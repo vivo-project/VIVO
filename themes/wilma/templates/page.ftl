@@ -11,6 +11,19 @@
     <body class="${bodyClasses!}" onload="${bodyOnload!}">
         <#include "identity.ftl">
         
+        <section id="search" role="region">
+            <fieldset>
+                <legend>Search form</legend>
+
+                <form id="search-form" action="${urls.search}" name="search" role="search" accept-charset="UTF-8" method="POST"> 
+                    <div id="search-field">
+                        <input type="text" name="querytext" class="search-vivo" value="${querytext!}" autocapitalize="off" />
+                        <input type="submit" value="Search" class="search">
+                    </div>
+                </form>
+            </fieldset>
+        </section>
+        
         <#include "menu.ftl">
 
 		<#-- VIVO OpenSocial Extension by UCSF -->

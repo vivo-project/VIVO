@@ -1,5 +1,7 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
+</header>
+
 <nav role="navigation">
     <ul id="main-nav" role="list">
         <#list menu.items as item>

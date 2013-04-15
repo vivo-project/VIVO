@@ -594,7 +594,7 @@ ul#main-nav {
     width: 930px;
     margin: 0 auto;
     background: #fff;
-    min-height: 550px;
+    min-height: 700px;
     padding: 20px;
 }
 /* INTRO-BLURB ------>  */
@@ -640,6 +640,12 @@ body.login #login {
     padding-left: 15px;
     padding-top: 18px;
     border-bottom: none;
+}
+h3.internal-auth {
+    color: #5E6363;
+}
+h3.internal-auth:hover {
+    color: #47B6D0;
 }
 #error-alert {
     margin-left: 0;
@@ -780,13 +786,14 @@ p.external-auth a.blue:hover {
 #search-home {
     float: left;
     width: 533px;
-    margin: 30px 0 0 24px;
+    margin: 30px 0 0 0;
 }
 #search-home h3 {
     padding: 0;
     font-size: 22px;
     margin-bottom: 15px;
     color: #2485AE;
+		padding-left: 24px;
 }
 #search-home-field {
     width: 483px;
@@ -814,6 +821,55 @@ input.search-home-vivo {
     margin-left: 4px;
     margin-top: 2px;
 }
+
+/* SEARCH HOME------>  */ 
+
+#search-home-field {
+		background: url(../images/search-field-and-button.gif) 0 0 no-repeat;
+		width: 520px;
+}
+#search-home-field input.search {
+	 	background-color: transparent;
+	 	color: #fff;
+		border: none;
+}
+a.filter-search {
+	right: 109px;
+}
+input.search-homepage {
+		border: 0;
+		background-color: #f9fafa;
+		background: url('../images/limit-search.png') no-repeat;
+		background-position: right;
+		opacity: .7;
+}
+
+.filter-default {
+		background: url(../images/filteredSearch.gif) 0 0 no-repeat;
+}
+.filter-active {
+		background: url(../images/filteredSearchActive.gif) 0 0 no-repeat;
+}
+#filter-search-nav {
+		background-color: #2d3535;
+		color: #fff;
+		background-color: #2d3535;
+		color: #fff;
+		right: 109px;
+}
+#filter-search-nav li {
+		background-image: none;
+		padding-left: 0;
+		margin-left: 0;
+}
+#filter-search-nav a.active {
+   color: #fff; 
+}
+#filter-search-nav a {
+		border-bottom: 1px dotted #4f5656;
+		color: #1483A4;
+}
+
 /* BROWSE ------>  */
 ul#browse-classgroups a {
     padding-top: 3px;
@@ -851,6 +907,42 @@ p.view-all {
 a.view-all-style {
     color: #303e4e
 }
+
+/* HOME STATS----->  */
+#home-stats {
+		border-top: 1px dotted #dbe3e3; /* stroke */
+		border-bottom: 1px dotted #dbe3e3; /* stroke */
+		background-color: #fff; /* layer fill content */
+}
+#home-stats h4 {
+		border-top: 1px solid rgba(220,228,227,.42); /* stroke */
+		border-bottom: 1px solid rgba(220,228,227,.42); /* stroke */
+		background-color: #395d7f; /* layer fill content */
+		border-bottom: 2px solid #62b6d7;
+		color: #fff;
+}
+#stats li {
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		border-radius: 6px; /* border radius */
+		-moz-background-clip: padding;
+		-webkit-background-clip: padding-box;
+		background-clip: padding-box; /* prevents bg color from leaking outside the border */
+		background: #5e6363 url(../images/stats-bg.png) repeat-x 0 0;
+		color: #fff;
+}
+#stats p {
+		color: #fff;
+}
+#stats li a:hover {
+		opacity: .5;
+}
+#stats .stats-count span {
+		color: #fff;
+		opacity: .5;
+}
+
+
 /* FOOTER------>  */
 footer {
     clear: both;
