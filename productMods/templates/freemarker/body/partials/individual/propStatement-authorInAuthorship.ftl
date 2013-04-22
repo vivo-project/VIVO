@@ -65,7 +65,7 @@
                     ${statement.startPage!}.
                 </#if>
             <#elseif statement.subclass?contains("Book")>
-                <#if statement.volume??>
+                <#if statement.volume?? && (statement.volume!?length > 0 )>
                     Vol.&nbsp;${statement.volume!}.&nbsp;
                 </#if>
                 <#if statement.editor??>
