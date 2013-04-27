@@ -7,7 +7,7 @@
         <#if copyright??>
             <small>&copy;${copyright.year?c}
             <#if copyright.url??>
-                <a href="${copyright.url}" title="copyright">${copyright.text}</a>
+                <a href="${copyright.url}" title="${i18n().menu_copyright}">${copyright.text}</a>
             <#else>
                 ${copyright.text}
             </#if>
@@ -15,7 +15,7 @@
         </#if>
         ${i18n().menu_powered} <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank" title="${i18n().menu_powered} VIVO"><strong>VIVO</strong></a>
         <#if user.hasRevisionInfoAccess>
-             | ${i18n().menu_version} <a href="${version.moreInfoUrl}" title="version">${version.label}</a>
+             | ${i18n().menu_version} <a href="${version.moreInfoUrl}" title="${i18n().menu_version}">${version.label}</a>
         </#if>
     </p>
     
