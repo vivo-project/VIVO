@@ -1,5 +1,5 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
-
+<#assign i18n = i18n() >
 </div> <!-- #wrapper-content -->
 
 <footer role="contentinfo">
@@ -11,21 +11,21 @@
             <#else>
                 ${copyright.text}
             </#if>
-             | <a class="terms" href="${urls.termsOfUse}" title="terms of use">Terms of Use</a></small> | 
+             | <a class="terms" href="${urls.termsOfUse}" title="${i18n.menu_termuse}">${i18n.menu_termuse}</a></small> | 
         </#if>
-        Powered by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank" title="powered by VIVO"><strong>VIVO</strong></a>
+        ${i18n.menu_powered} <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank" title="${i18n.menu_powered} VIVO"><strong>VIVO</strong></a>
         <#if user.hasRevisionInfoAccess>
-             | Version <a href="${version.moreInfoUrl}" title="version">${version.label}</a>
+             | ${i18n.menu_version} <a href="${version.moreInfoUrl}" title="version">${version.label}</a>
         </#if>
     </p>
     
     <nav role="navigation">
         <ul id="footer-nav" role="list">
-            <li role="listitem"><a href="${urls.about}" title="about">About</a></li>
+            <li role="listitem"><a href="${urls.about}" title="${i18n.menu_about}">${i18n.menu_about}</a></li>
             <#if urls.contact??>
-                <li role="listitem"><a href="${urls.contact}" title="contact us">Contact Us</a></li>
+                <li role="listitem"><a href="${urls.contact}" title="${i18n.menu_contactus}">${i18n.menu_contactus}</a></li>
             </#if> 
-            <li role="listitem"><a href="http://www.vivoweb.org/support" target="blank" title="support">Support</a></li>
+            <li role="listitem"><a href="http://www.vivoweb.org/support" target="blank" title="${i18n.menu_support}">${i18n.menu_support}</a></li>
         </ul>
     </nav>
 </footer>
