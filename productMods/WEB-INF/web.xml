@@ -666,6 +666,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>HomePageAjax</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.ajax.HomePageAjaxController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HomePageAjax</servlet-name>
+    <url-pattern>/homePageAjax</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>ShowAuth</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.admin.ShowAuthController</servlet-class>
   </servlet>
