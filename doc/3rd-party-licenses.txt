@@ -176,7 +176,7 @@ googleanalytics (license/googleanalytics.LICENSE.txt)
 json (licenses/json.LICENSE.txt)
 jtidy (licenses/jtidy.LICENSE.txt)
 ojdbc (licenses/oracle.LICENSE.txt)
-
+leaflet (licenses/leaflet.LICENSE.txt)
 
 Unknown
 -------

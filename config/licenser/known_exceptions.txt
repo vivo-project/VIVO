@@ -32,6 +32,7 @@ utilities/load-testing/jmeter-results-detail-report.xsl
 # See /doc/3rd-party-licenses.txt for LICENSE file
 productMods/css/jquery_plugins/*
 productMods/js/jquery_plugins/*
+productMods/js/leaflet/*
 productMods/js/visualization/entitycomparison/jquery_plugins/*
 
 # PROBLEM: Can't find any info on licensing.
