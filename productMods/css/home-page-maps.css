@@ -1,0 +1,53 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+/* styles for geographic focus maps on home page */
+div#mapControls {
+    margin: -26px 26px 0 0 ;
+    float: right;
+}
+a.selected {
+    color: #555;
+    text-decoration: none;
+}
+div#mapControls a {
+    font-size: 1.05em;
+}
+div#researcherTotal {
+    margin: 12px 0 -2px 34px;
+}
+.mapArea {
+    height:540px;
+    width:885px;
+    margin: 2px 0 16px 16px;
+}
+.divIconCount {
+    border: none;
+    color: #777;
+    font-size: 0.75em;
+    text-align: center;
+}
+.divIconCountPlus {
+    border: none;
+    color: #777;
+    font-size: 0.75em;
+    text-align: center;
+    padding-left: -10px;
+}
+.leaflet-popup-tip-container {
+    display: none !important;
+}
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background: none repeat scroll 0 0 white;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+}
+.leaflet-popup-content-wrapper {
+    border-radius: 10px 10px 10px 10px;
+    padding: 1px;
+    text-align: center;
+    width: 170px;
+    margin-top:-60px;
+}  
+.leaflet-popup-content {
+    line-height: 1.4;
+    margin: 8px 8px;
+}
