@@ -16,13 +16,13 @@
 
 
         <section id="intro" role="region">
-            <h2>Welcome to VIVO</h2>
+            <h2>${i18n().intro_title}</h2>
 
-            <p>VIVO is a research-focused discovery tool that enables collaboration among scientists across all disciplines.</p>
-            <p>Browse or search information on people, departments, courses, grants, and publications.</p>
+            <p>${i18n().intro_para1}</p>
+            <p>${i18n().intro_para2}Browse or search information on people, departments, courses, grants, and publications.</p>
 
             <section id="search-home" role="region">
-                <h3>Search VIVO <span class="search-filter-selected">filteredSearch</span></h3>
+                <h3>${i18n().intro_searchvivo} <span class="search-filter-selected">filteredSearch</span></h3>
         
                 <fieldset>
                     <legend>Search form</legend>
@@ -32,7 +32,7 @@
                             <input type="submit" value="Search" class="search" />
                         </div>
                 
-                        <a class="filter-search filter-default" href="#" title="Filter search"><span class="displace">filter search</span></a>
+                        <a class="filter-search filter-default" href="#" title="${i18n().intro_filtersearch}"><span class="displace">${i18n().intro_filtersearch}</span></a>
                 
                         <ul id="filter-search-nav">
                             <li><a class="active" href="">All</a></li>
