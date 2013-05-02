@@ -62,20 +62,22 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
 		try {
             geoLocations = getGeoLocations(vreq);
             
-//            String response = "{\"type\": \"FeatureCollection\",\"features\": [";
             String response = "[";
             String geometry = "{\"geometry\": {\"type\": \"Point\",\"coordinates\": \"\"},";
             String typeProps = "\"type\": \"Feature\",\"properties\": {\"mapType\": \"\",";
             String previousLabel = "";
-
+            
             for (Map<String, String> map: geoLocations) {
                 String label = map.get("label");
                 String html  = map.get("count");
-                String uri   = UrlBuilder.urlEncode(map.get("location"));
+                String uri = map.get("location");
+                if ( uri != null ) {
+                    uri = UrlBuilder.urlEncode(uri);
+                }
                 Integer count    = Integer.parseInt(map.get("count"));
                 String radius   = String.valueOf(calculateRadius(count));
                 
-                if ( !label.equals(previousLabel) ) {
+                if ( label != null && !label.equals(previousLabel) ) {
                     String tempStr = geometry; //+label
                     tempStr += typeProps //+ label 
                                         + "\"popupContent\": \""
@@ -91,7 +93,9 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
                     previousLabel = label;
                 }
             }
-			response = response.substring(0, response.lastIndexOf(","));
+			if ( response.lastIndexOf(",") > 0 ) {
+			    response = response.substring(0, response.lastIndexOf(","));
+			}
 			response += " ]";
 			log.debug(response);
 			return response;

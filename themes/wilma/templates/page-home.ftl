@@ -49,7 +49,9 @@
                             <input type="hidden" name="classgroup" class="search-homepage" value="" autocapitalize="off" />
                         </div>
                 
-                        <a class="filter-search filter-default" href="#" title="Filter search"><span class="displace">filter search</span></a>
+                        <a class="filter-search filter-default" href="#" title="Filter search">
+                            <span class="displace">filter search</span>
+                        </a>
                 
                         <ul id="filter-search-nav">
                             <li><a class="active" href="">All</a></li>
@@ -63,60 +65,25 @@
         
         <@widget name="login" />
         
-        <section id="home-research" class="home-sections">
-            <h4>Research</h4>
-            <ul>
-                <@lh.researchClasses />
+        <!-- List of research classes: e.g., articles, books, collections, conference papers -->
+        <@lh.researchClasses />
                 
-            </ul>
-        </section>
+        <!-- List of four randomly selected faculty members -->
+        <@lh.facultyMbrHtml />
 
-        <section id="home-faculty-mbrs" class="home-sections"  >
-            <h4>Faculty</h4>
-            <div id="tempSpacing">&nbsp;</div>
-            <div id="research-faculty-mbrs">
-                <!-- populated via an ajax call -->
-                <ul id="facultyThumbs">
-                </ul>
-
-            </div>
-        </section>
-
-        <section id="home-academic-depts" class="home-sections">
-            <h4>Departments</h4>
-            <div id="academic-depts"></div>
-        </section>        
+        <!-- List of randomly selected academic departments -->
+        <@lh.academicDeptsHtml />
 
         <#if geoFocusMapsEnabled >
-            <section id="home-geo-focus" class="home-sections">
-                <h4>Geographic Focus</h4>
-                <div id="mapControls">
-                    <a id="globalLink" class="selected" href="javascript:">Global Research</a>&nbsp;|&nbsp;
-                    <a id="usLink" href="javascript:">US Research</a>&nbsp;|&nbsp;
-                    <#-- <a id="stateLink" href="javascript:">NY Research</a>  -->
-                </div>
-                <div id="researcherTotal"></div>
-                <div id="timeIndicator">
-                    <span>Loading map information . . .&nbsp;&nbsp;&nbsp;
-                        <img  src="${urls.images}/indicatorWhite.gif">
-                    </span>
-                </div>
-                <div id="mapGlobal" class="mapArea"></div>
-                <div id="mapUS" class="mapArea"></div>
-                <div id="mapState" class="mapArea"></div>
-            </section>
+            <!-- Map display of researchers' areas of geographic focus. Must be enabled in runtime.properties -->
+            <@lh.geographicFocusHtml />
         </#if>
         
-        <section id="home-stats" class="home-sections" >
-            <h4>Statistics</h4>
+        <!-- Statistical information relating to property groups and their classes; displayed horizontally, not vertically-->
+        <@lh.allClassGroups vClassGroups! />
 
-            <ul id="stats">
-                <@lh.allClassGroups vClassGroups! />
-            </ul>
-        </section>
-    
         <#include "footer.ftl">
         <#-- builds a json object that is used by js to render the academic departments section -->
-        <@lh.academicDepartments />
+        <@lh.listAcademicDepartments />
     </body>
 </html>

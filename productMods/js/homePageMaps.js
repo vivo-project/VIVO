@@ -310,16 +310,27 @@ $(document).ready(function(){
                 action: "getGeoFocusLocations",
             },
             complete: function(xhr, status) {
-                var results = $.parseJSON(xhr.responseText);
                 
-                $.each(results, function() {
-                    var locale = this.properties.popupContent;
-                    this.geometry.coordinates = getLatLong(locale);
-                    this.properties.mapType = getMapType(locale);
-                    researchAreas["features"].push(this);
-                });
-                buildGlobalMap();
-                $('div#timeIndicator').hide();
+                var results = $.parseJSON(xhr.responseText);
+                if ( results.length == 0 ) {
+                    var html = "There are currently no researchers with a defined geographic focus.";
+                    $('section#home-geo-focus div#timeIndicator span').html(html);
+                    $('section#home-geo-focus').css("height","175px");
+                    $('section#home-geo-focus div#timeIndicator').css("margin-top","50px");
+                    $('section#home-geo-focus div#mapGlobal').hide();
+                    $('section#home-geo-focus div#mapUS').hide();
+                    $('section#home-geo-focus div#mapState').hide();
+                }
+                else {
+                    $.each(results, function() {
+                        var locale = this.properties.popupContent;
+                        this.geometry.coordinates = getLatLong(locale);
+                        this.properties.mapType = getMapType(locale);
+                        researchAreas["features"].push(this);
+                    });
+                    buildGlobalMap();
+                    $('div#timeIndicator').hide();
+                }
             }
        });        
     }
