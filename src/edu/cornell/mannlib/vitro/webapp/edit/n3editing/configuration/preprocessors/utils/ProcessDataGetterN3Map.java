@@ -2,26 +2,10 @@
 
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.utils;
 
-import java.lang.reflect.Constructor;
 import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.ServletContext;
-
-import net.sf.json.JSONObject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import com.hp.hpl.jena.ontology.OntModel;
-import com.hp.hpl.jena.rdf.model.RDFNode;
-import com.hp.hpl.jena.rdf.model.ResourceFactory;
-import com.hp.hpl.jena.rdf.model.StmtIterator;
-
-import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
-import edu.cornell.mannlib.vitro.webapp.dao.jena.ModelContext;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.utils.ProcessDataGetterN3;
-import edu.cornell.mannlib.vitro.webapp.utils.dataGetter.DataGetter;
 
 /*
  * This class determines what n3 should be returned for a particular data getter and can be overwritten or extended in VIVO. 
