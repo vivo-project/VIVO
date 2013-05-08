@@ -6,22 +6,17 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
-import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Route;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
-import edu.cornell.mannlib.vitro.webapp.dao.jena.ModelContext;
-import edu.cornell.mannlib.vitro.webapp.dao.jena.SimpleOntModelSelector;
-import edu.cornell.mannlib.vitro.webapp.dao.jena.WebappDaoFactorySDB;
 
 public class IndividualTemplateModel extends BaseIndividualTemplateModel {
 
