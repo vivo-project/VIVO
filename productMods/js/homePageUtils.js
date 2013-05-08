@@ -23,7 +23,13 @@ $(document).ready(function(){
             var rowStart = Math.floor((Math.random()*facultyMemberCount)+1)-1;
             var diff;
             var pageSize = 4; // the number of faculty to display on the home page
-
+            
+            if ( facultyMemberCount < 5 ) {
+                pageSize = facultyMemberCount;
+            }
+            else {
+                pageSize = 4; // our default number; could have fewer than 4 in a test or dev environment
+            }
             // in case the random number is equal to or within 3 of the facultyMemberCount 
             if ( (rowStart + (pageSize-1)) > facultyMemberCount ) {
                 diff = (rowStart + (pageSize-1)) - facultyMemberCount;
@@ -33,6 +39,9 @@ $(document).ready(function(){
                 else {
                     rowStart = rowStart - diff;
                 }
+            }
+            if ( rowStart < 0 ) {
+                rowStart = 0;
             }
 
             var dataServiceUrl = urlsBase + "/dataservice?getRandomSolrIndividualsByVClass=1&vclassId=";
