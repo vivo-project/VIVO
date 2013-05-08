@@ -67,20 +67,24 @@ $(document).ready(function(){
         if ( location.hash ) {
             // remove the trailing white space
             location.hash = location.hash.replace(/\s+/g, '');
-            if ( location.hash.indexOf("map") >= 0 ) {                
-                // if the first tab section is named "Research" we don't have to do anything;
-                // otherwise, select the Research tab and deselect the first one
+            if ( location.hash.indexOf("map") >= 0 ) {  
+                // get the name of the group that contains the geographicFocusOf property.
+                var tabName = $('h3#geographicFocusOf').parent('article').parent('div').attr("id");
+                tabName = tabName.replace("Group","");
+                tabNameCapped = tabName.charAt(0).toUpperCase() + tabName.slice(1);
+                // if the name of the first tab section = tabName we don't have to do anything;
+                // otherwise, select the correct tab and deselect the first one
                 var $firstTab = $('li.clickable').first();
-                if ( $firstTab.text() != "Research") {
-                    // select the stored tab
-                    $("li[groupName='research']").removeClass("nonSelectedGroupTab clickable");
-                    $("li[groupName='research']").addClass("selectedGroupTab clickable");
+                if ( $firstTab.text() != tabNameCapped ) {
+                    // select the correct tab
+                    $('li[groupName="' + tabName + '"]').removeClass("nonSelectedGroupTab clickable");
+                    $('li[groupName="' + tabName + '"]').addClass("selectedGroupTab clickable");
                     // deselect the first tab
                     $firstTab.removeClass("selectedGroupTab clickable");
                     $firstTab.addClass("nonSelectedGroupTab clickable");
                     $('section.property-group:visible').hide();
                     // show the selected tab section
-                    $('section#research').show();                
+                    $('section#' + tabName).show();                
                 }
             }
             else {

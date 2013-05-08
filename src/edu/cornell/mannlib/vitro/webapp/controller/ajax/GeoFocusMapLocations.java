@@ -34,23 +34,14 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
         + "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n"
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
         + "PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n"
-        + "PREFIX vivoc: <http://vivo.library.cornell.edu/ns/0.1#> \n"
         + "SELECT DISTINCT ?label ?location (COUNT(?person) AS ?count) \n"
-        + "WHERE { {"
+        + "WHERE {"
         + "    ?location rdf:type core:GeographicRegion . \n"
         + "    ?location rdfs:label ?label . " 
         + "    ?location core:geographicFocusOf ?person . \n"
         + "    ?person rdf:type foaf:Person \n"
-        + "    FILTER (! regex(str(?location), \"dbpedia\")) \n"
-        + "} UNION { \n "
-        + "    ?sublocation rdf:type vivoc:DomesticGeographicalRegion  . \n"
-        + "    ?sublocation core:geographicFocusOf ?person . \n"
-        + "    ?person rdf:type foaf:Person \n"
-        + "    bind((\"United States of America\"^^<http://www.w3.org/2001/XMLSchema#string>) AS ?label) \n"
-        + "    bind(<http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> AS ?location) \n"
-        + "} } \n"
-        + "GROUP BY ?label ?location \n"
-        + "ORDER BY ?label ?location \n";
+        + "} \n"
+        + "GROUP BY ?label ?location \n";
     
 	public GeoFocusMapLocations(HttpServlet parent, VitroRequest vreq,
 			HttpServletResponse resp) {
@@ -76,12 +67,25 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
                 }
                 Integer count    = Integer.parseInt(map.get("count"));
                 String radius   = String.valueOf(calculateRadius(count));
+                String name = "";
                 
                 if ( label != null && !label.equals(previousLabel) ) {
+                    if ( label.contains("Ivoire") ) {
+                        name = "Ivory Coast";
+                    }
+                    else if ( label.contains("New York State") ) {
+                        name = "New York";
+                    }
+                    else if ( label.contains("United Kingdom") ) {
+                        name = "United Kingdom";
+                    }
+                    else {
+                        name = label;
+                    }
                     String tempStr = geometry; //+label
                     tempStr += typeProps //+ label 
                                         + "\"popupContent\": \""
-                                        + label 
+                                        + name 
                                         + "\",\"html\":"
                                         + html 
                                         + ",\"radius\":"
