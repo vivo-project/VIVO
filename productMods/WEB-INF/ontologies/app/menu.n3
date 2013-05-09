@@ -14,6 +14,7 @@
 display:DefaultMenu 
     a  display:MainMenu ;
     rdfs:label "Default Menu" ;
+    rdfs:label "Menú Predeterminado"@es-ES ;
     display:hasElement display:EventsMenuItem ;
     display:hasElement display:HomeMenuItem ;
     display:hasElement display:OrganizationsMenuItem ;
@@ -26,36 +27,42 @@ display:HomeMenuItem
     a display:NavigationElement ;
     display:menuPosition 1;
     display:linkText "Home";
+    display:linkText "Inicio"@es-ES;
     display:toPage display:Home .
 
 display:PeopleMenuItem 
     a display:NavigationElement ;
     display:menuPosition 2;
     display:linkText "People";
+    display:linkText "Personas"@es-ES;
     display:toPage display:People .
 
 display:OrganizationsMenuItem 
     a display:NavigationElement ;
     display:menuPosition 3;
     display:linkText "Organizations";
+    display:linkText "Organizaciones"@es-ES;
     display:toPage display:Organizations .
 
 display:ResearchMenuItem     
     a display:NavigationElement ;
     display:menuPosition 4;
     display:linkText "Research";
+    display:linkText "Investigación"@es-ES;
     display:toPage display:Research .
 
 display:EventsMenuItem 
     a display:NavigationElement ;
     display:menuPosition 5;
     display:linkText "Events";
+    display:linkText "Eventos"@es-ES;
     display:toPage display:Events .        
     
 display:Home 
     a display:HomePage ;    
     a display:Page ;
     display:title "Home" ;    
+    display:title "Inicio"@es-ES;
     display:urlMapping "/" ;
     display:hasDataGetter display:homeDataGetter;
     display:cannotDeletePage "true" .
@@ -65,6 +72,7 @@ display:Events
     a display:ClassGroupPage;
     display:forClassGroup vivoweb:vitroClassGroupevents ;
     display:title "Events" ;
+    display:title "Eventos"@es-ES ;
     display:urlMapping "/events" ; 
     display:hasDataGetter display:eventsDataGetter .
 
@@ -73,6 +81,7 @@ display:Organizations
     a display:ClassGroupPage;
     display:forClassGroup vivoweb:vitroClassGrouporganizations ;
     display:title "Organizations" ;
+    display:title "Organizaciones"@es-ES;
     display:urlMapping "/organizations";
     display:hasDataGetter display:organizationsDataGetter .
 
@@ -81,6 +90,7 @@ display:People
     a display:ClassGroupPage;
     display:forClassGroup vivoweb:vitroClassGrouppeople ;
     display:title "People" ;
+    display:title "Personas"@es-ES;
     display:urlMapping "/people" ;
    	display:hasDataGetter display:peopleDataGetter .
 
@@ -89,33 +99,34 @@ display:Research
     a display:ClassGroupPage;
     display:forClassGroup vivoweb:vitroClassGrouppublications ;
     display:title "Research" ;
+    display:title "Investigación"@es-ES;
     display:urlMapping "/research" ;
     display:hasDataGetter display:researchDataGetter .
 
 
     
 #The data getter objects used above
-<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#peopleDataGetter>
+display:peopleDataGetter
       a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData>;
-      <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#forClassGroup>
-              <http://vivoweb.org/ontology#vitroClassGrouppeople> .
+      display:forClassGroup
+              vivoweb:vitroClassGrouppeople .
 
-<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#researchDataGetter>
+display:researchDataGetter
       a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData>;
-      <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#forClassGroup>
-              <http://vivoweb.org/ontology#vitroClassGrouppublications> .
+      display:forClassGroup
+              vivoweb:vitroClassGrouppublications .
 
-<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#organizationsDataGetter>
+display:organizationsDataGetter
       a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData>;
-      <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#forClassGroup>
-              <http://vivoweb.org/ontology#vitroClassGrouporganizations> .
+      display:forClassGroup
+              vivoweb:vitroClassGrouporganizations .
                             
-<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#eventsDataGetter>
+display:eventsDataGetter
       a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData>;
-      <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#forClassGroup>
-              <http://vivoweb.org/ontology#vitroClassGroupevents> .
+      display:forClassGroup
+              vivoweb:vitroClassGroupevents .
               
-<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#homeDataGetter>
+display:homeDataGetter
       a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.BrowseDataGetter> .
       
 
@@ -125,6 +136,7 @@ display:Research
 display:pageListPage
     a display:Page ;              
     display:title "Pages" ;
+    display:title "Páginas"@es-ES ;
     display:urlMapping "/pageList" ;
     display:requiresBodyTemplate "pageList.ftl" ;   
     display:hasDataGetter display:pageListData;
@@ -149,8 +161,8 @@ display:pageListData
      }  ORDER BY ?listedPageTitle """ .       
 
 #Data getter type labels
-<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData>  rdfs:label "Class Group Page" .
-<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.BrowseDataGetter> rdfs:label "Browse Page" . 
-<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.IndividualsForClassesDataGetter> rdfs:label "Class Group Page - Selected Classes" .
-<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> rdfs:label "Sparql Query Results" .
-<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.InternalClassesDataGetter> rdfs:label "Class Group Page - Institutional Internal Class" .
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData>  rdfs:label "Class Group Page", "Grupo de Clases página"@es-ES .
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.BrowseDataGetter> rdfs:label "Browse Page", "Navegar Página"@es-ES . 
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.IndividualsForClassesDataGetter> rdfs:label "Class Group Page - Selected Classes", "Grupo de Clases página - Clases seleccionadas"@es-ES .
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> rdfs:label "SPARQL Query Results", "SPARQL Query Resultados"@es-ES .
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.InternalClassesDataGetter> rdfs:label "Class Group Page - Institutional Internal Class", "Grupo de Clases página - Institucional Clase Interna"@es-ES .
