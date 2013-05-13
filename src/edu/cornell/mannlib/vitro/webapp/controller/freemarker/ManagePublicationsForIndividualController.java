@@ -92,6 +92,7 @@ public class ManagePublicationsForIndividualController extends FreemarkerHttpSer
     HashMap<String, List<Map<String,String>>>  getPublications(String subjectUri, VitroRequest vreq) {
           
         String queryStr = QueryUtils.subUriForQueryVar(PUBLICATION_QUERY, "subject", subjectUri);
+        String subclass = "";
         log.debug("queryStr = " + queryStr);
         HashMap<String, List<Map<String,String>>>  subclassToPublications = new HashMap<String, List<Map<String,String>>>();
         try {
@@ -102,13 +103,16 @@ public class ManagePublicationsForIndividualController extends FreemarkerHttpSer
                 if ( subclassUri != null ) {
                     String subclassUriStr = soln.get("subclass").toString();
                     VClass vClass = (VClass) vcDao.getVClassByURI(subclassUriStr);
-                    String subclass = ((vClass.getName() == null) ? subclassUriStr : vClass.getName());
-                    if(!subclassToPublications.containsKey(subclass)) {
-                        subclassToPublications.put(subclass, new ArrayList<Map<String,String>>()); //list of publication information
-                    }
-                    List<Map<String,String>> publicationsList = subclassToPublications.get(subclass);
-                    publicationsList.add(QueryUtils.querySolutionToStringValueMap(soln));
+                    subclass = ((vClass.getName() == null) ? subclassUriStr : vClass.getName());
                 }
+                else {
+                    subclass = "Unclassified Publication";
+                }
+                if(!subclassToPublications.containsKey(subclass)) {
+                    subclassToPublications.put(subclass, new ArrayList<Map<String,String>>()); //list of publication information
+                }
+                List<Map<String,String>> publicationsList = subclassToPublications.get(subclass);
+                publicationsList.add(QueryUtils.querySolutionToStringValueMap(soln));
             }
         } catch (Exception e) {
             log.error(e, e);
