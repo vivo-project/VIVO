@@ -22,8 +22,10 @@ Check those publications you want to exclude from the profile page.
        
     <#list allSubclasses as sub>
     <h4>
-        <#if sub = "Software" || sub = "Thesis">
+        <#if sub = "Software">
             ${sub}
+        <#elseif sub = "Thesis">
+            Theses
         <#elseif sub = "Speech">
             Speeches
         <#else>
