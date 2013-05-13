@@ -23,7 +23,7 @@
             
             <#assign googleJSAPI = "https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22imagesparkline%22%5D%7D%5D%7D"> 
             
-            <span id="sparklineHeading">Publications in VIVO</span>   
+            <span id="sparklineHeading">${i18n().publications_in_vivo}</span>   
             
             <div id="vis_container_coauthor">&nbsp;</div>
             
@@ -31,18 +31,18 @@
             
             <div id="coauthorship_link_container" class="collaboratorship-link-container">
 				<div class="collaboratorship-icon">
-                    <a href="${coAuthorVisUrl}" title="co-author"><img src="${coAuthorIcon}" alt="Co-author network icon" width="25px" height="25px" /></a>
+                    <a href="${coAuthorVisUrl}" title="${i18n().co_author}"><img src="${coAuthorIcon}" alt="${i18n().co_author}" width="25px" height="25px" /></a>
                 </div>
-                <div class="collaboratorship-link"><a href="${coAuthorVisUrl}" title="co-author network">Co-Author Network</a></div>
+                <div class="collaboratorship-link"><a href="${coAuthorVisUrl}" title="${i18n().co_author_network}">${i18n().co_author_network}</a></div>
             </div>
             
             <div class="collaboratorship-link-separator"></div>
             
   	      	<div id="mapofscience_link_container" class="collaboratorship-link-container">
             	<div class="collaboratorship-icon">	
-                    <a href="${mapOfScienceVisUrl}" title="map of science"><img src="${mapOfScienceIcon}" alt="Map Of Science icon" width="25px" height="25px" /></a>
+                    <a href="${mapOfScienceVisUrl}" title="${i18n().map_of_science}"><img src="${mapOfScienceIcon}" alt="${i18n().map_of_science}" width="25px" height="25px" /></a>
                 </div>
-                <div class="collaboratorship-link"><a href="${mapOfScienceVisUrl}" title="map of science">Map Of Science</a></div>
+                <div class="collaboratorship-link"><a href="${mapOfScienceVisUrl}" title="${i18n().map_of_science}">${i18n().map_of_science_capitalized}</a></div>
             </div>
             
             ${scripts.add('<script type="text/javascript" src="${googleJSAPI}"></script>',
@@ -65,9 +65,9 @@
             
             <div id="coinvestigator_link_container" class="collaboratorship-link-container">
                 <div class="collaboratorship-icon">
-                    <a href="${coInvestigatorVisUrl}" title="co-investigator network"><img src="${coInvestigatorIcon}" alt="Co-investigator network icon" width="25px" height="25px" /></a>
+                    <a href="${coInvestigatorVisUrl}" title="${i18n().co_investigator_network}"><img src="${coInvestigatorIcon}" alt="${i18n().co_investigator_network}" width="25px" height="25px" /></a>
                 </div>
-                <div class="collaboratorship-link"><a href="${coInvestigatorVisUrl}" title="co-investigator network">Co-Investigator Network</a></div>
+                <div class="collaboratorship-link"><a href="${coInvestigatorVisUrl}" title="${i18n().co_investigator_network}">${i18n().co_investigator_network_capitalized}</a></div>
             </div>
         </#if>
 </#if>

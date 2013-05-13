@@ -8,7 +8,6 @@
 
 <#import "lib-sequence.ftl" as s>
 <#import "lib-datetime.ftl" as dt>
-
 <@showRole statement property />
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
@@ -16,7 +15,7 @@
 <#macro showRole statement property>
     <#local linkedIndividual>
     		<#if statement?has_content && statement.activity?has_content>
-        	<a href="${profileUrl(statement.uri("activity"))}" title="activity name">${statement.activityLabel!statement.activityName}</a>
+        	<a href="${profileUrl(statement.uri("activity"))}" title="${i18n().activity_name}">${statement.activityLabel!statement.activityName}</a>
         </#if>
     </#local>
 

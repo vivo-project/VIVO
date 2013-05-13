@@ -6,7 +6,7 @@
 <#assign email = propertyGroups.pullProperty("${core}email")!>
 
 <#if editable || ( phone?has_content || pEmail?has_content || email?has_content ) >
-    <h2 id="contactHeading" class="mainPropGroup">Contact</h2>
+    <h2 id="contactHeading" class="mainPropGroup">${i18n().contact_capitalized}</h2>
 </#if>
 
 <#-- the layout is different in edit mode -->
@@ -50,10 +50,10 @@
 <#macro emailLinks property email>        
     <#if property == "${core}primaryEmail">
         <#local listId = "primary-email">
-        <#local label = "primary email">
+        <#local label = "${i18n().primary_email}">
     <#else>
         <#local listId = "additional-emails">
-        <#local label = "additional emails">
+        <#local label = "${i18n().additional_emails}">
     </#if>     
     <#if email?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
         <#if editable>
@@ -65,7 +65,7 @@
                 <#list email.statements as statement>
                     <li role="listitem" <#if editable>style="padding-left:10px;"</#if>>
                         
-                        <a class="email" href="mailto:${statement.value}" title="email">${statement.value}</a>
+                        <a class="email" href="mailto:${statement.value}" title="${i18n().email}">${statement.value}</a>
                         <@p.editingLinks "${email.localName}" statement editable />
                     </li>
                 </#list>

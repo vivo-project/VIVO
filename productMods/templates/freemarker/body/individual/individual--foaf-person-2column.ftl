@@ -36,7 +36,7 @@
         <header>
             <#if relatedSubject??>
                 <h2>${relatedSubject.relatingPredicateDomainPublic} for ${relatedSubject.name}</h2>
-                <p><a href="${relatedSubject.url}" title="return to">&larr; return to ${relatedSubject.name}</a></p>
+                <p><a href="${relatedSubject.url}" title="${i18n().return_to(relatedSubject.name)}">&larr; ${i18n().return_to(relatedSubject.name)}</a></p>
             <#else>  
                 <h1 class="vcard foaf-person fn" <#if !editable>style="float:left;border-right:1px solid #A6B1B0;"</#if>> 
                     <#-- Label -->
@@ -68,8 +68,8 @@
                     <!-- The text in this h2 element is set via the wilma.css file -->
                     <h2></h2>
                     <select id="profilePageType">
-                        <option value="standard" <#if profileType == "standard" || profileType == "none">selected</#if> >Standard profile view</option>
-                        <option value="quickView" <#if profileType == "quickView">selected</#if> >Quick profile view</option>
+                        <option value="standard" <#if profileType == "standard" || profileType == "none">selected</#if> >${i18n().standard_view}</option>
+                        <option value="quickView" <#if profileType == "quickView">selected</#if> >${i18n().quick_view}</option>
                     </select>
                 </div>
             </#if>
@@ -94,7 +94,7 @@
             <div id="webpagesContainer">
                 <#assign webpage = propertyGroups.pullProperty("${core}webpage")!>
                 <#if webpage?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-                    <h2 id="webpage" class="mainPropGroup">Websites <@p.addLink webpage editable ""/></h2>
+                    <h2 id="webpage" class="mainPropGroup">${i18n().websites} <@p.addLink webpage editable ""/></h2>
                     <@p.verboseDisplay webpage />
                     <#assign localName = webpage.localName>
                     <ul id="individual-${localName}" role="list">
@@ -120,7 +120,7 @@
 <#if targetedView?has_content || user.loggedIn >
 <span id="quickViewLink" >
     <a href="${urls.base}/display/${individual.localName}?destination=quickView" >
-        <img id="quickViewIcon" src="${urls.images}/individual/quickViewIcon.png" alt="full view icon"/>
+        <img id="quickViewIcon" src="${urls.images}/individual/quickViewIcon.png" alt="${i18n().quick_view_icon}"/>
     </a>
 </span>
 </#if>

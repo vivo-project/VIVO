@@ -101,13 +101,13 @@
     <#local resourceTitle>
         <#if statement.infoResource??>
             <#if citationDetails?has_content>
-                <a href="${profileUrl(statement.uri("infoResource"))}"  title="resource name">${statement.infoResourceName}</a>.&nbsp;
+                <a href="${profileUrl(statement.uri("infoResource"))}"  title="${i18n().resource_name}">${statement.infoResourceName}</a>.&nbsp;
             <#else>
-                <a href="${profileUrl(statement.uri("infoResource"))}"  title="resource name">${statement.infoResourceName}</a>
+                <a href="${profileUrl(statement.uri("infoResource"))}"  title="${i18n().resource_name}">${statement.infoResourceName}</a>
             </#if>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.uri("authorship"))}" title="missing resource">missing information resource</a>
+            <a href="${profileUrl(statement.uri("authorship"))}" title="${i18n().missing_info_resource}">missing information resource</a>
         </#if>
     </#local>
 

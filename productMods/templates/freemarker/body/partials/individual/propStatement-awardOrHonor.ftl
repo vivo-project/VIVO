@@ -15,9 +15,9 @@
  
     <#local linkedIndividual>
         <#if statement.award??>
-            <a href="${profileUrl(statement.uri("award"))}" title="award name">${statement.awardLabel!statement.localName}</a>
+            <a href="${profileUrl(statement.uri("award"))}" title="${i18n().award_name}">${statement.awardLabel!statement.localName}</a>
         <#else>
-            <a href="${profileUrl(statement.uri("awardReceipt"))}" title="award receipt name">${statement.receiptLabel!statement.localName}</a>
+            <a href="${profileUrl(statement.uri("awardReceipt"))}" title="${i18n().award_receipt_name}">${statement.receiptLabel!statement.localName}</a>
         </#if>
     </#local>
 
@@ -31,7 +31,7 @@
 
     <#local conferredByOrg>
         <#if statement.conferredBy?has_content && statement.conferredByLabel?has_content>
-             conferred by <a href="${profileUrl(statement.uri("conferredBy"))}" title="conferred by">${statement.conferredByLabel}</a>
+             ${i18n().conferred_by} <a href="${profileUrl(statement.uri("conferredBy"))}" title="${i18n().conferred_by}">${statement.conferredByLabel}</a>
         </#if>
     </#local>
 

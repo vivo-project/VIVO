@@ -12,7 +12,6 @@
       *** element that contains the web page snap shot, as shown below in the template. Note that this code is ***
       *** currently commented out and a placeholder is displayed instead.                                      ***
 -->
-       
 <#assign count = property.statements?size!> 
 
 <#assign identifier>
@@ -42,29 +41,29 @@
       The assumption is made that the service will require the url of the web page and possibly
       an image size as well.
       
-<span id="span-${identifier}" class="webpage-indicator-qv">Loading website image. . .&nbsp;&nbsp;&nbsp;<img  src="${urls.images}/indicatorWhite.gif"></span>
-        <a title="Click to view the ${linkText} web page" href="${statement.url}">
-            <img id="img-${identifier}" class="org-webThumbnail" src="http://your.web.service/getsTheImage?url=${statement.url}${imgSize}" alt="screenshot of webpage ${statement.url}" style="display:none"/>
+<span id="span-${identifier}" class="webpage-indicator-qv">${strings.loading_website_image}. . .&nbsp;&nbsp;&nbsp;<img  src="${urls.images}/indicatorWhite.gif"></span>
+        <a title="${i18n().click_to_view_web_page(linkText)}" href="${statement.url}">
+            <img id="img-${identifier}" class="org-webThumbnail" src="http://your.web.service/getsTheImage?url=${statement.url}${imgSize}" alt="${i18n().screenshot_of_webpage(statement.url)}" style="display:none"/>
 
         </a>
         <#if imgSize == "" >
             </li>
             <li class="weblinkLarge">  
-            <a title="Click to view the ${linkText} web page" href="${statement.url}">
-                <img id="icon-${identifier}" src="${urls.images}/individual/weblinkIconLarge.png"  alt="click webpage icon" style="display:none"/>  
+            <a title="${i18n().click_to_view_web_page(linkText)}" href="${statement.url}">
+                <img id="icon-${identifier}" src="${urls.images}/individual/weblinkIconLarge.png"  alt="${i18n().click_webpage_icon}" style="display:none"/>  
             </a>
         <#else>
             </li>
             <li class="weblinkSmall">  
-            <a title="Click to view the ${linkText} web page" href="${statement.url}">
-                <img id="icon-${identifier}" src="${urls.images}/individual/weblinkIconSmall.png"  alt="click webpage icon" style="display:none"/>  
+            <a title="${i18n().click_to_view_web_page(linkText)}" href="${statement.url}">
+                <img id="icon-${identifier}" src="${urls.images}/individual/weblinkIconSmall.png"  alt="${i18n().click_webpage_icon}" style="display:none"/>  
             </a>
         </#if>
 -->
 <#-- Here is the placeholder link -->
-    <a href="${statement.url}" title="link text">${linkText}</a><script>$("a[title='link text']").parent('li').css("float","none");</script>
+    <a href="${statement.url}" title="${i18n().link_text}">${linkText}</a><script>$("a[title='${i18n().link_text}']").parent('li').css("float","none");</script>
 <#else>
-    <a href="${profileUrl(statement.uri("link"))}" title="link name">${statement.linkName}</a> (no url provided for link)
+    <a href="${profileUrl(statement.uri("link"))}" title="${i18n().link_name}">${statement.linkName}</a> (${i18n().no_url_provided})
 </#if>
 
 </#macro>

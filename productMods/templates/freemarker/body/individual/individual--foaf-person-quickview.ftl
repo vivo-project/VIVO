@@ -46,7 +46,7 @@
         <header>
             <#if relatedSubject??>
                 <h2>${relatedSubject.relatingPredicateDomainPublic} for ${relatedSubject.name}</h2>
-                <p><a href="${relatedSubject.url}" title="return to">&larr; return to ${relatedSubject.name}</a></p>
+                <p><a href="${relatedSubject.url}" title="${i18n().return_to(relatedSubject.name)}">&larr; ${i18n().return_to(relatedSubject.name)}</a></p>
             <#else> 
                 <#-- Image  -->
                 <div id="photo-wrapper">${individualImage}</div>
@@ -84,8 +84,8 @@
             <!-- The text in this h2 element is set via the wilma.css file -->
             <h2></h2>
             <select id="profilePageType">
-                <option value="standard" <#if profileType == "standard" || profileType == "none">selected</#if> >Standard profile view</option>
-                <option value="quickView" <#if profileType == "quickView">selected</#if> >Quick profile view</option>
+                <option value="standard" <#if profileType == "standard" || profileType == "none">selected</#if> >${i18n().standard_view}</option>
+                <option value="quickView" <#if profileType == "quickView">selected</#if> >${i18n().quick_view}</option>
             </select>
         </div>
     </#if>
@@ -102,7 +102,7 @@
                 <#assign webpage = propertyGroups.pullProperty("${core}webpage")!>            
                 <#if webpage?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
                     <#if editable>
-                        <h2 class="websites" >Websites <@p.addLink webpage editable ""/></h2>
+                        <h2 class="websites" >${i18n().websites} <@p.addLink webpage editable ""/></h2>
                     </#if>
                     <@p.verboseDisplay webpage />
                     <#assign localName = webpage.localName>
@@ -124,7 +124,7 @@
         <!-- Geographic Focus -->
         <#assign geographicFocus = propertyGroups.pullProperty("${core}geographicFocus")!> 
         <#if geographicFocus?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-            <h2 id="geoFocus" class="mainPropGroup">Geographic Focus <@p.addLink geographicFocus editable ""/></h2>
+            <h2 id="geoFocus" class="mainPropGroup">${i18n().geographic_focus} <@p.addLink geographicFocus editable ""/></h2>
             <@p.verboseDisplay geographicFocus />
             <#assign localName = geographicFocus.localName>
 
@@ -148,7 +148,7 @@
             <!-- Webpages -->
             <#assign webpage = propertyGroups.pullProperty("${core}webpage")!>            
             <#if webpage?has_content>
-                <h2 id="webpage" class="mainPropGroup">Websites <@p.addLink webpage editable ""/></h2>
+                <h2 id="webpage" class="mainPropGroup">${i18n().websites} <@p.addLink webpage editable ""/></h2>
                 <@p.verboseDisplay webpage />
                 <#assign localName = webpage.localName>
                 <ul id="individual-${localName}" role="list">

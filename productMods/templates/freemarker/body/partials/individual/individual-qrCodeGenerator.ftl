@@ -32,16 +32,16 @@
 <#macro renderCode imageFile display="icon" width="125">
     <#if hasValidVCard()>
         <#local qrData = individual.qrData()>
-        <#local qrCodeLinkedImage><a title="Export QR codes" href="${qrData.exportQrCodeUrl}" title="QR Code"><@qrCodeVCard qrCodeWidth=width /></a></#local>
+        <#local qrCodeLinkedImage><a title="${i18n().export_qr_codes}" href="${qrData.exportQrCodeUrl}"><@qrCodeVCard qrCodeWidth=width /></a></#local>
         
         <#if (display == "full")>
             <h5 class="qrCode">vCard QR</h5>
             ${qrCodeLinkedImage}
         <#elseif (display == "icon")>
-                <a id="qrIcon" title="vCard QR Code" href="${qrData.exportQrCodeUrl}" title="QR Code"><img  src="${urls.images}/individual/${imageFile!}" alt="qr icon" /></a>
-                <span id="qrCodeImage" class="hidden">${qrCodeLinkedImage} <a class="qrCloseLink" href="#"  title="QR Code">Close</a></span>
+                <a id="qrIcon" title="${i18n().vcard_qr_code}" href="${qrData.exportQrCodeUrl}"><img  src="${urls.images}/individual/${imageFile!}" alt="${i18n().qr_icon}" /></a>
+                <span id="qrCodeImage" class="hidden">${qrCodeLinkedImage} <a class="qrCloseLink" href="#"  title="${i18n().qr_code}">Close</a></span>
         <#else>
-            <p class="notice">You have passed an invalid value for the qrCode display parameter.</p>
+            <p class="notice">${i18n().invalid_qr_code_parameter}</p>
         </#if>
         
     </#if>

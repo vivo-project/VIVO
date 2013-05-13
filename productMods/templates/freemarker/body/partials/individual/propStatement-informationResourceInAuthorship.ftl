@@ -7,16 +7,15 @@
  -->
 
 <#import "lib-sequence.ftl" as s>
-
 <@showAuthorship statement />
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
 <#macro showAuthorship statement>
     <#if statement.person??>
-        <a href="${profileUrl(statement.uri("person"))}" title="author name">${statement.personName}</a>
+        <a href="${profileUrl(statement.uri("person"))}" title="${i18n().author_name}">${statement.personName}</a>
     <#else>
         <#-- This shouldn't happen, but we must provide for it -->
-        <a href="${profileUrl(statement.uri("authorship"))}" title="missing author">missing author</a>
+        <a href="${profileUrl(statement.uri("authorship"))}" title="${i18n().missing_author}">${i18n().missing_author}</a>
     </#if>
 </#macro>

@@ -7,7 +7,6 @@
  -->
 
 <#import "lib-datetime.ftl" as dt>
-
 <@showRole statement />
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
@@ -25,10 +24,10 @@
 <#else>
     <#local linkedIndividual>
         <#if statement.activity??>
-            <a href="${profileUrl(statement.uri("activity"))}" title="activity name">${statement.activityLabel!statement.activityName}</a>
+            <a href="${profileUrl(statement.uri("activity"))}" title="${i18n().activity_name}">${statement.activityLabel!statement.activityName}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.uri("role"))}" title="missing activity">missing activity</a>
+            <a href="${profileUrl(statement.uri("role"))}" title="${i18n().missing_activity}">${i18n().missing_activity}</a>
         </#if>
     </#local>
     

@@ -2,14 +2,15 @@
 
 <#-- Icon controls displayed in upper-right corner -->
 
-<img id="uriIcon" title="${individual.uri}" src="${urls.images}/individual/share-uri-icon.png" alt="share the uri" />
+<img id="uriIcon" title="${individual.uri}" src="${urls.images}/individual/share-uri-icon.png" alt="${i18n().share_the_uri}" />
 <@qr.renderCode qrCodeIcon />
 
 <#--
 
-Some contact information is displayed on the profile page by default; e.g., phone numbes and email addresses. If an institution
-has an additional location for contact info, such as a university directory, a third "contact" icon is available that can be used
-to direct users to that directory. The <a> tag below shows an example using Cornell University's directory.
+Some contact information is displayed on the profile page by default; e.g., phone numbes and 
+email addresses. If an institution has an additional location for contact info, such as a 
+university directory, a third "contact" icon is available that can be used to direct users to 
+that directory. The <a> tag below shows an example using Cornell University's directory.
 
 <#assign netid = individual.selfEditingId()!>
 <#if netid?has_content>

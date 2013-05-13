@@ -10,7 +10,7 @@
 
 <#-- No core:dateTime data property assigned. Display a link to the core:DateTimeValue object -->
 <#if ! statement.dateTime??>
-    <a href="${profileUrl(statement.uri("dateTimeValue"))}" title="incomplete date time">incomplete date/time</a>
+    <a href="${profileUrl(statement.uri("dateTimeValue"))}" title="${i18n().incomplete_date_time}">incomplete date/time</a>
 <#else>
     ${dt.formatXsdDateTimeLong(statement.dateTime, statement.precision!)}
 </#if>

@@ -7,14 +7,13 @@
  -->
 
 <#import "lib-sequence.ftl" as s>
-
 <@showResearchers statement />
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
 <#macro showResearchers statement>
     <#local linkedIndividual>
-        <a href="${profileUrl(statement.uri("person"))}" title="person name">${statement.personName}</a>
+        <a href="${profileUrl(statement.uri("person"))}" title="${i18n().person_name}">${statement.personName}</a>
     </#local>
     <#if statement.title?has_content >
         <#local posnTitle = statement.title>

@@ -8,7 +8,6 @@
 
 <#import "lib-sequence.ftl" as s>
 <#import "lib-datetime.ftl" as dt>
-
 <#-- Coming from propDelete, individual is not defined, but we are editing. -->
 <@showEducationalTraining statement=statement editable=(!individual?? || individual.editable) />
 
@@ -18,10 +17,6 @@
 
     <#local degree>
         <#if statement.degreeName??>
-            <#-- RY Giving up on join here. Freemarker insists on removing the space before "in"
-                 and leaving no space between the degree and major field, even though compress
-                 should only delete consecutive spaces. Even &nbsp; doesn't help.
-            <@s.join [ statement.degreeAbbr!statement.degreeName, statement.majorField! ], " in " /> -->
             ${statement.degreeAbbr!statement.degreeName} 
             <#if statement.majorField??> in ${statement.majorField}</#if>
         <#elseif statement.typeName??>
@@ -31,10 +26,10 @@
     
     <#local linkedIndividual>
         <#if statement.org??>
-            <a href="${profileUrl(statement.uri("org"))}" title="organization name">${statement.orgName}</a>
+            <a href="${profileUrl(statement.uri("org"))}" title="${i18n().organization_name}">${statement.orgName}</a>
         <#elseif editable>
             <#-- Show the link to the context node only if the user is editing the page. -->
-            <a href="${profileUrl(statement.uri("edTraining"))}" title="missing organization">missing organization</a>
+            <a href="${profileUrl(statement.uri("edTraining"))}" title="${i18n().missing_organization}">missing organization</a>
         </#if>
     </#local>
 

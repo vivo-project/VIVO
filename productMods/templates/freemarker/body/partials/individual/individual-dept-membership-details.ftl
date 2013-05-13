@@ -5,7 +5,7 @@
         <#list deptMemberships as firstRow>
         <div class="tab">
             <h2>${firstRow["orgLabel"]}</h2>
-            <p>Here are the faculty in the ${firstRow["deptLabel"]} department who are members of this organization. <a href="${urls.base}/display${firstRow["orgURI"]?substring(firstRow["orgURI"]?last_index_of("/"))}" title="view all cornell faculty">View all the members of this organization.</a></p>
+            <p>${i18n().faculty_who_are_members_of_org(firstRow["deptLabel"])} <a href="${urls.base}/display${firstRow["orgURI"]?substring(firstRow["orgURI"]?last_index_of("/"))}" title="${i18n().view_all_faculty}">${i18n().view_all_members_of_org}</a></p>
         </div>
         <#break>
         </#list>
@@ -14,7 +14,7 @@
         <ul role="list"  class="deptDetailsList">
             <#list deptMemberships as resultRow>
 		        <li class="deptDetailsListItem">
-		                <a href="${urls.base}/individual${resultRow["person"]?substring(resultRow["person"]?last_index_of("/"))}">${resultRow["personLabel"]}</a>
+		                <a href="${urls.base}/individual${resultRow["person"]?substring(resultRow["person"]?last_index_of("/"))}" title="${i18n().person_name}">${resultRow["personLabel"]}</a>
 		        </li>
             </#list>
         </ul>

@@ -8,7 +8,6 @@
 
 <#import "lib-sequence.ftl" as s>
 <#import "lib-datetime.ftl" as dt>
-
 <@showTraining statement />
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
@@ -17,10 +16,10 @@
     
     <#local linkedIndividual>
         <#if statement.person??>
-            <a href="${profileUrl(statement.uri("person"))}" title="person name">${statement.personName}</a>
+            <a href="${profileUrl(statement.uri("person"))}" title="${i18n().person_name}">${statement.personName}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.uri("training"))}" title="missing person">missing person in this position</a>
+            <a href="${profileUrl(statement.uri("training"))}" title="${i18n().missing_person_in_posn}">${i18n().missing_person_in_posn}</a>
         </#if>
     </#local>
     <#local detailedInfo>

@@ -16,16 +16,16 @@
     <#local linkedIndividual>
         <#if statement.advisee??>
             <#if statement.degreeLabel?? || statement.dateTimeStart?? || statement.dateTimeEnd?? >
-                <a href="${profileUrl(statement.uri("advisee"))}" title="advisee label">${statement.adviseeLabel!}</a>,
+                <a href="${profileUrl(statement.uri("advisee"))}" title="${i18n().advisee_label}">${statement.adviseeLabel!}</a>,
             <#else>
-                <a href="${profileUrl(statement.uri("advisee"))}" title="advisee label">${statement.adviseeLabel!}</a>
+                <a href="${profileUrl(statement.uri("advisee"))}" title="${i18n().advisee_label}">${statement.adviseeLabel!}</a>
             </#if>
             <#if statement.degreeLabel??>
                 ${statement.degreeAbbr!statement.degreeLabel!} 
-                <#if statement.dateTimeStart?? || statement.dateTimeEnd?? >&nbsp;candidate,<#else>&nbsp;candidate</#if>
+                <#if statement.dateTimeStart?? || statement.dateTimeEnd?? >&nbsp;${i18n().candidate},<#else>&nbsp;${i18n().candidate}</#if>
             </#if>
         <#elseif statement.advisoryLabel??>
-            <a href="${profileUrl(statement.uri("advisory"))}" title="advisory label">${statement.advisoryLabel!statement.localName}</a>
+            <a href="${profileUrl(statement.uri("advisory"))}" title="${i18n().advisory_label}">${statement.advisoryLabel!statement.localName}</a>
         </#if>
     </#local>
 

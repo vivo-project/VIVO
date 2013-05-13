@@ -17,12 +17,12 @@
         <#-- until the custom form is ready, provide a link to the address profile for editing --> 
         <div class="adr">
             <#if statement.street1?has_content>
-                <div class="address-street1"><a href="${profileUrl(statement.uri("address"))}">${statement.street1}</a></div>
+                <div class="address-street1"><a href="${profileUrl(statement.uri("address"))}" title="${i18n().address_street_one}">${statement.street1}</a></div>
             </#if>
             
             <#if statement.street2?has_content>
                 <#if !statement.street1?has_content>
-                    <div class="address-street2"><a href="${profileUrl(statement.uri("address"))}">${statement.street2}</a></div>
+                    <div class="address-street2"><a href="${profileUrl(statement.uri("address"))}" title="${i18n().address_street_two}">${statement.street2}</a></div>
                 <#else>
                     <div class="address-street2">${statement.street2}</div>
                 </#if>
@@ -30,7 +30,7 @@
             
             <#if statement.street3?has_content>
                 <#if !statement.street1?has_content && !statement.street2?has_content>
-                    <div class="address-street3"><a href="${profileUrl(statement.uri("address"))}">${statement.street3}</a></div>
+                    <div class="address-street3"><a href="${profileUrl(statement.uri("address"))}" title="${i18n().address_street_three}">${statement.street3}</a></div>
                 <#else>
                     <div class="address-street3">${statement.street3}</div>
                 </#if>
@@ -64,7 +64,7 @@
     <#elseif statement.editable>
         <#-- This can be removed when the custom form is available. Until then, provide a link to the
              address profile so the data can be edited. -->
-        <a href="${profileUrl(statement.uri("address"))}" title="address label">${statement.label!statement.localName}</a>
+        <a href="${profileUrl(statement.uri("address"))}" title="${i18n().address_label}">${statement.label!statement.localName}</a>
     <#else>
         ${statement.label!}
     </#if>

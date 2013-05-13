@@ -17,8 +17,8 @@
     <#assign departmentalGrantsExtension>    
         <div id="activeGrantsLink">
         <img src="${urls.base}/images/individual/arrow-green.gif">
-            <a href="${urls.base}/deptGrants?individualURI=${individual.uri}">
-                View all active grants
+            <a href="${urls.base}/deptGrants?individualURI=${individual.uri}" title="${i18n().view_all_active_grants}">
+                ${i18n().view_all_active_grants}
             </a>    
         </div>
     </#assign>

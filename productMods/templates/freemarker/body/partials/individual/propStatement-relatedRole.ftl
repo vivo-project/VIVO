@@ -21,7 +21,7 @@
             <a href="${profileUrl(statement.uri("indivInRole"))}" title="name">${statement.indivLabel!statement.indivName}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.uri("role"))}"  title="missing person">missing person in this role</a>
+            <a href="${profileUrl(statement.uri("role"))}"  title="${i18n().missing_person_in_role}">${i18n().missing_person_in_role}</a>
         </#if>
     </#local>
 

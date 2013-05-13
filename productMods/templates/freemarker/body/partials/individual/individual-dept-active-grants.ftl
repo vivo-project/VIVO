@@ -4,23 +4,23 @@
 <#if deptGrants?has_content>
 <section id="pageList">
     <#list deptGrants as firstRow>
-        <h2>Active Grants for ${firstRow["deptLabel"]}</h2>
+        <h2>${i18n().active_grants_for} ${firstRow["deptLabel"]}</h2>
         <#break>
     </#list>
 <table id="pageList" >
     <tr>
-        <th>Grant Name</th>
-        <th>Close Date</th>
+        <th>${i18n().grant_name}</th>
+        <th>${i18n().close_date}</th>
     </tr>
         <#list deptGrants as resultRow>
             <tr>
-		        <td><a href="${urls.base}/individual${resultRow["activity"]?substring(resultRow["activity"]?last_index_of("/"))}">${resultRow["activityLabel"]}</a></td> 
+		        <td><a href="${urls.base}/individual${resultRow["activity"]?substring(resultRow["activity"]?last_index_of("/"))}" title="${i18n().activity_name}">${resultRow["activityLabel"]}</a></td> 
 		        <td>${dt.formatXsdDateTimeShort(resultRow["dt"], "yearMonthDayPrecision")}</td>
 		    </tr>
 		</#list>
 </table>
 <#else>
-    There are currently no active grants for this department.
+    ${i18n().no_active_grants}
 </#if>
 
 </section>

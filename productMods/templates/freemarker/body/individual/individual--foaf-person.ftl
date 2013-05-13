@@ -13,7 +13,9 @@
     the targetedView variable gets set. 
     
     This template could also be used to load just the "individual--foaf-person-2column.ftl"
-    without enabling profile page types.
+    without enabling profile page types. "individual--foaf-person-2column.ftl" is a slightly
+    different design than the "individual--foaf-person.ftl" template in the themes/wilma 
+    directory.
         
  -->
 
@@ -44,15 +46,4 @@
         <#assign selectedTemplate = "individual--foaf-person-quickview.ftl" >
     </#if>
 </#if>
-<#include selectedTemplate >
-
-${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/individual/propertyGroupControls.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/individual/individualUriRdf.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/imageUpload/imageUploadUtils.js"></script>')}
-
-<script type="text/javascript">
-    i18n_confirmDelete = "${i18n().confirm_delete}"
-</script>
-              
+<#include selectedTemplate >              
