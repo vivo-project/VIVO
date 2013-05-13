@@ -21,7 +21,15 @@ Check those publications you want <strong>EXCLUDED</strong> from the profile pag
 
        
     <#list allSubclasses as sub>
-    <h4>${sub}s</h4>
+    <h4>
+        <#if sub = "Software" || sub = "Thesis">
+            ${sub}
+        <#elseif sub = "Speech">
+            Speeches
+        <#else>
+            ${sub}s
+        </#if>
+    </h4>
         <section id="pubsContainer" role="container">
         <#assign pubs = publications[sub]>
         <ul >
