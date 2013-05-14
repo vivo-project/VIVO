@@ -117,7 +117,7 @@
 
 <#include "individual-property-group-tabs.ftl">
 
-<#if targetedView?has_content || user.loggedIn >
+<#if profilePageTypesEnabled && (targetedView?has_content || user.loggedIn) >
 <span id="quickViewLink" >
     <a href="${urls.base}/display/${individual.localName}?destination=quickView" >
         <img id="quickViewIcon" src="${urls.images}/individual/quickViewIcon.png" alt="${i18n().quick_view_icon}"/>
