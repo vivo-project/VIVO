@@ -86,6 +86,9 @@ $(document).ready(function(){
                     // show the selected tab section
                     $('section#' + tabName).show();                
                 }
+                // if there is a more link, "click" more to show all the researchers
+                // we need the timeout delay so that the more link can get rendered                
+                setTimeout(geoFocusExpand,250);
             }
             else {
                 retrieveLocalStorage();
@@ -96,6 +99,21 @@ $(document).ready(function(){
         }
     }
 
+    function geoFocusExpand() {
+        // if the ontology is set to collate by subclass, $list.length will be > 0 
+        // this ensures both possibilities are covered
+        var $list = $('ul#geographicFocusOfList').find('ul');
+        if ( $list.length > 0 )
+        {
+            var $more = $list.find('a.more-less');
+            $more.click();
+        }
+        else {
+            var $more = $('ul#geographicFocusOfList').find('a.more-less');
+            $more.click();
+        }
+    }
+    
     //  Next two functions --  keep track of which property group tab was selected,
     //  so if we return from a custom form or a related individual, even via the back button,
     //  the same property group will be selected as before.
