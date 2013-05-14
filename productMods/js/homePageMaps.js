@@ -329,7 +329,7 @@ $(document).ready(function(){
                         researchAreas["features"].push(this);
                     });
                     buildGlobalMap();
-                    $('div#timeIndicator').hide();
+                    $('div#timeIndicatorGeo').hide();
                 }
             }
        });        

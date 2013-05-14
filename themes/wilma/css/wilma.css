@@ -1008,6 +1008,8 @@ a.view-all-style {
 	width: 86px; 
 }
 div#tempSpacing {
+    margin-top:30px;
+    padding-left:20px;
     height:325px;
 }
 div#research-faculty-mbrs {

@@ -17,7 +17,11 @@
 <#macro facultyMbrHtml>
     <section id="home-faculty-mbrs" class="home-sections"  >
         <h4>Faculty</h4>
-        <div id="tempSpacing">&nbsp;</div>
+        <div id="tempSpacing">
+            <span>Loading faculty . . .&nbsp;&nbsp;&nbsp;
+                <img  src="${urls.images}/indicatorWhite.gif">
+            </span>
+        </div>
         <div id="research-faculty-mbrs">
             <!-- populated via an ajax call -->
             <ul id="facultyThumbs">
@@ -178,7 +182,7 @@ var urlsBase = "${urls.base}";
             </div>  
         -->
         <div id="researcherTotal"></div>
-        <div id="timeIndicator">
+        <div id="timeIndicatorGeo">
             <span>Loading map information . . .&nbsp;&nbsp;&nbsp;
                 <img  src="${urls.images}/indicatorWhite.gif">
             </span>
