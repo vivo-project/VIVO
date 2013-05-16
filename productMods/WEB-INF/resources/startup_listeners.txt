@@ -20,8 +20,8 @@ edu.cornell.mannlib.vitro.webapp.servlet.setup.RDFServiceSetup
 
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ApplicationModelSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.UserModelSetup
-
-edu.cornell.mannlib.vitro.webapp.servlet.setup.WebappDaoSetup
+edu.cornell.mannlib.vitro.webapp.servlet.setup.ContentModelSetup
+edu.cornell.mannlib.vitro.webapp.servlet.setup.ModelMakerSetup
 
 edu.cornell.mannlib.vitro.webapp.filestorage.backend.FileStorageSetup
 
