@@ -25,8 +25,9 @@ import edu.cornell.mannlib.vitro.webapp.controller.edit.utils.LocalNamespaceClas
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.RedirectResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
+import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess;
+import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess.ModelID;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
-import edu.cornell.mannlib.vitro.webapp.dao.jena.ModelContext;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.event.EditEvent;
 /*
  * Custom controller for menu management.  This will be replaced later once N3 Editing
@@ -183,7 +184,7 @@ public class InstitutionalInternalClassController extends FreemarkerHttpServlet 
 		}
 		//If existing class, need to simply add a statement specifying existing class is an internal class
 		if(classUri != null && !classUri.isEmpty()) {
-			Model writeModel = ModelContext.getBaseOntModelSelector(getServletContext()).getTBoxModel();
+			Model writeModel = ModelAccess.on(getServletContext()).getOntModel(ModelID.BASE_TBOX);
 			writeModel.enterCriticalSection(Lock.WRITE);
 			writeModel.notifyEvent(new EditEvent(null,true));
 			try {
@@ -238,7 +239,7 @@ public class InstitutionalInternalClassController extends FreemarkerHttpServlet 
 	//Get current internal class
 	private String retrieveCurrentInternalClass() {
 		String internalClassUri = "";
-		Model mainModel = ModelContext.getBaseOntModelSelector(getServletContext()).getTBoxModel();
+		Model mainModel = ModelAccess.on(getServletContext()).getOntModel(ModelID.BASE_TBOX);
 		StmtIterator internalIt = mainModel.listStatements(null, 
 				ResourceFactory.createProperty(VitroVocabulary.IS_INTERNAL_CLASSANNOT), 
 				(RDFNode) null);
