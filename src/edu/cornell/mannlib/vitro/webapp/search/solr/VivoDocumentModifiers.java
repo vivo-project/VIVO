@@ -10,10 +10,9 @@ import javax.servlet.ServletContextEvent;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.DatasetFactory;
 
-import edu.cornell.mannlib.vitro.webapp.dao.jena.ModelContext;
+import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.RDFServiceUtils;
-
 import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.CalculateParameters;
 import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.DocumentModifier;
 
@@ -25,7 +24,7 @@ public class VivoDocumentModifiers implements javax.servlet.ServletContextListen
         ServletContext context = sce.getServletContext();
 		RDFServiceFactory rdfServiceFactory = RDFServiceUtils.getRDFServiceFactory(context);
         
-        Dataset dataset = DatasetFactory.create(ModelContext.getJenaOntModel(context));
+        Dataset dataset = DatasetFactory.create(ModelAccess.on(context).getJenaOntModel());
         
         /* put DocumentModifiers into servlet context for use later in startup by SolrSetup */        
         
