@@ -18,9 +18,11 @@
                ?label 
                ?localName 
                ?type
+               ?objectType
                ?title WHERE {
   
-            ?subject ?property ?object 
+            ?subject ?property ?object .
+            ?object a ?objectType
                 LET (?localName := afn:localname(?object)) 
             
             OPTIONAL { ?object rdfs:label ?label } 

@@ -20,7 +20,8 @@
                         ?dateTimeStart ?dateTimeEnd 
                         ?hideThis
         WHERE {                
-            ?subject ?property ?role  
+            ?subject ?property ?role .
+            ?role a ?objectType 
             
             OPTIONAL {  ?role core:roleRealizedIn ?activity 
                         LET (?activityName := afn:localname(?activity)) 
