@@ -18,8 +18,8 @@ roleExamples-->
 
 
 <#--Variable assignments for Add Clinical Role To Person-->
-<#assign roleDescriptor = "outreach & community service" />
-<#assign typeSelectorLabel = "outreach & community service in" />
+<#assign roleDescriptor = "${i18n().outreach_comm_service}" />
+<#assign typeSelectorLabel = "${i18n().outreach_comm_service_in}" />
 
 
 <#--Each of the two stage forms will include the form below-->

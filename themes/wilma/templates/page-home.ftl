@@ -35,17 +35,17 @@
             <h2>${i18n().intro_title}</h2>
 
             <p>${i18n().intro_para1}</p>
-            <p>${i18n().intro_para2}Browse or search information on people, departments, courses, grants, and publications.</p>
+            <p>${i18n().intro_para2}</p>
 
             <section id="search-home" role="region">
                 <h3>${i18n().intro_searchvivo} <span class="search-filter-selected">filteredSearch</span></h3>
         
                 <fieldset>
-                    <legend>Search form</legend>
+                    <legend>${i18n().search_form}</legend>
                     <form id="search-homepage" action="${urls.search}" name="search-home" role="search" method="post" > 
                         <div id="search-home-field">
                             <input type="text" name="querytext" class="search-homepage" value="" autocapitalize="off" />
-                            <input type="submit" value="Search" class="search" />
+                            <input type="submit" value="${i18n().search_button}" class="search" />
                             <input type="hidden" name="classgroup" class="search-homepage" value="" autocapitalize="off" />
                         </div>
                 
@@ -54,7 +54,7 @@
                         </a>
                 
                         <ul id="filter-search-nav">
-                            <li><a class="active" href="">All</a></li>
+                            <li><a class="active" href="">${i18n().all_capitalized}</a></li>
                             <@lh.allClassGroupNames vClassGroups! />  
                         </ul>
                     </form>

@@ -32,36 +32,36 @@
 </#if>
 
 <#if editMode == "edit">    
-        <#assign titleVerb="Edit">        
-        <#assign submitButtonText="Edit Mailing Address">
+        <#assign titleVerb="${i18n().edit_capitalized}">        
+        <#assign submitButtonText="${i18n().edit_mailing_address}">
         <#assign disabledVal="disabled">
 <#else>
-        <#assign titleVerb="Create">        
-        <#assign submitButtonText="Create Mailing Address">
+        <#assign titleVerb="${i18n().create_capitalized}">        
+        <#assign submitButtonText="${i18n().create_mailing_address}">
         <#assign disabledVal=""/>
 </#if>
 
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
 
-<h2>${titleVerb}&nbsp;mailing address for ${editConfiguration.subjectName}</h2>
+<h2>${titleVerb}&nbsp;${i18n().mailing_address_for} ${editConfiguration.subjectName}</h2>
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
     <section id="error-alert" role="alert">
-        <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
+        <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="${i18n().error_alert_icon}" />
         <p>
         <#--Checking if any required fields are empty-->
          <#if lvf.submissionErrorExists(editSubmission, "country")>
- 	        Please select a country.<br />
+ 	        ${i18n().select_a_country}<br />
         </#if>
          <#if lvf.submissionErrorExists(editSubmission, "addrLineOne")>
- 	        Please enter a value in the Address Line 1 field.<br />
+ 	        ${i18n().enter_address1_value}<br />
         </#if>
          <#if lvf.submissionErrorExists(editSubmission, "city")>
- 	        Please enter a value in the City field.<br />
+ 	        ${i18n().enter_a_city}<br />
         </#if>
          <#if lvf.submissionErrorExists(editSubmission, "postalCode")>
- 	        Please enter a value in the Postal Code field.
+ 	        ${i18n().enter_postal_code}
         </#if>
         
         </p>
@@ -76,7 +76,7 @@
 
     
     <p>    
-      <label for="country" style="margin-bottom:-4px">Country ${requiredHint}</label>
+      <label for="country" style="margin-bottom:-4px">${i18n().country} ${requiredHint}</label>
       <#assign countryOpts = editConfiguration.pageData.country />
       <select id="country" name="country" >
           <#list countryOpts?keys as key>  
@@ -92,30 +92,30 @@
     
   <div id="addressDetails" >
     <p>
-        <label for="addrLineOne">Street Address 1 ${requiredHint}</label>
+        <label for="addrLineOne">${i18n().street_Address1} ${requiredHint}</label>
         <input  size="50"  type="text" id="addrLineOne" name="addrLineOne" value="${addrLineOneValue}" />
     </p>
     
     <p>
-        <label for="addrLineTwo">Street Address 2</label>
+        <label for="addrLineTwo">${i18n().street_Address2}</label>
         <input  size="50"  type="text" id="addrLineTwo" name="addrLineTwo" value="${addrLineTwoValue}" />
     </p>
                                     
     <p>
-        <label for="addrLineThree">Street Address 3</label>
+        <label for="addrLineThree">${i18n().street_Address3}</label>
         <input  size="50"  type="text" id="addrLineThree" name="addrLineThree" value="${addrLineThreeValue}" />
     </p>
 
     <p>
-        <label for="city">City ${requiredHint}</label>
+        <label for="city">${i18n().city} ${requiredHint}</label>
         <input  size="40"  type="text" id="city" name="city" value="${cityValue}" />
     </p>
 
     <p>
-        <label for="state" id="stateLabel">State</label>
+        <label for="state" id="stateLabel">${i18n().state}</label>
         <input  size="40"  type="text" id="state" name="state" value="${stateValue}" />
         <select id="stateSelect" name="stateSelect">
-            <option value="" <#if editMode == "add">selected</#if> >Select one</option>
+            <option value="" <#if editMode == "add">selected</#if> >${i18n().select_one}</option>
             <option value="Alabama" <#if stateValue == "Alabama" || stateValue == "AL" >selected</#if> >Alabama</option>
             <option value="Alaska" <#if stateValue == "Alaska" || stateValue == "AK" >selected</#if> >Alaska</option>
             <option value="Arizona" <#if stateValue == "Arizona " || stateValue == "AZ" >selected</#if>>Arizona</option>
@@ -170,7 +170,7 @@
     </p>
 
     <p>
-        <label for="postalCode" id="postalCodeLabel">Postal Code ${requiredHint}</label>
+        <label for="postalCode" id="postalCodeLabel">${i18n().postal_code} ${requiredHint}</label>
         <input  size="8"  type="text" id="postalCode" name="postalCode" value="${postalCodeValue}" />
     </p>
 
@@ -181,11 +181,11 @@
     <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>
 
     <p class="submit">
-        <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> or </span>
-        <a class="cancel" href="${cancelUrl}" title="Cancel">Cancel</a>
+        <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> ${i18n().or} </span>
+        <a class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
     </p>
 
-    <p id="requiredLegend" class="requiredHint">* required fields</p>
+    <p id="requiredLegend" class="requiredHint">* ${i18n().required_fields}</p>
 
 </form>
 

@@ -32,7 +32,7 @@
         <!-- Contact Info -->
         <div id="individual-tools-people">
             <span id="iconControlsLeftSide">
-                <img id="uriIcon" title="${individual.uri}" src="${urls.images}/individual/uriIcon.gif" alt="uri icon"/>  
+                <img id="uriIcon" title="${individual.uri}" src="${urls.images}/individual/uriIcon.gif" alt="${i18n().uri_icon}"/>  
                 <@qr.renderCode "qr_icon.png" />
             </span>
         </div>
@@ -50,8 +50,8 @@
         
         <header>
             <#if relatedSubject??>
-                <h2>${relatedSubject.relatingPredicateDomainPublic} ${i18n.indiv_foafperson_for} ${relatedSubject.name}</h2>
-                <p><a href="${relatedSubject.url}" title="${i18n.indiv_foafperson_return}">&larr; ${i18n.indiv_foafperson_return} ${relatedSubject.name}</a></p>
+                <h2>${relatedSubject.relatingPredicateDomainPublic} ${i18n().indiv_foafperson_for} ${relatedSubject.name}</h2>
+                <p><a href="${relatedSubject.url}" title="${i18n().indiv_foafperson_return}">&larr; ${i18n().indiv_foafperson_return} ${relatedSubject.name}</a></p>
             <#else>                
                 <h1 class="vcard foaf-person">
                     <#-- Label -->

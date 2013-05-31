@@ -17,14 +17,14 @@
 <h2><em>${editConfiguration.pageData.subjectName}</em></h2>
 </#if>
 
-<h3>Manage Web Pages</h3>
+<h3>${i18n().manage_web_pages}</h3>
        
 <script type="text/javascript">
     var webpageData = [];
 </script>
 
 <#if !editConfiguration.pageData.webpages?has_content>
-    <p>This individual currently has no web pages specified. Add a new web page by clicking on the button below.</p>
+    <p>${i18n().has_no_webpages}</p>
 </#if>
 
 <ul id="webpageList" ${ulClass} role="list">
@@ -37,11 +37,11 @@
             </#if>
             
             <span class="webpageName">
-                <a href="${webpage.url}" title="webpage url">${anchor}</a>
+                <a href="${webpage.url}" title="${i18n().webpage_url}">${anchor}</a>
             </span>
             <span class="editingLinks">
-                <a href="${baseEditWebpageUrl}&objectUri=${webpage.link?url}&predicateUri=${predicateUri}" class="edit" title="edit web page link">Edit</a> | 
-                <a href="${urls.base}${deleteWebpageUrl}" class="remove" title="delete web page link">Delete</a> 
+                <a href="${baseEditWebpageUrl}&objectUri=${webpage.link?url}&predicateUri=${predicateUri}" class="edit" title="${i18n().edit_wepage_link}">${i18n().edit_capitalized}</a> | 
+                <a href="${urls.base}${deleteWebpageUrl}" class="remove" title="${i18n().delete_web_page_link}">${i18n().delete_capitalized}</a> 
             </span>
         </li>    
         
@@ -57,10 +57,10 @@
     <#-- There is no editConfig at this stage, so we don't need to go through postEditCleanup.jsp on cancel.
          These can just be ordinary links, rather than a v:input element, as in 
          addAuthorsToInformationResource.jsp. -->   
-    <a href="${showAddFormUrl}" id="showAddForm" class="button green" title="add new web page">Add New Web Page</a>
+    <a href="${showAddFormUrl}" id="showAddForm" class="button green" title="${i18n().add_new_web_page}">${i18n().add_new_web_page}</a>
        
-    <a href="${cancelUrl}" id="returnToIndividual" class="return" title="return to individual">Return to Individual</a>
-    <img id="indicator" class="indicator hidden" src="${urls.base}/images/indicatorWhite.gif" />
+    <a href="${cancelUrl}" id="returnToIndividual" class="return" title="${i18n().return_to_profile}">${i18n().return_to_profile}</a>
+    <img id="indicator" class="indicator hidden" src="${urls.base}/images/indicatorWhite.gif" alt="${i18n().processing_indicator}"/>
 </section>
 
 

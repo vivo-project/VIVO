@@ -3,26 +3,19 @@
 <#assign shortVisualizationURLRoot ="/vis">
 <#assign refreshCacheURL = "${urls.base}${shortVisualizationURLRoot}/refresh-cache">
 
-<h2>Visualization Tools</h2>
+<h2>${i18n().visualization_tools}</h2>
 
-<a href="${refreshCacheURL}">Refresh Cached Models for Visualization</a> 
+<a href="${refreshCacheURL}">${i18n().refresh_cached_vis_model}</a> 
 <section class="visualizationTools">
-<h3>Why is it needed?</h3>
-<p>Large-scale visualizations like the Temporal Graph or the Map of Science involve calculating total counts of publications or 
-of grants for some entity. Since this also means checking through all of its sub-entities, the underlying queries can be both 
-memory-intensive and time-consuming. For a faster user experience, we wish to save the results of these queries for later re-use.</p>
+<h3>${i18n().why_needed}</h3>
+<p>${i18n().vis_tools_note_one}</p>
 
-<h3>What's involved in the caching process?</h3>
-<p>To this end we have devised a caching solution which will retain information about the hierarchy of organizations -- namely, 
-which publications are attributed to which organizations -- by storing the RDF model.</p>
+<h3>${i18n().vis_caching_process}</h3>
+<p>${i18n().vis_tools_note_two}</p>
 
-<p>We're currently caching these models in memory.  The cache is built (only once) on the first user request after a server restart.  
-Because of this, the same model will be served until the next restart. This means that the data in these models may become stale 
-depending upon when it was last created. This works well enough for now. In future releases we will improve this solution so that 
-models are stored on disk and periodically updated.</p>
+<p>${i18n().vis_tools_note_three}</p>
 
-<p>The models are refreshed each time the server restarts.  Since this is not generally practical on production instances, 
-administrators can instead use the "refresh cache" link above to do this without a restart.</p>
+<p>${i18n().vis_tools_note_four}</p>
 </section>
 
 

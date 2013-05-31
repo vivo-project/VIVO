@@ -18,9 +18,9 @@ roleExamples-->
 
 
 <#--Variable assignments for Add Clinical Role To Person-->
-<#assign roleDescriptor = "attended" />
-<#assign typeSelectorLabel = "event type" />
-<#assign buttonText = "Attendee" />
+<#assign roleDescriptor = "${i18n().attended}" />
+<#assign typeSelectorLabel = "${i18n().event_type}" />
+<#assign buttonText = "${i18n().attendee_capitalized}" />
 
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">

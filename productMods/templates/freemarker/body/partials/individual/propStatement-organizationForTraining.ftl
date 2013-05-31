@@ -24,7 +24,7 @@
     </#local>
     <#local detailedInfo>
         <#if statement.degree??>
-            ${statement.degreeAbbr!} in ${statement.field!} 
+            ${statement.degreeAbbr!} ${i18n().in} ${statement.field!} 
         <#elseif statement.field??>
             ${statement.field!}, ${statement.suppInfo!}
         <#else>

@@ -6,12 +6,12 @@
 <#if subjectName?contains(",") >
 <#assign lastName = subjectName?substring(0,subjectName?index_of(",")) />
 <#assign firstName = subjectName?substring(subjectName?index_of(",") + 1) />
-<h2>Manage Publications for ${firstName} ${lastName}</h2>
+<h2>${i18n().manage_publications} ${firstName} ${lastName}</h2>
 <#else>
-<h2>Manage Publications for ${subjectName}</h2>
+<h2>${i18n().manage_publications} ${subjectName}</h2>
 </#if>
 <p style="margin-left:25px;margin-bottom:12px">
-Check those publications you want to exclude from the profile page.
+${i18n().check_pubs_to_exclude}
 <script type="text/javascript">
     var publicationData = [];
 </script>
@@ -52,7 +52,7 @@ Check those publications you want to exclude from the profile page.
 
 <br />    
 <p>
-    <a href="${urls.referringPage}#publications" title="return to profile page">Return to profile page</a>
+    <a href="${urls.referringPage}#publications" title="${i18n().return_to_profile}">${i18n().return_to_profile}</a>
 </p>
 
 <script type="text/javascript">

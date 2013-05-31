@@ -2,19 +2,19 @@
 
 <#if !(user.loggedIn && user.hasSiteAdminAccess)>
 
-    <p>You must be an administrator to use this tool.</p>
+    <p>${i18n().must_be_admin}</p>
 
 <#else>
 
     <#if jobKnown == "false">
         
-        <p>Error: No file harvest job was specified, or an unknown job was specified.</p>
+        <p>${i18n().error_no_job_specified}</p>
         
-        <p>The end user should not see this error under normal circumstances, so this is probably a bug and should be reported.</p>
+        <p>${i18n().probably_a_bug_so_report}</p>
         
     <#else>
         
-        <h2><a class="ingestMenu" href="${urls.base}/ingest" title="Return to the Data Ingest Tools menu">Ingest Menu</a> > ${jobSpecificHeader}</h2>
+        <h2><a class="ingestMenu" href="${urls.base}/ingest" title="${i18n().return_to_ingest_menu}">${i18n().ingest_menu}</a> > ${jobSpecificHeader}</h2>
         
         <#-- check to ensure harvester.location is set in runtime.properties -->
         <#if harvesterLocation?has_content>
@@ -25,7 +25,7 @@
                 
                 function doHarvest() {
                     document.getElementById("harvestButton").disabled = true;
-                    document.getElementById("harvestButtonHelpText").innerHTML = "Please wait while your data is harvested.";
+                    document.getElementById("harvestButtonHelpText").innerHTML = "${i18n().data_being_harvested}";
                     
                     var request = createRequest();
                     request.onreadystatechange=function() {
@@ -92,7 +92,7 @@
                             importedItems.appendChild(newLi);
                         }
                         
-                        document.getElementById("harvestButtonHelpText").innerHTML = "Harvest complete.  For another, please refresh the page.";
+                        document.getElementById("harvestButtonHelpText").innerHTML = "${i18n().harvest_complete}";
                     }
                 }
                 
@@ -175,82 +175,82 @@
             </script>
             
             <div id="fileHarvestErrorHelp" class="hidden">
-                <p>An error has occurred and the file harvest cannot continue.</p>
+                <p>${i18n().error_harvest_cannot_continue}</p>
                 
-                <p>This is most likely due to an improper Harvester configuration. Please ensure the following:</p>
+                <p>${i18n().harvest_error_instructions_one}</p>
                 
                 <ol>
-                    <li>VIVO Harvester is installed.</li>
-                    <li>The <em>harvester.location</em> property in runtime.properties is pointed to the Harvester installation directory.</li>
-                    <li>In VIVO Harvester, the web server user (typically tomcat6) has read and write access to the <em>vivo/</em> directory and all of its children.</li>
-                    <li>In VIVO Harvester, the <em>logs/</em> directory exists and the web server user has read and write access to it.</li>
-                    <li>In VIVO Harvester, the file <em>vivo/config/vivo.xml</em> is properly configured with your database information and namespace.</li>
+                    <li>${i18n().harvest_error_instructions_two}</li>
+                    <li>${i18n().the_capitalized} <em>${i18n().harvester_location}</em> ${i18n().harvest_error_instructions_three}</li>
+                    <li>${i18n().harvest_error_instructions_fourA}<em>${i18n().harvest_error_instructions_fourB}</em> ${i18n().harvest_error_instructions_fourC}</li>
+                    <li>${i18n().harvest_error_instructions_fiveA} <em>${i18n().harvest_error_instructions_fiveB}</em> ${i18n().harvest_error_instructions_fiveC}</li>
+                    <li>${i18n().harvest_error_instructions_sixA} <em>${i18n().harvest_error_instructions_sixB}</em> ${i18n().harvest_error_instructions_sixC}</li>
                 </ol>
             </div>
             
             <div id="fileHarvestForm">
                 <div id="step1" class="testfile-step">
-                    <h3 class="testfile-step-header">Step 1</h3>
+                    <h3 class="testfile-step-header">${i18n().step_one}</h3>
                     <div id="step1-inner" class="testfile-step-body">
-                        <h4 class="testfile-step-subheader">Download template</h4>
+                        <h4 class="testfile-step-subheader">${i18n().download_template}</h4>
                         <form id="downloadTemplateForm" method="post" action=${postTo}>
                             <input type="hidden" id="${paramMode}" name="${paramMode}" value="${modeDownloadTemplate}" />
-                            <p><input id="submit" type="submit" name="submit" value="Download" /> ${jobSpecificDownloadHelp}</p>
+                            <p><input id="submit" type="submit" name="submit" value="${i18n().download}" /> ${jobSpecificDownloadHelp}</p>
                         </form>
                     </div>
                 </div>
                 
                 <div id="step2" class="testfile-step">
-                    <h3 class="testfile-step-header">Step 2</h3>
+                    <h3 class="testfile-step-header">${i18n().step_two}</h3>
                     <div id="step2-inner" class="testfile-step-body">
-                        <h4 class="testfile-step-subheader">Fill in data <a class="help" href="#">Help</a></h4>
+                        <h4 class="testfile-step-subheader">${i18n().fill_in_data} <a class="help" href="#">${i18n().help_capitalized}</a></h4>
                         <div id="csvHelp-collapsible" class="hidden">
                             <div id="csvHelp-indented">
                                 ${jobSpecificFillInHelp}
                             </div>
                         </div>
-                        <p>Fill in the template with your data.  You may fill in multiple templates if you wish to harvest multiple files at once.</p>
+                        <p>${i18n().fill_in_template_with_data}</p>
                         <div id="csvHelp">
                         </div>
                     </div>
                 </div>
                 
                 <div id="step3" class="testfile-step">
-                    <h3 class="testfile-step-header">Step 3</h3>
+                    <h3 class="testfile-step-header">${i18n().step_three}</h3>
                     <div id="step3-inner" class="testfile-step-body">
-                        <h4 class="testfile-step-subheader">Upload file(s)</h4>
-                        <p>Upload your filled-in template(s).</p>
+                        <h4 class="testfile-step-subheader">${i18n().upload_files}</h4>
+                        <p>${i18n().upload_completed_templates}</p>
                         <form id="fileUploadForm" method="post" enctype="multipart/form-data" action=${postTo}>
                             <input type="hidden" id="${paramFirstUpload}" name="${paramFirstUpload}" value="true" />
                             <!--<input type="hidden" id="${paramJob}" name="${paramJob}" value="${job}" /> -->
                             <input type="file" name="${paramUploadedFile}" />
-                            <input type="submit" name="submit" value="Upload" />
+                            <input type="submit" name="submit" value="${i18n().upload_capitalized}" />
                             <iframe id="uploadTarget" name="uploadTarget" src=""></iframe>
                         </form>
-                        <h5>Uploaded files</h5>
+                        <h5>${i18n().uploaded_files}</h5>
                         <ul id="fileListing">
                         </ul>
                     </div>
                 </div>
                 
                 <div id="step4" class="testfile-step">
-                    <h3 class="testfile-step-header">Step 4</h3>
+                    <h3 class="testfile-step-header">${i18n().step_four}</h3>
                     <div id="step4-inner" class="testfile-step-body">
-                        <h4 class="testfile-step-subheader">Harvest</h4>
-                        <p><input type="button" name="harvestButton" id="harvestButton" class="green button" value="Harvest" /><span id="harvestButtonHelpText">Click the button to harvest your file(s).</span></p>
+                        <h4 class="testfile-step-subheader">${i18n().harvest_capitalized}</h4>
+                        <p><input type="button" name="harvestButton" id="harvestButton" class="green button" value="${i18n().harvest_capitalized}" /><span id="harvestButtonHelpText">${i18n().click_to_harvest}</span></p>
                     </div>
                 </div>
                 
                 <div id="step5" class="testfile-step">
-                    <h3 class="testfile-step-header">Step 5</h3>
+                    <h3 class="testfile-step-header">${i18n().step_five}</h3>
                     <div id="step5-inner" class="testfile-step-body">
-                        <h4 class="testfile-step-subheader">View results</h4>
+                        <h4 class="testfile-step-subheader">${i18n().view_results}</h4>
                         <div id="script">
-                            <h5>Script being executed</h5>
+                            <h5>${i18n().script_executed}</h5>
                             <textarea cols="100" rows="20" readonly="readonly" id="scriptTextArea"></textarea>      
                         </div>
                         <div id="progress">
-                            <h5>Progress</h5>
+                            <h5>${i18n().progress_capitalized}</h5>
                             <textarea cols="100" rows="20" readonly="readonly" id="progressTextArea"></textarea>        
                         </div>
                         <div id="summary">
@@ -265,9 +265,9 @@
         <#else>
             
             <div id="fileHarvestErrorHelp">
-                <p>The <em>harvester.location</em> property in runtime.properties is undefined.</p>
+                <p>${i18n().the_capitalized} <em>${i18n().harvester_location}</em> ${i18n().undefined_runtime_property}</p>
                 
-                <p>In order to use this feature, please define a value for this property that points to the Harvester installation directory before redeploying and restarting the application.</p>
+                <p>${i18n().define_value_for_property}</p>
             </div>
             
         <#-- if harvester.location is defined -->

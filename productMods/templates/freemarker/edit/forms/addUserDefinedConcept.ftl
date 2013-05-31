@@ -7,7 +7,7 @@
 
 <#assign sparqlForAcFilter = editConfiguration.pageData.sparqlForAcFilter />
 
-<h2>Create Your Own Concept</h2>
+<h2>${i18n().create_own_concept_all_caps}</h2>
 
 <@lvf.unsupportedBrowser urls.base /> 
 
@@ -15,16 +15,16 @@
     <input type="hidden" name="editKey" id="editKey" value="${editKey}" role="input" />
    <#--Autocomplete for looking up existing skos concepts -->
 						<p>
-		            <label for="relatedIndLabel">Concept <span class='requiredHint'> *</span></label>
+		            <label for="relatedIndLabel">${i18n().concept_capitalized} <span class='requiredHint'> *</span></label>
 		            <input class="acSelector" size="50"  type="text" id="relatedIndLabel" acGroupName="concept" name="conceptLabel" value="" />
 		        </p>
 		
 		        <div class="acSelection" acGroupName="concept">
 		            <p class="inline">
-		                <label>Selected Concept:</label>
+		                <label>${i18n().selected_concept}:</label>
 		                <span class="acSelectionInfo"></span>
-                        <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
-                        <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
+                        <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+                        <a href="#" class="changeSelection" id="changeSelection" title="${i18n().change_selection}">${i18n().change_selection})</a>
 		            </p>
 		            <input class="acUriReceiver" type="hidden" id="conceptNode" name="conceptNode" value="" />
         </div>
@@ -35,10 +35,10 @@
     
 		<p class="submit">
 				<input type="hidden" name = "editKey" value="${editKey}"/>
-				<input type="submit" id="submit" value="Create Concept"/><span class="or"> or </span><a class="cancel" href="${cancelUrl}">Return to Manage Concepts</a>
+				<input type="submit" id="submit" value="${i18n().create_concept}"/><span class="or"> ${i18n().or} </span><a class="cancel" href="${cancelUrl}">${i18n().return_to_manage_concepts}</a>
 		</p>
 		
-		<p id="requiredLegend" class="requiredHint">* required fields</p>
+		<p id="requiredLegend" class="requiredHint">* ${i18n().required_fields}</p>
     
 </form>
 

@@ -35,7 +35,7 @@
         <#include "individual-adminPanel.ftl">
         <header>
             <#if relatedSubject??>
-                <h2>${relatedSubject.relatingPredicateDomainPublic} for ${relatedSubject.name}</h2>
+                <h2>${relatedSubject.relatingPredicateDomainPublic} ${i18n().for} ${relatedSubject.name}</h2>
                 <p><a href="${relatedSubject.url}" title="${i18n().return_to(relatedSubject.name)}">&larr; ${i18n().return_to(relatedSubject.name)}</a></p>
             <#else>  
                 <h1 class="vcard foaf-person fn" <#if !editable>style="float:left;border-right:1px solid #A6B1B0;"</#if>> 

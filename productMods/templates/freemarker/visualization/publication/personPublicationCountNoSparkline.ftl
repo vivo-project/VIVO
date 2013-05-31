@@ -20,8 +20,8 @@
                 var onlyUnknownYearPublications = false;
                 
                 var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Year');
-                data.addColumn('number', 'Publications');
+                data.addColumn('string', '${i18n().year_capitalized}');
+                data.addColumn('number', '${i18n().publications_capitalized}');
                 data.addRows(${sparklineVO.yearToEntityCountDataTable?size});
                 
                 var knownYearPublicationCounts = 0;
@@ -59,14 +59,14 @@
 
                 var td1Text = totalPublicationCount;
                 var td2Text = "";
-                var infoImgText = "<img class='infoIcon' src='" + infoIconSrc + "' height='14px' width='14px' alt='information icon' title='These numbers are based solely on publications that have been loaded into this VIVO application. If this is your profile, you can enter additional publications below.' />";
+                var infoImgText = "<img class='infoIcon' src='" + infoIconSrc + "' height='14px' width='14px' alt='${i18n().info_icon}' title='${i18n().numbers_based_on_publications_in_vivo}' />";
 
                 if ( !onlyUnknownYearPublications ) {
                     if ( td1Text == tenYearCount ) {
-                        td2Text += "in the last 10 full years " ;
+                        td2Text += "${i18n().last_ten_full_years} " ;
                     }
                     else {
-                        td2Text += "<strong>" + tenYearCount + "</strong> in the last 10 full years " ;
+                        td2Text += "<strong>" + tenYearCount + "</strong> ${i18n().last_ten_full_years} " ;
                     }
                     
                     if ( tenYearCount < 100 ) {
@@ -74,7 +74,7 @@
                     } 
                 }
                 else {
-                    td2Text += "total <img class='infoIcon' src='" + infoIconSrc + "' height='14px' width='14px' alt='information icon' title='These numbers are based solely on publications that have been loaded into this VIVO application. If this is your profile, you can enter additional publications below.' />";
+                    td2Text += "total <img class='infoIcon' src='" + infoIconSrc + "' height='14px' width='14px' alt='${i18n().info_icon}' title='${i18n().numbers_based_on_publications_in_vivo}' />";
                 }
          
                 $('#${sparklineContainerID} td#totalPubs').html(td1Text);

@@ -18,8 +18,8 @@ roleExamples-->
 
 
 <#--Variable assignments for Add Clinical Role To Person-->
-<#assign roleDescriptor = "collection or series editor role" />
-<#assign typeSelectorLabel = "editor role in" />
+<#assign roleDescriptor = "${i18n().collection_series_editor_role}" />
+<#assign typeSelectorLabel = "${i18n().editor_role_in}" />
 
 
 <#--Each of the two stage forms will include the form below-->

@@ -2,12 +2,12 @@
 
 <table id='${tableID}'>
     <caption>
-        ${tableCaption} <a href="${fileDownloadLink}">(.CSV File)</a>
+        ${tableCaption} <a href="${fileDownloadLink}">(.CSV ${i18n().file_capitalized})</a>
     </caption>
     <thead>
         <tr>
             <th>
-                Year
+                ${i18n().year_capitalized}
             </th>
             <th>
                 ${tableActivityColumnName}

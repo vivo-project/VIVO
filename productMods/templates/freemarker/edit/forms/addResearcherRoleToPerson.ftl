@@ -18,8 +18,8 @@ roleExamples-->
 
 
 <#--Variable assignments for Add Clinical Role To Person-->
-<#assign roleDescriptor = "research activity" />
-<#assign typeSelectorLabel = "research activity type" />
+<#assign roleDescriptor = "${i18n().research_activity}" />
+<#assign typeSelectorLabel = "${i18n().research_activity_type}" />
 
 
 <#--Each of the two stage forms will include the form below-->

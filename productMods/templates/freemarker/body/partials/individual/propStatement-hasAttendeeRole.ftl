@@ -28,9 +28,9 @@
     
     <#local attendedEvent>
         <#if statement.event2?has_content && statement.event2Label?has_content>
-            at <a href="${profileUrl(statement.uri("event2"))}" title="${i18n().event_label}">${statement.event2Label}</a>
+            ${i18n().at} <a href="${profileUrl(statement.uri("event2"))}" title="${i18n().event_label}">${statement.event2Label}</a>
         <#elseif statement.series?has_content && statement.seriesLabel?has_content>
-            at <a href="${profileUrl(statement.uri("series"))}" title="${i18n().event_label}">${statement.seriesLabel}</a>
+            ${i18n().at} <a href="${profileUrl(statement.uri("series"))}" title="${i18n().event_label}">${statement.seriesLabel}</a>
         </#if>
     </#local>
 

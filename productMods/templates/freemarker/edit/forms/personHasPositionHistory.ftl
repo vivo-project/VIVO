@@ -32,19 +32,19 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <#assign disabledVal = ""/>
 <#if editMode == "edit">        
-        <#assign formAction="Edit">        
-        <#assign submitButtonText="Save Changes">
+        <#assign formAction="${i18n().edit_capitalized}">        
+        <#assign submitButtonText="${i18n().save_changes}">
         <#assign disabledVal="disabled">
 <#else>
-        <#assign formAction="Create">        
-        <#assign submitButtonText="Create Entry">
+        <#assign formAction="${i18n().create_capitalized}">        
+        <#assign submitButtonText="${i18n().create_entry}">
         <#assign disabledVal="">
 </#if>
 
 <#assign requiredHint="<span class='requiredHint'> *</span>"/> 
-<#assign yearHint     = "<span class='hint'>(YYYY)</span>" />
+<#assign yearHint     = "<span class='hint'>(${i18n().year_hint_format})</span>" />
 
-<h2>${formAction} position entry for ${editConfiguration.subjectName}</h2>
+<h2>${formAction} ${i18n().posn_entry_for} ${editConfiguration.subjectName}</h2>
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
@@ -52,20 +52,20 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <#assign orgLabelValue = orgLabelDisplayValue />
     </#if>
     <section id="error-alert" role="alert">
-        <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
+        <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="${i18n().error_alert_icon}" />
         <p>
         <#--below shows examples of both printing out all error messages and checking the error message for a specific field-->
         <#list submissionErrors?keys as errorFieldName>
         	<#if errorFieldName == "startField">
         	    <#if submissionErrors[errorFieldName]?contains("before")>
-        	        The Start Year must be earlier than the End Year.
+        	        ${i18n().start_year_must_precede_end}
         	    <#else>
         	        ${submissionErrors[errorFieldName]}
         	    </#if>
         	    <br />
         	<#elseif errorFieldName == "endField">
     	        <#if submissionErrors[errorFieldName]?contains("after")>
-    	            The End Year must be later than the Start Year.
+    	            ${i18n().end_year_must_be_later}
     	        <#else>
     	            ${submissionErrors[errorFieldName]}
     	        </#if>
@@ -73,19 +73,19 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         </#list>
         <#--Checking if Org Type field is empty-->
          <#if lvf.submissionErrorExists(editSubmission, "orgType")>
- 	        Please select a value in the Organization Type field.<br />
+ 	        ${i18n().select_organization_type}<br />
         </#if>
         <#--Checking if Org Name field is empty-->
          <#if lvf.submissionErrorExists(editSubmission, "orgLabel")>
- 	        Please enter or select a value in the Name field.<br />
+ 	        ${i18n().select_an_organization_name}<br />
         </#if>
         <#--Checking if Position Title field is empty-->
          <#if lvf.submissionErrorExists(editSubmission, "positionTitle")>
- 	        Please enter a value in the Position Title field.<br />
+ 	        ${i18n().enter_posn_title_value}<br />
         </#if>
         <#--Checking if Position Type field is empty-->
          <#if lvf.submissionErrorExists(editSubmission, "positionType")>
- 	        Please select a value in the Position Type field.<br />
+ 	        ${i18n().enter_posn_type_value}<br />
         </#if>
         
         </p>
@@ -96,7 +96,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <form class="customForm" action ="${submitUrl}" class="customForm noIE67" role="${formAction} position entry">
   <p class="inline">    
-    <label for="orgType">Organization Type<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
+    <label for="orgType">${i18n().org_type_capitalized}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
     <#assign orgTypeOpts = editConfiguration.pageData.orgType />
 <#--
     <#if editMode == "edit">
@@ -110,7 +110,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     </#if>
 -->
 <select id="typeSelector" name="orgType" acGroupName="org">
-    <option value="" selected="selected">Select one</option>                
+    <option value="" selected="selected">${i18n().select_one}</option>                
     <#list orgTypeOpts?keys as key>             
         <option value="${key}"  <#if orgTypeValue = key>selected</#if>>${orgTypeOpts[key]}</option>            
     </#list>
@@ -119,27 +119,27 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
   <div class="fullViewOnly">        
   <p>
-    <label for="relatedIndLabel">### Name ${requiredHint}</label>
+    <label for="relatedIndLabel">### ${i18n().name_capitalized} ${requiredHint}</label>
     <input type="text" name="orgLabel" id="orgLabel" acGroupName="org" size="50" class="acSelector" value="${orgLabelValue}" >
     <input class="display" type="hidden" id="orgDisplay" acGroupName="org" name="orgLabelDisplay" value="${orgLabelDisplayValue}">
   </p>
     <div class="acSelection" acGroupName="org">
         <p class="inline">
-            <label>Selected Organization:</label>
+            <label>${i18n().selected_organization}:</label>
             <span class="acSelectionInfo"></span>
-            <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
-            <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
+            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+            <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="orgUri" name="existingOrg" value="${existingOrgValue}" ${flagClearLabelForExisting}="true" />
     </div>
     
-    <label for="positionTitle">Position Title ${requiredHint}</label>
+    <label for="positionTitle">${i18n().position_title} ${requiredHint}</label>
     <input  size="30"  type="text" id="positionTitle" name="positionTitle" value="${positionTitleValue}" role="input" />
 
-      <label for="positionType">Position Type ${requiredHint}</label>
+      <label for="positionType">${i18n().position_type} ${requiredHint}</label>
       <#assign posnTypeOpts = editConfiguration.pageData.positionType />
       <select name="positionType" style="margin-top:-2px" >
-          <option value="" <#if positionTypeValue == "">selected</#if>>Select one</option>                
+          <option value="" <#if positionTypeValue == "">selected</#if>>${i18n().select_one}</option>                
           <#list posnTypeOpts?keys as key>             
               <option value="${key}"  <#if positionTypeValue == key>selected</#if>>${posnTypeOpts[key]}</option>         
           </#list>
@@ -147,12 +147,12 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
       <p></p>
       <#--Need to draw edit elements for dates here-->
        <#if htmlForElements?keys?seq_contains("startField")>
-  			<label class="dateTime" for="startField">Start</label>
+  			<label class="dateTime" for="startField">${i18n().start_capitalized}</label>
   			${htmlForElements["startField"]} ${yearHint}
        </#if>
        <p></p>
        <#if htmlForElements?keys?seq_contains("endField")>
-  			<label class="dateTime" for="endField">End</label>
+  			<label class="dateTime" for="endField">${i18n().end_capitalized}</label>
   		 	${htmlForElements["endField"]} ${yearHint}
        </#if>
 
@@ -168,9 +168,9 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
             <input type="submit" id="submit" name="submit-${formAction}" value="${submitButtonText}" class="submit" /> 
         </#if>
 
-        <span class="or"> or </span><a class="cancel" href="${editConfiguration.cancelUrl}" title="Cancel">Cancel</a>
+        <span class="or"> ${i18n().or} </span><a class="cancel" href="${editConfiguration.cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
       </p>
-      <p class="requiredHint"  id="requiredLegend" >* required fields</p>
+      <p class="requiredHint"  id="requiredLegend" >* ${i18n().required_fields}</p>
       
 </form>
 

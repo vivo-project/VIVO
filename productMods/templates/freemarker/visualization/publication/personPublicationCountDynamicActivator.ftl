@@ -6,7 +6,7 @@
      - personPublicationSparklineContent.ftl, which shows the actual sparkline
      - personPublicationCountNoSparkline.ftl, which shows on counts and not the sparkline
      
-     The first is the template use with the Wilma theme and the individual--foaf-person.ftl
+     The first is the template used with the Wilma theme and the individual--foaf-person.ftl
      template. The second is used with the individual--foaf-person-2column.ftl template.
 -->
 <#if shouldVIVOrenderVis>

@@ -6,12 +6,11 @@ To be associated later (upon completion of N3 Refactoring) with
 edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.InstitutionalInternalClassForm.
 -->
 
-<h2>Institutional Internal Class</h2>
+<h2>${i18n().institutional_internal_class}</h2>
 
 <section id="introMessage" role="region">
-    <p>This class will be used to designate those individuals internal to your institution.</p>
-    <p>This will allow you to limit the individuals displayed on your menu pages (People, Research, etc.) 
-    to only those within your institution.</p>
+    <p>${i18n().internal_class_intro_one}</p>
+    <p>${i18n().internal_class_intro_two}</p>
 </section>
 
 <section role="region">
@@ -21,46 +20,46 @@ edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.Institu
         <#--If no local ontologies, display message for user to create a local ontology-->
         <#if ontologiesExist = false>
         <section id="noLocalOntologyExists" role="region">
-            <h4>There are currently no recognized local ontologies.</h4>
+            <h4>${i18n().no_local_oncologies}</h4>
             <#if defaultNamespace?has_content && defaultNamespace?contains("individual/")>
                 <#assign localOntologyNamespace = defaultNamespace?replace("individual/", "") />
-                <p>In order for a local ontology to be recognized here, its namespace URI must follow this pattern:</p>
+                <p>${i18n().namespace_must_use_this_pattern}:</p>
                 <blockquote>${localOntologyNamespace}ontology/<em>yourOntologyName</em></blockquote>
             </#if>
-            <p>Please create a <a href='${urls.base}/editForm?controller=Ontology' title="new local ontology">new local ontology</a> and then return here to define the institutional internal class.</p>
+            <p>${i18n().please_create} <a href='${urls.base}/editForm?controller=Ontology' title="${i18n().new_local_ontology}">${i18n().new_local_oncology}</a> ${i18n().return_here_to_define_class}</p>
         </section>
         
         <#--else if local ontologies exist and local classes exist, show drop-down of local classes-->
         <#elseif useExistingLocalClass?has_content> 
         <section id="existingLocalClass" role="region">
             <#--Populated based on class list returned-->
-            <label for="existingLocalClasses">Select an existing class from a local extension</label>
+            <label for="existingLocalClasses">${i18n().select_existing_local_class}</label>
        
             <select id="existingLocalClasses" name="existingLocalClasses" role="combobox"<strong></strong>>
                 <#assign classUris = existingLocalClasses?keys />
                 
                 <#--If internal class exists, check against value in drop-down and select option-->
-                <#--<option value="" role="option">Select one</option>-->
+                <#--<option value="" role="option">${i18n().select_one}</option>-->
                 <#list classUris as localClassUri>
                     <option value="${localClassUri}" role="option" <#if existingInternalClass = localClassUri>selected</#if> >${existingLocalClasses[localClassUri]}</option>
                 </#list>
             </select>
             
-            <p>Can't find an appropriate class? Create a <a href="${formUrl}?cmd=createClass" title="create new class">new one</a>.</p>
+            <p>${i18n().cannot_find_class} <a href="${formUrl}?cmd=createClass" title="${i18n().create_new_class}">${i18n().create_new_one}</a>.</p>
         </section>
 
         <#--if parameter to create new class passed or if there are local ontologies but no local classes, show create new class page-->
         <#elseif createNewClass?has_content>
         <section id="createNewLocalClass" role="region">
-            <h3>Create a new class</h3>
+            <h3>${i18n().create_new_class}</h3>
         
-            <label for="localClassName">Name<span class="requiredHint"> *</span></label>
+            <label for="localClassName">${i18n().name_capitalized}<span class="requiredHint"> *</span></label>
             <input type="text" id="localClassName" name="localClassName" value="" role="input" />
-            <p class="note">use capitals for the first letter of each word</p>
+            <p class="note">${i18n().use_capitals_each_word}</p>
     
             <#--If more than one local namespace, generate select-->
             <#if multipleLocalNamespaces = true>
-                <label for="existingLocalNamespace">Local Namespace<span class="requiredHint"> *</span></label>
+                <label for="existingLocalNamespace">${i18n().local_namespace}<span class="requiredHint"> *</span></label>
                 
                 <select id="existingLocalNamespaces" name="existingLocalNamespaces" role="combobox">
                     <#assign namespaceUris = existingLocalNamespaces?keys /> 
@@ -75,12 +74,12 @@ edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.Institu
     
         <#--this case is an error case-->
         <#else>
-            <p>Problematic section as above should all have been handled</p>
+            <p>${i18n().problematic_section_error}</p>
         </#if>
 
         <#--only show submit and cancel if ontologies exist-->
         <#if ontologiesExist = true>
-            <input type="submit" name="submit-internalClass" value="${submitAction}" class="submit" /> or <a class="cancel" href="${cancelUrl}" title="Cancel">Cancel</a>
+            <input type="submit" name="submit-internalClass" value="${submitAction}" class="submit" /> ${i18n().or} <a class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
         </#if>
     </form>
 </section>

@@ -44,19 +44,19 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 </#if>
 
 <#if editMode == "edit">    
-        <#assign titleVerb="Edit">        
-        <#assign submitButtonText="Save Changes">
+        <#assign titleVerb="${i18n().edit_capitalized}">        
+        <#assign submitButtonText="${i18n().save_changes}">
         <#assign disabledVal="disabled">
 <#else>
-        <#assign titleVerb="Create">        
-        <#assign submitButtonText="Create Entry">
+        <#assign titleVerb="${i18n().create_capitalized}">        
+        <#assign submitButtonText="${i18n().create_entry}">
         <#assign disabledVal=""/>
 </#if>
 
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
-<#assign yearHint     = "<span class='hint'>(YYYY)</span>" />
+<#assign yearHint     = "<span class='hint'>(${i18n().year_hint_format})</span>" />
 
-<h2>${titleVerb}&nbsp;advising relationship entry for ${editConfiguration.subjectName}</h2>
+<h2>${titleVerb}&nbsp;${i18n().advising_relationship_entry_for} ${editConfiguration.subjectName}</h2>
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
@@ -68,23 +68,23 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     </#if>
     
     <section id="error-alert" role="alert">
-        <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
+        <img src="${urls.images}/iconAlert.png" width="24" height="24" alt="${i18n().error_alert_icon}" />
         <p>
         <#--Checking if any required fields are empty-->
         <#if lvf.submissionErrorExists(editSubmission, "advisingRelType")>
- 	        Please select an Advising Relationship Type.<br />
+ 	        ${i18n().select_advising_relationship_type}<br />
         </#if> 
         <#list submissionErrors?keys as errorFieldName>
         	<#if errorFieldName == "startField">
         	    <#if submissionErrors[errorFieldName]?contains("before")>
-        	        The Start Year must be earlier than the End Year.
+        	        ${i18n().start_year_must_precede_end}
         	    <#else>
         	        ${submissionErrors[errorFieldName]}
         	    </#if>
         	    
         	<#elseif errorFieldName == "endField">
     	        <#if submissionErrors[errorFieldName]?contains("after")>
-    	            The End Year must be later than the Start Year.
+    	            ${i18n().end_year_must_be_later}
     	        <#else>
     	            ${submissionErrors[errorFieldName]}
     	        </#if>
@@ -103,7 +103,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     
     <form id="personHasAdvisingRelationship" class="customForm noIE67" action="${submitUrl}"  role="add/edit AdvisingRelationship">
     <p class="inline">    
-      <label for="orgType">Advising Relationship Type<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
+      <label for="orgType">${i18n().advising_relationship_type}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
       <#assign advisingRelTypeOpts = editConfiguration.pageData.advisingRelType />
       <#if editMode == "edit">
         <#list advisingRelTypeOpts?keys as key>             
@@ -114,7 +114,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         </#list>
       <#else>
         <select id="selector" name="advisingRelType"  ${disabledVal} >
-            <option value="" selected="selected">Select one</option>                
+            <option value="" selected="selected">${i18n().select_one}</option>                
             <#list advisingRelTypeOpts?keys as key>             
                 <option value="${key}"  <#if advisingRelTypeValue = key>selected</#if>>${advisingRelTypeOpts[key]}</option>            
             </#list>
@@ -122,7 +122,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
       </#if>
     </p>
     <p >
-        <label for="advisee">Advisee: Last Name  ${requiredHint}<span style="padding-left:322px">First Name  ${requiredHint}</span></label>
+        <label for="advisee">${i18n().advisee_capitalized}: ${i18n().last_name}  ${requiredHint}<span style="padding-left:322px">${i18n().first_name}  ${requiredHint}</span></label>
             <input class="acSelector" size="50"  type="text" acGroupName="advisee" id="advisee" name="adviseeLabel" value="${adviseeLabelValue}" >
             <input  size="30"  type="text" id="firstName" name="firstName" value="${firstNameValue}" ><br />
             <input type="hidden" id="lastName" name="lastName" value="">
@@ -131,25 +131,24 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
     <div class="acSelection" acGroupName="advisee" id="adviseeAcSelection">
         <p class="inline">
-            <label>Selected Advisee:</label>
-            <span class="acSelectionInfo" id="arf"></span>
-            <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
-            <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
+            <label>${i18n().selected_advisee}/span>
+            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+            <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="adviseeUri" name="existingAdvisee" value="${adviseeValue}" ${flagClearLabelForExisting}="true"/>
     </div>
 
     <p>
-        <label for="SubjectArea">Subject Area</label>
+        <label for="SubjectArea">${i18n().subject_area}</label>
               <input class="acSelector" size="50"  type="text" id="SubjectArea" acGroupName="SubjectArea" name="subjAreaLabel" value="${subjAreaLabelValue}" />
               <input class="display" type="hidden" id="SubjectAreaDisplay" acGroupName="SubjectArea" name="subjAreaLabelDisplay" value="${subjAreaLabelDisplayValue}" />
     </p>
       <div class="acSelection" acGroupName="SubjectArea">
           <p class="inline">
-              <label>Subject Area</label>
+              <label>${i18n().selected_subject_area}:</label>
               <span class="acSelectionInfo"></span>
-              <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
-              <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
+              <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+              <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
           </p>
           <#--When no autocomplete value is selected, the value of this field will be set to the 'blank sentinel'.
           When an autocomplete value is selected, the 'flagClearLabelField' attribute will clear out the associated label input. -->
@@ -157,11 +156,11 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
       </div>
 
     <p>
-    <label for="degreeUri">Degree Candidacy</label>      
+    <label for="degreeUri">${i18n().degree_candidacy}</label>      
   
     <#assign degreeOpts = editConfiguration.pageData.degree />  
     <select name="degree" id="degreeUri" >
-      <option value="" <#if degreeValue = "">selected</#if>>Select one</option>        
+      <option value="" <#if degreeValue = "">selected</#if>>${i18n().select_one}</option>        
              <#list degreeOpts?keys as key>                 
       <option value="${key}" <#if degreeValue = key>selected</#if>>${degreeOpts[key]}</option>                    
       </#list>                                
@@ -169,17 +168,17 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     </p>
 
     <p>
-        <h4>Years of Participation</h4>
+        <h4>${i18n().years_participating}</h4>
     </p>
     <#--Need to draw edit elements for dates here-->
     <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
     <#if htmlForElements?keys?seq_contains("startField")>
-        <label class="dateTime" for="startField">Start</label>
+        <label class="dateTime" for="startField">${i18n().start_capitalized}</label>
 		${htmlForElements["startField"]} ${yearHint}
     </#if>
     <br/>
     <#if htmlForElements?keys?seq_contains("endField")>
-		<label class="dateTime" for="endField">End</label>
+		<label class="dateTime" for="endField">${i18n().end_capitalized}</label>
 	 	${htmlForElements["endField"]} ${yearHint}
     </#if>
 	<#--End draw elements-->
@@ -188,11 +187,11 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>
 
    <p class="submit">
-        <input type="submit" class="submit" value="${submitButtonText}"/><span class="or"> or </span>
-        <a class="cancel" href="${cancelUrl}" title="Cancel">Cancel</a>
+        <input type="submit" class="submit" value="${submitButtonText}"/><span class="or"> ${i18n().or} </span>
+        <a class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
     </p>
 
-    <p id="requiredLegend" class="requiredHint">* required fields</p>
+    <p id="requiredLegend" class="requiredHint">* ${i18n().required_fields}</p>
 
 </form>
 

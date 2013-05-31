@@ -45,7 +45,7 @@
     <section id="label-title" <#if editable>style="width:45%"</#if> >
         <header>
             <#if relatedSubject??>
-                <h2>${relatedSubject.relatingPredicateDomainPublic} for ${relatedSubject.name}</h2>
+                <h2>${relatedSubject.relatingPredicateDomainPublic} ${i18n().for} ${relatedSubject.name}</h2>
                 <p><a href="${relatedSubject.url}" title="${i18n().return_to(relatedSubject.name)}">&larr; ${i18n().return_to(relatedSubject.name)}</a></p>
             <#else> 
                 <#-- Image  -->
@@ -97,7 +97,7 @@
     -->
     <#if hasWebpage >
         <section id="qv-share-contact" class="share-contact" role="region" <#if !editable>style="padding-top:12px"</#if>> 
-            <img id="webpage-popout-top" src="${urls.images}/individual/webpage-popout-top.png"  alt="background top"/>
+            <img id="webpage-popout-top" src="${urls.images}/individual/webpage-popout-top.png"  alt="${i18n().background_top_image}"/>
             <div id="webpage-wrapper" >
                 <#assign webpage = propertyGroups.pullProperty("${core}webpage")!>            
                 <#if webpage?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
@@ -111,7 +111,7 @@
                     </ul>
                 </#if>
             </div>
-            <img id="webpage-popout-bottom" src="${urls.images}/individual/webpage-popout-bottom.png"  alt="background top"  <#if editable>style="margin-top:16px"</#if>/>
+            <img id="webpage-popout-bottom" src="${urls.images}/individual/webpage-popout-bottom.png"  alt="${i18n().background_top_image}"  <#if editable>style="margin-top:16px"</#if>/>
         </section> <!-- end share-contact -->
     </#if>
     <section id="individual-info" class="qv-individual-info" role="region" style=" <#if !editable>padding-top:12px;</#if><#if hasWebpage>width:53%<#else>width:100%;clear:left</#if>;">       
@@ -167,7 +167,7 @@
 </p>
 <span id="fullViewLink">
     <a href="${urls.base}/display/${individual.localName}?destination=standardView" >
-        <img id="fullViewIcon" src="${urls.images}/individual/fullViewIcon.png" alt="full view icon"/>
+        <img id="fullViewIcon" src="${urls.images}/individual/fullViewIcon.png" alt="${i18n().full_view_icon}"/>
     </a>
 </span>
 <#if !editable>

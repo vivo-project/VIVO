@@ -16,9 +16,9 @@
 <#-- Works in conjunction with the homePageUtils.js file, which contains the ajax call. -->
 <#macro facultyMbrHtml>
     <section id="home-faculty-mbrs" class="home-sections"  >
-        <h4>Faculty</h4>
+        <h4>${i18n().faculty_capitalized}</h4>
         <div id="tempSpacing">
-            <span>Loading faculty . . .&nbsp;&nbsp;&nbsp;
+            <span>${i18n().loading_faculty}&nbsp;&nbsp;&nbsp;
                 <img  src="${urls.images}/indicatorWhite.gif">
             </span>
         </div>
@@ -58,7 +58,7 @@
     <#assign selected = 'class="selected" ' />
     <#assign classGroupList>
         <section id="home-stats" class="home-sections" >
-            <h4>Statistics</h4>
+            <h4>${i18n().statistics}</h4>
             <ul id="stats">
                 <#assign groupCount = 1>
                 <#list classGroups as group>
@@ -101,14 +101,14 @@
     <#if firstPopulatedClassGroup??>
             ${classGroupList}
     <#else>
-        <h3 id="noContentMsg">There is currently no content in the system, or you need to create class groups and assign your classes to them.</h3>
+        <h3 id="noContentMsg">${i18n().no_content_create_groups_classes}</h3>
         
         <#if user.loggedIn>
             <#if user.hasSiteAdminAccess>
-                <p>You can <a href="${urls.siteAdmin}" title="Manage content">add content and manage this site</a> from the Site Administration page.</p>
+                <p>${i18n().you_can} <a href="${urls.siteAdmin}" title="${i18n().add_content_manage_site}">${i18n().add_content_manage_site}</a> ${i18n().from_site_admin_page}</p>
             </#if>
         <#else>
-            <p>Please <a href="${urls.login}" title="log in to manage this site">log in</a> to manage content.</p>
+            <p>${i18n().please} <a href="${urls.login}" title="${i18n().login_to_manage_site}">${i18n().log_in}</a> ${i18n().to_manage_content}</p>
         </#if>
     </#if>
             
@@ -118,7 +118,7 @@
 <#macro researchClasses classGroups=vClassGroups>
     <#assign foundClassGroup = false />
     <section id="home-research" class="home-sections">
-        <h4>Research</h4>
+        <h4>${i18n().research_capitalized}</h4>
         <ul>
             <#list classGroups as group>
                 <#if (group.individualCount > 0) && group.displayName == "research" >
@@ -128,11 +128,11 @@
                             <li role="listitem"><span>${class.individualCount!}</span>&nbsp;<a href='${urls.base}/individuallist?vclassId=${class.uri?replace("#","%23")!}'>${class.name}s</a></li>
                         </#if>
                     </#list>
-                    <li><a href="${urls.base}/research" alt="view all research">View all ...</a></li>
+                    <li><a href="${urls.base}/research" alt="${i18n().view_all_research}">${i18n().view_all}</a></li>
                 </#if>
             </#list>
             <#if !foundClassGroup>
-                <p><li>No research content found.</li></p> 
+                <p><li>${i18n().no_research_content_found}</li></p> 
             </#if>
         </ul>
     </section>
@@ -142,7 +142,7 @@
 <#-- Works in conjunction with the homePageUtils.js file -->
 <#macro academicDeptsHtml>
     <section id="home-academic-depts" class="home-sections">
-        <h4>Departments</h4>
+        <h4>${i18n().departments}</h4>
         <div id="academic-depts">
         </div>
     </section>        
@@ -170,7 +170,7 @@ var urlsBase = "${urls.base}";
 <#-- as the leaflet javascript library.                                     -->
 <#macro geographicFocusHtml>
     <section id="home-geo-focus" class="home-sections">
-        <h4>Geographic Focus</h4>
+        <h4>${i18n().geographic_focus}</h4>
         <#-- map controls allow toggling between multiple map types: e.g., global, country, state/province. -->
         <#-- VIVO default is for only a global display, though the javascript exists to support the other   -->
         <#-- types. See map documentation for additional information on how to implement additional types.  -->
@@ -183,7 +183,7 @@ var urlsBase = "${urls.base}";
         -->
         <div id="researcherTotal"></div>
         <div id="timeIndicatorGeo">
-            <span>Loading map information . . .&nbsp;&nbsp;&nbsp;
+            <span>${i18n().loading_map_information}&nbsp;&nbsp;&nbsp;
                 <img  src="${urls.images}/indicatorWhite.gif">
             </span>
         </div>

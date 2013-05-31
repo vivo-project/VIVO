@@ -33,9 +33,9 @@
     
     <#local awardOrAdminBy>
         <#if statement.awardedByLabel??>
-            &nbsp;awarded by&nbsp;<a href="${profileUrl(statement.uri("awardedBy"))}" title="${i18n().awarded_by}">${statement.awardedByLabel!}</a>
+            &nbsp;${i18n().awarded_by}&nbsp;<a href="${profileUrl(statement.uri("awardedBy"))}" title="${i18n().awarded_by}">${statement.awardedByLabel!}</a>
         <#elseif statement.adminedByLabel??>
-            &nbsp;administered by&nbsp;<a href="${profileUrl(statement.uri("adminedBy"))}" title="${i18n().administered_by}">${statement.adminedByLabel!}</a>
+            &nbsp;${i18n().administered_by}&nbsp;<a href="${profileUrl(statement.uri("adminedBy"))}" title="${i18n().administered_by}">${statement.adminedByLabel!}</a>
         </#if>
     </#local>
         

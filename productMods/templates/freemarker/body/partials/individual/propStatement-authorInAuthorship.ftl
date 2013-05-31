@@ -50,7 +50,7 @@
                     <em>${statement.partOf!}</em>.
                 </#if>
                 <#if statement.editor??>
-                    Ed.&nbsp;${statement.editor!}.&nbsp;
+                    ${i18n().editor_abbreviated}&nbsp;${statement.editor!}.&nbsp;
                 </#if>
                 <#if statement.locale?? && statement.publisher??>
                     ${statement.locale!}:&nbsp;${statement.publisher!}.
@@ -66,10 +66,10 @@
                 </#if>
             <#elseif statement.subclass?contains("Book")>
                 <#if statement.volume?? && (statement.volume!?length > 0 )>
-                    Vol.&nbsp;${statement.volume!}.&nbsp;
+                    ${i18n().volume_abbreviated}&nbsp;${statement.volume!}.&nbsp;
                 </#if>
                 <#if statement.editor??>
-                    Ed.&nbsp;${statement.editor!}.&nbsp;
+                    ${i18n().editor_abbreviated}&nbsp;${statement.editor!}.&nbsp;
                 </#if>
                 <#if statement.locale?? && statement.publisher??>
                     ${statement.locale!}:&nbsp;${statement.publisher!}.
@@ -87,7 +87,7 @@
                     <em>${statement.partOf!}</em>.
                 </#if>
                 <#if statement.editor??>
-                    Ed. ${statement.editor!}.&nbsp;
+                    ${i18n().editor_abbreviated} ${statement.editor!}.&nbsp;
                 </#if>
                 <#if statement.startPage?? && statement.endPage??>
                     ${statement.startPage!}-${statement.endPage!}.
@@ -107,7 +107,7 @@
             </#if>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.uri("authorship"))}" title="${i18n().missing_info_resource}">missing information resource</a>
+            <a href="${profileUrl(statement.uri("authorship"))}" title="${i18n().missing_info_resource}">${i18n().missing_info_resource}</a>
         </#if>
     </#local>
 

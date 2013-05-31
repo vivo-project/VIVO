@@ -18,7 +18,7 @@
     <#local degree>
         <#if statement.degreeName??>
             ${statement.degreeAbbr!statement.degreeName} 
-            <#if statement.majorField??> in ${statement.majorField}</#if>
+            <#if statement.majorField??> ${i18n().in} ${statement.majorField}</#if>
         <#elseif statement.typeName??>
             ${statement.typeName!}
         </#if>
@@ -29,7 +29,7 @@
             <a href="${profileUrl(statement.uri("org"))}" title="${i18n().organization_name}">${statement.orgName}</a>
         <#elseif editable>
             <#-- Show the link to the context node only if the user is editing the page. -->
-            <a href="${profileUrl(statement.uri("edTraining"))}" title="${i18n().missing_organization}">missing organization</a>
+            <a href="${profileUrl(statement.uri("edTraining"))}" title="${i18n().missing_organization}">${i18n().missing_organization}</a>
         </#if>
     </#local>
 

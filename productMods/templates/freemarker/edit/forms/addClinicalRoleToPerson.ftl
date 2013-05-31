@@ -23,8 +23,8 @@ RoleToActivityPredicate
 
 
 <#--Variable assignments for Add Clinical Role To Person-->
-<#assign roleDescriptor = "clinical activity" />
-<#assign typeSelectorLabel = "clinical activity type" />
+<#assign roleDescriptor = "${i18n().clinical_activity}" />
+<#assign typeSelectorLabel = "${i18n().clinical_activity_type}" />
 
 
 <#--Each of the two stage forms will include the form below-->

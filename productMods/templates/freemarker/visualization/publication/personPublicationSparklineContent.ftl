@@ -22,8 +22,8 @@
                 var onlyUnknownYearPublications = false;
                 
                 var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Year');
-                data.addColumn('number', 'Publications');
+                data.addColumn('string', '${i18n().year_capitalized}');
+                data.addColumn('number', '${i18n().publications_capitalized}');
                 data.addRows(${sparklineVO.yearToEntityCountDataTable?size});
                 
                 var knownYearPublicationCounts = 0;
@@ -149,20 +149,20 @@
                                     var sparksText = "";
                                     if ( !onlyUnknownYearPublications ) {
                                     
-                                        $('#${sparklineContainerID} td.sparkline_number').text(totalPubs + " in the last 10 full").attr("class", "grey-text");
+                                        $('#${sparklineContainerID} td.sparkline_number').text(totalPubs + " ${i18n().last_ten_full}").attr("class", "grey-text");
 
-                                        sparksText += "years";
+                                        sparksText += "${i18n().years}";
 
                                         if (totalPubs !== totalPublicationCount) {
-                                        sparksText += ' (' + totalPublicationCount + ' total)' ; 
+                                        sparksText += ' (' + totalPublicationCount + ' ${i18n().total})' ; 
                                         }
-                                        sparksText += "&nbsp;<img class='infoIcon' src='" + infoIconSrc + "' height='16px' width='16px' alt='information icon' title='These numbers are based solely on publications that have been loaded into this VIVO application. If this is your profile, you can enter additional publications below.' />" ;
+                                        sparksText += "&nbsp;<img class='infoIcon' src='" + infoIconSrc + "' height='16px' width='16px' alt='${i18n().info_icon}' title='${i18n().numbers_based_on_publications_in_vivo}' />" ;
                                         
                                     }
                                     else {
                                     var totalPubs = onlyUnknownYearPublications ? unknownYearPublicationCounts : renderedSparks;
 
-                                    $('#${sparklineContainerID} td.sparkline_number').html(totalPubs + "  total <img class='infoIcon' src='" + infoIconSrc + "' height='16px' width='16px' alt='information icon' title='These numbers are based solely on publications that have been loaded into this VIVO application. If this is your profile, you can enter additional publications below.' />").attr("class", "grey-text");
+                                    $('#${sparklineContainerID} td.sparkline_number').html(totalPubs + "  total <img class='infoIcon' src='" + infoIconSrc + "' height='16px' width='16px' alt='${i18n().info_icon}' title='${i18n().numbers_based_on_publications_in_vivo}' />").attr("class", "grey-text");
                                    }
 
                                  <#else>
@@ -181,22 +181,22 @@
                     var totalPubs = onlyUnknownYearPublications ? unknownYearPublicationCounts : renderedSparks;
                           
                     if ( totalPubs == 1 ) {
-                        var pubDisplay = "publication";
+                        var pubDisplay = "${i18n().publication}";
                     } else {
-                        var pubDisplay = "publications";
+                        var pubDisplay = "${i18n().publications}";
                     }
                     
                     $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).attr("class", "grey-text").append("<span style='color: #2485AE;'> "+ pubDisplay +"<br/></span>");
             
-                    var sparksText = '  from <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}' 
+                    var sparksText = '  ${i18n().from} <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}' 
                                         + ' to ${sparklineVO.latestRenderedPublicationYear?c}</span>';
 
                     if (totalPubs !== totalPublicationCount) {
-                        sparksText += ' (' + totalPublicationCount + ' total)';
+                        sparksText += ' (' + totalPublicationCount + ' ${i18n().total})';
                     }
 
                     if (totalPublicationCount) {
-                        sparksText += ' <br /><a href="${sparklineVO.downloadDataLink}" title="csv file">(.CSV File)</a> ';                    
+                        sparksText += ' <br /><a href="${sparklineVO.downloadDataLink}" title="csv ${i18n().file}">(.CSV ${i18n().file_capitalized})</a> ';                    
                     }
                     
                                                                                 
@@ -220,7 +220,7 @@
              * This is a nuclear option (creating the container in which everything goes)
              * the only reason this will be ever used is the API user never submitted a 
              * container ID in which everything goes. The alternative was to let the 
-             * vis not appear in the calling page at all. So now atleast vis appears but 
+             * vis not appear in the calling page at all. So now at least vis appears but 
              * appended at the bottom of the body.
              * */
      
@@ -280,14 +280,14 @@
 
                     <p> 
                         <#assign tableID = "publications_sparkline_data_table" />
-                        <#assign tableCaption = "Publications per year " />
-                        <#assign tableActivityColumnName = "Publications" />
+                        <#assign tableCaption = "${i18n().publications_per_year} " />
+                        <#assign tableActivityColumnName = "${i18n().publications_capitalized}" />
                         <#assign tableContent = sparklineVO.yearToActivityCount />
                         <#assign fileDownloadLink = sparklineVO.downloadDataLink />
 
                         <#include "yearToActivityCountTable.ftl">
 
-                        Download data as <a href="${sparklineVO.downloadDataLink}" title="csv download link">.csv</a> file.
+                        ${i18n().download_data_as} <a href="${sparklineVO.downloadDataLink}" title="csv ${i18n().download_link}">.csv</a> ${i18n().file}.
                         <br />
                     </p>
 

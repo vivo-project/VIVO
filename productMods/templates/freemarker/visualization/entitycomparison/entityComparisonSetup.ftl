@@ -34,25 +34,25 @@
 
 <#assign temporalGraphDownloadCSVCommonURL = '${urls.base}${dataVisualizationURLRoot}?uri=${organizationURI}&labelField=label'>
 
-<#assign publicationParameter = {   "name": "publication",
-                                    "pluralName": "publications",
-                                    "verbName": "published",
-                                    "dropDownText": "by Publications", 
+<#assign publicationParameter = {   "name": "${i18n().publication}",
+                                    "pluralName": "${i18n().publications}",
+                                    "verbName": "${i18n().published}",
+                                    "dropDownText": "${i18n().by_publications}", 
                                     "viewLink": "${organizationPublicationTemporalGraphURL}",
                                     "viewBaseLink": "${subOrganizationPublicationTemporalGraphCommonURL}",
                                     "dataLink": "${organizationPublicationTemporalGraphDataURL}",
                                     "csvLink": "${temporalGraphDownloadCSVCommonURL}&vis=entity_comparison", 
-                                    "value": "Publications" }>
+                                    "value": "${i18n().publications}" }>
                                     
-<#assign grantParameter = {   "name": "grant",
-                              "pluralName": "grants",
-                              "verbName": "granted",
-                              "dropDownText": "by Grants", 
+<#assign grantParameter = {   "name": "${i18n().grant}",
+                              "pluralName": "${i18n().grants}",
+                              "verbName": "${i18n().granted}",
+                              "dropDownText": "${i18n().by_grants}", 
                               "viewLink": "${organizationGrantTemporalGraphURL}",
                               "viewBaseLink": "${subOrganizationGrantTemporalGraphCommonURL}", 
                               "dataLink": "${organizationGrantTemporalGraphDataURL}",
                               "csvLink": "${temporalGraphDownloadCSVCommonURL}&vis=entity_grant_count",
-                              "value": "Grants" }>
+                              "value": "${i18n().grants}" }>
                               
 <#assign parameterOptions = [publicationParameter, grantParameter]>
 
@@ -70,8 +70,8 @@ we will use rev 293 (dev build version) of the flot & excanvas files.
 <script language="JavaScript" type="text/javascript">
 
 var activitiesLabel = {
-        singular: 'activity',
-        plural: 'activities'
+        singular: '${i18n().activity}',
+        plural: '${i18n().activities}'
     };
     
 </script>

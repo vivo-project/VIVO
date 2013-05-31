@@ -7,9 +7,8 @@
 <#macro unsupportedBrowser  urlsBase>
 <div id="ie67DisableWrapper">
     <div id="ie67DisableContent">
-	    <img src="${urlsBase}/images/iconAlertBig.png" alt="Alert Icon"/>
-	    <p>This form is not supported in versions of Internet Explorer below version 8. Please upgrade your browser, or
-	    switch to another browser, such as FireFox.</p>
+	    <img src="${urlsBase}/images/iconAlertBig.png" alt="${i18n().alert_icon}"/>
+	    <p>${i18n().unsupported_ie_version}</p>
     </div>
 </div>
 </#macro>
@@ -20,8 +19,8 @@
     <p class="inline">
         <label>${labelValue}</label>
         <span class="acSelectionInfo"></span>
-        <a href="${urlsBase}/individual?uri=" class="verifyMatch" title="verify match">(Verify this match</a> or 
-        <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
+        <a href="${urlsBase}/individual?uri=" class="verifyMatch" title="${i18n().verify_this_match_title}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+        <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="${inputId}" name="${inputName}" value="${inputValue}" />
         <!-- Field value populated by JavaScript -->

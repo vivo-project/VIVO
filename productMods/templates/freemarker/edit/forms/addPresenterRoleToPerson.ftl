@@ -41,19 +41,19 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 </#if>
 
 <#if editMode == "edit">    
-        <#assign titleVerb="Edit">        
-        <#assign submitButtonText="Save Changes">
+        <#assign titleVerb="${i18n().edit_capitalized}">        
+        <#assign submitButtonText="${i18n().save_changes}">
         <#assign disabledVal="disabled">
 <#else>
-        <#assign titleVerb="Create">        
-        <#assign submitButtonText="Create Entry">
+        <#assign titleVerb="${i18n().create_capitalized}">        
+        <#assign submitButtonText="${i18n().create_entry}">
         <#assign disabledVal=""/>
 </#if>
 
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
-<#assign yearHint     = "<span class='hint'>(YYYY)</span>" />
+<#assign yearHint     = "<span class='hint'>(${i18n().year_hint_format})</span>" />
 
-<h2>${titleVerb}&nbsp;presentation entry for ${editConfiguration.subjectName}</h2>
+<h2>${titleVerb}&nbsp;${i18n().presentation_entry_for} ${editConfiguration.subjectName}</h2>
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
@@ -64,26 +64,26 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <#assign presentationLabelValue = presentationLabelDisplayValue />
     </#if>
     <section id="error-alert" role="alert">
-        <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
+        <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="${i18n().error_alert_icon}" />
         <p>
         <#--Checking if any required fields are empty-->
         <#if lvf.submissionErrorExists(editSubmission, "presentationLabel")>
- 	        Please select an existing value or enter a new value in the Name field.
+ 	        ${i18n().select_or_enter_name}
         </#if> 
         <#if lvf.submissionErrorExists(editSubmission, "roleLabel")>
- 	        Please enter a new value in the Role field.
+ 	        ${i18n().enter_new_role_value}
         </#if> 
         <#list submissionErrors?keys as errorFieldName>
         	<#if errorFieldName == "startField">
         	    <#if submissionErrors[errorFieldName]?contains("before")>
-        	        The Start Year must be earlier than the End Year.
+        	        ${i18n().start_year_must_precede_end}
         	    <#else>
         	        ${submissionErrors[errorFieldName]}
         	    </#if>
         	    
         	<#elseif errorFieldName == "endField">
     	        <#if submissionErrors[errorFieldName]?contains("after")>
-    	            The End Year must be later than the Start Year.
+    	            ${i18n().end_year_must_be_later}
     	        <#else>
     	            ${submissionErrors[errorFieldName]}
     	        </#if>
@@ -99,19 +99,19 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     
     <form id="addPresenterRoleToPerson" class="customForm noIE67" action="${submitUrl}"  role="add/edit Presentation">
     <p class="inline">    
-      <label for="presentationType">Presentation Type<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
+      <label for="presentationType">${i18n().presentation_type}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
       <#assign presentationTypeOpts = editConfiguration.pageData.presentationType />
       <select id="typeSelector" name="presentationType" acGroupName="presentation">
-        <option value="" selected="selected">Select one</option>                
+        <option value="" selected="selected">${i18n().select_one}</option>                
         <#list presentationTypeOpts?keys as key>             
-            <option value="${key}" <#if presentationTypeValue = key>selected</#if>> <#if presentationTypeOpts[key] == "Other">Presentation<#else>${presentationTypeOpts[key]}</#if></option>            
+            <option value="${key}" <#if presentationTypeValue = key>selected</#if>> <#if presentationTypeOpts[key] == "Other">${i18n().presentation_capitalized}<#else>${presentationTypeOpts[key]}</#if></option>            
         </#list>
     </select>
     </p>
 
     <div class="fullViewOnly">        
     <p>
-        <label for="presentation">### Name ${requiredHint}</label>
+        <label for="presentation">### ${i18n().name_capitalized} ${requiredHint}</label>
             <input class="acSelector" size="50"  type="text" id="presentation" acGroupName="presentation" name="presentationLabel" value="${presentationLabelValue}">
             <input class="display" type="hidden" id="presentationDisplay" acGroupName="presentation" name="presentationLabelDisplay" value="${presentationLabelDisplayValue}">
     </p>
@@ -120,40 +120,40 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <p class="inline">
             <label></label>
             <span class="acSelectionInfo"></span>
-            <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
-            <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
+            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+            <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="presentationUri" name="existingPresentation" value="${existingPresentationValue}" ${flagClearLabelForExisting}="true" />
     </div>
-    <p><label for="roleLabel">Role in ### ${requiredHint} <span class="hint">(e.g., Moderator, Speaker, Panelist)</span></label>
+    <p><label for="roleLabel">${i18n().role_in} ### ${requiredHint} <span class="hint">(${i18n().presentation_hint})</span></label>
         <input  size="50"  type="text" id="roleLabel" name="roleLabel" value="${roleLabelValue}" />
     </p>
   <p>
-      <label for="org">Presented At</label>
+      <label for="org">${i18n().presented_at}</label>
       <input  class="acSelector" size="50" acGroupName="conference" type="text" id="conference" name="conferenceLabel" value="${conferenceLabelValue}" />
       <input  class="display" acGroupName="conference" type="hidden" id="conferenceDisplay" name="conferenceLabelDisplay" value="${conferenceLabelDisplayValue}" />
   </p>
   <div class="acSelection" acGroupName="conference">
       <p class="inline">
-          <label>Selected conference:</label>
+          <label>${i18n().selected_conference}:</label>
           <span class="acSelectionInfo"></span>
-          <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
-          <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
+          <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+          <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
       </p>
       <input class="acUriReceiver" type="hidden" id="conferenceUri" name="existingConference" value="${conferenceValue}" ${flagClearLabelForExisting}="true" />
   </div>
     <p>
-        <h4 class="label">Years of Participation in ###</h4>
+        <h4 class="label">${i18n().years_participation_in} ###</h4>
     </p>
     <#--Need to draw edit elements for dates here-->
     <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
     <#if htmlForElements?keys?seq_contains("startField")>
-        <label class="dateTime" for="startField">Start</label>
+        <label class="dateTime" for="startField">${i18n().start_capitalized}</label>
 		${htmlForElements["startField"]} ${yearHint}
     </#if>
     <br/>
     <#if htmlForElements?keys?seq_contains("endField")>
-		<label class="dateTime" for="endField">End</label>
+		<label class="dateTime" for="endField">${i18n().end_capitalized}</label>
 	 	${htmlForElements["endField"]} ${yearHint}
     </#if>
 	<#--End draw elements-->
@@ -163,11 +163,11 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     </div>
 
     <p class="submit">
-        <input type="submit" class="submit" value="${submitButtonText}"/><span class="or"> or </span>
-        <a class="cancel" href="${cancelUrl}" title="Cancel">Cancel</a>
+        <input type="submit" class="submit" value="${submitButtonText}"/><span class="or"> ${i18n().or} </span>
+        <a class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
     </p>
 
-    <p id="requiredLegend" class="requiredHint">* required fields</p>
+    <p id="requiredLegend" class="requiredHint">* ${i18n().required_fields}</p>
 
     <#-- hide the html that gets written, and use java script to pass the value between the two -->
     <div class="hidden">

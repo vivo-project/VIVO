@@ -32,20 +32,20 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <#--the heading and submit button label depend on the predicate uri-->
 
-<#assign formHeading =  "investigator entry for "/>
-<#assign submitButtonLabel = "Investigator" />
+<#assign formHeading =  "${i18n().investigator_entry_for}"/>
+<#assign submitButtonLabel = "${i18n().investigator_capitalized}" />
 <#if editConfiguration.predicateUri?ends_with("hasPrincipalInvestigatorRole") >
-	<#assign formHeading = "principal investigator entry for "/>
+	<#assign formHeading = "${i18n().principal_investigator_entry_for}"/>
 <#elseif editConfiguration.predicateUri?ends_with("hasCo-PrincipalInvestigatorRole") >
- 	<#assign formHeading = "co-principal investigator entry for "/>
+ 	<#assign formHeading = "${i18n().co_principal_investigator_entry_for}"/>
 </#if>
 
 <#if editMode = "add">
-	<#assign formHeading> Create ${formHeading} </#assign>
-	<#assign submitButtonLabel>Create Entry</#assign>
+	<#assign formHeading> ${i18n().create_capitalized} ${formHeading} </#assign>
+	<#assign submitButtonLabel>${i18n().create_entry}</#assign>
 <#else>
-	<#assign formHeading> Edit ${formHeading} </#assign>
-	<#assign submitButtonLabel>Save Changes</#assign>
+	<#assign formHeading> ${i18n().edit_capitalized} ${formHeading} </#assign>
+	<#assign submitButtonLabel>${i18n().save_changes}</#assign>
 
 </#if>
 
@@ -63,11 +63,10 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
-<#assign yearHint     = "<span class='hint'>(YYYY)</span>" />
+<#assign yearHint     = "<span class='hint'>(${i18n().year_hint_format})</span>" />
 
 <#if editMode = "error">
- <div>This form is unable to handle the editing of this position because it is associated with 
-      multiple Position individuals.</div>      
+ <div>${i18n().unable_to_handle_position_editing}</div>      
 <#else>
 
 <h2>${formHeading} ${editConfiguration.subjectName}</h2>
@@ -79,20 +78,20 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     </#if>
 
     <section id="error-alert" role="alert">
-        <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
+        <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="${i18n().error_alert_icon}" />
         <p>
         <#--below shows examples of both printing out all error messages and checking the error message for a specific field-->
         <#list submissionErrors?keys as errorFieldName>
         	<#if errorFieldName == "startField">
         	    <#if submissionErrors[errorFieldName]?contains("before")>
-        	        The Start Year must be earlier than the End Year.
+        	        ${i18n().start_year_must_precede_end}
         	    <#else>
         	        ${submissionErrors[errorFieldName]}
         	    </#if>
         	    <br />
         	<#elseif errorFieldName == "endField">
     	        <#if submissionErrors[errorFieldName]?contains("after")>
-    	            The End Year must be later than the Start Year.
+    	            ${i18n().end_year_must_be_later}
     	        <#else>
     	            ${submissionErrors[errorFieldName]}
     	        </#if>
@@ -100,7 +99,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         </#list>
         <#--Checking if Name field is empty-->
          <#if lvf.submissionErrorExists(editSubmission, "grantLabel")>
- 	        Please enter or select a value in the Grant Name field.
+ 	        ${i18n().enter_or_select_grant}
         </#if>
         
         </p>
@@ -115,38 +114,38 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <form id="addGrantRoleToPerson" class="customForm noIE67" action="${submitUrl}"  role="add/edit grant role">
         
         <p>
-            <label for="grant">Grant Name ${requiredHint}</label>
+            <label for="grant">${i18n().grant_name} ${requiredHint}</label>
             <input class="acSelector" size="50"  type="text" id="grant" acGroupName="grant" name="grantLabel"  value="${grantLabelValue}" />
             <input class="display" type="hidden" id="grantDisplay" acGroupName="grant" name="grantLabelDisplay" value="${grantLabelDisplayValue}">
         </p>
 
         <div class="acSelection" acGroupName="grant" id="grantAcSelection">
             <p class="inline">
-                <label>Selected Grant:</label>
+                <label>${i18n().selected_grant}:</label>
                 <span class="acSelectionInfo"></span>
-                <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
-                <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
+                <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+                <a href="#" class="changeSelection" id="changeSelection" title="${i18n().change_selection}">${i18n().change_selection})</a>
             </p>
             <input class="acUriReceiver" type="hidden" id="grantUri" name="existingGrant" value="${existingGrantValue}" ${flagClearLabelForExisting}="true" />
         </div>
 
-        <h4>Years of Participation in Grant</h4>							 
+        <h4>${i18n().years_of_grant_participation}</h4>							 
 			 						<#if htmlForElements?keys?seq_contains("startField")>
-			 							 <label class="dateTime" for="startField">Start</label>
+			 							 <label class="dateTime" for="startField">${i18n().start_capitalized}</label>
 			 							${htmlForElements["startField"]} ${yearHint}
 			 					 </#if>
 			 					 <p></p>
 			 					 <#if htmlForElements?keys?seq_contains("endField")>
-			 							<label class="dateTime" for="endField">End</label>
+			 							<label class="dateTime" for="endField">${i18n().end_capitalized}</label>
 			 							${htmlForElements["endField"]} ${yearHint}
 					 	</#if>
 					 
             <p class="submit">
                 <input type="hidden" name = "editKey" value="${editKey}"/>
-                <input type="submit" id="submit" value="${submitButtonLabel}"/><span class="or"> or </span><a class="cancel" href="${cancelUrl}" title="Cancel">Cancel</a>
+                <input type="submit" id="submit" value="${submitButtonLabel}"/><span class="or"> ${i18n().or} </span><a class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
             </p>
 
-            <p id="requiredLegend" class="requiredHint">* required fields</p>
+            <p id="requiredLegend" class="requiredHint">* ${i18n().required_fields}</p>
     </form>
 
 </section>

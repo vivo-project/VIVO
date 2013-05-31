@@ -2,7 +2,7 @@
 
 <#-- Confirmation that an account has been created. -->
 
-<#assign subject = "Your ${siteName} account has been created." />
+<#assign subject = "${i18n().account_created_subject(siteName)}" />
 
 <#assign html>
 <html>
@@ -15,32 +15,31 @@
         </p>
         
         <p>
-            <strong>Congratulations!</strong>
+            <strong>${i18n().congratulations}</strong>
         </p>
         
         <p>
-            We have created your new VIVO account associated with ${userAccount.emailAddress}.
+            ${i18n().we_have_created_your_account(siteName,userAccount.emailAddress)}
         </p>
         
         <p>
-            If you did not request this new account you can safely ignore this email. 
-            This request will expire if not acted upon for 30 days.
+            ${i18n().did_not_request_text}
         </p>
         
         <p>
-            Click the link below to create your password for your new account using our secure server.
+            ${i18n().click_to_create_password}
         </p>
         
         <p>
-            <a href="${passwordLink}" title="password">${passwordLink}</a>
+            <a href="${passwordLink}" title="${i18n().password}">${passwordLink}</a>
         </p>
         
         <p>
-            If the link above doesn't work, you can copy and paste the link directly into your browser's address bar.
+            ${i18n().if_link_failed}
         </p>
         
         <p>
-            Thanks!
+            ${i18n().thanks}
         </p>
     </body>
 </html>
@@ -49,20 +48,17 @@
 <#assign text>
 ${userAccount.firstName} ${userAccount.lastName}
 
-Congratulations!
+${i18n().congratulations}
 
-We have created your new VIVO account associated with 
-${userAccount.emailAddress}.
+${i18n().we_have_created_your_account(siteName,userAccount.emailAddress)}
 
-If you did not request this new account you can safely ignore this email. 
-This request will expire if not acted upon for 30 days.
+${i18n().did_not_request_text}
         
-Paste the link below into your browser's address bar to create your password 
-for your new account using our secure server.
+${i18n().paste_the_link}
         
 ${passwordLink}
         
-Thanks!
+${i18n().thanks}
 </#assign>
 
 <@email subject=subject html=html text=text />

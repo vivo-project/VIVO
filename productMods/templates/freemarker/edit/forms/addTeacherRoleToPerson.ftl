@@ -18,9 +18,9 @@ roleExamples-->
 
 
 <#--Variable assignments for Add Clinical Role To Person-->
-<#assign roleDescriptor = "teaching activity" />
-<#assign typeSelectorLabel = "teaching activity type" />
-<#assign roleExamples = "<span class='hint'>&nbsp;(e.g., Instructor, Facilitator, Assistant)</span>" />
+<#assign roleDescriptor = "${i18n().teaching_activity}" />
+<#assign typeSelectorLabel = "${i18n().teaching_activity_type}" />
+<#assign roleExamples = "<span class='hint'>&nbsp;(${i18n().teaching_role_hint})</span>" />
 
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">

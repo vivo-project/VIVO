@@ -32,7 +32,7 @@
 <#macro phoneLinks phone>
 <#if phone?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
     <#if editable>
-        <h3 id="contact">phone<@p.addLink phone editable />  </h3>
+        <h3 id="contact">${i18n().phone} <@p.addLink phone editable />  </h3>
         <@p.verboseDisplay phone />
     </#if>
     <#if phone.statements?has_content> <#-- if there are any statements -->

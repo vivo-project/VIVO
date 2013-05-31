@@ -22,8 +22,8 @@
                 var onlyUnknownYearGrants = false;
                 
                 var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Year');
-                data.addColumn('number', 'Unique co-investigators');
+                data.addColumn('string', '${i18n().year_capitalized}');
+                data.addColumn('number', '${i18n().unique_coinvestigators}');
                 data.addRows(${sparklineVO.yearToEntityCountDataTable?size});
                 
                 var knownYearGrantCounts = 0;
@@ -152,17 +152,17 @@
                     
                                         
                     if (totalGrants === 1) {
-                        var grantDisplay = "co-investigator";
+                        var grantDisplay = "${i18n().co_investigator}";
                     } else {
-                        var grantDisplay = "co-investigators";
+                        var grantDisplay = "${i18n().co_investigators}";
                     }
                     
                     $('#${sparklineContainerID} td.sparkline_number').text(totalGrants).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + grantDisplay + " <br/></span>");
             
-                    var sparksText = '  within the last 10 years';
+                    var sparksText = '  ${i18n().within_last_10_years}';
                     
                     if (totalGrants !== totalGrantCount) {
-                        sparksText += ' (' + totalGrantCount + ' total)';
+                        sparksText += ' (' + totalGrantCount + ' ${i18n().total})';
                     }
             
                  <#else>
@@ -181,22 +181,22 @@
                     var totalGrants = onlyUnknownYearGrants ? unknownYearGrantCounts : renderedSparks;
                     
                     if (totalGrants === 1) {
-                        var grantDisplay = "co-investigator";
+                        var grantDisplay = "${i18n().co_investigator}";
                     } else {
-                        var grantDisplay = "co-investigators";
+                        var grantDisplay = "${i18n().co_investigators}";
                     }
                      
                     $('#${sparklineContainerID} td.sparkline_number').text(totalGrants).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + grantDisplay + " <br/></span>");
             
-                    var sparksText = '  from <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}' 
+                    var sparksText = '  ${i18n().from} <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}' 
                                         + ' through ${sparklineVO.latestRenderedGrantYear?c}</span>';
                                         
                     if (totalGrants !== totalGrantCount) {
-                        sparksText += ' (' + totalGrantCount + ' total)';
+                        sparksText += ' (' + totalGrantCount + ' ${i18n().total})';
                     }
                     
                     if (totalGrantCount) {
-                        sparksText += '<br /> <a href="${sparklineVO.downloadDataLink}" title="csv file">(.CSV File)</a> ';
+                        sparksText += '<br /> <a href="${sparklineVO.downloadDataLink}" title="csv ${i18n().file_capitalized}">(.CSV ${i18n().file_capitalized})</a> ';
                     }
                     
                  </#if>
@@ -275,7 +275,7 @@
 
     <#if sparklineVO.shortVisMode>
         <#--<span class="vis_link">-->
-            <p><a class="all-vivo-grants" href="${sparklineVO.fullTimelineNetworkLink}" title="view full timeline">View full timeline and co-investigator network.</a></p>
+            <p><a class="all-vivo-grants" href="${sparklineVO.fullTimelineNetworkLink}" title="${i18n().view_timeline_copi_network}">${i18n().view_timeline_copi_network}</a></p>
         <#--</span>-->
     <#else>
         <!-- For Full Sparkline - Print the Table of CoInvestigator Counts per Year -->
@@ -283,14 +283,14 @@
         
                 <p> 
                     <#assign tableID = "coinve_sparkline_data_table" />
-                    <#assign tableCaption = "Unique Co-Investigators per year " />
-                    <#assign tableActivityColumnName = "Count" />
+                    <#assign tableCaption = "${i18n().unique_coinvestigators_per_year} " />
+                    <#assign tableActivityColumnName = "${i18n().count_capitalized}" />
                     <#assign tableContent = sparklineVO.yearToActivityCount />
                     <#assign fileDownloadLink = sparklineVO.downloadDataLink />
                     
                     <#include "yearToActivityCountTable.ftl">
         
-                    Download data as <a href="${sparklineVO.downloadDataLink}" title="csv link">.csv</a> file.
+                    ${i18n().download_data_as} <a href="${sparklineVO.downloadDataLink}" title="csv ${i18n().download}">.csv</a> ${i18n().file}.
                     <br />
                 </p>
         

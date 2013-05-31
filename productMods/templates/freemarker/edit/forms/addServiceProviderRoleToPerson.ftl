@@ -18,9 +18,9 @@ roleExamples-->
 
 
 <#--Variable assignments for Add Service Provider Role To Person-->
-<#assign roleDescriptor = "service to the profession" />
-<#assign typeSelectorLabel = "service to the profession in" />
-<#assign buttonText = "Service Provider Role" />
+<#assign roleDescriptor = "${i18n().service_to_profession}" />
+<#assign typeSelectorLabel = "${i18n().service_to_profession_in}" />
+<#assign buttonText = "${i18n().service_provider_role}" />
 
 
 <#--Each of the two stage forms will include the form below-->

@@ -6,12 +6,12 @@
 <#if subjectName?contains(",") >
 <#assign lastName = subjectName?substring(0,subjectName?index_of(",")) />
 <#assign firstName = subjectName?substring(subjectName?index_of(",") + 1) />
-<h2>Manage Grants & Projects for ${firstName} ${lastName}</h2>
+<h2>${i18n().manage_grants_and_projects} ${firstName} ${lastName}</h2>
 <#else>
-<h2>Manage Grants & Projects for ${subjectName}</h2>
+<h2>${i18n().manage_grants_and_projects} ${subjectName}</h2>
 </#if>
 <p style="margin-left:25px;margin-bottom:12px">
-Check those grants and projects you want to exclude from the profile page.
+${i18n().check_grants_to_exclude}
 <script type="text/javascript">
     var grantData = [];
 </script>
@@ -40,7 +40,7 @@ Check those grants and projects you want to exclude from the profile page.
 
 <br />    
 <p>
-    <a href="${urls.referringPage}#research" title="return to profile page">Return to profile page</a>
+    <a href="${urls.referringPage}#research" title="${i18n().return_to_profile}">${i18n().return_to_profile}</a>
 </p>
 
 <script type="text/javascript">
