@@ -699,6 +699,25 @@
 
                     <tr>
                         <td colspan="2">
+                            Tell VIVO to generate HTTP headers on its responses to facilitate caching the 
+                            profile pages that it creates. This can improve performance, but it can also
+                            result in serving stale data. Default is false if not set.
+                            For more information, see the VIVO wiki page: 
+                            <a href="https://wiki.duraspace.org/display/VIVO/Use+HTTP+caching+to+improve+performance">
+                            Use HTTP caching to improve performance </a>
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                          http.createCacheHeaders
+                        </td>
+                        <td>
+                           true
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
 							Show only the most appropriate data values based on the Accept-Language 
 							header supplied by the browser.  Default is true if not set.
                         </td>
