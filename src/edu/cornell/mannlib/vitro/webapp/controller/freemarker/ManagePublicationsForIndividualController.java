@@ -82,10 +82,11 @@ public class ManagePublicationsForIndividualController extends FreemarkerHttpSer
         + "SELECT DISTINCT ?subclass ?authorship (str(?label) as ?title) ?pub ?hideThis WHERE { \n"
         + "    ?subject core:authorInAuthorship ?authorship . \n"
         + "    OPTIONAL { ?authorship core:linkedInformationResource ?pub . " 
-        + "               ?pub rdfs:label ?label } \n"
-        + "    OPTIONAL { ?pub vitro:mostSpecificType ?subclass . \n"
-        + "              ?subclass rdfs:subClassOf core:InformationResource } \n"
-        + "    OPTIONAL { ?authorship core:hideFromDisplay ?hideThis } \n "
+        + "               ?pub rdfs:label ?label  \n"
+        + "               OPTIONAL { ?pub vitro:mostSpecificType ?subclass . \n"
+        + "                          ?subclass rdfs:subClassOf core:InformationResource } \n"
+        + "    } \n" 
+        + "    OPTIONAL { ?authorship core:hideFromDisplay ?hideThis } \n"
         + "} ORDER BY ?subclass ?title";
     
        

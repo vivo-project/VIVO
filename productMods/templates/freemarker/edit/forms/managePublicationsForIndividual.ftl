@@ -37,7 +37,8 @@ ${i18n().check_pubs_to_exclude}
         <ul >
             <#list pubs as pub>
             <li>
-                <input type="checkbox" class="pubCheckbox" <#if pub.hideThis??>checked</#if> />${pub.title}
+                <input type="checkbox" class="pubCheckbox" <#if pub.hideThis??>checked</#if> />
+                <#if pub.title?has_content>${pub.title!}<#else>Title not found.</#if>
             </li>
             <script type="text/javascript">
                 publicationData.push({
@@ -58,6 +59,10 @@ ${i18n().check_pubs_to_exclude}
 <script type="text/javascript">
 var customFormData = {
     processingUrl: '${urls.base}/edit/primitiveRdfEdit'
+};
+var i18nStrings = {
+    publicationSuccessfullyExcluded: '${i18n().publication_successfully_excluded}',
+    errorExcludingPublication: '${i18n().error_excluding_publication}'
 };
 </script>
 
