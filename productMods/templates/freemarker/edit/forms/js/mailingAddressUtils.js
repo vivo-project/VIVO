@@ -6,6 +6,7 @@ var mailingAddressUtils = {
         this.initObjectReferences();                 
         this.bindEventListeners();
         this.sortCountrySelector(mode,country);
+        $.extend(this, i18nStrings);
 
         if ( mode == "add" && !this.errorSection.attr('id') ) {
             this.containerDiv.hide();
@@ -76,14 +77,14 @@ var mailingAddressUtils = {
     
     processCountryRelatedFields: function() {
         if ( mailingAddressUtils.addressClassIsNonUS() ) {
-            this.stateLabel.text("Province or Region");
+            this.stateLabel.text(mailingAddressUtils.provinceOrRegion);
             this.postalCodeField.attr('size', '40');
             this.stateSelector.hide();
             this.stateField.show();
             this.addrTypeField.val("http://vivoweb.org/ontology/core#Address");
         }
         else {
-            this.stateLabel.text("State");
+            this.stateLabel.text(mailingAddressUtils.stateString);
             this.postalCodeField.attr('size', '8');
             this.stateField.hide();
             this.stateSelector.show();
@@ -122,24 +123,24 @@ var mailingAddressUtils = {
         if ( this.errorSection.is(':visible') ) {
             this.countrySelector.prepend($("<option></option>")
                                 .attr("value","")
-                                .text("Select one"));
+                                .text(mailingAddressUtils.selectOne));
             this.countrySelector.val(country);                 
         }
         else if ( mode == "add" ) {
             this.countrySelector.prepend($("<option selected></option>")
                                 .attr("value","")
-                                .text("Select one"));
+                                .text(mailingAddressUtils.selectOne));
         }
         else if ( mode == "edit" || country.length > 1 ) {
             this.countrySelector.prepend($("<option></option>")
                                 .attr("value","")
-                                .text("Select one"));
+                                .text(mailingAddressUtils.selectOne));
             this.countrySelector.val(country);
         } 
         else if ( country.length == 0 ) {
             this.countrySelector.prepend($("<option selected></option>")
                                 .attr("value","")
-                                .text("Select one"));
+                                .text(mailingAddressUtils.selectOne));
             this.countrySelector.val(country);
         } 
     }

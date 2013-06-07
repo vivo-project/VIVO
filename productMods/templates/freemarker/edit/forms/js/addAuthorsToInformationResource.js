@@ -34,6 +34,9 @@ var addAuthorForm = {
         
         // Get the custom form data from the page
         $.extend(this, customFormData);
+
+        // Get the i18n variables from the page
+        $.extend(this, i18nStrings);
     },
     
     // On page load, create references for easy access to form elements.
@@ -372,7 +375,7 @@ var addAuthorForm = {
         }
         
         $('.authorNameWrapper').each(function() {
-            $(this).attr('title', 'Drag and drop to reorder authors');
+            $(this).attr('title', addAuthorForm.authorNameWrapperTitle);
         });
         
         authorshipList.sortable({
@@ -427,7 +430,7 @@ var addAuthorForm = {
                         ui.item.appendTo(authorships);
                     }
                     
-                    alert('Reordering of authors failed.');                                 
+                    alert(addAuthorForm.reorderAuthorsAlert);                                 
                 }      
             }
         });           
@@ -549,13 +552,6 @@ var addAuthorForm = {
             return false;
         });
         
-//      this.undoLinks.click(function() {
-//          $.ajax({
-//              url: $(this).attr('href')
-//          });
-//          return false;           
-//      });
-        
     },
 
     prepareSubmit: function() {
@@ -618,7 +614,7 @@ var addAuthorForm = {
         authorName = $(link).prev().children().text();
 
         var removeLast = false,
-            message = 'Are you sure you want to remove this author:\n\n' + authorName + ' ?\n\n';
+            message = addAuthorForm.removeAuthorshipMessage + '\n\n' + authorName + ' ?\n\n';
         if (!confirm(message)) {
             return false;
         }
@@ -710,7 +706,7 @@ var addAuthorForm = {
                     });
 
                 } else {
-                    alert('Error processing request: author not removed');
+                    alert(addAuthorForm.removeAuthorshipAlert);
                     
                 }
             }
@@ -743,14 +739,14 @@ var addAuthorForm = {
 	addAcHelpText: function(selectedObj) {
         var typeText;
         if ( $(selectedObj).attr('id') == "lastName" ) {
-            typeText = "Author";
+            typeText = addAuthorForm.authorTypeText;
         }
         else {
-            typeText = "Organization";
+            typeText = addAuthorForm.organizationTypeText;
         }
         
         if (!$(selectedObj).val()) {
-			$(selectedObj).val("Select an existing " + typeText + " or add a new one.")
+			$(selectedObj).val(addAuthorForm.helpTextSelect + " " + typeText + " " + addAuthorForm.helpTextAdd)
 						   .addClass(this.acHelpTextClass);
 		}
 	},

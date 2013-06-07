@@ -1,4 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
+$.extend(this, i18nStrings);
+
 COMPARISON = {
 	"one":{ "name": "one", "color": "#99CC00"},
 	"two":{ "name": "two", "color": "#FF9900"},
@@ -85,7 +87,7 @@ var ComparisonScimapWidget = Class.extend({
 			me.disciplineLabelsControl = new CheckBoxPanel({ 
 				map: map,
 				checked: true,
-				text: "Show discipline labels",
+				text: i18nStrings.showDisciplineLabels,
 				click: function() {
 					if($(this).attr('checked')) {
 						me.labelsMarkerManager.showMarkers();
@@ -250,7 +252,7 @@ var ComparisonScimapWidget = Class.extend({
 		if (compositeManager) {
 			var length = compositeManager.length();
 			var slider = this.sliderControl;
-			slider.setTypeString("subdisciplines");
+			slider.setTypeString(i18nStrings.subdisciplinesLower);
 			slider.setMin(Math.min(1, length));
 			slider.setMax(length);
 			slider.setValue(length);

@@ -34,6 +34,7 @@ var customForm = {
 
         // Get the custom form data from the page
         $.extend(this, customFormData);
+        $.extend(this, i18nStrings);
     },
     
     // On page load, create references for easy access to form elements.
@@ -126,7 +127,7 @@ var customForm = {
         this.or.show();
         this.requiredLegend.show();
         this.button.show();
-        this.setButtonText('new');
+//        this.setButtonText('new');
         this.setLabels(); 
 
         // Set the initial autocomplete help text in the acSelector field.
@@ -330,7 +331,7 @@ var customForm = {
         this.acSelector.val(label);        
         this.acSelectionInfo.html(label);
      
-        this.setButtonText('existing');            
+//        this.setButtonText('existing');            
         
         this.cancel.unbind('click');
         this.cancel.click(function() {
@@ -355,7 +356,8 @@ var customForm = {
             this.acSelectionInfo.html('');
             
             if (this.formSteps > 1) {
-                this.acSelection.find('label').html('Selected ');
+                htmlString = customForm.selectedString + " ";
+                this.acSelection.find('label').html(htmlString);
             }
         }      
     },
@@ -419,7 +421,7 @@ var customForm = {
     
         // First case applies on page load; second case applies when the type gets changed.
         if (!this.acSelector.val() || this.acSelector.hasClass(this.acHelpTextClass)) {            
-        	var helpText = "Select an existing " + typeText + " or create a new one.";
+        	var helpText = customForm.selectExisting + " " + typeText + " " + customForm.orCreateNewOne;
         	//Different for object property autocomplete
 			this.acSelector.val(helpText)
 		               	   .addClass(this.acHelpTextClass);     

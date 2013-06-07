@@ -10,6 +10,7 @@ $(document).ready(function(){
         $('div#activeGrantsLink').css("margin-top","30px");
         $('section#individual-info').children('h2#overview').css("clear","both");
     }
+    $.extend(this, i18nStrings);
 
     // "more"/"less" HTML truncator for showing more or less content in data property core:overview
     $('.overview-value').truncate({max_length: 500});
@@ -27,7 +28,7 @@ $(document).ready(function(){
             $toggleLink.click(function() {
                 $itemContainer.show();
                 $(this).attr('href', '#show less content');
-                $(this).text('less');
+                $(this).text(i18nStrings.displayLess);
                 togglePropDisplay.showLess($toggleLink, $itemContainer);
                 return false;
             });
@@ -37,7 +38,7 @@ $(document).ready(function(){
             $toggleLink.click(function() {
                 $itemContainer.hide();
                 $(this).attr('href', '#show more content');
-                $(this).text('more...');
+                $(this).text(i18nStrings.displayMoreEllipsis);
                 togglePropDisplay.showMore($toggleLink, $itemContainer);
                 return false;
             });
@@ -53,7 +54,7 @@ $(document).ready(function(){
             var $itemContainer = $('<div class="additionalItems" />').appendTo(this);
             
             // create toggle link
-            var $toggleLink = $('<a class="more-less" href="#show more content">more...</a>').appendTo(this);
+            var $toggleLink = $('<a class="more-less" href="#show more content" title="' + i18nStrings.showMoreContent + '">' + i18nStrings.displayMoreEllipsis + '</a>').appendTo(this);
             
             $additionalItems.appendTo($itemContainer);
             
@@ -71,7 +72,7 @@ $(document).ready(function(){
             var $itemContainer = $('<div class="additionalItems" />').appendTo(this);
             
             // create toggle link
-            var $toggleLink = $('<a class="more-less" href="#show more content">more...</a>').appendTo(this);
+            var $toggleLink = $('<a class="more-less" href="#show more content" title="' + i18nStrings.showMoreContent + '">' + i18nStrings.displayMoreEllipsis + '</a>').appendTo(this);
             
             $additionalItems.appendTo($itemContainer);
             
@@ -89,7 +90,7 @@ $(document).ready(function(){
         var $itemContainer = $('<div class="additionalItems" />').appendTo($subPropParent);
         
         // create toggle link
-        var $toggleLink = $('<a class="more-less" href="#show more content">more...</a>').appendTo($subPropParent);
+        var $toggleLink = $('<a class="more-less" href="#show more content" title="' + i18nStrings.showMoreContent + '">' + i18nStrings.displayMoreEllipsis + '</a>').appendTo($subPropParent);
         
         $additionalItems.appendTo($itemContainer);
         
@@ -99,7 +100,7 @@ $(document).ready(function(){
     }
     
     // Change background color button when verbose mode is off
-    $('a#verbosePropertySwitch:contains("Turn off")').addClass('verbose-off');
+    $('a#verbosePropertySwitch:contains("' + i18nStrings.verboseTurnOff + '")').addClass('verbose-off');
     
     // Reveal vCard QR code when QR icon is clicked
     $('#qrIcon, .qrCloseLink').click(function() {

@@ -13,6 +13,7 @@ var advisingRelUtils = {
         this.bindEventListeners();
         
         $.extend(this, vitro.customFormUtils);
+        $.extend(this, i18nStrings);
 
         if ( this.findValidationErrors() ) {
             this.resetLastNameLabel();
@@ -41,9 +42,9 @@ var advisingRelUtils = {
     bindEventListeners: function() {
         this.idCache = {};
         
-        //we want to use the advisee label in the relationship label.
+        // we want to use the advisee label in the relationship label.
         // since the former gets cleared on submit in some cases, store
-        //the value in a hidden field and map to relationship label
+        // the value in a hidden field and map to relationship label
         this.advisee.change( function(objEvent) {
            window.setTimeout('advisingRelUtils.mapAdviseeValue()', 180); 
         });
@@ -89,13 +90,13 @@ var advisingRelUtils = {
 
     buildAdvisingRelLabel: function() {
         if ( this.advisee.val() != "" ) {
-            this.adRelshiplabel.val(this.subjName + " advising " + this.advisee.val());
+            this.adRelshiplabel.val(this.subjName + " " + advisingRelUtils.advisingString + " " + this.advisee.val());
         }
         else if ( this.saveAdviseeLabel.val() != "" ){
-            this.adRelshiplabel.val(this.subjName + " advising " + this.saveAdviseeLabel.val());
+            this.adRelshiplabel.val(this.subjName + " " + advisingRelUtils.advisingString + " " + this.saveAdviseeLabel.val());
         }
         else {
-            this.adRelshiplabel.val(this.subjName + " advising relationship");
+            this.adRelshiplabel.val(this.subjName + " " + advisingRelUtils.advisingRelationshipString);
         }
     },
 

@@ -14,6 +14,7 @@ var manageGrants = {
 
         // Get the custom form data from the page
         $.extend(this, customFormData);
+        $.extend(this, i18nStrings);
     },
 
     // Initial page setup. Called only at page load.
@@ -68,10 +69,10 @@ var manageGrants = {
             complete: function(request, status) {
             
                 if (status === 'success') {
-                    window.status = "The item has been successfully excluded from the profile page."; 
+                    window.status = manageGrants.grantSuccessfullyExcluded; 
 
                 } else {
-                    alert('Error processing request: the item cannot be excluded from the profile page.');
+                    alert(manageGrants.errorExcludingGrant);
                     $(grant).removeAttr('checked');
                 }
             }

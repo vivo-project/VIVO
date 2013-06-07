@@ -6,7 +6,7 @@
         <#assign enableInternalClass = '' />
         <#assign disableClass = 'class="inline"' />
     <#else>
-        <#assign enableInternalClass = '<p class="note">${i18n().enable_internal_class_one} <a href="${urls.base}/processInstitutionalInternalClass" title="${i18n().institutional_class}">${i18n().internal_class}</a> ${i18n().enable_internal_class_two}</p>' />
+        <#assign enableInternalClass = '<p class="note">${i18n().enable_internal_class_one} <a href="${urls.base}/processInstitutionalInternalClass" title="${i18n().internal_class}">${i18n().internal_class}</a> ${i18n().enable_internal_class_two}</p>' />
         <#assign disableClass = 'class="disable inline" disabled="disabled"' />
     </#if>
 

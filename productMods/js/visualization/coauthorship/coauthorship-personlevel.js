@@ -1,10 +1,12 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
+$.extend(this, i18nStringsCoauthorship);
+
 var collaboratorTableMetadata = {
 	tableID: "coauthorships_table",
 	tableContainer: "coauth_table_container",
-	tableCaption: "Co-authors ",
-	tableColumnTitle1: "Author",
-	tableColumnTitle2: "Publications with <br />",
+	tableCaption: i18nStringsCoauthorship.coAuthorsString + " ",
+	tableColumnTitle1: i18nStringsCoauthorship.authorString,
+	tableColumnTitle2: i18nStringsCoauthorship.publicationsWith + " <br />",
 	tableCSVFileLink: egoCoAuthorsListDataFileURL,
 	jsonNumberWorksProperty: "number_of_authored_works" 
 };
@@ -23,8 +25,8 @@ function renderStatsOnNodeClicked(json){
 	var latest_work = "";
 	var number_of_works = "";
 	
-	works = "Publication(s)";
-	persons = "Co-author(s)";
+	works = i18nStringsCoauthorship.publicationsString;
+	persons = i18nStringsCoauthorship.coauthorsString;
 	relation = "coauthorship"
 	earliest_work = obj.earliest_publication;
 	latest_work = obj.latest_publication;

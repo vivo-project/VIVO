@@ -1,4 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
+$.extend(this, i18nStrings);
+
 var disciplineOrSubdisciplineDataTableFilter = function(oSettings, aData, iDataIndex) {
 
 	/*
@@ -22,17 +24,14 @@ $.fn.dataTableExt.oPagination.gmail_style = {
             var nNext = document.createElement('span');
             var nLast = document.createElement('span');
 
-/*
-			nFirst.innerHTML = oSettings.oLanguage.oPaginate.sFirst;
-			nPrevious.innerHTML = oSettings.oLanguage.oPaginate.sPrevious;
-			nNext.innerHTML = oSettings.oLanguage.oPaginate.sNext;
-			nLast.innerHTML = oSettings.oLanguage.oPaginate.sLast;
-			*/
-
-            nFirst.innerHTML = "<span class='small-arrows'>&laquo;</span> <span class='paginate-nav-text'>First</span>";
-            nPrevious.innerHTML = "<span class='small-arrows'>&lsaquo;</span> <span class='paginate-nav-text'>Prev</span>";
-            nNext.innerHTML = "<span class='paginate-nav-text'>Next</span><span class='small-arrows'>&rsaquo;</span>";
-            nLast.innerHTML = "<span class='paginate-nav-text'>Last</span><span class='small-arrows'>&raquo;</span>";
+            nFirst.innerHTML = "<span class='small-arrows'>&laquo;</span> <span class='paginate-nav-text'>" 
+                                + i18nStrings.firstString + "</span>";
+            nPrevious.innerHTML = "<span class='small-arrows'>&lsaquo;</span> <span class='paginate-nav-text'>" 
+                                + i18nStrings.previousString + "</span>";
+            nNext.innerHTML = "<span class='paginate-nav-text'>" 
+                                + i18nStrings.nextString + "</span><span class='small-arrows'>&rsaquo;</span>";
+            nLast.innerHTML = "<span class='paginate-nav-text'>" 
+                                + i18nStrings.lastString + "</span><span class='small-arrows'>&raquo;</span>";
 
             var oClasses = oSettings.oClasses;
             nFirst.className = oClasses.sPageButton + " " + oClasses.sPageFirst;

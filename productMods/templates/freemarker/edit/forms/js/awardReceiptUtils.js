@@ -9,6 +9,8 @@ var awardReceiptUtils = {
         this.baseHref = href;
         this.editMode = mode;
         $.extend(this, vitro.customFormUtils);
+        $.extend(this, i18nStrings);
+
         // in edit mode copy the year awarded to the displayed input element
         if ( this.editMode == "edit"  ) {
             this.hiddenOrgDiv = $('div#hiddenOrgLabel');
@@ -67,7 +69,7 @@ var awardReceiptUtils = {
     },
 
     showConferredBy: function() {
-        this.org.val('Select an existing Organization or create a new one.');
+        this.org.val(awardReceiptUtils.selectAnOrganization);
         this.org.addClass('acSelectorWithHelpText');
         this.org.parent('p').show();
         if ( this.editMode == "edit" ) {

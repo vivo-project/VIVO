@@ -219,7 +219,12 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         blankSentinel: '${blankSentinel}',
         flagClearLabelForExisting: '${flagClearLabelForExisting}'
 	};
-	</script>
+	var i18nStrings = {
+        selectAnExisting: '${i18n().select_an_existing}',
+        orCreateNewOne: '${i18n().or_create_new_one}',
+        selectedString: '${i18n().selected}'
+    };
+    </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}

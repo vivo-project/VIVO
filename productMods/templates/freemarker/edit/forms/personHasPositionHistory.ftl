@@ -182,7 +182,12 @@ var customFormData  = {
     baseHref: '${urls.base}/individual?uri=',
     blankSentinel: '${blankSentinel}',
     flagClearLabelForExisting: '${flagClearLabelForExisting}'
-    };
+};
+var i18nStrings = {
+    selectAnExisting: '${i18n().select_an_existing}',
+    orCreateNewOne: '${i18n().or_create_new_one}',
+    selectedString: '${i18n().selected}'
+};
 </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}

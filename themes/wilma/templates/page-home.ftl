@@ -85,5 +85,23 @@
         <#include "footer.ftl">
         <#-- builds a json object that is used by js to render the academic departments section -->
         <@lh.listAcademicDepartments />
+        <script>
+        var i18nStrings = {
+            researcherString: '${i18n().researcher}',
+            researchersString: '${i18n().researchers}',
+            currentlyNoResearchers: '${i18n().currently_no_researchers}',
+            countriesAndRegions: '${i18n().countries_and_regions}',
+            statesString: '${i18n().map_states_string}',
+            stateString: '${i18n().map_state_string}',
+            statewideLocations: '${i18n().statewide_locations}',
+            researchersInString: '${i18n().researchers_in}',
+            noFacultyFound: '${i18n().no_faculty_found}',
+            placeholderImage: '${i18n().placeholder_image}',
+            viewAllFaculty: '${i18n().view_all_faculty}',
+            viewAllString: '${i18n().view_all}',
+            viewAllDepartments: '${i18n().view_all_departments}',
+            noDepartmentsFound: '${i18n().no_departments_found}'
+        };
+        </script>
     </body>
 </html>

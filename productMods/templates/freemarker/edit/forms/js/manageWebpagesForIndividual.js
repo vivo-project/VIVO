@@ -14,6 +14,7 @@ var manageWebpages = {
         
         // Get the custom form data from the page
         $.extend(this, customFormData);
+        $.extend(this, i18nStrings);
     },
     
     // Initial page setup. Called only at page load.
@@ -68,7 +69,7 @@ var manageWebpages = {
         }
         
         $('.webpageName').each(function() {
-            $(this).attr('title', 'Drag and drop to reorder web pages');
+            $(this).attr('title', manageWebpages.dragDropToReorderWebpages);
         });
         
         webpages.sortable({
@@ -121,7 +122,7 @@ var manageWebpages = {
                         ui.item.appendTo(webpages);
                     }
                     
-                    alert('Reordering of web pages failed.');                                 
+                    alert(manageWebpages.webpageReorderingFailed);                                 
                 }      
             }
         });           
@@ -152,7 +153,7 @@ var manageWebpages = {
     removeWebpage: function(link) {
         // RY Upgrade this to a modal window
         var removeLast = false,
-            message = 'Are you sure you want to remove this web page?';
+            message = manageWebpages.confirmWebpageDeletion;
             
         if (!confirm(message)) {
             return false;
@@ -212,7 +213,7 @@ var manageWebpages = {
                     });
 
                 } else {
-                    alert('Error processing request: web page not removed.');
+                    alert(manageWebpages.errorRemovingWebpage);
                 }
             }
         });        

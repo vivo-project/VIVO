@@ -33,6 +33,8 @@ var addConceptForm = {
         $.extend(this, vitro.customFormUtils);
         // Get the custom form data from the page
         $.extend(this, customFormData);
+        // Get the i18n variables from the page
+        $.extend(this, i18nStrings);
     },
     // On page load, create references for easy access to form elements.
     initObjects: function() {
@@ -145,7 +147,7 @@ var addConceptForm = {
         //This should return an object including the concept list or any errors if there are any
     	$.getJSON(dataServiceUrl, function(results) {
             var htmlAdd = "";
-            var vocabUnavailable = "<p>The vocabulary service is unavailable. Please try again later.</p>";
+            var vocabUnavailable = "<p>" + addConceptForm.vocServiceUnavailable + "</p>";
             if ( results== null  || results.semanticServicesError != null || results.conceptList == null) {
             	htmlAdd = vocabUnavailable;
             }
@@ -176,7 +178,7 @@ var addConceptForm = {
 	                }
 	                htmlAdd+= "</ul>";
                 } else {
-                	htmlAdd+= "<p>No search results were found.</p>";
+                	htmlAdd+= "<p>" + addConceptForm.noResultsFound + "</p>";
                 }
             	
             }
@@ -221,7 +223,7 @@ var addConceptForm = {
     	return {"bestMatch":bestMatchResults, "alternate":alternateResults};
     },
     addResultsHeader:function() {
-    	var htmlAdd = "<li class='concepts'><div class='row'><span class='column conceptLabel'>Label (Type) </span><span class='column conceptDefinition'>Definition</span><span class='column'>Best Match</span></div></li>";
+    	var htmlAdd = "<li class='concepts'><div class='row'><span class='column conceptLabel'>" + addConceptForm.labelTypeString + " </span><span class='column conceptDefinition'>" + addConceptForm.definitionString + "</span><span class='column'>" + addConceptForm.bestMatchString + "</span></div></li>";
     	return htmlAdd;
     },
     hideSearchResults:function() {
@@ -293,17 +295,17 @@ var addConceptForm = {
     validateConceptSelection:function(checkedElements) {
     	var numberElements = checkedElements.length;
     	if(numberElements < 1) {
-    		addConceptForm.errors.html("<p class='validationError'>Please select at least one term from the search search results.</p>");
+    		addConceptForm.errors.html("<p class='validationError'>" + addConceptForm.selectTermFromResults + "</p>");
     		return false;
     	}
     	return true;
     }, 
     showUncheckedSourceError:function() {
-		addConceptForm.errors.html("<p class='validationError'>Please select at least one external vocabulary source to search.</p>");
+		addConceptForm.errors.html("<p class='validationError'>" + addConceptForm.selectVocSource + "</p>");
     },
     removeExistingConcept: function(link) {
         var removeLast = false,
-            message = 'Are you sure you want to remove this term?';
+            message = addConceptForm.confirmTermDelete;
             
         if (!confirm(message)) {
             return false;
@@ -339,7 +341,7 @@ var addConceptForm = {
                     });
 
                 } else {
-                    alert('Error processing request: term not removed');
+                    alert(addConceptForm.errorTernNotRemoved);
                 }
             }
         });        

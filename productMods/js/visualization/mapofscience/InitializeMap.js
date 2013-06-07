@@ -1,4 +1,7 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+$.extend(this, i18nStrings);
+
 var map;
 var downloader;
 var currentVisMode;
@@ -26,7 +29,7 @@ function setupLoadingScreen() {
     
     $("#" + responseContainerID).block({
         message: '<div id="loading-data-container"><h3><img id="data-loading-icon" src="' + loadingImageLink 
-        			+ '" />&nbsp;Loading data for <i>' 
+        			+ '" />&nbsp;' + i18nStrings.loadingDataFor + ' <i>' 
         			+ entityLabel
         			+ '</i></h3></div>'
     });
@@ -38,8 +41,7 @@ function setupLoadingScreen() {
     		.html('<h3><img id="refresh-page-icon" src="' 
     				+ refreshPageImageLink 
 	    			+ '" />&nbsp;Data for <i>' + entityLabel
-	    			+ '</i> is now being refreshed. The visualization will load as soon as we are done computing, ' 
-	    			+ 'or you can search or browse other data in VIVO and come back in a few minutes.</h3>')
+	    			+ '</i> ' + i18nStrings.mapBeingRefreshed + '</h3>')
 	    	.css({'cursor': 'pointer'});
     }, 10 * 1000);
 }

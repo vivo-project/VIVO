@@ -191,6 +191,14 @@
 
 </section>
 
+<script type="text/javascript">
+var i18nStrings = {
+    provinceOrRegion: '${i18n().province_or_region}',
+    stateString: '${i18n().state}',
+    selectOne: '${i18n().select_one}'
+};
+</script>
+
 
 <script type="text/javascript">
 $(document).ready(function(){

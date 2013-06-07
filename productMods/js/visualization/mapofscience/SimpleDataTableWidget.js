@@ -1,5 +1,7 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
+$.extend(this, i18nStrings);
+
 var SimpleDataTableWidget = Class.extend({
 	
 	dom: {
@@ -61,7 +63,7 @@ var SimpleDataTableWidget = Class.extend({
 				entityVivoProfileURLPrefix + me.uri +'">' + 
 				truncateText(me.label, 23) + '</a><a href="' + entityMapOfScienceURLPrefix + 
 				me.uri + '"><img class="drillDownIcon" src="' + 
-				drillDownIconUrl + '" alt="drill down" title="drill down" /></a></div>');
+				drillDownIconUrl + '" alt="' + i18nStrings.drillDownString + '" title="' + i18nStrings.drillDownString + '" /></a></div>');
 		me.tableDiv.append(organizationHeader);
 		
 		/* Create table */
@@ -78,10 +80,10 @@ var SimpleDataTableWidget = Class.extend({
 		
 		var scienceAreasTH = $('<th>');
 		scienceAreasTH.attr("id", "entity-science-areas-th");
-		scienceAreasTH.html('Subdisciplines');
+		scienceAreasTH.html(i18nStrings.subdisciplinesString);
 		
 		var activityCountTH = $('<th width="53">');
-		activityCountTH.html('# of pubs.');
+		activityCountTH.html('# ' + i18nStrings.numberOfPubs);
 
 		//tr.append(levelOfScienceAreaTH);
 		tr.append(scienceAreasTH);
@@ -129,7 +131,7 @@ var SimpleDataTableWidget = Class.extend({
 		    "bFilter": false,
 		    "oLanguage": {
 				"sInfo": "_START_ - _END_ of _TOTAL_",
-				"sInfoEmpty": "No matching science areas found",
+				"sInfoEmpty": i18nStrings.noMatchingScienceAreas,
 				"sInfoFiltered": ""
 			},
 		    "sPaginationType": "gmail_style",
@@ -140,7 +142,7 @@ var SimpleDataTableWidget = Class.extend({
 		/* Create csv download button */
 		var csvButton = '<hr class="subtle-hr" /><div id="main-science-areas-table-footer" style="background-color:' + me.color + ';"><a href="' +
 						entityMapOfScienceSubDisciplineCSVURLPrefix + me.uri +
-						'" class="map-of-science-links">Save All as CSV</a></div>';
+						'" class="map-of-science-links">' + i18nStrings.saveAllAsCSV + '</a></div>';
 		me.tableDiv.append(csvButton);
 		
 		/* Create mapping statistic result */

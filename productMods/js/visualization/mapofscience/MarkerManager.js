@@ -3,6 +3,9 @@
  * The MarkerManager is more like a composite class of Marker. It manages 
  * markers by grouping the markers by keys. 
  */
+
+$.extend(this, i18nStrings);
+
 var MarkerManager = Class.extend({
 	init: function() {
 		this.keyToMarker = {};
@@ -184,8 +187,8 @@ var DisciplineMarkerManager = ScimapMarkerManager.extend({
 		marker.setContent( 
 				'<div style="font-size: 80%; padding: 5px; text-align: left;"><b>'
 				+ poly.label +'</b><br />'
-				+ addCommasToNumber(poly.value.toFixed(2)) + ' publications (pubs.)<br />'
-				+ (poly.value * 100 / this.maxValue).toFixed(2) + '% activity</div>'
+				+ addCommasToNumber(poly.value.toFixed(2)) + ' ' + i18nStrings.publicationsPubs + '<br />'
+				+ (poly.value * 100 / this.maxValue).toFixed(2) + i18nStrings.percentActivity
 		);
 		return marker;
 	}
@@ -205,8 +208,8 @@ var SubdisciplineMarkerManager = ScimapMarkerManager.extend({
 		marker.setContent(
 			'<div style="font-size: 80%; padding: 5px; text-align: left;"><b>'
 			+ poly.label + '</b> in ' + disciplineLabel +'<br />' 
-			+ addCommasToNumber(poly.value.toFixed(2)) + ' publications (pubs.)<br />'
-			+ (poly.value * 100 / this.maxValue).toFixed(2) + '% activity</div>'
+			+ addCommasToNumber(poly.value.toFixed(2)) + ' ' + i18nStrings.publicationsPubs + '<br />'
+			+ (poly.value * 100 / this.maxValue).toFixed(2) + i18nStrings.percentActivity
 		);
 		
 		return marker;

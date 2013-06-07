@@ -1,5 +1,7 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
+$.extend(this, i18nStrings);
+
 var ScimapWidget = Class.extend({
 	init: function(map) {
 		var me = this;
@@ -48,7 +50,7 @@ var ScimapWidget = Class.extend({
 			me.disciplineLabelsControl = new CheckBoxPanel({ 
 				map: map,
 				checked: true,
-				text: "Show discipline labels",
+				text: i18nStrings.showDisciplineLabels,
 				click: function() {
 					if($(this).attr('checked')) {
 						me.labelsMarkerManager.showMarkers();
@@ -204,9 +206,9 @@ var ScimapWidget = Class.extend({
 			var length = manager.length();
 			var slider = this.sliderControl;
 			if (this.getMarkerManager(SCIMAP_TYPE.DISCIPLINE) == manager) {
-				slider.setTypeString("disciplines");
+				slider.setTypeString(i18nStrings.disciplinesLower);
 			} else {
-				slider.setTypeString("subdisciplines");
+				slider.setTypeString(i18nStrings.subdisciplinesLower);
 			}
 			slider.setMin(Math.min(1, length));
 			slider.setMax(length);

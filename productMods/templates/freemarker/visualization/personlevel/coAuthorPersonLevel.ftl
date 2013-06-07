@@ -58,6 +58,18 @@ var contextPath = "${urls.base}";
 var visualizationDataRoot = "${dataVisualizationURLRoot}";
 
 // -->
+var i18nStringsCoauthorship = {
+    coAuthorsString: '${i18n().co_authors_capitalized}',
+    authorString: '${i18n().author_capitalized}',
+    publicationsWith: '${i18n().publications_with}',
+    publicationsString: '${i18n().publication_s_capitalized}',
+    coauthorsString: '${i18n().co_author_s_capitalized}'
+};
+var i18nStringsPersonLvl = {
+    fileCapitalized: '${i18n().file_capitalized}',
+    contentRequiresFlash: '${i18n().content_requires_flash}',
+    getFlashString: '${i18n().get_flash}'
+};
 </script>
 
 <script type="text/javascript" src="${coAuthorPersonLevelJavaScript}"></script>

@@ -4,6 +4,7 @@ $(document).ready(function(){
     
     $.extend(this, urlsBase);
     $.extend(this, facultyMemberCount);
+    $.extend(this, i18nStrings);
 
     // this will ensure that the hidden classgroup input is cleared if the back button is used
     // to return to th ehome page from the search results
@@ -51,7 +52,7 @@ $(document).ready(function(){
             $.getJSON(url, function(results) {
             
                 if ( results == null || results.individuals.length == 0 ) {
-                    individualList = "<p><li>No faculty members found.</li></p>";
+                    individualList = "<p><li>" + i18nStrings.noFacultyFound + "</li></p>";
                     $('div#tempSpacing').hide();
                     $('div#research-faculty-mbrs ul#facultyThumbs').append(individualList);
                 } 
@@ -66,7 +67,7 @@ $(document).ready(function(){
                 
                     $.each($('div#research-faculty-mbrs ul#facultyThumbs li.individual'), function() {
                         if ( $(this).children('img').length == 0 ) {
-                            var imgHtml = "<img width='60' alt='placeholder image' src='" + urlsBase + "/images/placeholders/person.bordered.thumbnail.jpg'>";
+                            var imgHtml = "<img width='60' alt='" + i18nStrings.placeholderImage + "' src='" + urlsBase + "/images/placeholders/person.bordered.thumbnail.jpg'>";
                             $(this).prepend(imgHtml);
                         }
                         else { 
@@ -77,14 +78,15 @@ $(document).ready(function(){
                     });
                     var viewMore = "<ul id='viewMoreFac'><li><a href='"
                                 + urlsBase
-                                + "/people/%23http://vivoweb.org/ontology/core%23FacultyMember' alt='view all faculty'>"
-                                + "View all ...</a></li?</ul>";
+                                + "/people/%23http://vivoweb.org/ontology/core%23FacultyMember' alt='" 
+                                + i18nStrings.viewAllFaculty + "'>"
+                                + i18nStrings.viewAllString + "</a></li?</ul>";
                     $('div#research-faculty-mbrs').append(viewMore);
                 }
             });
        }
        else {
-           individualList = "<p><li>No faculty members found.</li></p>";
+           individualList = "<p><li>" + i18nStrings.noFacultyFound + "</li></p>";
            $('div#tempSpacing').hide();
            $('div#research-faculty-mbrs ul#facultyThumbs').append(individualList);
            $('div#research-faculty-mbrs ul#facultyThumbs').css("padding", "1.0em 0 0.825em 0.75em");
@@ -108,7 +110,8 @@ $(document).ready(function(){
         var index = Math.floor((Math.random()*deptNbr)+1)-1;
         
         if ( deptNbr == 0 ) {
-            html = "<ul style='list-style:none'><p><li style='padding-top:0.3em'>No academic departments found.</li></p></ul>";
+            html = "<ul style='list-style:none'><p><li style='padding-top:0.3em'>"
+                   + i18nStrings.noDepartmentsFound + "</li></p></ul>";
         }
         else if ( deptNbr > 6 ) {
             for ( var i=0;i<6;i++) {
@@ -126,7 +129,12 @@ $(document).ready(function(){
             }
         }
         if ( deptNbr > 0 ) {
-            html += "</ul><ul style='list-style:none'><li style='font-size:0.9em;text-align:right;padding: 6px 16px 0 0'><a href='" + urlsBase + "/organizations/%23http://vivoweb.org/ontology/core%23AcademicDepartment' alt='view all academic departments'>View all ...</a></li></ul>";
+            html += "</ul><ul style='list-style:none'>"
+                    + "<li style='font-size:0.9em;text-align:right;padding: 6px 16px 0 0'><a href='" 
+                    + urlsBase 
+                    + "/organizations/%23http://vivoweb.org/ontology/core%23AcademicDepartment' alt='" 
+                    + i18nStrings.viewAllDepartments + "'>" 
+                    + i18nStrings.viewAllString + "</a></li></ul>";
         }
         $('div#academic-depts').html(html);
     }

@@ -81,8 +81,7 @@
     </span>
     <#if editable && profilePageTypesEnabled >
         <div id="profileTypeContainer" <#if editable>style="margin-top:22px"</#if>>
-            <!-- The text in this h2 element is set via the wilma.css file -->
-            <h2></h2>
+            <h2>${i18n().profile_type}</h2>
             <select id="profilePageType">
                 <option value="standard" <#if profileType == "standard" || profileType == "none">selected</#if> >${i18n().standard_view}</option>
                 <option value="quickView" <#if profileType == "quickView">selected</#if> >${i18n().quick_view}</option>
@@ -200,6 +199,13 @@ var profileTypeData = {
     processingUrl: '${urls.base}/edit/primitiveRdfEdit',
     individualUri: '${individual.uri!}',
     defaultProfileType: '${profileType!}'
+};
+var i18nStrings = {
+    errorProcessingTypeChange: '${i18n().error_processing_type_change}',
+    displayLess: '${i18n().display_less}',
+    displayMoreEllipsis: '${i18n().display_more_ellipsis}',
+    showMoreContent: '${i18n().show_more_content}',
+    verboseTurnOff: '${i18n().verbose_turn_off}'
 };
 </script>
 <#if editable>

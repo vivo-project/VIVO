@@ -1700,9 +1700,6 @@ input[type="submit"] {
 .edit-individual {
     border-left: 1px dotted #B2D15A;
 }
-div#profileTypeContainer h2:after {
-    content:"Profile Type";
-}
 /* ------------------------------------------------->  */
 /* SITE ADMIN DASHBOARD ---------------------------->  */
 /* ------------------------------------------------->  */

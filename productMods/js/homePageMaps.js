@@ -8,6 +8,7 @@ $(document).ready(function(){
     var researchAreas = { "type": "FeatureCollection", "features": []};
     
     $.extend(this, urlsBase);
+    $.extend(this, i18nStrings);
     
     getGeoJsonForMaps();
     
@@ -66,10 +67,10 @@ $(document).ready(function(){
 		}
 		if (feature.properties && feature.properties.html) {
 		    if ( feature.properties.html == "1") {
-			    popupContent += ": " + feature.properties.html + " researcher";
+			    popupContent += ": " + feature.properties.html + " " + i18nStrings.researcherString;
 			}
 		    else {
-			    popupContent += ": " + feature.properties.html + " researchers";
+			    popupContent += ": " + feature.properties.html + " " + i18nStrings.researchersString;
 			}
 		}
         layer.on('mouseover', function(e) {
@@ -313,7 +314,7 @@ $(document).ready(function(){
                 
                 var results = $.parseJSON(xhr.responseText);
                 if ( results.length == 0 ) {
-                    var html = "There are currently no researchers with a defined geographic focus.";
+                    var html = i18nStrings.currentlyNoResearchers;
                     $('section#home-geo-focus div#timeIndicator span').html(html);
                     $('section#home-geo-focus').css("height","175px");
                     $('section#home-geo-focus div#timeIndicator').css("margin-top","50px");
@@ -341,13 +342,13 @@ $(document).ready(function(){
         var areaCount = 0;
         var text = "";
         if ( area == "global" ) {
-            text = " countries and regions.";
+            text = " " + i18nStrings.countriesAndRegions;
         }
         else if ( area == "US" ) {
-            text = " states.";
+            text = " " + i18nStrings.stateString;
         }
         else {
-            text = " state-wide locations.";
+            text = " " + i18nStrings.statewideLocations;
         }
 
         $.each(researchAreas.features, function() {
@@ -358,12 +359,12 @@ $(document).ready(function(){
         });
 
         if ( areaCount == 1 && text == " states.") {
-            text = " state.";
+            text = " " + i18nStrings.stateString;
         }
 
         $('div#researcherTotal').html("<font style='font-size:1.05em;color:#167093'>" 
                                         + researcherCount.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2') 
-                                        + "</font> researchers in <font style='font-size:1.05em;color:#167093'>" 
+                                        + "</font> " + i18nStrings.researchersInString + " <font style='font-size:1.05em;color:#167093'>" 
                                         + areaCount + "</font>" + text);
     }
     

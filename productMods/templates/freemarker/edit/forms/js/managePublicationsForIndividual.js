@@ -14,6 +14,7 @@ var managePublications = {
 
         // Get the custom form data from the page
         $.extend(this, customFormData);
+        $.extend(this, i18nStrings);
     },
 
     // Initial page setup. Called only at page load.
@@ -68,10 +69,10 @@ var managePublications = {
             complete: function(request, status) {
             
                 if (status === 'success') {
-                    window.status = "The publication will has been successfully excluded from the profile page."; 
+                    window.status = managePublications.publicationSuccessfullyExcluded; 
 
                 } else {
-                    alert('Error processing request: the publication cannot be excluded from the profile page.');
+                    alert(managePublications.errorExcludingPublication);
                     $(publication).removeAttr('checked');
                 }
             }

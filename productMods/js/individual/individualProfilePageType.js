@@ -20,6 +20,7 @@ var profilePageType = {
 
         // Get the custom form data from the page
         $.extend(this, profileTypeData);
+        $.extend(this, i18nStrings);
     },
 
     // Initial page setup. Called only at page load.
@@ -65,7 +66,7 @@ var profilePageType = {
                     location.reload(true);
                 }
                 else {
-                    alert('Error processing request: the unchecked labels could not be deleted.');
+                    alert(profilePageType.errorProcessingTypeChange);
                     $('select#profilePageType').val(profilePageType.selectedProfileType);
                 }
             }

@@ -43,6 +43,10 @@ ${i18n().check_people_to_exclude}
 var customFormData = {
     processingUrl: '${urls.base}/edit/primitiveRdfEdit'
 };
+var i18nStrings = {
+    personSuccessfullyExcluded: '${i18n().person_successfully_excluded}',
+    errorExcludingPerson: '${i18n().error_excluding_person}'
+};
 </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />',

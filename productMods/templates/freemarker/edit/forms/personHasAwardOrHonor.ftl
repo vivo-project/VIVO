@@ -192,7 +192,15 @@ var customFormData  = {
     multipleTypeNames: {award: 'award', org: 'organization'},
     baseHref: '${urls.base}/individual?uri=',
     blankSentinel: '${blankSentinel}',
-    flagClearLabelForExisting: '${flagClearLabelForExisting}'};
+    flagClearLabelForExisting: '${flagClearLabelForExisting}'
+};
+var i18nStrings = {
+    selectAnOrganization: '${i18n().select_or_create_organization}',
+    selectAnExisting: '${i18n().select_an_existing}',
+    orCreateNewOne: '${i18n().or_create_new_one}',
+    selectedString: '${i18n().selected}',
+};
+
 </script>
 
  

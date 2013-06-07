@@ -47,6 +47,10 @@ ${i18n().check_grants_to_exclude}
 var customFormData = {
     processingUrl: '${urls.base}/edit/primitiveRdfEdit'
 };
+var i18nStrings = {
+    grantSuccessfullyExcluded: '${i18n().grant_successfully_excluded}',
+    errorExcludingGrant: '${i18n().error_excluding_grant}'
+};
 </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />',

@@ -1,10 +1,12 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
+$.extend(this, i18nStrings);
+
 var ComparisonDataTableWidget = Class.extend({
 	
 	dom: {
-		firstFilterLabel: "Organizations",
-		secondFilterLabel: "People",
+		firstFilterLabel: i18nStrings.organizationsString,
+		secondFilterLabel: i18nStrings.peopleString,
 		
 		searchBarParentContainerClass : "comparisonSearchbar",
 		paginationContainerClass : "paginatedtabs",
@@ -67,7 +69,7 @@ var ComparisonDataTableWidget = Class.extend({
 		    	' | ' +
 		    	'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">' + dom.secondFilterLabel + '</span>' +
 	    	*/
-	    	'<img class="' + dom.filterInfoIconClass + '" id="comparisonImageIconTwo" src="'+ infoIconUrl +'" alt="information icon" title="" /></div>');
+	    	'<img class="' + dom.filterInfoIconClass + '" id="comparisonImageIconTwo" src="'+ infoIconUrl +'" alt="' + i18nStrings.infoIconString + '" title="" /></div>');
 		me.tableDiv.append(filter);
 		createToolTip($("#comparisonImageIconTwo"), $("#comparisonToolTipTwo").html(), "topLeft");
 		initFilter(dom);
@@ -81,7 +83,7 @@ var ComparisonDataTableWidget = Class.extend({
 		var tr = $('<tr>');
 		
 		var levelOfScienceAreaTH = $('<th>');
-		levelOfScienceAreaTH.html('Entity Type');
+		levelOfScienceAreaTH.html(i18nStrings.entityTypeString);
 		
 		var checkBoxTH = $('<th>');
 		checkBoxTH.html('');
@@ -89,13 +91,13 @@ var ComparisonDataTableWidget = Class.extend({
 		var scienceAreasTH = $('<th>');
 		scienceAreasTH.attr("id", "comparison-science-areas-th");
 		if (this.currentSelectedFilter === COMPARISON_TYPE.ORGANIZATION ) {
-			scienceAreasTH.html('Organization');
+			scienceAreasTH.html(i18nStrings.organizationString);
 		} else {
-			scienceAreasTH.html('Person');
+			scienceAreasTH.html(i18nStrings.personString);
 		}
 		
 		var activityCountTH = $('<th width="53">');
-		activityCountTH.html('# of pubs.');
+		activityCountTH.html('# ' + i18nStrings.numberOfPubs);
 		activityCountTH.attr("id", "activity-count-column");
 
 		tr.append(levelOfScienceAreaTH);
@@ -144,7 +146,7 @@ var ComparisonDataTableWidget = Class.extend({
 			if (element.attr('checked')) {
 				if ($("input:checkbox[class=chk]:checked").length > 3) {
 					element.attr('checked', false);
-					alert("The maximum number of items for comparison is 3.");
+					alert(i18nStrings.maxNbrForComp);
 				} else {
 					me.loadEntity(item.uri, index);
 				}
@@ -180,7 +182,7 @@ var ComparisonDataTableWidget = Class.extend({
 		    "bInfo": true,
 		    "oLanguage": {
 				"sInfo": "_START_ - _END_ of _TOTAL_",
-				"sInfoEmpty": "No matching science areas found",
+				"sInfoEmpty": i18nStrings.noMatchingScienceAreas,
 				"sInfoFiltered": ""
 			},
 		    "sPaginationType": "gmail_style",
@@ -198,8 +200,8 @@ var ComparisonDataTableWidget = Class.extend({
 		/* Create search box */
 		var searchInputBox = $("." + me.dom.searchBarParentContainerClass).find("input[type=text]");
 		searchInputBox.css("width", "140px");
-		searchInputBox.after("<span id='comparison-reset-search' title='Clear search query'>X</span>" 
-								+ "<img class='comparisonFilterInfoIcon' id='comparisonSearchInfoIcon' src='" + infoIconUrl + "' alt='information icon' title='' />");
+		searchInputBox.after("<span id='comparison-reset-search' title='" + i18nStrings.clearSearchQuery + "'>X</span>" 
+								+ "<img class='comparisonFilterInfoIcon' id='comparisonSearchInfoIcon' src='" + infoIconUrl + "' alt='" + i18nStrings.infoIconString + "' title='' />");
 		$("#comparison-reset-search").live('click', function() {
 			me.widget.fnFilter("");
 		});
@@ -208,18 +210,18 @@ var ComparisonDataTableWidget = Class.extend({
 		/* Create csv download button */
 		var csvButton = '<hr class="subtle-hr"/><div id="main-science-areas-table-footer"><a href="' +
 						comparisonScienceMapCsvDataUrlPrefix + me.uri +
-						'" class="map-of-science-links">Save All as CSV</a></div>';
+						'" class="map-of-science-links">' + i18nStrings.saveAllAsCSV + '</a></div>';
 		me.tableDiv.append(csvButton);
 	},
 	changeFilter: function(filterType) {
 		var me = this;
 		if (filterType === COMPARISON_TYPE.ORGANIZATION) {
 			
-			$("#comparison-science-areas-th").html("Organization");
+			$("#comparison-science-areas-th").html(i18nStrings.organizationString);
 			me.currentSelectedFilter = COMPARISON_TYPE.ORGANIZATION;
 		} else {
 			
-			$("#comparison-science-areas-th").html("Person");
+			$("#comparison-science-areas-th").html(i18nStrings.personString);
 			me.currentSelectedFilter = COMPARISON_TYPE.PERSON;
 			
 		}

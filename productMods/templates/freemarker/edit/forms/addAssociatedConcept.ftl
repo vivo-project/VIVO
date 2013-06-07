@@ -120,14 +120,25 @@
 
 
 
-    <script type="text/javascript">
-    var customFormData = {
+<script type="text/javascript">
+var customFormData = {
         dataServiceUrl: '${urls.base}/conceptSearchService',
         subjectUri: '${editConfiguration.subjectUri}',
         predicateUri: '${editConfiguration.predicateUri}',
         inversePredicateUri: '${inversePredicate}'
-    };
-    </script>
+};
+var i18nStrings = {
+    vocServiceUnavailable: '${i18n().vocabulary_service_unavailable}',
+    noResultsFound: '${i18n().no_serch_results_found}',
+    labelTypeString: '${i18n().label_type}',
+    definitionString: '${i18n().definition_capitalized}',
+    bestMatchString: '${i18n().best_match}',
+    selectTermFromResults: '${i18n().select_term_from_results}',
+    selectVocSource: '${i18n().select_vocabulary_source_to_search}',
+    confirmTermDelete: '${i18n().confirm_term_deletion}',
+    errorTernNotRemoved: '${i18n().error_term_not_deleted}'
+};
+</script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}

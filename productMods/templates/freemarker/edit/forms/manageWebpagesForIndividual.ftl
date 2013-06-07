@@ -41,7 +41,7 @@
             </span>
             <span class="editingLinks">
                 <a href="${baseEditWebpageUrl}&objectUri=${webpage.link?url}&predicateUri=${predicateUri}" class="edit" title="${i18n().edit_wepage_link}">${i18n().edit_capitalized}</a> | 
-                <a href="${urls.base}${deleteWebpageUrl}" class="remove" title="${i18n().delete_web_page_link}">${i18n().delete_capitalized}</a> 
+                <a href="${urls.base}${deleteWebpageUrl}" class="remove" title="${i18n().delete_web_page_link}">${i18n().delete_button}</a> 
             </span>
         </li>    
         
@@ -68,6 +68,12 @@
 var customFormData = {
     rankPredicate: '${editConfiguration.pageData.rankPredicate}',
     reorderUrl: '${urls.base}/edit/reorder'
+};
+var i18nStrings = {
+    dragDropToReorderWebpages: '${i18n().drag_drop_to_reorder_webpages}',
+    webpageReorderingFailed: '${i18n().webpage_reordering_failed}',
+    confirmWebpageDeletion: '${i18n().confirm_webpage_deletion}',
+    errorRemovingWebpage: '${i18n().error_removing_webpage}'
 };
 </script>
 

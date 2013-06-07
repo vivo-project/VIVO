@@ -70,6 +70,11 @@ Also multiple types parameter set to true only if more than one type returned-->
         sparqlQueryUrl: '${sparqlQueryUrl}',
         defaultTypeName: '${propertyPublicName}'
     };
+    var i18nStrings = {
+        selectExisting: '${i18n().select_an_existing}',
+        orCreateNewOne: '$i18n().or_create_new_one}',
+        selectedString: '$i18n().selected}'
+    };
     </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}

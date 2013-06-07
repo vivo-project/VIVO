@@ -19,6 +19,14 @@
 </#assign>
 
 <#include "individual-vitro.ftl">
+<script>
+var i18nStrings = {
+    displayLess: '${i18n().display_less}',
+    displayMoreEllipsis: '${i18n().display_more_ellipsis}',
+    showMoreContent: '${i18n().show_more_content}',
+    verboseTurnOff: '${i18n().verbose_turn_off}',
+};
+</script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />')}
 

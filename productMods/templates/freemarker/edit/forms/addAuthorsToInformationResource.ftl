@@ -30,7 +30,7 @@
 
 <#assign title="<em>${editConfiguration.subjectName}</em>" />
 <#assign requiredHint="<span class='requiredHint'> *</span>" />
-<#assign initialHint="<span class='hint'>(${i18n().initial okay})</span>" />
+<#assign initialHint="<span class='hint'>(${i18n().initial_okay})</span>" />
 
 <@lvf.unsupportedBrowser urls.base/>
 
@@ -184,12 +184,22 @@ var customFormData = {
     orgUrl: 'http://xmlns.com/foaf/0.1/Organization',
     reorderUrl: '${urls.base}/edit/reorder'
 };
+var i18nStrings = {
+    authorNameWrapperTitle: '${i18n().drag_drop_reorder_authors}',
+    reorderAuthorsAlert: '${i18n().reordering_authors_failed}',
+    removeAuthorshipMessage: '${i18n().confirm_author_removal}',
+    removeAuthorshipAlert: '${i18n().error_processing_aithor_request}',
+    authorTypeText: '${i18n().author_capitalized}',
+    organizationTypeText: '${i18n().organization_capitalized}',
+    helpTextSelect: '${i18n().select_an_existing}',
+    helptextAdd: '${i18n().or_add_new_one}'
+};
 </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />',
-									'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />',
-									'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/autocomplete.css" />',
-									'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/addAuthorsToInformationResource.css" />')}
+					'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />',
+					'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/autocomplete.css" />',
+					'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/addAuthorsToInformationResource.css" />')}
 
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>')}
