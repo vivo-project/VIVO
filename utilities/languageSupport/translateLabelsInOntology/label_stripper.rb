@@ -19,6 +19,7 @@ $: << File.dirname(File.expand_path(__FILE__))
 require 'rubygems'
 require 'rdf'
 require 'label_common'
+require 'rdf/n3'
 
 include RDF
 
@@ -87,7 +88,8 @@ end
 # ------------------------------------------------------------------------------------
 #
 
-vivo_filter = lambda {|s| s.prop.start_with?("http://vivoweb.org/ontology/core#") && !s.label.to_s.strip.empty?}
+#vivo_filter = lambda {|s| s.prop.start_with?("http://vivoweb.org/ontology/core#") && !s.label.to_s.strip.empty?}
+vivo_filter = lambda {|s| !s.label.to_s.strip.empty?}
 
 if File.expand_path($0) == File.expand_path(__FILE__)
   stripper = LabelStripper.new(ARGV)

@@ -8,6 +8,7 @@ require 'rubygems'
 require 'rdf'
 require 'rdf/rdfxml'
 require 'rdf/ntriples'
+require 'rdf/n3'
 
 include RDF
     
