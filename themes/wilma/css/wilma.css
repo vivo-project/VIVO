@@ -1377,8 +1377,6 @@ ul#alpha-browse-individuals a:hover {
 ul#alpha-browse-individuals a.selected {
     color: #2ea0cf;
     background: url(../images/arrowSmall.gif) -3px 7px no-repeat;
-    margin-right: 3px;
-    margin-left: 5px;
 }
 ul#alpha-browse-individuals .count-classes {
     font-size: .75em;
