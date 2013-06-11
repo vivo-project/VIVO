@@ -3,7 +3,6 @@
 $(document).ready(function(){
         
     $.extend(this, individualLocalName);
-    $.extend(this, i18nStringsTabs);
     adjustFontSize();
     padSectionBottoms();
     checkLocationHash();
@@ -34,7 +33,7 @@ $(document).ready(function(){
                 $propertyGroupLi.removeClass("nonSelectedGroupTab clickable");
                 $propertyGroupLi.addClass("selectedGroupTab clickable");
             }
-            if ( $propertyGroupLi.text() == i18nStringsTabs.viewAllCapitalized ) {
+            if ( $propertyGroupLi.attr("groupname") == "viewAll" ) {
                 processViewAllTab();
             }
             else {
