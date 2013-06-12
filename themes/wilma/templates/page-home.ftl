@@ -46,7 +46,7 @@
                         <div id="search-home-field">
                             <input type="text" name="querytext" class="search-homepage" value="" autocapitalize="off" />
                             <input type="submit" value="${i18n().search_button}" class="search" />
-                            <input type="hidden" name="classgroup" class="search-homepage" value="" autocapitalize="off" />
+                            <input type="hidden" name="classgroup"  value="" autocapitalize="off" />
                         </div>
                 
                         <a class="filter-search filter-default" href="#" title="${i18n().intro_filtersearch}">
@@ -85,7 +85,7 @@
         <#include "footer.ftl">
         <#-- builds a json object that is used by js to render the academic departments section -->
         <@lh.listAcademicDepartments />
-        <script>
+    <script>       
         var i18nStrings = {
             researcherString: '${i18n().researcher}',
             researchersString: '${i18n().researchers}',
@@ -102,6 +102,11 @@
             viewAllDepartments: '${i18n().view_all_departments}',
             noDepartmentsFound: '${i18n().no_departments_found}'
         };
-        </script>
+        // set the 'limmit search' text and alignment
+        if  ( $('input.search-homepage').css('text-align') == "right" ) {       
+             $('input.search-homepage').attr("value","${i18n().limit_search} \u2192");
+        }  
+        
+    </script>
     </body>
 </html>

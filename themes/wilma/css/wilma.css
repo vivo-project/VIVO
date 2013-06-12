@@ -839,9 +839,9 @@ a.filter-search {
 input.search-homepage {
 		border: 0;
 		background-color: #f9fafa;
-		background: url('../images/limit-search.png') no-repeat;
 		background-position: right;
-		opacity: .7;
+		opacity: .5;
+		text-align:right; 
 }
 
 .filter-default {
