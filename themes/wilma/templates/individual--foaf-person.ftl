@@ -87,7 +87,7 @@
     
 </section>
 
-<#assign nameForOtherGroup = "other"> <#-- used by both individual-propertyGroupMenu.ftl and individual-properties.ftl -->
+<#assign nameForOtherGroup = "${i18n().other}"> 
 
 <#-- Ontology properties -->
 <#if !editable>

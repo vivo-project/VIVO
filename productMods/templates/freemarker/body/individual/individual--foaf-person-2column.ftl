@@ -107,8 +107,7 @@
     </section> <!-- end individual-info -->
 </section> <!-- end individual-intro -->
 
-<#assign nameForOtherGroup = "other"> <#-- individual-properties.ftl -->
-<#-- Ontology properties --> 
+<#assign nameForOtherGroup = "${i18n().other}">
 <#if !editable>
 	<#-- We don't want to see the first name and last name unless we might edit them. -->
 	<#assign skipThis = propertyGroups.pullProperty("http://xmlns.com/foaf/0.1/firstName")!> 
