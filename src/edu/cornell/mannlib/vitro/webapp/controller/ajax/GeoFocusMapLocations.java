@@ -73,8 +73,8 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
                     if ( label.contains("Ivoire") ) {
                         name = "Ivory Coast";
                     }
-                    else if ( label.contains("New York State") ) {
-                        name = "New York";
+                    else if ( label.contains("United States of America") ) {
+                        name = "United States of America";
                     }
                     else if ( label.contains("United Kingdom") ) {
                         name = "United Kingdom";
