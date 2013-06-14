@@ -1,3 +1,4 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.visutils;
 
 import java.util.concurrent.locks.ReentrantLock;
@@ -8,19 +9,8 @@ import java.util.concurrent.locks.Lock;
 construction of the models to resolve concurrency issue*/
 
 public final class CustomLock{
-	private static final CustomLock instance = new CustomLock();
-	private static Lock lock;
-	private CustomLock()
-	{
-		this.lock = new ReentrantLock();
-	
-	}
-	
-	public static CustomLock getInstance()
-	{
-		return instance;
-	}
-	
+	private static final Lock lock = new ReentrantLock();
+
 	public static Lock getLock()
 	{
 		return lock;
