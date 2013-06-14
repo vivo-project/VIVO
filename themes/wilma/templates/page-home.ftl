@@ -91,6 +91,8 @@
             researchersString: '${i18n().researchers}',
             currentlyNoResearchers: '${i18n().currently_no_researchers}',
             countriesAndRegions: '${i18n().countries_and_regions}',
+            countriesString: '${i18n().countries}',
+            regionsString: '${i18n().regions}',
             statesString: '${i18n().map_states_string}',
             stateString: '${i18n().map_state_string}',
             statewideLocations: '${i18n().statewide_locations}',
