@@ -158,7 +158,11 @@ var i18nStrings = {
     displayLess: '${i18n().display_less}',
     displayMoreEllipsis: '${i18n().display_more_ellipsis}',
     showMoreContent: '${i18n().show_more_content}',
-    verboseTurnOff: '${i18n().verbose_turn_off}'
+    verboseTurnOff: '${i18n().verbose_turn_off}',
+    standardviewTooltipOne: '${i18n().standardview_tooltip_one}',
+    standardviewTooltipTwo: '${i18n().standardview_tooltip_two}',
+    researchAreaTooltipOne: '${i18n().research_area_tooltip_one}',
+    researchAreaTooltipTwo: '${i18n().research_area_tooltip_two}'
 };
 var i18nStringsUriRdf = {
     shareProfileUri: '${i18n().share_profile_uri}',
