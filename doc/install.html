@@ -827,6 +827,41 @@
                     
                     <tr>
                         <td colspan="2">
+                          On the VIVO home page, display a global map highlighting the geographical focus
+                          of foaf:person individuals. The default is <code>enabled</code>.
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                          homePage.geoFocusMaps = enabled
+                        </td>
+                        <td>
+                          enabled
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2">
+                          <b>MultiViews for foaf:person profile pages.</b>
+                          VIVO supports the simultaneous use of a full foaf:Person profile page view 
+                          and a "quick" page view that emphasizes the individual's own webpage presence.
+                          <b>Implementing this feature requires an installation to develop a web service
+                          that captures images of web pages or to use an existing service outside of VIVO, 
+                          usually for a small fee.</b>
+                          The default is <code>disabled</code>.
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                          MultiViews.profilePageTypes=disabled
+                        </td>
+                        <td>
+                          disabled
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2">
 							These values are used when deploying VIVO as an OpenSocial container
 							and integrating with OpenSocial gadgets 
 							(see <a href="#opensocial">Step 13</a>, below). If you are creating
