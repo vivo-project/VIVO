@@ -115,7 +115,7 @@ $(document).ready(function(){
         }
         else if ( deptNbr > 6 ) {
             for ( var i=0;i<6;i++) {
-                html += "<li><a href='${urls.base}/display" 
+                html += "<li><a href='" + urlsBase + "/display" 
                         + academicDepartments[index].uri + "'>" 
                         + academicDepartments[index].name + "</a></li>";
                 index = Math.floor((Math.random()*deptNbr)+1)-1;
@@ -123,7 +123,7 @@ $(document).ready(function(){
         }
         else {
             for ( var i=0;i<deptNbr;i++) {
-                html += "<li><a href='${urls.base}/display" 
+                html += "<li><a href='" + urlsBase + "/display" 
                         + academicDepartments[i].uri + "'>" 
                         + academicDepartments[i].name + "</a></li>";
             }
