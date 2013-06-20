@@ -1,10 +1,10 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in /doc/license.txt$  -->
 <#if deptResearchAreas?has_content>
     <section id="pageList">
         <#list deptResearchAreas as firstRow>
         <div class="tab">
             <h2>${firstRow["raLabel"]}</h2>
-            <p>${i18n().faculty_with_researh_area(firstRow["deptLabel"])} <a href="${urls.base}/display${firstRow["raURI"]?substring(firstRow["raURI"]?last_index_of("/"))}">${i18n().view_all_faculty_in_area}</a></p>
+            <p>${i18n().faculty_with_researh_area(firstRow["deptLabel"])} <a href="${urls.base}/individual?uri=${firstRow["raURI"]}">${i18n().view_all_faculty_in_area}</a></p>
         </div>
         <#break>
         </#list>

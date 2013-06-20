@@ -12,7 +12,7 @@
     <!--PREINDIVIDUAL OVERVIEW.FTL-->
     <#include "individual-webpage.ftl">
     <#include "individual-overview.ftl">
-    ${departmentalResearchAreas!}
+    ${affiliatedResearchAreas!}
         </section> <!-- #individual-info -->
     </section> <!-- #individual-intro -->
     <!--postindiviudal overiew tfl-->

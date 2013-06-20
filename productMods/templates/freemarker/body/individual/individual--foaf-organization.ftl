@@ -13,6 +13,10 @@
     </#assign>
 </#if>
 
+<#assign affiliatedResearchAreas>
+    <#include "individual-affiliated-research-areas.ftl">
+</#assign>
+
 <#if individual.mostSpecificTypes?seq_contains("Academic Department")>
     <#assign departmentalGrantsExtension>    
         <div id="activeGrantsLink">
@@ -22,14 +26,6 @@
             </a>    
         </div>
     </#assign>
-    
-    <#assign departmentalResearchAreas>
-        <#include "individual-dept-research-areas.ftl">
-    </#assign>
-    
-    <#assign departmentalMemberships>
-        <#include "individual-dept-memberships.ftl">
-    </#assign>    
 </#if>
 
 <#include "individual.ftl">
