@@ -24,7 +24,7 @@ require 'label_common'
 
 include RDF
 
-class LabelStripper
+class LabelInserter
   # ------------------------------------------------------------------------------------
   private
   # ------------------------------------------------------------------------------------
@@ -33,29 +33,32 @@ class LabelStripper
   # Parse the arguments and complain if they don't make sense.
   #
   def sanity_check_arguments(args)
-    raise "usage is: label_inserter.rb <rdf_file> <labels_input_file> <locale> <n3_output_file> [ok]" unless (4..5).include?(args.length)
-
-	if args[4].nil?
-	  ok = false
-	elsif args[4].downcase == 'ok'
+   	if args[-1].downcase == 'ok'
 	  ok = true
+	  args.pop
 	else
-	  raise "fifth argument, if present, must be 'ok'"
+	  ok = false
     end
-        
+
+    raise UsageError, "usage is: label_inserter.rb <rdf_file> <labels_input_file> <locale> [filter_file] <n3_output_file> [ok]" unless (4..5).include?(args.length)
+
+    n3_output_file = args.pop
+    raise UsageError, "File '#{n3_output_file}' already exists. specify 'ok' to overwrite it." if File.exist?(n3_output_file) && !ok
+
     rdf_file = args[0]
-    raise "File '#{rdf_file}' does not exist." unless File.exist?(rdf_file)
+    raise UsageError, "File '#{rdf_file}' does not exist." unless File.exist?(rdf_file)
 
     labels_input_file = args[1]
-    raise "File '#{labels_input_file}' does not exist." unless File.exist?(labels_input_file)
+    raise UsageError, "File '#{labels_input_file}' does not exist." unless File.exist?(labels_input_file)
 
     locale = args[2]
-    raise "Locale should be like 'ab' or 'ab-CD'." unless /^[a-z]{2}(-[A-Z]{2})?$/ =~ locale
+    raise UsageError, "Locale should be like 'ab' or 'ab-CD'." unless /^[a-z]{2}(-[A-Z]{2})?$/ =~ locale
 
-    n3_output_file = args[3]
-    raise "File '#{n3_output_file}' already exists. specify 'ok' to overwrite it." if File.exist?(n3_output_file) && !ok
+    filter_file = args[3]
+    raise UsageError, "File '#{filter_file}' does not exist." if filter_file && !File.exist?(filter_file)
+    filter = LabelCommon.load_filter(filter_file)
 
-    return rdf_file, labels_input_file, locale, n3_output_file
+    return rdf_file, labels_input_file, locale, filter, n3_output_file
   end
   
   # ------------------------------------------------------------------------------------
@@ -63,19 +66,23 @@ class LabelStripper
   # ------------------------------------------------------------------------------------
 
   def initialize(args)
-    @rdf_file, @labels_input_file, @locale, @n3_output_file = sanity_check_arguments(args)
+    @rdf_file, @labels_input_file, @locale, @filter, @n3_output_file = sanity_check_arguments(args)
+  rescue UsageError => e
+    puts "\n----------------\nUsage error\n----------------\n\n#{e}\n\n----------------\n\n"
+    exit
+  rescue FilterError => e
+    puts "\n----------------\nFilter file is invalid\n----------------\n\n#{e}\n\n----------------\n\n"
+    exit
   end
   
-  def process(&filter)
-    filter = filter || lambda{true}
-    
+  def process()
     query = Query.new({
       :prop => {
         RDFS.label => :label,
         }
       })
 
-    solutions = LabelCommon.new(@rdf_file).process(query, &filter)
+    solutions = LabelCommon.new(@rdf_file).process(query, &@filter)
 
     labels = IO.readlines(@labels_input_file)
     
@@ -105,10 +112,7 @@ end
 # ------------------------------------------------------------------------------------
 #
 
-#vivo_filter = lambda {|s| s.prop.start_with?("http://vivoweb.org/ontology/core#") && !s.label.to_s.strip.empty?}
-vivo_filter = lambda {|s| !s.label.to_s.strip.empty?}
-
 if File.expand_path($0) == File.expand_path(__FILE__)
-  stripper = LabelStripper.new(ARGV)
-  stripper.process(&vivo_filter) 
+  inserter = LabelInserter.new(ARGV)
+  inserter.process() 
 end

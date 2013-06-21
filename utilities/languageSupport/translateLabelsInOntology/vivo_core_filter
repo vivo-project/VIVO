@@ -1,0 +1,12 @@
+lambda {|s| 
+  (
+    s.prop.start_with?("http://vivoweb.org/ontology/core#") ||
+    s.prop.start_with?("http://vitro.mannlib.cornell.edu/ns/") ||
+    s.prop.start_with?("http://purl.org/ontology/bibo/") ||
+    s.prop.start_with?("http://xmlns.com/foaf/0.1/") ||
+    s.prop.start_with?("http://purl.org/dc/terms/") ||
+    s.prop.start_with?("http://purl.org/dc/elements/1.1/") ||
+    s.prop.start_with?("http://purl.org/NET/c4dm/event.owl#") ) &&
+  !s.label.to_s.strip.empty?
+}
+
