@@ -42,6 +42,7 @@
 	                    <ol class="roman2">
 	                        <li><a href="#more_portable">VIVO becomes more portable</a></li>
 	                        <li><a href="#solr_insecure">Solr is no longer secured</a></li>
+	                        <li><a href="#log4j_properties">Log4J properties file renamed</a></li>
 	                        <li><a href="#BOGUS">ANYTHING ELSE?</a></li>
 	                    </ol>
 					</li>					
@@ -154,6 +155,18 @@
              	        </p>
              	        <p>
              	            Sites that need to secure Solr are now left to their own devices.
+             	        </p>
+
+                	    <h4 id="log4j_properties">Log4J properties file renamed</h4>
+             	        <p>
+             	            In previous releases, the properties file for the VIVO logging system
+             	            was called <code>default.log4j.properties</code>. In release 1.6, this
+             	            file has been renamed to <code>log4j.properties</code>. This is so the 
+             	            developers and implementers will know where to look for the file.
+             	        </p>
+             	        <p>
+             	            Note that <code>debug.log4j.properties</code>, if present, will still 
+             	            override the default.
              	        </p>
 
                 	    <h4 id="BOGUS">ANYTHING ELSE?</h4>
