@@ -43,6 +43,11 @@
 	                        <li><a href="#more_portable">VIVO becomes more portable</a></li>
 	                        <li><a href="#solr_insecure">Solr is no longer secured</a></li>
 	                        <li><a href="#log4j_properties">Log4J properties file renamed</a></li>
+                    	    <li><a href="#tabMenu">Property groups now displayed in a tab format</a></li>
+                    	    <li><a href="#sparqlDataGetters">Class-specific SPARQL Query Data Getters</a></li>
+                    	    <li><a href="#foafPersonTemplate">The foaf:Person template has been re-located.</a></li>
+                    	    <li><a href="#multiple">Multiple foaf:Person Profile Pages</a></li>
+                    	    <li><a href="#homePage">Home Page Re-design</a></li>
 	                        <li><a href="#BOGUS">ANYTHING ELSE?</a></li>
 	                    </ol>
 					</li>					
@@ -167,6 +172,60 @@
              	        <p>
              	            Note that <code>debug.log4j.properties</code>, if present, will still 
              	            override the default.
+             	        </p>
+
+                	    <h4 id="tabMenu">Property groups now displayed in a tab format, including a "View All" tab</h4>
+             	        <p>
+             	            With release 1.6, the property group menu bar that was used on profile pages has been replaced 
+             	            by java script enabled tabs. When clicked, each property group tab will display the properties 
+             	            within that group while the contents of the previously displayed group will be hidden. The array of
+             	            tabs also includes a "View All" tab that, when clicked, displays the contents of all the property groups. 
+             	        </p>
+
+                	    <h4 id="sparqlDataGetters">Class-specific SPARQL Query Data Getters</h4>
+             	        <p>
+             	            The VIVO software now supports the development of SPARQL query data getters that can be associated 
+             	            with specific ontological classes. These data getters, in turn, can be accessed within Freemarker 
+             	            templates to provide richer content on VIVO profile pages. For example, the profile page for an academic 
+             	            department lists only the names of the faculty within that department and their titles, but with a SPARQL 
+             	            query data getter it is now possible to extend the faculty information to display all of the faculty 
+             	            members' research areas. Refer to this wiki page for details on how to use class-specific SPARQL query 
+             	            data getters: 
+             	            <code>https://wiki.duraspace.org/display/VIVO/Enriching+VIVO+Content+Using+SPARQL+Query+Data+Getters</code>.
+             	        </p>
+
+                	    <h4 id="foafPersonTemplate">The foaf:Person template has been re-located.</h4>
+             	        <p>
+             	            The template individual--foaf-person.ftl has been moved to the "templates" subdirectory in the wilma 
+             	            theme directory (vivo/themes/wilma/templates). If your installation has a customized version of 
+             	            individual--foaf-person.ftl, ensure that it is located in the templates subdirectory in your installation's 
+             	            theme directory or, if your installation does not have it's own theme directory, in the 
+             	            <code>themes/wilma/templates subdirectory</code>.
+             	        </p>
+
+                	    <h4 id="multiple">Multiple foaf:Person Profile Pages</h4>
+             	        <p>
+             	            VIVO now supports multiple profile pages for foaf:Persons. This feature, which is optional so installations 
+             	            can continue to use just the individual--foaf-person.ftl template, currently consists of two profile page 
+             	            types: a standard view, which is a redesigned version of the foaf:Person template in previous releases; and 
+             	            a quick view, which emphasizes the individual's own web page presence while providing summary VIVO information, 
+             	            such as current positions and research areas. The profile quick view requires the use of a web service that 
+             	            captures images of web pages. <strong>This web service is not included with the VIVO software.</strong> An 
+             	            installation will either have to develop their own service or use a third-party service, usually for a small 
+             	            fee depending on the number of images served. (Examples of these services include WebShotsPro, Thumbalizr and 
+             	            Websnapr.) For more information on how to implement multiple profile page views, refer to this wiki page: 
+             	            <code>https://wiki.duraspace.org/display/VIVO/Multiple+foaf%3APerson+Profile+Pages</code>.
+             	        </p>
+
+                	    <h4 id="homePage">Home Page Re-design</h4>
+             	        <p>
+             	            For Release 1.6 the VIVO Home Page has been redesigned. The Search field beneath the "welcome" text now 
+             	            allows the user to limit the results of a search to a specific class group, such as people, organizations, 
+             	            etc. In addition, the browse-by-class-group display has been removed from the Home Page and replaced by 
+             	            multiple features, which include: a list of four randomly selected faculty members, including their titles 
+             	            and thumbnail images; a display of statistical data about the VIVO installation, such as the number of people, 
+             	            activities and organizations; and, <a href="#optionalMap">optionally</a> a global map showing researchers' 
+             	            areas of geographic focus.
              	        </p>
 
                 	    <h4 id="BOGUS">ANYTHING ELSE?</h4>
@@ -383,7 +442,7 @@
                     </tr>
                     
                     <tr>
-                        <td colspan="2">
+                        <td colspan="2" id="optionalMap">
                           On the VIVO home page, display a global map highlighting the geographical focus
                           of foaf:person individuals. The default is <code>enabled</code>.
                         </td>
@@ -500,6 +559,39 @@
                         you will need to rerun the knowledge base migration.
                     </dd>
                 </dl>
+                <p>
+                    9. Load the About Page .N3 file (optional).  Release 1.6 provides an "about VIVO" page that is editable 
+                    through the GUI, using the Page Management functionality. If your installation has a customized version 
+                    of the About Page and you do not need to have it accessible via Page Management, then skip this step. 
+                    Otherwise, here are the instructions for loading the About Page .N3 file:
+                    <ol>
+                        <li>
+                            Once the VIVO application is running, go to the Site Admin page and click the "Ingest Tools"
+                            link under Advanced Data Tools.
+                        </li>
+                        <li>
+                            From the Ingest Menu click the "Manage Jena Tools" link, and then click the "RDB Models" button.
+                        </li>
+                        <li>
+                            Locate the "vitro-kb-displayMetadata" model and click the "load RDF data" button.
+                        </li>
+                        <li>
+                            Click the "Browse" button to upload the file from your computer and select the aboutPage.n3 file
+                            located here in the VIVO source: <code>productMods/WEB-INF/ontologies/app/aboutPage.n3</code>.
+                        </li>
+                        <li>
+                            Select N3 as the file type from the drop-down list and then click the "Load Data" button.
+                        </li>
+                        <li>
+                            Restart tomcat.
+                        </li>
+                    </ol>
+                </p>
+                <p>
+                    If your installation has a customized version of the About Page, but you would like to make its content
+                    editable through the GUI, follow the above steps and then use Page Management to update the fixed HTML
+                    content.
+                </p>
  
                 <h3 id="#kbm">IV. Knowledge Base Migration</h3>
                 
