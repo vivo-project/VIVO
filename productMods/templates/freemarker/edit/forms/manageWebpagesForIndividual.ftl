@@ -1,7 +1,6 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
 <#-- Custom form for managing web pages for individuals -->
-
 <#if (editConfiguration.pageData.webpages?size > 1) >
   <#assign ulClass="class='dd'">
 <#else>
@@ -40,8 +39,8 @@
                 <a href="${webpage.url}" title="${i18n().webpage_url}">${anchor}</a>
             </span>
             <span class="editingLinks">
-                <a href="${baseEditWebpageUrl}&objectUri=${webpage.link?url}&predicateUri=${predicateUri}" class="edit" title="${i18n().edit_wepage_link}">${i18n().edit_capitalized}</a> | 
-                <a href="${urls.base}${deleteWebpageUrl}" class="remove" title="${i18n().delete_web_page_link}">${i18n().delete_button}</a> 
+                <a href="${baseEditWebpageUrl}&objectUri=${webpage.link?url}&predicateUri=${predicateUri}" class="edit" title="${i18n().edit_webpage_link}">${i18n().edit_capitalized}</a> | 
+                <a href="${urls.base}${deleteWebpageUrl}" class="remove" title="${i18n().delete_webpage_link}">${i18n().delete_button}</a> 
             </span>
         </li>    
         
