@@ -17,7 +17,7 @@
     <#include "individual-affiliated-research-areas.ftl">
 </#assign>
 
-<#if individual.mostSpecificTypes?seq_contains("Academic Department")>
+<#if individual.mostSpecificTypes?seq_contains("Academic Department") && getGrantResults?has_content>
     <#assign departmentalGrantsExtension>    
         <div id="activeGrantsLink">
         <img src="${urls.base}/images/individual/arrow-green.gif">

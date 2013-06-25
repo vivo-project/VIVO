@@ -4,7 +4,14 @@
 <#if deptGrants?has_content>
 <section id="pageList">
     <#list deptGrants as firstRow>
-        <h2>${i18n().active_grants_for} ${firstRow["deptLabel"]}</h2>
+        <#assign firstDeptLabel = firstRow["deptLabel"]?upper_case />
+        <#assign i18TextString = "" />
+        <#if ( firstDeptLabel?index_of("THE") == 0 ) >
+            <#assign i18TextString = "${i18n().active_grants_for?replace('the','')}" />
+        <#else>
+            <#assign i18TextString = "${i18n().active_grants_for}" />
+        </#if>
+        <h2>${i18TextString} ${firstRow["deptLabel"]} ${i18n().department}</h2>
         <#break>
     </#list>
 <table id="pageList" >
