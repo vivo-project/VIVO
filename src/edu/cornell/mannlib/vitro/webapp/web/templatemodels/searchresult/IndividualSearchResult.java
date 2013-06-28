@@ -15,13 +15,20 @@ public class IndividualSearchResult extends BaseIndividualSearchResult {
     private static final String CORE = "http://vivoweb.org/ontology/core#";
        
     public IndividualSearchResult(Individual individual, VitroRequest vreq) {
-        super(individual, vreq);
+    	super(individual, vreq);
+    	log.info("Called Individual Search Result");
     }
     
     /* Access methods for templates */
     
     public String getPreferredTitle() {
+    	log.info("Called get Title");
         return individual.getDataValue(CORE + "preferredTitle");
+    }
+    
+    public String getEmail() {
+    	log.info("Called get Email");
+    	return individual.getDataValue(CORE + "email");
     }
 
 }
