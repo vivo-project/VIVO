@@ -13,7 +13,6 @@ public final class CustomLock{
 	private CustomLock()
 	{
 		this.lock = new ReentrantLock();
-	
 	}
 	
 	public static CustomLock getInstance()

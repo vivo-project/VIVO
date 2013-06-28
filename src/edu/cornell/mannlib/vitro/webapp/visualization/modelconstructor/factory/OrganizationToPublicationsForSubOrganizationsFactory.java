@@ -35,18 +35,21 @@ public class OrganizationToPublicationsForSubOrganizationsFactory implements
 			Lock customLock = CustomLock.getInstance().getLock();
 			if (customLock.tryLock())	//Acquiring lock if available to construct the model
 			{
-                        	customLock.lock();
-                        	ModelConstructor model = new OrganizationToPublicationsForSubOrganizationsModelConstructor(uri, dataset);
+				try {
+	            	ModelConstructor model = new OrganizationToPublicationsForSubOrganizationsModelConstructor(uri, dataset);
+	
+	            	Model constructedModel = model.getConstructedModel();
+	            	ConstructedModelTracker.trackModel(
+	                    ConstructedModelTracker
+	                                    .generateModelIdentifier(
+	                                                    uri,
+	                                                    OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE),
+	                                                    constructedModel);
+				} finally {
+					customLock.unlock();
+				}
 
-                        	Model constructedModel = model.getConstructedModel();
-                        	ConstructedModelTracker.trackModel(
-                                ConstructedModelTracker
-                                                .generateModelIdentifier(
-                                                                uri,
-                                                                OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE),
-                                                                constructedModel);
-                        	customLock.unlock();
-                        	return constructedModel;
+            	return constructedModel;
 			}
 			else
 			{
