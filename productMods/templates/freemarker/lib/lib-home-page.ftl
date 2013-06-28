@@ -114,28 +114,38 @@
             
 </#macro>
 
-<#-- builds the "research" box on the home page -->
+<#-- Renders the html for the research section on the home page. -->
+<#-- Works in conjunction with the homePageUtils.js file -->
 <#macro researchClasses classGroups=vClassGroups>
-    <#assign foundClassGroup = false />
-    <section id="home-research" class="home-sections">
-        <h4>${i18n().research_capitalized}</h4>
-        <ul>
-            <#list classGroups as group>
-                <#if (group.individualCount > 0) && group.displayName == "research" >
-                    <#assign foundClassGroup = true />
-                    <#list group.classes as class>
-                        <#if (class.name == "Academic Article" || class.name == "Book" || class.name == "Conference Paper" ||class.name == "Media Contribution" || class.name == "Report" || class.name == "Library Collection") && (class.individualCount > 0)>
-                            <li role="listitem"><span>${class.individualCount!}</span>&nbsp;<a href='${urls.base}/individuallist?vclassId=${class.uri?replace("#","%23")!}'>${class.name}s</a></li>
-                        </#if>
-                    </#list>
-                    <li><a href="${urls.base}/research" alt="${i18n().view_all_research}">${i18n().view_all}</a></li>
-                </#if>
-            </#list>
-            <#if !foundClassGroup>
-                <p><li>${i18n().no_research_content_found}</li></p> 
+<#assign foundClassGroup = false />
+<section id="home-research" class="home-sections">
+    <h4>${i18n().research_capitalized}</h4>
+    <ul>
+        <#list classGroups as group>
+            <#if (group.individualCount > 0) && group.displayName == "research" >
+                <#assign foundClassGroup = true />
+                <#list group.classes as class>
+                    <#if (class.individualCount > 0) && (class.name == "Academic Article" || class.name == "Book" || class.name == "Chapter" ||class.name == "Conference Paper" || class.name == "Proceedings" || class.name == "Report") >
+                        <li role="listitem">
+                            <span>${class.individualCount!}</span>&nbsp;
+                            <a href='${urls.base}/individuallist?vclassId=${class.uri?replace("#","%23")!}'>
+                                <#if class.name?substring(class.name?length-1) == "s">
+                                    ${class.name}
+                                <#else>
+                                    ${class.name}s 
+                                </#if>
+                            </a>
+                        </li>
+                    </#if>
+                </#list>
+                <li><a href="${urls.base}/research" alt="${i18n().view_all_research}">${i18n().view_all}</a></li>
             </#if>
-        </ul>
-    </section>
+        </#list>
+        <#if !foundClassGroup>
+            <p><li>${i18n().no_research_content_found}</li></p> 
+        </#if>
+    </ul>
+</section>
 </#macro>
 
 <#-- Renders the html for the academic departments section on the home page. -->
@@ -154,7 +164,7 @@
 var academicDepartments = [
 <#if academicDeptDG?has_content>
     <#list academicDeptDG as resultRow>
-        <#assign uri = resultRow["deptURI"] />
+        <#assign uri = resultRow["theURI"] />
         <#assign label = resultRow["name"] />
         <#assign localName = uri?substring(uri?last_index_of("/")) />
             {"uri": "${localName}", "name": "${label}"}<#if (resultRow_has_next)>,</#if>
