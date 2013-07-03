@@ -186,9 +186,9 @@ var urlsBase = "${urls.base}";
         <#-- types. See map documentation for additional information on how to implement additional types.  -->
         <#--
             <div id="mapControls">
-                <a id="globalLink" class="selected" href="javascript:">Global Research</a>&nbsp;|&nbsp;
-                <a id="usLink" href="javascript:">US Research</a>&nbsp;|&nbsp;
-                <a id="stateLink" href="javascript:">State-wide Research</a>  
+                <a id="globalLink" class="selected" href="javascript:">${i18n().global_research}</a>&nbsp;|&nbsp;
+                <a id="countryLink" href="javascript:">${i18n().country_wide_research}</a>&nbsp;|&nbsp;
+                <a id="localLink" href="javascript:">${i18n().local_research}</a>  
             </div>  
         -->
         <div id="researcherTotal"></div>
@@ -198,9 +198,10 @@ var urlsBase = "${urls.base}";
             </span>
         </div>
         <div id="mapGlobal" class="mapArea"></div>
-        <#-- 
-            <div id="mapUS" class="mapArea"></div>
-            <div id="mapState" class="mapArea"></div>
-        -->
+       <#--  
+            <div id="mapCountry" class="mapArea"></div>
+            <div id="mapLocal" class="mapArea"></div> 
+       -->
     </section>
 </#macro>
+

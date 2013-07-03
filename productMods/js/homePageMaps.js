@@ -3,8 +3,8 @@
 $(document).ready(function(){
     
     var globalMapBuilt = false;
-    var usMapBuilt = false;
-    var stateMapBuilt = false;
+    var countryMapBuilt = false;
+    var localMapBuilt = false;
     var researchAreas = { "type": "FeatureCollection", "features": []};
     
     $.extend(this, urlsBase);
@@ -15,21 +15,21 @@ $(document).ready(function(){
     $('a#globalLink').click(function() {
         buildGlobalMap();
         $(this).addClass("selected");
-        $('a#usLink').removeClass("selected");
+        $('a#countryLink').removeClass("selected");
         $('a#nyLink').removeClass("selected");
     });
 
-    $('a#usLink').click(function() {
-        buildUSMap();
+    $('a#countryLink').click(function() {
+        buildCountryMap();
         $(this).addClass("selected");
         $('a#globalLink').removeClass("selected");
         $('a#nyLink').removeClass("selected");
     });
 
-    $('a#stateLink').click(function() {
-        buildStateMap();
+    $('a#localLink').click(function() {
+        buildLocalMap();
         $(this).addClass("selected");
-        $('a#usLink').removeClass("selected");
+        $('a#countryLink').removeClass("selected");
         $('a#globalLink').removeClass("selected");
     });
     
@@ -148,19 +148,19 @@ $(document).ready(function(){
 		return false;
 	}
 
-    function checkUSCoordinates(feature, layer) {
+    function checkCountryCoordinates(feature, layer) {
         var theLatLng = new L.LatLng(feature.geometry.coordinates[0],feature.geometry.coordinates[1]);
         var mt = feature.properties.mapType;
-        if ( !theLatLng.equals([0,0]) && mt == "US" ) {
+        if ( !theLatLng.equals([0,0]) && mt == "country" ) {
 		    return true;
 		}
 		return false;
 	}
 
-    function checkStateCoordinates(feature, layer) {
+    function checkLocalCoordinates(feature, layer) {
         var theLatLng = new L.LatLng(feature.geometry.coordinates[0],feature.geometry.coordinates[1]);
         var mt = feature.properties.mapType;
-        if ( !theLatLng.equals([0,0]) && mt == "state" ) {
+        if ( !theLatLng.equals([0,0]) && mt == "local" ) {
 		    return true;
 		}
 		return false;  
@@ -168,18 +168,18 @@ $(document).ready(function(){
 
     function buildGlobalMap() {
         $('div#mapGlobal').show();
-        $('div#mapUS').hide();
-        $('div#mapState').hide();
+        $('div#mapCountry').hide();
+        $('div#mapLocal').hide();
         
         if ( !globalMapBuilt ) {
         
             var mapGlobal = L.map('mapGlobal').setView([25.25, 23.20], 2);
-                L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile\/{z}\/{y}\/{x}.png', {
-    		        maxZoom: 12,
-    		        minZoom: 1,
-    		        boxZoom: false,
-			        doubleClickZoom: false,
-    		        attribution: 'Tiles &copy; <a href="http://www.esri.com/">Esri</a>'
+            L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile\/{z}\/{y}\/{x}.png', {
+    		    maxZoom: 12,
+    		    minZoom: 1,
+    		    boxZoom: false,
+			    doubleClickZoom: false,
+    		    attribution: 'Tiles &copy; <a href="http://www.esri.com/">Esri</a>'
             }).addTo(mapGlobal);
 
 	        L.geoJson(researchAreas, {
@@ -216,28 +216,30 @@ $(document).ready(function(){
     
         getResearcherCount("global");
         appendLegendToLeafletContainer();
-    } // Canvas/World_Light_Gray_Base
+    } 
 
-    function buildUSMap() {
+    function buildCountryMap() {
         $('div#mapGlobal').hide();
-        $('div#mapState').hide();
-        $('div#mapUS').show();
+        $('div#mapLocal').hide();
+        $('div#mapCountry').show();
         
-        if ( !usMapBuilt ) {
+        if ( !countryMapBuilt ) {
 
-            var mapUS = L.map('mapUS').setView([46.0, -97.0], 3);
-                L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile\/{z}\/{y}\/{x}.png', {
+            // CHANGE THE setView COORDINATES SO THAT THE COUNTRY YOU WANT TO 
+            // DISPLAY IS CENTERED CORRECTLY.  THE COORDINATES BELOW CENTERS THE MAP ON THE U.S.
+            var mapCountry = L.map('mapCountry').setView([46.0, -97.0], 3);
+            L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile\/{z}\/{y}\/{x}.png', {
         		maxZoom: 30,
         		minZoom: 1,
         		boxZoom: false,
         		zIndex: 1,
     			doubleClickZoom: false,
         		attribution: 'Tiles &copy; <a href="http://www.esri.com/">Esri</a>'
-            }).addTo(mapUS);
+            }).addTo(mapCountry);
 
         	L.geoJson(researchAreas, {
 
-    		    filter: checkUSCoordinates,
+    		    filter: checkCountryCoordinates,
     		    onEachFeature: onEachFeature,
 
     			pointToLayer: function(feature, latlng) {
@@ -250,11 +252,11 @@ $(document).ready(function(){
             		    fillOpacity: 0.8
             	    });
             	}       		
-            }).addTo(mapUS);
+            }).addTo(mapCountry);
 
         	L.geoJson(researchAreas, {
 
-    		    filter: checkUSCoordinates, 
+    		    filter: checkCountryCoordinates, 
         	    onEachFeature: onEachFeature,
 
     		    pointToLayer: function(feature, latlng) {
@@ -262,42 +264,42 @@ $(document).ready(function(){
     				    icon: getDivIcon(feature)
     			    });
     			}	
-            }).addTo(mapUS);
+            }).addTo(mapCountry);
             
-            usMapBuilt = true;
+            countryMapBuilt = true;
         }
             
-        getResearcherCount("US");
-    } // Canvas/World_Light_Gray_Base - services/Reference/World_Boundaries_and_Places_Alternate/MapServer
+        getResearcherCount("country");
+    } 
 
-    function buildStateMap() {
+    function buildLocalMap() {
         $('div#mapGlobal').hide();
-        $('div#mapUS').hide();
-        $('div#mapState').show();
+        $('div#mapCountry').hide();
+        $('div#mapLocal').show();
         
-        if ( !stateMapBuilt ) {
+        if ( !localMapBuilt ) {
             
-            // CHANGE THE setView COORDINATES SO THAT THE STATE YOU WANT TO DISPLAY IS CENTERED CORRECTLY.
-            // THE COORDINATES BELOW ARE FOR NEW YORK.
-            var mapState = L.map('mapState').setView([42.83, -75.50], 7);
-                L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile\/{z}\/{y}\/{x}.png', {
+            // CHANGE THE setView COORDINATES SO THAT THE LOCAL AREA (E.G. A STATE OR PROVINCE) YOU WANT TO 
+            // DISPLAY IS CENTERED CORRECTLY.  THE COORDINATES BELOW CENTERS THE MAP ON NEW YORK STATE.
+            var mapLocal = L.map('mapLocal').setView([42.83, -75.50], 7);
+            L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile\/{z}\/{y}\/{x}.png', {
         		maxZoom: 12,
         		minZoom: 1,
         		boxZoom: false,
     			doubleClickZoom: false,
         		attribution: 'Tiles &copy; <a href="http://www.esri.com/">Esri</a>'
-            }).addTo(mapState);
+            }).addTo(mapLocal);
 
             L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places_Alternate/MapServer/tile\/{z}\/{y}\/{x}.png', {
 		        maxZoom: 12,
 		        minZoom: 1,
 		        boxZoom: false,
 		        doubleClickZoom: false
-            }).addTo(mapState);
+            }).addTo(mapLocal);
 
         	L.geoJson(researchAreas, {
 
-    		    filter: checkStateCoordinates,
+    		    filter: checkLocalCoordinates,
     		    onEachFeature: onEachFeature,
 
     			pointToLayer: function(feature, latlng) {
@@ -310,11 +312,11 @@ $(document).ready(function(){
             		    fillOpacity: 0.8
             	    });
             	}       		
-            }).addTo(mapState);
+            }).addTo(mapLocal);
 
         	L.geoJson(researchAreas, {
 
-    		    filter: checkStateCoordinates, 
+    		    filter: checkLocalCoordinates, 
         	    onEachFeature: onEachFeature,
 
     		    pointToLayer: function(feature, latlng) {
@@ -322,12 +324,12 @@ $(document).ready(function(){
     				    icon: getDivIcon(feature)
     			    });
     			}	
-            }).addTo(mapState);
+            }).addTo(mapLocal);
                         
-            stateMapBuilt = true;
+            localMapBuilt = true;
         }
 
-        getResearcherCount("state");
+        getResearcherCount("local");
     }
 
     function getGeoJsonForMaps() {
@@ -338,7 +340,7 @@ $(document).ready(function(){
                 action: "getGeoFocusLocations",
             },
             complete: function(xhr, status) {
-                
+
                 var results = $.parseJSON(xhr.responseText);
                 if ( results.length == 0 ) {
                     var html = i18nStrings.currentlyNoResearchers;
@@ -346,8 +348,8 @@ $(document).ready(function(){
                     $('section#home-geo-focus').css("height","175px");
                     $('section#home-geo-focus div#timeIndicator').css("margin-top","50px");
                     $('section#home-geo-focus div#mapGlobal').hide();
-                    $('section#home-geo-focus div#mapUS').hide();
-                    $('section#home-geo-focus div#mapState').hide();
+                    $('section#home-geo-focus div#mapCountry').hide();
+                    $('section#home-geo-focus div#mapLocal').hide();
                 }
                 else {
                     $.each(results, function() {
@@ -372,7 +374,7 @@ $(document).ready(function(){
         if ( area == "global" ) {
             text = " " + i18nStrings.countriesAndRegions;
         }
-        else if ( area == "US" ) {
+        else if ( area == "country" ) {
             text = " " + i18nStrings.stateString;
         }
         else {
@@ -404,6 +406,6 @@ $(document).ready(function(){
                         + "/images/map_legend_regions.png' style='margin-right:5px'><font style='color:#555'>" 
                         + i18nStrings.regionsString + "</font></li></ul></div>";
         $('div.leaflet-control-container').append(htmlString);       
-    }//659667
+    }
     
 }); 

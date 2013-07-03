@@ -6,6 +6,8 @@ $(document).ready(function(){
     $.extend(this, facultyMemberCount);
     $.extend(this, i18nStrings);
 
+    var retryCount = 0;
+    
     // this will ensure that the hidden classgroup input is cleared if the back button is used
     // to return to th ehome page from the search results
     $('input[name="classgroup"]').val("");    
@@ -19,21 +21,22 @@ $(document).ready(function(){
         
     function getFacultyMembers() {
         var individualList = "";
+
         if ( facultyMemberCount > 0 ) {        
             // determine the row at which to start the solr query
-            var rowStart = Math.floor((Math.random()*facultyMemberCount)+1)-1;
+            var rowStart = Math.floor((Math.random()*facultyMemberCount));
             var diff;
             var pageSize = 4; // the number of faculty to display on the home page
             
-            if ( facultyMemberCount < 5 ) {
+            // could have fewer than 4 in a test or dev environment
+            if ( facultyMemberCount < pageSize ) {
                 pageSize = facultyMemberCount;
             }
-            else {
-                pageSize = 4; // our default number; could have fewer than 4 in a test or dev environment
-            }
+
             // in case the random number is equal to or within 3 of the facultyMemberCount 
-            if ( (rowStart + (pageSize-1)) > facultyMemberCount ) {
-                diff = (rowStart + (pageSize-1)) - facultyMemberCount;
+            // subtract 1 from the facultyMemberCount because the Solr rows begin at 0, not 1
+            if ( (rowStart + (pageSize-1)) > (facultyMemberCount-1) ) {
+                diff = (rowStart + (pageSize-1)) - (facultyMemberCount-1);
                 if ( diff == 0 ) {
                     rowStart = rowStart - (pageSize-1);
                 }
@@ -52,9 +55,15 @@ $(document).ready(function(){
             $.getJSON(url, function(results) {
             
                 if ( results == null || results.individuals.length == 0 ) {
-                    individualList = "<p><li>" + i18nStrings.noFacultyFound + "</li></p>";
-                    $('div#tempSpacing').hide();
-                    $('div#research-faculty-mbrs ul#facultyThumbs').append(individualList);
+                    if ( retryCount < 3 ) {
+                        retryCount = retryCount + 1;
+                        getFacultyMembers();
+                    }
+                    else {
+                        individualList = "<p><li>" + i18nStrings.noFacultyFound + "</li></p>";
+                        $('div#tempSpacing').hide();
+                        $('div#research-faculty-mbrs ul#facultyThumbs').append(individualList);
+                    }
                 } 
                 else {
                     var vclassName = results.vclass.name;
@@ -115,7 +124,7 @@ $(document).ready(function(){
         }
         else if ( deptNbr > 6 ) {
             for ( var i=0;i<6;i++) {
-                html += "<li><a href='" + urlsBase + "/display" 
+                html += "<li><a href='" + urlsBase + "/individual" 
                         + academicDepartments[index].uri + "'>" 
                         + academicDepartments[index].name + "</a></li>";
                 index = Math.floor((Math.random()*deptNbr)+1)-1;
@@ -123,7 +132,7 @@ $(document).ready(function(){
         }
         else {
             for ( var i=0;i<deptNbr;i++) {
-                html += "<li><a href='" + urlsBase + "/display" 
+                html += "<li><a href='" + urlsBase + "/individual" 
                         + academicDepartments[i].uri + "'>" 
                         + academicDepartments[i].name + "</a></li>";
             }
