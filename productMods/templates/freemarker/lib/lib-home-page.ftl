@@ -73,7 +73,7 @@
                         </#if>
                         <#if group.displayName != "equipment" && group.displayName != "courses" >
                             <li>
-                                <a href="#">
+                                <a href="${urls.base}/browse">
                                     <p  class="stats-count">
                                         <#if (group.individualCount > 10000) >
                                             <#assign overTen = group.individualCount/1000>
