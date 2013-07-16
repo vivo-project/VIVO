@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
-        <title>VIVO Release V1.5 Installation Guide</title>
+        <title>VIVO Release V1.6 Installation Guide</title>
         <link rel="stylesheet" href="./css/doc.css" media="screen">
     </head>
     <body>
@@ -12,7 +12,7 @@
         </div>
         <!-- Start of content -->
         <div id="wrapper-content" role="main">
-            <h1>VIVO Release V1.5 Installation Guide</h1>
+            <h1>VIVO Release V1.6 Installation Guide</h1>
             <div>
                 June 30, 2012
             </div>
@@ -20,7 +20,7 @@
             <p>
               This document is a summary of the VIVO installation
               process. For information about this release, consult
-              the <a href="release.html">VIVO v1.5 Release
+              the <a href="release.html">VIVO v1.6 Release
               Announcement</a>.  This and other documentation can be found on
               the <a href="http://vivoweb.org/support">support
               page</a> at <a href="http://vivoweb.org">VIVOweb.org</a>. 
@@ -125,7 +125,7 @@
                             using "Contact Us" form)</a>
                     </li>
                     <li>
-                        <a href="#tomcat_connector">Setup Apache Tomcat Connector</a>
+                        <a href="#httpd">Set up Apache HTTPD</a>
                     </li>
                     <li>
                         <a href="#external_auth">Using an External Authentication
@@ -222,8 +222,8 @@
                 <br>
             </h3>
             <p>
-                Download the VIVO application source as either <code>rel-1.5.zip</code>
-                or <code>rel-1.5.gz</code>
+                Download the VIVO application source as either <code>rel-1.6.zip</code>
+                or <code>rel-1.6.gz</code>
                 file and unpack it on your web server: 
                 <br>
                 <a href="http://vivoweb.org/download">http://vivoweb.org/download</a>
@@ -963,7 +963,7 @@
                 from the overridden context fragment.
             </p>
             <p>
-                See <a href="#tomcat_connector">Step 11</a> below, 
+                See <a href="#httpd">Step 11</a> below, 
                 for an example of overriding the VIVO context fragment.
             </p>
 
@@ -1059,44 +1059,23 @@
                 provide an email address in this step, your users will receive a java  
                 error in the interface. 
             </p>
-            <h3 id="tomcat_connector">11. Set up Apache Tomcat Connector </h3>
+            <h3 id="httpd">11. Set up HTTPD </h3>
+
             <p>
-                It is recommended that a Tomcat Connector such as mod_jk be used to 
-                ensure that the site address does not include the port number (e.g. 
-                8080) and an additional reference to the Tomcat context name (e.g.  
-                /vivo). 
+                It is recommended to run an Apache HTTPD web server to accept requests
+                and then proxy them to the VIVO Tomcat context. This will make Vitro
+                available at "http://example.com" instead of "http://example.com:8080/vitro".
+                It will also allow the use of external authentication.
             </p>
             <p>
-                This will make VIVO available at "http://example.com" instead of 
-                "http://example.com:8080/vivo" 
+                Setup HTTPD to send all of the requests that it receives to Tomcat's AJP
+                connector. This can be done in HTTPD 2.x with a simple directive in httpd.conf:
             </p>
+            <pre>     ProxyPass / ajp://localhost:8009/ <br><br></pre>
             <p>
-                Using the mod_jk connector allows for communication between Tomcat 
-                and the primary web server. The <a href="http://tomcat.apache.org/connectors-doc/generic_howto/quick.html">Quick
-                    Start
-                    HowTo</a>
-                on the Apache site describes the minimum server 
-                configurations for several popular web servers. 
-            </p>
-            <p>
-                After setting up the mod_jk connector above, you will need to 
-                modify the Tomcat's server.xml (located in <code>[tomcat root]/conf/</code>)
-                to
-                respond 
-                to 
-                requests from Apache via the connector. Look for the  
-                &lt;connector&gt; directive and add the following properties: 
-            </p>
-            <pre>                connectionTimeout="20000" maxThreads="320" keepAliveTimeout="20000"&nbsp; <br>            </pre>
-            <p>
-                Note: the value for maxThreads (320) is equal to the value for 
-                MaxClients in the apache's <code>httpd.conf</code>
-                file. 
-            </p>
-            <p>
-                Locate the <code>&lt;Host name="localhost"...&gt;</code>
-                directive 
-                and update as follows: 
+                Modify the &lt;Host&gt; in Tomcat server.xml (located in <code>[tomcat root]/conf/</code>)
+                so that the context path is empty to allow VIVO to be servred from the root path.
+                Locate the <code>&lt;Host name="localhost"...&gt;</code> directive and update as follows: 
             </p>
             <pre>              &lt;Host name="localhost" appBase="webapps"
                        DeployOnStartup="false"
@@ -1106,7 +1085,7 @@
                    &lt;Alias&gt;example.com&lt;/Alias&gt;
                    
                    &lt;Context path=""
-                           docBase="/usr/local/tomcat/webapps/vivo"
+                           docBase="/usr/local/tomcat/webapps/vitro"
                            reloadable="true"
                            cookies="true" &gt;
                    
@@ -1115,6 +1094,16 @@
                   
                    ...
             </pre>
+            <p>
+                After setting up the above, it is recommended that you modify the Tomcat AJP connector
+                parameters in server.xml. Look for the &lt;connector&gt; directive and add the
+                following properties: 
+            </p>
+            <pre>    connectionTimeout="20000" maxThreads="320" keepAliveTimeout="20000"&nbsp;<br><br></pre>
+            <p>
+                Note: the value for maxThreads (320) is equal or greater than the value for 
+                MaxClients in the apache's <code>httpd.conf</code> file. 
+            </p>
 
             <h3 id="external_auth">12. Using an External Authentication System 
                 with VIVO </h3>
