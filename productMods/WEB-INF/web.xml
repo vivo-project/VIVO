@@ -1361,7 +1361,15 @@
     <servlet-name>GetObjectClasses</servlet-name>
     <url-pattern>/admin/getObjectClasses</url-pattern>
   </servlet-mapping>
-  
+
+  <servlet>
+    <servlet-name>SearchServiceController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.SearchServiceController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchServiceController</servlet-name>
+    <url-pattern>/searchService/*</url-pattern>
+  </servlet-mapping>
   
   <servlet>
     <servlet-name>SmokeTestController</servlet-name>
