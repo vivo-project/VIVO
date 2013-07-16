@@ -344,7 +344,7 @@ $(document).ready(function(){
                 var results = $.parseJSON(xhr.responseText);
                 if ( results.length == 0 ) {
                     var html = i18nStrings.currentlyNoResearchers;
-                    $('section#home-geo-focus div#timeIndicator span').html(html);
+                    $('section#home-geo-focus div#timeIndicatorGeo span').html(html);
                     $('section#home-geo-focus').css("height","175px");
                     $('section#home-geo-focus div#timeIndicator').css("margin-top","50px");
                     $('section#home-geo-focus div#mapGlobal').hide();
