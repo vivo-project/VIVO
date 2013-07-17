@@ -282,15 +282,6 @@
   </servlet-mapping>
   
   <servlet>
-    <servlet-name>N3EditFormController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.N3EditFormController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>N3EditFormController</servlet-name>
-    <url-pattern>/N3EditForm</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>AboutController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.AboutController</servlet-class>
   </servlet>
@@ -1361,7 +1352,15 @@
     <servlet-name>GetObjectClasses</servlet-name>
     <url-pattern>/admin/getObjectClasses</url-pattern>
   </servlet-mapping>
-  
+
+  <servlet>
+    <servlet-name>SearchServiceController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.SearchServiceController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchServiceController</servlet-name>
+    <url-pattern>/searchService/*</url-pattern>
+  </servlet-mapping>
   
   <servlet>
     <servlet-name>SmokeTestController</servlet-name>
