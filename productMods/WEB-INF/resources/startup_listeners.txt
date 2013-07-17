@@ -5,6 +5,8 @@
 #     https://sourceforge.net/apps/mediawiki/vivo/index.php?title=The_StartupManager
 #
 
+edu.cornell.mannlib.vitro.webapp.servlet.setup.JvmSmokeTests
+
 edu.cornell.mannlib.vitro.webapp.config.ConfigurationPropertiesSetup
 
 edu.cornell.mannlib.vitro.webapp.config.ConfigurationPropertiesSmokeTests
