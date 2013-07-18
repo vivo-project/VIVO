@@ -3,13 +3,9 @@ package edu.cornell.mannlib.vitro.webapp.controller.freemarker;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,12 +19,10 @@ import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.Actions;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.VClass;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
-import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 import edu.cornell.mannlib.vitro.webapp.dao.VClassDao;
-import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
+import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 
 
 public class ManagePublicationsForIndividualController extends FreemarkerHttpServlet {
@@ -52,11 +46,7 @@ public class ManagePublicationsForIndividualController extends FreemarkerHttpSer
         
         body.put("subjectUri", subjectUri);
 
-        if (vreq.getAssertionsWebappDaoFactory() != null) {
-        	vcDao = vreq.getAssertionsWebappDaoFactory().getVClassDao();
-        } else {
-        	vcDao = vreq.getFullWebappDaoFactory().getVClassDao();
-        }
+       	vcDao = vreq.getUnfilteredAssertionsWebappDaoFactory().getVClassDao();
 
         HashMap<String, List<Map<String,String>>>  publications = getPublications(subjectUri, vreq);
         log.debug("publications = " + publications);
@@ -103,7 +93,7 @@ public class ManagePublicationsForIndividualController extends FreemarkerHttpSer
                 RDFNode subclassUri= soln.get("subclass");
                 if ( subclassUri != null ) {
                     String subclassUriStr = soln.get("subclass").toString();
-                    VClass vClass = (VClass) vcDao.getVClassByURI(subclassUriStr);
+                    VClass vClass = vcDao.getVClassByURI(subclassUriStr);
                     subclass = ((vClass.getName() == null) ? subclassUriStr : vClass.getName());
                 }
                 else {
