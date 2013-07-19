@@ -117,23 +117,23 @@ class TemplateFileChecker
   end
   
   def scan_for_words_outside_of_tags()
-    scan(/>\s*([^><]+)\s*</m, 1, "Words found outside of tags")
+    scan(/>\s*([^><]+)</m, 1, "Words found outside of tags")
   end
   
   def scan_for_title_attributes()
-    scan(/<[^>]*title=(["'])\s*([^>]+?)\s*\1.*?>/mi, 2, "Words found in title attribute of an HTML tag")
+    scan(/<[^>]*title=(["'])\s*([^>]*?)\s*\1.*?>/mi, 2, "Words found in title attribute of an HTML tag")
   end
   
   def scan_for_alert_attributes()
-    scan(/<img\b[^>]*alert=(["'])\s*([^>]+?)\s*\1.*?>/mi, 2, "Words found in alert attribute of <img> tag")
+    scan(/<img\b[^>]*alert=(["'])\s*([^>]*?)\s*\1.*?>/mi, 2, "Words found in alert attribute of <img> tag")
   end
   
   def scan_for_alt_attributes()
-    scan(/<img\b[^>]*alt=(["'])\s*([^>]+?)\s*\1.*?>/mi, 2, "Words found in alt attribute of <img> tag")
+    scan(/<img\b[^>]*alt=(["'])\s*([^>]*?)\s*\1.*?>/mi, 2, "Words found in alt attribute of <img> tag")
   end
   
   def scan_for_value_attributes_on_submit_tags()
-    scan(/<input\b[^>]*type=["']submit["'][^>]*value=(["'])\s*([^'">]+?)\s*\1.*?>/mi, 2, "Words found in value attribute of <input type='submit'> tag")
+    scan(/<input\b[^>]*type=["']submit["'][^>]*value=(["'])\s*([^'">]*?)\s*\1.*?>/mi, 2, "Words found in value attribute of <input type='submit'> tag")
   end
   
   # ------------------------------------------------------------------------------------
@@ -157,7 +157,6 @@ class TemplateFileChecker
   
   def report(summary)
     puts "   Template file '#{@path}'"
-
     if !@warnings.empty?
       if summary
         puts "      #{@warnings.size} warnings."
@@ -168,6 +167,7 @@ class TemplateFileChecker
         end
       end
     end
+    $stdout.flush
   end
   
   def warnings()

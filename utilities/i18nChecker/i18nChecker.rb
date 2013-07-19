@@ -33,6 +33,7 @@ and optional "complete" or "summary" flags. E.g.:
 $: << File.dirname(File.expand_path(__FILE__))
 require 'properties_file_checker'
 require 'template_file_checker'
+require 'template_set_checker'
 
 class I18nChecker
   # ------------------------------------------------------------------------------------
@@ -101,6 +102,11 @@ class I18nChecker
   end
   
   def process_template_files(paths, summary)
+    ts = TemplateSetChecker.new(paths)
+    ts.report(summary)
+    paths = ts.remaining_paths
+    @total_warnings += ts.warnings_count
+    
     paths.each() do |path|
       tf = TemplateFileChecker.new(path)
       tf.report(summary)
