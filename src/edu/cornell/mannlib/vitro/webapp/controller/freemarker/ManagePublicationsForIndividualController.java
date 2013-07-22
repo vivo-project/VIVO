@@ -28,9 +28,7 @@ import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 public class ManagePublicationsForIndividualController extends FreemarkerHttpServlet {
 
     private static final Log log = LogFactory.getLog(ManagePublicationsForIndividualController.class.getName());
-    private VClassDao vcDao = null;
     private static final String TEMPLATE_NAME = "managePublicationsForIndividual.ftl";
-    private List<String> allSubclasses;
     
     @Override
 	protected Actions requiredActions(VitroRequest vreq) {
@@ -43,14 +41,13 @@ public class ManagePublicationsForIndividualController extends FreemarkerHttpSer
         Map<String, Object> body = new HashMap<String, Object>();
 
         String subjectUri = vreq.getParameter("subjectUri");
-        
         body.put("subjectUri", subjectUri);
-
-       	vcDao = vreq.getUnfilteredAssertionsWebappDaoFactory().getVClassDao();
 
         HashMap<String, List<Map<String,String>>>  publications = getPublications(subjectUri, vreq);
         log.debug("publications = " + publications);
         body.put("publications", publications);
+
+        List<String> allSubclasses = getAllSubclasses(publications);
         body.put("allSubclasses", allSubclasses);
         
         Individual subject = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subjectUri);
@@ -63,7 +60,6 @@ public class ManagePublicationsForIndividualController extends FreemarkerHttpSer
         return new TemplateResponseValues(TEMPLATE_NAME, body);
     }
   
-    
     private static String PUBLICATION_QUERY = ""
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
         + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
@@ -79,9 +75,10 @@ public class ManagePublicationsForIndividualController extends FreemarkerHttpSer
         + "    OPTIONAL { ?authorship core:hideFromDisplay ?hideThis } \n"
         + "} ORDER BY ?subclass ?title";
     
-       
     HashMap<String, List<Map<String,String>>>  getPublications(String subjectUri, VitroRequest vreq) {
-          
+
+        VClassDao vcDao = vreq.getUnfilteredAssertionsWebappDaoFactory().getVClassDao();
+
         String queryStr = QueryUtils.subUriForQueryVar(PUBLICATION_QUERY, "subject", subjectUri);
         String subclass = "";
         log.debug("queryStr = " + queryStr);
@@ -109,10 +106,12 @@ public class ManagePublicationsForIndividualController extends FreemarkerHttpSer
             log.error(e, e);
         }    
        
-        allSubclasses = new ArrayList<String>(subclassToPublications.keySet());
-        Collections.sort(allSubclasses);
         return subclassToPublications;
     }
+
+    private List<String> getAllSubclasses(HashMap<String, List<Map<String, String>>> publications) {
+        List<String> allSubclasses = new ArrayList<String>(publications.keySet());
+        Collections.sort(allSubclasses);
+        return allSubclasses;
+    }
 }
-
-

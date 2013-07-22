@@ -28,9 +28,7 @@ import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 public class ManageGrantsForIndividualController extends FreemarkerHttpServlet {
 
     private static final Log log = LogFactory.getLog(ManageGrantsForIndividualController.class.getName());
-    private VClassDao vcDao = null;
     private static final String TEMPLATE_NAME = "manageGrantsForIndividual.ftl";
-    private List<String> allSubclasses;
     
     @Override
 	protected Actions requiredActions(VitroRequest vreq) {
@@ -43,14 +41,13 @@ public class ManageGrantsForIndividualController extends FreemarkerHttpServlet {
         Map<String, Object> body = new HashMap<String, Object>();
 
         String subjectUri = vreq.getParameter("subjectUri");
-        
         body.put("subjectUri", subjectUri);
-
-        vcDao = vreq.getUnfilteredAssertionsWebappDaoFactory().getVClassDao();
 
         HashMap<String, List<Map<String,String>>>  grants = getGrants(subjectUri, vreq);
         log.debug("grants = " + grants);
         body.put("grants", grants);
+
+        List<String> allSubclasses = getAllSubclasses(grants);
         body.put("allSubclasses", allSubclasses);
         
         Individual subject = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subjectUri);
@@ -81,8 +78,8 @@ public class ManageGrantsForIndividualController extends FreemarkerHttpServlet {
         + "    OPTIONAL { ?role core:hideFromDisplay ?hideThis } \n" 
         + "} ORDER BY ?subclass ?label2";
     
-       
     HashMap<String, List<Map<String,String>>>  getGrants(String subjectUri, VitroRequest vreq) {
+        VClassDao vcDao = vreq.getUnfilteredAssertionsWebappDaoFactory().getVClassDao(); 
           
         String queryStr = QueryUtils.subUriForQueryVar(GRANT_QUERY, "subject", subjectUri);
         log.debug("queryStr = " + queryStr);
@@ -107,9 +104,13 @@ public class ManageGrantsForIndividualController extends FreemarkerHttpServlet {
             log.error(e, e);
         }    
        
-        allSubclasses = new ArrayList<String>(subclassToGrants.keySet());
-        Collections.sort(allSubclasses);
         return subclassToGrants;
+    }
+
+    private List<String> getAllSubclasses(HashMap<String, List<Map<String, String>>> grants) {
+        List<String> allSubclasses = new ArrayList<String>(grants.keySet());
+        Collections.sort(allSubclasses);
+        return allSubclasses;
     }
 }
 
