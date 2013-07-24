@@ -1,4 +1,6 @@
 <rdf:RDF
+	xmlns="http://aims.fao.org/aos/geopolitical.owl#"
+	xml:base="http://aims.fao.org/aos/geopolitical.owl"
     xmlns:geo="http://aims.fao.org/aos/geopolitical.owl#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"

@@ -1,0 +1,810 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://purl.obolibrary.org/obo/arg/module/vivo/vivo.owl#"
+     xml:base="http://purl.obolibrary.org/obo/arg/module/vivo/vivo.owl"
+     xmlns:obo="http://purl.obolibrary.org/obo/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:core="http://vivoweb.org/ontology/core#">
+    <owl:Ontology rdf:about="http://purl.obolibrary.org/obo/arg/module/vivo/vivo.owl">
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0000115"/>
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2003/06/sw-vocab-status/ns#term_status"/>
+    <owl:AnnotationProperty rdf:about="http://vivoweb.org/ontology/core#serviceProvidedBy"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/BFO_0000050 -->
+
+    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/BFO_0000050">
+        <rdfs:label>part_of (RO)</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/BFO_0000051 -->
+
+    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/BFO_0000051">
+        <rdfs:label>has_part (RO)</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/BFO_0000052 -->
+
+    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/BFO_0000052">
+        <rdfs:label>inheres in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/BFO_0000053 -->
+
+    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/BFO_0000053">
+        <rdfs:label>bearer of</rdfs:label>
+        <owl:inverseOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000052"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/BFO_0000056 -->
+
+    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/BFO_0000056">
+        <rdfs:label>participates in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/BFO_0000057 -->
+
+    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/BFO_0000057">
+        <rdfs:label>has participant</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/IAO_0000136 -->
+
+    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0000136">
+        <rdfs:label>is about</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/RO_0001015 -->
+
+    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0001015">
+        <rdfs:label>location of</rdfs:label>
+        <owl:inverseOf rdf:resource="http://purl.obolibrary.org/obo/RO_0001025"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/RO_0001025 -->
+
+    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0001025">
+        <rdfs:label>located in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/RO_0002233 -->
+
+    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0002233">
+        <rdfs:label>has input</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000057"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/RO_0002234 -->
+
+    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0002234">
+        <rdfs:label>has output</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000057"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/RO_0002350 -->
+
+    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0002350">
+        <rdfs:label>member of</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000050"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/RO_0002351 -->
+
+    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0002351">
+        <rdfs:label>has member</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000051"/>
+        <owl:inverseOf rdf:resource="http://purl.obolibrary.org/obo/RO_0002350"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/RO_0002353 -->
+
+    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0002353">
+        <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000056"/>
+        <owl:inverseOf rdf:resource="http://purl.obolibrary.org/obo/RO_0002234"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/NET/c4dm/event.owl#isAgentIn -->
+
+    <rdf:Description rdf:about="http://purl.org/NET/c4dm/event.owl#isAgentIn">
+        <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000056"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://purl.org/ontology/bibo/reviewOf -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/reviewOf">
+        <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000136"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/ontology/bibo/status -->
+
+    <rdf:Description rdf:about="http://purl.org/ontology/bibo/status">
+        <rdfs:range rdf:resource="http://purl.org/ontology/bibo/DocumentStatus"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://purl.org/ontology/bibo/translator -->
+
+    <rdf:Description rdf:about="http://purl.org/ontology/bibo/translator">
+        <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/IAO_0000030"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#assignedBy -->
+
+    <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#assignedBy">
+        <rdfs:label xml:lang="en">assigned by</rdfs:label>
+        <obo:IAO_0000115 xml:lang="en">Relates a Relationship (as a predicate or n-ary relation over one or more Thing) to an Agent that defined or instantiated the predicate instance. </obo:IAO_0000115>
+        <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Relationship"/>
+        <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#assigns"/>
+        <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#assigns -->
+
+    <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#assigns">
+        <rdfs:label xml:lang="en">assigns</rdfs:label>
+        <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#Relationship"/>
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#features -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#features">
+        <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/IAO_0000030"/>
+        <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000136"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#hasPublicationVenue -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasPublicationVenue">
+        <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000050"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#publicationVenueFor -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#publicationVenueFor">
+        <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000051"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#relatedBy -->
+
+    <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#relatedBy">
+        <rdfs:label xml:lang="en">related by</rdfs:label>
+        <obo:IAO_0000115 xml:lang="en">Relates a Thing to a Relationship as a Thing that is somehow related to other Thing in the same Relationship instance. A Relationship instnace is a predicate over Thing and is created by an Agent.</obo:IAO_0000115>
+        <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#relates"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#relates -->
+
+    <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#relates">
+        <rdfs:label xml:lang="en">relates</rdfs:label>
+        <obo:IAO_0000115 xml:lang="en">Relates a Relationship instance to the one or more Thing of the Relationship. There is a separate property (assigned by) to relate to the Agent that defines the Relationship.</obo:IAO_0000115>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#dateTime -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#dateTime">
+        <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#hasValue"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#grantDirectCosts -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#grantDirectCosts">
+        <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#hasMonetaryAmount"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#hasMonetaryAmount -->
+
+    <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#hasMonetaryAmount">
+        <rdfs:label>has_monetary_amount</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#hasValue -->
+
+    <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#hasValue">
+        <rdfs:label>has_value</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#licenseNumber -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#licenseNumber">
+        <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#identifier"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#linkURI -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#linkURI">
+        <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#hasValue"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#majorField -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#majorField">
+        <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#AwardedDegree"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#outreachOverview -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#outreachOverview">
+        <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#description"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#overview -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#overview">
+        <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#description"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#researchOverview -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#researchOverview">
+        <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#description"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#teachingOverview -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#teachingOverview">
+        <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#description"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#totalAwardAmount -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#totalAwardAmount">
+        <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#hasMonetaryAmount"/>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://aims.fao.org/aos/geopolitical.owl#self_governing -->
+
+    <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#self_governing">
+        <rdfs:label>self governing</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#GeopoliticalEntity"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000005 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000005">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">service</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000030"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000071 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000071">
+        <rdfs:label>software</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/snap#MaterialEntity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0001554 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0001554">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">data</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000030"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/IAO_0000013 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/IAO_0000013">
+        <rdfs:label>journal article (IAO)</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/AcademicArticle"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/IAO_0000030 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/IAO_0000030">
+        <rdfs:label>information content entity (IAO)</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/snap#GenericallyDependentContinuant"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/IAO_0000032 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/IAO_0000032">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">scalar measurement datum</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/OBI_0000272 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/OBI_0000272">
+        <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/NET/c4dm/event.owl#Event -->
+
+    <rdf:Description rdf:about="http://purl.org/NET/c4dm/event.owl#Event">
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/span#ProcessualEntity"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://purl.org/ontology/bibo/Collection -->
+
+    <rdf:Description rdf:about="http://purl.org/ontology/bibo/Collection">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000030"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://purl.org/ontology/bibo/Conference -->
+
+    <rdf:Description rdf:about="http://purl.org/ontology/bibo/Conference">
+        <rdfs:subClassOf rdf:resource="http://purl.org/NET/c4dm/event.owl#Event"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://purl.org/ontology/bibo/Document -->
+
+    <owl:Class rdf:about="http://purl.org/ontology/bibo/Document">
+        <rdfs:label>document (IAO)</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000030"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/spar/c4o/GlobalCitationCount -->
+
+    <rdf:Description rdf:about="http://purl.org/spar/c4o/GlobalCitationCount">
+        <rdfs:label>global citation count</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000032"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#AdministratorRole -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#AdministratorRole">
+        <rdfs:label>administrator role</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/snap#Role"/>
+    </owl:Class>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#AdvisingProcess -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#AdvisingProcess">
+        <rdfs:label>advising process</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/span#ProcessualEntity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#AttendeeRole -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#AttendeeRole">
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/snap#Role"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#AttendingProcess -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#AttendingProcess">
+        <rdfs:label>attending process</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/span#ProcessualEntity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#AwardReceipt -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#AwardReceipt">
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Relationship"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#AwardedDegree -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#AwardedDegree">
+        <rdfs:label>awarded degree</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Relationship"/>
+        <obo:IAO_0000115>The awarding of a degree by an agent to another agent. It is mostly for academic degrees.</obo:IAO_0000115>
+    </owl:Class>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#Campus -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Campus">
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#GeographicLocation"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#Contract -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Contract">
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Relationship"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#Dataset -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Dataset">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000030"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#DateTimeInterval -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#DateTimeInterval">
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/span#TemporalInterval"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#DateTimeValue -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#DateTimeValue">
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/span#TemporalInstant"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#Division -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Division">
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#ExtensionUnit"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#Editorship -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#Editorship">
+        <rdfs:label>editorship</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Relationship"/>
+        <obo:IAO_0000115>A relationship that represents the recognition of an agent as an editor.</obo:IAO_0000115>
+    </owl:Class>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#EducationalProcess -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#EducationalProcess">
+        <rdfs:label>educational process</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/span#ProcessualEntity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#Equipment -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Equipment">
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/snap#MaterialEntity"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#EventSeries -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#EventSeries">
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/span#ProcessualEntity"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#Facility -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Facility">
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/snap#Site"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#GeographicRegion -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#GeographicRegion">
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#GeographicLocation"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#Grant -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Grant">
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Relationship"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#Internship -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Internship">
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#EducationalProcess"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#IssuedCredential -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#IssuedCredential">
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Relationship"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#Location -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Location">
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/snap#SpatialRegion"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#MedicalResidency -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#MedicalResidency">
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#EducationalProcess"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#OrganizingProcess -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#OrganizingProcess">
+        <rdfs:label>organizing process</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/span#ProcessualEntity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#Position -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Position">
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Relationship"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#PostdoctoralTraining -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#PostdoctoralTraining">
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#EducationalProcess"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#PresentingProcess -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#PresentingProcess">
+        <rdfs:label>presenting process</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/span#ProcessualEntity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#Project -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Project">
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/span#ProcessualEntity"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#Relationship -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Relationship">
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/snap#SpecificallyDependentContinuant"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#yearMonthDayPrecision -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#yearMonthDayPrecision">
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
+    </owl:Class>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#yearMonthDayTimePrecision -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#yearMonthDayTimePrecision">
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
+    </owl:Class>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#yearMonthPrecision -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#yearMonthPrecision">
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
+    </owl:Class>
+    
+
+
+    <!-- http://vivoweb.org/ontology/core#yearPrecision -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#yearPrecision">
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
+    </owl:Class>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Agent -->
+
+    <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/Agent">
+        <rdfs:subClassOf rdf:resource="http://www.ifomis.org/bfo/1.1/snap#IndependentContinuant"/>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="http://purl.org/spar/c4o/hasGlobalCitationFrequency">
+        <rdfs:label>has_global_citation_frequency</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#geographicLocationOf">
+        <rdfs:label>geographic_location_of</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#geographical_region">
+        <rdfs:label>geographical region</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#reviewedIn">
+        <rdfs:label>reviewed_in</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#geographicallyWithin">
+        <rdfs:label>geographically_within</rdfs:label>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.3.1957) http://owlapi.sourceforge.net -->
+
