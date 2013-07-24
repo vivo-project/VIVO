@@ -1,0 +1,43 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#> .
+@prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix datagetter: <java:edu/cornell/mannlib/vitro/webapp/utils/datagetter/> .
+@prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix role:  <http://vitro.mannlib.cornell.edu/ns/vitro/role#> .
+ 
+@base <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration> .
+
+
+<http://example.org/appConfig/hasRoleServiceProviderRoleContext> a :ConfigContext ;
+    :hasConfiguration <http://example.org/appConfig/hasServiceProviderRoleConfig> ;
+    :configContextFor <http://vivoweb.org/ontology/core#hasRole> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#ServiceProviderRole> .
+    
+ 
+<http://example.org/appConfig/hasServiceProviderRoleConfig> a :ObjectPropertyDisplayConfig ;
+   :hasListView [
+        :listViewConfigFile "listViewConfig-hasRole.xml"^^<xsd:string> 
+    ] ;
+   :displayName "has service provider role" ;
+   vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+   vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+   vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddServiceProviderRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+   :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupmapping> .
+  
+  
+<http://example.org/appConfig/residentOfAwesomeCountryContext> a :ConfigContext ;
+    :hasConfiguration <http://example.org/appConfig/residentOfAwesomeCountryConfig> ;
+    :configContextFor <http://localhost:8085/vivo/individual/residentOf> ;
+    :qualifiedBy      <http://localhost:8085/vivo/individual/AwesomeCountry> .
+   
+
+<http://example.org/appConfig/residentOfAwesomeCountryConfig> a :ObjectPropertyDisplayConfig ;
+   :displayName "resident of awesome country" ;
+   vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+   vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+   :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupmapping> .
+   
+ 
