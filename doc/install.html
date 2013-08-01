@@ -886,11 +886,42 @@
             <p>
                 At the command line, from the top level of the VIVO distribution 
                 directory, type: 
-            </p>
-            <pre>                ant all<br>            </pre>
-            <p>
+            <pre>                ant all            </pre>
                 to build VIVO and deploy to Tomcat's webapps directory. 
             </p>
+            <p>
+                The build script may run for as much as five minutes, 
+                and creates more than 100 lines of output. 
+                The process comprises several steps:
+                <ul>
+                   <li>collecting the source files from the distribution directory,</li>
+                   <li>compiling the Java source code,</li>
+                   <li>compiling and running unit tests,</li>
+                   <li>preparing the Solr search engine,</li>
+                   <li>deploying VIVO and Solr to Tomcat.</li>
+                </ul> 
+            </p>
+            <p>
+                The output of the build may include a variety of warning messages.
+                The Java compiler may warn of code that is outdated.
+                Unit tests may produce warning messages, 
+                and some tests may be ignored if they do not produce consistent results.  
+            </p>
+            <table align="center"><tr><td>
+                BUILD SUCCESSFUL<br>Total time: 1 minute 49 seconds
+            </td></tr></table>
+            <p>
+                If the output ends with a success message, the build was successful. 
+                Proceed to the next step.
+            </p>
+            <table align="center"><tr><td>
+                BUILD FAILED<br>Total time: 35 seconds
+            </td></tr></table>
+            <p>
+                If the output ends with a failure message, the build has failed. 
+                Find the cause of the failure, fix the problem, and run the script again.
+            </p>
+
             <h3 id="tomcat_settings">7. Configure Tomcat</h3>
             <h4>Set JVM parameters</h4>
             <p>
