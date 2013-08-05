@@ -20,7 +20,10 @@ roleExamples-->
 <#--Variable assignments for Add Clinical Role To Person-->
 <#assign roleDescriptor = "${i18n().reviewer_of}" />
 <#assign typeSelectorLabel = "${i18n().reviewer_of}" />
-<#assign buttonText = "${i18n().reviewer_role}" />
+<#assign genericLabel = "${i18n().item_capitalized}" />
+
+<#assign acTypes = "{activity: 'http://vivoweb.org/ontology/core#InformationResource'}" />
 
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">
+

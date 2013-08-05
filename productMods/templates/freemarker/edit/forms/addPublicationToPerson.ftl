@@ -138,7 +138,6 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
              </#list>
         </select>
     </p>
-    <div class="fullViewOnly">        
         <p>
             <label for="title">${i18n().title_capitalized} ${requiredHint}</label>
             <input class="acSelector" size="60"  type="text" id="title" name="title" acGroupName="publication"  value="${titleValue}" />
@@ -301,7 +300,6 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     </p>
     </div> <!-- end fieldsForNewPub -->
 
-   </div> <!-- end fullViewOnly -->
        <p class="submit">
             <input type="hidden" name = "editKey" value="${editKey}"/>
             <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> ${i18n().or} </span><a class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
@@ -318,7 +316,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         sparqlForAcFilter: '${sparqlForAcFilter}',
         sparqlQueryUrl: '${sparqlQueryUrl}',
         acUrl: '${urls.base}/autocomplete?tokenize=true',
-        acTypes: {collection: 'http://purl.org/ontology/bibo/Periodical', book: 'http://purl.org/ontology/bibo/Book', conference: 'http://purl.org/NET/c4dm/event.owl#Event', event: 'http://purl.org/NET/c4dm/event.owl#Event', editor: 'http://xmlns.com/foaf/0.1/Person', publisher: 'http://xmlns.com/foaf/0.1/Organization'},
+        acTypes: {publication: 'http://purl.org/ontology/bibo/Document', collection: 'http://purl.org/ontology/bibo/Periodical', book: 'http://purl.org/ontology/bibo/Book', conference: 'http://purl.org/NET/c4dm/event.owl#Event', event: 'http://purl.org/NET/c4dm/event.owl#Event', editor: 'http://xmlns.com/foaf/0.1/Person', publisher: 'http://xmlns.com/foaf/0.1/Organization'},
         editMode: '${editMode}',
         defaultTypeName: 'publication', // used in repair mode to generate button text
         multipleTypeNames: {collection: 'publication', book: 'book', conference: 'conference', event: 'event', editor: 'editor', publisher: 'publisher'},

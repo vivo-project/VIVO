@@ -20,7 +20,9 @@ roleExamples-->
 <#--Variable assignments for Add Service Provider Role To Person-->
 <#assign roleDescriptor = "${i18n().service_to_profession}" />
 <#assign typeSelectorLabel = "${i18n().service_to_profession_in}" />
-<#assign buttonText = "${i18n().service_provider_role}" />
+<#assign genericLabel = "${i18n().organization_capitalized}" />
+
+<#assign acTypes = "{activity: 'http://xmlns.com/foaf/0.1/Organization'}" />
 
 
 <#--Each of the two stage forms will include the form below-->

@@ -9,7 +9,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
 public class AddAttendeeRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
     
     private static String TEMPLATE = "addAttendeeRoleToPerson.ftl";
-    
+
     @Override
     String getTemplate(){ return TEMPLATE; }
 
@@ -28,7 +28,10 @@ public class AddAttendeeRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
         "http://purl.org/ontology/bibo/Conference", "Conference",
         "http://vivoweb.org/ontology/core#Course", "Course",
         "http://vivoweb.org/ontology/core#Exhibit", "Exhibit",
+        "http://purl.org/ontology/bibo/Hearing", "Hearing",
+        "http://purl.org/ontology/bibo/Interview", "Interview",
         "http://vivoweb.org/ontology/core#Meeting", "Meeting",
+        "http://purl.org/ontology/bibo/Performance", "Performance",
         "http://vivoweb.org/ontology/core#Presentation", "Presentation",
         "http://vivoweb.org/ontology/core#InvitedTalk", "Invited Talk",
         "http://purl.org/ontology/bibo/Workshop", "Workshop",
