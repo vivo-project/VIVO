@@ -6,6 +6,6 @@ ASK {
     graph <http://vitro.mannlib.cornell.edu/default/vitro-kb-applicationMetadata> {
        <http://vitro.mannlib.cornell.edu/default/vitro-kb-2> vitro:updatedToOntology ?u .
        ?u vitro:updatedOntology <http://vivoweb.org/ontology/core> .
-       ?u vitro:toOntologyVersion "1.5" .
+       ?u vitro:toOntologyVersion "1.6" .
     }
 }

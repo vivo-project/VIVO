@@ -27,7 +27,8 @@
                         ?hideThis
         WHERE {
             ?subject ?property ?authorship .
-            ?authorship core:linkedInformationResource ?infoResource .                      
+            ?authorship core:relates ?infoResource .
+            ?infoResource a bibo:Document .                      
             ?infoResource rdfs:label ?infoResourceName 
             
                OPTIONAL { ?infoResource bibo:volume ?volume }
@@ -80,7 +81,8 @@
         CONSTRUCT { 
             ?subject ?property ?authorship .  
             ?authorship ?authorshipProperty ?authorshipValue .
-            ?authorship core:linkedInformationResource ?infoResource .
+            ?authorship core:relates ?infoResource .
+            ?infoResource a bibo:Document .
             ?infoResource rdfs:label ?infoResourceName .
             ?infoResource core:hasPublicationVenue ?publishedIn .
             ?publishedIn  rdfs:label ?journal 
@@ -138,29 +140,30 @@
                ?authorship ?authorshipProperty ?authorshipValue 
             } UNION {
                ?subject ?property ?authorship .
-               ?authorship core:linkedInformationResource ?infoResource 
+               ?authorship core:relates ?infoResource  
             } UNION {
                ?subject ?property ?authorship .
-               ?authorship core:linkedInformationResource ?infoResource .
+               ?authorship core:relates ?infoResource .
+               ?infoResource a bibo:Document .
                ?infoResource ?infoResourceProperty ?infoResourceValue 
             } UNION {
                ?subject ?property ?authorship .
-               ?authorship core:linkedInformationResource ?infoResource .
+               ?authorship core:relates ?infoResource .
                ?infoResource bibo:reproducedIn ?appearsInObj .
                ?appearsInObj rdfs:label ?appearsIn
             } UNION {
                ?subject ?property ?authorship .
-               ?authorship core:linkedInformationResource ?infoResource .
+               ?authorship core:relates ?infoResource .
                ?infoResource core:publisher ?publisherObj .
                ?publisherObj rdfs:label ?publisher
             } UNION {
                ?subject ?property ?authorship .
-               ?authorship core:linkedInformationResource ?infoResource .
+               ?authorship core:relates ?infoResource .
                ?infoResource core:editor ?editorObj .
                ?editorObj rdfs:label ?editor
             } UNION {
                ?subject ?property ?authorship .
-               ?authorship core:linkedInformationResource ?infoResource .
+               ?authorship core:relates ?infoResource .
                ?infoResource core:partOf ?partOfObj .
                ?partOfObj rdfs:label ?partOf
             } 
@@ -170,14 +173,17 @@
     <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt; 
         CONSTRUCT { 
             ?subject ?property ?authorship .  
-            ?authorship core:linkedInformationResource ?infoResource .
+            ?authorship core:relates ?infoResource .
+            ?infoResource a bibo:Document .
             ?infoResource core:dateTimeValue ?dateTimeValue .
             ?dateTimeValue core:dateTime ?dateTime  
         } WHERE {
             ?subject ?property ?authorship .
-            ?authorship core:linkedInformationResource ?infoResource .
+            ?authorship core:relates ?infoResource .
+            ?infoResource a bibo:Document .
             ?infoResource core:dateTimeValue ?dateTimeValue .
             ?dateTimeValue core:dateTime ?dateTime  
         } 
