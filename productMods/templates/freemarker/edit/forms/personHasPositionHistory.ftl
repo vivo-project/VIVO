@@ -103,13 +103,13 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
       <#list orgTypeOpts?keys as key>             
           <#if orgTypeValue = key >
             <span class="readOnly" id="typeSelectorSpan">${orgTypeOpts[key]}</span> 
-            <input type="hidden" id="typeSelectorInput" name="orgType" acGroupName="org" value="${orgTypeValue}" >
+            <input type="hidden" id="typeSelectorInput" name="orgType" acGroupName="organization" value="${orgTypeValue}" >
           </#if>           
       </#list>
     <#else>
     </#if>
 -->
-<select id="typeSelector" name="orgType" acGroupName="org">
+<select id="typeSelector" name="orgType" acGroupName="organization">
     <option value="" selected="selected">${i18n().select_one}</option>                
     <#list orgTypeOpts?keys as key>             
         <option value="${key}"  <#if orgTypeValue = key>selected</#if>>${orgTypeOpts[key]}</option>            
@@ -117,13 +117,12 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 </select>
   </p>
 
-  <div class="fullViewOnly">        
   <p>
-    <label for="relatedIndLabel">### ${i18n().name_capitalized} ${requiredHint}</label>
-    <input type="text" name="orgLabel" id="orgLabel" acGroupName="org" size="50" class="acSelector" value="${orgLabelValue}" >
-    <input class="display" type="hidden" id="orgDisplay" acGroupName="org" name="orgLabelDisplay" value="${orgLabelDisplayValue}">
+    <label for="relatedIndLabel">${i18n().organization_capitalized} ${i18n().name_capitalized} ${requiredHint}</label>
+    <input type="text" name="orgLabel" id="orgLabel" acGroupName="organization" size="50" class="acSelector" value="${orgLabelValue}" >
+    <input class="display" type="hidden" id="orgDisplay" acGroupName="organization" name="orgLabelDisplay" value="${orgLabelDisplayValue}">
   </p>
-    <div class="acSelection" acGroupName="org">
+    <div class="acSelection" acGroupName="organization">
         <p class="inline">
             <label>${i18n().selected_organization}:</label>
             <span class="acSelectionInfo"></span>
@@ -160,7 +159,6 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     	
       <input type="hidden" name = "editKey" value="${editKey}" role="input"/>
 
-   </div>
       <p class="submit">
         <#if editMode == "edit">  
             <input type="submit" id="submit" name="submit-${formAction}" value="${submitButtonText}" class="submit" /> 
@@ -177,6 +175,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <script type="text/javascript">
 var customFormData  = {
     acUrl: '${urls.base}/autocomplete?tokenize=true',
+    acTypes: {organization: 'http://xmlns.com/foaf/0.1/Organization'},
     editMode: '${editMode}',
     defaultTypeName: 'organization', // used in repair mode, to generate button text and org name field label
     baseHref: '${urls.base}/individual?uri=',

@@ -20,7 +20,10 @@ roleExamples-->
 <#--Variable assignments for Add Clinical Role To Person-->
 <#assign roleDescriptor = "${i18n().research_activity}" />
 <#assign typeSelectorLabel = "${i18n().research_activity_type}" />
+<#assign genericLabel = "${i18n().research_activity?capitalize}" />
 
+<#assign acMultipleTypes = "'true'" />
+<#assign acTypes = "{activity: 'http://vivoweb.org/ontology/core#Project,http://vivoweb.org/ontology/core#Grant'}" />
 
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">

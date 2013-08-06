@@ -20,7 +20,9 @@ roleExamples-->
 <#--Variable assignments for Add Clinical Role To Person-->
 <#assign roleDescriptor = "${i18n().collection_series_editor_role}" />
 <#assign typeSelectorLabel = "${i18n().editor_role_in}" />
+<#assign genericLabel = "Collection" />
 
+<#assign acTypes = "{activity: 'http://purl.org/ontology/bibo/Collection'}" />
 
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">
