@@ -20,7 +20,7 @@
                         ?outerOrg ?outerOrgName
                         ?dateTimeStart ?dateTimeEnd WHERE {
             ?subject ?property ?position 
-            OPTIONAL { ?position core:positionInOrganization ?org .
+            OPTIONAL { ?position core:relates ?org .
                        ?org rdfs:label ?orgName 
                        OPTIONAL { ?org core:subOrganizationWithin ?middleOrg .
                                   ?middleOrg rdfs:label ?middleOrgName
@@ -61,6 +61,7 @@
             ?subclass rdfs:subClassOf core:Position 
         } WHERE {
             ?subject ?property ?position .
+            ?position a core:Position .
             ?position vitro:mostSpecificType ?subclass .
             ?subclass rdfs:subClassOf core:Position 
         }
@@ -69,8 +70,10 @@
     <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
         CONSTRUCT { 
             ?subject ?property ?position .
+            ?position a core:Position .
             ?position ?positionProperty ?positionValue .
             ?org rdfs:label ?orgName .
             ?org core:subOrganizationWithin ?middleOrg .
@@ -79,34 +82,47 @@
             ?outerOrg rdfs:label ?outerOrgName
         } WHERE {
             {
-               ?subject ?property ?position 
+               ?subject ?property ?position .
+               ?position a core:Position .
             } UNION {
                ?subject ?property ?position .
+               ?position a core:Position .
                ?position ?positionProperty ?positionValue 
             } UNION {
                ?subject ?property ?position .
+               ?position a core:Position .
                ?position core:rank ?rank 
             } UNION {
                ?subject ?property ?position .
-               ?position core:positionInOrganization ?org . 
+               ?position a core:Position .
+               ?position core:relates ?org .
+               ?org a foaf:Organization . 
                ?org rdfs:label ?orgName 
             } UNION {
                 ?subject ?property ?position .
-                ?position core:positionInOrganization ?org . 
+                ?position a core:Position .
+                ?position core:relates ?org .
+                ?org a foaf:Organization . 
                 ?org core:subOrganizationWithin ?middleOrg
             } UNION {
                 ?subject ?property ?position .
-                ?position core:positionInOrganization ?org . 
+                ?position a core:Position .
+                ?position core:relates ?org . 
+                ?org a foaf:Organization .
                 ?org core:subOrganizationWithin ?middleOrg .
                 ?middleOrg rdfs:label ?middleOrgName
             } UNION {
                 ?subject ?property ?position .
-                ?position core:positionInOrganization ?org . 
+                ?position a core:Position .
+                ?position core:relates ?org .
+                ?org a foaf:Organization . 
                 ?org core:subOrganizationWithin ?middleOrg .
                 ?middleOrg core:subOrganizationWithin ?outerOrg
             } UNION {
                 ?subject ?property ?position .
-                ?position core:positionInOrganization ?org . 
+                ?position a core:Position .
+                ?position core:positionInOrganization ?org .
+                ?org a foaf:Organization . 
                 ?org core:subOrganizationWithin ?middleOrg .
                 ?middleOrg core:subOrganizationWithin ?outerOrg .
                 ?outerOrg rdfs:label ?outerOrgName
@@ -117,12 +133,14 @@
     <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
         CONSTRUCT { 
-            ?subject ?property ?position .  
+            ?subject ?property ?position .
+            ?position a core:Position .  
             ?position core:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval core:start ?dateTimeStartValue .
             ?dateTimeStartValue core:dateTime ?dateTimeStart 
         } WHERE {
             ?subject ?property ?position .  
+            ?position a core:Position .  
             ?position core:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval core:start ?dateTimeStartValue .
             ?dateTimeStartValue core:dateTime ?dateTimeStart 
@@ -133,11 +151,13 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;    
         CONSTRUCT { 
             ?subject ?property ?position .  
+            ?position a core:Position .  
             ?position core:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval core:end ?dateTimeEndValue .
             ?dateTimeEndValue core:dateTime ?dateTimeEnd 
         } WHERE {
             ?subject ?property ?position .  
+            ?position a core:Position .  
             ?position core:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval core:end ?dateTimeEndValue .
             ?dateTimeEndValue core:dateTime ?dateTimeEnd 
