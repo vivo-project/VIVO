@@ -197,22 +197,22 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     private String getAuthorshipN3() {
         return "@prefix core: <" + vivoCore + "> . " + 
         "?authorshipUri a core:Authorship ;" + 
-        "core:linkedAuthor ?person ." +   
-        "?person core:authorInAuthorship ?authorshipUri .";
+        "core:relates ?person ." +   
+        "?person core:relatedBy ?authorshipUri .";
     }
 
     private String getN3ForNewPub() {
         return "@prefix core: <" + vivoCore + "> ." +
         "?newPublication a ?pubType ." +
         "?newPublication <" + label + "> ?title ." +  
-        "?authorshipUri core:linkedInformationResource ?newPublication ." +
-        "?newPublication core:informationResourceInAuthorship ?authorshipUri .";   
+        "?authorshipUri core:relates ?newPublication ." +
+        "?newPublication core:relatedBy ?authorshipUri .";   
     }
 
     private String getN3ForExistingPub() {
         return "@prefix core: <" + vivoCore + "> ." +
-        "?authorshipUri core:linkedInformationResource ?pubUri ." +
-        "?pubUri core:informationResourceInAuthorship ?authorshipUri .";
+        "?authorshipUri core:relates ?pubUri ." +
+        "?pubUri core:relatedBy ?authorshipUri .";
     }
 
     private String getN3ForNewCollectionNewPub() {
@@ -875,8 +875,9 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
         String query = "PREFIX core:<" + vivoCore + "> " + 
         "SELECT ?pubUri WHERE { " + 
-        "<" + subject + "> core:authorInAuthorship ?authorshipUri ." + 
-        "?authorshipUri core:linkedInformationResource ?pubUri . }";
+        "<" + subject + "> core:relatedBy ?authorshipUri . " + 
+        "?authorship a core:Authorship . " +  
+        "?authorshipUri core:relates ?pubUri . }";
         return query;
     }
 

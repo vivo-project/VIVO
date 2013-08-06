@@ -145,28 +145,28 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 		return  getN3PrefixString() + 
         "?newPerson a foaf:Person ;\n" + 
         "<" + RDFS.label.getURI() + "> ?label .\n" + 
-        "?authorshipUri core:linkedAuthor ?newPerson .\n" + 
-        "?newPerson core:authorInAuthorship ?authorshipUri . ";
+        "?authorshipUri core:relates ?newPerson .\n" + 
+        "?newPerson core:relatedBy ?authorshipUri . ";
 	}
 	
 	private String getN3ForExistingPerson() {
 		return getN3PrefixString() + 
-		"?authorshipUri core:linkedAuthor ?personUri .\n" + 
-		"?personUri core:authorInAuthorship ?authorshipUri .";
+		"?authorshipUri core:relates ?personUri .\n" + 
+		"?personUri core:relatedBy ?authorshipUri .";
 	}
 	
 	private String getN3NewOrg() {
 		return  getN3PrefixString() + 
         "?newOrg a foaf:Organization ;\n" + 
         "<" + RDFS.label.getURI() + "> ?orgName .\n" + 
-        "?authorshipUri core:linkedAuthor ?newOrg .\n" + 
-        "?newOrg core:authorInAuthorship ?authorshipUri . ";
+        "?authorshipUri core:relates ?newOrg .\n" + 
+        "?newOrg core:relatedBy ?authorshipUri . ";
 	}
 	
 	private String getN3ForExistingOrg() {
 		return getN3PrefixString() + 
-		"?authorshipUri core:linkedAuthor ?orgUri .\n" + 
-		"?orgUri core:authorInAuthorship ?authorshipUri .";
+		"?authorshipUri core:relates ?orgUri .\n" + 
+		"?orgUri core:relatedBy ?authorshipUri .";
 	}
 	/**  Get new resources	 */
 	//A new authorship uri will always be created when an author is added
