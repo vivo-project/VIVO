@@ -24,7 +24,8 @@ local:personInPositionConfig a :ObjectPropertyDisplayConfig ;
     :displayName "positions" ;
     :listViewConfigFile "listViewConfig-personInPosition.xml"^^xsd:string ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> ;
-    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public .
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasPositionHistoryGenerator"^^xsd:string .
 
 local:authorInAuthorshipContext a :ConfigContext ;
     :hasConfiguration local:authorInAuthorshipConfig ;
