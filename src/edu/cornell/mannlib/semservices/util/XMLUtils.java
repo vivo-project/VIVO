@@ -1,8 +1,7 @@
-/* $This file is distributed under the terms of the license in /doc/license.txt$ */
-
 package edu.cornell.mannlib.semservices.util;
 
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
@@ -81,7 +80,7 @@ public class XMLUtils {
     public synchronized static Document parse(String xmlString)
             throws IOException, SAXException, ParserConfigurationException {
         StringReader reader = new StringReader(xmlString);
-        InputSource inputSource = new InputSource(reader); 
+        InputSource inputSource = new InputSource(reader);
         return getDocumentBuilder().parse(inputSource);
     }
 
@@ -122,6 +121,15 @@ public class XMLUtils {
        serializer.serialize(doc);
     }
 
+   public static String serializeDoctoString(Document doc) throws IOException {
+      XMLSerializer serializer = new XMLSerializer();
+      ByteArrayOutputStream bout = new ByteArrayOutputStream();
+
+      serializer.setOutputByteStream(bout);
+      serializer.serialize(doc);
+      return bout.toString();
+   }
+
     /**
     * @param xml
     */
@@ -149,6 +157,36 @@ public class XMLUtils {
       }
        String formattedxml=xmlOutput.getWriter().toString();
        System.out.println(formattedxml);
+
+    }
+
+   /**
+    * @param xml
+    */
+   public static String prettyPrintToString(String xml) {
+       Source xmlInput = new StreamSource(new StringReader(xml));
+       StreamResult xmlOutput = new StreamResult(new StringWriter());
+       Transformer transformer = null;
+      try {
+         transformer = TransformerFactory.newInstance().newTransformer();
+      } catch (TransformerConfigurationException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      } catch (TransformerFactoryConfigurationError e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+       //transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "testing.dtd");
+       transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+       transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+       try {
+         transformer.transform(xmlInput, xmlOutput);
+      } catch (TransformerException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+       String formattedxml=xmlOutput.getWriter().toString();
+       return formattedxml;
 
     }
 

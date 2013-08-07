@@ -264,5 +264,10 @@ public class ObjectUtils {
       }
    }
 
+   public static String nl2br(String text) {
+      return text.replaceAll("\n\n", "<p>").replaceAll("\n", "<br>");
+   }
+
+
 
 }

@@ -96,6 +96,9 @@
     <input type="hidden" id="conceptNode" name="conceptNode" value=""/> <!-- Field value populated by JavaScript -->
     <input type="hidden" id="conceptLabel" name="conceptLabel" value="" />  <!-- Field value populated by JavaScript -->
 		<input type="hidden" id="conceptSource" name="conceptSource" value="" /> <!-- Field value populated by JavaScript -->
+    		<input type="hidden" id="conceptSemanticTypeURI" name="conceptSemanticTypeURI" value="" /> <!-- Field value populated by JavaScript -->
+        		<input type="hidden" id="conceptSemanticTypeLabel" name="conceptSemanticTypeLabel" value="" /> <!-- Field value populated by JavaScript -->
+    
     <div id="selectedConcept" name="selectedConcept" class="acSelection">
         <p class="inline">
         </p>

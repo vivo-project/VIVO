@@ -54,6 +54,7 @@ var addConceptForm = {
         this.externalConceptURI = $('#conceptNode');
         this.externalConceptLabel = $('#conceptLabel');
         this.externalConceptSource = $('#conceptSource');
+        this.externalConceptSemanticTypeLabel = $("#conceptSemanticTypeLabel");
         //remove links
         this.removeConceptLinks = $('a.remove');
         this.errors = $('#errors');
@@ -236,23 +237,27 @@ var addConceptForm = {
     	}
     	var i;
     	var len = checkedElements.length;
-    	var checkedConcept, checkedConceptElement, conceptLabel, conceptSource;
+    	var checkedConcept, checkedConceptElement, conceptLabel, conceptSource, conceptSemanticType;
     	var conceptNodes = [];
     	var conceptLabels = [];
     	var conceptSources = [];
+    	var conceptSemanticTypes = [];
     	
     	checkedElements.each(function() {
     		checkedConceptElement = $(this);
     		checkedConcept = checkedConceptElement.val();
     		conceptLabel = checkedConceptElement.attr("label");
     		conceptSource = checkedConceptElement.attr("conceptDefinedBy");
+    		conceptSemanticType = checkedConceptElement.attr("conceptType");
     		conceptNodes.push(checkedConcept);
     		conceptLabels.push(conceptLabel);
     		conceptSources.push(conceptSource);
+    		conceptSemanticTypes.push(conceptSemanticType);
     	});
     	this.externalConceptURI.val(conceptNodes);
     	this.externalConceptLabel.val(conceptLabels);
     	this.externalConceptSource.val(conceptSources);
+    	this.externalConceptSemanticTypeLabel.val(conceptSemanticTypes);
     	return true;
     }, 
     generateIndividualConceptDisplay: function(cuiURI, label, definition, type, definedBy, isBestMatch) {

@@ -1,4 +1,16 @@
-package edu.cornell.mannlib.vitro.webapp.utils.ConceptSearchService;
+/*
+ * $Id: BeanToJsonSerializer.java 66350 2007-08-20 21:11:41Z xluan $
+ *
+ * Copyright 2006- Revolution Health Group.  All rights reserved.
+ *
+ * This software is the confidential and proprietary information
+ * of Revolution Health Group.  (Confidential Information).
+ * You shall not disclose such Confidential Information and shall
+ * use it only in accordance with the terms of the license
+ * agreement you entered into with Revolution Health Group.
+ *
+ */
+package edu.cornell.mannlib.semservices.view;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
