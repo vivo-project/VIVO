@@ -70,10 +70,10 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         
         //try to get the publication
         List<ObjectPropertyStatement> stmts = 
-            authorshipNode.getObjectPropertyStatements("http://vivoweb.org/ontology/core#linkedInformationResource");
+            authorshipNode.getObjectPropertyStatements("http://vivoweb.org/ontology/core#relates");
         if( stmts == null || stmts.isEmpty() ){
             return doBadAuthorshipNoPub( vreq );
-        }else if( stmts.size() > 1 ){
+        }else if( stmts.size() > 2 ){
             return doBadAuthorshipMultiplePubs(vreq);
         }else{ 
             //skip to publication 
