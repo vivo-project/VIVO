@@ -111,7 +111,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <p class="inline">    
         <label for="orgType">${i18n().org_type_capitalized} ${requiredHint}</label>
         <#assign orgTypeOpts = editConfiguration.pageData.orgType />
-        <select id="typeSelector" name="orgType" acGroupName="org">
+        <select id="typeSelector" name="orgType" acGroupName="organization">
             <option value="" selected="selected">${i18n().select_one}</option>                
             <#list orgTypeOpts?keys as key>             
                 <#if orgTypeValue = key>
@@ -122,16 +122,14 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
             </#list>
         </select>
     </p>     
-
-  <div class="fullViewOnly">        
     
     <p>
-        <label for="relatedIndLabel">### ${i18n().name_capitalized} ${requiredHint}</label>
-        <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="orgLabel" acGroupName="org" value="${orgLabelValue}"  />
-        <input class="display" type="hidden" id="orgDisplay" acGroupName="org" name="orgLabelDisplay" value="${orgLabelDisplayValue}">
+        <label for="relatedIndLabel">${i18n().organization_capitalized} ${i18n().name_capitalized} ${requiredHint}</label>
+        <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="orgLabel" acGroupName="organization" value="${orgLabelValue}"  />
+        <input class="display" type="hidden" id="orgDisplay" acGroupName="organization" name="orgLabelDisplay" value="${orgLabelDisplayValue}">
     </p>
         
-    <div class="acSelection" acGroupName="org">
+    <div class="acSelection" acGroupName="organization">
         <p class="inline">
             <label>${i18n().selected_organization}:</label>
             <span class="acSelectionInfo"></span>
@@ -150,7 +148,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         </#list>
     </select>
     <p>
-        <label for="dept">${i18n().dept_or_school_name} ###</label>
+        <label for="dept">${i18n().dept_or_school_name} ${i18n().organization_capitalized}</label>
         <input  size="50"  type="text" id="dept" name="dept" value="${deptValue}" />
     </p>
     
@@ -191,7 +189,6 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
      </#if>
                                     
   	<#--End draw elements-->
-  </div>    
     <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>
     <p class="submit">
          <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> ${i18n().or} </span>
@@ -207,6 +204,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 var customFormData  = {
     acUrl: '${urls.base}/autocomplete?tokenize=true&stem=true',
     editMode: '${editMode}',
+    acTypes: {organization: 'http://xmlns.com/foaf/0.1/Organization'},
     defaultTypeName: 'organization',
     baseHref: '${urls.base}/individual?uri=',
     blankSentinel: '${blankSentinel}',

@@ -20,6 +20,9 @@ roleExamples-->
 <#--Variable assignments for Add Clinical Role To Person-->
 <#assign roleDescriptor = "${i18n().outreach_comm_service}" />
 <#assign typeSelectorLabel = "${i18n().outreach_comm_service_in}" />
+<#assign genericLabel = "${i18n().organization_capitalized}" />
+
+<#assign acTypes = "{activity: 'http://xmlns.com/foaf/0.1/Organization'}" />
 
 
 <#--Each of the two stage forms will include the form below-->

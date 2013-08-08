@@ -6,6 +6,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix core: <http://vivoweb.org/ontology/core#> .
 @prefix vivoweb: <http://vivoweb.org/ontology#> .
+@prefix afn:  <http://jena.hpl.hp.com/ARQ/function#> .
 
  
 #### n3 for research areas ####
@@ -30,12 +31,20 @@ display:getResearchAreaDataGetter
         """
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX vivo: <http://vivoweb.org/ontology/core#>
+        PREFIX afn:  <http://jena.hpl.hp.com/ARQ/function#>
         SELECT DISTINCT (str(?researchAreaLabel) AS ?raLabel) ?ra
         WHERE {
             ?individualURI vivo:organizationForPosition ?posn .
             ?posn  vivo:positionForPerson ?person .
             ?person vivo:hasResearchArea ?ra .
             ?ra rdfs:label ?researchAreaLabel
+            OPTIONAL { ?posn vivo:dateTimeInterval ?dti 
+                     OPTIONAL { ?dti vivo:end ?end .
+                                ?end vivo:dateTime ?endDate
+                     }
+            }
+            FILTER ( !bound(?endDate) ||                        
+                      afn:substring(str(?endDate), 0, 4) >= afn:substring(str(afn:now()), 0, 4) )
         }
         ORDER BY ?raLabel
         """ .

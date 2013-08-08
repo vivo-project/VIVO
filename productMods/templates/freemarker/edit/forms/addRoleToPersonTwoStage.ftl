@@ -153,9 +153,9 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
        </p>
        
        
-   <div class="fullViewOnly">        
+<#--   <div class="fullViewOnly"> -->
             <p>
-                <label for="activity">### ${i18n().name_capitalized} ${requiredHint}</label>
+                <label for="activity">${genericLabel?capitalize} ${i18n().name_capitalized} ${requiredHint}</label>
                 <input class="acSelector" size="50"  type="text" id="activity" name="activityLabel"  acGroupName="activity" value="${activityLabelValue}" />
                 <input class="display" type="hidden" id="activityDisplay" acGroupName="activity" name="activityLabelDisplay" value="${activityLabelDisplayValue}">
             </p>
@@ -176,7 +176,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
             </div>
 
             <#if showRoleLabelField = true>
-            <p><label for="roleLabel">${i18n().role_in} ### ${requiredHint} ${roleExamples}</label>
+            <p><label for="roleLabel">${i18n().role_in} ${genericLabel?capitalize} ${requiredHint} ${roleExamples}</label>
                 <input  size="50"  type="text" id="roleLabel" name="roleLabel" value="${roleLabel}" />
             </p>
         	</#if>
@@ -188,7 +188,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
                		${htmlForElements["startField"]} ${yearHint}
                </#if>
             <#else>
-                <h4 class="label">${i18n().years_participation_in} ### </h4>
+                <h4 class="label">${i18n().years_participating} </h4>
                 <#if htmlForElements?keys?seq_contains("startField")>
                 	    <label class="dateTime" for="startField">${i18n().start_capitalized}</label>
                		    ${htmlForElements["startField"]} ${yearHint}
@@ -199,7 +199,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
                		    ${htmlForElements["endField"]} ${yearHint}
                </#if>
             </#if>
-        </div>
+<#--        </div> -->
         <p class="submit">
             <input type="hidden" id="editKey" name="editKey" value="${editKey}" />
             <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> ${i18n().or} </span><a class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
@@ -214,7 +214,10 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 	var customFormData  = {
 	    acUrl: '${urls.base}/autocomplete?tokenize=true',
 	    editMode: '${editMode}',
-	    defaultTypeName: 'activity', // used in repair mode, to generate button text and org name field label
+	    acTypes: ${acTypes!},
+	    <#if acMultipleTypes??>acMultipleTypes: ${acMultipleTypes!},</#if>
+	    // used in repair mode: button text and org name label
+	    defaultTypeName: <#if genericLabel??>'${genericLabel}'<#else>'activity'</#if>, 
 	    baseHref: '${urls.base}/individual?uri=',
         blankSentinel: '${blankSentinel}',
         flagClearLabelForExisting: '${flagClearLabelForExisting}'

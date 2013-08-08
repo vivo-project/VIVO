@@ -21,6 +21,8 @@ roleExamples-->
 <#assign roleDescriptor = "${i18n().membership}" />
 <#assign typeSelectorLabel = "${i18n().membership_in}" />
 <#assign roleActivityVClass = "${i18n().organizations}" />
+<#assign genericLabel = "${i18n().organization_capitalized}" />
+<#assign acTypes = "{activity: 'http://xmlns.com/foaf/0.1/Organization'}" />
 
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">
