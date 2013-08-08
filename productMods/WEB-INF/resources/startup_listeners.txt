@@ -72,6 +72,7 @@ edu.cornell.mannlib.vitro.webapp.search.solr.VivoDocumentModifiers
 edu.cornell.mannlib.vitro.webapp.search.solr.SolrSetup
 
 edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerSetup
+edu.cornell.mannlib.vitro.webapp.freemarker.config.FreemarkerConfiguration$Setup
 
 # On shutdown, this will kill the background thread started by Apache Commons File Upload
 org.apache.commons.fileupload.servlet.FileCleanerCleanup
