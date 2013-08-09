@@ -206,6 +206,7 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
     final static String orgLabelQuery =
         "SELECT ?existingOrgLabel WHERE { \n" +
         "  ?position <" + positionInOrgPred + "> ?existingOrg . \n" +
+        "  ?existingOrg a <" + orgClass + "> . \n" +
         "  ?existingOrg <" + label + "> ?existingOrgLabel . \n" +
         "}";
     
