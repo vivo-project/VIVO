@@ -17,7 +17,8 @@ public class Concept {
    private List<String> narrowerURIList;
    private List<String> exactMatchURIList;
    private List<String> closeMatchURIList;
-
+   private List<String> altLabelList;
+   
    /**
     * default constructor
     */
@@ -147,6 +148,14 @@ public List<String> getCloseMatchURIList() {
 }
 public void setCloseMatchURIList(List<String> closeMatchURIList) {
 	this.closeMatchURIList = closeMatchURIList;
+}
+
+public List<String> getAltLabelList() {
+	return altLabelList;
+}
+
+public void setAltLabelList(List<String> altLabelList) {
+	this.altLabelList = altLabelList;
 }
 
 }

@@ -65,7 +65,6 @@ public class AgrovocService implements ExternalConceptService  {
    private final String codeName = "hasCodeAgrovoc";
    private final String searchMode = "Exact Match";
    protected final String dbpedia_endpoint = " http://dbpedia.org/sparql";
-
   
    
 	@Override
@@ -94,16 +93,16 @@ public class AgrovocService implements ExternalConceptService  {
 			return conceptList;
 		}
 		
-		System.out.println("uri: "+uri); 
+		//System.out.println("uri: "+uri); 
         SKOSDataset dataset = manager.loadDataset(uri);
         
         for (SKOSConcept skosConcept : dataset.getSKOSConcepts()) {
         	Concept concept = new Concept();
-            System.out.println("Concept: " + skosConcept.getURI());
+            //System.out.println("Concept: " + skosConcept.getURI());
             concept.setUri(skosConcept.getURI().toString());
             concept.setConceptId(stripConceptId(skosConcept.getURI().toString()));
             concept.setBestMatch("true");
-            concept.setDefinedBy(this.schemeUri);
+            concept.setDefinedBy(schemeUri);
             concept.setSchemeURI(this.schemeUri);
             concept.setType("");
             String lang = "";
@@ -125,6 +124,32 @@ public class AgrovocService implements ExternalConceptService  {
                  concept.setLabel(literal.getLiteral());
               }
             }
+            
+            // get altLabels
+            List<String> altLabelList = new ArrayList<String>();
+			for (SKOSLiteral literal : skosConcept
+					.getSKOSRelatedConstantByProperty(dataset, manager
+							.getSKOSDataFactory().getSKOSAltLabelProperty())) {
+
+				if (!literal.isTyped()) {
+					// if it has language
+					SKOSUntypedLiteral untypedLiteral = literal
+							.getAsSKOSUntypedLiteral();
+					if (untypedLiteral.hasLang()) {
+						lang = untypedLiteral.getLang();
+					} else {
+						lang = "";
+					}
+				}
+				//System.out.println("literal: "+ literal.getLiteral());
+				if (lang.equals("en")) {
+					//System.out.println("altLabel: " + literal.getLiteral());
+					altLabelList.add(literal.getLiteral());
+				}
+			}
+            concept.setAltLabelList(altLabelList);
+            
+            
             
             // get the broader property URI
             List<String> broaderURIList = new ArrayList<String>();
@@ -347,9 +372,9 @@ public class AgrovocService implements ExternalConceptService  {
 
 
    public List<Concept> getConceptsByURIWithSparql(String uri) throws Exception {
-	 //John Ferreira's original code has implementation
-	      List<Concept> newConceptList = new ArrayList<Concept>();
-	      return newConceptList;
+	  // deprecating this method...just return an empty list
+      List<Concept> conceptList = new ArrayList<Concept>();      
+      return conceptList;
    }
    
    protected String getAgrovocTermCode(String rdf) throws Exception {

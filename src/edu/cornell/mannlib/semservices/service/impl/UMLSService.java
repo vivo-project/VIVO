@@ -29,14 +29,14 @@ public class UMLSService implements ExternalConceptService {
    private static final String baseUri = "http://link.informatics.stonybrook.edu/umls/CUI/";
    private static final String endpoint = "http://link.informatics.stonybrook.edu/sparql/";
    private static final String schemeURI = "http://link.informatics.stonybrook.edu/umls";
-
+   
+   
    
 	@Override
 	public List<Concept> getConcepts(String term) throws Exception {
 		List<Concept> conceptList = new ArrayList<Concept>();
 
 		String results = null;
-		//Format in rdf/xml is possible but would require separate processing method
 		String dataUrl = submissionUrl + "textToProcess="
 				+ URLEncoder.encode(term, "UTF-8") 
 				+ "&format=json";
@@ -98,11 +98,12 @@ public class UMLSService implements ExternalConceptService {
     * @param uri
     * @return
     */
-   public List<Concept> getConceptsByURIWithSparql(String uri) throws Exception {
-	 //John Ferreira's original code has implementation
-	      List<Concept> newConceptList = new ArrayList<Concept>();
-	      return newConceptList;
-   }
+	public List<Concept> getConceptsByURIWithSparql(String uri)
+			throws Exception {
+		// deprecating this method...just return an empty list
+		List<Concept> conceptList = new ArrayList<Concept>();
+		return conceptList;
+	}
 
    /**
     * @param results

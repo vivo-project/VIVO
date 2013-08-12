@@ -34,8 +34,7 @@ public class GemetService implements ExternalConceptService  {
    private final String endpoint = "http://cr.eionet.europa.eu/sparql";
    private final String schemeURI = "http://www.eionet.europa.eu/gemet/gemetThesaurus";
 
-
-  
+   
 	@Override
 	public List<Concept> getConcepts(String term) throws Exception {
 		List<Concept> conceptList = new ArrayList<Concept>();
@@ -65,11 +64,12 @@ public class GemetService implements ExternalConceptService  {
 
    }
 
-   public List<Concept> getConceptsByURIWithSparql(String uri) throws Exception {
-     //John Ferreira's original code has implementation
-      List<Concept> newConceptList = new ArrayList<Concept>();
-      return newConceptList;
-   }
+	public List<Concept> getConceptsByURIWithSparql(String uri)
+			throws Exception {
+		// deprecating this method...just return an empty list
+		List<Concept> conceptList = new ArrayList<Concept>();
+		return conceptList;
+	}
 
    /**
     * @param results
@@ -87,7 +87,7 @@ public class GemetService implements ExternalConceptService  {
 
          for (int i = 0; i < jsonArray.size(); i++) {
             Concept concept = new Concept();
-            concept.setDefinedBy(this.schemeURI);
+            concept.setDefinedBy(schemeURI);
             concept.setBestMatch("true");
             JSONObject json = jsonArray.getJSONObject(i);
             String uri = getJsonValue(json, "uri");
@@ -124,7 +124,7 @@ public class GemetService implements ExternalConceptService  {
             for (String s: relatedURIList) {
             	System.out.println("related uri: "+s);
             }*/
-            
+            //String altLabels = getAllTranslationsForConcept(uri, "nonPreferredLabels");
             
             conceptList.add(concept);
 
@@ -218,9 +218,10 @@ public class GemetService implements ExternalConceptService  {
       "?concept_uri=" + concept_uri +
       "&property_uri=" + property_uri +
       "&language=en";
-
       try {
          result = getGemetResults(serviceUrl);
+         List<String> props = getPropertyFromJson(result);
+          
       } catch (Exception e) {
          e.printStackTrace();
          throw e;
@@ -310,6 +311,7 @@ public class GemetService implements ExternalConceptService  {
       return results;
    }
    
+    
    protected List<String> getRelatedUris(String json) {
 	   List<String> uriList = new ArrayList<String>();
 	   String uri = new String();
@@ -327,6 +329,19 @@ public class GemetService implements ExternalConceptService  {
 	   
    }
    
+	protected List<String> getPropertyFromJson(String json) {
+		List<String> props = new ArrayList<String>();
+		JSONArray jsonArray = (JSONArray) JSONSerializer.toJSON(json);
+		if (jsonArray.size() == 0) {
+			return new ArrayList<String>();
+		}
+		for (int i = 0; i < jsonArray.size(); i++) {
+			JSONObject jsonObj = jsonArray.getJSONObject(i);
+			System.out.println(jsonObj.toString());
+		}
+		return props;
+	}
+
    protected String stripConceptId(String uri) {
 	     String conceptId = new String();
 	     int lastslash = uri.lastIndexOf('/');
