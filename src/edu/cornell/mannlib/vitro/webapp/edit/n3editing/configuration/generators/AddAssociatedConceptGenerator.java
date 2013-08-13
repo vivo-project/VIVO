@@ -323,7 +323,8 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	
    private void addPreprocessors(EditConfigurationVTwo editConfiguration, WebappDaoFactory wadf) {
 	  //An Edit submission preprocessor for enabling addition of multiple terms for a single search
-	  
+	   //TODO: Check if this is the appropriate way of getting model
+	 
 	   editConfiguration.addEditSubmissionPreprocessor(
 			   new AddAssociatedConceptsPreprocessor(editConfiguration, wadf));
 	  

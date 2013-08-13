@@ -377,7 +377,9 @@ public class AddAssociatedConceptsPreprocessor extends
 		//Check if system has an individual with this URI
 		//
 		List<Individual> individualsWithLabel = this.wadf.getIndividualDao().getIndividualsByDataProperty(RDFS.label.getURI(), label);
-		//We are only interested in concepts
+		//We are only interested in semantic type objects and this may return multiple elements (perhaps too many?
+		//getting the model requires servlet and context and we don't want to pass that here do we//Return all semantic type objects with this label
+		//this.modelSelector.
 		return null;
 		
 	}
