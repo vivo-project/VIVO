@@ -1,4 +1,7 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
 /*
+
  * $Id$
  * CONFIDENTIAL AND PROPRIETARY. © 2007 Revolution Health Group LLC. All rights reserved.
  * This source code may not be disclosed to others, used or reproduced without the written permission of Revolution Health Group.

@@ -203,7 +203,9 @@ var addConceptForm = {
     	var definedBy = conceptResult.definedBy;
     	var type = conceptResult.type;
     	var uri = conceptResult.uri;
-    	return addConceptForm.generateIndividualConceptDisplay(uri, label, definition, type, definedBy, isBestMatch);
+    	//this will be null if there are no alternate labels
+    	var altLabels = conceptResult.altLabelList;
+    	return addConceptForm.generateIndividualConceptDisplay(uri, label, altLabels, definition, type, definedBy, isBestMatch);
     },
     //This should now return all best matches in one array and other results in another
     parseResults:function(resultsArray) {
@@ -260,12 +262,12 @@ var addConceptForm = {
     	this.externalConceptSemanticTypeLabel.val(conceptSemanticTypes);
     	return true;
     }, 
-    generateIndividualConceptDisplay: function(cuiURI, label, definition, type, definedBy, isBestMatch) {
+    generateIndividualConceptDisplay: function(cuiURI, label, altLabels, definition, type, definedBy, isBestMatch) {
     	var htmlAdd = "<li class='concepts'>" + 
     	"<div class='row'>" + 
     	"<div class='column conceptLabel'>" +
     	addConceptForm.generateIndividualCUIInput(cuiURI, label, type, definedBy) +  
-    	label + addConceptForm.generateIndividualTypeDisplay(type) + "</div>" + 
+    	addConceptForm.generateIndividualLabelsDisplay(label, altLabels) + addConceptForm.generateIndividualTypeDisplay(type) + "</div>" + 
     	addConceptForm.generateIndividualDefinitionDisplay(definition) + 
     	addConceptForm.generateBestOrAlternate(isBestMatch) +
     	"</div>" +  
@@ -274,6 +276,14 @@ var addConceptForm = {
     }, 
     generateIndividualCUIInput:function(cuiURI, label, type, definedBy) {
     	return 	"<input type='checkbox'  name='CUI' value='" + cuiURI + "' label='" + label + "' conceptType='" + type + "' conceptDefinedBy='" + definedBy + "'/>";
+    },
+    //In case there are multiple labels display those
+    generateIndividualLabelsDisplay:function(label, altLabels) {
+    	var labelDisplay = label;
+    	if(altLabels != null && altLabels.length > 0) {
+    		labelDisplay += "<br>(" + altLabels + ")";
+    	}
+    	return labelDisplay;
     },
     generateIndividualTypeDisplay:function(type) {
     	if(type != null && type.length > 0) {

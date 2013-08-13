@@ -1,3 +1,5 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
 /*
  * $Id: DateConverter.java 50408 2007-03-28 19:14:46Z jdamick $
  *
