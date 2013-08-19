@@ -11,11 +11,20 @@ import javax.servlet.http.HttpSession;
 
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.vocabulary.XSD;
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.sparql.resultset.ResultSetMem;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.ObjectPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
+import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.PersonHasPublicationValidator;
@@ -37,6 +46,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
     final static String collectionClass = bibo + "Periodical";
     final static String bookClass = bibo + "Book";
+    final static String documentClass = bibo + "Document";
     final static String conferenceClass = bibo + "Conference";
     final static String editorClass = foaf + "Person";
     final static String publisherClass = vivoCore + "Publisher";
@@ -52,7 +62,8 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     final static String dateTimeValueType = vivoCore + "DateTimeValue";
     final static String dateTimeValue = vivoCore + "dateTime";
     final static String dateTimePrecision = vivoCore + "dateTimePrecision";
-    
+    final static String relatesPred = vivoCore + "relates";
+   
     public AddPublicationToPersonGenerator() {}
     
 	@Override
@@ -69,17 +80,29 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         Individual authorshipNode = EditConfigurationUtils.getObjectIndividual(vreq);
         
         //try to get the publication
-        List<ObjectPropertyStatement> stmts = 
-            authorshipNode.getObjectPropertyStatements("http://vivoweb.org/ontology/core#relates");
-        if( stmts == null || stmts.isEmpty() ){
-            return doBadAuthorshipNoPub( vreq );
-        }else if( stmts.size() > 2 ){
-            return doBadAuthorshipMultiplePubs(vreq);
-        }else{ 
-            //skip to publication 
-            EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();
-            editConfiguration.setSkipToUrl(UrlBuilder.getIndividualProfileUrl(stmts.get(0).getObjectURI(), vreq));
-            return editConfiguration;
+        String pubQueryStr = "SELECT ?obj \n" +
+                             "WHERE { <" + authorshipNode.getURI() + "> <" + relatesPred + "> ?obj . \n" +
+                             "    ?obj a <" + documentClass + "> . } \n";
+        Query pubQuery = QueryFactory.create(pubQueryStr);
+        QueryExecution qe = QueryExecutionFactory.create(pubQuery, ModelAccess.on(vreq).getJenaOntModel());
+        try {
+            ResultSetMem rs = new ResultSetMem(qe.execSelect());
+            if(!rs.hasNext()){
+                return doBadAuthorshipNoPub( vreq );
+            }else if( rs.size() > 1 ){
+                return doBadAuthorshipMultiplePubs(vreq);
+            }else{ 
+                //skip to publication 
+                RDFNode objNode = rs.next().get("obj");
+                if (!objNode.isResource() || objNode.isAnon()) {
+                    return doBadAuthorshipNoPub( vreq );
+                }
+                EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();
+                editConfiguration.setSkipToUrl(UrlBuilder.getIndividualProfileUrl(((Resource) objNode).getURI(), vreq));
+                return editConfiguration;
+            }
+        } finally {
+            qe.close();
         }
     }
 
