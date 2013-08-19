@@ -46,7 +46,8 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	private Log log = LogFactory.getLog(AddAssociatedConceptGenerator.class);
 	private String template = "addAssociatedConcept.ftl";
 	private static String SKOSConceptType = "http://www.w3.org/2004/02/skos/core#Concept";
-	
+	//TODO: Set this to a dynamic mechanism
+	private static String VIVOCore = "http://vivoweb.org/ontology/core#";
 		
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
@@ -168,10 +169,13 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		return n3Required;
     }
     
-   //Don't think there's any n3 optional here
+   //Optional N3, includes possibility of semantic type which may or may not be included
+    //label and source are independent of semantic type
 	private List<String> generateN3Optional() {
 		return list("?conceptNode <" + RDFS.label.getURI() + "> ?conceptLabel .\n" + 
-    	        "?conceptNode <" + RDFS.isDefinedBy.getURI() + "> ?conceptSource ."  	            	        
+    	        "?conceptNode <" + RDFS.isDefinedBy.getURI() + "> ?conceptSource .", 
+				"?conceptNode <" + VIVOCore + "conceptSemanticType> ?conceptSemanticTypeURI ." + 
+    	        "?conceptSemanticTypeURI <" + RDFS.label.getURI() + "> ?conceptSemanticTypeLabel ."
     	);
     }
 	
@@ -185,6 +189,8 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 			HashMap<String, String> newResources = new HashMap<String, String>();
 			//There are no new resources here, the concept node uri doesn't
 			//get created but already exists, and vocab uri should already exist as well
+			//Adding concept semantic type uri just to test - note this isn't really on the form at all
+			//newResources.put("conceptSemanticTypeURI", null);
 			return newResources;
 		}
     
@@ -233,9 +239,12 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
     	//The URI of the node that defines the concept
     	urisOnForm.add("conceptNode");
     	urisOnForm.add("conceptSource");
+    //	urisOnForm.add("conceptSemanticTypeURI");
     	editConfiguration.setUrisOnform(urisOnForm);
     	//Also need to add the label of the concept
     	literalsOnForm.add("conceptLabel");
+    //	literalsOnForm.add("conceptSemanticTypeLabel");
+
     	editConfiguration.setLiteralsOnForm(literalsOnForm);
     }
     
@@ -263,6 +272,8 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
     	setConceptNodeField(editConfiguration, vreq);
     	setConceptLabelField(editConfiguration, vreq);
     	setVocabURIField(editConfiguration, vreq);
+    	//setConceptSemanticTypeURIField(editConfiguration,vreq);
+    	//setConceptSemanticTypeLabelField(editConfiguration,vreq);
     }
     
 	//this field will be hidden and include the concept node URI
@@ -290,6 +301,22 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 				setRangeDatatypeUri(XSD.xstring.toString())
 				);
 	}
+	
+	//This will also be a URI
+	private void setConceptSemanticTypeURIField(EditConfigurationVTwo editConfiguration,
+			VitroRequest vreq) {
+		editConfiguration.addField(new FieldVTwo().
+				setName("conceptSemanticTypeURI")
+				);
+	}
+	
+	private void setConceptSemanticTypeLabelField(EditConfigurationVTwo editConfiguration,
+			VitroRequest vreq) {
+		editConfiguration.addField(new FieldVTwo().
+				setName("conceptSemanticTypeLabel").
+				setRangeDatatypeUri(XSD.xstring.toString())
+				);
+	}
     
    
     //Add preprocessor
@@ -298,7 +325,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	  //An Edit submission preprocessor for enabling addition of multiple terms for a single search
 	  
 	   editConfiguration.addEditSubmissionPreprocessor(
-			   new AddAssociatedConceptsPreprocessor(editConfiguration));
+			   new AddAssociatedConceptsPreprocessor(editConfiguration, wadf));
 	  
 	}
      
@@ -357,6 +384,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 			 	boolean isSKOSConcept = false;
 			 	String conceptUri =  conceptIndividual.getURI();
 			 	String conceptLabel = conceptIndividual.getName();
+
 			 	//Check if SKOS Concept type
 			 	List<ObjectPropertyStatement> osl = conceptIndividual.getObjectPropertyStatements(RDF.type.getURI());
 			 	for(ObjectPropertyStatement os: osl) {
@@ -367,7 +395,8 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 			 	}
 			 	
 			 	if(isSKOSConcept) {
-			 		info.add(new AssociatedConceptInfo(conceptLabel, conceptUri, null, null, SKOSConceptType));
+			 		//if the concept in question is skos - which would imply a user generated concept
+			 		info.add(new AssociatedConceptInfo(conceptLabel, conceptUri, null, null, SKOSConceptType, null, null));
 			 	} else {
 			 		//Get the vocab source and vocab label
 			 		List<ObjectPropertyStatement> vocabList = conceptIndividual.getObjectPropertyStatements(RDFS.isDefinedBy.getURI());
@@ -379,7 +408,20 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 			 			//Assuming name will get label
 			 			vocabLabel = sourceIndividual.getName();
 			 		}
-			 		info.add(new AssociatedConceptInfo(conceptLabel, conceptUri, vocabSource, vocabLabel, null));
+			 		String conceptSemanticTypeURI = null;
+			 		String conceptSemanticTypeLabel = null;
+			 		//Can a concept have multiple semantic types?  Currently we are only returning the first one
+			 		/*
+			 		List<ObjectPropertyStatement> semanticTypeStatements = conceptIndividual.getObjectPropertyStatements(VIVOCore + "conceptSemanticType");
+				 	if(semanticTypeStatements.size() > 0) {
+				 		conceptSemanticTypeURI = semanticTypeStatements.get(0).getObjectURI();
+					 	Individual conceptSemanticTypeIndividual = EditConfigurationUtils.getIndividual(vreq, conceptSemanticTypeURI);
+					 	conceptSemanticTypeLabel = conceptSemanticTypeIndividual.getName();
+				 	}*/
+				 	//get label
+
+			 		//Assuming this is from an external vocabulary source
+			 		info.add(new AssociatedConceptInfo(conceptLabel, conceptUri, vocabSource, vocabLabel, null, conceptSemanticTypeURI, conceptSemanticTypeLabel));
 
 			 	}
 		 }
@@ -392,12 +434,16 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		private String vocabURI;
 		private String vocabLabel;
 		private String type; //In case of SKOS concept, will have skos concept type
-		public AssociatedConceptInfo(String inputLabel, String inputURI, String inputVocabURI, String inputVocabLabel, String inputType) {
+		private String conceptSemanticTypeURI; //For some services, such as UMLS, we have a semantic type associated
+		private String conceptSemanticTypeLabel;
+		public AssociatedConceptInfo(String inputLabel, String inputURI, String inputVocabURI, String inputVocabLabel, String inputType, String inputConceptSemanticTypeURI, String inputConceptSemanticTypeLabel) {
 			this.conceptLabel = inputLabel;
 			this.conceptURI = inputURI;
 			this.vocabURI = inputVocabURI;
 			this.vocabLabel = inputVocabLabel;
 			this.type = inputType;
+			//this.conceptSemanticTypeURI = inputConceptSemanticTypeURI;
+			//this.conceptSemanticTypeLabel = inputConceptSemanticTypeLabel;
 		}
 		
 		//Getters
@@ -419,6 +465,14 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		
 		public  String getType(){
 			return type;
+		}
+		
+		public  String getConceptSemanticTypeURI(){
+			return conceptSemanticTypeURI;
+		}
+		
+		public  String getConceptSemanticTypeLabel(){
+			return conceptSemanticTypeLabel;
 		}
 		
 	}

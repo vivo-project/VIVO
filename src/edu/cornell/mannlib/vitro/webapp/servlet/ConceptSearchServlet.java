@@ -20,9 +20,9 @@ import org.apache.commons.logging.LogFactory;
 import edu.cornell.mannlib.semservices.bo.Concept;
 import edu.cornell.mannlib.semservices.bo.ConceptInfo;
 import edu.cornell.mannlib.semservices.bo.SemanticServicesError;
+import edu.cornell.mannlib.semservices.view.BeanToJsonSerializer;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.utils.ConceptSearchService.BeanToJsonSerializer;
 import edu.cornell.mannlib.vitro.webapp.utils.ConceptSearchService.ConceptSearchServiceUtils;
 
 public class ConceptSearchServlet extends VitroHttpServlet {
