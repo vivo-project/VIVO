@@ -69,7 +69,7 @@
 		<patternset id="appbase.patterns">
 			<include name="src/**/*" />
 			<include name="lib/**/*" />
-			<include name="rdffiles/**/*" />
+			<include name="rdf/**/*" />
 			<include name="test/**/*" />
 			<include name="themes/**/*" />
 			<include name="config/*.properties" />
