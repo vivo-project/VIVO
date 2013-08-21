@@ -40,10 +40,10 @@ local:authorInAuthorshipConfig a :ObjectPropertyDisplayConfig ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddPublicationToPersonGenerator"^^xsd:string ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupresearch> . 
 
-<http://example.org/appConfig/hasRoleServiceProviderRoleContext> a :ConfigContext ;
+<http://example.org/appConfig/hasServiceProviderRoleContext> a :ConfigContext ;
     :hasConfiguration <http://example.org/appConfig/hasServiceProviderRoleConfig> ;
-    :configContextFor <http://vivoweb.org/ontology/core#hasRole> ;
-    :qualifiedBy      <http://vivoweb.org/ontology/core#ServiceProviderRole> .
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedBy      <http://purl.obolibrary.org/obo/ERO_0000012> .
     
  
 <http://example.org/appConfig/hasServiceProviderRoleConfig> a :ObjectPropertyDisplayConfig ;
@@ -54,17 +54,3 @@ local:authorInAuthorshipConfig a :ObjectPropertyDisplayConfig ;
    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddServiceProviderRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupmapping> .
   
-  
-<http://example.org/appConfig/residentOfAwesomeCountryContext> a :ConfigContext ;
-    :hasConfiguration <http://example.org/appConfig/residentOfAwesomeCountryConfig> ;
-    :configContextFor <http://localhost:8085/vivo/individual/residentOf> ;
-    :qualifiedBy      <http://localhost:8085/vivo/individual/AwesomeCountry> .
-   
-
-<http://example.org/appConfig/residentOfAwesomeCountryConfig> a :ObjectPropertyDisplayConfig ;
-   :displayName "resident of awesome country" ;
-   vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
-   vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
-   :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupmapping> .
-   
- 
