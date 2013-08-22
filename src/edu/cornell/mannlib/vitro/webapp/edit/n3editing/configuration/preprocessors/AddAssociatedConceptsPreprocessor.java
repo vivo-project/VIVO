@@ -4,18 +4,27 @@ package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocess
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Literal;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
 
-import edu.cornell.mannlib.vitro.webapp.beans.Individual;
-import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
+
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.BaseEditSubmissionPreprocessorVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
@@ -27,13 +36,18 @@ public class AddAssociatedConceptsPreprocessor extends
 
 	protected static final Log log = LogFactory
 			.getLog(AddAssociatedConceptsPreprocessor.class.getName());
-    protected WebappDaoFactory wadf = null;
-
+	//TODO: Check if better way to do this?
+	protected OntModel ontModel = null;
 	// Field names/variables names for n3 - these will have numbers added as
 	// suffix if more than one term
 	private static String conceptNodeBase = "conceptNode";
 	private static String sourceBase = "conceptSource";
 	private static String labelBase = "conceptLabel";
+	private static String conceptSemanticTypeLabelBase = "conceptSemanticTypeLabel";
+	private static String conceptSemanticTypeURIBase = "conceptSemanticTypeURI";
+	//keyed off label variable, specifies which uri variable should be used, useful if same label repeated twice
+	private HashMap<String, String> labelVarToUriVarHash = null;
+	
 	//Also storing submission values
 	private static String conceptNodeValues = null;
 	private static String conceptLabelValues = null;
@@ -46,9 +60,10 @@ public class AddAssociatedConceptsPreprocessor extends
 
 	// Will be editing the edit configuration as well as edit submission here
 
-	public AddAssociatedConceptsPreprocessor(EditConfigurationVTwo editConfig, WebappDaoFactory wadf) {
+	public AddAssociatedConceptsPreprocessor(EditConfigurationVTwo editConfig, OntModel ontModel) {
 		super(editConfig);
-		this.wadf = wadf;
+		this.ontModel = ontModel;
+		this.labelVarToUriVarHash = new HashMap<String, String>();
 	}
 
 	public void preprocess(MultiValueEditSubmission inputSubmission) {
@@ -57,12 +72,14 @@ public class AddAssociatedConceptsPreprocessor extends
 		// as vocab uri (which is based on thge
 		// For query parameters, check whether CUI
 		copySubmissionValues();
-		//This will put the URI value in scope for the first semantic type label
-		//and generate the rest if need be
-		//processConceptSemanticValues();
+		
+		
 		if (conceptNodeValues != null) {
 			String[] conceptNodes = convertDelimitedStringToArray(conceptNodeValues);
 			int numberConcepts = conceptNodes.length;
+			//This will put the URI value in scope for the first semantic type label
+			//and generate the rest if need be
+			processConceptSemanticValues();
 			if (numberConcepts > 1) {
 				processConceptNodes(numberConcepts);
 			}
@@ -80,6 +97,7 @@ public class AddAssociatedConceptsPreprocessor extends
 		conceptLabelValues = getConceptLabelValues();
 		conceptNodeValues = getConceptNodeValues();
 		conceptSourceValues = getConceptSourceValues();
+		log.debug("concept label values are " + conceptLabelValues);
 
 	}
 	
@@ -94,14 +112,11 @@ public class AddAssociatedConceptsPreprocessor extends
 	}
 
 
-	
-	
-	
-	
-
 	//This is for additional concept nodes (i.e. if user selects more than one concept)
 	private void processConceptNodes(int numberConcepts) {
 		//There are no "new" resources b/c the concept nodes are URIs from external vocabularies
+		//New resources for concept semantic type uris
+		addNewResources(numberConcepts);
 		// Add N3Required
 		addN3Required(numberConcepts);
 		//Add N3 Optional as well
@@ -115,6 +130,31 @@ public class AddAssociatedConceptsPreprocessor extends
 
 	}
 
+	//This is specifically for concept semantic type URIs which may need to be generated
+	private void addNewResources(int numberConcepts) {
+		// TODO Auto-generated method stub
+		addConceptSemanticTypeURIResources(numberConcepts);
+	}
+
+	private void addConceptSemanticTypeURIResources(int numberConcepts) {
+		String[] conceptSemanticTypeURIs= convertDelimitedStringToArray(conceptSemanticTypeURIValues);
+		//the number of existing values may not match up, or at least existing populated ones
+		if(conceptSemanticTypeURIs != null && conceptSemanticTypeURIs.length == numberConcepts) {
+			int i;
+			for(i = 0; i < numberConcepts; i++) {
+				int suffix = i + 1;
+				String newResourceName = conceptSemanticTypeURIBase + suffix;
+				editConfiguration.addNewResource(newResourceName, null);
+				
+			}
+		} else if(conceptSemanticTypeURIs != null && conceptSemanticTypeURIs.length != numberConcepts){
+			log.error("Number of concept semantic type uris does not match the number of concepts");
+		} else{
+			log.error("Concept semantic type uris returned as null");
+		}		
+		
+	}
+
 	//This is where the actual values will be submitted as if they were separate input fields
 	//Each field name will correspond to the names of the fileds/uris on form/literals on form
 	//generated here
@@ -126,8 +166,8 @@ public class AddAssociatedConceptsPreprocessor extends
 		addConceptSourceInputs(numberConcepts);
 		addConceptLabelInputs(numberConcepts);
 		//for concept semantic type  labels and uris where they exist
-		//addConceptSemanticTypeLabelInputs(numberConcepts);
-		//addConceptSemanticTypeURIInputs(numberConcepts);
+		addConceptSemanticTypeLabelInputs(numberConcepts);
+		addConceptSemanticTypeURIInputs(numberConcepts);
 		
 	}
 
@@ -199,11 +239,51 @@ public class AddAssociatedConceptsPreprocessor extends
 	}
 	
 	private void addConceptSemanticTypeLabelInputs(int numberConcepts) {
-		
+		String[] labels = convertDelimitedStringToArray(conceptSemanticTypeLabelValues);
+		if(labels != null && labels.length == numberConcepts) {
+			int i;
+			for(i = 0; i < numberConcepts; i++) {
+				int suffix = i + 1;
+				String labelInputName = conceptSemanticTypeLabelBase + suffix;
+				String[] labelValues = new String[1];
+				labelValues[0] = labels[i];
+				//TODO: Check if there are no funky typed information also stored
+				//At this point the field should already have been added to edit configuration
+				FieldVTwo labelField = editConfiguration.getField(labelInputName);
+				//TODO: Also check to see whether the label is actually populate or will n3 editing take care of that?
+				if(labelField != null) {
+					submission.addLiteralToForm(editConfiguration, labelField, labelInputName, labelValues);
+				} else {
+					log.error("Corresponding field for " + labelInputName + " was not added to edit configuration");
+				}
+				
+			}
+		} else if(labels != null && labels.length != numberConcepts){
+			log.error("Number of concept semantic type labels did not match the number of concepts to be added");
+		} else{
+			log.error("Concept labels returned were null");
+		}	
 	}
 	
 	private void addConceptSemanticTypeURIInputs(int numberConcepts) {
-		
+		String[] conceptSemanticTypeURIs= convertDelimitedStringToArray(conceptSemanticTypeURIValues);
+		//the number of existing values may not match up, or at least existing populated ones
+		if(conceptSemanticTypeURIs != null && conceptSemanticTypeURIs.length == numberConcepts) {
+			int i;
+			for(i = 0; i < numberConcepts; i++) {
+				int suffix = i + 1;
+				String conceptInputName = conceptSemanticTypeURIBase + suffix;
+				String[] uriValues = new String[1];
+				uriValues[0] = conceptSemanticTypeURIs[i];
+				//Add value for uri to form
+				//TODO: Check if value is empty in which case don't add to submission
+				submission.addUriToForm(editConfiguration, conceptInputName, uriValues);
+			}
+		} else if(conceptSemanticTypeURIs != null && conceptSemanticTypeURIs.length != numberConcepts){
+			log.error("Number of concept nodes did not match the number of concepts to be added");
+		} else{
+			log.error("Concept nodes returned were null");
+		}	
 	}
 
 	//Fields
@@ -218,10 +298,16 @@ public class AddAssociatedConceptsPreprocessor extends
 			String conceptNode = conceptNodeBase + suffix;
 			String label = labelBase + suffix;
 			String source = sourceBase + suffix;
+			String conceptSemanticTypeLabel = conceptSemanticTypeLabelBase + suffix;
+			String conceptSemanticTypeURI = conceptSemanticTypeURIBase + suffix;
 			
 			addConceptNodeField(conceptNode);
 			addLabelField(label);
 			addSourceField(source);
+			//Also add fields for concept semantic type label
+			addConceptSemanticTypeLabelField(conceptSemanticTypeLabel);
+			//and concept semantic type URI
+			addConceptSemanticTypeURIField(conceptSemanticTypeURI);
 		}
 	}
 	
@@ -246,6 +332,21 @@ public class AddAssociatedConceptsPreprocessor extends
 				setName(source));
 		
 	}
+	
+	//Will need to check whether or not semantic type label even exists though?
+	private void addConceptSemanticTypeLabelField(String label) {
+		editConfiguration.addField(new FieldVTwo().
+				setName(label).
+				setRangeDatatypeUri(XSD.xstring.toString())
+				);
+		
+	}
+	
+	private void addConceptSemanticTypeURIField(String conceptSemanticTypeURI) {
+		editConfiguration.addField(new FieldVTwo().
+				setName(conceptSemanticTypeURI));		
+	}
+
 
 	//original literals on form: label, uris on form: conceptNode and conceptSource
 	//This will overwrite the original values in the edit configuration
@@ -261,9 +362,13 @@ public class AddAssociatedConceptsPreprocessor extends
 			String conceptNode = conceptNodeBase + suffix;
 			String label = labelBase + suffix;
 			String source = sourceBase + suffix;
+			String conceptSemanticTypeLabel = conceptSemanticTypeLabelBase + suffix;
+			String conceptSemanticTypeURI = conceptSemanticTypeURIBase + suffix;
 			urisOnForm.add(conceptNode);
 			urisOnForm.add(source);
+			urisOnForm.add(conceptSemanticTypeURI);
 			literalsOnForm.add(label);
+			literalsOnForm.add(conceptSemanticTypeLabel);
 		}
 		editConfiguration.setUrisOnform(urisOnForm);
 		editConfiguration.setLiteralsOnForm(literalsOnForm);
@@ -279,8 +384,7 @@ public class AddAssociatedConceptsPreprocessor extends
 		List<String> n3Required = new ArrayList<String>();
 		int index;
 		String nodeBase = "?" + conceptNodeBase;
-		String labelVar = "?" + labelBase;
-		String sourceVar = "?" + sourceBase;
+		
 		String prefixStr = "@prefix core: <http://vivoweb.org/ontology/core#> .";
 		// First one already included so add new ones here
 		for (index = 1; index <= numberConcepts; index++) {
@@ -293,23 +397,30 @@ public class AddAssociatedConceptsPreprocessor extends
 		editConfiguration.setN3Required(n3Required);
 	}
 	//Add n3 optional
-	
+	//TODO: Rewrite optional N3
 	private void addN3Optional(int numberConcepts) {
 		List<String> n3Optional = new ArrayList<String>();
 		int index;
 		String nodeBase = "?" + conceptNodeBase;
-		String labelVar = "?" + labelBase;
-		String sourceVar = "?" + sourceBase;
+		
+		String conceptSemanticTypeLabelVar = "?" + conceptSemanticTypeLabelBase;
+		String conceptSemanticTypeURIVar = "?" + conceptSemanticTypeURIBase;
 		String prefixStr = "@prefix core: <http://vivoweb.org/ontology/core#> .";
 		// First one already included so add new ones here
 		for (index = 1; index <= numberConcepts; index++) {
 			int suffix = index;
 			String node = nodeBase + suffix;
-			String label = labelVar + suffix;
-			String source = sourceVar + suffix;
+			
+			String conceptSemanticTypeLabel = conceptSemanticTypeLabelVar + suffix;
+			String conceptSemanticTypeURI = conceptSemanticTypeURIVar + suffix;
 			String n3String = prefixStr;
-			n3String += node + " <" + RDFS.label.getURI() + "> " + label + " .\n" + 
-	        node + " <" + RDFS.isDefinedBy.getURI() + "> " + source + " ."; 
+			
+			
+			n3String += node + " core:hasConceptSemanticType " + conceptSemanticTypeURI + " ." + 
+			conceptSemanticTypeURI + " core:isConceptSemanticTypeOf " + node + ". " + 
+	        conceptSemanticTypeURI +  " <" + RDFS.label.getURI() + "> " + conceptSemanticTypeLabel + " .\n" + 
+	        conceptSemanticTypeURI +  " <" + RDF.type.getURI() + "> core:ConceptSemanticType .\n"  ;
+			
 			n3Optional.add(n3String);
 		}
 		//Already have n3 required so need to add to that
@@ -357,31 +468,69 @@ public class AddAssociatedConceptsPreprocessor extends
 	//This will either generate or retrieve URIs for the concept semantic type labels if they exist
 	//We will then update the submission to include this 
 		private String getConceptSemanticTypeURIValues() {
- 			List<String> conceptSemanticTypeURIs = new ArrayList<String>();
 			String[] conceptSemanticTypeLabels = convertDelimitedStringToArray(conceptSemanticTypeLabelValues);
+			//keep track of unique labels
+			HashSet<String> allSemanticTypeLabels = new HashSet<String>();
 			int numberLabels = conceptSemanticTypeLabels.length;
-			
+			String pseudoInputString = "";
 			for(int i = 0; i < numberLabels; i++) {
 				String label = conceptSemanticTypeLabels[i];
+				//if label not already in the hash, then create key
+				if(!allSemanticTypeLabels.contains(label)) {
+					
+				}
 				//Make or retrieve URI for this label
 				String  uri = getURIForSemanticTypeLabel(label);
-				conceptSemanticTypeURIs.add(uri);
+				if(i != 0) {
+					pseudoInputString += ","; 
+				}
+				pseudoInputString += uri;
+			
 			}
 			
-			//Set uris as string
-			//Essentially this will allow the URI to be put in scope 
-			return conceptSemanticTypeURIs.toString();
+			String[] urisToAdd = new String[1];
+			urisToAdd[0] = pseudoInputString;
+			log.debug("uris to add" + pseudoInputString);
+			submission.addUriToForm(this.editConfiguration, "conceptSemanticTypeURI", urisToAdd);
+			return pseudoInputString;
 		}
 		
 	private String getURIForSemanticTypeLabel(String label) {
-		//Check if system has an individual with this URI
-		//
-		List<Individual> individualsWithLabel = this.wadf.getIndividualDao().getIndividualsByDataProperty(RDFS.label.getURI(), label);
-		//We are only interested in semantic type objects and this may return multiple elements (perhaps too many?
-		//getting the model requires servlet and context and we don't want to pass that here do we//Return all semantic type objects with this label
-		//this.modelSelector.
-		return null;
+		String existingURI = this.getExistingSemanticTypeURI(label);
+		if(existingURI != null) {
+			return existingURI;
+		}
+		//if we leave this as null, we should be able to generate a new resource
+		//empty string because there may be more than one value returned for labels
+		else return "";
 		
+	}
+	
+	private String getExistingSemanticTypeURI(String label) {
+		String queryStr = "SELECT ?semanticType WHERE { ?semanticType <" + RDF.type.getURI() + "> <http://vivoweb.org/ontology/core#ConceptSemanticType> . " + 
+				"?semanticType <" + RDFS.label.getURI() + "> \"" + label + "\"^^<http://www.w3.org/2001/XMLSchema#string>  . }";
+		 QueryExecution qe = null;
+	        try{
+	            Query query = QueryFactory.create(queryStr);
+	            qe = QueryExecutionFactory.create(query, this.ontModel);
+                ResultSet results = null;
+                results = qe.execSelect();
+                
+                while( results.hasNext()){
+                	QuerySolution qs = results.nextSolution();
+                	if(qs.get("semanticType") != null) {
+                		Resource semanticTypeURI = qs.getResource("semanticType");
+                		log.debug("Semantic Type URI returned " + semanticTypeURI.getURI());
+                		return semanticTypeURI.getURI();
+                	}
+                }
+	        }catch(Exception ex){
+	            throw new Error("Error in executing query string: \n" + queryStr + '\n' + ex.getMessage());
+	        }finally{
+	            if( qe != null)
+	                qe.close();
+	        }
+		return null;
 	}
 	
 	private Object getFirstElement(List inputList) {
