@@ -229,16 +229,138 @@
              	            areas of geographic focus.
              	        </p>
 
-                    	    <li><a href="#"></a></li>
                 	    <h4 id="rdffiles">Auto-loaded RDF files move to the Home directory</h4>
-             	        <p>
-             	        	<em>BOGUS</em>
-             	        	Any customizations will need to be adjusted.
-             	        	Change to the build process, so Three-tier build must adapt.
-             	        	Holly must store the user login data in a different place: [vivo]/rdffiles/auth/firsttime
-             	        </p>
+                	    <p>
+                	    	The RDF files that initialize the data model have moved, in both the distribution and 
+                	    	the runtime locations. 
+                	    	In the distribution, they have been collected in one place, and reorganized to use 
+                	    	a more consistent naming scheme. During the build process, they are copied to a
+                	    	location within the VIVO home directory, instead of residing in the webapp itself.
+                	    </p>
+                	    <p>
+                	    	If you have modified these RDF files, or added files of your own, you must adjust to
+                	    	the new locations accordingly.
+                	    	
+                	    </p>
+                	    	<h5>Old locations of RDF files</h5>
+<pre>/WEB-INF/ontologies/app/application.owl
+/WEB-INF/ontologies/app/aboutPage.n3
+/WEB-INF/ontologies/app/menu.n3
+/WEB-INF/ontologies/app/profilePageType.n3
+/WEB-INF/ontologies/app/loadedAtStartup/displayModelListViews.rdf
+/WEB-INF/ontologies/app/loadedAtStartup/homePageDataGetters.n3
+/WEB-INF/ontologies/app/loadedAtStartup/localeSelectionGUI.n3
+/WEB-INF/ontologies/app/loadedAtStartup/vivoListViewConfig.rdf
+/WEB-INF/ontologies/app/loadedAtStartup/vivoOrganizationDataGetters.n3
+/WEB-INF/ontologies/app/loadedAtStartup/vivoSearchProhibited.n3
+/WEB-INF/ontologies/app/menuload/displayTBOX.n3
+/WEB-INF/ontologies/app/menuload/displayDisplay.n3
+/WEB-INF/init-data/initialSiteConfig.rdf
+/WEB-INF/ontologies/user/abox/geopolitical.ver1.1-11-18-11-individual-labels.rdf
+/WEB-INF/ontologies/user/abox/vocabularySource-labels.n3
+/WEB-INF/ontologies/user/tbox/vitro-0.7-annotations.rdf
+/WEB-INF/ontologies/user/tbox/geopolitical-ver1.1-11-18-11-annotations.rdf
+/WEB-INF/ontologies/user/tbox/scires-1.5-annotations.rdf
+/WEB-INF/ontologies/user/tbox/vivo-core-1.5-annotations.rdf
+/WEB-INF/ontologies/user/tbox/isDefinedBy-1.5-annotations.rdf
+/WEB-INF/ontologies/user/applicationMetadata/propertygroups.rdf
+/WEB-INF/ontologies/user/applicationMetadata/classgroups.rdf
+/WEB-INF/filegraph/abox/us-states.rdf
+/WEB-INF/filegraph/abox/geopolitical.abox.ver1.1-11-18-11.owl
+/WEB-INF/filegraph/abox/academicDegree.rdf
+/WEB-INF/filegraph/abox/documentStatus.owl
+/WEB-INF/filegraph/abox/continents.n3
+/WEB-INF/filegraph/abox/vocabularySource.n3
+/WEB-INF/filegraph/abox/dateTimeValuePrecision.owl
+/WEB-INF/filegraph/tbox/vitroPublic.owl
+/WEB-INF/filegraph/tbox/vivo-dcterms-1.5.owl
+/WEB-INF/filegraph/tbox/scires-1.5.owl
+/WEB-INF/filegraph/tbox/vivo-core-1.5.owl
+/WEB-INF/filegraph/tbox/vivo-c4o-1.5.owl
+/WEB-INF/filegraph/tbox/geopolitical.tbox.ver1.1-11-18-11.owl
+/WEB-INF/filegraph/tbox/vivo-fabio-1.5.owl
+/WEB-INF/filegraph/tbox/vivo-skos-1.5.owl
+/WEB-INF/filegraph/tbox/vivo-event-1.5.owl
+/WEB-INF/filegraph/tbox/vivo-foaf-1.5.owl
+/WEB-INF/filegraph/tbox/vitro-0.7.owl
+/WEB-INF/filegraph/tbox/vivo-pws-1.5.owl
+/WEB-INF/filegraph/tbox/isDefinedBy-1.5.owl
+/WEB-INF/filegraph/tbox/vivo-dcelements-1.5.owl
+/WEB-INF/filegraph/tbox/vivo-bibo-1.5.owl</pre>
 
-
+                	    	<h5>New locations of RDF files</h5>
+<pre>rdf/display/firsttime/aboutPage.n3
+rdf/display/firsttime/application.owl
+rdf/display/firsttime/menu.n3
+rdf/display/firsttime/profilePageType.n3
+rdf/display/everytime/displayModelListViews.rdf
+rdf/display/everytime/homePageDataGetters.n3
+rdf/display/everytime/localeSelectionGUI.n3
+rdf/display/everytime/vivoListViewConfig.rdf
+rdf/display/everytime/vivoOrganizationDataGetters.n3
+rdf/display/everytime/vivoSearchProhibited.n3
+rdf/displayTbox/everytime/displayTBOX.n3
+rdf/displayDisplay/everytime/displayDisplay.n3
+rdf/applicationMetadata/firsttime/classgroups.rdf
+rdf/applicationMetadata/firsttime/initialSiteConfig.rdf
+rdf/applicationMetadata/firsttime/propertygroups.rdf
+rdf/abox/firsttime/geopolitical.ver1.1-11-18-11-individual-labels.rdf
+rdf/abox/firsttime/vocabularySource-labels.n3
+rdf/abox/filegraph/abox/academicDegree.rdf
+rdf/abox/filegraph/abox/continents.n3
+rdf/abox/filegraph/abox/dateTimeValuePrecision.owl
+rdf/abox/filegraph/abox/documentStatus.owl
+rdf/abox/filegraph/abox/geopolitical.abox.ver1.1-11-18-11.owl
+rdf/abox/filegraph/abox/us-states.rdf
+rdf/abox/filegraph/abox/vocabularySource.n3
+rdf/tbox/firsttime/geopolitical-ver1.1-11-18-11-annotations.rdf
+rdf/tbox/firsttime/isDefinedBy-1.5-annotations.rdf
+rdf/tbox/firsttime/scires-1.5-annotations.rdf
+rdf/tbox/firsttime/vitro-0.7-annotations.rdf
+rdf/tbox/firsttime/vivo-core-1.5-annotations.rdf
+rdf/tbox/filegraph/tbox/geopolitical.tbox.ver1.1-11-18-11.owl
+rdf/tbox/filegraph/tbox/isDefinedBy-1.5.owl
+rdf/tbox/filegraph/tbox/scires-1.5.owl
+rdf/tbox/filegraph/tbox/vitro-0.7.owl
+rdf/tbox/filegraph/tbox/vitroPublic.owl
+rdf/tbox/filegraph/tbox/vivo-bibo-1.5.owl
+rdf/tbox/filegraph/tbox/vivo-c4o-1.5.owl
+rdf/tbox/filegraph/tbox/vivo-core-1.5.owl
+rdf/tbox/filegraph/tbox/vivo-dcelements-1.5.owl
+rdf/tbox/filegraph/tbox/vivo-dcterms-1.5.owl
+rdf/tbox/filegraph/tbox/vivo-event-1.5.owl
+rdf/tbox/filegraph/tbox/vivo-fabio-1.5.owl
+rdf/tbox/filegraph/tbox/vivo-foaf-1.5.owl
+rdf/tbox/filegraph/tbox/vivo-pws-1.5.owl
+rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
+                	    <p>
+                	    	If you are using a three-tier build process, you will need to add a single line
+                	    	to the build script so the RDF files will be merged properly across the tiers. So this:
+<pre>&lt;patternset id="appbase.patterns"&gt;
+&lt;include name="src/**/*" /&gt;
+&lt;include name="lib/**/*" /&gt;
+&lt;include name="test/**/*" /&gt;
+&lt;include name="themes/**/*" /&gt;
+&lt;include name="config/*.properties" /&gt;
+&lt;include name="config/*.txt" /&gt;
+&lt;include name="config/jarlist/*.txt" /&gt;
+&lt;include name="config/solr/*" /&gt;
+&lt;include name="context.xml" /&gt;
+&lt;/patternset&gt;</pre>
+ becomes this: 
+ <pre>&lt;patternset id="appbase.patterns"&gt;
+&lt;include name="src/**/*" /&gt;
+&lt;include name="lib/**/*" /&gt;
+&lt;include name="rdf/**/*" /&gt;
+&lt;include name="test/**/*" /&gt;
+&lt;include name="themes/**/*" /&gt;
+&lt;include name="config/*.properties" /&gt;
+&lt;include name="config/*.txt" /&gt;
+&lt;include name="config/jarlist/*.txt" /&gt;
+&lt;include name="config/solr/*" /&gt;
+&lt;include name="context.xml" /&gt;
+&lt;/patternset&gt;</pre>
+                	    </p>
 
                 	    <h4 id="BOGUS">ANYTHING ELSE?</h4>
              	        <p>
@@ -526,6 +648,11 @@
                         </li>
                     </ul>
                 </blockquote>
+                <p>
+                    4. Apply any previous changes you have made to the RDF initialization files. 
+                    See the section on the <a href="#rdffiles">Auto-loaded RDF files</a>
+                    above for more details. 
+                </p>
                 <p>
                     5. Stop Apache Tomcat and from your VIVO source directory, run 
                     ant  
