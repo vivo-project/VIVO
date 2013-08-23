@@ -97,6 +97,7 @@
             stateString: '${i18n().map_state_string}',
             statewideLocations: '${i18n().statewide_locations}',
             researchersInString: '${i18n().researchers_in}',
+            inString: '${i18n().in}',
             noFacultyFound: '${i18n().no_faculty_found}',
             placeholderImage: '${i18n().placeholder_image}',
             viewAllFaculty: '${i18n().view_all_faculty}',
@@ -108,7 +109,7 @@
         if  ( $('input.search-homepage').css('text-align') == "right" ) {       
              $('input.search-homepage').attr("value","${i18n().limit_search} \u2192");
         }  
-        
     </script>
+    <@lh.getGeoResearcherCount/>
     </body>
 </html>
