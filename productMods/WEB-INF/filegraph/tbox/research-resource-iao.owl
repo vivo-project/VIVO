@@ -70,13 +70,6 @@
     
 
 
-    <!-- http://purl.obolibrary.org/obo/ARG_0000012 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ARG_0000012">
-        <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
-    </owl:Class>
-    
-
 
     <!-- http://purl.obolibrary.org/obo/BFO_0000001 -->
 

@@ -150,34 +150,6 @@
     
 
 
-
-    <!-- http://purl.obolibrary.org/obo/ARG_2000349 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ARG_2000349">
-        <rdfs:label xml:lang="en">hospital units</rdfs:label>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ARG_2000022"/>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/ARG_2000350 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ARG_2000350">
-        <rdfs:label xml:lang="en">hospitals</rdfs:label>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ARG_2000022"/>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/ARG_2000351 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/ARG_2000351">
-        <rdfs:label xml:lang="en">laboratories</rdfs:label>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ARG_2000022"/>
-    </owl:Class>
-    
-
-
     <!-- http://purl.obolibrary.org/obo/ERO_0000565 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000565">
