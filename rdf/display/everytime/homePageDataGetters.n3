@@ -29,3 +29,23 @@ display:academicDeptsDataGetter
     
     """ .
 
+<freemarker:lib-home-page.ftl> display:hasDataGetter display:researcherCountDataGetter .
+
+display:researcherCountDataGetter
+    a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> ;
+    display:saveToVar "researcherCountDG" ;
+    display:query """
+    PREFIX geo: <http://aims.fao.org/aos/geopolitical.owl#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX core: <http://vivoweb.org/ontology/core#>
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+    PREFIX vivoc: <http://vivo.library.cornell.edu/ns/0.1#>
+
+    SELECT DISTINCT (COUNT(?person) AS ?count)  
+    WHERE { 
+        ?person rdf:type foaf:Person .
+        FILTER (EXISTS {?person core:geographicFocus ?focus})  
+    }
+
+    """ .

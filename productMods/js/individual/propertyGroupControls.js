@@ -69,22 +69,25 @@ $(document).ready(function(){
             location.hash = location.hash.replace(/\s+/g, '');
             if ( location.hash.indexOf("map") >= 0 ) {  
                 // get the name of the group that contains the geographicFocusOf property.
-                var tabName = $('h3#geographicFocusOf').parent('article').parent('div').attr("id");
-                tabName = tabName.replace("Group","");
-                tabNameCapped = tabName.charAt(0).toUpperCase() + tabName.slice(1);
-                // if the name of the first tab section = tabName we don't have to do anything;
-                // otherwise, select the correct tab and deselect the first one
-                var $firstTab = $('li.clickable').first();
-                if ( $firstTab.text() != tabNameCapped ) {
-                    // select the correct tab
-                    $('li[groupName="' + tabName + '"]').removeClass("nonSelectedGroupTab clickable");
-                    $('li[groupName="' + tabName + '"]').addClass("selectedGroupTab clickable");
-                    // deselect the first tab
-                    $firstTab.removeClass("selectedGroupTab clickable");
-                    $firstTab.addClass("nonSelectedGroupTab clickable");
-                    $('section.property-group:visible').hide();
-                    // show the selected tab section
-                    $('section#' + tabName).show();                
+                // if it doesn't exist, don't do anything.
+                if ( $('h3#geographicFocusOf').length ) {
+                    var tabName = $('h3#geographicFocusOf').parent('article').parent('div').attr("id");
+                    tabName = tabName.replace("Group","");
+                    tabNameCapped = tabName.charAt(0).toUpperCase() + tabName.slice(1);
+                    // if the name of the first tab section = tabName we don't have to do anything;
+                    // otherwise, select the correct tab and deselect the first one
+                    var $firstTab = $('li.clickable').first();
+                    if ( $firstTab.text() != tabNameCapped ) {
+                        // select the correct tab
+                        $('li[groupName="' + tabName + '"]').removeClass("nonSelectedGroupTab clickable");
+                        $('li[groupName="' + tabName + '"]').addClass("selectedGroupTab clickable");
+                        // deselect the first tab
+                        $firstTab.removeClass("selectedGroupTab clickable");
+                        $firstTab.addClass("nonSelectedGroupTab clickable");
+                        $('section.property-group:visible').hide();
+                        // show the selected tab section
+                        $('section#' + tabName).show();                
+                    }
                 }
                 // if there is a more link, "click" more to show all the researchers
                 // we need the timeout delay so that the more link can get rendered                

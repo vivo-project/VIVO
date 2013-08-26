@@ -9,6 +9,7 @@ $(document).ready(function(){
     
     $.extend(this, urlsBase);
     $.extend(this, i18nStrings);
+    $.extend(this, geoResearcherCount);
     
     getGeoJsonForMaps();
     
@@ -368,7 +369,7 @@ $(document).ready(function(){
 
     function getResearcherCount(area) {
         
-        var researcherCount = 0;
+        var researcherCount = this.geoResearcherCount;
         var areaCount = 0;
         var text = "";
         if ( area == "global" ) {
@@ -383,7 +384,6 @@ $(document).ready(function(){
 
         $.each(researchAreas.features, function() {
             if ( this.properties.mapType == area ) {
-                researcherCount = researcherCount + this.properties.html ;
                 areaCount = areaCount + 1; 
             }
         });
@@ -391,10 +391,16 @@ $(document).ready(function(){
         if ( areaCount == 1 && text == " states.") {
             text = " " + i18nStrings.stateString;
         }
+        if ( researcherCount == 1 ) {
+            researcherText = " " + i18nStrings.researcherString + " " + i18nStrings.inString;
+        }
+        else {
+            researcherText = " " + i18nStrings.researcherInString
+        }
 
         $('div#researcherTotal').html("<font style='font-size:1.05em;color:#167093'>" 
-                                        + researcherCount.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2') 
-                                        + "</font> " + i18nStrings.researchersInString + " <font style='font-size:1.05em;color:#167093'>" 
+                                        + researcherCount 
+                                        + "</font> " + researcherText + " <font style='font-size:1.05em;color:#167093'>" 
                                         + areaCount + "</font>" + text);
     }
     function appendLegendToLeafletContainer() {

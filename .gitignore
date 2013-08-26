@@ -6,4 +6,5 @@
 /deploy.properties
 /build.properties
 /runtime.properties
-catalog-v001.xml
+/ontology/public/catalog-v0001.xml
+
