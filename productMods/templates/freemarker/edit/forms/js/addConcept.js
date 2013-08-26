@@ -281,7 +281,7 @@ var addConceptForm = {
     generateIndividualLabelsDisplay:function(label, altLabels) {
     	var labelDisplay = label;
     	if(altLabels != null && altLabels.length > 0) {
-    		labelDisplay += "<br>(" + altLabels + ")";
+    		labelDisplay += "<br> [" + altLabels + "]";
     	}
     	return labelDisplay;
     },
