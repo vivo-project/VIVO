@@ -18,12 +18,11 @@
                         ?hideThis
         WHERE {
             ?subject ?property ?position  
-            OPTIONAL { ?position core:positionForPerson ?person .
+            OPTIONAL { ?position core:relates ?person .
                        ?person rdfs:label ?personName   
             }     
             <collated>           
             OPTIONAL { ?position vitro:mostSpecificType ?subclass .
-                       ?subclass rdfs:subClassOf core:Position 
             }   
             </collated>
             OPTIONAL { ?position rdfs:label ?positionTitle }
@@ -52,12 +51,10 @@
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;  
         CONSTRUCT {
             ?subject ?property ?position .
-            ?position vitro:mostSpecificType ?subclass .
-            ?subclass rdfs:subClassOf core:Position 
+            ?position vitro:mostSpecificType ?subclass 
         } WHERE {
             ?subject ?property ?position .
-            ?position vitro:mostSpecificType ?subclass .
-            ?subclass rdfs:subClassOf core:Position 
+            ?position vitro:mostSpecificType ?subclass 
         }
     </query-construct>
     
