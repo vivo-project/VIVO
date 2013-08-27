@@ -196,3 +196,95 @@ local:hasResearcherRoleConfig a :ObjectPropertyDisplayConfig ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddResearcherRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupresearch> .
+m
+local:hasInvestigatorRoleContext a :ConfigContext ;
+    :hasConfiguration local:hasInvestigatorRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#InvestigatorRole> .
+
+local:hasInvestigatorRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-hasInvestigatorRole.xml"^^xsd:string ;
+    :displayName "investigator on" ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddGrantRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupresearch> .
+
+local:hasPrincipalInvestigatorRoleContext a :ConfigContext ;
+    :hasConfiguration local:hasPrincipalInvestigatorRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#PrincipalInvestigatorRole> .
+
+local:hasPrincipalInvestigatorRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-hasInvestigatorRole.xml"^^xsd:string ;
+    :displayName "principal investigator on" ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddGrantRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupresearch> .
+
+local:hasCo-PrincipalInvestigatorRoleContext a :ConfigContext ;
+    :hasConfiguration local:hasCo-PrincipalInvestigatorRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#Co-PrincipalInvestigatorRole> .
+
+local:hasCo-PrincipalInvestigatorRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-hasInvestigatorRole.xml"^^xsd:string ;
+    :displayName "co-principal investigator on" ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddGrantRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupresearch> .
+
+local:hasPresenterRoleContext a :ConfigContext ;
+    :hasConfiguration local:hasPresenterRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#PresenterRole> .
+
+local:hasPresenterRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-hasPresenterRole.xml"^^xsd:string ;
+    :displayName "presentations" ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddPresenterRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGrouppublications> .
+
+local:awardOrHonorContext a :ConfigContext ;
+    :hasConfiguration local:awardOrHonorConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#AwardorHonorReceipt> .
+
+local:awardOrHonorConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-awardOrHonor.xml"^^xsd:string ;
+    :displayName "awards and honors" ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasAwardOrHonorGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbackground> .
+
+local:educationalTrainingContext a :ConfigContext ;
+    :hasConfiguration local:educationalTrainingConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#EducationalTraining> .
+
+local:educationalTrainingConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-educationalTraining.xml"^^xsd:string ;
+    :displayName "education and training" ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasEducationalTraining"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbackground> .
+
+local:informationResourceInAuthorshipContext a :ConfigContext ;
+    :hasConfiguration local:informationResourceInAuthorshipConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/Document> .
+    :qualifiedBy      <http://vivoweb.org/ontology/core#Authorship> .
+
+local:informationResourceInAuthorshipConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-informationResourceInAuthorship.xml"^^xsd:string ;
+    :displayName "authors" ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddAuthorsToInformationResourceGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
