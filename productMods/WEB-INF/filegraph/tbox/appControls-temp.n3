@@ -52,3 +52,11 @@ foaf:Agent
                 owl:allValuesFrom core:Relationship ;
                 owl:onProperty core:relatedBy
               ] .
+
+
+foaf:Person
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom <http://www.w3.org/2006/vcard/ns#Individual> ;
+                owl:onProperty <http://purl.obolibrary.org/obo/ARG_2000028>
+              ] .

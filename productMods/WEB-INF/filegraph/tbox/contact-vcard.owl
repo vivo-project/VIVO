@@ -464,7 +464,7 @@
         <rdfs:label xml:lang="en">address</rdfs:label>
         <owl:equivalentClass>
             <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
+                <owl:intersectionOf rdf:parseType="Collection">
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
                             <owl:Restriction>
@@ -525,7 +525,7 @@
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
-                </owl:unionOf>
+                </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#Addressing"/>
@@ -540,7 +540,7 @@
         <rdfs:label xml:lang="en">addressing</rdfs:label>
         <owl:equivalentClass>
             <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
+                <owl:intersectionOf rdf:parseType="Collection">
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
                             <owl:Restriction>
@@ -589,7 +589,7 @@
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
-                </owl:unionOf>
+                </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">These types are concerned with information related to the delivery addressing or label for the vCard object</rdfs:comment>
@@ -612,7 +612,7 @@
         <rdfs:label xml:lang="en">calendar</rdfs:label>
         <owl:equivalentClass>
             <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
+                <owl:intersectionOf rdf:parseType="Collection">
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
                             <owl:Restriction>
@@ -637,7 +637,7 @@
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
-                </owl:unionOf>
+                </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
     </owl:Class>
@@ -786,7 +786,7 @@ Was called CALADRURI in vCard</rdfs:comment>
         <rdfs:label xml:lang="en">communication</rdfs:label>
         <owl:equivalentClass>
             <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
+                <owl:intersectionOf rdf:parseType="Collection">
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
                             <owl:Restriction>
@@ -835,7 +835,7 @@ Was called CALADRURI in vCard</rdfs:comment>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
-                </owl:unionOf>
+                </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">These properties describe information about how to communicate with the object the vCard represents</rdfs:comment>
@@ -927,7 +927,7 @@ Was called CALADRURI in vCard</rdfs:comment>
         <rdfs:label xml:lang="en">explanatory</rdfs:label>
         <owl:equivalentClass>
             <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
+                <owl:intersectionOf rdf:parseType="Collection">
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
                             <owl:Restriction>
@@ -976,7 +976,7 @@ Was called CALADRURI in vCard</rdfs:comment>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
-                </owl:unionOf>
+                </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">These properties are concerned with additional explanations, such as that related to informational notes or revisions specific to the  vCard</rdfs:comment>
@@ -1131,7 +1131,7 @@ Was called CALADRURI in vCard</rdfs:comment>
         <rdfs:label xml:lang="en">identification</rdfs:label>
         <owl:equivalentClass>
             <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
+                <owl:intersectionOf rdf:parseType="Collection">
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
                             <owl:Restriction>
@@ -1180,7 +1180,7 @@ Was called CALADRURI in vCard</rdfs:comment>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
-                </owl:unionOf>
+                </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">These types are used to capture information associated with the identification and naming of the entity associated with the vCard</rdfs:comment>
@@ -1194,7 +1194,7 @@ Was called CALADRURI in vCard</rdfs:comment>
         <rdfs:label xml:lang="en">individual</rdfs:label>
         <owl:equivalentClass>
             <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
+                <owl:intersectionOf rdf:parseType="Collection">
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
                             <owl:Restriction>
@@ -1243,7 +1243,7 @@ Was called CALADRURI in vCard</rdfs:comment>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
-                </owl:unionOf>
+                </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#Kind"/>
@@ -1315,7 +1315,7 @@ Was called IMPP in vCard.</rdfs:comment>
         <rdfs:label xml:lang="en">vcard kind</rdfs:label>
         <owl:equivalentClass>
             <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
+                <owl:intersectionOf rdf:parseType="Collection">
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
                             <owl:Restriction>
@@ -1400,7 +1400,7 @@ Was called IMPP in vCard.</rdfs:comment>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
-                </owl:unionOf>
+                </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ARG_2000379"/>
@@ -1509,7 +1509,7 @@ Was called IMPP in vCard.</rdfs:comment>
         <rdfs:label xml:lang="en">name</rdfs:label>
         <owl:equivalentClass>
             <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
+                <owl:intersectionOf rdf:parseType="Collection">
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
                             <owl:Restriction>
@@ -1570,7 +1570,7 @@ Was called IMPP in vCard.</rdfs:comment>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
-                </owl:unionOf>
+                </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#Identification"/>
@@ -1708,7 +1708,7 @@ Was called IMPP in vCard.</rdfs:comment>
         <rdfs:label xml:lang="en">organisational</rdfs:label>
         <owl:equivalentClass>
             <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
+                <owl:intersectionOf rdf:parseType="Collection">
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
                             <owl:Restriction>
@@ -1757,7 +1757,7 @@ Was called IMPP in vCard.</rdfs:comment>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
-                </owl:unionOf>
+                </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">These properties are concerned with information associated with characteristics of the organization or organizational units of the object that the vCard represents</rdfs:comment>
@@ -1857,7 +1857,7 @@ Was called IMPP in vCard.</rdfs:comment>
         <rdfs:label xml:lang="en">security</rdfs:label>
         <owl:equivalentClass>
             <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
+                <owl:intersectionOf rdf:parseType="Collection">
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
                             <owl:Restriction>
@@ -1894,7 +1894,7 @@ Was called IMPP in vCard.</rdfs:comment>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
-                </owl:unionOf>
+                </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Contains all the Security related Classes</rdfs:comment>
