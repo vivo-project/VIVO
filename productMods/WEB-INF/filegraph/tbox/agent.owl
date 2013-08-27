@@ -67,11 +67,6 @@
     
 
 
-    <!-- http://purl.obolibrary.org/obo/OBI_0000300 -->
-
-    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/OBI_0000300"/>
-    
-
 
     <!-- http://purl.obolibrary.org/obo/OBI_0000316 -->
 
@@ -160,41 +155,6 @@
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Nicole Vasilevsky</obo:IAO_0000119>
         <obo:IAO_0000111 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Technology Transfer Office</obo:IAO_0000111>
         <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000123"/>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/OBI_0000571 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/OBI_0000571">
-        <rdfs:label xml:lang="en">manufacturer role</rdfs:label>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/OBI_0000300"/>
-                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/OBI_0000457"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0000052"/>
-                <owl:someValuesFrom>
-                    <owl:Class>
-                        <owl:unionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://purl.obolibrary.org/obo/NCBITaxon_9606"/>
-                            <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/Organization"/>
-                        </owl:unionOf>
-                    </owl:Class>
-                </owl:someValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GROUP:  Role Branch</obo:IAO_0000117>
-        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Manufacturer role is a role which inheres in a person or organization and which is realized by a manufacturing process.</obo:IAO_0000115>
-        <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OBI</obo:IAO_0000119>
-        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">With respect to The Accuri C6 Flow Cytometer System, the organization Accuri bears the role manufacturer role.  With respect to a transformed line of tissue culture cells derived by a specific lab, the lab whose personnel isolated the cll line bears the role manufacturer role.  With respect to a specific antibody produced by an individual scientist, the scientist who purifies, characterizes and distributes the anitbody bears the role manufacturer role.</obo:IAO_0000112>
-        <obo:IAO_0000111 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">manufacturer role</obo:IAO_0000111>
-        <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000123"/>
-        <obo:IAO_0000412 rdf:resource="http://purl.obolibrary.org/obo/obi.owl"/>
     </owl:Class>
     
 

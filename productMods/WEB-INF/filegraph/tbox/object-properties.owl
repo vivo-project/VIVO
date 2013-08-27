@@ -919,21 +919,6 @@ there is a measurement process p that has specified output m, a measurement datu
     
 
 
-    <!-- http://purl.obolibrary.org/obo/OBI_0000300 -->
-
-    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/OBI_0000300">
-        <rdfs:label xml:lang="en">is_realized_by</rdfs:label>
-        <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GROUP:OBI:&lt;http://obi.sourceforge.net&gt;</obo:IAO_0000117>
-        <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Chris Mungall</obo:IAO_0000117>
-        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relation between a realizable and a process. Reciprocal relation of realizes [GOC:cjm]</obo:IAO_0000115>
-        <obo:IAO_0000118 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">executed_during</obo:IAO_0000118>
-        <obo:IAO_0000118 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_realization</obo:IAO_0000118>
-        <obo:IAO_0000118 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is_realized_as</obo:IAO_0000118>
-        <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
-        <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/BFO_0000017"/>
-        <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000122"/>
-    </owl:ObjectProperty>
-    
 
 
     <!-- http://purl.obolibrary.org/obo/OBI_0000304 -->
@@ -977,33 +962,6 @@ there is a measurement process p that has specified output m, a measurement datu
     
 
 
-    <!-- http://purl.obolibrary.org/obo/OBI_0000308 -->
-
-    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/OBI_0000308">
-        <rdfs:label xml:lang="en">realizes</rdfs:label>
-        <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GROUP:OBI:&lt;http://obi.sourceforge.net&gt;</obo:IAO_0000117>
-        <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Chris Mungal</obo:IAO_0000117>
-        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relation between a process and a function, where the unfolding of the 
-process requires the execution of the function. Class level: P realizes F iff: 
-given any p that instantiates P, there exists some f, t such that f instantiates
- F at t and p *realizes* f. Here, *realizes* is the primitive 
-instance level relation [GOC:cjm]</obo:IAO_0000115>
-        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">example of usage: The process of &apos;histidine catabolism&apos; (GO:0006548) realizes the 
-function &apos;histidine ammonia lyase activity&apos; (GO:0004397) (note: here &apos;activity&apos; 
-denotes a function and not a process). We leave open the possibility of defining 
-in future the sub-relations directly_realizes (as bewteen a function and it&apos;s 
-functioning) and indirectly_realizes.</obo:IAO_0000112>
-        <obo:IAO_0000118 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">executes</obo:IAO_0000118>
-        <obo:IAO_0000118 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has_function_part</obo:IAO_0000118>
-        <obo:IAO_0000118 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">involves_execution_of</obo:IAO_0000118>
-        <obo:IAO_0000118 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is_realization_of</obo:IAO_0000118>
-        <obo:IAO_0000111 xml:lang="en">realizes</obo:IAO_0000111>
-        <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
-        <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/BFO_0000017"/>
-        <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000122"/>
-        <owl:inverseOf rdf:resource="http://purl.obolibrary.org/obo/OBI_0000300"/>
-    </owl:ObjectProperty>
-    
 
 
     <!-- http://purl.obolibrary.org/obo/OBI_0000312 -->
