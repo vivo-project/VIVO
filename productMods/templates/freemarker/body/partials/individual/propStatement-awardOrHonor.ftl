@@ -15,9 +15,9 @@
  
     <#local linkedIndividual>
         <#if statement.award??>
-            <a href="${profileUrl(statement.uri("award"))}" title="${i18n().award_name}">${statement.awardLabel!statement.localName}</a>
+            <a href="${profileUrl(statement.uri("award"))}" title="${i18n().award_name}">${statement.awardLabel!statement.localName!}</a>
         <#else>
-            <a href="${profileUrl(statement.uri("awardReceipt"))}" title="${i18n().award_receipt_name}">${statement.receiptLabel!statement.localName}</a>
+            <a href="${profileUrl(statement.uri("awardReceipt"))}" title="${i18n().award_receipt_name}">${statement.receiptLabel!statement.localName!}</a>
         </#if>
     </#local>
 

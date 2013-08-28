@@ -196,7 +196,7 @@ local:hasResearcherRoleConfig a :ObjectPropertyDisplayConfig ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddResearcherRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupresearch> .
-m
+
 local:hasInvestigatorRoleContext a :ConfigContext ;
     :hasConfiguration local:hasInvestigatorRoleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
@@ -226,7 +226,7 @@ local:hasPrincipalInvestigatorRoleConfig a :ObjectPropertyDisplayConfig ;
 local:hasCo-PrincipalInvestigatorRoleContext a :ConfigContext ;
     :hasConfiguration local:hasCo-PrincipalInvestigatorRoleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
-    :qualifiedBy      <http://vivoweb.org/ontology/core#Co-PrincipalInvestigatorRole> .
+    :qualifiedBy      <http://vivoweb.org/ontology/core#CoPrincipalInvestigatorRole> .
 
 local:hasCo-PrincipalInvestigatorRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-hasInvestigatorRole.xml"^^xsd:string ;
@@ -278,7 +278,7 @@ local:educationalTrainingConfig a :ObjectPropertyDisplayConfig ;
 local:informationResourceInAuthorshipContext a :ConfigContext ;
     :hasConfiguration local:informationResourceInAuthorshipConfig ;
     :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
-    :qualifiedByDomain      <http://purl.org/ontology/bibo/Document> .
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/Document> ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#Authorship> .
 
 local:informationResourceInAuthorshipConfig a :ObjectPropertyDisplayConfig ;

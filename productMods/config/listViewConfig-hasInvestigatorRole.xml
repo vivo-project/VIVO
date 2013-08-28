@@ -23,13 +23,15 @@
                         ?hideThis
         WHERE {
                         
-            ?subject ?property ?role  
+            ?subject ?property ?role .
+            ?role a ?objectType .
+            ?role vitro:mostSpecificType ?subclass
             
-            OPTIONAL {  ?role core:roleRealizedIn ?activity 
+            OPTIONAL {  ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?activity
                         LET (?activityName := afn:localname(?activity)) 
                         OPTIONAL { ?activity rdfs:label ?activityLabel }
             }   
-            OPTIONAL {  ?role core:roleContributesTo ?activity 
+            OPTIONAL {  ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity 
                         LET (?activityName := afn:localname(?activity)) 
                         OPTIONAL { ?activity rdfs:label ?activityLabel }
             }                   
@@ -47,7 +49,7 @@
                                   ?dateTimeEndValueRole core:dateTime ?dateTimeEndRole 
                        }
             }  
-            OPTIONAL { ?role core:roleContributesTo ?grant .
+            OPTIONAL { ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?grant .
                        ?grant core:dateTimeInterval ?dateTimeIntervalGrant 
                        OPTIONAL { ?dateTimeIntervalGrant core:start ?dateTimeStartValueGrant .
                                   ?dateTimeStartValueGrant core:dateTime ?dateTimeStartGrant 
@@ -57,10 +59,7 @@
                        }
             }
             OPTIONAL { ?role core:hideFromDisplay ?hideThis }
-     #       NOT EXISTS { ?role core:hideFromDisplay ?hideThis }  
-            <critical-data-required>
-            FILTER ( bound(?activity) )
-            </critical-data-required>
+            FILTER ( bound(?activity) &amp;&amp; ?subclass = ?objectType)
         } ORDER BY DESC(?dateTimeEndRole) DESC(?dateTimeStartRole) DESC(?dateTimeEndGrant) DESC(?dateTimeStartGrant) ?activityLabel ?activityName
     </query-select>
     
@@ -71,16 +70,19 @@
         
         CONSTRUCT {
             ?subject ?property ?role .
-            ?role core:roleRealizedIn ?activity .
+            ?role a ?objectType .
+            ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?activity .
             ?activity rdfs:label ?activityLabel
         } WHERE {
         {
             ?subject ?property ?role .
-            ?role core:roleContributesTo ?activity 
+            ?role a ?objectType .
+            ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity 
         } UNION
         {
             ?subject ?property ?role .
-            ?role core:roleRealizedIn ?activity .
+            ?role a ?objectType .
+            ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt;n ?activity .
             ?activity rdfs:label ?activityLabel 
         }
         }
@@ -93,16 +95,19 @@
         
         CONSTRUCT {
             ?subject ?property ?role .
-            ?role core:roleContributesTo ?activity .
+            ?role a ?objectType .
+            ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
             ?activity rdfs:label ?activityLabel 
         } WHERE {
             {
                 ?subject ?property ?role .
-                ?role core:roleContributesTo ?activity 
+                ?role a ?objectType .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity 
             } UNION
             {
                 ?subject ?property ?role .
-                ?role core:roleContributesTo ?activity .
+                ?role a ?objectType .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
                 ?activity rdfs:label ?activityLabel 
             }
         }
@@ -113,6 +118,7 @@
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
         CONSTRUCT { 
             ?subject ?property ?role .
+            ?role a ?objectType .
             ?role ?roleProperty ?roleValue . 
             ?activity rdfs:label ?activityName .
             ?activity core:grantAwardedBy ?awardedBy .
@@ -124,31 +130,38 @@
                 ?subject ?property ?role 
             } UNION {
                 ?subject ?property ?role .
+                ?role a ?objectType .
                 ?role ?roleProperty ?roleValue 
             } UNION {
                 ?subject ?property ?role .
-                ?role core:roleContributesTo ?activity . 
+                ?role a ?objectType .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity . 
                 ?activity rdfs:label ?activityName 
             } UNION {
                 ?subject ?property ?role .
-                ?role core:roleRealizedIn ?activity . 
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?activity . 
                 ?activity rdfs:label ?activityName                
             } UNION {
                 ?subject ?property ?role .
-                ?role core:roleContributesTo ?activity . 
+                ?role a ?objectType .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity . 
                 ?activity core:grantAwardedBy ?awardedBy
             } UNION {
                 ?subject ?property ?role .
-                ?role core:roleContributesTo ?activity . 
+                ?role a ?objectType .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity . 
                 ?activity core:grantAwardedBy ?awardedBy .
                 ?awardedBy rdfs:label ?awardedByLabel
             } UNION {
                 ?subject ?property ?role .
-                ?role core:roleContributesTo ?activity . 
+                ?role a ?objectType .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity . 
                 ?activity core:administeredBy ?adminedBy
             } UNION {
                 ?subject ?property ?role .
-                ?role core:roleContributesTo ?activity . 
+                ?role a ?objectType .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity . 
                 ?activity core:administeredBy ?adminedBy .
                 ?adminedBy rdfs:label ?adminedByLabel
             }
@@ -158,12 +171,14 @@
     <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
         CONSTRUCT { 
-            ?subject ?property ?role .  
+            ?subject ?property ?role .
+            ?role a ?objectType .  
             ?role core:dateTimeInterval ?dateTimeIntervalRole .
             ?dateTimeIntervalRole core:start ?dateTimeStartValueRole .
             ?dateTimeStartValueRole core:dateTime ?dateTimeStartRole 
         } WHERE {
             ?subject ?property ?role .  
+            ?role a ?objectType .
             ?role core:dateTimeInterval ?dateTimeIntervalRole .
             ?dateTimeIntervalRole core:start ?dateTimeStartValueRole .
             ?dateTimeStartValueRole core:dateTime ?dateTimeStartRole 
@@ -174,11 +189,13 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
         CONSTRUCT { 
             ?subject ?property ?role .  
+            ?role a ?objectType .
             ?role core:dateTimeInterval ?dateTimeIntervalRole .
             ?dateTimeIntervalRole core:end ?dateTimeEndValueRole .
             ?dateTimeEndValueRole core:dateTime ?dateTimeEndRole 
         } WHERE {
             ?subject ?property ?role .  
+            ?role a ?objectType .
             ?role core:dateTimeInterval ?dateTimeIntervalRole .
             ?dateTimeIntervalRole core:end ?dateTimeEndValueRole .
             ?dateTimeEndValueRole core:dateTime ?dateTimeEndRole 
@@ -187,14 +204,16 @@
     <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
         CONSTRUCT { 
-            ?subject ?property ?role .  
-            ?role core:roleContributesTo ?grant .
+            ?subject ?property ?role .
+            ?role a ?objectType .
+            ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?grant .
             ?grant core:dateTimeInterval ?dateTimeIntervalGrant .
             ?dateTimeIntervalGrant core:start ?dateTimeStartValueGrant .
             ?dateTimeStartValueGrant core:dateTime ?dateTimeStartGrant 
         } WHERE {
-            ?subject ?property ?role .  
-            ?role core:roleContributesTo ?grant .
+            ?subject ?property ?role .
+            ?role a ?objectType .
+            ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?grant .
             ?grant core:dateTimeInterval ?dateTimeIntervalGrant .
             ?dateTimeIntervalGrant core:start ?dateTimeStartValueGrant .
             ?dateTimeStartValueGrant core:dateTime ?dateTimeStartGrant 
@@ -204,14 +223,16 @@
     <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
         CONSTRUCT { 
-            ?subject ?property ?role .  
-            ?role core:roleContributesTo ?grant .
+            ?subject ?property ?role .
+            ?role a ?objectType .
+            ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?grant .
             ?grant core:dateTimeInterval ?dateTimeIntervalGrant .
             ?dateTimeIntervalGrant core:end ?dateTimeEndValueGrant .
             ?dateTimeEndValueGrant core:dateTime ?dateTimeEndGrant 
         } WHERE {
-            ?subject ?property ?role .  
-            ?role core:roleContributesTo ?grant .
+            ?subject ?property ?role .
+            ?role a ?objectType .
+            ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?grant .
             ?grant core:dateTimeInterval ?dateTimeIntervalGrant .
             ?dateTimeIntervalGrant core:end ?dateTimeEndValueGrant .
             ?dateTimeEndValueGrant core:dateTime ?dateTimeEndGrant 

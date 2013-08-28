@@ -101,8 +101,8 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 	private String getN3NewAuthorship() {
 		return getN3PrefixString() + 
 		"?authorshipUri a core:Authorship ;\n" + 
-        "  core:linkedInformationResource ?infoResource .\n" + 
-        "?infoResource core:informationResourceInAuthorship ?authorshipUri .";
+        "  core:relates ?infoResource .\n" + 
+        "?infoResource core:relatedBy ?authorshipUri .";
 	}
 	
 	private String getN3AuthorshipRank() {

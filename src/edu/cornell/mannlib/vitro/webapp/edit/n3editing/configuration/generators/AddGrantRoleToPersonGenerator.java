@@ -604,19 +604,19 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
      **/
   //role type will always be set based on particular form
 	public String getRoleType(VitroRequest vreq) {
-		String predicateUri = EditConfigurationUtils.getPredicateUri(vreq);
-		if(predicateUri.equals(getHasPrincipalInvestigatorURI())) {
+		String rangeUri = EditConfigurationUtils.getRangeUri(vreq);
+		if(rangeUri.equals(getPrincipalInvestigatorURI())) {
 			return getVivoOntologyCoreNamespace() + "PrincipalInvestigatorRole";
 		}
-		else if(predicateUri.equals(getHasCoPrincipalInvestigatorURI())) {
+		else if(predicateUri.equals(getCoPrincipalInvestigatorURI())) {
 			return getVivoOntologyCoreNamespace() + "CoPrincipalInvestigatorRole";
 		} else {
 			return getVivoOntologyCoreNamespace() + "InvestigatorRole";
 		}
 	}
 	
-	private Object getHasCoPrincipalInvestigatorURI() {
-		return getVivoOntologyCoreNamespace() + "hasCo-PrincipalInvestigatorRole";
+	private Object getCoPrincipalInvestigatorURI() {
+		return getVivoOntologyCoreNamespace() + "CoPrincipalInvestigatorRole";
 	}
 
 
@@ -625,8 +625,8 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 		return "http://vivoweb.org/ontology/core#";
 	}
 
-	private Object getHasPrincipalInvestigatorURI() {
-		return getVivoOntologyCoreNamespace() + "hasPrincipalInvestigatorRole";
+	private Object getPrincipalInvestigatorURI() {
+		return getVivoOntologyCoreNamespace() + "PrincipalInvestigatorRole";
 
 	}
 

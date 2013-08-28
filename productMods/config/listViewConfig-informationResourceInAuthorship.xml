@@ -14,9 +14,10 @@
         SELECT DISTINCT <collated> ?subclass </collated>
                         ?authorship
                         ?person ?personName WHERE {
-            ?subject ?property ?authorship  
+            ?subject ?property ?authorship .
+            ?subject a core:Authorship 
             OPTIONAL { ?authorship core:authorRank ?rank } 
-            OPTIONAL { ?authorship core:linkedAuthor ?person .                      
+            OPTIONAL { ?authorship core:relates ?person .                      
                        ?person rdfs:label ?personName 
                        <collated> 
                        OPTIONAL { ?person vitro:mostSpecificType ?subclass .
@@ -57,11 +58,11 @@
                 ?authorship ?authorshipProperty ?authorshipValue 
             } UNION {
                 ?subject ?property ?authorship .
-                ?authorship core:linkedAuthor ?person .                      
+                ?authorship core:relates ?person .                      
                 ?person rdfs:label ?personName  
             } UNION {
                 ?subject ?property ?authorship .
-                ?authorship core:linkedAuthor ?person .                      
+                ?authorship core:relates ?person .                      
                 ?person rdfs:label ?personName . 
                 ?person vitro:mostSpecificType ?subclass
             }
