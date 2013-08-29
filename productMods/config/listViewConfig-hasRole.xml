@@ -22,7 +22,8 @@
                         ?objectType
         WHERE {                
             ?subject ?property ?role .
-            ?role a ?objectType 
+            ?role a ?objectType .
+            ?role vitro:mostSpecificType ?roleSubclass
             
             OPTIONAL {  ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?activity 
                         LET (?activityName := afn:localname(?activity)) 
@@ -53,9 +54,7 @@
                        }
             }
       #      NOT EXISTS { ?role core:hideFromDisplay ?hideThis }  
-            <critical-data-required>
-            FILTER ( bound(?activity) )
-            </critical-data-required>
+            FILTER ( bound(?activity) &amp;&amp; ?objectType = ?roleSubclass )
         } ORDER BY <collated>?subclass</collated> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityLabel ?activityName
     </query-select>
     

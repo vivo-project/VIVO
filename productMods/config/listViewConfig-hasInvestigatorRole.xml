@@ -82,7 +82,7 @@
         {
             ?subject ?property ?role .
             ?role a ?objectType .
-            ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt;n ?activity .
+            ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?activity .
             ?activity rdfs:label ?activityLabel 
         }
         }
