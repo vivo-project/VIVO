@@ -70,8 +70,8 @@ public class SelfEditorRelationshipPolicy extends AbstractRelationshipPolicy
 			return inconclusiveDecision("Not self-editing.");
 		}
 
-		if (!canModifyPredicate(action.getPredicateUri())) {
-			return cantModifyPredicate(action.getPredicateUri());
+		if (!canModifyPredicate(action.getPredicate())) {
+			return cantModifyPredicate(action.getPredicate().getURI());
 		}
 
 		for (String resourceUri : action.getResourceUris()) {
