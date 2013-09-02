@@ -23,7 +23,7 @@ require '_common'
 #
 def export_files(vivo_path, vitro_path, tag, export_dir)
 	approve_and_execute([
-			"rm -Rf #{export_dir}/..",
+			"rm -Rf #{File.expand_path("..", export_dir)}",
 			"mkdir -pv #{export_dir}",
 			"cp -R #{vivo_path}/* #{export_dir}",
 			"mkdir -pv #{export_dir}/vitro-core",
