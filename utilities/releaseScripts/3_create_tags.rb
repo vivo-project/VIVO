@@ -52,18 +52,10 @@ begin
 	raise BadState.new("Tag #{tag} already exists in VIVO.") if tag_exists?(vivo_path, tag) 
 	raise BadState.new("Tag #{tag} already exists in Vitro.") if tag_exists?(vitro_path, tag) 
 
-	puts
-	yn = prompt("OK to create tags named '#{tag}' '#{message}' (y/n)")
-	if yn.downcase == 'y'
-		puts
+	get_permission_and_go("OK to create tags named '#{tag}' '#{message}'?") do
 		puts "Creating tags"
 		create_tag(vivo_path, branch, tag, message)
 		create_tag(vitro_path, branch, tag, message)
-		puts
-	else
-		puts
-		puts "OK - forget it."
-		puts
 	end
 rescue BadState
 	puts "#{$!.message} - Aborting."

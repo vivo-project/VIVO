@@ -23,6 +23,10 @@ end
 #
 
 class Settings
+	#
+	# The settings themselves: getters, setters, and validators.
+	#
+	
 	def self.base_directory
 		`git config --get --global vivo.release.basedirectory`.strip
 	end
@@ -102,10 +106,15 @@ class Settings
 	#
 
 	# The name of the maintenance branch. Looks like "maint-rel-4.2" even for releases like "4.2.1"
+	# Test candidates for major releases are built on the develop branch.
 	def self.branch_name
-		label = Settings.confirm_release_label(Settings.release_label)
-		major_release = label[0..2]
-		"maint-rel-#{major_release}"
+		if is_test_candidate?()
+			"develop"
+		else
+			release_label = Settings.confirm_release_label(Settings.release_label)
+			major_release = release_label[0..2]
+			"maint-rel-#{major_release}"
+		end
 	end
 	
 	# The name of the Git tag. Looks like "rel-1.9-tc2" or "rel-1.9" (for final)
@@ -167,6 +176,20 @@ end
 
 #
 # ------------------------------------------------------------------------------------
+# Confirmation methods.
+# ------------------------------------------------------------------------------------
+#
+
+def is_test_candidate?()
+	Settings.confirm_candidate_label(Settings.candidate_label)[0..0] == 't'
+end
+
+def is_final_release?()
+	Settings.confirm_candidate_label(Settings.candidate_label) == 'final'
+end
+
+#
+# ------------------------------------------------------------------------------------
 # General-purpose methods.
 # ------------------------------------------------------------------------------------
 #
@@ -179,6 +202,20 @@ end
 def echo_command(c)
 	puts ">>>>>> #{c}"
 	`#{c}`
+end
+
+def get_permission_and_go(p)
+	puts
+	yn = prompt("#{p} (y/n)")
+	if yn.downcase == 'y'
+		puts
+		yield
+		puts
+	else
+		puts
+		puts "OK - forget it."
+		puts
+	end	
 end
 
 def approve_and_execute(cmds, prompt="")
@@ -211,3 +248,4 @@ def tag_exists?(dir, tag)
 		!`git tag --list #{tag}`.strip.empty?
 	end
 end
+

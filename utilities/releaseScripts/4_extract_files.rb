@@ -47,22 +47,14 @@ begin
 	raise BadState.new("Tag #{tag} doesn't exist in Vitro.") unless tag_exists?(vitro_path, tag) 
 
 	if File.directory?(export_dir) 
-		p = "OK to overwrite export area at #{export_dir} ? (y/n)"
+		p = "OK to overwrite export area at #{export_dir} ?"
 	else
-		p = "OK to create export area at #{export_dir} ? (y/n)"
+		p = "OK to create export area at #{export_dir} ?"
 	end
 	
-	puts
-	yn = prompt(p)
-	if yn.downcase == 'y'
-		puts
+	get_permission_and_go(p) do
 		puts "Building export area"
 		export_files(vivo_path, vitro_path, tag, export_dir)
-		puts
-	else
-		puts
-		puts "OK - forget it."
-		puts
 	end
 rescue BadState
 	puts "#{$!.message} - Aborting."
