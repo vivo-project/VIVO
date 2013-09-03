@@ -47,10 +47,9 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	
 	private Log log = LogFactory.getLog(AddAssociatedConceptGenerator.class);
 	private String template = "addAssociatedConcept.ftl";
-	private static String SKOSConceptType = "http://www.w3.org/2004/02/skos/core#Concept";
 	//TODO: Set this to a dynamic mechanism
 	private static String VIVOCore = "http://vivoweb.org/ontology/core#";
-		
+	private static String SKOSConceptType = "http://www.w3.org/2004/02/skos/core#Concept";	
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
     	EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();
@@ -173,13 +172,13 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
     
    //Optional N3, includes possibility of semantic type which may or may not be included
     //label and source are independent of semantic type
+    //concept semantic type uri is a placeholder which is actually processed in the sparql update preprocessor
 	private List<String> generateN3Optional() {
 		return list("?conceptNode <" + RDFS.label.getURI() + "> ?conceptLabel .\n" + 
     	        "?conceptNode <" + RDFS.isDefinedBy.getURI() + "> ?conceptSource .", 
-				"?conceptNode <" + VIVOCore + "hasConceptSemanticType> ?conceptSemanticTypeURI ." + 
-    	        "?conceptSemanticTypeURI <" + VIVOCore + "isConceptSemanticTypeOf> ?conceptNode ." + 
+				"?conceptNode <" + RDF.type + "> ?conceptSemanticTypeURI ." +  
     	        "?conceptSemanticTypeURI <" + RDFS.label.getURI() + "> ?conceptSemanticTypeLabel ." + 
-    	        "?conceptSemanticTypeURI <" + RDF.type.getURI() + "> <" + VIVOCore + "ConceptSemanticType> ."  
+    	        "?conceptSemanticTypeURI <" + RDFS.subClassOf + "> <" + SKOSConceptType + "> ."  
     	);
     }
 	

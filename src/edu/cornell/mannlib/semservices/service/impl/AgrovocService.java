@@ -425,6 +425,7 @@ public class AgrovocService implements ExternalConceptService  {
 	}
 	
 	protected String getDbpediaDescription(String uri) throws Exception{
+		String descriptionSource = " (Source: DBpedia)";
 		String description = new String();
 		String qs = ""
 				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
@@ -476,7 +477,8 @@ public class AgrovocService implements ExternalConceptService  {
 		} catch (Exception ex) {
 			throw ex;
 		}
-		return description;
+		//Adding source so it is clear that this description comes from DBPedia
+		return description + descriptionSource;
 	}
    
    /**
