@@ -21,6 +21,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
@@ -469,10 +470,9 @@ public class AddAssociatedConceptsPreprocessor extends
 			n3String += node + " <" + RDFS.label.getURI() + "> " + label + " .\n" + 
 			        node + " <" + RDFS.isDefinedBy.getURI() + "> " + source + " ."; 
 			String n3ConceptTypeString = prefixStr;
-			n3ConceptTypeString += node + " core:hasConceptSemanticType " + conceptSemanticTypeURI + " ." + 
-			conceptSemanticTypeURI + " core:isConceptSemanticTypeOf " + node + ". " + 
-	        conceptSemanticTypeURI +  " <" + RDFS.label.getURI() + "> " + conceptSemanticTypeLabel + " .\n" + 
-	        conceptSemanticTypeURI +  " <" + RDF.type.getURI() + "> core:ConceptSemanticType .\n"  ;
+			n3ConceptTypeString += node + " <" + RDF.type.getURI() + "> " + conceptSemanticTypeURI + " ." + 
+			conceptSemanticTypeURI +  " <" + RDFS.label.getURI() + "> " + conceptSemanticTypeLabel + " .\n" + 
+	        conceptSemanticTypeURI +  " <" + RDFS.subClassOf.getURI() + "> <http://www.w3.org/2004/02/skos/core#Concept> .\n"  ;
 			
 			n3Optional.add(n3String);
 			//adding separately so their resolution does not depend on each other
@@ -630,7 +630,7 @@ public class AddAssociatedConceptsPreprocessor extends
 	}
 	
 	private String getExistingSemanticTypeURI(String label) {
-		String queryStr = "SELECT ?semanticType WHERE { ?semanticType <" + RDF.type.getURI() + "> <http://vivoweb.org/ontology/core#ConceptSemanticType> . " + 
+		String queryStr = "SELECT ?semanticType WHERE { ?semanticType <" + RDF.type.getURI() + "> <" + OWL.Class.getURI() + "> . " + 
 				"?semanticType <" + RDFS.label.getURI() + "> \"" + label + "\"^^<http://www.w3.org/2001/XMLSchema#string>  . }";
 		 QueryExecution qe = null;
 	        try{

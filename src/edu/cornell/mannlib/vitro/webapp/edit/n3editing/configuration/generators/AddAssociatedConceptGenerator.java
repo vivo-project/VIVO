@@ -17,8 +17,16 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
@@ -34,6 +42,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUti
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.AddAssociatedConceptsPreprocessor;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.ConceptSemanticTypesPreprocessor;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.utils.ConceptSearchService.ConceptSearchServiceUtils;
 /**
@@ -86,7 +95,9 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		setTemplate(editConfiguration, vreq);
 		// No validators required here
 		// Add preprocessors
-		addPreprocessors(editConfiguration, ModelAccess.on(vreq).getJenaOntModel());
+		addPreprocessors(editConfiguration, 
+				ModelAccess.on(vreq).getJenaOntModel(), 
+				ModelAccess.on(vreq).getOntModelSelector().getTBoxModel());
 		// Adding additional data, specifically edit mode
 		addFormSpecificData(editConfiguration, vreq);
 		// One override for basic functionality, changing url pattern
@@ -324,7 +335,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
    
     //Add preprocessor
 	
-   private void addPreprocessors(EditConfigurationVTwo editConfiguration, OntModel ontModel) {
+   private void addPreprocessors(EditConfigurationVTwo editConfiguration, OntModel ontModel, OntModel modelChangeModel) {
 	  //An Edit submission preprocessor for enabling addition of multiple terms for a single search
 	   //TODO: Check if this is the appropriate way of getting model
 	 
@@ -332,6 +343,8 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	   
 	   editConfiguration.addEditSubmissionPreprocessor(
 			   new AddAssociatedConceptsPreprocessor(editConfiguration, ontModel));
+	   editConfiguration.addModelChangePreprocessor(new ConceptSemanticTypesPreprocessor(
+			   modelChangeModel));
 	  
 	}
      
@@ -417,14 +430,15 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 			 		String conceptSemanticTypeURI = null;
 			 		String conceptSemanticTypeLabel = null;
 			 		//Can a concept have multiple semantic types?  Currently we are only returning the first one
+			 		//TODO: Change this into a sparql query that returns all types for the concept that are subclasses of SKOS concepts
+			 		HashMap<String, String> typeAndLabel = this.getConceptSemanticTypeQueryResults(conceptIndividual.getURI(), ModelAccess.on(vreq).getJenaOntModel());
+			 		if(typeAndLabel.containsKey("semanticTypeURI")) {
+			 			conceptSemanticTypeURI = typeAndLabel.get("semanticTypeURI");
+			 		}
+			 		if(typeAndLabel.containsKey("semanticTypeLabel")) {
+			 			conceptSemanticTypeLabel = typeAndLabel.get("semanticTypeLabel");
+			 		}
 			 		
-			 		List<ObjectPropertyStatement> semanticTypeStatements = conceptIndividual.getObjectPropertyStatements(VIVOCore + "hasConceptSemanticType");
-				 	if(semanticTypeStatements.size() > 0) {
-				 		conceptSemanticTypeURI = semanticTypeStatements.get(0).getObjectURI();
-					 	Individual conceptSemanticTypeIndividual = EditConfigurationUtils.getIndividual(vreq, conceptSemanticTypeURI);
-					 	conceptSemanticTypeLabel = conceptSemanticTypeIndividual.getName();
-				 	}
-				 	//get label
 
 			 		//Assuming this is from an external vocabulary source
 			 		info.add(new AssociatedConceptInfo(conceptLabel, conceptUri, vocabSource, vocabLabel, null, conceptSemanticTypeURI, conceptSemanticTypeLabel));
@@ -434,6 +448,44 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		 return info;
 	}
 	
+	private HashMap<String, String> getConceptSemanticTypeQueryResults(String conceptURI, OntModel ontModel) {
+		HashMap<String, String> typeAndLabel = new HashMap<String, String>();
+		String queryStr = "SELECT ?semanticTypeURI ?semanticTypeLabel WHERE { " + 
+				"<" + conceptURI + "> <" + RDF.type.getURI() + "> ?semanticTypeURI . " + 
+				"?semanticTypeURI <" + RDFS.subClassOf.getURI() + "> <" + this.SKOSConceptType + ">.  " + 
+				"?semanticTypeURI <" + RDFS.label.getURI() + "> ?semanticTypeLabel ." + 
+				"}";
+		 QueryExecution qe = null;
+	        try{
+	            Query query = QueryFactory.create(queryStr);
+	            qe = QueryExecutionFactory.create(query, ontModel);
+                ResultSet results = null;
+                results = qe.execSelect();
+                
+                while( results.hasNext()){
+                	QuerySolution qs = results.nextSolution();
+                	if(qs.get("semanticTypeURI") != null) {
+                		Resource semanticTypeURI = qs.getResource("semanticTypeURI");
+                		log.debug("Semantic Type URI returned " + semanticTypeURI.getURI());
+                		typeAndLabel.put("semanticTypeURI", semanticTypeURI.getURI());
+                	}
+                	if(qs.get("semanticTypeLabel") != null) {
+                		Literal semanticTypeLabel = qs.getLiteral("semanticTypeLabel");
+                		log.debug("Semantic Type label returned " + semanticTypeLabel.getString());
+                		typeAndLabel.put("semanticTypeLabel", semanticTypeLabel.getString());
+                	}
+                	
+                	
+                }
+	        }catch(Exception ex){
+	            throw new Error("Error in executing query string: \n" + queryStr + '\n' + ex.getMessage());
+	        }finally{
+	            if( qe != null)
+	                qe.close();
+	        }
+		return typeAndLabel;
+	}
+
 	public class AssociatedConceptInfo {
 		private String conceptLabel;
 		private String conceptURI;
