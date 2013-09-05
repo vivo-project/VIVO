@@ -84,6 +84,8 @@ public class AddAssociatedConceptsPreprocessor extends
 			//This will put the URI value in scope for the first semantic type label
 			//and generate the rest if need be
 			processConceptSemanticValues();
+			//Also need to see if any broader or narrower uris for the concepts that already exist in the system
+			//and set up the appropriate relationships between this concept and the broader/narrower uri
 			if (numberConcepts > 1) {
 				processConceptNodes(numberConcepts);
 			}

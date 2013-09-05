@@ -51,6 +51,9 @@
                    	<#if existingConcept.vocabURI?has_content && existingConcept.vocabLabel?has_content>
                    		(${existingConcept.vocabLabel})
                    	</#if>
+                   	<#if existingConcept.conceptSemanticTypeLabel?has_content>
+                   	 ${existingConcept.conceptSemanticTypeLabel}
+                   	</#if>
                    </span> 
                 </span>
                 &nbsp;<a href="${urls.base}/edit/primitiveRdfEdit" class="remove" title="${i18n().remove_capitalized}">${i18n().remove_capitalized}</a>
