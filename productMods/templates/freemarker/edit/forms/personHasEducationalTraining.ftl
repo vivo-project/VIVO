@@ -33,9 +33,11 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <#assign deptValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "dept") />
 <#assign infoValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "info") />
 <#assign majorFieldValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "majorField") />
-<#assign degreeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "degree") />
+<#assign degreeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "degreeType") />
+<#assign awardedDegreeLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "awardedDegreeLabel") />
 <#assign existingOrgValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingOrg") />
 <#assign trainingTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "trainingType")/>
+<#assign existingADLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingAwardedDegreeLabel") />
 
 <#--If edit submission exists, then retrieve validation errors if they exist-->
 <#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
@@ -56,7 +58,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <#assign yearHint     = "<span class='hint'>(${i18n().year_hint_format})</span>" />
 
 
-<h2>${titleVerb}&nbsp;${i18n().educational_training_for} ${subjectName}${editConfiguration.subjectName}</h2>
+<h2>${titleVerb}&nbsp;${i18n().educational_training_for} ${editConfiguration.subjectName}</h2>
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
@@ -155,13 +157,19 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <div class="entry">
       <label for="degreeUri">${i18n().degree}</label>      
     
-      <#assign degreeOpts = editConfiguration.pageData.degree />  
-      <select name="degree" id="degreeUri" >
+      <#assign degreeOpts = editConfiguration.pageData.degreeType />  
+      <select name="degreeType" id="degreeUri" >
         <option value="" <#if degreeValue = "">selected</#if>>${i18n().select_one}</option>        
                <#list degreeOpts?keys as key>                 
         <option value="${key}" <#if degreeValue = key>selected</#if>>${degreeOpts[key]}</option>                    
         </#list>                                
-      </select>    
+      </select>
+      <#if editMode == "edit">
+            <input type="hidden" id="newAwardedDegreeLabel" name="awardedDegreeLabel" value=""/> 
+            <input type="hidden" id="awardedDegreeLabel" name="existingAwardedDegreeLabel" value="${existingADLabelValue!}"/> 
+      <#else>
+            <input type="hidden" id="awardedDegreeLabel" name="awardedDegreeLabel" value=""/> 
+      </#if> 
     </div>
     
     <p>    
@@ -208,13 +216,18 @@ var customFormData  = {
     defaultTypeName: 'organization',
     baseHref: '${urls.base}/individual?uri=',
     blankSentinel: '${blankSentinel}',
-    flagClearLabelForExisting: '${flagClearLabelForExisting}'
+    flagClearLabelForExisting: '${flagClearLabelForExisting}',
+    subjectName: '${editConfiguration.subjectName}'
 };
 var i18nStrings = {
     selectAnExisting: '${i18n().select_an_existing}',
     orCreateNewOne: '${i18n().or_create_new_one}',
     selectedString: '${i18n().selected}'
 };
+
+$(document).ready(function() {
+    educationalTrainingUtils.onLoad();
+});
 </script>
 
 </section>
@@ -229,6 +242,7 @@ ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/
              '<script type="text/javascript" src="${urls.base}/js/extensions/String.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.bgiframe.pack.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/educationalTrainingUtils.js"></script>',
              '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/customFormWithAutocomplete.js"></script>')}
 
 

@@ -91,8 +91,14 @@ var awardReceiptUtils = {
 
     buildAwardReceiptLabel: function() {
         var rdfsLabel = "";
+        var $acSelection = $("div.acSelection[acGroupName='award']")
         if ( this.editMode == "edit"  ) {
-            rdfsLabel = this.awardDisplay.val();
+            if ( $acSelection.find("span.acSelectionInfo").text().length > 0 ) {
+                rdfsLabel = $("span.acSelectionInfo").text();
+            }
+            else {
+                rdfsLabel = this.award.val();
+            }
         }
         else {
             rdfsLabel = this.award.val();

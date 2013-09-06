@@ -29,12 +29,12 @@
         </#if>
     </#local>
 
-    <#local conferredByOrg>
-        <#if statement.conferredBy?has_content && statement.conferredByLabel?has_content>
-             ${i18n().conferred_by} <a href="${profileUrl(statement.uri("conferredBy"))}" title="${i18n().conferred_by}">${statement.conferredByLabel}</a>
+    <#local assignedByOrg>
+        <#if statement.assignedBy?has_content && statement.assignedByLabel?has_content>
+             ${i18n().conferred_by} <a href="${profileUrl(statement.uri("assignedBy"))}" title="${i18n().conferred_by}">${statement.assignedByLabel}</a>
         </#if>
     </#local>
 
-    <@s.join [ linkedIndividual, conferredByOrg!,  dateTimeVal! ] />
+    <@s.join [ linkedIndividual, assignedByOrg!,  dateTimeVal! ] />
 
  </#macro>
