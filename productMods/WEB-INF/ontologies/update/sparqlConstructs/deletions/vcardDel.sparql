@@ -1,0 +1,48 @@
+PREFIX arg: <http://purl.obolibrary.org/obo/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX v:   <http://www.w3.org/2006/vcard/ns#>
+PREFIX vivo: <http://vivoweb.org/ontology/core#>
+
+CONSTRUCT {
+        ?s foaf:firstName ?firstName .
+        ?s foaf:lastName ?lastName .
+        ?s vivo:middleName ?middleName .
+        ?s vivo:email ?email .
+        ?s vivo:primaryEmail ?primaryEmail . 
+        ?s vivo:phoneNumber ?phoneNumber .
+        ?s vivo:primaryPhoneNumber ?primaryPhoneNumber .
+        ?s vivo:faxNumber ?faxNumber .
+        ?s vivo:mailingAddress ?address .
+        ?address ?addressP ?addressO .
+} WHERE {
+    ?s a foaf:Agent 
+    OPTIONAL {
+        ?s foaf:firstName ?firstName .
+    } 
+    OPTIONAL {
+        ?s foaf:lastName ?lastName .
+    } 
+    OPTIONAL {
+        ?s vivo:middleName ?middleName 
+    } 
+    OPTIONAL {
+        ?s vivo:email ?email
+    } 
+    OPTIONAL {
+        ?s vivo:primaryEmail ?primaryEmail 
+    } 
+    OPTIONAL {
+        ?s vivo:phoneNumber ?phoneNumber 
+    } 
+    OPTIONAL {
+        ?s vivo:primaryPhoneNumber ?primaryPhoneNumber
+    } 
+    OPTIONAL {
+        ?s vivo:faxNumber ?faxNumber
+    } OPTIONAL {
+        ?s vivo:mailingAddress ?address .
+        OPTIONAL {
+            ?address ?addressP ?addressO
+        }
+    } 
+}

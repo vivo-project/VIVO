@@ -1,0 +1,27 @@
+PREFIX arg: <http://purl.obolibrary.org/obo/> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+PREFIX v:   <http://www.w3.org/2006/vcard/ns#> 
+PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+
+CONSTRUCT {
+    ?vcard v:hasName _:name .
+    _:name a v:Name .
+    _:name v:givenName ?firstName .
+    _:name vivo:middleName ?middleName .
+    _:name v:familyName ?lastName .
+} WHERE {
+     ?s arg:ARG_2000028 ?vcard .
+    OPTIONAL {
+        ?s foaf:firstName ?firstName .
+        BIND("yes" as ?test)
+    } 
+    OPTIONAL {
+        ?s foaf:lastName ?lastName .
+        BIND("yes" as ?test)
+    } 
+    OPTIONAL {
+        ?s vivo:middleName ?middleName 
+        BIND("yes" as ?test)
+    } 
+    FILTER(bound(?test))
+}
