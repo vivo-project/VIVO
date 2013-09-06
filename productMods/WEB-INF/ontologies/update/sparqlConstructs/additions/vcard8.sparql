@@ -1,0 +1,37 @@
+PREFIX arg: <http://purl.obolibrary.org/obo/> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+PREFIX v:   <http://www.w3.org/2006/vcard/ns#> 
+PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+
+CONSTRUCT {
+    ?vcard v:hasAddress _:address .
+    _:address a v:Address .
+    _:address v:streetAddress ?streetAddress .
+    _:address v:locality ?addressCity .
+    _:address v:region ?addressState .
+    _:address v:postalCode ?addressPostalCode .
+    _:address v:country ?addressCountry .
+} WHERE {
+    ?s arg:ARG_2000028 ?vcard .
+    ?s vivo:mailingAddress ?address .
+    ?address vivo:addressCity ?addressCity .
+    ?address vivo:addressState ?addressState .
+    ?address vivo:addressCountry ?addressCountry .
+    ?address vivo:addressPostalCode ?addressPostalCode .
+    OPTIONAL {
+        ?address vivo:address1 ?address1 .
+        ?address vivo:address2 ?address2 .
+        ?address vivo:address3 ?address3 .
+        BIND (CONCAT(?address1, ", ", ?address2, ", ", ?address3)  AS ?streetAddress) 
+    } 
+    OPTIONAL {
+        ?address vivo:address1 ?address1 .
+        ?address vivo:address2 ?address2 .
+        FILTER NOT EXISTS { ?address vivo:address3 ?address3 }
+        BIND (CONCAT(?address1, ", ", ?address2)  AS ?streetAddress) 
+    }
+    OPTIONAL {
+        ?address vivo:address1 ?address1
+        BIND(?address1 as ?streetAddress)
+    }
+}
