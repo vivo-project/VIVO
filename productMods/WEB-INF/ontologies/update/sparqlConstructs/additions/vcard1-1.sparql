@@ -15,6 +15,7 @@ CONSTRUCT {
         EXISTS { ?s vivo:phoneNumber ?phoneNumber } ||
         EXISTS { ?s vivo:primaryPhoneNumber ?primaryPhoneNumber } ||
         EXISTS { ?s vivo:faxNumber ?faxNumber } ||
-        EXISTS { ?s vivo:mailingAddress ?address } 
+        EXISTS { ?s vivo:mailingAddress ?address } ||
+        EXISTS { ?s vivo:webpage ?webpage }
     )
 }

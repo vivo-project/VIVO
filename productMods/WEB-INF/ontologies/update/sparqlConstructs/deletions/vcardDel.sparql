@@ -14,35 +14,45 @@ CONSTRUCT {
         ?s vivo:faxNumber ?faxNumber .
         ?s vivo:mailingAddress ?address .
         ?address ?addressP ?addressO .
+        ?s vivo:webpage ?webpage .
+        ?webpage ?webpageP ?webpageO .
 } WHERE {
-    ?s a foaf:Agent 
-    OPTIONAL {
+    {
         ?s foaf:firstName ?firstName .
     } 
-    OPTIONAL {
+    UNION {
         ?s foaf:lastName ?lastName .
     } 
-    OPTIONAL {
+    UNION {
         ?s vivo:middleName ?middleName 
     } 
-    OPTIONAL {
+    UNION {
         ?s vivo:email ?email
     } 
-    OPTIONAL {
+    UNION {
         ?s vivo:primaryEmail ?primaryEmail 
     } 
-    OPTIONAL {
+    UNION {
         ?s vivo:phoneNumber ?phoneNumber 
     } 
-    OPTIONAL {
+    UNION {
         ?s vivo:primaryPhoneNumber ?primaryPhoneNumber
     } 
-    OPTIONAL {
+    UNION {
         ?s vivo:faxNumber ?faxNumber
-    } OPTIONAL {
-        ?s vivo:mailingAddress ?address .
-        OPTIONAL {
-            ?address ?addressP ?addressO
-        }
     } 
+    UNION {
+        ?s vivo:mailingAddress ?address .
+    }
+    UNION {
+        ?s vivo:mailingAddress ?address .
+        ?address ?addressP ?addressO
+    } 
+    UNION {
+        ?s vivo:webpage ?webpage 
+    }
+    UNION {
+        ?s vivo:webpage ?webpage .
+        ?webpage ?webpageP ?webpageO
+    }
 }
