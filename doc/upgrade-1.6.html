@@ -49,6 +49,7 @@
                     	    <li><a href="#multiple">Multiple foaf:Person Profile Pages</a></li>
                     	    <li><a href="#homePage">Home Page Re-design</a></li>
                     	    <li><a href="#rdffiles">Auto-loaded RDF files move to the Home directory</a></li>
+                    	    <li><a href="#language">Support for additional languages</a></li>
 	                        <li><a href="#BOGUS">ANYTHING ELSE?</a></li>
 	                    </ol>
 					</li>					
@@ -362,6 +363,30 @@ rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
 &lt;/patternset&gt;</pre>
                 	    </p>
 
+                	    <h4 id="language">Support for additional languages</h4>
+             	        <p>
+             	        	VIVO 1.6 includes limited support for other languages, in addition to American English.
+             	        	This limited support is described as <em>read-only</em> support on <em>public-facing</em>
+             	        	pages. 
+             	        </p>
+             	        <p>
+             	        	<em>Read-only</em> means that there is no provision for editing multi-language
+             	        	data or displays. Property values, ontology labels, etc. must all be provided in RDF files
+             	        	and ingested or otherwise inserted into the data model. The Page Management user interface
+             	        	does not support maintaining pages in multiple languages.
+             	        </p>
+             	        <p>
+             	        	<em>Public-facing</em> means that most of the pages used for site adminstration 
+             	        	are only presented in American English.
+             	        </p>
+             	        <p>
+             	        	These two pages in the VIVO Wiki describe how to 
+             	        	<a href="https://wiki.duraspace.org/display/VIVO/Building+a+multi-language+VIVO+instance">
+             	        	Build VIVO with multiple languages</a> and how to 
+             	        	<a href="https://wiki.duraspace.org/display/VIVO/Adding+a+language+to+VIVO">
+             	        	Add a new language to VIVO</a>.
+             	        </p>
+
                 	    <h4 id="BOGUS">ANYTHING ELSE?</h4>
              	        <p>
              	        </p>
@@ -445,6 +470,44 @@ rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
             	    goes into your VIVO home directory.
             </p>
             
+            <p>
+              The properties below are new to <code>build.properties</code>. They are optional,
+              so you need not add them unless you want a value other than the default. 
+            </p>
+                <p>
+                    <!-- runtime.properties table from install.html -->
+                </p>
+            <table border='1' bordercolor="#CCCCCC" cellspacing="5">
+                <tbody>
+                    <tr>
+                        <th>
+                            Property Name 
+                        </th>
+                        <th>
+                            Example Value 
+                        </th>
+                    </tr>
+                   
+                     <tr>
+                        <td colspan="2">
+                        	Languages (in addition to American English) that will be built into your 
+                            VIVO site. The languages must be found in the
+                            <code>languages</code> directory of the VIVO distribution.
+                            See <a href="https://wiki.duraspace.org/display/VIVO/Building+a+multi-language+VIVO+instance">
+                            the VIVO Wiki</a> for more information.
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                          languages.addToBuild
+                        </td>
+                        <td>
+                           es_MX
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
             <p>
               The properties below are new to <code>runtime.properties</code>. They are optional,
               so you need not add them, unless you want a value other than the default. 
