@@ -86,7 +86,6 @@
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role of conducting funded or unfunded research,  sometimes linked to an Agreement.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Examples of research can be seen at: http://www.ufl.edu/research/products/index.html.  Note these may have been funded, but the research doesn&apos;t have to be funded.  Also, the research may be linked to an Agreement (for example, a Grant), but does not need to be.</obo:IAO_0000112>
     </owl:Class>
-</rdf:RDF>
 
 
 
@@ -96,7 +95,6 @@
         <rdfs:label xml:lang="en">Advisee Role</rdfs:label>
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
     </owl:Class>
-</rdf:RDF>
 
 
 
