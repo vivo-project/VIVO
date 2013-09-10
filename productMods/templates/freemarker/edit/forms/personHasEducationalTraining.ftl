@@ -44,7 +44,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 	<#assign submissionErrors = editSubmission.validationErrors/>
 </#if>
 
-<#if editMode == "edit">    
+<#if editMode == "edit" || editMode == "repair">    
         <#assign titleVerb="${i18n().edit_capitalized}">        
         <#assign submitButtonText="${i18n().save_changes}">
         <#assign disabledVal="disabled">
@@ -164,7 +164,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <option value="${key}" <#if degreeValue = key>selected</#if>>${degreeOpts[key]}</option>                    
         </#list>                                
       </select>
-      <#if editMode == "edit">
+      <#if editMode == "edit" || editMode == "repair">
             <input type="hidden" id="newAwardedDegreeLabel" name="awardedDegreeLabel" value=""/> 
             <input type="hidden" id="awardedDegreeLabel" name="existingAwardedDegreeLabel" value="${existingADLabelValue!}"/> 
       <#else>

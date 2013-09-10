@@ -90,8 +90,8 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
                 
         conf.setN3Required( Arrays.asList( n3ForNewEdTraining, trainingTypeAssertion ) );
         conf.setN3Optional(Arrays.asList( 
-                n3ForNewOrg, n3ForExistingOrg, n3ForNewAwardedDegree,  
-                majorFieldAssertion, 
+                n3ForNewOrgExistingAwardedDegree, n3ForExistingOrgExistingAwardedDegree, n3ForNewAwardedDegreeNewOrg,  
+                majorFieldAssertion,  n3ForNewAwardedDegreeExistingOrg,
                 //existingDegreeTypeAssertion, 
                 existingAwardedDegreeLabel, deptAssertion, infoAssertion, n3ForStart, n3ForEnd ));
         
@@ -229,15 +229,30 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
     final static String trainingTypeAssertion =
         "?edTraining a ?trainingType .";
 
-    final static String n3ForNewAwardedDegree  =      
+    final static String n3ForNewAwardedDegreeNewOrg  =      
         "@prefix core: <"+ vivoCore +"> .\n"+
         "?edTraining <http://purl.obolibrary.org/obo/RO_0002234> ?newAwardedDegree . \n" +
         "?newAwardedDegree <http://purl.obolibrary.org/obo/RO_0002353> ?edTraining . \n" +
         "?newAwardedDegree <http://vivoweb.org/ontology/core#relates> ?person . \n" +
         "?person <http://vivoweb.org/ontology/core#relatedBy> ?newAwardedDegree . \n" +
         "?newAwardedDegree <"+ label +"> ?awardedDegreeLabel . \n" +
-        "?newOrg <http://vivoweb.org/ontology/core#assigns> ?newAwardedDegree . \n" +
         "?newAwardedDegree <http://vivoweb.org/ontology/core#assignedBy> ?newOrg . \n" +
+        "?newOrg <http://vivoweb.org/ontology/core#assigns> ?newAwardedDegree . \n" +
+        "?newOrg a ?orgType . \n" +
+        "?newOrg <"+ label +"> ?orgLabel . \n" +
+        "?newAwardedDegree <http://vivoweb.org/ontology/core#relates> ?degreeType .\n"+
+        "?degreeType <http://vivoweb.org/ontology/core#relatedBy> ?newAwardedDegree . \n"+
+        "?newAwardedDegree a core:AwardedDegree .";
+
+    final static String n3ForNewAwardedDegreeExistingOrg  =      
+        "@prefix core: <"+ vivoCore +"> .\n"+
+        "?edTraining <http://purl.obolibrary.org/obo/RO_0002234> ?newAwardedDegree . \n" +
+        "?newAwardedDegree <http://purl.obolibrary.org/obo/RO_0002353> ?edTraining . \n" +
+        "?newAwardedDegree <http://vivoweb.org/ontology/core#relates> ?person . \n" +
+        "?person <http://vivoweb.org/ontology/core#relatedBy> ?newAwardedDegree . \n" +
+        "?newAwardedDegree <"+ label +"> ?awardedDegreeLabel . \n" +
+        "?existingOrg  <http://vivoweb.org/ontology/core#assigns> ?newAwardedDegree . \n" +
+        "?newAwardedDegree <http://vivoweb.org/ontology/core#assignedBy> ?existingOrg  . \n" +
         "?newAwardedDegree <http://vivoweb.org/ontology/core#relates> ?degreeType .\n"+
         "?degreeType <http://vivoweb.org/ontology/core#relatedBy> ?newAwardedDegree . \n"+
         "?newAwardedDegree a core:AwardedDegree .";
@@ -249,15 +264,15 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         "?degreeType <http://vivoweb.org/ontology/core#relatedBy> ?existingAwardedDegree . \n"+
         "?existingAwardedDegree <"+ label +"> ?existingAwardedDegreeLabel . " ;
 
-    final static String n3ForNewOrg  =      
-        "?edTraining <http://vivoweb.org/ontology/core#relates> ?newOrg . \n" +
-        "?newOrg <http://vivoweb.org/ontology/core#relatedBy> ?edTraining . \n" +
+    final static String n3ForNewOrgExistingAwardedDegree  =      
+        "?existingAwardedDegree <http://vivoweb.org/ontology/core#assignedBy> ?newOrg . \n" +
+        "?newOrg <http://vivoweb.org/ontology/core#assigns> ?existingAwardedDegree . \n" +
         "?newOrg <"+ label +"> ?orgLabel . \n" +
         "?newOrg a ?orgType .";
 
-    final static String n3ForExistingOrg  =      
-        "?edTraining <http://vivoweb.org/ontology/core#relates> ?existingOrg . \n" +
-        "?existingOrg <http://vivoweb.org/ontology/core#relatedBy> ?edTraining . \n" +
+    final static String n3ForExistingOrgExistingAwardedDegree  =      
+        "?existingAwardedDegree <http://vivoweb.org/ontology/core#assignedBy> ?existingOrg . \n" +
+        "?existingOrg <http://vivoweb.org/ontology/core#assigns> ?existingAwardedDegree . \n" +
         "?existingOrg a ?orgType . ";
     
     final static String majorFieldAssertion  =      
@@ -287,16 +302,6 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
 
     /* Queries for editing an existing educational training entry */
 
-    final static String existingOrgQuery  =      
-        "SELECT ?existingOrg WHERE {\n"+
-        "?edTraining <http://vivoweb.org/ontology/core#relates> ?existingOrg . }\n";
-
-    final static String orgLabelQuery  =      
-        "SELECT ?existingOrgLabel WHERE {\n"+
-        "?edTraining <http://vivoweb.org/ontology/core#relates> ?existingOrg .\n"+
-        "?existingOrg <"+ label +"> ?existingOrgLabel .\n"+
-        "}";
-
     final static String existingAwardedDegreeQuery =      
         "SELECT ?existingAwardedDegree WHERE {\n"+
         "?edTraining <http://purl.obolibrary.org/obo/RO_0002234> ?existingAwardedDegree . }\n";
@@ -306,12 +311,25 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         "?edTraining <http://purl.obolibrary.org/obo/RO_0002234> ?existingAwardedDegree . \n" +
         "?existingAwardedDegree <"+ label +"> ?existingAwardedDegreeLabel }\n";
 
+    final static String existingOrgQuery  =      
+        "SELECT ?existingOrg WHERE {\n"+
+        "?edTraining <http://purl.obolibrary.org/obo/RO_0002234> ?existingAwardedDegree . \n" +
+        "?existingAwardedDegree <http://vivoweb.org/ontology/core#assignedBy> ?existingOrg . }\n";
+
+    final static String orgLabelQuery  =      
+        "SELECT ?existingOrgLabel WHERE {\n"+
+        "?edTraining <http://purl.obolibrary.org/obo/RO_0002234> ?existingAwardedDegree . \n" +
+        "?existingAwardedDegree <http://vivoweb.org/ontology/core#assignedBy> ?existingOrg .\n"+
+        "?existingOrg <"+ label +"> ?existingOrgLabel .\n"+
+        "}";
+
     /* Limit type to subclasses of foaf:Organization. Otherwise, sometimes owl:Thing or another
     type is returned and we don't get a match to the select element options. */
     final static String orgTypeQuery  =      
         "PREFIX rdfs: <"+ rdfs +">   \n"+
         "SELECT ?existingOrgType WHERE {\n"+
-        "?edTraining <http://vivoweb.org/ontology/core#relates> ?existingOrg .\n"+
+        "?edTraining <http://purl.obolibrary.org/obo/RO_0002234> ?existingAwardedDegree . \n" +
+        "?existingAwardedDegree <http://vivoweb.org/ontology/core#assignedBy> ?existingOrg .\n"+
         "?existingOrg a ?existingOrgType .\n"+
         "?existingOrgType rdfs:subClassOf <"+ orgClass +"> .\n"+
         "}";

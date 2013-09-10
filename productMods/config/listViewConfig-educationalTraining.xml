@@ -26,7 +26,13 @@
                           ?trainingType rdfs:subClassOf core:EducationalProcess .
                           ?trainingType rdfs:label ?typeName
                           } 
-                OPTIONAL { ?edTraining core:relates ?org .                                 
+                OPTIONAL { ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0002234&gt; ?awardedDegree .
+                           ?awardedDegree core:relates ?degree .
+                           ?degree a core:AcademicDegree
+                           OPTIONAL { ?degree rdfs:label ?degreeName }
+                           OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
+                          }
+                OPTIONAL { ?awardedDegree core:assignedBy ?org .                                 
                            ?org rdfs:label ?orgName  
                            <collated>
                            OPTIONAL { ?org vitro:mostSpecificType ?subclass .
@@ -34,12 +40,6 @@
                            }  
                            </collated>                         
                 }        
-                OPTIONAL { ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0002234&gt; ?awardedDegree .
-                           ?awardedDegree core:relates ?degree .
-                           ?degree a core:AcademicDegree
-                           OPTIONAL { ?degree rdfs:label ?degreeName }
-                           OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
-                }
                 OPTIONAL { ?edTraining core:majorField ?majorField }
                 OPTIONAL { ?edTraining core:departmentOrSchool ?deptOrSchool }
                 OPTIONAL { ?edTraining core:supplementalInformation ?info }
@@ -74,9 +74,9 @@
             ?subject ?property ?edTraining .
             ?edTraining a core:EducationalProcess .
             ?edTraining ?edTrainingProp ?edTrainingValue .
-            ?edTraining core:relates ?org .
-            ?org rdfs:label ?orgName .
             ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0002234&gt; ?awardedDegree .
+            ?awardedDegree core:assignedBy ?org .
+            ?org rdfs:label ?orgName .
             ?awardedDegree core:relates ?degree .
             ?edTraining core:dateTimeInterval ?dateTimeInterval
         } WHERE {
@@ -92,14 +92,15 @@
             UNION {
                 ?subject ?property ?edTraining .
                 ?edTraining a core:EducationalProcess .
-                ?edTraining core:relates ?org .
-                ?org rdfs:label ?orgName  
-            } 
+                ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0002234&gt; ?awardedDegree .
+            }     
             UNION {
                 ?subject ?property ?edTraining .
                 ?edTraining a core:EducationalProcess .
                 ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0002234&gt; ?awardedDegree .
-            }     
+                ?awardedDegree core:assignedBy ?org .
+                ?org rdfs:label ?orgName  
+            } 
             UNION {
                 ?subject ?property ?edTraining .
                 ?edTraining a core:EducationalProcess .

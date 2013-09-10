@@ -43,13 +43,13 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 			+ "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
 			+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
 			+ "SELECT ?existingPerson WHERE { \n"
-			+ "  ?position core:positionForPerson ?existingPerson .}";
+			+ "  ?position core:relates ?existingPerson .}";
 
 	private static final String QUERY_EXISTING_PERSON_LABEL = ""
 			+ "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
 			+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
 			+ "SELECT ?existingPersonLabel WHERE { \n"
-			+ "  ?position core:positionForPerson ?existingPerson . \n"
+			+ "  ?position core:relates ?existingPerson . \n"
 			+ "  ?existingPerson rdfs:label ?existingPersonLabel . }";
 
 	private static final String QUERY_EXISTING_INTERVAL_NODE = ""
@@ -113,18 +113,18 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 	private static final String N3_NEW_POSITION = ""
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
 			+ "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> . \n"
-			+ "?organization core:organizationForPosition ?position . \n"
+			+ "?organization core:relatedBy ?position . \n"
 			+ "?position a core:Position . \n" 
 			+ "?position a  ?positionType . \n"
 			+ "?position rdfs:label ?positionTitle . \n"
-			+ "?position core:positionInOrganization ?organization . ";
+			+ "?position core:relates ?organization . ";
 
     private static final String N3_NEW_PERSON = ""
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
 			+ "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> . \n"
 			+ "@prefix foaf: <http://xmlns.com/foaf/0.1/> . \n"
-    		+ "?position core:positionForPerson ?person . \n" 
-    		+ "?person core:personInPosition ?position . \n"
+    		+ "?position core:relates ?person . \n" 
+    		+ "?person core:relatedBy ?position . \n"
     		+ "?person a foaf:Person . \n"
     		+ "?person rdfs:label ?personLabel . ";
 
@@ -138,8 +138,8 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 
     private static final String N3_EXISTING_PERSON = ""
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
-        	+ "?position core:positionForPerson ?existingPerson . \n" 
-        	+ "?existingPerson core:personInPosition ?position . \n";
+        	+ "?position core:relates ?existingPerson . \n" 
+        	+ "?existingPerson core:relatedBy ?position . \n";
 
 	private static final String N3_NEW_START_NODE = ""
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
