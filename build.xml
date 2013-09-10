@@ -69,8 +69,10 @@
 		<patternset id="appbase.patterns">
 			<include name="src/**/*" />
 			<include name="lib/**/*" />
+			<include name="rdf/**/*" />
 			<include name="test/**/*" />
 			<include name="themes/**/*" />
+			<include name="languages/**/*" />
 			<include name="config/*.properties" />
 			<include name="config/*.txt" />
 			<include name="config/jarlist/*.txt" />

@@ -51,6 +51,9 @@
                    	<#if existingConcept.vocabURI?has_content && existingConcept.vocabLabel?has_content>
                    		(${existingConcept.vocabLabel})
                    	</#if>
+                   	<#if existingConcept.conceptSemanticTypeLabel?has_content>
+                   	 ${existingConcept.conceptSemanticTypeLabel}
+                   	</#if>
                    </span> 
                 </span>
                 &nbsp;<a href="${urls.base}/edit/primitiveRdfEdit" class="remove" title="${i18n().remove_capitalized}">${i18n().remove_capitalized}</a>
@@ -95,7 +98,10 @@
     </p><span id="createOwnOne"> ${i18n().or} &nbsp;<a href="${userDefinedConceptUrl}" title="${i18n().create_own_concept}">${i18n().create_own_concept}&nbsp;</a></span>
     <input type="hidden" id="conceptNode" name="conceptNode" value=""/> <!-- Field value populated by JavaScript -->
     <input type="hidden" id="conceptLabel" name="conceptLabel" value="" />  <!-- Field value populated by JavaScript -->
-		<input type="hidden" id="conceptSource" name="conceptSource" value="" /> <!-- Field value populated by JavaScript -->
+	<input type="hidden" id="conceptSource" name="conceptSource" value="" /> <!-- Field value populated by JavaScript -->
+    <input type="hidden" id="conceptSemanticTypeURI" name="conceptSemanticTypeURI" value="" /> <!-- Field value populated by JavaScript -->
+    <input type="hidden" id="conceptSemanticTypeLabel" name="conceptSemanticTypeLabel" value="" /> <!-- Field value populated by JavaScript -->
+    
     <div id="selectedConcept" name="selectedConcept" class="acSelection">
         <p class="inline">
         </p>

@@ -1,3 +1,5 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
 /*
 
  * $Id: XMLGregorianCalendarConverter.java 28642 2006-10-25 13:41:54Z jdamick $

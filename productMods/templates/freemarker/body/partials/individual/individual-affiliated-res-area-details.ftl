@@ -3,11 +3,12 @@
     <section id="pageList">
         <#list affiliatedResearchAreas as firstRow>
         <#assign firstOrgLabel = firstRow["orgLabel"]?upper_case />
+        <#assign deptLink = "${urls.base}/individual?uri=${firstRow['orgURI']}" />
         <#assign i18TextString1 = "" />
         <#if ( firstOrgLabel?index_of("THE") == 0 ) >
-            <#assign i18TextString1 = "${i18n().individuals_with_researh_area_one(firstRow['orgLabel'])}" />
+            <#assign i18TextString1 = "${i18n().individuals_with_researh_area_one(firstRow['orgLabel'],deptLink)}" />
         <#else>
-            <#assign i18TextString1 = "${i18n().individuals_with_researh_area_two(firstRow['orgLabel'])}" />
+            <#assign i18TextString1 = "${i18n().individuals_with_researh_area_two(firstRow['orgLabel'],deptLink)}" />
         </#if>
         <div class="tab">
             <h2>${firstRow["raLabel"]}</h2>
