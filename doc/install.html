@@ -316,18 +316,35 @@
                             /usr/local/vivo/home
                         </td>
                     </tr>
+                    <tr>
+                        <td colspan="2">
+                            Languages (in addition to American English) that will be built into your 
+                            VIVO site. The languages must be found in the
+                            <code>languages</code> directory of the VIVO distribution.
+                            See <a href="https://wiki.duraspace.org/display/VIVO/Building+a+multi-language+VIVO+instance">
+                            the VIVO Wiki</a> for more information.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            languages.addToBuild
+                        </td>
+                        <td>
+                            es_MX
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
             <h3 id="runtime_properties">5. Specify runtime properties </h3>
             <p>
-                In <a href="#build_properties">Step 4</a>, you defined the location of the Vitro home directory, 
+                In <a href="#build_properties">Step 4</a>, you defined the location of the VIVO home directory, 
                 by specifying <code>vitro.home</code> in the <code>build.properties</code> file.
                 Create that directory now.
             </p>
             <p>
             	At the top level of the VIVO distribution directory, you will find a file called 
-            	<code>example.runtime.properties</code>. Copy this to the Vitro home directory you have created, 
+            	<code>example.runtime.properties</code>. Copy this to the VIVO home directory you have created, 
             	renaming the copy to <code>runtime.properties</code>. 
                 Edit the file to suit your installation, as described in the following table. 
             </p>

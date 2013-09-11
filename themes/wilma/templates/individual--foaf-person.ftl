@@ -11,6 +11,9 @@
 <#if !labelCount??>
     <#assign labelCount = 0 >
 </#if>
+<#if !localesCount??>
+	<#assign localesCount = 1>
+</#if>
 <#assign visRequestingTemplate = "foaf-person-wilma">
 <section id="individual-intro" class="vcard person" role="region">
 
@@ -55,7 +58,7 @@
             <#else>                
                 <h1 class="vcard foaf-person">
                     <#-- Label -->
-                    <span class="fn"><@p.label individual editable labelCount/></span>
+                    <span class="fn"><@p.label individual editable labelCount localesCount/></span>
 
                     <#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->
                     <#assign title = propertyGroups.pullProperty("${core}preferredTitle")!>

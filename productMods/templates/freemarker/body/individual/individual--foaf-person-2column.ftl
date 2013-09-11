@@ -10,6 +10,9 @@
 <#if !labelCount??>
     <#assign labelCount = 0 >
 </#if>
+<#if !localesCount??>
+	<#assign localesCount = 1>
+</#if>
 <#assign qrCodeIcon = "qr-code-icon.png">
 <#assign visRequestingTemplate = "foaf-person-2column">
 <section id="individual-intro" class="vcard person" role="region">
@@ -40,7 +43,7 @@
             <#else>  
                 <h1 class="vcard foaf-person fn" <#if !editable>style="float:left;border-right:1px solid #A6B1B0;"</#if>> 
                     <#-- Label -->
-                    <@p.label individual editable labelCount/>
+                    <@p.label individual editable labelCount localesCount/>
                 </h1>
                 <#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->
                 <#assign title = propertyGroups.pullProperty("${core}preferredTitle")!>

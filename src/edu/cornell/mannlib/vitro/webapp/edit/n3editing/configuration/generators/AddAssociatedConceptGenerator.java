@@ -396,37 +396,38 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	}
 	
     
+	//To determine whether or not a concept is a user generated or one from an external vocab source.
+	//we cannot rely on whether or not it is a skos concept because incorporating UMLS semantic network classes as
+	//SKOS concept subclasses means that even concepts from an external vocab source might be considered SKOS concepts
+	//Instead, we will simply determine whether a concept is defined by an external vocabulary source and use that
+	//as the primary indicator of whether a concept is from an external vocabulary source or a user generated concept
 	private List<AssociatedConceptInfo> getAssociatedConceptInfo(
 			List<Individual> concepts, VitroRequest vreq) {
 		List<AssociatedConceptInfo> info = new ArrayList<AssociatedConceptInfo>();
 		 for ( Individual conceptIndividual : concepts ) {
-			 	boolean isSKOSConcept = false;
+			 	boolean userGenerated = true;
+			 	//Note that this isn't technically 
 			 	String conceptUri =  conceptIndividual.getURI();
 			 	String conceptLabel = conceptIndividual.getName();
 
-			 	//Check if SKOS Concept type
-			 	List<ObjectPropertyStatement> osl = conceptIndividual.getObjectPropertyStatements(RDF.type.getURI());
-			 	for(ObjectPropertyStatement os: osl) {
-			 		if(os.getObjectURI().equals(SKOSConceptType)) {
-			 			isSKOSConcept = true;
-			 			break;
-			 		}
-			 	}
+			 	//Check if defined by an external vocabulary source
+		 		List<ObjectPropertyStatement> vocabList = conceptIndividual.getObjectPropertyStatements(RDFS.isDefinedBy.getURI());
+		 		String vocabSource = null;
+		 		String vocabLabel = null;
+		 		if(vocabList != null && vocabList.size() > 0) {
+		 			userGenerated = false;
+		 			vocabSource = vocabList.get(0).getObjectURI();
+		 			Individual sourceIndividual = EditConfigurationUtils.getIndividual(vreq, vocabSource);
+		 			//Assuming name will get label
+		 			vocabLabel = sourceIndividual.getName();
+		 		}
+		 		
 			 	
-			 	if(isSKOSConcept) {
+			 	
+			 	if(userGenerated) {
 			 		//if the concept in question is skos - which would imply a user generated concept
 			 		info.add(new AssociatedConceptInfo(conceptLabel, conceptUri, null, null, SKOSConceptType, null, null));
 			 	} else {
-			 		//Get the vocab source and vocab label
-			 		List<ObjectPropertyStatement> vocabList = conceptIndividual.getObjectPropertyStatements(RDFS.isDefinedBy.getURI());
-			 		String vocabSource = null;
-			 		String vocabLabel = null;
-			 		if(vocabList != null && vocabList.size() > 0) {
-			 			vocabSource = vocabList.get(0).getObjectURI();
-			 			Individual sourceIndividual = EditConfigurationUtils.getIndividual(vreq, vocabSource);
-			 			//Assuming name will get label
-			 			vocabLabel = sourceIndividual.getName();
-			 		}
 			 		String conceptSemanticTypeURI = null;
 			 		String conceptSemanticTypeLabel = null;
 			 		//Can a concept have multiple semantic types?  Currently we are only returning the first one
@@ -438,7 +439,6 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 			 		if(typeAndLabel.containsKey("semanticTypeLabel")) {
 			 			conceptSemanticTypeLabel = typeAndLabel.get("semanticTypeLabel");
 			 		}
-			 		
 
 			 		//Assuming this is from an external vocabulary source
 			 		info.add(new AssociatedConceptInfo(conceptLabel, conceptUri, vocabSource, vocabLabel, null, conceptSemanticTypeURI, conceptSemanticTypeLabel));
