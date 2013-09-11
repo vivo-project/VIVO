@@ -59,4 +59,9 @@ foaf:Person
               [ a       owl:Restriction ;
                 owl:someValuesFrom <http://www.w3.org/2006/vcard/ns#Individual> ;
                 owl:onProperty <http://purl.obolibrary.org/obo/ARG_2000028>
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:onProperty <http://vivoweb.org/ontology/core#hasResearchArea> ;
+                owl:allValuesFrom <http://www.w3.org/2004/02/skos/core#Concept> 
               ] .
