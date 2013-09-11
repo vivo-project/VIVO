@@ -25,13 +25,15 @@
                          ?dateTimeEnd
 
          WHERE {
-                     ?subject ?property ?advisory
+                     ?subject ?property ?advisory 
                      LET ( ?localName := afn:localname(?advisory) )
                      OPTIONAL { ?advisory rdfs:label ?advisoryLabel  }
-                     OPTIONAL { ?advisory core:advisee ?advisee 
+                     OPTIONAL { ?advisory core:relates ?advisee .
+                                ?advisee a foaf:Person .
                                 OPTIONAL { ?advisee rdfs:label ?adviseeLabel }
                      }
-                     OPTIONAL { ?advisory core:degreeCandidacy ?degree 
+                     OPTIONAL { ?advisory core:relates ?degree .
+                                ?degree a core:AcademicDegree .
                                 OPTIONAL { ?degree rdfs:label ?degreeLabel }
                                 OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
                      }
@@ -51,7 +53,7 @@
                                 }
                      }  
 
-
+                     FILTER ( ?subject != ?advisee )
          }  ORDER BY  <collated>?subclass</collated> DESC(?dateTimeEnd)
     </query-select>
        
@@ -70,17 +72,21 @@
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
         CONSTRUCT { 
             ?subject ?property ?advisory .
+            ?advisory a core:AdvisingRelationship .
             ?advisory ?advisoryProperty ?advisoryValue .
             ?advisory rdfs:label ?advisoryLabel 
         } WHERE {
             {
-               ?subject ?property ?advisory 
+               ?subject ?property ?advisory .
+               ?advisory a core:AdvisingRelationship 
             } UNION {
                ?subject ?property ?advisory .
-               ?advisory ?advisoryProperty ?advisoryValue
+               ?advisory a core:AdvisingRelationship .
+               ?advisory ?advisoryProperty ?advisoryValue  
             } UNION {
                ?subject ?property ?advisory .
-               ?advisory ?advisoryProperty ?advisoryValue .
+               ?advisory a core:AdvisingRelationship .
+               ?advisory ?advisoryProperty ?advisoryValue . 
                ?advisory rdfs:label ?advisoryLabel
             } 
         }
@@ -94,31 +100,45 @@
 
             CONSTRUCT {
                 ?subject ?property ?advisory .
-                ?advisory core:advisee ?advisee .
+                ?advisory a core:AdvisingRelationship .
+                ?advisory core:relates ?advisee .
+                ?advisee a foaf:Person .
                 ?advisee rdfs:label ?adviseeLabel .
-                ?advisory core:degreeCandidacy ?degree .
+                ?advisory core:relates ?degree .
+                ?degree a core:AcademicDegree .
                 ?degree rdfs:label ?degreeLabel .
                 ?degree core:abbreviation ?degreeAbbr
             } WHERE {
                 {
-                    ?subject ?property ?advisory 
+                    ?subject ?property ?advisory .
+                    ?advisory a core:AdvisingRelationship .
                 } UNION {
                     ?subject ?property ?advisory. 
-                    ?advisory core:advisee ?advisee 
+                    ?advisory a core:AdvisingRelationship .
+                    ?advisory core:relates ?advisee .
+                    ?advisee a foaf:Person .
                 } UNION {
                     ?subject ?property ?advisory .
-                    ?advisory core:advisee ?advisee .
+                    ?advisory a core:AdvisingRelationship .
+                    ?advisory core:relates ?advisee .
+                    ?advisee a foaf:Person .
                     ?advisee rdfs:label ?adviseeLabel
                 } UNION {
                     ?subject ?property ?advisory .
-                    ?advisory core:degreeCandidacy ?degree 
+                    ?advisory a core:AdvisingRelationship .
+                    ?advisory core:relates ?degree .
+                    ?degree a core:AcademicDegree .
                 } UNION {
                     ?subject ?property ?advisory .
-                    ?advisory core:degreeCandidacy ?degree .
+                    ?advisory a core:AdvisingRelationship .
+                    ?advisory core:relates ?degree .
+                    ?degree a core:AcademicDegree .
                     ?degree rdfs:label ?degreeLabel
                 } UNION {
                     ?subject ?property ?advisory .
-                    ?advisory core:degreeCandidacy ?degree .
+                    ?advisory a core:AdvisingRelationship .
+                    ?advisory core:relates ?degree .
+                    ?degree a core:AcademicDegree .
                     ?degree rdfs:label ?degreeLabel .
                     ?degree core:abbreviation ?degreeAbbr
                 }
@@ -128,12 +148,14 @@
     <query-construct>
             PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
             CONSTRUCT { 
-                ?subject ?property ?award .  
+                ?subject ?property ?advisory .
+                ?advisory a core:AdvisingRelationship .
                 ?award core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:start ?dateTimeStartValue .
                 ?dateTimeStartValue core:dateTime ?dateTimeStart 
             } WHERE {
-                ?subject ?property ?award .  
+                ?subject ?property ?advisory .
+                ?advisory a core:AdvisingRelationship .
                 ?award core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:start ?dateTimeStartValue .
                 ?dateTimeStartValue core:dateTime ?dateTimeStart 
@@ -143,12 +165,14 @@
     <query-construct>
             PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
             CONSTRUCT { 
-                ?subject ?property ?award .  
+                ?subject ?property ?advisory .
+                ?advisory a core:AdvisingRelationship .
                 ?award core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:end ?dateTimeEndValue .
                 ?dateTimeEndValue core:dateTime ?dateTimeEnd 
             } WHERE {
-                ?subject ?property ?award .  
+                ?subject ?property ?advisory .
+                ?advisory a core:AdvisingRelationship .
                 ?award core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:end ?dateTimeEndValue .
                 ?dateTimeEndValue core:dateTime ?dateTimeEnd 

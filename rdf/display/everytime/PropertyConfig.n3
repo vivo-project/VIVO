@@ -61,6 +61,7 @@ local:authorInAuthorshipConfig a :ObjectPropertyDisplayConfig ;
 local:hasServiceProviderRoleContext a :ConfigContext ;
     :hasConfiguration local:hasServiceProviderRoleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain   <http://xmlns.com/foaf/0.1/Person> ;
     :qualifiedBy      <http://purl.obolibrary.org/obo/ERO_0000012> .
     
 local:hasServiceProviderRoleConfig a :ObjectPropertyDisplayConfig ;
@@ -75,6 +76,7 @@ local:hasServiceProviderRoleConfig a :ObjectPropertyDisplayConfig ;
 local:hasClinicalRoleContext a :ConfigContext ;
     :hasConfiguration local:hasClinicalRoleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#ClinicalRole> .
 
 local:hasClinicalRoleConfig a :ObjectPropertyDisplayConfig ;
@@ -89,6 +91,7 @@ local:hasClinicalRoleConfig a :ObjectPropertyDisplayConfig ;
 local:hasLeaderRoleContext a :ConfigContext ;
     :hasConfiguration local:hasLeaderRoleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#LeaderRole> .
 
 local:hasLeaderRoleConfig a :ObjectPropertyDisplayConfig ;
@@ -103,6 +106,7 @@ local:hasLeaderRoleConfig a :ObjectPropertyDisplayConfig ;
 local:hasMemberRoleContext a :ConfigContext ;
     :hasConfiguration local:hasMemberRoleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#MemberRole> .
 
 local:hasMemberRoleConfig a :ObjectPropertyDisplayConfig ;
@@ -117,6 +121,7 @@ local:hasMemberRoleConfig a :ObjectPropertyDisplayConfig ;
 local:hasTeacherRoleContext a :ConfigContext ;
     :hasConfiguration local:hasTeacherRoleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#TeacherRole> .
 
 local:hasTeacherRoleConfig a :ObjectPropertyDisplayConfig ;
@@ -131,6 +136,7 @@ local:hasTeacherRoleConfig a :ObjectPropertyDisplayConfig ;
 local:hasEditorRoleContext a :ConfigContext ;
     :hasConfiguration local:hasEditorRoleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#EditorRole> .
 
 local:hasEditorRoleConfig a :ObjectPropertyDisplayConfig ;
@@ -145,6 +151,7 @@ local:hasEditorRoleConfig a :ObjectPropertyDisplayConfig ;
 local:hasReviewerRoleContext a :ConfigContext ;
     :hasConfiguration local:hasReviewerRoleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#ReviewerRole> .
 
 local:hasReviewerRoleConfig a :ObjectPropertyDisplayConfig ;
@@ -159,6 +166,7 @@ local:hasReviewerRoleConfig a :ObjectPropertyDisplayConfig ;
 local:hasOrganizerRoleContext a :ConfigContext ;
     :hasConfiguration local:hasOrganizerRoleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#OrganizerRole> .
 
 local:hasOrganizerRoleConfig a :ObjectPropertyDisplayConfig ;
@@ -173,6 +181,7 @@ local:hasOrganizerRoleConfig a :ObjectPropertyDisplayConfig ;
 local:hasOutreachProviderRoleContext a :ConfigContext ;
     :hasConfiguration local:hasOutreachProviderRoleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#OutreachProviderRole> .
 
 local:hasOutreachProviderRoleConfig a :ObjectPropertyDisplayConfig ;
@@ -187,6 +196,7 @@ local:hasOutreachProviderRoleConfig a :ObjectPropertyDisplayConfig ;
 local:hasAttendeeRoleContext a :ConfigContext ;
     :hasConfiguration local:hasAttendeeRoleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain   <http://xmlns.com/foaf/0.1/Person> ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#AttendeeRole> .
 
 local:hasAttendeeRoleConfig a :ObjectPropertyDisplayConfig ;
@@ -201,6 +211,7 @@ local:hasAttendeeRoleConfig a :ObjectPropertyDisplayConfig ;
 local:hasResearcherRoleContext a :ConfigContext ;
     :hasConfiguration local:hasResearcherRoleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#ResearcherRole> .
 
 local:hasResearcherRoleConfig a :ObjectPropertyDisplayConfig ;
@@ -215,6 +226,7 @@ local:hasResearcherRoleConfig a :ObjectPropertyDisplayConfig ;
 local:hasInvestigatorRoleContext a :ConfigContext ;
     :hasConfiguration local:hasInvestigatorRoleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#InvestigatorRole> .
 
 local:hasInvestigatorRoleConfig a :ObjectPropertyDisplayConfig ;
@@ -229,6 +241,7 @@ local:hasInvestigatorRoleConfig a :ObjectPropertyDisplayConfig ;
 local:hasPrincipalInvestigatorRoleContext a :ConfigContext ;
     :hasConfiguration local:hasPrincipalInvestigatorRoleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#PrincipalInvestigatorRole> .
 
 local:hasPrincipalInvestigatorRoleConfig a :ObjectPropertyDisplayConfig ;
@@ -243,6 +256,7 @@ local:hasPrincipalInvestigatorRoleConfig a :ObjectPropertyDisplayConfig ;
 local:hasCo-PrincipalInvestigatorRoleContext a :ConfigContext ;
     :hasConfiguration local:hasCo-PrincipalInvestigatorRoleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#CoPrincipalInvestigatorRole> .
 
 local:hasCo-PrincipalInvestigatorRoleConfig a :ObjectPropertyDisplayConfig ;
@@ -257,6 +271,7 @@ local:hasCo-PrincipalInvestigatorRoleConfig a :ObjectPropertyDisplayConfig ;
 local:hasPresenterRoleContext a :ConfigContext ;
     :hasConfiguration local:hasPresenterRoleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#PresenterRole> .
 
 local:hasPresenterRoleConfig a :ObjectPropertyDisplayConfig ;
@@ -271,6 +286,7 @@ local:hasPresenterRoleConfig a :ObjectPropertyDisplayConfig ;
 local:awardOrHonorContext a :ConfigContext ;
     :hasConfiguration local:awardOrHonorConfig ;
     :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#AwardorHonorReceipt> .
 
 local:awardOrHonorConfig a :ObjectPropertyDisplayConfig ;
@@ -285,6 +301,7 @@ local:awardOrHonorConfig a :ObjectPropertyDisplayConfig ;
 local:educationalTrainingContext a :ConfigContext ;
     :hasConfiguration local:educationalTrainingConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000056> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#EducationalProcess> .
 
 local:educationalTrainingConfig a :ObjectPropertyDisplayConfig ;
@@ -295,6 +312,22 @@ local:educationalTrainingConfig a :ObjectPropertyDisplayConfig ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasEducationalTraining"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbiography> .
+
+local:advisorRoleContext a :ConfigContext ;
+    :hasConfiguration local:advisorRoleConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#AdvisingRelationship> .
+
+local:advisorRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-advisorIn.xml"^^xsd:string ;
+    :displayName "advisees" ;
+    vitro:displayRankAnnot 40;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasAdvisingRelationshipGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupteaching> .
+
 
 local:informationResourceInAuthorshipContext a :ConfigContext ;
     :hasConfiguration local:informationResourceInAuthorshipConfig ;
@@ -310,3 +343,19 @@ local:informationResourceInAuthorshipConfig a :ObjectPropertyDisplayConfig ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddAuthorsToInformationResourceGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+### vcard properties ###
+local:mailingAddressContext a :ConfigContext ;
+    :hasConfiguration local:mailingAddressConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Address> .
+
+local:mailingAddressConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-personHasMailingAddress.xml"^^xsd:string ;
+    :displayName "mailing address" ;
+    vitro:displayRankAnnot 80;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasMailingAddressGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
