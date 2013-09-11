@@ -1830,19 +1830,6 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
     
 
 
-    <!-- http://vivoweb.org/ontology/core#orcidId -->
-
-    <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#orcidId">
-        <rdfs:label xml:lang="en">orcid id</rdfs:label>
-        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">We can&apos;t yet assume that we will only have a single ORCID id for a person.
-source: http://en.wikipedia.org/wiki/ORCID .
-
-
-We wanted this property to be visible so that people would be aware that we intend to carry ORCID ids in VIVO for cross-reference. I don&apos;t believe any ORCID ids have been minted yet, but it&apos;s hard to imagine they would need to be private since the goal of having them is to disambiguate author references internationally. However, this and the researcherId and scopusId (also with domain foaf:Person) can stay as visible to self-editors for now as they will probably be used mostly in data ingest. It might be nice in the future to let people make their own decision about whether these are visible.</obo:IAO_0000112>
-        <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#identifier"/>
-    </owl:DatatypeProperty>
-    
-
 
     <!-- http://vivoweb.org/ontology/core#outreachOverview -->
 
