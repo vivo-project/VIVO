@@ -8,8 +8,6 @@ CONSTRUCT {
     _:fax a v:Telephone .
     _:fax a v:Fax.
     _:fax v:telephone ?faxNumber . 
-    _:name v:hasAddress _:address .
-    _:address v:streetAddress ?streetAddress .
 } WHERE {
     ?s arg:ARG_2000028 ?vcard .
     ?s vivo:faxNumber ?faxNumber
