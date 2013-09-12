@@ -1,127 +1,1 @@
-http://vivoweb.org/ontology/core#administeredBy				complex construct with grant administrator role
-http://vivoweb.org/ontology/core#administers				complex construct with grant administrator role
-http://vivoweb.org/ontology/core#advisee				CC - advising relationship plus add advisee role
-http://vivoweb.org/ontology/core#adviseeIn				CC - advising relationship plus add advisee role
-http://vivoweb.org/ontology/core#advisingContributionTo				realizedIn? Come back to this.
-http://vivoweb.org/ontology/core#advisor				CC - advising relationship plus add advisor role
-http://vivoweb.org/ontology/core#advisorIn				CC - advising relationship plus add advisor role
-http://vivoweb.org/ontology/core#affiliatedOrganization				construct Relationship node?
-http://vivoweb.org/ontology/core#assignedBy				patent - come back to this
-http://vivoweb.org/ontology/core#assignee				patent - come back to this
-http://vivoweb.org/ontology/core#associatedRole	http://vivoweb.org/ontology/core#relates	Yes		z
-http://vivoweb.org/ontology/core#associatedWithPosition	http://vivoweb.org/ontology/core#relatedBy	Yes		z
-http://vivoweb.org/ontology/core#attendeeRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		z
-http://vivoweb.org/ontology/core#authorInAuthorship	http://vivoweb.org/ontology/core#relatedBy	Yes		z
-http://vivoweb.org/ontology/core#awardConferred	http://vivoweb.org/ontology/core#assigns	Yes		z
-http://vivoweb.org/ontology/core#awardConferredBy	http://vivoweb.org/ontology/core#assignedBy	Yes		z
-http://vivoweb.org/ontology/core#awardOrHonor	http://vivoweb.org/ontology/core#relatedBy	Yes		z
-http://vivoweb.org/ontology/core#awardOrHonorFor	http://vivoweb.org/ontology/core#relates	Yes		z
-http://vivoweb.org/ontology/core#awardsGrant	http://vivoweb.org/ontology/core#assigns	Yes		z
-http://vivoweb.org/ontology/core#clinicalRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		z
-http://vivoweb.org/ontology/core#co-PrincipalInvestigatorRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		z
-http://vivoweb.org/ontology/core#contributingAdvising				come back to this
-http://vivoweb.org/ontology/core#contributingRole				come back to this
-http://vivoweb.org/ontology/core#courseOfferedBy	http://vivoweb.org/ontology/core#offeredBy	Yes		z
-http://vivoweb.org/ontology/core#credentialOf	http://vivoweb.org/ontology/core#relates	Yes		z
-http://vivoweb.org/ontology/core#currentMemberOf	http://vivoweb.org/ontology/core#memberOf	Yes		z
-http://vivoweb.org/ontology/core#currentlyHeadOf				CC or delete?
-http://vivoweb.org/ontology/core#currentlyHeadedBy				CC or delete?
-http://vivoweb.org/ontology/core#degreeCandidacy				revisit
-http://vivoweb.org/ontology/core#degreeEarned	http://vivoweb.org/ontology/core#relates	Yes		z
-http://vivoweb.org/ontology/core#degreeOfferedBy	http://vivoweb.org/ontology/core#offeredBy	Yes		z
-http://vivoweb.org/ontology/core#degreeOutcomeOf	http://vivoweb.org/ontology/core#relatedBy	Yes		z
-http://vivoweb.org/ontology/core#distributes				revisit (distributor role?)
-http://vivoweb.org/ontology/core#distributesFundingFrom				revisit
-http://vivoweb.org/ontology/core#domesticGeographicFocus	http://vivoweb.org/ontology/core#geographicFocus	Yes		z
-http://vivoweb.org/ontology/core#domesticGeographicFocusOf	http://vivoweb.org/ontology/core#geographicFocusOf	Yes		z
-http://vivoweb.org/ontology/core#editor				CC editorship
-http://vivoweb.org/ontology/core#editorOf				CC editorship
-http://vivoweb.org/ontology/core#editorRoleOf	http://purl.obolibrary.org/obo/RO_0000052			z
-http://vivoweb.org/ontology/core#educationalTraining	http://vivoweb.org/ontology/core#relatedBy			z
-http://vivoweb.org/ontology/core#educationalTrainingOf	http://vivoweb.org/ontology/core#relates			z
-http://vivoweb.org/ontology/core#eligibleFor				revisit
-http://vivoweb.org/ontology/core#equipmentInFacility	http://purl.obolibrary.org/obo/RO_0001025	Yes		"""located in"""
-http://vivoweb.org/ontology/core#eventWithin	http://purl.obolibrary.org/obo/BFO_0000050	Yes		"""part of"""
-http://vivoweb.org/ontology/core#geographicLocationOf	http://purl.obolibrary.org/obo/RO_0001015	Yes		"""location of"""
-http://vivoweb.org/ontology/core#geographicallyContains	http://purl.obolibrary.org/obo/BFO_0000051	Yes		"""has part"""
-http://vivoweb.org/ontology/core#geographicallyWithin	http://purl.obolibrary.org/obo/BFO_0000050	Yes		z
-http://vivoweb.org/ontology/core#governingAuthorityFor				revisit
-http://vivoweb.org/ontology/core#grantAwardedBy	http://vivoweb.org/ontology/core#assignedBy	Yes		z
-http://vivoweb.org/ontology/core#hasAttendeeRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		"""bearer of"""
-http://vivoweb.org/ontology/core#hasClinicalRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		"""bearer of"""
-http://vivoweb.org/ontology/core#hasCo-PrincipalInvestigatorRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		z
-http://vivoweb.org/ontology/core#hasCollaborator	http://vivoweb.org/ontology/core#relatedBy	Yes		CC construct Relationship
-http://vivoweb.org/ontology/core#hasCredential	http://vivoweb.org/ontology/core#relatedBy	Yes		z
-http://vivoweb.org/ontology/core#hasCurrentMember				revisit - construct relationship?
-http://vivoweb.org/ontology/core#hasEditorRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		z
-http://vivoweb.org/ontology/core#hasGeographicLocation	http://purl.obolibrary.org/obo/RO_0001025	Yes		"""located in"""
-http://vivoweb.org/ontology/core#hasGoverningAuthority				revisit
-http://vivoweb.org/ontology/core#hasInvestigatorRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		z
-http://vivoweb.org/ontology/core#hasLeaderRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		z
-http://vivoweb.org/ontology/core#hasMemberRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		z
-http://vivoweb.org/ontology/core#hasOrganizerRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		z
-http://vivoweb.org/ontology/core#hasOutreachProviderRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		z
-http://vivoweb.org/ontology/core#hasPart	http://purl.obolibrary.org/obo/BFO_0000051	Yes		z
-http://vivoweb.org/ontology/core#hasPredecessorOrganization				revisit
-http://vivoweb.org/ontology/core#hasPresenterRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		z
-http://vivoweb.org/ontology/core#hasPrincipalInvestigatorRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		z
-http://vivoweb.org/ontology/core#hasResearcherRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		z
-http://vivoweb.org/ontology/core#hasReviewerRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		z
-http://vivoweb.org/ontology/core#hasRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		z
-http://vivoweb.org/ontology/core#hasRoom	http://purl.obolibrary.org/obo/BFO_0000051	Yes		"""has part"""
-http://vivoweb.org/ontology/core#hasServiceProviderRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		z
-http://vivoweb.org/ontology/core#hasSubOrganization	http://purl.obolibrary.org/obo/BFO_0000051	Yes		z
-http://vivoweb.org/ontology/core#hasSuccessorOrganization				revisit
-http://vivoweb.org/ontology/core#hasTeacherRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		z
-http://vivoweb.org/ontology/core#inEventSeries	http://purl.obolibrary.org/obo/BFO_0000050	Yes		"""part of"""
-http://vivoweb.org/ontology/core#includesEvent	http://purl.obolibrary.org/obo/BFO_0000051	Yes		z
-http://vivoweb.org/ontology/core#informationProduct				revisit
-http://vivoweb.org/ontology/core#informationProductOf				revisit
-http://vivoweb.org/ontology/core#informationResourceInAuthorship	http://vivoweb.org/ontology/core#relatedBy	Yes		z
-http://vivoweb.org/ontology/core#internationalGeographicFocus	http://vivoweb.org/ontology/core#geographicFocus	Yes		z
-http://vivoweb.org/ontology/core#internationalGeographicFocusOf	http://vivoweb.org/ontology/core#geographicFocusOf	Yes		z
-http://vivoweb.org/ontology/core#investigatorRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		"""inheres in"""
-http://vivoweb.org/ontology/core#issuanceOfCredential	http://vivoweb.org/ontology/core#relates	Yes		z
-http://vivoweb.org/ontology/core#issuedCredential	http://vivoweb.org/ontology/core#relatedBy	Yes		z
-http://vivoweb.org/ontology/core#leaderRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		z
-http://vivoweb.org/ontology/core#linkedAuthor	http://vivoweb.org/ontology/core#relates	Yes		z
-http://vivoweb.org/ontology/core#linkedInformationResource	http://vivoweb.org/ontology/core#relates	Yes		z
-http://vivoweb.org/ontology/core#locationOfEquipment	http://purl.obolibrary.org/obo/RO_0001015	Yes		z
-http://vivoweb.org/ontology/core#mailingAddress				VCard
-http://vivoweb.org/ontology/core#mailingAddressFor				VCard
-http://vivoweb.org/ontology/core#memberRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		z
-http://vivoweb.org/ontology/core#offersCourse	http://vivoweb.org/ontology/core#offers	Yes		z
-http://vivoweb.org/ontology/core#offersDegree	http://vivoweb.org/ontology/core#offers	Yes		z
-http://vivoweb.org/ontology/core#organizationForPosition	http://vivoweb.org/ontology/core#relatedBy	Yes		z
-http://vivoweb.org/ontology/core#organizationForTraining	http://vivoweb.org/ontology/core#relatedBy	Yes		z
-http://vivoweb.org/ontology/core#organizerRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		z
-http://vivoweb.org/ontology/core#outcome				revisit: RO?
-http://vivoweb.org/ontology/core#outcomeOf				revisit: RO?
-http://vivoweb.org/ontology/core#outreachProviderRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		z
-http://vivoweb.org/ontology/core#partOf	http://purl.obolibrary.org/obo/BFO_0000050	Yes		z
-http://vivoweb.org/ontology/core#personInPosition	http://vivoweb.org/ontology/core#relatedBy	Yes		z
-http://vivoweb.org/ontology/core#positionForPerson	http://vivoweb.org/ontology/core#relates	Yes		z
-http://vivoweb.org/ontology/core#positionInOrganization	http://vivoweb.org/ontology/core#relates	Yes		z
-http://vivoweb.org/ontology/core#presenterRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		z
-http://vivoweb.org/ontology/core#principalInvestigatorRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		z
-http://vivoweb.org/ontology/core#providesService	http://vivoweb.org/ontology/core#offers	Yes		z
-http://vivoweb.org/ontology/core#realizedRole	http://purl.obolibrary.org/obo/BFO_0000055	Yes		"""realizes"""
-http://vivoweb.org/ontology/core#receipt	http://vivoweb.org/ontology/core#relatedBy	Yes		z
-http://vivoweb.org/ontology/core#receiptOf	http://vivoweb.org/ontology/core#relates	Yes		z
-http://vivoweb.org/ontology/core#relatedRole	http://vivoweb.org/ontology/core#relates	Yes		z
-http://vivoweb.org/ontology/core#researcherRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		z
-http://vivoweb.org/ontology/core#reviewerRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		z
-http://vivoweb.org/ontology/core#roleContributesTo	http://vivoweb.org/ontology/core#relatedBy	Yes		may not apply in all situations
-http://vivoweb.org/ontology/core#roleIn	http://purl.obolibrary.org/obo/BFO_0000054	Yes		"""realized in"" (or delete, since there should be subs?)"
-http://vivoweb.org/ontology/core#roleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		z
-http://vivoweb.org/ontology/core#roleRealizedIn	http://purl.obolibrary.org/obo/BFO_0000054	Yes		z
-http://vivoweb.org/ontology/core#roomWithinBuilding	http://purl.obolibrary.org/obo/RO_0001025	Yes		double check this
-http://vivoweb.org/ontology/core#seriesForEvent	http://purl.obolibrary.org/obo/BFO_0000051	Yes		z
-http://vivoweb.org/ontology/core#serviceProvidedBy	http://vivoweb.org/ontology/core#offeredBy	Yes		z
-http://vivoweb.org/ontology/core#serviceProviderRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		z
-http://vivoweb.org/ontology/core#subGrantOf	http://purl.obolibrary.org/obo/BFO_0000050	Yes		z
-http://vivoweb.org/ontology/core#subOrganizationWithin	http://purl.obolibrary.org/obo/BFO_0000050	Yes		z
-http://vivoweb.org/ontology/core#teacherRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		z
-http://vivoweb.org/ontology/core#trainingAtOrganization	http://vivoweb.org/ontology/core#relates	Yes		double check this
-http://vivoweb.org/ontology/core#webpage				VCard?
-http://vivoweb.org/ontology/core#webpageOf				VCard
+http://vivoweb.org/ontology/core#administeredBy				complex construct with grant administrator rolehttp://vivoweb.org/ontology/core#administers				complex construct with grant administrator rolehttp://vivoweb.org/ontology/core#advisee				CC - advising relationship plus add advisee rolehttp://vivoweb.org/ontology/core#adviseeIn				CC - advising relationship plus add advisee rolehttp://vivoweb.org/ontology/core#advisingContributionTo				realizedIn? Come back to this.http://vivoweb.org/ontology/core#advisor				CC - advising relationship plus add advisor rolehttp://vivoweb.org/ontology/core#advisorIn				CC - advising relationship plus add advisor rolehttp://vivoweb.org/ontology/core#affiliatedOrganization				construct Relationship node?http://vivoweb.org/ontology/core#assignedBy				patent - come back to thishttp://vivoweb.org/ontology/core#assignee				patent - come back to thishttp://vivoweb.org/ontology/core#associatedRole	http://vivoweb.org/ontology/core#relates	Yes		zhttp://vivoweb.org/ontology/core#associatedWithPosition	http://vivoweb.org/ontology/core#relatedBy	Yes		zhttp://vivoweb.org/ontology/core#attendeeRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		zhttp://vivoweb.org/ontology/core#authorInAuthorship	http://vivoweb.org/ontology/core#relatedBy	Yes		zhttp://vivoweb.org/ontology/core#awardConferred	http://vivoweb.org/ontology/core#assigns	Yes		zhttp://vivoweb.org/ontology/core#awardConferredBy	http://vivoweb.org/ontology/core#assignedBy	Yes		zhttp://vivoweb.org/ontology/core#awardOrHonor	http://vivoweb.org/ontology/core#relatedBy	Yes		zhttp://vivoweb.org/ontology/core#awardOrHonorFor	http://vivoweb.org/ontology/core#relates	Yes		zhttp://vivoweb.org/ontology/core#awardsGrant	http://vivoweb.org/ontology/core#assigns	Yes		zhttp://vivoweb.org/ontology/core#clinicalRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		zhttp://vivoweb.org/ontology/core#co-PrincipalInvestigatorRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		zhttp://vivoweb.org/ontology/core#contributingAdvising				come back to thishttp://vivoweb.org/ontology/core#contributingRole				come back to thishttp://vivoweb.org/ontology/core#courseOfferedBy	http://vivoweb.org/ontology/core#offeredBy	Yes		zhttp://vivoweb.org/ontology/core#credentialOf	http://vivoweb.org/ontology/core#relates	Yes		zhttp://vivoweb.org/ontology/core#currentMemberOf	http://vivoweb.org/ontology/core#memberOf	Yes		zhttp://vivoweb.org/ontology/core#currentlyHeadOf				CC or delete?http://vivoweb.org/ontology/core#currentlyHeadedBy				CC or delete?http://vivoweb.org/ontology/core#degreeCandidacy				revisithttp://vivoweb.org/ontology/core#degreeEarned	http://purl.obolibrary.org/obo/RO_0002234	Yes		zhttp://vivoweb.org/ontology/core#degreeOfferedBy	http://vivoweb.org/ontology/core#offeredBy	Yes		zhttp://vivoweb.org/ontology/core#degreeOutcomeOf	http://purl.obolibrary.org/obo/RO_0002353	Yes		zhttp://vivoweb.org/ontology/core#distributes				revisit (distributor role?)http://vivoweb.org/ontology/core#distributesFundingFrom				revisithttp://vivoweb.org/ontology/core#domesticGeographicFocus	http://vivoweb.org/ontology/core#geographicFocus	Yes		zhttp://vivoweb.org/ontology/core#domesticGeographicFocusOf	http://vivoweb.org/ontology/core#geographicFocusOf	Yes		zhttp://vivoweb.org/ontology/core#editor				CC editorshiphttp://vivoweb.org/ontology/core#editorOf				CC editorshiphttp://vivoweb.org/ontology/core#editorRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		zhttp://vivoweb.org/ontology/core#educationalTraining	http://purl.obolibrary.org/obo/RO_0000056	Yes		zhttp://vivoweb.org/ontology/core#educationalTrainingOf	http://purl.obolibrary.org/obo/RO_0000057	Yes		zhttp://vivoweb.org/ontology/core#eligibleFor				revisithttp://vivoweb.org/ontology/core#equipmentInFacility	http://purl.obolibrary.org/obo/RO_0001025	Yes		"""located in"""http://vivoweb.org/ontology/core#eventWithin	http://purl.obolibrary.org/obo/BFO_0000050	Yes		"""part of"""http://vivoweb.org/ontology/core#geographicLocationOf	http://purl.obolibrary.org/obo/RO_0001015	Yes		"""location of"""http://vivoweb.org/ontology/core#geographicallyContains	http://purl.obolibrary.org/obo/BFO_0000051	Yes		"""has part"""http://vivoweb.org/ontology/core#geographicallyWithin	http://purl.obolibrary.org/obo/BFO_0000050	Yes		zhttp://vivoweb.org/ontology/core#governingAuthorityFor				revisithttp://vivoweb.org/ontology/core#grantAwardedBy	http://vivoweb.org/ontology/core#assignedBy	Yes		zhttp://vivoweb.org/ontology/core#hasAttendeeRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		"""bearer of"""http://vivoweb.org/ontology/core#hasClinicalRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		"""bearer of"""http://vivoweb.org/ontology/core#hasCo-PrincipalInvestigatorRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		zhttp://vivoweb.org/ontology/core#hasCollaborator	http://vivoweb.org/ontology/core#relatedBy	Yes		CC construct Relationshiphttp://vivoweb.org/ontology/core#hasCredential	http://vivoweb.org/ontology/core#relatedBy	Yes		zhttp://vivoweb.org/ontology/core#hasCurrentMember				revisit - construct relationship?http://vivoweb.org/ontology/core#hasEditorRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		zhttp://vivoweb.org/ontology/core#hasGeographicLocation	http://purl.obolibrary.org/obo/RO_0001025	Yes		"""located in"""http://vivoweb.org/ontology/core#hasGoverningAuthority				revisithttp://vivoweb.org/ontology/core#hasInvestigatorRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		zhttp://vivoweb.org/ontology/core#hasLeaderRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		zhttp://vivoweb.org/ontology/core#hasMemberRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		zhttp://vivoweb.org/ontology/core#hasOrganizerRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		zhttp://vivoweb.org/ontology/core#hasOutreachProviderRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		zhttp://vivoweb.org/ontology/core#hasPart	http://purl.obolibrary.org/obo/BFO_0000051	Yes		zhttp://vivoweb.org/ontology/core#hasPredecessorOrganization				revisithttp://vivoweb.org/ontology/core#hasPresenterRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		zhttp://vivoweb.org/ontology/core#hasPrincipalInvestigatorRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		zhttp://vivoweb.org/ontology/core#hasResearcherRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		zhttp://vivoweb.org/ontology/core#hasReviewerRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		zhttp://vivoweb.org/ontology/core#hasRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		zhttp://vivoweb.org/ontology/core#hasRoom	http://purl.obolibrary.org/obo/BFO_0000051	Yes		"""has part"""http://vivoweb.org/ontology/core#hasServiceProviderRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		zhttp://vivoweb.org/ontology/core#hasSubOrganization	http://purl.obolibrary.org/obo/BFO_0000051	Yes		zhttp://vivoweb.org/ontology/core#hasSuccessorOrganization				revisithttp://vivoweb.org/ontology/core#hasTeacherRole	http://purl.obolibrary.org/obo/RO_0000053	Yes		zhttp://vivoweb.org/ontology/core#inEventSeries	http://purl.obolibrary.org/obo/BFO_0000050	Yes		"""part of"""http://vivoweb.org/ontology/core#includesEvent	http://purl.obolibrary.org/obo/BFO_0000051	Yes		zhttp://vivoweb.org/ontology/core#informationProduct				revisithttp://vivoweb.org/ontology/core#informationProductOf				revisithttp://vivoweb.org/ontology/core#informationResourceInAuthorship	http://vivoweb.org/ontology/core#relatedBy	Yes		zhttp://vivoweb.org/ontology/core#internationalGeographicFocus	http://vivoweb.org/ontology/core#geographicFocus	Yes		zhttp://vivoweb.org/ontology/core#internationalGeographicFocusOf	http://vivoweb.org/ontology/core#geographicFocusOf	Yes		zhttp://vivoweb.org/ontology/core#investigatorRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		"""inheres in"""http://vivoweb.org/ontology/core#issuanceOfCredential	http://vivoweb.org/ontology/core#relates	Yes		zhttp://vivoweb.org/ontology/core#issuedCredential	http://vivoweb.org/ontology/core#relatedBy	Yes		zhttp://vivoweb.org/ontology/core#leaderRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		zhttp://vivoweb.org/ontology/core#linkedAuthor	http://vivoweb.org/ontology/core#relates	Yes		zhttp://vivoweb.org/ontology/core#linkedInformationResource	http://vivoweb.org/ontology/core#relates	Yes		zhttp://vivoweb.org/ontology/core#locationOfEquipment	http://purl.obolibrary.org/obo/RO_0001015	Yes		zhttp://vivoweb.org/ontology/core#mailingAddress				VCardhttp://vivoweb.org/ontology/core#mailingAddressFor				VCardhttp://vivoweb.org/ontology/core#memberRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		zhttp://vivoweb.org/ontology/core#offersCourse	http://vivoweb.org/ontology/core#offers	Yes		zhttp://vivoweb.org/ontology/core#offersDegree	http://vivoweb.org/ontology/core#offers	Yes		zhttp://vivoweb.org/ontology/core#organizationForPosition	http://vivoweb.org/ontology/core#relatedBy	Yes		zhttp://vivoweb.org/ontology/core#organizationForTraining	http://vivoweb.org/ontology/core#relatedBy	Yes		zhttp://vivoweb.org/ontology/core#organizerRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		zhttp://vivoweb.org/ontology/core#outcome				revisit: RO?http://vivoweb.org/ontology/core#outcomeOf				revisit: RO?http://vivoweb.org/ontology/core#outreachProviderRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		zhttp://vivoweb.org/ontology/core#partOf	http://purl.obolibrary.org/obo/BFO_0000050	Yes		zhttp://vivoweb.org/ontology/core#personInPosition	http://vivoweb.org/ontology/core#relatedBy	Yes		zhttp://vivoweb.org/ontology/core#positionForPerson	http://vivoweb.org/ontology/core#relates	Yes		zhttp://vivoweb.org/ontology/core#positionInOrganization	http://vivoweb.org/ontology/core#relates	Yes		zhttp://vivoweb.org/ontology/core#presenterRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		zhttp://vivoweb.org/ontology/core#principalInvestigatorRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		zhttp://vivoweb.org/ontology/core#providesService	http://vivoweb.org/ontology/core#offers	Yes		zhttp://vivoweb.org/ontology/core#realizedRole	http://purl.obolibrary.org/obo/BFO_0000055	Yes		"""realizes"""http://vivoweb.org/ontology/core#receipt	http://vivoweb.org/ontology/core#relatedBy	Yes		zhttp://vivoweb.org/ontology/core#receiptOf	http://vivoweb.org/ontology/core#relates	Yes		zhttp://vivoweb.org/ontology/core#relatedRole	http://vivoweb.org/ontology/core#relates	Yes		zhttp://vivoweb.org/ontology/core#researcherRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		zhttp://vivoweb.org/ontology/core#reviewerRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		zhttp://vivoweb.org/ontology/core#roleContributesTo	http://vivoweb.org/ontology/core#relatedBy	Yes		may not apply in all situationshttp://vivoweb.org/ontology/core#roleIn	http://purl.obolibrary.org/obo/BFO_0000054	Yes		"""realized in"" (or delete, since there should be subs?)"http://vivoweb.org/ontology/core#roleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		zhttp://vivoweb.org/ontology/core#roleRealizedIn	http://purl.obolibrary.org/obo/BFO_0000054	Yes		zhttp://vivoweb.org/ontology/core#roomWithinBuilding	http://purl.obolibrary.org/obo/RO_0001025	Yes		double check thishttp://vivoweb.org/ontology/core#seriesForEvent	http://purl.obolibrary.org/obo/BFO_0000051	Yes		zhttp://vivoweb.org/ontology/core#serviceProvidedBy	http://vivoweb.org/ontology/core#offeredBy	Yes		zhttp://vivoweb.org/ontology/core#serviceProviderRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		zhttp://vivoweb.org/ontology/core#subGrantOf	http://purl.obolibrary.org/obo/BFO_0000050	Yes		zhttp://vivoweb.org/ontology/core#subOrganizationWithin	http://purl.obolibrary.org/obo/BFO_0000050	Yes		zhttp://vivoweb.org/ontology/core#teacherRoleOf	http://purl.obolibrary.org/obo/RO_0000052	Yes		zhttp://vivoweb.org/ontology/core#trainingAtOrganization	http://vivoweb.org/ontology/core#relates	Yes		double check thishttp://vivoweb.org/ontology/core#EducationalTraining	http://vivoweb.org/ontology/core#EducationalProcess	Yes		z

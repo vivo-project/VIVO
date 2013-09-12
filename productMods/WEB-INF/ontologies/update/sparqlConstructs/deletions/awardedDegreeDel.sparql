@@ -1,0 +1,18 @@
+PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#Thing> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+CONSTRUCT {
+    ?educationalProcess <http://purl.obolibrary.org/obo/RO_0002234> ?degree .
+    ?degree <http://purl.obolibrary.org/obo/RO_0002353> ?educationalProcess .
+    ?educationalProcess vivo:relates ?org .
+    ?org vivo:relatedBy ?educationalProcess .
+} WHERE {
+    ?educationalProcess <http://purl.obolibrary.org/obo/RO_0002234> ?degree .
+    OPTIONAL { ?degree <http://purl.obolibrary.org/obo/RO_0002353> ?educationalProcess }
+    OPTIONAL {
+        ?educationalProcess vivo:relates ?org .
+        ?org a foaf:Organization . 
+    }
+    ?degree a vivo:AcademicDegree .
+}
