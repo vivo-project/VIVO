@@ -1437,6 +1437,7 @@ there is a measurement process p that has specified output m, a measurement datu
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#assigns">
         <rdfs:label xml:lang="en">assigns</rdfs:label>
+        <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#assignedBy"/>
     </owl:ObjectProperty>
     
 
@@ -1688,6 +1689,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#relates">
         <rdfs:label xml:lang="en">relates</rdfs:label>
         <obo:IAO_0000115 xml:lang="en">Relates a Relationship instance to the one or more Thing of the Relationship. There is a separate property (assigned by) to relate to the Agent that defines the Relationship.</obo:IAO_0000115>
+        <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#relatedBy"/>
     </owl:ObjectProperty>
     
 
