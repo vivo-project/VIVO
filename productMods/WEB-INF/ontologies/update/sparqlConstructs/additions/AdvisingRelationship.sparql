@@ -1,0 +1,23 @@
+PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#Thing> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+CONSTRUCT {
+    ?advisee <ihttp://purl.obolibrary.org/obo/RO_0000053> _:AdviseeRole .
+    _:AdviseeRole <http://purl.obolibrary.org/obo/RO_0000052> ?advisee .
+    _:AdviseeRole a vivo:AdviseeRole .
+    ?advisor <http://purl.obolibrary.org/obo/RO_0000053> _:AdvisorRole .
+    _:AdvisorRole <http://purl.obolibrary.org/obo/RO_0000052> ?advisor .
+    _:AdvisorRole a vivo:AdvisorRole .
+    _:AdviseeRole vivo:relatedBy ?advisingRelationship .
+    ?advisingRelationship vivo:relates _:AdviseeRole .
+    _:AdvisorRole vivo:relatedBy ?advisingRelationship .
+    ?advisingRelationship vivo:relates _:AdvisorRole .
+    ?advisingRelationship vivo:relates ?advisee .
+    ?advisingRelationship vivo:relates ?advisor .
+    ?advisee vivo:relatedBy ?advisingRelationship .
+    ?advisor vivo:relatedBy ?advisingRelationship .
+} WHERE {
+    ?advisee vivo:adviseeIn ?advisingRelationship .
+    ?advisor vivo:advisorIn ?advisingRelationship .
+}
