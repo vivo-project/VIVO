@@ -1,5 +1,9 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
+.conceptsListContainer {
+	overflow:hidden;
+	width:100%;
+}
 .concepts .column {
 	float:left;
 	padding-right:3px;
@@ -44,4 +48,29 @@ form#addConceptForm {
 form#addConceptForm span#createOwnOne{
 	float:left;
 	margin-top:24px
+}
+
+/*For existing concepts, display will also be tabular with columns*/
+
+.existingConcept .row, .conceptHeadings .row {
+	clear:both;
+	float:left;
+}
+
+.existingConcept .column , .conceptHeadings .column {
+	float:left;
+	padding-right:3px;
+	clear:none !important; /*Overriding customFor div's clearing*/
+}
+/*label and semantic type if it exists*/
+.existingConcept .conceptLabelInfo, .conceptHeadings .conceptLabelInfo {
+	width:220px;
+}
+
+.existingConcept .conceptVocabSource, .conceptHeadings .conceptVocabSource {
+	width:220px;
+}
+
+.conceptHeadings .row {
+	border-bottom: 1px solid #5F6464;
 }

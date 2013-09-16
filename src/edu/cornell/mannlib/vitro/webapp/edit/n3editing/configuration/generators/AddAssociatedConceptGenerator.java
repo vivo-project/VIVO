@@ -59,6 +59,8 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	//TODO: Set this to a dynamic mechanism
 	private static String VIVOCore = "http://vivoweb.org/ontology/core#";
 	private static String SKOSConceptType = "http://www.w3.org/2004/02/skos/core#Concept";	
+	private static String SKOSBroaderURI = "http://www.w3.org/2004/02/skos/core#broader";
+	private static String SKOSNarrowerURI = "http://www.w3.org/2004/02/skos/core#narrower";
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
     	EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();
@@ -97,7 +99,8 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		// Add preprocessors
 		addPreprocessors(editConfiguration, 
 				ModelAccess.on(vreq).getJenaOntModel(), 
-				ModelAccess.on(vreq).getOntModelSelector().getTBoxModel());
+				ModelAccess.on(vreq).getOntModelSelector().getTBoxModel(),
+				vreq.getWebappDaoFactory());
 		// Adding additional data, specifically edit mode
 		addFormSpecificData(editConfiguration, vreq);
 		// One override for basic functionality, changing url pattern
@@ -189,7 +192,11 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
     	        "?conceptNode <" + RDFS.isDefinedBy.getURI() + "> ?conceptSource .", 
 				"?conceptNode <" + RDF.type + "> ?conceptSemanticTypeURI ." +  
     	        "?conceptSemanticTypeURI <" + RDFS.label.getURI() + "> ?conceptSemanticTypeLabel ." + 
-    	        "?conceptSemanticTypeURI <" + RDFS.subClassOf + "> <" + SKOSConceptType + "> ."  
+    	        "?conceptSemanticTypeURI <" + RDFS.subClassOf + "> <" + SKOSConceptType + "> .",
+    	        "?conceptNode <" + this.SKOSNarrowerURI + "> ?conceptNarrowerURI ." + 
+    	        "?conceptNarrowerURI <" + this.SKOSBroaderURI + "> ?conceptNode .",
+    	        "?conceptNode <" + this.SKOSBroaderURI + "> ?conceptBroaderURI ." + 
+    	    	"?conceptBroaderURI <" + this.SKOSNarrowerURI + "> ?conceptNode ."
     	);
     }
 	
@@ -254,6 +261,8 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
     	urisOnForm.add("conceptNode");
     	urisOnForm.add("conceptSource");
     	urisOnForm.add("conceptSemanticTypeURI");
+    	urisOnForm.add("conceptBroaderURI");
+    	urisOnForm.add("conceptNarrowerURI");
     	editConfiguration.setUrisOnform(urisOnForm);
     	//Also need to add the label of the concept
     	literalsOnForm.add("conceptLabel");
@@ -288,8 +297,23 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
     	setVocabURIField(editConfiguration, vreq);
     	setConceptSemanticTypeURIField(editConfiguration,vreq);
     	setConceptSemanticTypeLabelField(editConfiguration,vreq);
+    	setConceptBroaderURIField(editConfiguration, vreq);
+    	setConceptNarrowerURIField(editConfiguration, vreq);
     }
     
+	private void setConceptNarrowerURIField(
+			EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
+		editConfiguration.addField(new FieldVTwo().
+				setName("conceptNarrowerURI"));		
+	}
+
+	private void setConceptBroaderURIField(
+			EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
+		editConfiguration.addField(new FieldVTwo().
+				setName("conceptBroaderURI"));		
+		
+	}
+
 	//this field will be hidden and include the concept node URI
 	private void setConceptNodeField(EditConfigurationVTwo editConfiguration,
 			VitroRequest vreq) {
@@ -335,14 +359,17 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
    
     //Add preprocessor
 	
-   private void addPreprocessors(EditConfigurationVTwo editConfiguration, OntModel ontModel, OntModel modelChangeModel) {
+   private void addPreprocessors(EditConfigurationVTwo editConfiguration, 
+		   OntModel ontModel, 
+		   OntModel modelChangeModel,
+		   WebappDaoFactory wdf) {
 	  //An Edit submission preprocessor for enabling addition of multiple terms for a single search
 	   //TODO: Check if this is the appropriate way of getting model
 	 
 	   //Passing model to check for any URIs that are present
 	   
 	   editConfiguration.addEditSubmissionPreprocessor(
-			   new AddAssociatedConceptsPreprocessor(editConfiguration, ontModel));
+			   new AddAssociatedConceptsPreprocessor(editConfiguration, ontModel, wdf));
 	   editConfiguration.addModelChangePreprocessor(new ConceptSemanticTypesPreprocessor(
 			   modelChangeModel));
 	  

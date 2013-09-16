@@ -55,12 +55,19 @@ var addConceptForm = {
         this.externalConceptLabel = $('#conceptLabel');
         this.externalConceptSource = $('#conceptSource');
         this.externalConceptSemanticTypeLabel = $("#conceptSemanticTypeLabel");
+        this.externalConceptBroaderUris = $("#conceptBroaderURI");
+        this.externalConceptNarrowerUris = $("#conceptNarrowerURI");
         //remove links
         this.removeConceptLinks = $('a.remove');
         this.errors = $('#errors');
         this.createOwn1 = $('#createOwnOne');
         this.createOwn2 = $('#createOwnTwo');
         this.orSpan = $('span.or')
+        this.loadingIndicator = $("#indicator");
+        this.showHideSearchResults = $("#showHideResults");
+        //Value we are setting to cut off length of alternate labels string
+        this.maxNumberAlternateLabels = 4;
+        this.numberOfMaxInitialSearchResults = 7;
     },
     
     initPage: function() {
@@ -87,6 +94,10 @@ var addConceptForm = {
              addConceptForm.removeExistingConcept(this);
              return false;
          });
+    	 this.showHideSearchResults.find("a#showHideLink").click(function() {
+    		 addConceptForm.showHideMultipleSearchResults(this);
+    		 return false;
+    	 });
     },
     initForm: function() {
         // Hide the button that shows the form
@@ -99,7 +110,9 @@ var addConceptForm = {
         //Also clear the search input
         this.searchTerm.val("");
         this.cancel.unbind('click');
-
+        //make sure results loading indicator is hidden
+        this.loadingIndicator.addClass("hidden");
+        this.showHideSearchResults.hide();
         // Show the form
         this.form.show();                 
     },   
@@ -114,6 +127,8 @@ var addConceptForm = {
     },
     clearSearchResults:function() {
     	$('#selectedConcept').empty();
+    	//Hide the indicator icon if still there
+    	$("#indicator").addClass("hidden");
     },
     clearErrors:function() {
     	addConceptForm.errors.empty();
@@ -134,6 +149,25 @@ var addConceptForm = {
         this.hideForm();
         this.showFormButtonWrapper.show();
     },
+    showHideMultipleSearchResults: function(link) {
+    	if($(link).hasClass("showmore")) {
+    		//if clicking and already says show more then need to show the rest of the results
+    		$("li.concepts").show(); //show everything
+    		$(link).html("Show fewer results");
+    		$(link).removeClass("showmore");
+    	} else {
+    		//if clicking and does not say show  more than need to show less
+    		$("li.concepts").slice(addConceptForm.numberOfMaxInitialSearchResults).hide();
+    		$(link).html("Show more results");
+    		$(link).addClass("showmore");
+    	}
+    },
+    //reset this to default, which is hidden with show more link
+    resetShowHideMultipleSearchResults: function() {
+    	addConceptForm.showHideSearchResults.hide();
+    	addConceptForm.showHideSearchResults.find("a#showHideLink").html("Show more results");
+    	addConceptForm.showHideSearchResults.find("a#showHideLink").addClass("showmore");
+    },
     submitSearchTerm: function() {
     	//Get value of search term
     	var searchValue = this.searchTerm.val();
@@ -145,7 +179,11 @@ var addConceptForm = {
     	}
     	var vocabSourceValue = checkedVocabSource.val();
     	var dataServiceUrl = addConceptForm.dataServiceUrl + "?searchTerm=" + encodeURIComponent(searchValue) + "&source=" + encodeURIComponent(vocabSourceValue);
-        //This should return an object including the concept list or any errors if there are any
+        //Show the loading icon until the results appear
+    	addConceptForm.loadingIndicator.removeClass("hidden");
+    	//Hide and reset the show more button
+    	addConceptForm.resetShowHideMultipleSearchResults();
+    	//This should return an object including the concept list or any errors if there are any
     	$.getJSON(dataServiceUrl, function(results) {
             var htmlAdd = "";
             var vocabUnavailable = "<p>" + addConceptForm.vocServiceUnavailable + "</p>";
@@ -166,7 +204,7 @@ var addConceptForm = {
                 //For each result, display
                 if(numberTotalMatches > 0) {
                 	htmlAdd = "<ul class='dd' id='concepts' name='concepts'>";
-                	htmlAdd+= addConceptForm.addResultsHeader();
+                	htmlAdd+= addConceptForm.addResultsHeader(vocabSourceValue);
                 	//Show best matches first
 	                for(i = 0; i < numberBestMatches; i++) {
 	                	var conceptResult = bestMatchResults[i];
@@ -184,6 +222,8 @@ var addConceptForm = {
             	
             }
             if(htmlAdd.length) {
+            	//hide the loading icon again
+            	addConceptForm.loadingIndicator.addClass("hidden");
             	$('#selectedConcept').html(htmlAdd);
             	if (htmlAdd.indexOf("No search results") >= 0) {
             	    addConceptForm.showHiddenElements(hasResults);
@@ -191,6 +231,8 @@ var addConceptForm = {
             	else {
             	   hasResults = true;
                    addConceptForm.showHiddenElements(hasResults);
+                   //Here, tweak the display based on the number of results
+                   addConceptForm.displayUptoMaxResults();
                 }
             }
           });
@@ -203,9 +245,12 @@ var addConceptForm = {
     	var definedBy = conceptResult.definedBy;
     	var type = conceptResult.type;
     	var uri = conceptResult.uri;
+    	//also adding broader and narrower uris wherever they exist
+    	var broaderUris = conceptResult.broaderURIList;
+    	var narrowerUris = conceptResult.narrowerURIList;
     	//this will be null if there are no alternate labels
     	var altLabels = conceptResult.altLabelList;
-    	return addConceptForm.generateIndividualConceptDisplay(uri, label, altLabels, definition, type, definedBy, isBestMatch);
+    	return addConceptForm.generateIndividualConceptDisplay(uri, label, altLabels, definition, type, definedBy, isBestMatch, broaderUris, narrowerUris);
     },
     //This should now return all best matches in one array and other results in another
     parseResults:function(resultsArray) {
@@ -225,9 +270,18 @@ var addConceptForm = {
     	}
     	return {"bestMatch":bestMatchResults, "alternate":alternateResults};
     },
-    addResultsHeader:function() {
-    	var htmlAdd = "<li class='concepts'><div class='row'><span class='column conceptLabel'>" + addConceptForm.labelTypeString + " </span><span class='column conceptDefinition'>" + addConceptForm.definitionString + "</span><span class='column'>" + addConceptForm.bestMatchString + "</span></div></li>";
+    addResultsHeader:function(vocabSourceValue) {
+    	var htmlAdd = "<li class='concepts'><div class='row'><span class='column conceptLabel'>" + 
+    	addConceptForm.getVocabSpecificColumnLabel(vocabSourceValue) + " </span><span class='column conceptDefinition'>" + addConceptForm.definitionString + "</span><span class='column'>" + addConceptForm.bestMatchString + "</span></div></li>";
     	return htmlAdd;
+    },
+    //currently just the first column label depends on which service has been utilized
+    getVocabSpecificColumnLabel: function(vocabSourceValue) {
+    	var columnLabel = addConceptForm.vocabSpecificLabels[vocabSourceValue];
+    	if(columnLabel == undefined) {
+    		columnLabel = addConceptForm.defaultLabelTypeString;
+    	}
+    	return columnLabel;
     },
     hideSearchResults:function() {
     	this.selectedConcept.hide();
@@ -239,11 +293,14 @@ var addConceptForm = {
     	}
     	var i;
     	var len = checkedElements.length;
-    	var checkedConcept, checkedConceptElement, conceptLabel, conceptSource, conceptSemanticType;
+    	var checkedConcept, checkedConceptElement, conceptLabel, conceptSource, conceptSemanticType,
+    	conceptBroaderUri, conceptNarrowerUri;
     	var conceptNodes = [];
     	var conceptLabels = [];
     	var conceptSources = [];
     	var conceptSemanticTypes = [];
+    	var conceptBroaderUris = []; //each array element can be a string which is comma delimited for multiple uris
+    	var conceptNarrowerUris = [];//same as above
     	
     	checkedElements.each(function() {
     		checkedConceptElement = $(this);
@@ -251,22 +308,29 @@ var addConceptForm = {
     		conceptLabel = checkedConceptElement.attr("label");
     		conceptSource = checkedConceptElement.attr("conceptDefinedBy");
     		conceptSemanticType = checkedConceptElement.attr("conceptType");
+    		conceptBroaderUri = checkedConceptElement.attr("broaderUris");
+    		conceptNarrowerUri = checkedConceptElement.attr("narrowerUris");
     		conceptNodes.push(checkedConcept);
     		conceptLabels.push(conceptLabel);
     		conceptSources.push(conceptSource);
     		conceptSemanticTypes.push(conceptSemanticType);
+    		conceptBroaderUris.push(conceptBroaderUri);
+    		conceptNarrowerUris.push(conceptNarrowerUri);
     	});
     	this.externalConceptURI.val(conceptNodes);
     	this.externalConceptLabel.val(conceptLabels);
     	this.externalConceptSource.val(conceptSources);
     	this.externalConceptSemanticTypeLabel.val(conceptSemanticTypes);
+    	this.externalConceptBroaderUris.val(conceptBroaderUris);
+    	this.externalConceptNarrowerUris.val(conceptNarrowerUris);
+    	
     	return true;
     }, 
-    generateIndividualConceptDisplay: function(cuiURI, label, altLabels, definition, type, definedBy, isBestMatch) {
+    generateIndividualConceptDisplay: function(cuiURI, label, altLabels, definition, type, definedBy, isBestMatch, broaderUris, narrowerUris) {
     	var htmlAdd = "<li class='concepts'>" + 
     	"<div class='row'>" + 
     	"<div class='column conceptLabel'>" +
-    	addConceptForm.generateIndividualCUIInput(cuiURI, label, type, definedBy) +  
+    	addConceptForm.generateIndividualCUIInput(cuiURI, label, type, definedBy, broaderUris, narrowerUris) +  
     	addConceptForm.generateIndividualLabelsDisplay(label, altLabels) + addConceptForm.generateIndividualTypeDisplay(type) + "</div>" + 
     	addConceptForm.generateIndividualDefinitionDisplay(definition) + 
     	addConceptForm.generateBestOrAlternate(isBestMatch) +
@@ -274,14 +338,23 @@ var addConceptForm = {
     	"</li>";	
     	return htmlAdd;
     }, 
-    generateIndividualCUIInput:function(cuiURI, label, type, definedBy) {
-    	return 	"<input type='checkbox'  name='CUI' value='" + cuiURI + "' label='" + label + "' conceptType='" + type + "' conceptDefinedBy='" + definedBy + "'/>";
+    generateIndividualCUIInput:function(cuiURI, label, type, definedBy, broaderUris, narrowerUris) {
+    	return 	"<input type='checkbox'  name='CUI' value='" + cuiURI + "' label='" + 
+    		label + "' conceptType='" + type + "' conceptDefinedBy='" + definedBy + "' " +
+    		"broaderUris='" + broaderUris + "' narrowerUris='" + narrowerUris + "'/>";
     },
     //In case there are multiple labels display those
     generateIndividualLabelsDisplay:function(label, altLabels) {
     	var labelDisplay = label;
+    	var displayAltLabels = altLabels;
     	if(altLabels != null && altLabels.length > 0) {
-    		labelDisplay += "<br> [" + altLabels + "]";
+    		//Certain vocabulary services might return a long list of alternate labels, in which case we will show fewer 
+    		//display only upto a certain number of alternate labels and use an ellipsis to signify there
+    		//are additional terms
+    		if(altLabels.length > addConceptForm.maxNumberAlternateLabels) {
+    			displayAltLabels = altLabels.slice(0, addConceptForm.maxNumberAlternateLabels) + ",...";
+    		}
+    		labelDisplay += "<br> (" + displayAltLabels + ")";
     	}
     	return labelDisplay;
     },
@@ -306,6 +379,18 @@ var addConceptForm = {
     		className = "bestMatchFlag";
     	}
     	return "<div class='column'><div class='" + className + "'>&nbsp;</div></div>";	
+    },
+    //Certain vocabulary services return a great number of results, we would like the ability to show more or less of those results
+    displayUptoMaxResults:function() {
+    	var numberConcepts = $("li.concepts").length;
+    	if(numberConcepts > addConceptForm.numberOfMaxInitialSearchResults) {
+    		$("li.concepts").slice(addConceptForm.numberOfMaxInitialSearchResults).hide();
+    		 //Hide the link for showing/hiding search results
+            addConceptForm.showHideSearchResults.show();
+            addConceptForm.showHideSearchResults.find("a#showHideLink").html("Show more results");
+            addConceptForm.showHideSearchResults.find("a#showHideLink").addClass("showmore");
+    	}
+    	
     },
     validateConceptSelection:function(checkedElements) {
     	var numberElements = checkedElements.length;
