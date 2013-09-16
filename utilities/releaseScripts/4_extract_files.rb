@@ -21,7 +21,23 @@ require '_common'
 #
 # Get the VIVO files and the Vitro files, and remove the .git directories.
 #
-def export_files(vivo_path, vitro_path, tag, export_dir)
+def export_files(vivo_path, vitro_path, tag, branch, export_dir)
+	Dir.chdir(vivo_path) do |path|
+		cmds = ["git checkout #{branch}", 
+				"git pull",
+				]
+		cmds.delete_at(1) unless is_remote_branch?(branch)
+		approve_and_execute(cmds, "in #{path}")
+	end
+	
+	Dir.chdir(vitro_path) do |path|
+		cmds = ["git checkout #{branch}", 
+				"git pull",
+				]
+		cmds.delete_at(1) unless is_remote_branch?(branch)
+		approve_and_execute(cmds, "in #{path}")
+	end
+	
 	approve_and_execute([
 			"rm -Rf #{File.expand_path("..", export_dir)}",
 			"mkdir -pv #{export_dir}",
@@ -29,6 +45,10 @@ def export_files(vivo_path, vitro_path, tag, export_dir)
 			"mkdir -pv #{export_dir}/vitro-core",
 			"cp -R #{vitro_path}/* #{export_dir}/vitro-core",
 			])
+end
+
+def is_remote_branch?(branch)
+	! `git branch --list -a origin/#{branch}`.strip.empty?
 end
 
 #
@@ -39,6 +59,7 @@ end
 
 begin
 	tag = Settings.tag_name
+	branch = Settings.branch_name
 	vivo_path = Settings.vivo_path
 	vitro_path = Settings.vitro_path
 	export_dir = Settings.export_dir
@@ -54,7 +75,7 @@ begin
 	
 	get_permission_and_go(p) do
 		puts "Building export area"
-		export_files(vivo_path, vitro_path, tag, export_dir)
+		export_files(vivo_path, vitro_path, tag, branch, export_dir)
 	end
 rescue BadState
 	puts "#{$!.message} - Aborting."
