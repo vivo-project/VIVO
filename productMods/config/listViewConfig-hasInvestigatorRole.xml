@@ -31,7 +31,7 @@
                         LET (?activityName := afn:localname(?activity)) 
                         OPTIONAL { ?activity rdfs:label ?activityLabel }
             }   
-            OPTIONAL {  ?role &lt;http://vivoweb.org/ontology/core#relates&gt; ?activity 
+            OPTIONAL {  ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity 
                         LET (?activityName := afn:localname(?activity)) 
                         OPTIONAL { ?activity rdfs:label ?activityLabel }
             }                   
@@ -49,7 +49,7 @@
                                   ?dateTimeEndValueRole core:dateTime ?dateTimeEndRole 
                        }
             }  
-            OPTIONAL { ?role &lt;http://vivoweb.org/ontology/core#relates&gt; ?grant .
+            OPTIONAL { ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?grant .
                        ?grant core:dateTimeInterval ?dateTimeIntervalGrant 
                        OPTIONAL { ?dateTimeIntervalGrant core:start ?dateTimeStartValueGrant .
                                   ?dateTimeStartValueGrant core:dateTime ?dateTimeStartGrant 
@@ -77,7 +77,7 @@
         {
             ?subject ?property ?role .
             ?role a ?objectType .
-            ?role &lt;http://vivoweb.org/ontology/core#relates&gt; ?activity 
+            ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity 
         } UNION
         {
             ?subject ?property ?role .
@@ -96,18 +96,18 @@
         CONSTRUCT {
             ?subject ?property ?role .
             ?role a ?objectType .
-            ?role &lt;http://vivoweb.org/ontology/core#relates&gt; ?activity .
+            ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
             ?activity rdfs:label ?activityLabel 
         } WHERE {
             {
                 ?subject ?property ?role .
                 ?role a ?objectType .
-                ?role &lt;http://vivoweb.org/ontology/core#relates&gt; ?activity 
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity 
             } UNION
             {
                 ?subject ?property ?role .
                 ?role a ?objectType .
-                ?role &lt;http://vivoweb.org/ontology/core#relates&gt; ?activity .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
                 ?activity rdfs:label ?activityLabel 
             }
         }
@@ -135,7 +135,7 @@
             } UNION {
                 ?subject ?property ?role .
                 ?role a ?objectType .
-                ?role &lt;http://vivoweb.org/ontology/core#relates&gt; ?activity . 
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity . 
                 ?activity rdfs:label ?activityName 
             } UNION {
                 ?subject ?property ?role .
@@ -145,23 +145,23 @@
             } UNION {
                 ?subject ?property ?role .
                 ?role a ?objectType .
-                ?role &lt;http://vivoweb.org/ontology/core#relates&gt; ?activity . 
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity . 
                 ?activity core:grantAwardedBy ?awardedBy
             } UNION {
                 ?subject ?property ?role .
                 ?role a ?objectType .
-                ?role &lt;http://vivoweb.org/ontology/core#relates&gt; ?activity . 
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity . 
                 ?activity core:grantAwardedBy ?awardedBy .
                 ?awardedBy rdfs:label ?awardedByLabel
             } UNION {
                 ?subject ?property ?role .
                 ?role a ?objectType .
-                ?role &lt;http://vivoweb.org/ontology/core#relates&gt; ?activity . 
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity . 
                 ?activity core:administeredBy ?adminedBy
             } UNION {
                 ?subject ?property ?role .
                 ?role a ?objectType .
-                ?role &lt;http://vivoweb.org/ontology/core#relates&gt; ?activity . 
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity . 
                 ?activity core:administeredBy ?adminedBy .
                 ?adminedBy rdfs:label ?adminedByLabel
             }
@@ -206,14 +206,14 @@
         CONSTRUCT { 
             ?subject ?property ?role .
             ?role a ?objectType .
-            ?role &lt;http://vivoweb.org/ontology/core#relates&gt; ?grant .
+            ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?grant .
             ?grant core:dateTimeInterval ?dateTimeIntervalGrant .
             ?dateTimeIntervalGrant core:start ?dateTimeStartValueGrant .
             ?dateTimeStartValueGrant core:dateTime ?dateTimeStartGrant 
         } WHERE {
             ?subject ?property ?role .
             ?role a ?objectType .
-            ?role &lt;http://vivoweb.org/ontology/core#relates&gt; ?grant .
+            ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?grant .
             ?grant core:dateTimeInterval ?dateTimeIntervalGrant .
             ?dateTimeIntervalGrant core:start ?dateTimeStartValueGrant .
             ?dateTimeStartValueGrant core:dateTime ?dateTimeStartGrant 
@@ -225,14 +225,14 @@
         CONSTRUCT { 
             ?subject ?property ?role .
             ?role a ?objectType .
-            ?role &lt;http://vivoweb.org/ontology/core#relates&gt; ?grant .
+            ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?grant .
             ?grant core:dateTimeInterval ?dateTimeIntervalGrant .
             ?dateTimeIntervalGrant core:end ?dateTimeEndValueGrant .
             ?dateTimeEndValueGrant core:dateTime ?dateTimeEndGrant 
         } WHERE {
             ?subject ?property ?role .
             ?role a ?objectType .
-            ?role &lt;http://vivoweb.org/ontology/core#relates&gt; ?grant .
+            ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?grant .
             ?grant core:dateTimeInterval ?dateTimeIntervalGrant .
             ?dateTimeIntervalGrant core:end ?dateTimeEndValueGrant .
             ?dateTimeEndValueGrant core:dateTime ?dateTimeEndGrant 
