@@ -56,6 +56,8 @@
             <label for="lastName">${i18n().last_name} ${requiredHint}</label>
             <input size="30"  type="text" id="lastName" name="lastName" value="${lastNameValue}" />
         </p>
+        
+        <input type="hidden" id="label" name="label" value="${labelValue}" />
     <#else>       
         <p>
             <label for="name">${i18n().name_capitalized} ${requiredHint}</label>
@@ -75,3 +77,4 @@
 </section>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}
+${scripts.add('<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/newIndividualFormUtils.js"></script>')}

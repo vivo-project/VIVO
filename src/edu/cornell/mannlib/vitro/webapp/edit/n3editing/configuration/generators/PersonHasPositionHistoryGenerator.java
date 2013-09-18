@@ -203,6 +203,7 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
         "?endNode  <" + dateTimeValue + "> ?endField-value . \n" +
         "?endNode  <" + dateTimePrecision + "> ?endField-precision . \n";
     
+// Queries for existing values 
     final static String orgLabelQuery =
         "SELECT ?existingOrgLabel WHERE { \n" +
         "  ?position <" + positionInOrgPred + "> ?existingOrg . \n" +
@@ -232,7 +233,8 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
 
     final static String existingOrgQuery = 
         "SELECT ?existingOrg WHERE { \n" +
-        "  ?position <" + positionInOrgPred + "> ?existingOrg . }";
+        "  ?position <" + positionInOrgPred + "> ?existingOrg . \n" +
+        "  ?existingOrg a <" + orgClass + ">  }";
     
     final static String orgTypeQuery = 
         "PREFIX rdfs: <" + rdfs + "> \n" +   

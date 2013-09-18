@@ -42,11 +42,20 @@ public class NewIndividualFormGenerator extends BaseEditConfigurationGenerator i
     	//Optional because user may have selected either person or individual of another kind
     	//Person uses first name and last name whereas individual of other class would use label 
     	config.setN3Optional(list(
-    	        N3_PREFIX + "?newInd foaf:firstName ?firstName ; foaf:lastName ?lastName .",             
-                N3_PREFIX + "?newInd <" + RDFS.label.getURI() + "> ?label ."
+    	        N3_PREFIX + "@prefix vcard:<http://www.w3.org/2006/vcard/ns#> .\n"
+    	                  + " ?newInd <http://purl.obolibrary.org/obo/ARG_2000028> ?newVcardInd . \n"
+    	                  + " ?newVcardInd <http://purl.obolibrary.org/obo/ARG_2000029> ?newInd . \n"
+    	                  + " ?newVcardInd a <http://www.w3.org/2006/vcard/ns#Individual> . \n"
+    	                  + " ?newVcardInd vcard:hasName  ?newVcardName . \n"
+    	                  + " ?newVcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n"
+    	                  + " ?newVcardName vcard:givenName ?firstName . \n"
+    	                  + " ?newVcardName vcard:familyName ?lastName .",
+                N3_PREFIX + " ?newInd <" + RDFS.label.getURI() + "> ?label ."
     	));
     	                    
     	config.addNewResource("newInd", vreq.getWebappDaoFactory().getDefaultNamespace());
+    	config.addNewResource("newVcardInd", vreq.getWebappDaoFactory().getDefaultNamespace());
+    	config.addNewResource("newVcardName", vreq.getWebappDaoFactory().getDefaultNamespace());
     	    	
     	config.setUrisOnform(list ());
         config.setLiteralsOnForm( list( "label", "firstName", "lastName" ));            	
@@ -73,7 +82,9 @@ public class NewIndividualFormGenerator extends BaseEditConfigurationGenerator i
         config.addValidator(new AntiXssValidation());
         
         //This combines the first and last name into the rdfs:label
-        config.addModelChangePreprocessor(new FoafNameToRdfsLabelPreprocessor());        
+        // currently being done via javascript in the template. May use this again
+        // when/if updated to IFS ontology.  tlw72
+//        config.addModelChangePreprocessor(new FoafNameToRdfsLabelPreprocessor());        
 
         String formUrl = EditConfigurationUtils.getFormUrlWithoutContext(vreq);       
         config.setFormUrl(formUrl);

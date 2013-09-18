@@ -7,45 +7,40 @@
     <query-select>    
         PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
         
-        SELECT DISTINCT ?vcard ?address
-                        ?street
-                        ?locality 
-                        ?region
-                        ?postalCode
-                        ?country   
-                        
+        SELECT DISTINCT ?vcard ?email
+                        ?emailAddress
         WHERE {
             ?subject ?property ?vcard .
-            ?vcard vcard:hasAddress ?address 
-            OPTIONAL { ?address vcard:streetAddress ?street  }
-            OPTIONAL { ?address vcard:locality ?locality  }
-            OPTIONAL { ?address vcard:region ?region  }
-            OPTIONAL { ?address vcard:postalCode ?postalCode  }
-            OPTIONAL { ?address vcard:country ?country  }            
+            ?vcard vcard:hasEmail ?email .
+            ?email a vcard:Work
+            OPTIONAL { ?email vcard:email ?emailAddress  }
             
-        } ORDER BY ?country ?region ?street
+        } 
     </query-select>
        
     <query-construct>
         PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
         CONSTRUCT { 
             ?subject ?property ?vcard .
-            ?vcard vcard:hasAddress ?address .
-            ?address ?addressProperty ?addressValue 
+            ?vcard vcard:hasEmail ?email .
+            ?email a vcard:Work .
+            ?email ?emailProperty ?emailValue 
         } WHERE {
             {
                ?subject ?property ?vcard
             } UNION {
                ?subject ?property ?vcard .
-               ?vcard vcard:hasAddress ?address
+               ?vcard vcard:hasEmail ?email .
+               ?email a vcard:Work 
             } UNION {
                ?subject ?property ?vcard .
-               ?vcard vcard:hasAddress ?address .
-               ?address ?addressProperty ?addressValue 
+               ?vcard vcard:hasEmail ?email .
+               ?email a vcard:Work .
+               ?email ?emailProperty ?emailValue 
             } 
         } 
     </query-construct>
               
-    <template>propStatement-mailingAddress.ftl</template>
+    <template>propStatement-emailAddress.ftl</template>
     <postprocessor>edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.MaintainDuplicatesObjectPropertyDataPostProcessor</postprocessor>
 </list-view-config>

@@ -71,6 +71,8 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
         
         conf.addNewResource("advisingRelationship", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("newAdvisee", DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("vcardAdvisee", DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("vcardName", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("advisorRole", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("adviseeRole", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("newSubjArea", DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -229,12 +231,22 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
         "?adviseeRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . ";
     
     final static String firstNameAssertion  =      
-        "@prefix foaf: <" + foaf + "> .  \n" +
-        "?newAdvisee foaf:firstName ?firstName .";
+        "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+        "?newAdvisee <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardAdvisee . \n" +
+        "?vcardAdvisee <http://purl.obolibrary.org/obo/ARG_2000029>  ?newAdvisee . \n" +
+        "?vcardAdvisee a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+        "?vcardAdvisee vcard:hasName  ?vcardName . \n" +
+        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
+        "?vcardName vcard:givenName ?firstName .";
     
     final static String lastNameAssertion  =      
-        "@prefix foaf: <" + foaf + "> .  \n" +
-        "?newAdvisee foaf:lastName ?lastName .";
+        "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+        "?newAdvisee <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardAdvisee . \n" +
+        "?vcardAdvisee <http://purl.obolibrary.org/obo/ARG_2000029>  ?newAdvisee . \n" +
+        "?vcardAdvisee a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+        "?vcardAdvisee vcard:hasName  ?vcardName . \n" +
+        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
+        "?vcardName vcard:familyName ?lastName .";
     
     final static String degreeAssertion  =      
         "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?degree . \n" +

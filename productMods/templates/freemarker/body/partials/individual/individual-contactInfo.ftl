@@ -2,19 +2,19 @@
 
 <#-- Contact info on individual profile page -->
 
-<#assign phone = propertyGroups.pullProperty("${core}phoneNumber")!>
-<#assign primaryEmail = propertyGroups.pullProperty("${core}primaryEmail")!>
-<#assign addlEmail = propertyGroups.pullProperty("${core}email")!>
+<#assign phone = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Telephone")!>
+<#assign primaryEmail = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Work")!>
+<#assign addlEmail = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Email")!>
 
 <#if phone?has_content || primaryEmail?has_content || addlEmail?has_content >
     <ul style="font-size:1em;padding-bottom:4px"><li><strong>${i18n().contact_info}</strong></li></ul>
 </#if>
 
 <#-- Primary Email -->    
-<@emailLinks "${core}primaryEmail" primaryEmail />
+<@emailLinks "primaryEmail" primaryEmail />
 
 <#-- Additional Emails --> 
-<@emailLinks "${core}email" addlEmail />   
+<@emailLinks "email" addlEmail />   
   
 <#-- Phone --> 
 
@@ -24,8 +24,8 @@
         <ul id="individual-phone" role="list" <#if editable>style="list-style:none;margin-left:0;"</#if>>
             <#list phone.statements as statement>
                 <li role="listitem">
-                    ${statement.value}
-                    <@p.editingLinks "${phone.localName}" statement editable />
+                    ${statement.number!}
+                    <@p.editingLinks "${phone.localName}" "${phone.name}" statement editable />
                 </li>
             </#list>
         </ul>
@@ -33,7 +33,7 @@
 </#if>
 
 <#macro emailLinks property email>
-    <#if property == "${core}primaryEmail">
+    <#if property == "primaryEmail">
         <#local listId = "primary-email">
         <#local label = "${i18n().primary_email_capitalized}">
     <#else>
@@ -46,8 +46,8 @@
             <ul id="${listId}" class="individual-emails" role="list" <#if editable>style="list-style:none;margin-left:0;"</#if>>
                 <#list email.statements as statement>
                     <li role="listitem">
-                        <a class="email" href="mailto:${statement.value}" title="${i18n().email}">${statement.value}</a>
-                        <@p.editingLinks "${email.localName}" statement editable />
+                        <a class="email" href="mailto:${statement.emailAddress!}" title="${i18n().email}">${statement.emailAddress!}</a>
+                        <@p.editingLinks "${email.localName}" "${email.name}" statement editable />
                     </li>
                 </#list>
             </ul>

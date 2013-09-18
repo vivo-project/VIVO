@@ -451,13 +451,23 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     }
 
     private String getN3FirstNameAssertion() {
-        return "@prefix foaf: <" + foaf + "> .  \n" +
-        "?newEditor foaf:firstName ?firstName .";
+        return "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+        "?newEditor <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardEditor . \n" +
+        "?vcardEditor <http://purl.obolibrary.org/obo/ARG_2000029>  ?newEditor . \n" +
+        "?vcardEditor a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+        "?vcardEditor vcard:hasName  ?vcardName . \n" +
+        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
+        "?vcardName vcard:givenName ?firstName .";
     }
 
     private String getN3LastNameAssertion() {
-        return "@prefix foaf: <" + foaf + "> .  \n" +
-        "?newEditor foaf:lastName ?lastName .";
+        return "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+        "?newEditor <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardEditor . \n" +
+        "?vcardEditor <http://purl.obolibrary.org/obo/ARG_2000029>  ?newEditor . \n" +
+        "?vcardEditor a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+        "?vcardEditor vcard:hasName  ?vcardName . \n" +
+        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
+        "?vcardName vcard:familyName ?lastName .";
     }
 
     private String getN3ForLocaleAssertion() {
@@ -515,6 +525,8 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         newResources.put("newConference", DEFAULT_NS_TOKEN);
         newResources.put("newEvent", DEFAULT_NS_TOKEN);
         newResources.put("newEditor", DEFAULT_NS_TOKEN);
+        newResources.put("vcardEditor", DEFAULT_NS_TOKEN);
+        newResources.put("vcardName", DEFAULT_NS_TOKEN);
         newResources.put("newPublisher", DEFAULT_NS_TOKEN);
         newResources.put("dateTimeNode", DEFAULT_NS_TOKEN);
         return newResources;

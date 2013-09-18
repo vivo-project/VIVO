@@ -39,7 +39,7 @@ Class:
 core:URLLink - the link to be added to the individual
 
 Data properties of core:URLLink:
-core:linkURI
+core:linkUrlPredicate
 core:linkAnchorText
 core:rank
 
@@ -68,27 +68,32 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
 	    initBasics(config, vreq);
 	    initPropertyParameters(vreq, session, config);
 	    initObjectPropForm(config, vreq);       
+	    String linkUri = getLinkUri(vreq);
 	            
 	    config.setVarNameForSubject("subject");
-	    config.setVarNameForObject("link");
+	    config.setVarNameForObject("vcard");
 	
+	    config.addNewResource("vcard", DEFAULT_NS_FOR_NEW_RESOURCE);
 	    config.addNewResource("link", DEFAULT_NS_FOR_NEW_RESOURCE);
 	    
 	    config.setN3Required(list( this.getN3ForWebpage(), N3_FOR_URLTYPE ));
 	    config.setN3Optional(list( N3_FOR_ANCHOR, N3_FOR_RANK));
 	    
-	    config.addUrisInScope("webpageProperty",     list( this.getWebpageProperty()));
-	    config.addUrisInScope("inverseProperty",     list( this.getWebpageOfProperty()));
-	    config.addUrisInScope("linkClass",           list( this.getURLLinkClass()));
-	    config.addUrisInScope("linkURI",       list( core + "linkURI" ));
-	    config.addUrisInScope("linkAnchorPredicate", list( core + "linkAnchorText" ));
+	    config.addUrisInScope("webpageProperty",     list( "http://purl.obolibrary.org/obo/ARG_2000028" ));
+	    config.addUrisInScope("inverseProperty",     list( "http://purl.obolibrary.org/obo/ARG_2000029" ));
+	    config.addUrisInScope("linkUrlPredicate",             list( "http://www.w3.org/2006/vcard/ns#url" ));
+	    config.addUrisInScope("linkLabelPredicate",  list( "http://www.w3.org/2000/01/rdf-schema#label" ));
 	    config.addUrisInScope("rankPredicate",       list( core + "rank"));
+	    config.addSparqlForAdditionalUrisInScope("vcard", individualVcardQuery);
 	    
+	    if ( config.isUpdate() ) {
+	        config.addUrisInScope("link",  list( linkUri ));
+	    }
 	    config.setUrisOnForm("urlType");
-	    config.setLiteralsOnForm(list("url","anchor","rank"));
+	    config.setLiteralsOnForm(list("url","label","rank"));
 	
 	    config.addSparqlForExistingLiteral("url",    URL_QUERY);
-	    config.addSparqlForExistingLiteral("anchor", ANCHOR_QUERY);
+	    config.addSparqlForExistingLiteral("label", ANCHOR_QUERY);
 	    config.addSparqlForExistingLiteral("rank",   MAX_RANK_QUERY);
 	    config.addSparqlForExistingUris("urlType", URLTYPE_QUERY);
 	        
@@ -101,10 +106,10 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
 	            setName("urlType").
 	            setValidators( list("nonempty") ).
 	            setOptions( 
-	                new ChildVClassesWithParent(this.getURLLinkClass())));
+	                new ChildVClassesWithParent("http://www.w3.org/2006/vcard/ns#URL")));
 	
 	    config.addField(new FieldVTwo().
-	            setName("anchor"));
+	            setName("label"));
 	    
 	    config.addField(new FieldVTwo().
 	            setName("rank").
@@ -133,16 +138,17 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
 
     /* ********* N3 Assertions *********** */
     static String N3_FOR_WEBPAGE = 
-        "?subject ?webpageProperty ?link . \n"+
-        "?link    ?inverseProperty ?subject . \n"+
-        "?link    a                ?linkClass  . \n" +      
-        "?link    ?linkURI         ?url .";    
+        "?subject ?webpageProperty ?vcard . \n"+
+        "?vcard ?inverseProperty ?subject . \n"+
+        "?vcard <http://www.w3.org/2006/vcard/ns#hasURL> ?link ."+
+        "?link a <http://www.w3.org/2006/vcard/ns#URL> . \n" +
+        "?link ?linkUrlPredicate ?url .";    
     
     static String N3_FOR_URLTYPE =
         "?link a ?urlType .";
 
     static String N3_FOR_ANCHOR =
-        "?link ?linkAnchorPredicate ?anchor .";
+        "?link ?linkLabelPredicate ?label .";
     
     static String N3_FOR_RANK = 
         "?link ?rankPredicate ?rank .";
@@ -150,28 +156,35 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
     /* *********** SPARQL queries for existing values ************** */
     
     static String URL_QUERY = 
-        "SELECT ?urlExisting WHERE { ?link ?linkURI ?urlExisting }";
+        "SELECT ?urlExisting WHERE { ?link ?linkUrlPredicate ?urlExisting }";
     
     static String URLTYPE_QUERY = 
         "PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
         "SELECT ?linkClassExisting WHERE { ?link vitro:mostSpecificType ?linkClassExisting }";
     
     static String ANCHOR_QUERY = 
-        "SELECT ?anchorExisting WHERE { ?link ?linkAnchorPredicate ?anchorExisting }";
+        "SELECT ?labelExisting WHERE { ?link ?linkLabelPredicate ?labelExisting }";
 
     static String RANK_QUERY =
         "SELECT ?rankExisting WHERE { ?link ?rankPredicate ?rankExisting }";
     
     static String core = "http://vivoweb.org/ontology/core#";
     
+    static String individualVcardQuery =
+        "SELECT ?existingVcard WHERE { \n" +
+        "?subject <http://purl.obolibrary.org/obo/ARG_2000028>  ?existingVcard . \n" +
+        "}";
+
     /* Note on ordering by rank in sparql: if there is a non-integer value on a link, that will be returned,
      * since it's ranked highest. Preventing that would require getting all the ranks and sorting in Java,
      * throwing out non-int values. 
      */
     private static String MAX_RANK_QUERY = ""
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
+        + "PREFIX vcard: <http://www.w3.org/2006/vcard/ns#> \n"
         + "SELECT DISTINCT ?rank WHERE { \n"
-        + "    ?subject core:webpage ?link . \n"
+        + "    ?subject <http://purl.obolibrary.org/obo/ARG_2000028> ?vcard . \n"
+        + "    ?vcard vcard:hasURL ?link . \n"
         + "    ?link core:rank ?rank .\n"
         + "} ORDER BY DESC(?rank) LIMIT 1";
         
@@ -209,23 +222,10 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
     	return formTemplate;
     }
     
-    protected String getWebpageProperty() {
-    	return core + "webpage";
-    }
-    
-    protected String getWebpageOfProperty() {
-    	return core + "webpageOf";
-    }
-    
     protected String getMaxRankQueryStr() {
     	return MAX_RANK_QUERY;
     }
 
-    
-    protected String getURLLinkClass() {
-    	return core + "URLLink";
-    }
-    
     protected String getN3ForWebpage() {
     	return N3_FOR_WEBPAGE;
     }
@@ -240,5 +240,9 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
 		"&editForm=" + UrlBuilder.urlEncode(generatorName);
 	}
 
-
+	private String getLinkUri(VitroRequest vreq) {
+	    String linkUri = vreq.getParameter("linkUri"); 
+        
+		return linkUri;
+	}
 }

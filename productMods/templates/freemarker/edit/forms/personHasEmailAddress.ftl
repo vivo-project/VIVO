@@ -16,11 +16,7 @@
 <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
 
 <#--Retrieve variables needed-->
-<#assign streetAddressValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "streetAddress") />
-<#assign localityValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "locality") />
-<#assign regionValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "region") />
-<#assign postalCodeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "postalCode") />
-<#assign countryValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "country") />
+<#assign emailAddressValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "emailAddress") />
 
 <#--If edit submission exists, then retrieve validation errors if they exist-->
 <#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
@@ -29,72 +25,42 @@
 
 <#if editMode == "edit">    
         <#assign titleVerb="${i18n().edit_capitalized}">        
-        <#assign submitButtonText="${i18n().edit_mailing_address}">
+        <#assign submitButtonText="${titleVerb}" + " ${i18n().email_address}">
         <#assign disabledVal="disabled">
 <#else>
         <#assign titleVerb="${i18n().create_capitalized}">        
-        <#assign submitButtonText="${i18n().create_mailing_address}">
+        <#assign submitButtonText="${titleVerb}" + " ${i18n().email_address}">
         <#assign disabledVal=""/>
 </#if>
 
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
 
-<h2>${titleVerb}&nbsp;${i18n().mailing_address_for} ${editConfiguration.subjectName}</h2>
+<h2>${titleVerb}&nbsp;${i18n().email_address_for} ${editConfiguration.subjectName}</h2>
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="${i18n().error_alert_icon}" />
         <p>
-        <#--Checking if any required fields are empty-->
-         <#if lvf.submissionErrorExists(editSubmission, "country")>
- 	        ${i18n().enter_a_country}<br />
-        </#if>
-         <#if lvf.submissionErrorExists(editSubmission, "streetAddress")>
- 	        ${i18n().enter_street_address}<br />
-        </#if>
-         <#if lvf.submissionErrorExists(editSubmission, "locality")>
- 	        ${i18n().enter_a_locality}<br />
-        </#if>
-         <#if lvf.submissionErrorExists(editSubmission, "postalCode")>
- 	        ${i18n().enter_postal_code}
-        </#if>
-        
+            <#--Checking if any required fields are empty-->
+            <#if lvf.submissionErrorExists(editSubmission, "emailAddress")>
+ 	            ${i18n().enter_email_address}<br />
+            </#if>        
         </p>
     </section>
 </#if>
 
 <@lvf.unsupportedBrowser urls.base /> 
 
-<section id="personHasMailingAddress" role="region">        
+<section id="personHasAdditionalEmail" role="region">        
     
-    <form id="personHasMailingAddress" class="customForm noIE67" action="${submitUrl}"  role="add/edit educational training">
+    <form id="personHasAdditionalEmail" class="customForm noIE67" action="${submitUrl}"  role="add/edit phone">
 
         <p>
-            <label for="streetAddress">${i18n().street_address} ${requiredHint}</label>
-            <input  size="50"  type="text" id="streetAddress" name="streetAddress" value="${streetAddressValue}" />
-        </p>
-    
-        <p>
-            <label for="locality">${i18n().city_locality} ${requiredHint}</label>
-            <input  size="40"  type="text" id="city" name="locality" value="${localityValue}" />
+            <label for="additionalEmail">${i18n().email_address} ${requiredHint}</label>
+            <input  size="35"  type="text" id="emailAddress" name="emailAddress" value="${emailAddressValue}" />
         </p>
 
-        <p>
-            <label for="region" id="stateLabel">${i18n().region}</label>
-            <input  size="40"  type="text" id="state" name="region" value="${regionValue}" />
-        </p>
-
-        <p>
-            <label for="postalCode" id="postalCodeLabel">${i18n().postal_code} ${requiredHint}</label>
-            <input  size="20"  type="text" id="postalCode" name="postalCode" value="${postalCodeValue}" />
-        </p>
-
-        <p>    
-            <label for="country" style="margin-bottom:-4px">${i18n().country} ${requiredHint}</label>
-            <input  size="20"  type="text"  id="countryEditMode" name="country" value="${countryValue}" />
-        </p>
-    
         <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>
 
         <p class="submit">

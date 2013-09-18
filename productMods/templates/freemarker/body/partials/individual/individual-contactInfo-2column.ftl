@@ -1,9 +1,9 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
 <#-- Contact info on individual profile page -->
-<#assign phone = propertyGroups.pullProperty("${core}phoneNumber")!>
-<#assign pEmail = propertyGroups.pullProperty("${core}primaryEmail")!>
-<#assign email = propertyGroups.pullProperty("${core}email")!>
+<#assign phone = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Telephone")!>
+<#assign pEmail = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Work")!>
+<#assign email = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Email")!>
 
 <#if editable || ( phone?has_content || pEmail?has_content || email?has_content ) >
     <h2 id="contactHeading" class="mainPropGroup">${i18n().contact_capitalized}</h2>
@@ -39,8 +39,8 @@
         <ul id="phone-list" role="list">
             <#list phone.statements as statement>
                 <li role="listitem" <#if editable>style="padding-left:10px;"</#if>>                           
-                    ${statement.value}
-                    <@p.editingLinks "${phone.localName}" statement editable />
+                    ${statement.number!}
+                    <@p.editingLinks "${phone.localName}" "${phone.name}" statement editable />
                 </li>
             </#list>
         </ul>
@@ -65,8 +65,8 @@
                 <#list email.statements as statement>
                     <li role="listitem" <#if editable>style="padding-left:10px;"</#if>>
                         
-                        <a class="email" href="mailto:${statement.value}" title="${i18n().email}">${statement.value}</a>
-                        <@p.editingLinks "${email.localName}" statement editable />
+                        <a class="email" href="mailto:${statement.emailAddress!}" title="${i18n().email}">${statement.emailAddress!}</a>
+                        <@p.editingLinks "${email.localName}" "${email.name}" statement editable />
                     </li>
                 </#list>
             </ul>
