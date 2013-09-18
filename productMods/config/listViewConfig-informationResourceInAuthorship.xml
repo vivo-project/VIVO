@@ -17,7 +17,7 @@
         WHERE {
                 ?subject ?property ?authorship .
                 ?authorship a core:Authorship 
-                OPTIONAL { ?authorship core:authorRank ?rank } 
+                OPTIONAL { ?authorship core:rank ?rank } 
                 OPTIONAL { ?authorship core:relates ?person .
                        ?person a foaf:Person .                      
                        ?person rdfs:label ?personName 

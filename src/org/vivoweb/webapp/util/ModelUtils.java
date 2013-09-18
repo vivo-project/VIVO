@@ -24,8 +24,8 @@ public class ModelUtils {
     private static final String processPropertyInverseURI = "http://purl.obolibrary.org/obo/BFO_0000055";
     private static final String nonProcessPropertyURI = "http://vivoweb.org/ontology/core#roleContributesTo";
 	private static final String nonProcessPropertyInverseURI = "http://vivoweb.org/ontology/core#contributingRole";
-    private static final String grantPropertyURI = "http://vivoweb.org/ontology/core#relates";
-	private static final String grantPropertyInverseURI = "http://vivoweb.org/ontology/core#relatedBy";
+    private static final String grantPropertyURI = "http://vivoweb.org/ontology/core#relatedBy";
+	private static final String grantPropertyInverseURI = "http://vivoweb.org/ontology/core#relates";
 	
 	private static Set<String> processClass = new HashSet<String>();
 	static {

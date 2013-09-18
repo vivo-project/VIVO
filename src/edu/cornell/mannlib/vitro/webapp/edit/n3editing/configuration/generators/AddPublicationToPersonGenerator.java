@@ -308,15 +308,24 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
     private String getN3ForNewBookNewEditor() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
-        "?newBook vivo:editor ?newEditor . \n " +
-        "?newEditor vivo:editorOf ?newBook . \n" + 
+        "?newBook vivo:relatedBy ?editorship . \n" +
+        "?editorship vivo:relates ?newBook . \n" +
+        "?newBook <" + label + "> ?book . \n " +
+        "?editorship a vivo:Editorship . \n" +
+        "?editorship vivo:relates ?newEditor . \n" +
+        "?newEditor a <" + editorClass + ">  . \n" +
+        "?newEditor vivo:relatedBy ?editorship . \n" + 
         "?newEditor <" + label + "> ?editor .";
     }
 
     private String getN3ForNewBookEditor() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
-        "?newBook vivo:editor ?editorUri . \n" +
-        "?editorUri vivo:editorOf ?newBook . " ;
+        "?newBook vivo:relatedBy ?editorship . \n" +
+        "?editorship vivo:relates ?newBook . \n" +
+        "?newBook <" + label + "> ?book . \n " +
+        "?editorship a vivo:Editorship . \n" +
+        "?editorship vivo:relates ?editorUri . \n" +
+        "?editorUri vivo:relatedBy ?editorship . "; 
     }
 
     private String getN3ForNewBookNewPublisher() {
@@ -396,30 +405,44 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
     private String getN3ForNewEditor() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
-        "?pubUri vivo:editor ?newEditor . \n" +
+        "?pubUri vivo:relatedBy ?editorship . \n" +
+        "?editorship vivo:relates ?pubUri . \n" +
+        "?editorship a vivo:Editorship . \n" +
+        "?editorship vivo:relates ?newEditor . \n" +
         "?newEditor a <" + editorClass + ">  . \n" +
-        "?newEditor vivo:editorOf ?pubUri . \n" + 
+        "?newEditor vivo:relatedBy ?editorship . \n" + 
         "?newEditor <" + label + "> ?editor .";
     }
 
     private String getN3ForEditor() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
-        "?pubUri vivo:editor ?editorUri . \n" +
-        "?editorUri vivo:editorOf ?pubUri . "; 
+        "?pubUri vivo:relatedBy ?editorship . \n" +
+        "?editorship vivo:relates ?pubUri . \n" +
+        "?editorship a vivo:Editorship . \n" +
+        "?editorship vivo:relates ?editorUri . \n" +
+        "?editorUri vivo:relatedBy ?editorship . "; 
     }
 
     private String getN3ForNewEditorNewPub() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
-        "?newPublication vivo:editor ?newEditor . \n" +
+        "?newPublication vivo:relatedBy ?editorship . \n" +
+        "?editorship vivo:relates ?newPublication . \n" +
+        "?newPublication <" + label + "> ?title ." +
+        "?editorship a vivo:Editorship . \n" +
+        "?editorship vivo:relates ?newEditor . \n" +
         "?newEditor a <" + editorClass + ">  . \n" +
-        "?newEditor vivo:editorOf ?newPublication . \n" + 
+        "?newEditor vivo:relatedBy ?editorship . \n" + 
         "?newEditor <" + label + "> ?editor .";
     }
 
     private String getN3ForEditorNewPub() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
-        "?newPublication vivo:editor ?editorUri . \n" +
-        "?editorUri vivo:editorOf ?newPublication . "; 
+        "?newPublication vivo:relatedBy ?editorship . \n" +
+        "?editorship vivo:relates ?newPublication . \n" +
+        "?newPublication <" + label + "> ?title ." +
+        "?editorship vivo:relates ?editorUri . \n" +
+        "?editorship a vivo:Editorship . \n" +
+        "?editorUri vivo:relatedBy ?editorship . "; 
     }
 
     private String getN3ForNewPublisher() {
@@ -525,6 +548,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         newResources.put("newConference", DEFAULT_NS_TOKEN);
         newResources.put("newEvent", DEFAULT_NS_TOKEN);
         newResources.put("newEditor", DEFAULT_NS_TOKEN);
+        newResources.put("editorship", DEFAULT_NS_TOKEN);
         newResources.put("vcardEditor", DEFAULT_NS_TOKEN);
         newResources.put("vcardName", DEFAULT_NS_TOKEN);
         newResources.put("newPublisher", DEFAULT_NS_TOKEN);
