@@ -2,6 +2,7 @@
 <rdf:RDF xmlns="http://purl.obolibrary.org/obo/arg/contact-vcard.owl#"
      xml:base="http://purl.obolibrary.org/obo/arg/contact-vcard.owl"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:obo="http://purl.obolibrary.org/obo/"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
@@ -2084,6 +2085,16 @@ Was called IMPP in vCard.</rdfs:comment>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">To specify a uniform resource locator associated with the object to which the vCard refers.  Examples for individuals include personal web sites, blogs, and social networking site  identifiers. </rdfs:comment>
     </owl:Class>
     
+
+
+    <!-- http://vivoweb.org/ontology/core#F1000Link -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#F1000Link">
+        <rdfs:label xml:lang="en">f1000 link</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#URL"/>
+        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F1000 is a place where faculty go to critique papers published in PubMed. Any given record in F1000 might have anywhere from one to dozens of reviews.</obo:IAO_0000112>
+    </owl:Class>
+
 
 
     <!-- http://www.w3.org/2006/vcard/ns#Unknown -->

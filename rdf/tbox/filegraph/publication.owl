@@ -1017,16 +1017,6 @@ This class allows for linking an author to a publication while indicating inform
     
 
 
-    <!-- http://vivoweb.org/ontology/core#F1000Link -->
-
-    <owl:Class rdf:about="http://vivoweb.org/ontology/core#F1000Link">
-        <rdfs:label xml:lang="en">f1000 link</rdfs:label>
-        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#URLLink"/>
-        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F1000, is a place where faculty go to critique papers published in PubMed. Any given record in F1000 might have anywhere from one to dozens of reviews.</obo:IAO_0000112>
-    </owl:Class>
-    
-
-
     <!-- http://vivoweb.org/ontology/core#InvitedTalk -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#InvitedTalk">
