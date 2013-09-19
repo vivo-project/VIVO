@@ -10,8 +10,7 @@ CONSTRUCT {
 } WHERE {
     ?educationalProcess <http://purl.obolibrary.org/obo/RO_0002234> ?degree .
     ?person <http://purl.obolibrary.org/obo/RO_0000056> ?educationalProcess .
-    ?educationalProcess a vivo:EducationalProcess .
-    ?educationalProcess <http://purl.obolibrary.org/obo/RO_0002234> ?degree .
+    ?degree a vivo:AcademicDegree .
     OPTIONAL { ?degree <http://purl.obolibrary.org/obo/RO_0002353> ?educationalProcess }
     OPTIONAL {
         ?educationalProcess vivo:relates ?org .
