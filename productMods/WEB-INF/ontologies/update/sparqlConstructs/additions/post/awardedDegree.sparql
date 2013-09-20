@@ -18,7 +18,7 @@ CONSTRUCT {
     ?educationalProcess <http://purl.obolibrary.org/obo/RO_0002234> ?degree .
     ?degree a vivo:AcademicDegree .
     OPTIONAL {
-        ?educationalProcess vivo:relates ?org . 
+        ?educationalProcess <http://purl.obolibrary.org/obo/RO_0000057> ?org . 
         ?org a foaf:Organization 
     }
 }
