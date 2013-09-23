@@ -16,18 +16,18 @@ public class IndividualSearchResult extends BaseIndividualSearchResult {
        
     public IndividualSearchResult(Individual individual, VitroRequest vreq) {
     	super(individual, vreq);
-    	log.info("Called Individual Search Result");
+    	log.debug("Called Individual Search Result");
     }
     
     /* Access methods for templates */
     
     public String getPreferredTitle() {
-    	log.info("Called get Title");
+    	log.debug("Called get Title");
         return individual.getDataValue(CORE + "preferredTitle");
     }
     
     public String getEmail() {
-    	log.info("Called get Email");
+    	log.debug("Called get Email");
     	return individual.getDataValue(CORE + "email");
     }
 
