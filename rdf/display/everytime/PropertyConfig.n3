@@ -140,7 +140,7 @@ local:hasEditorRoleContext a :ConfigContext ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#EditorRole> .
 
 local:hasEditorRoleConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-hasRole.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-hasEditorRole.xml"^^xsd:string ;
     :displayName "collection or series editor for" ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -155,7 +155,7 @@ local:hasReviewerRoleContext a :ConfigContext ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#ReviewerRole> .
 
 local:hasReviewerRoleConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-hasRole.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-hasReviewerRole.xml"^^xsd:string ;
     :displayName "reviewer of" ;
     vitro:displayRankAnnot 3;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -200,7 +200,7 @@ local:hasAttendeeRoleContext a :ConfigContext ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#AttendeeRole> .
 
 local:hasAttendeeRoleConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-hasRole.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-hasAttendeeRole.xml"^^xsd:string ;
     :displayName "attended" ;
     vitro:displayRankAnnot 1;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -434,3 +434,48 @@ local:fullNameConfig a :ObjectPropertyDisplayConfig ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddFullNameToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+### properties using default editing form ##
+
+local:eventWithinContext a :ConfigContext ;
+    :hasConfiguration local:eventWithinConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
+    :qualifiedByDomain      <http://purl.org/NET/c4dm/event.owl#Event> ;
+    :qualifiedBy      <http://purl.org/NET/c4dm/event.owl#Event> .
+
+local:eventWithinConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "event within" ;
+    vitro:displayRankAnnot 1;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:includesEventContext a :ConfigContext ;
+    :hasConfiguration local:includesEventConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
+    :qualifiedByDomain      <http://purl.org/NET/c4dm/event.owl#Event> ;
+    :qualifiedBy      <http://purl.org/NET/c4dm/event.owl#Event> .
+
+local:includesEventConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "includes event" ;
+    vitro:displayRankAnnot 2;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:inEventSeriesContext a :ConfigContext ;
+    :hasConfiguration local:inEventSeriesConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000051> ;
+    :qualifiedByDomain      <http://purl.org/NET/c4dm/event.owl#Event> ;
+    :qualifiedBy      <http://purl.org/NET/c4dm/event.owl#EventSeries> .
+
+local:includesEventConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "in event series" ;
+    vitro:displayRankAnnot 3;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+

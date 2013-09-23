@@ -8,7 +8,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
 
 public class AddReviewerRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {		
 	
-    private static String OBJECT_VCLASS_URI = "http://vivoweb.org/ontology/core#InformationResource";
+    private static String OBJECT_VCLASS_URI = "http://purl.org/ontology/bibo/Document";
     
 	@Override
 	String getTemplate() { return "addReviewerRoleToPerson.ftl"; }
@@ -16,11 +16,11 @@ public class AddReviewerRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
     //The default activityToRolePredicate and roleToActivityPredicates are 
 	//correct for this subclass so they don't need to be overwritten
 
-	@Override
+/*	@Override
 	public String getRoleToActivityPredicate(VitroRequest vreq) {
-		return "<http://vivoweb.org/ontology/core#forInformationResource>";
+		return "<http://purl.obolibrary.org/obo/BFO_0000054>";
 	}
-	
+*/	
 	//role type will always be set based on particular form
 	@Override
 	public String getRoleType() {

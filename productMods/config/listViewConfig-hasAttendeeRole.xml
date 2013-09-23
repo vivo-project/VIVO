@@ -28,7 +28,7 @@
                 
                 OPTIONAL { ?role rdfs:label ?roleLabel }
                 
-                OPTIONAL {  ?role vivo:roleRealizedIn ?event1 
+                OPTIONAL {  ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 
                             LET (?event1Name := afn:localname(?event1)) 
                         
                             OPTIONAL { ?event1 rdfs:label ?event1Label }
@@ -37,18 +37,18 @@
                                        OPTIONAL { ?event2 rdfs:label ?event2Label }
                                        
                                        { 
-                                           ?event1 vivo:eventWithin ?event2 
+                                           ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event2 
                                        }  UNION {                                                                                                              
-                                           ?event2 vivo:includesEvent ?event1 
+                                           ?event2 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 
                                        }
                             }
                             OPTIONAL {
                                        { 
-                                            ?event1 vivo:eventWithin ?event3 .
-                                            ?event3 vivo:eventWithin ?event2 
+                                            ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event3 .
+                                            ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event2 
                                        }  UNION {   
-                                            ?event2 vivo:includesEvent ?event3 .                                                                                                          
-                                            ?event3 vivo:includesEvent ?event1 
+                                            ?event2 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event3 .                                                                                                          
+                                            ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 
                                            
                                        }
                                        OPTIONAL { ?event2 rdfs:label ?event2Label }
@@ -59,18 +59,18 @@
                                        OPTIONAL { ?series rdfs:label ?seriesLabel }
                                        
                                        { 
-                                           ?event1 vivo:inEventWithin ?series
+                                           ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series
                                        }  UNION {                                                                                                              
-                                           ?series vivo:seriesForEvent ?event1 
+                                           ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 
                                        }
                             }
                             OPTIONAL {
                                        { 
-                                           ?event1 vivo:eventWithin ?event3 .
-                                           ?event3 vivo:inEventSeries ?series 
+                                           ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event3 .
+                                           ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series 
                                        }  UNION {                                                                                                              
-                                           ?event3 vivo:includesEvent ?event1 .
-                                           ?series vivo:seriesForEvent ?event3 
+                                           ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 .
+                                           ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event3 
                                        }
                                        OPTIONAL { ?series rdfs:label ?seriesLabel }
                             }
@@ -112,19 +112,22 @@
         
         CONSTRUCT {
             ?subject ?property ?role .
-            ?role vivo:roleRealizedIn ?event1 .
+            ?role a ?objectType .
+            ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
             ?event1 vitro:mostSpecificType ?subclass .
             ?subclass rdfs:subClassOf event:Event .
             ?subclass owl:equivalentClass event:Event .
         } WHERE {
             { 
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?event1 .
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?event1 vitro:mostSpecificType ?subclass .
                 ?subclass rdfs:subClassOf event:Event 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?event1 .
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?event1 vitro:mostSpecificType ?subclass .
                 ?subclass owl:equivalentClass event:Event 
             }   
@@ -136,17 +139,21 @@
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
         CONSTRUCT { 
             ?subject ?property ?role .
+            ?role a ?objectType .
             ?role ?roleProperty ?roleValue . 
             ?event1 rdfs:label ?event1Label 
         } WHERE {
             {
-                ?subject ?property ?role 
+                ?subject ?property ?role .
+                ?role a ?objectType .
             } UNION {
                 ?subject ?property ?role .
+                ?role a ?objectType .
                 ?role ?roleProperty ?roleValue 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?event1 . 
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 . 
                 ?event1 rdfs:label ?event1Label 
             }
         } 
@@ -160,33 +167,38 @@
         
         CONSTRUCT {
             ?subject ?property ?role .
+            ?role a ?objectType .
             ?event2 a event:Event .
-            ?event1 vivo:eventWithin ?event2 .
-            ?event2 vivo:includesEvent ?event1 .
+            ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event2 .
+            ?event2 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 .
             ?event2 rdfs:label ?event2Label
         } WHERE {
         
             {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?event1 .
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?event2 a event:Event .
-                ?event1 vivo:eventWithin ?event2 
+                ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event2 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?event1 .
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?event2 a event:Event .
-                ?event1 vivo:eventWithin ?event2 .
+                ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event2 .
                 ?event2 rdfs:label ?event2Label
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?event1 .
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?event2 a event:Event .
-                ?event2 vivo:includesEvent ?event1 
+                ?event2 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?event1 .
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?event2 a event:Event .
-                ?event2 vivo:includesEvent ?event1 .
+                ?event2 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 .
                 ?event2 rdfs:label ?event2Label
             }
         }        
@@ -200,38 +212,43 @@
         
         CONSTRUCT {
             ?subject ?property ?role .
-            ?event3 vivo:eventWithin ?event2 .
-            ?event2 vivo:includesEvent ?event3 .
+            ?role a ?objectType .
+            ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event2 .
+            ?event2 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event3 .
             ?event2 a event:Event .
-            ?event1 vivo:eventWithin ?event3 .
-            ?event3 vivo:includesEvent ?event1 .
+            ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event3 .
+            ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 .
             ?event2 rdfs:label ?event2Label 
         } WHERE {
             {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?event1 .
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?event2 a event:Event .
-                ?event1 vivo:eventWithin ?event3 .
-                ?event3 vivo:eventWithin ?event2 
+                ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event3 .
+                ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event2 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?event1 .
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?event2 a event:Event .
-                ?event1 vivo:eventWithin ?event3 .
-                ?event3 vivo:eventWithin ?event2 .
+                ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event3 .
+                ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event2 .
                 ?event2 rdfs:label ?event2Label
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?event1 .
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?event2 a event:Event .
-                ?event2 vivo:includesEvent ?event3 . 
-                ?event3 vivo:includesEvent ?event1 
+                ?event2 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event3 . 
+                ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?event1 .
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?event2 a event:Event .
-                ?event2 vivo:includesEvent ?event3 . 
-                ?event3 vivo:includesEvent ?event1 .
+                ?event2 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event3 . 
+                ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 .
                 ?event2 rdfs:label ?event2Label
             }
         }        
@@ -245,33 +262,38 @@
         
         CONSTRUCT {
             ?subject ?property ?role .
+            ?role a ?objectType .
             ?series a vivo:EventSeries .
-            ?event1 vivo:inEventSeries ?series .
-            ?series vivo:seriesForEvent ?event1 .
+            ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series .
+            ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 .
             ?series rdfs:label ?seriesLabel
         } WHERE {
         
             {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?event1 .
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?series a vivo:EventSeries .
-                ?event1 vivo:inEventSeries ?series 
+                ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?event1 .
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?series a vivo:EventSeries .
-                ?event1 vivo:inEventSeries ?series .
+                ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series .
                 ?series rdfs:label ?seriesLabel
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?event1 .
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?series a vivo:EventSeries .
-                ?series vivo:seriesForEvent ?event1 
+                ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?event1 .
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?series a vivo:EventSeries .
-                ?series vivo:seriesForEvent ?event1 .
+                ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 .
                 ?series rdfs:label ?seriesLabel
             }
         }        
@@ -284,38 +306,43 @@
         
         CONSTRUCT {
             ?subject ?property ?role .
-            ?workshop vivo:inEventSeries ?series .
-            ?series vivo:seriesForEvent ?event3 .
+            ?role a ?objectType .
+            ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series .
+            ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event3 .
             ?series a vivo:EventSeries .
-            ?event1 vivo:eventWithin ?event3 .
-            ?event3 vivo:includesEvent ?event1 .
+            ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event3 .
+            ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 .
             ?series rdfs:label ?seriesLabel
         } WHERE {
             {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?event1 .
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?series a vivo:EventSeries .
-                ?event1 vivo:eventWithin ?event3 .
-                ?event3 vivo:inEventSeries ?series 
+                ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event3 .
+                ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?event1 .
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?series a vivo:EventSeries .
-                ?event1 vivo:eventWithin ?event3 .
-                ?event3 vivo:inEventSeries ?series .
+                ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event3 .
+                ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series .
                 ?series rdfs:label ?seriesLabel
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?event1 .
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?series a vivo:EventSeries .
-                ?series vivo:seriesForEvent ?event3 . 
-                ?workshop vivo:includesEvent ?event1 
+                ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event3 . 
+                ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?event1 .
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?series a vivo:EventSeries .
-                ?series vivo:seriesForEvent ?event3 . 
-                ?event3 vivo:includesEvent ?event1 .
+                ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event3 . 
+                ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 .
                 ?series rdfs:label ?seriesLabel
             }
         }        
@@ -325,11 +352,13 @@
         PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;   
         CONSTRUCT { 
             ?subject ?property ?role .  
+            ?role a ?objectType .
             ?role vivo:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval vivo:start ?dateTimeStartValue .
             ?dateTimeStartValue vivo:dateTime ?dateTimeStart 
         } WHERE {
             ?subject ?property ?role .  
+            ?role a ?objectType .
             ?role vivo:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval vivo:start ?dateTimeStartValue .
             ?dateTimeStartValue vivo:dateTime ?dateTimeStart 
@@ -340,11 +369,13 @@
         PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;   
         CONSTRUCT { 
             ?subject ?property ?role .  
+            ?role a ?objectType .
             ?role vivo:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval vivo:end ?dateTimeEndValue .
             ?dateTimeEndValue vivo:dateTime ?dateTimeEnd 
         } WHERE {
             ?subject ?property ?role .  
+            ?role a ?objectType .
             ?role vivo:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval vivo:end ?dateTimeEndValue .
             ?dateTimeEndValue vivo:dateTime ?dateTimeEnd 

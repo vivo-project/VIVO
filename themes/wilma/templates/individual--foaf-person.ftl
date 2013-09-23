@@ -66,7 +66,7 @@
                         <@p.addLinkWithLabel title editable />
                         <#list title.statements as statement>
                             <span class="display-title">${statement.value}</span>
-                            <@p.editingLinks "${title.name}" statement editable />
+                            <@p.editingLinks "${title.name}" "" statement editable />
                         </#list>
                     </#if>
                     <#-- If preferredTitle is unpopulated, display mostSpecificTypes -->

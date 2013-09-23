@@ -608,9 +608,10 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 		if(rangeUri.equals(getPrincipalInvestigatorURI())) {
 			return getVivoOntologyCoreNamespace() + "PrincipalInvestigatorRole";
 		}
-		else if(predicateUri.equals(getCoPrincipalInvestigatorURI())) {
+		else if(rangeUri.equals(getCoPrincipalInvestigatorURI())) {
 			return getVivoOntologyCoreNamespace() + "CoPrincipalInvestigatorRole";
-		} else {
+		} 
+		else {
 			return getVivoOntologyCoreNamespace() + "InvestigatorRole";
 		}
 	}

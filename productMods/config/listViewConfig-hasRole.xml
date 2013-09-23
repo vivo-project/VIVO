@@ -60,7 +60,6 @@
                                   ?dateTimeEndValue core:dateTime ?dateTimeEnd 
                        }
             }
-      #      NOT EXISTS { ?role core:hideFromDisplay ?hideThis }  
             FILTER ( bound(?activity) &amp;&amp; ?objectType = ?roleSubclass )
         } ORDER BY <collated>?subclass</collated> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityLabel ?activityName
     </query-select>

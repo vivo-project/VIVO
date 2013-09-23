@@ -22,7 +22,7 @@ roleExamples-->
 <#assign typeSelectorLabel = "${i18n().reviewer_of}" />
 <#assign genericLabel = "${i18n().item_capitalized}" />
 
-<#assign acTypes = "{activity: 'http://vivoweb.org/ontology/core#InformationResource'}" />
+<#assign acTypes = "{activity: 'http://purl.org/ontology/bibo/Document'}" />
 
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">

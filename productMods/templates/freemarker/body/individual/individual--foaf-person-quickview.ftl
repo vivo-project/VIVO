@@ -66,7 +66,7 @@
                             <div id="titleContainer"><span class="display-title-not-editable">${statement.value}</span></div>
                         <#else>
                             <span class="display-title-editable">${statement.value}</span>
-                            <@p.editingLinks "${title.name}" statement editable />
+                            <@p.editingLinks "${title.name}" "" statement editable />
                         </#if>
                     </#list>
                 </#if>
