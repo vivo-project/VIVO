@@ -1117,6 +1117,7 @@ there is a measurement process p that has specified output m, a measurement datu
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0002350">
         <rdfs:label xml:lang="en">member of</rdfs:label>
+        <owl:inverseOf rdf:resource="http://purl.obolibrary.org/obo/RO_0002351"/>
     </owl:ObjectProperty>
     
 
@@ -1125,8 +1126,6 @@ there is a measurement process p that has specified output m, a measurement datu
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0002351">
         <rdfs:label xml:lang="en">has_member</rdfs:label>
-        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     </owl:ObjectProperty>
     
 

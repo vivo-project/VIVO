@@ -3,7 +3,7 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#Thing>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 CONSTRUCT {
-    ?advisee <ihttp://purl.obolibrary.org/obo/RO_0000053> _:AdviseeRole .
+    ?advisee <http://purl.obolibrary.org/obo/RO_0000053> _:AdviseeRole .
     _:AdviseeRole <http://purl.obolibrary.org/obo/RO_0000052> ?advisee .
     _:AdviseeRole a vivo:AdviseeRole .
     ?advisor <http://purl.obolibrary.org/obo/RO_0000053> _:AdvisorRole .

@@ -3,9 +3,6 @@ PREFIX owl:   <http://www.w3.org/2002/07/owl#>
 PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 ASK {
-    graph <http://vitro.mannlib.cornell.edu/default/vitro-kb-applicationMetadata> {
        <http://vitro.mannlib.cornell.edu/default/vitro-kb-2> vitro:updatedToOntology ?u .
-       ?u vitro:updatedOntology <http://vivoweb.org/ontology/core> .
        ?u vitro:toOntologyVersion "1.6" .
-    }
 }
