@@ -34,6 +34,7 @@ import com.hp.hpl.jena.vocabulary.XSD;
 
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.BaseEditSubmissionPreprocessorVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
@@ -78,17 +79,18 @@ public class AddAssociatedConceptsPreprocessor extends
 
 	// Will be editing the edit configuration as well as edit submission here
 
-	public AddAssociatedConceptsPreprocessor(EditConfigurationVTwo editConfig, OntModel ontModel, WebappDaoFactory wadf) {
+	public AddAssociatedConceptsPreprocessor(EditConfigurationVTwo editConfig) {
 		super(editConfig);
-		this.ontModel = ontModel;
-		this.wdf = wadf;
 		this.labelVarToUriVarHash = new HashMap<String, String>();
 		//Saves values of concept type uris
 		this.conceptSemanticTypeURIVarToValueMap = new HashMap<String, List<String>>();
 	}
 
-	public void preprocess(MultiValueEditSubmission inputSubmission) {
+	public void preprocess(MultiValueEditSubmission inputSubmission, VitroRequest vreq) {
 		submission = inputSubmission;
+		this.wdf = vreq.getWebappDaoFactory();
+		this.ontModel = ModelAccess.on(vreq).getJenaOntModel();
+		//Set the models that we need here
 		// Get the input elements for concept node and concept label as well
 		// as vocab uri (which is based on thge
 		// For query parameters, check whether CUI

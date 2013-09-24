@@ -50,7 +50,7 @@ public class ConceptSemanticTypesPreprocessor implements ModelChangePreprocessor
 	@Override
 	public void preprocess(Model retractionsModel, Model additionsModel,
 			HttpServletRequest request) {
-		VitroRequest vreq = new VitroRequest(vreq);
+		VitroRequest vreq = new VitroRequest(request);
 		//Run a construct query against the additions model
 		String prefixes = "PREFIX rdfs:<" + RDFS.getURI() + "> " + 
 		"PREFIX owl:<http://www.w3.org/2002/07/owl#> " + 
