@@ -67,7 +67,6 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		initBasics(editConfiguration, vreq);
 		initPropertyParameters(vreq, session, editConfiguration);
 		initObjectPropForm(editConfiguration, vreq);
-
 		editConfiguration.setTemplate(template);
 
 		setVarNames(editConfiguration);
@@ -97,10 +96,10 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		setTemplate(editConfiguration, vreq);
 		// No validators required here
 		// Add preprocessors
+		//Passing from servlet context for now but will have to see if there's a way to pass vreq
 		addPreprocessors(editConfiguration, 
-				ModelAccess.on(vreq).getJenaOntModel(), 
-				ModelAccess.on(vreq).getOntModelSelector().getTBoxModel(),
-				vreq.getWebappDaoFactory());
+				ModelAccess.on(session.getServletContext()).getJenaOntModel(), 
+				ModelAccess.on(session.getServletContext()).getWebappDaoFactory());
 		// Adding additional data, specifically edit mode
 		addFormSpecificData(editConfiguration, vreq);
 		// One override for basic functionality, changing url pattern
@@ -361,7 +360,6 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	
    private void addPreprocessors(EditConfigurationVTwo editConfiguration, 
 		   OntModel ontModel, 
-		   OntModel modelChangeModel,
 		   WebappDaoFactory wdf) {
 	  //An Edit submission preprocessor for enabling addition of multiple terms for a single search
 	   //TODO: Check if this is the appropriate way of getting model
@@ -370,8 +368,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	   
 	   editConfiguration.addEditSubmissionPreprocessor(
 			   new AddAssociatedConceptsPreprocessor(editConfiguration, ontModel, wdf));
-	   editConfiguration.addModelChangePreprocessor(new ConceptSemanticTypesPreprocessor(
-			   modelChangeModel));
+	   editConfiguration.addModelChangePreprocessor(new ConceptSemanticTypesPreprocessor());
 	  
 	}
      

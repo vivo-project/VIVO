@@ -269,20 +269,24 @@ public class LCSHService implements ExternalConceptService {
 		String lang = "";
 		List<String> literalValues = new ArrayList<String>();
 		for (SKOSLiteral literal : skosLiterals) {
-			if (!literal.isTyped()) {
-				// if it has language
-				SKOSUntypedLiteral untypedLiteral = literal
-						.getAsSKOSUntypedLiteral();
-				if (untypedLiteral.hasLang()) {
-					lang = untypedLiteral.getLang();
-				} else {
-					lang = "";
+			if(literal != null) {
+				if (!literal.isTyped()) {
+					// if it has language
+					SKOSUntypedLiteral untypedLiteral = literal
+							.getAsSKOSUntypedLiteral();
+					if (untypedLiteral.hasLang()) {
+						lang = untypedLiteral.getLang();
+					} else {
+						lang = "";
+					}
 				}
-			}
-			// log.debug("literal: "+ literal.getLiteral());
-			if (lang.equals("en")) {
-				log.debug("literal value: " + literal.getLiteral());
-				literalValues.add(literal.getLiteral());
+				// log.debug("literal: "+ literal.getLiteral());
+				if (lang.equals("en")) {
+					log.debug("literal value: " + literal.getLiteral());
+					literalValues.add(literal.getLiteral());
+				}
+			} else {
+				log.debug("Literal returned was null so was ignored");
 			}
 		}
 		return literalValues;

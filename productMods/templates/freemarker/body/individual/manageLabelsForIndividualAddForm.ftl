@@ -8,6 +8,12 @@
 	            <label for="firstName">${i18n().first_name} ${requiredHint}</label>
 	            <input size="30"  type="text" id="firstName" name="firstName" value="${firstNameValue}" />
 	        </p>
+			<#--TODO: With ISF changes, add middle name input-->
+	
+			<!--p-->
+	            <!--label for="middleName">${i18n().middle_name} ${requiredHint}</label>
+	            <input size="30"  type="text" id="middleName" name="middleName" value="${middleNameValue}" />
+	        </p-->
 	
 	        <p>
 	            <label for="lastName">${i18n().last_name} ${requiredHint}</label>

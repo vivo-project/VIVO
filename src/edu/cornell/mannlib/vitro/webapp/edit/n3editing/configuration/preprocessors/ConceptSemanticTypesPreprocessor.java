@@ -27,6 +27,8 @@ import com.hp.hpl.jena.shared.Lock;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
+import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.DatasetWrapper;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.DatasetWrapperFactory;
@@ -40,16 +42,15 @@ public class ConceptSemanticTypesPreprocessor implements ModelChangePreprocessor
 	private static String SKOSConceptType = "http://www.w3.org/2004/02/skos/core#Concept";	
 	private Log log = LogFactory.getLog(ConceptSemanticTypesPreprocessor.class);
 
-	private OntModel toUpdateModel = null;
 	
 	//Custom constructor
-	public ConceptSemanticTypesPreprocessor(OntModel updateModel) {
-		this.toUpdateModel = updateModel;
+	public ConceptSemanticTypesPreprocessor() {
 	}
 	
 	@Override
 	public void preprocess(Model retractionsModel, Model additionsModel,
 			HttpServletRequest request) {
+		VitroRequest vreq = new VitroRequest(vreq);
 		//Run a construct query against the additions model
 		String prefixes = "PREFIX rdfs:<" + RDFS.getURI() + "> " + 
 		"PREFIX owl:<http://www.w3.org/2002/07/owl#> " + 
@@ -99,6 +100,7 @@ public class ConceptSemanticTypesPreprocessor implements ModelChangePreprocessor
         }
         
         //Add constructed model to the designated update model
+        OntModel toUpdateModel = ModelAccess.on(vreq).getOntModelSelector().getTBoxModel();
         toUpdateModel.enterCriticalSection(Lock.WRITE);
         try {
         	toUpdateModel.add(constructedModel);

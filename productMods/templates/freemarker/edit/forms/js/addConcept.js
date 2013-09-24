@@ -321,8 +321,11 @@ var addConceptForm = {
     	this.externalConceptLabel.val(conceptLabels);
     	this.externalConceptSource.val(conceptSources);
     	this.externalConceptSemanticTypeLabel.val(conceptSemanticTypes);
-    	this.externalConceptBroaderUris.val(conceptBroaderUris);
-    	this.externalConceptNarrowerUris.val(conceptNarrowerUris);
+    	//Using JSON here because there may be multiple broader and narrower uris per concept
+    	//and using a regular string representation does not differentiate between which set of uris
+    	//would belong to which concept
+    	this.externalConceptBroaderUris.val(JSON.stringify(conceptBroaderUris));
+    	this.externalConceptNarrowerUris.val(JSON.stringify(conceptNarrowerUris));
     	
     	return true;
     }, 

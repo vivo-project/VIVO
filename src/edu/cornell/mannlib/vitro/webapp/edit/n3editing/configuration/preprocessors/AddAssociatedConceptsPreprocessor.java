@@ -9,6 +9,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.json.JSON;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -140,26 +145,55 @@ public class AddAssociatedConceptsPreprocessor extends
 			//The original code for submission wouldn't put in a key if the values were null or size 0
 			urisFromForm.remove("conceptNarrowerURI");
 		}
+		//Set the copied values to this value as well so when if there are multiple
+		//concepts, the inputs get copied correctly for each of them
+		this.conceptNarrowerURIValues = existingNarrowerURIs;
 		if(existingBroaderURIs.size() > 0) {
 			urisFromForm.put("conceptBroaderURI", existingBroaderURIs);
 		} else {
 			urisFromForm.remove("conceptBroaderURI");
 		}
+		this.conceptBroaderURIValues = existingBroaderURIs;
 	}
 	
 	//get the broader and narrower uri values that already exist in the system from the ones returned in the search
 	//and use those to populate relationships between the concept and other concepts already in the system
 	//We should also make sure to use bidirectional n3 so the graph has both sets of relationships represented
 	private List<String> getConceptNarrowerURIValues() {
-		Map<String, List<String>> urisFromForm = submission.getUrisFromForm();
-		List<String> narrowerURIs =  urisFromForm.get("conceptNarrowerURI");
-		return narrowerURIs;
+		return this.getJSONFormURIValues("conceptNarrowerURI");
 	}
 
 	private List<String> getConceptBroaderURIValues() {
+		return this.getJSONFormURIValues("conceptBroaderURI");
+	}
+	
+	private List<String> getJSONFormURIValues(String varName) {
 		Map<String, List<String>> urisFromForm = submission.getUrisFromForm();
-		List<String> broaderURIs =  urisFromForm.get("conceptBroaderURI");
-		return broaderURIs;
+		List<String> uris =  urisFromForm.get(varName);
+		//This should be a JSON object stringified
+		if(uris.size() > 0) {
+			String jsonString = uris.get(0);
+			if(jsonString != null && !jsonString.isEmpty()) {
+				JSON json = JSONSerializer.toJSON(jsonString);
+				//This should be an array
+				if(json.isArray()) {
+					JSONArray jsonArray = (JSONArray) JSONSerializer.toJSON(jsonString);
+					//Convert to list of strings
+					return convertJsonArrayToList(jsonArray);
+				}
+			}
+		}
+		return uris;
+	}
+
+	private List<String> convertJsonArrayToList(JSONArray jsonArray) {
+		List<String> stringList = new ArrayList<String>();
+		int len = jsonArray.size();
+		int i = 0;
+		for(i = 0; i < len; i++) {
+			stringList.add(jsonArray.getString(i));
+		}
+		return stringList;
 	}
 
 	private List<String> getExistingBroaderURIs(List<String> broaderURIs) {

@@ -101,9 +101,8 @@
     <form id="addConceptForm" class="customForm" action="${submitUrl}">
 		<#assign checkedSource = false />
 	<h4 class="services">${i18n().external_vocabulary_services}</h4>
-    <#list sources?keys?sort as sourceUri>
-    		<#assign thisSource = sources[sourceUri]/>
-        <input type="radio"  name="source" value="${sourceUri}" role="radio" <#if checkedSource = false><#assign checkedSource = true/>checked="checked"</#if>>
+    <#list sources?values?sort_by("label") as thisSource>
+        <input type="radio"  name="source" value="${thisSource.url}" role="radio" <#if checkedSource = false><#assign checkedSource = true/>checked="checked"</#if>>
         <label class="inline" for="${thisSource.label}"> <a href="${thisSource.url}">${thisSource.label}</a> &nbsp;(${thisSource.description})</label>
         <br />
     </#list>
@@ -180,6 +179,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarke
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/addConcept.css" />')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>')}
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/json2.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/addConcept.js"></script>')}
