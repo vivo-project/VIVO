@@ -21,7 +21,23 @@ require '_common'
 #
 # Get the VIVO files and the Vitro files, and remove the .git directories.
 #
-def export_files(vivo_path, vitro_path, tag, export_dir)
+def export_files(vivo_path, vitro_path, tag, branch, export_dir)
+	Dir.chdir(vivo_path) do |path|
+		cmds = ["git checkout #{branch}", 
+				"git pull",
+				]
+		cmds.delete_at(1) unless is_remote_branch?(branch)
+		approve_and_execute(cmds, "in #{path}")
+	end
+	
+	Dir.chdir(vitro_path) do |path|
+		cmds = ["git checkout #{branch}", 
+				"git pull",
+				]
+		cmds.delete_at(1) unless is_remote_branch?(branch)
+		approve_and_execute(cmds, "in #{path}")
+	end
+	
 	approve_and_execute([
 			"rm -Rf #{File.expand_path("..", export_dir)}",
 			"mkdir -pv #{export_dir}",
@@ -29,6 +45,10 @@ def export_files(vivo_path, vitro_path, tag, export_dir)
 			"mkdir -pv #{export_dir}/vitro-core",
 			"cp -R #{vitro_path}/* #{export_dir}/vitro-core",
 			])
+end
+
+def is_remote_branch?(branch)
+	! `git branch --list -a origin/#{branch}`.strip.empty?
 end
 
 #
@@ -39,6 +59,7 @@ end
 
 begin
 	tag = Settings.tag_name
+	branch = Settings.branch_name
 	vivo_path = Settings.vivo_path
 	vitro_path = Settings.vitro_path
 	export_dir = Settings.export_dir
@@ -47,22 +68,14 @@ begin
 	raise BadState.new("Tag #{tag} doesn't exist in Vitro.") unless tag_exists?(vitro_path, tag) 
 
 	if File.directory?(export_dir) 
-		p = "OK to overwrite export area at #{export_dir} ? (y/n)"
+		p = "OK to overwrite export area at #{export_dir} ?"
 	else
-		p = "OK to create export area at #{export_dir} ? (y/n)"
+		p = "OK to create export area at #{export_dir} ?"
 	end
 	
-	puts
-	yn = prompt(p)
-	if yn.downcase == 'y'
-		puts
+	get_permission_and_go(p) do
 		puts "Building export area"
-		export_files(vivo_path, vitro_path, tag, export_dir)
-		puts
-	else
-		puts
-		puts "OK - forget it."
-		puts
+		export_files(vivo_path, vitro_path, tag, branch, export_dir)
 	end
 rescue BadState
 	puts "#{$!.message} - Aborting."

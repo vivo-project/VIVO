@@ -13,7 +13,7 @@
 <#--Retrieve variables needed-->
 <#assign url = lvf.getFormFieldValue(editSubmission, editConfiguration, "url")/>
 <#assign urlTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "urlType")/>
-<#assign anchor = lvf.getFormFieldValue(editSubmission, editConfiguration, "anchor") />
+<#assign label = lvf.getFormFieldValue(editSubmission, editConfiguration, "label") />
 <#assign newRank = editConfiguration.pageData.newRank!"" />
 
 <#if url?has_content>
@@ -66,8 +66,8 @@
     <label for="url">URL ${requiredHint}</label>
     <input  size="70"  type="text" id="url" name="url" value="${url}" role="input" />
    
-    <label for="anchor">${i18n().webpage_name}</label>
-    <input  size="70"  type="text" id="anchor" name="anchor" value="${anchor}" role="input" />
+    <label for="label">${i18n().webpage_name}</label>
+    <input  size="70"  type="text" id="label" name="label" value="${label}" role="input" />
 
     <#if editMode="add">
         <input type="hidden" name="rank" value="${newRank}" />

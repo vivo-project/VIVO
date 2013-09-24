@@ -47,6 +47,6 @@
         </#if>
     </#local>
     
-    ${linkedIndividual} ${awardOrAdminBy} ${dateTime!} ${statement.subclass!}
+    ${linkedIndividual} ${awardOrAdminBy} ${dateTime!} 
 </#if>
 </#macro>

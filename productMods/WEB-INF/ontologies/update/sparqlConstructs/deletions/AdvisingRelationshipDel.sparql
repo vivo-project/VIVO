@@ -1,0 +1,19 @@
+PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#Thing> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+CONSTRUCT {
+    ?advisee vivo:adviseeIn ?advisingRelationship .
+    ?advisingRelationship vivo:advisee ?advisee .
+    ?advisor vivo:advisorIn ?advisingRelationship .
+    ?advisingRelationship vivo:advisor ?advisor 
+} WHERE {
+    ?advisee vivo:adviseeIn ?advisingRelationship .
+    OPTIONAL {
+        ?advisingRelationship vivo:advisee ?advisee .
+    }
+    ?advisor vivo:advisorIn ?advisingRelationship .
+    OPTIONAL {
+         ?advisingRelationship vivo:advisor ?advisor 
+    }
+}

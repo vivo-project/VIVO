@@ -25,11 +25,12 @@
                         
             WHERE {
                         
-                ?subject ?property ?role  
+                ?subject ?property ?role .
+                ?role a vivo:PresenterRole 
                 
                 OPTIONAL { ?role rdfs:label ?roleLabel }
                 
-                OPTIONAL {  ?role vivo:roleRealizedIn ?presentation 
+                OPTIONAL {  ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation 
                             LET (?presentationName := afn:localname(?presentation)) 
                         
                             OPTIONAL { ?presentation rdfs:label ?presentationLabel }
@@ -38,18 +39,18 @@
                                        OPTIONAL { ?conference rdfs:label ?conferenceLabel }
                                        
                                        { 
-                                           ?presentation vivo:eventWithin ?conference 
+                                           ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?conference 
                                        }  UNION {                                                                                                              
-                                           ?conference vivo:includesEvent ?presentation 
+                                           ?conference &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation 
                                        }
                             }
                             OPTIONAL {
                                        { 
-                                           ?presentation vivo:eventWithin ?workshop .
-                                           ?workshop vivo:eventWithin ?conference 
+                                           ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?workshop .
+                                           ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?conference 
                                        }  UNION {                                                                                                              
-                                           ?workshop vivo:includesEvent ?presentation .
-                                           ?conference vivo:includesEvent ?workshop 
+                                           ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
+                                           ?conference &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?workshop 
                                        }
                                        OPTIONAL { ?conference rdfs:label ?conferenceLabel }
                             }
@@ -66,10 +67,10 @@
                             }
                             OPTIONAL {
                                        { 
-                                           ?presentation vivo:eventWithin ?workshop .
+                                           ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?workshop .
                                            ?workshop vivo:inEventSeries ?series 
                                        }  UNION {                                                                                                              
-                                           ?workshop vivo:includesEvent ?presentation .
+                                           ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
                                            ?series vivo:seriesForEvent ?workshop 
                                        }
                                        OPTIONAL { ?series rdfs:label ?seriesLabel }
@@ -108,19 +109,22 @@
         
         CONSTRUCT {
             ?subject ?property ?role .
-            ?role vivo:roleRealizedIn ?presentation .
+            ?role a vivo:PresenterRole .
+            ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
             ?presentation vitro:mostSpecificType ?subclass .
             ?subclass rdfs:subClassOf vivo:Presentation .
             ?subclass owl:equivalentClass vivo:Presentation .
         } WHERE {
             { 
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?presentation .
+                ?role a vivo:PresenterRole .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?presentation vitro:mostSpecificType ?subclass .
                 ?subclass rdfs:subClassOf vivo:Presentation 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?presentation .
+                ?role a vivo:PresenterRole .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?presentation vitro:mostSpecificType ?subclass .
                 ?subclass owl:equivalentClass vivo:Presentation 
             }   
@@ -132,17 +136,21 @@
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
         CONSTRUCT { 
             ?subject ?property ?role .
+            ?role a vivo:PresenterRole .
             ?role ?roleProperty ?roleValue . 
             ?presentation rdfs:label ?presentationLabel 
         } WHERE {
             {
-                ?subject ?property ?role 
+                ?subject ?property ?role .
+                ?role a vivo:PresenterRole 
             } UNION {
                 ?subject ?property ?role .
+                ?role a vivo:PresenterRole .
                 ?role ?roleProperty ?roleValue 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?presentation . 
+                ?role a vivo:PresenterRole .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation . 
                 ?presentation rdfs:label ?presentationLabel 
             }
         } 
@@ -155,33 +163,38 @@
         
         CONSTRUCT {
             ?subject ?property ?role .
+            ?role a vivo:PresenterRole .
             ?conference a bibo:Conference .
-            ?presentation vivo:eventWithin ?conference .
-            ?conference vivo:includesEvent ?presentation .
+            ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?conference .
+            ?conference &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
             ?conference rdfs:label ?conferenceLabel
         } WHERE {
         
             {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?presentation .
+                ?role a vivo:PresenterRole .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?conference a bibo:Conference .
-                ?presentation vivo:eventWithin ?conference 
+                ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?conference 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?presentation .
+                ?role a vivo:PresenterRole .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?conference a bibo:Conference .
-                ?presentation vivo:eventWithin ?conference .
+                ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?conference .
                 ?conference rdfs:label ?conferenceLabel
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?presentation .
+                ?role a vivo:PresenterRole .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?conference a bibo:Conference .
-                ?conference vivo:includesEvent ?presentation 
+                ?conference &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?presentation .
+                ?role a vivo:PresenterRole .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?conference a bibo:Conference .
-                ?conference vivo:includesEvent ?presentation .
+                ?conference &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
                 ?conference rdfs:label ?conferenceLabel
             }
         }        
@@ -194,38 +207,43 @@
         
         CONSTRUCT {
             ?subject ?property ?role .
-            ?workshop vivo:eventWithin ?conference .
-            ?conference vivo:includesEvent ?workshop .
+            ?role a vivo:PresenterRole .
+            ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?conference .
+            ?conference &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?workshop .
             ?conference a bibo:Conference .
-            ?presentation vivo:eventWithin ?workshop .
-            ?workshop vivo:includesEvent ?presentation .
+            ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?workshop .
+            ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
             ?conference rdfs:label ?conferenceLabel 
         } WHERE {
             {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?presentation .
+                ?role a vivo:PresenterRole .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?conference a bibo:Conference .
-                ?presentation vivo:eventWithin ?workshop .
-                ?workshop vivo:eventWithin ?conference 
+                ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?workshop .
+                ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?conference 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?presentation .
+                ?role a vivo:PresenterRole .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?conference a bibo:Conference .
-                ?presentation vivo:eventWithin ?workshop .
-                ?workshop vivo:eventWithin ?conference .
+                ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?workshop .
+                ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?conference .
                 ?conference rdfs:label ?conferenceLabel
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?presentation .
+                ?role a vivo:PresenterRole .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?conference a bibo:Conference .
-                ?conference vivo:includesEvent ?workshop . 
-                ?workshop vivo:includesEvent ?presentation 
+                ?conference &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?workshop . 
+                ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?presentation .
+                ?role a vivo:PresenterRole .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?conference a bibo:Conference .
-                ?conference vivo:includesEvent ?workshop . 
-                ?workshop vivo:includesEvent ?presentation .
+                ?conference &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?workshop . 
+                ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
                 ?conference rdfs:label ?conferenceLabel
             }
         }        
@@ -238,6 +256,7 @@
         
         CONSTRUCT {
             ?subject ?property ?role .
+            ?role a vivo:PresenterRole .
             ?series a vivo:EventSeries .
             ?presentation vivo:inEventSeries ?series .
             ?series vivo:seriesForEvent ?presentation .
@@ -246,23 +265,27 @@
         
             {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?presentation .
+                ?role a vivo:PresenterRole .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?series a vivo:EventSeries .
                 ?presentation vivo:inEventSeries ?series 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?presentation .
+                ?role a vivo:PresenterRole .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?series a vivo:EventSeries .
                 ?presentation vivo:inEventSeries ?series .
                 ?series rdfs:label ?seriesLabel
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?presentation .
+                ?role a vivo:PresenterRole .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?series a vivo:EventSeries .
                 ?series vivo:seriesForEvent ?presentation 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?presentation .
+                ?role a vivo:PresenterRole .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?series a vivo:EventSeries .
                 ?series vivo:seriesForEvent ?presentation .
                 ?series rdfs:label ?seriesLabel
@@ -277,38 +300,43 @@
         
         CONSTRUCT {
             ?subject ?property ?role .
+            ?role a vivo:PresenterRole .
             ?workshop vivo:inEventSeries ?series .
             ?series vivo:seriesForEvent ?workshop .
             ?series a vivo:EventSeries .
-            ?presentation vivo:eventWithin ?workshop .
-            ?workshop vivo:includesEvent ?presentation .
+            ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?workshop .
+            ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
             ?series rdfs:label ?seriesLabel
         } WHERE {
             {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?presentation .
+                ?role a vivo:PresenterRole .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?series a vivo:EventSeries .
-                ?presentation vivo:eventWithin ?workshop .
+                ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?workshop .
                 ?workshop vivo:inEventSeries ?series 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?presentation .
+                ?role a vivo:PresenterRole .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?series a vivo:EventSeries .
-                ?presentation vivo:eventWithin ?workshop .
+                ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?workshop .
                 ?workshop vivo:inEventSeries ?series .
                 ?series rdfs:label ?seriesLabel
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?presentation .
+                ?role a vivo:PresenterRole .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?series a vivo:EventSeries .
                 ?series vivo:seriesForEvent ?workshop . 
-                ?workshop vivo:includesEvent ?presentation 
+                ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation 
             } UNION {
                 ?subject ?property ?role .
-                ?role vivo:roleRealizedIn ?presentation .
+                ?role a vivo:PresenterRole .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?series a vivo:EventSeries .
                 ?series vivo:seriesForEvent ?workshop . 
-                ?workshop vivo:includesEvent ?presentation .
+                ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
                 ?series rdfs:label ?seriesLabel
             }
         }        
@@ -317,12 +345,14 @@
     <query-construct>
         PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;   
         CONSTRUCT { 
-            ?subject ?property ?role .  
+            ?subject ?property ?role .
+            ?role a vivo:PresenterRole .  
             ?role vivo:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval vivo:start ?dateTimeStartValue .
             ?dateTimeStartValue vivo:dateTime ?dateTimeStart 
         } WHERE {
-            ?subject ?property ?role .  
+            ?subject ?property ?role .
+            ?role a vivo:PresenterRole .  
             ?role vivo:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval vivo:start ?dateTimeStartValue .
             ?dateTimeStartValue vivo:dateTime ?dateTimeStart 

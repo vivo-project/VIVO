@@ -24,12 +24,12 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
     final static String awardReceiptClass = vivoCore + "AwardReceipt";
     final static String awardClass = vivoCore + "Award";
     final static String orgClass = "http://xmlns.com/foaf/0.1/Organization";
-    final static String awardReceiptPred = vivoCore + "awardOrHonor";
-    final static String awardForPred = vivoCore + "awardOrHonorFor";
-    final static String receiptPred =vivoCore+"receipt" ;
-    final static String receiptOfPred =vivoCore+"receiptOf" ;
-    final static String awardConferredByPred =vivoCore+"awardConferredBy" ;
-    final static String awardConferredPred =vivoCore+"awardConferred" ;
+    final static String awardReceiptPred = vivoCore + "relatedBy";
+    final static String awardForPred = vivoCore + "relates";
+    final static String receiptPred =vivoCore+"relatedBy" ;
+    final static String receiptOfPred =vivoCore+"relates" ;
+    final static String awardConferredByPred =vivoCore+"assignedBy" ;
+    final static String awardConferredPred =vivoCore+"assigns" ;
     final static String descriptionPred = vivoCore + "description";
     final static String yearAwardedPred = vivoCore + "dateTimeValue";
     final static String awardReceiptToInterval = vivoCore + "dateTimeInterval";
@@ -257,11 +257,13 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
     final static String existingAwardQuery =
         "SELECT ?existingAward WHERE { \n" +
         " ?awardReceipt <" + receiptOfPred + "> ?existingAward . \n" +
+        " ?existingAward a <" + awardClass + "> . \n" +
         "}";
 
     final static String existingOrgQuery  =      
         "SELECT ?existingOrg WHERE { \n" +
         " ?awardReceipt <" + receiptOfPred + "> ?existingAward . \n" +
+        " ?existingAward a <" + awardClass + "> . \n" +
         " ?existingAward<" + awardConferredByPred + "> ?existingOrg . \n" +
         " ?existingOrg <" + awardConferredPred + "> ?existingAward . }";
 
@@ -273,6 +275,7 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
     final static String awardLabelQuery =
         "SELECT ?existingAwardLabel WHERE { \n" +
         " ?awardReceipt <" + receiptOfPred + "> ?existingAward . \n" +
+        " ?existingAward a <" + awardClass + "> . \n" +
         " ?existingAward <" + label + "> ?existingAwardLabel . \n" +
         "}";
 

@@ -11,11 +11,20 @@ import javax.servlet.http.HttpSession;
 
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.vocabulary.XSD;
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.sparql.resultset.ResultSetMem;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.ObjectPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
+import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.PersonHasPublicationValidator;
@@ -37,6 +46,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
     final static String collectionClass = bibo + "Periodical";
     final static String bookClass = bibo + "Book";
+    final static String documentClass = bibo + "Document";
     final static String conferenceClass = bibo + "Conference";
     final static String editorClass = foaf + "Person";
     final static String publisherClass = vivoCore + "Publisher";
@@ -52,7 +62,8 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     final static String dateTimeValueType = vivoCore + "DateTimeValue";
     final static String dateTimeValue = vivoCore + "dateTime";
     final static String dateTimePrecision = vivoCore + "dateTimePrecision";
-    
+    final static String relatesPred = vivoCore + "relates";
+   
     public AddPublicationToPersonGenerator() {}
     
 	@Override
@@ -69,17 +80,29 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         Individual authorshipNode = EditConfigurationUtils.getObjectIndividual(vreq);
         
         //try to get the publication
-        List<ObjectPropertyStatement> stmts = 
-            authorshipNode.getObjectPropertyStatements("http://vivoweb.org/ontology/core#linkedInformationResource");
-        if( stmts == null || stmts.isEmpty() ){
-            return doBadAuthorshipNoPub( vreq );
-        }else if( stmts.size() > 1 ){
-            return doBadAuthorshipMultiplePubs(vreq);
-        }else{ 
-            //skip to publication 
-            EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();
-            editConfiguration.setSkipToUrl(UrlBuilder.getIndividualProfileUrl(stmts.get(0).getObjectURI(), vreq));
-            return editConfiguration;
+        String pubQueryStr = "SELECT ?obj \n" +
+                             "WHERE { <" + authorshipNode.getURI() + "> <" + relatesPred + "> ?obj . \n" +
+                             "    ?obj a <" + documentClass + "> . } \n";
+        Query pubQuery = QueryFactory.create(pubQueryStr);
+        QueryExecution qe = QueryExecutionFactory.create(pubQuery, ModelAccess.on(vreq).getJenaOntModel());
+        try {
+            ResultSetMem rs = new ResultSetMem(qe.execSelect());
+            if(!rs.hasNext()){
+                return doBadAuthorshipNoPub( vreq );
+            }else if( rs.size() > 1 ){
+                return doBadAuthorshipMultiplePubs(vreq);
+            }else{ 
+                //skip to publication 
+                RDFNode objNode = rs.next().get("obj");
+                if (!objNode.isResource() || objNode.isAnon()) {
+                    return doBadAuthorshipNoPub( vreq );
+                }
+                EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();
+                editConfiguration.setSkipToUrl(UrlBuilder.getIndividualProfileUrl(((Resource) objNode).getURI(), vreq));
+                return editConfiguration;
+            }
+        } finally {
+            qe.close();
         }
     }
 
@@ -197,22 +220,22 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     private String getAuthorshipN3() {
         return "@prefix core: <" + vivoCore + "> . " + 
         "?authorshipUri a core:Authorship ;" + 
-        "core:linkedAuthor ?person ." +   
-        "?person core:authorInAuthorship ?authorshipUri .";
+        "core:relates ?person ." +   
+        "?person core:relatedBy ?authorshipUri .";
     }
 
     private String getN3ForNewPub() {
         return "@prefix core: <" + vivoCore + "> ." +
         "?newPublication a ?pubType ." +
         "?newPublication <" + label + "> ?title ." +  
-        "?authorshipUri core:linkedInformationResource ?newPublication ." +
-        "?newPublication core:informationResourceInAuthorship ?authorshipUri .";   
+        "?authorshipUri core:relates ?newPublication ." +
+        "?newPublication core:relatedBy ?authorshipUri .";   
     }
 
     private String getN3ForExistingPub() {
         return "@prefix core: <" + vivoCore + "> ." +
-        "?authorshipUri core:linkedInformationResource ?pubUri ." +
-        "?pubUri core:informationResourceInAuthorship ?authorshipUri .";
+        "?authorshipUri core:relates ?pubUri ." +
+        "?pubUri core:relatedBy ?authorshipUri .";
     }
 
     private String getN3ForNewCollectionNewPub() {
@@ -285,15 +308,24 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
     private String getN3ForNewBookNewEditor() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
-        "?newBook vivo:editor ?newEditor . \n " +
-        "?newEditor vivo:editorOf ?newBook . \n" + 
+        "?newBook vivo:relatedBy ?editorship . \n" +
+        "?editorship vivo:relates ?newBook . \n" +
+        "?newBook <" + label + "> ?book . \n " +
+        "?editorship a vivo:Editorship . \n" +
+        "?editorship vivo:relates ?newEditor . \n" +
+        "?newEditor a <" + editorClass + ">  . \n" +
+        "?newEditor vivo:relatedBy ?editorship . \n" + 
         "?newEditor <" + label + "> ?editor .";
     }
 
     private String getN3ForNewBookEditor() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
-        "?newBook vivo:editor ?editorUri . \n" +
-        "?editorUri vivo:editorOf ?newBook . " ;
+        "?newBook vivo:relatedBy ?editorship . \n" +
+        "?editorship vivo:relates ?newBook . \n" +
+        "?newBook <" + label + "> ?book . \n " +
+        "?editorship a vivo:Editorship . \n" +
+        "?editorship vivo:relates ?editorUri . \n" +
+        "?editorUri vivo:relatedBy ?editorship . "; 
     }
 
     private String getN3ForNewBookNewPublisher() {
@@ -373,30 +405,44 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
     private String getN3ForNewEditor() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
-        "?pubUri vivo:editor ?newEditor . \n" +
+        "?pubUri vivo:relatedBy ?editorship . \n" +
+        "?editorship vivo:relates ?pubUri . \n" +
+        "?editorship a vivo:Editorship . \n" +
+        "?editorship vivo:relates ?newEditor . \n" +
         "?newEditor a <" + editorClass + ">  . \n" +
-        "?newEditor vivo:editorOf ?pubUri . \n" + 
+        "?newEditor vivo:relatedBy ?editorship . \n" + 
         "?newEditor <" + label + "> ?editor .";
     }
 
     private String getN3ForEditor() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
-        "?pubUri vivo:editor ?editorUri . \n" +
-        "?editorUri vivo:editorOf ?pubUri . "; 
+        "?pubUri vivo:relatedBy ?editorship . \n" +
+        "?editorship vivo:relates ?pubUri . \n" +
+        "?editorship a vivo:Editorship . \n" +
+        "?editorship vivo:relates ?editorUri . \n" +
+        "?editorUri vivo:relatedBy ?editorship . "; 
     }
 
     private String getN3ForNewEditorNewPub() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
-        "?newPublication vivo:editor ?newEditor . \n" +
+        "?newPublication vivo:relatedBy ?editorship . \n" +
+        "?editorship vivo:relates ?newPublication . \n" +
+        "?newPublication <" + label + "> ?title ." +
+        "?editorship a vivo:Editorship . \n" +
+        "?editorship vivo:relates ?newEditor . \n" +
         "?newEditor a <" + editorClass + ">  . \n" +
-        "?newEditor vivo:editorOf ?newPublication . \n" + 
+        "?newEditor vivo:relatedBy ?editorship . \n" + 
         "?newEditor <" + label + "> ?editor .";
     }
 
     private String getN3ForEditorNewPub() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
-        "?newPublication vivo:editor ?editorUri . \n" +
-        "?editorUri vivo:editorOf ?newPublication . "; 
+        "?newPublication vivo:relatedBy ?editorship . \n" +
+        "?editorship vivo:relates ?newPublication . \n" +
+        "?newPublication <" + label + "> ?title ." +
+        "?editorship vivo:relates ?editorUri . \n" +
+        "?editorship a vivo:Editorship . \n" +
+        "?editorUri vivo:relatedBy ?editorship . "; 
     }
 
     private String getN3ForNewPublisher() {
@@ -428,13 +474,23 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     }
 
     private String getN3FirstNameAssertion() {
-        return "@prefix foaf: <" + foaf + "> .  \n" +
-        "?newEditor foaf:firstName ?firstName .";
+        return "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+        "?newEditor <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardEditor . \n" +
+        "?vcardEditor <http://purl.obolibrary.org/obo/ARG_2000029>  ?newEditor . \n" +
+        "?vcardEditor a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+        "?vcardEditor vcard:hasName  ?vcardName . \n" +
+        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
+        "?vcardName vcard:givenName ?firstName .";
     }
 
     private String getN3LastNameAssertion() {
-        return "@prefix foaf: <" + foaf + "> .  \n" +
-        "?newEditor foaf:lastName ?lastName .";
+        return "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+        "?newEditor <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardEditor . \n" +
+        "?vcardEditor <http://purl.obolibrary.org/obo/ARG_2000029>  ?newEditor . \n" +
+        "?vcardEditor a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+        "?vcardEditor vcard:hasName  ?vcardName . \n" +
+        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
+        "?vcardName vcard:familyName ?lastName .";
     }
 
     private String getN3ForLocaleAssertion() {
@@ -492,6 +548,9 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         newResources.put("newConference", DEFAULT_NS_TOKEN);
         newResources.put("newEvent", DEFAULT_NS_TOKEN);
         newResources.put("newEditor", DEFAULT_NS_TOKEN);
+        newResources.put("editorship", DEFAULT_NS_TOKEN);
+        newResources.put("vcardEditor", DEFAULT_NS_TOKEN);
+        newResources.put("vcardName", DEFAULT_NS_TOKEN);
         newResources.put("newPublisher", DEFAULT_NS_TOKEN);
         newResources.put("dateTimeNode", DEFAULT_NS_TOKEN);
         return newResources;
@@ -875,8 +934,9 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
         String query = "PREFIX core:<" + vivoCore + "> " + 
         "SELECT ?pubUri WHERE { " + 
-        "<" + subject + "> core:authorInAuthorship ?authorshipUri ." + 
-        "?authorshipUri core:linkedInformationResource ?pubUri . }";
+        "<" + subject + "> core:relatedBy ?authorshipUri . " + 
+        "?authorship a core:Authorship . " +  
+        "?authorshipUri core:relates ?pubUri . }";
         return query;
     }
 

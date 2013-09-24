@@ -8,9 +8,16 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
@@ -19,6 +26,7 @@ import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyComparator;
 import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.PublicationHasAuthorValidator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
@@ -33,6 +41,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.
  * It is intended to always be an add, and never an update. 
  */
 public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator implements EditConfigurationGenerator {
+    public static Log log = LogFactory.getLog(AddAuthorsToInformationResourceGenerator.class);
 
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
@@ -58,6 +67,8 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
         editConfiguration.addNewResource("authorshipUri", DEFAULT_NS_TOKEN);
         editConfiguration.addNewResource("newPerson", DEFAULT_NS_TOKEN);
         editConfiguration.addNewResource("newOrg", DEFAULT_NS_TOKEN);
+        editConfiguration.addNewResource("vcardPerson", DEFAULT_NS_TOKEN);
+        editConfiguration.addNewResource("vcardName", DEFAULT_NS_TOKEN);
         
         //In scope
         setUrisAndLiteralsInScope(editConfiguration, vreq);
@@ -101,8 +112,8 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 	private String getN3NewAuthorship() {
 		return getN3PrefixString() + 
 		"?authorshipUri a core:Authorship ;\n" + 
-        "  core:linkedInformationResource ?infoResource .\n" + 
-        "?infoResource core:informationResourceInAuthorship ?authorshipUri .";
+        "  core:relates ?infoResource .\n" + 
+        "?infoResource core:relatedBy ?authorshipUri .";
 	}
 	
 	private String getN3AuthorshipRank() {
@@ -128,45 +139,63 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 	
 	private String getN3NewPersonFirstName() {
 		return getN3PrefixString() + 
-		"?newPerson foaf:firstName ?firstName .";
+            "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+            "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
+            "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
+            "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+            "?vcardPerson vcard:hasName  ?vcardName . \n" +
+            "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
+            "?vcardName vcard:givenName ?firstName .";
 	}
 	
 	private String getN3NewPersonMiddleName() {
 		return getN3PrefixString() +  
-        "?newPerson core:middleName ?middleName .";
+            "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+            "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
+            "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
+            "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+            "?vcardPerson vcard:hasName  ?vcardName . \n" +
+            "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
+            "?vcardName vcard:middleName ?middleName .";
 	}
 	
 	private String getN3NewPersonLastName() {
 		return getN3PrefixString() + 
-        "?newPerson foaf:lastName ?lastName .";
+            "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+            "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
+            "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
+            "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+            "?vcardPerson vcard:hasName  ?vcardName . \n" +
+            "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
+            "?vcardName vcard:familyName ?lastName .";
 	}
 	
 	private String getN3NewPerson() {
 		return  getN3PrefixString() + 
         "?newPerson a foaf:Person ;\n" + 
         "<" + RDFS.label.getURI() + "> ?label .\n" + 
-        "?authorshipUri core:linkedAuthor ?newPerson .\n" + 
-        "?newPerson core:authorInAuthorship ?authorshipUri . ";
+        "?authorshipUri core:relates ?newPerson .\n" + 
+        "?newPerson core:relatedBy ?authorshipUri . ";
 	}
 	
 	private String getN3ForExistingPerson() {
 		return getN3PrefixString() + 
-		"?authorshipUri core:linkedAuthor ?personUri .\n" + 
-		"?personUri core:authorInAuthorship ?authorshipUri .";
+		"?authorshipUri core:relates ?personUri .\n" + 
+		"?personUri core:relatedBy ?authorshipUri .";
 	}
 	
 	private String getN3NewOrg() {
 		return  getN3PrefixString() + 
         "?newOrg a foaf:Organization ;\n" + 
         "<" + RDFS.label.getURI() + "> ?orgName .\n" + 
-        "?authorshipUri core:linkedAuthor ?newOrg .\n" + 
-        "?newOrg core:authorInAuthorship ?authorshipUri . ";
+        "?authorshipUri core:relates ?newOrg .\n" + 
+        "?newOrg core:relatedBy ?authorshipUri . ";
 	}
 	
 	private String getN3ForExistingOrg() {
 		return getN3PrefixString() + 
-		"?authorshipUri core:linkedAuthor ?orgUri .\n" + 
-		"?orgUri core:authorInAuthorship ?authorshipUri .";
+		"?authorshipUri core:relates ?orgUri .\n" + 
+		"?orgUri core:relatedBy ?authorshipUri .";
 	}
 	/**  Get new resources	 */
 	//A new authorship uri will always be created when an author is added
@@ -177,6 +206,8 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 			HashMap<String, String> newResources = new HashMap<String, String>();			
 			newResources.put("authorshipUri", DEFAULT_NS_TOKEN);
 			newResources.put("newPerson", DEFAULT_NS_TOKEN);
+			newResources.put("vcardPerson", DEFAULT_NS_TOKEN);
+			newResources.put("vcardName", DEFAULT_NS_TOKEN);
 			newResources.put("newOrg", DEFAULT_NS_TOKEN);
 			return newResources;
 		}
@@ -245,7 +276,6 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 				setValidators(list("datatype:" + XSD.xstring.toString())).
 				setRangeDatatypeUri(XSD.xstring.toString())
 				);
-		
 	}
 
 
@@ -255,7 +285,6 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 				setValidators(list("datatype:" + XSD.xstring.toString())).
 				setRangeDatatypeUri(XSD.xstring.toString())
 				);
-		
 	}
 
 
@@ -265,12 +294,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 				setValidators(list("datatype:" + XSD.xstring.toString())).
 				setRangeDatatypeUri(XSD.xstring.toString())
 				);
-		
 	}
-
-
-
-
 
 	private void setLastNameField(EditConfigurationVTwo editConfiguration) {
 		editConfiguration.addField(new FieldVTwo().
@@ -278,7 +302,6 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 				setValidators(list("datatype:" + XSD.xstring.toString())).
 				setRangeDatatypeUri(XSD.xstring.toString())
 				);
-		
 	}
 
 	private void setRankField(EditConfigurationVTwo editConfiguration) {
@@ -287,7 +310,6 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 				setValidators(list("nonempty")).
 				setRangeDatatypeUri(XSD.xint.toString())
 				);
-		
 	}
 
 
@@ -296,7 +318,6 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 				setName("personUri")
 				//.setObjectClassUri(personClass)
 				);
-		
 	}
 
 	private void setOrgUriField(EditConfigurationVTwo editConfiguration) {
@@ -304,76 +325,129 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 				setName("orgUri")
 				//.setObjectClassUri(personClass)
 				);
-		
 	}
+
 	private void setOrgNameField(EditConfigurationVTwo editConfiguration) {
 		editConfiguration.addField(new FieldVTwo().
 				setName("orgName").
 				setValidators(list("datatype:" + XSD.xstring.toString())).
 				setRangeDatatypeUri(XSD.xstring.toString())
 				);
-		
 	}
+	
 	//Form specific data
 	public void addFormSpecificData(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
 		HashMap<String, Object> formSpecificData = new HashMap<String, Object>();
 		//Get the existing authorships
-		formSpecificData.put("existingAuthorInfo", getExistingAuthorships(vreq));
-		formSpecificData.put("newRank", getMaxRank(vreq) + 1);
-		formSpecificData.put("rankPredicate", authorRankPredicate);
+		formSpecificData.put("existingAuthorInfo", getExistingAuthorships(editConfiguration.getSubjectUri(), vreq));
+		formSpecificData.put("newRank", getMaxRank(editConfiguration.getSubjectUri(), vreq) + 1);
+		formSpecificData.put("rankPredicate", "http://vivoweb.org/ontology/core#rank");
 		editConfiguration.setFormSpecificData(formSpecificData);
 	}
-	
-	private List<AuthorshipInfo> getExistingAuthorships(VitroRequest vreq) {
-		Individual infoResource = EditConfigurationUtils.getSubjectIndividual(vreq);
-	    List<Individual> authorships = infoResource.getRelatedIndividuals(
-	    		EditConfigurationUtils.getPredicateUri(vreq));  
-	    //TODO: Check if sorted correctly
-	    sortAuthorshipIndividuals(authorships);
-		
-		return getAuthorshipInfo(authorships);
-	}
+
+    private static String AUTHORSHIPS_QUERY = ""
+        + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
+        + "PREFIX afn:  <http://jena.hpl.hp.com/ARQ/function#> \n"
+        + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
+        + "PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n"
+        + "SELECT ?authorshipURI (afn:localname(?authorshipURI) AS ?authorshipName) ?authorURI ?authorName ?rank \n"
+        + "WHERE { \n"
+        + "?subject core:relatedBy ?authorshipURI . \n"
+        + "?authorshipURI a core:Authorship . \n"
+        + "?authorshipURI core:relates ?authorURI . \n" 
+        + "?authorURI a foaf:Person . \n"
+        + "OPTIONAL { ?authorURI rdfs:label ?authorName } \n"
+        + "OPTIONAL { ?authorshipURI core:rank ?rank } \n" 
+        + "} ORDER BY ?rank";
+    
+       
+    private List<AuthorshipInfo> getExistingAuthorships(String subjectUri, VitroRequest vreq) {
+          
+        String queryStr = QueryUtils.subUriForQueryVar(this.getAuthorshipsQuery(), "subject", subjectUri);
+        log.debug("Query string is: " + queryStr);
+        List<Map<String, String>> authorships = new ArrayList<Map<String, String>>();
+        try {
+            ResultSet results = QueryUtils.getQueryResults(queryStr, vreq);
+            while (results.hasNext()) {
+                QuerySolution soln = results.nextSolution();
+                RDFNode node = soln.get("authorshipURI");
+                if (node.isURIResource()) {
+                    authorships.add(QueryUtils.querySolutionToStringValueMap(soln));        
+                }
+            }
+        } catch (Exception e) {
+            log.error(e, e);
+        }    
+        log.debug("authorships = " + authorships);
+        return getAuthorshipInfo(authorships);
+    }
+
+    private static String MAX_RANK_QUERY = ""
+        + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
+        + "SELECT DISTINCT ?rank WHERE { \n"
+        + "    ?subject core:relatedBy ?authorship . \n"
+        + "    ?authorship a core:Authorship . \n"
+        + "    ?authorship core:rank ?rank .\n"
+        + "} ORDER BY DESC(?rank) LIMIT 1";
+        
+    private int getMaxRank(String subjectUri, VitroRequest vreq) {
+
+        int maxRank = 0; // default value 
+        String queryStr = QueryUtils.subUriForQueryVar(this.getMaxRankQueryStr(), "subject", subjectUri);
+        log.debug("maxRank query string is: " + queryStr);
+        try {
+            ResultSet results = QueryUtils.getQueryResults(queryStr, vreq);
+            if (results != null && results.hasNext()) { // there is at most one result
+                QuerySolution soln = results.next(); 
+                RDFNode node = soln.get("rank");
+                if (node != null && node.isLiteral()) {
+                    // node.asLiteral().getInt() won't return an xsd:string that 
+                    // can be parsed as an int.
+                    int rank = Integer.parseInt(node.asLiteral().getLexicalForm());
+                    if (rank > maxRank) {  
+                        log.debug("setting maxRank to " + rank);
+                        maxRank = rank;
+                    }
+                }
+            }
+        } catch (NumberFormatException e) {
+            log.error("Invalid rank returned from query: not an integer value.");
+        } catch (Exception e) {
+            log.error(e, e);
+        }
+        log.debug("maxRank is: " + maxRank);
+        return maxRank;
+    }
 
 	private List<AuthorshipInfo> getAuthorshipInfo(
-			List<Individual> authorships) {
+			List<Map<String, String>> authorships) {
 		List<AuthorshipInfo> info = new ArrayList<AuthorshipInfo>();
-		 for ( Individual authorship : authorships ) {
-			 	String authorshipUri =  authorship.getURI();
-			 	String authorshipName = authorship.getName();
-			 	String authorUri = "";
-			 	String authorName = "";
-			 	Individual author = authorship.getRelatedIndividual(linkedAuthorPredicate);
-			 	if(author != null) {
-			 		authorUri = author.getURI();
-			 		authorName = author.getName();
-			 	}
-			 	AuthorshipInfo aaInfo = new AuthorshipInfo(authorshipUri, authorshipName, authorUri, authorName);
-		        info.add(aaInfo);
+	 	String authorshipUri =  "";
+	 	String authorshipName = "";
+	 	String authorUri = "";
+	 	String authorName = "";
+
+		for ( Map<String, String> authorship : authorships ) {
+		    for (Entry<String, String> entry : authorship.entrySet() ) {
+		            if ( entry.getKey().equals("authorshipURI") ) {
+		                authorshipUri = entry.getValue();
+		            }
+		            else if ( entry.getKey().equals("authorshipName") ) {
+		                authorshipName = entry.getValue();
+		            }
+		            else if ( entry.getKey().equals("authorURI") ) {
+		                authorUri = entry.getValue();
+		            }
+		            else if ( entry.getKey().equals("authorName") ) {
+		                authorName = entry.getValue();
+		            }
+			 }
+
+			 AuthorshipInfo aaInfo = new AuthorshipInfo(authorshipUri, authorshipName, authorUri, authorName);
+		    info.add(aaInfo);
 		 }
+		 log.debug("info = " + info);
 		 return info;
-	}
-
-	private int getMaxRank(VitroRequest vreq) {
-		Individual infoResource = EditConfigurationUtils.getSubjectIndividual(vreq);
-	    List<Individual> authorships = infoResource.getRelatedIndividuals(
-	    		EditConfigurationUtils.getPredicateUri(vreq)); 
-	    sortAuthorshipIndividuals(authorships);
-	    int maxRank = 0;
-	    for(Individual authorship: authorships) {
-	    	DataPropertyStatement rankStmt = authorship.getDataPropertyStatement(authorRankPredicate);
-	        if (rankStmt != null) {
-	            maxRank = Integer.parseInt(rankStmt.getData());   
-	        }
-	    }
-		return maxRank;
-	}
-
-
-
-
-	private void sortAuthorshipIndividuals(List<Individual> authorships) {
-		DataPropertyComparator comp = new DataPropertyComparator(authorRankPredicate);
-	    Collections.sort(authorships, comp);
 	}
 
 	//This is the information about authors the form will require
@@ -415,5 +489,13 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 	}
 	
 	static final String DEFAULT_NS_TOKEN=null; //null forces the default NS
+
+    protected String getMaxRankQueryStr() {
+    	return MAX_RANK_QUERY;
+    }
+
+    protected String getAuthorshipsQuery() {
+    	return AUTHORSHIPS_QUERY;
+    }
 
 }

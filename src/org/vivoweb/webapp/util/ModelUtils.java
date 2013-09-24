@@ -20,10 +20,12 @@ public class ModelUtils {
 	
 	private static final Log log = LogFactory.getLog(ModelUtils.class.getName());
 		
-	private static final String processPropertyURI = "http://vivoweb.org/ontology/core#roleRealizedIn";
-	private static final String processPropertyInverseURI = "http://vivoweb.org/ontology/core#realizedRole";
-	private static final String nonProcessPropertyURI = "http://vivoweb.org/ontology/core#roleContributesTo";
+    private static final String processPropertyURI = "http://purl.obolibrary.org/obo/BFO_0000054";
+    private static final String processPropertyInverseURI = "http://purl.obolibrary.org/obo/BFO_0000055";
+    private static final String nonProcessPropertyURI = "http://vivoweb.org/ontology/core#roleContributesTo";
 	private static final String nonProcessPropertyInverseURI = "http://vivoweb.org/ontology/core#contributingRole";
+    private static final String grantPropertyURI = "http://vivoweb.org/ontology/core#relatedBy";
+	private static final String grantPropertyInverseURI = "http://vivoweb.org/ontology/core#relates";
 	
 	private static Set<String> processClass = new HashSet<String>();
 	static {
@@ -32,6 +34,10 @@ public class ModelUtils {
 		processClass.add("http://vivoweb.org/ontology/core#EventSeries");
 	}
 
+	private static Set<String> grantClass = new HashSet<String>();
+	static {
+		grantClass.add("http://vivoweb.org/ontology/core#Grant");
+	}
 	/*
 	 * Given a class URI that represents the type of entity that a Role
 	 * is in (in, in any of its senses) this method returns the URIs of
@@ -61,6 +67,7 @@ public class ModelUtils {
 		
 		ObjectProperty op = new ObjectProperty();
 		boolean isBFOProcess = false;
+		boolean isGrantClass = false;
 
 	    while (iter.hasNext()) {
 	    	String superClassURI = iter.next();
@@ -69,12 +76,21 @@ public class ModelUtils {
 	    		isBFOProcess = true;
 	    		break;
 	    	}
+	    	if (grantClass.contains(superClassURI)) {
+	    		isGrantClass = true;
+	    		break;
+	    	}
 	    }
 		
 	    if (isBFOProcess) {
 			op.setURI(processPropertyURI);
 			op.setURIInverse(processPropertyInverseURI);    	
-	    } else {
+	    } 
+	    else if (isGrantClass){
+			op.setURI(grantPropertyURI);
+			op.setURIInverse(grantPropertyInverseURI);    	
+	    }
+	    else {
 			op.setURI(nonProcessPropertyURI);
 			op.setURIInverse(nonProcessPropertyInverseURI);    		    	
 	    }

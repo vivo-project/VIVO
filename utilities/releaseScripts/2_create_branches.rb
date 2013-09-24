@@ -38,21 +38,14 @@ begin
 	vivo_path = Settings.vivo_path
 	vitro_path = Settings.vitro_path
 	
+	raise BadState.new("Branches are not created for test candidates.") if is_test_candidate?() 
 	raise BadState.new("Branch #{branch} already exists in VIVO.") if branch_exists?(vivo_path, branch) 
 	raise BadState.new("Branch #{branch} already exists in Vitro.") if branch_exists?(vitro_path, branch) 
 
-	puts
-	yn = prompt("OK to create branches named '#{branch}' (y/n)")
-	if yn.downcase == 'y'
-		puts
+	get_permission_and_go("OK to create branches named '#{branch}'?") do
 		puts "Creating branches"
 		create_branch(vivo_path, branch)
 		create_branch(vitro_path, branch)
-		puts
-	else
-		puts
-		puts "OK - forget it."
-		puts
 	end
 rescue BadState
 	puts "#{$!.message} - Aborting."

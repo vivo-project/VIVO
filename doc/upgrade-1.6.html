@@ -49,6 +49,8 @@
                     	    <li><a href="#multiple">Multiple foaf:Person Profile Pages</a></li>
                     	    <li><a href="#homePage">Home Page Re-design</a></li>
                     	    <li><a href="#rdffiles">Auto-loaded RDF files move to the Home directory</a></li>
+                    	    <li><a href="#language">Support for additional languages</a></li>
+                    	    <li><a href="#extended_lod">More compact responses to Linked data requests</a></li>
 	                        <li><a href="#BOGUS">ANYTHING ELSE?</a></li>
 	                    </ol>
 					</li>					
@@ -334,8 +336,9 @@ rdf/tbox/filegraph/tbox/vivo-foaf-1.5.owl
 rdf/tbox/filegraph/tbox/vivo-pws-1.5.owl
 rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
                 	    <p>
-                	    	If you are using a three-tier build process, you will need to add a single line
-                	    	to the build script so the RDF files will be merged properly across the tiers. So this:
+                	    	If you are using a three-tier build process, you will need to add two lines
+                	    	to the build script to accomodate the RDF files, and the language support (see below)
+                	    	So this:
 <pre>&lt;patternset id="appbase.patterns"&gt;
 &lt;include name="src/**/*" /&gt;
 &lt;include name="lib/**/*" /&gt;
@@ -352,6 +355,7 @@ rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
 &lt;include name="src/**/*" /&gt;
 &lt;include name="lib/**/*" /&gt;
 &lt;include name="rdf/**/*" /&gt;
+&lt;include name="languages/**/*" /&gt;
 &lt;include name="test/**/*" /&gt;
 &lt;include name="themes/**/*" /&gt;
 &lt;include name="config/*.properties" /&gt;
@@ -361,6 +365,71 @@ rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
 &lt;include name="context.xml" /&gt;
 &lt;/patternset&gt;</pre>
                 	    </p>
+
+                	    <h4 id="language">Support for additional languages</h4>
+             	        <p>
+             	        	VIVO 1.6 includes limited support for other languages, in addition to American English.
+             	        	This limited support is described as <em>read-only</em> support on <em>public-facing</em>
+             	        	pages. 
+             	        </p>
+             	        <p>
+             	        	<em>Read-only</em> means that there is no provision for editing multi-language
+             	        	data or displays. Property values, ontology labels, etc. must all be provided in RDF files
+             	        	and ingested or otherwise inserted into the data model. The Page Management user interface
+             	        	does not support maintaining pages in multiple languages.
+             	        </p>
+             	        <p>
+             	        	<em>Public-facing</em> means that most of the pages used for site adminstration 
+             	        	are only presented in American English.
+             	        </p>
+             	        <p>
+             	        	These two pages in the VIVO Wiki describe how to 
+             	        	<a href="https://wiki.duraspace.org/display/VIVO/Building+a+multi-language+VIVO+instance">
+             	        	Build VIVO with multiple languages</a> and how to 
+             	        	<a href="https://wiki.duraspace.org/display/VIVO/Adding+a+language+to+VIVO">
+             	        	Add a new language to VIVO</a>.
+             	        </p>
+
+                	    <h4 id="extended_lod">More compact responses to Linked data requests</h4>
+             	        <p>
+             	        	In VIVO 1.6, the response to requests for linked data is changed, to be smaller and faster.
+             	        </p>
+             	        <p>
+	             	        When responding to a request for linked data about an individual, VIVO 1.6 returns:
+	             	        <ul>
+	             	        <li>Data properties of the individual</li>
+	             	        <li>Object relationships to and from the individual</li>
+	             	        <li>The RDF types and RDFS labels for any object that directly relates to the individual</li>
+	             	        </ul>
+	             	        This data is filtered by the usual VIVO privacy policies, 
+	             	        so properties such as salary or employee ID number may not be revealed 
+	             	        unless the requester has been properly authenticated.
+             	        </p>
+             	        <p>
+	             	        VIVO releases prior to VIVO 1.6 returned a more complex set of statements, 
+	             	        referred to as "extended linked data":
+	             	        <ul>
+	             	        <li>Data properties of the individual</li>
+	             	        <li>Object relationships from the individual</li>
+	             	        <li>All properties of the context nodes (positions, roles, etc.) that are associated with the individual.</li>
+	             	        <li>Labels of objects that are joined to the individual through context nodes.</li>
+	             	        <li>Full details of time intervals that are attached to context nodes: start, end, precision.</li>
+	             	        </ul>
+	             	        As above, this data was filtered by the VIVO privacy policies.
+	                        Although these additional items were included, 
+	                        extended linked data was based only on relationships from the individual. 
+	                        Relationships to the individual were not included.	
+	             	        </p>
+             	        <p>
+             	        	Extended linked data was costly to produce, in terms of resources, 
+             	        	because it required a recursive search of the data model. 
+             	        	Extended linked data typically contained 50% more information than its non-extended equivalent, 
+             	        	and took more than 10 times as long to produce.
+             	        </p>
+             	        <p>
+             	        	VIVO release 1.6 can be configured to produce extended linked data like previous releases.
+             	        	However, extended linked data will not be supported in future releases.
+             	        </p>
 
                 	    <h4 id="BOGUS">ANYTHING ELSE?</h4>
              	        <p>
@@ -394,7 +463,7 @@ rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
                </ul>
 
 
-                <h3 id="#upgrade_process">III. Upgrade Instructions</h3>
+                <h3 id="upgrade_process">III. Upgrade Instructions</h3>
 
                 <p>
                     1. Download the new distribution file and unpack it into a new 
@@ -402,9 +471,9 @@ rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
                 </p>
                 <p>
                     2. Separate your existing <code>deploy.properties</code> file into two files,
-                    as described below. The new <code>build.properties</code> file is stored in
-                    the top level of the VIVO distribution directory. The new <code>runtime.properties</code>
-                    file is stored in your Vitro home directory.
+                    as described below. Store the new <code>build.properties</code> file in
+                    the top level of the VIVO distribution directory. Store the new <code>runtime.properties</code>
+                    file in your VIVO home directory.
                     <br>
                 </p>
             <table border='1' bordercolor="#CCCCCC" cellspacing="5">
@@ -441,9 +510,48 @@ rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
             <p>    
             	    If you prefer, you may start with <code>example.build.properties</code> 
             	    and <code>example.runtime.properties</code>, make copies, 
-            	    and edit them to suit your installation.
+            	    and edit them to suit your installation. Remember, the <code>runtime.properties</code> file
+            	    goes into your VIVO home directory.
             </p>
             
+            <p>
+              The properties below are new to <code>build.properties</code>. They are optional,
+              so you need not add them unless you want a value other than the default. 
+            </p>
+                <p>
+                    <!-- runtime.properties table from install.html -->
+                </p>
+            <table border='1' bordercolor="#CCCCCC" cellspacing="5">
+                <tbody>
+                    <tr>
+                        <th>
+                            Property Name 
+                        </th>
+                        <th>
+                            Example Value 
+                        </th>
+                    </tr>
+                   
+                     <tr>
+                        <td colspan="2">
+                        	Languages (in addition to American English) that will be built into your 
+                            VIVO site. The languages must be found in the
+                            <code>languages</code> directory of the VIVO distribution.
+                            See <a href="https://wiki.duraspace.org/display/VIVO/Building+a+multi-language+VIVO+instance">
+                            the VIVO Wiki</a> for more information.
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                          languages.addToBuild
+                        </td>
+                        <td>
+                           es_MX
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
             <p>
               The properties below are new to <code>runtime.properties</code>. They are optional,
               so you need not add them, unless you want a value other than the default. 
@@ -550,7 +658,7 @@ rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
                     </tr>
                     <tr class="odd_row blue">
                         <td>
-                          developer.defeatI18nCache = true
+                          developer.defeatI18nCache
                         </td>
                         <td>
                           false
@@ -568,7 +676,7 @@ rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
                     </tr>
                     <tr class="odd_row blue">
                         <td>
-                          developer.insertFreemarkerDelimiters = true
+                          developer.insertFreemarkerDelimiters
                         </td>
                         <td>
                           false
@@ -583,7 +691,7 @@ rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
                     </tr>
                     <tr class="odd_row blue">
                         <td>
-                          homePage.geoFocusMaps = enabled
+                          homePage.geoFocusMaps
                         </td>
                         <td>
                           enabled
@@ -603,10 +711,32 @@ rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
                     </tr>
                     <tr class="odd_row blue">
                         <td>
-                          MultiViews.profilePageTypes=disabled
+                          MultiViews.profilePageTypes
                         </td>
                         <td>
                           disabled
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2">
+                          Setting this property causes VIVO 1.6 to produce extended responses to requests
+                          for linked data. This provides compatibility with earlier releases.
+                          The default is <code>false</code>.
+                          <br/>
+                          Extended linked data is costly, in terms of server resource. Typically, extended 
+                          linke data contains 50% more information than its non-extended equivalent, and
+                          takes 10 times as long to produce.
+                          <br/>
+                          <b>Extended linked data will not be supported in future releases of VIVO.</b>
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                          serveExtendedLinkedData
+                        </td>
+                        <td>
+                          true
                         </td>
                     </tr>
                     

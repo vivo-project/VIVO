@@ -22,7 +22,7 @@ roleExamples-->
 <#assign typeSelectorLabel = "${i18n().organizer_of}" />
 <#assign genericLabel = "${i18n().event_capitalized}" />
 <#assign acMultipleTypes = "'true'" />
-<#assign acTypes = "{activity: 'http://vivoweb.org/ontology/core#EventSeries,http://purl.org/NET/c4dm/event.owl#Event'}"
+<#assign acTypes = "{activity: 'http://vivoweb.org/ontology/core#EventSeries,http://purl.org/NET/c4dm/event.owl#Event'}">
 
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">

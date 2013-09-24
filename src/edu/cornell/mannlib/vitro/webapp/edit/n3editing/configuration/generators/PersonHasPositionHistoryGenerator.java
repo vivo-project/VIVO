@@ -30,8 +30,8 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
 
     final static String positionClass = vivoCore + "Position";
     final static String orgClass = "http://xmlns.com/foaf/0.1/Organization";
-    final static String positionInOrgPred = vivoCore + "positionInOrganization";
-    final static String orgForPositionPred = vivoCore + "organizationForPosition";
+    final static String positionInOrgPred = vivoCore + "relates";
+    final static String orgForPositionPred = vivoCore + "relatedBy";
     final static String positionToInterval = vivoCore + "dateTimeInterval";
     final static String intervalType = vivoCore + "DateTimeInterval";
     final static String intervalToStart = vivoCore + "start";
@@ -166,9 +166,9 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
 
     final static String n3ForNewPosition = 
         "@prefix core: <" + vivoCore + "> . \n" +   
-        "?person core:personInPosition  ?position . \n" +
+        "?person core:relatedBy  ?position . \n" +
         "?position a  ?positionType . \n" +              
-        "?position core:positionForPerson ?person ; ";    
+        "?position core:relates ?person ; ";    
     
     final static String positionTitleAssertion =
         "?position <" + label + "> ?positionTitle .";
@@ -203,9 +203,11 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
         "?endNode  <" + dateTimeValue + "> ?endField-value . \n" +
         "?endNode  <" + dateTimePrecision + "> ?endField-precision . \n";
     
+// Queries for existing values 
     final static String orgLabelQuery =
         "SELECT ?existingOrgLabel WHERE { \n" +
         "  ?position <" + positionInOrgPred + "> ?existingOrg . \n" +
+        "  ?existingOrg a <" + orgClass + "> . \n" +
         "  ?existingOrg <" + label + "> ?existingOrgLabel . \n" +
         "}";
     
@@ -231,7 +233,8 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
 
     final static String existingOrgQuery = 
         "SELECT ?existingOrg WHERE { \n" +
-        "  ?position <" + positionInOrgPred + "> ?existingOrg . }";
+        "  ?position <" + positionInOrgPred + "> ?existingOrg . \n" +
+        "  ?existingOrg a <" + orgClass + ">  }";
     
     final static String orgTypeQuery = 
         "PREFIX rdfs: <" + rdfs + "> \n" +   

@@ -45,7 +45,7 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
         + "    FILTER (NOT EXISTS {?location a core:StateOrProvince}) \n"
         + "} UNION {   \n"
         + "    ?location rdf:type core:GeographicRegion .  \n"
-        + "    ?location core:geographicallyContains ?sublocation  . \n"
+        + "    ?location <http://purl.obolibrary.org/obo/BFO_0000051> ?sublocation  . \n"
         + "    ?location rdfs:label ?label .  \n"
         + "    ?sublocation core:geographicFocusOf ?person .  \n"
         + "    ?person rdf:type foaf:Person  \n"

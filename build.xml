@@ -72,6 +72,7 @@
 			<include name="rdf/**/*" />
 			<include name="test/**/*" />
 			<include name="themes/**/*" />
+			<include name="languages/**/*" />
 			<include name="config/*.properties" />
 			<include name="config/*.txt" />
 			<include name="config/jarlist/*.txt" />

@@ -29,7 +29,7 @@ public class AddClinicalRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
 		return new ConstantFieldOptions(
 		        "",  "Select one", 
 		        "http://vivoweb.org/ontology/core#Project", "Project", 
-		        "http://vivoweb.org/ontology/core#Service", "Service"
+		        "http://purl.obolibrary.org/obo/ERO_0000005", "Service"
 		);		
 	}
 

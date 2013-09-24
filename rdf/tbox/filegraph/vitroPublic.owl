@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE rdf [
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+
+	xmlns="http://vitro.mannlib.cornell.edu/ns/vitro/public#"
+	xml:base="http://vitro.mannlib.cornell.edu/ns/vitro/public"
+>
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	Vitro Application Public Ontology
+
+	This ontology is used by the Vitro application. 
+	It contains constructs that are available for public export and use. 
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<owl:Ontology rdf:about="">
+    <rdfs:label rdf:datatype="&xsd;string">Vitro public constructs</rdfs:label>
+    <owl:versionInfo rdf:datatype="&xsd;decimal">0.1</owl:versionInfo>
+</owl:Ontology>
+
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	File-related constructs
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<owl:Class rdf:about="#File"/>
+<owl:Class rdf:about="#FileByteStream"/>
+
+<owl:DatatypeProperty rdf:about="#filename">
+	<rdfs:domain><owl:Class rdf:about="#File"/></rdfs:domain>
+	<rdfs:range rdf:resource="&xsd;string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#mimeType">
+	<rdfs:domain><owl:Class rdf:about="#File"/></rdfs:domain>
+	<rdfs:range rdf:resource="&xsd;string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#attribution">
+	<rdfs:domain><owl:Class rdf:about="#File"/></rdfs:domain>
+	<rdfs:range rdf:resource="&xsd;string"/>
+</owl:DatatypeProperty>
+
+<owl:ObjectProperty rdf:about="#downloadLocation">
+	<rdfs:domain><owl:Class rdf:about="#File"/></rdfs:domain>
+	<rdfs:range><owl:Class rdf:about="#FileByteStream"/></rdfs:range>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#thumbnailImage">
+	<rdfs:domain><owl:Class rdf:about="#File"/></rdfs:domain>
+	<rdfs:range><owl:Class rdf:about="#File"/></rdfs:range>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#mainImage">
+	<rdfs:range><owl:Class rdf:about="#File"/></rdfs:range>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#image">
+	<rdfs:range><owl:Class rdf:about="#File"/></rdfs:range>
+</owl:ObjectProperty>
+
+</rdf:RDF>

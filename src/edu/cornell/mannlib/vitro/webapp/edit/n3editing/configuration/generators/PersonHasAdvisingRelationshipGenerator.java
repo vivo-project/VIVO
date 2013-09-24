@@ -28,12 +28,8 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
     final static String subjAreaClass = "http://www.w3.org/2004/02/skos/core#Concept";
     final static String degreeClass = vivoCore+"AcademicDegree";
     final static String adviseeClass = foaf + "Person";
-    final static String advisorInPred = vivoCore + "advisorIn";
-    final static String adviseeInPred = vivoCore + "adviseeIn";
-    final static String advisorPred = vivoCore + "advisor";
-    final static String adviseePred = vivoCore + "advisee" ;
-    final static String subjAreaPred = vivoCore + "hasSubjectArea" ;
-    final static String degreePred = vivoCore + "degreeCandidacy" ;
+    final static String adviseeRoleClass = "http://vivoweb.org/ontology/core#AdviseeRole";
+    final static String advisorRoleClass = "http://vivoweb.org/ontology/core#AdvisorRole";
     final static String advisingRelToInterval = vivoCore + "dateTimeInterval";
     final static String intervalType = vivoCore + "DateTimeInterval";
     final static String intervalToStart = vivoCore + "start";
@@ -62,7 +58,7 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
         
         conf.setN3Required( Arrays.asList( n3ForNewAdvisingRelationship,
                                            advisingRelLabelAssertion,
-                                           advisingRelTypeAssertion  ) );
+                                           advisingRelTypeAssertion ) );
         conf.setN3Optional( Arrays.asList( n3ForNewAdviseeAssertion,
                                            n3ForExistingAdviseeAssertion,
                                            degreeAssertion,
@@ -75,6 +71,10 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
         
         conf.addNewResource("advisingRelationship", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("newAdvisee", DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("vcardAdvisee", DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("vcardName", DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("advisorRole", DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("adviseeRole", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("newSubjArea", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("intervalNode", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("startNode", DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -93,6 +93,8 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
         conf.addSparqlForExistingLiteral("endField-value", existingEndDateQuery);
         
         conf.addSparqlForExistingUris("advisingRelType", advisingRelTypeQuery);
+        conf.addSparqlForExistingUris("advisorRole", existingAdvisorRoleQuery);
+        conf.addSparqlForExistingUris("adviseeRole", existingAdviseeRoleQuery);
         conf.addSparqlForExistingUris("existingSubjArea", subjAreaQuery);
         conf.addSparqlForExistingUris("existingAdvisee", adviseeQuery);
         conf.addSparqlForExistingUris("degree", degreeQuery);
@@ -193,9 +195,14 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
 
     final static String n3ForNewAdvisingRelationship = 
         "@prefix vivo: <" + vivoCore + "> . \n\n" +   
-        "?person <" + advisorInPred + ">  ?advisingRelationship . \n" +
+        "?person <http://vivoweb.org/ontology/core#relatedBy>  ?advisingRelationship . \n" +
         "?advisingRelationship a  <" + advisingRelClass + "> . \n" +              
-        "?advisingRelationship <" + advisorPred + "> ?person . \n" ;    
+        "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?person . \n" +
+        "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
+        "?advisorRole a  <" + advisorRoleClass + "> . \n" +              
+        "?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
+        "?person <http://purl.obolibrary.org/obo/RO_0000053>  ?advisorRole . \n" +
+        "?advisorRole <http://purl.obolibrary.org/obo/RO_0000052>  ?person . ";
     
     final static String advisingRelLabelAssertion  =      
         "?advisingRelationship <"+ label + "> ?advisingRelLabel .";
@@ -204,37 +211,60 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
         "?advisingRelationship a ?advisingRelType .";
 
     final static String n3ForNewAdviseeAssertion  =      
-        "?advisingRelationship <" + adviseePred + "> ?newAdvisee . \n" +
-        "?newAdvisee <" + adviseeInPred + "> ?advisingRelationship . \n" +
+        "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?newAdvisee . \n" +
+        "?newAdvisee <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         "?newAdvisee <" + label + "> ?adviseeLabel . \n" +
-        "?newAdvisee a <" + adviseeClass + ">  . ";
+        "?newAdvisee a <" + adviseeClass + ">  . \n" +
+        "?newAdvisee <http://purl.obolibrary.org/obo/RO_0000053>  ?adviseeRole . \n" +
+        "?adviseeRole <http://purl.obolibrary.org/obo/RO_0000052>  ?newAdvisee . \n" +
+        "?adviseeRole a  <" + adviseeRoleClass + "> . \n" +              
+        "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?adviseeRole . \n" +
+        "?adviseeRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . ";
     
     final static String n3ForExistingAdviseeAssertion  =      
-        "?advisingRelationship <" + adviseePred + "> ?existingAdvisee . \n" +
-        "?existingAdvisee <" + adviseeInPred + "> ?advisingRelationship . "; 
+        "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingAdvisee . \n" +
+        "?existingAdvisee <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
+        "?existingAdvisee <http://purl.obolibrary.org/obo/RO_0000053>  ?adviseeRole . \n" +
+        "?adviseeRole <http://purl.obolibrary.org/obo/RO_0000052>  ?existingAdvisee . \n" +
+        "?adviseeRole a  <" + adviseeRoleClass + "> . \n" +              
+        "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?adviseeRole . \n" +
+        "?adviseeRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . ";
     
     final static String firstNameAssertion  =      
-        "@prefix foaf: <" + foaf + "> .  \n" +
-        "?newAdvisee foaf:firstName ?firstName .";
+        "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+        "?newAdvisee <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardAdvisee . \n" +
+        "?vcardAdvisee <http://purl.obolibrary.org/obo/ARG_2000029>  ?newAdvisee . \n" +
+        "?vcardAdvisee a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+        "?vcardAdvisee vcard:hasName  ?vcardName . \n" +
+        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
+        "?vcardName vcard:givenName ?firstName .";
     
     final static String lastNameAssertion  =      
-        "@prefix foaf: <" + foaf + "> .  \n" +
-        "?newAdvisee foaf:lastName ?lastName .";
+        "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+        "?newAdvisee <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardAdvisee . \n" +
+        "?vcardAdvisee <http://purl.obolibrary.org/obo/ARG_2000029>  ?newAdvisee . \n" +
+        "?vcardAdvisee a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+        "?vcardAdvisee vcard:hasName  ?vcardName . \n" +
+        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
+        "?vcardName vcard:familyName ?lastName .";
     
     final static String degreeAssertion  =      
-        "?advisingRelationship <"+ degreePred +"> ?degree .";
+        "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?degree . \n" +
+        "?degree <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . ";
 
     //This is for an existing subject area
     //Where we only need the existing subject area label
     final static String n3ForExistingSubjAreaAssertion  =      
-        "?advisingRelationship <"+ subjAreaPred +"> ?existingSubjArea .";   
+        "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingSubjArea . \n" +
+        "?existingSubjArea <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . ";   
     //For new subject area, we include all new information
     //new subject area should always be a new resource
     //and the following should only get evaluated 
     //when there is something in the label
     
     final static String n3ForNewSubjAreaAssertion  =   
-    	"?advisingRelationship <"+ subjAreaPred +"> ?newSubjArea . \n" + 
+    	"?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?newSubjArea . \n" + 
+	    "?newSubjArea <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" + 
         "?newSubjArea <"+ label + "> ?subjAreaLabel . \n" + 
         "?newSubjArea a <" + subjAreaClass + "> . ";    
 
@@ -264,24 +294,46 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
 
     final static String adviseeQuery  =      
         "SELECT ?existingAdvisee WHERE { \n" +
-        " ?advisingRelationship <" + adviseePred + "> ?existingAdvisee . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingAdvisee . \n" +
+        " ?existingAdvisee a <" + adviseeClass + ">  . \n" +
+        " FILTER  (?person != ?existingAdvisee)  . \n" +
+        "}";
+
+    final static String existingAdvisorRoleQuery  =      
+        "SELECT ?advisorRole WHERE { \n" +
+        "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
+        "?advisorRole a  <" + advisorRoleClass + "> . \n" +              
+        "}";
+
+    final static String existingAdviseeRoleQuery  =      
+        "SELECT ?adviseeRole WHERE { \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?adviseeRole . \n" +
+        " ?adviseeRole a  <" + adviseeRoleClass + "> . \n" +              
         "}";
 
     final static String adviseeLabelQuery =
         "SELECT ?existingAdviseeLabel WHERE { \n" +
-        " ?advisingRelationship <" + adviseePred + "> ?existingAdvisee . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingAdvisee . \n" +
+        " ?existingAdvisee a <" + adviseeClass + ">  . \n" +
         " ?existingAdvisee <"  + label + "> ?existingAdviseeLabel . \n" +
+        " FILTER  (?person != ?existingAdvisee)  . \n" +
         "}";
 
     final static String subjAreaQuery =
         "SELECT ?existingSubjArea WHERE { \n" +
-        " ?advisingRelationship <" + subjAreaPred + "> ?existingSubjArea . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingSubjArea . \n" +
+        " ?existingSubjArea a <http://www.w3.org/2004/02/skos/core#Concept>  . \n" +
+        " ?existingSubjArea <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type \n" +
+        " FILTER  (?type != <http://vivoweb.org/ontology/core#AcademicDegree>)  . \n" +        
         "}";
 
     final static String subjAreaLabelQuery  =      
         "SELECT ?existingSubjAreaLabel WHERE { \n" +
-        " ?advisingRelationship <" + subjAreaPred + "> ?existingSubjArea . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingSubjArea . \n" +
+        " ?existingSubjArea a <http://www.w3.org/2004/02/skos/core#Concept>  . \n" +
         " ?existingSubjArea <" + label + "> ?existingSubjAreaLabel . \n" +
+        " ?existingSubjArea <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type \n" +
+        " FILTER  (?type != <http://vivoweb.org/ontology/core#AcademicDegree>)  . \n" +        
         "}";
 
     final static String advisingRelLabelQuery =
@@ -291,7 +343,10 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
 
     final static String degreeQuery  =  
         "SELECT ?existingDegree WHERE {\n"+
-        " ?advisingRelationship <"+ degreePred +"> ?existingDegree . }";
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingDegree . \n" +
+        " ?existingDegree a  <" + degreeClass + "> . \n" +
+        "}";
+        
 
     final static String existingStartDateQuery =
         "SELECT ?existingDateStart WHERE { \n" +

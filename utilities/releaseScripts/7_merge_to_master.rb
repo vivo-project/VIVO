@@ -47,18 +47,10 @@ begin
 	raise BadState.new("Branch #{branch} doesn't exist in VIVO.") unless branch_exists?(vivo_path, branch) 
 	raise BadState.new("Branch #{branch} doesn't exist in Vitro.") unless branch_exists?(vitro_path, branch) 
 	
-	puts
-	yn = prompt("OK to merge the #{tag} tags to the master branches? (y/n)")
-	if yn.downcase == 'y'
-		puts
+	get_permission_and_go("OK to merge the #{tag} tags to the master branches?") do
 		puts "Merging tags"
 		merge_branch_to_master(branch, tag, message, vivo_path)
 		merge_branch_to_master(branch, tag, message, vitro_path)
-		puts
-	else
-		puts
-		puts "OK - forget it."
-		puts
 	end
 rescue BadState
 	puts "#{$!.message} - Aborting."

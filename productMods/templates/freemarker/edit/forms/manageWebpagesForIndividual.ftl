@@ -29,8 +29,8 @@
 <ul id="webpageList" ${ulClass} role="list">
     <#list editConfiguration.pageData.webpages as webpage>
         <li class="webpage" role="listitem">
-            <#if webpage.anchor??>
-                <#assign anchor=webpage.anchor >
+            <#if webpage.label??>
+                <#assign anchor=webpage.label >
             <#else>
                 <#assign anchor=webpage.url >
             </#if>
@@ -39,7 +39,7 @@
                 <a href="${webpage.url}" title="${i18n().webpage_url}">${anchor}</a>
             </span>
             <span class="editingLinks">
-                <a href="${baseEditWebpageUrl}&objectUri=${webpage.link?url}&predicateUri=${predicateUri}" class="edit" title="${i18n().edit_webpage_link}">${i18n().edit_capitalized}</a> | 
+                <a href="${baseEditWebpageUrl}&objectUri=${webpage.vcard}&predicateUri=${predicateUri}&linkUri=${webpage.link}" class="edit" title="${i18n().edit_webpage_link}">${i18n().edit_capitalized}</a> | 
                 <a href="${urls.base}${deleteWebpageUrl}" class="remove" title="${i18n().delete_webpage_link}">${i18n().delete_button}</a> 
             </span>
         </li>    

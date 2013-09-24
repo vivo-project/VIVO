@@ -1,14 +1,7 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#-- This snippet will be included in lib-vivo-properties.ftl, so users will be able to have a 
-    different view when extending wilma theme
 
-    <#assign webpage = propertyGroups.pullProperty("${core}webpage")!>
-    <@p.objectPropertyListing webpage editable />
-    
-    
--->
-    <#assign webpage = propertyGroups.pullProperty("${core}webpage")!>
+<#assign webpage = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#URL")!>
     <#if webpage?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
         <#if !editable && individual.person() > 
             <ul style="font-size:0.9em;padding-bottom:4px"><li><strong>${i18n().websites}</strong></li></ul>
@@ -19,4 +12,3 @@
             <@p.objectProperty webpage editable />
         </ul>
     </#if>
-

@@ -29,5 +29,5 @@
         </#if>
     </#local>
 
-    ${linkedIndividual}    <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
+    ${linkedIndividual}    <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" /> 
  </#macro>

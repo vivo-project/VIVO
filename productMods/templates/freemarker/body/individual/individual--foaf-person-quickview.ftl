@@ -12,6 +12,9 @@
 <#if !labelCount??>
     <#assign labelCount = 0 >
 </#if>
+<#if !localesCount??>
+	<#assign localesCount = 1>
+</#if>
 <#assign qrCodeIcon = "qr-code-icon.png">
 <#assign individualImage>
     <@p.image individual=individual 
@@ -52,7 +55,7 @@
                 <div id="photo-wrapper">${individualImage}</div>
                 <h1 class="vcard foaf-person fn" <#if !editable>style="float:left;border-right:1px solid #A6B1B0;"</#if>> 
                     <#-- Label -->
-                    <@p.label individual editable labelCount/>
+                    <@p.label individual editable labelCount localesCount/>
                 </h1>
                 <#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->
                 <#assign title = propertyGroups.pullProperty("${core}preferredTitle")!>
@@ -63,7 +66,7 @@
                             <div id="titleContainer"><span class="display-title-not-editable">${statement.value}</span></div>
                         <#else>
                             <span class="display-title-editable">${statement.value}</span>
-                            <@p.editingLinks "${title.name}" statement editable />
+                            <@p.editingLinks "${title.name}" "" statement editable />
                         </#if>
                     </#list>
                 </#if>

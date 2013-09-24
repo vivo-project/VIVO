@@ -5,6 +5,9 @@
 <#--Get existing value for specific data literals and uris, in case the form is returned because of an error-->
 <#assign firstNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "firstName")/>
 <#assign lastNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "lastName")/>
+<#--With ISF changes, we also have a niddle name value, also add error field below-->
+<#--assign middleNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "middleName") /-->
+
 <#assign labelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "label")/>
 <#assign newLabelLanguageValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "newLabelLanguage")/>
 

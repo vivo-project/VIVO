@@ -1,6 +1,6 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 <#import "lib-vivo-form.ftl" as lvf>
-
+<#include "addAssociatedConceptVocabSpecificDisplay.ftl" >
 <#assign existingConcepts = editConfiguration.pageData.existingConcepts/>
 <#assign userDefinedConceptUrl = editConfiguration.pageData.userDefinedConceptUrl/>
 <#assign sources = editConfiguration.pageData.searchServices/>
@@ -35,26 +35,44 @@
 
     
     
-<ul id="existingConcepts" >
+<ul id="existingConcepts">
       
     <script type="text/javascript">
         var existingConceptsData = [];
     </script>
+    <#if (existingConcepts?size > 0)>
+    	 <li class="conceptHeadings conceptsListContainer">
+    	 	<div class="row">
+    	 		 <div class="column conceptLabelInfo"> 
+    	 		 	<h4>Concept (Type)</h4>
+    	 		 </div>
+    	 		 <div class="column conceptVocabSource"> 
+    	 		 	<h4>Vocabulary Source</h4>
+    	 		 </div>
+    	 		 <div class="column">&nbsp;
+    	 		 </div>
+    	 	</div>	
+    	 </li>
+    </#if>
     
     <#list existingConcepts as existingConcept>
-        <li class="existingConcept">
-              
-            <span class="concept">
-
-                <span class="conceptWrapper">
-                   <span class="conceptLabel"> ${existingConcept.conceptLabel} 
-                   	<#if existingConcept.vocabURI?has_content && existingConcept.vocabLabel?has_content>
-                   		(${existingConcept.vocabLabel})
+        <li class="existingConcept conceptsListContainer">
+                <div class="row">
+                   <div class="column conceptLabelInfo"> ${existingConcept.conceptLabel} 
+                   	<#if existingConcept.conceptSemanticTypeLabel?has_content>
+                   	 (${existingConcept.conceptSemanticTypeLabel})
                    	</#if>
-                   </span> 
-                </span>
-                &nbsp;<a href="${urls.base}/edit/primitiveRdfEdit" class="remove" title="${i18n().remove_capitalized}">${i18n().remove_capitalized}</a>
-            </span>
+                   	</div>
+                   	<div class="column conceptVocabSource">
+                   	<#if existingConcept.vocabURI?has_content && existingConcept.vocabLabel?has_content>
+                   		${existingConcept.vocabLabel}
+                   	</#if>
+                  	</div> 
+                  	<div class="column">
+                  	     <a href="${urls.base}/edit/primitiveRdfEdit" class="remove" title="${i18n().remove_capitalized}">${i18n().remove_capitalized}</a>
+                  	
+                  	</div>
+                </div>
         </li>    
         
         <script type="text/javascript">
@@ -83,9 +101,8 @@
     <form id="addConceptForm" class="customForm" action="${submitUrl}">
 		<#assign checkedSource = false />
 	<h4 class="services">${i18n().external_vocabulary_services}</h4>
-    <#list sources?keys as sourceUri>
-    		<#assign thisSource = sources[sourceUri]/>
-        <input type="radio"  name="source" value="${sourceUri}" role="radio" <#if checkedSource = false><#assign checkedSource = true/>checked="checked"</#if>>
+    <#list sources?values?sort_by("label") as thisSource>
+        <input type="radio"  name="source" value="${thisSource.url}" role="radio" <#if checkedSource = false><#assign checkedSource = true/>checked="checked"</#if>>
         <label class="inline" for="${thisSource.label}"> <a href="${thisSource.url}">${thisSource.label}</a> &nbsp;(${thisSource.description})</label>
         <br />
     </#list>
@@ -98,11 +115,20 @@
 	<input type="hidden" id="conceptSource" name="conceptSource" value="" /> <!-- Field value populated by JavaScript -->
     <input type="hidden" id="conceptSemanticTypeURI" name="conceptSemanticTypeURI" value="" /> <!-- Field value populated by JavaScript -->
     <input type="hidden" id="conceptSemanticTypeLabel" name="conceptSemanticTypeLabel" value="" /> <!-- Field value populated by JavaScript -->
-    
+    <input type="hidden" id="conceptBroaderURI" name="conceptBroaderURI" value=""/><!-- Field value populated by JavaScript -->
+    <input type="hidden" id="conceptNarrowerURI" name="conceptNarrowerURI" value=""/><!-- Field value populated by JavaScript -->
+    <div id="indicator" class="hidden">
+    	<img id="loadingIndicator" class="indicator" src="${urls.base}/images/indicatorWhite.gif" alt="${i18n().processing_indicator}"/>
+    </div>
     <div id="selectedConcept" name="selectedConcept" class="acSelection">
         <p class="inline">
+         
         </p>
+        
         <!-- Search results populated by JavaScript -->
+    </div>
+    <div id="showHideResults" name="showHideResults">
+    	<a href="#" id="showHideLink">Results</a>
     </div>
     <div id="errors" name="errors"></div>
     
@@ -130,16 +156,21 @@ var customFormData = {
         predicateUri: '${editConfiguration.predicateUri}',
         inversePredicateUri: '${inversePredicate}'
 };
+var vocabSpecificDisplay = {};
+<#list vocabSpecificDisplay?keys as vocab>
+vocabSpecificDisplay["${vocab}"] = "${vocabSpecificDisplay[vocab]}";
+</#list>
 var i18nStrings = {
     vocServiceUnavailable: '${i18n().vocabulary_service_unavailable}',
     noResultsFound: '${i18n().no_serch_results_found}',
-    labelTypeString: '${i18n().label_type}',
+    defaultLabelTypeString: '${i18n().label_type}',
     definitionString: '${i18n().definition_capitalized}',
     bestMatchString: '${i18n().best_match}',
     selectTermFromResults: '${i18n().select_term_from_results}',
     selectVocSource: '${i18n().select_vocabulary_source_to_search}',
     confirmTermDelete: '${i18n().confirm_term_deletion}',
-    errorTernNotRemoved: '${i18n().error_term_not_deleted}'
+    errorTernNotRemoved: '${i18n().error_term_not_deleted}',
+    vocabSpecificLabels: vocabSpecificDisplay
 };
 </script>
 
@@ -148,6 +179,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarke
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/addConcept.css" />')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>')}
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/json2.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/addConcept.js"></script>')}

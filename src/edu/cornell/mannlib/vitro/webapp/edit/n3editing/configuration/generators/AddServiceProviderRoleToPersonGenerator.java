@@ -15,7 +15,7 @@ public class AddServiceProviderRoleToPersonGenerator extends AddRoleToPersonTwoS
 
 	@Override
 	String getRoleType() {	
-		return "http://vivoweb.org/ontology/core#ServiceProviderRole";
+		return "http://purl.obolibrary.org/obo/ERO_0000012";
 	}	
 
 	/** Service Provider role involves hard-coded options for the 

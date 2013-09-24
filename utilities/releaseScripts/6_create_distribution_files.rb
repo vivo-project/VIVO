@@ -50,23 +50,10 @@ begin
 	raise BadState.new("Revision information file does not exist at #{vivo_revision_info_path}") unless File.exist?(vivo_revision_info_path)
 	raise BadState.new("Revision information file does not exist at #{vitro_revision_info_path}") unless File.exist?(vitro_revision_info_path)
 	
-	if File.exist?(vivo_revision_info_path) || File.exist?(vitro_revision_info_path)
-		p = "OK to overwrite revision_info at these paths? \n    #{vivo_revision_info_path} \n    #{vitro_revision_info_path}  ? (y/n)"
-	else
-		p = "OK to write revision_info at these paths? \n    #{vivo_revision_info_path} \n    #{vitro_revision_info_path}  ? (y/n)"
-	end
 
-	puts
-	yn = prompt("OK to create distribution files in #{export_dir} ? (y/n)")
-	if yn.downcase == 'y'
-		puts
+	get_permission_and_go("OK to create distribution files in #{export_dir} ?") do
 		puts "Creating distribution files"
 		create_distribution_files(export_dir, vivo_filename, vitro_filename)
-		puts
-	else
-		puts
-		puts "OK - forget it."
-		puts
 	end
 rescue BadState
 	puts "#{$!.message} - Aborting."

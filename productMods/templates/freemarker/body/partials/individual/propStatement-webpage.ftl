@@ -7,7 +7,7 @@
  -->
 
 <#assign linkText>
-    <#if statement.anchor?has_content>${statement.anchor}<#t>
+    <#if statement.label?has_content>${statement.label}<#t>
     <#elseif statement.url?has_content>${statement.url}<#t>
     </#if>    
 </#assign>

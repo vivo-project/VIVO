@@ -2,14 +2,23 @@
 
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
@@ -18,20 +27,8 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.
 
 public class PersonHasMailingAddressGenerator extends VivoBaseGenerator implements
         EditConfigurationGenerator {
-
-    final static String addressClass = vivoCore + "Address";
-    final static String countryPred = vivoCore + "addressCountry";
-    final static String countryClass = vivoCore + "Country";
-    final static String addrLine1Pred =vivoCore+"address1" ;
-    final static String addrLine2Pred =vivoCore+"address2" ;
-    final static String addrLine3Pred =vivoCore+"address3" ;
-    final static String cityPred =vivoCore+"addressCity" ;
-    final static String statePred =vivoCore+"addressState" ;
-    final static String postalCodePred =vivoCore+"addressPostalCode" ;
-    final static String mailingAddressPred =vivoCore+"mailingAddress" ;
-    
-    public PersonHasMailingAddressGenerator() {}
-   
+    private Log log = LogFactory.getLog(PersonHasMailingAddressGenerator.class);
+       
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
             HttpSession session) throws Exception {
@@ -40,59 +37,51 @@ public class PersonHasMailingAddressGenerator extends VivoBaseGenerator implemen
         
         initBasics(conf, vreq);
         initPropertyParameters(vreq, session, conf);
-        initObjectPropForm(conf, vreq);               
+        initObjectPropForm(conf, vreq);  
+        String addressUri = vreq.getParameter("addressUri"); 
         
         conf.setTemplate("personHasMailingAddress.ftl");
         
         conf.setVarNameForSubject("person");
         conf.setVarNameForPredicate("predicate");
-        conf.setVarNameForObject("address");
+        conf.setVarNameForObject("individualVcard");
         
-        conf.setN3Required( Arrays.asList( n3ForNewAddress,
-                                           addrLabelAssertion, 
-                                           addressTypeAssertion ) );
-        conf.setN3Optional( Arrays.asList( addrLineOneAssertion, addrLineTwoAssertion, addrLineThreeAssertion,  cityAssertion, stateAssertion, countryAssertion, postalCodeAssertion ) );
+        conf.setN3Required( Arrays.asList( n3ForNewAddress ) );
+        conf.setN3Optional( Arrays.asList( streetAddressAssertion, 
+                                           localityAssertion, 
+                                           regionAssertion, 
+                                           countryAssertion, 
+                                           postalCodeAssertion ) );
         
         conf.addNewResource("address", DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("individualVcard", DEFAULT_NS_FOR_NEW_RESOURCE);
+                
+        conf.setLiteralsOnForm(Arrays.asList("streetAddress", "locality", "postalCode", "country", "region" ));
         
-        //uris in scope: none   
-        //literals in scope: none
-        
-        conf.setUrisOnform(Arrays.asList("addressType"));
-        conf.setLiteralsOnForm(Arrays.asList("addrLineOne", "addrLineTwo", "addrLineThree", "city", "postalCode", "addrLabel","country", "state" ));
-        
-        conf.addSparqlForExistingLiteral("addrLabel", addrLabelQuery);
-        conf.addSparqlForExistingLiteral("addrLineOne", addrLineOneQuery);
-        conf.addSparqlForExistingLiteral("addrLineTwo", addrLineTwoQuery);
-        conf.addSparqlForExistingLiteral("addrLineThree", addrLineThreeQuery);
-        conf.addSparqlForExistingLiteral("city", cityQuery);
+        conf.addSparqlForExistingLiteral("streetAddress", streetAddressQuery);
+        conf.addSparqlForExistingLiteral("locality", localityQuery);
         conf.addSparqlForExistingLiteral("postalCode", postalCodeQuery);
-        conf.addSparqlForExistingLiteral("state", stateQuery);
-        conf.addSparqlForExistingLiteral("country", countryQuery);
+        conf.addSparqlForExistingLiteral("region", regionQuery);
+        conf.addSparqlForExistingLiteral("country", countryQuery); 
         
-        conf.addSparqlForExistingUris("addressType", addressTypeQuery);
-        
-    conf.addField( new FieldVTwo().                        
-            setName("country").
-            setValidators( list("nonempty") ).
-            setOptions( 
-                    new IndividualsViaVClassOptions(
-                            countryClass)));
+        if ( conf.isUpdate() ) {
+            HashMap<String, List<String>> urisInScope = new HashMap<String, List<String>>();
+            urisInScope.put("address", Arrays.asList(new String[]{addressUri}));
+            conf.addUrisInScope(urisInScope);
+        }
+        else {
+            conf.addSparqlForAdditionalUrisInScope("individualVcard", individualVcardQuery);
+        }
 
         conf.addField( new FieldVTwo().                        
-                setName("addrLineOne")
+                setName("streetAddress")
                 .setRangeDatatypeUri( XSD.xstring.toString() ).
                 setValidators( list("nonempty") ));
         
         conf.addField( new FieldVTwo().                        
-                setName("addrLineTwo")
+                setName("country")
                 .setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString()) ));
-
-        conf.addField( new FieldVTwo().                        
-                setName("addrLineThree")
-                .setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString()) ));
+                setValidators( list("nonempty") ));
 
         conf.addField( new FieldVTwo().                        
                 setName("postalCode")
@@ -100,24 +89,14 @@ public class PersonHasMailingAddressGenerator extends VivoBaseGenerator implemen
                 setValidators( list("nonempty") ));
 
         conf.addField( new FieldVTwo().                        
-                setName("city")
+                setName("locality")
                 .setRangeDatatypeUri( XSD.xstring.toString() ).
                 setValidators( list("nonempty") ) );
 
         conf.addField( new FieldVTwo().                        
-                setName("state")
+                setName("region")
                 .setRangeDatatypeUri( XSD.xstring.toString() ).
                 setValidators( list("datatype:" + XSD.xstring.toString()) ) );
-
-        conf.addField( new FieldVTwo().                        
-                setName("addrLabel")
-                .setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString()) ) );
-
-        conf.addField( new FieldVTwo().
-                setName("addressType").
-                setOptions(new ChildVClassesOptions(
-                                addressClass)) );
 
         conf.addValidator(new AntiXssValidation());
         
@@ -128,77 +107,53 @@ public class PersonHasMailingAddressGenerator extends VivoBaseGenerator implemen
     /* N3 assertions  */
 
     final static String n3ForNewAddress = 
-        "@prefix vivo: <" + vivoCore + "> . \n\n" +   
-        "?person vivo:mailingAddress  ?address . \n" +
-        "?address a vivo:Address . \n" +              
-        "?address vivo:mailingAddressFor ?person . \n" ;    
+        "?person <http://purl.obolibrary.org/obo/ARG_2000028>  ?individualVcard . \n" +
+        "?individualVcard a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +              
+        "?individualVcard <http://purl.obolibrary.org/obo/ARG_2000029> ?person . \n" +
+        "?individualVcard <http://www.w3.org/2006/vcard/ns#hasAddress> ?address . \n" +
+        "?address a <http://www.w3.org/2006/vcard/ns#Address> . " ;    
     
-    final static String addrLineOneAssertion  =      
-        "?address <"+ addrLine1Pred +"> ?addrLineOne .";
+    final static String streetAddressAssertion  =      
+        "?address <http://www.w3.org/2006/vcard/ns#streetAddress> ?streetAddress .";
     
-    final static String addrLineTwoAssertion  =      
-        "?address <"+ addrLine2Pred +"> ?addrLineTwo .";
-
-    final static String addrLineThreeAssertion  =      
-        "?address <"+ addrLine3Pred +"> ?addrLineThree .";
-    
-    final static String cityAssertion  =      
-        "?address <"+ cityPred +"> ?city .";
+    final static String localityAssertion  =      
+        "?address <http://www.w3.org/2006/vcard/ns#locality> ?locality .";
 
     final static String postalCodeAssertion  =      
-        "?address <"+ postalCodePred +"> ?postalCode .";    
+        "?address <http://www.w3.org/2006/vcard/ns#postalCode> ?postalCode .";    
     
-    final static String stateAssertion  =      
-        "?address <"+ statePred +"> ?state .";    
+    final static String regionAssertion  =      
+        "?address <http://www.w3.org/2006/vcard/ns#region> ?region .";    
         
     final static String countryAssertion =
-        "?address <" + countryPred + "> ?country .";
-
-    final static String addrLabelAssertion =
-        "?address <" + label + "> ?addrLabel .";
-
-    final static String addressTypeAssertion =
-        "?address a ?addressType .";
+        "?address <http://www.w3.org/2006/vcard/ns#country> ?country .";
 
 
     /* Queries for editing an existing entry */
 
-    final static String addrLabelQuery =
-        "SELECT ?existingAddrLabel WHERE { \n" +
-        "  ?address <" + label + "> ?existingAddrLabel . \n" +
+    final static String individualVcardQuery =
+        "SELECT ?individualVcard WHERE { \n" +
+        "?person <http://purl.obolibrary.org/obo/ARG_2000028>  ?individualVcard . \n" +
         "}";
 
-    final static String addrLineOneQuery  =      
-        "SELECT ?existingaddrLineOne WHERE {\n"+
-        "?address <"+ addrLine1Pred +"> ?existingaddrLineOne . }";
+    final static String streetAddressQuery  =      
+        "SELECT ?existingStreetAddress WHERE {\n"+
+        "?address <http://www.w3.org/2006/vcard/ns#streetAddress> ?existingStreetAddress . }";
 
-    final static String addrLineTwoQuery  =  
-        "SELECT ?existingaddrLineTwo WHERE {\n"+
-        "?address <"+ addrLine2Pred +"> ?existingaddrLineTwo . }";
+    final static String localityQuery  =  
+        "SELECT ?existingLocality WHERE {\n"+
+        "?address <http://www.w3.org/2006/vcard/ns#locality> ?existingLocality . }";
 
-    final static String addrLineThreeQuery  =  
-        "SELECT ?existingaddrLineThree WHERE {\n"+
-        "?address <"+ addrLine3Pred +"> ?existingaddrLineThree . }";
-
-    final static String cityQuery  =  
-        "SELECT ?existingCity WHERE {\n"+
-        "?address <"+ cityPred +"> ?existingCity . }";
-
-    final static String stateQuery  =  
-        "SELECT ?existingState WHERE {\n"+
-        "?address <"+ statePred +"> ?existingState . }";
+    final static String regionQuery  =  
+        "SELECT ?existingRegion WHERE {\n"+
+        "?address <http://www.w3.org/2006/vcard/ns#region> ?existingRegion . }";
 
     final static String postalCodeQuery  =  
         "SELECT ?existingPostalCode WHERE {\n"+
-        "?address <"+ postalCodePred +"> ?existingPostalCode . }";
+        "?address <http://www.w3.org/2006/vcard/ns#postalCode> ?existingPostalCode . }";
 
     final static String countryQuery  =  
         "SELECT ?existingCountry WHERE {\n"+
-        "?address <"+ countryPred +"> ?existingCountry . }";
-
-    final static String addressTypeQuery = 
-    	"PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
-        "SELECT ?existingAddressType WHERE { \n" + 
-        "?address vitro:mostSpecificType ?existingAddressType . }";
+        "?address <http://www.w3.org/2006/vcard/ns#country> ?existingCountry . }";
 
 }

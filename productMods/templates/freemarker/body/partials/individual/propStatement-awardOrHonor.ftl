@@ -15,9 +15,9 @@
  
     <#local linkedIndividual>
         <#if statement.award??>
-            <a href="${profileUrl(statement.uri("award"))}" title="${i18n().award_name}">${statement.awardLabel!statement.localName}</a>
+            <a href="${profileUrl(statement.uri("award"))}" title="${i18n().award_name}">${statement.awardLabel!statement.localName!}</a>
         <#else>
-            <a href="${profileUrl(statement.uri("awardReceipt"))}" title="${i18n().award_receipt_name}">${statement.receiptLabel!statement.localName}</a>
+            <a href="${profileUrl(statement.uri("awardReceipt"))}" title="${i18n().award_receipt_name}">${statement.receiptLabel!statement.localName!}</a>
         </#if>
     </#local>
 
@@ -29,12 +29,12 @@
         </#if>
     </#local>
 
-    <#local conferredByOrg>
-        <#if statement.conferredBy?has_content && statement.conferredByLabel?has_content>
-             ${i18n().conferred_by} <a href="${profileUrl(statement.uri("conferredBy"))}" title="${i18n().conferred_by}">${statement.conferredByLabel}</a>
+    <#local assignedByOrg>
+        <#if statement.assignedBy?has_content && statement.assignedByLabel?has_content>
+             ${i18n().conferred_by} <a href="${profileUrl(statement.uri("assignedBy"))}" title="${i18n().conferred_by}">${statement.assignedByLabel}</a>
         </#if>
     </#local>
 
-    <@s.join [ linkedIndividual, conferredByOrg!,  dateTimeVal! ] />
+    <@s.join [ linkedIndividual, assignedByOrg!,  dateTimeVal! ] />
 
  </#macro>

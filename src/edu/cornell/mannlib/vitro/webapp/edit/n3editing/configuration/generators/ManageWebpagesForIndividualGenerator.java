@@ -83,10 +83,14 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
     
     private static String WEBPAGE_QUERY = ""
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
-        + "SELECT DISTINCT ?link ?url ?anchor ?rank WHERE { \n"
-        + "    ?subject core:webpage ?link . \n"
-        + "    OPTIONAL { ?link core:linkURI ?url } \n"
-        + "    OPTIONAL { ?link core:linkAnchorText ?anchor } \n"
+        + "PREFIX vcard: <http://www.w3.org/2006/vcard/ns#> \n"
+        + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
+        + "SELECT DISTINCT ?vcard ?link ?url ?label ?rank WHERE { \n"
+        + "    ?subject <http://purl.obolibrary.org/obo/ARG_2000028> ?vcard . \n"
+        + "    ?vcard vcard:hasURL ?link . \n"
+        + "    ?link a vcard:URL \n"
+        + "    OPTIONAL { ?link vcard:url ?url } \n"
+        + "    OPTIONAL { ?link rdfs:label ?label } \n"
         + "    OPTIONAL { ?link core:rank ?rank } \n"
         + "} ORDER BY ?rank";
     
@@ -108,7 +112,7 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         } catch (Exception e) {
             log.error(e, e);
         }    
-        
+        log.debug("webpages = " + webpages);
         return webpages;
     }
     

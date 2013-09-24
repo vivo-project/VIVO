@@ -47,23 +47,15 @@ begin
 	raise BadState.new("Files have not been exported to #{export_dir}") unless File.directory?(export_dir)
 	
 	if File.exist?(vivo_revision_info_path) || File.exist?(vitro_revision_info_path)
-		p = "OK to overwrite revision_info at these paths? \n    #{vivo_revision_info_path} \n    #{vitro_revision_info_path}  ? (y/n)"
+		p = "OK to overwrite revision_info at these paths? \n    #{vivo_revision_info_path} \n    #{vitro_revision_info_path}  ?"
 	else
-		p = "OK to write revision_info at these paths? \n    #{vivo_revision_info_path} \n    #{vitro_revision_info_path}  ? (y/n)"
+		p = "OK to write revision_info at these paths? \n    #{vivo_revision_info_path} \n    #{vitro_revision_info_path}  ?"
 	end
 
-	puts
-	yn = prompt(p)
-	if yn.downcase == 'y'
-		puts
+	get_permission_and_go(p) do
 		puts "Building revision info"
 		create_revision_info(vivo_path, vivo_revision_info_path, tag)
 		create_revision_info(vitro_path, vitro_revision_info_path, tag)
-		puts
-	else
-		puts
-		puts "OK - forget it."
-		puts
 	end
 rescue BadState
 	puts "#{$!.message} - Aborting."

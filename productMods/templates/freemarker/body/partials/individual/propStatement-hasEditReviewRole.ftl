@@ -15,7 +15,7 @@
 <#macro showRole statement property>
     <#local linkedIndividual>
     		<#if statement?has_content && statement.activity?has_content>
-        	<a href="${profileUrl(statement.uri("activity"))}" title="${i18n().activity_name}">${statement.activityLabel!statement.activityName}</a>
+        	<a href="${profileUrl(statement.uri("activity"))}" title="${i18n().activity_name}">${statement.activityLabel!statement.activityName!}</a>
         </#if>
     </#local>
 
@@ -24,6 +24,5 @@
     </#local>
 
     <#-- If property is collated, then subclass label is redundant information -->
-    ${linkedIndividual} <#if ! property.collatedBySubclass>${statement.subclassLabel!}</#if> ${dateTime!}
-
+    ${linkedIndividual} <#if ! property.collatedBySubclass>&nbsp;(${statement.subclassLabel!})</#if> ${dateTime!}
 </#macro>
