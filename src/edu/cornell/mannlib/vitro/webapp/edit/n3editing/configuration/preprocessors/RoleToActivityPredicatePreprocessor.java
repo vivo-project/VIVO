@@ -50,7 +50,7 @@ public class RoleToActivityPredicatePreprocessor extends RoleToPredicatePreproce
     	this.itemToRolePredicate = "activityToRolePredicate";
     }
     
-    protected String getItemType(MultiValueEditSubmission submission, VitroRequest vreq) {
+    protected String getItemType(MultiValueEditSubmission submission) {
     	String type = null;
     	Map<String, List<String>> urisFromForm = submission.getUrisFromForm();
 		//Get the type of the activity selected

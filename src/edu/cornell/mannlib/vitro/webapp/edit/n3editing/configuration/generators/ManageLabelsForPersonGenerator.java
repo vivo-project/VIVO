@@ -25,6 +25,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.shared.Lock;
 import com.hp.hpl.jena.sparql.resultset.ResultSetMem;
 import com.hp.hpl.jena.vocabulary.RDFS;
@@ -38,11 +39,13 @@ import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AddObjectP
 import edu.cornell.mannlib.vitro.webapp.beans.DataProperty;
 import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
+import edu.cornell.mannlib.vitro.webapp.beans.Property;
 import edu.cornell.mannlib.vitro.webapp.beans.VClass;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
 import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess;
+import edu.cornell.mannlib.vitro.webapp.dao.PropertyInstanceDao;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
@@ -363,9 +366,10 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
 		AddDataPropertyStatement adps = new AddDataPropertyStatement(
 				vreq.getJenaOntModel(), individual.getURI(),
 				RequestActionConstants.SOME_URI);
+	
 		AddObjectPropertyStatement aops = new AddObjectPropertyStatement(
 				vreq.getJenaOntModel(), individual.getURI(),
-				RequestActionConstants.SOME_URI,
+				RequestActionConstants.SOME_PREDICATE,
 				RequestActionConstants.SOME_URI);
     	return PolicyHelper.isAuthorizedForActions(vreq, new Actions(adps).or(aops));
 	}
@@ -406,8 +410,8 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
 			VitroRequest vreq) {
 		String subjectUri = config.getSubjectUri();
 		String propertyUri = config.getPredicateUri();
-		
-		
+		Property prop = new Property();
+		prop.setURI(propertyUri);
 		//Iterate through the labels and create a hashmap
 		HashMap<String, List<LabelInformation>> labelsHash= new HashMap<String, List<LabelInformation>>();
 		
@@ -431,7 +435,8 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
 				//This should put the label in the list
 				//Create label information instance with the required information
 				//To generate link
-				DataPropertyStatementTemplateModel dpstm = new DataPropertyStatementTemplateModel(subjectUri, propertyUri, l,
+				
+				DataPropertyStatementTemplateModel dpstm = new DataPropertyStatementTemplateModel(subjectUri, prop, l,
 			            template, vreq);
 				labelsList.add(new LabelInformation(
 						l, dpstm.getEditUrl(), dpstm.getDeleteUrl(), languageTag, languageName));

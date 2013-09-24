@@ -97,9 +97,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		// No validators required here
 		// Add preprocessors
 		//Passing from servlet context for now but will have to see if there's a way to pass vreq
-		addPreprocessors(editConfiguration, 
-				ModelAccess.on(session.getServletContext()).getJenaOntModel(), 
-				ModelAccess.on(session.getServletContext()).getWebappDaoFactory());
+		addPreprocessors(editConfiguration);
 		// Adding additional data, specifically edit mode
 		addFormSpecificData(editConfiguration, vreq);
 		// One override for basic functionality, changing url pattern
