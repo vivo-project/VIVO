@@ -6,9 +6,9 @@
 <#if subjectName?contains(",") >
 <#assign lastName = subjectName?substring(0,subjectName?index_of(",")) />
 <#assign firstName = subjectName?substring(subjectName?index_of(",") + 1) />
-<h2>${i18n().manage_publications} ${firstName} ${lastName}</h2>
+<h2>${i18n().manage_publications_for} ${firstName} ${lastName}</h2>
 <#else>
-<h2>${i18n().manage_publications} ${subjectName}</h2>
+<h2>${i18n().manage_publications_for} ${subjectName}</h2>
 </#if>
 <p style="margin-left:25px;margin-bottom:12px">
 ${i18n().check_pubs_to_exclude}
@@ -25,9 +25,9 @@ ${i18n().check_pubs_to_exclude}
         <#if sub = "Software">
             ${sub}
         <#elseif sub = "Thesis">
-            Theses
+            ${i18n().theses_capitalized}
         <#elseif sub = "Speech">
-            Speeches
+            ${i18n().speeches_capitalized}
         <#else>
             ${sub}s
         </#if>
@@ -38,7 +38,7 @@ ${i18n().check_pubs_to_exclude}
             <#list pubs as pub>
             <li>
                 <input type="checkbox" class="pubCheckbox" <#if pub.hideThis??>checked</#if> />
-                <#if pub.title?has_content>${pub.title!}<#else>Title not found.</#if>
+                <#if pub.title?has_content>${pub.title!}<#else>${i18n().title_not_found}</#if>
             </li>
             <script type="text/javascript">
                 publicationData.push({

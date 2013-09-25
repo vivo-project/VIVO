@@ -15,7 +15,7 @@
     ${affiliatedResearchAreas!}
         </section> <!-- #individual-info -->
     </section> <!-- #individual-intro -->
-    <!--postindiviudal overiew tfl-->
+    <!--postindividual overiew ftl-->
 </#assign>
 
 <#include "individual-vitro.ftl">
