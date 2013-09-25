@@ -67,7 +67,6 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		initBasics(editConfiguration, vreq);
 		initPropertyParameters(vreq, session, editConfiguration);
 		initObjectPropForm(editConfiguration, vreq);
-
 		editConfiguration.setTemplate(template);
 
 		setVarNames(editConfiguration);
@@ -97,10 +96,8 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		setTemplate(editConfiguration, vreq);
 		// No validators required here
 		// Add preprocessors
-		addPreprocessors(editConfiguration, 
-				ModelAccess.on(vreq).getJenaOntModel(), 
-				ModelAccess.on(vreq).getOntModelSelector().getTBoxModel(),
-				vreq.getWebappDaoFactory());
+		//Passing from servlet context for now but will have to see if there's a way to pass vreq
+		addPreprocessors(editConfiguration);
 		// Adding additional data, specifically edit mode
 		addFormSpecificData(editConfiguration, vreq);
 		// One override for basic functionality, changing url pattern
@@ -359,19 +356,15 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
    
     //Add preprocessor
 	
-   private void addPreprocessors(EditConfigurationVTwo editConfiguration, 
-		   OntModel ontModel, 
-		   OntModel modelChangeModel,
-		   WebappDaoFactory wdf) {
+   private void addPreprocessors(EditConfigurationVTwo editConfiguration) {
 	  //An Edit submission preprocessor for enabling addition of multiple terms for a single search
 	   //TODO: Check if this is the appropriate way of getting model
 	 
 	   //Passing model to check for any URIs that are present
 	   
 	   editConfiguration.addEditSubmissionPreprocessor(
-			   new AddAssociatedConceptsPreprocessor(editConfiguration, ontModel, wdf));
-	   editConfiguration.addModelChangePreprocessor(new ConceptSemanticTypesPreprocessor(
-			   modelChangeModel));
+			   new AddAssociatedConceptsPreprocessor(editConfiguration));
+	   editConfiguration.addModelChangePreprocessor(new ConceptSemanticTypesPreprocessor());
 	  
 	}
      

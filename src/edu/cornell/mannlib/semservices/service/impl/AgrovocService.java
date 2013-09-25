@@ -108,20 +108,23 @@ public class AgrovocService implements ExternalConceptService  {
             String lang = "";
             
             for (SKOSLiteral literal : skosConcept.getSKOSRelatedConstantByProperty(dataset, manager.getSKOSDataFactory().getSKOSPrefLabelProperty())) {
-              
-              if (!literal.isTyped()) {
-                  // if it has  language
-                  SKOSUntypedLiteral untypedLiteral = literal.getAsSKOSUntypedLiteral();
-                  if (untypedLiteral.hasLang()) {
-                      lang = untypedLiteral.getLang();
-                  } else {
-                	  lang = "";
-                  }
-              }
-              if (lang.equals("en")) {
-                 //System.out.println("prefLabel: " + literal.getLiteral());
-                 
-                 concept.setLabel(literal.getLiteral());
+              if(literal != null) {
+	              if (!literal.isTyped()) {
+	                  // if it has  language
+	                  SKOSUntypedLiteral untypedLiteral = literal.getAsSKOSUntypedLiteral();
+	                  if (untypedLiteral.hasLang()) {
+	                      lang = untypedLiteral.getLang();
+	                  } else {
+	                	  lang = "";
+	                  }
+	              }
+	              if (lang.equals("en")) {
+	                 //System.out.println("prefLabel: " + literal.getLiteral());
+	                 
+	                 concept.setLabel(literal.getLiteral());
+	              }
+              } else {
+            	  logger.debug("Literal returned for preferred label was null and was ignored");
               }
             }
             
@@ -130,21 +133,24 @@ public class AgrovocService implements ExternalConceptService  {
 			for (SKOSLiteral literal : skosConcept
 					.getSKOSRelatedConstantByProperty(dataset, manager
 							.getSKOSDataFactory().getSKOSAltLabelProperty())) {
-
-				if (!literal.isTyped()) {
-					// if it has language
-					SKOSUntypedLiteral untypedLiteral = literal
-							.getAsSKOSUntypedLiteral();
-					if (untypedLiteral.hasLang()) {
-						lang = untypedLiteral.getLang();
-					} else {
-						lang = "";
+				if(literal != null) {
+					if (!literal.isTyped()) {
+						// if it has language
+						SKOSUntypedLiteral untypedLiteral = literal
+								.getAsSKOSUntypedLiteral();
+						if (untypedLiteral.hasLang()) {
+							lang = untypedLiteral.getLang();
+						} else {
+							lang = "";
+						}
 					}
-				}
-				//System.out.println("literal: "+ literal.getLiteral());
-				if (lang.equals("en")) {
-					//System.out.println("altLabel: " + literal.getLiteral());
-					altLabelList.add(literal.getLiteral());
+					//System.out.println("literal: "+ literal.getLiteral());
+					if (lang.equals("en")) {
+						//System.out.println("altLabel: " + literal.getLiteral());
+						altLabelList.add(literal.getLiteral());
+					}
+				} else {
+					logger.debug("Literal retrieved for altlabel was null and was ignored");
 				}
 			}
             concept.setAltLabelList(altLabelList);
