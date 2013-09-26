@@ -73,16 +73,6 @@
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000003"/>
     </owl:Class>
     
-
-
-    <!-- http://vivoweb.org/ontology/core#URLLink -->
-
-    <owl:Class rdf:about="http://vivoweb.org/ontology/core#URLLink">
-        <rdfs:label xml:lang="en">urllink</rdfs:label>
-        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The full URL.</obo:IAO_0000112>
-        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Uniform Resource Locator (URL) specifies where an identified resource is available and the mechanism for retrieving it.</obo:IAO_0000115>
-        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://info.slis.indiana.edu/~katy/</obo:IAO_0000112>
-    </owl:Class>
     
 
 

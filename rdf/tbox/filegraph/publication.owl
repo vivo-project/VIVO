@@ -1142,12 +1142,6 @@ Contents
     
 
 
-    <!-- http://vivoweb.org/ontology/core#URLLink -->
-
-    <owl:Class rdf:about="http://vivoweb.org/ontology/core#URLLink"/>
-    
-
-
     <!-- http://vivoweb.org/ontology/core#Video -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Video">

@@ -539,7 +539,6 @@
 
     <owl:Class rdf:about="http://purl.org/spar/c4o/BibliographicInformationSource">
         <rdfs:label xml:lang="en-us">Bibliographic Information Source</rdfs:label>
-        <rdfs:subClassOf rdf:resource="http://isf/deprecated_class"/>
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A source of information about bibliographic citations, such as Google Scholar, Web of Science or Scopus.</vitro:descriptionAnnot>
     </owl:Class>
     
@@ -792,7 +791,6 @@
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#EducationalProcess">
         <rdfs:label xml:lang="en-us">Educational Process</rdfs:label>
-        <rdfs:subClassOf rdf:resource="http://isf/deprecated_class"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#supplementalInformation"/>
@@ -1056,7 +1054,6 @@
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Software">
         <rdfs:label xml:lang="en-us">Software</rdfs:label>
-        <rdfs:subClassOf rdf:resource="http://isf/deprecated_class"/>
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#InformationResource"/>
         <rdfs:subClassOf>
             <owl:Restriction>
