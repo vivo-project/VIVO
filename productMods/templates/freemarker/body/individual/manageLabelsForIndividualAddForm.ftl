@@ -3,17 +3,17 @@
 <#assign isPersonType = editConfiguration.pageData.isPersonType />
 <form id="addLabelForm" name="addLabelForm" class="customForm" action="${submitUrl}">
            <h2>${i18n().add_label}</h2>
-           <#if isPersonType = "true">       
+           <#if isPersonType?has_content && isPersonType = "true">       
 	        <p>
 	            <label for="firstName">${i18n().first_name} ${requiredHint}</label>
 	            <input size="30"  type="text" id="firstName" name="firstName" value="${firstNameValue}" />
 	        </p>
 			<#--TODO: With ISF changes, add middle name input-->
 	
-			<!--p-->
-	            <!--label for="middleName">${i18n().middle_name} ${requiredHint}</label>
+			<p>
+	            <label for="middleName">${i18n().middle_name} </label>
 	            <input size="30"  type="text" id="middleName" name="middleName" value="${middleNameValue}" />
-	        </p-->
+	        </p>
 	
 	        <p>
 	            <label for="lastName">${i18n().last_name} ${requiredHint}</label>

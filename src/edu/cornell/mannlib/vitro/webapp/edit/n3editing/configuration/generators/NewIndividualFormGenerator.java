@@ -41,6 +41,7 @@ public class NewIndividualFormGenerator extends BaseEditConfigurationGenerator i
     	));    
     	//Optional because user may have selected either person or individual of another kind
     	//Person uses first name and last name whereas individual of other class would use label 
+    	//middle name is also optional
     	config.setN3Optional(list(
     	        N3_PREFIX + "@prefix vcard:<http://www.w3.org/2006/vcard/ns#> .\n"
     	                  + " ?newInd <http://purl.obolibrary.org/obo/ARG_2000028> ?newVcardInd . \n"
@@ -50,6 +51,7 @@ public class NewIndividualFormGenerator extends BaseEditConfigurationGenerator i
     	                  + " ?newVcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n"
     	                  + " ?newVcardName vcard:givenName ?firstName . \n"
     	                  + " ?newVcardName vcard:familyName ?lastName .",
+    	        "?newVcardName <http://www.w3.org/2006/vcard/ns#middleName> ?middleName .",
                 N3_PREFIX + " ?newInd <" + RDFS.label.getURI() + "> ?label ."
     	));
     	                    
@@ -58,7 +60,7 @@ public class NewIndividualFormGenerator extends BaseEditConfigurationGenerator i
     	config.addNewResource("newVcardName", vreq.getWebappDaoFactory().getDefaultNamespace());
     	    	
     	config.setUrisOnform(list ());
-        config.setLiteralsOnForm( list( "label", "firstName", "lastName" ));            	
+        config.setLiteralsOnForm( list( "label", "firstName", "lastName", "middleName" ));            	
     	setUrisAndLiteralsInScope(config);
     	//No SPARQL queries for existing since this is only used to create new, never for edit    	
     	    	
@@ -66,6 +68,11 @@ public class NewIndividualFormGenerator extends BaseEditConfigurationGenerator i
     	        setName("firstName").
     	        setRangeDatatypeUri(XSD.xstring.getURI()).
     	        setValidators(getFirstNameValidators(vreq)));
+    	
+    	config.addField(new FieldVTwo().
+    	        setName("middleName").
+    	        setRangeDatatypeUri(XSD.xstring.getURI()).
+    	        setValidators(getMiddleNameValidators(vreq)));
     	
     	config.addField(new FieldVTwo().
                 setName("lastName").
@@ -96,7 +103,12 @@ public class NewIndividualFormGenerator extends BaseEditConfigurationGenerator i
     	return config;
     }
     
-    //first and last name have validators if is person is true
+    private List<String> getMiddleNameValidators(VitroRequest vreq) {
+    	List<String> validators = new ArrayList<String>();
+		return validators;
+	}
+
+	//first and last name have validators if is person is true
     private List<String> getFirstNameValidators(VitroRequest vreq) {
 		List<String> validators = new ArrayList<String>();
 		if(isPersonType(vreq)) {
