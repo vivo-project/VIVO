@@ -54,6 +54,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTw
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.FoafNameToRdfsLabelPreprocessor;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.ManageLabelsForIndividualPreprocessor;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.ManageLabelsForPersonPreprocessor;
 import edu.cornell.mannlib.vitro.webapp.i18n.selection.LocaleSelectionDataGetter;
 import edu.cornell.mannlib.vitro.webapp.i18n.selection.LocaleSelectorUtilities;
 import edu.cornell.mannlib.vitro.webapp.i18n.selection.SelectedLocale;
@@ -69,12 +70,7 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
     private static String template = "manageLabelsForPerson.ftl";
     private HashMap<String, List<LabelInformation>> labelsSortedByLanguage = null;
     private List<Literal> existingLabelLiterals = null;
-    //list of language names sorted alphabetically
-    private List<String> existingSortedLanguageNameList = null;
-    //This would be for the full list and can be used for the existing labels list as well
-    
-    private HashMap<String, String> fullLanguageNameToCodeMap = null;
-    private static String predicateUri = RDFS.label.getURI();
+
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
 
@@ -115,7 +111,7 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
         addFormSpecificData(config, vreq);
         //This preprocessor handles getting the correct label language and putting the attribute on the label
  	   config.addEditSubmissionPreprocessor(
-			   new ManageLabelsForIndividualPreprocessor(config));
+			   new ManageLabelsForPersonPreprocessor(config));
  	   //This will handle generating the label from the first name, middle, and last names and also make sure to associate
  	   //a language with that label
        config.addModelChangePreprocessor(new FoafNameToRdfsLabelPreprocessor());        
@@ -150,22 +146,20 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
 
 	private List<String> generateN3Optional(VitroRequest vreq) {
 		List<String> n3Optional = new ArrayList<String>();
-		String predicateUri = EditConfigurationUtils.getPredicateUri(vreq);
-		String n3 = "?subject <" + predicateUri + "> ?label ";
-		//n3 used if the subject is a person
-		//String personN3 = this.N3_PREFIX + "?subject foaf:firstName ?firstName ; foaf:lastName ?lastName .";
-		//This n3 will be different with the ISF changes
-		String personN3 = this.N3_PREFIX + 
+		
+		String personFullNameN3 = this.N3_PREFIX + 
 		 "?subject <http://purl.obolibrary.org/obo/ARG_2000028>  ?individualVcard . \n" +
 	        "?individualVcard a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +              
 	        "?individualVcard <http://purl.obolibrary.org/obo/ARG_2000029> ?subject . \n" +
 	        "?individualVcard <http://www.w3.org/2006/vcard/ns#hasName> ?fullName . \n" +
-	        "?fullName a <http://www.w3.org/2006/vcard/ns#Name> . \n"  + 
-	        "?fullName <http://www.w3.org/2006/vcard/ns#givenName> ?firstName . \n" + 
+	        "?fullName a <http://www.w3.org/2006/vcard/ns#Name> .";
+		String personFirstNameN3 =  
+	        "?fullName <http://www.w3.org/2006/vcard/ns#givenName> ?firstName . ";
+		String personLastNameN3 = 
 	        "?fullName <http://www.w3.org/2006/vcard/ns#familyName> ?lastName .";
-       
-		n3Optional.add(n3);
-		n3Optional.add(personN3);
+		String personMiddleNameN3 = "?fullName <http://www.w3.org/2006/vcard/ns#middleName> ?middleName .";
+  		n3Optional.add(personFullNameN3 + "\n " + personFirstNameN3 + "\n " + personLastNameN3);
+		n3Optional.add(personMiddleNameN3);
 		return n3Optional;
 	}
 	
@@ -174,9 +168,7 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
 	private void setFields(EditConfigurationVTwo editConfiguration, VitroRequest vreq, String predicateUri) {
     	Map<String, FieldVTwo> fields = new HashMap<String, FieldVTwo>();
     	editConfiguration.setFields(fields);
-    	editConfiguration.addField(new FieldVTwo().
-                setName("label").
-                setValidators(getLabelValidators(vreq, editConfiguration)));    
+    	
     	editConfiguration.addField(new FieldVTwo(
     			).setName("newLabelLanguage"));
     	//no validators since all of this is optional
@@ -186,7 +178,7 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
     	        setValidators(getFirstNameValidators(vreq, editConfiguration)));
     	editConfiguration.addField(new FieldVTwo().
                 setName("middleName").
-                setValidators(getLastNameValidators(vreq, editConfiguration)));  
+                setValidators(getMiddleNameValidators(vreq, editConfiguration)));  
     	
     	editConfiguration.addField(new FieldVTwo().
                 setName("lastName").
@@ -199,39 +191,36 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
 	//first and last name have validators if is person is true
     private List<String> getFirstNameValidators(VitroRequest vreq, EditConfigurationVTwo config) {
 		List<String> validators = new ArrayList<String>();
-		if(isPersonType(vreq, config)) {
 			validators.add("nonempty");
-		}
+		
+		return validators;
+	}
+    
+    private List<String> getMiddleNameValidators(VitroRequest vreq, EditConfigurationVTwo config) {
+		List<String> validators = new ArrayList<String>();
+		
 		return validators;
 	}
 
 	private List<String> getLastNameValidators(VitroRequest vreq, EditConfigurationVTwo config) {
 		List<String> validators = new ArrayList<String>();
-		if(isPersonType(vreq, config)) {
 			validators.add("nonempty");
-		}
+		
 		return validators;
 	}
 
-	//validate label if person is not true
-	private List<String> getLabelValidators(VitroRequest vreq, EditConfigurationVTwo config) {
-		List<String> validators = new ArrayList<String>();
-		if(!isPersonType(vreq, config)) {
-			validators.add("nonempty");
-		}
-		return validators;
-	}
+	
     
 
     
 	private void setUrisAndLiteralsOnForm(EditConfigurationVTwo config,
 			VitroRequest vreq) {
 		List<String> literalsOnForm = new ArrayList<String>();
-		literalsOnForm.add("label");
 		literalsOnForm.add("newLabelLanguage");
 		//optional for person
 		literalsOnForm.add("firstName");
 		literalsOnForm.add("lastName");
+		literalsOnForm.add("middleName");
 		config.setLiteralsOnForm(literalsOnForm);
 		
 	}
@@ -253,17 +242,6 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
 	private void initExistingLabels(EditConfigurationVTwo config,
 			VitroRequest vreq) {
 		this.existingLabelLiterals = this.getExistingLabels(config.getSubjectUri(), vreq);
-    //	this.labelsSortedByLanguage = this.getLabelsSortedByLanguage(config,vreq);
-    	//language names sorted for the existing languages
-   // 	this.existingSortedLanguageNameList = getExistingSortedLanguageNamesList();
-    	
-    	//Generate a label to language code hash map
-    	//TODO: 
-    	
-    	//HashMap<String, String> labelToLanguageCode = new HashMap<String, String>();
-    	
-    	//this.labels = getExistingLabels(config.getSubjectUri(), vreq);
-    	//this.labelsSortedByLanguage = getLabelsSortedByLanguage(config.getSubjectUri(), vreq);
 		
 	}
     
@@ -318,15 +296,7 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
             config.addFormSpecificData("subjectName", null);
         }
         
-  //Put in whether or not person type
-  		if(isPersonType(vreq, config)) {
-  			//Doing this b/c unsure how freemarker will handle boolean value from JAVA
-  			config.addFormSpecificData("isPersonType", "true");
-  		} else {
-  			config.addFormSpecificData("isPersonType", "false");
-
-  		}
-  		
+  		config.addFormSpecificData("isPersonType", "true");
   		//Include whether or not editable to enable edit/remove links and add to show up
   		config.addFormSpecificData("editable", isEditable(vreq, config));
 	}
@@ -376,7 +346,6 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
 
 
 	//Copied from NewIndividualFormGenerator
-	//TODO: Refactor so common code can be used by both generators
 	public String getFOAFPersonClassURI() {
 		return "http://xmlns.com/foaf/0.1/Person";
 	}
