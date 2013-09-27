@@ -13,5 +13,6 @@ CONSTRUCT {
       ?person vivo:editorOf ?document
     } UNION {
       ?document vivo:editor ?person
+      FILTER NOT EXISTS { ?person vivo:editorOf ?document } 
     }
 }

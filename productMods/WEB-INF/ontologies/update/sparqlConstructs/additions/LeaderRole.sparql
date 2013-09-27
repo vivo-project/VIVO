@@ -11,5 +11,7 @@ CONSTRUCT {
 } WHERE {
     { ?person vivo:currentlyHeadOf ?org }
       UNION 
-    { ?org vivo:currentlyHeadedBy ?person }
+    { ?org vivo:currentlyHeadedBy ?person 
+      FILTER NOT EXISTS { ?person vivo:currentlyHeadOf ?org }
+    }
 }

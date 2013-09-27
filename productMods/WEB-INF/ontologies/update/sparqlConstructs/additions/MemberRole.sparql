@@ -11,5 +11,7 @@ CONSTRUCT {
 } WHERE {
      {  ?person vivo:currentMemberOf ?org }
        UNION 
-     { ?org vivo:hasCurrentMember ?person }
+     { ?org vivo:hasCurrentMember ?person 
+       FILTER NOT EXISTS { ?person vivo:currentMemberOf ?org }
+     }
 }
