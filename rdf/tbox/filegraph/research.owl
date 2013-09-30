@@ -25,7 +25,6 @@
     <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0000119"/>
     <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0000117"/>
     <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0000118"/>
-    <owl:AnnotationProperty rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#shortDef"/>
     <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0000111"/>
     <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0000112"/>
     
@@ -93,7 +92,7 @@
     <owl:Class rdf:about="http://vivoweb.org/ontology/scientific-research#Phase0ClinicalTrial">
         <rdfs:label xml:lang="en">phase 0 clinical trial</rdfs:label>
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000016"/>
-        <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 0 Clinical Trial</vitro:shortDef>
+        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 0 Clinical Trial</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 0 is a recent designation for exploratory, first-in-human trials  conducted in accordance with the United States Food and Drug Administration&apos;s (FDA) 2006 Guidance on Exploratory Investigational New Drug (IND) Studies.  Phase 0 trials are also known as human microdosing  studies and are designed to speed up the development of promising drugs or imaging agents by establishing very early on whether the drug or agent behaves in human subjects as was expected from preclinical studies.</obo:IAO_0000115>
     </owl:Class>
     
@@ -105,7 +104,7 @@
         <rdfs:label xml:lang="en">phase 1 clinical trial</rdfs:label>
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000016"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">In Phase I trials, researchers test an experimental drug or treatment in a small group of people (20-80) for the first time to evaluate its safety, determine a safe dosage range, and identify side effects</obo:IAO_0000115>
-        <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 1 Clinical Trial</vitro:shortDef>
+        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 1 Clinical Trial</obo:IAO_0000115>
     </owl:Class>
     
 
@@ -116,7 +115,7 @@
         <rdfs:label xml:lang="en">phase 2 clinical trial</rdfs:label>
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000016"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">In Phase 2 trials, an experimental study drug or treatment is given to a larger group of people (100-300) to see if it is effective and to further evaluate its safety.</obo:IAO_0000115>
-        <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 2 Clinical Trial</vitro:shortDef>
+        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 2 Clinical Trial</obo:IAO_0000115>
     </owl:Class>
     
 
@@ -128,7 +127,7 @@
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000016"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">In Phase 3 trials, an experimental study drug or treatment is given to large groups of people (1,000-3,000) to confirm its effectiveness, monitor side effects, compare it to commonly used treatments, and collect information that will allow the experimental drug or treatment to be used safely.
 </obo:IAO_0000115>
-        <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 3 Clinical Trial</vitro:shortDef>
+        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 3 Clinical Trial</obo:IAO_0000115>
     </owl:Class>
     
 
@@ -139,7 +138,7 @@
         <rdfs:label xml:lang="en">phase 4 clinical trial</rdfs:label>
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000016"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">In Phase 4 trials, post marketing studies delineate additional information including the drug&apos;s or treatment&apos;s risks, benefits, and optimal use.</obo:IAO_0000115>
-        <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 4 Clinical Trial</vitro:shortDef>
+        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 4 Clinical Trial</obo:IAO_0000115>
     </owl:Class>
 </rdf:RDF>
 

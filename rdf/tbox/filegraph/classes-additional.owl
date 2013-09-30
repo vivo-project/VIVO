@@ -803,8 +803,8 @@
                 <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#DateTimeInterval"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Currently any abstract name is given to individuals of this class. This could change in the future.</vitro:exampleAnnot>
-        <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Represents educational training that has been received.</vitro:shortDef>
+        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Currently any abstract name is given to individuals of this class. This could change in the future.</obo:IAO_0000112>
+        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Represents educational training that has been received.</obo:IAO_0000115>
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This connects person to their academic degree through this educational training, but can also be used when the training does not result in a degree.</vitro:descriptionAnnot>
     </owl:Class>
     
@@ -913,7 +913,7 @@
                 <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The most general classification of an information resource</vitro:shortDef>
+        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The most general classification of an information resource</obo:IAO_0000115>
     </owl:Class>
     
 
@@ -1042,8 +1042,8 @@
                 <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#DateTimeInterval"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A person&apos;s, group&apos;s or organization&apos;s role in an endeavor</vitro:shortDef>
-        <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Only use if no specific subclasses of core:Role describe the role.</vitro:exampleAnnot>
+        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A person&apos;s, group&apos;s or organization&apos;s role in an endeavor</obo:IAO_0000115>
+        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Only use if no specific subclasses of core:Role describe the role.</obo:IAO_0000112>
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Only use this broad role class if no subclasses of role describe the item being classified.</vitro:descriptionAnnot>
     </owl:Class>
     
@@ -1061,7 +1061,7 @@
                 <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Computer program and its related documentation; directs the operation of a computer</vitro:shortDef>
+        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Computer program and its related documentation; directs the operation of a computer</obo:IAO_0000115>
     </owl:Class>
     
 

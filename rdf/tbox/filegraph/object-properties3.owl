@@ -33,7 +33,6 @@
     <owl:AnnotationProperty rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#exampleAnnot"/>
     <owl:AnnotationProperty rdf:about="http://www.w3.org/2003/06/sw-vocab-status/ns#term_status"/>
     <owl:AnnotationProperty rdf:about="http://www.w3.org/2008/05/skos#scopeNote"/>
-    <owl:AnnotationProperty rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#shortDef"/>
     <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#label"/>
     <owl:AnnotationProperty rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#descriptionAnnot"/>
     <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment"/>

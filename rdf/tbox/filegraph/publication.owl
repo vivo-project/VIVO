@@ -27,7 +27,6 @@
     <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0000114"/>
     <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0000119"/>
     <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0000117"/>
-    <owl:AnnotationProperty rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#shortDef"/>
     <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0000111"/>
     <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0000112"/>
     
@@ -864,7 +863,7 @@
     <owl:Class rdf:about="http://purl.org/spar/fabio/ClinicalGuideline">
         <rdfs:label xml:lang="en">clinical guideline</rdfs:label>
         <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
-        <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A recommendation on the appropriate treatment and care of people with a specific disease or condition, based on the best available evidence, designed to help healthcare professionals in their work.</vitro:shortDef>
+        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A recommendation on the appropriate treatment and care of people with a specific disease or condition, based on the best available evidence, designed to help healthcare professionals in their work.</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A recommendation on the appropriate treatment and care of people with a specific disease or condition, based on the best available evidence, designed to help healthcare professionals in their work.</obo:IAO_0000115>
     </owl:Class>
     
@@ -875,7 +874,7 @@
     <owl:Class rdf:about="http://purl.org/spar/fabio/Comment">
         <rdfs:label xml:lang="en">comment</rdfs:label>
         <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
-        <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A verbal or written remark concerning some entity. In written form, a comment is often appended to that entity and termed an annotation. Within computer programs or ontologies, comments are added to enhance human understanding, and are usually prefaced by</vitro:shortDef>
+        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A verbal or written remark concerning some entity. In written form, a comment is often appended to that entity and termed an annotation. Within computer programs or ontologies, comments are added to enhance human understanding, and are usually prefaced by</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A verbal or written remark concerning some entity. In written form, a comment is often appended to that entity and termed an annotation. Within computer programs or ontologies, comments are added to enhance human understanding, and are usually prefaced by a special syntactic symbol that ensures they are ignored during execution of the program.
 
 has super-classes</obo:IAO_0000115>
@@ -888,7 +887,7 @@ has super-classes</obo:IAO_0000115>
     <owl:Class rdf:about="http://purl.org/spar/fabio/Erratum">
         <rdfs:label xml:lang="en">erratum</rdfs:label>
         <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
-        <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A formal correction to an error introduced by the publisher into a previously published document.</vitro:shortDef>
+        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A formal correction to an error introduced by the publisher into a previously published document.</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A formal correction to an error introduced by the publisher into a previously published document.</obo:IAO_0000115>
     </owl:Class>
     
