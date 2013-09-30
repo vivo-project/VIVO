@@ -209,25 +209,25 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
         "?awardReceipt <"+ descriptionPred +"> ?description .";
 
     final static String n3ForExistingOrgNewAwardAssertion  =      
-        "?award <" + awardConferredByPred +"> ?existingOrg . \n" +
-        "?existingOrg <" + awardConferredPred + "> ?award . \n" +
+        "?awardReceipt <" + awardConferredByPred +"> ?existingOrg . \n" +
+        "?existingOrg <" + awardConferredPred + "> ?awardReceipt . \n" +
         "?award <"+ label + "> ?awardLabel .";    
 
     final static String n3ForExistingOrgExistingAwardAssertion  =      
-        "?existingAward <" + awardConferredByPred +"> ?existingOrg . \n" +
-        "?existingOrg <" + awardConferredPred + "> ?existingAward . ";    
+        "?awardReceipt <" + awardConferredByPred +"> ?existingOrg . \n" +
+        "?existingOrg <" + awardConferredPred + "> ?awardReceipt . ";    
 
     final static String n3ForNewOrgNewAwardAssertion  =      
         "?newOrg a <" + orgClass + "> . \n" +
-        "?award <" + awardConferredByPred +"> ?newOrg . \n" +
-        "?newOrg <" + awardConferredPred + "> ?award . \n" +
+        "?awardReceipt <" + awardConferredByPred +"> ?newOrg . \n" +
+        "?newOrg <" + awardConferredPred + "> ?awardReceipt . \n" +
         "?award <"+ label + "> ?awardLabel . \n" +   
         "?newOrg <"+ label + "> ?orgLabel .";    
 
     final static String n3ForNewOrgExistingAwardAssertion  =      
         "?newOrg a <" + orgClass + "> . \n" +
-        "?existingAward <" + awardConferredByPred +"> ?newOrg . \n" +
-        "?newOrg <" + awardConferredPred + "> ?existingAward . \n" +    
+        "?awardReceipt <" + awardConferredByPred +"> ?newOrg . \n" +
+        "?newOrg <" + awardConferredPred + "> ?awardReceipt . \n" +    
         "?newOrg <"+ label + "> ?orgLabel .";    
 
 	final static String n3ForYearAwarded = 

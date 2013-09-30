@@ -453,7 +453,7 @@ local:eventWithinConfig a :ObjectPropertyDisplayConfig ;
 
 local:includesEventContext a :ConfigContext ;
     :hasConfiguration local:includesEventConfig ;
-    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000051> ;
     :qualifiedByDomain      <http://purl.org/NET/c4dm/event.owl#Event> ;
     :qualifiedBy      <http://purl.org/NET/c4dm/event.owl#Event> .
 
@@ -467,11 +467,11 @@ local:includesEventConfig a :ObjectPropertyDisplayConfig ;
 
 local:inEventSeriesContext a :ConfigContext ;
     :hasConfiguration local:inEventSeriesConfig ;
-    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000051> ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
     :qualifiedByDomain      <http://purl.org/NET/c4dm/event.owl#Event> ;
     :qualifiedBy      <http://purl.org/NET/c4dm/event.owl#EventSeries> .
 
-local:includesEventConfig a :ObjectPropertyDisplayConfig ;
+local:inEventSeriesConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
     :displayName "in event series" ;
     vitro:displayRankAnnot 3;
@@ -479,3 +479,16 @@ local:includesEventConfig a :ObjectPropertyDisplayConfig ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
+local:awardAssignedByContext a :ConfigContext ;
+    :hasConfiguration local:awardAssignedByConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#assignedBy> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#Award> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#Award> .
+
+local:awardAssignedByConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "award conferred by" ;
+    vitro:displayRankAnnot 3;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .

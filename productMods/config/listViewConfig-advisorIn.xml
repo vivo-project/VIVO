@@ -25,11 +25,14 @@
                          ?dateTimeEnd
 
          WHERE {
-                     ?subject ?property ?advisory 
+                     ?subject ?property ?advisory .
+                     ?advisory core:relates ?advisor .
+                     ?advisor &lt;http://purl.obolibrary.org/obo/RO_0000053&gt; ?advisorRole .
                      LET ( ?localName := afn:localname(?advisory) )
                      OPTIONAL { ?advisory rdfs:label ?advisoryLabel  }
                      OPTIONAL { ?advisory core:relates ?advisee .
                                 ?advisee a foaf:Person .
+                                ?advisee &lt;http://purl.obolibrary.org/obo/RO_0000053&gt; ?adviseeRole
                                 OPTIONAL { ?advisee rdfs:label ?adviseeLabel }
                      }
                      OPTIONAL { ?advisory core:relates ?degree .
@@ -74,7 +77,10 @@
             ?subject ?property ?advisory .
             ?advisory a core:AdvisingRelationship .
             ?advisory ?advisoryProperty ?advisoryValue .
-            ?advisory rdfs:label ?advisoryLabel 
+            ?advisory rdfs:label ?advisoryLabel .
+            ?advisory core:relates ?advisor .
+            ?advisor &lt;http://purl.obolibrary.org/obo/RO_0000053&gt; ?advisorRole .
+            ?advisorRole a core:AdvisorRole
         } WHERE {
             {
                ?subject ?property ?advisory .
@@ -88,10 +94,23 @@
                ?advisory a core:AdvisingRelationship .
                ?advisory ?advisoryProperty ?advisoryValue . 
                ?advisory rdfs:label ?advisoryLabel
+            } UNION {
+               ?subject ?property ?advisory .
+               ?advisory a core:AdvisingRelationship .
+               ?advisory ?advisoryProperty ?advisoryValue . 
+               ?advisory core:relates ?advisor .
+               ?advisor &lt;http://purl.obolibrary.org/obo/RO_0000053&gt; ?advisorRole .
+               ?advisorRole a core:AdvisorRole
             } 
         }
     </query-construct>
     
+    OPTIONAL { ?advisory core:relates ?advisee .
+               ?advisee a foaf:Person .
+               ?advisee &lt;http://purl.obolibrary.org/obo/RO_0000053&gt; ?adviseeRole
+
+
+
     <query-construct>
             PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt;
             PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt; 
@@ -104,6 +123,8 @@
                 ?advisory core:relates ?advisee .
                 ?advisee a foaf:Person .
                 ?advisee rdfs:label ?adviseeLabel .
+                ?advisee &lt;http://purl.obolibrary.org/obo/RO_0000053&gt; ?adviseeRole .
+                ?adviseeRole a core:AdviseeRole .
                 ?advisory core:relates ?degree .
                 ?degree a core:AcademicDegree .
                 ?degree rdfs:label ?degreeLabel .
@@ -117,11 +138,15 @@
                     ?advisory a core:AdvisingRelationship .
                     ?advisory core:relates ?advisee .
                     ?advisee a foaf:Person .
+                    ?advisee &lt;http://purl.obolibrary.org/obo/RO_0000053&gt; ?adviseeRole .
+                    ?adviseeRole a core:AdviseeRole 
                 } UNION {
                     ?subject ?property ?advisory .
                     ?advisory a core:AdvisingRelationship .
                     ?advisory core:relates ?advisee .
                     ?advisee a foaf:Person .
+                    ?advisee &lt;http://purl.obolibrary.org/obo/RO_0000053&gt; ?adviseeRole .
+                    ?adviseeRole a core:AdviseeRole .
                     ?advisee rdfs:label ?adviseeLabel
                 } UNION {
                     ?subject ?property ?advisory .

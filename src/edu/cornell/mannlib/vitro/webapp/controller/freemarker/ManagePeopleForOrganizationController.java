@@ -65,12 +65,14 @@ public class ManagePeopleForOrganizationController extends FreemarkerHttpServlet
         + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
         + "PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> \n"
         + "PREFIX afn: <http://jena.hpl.hp.com/ARQ/function#> \n"
+        + "PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n"
         + "SELECT DISTINCT ?subclass ?position (str(?label) as ?name) ?person ?hideThis WHERE { \n"
-        + "    ?subject core:organizationForPosition ?position . \n"
-        + "    OPTIONAL { ?position core:positionForPerson  ?person . " 
+        + "    ?subject core:relatedBy ?position . \n"
+        + "    ?position a core:Position . \n"
+        + "    OPTIONAL { ?position core:relates  ?person . " 
+        + "               ?person a foaf:Person . \n"
         + "               ?person rdfs:label ?label } \n"
-        + "    OPTIONAL { ?position vitro:mostSpecificType ?subclass . \n"
-        + "              ?subclass rdfs:subClassOf core:Position } \n"
+        + "    OPTIONAL { ?position vitro:mostSpecificType ?subclass } \n"
         + "    OPTIONAL { ?position core:hideFromDisplay ?hideThis } \n "
         + "} ORDER BY ?subclass ?name";    
        

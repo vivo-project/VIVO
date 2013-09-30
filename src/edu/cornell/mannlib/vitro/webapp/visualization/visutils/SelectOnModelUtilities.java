@@ -52,7 +52,8 @@ public class SelectOnModelUtilities {
 		
 		String whereClause = ""
 			+ " <" + subjectEntityURI + "> rdfs:label ?organizationLabel . "
-			+ " <" + subjectEntityURI + "> core:hasSubOrganization ?subOrganization . "
+			+ " <" + subjectEntityURI + "> <http://purl.obolibrary.org/obo/BFO_0000051> ?subOrganization . "
+            + " ?subOrganization rdf:type foaf:Organization .  "
 			+ " ?subOrganization rdfs:label ?subOrganizationLabel . "
 			+ " ?subOrganization rdf:type ?subOrgType . "
 			+ " ?subOrgType rdfs:label ?subOrganizationTypeLabel . ";
@@ -136,7 +137,8 @@ public class SelectOnModelUtilities {
 		
 		String whereClause = ""
 			+ " <" + subjectEntityURI + "> rdfs:label ?organizationLabel . "
-			+ " <" + subjectEntityURI + "> core:subOrganizationWithin ?parentOrganization . "
+			+ " <" + subjectEntityURI + "> <http://purl.obolibrary.org/obo/BFO_0000050> ?parentOrganization . "
+            + " ?parentOrganization rdf:type foaf:Organization .  "
 			+ " ?parentOrganization rdfs:label ?parentOrganizationLabel . ";
 		
 		QueryRunner<ResultSet> parentOrganizationsQuery = 

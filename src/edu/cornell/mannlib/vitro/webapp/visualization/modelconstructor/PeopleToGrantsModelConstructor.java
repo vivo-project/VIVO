@@ -37,22 +37,24 @@ public class PeopleToGrantsModelConstructor implements ModelConstructor {
 		this.dataset = dataset;
 	}
 	
-private Set<String> constructPersonGrantsQueryTemplate(String constructProperty, String roleTypeProperty) {
+private Set<String> constructPersonGrantsQueryTemplate(String constructProperty, String roleType) {
 		
 		Set<String> differentPerspectiveQueries = new HashSet<String>();
 		
 		String justGrantsQuery = ""
 			+ " CONSTRUCT {  "
-			+ "     ?person vivosocnet:lastCachedAt ?now . "
-			+ "     ?person vivosocnet:" + constructProperty + " ?Grant . "
+			+ "     ?Person vivosocnet:lastCachedAt ?now . "
+			+ "     ?Person vivosocnet:" + constructProperty + " ?Grant . "
 			+ "      "
 			+ "     ?Grant rdf:type core:Grant . "
 			+ "     ?Grant rdfs:label ?grantLabel . "
 			+ "      "
 			+ " } "
 			+ " WHERE { "
-			+ "     ?person core:" + roleTypeProperty + " ?Role .  "
-			+ "     ?Role core:roleContributesTo ?Grant . "
+    		+ "     ?Person <http://purl.obolibrary.org/obo/RO_0000053> ?Role .  "
+    	    + "     ?Role rdf:type core:" + roleType + " . "
+			+ "     ?Role core:relatedBy ?Grant . "
+			+ "     ?Grant rdf:type core:Grant . "
 			+ "     ?Grant rdfs:label ?grantLabel . "
 			+ "      "
 			+ "     LET(?now := afn:now()) "
@@ -60,14 +62,16 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 
 		String justDateTimeOnGrantsQuery = ""
 			+ " CONSTRUCT {  "
-			+ "     ?person vivosocnet:lastCachedAt ?now . "
+			+ "     ?Person vivosocnet:lastCachedAt ?now . "
 			+ "     ?Grant vivosocnet:startDateTimeOnGrant ?startDateTimeValueForGrant . "
 //			+ "     ?Grant vivosocnet:endDateTimeOnGrant ?endDateTimeValueForGrant . "
 			+ "      "
 			+ " } "
 			+ " WHERE { "
-			+ "     ?person core:" + roleTypeProperty + " ?Role .  "
-			+ "     ?Role core:roleContributesTo ?Grant . "
+    		+ "     ?Person <http://purl.obolibrary.org/obo/RO_0000053> ?Role .  "
+    	    + "     ?Role rdf:type core:" + roleType + " . "
+			+ "     ?Role core:relatedBy ?Grant . "
+			+ "     ?Grant rdf:type core:Grant . "
 			+ "      "
 			+ "         ?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant .          "
 //			+ "         OPTIONAL { "
@@ -84,13 +88,15 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 		
 		String justDateTimeOnRolesQuery = ""
 			+ " CONSTRUCT {  "
-			+ "     ?person vivosocnet:lastCachedAt ?now . "
+			+ "     ?Person vivosocnet:lastCachedAt ?now . "
 			+ "     ?Grant vivosocnet:startDateTimeOnRole ?startDateTimeValue . "
 //			+ "     ?Grant vivosocnet:endDateTimeOnRole ?endDateTimeValue . "
 			+ " } "
 			+ " WHERE { "
-			+ "     ?person core:" + roleTypeProperty + " ?Role .  "
-			+ "     ?Role core:roleContributesTo ?Grant . "
+    		+ "     ?Person <http://purl.obolibrary.org/obo/RO_0000053> ?Role .  "
+    	    + "     ?Role rdf:type core:" + roleType + " . "
+			+ "     ?Role core:relatedBy ?Grant . "
+			+ "     ?Grant rdf:type core:Grant . "
 			+ "      "
 			+ "         ?Role core:dateTimeInterval ?dateTimeIntervalValue . "
 //			+ "         OPTIONAL { "
@@ -117,9 +123,9 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 
 		Set<String> differentInvestigatorTypeQueries = new HashSet<String>();
 		
-		Set<String> investigatorRoleQuery = constructPersonGrantsQueryTemplate("hasGrantAsAnInvestigator", "hasInvestigatorRole");
-		Set<String> piRoleQuery = constructPersonGrantsQueryTemplate("hasGrantAsPI", "hasPrincipalInvestigatorRole");
-		Set<String> coPIRoleQuery = constructPersonGrantsQueryTemplate("hasGrantAsCoPI", "hasCo-PrincipalInvestigatorRole");
+		Set<String> investigatorRoleQuery = constructPersonGrantsQueryTemplate("hasGrantAsAnInvestigator", "InvestigatorRole");
+		Set<String> piRoleQuery = constructPersonGrantsQueryTemplate("hasGrantAsPI", "PrincipalInvestigatorRole");
+		Set<String> coPIRoleQuery = constructPersonGrantsQueryTemplate("hasGrantAsCoPI", "CoPrincipalInvestigatorRole");
 
 		differentInvestigatorTypeQueries.addAll(investigatorRoleQuery);
 		differentInvestigatorTypeQueries.addAll(piRoleQuery);

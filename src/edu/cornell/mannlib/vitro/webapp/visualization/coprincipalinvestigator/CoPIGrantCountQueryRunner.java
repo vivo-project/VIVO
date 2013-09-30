@@ -113,13 +113,21 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			+ 		"<" + queryURI + "> rdfs:label ?PILabel . "  	
 			+  		"{ "
 			        	
-			+			"<" + queryURI + "> core:hasCo-PrincipalInvestigatorRole ?Role . "
+			+			"<" + queryURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
 
-			+			"?Role core:roleContributesTo ?Grant . "
+		    +			"?Role rdf:type core:CoPrincipalInvestigatorRole . "
 
-			+			"?Grant core:contributingRole ?RelatedRole . "
+			+			"?Role core:relatedBy ?Grant . "
 
-			+			"?RelatedRole core:principalInvestigatorRoleOf ?CoPI . " 
+			+			"?Grant rdf:type core:Grant . "
+
+			+			"?Grant core:relates ?RelatedRole . "
+
+			+			"?RelatedRole rdf:type core:PrincipalInvestigatorRole . " 
+
+			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . " 
+
+	        +			"?CoPI rdf:type foaf:Person .	"
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
@@ -133,13 +141,21 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 
 			+  		"{ "
 			        	
-			+			"<" + queryURI + "> core:hasCo-PrincipalInvestigatorRole ?Role . "
+			+			"<" + queryURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
 
-			+			"?Role core:roleContributesTo ?Grant . "
+	        +			"?Role rdf:type core:CoPrincipalInvestigatorRole . "
 
-			+			"?Grant core:contributingRole ?RelatedRole . "
+			+			"?Role core:relatedBy ?Grant . "
 
-			+			"?RelatedRole core:investigatorRoleOf ?CoPI . " 
+			+			"?Grant rdf:type core:Grant . "
+
+			+			"?Grant core:relates ?RelatedRole . "
+
+			+			"?RelatedRole rdf:type core:InvestigatorRole . " 
+
+			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . " 
+
+	        +			"?CoPI rdf:type foaf:Person .	"
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
@@ -154,13 +170,21 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 					
 			+  		"{ "
 			        	
-			+			"<" + queryURI + "> core:hasCo-PrincipalInvestigatorRole ?Role . "
+			+			"<" + queryURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
 
-			+			"?Role core:roleContributesTo ?Grant . "
+	        +			"?Role rdf:type core:CoPrincipalInvestigatorRole . "
 
-			+			"?Grant core:contributingRole ?RelatedRole . "
+			+			"?Role core:relatedBy ?Grant . "
 
-			+			"?RelatedRole core:co-PrincipalInvestigatorRoleOf ?CoPI . " 
+			+			"?Grant rdf:type core:Grant . "
+
+			+			"?Grant core:relates ?RelatedRole . "
+
+			+			"?RelatedRole rdf:type core:CoPrincipalInvestigatorRole  . " 
+
+			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . " 
+
+	        +			"?CoPI rdf:type foaf:Person .	"
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
@@ -176,13 +200,21 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			
 			+		"{ "
 			        	
-			+			"<" + queryURI + "> core:hasPrincipalInvestigatorRole ?Role . "
+			+			"<" + queryURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
 
-			+			"?Role core:roleContributesTo ?Grant . "
+	        +			"?Role rdf:type core:PrincipalInvestigatorRole . "
 
-			+			"?Grant core:contributingRole ?RelatedRole . "
+			+			"?Role core:relatedBy ?Grant . "
 
-			+			"?RelatedRole core:principalInvestigatorRoleOf ?CoPI . " 
+			+			"?Grant rdf:type core:Grant . "
+
+			+			"?Grant core:relates ?RelatedRole . "
+
+			+			"?RelatedRole rdf:type core:PrincipalInvestigatorRole  . " 
+
+			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . " 
+
+	        +			"?CoPI rdf:type foaf:Person .	"
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
@@ -197,13 +229,21 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			
 			+		"{ "
 			        	
-			+			"<" + queryURI + "> core:hasPrincipalInvestigatorRole ?Role . "
+			+			"<" + queryURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
 
-			+			"?Role core:roleContributesTo ?Grant . "
+	        +			"?Role rdf:type core:PrincipalInvestigatorRole . "
 
-			+			"?Grant core:contributingRole ?RelatedRole . "
+			+			"?Role core:relatedBy ?Grant . "
 
-			+			"?RelatedRole core:investigatorRoleOf ?CoPI . " 
+			+			"?Grant rdf:type core:Grant . "
+
+			+			"?Grant core:relates ?RelatedRole . "
+
+			+			"?RelatedRole rdf:type core:InvestigatorRole  . " 
+
+			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . " 
+
+	        +			"?CoPI rdf:type foaf:Person .	"
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
@@ -218,13 +258,21 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 					
 			+		"{ "
 			        	
-			+			"<" + queryURI + "> core:hasPrincipalInvestigatorRole ?Role . "
+			+			"<" + queryURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
 
-			+			"?Role core:roleContributesTo ?Grant . "
+	        +			"?Role rdf:type core:PrincipalInvestigatorRole . "
 
-			+			"?Grant core:contributingRole ?RelatedRole . "
+			+			"?Role core:relatedBy ?Grant . "
 
-			+			"?RelatedRole core:co-PrincipalInvestigatorRoleOf ?CoPI . " 
+			+			"?Grant rdf:type core:Grant . "
+
+			+			"?Grant core:relates ?RelatedRole . "
+
+			+			"?RelatedRole rdf:type core:CoPrincipalInvestigatorRole . " 
+
+			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . " 
+
+	        +			"?CoPI rdf:type foaf:Person .	"
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
@@ -239,34 +287,21 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 					
 			+		"{ "
 			        	
-			+			"<" + queryURI + "> core:hasInvestigatorRole ?Role . "
+			+			"<" + queryURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
 
-			+			"?Role core:roleContributesTo ?Grant . "
+	        +			"?Role rdf:type core:InvestigatorRole . "
 
-			+			"?Grant core:contributingRole ?RelatedRole . "
+			+			"?Role core:relatedBy ?Grant . "
 
-			+			"?RelatedRole core:investigatorRoleOf ?CoPI . " 
+			+			"?Grant rdf:type core:Grant . "
 
-			+			"?CoPI rdfs:label ?CoPILabel .	"
+			+			"?Grant core:relates ?RelatedRole . "
 
-			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
-			
-			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
-			
-			
-			+ 		"} "
-			
-			+		"UNION "
-			
-			+		"{ "
-			        	
-			+			"<" + queryURI + "> core:hasInvestigatorRole ?Role . "
+			+			"?RelatedRole rdf:type core:InvestigatorRole  . " 
 
-			+			"?Role core:roleContributesTo ?Grant . "
+			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . " 
 
-			+			"?Grant core:contributingRole ?RelatedRole . "
-
-			+			"?RelatedRole core:co-PrincipalInvestigatorRoleOf ?CoPI . " 
+	        +			"?CoPI rdf:type foaf:Person .	"
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
@@ -281,13 +316,50 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			
 			+		"{ "
 			        	
-			+			"<" + queryURI + "> core:hasInvestigatorRole ?Role . "
+			+			"<" + queryURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
 
-			+			"?Role core:roleContributesTo ?Grant . "
+	        +			"?Role rdf:type core:InvestigatorRole . "
 
-			+			"?Grant core:contributingRole ?RelatedRole . "
+			+			"?Role core:relatedBy ?Grant . "
 
-			+			"?RelatedRole core:principalInvestigatorRoleOf ?CoPI . " 
+			+			"?Grant rdf:type core:Grant . "
+
+			+			"?Grant core:relates ?RelatedRole . "
+
+			+			"?RelatedRole rdf:type core:CoPrincipalInvestigatorRole  . " 
+
+			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . " 
+
+	        +			"?CoPI rdf:type foaf:Person .	"
+
+			+			"?CoPI rdfs:label ?CoPILabel .	"
+
+			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
+			
+			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
+			
+			
+			+ 		"} "
+			
+			+		"UNION "
+			
+			+		"{ "
+			        	
+			+			"<" + queryURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
+
+	        +			"?Role rdf:type core:InvestigatorRole . "
+
+			+			"?Role core:relatedBy ?Grant . "
+
+			+			"?Grant rdf:type core:Grant . "
+
+			+			"?Grant core:relates ?RelatedRole . "
+
+			+			"?RelatedRole rdf:type core:PrincipalInvestigatorRole . " 
+
+			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . " 
+
+		    +			"?CoPI rdf:type foaf:Person .	"
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
