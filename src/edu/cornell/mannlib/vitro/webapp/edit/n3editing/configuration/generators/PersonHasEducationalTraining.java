@@ -240,6 +240,8 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         "?newOrg <http://vivoweb.org/ontology/core#assigns> ?newAwardedDegree . \n" +
         "?newOrg a ?orgType . \n" +
         "?newOrg <"+ label +"> ?orgLabel . \n" +
+        "?edTraining <http://purl.obolibrary.org/obo/RO_0000057> ?newOrg . \n" +
+        "?newOrg <http://purl.obolibrary.org/obo/RO_0000056> ?edTraining . \n" +
         "?newAwardedDegree <http://vivoweb.org/ontology/core#relates> ?degreeType .\n"+
         "?degreeType <http://vivoweb.org/ontology/core#relatedBy> ?newAwardedDegree . \n"+
         "?newAwardedDegree a core:AwardedDegree .";
@@ -254,6 +256,8 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         "?existingOrg  <http://vivoweb.org/ontology/core#assigns> ?newAwardedDegree . \n" +
         "?newAwardedDegree <http://vivoweb.org/ontology/core#assignedBy> ?existingOrg  . \n" +
         "?newAwardedDegree <http://vivoweb.org/ontology/core#relates> ?degreeType .\n"+
+        "?edTraining <http://purl.obolibrary.org/obo/RO_0000057> ?existingOrg . \n" +
+        "?existingOrg <http://purl.obolibrary.org/obo/RO_0000056> ?edTraining . \n" +
         "?degreeType <http://vivoweb.org/ontology/core#relatedBy> ?newAwardedDegree . \n"+
         "?newAwardedDegree a core:AwardedDegree .";
 

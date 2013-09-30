@@ -38,9 +38,9 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 			.getLog(CoPIGrantCountConstructQueryRunner.class.getName());
 
 	private static final String SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING = 
-			"?Role core:roleContributesTo ?Grant . "
-//			+ "?Grant rdfs:label ?GrantLabel . "
-			+ "?Grant core:contributingRole ?RelatedRole . ";
+			"?Role core:relatedBy ?Grant . "
+			+ "?Grant rdf:type core:Grant ."
+			+ "?Grant core:relates ?RelatedRole . ";
 
 	public CoPIGrantCountConstructQueryRunner(String egoURI, Dataset dataset,
 			Log log) {
@@ -59,23 +59,31 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 	}
 
 	private String generateConstructQueryForInvestigatorRoleOfProperty(
-			String queryURI, String preboundProperty) {
+			String queryURI, String preboundProperty, String preboundRoleType) {
 
 		String sparqlQuery = "CONSTRUCT { " + "<" + queryURI + ">"
 				+ preboundProperty + " ?Role . "
+				+ "?Role rdf:type " + preboundRoleType + " . "
 				+ SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING
-				+ "?RelatedRole core:investigatorRoleOf ?coInvestigator ."
+				+ "?RelatedRole rdf:type core:InvestigatorRole ."
+				+ "?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?coInvestigator ."
+			    + "?coInvestigator rdf:type foaf:Person  ."
 				+ "?coInvestigator rdfs:label ?coInvestigatorLabel . " + "}"
-				+ "WHERE { " + "<" + queryURI + ">" + preboundProperty
-				+ " ?Role . " + SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING
-				+ "?RelatedRole core:investigatorRoleOf ?coInvestigator ."
-				+ "?coInvestigator rdfs:label ?coInvestigatorLabel . " + "}";
+				+ "WHERE { " + "<" + queryURI + ">" + preboundProperty + " ?Role . "  
+				+ "?Role rdf:type " + preboundRoleType + " . "
+				+ SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING
+				+ "?RelatedRole rdf:type core:InvestigatorRole ."
+				+ "?RelatedRole vitro:mostSpecificType ?subclass ."
+				+ "?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?coInvestigator ."
+		        + "?coInvestigator rdf:type foaf:Person  ."
+				+ "?coInvestigator rdfs:label ?coInvestigatorLabel . " 
+				+ "FILTER (?subclass != core:PrincipalInvestigatorRole && ?subclass != core:CoPrincipalInvestigatorRole)}";
 
 		return sparqlQuery;
 	}
 
 	private String generateConstructQueryForPrincipalInvestigatorRoleOfProperty(
-			String queryURI, String preboundProperty) {
+			String queryURI, String preboundProperty, String preboundRoleType) {
 
 		String sparqlQuery = "CONSTRUCT { "
 				+ "<"
@@ -83,8 +91,11 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 				+ ">"
 				+ preboundProperty
 				+ " ?Role . "
+				+ "?Role rdf:type " + preboundRoleType + " . "
 				+ SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING
-				+ "?RelatedRole core:principalInvestigatorRoleOf ?coInvestigator ."
+				+ "?RelatedRole rdf:type core:PrincipalInvestigatorRole ."
+				+ "?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?coInvestigator ."
+		        + "?coInvestigator rdf:type foaf:Person  ."
 				+ "?coInvestigator rdfs:label ?coInvestigatorLabel . "
 				+ "}"
 				+ "WHERE { "
@@ -93,15 +104,18 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 				+ ">"
 				+ preboundProperty
 				+ " ?Role . "
+				+ "?Role rdf:type " + preboundRoleType + " . "
 				+ SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING
-				+ "?RelatedRole core:principalInvestigatorRoleOf ?coInvestigator ."
+				+ "?RelatedRole rdf:type core:PrincipalInvestigatorRole ."
+				+ "?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?coInvestigator ."
+		        + "?coInvestigator rdf:type foaf:Person  ."
 				+ "?coInvestigator rdfs:label ?coInvestigatorLabel . " + "}";
 
 		return sparqlQuery;
 	}
 
 	private String generateConstructQueryForCoPrincipalInvestigatorRoleOfProperty(
-			String queryURI, String preboundProperty) {
+			String queryURI, String preboundProperty, String preboundRoleType) {
 
 		String sparqlQuery = "CONSTRUCT { "
 				+ "<"
@@ -109,8 +123,11 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 				+ ">"
 				+ preboundProperty
 				+ " ?Role . "
+				+ "?Role rdf:type " + preboundRoleType + " . "
 				+ SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING
-				+ "?RelatedRole core:co-PrincipalInvestigatorRoleOf ?coInvestigator ."
+				+ "?RelatedRole rdf:type core:CoPrincipalInvestigatorRole ."
+				+ "?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?coInvestigator ."
+		        + "?coInvestigator rdf:type foaf:Person  ."
 				+ "?coInvestigator rdfs:label ?coInvestigatorLabel . "
 				+ "}"
 				+ "WHERE { "
@@ -119,18 +136,22 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 				+ ">"
 				+ preboundProperty
 				+ " ?Role . "
+				+ "?Role rdf:type " + preboundRoleType + " . "
 				+ SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING
-				+ "?RelatedRole core:co-PrincipalInvestigatorRoleOf ?coInvestigator ."
+				+ "?RelatedRole rdf:type core:CoPrincipalInvestigatorRole ."
+				+ "?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?coInvestigator ."
+		        + "?coInvestigator rdf:type foaf:Person  ."
 				+ "?coInvestigator rdfs:label ?coInvestigatorLabel . " + "}";
 
 		return sparqlQuery;
 	}
 
 	private String generateConstructQueryForDateTimeValueofRole(
-			String queryURI, String preboundProperty) {
+			String queryURI, String preboundProperty, String preboundRoleType) {
 
 		String sparqlQuery = "CONSTRUCT { " + "<" + queryURI + ">"
 				+ preboundProperty + " ?Role . "
+				+ "?Role rdf:type " + preboundRoleType + " . "
 				+ "?Role core:dateTimeInterval ?dateTimeIntervalValue . "
 				+ "?dateTimeIntervalValue core:start ?startDate . "
 				+ "?startDate core:dateTime ?startDateTimeValue . "
@@ -139,6 +160,7 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 				+ "}"
 				+ "WHERE { " + "{" + "<" + queryURI + ">" + preboundProperty
 				+ " ?Role . "
+				+ "?Role rdf:type " + preboundRoleType + " . "
 				+ "?Role core:dateTimeInterval ?dateTimeIntervalValue . "
 				+ "?dateTimeIntervalValue core:start ?startDate . "
 				+ "?startDate core:dateTime ?startDateTimeValue . "
@@ -153,14 +175,16 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 	}
 
 	private String generateConstructQueryForDateTimeValueofGrant(
-			String queryURI, String preboundProperty) {
+			String queryURI, String preboundProperty, String preboundRoleType) {
 
 		String sparqlQuery = "CONSTRUCT { " + "<"
 				+ queryURI
 				+ ">"
 				+ preboundProperty
 				+ " ?Role . "
-				+ "?Role core:roleContributesTo ?Grant ."
+				+ "?Role rdf:type " + preboundRoleType + " . "
+				+ "?Role core:relatedBy ?Grant ."
+    			+ "?Grant rdf:type core:Grant ."
 				+ "?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant . "
 				+ "?dateTimeIntervalValueForGrant core:start ?startDateForGrant . "
 				+ "?startDateForGrant core:dateTime ?startDateTimeValueForGrant . "
@@ -174,7 +198,9 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 				+ ">"
 				+ preboundProperty
 				+ " ?Role . "
-				+ "?Role core:roleContributesTo ?Grant ."
+				+ "?Role rdf:type " + preboundRoleType + " . "
+				+ "?Role core:relatedBy ?Grant ."
+    			+ "?Grant rdf:type core:Grant ."
 				+ "?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant . "
 				+ "?dateTimeIntervalValueForGrant core:start ?startDateForGrant . "
 				+ "?startDateForGrant core:dateTime ?startDateTimeValueForGrant . "
@@ -268,45 +294,45 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 				.add(generateConstructQueryForInvestigatorLabel(this.egoURI));
 		constructQueries
 				.add(generateConstructQueryForInvestigatorRoleOfProperty(
-						this.egoURI, "core:hasInvestigatorRole"));
+						this.egoURI, "<http://purl.obolibrary.org/obo/RO_0000053>", "core:InvestigatorRole"));
 		constructQueries
 				.add(generateConstructQueryForCoPrincipalInvestigatorRoleOfProperty(
-						this.egoURI, "core:hasInvestigatorRole"));
+						this.egoURI, "<http://purl.obolibrary.org/obo/RO_0000053>", "core:InvestigatorRole"));
 		constructQueries
 				.add(generateConstructQueryForPrincipalInvestigatorRoleOfProperty(
-						this.egoURI, "core:hasInvestigatorRole"));
+						this.egoURI, "<http://purl.obolibrary.org/obo/RO_0000053>", "core:InvestigatorRole"));
 		constructQueries.add(generateConstructQueryForDateTimeValueofRole(
-				this.egoURI, "core:hasInvestigatorRole"));
+				this.egoURI, "<http://purl.obolibrary.org/obo/RO_0000053>", "core:InvestigatorRole"));
 		constructQueries.add(generateConstructQueryForDateTimeValueofGrant(
-				this.egoURI, "core:hasInvestigatorRole"));
+				this.egoURI, "<http://purl.obolibrary.org/obo/RO_0000053>", "core:InvestigatorRole"));
 
 		constructQueries
 				.add(generateConstructQueryForInvestigatorRoleOfProperty(
-						this.egoURI, "core:hasPrincipalInvestigatorRole"));
+						this.egoURI, "<http://purl.obolibrary.org/obo/RO_0000053>", "core:PrincipalInvestigatorRole"));
 		constructQueries
 				.add(generateConstructQueryForCoPrincipalInvestigatorRoleOfProperty(
-						this.egoURI, "core:hasPrincipalInvestigatorRole"));
+						this.egoURI, "<http://purl.obolibrary.org/obo/RO_0000053>", "core:PrincipalInvestigatorRole"));
 		constructQueries
 				.add(generateConstructQueryForPrincipalInvestigatorRoleOfProperty(
-						this.egoURI, "core:hasPrincipalInvestigatorRole"));
+						this.egoURI, "<http://purl.obolibrary.org/obo/RO_0000053>", "core:PrincipalInvestigatorRole"));
 		constructQueries.add(generateConstructQueryForDateTimeValueofRole(
-				this.egoURI, "core:hasPrincipalInvestigatorRole"));
+				this.egoURI, "<http://purl.obolibrary.org/obo/RO_0000053>", "core:PrincipalInvestigatorRole"));
 		constructQueries.add(generateConstructQueryForDateTimeValueofGrant(
-				this.egoURI, "core:hasPrincipalInvestigatorRole"));
+				this.egoURI, "<http://purl.obolibrary.org/obo/RO_0000053>", "core:PrincipalInvestigatorRole"));
 
 		constructQueries
 				.add(generateConstructQueryForInvestigatorRoleOfProperty(
-						this.egoURI, "core:hasCo-PrincipalInvestigatorRole"));
+						this.egoURI, "<http://purl.obolibrary.org/obo/RO_0000053>", "core:CoPrincipalInvestigatorRole"));
 		constructQueries
 				.add(generateConstructQueryForCoPrincipalInvestigatorRoleOfProperty(
-						this.egoURI, "core:hasCo-PrincipalInvestigatorRole"));
+						this.egoURI, "<http://purl.obolibrary.org/obo/RO_0000053>", "core:CoPrincipalInvestigatorRole"));
 		constructQueries
 				.add(generateConstructQueryForPrincipalInvestigatorRoleOfProperty(
-						this.egoURI, "core:hasCo-PrincipalInvestigatorRole"));
+						this.egoURI, "<http://purl.obolibrary.org/obo/RO_0000053>", "core:CoPrincipalInvestigatorRole"));
 		constructQueries.add(generateConstructQueryForDateTimeValueofRole(
-				this.egoURI, "core:hasCo-PrincipalInvestigatorRole"));
+				this.egoURI, "<http://purl.obolibrary.org/obo/RO_0000053>", "core:CoPrincipalInvestigatorRole"));
 		constructQueries.add(generateConstructQueryForDateTimeValueofGrant(
-				this.egoURI, "core:hasCo-PrincipalInvestigatorRole"));
+				this.egoURI, "<http://purl.obolibrary.org/obo/RO_0000053>", "core:CoPrincipalInvestigatorRole"));
 
 	}
 }

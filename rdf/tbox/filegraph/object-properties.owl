@@ -1532,6 +1532,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#geographicFocusOf">
         <rdfs:label xml:lang="en">geographic focus of</rdfs:label>
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
+        <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#geographicFocus"/>
     </owl:ObjectProperty>
     
 

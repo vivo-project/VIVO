@@ -11,6 +11,8 @@
 <#--Get existing value for specific data literals and uris-->
 <#assign firstNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "firstName")/>
 <#assign lastNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "lastName")/>
+<#assign middleNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "middleName")/>
+
 <#assign labelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "label")/>
 
 <#--If edit submission exists, then retrieve validation errors if they exist-->
@@ -50,6 +52,11 @@
         <p>
             <label for="firstName">${i18n().first_name} ${requiredHint}</label>
             <input size="30"  type="text" id="firstName" name="firstName" value="${firstNameValue}" />
+        </p>
+        
+        <p>
+            <label for="lastName">${i18n().middle_name} </label>
+            <input size="30"  type="text" id="middleName" name="middleName" value="${middleNameValue}" />
         </p>
 
         <p>

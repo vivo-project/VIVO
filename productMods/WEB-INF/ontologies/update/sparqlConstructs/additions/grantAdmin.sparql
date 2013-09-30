@@ -13,5 +13,7 @@ CONSTRUCT {
 } WHERE {
     { ?agent vivo:administers ?grant }
       UNION
-    { ?grant vivo:administeredBy ?agent }
+    { ?grant vivo:administeredBy ?agent 
+      FILTER NOT EXISTS { ?agent vivo:administers ?grant } 
+    }
 }

@@ -80,8 +80,10 @@ public class OrganizationUtilityFunctions {
 
 		String whereClause = "?organization rdf:type foaf:Organization ;" 
 						+ " rdfs:label ?organizationLabel . \n"
-				+ "OPTIONAL { ?organization core:hasSubOrganization ?subOrg } . \n"
-				+ "OPTIONAL { ?organization core:subOrganizationWithin ?parent } . \n"
+				+ "OPTIONAL { ?organization <http://purl.obolibrary.org/obo/BFO_0000051> ?subOrg . \n"
+			    + "           ?subOrg rdf:type foaf:Organization } . \n"
+				+ "OPTIONAL { ?organization <http://purl.obolibrary.org/obo/BFO_0000050> ?parent . \n"
+		    + "               ?parent rdf:type foaf:Organization } . \n"
 				+ "FILTER ( !bound(?parent) ). \n";
 
 		String groupOrderClause = "GROUP BY ?organization ?organizationLabel \n"

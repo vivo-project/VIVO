@@ -122,19 +122,19 @@ $(document).ready(function(){
         
     // if there are no selected pubs, hide the manage link; same for grants
     // and affiliated people on the org profile page
-    if ( $('ul#authorInAuthorshipList').children('li').length < 1 && $('h3#authorInAuthorship').attr('class') != "hiddenPubs" ) {
+    if ( $('ul#relatedBy-Authorship-List').children('li').length < 1 && $('h3#relatedBy-Authorship').attr('class') != "hiddenPubs" ) {
         $('a#managePubLink').hide();
     }
 
-    if ( $('ul#hasResearcherRoleList').children('li').length < 1 &&
-            $('ul#hasPrincipalInvestigatorRoleList').children('li').length < 1 &&
-            $('ul#hasCo-PrincipalInvestigatorRoleList').children('li').length < 1 &&
-            $('ul#hasInvestigatorRoleList').children('li').length < 1 &&
-            $('h3#hasResearcherRole').attr('class') != "hiddenGrants" ) {
+    if ( $('ul#RO_0000053-ResearcherRole-List').children('li').length < 1 &&
+            $('ul#RO_0000053-PrincipalInvestigatorRole-List').children('li').length < 1 &&
+            $('ul#RO_0000053-CoPrincipalInvestigatorRole-List').children('li').length < 1 &&
+            $('ul#RO_0000053-InvestigatorRole-List').children('li').length < 1 &&
+            $('h3#RO_0000053-ResearcherRole').attr('class') != "hiddenGrants" ) {
                     $('a#manageGrantLink').hide();
     }
 
-    if ( $('ul#organizationForPositionList').children('li').length < 1 && $('h3#organizationForPosition').attr('class') != "hiddenPeople" ) {
+    if ( $('ul#relatedBy-Position-List').children('li').length < 1 && $('h3#relatedBy-Position').attr('class') != "hiddenPeople" ) {
         $('a#managePeopleLink').hide();
     }
    

@@ -3,7 +3,9 @@
 package edu.cornell.mannlib.vitro.webapp.visualization.visutils;
 
 import org.apache.commons.lang.StringUtils;
+
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
@@ -38,7 +40,7 @@ public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
 	private String filterRule, individualURI;
 	private Dataset dataset;
 
-	private Log log;
+	private Log log = LogFactory.getLog(AllPropertiesQueryRunner.class.getName());
 
 	public AllPropertiesQueryRunner(String individualURI,
 							   String filterRule,
@@ -101,7 +103,9 @@ public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
 							+ "<" + queryURI + "> ?predicate ?object.  "
 							+ filterClause
 							+ "}";
-
+            	
+        log.debug("sparqlQuery = " + sparqlQuery.toString());
+        
 		return sparqlQuery;
 	}
 	

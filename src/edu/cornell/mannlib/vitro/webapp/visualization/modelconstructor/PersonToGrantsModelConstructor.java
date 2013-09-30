@@ -40,7 +40,7 @@ public class PersonToGrantsModelConstructor implements ModelConstructor {
 		this.dataset = dataset;
 	}
 	
-private Set<String> constructPersonGrantsQueryTemplate(String constructProperty, String roleTypeProperty) {
+private Set<String> constructPersonGrantsQueryTemplate(String constructProperty, String roleType) {
 		
 		Set<String> differentPerspectiveQueries = new HashSet<String>();
 		
@@ -54,8 +54,10 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 			+ "      "
 			+ " } "
 			+ " WHERE { "
-			+ "     <" + personURI + "> core:" + roleTypeProperty + " ?Role .  "
-			+ "     ?Role core:roleContributesTo ?Grant . "
+			+ "     <" + personURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
+		    + "     ?Role rdf:type core:" + roleType + " . "
+    		+ "     ?Role core:relatedBy ?Grant . "
+    		+ "     ?Grant rdf:type core:Grant . "
 			+ "     ?Grant rdfs:label ?grantLabel . "
 			+ "      "
 			+ "     LET(?now := afn:now()) "
@@ -69,8 +71,10 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 			+ "      "
 			+ " } "
 			+ " WHERE { "
-			+ "     <" + personURI + "> core:" + roleTypeProperty + " ?Role .  "
-			+ "     ?Role core:roleContributesTo ?Grant . "
+			+ "     <" + personURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
+		    + "     ?Role rdf:type core:" + roleType + " . "
+    		+ "     ?Role core:relatedBy ?Grant . "
+    		+ "     ?Grant rdf:type core:Grant . "
 			+ "      "
 			+ "         ?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant .          "
 //			+ "         OPTIONAL { "
@@ -92,8 +96,10 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 //			+ "     ?Grant vivosocnet:endDateTimeOnRole ?endDateTimeValue . "
 			+ " } "
 			+ " WHERE { "
-			+ "     <" + personURI + "> core:" + roleTypeProperty + " ?Role .  "
-			+ "     ?Role core:roleContributesTo ?Grant . "
+			+ "     <" + personURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
+		    + "     ?Role rdf:type core:" + roleType + " . "
+    		+ "     ?Role core:relatedBy ?Grant . "
+    		+ "     ?Grant rdf:type core:Grant . "
 			+ "      "
 			+ "         ?Role core:dateTimeInterval ?dateTimeIntervalValue . "
 //			+ "         OPTIONAL { "
@@ -120,9 +126,9 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 
 		Set<String> differentInvestigatorTypeQueries = new HashSet<String>();
 		
-		Set<String> investigatorRoleQuery = constructPersonGrantsQueryTemplate("hasGrantAsAnInvestigator", "hasInvestigatorRole");
-		Set<String> piRoleQuery = constructPersonGrantsQueryTemplate("hasGrantAsPI", "hasPrincipalInvestigatorRole");
-		Set<String> coPIRoleQuery = constructPersonGrantsQueryTemplate("hasGrantAsCoPI", "hasCo-PrincipalInvestigatorRole");
+		Set<String> investigatorRoleQuery = constructPersonGrantsQueryTemplate("hasGrantAsAnInvestigator", "InvestigatorRole");
+		Set<String> piRoleQuery = constructPersonGrantsQueryTemplate("hasGrantAsPI", "PrincipalInvestigatorRole");
+		Set<String> coPIRoleQuery = constructPersonGrantsQueryTemplate("hasGrantAsCoPI", "CoPrincipalInvestigatorRole");
 
 		differentInvestigatorTypeQueries.addAll(investigatorRoleQuery);
 		differentInvestigatorTypeQueries.addAll(piRoleQuery);

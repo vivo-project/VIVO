@@ -16,7 +16,7 @@
 <h1 id="noPubsOrGrants-header">${organizationLabel}</h1>
 
     <h3 id="alternative-vis-info">${textForCurrentEntityComparisonType?capitalize} ${i18n().temporal_graph_capitalized} 
-        <span id="noPubsOrGrants-span">|&nbsp;<a  href="${temporalGraphURL}" title="${i18n().view}">${i18n().view} ${textForOtherEntityComparisonType} ${i18n().temporal_graph}</a></span>
+        <span id="noPubsOrGrants-span">|&nbsp;<a  href="${temporalGraphURL}" title="${i18n().view}">${i18n().view}&nbsp${textForOtherEntityComparisonType}&nbsp;${i18n().temporal_graph}</a></span>
     </h3>
     <div id="error-body">
         <p>${i18n().entity_comp_error_text1} 
