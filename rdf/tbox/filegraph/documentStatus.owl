@@ -15,9 +15,6 @@
      xmlns:core="http://vivoweb.org/ontology/core#"
      xmlns:skos="http://www.w3.org/2004/02/skos/core#"
      xmlns:dcelem="http://purl.org/dc/elements/1.1/">
-    <owl:Ontology rdf:about="http://vivoweb.org/ontology/core/documentStatus.owl">
-        <rdfs:label xml:lang="en-us">Document status</rdfs:label>
-    </owl:Ontology>
     
 
 

@@ -12,10 +12,6 @@
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:core="http://vivoweb.org/ontology/core#">
-    <owl:Ontology rdf:about="http://purl.obolibrary.org/obo/arg/app-views/vivo/vivo-app.owl">
-        <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">${eaglei.ontology.version}</owl:versionInfo>
-        <rdfs:comment>A file to hold VIVO application specific entities, and original VIVO entities that are being considered to be application specific when merging into ARG. </rdfs:comment>
-    </owl:Ontology>
     
 
 

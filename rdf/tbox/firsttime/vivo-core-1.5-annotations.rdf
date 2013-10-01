@@ -245,6 +245,14 @@
     >5</vitro:displayLimitAnnot>
     <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupoverview"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://purl.obolibrary.org/obo/">
+      <rdfs:label xml:lang="en-US">OBO Foundry</rdfs:label>
+      <vitro:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">obo</vitro:ontologyPrefixAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2006/vcard/ns">
+      <rdfs:label xml:lang="en-US">VCard</rdfs:label>
+      <vitro:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vcard</vitro:ontologyPrefixAnnot>
+  </rdf:Description>
   <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/">
     <rdfs:label xml:lang="en-US">FOAF</rdfs:label>
     <vitro:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
