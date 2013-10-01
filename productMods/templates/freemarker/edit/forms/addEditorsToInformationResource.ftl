@@ -1,12 +1,12 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#-- Custom form for adding authors to information resources -->
+<#-- Custom form for adding editors to information resources -->
 
 <#import "lib-vivo-form.ftl" as lvf>
 
 <#--Retrieve certain page specific information information-->
 <#assign newRank = editConfiguration.pageData.newRank />
-<#assign existingAuthorInfo = editConfiguration.pageData.existingAuthorInfo />
+<#assign existingEditorInfo = editConfiguration.pageData.existingEditorInfo />
 <#assign rankPredicate = editConfiguration.pageData.rankPredicate />
 
 <#--If edit submission exists, then retrieve validation errors if they exist-->
@@ -18,13 +18,10 @@
 <#assign lastNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "lastName") />
 <#assign firstNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "firstName") />
 <#assign middleNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "middleName") />
-<#assign orgNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgName") />
 
-
-
-<#--UL class based on size of existing authors-->
+<#--UL class based on size of existing editors-->
 <#assign ulClass = ""/>
-<#if (existingAuthorInfo?size > 0)>
+<#if (existingEditorInfo?size > 0)>
 	<#assign ulClass = "class='dd'"/>
 </#if>
 
@@ -49,70 +46,60 @@
     </section>
 </#if>
 
-<h3>${i18n().manage_authors}</h3>
+<h3>${i18n().manage_editors}</h3>
 
-<ul id="authorships" ${ulClass}>
+<ul id="editorships" ${ulClass}>
 
 <script type="text/javascript">
-    var authorshipData = [];
+    var editorshipData = [];
 </script>
 
 
-<#assign authorHref="/individual?uri=" />
+<#assign editorHref="/individual?uri=" />
 <#--This should be a list of java objects where URI and name can be retrieved-->
-<#list existingAuthorInfo as authorship>
-	<#assign authorUri = authorship.authorUri/>
-	<#assign authorName = authorship.authorName/>
+<#list existingEditorInfo as editorship>
+	<#assign editorUri = editorship.editorUri/>
+	<#assign editorName = editorship.editorName/>
 
-	<li class="authorship">
-			<#-- span.author will be used in the next phase, when we display a message that the author has been
-			removed. That text will replace the a.authorName, which will be removed. -->    
-			<span class="author">
-					<#-- This span is here to assign a width to. We can't assign directly to the a.authorName,
+	<li class="editorship">
+			<#-- span.editor will be used in the next phase, when we display a message that the editor has been
+			removed. That text will replace the a.editorName, which will be removed. -->    
+			<span class="editor">
+					<#-- This span is here to assign a width to. We can't assign directly to the a.editorName,
 					for the case when it's followed by an em tag - we want the width to apply to the whole thing. -->
-					<span class="authorNameWrapper">
-							<#if (authorUri?length > 0)>
-									<span class="authorName">${authorName}</span>
+					<span class="editorNameWrapper">
+							<#if (editorUri?length > 0)>
+									<span class="editorName">${editorName}</span>
 								<#else>      
-									<span class="authorName">${authorship.authorshipName}</span><em> (${i18n().no_linked_author})</em>
+									<span class="editorName">${editorship.editorshipName}</span><em> (${i18n().no_linked_editor})</em>
 							</#if>
 					</span>
 
-					<a href="${urls.base}/edit/primitiveDelete" class="remove" title="${i18n().remove_author_link}">${i18n().remove_capitalized}</a>
+					<a href="${urls.base}/edit/primitiveDelete" class="remove" title="${i18n().remove_editor_link}">${i18n().remove_capitalized}</a>
 			</span>
 	</li>
 
 	<script type="text/javascript">
-			authorshipData.push({
-					"authorshipUri": "${authorship.authorshipUri}",
-					"authorUri": "${authorUri}",
-					"authorName": "${authorName}"                
+			editorshipData.push({
+					"editorshipUri": "${editorship.editorshipUri}",
+					"editorUri": "${editorUri}",
+					"editorName": "${editorName}"                
 			});
 	</script>
 </#list>
-
-   
-
 </ul>
-
+<br />
 <section id="showAddForm" role="region">
     <input type="hidden" name = "editKey" value="${editKey}" />
-    <input type="submit" id="showAddFormButton" value="${i18n().add_author}" role="button" />
+    <input type="submit" id="showAddFormButton" value="${i18n().add_editor}" role="button" />
 
     <span class="or"> ${i18n().or} </span>
     <a id="returnLink" class="cancel" href="${cancelUrl}&url=/individual" title="${i18n().cancel_title}">${i18n().return_to_publication}</a>
     <img id="indicatorOne" class="indicator hidden" alt="${i18n().processing_indicator}" src="${urls.base}/images/indicatorWhite.gif" />
 </section> 
 
-<form id="addAuthorForm" action ="${submitUrl}" class="customForm noIE67">
-    <h3>${i18n().add_an_author}</h3>
-
-    <div style="display:inline">
-        <input type="radio" name="authorType" class="person-radio" value="" role="radio" checked style="display:inline;margin-top:20px" />
-        <label class="inline" for="Person" >${i18n().person_capitalized}</label>
-        <input type="radio" name="authorType" class="org-radio" value="http://xmlns.com/foaf/0.1/Organization" role="radio" style="display:inline;margin-left:18px" />
-        <label class="inline" for="Organization">${i18n().organization_capitalized}</label>
-    </div>
+<form id="addEditorForm" action ="${submitUrl}" class="customForm noIE67">
+    <h3>${i18n().add_an_editor}</h3>
 
     <section id="personFields" role="personContainer">
     		<#--These wrapper paragraph elements are important because javascript hides parent of these fields, since last name
@@ -132,27 +119,12 @@
         <input  size="20"  type="text" id="middleName" name="middleName" value="${middleNameValue}"  role="input" />
         </p>
       
-        <div id="selectedAuthor" class="acSelection">
+        <div id="selectedEditor" class="acSelection">
             <p class="inline">
-                <label>${i18n().selected_author}:&nbsp;</label>
-                <span class="acSelectionInfo" id="selectedAuthorName"></span>
+                <label>${i18n().selected_editor}:&nbsp;</label>
+                <span class="acSelectionInfo" id="selectedEditorName"></span>
                 <a href="${urls.base}/individual?uri=" id="personLink" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized})</a>
                 <input type="hidden" id="personUri" name="personUri" value=""  role="input" /> <!-- Field value populated by JavaScript -->
-            </p>
-        </div>
-    </section>
-    <section id="organizationFields" role="organization">
-    		<p class="inline">
-        <label for="orgName">${i18n().organization_name_capitalized} <span class='requiredHint'> *</span></label>
-        <input size="38"  type="text" id="orgName" name="orgName" value="${orgNameValue}" role="input" />
-        </p>
-				      
-        <div id="selectedOrg" class="acSelection">
-            <p class="inline">
-                <label>${i18n().selected_organization}:&nbsp;</label>
-                <span  id="selectedOrgName"></span>
-                <a href="${urls.base}/individual?uri=" id="orgLink"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized})</a>
-                <input type="hidden" id="orgUri" name="orgUri" value=""  role="input" /> <!-- Field value populated by JavaScript -->
             </p>
         </div>
     </section>
@@ -164,7 +136,7 @@
     
         <p class="submit">
             <input type="hidden" name = "editKey" value="${editKey}" role="input" />
-            <input type="submit" id="submit" value="${i18n().add_author}" role="button" role="input" />
+            <input type="submit" id="submit" value="${i18n().add_editor}" role="button" role="input" />
             
             <span class="or"> ${i18n().or} </span>
             
@@ -181,16 +153,14 @@ var customFormData = {
     acUrl: '${urls.base}/autocomplete?type=',
     tokenize: '&tokenize=true',
     personUrl: 'http://xmlns.com/foaf/0.1/Person',
-    orgUrl: 'http://xmlns.com/foaf/0.1/Organization',
     reorderUrl: '${urls.base}/edit/reorder'
 };
 var i18nStrings = {
-    authorNameWrapperTitle: '${i18n().drag_drop_reorder_authors}',
-    reorderAuthorsAlert: '${i18n().reordering_authors_failed}',
-    removeAuthorshipMessage: '${i18n().confirm_author_removal}',
-    removeAuthorshipAlert: '${i18n().error_processing_author_request}',
-    authorTypeText: '${i18n().author_capitalized}',
-    organizationTypeText: '${i18n().organization_capitalized}',
+    editorNameWrapperTitle: '${i18n().drag_drop_reorder_editors}',
+    reorderEditorsAlert: '${i18n().reordering_editors_failed}',
+    removeEditorshipMessage: '${i18n().confirm_editor_removal}',
+    removeEditorshipAlert: '${i18n().error_processing_editor_request}',
+    editorTypeText: '${i18n().editor_capitalized}',
     helpTextSelect: '${i18n().select_an_existing}',
     helptextAdd: '${i18n().or_add_new_one}'
 };
@@ -199,10 +169,10 @@ var i18nStrings = {
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />',
 					'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />',
 					'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/autocomplete.css" />',
-					'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/addAuthorsToInformationResource.css" />')}
+					'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/addEditorsToInformationResource.css" />')}
 
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>')}
-${scripts.add('<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/addAuthorsToInformationResource.js"></script>')}
+${scripts.add('<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/addEditorsToInformationResource.js"></script>')}

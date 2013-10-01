@@ -12,12 +12,12 @@
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
                 
         SELECT DISTINCT <collated> ?subclass </collated>
-                        ?authorship
+                        ?editorship
                         ?person ?personName 
         WHERE {
-                ?subject ?property ?authorship .
-                OPTIONAL { ?authorship core:rank ?rank } 
-                OPTIONAL { ?authorship core:relates ?person .
+                ?subject ?property ?editorship .
+                OPTIONAL { ?editorship core:rank ?rank } 
+                OPTIONAL { ?editorship core:relates ?person .
                        ?person a foaf:Person .                      
                        ?person rdfs:label ?personName 
                        <collated> 
@@ -48,31 +48,31 @@
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt; 
         PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt; 
         CONSTRUCT { 
-            ?subject ?property ?authorship .
-            ?authorship a core:Authorship .
-            ?authorship ?authorshipProperty ?authorshipValue .
-            ?authorship core:relates ?person .
+            ?subject ?property ?editorship .
+            ?editorship a core:Editorship .
+            ?editorship ?editorshipProperty ?editorshipValue .
+            ?editorship core:relates ?person .
             ?person a foaf:Person .
             ?person rdfs:label ?personName .
             ?person vitro:mostSpecificType ?subclass           
         } WHERE {
             {
-                ?subject ?property ?authorship .
-                ?authorship a core:Authorship 
+                ?subject ?property ?editorship .
+                ?editorship a core:Editorship 
             } UNION {
-                ?subject ?property ?authorship .
-                ?authorship a core:Authorship .
-                ?authorship ?authorshipProperty ?authorshipValue 
+                ?subject ?property ?editorship .
+                ?editorship a core:Editorship .
+                ?editorship ?editorshipProperty ?editorshipValue 
             } UNION {
-                ?subject ?property ?authorship .
-                ?authorship a core:Authorship .
-                ?authorship core:relates ?person .
+                ?subject ?property ?editorship .
+                ?editorship a core:Editorship .
+                ?editorship core:relates ?person .
                 ?person a foaf:Person .                      
                 ?person rdfs:label ?personName  
             } UNION {
-                ?subject ?property ?authorship .
-                ?authorship a core:Authorship .
-                ?authorship core:relates ?person .
+                ?subject ?property ?editorship .
+                ?editorship a core:Editorship .
+                ?editorship core:relates ?person .
                 ?person a foaf:Person .
                 ?person rdfs:label ?personName . 
                 ?person vitro:mostSpecificType ?subclass
@@ -80,5 +80,5 @@
         } 
     </query-construct>
     
-    <template>propStatement-informationResourceInAuthorship.ftl</template>
+    <template>propStatement-informationResourceInEditorship.ftl</template>
 </list-view-config>

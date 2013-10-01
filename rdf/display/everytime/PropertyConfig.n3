@@ -328,7 +328,6 @@ local:advisorRoleConfig a :ObjectPropertyDisplayConfig ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasAdvisingRelationshipGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupteaching> .
 
-
 local:informationResourceInAuthorshipContext a :ConfigContext ;
     :hasConfiguration local:informationResourceInAuthorshipConfig ;
     :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
@@ -344,7 +343,23 @@ local:informationResourceInAuthorshipConfig a :ObjectPropertyDisplayConfig ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddAuthorsToInformationResourceGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
+local:informationResourceInEditorshipContext a :ConfigContext ;
+    :hasConfiguration local:informationResourceInEditorshipConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
+    :qualifiedByDomain      <http://purl.obolibrary.org/obo/IAO_0000030> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#Editorship> .
+
+local:informationResourceInEditorshipConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-informationResourceInEditorship.xml"^^xsd:string ;
+    :displayName "editors" ;
+    vitro:displayRankAnnot 10;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddEditorsToInformationResourceGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibobscure> .
+
 ### vcard properties ###
+
 local:mailingAddressContext a :ConfigContext ;
     :hasConfiguration local:mailingAddressConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
@@ -435,6 +450,21 @@ local:fullNameConfig a :ObjectPropertyDisplayConfig ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddFullNameToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
 
+local:editorOfContext a :ConfigContext ;
+    :hasConfiguration local:editorOfConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#Editorship> .
+
+local:editorOfConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-editorship.xml"^^xsd:string ;
+    :displayName "editor of" ;
+    vitro:displayRankAnnot 20;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddEditorshipToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> .
+
 ### properties using default editing form ##
 
 local:eventWithinContext a :ConfigContext ;
@@ -479,16 +509,17 @@ local:inEventSeriesConfig a :ObjectPropertyDisplayConfig ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
-local:awardAssignedByContext a :ConfigContext ;
-    :hasConfiguration local:awardAssignedByConfig ;
-    :configContextFor <http://vivoweb.org/ontology/core#assignedBy> ;
+local:awardReceiptsContext a :ConfigContext ;
+    :hasConfiguration local:awardReceiptsConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
     :qualifiedByDomain      <http://vivoweb.org/ontology/core#Award> ;
-    :qualifiedBy      <http://vivoweb.org/ontology/core#Award> .
+    :qualifiedBy      <http://vivoweb.org/ontology/core#AwardReceipt> .
 
-local:awardAssignedByConfig a :ObjectPropertyDisplayConfig ;
+local:awardReceiptsConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
-    :displayName "award conferred by" ;
+    :displayName "receipts" ;
     vitro:displayRankAnnot 3;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
-    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupother> .
+

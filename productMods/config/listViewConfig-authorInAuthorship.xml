@@ -65,12 +65,19 @@
     </query-select>
 
     <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt;
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;    
         CONSTRUCT {
+            ?subject ?property ?authorship . 
+            ?authorship a core:Authorship . 
+            ?authorship core:relates ?infoResource .
             ?infoResource a bibo:Document .
             ?infoResource vitro:mostSpecificType ?subclass 
         } WHERE {
+            ?subject ?property ?authorship . 
+            ?authorship a core:Authorship . 
+            ?authorship core:relates ?infoResource .
             ?infoResource a bibo:Document .
             ?infoResource vitro:mostSpecificType ?subclass 
         }
@@ -90,25 +97,35 @@
             ?publishedIn  rdfs:label ?journal 
         } WHERE {
             {
-               ?subject ?property ?authorship 
+               ?subject ?property ?authorship .
+               ?authorship a core:Authorship 
             }
             UNION {
                ?subject ?property ?authorship .
+               ?authorship a core:Authorship .
                ?authorship ?authorshipProperty ?authorshipValue 
             } UNION {
                ?subject ?property ?authorship .
-               ?authorship core:linkedInformationResource ?infoResource 
+               ?authorship a core:Authorship .
+               ?authorship core:relates ?infoResource .
+               ?infoResource a bibo:Document  
             } UNION {
                ?subject ?property ?authorship .
-               ?authorship core:linkedInformationResource ?infoResource .
+               ?authorship a core:Authorship .
+               ?authorship core:relates ?infoResource .
+               ?infoResource a bibo:Document .
                ?infoResource rdfs:label ?infoResourceName 
             } UNION {
                ?subject ?property ?authorship .
-               ?authorship core:linkedInformationResource ?infoResource .
+               ?authorship a core:Authorship .
+               ?authorship core:relates ?infoResource .
+               ?infoResource a bibo:Document .
                ?infoResource core:hasPublicationVenue ?publishedIn 
             } UNION {
                ?subject ?property ?authorship .
-               ?authorship core:linkedInformationResource ?infoResource .
+               ?authorship a core:Authorship .
+               ?authorship core:relates ?infoResource .
+               ?infoResource a bibo:Document .
                ?infoResource core:hasPublicationVenue ?publishedIn .
                ?publishedIn  rdfs:label ?journal
             }
@@ -123,8 +140,10 @@
         PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
         CONSTRUCT { 
             ?subject ?property ?authorship .  
+            ?authorship a core:Authorship .
             ?authorship ?authorshipProperty ?authorshipValue .
-            ?authorship core:linkedInformationResource ?infoResource .
+            ?authorship core:relates ?infoResource .
+            ?infoResource a bibo:Document .
             ?infoResource ?infoResourceProperty ?infoResourceValue .
             ?infoResource bibo:reproducedIn ?appearsInObj .
             ?infoResource core:publisher ?publisherObj .
@@ -139,38 +158,51 @@
             ?partOfObj rdfs:label ?partOf
         } WHERE {
             {
-               ?subject ?property ?authorship 
+               ?subject ?property ?authorship .
+               ?authorship a core:Authorship 
             }
             UNION {
                ?subject ?property ?authorship .
+               ?authorship a core:Authorship .
                ?authorship ?authorshipProperty ?authorshipValue 
             } UNION {
                ?subject ?property ?authorship .
-               ?authorship core:relates ?infoResource  
+               ?authorship a core:Authorship .
+               ?authorship core:relates ?infoResource .
+               ?infoResource a bibo:Document . 
             } UNION {
                ?subject ?property ?authorship .
+               ?authorship a core:Authorship .
                ?authorship core:relates ?infoResource .
                ?infoResource a bibo:Document .
                ?infoResource ?infoResourceProperty ?infoResourceValue 
             } UNION {
                ?subject ?property ?authorship .
+               ?authorship a core:Authorship .
                ?authorship core:relates ?infoResource .
+               ?infoResource a bibo:Document .
                ?infoResource bibo:reproducedIn ?appearsInObj .
                ?appearsInObj rdfs:label ?appearsIn
             } UNION {
                ?subject ?property ?authorship .
+               ?authorship a core:Authorship .
                ?authorship core:relates ?infoResource .
+               ?infoResource a bibo:Document .
                ?infoResource core:publisher ?publisherObj .
                ?publisherObj rdfs:label ?publisher
             } UNION {
                ?subject ?property ?authorship .
+               ?authorship a core:Authorship .
                ?authorship core:relates ?infoResource .
+               ?infoResource a bibo:Document .
                ?infoResource core:relatedBy ?editorship .
                ?editorship core:relates ?editorObj .
                ?editorObj rdfs:label ?editor
             } UNION {
                ?subject ?property ?authorship .
+               ?authorship a core:Authorship .
                ?authorship core:relates ?infoResource .
+               ?infoResource a bibo:Document .
                ?infoResource core:partOf ?partOfObj .
                ?partOfObj rdfs:label ?partOf
             } 
@@ -183,12 +215,14 @@
         PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt; 
         CONSTRUCT { 
             ?subject ?property ?authorship .  
+            ?authorship a core:Authorship .
             ?authorship core:relates ?infoResource .
             ?infoResource a bibo:Document .
             ?infoResource core:dateTimeValue ?dateTimeValue .
             ?dateTimeValue core:dateTime ?dateTime  
         } WHERE {
             ?subject ?property ?authorship .
+            ?authorship a core:Authorship .
             ?authorship core:relates ?infoResource .
             ?infoResource a bibo:Document .
             ?infoResource core:dateTimeValue ?dateTimeValue .
