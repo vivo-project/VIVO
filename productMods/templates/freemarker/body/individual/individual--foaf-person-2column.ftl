@@ -7,12 +7,18 @@
 <#-- <#include "individual-setup.ftl"> -->
 <#import "individual-qrCodeGenerator.ftl" as qr>
 <#import "lib-vivo-properties.ftl" as vp>
+<#--Number of labels present-->
 <#if !labelCount??>
     <#assign labelCount = 0 >
 </#if>
+<#--Number of available locales-->
 <#if !localesCount??>
 	<#assign localesCount = 1>
 </#if>
+<#--Number of distinct languages represented, with no language tag counting as a language, across labels-->
+<#if !languageCount??>
+	<#assign languageCount = 1>
+</#if>	
 <#assign qrCodeIcon = "qr-code-icon.png">
 <#assign visRequestingTemplate = "foaf-person-2column">
 <section id="individual-intro" class="vcard person" role="region">

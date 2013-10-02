@@ -49,7 +49,7 @@
     	 		 <div class="column conceptVocabSource"> 
     	 		 	<h4>Vocabulary Source</h4>
     	 		 </div>
-    	 		 <div class="column">&nbsp;
+    	 		 <div class="column conceptRemoval">&nbsp;
     	 		 </div>
     	 	</div>	
     	 </li>
@@ -68,7 +68,7 @@
                    		${existingConcept.vocabLabel}
                    	</#if>
                   	</div> 
-                  	<div class="column">
+                  	<div class="column conceptRemoval">
                   	     <a href="${urls.base}/edit/primitiveRdfEdit" class="remove" title="${i18n().remove_capitalized}">${i18n().remove_capitalized}</a>
                   	
                   	</div>
@@ -102,7 +102,7 @@
 		<#assign checkedSource = false />
 	<h4 class="services">${i18n().external_vocabulary_services}</h4>
     <#list sources?values?sort_by("label") as thisSource>
-        <input type="radio"  name="source" value="${thisSource.url}" role="radio" <#if checkedSource = false><#assign checkedSource = true/>checked="checked"</#if>>
+        <input type="radio"  name="source" value="${thisSource.schema}" role="radio" <#if checkedSource = false><#assign checkedSource = true/>checked="checked"</#if>>
         <label class="inline" for="${thisSource.label}"> <a href="${thisSource.url}">${thisSource.label}</a> &nbsp;(${thisSource.description})</label>
         <br />
     </#list>
@@ -128,7 +128,8 @@
         <!-- Search results populated by JavaScript -->
     </div>
     <div id="showHideResults" name="showHideResults">
-    	<a href="#" id="showHideLink">Results</a>
+    	<a class="more-less" href="#show more content" id="showHideLink" title="${i18n().show_more_content}">
+    	&nbsp;</a>
     </div>
     <div id="errors" name="errors"></div>
     
@@ -170,7 +171,10 @@ var i18nStrings = {
     selectVocSource: '${i18n().select_vocabulary_source_to_search}',
     confirmTermDelete: '${i18n().confirm_term_deletion}',
     errorTernNotRemoved: '${i18n().error_term_not_deleted}',
-    vocabSpecificLabels: vocabSpecificDisplay
+    vocabSpecificLabels: vocabSpecificDisplay,
+    displayMoreEllipsis: '${i18n().display_more_ellipsis}',
+    displayLess: '${i18n().display_less}',
+    showMoreContent: '${i18n().show_more_content}'
 };
 </script>
 

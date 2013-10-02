@@ -27,6 +27,10 @@
 	width:400px;
 }
 
+.conceptRemoval {
+	width:50px;
+}
+
 /* For adding an empty element under the best match column*/
 .emptyColumn {
 	width:67px;
@@ -73,4 +77,21 @@ form#addConceptForm span#createOwnOne{
 
 .conceptHeadings .row {
 	border-bottom: 1px solid #5F6464;
+}
+
+/*For showing and hiding more results, copied from individual.css*/
+a.more-less {
+    margin-left: 1.5em;
+    padding: .3em .8em;
+    font-size: .8em;
+    text-decoration: none;
+    color: #666;
+    background: #eee;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+a:hover.more-less {
+    color: #fff;
+    background: #888;
 }

@@ -67,7 +67,7 @@ import edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.DataProper
  */
 public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerator implements EditConfigurationGenerator {
     public static Log log = LogFactory.getLog(ManageLabelsForIndividualGenerator.class);
-    private static String template = "manageLabelsForPerson.ftl";
+    private static String template = "manageLabelsForIndividual.ftl";
     private HashMap<String, List<LabelInformation>> labelsSortedByLanguage = null;
     private List<Literal> existingLabelLiterals = null;
 

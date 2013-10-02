@@ -54,7 +54,7 @@ public class ConceptSearchServlet extends VitroHttpServlet {
         	catch (Exception ex) {
         		 SemanticServicesError semanticServicesError = new SemanticServicesError(
         	               "Exception encountered ", ex.getMessage(), "fatal");
-        		 log.error("An error occurred retrieving search results");
+        		 log.error("An error occurred retrieving search results", ex);
         		 conceptInfo.setSemanticServicesError(semanticServicesError);
         	}
         	conceptInfo.setConceptList(results);

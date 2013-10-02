@@ -13,6 +13,7 @@ var newIndividualFormUtils = {
     // The external auth ID field and messages
     this.fName = $('#firstName');
     this.lName = $('#lastName');
+    this.mName = $('#middleName');
     this.rdfsLabel = $('#label');
     },
     
@@ -27,7 +28,11 @@ var newIndividualFormUtils = {
 
     buildRDFSLabel: function() {
         if ( this.fName.length > 0 ) {
-            this.rdfsLabel.val(this.lName.val() + ", " + this.fName.val());
+        	var label = this.lName.val() + ", " + this.fName.val();
+        	if(this.mName.length > 0) {
+        		label += " " + this.mName.val();
+        	}
+            this.rdfsLabel.val(label);
         }
     },
 }

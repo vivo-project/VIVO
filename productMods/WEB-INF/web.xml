@@ -728,12 +728,12 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>ManageLabelsForIndividualController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.ManageLabelsForIndividualController</servlet-class>
+    <servlet-name>ViewLabelsServlet</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.ViewLabelsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ManageLabelsForIndividualController</servlet-name>
-    <url-pattern>/manageLabels</url-pattern>
+    <servlet-name>ViewLabelsServlet</servlet-name>
+    <url-pattern>/viewLabels</url-pattern>
   </servlet-mapping>
 
   <servlet>

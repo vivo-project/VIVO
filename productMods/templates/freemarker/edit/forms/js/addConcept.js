@@ -153,12 +153,12 @@ var addConceptForm = {
     	if($(link).hasClass("showmore")) {
     		//if clicking and already says show more then need to show the rest of the results
     		$("li.concepts").show(); //show everything
-    		$(link).html("Show fewer results");
+    		$(link).html(addConceptForm.displayLess);
     		$(link).removeClass("showmore");
     	} else {
     		//if clicking and does not say show  more than need to show less
     		$("li.concepts").slice(addConceptForm.numberOfMaxInitialSearchResults).hide();
-    		$(link).html("Show more results");
+    		$(link).html(addConceptForm.displayMoreEllipsis);
     		$(link).addClass("showmore");
     	}
     },
@@ -181,6 +181,8 @@ var addConceptForm = {
     	var dataServiceUrl = addConceptForm.dataServiceUrl + "?searchTerm=" + encodeURIComponent(searchValue) + "&source=" + encodeURIComponent(vocabSourceValue);
         //Show the loading icon until the results appear
     	addConceptForm.loadingIndicator.removeClass("hidden");
+    	//remove the old search results if there are any
+    	$("#selectedConcept").empty();
     	//Hide and reset the show more button
     	addConceptForm.resetShowHideMultipleSearchResults();
     	//This should return an object including the concept list or any errors if there are any
@@ -371,7 +373,8 @@ var addConceptForm = {
     	//The definition in some cases may be an empty string, so to prevent the div
     	//from not appearing, we are replacing with 
     	if(definition == null || definition.length == 0) {
-    		definition = "&nbsp;";
+    		//definition = "&nbsp;";
+    		definition = "No definition provided.";
     	}
     	return "<div class='column conceptDefinition'>" + definition + "</div>";
     },
@@ -390,7 +393,7 @@ var addConceptForm = {
     		$("li.concepts").slice(addConceptForm.numberOfMaxInitialSearchResults).hide();
     		 //Hide the link for showing/hiding search results
             addConceptForm.showHideSearchResults.show();
-            addConceptForm.showHideSearchResults.find("a#showHideLink").html("Show more results");
+            addConceptForm.showHideSearchResults.find("a#showHideLink").html(addConceptForm.displayMoreEllipsis);
             addConceptForm.showHideSearchResults.find("a#showHideLink").addClass("showmore");
     	}
     	
