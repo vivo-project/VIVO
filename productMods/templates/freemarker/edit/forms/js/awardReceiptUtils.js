@@ -92,13 +92,8 @@ var awardReceiptUtils = {
     buildAwardReceiptLabel: function() {
         var rdfsLabel = "";
         var $acSelection = $("div.acSelection[acGroupName='award']")
-        if ( this.editMode == "edit"  ) {
-            if ( $acSelection.find("span.acSelectionInfo").text().length > 0 ) {
-                rdfsLabel = $("span.acSelectionInfo").text();
-            }
-            else {
-                rdfsLabel = this.award.val();
-            }
+        if ( $acSelection.find("span.acSelectionInfo").text().length > 0 ) {
+            rdfsLabel = $("span.acSelectionInfo").text();
         }
         else {
             rdfsLabel = this.award.val();
@@ -110,6 +105,7 @@ var awardReceiptUtils = {
             rdfsLabel += " (" + this.subjectName + ")";
         }
         this.recLabel.val(rdfsLabel);
+        alert(this.recLabel.val());
     },
 
     setYearAwardedValue: function() {

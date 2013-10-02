@@ -106,7 +106,10 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     	        </#if>
 	        </#if>
         </#list>
-        <#--Checking if Name field is empty-->
+        <#--Checking if Type, Name and Role fields are empty-->
+         <#if lvf.submissionErrorExists(editSubmission, "roleActivityType")>
+ 	        ${i18n().please_select_type}<br />
+        </#if>
          <#if lvf.submissionErrorExists(editSubmission, "activityLabel")>
  	        ${i18n().select_or_enter_name}<br />
         </#if>
