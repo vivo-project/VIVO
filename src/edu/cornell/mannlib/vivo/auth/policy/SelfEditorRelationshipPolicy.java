@@ -86,7 +86,7 @@ public class SelfEditorRelationshipPolicy extends AbstractRelationshipPolicy
 	private PolicyDecision checkRelationships(List<String> userUris,
 			AbstractPropertyStatementAction action) {
 
-		PolicyDecision decision = new InformationResourceChecker(action)
+		PolicyDecision decision = new InfoContentEntityChecker(action)
 				.isAuthorized(userUris);
 		if (decision == null) {
 			decision = new GrantChecker(action).isAuthorized(userUris);
@@ -100,6 +100,9 @@ public class SelfEditorRelationshipPolicy extends AbstractRelationshipPolicy
 		}
 		if (decision == null) {
 			decision = new CourseChecker(action).isAuthorized(userUris);
+		}
+		if (decision == null) {
+			decision = new AdvisingRelationshipChecker(action).isAuthorized(userUris);
 		}
 		if (decision == null) {
 			decision = userNotAuthorizedToStatement();

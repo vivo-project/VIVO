@@ -13,14 +13,11 @@ import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AbstractPr
  * authorized to modify?
  */
 public class GrantChecker extends RelationshipChecker {
-	private static final String NS_CORE = "http://vivoweb.org/ontology/core#";
 	private static final String URI_GRANT_TYPE = NS_CORE + "Grant";
-	private static final String URI_RELATED_ROLE_PROPERTY = NS_CORE
-			+ "relatedRole";
-	private static final String URI_PRINCIPAL_INVESTIGATOR_OF_PROPERTY = NS_CORE
-			+ "principalInvestigatorRoleOf";
-	private static final String URI_CO_PRINCIPAL_INVESTIGATOR_OF_PROPERTY = NS_CORE
-			+ "co-PrincipalInvestigatorRoleOf";
+	private static final String URI_PI_ROLE_TYPE = NS_CORE
+			+ "PrincipalInvestigatorRole";
+	private static final String URI_CO_PI_ROLE_TYPE = NS_CORE
+			+ "CoPrincipalInvestigatorRole";
 
 	private final String[] resourceUris;
 
@@ -58,15 +55,13 @@ public class GrantChecker extends RelationshipChecker {
 	}
 
 	private List<String> getUrisOfPrincipalInvestigators(String resourceUri) {
-		return getObjectsOfLinkedProperty(resourceUri,
-				URI_RELATED_ROLE_PROPERTY,
-				URI_PRINCIPAL_INVESTIGATOR_OF_PROPERTY);
+		return getObjectsThroughLinkingNode(resourceUri, URI_RELATES,
+				URI_PI_ROLE_TYPE, URI_INHERES_IN);
 	}
 
 	private List<String> getUrisOfCoPrincipalInvestigators(String resourceUri) {
-		return getObjectsOfLinkedProperty(resourceUri,
-				URI_RELATED_ROLE_PROPERTY,
-				URI_CO_PRINCIPAL_INVESTIGATOR_OF_PROPERTY);
+		return getObjectsThroughLinkingNode(resourceUri, URI_RELATES,
+				URI_CO_PI_ROLE_TYPE, URI_INHERES_IN);
 	}
 
 	private PolicyDecision authorizedPI(String resourceUri) {
