@@ -24,7 +24,7 @@
      -->
 
     <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#isDefinedBy">
-        <rdfs:label xml:lang="en-us">is defined by</rdfs:label>
+
     </owl:AnnotationProperty>
     <owl:AnnotationProperty rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#exampleAnnot"/>
     <owl:AnnotationProperty rdf:about="http://www.w3.org/2003/06/sw-vocab-status/ns#term_status"/>
@@ -33,10 +33,10 @@
     <owl:AnnotationProperty rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#descriptionAnnot"/>
     <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment"/>
     <owl:AnnotationProperty rdf:about="http://vivoweb.org/ontology/core#description">
-        <rdfs:label xml:lang="en-us">description</rdfs:label>
+
     </owl:AnnotationProperty>
     <owl:AnnotationProperty rdf:about="http://purl.org/ontology/bibo/suffixName">
-        <rdfs:label xml:lang="en-us">name suffix</rdfs:label>
+
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     </owl:AnnotationProperty>
     
@@ -125,7 +125,7 @@
     <!-- http://purl.org/ontology/bibo/degree -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/degree">
-        <rdfs:label xml:lang="en-us">related degree</rdfs:label>
+
         <rdfs:range rdf:resource="http://purl.org/ontology/bibo/ThesisDegree"/>
     </owl:ObjectProperty>
     
@@ -133,7 +133,7 @@
     <!-- http://purl.org/ontology/bibo/director -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/director">
-        <rdfs:label xml:lang="en-us">director</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -141,7 +141,7 @@
     <!-- http://purl.org/ontology/bibo/distributor -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/distributor">
-        <rdfs:label xml:lang="en-us">distributor</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Public Description for bibo:distributor taken from here:  http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html .</vitro:descriptionAnnot>
     </owl:ObjectProperty>
     
@@ -151,7 +151,7 @@
     <!-- http://purl.org/ontology/bibo/interviewee -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/interviewee">
-        <rdfs:label xml:lang="en-us">interviewee</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -159,7 +159,7 @@
     <!-- http://purl.org/ontology/bibo/interviewer -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/interviewer">
-        <rdfs:label xml:lang="en-us">interviewer</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -167,7 +167,7 @@
     <!-- http://purl.org/ontology/bibo/issuer -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/issuer">
-        <rdfs:label xml:lang="en-us">issuer</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An entity responsible for issuing often informally published documents such as press releases, reports, etc. This term is classified as unstable by bibo.</vitro:descriptionAnnot>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <rdfs:comment>An entity responsible for issuing often informally published documents such as press releases, reports, etc.</rdfs:comment>
@@ -180,7 +180,7 @@
     <!-- http://purl.org/ontology/bibo/performer -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/performer">
-        <rdfs:label xml:lang="en-us">performer</rdfs:label>
+
         <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/contributor"/>
     </owl:ObjectProperty>
     
@@ -189,7 +189,7 @@
     <!-- http://purl.org/ontology/bibo/presentedAt -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/presentedAt">
-        <rdfs:label xml:lang="en-us">presented at</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Public Description from source: http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html .  Bibo considers the bibo:presents and the bibo:presentedAt unstable terms.  It also indicates that bibo:presents is a sub-property of event:product.</vitro:descriptionAnnot>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <rdfs:comment xml:lang="en">Relates a document to an event; for example, a paper to a conference.</rdfs:comment>
@@ -204,7 +204,7 @@
     <!-- http://purl.org/ontology/bibo/presents -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/presents">
-        <rdfs:label xml:lang="en-us">related documents</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -212,7 +212,7 @@
     <!-- http://purl.org/ontology/bibo/recipient -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/recipient">
-        <rdfs:label xml:lang="en-us">recipient</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -220,7 +220,7 @@
     <!-- http://purl.org/ontology/bibo/reproducedIn -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/reproducedIn">
-        <rdfs:label xml:lang="en-us">reproduced in</rdfs:label>
+
         <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000050"/>
     </owl:ObjectProperty>
     
@@ -229,7 +229,7 @@
     <!-- http://purl.org/ontology/bibo/status -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/status">
-        <rdfs:label xml:lang="en-us">status</rdfs:label>
+
         <rdfs:range rdf:resource="http://purl.org/ontology/bibo/DocumentStatus"/>
     </owl:ObjectProperty>
     
@@ -238,7 +238,7 @@
     <!-- http://purl.org/ontology/bibo/subsequentLegalDecision -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/subsequentLegalDecision">
-        <rdfs:label xml:lang="en-us">subsequentLegalDecision</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -246,7 +246,7 @@
     <!-- http://purl.org/ontology/bibo/translationOf -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/translationOf">
-        <rdfs:label xml:lang="en-us">translation of</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -254,7 +254,7 @@
     <!-- http://purl.org/ontology/bibo/translator -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/translator">
-        <rdfs:label xml:lang="en-us">translator</rdfs:label>
+
         <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/contributor"/>
         <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/IAO_0000030"/>
     </owl:ObjectProperty>
@@ -264,7 +264,7 @@
     <!-- http://purl.org/spar/c4o/hasGlobalCitationFrequency -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/spar/c4o/hasGlobalCitationFrequency">
-        <rdfs:label xml:lang="en-us">has global citation frequency</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A property linking a publication entity to the property c40:GlobalCitationCount that specify how many times a work has been cited by others, according to a particular information source on a particular date.</vitro:descriptionAnnot>
         <rdfs:range rdf:resource="http://purl.org/spar/c4o/GlobalCitationCount"/>
     </owl:ObjectProperty>
@@ -274,7 +274,7 @@
     <!-- http://purl.org/spar/c4o/hasGlobalCountSource -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/spar/c4o/hasGlobalCountSource">
-        <rdfs:label xml:lang="en-us">has global count source</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A property linking the property c40:GlobalCitationCount to the bibliographic information source providing the global citation count information for a particular publication on a particular date.</vitro:descriptionAnnot>
         <rdfs:range rdf:resource="http://purl.org/spar/c4o/BibliographicInformationSource"/>
         <rdfs:domain rdf:resource="http://purl.org/spar/c4o/GlobalCitationCount"/>
@@ -286,7 +286,7 @@
     <!-- http://vivoweb.org/ontology/core#assignee -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#assignee">
-        <rdfs:label xml:lang="en-us">assignee</rdfs:label>
+
         <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Patent"/>
         <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
     </owl:ObjectProperty>
@@ -296,7 +296,7 @@
     <!-- http://vivoweb.org/ontology/core#assigneeFor -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#assigneeFor">
-        <rdfs:label xml:lang="en-us">assignee for</rdfs:label>
+
         <rdfs:range rdf:resource="http://purl.org/ontology/bibo/Patent"/>
         <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#assignee"/>
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
@@ -308,7 +308,7 @@
     <!-- http://vivoweb.org/ontology/core#degreeCandidacy -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#degreeCandidacy">
-        <rdfs:label xml:lang="en-us">degree candidacy</rdfs:label>
+
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#AdvisingRelationship"/>
     </owl:ObjectProperty>
@@ -319,7 +319,7 @@
     <!-- http://vivoweb.org/ontology/core#distributes -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#distributes">
-        <rdfs:label xml:lang="en-us">distributes</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Public Description for bibo:distributor taken from here:  http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html .</vitro:descriptionAnnot>
         <owl:inverseOf rdf:resource="http://purl.org/ontology/bibo/distributor"/>
     </owl:ObjectProperty>
@@ -329,7 +329,7 @@
     <!-- http://vivoweb.org/ontology/core#distributesFundingFrom -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#distributesFundingFrom">
-        <rdfs:label xml:lang="en-us">distributes funding from</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">For example, National Science Foundation providesFundingThrough Graduate Research Fellowship Program; National Institutes of Health providesFundingThrough National Center for Research Resources. </vitro:descriptionAnnot>
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#FundingOrganization"/>
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#FundingOrganization"/>
@@ -342,7 +342,7 @@
     <!-- http://vivoweb.org/ontology/core#eligibleFor -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#eligibleFor">
-        <rdfs:label xml:lang="en-us">eligible for</rdfs:label>
+
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#Credential"/>
     </owl:ObjectProperty>
     
@@ -351,7 +351,7 @@
     <!-- http://vivoweb.org/ontology/core#equipmentFor -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#equipmentFor">
-        <rdfs:label xml:lang="en-us">equipment for</rdfs:label>
+
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Equipment"/>
         <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
     </owl:ObjectProperty>
@@ -361,7 +361,7 @@
     <!-- http://vivoweb.org/ontology/core#facilityFor -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#facilityFor">
-        <rdfs:label xml:lang="en-us">facility for</rdfs:label>
+
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Facility"/>
         <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#hasFacility"/>
     </owl:ObjectProperty>
@@ -371,7 +371,7 @@
     <!-- http://vivoweb.org/ontology/core#featuredIn -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#featuredIn">
-        <rdfs:label xml:lang="en-us">featured in</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This is done through a restriction on the foaf:Person class.</vitro:descriptionAnnot>
         <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/IAO_0000030"/>
         <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#features"/>
@@ -382,7 +382,7 @@
     <!-- http://vivoweb.org/ontology/core#features -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#features">
-        <rdfs:label xml:lang="en-us">features</rdfs:label>
+
         <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/IAO_0000030"/>
     </owl:ObjectProperty>
     
@@ -391,7 +391,7 @@
     <!-- http://vivoweb.org/ontology/core#fundingVehicleFor -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#fundingVehicleFor">
-        <rdfs:label xml:lang="en-us">provides funding for</rdfs:label>
+
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Grant"/>
         <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#hasFundingVehicle"/>
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#supports"/>
@@ -402,7 +402,7 @@
     <!-- http://vivoweb.org/ontology/core#governingAuthorityFor -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#governingAuthorityFor">
-        <rdfs:label xml:lang="en-us">governing authority for</rdfs:label>
+
         <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#hasGoverningAuthority"/>
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
     </owl:ObjectProperty>
@@ -412,7 +412,7 @@
     <!-- http://vivoweb.org/ontology/core#hasPredecessorOrganization -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasPredecessorOrganization">
-        <rdfs:label xml:lang="en-us">predecessor organization</rdfs:label>
+
         <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#hasSuccessorOrganization"/>
         <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
@@ -422,7 +422,7 @@
     <!-- http://vivoweb.org/ontology/core#hasProceedings -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasProceedings">
-        <rdfs:label xml:lang="en-us">proceedings</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A possible working example: The conference proceeding of the SPIE was generated from the conference - International Society for Optical Engineering.</vitro:descriptionAnnot>
         <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Conference"/>
         <rdfs:range rdf:resource="http://purl.org/ontology/bibo/Proceedings"/>
@@ -433,7 +433,7 @@
     <!-- http://vivoweb.org/ontology/core#hasPublicationVenue -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasPublicationVenue">
-        <rdfs:label xml:lang="en-us">published in</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -441,7 +441,7 @@
     <!-- http://vivoweb.org/ontology/core#hasResearchArea -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasResearchArea">
-        <rdfs:label xml:lang="en-us">research areas</rdfs:label>
+
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#hasAssociatedConcept"/>
         <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#researchAreaOf"/>
     </owl:ObjectProperty>
@@ -452,7 +452,7 @@
     <!-- http://vivoweb.org/ontology/core#hasSubjectArea -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasSubjectArea">
-        <rdfs:label xml:lang="en-us">has subject area</rdfs:label>
+
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#hasAssociatedConcept"/>
     </owl:ObjectProperty>
     
@@ -461,7 +461,7 @@
     <!-- http://vivoweb.org/ontology/core#hasSuccessorOrganization -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasSuccessorOrganization">
-        <rdfs:label xml:lang="en-us">successor organization</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -471,7 +471,7 @@
     <!-- http://vivoweb.org/ontology/core#informationResourceSupportedBy -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#informationResourceSupportedBy">
-        <rdfs:label xml:lang="en-us">supported by</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">an information resource (typically a publication) supported by (typically via funding) an agreement (such as a grant)</vitro:descriptionAnnot>
         <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/IAO_0000030"/>
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#supportedBy"/>
@@ -482,7 +482,7 @@
     <!-- http://vivoweb.org/ontology/core#proceedingsOf -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#proceedingsOf">
-        <rdfs:label xml:lang="en-us">proceedings of</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A possible working example: The conference proceeding of the SPIE was generated from the conference - International Society for Optical Engineering.</vitro:descriptionAnnot>
         <rdfs:range rdf:resource="http://purl.org/ontology/bibo/Conference"/>
         <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Proceedings"/>
@@ -496,7 +496,7 @@
     <!-- http://vivoweb.org/ontology/core#reproduces -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#reproduces">
-        <rdfs:label xml:lang="en-us">reproduces</rdfs:label>
+
         <rdfs:range rdf:resource="http://purl.org/ontology/bibo/Document"/>
         <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Document"/>
         <owl:inverseOf rdf:resource="http://purl.org/ontology/bibo/reproducedIn"/>
@@ -508,7 +508,7 @@
     <!-- http://vivoweb.org/ontology/core#researchAreaOf -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#researchAreaOf">
-        <rdfs:label xml:lang="en-us">research area of</rdfs:label>
+
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#conceptAssociatedWith"/>
     </owl:ObjectProperty>
     
@@ -517,7 +517,7 @@
     <!-- http://vivoweb.org/ontology/core#researcherRoleOf -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#researcherRoleOf">
-        <rdfs:label xml:lang="en-us">researcher role of</rdfs:label>
+
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#ResearcherRole"/>
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#roleOf"/>
         <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
@@ -528,7 +528,7 @@
     <!-- http://vivoweb.org/ontology/core#reviewedIn -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#reviewedIn">
-        <rdfs:label xml:lang="en-us">reviewed in</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The bibo:reviewOf public description was found here: http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html .  As of 26 May 2010, bibo:reviewOf is used with the class Review, but core:reviewIn doesn&apos;t seem to be being used.</vitro:descriptionAnnot>
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#Review"/>
     </owl:ObjectProperty>
@@ -538,7 +538,7 @@
     <!-- http://vivoweb.org/ontology/core#reviewerRoleOf -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#reviewerRoleOf">
-        <rdfs:label xml:lang="en-us">reviewer role of</rdfs:label>
+
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#ReviewerRole"/>
         <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#hasReviewerRole"/>
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#roleOf"/>
@@ -550,7 +550,7 @@
     <!-- http://vivoweb.org/ontology/core#roleContributesTo -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#roleContributesTo">
-        <rdfs:label xml:lang="en-us">contributes to</rdfs:label>
+
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Role"/>
         <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#contributingRole"/>
     </owl:ObjectProperty>
@@ -560,7 +560,7 @@
     <!-- http://vivoweb.org/ontology/core#sponsoredBy -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#sponsoredBy">
-        <rdfs:label xml:lang="en-us">award sponsored by</rdfs:label>
+
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Award"/>
         <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
     </owl:ObjectProperty>
@@ -570,7 +570,7 @@
     <!-- http://vivoweb.org/ontology/core#sponsors -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#sponsors">
-        <rdfs:label xml:lang="en-us">sponsors award or honor</rdfs:label>
+
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#Award"/>
         <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#sponsoredBy"/>
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
@@ -582,7 +582,7 @@
     <!-- http://vivoweb.org/ontology/core#supportedBy -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#supportedBy">
-        <rdfs:label xml:lang="en-us">supported by</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">general relationship of support</vitro:descriptionAnnot>
         <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#supports"/>
     </owl:ObjectProperty>
@@ -592,7 +592,7 @@
     <!-- http://vivoweb.org/ontology/core#supportedInformationResource -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#supportedInformationResource">
-        <rdfs:label xml:lang="en-us">supported publications</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">an information resource (typically a publication) supported by (typically via funding) an agreement (such as a grant)</vitro:descriptionAnnot>
         <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/IAO_0000030"/>
         <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#informationResourceSupportedBy"/>
@@ -604,7 +604,7 @@
     <!-- http://vivoweb.org/ontology/core#supports -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#supports">
-        <rdfs:label xml:lang="en-us">supports</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">general relationship of support</vitro:descriptionAnnot>
     </owl:ObjectProperty>
     
@@ -614,7 +614,7 @@
     <!-- http://vivoweb.org/ontology/core#translatorOf -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#translatorOf">
-        <rdfs:label xml:lang="en-us">translator of</rdfs:label>
+
         <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/IAO_0000030"/>
     </owl:ObjectProperty>
     
@@ -623,7 +623,7 @@
     <!-- http://vivoweb.org/ontology/core#validIn -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#validIn">
-        <rdfs:label xml:lang="en-us">valid in</rdfs:label>
+
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#GeographicLocation"/>
     </owl:ObjectProperty>
     
@@ -632,8 +632,8 @@
     <!-- http://www.w3.org/2004/02/skos/core#broader -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2004/02/skos/core#broader">
-        <rdfs:label xml:lang="en">has broader</rdfs:label>
-        <rdfs:label xml:lang="en-us">broader term</rdfs:label>
+
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Public description modified from the information on this page: http://www.w3.org/TR/2005/WD-swbp-skos-core-guide-20050510/#sechierarchy .</vitro:descriptionAnnot>
         <rdfs:domain rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
@@ -644,8 +644,8 @@
     <!-- http://www.w3.org/2004/02/skos/core#narrower -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2004/02/skos/core#narrower">
-        <rdfs:label xml:lang="en">has narrower</rdfs:label>
-        <rdfs:label xml:lang="en-us">narrower term</rdfs:label>
+
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Public description modified from the information on this page: http://www.w3.org/TR/2005/WD-swbp-skos-core-guide-20050510/#sechierarchy .</vitro:descriptionAnnot>
         <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
@@ -656,8 +656,8 @@
     <!-- http://www.w3.org/2004/02/skos/core#related -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2004/02/skos/core#related">
-        <rdfs:label xml:lang="en">has related</rdfs:label>
-        <rdfs:label xml:lang="en-us">related</rdfs:label>
+
+
         <rdfs:domain rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     </owl:ObjectProperty>
@@ -677,7 +677,7 @@
     <!-- http://purl.org/ontology/bibo/abstract -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/abstract">
-        <rdfs:label xml:lang="en-us">abstract</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -685,7 +685,7 @@
     <!-- http://purl.org/ontology/bibo/doi -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/doi">
-        <rdfs:label xml:lang="en-us">Digital Object Identifier (DOI)</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -693,7 +693,7 @@
     <!-- http://purl.org/ontology/bibo/eanucc13 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/eanucc13">
-        <rdfs:label xml:lang="en-us">EAN International-Uniform Code Council (EAN-UCC) 13</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -701,7 +701,7 @@
     <!-- http://purl.org/ontology/bibo/edition -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/edition">
-        <rdfs:label xml:lang="en-us">edition</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -709,7 +709,7 @@
     <!-- http://purl.org/ontology/bibo/eissn -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/eissn">
-        <rdfs:label xml:lang="en-us">Electronic International Standard Serial Number (EISSN)</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -717,7 +717,7 @@
     <!-- http://purl.org/ontology/bibo/issn -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/issn">
-        <rdfs:label xml:lang="en-us">International Standard Serial Number (ISSN)</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -725,7 +725,7 @@
     <!-- http://purl.org/ontology/bibo/lccn -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/lccn">
-        <rdfs:label xml:lang="en-us">Library of Congress Control Number (LCCN)</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -733,7 +733,7 @@
     <!-- http://purl.org/ontology/bibo/numPages -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/numPages">
-        <rdfs:label xml:lang="en-us">number of pages</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -741,7 +741,7 @@
     <!-- http://purl.org/ontology/bibo/oclcnum -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/oclcnum">
-        <rdfs:label xml:lang="en-us">Online Computer Library Center (OCLC) number</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -749,7 +749,7 @@
     <!-- http://purl.org/ontology/bibo/pageEnd -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/pageEnd">
-        <rdfs:label xml:lang="en-us">end page</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -757,7 +757,7 @@
     <!-- http://purl.org/ontology/bibo/pageStart -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/pageStart">
-        <rdfs:label xml:lang="en-us">start page</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -765,7 +765,7 @@
     <!-- http://purl.org/spar/c4o/hasGlobalCountDate -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/spar/c4o/hasGlobalCountDate">
-        <rdfs:label xml:lang="en-us">has global count date</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The date on which the global citation count of the cited entity was recorded from a named bibliographic information source.</vitro:descriptionAnnot>
         <rdfs:domain rdf:resource="http://purl.org/spar/c4o/GlobalCitationCount"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
@@ -776,7 +776,7 @@
     <!-- http://purl.org/spar/c4o/hasGlobalCountValue -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/spar/c4o/hasGlobalCountValue">
-        <rdfs:label xml:lang="en-us">has global count value</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An integer defining the value of the global citation count of a cited entity recorded from a named bibliographic information source on a particular date.</vitro:descriptionAnnot>
         <rdfs:domain rdf:resource="http://purl.org/spar/c4o/GlobalCitationCount"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
@@ -787,7 +787,7 @@
     <!-- http://purl.org/vocab/vann/preferredNamespaceUri -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/vocab/vann/preferredNamespaceUri">
-        <rdfs:label xml:lang="en-us">preferredNamespaceUri</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -795,7 +795,7 @@
     <!-- http://vivoweb.org/ontology/core#abbreviation -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#abbreviation">
-        <rdfs:label xml:lang="en-us">abbreviation</rdfs:label>
+
     </owl:DatatypeProperty>
     
     
@@ -804,7 +804,7 @@
     <!-- http://vivoweb.org/ontology/core#courseCredits -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#courseCredits">
-        <rdfs:label xml:lang="en-us">credits</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -812,7 +812,7 @@
     <!-- http://vivoweb.org/ontology/core#departmentOrSchool -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#departmentOrSchool">
-        <rdfs:label xml:lang="en-us">department or school name within institution</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Not intended to be an institution name.</vitro:descriptionAnnot>
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#EducationalProcess"/>
     </owl:DatatypeProperty>
@@ -822,7 +822,7 @@
     <!-- http://vivoweb.org/ontology/core#description -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#description">
-        <rdfs:label xml:lang="en-us">description</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -831,7 +831,7 @@
     <!-- http://vivoweb.org/ontology/core#entryTerm -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#entryTerm">
-        <rdfs:label xml:lang="en-us">entry term</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -840,7 +840,7 @@
     <!-- http://vivoweb.org/ontology/core#freetextKeyword -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#freetextKeyword">
-        <rdfs:label xml:lang="en-us">keywords</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -848,7 +848,7 @@
     <!-- http://vivoweb.org/ontology/core#grantDirectCosts -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#grantDirectCosts">
-        <rdfs:label xml:lang="en-us">direct costs</rdfs:label>
+
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Grant"/>
     </owl:DatatypeProperty>
     
@@ -858,7 +858,7 @@
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#hideFromDisplay">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label xml:lang="en-us">hide from display</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
     </owl:DatatypeProperty>
     
@@ -867,7 +867,7 @@
     <!-- http://vivoweb.org/ontology/core#hrJobTitle -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#hrJobTitle">
-        <rdfs:label xml:lang="en-us">HR job title</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition http://en.wikipedia.org/wiki/Job_title#Job_title.</vitro:descriptionAnnot>
         <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">administrative secretary</vitro:exampleAnnot>
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Position"/>
@@ -879,7 +879,7 @@
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#isCorrespondingAuthor">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label xml:lang="en-us">is this person a corresponding author?</rdfs:label>
+
         <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">True; False</vitro:exampleAnnot>
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Authorship"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
@@ -890,7 +890,7 @@
     <!-- http://vivoweb.org/ontology/core#majorField -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#majorField">
-        <rdfs:label xml:lang="en-us">major field of degree</rdfs:label>
+
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#EducationalProcess"/>
     </owl:DatatypeProperty>
     
@@ -901,7 +901,7 @@
     <!-- http://vivoweb.org/ontology/core#placeOfPublication -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#placeOfPublication">
-        <rdfs:label xml:lang="en-us">place of publication</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -909,7 +909,7 @@
     <!-- http://vivoweb.org/ontology/core#preferredDisplayOrder -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#preferredDisplayOrder">
-        <rdfs:label xml:lang="en-us">preferred display order</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -918,7 +918,7 @@
     <!-- http://vivoweb.org/ontology/core#rank -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#rank">
-        <rdfs:label xml:lang="en-us">rank</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -926,7 +926,7 @@
     <!-- http://vivoweb.org/ontology/core#supplementalInformation -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#supplementalInformation">
-        <rdfs:label xml:lang="en-us">supplemental information</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -934,7 +934,7 @@
     <!-- http://vivoweb.org/ontology/core#termLabel -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#termLabel">
-        <rdfs:label xml:lang="en-us">term label</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -942,7 +942,7 @@
     <!-- http://vivoweb.org/ontology/core#termType -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#termType">
-        <rdfs:label xml:lang="en-us">term type</rdfs:label>
+
     </owl:DatatypeProperty>
     
 

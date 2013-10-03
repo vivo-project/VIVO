@@ -47,7 +47,7 @@
     <!-- http://vivoweb.org/ontology/core#OutreachProviderRole -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#OutreachProviderRole">
-        <rdfs:label xml:lang="en">outreach provider role</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An outreach or community service role directed outside a person&apos;s primary profession and institution</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Communicating Astronomy to the Public</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The example is one outreach role required by US space agency NASA, which is related with one project in NASA. Name of the outreach role should be put here.</obo:IAO_0000112>

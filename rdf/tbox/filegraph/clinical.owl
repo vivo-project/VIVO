@@ -98,7 +98,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000015 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000015">
-        <rdfs:label xml:lang="en">human study</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000014"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A clinical trial.</obo:IAO_0000112>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OCRe</obo:IAO_0000119>
@@ -114,7 +114,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000016 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000016">
-        <rdfs:label xml:lang="en">clinical trial</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -137,7 +137,7 @@
 
 
     <owl:Class rdf:about="http://purl.org/net/OCRe/study_design.owl#OCRE100038">
-        <rdfs:label xml:lang="en">phase (ocre)</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase describes the level of a trial required of drugs before (and after) they are routinely used in clinical practice: 
 - Phase I trials assess toxic effects on humans (not many people participate in them, and usually without controls); 
@@ -155,7 +155,7 @@ The concept of phase is not applicable to trials studying certain interventions 
     <!-- http://purl.org/net/OCRe/study_design.owl#Phase_0 -->
 
     <owl:Class rdf:about="http://purl.org/net/OCRe/study_design.owl#Phase_0">
-        <rdfs:label xml:lang="en">phase 0</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.org/net/OCRe/study_design.owl#OCRE100038"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A Phase 0 trial is an exploratory trial involving very limited human exposure, with no therapeutic or diagnostic intent (e.g., screening study, microdose study). [http://prsinfo.clinicaltrials.gov/definitions.html]</obo:IAO_0000115>
         <statistics:curator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Simona</statistics:curator>
@@ -166,7 +166,7 @@ The concept of phase is not applicable to trials studying certain interventions 
     <!-- http://purl.org/net/OCRe/study_design.owl#Phase_1 -->
 
     <owl:Class rdf:about="http://purl.org/net/OCRe/study_design.owl#Phase_1">
-        <rdfs:label xml:lang="en">phase 1</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.org/net/OCRe/study_design.owl#OCRE100038"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A Phase I trial assesses toxic effects on humans (not many people participate, and usually without controls) [Glossary of Terms in The Cochrane Collaboration]</obo:IAO_0000115>
         <statistics:curator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Simona</statistics:curator>
@@ -177,7 +177,7 @@ The concept of phase is not applicable to trials studying certain interventions 
     <!-- http://purl.org/net/OCRe/study_design.owl#Phase_2 -->
 
     <owl:Class rdf:about="http://purl.org/net/OCRe/study_design.owl#Phase_2">
-        <rdfs:label xml:lang="en">phase 2</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.org/net/OCRe/study_design.owl#OCRE100038"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A Phase ll trial assesses therapeutic benefit (usually involving a few hundred people, usually with controls, but not always) [Glossary of Terms in The Cochrane Collaboration]</obo:IAO_0000115>
         <statistics:curator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Simona</statistics:curator>
@@ -188,7 +188,7 @@ The concept of phase is not applicable to trials studying certain interventions 
     <!-- http://purl.org/net/OCRe/study_design.owl#Phase_3 -->
 
     <owl:Class rdf:about="http://purl.org/net/OCRe/study_design.owl#Phase_3">
-        <rdfs:label xml:lang="en">phase 3</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.org/net/OCRe/study_design.owl#OCRE100038"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A Phase III trial compares the new treatment against standard (or placebo) treatment (usually a full
 randomised controlled trial). At this point, a drug can be approved for community use. [Glossary of Terms in The Cochrane Collaboration]</obo:IAO_0000115>
@@ -200,7 +200,7 @@ randomised controlled trial). At this point, a drug can be approved for communit
     <!-- http://purl.org/net/OCRe/study_design.owl#Phase_4 -->
 
     <owl:Class rdf:about="http://purl.org/net/OCRe/study_design.owl#Phase_4">
-        <rdfs:label xml:lang="en">phase 4</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.org/net/OCRe/study_design.owl#OCRE100038"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A Phase IV study monitors a new treatment in the community, often to evaluate longterm safety and effectiveness. [Glossary of Terms in The Cochrane Collaboration]</obo:IAO_0000115>
         <statistics:curator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Simona</statistics:curator>
@@ -211,7 +211,7 @@ randomised controlled trial). At this point, a drug can be approved for communit
     <!-- http://purl.org/net/OCRe/study_design.owl#Single_group_study -->
 
     <owl:Class rdf:about="http://purl.org/net/OCRe/study_design.owl#Single_group_study">
-        <rdfs:label xml:lang="en">single group study</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.org/net/OCRe/research.owl#Interventional_study"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A single group study is an interventional study that has only a single allocation group and no contemporaneuos comparison group.
 A study in which an individual acts has his/her own comparison does not fall into this category, since an individual is not a group.</obo:IAO_0000115>
@@ -224,7 +224,7 @@ A study in which an individual acts has his/her own comparison does not fall int
     <!-- http://vivoweb.org/ontology/core#ClinicalRole -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#ClinicalRole">
-        <rdfs:label xml:lang="en">clinical role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role of observing or treating patients</obo:IAO_0000115>
     </owl:Class>

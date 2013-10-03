@@ -59,7 +59,7 @@
     <!-- http://purl.org/NET/c4dm/event.owl#Event -->
 
     <owl:Class rdf:about="http://purl.org/NET/c4dm/event.owl#Event">
-        <rdfs:label xml:lang="en">event</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Only use if no specific subclasses of event:Event are appropriate.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Something that happens at a given place and time.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class will also display instances of subclasses under Event, e.g. Philosophy Department Discussion Club; 2009 Racker Lecture; screening of a documentary. In addition to a location in space and time, an event may have any or all the following qualities: actively participating agents, passive factors, work products. Also, it may be in a virtual space or part of a series such as a lecture series.
@@ -80,7 +80,7 @@ The previous short definition was: &quot;An arbitrary classification of a space/
     <!-- http://vivoweb.org/ontology/core#AttendeeRole -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#AttendeeRole">
-        <rdfs:label xml:lang="en">attendee role</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role of attending an Event or EventSeries</obo:IAO_0000115>
     </owl:Class>
     
@@ -89,7 +89,7 @@ The previous short definition was: &quot;An arbitrary classification of a space/
     <!-- http://vivoweb.org/ontology/core#Competition -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Competition">
-        <rdfs:label xml:lang="en">competition</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.org/NET/c4dm/event.owl#Event"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An occasion on which a winner is selected from among two or more contestants.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Intel Talent Search; poetry contest</obo:IAO_0000112>
@@ -101,7 +101,7 @@ The previous short definition was: &quot;An arbitrary classification of a space/
     <!-- http://vivoweb.org/ontology/core#ConferenceSeries -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#ConferenceSeries">
-        <rdfs:label xml:lang="en">conference series</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#EventSeries"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organized series of a meeting for consultation or discussion.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">For individual, separate conferences, use conference instead.  core:ConferenceSeries and core:SeminarSeries are very similar.</obo:IAO_0000112>
@@ -112,7 +112,7 @@ The previous short definition was: &quot;An arbitrary classification of a space/
     <!-- http://vivoweb.org/ontology/core#EventSeries -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#EventSeries">
-        <rdfs:label xml:lang="en">event series</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A generic class which may include a conference series, a course section, a seminar series, or a workshop series. When possible, use one of these more specific classes.</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Only use if no specific subclasses of core:EventSeries desribe the activity.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Two or more events that occur at different times and are connected to each other.</obo:IAO_0000115>
@@ -123,7 +123,7 @@ The previous short definition was: &quot;An arbitrary classification of a space/
     <!-- http://vivoweb.org/ontology/core#Exhibit -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Exhibit">
-        <rdfs:label xml:lang="en">exhibit</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.org/NET/c4dm/event.owl#Event"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The showing of an object or a collection of objects, in an organized manner.</obo:IAO_0000115>
     </owl:Class>
@@ -133,7 +133,7 @@ The previous short definition was: &quot;An arbitrary classification of a space/
     <!-- http://vivoweb.org/ontology/core#Meeting -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Meeting">
-        <rdfs:label xml:lang="en">meeting</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.org/NET/c4dm/event.owl#Event"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A gathering of people for a defined purpose, not necessarily public or announced</obo:IAO_0000115>
     </owl:Class>
@@ -143,7 +143,7 @@ The previous short definition was: &quot;An arbitrary classification of a space/
     <!-- http://vivoweb.org/ontology/core#OrganizerRole -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#OrganizerRole">
-        <rdfs:label xml:lang="en">organizer role</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role of organizing</obo:IAO_0000115>
     </owl:Class>
     
@@ -152,7 +152,7 @@ The previous short definition was: &quot;An arbitrary classification of a space/
     <!-- http://vivoweb.org/ontology/core#Presentation -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Presentation">
-        <rdfs:label xml:lang="en">presentation</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.org/NET/c4dm/event.owl#Event"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Encompasses talk, speech, lecture, slide lecture, conference presentation</obo:IAO_0000115>
     </owl:Class>
@@ -162,7 +162,7 @@ The previous short definition was: &quot;An arbitrary classification of a space/
     <!-- http://vivoweb.org/ontology/core#PresenterRole -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#PresenterRole">
-        <rdfs:label xml:lang="en">presenter role</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role of presenting information</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Are we assuming that a PresenterRole is in a Presentation?  Or could you have a PresenterRole in, say, a committee?</obo:IAO_0000112>
     </owl:Class>
@@ -172,7 +172,7 @@ The previous short definition was: &quot;An arbitrary classification of a space/
     <!-- http://vivoweb.org/ontology/core#SeminarSeries -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#SeminarSeries">
-        <rdfs:label xml:lang="en">seminar series</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#EventSeries"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organized series of a meeting for an exchange of ideas, typically put on by a department or center.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Applied Microeconomics Seminars; Future of Rural New York Seminar Series</obo:IAO_0000112>
@@ -184,7 +184,7 @@ The previous short definition was: &quot;An arbitrary classification of a space/
     <!-- http://vivoweb.org/ontology/core#WorkshopSeries -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#WorkshopSeries">
-        <rdfs:label xml:lang="en">workshop series</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#EventSeries"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organized series of workshop events, whether repetitions of the same workshop or multiple different workshops.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Use workshop for individual events.</obo:IAO_0000112>

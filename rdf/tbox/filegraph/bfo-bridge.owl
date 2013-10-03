@@ -45,7 +45,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000001 -->
 
     <rdf:Description rdf:about="http://purl.obolibrary.org/obo/BFO_0000001">
-        <rdfs:label>entity</rdfs:label>
+
     </rdf:Description>
     
 
@@ -53,7 +53,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000002 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000002">
-        <rdfs:label>continuant</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000001"/>
     </owl:Class>
     
@@ -62,7 +62,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000003 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000003">
-        <rdfs:label>occurrent</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000001"/>
     </owl:Class>
     
@@ -71,7 +71,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000004 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000004">
-        <rdfs:label xml:lang="en">independent_continuant</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000002"/>
     </owl:Class>
     
@@ -80,7 +80,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000006 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000006">
-        <rdfs:label xml:lang="en">spatial region</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000141"/>
     </owl:Class>
     
@@ -89,7 +89,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000008 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000008">
-        <rdfs:label>temporal region</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000003"/>
     </owl:Class>
     
@@ -98,7 +98,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000015 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000015">
-        <rdfs:label xml:lang="en">process</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000003"/>
     </owl:Class>
     
@@ -107,7 +107,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000016 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000016">
-        <rdfs:label>disposition (bfo)</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000017"/>
     </owl:Class>
     
@@ -124,7 +124,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000019 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000019">
-        <rdfs:label>quality</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000020"/>
     </owl:Class>
     
@@ -133,7 +133,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000020 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000020">
-        <rdfs:label xml:lang="en">specifically_dependent_continuant</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000002"/>
     </owl:Class>
     
@@ -142,7 +142,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000023 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000023">
-        <rdfs:label xml:lang="en">role (bfo)</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000017"/>
     </owl:Class>
     
@@ -151,7 +151,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000029 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000029">
-        <rdfs:label xml:lang="en">site</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000141"/>
     </owl:Class>
     
@@ -160,7 +160,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000031 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000031">
-        <rdfs:label xml:lang="en">generically dependent continuant</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000002"/>
     </owl:Class>
     
@@ -169,7 +169,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000034 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000034">
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">function</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000016"/>
     </owl:Class>
     
@@ -178,7 +178,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000038 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000038">
-        <rdfs:label xml:lang="en">one-dimensional temporal region</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000008"/>
     </owl:Class>
     
@@ -187,7 +187,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000040 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000040">
-        <rdfs:label xml:lang="en">material_entity</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000004"/>
     </owl:Class>
     
@@ -196,7 +196,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000141 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000141">
-        <rdfs:label>immaterial entity</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000004"/>
     </owl:Class>
     
@@ -205,7 +205,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000148 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000148">
-        <rdfs:label xml:lang="en">zero-dimensional temporal region</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000008"/>
     </owl:Class>
     
@@ -238,7 +238,7 @@
     <!-- http://vivoweb.org/ontology/core#AdministratorRole -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#AdministratorRole">
-        <rdfs:label xml:lang="en">administrator role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
     </owl:Class>
     
@@ -247,7 +247,7 @@
     <!-- http://vivoweb.org/ontology/core#AdvisingProcess -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#AdvisingProcess">
-        <rdfs:label xml:lang="en">advising process</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
     </owl:Class>
     
@@ -264,7 +264,7 @@
     <!-- http://vivoweb.org/ontology/core#AttendingProcess -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#AttendingProcess">
-        <rdfs:label xml:lang="en">attending process</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
     </owl:Class>
     
@@ -289,7 +289,7 @@
     <!-- http://vivoweb.org/ontology/core#EditorRole -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#EditorRole">
-        <rdfs:label xml:lang="en">editor role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
     </owl:Class>
     
@@ -298,7 +298,7 @@
     <!-- http://vivoweb.org/ontology/core#EducationalProcess -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#EducationalProcess">
-        <rdfs:label xml:lang="en">educational process</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
     </owl:Class>
     
@@ -355,7 +355,7 @@
     <!-- http://vivoweb.org/ontology/core#OrganizerRole -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#OrganizerRole">
-        <rdfs:label xml:lang="en">organizer role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
     </owl:Class>
     
@@ -364,7 +364,7 @@
     <!-- http://vivoweb.org/ontology/core#OrganizingProcess -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#OrganizingProcess">
-        <rdfs:label xml:lang="en">organizing process</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
     </owl:Class>
     
@@ -373,7 +373,7 @@
     <!-- http://vivoweb.org/ontology/core#OutreachProviderRole -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#OutreachProviderRole">
-        <rdfs:label xml:lang="en">outreach provider role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
     </owl:Class>
     
@@ -382,7 +382,7 @@
     <!-- http://vivoweb.org/ontology/core#PresenterRole -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#PresenterRole">
-        <rdfs:label xml:lang="en">presenter role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
     </owl:Class>
     
@@ -391,7 +391,7 @@
     <!-- http://vivoweb.org/ontology/core#PresentingProcess -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#PresentingProcess">
-        <rdfs:label xml:lang="en">presenting process</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
     </owl:Class>
     
@@ -416,7 +416,7 @@
     <!-- http://vivoweb.org/ontology/core#ReviewerRole -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#ReviewerRole">
-        <rdfs:label xml:lang="en">reviewer role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
     </owl:Class>
     
@@ -425,7 +425,7 @@
     <!-- http://vivoweb.org/ontology/core#TeacherRole -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#TeacherRole">
-        <rdfs:label xml:lang="en">teacher role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
     </owl:Class>
 </rdf:RDF>

@@ -452,7 +452,7 @@
     <!-- http://www.w3.org/2006/vcard/ns#Acquaintance -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Acquaintance">
-        <rdfs:label xml:lang="en">acquaintance</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -461,7 +461,7 @@
     <!-- http://www.w3.org/2006/vcard/ns#Address -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Address">
-        <rdfs:label xml:lang="en">address</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -537,7 +537,7 @@
     <!-- http://www.w3.org/2006/vcard/ns#Addressing -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Addressing">
-        <rdfs:label xml:lang="en">addressing</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -600,7 +600,7 @@
     <!-- http://www.w3.org/2006/vcard/ns#Agent -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Agent">
-        <rdfs:label xml:lang="en">agent (vcard c)</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -609,7 +609,7 @@
     <!-- http://www.w3.org/2006/vcard/ns#Calendar -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Calendar">
-        <rdfs:label xml:lang="en">calendar</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -647,7 +647,7 @@
     <!-- http://www.w3.org/2006/vcard/ns#CalendarBusy -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#CalendarBusy">
-        <rdfs:label xml:lang="en">calendar busy (vcard c)</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -672,7 +672,7 @@ Was called FBURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#CalendarLink -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#CalendarLink">
-        <rdfs:label xml:lang="en">calendar link (vcard c)</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -697,7 +697,7 @@ Was called CALURI in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#CalendarRequest -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#CalendarRequest">
-        <rdfs:label xml:lang="en">calendar request (vcard c)</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -722,7 +722,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Category -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Category">
-        <rdfs:label xml:lang="en">category (vcard c)</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -746,7 +746,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Cell -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Cell">
-        <rdfs:label xml:lang="en">cell</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#TelephoneType"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Also called mobile telephone</rdfs:comment>
     </owl:Class>
@@ -756,7 +756,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Child -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Child">
-        <rdfs:label xml:lang="en">child</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -765,7 +765,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Code -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Code">
-        <rdfs:label xml:lang="en">code (vcard c)</rdfs:label>
+
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Contains all the Code related Classes that are used to indicate vCard Types</rdfs:comment>
     </owl:Class>
     
@@ -774,7 +774,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Colleague -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Colleague">
-        <rdfs:label xml:lang="en">colleague</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -783,7 +783,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Communication -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Communication">
-        <rdfs:label xml:lang="en">communication</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -846,7 +846,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Contact -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Contact">
-        <rdfs:label xml:lang="en">contact (vcard c)</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -855,7 +855,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Coresident -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Coresident">
-        <rdfs:label xml:lang="en">coresident</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -864,7 +864,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Coworker -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Coworker">
-        <rdfs:label xml:lang="en">coworker</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -873,7 +873,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Crush -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Crush">
-        <rdfs:label xml:lang="en">crush</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -882,7 +882,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Date -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Date">
-        <rdfs:label xml:lang="en">date</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -891,7 +891,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Email -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Email">
-        <rdfs:label xml:lang="en">email (vcard c)</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -915,7 +915,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Emergency -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Emergency">
-        <rdfs:label xml:lang="en">emergency</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -924,7 +924,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Explanatory -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Explanatory">
-        <rdfs:label xml:lang="en">explanatory</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -987,7 +987,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Fax -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Fax">
-        <rdfs:label xml:lang="en">fax</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#TelephoneType"/>
     </owl:Class>
     
@@ -996,7 +996,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Female -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Female">
-        <rdfs:label xml:lang="en">female (vcard)</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#Gender"/>
     </owl:Class>
     
@@ -1005,7 +1005,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#FormattedName -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#FormattedName">
-        <rdfs:label xml:lang="en">formatted name</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1029,7 +1029,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Friend -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Friend">
-        <rdfs:label xml:lang="en">friend</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -1038,7 +1038,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Gender -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Gender">
-        <rdfs:label xml:lang="en">gender (vcard c)</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#Code"/>
     </owl:Class>
     
@@ -1047,7 +1047,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Geo -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Geo">
-        <rdfs:label xml:lang="en">geo (vcard c)</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1071,7 +1071,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Geographical -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Geographical">
-        <rdfs:label xml:lang="en">geographical</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1094,7 +1094,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Group -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Group">
-        <rdfs:label xml:lang="en">group (vcard c)</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1118,7 +1118,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Home -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Home">
-        <rdfs:label xml:lang="en">home</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#Type"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This implies that the property is related to an individual&apos;s personal life</rdfs:comment>
     </owl:Class>
@@ -1128,7 +1128,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Identification -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Identification">
-        <rdfs:label xml:lang="en">identification</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1191,7 +1191,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Individual -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Individual">
-        <rdfs:label xml:lang="en">individual</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1255,7 +1255,7 @@ Was called CALADRURI in vCard</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#InstantMessage -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#InstantMessage">
-        <rdfs:label xml:lang="en">messaging</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1280,7 +1280,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Key -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Key">
-        <rdfs:label xml:lang="en">key (vcard c)</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1303,7 +1303,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Kin -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Kin">
-        <rdfs:label xml:lang="en">kin</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -1312,7 +1312,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Kind -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Kind">
-        <rdfs:label xml:lang="en">vcard kind</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1412,7 +1412,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Language -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Language">
-        <rdfs:label xml:lang="en">language</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1436,7 +1436,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Location -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Location">
-        <rdfs:label xml:lang="en">location (vcard c)</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#Kind"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Defines all the properties required to be a Location</rdfs:comment>
     </owl:Class>
@@ -1446,7 +1446,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Logo -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Logo">
-        <rdfs:label xml:lang="en">logo (vcard c)</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1470,7 +1470,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Male -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Male">
-        <rdfs:label xml:lang="en">male (vcard c)</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#Gender"/>
     </owl:Class>
     
@@ -1479,7 +1479,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Me -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Me">
-        <rdfs:label xml:lang="en">me</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -1488,7 +1488,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Met -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Met">
-        <rdfs:label xml:lang="en">met</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -1497,7 +1497,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Muse -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Muse">
-        <rdfs:label xml:lang="en">muse</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -1506,7 +1506,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Name -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Name">
-        <rdfs:label xml:lang="en">name</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1582,7 +1582,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Neighbor -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Neighbor">
-        <rdfs:label xml:lang="en">neighbor</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -1591,7 +1591,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Nickname -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Nickname">
-        <rdfs:label xml:lang="en">nickname</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1615,7 +1615,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#None -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#None">
-        <rdfs:label xml:lang="en">none</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#Gender"/>
     </owl:Class>
     
@@ -1624,7 +1624,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Note -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Note">
-        <rdfs:label xml:lang="en">note (vcard c)</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1648,7 +1648,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Organization -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Organization">
-        <rdfs:label xml:lang="en">organization  (vcard c)</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#Kind"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Defines all the properties required to be an  Organization</rdfs:comment>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">To specify the organizational name  associated with the vCard</rdfs:comment>
@@ -1659,7 +1659,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#OrganizationName -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#OrganizationName">
-        <rdfs:label xml:lang="en">organization name (vcard c)</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1682,7 +1682,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#OrganizationUnitName -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#OrganizationUnitName">
-        <rdfs:label xml:lang="en">organizational unit name (vcard c)</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1705,7 +1705,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Organizational -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Organizational">
-        <rdfs:label xml:lang="en">organisational</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1768,7 +1768,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Other -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Other">
-        <rdfs:label xml:lang="en">other</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#Gender"/>
     </owl:Class>
     
@@ -1777,7 +1777,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Pager -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Pager">
-        <rdfs:label xml:lang="en">pager</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#TelephoneType"/>
     </owl:Class>
     
@@ -1786,7 +1786,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Parent -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Parent">
-        <rdfs:label xml:lang="en">parent</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -1795,7 +1795,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Photo -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Photo">
-        <rdfs:label xml:lang="en">photo (vcard c)</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1819,7 +1819,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Related -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Related">
-        <rdfs:label xml:lang="en">related (vcard c)</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1843,7 +1843,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#RelatedType -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#RelatedType">
-        <rdfs:label xml:lang="en">relation type</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#Code"/>
     </owl:Class>
     
@@ -1854,7 +1854,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Security -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Security">
-        <rdfs:label xml:lang="en">security</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1905,7 +1905,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Sibling -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Sibling">
-        <rdfs:label xml:lang="en">sibling</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -1914,7 +1914,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Sound -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Sound">
-        <rdfs:label xml:lang="en">sound (vcard c)</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1938,7 +1938,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Spouse -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Spouse">
-        <rdfs:label xml:lang="en">spouse</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -1947,7 +1947,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Sweetheart -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Sweetheart">
-        <rdfs:label xml:lang="en">sweetheart</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#RelatedType"/>
     </owl:Class>
     
@@ -1956,7 +1956,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Telephone -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Telephone">
-        <rdfs:label xml:lang="en">telephone (vcard c)</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1979,7 +1979,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#TelephoneType -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#TelephoneType">
-        <rdfs:label xml:lang="en">phone</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#Code"/>
     </owl:Class>
     
@@ -1988,7 +1988,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Text -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Text">
-        <rdfs:label xml:lang="en">text</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#TelephoneType"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Also called sms telephone</rdfs:comment>
     </owl:Class>
@@ -1998,7 +1998,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#TextPhone -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#TextPhone">
-        <rdfs:label xml:lang="en">text phone</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#TelephoneType"/>
     </owl:Class>
     
@@ -2007,7 +2007,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#TimeZone -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#TimeZone">
-        <rdfs:label xml:lang="en">time zone</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -2031,7 +2031,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Title -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Title">
-        <rdfs:label xml:lang="en">title (vcard c)</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -2055,7 +2055,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Type -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Type">
-        <rdfs:label xml:lang="en">type</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#Code"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This is called TYPE in vCard but renamed here to Context for less confusion (with types/class)</rdfs:comment>
     </owl:Class>
@@ -2065,7 +2065,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#URL -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#URL">
-        <rdfs:label xml:lang="en">url (vcard c)</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -2089,7 +2089,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://vivoweb.org/ontology/core#F1000Link -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#F1000Link">
-        <rdfs:label xml:lang="en">f1000 link</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#URL"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">F1000 is a place where faculty go to critique papers published in PubMed. Any given record in F1000 might have anywhere from one to dozens of reviews.</obo:IAO_0000112>
     </owl:Class>
@@ -2099,7 +2099,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Unknown -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Unknown">
-        <rdfs:label xml:lang="en">unknown</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#Gender"/>
     </owl:Class>
     
@@ -2108,7 +2108,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Video -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Video">
-        <rdfs:label xml:lang="en">video (vcard c)</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#TelephoneType"/>
     </owl:Class>
     
@@ -2117,7 +2117,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Voice -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Voice">
-        <rdfs:label xml:lang="en">voice</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#TelephoneType"/>
     </owl:Class>
     
@@ -2126,7 +2126,7 @@ Was called IMPP in vCard.</rdfs:comment>
     <!-- http://www.w3.org/2006/vcard/ns#Work -->
 
     <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Work">
-        <rdfs:label xml:lang="en">work (vcard c)</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/vcard/ns#Type"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This implies that the property is related to an individual&apos;s work place</rdfs:comment>
     </owl:Class>

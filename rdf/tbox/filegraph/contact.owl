@@ -47,7 +47,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_2000376 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ARG_2000376">
-        <rdfs:label xml:lang="en">contact qualifier</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     </owl:Class>
     
@@ -56,7 +56,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_2000377 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ARG_2000377">
-        <rdfs:label xml:lang="en">foaf profile</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ARG_2000379"/>
     </owl:Class>
     
@@ -65,7 +65,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_2000379 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ARG_2000379">
-        <rdfs:label xml:lang="en">contact</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000030"/>
     </owl:Class>
     
