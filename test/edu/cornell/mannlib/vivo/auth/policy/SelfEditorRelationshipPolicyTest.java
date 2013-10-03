@@ -44,7 +44,7 @@ import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 /**
  * Check the relationships in the SelfEditorRelationshipPolicy.
  * 
- * This only checks the relationships that deal with InformationResources.
+ * This only checks the relationships that deal with InfoContentEntitys.
  * Testing the others seems too redundant. If we generalize this to use
  * configurable relationships, then we'll be able to make more general tests as
  * well.
@@ -153,7 +153,6 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	@Before
 	public void setLogging() {
 		// setLoggerLevel(this.getClass(), Level.DEBUG);
-		// setLoggerLevel(InformationResourceEditingPolicy.class, Level.DEBUG);
 	}
 
 	// ----------------------------------------------------------------------
@@ -221,18 +220,18 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	}
 
 	// ----------------------------------------------------------------------
-	// InformationResource tests
+	// InfoContentEntity tests
 	// ----------------------------------------------------------------------
 
 	@Test
-	public void dataPropSubjectIsInfoResourceButNobodyIsSelfEditing() {
+	public void dataPropSubjectIsIceButNobodyIsSelfEditing() {
 		action = new AddDataPropertyStatement(ontModel, URI_JOE_WROTE_IT,
 				URI_PERMITTED_PREDICATE);
 		assertDecision(INCONCLUSIVE, policy.isAuthorized(idNobody, action));
 	}
 
 	@Test
-	public void dataPropSubjectIsInfoResourceButNoAuthorsOrEditorsOrFeatured() {
+	public void dataPropSubjectIsIceButNoAuthorsOrEditorsOrFeatured() {
 		action = new AddDataPropertyStatement(ontModel, URI_NOBODY_WROTE_IT,
 				URI_PERMITTED_PREDICATE);
 		assertDecision(INCONCLUSIVE, policy.isAuthorized(idJoe, action));
@@ -240,28 +239,28 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	}
 
 	@Test
-	public void dataPropSubjectIsInfoResourceButWrongAuthor() {
+	public void dataPropSubjectIsIceButWrongAuthor() {
 		action = new AddDataPropertyStatement(ontModel, URI_BOZO_WROTE_IT,
 				URI_PERMITTED_PREDICATE);
 		assertDecision(INCONCLUSIVE, policy.isAuthorized(idJoe, action));
 	}
 
 	@Test
-	public void dataPropSubjectIsInfoResourceButWrongEditor() {
+	public void dataPropSubjectIsIceButWrongEditor() {
 		action = new AddDataPropertyStatement(ontModel, URI_BOZO_EDITED_IT,
 				URI_PERMITTED_PREDICATE);
 		assertDecision(INCONCLUSIVE, policy.isAuthorized(idJoe, action));
 	}
 
 	@Test
-	public void dataPropSubjectIsInfoResourceButWrongFeatured() {
+	public void dataPropSubjectIsIceButWrongFeatured() {
 		action = new AddDataPropertyStatement(ontModel,
 				URI_BOZO_FEATURED_IN_IT, URI_PERMITTED_PREDICATE);
 		assertDecision(INCONCLUSIVE, policy.isAuthorized(idJoe, action));
 	}
 
 	@Test
-	public void dataPropSubjectIsInfoResourceWithSelfEditingAuthor() {
+	public void dataPropSubjectIsIceWithSelfEditingAuthor() {
 		action = new AddDataPropertyStatement(ontModel, URI_JOE_WROTE_IT,
 				URI_PERMITTED_PREDICATE);
 		assertDecision(AUTHORIZED, policy.isAuthorized(idJoe, action));
@@ -269,7 +268,7 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	}
 
 	@Test
-	public void dataPropSubjectIsInfoResourceWithSelfEditingEditor() {
+	public void dataPropSubjectIsIceWithSelfEditingEditor() {
 		action = new AddDataPropertyStatement(ontModel, URI_JOE_EDITED_IT,
 				URI_PERMITTED_PREDICATE);
 		assertDecision(AUTHORIZED, policy.isAuthorized(idJoe, action));
@@ -277,7 +276,7 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	}
 
 	@Test
-	public void dataPropSubjectIsInfoResourceWithSelfEditingFeatured() {
+	public void dataPropSubjectIsIceWithSelfEditingFeatured() {
 		action = new AddDataPropertyStatement(ontModel, URI_JOE_FEATURED_IN_IT,
 				URI_PERMITTED_PREDICATE);
 		assertDecision(AUTHORIZED, policy.isAuthorized(idJoe, action));
@@ -285,14 +284,14 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	}
 
 	@Test
-	public void objectPropSubjectIsInfoResourceButNobodyIsSelfEditing() {
+	public void objectPropSubjectIsIceButNobodyIsSelfEditing() {
 		action = new AddObjectPropertyStatement(ontModel, URI_JOE_EDITED_IT,
 				PERMITTED_PREDICATE, URI_PERMITTED_RESOURCE);
 		assertDecision(INCONCLUSIVE, policy.isAuthorized(idNobody, action));
 	}
 
 	@Test
-	public void objectPropSubjectIsInfoResourceButNoAuthorsOrEditorsOrFeatured() {
+	public void objectPropSubjectIsIceButNoAuthorsOrEditorsOrFeatured() {
 		action = new AddObjectPropertyStatement(ontModel, URI_NOBODY_WROTE_IT,
 				PERMITTED_PREDICATE, URI_PERMITTED_RESOURCE);
 		assertDecision(INCONCLUSIVE, policy.isAuthorized(idJoe, action));
@@ -300,21 +299,21 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	}
 
 	@Test
-	public void objectPropSubjectIsInfoResourceButWrongAuthor() {
+	public void objectPropSubjectIsIceButWrongAuthor() {
 		action = new AddObjectPropertyStatement(ontModel, URI_BOZO_WROTE_IT,
 				PERMITTED_PREDICATE, URI_PERMITTED_RESOURCE);
 		assertDecision(INCONCLUSIVE, policy.isAuthorized(idJoe, action));
 	}
 
 	@Test
-	public void objectPropSubjectIsInfoResourceButWrongEditor() {
+	public void objectPropSubjectIsIceButWrongEditor() {
 		action = new AddObjectPropertyStatement(ontModel, URI_BOZO_EDITED_IT,
 				PERMITTED_PREDICATE, URI_PERMITTED_RESOURCE);
 		assertDecision(INCONCLUSIVE, policy.isAuthorized(idJoe, action));
 	}
 
 	@Test
-	public void objectPropSubjectIsInfoResourceButWrongFeatured() {
+	public void objectPropSubjectIsIceButWrongFeatured() {
 		action = new AddObjectPropertyStatement(ontModel,
 				URI_BOZO_FEATURED_IN_IT, PERMITTED_PREDICATE,
 				URI_PERMITTED_RESOURCE);
@@ -322,7 +321,7 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	}
 
 	@Test
-	public void objectPropSubjectIsInfoResourceWithSelfEditingAuthor() {
+	public void objectPropSubjectIsIceWithSelfEditingAuthor() {
 		action = new AddObjectPropertyStatement(ontModel, URI_JOE_WROTE_IT,
 				PERMITTED_PREDICATE, URI_PERMITTED_RESOURCE);
 		assertDecision(AUTHORIZED, policy.isAuthorized(idJoe, action));
@@ -330,7 +329,7 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	}
 
 	@Test
-	public void objectPropSubjectIsInfoResourceWithSelfEditingEditor() {
+	public void objectPropSubjectIsIceWithSelfEditingEditor() {
 		action = new AddObjectPropertyStatement(ontModel, URI_JOE_EDITED_IT,
 				PERMITTED_PREDICATE, URI_PERMITTED_RESOURCE);
 		assertDecision(AUTHORIZED, policy.isAuthorized(idJoe, action));
@@ -338,7 +337,7 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	}
 
 	@Test
-	public void objectPropSubjectIsInfoResourceWithSelfEditingFeatured() {
+	public void objectPropSubjectIsIceWithSelfEditingFeatured() {
 		action = new AddObjectPropertyStatement(ontModel,
 				URI_JOE_FEATURED_IN_IT, PERMITTED_PREDICATE,
 				URI_PERMITTED_RESOURCE);
@@ -347,7 +346,7 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	}
 
 	@Test
-	public void objectPropObjectIsInfoResourcebutNobodyIsSelfEditing() {
+	public void objectPropObjectIsIcebutNobodyIsSelfEditing() {
 		action = new AddObjectPropertyStatement(ontModel,
 				URI_PERMITTED_RESOURCE, PERMITTED_PREDICATE,
 				URI_JOE_EDITED_IT);
@@ -355,7 +354,7 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	}
 
 	@Test
-	public void objectPropObjectIsInfoResourceButNoAuthorsOrEditors() {
+	public void objectPropObjectIsIceButNoAuthorsOrEditors() {
 		action = new AddObjectPropertyStatement(ontModel,
 				URI_PERMITTED_RESOURCE, PERMITTED_PREDICATE,
 				URI_NOBODY_WROTE_IT);
@@ -364,7 +363,7 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	}
 
 	@Test
-	public void objectPropObjectIsInfoResourceButWrongAuthor() {
+	public void objectPropObjectIsIceButWrongAuthor() {
 		action = new AddObjectPropertyStatement(ontModel,
 				URI_PERMITTED_RESOURCE, PERMITTED_PREDICATE,
 				URI_BOZO_WROTE_IT);
@@ -372,7 +371,7 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	}
 
 	@Test
-	public void objectPropObjectIsInfoResourceButWrongEditor() {
+	public void objectPropObjectIsIceButWrongEditor() {
 		action = new AddObjectPropertyStatement(ontModel,
 				URI_PERMITTED_RESOURCE, PERMITTED_PREDICATE,
 				URI_BOZO_EDITED_IT);
@@ -380,7 +379,7 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	}
 
 	@Test
-	public void objectPropObjectIsInfoResourceButWrongFeatured() {
+	public void objectPropObjectIsIceButWrongFeatured() {
 		action = new AddObjectPropertyStatement(ontModel,
 				URI_PERMITTED_RESOURCE, PERMITTED_PREDICATE,
 				URI_BOZO_FEATURED_IN_IT);
@@ -388,7 +387,7 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	}
 
 	@Test
-	public void objectPropObjectIsInfoResourceWithSelfEditingAuthor() {
+	public void objectPropObjectIsIceWithSelfEditingAuthor() {
 		action = new AddObjectPropertyStatement(ontModel,
 				URI_PERMITTED_RESOURCE, PERMITTED_PREDICATE,
 				URI_JOE_WROTE_IT);
@@ -397,7 +396,7 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	}
 
 	@Test
-	public void objectPropObjectIsInfoResourceWithSelfEditingEditor() {
+	public void objectPropObjectIsIceWithSelfEditingEditor() {
 		action = new AddObjectPropertyStatement(ontModel,
 				URI_PERMITTED_RESOURCE, PERMITTED_PREDICATE,
 				URI_JOE_EDITED_IT);
@@ -406,7 +405,7 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	}
 
 	@Test
-	public void objectPropObjectIsInfoResourceWithSelfEditingFeatured() {
+	public void objectPropObjectIsIceWithSelfEditingFeatured() {
 		action = new AddObjectPropertyStatement(ontModel,
 				URI_PERMITTED_RESOURCE, PERMITTED_PREDICATE,
 				URI_JOE_FEATURED_IN_IT);
@@ -419,14 +418,14 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	// ----------------------------------------------------------------------
 
 	@Test
-	public void dataPropSubjectIsNotInfoResource() {
+	public void dataPropSubjectIsNotIce() {
 		action = new AddDataPropertyStatement(ontModel, URI_PERMITTED_RESOURCE,
 				URI_PERMITTED_PREDICATE);
 		assertDecision(INCONCLUSIVE, policy.isAuthorized(idJoe, action));
 	}
 
 	@Test
-	public void objectPropNeitherSubjectOrObjectIsInfoResource() {
+	public void objectPropNeitherSubjectOrObjectIsIce() {
 		action = new AddObjectPropertyStatement(ontModel,
 				URI_PERMITTED_RESOURCE, PERMITTED_PREDICATE,
 				URI_PERMITTED_RESOURCE);

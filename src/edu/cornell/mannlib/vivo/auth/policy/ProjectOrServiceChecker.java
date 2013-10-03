@@ -13,13 +13,12 @@ import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AbstractPr
  * self-editor is authorized to modify?
  */
 public class ProjectOrServiceChecker extends RelationshipChecker {
-	private static final String NS_CORE = "http://vivoweb.org/ontology/core#";
 	private static final String URI_PROJECT_TYPE = NS_CORE + "Project";
 	private static final String URI_SERVICE_TYPE = NS_CORE + "Service";
-	private static final String URI_RELATED_ROLE_PROPERTY = NS_CORE
-			+ "relatedRole";
-	private static final String URI_CLINICAL_ROLE_OF_PROPERTY = NS_CORE
-			+ "clinicalRoleOf";
+	private static final String URI_CLINICAL_ROLE_TYPE = NS_CORE
+			+ "ClinicalRole";
+	private static final String URI_CONTRIBUTING_ROLE_PROPERTY = NS_CORE
+			+ "contributingRole";
 
 	private final String[] resourceUris;
 
@@ -37,9 +36,15 @@ public class ProjectOrServiceChecker extends RelationshipChecker {
 	 */
 	public PolicyDecision isAuthorized(List<String> userUris) {
 		for (String resourceUri : resourceUris) {
-			if (isProject(resourceUri) || isService(resourceUri)) {
+			if (isProject(resourceUri)) {
 				if (anyUrisInCommon(userUris,
-						getUrisOfClinicalAgents(resourceUri))) {
+						getClinicalAgentsOfProject(resourceUri))) {
+					return authorizedClinicalAgent(resourceUri);
+				}
+			}
+			if (isService(resourceUri)) {
+				if (anyUrisInCommon(userUris,
+						getClinicalAgentsOfService(resourceUri))) {
 					return authorizedClinicalAgent(resourceUri);
 				}
 			}
@@ -55,9 +60,15 @@ public class ProjectOrServiceChecker extends RelationshipChecker {
 		return isResourceOfType(resourceUri, URI_SERVICE_TYPE);
 	}
 
-	private List<String> getUrisOfClinicalAgents(String resourceUri) {
-		return getObjectsOfLinkedProperty(resourceUri,
-				URI_RELATED_ROLE_PROPERTY, URI_CLINICAL_ROLE_OF_PROPERTY);
+	private List<String> getClinicalAgentsOfProject(String resourceUri) {
+		return getObjectsThroughLinkingNode(resourceUri, URI_REALIZES,
+				URI_CLINICAL_ROLE_TYPE, URI_INHERES_IN);
+	}
+
+	private List<String> getClinicalAgentsOfService(String resourceUri) {
+		return getObjectsThroughLinkingNode(resourceUri,
+				URI_CONTRIBUTING_ROLE_PROPERTY, URI_CLINICAL_ROLE_TYPE,
+				URI_INHERES_IN);
 	}
 
 	private PolicyDecision authorizedClinicalAgent(String resourceUri) {

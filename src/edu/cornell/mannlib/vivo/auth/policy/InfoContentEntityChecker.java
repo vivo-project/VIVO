@@ -9,46 +9,41 @@ import edu.cornell.mannlib.vitro.webapp.auth.policy.specialrelationships.Relatio
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AbstractPropertyStatementAction;
 
 /**
- * Does the requested action involve a change to an Information Resource that
- * the self-editor is authorized to modify?
+ * Does the requested action involve a change to an Info Content Entity that the
+ * self-editor is authorized to modify?
  */
-public class InformationResourceChecker extends RelationshipChecker {
-	private static final String NS_CORE = "http://vivoweb.org/ontology/core#";
-	private static final String URI_INFORMATION_RESOURCE_TYPE = NS_CORE
-			+ "InformationResource";
-	private static final String URI_EDITOR_PROPERTY = "http://purl.org/ontology/bibo/editor";
+public class InfoContentEntityChecker extends RelationshipChecker {
+	private static final String URI_INFO_CONTENT_TYPE = NS_OBO + "IAO_0000030";
 	private static final String URI_FEATURES_PROPERTY = NS_CORE + "features";
-	private static final String URI_IN_AUTHORSHIP_PROPERTY = NS_CORE
-			+ "informationResourceInAuthorship";
-	private static final String URI_LINKED_AUTHOR_PROPERTY = NS_CORE
-			+ "linkedAuthor";
+	private static final String URI_AUTHORSHIP_TYPE = NS_CORE + "Authorship";
+	private static final String URI_EDITORSHIP_TYPE = NS_CORE + "Editorship";
 
 	private final String[] resourceUris;
 
-	public InformationResourceChecker(AbstractPropertyStatementAction action) {
+	public InfoContentEntityChecker(AbstractPropertyStatementAction action) {
 		super(action.getOntModel());
 		this.resourceUris = action.getResourceUris();
 	}
 
 	/**
 	 * A self-editor is authorized to add, edit, or delete a statement if the
-	 * subject or object refers to an Information Resource, and if the
+	 * subject or object refers to an Info Content Entity, and if the
 	 * self-editor:
 	 * 
-	 * 1) is an Author of that Information Resource
+	 * 1) is an Author of that Info Content Entity,
 	 * 
-	 * 2) is an Editor of that Information Resource, or
+	 * 2) is an Editor of that Info Content Entity, or
 	 * 
-	 * 3) is Featured in that Information Resource.
+	 * 3) is Featured in that Info Content Entity.
 	 */
 	public PolicyDecision isAuthorized(List<String> userUris) {
 		for (String resourceUri : resourceUris) {
-			if (isInformationResource(resourceUri)) {
-				if (anyUrisInCommon(userUris, getUrisOfEditors(resourceUri))) {
-					return authorizedEditor(resourceUri);
-				}
+			if (isInfoContentEntity(resourceUri)) {
 				if (anyUrisInCommon(userUris, getUrisOfAuthors(resourceUri))) {
 					return authorizedAuthor(resourceUri);
+				}
+				if (anyUrisInCommon(userUris, getUrisOfEditors(resourceUri))) {
+					return authorizedEditor(resourceUri);
 				}
 				if (anyUrisInCommon(userUris, getUrisOfFeatured(resourceUri))) {
 					return authorizedFeatured(resourceUri);
@@ -58,16 +53,16 @@ public class InformationResourceChecker extends RelationshipChecker {
 		return null;
 	}
 
-	// ----------------------------------------------------------------------
-	// methods for InformationResource
-	// ----------------------------------------------------------------------
-
-	private boolean isInformationResource(String resourceUri) {
-		return isResourceOfType(resourceUri, URI_INFORMATION_RESOURCE_TYPE);
+	private boolean isInfoContentEntity(String resourceUri) {
+		return isResourceOfType(resourceUri, URI_INFO_CONTENT_TYPE);
 	}
 
 	private List<String> getUrisOfEditors(String resourceUri) {
-		return getObjectsOfProperty(resourceUri, URI_EDITOR_PROPERTY);
+		List<String> allRelatedUris = getObjectsThroughLinkingNode(resourceUri,
+				URI_RELATED_BY, URI_EDITORSHIP_TYPE, URI_RELATES);
+		// The editorship relates to the editors and to the resource itself.
+		allRelatedUris.remove(resourceUri);
+		return allRelatedUris;
 	}
 
 	private List<String> getUrisOfFeatured(String resourceUri) {
@@ -75,8 +70,11 @@ public class InformationResourceChecker extends RelationshipChecker {
 	}
 
 	private List<String> getUrisOfAuthors(String resourceUri) {
-		return getObjectsOfLinkedProperty(resourceUri,
-				URI_IN_AUTHORSHIP_PROPERTY, URI_LINKED_AUTHOR_PROPERTY);
+		List<String> allRelatedUris = getObjectsThroughLinkingNode(resourceUri,
+				URI_RELATED_BY, URI_AUTHORSHIP_TYPE, URI_RELATES);
+		// The authorship relates to the authors and to the resource itself. 
+		allRelatedUris.remove(resourceUri);
+		return allRelatedUris;
 	}
 
 	private PolicyDecision authorizedEditor(String uri) {
