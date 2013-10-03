@@ -37,9 +37,10 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <#assign awardedDegreeLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "awardedDegreeLabel") />
 <#assign existingOrgValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingOrg") />
 <#assign trainingTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "trainingType")/>
-<#assign existingADLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingAwardedDegreeLabel") />
-
-<#--If edit submission exists, then retrieve validation errors if they exist-->
+<#--
+    <#assign existingADLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingAwardedDegreeLabel") />
+-->
+<#-- If edit submission exists, then retrieve validation errors if they exist-->
 <#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
 	<#assign submissionErrors = editSubmission.validationErrors/>
 </#if>
@@ -164,12 +165,15 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <option value="${key}" <#if degreeValue = key>selected</#if>>${degreeOpts[key]}</option>                    
         </#list>                                
       </select>
+<#--
       <#if editMode == "edit" || editMode == "repair">
             <input type="hidden" id="newAwardedDegreeLabel" name="awardedDegreeLabel" value=""/> 
             <input type="hidden" id="awardedDegreeLabel" name="existingAwardedDegreeLabel" value="${existingADLabelValue!}"/> 
       <#else>
             <input type="hidden" id="awardedDegreeLabel" name="awardedDegreeLabel" value=""/> 
       </#if> 
+-->
+            <input type="hidden" id="awardedDegreeLabel" name="awardedDegreeLabel" value=""/>
     </div>
     
     <p>    

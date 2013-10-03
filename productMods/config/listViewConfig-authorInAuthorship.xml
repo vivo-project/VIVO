@@ -29,7 +29,7 @@
         WHERE {
             ?subject ?property ?authorship .
             ?authorship core:relates ?infoResource .
-            ?infoResource a bibo:Document .                      
+            ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .                      
             ?infoResource rdfs:label ?infoResourceName .
             
                OPTIONAL { ?infoResource bibo:volume ?volume }
@@ -72,13 +72,13 @@
             ?subject ?property ?authorship . 
             ?authorship a core:Authorship . 
             ?authorship core:relates ?infoResource .
-            ?infoResource a bibo:Document .
+            ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
             ?infoResource vitro:mostSpecificType ?subclass 
         } WHERE {
             ?subject ?property ?authorship . 
             ?authorship a core:Authorship . 
             ?authorship core:relates ?infoResource .
-            ?infoResource a bibo:Document .
+            ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
             ?infoResource vitro:mostSpecificType ?subclass 
         }
     </query-construct>
@@ -91,7 +91,7 @@
             ?subject ?property ?authorship .  
             ?authorship ?authorshipProperty ?authorshipValue .
             ?authorship core:relates ?infoResource .
-            ?infoResource a bibo:Document .
+            ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
             ?infoResource rdfs:label ?infoResourceName .
             ?infoResource core:hasPublicationVenue ?publishedIn .
             ?publishedIn  rdfs:label ?journal 
@@ -108,24 +108,24 @@
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
                ?authorship core:relates ?infoResource .
-               ?infoResource a bibo:Document  
+               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt;  
             } UNION {
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
                ?authorship core:relates ?infoResource .
-               ?infoResource a bibo:Document .
+               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
                ?infoResource rdfs:label ?infoResourceName 
             } UNION {
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
                ?authorship core:relates ?infoResource .
-               ?infoResource a bibo:Document .
+               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
                ?infoResource core:hasPublicationVenue ?publishedIn 
             } UNION {
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
                ?authorship core:relates ?infoResource .
-               ?infoResource a bibo:Document .
+               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
                ?infoResource core:hasPublicationVenue ?publishedIn .
                ?publishedIn  rdfs:label ?journal
             }
@@ -143,7 +143,7 @@
             ?authorship a core:Authorship .
             ?authorship ?authorshipProperty ?authorshipValue .
             ?authorship core:relates ?infoResource .
-            ?infoResource a bibo:Document .
+            ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
             ?infoResource ?infoResourceProperty ?infoResourceValue .
             ?infoResource bibo:reproducedIn ?appearsInObj .
             ?infoResource core:publisher ?publisherObj .
@@ -169,32 +169,32 @@
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
                ?authorship core:relates ?infoResource .
-               ?infoResource a bibo:Document . 
+               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; . 
             } UNION {
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
                ?authorship core:relates ?infoResource .
-               ?infoResource a bibo:Document .
+               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
                ?infoResource ?infoResourceProperty ?infoResourceValue 
             } UNION {
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
                ?authorship core:relates ?infoResource .
-               ?infoResource a bibo:Document .
+               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
                ?infoResource bibo:reproducedIn ?appearsInObj .
                ?appearsInObj rdfs:label ?appearsIn
             } UNION {
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
                ?authorship core:relates ?infoResource .
-               ?infoResource a bibo:Document .
+               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
                ?infoResource core:publisher ?publisherObj .
                ?publisherObj rdfs:label ?publisher
             } UNION {
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
                ?authorship core:relates ?infoResource .
-               ?infoResource a bibo:Document .
+               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
                ?infoResource core:relatedBy ?editorship .
                ?editorship core:relates ?editorObj .
                ?editorObj rdfs:label ?editor
@@ -202,7 +202,7 @@
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
                ?authorship core:relates ?infoResource .
-               ?infoResource a bibo:Document .
+               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
                ?infoResource core:partOf ?partOfObj .
                ?partOfObj rdfs:label ?partOf
             } 
@@ -217,14 +217,14 @@
             ?subject ?property ?authorship .  
             ?authorship a core:Authorship .
             ?authorship core:relates ?infoResource .
-            ?infoResource a bibo:Document .
+            ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
             ?infoResource core:dateTimeValue ?dateTimeValue .
             ?dateTimeValue core:dateTime ?dateTime  
         } WHERE {
             ?subject ?property ?authorship .
             ?authorship a core:Authorship .
             ?authorship core:relates ?infoResource .
-            ?infoResource a bibo:Document .
+            ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
             ?infoResource core:dateTimeValue ?dateTimeValue .
             ?dateTimeValue core:dateTime ?dateTime  
         } 

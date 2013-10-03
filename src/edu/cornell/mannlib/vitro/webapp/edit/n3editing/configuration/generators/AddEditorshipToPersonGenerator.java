@@ -109,7 +109,7 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
         "PREFIX bibo: <http://purl.org/ontology/bibo/> . \n" +   
         "SELECT ?documentType WHERE { \n" + 
         "  ?editorship vivo:relates ?existingDocument . \n" + 
-        "  ?existingDocument a bibo:Document . \n" + 
+        "  ?existingDocument a <http://purl.obolibrary.org/obo/IAO_0000030> . \n" + 
         "  ?existingDocument vitro:mostSpecificType ?documentType . \n" + 
         "}";
 
@@ -119,7 +119,7 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
         "PREFIX bibo: <http://purl.org/ontology/bibo/> . \n" +   
         "SELECT ?documentLabel WHERE { \n" + 
         "  ?editorship vivo:relates ?existingDocument . \n" + 
-        "  ?existingDocument a bibo:Document . \n" + 
+        "  ?existingDocument a <http://purl.obolibrary.org/obo/IAO_0000030> . \n" + 
         "  ?existingDocument <" + label + "> ?documentLabel . \n" + 
         "}";
 
@@ -129,7 +129,7 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
         "PREFIX bibo: <http://purl.org/ontology/bibo/> . \n" +   
         "SELECT existingDocument WHERE { \n" + 
         "  ?editorship vivo:relates ?existingDocument . \n" + 
-        "  ?existingDocument a bibo:Document . \n" + 
+        "  ?existingDocument a <http://purl.obolibrary.org/obo/IAO_0000030> . \n" + 
         "}";
 
     //Adding form specific data such as edit mode

@@ -13,7 +13,6 @@
         
         SELECT DISTINCT <collated> ?subclass </collated>
                         ?edTraining 
-                        ?trainingType
                         ?typeName
                         ?org ?orgName 
                         ?degreeName ?degreeAbbr 
@@ -22,7 +21,7 @@
             WHERE {
                 ?subject ?property ?edTraining .
                 ?edTraining a core:EducationalProcess
-                OPTIONAL {?edTraining vitro:mostSpecificType ?trainingType .
+                OPTIONAL {?edTraining vitro:mostSpecificType ?subclass .
                           ?trainingType rdfs:subClassOf core:EducationalProcess .
                           ?trainingType rdfs:label ?typeName
                           } 
@@ -32,13 +31,9 @@
                            OPTIONAL { ?degree rdfs:label ?degreeName }
                            OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
                           }
-                OPTIONAL { ?awardedDegree core:assignedBy ?org .                                 
+                OPTIONAL { ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0000057&gt; ?org . 
+                           ?org a foaf:Organization .                                
                            ?org rdfs:label ?orgName  
-                           <collated>
-                           OPTIONAL { ?org vitro:mostSpecificType ?subclass .
-                                      ?subclass rdfs:subClassOf foaf:Organization  
-                           }  
-                           </collated>                         
                 }        
                 OPTIONAL { ?edTraining core:majorField ?majorField }
                 OPTIONAL { ?edTraining core:departmentOrSchool ?deptOrSchool }
@@ -57,12 +52,11 @@
     <query-construct> 
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
 
         CONSTRUCT {
-            ?subclass rdfs:subClassOf foaf:Organization .
+            ?subclass rdfs:subClassOf core:EducationalProcess .
         } WHERE {
-            ?subclass rdfs:subClassOf foaf:Organization .
+            ?subclass rdfs:subClassOf core:EducationalProcess .
         }
     </query-construct>
 
@@ -75,8 +69,6 @@
             ?edTraining a core:EducationalProcess .
             ?edTraining ?edTrainingProp ?edTrainingValue .
             ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0002234&gt; ?awardedDegree .
-            ?awardedDegree core:assignedBy ?org .
-            ?org rdfs:label ?orgName .
             ?awardedDegree core:relates ?degree .
             ?edTraining core:dateTimeInterval ?dateTimeInterval
         } WHERE {
@@ -98,8 +90,6 @@
                 ?subject ?property ?edTraining .
                 ?edTraining a core:EducationalProcess .
                 ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0002234&gt; ?awardedDegree .
-                ?awardedDegree core:assignedBy ?org .
-                ?org rdfs:label ?orgName  
             } 
             UNION {
                 ?subject ?property ?edTraining .
@@ -112,6 +102,44 @@
                 ?edTraining a core:EducationalProcess .
                 ?edTraining core:dateTimeInterval ?dateTimeInterval
             }
+        }
+    </query-construct> 
+
+    <query-construct>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
+
+        CONSTRUCT {
+            ?subject ?property ?edTraining .
+            ?edTraining a core:EducationalProcess .
+            ?edTraining ?edTrainingProp ?edTrainingValue .
+            ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0000057&gt; ?org .
+            ?org a foaf:Organization .
+            ?org rdfs:label ?orgName .
+        } WHERE {
+            {
+                ?subject ?property ?edTraining .
+                ?edTraining a core:EducationalProcess
+            }
+            UNION {
+                ?subject ?property ?edTraining .
+                ?edTraining a core:EducationalProcess .
+                ?edTraining ?edTrainingProp ?edTrainingValue 
+            }
+            UNION {
+                ?subject ?property ?edTraining .
+                ?edTraining a core:EducationalProcess .
+                ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0000057&gt; ?org .
+                ?org a foaf:Organization .
+            } 
+            UNION {
+                ?subject ?property ?edTraining .
+                ?edTraining a core:EducationalProcess .
+                ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0000057&gt; ?org .
+                ?org a foaf:Organization .
+                ?org rdfs:label ?orgName  
+            } 
         }
     </query-construct> 
 

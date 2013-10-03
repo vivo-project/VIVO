@@ -96,6 +96,10 @@
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasAssociatedConcept.xml</display:listViewConfigFile>
     </rdf:Description>
 
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#orcidId">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-orcidId.xml</display:listViewConfigFile>
+    </rdf:Description>
+
     <!--
      ******************************************************************
      data property custom list views

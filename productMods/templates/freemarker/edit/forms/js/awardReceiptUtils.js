@@ -105,7 +105,6 @@ var awardReceiptUtils = {
             rdfsLabel += " (" + this.subjectName + ")";
         }
         this.recLabel.val(rdfsLabel);
-        alert(this.recLabel.val());
     },
 
     setYearAwardedValue: function() {

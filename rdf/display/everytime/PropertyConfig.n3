@@ -358,6 +358,21 @@ local:informationResourceInEditorshipConfig a :ObjectPropertyDisplayConfig ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddEditorsToInformationResourceGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibobscure> .
 
+local:editorOfContext a :ConfigContext ;
+    :hasConfiguration local:editorOfConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#Editorship> .
+
+local:editorOfConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-editorship.xml"^^xsd:string ;
+    :displayName "editor of" ;
+    vitro:displayRankAnnot 20;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddEditorshipToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> .
+
 ### vcard properties ###
 
 local:mailingAddressContext a :ConfigContext ;
@@ -449,21 +464,6 @@ local:fullNameConfig a :ObjectPropertyDisplayConfig ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddFullNameToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
-
-local:editorOfContext a :ConfigContext ;
-    :hasConfiguration local:editorOfConfig ;
-    :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
-    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
-    :qualifiedBy      <http://vivoweb.org/ontology/core#Editorship> .
-
-local:editorOfConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-editorship.xml"^^xsd:string ;
-    :displayName "editor of" ;
-    vitro:displayRankAnnot 20;
-    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
-    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
-    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddEditorshipToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
-    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> .
 
 ### properties using default editing form ##
 
