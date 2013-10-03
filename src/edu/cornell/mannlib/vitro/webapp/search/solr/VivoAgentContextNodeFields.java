@@ -35,29 +35,33 @@ public class VivoAgentContextNodeFields extends ContextNodeFields{
   //queries for foaf:Agent
   static {
       
-      /*  Position */
+      /*  Positions for People */
     queriesForAgent.add(prefix +
             "SELECT " +
             "(str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {" +
-            " ?uri rdf:type foaf:Agent  ; ?b ?c . " +
+            " ?uri rdf:type foaf:Agent  . " +
+            " ?uri ?b ?c . " +
             " ?c rdf:type core:Position . " +
             " ?c core:hrJobTitle ?ContextNodeProperty . }");
     
     queriesForAgent.add(prefix +        "SELECT " +
             "(str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {" +
-            " ?uri rdf:type foaf:Agent  ; ?b ?c . " +
+            " ?uri rdf:type foaf:Agent  . " +
+            " ?uri ?b ?c . " +
             " ?c rdf:type core:Position . " +
             " ?c core:involvedOrganizationName ?ContextNodeProperty . }");       
     
     queriesForAgent.add(prefix +        "SELECT " +
             "(str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {" +
-            " ?uri rdf:type foaf:Agent  ; ?b ?c . " +
+            " ?uri rdf:type foaf:Agent  . " +
+            " ?uri ?b ?c . " +
             " ?c rdf:type core:Position . " +
             " ?c core:positionInOrganization ?i . ?i rdfs:label ?ContextNodeProperty . }");
     
     queriesForAgent.add(prefix +        "SELECT " +
             "(str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {" +
-            " ?uri rdf:type foaf:Agent  ; ?b ?c . " +
+            " ?uri rdf:type foaf:Agent  . " +
+            " ?uri  ?b ?c . " +
             " ?c rdf:type core:Position . " +
             " ?c core:titleOrRole ?ContextNodeProperty .  }");
     

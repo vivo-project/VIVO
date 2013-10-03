@@ -15,9 +15,20 @@ import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.RDFServiceUtils;
 import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.CalculateParameters;
 import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.DocumentModifier;
+import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.ExcludeBasedOnNamespace;
+import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.SearchIndexExcluder;
 
 public class VivoDocumentModifiers implements javax.servlet.ServletContextListener{
     
+    /** 
+     * Exclude from the search index individuals who's URIs start with these namespaces. 
+     */
+    private static final String[] INDIVIDUAL_NS_EXCLUDES={
+        //bdc34: seems that there are a lot of odd OBO things in the search, exclude them
+        "http://purl.obolibrary.org/obo/"
+    };
+    
+    @SuppressWarnings("unchecked")
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         
@@ -26,14 +37,35 @@ public class VivoDocumentModifiers implements javax.servlet.ServletContextListen
         
         Dataset dataset = DatasetFactory.create(ModelAccess.on(context).getJenaOntModel());
         
-        /* put DocumentModifiers into servlet context for use later in startup by SolrSetup */        
+        /* Put DocumentModifiers into servlet context for use later in startup by SolrSetup 
+         * This adds the code for VIVO specific additions to the building
+         * of solr Documents. */        
+        List<DocumentModifier> modifiers = (List<DocumentModifier>)context.getAttribute("DocumentModifiers");
+        if( modifiers == null ){                    
+            modifiers = new ArrayList<DocumentModifier>();
+            context.setAttribute("DocumentModifiers", modifiers);
+        }
         
-        List<DocumentModifier> modifiers = new ArrayList<DocumentModifier>();                                        
-        modifiers.add(new CalculateParameters(dataset));        //
-        modifiers.add(new VivoAgentContextNodeFields(rdfServiceFactory));
-        modifiers.add(new VivoInformationResourceContextNodeFields(rdfServiceFactory));
+        modifiers.add(new CalculateParameters(dataset));                
+        modifiers.add( new VivoISFBasicFields( rdfServiceFactory ));
+        modifiers.add( new VivoISFAdvisingFields( rdfServiceFactory ));
+        modifiers.add( new VivoISFEducationFields( rdfServiceFactory ));
+        modifiers.add( new VivoISFGrantFields( rdfServiceFactory ));
+        modifiers.add( new VivoISFMemberFields( rdfServiceFactory ));        
+        modifiers.add(new VivoInformationResourceContextNodeFields(rdfServiceFactory));                
         
-        context.setAttribute("DocumentModifiers", modifiers);
+        /*
+         * Add VIVO specific code that excludes Individuals from the search index. 
+         */        
+        List<SearchIndexExcluder> excludes = 
+            (List<SearchIndexExcluder>)context.getAttribute("SearchIndexExcludes");
+        
+        if( excludes == null ){
+            excludes = new ArrayList<SearchIndexExcluder>();
+            context.setAttribute("SearchIndexExcludes", excludes);
+        }
+                
+        excludes.add(new ExcludeBasedOnNamespace(INDIVIDUAL_NS_EXCLUDES ));        
     }
 
     @Override
