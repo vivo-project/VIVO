@@ -51,7 +51,7 @@ public class VivoISFBasicFields extends ContextNodeFields {
          * a SPARQL IN clause */
         String types = "";
         for( int i = 0 ; i < RELATIONSHIP_TYPES.length ; i++ ){
-            types += RELATIONSHIP_TYPES[i];
+            types += "<" + RELATIONSHIP_TYPES[i] + ">";
             if( i != RELATIONSHIP_TYPES.length - 1 ){
                 types += ", ";
             }                    
