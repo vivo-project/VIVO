@@ -2390,8 +2390,20 @@
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#self_governing">
     <rdfs:label xml:lang="en-US">Self Governing</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#special_group_territory">
-    <rdfs:label xml:lang="en-US">Special Group Territory</rdfs:label>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#special_group">
+    <rdfs:label xml:lang="en-US">Special Group</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#group">
+    <rdfs:label xml:lang="en-US">Group</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#organization">
+    <rdfs:label xml:lang="en-US">Organization</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#non_self_governing">
+    <rdfs:label xml:lang="en-US">Non Self Governing</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#territory">
+    <rdfs:label xml:lang="en-US">Territory</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl">
     <rdfs:label xml:lang="en-US">Geopolitical Ontology</rdfs:label>
