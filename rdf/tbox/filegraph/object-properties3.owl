@@ -945,7 +945,14 @@
 
     </owl:DatatypeProperty>
     
+    <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasCollaborator">
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+        <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+    </owl:ObjectProperty>
 
-
+    <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#affiliatedOrganization">
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+        <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+    </owl:ObjectProperty>
 
 </rdf:RDF>
