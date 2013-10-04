@@ -37,7 +37,7 @@ public class VivoISFMemberFields extends ContextNodeFields {
             prefix +
             "SELECT (str(?result) as ?result) WHERE {\n" +              
             " ?uri    rdf:type               foaf:Organization . \n" +
-            " ?role   vivo:roleContrigutesTo ?uri . \n" +
+            " ?role   core:roleContrigutesTo ?uri . \n" +
             " ?person obo:RO_0000053         ?role . \n" +
             " ?person rdfs:label             ?result .\n" +                       
             "}";
@@ -49,7 +49,7 @@ public class VivoISFMemberFields extends ContextNodeFields {
             prefix +
             "SELECT (str(?result) as ?result) WHERE {\n" +              
             " ?uri    rdf:type               foaf:Person . \n" +
-            " ?uri obo:RO_0000053 / vivo:roleContrigutesTo / rdfs:label ?result . \n" +                        
+            " ?uri obo:RO_0000053 / core:roleContrigutesTo / rdfs:label ?result . \n" +                        
             "}";
     
         
