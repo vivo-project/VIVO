@@ -2076,6 +2076,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#orcidId">
 
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This is now an object property where the object value is a resource of the form &lt;http://orcid.org/NNNN-NNNN-NNNN-NNNN&gt;.  This is to support connecting VIVO and ORCID in the linked data web.   Note: a person can have multiple ORCID iDs.</obo:IAO_0000112>
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     </owl:ObjectProperty>
 
 
