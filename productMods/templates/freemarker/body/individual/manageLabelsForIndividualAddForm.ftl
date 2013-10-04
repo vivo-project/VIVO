@@ -1,6 +1,9 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 <#-- Custom form for managing labels for individuals - specific to VIVO which handles people as well -->
-<#assign isPersonType = editConfiguration.pageData.isPersonType />
+<#assign isPersonType = "false"/>
+<#if editConfiguration.pageData.isPersonType?has_content>
+	<#assign isPersonType = editConfiguration.pageData.isPersonType />
+</#if>
 <form id="addLabelForm" name="addLabelForm" class="customForm" action="${submitUrl}">
            <h2>${i18n().add_label}</h2>
            <#if isPersonType?has_content && isPersonType = "true">       
