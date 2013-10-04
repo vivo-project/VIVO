@@ -1069,7 +1069,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_0000001 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.obolibrary.org/obo/ARG_0000001">
-        <rdfs:label xml:lang="en">is_template</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The document can be used as a template for the creation of other documents. </obo:IAO_0000115>
         <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Document"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
@@ -1080,7 +1080,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_0000015 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.obolibrary.org/obo/ARG_0000015">
-        <rdfs:label xml:lang="en">user_defined_tag</rdfs:label>
+
         <obo:IAO_0000115>A free text field for recording topics which relate to the resource. </obo:IAO_0000115>
         <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/ARG_0000008"/>
     </owl:DatatypeProperty>
@@ -1090,7 +1090,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_0000172 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.obolibrary.org/obo/ARG_0000172">
-        <rdfs:label xml:lang="en">patient_id</rdfs:label>
+
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#identifier"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
@@ -1101,7 +1101,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_0000197 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.obolibrary.org/obo/ARG_0000197">
-        <rdfs:label xml:lang="en">health care provider id</rdfs:label>
+
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#identifier"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
@@ -1112,7 +1112,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_2000012 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.obolibrary.org/obo/ARG_2000012">
-        <rdfs:label xml:lang="en">measurement_label</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -1120,7 +1120,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000044 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000044">
-        <rdfs:label xml:lang="en">has_inventory_number</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An example inventory number can be in the form: 12345</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Inventory identifier for the resource.</obo:IAO_0000115>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
@@ -1153,7 +1153,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000045 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000045">
-        <rdfs:label xml:lang="en">has_restriction</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A restriction on service availability, such as university or consortium affiliation, geographical location, professional certification, or other factors.</obo:IAO_0000115>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
@@ -1184,7 +1184,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000046 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000046">
-        <rdfs:label xml:lang="en">has_geographic_restriction</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Any service limitation tied to geographically-defined areas such as metro areas, counties, states, or regions. </obo:IAO_0000115>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
@@ -1201,7 +1201,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000050 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000050">
-        <rdfs:label xml:lang="en">model_number</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ABI 9000</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Instrument model number, which may be a name, number, or both.</obo:IAO_0000115>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
@@ -1217,7 +1217,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000054 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000054">
-        <rdfs:label xml:lang="en">lab_data_format</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Current method or software used to inventory a lab&apos;s resources. Examples include Excel, index cards, FileMaker, 3-ring binder, etc.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Excel spreadsheet</obo:IAO_0000112>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
@@ -1240,7 +1240,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000072 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000072">
-        <rdfs:label xml:lang="en">version</rdfs:label>
+
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Software edition, typically a numeral followed by a decimal and another numeral, such as 2.1.</obo:IAO_0000115>
@@ -1262,7 +1262,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000405 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000405">
-        <rdfs:label xml:lang="en">has_accession_number</rdfs:label>
+
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The accession number for a gene.</obo:IAO_0000112>
@@ -1286,7 +1286,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000424 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000424">
-        <rdfs:label xml:lang="en">has_study_population</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">African american study population.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Characteristics of the human population being studied.  May include number, demographic or geographic information, inclusion or exclusion criteria, or other descriptive information.</obo:IAO_0000115>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
@@ -1302,7 +1302,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000774 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000774">
-        <rdfs:label xml:lang="en">has_eligibility_requirment</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A grade point average above 3.5 is an eligibility requirement.</obo:IAO_0000112>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
@@ -1318,7 +1318,7 @@
     <!-- http://purl.org/ontology/bibo/abstract -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/abstract">
-        <rdfs:label xml:lang="en">abstract</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/dc/terms/</rdfs:isDefinedBy>
         <rdfs:comment>A summary of the resource.</rdfs:comment>
@@ -1330,7 +1330,7 @@
     <!-- http://purl.org/ontology/bibo/asin -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/asin">
-        <rdfs:label xml:lang="en">asin</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">020530902X</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Amazon standard identification number. Source: http://en.wikipedia.org/wiki/Amazon_Standard_Identification_Number.</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
@@ -1343,8 +1343,8 @@
     <!-- http://purl.org/ontology/bibo/chapter -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/chapter">
-        <rdfs:label xml:lang="en">chapter (bibo dp)</rdfs:label>
-        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Title of the chapter (this individual) currently should be entered in the individual name (rdfs:label). Title of the book belongs on a separate Book individual related to the chapter via the core:partOf property (or its child property bibo:reproducedIn).  The core:title field is deprecated and should no longer be used as of version 1.1 -- we will want to map rdfs:label to dc:title for query or linked data requests in the future</obo:IAO_0000112>
+
+
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <rdfs:comment xml:lang="en">An chapter number</rdfs:comment>
         <ns:term_status>unstable</ns:term_status>
@@ -1355,7 +1355,7 @@
     <!-- http://purl.org/ontology/bibo/coden -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/coden">
-        <rdfs:label xml:lang="en">coden</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CODEN became particularly common in the scientific community as a citation system for periodicals cited in technical- as well in chemistry-related publications and as a search tool in many bibliographic catalogues.
 Definition and description came from Wikipedia here: http://en.wikipedia.org/wiki/CODEN </obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
@@ -1368,7 +1368,7 @@ Definition and description came from Wikipedia here: http://en.wikipedia.org/wik
     <!-- http://purl.org/ontology/bibo/doi -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/doi">
-        <rdfs:label xml:lang="en">digital object identifier (doi)</rdfs:label>
+
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>stable</ns:term_status>
         <rdfs:comment xml:lang="en">Digital Object Identifier</rdfs:comment>
@@ -1379,7 +1379,7 @@ Definition and description came from Wikipedia here: http://en.wikipedia.org/wik
     <!-- http://purl.org/ontology/bibo/eanucc13 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/eanucc13">
-        <rdfs:label xml:lang="en">ean international-uniform code council (ean-ucc) 13</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition source: http://en.wikipedia.org/wiki/European_Article_Numbering-Uniform_Code_Council.
 The Uniform Code Council (UCC) was the Numbering Organization in the USA to administer and manage the EAN.UCC System. In 2005 the UCC changed its name to GS1 US.</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
@@ -1392,7 +1392,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/edition -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/edition">
-        <rdfs:label xml:lang="en">edition</rdfs:label>
+
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <rdfs:comment xml:lang="en">The name defining a special edition of a document. Normally its a literal value composed of a version number and words.</rdfs:comment>
         <ns:term_status>stable</ns:term_status>
@@ -1403,7 +1403,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/eissn -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/eissn">
-        <rdfs:label xml:lang="en">electronic international standard serial number (eissn)</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">eissn stands for Electronic International Standard Serial Number.  source: http://www.definition-of.com/EISSN</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>stable</ns:term_status>
@@ -1415,7 +1415,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/gtin14 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/gtin14">
-        <rdfs:label xml:lang="en">gtin14</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://en.wikipedia.org/wiki/Global_Trade_Item_Number.</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>stable</ns:term_status>
@@ -1427,7 +1427,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/identifier -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/identifier">
-        <rdfs:label xml:lang="en">identifier (bibo)</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -1435,7 +1435,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/isbn10 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/isbn10">
-        <rdfs:label xml:lang="en">international standard book number (isbn) 10</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://en.wikipedia.org/wiki/Isbn.</obo:IAO_0000112>
     </owl:DatatypeProperty>
     
@@ -1444,7 +1444,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/isbn13 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/isbn13">
-        <rdfs:label xml:lang="en">international standard book number (isbn) 13</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source: http://en.wikipedia.org/wiki/Isbn.</obo:IAO_0000112>
     </owl:DatatypeProperty>
     
@@ -1453,7 +1453,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/issn -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/issn">
-        <rdfs:label xml:lang="en">international standard serial number (issn)</rdfs:label>
+
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source: http://en.wikipedia.org/wiki/Issn</obo:IAO_0000112>
         <ns:term_status>stable</ns:term_status>
@@ -1465,7 +1465,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/issue -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/issue">
-        <rdfs:label xml:lang="en">issue (bibo dp)</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bibo has the domain of bibo:issue as the class Issue, but an example on their site uses it with Article, referring to the issue number &quot;4&quot;</obo:IAO_0000112>
     </owl:DatatypeProperty>
     
@@ -1474,7 +1474,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/lccn -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/lccn">
-        <rdfs:label xml:lang="en">library of congress control number (lccn)</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Source: http://en.wikipedia.org/wiki/Library_of_Congress_Control_Number.</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>stable</ns:term_status>
@@ -1486,7 +1486,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/locator -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/locator">
-        <rdfs:label xml:lang="en">locator</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">definition from: http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>stable</ns:term_status>
@@ -1498,7 +1498,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/numPages -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/numPages">
-        <rdfs:label xml:lang="en">number of pages</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -1506,7 +1506,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/number -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/number">
-        <rdfs:label xml:lang="en">number</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition from here: http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html</obo:IAO_0000112>
     </owl:DatatypeProperty>
     
@@ -1515,7 +1515,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/oclcnum -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/oclcnum">
-        <rdfs:label xml:lang="en">online computer library center (oclc) number</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://info-uri.info/registry/OAIHandler?verb=GetRecord&amp;metadataPrefix=reg&amp;identifier=info:oclcnum/. 
 
 
@@ -1530,7 +1530,7 @@ bibo has the domain of this property set to the union of Collection and Document
     <!-- http://purl.org/ontology/bibo/pageEnd -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/pageEnd">
-        <rdfs:label xml:lang="en">end page</rdfs:label>
+
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>stable</ns:term_status>
         <rdfs:comment xml:lang="en">Ending page number within a continuous page range.</rdfs:comment>
@@ -1541,7 +1541,7 @@ bibo has the domain of this property set to the union of Collection and Document
     <!-- http://purl.org/ontology/bibo/pageStart -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/pageStart">
-        <rdfs:label xml:lang="en">start page</rdfs:label>
+
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>stable</ns:term_status>
         <rdfs:comment xml:lang="en">Starting page number within a continuous page range.</rdfs:comment>
@@ -1552,7 +1552,7 @@ bibo has the domain of this property set to the union of Collection and Document
     <!-- http://purl.org/ontology/bibo/pmid -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/pmid">
-        <rdfs:label xml:lang="en">pubmed identifier</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The PubMed ID (PMID) identifies a citation record (rather than full-text) in the PubMed database. It is not evidence of compliance with the NIH Public Access Policy, because it does not identify a full-text submission of any kind.</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>stable</ns:term_status>
@@ -1564,7 +1564,7 @@ bibo has the domain of this property set to the union of Collection and Document
     <!-- http://purl.org/ontology/bibo/prefixName -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/prefixName">
-        <rdfs:label xml:lang="en">name prefix</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mr; Ms; Mrs</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dictionary.reference.com/browse/prefix</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
@@ -1577,7 +1577,7 @@ bibo has the domain of this property set to the union of Collection and Document
     <!-- http://purl.org/ontology/bibo/section -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/section">
-        <rdfs:label xml:lang="en">section</rdfs:label>
+
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <rdfs:comment xml:lang="en">An section number</rdfs:comment>
         <obo:IAO_0000112 xml:lang="en">Di Rado, Alicia. 1995. Trekking through college: Classes explore
@@ -1591,7 +1591,7 @@ modern society using the world of Star trek. Los Angeles Times, March
     <!-- http://purl.org/ontology/bibo/shortDescription -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/shortDescription">
-        <rdfs:label xml:lang="en">short description</rdfs:label>
+
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <rdfs:comment>A short description of the resource.</rdfs:comment>
         <skos:scopeNote xml:lang="en">The idea here is that while dcterms:description may involve length descriptions, this for short (two or three word) descriptions that could go in a bibliographic entry.</skos:scopeNote>
@@ -1603,7 +1603,7 @@ modern society using the world of Star trek. Los Angeles Times, March
     <!-- http://purl.org/ontology/bibo/sici -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/sici">
-        <rdfs:label xml:lang="en">sici</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A sub property of identifier (http://en.wikipedia.org/wiki/SICI).</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <rdfs:comment xml:lang="en">Serial Item and Contribution Identifier</rdfs:comment>
@@ -1615,7 +1615,7 @@ modern society using the world of Star trek. Los Angeles Times, March
     <!-- http://purl.org/ontology/bibo/suffixName -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/suffixName">
-        <rdfs:label xml:lang="en">name suffix</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Jr.; III;; M.D.</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>stable</ns:term_status>
@@ -1627,7 +1627,7 @@ modern society using the world of Star trek. Los Angeles Times, March
     <!-- http://purl.org/ontology/bibo/upc -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/upc">
-        <rdfs:label xml:lang="en">upc</rdfs:label>
+
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source for public description: http://en.wikipedia.org/wiki/Universal_Product_Code.</obo:IAO_0000112>
         <ns:term_status>stable</ns:term_status>
@@ -1639,7 +1639,7 @@ modern society using the world of Star trek. Los Angeles Times, March
     <!-- http://purl.org/ontology/bibo/uri -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/uri">
-        <rdfs:label xml:lang="en">uri</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition from: http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html</obo:IAO_0000112>
     </owl:DatatypeProperty>
     
@@ -1648,7 +1648,7 @@ modern society using the world of Star trek. Los Angeles Times, March
     <!-- http://purl.org/ontology/bibo/volume -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/volume">
-        <rdfs:label xml:lang="en">volume (bibo)</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -1656,7 +1656,7 @@ modern society using the world of Star trek. Los Angeles Times, March
     <!-- http://purl.org/spar/c4o/hasGlobalCountDate -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/spar/c4o/hasGlobalCountDate">
-        <rdfs:label xml:lang="en">has global count date</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The date on which the global citation count of the cited entity was recorded from a named bibliographic information source.</obo:IAO_0000115>
     </owl:DatatypeProperty>
     
@@ -1665,7 +1665,7 @@ modern society using the world of Star trek. Los Angeles Times, March
     <!-- http://purl.org/spar/c4o/hasGlobalCountValue -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/spar/c4o/hasGlobalCountValue">
-        <rdfs:label xml:lang="en">has global count value</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An integer defining the value of the global citation count of a cited entity recorded from a named bibliographic information source on a particular date.</obo:IAO_0000115>
     </owl:DatatypeProperty>
     
@@ -1675,7 +1675,7 @@ modern society using the world of Star trek. Los Angeles Times, March
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#abbreviation">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label xml:lang="en">abbreviation</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A short form for an longer title or name.</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">B.A.</obo:IAO_0000112>
     </owl:DatatypeProperty>
@@ -1685,7 +1685,7 @@ modern society using the world of Star trek. Los Angeles Times, March
     <!-- http://vivoweb.org/ontology/core#cclCode -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#cclCode">
-        <rdfs:label xml:lang="en">published us classification class/subclass (ccl) code</rdfs:label>
+
         <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Patent"/>
     </owl:DatatypeProperty>
     
@@ -1695,7 +1695,7 @@ modern society using the world of Star trek. Los Angeles Times, March
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#courseCredits">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label xml:lang="en">credits</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -1703,7 +1703,7 @@ modern society using the world of Star trek. Los Angeles Times, March
     <!-- http://vivoweb.org/ontology/core#dateTime -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#dateTime">
-        <rdfs:label xml:lang="en">date/time</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
     </owl:DatatypeProperty>
     
@@ -1712,7 +1712,7 @@ modern society using the world of Star trek. Los Angeles Times, March
     <!-- http://vivoweb.org/ontology/core#eRACommonsId -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#eRACommonsId">
-        <rdfs:label xml:lang="en">era commons id</rdfs:label>
+
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#identifier"/>
     </owl:DatatypeProperty>
     
@@ -1721,7 +1721,7 @@ modern society using the world of Star trek. Los Angeles Times, March
     <!-- http://vivoweb.org/ontology/core#freetextKeyword -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#freetextKeyword">
-        <rdfs:label xml:lang="en">keywords</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">conservation
 
 use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
@@ -1734,7 +1734,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#grantDirectCosts">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label xml:lang="en">direct costs</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -1742,7 +1742,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
     <!-- http://vivoweb.org/ontology/core#hasMonetaryAmount -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#hasMonetaryAmount">
-        <rdfs:label xml:lang="en">has_monetary_amount</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -1750,7 +1750,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
     <!-- http://vivoweb.org/ontology/core#hasValue -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#hasValue">
-        <rdfs:label xml:lang="en">has_value</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -1758,7 +1758,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
     <!-- http://vivoweb.org/ontology/core#iclCode -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#iclCode">
-        <rdfs:label xml:lang="en">international classification (icl) code</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The International classification(s) to which the published application has been assigned.
 </obo:IAO_0000112>
         <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Patent"/>
@@ -1769,7 +1769,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
     <!-- http://vivoweb.org/ontology/core#identifier -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#identifier">
-        <rdfs:label xml:lang="en">identifier (vivo)</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -1777,7 +1777,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
     <!-- http://vivoweb.org/ontology/core#licenseNumber -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#licenseNumber">
-        <rdfs:label xml:lang="en">license number</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -1786,7 +1786,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#linkURI">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label xml:lang="en">link uri</rdfs:label>
+
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#URLLink"/>
     </owl:DatatypeProperty>
     
@@ -1795,7 +1795,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
     <!-- http://vivoweb.org/ontology/core#localAwardId -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#localAwardId">
-        <rdfs:label xml:lang="en">local award id</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">core:localAwardId has a domain of core:Grant, and should be public since that&apos;s its public identifier for local use by OSP, accounting, department admins, and the PI </obo:IAO_0000112>
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#identifier"/>
     </owl:DatatypeProperty>
@@ -1805,7 +1805,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
     <!-- http://vivoweb.org/ontology/core#majorField -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#majorField">
-        <rdfs:label xml:lang="en">major field of degree</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Information Science; Computer Science; Anthropology</obo:IAO_0000112>
     </owl:DatatypeProperty>
     
@@ -1814,7 +1814,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
     <!-- http://vivoweb.org/ontology/core#middleName -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#middleName">
-        <rdfs:label xml:lang="en">middle name or initial</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -1822,7 +1822,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
     <!-- http://vivoweb.org/ontology/core#nihmsid -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#nihmsid">
-        <rdfs:label xml:lang="en">nih manuscript submission system id</rdfs:label>
+
         <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Article"/>
         <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
     </owl:DatatypeProperty>
@@ -1834,7 +1834,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#outreachOverview">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label xml:lang="en">outreach overview</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">My extension program consists of developing and reporting disease management strategies that are both economically and environmentally sound for fresh market vegetable production. We hope that some of this testing will result in practices adaptable for organic production.</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Used for a single narrative summary of outreach, typically covering a wide range of activities and time periods; use Outreach Provider Role for information on individual activities</obo:IAO_0000112>
     </owl:DatatypeProperty>
@@ -1845,7 +1845,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#overview">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label xml:lang="en">overview</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -1854,7 +1854,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#patentNumber">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label xml:lang="en">patent number</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source of definition: http://www.uspto.gov/main/glossary/#p . The following site has patent number formats: http://www.uspto.gov/patents/ebc/kindcodesum.jsp .</obo:IAO_0000112>
         <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Patent"/>
         <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
@@ -1866,7 +1866,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#placeOfPublication">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label xml:lang="en">place of publication</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -1874,7 +1874,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
     <!-- http://vivoweb.org/ontology/core#pmcid -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#pmcid">
-        <rdfs:label xml:lang="en">pubmed central id</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">   A PMCID is a unique PubMed Central reference number, which is assigned to each full-text record made available A PMCID is a unique PubMed Central reference number, which is assigned to each full-text record made available in PubMed Central. The PMCID is issued shortly after the PI or author approves the PubMed Central formatted web version of the submission. </obo:IAO_0000112>
         <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Article"/>
         <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
@@ -1885,7 +1885,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
     <!-- http://vivoweb.org/ontology/core#rank -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#rank">
-        <rdfs:label xml:lang="en">rank</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">this number indicates a position in a list</obo:IAO_0000112>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
     </owl:DatatypeProperty>
@@ -1896,7 +1896,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#reportId">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label xml:lang="en">report identifier</rdfs:label>
+
         <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Report"/>
         <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
     </owl:DatatypeProperty>
@@ -1907,7 +1907,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#researchOverview">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label xml:lang="en">research overview</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Used for a single narrative summary of research, typically covering a wide range of activities and time periods; use Researcher Role for information on individual activities</obo:IAO_0000112>
     </owl:DatatypeProperty>
     
@@ -1916,7 +1916,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
     <!-- http://vivoweb.org/ontology/core#researcherId -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#researcherId">
-        <rdfs:label xml:lang="en">isi researcher id</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RearcherID is a Thomson Reuters project where researchers have a place to manage and share their professional information. It will allow them to solve author identity issues while simultaneously adding dynamic citation metrics and collaboration networks to your personal profile.
 Definition source: http://isiwebofknowledge.com/researcherid/</obo:IAO_0000112>
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#identifier"/>
@@ -1927,7 +1927,7 @@ Definition source: http://isiwebofknowledge.com/researcherid/</obo:IAO_0000112>
     <!-- http://vivoweb.org/ontology/core#scopusId -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#scopusId">
-        <rdfs:label xml:lang="en">scopus id</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Home page for Scopus: http://www.scopus.com/home.url</obo:IAO_0000112>
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#identifier"/>
     </owl:DatatypeProperty>
@@ -1938,7 +1938,7 @@ Definition source: http://isiwebofknowledge.com/researcherid/</obo:IAO_0000112>
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#seatingCapacity">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label xml:lang="en">seating capacity</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">55</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">definition modified from: source (http://en.wikipedia.org/wiki/Seating_capacity).</obo:IAO_0000112>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
@@ -1950,7 +1950,7 @@ Definition source: http://isiwebofknowledge.com/researcherid/</obo:IAO_0000112>
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#sponsorAwardId">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label xml:lang="en">sponsor award id</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Has a domain of Grant. There is not a strong reason have this be publically visible, since most users would care more about the name of the sponsoring agency than its identifier, but it does no harm to be public.
 
 
@@ -1964,7 +1964,7 @@ See also core:localAwardId.
     <!-- http://vivoweb.org/ontology/core#supplementalInformation -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#supplementalInformation">
-        <rdfs:label xml:lang="en">supplemental information</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -1973,7 +1973,7 @@ See also core:localAwardId.
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#teachingOverview">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label xml:lang="en">teaching overview</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Used for a single narrative summary of teaching, typically covering a wide range of courses including for credit and non-credit teaching over multiple semesters; the &quot;teaches&quot; property links a person directly with an instance of a Semester Class, typically from an institutional database of record; then use Teacher Role for information about a person&apos;s role in non-credit teaching or their specific contribution to individual courses</obo:IAO_0000112>
     </owl:DatatypeProperty>
     
@@ -1983,7 +1983,7 @@ See also core:localAwardId.
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#totalAwardAmount">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label xml:lang="en">total award amount</rdfs:label>
+
     </owl:DatatypeProperty>
     
 
@@ -1991,7 +1991,7 @@ See also core:localAwardId.
     <!-- http://vivoweb.org/ontology/scientific-research#irbNumber -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/scientific-research#irbNumber">
-        <rdfs:label xml:lang="en">institutional review board (irb) number</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Every clinical trial in the United States must be approved and monitored by an Institutional Review Board (IRB). An IRB is an independent committee of physicians, statisticians, community advocates and others whose objective is to ensure that a clinical trial is ethical and the rights of study participants are protected. </obo:IAO_0000115>
     </owl:DatatypeProperty>
     
@@ -2000,7 +2000,7 @@ See also core:localAwardId.
     <!-- http://vivoweb.org/ontology/scientific-research#nctId -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/scientific-research#nctId">
-        <rdfs:label xml:lang="en">national clinical trials (nct) number</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ClinicalTrials.gov is an ICMJE-acceptable public registry, offering up-to-date information for locating clinical trials for a wide range of diseases and conditions. The U.S. National Institutes of Health (NIH), through its National Library of Medicine (NLM), developed this site in collaboration with the Food and Drug Administration (FDA), as a result of the FDA Modernization Act, which was passed into law in November 1997.   This property should be publically visible since it is one of the principal identifiers in a national registry of clinical trials </obo:IAO_0000115>
         <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NCT00000419</vitro:exampleAnnot>
     </owl:DatatypeProperty>
@@ -2010,7 +2010,7 @@ See also core:localAwardId.
     <!-- http://vivoweb.org/ontology/scientific-research#studyPopulationCount -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/scientific-research#studyPopulationCount">
-        <rdfs:label xml:lang="en">study population count</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">number of human participants in the study (trial).</obo:IAO_0000115>
     </owl:DatatypeProperty>
     
@@ -2019,7 +2019,7 @@ See also core:localAwardId.
     <!-- http://www.w3.org/2006/vcard/ns#additionalName -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#additionalName">
-        <rdfs:label xml:lang="en"> additional name</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Name"/>
     </owl:DatatypeProperty>
@@ -2029,7 +2029,7 @@ See also core:localAwardId.
     <!-- http://www.w3.org/2006/vcard/ns#anniversary -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#anniversary">
-        <rdfs:label xml:lang="en">anniversary</rdfs:label>
+
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The date of marriage, or equivalent, of the object the  vCard represents</rdfs:comment>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Individual"/>
@@ -2040,7 +2040,7 @@ See also core:localAwardId.
     <!-- http://www.w3.org/2006/vcard/ns#birthdate -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#birthdate">
-        <rdfs:label xml:lang="en">birthdate</rdfs:label>
+
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">To specify the birth date of the object the vCard represents</rdfs:comment>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Individual"/>
@@ -2051,7 +2051,7 @@ See also core:localAwardId.
     <!-- http://www.w3.org/2006/vcard/ns#calendarBusy -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#calendarBusy">
-        <rdfs:label xml:lang="en">calendar busy (vcard dp)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#CalendarBusy"/>
     </owl:DatatypeProperty>
@@ -2061,7 +2061,7 @@ See also core:localAwardId.
     <!-- http://www.w3.org/2006/vcard/ns#calendarLink -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#calendarLink">
-        <rdfs:label xml:lang="en">calendar link (vcard dp)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#CalendarLink"/>
     </owl:DatatypeProperty>
@@ -2071,7 +2071,7 @@ See also core:localAwardId.
     <!-- http://www.w3.org/2006/vcard/ns#calendarRequest -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#calendarRequest">
-        <rdfs:label xml:lang="en">calendar request (vcard dp)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#CalendarRequest"/>
     </owl:DatatypeProperty>
@@ -2081,7 +2081,7 @@ See also core:localAwardId.
     <!-- http://www.w3.org/2006/vcard/ns#category -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#category">
-        <rdfs:label xml:lang="en">category (vcard dp)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Category"/>
     </owl:DatatypeProperty>
@@ -2091,7 +2091,7 @@ See also core:localAwardId.
     <!-- http://www.w3.org/2006/vcard/ns#country -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#country">
-        <rdfs:label xml:lang="en">country (vcard dp)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Address"/>
     </owl:DatatypeProperty>
@@ -2101,7 +2101,7 @@ See also core:localAwardId.
     <!-- http://www.w3.org/2006/vcard/ns#email -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#email">
-        <rdfs:label xml:lang="en">email (vcard dp)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Email"/>
     </owl:DatatypeProperty>
@@ -2111,7 +2111,7 @@ See also core:localAwardId.
     <!-- http://www.w3.org/2006/vcard/ns#familyName -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#familyName">
-        <rdfs:label xml:lang="en">has last name</rdfs:label>
+
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Called Family Name in vCard</rdfs:comment>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Name"/>
@@ -2122,7 +2122,7 @@ See also core:localAwardId.
     <!-- http://www.w3.org/2006/vcard/ns#formattedName -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#formattedName">
-        <rdfs:label xml:lang="en">has format name</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#FormattedName"/>
     </owl:DatatypeProperty>
@@ -2132,7 +2132,7 @@ See also core:localAwardId.
     <!-- http://www.w3.org/2006/vcard/ns#gender -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#gender">
-        <rdfs:label xml:lang="en">gender (vcard dp)</rdfs:label>
+
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">To specify the components of the sex and gender identity of the object the vCard represents.
 To enable other Gender/Sex codes to be used, this dataproperty has range URI. The vCard gender code classes are defined under Code/Gender</rdfs:comment>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
@@ -2144,7 +2144,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#geo -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#geo">
-        <rdfs:label xml:lang="en">geo (vcard dp)</rdfs:label>
+
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Must use the geo URI scheme RFC5870</rdfs:comment>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Geo"/>
@@ -2155,7 +2155,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#givenName -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#givenName">
-        <rdfs:label xml:lang="en">first name</rdfs:label>
+
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">called Given Name invCard</rdfs:comment>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Name"/>
@@ -2166,7 +2166,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#honorificPrefix -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#honorificPrefix">
-        <rdfs:label xml:lang="en">has prefix name</rdfs:label>
+
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Called Honorific Prefix in vCard</rdfs:comment>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Name"/>
@@ -2177,7 +2177,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#honorificSuffix -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#honorificSuffix">
-        <rdfs:label xml:lang="en">honorific suffix name</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Name"/>
     </owl:DatatypeProperty>
@@ -2187,7 +2187,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#instantMessage -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#instantMessage">
-        <rdfs:label xml:lang="en">instant message</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#InstantMessage"/>
     </owl:DatatypeProperty>
@@ -2197,7 +2197,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#key -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#key">
-        <rdfs:label xml:lang="en">key (vcard dp)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Key"/>
     </owl:DatatypeProperty>
@@ -2207,7 +2207,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#language -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#language">
-        <rdfs:label xml:lang="en">has language (vcard dp)</rdfs:label>
+
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Use 2 char language code from RFC5646</rdfs:comment>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
@@ -2217,7 +2217,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#locality -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#locality">
-        <rdfs:label xml:lang="en">locality</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Address"/>
     </owl:DatatypeProperty>
@@ -2227,7 +2227,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#logo -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#logo">
-        <rdfs:label xml:lang="en">logo (vcard dp)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Logo"/>
     </owl:DatatypeProperty>
@@ -2237,7 +2237,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#nickName -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#nickName">
-        <rdfs:label xml:lang="en">nick name</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Nickname"/>
     </owl:DatatypeProperty>
@@ -2247,7 +2247,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#note -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#note">
-        <rdfs:label xml:lang="en">note (vcard dp)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Note"/>
     </owl:DatatypeProperty>
@@ -2257,7 +2257,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#organizationName -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#organizationName">
-        <rdfs:label xml:lang="en">organization name (vcard dp)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#OrganizationName"/>
     </owl:DatatypeProperty>
@@ -2267,7 +2267,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#organizationalUnitName -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#organizationalUnitName">
-        <rdfs:label xml:lang="en">organizational unit name (vcard dp)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#OrganizationUnitName"/>
     </owl:DatatypeProperty>
@@ -2277,7 +2277,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#photo -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#photo">
-        <rdfs:label xml:lang="en">photo (vcard dp)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Photo"/>
     </owl:DatatypeProperty>
@@ -2287,7 +2287,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#postalCode -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#postalCode">
-        <rdfs:label xml:lang="en">postal code</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Address"/>
     </owl:DatatypeProperty>
@@ -2297,7 +2297,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#productId -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#productId">
-        <rdfs:label xml:lang="en">product id</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
@@ -2306,7 +2306,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#region -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#region">
-        <rdfs:label xml:lang="en">region</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Address"/>
     </owl:DatatypeProperty>
@@ -2316,7 +2316,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#related -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#related">
-        <rdfs:label xml:lang="en">related (vcard dp)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Related"/>
     </owl:DatatypeProperty>
@@ -2326,7 +2326,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#revision -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#revision">
-        <rdfs:label xml:lang="en">revision</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
     </owl:DatatypeProperty>
     
@@ -2335,7 +2335,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#role -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#role">
-        <rdfs:label xml:lang="en">role (vcard)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Role"/>
     </owl:DatatypeProperty>
@@ -2345,7 +2345,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#sortAs -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#sortAs">
-        <rdfs:label xml:lang="en">sort as</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
@@ -2354,7 +2354,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#sound -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#sound">
-        <rdfs:label xml:lang="en">sound (vcard dp)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Sound"/>
     </owl:DatatypeProperty>
@@ -2364,7 +2364,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#source -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#source">
-        <rdfs:label xml:lang="en">source</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
@@ -2373,7 +2373,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#streetAddress -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#streetAddress">
-        <rdfs:label xml:lang="en">street address</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Address"/>
     </owl:DatatypeProperty>
@@ -2383,7 +2383,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#telephone -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#telephone">
-        <rdfs:label xml:lang="en">telephone (vcard dp)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
     </owl:DatatypeProperty>
     
@@ -2392,7 +2392,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#timeZone -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#timeZone">
-        <rdfs:label xml:lang="en">timezone</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#TimeZone"/>
     </owl:DatatypeProperty>
@@ -2402,7 +2402,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#title -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#title">
-        <rdfs:label xml:lang="en">title (vcard dp)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Title"/>
     </owl:DatatypeProperty>
@@ -2412,7 +2412,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#uid -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#uid">
-        <rdfs:label xml:lang="en">uid</rdfs:label>
+
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">To specify a value that represents a globally unique identifier corresponding to the entity associated with the vCard</rdfs:comment>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
     </owl:DatatypeProperty>
@@ -2422,7 +2422,7 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <!-- http://www.w3.org/2006/vcard/ns#url -->
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#url">
-        <rdfs:label xml:lang="en">url (vcard dp)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
     </owl:DatatypeProperty>
     

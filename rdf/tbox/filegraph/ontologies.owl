@@ -13,4 +13,8 @@
     <owl:Ontology rdf:about="http://vivoweb.org/ontology/core"/>
     <owl:Ontology rdf:about="http://purl.obolibrary.org/obo/"/>
     <owl:Ontology rdf:about="http://www.w3.org/2006/vcard/ns"/>   
+    <owl:Ontology rdf:about="http://aims.fao.org/aos/geopolitical.owl"/>
+    <owl:Ontology rdf:about="http://purl.org/net/OCRe/statistics.owl"/>
+    <owl:Ontology rdf:about="http://purl.org/net/OCRe/study_protocol.owl"/>
+    <owl:Ontology rdf:about="http://www.w3.org/2004/02/skos/core"/>
 </rdf:RDF> 

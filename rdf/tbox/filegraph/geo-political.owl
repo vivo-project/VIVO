@@ -747,7 +747,7 @@
     <!-- http://aims.fao.org/aos/geopolitical.owl#group -->
 
     <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#group">
-        <rdfs:label>group (geo)</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#area"/>
     </owl:Class>
     
@@ -783,7 +783,7 @@
     <!-- http://aims.fao.org/aos/geopolitical.owl#organization -->
 
     <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#organization">
-        <rdfs:label>organization (geo)</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#group"/>
     </owl:Class>
     
@@ -800,7 +800,7 @@
     <!-- http://aims.fao.org/aos/geopolitical.owl#self_governing -->
 
     <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#self_governing">
-        <rdfs:label xml:lang="en">self governing</rdfs:label>
+
         <owl:equivalentClass rdf:resource="http://vivoweb.org/ontology/core#Country"/>
         <rdfs:subClassOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#territory"/>
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#GeopoliticalEntity"/>
@@ -1081,7 +1081,7 @@
     <!-- http://vivoweb.org/ontology/core#Continent -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Continent">
-        <rdfs:label xml:lang="en">continent</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#TransnationalRegion"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A large contiguous landmass  that is at least partially surrounded by water, together with any islands on its continental shelf.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Short Definition take from http://en.wiktionary.org/wiki/continent.</obo:IAO_0000112>
@@ -1093,7 +1093,7 @@
     <!-- http://vivoweb.org/ontology/core#Country -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Country">
-        <rdfs:label xml:lang="en">country (vivo)</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#GeopoliticalEntity"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Afghanistan; Antigua and Barbuda; Cameroon; Iceland; Jamaica; Nigeria; United States of America</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An area of land distinguished by its political autonomy. Politically independent territories.</obo:IAO_0000115>
@@ -1105,7 +1105,7 @@
     <!-- http://vivoweb.org/ontology/core#County -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#County">
-        <rdfs:label xml:lang="en">county</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#GeopoliticalEntity"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alachua; Baker; Bradford; Kenora; Ottawa; Waterloo</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Short Definition modified from the one found here: http://www.thefreedictionary.com/county.</obo:IAO_0000112>
@@ -1123,7 +1123,7 @@
     <!-- http://vivoweb.org/ontology/core#GeopoliticalEntity -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#GeopoliticalEntity">
-        <rdfs:label xml:lang="en">geopolitical entity</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A geographical area which is associated with some sort of political  structure.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Short definition obtained here: http://en.wiktionary.org/wiki/geopolitical_entity.</obo:IAO_0000112>
@@ -1135,7 +1135,7 @@
     <!-- http://vivoweb.org/ontology/core#StateOrProvince -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#StateOrProvince">
-        <rdfs:label xml:lang="en">state or province</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#GeopoliticalEntity"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Minnesota; Michigan; Indiana; New York; Quebec; Manitoba; Ontario</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">One of a number of areas or communities having their own governments and forming a federation under a sovereign government, as in the US.</obo:IAO_0000115>
@@ -1147,7 +1147,7 @@
     <!-- http://vivoweb.org/ontology/core#SubnationalRegion -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#SubnationalRegion">
-        <rdfs:label xml:lang="en">subnational region</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Boroughs; townships; districts; the Midwest</obo:IAO_0000112>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">For example, the Midwest, northeast U.S.</rdfs:comment>
@@ -1160,7 +1160,7 @@
     <!-- http://vivoweb.org/ontology/core#TransnationalRegion -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#TransnationalRegion">
-        <rdfs:label xml:lang="en">transnational region</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Any region that goes beyond national boundaries and does not fit into any subclass of core:TransnationalRegion.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">None as yet.</obo:IAO_0000112>

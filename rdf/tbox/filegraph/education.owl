@@ -76,7 +76,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000224 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000224">
-        <rdfs:label xml:lang="en">funding role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role inhering in a person or organization that is realized when the bearer participates in providing funding to a person or an organization for academic or business purposes.</obo:IAO_0000115>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Nicole Vasilevsky</obo:IAO_0000119>
@@ -90,7 +90,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000225 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000225">
-        <rdfs:label xml:lang="en">educator role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role inhering in a person or organization that is realized when the bearer participates in providing education to a student or group of students.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A teacher.</obo:IAO_0000112>
@@ -104,7 +104,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000595 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000595">
-        <rdfs:label xml:lang="en">research opportunity</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A planned process carried out by a person or organization with the objective of performing research.</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An offering through an ongoing program or single request of research support: internships, positions, financial awards or other forms of tangible or intangible support</obo:IAO_0000115>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Nicole Vasilevsky</obo:IAO_0000117>
@@ -119,7 +119,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000776 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000776">
-        <rdfs:label xml:lang="en">us resident role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role that inheres in a person who maintains residency in the United states. </obo:IAO_0000115>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Nicole Vasilevsky</obo:IAO_0000119>
@@ -132,7 +132,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000777 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000777">
-        <rdfs:label xml:lang="en">us citizen role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000776"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A US resident role that inheres in an individual that is a legally recognized as a member of a state, with associated rights and obligations.</obo:IAO_0000115>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Nicole Vasilevsky</obo:IAO_0000117>
@@ -145,7 +145,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000778 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000778">
-        <rdfs:label xml:lang="en">non-us citizen</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000776"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A US resident role that inheres in an individual who is not a legally recognized subject or national of the United States.</obo:IAO_0000115>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Nicole Vasilevsky</obo:IAO_0000117>
@@ -158,7 +158,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000779 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000779">
-        <rdfs:label xml:lang="en">permanent resident role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000778"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An role that inheres in an individual who is not a citizen but who legally resides in another nation on a permanent or extended basis.</obo:IAO_0000115>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Nicole Vasilevsky</obo:IAO_0000117>
@@ -171,7 +171,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000780 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000780">
-        <rdfs:label xml:lang="en">non-permanent resident role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000778"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A non-US citizen role that inheres in an individual who is residing in a country, but is neither a citizen nor a permanent resident. </obo:IAO_0000115>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Nicole Vasilevsky</obo:IAO_0000117>
@@ -184,7 +184,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000783 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000783">
-        <rdfs:label xml:lang="en">student role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A college student.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role inhering in a person that is realized when the bearer participates a course of study, as in a school, college, university, etc.</obo:IAO_0000115>
@@ -198,7 +198,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000784 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000784">
-        <rdfs:label xml:lang="en">undergraduate student role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000783"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A college student.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A student role inhering in a person that is realized when the bearer participates in a course of study at a college, university, etc. in pursuit of an associate or bachelor degree.</obo:IAO_0000115>
@@ -212,7 +212,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000785 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000785">
-        <rdfs:label xml:lang="en">graduate student role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000783"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A PhD student at a university.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A student role inhering in a person that is realized when the bearer participates a course of study at a university or institution in pursuit of an graduate or professional degree.</obo:IAO_0000115>
@@ -226,7 +226,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000786 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000786">
-        <rdfs:label xml:lang="en">high school student role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000783"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A freshman in high school.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A student role inhering in a person that is realized when the bearer participates in a course of study at a secondary learning institution.</obo:IAO_0000115>
@@ -240,7 +240,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000787 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000787">
-        <rdfs:label xml:lang="en">employee role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role inhering in a person that is realized when the bearer participates in an occupation by which a person earns a living or spends their time.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An employee at a university.</obo:IAO_0000112>
@@ -254,7 +254,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000788 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000788">
-        <rdfs:label xml:lang="en">faculty role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000787"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A professor at a university.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An employee role inhering in a person that is realized when the bearer participates in the teaching and/or administrative force of a university, college, or school.</obo:IAO_0000115>
@@ -268,7 +268,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000789 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000789">
-        <rdfs:label xml:lang="en">staff role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000787"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A research technician in a lab.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An employee role inhering in a person that is realized when the bearer is employed by an employer.</obo:IAO_0000115>
@@ -282,7 +282,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000790 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000790">
-        <rdfs:label xml:lang="en">post-baccalaureate trainee</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000783"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A student role inhering in a person that is realized when the bearer participates in a post-baccalaureate training program in pursuit of an additional bachelor degree or new or additional training in a particular field.</obo:IAO_0000115>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Nicole Vasilevsky</obo:IAO_0000117>
@@ -295,7 +295,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000914 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000914">
-        <rdfs:label xml:lang="en">post-graduate student trainee role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000783"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A post-doctoral fellow.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A student role inhering in a person that is realized when the bearer participates in a post-graduate training program in pursuit of new or additional training in a particular field, such as a post-doctoral fellowship.</obo:IAO_0000115>
@@ -309,7 +309,7 @@
     <!-- http://purl.obolibrary.org/obo/OBI_0000017 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/OBI_0000017">
-        <rdfs:label xml:lang="en">regulatory role</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
         <obo:IAO_0000117 xml:lang="en">GROUP:  Role branch</obo:IAO_0000117>
         <obo:IAO_0000119 xml:lang="en">OBI, CDISC</obo:IAO_0000119>
@@ -325,7 +325,7 @@
     <!-- http://vivoweb.org/ontology/core#AdvisingRelationship -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#AdvisingRelationship">
-        <rdfs:label xml:lang="en">advising relationship</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Relationship"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A dual relationship of one person being advised or mentored by another person, typically including start and end dates</obo:IAO_0000115>
     </owl:Class>
@@ -335,7 +335,7 @@
     <!-- http://vivoweb.org/ontology/core#Certification -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Certification">
-        <rdfs:label xml:lang="en">certification</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#IssuedCredential"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An issued certificate</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">see also core:Certificate</obo:IAO_0000112>
@@ -346,7 +346,7 @@
     <!-- http://vivoweb.org/ontology/core#EducationalProcess -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#EducationalProcess">
-        <rdfs:label xml:lang="en">educational process</rdfs:label>
+
     </owl:Class>
     
 
@@ -354,7 +354,7 @@
     <!-- http://vivoweb.org/ontology/core#FacultyMentoringRelationship -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#FacultyMentoringRelationship">
-        <rdfs:label xml:lang="en">faculty mentoring relationship</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#AdvisingRelationship"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An advisory relationship in which one faculty member mentors another faculty member.</obo:IAO_0000115>
     </owl:Class>
@@ -364,7 +364,7 @@
     <!-- http://vivoweb.org/ontology/core#GraduateAdvisingRelationship -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#GraduateAdvisingRelationship">
-        <rdfs:label xml:lang="en">graduate advising relationship</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#AdvisingRelationship"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An advisory relationship in which a professor advises a graduate student.</obo:IAO_0000115>
     </owl:Class>
@@ -374,7 +374,7 @@
     <!-- http://vivoweb.org/ontology/core#Internship -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Internship">
-        <rdfs:label xml:lang="en">internship</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#EducationalProcess"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Typically a student or a recent graduate undergoing supervised practical training.</obo:IAO_0000115>
     </owl:Class>
@@ -384,7 +384,7 @@
     <!-- http://vivoweb.org/ontology/core#IssuedCredential -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#IssuedCredential">
-        <rdfs:label xml:lang="en">issued credential</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Relationship"/>
     </owl:Class>
     
@@ -393,7 +393,7 @@
     <!-- http://vivoweb.org/ontology/core#Licensure -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Licensure">
-        <rdfs:label xml:lang="en">licensure</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#IssuedCredential"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A granted license, which gives a &apos;permission to practice.&apos;</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A granted license, which gives a &apos;permission to practice.&apos; Such licenses are usually issued in order to regulate some activity that is deemed to be dangerous or a threat to the person or the public or which involves a high level of specialized skill.  See also core:License.</obo:IAO_0000112>
@@ -404,7 +404,7 @@
     <!-- http://vivoweb.org/ontology/core#MedicalResidency -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#MedicalResidency">
-        <rdfs:label xml:lang="en">medical residency</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#EducationalProcess"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Residency is a stage of graduate medical training. </obo:IAO_0000115>
     </owl:Class>
@@ -414,7 +414,7 @@
     <!-- http://vivoweb.org/ontology/core#PostdocOrFellowAdvisingRelationship -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#PostdocOrFellowAdvisingRelationship">
-        <rdfs:label xml:lang="en">postdoc or fellow advising relationship</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#AdvisingRelationship"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An advisory relationship in which the advisee is a Postdoc or Fellow.</obo:IAO_0000115>
     </owl:Class>
@@ -424,7 +424,7 @@
     <!-- http://vivoweb.org/ontology/core#PostdoctoralTraining -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#PostdoctoralTraining">
-        <rdfs:label xml:lang="en">postdoctoral training</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#EducationalProcess"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Postdoctoral research is academic or scholarly research conducted by a person who has completed his or her doctoral studies, normally within the following five years. It is intended to further deepen expertise in a specialist subject.</obo:IAO_0000115>
     </owl:Class>
@@ -440,7 +440,7 @@
     <!-- http://vivoweb.org/ontology/core#UndergraduateAdvisingRelationship -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#UndergraduateAdvisingRelationship">
-        <rdfs:label xml:lang="en">undergraduate advising relationship</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#AdvisingRelationship"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An advisory relationship in which a professor advises an undergraduate student.</obo:IAO_0000115>
     </owl:Class>

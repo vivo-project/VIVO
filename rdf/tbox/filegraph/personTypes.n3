@@ -48,7 +48,7 @@
 
 core:FacultyMember
       a       owl:Class ;
-      rdfs:label "Faculty Member"@en-us ;
+
       rdfs:subClassOf foaf:Person , <http://isf/deprecated_class> ;
       vitro:descriptionAnnot
               "Definition from here: http://research.carleton.ca/htr/defs.php."^^xsd:string ;
@@ -56,42 +56,42 @@ core:FacultyMember
 
 core:Postdoc
       a       owl:Class ;
-      rdfs:label "Postdoc"@en-us ;
+
       rdfs:subClassOf <http://isf/deprecated_class> , core:NonFacultyAcademic ;
       obo:IAO_0000115 "A Person holding an academic employment appointment focused on research rather than teaching; temporary (or for some defined term)"^^xsd:string .
 
 core:NonFacultyAcademic
       a       owl:Class ;
-      rdfs:label "Non-Faculty Academic"@en-us ;
+
       rdfs:subClassOf foaf:Person , <http://isf/deprecated_class> ;
       obo:IAO_0000115 "A person not considered a faculty member but holding an academic appointment."^^xsd:string .
 
 core:EmeritusLibrarian
       a       owl:Class ;
-      rdfs:label "Librarian Emeritus"@en-us ;
+
       rdfs:subClassOf foaf:Person , <http://isf/deprecated_class> ;
       obo:IAO_0000115 "A retired librarian who has retained their rank, title and privileges."^^xsd:string .
 
 core:EmeritusFaculty
       a       owl:Class ;
-      rdfs:label "Faculty Member Emeritus"@en-us ;
+
       rdfs:subClassOf foaf:Person , <http://isf/deprecated_class> ;
       obo:IAO_0000115 "A retired faculty member who has retained their rank, title and privileges."^^xsd:string .
 
 core:Librarian
       a       owl:Class ;
-      rdfs:label "Librarian"@en-us ;
+
       rdfs:subClassOf foaf:Person , <http://isf/deprecated_class> ;
       obo:IAO_0000115 "A person working in a position of librarian or information professional, or academic or technical expert in support of providing information services or materials."^^xsd:string .
 
 core:EmeritusProfessor
       a       owl:Class ;
-      rdfs:label "Professor Emeritus"@en-us ;
+
       rdfs:subClassOf core:EmeritusFaculty , foaf:Person , <http://isf/deprecated_class> ;
       obo:IAO_0000115 "A retired professor who has retained their rank, title and privileges."^^xsd:string .
 
 core:NonAcademic
       a       owl:Class ;
-      rdfs:label "Non-Academic"@en-us ;
+
       rdfs:subClassOf foaf:Person , <http://isf/deprecated_class> ;
       obo:IAO_0000115 "A person holding a position that is not considered to be an academic appointment."^^xsd:string .

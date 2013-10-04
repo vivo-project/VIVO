@@ -124,7 +124,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_2000028 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ARG_2000028">
-        <rdfs:label xml:lang="en">has_contact_info</rdfs:label>
+
         <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/ARG_2000379"/>
     </owl:ObjectProperty>
     
@@ -133,7 +133,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_2000029 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ARG_2000029">
-        <rdfs:label xml:lang="en">contact_info_for</rdfs:label>
+
         <owl:inverseOf rdf:resource="http://purl.obolibrary.org/obo/ARG_2000028"/>
         <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/ARG_2000379"/>
     </owl:ObjectProperty>
@@ -143,7 +143,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_2000390 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ARG_2000390">
-        <rdfs:label xml:lang="en">context_for</rdfs:label>
+
         <owl:inverseOf rdf:resource="http://purl.obolibrary.org/obo/ARG_2000391"/>
     </owl:ObjectProperty>
     
@@ -152,7 +152,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_2000391 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ARG_2000391">
-        <rdfs:label xml:lang="en">has_context</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -160,7 +160,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_2000397 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ARG_2000397">
-        <rdfs:label xml:lang="en">url_link_for</rdfs:label>
+
         <owl:inverseOf rdf:resource="http://purl.obolibrary.org/obo/ARG_2000398"/>
     </owl:ObjectProperty>
     
@@ -169,7 +169,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_2000398 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ARG_2000398">
-        <rdfs:label xml:lang="en">has_url_link</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -177,7 +177,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_2000399 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ARG_2000399">
-        <rdfs:label>has contact agent</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -186,7 +186,7 @@
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/BFO_0000050">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
-        <rdfs:label xml:lang="en">part_of</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -195,7 +195,7 @@
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/BFO_0000051">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
-        <rdfs:label xml:lang="en">has_part</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -203,7 +203,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000029 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000029">
-        <rdfs:label xml:lang="en">provides_access_to</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An access service that provides access to a flow cytometer.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Instruments, reagents, organisms, or software for which the service provides access.</obo:IAO_0000115>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
@@ -229,7 +229,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000031 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000031">
-        <rdfs:label xml:lang="en">uses</rdfs:label>
+
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Here there are things to be fixed (for instance a service can use a technique...)</rdfs:comment>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Microsoft powerpoint is commonly used in research laboratories to prepare presentations.</obo:IAO_0000112>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
@@ -255,7 +255,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000033 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000033">
-        <rdfs:label xml:lang="en">has_expertise</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Brian Druker has expertise in cancer research.</obo:IAO_0000112>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
@@ -271,7 +271,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000034 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000034">
-        <rdfs:label xml:lang="en">has_manufacturer</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Organization or person that created the resource.</obo:IAO_0000115>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
@@ -296,7 +296,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000037 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000037">
-        <rdfs:label xml:lang="en">provides_service</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A core lab providing cell sorting to individual labs.</obo:IAO_0000112>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
@@ -319,7 +319,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000038 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000038">
-        <rdfs:label xml:lang="en">specifies_the_use_of</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A protocol can specify the use of a flow cytometer.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Instruments, techniques, reagents, organisms, or software that are referenced in a protocol.</obo:IAO_0000115>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
@@ -346,7 +346,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000070 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000070">
-        <rdfs:label xml:lang="en">used_by</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A laboratory uses Microsoft Word.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Laboratory that uses the protocol or software.</obo:IAO_0000115>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
@@ -370,7 +370,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000076 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000076">
-        <rdfs:label xml:lang="en">has_input_type</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Imaging processing software that requires .jpg format files for analysis.</obo:IAO_0000112>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Carlo Torniai</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
@@ -393,7 +393,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000077 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000077">
-        <rdfs:label xml:lang="en">has_output_type</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Microsoft Excel arranges and saves data in .xlsx format.</obo:IAO_0000112>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Carlo Torniai</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
@@ -409,7 +409,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000078 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000078">
-        <rdfs:label xml:lang="en">achieves_objective</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ImageJ software measures characteristics of digital images.</obo:IAO_0000112>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Carlo Torniai</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
@@ -425,7 +425,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000390 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000390">
-        <rdfs:label xml:lang="en">service_provided_by</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A core laboratory provides a service.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Organization or laboratory performing the service.</obo:IAO_0000115>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
@@ -449,7 +449,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000397 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000397">
-        <rdfs:label xml:lang="en">performs</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A cancer researcher performs apoptosis assays.</obo:IAO_0000112>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
@@ -471,7 +471,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000398 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000398">
-        <rdfs:label xml:lang="en">is_performed_by</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Confocal microscopy is performed by a confocal core laboratory.</obo:IAO_0000112>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
@@ -495,7 +495,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000460 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000460">
-        <rdfs:label xml:lang="en">has_documentation</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An antibody has documentation describing attributes of the antibody.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Document that contains relevant resource information.</obo:IAO_0000115>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
@@ -525,7 +525,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000481 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000481">
-        <rdfs:label xml:lang="en">realizes_protocol</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A sequencing protocol used for next generation sequencing.</obo:IAO_0000112>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
@@ -549,7 +549,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000482 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000482">
-        <rdfs:label xml:lang="en">uses_software</rdfs:label>
+
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Placeholder needs to be redesign</rdfs:comment>
@@ -570,7 +570,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000543 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000543">
-        <rdfs:label xml:lang="en">related_technique</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Flow cytometry is a related technique for a flow cytometer instrument.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Method in which the resource can be used.</obo:IAO_0000115>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
@@ -604,7 +604,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000572 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000572">
-        <rdfs:label xml:lang="en">used_to_study</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A study of hibernation in bears.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biological process studied in the organism.</obo:IAO_0000115>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
@@ -621,7 +621,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000775 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000775">
-        <rdfs:label xml:lang="en">has_residency_requirement</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A research opportunity requires applicants to be US citizens.</obo:IAO_0000112>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
@@ -638,7 +638,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000918 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000918">
-        <rdfs:label xml:lang="en">related_research_project</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A research project studying breast cancer.</obo:IAO_0000112>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
@@ -655,7 +655,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000919 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000919">
-        <rdfs:label xml:lang="en">related_biological_specimen</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A breast cancer specimen.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Biological specimen collected as part of the research project.</obo:IAO_0000115>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
@@ -672,7 +672,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0001057 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0001057">
-        <rdfs:label xml:lang="en">has_preparation_technique</rdfs:label>
+
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Paraffin embedding of tissue.</obo:IAO_0000112>
@@ -690,7 +690,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0001518 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0001518">
-        <rdfs:label xml:lang="en">has_phase</rdfs:label>
+
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 1 clinical trial.</obo:IAO_0000112>
@@ -706,7 +706,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0001520 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0001520">
-        <rdfs:label xml:lang="en">performs_human_study</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Human study performed by the organization.</obo:IAO_0000115>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
@@ -724,7 +724,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0001521 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0001521">
-        <rdfs:label xml:lang="en">human_study_performed_by</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Jackson State University performs human studies on heart disease.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Organization that performs the human study.</obo:IAO_0000115>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
@@ -742,7 +742,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0001811 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0001811">
-        <rdfs:label xml:lang="en">has_format</rdfs:label>
+
         <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/ERO_0001554"/>
         <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/IAO_0000098"/>
     </owl:ObjectProperty>
@@ -752,7 +752,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0001824 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0001824">
-        <rdfs:label xml:lang="en">has_software_license</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Is a legal instrument (usually by way of contract law) governing the usage or redistribution of software.</obo:IAO_0000115>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Scott Hoffmann</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://en.wikipedia.org/wiki/Software_license</obo:IAO_0000119>
@@ -766,7 +766,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0001908 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0001908">
-        <rdfs:label xml:lang="en">objective_achieved_by_operation</rdfs:label>
+
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Links an objective to a software operation whise execution achieves the objective. Is different from OBI:objective_achieved_by which links an objective to the process that achieves it.</rdfs:comment>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON:Matthew Brush</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON:Matthew Brush</obo:IAO_0000119>
@@ -784,7 +784,7 @@ objective_achieved_by some (&apos;software/algorithm execution&apos; and (specif
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0000039">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label xml:lang="en">has measurement unit label</rdfs:label>
+
         <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000051"/>
         <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/IAO_0000003"/>
     </owl:ObjectProperty>
@@ -794,7 +794,7 @@ objective_achieved_by some (&apos;software/algorithm execution&apos; and (specif
     <!-- http://purl.obolibrary.org/obo/IAO_0000136 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0000136">
-        <rdfs:label xml:lang="en">is about</rdfs:label>
+
         <obo:IAO_0000116 xml:lang="en">7/6/2009 Alan Ruttenberg. Following discussion with Jonathan Rees, and introduction of &quot;mentions&quot; relation. Weaken the is_about relationship to be primitive. 
 
 We will try to build it back up by elaborating the various subproperties that are more precisely defined.
@@ -813,7 +813,7 @@ Some currently missing phenomena that should be considered &quot;about&quot; are
     <!-- http://purl.obolibrary.org/obo/IAO_0000142 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0000142">
-        <rdfs:label>mentions</rdfs:label>
+
         <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000136"/>
     </owl:ObjectProperty>
     
@@ -822,7 +822,7 @@ Some currently missing phenomena that should be considered &quot;about&quot; are
     <!-- http://purl.obolibrary.org/obo/IAO_0000221 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0000221">
-        <rdfs:label xml:lang="en">is quality measurement of</rdfs:label>
+
         <obo:IAO_0000116 xml:lang="en">8/6/2009 Alan Ruttenberg: The strategy is to be rather specific with this relationship. There are other kinds of measurements that are not of qualities, such as those that measure time. We will add these as separate properties for the moment and see about generalizing later</obo:IAO_0000116>
         <obo:IAO_0000117 xml:lang="en">Alan Ruttenberg</obo:IAO_0000117>
         <obo:IAO_0000116 xml:lang="en">From the second IAO workshop [Alan Ruttenberg 8/6/2009: not completely current, though bringing in comparison is probably important]
@@ -873,7 +873,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/IAO_0000417 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/IAO_0000417">
-        <rdfs:label xml:lang="en">is quality measured as</rdfs:label>
+
         <obo:IAO_0000116 xml:lang="en">2009/10/19 Alan Ruttenberg. Named &apos;junk&apos; relation useful in restrictions, but not a real instance relationship</obo:IAO_0000116>
         <obo:IAO_0000117 xml:lang="en">Person:Alan Ruttenberg</obo:IAO_0000117>
         <obo:IAO_0000115 xml:lang="en">inverse of the relation of is quality measurement of</obo:IAO_0000115>
@@ -886,7 +886,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/OBI_0000293 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/OBI_0000293">
-        <rdfs:label xml:lang="en">has_specified_input</rdfs:label>
+
         <obo:IAO_0000116 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">8/17/09: specified inputs of one process are not necessarily specified inputs of a larger process that it is part of. This is in contrast to how &apos;has participant&apos; works.</obo:IAO_0000116>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Bjoern Peters</obo:IAO_0000117>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Larry Hunter</obo:IAO_0000117>
@@ -904,7 +904,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/OBI_0000299 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/OBI_0000299">
-        <rdfs:label xml:lang="en">has_specified_output</rdfs:label>
+
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Bjoern Peters</obo:IAO_0000117>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Larry Hunter</obo:IAO_0000117>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melanie Courtot</obo:IAO_0000117>
@@ -923,7 +923,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/OBI_0000304 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/OBI_0000304">
-        <rdfs:label xml:lang="en">is_manufactured_by</rdfs:label>
+
         <obo:IAO_0000117 xml:lang="en">Alan Ruttenberg</obo:IAO_0000117>
         <obo:IAO_0000117 xml:lang="en">Liju Fan</obo:IAO_0000117>
         <obo:IAO_0000115 xml:lang="en">c is_manufactured_by o means that there was a process p in which c was built in which a person, or set of people or machines did the work(bore the &quot;Manufacturer Role&quot;, and those people/and or machines were members or of directed by the organization to do this.</obo:IAO_0000115>
@@ -948,7 +948,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/OBI_0000312 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/OBI_0000312">
-        <rdfs:label xml:lang="en">is_specified_output_of</rdfs:label>
+
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON:Bjoern Peters</obo:IAO_0000117>
         <obo:IAO_0000111 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is_specified_output_of</obo:IAO_0000111>
         <obo:IAO_0000115 xml:lang="en">A relation between a planned process and a continuant participating in that process. The presence of the continuant at the end of the process is explicitly specified in the objective specification which the process realizes the concretization of.</obo:IAO_0000115>
@@ -962,7 +962,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/OBI_0000417 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/OBI_0000417">
-        <rdfs:label xml:lang="en">achieves_planned_objective</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A cell sorting process achieves the objective specification &apos;material separation objective&apos;</obo:IAO_0000112>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BP, AR, PPPB branch</obo:IAO_0000117>
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PPPB branch derived</obo:IAO_0000119>
@@ -977,7 +977,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/OBI_0000643 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/OBI_0000643">
-        <rdfs:label xml:lang="en">has grain</rdfs:label>
+
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PAPER: Granularity, scale and collectivity: When size does and does not matter, Alan Rector, Jeremy Rogers, Thomas Bittner, Journal of Biomedical Informatics 39 (2006) 333-349</obo:IAO_0000119>
         <obo:IAO_0000111 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has grain</obo:IAO_0000111>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">the relation of the cells in the finger of the skin to the finger, in which an indeterminate number of grains are parts of the whole by virtue of being grains in a collective that is part of the whole, and in which removing one granular part does not nec- essarily damage or diminish the whole. Ontological Whether there is a fixed, or nearly fixed number of parts - e.g. fingers of the hand, chambers of the heart, or wheels of a car - such that there can be a notion of a single one being missing, or whether, by contrast, the number of parts is indeterminate - e.g., cells in the skin of the hand, red cells in blood, or rubber molecules in the tread of the tire of the wheel of the car.</obo:IAO_0000115>
@@ -992,7 +992,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/OBI_0000833 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/OBI_0000833">
-        <rdfs:label xml:lang="en">objective_achieved_by</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This relation obtains between a a objective specification and a planned process when the criteria specified in the objective specification are met at the end of the planned process.</obo:IAO_0000115>
         <obo:IAO_0000116 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">definition needs clean up to indicate directionality</obo:IAO_0000116>
         <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/IAO_0000005"/>
@@ -1006,7 +1006,7 @@ there is a measurement process p that has specified output m, a measurement datu
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0000052">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label xml:lang="en">inheres in</rdfs:label>
+
         <obo:IAO_0000116 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This clarifies that only specifically dependent continuants inhere in (specifically) one independent continuant over all time. For GDCs, there in implicitly inherence to all the independent continuants in which the concretizations inhere. Should add a &apos;cardinality 1&apos; restriction to the definition of specifically dependent continuant.</obo:IAO_0000116>
         <obo:IAO_0000116 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This relation belongs in BFO/RO, and will be in BFO 2</obo:IAO_0000116>
         <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/BFO_0000004"/>
@@ -1019,7 +1019,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/RO_0000053 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0000053">
-        <rdfs:label xml:lang="en">bearer_of</rdfs:label>
+
         <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/BFO_0000004"/>
         <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/BFO_0000020"/>
     </owl:ObjectProperty>
@@ -1029,7 +1029,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/RO_0000056 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0000056">
-        <rdfs:label xml:lang="en">participates in</rdfs:label>
+
         <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/BFO_0000002"/>
         <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/BFO_0000003"/>
     </owl:ObjectProperty>
@@ -1039,7 +1039,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/RO_0000057 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0000057">
-        <rdfs:label xml:lang="en">has participant</rdfs:label>
+
         <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/BFO_0000003"/>
         <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/BFO_0000002"/>
     </owl:ObjectProperty>
@@ -1049,7 +1049,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/RO_0001000 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0001000">
-        <rdfs:label xml:lang="en">derives from (ro)</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1057,7 +1057,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/RO_0001015 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0001015">
-        <rdfs:label xml:lang="en">location of</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1065,7 +1065,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/RO_0001018 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0001018">
-        <rdfs:label xml:lang="en">contained in</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1073,7 +1073,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/RO_0001019 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0001019">
-        <rdfs:label xml:lang="en">contains</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1081,7 +1081,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/RO_0001025 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0001025">
-        <rdfs:label xml:lang="en">located in</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1089,7 +1089,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/RO_0002220 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0002220">
-        <rdfs:label xml:lang="en">adjacent to</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1097,7 +1097,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/RO_0002233 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0002233">
-        <rdfs:label xml:lang="en">has input</rdfs:label>
+
         <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/RO_0000057"/>
     </owl:ObjectProperty>
     
@@ -1106,7 +1106,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/RO_0002234 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0002234">
-        <rdfs:label xml:lang="en">has output</rdfs:label>
+
         <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/RO_0000057"/>
     </owl:ObjectProperty>
     
@@ -1115,7 +1115,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/RO_0002350 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0002350">
-        <rdfs:label xml:lang="en">member of</rdfs:label>
+
         <owl:inverseOf rdf:resource="http://purl.obolibrary.org/obo/RO_0002351"/>
     </owl:ObjectProperty>
     
@@ -1124,7 +1124,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/RO_0002351 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0002351">
-        <rdfs:label xml:lang="en">has_member</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1132,7 +1132,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/RO_0002353 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0002353">
-        <rdfs:label xml:lang="en">output_of</rdfs:label>
+
         <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/RO_0000056"/>
     </owl:ObjectProperty>
     
@@ -1141,7 +1141,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/RO_0003000 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0003000">
-        <rdfs:label xml:lang="en">produces</rdfs:label>
+
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Melissa Haendel</obo:IAO_0000117>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">a produces b if some process that occurs_in a has_output b, where a and b are material entities. Examples: hybridoma cell line produces monoclonal antibody reagent; chondroblast produces avascular GAG-rich matrix.</obo:IAO_0000115>
         <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/BFO_0000040"/>
@@ -1154,7 +1154,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.obolibrary.org/obo/RO_0003001 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/RO_0003001">
-        <rdfs:label xml:lang="en">produced_by</rdfs:label>
+
         <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/BFO_0000040"/>
         <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/BFO_0000040"/>
         <owl:inverseOf rdf:resource="http://purl.obolibrary.org/obo/RO_0003000"/>
@@ -1165,7 +1165,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/NET/c4dm/event.owl#isAgentIn -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/NET/c4dm/event.owl#isAgentIn">
-        <rdfs:label xml:lang="en">is agent in</rdfs:label>
+
         <rdfs:range rdf:resource="http://purl.org/NET/c4dm/event.owl#Event"/>
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
     </owl:ObjectProperty>
@@ -1181,7 +1181,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/obo/owl/OBO_REL#role_of -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/obo/owl/OBO_REL#role_of">
-        <rdfs:label xml:lang="en">role_of</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between a role R and an entity E. R role_of E iff: R inheres_in E and R is a role</obo:IAO_0000115>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GROUP:OBI:&lt;http://obi.sourceforge.net&gt;</obo:IAO_0000117>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Chris Mungall</obo:IAO_0000117>
@@ -1196,7 +1196,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/affirmedBy -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/affirmedBy">
-        <rdfs:label xml:lang="en">affirmedby</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The public description was taken from here:  http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <rdfs:comment xml:lang="en">A legal decision that affirms a ruling.</rdfs:comment>
@@ -1207,7 +1207,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/annotates -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/annotates">
-        <rdfs:label xml:lang="en">annotates</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The public description source is: http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html.</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>stable</ns:term_status>
@@ -1219,7 +1219,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/citedBy -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/citedBy">
-        <rdfs:label xml:lang="en">cited by</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1227,7 +1227,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/cites -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/cites">
-        <rdfs:label xml:lang="en">cites</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1235,7 +1235,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/court -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/court">
-        <rdfs:label xml:lang="en">court</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Public description take from: http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html.  Bibo considers this property &quot;unstable&quot;.</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>unstable</ns:term_status>
@@ -1247,7 +1247,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/degree -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/degree">
-        <rdfs:label xml:lang="en">related degree</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The source of the public description and this info is found here:  http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html.  Bibo considers this term &quot;unstable&quot;.  The bibo editorial note is: &quot;We are not defining, using an enumeration, the range of the bibo:degree to the defined list of bibo:ThesisDegree. We won&apos;t do it because we want people to be able to define new degress if needed by some special usecases. Creating such an enumeration would restrict this to happen.&quot;</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <rdfs:comment xml:lang="en">The thesis degree.</rdfs:comment>
@@ -1260,7 +1260,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/director -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/director">
-        <rdfs:label xml:lang="en">director</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition take from this site: http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html .</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <rdfs:comment xml:lang="en">A Film director.</rdfs:comment>
@@ -1272,7 +1272,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/interviewee -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/interviewee">
-        <rdfs:label xml:lang="en">interviewee</rdfs:label>
+
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>stable</ns:term_status>
         <rdfs:comment xml:lang="en">An agent that is interviewed by another agent.</rdfs:comment>
@@ -1283,7 +1283,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/interviewer -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/interviewer">
-        <rdfs:label xml:lang="en">interviewer</rdfs:label>
+
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>stable</ns:term_status>
         <rdfs:comment xml:lang="en">An agent that interview another agent.</rdfs:comment>
@@ -1294,7 +1294,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/performer -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/performer">
-        <rdfs:label xml:lang="en">performer</rdfs:label>
+
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>stable</ns:term_status>
     </owl:ObjectProperty>
@@ -1304,7 +1304,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/presents -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/presents">
-        <rdfs:label xml:lang="en">related documents</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Public Description from source: http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html .  Bibo considers the bibo:presents and the bibo:presentedAt unstable terms.  It also indicates that bibo:presents is a sub-property of event:product.</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <rdfs:comment xml:lang="en">Relates an event to associated documents; for example, conference to a paper.</rdfs:comment>
@@ -1316,7 +1316,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/recipient -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/recipient">
-        <rdfs:label xml:lang="en">recipient</rdfs:label>
+
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>stable</ns:term_status>
         <rdfs:comment xml:lang="en">An agent that receives a communication document.</rdfs:comment>
@@ -1327,7 +1327,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/reproducedIn -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/reproducedIn">
-        <rdfs:label xml:lang="en">reproduced in</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1335,7 +1335,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/reversedBy -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/reversedBy">
-        <rdfs:label xml:lang="en">reversedby</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The first sentence of the public description was taken from here: http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <rdfs:comment xml:lang="en">A legal decision that reverses a ruling.</rdfs:comment>
@@ -1346,7 +1346,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/reviewOf -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/reviewOf">
-        <rdfs:label xml:lang="en">review of</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The bibo:reviewOf public description was found here: http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html .  As of 26 May 2010, bibo:reviewOf is used with the class Review, but core:reviewIn doesn&apos;t seem to be being used.</obo:IAO_0000112>
     </owl:ObjectProperty>
     
@@ -1355,7 +1355,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/status -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/status">
-        <rdfs:label xml:lang="en">status</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">paraphrased editorial note from the bibo ontology: We are not defining, using an enumeration, the range of the bibo:status to be a defined list of bibo:DocumentStatus. This is because we want people to be able to define new statuses if needed; and creating such an enumeration would prevent this.</obo:IAO_0000112>
     </owl:ObjectProperty>
     
@@ -1364,7 +1364,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/subsequentLegalDecision -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/subsequentLegalDecision">
-        <rdfs:label xml:lang="en">subsequentlegaldecision</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Public description is from comments of this object property in bibo ontology located here: http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <rdfs:comment xml:lang="en">A legal decision on appeal that takes action on a case (affirming it, reversing it, etc.).</rdfs:comment>
@@ -1375,7 +1375,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/transcriptOf -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/transcriptOf">
-        <rdfs:label xml:lang="en">transcript of</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The bibo:transcriptOf public description was found here:  http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html .  Bibo considers this term unstable.</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <rdfs:comment xml:lang="en">Relates a document to some transcribed original.</rdfs:comment>
@@ -1387,7 +1387,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/translationOf -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/translationOf">
-        <rdfs:label xml:lang="en">translation of</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Examples shows a book has French language version. Public description source: http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html .</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <rdfs:comment xml:lang="en">Relates a translated document to the original document.</rdfs:comment>
@@ -1399,7 +1399,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/translator -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/translator">
-        <rdfs:label xml:lang="en">translator</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1407,7 +1407,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/spar/c4o/hasGlobalCitationFrequency -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/spar/c4o/hasGlobalCitationFrequency">
-        <rdfs:label xml:lang="en">has_global_citation_frequency</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A property linking a publication entity to an instance of c40:GlobalCitationCount that specifies how many times a work has been cited by others, according to a particular information source on a particular date.</obo:IAO_0000115>
     </owl:ObjectProperty>
     
@@ -1416,7 +1416,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/spar/c4o/hasGlobalCountSource -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/spar/c4o/hasGlobalCountSource">
-        <rdfs:label xml:lang="en">has global count source</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A property linking an instance of c40:GlobalCitationCount to the bibliographic information source providing the global citation count information for a particular publication on a particular date.</obo:IAO_0000115>
     </owl:ObjectProperty>
     
@@ -1425,7 +1425,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#assignedBy -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#assignedBy">
-        <rdfs:label xml:lang="en">assigned by</rdfs:label>
+
         <obo:IAO_0000115 xml:lang="en">Relates a Relationship (as a predicate or n-ary relation over one or more Thing) to an Agent that defined or instantiated the predicate instance. </obo:IAO_0000115>
     </owl:ObjectProperty>
     
@@ -1434,7 +1434,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#assigns -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#assigns">
-        <rdfs:label xml:lang="en">assigns</rdfs:label>
+
         <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#assignedBy"/>
     </owl:ObjectProperty>
     
@@ -1443,7 +1443,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#dateFiled -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#dateFiled">
-        <rdfs:label xml:lang="en">date filed</rdfs:label>
+
         <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Patent"/>
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#dateTimeValue"/>
@@ -1454,7 +1454,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#dateIssued -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#dateIssued">
-        <rdfs:label xml:lang="en">date issued</rdfs:label>
+
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#dateTimeValue"/>
     </owl:ObjectProperty>
@@ -1464,7 +1464,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#dateTimeInterval -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#dateTimeInterval">
-        <rdfs:label xml:lang="en">has date/time interval</rdfs:label>
+
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#DateTimeInterval"/>
     </owl:ObjectProperty>
     
@@ -1473,7 +1473,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#dateTimePrecision -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#dateTimePrecision">
-        <rdfs:label xml:lang="en">date/time precision</rdfs:label>
+
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
     </owl:ObjectProperty>
     
@@ -1482,7 +1482,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#dateTimeValue -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#dateTimeValue">
-        <rdfs:label xml:lang="en">date/time value</rdfs:label>
+
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
     </owl:ObjectProperty>
     
@@ -1491,7 +1491,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#end -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#end">
-        <rdfs:label xml:lang="en">end date value</rdfs:label>
+
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#DateTimeInterval"/>
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#dateTimeValue"/>
@@ -1502,7 +1502,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#expirationDate -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#expirationDate">
-        <rdfs:label xml:lang="en">expiration date</rdfs:label>
+
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#dateTimeValue"/>
     </owl:ObjectProperty>
     
@@ -1511,7 +1511,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#features -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#features">
-        <rdfs:label xml:lang="en">features</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This is done through a restriction on the foaf:Person class.</obo:IAO_0000112>
     </owl:ObjectProperty>
     
@@ -1520,7 +1520,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#geographicFocus -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#geographicFocus">
-        <rdfs:label xml:lang="en">geographic focus</rdfs:label>
+
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
     </owl:ObjectProperty>
     
@@ -1529,7 +1529,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#geographicFocusOf -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#geographicFocusOf">
-        <rdfs:label xml:lang="en">geographic focus of</rdfs:label>
+
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
         <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#geographicFocus"/>
     </owl:ObjectProperty>
@@ -1539,7 +1539,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#geographicLocationOf -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#geographicLocationOf">
-        <rdfs:label xml:lang="en">geographic_location_of</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1547,7 +1547,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#grantSubcontractedThrough -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#grantSubcontractedThrough">
-        <rdfs:label xml:lang="en">subcontracted through</rdfs:label>
+
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Grant"/>
         <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
     </owl:ObjectProperty>
@@ -1557,7 +1557,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#hasAssociatedConcept -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasAssociatedConcept">
-        <rdfs:label xml:lang="en">associated concept</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1565,7 +1565,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#hasGeographicLocation -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasGeographicLocation">
-        <rdfs:label xml:lang="en">has geographic location</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Currently being used by a restriction on organization.</obo:IAO_0000112>
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#GeographicLocation"/>
     </owl:ObjectProperty>
@@ -1575,7 +1575,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#hasPrerequisite -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasPrerequisite">
-        <rdfs:label xml:lang="en">has prerequisite</rdfs:label>
+
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Course"/>
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#Course"/>
     </owl:ObjectProperty>
@@ -1585,7 +1585,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#hasPublicationVenue -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasPublicationVenue">
-        <rdfs:label xml:lang="en">published in</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1593,7 +1593,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#hasSuccessorOrganization -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasSuccessorOrganization">
-        <rdfs:label xml:lang="en">successor organization</rdfs:label>
+
         <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
     </owl:ObjectProperty>
@@ -1603,7 +1603,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#hasTranslation -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasTranslation">
-        <rdfs:label xml:lang="en">has translation</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Examples shows a book has French language version. Public description source: http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html .</obo:IAO_0000112>
     </owl:ObjectProperty>
     
@@ -1612,7 +1612,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#offeredBy -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#offeredBy">
-        <rdfs:label xml:lang="en">offered by</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1620,7 +1620,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#offers -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#offers">
-        <rdfs:label xml:lang="en">offers</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1628,7 +1628,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#prerequisiteFor -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#prerequisiteFor">
-        <rdfs:label xml:lang="en">prerequisite for</rdfs:label>
+
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#Course"/>
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Course"/>
     </owl:ObjectProperty>
@@ -1638,7 +1638,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#providesFundingThrough -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#providesFundingThrough">
-        <rdfs:label xml:lang="en">provides funding through</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">For example, National Science Foundation providesFundingThrough Graduate Research Fellowship Program; National Institutes of Health providesFundingThrough National Center for Research Resources. </obo:IAO_0000112>
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#FundingOrganization"/>
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#FundingOrganization"/>
@@ -1649,7 +1649,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#publicationVenueFor -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#publicationVenueFor">
-        <rdfs:label xml:lang="en">publication venue for</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1657,7 +1657,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#publisher -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#publisher">
-        <rdfs:label xml:lang="en">publisher (vivo op)</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Public Definition source (http://www.answers.com/topic/publisher).</obo:IAO_0000112>
         <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
     </owl:ObjectProperty>
@@ -1667,7 +1667,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#publisherOf -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#publisherOf">
-        <rdfs:label xml:lang="en">publisher of</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Public Definition source (http://www.answers.com/topic/publisher).</obo:IAO_0000112>
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
     </owl:ObjectProperty>
@@ -1677,7 +1677,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#relatedBy -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#relatedBy">
-        <rdfs:label xml:lang="en">related by</rdfs:label>
+
         <obo:IAO_0000115 xml:lang="en">Relates a Thing to a Relationship as a Thing that is somehow related to other Thing in the same Relationship instance. A Relationship instnace is a predicate over Thing and is created by an Agent.</obo:IAO_0000115>
     </owl:ObjectProperty>
     
@@ -1686,7 +1686,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#relates -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#relates">
-        <rdfs:label xml:lang="en">relates</rdfs:label>
+
         <obo:IAO_0000115 xml:lang="en">Relates a Relationship instance to the one or more Thing of the Relationship. There is a separate property (assigned by) to relate to the Agent that defines the Relationship.</obo:IAO_0000115>
         <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#relatedBy"/>
     </owl:ObjectProperty>
@@ -1696,7 +1696,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#reviewedIn -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#reviewedIn">
-        <rdfs:label xml:lang="en">reviewed_in</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1704,7 +1704,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#start -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#start">
-        <rdfs:label xml:lang="en">start date value</rdfs:label>
+
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#DateTimeInterval"/>
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#dateTimeValue"/>
@@ -1715,7 +1715,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#subcontractsGrant -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#subcontractsGrant">
-        <rdfs:label xml:lang="en">subcontracts grant</rdfs:label>
+
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#Grant"/>
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
     </owl:ObjectProperty>
@@ -1725,7 +1725,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#translatorOf -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#translatorOf">
-        <rdfs:label xml:lang="en">translator of</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1733,7 +1733,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/scientific-research#accessProvidedBy -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/scientific-research#accessProvidedBy">
-        <rdfs:label xml:lang="en">access provided by</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1741,7 +1741,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/scientific-research#documentationFor -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/scientific-research#documentationFor">
-        <rdfs:label xml:lang="en">documentation for</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1749,7 +1749,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/scientific-research#protocolRealizedBy -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/scientific-research#protocolRealizedBy">
-        <rdfs:label xml:lang="en">protocol realized by</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1757,7 +1757,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.ebi.ac.uk/efo/swo/SWO_0000740 -->
 
     <owl:ObjectProperty rdf:about="http://www.ebi.ac.uk/efo/swo/SWO_0000740">
-        <rdfs:label xml:lang="en">implements</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1765,7 +1765,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.ebi.ac.uk/efo/swo/SWO_0000741 -->
 
     <owl:ObjectProperty rdf:about="http://www.ebi.ac.uk/efo/swo/SWO_0000741">
-        <rdfs:label xml:lang="en">is_encoded_in</rdfs:label>
+
         <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/IAO_0000025"/>
         <rdfs:domain>
             <owl:Class>
@@ -1782,7 +1782,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.obofoundry.org/ro/ro.owl#has_agent -->
 
     <owl:ObjectProperty rdf:about="http://www.obofoundry.org/ro/ro.owl#has_agent">
-        <rdfs:label xml:lang="en">has_agent</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1790,7 +1790,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2002/07/owl#DeprecatedProperty -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2002/07/owl#DeprecatedProperty">
-        <rdfs:label xml:lang="en">deprecatedproperty</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1804,7 +1804,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2004/02/skos/core#broader -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2004/02/skos/core#broader">
-        <rdfs:label xml:lang="en">broader term</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Public description modified from the information on this page: http://www.w3.org/TR/2005/WD-swbp-skos-core-guide-20050510/#sechierarchy .</obo:IAO_0000115>
     </owl:ObjectProperty>
     
@@ -1813,7 +1813,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2004/02/skos/core#narrower -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2004/02/skos/core#narrower">
-        <rdfs:label xml:lang="en">narrower term</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Public description modified from the information on this page: http://www.w3.org/TR/2005/WD-swbp-skos-core-guide-20050510/#sechierarchy .</obo:IAO_0000115>
     </owl:ObjectProperty>
     
@@ -1822,7 +1822,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2004/02/skos/core#related -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2004/02/skos/core#related">
-        <rdfs:label xml:lang="en">related (skos)</rdfs:label>
+
     </owl:ObjectProperty>
     
 
@@ -1830,7 +1830,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasAddress -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasAddress">
-        <rdfs:label xml:lang="en">has address</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#Address"/>
     </owl:ObjectProperty>
     
@@ -1839,7 +1839,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasCalendarLink -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasCalendarLink">
-        <rdfs:label xml:lang="en">has calendar link</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#CalendarLink"/>
     </owl:ObjectProperty>
     
@@ -1848,7 +1848,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasCalendarRequest -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasCalendarRequest">
-        <rdfs:label xml:lang="en">has calendar request</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#CalendarRequest"/>
     </owl:ObjectProperty>
     
@@ -1857,7 +1857,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasCalenderBusy -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasCalenderBusy">
-        <rdfs:label xml:lang="en">has calender busy</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#CalendarBusy"/>
     </owl:ObjectProperty>
     
@@ -1866,7 +1866,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasCategory -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasCategory">
-        <rdfs:label xml:lang="en">has category</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#Category"/>
     </owl:ObjectProperty>
     
@@ -1875,7 +1875,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasEmail -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasEmail">
-        <rdfs:label xml:lang="en">has email</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#Email"/>
     </owl:ObjectProperty>
     
@@ -1884,7 +1884,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasFormattedName -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasFormattedName">
-        <rdfs:label xml:lang="en">has formatted name</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#FormattedName"/>
     </owl:ObjectProperty>
     
@@ -1893,7 +1893,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasGeo -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasGeo">
-        <rdfs:label xml:lang="en">has geo</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#Geo"/>
     </owl:ObjectProperty>
     
@@ -1902,7 +1902,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasInstantMessage -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasInstantMessage">
-        <rdfs:label xml:lang="en">has messaging</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#InstantMessage"/>
     </owl:ObjectProperty>
     
@@ -1911,7 +1911,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasKey -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasKey">
-        <rdfs:label xml:lang="en">has key</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#Key"/>
     </owl:ObjectProperty>
     
@@ -1920,7 +1920,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasLanguage -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasLanguage">
-        <rdfs:label xml:lang="en">has language (vcard op)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#Language"/>
     </owl:ObjectProperty>
     
@@ -1929,7 +1929,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasLogo -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasLogo">
-        <rdfs:label xml:lang="en">has logo</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#Logo"/>
     </owl:ObjectProperty>
     
@@ -1938,7 +1938,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasMember -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasMember">
-        <rdfs:label xml:lang="en">member</rdfs:label>
+
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">To include a member in the group this vCard represents</rdfs:comment>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Group"/>
         <rdfs:range>
@@ -1957,7 +1957,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasName -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasName">
-        <rdfs:label xml:lang="en">has name</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#Name"/>
     </owl:ObjectProperty>
     
@@ -1966,7 +1966,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasNickname -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasNickname">
-        <rdfs:label xml:lang="en">has nickname</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#Nickname"/>
     </owl:ObjectProperty>
     
@@ -1975,7 +1975,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasNote -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasNote">
-        <rdfs:label xml:lang="en">has note</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#Note"/>
     </owl:ObjectProperty>
     
@@ -1984,7 +1984,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasOrganizationName -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasOrganizationName">
-        <rdfs:label xml:lang="en">has organization name</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#OrganizationName"/>
     </owl:ObjectProperty>
     
@@ -1993,7 +1993,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasOrganizationalUnitName -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasOrganizationalUnitName">
-        <rdfs:label xml:lang="en">has organisational unit name</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#OrganizationUnitName"/>
     </owl:ObjectProperty>
     
@@ -2002,7 +2002,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasPhoto -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasPhoto">
-        <rdfs:label xml:lang="en">has photo</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#Photo"/>
     </owl:ObjectProperty>
     
@@ -2011,7 +2011,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasRelated -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasRelated">
-        <rdfs:label xml:lang="en">has related (vcard op)</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#Related"/>
     </owl:ObjectProperty>
     
@@ -2020,7 +2020,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasRole -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasRole">
-        <rdfs:label xml:lang="en">has role</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#Role"/>
     </owl:ObjectProperty>
     
@@ -2029,7 +2029,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasSound -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasSound">
-        <rdfs:label xml:lang="en">has sound</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#Sound"/>
     </owl:ObjectProperty>
     
@@ -2038,7 +2038,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasTelephone -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasTelephone">
-        <rdfs:label xml:lang="en">has telephone</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#Telephone"/>
     </owl:ObjectProperty>
     
@@ -2047,7 +2047,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasTimeZone -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasTimeZone">
-        <rdfs:label xml:lang="en">has time zone</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#TimeZone"/>
     </owl:ObjectProperty>
     
@@ -2056,7 +2056,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasTitle -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasTitle">
-        <rdfs:label xml:lang="en">has title</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#Title"/>
     </owl:ObjectProperty>
     
@@ -2065,7 +2065,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2006/vcard/ns#hasURL -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasURL">
-        <rdfs:label xml:lang="en">has url</rdfs:label>
+
         <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#URL"/>
     </owl:ObjectProperty>
     
@@ -2074,8 +2074,9 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#orcidId -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#orcidId">
-        <rdfs:label xml:lang="en">orcid id</rdfs:label>
+
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This is now an object property where the object value is a resource of the form &lt;http://orcid.org/NNNN-NNNN-NNNN-NNNN&gt;.  This is to support connecting VIVO and ORCID in the linked data web.   Note: a person can have multiple ORCID iDs.</obo:IAO_0000112>
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     </owl:ObjectProperty>
 
 
@@ -2083,7 +2084,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#roleContributesTo -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#roleContributesTo">
-        <rdfs:label xml:lang="en-us">contributes to</rdfs:label>
+
         <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
         <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#contributingRole"/>
     </owl:ObjectProperty>
@@ -2091,7 +2092,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#contributingRole -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#contributingRole">
-        <rdfs:label xml:lang="en-us">contributor</rdfs:label>
+
         <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/BFO_0000023"/>
         <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#roleContributesTo"/>
     </owl:ObjectProperty> 
@@ -2099,7 +2100,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#hasResearchArea -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasResearchArea">
-        <rdfs:label xml:lang="en-us">research areas</rdfs:label>
+
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#hasAssociatedConcept"/>
         <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#researchAreaOf"/>
     </owl:ObjectProperty>
@@ -2107,7 +2108,7 @@ there is a measurement process p that has specified output m, a measurement datu
      <!-- http://vivoweb.org/ontology/core#researchAreaOf -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#researchAreaOf">
-        <rdfs:label xml:lang="en-us">research area of</rdfs:label>
+
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#conceptAssociatedWith"/>
     </owl:ObjectProperty>
 

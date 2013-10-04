@@ -12,7 +12,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000017 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000017"><!-- realizable entity -->
-        <rdfs:label xml:lang="en">realizable entity</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000020"/><!-- specifically dependent continuant -->
         <owl:disjointWith rdf:resource="http://purl.obolibrary.org/obo/BFO_0000019"/><!-- quality -->
         <!-- has associated axiom(fol) --><obo:IAO_0000602>(forall (x t) (if (RealizableEntity x) (exists (y) (and (IndependentContinuant y) (not (SpatialRegion y)) (bearerOfAt y x t))))) // axiom label in BFO2 CLIF: [060-002] </obo:IAO_0000602>

@@ -15,7 +15,7 @@
 <!-- http://purl.obolibrary.org/obo/BFO_0000054 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/BFO_0000054"><!-- realized in -->
-        <rdfs:label xml:lang="en">realized in</rdfs:label>
+
         <!-- has associated axiom(fol) --><obo:IAO_0000602>(forall (x y z t) (if (and (RealizableEntity x) (Process y) (realizesAt y x t) (bearerOfAt z x t)) (hasParticipantAt y z t))) // axiom label in BFO2 CLIF: [106-002] </obo:IAO_0000602>
         <!-- elucidation --><obo:IAO_0000600>[copied from inverse property &apos;realizes&apos;] to say that b realizes c at t is to assert that there is some material entity d &amp; b is a process which has participant d at t &amp; c is a disposition or role of which d is bearer_of at t&amp; the type instantiated by b is correlated with the type instantiated by c. (axiom label in BFO2 Reference: [059-003])</obo:IAO_0000600>
         <!-- has associated axiom(nl) --><obo:IAO_0000601 xml:lang="en">if a realizable entity b is realized in a process p, then p stands in the has_participant relation to the bearer of b. (axiom label in BFO2 Reference: [106-002])</obo:IAO_0000601>
@@ -30,7 +30,7 @@
     <!-- http://purl.obolibrary.org/obo/BFO_0000055 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/BFO_0000055"><!-- realizes -->
-        <rdfs:label xml:lang="en">realizes</rdfs:label>
+
         <!-- has associated axiom(fol) --><obo:IAO_0000602>(forall (x y t) (if (realizesAt x y t) (and (Process x) (or (Disposition y) (Role y)) (exists (z) (and (MaterialEntity z) (hasParticipantAt x z t) (bearerOfAt z y t)))))) // axiom label in BFO2 CLIF: [059-003] </obo:IAO_0000602>
         <!-- BFO OWL specification label --><obo:BFO_0000179>realizes</obo:BFO_0000179>
         <!-- BFO CLIF specification label --><obo:BFO_0000180>realizes</obo:BFO_0000180>

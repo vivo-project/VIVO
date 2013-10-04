@@ -47,7 +47,7 @@
     <!-- http://vivoweb.org/ontology/core#AdvisingProcess -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#AdvisingProcess">
-        <rdfs:label xml:lang="en">advising process</rdfs:label>
+
     </owl:Class>
     
 
@@ -55,7 +55,7 @@
     <!-- http://vivoweb.org/ontology/core#AttendingProcess -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#AttendingProcess">
-        <rdfs:label xml:lang="en">attending process</rdfs:label>
+
     </owl:Class>
     
 
@@ -63,7 +63,7 @@
     <!-- http://vivoweb.org/ontology/core#PresentingProcess -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#PresentingProcess">
-        <rdfs:label xml:lang="en">presenting process</rdfs:label>
+
     </owl:Class>
     
 
@@ -71,7 +71,7 @@
     <!-- http://vivoweb.org/ontology/core#Project -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Project">
-        <rdfs:label xml:lang="en">project</rdfs:label>
+
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An endeavor, frequently collaborative, that occurs over a finite period of time and is intended to achieve a particular aim.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An endeavor, frequently collaborative, that occurs over a finite period of time and is intended to achieve a particular aim.
 </obo:IAO_0000112>

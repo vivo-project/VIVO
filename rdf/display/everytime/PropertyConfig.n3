@@ -52,6 +52,8 @@ local:authorInAuthorshipContext a :ConfigContext ;
 local:authorInAuthorshipConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-authorInAuthorship.xml"^^xsd:string ;
     :displayName "selected publications" ;
+    vitro:collateBySubclassAnnot
+              "true"^^xsd:boolean;
     vitro:displayRankAnnot 1;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;

@@ -46,7 +46,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
     final static String collectionClass = bibo + "Periodical";
     final static String bookClass = bibo + "Book";
-    final static String documentClass = bibo + "Document";
+    final static String documentClass = "http://purl.obolibrary.org/obo/IAO_0000030";
     final static String conferenceClass = bibo + "Conference";
     final static String editorClass = foaf + "Person";
     final static String publisherClass = vivoCore + "Publisher";

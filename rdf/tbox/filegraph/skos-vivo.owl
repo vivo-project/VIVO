@@ -54,7 +54,7 @@
     <!-- http://purl.org/ontology/bibo/DocumentStatus -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/DocumentStatus">
-        <rdfs:label xml:lang="en-us">document status</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The status of a document with respect to its publication.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The status of a document with respect to its publication. The statuses are represented as individuals of this class. Use the &quot;show all individuals of this class&quot; button on the class control panel to see the currently defined statuses.</obo:IAO_0000112>
@@ -69,7 +69,7 @@
     <!-- http://purl.org/ontology/bibo/ThesisDegree -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/ThesisDegree">
-        <rdfs:label xml:lang="en-us">Thesis Degree</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Different from general academic degree, thesis degree is achieved through one&apos;s completed thesis. Thesis is a document submitted in support of candidature for a degree or professional qualification presenting the author&apos;s research and findings(http://en.wikipedia.org/wiki/Thesis_or_dissertation).</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Doctor of Philosophy (Ph.D.)</obo:IAO_0000112>
@@ -84,7 +84,7 @@
     <!-- http://vivoweb.org/ontology/core#AcademicDegree -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#AcademicDegree">
-        <rdfs:label xml:lang="en-us">academic degree</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An academic degree at any level, both as reported by individuals for employment and as offered by academic degree programs.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">B.A. Bachelor of Arts</obo:IAO_0000112>
@@ -96,7 +96,7 @@
     <!-- http://vivoweb.org/ontology/core#Award -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Award">
-        <rdfs:label xml:lang="en-us">award or honor</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An Award or Honor</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An Award or Honor</obo:IAO_0000115>
@@ -108,7 +108,7 @@
     <!-- http://vivoweb.org/ontology/core#Certificate -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Certificate">
-        <rdfs:label xml:lang="en-us">Certificate</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Credential"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A document confirming certain characteristics of a person or organization, usually provided by some form of external review, education, or assessment.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A document confirming certain characteristics of a person or organization, usually provided by some form of external review, education, or assessment.</obo:IAO_0000115>
@@ -119,7 +119,7 @@
     <!-- http://vivoweb.org/ontology/core#Credential -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Credential">
-        <rdfs:label xml:lang="en-us">credential</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An attestation of qualification, competence, or authority issued to an individual by a third party with a relevant or  de facto authority or assumed competence to do so.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An attestation of qualification, competence, or authority issued to an individual by a third party with a relevant or  de facto authority or assumed competence to do so.</obo:IAO_0000112>
@@ -130,7 +130,7 @@
     <!-- http://vivoweb.org/ontology/core#DateTimeValuePrecision -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#DateTimeValuePrecision">
-        <rdfs:label xml:lang="en-us">date/time value precision</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Indicates the precision of the value of a DateTimeValue instance.</obo:IAO_0000115>
     </owl:Class>
@@ -140,7 +140,7 @@
     <!-- http://vivoweb.org/ontology/core#License -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#License">
-        <rdfs:label xml:lang="en-us">License</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Credential"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Licenses are usually issued in order to regulate some activity that is deemed to be dangerous or a threat to the person or the public or which involves a high level of specialized skill.  See also core:Licensure.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Official or legal permission to do something</obo:IAO_0000115>

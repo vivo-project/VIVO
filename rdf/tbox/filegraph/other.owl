@@ -59,7 +59,7 @@
     <!-- http://purl.obolibrary.org/obo/OBI_0001554 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/OBI_0001554">
-        <rdfs:label xml:lang="en">rate measurement datum</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000032"/>
     </owl:Class>
     
@@ -68,7 +68,7 @@
     <!-- http://purl.obolibrary.org/obo/UO_0000280 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/UO_0000280">
-        <rdfs:label xml:lang="en">rate unit</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000003"/>
     </owl:Class>
     
@@ -90,7 +90,7 @@
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000400">
         <rdf:type rdf:resource="http://purl.obolibrary.org/obo/UO_0000280"/>
-        <rdfs:label xml:lang="en">count per year</rdfs:label>
+
     </owl:NamedIndividual>
 </rdf:RDF>
 

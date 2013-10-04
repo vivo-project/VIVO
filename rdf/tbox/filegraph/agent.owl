@@ -93,7 +93,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_2000008 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ARG_2000008">
-        <rdfs:label xml:lang="en">topic weight measurement</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000032"/>
     </owl:Class>
     
@@ -102,7 +102,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_2000009 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ARG_2000009">
-        <rdfs:label xml:lang="en">expertise measurement</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ARG_2000008"/>
     </owl:Class>
     
@@ -111,7 +111,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_2000010 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ARG_2000010">
-        <rdfs:label xml:lang="en">topic weight measurement process</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/OBI_0000011"/>
     </owl:Class>
     
@@ -120,7 +120,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_2000011 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ARG_2000011">
-        <rdfs:label xml:lang="en">expertise measurement process</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ARG_2000010"/>
     </owl:Class>
     
@@ -129,7 +129,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_2000021 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ARG_2000021">
-        <rdfs:label xml:lang="en">experience</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000019"/>
     </owl:Class>
     
@@ -138,7 +138,7 @@
     <!-- http://purl.obolibrary.org/obo/ARG_2000022 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ARG_2000022">
-        <rdfs:label xml:lang="en">specialty</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000019"/>
     </owl:Class>
     
@@ -147,7 +147,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000565 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000565">
-        <rdfs:label xml:lang="en">technology transfer office</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organization that provides services for commercialization and licensing of technologies at an institution.</obo:IAO_0000115>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Nicole Vasilevsky</obo:IAO_0000117>
@@ -161,7 +161,7 @@
     <!-- http://purl.obolibrary.org/obo/OBI_0000835 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/OBI_0000835">
-        <rdfs:label xml:lang="en">manufacturer</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -188,7 +188,7 @@
     <!-- http://vivoweb.org/ontology/core#AcademicDepartment -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#AcademicDepartment">
-        <rdfs:label xml:lang="en">academic department</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Department"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A distinct, usually specialized educational unit within an educational organization.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Endodontics (department within a College of Dentistry); English (department within a College of Liberal Arts)</obo:IAO_0000112>
@@ -200,7 +200,7 @@
     <!-- http://vivoweb.org/ontology/core#Association -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Association">
-        <rdfs:label xml:lang="en">association</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A formal organization of people or groups of people around a subject or practice.</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A group of persons or organizations organized for a common purpose.</obo:IAO_0000115>
@@ -213,7 +213,7 @@
     <!-- http://vivoweb.org/ontology/core#Center -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Center">
-        <rdfs:label xml:lang="en">center</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A place where a particular activity or service is concentrated.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alchohol Education Center; Center for Arts and Public Policy; Hearing Research Center</obo:IAO_0000112>
@@ -227,7 +227,7 @@
     <!-- http://vivoweb.org/ontology/core#ClinicalOrganization -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#ClinicalOrganization">
-        <rdfs:label xml:lang="en">clinical organization</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Any organization that offers significant health services or routinely provides medical care to patients.</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Any organization with a significant clinical function as a matter of course and not just through occasional clinical roles</obo:IAO_0000115>
@@ -240,7 +240,7 @@
     <!-- http://vivoweb.org/ontology/core#College -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#College">
-        <rdfs:label xml:lang="en">college</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A primary academic unit within a University or a free-standing higher education organization without graduate degree programs</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A primary academic unit within a University or a free-standing higher education organization without graduate degree programs.</obo:IAO_0000115>
@@ -253,7 +253,7 @@
     <!-- http://vivoweb.org/ontology/core#Committee -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Committee">
-        <rdfs:label xml:lang="en">committee</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Group"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A group of people organized for a specific purpose (e.g., a reporting or advisory role), often with a charge and for a specific duration</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A group of people organized for a specific purpose, whose members are often selected from a larger group to serve for designated periods of time.</obo:IAO_0000115>
@@ -267,7 +267,7 @@
     <!-- http://vivoweb.org/ontology/core#Company -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Company">
-        <rdfs:label xml:lang="en">company</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A legally-recognized business organization</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A legally-recognized business organization.</obo:IAO_0000115>
@@ -280,7 +280,7 @@
     <!-- http://vivoweb.org/ontology/core#Consortium -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Consortium">
-        <rdfs:label xml:lang="en">consortium</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A group  of independent organizations working together toward a common goal, under an expressed agreement.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Committee on Institutional Cooperation (CIC); The Five Colleges of Ohio</obo:IAO_0000112>
@@ -292,7 +292,7 @@
     <!-- http://vivoweb.org/ontology/core#CoreLaboratory -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#CoreLaboratory">
-        <rdfs:label xml:lang="en">core laboratory</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#ServiceProvidingLaboratory"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A lab providing services such as training, protocols, or access to instruments or software</obo:IAO_0000115>
     </owl:Class>
@@ -302,7 +302,7 @@
     <!-- http://vivoweb.org/ontology/core#Department -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Department">
-        <rdfs:label xml:lang="en">department</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A unit within a larger organization that addresses a specific subject or area of activity.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition modified from the definition here: http://dictionary.reference.com/browse/department. It is difficult to tell the difference between and department and a division.</obo:IAO_0000112>
@@ -315,7 +315,7 @@
     <!-- http://vivoweb.org/ontology/core#Division -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Division">
-        <rdfs:label xml:lang="en">division</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#ExtensionUnit"/>
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A major unit or section within a larger organization.</obo:IAO_0000115>
@@ -329,7 +329,7 @@
     <!-- http://vivoweb.org/ontology/core#ExtensionUnit -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#ExtensionUnit">
-        <rdfs:label xml:lang="en">extension unit</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A unit devoted primarily to extension activities, whether for outreach or research</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A unit devoted primarily to extension activities, whether for outreach or research.</obo:IAO_0000115>
@@ -342,7 +342,7 @@
     <!-- http://vivoweb.org/ontology/core#Foundation -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Foundation">
-        <rdfs:label xml:lang="en">foundation</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An institution founded with an endowment to support educational, research, artistic or other charitable activities.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition take from: http://dictionary.reference.com/browse/foundation.</obo:IAO_0000112>
@@ -355,7 +355,7 @@
     <!-- http://vivoweb.org/ontology/core#FundingOrganization -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#FundingOrganization">
-        <rdfs:label xml:lang="en">funding organization</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A defined class of organizations that fund Grants</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organization that provides financial support to individuals or organizations to carry out specified activities.</obo:IAO_0000115>
@@ -368,7 +368,7 @@
     <!-- http://vivoweb.org/ontology/core#GovernmentAgency -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#GovernmentAgency">
-        <rdfs:label xml:lang="en">government agency</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A unit of government responsible for oversight and regulation of certain activities or the administration and provision of specific services.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition take from: http://en.wikipedia.org/wiki/Government_agency.</obo:IAO_0000112>
@@ -381,7 +381,7 @@
     <!-- http://vivoweb.org/ontology/core#GraduateStudent -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#GraduateStudent">
-        <rdfs:label xml:lang="en">graduate student</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Student"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A person who has already received a bachelor&apos;s degree and is working toward a Master&apos;s or Doctoral degree.</obo:IAO_0000115>
     </owl:Class>
@@ -391,7 +391,7 @@
     <!-- http://vivoweb.org/ontology/core#Hospital -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Hospital">
-        <rdfs:label xml:lang="en">hospital</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An institution that provides medical, surgical, psychiatric or nursing care.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition take from: http://dictionary.reference.com/browse/hospital.</obo:IAO_0000112>
@@ -404,7 +404,7 @@
     <!-- http://vivoweb.org/ontology/core#Institute -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Institute">
-        <rdfs:label xml:lang="en">institute</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An Institute normally has a research focus but may also fulfill instructional or outreach roles</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organization founded to pursue or promote certain research, educational or public policy interests or activities.</obo:IAO_0000115>
@@ -417,7 +417,7 @@
     <!-- http://vivoweb.org/ontology/core#Laboratory -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Laboratory">
-        <rdfs:label xml:lang="en">laboratory</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organization unit that facilitates or conduits observation, testing, experimentation, or research in a field of study or practice.</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organizational unit (as opposed to the physical facility) that performs research, provides services, or processes materials</obo:IAO_0000115>
@@ -429,7 +429,7 @@
     <!-- http://vivoweb.org/ontology/core#Library -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Library">
-        <rdfs:label xml:lang="en">library</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organization maintaining one or more collections of physical and/or electronic information resources for access or lending.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Marston Science Library</obo:IAO_0000112>
@@ -442,7 +442,7 @@
     <!-- http://vivoweb.org/ontology/core#Museum -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Museum">
-        <rdfs:label xml:lang="en">museum</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organization devoted to the acquisition, conservation, study, exhibition, and educational interpretation of objects having scientific, historical, cultural or artistic value.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition was take from here:  http://dictionary.reference.com/browse/museum</obo:IAO_0000112>
@@ -455,7 +455,7 @@
     <!-- http://vivoweb.org/ontology/core#PrivateCompany -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#PrivateCompany">
-        <rdfs:label xml:lang="en">private company</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Company"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A private company is one that is privately-owned, and thus, is not publicly-traded in the stock market. Members of the general public cannot purchase stock in a private company unless that company chooses to go public and become a public company.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition obtained here: http://answers.ask.com/Business/Finance/what_is_a_private_company.  Examples of private companies found here: http://www.forbes.com/2008/11/03/largest-private-companies-biz-privates08-cx_sr_1103private_land.html</obo:IAO_0000112>
@@ -468,7 +468,7 @@
     <!-- http://vivoweb.org/ontology/core#Program -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Program">
-        <rdfs:label xml:lang="en">program</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A Cornell graduate field (http://vivo.cornell.edu/index.jsp?home=65535&amp;collection=820)</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An ongoing academic initiative not formalized with department or division status.</obo:IAO_0000115>
@@ -480,7 +480,7 @@
     <!-- http://vivoweb.org/ontology/core#Publisher -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Publisher">
-        <rdfs:label xml:lang="en">publisher (vivo)</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A person or company whose business is the publishing of books, periodicals, engravings, computer software, etc.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition found here: http://dictionary.reference.com/browse/publisher</obo:IAO_0000112>
@@ -493,7 +493,7 @@
     <!-- http://vivoweb.org/ontology/core#ResearchOrganization -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#ResearchOrganization">
-        <rdfs:label xml:lang="en">research organization</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Any organization (likely also asserted as another class of Organization) with a primary, ongoing research function, not just through occasional roles</obo:IAO_0000115>
         <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
@@ -504,7 +504,7 @@
     <!-- http://vivoweb.org/ontology/core#School -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#School">
-        <rdfs:label xml:lang="en">school</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An institution for instruction in a particular skill or field.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition take from here: http://dictionary.reference.com/browse/school.</obo:IAO_0000112>
@@ -517,7 +517,7 @@
     <!-- http://vivoweb.org/ontology/core#ServiceProvidingLaboratory -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#ServiceProvidingLaboratory">
-        <rdfs:label xml:lang="en">service providing lab</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Laboratory"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A laboratory that provides services</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ideally a defined class -- a Laboratory the provides some Service via the property</obo:IAO_0000112>
@@ -529,7 +529,7 @@
     <!-- http://vivoweb.org/ontology/core#Student -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Student">
-        <rdfs:label xml:lang="en">student</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A person who is enrolled in an educational institution.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Use only if no specific subclasses of core:Student describe the person.</obo:IAO_0000112>
@@ -540,7 +540,7 @@
     <!-- http://vivoweb.org/ontology/core#StudentOrganization -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#StudentOrganization">
-        <rdfs:label xml:lang="en">student organization</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A student organization is an organization, operated by students at a university, whose membership normally consists only of students.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Dancin&apos; Gators</obo:IAO_0000112>
@@ -553,7 +553,7 @@
     <!-- http://vivoweb.org/ontology/core#Team -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Team">
-        <rdfs:label xml:lang="en">team</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Group"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A group of people working together.</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An informal organization brought together for the purposes of a project or event</obo:IAO_0000115>
@@ -566,7 +566,7 @@
     <!-- http://vivoweb.org/ontology/core#UndergraduateStudent -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#UndergraduateStudent">
-        <rdfs:label xml:lang="en">undergraduate student</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Student"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A person registered in an undergraduate program leading to a bachelor&apos;s degree or an undergraduate diploma or certificate.</obo:IAO_0000115>
     </owl:Class>
@@ -576,7 +576,7 @@
     <!-- http://vivoweb.org/ontology/core#University -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#University">
-        <rdfs:label xml:lang="en">university</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An institution of higher education and research, which grants academic degrees in a variety of subjects, and provides both undergraduate education and postgraduate education.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition taken from: http://en.wikipedia.org/wiki/University</obo:IAO_0000112>
@@ -595,7 +595,7 @@
     <!-- http://xmlns.com/foaf/0.1/Agent -->
 
     <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Agent">
-        <rdfs:label xml:lang="en">agent (foaf)</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000004"/>
         <obo:IAO_0000118 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></obo:IAO_0000118>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Agents are things that do stuff</obo:IAO_0000115>
@@ -612,7 +612,7 @@
     <!-- http://xmlns.com/foaf/0.1/Group -->
 
     <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Group">
-        <rdfs:label xml:lang="en">group (foaf)</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"> A collection of individual agents (and may itself play the role of a Agent, ie. something that can perform actions). </obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A collection of individual agents.</obo:IAO_0000115>
@@ -629,7 +629,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
     <!-- http://xmlns.com/foaf/0.1/Organization -->
 
     <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Organization">
-        <rdfs:label xml:lang="en">organization</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <obo:IAO_0000118 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></obo:IAO_0000118>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A generic class encompassing several types of organizations.</obo:IAO_0000115>
@@ -647,7 +647,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
     <!-- http://xmlns.com/foaf/0.1/Person -->
 
     <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Person">
-        <rdfs:label xml:lang="en">person</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <obo:IAO_0000118 rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></obo:IAO_0000118>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A person</rdfs:comment>
@@ -674,7 +674,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000065">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of allergy and immunology</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -683,7 +683,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000066">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of anesthesiology</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -692,7 +692,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000067">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of colon and rectal surgery</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -701,7 +701,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000068">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of dermatology</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -710,7 +710,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000069">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of emergency medicine</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -719,7 +719,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000070">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of family medicine</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -728,7 +728,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000071">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of internal medicine</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -737,7 +737,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000072">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of medical genetics</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -746,7 +746,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000073">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of neurological surgery</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -755,7 +755,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000074">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of nuclear medicine</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -764,7 +764,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000075">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of obstetrics and gynecology</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -773,7 +773,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000076">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of ophthalmology</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -782,7 +782,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000077">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of orthopaedic surgery</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -791,7 +791,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000078">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of otolaryngology</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -800,7 +800,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000079">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of pathology</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -809,7 +809,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000080">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of pediatrics</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -818,7 +818,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000081">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of physical medicine and rehabilitation</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -827,7 +827,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000083">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of plastic surgery</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -836,7 +836,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000084">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of preventive medicine</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -845,7 +845,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000085">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of psychiatry and neurology</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -854,7 +854,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000086">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of radiology</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -863,7 +863,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000087">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of surgery</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -872,7 +872,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000088">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of thoracic surgery</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -881,7 +881,7 @@ see: http://xmlns.com/foaf/spec/#term_Group</obo:IAO_0000112>
 
     <owl:NamedIndividual rdf:about="http://purl.obolibrary.org/obo/ARG_2000089">
         <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <rdfs:label xml:lang="en">american board of urology</rdfs:label>
+
     </owl:NamedIndividual>
 </rdf:RDF>
 

@@ -52,7 +52,7 @@
     <!-- http://vivoweb.org/ontology/core#yearMonthDayPrecision -->
 
     <owl:NamedIndividual rdf:about="http://vivoweb.org/ontology/core#yearMonthDayPrecision">
-        <rdfs:label xml:lang="en-us">YearMonthDayValue</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -60,7 +60,7 @@
     <!-- http://vivoweb.org/ontology/core#yearMonthDayTimePrecision -->
 
     <owl:NamedIndividual rdf:about="http://vivoweb.org/ontology/core#yearMonthDayTimePrecision">
-        <rdfs:label xml:lang="en-us">YearMonthDayTimeValue</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -68,7 +68,7 @@
     <!-- http://vivoweb.org/ontology/core#yearMonthPrecision -->
 
     <owl:NamedIndividual rdf:about="http://vivoweb.org/ontology/core#yearMonthPrecision">
-        <rdfs:label xml:lang="en-us">YearMonthValue</rdfs:label>
+
     </owl:NamedIndividual>
     
 
@@ -76,7 +76,7 @@
     <!-- http://vivoweb.org/ontology/core#yearPrecision -->
 
     <owl:NamedIndividual rdf:about="http://vivoweb.org/ontology/core#yearPrecision">
-        <rdfs:label xml:lang="en-us">YearValue</rdfs:label>
+
     </owl:NamedIndividual>
 </rdf:RDF>
 

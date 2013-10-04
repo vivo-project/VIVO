@@ -25,7 +25,7 @@
     <!-- http://purl.obolibrary.org/obo/ERO_0000595 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ERO_0000595">
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">research opportunity</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#dateTimeInterval"/>
@@ -57,7 +57,7 @@
     <!-- http://purl.org/NET/c4dm/event.owl#Event -->
 
     <owl:Class rdf:about="http://purl.org/NET/c4dm/event.owl#Event">
-        <rdfs:label xml:lang="en-us">Event</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#hasSubjectArea"/>
@@ -101,7 +101,7 @@
     <!-- http://purl.org/ontology/bibo/AcademicArticle -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/AcademicArticle">
-        <rdfs:label xml:lang="en-us">Academic Article</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.org/ontology/bibo/eanucc13"/>
@@ -121,7 +121,7 @@
     <!-- http://purl.org/ontology/bibo/Article -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/Article">
-        <rdfs:label xml:lang="en-us">Article</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.org/ontology/bibo/doi"/>
@@ -147,7 +147,7 @@
     <!-- http://purl.org/ontology/bibo/AudioDocument -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/AudioDocument">
-        <rdfs:label xml:lang="en-us">Audio Document</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.org/ontology/bibo/distributor"/>
@@ -161,7 +161,7 @@
     <!-- http://purl.org/ontology/bibo/AudioVisualDocument -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/AudioVisualDocument">
-        <rdfs:label xml:lang="en-us">Audio-Visual Document</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.org/ontology/bibo/distributor"/>
@@ -175,7 +175,7 @@
     <!-- http://purl.org/ontology/bibo/Book -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/Book">
-        <rdfs:label xml:lang="en-us">Book</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.org/ontology/bibo/edition"/>
@@ -213,7 +213,7 @@
     <!-- http://purl.org/ontology/bibo/BookSection -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/BookSection">
-        <rdfs:label xml:lang="en-us">Book Section</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.org/ontology/bibo/pageStart"/>
@@ -239,7 +239,7 @@
     <!-- http://purl.org/ontology/bibo/CollectedDocument -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/CollectedDocument">
-        <rdfs:label xml:lang="en-us">Collected Document</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#publisher"/>
@@ -253,7 +253,7 @@
     <!-- http://purl.org/ontology/bibo/Collection -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/Collection">
-        <rdfs:label xml:lang="en-us">Collection</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#InformationResource"/>
         <rdfs:subClassOf>
             <owl:Restriction>
@@ -268,7 +268,7 @@
     <!-- http://purl.org/ontology/bibo/Conference -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/Conference">
-        <rdfs:label xml:lang="en-us">Conference</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#abbreviation"/>
@@ -282,8 +282,8 @@
     <!-- http://purl.org/ontology/bibo/Document -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/Document">
-        <rdfs:label>document (IAO)</rdfs:label>
-        <rdfs:label xml:lang="en-us">Document</rdfs:label>
+
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#features"/>
@@ -321,7 +321,7 @@
     <!-- http://purl.org/ontology/bibo/DocumentPart -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/DocumentPart">
-        <rdfs:label xml:lang="en-us">Document Part</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000050"/>
@@ -347,7 +347,7 @@
     <!-- http://purl.org/ontology/bibo/DocumentStatus -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/DocumentStatus">
-        <rdfs:label xml:lang="en-us">Document Status</rdfs:label>
+
     </owl:Class>
     
 
@@ -355,7 +355,7 @@
     <!-- http://purl.org/ontology/bibo/EditedBook -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/EditedBook">
-        <rdfs:label xml:lang="en-us">Edited Book</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.org/ontology/bibo/edition"/>
@@ -381,7 +381,7 @@
     <!-- http://purl.org/ontology/bibo/Image -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/Image">
-        <rdfs:label xml:lang="en-us">Image</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#InformationResource"/>
     </owl:Class>
     
@@ -390,7 +390,7 @@
     <!-- http://purl.org/ontology/bibo/Journal -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/Journal">
-        <rdfs:label xml:lang="en-us">Journal</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#abbreviation"/>
@@ -404,7 +404,7 @@
     <!-- http://purl.org/ontology/bibo/Patent -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/Patent">
-        <rdfs:label xml:lang="en-us">Patent</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#publisher"/>
@@ -424,7 +424,7 @@
     <!-- http://purl.org/ontology/bibo/Periodical -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/Periodical">
-        <rdfs:label xml:lang="en-us">Periodical</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.org/ontology/bibo/eissn"/>
@@ -450,7 +450,7 @@
     <!-- http://purl.org/ontology/bibo/Proceedings -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/Proceedings">
-        <rdfs:label xml:lang="en-us">Proceedings</rdfs:label>
+
     </owl:Class>
     
 
@@ -458,7 +458,7 @@
     <!-- http://purl.org/ontology/bibo/Report -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/Report">
-        <rdfs:label xml:lang="en-us">Report</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.org/ontology/bibo/distributor"/>
@@ -472,7 +472,7 @@
     <!-- http://purl.org/ontology/bibo/Series -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/Series">
-        <rdfs:label xml:lang="en-us">Series</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.org/ontology/bibo/issn"/>
@@ -492,7 +492,7 @@
     <!-- http://purl.org/ontology/bibo/Thesis -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/Thesis">
-        <rdfs:label xml:lang="en-us">Thesis</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#placeOfPublication"/>
@@ -512,7 +512,7 @@
     <!-- http://purl.org/ontology/bibo/ThesisDegree -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/ThesisDegree">
-        <rdfs:label xml:lang="en-us">Thesis Degree</rdfs:label>
+
     </owl:Class>
     
 
@@ -520,7 +520,7 @@
     <!-- http://purl.org/ontology/bibo/Website -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/Website">
-        <rdfs:label xml:lang="en-us">Website</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#publisher"/>
@@ -534,7 +534,7 @@
     <!-- http://purl.org/spar/c4o/BibliographicInformationSource -->
 
     <owl:Class rdf:about="http://purl.org/spar/c4o/BibliographicInformationSource">
-        <rdfs:label xml:lang="en-us">Bibliographic Information Source</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A source of information about bibliographic citations, such as Google Scholar, Web of Science or Scopus.</vitro:descriptionAnnot>
     </owl:Class>
     
@@ -543,7 +543,7 @@
     <!-- http://purl.org/spar/c4o/GlobalCitationCount -->
 
     <owl:Class rdf:about="http://purl.org/spar/c4o/GlobalCitationCount">
-        <rdfs:label xml:lang="en-us">Global Citation Count</rdfs:label>
+
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The number of times a work has been cited globally, as determined from a particular bibliographic information source on a particular date.</vitro:descriptionAnnot>
     </owl:Class>
     
@@ -552,7 +552,7 @@
     <!-- http://vivoweb.org/ontology/core#AcademicDegree -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#AcademicDegree">
-        <rdfs:label xml:lang="en-us">Academic Degree</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#abbreviation"/>
@@ -572,7 +572,7 @@
     <!-- http://vivoweb.org/ontology/core#AcademicDepartment -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#AcademicDepartment">
-        <rdfs:label xml:lang="en-us">Academic Department</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#offers"/>
@@ -594,7 +594,7 @@
     <!-- http://vivoweb.org/ontology/core#AdvisingRelationship -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#AdvisingRelationship">
-        <rdfs:label xml:lang="en-us">Advising Relationship</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#dateTimeInterval"/>
@@ -615,7 +615,7 @@
     <!-- http://vivoweb.org/ontology/core#Authorship -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Authorship">
-        <rdfs:label xml:lang="en-us">Authorship</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#hideFromDisplay"/>
@@ -632,7 +632,7 @@
     <!-- http://vivoweb.org/ontology/core#AwardReceipt -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#AwardReceipt">
-        <rdfs:label xml:lang="en-us">Award or Honor Receipt</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#assignedBy"/>
@@ -665,7 +665,7 @@
     <!-- http://vivoweb.org/ontology/core#BlogPosting -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#BlogPosting">
-        <rdfs:label xml:lang="en-us">Blog Posting</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#hasPublicationVenue"/>
@@ -680,7 +680,7 @@
     <!-- http://vivoweb.org/ontology/core#Catalog -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Catalog">
-        <rdfs:label xml:lang="en-us">Catalog</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#placeOfPublication"/>
@@ -701,7 +701,7 @@
     <!-- http://vivoweb.org/ontology/core#College -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#College">
-        <rdfs:label xml:lang="en-us">College</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#offers"/>
@@ -717,7 +717,7 @@
     <!-- http://vivoweb.org/ontology/core#ConferencePaper -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#ConferencePaper">
-        <rdfs:label xml:lang="en-us">Conference Paper</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.org/ontology/bibo/presentedAt"/>
@@ -732,7 +732,7 @@
     <!-- http://vivoweb.org/ontology/core#Course -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Course">
-        <rdfs:label xml:lang="en-us">Course</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#courseCredits"/>
@@ -746,7 +746,7 @@
     <!-- http://vivoweb.org/ontology/core#Credential -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Credential">
-        <rdfs:label xml:lang="en-us">Credential</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#hasGoverningAuthority"/>
@@ -772,7 +772,7 @@
     <!-- http://vivoweb.org/ontology/core#Database -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Database">
-        <rdfs:label xml:lang="en-us">Database</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#publisher"/>
@@ -786,7 +786,7 @@
     <!-- http://vivoweb.org/ontology/core#EducationalTraining -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#EducationalProcess">
-        <rdfs:label xml:lang="en-us">Educational Process</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#supplementalInformation"/>
@@ -809,7 +809,7 @@
     <!-- http://vivoweb.org/ontology/core#EventSeries -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#EventSeries">
-        <rdfs:label xml:lang="en-us">Event Series</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#hasSubjectArea"/>
@@ -841,7 +841,7 @@
     <!-- http://vivoweb.org/ontology/core#FundingOrganization -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#FundingOrganization">
-        <rdfs:label xml:lang="en-us">Funding Organization</rdfs:label>
+
         <owl:equivalentClass>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#awardsGrant"/>
@@ -857,7 +857,7 @@
     <!-- http://vivoweb.org/ontology/core#Grant -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Grant">
-        <rdfs:label xml:lang="en-us">Grant</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#supportedInformationResource"/>
@@ -883,7 +883,7 @@
     <!-- http://vivoweb.org/ontology/core#InformationResource -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/IAO_0000030">
-        <rdfs:label xml:lang="en-us">Information Resource</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#freetextKeyword"/>
@@ -917,7 +917,7 @@
     <!-- http://vivoweb.org/ontology/core#IssuedCredential -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#IssuedCredential">
-        <rdfs:label xml:lang="en-us">Issued Credential</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#dateIssued"/>
@@ -955,7 +955,7 @@
     <!-- http://vivoweb.org/ontology/core#Laboratory -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Laboratory">
-        <rdfs:label xml:lang="en-us">Laboratory</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#offers"/>
@@ -969,7 +969,7 @@
     <!-- http://vivoweb.org/ontology/core#Position -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Position">
-        <rdfs:label xml:lang="en-us">Position</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#rank"/>
@@ -991,7 +991,7 @@
     <!-- http://vivoweb.org/ontology/core#Project -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Project">
-        <rdfs:label xml:lang="en-us">Project</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#geographicFocus"/>
@@ -1018,7 +1018,7 @@
     <!-- http://vivoweb.org/ontology/core#Role -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000023">
-        <rdfs:label xml:lang="en-us">Role</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#description"/>
@@ -1048,7 +1048,7 @@
     <!-- http://vivoweb.org/ontology/core#Software -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Software">
-        <rdfs:label xml:lang="en-us">Software</rdfs:label>
+
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#InformationResource"/>
         <rdfs:subClassOf>
             <owl:Restriction>
@@ -1065,7 +1065,7 @@
     <!-- http://vivoweb.org/ontology/core#University -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#University">
-        <rdfs:label xml:lang="en-us">University</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#offers"/>
@@ -1079,7 +1079,7 @@
     <!-- http://vivoweb.org/ontology/core#WorkingPaper -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#WorkingPaper">
-        <rdfs:label xml:lang="en-us">Working Paper</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#placeOfPublication"/>
@@ -1094,7 +1094,7 @@
     <!-- http://xmlns.com/foaf/0.1/Agent -->
 
     <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Agent">
-        <rdfs:label xml:lang="en-us">Agent</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#freetextKeyword"/>
@@ -1117,7 +1117,7 @@
     <!-- http://xmlns.com/foaf/0.1/Organization -->
 
     <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Organization">
-        <rdfs:label xml:lang="en-us">Organization</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#abbreviation"/>
@@ -1149,7 +1149,7 @@
     <!-- http://xmlns.com/foaf/0.1/Person -->
 
     <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Person">
-        <rdfs:label xml:lang="en">Person</rdfs:label>
+
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#eligibleFor"/>

@@ -8,9 +8,21 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.vocabulary.XSD;
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.sparql.resultset.ResultSetMem;
 
+import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
+import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.PersonHasAdviseesValidator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
@@ -31,7 +43,46 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
     public AddEditorshipToPersonGenerator() {}
     
     @Override
-    public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
+    public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) throws Exception {
+     
+     if( EditConfigurationUtils.getObjectUri(vreq) == null ){
+         return doAddNew(vreq,session);
+     }else{
+         return doSkipToDocument(vreq);
+     }
+    }
+
+    private EditConfigurationVTwo doSkipToDocument(VitroRequest vreq) {
+        Individual editorshipNode = EditConfigurationUtils.getObjectIndividual(vreq);
+        
+        //try to get the document
+        String documentQueryStr = "SELECT ?obj \n" +
+                             "WHERE { <" + editorshipNode.getURI() + "> <http://vivoweb.org/ontology/core#relates> ?obj . \n" +
+                             "    ?obj a <http://purl.obolibrary.org/obo/IAO_0000030> . } \n";
+        Query documentQuery = QueryFactory.create(documentQueryStr);
+        QueryExecution qe = QueryExecutionFactory.create(documentQuery, ModelAccess.on(vreq).getJenaOntModel());
+        try {
+            ResultSetMem rs = new ResultSetMem(qe.execSelect());
+            if(!rs.hasNext()){
+                return doBadEditorshipNoPub( vreq );
+            }else if( rs.size() > 1 ){
+                return doBadEditorshipMultiplePubs(vreq);
+            }else{ 
+                //skip to document 
+                RDFNode objNode = rs.next().get("obj");
+                if (!objNode.isResource() || objNode.isAnon()) {
+                    return doBadEditorshipNoPub( vreq );
+                }
+                EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();
+                editConfiguration.setSkipToUrl(UrlBuilder.getIndividualProfileUrl(((Resource) objNode).getURI(), vreq));
+                return editConfiguration;
+            }
+        } finally {
+            qe.close();
+        }
+    }
+
+    protected EditConfigurationVTwo doAddNew(VitroRequest vreq,
             HttpSession session) throws Exception {
         
         EditConfigurationVTwo conf = new EditConfigurationVTwo();
@@ -72,6 +123,10 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
                 setRangeDatatypeUri(XSD.xstring.toString() ).
                 setValidators( list("datatype:" + XSD.xstring.toString()) )
                 );
+
+        conf.addField( new FieldVTwo().
+                setName("documentLabelDisplay").
+                setRangeDatatypeUri(XSD.xstring.toString() ));
 
         conf.addValidator(new AntiXssValidation());
         addFormSpecificData(conf, vreq);
@@ -145,6 +200,16 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
   		return EditModeUtils.getEditMode(vreq, predicates);
   	}
 
+    private EditConfigurationVTwo doBadEditorshipMultiplePubs(VitroRequest vreq) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    private EditConfigurationVTwo doBadEditorshipNoPub(VitroRequest vreq) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    
     private List<List<String>> getDocumentTypeLiteralOptions() {
         List<List<String>> literalOptions = new ArrayList<List<String>>();
         literalOptions.add(list("http://purl.org/ontology/bibo/Book", "Book"));
