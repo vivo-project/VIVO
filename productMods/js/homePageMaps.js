@@ -395,7 +395,7 @@ $(document).ready(function(){
             researcherText = " " + i18nStrings.researcherString + " " + i18nStrings.inString;
         }
         else {
-            researcherText = " " + i18nStrings.researcherInString
+            researcherText = " " + i18nStrings.researchersString
         }
 
         $('div#researcherTotal').html("<font style='font-size:1.05em;color:#167093'>" 
