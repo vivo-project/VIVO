@@ -171,8 +171,10 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
     	List<String> n3Required = list(    	            	        
     	        getPrefixesString() + "\n" +
     	        "?subject ?predicate ?conceptNode .\n" + 
-    	        "?conceptNode <" + RDF.type.getURI() + "> <http://www.w3.org/2002/07/owl#Thing> ."
+    	        "?conceptNode <" + RDF.type.getURI() + "> <" + this.SKOSConceptType + "> ."
     	);
+        //"?conceptNode <" + RDF.type.getURI() + "> <http://www.w3.org/2002/07/owl#Thing> ."
+
     	List<String> inversePredicate = getInversePredicate(vreq);
 		//Adding inverse predicate if it exists
 		if(inversePredicate.size() > 0) {

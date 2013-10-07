@@ -74,6 +74,7 @@ public class AddAssociatedConceptsPreprocessor extends
 	
 	private static String SKOSBroaderURI = "http://www.w3.org/2004/02/skos/core#broader";
 	private static String SKOSNarrowerURI = "http://www.w3.org/2004/02/skos/core#narrower";
+	private static String SKOSConceptType = "http://www.w3.org/2004/02/skos/core#Concept";	
 
 	// String datatype
 
@@ -631,7 +632,8 @@ public class AddAssociatedConceptsPreprocessor extends
 			int suffix = index;
 			String node = nodeBase + suffix;
 			String n3String = prefixStr;
-			n3String += "?subject ?predicate " + node + " . ";
+			n3String += "?subject ?predicate " + node + " . \n" + 
+			node + " <" + RDF.type.getURI() + "> <" + this.SKOSConceptType + "> .";
 			n3Required.add(n3String);
 		}
 		editConfiguration.setN3Required(n3Required);
