@@ -957,7 +957,8 @@ a.view-all-style {
 	clear: both;
 }
 #home-research h4 {
-    width: 100px;
+    display: inline;
+    padding: 3px 10px;
 }
 #home-research ul {
 	padding: 0.7em 0 0.6em 0.75em; 
@@ -987,7 +988,8 @@ a.view-all-style {
 	float: left;
 }
 #home-academic-depts h4 {
-	width: 136px; 
+    display: inline;
+    padding: 3px 10px;
 }
 #home-academic-depts ul {
     list-style: disc outside url(../../../images/arrowIcon.gif); 
@@ -1005,7 +1007,8 @@ a.view-all-style {
 	float: left;
 }
 #home-faculty-mbrs h4 {
-	width: 86px; 
+    display: inline;
+    padding: 3px 10px;
 }
 div#tempSpacing {
     margin-top:30px;
@@ -1059,7 +1062,8 @@ div#adjImgHeight {
     width: 921px;
 }
 #home-geo-focus h4 {
-	width: 172px; 
+    display: inline;
+    padding: 3px 10px;
 }
 #home-geo-focus div#timeIndicatorGeo {
     text-align:center;
