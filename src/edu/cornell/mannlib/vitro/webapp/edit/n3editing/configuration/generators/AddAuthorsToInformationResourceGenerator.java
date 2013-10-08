@@ -118,7 +118,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 	
 	private String getN3AuthorshipRank() {
 		return getN3PrefixString() +   
-        "?authorshipUri core:authorRank ?rank .";
+        "?authorshipUri core:rank ?rank .";
 	}
 	
 	//first name, middle name, last name, and new perseon for new author being created, and n3 for existing person
