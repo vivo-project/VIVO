@@ -93,6 +93,7 @@ var manageWebpages = {
                 predicate: manageWebpages.rankPredicate,
                 individuals: webpages
             },
+            
             traditional: true, // serialize the array of individuals for the server
             dataType: 'json',
             type: 'POST',

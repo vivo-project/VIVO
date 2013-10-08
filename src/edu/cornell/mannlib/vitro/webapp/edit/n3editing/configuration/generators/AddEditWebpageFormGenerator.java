@@ -113,7 +113,7 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
 	    
 	    config.addField(new FieldVTwo().
 	            setName("rank").
-	            setRangeDatatypeUri(XSD.integer.toString()));
+	            setRangeDatatypeUri(XSD.xint.toString()));
 	    
 	    config.addFormSpecificData("newRank", 
 	            getMaxRank( EditConfigurationUtils.getObjectUri(vreq), 
