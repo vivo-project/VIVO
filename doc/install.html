@@ -363,7 +363,7 @@
                 <em>External authentication:</em>
                 If you want to use an external 
                 authentication system like Shibboleth or CUWebAuth, you will need to 
-                set additional properties in this file. See the step below  
+                set an additional property in this file. See the step below  
                 entitled <a href="#external_auth">Using an External Authentication
                     System with VIVO</a>. 
             </p>
@@ -615,21 +615,16 @@
                     <tr>
                         <td colspan="2">
                             If an external authentication system like Shibboleth or CUWebAuth is to be 
-                            used, these properties say how the login button should be labeled, and which  
-                            HTTP header will contain the user ID from the authentication system. If such 
-                            a system is not to be used, leave these commented out. Consult the installation  
-                            instructions for more details. 
+                            used, this property says which HTTP header will contain the user ID from 
+                            the authentication system. If such a system is not to be used, 
+                            leave this commented out.
                         </td>
                     </tr>
                     <tr class="odd_row">
                         <td>
-                            externalAuth.buttonText
-                            <br/>
                             externalAuth.netIdHeaderName
                         </td>
                         <td>
-                            Log in using BearCat Shibboleth
-                            <br/>
                             remote_userID 
                         </td>
                     </tr>
@@ -1219,13 +1214,18 @@
                     the VIVO login form. You need to tell VIVO what text should appear in
                     that button.
                     <p>
-                        Put a line like this in the runtime.properties file:
-                        externalAuth.buttonText = [the text for your login button] For example:
-                    </p>
-                    <pre>externalAuth.buttonText = Log in using BearCat Shibboleth</pre>
-                    <p>
+                        In your theme, add a line to the <code>all.properties</code> file,
+                        like this one: 
+                        <pre>external_login_text = <em>[the text for your login button]</em></pre>
+                        For example:
+                        <pre>external_login_text = Log in using BearCat Shibboleth</pre>
                         The VIVO login form will display a button labelled "Log in 
                         using BearCat Shibboleth". 
+                    </p>
+                    <p>
+                    	If your site supports additional languages, add lines to the corresponding files.
+                    	For example, <code>all_es.properties</code> might contain this line:
+                    	<pre>external_login_text = Entrar usando Shibboleth GatoOso</pre>
                     </p>
                 </li>
                 <li>
