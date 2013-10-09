@@ -1833,6 +1833,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
     <!-- http://vivoweb.org/ontology/core#outreachOverview -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#outreachOverview">
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
 
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">My extension program consists of developing and reporting disease management strategies that are both economically and environmentally sound for fresh market vegetable production. We hope that some of this testing will result in practices adaptable for organic production.</obo:IAO_0000112>
@@ -1845,7 +1846,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#overview">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     </owl:DatatypeProperty>
     
 
@@ -1907,7 +1908,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#researchOverview">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Used for a single narrative summary of research, typically covering a wide range of activities and time periods; use Researcher Role for information on individual activities</obo:IAO_0000112>
     </owl:DatatypeProperty>
     
@@ -1973,7 +1974,7 @@ See also core:localAwardId.
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#teachingOverview">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Used for a single narrative summary of teaching, typically covering a wide range of courses including for credit and non-credit teaching over multiple semesters; the &quot;teaches&quot; property links a person directly with an instance of a Semester Class, typically from an institutional database of record; then use Teacher Role for information about a person&apos;s role in non-credit teaching or their specific contribution to individual courses</obo:IAO_0000112>
     </owl:DatatypeProperty>
     
