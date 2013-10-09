@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -270,8 +271,9 @@ public class GemetService implements ExternalConceptService  {
     */
    protected String getConceptsMatchingKeyword(String keyword) throws Exception {
       String result = new String();
+      String encodedKeyword = URLEncoder.encode(keyword, "UTF-8"); 
       String serviceUrl = GemetWS_address + "getConceptsMatchingKeyword" +
-      "?keyword="  + keyword +
+      "?keyword="  + encodedKeyword +
       "&search_mode=0" +
       "&thesaurus_uri=http://www.eionet.europa.eu/gemet/concept/" +
       "&language=en";
