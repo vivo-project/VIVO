@@ -6,19 +6,19 @@
      is also used to generate the property statement during a deletion.  
  -->
 <#import "lib-datetime.ftl" as dt>
-<@showAdvisorIn statement />
+<@showAdviseeIn statement />
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
-<#macro showAdvisorIn statement>
-    <#-- It's possible that advisorIn relationships were created before the custom form and only have
-         an rdfs:label. So check to see if there's an advisee first. If not, just display the label.  -->
+<#macro showAdviseeIn statement>
+    <#-- It's possible that adviseeIn relationships were created before the custom form and only have
+         an rdfs:label. So check to see if there's an advisor first. If not, just display the label.  -->
     <#local linkedIndividual>
-        <#if statement.advisee??>
+        <#if statement.advisor??>
             <#if statement.degreeLabel?? || statement.dateTimeStart?? || statement.dateTimeEnd?? >
-                <a href="${profileUrl(statement.uri("advisee"))}" title="${i18n().advisee_label}">${statement.adviseeLabel!}</a>,
+                <a href="${profileUrl(statement.uri("advisor"))}" title="${i18n().advisor_label}">${statement.advisorLabel!}</a>,
             <#else>
-                <a href="${profileUrl(statement.uri("advisee"))}" title="${i18n().advisee_label}">${statement.adviseeLabel!}</a>
+                <a href="${profileUrl(statement.uri("advisor"))}" title="${i18n().advisor_label}">${statement.advisorLabel!}</a>
             </#if>
             <#if statement.degreeLabel??>
                 ${statement.degreeAbbr!statement.degreeLabel!} 

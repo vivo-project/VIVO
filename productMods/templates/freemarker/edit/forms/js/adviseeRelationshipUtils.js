@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-var advisingRelUtils = {
+var adviseeRelUtils = {
         
     onLoad: function(subject,blankSentinel) {
         this.subjName = '';
@@ -24,14 +24,14 @@ var advisingRelUtils = {
     
     this.form = $('#personHasAdvisingRelationship');
     this.adRelshiplabel = $('#advisingRelLabel');
-    this.advisee = $('#advisee');
+    this.advisor = $('#advisor');
     this.subjArea = $('#SubjectArea');
     this.firstName = $('#firstName');
     this.lastName = $('#lastName');
-    this.adviseeUri = $('#adviseeUri');
+    this.advisorUri = $('#advisorUri');
     this.subjAreaUri = $('#subjAreaUri');
-    this.saveAdviseeLabel = $('#saveAdviseeLabel');
-    this.adviseeAcSelection = $('div#adviseeAcSelection');
+    this.saveAdvisorLabel = $('#saveAdvisorLabel');
+    this.advisorAcSelection = $('div#advisorAcSelection');
     
 
     // may not need this
@@ -42,43 +42,45 @@ var advisingRelUtils = {
     bindEventListeners: function() {
         this.idCache = {};
         
-        // we want to use the advisee label in the relationship label.
+        // we want to use the advisor label in the relationship label.
         // since the former gets cleared on submit in some cases, store
         // the value in a hidden field and map to relationship label
-        this.advisee.change( function(objEvent) {
-           window.setTimeout('advisingRelUtils.mapAdviseeValue()', 180); 
+        this.advisor.change( function(objEvent) {
+           window.setTimeout('adviseeRelUtils.mapAdvisorValue()', 180); 
         });
-        this.advisee.blur( function(objEvent) {
-           window.setTimeout('advisingRelUtils.mapAdviseeValue()', 180); 
+        this.advisor.blur( function(objEvent) {
+           window.setTimeout('adviseeRelUtils.mapAdvisorValue()', 180); 
         });
         
         
         this.form.submit(function() {
-            advisingRelUtils.resolveAdviseeNames();
-            advisingRelUtils.buildAdvisingRelLabel();
+            adviseeRelUtils.resolveAdvisorNames();
+            adviseeRelUtils.buildAdvisingRelLabel();
+            alert(this.adRelshiplabel.val());
+            return false;
         });            
     },
     
-    mapAdviseeValue: function() {
-       if ( this.adviseeAcSelection.attr('class').indexOf('userSelected') != -1 ) {
-           this.saveAdviseeLabel.val(this.advisee.val());
+    mapAdvisorValue: function() {
+       if ( this.advisorAcSelection.attr('class').indexOf('userSelected') != -1 ) {
+           this.saveAdvisorLabel.val(this.advisor.val());
        }
     },
-    resolveAdviseeNames: function() {
+    resolveAdvisorNames: function() {
         var firstName,
             lastName,
             name;
 
         // If selecting an existing person, don't submit name fields
-        if (this.adviseeUri.val() == '' || this.adviseeUri.val() == this.sentinel ) {
+        if (this.advisorUri.val() == '' || this.advisorUri.val() == this.sentinel ) {
             firstName = this.firstName.val();
-            lastName = this.advisee.val();
+            lastName = this.advisor.val();
             
             name = lastName;
             if (firstName) {
                 name += ', ' + firstName;
             }            
-            this.advisee.val(name);
+            this.advisor.val(name);
             this.lastName.val(lastName);
         } 
         else {
@@ -89,22 +91,23 @@ var advisingRelUtils = {
     },    
 
     buildAdvisingRelLabel: function() {
-        if ( this.advisee.val() != "" ) {
-            this.adRelshiplabel.val(this.subjName + " " + advisingRelUtils.advisingString + " " + this.advisee.val());
+        alert("here");
+        if ( this.advisor.val() != "" ) {
+            this.adRelshiplabel.val(this.advisor.val() + " " + adviseeRelUtils.advisingString + " " + this.subjName);
         }
-        else if ( this.saveAdviseeLabel.val() != "" ){
-            this.adRelshiplabel.val(this.subjName + " " + advisingRelUtils.advisingString + " " + this.saveAdviseeLabel.val());
+        else if ( this.saveAdvisorLabel.val() != "" ){
+            this.adRelshiplabel.val(this.saveAdvisorLabel.val() + " " + adviseeRelUtils.advisingString + " " + this.subjName);
         }
         else {
-            this.adRelshiplabel.val(this.subjName + " " + advisingRelUtils.advisingRelationshipString);
+            this.adRelshiplabel.val(this.subjName + " " + adviseeRelUtils.advisingRelationshipString);
         }
     },
 
     resetLastNameLabel: function() {
-        var indx = this.advisee.val().indexOf(", ");
+        var indx = this.advisor.val().indexOf(", ");
         if ( indx != -1 ) {
-            var temp = this.advisee.val().substr(0,indx);
-            this.advisee.val(temp);
+            var temp = this.advisor.val().substr(0,indx);
+            this.advisor.val(temp);
         }
     }
     

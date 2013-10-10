@@ -21,7 +21,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaVClassOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 
-public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator implements
+public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator implements
         EditConfigurationGenerator {
 
     final static String advisingRelClass = vivoCore + "AdvisingRelationship";
@@ -38,7 +38,7 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
     final static String dateTimeValue = vivoCore + "dateTime";
     final static String dateTimePrecision = vivoCore + "dateTimePrecision";
     
-    public PersonHasAdvisingRelationshipGenerator() {}
+    public PersonHasAdvisorRelationshipGenerator() {}
     
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
@@ -50,11 +50,11 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
         initPropertyParameters(vreq, session, conf);
         initObjectPropForm(conf, vreq);               
         
-        conf.setTemplate("personHasAdvisingRelationship.ftl");
+        conf.setTemplate("personHasAdvisorRelationship.ftl");
         
         conf.setVarNameForSubject("person");
         conf.setVarNameForPredicate("predicate");
-        conf.setVarNameForObject("advisingRelationship");
+        conf.setVarNameForObject("advisorRole");
         
         conf.setN3Required( Arrays.asList( n3ForNewAdvisingRelationship,
                                            advisingRelLabelAssertion,

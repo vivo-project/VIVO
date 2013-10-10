@@ -24,9 +24,9 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
 
 <#--Retrieve variables needed-->
-<#assign adviseeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingAdvisee") />
-<#assign adviseeLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "adviseeLabel") />
-<#assign adviseeLabelDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "adviseeLabelDisplay") />
+<#assign advisorValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingAdvisor") />
+<#assign advisorLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "advisorLabel") />
+<#assign advisorLabelDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "advisorLabelDisplay") />
 <#assign firstNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "firstName") />
 <#assign lastNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "lastName") />
 <#assign advisingRelTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "advisingRelType") />
@@ -56,12 +56,12 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
 <#assign yearHint     = "<span class='hint'>(${i18n().year_hint_format})</span>" />
 
-<h2>${titleVerb}&nbsp;${i18n().advising_relationship_entry_for} ${editConfiguration.subjectName}</h2>
+<h2>${titleVerb}&nbsp;${i18n().advisee_relationship_entry_for} ${editConfiguration.subjectName}</h2>
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
-    <#if adviseeLabelDisplayValue?has_content >
-        <#assign adviseeLabelValue = adviseeLabelDisplayValue />
+    <#if advisorLabelDisplayValue?has_content >
+        <#assign advisorLabelValue = advisorLabelDisplayValue />
     </#if>
     <#if subjAreaLabelDisplayValue?has_content >
         <#assign subjAreaLabelValue = subjAreaLabelDisplayValue />
@@ -122,21 +122,21 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
       </#if>
     </p>
     <p >
-        <label for="advisee">${i18n().advisee_capitalized}: ${i18n().last_name}  ${requiredHint}<span style="padding-left:322px">${i18n().first_name}  ${requiredHint}</span></label>
-            <input class="acSelector" size="50"  type="text" acGroupName="advisee" id="advisee" name="adviseeLabel" value="${adviseeLabelValue}" >
+        <label for="advisor">${i18n().advisor_capitalized}: ${i18n().last_name}  ${requiredHint}<span style="padding-left:322px">${i18n().first_name}  ${requiredHint}</span></label>
+            <input class="acSelector" size="50"  type="text" acGroupName="advisor" id="advisor" name="advisorLabel" value="${advisorLabelValue}" >
             <input  size="30"  type="text" id="firstName" name="firstName" value="${firstNameValue}" ><br />
             <input type="hidden" id="lastName" name="lastName" value="">
-            <input class="display" type="hidden" acGroupName="advisee" id="adviseeDisplay" name="adviseeLabelDisplay" value="${adviseeLabelDisplayValue}" >
+            <input class="display" type="hidden" acGroupName="advisor" id="advisorDisplay" name="advisorLabelDisplay" value="${advisorLabelDisplayValue}" >
     </p>
 
-    <div class="acSelection" acGroupName="advisee" id="adviseeAcSelection">
+    <div class="acSelection" acGroupName="advisor" id="advisorAcSelection">
         <p class="inline">
-            <label>${i18n().selected_advisee}
+            <label>${i18n().selected_advisor}
             <span class="acSelectionInfo"></span>
             <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
             <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
-        <input class="acUriReceiver" type="hidden" id="adviseeUri" name="existingAdvisee" value="${adviseeValue}" ${flagClearLabelForExisting}="true"/>
+        <input class="acUriReceiver" type="hidden" id="advisorUri" name="existingAdvisor" value="${advisorValue}" ${flagClearLabelForExisting}="true"/>
     </div>
 
     <p>
@@ -184,7 +184,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     </#if>
 	<#--End draw elements-->
     <input type="hidden" id="advisingRelLabel" name="advisingRelLabel" value="${advisingRelLabelValue}"/>
-    <input type="hidden" id="saveAdviseeLabel" name="saveAdviseeLabel" value="${adviseeLabelValue}"/>
+    <input type="hidden" id="saveAdvisorLabel" name="saveAdvisorLabel" value="${advisorLabelValue}"/>
     <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>
 
    <p class="submit">
@@ -202,10 +202,10 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <script type="text/javascript">
 var customFormData  = {
     acUrl: '${urls.base}/autocomplete?tokenize=true&stem=true',
-    acTypes: {advisee: 'http://xmlns.com/foaf/0.1/Person', SubjectArea: 'http://www.w3.org/2004/02/skos/core#Concept'},
+    acTypes: {advisor: 'http://xmlns.com/foaf/0.1/Person', SubjectArea: 'http://www.w3.org/2004/02/skos/core#Concept'},
     editMode: '${editMode}',
-    defaultTypeName: 'advisee',
-    multipleTypeNames: {advisee: 'advisee', SubjectArea: 'Subject Area'},
+    defaultTypeName: 'advisor',
+    multipleTypeNames: {advisor: 'advisor', SubjectArea: 'Subject Area'},
     sparqlForAcFilter: '${sparqlForAcFilter}',
     sparqlQueryUrl: '${sparqlQueryUrl}',
     acFilterForIndividuals: ${acFilterForIndividuals},
@@ -226,7 +226,7 @@ var i18nStrings = {
 
 <script type="text/javascript">
 $(document).ready(function(){
-    advisingRelUtils.onLoad('${editConfiguration.subjectName}', '${blankSentinel}');
+    adviseeRelUtils.onLoad('${editConfiguration.subjectName}', '${blankSentinel}');
 });
 </script> 
  
@@ -236,7 +236,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarke
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
-             '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/advisingRelationshipUtils.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/adviseeRelationshipUtils.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/extensions/String.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.bgiframe.pack.js"></script>',
