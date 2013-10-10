@@ -482,6 +482,21 @@ local:fullNameConfig a :ObjectPropertyDisplayConfig ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddFullNameToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
 
+local:preferredTitleContext a :ConfigContext ;
+    :hasConfiguration local:preferredTitleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Title> .
+
+local:preferredTitleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-preferredTitle.xml"^^xsd:string ;
+    :displayName "preferred title" ;
+    vitro:displayRankAnnot 8;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasPreferredTitleGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
 ### properties using default editing form ##
 
 local:eventWithinContext a :ConfigContext ;

@@ -16,7 +16,7 @@
 <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
 
 <#--Retrieve variables needed-->
-<#assign telephoneNumberValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "telephoneNumber") />
+<#assign preferredTitleValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "preferredTitle") />
 
 <#--If edit submission exists, then retrieve validation errors if they exist-->
 <#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
@@ -25,17 +25,17 @@
 
 <#if editMode == "edit">    
         <#assign titleVerb="${i18n().edit_capitalized}">        
-        <#assign submitButtonText="${titleVerb}" + " ${i18n().telephone_number}">
+        <#assign submitButtonText="${titleVerb}" + " ${i18n().preferred_title}">
         <#assign disabledVal="disabled">
 <#else>
         <#assign titleVerb="${i18n().create_capitalized}">        
-        <#assign submitButtonText="${titleVerb}" + " ${i18n().telephone_number}">
+        <#assign submitButtonText="${titleVerb}" + " ${i18n().preferred_title}">
         <#assign disabledVal=""/>
 </#if>
 
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
 
-<h2>${titleVerb}&nbsp;${i18n().telephone_number_for} ${editConfiguration.subjectName}</h2>
+<h2>${titleVerb}&nbsp;${i18n().preferred_title_for} ${editConfiguration.subjectName}</h2>
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
@@ -43,8 +43,8 @@
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="${i18n().error_alert_icon}" />
         <p>
             <#--Checking if any required fields are empty-->
-            <#if lvf.submissionErrorExists(editSubmission, "telephoneNumber")>
- 	            ${i18n().enter_telephone_number}<br />
+            <#if lvf.submissionErrorExists(editSubmission, "preferredTitle")>
+ 	            ${i18n().enter_preferred_title}<br />
             </#if>        
         </p>
     </section>
@@ -57,8 +57,8 @@
     <form id="personHasTelephoneNumber" class="customForm noIE67" action="${submitUrl}"  role="add/edit phone">
 
         <p>
-            <label for="telephoneNumber">${i18n().telephone_number} ${requiredHint}</label>
-            <input  size="25"  type="text" id="telephoneNumber" name="telephoneNumber" value="${telephoneNumberValue}" />
+            <label for="preferredTitle">${i18n().preferred_title} ${requiredHint}</label>
+            <input  size="25"  type="text" id="preferredTitle" name="preferredTitle" value="${preferredTitleValue}" />
         </p>
 
         <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>

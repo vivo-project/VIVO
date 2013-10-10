@@ -67,12 +67,12 @@
                     <span class="fn"><@p.label individual editable labelCount localesCount/></span>
 
                     <#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->
-                    <#assign title = propertyGroups.pullProperty("${core}preferredTitle")!>
+                    <#assign title = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Title")!>
                     <#if title?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
                         <@p.addLinkWithLabel title editable />
                         <#list title.statements as statement>
-                            <span class="display-title">${statement.value}</span>
-                            <@p.editingLinks "${title.name}" "" statement editable />
+                            <span class="display-title">${statement.preferredTitle}</span>
+                            <@p.editingLinks "${title.localName}" "${title.name}" statement editable />
                         </#list>
                     </#if>
                     <#-- If preferredTitle is unpopulated, display mostSpecificTypes -->
