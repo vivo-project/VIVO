@@ -1343,7 +1343,7 @@
     <!-- http://purl.org/ontology/bibo/chapter -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/chapter">
-        <rdfs:subPropertyOf rdf:about="http://purl.org/ontology/bibo/locator"/>
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/locator"/>
         <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/BookSection"/>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <rdfs:comment xml:lang="en">An chapter number</rdfs:comment>
