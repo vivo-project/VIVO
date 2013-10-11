@@ -1343,8 +1343,8 @@
     <!-- http://purl.org/ontology/bibo/chapter -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/chapter">
-
-
+        <rdfs:subPropertyOf rdf:about="http://purl.org/ontology/bibo/locator"/>
+        <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/BookSection"/>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <rdfs:comment xml:lang="en">An chapter number</rdfs:comment>
         <ns:term_status>unstable</ns:term_status>
@@ -1435,7 +1435,8 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/isbn10 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/isbn10">
-
+        <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Book"/>
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://en.wikipedia.org/wiki/Isbn.</obo:IAO_0000112>
     </owl:DatatypeProperty>
     
@@ -1444,7 +1445,8 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/isbn13 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/isbn13">
-
+        <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Book"/>
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source: http://en.wikipedia.org/wiki/Isbn.</obo:IAO_0000112>
     </owl:DatatypeProperty>
     
@@ -1453,7 +1455,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/issn -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/issn">
-
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source: http://en.wikipedia.org/wiki/Issn</obo:IAO_0000112>
         <ns:term_status>stable</ns:term_status>
@@ -1465,7 +1467,8 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/issue -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/issue">
-
+        <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Article"/>
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/locator"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bibo has the domain of bibo:issue as the class Issue, but an example on their site uses it with Article, referring to the issue number &quot;4&quot;</obo:IAO_0000112>
     </owl:DatatypeProperty>
     
@@ -1498,7 +1501,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/numPages -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/numPages">
-
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/locator"/>
     </owl:DatatypeProperty>
     
 
@@ -1515,7 +1518,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/oclcnum -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/oclcnum">
-
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://info-uri.info/registry/OAIHandler?verb=GetRecord&amp;metadataPrefix=reg&amp;identifier=info:oclcnum/. 
 
 
@@ -1530,7 +1533,7 @@ bibo has the domain of this property set to the union of Collection and Document
     <!-- http://purl.org/ontology/bibo/pageEnd -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/pageEnd">
-
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/locator"/>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>stable</ns:term_status>
         <rdfs:comment xml:lang="en">Ending page number within a continuous page range.</rdfs:comment>
@@ -1541,7 +1544,7 @@ bibo has the domain of this property set to the union of Collection and Document
     <!-- http://purl.org/ontology/bibo/pageStart -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/pageStart">
-
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/locator"/>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>stable</ns:term_status>
         <rdfs:comment xml:lang="en">Starting page number within a continuous page range.</rdfs:comment>
@@ -1552,7 +1555,7 @@ bibo has the domain of this property set to the union of Collection and Document
     <!-- http://purl.org/ontology/bibo/pmid -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/pmid">
-
+        <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Document"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The PubMed ID (PMID) identifies a citation record (rather than full-text) in the PubMed database. It is not evidence of compliance with the NIH Public Access Policy, because it does not identify a full-text submission of any kind.</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>stable</ns:term_status>
@@ -1577,7 +1580,7 @@ bibo has the domain of this property set to the union of Collection and Document
     <!-- http://purl.org/ontology/bibo/section -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/section">
-
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/locator"/>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <rdfs:comment xml:lang="en">An section number</rdfs:comment>
         <obo:IAO_0000112 xml:lang="en">Di Rado, Alicia. 1995. Trekking through college: Classes explore
@@ -1603,7 +1606,7 @@ modern society using the world of Star trek. Los Angeles Times, March
     <!-- http://purl.org/ontology/bibo/sici -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/sici">
-
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A sub property of identifier (http://en.wikipedia.org/wiki/SICI).</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <rdfs:comment xml:lang="en">Serial Item and Contribution Identifier</rdfs:comment>
@@ -1627,7 +1630,7 @@ modern society using the world of Star trek. Los Angeles Times, March
     <!-- http://purl.org/ontology/bibo/upc -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/upc">
-
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source for public description: http://en.wikipedia.org/wiki/Universal_Product_Code.</obo:IAO_0000112>
         <ns:term_status>stable</ns:term_status>
@@ -1648,7 +1651,8 @@ modern society using the world of Star trek. Los Angeles Times, March
     <!-- http://purl.org/ontology/bibo/volume -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/volume">
-
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/locator"/>
+        <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Document"/>
     </owl:DatatypeProperty>
     
 

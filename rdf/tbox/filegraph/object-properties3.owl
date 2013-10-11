@@ -229,7 +229,7 @@
     <!-- http://purl.org/ontology/bibo/status -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/status">
-
+        <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Document"/>
         <rdfs:range rdf:resource="http://purl.org/ontology/bibo/DocumentStatus"/>
     </owl:ObjectProperty>
     
