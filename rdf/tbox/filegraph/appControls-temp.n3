@@ -64,4 +64,18 @@ foaf:Person
               [ a       owl:Restriction ;
                 owl:onProperty <http://vivoweb.org/ontology/core#hasResearchArea> ;
                 owl:allValuesFrom <http://www.w3.org/2004/02/skos/core#Concept> 
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:onProperty <http://vivoweb.org/ontology/core#freetextKeyword> ;
+                owl:allValuesFrom <http://www.w3.org/2001/XMLSchema#string> 
               ] .
+
+foaf:Organization
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:onProperty <http://purl.obolibrary.org/obo/ARG_2000028> ;
+                owl:someValuesFrom <http://www.w3.org/2006/vcard/ns#Organization> 
+              ] .
+
+

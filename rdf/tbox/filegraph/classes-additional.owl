@@ -844,7 +844,7 @@
 
         <owl:equivalentClass>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#awardsGrant"/>
+                <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#assigns"/>
                 <owl:someValuesFrom rdf:resource="http://vivoweb.org/ontology/core#Grant"/>
             </owl:Restriction>
         </owl:equivalentClass>
@@ -1138,7 +1138,7 @@
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#hasSubOrganization"/>
+                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000051"/>
                 <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
             </owl:Restriction>
         </rdfs:subClassOf>

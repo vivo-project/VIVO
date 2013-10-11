@@ -1178,19 +1178,6 @@ there is a measurement process p that has specified output m, a measurement datu
     
 
 
-    <!-- http://purl.org/obo/owl/OBO_REL#role_of -->
-
-    <owl:ObjectProperty rdf:about="http://purl.org/obo/owl/OBO_REL#role_of">
-
-        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between a role R and an entity E. R role_of E iff: R inheres_in E and R is a role</obo:IAO_0000115>
-        <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GROUP:OBI:&lt;http://obi.sourceforge.net&gt;</obo:IAO_0000117>
-        <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Chris Mungall</obo:IAO_0000117>
-        <obo:IAO_0000111 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">role_of</obo:IAO_0000111>
-        <owl:inverseOf rdf:resource="http://purl.obolibrary.org/obo/OBI_0000316"/>
-        <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/RO_0000052"/>
-        <obo:IAO_0000412 rdf:resource="http://purl.org/obo/owl/ro_proposed"/>
-    </owl:ObjectProperty>
-    
 
 
     <!-- http://purl.org/ontology/bibo/affirmedBy -->
@@ -1725,7 +1712,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#translatorOf -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#translatorOf">
-
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
     </owl:ObjectProperty>
     
 
