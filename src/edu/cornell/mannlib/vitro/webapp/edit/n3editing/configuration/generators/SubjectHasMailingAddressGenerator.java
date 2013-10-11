@@ -25,9 +25,9 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaVClassOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 
-public class PersonHasMailingAddressGenerator extends VivoBaseGenerator implements
+public class SubjectHasMailingAddressGenerator extends VivoBaseGenerator implements
         EditConfigurationGenerator {
-    private Log log = LogFactory.getLog(PersonHasMailingAddressGenerator.class);
+    private Log log = LogFactory.getLog(SubjectHasMailingAddressGenerator.class);
        
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
@@ -40,9 +40,9 @@ public class PersonHasMailingAddressGenerator extends VivoBaseGenerator implemen
         initObjectPropForm(conf, vreq);  
         String addressUri = vreq.getParameter("addressUri"); 
         
-        conf.setTemplate("personHasMailingAddress.ftl");
+        conf.setTemplate("subjectHasMailingAddress.ftl");
         
-        conf.setVarNameForSubject("person");
+        conf.setVarNameForSubject("subject");
         conf.setVarNameForPredicate("predicate");
         conf.setVarNameForObject("individualVcard");
         
@@ -107,9 +107,9 @@ public class PersonHasMailingAddressGenerator extends VivoBaseGenerator implemen
     /* N3 assertions  */
 
     final static String n3ForNewAddress = 
-        "?person <http://purl.obolibrary.org/obo/ARG_2000028>  ?individualVcard . \n" +
+        "?subject <http://purl.obolibrary.org/obo/ARG_2000028>  ?individualVcard . \n" +
         "?individualVcard a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +              
-        "?individualVcard <http://purl.obolibrary.org/obo/ARG_2000029> ?person . \n" +
+        "?individualVcard <http://purl.obolibrary.org/obo/ARG_2000029> ?subject . \n" +
         "?individualVcard <http://www.w3.org/2006/vcard/ns#hasAddress> ?address . \n" +
         "?address a <http://www.w3.org/2006/vcard/ns#Address> . " ;    
     
@@ -133,7 +133,7 @@ public class PersonHasMailingAddressGenerator extends VivoBaseGenerator implemen
 
     final static String individualVcardQuery =
         "SELECT ?individualVcard WHERE { \n" +
-        "?person <http://purl.obolibrary.org/obo/ARG_2000028>  ?individualVcard . \n" +
+        "?subject <http://purl.obolibrary.org/obo/ARG_2000028>  ?individualVcard . \n" +
         "}";
 
     final static String streetAddressQuery  =      

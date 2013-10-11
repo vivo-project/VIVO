@@ -11,9 +11,10 @@
                         ?number
         WHERE {
             ?subject ?property ?vcard .
-            ?vcard vcard:hasTelephone ?phone 
+            ?vcard vcard:hasTelephone ?phone .
+            ?phone a vcard:Fax
             OPTIONAL { ?phone vcard:telephone ?number  }
-        MINUS {?phone a vcard:Fax}
+            
         } 
     </query-select>
        
@@ -22,16 +23,19 @@
         CONSTRUCT { 
             ?subject ?property ?vcard .
             ?vcard vcard:hasTelephone ?phone .
+            ?phone a vcard:Fax .
             ?phone ?phoneProperty ?phoneValue 
         } WHERE {
             {
                ?subject ?property ?vcard
             } UNION {
                ?subject ?property ?vcard .
-               ?vcard vcard:hasTelephone ?phone
+               ?vcard vcard:hasTelephone ?phone .
+               ?phone a vcard:Fax 
             } UNION {
                ?subject ?property ?vcard .
                ?vcard vcard:hasTelephone ?phone .
+               ?phone a vcard:Fax .
                ?phone ?phoneProperty ?phoneValue 
             } 
         } 

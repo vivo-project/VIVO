@@ -404,22 +404,82 @@ local:mailingAddressConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 80;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
-    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasMailingAddressGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.SubjectHasMailingAddressGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
 
-local:telephoneContext a :ConfigContext ;
-    :hasConfiguration local:telephoneConfig ;
+local:mailingAddressContext a :ConfigContext ;
+    :hasConfiguration local:mailingAddressConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Address> .
+
+local:mailingAddressConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-mailingAddress.xml"^^xsd:string ;
+    :displayName "mailing address" ;
+    vitro:displayRankAnnot 80;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.SubjectHasMailingAddressGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:personTelephoneContext a :ConfigContext ;
+    :hasConfiguration local:personTelephoneConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
     :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
     :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Telephone> .
 
-local:telephoneConfig a :ObjectPropertyDisplayConfig ;
+local:personTelephoneConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-telephoneNumber.xml"^^xsd:string ;
     :displayName "phone" ;
     vitro:displayRankAnnot 60;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
-    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasTelephoneNumberGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.SubjectHasPhoneFaxNumberGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:orgTelephoneContext a :ConfigContext ;
+    :hasConfiguration local:orgTelephoneConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Telephone> .
+
+local:orgTelephoneConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-telephoneNumber.xml"^^xsd:string ;
+    :displayName "phone" ;
+    vitro:displayRankAnnot 10;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.SubjectHasPhoneFaxNumberGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:personFaxContext a :ConfigContext ;
+    :hasConfiguration local:personFaxConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Fax> .
+
+local:personFaxConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-faxNumber.xml"^^xsd:string ;
+    :displayName "fax" ;
+    vitro:displayRankAnnot 60;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.SubjectHasPhoneFaxNumberGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:orgFaxContext a :ConfigContext ;
+    :hasConfiguration local:orgFaxConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Fax> .
+
+local:orgFaxConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-faxNumber.xml"^^xsd:string ;
+    :displayName "fax" ;
+    vitro:displayRankAnnot 10;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.SubjectHasPhoneFaxNumberGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
 
 local:additionalEmailContext a :ConfigContext ;
@@ -466,6 +526,21 @@ local:webpageConfig a :ObjectPropertyDisplayConfig ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForIndividualGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:webpageContext a :ConfigContext ;
+    :hasConfiguration local:webpageConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+
+local:webpageConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
+    :displayName "webpage" ;
+    vitro:displayRankAnnot 40;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForIndividualGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupother> .
 
 local:fullNameContext a :ConfigContext ;
     :hasConfiguration local:fullNameConfig ;
