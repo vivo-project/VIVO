@@ -84,11 +84,18 @@
             </p>
             <h4>The MySQL database</h4>
             <p>
-                Essentially all of the data that you store in VIVO will be given to 
-                MySQL for storage. The actual location of this data depends on what  
+                By default, nearly all of the data that you enter into VIVO will be  
+                stored in MySQL. The actual location of this data depends on what  
                 system you have, and on how you install MySQL (see <a href="#required_software">Step 1</a>, below). but you won’t need to 
                 know the location. You will access the data through VIVO, or  
                 occasionally through the MySQL client application. 
+            </p>
+            <h4>Optional external triple store</h4>
+            <p>
+                VIVO can configured to use a different triple store for the bulk of its semantic data, so long as this triple store supports Web-based use of the SPARQL language to query and modify its data.  If you elect to use a separate triple store, note that VIVO's MySQL database is
+still required for basic configuration and user account data.  In order to connect VIVO to an 
+external triple store, you will need to know two URIs: the store's endpoint URI for 
+issuing SPARQL queries that read data, and its URI for issuing SPARQL UPDATE commands.  These URIs are typically kept separate in order to make it easier to secure the triple store against unauthorized edits.  With Sesame, for example, the update URI is usually the query endpoint URI with "/statements" appended.  You will need to know these two URIs later when you <a href="#runtime_properties">specify runtime properties</a>. 
             </p>
             <toc>
                 <h3>Steps to Installation</h3>
@@ -571,6 +578,26 @@
                         </td>
                         <td>
                             SELECT 1 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+ Set the endpointURI only if you wish to store semantic data in an external triple store instead of MySQL.  Enter the URI of the triple store's SPARQL endpoint for querying data.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td colspan="2">
+                            VitroConnection.DataSource.endpointURI 
+                        </td>
+                    </tr>
+                    <tr>
+                       <td colspan="2">
+ Set the updateEndpointURI only if you wish to store semantic data in an external triple store instead of MySQL.  Enter the URI at which the triple store responds to SPARQL UPDATE requests.  This setting is only necessary if the triple store does not support updates via its main URI.  If the endpointURI above is not set, this setting has no effect.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td colspan="2">
+                            VitroConnection.DataSource.updateEndpointURI 
                         </td>
                     </tr>
                     <tr>
