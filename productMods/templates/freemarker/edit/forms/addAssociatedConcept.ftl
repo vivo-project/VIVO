@@ -162,7 +162,7 @@ var vocabSpecificDisplay = {};
 vocabSpecificDisplay["${vocab}"] = "${vocabSpecificDisplay[vocab]}";
 </#list>
 var i18nStrings = {
-    vocServiceUnavailable: '${i18n().vocabulary_service_error}',
+    vocServiceUnavailable: '${i18n().vocabulary_service_unavailable}',
     noResultsFound: '${i18n().no_serch_results_found}',
     defaultLabelTypeString: '${i18n().label_type}',
     definitionString: '${i18n().definition_capitalized}',

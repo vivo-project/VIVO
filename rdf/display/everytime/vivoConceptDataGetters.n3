@@ -25,11 +25,14 @@ display:getDepartmentDataGetter
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX vivo: <http://vivoweb.org/ontology/core#>
         PREFIX afn:  <http://jena.hpl.hp.com/ARQ/function#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         SELECT DISTINCT (str(?departmentLabel) AS ?deptLabel) ?dept
         WHERE {
             ?individualURI vivo:researchAreaOf ?person .
-			?person vivo:personInPosition ?posn .
-            ?posn  vivo:positionInOrganization ?dept .
+			?person vivo:relatedBy ?posn .
+			?posn a vivo:Position .
+            ?posn  vivo:relates ?dept .
+            ?dept a foaf:Organization .
             ?dept rdfs:label ?departmentLabel
             OPTIONAL { ?posn vivo:dateTimeInterval ?dti 
                      OPTIONAL { ?dti vivo:end ?end .
@@ -44,19 +47,20 @@ display:getDepartmentDataGetter
 
 ## detail page for dept research areas ##
 
-<http://vitro.mannlib.cornell.edu/ns/default#n55553333>
+<http://vitro.mannlib.cornell.edu/ns/default/page#AffiliatedDepartments>
     a   <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Page> ;
-    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#hasDataGetter> <http://vitro.mannlib.cornell.edu/ns/default#n55552222> ;
+    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#hasDataGetter> <http://vitro.mannlib.cornell.edu/ns/default/datagetter#AffiliatedDepartmentsDG> ;
     <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#requiresBodyTemplate> "individual-affiliated-dept-details.ftl" ;
     <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Affiliated Departments" ;
     <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#urlMapping> "/affiliatedDepartments" .
 
-<http://vitro.mannlib.cornell.edu/ns/default#n55552222>
+<http://vitro.mannlib.cornell.edu/ns/default/datagetter#AffiliatedDepartmentsDG>
     a   <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> ;
     <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#query>
         """
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX vivo: <http://vivoweb.org/ontology/core#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         SELECT DISTINCT (str (?prsnLabel) AS ?personLabel) 
                         ?person 
                         (Str(?researchAreaLabel) AS ?raLabel) 
@@ -64,9 +68,11 @@ display:getDepartmentDataGetter
                         ?raURI
                         ?orgURI
         WHERE {
-            ?orgURI vivo:organizationForPosition ?posn .
+            ?orgURI vivo:relatedBy ?posn .
+            ?posn a vivo:Position .
             ?orgURI rdfs:label ?orgLabel .
-            ?posn  vivo:positionForPerson ?person .
+            ?posn  vivo:relates ?person .
+            ?person a foaf:Person .
             ?person rdfs:label ?prsnLabel .
             ?person vivo:hasResearchArea ?raURI .
             ?raURI rdfs:label ?researchAreaLabel
