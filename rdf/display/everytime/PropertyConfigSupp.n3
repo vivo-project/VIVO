@@ -20,3 +20,6 @@ local:authorInAuthorshipConfig a :ObjectPropertyDisplayConfig ;
 
 local:informationResourceInAuthorshipConfig a :ObjectPropertyDisplayConfig ;
     :deleteLinkSuppressed "true"^^xsd:boolean .
+
+local:informationResourceInEditorshipConfig a :ObjectPropertyDisplayConfig ;
+    :deleteLinkSuppressed "true"^^xsd:boolean .

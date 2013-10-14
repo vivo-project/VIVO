@@ -476,7 +476,7 @@ local:orgFaxContext a :ConfigContext ;
 local:orgFaxConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-faxNumber.xml"^^xsd:string ;
     :displayName "fax" ;
-    vitro:displayRankAnnot 10;
+    vitro:displayRankAnnot 20;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.SubjectHasPhoneFaxNumberGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
@@ -688,3 +688,18 @@ local:grantRelatesConfig a :ObjectPropertyDisplayConfig ;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbiography> .
+
+
+
+local:testRemovalContext a :ConfigContext ;
+    :hasConfiguration local:testRemovalConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://purl.obolibrary.org/obo/BFO_0000001> .
+
+local:testRemovalConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "related by" ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:root ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:root ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupother> .

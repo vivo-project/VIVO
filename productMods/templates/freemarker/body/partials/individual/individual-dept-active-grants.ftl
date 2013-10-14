@@ -21,7 +21,7 @@
     </tr>
         <#list deptGrants as resultRow>
             <tr>
-		        <td><a href="${urls.base}/individual${resultRow["activity"]?substring(resultRow["activity"]?last_index_of("/"))}" title="${i18n().activity_name}">${resultRow["activityLabel"]}</a></td> 
+		        <td><a href="${urls.base}/individual${resultRow["grant"]?substring(resultRow["grant"]?last_index_of("/"))}" title="${i18n().grant_name}">${resultRow["grantLabel"]}</a></td> 
 		        <td>${dt.formatXsdDateTimeShort(resultRow["dt"], "yearMonthDayPrecision")}</td>
 		    </tr>
 		</#list>
