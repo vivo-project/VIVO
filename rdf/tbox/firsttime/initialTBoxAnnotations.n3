@@ -16,7 +16,7 @@
 @prefix vivo:    <http://vivoweb.org/ontology/core#> .
 
 vivo:pmcid
-      rdfs:label "pubmed central id"@en , "PubMed Central ID"@en-US ;
+      rdfs:label "PubMed Central ID"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -25,10 +25,10 @@ vivo:pmcid
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000071
-      rdfs:label "Software"@en .
+      rdfs:label "Software"@en-US .
 
 bibo:Note
-      rdfs:label "Note"@en , "Note"@en-US ;
+      rdfs:label "Note"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -39,10 +39,10 @@ bibo:Note
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:language
-      rdfs:label "has language (vcard dp)"@en .
+      rdfs:label "has language"@en-US .
 
 vivo:offeredBy
-      rdfs:label "offered by"@en , "offered by"@en-US ;
+      rdfs:label "offered by"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -57,7 +57,7 @@ vivo:offeredBy
               "true"^^xsd:boolean .
 
 vivo:dateTimeValue
-      rdfs:label "date/time value"@en-US , "Date/Time Value"@en ;
+      rdfs:label "date/time value"@en-US ;
       vitro:customEntryFormAnnot
               "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimeValueFormGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
@@ -76,7 +76,7 @@ vivo:dateTimeValue
               "false"^^xsd:boolean .
 
 vivo:isCorrespondingAuthor
-      rdfs:label "is this person a corresponding author?"@en-US , "is this person a corresponding author?"@en-us ;
+      rdfs:label "Is this person a corresponding author?"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -91,7 +91,7 @@ vivo:isCorrespondingAuthor
               "Indicates whether the author handles correspondence about the work and is in effect the guarantor of the published work.  The response is either 'true' or 'false' (without the quotes)."^^xsd:string .
 
 vivo:SeminarSeries
-      rdfs:label "Seminar Series"@en , "Seminar Series"@en-US ;
+      rdfs:label "Seminar Series"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -103,10 +103,10 @@ vivo:SeminarSeries
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ARG_0000172
-      rdfs:label "patient id"@en .
+      rdfs:label "patient ID"@en-US .
 
 vivo:supplementalInformation
-      rdfs:label "supplemental information"@en-US , "supplemental information"@en-us ;
+      rdfs:label "supplemental information"@en-US ;
       vitro:displayLimitAnnot
               "3"^^xsd:int ;
       vitro:displayRankAnnot
@@ -121,10 +121,10 @@ vivo:supplementalInformation
               "Allows for the entry of additional information, such as additional information describing educational background."^^xsd:string .
 
 vcard:Geo
-      rdfs:label "Geo"@en .
+      rdfs:label "Geo"@en-US .
 
 bibo:chapter
-      rdfs:label "chapter"@en , "chapter"@en-US ;
+      rdfs:label "chapter"@en-US ;
       vitro:displayRankAnnot
               "50"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -140,10 +140,10 @@ vivo:yearMonthDayTimePrecision
       rdfs:label "year-month-day-time value"@en-US .
 
 obo:IAO_0000417
-      rdfs:label "is quality measured as"@en .
+      rdfs:label "is quality measured as"@en-US .
 
 vivo:Student
-      rdfs:label "student"@en , "Student"@en-US ;
+      rdfs:label "Student"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -154,10 +154,10 @@ vivo:Student
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000072
-      rdfs:label "version"@en .
+      rdfs:label "version"@en-US .
 
 geo:non_self_governing
-      rdfs:label "non_self_governing"@en-US , "Non Self Governing"@en-US ;
+      rdfs:label "Non Self Governing"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -168,10 +168,10 @@ geo:non_self_governing
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Female
-      rdfs:label "Female"@en .
+      rdfs:label "Female"@en-US .
 
 <http://vivoweb.org/ontology/scientific-research#Phase1ClinicalTrial>
-      rdfs:label "Phase 1 Clinical Trial"@en-US , "Phase 1 Clinical Trial"@en ;
+      rdfs:label "Phase 1 Clinical Trial"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -183,10 +183,10 @@ vcard:Female
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:yearPrecision
-      rdfs:label "year value"@en-us .
+      rdfs:label "year value"@en-US .
 
 vivo:assigneeFor
-      rdfs:label "assignee for"@en-US , "assignee for"@en-us ;
+      rdfs:label "assignee for"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -204,14 +204,14 @@ vcard:organizationName
       rdfs:label "organization name"@en-US .
 
 geo:GDPTotalInCurrentPrices
-      rdfs:label "GDPTotalInCurrentPrices"@en-US ;
+      rdfs:label "GDP total in current prices"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:Company
-      rdfs:label "Company"@en-US , "Company"@en ;
+      rdfs:label "Company"@en-US ;
       vitro:displayLimitAnnot
               "2"^^xsd:int ;
       vitro:displayRankAnnot
@@ -226,7 +226,7 @@ vcard:hasOrganizationalUnitName
       rdfs:label "has organizational unit name"@en-US .
 
 vivo:NonAcademicPosition
-      rdfs:label "Non-Academic Position"@en-US , "Non-Academic Position"@en ;
+      rdfs:label "Non-Academic Position"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -239,7 +239,7 @@ vivo:NonAcademicPosition
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 geo:other
-      rdfs:label "other"@en-US , "Other"@en-US ;
+      rdfs:label "Other"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -250,7 +250,7 @@ geo:other
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:sici
-      rdfs:label "sici"@en , "sici"@en-US ;
+      rdfs:label "sici"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -261,7 +261,7 @@ bibo:sici
               "The Serial Item and Contribution Identifier (SICI) is a code (ANSI/NISO standard Z39.56) used to uniquely identify specific volumes, articles or other identifiable parts of a periodical."^^xsd:string .
 
 vivo:Licensure
-      rdfs:label "Licensure"@en-US , "Licensure"@en ;
+      rdfs:label "Licensure"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -273,13 +273,13 @@ vivo:Licensure
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:inPress
-      rdfs:label "in press"@en-us .
+      rdfs:label "in press"@en-US .
 
 obo:IAO_0000078
-      rdfs:label "Curation Status Specification"@en .
+      rdfs:label "Curation Status Specification"@en-US .
 
 vivo:placeOfPublication
-      rdfs:label "place of publication"@en-US , "place of publication"@en-us ;
+      rdfs:label "place of publication"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -294,7 +294,7 @@ vivo:placeOfPublication
               "City in which the publication was done."^^xsd:string .
 
 obo:IAO_0000125
-      rdfs:label "pending final vetting"@en .
+      rdfs:label "pending final vetting"@en-US .
 
 vivo:hasCollaborator
       rdfs:label "collaborator"@en-US ;
@@ -316,7 +316,7 @@ vivo:hasCollaborator
               "true"^^xsd:boolean .
 
 vivo:GovernmentAgency
-      rdfs:label "Government Agency"@en , "Government Agency"@en-US ;
+      rdfs:label "Government Agency"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -328,7 +328,7 @@ vivo:GovernmentAgency
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 skos:narrower
-      rdfs:label "narrower term"@en-us , "narrower term"@en-US ;
+      rdfs:label "narrower term"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -364,17 +364,17 @@ vivo:affiliatedOrganization
               "true"^^xsd:boolean .
 
 <http://aims.fao.org/aos/geopolitical.owl>
-      rdfs:label "Geopolitical Ontology"@en-US , "geopolitical.owl"@en-US ;
+      rdfs:label "Geopolitical Ontology"@en-US ;
       vitro:ontologyPrefixAnnot
               "geo"^^xsd:string .
 
 <http://www.w3.org/2004/02/skos/core>
-      rdfs:label "SKOS"@en-US , "SKOS (Simple Knowledge Organization System)"@en-US ;
+      rdfs:label "SKOS (Simple Knowledge Organization System)"@en-US ;
       vitro:ontologyPrefixAnnot
               "skos"^^xsd:string .
 
 vivo:License
-      rdfs:label "License"@en-us , "License"@en-US ;
+      rdfs:label "License"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -386,10 +386,10 @@ vivo:License
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:hasMonetaryAmount
-      rdfs:label "has monetary amount"@en .
+      rdfs:label "has monetary amount"@en-US .
 
 foaf:Person
-      rdfs:label "Person"@en-US , "Person"@en ;
+      rdfs:label "Person"@en-US ;
       vitro:customDisplayViewAnnot
               "individual--foaf-person.ftl"^^xsd:string ;
       vitro:displayLimitAnnot
@@ -403,13 +403,13 @@ foaf:Person
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:OBI_0000643
-      rdfs:label "has grain"@en .
+      rdfs:label "has grain"@en-US .
 
 vcard:Identification
-      rdfs:label "Identification"@en .
+      rdfs:label "Identification"@en-US .
 
 bibo:pageStart
-      rdfs:label "start page"@en-US , "start page"@en-us ;
+      rdfs:label "start page"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -424,7 +424,7 @@ bibo:pageStart
               "Starting page number within a continuous page range."^^xsd:string .
 
 obo:IAO_0000124
-      rdfs:label "uncurated"@en .
+      rdfs:label "uncurated"@en-US .
 
 geo:countryAreaYear
       rdfs:label "countryAreaYear"@en-US ;
@@ -434,7 +434,7 @@ geo:countryAreaYear
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:reportId
-      rdfs:label "report identifier"@en , "report identifier"@en-US ;
+      rdfs:label "report identifier"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -449,20 +449,20 @@ vivo:reportId
               "Unique identifier for a Report (a type of information resource)."^^xsd:string .
 
 vcard:Security
-      rdfs:label "Security"@en .
+      rdfs:label "Security"@en-US .
 
 vcard:hasCalendarRequest
-      rdfs:label "has calendar request"@en .
+      rdfs:label "has calendar request"@en-US .
 
 geo:hasMinLongitude
-      rdfs:label "hasMinLongitude"@en-US ;
+      rdfs:label "has minimum longitude"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:Manuscript
-      rdfs:label "manuscript"@en , "Manuscript"@en-US ;
+      rdfs:label "manuscript"@en-US , "Manuscript"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -498,13 +498,13 @@ owl:sameAs
               "true"^^xsd:boolean .
 
 obo:IAO_0000123
-      rdfs:label "metadata incomplete"@en .
+      rdfs:label "metadata incomplete"@en-US .
 
 vcard:hasTimeZone
-      rdfs:label "has time zone"@en .
+      rdfs:label "has time zone"@en-US .
 
 vivo:Presentation
-      rdfs:label "Presentation"@en , "Presentation"@en-US ;
+      rdfs:label "Presentation"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -516,22 +516,22 @@ vivo:Presentation
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Other
-      rdfs:label "Other"@en .
+      rdfs:label "Other"@en-US .
 
 vivo:relates
-      rdfs:label "relates"@en .
+      rdfs:label "relates"@en-US .
 
 obo:ERO_0000007
-      rdfs:label "Technique"@en .
+      rdfs:label "Technique"@en-US .
 
 vcard:hasCalendarLink
-      rdfs:label "has calendar link"@en .
+      rdfs:label "has calendar link"@en-US .
 
 vcard:hasRole
-      rdfs:label "has role"@en .
+      rdfs:label "has role"@en-US .
 
 vivo:SubnationalRegion
-      rdfs:label "Subnational Region"@en , "Subnational Region"@en-US ;
+      rdfs:label "Subnational Region"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -542,10 +542,10 @@ vivo:SubnationalRegion
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:IAO_0000102
-      rdfs:label "Data about an Ontology Part"@en .
+      rdfs:label "Data about an Ontology Part"@en-US .
 
 geo:territory
-      rdfs:label "Territory"@en-US , "territory"@en-US ;
+      rdfs:label "Territory"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -556,16 +556,16 @@ geo:territory
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:IAO_0000122
-      rdfs:label "ready for release"@en .
+      rdfs:label "ready for release"@en-US .
 
 vcard:OrganizationName
-      rdfs:label "Organization Name"@en .
+      rdfs:label "Organization Name"@en-US .
 
 obo:ERO_0000076
-      rdfs:label "has input type"@en .
+      rdfs:label "has input type"@en-US .
 
 vivo:researchAreaOf
-      rdfs:label "research area of"@en-us , "research area of"@en-US ;
+      rdfs:label "research area of"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -582,7 +582,7 @@ vivo:researchAreaOf
               "true"^^xsd:boolean .
 
 geo:populationTotal
-      rdfs:label "populationTotal"@en-US ;
+      rdfs:label "total population"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -596,7 +596,7 @@ geo:nationalityFR
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000006
-      rdfs:label "Reagent"@en , "Reagent"@en-US ;
+      rdfs:label "Reagent"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -630,7 +630,7 @@ geo:nameOfficialIT
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:reproduces
-      rdfs:label "reproduces"@en-us , "reproduces"@en-US ;
+      rdfs:label "reproduces"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -645,13 +645,13 @@ vivo:reproduces
               "true"^^xsd:boolean .
 
 obo:IAO_0000300
-      rdfs:label "Textual Entity"@en .
+      rdfs:label "Textual Entity"@en-US .
 
 vcard:calendarRequest
-      rdfs:label "calendar request"@en .
+      rdfs:label "calendar request"@en-US .
 
 vivo:EmeritusFaculty
-      rdfs:label "Faculty Member Emeritus"@en-US , "Faculty Member Emeritus"@en-us ;
+      rdfs:label "Faculty Member Emeritus"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -666,7 +666,7 @@ vcard:organizationalUnitName
       rdfs:label "organizational unit name"@en-US .
 
 vivo:Video
-      rdfs:label "Video"@en-US , "Video"@en ;
+      rdfs:label "Video"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -681,13 +681,13 @@ obo:IAO_0000142
       rdfs:label "mentions" .
 
 vivo:submitted
-      rdfs:label "submitted"@en-us .
+      rdfs:label "submitted"@en-US .
 
 obo:ERO_0000077
-      rdfs:label "has output type"@en .
+      rdfs:label "has output type"@en-US .
 
 bibo:Issue
-      rdfs:label "Issue"@en-US , "Issue"@en ;
+      rdfs:label "Issue"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -702,10 +702,10 @@ obo:IAO_0000121
       rdfs:label "organizational term"@en-US .
 
 vcard:uid
-      rdfs:label "uid"@en .
+      rdfs:label "uid"@en-US .
 
 obo:ERO_0000790
-      rdfs:label "Post-Baccalaureate Trainee"@en .
+      rdfs:label "Post-Baccalaureate Trainee"@en-US .
 
 vitro-public:File
       rdfs:label "File"@en-US ;
@@ -719,7 +719,7 @@ vitro-public:File
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:AcademicYear
-      rdfs:label "Academic Year"@en , "Academic Year"@en-US ;
+      rdfs:label "Academic Year"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -730,7 +730,7 @@ vivo:AcademicYear
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:related
-      rdfs:label "related"@en .
+      rdfs:label "related"@en-US .
 
 geo:nameShortRU
       rdfs:label "nameShortRU"@en-US ;
@@ -752,13 +752,13 @@ geo:codeISO3
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 <http://www.ebi.ac.uk/efo/swo/SWO_0000740>
-      rdfs:label "implements"@en .
+      rdfs:label "implements"@en-US .
 
 vcard:locality
-      rdfs:label "locality"@en .
+      rdfs:label "locality"@en-US .
 
 obo:ERO_0000005
-      rdfs:label "Service"@en .
+      rdfs:label "Service"@en-US .
 
 vitro:moniker
       rdfs:label "moniker (deprecated)"@en-US ;
@@ -774,7 +774,7 @@ vitro:moniker
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#editor> .
 
 obo:ERO_0000078
-      rdfs:label "achieves_objective"@en .
+      rdfs:label "achieves objective"@en-US .
 
 geo:codeFAOSTAT
       rdfs:label "codeFAOSTAT"@en-US ;
@@ -784,7 +784,7 @@ geo:codeFAOSTAT
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 <http://vivoweb.org/ontology/scientific-research#accessProvidedBy>
-      rdfs:label "access provided by"@en-US , "access provided by"@en ;
+      rdfs:label "access provided by"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -793,10 +793,10 @@ geo:codeFAOSTAT
               "true"^^xsd:boolean .
 
 obo:IAO_0000120
-      rdfs:label "metadata complete"@en .
+      rdfs:label "metadata complete"@en-US .
 
 vivo:AttendeeRole
-      rdfs:label "Attendee Role"@en , "Attendee Role"@en-US ;
+      rdfs:label "Attendee Role"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -809,7 +809,7 @@ vivo:AttendeeRole
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:geographicLocationOf
-      rdfs:label "geographic location of"@en-US , "geographic location of"@en ;
+      rdfs:label "geographic location of"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -827,10 +827,10 @@ vivo:geographicLocationOf
               "true"^^xsd:boolean .
 
 vivo:invited
-      rdfs:label "invited"@en-us .
+      rdfs:label "invited"@en-US .
 
 vivo:NewsRelease
-      rdfs:label "News Release"@en , "News Release"@en-US ;
+      rdfs:label "News Release"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -842,7 +842,7 @@ vivo:NewsRelease
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 <http://www.ebi.ac.uk/efo/swo/SWO_0000741>
-      rdfs:label "is encoded in"@en .
+      rdfs:label "is encoded in"@en-US .
 
 geo:codeISO2
       rdfs:label "codeISO2"@en-US ;
@@ -859,7 +859,7 @@ geo:nameOfficialFR
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:Authorship
-      rdfs:label "Authorship"@en-us , "Authorship"@en-US ;
+      rdfs:label "Authorship"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -872,7 +872,7 @@ vivo:Authorship
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000004
-      rdfs:label "Instrument"@en-US , "Instrument"@en ;
+      rdfs:label "Instrument"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -884,7 +884,7 @@ obo:ERO_0000004
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:Workshop
-      rdfs:label "Workshop"@en , "Workshop"@en-US ;
+      rdfs:label "Workshop"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -896,7 +896,7 @@ bibo:Workshop
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:roleContributesTo
-      rdfs:label "contributes to"@en-US , "contributes to"@en-us ;
+      rdfs:label "contributes to"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -907,10 +907,10 @@ vivo:roleContributesTo
               "true"^^xsd:boolean .
 
 vcard:gender
-      rdfs:label "gender"@en .
+      rdfs:label "gender"@en-US .
 
 bibo:pmid
-      rdfs:label "PubMed Identifier"@en-US , "pubmed identifier"@en ;
+      rdfs:label "PubMed Identifier"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -925,7 +925,7 @@ bibo:pmid
               "A PMID (PubMed Identifier or PubMed Unique Identifier) is a unique number assigned to each PubMed citation of life sciences and biomedical scientific journal articles."^^xsd:string .
 
 bibo:Film
-      rdfs:label "Film"@en-US , "Film"@en ;
+      rdfs:label "Film"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -937,7 +937,7 @@ bibo:Film
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:Consortium
-      rdfs:label "Consortium"@en , "Consortium"@en-US ;
+      rdfs:label "Consortium"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -949,7 +949,7 @@ vivo:Consortium
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:Periodical
-      rdfs:label "Periodical"@en-us , "Periodical"@en-US ;
+      rdfs:label "Periodical"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -960,7 +960,7 @@ bibo:Periodical
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 geo:disputed
-      rdfs:label "Disputed"@en-US , "disputed"@en-US ;
+      rdfs:label "Disputed"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -971,7 +971,7 @@ geo:disputed
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:grantDirectCosts
-      rdfs:label "direct costs"@en-US , "direct costs"@en-us ;
+      rdfs:label "direct costs"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -993,7 +993,7 @@ geo:nameListES
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:Continent
-      rdfs:label "Continent"@en-US , "Continent"@en ;
+      rdfs:label "Continent"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1005,7 +1005,7 @@ vivo:Continent
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0001908
-      rdfs:label "objective achieved by operation"@en .
+      rdfs:label "objective achieved by operation"@en-US .
 
 geo:nameOfficialRU
       rdfs:label "nameOfficialRU"@en-US ;
@@ -1015,10 +1015,10 @@ geo:nameOfficialRU
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0001255
-      rdfs:label "Support Service"@en .
+      rdfs:label "Support Service"@en-US .
 
 vivo:features
-      rdfs:label "features"@en-us , "features"@en-US ;
+      rdfs:label "features"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1037,7 +1037,7 @@ vivo:features
               "true"^^xsd:boolean .
 
 vivo:featuredIn
-      rdfs:label "featured in"@en-us , "featured in"@en-US ;
+      rdfs:label "featured in"@en-US ;
       vitro:customEntryFormAnnot
               "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AutocompleteObjectPropertyFormGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
@@ -1060,7 +1060,7 @@ vivo:featuredIn
               "true"^^xsd:boolean .
 
 vivo:Certification
-      rdfs:label "Certification"@en , "Certification"@en-US ;
+      rdfs:label "Certification"@en-US ;
       vitro:displayLimitAnnot
               "2"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1072,7 +1072,7 @@ vivo:Certification
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:ClinicalRole
-      rdfs:label "Clinical Role"@en-US , "Clinical Role"@en ;
+      rdfs:label "Clinical Role"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1085,24 +1085,24 @@ vivo:ClinicalRole
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 geo:hasCurrency
-      rdfs:label "hasCurrency"@en-US ;
+      rdfs:label "has currency"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 geo:landArea
-      rdfs:label "landArea"@en-US ;
+      rdfs:label "land area"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:IAO_0000009
-      rdfs:label "datum label"@en .
+      rdfs:label "Datum Label"@en-US .
 
 vivo:PeerReviewerRole
-      rdfs:label "Peer Reviewer Role"@en , "Peer Reviewer Role"@en-US ;
+      rdfs:label "Peer Reviewer Role"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1115,7 +1115,7 @@ vivo:PeerReviewerRole
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:ExtensionUnit
-      rdfs:label "Extension Unit"@en-US , "Extension Unit"@en ;
+      rdfs:label "Extension Unit"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1127,7 +1127,7 @@ vivo:ExtensionUnit
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:distributor
-      rdfs:label "distributor"@en-us , "distributor"@en-US ;
+      rdfs:label "distributor"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1148,7 +1148,7 @@ bibo:distributor
               "true"^^xsd:boolean .
 
 vivo:eligibleFor
-      rdfs:label "eligible for"@en-US , "eligible for"@en-us ;
+      rdfs:label "eligible for"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1172,13 +1172,13 @@ geo:nameCurrencyRU
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0001254
-      rdfs:label "Transport Service"@en .
+      rdfs:label "Transport Service"@en-US .
 
 vcard:Child
-      rdfs:label "Child"@en .
+      rdfs:label "Child"@en-US .
 
 bibo:affirmedBy
-      rdfs:label "affirmed by"@en , "affirmedBy"@en-US ;
+      rdfs:label "affirmed by"@en-US ;
       vitro:fullPropertyNameAnnot
               "affirmedBy"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -1198,10 +1198,10 @@ vcard:Organizational
       rdfs:label "Organizational"@en-US .
 
 obo:ERO_0000774
-      rdfs:label "has eligibility requirment"@en .
+      rdfs:label "has eligibility requirment"@en-US .
 
 vivo:ServiceProvidingLaboratory
-      rdfs:label "Service-Providing Lab"@en , "Service Providing Lab"@en-US ;
+      rdfs:label "Service Providing Lab"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1213,10 +1213,10 @@ vivo:ServiceProvidingLaboratory
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:assignedBy
-      rdfs:label "assigned by"@en .
+      rdfs:label "assigned by"@en-US .
 
 vivo:Facility
-      rdfs:label "Facility"@en , "Facility"@en-US ;
+      rdfs:label "Facility"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1228,10 +1228,10 @@ vivo:Facility
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:IAO_0000007
-      rdfs:label "Action Specification"@en .
+      rdfs:label "Action Specification"@en-US .
 
 vivo:expirationDate
-      rdfs:label "expiration date"@en-US , "expiration date"@en ;
+      rdfs:label "expiration date"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1248,10 +1248,10 @@ vivo:expirationDate
               "false"^^xsd:boolean .
 
 vcard:Video
-      rdfs:label "Video"@en .
+      rdfs:label "Video"@en-US .
 
 vivo:Meeting
-      rdfs:label "Meeting"@en-US , "Meeting"@en ;
+      rdfs:label "Meeting"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1263,7 +1263,7 @@ vivo:Meeting
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:assignee
-      rdfs:label "assignee"@en-us , "assignee"@en-US ;
+      rdfs:label "assignee"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1282,10 +1282,10 @@ vivo:assignee
               "true"^^xsd:boolean .
 
 obo:ARG_2000022
-      rdfs:label "specialty"@en .
+      rdfs:label "specialty"@en-US .
 
 vivo:Blog
-      rdfs:label "Blog"@en-US , "Blog"@en ;
+      rdfs:label "Blog"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1296,16 +1296,16 @@ vivo:Blog
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 owl:DeprecatedProperty
-      rdfs:label "deprecated property"@en .
+      rdfs:label "deprecated property"@en-US .
 
 obo:ERO_0001257
-      rdfs:label "Data Storage Service"@en .
+      rdfs:label "Data Storage Service"@en-US .
 
 vcard:Kind
-      rdfs:label "VCard Kind"@en .
+      rdfs:label "VCard Kind"@en-US .
 
 bibo:presents
-      rdfs:label "related documents"@en-US , "related documents"@en-us ;
+      rdfs:label "related documents"@en-US ;
       vitro:displayRankAnnot
               "200"^^xsd:int ;
       vitro:fullPropertyNameAnnot
@@ -1324,23 +1324,23 @@ bibo:presents
               "true"^^xsd:boolean .
 
 obo:ERO_0000054
-      rdfs:label "lab data format"@en .
+      rdfs:label "lab data format"@en-US .
 
 obo:IAO_0000144
-      rdfs:label "Conclusion Textual Entity"@en .
+      rdfs:label "Conclusion Textual Entity"@en-US .
 
 geo:hasShortName
-      rdfs:label "hasShortName"@en-US ;
+      rdfs:label "has short name"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:hasTitle
-      rdfs:label "has title"@en .
+      rdfs:label "has title"@en-US .
 
 vivo:PopulatedPlace
-      rdfs:label "Populated Place"@en , "Populated Place"@en-US ;
+      rdfs:label "Populated Place"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1352,10 +1352,10 @@ vivo:PopulatedPlace
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0001811
-      rdfs:label "has format"@en .
+      rdfs:label "has format"@en-US .
 
 vivo:FacultyAdministrativePosition
-      rdfs:label "Faculty Administrative Position"@en-US , "Faculty Administrative Position"@en ;
+      rdfs:label "Faculty Administrative Position"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1368,7 +1368,7 @@ vivo:FacultyAdministrativePosition
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:Equipment
-      rdfs:label "Equipment"@en-US , "Equipment"@en ;
+      rdfs:label "Equipment"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1380,10 +1380,10 @@ vivo:Equipment
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ARG_2000021
-      rdfs:label "Experience"@en .
+      rdfs:label "Experience"@en-US .
 
 bibo:locator
-      rdfs:label "locator"@en-US , "locator"@en ;
+      rdfs:label "locator"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:inPropertyGroupAnnot
@@ -1394,7 +1394,7 @@ bibo:locator
               "A description (often numeric) that locates an item within a containing document or collection."^^xsd:string .
 
 bibo:Article
-      rdfs:label "Article"@en-US , "Article"@en-us ;
+      rdfs:label "Article"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouppublications> ;
@@ -1402,7 +1402,7 @@ bibo:Article
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:Position
-      rdfs:label "Position"@en-us , "Position"@en-US ;
+      rdfs:label "Position"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1415,7 +1415,7 @@ vivo:Position
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0001256
-      rdfs:label "Material Storage Service"@en .
+      rdfs:label "Material Storage Service"@en-US .
 
 geo:GDPYear
       rdfs:label "GDPYear"@en-US ;
@@ -1425,7 +1425,7 @@ geo:GDPYear
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:degree
-      rdfs:label "related degree"@en-US , "related degree"@en-us ;
+      rdfs:label "related degree"@en-US ;
       vitro:fullPropertyNameAnnot
               "degree"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -1442,7 +1442,7 @@ bibo:degree
               "true"^^xsd:boolean .
 
 vivo:Laboratory
-      rdfs:label "Laboratory"@en-US , "Laboratory"@en-us ;
+      rdfs:label "Laboratory"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1454,7 +1454,7 @@ vivo:Laboratory
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:localAwardId
-      rdfs:label "local award id"@en-US , "local award ID"@en ;
+      rdfs:label "local award ID"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1469,7 +1469,7 @@ vivo:localAwardId
               "An institution's local identifier assigned to a grant awarded."^^xsd:string .
 
 vivo:IssuedCredential
-      rdfs:label "Issued Credential"@en-US , "Issued Credential"@en-us ;
+      rdfs:label "Issued Credential"@en-US ;
       vitro:displayLimitAnnot
               "2"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1483,13 +1483,13 @@ vivo:IssuedCredential
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ARG_0000197
-      rdfs:label "health care provider ID"@en .
+      rdfs:label "health care provider ID"@en-US .
 
 vcard:hasTelephone
-      rdfs:label "has telephone"@en .
+      rdfs:label "has telephone"@en-US .
 
 vivo:iclCode
-      rdfs:label "International Classification (ICL) code"@en-US , "international classification (icl) code"@en ;
+      rdfs:label "International Classification (ICL) code"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1505,7 +1505,7 @@ vivo:iclCode
 """^^xsd:string .
 
 bibo:presentedAt
-      rdfs:label "presented at"@en-US , "presented at"@en-us ;
+      rdfs:label "presented at"@en-US ;
       vitro:displayRankAnnot
               "200"^^xsd:int ;
       vitro:fullPropertyNameAnnot
@@ -1524,14 +1524,14 @@ bibo:presentedAt
               "true"^^xsd:boolean .
 
 geo:agriculturalArea
-      rdfs:label "agriculturalArea"@en-US ;
+      rdfs:label "agricultural area"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:publisherOf
-      rdfs:label "publisher of"@en-US , "publisher of"@en ;
+      rdfs:label "publisher of"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1552,13 +1552,13 @@ vivo:publisherOf
               "true"^^xsd:boolean .
 
 obo:ERO_0001259
-      rdfs:label "Material Maintenance Service"@en .
+      rdfs:label "Material Maintenance Service"@en-US .
 
 vcard:Home
-      rdfs:label "Home"@en .
+      rdfs:label "Home"@en-US .
 
 vivo:TeacherRole
-      rdfs:label "Teacher Role"@en-US , "Teacher Role"@en ;
+      rdfs:label "Teacher Role"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1571,10 +1571,10 @@ vivo:TeacherRole
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:hasGeo
-      rdfs:label "has geo"@en .
+      rdfs:label "has geo"@en-US .
 
 vcard:url
-      rdfs:label "URL"@en .
+      rdfs:label "URL"@en-US .
 
 obo:BFO_0000019
       rdfs:label "Quality" .
@@ -1587,10 +1587,10 @@ geo:population
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Geographical
-      rdfs:label "Geographical"@en .
+      rdfs:label "Geographical"@en-US .
 
 vivo:Dataset
-      rdfs:label "Dataset"@en , "Dataset"@en-US ;
+      rdfs:label "Dataset"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1601,25 +1601,13 @@ vivo:Dataset
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Unknown
-      rdfs:label "Unknown"@en .
+      rdfs:label "Unknown"@en-US .
 
 vcard:Pager
-      rdfs:label "Pager"@en .
-
-vivo:Software
-      rdfs:label "Software"@en-US , "Software"@en-us ;
-      vitro:displayLimitAnnot
-              "-1"^^xsd:int ;
-      vitro:displayRankAnnot
-              "-1"^^xsd:int ;
-      vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouppublications> ;
-      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
+      rdfs:label "Pager"@en-US .
 
 vivo:Contract
-      rdfs:label "Contract"@en , "Contract"@en-US ;
+      rdfs:label "Contract"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1631,7 +1619,7 @@ vivo:Contract
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:Hearing
-      rdfs:label "Hearing"@en-US , "Hearing"@en ;
+      rdfs:label "Hearing"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1643,13 +1631,13 @@ bibo:Hearing
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0001258
-      rdfs:label "Maintenance Service"@en .
+      rdfs:label "Maintenance Service"@en-US .
 
 obo:UO_0000280
-      rdfs:label "Rate Unit"@en .
+      rdfs:label "Rate Unit"@en-US .
 
 bibo:Brief
-      rdfs:label "Brief"@en , "Brief"@en-US ;
+      rdfs:label "Brief"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1660,7 +1648,7 @@ bibo:Brief
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:DateTimeValue
-      rdfs:label "date/time value instance"@en , "Date/Time Value"@en-US ;
+      rdfs:label "Date/Time Value"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1673,7 +1661,7 @@ vivo:DateTimeValue
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:reproducedIn
-      rdfs:label "reproduced in"@en-US , "reproduced in"@en-us ;
+      rdfs:label "reproduced in"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1690,20 +1678,20 @@ bibo:reproducedIn
               "true"^^xsd:boolean .
 
 vcard:Voice
-      rdfs:label "Voice"@en .
+      rdfs:label "Voice"@en-US .
 
 geo:hasListName
-      rdfs:label "hasListName"@en-US ;
+      rdfs:label "has list name"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Emergency
-      rdfs:label "Emergency"@en .
+      rdfs:label "Emergency"@en-US .
 
 bibo:suffixName
-      rdfs:label "name suffix"@en-US , "name suffix"@en-us ;
+      rdfs:label "name suffix"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1718,7 +1706,7 @@ bibo:suffixName
               "If applicable, please enter the preferred name suffix.  Only one may be entered."^^xsd:string .
 
 bibo:asin
-      rdfs:label "asin"@en-US , "ASIN"@en ;
+      rdfs:label "ASIN"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -1729,7 +1717,7 @@ bibo:asin
               "The Amazon Standard Identification Number (ASIN) is a unique identification number assigned by Amazon.com and its partners for product identification within the Amazon.com organization."^^xsd:string .
 
 vivo:outreachOverview
-      rdfs:label "outreach overview"@en-US , "outreach overview"@en ;
+      rdfs:label "outreach overview"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1744,13 +1732,13 @@ vivo:outreachOverview
               "Please enter a single summary narrative of your outreach goals and/or contributions"^^xsd:string .
 
 vcard:Address
-      rdfs:label "Address"@en .
+      rdfs:label "Address"@en-US .
 
 obo:ERO_0000031
-      rdfs:label "uses"@en .
+      rdfs:label "uses"@en-US .
 
 vivo:Librarian
-      rdfs:label "Librarian"@en-US , "Librarian"@en-us ;
+      rdfs:label "Librarian"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1762,7 +1750,7 @@ vivo:Librarian
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000050
-      rdfs:label "model number"@en .
+      rdfs:label "model number"@en-US .
 
 geo:nameCurrencyFR
       rdfs:label "nameCurrencyFR"@en-US ;
@@ -1772,10 +1760,10 @@ geo:nameCurrencyFR
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:BFO_0000017
-      rdfs:label "Realizable Entity"@en .
+      rdfs:label "Realizable Entity"@en-US .
 
 obo:IAO_0000410
-      rdfs:label "universal"@en .
+      rdfs:label "universal"@en-US .
 
 vivo:hasGoverningAuthority
       rdfs:label "governing authority"@en-US ;
@@ -1795,16 +1783,16 @@ vivo:hasGoverningAuthority
               "true"^^xsd:boolean .
 
 obo:ERO_0000715
-      rdfs:label "Risk Management"@en .
+      rdfs:label "Risk Management"@en-US .
 
 vcard:additionalName
-      rdfs:label "additional name"@en .
+      rdfs:label "additional name"@en-US .
 
 obo:ARG_2000080
-      rdfs:label "american board of pediatrics"@en .
+     rdfs:label "American Board of Pediatrics"@en-US .
 
 bibo:AcademicArticle
-      rdfs:label "Academic Article"@en-us , "Academic Article"@en-US ;
+      rdfs:label "Academic Article"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1828,7 +1816,7 @@ geo:geographical_region
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:doi
-      rdfs:label "Digital Object Identifier (DOI)"@en-US , "Digital Object Identifier (DOI)"@en-us ;
+      rdfs:label "Digital Object Identifier (DOI)"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1849,16 +1837,16 @@ bibo:doi
               "true"^^xsd:boolean .
 
 bibo:accepted
-      rdfs:label "accepted"@en-us , "accepted"@en .
+      rdfs:label "accepted"@en-US .
 
 obo:ERO_0000070
-      rdfs:label "used by"@en .
+      rdfs:label "used by"@en-US .
 
 vcard:Email
-      rdfs:label "Email"@en .
+      rdfs:label "Email"@en-US .
 
 bibo:shortDescription
-      rdfs:label "short description"@en , "short description"@en-US ;
+      rdfs:label "short description"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -1869,7 +1857,7 @@ bibo:shortDescription
               "An account of the resource."^^xsd:string .
 
 geo:isAdministeredBy
-      rdfs:label "isAdministeredBy"@en-US ;
+      rdfs:label "is administered by"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -1878,13 +1866,13 @@ geo:isAdministeredBy
               "true"^^xsd:boolean .
 
 vcard:hasLogo
-      rdfs:label "has logo"@en .
+      rdfs:label "has logo"@en-US .
 
 vcard:Cell
-      rdfs:label "Cell"@en .
+      rdfs:label "Cell"@en-US .
 
 bibo:volume
-      rdfs:label "volume"@en , "volume"@en-US ;
+      rdfs:label "volume"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1899,10 +1887,10 @@ bibo:volume
               "A volume number."^^xsd:string .
 
 vcard:key
-      rdfs:label "key"@en .
+      rdfs:label "key"@en-US .
 
 bibo:abstract
-      rdfs:label "abstract"@en-us , "abstract"@en-US ;
+      rdfs:label "abstract"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1917,7 +1905,7 @@ bibo:abstract
               "A summary of the resource."^^xsd:string .
 
 vivo:PrincipalInvestigatorRole
-      rdfs:label "Principal Investigator Role"@en , "Principal Investigator Role"@en-US ;
+      rdfs:label "Principal Investigator Role"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1930,7 +1918,7 @@ vivo:PrincipalInvestigatorRole
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:School
-      rdfs:label "School"@en , "School"@en-US ;
+      rdfs:label "School"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1942,7 +1930,7 @@ vivo:School
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000020
-      rdfs:label "Biological Specimen"@en , "Biological Specimen"@en-US ;
+      rdfs:label "Biological Specimen"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1961,7 +1949,7 @@ geo:nameShortFR
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Type
-      rdfs:label "Type"@en .
+      rdfs:label "Type"@en-US .
 
 geo:codeFAOTERM
       rdfs:label "codeFAOTERM"@en-US ;
@@ -1971,10 +1959,10 @@ geo:codeFAOTERM
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:yearMonthDayPrecision
-      rdfs:label "YearMonthDayValue"@en-us .
+      rdfs:label "year-month-day value"@en-US .
 
 vivo:sponsoredBy
-      rdfs:label "award sponsored by"@en-us , "award sponsored by"@en-US ;
+      rdfs:label "award sponsored by"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1991,7 +1979,7 @@ vivo:sponsoredBy
               "true"^^xsd:boolean .
 
 vivo:Review
-      rdfs:label "Review"@en-US , "Review"@en ;
+      rdfs:label "Review"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2003,7 +1991,7 @@ vivo:Review
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 <http://purl.org/spar/c4o/GlobalCitationCount>
-      rdfs:label "Global Citation Count"@en-us , "Global Citation Count"@en-US ;
+      rdfs:label "Global Citation Count"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2014,7 +2002,7 @@ vivo:Review
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:courseCredits
-      rdfs:label "credits"@en-us , "credits"@en-US ;
+      rdfs:label "credits"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2027,16 +2015,16 @@ vivo:courseCredits
               "Number of credits assigned a course by an learning institution."^^xsd:string .
 
 vcard:note
-      rdfs:label "note"@en .
+      rdfs:label "note"@en-US .
 
 obo:ERO_0000779
-      rdfs:label "Permanent Resident Role"@en .
+      rdfs:label "Permanent Resident Role"@en-US .
 
 obo:IAO_0000226
-      rdfs:label "placeholder removed"@en .
+      rdfs:label "placeholder removed"@en-US .
 
 bibo:issue
-      rdfs:label "issue"@en , "issue"@en-US ;
+      rdfs:label "issue"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2049,10 +2037,10 @@ bibo:issue
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ARG_2000069
-      rdfs:label "American Board of Emergency Medicine"@en .
+      rdfs:label "American Board of Emergency Medicine"@en-US .
 
 vivo:University
-      rdfs:label "University"@en-us , "University"@en-US ;
+      rdfs:label "University"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2064,7 +2052,7 @@ vivo:University
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:number
-      rdfs:label "number"@en , "number"@en-US ;
+      rdfs:label "number"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2079,10 +2067,10 @@ bibo:number
               "A generic item or document number. Not to be confused with issue number. A barcode, perhaps?"^^xsd:string .
 
 obo:RO_0001025
-      rdfs:label "located in"@en .
+      rdfs:label "located in"@en-US .
 
 vivo:Location
-      rdfs:label "Location"@en , "Location"@en-US ;
+      rdfs:label "Location"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2096,7 +2084,7 @@ vivo:Location
       rdfs:label "OCRe study protocol"@en-US .
 
 vivo:WorkingPaper
-      rdfs:label "Working Paper"@en-US , "Working Paper"@en-us ;
+      rdfs:label "Working Paper"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2108,27 +2096,27 @@ vivo:WorkingPaper
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 geo:hasStatistics
-      rdfs:label "hasStatistics"@en-US ;
+      rdfs:label "has statistics"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:IAO_0000013
-      rdfs:label "Journal Article"@en .
+      rdfs:label "Journal Article"@en-US .
 
 obo:ARG_2000081
-      rdfs:label "American Board of Physical Medicine and Rehabilitation"@en .
+      rdfs:label "American Board of Physical Medicine and Rehabilitation"@en-US .
 
 geo:populationUnit
-      rdfs:label "populationUnit"@en-US ;
+      rdfs:label "population unit"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:teachingOverview
-      rdfs:label "teaching overview"@en , "teaching overview"@en-US ;
+      rdfs:label "teaching overview"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2143,10 +2131,10 @@ vivo:teachingOverview
               "Please enter a single narrative summary description of your teaching activities, goals, and/or experience"^^xsd:string .
 
 obo:IAO_0000227
-      rdfs:label "terms merged"@en .
+      rdfs:label "terms merged"@en-US .
 
 vivo:rank
-      rdfs:label "rank"@en-us , "rank"@en-US ;
+      rdfs:label "rank"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -2155,10 +2143,10 @@ vivo:rank
               "enter the position in the list that you would like this item displayed"^^xsd:string .
 
 bibo:draft
-      rdfs:label "draft"@en-us .
+      rdfs:label "draft"@en-US .
 
 bibo:issn
-      rdfs:label "International Standard Serial Number (ISSN)"@en-us , "International Standard Serial Number (ISSN)"@en-US ;
+      rdfs:label "International Standard Serial Number (ISSN)"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -2169,7 +2157,7 @@ bibo:issn
               "An International Standard Serial Number (ISSN) is a unique eight-digit number used to identify a periodical publication."^^xsd:string .
 
 vivo:supports
-      rdfs:label "supports"@en-us , "supports"@en-US ;
+      rdfs:label "supports"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -2180,10 +2168,10 @@ vivo:supports
               "true"^^xsd:boolean .
 
 obo:RO_0000057
-      rdfs:label "has participant"@en .
+      rdfs:label "has participant"@en-US .
 
 vivo:patentNumber
-      rdfs:label "patent number"@en , "patent number"@en-US ;
+      rdfs:label "patent number"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2198,16 +2186,16 @@ vivo:patentNumber
               "Unique number assigned to a patent application when the United States Patent and Trademark Office issues as a patent."^^xsd:string .
 
 vcard:FormattedName
-      rdfs:label "Formatted Name"@en .
+      rdfs:label "Formatted Name"@en-US .
 
 obo:BFO_0000040
-      rdfs:label "Material Entity"@en .
+      rdfs:label "Material Entity"@en-US .
 
 vcard:TelephoneType
-      rdfs:label "Telephone Type"@en .
+      rdfs:label "Telephone Type"@en-US .
 
 bibo:Journal
-      rdfs:label "Journal"@en-us , "Journal"@en-US ;
+      rdfs:label "Journal"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2219,7 +2207,7 @@ bibo:Journal
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:Newspaper
-      rdfs:label "Newspaper"@en-US , "Newspaper"@en ;
+      rdfs:label "Newspaper"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2230,7 +2218,7 @@ bibo:Newspaper
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:source
-      rdfs:label "source"@en .
+      rdfs:label "source"@en-US .
 
 vivo:contactInformation
       rdfs:label "contact information"@en-US ;
@@ -2255,7 +2243,7 @@ geo:nameListEN
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:overview
-      rdfs:label "overview"@en , "overview"@en-US ;
+      rdfs:label "overview"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2269,19 +2257,8 @@ vivo:overview
       vitro:publicDescriptionAnnot
               "A short narrative summary to be used as a single descriptive overview statement."^^xsd:string .
 
-vivo:InformationResource
-      rdfs:label "Information Resource"@en-US ;
-      vitro:displayLimitAnnot
-              "-1"^^xsd:int ;
-      vitro:displayRankAnnot
-              "-1"^^xsd:int ;
-      vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
-
 vivo:description
-      rdfs:label "description"@en-US , "description"@en-us ;
+      rdfs:label "description"@en-US ;
       vitro:displayLimitAnnot
               "3"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2296,26 +2273,26 @@ vivo:description
               "An account of the resource."^^xsd:string .
 
 obo:IAO_0000224
-      rdfs:label "core"@en .
+      rdfs:label "core"@en-US .
 
 geo:hasCode
-      rdfs:label "hasCode"@en-US ;
+      rdfs:label "has code"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ARG_2000084
-      rdfs:label "American Board of Preventive Medicine"@en .
+      rdfs:label "American Board of Preventive Medicine"@en-US .
 
 obo:RO_0000056
-      rdfs:label "participates in"@en .
+      rdfs:label "participates in"@en-US .
 
 vcard:timeZone
-      rdfs:label "timezone"@en .
+      rdfs:label "timezone"@en-US .
 
 <http://purl.org/spar/c4o/hasGlobalCountValue>
-      rdfs:label "has global count value"@en-us , "has global count value"@en-US ;
+      rdfs:label "has global count value"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -2324,10 +2301,10 @@ vcard:timeZone
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:IAO_0000039
-      rdfs:label "has measurement unit label"@en .
+      rdfs:label "has measurement unit label"@en-US .
 
 vivo:Award
-      rdfs:label "Award or Honor"@en-US , "Award or Honor"@en-us ;
+      rdfs:label "Award or Honor"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2339,7 +2316,7 @@ vivo:Award
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:grantSubcontractedThrough
-      rdfs:label "subcontracted through"@en , "subcontracted through"@en-US ;
+      rdfs:label "subcontracted through"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2358,13 +2335,13 @@ vivo:grantSubcontractedThrough
               "true"^^xsd:boolean .
 
 obo:ERO_0001260
-      rdfs:label "Data Maintenance Service"@en .
+      rdfs:label "Data Maintenance Service"@en-US .
 
 vcard:hasNickname
-      rdfs:label "has nickname"@en .
+      rdfs:label "has nickname"@en-US .
 
 bibo:recipient
-      rdfs:label "recipient"@en-us , "recipient"@en-US ;
+      rdfs:label "recipient"@en-US ;
       vitro:fullPropertyNameAnnot
               "recipient"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -2381,7 +2358,7 @@ bibo:recipient
               "true"^^xsd:boolean .
 
 vivo:Building
-      rdfs:label "Building"@en , "Building"@en-US ;
+      rdfs:label "Building"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2393,7 +2370,7 @@ vivo:Building
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:EventSeries
-      rdfs:label "Event Series"@en-us , "Event Series"@en-US ;
+      rdfs:label "Event Series"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2404,7 +2381,7 @@ vivo:EventSeries
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:hasSubjectArea
-      rdfs:label "has subject area"@en-US , "has subject area"@en-us ;
+      rdfs:label "has subject area"@en-US ;
       vitro:customEntryFormAnnot
               "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddAssociatedConceptGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
@@ -2423,19 +2400,19 @@ vivo:hasSubjectArea
               "true"^^xsd:boolean .
 
 obo:ARG_2000083
-      rdfs:label "American Board of Plastic Surgery"@en .
+      rdfs:label "American Board of Plastic Surgery"@en-US .
 
 obo:IAO_0000225
-      rdfs:label "Obsolescence Reason Specification"@en .
+      rdfs:label "Obsolescence Reason Specification"@en-US .
 
 obo:ERO_0000398
-      rdfs:label "is performed by"@en .
+      rdfs:label "is performed by"@en-US .
 
 vcard:hasCalenderBusy
-      rdfs:label "has calendar busy"@en .
+      rdfs:label "has calendar busy"@en-US .
 
 vivo:geographicFocusOf
-      rdfs:label "geographic focus of"@en-US , "geographic focus of"@en ;
+      rdfs:label "geographic focus of"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2450,10 +2427,10 @@ vivo:geographicFocusOf
               "true"^^xsd:boolean .
 
 vcard:hasCategory
-      rdfs:label "has category"@en .
+      rdfs:label "has category"@en-US .
 
 vivo:freetextKeyword
-      rdfs:label "keywords"@en-US , "keywords"@en-us ;
+      rdfs:label "keywords"@en-US ;
       vitro:displayLimitAnnot
               "10"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2466,19 +2443,19 @@ vivo:freetextKeyword
               "Intended for a word or short phrase only where no instance of a controlled vocabulary can be identified. Can also be used to help in highlighting subtle difference in work."^^xsd:string .
 
 obo:BFO_0000004
-      rdfs:label "Independent Continuant"@en .
+      rdfs:label "Independent Continuant"@en-US .
 
 obo:ARG_2000086
-      rdfs:label "American Board of Radiology"@en .
+      rdfs:label "American Board of Radiology"@en-US .
 
 obo:ARG_2000399
       rdfs:label "has contact agent" .
 
 bibo:unpublished
-      rdfs:label "unpublished"@en-us .
+      rdfs:label "unpublished"@en-US .
 
 vivo:Credential
-      rdfs:label "Credential"@en-US , "Credential"@en-us ;
+      rdfs:label "Credential"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2490,7 +2467,7 @@ vivo:Credential
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:identifier
-      rdfs:label "identifier"@en-US , "identifier"@en ;
+      rdfs:label "identifier"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2505,19 +2482,19 @@ bibo:identifier
               "Unique identifier of a document or collection. This data property is not seen or updated by anyone."^^xsd:string .
 
 obo:ERO_0000044
-      rdfs:label "has inventory number"@en .
+      rdfs:label "has inventory number"@en-US .
 
 obo:ERO_0001261
-      rdfs:label "Analysis Service"@en .
+      rdfs:label "Analysis Service"@en-US .
 
 obo:ARG_2000065
-      rdfs:label "American Board of Allergy and Immunology"@en .
+      rdfs:label "American Board of Allergy and Immunology"@en-US .
 
 obo:ERO_0000775
-      rdfs:label "has residency requirement"@en .
+      rdfs:label "has residency requirement"@en-US .
 
 bibo:reviewOf
-      rdfs:label "review of"@en , "review of"@en-US ;
+      rdfs:label "review of"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2538,10 +2515,10 @@ bibo:reviewOf
               "true"^^xsd:boolean .
 
 obo:ERO_0001263
-      rdfs:label "Material Modification Service"@en .
+      rdfs:label "Material Modification Service"@en-US .
 
 vivo:informationResourceSupportedBy
-      rdfs:label "supported by"@en-us , "supported by"@en-US ;
+      rdfs:label "supported by"@en-US , "supported by"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -2554,10 +2531,10 @@ vivo:informationResourceSupportedBy
               "true"^^xsd:boolean .
 
 obo:ERO_0000397
-      rdfs:label "performs"@en .
+      rdfs:label "performs"@en-US .
 
 vivo:ConferencePaper
-      rdfs:label "Conference Paper"@en-US , "Conference Paper"@en-us ;
+      rdfs:label "Conference Paper"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2576,7 +2553,7 @@ geo:landAreaYear
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:Website
-      rdfs:label "Website"@en-us , "Website"@en-US ;
+      rdfs:label "Website"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2588,7 +2565,7 @@ bibo:Website
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0001057
-      rdfs:label "has preparation technique"@en .
+      rdfs:label "has preparation technique"@en-US .
 
 obo:BFO_0000003
       rdfs:label "Occurrent" .
@@ -2601,22 +2578,22 @@ geo:nationalityIT
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:EducationalProcess
-      rdfs:label "Educational Process"@en-us .
+      rdfs:label "Educational Process"@en-US .
 
 obo:ERO_0000776
-      rdfs:label "US Resident Role"@en .
+      rdfs:label "US Resident Role"@en-US .
 
 obo:ARG_2000066
-      rdfs:label "American Board of Anesthesiology"@en .
+      rdfs:label "American Board of Anesthesiology"@en-US .
 
 obo:ARG_0000001
-      rdfs:label "is template"@en .
+      rdfs:label "is template"@en-US .
 
 obo:RO_0000053
-      rdfs:label "bearer of"@en .
+      rdfs:label "bearer of"@en-US .
 
 bibo:CollectedDocument
-      rdfs:label "Collected Document"@en-US , "Collected Document"@en-us ;
+      rdfs:label "Collected Document"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2627,10 +2604,10 @@ bibo:CollectedDocument
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ARG_2000085
-      rdfs:label "American Board of Psychiatry and Neurology"@en .
+      rdfs:label "American Board of Psychiatry and Neurology"@en-US .
 
 vivo:Relationship
-      rdfs:label "Relationship"@en-US , "Relationship"@en ;
+      rdfs:label "Relationship"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2641,16 +2618,13 @@ vivo:Relationship
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:BFO_0000023
-      rdfs:label "Role"@en-us .
-
-obo:ARG_2000398
-      rdfs:label "has url link"@en .
+      rdfs:label "Role"@en-US .
 
 obo:ERO_0000045
-      rdfs:label "has restriction"@en .
+      rdfs:label "has restriction"@en-US .
 
 vivo:Division
-      rdfs:label "division"@en , "Division"@en-US ;
+      rdfs:label "Division"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2662,7 +2636,7 @@ vivo:Division
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:Newsletter
-      rdfs:label "newsletter"@en , "Newsletter"@en-US ;
+      rdfs:label "Newsletter"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2674,19 +2648,19 @@ vivo:Newsletter
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0001262
-      rdfs:label "Data Analysis Service"@en .
+      rdfs:label "Data Analysis Service"@en-US .
 
 vcard:hasKey
-      rdfs:label "has key"@en .
+      rdfs:label "has key"@en-US .
 
 obo:ERO_0000396
-      rdfs:label "Material Production Service"@en .
+      rdfs:label "Material Production Service"@en-US .
 
 vcard:TimeZone
-      rdfs:label "Time Zone"@en .
+      rdfs:label "Time Zone"@en-US .
 
 vivo:reviewedIn
-      rdfs:label "reviewed in"@en-US , "reviewed in"@en-us ;
+      rdfs:label "reviewed in"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2703,7 +2677,7 @@ vivo:reviewedIn
               "true"^^xsd:boolean .
 
 vivo:contributingRole
-      rdfs:label "contributor"@en-us , "contributor"@en-US ;
+      rdfs:label "contributor"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -2716,7 +2690,7 @@ vivo:contributingRole
               "true"^^xsd:boolean .
 
 vivo:Team
-      rdfs:label "Team"@en , "Team"@en-US ;
+      rdfs:label "Team"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2731,7 +2705,7 @@ obo:BFO_0000002
       rdfs:label "Continuant" .
 
 vivo:ClinicalOrganization
-      rdfs:label "Clinical Organization"@en , "Clinical Organization"@en-US ;
+      rdfs:label "Clinical Organization"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2743,10 +2717,10 @@ vivo:ClinicalOrganization
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:IAO_0000229
-      rdfs:label "term split"@en .
+      rdfs:label "term split"@en-US .
 
 vivo:Program
-      rdfs:label "Program"@en , "Program"@en-US ;
+      rdfs:label "Program"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2758,7 +2732,7 @@ vivo:Program
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:Hospital
-      rdfs:label "Hospital"@en , "Hospital"@en-US ;
+      rdfs:label "Hospital"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2770,7 +2744,7 @@ vivo:Hospital
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:ThesisDegree
-      rdfs:label "Thesis Degree"@en-US , "Thesis Degree"@en-us ;
+      rdfs:label "Thesis Degree"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2781,7 +2755,7 @@ bibo:ThesisDegree
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:Center
-      rdfs:label "Center"@en , "Center"@en-US ;
+      rdfs:label "Center"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2799,11 +2773,8 @@ geo:countryArea
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
-obo:ARG_2000397
-      rdfs:label "url link for"@en .
-
 vivo:DateTimeValuePrecision
-      rdfs:label "Date/Time Value Precision"@en-us , "Date/Time Value Precision"@en-US ;
+      rdfs:label "Date/Time Value Precision"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2814,7 +2785,7 @@ vivo:DateTimeValuePrecision
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:GraduateAdvisingRelationship
-      rdfs:label "Graduate Advising Relationship"@en , "Graduate Advising Relationship"@en-US ;
+      rdfs:label "Graduate Advising Relationship"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2825,13 +2796,13 @@ vivo:GraduateAdvisingRelationship
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:RO_0000052
-      rdfs:label "inheres in"@en .
+      rdfs:label "inheres in"@en-US .
 
 obo:OBI_0000299
-      rdfs:label "has specified output"@en .
+      rdfs:label "has specified output"@en-US .
 
 vivo:proceedingsOf
-      rdfs:label "proceedings of"@en-US , "proceedings of"@en-us ;
+      rdfs:label "proceedings of"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2855,13 +2826,13 @@ obo:ERO_0000777
       rdfs:label "US Citizen Role"@en .
 
 obo:ARG_2000067
-      rdfs:label "American Board of Colon and Rectal Surgery"@en .
+      rdfs:label "American Board of Colon and Rectal Surgery"@en-US .
 
 obo:IAO_0000228
-      rdfs:label "term imported"@en .
+      rdfs:label "term imported"@en-US .
 
 bibo:Thesis
-      rdfs:label "Thesis"@en-us , "Thesis"@en-US ;
+      rdfs:label "Thesis"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2873,16 +2844,16 @@ bibo:Thesis
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000046
-      rdfs:label "has geographic restriction"@en .
+      rdfs:label "has geographic restriction"@en-US .
 
 obo:ARG_2000088
-      rdfs:label "American Board of Thoracic Surgery"@en .
+      rdfs:label "American Board of Thoracic Surgery"@en-US .
 
 obo:ERO_0000395
-      rdfs:label "Material Analysis Service"@en .
+      rdfs:label "Material Analysis Service"@en-US .
 
 geo:isSuccessorOf
-      rdfs:label "isSuccessorOf"@en-US ;
+      rdfs:label "is successor of"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -2891,7 +2862,7 @@ geo:isSuccessorOf
               "true"^^xsd:boolean .
 
 geo:agriculturalAreaUnit
-      rdfs:label "agriculturalAreaUnit"@en-US ;
+      rdfs:label "agricultural area unit"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -2901,10 +2872,10 @@ obo:BFO_0000001
       rdfs:label "Entity" .
 
 vivo:AdvisorRole
-      rdfs:label "Advisor Role"@en .
+      rdfs:label "Advisor Role"@en-US .
 
 vivo:dateTimePrecision
-      rdfs:label "date/time precision"@en-US , "date/time precision"@en ;
+      rdfs:label "date/time precision"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2917,7 +2888,7 @@ vivo:dateTimePrecision
               "true"^^xsd:boolean .
 
 bibo:Map
-      rdfs:label "Map"@en , "Map"@en-US ;
+      rdfs:label "Map"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2928,10 +2899,10 @@ bibo:Map
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ARG_2000087
-      rdfs:label "American Board of Surgery"@en .
+      rdfs:label "American Board of Surgery"@en-US .
 
 geo:self_governing
-      rdfs:label "Self Governing"@en-US , "Self Governing"@en , "self_governing"@en-US ;
+      rdfs:label "Self Governing"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2942,7 +2913,7 @@ geo:self_governing
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:hasPrerequisite
-      rdfs:label "has prerequisite"@en-US , "has prerequisite"@en ;
+      rdfs:label "has prerequisite"@en-US ;
       vitro:fullPropertyNameAnnot
               "hasPrerequisite"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -2953,7 +2924,7 @@ vivo:hasPrerequisite
               "true"^^xsd:boolean .
 
 vivo:Database
-      rdfs:label "Database"@en-us , "Database"@en-US ;
+      rdfs:label "Database"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2965,16 +2936,16 @@ vivo:Database
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000778
-      rdfs:label "Non-US Citizen"@en .
+      rdfs:label "Non-US Citizen"@en-US .
 
 obo:ARG_2000068
-      rdfs:label "American Board of Dermatology"@en .
+      rdfs:label "American Board of Dermatology"@en-US .
 
 vivo:PresentingProcess
-      rdfs:label "Presenting Process"@en .
+      rdfs:label "Presenting Process"@en-US .
 
 vivo:validIn
-      rdfs:label "valid in"@en-US , "valid in"@en-us ;
+      rdfs:label "valid in"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -2989,10 +2960,10 @@ vivo:validIn
               "true"^^xsd:boolean .
 
 obo:IAO_0000221
-      rdfs:label "is quality measurement of"@en .
+      rdfs:label "is quality measurement of"@en-US .
 
 bibo:Conference
-      rdfs:label "Conference"@en-US , "Conference"@en-us ;
+      rdfs:label "Conference"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3004,10 +2975,10 @@ bibo:Conference
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Calendar
-      rdfs:label "Calendar"@en .
+      rdfs:label "Calendar"@en-US .
 
 vivo:Department
-      rdfs:label "Department"@en-US , "Department"@en ;
+      rdfs:label "Department"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3019,13 +2990,13 @@ vivo:Department
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:RO_0002234
-      rdfs:label "has output"@en .
+      rdfs:label "has output"@en-US .
 
 obo:BFO_0000020
-      rdfs:label "Specifically Dependent Continuant"@en .
+      rdfs:label "Specifically Dependent Continuant"@en-US .
 
 vivo:F1000Link
-      rdfs:label "F1000 Link"@en , "F1000 Link"@en-US ;
+      rdfs:label "F1000 Link"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3036,7 +3007,7 @@ vivo:F1000Link
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:BlogPosting
-      rdfs:label "Blog Posting"@en-us , "Blog Posting"@en-US ;
+      rdfs:label "Blog Posting"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3048,7 +3019,7 @@ vivo:BlogPosting
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:Collection
-      rdfs:label "Collection"@en-US , "Collection"@en-us ;
+      rdfs:label "Collection"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3059,7 +3030,7 @@ bibo:Collection
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:DocumentStatus
-      rdfs:label "Document Status"@en-us , "Document Status"@en-US ;
+      rdfs:label "Document Status"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3070,7 +3041,7 @@ bibo:DocumentStatus
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:PrivateCompany
-      rdfs:label "Private Company"@en-US , "Private Company"@en ;
+      rdfs:label "Private Company"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3082,10 +3053,10 @@ vivo:PrivateCompany
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0001520
-      rdfs:label "performs human study"@en .
+      rdfs:label "performs human study"@en-US .
 
 vivo:AcademicDegree
-      rdfs:label "Academic Degree"@en-US , "Academic Degree"@en-us ;
+      rdfs:label "Academic Degree"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3096,7 +3067,7 @@ vivo:AcademicDegree
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:Legislation
-      rdfs:label "Legislation"@en , "Legislation"@en-US ;
+      rdfs:label "Legislation"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3107,10 +3078,10 @@ bibo:Legislation
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:IAO_0000032
-      rdfs:label "Scalar Measurement Datum"@en .
+      rdfs:label "Scalar Measurement Datum"@en-US .
 
 vivo:ReviewerRole
-      rdfs:label "Reviewer Role"@en-US , "Reviewer Role"@en ;
+      rdfs:label "Reviewer Role"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3123,7 +3094,7 @@ vivo:ReviewerRole
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:StateOrProvince
-      rdfs:label "State Or Province"@en-US , "State or Province"@en ;
+      rdfs:label "State or Province"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3135,7 +3106,7 @@ vivo:StateOrProvince
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:pageEnd
-      rdfs:label "end page"@en-US , "end page"@en-us ;
+      rdfs:label "end page"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3150,10 +3121,10 @@ bibo:pageEnd
               "Ending page number within a continuous page range."^^xsd:string .
 
 obo:ARG_2000089
-      rdfs:label "American Board of Urology"@en .
+      rdfs:label "American Board of Urology"@en-US .
 
 bibo:AudioDocument
-      rdfs:label "Audio Document"@en-US , "Audio Document"@en-us ;
+      rdfs:label "Audio Document"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3165,10 +3136,10 @@ bibo:AudioDocument
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:RO_0002233
-      rdfs:label "has input"@en .
+      rdfs:label "has input"@en-US .
 
 geo:isPredecessorOf
-      rdfs:label "isPredecessorOf"@en-US ;
+      rdfs:label "is predecessor of"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -3177,7 +3148,7 @@ geo:isPredecessorOf
               "true"^^xsd:boolean .
 
 vivo:EmeritusLibrarian
-      rdfs:label "Librarian Emeritus"@en-us , "Librarian Emeritus"@en-US ;
+      rdfs:label "Librarian Emeritus"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3189,7 +3160,7 @@ vivo:EmeritusLibrarian
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:LegalDecision
-      rdfs:label "Decision"@en , "Decision"@en-US ;
+      rdfs:label "Decision"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3200,13 +3171,13 @@ bibo:LegalDecision
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Date
-      rdfs:label "Date"@en .
+      rdfs:label "Date"@en-US .
 
 vcard:Photo
-      rdfs:label "Photo"@en .
+      rdfs:label "Photo"@en-US .
 
 obo:ERO_0000029
-      rdfs:label "provides access to"@en , "provides access to"@en-US ;
+      rdfs:label "provides access to"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -3215,10 +3186,10 @@ obo:ERO_0000029
               "true"^^xsd:boolean .
 
 vcard:honorificSuffix
-      rdfs:label "honorific suffix name"@en .
+      rdfs:label "honorific suffix name"@en-US .
 
 <http://purl.org/spar/c4o/hasGlobalCitationFrequency>
-      rdfs:label "has global citation frequency"@en-US , "has global citation frequency"@en-us ;
+      rdfs:label "has global citation frequency"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3242,7 +3213,7 @@ geo:nameListIT
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:cites
-      rdfs:label "cites"@en , "cites"@en-US ;
+      rdfs:label "cites"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3259,13 +3230,13 @@ bibo:cites
               "true"^^xsd:boolean .
 
 vcard:Explanatory
-      rdfs:label "Explanatory"@en .
+      rdfs:label "Explanatory"@en-US .
 
 vcard:Parent
-      rdfs:label "Parent"@en .
+      rdfs:label "Parent"@en-US .
 
 bibo:AudioVisualDocument
-      rdfs:label "Audio-Visual Document"@en-US , "Audio-Visual Document"@en-us ;
+      rdfs:label "Audio-Visual Document"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3276,7 +3247,7 @@ bibo:AudioVisualDocument
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:GeographicRegion
-      rdfs:label "Geographic Region"@en , "Geographic Region"@en-US ;
+      rdfs:label "Geographic Region"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3288,7 +3259,7 @@ vivo:GeographicRegion
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:Country
-      rdfs:label "Country"@en-US , "Country"@en ;
+      rdfs:label "Country"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3300,10 +3271,10 @@ vivo:Country
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:hasEmail
-      rdfs:label "has email"@en .
+      rdfs:label "has email"@en-US .
 
 vivo:Speech
-      rdfs:label "Speech"@en-US , "Speech"@en ;
+      rdfs:label "Speech"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3315,7 +3286,7 @@ vivo:Speech
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:translationOf
-      rdfs:label "translation of"@en , "translation of"@en-us , "translation of"@en-US ;
+      rdfs:label "translation of"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3336,13 +3307,13 @@ bibo:translationOf
               "true"^^xsd:boolean .
 
 obo:IAO_0000033
-      rdfs:label "Directive Information Entity"@en .
+      rdfs:label "Directive Information Entity"@en-US .
 
 vcard:InstantMessage
-      rdfs:label "Messaging"@en .
+      rdfs:label "Messaging"@en-US .
 
 vcard:calendarBusy
-      rdfs:label "calendar busy"@en .
+      rdfs:label "calendar busy"@en-US .
 
 vitro-public:FileByteStream
       rdfs:label "FileByteStream"@en-US ;
@@ -3356,7 +3327,7 @@ vitro-public:FileByteStream
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 geo:hasBorderWith
-      rdfs:label "hasBorderWith"@en-US ;
+      rdfs:label "has border with"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -3365,7 +3336,7 @@ geo:hasBorderWith
               "true"^^xsd:boolean .
 
 bibo:performer
-      rdfs:label "performer"@en , "performer"@en-us , "performer"@en-US ;
+      rdfs:label "performer"@en-US ;
       vitro:fullPropertyNameAnnot
               "performer"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -3382,7 +3353,7 @@ bibo:performer
               "true"^^xsd:boolean .
 
 bibo:PersonalCommunicationDocument
-      rdfs:label "Personal Communication Document"@en-US , "Personal Communication Document"@en ;
+      rdfs:label "Personal Communication Document"@en-US ;
       vitro:displayLimitAnnot
               "2"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3393,7 +3364,7 @@ bibo:PersonalCommunicationDocument
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:FundingOrganization
-      rdfs:label "Funding Organization"@en-us , "Funding Organization"@en-US ;
+      rdfs:label "Funding Organization"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3405,10 +3376,10 @@ vivo:FundingOrganization
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:AwardedDegree
-      rdfs:label "Awarded Degree"@en .
+      rdfs:label "Awarded Degree"@en-US .
 
 vivo:Publisher
-      rdfs:label "Publisher"@en , "Publisher"@en-US ;
+      rdfs:label "Publisher"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3420,21 +3391,10 @@ vivo:Publisher
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:IAO_0000030
-      rdfs:label "Information Content Entity"@en .
-
-vivo:linkURI
-      rdfs:label "link URI"@en-US , "link URI"@en ;
-      vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGrouplinks> ;
-      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:publicDescriptionAnnot
-              "Provides the URL for a hyperlink in VIVO."^^xsd:string .
+      rdfs:label "Information Content Entity"@en-US .
 
 vivo:StudentOrganization
-      rdfs:label "Student Organization"@en , "Student Organization"@en-US ;
+      rdfs:label "Student Organization"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3446,10 +3406,10 @@ vivo:StudentOrganization
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:OBI_0000312
-      rdfs:label "is specified output of"@en .
+      rdfs:label "is specified output of"@en-US .
 
 vivo:supportedInformationResource
-      rdfs:label "supported publications"@en-US , "supported publications"@en-us ;
+      rdfs:label "supported publications"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -3473,14 +3433,14 @@ geo:nameListRU
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 geo:validUntil
-      rdfs:label "validUntil"@en-US ;
+      rdfs:label "valid until"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 geo:hasMember
-      rdfs:label "hasMember"@en-US ;
+      rdfs:label "has member"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -3489,7 +3449,7 @@ geo:hasMember
               "true"^^xsd:boolean .
 
 bibo:eissn
-      rdfs:label "Electronic International Standard Serial Number (EISSN)"@en-US , "Electronic International Standard Serial Number (EISSN)"@en-us ;
+      rdfs:label "Electronic International Standard Serial Number (EISSN)"@en-US ;
       vitro:displayRankAnnot
               "90"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -3509,7 +3469,7 @@ geo:nameOfficialEN
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:Proceedings
-      rdfs:label "Proceedings"@en-US , "Proceedings"@en-us ;
+      rdfs:label "Proceedings"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3521,10 +3481,10 @@ bibo:Proceedings
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:OBI_0000293
-      rdfs:label "has specified input"@en .
+      rdfs:label "has specified input"@en-US .
 
 vivo:publisher
-      rdfs:label "publisher"@en-US , "publisher"@en ;
+      rdfs:label "publisher"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3545,10 +3505,10 @@ vivo:publisher
               "true"^^xsd:boolean .
 
 obo:ARG_2000391
-      rdfs:label "has context"@en .
+      rdfs:label "has context"@en-US .
 
 vivo:Institute
-      rdfs:label "Institute"@en , "Institute"@en-US ;
+      rdfs:label "Institute"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3560,10 +3520,10 @@ vivo:Institute
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:hasAddress
-      rdfs:label "has address"@en .
+      rdfs:label "has address"@en-US .
 
 foaf:Organization
-      rdfs:label "Organization"@en-US , "Organization"@en-us ;
+      rdfs:label "Organization"@en-US ;
       vitro:customDisplayViewAnnot
               "individual--foaf-organization.ftl"^^xsd:string ;
       vitro:displayLimitAnnot
@@ -3584,13 +3544,13 @@ geo:nationalityZH
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000224
-      rdfs:label "Funding Role"@en .
+      rdfs:label "Funding Role"@en-US .
 
 vcard:Code
-      rdfs:label "Code"@en .
+      rdfs:label "Code"@en-US .
 
 vivo:Postdoc
-      rdfs:label "Postdoc"@en-US , "Postdoc"@en-us ;
+      rdfs:label "Postdoc"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3602,7 +3562,7 @@ vivo:Postdoc
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:seatingCapacity
-      rdfs:label "seating capacity"@en , "seating capacity"@en-US ;
+      rdfs:label "seating capacity"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3617,13 +3577,13 @@ vivo:seatingCapacity
               "Number of people who can be seated in a specific room, by physical space available or limitations set by law. "^^xsd:string .
 
 vcard:Sibling
-      rdfs:label "Sibling"@en .
+      rdfs:label "Sibling"@en-US .
 
 vcard:Sweetheart
-      rdfs:label "Sweetheart"@en .
+      rdfs:label "Sweetheart"@en-US .
 
 vivo:ConferencePoster
-      rdfs:label "Conference Poster"@en , "Conference Poster"@en-US ;
+      rdfs:label "Conference Poster"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3635,13 +3595,13 @@ vivo:ConferencePoster
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ARG_2000390
-      rdfs:label "context for"@en .
+      rdfs:label "context for"@en-US .
 
 vcard:anniversary
-      rdfs:label "anniversary"@en .
+      rdfs:label "anniversary"@en-US .
 
 vivo:middleName
-      rdfs:label "middle name or initial"@en-US , "middle name or initial"@en ;
+      rdfs:label "middle name or initial"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3656,7 +3616,7 @@ vivo:middleName
               "The middle name or initial with which you normally identify yourself.  Only one may be entered."^^xsd:string .
 
 vivo:WorkshopSeries
-      rdfs:label "Workshop Series"@en-US , "Workshop Series"@en ;
+      rdfs:label "Workshop Series"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3668,7 +3628,7 @@ vivo:WorkshopSeries
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 event:isAgentIn
-      rdfs:label "is agent in"@en , "is agent in"@en-US ;
+      rdfs:label "is agent in"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:fullPropertyNameAnnot
@@ -3687,7 +3647,7 @@ event:isAgentIn
               "true"^^xsd:boolean .
 
 obo:ERO_0000225
-      rdfs:label "Educator Role"@en .
+      rdfs:label "Educator Role"@en-US .
 
 geo:agriculturalAreaTotal
       rdfs:label "agriculturalAreaTotal"@en-US ;
@@ -3697,7 +3657,7 @@ geo:agriculturalAreaTotal
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 event:Event
-      rdfs:label "Event"@en-us , "Event"@en-US ;
+      rdfs:label "Event"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3709,10 +3669,10 @@ event:Event
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:rejected
-      rdfs:label "rejected"@en-us .
+      rdfs:label "rejected"@en-US .
 
 geo:hasMaxLongitude
-      rdfs:label "hasMaxLongitude"@en-US ;
+      rdfs:label "has maximum longitude"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -3726,10 +3686,10 @@ geo:nationalityEN
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:URL
-      rdfs:label "URL"@en .
+      rdfs:label "URL"@en-US .
 
 vivo:hasPredecessorOrganization
-      rdfs:label "predecessor organization"@en-US , "predecessor organization"@en-us ;
+      rdfs:label "predecessor organization"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3744,7 +3704,7 @@ vivo:hasPredecessorOrganization
               "true"^^xsd:boolean .
 
 vivo:termType
-      rdfs:label "term type"@en-us , "term type"@en-US ;
+      rdfs:label "term type"@en-US ;
       vitro:displayRankAnnot
               "1"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -3755,7 +3715,7 @@ vivo:termType
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:Image
-      rdfs:label "Image"@en-us , "Image"@en-US ;
+      rdfs:label "Image"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3766,10 +3726,10 @@ bibo:Image
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Kin
-      rdfs:label "Kin"@en .
+      rdfs:label "Kin"@en-US .
 
 vivo:AwardReceipt
-      rdfs:label "Award or Honor Receipt"@en-us , "Award or Honor Receipt"@en-US ;
+      rdfs:label "Award or Honor Receipt"@en-US ;
       vitro:extendedLinkedData
               "true"^^xsd:boolean ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -3778,7 +3738,7 @@ vivo:AwardReceipt
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:FacultyMentoringRelationship
-      rdfs:label "Faculty Mentoring Relationship"@en , "Faculty Mentoring Relationship"@en-US ;
+      rdfs:label "Faculty Mentoring Relationship"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3789,7 +3749,7 @@ vivo:FacultyMentoringRelationship
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:Bill
-      rdfs:label "Bill"@en , "Bill"@en-US ;
+      rdfs:label "Bill"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3800,10 +3760,10 @@ bibo:Bill
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:birthdate
-      rdfs:label "birthdate"@en .
+      rdfs:label "birthdate"@en-US .
 
 vivo:CoPrincipalInvestigatorRole
-      rdfs:label "Co-Principal Investigator Role"@en-US , "Co-Principal Investigator Role"@en ;
+      rdfs:label "Co-Principal Investigator Role"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3816,7 +3776,7 @@ vivo:CoPrincipalInvestigatorRole
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:licenseNumber
-      rdfs:label "license number"@en , "license number"@en-US ;
+      rdfs:label "license number"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3831,7 +3791,7 @@ vivo:licenseNumber
               "license number"^^xsd:string .
 
 vivo:FacultyPosition
-      rdfs:label "Faculty Position"@en , "Faculty Position"@en-US ;
+      rdfs:label  "Faculty Position"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3844,16 +3804,16 @@ vivo:FacultyPosition
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Logo
-      rdfs:label "Logo"@en .
+      rdfs:label "Logo"@en-US .
 
 obo:ERO_0000572
-      rdfs:label "used to study"@en .
+      rdfs:label "used to study"@en-US .
 
 obo:RO_0001000
-      rdfs:label "derives from"@en .
+      rdfs:label "derives from"@en-US .
 
 bibo:gtin14
-      rdfs:label "gtin14"@en-US , "gtin14"@en ;
+      rdfs:label "gtin14"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3868,7 +3828,7 @@ bibo:gtin14
               "Global Trade Item Number (GTIN) is an identifier for trade items developed by GS1 (comprising the former EAN International and Uniform Code Council). GTIN is an \"umbrella\" term used to describe the entire family of GS1 data structures for trade items (products and services) identification. GTINs may be 8, 12, 13 or 14 digits long."^^xsd:string .
 
 vivo:AdvisingRelationship
-      rdfs:label "Advising Relationship"@en-us , "Advising Relationship"@en-US ;
+      rdfs:label "Advising Relationship"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3881,7 +3841,7 @@ vivo:AdvisingRelationship
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:entryTerm
-      rdfs:label "entry term"@en-us , "entry term"@en-US ;
+      rdfs:label "entry term"@en-US ;
       vitro:displayRankAnnot
               "40"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -3892,7 +3852,7 @@ vivo:entryTerm
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 <http://purl.org/spar/fabio/ClinicalGuideline>
-      rdfs:label "Clinical Guideline"@en-US , "Clinical Guideline"@en ;
+      rdfs:label "Clinical Guideline"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3904,13 +3864,13 @@ vivo:entryTerm
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Fax
-      rdfs:label "Fax"@en .
+      rdfs:label "Fax"@en-US .
 
 obo:ERO_0001521
-      rdfs:label "human study performed by"@en .
+      rdfs:label "human study performed by"@en-US .
 
 vivo:nihmsid
-      rdfs:label "NIH manuscript submission system ID"@en , "NIH Manuscript Submission System ID"@en-US ;
+      rdfs:label "NIH Manuscript Submission System ID"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -3919,7 +3879,7 @@ vivo:nihmsid
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:AcademicTerm
-      rdfs:label "Academic Term"@en , "Academic Term"@en-US ;
+      rdfs:label "Academic Term"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3930,7 +3890,7 @@ vivo:AcademicTerm
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:section
-      rdfs:label "section"@en , "section"@en-US ;
+      rdfs:label "section"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -3941,7 +3901,7 @@ bibo:section
               "A section number"^^xsd:string .
 
 vivo:CaseStudy
-      rdfs:label "Case Study"@en-US , "Case Study"@en ;
+      rdfs:label "Case Study"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -3960,7 +3920,7 @@ geo:populationYear
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:IAO_0000136
-      rdfs:label "is about"@en .
+      rdfs:label "is about"@en-US .
 
 geo:nationalityES
       rdfs:label "nationalityES"@en-US ;
@@ -3970,10 +3930,10 @@ geo:nationalityES
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Category
-      rdfs:label "Category"@en .
+      rdfs:label "Category"@en-US .
 
 bibo:interviewer
-      rdfs:label "interviewer"@en-US , "interviewer"@en-us ;
+      rdfs:label "interviewer"@en-US ;
       vitro:fullPropertyNameAnnot
               "interviewer"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -3990,7 +3950,7 @@ bibo:interviewer
               "true"^^xsd:boolean .
 
 vcard:None
-      rdfs:label "None"@en .
+      rdfs:label "None"@en-US .
 
 geo:codeUNDP
       rdfs:label "codeUNDP"@en-US ;
@@ -4000,25 +3960,25 @@ geo:codeUNDP
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:BFO_0000029
-      rdfs:label "Site"@en .
+      rdfs:label "Site"@en-US .
 
 foaf:
-      rdfs:label "FOAF"@en-US ;
+      rdfs:label "FOAF (Friend of a Friend)"@en-US ;
       vitro:ontologyPrefixAnnot
               "foaf"^^xsd:string .
 
 vcard:Note
-      rdfs:label "Note"@en .
+      rdfs:label "Note"@en-US .
 
 geo:hasMaxLatitude
-      rdfs:label "hasMaxLatitude"@en-US ;
+      rdfs:label "has maximum latitude"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:DateTimeInterval
-      rdfs:label "Date/Time Interval"@en-US , "Date/Time Interval"@en ;
+      rdfs:label "Date/Time Interval"@en-US ;
       vitro:displayLimitAnnot
               "4"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4031,10 +3991,10 @@ vivo:DateTimeInterval
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:photo
-      rdfs:label "photo"@en .
+      rdfs:label "photo"@en-US .
 
 bibo:Patent
-      rdfs:label "Patent"@en-US , "Patent"@en-us ;
+      rdfs:label "Patent"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4046,16 +4006,16 @@ bibo:Patent
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:hasPhoto
-      rdfs:label "has photo"@en .
+      rdfs:label "has photo"@en-US .
 
 obo:OBI_0500000
-      rdfs:label "Study Design"@en .
+      rdfs:label "Study Design"@en-US .
 
 vivo:OrganizingProcess
-      rdfs:label "Organizing Process"@en .
+      rdfs:label "Organizing Process"@en-US .
 
 vivo:Screenplay
-      rdfs:label "Screenplay"@en-US , "Screenplay"@en ;
+      rdfs:label "Screenplay"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4066,7 +4026,7 @@ vivo:Screenplay
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0001824
-      rdfs:label "has software license"@en .
+      rdfs:label "has software license"@en-US .
 
 geo:nameOfficialAR
       rdfs:label "nameOfficialAR"@en-US ;
@@ -4076,14 +4036,14 @@ geo:nameOfficialAR
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 geo:validSince
-      rdfs:label "validSince"@en-US ;
+      rdfs:label "valid since"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 geo:isInGroup
-      rdfs:label "isInGroup"@en-US ;
+      rdfs:label "is in group"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -4092,7 +4052,7 @@ geo:isInGroup
               "true"^^xsd:boolean .
 
 vivo:EditorialArticle
-      rdfs:label "Editorial Article"@en-US , "Editorial Article"@en ;
+      rdfs:label "Editorial Article"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4104,10 +4064,10 @@ vivo:EditorialArticle
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Neighbor
-      rdfs:label "Neighbor"@en .
+      rdfs:label "Neighbor"@en-US .
 
 <http://vivoweb.org/ontology/scientific-research#Phase4ClinicalTrial>
-      rdfs:label "Phase 4 Clinical Trial"@en , "Phase 4 Clinical Trial"@en-US ;
+      rdfs:label "Phase 4 Clinical Trial"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4119,7 +4079,7 @@ vcard:Neighbor
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:orcidId
-      rdfs:label "ORCID iD"@en , "ORCID id"@en-US ;
+      rdfs:label "ORCID iD"@en-US ;
       vitro:customEntryFormAnnot
               "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddOrcidIdToPersonGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
@@ -4155,7 +4115,7 @@ vivo:hasFacility
               "true"^^xsd:boolean .
 
 vcard:Text
-      rdfs:label "Text"@en .
+      rdfs:label "Text"@en-US .
 
 obo:BFO_0000141
       rdfs:label "Immaterial Entity" .
@@ -4168,7 +4128,7 @@ geo:nameListFR
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 <http://vivoweb.org/ontology/scientific-research#nctId>
-      rdfs:label "National Clinical Trials (NCT) number"@en , "National Clinical Trials (NCT) number"@en-US ;
+      rdfs:label "National Clinical Trials (NCT) number"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4183,7 +4143,7 @@ geo:nameListFR
               "ClinicalTrials.gov registry number"^^xsd:string .
 
 geo:organization
-      rdfs:label "Organization"@en-US , "Organization" , "organization"@en-US ;
+      rdfs:label "Organization"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4194,7 +4154,7 @@ geo:organization
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:Slideshow
-      rdfs:label "Slideshow"@en-US , "Slideshow"@en ;
+      rdfs:label "Slideshow"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4205,7 +4165,7 @@ bibo:Slideshow
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:equipmentFor
-      rdfs:label "equipment for"@en-us , "equipment for"@en-US ;
+      rdfs:label "equipment for"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:fullPropertyNameAnnot
@@ -4231,7 +4191,7 @@ geo:codeGAUL
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:geographicFocus
-      rdfs:label "geographic focus"@en-US , "geographic focus"@en ;
+      rdfs:label "geographic focus"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4248,7 +4208,7 @@ vivo:geographicFocus
               "true"^^xsd:boolean .
 
 bibo:prefixName
-      rdfs:label "name prefix"@en , "name prefix"@en-US ;
+      rdfs:label "name prefix"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4263,7 +4223,7 @@ bibo:prefixName
               "A title placed before a person's name."^^xsd:string .
 
 vcard:Met
-      rdfs:label "Met"@en .
+      rdfs:label "Met"@en-US .
 
 geo:nameShortAR
       rdfs:label "nameShortAR"@en-US ;
@@ -4273,7 +4233,7 @@ geo:nameShortAR
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 <http://purl.org/spar/c4o/BibliographicInformationSource>
-      rdfs:label "Bibliographic Information Source"@en-US , "Bibliographic Information Source"@en-us ;
+      rdfs:label "Bibliographic Information Source"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4284,19 +4244,19 @@ geo:nameShortAR
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:AdviseeRole
-      rdfs:label "Advisee Role"@en .
+      rdfs:label "Advisee Role"@en-US .
 
 vcard:Spouse
-      rdfs:label "Spouse"@en .
+      rdfs:label "Spouse"@en-US .
 
 <http://www.obofoundry.org/ro/ro.owl#has_agent>
-      rdfs:label "has agent"@en .
+      rdfs:label "has agent"@en-US .
 
 bibo:published
-      rdfs:label "published"@en-us .
+      rdfs:label "published"@en-US .
 
 vivo:AcademicDepartment
-      rdfs:label "Academic Department"@en-US , "Academic Department"@en-us ;
+      rdfs:label "Academic Department"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4308,7 +4268,7 @@ vivo:AcademicDepartment
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:researcherId
-      rdfs:label "ISI researcher id"@en-US , "ISI Researcher ID"@en ;
+      rdfs:label "ISI Researcher ID"@en-US ;
       vitro:displayLimitAnnot
               "2"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4323,7 +4283,7 @@ vivo:researcherId
               "The identification number given to the profile created by a researcher in ResearcherID (http://isiwebofknowledge.com/researcherid/)."^^xsd:string .
 
 vivo:hasPublicationVenue
-      rdfs:label "published in"@en-us , "published in"@en-US ;
+      rdfs:label "published in"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4340,7 +4300,7 @@ vivo:hasPublicationVenue
               "true"^^xsd:boolean .
 
 bibo:Excerpt
-      rdfs:label "Excerpt"@en-US , "Excerpt"@en ;
+      rdfs:label "Excerpt"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4351,7 +4311,7 @@ bibo:Excerpt
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:NonFacultyAcademic
-      rdfs:label "Non-Faculty Academic"@en-US , "Non-Faculty Academic"@en-us ;
+      rdfs:label "Non-Faculty Academic"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4363,7 +4323,7 @@ vivo:NonFacultyAcademic
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:annotates
-      rdfs:label "annotates"@en-US , "annotates"@en ;
+      rdfs:label "annotates"@en-US ;
       vitro:fullPropertyNameAnnot
               "annotates"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -4380,7 +4340,7 @@ bibo:annotates
               "true"^^xsd:boolean .
 
 vivo:Score
-      rdfs:label "Score"@en , "Score"@en-US ;
+      rdfs:label "Score"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4391,7 +4351,7 @@ vivo:Score
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:Grant
-      rdfs:label "Grant"@en-US , "Grant"@en-us ;
+      rdfs:label "Grant"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4410,7 +4370,7 @@ geo:nameOfficialZH
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:reversedBy
-      rdfs:label "reversed by"@en , "reversedBy"@en-US ;
+      rdfs:label "reversed by"@en-US ;
       vitro:fullPropertyNameAnnot
               "reversedBy"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -4427,7 +4387,7 @@ bibo:reversedBy
               "true"^^xsd:boolean .
 
 vivo:majorField
-      rdfs:label "major field of degree"@en-us , "major field of degree"@en-US ;
+      rdfs:label "major field of degree"@en-US ;
       vitro:displayLimitAnnot
               "3"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4442,13 +4402,13 @@ vivo:majorField
               "Major subject focus of the degree being described in an educational background."^^xsd:string .
 
 vivo:Editorship
-      rdfs:label "Editorship"@en .
+      rdfs:label "Editorship"@en-US .
 
 obo:ARG_2000377
-      rdfs:label "FOAF Profile"@en .
+      rdfs:label "FOAF Profile"@en-US .
 
 geo:GDPNotes
-      rdfs:label "GDPNotes"@en-US ;
+      rdfs:label "GDP notes"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -4462,7 +4422,7 @@ geo:nameOfficialES
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:upc
-      rdfs:label "UPC"@en , "upc"@en-US ;
+      rdfs:label "UPC"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -4473,7 +4433,7 @@ bibo:upc
               "The Universal Product Code (UPC) is a barcode symbology (i.e., a specific type of barcode), that is widely used in Canada and the United States for tracking trade items in stores."^^xsd:string .
 
 vivo:FacultyMember
-      rdfs:label "Faculty Member"@en-us , "Faculty Member"@en-US ;
+      rdfs:label "Faculty Member"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4485,10 +4445,10 @@ vivo:FacultyMember
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:IAO_0000428
-      rdfs:label "requires discussion"@en .
+      rdfs:label "requires discussion"@en-US .
 
 vivo:hideFromDisplay
-      rdfs:label "hide from display"@en-us , "hide from display"@en-US ;
+      rdfs:label "hide from display"@en-US ;
       vitro:displayRankAnnot
               "100"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -4497,7 +4457,7 @@ vivo:hideFromDisplay
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#dbAdmin> .
 
 obo:ERO_0000481
-      rdfs:label "realizes protocol"@en-US , "realizes protocol"@en ;
+      rdfs:label "realizes protocol"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -4506,7 +4466,7 @@ obo:ERO_0000481
               "true"^^xsd:boolean .
 
 obo:ERO_0000016
-      rdfs:label "Clinical Trial"@en , "Clinical Trial"@en-US ;
+      rdfs:label "Clinical Trial"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4517,10 +4477,10 @@ obo:ERO_0000016
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:sortAs
-      rdfs:label "sort as"@en .
+      rdfs:label "sort as"@en-US .
 
 <http://vivoweb.org/ontology/scientific-research#irbNumber>
-      rdfs:label "Institutional Review Board (IRB) number"@en-US , "institutional review board (IRB) number"@en ;
+      rdfs:label "Institutional Review Board (IRB) number"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -4531,7 +4491,7 @@ vcard:sortAs
               "Institutional Review Board (IRB) number for a Clinical Trial"^^xsd:string .
 
 vivo:Competition
-      rdfs:label "Competition"@en-US , "Competition"@en ;
+      rdfs:label "Competition"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4543,28 +4503,28 @@ vivo:Competition
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ARG_2000400
-      rdfs:label "count per year"@en .
+      rdfs:label "count per year"@en-US .
 
 obo:ERO_0001518
-      rdfs:label "has phase"@en .
+      rdfs:label "has phase"@en-US .
 
 obo:ARG_2000376
-      rdfs:label "Contact Qualifier"@en .
+      rdfs:label "Contact Qualifier"@en-US .
 
 vivo:AttendingProcess
-      rdfs:label "Attending Process"@en .
+      rdfs:label "Attending Process"@en-US .
 
 vcard:hasLanguage
-      rdfs:label "has language"@en .
+      rdfs:label "has language"@en-US .
 
 vcard:hasURL
-      rdfs:label "has URL"@en .
+      rdfs:label "has URL"@en-US .
 
 obo:ERO_0000482
-      rdfs:label "uses software"@en .
+      rdfs:label "uses software"@en-US .
 
 vivo:ResearchProposal
-      rdfs:label "Research Proposal"@en , "Research Proposal"@en-US ;
+      rdfs:label "Research Proposal"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4576,7 +4536,7 @@ vivo:ResearchProposal
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:director
-      rdfs:label "director"@en-US , "director"@en-us ;
+      rdfs:label "director"@en-US ;
       vitro:fullPropertyNameAnnot
               "director"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -4593,7 +4553,7 @@ bibo:director
               "true"^^xsd:boolean .
 
 vivo:Course
-      rdfs:label "Course"@en-US , "Course"@en-us ;
+      rdfs:label "Course"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4608,7 +4568,7 @@ vivo:Course
       rdfs:label "Vitro internals"^^xsd:string .
 
 bibo:Magazine
-      rdfs:label "Magazine"@en , "Magazine"@en-US ;
+      rdfs:label "Magazine"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4619,7 +4579,7 @@ bibo:Magazine
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:LibrarianPosition
-      rdfs:label "Librarian Position"@en , "Librarian Position"@en-US ;
+      rdfs:label "Librarian Position"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4639,7 +4599,7 @@ geo:nameShortIT
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:Internship
-      rdfs:label "Internship"@en , "Internship"@en-US ;
+      rdfs:label "Internship"@en-US ;
       vitro:displayLimitAnnot
               "10"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4650,16 +4610,16 @@ vivo:Internship
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ARG_2000379
-      rdfs:label "Contact"@en .
+      rdfs:label "Contact"@en-US .
 
 obo:IAO_0000409
-      rdfs:label "Denotator Type"@en .
+      rdfs:label "Denotator Type"@en-US .
 
 vcard:RelatedType
-      rdfs:label "Relation Type"@en .
+      rdfs:label "Relation Type"@en-US .
 
 obo:ERO_0000460
-      rdfs:label "has documentation"@en , "has documentation"@en-US ;
+      rdfs:label "has documentation"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -4670,7 +4630,7 @@ obo:ERO_0000460
               "true"^^xsd:boolean .
 
 vivo:EditorRole
-      rdfs:label "Editor Role"@en , "Editor Role"@en-US ;
+      rdfs:label "Editor Role"@en-US ;
       vitro:displayLimitAnnot
               "2"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4681,7 +4641,7 @@ vivo:EditorRole
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:lccn
-      rdfs:label "Library of Congress Control Number (LCCN)"@en-US , "Library of Congress Control Number (LCCN)"@en-us ;
+      rdfs:label "Library of Congress Control Number (LCCN)"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -4692,10 +4652,10 @@ bibo:lccn
               "The Library of Congress Control Number or LCCN is a serially based system of numbering cataloging records in the Library of Congress in the United States."^^xsd:string .
 
 vcard:streetAddress
-      rdfs:label "street address"@en .
+      rdfs:label "street address"@en-US .
 
 foaf:Group
-      rdfs:label "Group"@en , "Group"@en-US ;
+      rdfs:label "Group"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4707,7 +4667,7 @@ foaf:Group
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:Chapter
-      rdfs:label "Chapter"@en-US , "Chapter"@en ;
+      rdfs:label "Chapter"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4724,7 +4684,7 @@ bibo:Chapter
               "vcard"^^xsd:string .
 
 vivo:Committee
-      rdfs:label "Committee"@en-US , "Committee"@en ;
+      rdfs:label "Committee"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4736,7 +4696,7 @@ vivo:Committee
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:Standard
-      rdfs:label "Standard"@en , "Standard"@en-US ;
+      rdfs:label "Standard"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4747,15 +4707,15 @@ bibo:Standard
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000786
-      rdfs:label "High School Student Role"@en .
+      rdfs:label "High School Student Role"@en-US .
 
 vivo:supportedBy
-      rdfs:label "supported by"@en-us , "supported by"@en-US ;
+      rdfs:label "supported by"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int .
 
 bibo:LegalDocument
-      rdfs:label "Legal Document"@en , "Legal Document"@en-US ;
+      rdfs:label "Legal Document"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4766,7 +4726,7 @@ bibo:LegalDocument
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:CoreLaboratory
-      rdfs:label "Core Laboratory"@en-US , "Core Laboratory"@en ;
+      rdfs:label "Core Laboratory"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4778,7 +4738,7 @@ vivo:CoreLaboratory
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0001245
-      rdfs:label "Licensing"@en .
+      rdfs:label "Licensing"@en-US .
 
 <http://purl.org/dc/terms/relation>
       rdfs:label "relation"@en-US ;
@@ -4798,7 +4758,7 @@ obo:ERO_0001245
               "true"^^xsd:boolean .
 
 skos:broader
-      rdfs:label "broader term"@en-us , "broader term"@en-US ;
+      rdfs:label "broader term"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4819,7 +4779,7 @@ skos:broader
               "true"^^xsd:boolean .
 
 vivo:LeaderRole
-      rdfs:label "Leader Role"@en-US , "Leader Role"@en ;
+      rdfs:label "Leader Role"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4832,10 +4792,10 @@ vivo:LeaderRole
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:AdvisingProcess
-      rdfs:label "Advising Process"@en .
+      rdfs:label "Advising Process"@en-US .
 
 bibo:Webpage
-      rdfs:label "Webpage"@en , "Webpage"@en-US ;
+      rdfs:label "Webpage"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4847,7 +4807,7 @@ bibo:Webpage
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:InvestigatorRole
-      rdfs:label "Investigator Role"@en , "Investigator Role"@en-US ;
+      rdfs:label "Investigator Role"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4860,10 +4820,10 @@ vivo:InvestigatorRole
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:IAO_0000423
-      rdfs:label "to be replaced with external ontology term"@en .
+      rdfs:label "to be replaced with external ontology term"@en-US .
 
 bibo:BookSection
-      rdfs:label "Book Section"@en-US , "Book Section"@en-us ;
+      rdfs:label "Book Section"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4874,7 +4834,7 @@ bibo:BookSection
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:departmentOrSchool
-      rdfs:label "department or school name within institution"@en-us , "department or school name within institution"@en-US ;
+      rdfs:label "department or school name within institution"@en-US ;
       vitro:displayLimitAnnot
               "3"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4889,10 +4849,10 @@ vivo:departmentOrSchool
               "Name of department or school name used when describing educational background."^^xsd:string .
 
 obo:ERO_0000785
-      rdfs:label "Graduate Student Role"@en .
+      rdfs:label "Graduate Student Role"@en-US .
 
 bibo:court
-      rdfs:label "court"@en-US , "Court"@en ;
+      rdfs:label "Court"@en-US ;
       vitro:fullPropertyNameAnnot
               "court"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -4909,17 +4869,17 @@ bibo:court
               "true"^^xsd:boolean .
 
 geo:countryAreaNotes
-      rdfs:label "countryAreaNotes"@en-US ;
+      rdfs:label "country area notes"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000012
-      rdfs:label "Service Provider Role"@en .
+      rdfs:label "Service Provider Role"@en-US .
 
 bibo:Interview
-      rdfs:label "Interview"@en-US , "Interview"@en ;
+      rdfs:label "Interview"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4931,7 +4891,7 @@ bibo:Interview
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 <http://purl.org/spar/c4o/hasGlobalCountDate>
-      rdfs:label "has global count date"@en-US , "has global count date"@en-us ;
+      rdfs:label "has global count date"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4944,7 +4904,7 @@ bibo:Interview
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:Museum
-      rdfs:label "Museum"@en , "Museum"@en-US ;
+      rdfs:label "Museum"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4956,7 +4916,7 @@ vivo:Museum
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:hasAssociatedConcept
-      rdfs:label "associated concept"@en , "associated concept"@en-US ;
+      rdfs:label "associated concept"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4973,10 +4933,10 @@ vivo:hasAssociatedConcept
               "true"^^xsd:boolean .
 
 vcard:role
-      rdfs:label "role"@en .
+      rdfs:label "role"@en-US .
 
 bibo:LegalCaseDocument
-      rdfs:label "Legal Case Document"@en-US , "Legal Case Document"@en ;
+      rdfs:label "Legal Case Document"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4987,7 +4947,7 @@ bibo:LegalCaseDocument
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000784
-      rdfs:label "Undergraduate Student Role"@en .
+      rdfs:label "Undergraduate Student Role"@en-US .
 
 geo:nameCurrencyEN
       rdfs:label "nameCurrencyEN"@en-US ;
@@ -4997,7 +4957,7 @@ geo:nameCurrencyEN
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:offers
-      rdfs:label "offers"@en-US , "offers"@en ;
+      rdfs:label "offers"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5012,7 +4972,7 @@ vivo:offers
               "true"^^xsd:boolean .
 
 bibo:translator
-      rdfs:label "translator"@en-US , "translator"@en-us ;
+      rdfs:label "translator"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5033,7 +4993,7 @@ bibo:translator
               "true"^^xsd:boolean .
 
 obo:ERO_0000015
-      rdfs:label "Human Study"@en , "Human Study"@en-US ;
+      rdfs:label "Human Study"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5045,7 +5005,7 @@ obo:ERO_0000015
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:distributesFundingFrom
-      rdfs:label "distributes funding from"@en-US , "distributes funding from"@en-us ;
+      rdfs:label "distributes funding from"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:fullPropertyNameAnnot
@@ -5064,7 +5024,7 @@ vivo:distributesFundingFrom
               "true"^^xsd:boolean .
 
 bibo:citedBy
-      rdfs:label "cited by"@en , "cited by"@en-US ;
+      rdfs:label "cited by"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5081,7 +5041,7 @@ bibo:citedBy
               "true"^^xsd:boolean .
 
 bibo:Manual
-      rdfs:label "Manual"@en , "Manual"@en-US ;
+      rdfs:label "Manual"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5092,10 +5052,10 @@ bibo:Manual
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000783
-      rdfs:label "Student Role"@en .
+      rdfs:label "Student Role"@en-US .
 
 <http://vivoweb.org/ontology/scientific-research#Phase3ClinicalTrial>
-      rdfs:label "phase 3 clinical trial"@en , "Phase 3 Clinical Trial"@en-US ;
+      rdfs:label "Phase 3 Clinical Trial"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5107,7 +5067,7 @@ obo:ERO_0000783
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 <http://purl.org/spar/fabio/Comment>
-      rdfs:label "Comment"@en-US , "Comment"@en ;
+      rdfs:label "Comment"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5119,7 +5079,7 @@ obo:ERO_0000783
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:TransnationalRegion
-      rdfs:label "Transnational Region"@en , "Transnational Region"@en-US ;
+      rdfs:label "Transnational Region"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5130,7 +5090,7 @@ vivo:TransnationalRegion
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:termLabel
-      rdfs:label "term label"@en-US , "term label"@en-us ;
+      rdfs:label "term label"@en-US ;
       vitro:displayRankAnnot
               "1"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -5141,7 +5101,7 @@ vivo:termLabel
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 skos:related
-      rdfs:label "related"@en-us , "related"@en-US ;
+      rdfs:label "related"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5160,13 +5120,13 @@ skos:related
               "true"^^xsd:boolean .
 
 obo:BFO_0000148
-      rdfs:label "Zero-Dimensional Temporal Region"@en .
+      rdfs:label "Zero-Dimensional Temporal Region"@en-US .
 
 vivo:hasValue
-      rdfs:label "has value"@en .
+      rdfs:label "has value"@en-US .
 
 vivo:abbreviation
-      rdfs:label "abbreviation"@en-us , "abbreviation"@en-US ;
+      rdfs:label "abbreviation"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5177,10 +5137,10 @@ vivo:abbreviation
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:postalCode
-      rdfs:label "postal code"@en .
+      rdfs:label "postal code"@en-US .
 
 obo:ERO_0000014
-      rdfs:label "Research Project"@en-US , "Research Project"@en ;
+      rdfs:label "Research Project"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5192,7 +5152,7 @@ obo:ERO_0000014
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:UndergraduateAdvisingRelationship
-      rdfs:label "Undergraduate Advising Relationship"@en-US , "Undergraduate Advising Relationship"@en ;
+      rdfs:label "Undergraduate Advising Relationship"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5203,7 +5163,7 @@ vivo:UndergraduateAdvisingRelationship
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:NonAcademic
-      rdfs:label "Non-Academic"@en-us , "Non-Academic"@en-US ;
+      rdfs:label "Non-Academic"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5215,7 +5175,7 @@ vivo:NonAcademic
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:PostdocOrFellowAdvisingRelationship
-      rdfs:label "Postdoc or Fellow Advising Relationship"@en-US , "Postdoc or Fellow Advising Relationship"@en ;
+      rdfs:label "Postdoc or Fellow Advising Relationship"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5226,14 +5186,14 @@ vivo:PostdocOrFellowAdvisingRelationship
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:governingAuthorityFor
-      rdfs:label "governing authority for"@en-us , "governing authority for"@en-US ;
+      rdfs:label "governing authority for"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
               "8"^^xsd:int .
 
 vcard:Telephone
-      rdfs:label "Telephone"@en .
+      rdfs:label "Telephone"@en-US .
 
 geo:agriculturalAreaYear
       rdfs:label "agriculturalAreaYear"@en-US ;
@@ -5243,17 +5203,17 @@ geo:agriculturalAreaYear
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Coworker
-      rdfs:label "Coworker"@en .
+      rdfs:label "Coworker"@en-US .
 
 vcard:Communication
-      rdfs:label "Communication"@en .
+      rdfs:label "Communication"@en-US .
 
-obo:  rdfs:label "OBO Foundry"@en-US , "Research Resources (eagle-i)"@en-US ;
+obo:  rdfs:label "OBO Foundry"@en-US ;
       vitro:ontologyPrefixAnnot
-              "obo"^^xsd:string , "ero"^^xsd:string .
+              "obo"^^xsd:string .
 
 vivo:providesFundingThrough
-      rdfs:label "provides funding through"@en , "provides funding through"@en-US ;
+      rdfs:label "provides funding through"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:fullPropertyNameAnnot
@@ -5272,10 +5232,10 @@ vivo:providesFundingThrough
               "true"^^xsd:boolean .
 
 obo:OBI_0001554
-      rdfs:label "Rate Measurement Datum"@en .
+      rdfs:label "Rate Measurement Datum"@en-US .
 
 vivo:GeographicLocation
-      rdfs:label "Geographic Location"@en-US , "Geographic Location"@en ;
+      rdfs:label "Geographic Location"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5287,7 +5247,7 @@ vivo:GeographicLocation
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ARG_2000010
-      rdfs:label "Topic Weight Measurement Process"@en .
+      rdfs:label "Topic Weight Measurement Process"@en-US .
 
 geo:nameCurrencyAR
       rdfs:label "nameCurrencyAR"@en-US ;
@@ -5297,7 +5257,7 @@ geo:nameCurrencyAR
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:end
-      rdfs:label "end"@en-US , "end date value"@en ;
+      rdfs:label "end"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5312,7 +5272,7 @@ vivo:end
               "false"^^xsd:boolean .
 
 bibo:interviewee
-      rdfs:label "interviewee"@en-US , "interviewee"@en-us ;
+      rdfs:label "interviewee"@en-US ;
       vitro:fullPropertyNameAnnot
               "interviewee"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -5329,13 +5289,13 @@ bibo:interviewee
               "true"^^xsd:boolean .
 
 vivo:assigns
-      rdfs:label "assigns"@en .
+      rdfs:label "assigns"@en-US .
 
 vcard:Title
-      rdfs:label "Title"@en .
+      rdfs:label "Title"@en-US .
 
 vivo:researchOverview
-      rdfs:label "research overview"@en , "research overview"@en-US ;
+      rdfs:label "research overview"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5348,7 +5308,7 @@ vivo:researchOverview
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000390
-      rdfs:label "service provided by"@en .
+      rdfs:label "service provided by"@en-US .
 
 skos:Concept
       rdfs:label "Concept"@en-US ;
@@ -5365,7 +5325,7 @@ skos:Concept
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:ResearcherRole
-      rdfs:label "Researcher Role"@en-US , "Researcher Role"@en ;
+      rdfs:label "Researcher Role"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5378,7 +5338,7 @@ vivo:ResearcherRole
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:transcriptOf
-      rdfs:label "transcript of"@en , "transcript of"@en-US ;
+      rdfs:label "transcript of"@en-US ;
       vitro:fullPropertyNameAnnot
               "transcriptOf"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -5395,7 +5355,7 @@ bibo:transcriptOf
               "true"^^xsd:boolean .
 
 vivo:facilityFor
-      rdfs:label "facility for"@en-US , "facility for"@en-us ;
+      rdfs:label "facility for"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:fullPropertyNameAnnot
@@ -5412,7 +5372,7 @@ vivo:facilityFor
               "true"^^xsd:boolean .
 
 bibo:issuer
-      rdfs:label "issuer"@en-US , "issuer"@en-us ;
+      rdfs:label "issuer"@en-US ;
       vitro:fullPropertyNameAnnot
               "issuer"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -5429,7 +5389,7 @@ bibo:issuer
               "true"^^xsd:boolean .
 
 vivo:start
-      rdfs:label "start"@en-US , "start date value"@en ;
+      rdfs:label "start"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5446,15 +5406,15 @@ vivo:start
               "false"^^xsd:boolean .
 
 <http://purl.org/net/OCRe/study_design.owl#Single_group_study>
-      rdfs:label "Single Group Study"@en .
+      rdfs:label "Single Group Study"@en-US .
 
 <http://vitro.mannlib.cornell.edu/ns/vitro/public>
-      rdfs:label "Vitro Public Ontology"@en-US , "Vitro Public Ontology" , "Vitro public constructs"@en , "Vitro public constructs"^^xsd:string ;
+      rdfs:label "Vitro Public Ontology"@en-US ;
       vitro:ontologyPrefixAnnot
               "vitro-public"^^xsd:string .
 
 geo:group
-      rdfs:label "group"@en-US , "Group" , "Group"@en-US ;
+      rdfs:label "Group"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5465,7 +5425,7 @@ geo:group
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000595
-      rdfs:label "Research Opportunity"@en , "Research Opportunity"@en-US ;
+      rdfs:label "Research Opportunity"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5477,7 +5437,7 @@ obo:ERO_0000595
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:oclcnum
-      rdfs:label "Online Computer Library Center (OCLC) number"@en-us , "Online Computer Library Center (OCLC) number"@en-US ;
+      rdfs:label "Online Computer Library Center (OCLC) number"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5492,7 +5452,7 @@ bibo:oclcnum
               "An oclcnum is a sequential accession number assigned by OCLC as bibliographic records are entered into OCLC WorldCat (the OCLC Online Union Catalog)."^^xsd:string .
 
 bibo:isbn10
-      rdfs:label "International Standard Book Number (ISBN) 10"@en-US , "International Standard Book Number (ISBN) 10"@en ;
+      rdfs:label "International Standard Book Number (ISBN) 10"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5507,7 +5467,7 @@ bibo:isbn10
               "The International Standard Book Number (ISBN) is a unique[1][2] numeric commercial book identifier based upon the 9-digit Standard Book Numbering (SBN) code created by Gordon Foster. The 10-digit ISBN format was developed by the International Organization for Standardization and was published in 1970 as international standard ISO 2108."^^xsd:string .
 
 vivo:MedicalResidency
-      rdfs:label "Medical Residency"@en-US , "Medical Residency"@en ;
+      rdfs:label "Medical Residency"@en-US ;
       vitro:displayLimitAnnot
               "10"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5518,7 +5478,7 @@ vivo:MedicalResidency
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:BFO_0000006
-      rdfs:label "Spatial Region"@en .
+      rdfs:label "Spatial Region"@en-US .
 
 geo:nameShortEN
       rdfs:label "nameShortEN"@en-US ;
@@ -5528,10 +5488,10 @@ geo:nameShortEN
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:RO_0003001
-      rdfs:label "produced by"@en .
+      rdfs:label "produced by"@en-US .
 
 <http://purl.org/spar/c4o/hasGlobalCountSource>
-      rdfs:label "has global count source"@en-us , "has global count source"@en-US ;
+      rdfs:label "has global count source"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5555,10 +5515,10 @@ geo:nameCurrencyIT
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:TextPhone
-      rdfs:label "Text Phone"@en .
+      rdfs:label "Text Phone"@en-US .
 
 obo:ERO_0000391
-      rdfs:label "Access Service"@en , "Access Service"@en-US ;
+      rdfs:label "Access Service"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5570,10 +5530,10 @@ obo:ERO_0000391
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Crush
-      rdfs:label "Crush"@en .
+      rdfs:label "Crush"@en-US .
 
 vivo:MemberRole
-      rdfs:label "Member Role"@en-US , "Member Role"@en ;
+      rdfs:label "Member Role"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5586,13 +5546,13 @@ vivo:MemberRole
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Work
-      rdfs:label "Work"@en .
+      rdfs:label "Work"@en-US .
 
 obo:ARG_2000012
-      rdfs:label "Measurement Label"@en .
+      rdfs:label "Measurement Label"@en-US .
 
 obo:ERO_0000780
-      rdfs:label "Non-Permanent Resident Role"@en .
+      rdfs:label "Non-Permanent Resident Role"@en-US .
 
 bibo:
       rdfs:label "Bibontology"@en-US ;
@@ -5603,7 +5563,7 @@ bibo:
       rdfs:label "OCRe statistics"@en-US .
 
 geo:special_group
-      rdfs:label "Special Group"@en-US , "special_group"@en-US ;
+      rdfs:label "Special Group"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5614,23 +5574,23 @@ geo:special_group
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:IAO_0000420
-      rdfs:label "Defined Class"@en .
+      rdfs:label "Defined Class"@en-US .
 
 geo:countryAreaUnit
-      rdfs:label "countryAreaUnit"@en-US ;
+      rdfs:label "country area unit"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000742
-      rdfs:label "Research Electronic Datacapture"@en .
+      rdfs:label "Research Electronic Datacapture"@en-US .
 
 vcard:geo
-      rdfs:label "geo"@en .
+      rdfs:label "geo"@en-US .
 
 vivo:hasSuccessorOrganization
-      rdfs:label "successor organization"@en-us , "successor organization"@en-US ;
+      rdfs:label "successor organization"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5647,10 +5607,10 @@ vivo:hasSuccessorOrganization
               "true"^^xsd:boolean .
 
 obo:RO_0003000
-      rdfs:label "produces"@en .
+      rdfs:label "produces"@en-US .
 
 vivo:prerequisiteFor
-      rdfs:label "prerequisite for"@en-US , "prerequisite for"@en ;
+      rdfs:label "prerequisite for"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5667,7 +5627,7 @@ vivo:prerequisiteFor
               "true"^^xsd:boolean .
 
 bibo:isbn13
-      rdfs:label "International Standard Book Number (ISBN) 13"@en , "International Standard Book Number (ISBN) 13"@en-US ;
+      rdfs:label "International Standard Book Number (ISBN) 13"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5682,7 +5642,7 @@ bibo:isbn13
               "The International Standard Book Number (ISBN) is a unique[1][2] numeric commercial book identifier based upon the 9-digit Standard Book Numbering (SBN) code created by Gordon Foster.Since 1 January 2007, ISBNs have contained 13 digits, a format that is compatible with Bookland EAN-13s."^^xsd:string .
 
 vivo:cclCode
-      rdfs:label "Published US Classification Class/Subclass (CCL) code"@en-US , "published US Classification Class/subclass (CCL) code"@en ;
+      rdfs:label "published US Classification Class/subclass (CCL) code"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5697,14 +5657,14 @@ vivo:cclCode
               "The original and cross-reference US Classification(s) to which the published application was assigned at the time of publication -- includes both primary and secondary class information."^^xsd:string .
 
 geo:hasNationality
-      rdfs:label "hasNationality"@en-US ;
+      rdfs:label "has nationality"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:InvitedTalk
-      rdfs:label "Invited Talk"@en-US , "Invited Talk"@en ;
+      rdfs:label "Invited Talk"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5716,7 +5676,7 @@ vivo:InvitedTalk
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:uri
-      rdfs:label "URI"@en , "URI"@en-US ;
+      rdfs:label "URI"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5731,10 +5691,10 @@ bibo:uri
               "Universal Resource Identifier of a document."^^xsd:string .
 
 vcard:Agent
-      rdfs:label "Agent"@en .
+      rdfs:label "Agent"@en-US .
 
 obo:ERO_0000392
-      rdfs:label "Storage Service"@en , "Storage Service"@en-US ;
+      rdfs:label "Storage Service"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5746,7 +5706,7 @@ obo:ERO_0000392
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:translatorOf
-      rdfs:label "translator of"@en-US , "translator of"@en-us ;
+      rdfs:label "translator of"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5763,7 +5723,7 @@ vivo:translatorOf
               "true"^^xsd:boolean .
 
 bibo:Document
-      rdfs:label "Document"@en-US , "Document"@en-us ;
+      rdfs:label "Document"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5774,7 +5734,7 @@ bibo:Document
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000394
-      rdfs:label "Production Service"@en-US , "Material Processing Service"@en ;
+      rdfs:label "Material Processing Service"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5786,7 +5746,7 @@ obo:ERO_0000394
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ARG_2000011
-      rdfs:label "Expertise Measurement Process"@en .
+      rdfs:label "Expertise Measurement Process"@en-US .
 
 geo:nameCurrencyES
       rdfs:label "nameCurrencyES"@en-US ;
@@ -5796,14 +5756,14 @@ geo:nameCurrencyES
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 geo:countryAreaTotal
-      rdfs:label "countryAreaTotal"@en-US ;
+      rdfs:label "total country area"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:ReferenceSource
-      rdfs:label "Reference Source"@en-US , "Reference Source"@en ;
+      rdfs:label "Reference Source"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5832,7 +5792,7 @@ geo:nationalityRU
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:eanucc13
-      rdfs:label "EAN International-Uniform Code Council (EAN-UCC) 13"@en-us , "EAN International-Uniform Code Council (EAN-UCC) 13"@en-US ;
+      rdfs:label "EAN International-Uniform Code Council (EAN-UCC) 13"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -5843,27 +5803,10 @@ bibo:eanucc13
               "EAN International-Uniform Code Council (EAN-UCC) was a supply chain standards family name, formally the EAN.UCC System, that included product barcodes which are printed on the great majority of products available in stores worldwide and electronic commerce standards."^^xsd:string .
 
 obo:IAO_0000421
-      rdfs:label "Named Class Expression"@en .
-
-vivo:hasCurrentMember
-      rdfs:label "has current member"@en-US ;
-      vitro:fullPropertyNameAnnot
-              "has member"^^xsd:string ;
-      vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
-      vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> ;
-      vitro:offerCreateNewOptionAnnot
-              "true"^^xsd:boolean ;
-      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
-      vitro:publicDescriptionAnnot
-              "This relates a group to its members."^^xsd:string ;
-      vitro:selectFromExistingAnnot
-              "true"^^xsd:boolean .
+      rdfs:label "Named Class Expression"@en-US .
 
 bibo:EditedBook
-      rdfs:label "Edited Book"@en-us , "Edited Book"@en-US ;
+      rdfs:label "Edited Book"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5875,16 +5818,16 @@ bibo:EditedBook
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Male
-      rdfs:label "Male"@en .
+      rdfs:label "Male"@en-US .
 
 vcard:calendarLink
-      rdfs:label "calendar link"@en .
+      rdfs:label "calendar link"@en-US .
 
 obo:BFO_0000008
       rdfs:label "Temporal Region" .
 
 vivo:GeopoliticalEntity
-      rdfs:label "Geopolitical Entity"@en , "Geopolitical Entity"@en-US ;
+      rdfs:label "Geopolitical Entity"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5895,10 +5838,10 @@ vivo:GeopoliticalEntity
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000393
-      rdfs:label "Training Service"@en .
+      rdfs:label "Training Service"@en-US .
 
 vivo:sponsors
-      rdfs:label "sponsors award or honor"@en-US , "sponsors award or honor"@en-us ;
+      rdfs:label "sponsors award or honor"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5915,10 +5858,10 @@ vivo:sponsors
               "true"^^xsd:boolean .
 
 obo:ARG_2000029
-      rdfs:label "contact info for"@en .
+      rdfs:label "contact info for"@en-US .
 
 vivo:Room
-      rdfs:label "Room"@en , "Room"@en-US ;
+      rdfs:label "Room"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5930,7 +5873,7 @@ vivo:Room
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:eRACommonsId
-      rdfs:label "eRA Commons id"@en-US , "ERA Commons ID"@en ;
+      rdfs:label "eRA Commons ID"@en-US ; 
       vitro:displayRankAnnot
               "15"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -5941,13 +5884,13 @@ vivo:eRACommonsId
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Muse
-      rdfs:label "Muse"@en .
+      rdfs:label "Muse"@en-US .
 
 obo:ERO_0000034
-      rdfs:label "has manufacturer"@en .
+      rdfs:label "has manufacturer"@en-US .
 
 geo:area
-      rdfs:label "area"@en-US , "Area"@en-US ;
+      rdfs:label "Area"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5958,10 +5901,10 @@ geo:area
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:productId
-      rdfs:label "product ID"@en .
+      rdfs:label "product ID"@en-US .
 
 <http://purl.org/net/OCRe/study_design.owl#Phase_2>
-      rdfs:label "Phase 2"@en .
+      rdfs:label "Phase 2"@en-US .
 
 geo:codeCurrency
       rdfs:label "codeCurrency"@en-US ;
@@ -5971,7 +5914,7 @@ geo:codeCurrency
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:hasTranslation
-      rdfs:label "has translation"@en-US , "has translation"@en ;
+      rdfs:label "has translation"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5992,13 +5935,13 @@ vivo:hasTranslation
               "true"^^xsd:boolean .
 
 vcard:Coresident
-      rdfs:label "Coresident"@en .
+      rdfs:label "Coresident"@en-US .
 
 obo:BFO_0000054
-      rdfs:label "realized in"@en .
+      rdfs:label "realized in"@en-US .
 
 vivo:College
-      rdfs:label "College"@en-US , "College"@en-us ;
+      rdfs:label "College"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6017,10 +5960,10 @@ geo:nameShortES
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 <http://purl.org/net/OCRe/study_design.owl#Phase_3>
-      rdfs:label "Phase 3"@en .
+      rdfs:label "Phase 3"@en-US .
 
 vivo:dateIssued
-      rdfs:label "date issued"@en , "date issued"@en-US ;
+      rdfs:label "date issued"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6039,7 +5982,7 @@ vivo:dateIssued
               "false"^^xsd:boolean .
 
 vcard:region
-      rdfs:label "region"@en .
+      rdfs:label "region"@en-US .
 
 geo:GDP
       rdfs:label "GDP"@en-US ;
@@ -6049,13 +5992,13 @@ geo:GDP
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ARG_0000015
-      rdfs:label "user-defined tag"@en .
+      rdfs:label "user-defined tag"@en-US .
 
 vcard:Name
-      rdfs:label "Name"@en .
+      rdfs:label "Name"@en-US .
 
 obo:BFO_0000055
-      rdfs:label "realizes"@en .
+      rdfs:label "realizes"@en-US .
 
 geo:nationalityAR
       rdfs:label "nationalityAR"@en-US ;
@@ -6065,7 +6008,7 @@ geo:nationalityAR
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:CourtReporter
-      rdfs:label "Court Reporter"@en , "Court Reporter"@en-US ;
+      rdfs:label "Court Reporter"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6079,10 +6022,10 @@ obo:BFO_0000016
       rdfs:label "Disposition" .
 
 vcard:hasMember
-      rdfs:label "member"@en .
+      rdfs:label "member"@en-US .
 
 vivo:PresenterRole
-      rdfs:label "Presenter Role"@en , "Presenter Role"@en-US ;
+      rdfs:label "Presenter Role"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6095,7 +6038,7 @@ vivo:PresenterRole
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:PrimaryPosition
-      rdfs:label "Primary Position"@en , "Primary Position"@en-US ;
+      rdfs:label "Primary Position"@en-US , "Primary Position"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6106,28 +6049,28 @@ vivo:PrimaryPosition
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 <http://purl.org/net/OCRe/study_design.owl#Phase_4>
-      rdfs:label "Phase 4"@en .
+      rdfs:label "Phase 4"@en-US .
 
 obo:ERO_0000565
-      rdfs:label "Technology Transfer Office"@en .
+      rdfs:label "Technology Transfer Office"@en-US .
 
 vcard:hasOrganizationName
       rdfs:label "has organization name"@en-US .
 
 vcard:Addressing
-      rdfs:label "Addressing"@en .
+      rdfs:label "Addressing"@en-US .
 
 obo:RO_0001018
-      rdfs:label "contained in"@en .
+      rdfs:label "contained in"@en-US .
 
 obo:ERO_0000033
-      rdfs:label "has expertise"@en .
+      rdfs:label "has expertise"@en-US .
 
 bibo:peerReviewed
-      rdfs:label "peer reviewed"@en-us .
+      rdfs:label "peer reviewed"@en-US .
 
 vivo:identifier
-      rdfs:label "identifier"@en-US , "identifier"@en ;
+      rdfs:label "identifier"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6142,7 +6085,7 @@ vivo:identifier
               "A parent property for institutional and other identifiers. This data property is not seen or updated by anyone."^^xsd:string .
 
 geo:populationNotes
-      rdfs:label "populationNotes"@en-US ;
+      rdfs:label "population notes"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -6166,7 +6109,7 @@ vivo:currentMemberOf
               "true"^^xsd:boolean .
 
 vivo:Campus
-      rdfs:label "Campus"@en-US , "Campus"@en ;
+      rdfs:label "Campus"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6178,13 +6121,13 @@ vivo:Campus
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:BFO_0000015
-      rdfs:label "Process"@en .
+      rdfs:label "Process"@en-US .
 
 obo:RO_0001019
-      rdfs:label "contains"@en .
+      rdfs:label "contains"@en-US .
 
 bibo:Slide
-      rdfs:label "Slide"@en-US , "Slide"@en ;
+      rdfs:label "Slide"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6195,7 +6138,7 @@ bibo:Slide
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:totalAwardAmount
-      rdfs:label "total award amount"@en-US , "total award amount"@en ;
+      rdfs:label "total award amount"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6210,7 +6153,7 @@ vivo:totalAwardAmount
               "This includes the direct cost being used for the grant activity plus indirect costs associated with administering the grant."^^xsd:string .
 
 bibo:Code
-      rdfs:label "Code"@en-US , "Code"@en ;
+      rdfs:label "Code"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6221,16 +6164,16 @@ bibo:Code
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:RO_0002353
-      rdfs:label "output of"@en .
+      rdfs:label "output of"@en-US .
 
 obo:ERO_0000038
-      rdfs:label "specifies the use of"@en .
+      rdfs:label "specifies the use of"@en-US .
 
 obo:OBI_0000833
-      rdfs:label "objective achieved by"@en .
+      rdfs:label "objective achieved by"@en-US .
 
 vivo:Library
-      rdfs:label "Library"@en , "Library"@en-US ;
+      rdfs:label "Library"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6242,7 +6185,7 @@ vivo:Library
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:Performance
-      rdfs:label "performance"@en , "Performance"@en-US ;
+      rdfs:label "Performance"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6254,10 +6197,10 @@ bibo:Performance
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0001716
-      rdfs:label "Database"@en .
+      rdfs:label "Database"@en-US .
 
 <http://vivoweb.org/ontology/scientific-research#documentationFor>
-      rdfs:label "documentation for"@en-US , "documentation for"@en ;
+      rdfs:label "documentation for"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -6268,22 +6211,22 @@ obo:ERO_0001716
               "true"^^xsd:boolean .
 
 vcard:hasRelated
-      rdfs:label "has related"@en .
+      rdfs:label "has related"@en-US .
 
 obo:ERO_0000424
-      rdfs:label "has study population"@en .
+      rdfs:label "has study population"@en-US .
 
 obo:ARG_2000079
-      rdfs:label "American Board of Pathology"@en .
+      rdfs:label "American Board of Pathology"@en-US .
 
 obo:ERO_0000789
-      rdfs:label "Staff Role"@en .
+      rdfs:label "Staff Role"@en-US .
 
 obo:BFO_0000050
-      rdfs:label "part of"@en .
+      rdfs:label "part of"@en-US .
 
 bibo:Letter
-      rdfs:label "Letter"@en-US , "Letter"@en ;
+      rdfs:label "Letter"@en-US ;
       vitro:displayLimitAnnot
               "3"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6302,7 +6245,7 @@ geo:nameCurrencyZH
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:distributes
-      rdfs:label "distributes"@en-us , "distributes"@en-US ;
+      rdfs:label "distributes"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6321,16 +6264,16 @@ vivo:distributes
               "true"^^xsd:boolean .
 
 obo:OBI_0000304
-      rdfs:label "is manufactured by"@en .
+      rdfs:label "is manufactured by"@en-US .
 
 vcard:hasFormattedName
-      rdfs:label "has formatted name"@en .
+      rdfs:label "has formatted name"@en-US .
 
 obo:IAO_0000027
-      rdfs:label "Data Item"@en .
+      rdfs:label "Data Item"@en-US .
 
 <http://purl.org/spar/fabio/Erratum>
-      rdfs:label "Erratum"@en , "Erratum"@en-US ;
+      rdfs:label "Erratum"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6342,19 +6285,19 @@ obo:IAO_0000027
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Individual
-      rdfs:label "Individual"@en .
+      rdfs:label "Individual"@en-US .
 
 vcard:Friend
-      rdfs:label "Friend"@en .
+      rdfs:label "Friend"@en-US .
 
 vcard:Acquaintance
-      rdfs:label "Acquaintance"@en .
+      rdfs:label "Acquaintance"@en-US .
 
 vcard:Nickname
-      rdfs:label "Nickname"@en .
+      rdfs:label "Nickname"@en-US .
 
 foaf:Agent
-      rdfs:label "Agent"@en-us , "Agent"@en-US ;
+      rdfs:label "Agent"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6365,22 +6308,22 @@ foaf:Agent
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:RO_0002351
-      rdfs:label "has member"@en .
+      rdfs:label "has member"@en-US .
 
 obo:BFO_0000051
-      rdfs:label "has part"@en .
+      rdfs:label "has part"@en-US .
 
 obo:ARG_2000008
-      rdfs:label "Topic Weight Measurement"@en .
+      rdfs:label "Topic Weight Measurement"@en-US .
 
 vcard:logo
-      rdfs:label "logo"@en .
+      rdfs:label "logo"@en-US .
 
 obo:BFO_0000031
-      rdfs:label "Generically Dependent Continuant"@en .
+      rdfs:label "Generically Dependent Continuant"@en-US .
 
 vivo:GraduateStudent
-      rdfs:label "Graduate Student"@en , "Graduate Student"@en-US ;
+      rdfs:label "Graduate Student"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6392,16 +6335,16 @@ vivo:GraduateStudent
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:relatedBy
-      rdfs:label "related by"@en .
+      rdfs:label "related by"@en-US .
 
 obo:ARG_2000077
-      rdfs:label "American Board of Orthopaedic Surgery"@en .
+      rdfs:label "American Board of Orthopaedic Surgery"@en-US .
 
 obo:ERO_0000787
-      rdfs:label "Employee Role"@en .
+      rdfs:label "Employee Role"@en-US .
 
 vivo:publicationVenueFor
-      rdfs:label "publication venue for"@en , "publication venue for"@en-US ;
+      rdfs:label "publication venue for"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6414,10 +6357,10 @@ vivo:publicationVenueFor
               "true"^^xsd:boolean .
 
 <http://purl.org/net/OCRe/study_design.owl#Phase_0>
-      rdfs:label "Phase 0"@en .
+      rdfs:label "Phase 0"@en-US .
 
 <http://vivoweb.org/ontology/scientific-research#Phase2ClinicalTrial>
-      rdfs:label "Phase 2 clinical trial"@en , "Phase 2 Clinical Trial"@en-US ;
+      rdfs:label "Phase 2 Clinical Trial"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6453,19 +6396,19 @@ geo:codeAGROVOC
               "true"^^xsd:boolean .
 
 obo:RO_0002350
-      rdfs:label "member of"@en .
+      rdfs:label "member of"@en-US .
 
 vcard:telephone
-      rdfs:label "Telephone"@en .
+      rdfs:label "Telephone"@en-US .
 
 obo:ARG_2000009
-      rdfs:label "Expertise Measurement"@en .
+      rdfs:label "Expertise Measurement"@en-US .
 
 obo:ERO_0000037
-      rdfs:label "provides service"@en .
+      rdfs:label "provides service"@en-US .
 
 obo:ARG_2000028
-      rdfs:label "has contact info"@en .
+      rdfs:label "has contact info"@en-US .
 
 vivo:ResearchOrganization
       rdfs:label "Research Organization"@en-US ;
@@ -6480,13 +6423,13 @@ vivo:ResearchOrganization
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:OBI_0000835
-      rdfs:label "Manufacturer"@en .
+      rdfs:label "Manufacturer"@en-US .
 
 vcard:honorificPrefix
-      rdfs:label "has prefix name"@en .
+      rdfs:label "has prefix name"@en-US .
 
 <http://vivoweb.org/ontology/scientific-research#Phase0ClinicalTrial>
-      rdfs:label "Phase 0 Clinical Trial"@en , "Phase 0 Clinical Trial"@en-US ;
+      rdfs:label "Phase 0 Clinical Trial"@en-US ;
       vitro:displayLimitAnnot
               "6"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6498,7 +6441,7 @@ vcard:honorificPrefix
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:Translation
-      rdfs:label "Translation"@en-US , "Translation"@en ;
+      rdfs:label "Translation"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6509,20 +6452,20 @@ vivo:Translation
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000788
-      rdfs:label "Faculty Role"@en .
+      rdfs:label "Faculty Role"@en-US .
 
 obo:ARG_2000078
-      rdfs:label "American Board of Otolaryngology"@en .
+      rdfs:label "American Board of Otolaryngology"@en-US .
 
 geo:landAreaTotal
-      rdfs:label "landAreaTotal"@en-US ;
+      rdfs:label "total land area"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:hrJobTitle
-      rdfs:label "HR job title"@en-US , "HR job title"@en-us ;
+      rdfs:label "HR job title"@en-US ;
       vitro:displayLimitAnnot
               "3"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6537,10 +6480,10 @@ vivo:hrJobTitle
               "A specific designation of a post within a human resource organization, normally associated with a job description that details the tasks and responsibilities that go with it."^^xsd:string .
 
 <http://purl.org/net/OCRe/study_design.owl#Phase_1>
-      rdfs:label "Phase 1"@en .
+      rdfs:label "Phase 1"@en-US .
 
 vivo:hasResearchArea
-      rdfs:label "research areas"@en-US , "Research Areas"@en-us ;
+      rdfs:label "research areas"@en-US ;
       vitro:customEntryFormAnnot
               "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddAssociatedConceptGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
@@ -6559,14 +6502,14 @@ vivo:hasResearchArea
               "true"^^xsd:boolean .
 
 geo:hasCoordinate
-      rdfs:label "hasCoordinate"@en-US ;
+      rdfs:label "has coordinate"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 <http://purl.org/vocab/vann/preferredNamespaceUri>
-      rdfs:label "preferredNamespaceUri"@en-US , "preferred namespace URI"@en-us ;
+      rdfs:label "preferred namespace URI"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -6575,10 +6518,10 @@ geo:hasCoordinate
               "The full URI for the namespace."^^xsd:string .
 
 obo:ERO_0000914
-      rdfs:label "Post-Graduate Student Trainee Role"@en .
+      rdfs:label "Post-Graduate Student Trainee Role"@en-US .
 
 bibo:Report
-      rdfs:label "Report"@en-US , "Report"@en-us ;
+      rdfs:label "Report"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6590,10 +6533,10 @@ bibo:Report
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ARG_2000075
-      rdfs:label "American Board of Obstetrics and Gynecology"@en .
+      rdfs:label "American Board of Obstetrics and Gynecology"@en-US .
 
 geo:agriculturalAreaNotes
-      rdfs:label "agriculturalAreaNotes"@en-US ;
+      rdfs:label "agricultural area notes"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -6607,7 +6550,7 @@ geo:nameListZH
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 <http://vivoweb.org/ontology/scientific-research#studyPopulationCount>
-      rdfs:label "Study Population Count"@en , "study population count"@en-US ;
+      rdfs:label "study population count"@en-US ;
       vitro:displayRankAnnot
               "20"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -6618,10 +6561,10 @@ geo:nameListZH
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:CalendarBusy
-      rdfs:label "Calendar Busy"@en .
+      rdfs:label "Calendar Busy"@en-US .
 
 obo:IAO_0000003
-      rdfs:label "Measurement Unit Label"@en .
+      rdfs:label "Measurement Unit Label"@en-US .
 
 geo:nameListAR
       rdfs:label "nameListAR"@en-US ;
@@ -6631,7 +6574,7 @@ geo:nameListAR
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:dateTimeInterval
-      rdfs:label "date/time interval"@en-US , "has date/time interval"@en ;
+      rdfs:label "date/time interval"@en-US ;
       vitro:customEntryFormAnnot
               "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimeIntervalFormGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
@@ -6650,13 +6593,13 @@ vivo:dateTimeInterval
               "true"^^xsd:boolean .
 
 obo:IAO_0000103
-      rdfs:label "Failed Exploratory Term"@en .
+      rdfs:label "Failed Exploratory Term"@en-US .
 
 vcard:formattedName
-      rdfs:label "has formatted name"@en .
+      rdfs:label "has formatted name"@en-US .
 
 geo:economic_region
-      rdfs:label "Economic Region"@en-US , "economic_region"@en-US ;
+      rdfs:label "Economic Region"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6667,7 +6610,7 @@ geo:economic_region
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 rdfs:isDefinedBy
-      rdfs:label "is defined by"@en-US , "is defined by"@en-us ;
+      rdfs:label "is defined by"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -6678,19 +6621,19 @@ rdfs:isDefinedBy
               "true"^^xsd:boolean .
 
 vivo:AdministratorRole
-      rdfs:label "Administrator Role"@en .
+      rdfs:label "Administrator Role"@en-US .
 
 obo:ARG_2000076
-      rdfs:label "American Board of Ophthalmology"@en .
+      rdfs:label "American Board of Ophthalmology"@en-US .
 
 obo:BFO_0000034
-      rdfs:label "Function"@en .
+      rdfs:label "Function"@en-US .
 
 obo:IAO_0000002
-      rdfs:label "example to be eventually removed"@en .
+      rdfs:label "example to be eventually removed"@en-US .
 
 vivo:EmeritusProfessor
-      rdfs:label "Professor Emeritus"@en-us , "Professor Emeritus"@en-US ;
+      rdfs:label "Professor Emeritus"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6702,13 +6645,13 @@ vivo:EmeritusProfessor
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:yearMonthPrecision
-      rdfs:label "YearMonthValue"@en-us .
+      rdfs:label "year-month value"@en-US .
 
 vcard:instantMessage
-      rdfs:label "instant message"@en .
+      rdfs:label "instant message"@en-US .
 
 vivo:subcontractsGrant
-      rdfs:label "subcontracts grant"@en-US , "subcontracts grant"@en ;
+      rdfs:label "subcontracts grant"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6729,7 +6672,7 @@ vivo:subcontractsGrant
               "true"^^xsd:boolean .
 
 vivo:ConferenceSeries
-      rdfs:label "Conference Series"@en , "Conference Series"@en-US ;
+      rdfs:label "Conference Series"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6741,7 +6684,7 @@ vivo:ConferenceSeries
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 <http://vivoweb.org/ontology/scientific-research#protocolRealizedBy>
-      rdfs:label "protocol realized by"@en-US , "protocol realized by"@en ;
+      rdfs:label "protocol realized by"@en-US , "protocol realized by"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -6750,7 +6693,7 @@ vivo:ConferenceSeries
               "true"^^xsd:boolean .
 
 vivo:UndergraduateStudent
-      rdfs:label "Undergraduate Student"@en-US , "Undergraduate Student"@en ;
+      rdfs:label "Undergraduate Student"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6762,10 +6705,10 @@ vivo:UndergraduateStudent
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:IAO_0000104
-      rdfs:label "Plan Specification"@en .
+      rdfs:label "Plan Specification"@en-US .
 
 bibo:Quote
-      rdfs:label "Quote"@en , "Quote"@en-US ;
+      rdfs:label "Quote"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6776,7 +6719,7 @@ bibo:Quote
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:NonFacultyAcademicPosition
-      rdfs:label "Non-Faculty Academic Position"@en-US , "Non-Faculty Academic Position"@en ;
+      rdfs:label "Non-Faculty Academic Position"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6789,17 +6732,17 @@ vivo:NonFacultyAcademicPosition
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Colleague
-      rdfs:label "Colleague"@en .
+      rdfs:label "Colleague"@en-US .
 
 geo:landAreaUnit
-      rdfs:label "landAreaUnit"@en-US ;
+      rdfs:label "land area unit"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:hasGeographicLocation
-      rdfs:label "has geographic location"@en , "has geographic location"@en-US ;
+      rdfs:label "has geographic location"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6821,10 +6764,10 @@ vivo:hasGeographicLocation
               "true"^^xsd:boolean .
 
 vcard:hasSound
-      rdfs:label "has sound"@en .
+      rdfs:label "has sound"@en-US .
 
 vivo:dateFiled
-      rdfs:label "date filed"@en , "date filed"@en-US ;
+      rdfs:label "date filed"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6845,10 +6788,10 @@ vivo:dateFiled
               "false"^^xsd:boolean .
 
 vcard:givenName
-      rdfs:label "first name"@en .
+      rdfs:label "first name"@en-US .
 
 vivo:OutreachProviderRole
-      rdfs:label "Outreach Provider Role"@en , "Outreach Provider Role"@en-US ;
+      rdfs:label "Outreach Provider Role"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6861,22 +6804,22 @@ vivo:OutreachProviderRole
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ARG_2000073
-      rdfs:label "American Board of Neurological Surgery"@en .
+      rdfs:label "American Board of Neurological Surgery"@en-US .
 
 obo:IAO_0000005
-      rdfs:label "Objective Specification"@en .
+      rdfs:label "Objective Specification"@en-US .
 
 vcard:Organization
-      rdfs:label "Organization"@en .
+      rdfs:label "Organization"@en-US .
 
 vcard:country
-      rdfs:label "country"@en .
+      rdfs:label "country"@en-US .
 
 <http://purl.org/net/OCRe/study_design.owl#OCRE100038>
-      rdfs:label "Phase"@en .
+      rdfs:label "Phase"@en-US .
 
 bibo:Series
-      rdfs:label "Series"@en-us , "Series"@en-US ;
+      rdfs:label "Series"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6888,7 +6831,7 @@ bibo:Series
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:Foundation
-      rdfs:label "Foundation"@en-US , "Foundation"@en ;
+      rdfs:label "Foundation"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6900,7 +6843,7 @@ vivo:Foundation
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:subsequentLegalDecision
-      rdfs:label "subsequent legal decision"@en-us , "subsequentLegalDecision"@en-US ;
+      rdfs:label "subsequent legal decision"@en-US ;
       vitro:fullPropertyNameAnnot
               "subsequentLegalDecision"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -6917,7 +6860,7 @@ bibo:subsequentLegalDecision
               "true"^^xsd:boolean .
 
 bibo:coden
-      rdfs:label "coden"@en-US , "coden"@en ;
+      rdfs:label "coden"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -6928,16 +6871,16 @@ bibo:coden
               "CODEN – according to ASTM standard E250 – is a six character, alphanumeric bibliographic code, that provides concise, unique and unambiguous identification of the titles of serials and non-serial publications from all subject areas."^^xsd:string .
 
 vcard:revision
-      rdfs:label "revision"@en .
+      rdfs:label "revision"@en-US .
 
 vcard:Language
-      rdfs:label "Language"@en .
+      rdfs:label "Language"@en-US .
 
 vcard:Me
-      rdfs:label "Me"@en .
+      rdfs:label "Me"@en-US .
 
 vivo:OrganizerRole
-      rdfs:label "Organizer Role"@en-US , "Organizer Role"@en ;
+      rdfs:label "Organizer Role"@en-US ;
       vitro:displayLimitAnnot
               "10"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6948,13 +6891,13 @@ vivo:OrganizerRole
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ARG_2000074
-      rdfs:label "American Board of Nuclear Medicine"@en .
+      rdfs:label "American Board of Nuclear Medicine"@en-US .
 
 vcard:Gender
-      rdfs:label "Gender"@en .
+      rdfs:label "Gender"@en-US .
 
 vivo:Exhibit
-      rdfs:label "Exhibit"@en-US , "Exhibit"@en ;
+      rdfs:label "Exhibit"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6966,14 +6909,14 @@ vivo:Exhibit
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 geo:hasMinLatitude
-      rdfs:label "hasMinLatitude"@en-US ;
+      rdfs:label "has minimum latitude"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:County
-      rdfs:label "County"@en , "County"@en-US ;
+      rdfs:label "County"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6985,7 +6928,7 @@ vivo:County
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:Certificate
-      rdfs:label "Certificate"@en-US , "Certificate"@en-us ;
+      rdfs:label "Certificate"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6997,13 +6940,13 @@ vivo:Certificate
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Sound
-      rdfs:label "Sound"@en .
+      rdfs:label "Sound"@en-US .
 
 vcard:category
-      rdfs:label "category"@en .
+      rdfs:label "category"@en-US .
 
 vivo:scopusId
-      rdfs:label "Scopus ID"@en , "Scopus id"@en-US ;
+      rdfs:label "Scopus ID"@en-US ;
       vitro:displayLimitAnnot
               "2"^^xsd:int ;
       vitro:displayRankAnnot
@@ -7018,7 +6961,7 @@ vivo:scopusId
               "The numeric digit assigned to an author in Scopus.  In Scopus it's call the \"Author Identifier\"."^^xsd:string .
 
 bibo:Statute
-      rdfs:label "Statute"@en , "Statute"@en-US ;
+      rdfs:label "Statute"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -7029,10 +6972,10 @@ bibo:Statute
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000405
-      rdfs:label "has accession number"@en .
+      rdfs:label "has accession number"@en-US .
 
 vivo:fundingVehicleFor
-      rdfs:label "provides funding for"@en-US , "provides funding for"@en-us ;
+      rdfs:label "provides funding for"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -7043,19 +6986,19 @@ vivo:fundingVehicleFor
               "true"^^xsd:boolean .
 
 obo:ARG_2000071
-      rdfs:label "American Board of Internal Medicine"@en .
+      rdfs:label "American Board of Internal Medicine"@en-US .
 
 vcard:nickName
-      rdfs:label "nickname"@en .
+      rdfs:label "nickname"@en-US .
 
 obo:RO_0002220
-      rdfs:label "adjacent to"@en .
+      rdfs:label "adjacent to"@en-US .
 
 vcard:Key
-      rdfs:label "Key"@en .
+      rdfs:label "Key"@en-US .
 
 bibo:DocumentPart
-      rdfs:label "Document Part"@en-US , "Document Part"@en-us ;
+      rdfs:label "Document Part"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -7066,7 +7009,7 @@ bibo:DocumentPart
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:Book
-      rdfs:label "Book"@en-us , "Book"@en-US ;
+      rdfs:label "Book"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -7078,10 +7021,10 @@ bibo:Book
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Related
-      rdfs:label "Related"@en .
+      rdfs:label "Related"@en-US .
 
 vivo:Project
-      rdfs:label "Project"@en-us , "Project"@en-US ;
+      rdfs:label "Project"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -7093,7 +7036,7 @@ vivo:Project
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:PostdoctoralTraining
-      rdfs:label "Postdoctoral Training"@en-US , "Postdoctoral Training"@en ;
+      rdfs:label "Postdoctoral Training"@en-US ;
       vitro:displayLimitAnnot
               "10"^^xsd:int ;
       vitro:displayRankAnnot
@@ -7104,13 +7047,13 @@ vivo:PostdoctoralTraining
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000918
-      rdfs:label "related research project"@en .
+      rdfs:label "related research project"@en-US .
 
 obo:OBI_0000417
-      rdfs:label "achieves planned objective"@en .
+      rdfs:label "achieves planned objective"@en-US .
 
 vivo:preferredDisplayOrder
-      rdfs:label "preferred display order"@en-US , "preferred display order"@en-us ;
+      rdfs:label "preferred display order"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -7119,16 +7062,16 @@ vivo:preferredDisplayOrder
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:hasNote
-      rdfs:label "has note"@en .
+      rdfs:label "has note"@en-US .
 
 obo:ARG_2000072
-      rdfs:label "American Board of Medical Genetics"@en .
+      rdfs:label "American Board of Medical Genetics"@en-US .
 
 vcard:hasName
-      rdfs:label "has name"@en .
+      rdfs:label "has name"@en-US .
 
 vivo:sponsorAwardId
-      rdfs:label "sponsor award ID"@en , "sponsor award id"@en-US ;
+      rdfs:label "sponsor award ID"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -7143,19 +7086,19 @@ vivo:sponsorAwardId
               "Identifier of the organization that sponsored the award."^^xsd:string .
 
 obo:IAO_0000109
-      rdfs:label "Measurement Datum"@en .
+      rdfs:label "Measurement Datum"@en-US .
 
 vcard:CalendarRequest
-      rdfs:label "Calendar Request"@en .
+      rdfs:label "Calendar Request"@en-US .
 
 vcard:sound
-      rdfs:label "sound"@en .
+      rdfs:label "sound"@en-US .
 
 obo:ERO_0000543
-      rdfs:label "related technique"@en .
+      rdfs:label "related technique"@en-US .
 
 bibo:numPages
-      rdfs:label "number of pages"@en-US , "number of pages"@en-us ;
+      rdfs:label "number of pages"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -7164,10 +7107,10 @@ bibo:numPages
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:familyName
-      rdfs:label "has last name"@en .
+      rdfs:label "has last name"@en-US .
 
 vivo:Association
-      rdfs:label "Association"@en-US , "Association"@en ;
+      rdfs:label "Association"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -7179,7 +7122,7 @@ vivo:Association
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:PostdocPosition
-      rdfs:label "Postdoctoral Position"@en-US , "Postdoctoral Position"@en ;
+      rdfs:label "Postdoctoral Position"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -7192,16 +7135,16 @@ vivo:PostdocPosition
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:title
-      rdfs:label "title"@en .
+      rdfs:label "title"@en-US .
 
 obo:OBI_0000017
-      rdfs:label "Regulatory Role"@en .
+      rdfs:label "Regulatory Role"@en-US .
 
 obo:BFO_0000038
-      rdfs:label "One-Dimensional Temporal Region"@en .
+      rdfs:label "One-Dimensional Temporal Region"@en-US .
 
 vivo:degreeCandidacy
-      rdfs:label "degree candidacy"@en-US , "degree candidacy"@en-us ;
+      rdfs:label "degree candidacy"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -7222,23 +7165,23 @@ vivo:degreeCandidacy
               "true"^^xsd:boolean .
 
 geo:landAreaNotes
-      rdfs:label "landAreaNotes"@en-US ;
+      rdfs:label "land area notes"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:email
-      rdfs:label "email"@en .
+      rdfs:label "email"@en-US .
 
 vcard:CalendarLink
-      rdfs:label "Calendar Link"@en .
+      rdfs:label "Calendar Link"@en-US .
 
 vcard:Group
-      rdfs:label "Group"@en .
+      rdfs:label "Group"@en-US .
 
 geo:hasOfficialName
-      rdfs:label "hasOfficialName"@en-US ;
+      rdfs:label "has official name"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -7252,10 +7195,10 @@ geo:codeDBPediaID
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vcard:Contact
-      rdfs:label "Contact"@en .
+      rdfs:label "Contact"@en-US .
 
 vivo:hasProceedings
-      rdfs:label "proceedings"@en-US , "Proceedings"@en-us ;
+      rdfs:label "proceedings"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -7276,14 +7219,14 @@ vivo:hasProceedings
               "true"^^xsd:boolean .
 
 geo:GDPUnit
-      rdfs:label "GDPUnit"@en-US ;
+      rdfs:label "GDP unit"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:edition
-      rdfs:label "edition"@en-US , "edition"@en-us ;
+      rdfs:label "edition"@en-US ;
       vitro:displayLimitAnnot
               "3"^^xsd:int ;
       vitro:displayRankAnnot
@@ -7305,24 +7248,24 @@ geo:nameShortZH
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ARG_2000070
-      rdfs:label "American Board of Family Medicine"@en .
+      rdfs:label "American Board of Family Medicine"@en-US .
 
 vcard:Location
-      rdfs:label "Location"@en .
+      rdfs:label "Location"@en-US .
 
 obo:RO_0001015
-      rdfs:label "location of"@en .
+      rdfs:label "location of"@en-US .
 
 vcard:OrganizationUnitName
       rdfs:label "Organizational Unit Name"@en-US .
 
 <http://vivoweb.org/ontology/core>
-      rdfs:label "VIVO core"@en-US ;
+      rdfs:label "VIVO Core"@en-US ;
       vitro:ontologyPrefixAnnot
               "vivo"^^xsd:string .
 
 vivo:dateTime
-      rdfs:label "date/time"@en-US , "date/time"@en ;
+      rdfs:label "date/time"@en-US , "date/time"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -7342,13 +7285,13 @@ geo:codeUN
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:OBI_0000011
-      rdfs:label "Planned Process"@en .
+      rdfs:label "Planned Process"@en-US .
 
 obo:ERO_0000919
-      rdfs:label "related biological specimen"@en .
+      rdfs:label "related biological specimen"@en-US .
 
 bibo:status
-      rdfs:label "status"@en-US , "status"@en-us ;
+      rdfs:label "status"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -7363,10 +7306,10 @@ bibo:status
               "true"^^xsd:boolean .
 
 vcard:hasInstantMessage
-      rdfs:label "has messaging"@en .
+      rdfs:label "has messaging"@en-US .
 
 vivo:Catalog
-      rdfs:label "Catalog"@en-US , "Catalog"@en-us ;
+      rdfs:label "Catalog"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot

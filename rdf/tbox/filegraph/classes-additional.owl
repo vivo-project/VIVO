@@ -1034,23 +1034,6 @@
     
 
 
-
-    <!-- http://vivoweb.org/ontology/core#Software -->
-
-    <owl:Class rdf:about="http://vivoweb.org/ontology/core#Software">
-
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#description"/>
-                <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Computer program and its related documentation; directs the operation of a computer</obo:IAO_0000115>
-    </owl:Class>
-    
-
-
-
     <!-- http://vivoweb.org/ontology/core#University -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#University">
