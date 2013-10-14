@@ -94,7 +94,7 @@
                     installation.) 
                 </li>
                 <li>
-                    The first time Apache Tomcat starts up after the upgrade, an automated 
+                    When Apache Tomcat starts up after the upgrade, an automated 
                     process will modify the knowledge base to align the  
                     data with any ontology updates made for the new release. See the section on the <a href="#kbm">Knowledge Base Migration</a>
                     below for more information. 
@@ -801,16 +801,13 @@ rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
                     heading "Refresh Content". 
                 </p>
                 <p>
-                    8. Review and save aside the knowledge base migration logs. 
-                    The knowledge base migration process described in the next section will generate logs. 
-                    These logs will be overwritten if you redeploy the VIVO application (but not if you restart tomcat), and since
-                    they may be a useful reference if questions come up about your 1.6 VIVO data after deployment, 
-                    you should save them aside.
-                    The logs are created in the Tomcat <code>webapps/vivo/WEB-INF directory</code>:
+                    8. Review the knowledge base migration logs. 
+                    The knowledge base migration process described in the next section will create logs
+                    in a subdirectory of the VIVO home directory:
                 </p>
                 <dl>
                     <dt>
-                        <code>ontologies/update/logs/knowledgeBaseUpdate.(timestamp).log</code>
+                        <code>(home directory)/update/logs/knowledgeBaseUpdate.(timestamp).log</code>
                     </dt>
                     <dd>
                         A log of a summary of updates that were made to the knowledge 
@@ -868,15 +865,19 @@ rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
                                 <p>
                     Changes to the VIVO core ontology may require corresponding 
                     modifications to the knowledge base instance data and ontology annotations.
-                    When VIVO first starts up following the upgrade, it will 
-                    initiate a process to examine the knowledge base and apply necessary  
-                    changes. The knowledge base migration process for release 1.6 will make
+                    Each time VIVO starts up, it will initiate a process to examine the knowledge 
+                    base and apply necessary changes. This process should be very quick on subsequent
+                    restarts if no data using the 1.5 ontology has been reintroduced. 
+                    The knowledge base migration process for release 1.6 will make
                     the following types of changes: 
                 </p>
                 <dl>
                     <dt>
-                    	BOGUS CHANGES
+                    	Instance data changes to align with VIVO-ISF 
                     </dt>
+                    <dd>
+                        Obsolete predicates and types in the instance data will be updated where necesary to correspond to the current properties and classes in version 1.6 of the VIVO-ISF ontology.  Note that VIVO 1.6 continues to make use of certain deprecated classes and properties that are not incompatible with VIVO-ISF.  Most notable among these are the various subclasses of foaf:Person:  these types will be unchanged by the VIVO 1.6 data migration, but may be removed in a future release. 
+                    </dd>
                 </dl>
                 <dl>
                     <dt>
@@ -885,7 +886,12 @@ rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
                     <dd>
                         If a site has modified the value of a vitro annotation (such as  
                         displayRankAnnot or displayLimitAnnot) so that it is no longer using 
-                        the default, then that setting will be left unchanged. 
+                        the default, then that setting will be left unchanged.  Note that the
+                        annotation settings for certain obsolete VIVO 1.5 properties will be
+                        preserved in a configuration file that applies settings to particular
+                        object properties based on the types of their subject and object
+                        individuals.  This file is found in the VIVO home directory:
+                        <code>(home directory)/rdf/display/everytime/PropertyConfig.n3</code>
                         <br>
                         If a site is using the default value of a vitro annotation, and the 
                         default has been changed in the new version of the ontology, then the  
@@ -894,11 +900,11 @@ rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
                 </dl>
                 <p>
                     In addition to the logs described in <strong>step 8</strong> of the <a href="#upgrade_process">previous section</a>, the knowledge base migration
-                    process will log copies of all additions and deletions that were made to the knowledge base in the following files:
+                    process will log copies of all additions and deletions that were made to the knowledge base in the following files in the VIVO home directory:
                 </p>
                 <dl>
                     <dt>
-                        <code>webapps/vivo/WEB-INF/ontologies/update/changedData/removedData.n3</code>
+                        <code>(home directory)/upgrade/knowledgeBase/changedData/removedData.(timestamp).n3</code>
                     </dt>
                     <dd>
                         An N3 file containing all the statements that were removed from the knowledge base. 
@@ -906,7 +912,7 @@ rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
                 </dl>
                 <dl>
                     <dt>
-                        <code>webapps/vivo/WEB-INF/ontologies/update/changedData/addedData.n3</code>
+                        <code>webapps/vivo/WEB-INF/ontologies/update/changedData/addedData.(timestamp).n3</code>
                     </dt>
                     <dd>
                         An N3 file containing all the statements that were added to the knowledge base. 
