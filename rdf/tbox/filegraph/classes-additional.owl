@@ -866,6 +866,12 @@
                 <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#dateTimeInterval"/>
+                <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#DateTimeInterval"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -1032,23 +1038,6 @@
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Only use this broad role class if no subclasses of role describe the item being classified.</vitro:descriptionAnnot>
     </owl:Class>
     
-
-
-
-    <!-- http://vivoweb.org/ontology/core#Software -->
-
-    <owl:Class rdf:about="http://vivoweb.org/ontology/core#Software">
-
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#description"/>
-                <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Computer program and its related documentation; directs the operation of a computer</obo:IAO_0000115>
-    </owl:Class>
-    
-
 
 
     <!-- http://vivoweb.org/ontology/core#University -->

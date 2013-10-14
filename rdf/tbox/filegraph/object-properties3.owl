@@ -109,7 +109,6 @@
     <!-- http://aims.fao.org/aos/geopolitical.owl#hasMember -->
 
     <owl:ObjectProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMember">
-        <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#hasCurrentMember"/>
     </owl:ObjectProperty>
     
 
@@ -117,7 +116,6 @@
     <!-- http://aims.fao.org/aos/geopolitical.owl#isInGroup -->
 
     <owl:ObjectProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#isInGroup">
-        <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#currentMemberOf"/>
     </owl:ObjectProperty>
     
 

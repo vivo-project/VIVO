@@ -1786,15 +1786,6 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
     
 
 
-    <!-- http://vivoweb.org/ontology/core#linkURI -->
-
-    <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#linkURI">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-
-        <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#URLLink"/>
-    </owl:DatatypeProperty>
-    
-
 
     <!-- http://vivoweb.org/ontology/core#localAwardId -->
 

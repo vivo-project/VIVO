@@ -155,24 +155,7 @@
 
     </owl:ObjectProperty>
     
-
-
-    <!-- http://purl.obolibrary.org/obo/ARG_2000397 -->
-
-    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ARG_2000397">
-
-        <owl:inverseOf rdf:resource="http://purl.obolibrary.org/obo/ARG_2000398"/>
-    </owl:ObjectProperty>
     
-
-
-    <!-- http://purl.obolibrary.org/obo/ARG_2000398 -->
-
-    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ARG_2000398">
-
-    </owl:ObjectProperty>
-    
-
 
     <!-- http://purl.obolibrary.org/obo/ARG_2000399 -->
 
