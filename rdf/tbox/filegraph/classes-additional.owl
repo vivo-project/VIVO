@@ -254,7 +254,6 @@
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/Collection">
 
-        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#InformationResource"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.org/ontology/bibo/oclcnum"/>
@@ -374,15 +373,6 @@
                 <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.org/ontology/bibo/Image -->
-
-    <owl:Class rdf:about="http://purl.org/ontology/bibo/Image">
-
-        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#InformationResource"/>
     </owl:Class>
     
 
@@ -880,7 +870,7 @@
     
 
 
-    <!-- http://vivoweb.org/ontology/core#InformationResource -->
+    <!-- http://purl.obolibrary.org/obo/IAO_0000030 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/IAO_0000030">
 
@@ -1049,7 +1039,6 @@
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Software">
 
-        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#InformationResource"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#description"/>
@@ -1104,7 +1093,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#featuredIn"/>
-                <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#InformationResource"/>
+                <owl:allValuesFrom rdf:resource="http://purl.obolibrary.org/obo/IAO_0000030"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
