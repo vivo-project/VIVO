@@ -35,9 +35,6 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#reviewedIn">
     <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#Review"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#awardsGrant">
-    <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#Grant"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasFundingVehicle">
     <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#Grant"/>
   </rdf:Description>

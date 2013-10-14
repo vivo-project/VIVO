@@ -6930,25 +6930,6 @@ bibo:coden
 vcard:revision
       rdfs:label "revision"@en .
 
-vivo:awardsGrant
-      rdfs:label "awards grant"@en-US ;
-      vitro:displayRankAnnot
-              "61"^^xsd:int ;
-      vitro:fullPropertyNameAnnot
-              "funds"^^xsd:string ;
-      vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
-      vitro:offerCreateNewOptionAnnot
-              "true"^^xsd:boolean ;
-      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:publicDescriptionAnnot
-              "This relates an organization to a grant that it has awarded."^^xsd:string ;
-      vitro:selectFromExistingAnnot
-              "true"^^xsd:boolean .
-
 vcard:Language
       rdfs:label "Language"@en .
 
