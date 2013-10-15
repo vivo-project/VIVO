@@ -52,16 +52,17 @@
                     <@p.label individual editable labelCount localesCount/>
                 </h1>
                 <#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->
-                <#assign title = propertyGroups.pullProperty("${core}preferredTitle")!>
+                <#assign title = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Title")!>
                 <#if title?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-                    <@p.addLinkWithLabel title editable />
+                    <#if (title.statements?size < 1) >
+                        <@p.addLinkWithLabel title editable /> 
+                    <#else>
+                        <h2>${title.name?capitalize!}</h2>
+                        <@p.verboseDisplay title />
+                    </#if>
                     <#list title.statements as statement>
-                        <#if !editable >
-                            <div id="titleContainer"><span class="display-title-not-editable">${statement.value}</span></div>
-                        <#else>
-                            <span class="display-title-editable">${statement.value}</span>
-                            <@p.editingLinks "${title.name}" "" statement editable />
-                        </#if>
+                        <span class="display-title<#if editable>-editable</#if>">${statement.preferredTitle}</span>
+                        <@p.editingLinks "${title.localName}" "${title.name}" statement editable />
                     </#list>
                 </#if>
                 <#-- If preferredTitle is unpopulated, display mostSpecificTypes -->
@@ -101,7 +102,7 @@
                 <#include "individual-contactInfo-2column.ftl">
             </div> <!-- contactContainer -->
             <div id="webpagesContainer">
-                <#assign webpage = propertyGroups.pullProperty("${core}webpage")!>
+                <#assign webpage = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#URL")!>
                 <#if webpage?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
                     <h2 id="webpage" class="mainPropGroup">${i18n().websites} <@p.addLink webpage editable ""/></h2>
                     <@p.verboseDisplay webpage />

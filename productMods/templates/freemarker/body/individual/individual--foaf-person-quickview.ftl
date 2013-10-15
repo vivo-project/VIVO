@@ -35,7 +35,8 @@
      so set this variable now
 -->
 <#assign hasWebpage = false>
-<#assign web = individual.propertyList.getProperty("${core}webpage")!>
+<#assign web = individual.propertyList.getProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#URL")!>
+<#if web?? >
 <#if editable >
     <#if web.first()?? >
         <#assign hasWebpage = true>
@@ -49,7 +50,7 @@
         <#assign hasWebpage = false>
     </#if>
 </#if>
-
+</#if>
 <section id="individual-intro" class="vcard person" role="region">
     <section id="label-title" <#if editable>style="width:45%"</#if> >
         <header>
@@ -64,15 +65,20 @@
                     <@p.label individual editable labelCount localesCount/>
                 </h1>
                 <#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->
-                <#assign title = propertyGroups.pullProperty("${core}preferredTitle")!>
+                <#assign title = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Title")!>
                 <#if title?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-                    <@p.addLinkWithLabel title editable />
+                    <#if (title.statements?size < 1) >
+                        <@p.addLinkWithLabel title editable />
+                    <#else>
+                        <h2 id="preferredTitle">${title.name?capitalize!}</h2>
+                        <@p.verboseDisplay title />
+                    </#if>
                     <#list title.statements as statement>
                         <#if !editable >
-                            <div id="titleContainer"><span class="display-title-not-editable">${statement.value}</span></div>
+                            <div id="titleContainer"><span class="display-title-not-editable">${statement.preferredTitle}</span></div>
                         <#else>
-                            <span class="display-title-editable">${statement.value}</span>
-                            <@p.editingLinks "${title.name}" "" statement editable />
+                            <span class="display-title-editable">${statement.preferredTitle}</span>
+                            <@p.editingLinks "${title.localName}" "${title.name}" statement editable />
                         </#if>
                     </#list>
                 </#if>
@@ -107,7 +113,7 @@
         <section id="qv-share-contact" class="share-contact" role="region" <#if !editable>style="padding-top:12px"</#if>> 
             <img id="webpage-popout-top" src="${urls.images}/individual/webpage-popout-top.png"  alt="${i18n().background_top_image}"/>
             <div id="webpage-wrapper" >
-                <#assign webpage = propertyGroups.pullProperty("${core}webpage")!>            
+                <#assign webpage = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#URL")!>            
                 <#if webpage?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
                     <#if editable>
                         <h2 class="websites" >${i18n().websites} <@p.addLink webpage editable ""/></h2>
@@ -119,7 +125,7 @@
                     </ul>
                 </#if>
             </div>
-            <img id="webpage-popout-bottom" src="${urls.images}/individual/webpage-popout-bottom.png"  alt="${i18n().background_top_image}"  <#if editable>style="margin-top:16px"</#if>/>
+            <img id="webpage-popout-bottom" src="${urls.images}/individual/webpage-popout-bottom.png"  alt="${i18n().background_top_image}"  />
         </section> <!-- end share-contact -->
     </#if>
     <section id="individual-info" class="qv-individual-info" role="region" style=" <#if !editable>padding-top:12px;</#if><#if hasWebpage>width:53%<#else>width:100%;clear:left</#if>;">       
@@ -154,7 +160,7 @@
         <#-- If the individual does not have webpages and we're in edit mode, provide the opportunity to add webpages -->
         <#if editable && !hasWebpage >
             <!-- Webpages -->
-            <#assign webpage = propertyGroups.pullProperty("${core}webpage")!>            
+            <#assign webpage = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#URL")!>            
             <#if webpage?has_content>
                 <h2 id="webpage" class="mainPropGroup">${i18n().websites} <@p.addLink webpage editable ""/></h2>
                 <@p.verboseDisplay webpage />

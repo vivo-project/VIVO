@@ -43,7 +43,7 @@
                           ?publisherObj rdfs:label ?publisher
                }
                OPTIONAL { ?infoResource core:relatedBy ?editorship .
-                          ?editorObj core:relatedBy ?editorship .
+                          ?editorship core:relates ?editorObj .
                           ?editorObj rdfs:label ?editor
                }
                OPTIONAL { ?infoResource core:partOf ?partOfObj .
