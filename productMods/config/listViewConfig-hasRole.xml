@@ -49,7 +49,7 @@
                         ?activity vitro:mostSpecificType ?subclass   
                         </collated>
             }           
-            
+            <!-- for research activities where the activity involves a grant -->
             OPTIONAL {  ?role core:relatedBy ?activity .
                         LET (?activityName := afn:localname(?activity)) 
                         OPTIONAL { ?activity rdfs:label ?activityLabel }
