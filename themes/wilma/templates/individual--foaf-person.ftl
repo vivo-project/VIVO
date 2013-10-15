@@ -71,7 +71,7 @@
                     <#if title?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
                         <#if (title.statements?size < 1) >
                             <@p.addLinkWithLabel title editable /> 
-                        <#else>
+                        <#elseif editable>
                             <h2>${title.name?capitalize!}</h2>
                             <@p.verboseDisplay title />
                         </#if>
@@ -126,7 +126,7 @@
 
 <#if rdfUrl??>
     <script>
-        var individualRdfUrl = '${rdfUrl}';
+        var individualRdfUrl = '${rdfUrl?replace("display","individual")}';
     </script>
 </#if>
 <script>
