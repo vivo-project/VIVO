@@ -33,14 +33,14 @@ class LabelInserter
   # Parse the arguments and complain if they don't make sense.
   #
   def sanity_check_arguments(args)
+    raise UsageError, "usage is: label_inserter.rb <rdf_file> <labels_input_file> <locale> [filter_file] <n3_output_file> [ok]" unless (3..5).include?(args.length)
+
    	if args[-1].downcase == 'ok'
 	  ok = true
 	  args.pop
 	else
 	  ok = false
     end
-
-    raise UsageError, "usage is: label_inserter.rb <rdf_file> <labels_input_file> <locale> [filter_file] <n3_output_file> [ok]" unless (4..5).include?(args.length)
 
     n3_output_file = args.pop
     raise UsageError, "File '#{n3_output_file}' already exists. specify 'ok' to overwrite it." if File.exist?(n3_output_file) && !ok

@@ -32,6 +32,8 @@ class LabelStripper
   # Parse the arguments and complain if they don't make sense.
   #
   def sanity_check_arguments(args)
+    raise UsageError, "usage is: label_stripper.rb <rdf_file> [filter_file] <labels_output_file> [ok]" unless (2..3).include?(args.length)
+
   	if args[-1].downcase == 'ok'
 	  ok = true
 	  args.pop
@@ -39,8 +41,6 @@ class LabelStripper
 	  ok = false
     end
       
-    raise UsageError, "usage is: label_stripper.rb <rdf_file> [filter_file] <labels_output_file> [ok]" unless (2..3).include?(args.length)
-
     output_file = args.pop
     raise UsageError, "File '#{output_file}' already exists. specify 'ok' to overwrite it." if File.exist?(output_file) && !ok
     
