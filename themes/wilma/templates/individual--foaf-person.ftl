@@ -126,7 +126,7 @@
 
 <#if rdfUrl??>
     <script>
-        var individualRdfUrl = '${rdfUrl?replace("display","individual")}';
+        var individualRdfUrl = '${rdfUrl}';
     </script>
 </#if>
 <script>
