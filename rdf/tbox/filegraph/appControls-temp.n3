@@ -86,6 +86,11 @@ foaf:Organization
               ] ;
       rdfs:subClassOf
               [ a       owl:Restriction ;
+                owl:onProperty core:relatedBy ;
+                owl:allValuesFrom core:Relationship 
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
                 owl:onProperty <http://purl.obolibrary.org/obo/RO_0002353> ;
                 owl:allValuesFrom <http://purl.obolibrary.org/obo/BFO_0000015> 
               ] .
