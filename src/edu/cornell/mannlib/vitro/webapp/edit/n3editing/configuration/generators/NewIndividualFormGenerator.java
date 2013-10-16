@@ -46,12 +46,12 @@ public class NewIndividualFormGenerator extends BaseEditConfigurationGenerator i
     	        N3_PREFIX + "@prefix vcard:<http://www.w3.org/2006/vcard/ns#> .\n"
     	                  + " ?newInd <http://purl.obolibrary.org/obo/ARG_2000028> ?newVcardInd . \n"
     	                  + " ?newVcardInd <http://purl.obolibrary.org/obo/ARG_2000029> ?newInd . \n"
-    	                  + " ?newVcardInd a <http://www.w3.org/2006/vcard/ns#Individual> . \n"
+    	                  + " ?newVcardInd a vcard:Individual . \n"
     	                  + " ?newVcardInd vcard:hasName  ?newVcardName . \n"
-    	                  + " ?newVcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n"
+    	                  + " ?newVcardName a vcard:Name . \n"
     	                  + " ?newVcardName vcard:givenName ?firstName . \n"
-    	                  + " ?newVcardName vcard:familyName ?lastName .",
-    	        "?newVcardName <http://www.w3.org/2006/vcard/ns#middleName> ?middleName .",
+    	                  + " ?newVcardName vcard:familyName ?lastName . \n"
+    	                  + " ?newVcardName <http://vivoweb.org/ontology/core#middleName> ?middleName .",
                 N3_PREFIX + " ?newInd <" + RDFS.label.getURI() + "> ?label ."
     	));
     	                    
@@ -90,7 +90,7 @@ public class NewIndividualFormGenerator extends BaseEditConfigurationGenerator i
         
         //This combines the first and last name into the rdfs:label
         // currently being done via javascript in the template. May use this again
-        // when/if updated to IFS ontology.  tlw72
+        // when/if updated to ISF ontology.  tlw72
 //        config.addModelChangePreprocessor(new FoafNameToRdfsLabelPreprocessor());        
 
         String formUrl = EditConfigurationUtils.getFormUrlWithoutContext(vreq);       

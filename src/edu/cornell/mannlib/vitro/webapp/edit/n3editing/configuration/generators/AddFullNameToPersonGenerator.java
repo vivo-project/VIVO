@@ -47,16 +47,18 @@ public class AddFullNameToPersonGenerator extends VivoBaseGenerator implements
         conf.setVarNameForObject("individualVcard");
         
         conf.setN3Required( Arrays.asList( n3ForNewName ) );
-        conf.setN3Optional( Arrays.asList( firstNameAssertion, middleNameAssertion, lastNameAssertion ) );
+        conf.setN3Optional( Arrays.asList( firstNameAssertion, middleNameAssertion, lastNameAssertion, suffixAssertion, prefixAssertion ) );
         
         conf.addNewResource("fullName", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("individualVcard", DEFAULT_NS_FOR_NEW_RESOURCE);
                 
-        conf.setLiteralsOnForm(Arrays.asList("firstName", "middleName", "lastName" ));
+        conf.setLiteralsOnForm(Arrays.asList("firstName", "middleName", "lastName", "suffix", "prefix" ));
         
         conf.addSparqlForExistingLiteral("firstName", firstNameQuery);
         conf.addSparqlForExistingLiteral("middleName", middleNameQuery);
         conf.addSparqlForExistingLiteral("lastName", lastNameQuery);
+        conf.addSparqlForExistingLiteral("suffix", suffixQuery);
+        conf.addSparqlForExistingLiteral("prefix", prefixQuery);
         conf.addSparqlForAdditionalUrisInScope("individualVcard", individualVcardQuery);
         
         if ( conf.isUpdate() ) {
@@ -79,6 +81,14 @@ public class AddFullNameToPersonGenerator extends VivoBaseGenerator implements
                 .setRangeDatatypeUri( XSD.xstring.toString() ).
                 setValidators( list("nonempty") ));
 
+        conf.addField( new FieldVTwo().                        
+                setName("suffix")
+                .setRangeDatatypeUri( XSD.xstring.toString()) );
+
+            conf.addField( new FieldVTwo().                        
+                setName("prefix")
+                .setRangeDatatypeUri( XSD.xstring.toString()) );
+
         conf.addValidator(new AntiXssValidation());
         
         prepare(vreq, conf);
@@ -98,10 +108,16 @@ public class AddFullNameToPersonGenerator extends VivoBaseGenerator implements
         "?fullName <http://www.w3.org/2006/vcard/ns#givenName> ?firstName .";
     
     final static String middleNameAssertion  =      
-        "?fullName <http://www.w3.org/2006/vcard/ns#middleName> ?middleName .";
+        "?fullName <http://vivoweb.org/ontology/core#middleName> ?middleName .";
 
     final static String lastNameAssertion  =      
         "?fullName <http://www.w3.org/2006/vcard/ns#familyName> ?lastName .";
+
+    final static String suffixAssertion  =      
+        "?fullName <http://www.w3.org/2006/vcard/ns#honorificSuffix> ?suffix .";
+
+    final static String prefixAssertion  =      
+        "?fullName <http://www.w3.org/2006/vcard/ns#honorificPrefix> ?prefix .";
 
     /* Queries for editing an existing entry */
 
@@ -116,11 +132,19 @@ public class AddFullNameToPersonGenerator extends VivoBaseGenerator implements
 
     final static String middleNameQuery  =      
         "SELECT ?existingMiddleName WHERE {\n"+
-        "?fullName <http://www.w3.org/2006/vcard/ns#middleName> ?existingMiddleName . }";
+        "?fullName <http://vivoweb.org/ontology/core#middleName> ?existingMiddleName . }";
 
     final static String lastNameQuery  =      
         "SELECT ?existingLastName WHERE {\n"+
         "?fullName <http://www.w3.org/2006/vcard/ns#familyName> ?existingLastName . }";
+
+    final static String suffixQuery  =      
+        "SELECT ?existingSuffix WHERE {\n"+
+        "?fullName <http://www.w3.org/2006/vcard/ns#honorificSuffix> ?existingSuffix . }";
+
+    final static String prefixQuery  =      
+        "SELECT ?existingPrefix WHERE {\n"+
+        "?fullName <http://www.w3.org/2006/vcard/ns#honorificPrefix> ?existingPrefix . }";
 
 	private String getFullNameUri(VitroRequest vreq) {
         String fullNameUri = vreq.getParameter("fullNameUri"); 

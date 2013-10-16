@@ -149,10 +149,10 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
             "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
-            "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+            "?vcardPerson a vcard:Individual . \n" + 
             "?vcardPerson vcard:hasName  ?vcardName . \n" +
-            "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
-            "?vcardName vcard:middleName ?middleName .";
+            "?vcardName a vcard:Name . \n" +   
+            "?vcardName <http://vivoweb.org/ontology/core#middleName> ?middleName .";
 	}
 	
 	private String getN3NewPersonLastName() {

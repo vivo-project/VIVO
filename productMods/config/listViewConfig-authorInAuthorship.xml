@@ -43,6 +43,7 @@
                           ?publisherObj rdfs:label ?publisher
                }
                OPTIONAL { ?infoResource core:relatedBy ?editorship .
+                          ?editorship a core:Editorship .
                           ?editorship core:relates ?editorObj .
                           ?editorObj rdfs:label ?editor
                }
@@ -89,6 +90,7 @@
         PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt; 
         CONSTRUCT { 
             ?subject ?property ?authorship .  
+            ?authorship a core:Authorship . 
             ?authorship ?authorshipProperty ?authorshipValue .
             ?authorship core:relates ?infoResource .
             ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
@@ -196,6 +198,7 @@
                ?authorship core:relates ?infoResource .
                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
                ?infoResource core:relatedBy ?editorship .
+               ?editorship a core:Editorship . 
                ?editorship core:relates ?editorObj .
                ?editorObj rdfs:label ?editor
             } UNION {

@@ -11,7 +11,10 @@
 <#macro showFullName statement>
  
     <#if statement.fullName?has_content>
-            ${statement.firstName!}&nbsp;${statement.middleName!}&nbsp;${statement.lastName!}
+        <#if statement.prefix??>${statement.prefix!}</#if>
+        ${statement.firstName!}
+        ${statement.middleName!}
+        ${statement.lastName!}<#if statement.suffix??>, ${statement.suffix!}</#if>
     </#if>    
           
 </#macro>
