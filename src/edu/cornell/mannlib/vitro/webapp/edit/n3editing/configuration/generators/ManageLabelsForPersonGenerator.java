@@ -157,7 +157,7 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
 	        "?fullName <http://www.w3.org/2006/vcard/ns#givenName> ?firstName . ";
 		String personLastNameN3 = 
 	        "?fullName <http://www.w3.org/2006/vcard/ns#familyName> ?lastName .";
-		String personMiddleNameN3 = "?fullName <http://www.w3.org/2006/vcard/ns#middleName> ?middleName .";
+		String personMiddleNameN3 = "?subject <http://vivoweb.org/ontology/core#middleName> ?middleName .";
   		n3Optional.add(personFullNameN3 + "\n " + personFirstNameN3 + "\n " + personLastNameN3);
 		n3Optional.add(personMiddleNameN3);
 		return n3Optional;
