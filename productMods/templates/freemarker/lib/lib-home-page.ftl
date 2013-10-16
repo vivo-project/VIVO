@@ -34,9 +34,9 @@
 <#macro facultyMemberCount classGroups>
     <#assign foundClassGroup = false />
     <#list classGroups as group>
-        <#if (group.individualCount > 0) && group.displayName == "people" >
+        <#if (group.individualCount > 0) && group.uri?contains("people") >
             <#list group.classes as class>
-                <#if (class.name == "Faculty Member") >
+                <#if (class.uri?contains("FacultyMember")) >
                     <#assign foundClassGroup = true />
                     <#if (class.individualCount > 0) >
                         <script>var facultyMemberCount = ${class.individualCount?string?replace(",","")};</script>
