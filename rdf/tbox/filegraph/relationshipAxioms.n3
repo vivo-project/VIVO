@@ -1,0 +1,162 @@
+@prefix hr:      <http://vivo.cornell.edu/ns/hr/0.9/hr.owl#> .
+@prefix afn:     <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix :        <http://vivoweb.org/ontology/activity-insight#> .
+@prefix scires:  <http://vivoweb.org/ontology/scientific-research#> .
+@prefix aka:     <http://vivoweb.org/ontology/aka#> .
+@prefix pubmed:  <http://vitro.mannlib.cornell.edu/ns/pubmed#> .
+@prefix vann:    <http://purl.org/vocab/vann/> .
+@prefix owl2:    <http://www.w3.org/2006/12/owl2-xml#> .
+@prefix wcmc:    <http://weill.cornell.edu/vivo/ontology/wcmc#> .
+@prefix dcterms:  <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix swrl:    <http://www.w3.org/2003/11/swrl#> .
+@prefix vitro:   <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix event:   <http://purl.org/NET/c4dm/event.owl#> .
+@prefix wos:     <http://vivo.mannlib.cornell.edu/ns/ThomsonWOS/0.1#> .
+@prefix vivoc:   <http://vivo.library.cornell.edu/ns/0.1#> .
+@prefix swvs:    <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix c4o:     <http://purl.org/spar/c4o/> .
+@prefix cce:     <http://vivoweb.org/ontology/cornell-cooperative-extension#> .
+@prefix dcelem:  <http://purl.org/dc/elements/1.1/> .
+@prefix vivo:    <http://vivoweb.org/ontology/core#> .
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix geo:     <http://aims.fao.org/aos/geopolitical.owl#> .
+@prefix pvs:     <http://vivoweb.org/ontology/provenance-support#> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix aktp:    <http://www.aktors.org/ontology/portal#> .
+@prefix far:     <http://vitro.mannlib.cornell.edu/ns/reporting#> .
+@prefix fabio:   <http://purl.org/spar/fabio/> .
+@prefix skco:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix ospcu:   <http://vivoweb.org/ontology/cu-vivo-osp#> .
+@prefix acti:    <http://vivoweb.org/ontology/activity-insight#> .
+@prefix ai:      <http://vivoweb.org/ontology/activity-insight#> .
+@prefix sce:     <http://vivoweb.org/ontology/SchoolOfContinuingEducation#> .
+@prefix stars:   <http://vitro.mannlib.cornell.edu/ns/cornell/stars/classes#> .
+@prefix bibo:    <http://purl.org/ontology/bibo/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix swrlb:   <http://www.w3.org/2003/11/swrlb#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix core:    <http://vivoweb.org/ontology/core#> .
+@prefix socsci:  <http://vivo.library.cornell.edu/ns/vivo/socsci/0.1#> .
+@prefix rdfsyn:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix local:   <http://vivo.cornell.edu/ontology/local#> .
+@prefix vitro-public:  <http://vitro.mannlib.cornell.edu/ns/vitro/public#> .
+@prefix mann:    <http://vivo.cornell.edu/ns/mannadditions/0.1#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix ero:     <http://purl.obolibrary.org/obo/> .
+
+core:Authorship
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom foaf:Agent ;
+                owl:onProperty core:relates
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom <http://purl.obolibrary.org/obo/IAO_0000030> ;
+                owl:onProperty core:relates
+              ] .
+
+core:Position
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom foaf:Person ;
+                owl:onProperty core:relates
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom foaf:Organization ;
+                owl:onProperty core:relates
+              ] .
+
+core:Editorship
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom foaf:Agent ;
+                owl:onProperty core:relates
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom <http://purl.obolibrary.org/obo/IAO_0000030> ;
+                owl:onProperty core:relates
+              ] .
+
+core:AdvisingRelationship
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom foaf:Person ;
+                owl:onProperty core:relates
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom core:AdvisorRole ;
+                owl:onProperty core:relates
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom core:AdviseeRole ;
+                owl:onProperty core:relates
+              ] .
+
+core:AwardedDegree
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom foaf:Person ;
+                owl:onProperty core:relates
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom core:AcademicDegree ;
+                owl:onProperty core:relates
+              ] .
+
+core:AwardReceipt
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom foaf:Agent ;
+                owl:onProperty core:relates
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom core:Award ;
+                owl:onProperty core:relates
+              ] .
+
+core:IssuedCredential
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom foaf:Agent ;
+                owl:onProperty core:relates
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom core:Credential ;
+                owl:onProperty core:relates
+              ] .
+
+core:Grant
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom foaf:Agent ;
+                owl:onProperty core:relates
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom <http://purl.obolibrary.org/obo/BFO_0000023> ;
+                owl:onProperty core:relates
+              ] .
+
+core:Contract
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom foaf:Agent ;
+                owl:onProperty core:relates
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:someValuesFrom <http://purl.obolibrary.org/obo/BFO_0000023> ;
+                owl:onProperty core:relates
+              ] .
+
+
