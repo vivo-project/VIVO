@@ -47,7 +47,7 @@ public class VivoDocumentModifiers implements javax.servlet.ServletContextListen
         }
         
         modifiers.add(new CalculateParameters(dataset));   
-        modifiers.add( new VIVOPreferredTitleField( rdfServiceFactory ));
+        modifiers.add( new VIVOValuesFromVcards( rdfServiceFactory ));
         modifiers.add( new VivoISFBasicFields( rdfServiceFactory ));
         modifiers.add( new VivoISFAdvisingFields( rdfServiceFactory ));
         modifiers.add( new VivoISFEducationFields( rdfServiceFactory ));
