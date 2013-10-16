@@ -7,7 +7,7 @@
 @prefix datagetter: <java:edu/cornell/mannlib/vitro/webapp/utils/datagetter/> .
 @prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
 @prefix role:  <http://vitro.mannlib.cornell.edu/ns/vitro/role#> .
-@prefix local: <http://example.org/appConfig/> .
+@prefix local: <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/> .
 @prefix vivo: <http://vivoweb.org/ontology/core#> . 
 
 @base <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration> .

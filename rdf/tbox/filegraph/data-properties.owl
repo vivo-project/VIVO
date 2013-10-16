@@ -1615,18 +1615,6 @@ modern society using the world of Star trek. Los Angeles Times, March
     
 
 
-    <!-- http://purl.org/ontology/bibo/suffixName -->
-
-    <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/suffixName">
-
-        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Jr.; III;; M.D.</obo:IAO_0000112>
-        <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
-        <ns:term_status>stable</ns:term_status>
-        <rdfs:comment xml:lang="en">The suffix of a name</rdfs:comment>
-    </owl:DatatypeProperty>
-    
-
-
     <!-- http://purl.org/ontology/bibo/upc -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/upc">

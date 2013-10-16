@@ -35,11 +35,6 @@
     <owl:AnnotationProperty rdf:about="http://vivoweb.org/ontology/core#description">
 
     </owl:AnnotationProperty>
-    <owl:AnnotationProperty rdf:about="http://purl.org/ontology/bibo/suffixName">
-
-        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-    </owl:AnnotationProperty>
-    
 
 
     <!-- 

@@ -80,9 +80,6 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#dateTime">
     <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#middleName">
-    <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#teachingOverview">
     <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
   </rdf:Description>

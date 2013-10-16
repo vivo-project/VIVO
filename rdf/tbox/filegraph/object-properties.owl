@@ -1150,7 +1150,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <owl:ObjectProperty rdf:about="http://purl.org/NET/c4dm/event.owl#isAgentIn">
 
         <rdfs:range rdf:resource="http://purl.org/NET/c4dm/event.owl#Event"/>
-        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+     <!--   <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>  -->
     </owl:ObjectProperty>
     
 

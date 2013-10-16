@@ -1690,21 +1690,6 @@ geo:hasListName
 vcard:Emergency
       rdfs:label "Emergency"@en-US .
 
-bibo:suffixName
-      rdfs:label "name suffix"@en-US ;
-      vitro:displayLimitAnnot
-              "1"^^xsd:int ;
-      vitro:displayRankAnnot
-              "34"^^xsd:int ;
-      vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupaddress> ;
-      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:publicDescriptionAnnot
-              "If applicable, please enter the preferred name suffix.  Only one may be entered."^^xsd:string .
-
 bibo:asin
       rdfs:label "ASIN"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -3186,7 +3171,7 @@ obo:ERO_0000029
               "true"^^xsd:boolean .
 
 vcard:honorificSuffix
-      rdfs:label "honorific suffix name"@en-US .
+      rdfs:label "honorific suffix"@en-US .
 
 <http://purl.org/spar/c4o/hasGlobalCitationFrequency>
       rdfs:label "has global citation frequency"@en-US ;
@@ -6426,7 +6411,7 @@ obo:OBI_0000835
       rdfs:label "Manufacturer"@en-US .
 
 vcard:honorificPrefix
-      rdfs:label "has prefix name"@en-US .
+      rdfs:label "honorific prefix"@en-US .
 
 <http://vivoweb.org/ontology/scientific-research#Phase0ClinicalTrial>
       rdfs:label "Phase 0 Clinical Trial"@en-US ;

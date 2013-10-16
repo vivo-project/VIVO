@@ -55,7 +55,8 @@
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/DocumentStatus">
 
-        <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+<!-- the following axiom causes display issues -->
+<!--        <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/> -->
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The status of a document with respect to its publication.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The status of a document with respect to its publication. The statuses are represented as individuals of this class. Use the &quot;show all individuals of this class&quot; button on the class control panel to see the currently defined statuses.</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
