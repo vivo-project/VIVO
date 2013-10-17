@@ -695,15 +695,3 @@ local:grantRelatesConfig a :ObjectPropertyDisplayConfig ;
 
 
 
-local:testRemovalContext a :ConfigContext ;
-    :hasConfiguration local:testRemovalConfig ;
-    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
-    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
-    :qualifiedBy      <http://purl.obolibrary.org/obo/BFO_0000001> .
-
-local:testRemovalConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
-    :displayName "related by" ;
-    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:root ;
-    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:root ;
-    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupother> .
