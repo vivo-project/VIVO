@@ -1331,6 +1331,7 @@
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/asin">
 
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">020530902X</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Amazon standard identification number. Source: http://en.wikipedia.org/wiki/Amazon_Standard_Identification_Number.</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
@@ -1356,6 +1357,7 @@
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/coden">
 
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CODEN became particularly common in the scientific community as a citation system for periodicals cited in technical- as well in chemistry-related publications and as a search tool in many bibliographic catalogues.
 Definition and description came from Wikipedia here: http://en.wikipedia.org/wiki/CODEN </obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
@@ -1369,6 +1371,7 @@ Definition and description came from Wikipedia here: http://en.wikipedia.org/wik
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/doi">
 
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>stable</ns:term_status>
         <rdfs:comment xml:lang="en">Digital Object Identifier</rdfs:comment>
@@ -1379,6 +1382,7 @@ Definition and description came from Wikipedia here: http://en.wikipedia.org/wik
     <!-- http://purl.org/ontology/bibo/eanucc13 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/eanucc13">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
 
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition source: http://en.wikipedia.org/wiki/European_Article_Numbering-Uniform_Code_Council.
 The Uniform Code Council (UCC) was the Numbering Organization in the USA to administer and manage the EAN.UCC System. In 2005 the UCC changed its name to GS1 US.</obo:IAO_0000112>
@@ -1403,6 +1407,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/eissn -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/eissn">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
 
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">eissn stands for Electronic International Standard Serial Number.  source: http://www.definition-of.com/EISSN</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
@@ -1415,7 +1420,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/gtin14 -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/gtin14">
-
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://en.wikipedia.org/wiki/Global_Trade_Item_Number.</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
         <ns:term_status>stable</ns:term_status>
@@ -1427,6 +1432,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/identifier -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/identifier">
+        <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#identifier"/>
 
     </owl:DatatypeProperty>
     
@@ -1477,6 +1483,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
     <!-- http://purl.org/ontology/bibo/lccn -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/lccn">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
 
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Source: http://en.wikipedia.org/wiki/Library_of_Congress_Control_Number.</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
@@ -1555,6 +1562,7 @@ bibo has the domain of this property set to the union of Collection and Document
     <!-- http://purl.org/ontology/bibo/pmid -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/pmid">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
         <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Document"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The PubMed ID (PMID) identifies a citation record (rather than full-text) in the PubMed database. It is not evidence of compliance with the NIH Public Access Policy, because it does not identify a full-text submission of any kind.</obo:IAO_0000112>
         <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
@@ -1630,6 +1638,7 @@ modern society using the world of Star trek. Los Angeles Times, March
     <!-- http://purl.org/ontology/bibo/uri -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/uri">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
 
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition from: http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html</obo:IAO_0000112>
     </owl:DatatypeProperty>

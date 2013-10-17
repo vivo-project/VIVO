@@ -250,7 +250,7 @@ geo:other
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:sici
-      rdfs:label "sici"@en-US ;
+      rdfs:label "Serial Item and Contribution Identifier (SICI)"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -910,7 +910,7 @@ vcard:gender
       rdfs:label "gender"@en-US .
 
 bibo:pmid
-      rdfs:label "PubMed Identifier"@en-US ;
+      rdfs:label "PubMed ID"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1691,7 +1691,7 @@ vcard:Emergency
       rdfs:label "Emergency"@en-US .
 
 bibo:asin
-      rdfs:label "ASIN"@en-US ;
+      rdfs:label "Amazon Standard Identification Number (ASIN)"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -3798,7 +3798,7 @@ obo:RO_0001000
       rdfs:label "derives from"@en-US .
 
 bibo:gtin14
-      rdfs:label "gtin14"@en-US ;
+      rdfs:label "Global Trade Item Number (GTIN-14)"@en-US ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4407,7 +4407,7 @@ geo:nameOfficialES
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:upc
-      rdfs:label "UPC"@en-US ;
+      rdfs:label "Universal Product Code (UPC)"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
