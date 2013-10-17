@@ -325,7 +325,7 @@ local:adviseeRoleContext a :ConfigContext ;
 
 local:adviseeRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-adviseeIn.xml"^^xsd:string ;
-    :displayName "advisee in" ;
+    :displayName "advisee of" ;
     vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
