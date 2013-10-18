@@ -25,13 +25,9 @@ def create_tag(dir, branch, tag, message)
 				"git pull",
 				"git tag -a #{tag} -m '#{message}'"
 				]
-		cmds.delete_at(1) unless is_remote_branch?(branch)
+		cmds.delete_at(1) unless remote_branch_exists?(path, branch)
 		approve_and_execute(cmds, "in #{path}")
 	end
-end
-
-def is_remote_branch?(branch)
-	! `git branch --list -a origin/#{branch}`.strip.empty?
 end
 
 #

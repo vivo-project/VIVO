@@ -239,13 +239,22 @@ end
 
 def branch_exists?(dir, branch)
 	Dir.chdir(dir) do |path|
-		! `git branch --list #{branch}`.strip.empty?
+		re = Regexp.new("\\b#{branch}\\b")
+		`git branch`.index(re)
+	end
+end
+
+def remote_branch_exists?(dir, branch)
+	Dir.chdir(dir) do |path|
+		re = Regexp.new("remotes/origin/#{branch}\\b")
+		`git branch -a`.index(re)
 	end
 end
 
 def tag_exists?(dir, tag)
 	Dir.chdir(dir) do |path|
-		!`git tag --list #{tag}`.strip.empty?
+		re = Regexp.new("\\b#{tag}\\b")
+		`git tag`.index(re)
 	end
 end
 

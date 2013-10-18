@@ -26,7 +26,7 @@ def export_files(vivo_path, vitro_path, tag, branch, export_dir)
 		cmds = ["git checkout #{branch}", 
 				"git pull",
 				]
-		cmds.delete_at(1) unless is_remote_branch?(branch)
+		cmds.delete_at(1) unless remote_branch_exists?(path, branch)
 		approve_and_execute(cmds, "in #{path}")
 	end
 	
@@ -34,7 +34,7 @@ def export_files(vivo_path, vitro_path, tag, branch, export_dir)
 		cmds = ["git checkout #{branch}", 
 				"git pull",
 				]
-		cmds.delete_at(1) unless is_remote_branch?(branch)
+		cmds.delete_at(1) unless remote_branch_exists?(path, branch)
 		approve_and_execute(cmds, "in #{path}")
 	end
 	
@@ -45,10 +45,6 @@ def export_files(vivo_path, vitro_path, tag, branch, export_dir)
 			"mkdir -pv #{export_dir}/vitro-core",
 			"cp -R #{vitro_path}/* #{export_dir}/vitro-core",
 			])
-end
-
-def is_remote_branch?(branch)
-	! `git branch --list -a origin/#{branch}`.strip.empty?
 end
 
 #
