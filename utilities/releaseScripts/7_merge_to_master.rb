@@ -24,7 +24,7 @@ def merge_branch_to_master(branch, tag, message, repo_path)
 				"git merge --no-ff -Xtheirs #{branch}",
 				"git tag -a -f #{tag} -m '#{message}'"
 				]
-		cmds.insert(0, "git branch master origin/master") if `git branch --list master`.strip.empty?
+		cmds.insert(0, "git branch master origin/master") unless branch_exists?(path, "master")
 		approve_and_execute(cmds, "in #{path}")
 	end
 end
