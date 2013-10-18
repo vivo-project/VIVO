@@ -394,6 +394,21 @@ local:editorOfConfig a :ObjectPropertyDisplayConfig ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddEditorshipToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> .
 
+local:issuedCredentialContext a :ConfigContext ;
+    :hasConfiguration local:issuedCredentialConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#IssuedCredential> .
+
+local:issuedCredentialConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-issuedCredential.xml"^^xsd:string ;
+    :displayName "credentials" ;
+    vitro:displayRankAnnot 5;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasIssuedCredentialGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbiography> .
+
 ### vcard properties ###
 
 local:mailingAddressContext a :ConfigContext ;
