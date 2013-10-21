@@ -13,12 +13,12 @@ template. Then run the build script.
 --------------------------------------------------------------------------------
 =end
 
-require "#{File.dirname(__FILE__)}/subscripts/loadParms"
+require File.expand_path('subscripts/common', File.dirname(__FILE__))
 require 'erb'
 
-def build_deploy_properties
-  File.open(@deploy_properties_source) do |source_file|
-    File.open(@deploy_properties_target, 'w') do |target_file|
+def process_template_file(source, target)
+  File.open(source) do |source_file|
+    File.open(target, 'w') do |target_file|
       raw = source_file.read()
       cooked = ERB.new(raw).result
       target_file.write(cooked)
@@ -26,14 +26,18 @@ def build_deploy_properties
   end
 end
 
-puts system("rm -r ~/LoadTesting/tomcat/webapps/vivo*")
-puts system("rm -r ~/LoadTesting/tomcat/conf/Catalina/localhost/vivo*")
+puts system("rm -r #{@home}/tomcat/webapps/vivo*")
+puts system("rm -r #{@home}/tomcat/conf/Catalina/localhost/vivo*")
+puts system("rm -r #{@home}/tomcat/work/Catalina/localhost/vivo*")
 
-@deploy_properties_source = "/home/jeb228/LoadTesting/distros/#{@distro_name}/deploy.properties.template"
-@deploy_properties_target = "/home/jeb228/LoadTesting/distros/#{@distro_name}/vivo/deploy.properties"
-build_deploy_properties()
-
-Dir.chdir("/home/jeb228/LoadTesting/distros/#{@distro_name}/vivo") do |path|
-  system "ant clean deploy"
+if (@is_git)
+  process_template_file(distro_file("build.properties.template"), distro_file("VIVO/build.properties"))
+  process_template_file(distro_file("runtime.properties.template"), version_file("data/runtime.properties"))
+  Dir.chdir(distro_file("VIVO")) { |path| system "ant clean deploy" }
+else 
+  process_template_file(distro_file("deploy.properties.template"), distro_file("vivo/deploy.properties"))
+  Dir.chdir(distro_file("vivo")) { |path| system "ant clean deploy" }
 end
+
+
 

@@ -9,7 +9,7 @@ What is the currently-selected test?
 --------------------------------------------------------------------------------
 =end
 
-require "#{File.dirname(__FILE__)}/subscripts/loadParms"
+require File.expand_path('subscripts/common', File.dirname(__FILE__))
 
 puts "Current test is #{@test_name}, #{@test_threads} threads, #{@test_iterations} iterations"
 
