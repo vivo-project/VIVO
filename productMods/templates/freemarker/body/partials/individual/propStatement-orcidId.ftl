@@ -8,7 +8,7 @@
 <@showStatement statement />
 
 <#macro showStatement statement>
-    <a href="${statement.value!}" title="ORCID iD" target="_blank">${statement.localName!statement.value!}</a>
+    <a href="${statement.value!}" title="ORCID iD" target="_blank">${statement.value!"ORCID iD not found"}</a>
 </#macro>
 
 

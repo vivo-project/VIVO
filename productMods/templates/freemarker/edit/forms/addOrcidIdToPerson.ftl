@@ -17,7 +17,7 @@
 
 <#--Retrieve variables needed-->
 <#assign orcidIdFromConf = lvf.getFormFieldValue(editSubmission, editConfiguration, "orcidId") />
-<#assign orcidIdValue = orcidIdFromConf?replace("http://www.orcid.org/","") />
+<#assign orcidIdValue = orcidIdFromConf?replace("http://orcid.org/","") />
 <#--If edit submission exists, then retrieve validation errors if they exist-->
 <#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
 	<#assign submissionErrors = editSubmission.validationErrors/>

@@ -8,10 +8,9 @@
 <list-view-config>
     <query-select>    
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;  
-        SELECT ?value ?localName
+        SELECT ?value
         WHERE {
                 ?subject ?property ?value 
-                LET (?localName := afn:localname(?value))
         } LIMIT 1
     </query-select>
 
