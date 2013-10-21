@@ -37,8 +37,7 @@
                                 ?adviseeRole a core:AdviseeRole .
                                 OPTIONAL { ?advisee rdfs:label ?adviseeLabel }
                      }
-                     OPTIONAL { ?advisingRel core:relates ?degree .
-                                ?degree a core:AcademicDegree .
+                     OPTIONAL { ?advisingRel core:degreeCandidacy ?degree .
                                 OPTIONAL { ?degree rdfs:label ?degreeLabel }
                                 OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
                      }
@@ -163,24 +162,7 @@
                     ?advisorRole core:relatedBy ?advisingRel .
                     ?subject core:relatedBy ?advisingRel .
                     ?advisingRel a core:AdvisingRelationship .
-                    ?advisingRel core:relates ?degree .
-                    ?degree a core:AcademicDegree .
-                } UNION {
-                    ?subject ?property ?advisorRole .
-                    ?advisorRole a core:AdvisorRole .
-                    ?advisorRole core:relatedBy ?advisingRel .
-                    ?subject core:relatedBy ?advisingRel .
-                    ?advisingRel a core:AdvisingRelationship .
-                    ?advisingRel core:relates ?degree .
-                    ?degree a core:AcademicDegree .
-                    ?degree rdfs:label ?degreeLabel
-                } UNION {
-                    ?subject ?property ?advisorRole .
-                    ?advisorRole a core:AdvisorRole .
-                    ?advisorRole core:relatedBy ?advisingRel .
-                    ?subject core:relatedBy ?advisingRel .
-                    ?advisingRel a core:AdvisingRelationship .
-                    ?advisingRel core:relates ?degree .
+                    ?advisingRel core:degreeCandidacy ?degree .
                     ?degree a core:AcademicDegree .
                     ?degree rdfs:label ?degreeLabel .
                     ?degree core:abbreviation ?degreeAbbr
@@ -196,16 +178,16 @@
                 ?advisorRole core:relatedBy ?advisingRel .
                 ?subject core:relatedBy ?advisingRel .
                 ?advisingRel a core:AdvisingRelationship .
-                ?award core:dateTimeInterval ?dateTimeInterval .
+                ?advisingRel core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:start ?dateTimeStartValue .
                 ?dateTimeStartValue core:dateTime ?dateTimeStart 
             } WHERE {
-                ?subject ?property ?advisingRel .
+                ?subject ?property ?advisorRole .
                 ?advisorRole a core:AdvisorRole .
                 ?advisorRole core:relatedBy ?advisingRel .
                 ?subject core:relatedBy ?advisingRel .
                 ?advisingRel a core:AdvisingRelationship .
-                ?award core:dateTimeInterval ?dateTimeInterval .
+                ?advisingRel core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:start ?dateTimeStartValue .
                 ?dateTimeStartValue core:dateTime ?dateTimeStart 
             } 
@@ -219,7 +201,7 @@
                 ?advisorRole core:relatedBy ?advisingRel .
                 ?subject core:relatedBy ?advisingRel .
                 ?advisingRel a core:AdvisingRelationship .
-                ?award core:dateTimeInterval ?dateTimeInterval .
+                ?advisingRel core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:end ?dateTimeEndValue .
                 ?dateTimeEndValue core:dateTime ?dateTimeEnd 
             } WHERE {
@@ -228,7 +210,7 @@
                 ?advisorRole core:relatedBy ?advisingRel .
                 ?subject core:relatedBy ?advisingRel .
                 ?advisingRel a core:AdvisingRelationship .
-                ?award core:dateTimeInterval ?dateTimeInterval .
+                ?advisingRel core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:end ?dateTimeEndValue .
                 ?dateTimeEndValue core:dateTime ?dateTimeEnd 
             } 

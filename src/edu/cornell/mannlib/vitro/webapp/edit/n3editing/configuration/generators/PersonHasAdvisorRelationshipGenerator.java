@@ -249,14 +249,14 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
         "?vcardName vcard:familyName ?lastName .";
     
     final static String degreeAssertion  =      
-        "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?degree . \n" +
-        "?degree <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . ";
+        "?advisingRelationship <http://vivoweb.org/ontology/core#degreeCandidacy> ?degree . \n" +
+        " ";
 
     //This is for an existing subject area
     //Where we only need the existing subject area label
     final static String n3ForExistingSubjAreaAssertion  =      
-        "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingSubjArea . \n" +
-        "?existingSubjArea <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . ";   
+        "?advisingRelationship <http://vivoweb.org/ontology/core#hasSubjectArea> ?existingSubjArea . \n" +
+        "?existingSubjArea <http://vivoweb.org/ontology/core#subjectAreaOf> ?advisingRelationship";   
     //For new subject area, we include all new information
     //new subject area should always be a new resource
     //and the following should only get evaluated 
@@ -300,15 +300,15 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
         "}";
 
     final static String existingAdvisorRoleQuery  =      
-        "SELECT ?advisorRole WHERE { \n" +
-        "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
-        "?advisorRole a  <" + advisorRoleClass + "> . \n" +              
+        "SELECT ?existingAdvisorRole WHERE { \n" +
+        "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingAdvisorRole . \n" +
+        "?existingAdvisorRole a  <" + advisorRoleClass + "> . \n" +              
         "}";
 
     final static String existingAdviseeRoleQuery  =      
-        "SELECT ?adviseeRole WHERE { \n" +
-        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?adviseeRole . \n" +
-        " ?adviseeRole a  <" + adviseeRoleClass + "> . \n" +              
+        "SELECT ?existingAdviseeRole WHERE { \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingAdviseeRole . \n" +
+        " ?existingAdviseeRole a  <" + adviseeRoleClass + "> . \n" +              
         "}";
 
     final static String adviseeLabelQuery =
@@ -321,19 +321,17 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
 
     final static String subjAreaQuery =
         "SELECT ?existingSubjArea WHERE { \n" +
-        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingSubjArea . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#hasSubjectArea> ?existingSubjArea . \n" +
         " ?existingSubjArea a <http://www.w3.org/2004/02/skos/core#Concept>  . \n" +
         " ?existingSubjArea <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type \n" +
-        " FILTER  (?type != <http://vivoweb.org/ontology/core#AcademicDegree>)  . \n" +        
         "}";
 
     final static String subjAreaLabelQuery  =      
         "SELECT ?existingSubjAreaLabel WHERE { \n" +
-        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingSubjArea . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#hasSubjectArea> ?existingSubjArea . \n" +
         " ?existingSubjArea a <http://www.w3.org/2004/02/skos/core#Concept>  . \n" +
         " ?existingSubjArea <" + label + "> ?existingSubjAreaLabel . \n" +
         " ?existingSubjArea <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type \n" +
-        " FILTER  (?type != <http://vivoweb.org/ontology/core#AcademicDegree>)  . \n" +        
         "}";
 
     final static String advisingRelLabelQuery =
@@ -343,11 +341,10 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
 
     final static String degreeQuery  =  
         "SELECT ?existingDegree WHERE {\n"+
-        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingDegree . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#degreeCandidacy> ?existingDegree . \n" +
         " ?existingDegree a  <" + degreeClass + "> . \n" +
         "}";
         
-
     final static String existingStartDateQuery =
         "SELECT ?existingDateStart WHERE { \n" +
         "  ?advisingRelationship <" + advisingRelToInterval + "> ?intervalNode . \n" +

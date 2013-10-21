@@ -15,9 +15,9 @@
  
     <#local linkedIndividual>
         <#if statement.credential??>
-            <a href="${profileUrl(statement.uri("credential"))}" title="${i18n().credential_name}">${statement.credentialLabel!statement.localName!}</a>
+            <a href="${profileUrl(statement.uri("credential"))}" title="${i18n().credential_name}">${statement.credentialLabel!statement.issuedCredentialLabel!statement.credentialLocal!}</a>
         <#else>
-            <a href="${profileUrl(statement.uri("issuedCredential"))}" title="${i18n().credential_name}">${statement.issuedCredential!}</a>
+            <a href="${profileUrl(statement.uri("issuedCredential"))}" title="${i18n().credential_name}">${statement.issuedCredentialLabel!"missing credential"}</a>
         </#if>
     </#local>
 
