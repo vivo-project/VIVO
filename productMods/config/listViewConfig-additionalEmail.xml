@@ -7,13 +7,14 @@
     <query-select>    
         PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
         
-        SELECT DISTINCT ?vcard ?email
+        SELECT DISTINCT ?vcard 
+                        ?email
                         ?emailAddress
         WHERE {
             ?subject ?property ?vcard .
-            ?vcard vcard:hasEmail ?email 
-            OPTIONAL { ?email vcard:email ?emailAddress  }
-        MINUS {?email a vcard:Work}
+            ?vcard vcard:hasEmail ?email .
+            ?email vcard:email ?emailAddress 
+            MINUS {?email a vcard:Work}
         } 
     </query-select>
        
@@ -24,16 +25,9 @@
             ?vcard vcard:hasEmail ?email .
             ?email ?emailProperty ?emailValue 
         } WHERE {
-            {
-               ?subject ?property ?vcard
-            } UNION {
-               ?subject ?property ?vcard .
-               ?vcard vcard:hasEmail ?email
-            } UNION {
                ?subject ?property ?vcard .
                ?vcard vcard:hasEmail ?email .
                ?email ?emailProperty ?emailValue 
-            } 
         } 
     </query-construct>
               

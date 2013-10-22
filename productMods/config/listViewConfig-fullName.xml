@@ -36,9 +36,6 @@
                ?subject ?property ?vcard
             } UNION {
                ?subject ?property ?vcard .
-               ?vcard vcard:hasName ?fullName
-            } UNION {
-               ?subject ?property ?vcard .
                ?vcard vcard:hasName ?fullName .
                ?fullName ?fullNameProperty ?fullNameValue 
             } 

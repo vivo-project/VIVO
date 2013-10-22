@@ -17,10 +17,10 @@
                         ?infoResource ?infoResourceName 
                         ?dateTime
         WHERE {
-            ?subject ?property ?editorship .
-            ?editorship core:relates ?infoResource .
-            ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .                      
-            ?infoResource rdfs:label ?infoResourceName .
+                ?subject ?property ?editorship .
+                ?editorship core:relates ?infoResource .
+                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .                      
+                ?infoResource rdfs:label ?infoResourceName .
             
                OPTIONAL { ?infoResource vitro:mostSpecificType ?subclass }     
                OPTIONAL { ?infoResource core:dateTimeValue ?dateTimeValue .
@@ -60,7 +60,9 @@
             ?subject ?property ?editorship .  
             ?editorship core:relates ?infoResource .
             ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-            ?infoResource rdfs:label ?infoResourceName 
+            ?infoResource rdfs:label ?infoResourceName .
+            ?infoResource core:dateTimeValue ?dateTimeValue .
+            ?dateTimeValue core:dateTime ?dateTime  
         } WHERE {
             {
                ?subject ?property ?editorship .
@@ -70,37 +72,18 @@
                ?subject ?property ?editorship .
                ?editorship a core:Editorship .
                ?editorship core:relates ?infoResource .
-               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt;  
-            } UNION {
-               ?subject ?property ?editorship .
-               ?editorship a core:Editorship .
-               ?editorship core:relates ?infoResource .
                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
                ?infoResource rdfs:label ?infoResourceName 
-            } 
+            } UNION {
+                ?subject ?property ?editorship .
+                ?editorship a core:Editorship .
+                ?editorship core:relates ?infoResource .
+                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+                ?infoResource core:dateTimeValue ?dateTimeValue .
+                ?dateTimeValue core:dateTime ?dateTime  
+            }
     } 
     </query-construct>
-
-    <query-construct>
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
-        PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt; 
-        CONSTRUCT { 
-            ?subject ?property ?editorship .  
-            ?editorship a core:Editorship .
-            ?editorship core:relates ?infoResource .
-            ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-            ?infoResource core:dateTimeValue ?dateTimeValue .
-            ?dateTimeValue core:dateTime ?dateTime  
-        } WHERE {
-            ?subject ?property ?editorship .
-            ?editorship a core:Editorship .
-            ?editorship core:relates ?infoResource .
-            ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-            ?infoResource core:dateTimeValue ?dateTimeValue .
-            ?dateTimeValue core:dateTime ?dateTime  
-        } 
-    </query-construct>
-    
+   
     <template>propStatement-editorship.ftl</template>
 </list-view-config>

@@ -24,5 +24,5 @@
     </#local>
 
     <#-- If property is collated, then subclass label is redundant information -->
-    ${linkedIndividual} <#if ! property.collatedBySubclass>&nbsp;(${statement.subclassLabel!})</#if> ${dateTime!}
+    ${linkedIndividual} <#if (! property.collatedBySubclass) && statement.subclassLabel?has_content>&nbsp;(${statement.subclassLabel!})</#if> ${dateTime!}
 </#macro>

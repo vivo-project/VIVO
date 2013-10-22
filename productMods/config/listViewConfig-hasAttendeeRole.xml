@@ -179,20 +179,8 @@
                 ?role a vivo:AttendeeRole .
                 ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?event2 a event:Event .
-                ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event2 
-            } UNION {
-                ?subject ?property ?role .
-                ?role a vivo:AttendeeRole .
-                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
-                ?event2 a event:Event .
                 ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event2 .
                 ?event2 rdfs:label ?event2Label
-            } UNION {
-                ?subject ?property ?role .
-                ?role a vivo:AttendeeRole .
-                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
-                ?event2 a event:Event .
-                ?event2 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 
             } UNION {
                 ?subject ?property ?role .
                 ?role a vivo:AttendeeRole .
@@ -226,22 +214,8 @@
                 ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?event2 a event:Event .
                 ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event3 .
-                ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event2 
-            } UNION {
-                ?subject ?property ?role .
-                ?role a vivo:AttendeeRole .
-                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
-                ?event2 a event:Event .
-                ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event3 .
                 ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event2 .
                 ?event2 rdfs:label ?event2Label
-            } UNION {
-                ?subject ?property ?role .
-                ?role a vivo:AttendeeRole .
-                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
-                ?event2 a event:Event .
-                ?event2 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event3 . 
-                ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 
             } UNION {
                 ?subject ?property ?role .
                 ?role a vivo:AttendeeRole .
@@ -274,20 +248,8 @@
                 ?role a vivo:AttendeeRole .
                 ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?series a vivo:EventSeries .
-                ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series 
-            } UNION {
-                ?subject ?property ?role .
-                ?role a vivo:AttendeeRole .
-                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
-                ?series a vivo:EventSeries .
                 ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series .
                 ?series rdfs:label ?seriesLabel
-            } UNION {
-                ?subject ?property ?role .
-                ?role a vivo:AttendeeRole .
-                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
-                ?series a vivo:EventSeries .
-                ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 
             } UNION {
                 ?subject ?property ?role .
                 ?role a vivo:AttendeeRole .
@@ -320,22 +282,8 @@
                 ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                 ?series a vivo:EventSeries .
                 ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event3 .
-                ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series 
-            } UNION {
-                ?subject ?property ?role .
-                ?role a vivo:AttendeeRole .
-                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
-                ?series a vivo:EventSeries .
-                ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event3 .
                 ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series .
                 ?series rdfs:label ?seriesLabel
-            } UNION {
-                ?subject ?property ?role .
-                ?role a vivo:AttendeeRole .
-                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
-                ?series a vivo:EventSeries .
-                ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event3 . 
-                ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 
             } UNION {
                 ?subject ?property ?role .
                 ?role a vivo:AttendeeRole .
