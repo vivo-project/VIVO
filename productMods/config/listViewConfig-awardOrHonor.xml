@@ -63,10 +63,12 @@
                 ?awardReceipt rdfs:label ?receiptLabel .
                 ?awardReceipt core:relates ?award .
                 ?award a core:Award .
-                ?award core:relatedBy ?awardReceipt .
+                ?award core:relatedBy ?awardReceipt . 
                 ?award rdfs:label ?awardLabel .
                 ?award core:assignedBy ?assignedBy .
-                ?assignedBy rdfs:label ?assignedByLabel
+                ?assignedBy rdfs:label ?assignedByLabel .
+                ?awardReceipt core:dateTimeValue ?dateTimeValue .
+                ?dateTimeValue core:dateTime ?dateTime  
             } WHERE {
             {
                ?subject ?property ?awardReceipt .
@@ -81,13 +83,6 @@
                 ?awardReceipt rdfs:label ?receiptLabel .
                 ?awardReceipt core:relates ?award .
                 ?award a core:Award .
-                ?award core:relatedBy ?awardReceipt 
-            } UNION {
-                ?subject ?property ?awardReceipt .
-                ?awardReceipt a core:AwardReceipt .
-                ?awardReceipt rdfs:label ?receiptLabel .
-                ?awardReceipt core:relates ?award .
-                ?award a core:Award .
                 ?award core:relatedBy ?awardReceipt .
                 ?award rdfs:label ?awardLabel 
             } UNION {
@@ -96,19 +91,13 @@
                 ?awardReceipt rdfs:label ?receiptLabel .
                 ?awardReceipt core:relates ?award .
                 ?award a core:Award .
-                ?award core:relatedBy ?awardReceipt .
-                ?award rdfs:label ?awardLabel .
-                ?award core:assignedBy ?assignedBy
+                ?award core:assignedBy ?assignedBy .
+                ?assignedBy rdfs:label ?assignedByLabel
             } UNION {
                 ?subject ?property ?awardReceipt .
                 ?awardReceipt a core:AwardReceipt .
-                ?awardReceipt rdfs:label ?receiptLabel .
-                ?awardReceipt core:relates ?award .
-                ?award a core:Award .
-                ?award core:relatedBy ?awardReceipt .
-                ?award rdfs:label ?awardLabel .
-                ?award core:assignedBy ?assignedBy .
-                ?assignedBy rdfs:label ?assignedByLabel
+                ?awardReceipt core:dateTimeValue ?dateTimeValue .
+                ?dateTimeValue core:dateTime ?dateTime  
             }
         }
     </query-construct>
@@ -146,22 +135,5 @@
                 ?dateTimeEndValue core:dateTime ?dateTimeEnd 
             } 
     </query-construct>
-
-    <query-construct>
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-        CONSTRUCT { 
-            ?subject ?property ?awardReceipt . 
-            ?awardReceipt a core:AwardReceipt . 
-            ?awardReceipt core:dateTimeValue ?dateTimeValue .
-            ?dateTimeValue core:dateTime ?dateTime 
-        } WHERE {
-            ?subject ?property ?awardReceipt .
-            ?awardReceipt a core:AwardReceipt .
-            ?awardReceipt core:dateTimeValue ?dateTimeValue .
-            ?dateTimeValue core:dateTime ?dateTime  
-        } 
-    </query-construct>
-              
     <template>propStatement-awardOrHonor.ftl</template>
 </list-view-config>

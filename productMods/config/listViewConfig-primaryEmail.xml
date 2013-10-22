@@ -12,8 +12,8 @@
         WHERE {
             ?subject ?property ?vcard .
             ?vcard vcard:hasEmail ?email .
-            ?email a vcard:Work
-            OPTIONAL { ?email vcard:email ?emailAddress  }
+            ?email a vcard:Work .
+            ?email vcard:email ?emailAddress 
             
         } 
     </query-select>
@@ -26,18 +26,10 @@
             ?email a vcard:Work .
             ?email ?emailProperty ?emailValue 
         } WHERE {
-            {
-               ?subject ?property ?vcard
-            } UNION {
-               ?subject ?property ?vcard .
-               ?vcard vcard:hasEmail ?email .
-               ?email a vcard:Work 
-            } UNION {
                ?subject ?property ?vcard .
                ?vcard vcard:hasEmail ?email .
                ?email a vcard:Work .
                ?email ?emailProperty ?emailValue 
-            } 
         } 
     </query-construct>
               

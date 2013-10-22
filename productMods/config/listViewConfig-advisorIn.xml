@@ -32,13 +32,11 @@
                      LET ( ?localName := afn:localname(?advisingRel) )
                      OPTIONAL { ?advisingRel rdfs:label ?advisingRelLabel  }
                      OPTIONAL { ?advisingRel core:relates ?advisee .
-                                ?advisee a foaf:Person .
-                                ?advisee &lt;http://purl.obolibrary.org/obo/RO_0000053&gt; ?adviseeRole .
-                                ?adviseeRole a core:AdviseeRole .
+                                ?advisee a foaf:Person . 
                                 OPTIONAL { ?advisee rdfs:label ?adviseeLabel }
                      }
                      OPTIONAL { ?advisingRel core:degreeCandidacy ?degree .
-                                OPTIONAL { ?degree rdfs:label ?degreeLabel }
+                                ?degree rdfs:label ?degreeLabel .
                                 OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
                      }
                      <collated>
@@ -75,33 +73,19 @@
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
         CONSTRUCT { 
             ?subject ?property ?advisorRole .
-            ?advisorRole a core:AdvisorRole .
             ?advisorRole core:relatedBy ?advisingRel .
-            ?subject core:relatedBy ?advisingRel .
-            ?advisingRel a core:AdvisingRelationship .
-            ?advisingRel ?advisingRelProperty ?advisingRelValue .
             ?advisingRel rdfs:label ?advisingRelLabel .
         } WHERE {
             {
                ?subject ?property ?advisorRole .
                ?advisorRole a core:AdvisorRole .
                ?advisorRole core:relatedBy ?advisingRel .
-               ?subject core:relatedBy ?advisingRel .
                ?advisingRel a core:AdvisingRelationship 
             } UNION {
                ?subject ?property ?advisorRole .
                ?advisorRole a core:AdvisorRole .
                ?advisorRole core:relatedBy ?advisingRel .
-               ?subject core:relatedBy ?advisingRel .
                ?advisingRel a core:AdvisingRelationship .
-               ?advisingRel ?advisingRelProperty ?advisingRelValue  
-            } UNION {
-               ?subject ?property ?advisorRole .
-               ?advisorRole a core:AdvisorRole .
-               ?advisorRole core:relatedBy ?advisingRel .
-               ?subject core:relatedBy ?advisingRel .
-               ?advisingRel a core:AdvisingRelationship .
-               ?advisingRel ?advisingRelProperty ?advisingRelValue . 
                ?advisingRel rdfs:label ?advisingRelLabel
             } 
         }
@@ -117,39 +101,25 @@
                 ?subject ?property ?advisorRole .
                 ?advisorRole a core:AdvisorRole .
                 ?advisorRole core:relatedBy ?advisingRel .
-                ?subject core:relatedBy ?advisingRel .
                 ?advisingRel a core:AdvisingRelationship .
                 ?advisingRel core:relates ?advisee .
                 ?advisee a foaf:Person .
-                ?advisee rdfs:label ?adviseeLabel .
                 ?advisee &lt;http://purl.obolibrary.org/obo/RO_0000053&gt; ?adviseeRole .
                 ?adviseeRole a core:AdviseeRole .
-                ?advisingRel core:relates ?degree .
-                ?degree a core:AcademicDegree .
+                ?advisee rdfs:label ?adviseeLabel .
+                ?advisingRel core:degreeCandidacy ?degree .
                 ?degree rdfs:label ?degreeLabel .
                 ?degree core:abbreviation ?degreeAbbr
-            } WHERE {
+                } WHERE {
                 {
                     ?subject ?property ?advisorRole .
                     ?advisorRole a core:AdvisorRole .
                     ?advisorRole core:relatedBy ?advisingRel .
-                    ?subject core:relatedBy ?advisingRel .
                     ?advisingRel a core:AdvisingRelationship .
                 } UNION {
                     ?subject ?property ?advisorRole . 
                     ?advisorRole a core:AdvisorRole .
                     ?advisorRole core:relatedBy ?advisingRel .
-                    ?subject core:relatedBy ?advisingRel .
-                    ?advisingRel a core:AdvisingRelationship .
-                    ?advisingRel core:relates ?advisee .
-                    ?advisee a foaf:Person .
-                    ?advisee &lt;http://purl.obolibrary.org/obo/RO_0000053&gt; ?adviseeRole .
-                    ?adviseeRole a core:AdviseeRole 
-                } UNION {
-                    ?subject ?property ?advisorRole .
-                    ?advisorRole a core:AdvisorRole .
-                    ?advisorRole core:relatedBy ?advisingRel .
-                    ?subject core:relatedBy ?advisingRel .
                     ?advisingRel a core:AdvisingRelationship .
                     ?advisingRel core:relates ?advisee .
                     ?advisee a foaf:Person .
@@ -160,11 +130,15 @@
                     ?subject ?property ?advisorRole .
                     ?advisorRole a core:AdvisorRole .
                     ?advisorRole core:relatedBy ?advisingRel .
-                    ?subject core:relatedBy ?advisingRel .
                     ?advisingRel a core:AdvisingRelationship .
                     ?advisingRel core:degreeCandidacy ?degree .
-                    ?degree a core:AcademicDegree .
                     ?degree rdfs:label ?degreeLabel .
+                } UNION {
+                    ?subject ?property ?advisorRole .
+                    ?advisorRole a core:AdvisorRole .
+                    ?advisorRole core:relatedBy ?advisingRel .
+                    ?advisingRel a core:AdvisingRelationship .
+                    ?advisingRel core:degreeCandidacy ?degree .
                     ?degree core:abbreviation ?degreeAbbr
                 }
             }        
@@ -174,7 +148,6 @@
             PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
             CONSTRUCT { 
                 ?subject ?property ?advisorRole .
-                ?advisorRole a core:AdvisorRole .
                 ?advisorRole core:relatedBy ?advisingRel .
                 ?subject core:relatedBy ?advisingRel .
                 ?advisingRel a core:AdvisingRelationship .
@@ -184,8 +157,8 @@
             } WHERE {
                 ?subject ?property ?advisorRole .
                 ?advisorRole a core:AdvisorRole .
-                ?advisorRole core:relatedBy ?advisingRel .
                 ?subject core:relatedBy ?advisingRel .
+                ?advisorRole core:relatedBy ?advisingRel .
                 ?advisingRel a core:AdvisingRelationship .
                 ?advisingRel core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:start ?dateTimeStartValue .
@@ -197,7 +170,6 @@
             PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
             CONSTRUCT { 
                 ?subject ?property ?advisorRole .
-                ?advisorRole a core:AdvisorRole .
                 ?advisorRole core:relatedBy ?advisingRel .
                 ?subject core:relatedBy ?advisingRel .
                 ?advisingRel a core:AdvisingRelationship .
@@ -207,8 +179,8 @@
             } WHERE {
                 ?subject ?property ?advisorRole .
                 ?advisorRole a core:AdvisorRole .
-                ?advisorRole core:relatedBy ?advisingRel .
                 ?subject core:relatedBy ?advisingRel .
+                ?advisorRole core:relatedBy ?advisingRel .
                 ?advisingRel a core:AdvisingRelationship .
                 ?advisingRel core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:end ?dateTimeEndValue .

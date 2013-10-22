@@ -73,11 +73,6 @@
             ?subject ?property ?role .
             ?role a core:EditorRole .
             ?role core:roleContributesTo ?activity .
-            ?activity vitro:mostSpecificType ?subclass
-        } UNION {
-            ?subject ?property ?role .
-            ?role a core:EditorRole .
-            ?role core:roleContributesTo ?activity .
             ?activity vitro:mostSpecificType ?subclass .
             ?subclass rdfs:label ?subclassLabel  
         }

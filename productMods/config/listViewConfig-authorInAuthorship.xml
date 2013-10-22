@@ -131,7 +131,6 @@
                ?infoResource core:hasPublicationVenue ?publishedIn .
                ?publishedIn  rdfs:label ?journal
             }
-
         } 
     </query-construct>
 
