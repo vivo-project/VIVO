@@ -98,73 +98,78 @@
 </tr>
 <!--Add visiting hours-->
 <tr>
-	<td>select</td>
-	<td>ParentURI</td>
-	<td>label=dateTimeInterval (vivo)</td>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>GroupURI</td>
+	<td>name=ParentURI</td>
+	<td>label=date/time interval (vivo)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=GroupURI</td>
 	<td>label=Place</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>HiddenFromDisplayBelowRoleLevelUsingRoleUri</td>
-	<td>label=editor, curator, site administrator</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>ProhibitedFromUpdateBelowRoleLevelUsingRoleUri</td>
-	<td>label=site administrator</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>Namespace</td>
+	<td>name=Namespace</td>
 	<td>label=Bibontology</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>LocalName</td>
+	<td>name=LocalName</td>
 	<td>visitingHours</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>DomainPublic</td>
+	<td>name=DomainPublic</td>
 	<td>visiting hours</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>NamespaceInverse</td>
+	<td>name=NamespaceInverse</td>
 	<td>label=Bibontology</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>DomainVClassURI</td>
-	<td>label=vivo:Museum</td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>LocalNameInverse</td>
+	<td>name=LocalNameInverse</td>
 	<td>visitingHoursFor</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>RangePublic</td>
+	<td>name=RangePublic</td>
 	<td>visiting hours for</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>RangeVClassURI</td>
-	<td>label=vivo:Date/Time Interval</td>
+	<td>name=DomainVClassURI</td>
+	<td>label=Museum (vivo)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=RangeVClassURI</td>
+	<td>label=Date/Time Interval (vivo)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=HiddenFromDisplayBelowRoleLevelUsingRoleUri</td>
+	<td>label=editor, curator, site administrator</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=ProhibitedFromUpdateBelowRoleLevelUsingRoleUri</td>
+	<td>label=site administrator</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>DomainDisplayTier</td>
+	<td>name=DomainDisplayTier</td>
 	<td>100</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>OfferCreateNewOption</td>
+	<td>name=OfferCreateNewOption</td>
 	<td></td>
 </tr>
 <tr>
@@ -180,12 +185,12 @@
 <!--Verify visiting hours has been properly added-->
 <tr>
 	<td>verifyTextPresent</td>
-	<td>bibo:visitingHours</td>
+	<td>visiting hours (bibo)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=exact:vivo:dateTimeInterval</td>
+	<td>link=date/time interval (vivo)</td>
 	<td></td>
 </tr>
 <tr>
@@ -204,13 +209,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=exact:vivo:Museum</td>
+	<td>verifyTextPresent</td>
+	<td>visiting hours</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=exact:vivo:Date/Time Interval</td>
+	<td>link=Museum (vivo)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Date/Time Interval (vivo)</td>
 	<td></td>
 </tr>
 <tr>

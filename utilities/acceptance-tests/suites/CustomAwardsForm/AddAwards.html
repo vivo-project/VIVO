@@ -87,8 +87,13 @@
 </tr>
 <!--Select awards editing-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[12]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-awardOrHonor &gt; img.add-individual</td>
+	<td>xpath=(//img[@alt='add'])[33]</td>
 	<td></td>
 </tr>
 <tr>
@@ -109,8 +114,13 @@
 </tr>
 <!--Add only organization name, which results in error-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[12]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-awardOrHonor &gt; img.add-individual</td>
+	<td>xpath=(//img[@alt='add'])[33]</td>
 	<td></td>
 </tr>
 <tr>
@@ -188,7 +198,7 @@
 <!--Add second award using same organization-->
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-awardOrHonor &gt; img.add-individual</td>
+	<td>xpath=(//img[@alt='add'])[33]</td>
 	<td></td>
 </tr>
 <tr>
@@ -270,7 +280,7 @@
 <!--Add third award using new organization-->
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-awardOrHonor &gt; img.add-individual</td>
+	<td>xpath=(//img[@alt='add'])[33]</td>
 	<td></td>
 </tr>
 <tr>
@@ -563,6 +573,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Primate Expert</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[6]</td>
 	<td></td>
 </tr>
 <tr>

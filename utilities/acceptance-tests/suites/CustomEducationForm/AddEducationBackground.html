@@ -86,8 +86,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[12]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='educationalTraining']/a/img</td>
+	<td>css=a.add-RO_0000056 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -108,7 +113,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='educationalTraining']/a/img</td>
+	<td>css=a.add-RO_0000056 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <!--Verify entering no fields results in error-->
@@ -197,7 +207,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>degree</td>
+	<td>id=degreeUri</td>
 	<td>label=B.S. Bachelor of Science</td>
 </tr>
 <tr>
@@ -261,9 +271,10 @@
 	<td>link=Carroll College</td>
 	<td></td>
 </tr>
+<!--Add degree from another new organization-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='educationalTraining']/a/img</td>
+	<td>css=a.add-RO_0000056 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -271,32 +282,6 @@
 	<td>Edit</td>
 	<td></td>
 </tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<!--Add degree from another new organization-->
 <tr>
 	<td>select</td>
 	<td>id=typeSelector</td>
@@ -319,7 +304,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>degree</td>
+	<td>id=degreeUri</td>
 	<td>label=M.B.A. Master of Business Administration</td>
 </tr>
 <tr>
@@ -340,6 +325,31 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <!--Verify both degrees appear-->
@@ -371,18 +381,18 @@
 <!--Add third degree from new organization-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='educationalTraining']/a/img</td>
+	<td>css=a.add-RO_0000056 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>id=typeSelector</td>
 	<td>label=University</td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -396,7 +406,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>degree</td>
+	<td>id=degreeUri</td>
 	<td>label=M.Ed. Master of Education</td>
 </tr>
 <tr>

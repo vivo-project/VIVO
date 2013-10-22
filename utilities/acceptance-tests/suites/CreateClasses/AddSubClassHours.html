@@ -118,11 +118,6 @@
 	<td>label=Times</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>Namespace</td>
-	<td>label=VIVO core</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>LocalName</td>
 	<td>hours</td>
@@ -140,7 +135,7 @@
 <!--Verify new Times sub-class Hours added-->
 <tr>
 	<td>verifyTextPresent</td>
-	<td>vivo:Hours</td>
+	<td>Hours</td>
 	<td></td>
 </tr>
 <tr>
@@ -150,12 +145,32 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>(not identified)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>hours</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>site administrator</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>exact:http://vivoweb.org/ontology/core#hours</td>
+	<td>-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>(unspecified)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>http://vivo.mydomain.edu/individual/hours</td>
 	<td></td>
 </tr>
 <tr>
@@ -170,7 +185,17 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=vivo:Hours</td>
+	<td>link=Hours</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Times</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>http://vivo.mydomain.edu/individual/</td>
 	<td></td>
 </tr>
 <!--Logout-->
