@@ -41,7 +41,7 @@ def locate_files()
   @author_uris_file = "#{data_dir}/authorUris.csv"
   raise "Author URIs file doesn't exist: '#{@author_uris_file}'" unless File.file?(@author_uris_file)
 
-  @xsl_stylesheet_file = "/home/jeb228/LoadTesting/jmeter/jakarta-jmeter-2.4/extras/jmeter-results-report_21.xsl"
+  @xsl_stylesheet_file = "#{@home}/jmeter/jakarta-jmeter-2.4/extras/jmeter-results-report_21.xsl"
 end
 
 def prepare_jmeter_properties()
@@ -87,7 +87,7 @@ locate_files()
 prepare_jmeter_properties()
 test_the_webapp()
 
-Dir.chdir("/home/jeb228/LoadTesting/jmeter/jakarta-jmeter-2.4/bin") do |path|
+Dir.chdir("#{@home}/jmeter/jakarta-jmeter-2.4/bin") do |path|
   puts "RUNNING TESTS"
   system "./jmeter -n -t #{@test_jmx_file} -l #{@test_jtl_file} -j #{@test_log_file} #{@jmeter_properties}"
   puts "CONVERTING TO HTML"
