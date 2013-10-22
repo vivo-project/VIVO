@@ -8,5 +8,8 @@ Duh
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 =end
-puts system("~/LoadTesting/tomcat/bin/startup.sh")
+
+require File.expand_path('subscripts/common', File.dirname(__FILE__))
+
+puts system("#{@home}/tomcat/bin/startup.sh")
 
