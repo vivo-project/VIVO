@@ -22,7 +22,7 @@
             </#if>
             <#if statement.degreeLabel??>
                 ${statement.degreeAbbr!statement.degreeLabel!} 
-                <#if statement.dateTimeStart?? || statement.dateTimeEnd?? >&nbsp;${i18n().candidate},<#else>&nbsp;${i18n().candidate}</#if>
+                <#if statement.dateTimeStart?? || statement.dateTimeEnd?? >&nbsp;${i18n().candidacy},<#else>&nbsp;${i18n().candidacy}</#if>
             </#if>
         <#elseif statement.advisingRelLabel??>
             <a href="${profileUrl(statement.uri("advisingRel"))}" title="${i18n().advisingRel_label}">${statement.advisingRelLabel!statement.localName}</a>

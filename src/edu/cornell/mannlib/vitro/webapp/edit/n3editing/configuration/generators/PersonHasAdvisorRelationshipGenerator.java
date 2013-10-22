@@ -93,7 +93,7 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
         conf.addSparqlForExistingLiteral("endField-value", existingEndDateQuery);
         
         conf.addSparqlForExistingUris("advisingRelType", advisingRelTypeQuery);
-        conf.addSparqlForExistingUris("advisorRole", existingAdvisorRoleQuery);
+        conf.addSparqlForExistingUris("advisingRelationship", existingAdvisingRelQuery);
         conf.addSparqlForExistingUris("adviseeRole", existingAdviseeRoleQuery);
         conf.addSparqlForExistingUris("existingSubjArea", subjAreaQuery);
         conf.addSparqlForExistingUris("existingAdvisee", adviseeQuery);
@@ -286,41 +286,63 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
 
     /* Queries for editing an existing entry */
 
+    final static String existingAdvisingRelQuery  =      
+        "SELECT ?advisingRelationship WHERE { \n" +
+        " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
+        "}";
+
     final static String advisingRelTypeQuery =
     	"PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
         "SELECT ?advisingRelType WHERE { \n" + 
-        "  ?advisingRelationship vitro:mostSpecificType ?advisingRelType . \n" + 
+        " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
+        " ?advisingRelationship vitro:mostSpecificType ?advisingRelType . \n" + 
+        "}";
+
+    final static String advisingRelLabelQuery =
+        "SELECT ?existingAdvisingRelLabel WHERE { \n" +
+        " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
+        " ?advisingRelationship <"  + label + "> ?existingAdvisingRelLabel . \n" +
         "}";
 
     final static String adviseeQuery  =      
         "SELECT ?existingAdvisee WHERE { \n" +
+        " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
         " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingAdvisee . \n" +
+        " ?existingAdvisee <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         " ?existingAdvisee a <" + adviseeClass + ">  . \n" +
-        " FILTER  (?person != ?existingAdvisee)  . \n" +
-        "}";
-
-    final static String existingAdvisorRoleQuery  =      
-        "SELECT ?existingAdvisorRole WHERE { \n" +
-        "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingAdvisorRole . \n" +
-        "?existingAdvisorRole a  <" + advisorRoleClass + "> . \n" +              
-        "}";
-
-    final static String existingAdviseeRoleQuery  =      
-        "SELECT ?existingAdviseeRole WHERE { \n" +
-        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingAdviseeRole . \n" +
-        " ?existingAdviseeRole a  <" + adviseeRoleClass + "> . \n" +              
+        " ?existingAdvisee <http://purl.obolibrary.org/obo/RO_0000053> ?existingAdviseeRole . \n" +
+        " ?existingAdviseeRole a <" + adviseeRoleClass + ">  . \n" +
         "}";
 
     final static String adviseeLabelQuery =
         "SELECT ?existingAdviseeLabel WHERE { \n" +
+        " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
         " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingAdvisee . \n" +
+        " ?existingAdvisee <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         " ?existingAdvisee a <" + adviseeClass + ">  . \n" +
         " ?existingAdvisee <"  + label + "> ?existingAdviseeLabel . \n" +
-        " FILTER  (?person != ?existingAdvisee)  . \n" +
+        " ?existingAdvisee <http://purl.obolibrary.org/obo/RO_0000053> ?existingAdviseeRole . \n" +
+        " ?existingAdviseeRole a <" + adviseeRoleClass + ">  . \n" +
+        "}";
+
+    final static String existingAdviseeRoleQuery  =      
+        "SELECT ?existingAdviseeRole WHERE { \n" +
+        " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingAdviseeRole . \n" +
+        " ?existingAdviseeRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
+        " ?existingAdviseeRole a  <" + adviseeRoleClass + "> . \n" +              
         "}";
 
     final static String subjAreaQuery =
         "SELECT ?existingSubjArea WHERE { \n" +
+        " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
         " ?advisingRelationship <http://vivoweb.org/ontology/core#hasSubjectArea> ?existingSubjArea . \n" +
         " ?existingSubjArea a <http://www.w3.org/2004/02/skos/core#Concept>  . \n" +
         " ?existingSubjArea <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type \n" +
@@ -328,25 +350,26 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
 
     final static String subjAreaLabelQuery  =      
         "SELECT ?existingSubjAreaLabel WHERE { \n" +
+        " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
         " ?advisingRelationship <http://vivoweb.org/ontology/core#hasSubjectArea> ?existingSubjArea . \n" +
         " ?existingSubjArea a <http://www.w3.org/2004/02/skos/core#Concept>  . \n" +
         " ?existingSubjArea <" + label + "> ?existingSubjAreaLabel . \n" +
         " ?existingSubjArea <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type \n" +
         "}";
 
-    final static String advisingRelLabelQuery =
-        "SELECT ?existingAdvisingRelLabel WHERE { \n" +
-        " ?advisingRelationship <"  + label + "> ?existingAdvisingRelLabel . \n" +
-        "}";
-
     final static String degreeQuery  =  
         "SELECT ?existingDegree WHERE {\n"+
+        " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
         " ?advisingRelationship <http://vivoweb.org/ontology/core#degreeCandidacy> ?existingDegree . \n" +
         " ?existingDegree a  <" + degreeClass + "> . \n" +
         "}";
         
     final static String existingStartDateQuery =
         "SELECT ?existingDateStart WHERE { \n" +
+        " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
         "  ?advisingRelationship <" + advisingRelToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n" +
         "  ?intervalNode <" + intervalToStart + "> ?startNode . \n" +
@@ -355,6 +378,8 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
     
     final static String existingEndDateQuery =
         "SELECT ?existingEndDate WHERE { \n" +
+        " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
         "  ?advisingRelationship <" + advisingRelToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n " +
         "  ?intervalNode <" + intervalToEnd + "> ?endNode . \n" +
@@ -363,11 +388,15 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
 
     final static String existingIntervalNodeQuery =
         "SELECT ?existingIntervalNode WHERE { \n" + 
+        " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
         "  ?advisingRelationship <" + advisingRelToInterval + "> ?existingIntervalNode . \n" +
         "  ?existingIntervalNode a <" + intervalType + "> . }";
 
     final static String existingStartNodeQuery = 
         "SELECT ?existingStartNode WHERE { \n" +
+        " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
         "  ?advisingRelationship <" + advisingRelToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n" +
         "  ?intervalNode <" + intervalToStart + "> ?existingStartNode . \n" + 
@@ -375,6 +404,8 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
 
     final static String existingEndNodeQuery = 
         "SELECT ?existingEndNode WHERE { \n" +
+        " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
         "  ?advisingRelationship <" + advisingRelToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n" +
         "  ?intervalNode <" + intervalToEnd + "> ?existingEndNode . \n" + 
@@ -382,6 +413,8 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
 
     final static String existingStartPrecisionQuery = 
         "SELECT ?existingStartPrecision WHERE { \n" +
+        " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
         "  ?advisingRelationship <" + advisingRelToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n" +
         "  ?intervalNode <" + intervalToStart + "> ?startNode . \n" +
@@ -390,6 +423,8 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
 
     final static String existingEndPrecisionQuery = 
         "SELECT ?existingEndPrecision WHERE { \n" +
+        " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
+        " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
         "  ?advisingRelationship <" + advisingRelToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n" +
         "  ?intervalNode <" + intervalToEnd + "> ?endNode . \n" +

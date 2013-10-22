@@ -33,6 +33,6 @@
         </#if>
     </#local>
 
-    <@s.join [ degree, linkedIndividual!, statement.deptOrSchool!, statement.info! ] /> <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" false/>
+    <@s.join [ degree, linkedIndividual!, statement.deptOrSchool!, statement.info! ] /> <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" false/> 
 
 </#macro>
