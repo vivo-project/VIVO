@@ -87,8 +87,13 @@
 </tr>
 <!--Start to add presentation and cancel out-->
 <tr>
+	<td>click</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasPresenterRole']/a/img</td>
+	<td>css=#publicationsGroup &gt; article.property &gt; #RO_0000053 &gt; a.add-RO_0000053 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -119,7 +124,7 @@
 <!--Select presentation type then cancel out-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasPresenterRole']/a/img</td>
+	<td>css=#publicationsGroup &gt; article.property &gt; #RO_0000053 &gt; a.add-RO_0000053 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -154,7 +159,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Years of Participation in Presentation</td>
+	<td>Years of Participation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <tr>
@@ -163,6 +178,16 @@
 	<td></td>
 </tr>
 <!--Start to add presentation again, but enter no required field-->
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#publicationsGroup &gt; article.property &gt; #RO_0000053 &gt; a.add-RO_0000053 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Create presentation entry for Librarian, Lily</td>
@@ -190,7 +215,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Years of Participation in Presentation</td>
+	<td>Years of Participation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <tr>
@@ -241,7 +276,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Years of Participation in Presentation</td>
+	<td>Years of Participation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <tr>
@@ -287,7 +332,22 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Year</td>
+	<td>Presented At</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Years of Participation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <tr>
@@ -344,7 +404,7 @@
 <!--Add presentation type of invited talk-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasPresenterRole']/a/img</td>
+	<td>css=#publicationsGroup &gt; article.property &gt; #RO_0000053 &gt; a.add-RO_0000053 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -379,17 +439,32 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Invited Talk Name</td>
+	<td>Presentation Name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Role in Invited Talk</td>
+	<td>Role in Presentation</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Years of Participation in Invited Talk</td>
+	<td>Presented At</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Years of Participation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <tr>
@@ -466,8 +541,13 @@
 </tr>
 <!--Add service to the profession - college-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[10]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasServiceProviderRole']/a/img</td>
+	<td>css=#serviceGroup &gt; article.property &gt; #RO_0000053 &gt; a.add-RO_0000053 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -492,17 +572,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>College Name</td>
+	<td>Organization Name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Role in College</td>
+	<td>Role in Organization</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Years of Participation in College</td>
+	<td>Years of Participation</td>
 	<td></td>
 </tr>
 <tr>
@@ -573,8 +653,13 @@
 </tr>
 <!--Add service to the profession - college-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[10]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasServiceProviderRole']/a/img</td>
+	<td>css=#serviceGroup &gt; article.property &gt; #RO_0000053 &gt; a.add-RO_0000053 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -599,17 +684,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Museum Name</td>
+	<td>Organization Name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Role in Museum</td>
+	<td>Role in Organization</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Years of Participation in Museum</td>
+	<td>Years of Participation</td>
 	<td></td>
 </tr>
 <tr>
@@ -680,6 +765,11 @@
 </tr>
 <!--Verify that service to the profession displays-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[10]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Primates of the World</td>
 	<td></td>
@@ -701,8 +791,13 @@
 </tr>
 <!--Add outreach and community service - committee-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[10]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasOutreachProviderRole']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[29]</td>
 	<td></td>
 </tr>
 <tr>
