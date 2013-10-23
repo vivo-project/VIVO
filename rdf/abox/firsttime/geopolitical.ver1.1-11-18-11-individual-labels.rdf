@@ -1221,7 +1221,7 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#northern_America">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >northern America</rdfs:label>
+    >North America</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Slovakia">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
