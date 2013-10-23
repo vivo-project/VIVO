@@ -1696,7 +1696,7 @@ input[type="submit"] {
     cursor: pointer;
 }
 .checkboxSpacer {
-    margin-left:150px;
+    margin-left:80px;
 }
 p.address-line {
     margin-bottom: 0.3em;
