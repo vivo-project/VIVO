@@ -41730,7 +41730,7 @@ has super-classes</j.4:descriptionAnnot>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#northern_America">
-    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">northern America</rdfs:label>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">North America</rdfs:label>
     <j.0:nameShortAR rdf:datatype="http://www.w3.org/2001/XMLSchema#string">أمريكا الشمالية</j.0:nameShortAR>
     <j.0:nameOfficialES rdf:datatype="http://www.w3.org/2001/XMLSchema#string">América Septentrional; Norteamérica</j.0:nameOfficialES>
     <j.0:nameShortIT rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America del Nord</j.0:nameShortIT>
@@ -41748,19 +41748,19 @@ has super-classes</j.4:descriptionAnnot>
     <j.0:nameListAR rdf:datatype="http://www.w3.org/2001/XMLSchema#string">أمريكا الشمالية</j.0:nameListAR>
     <j.0:nameShortRU rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Северная Америка</j.0:nameShortRU>
     <j.0:nameListFR rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Amérique septentrionale</j.0:nameListFR>
-    <j.0:nameOfficialEN rdf:datatype="http://www.w3.org/2001/XMLSchema#string">northern America</j.0:nameOfficialEN>
+    <j.0:nameOfficialEN rdf:datatype="http://www.w3.org/2001/XMLSchema#string">North America</j.0:nameOfficialEN>
     <j.0:hasMember rdf:resource="http://aims.fao.org/aos/geopolitical.owl#Canada"/>
     <j.0:codeUN rdf:datatype="http://www.w3.org/2001/XMLSchema#string">021</j.0:codeUN>
     <j.0:nameOfficialIT rdf:datatype="http://www.w3.org/2001/XMLSchema#string">America del Nord</j.0:nameOfficialIT>
     <j.0:hasMember rdf:resource="http://aims.fao.org/aos/geopolitical.owl#United_States_of_America"/>
     <j.0:codeAGROVOC rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5219</j.0:codeAGROVOC>
     <rdf:type rdf:resource="http://aims.fao.org/aos/geopolitical.owl#geographical_region"/>
-    <j.0:nameListEN rdf:datatype="http://www.w3.org/2001/XMLSchema#string">northern America</j.0:nameListEN>
+    <j.0:nameListEN rdf:datatype="http://www.w3.org/2001/XMLSchema#string">North America</j.0:nameListEN>
     <j.0:codeFAOSTAT rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5203</j.0:codeFAOSTAT>
     <j.0:nameOfficialFR rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Amérique septentrionale</j.0:nameOfficialFR>
     <j.0:nameOfficialZH rdf:datatype="http://www.w3.org/2001/XMLSchema#string">北美洲</j.0:nameOfficialZH>
     <j.0:nameOfficialAR rdf:datatype="http://www.w3.org/2001/XMLSchema#string">أمريكا الشمالية</j.0:nameOfficialAR>
-    <j.0:nameShortEN rdf:datatype="http://www.w3.org/2001/XMLSchema#string">northern America</j.0:nameShortEN>
+    <j.0:nameShortEN rdf:datatype="http://www.w3.org/2001/XMLSchema#string">North America</j.0:nameShortEN>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#Continent"/>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#GeographicLocation"/>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
