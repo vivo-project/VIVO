@@ -87,8 +87,13 @@
 </tr>
 <!--Select advises editing-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[8]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-advisorIn &gt; img.add-individual</td>
+	<td>xpath=(//img[@alt='add'])[23]</td>
 	<td></td>
 </tr>
 <tr>
@@ -98,7 +103,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create advising relationship entry for Faculty, Jane</td>
+	<td>Create advisor relationship entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -108,12 +113,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Advisee: Last Name</td>
+	<td>Advisee: Last name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>First Name</td>
+	<td>First name</td>
 	<td></td>
 </tr>
 <tr>
@@ -133,12 +138,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Start<br />Year </td>
+	<td>Start Year </td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>End<br />Year</td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <!--Cancel without adding anything-->
@@ -149,7 +154,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-advisorIn &gt; img.add-individual</td>
+	<td>xpath=(//img[@alt='add'])[23]</td>
 	<td></td>
 </tr>
 <tr>
@@ -270,7 +275,7 @@
 <!--Add a second advises, including all fields-->
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-advisorIn &gt; img.add-individual</td>
+	<td>xpath=(//img[@alt='add'])[23]</td>
 	<td></td>
 </tr>
 <tr>
@@ -352,7 +357,7 @@
 <!--Add a third advises, exluding degree and end date-->
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-advisorIn &gt; img.add-individual</td>
+	<td>xpath=(//img[@alt='add'])[23]</td>
 	<td></td>
 </tr>
 <tr>
