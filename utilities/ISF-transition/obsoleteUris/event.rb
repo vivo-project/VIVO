@@ -1,4 +1,10 @@
 class Event
+  attr_reader :path
+  attr_reader :line_number
+  attr_reader :line
+  attr_reader :string
+  attr_reader :is_localname
+  
   # ------------------------------------------------------------------------------------
   private
   # ------------------------------------------------------------------------------------

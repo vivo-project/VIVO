@@ -19,8 +19,27 @@ class Report
     @extensions_count.sort.each do |pair|
       puts "    #{pair[0]}  #{pair[1]}"
     end
+    puts "-----------------------------------------------------------------"
+    puts
   end
-  
+ 
+  def collate_and_list_events()
+    hash = Hash.new{|h, k| []}
+    @events.each do |event|
+      hash[event.path] = hash[event.path] << event
+    end
+    
+#    puts "FLAT: #{hash.to_a.flatten}"
+    hash.sort.each do |path, events|
+      puts "#{path}"
+      events.sort{|a, b| a.line_number <=> b.line_number }.each do |e|
+        puts "   #{e.line_number} #{e.line}"
+        puts "       #{e.is_localname ? "Localname" : "URI"} #{e.string}"
+      end
+      puts "--------------------"
+    end
+  end 
+    
   def list_events()
     @events.each do |event|
       puts "Event: #{event}"
@@ -50,6 +69,7 @@ class Report
   def report()
   	state_arguments()
   	file_summary()
-  	list_events()
+#  	list_events()
+  	collate_and_list_events()
   end
 end
