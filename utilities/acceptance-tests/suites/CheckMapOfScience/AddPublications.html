@@ -87,8 +87,13 @@
 </tr>
 <!--Add first journal article-->
 <tr>
+	<td>click</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td>css=a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -307,16 +312,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>id=submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>id=name</td>
 	<td>Alcohol</td>
@@ -360,7 +355,7 @@
 <!--Add second journal article-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td>css=a.add-relatedBy</td>
 	<td></td>
 </tr>
 <tr>
@@ -564,6 +559,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>id=object</td>
+	<td>Alco</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>id=submit</td>
 	<td></td>
@@ -602,7 +607,7 @@
 <!--Add third journal article-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td>css=a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -864,7 +869,7 @@
 <!--Add fourth journal article-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td>css=a.add-relatedBy</td>
 	<td></td>
 </tr>
 <tr>
@@ -1167,7 +1172,22 @@
 <!--Check Map of Science-->
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Map Of Science</td>
+	<td>link=Map of Science</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank - Map of Science Visualization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=view-type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=first-filter</td>
 	<td></td>
 </tr>
 <tr>

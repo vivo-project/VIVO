@@ -114,7 +114,7 @@
 <!--Add article for journal not included in Web of Science-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td>css=a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -427,7 +427,22 @@
 <!--Check Map of Science-->
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Map Of Science</td>
+	<td>link=Map of Science</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank - Map of Science Visualization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=view-type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=first-filter</td>
 	<td></td>
 </tr>
 <tr>
