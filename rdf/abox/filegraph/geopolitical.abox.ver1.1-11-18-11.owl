@@ -10705,7 +10705,7 @@
                                                     <geo:nameOfficialEN
                                                      rdf:datatype=
                                                     "http://www.w3.org/2001/XMLSchema#string"
-                                                    >northern America</geo:nameOfficialEN>
+                                                    >North America</geo:nameOfficialEN>
                                                     <geo:hasMember>
                                                       <geo:self_governing rdf:about="http://aims.fao.org/aos/geopolitical.owl#Canada">
                                                         <geo:nameShortZH
@@ -11028,7 +11028,7 @@
                                                     <geo:nameListEN
                                                      rdf:datatype=
                                                     "http://www.w3.org/2001/XMLSchema#string"
-                                                    >northern America</geo:nameListEN>
+                                                    >North America</geo:nameListEN>
                                                     <geo:codeFAOSTAT
                                                      rdf:datatype=
                                                     "http://www.w3.org/2001/XMLSchema#string"
@@ -11048,7 +11048,7 @@
                                                     <geo:nameShortEN
                                                      rdf:datatype=
                                                     "http://www.w3.org/2001/XMLSchema#string"
-                                                    >northern America</geo:nameShortEN>
+                                                    >North America</geo:nameShortEN>
                                                   </geo:geographical_region>
                                                 </geo:isInGroup>
                                                 <geo:isInGroup rdf:resource="http://aims.fao.org/aos/geopolitical.owl#FAO_2006"/>

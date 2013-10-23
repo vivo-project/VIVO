@@ -2258,7 +2258,7 @@ geo:South_America
 
 geo:northern_America
       <http://www.w3.org/2000/01/rdf-schema#label>
-              "northern America"^^<http://www.w3.org/2001/XMLSchema#string> .
+              "North America"^^<http://www.w3.org/2001/XMLSchema#string> .
 
 <http://vivo.colorado.edu/spinId_0312127>
       <http://www.w3.org/2000/01/rdf-schema#label>
