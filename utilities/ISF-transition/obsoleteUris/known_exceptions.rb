@@ -68,6 +68,12 @@ class KnownExceptions
   
   def skip?(file, line_number = -1, string = "@!#IMPOSSIBLE#!@")
     @skippers.each() do |skipper|
+      if line_number == -1
+        next if skipper.is_a?(LineSkipper)
+      else
+        next if skipper.is_a?(ExtensionSkipper) || skipper.is_a?(PathSkipper)
+      end
+
       if skipper.skip?(file, line_number, string)
         return true
       end
