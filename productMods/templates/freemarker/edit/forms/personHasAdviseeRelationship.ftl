@@ -124,6 +124,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <p >
         <label for="advisor">${i18n().advisor_capitalized}: ${i18n().last_name}  ${requiredHint}<span style="padding-left:322px">${i18n().first_name}  ${requiredHint}</span></label>
             <input class="acSelector" size="50"  type="text" acGroupName="advisor" id="advisor" name="advisorLabel" value="${advisorLabelValue}" >
+            <input type="text" size="50"  id="maskLabelBuilding" name="maskLabelBuilding" value="" style="display:none" >
             <input  size="30"  type="text" id="firstName" name="firstName" value="${firstNameValue}" ><br />
             <input type="hidden" id="lastName" name="lastName" value="">
             <input class="display" type="hidden" acGroupName="advisor" id="advisorDisplay" name="advisorLabelDisplay" value="${advisorLabelDisplayValue}" >

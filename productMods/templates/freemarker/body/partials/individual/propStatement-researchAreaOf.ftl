@@ -13,13 +13,18 @@
      next statement -->
 <#macro showResearchers statement>
     <#local linkedIndividual>
-        <a href="${profileUrl(statement.uri("person"))}" title="${i18n().person_name}">${statement.personName}</a>
+        <a href="${profileUrl(statement.uri("person"))}" title="${i18n().person_name}">${statement.personName!}</a>
     </#local>
     <#if statement.title?has_content >
         <#local posnTitle = statement.title>
-    <#else>
-        <#local posnTitle = statement.posnLabel!statement.personType>
+    <#elseif statement.posnLabel?has_content>
+        <#local posnTitle = statement.posnLabel>
+    </#if>
+    <#if statement.org??>
+        <#local orgString>
+            <a href="${profileUrl(statement.uri("org"))}" title="${i18n().organization_name}">${statement.orgLabel!""}</a>
+        </#local>
     </#if>
 
-    <@s.join [ linkedIndividual, posnTitle, statement.orgLabel!"" ] /> ${statement.type!}
+    <@s.join [ linkedIndividual, posnTitle!, orgString! ] />
 </#macro>
