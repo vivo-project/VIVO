@@ -60,7 +60,7 @@
             <h4>VIVO inside Tomcat</h4>
             <p>
                 When you run the build script to compile and deploy VIVO 
-                (see <a href="#deploy">Step 6</a>, below), the files will be deployed to a
+                (see <a href="#deploy">Step 5</a>, below), the files will be deployed to a
                 directory inside Tomcat. This is the actual executing code for VIVO, 
                 but you won’t need to look at it or change it. If you need to change 
                 VIVO, make the changes in the distribution directory, and run the build  
@@ -78,7 +78,7 @@
                 in the build.properties file (see <a href="#build_properties">Step 4</a>, 
                 below). You must create this directory before starting VIVO, 
                 you must create the <code>runtime.properties</code> file in this directory
-                (see <a href="#runtime_properties">Step 5</a>, below), and you 
+                (see <a href="#runtime_properties">Step 6</a>, below), and you 
                 must ensure that Tomcat has permission to read and write to this  
                 directory when it runs. 
             </p>
@@ -113,10 +113,10 @@ issuing SPARQL queries that read data, and its URI for issuing SPARQL UPDATE com
                         <a href="#build_properties">Specify build properties</a>
                     </li>
                     <li>
-                        <a href="#runtime_properties">Specify runtime properties</a>
+                        <a href="#deploy">Compile and deploy</a>
                     </li>
                     <li>
-                        <a href="#deploy">Compile and deploy</a>
+                        <a href="#runtime_properties">Specify runtime properties</a>
                     </li>
                     <li>
                         <a href="#tomcat_settings">Configure Tomcat</a>
@@ -156,10 +156,9 @@ issuing SPARQL queries that read data, and its URI for issuing SPARQL UPDATE com
             </p>
             <ul>
                 <li>
-                    Java (SE) 1.6.x <a href="http://java.sun.com">http://java.sun.com</a>
+                    Java (SE) 1.7.x <a href="http://java.sun.com">http://java.sun.com</a>
                     <ul>
-                    	<li>VIVO does not work with OpenJDK</li>
-                    	<li>VIVO does not work with Java 1.7</li>
+                    	<li>VIVO has not been tested with OpenJDK</li>
                     </ul>
                 </li>
                 <li>
@@ -245,8 +244,8 @@ issuing SPARQL queries that read data, and its URI for issuing SPARQL UPDATE com
             <p>
             	These properties are used in compilation and deployment. 
             	They will be incorporated into VIVO when it is compiled in
-            	<a href="#deploy">Step 6</a>. If you want to change these properties at
-            	a later date, you will need to stop Tomcat, repeat <a href="#deploy">Step 6</a>, 
+            	<a href="#deploy">Step 5</a>. If you want to change these properties at
+            	a later date, you will need to stop Tomcat, repeat <a href="#deploy">Step 5</a>, 
             	and restart Tomcat.
             </p>
             <p>
@@ -343,22 +342,62 @@ issuing SPARQL queries that read data, and its URI for issuing SPARQL UPDATE com
                 </tbody>
             </table>
 
-            <h3 id="runtime_properties">5. Specify runtime properties </h3>
+            <h3 id="deploy">5. Compile and deploy</h3>
             <p>
                 In <a href="#build_properties">Step 4</a>, you defined the location of the VIVO home directory, 
                 by specifying <code>vitro.home</code> in the <code>build.properties</code> file.
                 Create that directory now.
             </p>
             <p>
-            	At the top level of the VIVO distribution directory, you will find a file called 
-            	<code>example.runtime.properties</code>. Copy this to the VIVO home directory you have created, 
-            	renaming the copy to <code>runtime.properties</code>. 
-                Edit the file to suit your installation, as described in the following table. 
+                At the command line, from the top level of the VIVO distribution 
+                directory, type: 
+            <pre>                ant all            </pre>
+                to build VIVO and deploy to Tomcat's webapps directory. 
+            </p>
+            <p>
+                The build script may run for as much as five minutes, 
+                and creates more than 100 lines of output. 
+                The process comprises several steps:
+                <ul>
+                   <li>collecting the source files from the distribution directory,</li>
+                   <li>compiling the Java source code,</li>
+                   <li>compiling and running unit tests,</li>
+                   <li>preparing the Solr search engine,</li>
+                   <li>deploying VIVO and Solr to Tomcat.</li>
+                </ul> 
+            </p>
+            <p>
+                The output of the build may include a variety of warning messages.
+                The Java compiler may warn of code that is outdated.
+                Unit tests may produce warning messages, 
+                and some tests may be ignored if they do not produce consistent results.  
+            </p>
+            <table align="center"><tr><td>
+                BUILD SUCCESSFUL<br>Total time: 1 minute 49 seconds
+            </td></tr></table>
+            <p>
+                If the output ends with a success message, the build was successful. 
+                Proceed to the next step.
+            </p>
+            <table align="center"><tr><td>
+                BUILD FAILED<br>Total time: 35 seconds
+            </td></tr></table>
+            <p>
+                If the output ends with a failure message, the build has failed. 
+                Find the cause of the failure, fix the problem, and run the script again.
+            </p>
+
+            <h3 id="runtime_properties">6. Specify runtime properties </h3>
+            <p>
+                The build process in <a href="deploy">Step 5</a> created a file called <code>example.runtime.properties</code>
+                in your VIVO home directory (<code>vitro.home</code> in the <code>build.properties</code> file).
+                Rename this file to  <code>runtime.properties</code>, and  
+                edit the file to suit your installation, as described in the following table. 
             </p>
             <p>
                 These properties are loaded when VIVO starts up. If you want to change these 
                 properties at a later date, you will need to restart Tomcat for them to take 
-                effect. You will not need to repeat <a href="#deploy">Step 6</a>.
+                effect. You will not need to repeat <a href="#deploy">Step 5</a>.
             </p>
             <p>
                 <em>Windows:</em>
@@ -921,45 +960,6 @@ issuing SPARQL queries that read data, and its URI for issuing SPARQL UPDATE com
 
                 </tbody>
             </table>
-            <h3 id="deploy">6. Compile and deploy</h3>
-            <p>
-                At the command line, from the top level of the VIVO distribution 
-                directory, type: 
-            <pre>                ant all            </pre>
-                to build VIVO and deploy to Tomcat's webapps directory. 
-            </p>
-            <p>
-                The build script may run for as much as five minutes, 
-                and creates more than 100 lines of output. 
-                The process comprises several steps:
-                <ul>
-                   <li>collecting the source files from the distribution directory,</li>
-                   <li>compiling the Java source code,</li>
-                   <li>compiling and running unit tests,</li>
-                   <li>preparing the Solr search engine,</li>
-                   <li>deploying VIVO and Solr to Tomcat.</li>
-                </ul> 
-            </p>
-            <p>
-                The output of the build may include a variety of warning messages.
-                The Java compiler may warn of code that is outdated.
-                Unit tests may produce warning messages, 
-                and some tests may be ignored if they do not produce consistent results.  
-            </p>
-            <table align="center"><tr><td>
-                BUILD SUCCESSFUL<br>Total time: 1 minute 49 seconds
-            </td></tr></table>
-            <p>
-                If the output ends with a success message, the build was successful. 
-                Proceed to the next step.
-            </p>
-            <table align="center"><tr><td>
-                BUILD FAILED<br>Total time: 35 seconds
-            </td></tr></table>
-            <p>
-                If the output ends with a failure message, the build has failed. 
-                Find the cause of the failure, fix the problem, and run the script again.
-            </p>
 
             <h3 id="tomcat_settings">7. Configure Tomcat</h3>
             <h4>Set JVM parameters</h4>
@@ -1049,8 +1049,8 @@ issuing SPARQL queries that read data, and its URI for issuing SPARQL UPDATE com
                problem is detected the normal VIVO pages will redirect
                to a startup status page describing the problem. You
                can stop tomcat, attempt to fix the problem and
-               proceeded from <a href="#deploy">Step 6</a>. The
-               startup status page may offer a continue link which
+               proceed from <a href="#deploy">Step 5</a>. If the problem is not serious, the
+               startup status page may offer a <code>continue</code> link which
                will allow you to use VIVO in spite of the problems.
 
             <p>

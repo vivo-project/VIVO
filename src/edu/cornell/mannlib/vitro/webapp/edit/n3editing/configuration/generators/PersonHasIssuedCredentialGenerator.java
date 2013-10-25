@@ -28,7 +28,7 @@ public class PersonHasIssuedCredentialGenerator extends VivoBaseGenerator implem
 
     final static String issuedCredentialTypeClass = vivoCore + "IssuedCredential";
     final static String credentialTypeClass = vivoCore + "Credential";
-    final static String yearCredentialedPred = vivoCore + "dateTimeValue";
+    final static String yearCredentialedPred = vivoCore + "dateIssued";
     final static String issuedCredentialToInterval = vivoCore + "dateTimeInterval";
     final static String intervalType = vivoCore + "DateTimeInterval";
     final static String intervalToStart = vivoCore + "start";

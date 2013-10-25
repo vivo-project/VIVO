@@ -27,6 +27,7 @@ local:personInPositionConfig a :ObjectPropertyDisplayConfig ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> ;
     vitro:displayRankAnnot 40;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasPositionHistoryGenerator"^^xsd:string .
 
 local:organizationForPositionContext a :ConfigContext ;
@@ -41,6 +42,7 @@ local:organizationForPositionConfig a :ObjectPropertyDisplayConfig ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> ;
     vitro:displayRankAnnot 15;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.OrganizationHasPositionHistoryGenerator"^^xsd:string .
 
 local:authorInAuthorshipContext a :ConfigContext ;
@@ -708,5 +710,32 @@ local:grantRelatesConfig a :ObjectPropertyDisplayConfig ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbiography> .
 
+### faux properties for dateTimeValue ###
 
+local:publicationDateContext a :ConfigContext ;
+    :hasConfiguration local:publicationDateConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#dateTimeValue> ;
+    :qualifiedByDomain      <http://purl.obolibrary.org/obo/IAO_0000030> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#DateTimeValue> .
 
+local:publicationDateConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-dateTimeValue.xml"^^xsd:string ;
+    :displayName "publication date" ;
+    vitro:displayRankAnnot 10;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGrouptime> .
+
+local:yearAwardedContext a :ConfigContext ;
+    :hasConfiguration local:yearAwardedConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#dateTimeValue> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#AwardReceipt> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#DateTimeValue> .
+
+local:yearAwardedConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-dateTimeValue.xml"^^xsd:string ;
+    :displayName "year awarded" ;
+    vitro:displayRankAnnot 10;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGrouptime> .
