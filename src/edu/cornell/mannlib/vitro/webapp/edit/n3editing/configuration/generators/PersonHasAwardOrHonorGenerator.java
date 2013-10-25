@@ -262,9 +262,8 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
 
     final static String existingOrgQuery  =      
         "SELECT ?existingOrg WHERE { \n" +
-        " ?awardReceipt <" + receiptOfPred + "> ?existingAward . \n" +
-        " ?existingAward a <" + awardClass + "> . \n" +
-        " ?existingAward<" + awardConferredByPred + "> ?existingOrg . \n" +
+        " ?awardReceipt <" + awardConferredByPred + "> ?existingOrg . \n" +
+        " ?existingOrg a <" + orgClass + ">  . \n" +
         " ?existingOrg <" + awardConferredPred + "> ?existingAward . }";
 
     final static String awardReceiptLabelQuery =
@@ -281,7 +280,8 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
 
     final static String orgLabelQuery  =      
         "SELECT ?existingOrgLabel WHERE { \n" +
-        " ?award <" + awardConferredByPred + "> ?existingOrg . \n" +
+        " ?awardReceipt <" + awardConferredByPred + "> ?existingOrg . \n" +
+        " ?existingOrg a <" + orgClass + ">  . \n" +
         " ?existingOrg <" + label + "> ?existingOrgLabel . \n" +
         "}";
 

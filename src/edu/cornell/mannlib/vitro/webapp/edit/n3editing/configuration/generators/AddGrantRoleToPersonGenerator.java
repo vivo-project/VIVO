@@ -729,6 +729,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 	public void addFormSpecificData(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
 		HashMap<String, Object> formSpecificData = new HashMap<String, Object>();
 		formSpecificData.put("editMode", getEditMode(vreq).name().toLowerCase());
+		formSpecificData.put("rangeUri", getRangeUri(vreq));
 		//In this case, passing back a sparql query
 		formSpecificData.put("sparqlForAcFilter", getSparqlForAcFilter(vreq));
 		//Put in the fact that we require field
@@ -747,8 +748,10 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 		return query;
 	}
 	
-	
-	
-	
+	private String getRangeUri(VitroRequest vreq) {
+        String rangeUri = vreq.getParameter("rangeUri"); 
+        
+		return rangeUri;
+	}
 	
 }
