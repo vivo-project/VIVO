@@ -148,7 +148,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
 			
 			String aggregationRules = "(count(DISTINCT ?Grant) AS ?numOfGrants)";
-			String grantType = "http://vivoweb.org/ontology#Grant";
+			String grantType = "http://vivoweb.org/ontology/core#Grant";
 
 			ObjectProperty predicate = ModelUtils.getPropertyForRoleInClass(grantType, vitroRequest.getWebappDaoFactory());
 			String roleToGrantPredicate = "<" + predicate.getURI() + ">";

@@ -25,25 +25,22 @@
             ?role a ?objectType .
             ?role vitro:mostSpecificType ?roleSubclass
             
-            OPTIONAL {  ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?activity 
-                        LET (?activityName := afn:localname(?activity)) 
-                        OPTIONAL { ?activity rdfs:label ?activityLabel }
+            OPTIONAL {  ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?activity .
+                        ?activity rdfs:label ?activityLabel
                         
                         <collated>
                         ?activity vitro:mostSpecificType ?subclass   
                         </collated>
             }           
-            OPTIONAL {  ?role core:relates ?activity 
-                        LET (?activityName := afn:localname(?activity)) 
-                        OPTIONAL { ?activity rdfs:label ?activityLabel }
+            OPTIONAL {  ?role core:relates ?activity .
+                        ?activity rdfs:label ?activityLabel
                         
                         <collated>
                         ?activity vitro:mostSpecificType ?subclass   
                         </collated>
             }           
-            OPTIONAL {  ?role core:roleContributesTo ?activity 
-                        LET (?activityName := afn:localname(?activity)) 
-                        OPTIONAL { ?activity rdfs:label ?activityLabel }
+            OPTIONAL {  ?role core:roleContributesTo ?activity .
+                        ?activity rdfs:label ?activityLabel 
                         
                         <collated>
                         ?activity vitro:mostSpecificType ?subclass   
@@ -51,8 +48,7 @@
             }           
             <!-- for research activities where the activity involves a grant -->
             OPTIONAL {  ?role core:relatedBy ?activity .
-                        LET (?activityName := afn:localname(?activity)) 
-                        OPTIONAL { ?activity rdfs:label ?activityLabel }
+                        ?activity rdfs:label ?activityLabel 
                         
                         <collated>
                         ?activity vitro:mostSpecificType ?subclass   
@@ -68,7 +64,7 @@
                                   ?dateTimeEndValue core:dateTime ?dateTimeEnd 
                        }
             }
-            FILTER ( bound(?activity) &amp;&amp; ?objectType = ?roleSubclass )
+            FILTER ( ?objectType = ?roleSubclass )
         } ORDER BY <collated>?subclass</collated> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityLabel ?activityName
     </query-select>
     
