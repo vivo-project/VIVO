@@ -86,10 +86,15 @@
 	<td>Furter, Frank</td>
 	<td></td>
 </tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[4]</td>
+	<td></td>
+</tr>
 <!--Select to add a Publication-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td>css=a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -105,6 +110,16 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Publication Type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Publication Date</td>
 	<td></td>
 </tr>
 <!--Cancel out before doing anything-->
@@ -121,7 +136,7 @@
 <!--Select to add a Publication again-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td>css=a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -137,6 +152,16 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Publication Type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Publication Date</td>
 	<td></td>
 </tr>
 <!--Select to add a book chapter-->
@@ -153,6 +178,11 @@
 </tr>
 <!--Select to add an book chapter again, this time without a title-->
 <tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-relatedBy &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
 	<td></td>
@@ -168,13 +198,83 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Publication Date</td>
+	<td></td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>typeSelector</td>
 	<td>label=Chapter</td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Create publication entry for Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Publication Type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Published in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Editor: Last name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>First name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Publisher</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Place of Publication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Volume</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Chapter</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>End Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Publication Date</td>
 	<td></td>
 </tr>
 <tr>
@@ -255,7 +355,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=number</td>
+	<td>id=chapterNbr</td>
 	<td>15</td>
 </tr>
 <tr>
@@ -296,7 +396,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Nintendo O.K. for Kids.&nbsp;&nbsp;Raising Children in the 21st Century. Ed. Mouse, Minnie.&nbsp;&nbsp;New York: Marcel Dekker. 123-144.</td>
+	<td>Nintendo O.K. for Kids.&nbsp;&nbsp;Raising Children in the 21st Century. Ed. Mouse, Minnie.&nbsp;&nbsp;New York: Marcel Dekker. 123-144.&nbsp;&nbsp;2009</td>
 	<td></td>
 </tr>
 <!--Add Image, validating field first-->
@@ -306,8 +406,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[16]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='add']</td>
+	<td>css=img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -423,6 +528,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Crop Photo for Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Photo Upload</td>
 	<td></td>
 </tr>
 <tr>
@@ -619,7 +729,7 @@
 <!--Add Author, validating field first-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='informationResourceInAuthorship']/a/img</td>
+	<td>css=a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -644,7 +754,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Return to Publication</td>
+	<td>id=returnLink</td>
 	<td></td>
 </tr>
 <tr>
@@ -654,7 +764,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='informationResourceInAuthorship']/a/img</td>
+	<td>css=a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -669,12 +779,37 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Manage Authors</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Add an Author</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Last name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>First name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Middle name</td>
 	<td></td>
 </tr>
 <tr>
@@ -685,6 +820,41 @@
 <tr>
 	<td>click</td>
 	<td>showAddFormButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Manage Authors</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add an Author</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Last name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>First name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Middle name</td>
 	<td></td>
 </tr>
 <tr>
@@ -815,6 +985,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Features Name</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Cancel</td>
 	<td></td>
@@ -835,9 +1010,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=objectVar</td>
-	<td>label=Mouse, Minnie</td>
+	<td>verifyTextPresent</td>
+	<td>Add an entry to: features</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>This relates an information resource to a person it features.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Features Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=object</td>
+	<td>Mouse</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -847,6 +1042,16 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Mouse, Minnie&nbsp;&nbsp;Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=a[title=&quot;name&quot;]</td>
 	<td></td>
 </tr>
 <!--Add Abstract, validating field first-->
@@ -927,6 +1132,21 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Relates a document to an event; for example, a paper to a conference.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Event Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>If you don't find the appropriate entry on the selection list above:</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Cancel</td>
 	<td></td>
@@ -947,6 +1167,26 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Event for Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Relates a document to an event; for example, a paper to a conference.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Event Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>If you don't find the appropriate entry on the selection list above:</td>
+	<td></td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>id=typeOfNew</td>
 	<td>label=Conference (bibo)</td>
@@ -959,6 +1199,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create &quot;presented at&quot; entry for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
@@ -993,6 +1238,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Status Name</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Cancel</td>
 	<td></td>
@@ -1005,6 +1255,36 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='status']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add an entry to: status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Status Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-status &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -1030,7 +1310,7 @@
 <!--Add Has Part, validating field first-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasPart']/a/img</td>
+	<td>css=a.add-BFO_0000051 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -1040,7 +1320,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Select an existing Document Part for Nintendo O.K. for Kids</td>
+	<td>Add an entry to: has part</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Has Part Name</td>
 	<td></td>
 </tr>
 <tr>
@@ -1055,12 +1340,22 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasPart']/a/img</td>
+	<td>css=a.add-BFO_0000051 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add an entry to: has part</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Has Part Name</td>
 	<td></td>
 </tr>
 <tr>
@@ -1096,7 +1391,7 @@
 <!--Add Part Of, validating field first-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='partOf']/a/img</td>
+	<td>css=a.add-BFO_0000050 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -1106,12 +1401,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Select an existing Document for Nintendo O.K. for Kids</td>
+	<td>Add an entry to: part of</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Relates a component of something to the whole thing.</td>
+	<td>Part Of Name</td>
 	<td></td>
 </tr>
 <tr>
@@ -1126,12 +1421,22 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='partOf']/a/img</td>
+	<td>css=a.add-BFO_0000050 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add an entry to: part of</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Part Of Name</td>
 	<td></td>
 </tr>
 <tr>
@@ -1181,6 +1486,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Geographic Region Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>If you don't find the appropriate entry on the selection list above:</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Cancel</td>
 	<td></td>
@@ -1198,6 +1513,21 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Geographic Region for Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Geographic Region Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>If you don't find the appropriate entry on the selection list above:</td>
 	<td></td>
 </tr>
 <tr>
@@ -1232,6 +1562,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Add new entry for: Online Computer Library Center (OCLC) number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>An oclcnum is a sequential accession number assigned by OCLC as bibliographic records are entered into OCLC WorldCat (the OCLC Online Union Catalog).</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Cancel</td>
 	<td></td>
@@ -1254,6 +1594,16 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add new entry for: Online Computer Library Center (OCLC) number</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>An oclcnum is a sequential accession number assigned by OCLC as bibliographic records are entered into OCLC WorldCat (the OCLC Online Union Catalog).</td>
 	<td></td>
 </tr>
 <tr>
@@ -1289,6 +1639,11 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Add new entry for: PubMed ID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>A PMID (PubMed Identifier or PubMed Unique Identifier) is a unique number assigned to each PubMed citation of life sciences and biomedical scientific journal articles.</td>
 	<td></td>
 </tr>
@@ -1315,6 +1670,16 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add new entry for: PubMed ID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>A PMID (PubMed Identifier or PubMed Unique Identifier) is a unique number assigned to each PubMed citation of life sciences and biomedical scientific journal articles.</td>
 	<td></td>
 </tr>
 <tr>
@@ -1445,6 +1810,21 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Manage Concepts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>There are currently no concepts specified.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Return to Profile Page</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>id=showAddFormButton</td>
 	<td></td>
@@ -1460,6 +1840,21 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Create Your Own Concept</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Concept</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Return to Manage Concepts</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>id=relatedIndLabel</td>
 	<td>Child Development</td>
@@ -1472,6 +1867,36 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Manage Concepts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Concept (Type)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Vocabulary Source</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Remove</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Return to Profile Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -1523,6 +1948,16 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add new entry for: keywords</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Intended for a word or short phrase only where no instance of a controlled vocabulary can be identified. Can also be used to help in highlighting subtle difference in work.</td>
 	<td></td>
 </tr>
 <tr>
@@ -1603,13 +2038,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
 	<td>Add an entry to: reproduces</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
+	<td>verifyTextPresent</td>
+	<td>Reproduces Name</td>
 	<td></td>
 </tr>
 <tr>
@@ -1630,6 +2070,16 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add an entry to: reproduces</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Reproduces Name</td>
 	<td></td>
 </tr>
 <tr>
@@ -1736,12 +2186,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>There are no entries in the system from which to select. </td>
+	<td>Global Citation Count Name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Please create a new entry.</td>
+	<td>If you don't find the appropriate entry on the selection list above:</td>
 	<td></td>
 </tr>
 <tr>
@@ -1780,6 +2230,36 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Global Citation Count for Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Global Citation Count Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>If you don't find the appropriate entry on the selection list above:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>id=name</td>
 	<td>99</td>
@@ -1787,6 +2267,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
@@ -1806,8 +2291,48 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Event for Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Relates a document to an event; for example, a paper to a conference.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Event Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>If you don't find the appropriate entry on the selection list above:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create &quot;presented at&quot; entry for Nintendo O.K. for Kids </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Cancel</td>
 	<td></td>
 </tr>
 <tr>
@@ -1831,6 +2356,31 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Event for Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Relates a document to an event; for example, a paper to a conference.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Event Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>If you don't find the appropriate entry on the selection list above:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>id=offerCreate</td>
 	<td></td>
@@ -1838,6 +2388,16 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create &quot;presented at&quot; entry for Nintendo O.K. for Kids </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Cancel</td>
 	<td></td>
 </tr>
 <tr>
@@ -1858,7 +2418,7 @@
 <!--Add part of-->
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-partOf &gt; img.add-individual</td>
+	<td>css=a.add-BFO_0000050 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -1868,12 +2428,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Select an existing Document for Nintendo O.K. for Kids</td>
+	<td>Add an entry to: part of</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Relates a component of something to the whole thing.</td>
+	<td>Part Of Name</td>
 	<td></td>
 </tr>
 <tr>
@@ -1929,6 +2489,16 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Select an existing Information Content Entity for Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Information Content Entity Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>If you don't find the appropriate entry on the selection list above:</td>
 	<td></td>
 </tr>
@@ -1958,6 +2528,26 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Information Content Entity for Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Information Content Entity Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>If you don't find the appropriate entry on the selection list above:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>id=offerCreate</td>
 	<td></td>
@@ -1965,6 +2555,16 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create &quot;cited by&quot; entry for Nintendo O.K. for Kids </td>
 	<td></td>
 </tr>
 <tr>
