@@ -4,6 +4,7 @@
 <#-- Template for adding a grant role, such as principal investigator, to a foaf:Persons -->
 <#--Retrieve certain edit configuration information-->
 <#assign editMode = editConfiguration.pageData.editMode />
+<#assign rangeUri = editConfiguration.pageData.rangeUri />
 <#assign literalValues = editConfiguration.existingLiteralValues />
 <#assign uriValues = editConfiguration.existingUriValues />
 <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
@@ -34,9 +35,9 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <#assign formHeading =  "${i18n().investigator_entry_for}"/>
 <#assign submitButtonLabel = "${i18n().investigator_capitalized}" />
-<#if editConfiguration.predicateUri?ends_with("hasPrincipalInvestigatorRole") >
+<#if rangeUri?contains("#PrincipalInvestigatorRole") >
 	<#assign formHeading = "${i18n().principal_investigator_entry_for}"/>
-<#elseif editConfiguration.predicateUri?ends_with("hasCo-PrincipalInvestigatorRole") >
+<#elseif rangeUri?contains("#CoPrincipalInvestigatorRole") >
  	<#assign formHeading = "${i18n().co_principal_investigator_entry_for}"/>
 </#if>
 
