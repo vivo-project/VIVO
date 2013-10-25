@@ -138,7 +138,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Please enter a value in the name field.</td>
+	<td>Please enter a value in the Name field.</td>
 	<td></td>
 </tr>
 <!--Now enter something in the field-->
@@ -158,6 +158,11 @@
 	<td></td>
 </tr>
 <!--Test overview entry (image and webpage have been tested)-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[10]</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='description']/a/img</td>
@@ -322,7 +327,7 @@
 <!--Test location entry-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasGeographicLocation']/a/img</td>
+	<td>css=a.add-RO_0001025 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -332,7 +337,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Select an existing Geographic Location for Primate Health Conference</td>
+	<td>Add an entry to: located in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Located In Nam</td>
 	<td></td>
 </tr>
 <tr>
@@ -407,6 +417,11 @@
 	<td></td>
 </tr>
 <!--Test related documents entry-->
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Health Conference</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='presents']/a/img</td>

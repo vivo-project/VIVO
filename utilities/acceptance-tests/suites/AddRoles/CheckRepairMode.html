@@ -88,7 +88,7 @@
 <!--Create a membership role in the front end-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasMemberRole']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[8]</td>
 	<td></td>
 </tr>
 <tr>
@@ -153,13 +153,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[16]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=li.selectedGroupTab.clickable</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Member at Large 1999 - 2009</td>
+	<td>Member at Large</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1999 - 2009</td>
 	<td></td>
 </tr>
 <!--Go to role node in backend editing-->
@@ -293,6 +308,11 @@
 	<td></td>
 </tr>
 <!--Verify condition of MEMBER OF-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[20]</td>
+	<td></td>
+</tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>missing activity Member at Large 1999 - 2009</td>
