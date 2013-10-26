@@ -33,7 +33,13 @@ class Report
     hash.sort.each do |path, events|
       puts "#{path}"
       events.sort{|a, b| a.line_number <=> b.line_number }.each do |e|
-        puts "   #{e.line_number} #{e.line}"
+        trimmed = 
+          if e.line.size <= 100
+            e.line 
+          else
+            e.line[0..97] << "..."
+          end
+        puts "   #{e.line_number} #{trimmed}"
         puts "       #{e.is_localname ? "Localname" : "URI"} #{e.string}"
       end
       puts "--------------------"
