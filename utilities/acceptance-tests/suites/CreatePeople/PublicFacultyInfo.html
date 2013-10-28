@@ -28,6 +28,37 @@
 	<td></td>
 </tr>
 <!--Do not login-->
+<!--Check front page-->
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>No research found.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=View all ...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>No faculty members found.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=a[alt=&quot;view all faculty&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No academic departments found.</td>
+	<td></td>
+</tr>
 <!--Find Jane Faculty via Index-->
 <tr>
 	<td>clickAndWait</td>
@@ -62,7 +93,12 @@
 <!--Verify fields that should and shouldn't be present-->
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Faculty, Jane Assistant Professor</td>
+	<td>Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Assistant Professor</td>
 	<td></td>
 </tr>
 <tr>
@@ -77,12 +113,12 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Primatia</td>
+	<td>link=Primatia Africana</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Primatia Africana</td>
+	<td>link=mejane@primates-r-us.com</td>
 	<td></td>
 </tr>
 <tr>
@@ -92,7 +128,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=mejane@primates-r-us.com</td>
+	<td>link=jfac@gmail.com</td>
 	<td></td>
 </tr>
 <tr>
@@ -117,22 +153,17 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Librarian, Lily</td>
+	<td>link=Librarian, Lily Lou</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Librarian, Lily Assistant Librarian </td>
+	<td>Librarian, Lily Lou Assistant Librarian </td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>I study apes, of course.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Africa</td>
 	<td></td>
 </tr>
 <tr>
@@ -177,17 +208,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Licensed Primate Expert</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
 	<td>link=Licensed Primate Instructor</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Chimp Lover for Life</td>
 	<td></td>
 </tr>
 <tr>
@@ -197,12 +218,122 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
+	<td>link=Chimp Lover for Life</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
 	<td>link=Ape Trainer of the Decade</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Monkey Trainer of the Year, conferred by Ape Trainer of the Decade</td>
+	<td>Mrs. Jane E. Faculty, Jr.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>607-299-9999 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>607-277-7777 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Jungle 1234</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Congo City</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Congola State</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1234567890</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Democratic Republic of Congo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>CIT Cornell University</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ithaca, New York&nbsp;&nbsp;14853</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>United States of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>11111</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>454545</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ABC121212 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ABC123987 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>222222</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>67676767</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3333333</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>987654321</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=USA1234567890</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>African Apes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>African Primates </td>
 	<td></td>
 </tr>
 <tr>
@@ -218,126 +349,6 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Primates Unite</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Mrs.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Jr.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>607-277-7777 </td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>607-299-9999 </td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Jungle 1234</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Congo City</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>1234567890</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Democratic Republic of Congo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=CIT</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Cornell University</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Ithaca, New York&nbsp;&nbsp;14853</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>United States of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>ABC121212 </td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>ABC123987 </td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=USA1234567890</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=USABC123456789</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>African Apes </td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>African Primates </td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>11111</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>454545</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>222222</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>67676767</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>987654321</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>3333333</td>
 	<td></td>
 </tr>
 <!--Logout-->
