@@ -106,8 +106,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-preferredTitle &gt; img.add-individual</td>
+	<td>css=header &gt; #ARG_2000028 &gt; a.add-ARG_2000028 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -116,13 +121,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>tinymce</td>
+	<td>id=preferredTitle</td>
 	<td>Professor</td>
 </tr>
 <tr>
@@ -177,8 +177,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[20]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-hasMemberRole &gt; img.add-individual</td>
+	<td>xpath=(//img[@alt='add'])[9]</td>
 	<td></td>
 </tr>
 <tr>
@@ -191,12 +196,12 @@
 	<td>id=typeSelector</td>
 	<td>label=Academic Department</td>
 </tr>
+<!--Select Department A-->
 <tr>
 	<td>type</td>
 	<td>id=activity</td>
 	<td>Depart</td>
 </tr>
-<!--Select Department A-->
 <tr>
 	<td>click</td>
 	<td>id=ui-active-menuitem</td>
@@ -259,8 +264,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[20]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-hasLeaderRole &gt; img.add-individual</td>
+	<td>xpath=(//img[@alt='add'])[9]</td>
 	<td></td>
 </tr>
 <tr>
@@ -273,12 +283,12 @@
 	<td>id=typeSelector</td>
 	<td>label=Department</td>
 </tr>
+<!--Select Department B-->
 <tr>
 	<td>type</td>
 	<td>id=activity</td>
 	<td>Depart</td>
 </tr>
-<!--Select Department B-->
 <tr>
 	<td>click</td>
 	<td>id=ui-active-menuitem</td>
