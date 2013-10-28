@@ -1,6 +1,8 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
+import static edu.cornell.mannlib.vitro.webapp.auth.requestedAction.ifaces.RequestActionConstants.SOME_LITERAL;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -335,7 +337,7 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
 		Individual individual = EditConfigurationUtils.getIndividual(vreq, config.getSubjectUri());
 		AddDataPropertyStatement adps = new AddDataPropertyStatement(
 				vreq.getJenaOntModel(), individual.getURI(),
-				RequestActionConstants.SOME_URI);
+				RequestActionConstants.SOME_URI, SOME_LITERAL);
 	
 		AddObjectPropertyStatement aops = new AddObjectPropertyStatement(
 				vreq.getJenaOntModel(), individual.getURI(),
