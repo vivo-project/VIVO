@@ -26,14 +26,19 @@
                  ?subject ?property ?person .
                  OPTIONAL { ?person core:relatedBy ?position .
                            ?position a core:Position 
-                           OPTIONAL { ?position rdfs:label ?posnLabel }
+                 }
+                 OPTIONAL { ?person core:relatedBy ?position .
+                            ?position a core:Position .
+                            ?position rdfs:label ?posnLabel 
                  }
                  OPTIONAL { ?person rdfs:label ?personName } 
                  OPTIONAL { ?person obo:ARG_2000028 ?vcard .
                             ?vcard vcard:hasTitle ?titleObj .
                             ?titleObj vcard:title ?title 
                  } 
-                 OPTIONAL { ?position core:relates ?org .
+                 OPTIONAL { ?person core:relatedBy ?position .
+                            ?position a core:Position .
+                            ?position core:relates ?org .
                             ?org a foaf:Organization .
                             ?org rdfs:label ?orgLabel 
                  }

@@ -24,20 +24,6 @@
             ?subject ?property ?role .
             ?role a ?objectType .
             
-            OPTIONAL {  ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?activity .
-                        ?activity rdfs:label ?activityLabel
-                        
-                        <collated>
-                        ?activity vitro:mostSpecificType ?subclass   
-                        </collated>
-            }           
-            OPTIONAL {  ?role core:relates ?activity .
-                        ?activity rdfs:label ?activityLabel
-                        
-                        <collated>
-                        ?activity vitro:mostSpecificType ?subclass   
-                        </collated>
-            }           
             OPTIONAL {  ?role core:roleContributesTo ?activity .
                         ?activity rdfs:label ?activityLabel 
                         
@@ -64,47 +50,17 @@
         
         CONSTRUCT {
             ?subject ?property ?role .
-            ?role core:relates ?activity .
-            ?activity vitro:mostSpecificType ?subclass .
-        } WHERE {
-            ?subject ?property ?role .
-            ?role core:relates ?activity .
-            ?activity vitro:mostSpecificType ?subclass
-        }
-    </query-construct>
-     
-    <query-construct>
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;  
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;          
-        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
-        
-        CONSTRUCT {
-            ?subject ?property ?role .
+            ?role a ?objectType .
             ?role core:roleContributesTo ?activity .
             ?activity vitro:mostSpecificType ?subclass .
         } WHERE {
             ?subject ?property ?role .
+            ?role a ?objectType .
             ?role core:roleContributesTo ?activity .
             ?activity vitro:mostSpecificType ?subclass
         }
     </query-construct>
 
-    <query-construct>
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;  
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;          
-        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
-        
-        CONSTRUCT {
-            ?subject ?property ?role .
-            ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?activity .
-            ?activity vitro:mostSpecificType ?subclass .
-        } WHERE {
-            ?subject ?property ?role .
-            ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?activity .
-            ?activity vitro:mostSpecificType ?subclass
-        }
-    </query-construct>
-    
     <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
@@ -142,12 +98,14 @@
     <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
         CONSTRUCT { 
-            ?subject ?property ?role .  
+            ?subject ?property ?role .
+            ?role a ?objectType .  
             ?role core:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval core:start ?dateTimeStartValue .
             ?dateTimeStartValue core:dateTime ?dateTimeStart 
         } WHERE {
             ?subject ?property ?role .  
+            ?role a ?objectType .
             ?role core:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval core:start ?dateTimeStartValue .
             ?dateTimeStartValue core:dateTime ?dateTimeStart 
@@ -158,11 +116,13 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
         CONSTRUCT { 
             ?subject ?property ?role .  
+            ?role a ?objectType .
             ?role core:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval core:end ?dateTimeEndValue .
             ?dateTimeEndValue core:dateTime ?dateTimeEnd 
         } WHERE {
             ?subject ?property ?role .  
+            ?role a ?objectType .
             ?role core:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval core:end ?dateTimeEndValue .
             ?dateTimeEndValue core:dateTime ?dateTimeEnd 
