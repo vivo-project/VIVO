@@ -32,26 +32,26 @@
                      OPTIONAL { ?advisingRel rdfs:label ?advisingRelLabel }
                      OPTIONAL { ?advisingRel core:relates ?advisee .
                                 ?advisee a foaf:Person .
-                                OPTIONAL { ?advisee rdfs:label ?adviseeLabel }
+                                ?advisee rdfs:label ?adviseeLabel
                      }
                      OPTIONAL { ?advisingRel core:degreeCandidacy ?degree .
                                 ?degree rdfs:label ?degreeLabel .
-                                OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
+                     }
+                     OPTIONAL { ?advisingRel core:degreeCandidacy ?degree .
+                                ?degree core:abbreviation ?degreeAbbr 
                      }
                      <collated>
                          OPTIONAL { ?advisingRel vitro:mostSpecificType ?subclass .
                                     ?subclass rdfs:subClassOf core:AdvisingRelationship
                          }
                      </collated>
-                     OPTIONAL { ?advisingRel core:dateTimeInterval ?dateTimeInterval
-                                OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .
-                                           ?dateTimeStartValue core:dateTime ?dateTimeStart
-                                }
+                     OPTIONAL { ?advisingRel core:dateTimeInterval ?dateTimeInterval .
+                                ?dateTimeInterval core:start ?dateTimeStartValue .
+                                ?dateTimeStartValue core:dateTime ?dateTimeStart
                      }
-                     OPTIONAL { ?advisingRel core:dateTimeInterval ?dateTimeInterval
-                                OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .
-                                           ?dateTimeEndValue core:dateTime ?dateTimeEnd
-                                }
+                     OPTIONAL { ?advisingRel core:dateTimeInterval ?dateTimeInterval .
+                                ?dateTimeInterval core:end ?dateTimeEndValue .
+                                ?dateTimeEndValue core:dateTime ?dateTimeEnd
                      }
 
          } ORDER BY <collated>?subclass</collated> DESC(?dateTimeEnd)

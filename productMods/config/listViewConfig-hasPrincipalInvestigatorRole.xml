@@ -24,8 +24,7 @@
         WHERE {
                         
             ?subject ?property ?role .
-            ?role a core:InvestigatorRole .
-            ?role vitro:mostSpecificType ?subclass
+            ?role a core:PrincipalInvestigatorRole .
             
             OPTIONAL {  ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
                         ?activity a core:Grant .
@@ -61,7 +60,6 @@
                        ?dateTimeEndValueGrant core:dateTime ?dateTimeEndGrant 
             }
             OPTIONAL { ?role core:hideFromDisplay ?hideThis }
-            FILTER ( ?subclass = core:InvestigatorRole)
         } ORDER BY DESC(?dateTimeEndRole) DESC(?dateTimeStartRole) DESC(?dateTimeEndGrant) DESC(?dateTimeStartGrant) ?activityLabel ?activityName
     </query-select>
 
@@ -70,7 +68,7 @@
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
         CONSTRUCT { 
             ?subject ?property ?role .
-            ?role a core:InvestigatorRole .
+            ?role a core:PrincipalInvestigatorRole .
             ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
             ?activity a core:Grant .
             ?role ?roleProperty ?roleValue . 
@@ -82,27 +80,27 @@
         } WHERE {
             {
                 ?subject ?property ?role .
-                ?role a core:InvestigatorRole . 
+                ?role a core:PrincipalInvestigatorRole . 
             } UNION {
                 ?subject ?property ?role .
-                ?role a core:InvestigatorRole .
+                ?role a core:PrincipalInvestigatorRole .
                 ?role ?roleProperty ?roleValue 
             } UNION {
                 ?subject ?property ?role .
-                ?role a core:InvestigatorRole .
+                ?role a core:PrincipalInvestigatorRole .
                 ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity . 
                 ?activity a core:Grant .
                 ?activity rdfs:label ?activityLabel 
             } UNION {
                 ?subject ?property ?role .
-                ?role a core:InvestigatorRole .
+                ?role a core:PrincipalInvestigatorRole .
                 ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
                 ?activity a core:Grant . 
                 ?activity core:grantAwardedBy ?awardedBy .
                 ?awardedBy rdfs:label ?awardedByLabel
             } UNION {
                 ?subject ?property ?role .
-                ?role a core:InvestigatorRole .
+                ?role a core:PrincipalInvestigatorRole .
                 ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity . 
                 ?activity a core:Grant .
                 ?activity core:administeredBy ?adminedBy .
@@ -115,13 +113,13 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
         CONSTRUCT { 
             ?subject ?property ?role .
-            ?role a core:InvestigatorRole .  
+            ?role a core:PrincipalInvestigatorRole .  
             ?role core:dateTimeInterval ?dateTimeIntervalRole .
             ?dateTimeIntervalRole core:start ?dateTimeStartValueRole .
             ?dateTimeStartValueRole core:dateTime ?dateTimeStartRole 
         } WHERE {
             ?subject ?property ?role .  
-            ?role a core:InvestigatorRole .
+            ?role a core:PrincipalInvestigatorRole .
             ?role core:dateTimeInterval ?dateTimeIntervalRole .
             ?dateTimeIntervalRole core:start ?dateTimeStartValueRole .
             ?dateTimeStartValueRole core:dateTime ?dateTimeStartRole 
@@ -132,13 +130,13 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
         CONSTRUCT { 
             ?subject ?property ?role .  
-            ?role a core:InvestigatorRole .
+            ?role a core:PrincipalInvestigatorRole .
             ?role core:dateTimeInterval ?dateTimeIntervalRole .
             ?dateTimeIntervalRole core:end ?dateTimeEndValueRole .
             ?dateTimeEndValueRole core:dateTime ?dateTimeEndRole 
         } WHERE {
             ?subject ?property ?role .  
-            ?role a core:InvestigatorRole .
+            ?role a core:PrincipalInvestigatorRole .
             ?role core:dateTimeInterval ?dateTimeIntervalRole .
             ?dateTimeIntervalRole core:end ?dateTimeEndValueRole .
             ?dateTimeEndValueRole core:dateTime ?dateTimeEndRole 
@@ -148,7 +146,7 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
         CONSTRUCT { 
             ?subject ?property ?role .
-            ?role a core:InvestigatorRole .
+            ?role a core:PrincipalInvestigatorRole .
             ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
             ?activity a core:Grant .
             ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
@@ -156,7 +154,7 @@
             ?dateTimeStartValueGrant core:dateTime ?dateTimeStartGrant 
         } WHERE {
             ?subject ?property ?role .
-            ?role a core:InvestigatorRole .
+            ?role a core:PrincipalInvestigatorRole .
             ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
             ?activity a core:Grant .
             ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
@@ -169,7 +167,7 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
         CONSTRUCT { 
             ?subject ?property ?role .
-            ?role a core:InvestigatorRole .
+            ?role a core:PrincipalInvestigatorRole .
             ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
             ?activity a core:Grant .
             ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
@@ -177,7 +175,7 @@
             ?dateTimeEndValueGrant core:dateTime ?dateTimeEndGrant 
         } WHERE {
             ?subject ?property ?role .
-            ?role a core:InvestigatorRole .
+            ?role a core:PrincipalInvestigatorRole .
             ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
             ?activity a core:Grant .
             ?activity core:dateTimeInterval ?dateTimeIntervalGrant .

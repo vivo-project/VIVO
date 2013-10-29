@@ -19,27 +19,33 @@
                         ?org ?orgName 
                         ?middleOrg ?middleOrgName
                         ?outerOrg ?outerOrgName
-                        ?dateTimeStart ?dateTimeEnd WHERE {
-            ?subject ?property ?position 
+                        ?dateTimeStart ?dateTimeEnd 
+        WHERE {
+            ?subject ?property ?position .
             OPTIONAL { ?position core:relates ?org .
                        ?org rdfs:label ?orgName 
-                       OPTIONAL { ?org obo:BFO_0000050 ?middleOrg .
-                                  ?middleOrg rdfs:label ?middleOrgName
-                                  OPTIONAL { ?middleOrg obo:BFO_0000050 ?outerOrg .
-                                             ?outerOrg rdfs:label ?outerOrgName
-                                  }
-                       }
+            }
+            OPTIONAL { ?position core:relates ?org .
+                       ?org rdfs:label ?orgName .
+                       ?org obo:BFO_0000050 ?middleOrg .
+                       ?middleOrg rdfs:label ?middleOrgName
+            }
+            OPTIONAL { ?position core:relates ?org .
+                       ?org rdfs:label ?orgName .
+                       ?org obo:BFO_0000050 ?middleOrg .
+                       ?middleOrg obo:BFO_0000050 ?outerOrg .
+                       ?outerOrg rdfs:label ?outerOrgName
             }
             OPTIONAL { ?position rdfs:label ?positionTitle } 
             OPTIONAL { ?position core:hrJobTitle ?hrJobTitle }
             OPTIONAL { ?position core:rank ?rank }
-            OPTIONAL { ?position core:dateTimeInterval ?dateTimeInterval 
-                       OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                                  ?dateTimeStartValue core:dateTime ?dateTimeStart 
-                       }
-                       OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .   
-                                  ?dateTimeEndValue core:dateTime ?dateTimeEnd  
-                       }
+            OPTIONAL { ?position core:dateTimeInterval ?dateTimeInterval .
+                       ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                       ?dateTimeStartValue core:dateTime ?dateTimeStart 
+            }
+            OPTIONAL { ?position core:dateTimeInterval ?dateTimeInterval .
+                       ?dateTimeInterval core:end ?dateTimeEndValue .   
+                       ?dateTimeEndValue core:dateTime ?dateTimeEnd  
             }
             <collated>
             OPTIONAL { ?position vitro:mostSpecificType ?subclass .
@@ -75,7 +81,6 @@
         PREFIX obo:   &lt;http://purl.obolibrary.org/obo/&gt;
         CONSTRUCT { 
             ?subject ?property ?position .
-            ?position a core:Position .
             ?position ?positionProperty ?positionValue .
             ?org rdfs:label ?orgName .
             ?org obo:BFO_0000050 ?middleOrg .
@@ -86,14 +91,7 @@
             {
                ?subject ?property ?position .
                ?position a core:Position .
-            } UNION {
-               ?subject ?property ?position .
-               ?position a core:Position .
                ?position ?positionProperty ?positionValue 
-            } UNION {
-               ?subject ?property ?position .
-               ?position a core:Position .
-               ?position core:rank ?rank 
             } UNION {
                ?subject ?property ?position .
                ?position a core:Position .
@@ -105,25 +103,12 @@
                 ?position a core:Position .
                 ?position core:relates ?org .
                 ?org a foaf:Organization . 
-                ?org obo:BFO_0000050 ?middleOrg
-            } UNION {
-                ?subject ?property ?position .
-                ?position a core:Position .
-                ?position core:relates ?org . 
-                ?org a foaf:Organization .
                 ?org obo:BFO_0000050 ?middleOrg .
                 ?middleOrg rdfs:label ?middleOrgName
             } UNION {
                 ?subject ?property ?position .
                 ?position a core:Position .
                 ?position core:relates ?org .
-                ?org a foaf:Organization . 
-                ?org obo:BFO_0000050 ?middleOrg .
-                ?middleOrg obo:BFO_0000050 ?outerOrg
-            } UNION {
-                ?subject ?property ?position .
-                ?position a core:Position .
-                ?position core:positionInOrganization ?org .
                 ?org a foaf:Organization . 
                 ?org obo:BFO_0000050 ?middleOrg .
                 ?middleOrg obo:BFO_0000050 ?outerOrg .
@@ -136,28 +121,22 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
         CONSTRUCT { 
             ?subject ?property ?position .
-            ?position a core:Position .  
             ?position core:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval core:start ?dateTimeStartValue .
             ?dateTimeStartValue core:dateTime ?dateTimeStart .
-            ?dateTimeInterval core:end ?dateTimeEndValue .
-            ?dateTimeEndValue core:dateTime ?dateTimeEnd 
         } WHERE {
             ?subject ?property ?position .  
             ?position a core:Position .  
             ?position core:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval core:start ?dateTimeStartValue .
             ?dateTimeStartValue core:dateTime ?dateTimeStart .
-            ?dateTimeInterval core:end ?dateTimeEndValue .
-            ?dateTimeEndValue core:dateTime ?dateTimeEnd 
         } 
     </query-construct>
-<!--
+
     <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;    
         CONSTRUCT { 
             ?subject ?property ?position .  
-            ?position a core:Position .  
             ?position core:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval core:end ?dateTimeEndValue .
             ?dateTimeEndValue core:dateTime ?dateTimeEnd 
@@ -169,6 +148,6 @@
             ?dateTimeEndValue core:dateTime ?dateTimeEnd 
         } 
     </query-construct>
--->              
+              
     <template>propStatement-personInPosition.ftl</template>
 </list-view-config>
