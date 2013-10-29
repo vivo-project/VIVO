@@ -243,97 +243,59 @@
                 	    	the new locations accordingly.
                 	    	
                 	    </p>
-                	    	<h5>Old locations of RDF files</h5>
-<pre>/WEB-INF/ontologies/app/application.owl
-/WEB-INF/ontologies/app/aboutPage.n3
-/WEB-INF/ontologies/app/menu.n3
-/WEB-INF/ontologies/app/profilePageType.n3
-/WEB-INF/ontologies/app/loadedAtStartup/displayModelListViews.rdf
-/WEB-INF/ontologies/app/loadedAtStartup/homePageDataGetters.n3
-/WEB-INF/ontologies/app/loadedAtStartup/localeSelectionGUI.n3
-/WEB-INF/ontologies/app/loadedAtStartup/vivoListViewConfig.rdf
-/WEB-INF/ontologies/app/loadedAtStartup/vivoOrganizationDataGetters.n3
-/WEB-INF/ontologies/app/loadedAtStartup/vivoSearchProhibited.n3
-/WEB-INF/ontologies/app/menuload/displayTBOX.n3
-/WEB-INF/ontologies/app/menuload/displayDisplay.n3
-/WEB-INF/init-data/initialSiteConfig.rdf
-/WEB-INF/ontologies/user/abox/geopolitical.ver1.1-11-18-11-individual-labels.rdf
-/WEB-INF/ontologies/user/abox/vocabularySource-labels.n3
-/WEB-INF/ontologies/user/tbox/vitro-0.7-annotations.rdf
-/WEB-INF/ontologies/user/tbox/geopolitical-ver1.1-11-18-11-annotations.rdf
-/WEB-INF/ontologies/user/tbox/scires-1.5-annotations.rdf
-/WEB-INF/ontologies/user/tbox/vivo-core-1.5-annotations.rdf
-/WEB-INF/ontologies/user/tbox/isDefinedBy-1.5-annotations.rdf
-/WEB-INF/ontologies/user/applicationMetadata/propertygroups.rdf
-/WEB-INF/ontologies/user/applicationMetadata/classgroups.rdf
-/WEB-INF/filegraph/abox/us-states.rdf
-/WEB-INF/filegraph/abox/geopolitical.abox.ver1.1-11-18-11.owl
-/WEB-INF/filegraph/abox/academicDegree.rdf
-/WEB-INF/filegraph/abox/documentStatus.owl
-/WEB-INF/filegraph/abox/continents.n3
-/WEB-INF/filegraph/abox/vocabularySource.n3
-/WEB-INF/filegraph/abox/dateTimeValuePrecision.owl
-/WEB-INF/filegraph/tbox/vitroPublic.owl
-/WEB-INF/filegraph/tbox/vivo-dcterms-1.5.owl
-/WEB-INF/filegraph/tbox/scires-1.5.owl
-/WEB-INF/filegraph/tbox/vivo-core-1.5.owl
-/WEB-INF/filegraph/tbox/vivo-c4o-1.5.owl
-/WEB-INF/filegraph/tbox/geopolitical.tbox.ver1.1-11-18-11.owl
-/WEB-INF/filegraph/tbox/vivo-fabio-1.5.owl
-/WEB-INF/filegraph/tbox/vivo-skos-1.5.owl
-/WEB-INF/filegraph/tbox/vivo-event-1.5.owl
-/WEB-INF/filegraph/tbox/vivo-foaf-1.5.owl
-/WEB-INF/filegraph/tbox/vitro-0.7.owl
-/WEB-INF/filegraph/tbox/vivo-pws-1.5.owl
-/WEB-INF/filegraph/tbox/isDefinedBy-1.5.owl
-/WEB-INF/filegraph/tbox/vivo-dcelements-1.5.owl
-/WEB-INF/filegraph/tbox/vivo-bibo-1.5.owl</pre>
+                            <table>
+                                <tr>
+                                    <th>Old locations of RDF files<br/>under [Vitro]/webapp/web or [VIVO]/productMods</th>
+                                    <th>New locations of RDF files<br/>under [Vitro]/webapp/rdf or [VIVO]/rdf</th>
+                                    <th>Comments</th>
+                                </tr>
+                                <tr>
+                                    <td>WEB-INF/ontologies/app/</td>
+                                    <td>rdf/display/firsttime/</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>WEB-INF/ontologies/app/loadedAtStartup/</td>
+                                    <td>rdf/display/everytime/</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>WEB-INF/ontologies/app/menuload/displayTBOX.n3</td>
+                                    <td>rdf/displayTbox/everytime/</td>
+                                    <td>Was one file, now a directory</td>
+                                </tr>
+                                <tr>
+                                    <td>/WEB-INF/ontologies/app/menuload/displayDisplay.n3</td>
+                                    <td>rdf/displayDisplay/everytime/</td>
+                                    <td>Was one file, now a directory</td>
+                                </tr>
+                                <tr>
+                                    <td>WEB-INF/ontologies/user/applicationMetadata/<br/>WEB-INF/init-data/</td>
+                                    <td>rdf/applicationMetadata/firsttime/</td>
+                                    <td>Merged directories</td>
+                                </tr>
+                                <tr>
+                                    <td>WEB-INF/ontologies/user/abox/</td>
+                                    <td>rdf/abox/firsttime/</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>WEB-INF/filegraph/abox/</td>
+                                    <td>rdf/abox/filegraph/</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>WEB-INF/ontologies/user/tbox/</td>
+                                    <td>rdf/tbox/firsttime/</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>WEB-INF/filegraph/tbox/</td>
+                                    <td>rdf/tbox/filegraph/</td>
+                                    <td></td>
+                                </tr>
+                            </table>
 
-                	    	<h5>New locations of RDF files</h5>
-<pre>rdf/display/firsttime/aboutPage.n3
-rdf/display/firsttime/application.owl
-rdf/display/firsttime/menu.n3
-rdf/display/firsttime/profilePageType.n3
-rdf/display/everytime/displayModelListViews.rdf
-rdf/display/everytime/homePageDataGetters.n3
-rdf/display/everytime/localeSelectionGUI.n3
-rdf/display/everytime/vivoListViewConfig.rdf
-rdf/display/everytime/vivoOrganizationDataGetters.n3
-rdf/display/everytime/vivoSearchProhibited.n3
-rdf/displayTbox/everytime/displayTBOX.n3
-rdf/displayDisplay/everytime/displayDisplay.n3
-rdf/applicationMetadata/firsttime/classgroups.rdf
-rdf/applicationMetadata/firsttime/initialSiteConfig.rdf
-rdf/applicationMetadata/firsttime/propertygroups.rdf
-rdf/abox/firsttime/geopolitical.ver1.1-11-18-11-individual-labels.rdf
-rdf/abox/firsttime/vocabularySource-labels.n3
-rdf/abox/filegraph/abox/academicDegree.rdf
-rdf/abox/filegraph/abox/continents.n3
-rdf/abox/filegraph/abox/dateTimeValuePrecision.owl
-rdf/abox/filegraph/abox/documentStatus.owl
-rdf/abox/filegraph/abox/geopolitical.abox.ver1.1-11-18-11.owl
-rdf/abox/filegraph/abox/us-states.rdf
-rdf/abox/filegraph/abox/vocabularySource.n3
-rdf/tbox/firsttime/geopolitical-ver1.1-11-18-11-annotations.rdf
-rdf/tbox/firsttime/isDefinedBy-1.5-annotations.rdf
-rdf/tbox/firsttime/scires-1.5-annotations.rdf
-rdf/tbox/firsttime/vitro-0.7-annotations.rdf
-rdf/tbox/firsttime/vivo-core-1.5-annotations.rdf
-rdf/tbox/filegraph/tbox/geopolitical.tbox.ver1.1-11-18-11.owl
-rdf/tbox/filegraph/tbox/isDefinedBy-1.5.owl
-rdf/tbox/filegraph/tbox/scires-1.5.owl
-rdf/tbox/filegraph/tbox/vitro-0.7.owl
-rdf/tbox/filegraph/tbox/vitroPublic.owl
-rdf/tbox/filegraph/tbox/vivo-bibo-1.5.owl
-rdf/tbox/filegraph/tbox/vivo-c4o-1.5.owl
-rdf/tbox/filegraph/tbox/vivo-core-1.5.owl
-rdf/tbox/filegraph/tbox/vivo-dcelements-1.5.owl
-rdf/tbox/filegraph/tbox/vivo-dcterms-1.5.owl
-rdf/tbox/filegraph/tbox/vivo-event-1.5.owl
-rdf/tbox/filegraph/tbox/vivo-fabio-1.5.owl
-rdf/tbox/filegraph/tbox/vivo-foaf-1.5.owl
-rdf/tbox/filegraph/tbox/vivo-pws-1.5.owl
-rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
                 	    <p>
                 	    	If you are using a three-tier build process, you will need to add two lines
                 	    	to the build script to accomodate the RDF files, and the language support (see below)
@@ -353,8 +315,8 @@ rdf/tbox/filegraph/tbox/vivo-skos-1.5.owl</pre>
  <pre>&lt;patternset id="appbase.patterns"&gt;
 &lt;include name="src/**/*" /&gt;
 &lt;include name="lib/**/*" /&gt;
-&lt;include name="rdf/**/*" /&gt;
-&lt;include name="languages/**/*" /&gt;
+<b>&lt;include name="rdf/**/*" /&gt;
+&lt;include name="languages/**/*" /&gt;</b>
 &lt;include name="test/**/*" /&gt;
 &lt;include name="themes/**/*" /&gt;
 &lt;include name="config/*.properties" /&gt;
