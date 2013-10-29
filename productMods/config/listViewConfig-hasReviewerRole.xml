@@ -22,18 +22,20 @@
 
                    ?subject ?property ?role 
                    OPTIONAL {  ?role core:roleContributesTo ?activity .
-                               ?activity vitro:mostSpecificType ?subclass 
-                               OPTIONAL { ?activity rdfs:label ?activityName }
-                               OPTIONAL { ?subclass rdfs:label ?subclassLabel }
-                            } 
+                               ?activity rdfs:label ?activityName .
+                   } 
 
-                   OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval 
-                              OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .
-                                         ?dateTimeStartValue core:dateTime ?dateTimeStart 
-                              }
-                              OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .
-                                         ?dateTimeEndValue core:dateTime ?dateTimeEnd 
-                              }
+                   OPTIONAL {  ?role core:roleContributesTo ?activity .
+                               ?activity vitro:mostSpecificType ?subclass .
+                               ?subclass rdfs:label ?subclassLabel 
+                   } 
+                   OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval .
+                              ?dateTimeInterval core:start ?dateTimeStartValue .
+                              ?dateTimeStartValue core:dateTime ?dateTimeStart 
+                   }
+                   OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval .
+                              ?dateTimeInterval core:end ?dateTimeEndValue .
+                              ?dateTimeEndValue core:dateTime ?dateTimeEnd 
                    }
                      
         } ORDER BY <collated> ?subclass </collated> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityName
@@ -63,17 +65,8 @@
         } UNION {
             ?subject ?property ?role .
             ?role a core:ReviewerRole .
-            ?role core:roleContributesTo ?activity
-        } UNION {
-            ?subject ?property ?role .
-            ?role a core:ReviewerRole .
             ?role core:roleContributesTo ?activity .
             ?activity rdfs:label ?activityName .
-        } UNION {
-            ?subject ?property ?role .
-            ?role a core:ReviewerRole .
-            ?role core:roleContributesTo ?activity .
-            ?activity vitro:mostSpecificType ?subclass
         } UNION {
             ?subject ?property ?role .
             ?role a core:ReviewerRole .

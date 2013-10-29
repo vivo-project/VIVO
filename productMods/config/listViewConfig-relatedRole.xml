@@ -30,23 +30,27 @@ http://vivoweb.org/ontology/core#realizedRole and http://vivoweb.org/ontology/co
 
             # We need ?subclass in the uncollated query to get the roleTypeLabel  
             # for roles that have no label.
-            OPTIONAL { ?role vitro:mostSpecificType ?subclass . 
-                       OPTIONAL { ?subclass rdfs:label ?roleTypeLabel }
-                       OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?indivInRole 
-                                  OPTIONAL { ?indivInRole rdfs:label ?indivLabel }
-                                } 
-                        OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/BFO_0000055&gt; ?indivInRole 
-                                   OPTIONAL { ?indivInRole rdfs:label ?indivLabel }
-                                 } 
+            OPTIONAL { ?role vitro:mostSpecificType ?subclass . }
+            OPTIONAL { ?role vitro:mostSpecificType ?subclass .
+                       ?subclass rdfs:label ?roleTypeLabel 
+            }
+            OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?indivInRole }
+            OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?indivInRole .
+                       ?indivInRole rdfs:label ?indivLabel 
+            }
+            OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/BFO_0000055&gt; ?indivInRole .
+            }
+            OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/BFO_0000055&gt; ?indivInRole .
+                       ?indivInRole rdfs:label ?indivLabel 
             }
 
-            OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval 
-                       OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                    
-                                  ?dateTimeStartValue core:dateTime ?dateTimeStart 
-                       }
-                       OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .
-                                  ?dateTimeEndValue core:dateTime ?dateTimeEnd
-                      }
+            OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval .
+                       ?dateTimeInterval core:start ?dateTimeStartValue .                    
+                       ?dateTimeStartValue core:dateTime ?dateTimeStart 
+            }
+            OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval .
+                       ?dateTimeInterval core:end ?dateTimeEndValue .
+                       ?dateTimeEndValue core:dateTime ?dateTimeEnd
             }
             <critical-data-required>
             FILTER ( bound(?indivInRole) )

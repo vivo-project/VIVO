@@ -69,7 +69,7 @@ local:hasServiceProviderRoleContext a :ConfigContext ;
     :qualifiedBy      <http://purl.obolibrary.org/obo/ERO_0000012> .
     
 local:hasServiceProviderRoleConfig a :ObjectPropertyDisplayConfig ;
-   :listViewConfigFile "listViewConfig-hasRole.xml"^^xsd:string ;
+   :listViewConfigFile "listViewConfig-roleContributesTo.xml"^^xsd:string ;
    :displayName "service to the profession" ;
    vitro:displayRankAnnot 20;
    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -84,7 +84,7 @@ local:hasClinicalRoleContext a :ConfigContext ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#ClinicalRole> .
 
 local:hasClinicalRoleConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-hasRole.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-hasClinicalActivity.xml"^^xsd:string ;
     :displayName "clinical activities" ;
     vitro:displayRankAnnot 70;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -99,7 +99,7 @@ local:hasLeaderRoleContext a :ConfigContext ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#LeaderRole> .
 
 local:hasLeaderRoleConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-hasRole.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-roleContributesTo.xml"^^xsd:string ;
     :displayName "head of" ;
     vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -114,7 +114,7 @@ local:hasMemberRoleContext a :ConfigContext ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#MemberRole> .
 
 local:hasMemberRoleConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-hasRole.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-roleContributesTo.xml"^^xsd:string ;
     :displayName "member of" ;
     vitro:displayRankAnnot 50;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -129,7 +129,7 @@ local:hasTeacherRoleContext a :ConfigContext ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#TeacherRole> .
 
 local:hasTeacherRoleConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-hasRole.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-roleRealizedIn.xml"^^xsd:string ;
     :displayName "teaching activities" ;
     vitro:displayRankAnnot 20;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -174,7 +174,7 @@ local:hasOrganizerRoleContext a :ConfigContext ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#OrganizerRole> .
 
 local:hasOrganizerRoleConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-hasRole.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-roleRealizedIn.xml"^^xsd:string ;
     :displayName "organizer of" ;
     vitro:displayRankAnnot 4;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -189,7 +189,7 @@ local:hasOutreachProviderRoleContext a :ConfigContext ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#OutreachProviderRole> .
 
 local:hasOutreachProviderRoleConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-hasRole.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-roleContributesTo.xml"^^xsd:string ;
     :displayName "outreach and community service" ;
     vitro:displayRankAnnot 50;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -219,7 +219,7 @@ local:hasResearcherRoleContext a :ConfigContext ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#ResearcherRole> .
 
 local:hasResearcherRoleConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-hasRole.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-researchActivities.xml"^^xsd:string ;
     :displayName "research activities" ;
     vitro:displayRankAnnot 15;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -249,7 +249,7 @@ local:hasPrincipalInvestigatorRoleContext a :ConfigContext ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#PrincipalInvestigatorRole> .
 
 local:hasPrincipalInvestigatorRoleConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-hasInvestigatorRole.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-hasPrincipalInvestigatorRole.xml"^^xsd:string ;
     :displayName "principal investigator on" ;
     vitro:displayRankAnnot 20;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -264,7 +264,7 @@ local:hasCo-PrincipalInvestigatorRoleContext a :ConfigContext ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#CoPrincipalInvestigatorRole> .
 
 local:hasCo-PrincipalInvestigatorRoleConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-hasInvestigatorRole.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-hasCoPrincipalInvestigatorRole.xml"^^xsd:string ;
     :displayName "co-principal investigator on" ;
     vitro:displayRankAnnot 25;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;

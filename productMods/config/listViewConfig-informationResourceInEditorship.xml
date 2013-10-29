@@ -18,30 +18,22 @@
                 ?subject ?property ?editorship .
                 OPTIONAL { ?editorship core:rank ?rank } 
                 OPTIONAL { ?editorship core:relates ?person .
-                       ?person a foaf:Person .                      
-                       ?person rdfs:label ?personName 
-                       <collated> 
-                       OPTIONAL { ?person vitro:mostSpecificType ?subclass .
-                                  ?subclass rdfs:subClassOf foaf:Person 
-                       } 
-                       </collated>
-            }
+                           ?person a foaf:Person .                      
+                           ?person rdfs:label ?personName 
+                }
+                <collated> 
+                OPTIONAL { ?editorship core:relates ?person .
+                           ?person a foaf:Person .
+                           ?person vitro:mostSpecificType ?subclass .
+                           ?subclass rdfs:subClassOf foaf:Person 
+                } 
+                </collated>
             <critical-data-required>
             FILTER ( bound(?person) )
             </critical-data-required>
         } ORDER BY <collated> ?subclass </collated> ?rank ?personName   
     </query-select>
 
-    <query-construct>
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
-        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt; 
-        CONSTRUCT {
-            ?subclass rdfs:subClassOf foaf:Person 
-        } WHERE {
-            ?subclass rdfs:subClassOf foaf:Person
-        }
-    </query-construct>
-    
     <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; 
@@ -54,7 +46,8 @@
             ?editorship core:relates ?person .
             ?person a foaf:Person .
             ?person rdfs:label ?personName .
-            ?person vitro:mostSpecificType ?subclass           
+            ?person vitro:mostSpecificType ?subclass .
+            ?subclass rdfs:subClassOf foaf:Person          
         } WHERE {
             {
                 ?subject ?property ?editorship .
@@ -75,7 +68,8 @@
                 ?editorship core:relates ?person .
                 ?person a foaf:Person .
                 ?person rdfs:label ?personName . 
-                ?person vitro:mostSpecificType ?subclass
+                ?person vitro:mostSpecificType ?subclass .
+                ?subclass rdfs:subClassOf foaf:Person
             }
         } 
     </query-construct>

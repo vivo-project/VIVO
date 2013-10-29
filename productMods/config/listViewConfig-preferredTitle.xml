@@ -12,8 +12,8 @@
                         ?preferredTitle
         WHERE {
             ?subject ?property ?vcard .
-            ?vcard vcard:hasTitle ?title 
-            OPTIONAL { ?title vcard:title ?preferredTitle }
+            ?vcard vcard:hasTitle ?title .
+            ?title vcard:title ?preferredTitle
             
         } 
     </query-select>
