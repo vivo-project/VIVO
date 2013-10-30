@@ -411,6 +411,21 @@ local:issuedCredentialConfig a :ObjectPropertyDisplayConfig ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasIssuedCredentialGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbiography> .
 
+local:grantAdministeredByContext a :ConfigContext ;
+    :hasConfiguration local:grantAdministeredByConfig ;
+    :configContextFor vivo:relates ;
+    :qualifiedByDomain  vivo:Grant  ;
+    :qualifiedBy      vivo:AdministratorRole .
+
+local:grantAdministeredByConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-grantAdministeredBy.xml"^^xsd:string ;
+    :displayName "grant administered by" ;
+    vitro:displayRankAnnot 1;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.GrantAdministeredByGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
 ### vcard properties ###
 
 local:mailingAddressContext a :ConfigContext ;
@@ -633,6 +648,104 @@ local:inEventSeriesConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
     :displayName "in event series" ;
     vitro:displayRankAnnot 3;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:eventLocationContext a :ConfigContext ;
+    :hasConfiguration local:eventLocationConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ;
+    :qualifiedByDomain      <http://purl.org/NET/c4dm/event.owl#Event> ;
+    :qualifiedBy      vivo:GeographicLocation .
+
+local:eventLocationConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "has geographic location" ;
+    vitro:displayRankAnnot 2;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGrouplocation> .
+
+local:courseOfferedByContext a :ConfigContext ;
+    :hasConfiguration local:courseOfferedByConfig ;
+    :configContextFor vivo:offeredBy ;
+    :qualifiedByDomain      vivo:Course ;
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
+
+local:courseOfferedByConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "offered by" ;
+    vitro:displayRankAnnot 2;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:orgOffersCourseContext a :ConfigContext ;
+    :hasConfiguration local:orgOffersCourseConfig ;
+    :configContextFor vivo:offers ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedBy      vivo:Course .
+
+local:orgOffersCourseConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "offers course" ;
+    vitro:displayRankAnnot 2;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupother> .
+
+local:collegeOffersDegreeContext a :ConfigContext ;
+    :hasConfiguration local:collegeOffersDegreeConfig ;
+    :configContextFor vivo:offers ;
+    :qualifiedByDomain      vivo:College ;
+    :qualifiedBy      vivo:AcademicDegree .
+
+local:collegeOffersDegreeConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "offers degree" ;
+    vitro:displayRankAnnot 2;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:deptOffersDegreeContext a :ConfigContext ;
+    :hasConfiguration local:debtOffersDegreeConfig ;
+    :configContextFor vivo:offers ;
+    :qualifiedByDomain      vivo:AcademicDepartment ;
+    :qualifiedBy      vivo:AcademicDegree .
+
+local:deptOffersDegreeConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "offers degree" ;
+    vitro:displayRankAnnot 2;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:uniOffersDegreeContext a :ConfigContext ;
+    :hasConfiguration local:uniOffersDegreeConfig ;
+    :configContextFor vivo:offers ;
+    :qualifiedByDomain      vivo:University ;
+    :qualifiedBy      vivo:AcademicDegree .
+
+local:uniOffersDegreeConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "offers degree" ;
+    vitro:displayRankAnnot 2;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:grantAwardedByContext a :ConfigContext ;
+    :hasConfiguration local:grantAwardedByConfig ;
+    :configContextFor vivo:assignedBy ;
+    :qualifiedByDomain      vivo:Grant ;
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
+
+local:grantAwardedByConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "grant awarded by" ;
+    vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .

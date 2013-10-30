@@ -185,7 +185,7 @@ public class PersonHasIssuedCredentialGenerator extends VivoBaseGenerator implem
         "@prefix vivo: <" + vivoCore + "> . \n\n" +   
         "?issuedCredential vivo:relates ?existingCredential . \n" +
         "?existingCredential a <" + credentialTypeClass + ">  . \n" +
-        "?credential a ?credentialType . \n" +
+        "?existingCredential a ?credentialType . \n" +
         "?existingCredential vivo:relatedBy ?issuedCredential . " ;
     
 	final static String n3ForYearCredentialed = 
