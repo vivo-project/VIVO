@@ -329,6 +329,8 @@ vivo:GovernmentAgency
 
 skos:narrower
       rdfs:label "narrower term"@en-US ;
+      vitro:customEntryFormAnnot
+              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddConceptThroughObjectPropertyGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -4744,6 +4746,8 @@ obo:ERO_0001245
 
 skos:broader
       rdfs:label "broader term"@en-US ;
+      vitro:customEntryFormAnnot
+              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddConceptThroughObjectPropertyGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
