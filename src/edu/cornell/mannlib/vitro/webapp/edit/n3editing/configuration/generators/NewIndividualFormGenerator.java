@@ -172,7 +172,9 @@ public class NewIndividualFormGenerator extends BaseEditConfigurationGenerator i
 		WebappDaoFactory wdf = vreq.getWebappDaoFactory();
 		Boolean isPersonType = Boolean.FALSE;
 		String foafPersonType = getFOAFPersonClassURI();
-	    List<String> superTypes = wdf.getVClassDao().getAllSuperClassURIs(getTypeOfNew(vreq));    
+	    List<String> superTypes = wdf.getVClassDao().getAllSuperClassURIs(getTypeOfNew(vreq));
+	    //add foaf person type too so that can also get checked
+	    superTypes.add(foafPersonType);
 	    if( superTypes != null ){
 	    	for( String typeUri : superTypes){
 	    		if( foafPersonType.equals(typeUri)) {

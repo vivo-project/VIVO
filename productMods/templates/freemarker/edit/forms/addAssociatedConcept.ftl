@@ -66,6 +66,9 @@
                    	<div class="column conceptVocabSource">
                    	<#if existingConcept.vocabURI?has_content && existingConcept.vocabLabel?has_content>
                    		${existingConcept.vocabLabel}
+                   	<#else>
+                   		&nbsp;
+                   		<#--We still want the column to be there even if no vocabulary source is present-->	
                    	</#if>
                   	</div> 
                   	<div class="column conceptRemoval">
