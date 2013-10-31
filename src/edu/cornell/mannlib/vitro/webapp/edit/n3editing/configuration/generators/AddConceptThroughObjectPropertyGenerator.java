@@ -37,10 +37,13 @@ public class AddConceptThroughObjectPropertyGenerator extends DefaultObjectPrope
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
             HttpSession session) throws Exception {
 		EditConfigurationVTwo editConfig = super.getEditConfiguration(vreq, session);
-		//return rangetypes in form specific data
-		editConfig.addFormSpecificData("createNewTypes", getCreateNewTypesOptions(vreq));
-		//override templates with ones that will override create new types portion
-		editConfig.setTemplate(getTemplate(vreq));
+		//If this isn't adding a new individual, then override  template/types
+		if(!DefaultAddMissingIndividualFormGenerator.isCreateNewIndividual(vreq, session)) {
+			//return rangetypes in form specific data
+			editConfig.addFormSpecificData("createNewTypes", getCreateNewTypesOptions(vreq));
+			//override templates with ones that will override create new types portion
+			editConfig.setTemplate(getTemplate(vreq));
+		}
 		return editConfig;
 	}
 	
@@ -117,9 +120,10 @@ public class AddConceptThroughObjectPropertyGenerator extends DefaultObjectPrope
     		for(VClass v: rangeTypes) {
     			types.add(v.getURI());
     		}
+    		String[] typesArray = types.toArray(new String[types.size()]);
     		field.setOptions( new IndividualsViaSolrQueryOptions(
     	        vreq.getSession().getServletContext(),
-    	        types.toArray(new String[types.size()])));
+    	        typesArray));
     	}else{
     		field.setOptions(null);
     	}
