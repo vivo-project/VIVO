@@ -213,7 +213,8 @@
     <!-- http://purl.org/ontology/bibo/reproducedIn -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/reproducedIn">
-
+        <rdfs:range rdf:resource="http://purl.org/ontology/bibo/Document"/>
+        <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Document"/>
         <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000050"/>
     </owl:ObjectProperty>
     
