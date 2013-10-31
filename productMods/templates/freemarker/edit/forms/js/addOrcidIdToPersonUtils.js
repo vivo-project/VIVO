@@ -12,6 +12,7 @@ var addOrcidIdToPersonUtils = {
     
     this.form = $('#personHasOrcidId');
     this.orcidId = $('#orcidId');
+    this.orcidIdDisplay = $('#orcidIdDisplay');
 
     },
     
@@ -25,10 +26,10 @@ var addOrcidIdToPersonUtils = {
     
     buildOrcidIdURL: function() {
         
-        var orcidBase = "http://www.orcid.org/";
+        var orcidBase = "http://orcid.org/";
         var orcidIdVal = "";
-        if ( this.orcidId.val().length > 0 ) {
-            orcidIdVal = orcidBase + this.orcidId.val();
+        if ( this.orcidIdDisplay.val().length > 0 ) {
+            orcidIdVal = orcidBase + this.orcidIdDisplay.val();
             this.orcidId.val(orcidIdVal);
         }
     },
