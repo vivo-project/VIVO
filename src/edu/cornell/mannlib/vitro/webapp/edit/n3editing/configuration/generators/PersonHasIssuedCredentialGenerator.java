@@ -118,12 +118,6 @@ public class PersonHasIssuedCredentialGenerator extends VivoBaseGenerator implem
                 );
 
         conf.addField( new FieldVTwo().
-                setName("orgLabelDisplay").
-                setRangeDatatypeUri(XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString()))
-                );
-
-        conf.addField( new FieldVTwo().
                 setName("credentialLabelDisplay").
                 setRangeDatatypeUri(XSD.xstring.toString() ).
                 setValidators( list("datatype:" + XSD.xstring.toString()))
@@ -184,8 +178,8 @@ public class PersonHasIssuedCredentialGenerator extends VivoBaseGenerator implem
     final static String n3ForExistingCredentialAssertion  =      
         "@prefix vivo: <" + vivoCore + "> . \n\n" +   
         "?issuedCredential vivo:relates ?existingCredential . \n" +
-        "?existingCredential a <" + credentialTypeClass + ">  . \n" +
-        "?existingCredential a ?credentialType . \n" +
+/*        "?existingCredential a <" + credentialTypeClass + ">  . \n" +
+        "?existingCredential a ?credentialType . \n" +  */
         "?existingCredential vivo:relatedBy ?issuedCredential . " ;
     
 	final static String n3ForYearCredentialed = 
