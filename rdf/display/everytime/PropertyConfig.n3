@@ -415,7 +415,8 @@ local:mailingAddressContext a :ConfigContext ;
     :hasConfiguration local:mailingAddressConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
     :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
-    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Address> .
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Address> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> .
 
 local:mailingAddressConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-mailingAddress.xml"^^xsd:string ;
@@ -430,6 +431,7 @@ local:mailingAddressContext a :ConfigContext ;
     :hasConfiguration local:mailingAddressConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
     :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
     :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Address> .
 
 local:mailingAddressConfig a :ObjectPropertyDisplayConfig ;
@@ -445,6 +447,7 @@ local:personTelephoneContext a :ConfigContext ;
     :hasConfiguration local:personTelephoneConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
     :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
     :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Telephone> .
 
 local:personTelephoneConfig a :ObjectPropertyDisplayConfig ;
@@ -460,6 +463,7 @@ local:orgTelephoneContext a :ConfigContext ;
     :hasConfiguration local:orgTelephoneConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
     :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
     :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Telephone> .
 
 local:orgTelephoneConfig a :ObjectPropertyDisplayConfig ;
@@ -475,6 +479,7 @@ local:personFaxContext a :ConfigContext ;
     :hasConfiguration local:personFaxConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
     :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
     :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Fax> .
 
 local:personFaxConfig a :ObjectPropertyDisplayConfig ;
@@ -490,6 +495,7 @@ local:orgFaxContext a :ConfigContext ;
     :hasConfiguration local:orgFaxConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
     :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
     :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Fax> .
 
 local:orgFaxConfig a :ObjectPropertyDisplayConfig ;
@@ -505,6 +511,7 @@ local:additionalEmailContext a :ConfigContext ;
     :hasConfiguration local:additionalEmailConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
     :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
     :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Email> .
 
 local:additionalEmailConfig a :ObjectPropertyDisplayConfig ;
@@ -520,6 +527,7 @@ local:primaryEmailContext a :ConfigContext ;
     :hasConfiguration local:primaryEmailConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
     :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
     :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Work> .
 
 local:primaryEmailConfig a :ObjectPropertyDisplayConfig ;
@@ -535,6 +543,7 @@ local:webpageContext a :ConfigContext ;
     :hasConfiguration local:webpageConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
     :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
     :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
 
 local:webpageConfig a :ObjectPropertyDisplayConfig ;
@@ -550,6 +559,7 @@ local:webpageContext a :ConfigContext ;
     :hasConfiguration local:webpageConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
     :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
     :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
 
 local:webpageConfig a :ObjectPropertyDisplayConfig ;
@@ -565,6 +575,7 @@ local:fullNameContext a :ConfigContext ;
     :hasConfiguration local:fullNameConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
     :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
     :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Name> .
 
 local:fullNameConfig a :ObjectPropertyDisplayConfig ;
@@ -580,6 +591,7 @@ local:preferredTitleContext a :ConfigContext ;
     :hasConfiguration local:preferredTitleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
     :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
     :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Title> .
 
 local:preferredTitleConfig a :ObjectPropertyDisplayConfig ;
