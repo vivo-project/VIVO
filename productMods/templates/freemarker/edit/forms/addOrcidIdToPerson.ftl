@@ -58,7 +58,8 @@
 
         <p>
             <label for="orcidId">ORCID iD ${requiredHint}</label>
-            <input  size="35"  type="text" id="orcidId" name="orcidId" value="${orcidIdValue}" />
+            <input  size="35"  type="text" id="orcidIdDisplay" name="orcidIdDisplay" value="${orcidIdValue}" />
+            <input  type="hidden" id="orcidId" name="orcidId" value="" />
         </p>
 
         <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>
