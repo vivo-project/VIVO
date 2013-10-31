@@ -17,7 +17,7 @@
         <#if statement.credential??>
             <a href="${profileUrl(statement.uri("credential"))}" title="${i18n().credential_name}">${statement.credentialLabel!statement.issuedCredentialLabel!statement.credentialLocal!}</a>
         <#else>
-            <a href="${profileUrl(statement.uri("issuedCredential"))}" title="${i18n().credential_name}">${statement.issuedCredentialLabel!"missing credential"}</a>
+            <a href="${profileUrl(statement.uri("issuedCredential"))}" title="${i18n().credential_name}">${statement.issuedCredentialLabel!"${i18n().missing_credential}"}</a>
         </#if>
     </#local>
 

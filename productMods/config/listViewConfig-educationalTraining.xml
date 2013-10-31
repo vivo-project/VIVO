@@ -23,10 +23,14 @@
                 OPTIONAL { ?edTraining vitro:mostSpecificType ?subclass . }
                 OPTIONAL { ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0002234&gt; ?awardedDegree .
                            ?awardedDegree core:relates ?degree .
-                           ?degree a core:AcademicDegree
-                           OPTIONAL { ?degree rdfs:label ?degreeName }
-                           OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
-                          }
+                           ?degree a core:AcademicDegree .
+                           ?degree rdfs:label ?degreeName 
+                }
+                OPTIONAL { ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0002234&gt; ?awardedDegree .
+                           ?awardedDegree core:relates ?degree .
+                           ?degree a core:AcademicDegree .
+                           ?degree core:abbreviation ?degreeAbbr 
+                }
                 OPTIONAL { ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0000057&gt; ?org . 
                            ?org a foaf:Organization .                                
                            ?org rdfs:label ?orgName  
@@ -34,13 +38,13 @@
                 OPTIONAL { ?edTraining core:majorField ?majorField }
                 OPTIONAL { ?edTraining core:departmentOrSchool ?deptOrSchool }
                 OPTIONAL { ?edTraining core:supplementalInformation ?info }
-                OPTIONAL { ?edTraining core:dateTimeInterval ?dateTimeInterval
-                           OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                    
-                                      ?dateTimeStartValue core:dateTime ?dateTimeStart 
-                           }
-                           OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue . 
-                                      ?dateTimeEndValue core:dateTime ?dateTimeEnd  
-                           }                                      
+                OPTIONAL { ?edTraining core:dateTimeInterval ?dateTimeInterval .
+                           ?dateTimeInterval core:start ?dateTimeStartValue .                    
+                           ?dateTimeStartValue core:dateTime ?dateTimeStart 
+                }
+                OPTIONAL { ?edTraining core:dateTimeInterval ?dateTimeInterval .
+                           ?dateTimeInterval core:end ?dateTimeEndValue . 
+                           ?dateTimeEndValue core:dateTime ?dateTimeEnd  
                 }  
          }  ORDER BY ?subclass DESC(?dateTimeEnd) DESC(?dateTimeStart)
     </query-select>

@@ -263,8 +263,8 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
     //when there is something in the label
     
     final static String n3ForNewSubjAreaAssertion  =   
-    	"?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?newSubjArea . \n" + 
-	    "?newSubjArea <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" + 
+    	"?advisingRelationship <http://vivoweb.org/ontology/core#hasSubjectArea> ?newSubjArea . \n" + 
+	    "?newSubjArea <http://vivoweb.org/ontology/core#subjectAreaOf> ?advisingRelationship . \n" + 
         "?newSubjArea <"+ label + "> ?subjAreaLabel . \n" + 
         "?newSubjArea a <" + subjAreaClass + "> . ";    
 

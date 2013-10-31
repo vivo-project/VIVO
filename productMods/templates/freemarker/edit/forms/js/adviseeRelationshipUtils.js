@@ -25,6 +25,7 @@ var adviseeRelUtils = {
     this.form = $('#personHasAdvisingRelationship');
     this.adRelshiplabel = $('#advisingRelLabel');
     this.advisor = $('#advisor');
+    this.fauxLabel = $('#maskLabelBuilding');
     this.subjArea = $('#SubjectArea');
     this.firstName = $('#firstName');
     this.lastName = $('#lastName');
@@ -56,8 +57,6 @@ var adviseeRelUtils = {
         this.form.submit(function() {
             adviseeRelUtils.resolveAdvisorNames();
             adviseeRelUtils.buildAdvisingRelLabel();
-            alert(this.adRelshiplabel.val());
-            return false;
         });            
     },
     
@@ -80,6 +79,12 @@ var adviseeRelUtils = {
             if (firstName) {
                 name += ', ' + firstName;
             }            
+
+            // we don't want the user to see the label getting built, so hide the acSelector
+            // field and display a bogus field that just has the last name in it.
+            this.fauxLabel.val(lastName);
+            this.advisee.hide();
+            this.fauxLabel.show();
             this.advisor.val(name);
             this.lastName.val(lastName);
         } 
@@ -91,7 +96,6 @@ var adviseeRelUtils = {
     },    
 
     buildAdvisingRelLabel: function() {
-        alert("here");
         if ( this.advisor.val() != "" ) {
             this.adRelshiplabel.val(this.advisor.val() + " " + adviseeRelUtils.advisingString + " " + this.subjName);
         }

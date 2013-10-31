@@ -32,28 +32,26 @@
                      OPTIONAL { ?advisingRel rdfs:label ?advisingRelLabel }
                      OPTIONAL { ?advisingRel core:relates ?advisee .
                                 ?advisee a foaf:Person .
-                                ?advisee &lt;http://purl.obolibrary.org/obo/RO_0000053&gt; ?adviseeRole .
-                                ?adviseeRole a core:AdviseeRole .
-                                OPTIONAL { ?advisee rdfs:label ?adviseeLabel }
+                                ?advisee rdfs:label ?adviseeLabel
                      }
                      OPTIONAL { ?advisingRel core:degreeCandidacy ?degree .
-                                OPTIONAL { ?degree rdfs:label ?degreeLabel }
-                                OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
+                                ?degree rdfs:label ?degreeLabel .
+                     }
+                     OPTIONAL { ?advisingRel core:degreeCandidacy ?degree .
+                                ?degree core:abbreviation ?degreeAbbr 
                      }
                      <collated>
                          OPTIONAL { ?advisingRel vitro:mostSpecificType ?subclass .
                                     ?subclass rdfs:subClassOf core:AdvisingRelationship
                          }
                      </collated>
-                     OPTIONAL { ?advisingRel core:dateTimeInterval ?dateTimeInterval
-                                OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .
-                                           ?dateTimeStartValue core:dateTime ?dateTimeStart
-                                }
+                     OPTIONAL { ?advisingRel core:dateTimeInterval ?dateTimeInterval .
+                                ?dateTimeInterval core:start ?dateTimeStartValue .
+                                ?dateTimeStartValue core:dateTime ?dateTimeStart
                      }
-                     OPTIONAL { ?advisingRel core:dateTimeInterval ?dateTimeInterval
-                                OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .
-                                           ?dateTimeEndValue core:dateTime ?dateTimeEnd
-                                }
+                     OPTIONAL { ?advisingRel core:dateTimeInterval ?dateTimeInterval .
+                                ?dateTimeInterval core:end ?dateTimeEndValue .
+                                ?dateTimeEndValue core:dateTime ?dateTimeEnd
                      }
 
          } ORDER BY <collated>?subclass</collated> DESC(?dateTimeEnd)
@@ -123,7 +121,6 @@
                 ?advisee &lt;http://purl.obolibrary.org/obo/RO_0000053&gt; ?adviseeRole .
                 ?adviseeRole a core:AdviseeRole .
                 ?advisingRel core:degreeCandidacy ?degree .
-                ?degree a core:AcademicDegree .
                 ?degree rdfs:label ?degreeLabel .
                 ?degree core:abbreviation ?degreeAbbr
             } WHERE {
@@ -140,15 +137,6 @@
                     ?advisingRel core:relates ?advisee .
                     ?advisee a foaf:Person .
                     ?advisee &lt;http://purl.obolibrary.org/obo/RO_0000053&gt; ?adviseeRole .
-                    ?adviseeRole a core:AdviseeRole
-                } UNION {
-                    ?subject ?property ?advisorRole .
-                    ?advisorRole a core:AdvisorRole .
-                    ?advisorRole core:relatedBy ?advisingRel .
-                    ?advisingRel a core:AdvisingRelationship .
-                    ?advisingRel core:relates ?advisee .
-                    ?advisee a foaf:Person .
-                    ?advisee &lt;http://purl.obolibrary.org/obo/RO_0000053&gt; ?adviseeRole .
                     ?adviseeRole a core:AdviseeRole .
                     ?advisee rdfs:label ?adviseeLabel
                 } UNION {
@@ -157,7 +145,6 @@
                     ?advisorRole core:relatedBy ?advisingRel .
                     ?advisingRel a core:AdvisingRelationship .
                     ?advisingRel core:degreeCandidacy ?degree .
-                    ?degree a core:AcademicDegree .
                     ?degree rdfs:label ?degreeLabel .
                 } UNION {
                     ?subject ?property ?advisorRole .
@@ -165,7 +152,6 @@
                     ?advisorRole core:relatedBy ?advisingRel .
                     ?advisingRel a core:AdvisingRelationship .
                     ?advisingRel core:degreeCandidacy ?degree .
-                    ?degree a core:AcademicDegree .
                     ?degree core:abbreviation ?degreeAbbr
                 }
             }
