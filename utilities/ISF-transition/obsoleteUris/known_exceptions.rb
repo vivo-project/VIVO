@@ -1,4 +1,21 @@
+require 'pathname'
+
 class KnownExceptionsError < StandardError; end
+
+class GlobSkipper
+  def initialize(root_path, glob)
+    @root_path = root_path
+    @glob = glob
+  end
+  
+  def relativize(path)
+    Pathname.new(path).relative_path_from(Pathname.new(@root_path)).to_s
+  end
+
+  def skip?(path, line, uri)
+    return File.fnmatch(@glob, relativize(path))
+  end
+end
 
 class ExtensionSkipper
   def initialize(extension)
@@ -44,10 +61,11 @@ class KnownExceptions
       line.strip!
       next if line.length == 0 || line[0..0] == '#' || line[0] == ?!
 
-      if line =~ /^\.[^\/]*$/
-        skippers << ExtensionSkipper.new(line)
-      elsif line =~ /^(\S+)\s*$/
-        skippers << PathSkipper.new(@root_path, $1)
+#      if line =~ /^\.[^\/]*$/
+#        skippers << ExtensionSkipper.new(line)
+      if line =~ /^(\S+)\s*$/
+#        skippers << PathSkipper.new(@root_path, $1)
+        skippers << GlobSkipper.new(@root_path, $1)
       elsif line =~ /^(\S+)\s*(\d+)\s*$/
         skippers << LineSkipper.new(@root_path, $1, $2.to_i)
       else
@@ -71,7 +89,7 @@ class KnownExceptions
       if line_number == -1
         next if skipper.is_a?(LineSkipper)
       else
-        next if skipper.is_a?(ExtensionSkipper) || skipper.is_a?(PathSkipper)
+        next if skipper.is_a?(ExtensionSkipper) || skipper.is_a?(PathSkipper) || skipper.is_a?(GlobSkipper)
       end
 
       if skipper.skip?(file, line_number, string)
