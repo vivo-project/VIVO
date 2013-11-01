@@ -583,6 +583,23 @@ vivo:researchAreaOf
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean .
 
+vivo:subjectAreaOf
+      rdfs:label "subject area of"@en-US ;
+      vitro:displayLimitAnnot
+              "5"^^xsd:int ;
+      vitro:displayRankAnnot
+              "10"^^xsd:int ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+      vitro:offerCreateNewOptionAnnot
+              "true"^^xsd:boolean ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:selectFromExistingAnnot
+              "true"^^xsd:boolean .
+
 geo:populationTotal
       rdfs:label "total population"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
