@@ -3,6 +3,10 @@ class Report
   private
   # ------------------------------------------------------------------------------------
 
+  def relativize(path)
+    Pathname.new(path).relative_path_from(Pathname.new(@directory_root)).to_s
+  end
+
   def state_arguments()
   	puts
   	puts "-----------------------------------------------------------------"
@@ -29,9 +33,8 @@ class Report
       hash[event.path] = hash[event.path] << event
     end
     
-#    puts "FLAT: #{hash.to_a.flatten}"
     hash.sort.each do |path, events|
-      puts "#{path}"
+      puts "#{relativize(path)}"
       events.sort{|a, b| a.line_number <=> b.line_number }.each do |e|
         trimmed = 
           if e.line.size <= 100
@@ -46,18 +49,13 @@ class Report
     end
   end 
     
-  def list_events()
-    @events.each do |event|
-      puts "Event: #{event}"
-    end
-  end
-  
   # ------------------------------------------------------------------------------------
   public
   # ------------------------------------------------------------------------------------
 
-  def initialize(args)
+  def initialize(args, directory_root)
   	@args = args;
+  	@directory_root = directory_root
     @file_count = 0
     @extensions_count = Hash.new(0)
     @events = []
@@ -75,7 +73,6 @@ class Report
   def report()
   	state_arguments()
   	file_summary()
-#  	list_events()
   	collate_and_list_events()
   end
 end

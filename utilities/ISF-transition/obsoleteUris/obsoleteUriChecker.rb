@@ -80,8 +80,8 @@ class ObsoleteUriChecker
   # ------------------------------------------------------------------------------------
 
   def initialize(args)
-    @report = Report.new(args) 
     @directory_root, @obsolete_uris, @known_exceptions, @complete = parse_arguments(args)
+    @report = Report.new(args, @directory_root) 
   rescue UsageError => e
     puts "\n----------------\nUsage error\n----------------\n\n#{e}\n\n----------------\n\n"
     exit
