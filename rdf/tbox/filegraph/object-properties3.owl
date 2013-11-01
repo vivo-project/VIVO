@@ -448,7 +448,17 @@
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasSubjectArea">
 
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#hasAssociatedConcept"/>
+        <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#subjectAreaOf"/>
     </owl:ObjectProperty>
+    
+
+    <!-- http://vivoweb.org/ontology/core#hasSubjectArea -->
+
+    <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#subjectAreaOf">
+        <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#conceptAssociatedWith"/>
+
+    </owl:ObjectProperty>
+    
     
 
 
