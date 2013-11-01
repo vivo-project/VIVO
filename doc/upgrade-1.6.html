@@ -51,6 +51,7 @@
                     	    <li><a href="#rdffiles">Auto-loaded RDF files move to the Home directory</a></li>
                     	    <li><a href="#language">Support for additional languages</a></li>
                     	    <li><a href="#extended_lod">More compact responses to Linked data requests</a></li>
+                    	    <li><a href="#google_refine">Changes to default types for Google Refine</a></li>
 	                    </ol>
 					</li>					
 					<li><a href="#upgrade_process">Upgrade Instructions</a></li>
@@ -143,7 +144,9 @@
              	        		<li><code>webapp.name</code></li>
              	        	</ul>
              	        </p>
+                	</li>
 
+            	    <li>
                 	    <h4 id="solr_insecure">Solr is no longer secured</h4>
              	        <p>
              	            In previous releases, Solr was deployed to Tomcat with a <code>RemoteAddrValve</code>
@@ -163,7 +166,9 @@
              	        <p>
              	            Sites that need to secure Solr are now left to their own devices.
              	        </p>
+                	</li>
 
+            	    <li>
                 	    <h4 id="log4j_properties">Log4J properties file renamed</h4>
              	        <p>
              	            In previous releases, the properties file for the VIVO logging system
@@ -175,7 +180,9 @@
              	            Note that <code>debug.log4j.properties</code>, if present, will still 
              	            override the default.
              	        </p>
+                	</li>
 
+            	    <li>
                 	    <h4 id="tabMenu">Property groups now displayed in a tab format, including a "View All" tab</h4>
              	        <p>
              	            With release 1.6, the property group menu bar that was used on profile pages has been replaced 
@@ -183,7 +190,9 @@
              	            within that group while the contents of the previously displayed group will be hidden. The array of
              	            tabs also includes a "View All" tab that, when clicked, displays the contents of all the property groups. 
              	        </p>
+                	</li>
 
+            	    <li>
                 	    <h4 id="sparqlDataGetters">Class-specific SPARQL Query Data Getters</h4>
              	        <p>
              	            The VIVO software now supports the development of SPARQL query data getters that can be associated 
@@ -195,7 +204,9 @@
              	            data getters: 
              	            <code>https://wiki.duraspace.org/display/VIVO/Enriching+VIVO+Content+Using+SPARQL+Query+Data+Getters</code>.
              	        </p>
+                	</li>
 
+            	    <li>
                 	    <h4 id="foafPersonTemplate">The foaf:Person template has been re-located.</h4>
              	        <p>
              	            The template individual--foaf-person.ftl has been moved to the "templates" subdirectory in the wilma 
@@ -204,7 +215,9 @@
              	            theme directory or, if your installation does not have it's own theme directory, in the 
              	            <code>themes/wilma/templates subdirectory</code>.
              	        </p>
+                	</li>
 
+            	    <li>
                 	    <h4 id="multiple">Multiple foaf:Person Profile Pages</h4>
              	        <p>
              	            VIVO now supports multiple profile pages for foaf:Persons. This feature, which is optional so installations 
@@ -218,7 +231,9 @@
              	            Websnapr.) For more information on how to implement multiple profile page views, refer to this wiki page: 
              	            <code>https://wiki.duraspace.org/display/VIVO/Multiple+foaf%3APerson+Profile+Pages</code>.
              	        </p>
+                	</li>
 
+            	    <li>
                 	    <h4 id="homePage">Home Page Re-design</h4>
              	        <p>
              	            For Release 1.6 the VIVO Home Page has been redesigned. The Search field beneath the "welcome" text now 
@@ -229,7 +244,9 @@
              	            activities and organizations; and, <a href="#optionalMap">optionally</a> a global map showing researchers' 
              	            areas of geographic focus.
              	        </p>
+                	</li>
 
+            	    <li>
                 	    <h4 id="rdffiles">Auto-loaded RDF files move to the Home directory</h4>
                 	    <p>
                 	    	The RDF files that initialize the data model have moved, in both the distribution and 
@@ -326,7 +343,9 @@
 &lt;include name="context.xml" /&gt;
 &lt;/patternset&gt;</pre>
                 	    </p>
+                	</li>
 
+            	    <li>
                 	    <h4 id="language">Support for additional languages</h4>
              	        <p>
              	        	VIVO 1.6 includes limited support for other languages, in addition to American English.
@@ -350,7 +369,9 @@
              	        	<a href="https://wiki.duraspace.org/display/VIVO/Adding+a+language+to+VIVO">
              	        	Add a new language to VIVO</a>.
              	        </p>
+                	</li>
 
+            	    <li>
                 	    <h4 id="extended_lod">More compact responses to Linked data requests</h4>
              	        <p>
              	        	In VIVO 1.6, the response to requests for linked data is changed, to be smaller and faster.
@@ -391,8 +412,17 @@
              	        	VIVO release 1.6 can be configured to produce extended linked data like previous releases.
              	        	However, extended linked data will not be supported in future releases.
              	        </p>
-
                 	</li>
+
+            	    <li>
+                	    <h4 id="google_refine">Changes to default types for Google Refine</h4>
+             	        <p>
+             	        	The list of default types for Google Refine has changed, to accomodate changes in the
+             	        	ontology. If you are using Google Refine, you may need to change your runtime properties
+             	        	accordingly. The new defaults appear in <code>example.runtime.properties</code>.
+             	        </p>
+                	</li>
+
             	    <li>
                 	    <h4 id="browsers">Supported Browsers</h4>
                 	    <p>
