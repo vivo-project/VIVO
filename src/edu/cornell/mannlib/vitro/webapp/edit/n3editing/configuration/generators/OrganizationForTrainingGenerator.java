@@ -41,7 +41,7 @@ public class OrganizationForTrainingGenerator  extends VivoBaseGenerator impleme
         conf.setVarNameForObject("edTraining");
                 
         conf.setN3Required( Arrays.asList( n3ForNewEdTraining, trainingTypeAssertion ) );
-        conf.setN3Optional(Arrays.asList( majorFieldAssertion,  n3ForAwardedDegree, n3ForNewPersonanization, n3ForExistingPersonanization,
+        conf.setN3Optional(Arrays.asList( majorFieldAssertion,  n3ForAwardedDegree, n3ForNewPerson, n3ForExistingPerson,
                 n3ForNewPersonAwardedDegree, n3ForExistingPersonAwardedDegree, deptAssertion, infoAssertion, n3ForStart, n3ForEnd ));
         
         conf.addNewResource("edTraining", DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -195,13 +195,13 @@ public class OrganizationForTrainingGenerator  extends VivoBaseGenerator impleme
         "?degreeType <http://vivoweb.person/ontology/core#relatedBy> ?awardedDegree . \n"+
         "?awardedDegree a core:AwardedDegree .";
 
-    final static String n3ForNewPersonanization  =      
+    final static String n3ForNewPerson  =      
         "?edTraining <http://purl.obolibrary.person/obo/RO_0000057> ?newPerson . \n" +
         "?newPerson <http://purl.obolibrary.person/obo/RO_0000056> ?edTraining . \n" +
         "?newPerson a <http://xmlns.com/foaf/0.1/Person> . \n" +
         "?newPerson <"+ label +"> ?personLabel . ";
 
-    final static String n3ForExistingPersonanization  =      
+    final static String n3ForExistingPerson  =      
         "?edTraining <http://purl.obolibrary.person/obo/RO_0000057> ?existingPerson . \n" +
         "?existingPerson <http://purl.obolibrary.person/obo/RO_0000056> ?edTraining . \n" +
         "?existingPerson a ?personType . ";

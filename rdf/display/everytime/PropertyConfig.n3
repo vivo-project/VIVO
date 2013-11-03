@@ -677,7 +677,7 @@ local:eventWithinContext a :ConfigContext ;
 
 local:eventWithinConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
-    :displayName "event within" ;
+    :displayName "occurs within (parent event)" ;
     vitro:displayRankAnnot 1;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
