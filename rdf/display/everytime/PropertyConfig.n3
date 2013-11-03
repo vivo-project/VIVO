@@ -319,6 +319,21 @@ local:educationalTrainingConfig a :ObjectPropertyDisplayConfig ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasEducationalTraining"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbiography> .
 
+local:organizationForTrainingContext a :ConfigContext ;
+    :hasConfiguration local:organizationForTrainingConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000056> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#EducationalProcess> .
+
+local:organizationForTrainingConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-organizationForTraining.xml"^^xsd:string ;
+    :displayName "organization for training" ;
+    vitro:displayRankAnnot 1;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.OrganizationForTrainingGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupother> .
+
 local:adviseeRoleContext a :ConfigContext ;
     :hasConfiguration local:adviseeRoleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
@@ -556,14 +571,14 @@ local:primaryEmailConfig a :ObjectPropertyDisplayConfig ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasEmailGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
 
-local:webpageContext a :ConfigContext ;
-    :hasConfiguration local:webpageConfig ;
+local:webpagePersonContext a :ConfigContext ;
+    :hasConfiguration local:webpagePersonConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
     :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
     :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
     :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
 
-local:webpageConfig a :ObjectPropertyDisplayConfig ;
+local:webpagePersonConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
     :displayName "webpage" ;
     vitro:displayRankAnnot 40;
@@ -572,14 +587,46 @@ local:webpageConfig a :ObjectPropertyDisplayConfig ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForIndividualGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
 
-local:webpageContext a :ConfigContext ;
-    :hasConfiguration local:webpageConfig ;
+local:webpageOrgContext a :ConfigContext ;
+    :hasConfiguration local:webpageOrgConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
     :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
     :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
     :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
 
-local:webpageConfig a :ObjectPropertyDisplayConfig ;
+local:webpageOrgConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
+    :displayName "webpage" ;
+    vitro:displayRankAnnot 40;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForIndividualGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupother> .
+
+local:webpageInfoContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.obolibrary.org/obo/IAO_0000030> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+
+local:webpageInfoConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
+    :displayName "webpage" ;
+    vitro:displayRankAnnot 40;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForIndividualGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupother> .
+
+local:webpageEventContext a :ConfigContext ;
+    :hasConfiguration local:webpageEventConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/NET/c4dm/event.owl#Event> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+
+local:webpageEventConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
     :displayName "webpage" ;
     vitro:displayRankAnnot 40;

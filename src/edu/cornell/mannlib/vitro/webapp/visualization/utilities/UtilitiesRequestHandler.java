@@ -68,7 +68,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			
 			
 			String filterRule = "?predicate = j.2:mainImage " 
-									+ "|| ?predicate = core:preferredTitle " 
+//									+ "|| ?predicate = core:preferredTitle "  
 									+ "|| ?predicate = rdfs:label";
 			
 			QueryRunner<GenericQueryMap> profileQueryHandler = 
