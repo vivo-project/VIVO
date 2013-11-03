@@ -3,8 +3,6 @@
 
 <!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
 
-<!-- List view config for http://vivoweb.org/ontology/core#contributingRole, 
-http://vivoweb.org/ontology/core#realizedRole and http://vivoweb.org/ontology/core#linkedRole -->
 
 <list-view-config>
     <query-select>    

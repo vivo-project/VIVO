@@ -52,16 +52,16 @@
                 }
                 OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                            ?presentation a vivo:Presentation .
-                           ?presentation vivo:inEventWithin ?series .
-                           ?series vivo:seriesForEvent ?presentation .
+                           ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series .
+                           ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
                            ?series rdfs:label ?seriesLabel 
                 }
                 OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                            ?presentation a vivo:Presentation .
                            ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?workshop .
                            ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .                
-                           ?workshop vivo:inEventSeries ?series .
-                           ?series vivo:seriesForEvent ?workshop .
+                           ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series .
+                           ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?workshop .
                            ?series rdfs:label ?seriesLabel 
                 }
                 <collated>
@@ -200,8 +200,8 @@
             ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
             ?presentation a vivo:Presentation .
             ?series a vivo:EventSeries .
-            ?presentation vivo:inEventSeries ?series .
-            ?series vivo:seriesForEvent ?presentation .
+            ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series .
+            ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
             ?series rdfs:label ?seriesLabel
         } WHERE {
         
@@ -214,8 +214,8 @@
                 ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?presentation a vivo:Presentation .
                 ?series a vivo:EventSeries .
-                ?presentation vivo:inEventSeries ?series .
-                ?series vivo:seriesForEvent ?presentation .
+                ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series .
+                ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
                 ?series rdfs:label ?seriesLabel
             }
         }        
@@ -234,8 +234,8 @@
             ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?workshop .
             ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
             ?workshop a bibo:Workshop .
-            ?workshop vivo:inEventSeries ?series .
-            ?series vivo:seriesForEvent ?workshop .
+            ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series .
+            ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?workshop .
             ?series a vivo:EventSeries .
             ?series rdfs:label ?seriesLabel
         } WHERE {
@@ -250,8 +250,8 @@
                 ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?workshop .
                 ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
                 ?workshop a bibo:Workshop .
-                ?workshop vivo:inEventSeries ?series .
-                ?series vivo:seriesForEvent ?workshop .
+                ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series .
+                ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?workshop .
                 ?series a vivo:EventSeries .
                 ?series rdfs:label ?seriesLabel
             }

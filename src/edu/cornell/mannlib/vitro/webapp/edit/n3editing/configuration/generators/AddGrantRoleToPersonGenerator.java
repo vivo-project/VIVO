@@ -39,12 +39,6 @@ import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
  *  Custom form for adding a grant to an person for the predicates hasCo-PrincipalInvestigatorRole
      and hasPrincipalInvestigatorRole.
      
-This is intended to create a set of statements like:
-
-?person  core:hasPrincipalInvestigatorRole ?newRole.
-?newRole rdf:type core:PrincipalInvestigatorRole ;
-         core:relatedRole ?someGrant . 
-     
  *
  */
 public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator {
@@ -664,12 +658,12 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 	//Some values will have a default value
 	//grantToRolePredicate
 	public String getDefaultgrantToRolePredicate() {
-		return "http://vivoweb.org/ontology/core#relatedRole";
+		return "http://vivoweb.org/ontology/core#relates";
 	}
 	
 	//roleToGrantPredicate
 	public String getDefaultroleToGrantPredicate() {
-		return "http://vivoweb.org/ontology/core#roleIn";
+		return "http://purl.obolibrary.org/obo/BFO_0000054";
 		
 	}
 	

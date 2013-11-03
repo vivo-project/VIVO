@@ -33,12 +33,13 @@
             }                   
             OPTIONAL { ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
                        ?activity a core:Grant .
-                       ?activity core:grantAwardedBy ?awardedBy .
+                       ?activity core:assignedBy ?awardedBy .
                        ?awardedBy rdfs:label ?awardedByLabel
             }
             OPTIONAL { ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
                        ?activity a core:Grant .
-                       ?activity core:administeredBy ?adminedBy .
+                       ?activity core:relates ?adminedByRole .
+                       ?adminedByRole &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?adminedBy .
                        ?adminedBy rdfs:label ?adminedByLabel
             }
             OPTIONAL { ?role core:dateTimeInterval ?dateTimeIntervalRole .
@@ -65,7 +66,8 @@
 
     <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; 
+        PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;   
         CONSTRUCT { 
             ?subject ?property ?role .
             ?role a core:PrincipalInvestigatorRole .
@@ -73,9 +75,10 @@
             ?activity a core:Grant .
             ?role ?roleProperty ?roleValue . 
             ?activity rdfs:label ?activityLabel .
-            ?activity core:grantAwardedBy ?awardedBy .
+            ?activity core:assignedBy ?awardedBy .
             ?awardedBy rdfs:label ?awardedByLabel .
-            ?activity core:administeredBy ?adminedBy .
+            ?activity core:relates ?adminedByRole .
+            ?adminedByRole &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?adminedBy .
             ?adminedBy rdfs:label ?adminedByLabel
         } WHERE {
             {
@@ -96,14 +99,18 @@
                 ?role a core:PrincipalInvestigatorRole .
                 ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
                 ?activity a core:Grant . 
-                ?activity core:grantAwardedBy ?awardedBy .
+                ?activity core:assignedBy ?awardedBy .
+                ?awardedBy a foaf:Organization .
                 ?awardedBy rdfs:label ?awardedByLabel
             } UNION {
                 ?subject ?property ?role .
                 ?role a core:PrincipalInvestigatorRole .
                 ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity . 
                 ?activity a core:Grant .
-                ?activity core:administeredBy ?adminedBy .
+                ?activity core:relates ?adminedByRole .
+                ?adminedByRole a core:AdminsitratorRole.
+                ?adminedByRole &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?adminedBy .
+                ?adminedBy a foaf:Organization .
                 ?adminedBy rdfs:label ?adminedByLabel
             }
         } 

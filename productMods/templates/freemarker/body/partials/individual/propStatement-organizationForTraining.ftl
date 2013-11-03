@@ -1,6 +1,6 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#-- Custom object property statement view for http://vivoweb.org/ontology/core#organizationForPosition. 
+<#-- Custom object property statement view for faux property "organization for training". See the PropertyConfig.3 file for details. 
     
      This template must be self-contained and not rely on other variables set for the individual page, because it
      is also used to generate the property statement during a deletion.  
@@ -24,13 +24,15 @@
     </#local>
     <#local detailedInfo>
         <#if statement.degree??>
-            ${statement.degreeAbbr!} ${i18n().in} ${statement.field!} 
-        <#elseif statement.field??>
-            ${statement.field!}, ${statement.suppInfo!}
+            ${statement.degreeAbbr!} <#if statement.majorField??> ${i18n().in} ${statement.majorField!} </#if>
+        <#elseif statement.majorField??>
+            ${statement.majorField!}, ${statement.info!}
         <#else>
-            ${statement.suppInfo!}
+            ${statement.info!}
         </#if>
     </#local>
-    <@s.join [ linkedIndividual, detailedInfo ] /> <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
+    <@s.join [ linkedIndividual, detailedInfo ] /> 
 
 </#macro>
+
+
