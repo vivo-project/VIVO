@@ -129,12 +129,22 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
     		+ "?person rdfs:label ?personLabel . ";
 
     private static final String N3_NEW_FIRST_NAME = ""
-    		+ "@prefix foaf: <http://xmlns.com/foaf/0.1/> . \n"
-        	+ "?person foaf:firstName ?firstName .";
+    		+ "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n"
+        	+ "?person <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n"
+        	+ "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?person . \n"
+        	+ "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n"
+        	+ "?vcardPerson vcard:hasName  ?vcardName . \n"
+        	+ "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n"
+        	+ "?vcardName vcard:givenName ?firstName .";
 
     private static final String N3_NEW_LAST_NAME = ""
-    		+ "@prefix foaf: <http://xmlns.com/foaf/0.1/> . \n"
-        	+ "?person foaf:lastName ?lastName .";
+		    + "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n"
+    	    + "?person <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n"
+    	    + "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?person . \n"
+    	    + "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n"
+    	    + "?vcardPerson vcard:hasName  ?vcardName . \n"
+    	    + "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n"
+    	    + "?vcardName vcard:familyName ?lastName .";
 
     private static final String N3_EXISTING_PERSON = ""
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
@@ -179,6 +189,8 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 
 		conf.addNewResource("position", DEFAULT_NS_FOR_NEW_RESOURCE);
 		conf.addNewResource("person", DEFAULT_NS_FOR_NEW_RESOURCE);
+		conf.addNewResource("vcardName", DEFAULT_NS_FOR_NEW_RESOURCE);
+		conf.addNewResource("vcardPerson", DEFAULT_NS_FOR_NEW_RESOURCE);
 		conf.addNewResource("intervalNode", DEFAULT_NS_FOR_NEW_RESOURCE);
 		conf.addNewResource("startNode", DEFAULT_NS_FOR_NEW_RESOURCE);
 		conf.addNewResource("endNode", DEFAULT_NS_FOR_NEW_RESOURCE);

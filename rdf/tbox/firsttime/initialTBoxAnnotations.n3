@@ -827,23 +827,6 @@ vivo:AttendeeRole
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
-vivo:geographicLocationOf
-      rdfs:label "geographic location of"@en-US ;
-      vitro:displayLimitAnnot
-              "5"^^xsd:int ;
-      vitro:displayRankAnnot
-              "60"^^xsd:int ;
-      vitro:fullPropertyNameAnnot
-              "nearestGeographicLocationFor"^^xsd:string ;
-      vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:publicDescriptionAnnot
-              """This relates a geographic location to something within that geographic location, for example, an organization within that geographic location.
-"""^^xsd:string ;
-      vitro:selectFromExistingAnnot
-              "true"^^xsd:boolean .
 
 vivo:invited
       rdfs:label "invited"@en-US .
@@ -3631,25 +3614,6 @@ vivo:WorkshopSeries
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
-event:isAgentIn
-      rdfs:label "is agent in"@en-US ;
-      vitro:displayLimitAnnot
-              "5"^^xsd:int ;
-      vitro:fullPropertyNameAnnot
-              "isAgentIn"^^xsd:string ;
-      vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
-      vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupmapping> ;
-      vitro:offerCreateNewOptionAnnot
-              "true"^^xsd:boolean ;
-      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
-      vitro:publicDescriptionAnnot
-              "This relates an active agent to an event."^^xsd:string ;
-      vitro:selectFromExistingAnnot
-              "true"^^xsd:boolean .
-
 obo:ERO_0000225
       rdfs:label "Educator Role"@en-US .
 
@@ -6097,23 +6061,6 @@ geo:populationNotes
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
-vivo:currentMemberOf
-      rdfs:label "current member of"@en-US ;
-      vitro:fullPropertyNameAnnot
-              "member of"^^xsd:string ;
-      vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
-      vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> ;
-      vitro:offerCreateNewOptionAnnot
-              "true"^^xsd:boolean ;
-      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
-      vitro:publicDescriptionAnnot
-              "A person's formal or informal affiliation with a group."^^xsd:string ;
-      vitro:selectFromExistingAnnot
-              "true"^^xsd:boolean .
-
 vivo:Campus
       rdfs:label "Campus"@en-US ;
       vitro:displayLimitAnnot
@@ -6746,28 +6693,6 @@ geo:landAreaUnit
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
-
-vivo:hasGeographicLocation
-      rdfs:label "has geographic location"@en-US ;
-      vitro:displayLimitAnnot
-              "5"^^xsd:int ;
-      vitro:displayRankAnnot
-              "60"^^xsd:int ;
-      vitro:fullPropertyNameAnnot
-              "nearestGeographicLocation"^^xsd:string ;
-      vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGrouplocation> ;
-      vitro:offerCreateNewOptionAnnot
-              "true"^^xsd:boolean ;
-      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:publicDescriptionAnnot
-              """This relates something to its geographic location, for example, an organization to its geographic location. 
-"""^^xsd:string ;
-      vitro:selectFromExistingAnnot
-              "true"^^xsd:boolean .
 
 vcard:hasSound
       rdfs:label "has sound"@en-US .
