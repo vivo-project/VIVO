@@ -110,6 +110,5 @@
              $('input.search-homepage').attr("value","${i18n().limit_search} \u2192");
         }  
     </script>
-    <@lh.getGeoResearcherCount/>
     </body>
 </html>

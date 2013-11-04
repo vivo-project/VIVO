@@ -10,6 +10,8 @@ class DirectoryWalker
       if FileTest.directory?(path)
         if File.basename(path).start_with?(".")
           Find.prune       # Don't look any further into this directory.
+        elsif @known_exceptions.skip?(path)
+          Find.prune
         else
           next
         end
@@ -33,13 +35,13 @@ class DirectoryWalker
   
   def scan_line(path, line_number, line)
     @obsolete_uris.uris.each do |uri|
-      next if @known_exceptions.skip?(path, line_number, uri)
+#     next if @known_exceptions.skip?(path, line_number, uri)
       @report.add_event(Event.new(path, line_number, line, uri)) if line =~ Regexp.new("\\b#{Regexp.quote(uri)}\\b") 
     end
     if @complete
       @obsolete_uris.localnames.each do |localname|
         term = ":#{localname}"
-        next if @known_exceptions.skip?(path, line_number, term)
+#       next if @known_exceptions.skip?(path, line_number, term)
         @report.add_event(Event.new(path, line_number, line, term)) if line =~ Regexp.new("#{Regexp.quote(term)}\\b") 
       end
     end
