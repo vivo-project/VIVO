@@ -1,0 +1,2 @@
+ruby obsoleteUriChecker.rb /Users/jeb228/Documents/Releases/VIVO\ 1.6/vivo-rel-1.6-rc1  ../../../productMods/WEB-INF/ontologies/update/diff.tab.txt vivo_known_exceptions.txt complete
+
