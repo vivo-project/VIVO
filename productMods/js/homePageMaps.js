@@ -6,11 +6,12 @@ $(document).ready(function(){
     var countryMapBuilt = false;
     var localMapBuilt = false;
     var researchAreas = { "type": "FeatureCollection", "features": []};
+    var geoResearcherCount = "0";
     
     $.extend(this, urlsBase);
     $.extend(this, i18nStrings);
-    $.extend(this, geoResearcherCount);
     
+    getGeoFocusResearcherCount();
     getGeoJsonForMaps();
     
     $('a#globalLink').click(function() {
@@ -367,9 +368,26 @@ $(document).ready(function(){
        });        
     }
 
+    function getGeoFocusResearcherCount() {
+        $.ajax({
+            url: urlsBase + "/homePageAjax",
+            dataType: "json",
+            data: {
+                action: "getGeoFocusResearcherCount",
+            },
+            complete: function(xhr, status) {
+                
+                var results = $.parseJSON(xhr.responseText);
+                // there will only ever be one key/value pair
+                if ( results != null ) {
+                    geoResearcherCount = results.count;
+                }
+            }
+       });        
+    }
+
     function getResearcherCount(area) {
         
-        var researcherCount = this.geoResearcherCount;
         var areaCount = 0;
         var text = "";
         if ( area == "global" ) {
@@ -391,7 +409,7 @@ $(document).ready(function(){
         if ( areaCount == 1 && text == " states.") {
             text = " " + i18nStrings.stateString;
         }
-        if ( researcherCount == 1 ) {
+        if ( geoResearcherCount == 1 ) {
             researcherText = " " + i18nStrings.researcherString + " " + i18nStrings.inString;
         }
         else {
@@ -399,7 +417,7 @@ $(document).ready(function(){
         }
 
         $('div#researcherTotal').html("<font style='font-size:1.05em;color:#167093'>" 
-                                        + researcherCount 
+                                        + geoResearcherCount 
                                         + "</font> " + researcherText + " <font style='font-size:1.05em;color:#167093'>" 
                                         + areaCount + "</font>" + text);
     }
