@@ -660,6 +660,8 @@ vivo:reproduces
               <http://vivoweb.org/ontology#vitroPropertyGroupbibobscure> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:offerCreateNewOptionAnnot
+              "true"^^xsd:boolean ;
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean .
 
@@ -2054,7 +2056,9 @@ bibo:number
               "A generic item or document number. Not to be confused with issue number. A barcode, perhaps?"^^xsd:string .
 
 obo:RO_0001025
-      rdfs:label "located in"@en-US .
+      rdfs:label "located in"@en-US ;
+      vitro:offerCreateNewOptionAnnot
+              "true"^^xsd:boolean .
 
 vivo:Location
       rdfs:label "Location"@en-US ;
@@ -6176,7 +6180,9 @@ obo:ERO_0000789
       rdfs:label "Staff Role"@en-US .
 
 obo:BFO_0000050
-      rdfs:label "part of"@en-US .
+      rdfs:label "part of"@en-US ;
+      vitro:offerCreateNewOptionAnnot
+              "true"^^xsd:boolean .
 
 bibo:Letter
       rdfs:label "Letter"@en-US ;
@@ -6264,7 +6270,9 @@ obo:RO_0002351
       rdfs:label "has member"@en-US .
 
 obo:BFO_0000051
-      rdfs:label "has part"@en-US .
+      rdfs:label "has part"@en-US ;
+      vitro:offerCreateNewOptionAnnot
+              "true"^^xsd:boolean .
 
 obo:ARG_2000008
       rdfs:label "Topic Weight Measurement"@en-US .

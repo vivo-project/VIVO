@@ -768,7 +768,7 @@ local:collegeOffersDegreeConfig a :ObjectPropertyDisplayConfig ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:deptOffersDegreeContext a :ConfigContext ;
-    :hasConfiguration local:debtOffersDegreeConfig ;
+    :hasConfiguration local:deptOffersDegreeConfig ;
     :configContextFor vivo:offers ;
     :qualifiedByDomain      vivo:AcademicDepartment ;
     :qualifiedBy      vivo:AcademicDegree .
@@ -793,6 +793,21 @@ local:uniOffersDegreeConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:labOffersServiceContext a :ConfigContext ;
+    :hasConfiguration local:labOffersServiceConfig ;
+    :configContextFor vivo:offers ;
+    :qualifiedByDomain      vivo:Laboratory ;
+    :qualifiedBy      <http://purl.obolibrary.org/obo/ERO_0000005> .
+
+local:labOffersServiceConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "offers service" ;
+    vitro:displayRankAnnot 2;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:grantAwardedByContext a :ConfigContext ;
