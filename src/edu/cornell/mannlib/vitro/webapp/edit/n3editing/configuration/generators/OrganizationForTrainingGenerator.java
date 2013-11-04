@@ -23,33 +23,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
 
-/**
-    Form for adding an educational attainment to an individual
-
-    Classes: 
-    core:EducationalProcess - primary new individual being created
-    foaf:Person - existing individual
-    foaf:Organization - new or existing individual
-    core:AcademicDegree - existing individual
-    core:AwardedDegree - new or existing individual
-    
-
-   
-    There are 4 modes that this form can be in: 
-     1.  Add, there is a subject and a predicate but no position and nothing else. 
-           
-     2. normal edit where everything should already be filled out.  There is a subject, a object and an individual on
-        the other end of the object's relationship. 
-     
-     3. Repair a bad role node.  There is a subject, prediate and object but there is no individual on the 
-        other end of the object's  relationship.  This should be similar to an add but the form should be expanded.
-        
-     4. Really bad node. multiple statements on the other end of the object's  relationship.
-
- * @author bdc34
- *
- */
-public class PersonHasEducationalTraining  extends VivoBaseGenerator implements EditConfigurationGenerator{            
+public class OrganizationForTrainingGenerator  extends VivoBaseGenerator implements EditConfigurationGenerator{            
 
     //TODO: can we get rid of the session and get it form the vreq?
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) throws Exception {
@@ -60,32 +34,33 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         initPropertyParameters(vreq, session, conf);
         initObjectPropForm(conf, vreq);               
         
-        conf.setTemplate("personHasEducationalTraining.ftl");
+        conf.setTemplate("organizationForTraining.ftl");
         
-        conf.setVarNameForSubject("person");
+        conf.setVarNameForSubject("organization");
         conf.setVarNameForPredicate("predicate");
         conf.setVarNameForObject("edTraining");
                 
         conf.setN3Required( Arrays.asList( n3ForNewEdTraining, trainingTypeAssertion ) );
-        conf.setN3Optional(Arrays.asList( majorFieldAssertion,  n3ForAwardedDegree, n3ForNewOrganization, n3ForExistingOrganization,
-                n3ForNewOrgAwardedDegree, n3ForExistingOrgAwardedDegree, deptAssertion, infoAssertion, n3ForStart, n3ForEnd ));
+        conf.setN3Optional(Arrays.asList( majorFieldAssertion,  n3ForAwardedDegree, n3ForNewPerson, n3ForExistingPerson,
+                n3ForNewPersonAwardedDegree, n3ForExistingPersonAwardedDegree, deptAssertion, infoAssertion, n3ForStart, n3ForEnd ));
         
         conf.addNewResource("edTraining", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("awardedDegree",DEFAULT_NS_FOR_NEW_RESOURCE);
-        conf.addNewResource("newOrg",DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("newPerson",DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("intervalNode",DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("startNode",DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("endNode",DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("vcardPerson", DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("vcardName", DEFAULT_NS_FOR_NEW_RESOURCE);
         
         //uris in scope: none   
         //literals in scope: none
         
-        conf.setUrisOnform( Arrays.asList( "existingOrg", "orgType", "degreeType", "trainingType"));
-        conf.setLiteralsOnForm( Arrays.asList("orgLabel", "orgLabelDisplay", "awardedDegreeLabel",
-                                              "majorField", "dept", "info"));
+        conf.setUrisOnform( Arrays.asList( "existingPerson", "personType", "degreeType", "trainingType"));
+        conf.setLiteralsOnForm( Arrays.asList("personLabel", "personLabelDisplay", "awardedDegreeLabel",
+                                              "majorField", "dept", "info", "firstName", "lastName"));
 
-        conf.addSparqlForExistingLiteral("orgLabel", orgLabelQuery);
-//        conf.addSparqlForExistingLiteral("existingAwardedDegreeLabel", existingAwardedDegreeLabelQuery);
+        conf.addSparqlForExistingLiteral("personLabel", personLabelQuery);
         conf.addSparqlForExistingLiteral("majorField", majorFieldQuery);
         conf.addSparqlForExistingLiteral("dept", deptQuery);
         conf.addSparqlForExistingLiteral("info", infoQuery);
@@ -94,8 +69,8 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
 
         
         conf.addSparqlForExistingUris("awardedDegree", existingAwardedDegreeQuery);
-        conf.addSparqlForExistingUris("existingOrg", existingOrgQuery);
-        conf.addSparqlForExistingUris("orgType", orgTypeQuery);
+        conf.addSparqlForExistingUris("existingPerson", existingPersonQuery);
+//        conf.addSparqlForExistingUris("personType", personTypeQuery);
         conf.addSparqlForExistingUris("trainingType", trainingTypeQuery);
         conf.addSparqlForExistingUris("degreeType", degreeTypeQuery);
         conf.addSparqlForExistingUris("intervalNode",existingIntervalNodeQuery);
@@ -104,7 +79,7 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         conf.addSparqlForExistingUris("startField-precision", existingStartPrecisionQuery);
         conf.addSparqlForExistingUris("endField-precision", existingEndPrecisionQuery);
         //Add sparql to include inverse property as well
-        conf.addSparqlForAdditionalUrisInScope("inverseTrainingAtOrg", inverseTrainingAtOrgQuery);
+        conf.addSparqlForAdditionalUrisInScope("inverseTrainingAtPerson", inverseTrainingAtPersonQuery);
                         
         conf.addField( new FieldVTwo().                        
                 setName("degreeType").
@@ -117,7 +92,7 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
                 setValidators(list("datatype:" + XSD.xstring.toString())));
         
         conf.addField( new FieldVTwo().
-                setName("existingOrg")
+                setName("existingPerson")
                 //options will be added in browser by auto complete JS  
                 );        
         
@@ -127,7 +102,7 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
                 );        
 
         conf.addField( new FieldVTwo().
-                setName("orgLabel").
+                setName("personLabel").
                 setRangeDatatypeUri(XSD.xstring.toString() ).
                 setValidators( list("datatype:" + XSD.xstring.toString())));
 
@@ -142,15 +117,21 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
                 setValidators( list("datatype:" + XSD.xstring.toString())));
             
         conf.addField( new FieldVTwo().
-                setName("orgLabelDisplay").
+                setName("personLabelDisplay").
                 setRangeDatatypeUri(XSD.xstring.toString() ));
                 
         conf.addField( new FieldVTwo().
-                setName("orgType").
-                setValidators( list("nonempty")).
-                setOptions( new ChildVClassesOptions(
-                        orgClass)));
-                
+                setName("firstName").
+                setRangeDatatypeUri(XSD.xstring.toString() ).
+                setValidators( list("datatype:" + XSD.xstring.toString()) )
+                );
+
+        conf.addField( new FieldVTwo().
+                setName("lastName").
+                setRangeDatatypeUri(XSD.xstring.toString() ).
+                setValidators( list("datatype:" + XSD.xstring.toString()) )
+                );
+
         conf.addField( new FieldVTwo().
                 setName("trainingType").
                 setValidators( list("nonempty") ).
@@ -196,47 +177,65 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
     
     final static String n3ForNewEdTraining =       
         "@prefix core: <"+ vivoCore +"> .\n"+
-        "?person <http://purl.obolibrary.org/obo/RO_0000056>  ?edTraining .\n" +
+        "?organization <http://purl.obolibrary.person/obo/RO_0000056>  ?edTraining .\n" +
         "?edTraining  a core:EducationalProcess .\n" +
-        "?edTraining <http://purl.obolibrary.org/obo/RO_0000057> ?person .";
+        "?edTraining <http://purl.obolibrary.person/obo/RO_0000057> ?organization .";
 
     final static String trainingTypeAssertion =
         "?edTraining a ?trainingType .";
 
     final static String n3ForAwardedDegree  =      
         "@prefix core: <"+ vivoCore +"> .\n"+
-        "?edTraining <http://purl.obolibrary.org/obo/RO_0002234> ?awardedDegree . \n" +
-        "?awardedDegree <http://purl.obolibrary.org/obo/RO_0002353> ?edTraining . \n" +
-        "?awardedDegree <http://vivoweb.org/ontology/core#relates> ?person . \n" +
-        "?person <http://vivoweb.org/ontology/core#relatedBy> ?awardedDegree . \n" +
+        "?edTraining <http://purl.obolibrary.person/obo/RO_0002234> ?awardedDegree . \n" +
+        "?awardedDegree <http://purl.obolibrary.person/obo/RO_0002353> ?edTraining . \n" +
+        "?awardedDegree <http://vivoweb.person/ontology/core#assignedBy> ?organization . \n" +
+        "?organization <http://vivoweb.person/ontology/core#assigns> ?awardedDegree . \n" +
         "?awardedDegree <"+ label +"> ?awardedDegreeLabel . \n" +
-        "?awardedDegree <http://vivoweb.org/ontology/core#relates> ?degreeType .\n"+
-        "?degreeType <http://vivoweb.org/ontology/core#relatedBy> ?awardedDegree . \n"+
+        "?awardedDegree <http://vivoweb.person/ontology/core#relates> ?degreeType .\n"+
+        "?degreeType <http://vivoweb.person/ontology/core#relatedBy> ?awardedDegree . \n"+
         "?awardedDegree a core:AwardedDegree .";
 
-    final static String n3ForNewOrganization  =      
-        "?edTraining <http://purl.obolibrary.org/obo/RO_0000057> ?newOrg . \n" +
-        "?newOrg <http://purl.obolibrary.org/obo/RO_0000056> ?edTraining . \n" +
-        "?newOrg a ?orgType . \n" +
-        "?newOrg <"+ label +"> ?orgLabel . ";
+    final static String n3ForNewPerson  =      
+        "?edTraining <http://purl.obolibrary.person/obo/RO_0000057> ?newPerson . \n" +
+        "?newPerson <http://purl.obolibrary.person/obo/RO_0000056> ?edTraining . \n" +
+        "?newPerson a <http://xmlns.com/foaf/0.1/Person> . \n" +
+        "?newPerson <"+ label +"> ?personLabel . ";
 
-    final static String n3ForExistingOrganization  =      
-        "?edTraining <http://purl.obolibrary.org/obo/RO_0000057> ?existingOrg . \n" +
-        "?existingOrg <http://purl.obolibrary.org/obo/RO_0000056> ?edTraining . \n" +
-        "?existingOrg a ?orgType . ";
+    final static String n3ForExistingPerson  =      
+        "?edTraining <http://purl.obolibrary.person/obo/RO_0000057> ?existingPerson . \n" +
+        "?existingPerson <http://purl.obolibrary.person/obo/RO_0000056> ?edTraining . \n" +
+        "?existingPerson a ?personType . ";
     
-    final static String n3ForNewOrgAwardedDegree  =      
-        "?awardedDegree <http://vivoweb.org/ontology/core#assignedBy> ?newOrg . \n" +
-        "?newOrg <http://vivoweb.org/ontology/core#assigns> ?awardedDegree . \n" +
-        "?newOrg a ?orgType . \n" +
+    final static String n3ForNewPersonAwardedDegree  =      
+        "?awardedDegree <http://vivoweb.person/ontology/core#relates> ?newPerson . \n" +
+        "?newPerson <http://vivoweb.person/ontology/core#releatedBy> ?awardedDegree . \n" +
+        "?newPerson a <http://xmlns.com/foaf/0.1/Person> . \n" +
         "?awardedDegree <"+ label +"> ?awardedDegreeLabel . \n" +
-        "?newOrg <"+ label +"> ?orgLabel . ";
+        "?newPerson <"+ label +"> ?personLabel . ";
 
-    final static String n3ForExistingOrgAwardedDegree  =      
-        "?awardedDegree <http://vivoweb.org/ontology/core#assignedBy> ?existingOrg . \n" +
-        "?existingOrg <http://vivoweb.org/ontology/core#assigns> ?awardedDegree . \n" +
+    final static String firstNameAssertion  =      
+        "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+        "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
+        "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
+        "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+        "?vcardPerson vcard:hasName  ?vcardName . \n" +
+        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
+        "?vcardName vcard:givenName ?firstName .";
+    
+    final static String lastNameAssertion  =      
+        "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+        "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
+        "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
+        "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+        "?vcardPerson vcard:hasName  ?vcardName . \n" +
+        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
+        "?vcardName vcard:familyName ?lastName .";
+
+    final static String n3ForExistingPersonAwardedDegree  =      
+        "?awardedDegree <http://vivoweb.person/ontology/core#relates> ?existingPerson . \n" +
+        "?existingPerson <http://vivoweb.person/ontology/core#relatedBy> ?awardedDegree . \n" +
         "?awardedDegree <"+ label +"> ?awardedDegreeLabel . \n" +
-        "?existingOrg a ?orgType . ";
+        "?existingPerson a <http://xmlns.com/foaf/0.1/Person> . ";
 
     final static String majorFieldAssertion  =      
         "?edTraining <"+ majorFieldPred +"> ?majorField .";
@@ -267,40 +266,29 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
 
     final static String existingAwardedDegreeQuery =      
         "SELECT ?existingAwardedDegree WHERE {\n"+
-        "?edTraining <http://purl.obolibrary.org/obo/RO_0002234> ?existingAwardedDegree . }\n";
+        "?edTraining <http://purl.obolibrary.person/obo/RO_0002234> ?existingAwardedDegree . }\n";
 
     final static String existingAwardedDegreeLabelQuery =      
         "SELECT ?existingAwardedDegreeLabel WHERE {\n"+
-        "?edTraining <http://purl.obolibrary.org/obo/RO_0002234> ?existingAwardedDegree . \n" +
+        "?edTraining <http://purl.obolibrary.person/obo/RO_0002234> ?existingAwardedDegree . \n" +
         "?existingAwardedDegree <"+ label +"> ?existingAwardedDegreeLabel }\n";
 
-    final static String existingOrgQuery  =      
+    final static String existingPersonQuery  =      
         "PREFIX rdfs: <"+ rdfs +">   \n"+
-        "SELECT ?existingOrg WHERE {\n"+
-        "?edTraining <http://purl.obolibrary.org/obo/RO_0000057> ?existingOrg . \n" +
-        "?existingOrg <http://purl.obolibrary.org/obo/RO_0000056> ?edTraining . \n" +
-        "?existingOrg a ?existingOrgType . \n " +
-        "?existingOrgType rdfs:subClassOf <"+ orgClass +"> . }";
+        "SELECT ?existingPerson WHERE {\n"+
+        "?edTraining <http://purl.obolibrary.person/obo/RO_0000057> ?existingPerson . \n" +
+        "?existingPerson <http://purl.obolibrary.person/obo/RO_0000056> ?edTraining . \n" +
+        "?existingPerson a <http://xmlns.com/foaf/0.1/Person> . \n " +
+        " }";
 
-    final static String orgLabelQuery  =      
+    final static String personLabelQuery  =      
         "PREFIX rdfs: <"+ rdfs +">   \n"+
-        "SELECT ?existingOrgLabel WHERE {\n"+
-        "?edTraining <http://purl.obolibrary.org/obo/RO_0000057> ?existingOrg . \n" +
-        "?existingOrg <http://purl.obolibrary.org/obo/RO_0000056> ?edTraining .\n"+
-        "?existingOrg <"+ label +"> ?existingOrgLabel .\n"+
-        "?existingOrg a ?existingOrgType . \n " +
-        "?existingOrgType rdfs:subClassOf <"+ orgClass +"> . }";
-
-    /* Limit type to subclasses of foaf:Organization. Otherwise, sometimes owl:Thing or another
-    type is returned and we don't get a match to the select element options. */
-    final static String orgTypeQuery  =      
-        "PREFIX rdfs: <"+ rdfs +">   \n"+
-        "SELECT ?existingOrgType WHERE {\n"+
-        "?edTraining <http://purl.obolibrary.org/obo/RO_0002234> ?existingAwardedDegree . \n" +
-        "?existingAwardedDegree <http://vivoweb.org/ontology/core#assignedBy> ?existingOrg .\n"+
-        "?existingOrg a ?existingOrgType .\n"+
-        "?existingOrgType rdfs:subClassOf <"+ orgClass +"> .\n"+
-        "}";
+        "SELECT ?existingPersonLabel WHERE {\n"+
+        "?edTraining <http://purl.obolibrary.person/obo/RO_0000057> ?existingPerson . \n" +
+        "?existingPerson <http://purl.obolibrary.person/obo/RO_0000056> ?edTraining .\n"+
+        "?existingPerson <"+ label +"> ?existingPersonLabel .\n"+
+        "?existingPerson a <http://xmlns.com/foaf/0.1/Person> . \n " +
+        " }";
 
     final static String trainingTypeQuery = 
     	"PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
@@ -310,7 +298,7 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
     final static String degreeTypeQuery  =      
         "PREFIX core: <"+ vivoCore +"> \n"+
         "SELECT ?existingDegreeType WHERE {\n"+
-        "?edTraining <http://purl.obolibrary.org/obo/RO_0002234> ?existingAwardedDegree . \n"+
+        "?edTraining <http://purl.obolibrary.person/obo/RO_0002234> ?existingAwardedDegree . \n"+
         "?existingAwardedDegree a core:AwardedDegree . \n"+
         "?existingAwardedDegree core:relates ?existingDegreeType .  \n" +
         "?existingDegreeType a core:AcademicDegree }";
@@ -379,10 +367,10 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         "?endNode <"+ dateTimePrecision +"> ?existingEndPrecision . }";
     
     //Query for inverse property
-    final static String inverseTrainingAtOrgQuery  =
-    	  "PREFIX owl:  <http://www.w3.org/2002/07/owl#>"
-			+ " SELECT ?inverseTrainingAtOrg "
-			+ "    WHERE { ?inverseTrainingAtOrg owl:inverseOf <http://vivoweb.org/ontology/core#relates> . } ";
+    final static String inverseTrainingAtPersonQuery  =
+    	  "PREFIX owl:  <http://www.w3.person/2002/07/owl#>"
+			+ " SELECT ?inverseTrainingAtPerson "
+			+ "    WHERE { ?inverseTrainingAtPerson owl:inverseOf <http://vivoweb.person/ontology/core#relates> . } ";
     
     
   //Adding form specific data such as edit mode
@@ -394,7 +382,7 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
 	
 	public EditMode getEditMode(VitroRequest vreq) {
 		List<String> predicates = new ArrayList<String>();
-		predicates.add("http://vivoweb.org/ontology/core#relates");
+		predicates.add("http://vivoweb.person/ontology/core#relates");
 		return EditModeUtils.getEditMode(vreq, predicates);
 	}
 }

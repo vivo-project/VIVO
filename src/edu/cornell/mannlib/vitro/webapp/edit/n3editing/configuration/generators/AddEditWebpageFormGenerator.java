@@ -31,17 +31,6 @@ Custom form for adding or editing a webpage associated with an individual. The p
 ManageWebpagesForIndividual, should forward to this page if: (a) we are adding a new page, or 
 (b) an edit link in the Manage Webpages view has been clicked. But right now (a) is not implemented. 
 
-Object properties: 
-core:webpage (range: core:URLLink)
-core:webpageOf (domain: core:URLLink) (inverse of core:webpage)
-
-Class: 
-core:URLLink - the link to be added to the individual
-
-Data properties of core:URLLink:
-core:linkUrlPredicate
-core:linkAnchorText
-core:rank
 
 */
 public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator implements EditConfigurationGenerator {

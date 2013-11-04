@@ -351,28 +351,28 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?pubUri <" + presentedAtPred + "> ?newConference . \n" +
         "?newConference a <" + conferenceClass + ">  . \n" +
-        "?newConference vivo:includesEvent ?pubUri . \n" + 
+        "?newConference <http://purl.obolibrary.org/obo/BFO_0000051> ?pubUri . \n" + 
         "?newConference <" + label + "> ?conference .";
     }
 
     private String getN3ForConference() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?pubUri <" + presentedAtPred + "> ?conferenceUri . \n" +
-        "?conferenceUri vivo:includesEvent ?pubUri . ";
+        "?conferenceUri <http://purl.obolibrary.org/obo/BFO_0000051> ?pubUri . ";
     }
 
     private String getN3ForNewConferenceNewPub() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?newPublication <" + presentedAtPred + "> ?newConference . \n" +
         "?newConference a <" + conferenceClass + ">  . \n" +
-        "?newConference vivo:includesEvent ?newPublication . \n" + 
+        "?newConference <http://purl.obolibrary.org/obo/BFO_0000051> ?newPublication . \n" + 
         "?newConference <" + label + "> ?conference .";
     }
 
     private String getN3ForConferenceNewPub() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?newPublication <" + presentedAtPred + "> ?conferenceUri . \n" +
-        "?conferenceUri vivo:includesEvent ?newPublication . ";
+        "?conferenceUri <http://purl.obolibrary.org/obo/BFO_0000051> ?newPublication . ";
     }
 
     private String getN3ForNewEvent() {
@@ -911,7 +911,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         literalOptions.add(list("http://purl.org/ontology/bibo/Report", "Report"));
         literalOptions.add(list("http://vivoweb.org/ontology/core#ResearchProposal", "Research Proposal"));
         literalOptions.add(list("http://vivoweb.org/ontology/core#Review", "Review"));
-        literalOptions.add(list("http://vivoweb.org/ontology/core#Software", "Software"));
+        literalOptions.add(list("http://purl.obolibrary.org/obo/ERO_0000071 ", "Software"));
         literalOptions.add(list("http://vivoweb.org/ontology/core#Speech", "Speech"));
         literalOptions.add(list("http://purl.org/ontology/bibo/Thesis", "Thesis"));
         literalOptions.add(list("http://vivoweb.org/ontology/core#Video", "Video"));
@@ -941,7 +941,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     }
 
     public EditMode getEditMode(VitroRequest vreq) {
-        return EditModeUtils.getEditMode(vreq, list("http://vivoweb.org/ontology/core#linkedInformationResource"));
+        return EditModeUtils.getEditMode(vreq, list("http://vivoweb.org/ontology/core#relates"));
     }
 
 }
