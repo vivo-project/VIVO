@@ -29,9 +29,6 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#translatorOf">
     <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#geographicLocationOf">
-    <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#GeographicLocation"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasSuccessorOrganization">
     <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
   </rdf:Description>

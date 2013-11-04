@@ -773,7 +773,7 @@
     
 
 
-    <!-- http://vivoweb.org/ontology/core#EducationalTraining -->
+    <!-- http://vivoweb.org/ontology/core#EducationalProcess -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#EducationalProcess">
 
@@ -955,7 +955,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#offers"/>
-                <owl:someValuesFrom rdf:resource="http://vivoweb.org/ontology/core#Service"/>
+                <owl:someValuesFrom rdf:resource="http://purl.obolibrary.org/obo/ERO_0000005"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
