@@ -19,7 +19,7 @@
             <a href="${profileUrl(statement.uri("person"))}" title="${i18n().person_name}">${statement.personName}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.uri("training"))}" title="${i18n().missing_person_in_posn}">${i18n().missing_person_in_posn}</a>
+            <a href="${profileUrl(statement.uri("edTraining"))}" title="${i18n().missing_person_in_posn}">${i18n().missing_person_in_posn}</a>
         </#if>
     </#local>
     <#local detailedInfo>
