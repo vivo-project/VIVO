@@ -1,22 +1,17 @@
-.*
-bin
-
-*.GIF
-*.as
-*.class
-*.fla
-*.gif
-*.gz
-*.ico
-*.jar
-*.jpg
-*.psd
-*.png
-*.swf
-*.war
-*.zip
-
-**/.*
+.GIF
+.as
+.class
+.fla
+.gif
+.gz
+.ico
+.jar
+.jpg
+.psd
+.png
+.swf
+.war
+.zip
 
 #
 # first_pass: no excluded files. everything was duplicated in the .bin directory, and

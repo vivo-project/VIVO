@@ -1,17 +1,23 @@
-.GIF
-.as
-.class
-.fla
-.gif
-.gz
-.ico
-.jar
-.jpg
-.psd
-.png
-.swf
-.war
-.zip
+
+bin
+utilities/ISF-transition/obsoleteUris
+
+*.GIF
+*.as
+*.class
+*.fla
+*.gif
+*.gz
+*.ico
+*.jar
+*.jpg
+*.psd
+*.png
+*.swf
+*.war
+*.zip
+
+**/.*
 
 #
 # first_pass: no excluded files. everything was duplicated in the .bin directory, and
@@ -39,3 +45,25 @@ productMods/WEB-INF/ontologies/update/oldVersion/vivo-bibo-1.5.owl
 productMods/WEB-INF/ontologies/update/oldVersion/scires-1.5.owl 
 productMods/WEB-INF/ontologies/update/oldVersion/vivo-dcterms-1.5.owl
 productMods/WEB-INF/ontologies/update/oldVersion/vivo-dcelements-1.5.owl
+
+#
+# Exclude old performance tests
+#
+utilities/LoadTesting/distros/release1.4/deploy.properties.template
+
+#
+# Exclude the migration code itself
+#
+productMods/WEB-INF/ontologies/update/**/*
+
+#
+# This is commented out.
+#
+src/edu/cornell/mannlib/vitro/webapp/visualization/utilities/UtilitiesRequestHandler.java 
+
+#
+# The URI is obsolete, but it has been replaced by another URI with the same localname.
+# http://purl.org/dc/terms/publisher	http://vivoweb.org/ontology/core#publisher
+# How to catch this?
+#
+
