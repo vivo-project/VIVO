@@ -220,8 +220,8 @@ local:hasResearcherRoleContext a :ConfigContext ;
 
 local:hasResearcherRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-researchActivities.xml"^^xsd:string ;
-    :displayName "research activities" ;
-    vitro:displayRankAnnot 15;
+    :displayName "other research activities" ;
+    vitro:displayRankAnnot 35;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddResearcherRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
