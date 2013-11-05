@@ -201,7 +201,6 @@
                     <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000006"/>
                     <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000071"/>
                     <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0001716"/>
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/OBI_0100026"/>
                 </owl:unionOf>
             </owl:Class>
         </rdfs:range>
@@ -317,7 +316,6 @@
                     <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000006"/>
                     <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000007"/>
                     <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000071"/>
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/OBI_0100026"/>
                 </owl:unionOf>
             </owl:Class>
         </rdfs:range>
@@ -497,7 +495,6 @@
                     <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000071"/>
                     <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0001716"/>
                     <rdf:Description rdf:about="http://purl.obolibrary.org/obo/OBI_0000272"/>
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/OBI_0100026"/>
                 </owl:unionOf>
             </owl:Class>
         </rdfs:domain>
@@ -561,25 +558,6 @@
         <obo:IAO_0000111 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">related technique</obo:IAO_0000111>
         <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/ERO_0000007"/>
         <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000120"/>
-        <rdfs:domain>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000004"/>
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000005"/>
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000009"/>
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000071"/>
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000161"/>
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000162"/>
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000285"/>
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000630"/>
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0001194"/>
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0001200"/>
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0001716"/>
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/OBI_0100026"/>
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/OBI_0400147"/>
-                </owl:unionOf>
-            </owl:Class>
-        </rdfs:domain>
     </owl:ObjectProperty>
     
 
@@ -593,8 +571,6 @@
         <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
         <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
         <obo:IAO_0000111 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">used to study</obo:IAO_0000111>
-        <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/ERO_0000985"/>
-        <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/GO_0008150"/>
         <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000120"/>
     </owl:ObjectProperty>
     
@@ -914,14 +890,7 @@ there is a measurement process p that has specified output m, a measurement datu
         <obo:IAO_0000112 xml:lang="en">http://www.affymetrix.com/products/arrays/specific/hgu133.affx is_manufactered_by http://www.affymetrix.com/ (if we decide to use these URIs for the actual entities)</obo:IAO_0000112>
         <obo:IAO_0000111 xml:lang="en">is_manufactured_by</obo:IAO_0000111>
         <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/BFO_0000040"/>
-        <rdfs:range>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/NCBITaxon_9606"/>
-                    <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/Organization"/>
-                </owl:unionOf>
-            </owl:Class>
-        </rdfs:range>
+        <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
     </owl:ObjectProperty>
     
 
@@ -1671,7 +1640,8 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/scientific-research#accessProvidedBy -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/scientific-research#accessProvidedBy">
-
+        <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/ERO_0000391"/>
+        <owl:inverseOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000029"/>
     </owl:ObjectProperty>
     
 
@@ -1679,7 +1649,21 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/scientific-research#documentationFor -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/scientific-research#documentationFor">
-
+         <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Document"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000004"/>
+                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000005"/>
+                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000006"/>
+                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000014"/>
+                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000020"/>
+                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000071"/>
+                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0001716"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+         <owl:inverseOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000460"/>
     </owl:ObjectProperty>
     
 
@@ -1687,7 +1671,16 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/scientific-research#protocolRealizedBy -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/scientific-research#protocolRealizedBy">
-
+     <owl:inverseOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000481"/>
+        <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/OBI_0000272"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000005"/>
+                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000014"/>
+                </owl:unionOf>
+            </owl:Class>
+         </rdfs:range>
     </owl:ObjectProperty>
     
 
@@ -1704,7 +1697,6 @@ there is a measurement process p that has specified output m, a measurement datu
 
     <owl:ObjectProperty rdf:about="http://www.ebi.ac.uk/efo/swo/SWO_0000741">
 
-        <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/IAO_0000025"/>
         <rdfs:domain>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
@@ -1713,22 +1705,6 @@ there is a measurement process p that has specified output m, a measurement datu
                 </owl:unionOf>
             </owl:Class>
         </rdfs:domain>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.obofoundry.org/ro/ro.owl#has_agent -->
-
-    <owl:ObjectProperty rdf:about="http://www.obofoundry.org/ro/ro.owl#has_agent">
-
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.w3.org/2002/07/owl#DeprecatedProperty -->
-
-    <owl:ObjectProperty rdf:about="http://www.w3.org/2002/07/owl#DeprecatedProperty">
-
     </owl:ObjectProperty>
     
 

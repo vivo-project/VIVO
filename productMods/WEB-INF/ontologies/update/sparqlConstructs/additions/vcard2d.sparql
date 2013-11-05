@@ -8,6 +8,7 @@ CONSTRUCT {
     ?name vivo:middleName ?middleName .
 } WHERE {
      ?s vivo:middleName ?middleName . 
+     ?s a foaf:Person .
      ?s arg:ARG_2000028 ?vcard .
      ?vcard v:hasName ?name
 }

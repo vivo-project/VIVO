@@ -8,7 +8,8 @@ CONSTRUCT {
     _:vcard arg:ARG_2000029 ?s .
     _:vcard a v:Individual .
 } WHERE {
-    ?s vivo:middleName ?middleName 
+    ?s vivo:middleName ?middleName .
+    ?s a foaf:Person 
     FILTER NOT EXISTS {
         ?s arg:ARG_2000028 ?vcard
     } 
