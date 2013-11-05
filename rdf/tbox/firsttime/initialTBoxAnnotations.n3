@@ -407,6 +407,9 @@ foaf:Person
 obo:OBI_0000643
       rdfs:label "has grain"@en-US .
 
+obo:OBI_0000272
+      rdfs:label "protocol"@en-US .
+
 vcard:Identification
       rdfs:label "Identification"@en-US .
 
@@ -5980,7 +5983,11 @@ vcard:Name
       rdfs:label "Name"@en-US .
 
 obo:BFO_0000055
-      rdfs:label "realizes"@en-US .
+      rdfs:label "realizes"@en-US ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
 geo:nationalityAR
       rdfs:label "nationalityAR"@en-US ;
@@ -6173,6 +6180,8 @@ obo:ERO_0001716
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:selectFromExistingAnnot
+              "true"^^xsd:boolean ;
+      vitro:offerCreateNewOptionAnnot
               "true"^^xsd:boolean .
 
 vcard:hasRelated
