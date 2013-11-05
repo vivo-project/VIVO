@@ -22,4 +22,8 @@ CONSTRUCT {
         ?educationalProcess <http://purl.obolibrary.org/obo/RO_0000057> ?org . 
         ?org a foaf:Organization 
     }
+    FILTER NOT EXISTS {
+        ?educationalProcess <http://purl.obolibrary.org/obo/RO_0002234>  ?awardedDegreeNode .
+        ?person vivo:relatedBy ?awardedDegreeNode .
+    }
 }

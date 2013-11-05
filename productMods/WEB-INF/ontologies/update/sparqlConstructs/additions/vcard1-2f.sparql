@@ -4,14 +4,13 @@ PREFIX v:   <http://www.w3.org/2006/vcard/ns#>
 PREFIX vivo: <http://vivoweb.org/ontology/core#> 
 
 CONSTRUCT {
-    ?vcard v:hasTelephone _:telephone .
-    _:telephone a v:Telephone .
-    _:telephone a v:Voice .
-    _:telephone v:telephone ?phoneNumber .
+    ?s arg:ARG_2000028 _:vcard .
+    _:vcard arg:ARG_2000029 ?s .
+    _:vcard a v:Group .
 } WHERE {
     ?s vivo:phoneNumber ?phoneNumber .
-    ?s arg:ARG_2000028 ?vcard .
+    ?s a foaf:Group .
     FILTER NOT EXISTS {
-        ?vcard v:hasTelephone ?telephoneNode .
+        ?s arg:ARG_2000028 ?vcard .
     }
 }

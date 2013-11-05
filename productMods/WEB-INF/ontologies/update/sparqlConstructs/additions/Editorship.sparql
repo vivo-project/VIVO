@@ -14,5 +14,9 @@ CONSTRUCT {
     } UNION {
       ?document vivo:editor ?person
       FILTER NOT EXISTS { ?person vivo:editorOf ?document } 
+    } 
+    FILTER NOT EXISTS {
+        ?person vivo:relatedBy ?editorshipNode .
+        ?editorshipNode vivo:relates ?document .
     }
 }

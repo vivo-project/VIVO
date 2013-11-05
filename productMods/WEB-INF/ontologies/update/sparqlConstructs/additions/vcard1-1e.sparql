@@ -4,13 +4,13 @@ PREFIX v:   <http://www.w3.org/2006/vcard/ns#>
 PREFIX vivo: <http://vivoweb.org/ontology/core#> 
 
 CONSTRUCT {
-    ?vcard v:hasEmail _:email .
-    _:email a v:Email .
-    _:email v:email ?email .
+    ?s arg:ARG_2000028 _:vcard .
+    _:vcard arg:ARG_2000029 ?s .
+    _:vcard a v:Organization .
 } WHERE {
-    ?s vivo:email ?email .
-    ?s arg:ARG_2000028 ?vcard .
+    ?s vivo:primaryEmail ?email  .
+    ?s a foaf:Organization .
     FILTER NOT EXISTS {
-        ?vcard v:hasEmail ?emailnode
+        ?s arg:ARG_2000028 ?vcard
     }
 }
