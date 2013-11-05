@@ -2159,7 +2159,11 @@ vivo:supports
               "true"^^xsd:boolean .
 
 obo:RO_0000057
-      rdfs:label "has participant"@en-US .
+      rdfs:label "has participant"@en-US ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
 vivo:patentNumber
       rdfs:label "patent number"@en-US ;
@@ -2277,7 +2281,11 @@ obo:ARG_2000084
       rdfs:label "American Board of Preventive Medicine"@en-US .
 
 obo:RO_0000056
-      rdfs:label "participates in"@en-US .
+      rdfs:label "participates in"@en-US ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
 vcard:timeZone
       rdfs:label "timezone"@en-US .

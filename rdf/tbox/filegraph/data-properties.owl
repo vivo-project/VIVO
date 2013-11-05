@@ -1833,15 +1833,12 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
     </owl:DatatypeProperty>
     
 
-
     <!-- http://vivoweb.org/ontology/core#overview -->
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#overview">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     </owl:DatatypeProperty>
     
-
 
     <!-- http://vivoweb.org/ontology/core#patentNumber -->
 

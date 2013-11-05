@@ -27,7 +27,8 @@ CONSTRUCT {
         ?s foaf:lastName ?lastName .
     } 
     UNION {
-        ?s vivo:middleName ?middleName 
+        ?s vivo:middleName ?middleName .
+        ?s a foaf:Person .
     }
     UNION {
         ?s bibo:prefixName ?prefix 
