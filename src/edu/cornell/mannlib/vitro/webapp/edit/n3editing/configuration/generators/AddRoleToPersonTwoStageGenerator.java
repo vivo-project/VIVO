@@ -3,6 +3,8 @@
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -268,7 +270,8 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     	HashMap<String, List<String>> urisInScope = new HashMap<String, List<String>>();
     	
     	//Setting inverse role predicate
-    	urisInScope.put("inverseRolePredicate", getInversePredicate(vreq));    
+    	//With ISF changes this will always be the same
+    	urisInScope.put("inverseRolePredicate", Arrays.asList(new String[]{"http://purl.obolibrary.org/obo/RO_0000052"}));    
     	urisInScope.put("roleType", list( getRoleType() ) );
     	
     	//Uris in scope include subject, predicate, and object var
