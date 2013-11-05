@@ -5,6 +5,8 @@
 <%@ taglib uri="http://djpowell.net/tmp/sparql-tag/0.1/" prefix="sparql" %>
 <%@ taglib uri="http://jakarta.apache.org/taglibs/string-1.1" prefix="str" %>
 <%@ page import="java.net.URLDecoder" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.dao.ModelAccess"%>
+<% request.setAttribute("jenaOntModel", ModelAccess.on(getServletContext()).getJenaOntModel()); %>
 
 <div id="content">
 
@@ -13,9 +15,9 @@
 	<!--
 		Author-Resource
 	-->
-	<sparql:lock model="${applicationScope.jenaOntModel }">
+	<sparql:lock model="${jenaOntModel }">
 	<sparql:sparql>
-	      <sparql:select model="${applicationScope.jenaOntModel}" var="inforauthorships">
+	      <sparql:select model="${jenaOntModel}" var="inforauthorships">
 	          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 	      	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 	          PREFIX akt:  <http://www.aktors.org/ontology/portal#>
@@ -34,9 +36,9 @@
 	</sparql:sparql>
 	</sparql:lock>
 	
-	<sparql:lock model="${applicationScope.jenaOntModel }">
+	<sparql:lock model="${jenaOntModel }">
     <sparql:sparql>
-      <sparql:select model="${applicationScope.jenaOntModel}" var="inforauthors">
+      <sparql:select model="${jenaOntModel}" var="inforauthors">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
           PREFIX akt:  <http://www.aktors.org/ontology/portal#>
@@ -58,9 +60,9 @@
     </sparql:sparql>
     </sparql:lock>
     
-    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:lock model="${jenaOntModel }">
     <sparql:sparql>
-      <sparql:select model="${applicationScope.jenaOntModel}" var="infors">
+      <sparql:select model="${jenaOntModel}" var="infors">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
           PREFIX akt:  <http://www.aktors.org/ontology/portal#>
@@ -84,9 +86,9 @@
 	<!--
 		Author-Conference_Paper
 	-->
-    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:lock model="${jenaOntModel }">
 	<sparql:sparql>
-	      <sparql:select model="${applicationScope.jenaOntModel}" var="confauthorships">
+	      <sparql:select model="${jenaOntModel}" var="confauthorships">
 	          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 	      	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 	          PREFIX akt:  <http://www.aktors.org/ontology/portal#>
@@ -104,9 +106,9 @@
     </sparql:sparql>
     </sparql:lock>
 
-    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:lock model="${jenaOntModel }">
     <sparql:sparql>
-      <sparql:select model="${applicationScope.jenaOntModel}" var="confauthors">
+      <sparql:select model="${jenaOntModel}" var="confauthors">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
           PREFIX akt:  <http://www.aktors.org/ontology/portal#>
@@ -127,9 +129,9 @@
     </sparql:sparql>
     </sparql:lock>
 
-    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:lock model="${jenaOntModel }">
     <sparql:sparql>
-      <sparql:select model="${applicationScope.jenaOntModel}" var="confs">
+      <sparql:select model="${jenaOntModel}" var="confs">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
           PREFIX akt:  <http://www.aktors.org/ontology/portal#>
@@ -152,9 +154,9 @@
 	<!--
 		Author-Academic_Article
 	-->
-    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:lock model="${jenaOntModel }">
 	<sparql:sparql>
-	      <sparql:select model="${applicationScope.jenaOntModel}" var="acaauthorships">
+	      <sparql:select model="${jenaOntModel}" var="acaauthorships">
 	          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 	      	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 	          PREFIX akt:  <http://www.aktors.org/ontology/portal#>
@@ -172,9 +174,9 @@
     </sparql:sparql>
     </sparql:lock>
 
-    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:lock model="${jenaOntModel }">
     <sparql:sparql>
-      <sparql:select model="${applicationScope.jenaOntModel}" var="acaauthors">
+      <sparql:select model="${jenaOntModel}" var="acaauthors">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
           PREFIX akt:  <http://www.aktors.org/ontology/portal#>
@@ -195,9 +197,9 @@
     </sparql:sparql>
     </sparql:lock>
 
-    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:lock model="${jenaOntModel }">
     <sparql:sparql>
-      <sparql:select model="${applicationScope.jenaOntModel}" var="acas">
+      <sparql:select model="${jenaOntModel}" var="acas">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
           PREFIX akt:  <http://www.aktors.org/ontology/portal#>
@@ -220,9 +222,9 @@
 	<!--
 		Investigator-Grant
 	-->
-    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:lock model="${jenaOntModel }">
 	<sparql:sparql>
-	      <sparql:select model="${applicationScope.jenaOntModel}" var="piships">
+	      <sparql:select model="${jenaOntModel}" var="piships">
 	          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 	      	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 	          PREFIX akt:  <http://www.aktors.org/ontology/portal#>
@@ -240,9 +242,9 @@
     </sparql:sparql>
     </sparql:lock>
     
-    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:lock model="${jenaOntModel }">
     <sparql:sparql>
-      <sparql:select model="${applicationScope.jenaOntModel}" var="pis">
+      <sparql:select model="${jenaOntModel}" var="pis">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
           PREFIX akt:  <http://www.aktors.org/ontology/portal#>
@@ -260,9 +262,9 @@
     </sparql:sparql>
     </sparql:lock>
 
-    <sparql:lock model="${applicationScope.jenaOntModel }">    
+    <sparql:lock model="${jenaOntModel }">    
     <sparql:sparql>
-      <sparql:select model="${applicationScope.jenaOntModel}" var="grants">
+      <sparql:select model="${jenaOntModel}" var="grants">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
           PREFIX akt:  <http://www.aktors.org/ontology/portal#>
@@ -284,9 +286,9 @@
 	<!--
 		Teacher-Course
 	-->
-    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:lock model="${jenaOntModel }">
 	<sparql:sparql>
-	      <sparql:select model="${applicationScope.jenaOntModel}" var="teachings">
+	      <sparql:select model="${jenaOntModel}" var="teachings">
 	          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 	      	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 	          PREFIX akt:  <http://www.aktors.org/ontology/portal#>
@@ -304,9 +306,9 @@
     </sparql:sparql>
     </sparql:lock>
 
-    <sparql:lock model="${applicationScope.jenaOntModel }">          
+    <sparql:lock model="${jenaOntModel }">          
     <sparql:sparql>
-      <sparql:select model="${applicationScope.jenaOntModel}" var="teachers">
+      <sparql:select model="${jenaOntModel}" var="teachers">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
           PREFIX akt:  <http://www.aktors.org/ontology/portal#>
@@ -325,9 +327,9 @@
     </sparql:sparql>
     </sparql:lock>
 
-    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:lock model="${jenaOntModel }">
     <sparql:sparql>
-      <sparql:select model="${applicationScope.jenaOntModel}" var="courses">
+      <sparql:select model="${jenaOntModel}" var="courses">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
           PREFIX akt:  <http://www.aktors.org/ontology/portal#>
@@ -349,9 +351,9 @@
 	<!--
 		Co-Author Linkage
 	-->
-    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:lock model="${jenaOntModel }">
 	<sparql:sparql>
-	      <sparql:select model="${applicationScope.jenaOntModel}" var="coauthors">
+	      <sparql:select model="${jenaOntModel}" var="coauthors">
 	          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 			PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 			PREFIX akt:  <http://www.aktors.org/ontology/portal#>
@@ -376,9 +378,9 @@
 	<!--
 		Distinct Co-Author Linkage
 	-->
-    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:lock model="${jenaOntModel }">
 	<sparql:sparql>
-	      <sparql:select model="${applicationScope.jenaOntModel}" var="discoauthors">
+	      <sparql:select model="${jenaOntModel}" var="discoauthors">
 	        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 			PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 			PREFIX akt:  <http://www.aktors.org/ontology/portal#>
@@ -404,9 +406,9 @@
 	<!--
 		Co-Investigator Linkage
 	-->
-	<sparql:lock model="${applicationScope.jenaOntModel }">
+	<sparql:lock model="${jenaOntModel }">
 	<sparql:sparql>
-	      <sparql:select model="${applicationScope.jenaOntModel}" var="copis">
+	      <sparql:select model="${jenaOntModel}" var="copis">
 	          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 	      	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 	          PREFIX akt:  <http://www.aktors.org/ontology/portal#>
@@ -429,9 +431,9 @@
 	<!--
 		Distinct Co-Investigator Linkage
 	-->
-    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:lock model="${jenaOntModel }">
 	<sparql:sparql>
-	      <sparql:select model="${applicationScope.jenaOntModel}" var="discopis">
+	      <sparql:select model="${jenaOntModel}" var="discopis">
 	          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 	      	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 	          PREFIX akt:  <http://www.aktors.org/ontology/portal#>
