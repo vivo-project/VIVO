@@ -21,10 +21,11 @@
 	          PREFIX akt:  <http://www.aktors.org/ontology/portal#>
 			  PREFIX bibo: <http://purl.org/ontology/bibo/>
 	          PREFIX core: <http://vivoweb.org/ontology/core#>
+	          PREFIX obo:  <http://purl.obolibrary.org/obo/>
 	          SELECT (count(?author) as ?counts) WHERE {
 	              ?author rdf:type core:Authorship .
-				  ?author core:linkedInformationResource ?infor .
-				  ?infor rdf:type core:InformationResource .
+				  ?author core:relates ?infor .
+				  ?infor rdf:type obo:IAO_0000030 .
 	          }
 	      </sparql:select>
           <c:forEach items="${inforauthorships.rows}" var="inforauthorship" varStatus="counter">
@@ -42,11 +43,13 @@
 		  PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 		  PREFIX bibo: <http://purl.org/ontology/bibo/>
           PREFIX core: <http://vivoweb.org/ontology/core#>
+          PREFIX obo:  <http://purl.obolibrary.org/obo/>
           SELECT (count(distinct ?author) as ?counts) WHERE {
-              ?author core:authorInAuthorship ?obj .
+              ?author core:relatedBy ?obj .
 			  ?author rdf:type foaf:Person .
-			  ?obj core:linkedInformationResource ?infor .
-			  ?infor rdf:type core:InformationResource .
+              ?obj rdf:type core:Authorship .
+			  ?obj core:relates ?infor .
+			  ?infor rdf:type obo:IAO_0000030 .
           }
       </sparql:select>
 				<c:forEach items="${inforauthors.rows}" var="inforauthor" varStatus="counter">
@@ -63,9 +66,10 @@
           PREFIX akt:  <http://www.aktors.org/ontology/portal#>
 		  PREFIX bibo: <http://purl.org/ontology/bibo/>
           PREFIX core: <http://vivoweb.org/ontology/core#>
+          PREFIX obo:  <http://purl.obolibrary.org/obo/>
           SELECT (count(distinct ?infor) as ?counts) WHERE {
-              ?subj core:linkedInformationResource ?infor .
-			  ?infor rdf:type core:InformationResource .
+              ?subj core:relates ?infor .
+              ?infor rdf:type obo:IAO_0000030 .
           }
       </sparql:select>
 				<c:forEach items="${infors.rows}" var="infor" varStatus="counter">
@@ -90,7 +94,7 @@
 	          PREFIX core: <http://vivoweb.org/ontology/core#>
 	          SELECT (count(?author) as ?counts) WHERE {
 	              ?author rdf:type core:Authorship .
-				  ?author core:linkedInformationResource ?infor .
+				  ?author core:relates ?infor .
 				  ?infor rdf:type core:ConferencePaper .
 	          }
 	      </sparql:select>
@@ -110,9 +114,10 @@
 		  PREFIX bibo: <http://purl.org/ontology/bibo/>
           PREFIX core: <http://vivoweb.org/ontology/core#>
           SELECT (count(distinct ?author) as ?counts) WHERE {
-              ?author core:authorInAuthorship ?obj .
+              ?author core:relatedBy ?obj .
 			  ?author rdf:type foaf:Person .
-			  ?obj core:linkedInformationResource ?infor .
+			  ?obj rdf:type core:Authorship .
+			  ?obj core:relates ?infor .
 			  ?infor rdf:type core:ConferencePaper .
           }
       </sparql:select>
@@ -131,7 +136,7 @@
 		  PREFIX bibo: <http://purl.org/ontology/bibo/>
           PREFIX core: <http://vivoweb.org/ontology/core#>
           SELECT (count(distinct ?infor) as ?counts) WHERE {
-              ?subj core:linkedInformationResource ?infor .
+              ?subj core:relates ?infor .
 			  ?infor rdf:type core:ConferencePaper .
           }
       </sparql:select>
@@ -157,7 +162,7 @@
 	          PREFIX core: <http://vivoweb.org/ontology/core#>
 	          SELECT (count(?author) as ?counts) WHERE {
 	              ?author rdf:type core:Authorship .
-				  ?author core:linkedInformationResource ?infor .
+				  ?author core:relates ?infor .
 				  ?infor rdf:type bibo:AcademicArticle .
 	          }
 	      </sparql:select>
@@ -177,9 +182,10 @@
 		  PREFIX bibo: <http://purl.org/ontology/bibo/>
           PREFIX core: <http://vivoweb.org/ontology/core#>
           SELECT (count(distinct ?author) as ?counts) WHERE {
-              ?author core:authorInAuthorship ?obj .
+              ?author core:relatedBy ?obj .
 			  ?author rdf:type foaf:Person .
-			  ?obj core:linkedInformationResource ?infor .
+			  ?obj rdf:type core:Authorship .
+			  ?obj core:relates ?infor .
 			  ?infor rdf:type bibo:AcademicArticle .
           }
       </sparql:select>
@@ -198,7 +204,7 @@
 		  PREFIX bibo: <http://purl.org/ontology/bibo/>
           PREFIX core: <http://vivoweb.org/ontology/core#>
           SELECT (count(distinct ?infor) as ?counts) WHERE {
-              ?subj core:linkedInformationResource ?infor .
+              ?subj core:relates ?infor .
 			  ?infor rdf:type bibo:AcademicArticle .
           }
       </sparql:select>
@@ -223,7 +229,9 @@
 			  PREFIX bibo: <http://purl.org/ontology/bibo/>
 	          PREFIX core: <http://vivoweb.org/ontology/core#>
 	          SELECT (count(*) as ?counts) WHERE {
-	              ?grant core:hasInvestigator ?pi .
+	              ?grant core:relates ?pi .
+	              ?grant rdf:type core:Grant .
+	              ?pi rdf:type core:InvestigatorRole .
 	          }
 	      </sparql:select>
 					<c:forEach items="${piships.rows}" var="piship" varStatus="counter">
@@ -241,8 +249,9 @@
 		  PREFIX bibo: <http://purl.org/ontology/bibo/>
           PREFIX core: <http://vivoweb.org/ontology/core#>
           SELECT (count(distinct ?pi) as ?counts) WHERE {
-              ?grant core:hasInvestigator ?pi .
+              ?grant core:relates ?pi .
 			  ?grant rdf:type core:Grant .
+			  ?pi rdf:type core:InvestigatorRole .
           }
       </sparql:select>
 				<c:forEach items="${pis.rows}" var="pi" varStatus="counter">
@@ -283,8 +292,10 @@
 	          PREFIX akt:  <http://www.aktors.org/ontology/portal#>
 			  PREFIX bibo: <http://purl.org/ontology/bibo/>
 	          PREFIX core: <http://vivoweb.org/ontology/core#>
+	          PREFIX obo:  <http://purl.obolibrary.org/obo/>
 	          SELECT (count(*) as ?counts) WHERE {
-				  ?teacher core:teaching ?obj .
+				  ?teacher obo:RO_0000053 ?obj .
+				  ?obj rdf:type core:teacherRole .
 	          }
 	      </sparql:select>
 					<c:forEach items="${teachings.rows}" var="teaching" varStatus="counter">
@@ -301,8 +312,11 @@
           PREFIX akt:  <http://www.aktors.org/ontology/portal#>
 		  PREFIX bibo: <http://purl.org/ontology/bibo/>
           PREFIX core: <http://vivoweb.org/ontology/core#>
+          PREFIX obo:  <http://purl.obolibrary.org/obo/>
           SELECT (count(distinct ?teacher) as ?counts) WHERE {
 			  ?teacher core:teaching ?obj .
+			  ?teacher obo:RO_0000053 ?obj .
+			  ?obj rdf:type core:teacherRole .
           }
       </sparql:select>
 				<c:forEach items="${teachers.rows}" var="teacher" varStatus="counter">
@@ -320,11 +334,11 @@
 		  PREFIX bibo: <http://purl.org/ontology/bibo/>
           PREFIX core: <http://vivoweb.org/ontology/core#>
           SELECT (count(?course) as ?counts) WHERE {
-			  ?course rdf:type core:CourseSection .
+			  ?course rdf:type core:Course .
           }
       </sparql:select>
 				<c:forEach items="${courses.rows}" var="course" varStatus="counter">
-					<li><a href="#">'CourseSection' entities</a> (${course.counts.string})</li>
+					<li><a href="#">'Course' entities</a> (${course.counts.string})</li>
 				</c:forEach>	
     </sparql:sparql>
     </sparql:lock>
@@ -343,12 +357,13 @@
 			PREFIX akt:  <http://www.aktors.org/ontology/portal#>
 			PREFIX bibo: <http://purl.org/ontology/bibo/>
 			PREFIX core: <http://vivoweb.org/ontology/core#>
+			PREFIX obo:  <http://purl.obolibrary.org/obo/>
 			SELECT (count(*) as ?counts) WHERE {
 			?author1 rdf:type core:Authorship .
 			?author2 rdf:type core:Authorship .
-			?author1 core:linkedInformationResource ?infor .
-			?author2 core:linkedInformationResource ?infor .
-			?infor rdf:type core:InformationResource .
+			?author1 core:relates ?infor .
+			?author2 core:relates ?infor .
+			?infor rdf:type obo:IAO_0000030  .
 			FILTER (str(?author1) < str(?author2)) 
 			}
 	      </sparql:select>
@@ -369,12 +384,13 @@
 			PREFIX akt:  <http://www.aktors.org/ontology/portal#>
 			PREFIX bibo: <http://purl.org/ontology/bibo/>
 			PREFIX core: <http://vivoweb.org/ontology/core#>
+			PREFIX obo:  <http://purl.obolibrary.org/obo/>
 			SELECT DISTINCT ?author1 ?author2 WHERE {
-			?author1 rdf:type core:Authorship .
-			?author2 rdf:type core:Authorship .
-			?author1 core:linkedInformationResource ?infor .
-			?author2 core:linkedInformationResource ?infor .
-			?infor rdf:type core:InformationResource .
+    			?author1 rdf:type core:Authorship .
+    			?author2 rdf:type core:Authorship .
+    			?author1 core:relates ?infor .
+    			?author2 core:relates ?infor .
+    			?infor rdf:type obo:IAO_0000030  .
 			FILTER (str(?author1) < str(?author2)) 
 			}
 	      </sparql:select>
@@ -397,8 +413,10 @@
 			  PREFIX bibo: <http://purl.org/ontology/bibo/>
 	          PREFIX core: <http://vivoweb.org/ontology/core#>
 	          SELECT (count(*) as ?counts) WHERE {
-	              ?grant core:hasInvestigator ?pi1 .
-				  ?grant core:hasInvestigator ?pi2 .
+	              ?grant core:relates ?pi1 .
+	              ?pi1 rdf:type core:InvestigatorRole .
+				  ?grant core:relates ?pi2 .
+	              ?pi1 rdf:type core:InvestigatorRole .
 				  FILTER (str(?pi1) < str(?pi2))
 	          }
 	      </sparql:select>
@@ -420,8 +438,10 @@
 			  PREFIX bibo: <http://purl.org/ontology/bibo/>
 	          PREFIX core: <http://vivoweb.org/ontology/core#>
 	          SELECT DISTINCT ?pi1 ?pi2 WHERE {
-	              ?grant core:hasInvestigator ?pi1 .
-				  ?grant core:hasInvestigator ?pi2 .
+	              ?grant core:relates ?pi1 .
+	              ?pi1 rdf:type core:InvestigatorRole .
+				  ?grant core:relates ?pi2 .
+	              ?pi1 rdf:type core:InvestigatorRole .
 				  FILTER (str(?pi1) < str(?pi2))
 	          }
             </sparql:select>
