@@ -12,4 +12,8 @@ CONSTRUCT {
     ?advisor vivo:relatedBy ?advisingRelationship .
 } WHERE {
     ?advisor vivo:advisorIn ?advisingRelationship .
+    FILTER NOT EXISTS {
+        ?advisor <http://purl.obolibrary.org/obo/RO_0000053> ?advisorRoleNode .
+        ?advisorRoleNode vivo:relatedBy ?advisingRelationship .
+    }
 }

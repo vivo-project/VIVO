@@ -10,6 +10,10 @@ CONSTRUCT {
     _:primaryTelephone a v:Work .
     _:primaryTelephone v:telephone ?primaryPhoneNumber .
 } WHERE {
+    ?s vivo:primaryPhoneNumber ?primaryPhoneNumber .
     ?s arg:ARG_2000028 ?vcard .
-    ?s vivo:primaryPhoneNumber ?primaryPhoneNumber
+    FILTER NOT EXISTS {
+        ?vcard v:hasTelephone ?telephoneNode .
+        ?vcard a v:Work .
+    }
 }

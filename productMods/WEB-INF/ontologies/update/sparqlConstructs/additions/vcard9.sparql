@@ -10,10 +10,13 @@ CONSTRUCT {
    _:url v:url ?linkURI .
    _:url rdfs:label ?linkAnchorText
 } WHERE {
-    ?s arg:ARG_2000028 ?vcard .
     ?s vivo:webpage ?webpage .
     ?webpage vivo:linkURI ?linkURI .
+    ?s arg:ARG_2000028 ?vcard .
     OPTIONAL {
         ?webpage vivo:linkAnchorText ?linkAnchorText
+    }
+    FILTER NOT EXISTS {
+        ?vcard v:hasURL ?URLNode
     }
 }
