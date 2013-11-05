@@ -11,6 +11,7 @@
 <#assign deleteWebpageUrl=editConfiguration.pageData.deleteWebpageUrl!"deleteWebpageUrl is undefined">
 <#assign showAddFormUrl=editConfiguration.pageData.showAddFormUrl!"showAddFormUrl is undefined">
 <#assign predicateUri=editConfiguration.predicateUri!"undefined">
+<#assign domainUri = editConfiguration.predicateProperty.domainVClassURI!"">
 
 <#if (editConfiguration.pageData.subjectName??) >
 <h2><em>${editConfiguration.pageData.subjectName}</em></h2>
@@ -56,7 +57,7 @@
     <#-- There is no editConfig at this stage, so we don't need to go through postEditCleanup.jsp on cancel.
          These can just be ordinary links, rather than a v:input element, as in 
          addAuthorsToInformationResource.jsp. -->   
-    <a href="${showAddFormUrl}" id="showAddForm" class="button green" title="${i18n().add_new_web_page}">${i18n().add_new_web_page}</a>
+    <a href="${showAddFormUrl}<#if (domainUri?length > 0)>&domainUri=${domainUri}</#if>" id="showAddForm" class="button green" title="${i18n().add_new_web_page}">${i18n().add_new_web_page}</a>
        
     <a href="${cancelUrl}" id="returnToIndividual" class="return" title="${i18n().return_to_profile}">${i18n().return_to_profile}</a>
     <img id="indicator" class="indicator hidden" src="${urls.base}/images/indicatorWhite.gif" alt="${i18n().processing_indicator}"/>

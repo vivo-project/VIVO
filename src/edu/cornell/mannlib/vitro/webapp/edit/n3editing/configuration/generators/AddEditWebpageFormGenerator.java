@@ -12,6 +12,9 @@ import org.apache.commons.logging.LogFactory;
 
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.Literal;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.vocabulary.XSD;
 
@@ -44,7 +47,7 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
         prepare(vreq, config);
         return config;
     }
-
+ 
     //Have broken this method down into two portions to allow for overriding of edit configuration
     //without having to copy the entire method and before prepare is called
     
@@ -58,6 +61,9 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
 	    initPropertyParameters(vreq, session, config);
 	    initObjectPropForm(config, vreq);       
 	    String linkUri = getLinkUri(vreq);
+	    String domainUri = vreq.getParameter("domainUri");
+	    String vcardIndividualType = "http://www.w3.org/2006/vcard/ns#Kind";
+
 	            
 	    config.setVarNameForSubject("subject");
 	    config.setVarNameForObject("vcard");
@@ -73,11 +79,22 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
 	    config.addUrisInScope("linkUrlPredicate",             list( "http://www.w3.org/2006/vcard/ns#url" ));
 	    config.addUrisInScope("linkLabelPredicate",  list( "http://www.w3.org/2000/01/rdf-schema#label" ));
 	    config.addUrisInScope("rankPredicate",       list( core + "rank"));
-	    config.addSparqlForAdditionalUrisInScope("vcard", individualVcardQuery);
+	    config.addUrisInScope("vcardType",       list( vcardIndividualType ));
+	    
 	    
 	    if ( config.isUpdate() ) {
 	        config.addUrisInScope("link",  list( linkUri ));
 	    }
+	    else {
+	        if ( domainUri.equals("http://xmlns.com/foaf/0.1/Person") ) {
+	        vcardIndividualType = "http://www.w3.org/2006/vcard/ns#Individual";
+	        }
+	        else if ( domainUri.equals("http://xmlns.com/foaf/0.1/Organization") ) {
+	            vcardIndividualType = "http://www.w3.org/2006/vcard/ns#Organization";
+	        }
+	    }
+	    config.addSparqlForAdditionalUrisInScope("vcard", individualVcardQuery);
+	    
 	    config.setUrisOnForm("urlType");
 	    config.setLiteralsOnForm(list("url","label","rank"));
 	
@@ -129,6 +146,7 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
     static String N3_FOR_WEBPAGE = 
         "?subject ?webpageProperty ?vcard . \n"+
         "?vcard ?inverseProperty ?subject . \n"+
+        "?vcard a ?vcardType . \n" +
         "?vcard <http://www.w3.org/2006/vcard/ns#hasURL> ?link ."+
         "?link a <http://www.w3.org/2006/vcard/ns#URL> . \n" +
         "?link ?linkUrlPredicate ?url .";    
