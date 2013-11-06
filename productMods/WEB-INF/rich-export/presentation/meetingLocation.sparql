@@ -1,16 +1,14 @@
 PREFIX vivo: <http://vivoweb.org/ontology/core#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
 
 CONSTRUCT {
      ?location rdfs:label ?locationName .
 } WHERE {
-     PERSON_URI vivo:hasPresenterRole ?presenterRole .
-
-     {?presenterRole vivo:roleRealizedIn ?presentation}
-        union
-     {?presenterRole vivo:roleIn ?presentation}   
-
-     ?presentation vivo:eventWithin ?containingEvent .
-     ?containingEvent vivo:hasGeographicLocation ?location .
+     PERSON_URI obo:RO_0000053 ?presenterRole .
+     ?presenterRole a core:PresenterRole .
+     ?presenterRole obo:BFO_0000054 ?presentation .
+     ?presentation obo:BFO_0000050 ?containingEvent .
+     ?containingEvent obo:RO_0001025 ?location .
      ?location rdfs:label ?locationName .
 }

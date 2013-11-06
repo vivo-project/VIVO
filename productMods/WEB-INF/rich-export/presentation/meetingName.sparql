@@ -4,12 +4,9 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 CONSTRUCT {
      ?containingEvent rdfs:label ?containingEventName
 } WHERE {
-     PERSON_URI vivo:hasPresenterRole ?presenterRole .
- 
-     {?presenterRole vivo:roleRealizedIn ?presentation}
-        union
-     {?presenterRole vivo:roleIn ?presentation}   
-
-     ?presentation vivo:eventWithin ?containingEvent .
+     PERSON_URI obo:RO_0000053 ?presenterRole .
+     ?presenterRole a core:PresenterRole .
+     ?presenterRole obo:BFO_0000054 ?presentation .
+     ?presentation obo:BFO_0000050 ?containingEvent .
      ?containingEvent rdfs:label ?containingEventName
 }
