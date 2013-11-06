@@ -17,6 +17,7 @@ CONSTRUCT {
         ?s vivo:faxNumber ?faxNumber .
         ?s vivo:mailingAddress ?address .
         ?address ?addressP ?addressO .
+        ?addressS ?addressQ ?address .
         ?s vivo:webpage ?webpage .
         ?webpage ?webpageP ?webpageO .
 } WHERE {
@@ -58,6 +59,10 @@ CONSTRUCT {
         ?s vivo:mailingAddress ?address .
         ?address ?addressP ?addressO
     } 
+    UNION {
+        ?s vivo:mailingAddress ?address .
+        ?addressS ?addressQ ?address 
+    }
     UNION {
         ?s vivo:webpage ?webpage 
     }

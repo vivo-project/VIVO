@@ -48,7 +48,7 @@ public class VivoInformationResourceContextNodeFields extends ContextNodeFields{
                         + "?uri core:relatedBy ?a . "
                         + "?a rdf:type core:Authorship ."
                         + "?a core:relates ?b ."
-                        + "?b rdf:type foaf:Person ."
+                        + "?b rdf:type foaf:Agent ."
                         + "?b rdfs:label ?ContextNodeProperty .}");
 
         /* features */
@@ -69,7 +69,7 @@ public class VivoInformationResourceContextNodeFields extends ContextNodeFields{
                         + "?uri core:relatedBy ?e . "
                         + "?e rdf:type core:Editorship  ."
                         + "?e core:relates ?i  ."
-                        + "?i rdf:type foaf:Person  ."
+                        + "?i rdf:type foaf:Agent ."
                         + "?i rdfs:label ?ContextNodeProperty  ."
                         + "}");
 

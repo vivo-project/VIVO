@@ -11,12 +11,15 @@ CONSTRUCT {
     _:address v:region ?addressState .
     _:address v:postalCode ?addressPostalCode .
     _:address v:country ?addressCountry .
+    _:address <http://purl.obolibrary.org/obo/RO_0001025> ?location .
+    ?location <http://purl.obolibrary.org/obo/RO_0001015> _:address .
 } WHERE {
     ?s vivo:mailingAddress ?address .
     OPTIONAL { ?address vivo:addressCity ?addressCity }
     OPTIONAL { ?address vivo:addressState ?addressState }
     OPTIONAL { ?address vivo:addressPostalCode ?addressPostalCode }
     OPTIONAL { ?address vivo:addressCountry ?addressCountry }
+    OPTIONAL { ?address vivo:hasGeographicLocation ?location }
     ?s arg:ARG_2000028 ?vcard .
     OPTIONAL {
         ?address vivo:address1 ?address1 .
