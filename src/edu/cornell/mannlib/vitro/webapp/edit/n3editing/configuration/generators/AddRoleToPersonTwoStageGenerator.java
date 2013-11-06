@@ -270,8 +270,7 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     	HashMap<String, List<String>> urisInScope = new HashMap<String, List<String>>();
     	
     	//Setting inverse role predicate
-    	//With ISF changes this will always be the same
-    	urisInScope.put("inverseRolePredicate", Arrays.asList(new String[]{"http://purl.obolibrary.org/obo/RO_0000052"}));    
+    	urisInScope.put("inverseRolePredicate", getInversePredicate(vreq));    
     	urisInScope.put("roleType", list( getRoleType() ) );
     	
     	//Uris in scope include subject, predicate, and object var

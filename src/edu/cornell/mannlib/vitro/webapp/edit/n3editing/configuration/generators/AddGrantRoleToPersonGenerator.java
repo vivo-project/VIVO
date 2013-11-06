@@ -271,9 +271,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	urisInScope.put("roleType", 
     			Arrays.asList(new String[]{getRoleType(vreq)}));
     	//Setting inverse role predicate
-    	// with ISF changes this will always be the same
-    	urisInScope.put("inverseRolePredicate", Arrays.asList(new String[]{"http://purl.obolibrary.org/obo/RO_0000052"}));
-    
+        urisInScope.put("inverseRolePredicate", getInversePredicate(vreq));
     	editConfiguration.setUrisInScope(urisInScope);
     	//Uris in scope include subject, predicate, and object var
     	//literals in scope empty initially, usually populated by code in prepare for update
