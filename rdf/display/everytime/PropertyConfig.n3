@@ -893,6 +893,20 @@ local:awardReceiptsAwardForConfig a :ObjectPropertyDisplayConfig ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
+local:addressLocationContext a :ConfigContext ;
+    :hasConfiguration local:addressLocationConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ;
+    :qualifiedByDomain      <http://www.w3.org/2006/vcard/ns#Address> ;
+    :qualifiedBy      vivo:GeographicLocation .
+
+local:addressLocationConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "has geographic location" ;
+    vitro:displayRankAnnot 2;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGrouplocation> .
+
 ### roles using the BFO_0000055 property ###
 
 local:bfo_0000055Context a :ConfigContext ;
