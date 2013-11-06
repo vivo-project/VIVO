@@ -13,7 +13,6 @@ import com.hp.hpl.jena.query.DatasetFactory;
 import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.RDFServiceUtils;
-import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.CalculateParameters;
 import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.DocumentModifier;
 import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.ExcludeBasedOnNamespace;
 import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.SearchIndexExcluder;
