@@ -1774,9 +1774,6 @@ vivo:hasGoverningAuthority
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean .
 
-obo:ERO_0000715
-      rdfs:label "Risk Management"@en-US .
-
 vcard:additionalName
       rdfs:label "additional name"@en-US .
 
@@ -2798,7 +2795,11 @@ vivo:GraduateAdvisingRelationship
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:RO_0000052
-      rdfs:label "inheres in"@en-US .
+      rdfs:label "inheres in"@en-US ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
 obo:OBI_0000299
       rdfs:label "has specified output"@en-US .
@@ -5568,9 +5569,6 @@ geo:countryAreaUnit
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
-obo:ERO_0000742
-      rdfs:label "Research Electronic Datacapture"@en-US .
-
 vcard:geo
       rdfs:label "geo"@en-US .
 
@@ -6053,7 +6051,11 @@ obo:RO_0001018
       rdfs:label "contained in"@en-US .
 
 obo:ERO_0000033
-      rdfs:label "has expertise"@en-US .
+      rdfs:label "has expertise in technique"@en-US ;
+      vitro:selectFromExistingAnnot
+              "true"^^xsd:boolean ;
+      vitro:offerCreateNewOptionAnnot
+              "true"^^xsd:boolean .
 
 bibo:peerReviewed
       rdfs:label "peer reviewed"@en-US .
