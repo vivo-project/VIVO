@@ -3,15 +3,19 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 CONSTRUCT {
      ?grant ?property ?object .
-     ?investigatorRole core:roleContributesTo ?grant .
+     ?investigatorRole core:relatedBy ?grant .
 } WHERE {
-    {
-      {PERSON_URI core:hasPrincipalInvestigatorRole ?investigatorRole }
-        union
-      {PERSON_URI core:hasCo-PrincipalInvestigatorRole ?investigatorRole }   
+     {
+       { PERSON_URI core:relatedBy ?investigatorRole .
+         ?investigatorRole a core:PrincipalInvestigatorRole
+       }
+         union
+       { PERSON_URI core:relatedBy ?investigatorRole .
+         ?investigatorRole a core:CoPrincipalInvestigatorRole
+       }   
      }
      
-     ?investigatorRole core:roleContributesTo ?grant .
+     ?investigatorRole core:relatedBy ?grant .
      ?grant a core:Grant .
      ?grant ?property ?object 
 }

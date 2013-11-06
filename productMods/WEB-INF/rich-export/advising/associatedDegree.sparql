@@ -1,9 +1,11 @@
 PREFIX core: <http://vivoweb.org/ontology/core#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
 
 CONSTRUCT {
      ?degree ?property ?object .
 } WHERE {
-     PERSON_URI core:advisorIn ?advisingRelationship .
+     PERSON_URI core:relatedBy ?advisingRelationship .
+     ?advisingRelationship a core:AdvisingRelationship .
      ?advisingRelationship core:degreeCandidacy ?degree .
      ?degree ?property ?object .
 }

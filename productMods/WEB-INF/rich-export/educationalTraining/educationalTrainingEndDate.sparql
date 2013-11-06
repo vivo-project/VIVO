@@ -1,10 +1,12 @@
 PREFIX core: <http://vivoweb.org/ontology/core#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
 
 CONSTRUCT {
      ?dateTimeInterval core:end ?date .
      ?date ?property ?object .
 } WHERE {
-     PERSON_URI core:educationalTraining ?educationalTraining . 
+     PERSON_URI obo:RO_0000056 ?educationalTraining . 
+     ?educationalTraining a core:EducationalProcess . 
      ?educationalTraining core:dateTimeInterval ?dateTimeInterval .
      ?dateTimeInterval core:end ?date .
      ?date ?property ?object .

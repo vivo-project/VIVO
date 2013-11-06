@@ -1,9 +1,11 @@
 PREFIX core: <http://vivoweb.org/ontology/core#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
 
 CONSTRUCT {
      ?course ?property ?object .
 } WHERE {
-     PERSON_URI core:hasTeacherRole ?teacherRole .
-     ?teacherRole core:roleRealizedIn ?course .
+     PERSON_URI obo:RO_0000053 ?teacherRole .
+     ?teacherRole a core:TeacherRole .
+     ?teacherRole obo:BFO_0000054  ?course .
      ?course ?property ?object .
 }
