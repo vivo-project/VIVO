@@ -5,9 +5,8 @@ package edu.cornell.mannlib.vitro.webapp.search.indexing;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hp.hpl.jena.ontology.OntModel;
-
 import edu.cornell.mannlib.vitro.webapp.dao.IndividualDao;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.search.beans.StatementToURIsToUpdate;
 
 /**
@@ -16,12 +15,12 @@ import edu.cornell.mannlib.vitro.webapp.search.beans.StatementToURIsToUpdate;
  */
 public class AdditionalUriFinders {
 
-	public static List<StatementToURIsToUpdate> getList(OntModel jenaOntModel,
+	public static List<StatementToURIsToUpdate> getList(RDFService rdfService,
 			IndividualDao indDao) {
 		List<StatementToURIsToUpdate> uriFinders = new ArrayList<>();
 		uriFinders.add(new AdditionalURIsForDataProperties());
-		uriFinders.add(new AdditionalURIsForObjectProperties(jenaOntModel));
-		uriFinders.add(new AdditionalURIsForContextNodes(jenaOntModel));
+		uriFinders.add(new AdditionalURIsForObjectProperties(rdfService));
+		uriFinders.add(new AdditionalURIsForContextNodes(rdfService));
 		uriFinders.add(new AdditionalURIsForTypeStatements());
 		uriFinders.add(new URIsForClassGroupChange(indDao));
 		return uriFinders;
