@@ -41,7 +41,7 @@ local:organizationForPositionConfig a :ObjectPropertyDisplayConfig ;
     :displayName "people" ;
     :listViewConfigFile "listViewConfig-organizationForPosition.xml"^^xsd:string ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> ;
-    vitro:displayRankAnnot 15;
+    vitro:displayRankAnnot 10;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.OrganizationHasPositionHistoryGenerator"^^xsd:string .
@@ -472,14 +472,14 @@ local:mailingAddressConfig a :ObjectPropertyDisplayConfig ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.SubjectHasMailingAddressGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
 
-local:mailingAddressContext a :ConfigContext ;
-    :hasConfiguration local:mailingAddressConfig ;
+local:mailingAddressOrgContext a :ConfigContext ;
+    :hasConfiguration local:mailingAddressOrgConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
     :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
     :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
     :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Address> .
 
-local:mailingAddressConfig a :ObjectPropertyDisplayConfig ;
+local:mailingAddressOrgConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-mailingAddress.xml"^^xsd:string ;
     :displayName "mailing address" ;
     vitro:displayRankAnnot 80;
@@ -681,6 +681,34 @@ local:preferredTitleConfig a :ObjectPropertyDisplayConfig ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
 
 ### properties using default editing form ##
+
+local:hasSubOrganizationContext a :ConfigContext ;
+    :hasConfiguration local:hasSubOrganizationConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000051> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
+
+local:hasSubOrganizationConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
+    :displayName "has sub-organization" ;
+    vitro:displayRankAnnot 15;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
+
+local:subOrganizationWithinContext a :ConfigContext ;
+    :hasConfiguration local:subOrganizationWithinConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
+
+local:subOrganizationWithinConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
+    :displayName "organization within" ;
+    vitro:displayRankAnnot 20;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
 
 local:eventWithinContext a :ConfigContext ;
     :hasConfiguration local:eventWithinConfig ;
