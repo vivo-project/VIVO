@@ -14,4 +14,8 @@ CONSTRUCT {
     { ?org vivo:currentlyHeadedBy ?person 
       FILTER NOT EXISTS { ?person vivo:currentlyHeadOf ?org }
     }
+    FILTER NOT EXISTS {
+        ?person <http://purl.obolibrary.org/obo/RO_0000053> ?leaderRoleNode .
+        ?leaderRoleNode vivo:roleContributesTo ?org .
+    }
 }

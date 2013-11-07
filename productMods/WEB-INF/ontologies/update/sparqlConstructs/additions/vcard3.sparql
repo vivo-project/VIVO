@@ -8,6 +8,9 @@ CONSTRUCT {
     _:email a v:Email .
     _:email v:email ?email .
 } WHERE {
+    ?s vivo:email ?email .
     ?s arg:ARG_2000028 ?vcard .
-    ?s vivo:email ?email
+    FILTER NOT EXISTS {
+        ?vcard v:hasEmail ?emailnode
+    }
 }

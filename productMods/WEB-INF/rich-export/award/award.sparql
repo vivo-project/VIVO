@@ -3,7 +3,9 @@ PREFIX core: <http://vivoweb.org/ontology/core#>
 CONSTRUCT {
      ?award ?property ?object .
 } WHERE {
-     PERSON_URI core:awardOrHonor ?awardReceipt .
-     ?awardReceipt core:receiptOf ?award . 
+     PERSON_URI core:relatedBy ?awardReceipt .
+     ?awardReceipt a core:AwardReceipt .
+     ?awardReceipt core:relates ?award . 
+     ?award a core:Award .
      ?award ?property ?object .
 }

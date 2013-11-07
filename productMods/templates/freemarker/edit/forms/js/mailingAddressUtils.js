@@ -10,6 +10,8 @@ var mailingAddressUtils = {
         if ( editMode != "add" ) {
             this.setStreetAddressDisplayFields();
         }
+        
+        this.setAddressFieldsIfErrors();
     },
 
     initObjectReferences: function() {
@@ -18,7 +20,14 @@ var mailingAddressUtils = {
         this.street1 = $('#streetAddressOne');
         this.street2 = $('#streetAddressTwo');
         this.streetAddress = $('#streetAddress');
+        this.errorSection = $('section#error-alert');
 
+    },
+    
+    setAddressFieldsIfErrors: function() {
+      if ( this.errorSection.length ) {
+          mailingAddressUtils.setStreetAddressDisplayFields();
+      }
     },
     
     bindEventListeners: function() {

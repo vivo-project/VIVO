@@ -559,27 +559,6 @@
     
 
 
-    <!-- http://vivoweb.org/ontology/core#AcademicDepartment -->
-
-    <owl:Class rdf:about="http://vivoweb.org/ontology/core#AcademicDepartment">
-
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#offers"/>
-                <owl:someValuesFrom rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#offers"/>
-                <owl:someValuesFrom rdf:resource="http://vivoweb.org/ontology/core#Course"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
-
 
     <!-- http://vivoweb.org/ontology/core#AdvisingRelationship -->
 
@@ -687,23 +666,6 @@
     
 
 
-
-    <!-- http://vivoweb.org/ontology/core#College -->
-
-    <owl:Class rdf:about="http://vivoweb.org/ontology/core#College">
-
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#offers"/>
-                <owl:someValuesFrom rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
-
-
     <!-- http://vivoweb.org/ontology/core#ConferencePaper -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#ConferencePaper">
@@ -773,7 +735,7 @@
     
 
 
-    <!-- http://vivoweb.org/ontology/core#EducationalTraining -->
+    <!-- http://vivoweb.org/ontology/core#EducationalProcess -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#EducationalProcess">
 
@@ -947,21 +909,6 @@
     </owl:Class>
     
 
-
-    <!-- http://vivoweb.org/ontology/core#Laboratory -->
-
-    <owl:Class rdf:about="http://vivoweb.org/ontology/core#Laboratory">
-
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#offers"/>
-                <owl:someValuesFrom rdf:resource="http://vivoweb.org/ontology/core#Service"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
     <!-- http://vivoweb.org/ontology/core#Position -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Position">
@@ -1039,19 +986,6 @@
     </owl:Class>
     
 
-
-    <!-- http://vivoweb.org/ontology/core#University -->
-
-    <owl:Class rdf:about="http://vivoweb.org/ontology/core#University">
-
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#offers"/>
-                <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
-    
 
 
     <!-- http://vivoweb.org/ontology/core#WorkingPaper -->

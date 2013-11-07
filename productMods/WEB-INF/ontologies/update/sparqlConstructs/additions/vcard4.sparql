@@ -9,6 +9,10 @@ CONSTRUCT {
     _:primaryEmail a v:Work .
     _:primaryEmail v:email ?primaryEmail . 
 } WHERE {
+     ?s vivo:primaryEmail ?primaryEmail .
      ?s arg:ARG_2000028 ?vcard .
-     ?s vivo:primaryEmail ?primaryEmail 
+     FILTER NOT EXISTS {
+         ?vcard v:hasEmail ?email .
+         ?email a v:Work .
+     }
 }

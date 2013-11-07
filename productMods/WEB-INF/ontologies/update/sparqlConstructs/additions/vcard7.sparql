@@ -9,6 +9,10 @@ CONSTRUCT {
     _:fax a v:Fax.
     _:fax v:telephone ?faxNumber . 
 } WHERE {
+    ?s vivo:faxNumber ?faxNumber .
     ?s arg:ARG_2000028 ?vcard .
-    ?s vivo:faxNumber ?faxNumber
+    FILTER NOT EXISTS {
+        ?vcard v:hasTelephone ?faxNode .
+        ?faxNode a v:Fax .
+    }
 }

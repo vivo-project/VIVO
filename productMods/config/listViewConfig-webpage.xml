@@ -23,8 +23,8 @@
             OPTIONAL { ?link vcard:url ?url }
             OPTIONAL { ?link core:rank ?rank }
         <critical-data-required>
-        FILTER ( bound(?url) )    
-        </critical-data-required>
+        FILTER ( bound(?link) )    
+        </critical-data-required>  
         } ORDER BY ?rank ?label
     </query-select>
 

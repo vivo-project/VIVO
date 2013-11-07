@@ -27,46 +27,24 @@ import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
     Form for adding an educational attainment to an individual
 
     Classes: 
-    core:EducationalTraining - primary new individual being created
+    core:EducationalProcess - primary new individual being created
     foaf:Person - existing individual
     foaf:Organization - new or existing individual
-    core:AcademicdegreeType - existing individual
+    core:AcademicDegree - existing individual
+    core:AwardedDegree - new or existing individual
     
-    Data properties of EducationalTraining:
-    core:majorField
-    core:departmentOrSchool
-    core:supplementalInformation
-    
-    Object properties (domain : range)
-    
-    core:educationalTraining (Person : EducationalTraining) - inverse of core:educationalTrainingOf
-    core:educationalTrainingOf (EducationalTraining : Person) - inverse of core:educationalTraining
-    
-    core:degreeTypeEarned (EducationalTraining : AcademicdegreeType) - inverse of core:degreeTypeOutcomeOf
-    core:degreeTypeOutcomeOf (AcademicdegreeType : EducationalTraining) - inverse of core:degreeTypeEarned
-    
-    core:organizationGrantingdegreeType (EducationalTraining : Organization) - no inverse
-    
-    Future version
-    --------------
-    Classes:
-    core:DateTimeValue
-    core:DateTimeValuePrecision
-    Object properties:
-    core:dateTimeValue (EducationalTraining : DateTimeValue)
-    core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 
    
     There are 4 modes that this form can be in: 
      1.  Add, there is a subject and a predicate but no position and nothing else. 
            
      2. normal edit where everything should already be filled out.  There is a subject, a object and an individual on
-        the other end of the object's core:trainingAtOrganization stmt. 
+        the other end of the object's relationship. 
      
      3. Repair a bad role node.  There is a subject, prediate and object but there is no individual on the 
-        other end of the object's core:trainingAtOrganization stmt.  This should be similar to an add but the form should be expanded.
+        other end of the object's  relationship.  This should be similar to an add but the form should be expanded.
         
-     4. Really bad node. multiple core:trainingAtOrganization statements.   
+     4. Really bad node. multiple statements on the other end of the object's  relationship.
 
  * @author bdc34
  *

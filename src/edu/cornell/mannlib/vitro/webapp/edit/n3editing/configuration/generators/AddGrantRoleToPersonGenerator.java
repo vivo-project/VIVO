@@ -39,12 +39,6 @@ import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
  *  Custom form for adding a grant to an person for the predicates hasCo-PrincipalInvestigatorRole
      and hasPrincipalInvestigatorRole.
      
-This is intended to create a set of statements like:
-
-?person  core:hasPrincipalInvestigatorRole ?newRole.
-?newRole rdf:type core:PrincipalInvestigatorRole ;
-         core:relatedRole ?someGrant . 
-     
  *
  */
 public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator {
@@ -277,8 +271,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	urisInScope.put("roleType", 
     			Arrays.asList(new String[]{getRoleType(vreq)}));
     	//Setting inverse role predicate
-    	urisInScope.put("inverseRolePredicate", getInversePredicate(vreq));
-    
+        urisInScope.put("inverseRolePredicate", getInversePredicate(vreq));
     	editConfiguration.setUrisInScope(urisInScope);
     	//Uris in scope include subject, predicate, and object var
     	//literals in scope empty initially, usually populated by code in prepare for update
@@ -664,12 +657,12 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 	//Some values will have a default value
 	//grantToRolePredicate
 	public String getDefaultgrantToRolePredicate() {
-		return "http://vivoweb.org/ontology/core#relatedRole";
+		return "http://vivoweb.org/ontology/core#relates";
 	}
 	
 	//roleToGrantPredicate
 	public String getDefaultroleToGrantPredicate() {
-		return "http://vivoweb.org/ontology/core#roleIn";
+		return "http://purl.obolibrary.org/obo/BFO_0000054";
 		
 	}
 	

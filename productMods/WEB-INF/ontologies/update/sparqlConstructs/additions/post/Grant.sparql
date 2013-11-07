@@ -7,6 +7,7 @@ CONSTRUCT {
     ?grant vivo:relates ?agent
 } WHERE {
     ?agent <http://purl.obolibrary.org/obo/RO_0000053> ?role .
-    ?role vivo:relatedBy ?grant
+    ?role vivo:relatedBy ?grant .
+    ?grant a vivo:Grant .
     FILTER NOT EXISTS { ?grant vivo:relates ?agent } 
 }

@@ -6,10 +6,10 @@ CONSTRUCT {
     ?educationalProcess <http://purl.obolibrary.org/obo/BFO_0000055> ?role .
     ?role <http://purl.obolibrary.org/obo/BFO_0000054> ?educationalProcess .
 } WHERE {
+    ?educationalProcess vivo:contributingAdvising ?advising .
     ?person <http://purl.obolibrary.org/obo/RO_0000056> ?educationalProcess .
     ?person a foaf:Person .
     ?educationalProcess a vivo:EducationalProcess .
-    ?educationalProcess vivo:contributingAdvising ?advising .
     ?advising vivo:relates ?role .
     ?role a <http://purl.obolibrary.org/obo/BFO_0000023> .
 }

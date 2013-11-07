@@ -1,9 +1,12 @@
 PREFIX core: <http://vivoweb.org/ontology/core#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 CONSTRUCT {
      ?organization ?property ?object .
 } WHERE {
-     PERSON_URI core:awardOrHonor ?awardReceipt .
-     ?awardReceipt core:awardConferredBy ?organization . 
+     PERSON_URI core:relatedBy ?awardReceipt .
+     ?awardReceipt a core:AwardReceipt .
+     ?awardReceipt core:assignedBy ?organization . 
+     ?organization a foaf:Organization .
      ?organization ?property ?object .
 }

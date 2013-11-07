@@ -14,4 +14,8 @@ CONSTRUCT {
      { ?org vivo:hasCurrentMember ?person 
        FILTER NOT EXISTS { ?person vivo:currentMemberOf ?org }
      }
+     FILTER NOT EXISTS {
+         ?person <http://purl.obolibrary.org/obo/RO_0000053> ?memberRoleNode .
+         ?memberRoleNode vivo:roleContributesTo ?org .
+     }
 }

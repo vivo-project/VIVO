@@ -204,17 +204,3 @@ var urlsBase = "${urls.base}";
        -->
     </section>
 </#macro>
-
-<#-- retrieves a count, the number of researchers with a geographic focus, -->
-<#-- and saves it as a js variable to be used by the homePageMaps.js file  -->
-<#macro getGeoResearcherCount>
-<script>
- 
-<#if researcherCountDG?has_content>
-    <#assign theCount = researcherCountDG[0].count />
-<#else>
-     <#assign theCount = 0 />
-</#if>
-var geoResearcherCount = ${theCount};
-</script>
-</#macro>

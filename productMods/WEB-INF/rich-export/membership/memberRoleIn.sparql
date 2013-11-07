@@ -1,15 +1,11 @@
 PREFIX core: <http://vivoweb.org/ontology/core#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
 
 CONSTRUCT {
      ?endeavor ?property ?object .
 } WHERE {
-     PERSON_URI core:hasMemberRole ?memberRole .
-     
-     {
-       {?memberRole core:roleRealizedIn ?endeavor }
-          union
-       {?memberRole core:roleContributesTo ?endeavor }
-     }
-           
+     PERSON_URI obo:RO_0000053 ?memberRole .
+     ?memberRole a core:MemberRole .
+     ?memberRole core:roleContributesTo ?endeavor .
      ?endeavor ?property ?object .
 }

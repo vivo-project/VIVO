@@ -15,45 +15,6 @@
     xmlns:rdfs="&rdfs;"
     xmlns:vitro="&vitro;">
 
-    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#authorInAuthorship">
-        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-authorInAuthorship.xml</display:listViewConfigFile>
-    </rdf:Description>
-    
-    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#educationalTraining">
-        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-educationalTraining.xml</display:listViewConfigFile>
-    </rdf:Description>
-
-    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#informationResourceInAuthorship">
-        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-informationResourceInAuthorship.xml</display:listViewConfigFile>
-    </rdf:Description>
-    
-    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#personInPosition">
-        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-personInPosition.xml</display:listViewConfigFile>
-    </rdf:Description>
-    
-    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#organizationForPosition">
-        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-organizationForPosition.xml</display:listViewConfigFile>
-    </rdf:Description>
-    
-    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#organizationForTraining">
-        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-organizationForTraining.xml</display:listViewConfigFile>
-    </rdf:Description>
-    
-    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#mailingAddress">
-        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-mailingAddress.xml</display:listViewConfigFile>
-    </rdf:Description>
-
-    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#awardOrHonor">
-        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-awardOrHonor.xml</display:listViewConfigFile>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#advisorIn">
-        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-advisorIn.xml</display:listViewConfigFile>
-    </rdf:Description>
-
-    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasRole">
-        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasRole.xml</display:listViewConfigFile>
-    </rdf:Description>
-    
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#researchAreaOf">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-researchAreaOf.xml</display:listViewConfigFile>
     </rdf:Description>

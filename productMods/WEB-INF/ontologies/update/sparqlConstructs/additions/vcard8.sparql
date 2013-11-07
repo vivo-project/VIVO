@@ -11,13 +11,16 @@ CONSTRUCT {
     _:address v:region ?addressState .
     _:address v:postalCode ?addressPostalCode .
     _:address v:country ?addressCountry .
+    _:address <http://purl.obolibrary.org/obo/RO_0001025> ?location .
+    ?location <http://purl.obolibrary.org/obo/RO_0001015> _:address .
 } WHERE {
-    ?s arg:ARG_2000028 ?vcard .
     ?s vivo:mailingAddress ?address .
-    ?address vivo:addressCity ?addressCity .
-    ?address vivo:addressState ?addressState .
-    ?address vivo:addressCountry ?addressCountry .
-    ?address vivo:addressPostalCode ?addressPostalCode .
+    OPTIONAL { ?address vivo:addressCity ?addressCity }
+    OPTIONAL { ?address vivo:addressState ?addressState }
+    OPTIONAL { ?address vivo:addressPostalCode ?addressPostalCode }
+    OPTIONAL { ?address vivo:addressCountry ?addressCountry }
+    OPTIONAL { ?address vivo:hasGeographicLocation ?location }
+    ?s arg:ARG_2000028 ?vcard .
     OPTIONAL {
         ?address vivo:address1 ?address1 .
         ?address vivo:address2 ?address2 .
@@ -33,5 +36,8 @@ CONSTRUCT {
     OPTIONAL {
         ?address vivo:address1 ?address1
         BIND(?address1 as ?streetAddress)
+    } 
+    FILTER NOT EXISTS {
+        ?vcard v:hasAddress ?addressNode
     }
 }
