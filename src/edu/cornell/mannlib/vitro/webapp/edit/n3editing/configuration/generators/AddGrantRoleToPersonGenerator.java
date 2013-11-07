@@ -202,6 +202,8 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	String editString = getPrefixesString();
     	editString += "?role <" + getRoleToGrantPredicate(vreq) + "> ?grant .";
     	editString += "?grant a core:Grant . ";
+    	editString += "?person core:relatedBy ?grant . "; 
+    	editString += "?grant core:relates ?person . "; 
     	editString += "?grant <" + getGrantToRolePredicate(vreq) + "> ?role .";
     	editString += "?grant <" + RDFS.label.getURI() + "> ?grantLabel .";
     	return editString;
@@ -209,6 +211,8 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 	
 	public String getN3ForExistingGrant(VitroRequest vreq) {
     	String editString = getPrefixesString();
+    	editString += "?person core:relatedBy ?existingGrant . "; 
+    	editString += "?existingGrant core:relates ?person . "; 
     	editString += "?role <" + getRoleToGrantPredicate(vreq) + "> ?existingGrant . "; 
     	editString += "?existingGrant <" + getGrantToRolePredicate(vreq) + "> ?role .";
     	return editString;
