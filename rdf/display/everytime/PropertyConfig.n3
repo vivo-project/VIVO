@@ -305,7 +305,7 @@ local:awardOrHonorContext a :ConfigContext ;
     :hasConfiguration local:awardOrHonorConfig ;
     :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
     :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
-    :qualifiedBy      <http://vivoweb.org/ontology/core#AwardorHonorReceipt> .
+    :qualifiedBy      <http://vivoweb.org/ontology/core#AwardReceipt> .
 
 local:awardOrHonorConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-awardOrHonor.xml"^^xsd:string ;
