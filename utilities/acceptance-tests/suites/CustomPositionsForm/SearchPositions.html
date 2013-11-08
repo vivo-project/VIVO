@@ -40,42 +40,17 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>lecturer - VIVO Search Results</td>
+	<td>Search for 'lecturer'</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Search results for 'lecturer'</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=people</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=organizations</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Carroll College</td>
+	<td>Search for 'lecturer'</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>College</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Assistant Professor</td>
+	<td>No matching results.</td>
 	<td></td>
 </tr>
 <!--Search for professor, which should bring up Assistant Professor and Professor-->
@@ -105,38 +80,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=organizations</td>
+	<td>verifyTextPresent</td>
+	<td>Faculty, Jane Assistant Professor</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Assistant Professor</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Carroll University</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>University</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Cornell University</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>University</td>
 	<td></td>
 </tr>
 <!--Search for Carroll, which should bring up 2 organizations-->
@@ -162,12 +112,12 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=people</td>
+	<td>link=organizations</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=organizations</td>
+	<td>verifyTextPresent</td>
+	<td>Carroll College College</td>
 	<td></td>
 </tr>
 <tr>
@@ -177,27 +127,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>College</td>
+	<td>Carroll University University</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Carroll University</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>University</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Assistant Professor</td>
 	<td></td>
 </tr>
 <!--Link to Carroll College to verify Jane Faculty is not listed-->
@@ -244,12 +179,12 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=people</td>
+	<td>link=organizations</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=organizations</td>
+	<td>verifyTextPresent</td>
+	<td>Carroll University University</td>
 	<td></td>
 </tr>
 <tr>
@@ -259,17 +194,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>University</td>
+	<td>Cornell University University</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Carroll University</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>University</td>
 	<td></td>
 </tr>
 <!--Make sure Jane Faculty is associated with Carroll and Cornell-->
@@ -329,13 +259,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Faculty, Jane</td>
+	<td>verifyTextPresent</td>
+	<td>Faculty, Jane , Professor 1986 -</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Faculty, Jane, Professor 1986 -</td>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty, Jane</td>
 	<td></td>
 </tr>
 <!--Go to home page-->

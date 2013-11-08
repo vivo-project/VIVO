@@ -92,8 +92,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>xpath=(//img[@alt='add'])[23]</td>
+	<td>xpath=(//img[@alt='add'])[24]</td>
 	<td></td>
 </tr>
 <tr>
@@ -154,7 +159,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>xpath=(//img[@alt='add'])[23]</td>
+	<td>xpath=(//img[@alt='add'])[24]</td>
 	<td></td>
 </tr>
 <tr>
@@ -275,7 +280,7 @@
 <!--Add a second advises, including all fields-->
 <tr>
 	<td>clickAndWait</td>
-	<td>xpath=(//img[@alt='add'])[23]</td>
+	<td>xpath=(//img[@alt='add'])[24]</td>
 	<td></td>
 </tr>
 <tr>
@@ -357,7 +362,7 @@
 <!--Add a third advises, exluding degree and end date-->
 <tr>
 	<td>clickAndWait</td>
-	<td>xpath=(//img[@alt='add'])[23]</td>
+	<td>xpath=(//img[@alt='add'])[24]</td>
 	<td></td>
 </tr>
 <tr>
@@ -403,12 +408,17 @@
 <!--Verify all 3 advises together-->
 <tr>
 	<td>verifyTextPresent</td>
-	<td>undergraduate advising relationship</td>
+	<td>faculty mentoring relationship</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Adams, Jeff, 2012 -</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Smith, Joe</td>
+	<td>link=Adams, Jeff</td>
 	<td></td>
 </tr>
 <tr>
@@ -428,17 +438,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>faculty mentoring relationship</td>
+	<td>undergraduate advising relationship</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Adams, Jeff, 2012 -</td>
+	<td>Smith, Joe</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Adams, Jeff</td>
+	<td>link=Smith, Joe</td>
 	<td></td>
 </tr>
 <!--Log out-->

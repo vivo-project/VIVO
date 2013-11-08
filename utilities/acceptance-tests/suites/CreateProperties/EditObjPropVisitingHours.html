@@ -104,13 +104,8 @@
 <!--Change Display Level to public and Display Tier to 1000-->
 <tr>
 	<td>select</td>
-	<td>HiddenFromDisplayBelowRoleLevelUsingRoleUri</td>
+	<td>name=HiddenFromDisplayBelowRoleLevelUsingRoleUri</td>
 	<td>label=public</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>DomainDisplayTier</td>
-	<td>1000</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -123,11 +118,6 @@
 	<td></td>
 </tr>
 <!--Verify that changes took place-->
-<tr>
-	<td>verifyTextPresent</td>
-	<td>property: 1000, inverse: -1</td>
-	<td></td>
-</tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>public</td>
