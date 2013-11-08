@@ -6,8 +6,9 @@ CONSTRUCT {
      ?date ?property ?object .
      ?precision ?property2 ?object2 .
 } WHERE {
-     PERSON_URI core:authorInAuthorship ?authorship . 
-     ?authorship core:linkedInformationResource ?patent .
+     PERSON_URI core:relatedBy ?authorship .
+     ?authorship a core:Authorship .
+     ?authorship core:relates ?patent .
      ?patent rdf:type bibo:Patent .
      ?patent core:dateFiled ?date .
      ?date ?property ?object .

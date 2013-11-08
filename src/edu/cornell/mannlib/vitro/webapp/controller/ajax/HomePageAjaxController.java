@@ -30,7 +30,11 @@ public class HomePageAjaxController extends VitroAjaxController {
 			String function = vreq.getParameter(PARAMETER_ACTION);
 			if ("getGeoFocusLocations".equals(function)) {
 				new GeoFocusMapLocations(this, vreq, resp).processRequest();
-			} else {
+			}
+			else if ("getGeoFocusResearcherCount".equals(function)) {
+			    new GeoFocusResearcherCount(this, vreq, resp).processRequest();
+			} 
+			else {
 				resp.getWriter().write("[]");
 			}
 		} catch (Exception e) {

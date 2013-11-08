@@ -34,11 +34,10 @@ edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdatePermissionSetUris
 
 edu.cornell.mannlib.vitro.webapp.servlet.setup.FileGraphSetup
 
-edu.cornell.mannlib.vitro.webapp.servlet.setup.SimpleReasonerSetup
-
 # Invokes process to perform updates to align with ontology changes if needed -->
-# Needs to run before submodels are attached and Pellet is set up -->
 edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdateKnowledgeBase
+
+edu.cornell.mannlib.vitro.webapp.servlet.setup.SimpleReasonerSetup
 
 # Must run after JenaDataSourceSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ThemeInfoSetup

@@ -28,7 +28,7 @@ RoleToActivityPredicate
 <#assign genericLabel = "${i18n().clinical_activity?capitalize}" />
 
 <#assign acMultipleTypes = "'true'" />
-<#assign acTypes = "{activity: 'http://vivoweb.org/ontology/core#Project,http://vivoweb.org/ontology/core#Service'}" />
+<#assign acTypes = "{activity: 'http://vivoweb.org/ontology/core#Project,http://purl.obolibrary.org/obo/ERO_0000005'}" />
 
 
 <#--Each of the two stage forms will include the form below-->

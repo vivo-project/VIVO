@@ -3,8 +3,10 @@ PREFIX core: <http://vivoweb.org/ontology/core#>
 CONSTRUCT {
      ?superOrganization ?property ?object .
 } WHERE {
-     PERSON_URI core:personInPosition ?position . 
-     ?position core:positionInOrganization ?organization .
-     ?organization core:subOrganizationWithin ?superOrganization .
+     PERSON_URI core:relatedBy ?position . 
+     ?position a core:Position .
+     ?position core:relates ?organization .
+     ?organization a foaf:Organization . 
+     ?organization obo:BFO_0000051 ?superOrganization .
      ?superOrganization ?property ?object .
 }

@@ -68,13 +68,19 @@
 
 <section id="personHasMailingAddress" role="region">        
     
-    <form id="personHasMailingAddress" class="customForm noIE67" action="${submitUrl}"  role="add/edit educational training">
+    <form id="personHasMailingAddress" class="customForm noIE67" action="${submitUrl}"  role="add/edit mailing address">
 
         <p>
-            <label for="streetAddress">${i18n().street_address} ${requiredHint}</label>
-            <input  size="50"  type="text" id="streetAddress" name="streetAddress" value="${streetAddressValue}" />
+            <label for="streetAddress">${i18n().street_address} 1 ${requiredHint}</label>
+            <input  size="40"  type="text" id="streetAddressOne" name="streetAddressOne" value="" />
         </p>
     
+        <p>
+            <label for="streetAddress">${i18n().street_address} 2 ${requiredHint}</label>
+            <input  size="40"  type="text" id="streetAddressTwo" name="streetAddressTwo" value="" />
+            <input  type="hidden" id="streetAddress" name="streetAddress" value="${streetAddressValue}" />
+        </p>
+
         <p>
             <label for="locality">${i18n().city_locality} ${requiredHint}</label>
             <input  size="40"  type="text" id="city" name="locality" value="${localityValue}" />
@@ -107,6 +113,12 @@
     </form>
 
 </section>
+
+<script type="text/javascript">
+ $(document).ready(function(){
+    mailingAddressUtils.onLoad('${editMode}');
+}); 
+</script>
  
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}
@@ -114,6 +126,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarke
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/extensions/String.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/mailingAddressUtils.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.bgiframe.pack.js"></script>')}
 

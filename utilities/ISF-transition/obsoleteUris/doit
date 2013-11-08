@@ -1,0 +1,7 @@
+ruby obsoleteUriChecker.rb /Users/jeb228/git/VIVO  \
+   ../../../productMods/WEB-INF/ontologies/update/diff.tab.txt \
+   vivo_known_exceptions.txt complete > scan_VIVO_maint_branch
+ruby obsoleteUriChecker.rb /Users/jeb228/git/Vitro  \
+   ../../../productMods/WEB-INF/ontologies/update/diff.tab.txt \
+   vivo_known_exceptions.txt complete > scan_Vitro_maint_branch
+

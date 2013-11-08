@@ -1,0 +1,2 @@
+ruby i18nChecker.rb '/Library/Tomcat/webapps/vivo/i18n/*.properties' complete
+ruby i18nChecker.rb '/Library/Tomcat/webapps/vivo/themes/wilma/i18n/*.properties' complete

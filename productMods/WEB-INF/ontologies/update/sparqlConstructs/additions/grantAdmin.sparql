@@ -16,4 +16,9 @@ CONSTRUCT {
     { ?grant vivo:administeredBy ?agent 
       FILTER NOT EXISTS { ?agent vivo:administers ?grant } 
     }
+    FILTER NOT EXISTS {
+        ?agent <http://purl.obolibrary.org/obo/RO_0000053> ?adminRoleNode .
+        ?adminRoleNode a vivo:AdministratorRole .
+        ?adminRoleNode vivo:relatedBy ?grant .
+    }
 }

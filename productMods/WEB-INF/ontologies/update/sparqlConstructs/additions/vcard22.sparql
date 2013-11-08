@@ -9,6 +9,9 @@ CONSTRUCT {
     _:title a v:Title .
     _:title v:title ?preferredTitle .
 } WHERE {
-     ?s arg:ARG_2000028 ?vcard .
      ?s <http://vivoweb.org/ontology/core#preferredTitle> ?preferredTitle .
+     ?s arg:ARG_2000028 ?vcard .
+     FILTER NOT EXISTS {
+         ?vcard v:hasTitle ?title
+     }
 }

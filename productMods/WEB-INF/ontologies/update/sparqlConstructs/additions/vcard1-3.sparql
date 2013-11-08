@@ -7,7 +7,7 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 CONSTRUCT {
     ?s arg:ARG_2000028 _:vcard .
     _:vcard arg:ARG_2000029 ?s .
-    _:vcard a v:Individual .
+    _:vcard a v:Kind .
 } WHERE {
     ?s vivo:webpage ?webpage 
     FILTER NOT EXISTS { ?s a foaf:Agent } 

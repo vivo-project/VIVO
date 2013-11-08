@@ -35,18 +35,16 @@
                     OPTIONAL { ?awardReceipt core:assignedBy ?assignedBy .
                                ?assignedBy rdfs:label ?assignedByLabel
                     }                
-                    OPTIONAL { ?awardReceipt core:dateTimeInterval ?dateTimeInterval 
-                                OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .
-                                           ?dateTimeStartValue core:dateTime ?dateTimeStart 
-                                         }
+                    OPTIONAL { ?awardReceipt core:dateTimeInterval ?dateTimeInterval .
+                               ?dateTimeInterval core:start ?dateTimeStartValue .
+                               ?dateTimeStartValue core:dateTime ?dateTimeStart 
                               }  
-                     OPTIONAL { ?awardReceipt core:dateTimeInterval ?dateTimeInterval 
-                                OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .
-                                           ?dateTimeEndValue core:dateTime ?dateTimeEnd
-                                         }
+                     OPTIONAL { ?awardReceipt core:dateTimeInterval ?dateTimeInterval .
+                                ?dateTimeInterval core:end ?dateTimeEndValue .
+                                ?dateTimeEndValue core:dateTime ?dateTimeEnd
                               }  
-                     OPTIONAL { ?awardReceipt core:dateTimeValue ?dateTimeValue 
-                                OPTIONAL { ?dateTimeValue core:dateTime ?dateTime }
+                     OPTIONAL { ?awardReceipt core:dateTimeValue ?dateTimeValue .
+                                ?dateTimeValue core:dateTime ?dateTime 
                               }  
                     }  ORDER BY  DESC(?dateTime) DESC(?dateTimeEnd)
   </query-select>

@@ -39,12 +39,6 @@ import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
  *  Custom form for adding a grant to an person for the predicates hasCo-PrincipalInvestigatorRole
      and hasPrincipalInvestigatorRole.
      
-This is intended to create a set of statements like:
-
-?person  core:hasPrincipalInvestigatorRole ?newRole.
-?newRole rdf:type core:PrincipalInvestigatorRole ;
-         core:relatedRole ?someGrant . 
-     
  *
  */
 public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator {
@@ -208,6 +202,8 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	String editString = getPrefixesString();
     	editString += "?role <" + getRoleToGrantPredicate(vreq) + "> ?grant .";
     	editString += "?grant a core:Grant . ";
+    	editString += "?person core:relatedBy ?grant . "; 
+    	editString += "?grant core:relates ?person . "; 
     	editString += "?grant <" + getGrantToRolePredicate(vreq) + "> ?role .";
     	editString += "?grant <" + RDFS.label.getURI() + "> ?grantLabel .";
     	return editString;
@@ -215,6 +211,8 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 	
 	public String getN3ForExistingGrant(VitroRequest vreq) {
     	String editString = getPrefixesString();
+    	editString += "?person core:relatedBy ?existingGrant . "; 
+    	editString += "?existingGrant core:relates ?person . "; 
     	editString += "?role <" + getRoleToGrantPredicate(vreq) + "> ?existingGrant . "; 
     	editString += "?existingGrant <" + getGrantToRolePredicate(vreq) + "> ?role .";
     	return editString;
@@ -277,8 +275,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	urisInScope.put("roleType", 
     			Arrays.asList(new String[]{getRoleType(vreq)}));
     	//Setting inverse role predicate
-    	urisInScope.put("inverseRolePredicate", getInversePredicate(vreq));
-    
+        urisInScope.put("inverseRolePredicate", getInversePredicate(vreq));
     	editConfiguration.setUrisInScope(urisInScope);
     	//Uris in scope include subject, predicate, and object var
     	//literals in scope empty initially, usually populated by code in prepare for update
@@ -664,12 +661,12 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 	//Some values will have a default value
 	//grantToRolePredicate
 	public String getDefaultgrantToRolePredicate() {
-		return "http://vivoweb.org/ontology/core#relatedRole";
+		return "http://vivoweb.org/ontology/core#relates";
 	}
 	
 	//roleToGrantPredicate
 	public String getDefaultroleToGrantPredicate() {
-		return "http://vivoweb.org/ontology/core#roleIn";
+		return "http://purl.obolibrary.org/obo/BFO_0000054";
 		
 	}
 	

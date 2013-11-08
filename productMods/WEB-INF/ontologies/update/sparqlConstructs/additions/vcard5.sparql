@@ -9,6 +9,9 @@ CONSTRUCT {
     _:telephone a v:Voice .
     _:telephone v:telephone ?phoneNumber .
 } WHERE {
+    ?s vivo:phoneNumber ?phoneNumber .
     ?s arg:ARG_2000028 ?vcard .
-    ?s vivo:phoneNumber ?phoneNumber 
+    FILTER NOT EXISTS {
+        ?vcard v:hasTelephone ?telephoneNode .
+    }
 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-select>    
+        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
+        PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX obo:   &lt;http://purl.obolibrary.org/obo/&gt;
+
+        SELECT DISTINCT ?administratorRole
+                        ?organization
+                        ?organizationLabel
+
+        WHERE {
+                    ?subject ?property ?administratorRole .
+                    ?administratorRole a core:AdministratorRole .
+                    OPTIONAL { ?administratorRole obo:RO_0000052 ?organization .
+                               ?organization a foaf:Organization .
+                               ?organization obo:RO_0000053 ?administratorRole .
+                               ?organization rdfs:label ?organizationLabel .
+                    }                
+        }  ORDER BY  ?organizationLabel
+  </query-select>
+    
+    <query-construct>
+        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
+        PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX obo:   &lt;http://purl.obolibrary.org/obo/&gt;
+
+            CONSTRUCT {
+                ?subject ?property ?administratorRole .
+                ?administratorRole a core:AdministratorRole .
+                ?administratorRole obo:RO_0000052 ?organization .
+                ?organization a foaf:Organization .
+                ?organization obo:RO_0000053 ?administratorRole .
+                ?organization rdfs:label ?organizationLabel .
+            } WHERE {
+            {
+                ?subject ?property ?administratorRole .
+                ?administratorRole a core:AdministratorRole .
+            } UNION {
+                ?subject ?property ?administratorRole .
+                ?administratorRole a core:AdministratorRole .
+                ?administratorRole obo:RO_0000052 ?organization .
+                ?organization a foaf:Organization .
+                ?organization obo:RO_0000053 ?administratorRole .
+                ?organization rdfs:label ?organizationLabel .
+            }
+        }
+    </query-construct>
+              
+    <template>propStatement-grantAdministeredBy.ftl</template>
+</list-view-config>

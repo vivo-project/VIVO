@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-select>    
+        PREFIX afn:   &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+        
+        SELECT DISTINCT <collated>?subclass</collated>
+                        # send the property to the template, since this view supports multiple role properties
+                        ?property
+                        ?role 
+                        ?roleLabel 
+                        ?activity ?activityName 
+                        ?activityLabel
+                        ?dateTimeStart ?dateTimeEnd 
+                        ?hideThis
+                        ?objectType
+        WHERE {                
+            ?subject ?property ?role .
+            ?role a ?objectType .
+            
+            OPTIONAL {  ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?activity .
+                        ?activity rdfs:label ?activityLabel
+                        
+                        <collated>
+                        ?activity vitro:mostSpecificType ?subclass   
+                        </collated>
+            }           
+            OPTIONAL { ?role rdfs:label ?roleLabel }
+            OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval .
+                       ?dateTimeInterval core:start ?dateTimeStartValue .
+                       ?dateTimeStartValue core:dateTime ?dateTimeStart 
+            }
+            OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval .
+                       ?dateTimeInterval core:end ?dateTimeEndValue .
+                       ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+            }
+        } ORDER BY <collated>?subclass</collated> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityLabel ?activityName
+    </query-select>
+    
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;  
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;          
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+        
+        CONSTRUCT {
+            ?subject ?property ?role .
+            ?role a ?objectType .
+            ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?activity .
+            ?activity vitro:mostSpecificType ?subclass .
+        } WHERE {
+            ?subject ?property ?role .
+            ?role a ?objectType .
+            ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?activity .
+            ?activity vitro:mostSpecificType ?subclass
+        }
+    </query-construct>
+    
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        CONSTRUCT { 
+            ?subject ?property ?role .
+            ?role ?roleProperty ?roleValue . 
+            ?activity rdfs:label ?activityName 
+        } WHERE {
+            {
+                ?subject ?property ?role .
+                ?role a ?objectType .
+            } UNION {
+                ?subject ?property ?role .
+                ?role a ?objectType .
+                ?role ?roleProperty ?roleValue 
+            } UNION {
+                ?subject ?property ?role .
+                ?role a ?objectType .
+                ?role core:relates ?activity . 
+                ?activity rdfs:label ?activityName 
+            } UNION {
+                ?subject ?property ?role .
+                ?role a ?objectType .
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?activity . 
+                ?activity rdfs:label ?activityName 
+            } UNION {
+                ?subject ?property ?role .
+                ?role a ?objectType .
+                ?role core:roleContributesTo ?activity .
+                ?activity rdfs:label ?activityName
+            }
+        } 
+    </query-construct>
+        
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?role .  
+            ?role a ?objectType .
+            ?role core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:start ?dateTimeStartValue .
+            ?dateTimeStartValue core:dateTime ?dateTimeStart 
+        } WHERE {
+            ?subject ?property ?role .  
+            ?role a ?objectType .
+            ?role core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:start ?dateTimeStartValue .
+            ?dateTimeStartValue core:dateTime ?dateTimeStart 
+        } 
+    </query-construct>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?role .  
+            ?role a ?objectType .
+            ?role core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:end ?dateTimeEndValue .
+            ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+        } WHERE {
+            ?subject ?property ?role .  
+            ?role a ?objectType .
+            ?role core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:end ?dateTimeEndValue .
+            ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+        } 
+    </query-construct>
+
+    <template>propStatement-hasRole.ftl</template>
+</list-view-config>
