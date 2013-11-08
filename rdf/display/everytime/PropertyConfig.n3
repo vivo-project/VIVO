@@ -41,6 +41,8 @@ local:organizationForPositionConfig a :ObjectPropertyDisplayConfig ;
     :displayName "people" ;
     :listViewConfigFile "listViewConfig-organizationForPosition.xml"^^xsd:string ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> ;
+    vitro:collateBySubclassAnnot
+              "true"^^xsd:boolean;
     vitro:displayRankAnnot 10;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
@@ -917,6 +919,20 @@ local:awardReceiptsAwardForConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
     :displayName "award or honor for" ;
     vitro:displayRankAnnot 2;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:awardOrHonorGivenContext a :ConfigContext ;
+    :hasConfiguration local:awardOrHonorGivenConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#assigns> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#AwardReceipt> .
+
+local:awardOrHonorGivenConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-awardOrHonorGiven.xml"^^xsd:string ;
+    :displayName "award or honor given" ;
+    vitro:displayRankAnnot 72;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
