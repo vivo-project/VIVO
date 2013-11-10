@@ -35,6 +35,7 @@ public class AddOutreachProviderRoleToPersonGenerator extends AddRoleToPersonTwo
             "http://vivoweb.org/ontology/core#CoreLaboratory","Core Laboratory",
             "http://vivoweb.org/ontology/core#Department","Department",
             "http://vivoweb.org/ontology/core#Division","Division",
+            "http://purl.org/NET/c4dm/event.owl#Event","Event",
             "http://vivoweb.org/ontology/core#ExtensionUnit","Extension Unit",
             "http://vivoweb.org/ontology/core#Foundation","Foundation",
             "http://vivoweb.org/ontology/core#FundingOrganization","Funding Organization",
