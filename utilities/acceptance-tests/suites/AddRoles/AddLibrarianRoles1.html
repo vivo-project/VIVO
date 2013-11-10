@@ -59,7 +59,7 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<!--Navigate to Jane Faculty-->
+<!--Navigate to Lily Librarian-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -159,6 +159,11 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Presented At</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Years of Participation</td>
 	<td></td>
 </tr>
@@ -211,6 +216,11 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Role in Presentation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Presented At</td>
 	<td></td>
 </tr>
 <tr>
@@ -272,6 +282,11 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Role in Presentation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Presented At</td>
 	<td></td>
 </tr>
 <tr>
@@ -479,6 +494,11 @@
 </tr>
 <tr>
 	<td>type</td>
+	<td>id=conference</td>
+	<td>USAIN Conference</td>
+</tr>
+<tr>
+	<td>type</td>
 	<td>startField-year</td>
 	<td>2003</td>
 </tr>
@@ -520,23 +540,38 @@
 </tr>
 <!--Verify presentations display-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[20]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>invited talk</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Animal Librarianship, Member of panel, USAIN Conference 2003</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Animal Librarianship</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Member of panel 2003</td>
+	<td>presentation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Researching Primates, Presenter 2009</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Researching Primates</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Presenter 2009</td>
 	<td></td>
 </tr>
 <!--Add service to the profession - college-->
@@ -547,7 +582,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=#serviceGroup &gt; article.property &gt; #RO_0000053 &gt; a.add-RO_0000053 &gt; img.add-individual</td>
+	<td>xpath=(//img[@alt='add'])[29]</td>
 	<td></td>
 </tr>
 <tr>
@@ -659,7 +694,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=#serviceGroup &gt; article.property &gt; #RO_0000053 &gt; a.add-RO_0000053 &gt; img.add-individual</td>
+	<td>xpath=(//img[@alt='add'])[29]</td>
 	<td></td>
 </tr>
 <tr>
@@ -770,13 +805,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Primates of the World</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyTextPresent</td>
-	<td>Board 2001 - 2003</td>
+	<td>Carroll College Consultant 2010 -</td>
 	<td></td>
 </tr>
 <tr>
@@ -786,7 +816,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Consultant 2010 -</td>
+	<td>Primates of the World Board 2001 - 2003</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primates of the World</td>
 	<td></td>
 </tr>
 <!--Add outreach and community service - committee-->
@@ -797,7 +832,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>xpath=(//img[@alt='add'])[29]</td>
+	<td>xpath=(//img[@alt='add'])[30]</td>
 	<td></td>
 </tr>
 <tr>
@@ -822,17 +857,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Committee Name</td>
+	<td>Organization Name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Role in Committee</td>
+	<td>Role in Organization</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Years of Participation in Committee</td>
+	<td>Years of Participation</td>
 	<td></td>
 </tr>
 <tr>
@@ -904,7 +939,7 @@
 <!--Add outreach and community service - event-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasOutreachProviderRole']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[30]</td>
 	<td></td>
 </tr>
 <tr>
@@ -925,21 +960,21 @@
 <tr>
 	<td>select</td>
 	<td>typeSelector</td>
-	<td>label=Event</td>
+	<td>label=Association</td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Event Name</td>
+	<td>Organization Name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Role in Event</td>
+	<td>Role in Organization</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Years of Participation in Event</td>
+	<td>Years of Participation</td>
 	<td></td>
 </tr>
 <tr>
@@ -1010,13 +1045,8 @@
 </tr>
 <!--Verify outreach and community service display-->
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Show Me the Primates!</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyTextPresent</td>
-	<td>Booth 2001</td>
+	<td>Librarians for the Better Treatment of Primates Chair 2009 -</td>
 	<td></td>
 </tr>
 <tr>
@@ -1026,7 +1056,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Chair 2009 -</td>
+	<td>Show Me the Primates! Booth 2001 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Show Me the Primates!</td>
 	<td></td>
 </tr>
 <!--Log out-->

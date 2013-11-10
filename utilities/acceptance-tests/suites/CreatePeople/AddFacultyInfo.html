@@ -458,17 +458,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>xpath=(//img[@alt='add'])[21]</td>
+	<td>xpath=(//img[@alt='add'])[22]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td></td>
 	<td></td>
 </tr>
 <tr>
@@ -563,47 +558,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='adviseeIn']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=offerCreate</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>Primates Foundation of America</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>xpath=(//img[@alt='add'])[29]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='awardOrHonor']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[30]</td>
 	<td></td>
 </tr>
 <tr>
@@ -733,7 +688,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>xpath=(//h3[@id='ARG_2000028']/a)[2]</td>
+	<td>xpath=(//img[@alt='add'])[33]</td>
 	<td></td>
 </tr>
 <tr>
@@ -743,7 +698,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=streetAddress</td>
+	<td>id=streetAddressOne</td>
 	<td>The Jungle</td>
 </tr>
 <tr>
@@ -916,11 +871,6 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
 <!--Test 4 new fields with Release 1.3-->
 <tr>
 	<td>clickAndWait</td>
@@ -980,6 +930,21 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>css=a.add-eligibleFor &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=typeOfNew</td>
+	<td>label=Credential (vivo)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
@@ -1237,7 +1202,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Librarian, Lily Lou Assistant Librarian</td>
+	<td>Librarian, Lily Lou&nbsp;&nbsp;Assistant Librarian</td>
 	<td></td>
 </tr>
 <!--No fields under PUBLICATIONS tab (that is a separate test suite)-->
@@ -1358,8 +1323,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>1234</td>
+	<td>verifyElementPresent</td>
+	<td>link=exact:file:///C:/xampp/1234</td>
 	<td></td>
 </tr>
 <tr>
@@ -1393,15 +1358,130 @@
 	<td>Apes</td>
 	<td></td>
 </tr>
-<!--Advisee In field missing in 1.6 RC 1-->
+<!--Check fields again under VIEW ALL tab-->
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Foundation</td>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[20]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Primates Foundation of America</td>
+	<td>link=Librarian, Lily Lou</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Librarian, Lily Lou&nbsp;&nbsp;Assistant Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>I study monkeys, of course.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Africa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>I teach monkeys to communicate.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>postdoc or fellow advising relationship</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Smith, Joe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>I travel the country teaching monkeys in zoos how to communicate.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Expert Association</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Licensed Primate Expert</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Monkey Trainer of the Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ms. Jane Elizabeth Faculty, III</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>607-244-4444</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>The Jungle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Congo City</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Congola State</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1234567890</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Democratic Republic of Congo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=exact:file:///C:/xampp/1234</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ABC123987</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>123456789</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=5678</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=USABC123456789</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Apes</td>
 	<td></td>
 </tr>
 <!--Log out-->
