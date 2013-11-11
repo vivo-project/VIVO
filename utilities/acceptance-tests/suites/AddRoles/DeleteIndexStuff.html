@@ -68,6 +68,16 @@
 <!--Verify what is to be deleted-->
 <tr>
 	<td>verifyTextPresent</td>
+	<td>activities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Project</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>courses</td>
 	<td></td>
 </tr>
@@ -78,37 +88,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>activities</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Agreement</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Grant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Project</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Service</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>events</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Event</td>
 	<td></td>
 </tr>
 <tr>
@@ -166,357 +156,17 @@
 	<td>Organization</td>
 	<td></td>
 </tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Grant</td>
+	<td></td>
+</tr>
 <!--Delete activities-->
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Agreement</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Agreement</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Habitats for Apes</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Habitats for Apes</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Edit this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value=&quot;Edit This Individual&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>_delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index of Contents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Agreement</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Agreement</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=NIH VIVO</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>NIH VIVO</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Edit this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value=&quot;Edit This Individual&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>_delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index of Contents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Agreement</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Agreement</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=NIH VIVO Too</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>NIH VIVO Too</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Edit this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value=&quot;Edit This Individual&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>_delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index of Contents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Agreement</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Agreement</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=VIVO Cornell Grant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Cornell Grant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Edit this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value=&quot;Edit This Individual&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>_delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index of Contents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Agreement</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Agreement</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=VIVO Cornell Grant Too</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Cornell Grant Too</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Edit this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value=&quot;Edit This Individual&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>_delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index of Contents</td>
-	<td></td>
-</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Project</td>
@@ -650,81 +300,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index of Contents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Service</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Service</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Ape Health Program</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Ape Health Program</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Edit this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value=&quot;Edit This Individual&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>_delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index of Contents</td>
 	<td></td>
 </tr>
 <!--Delete courses-->
@@ -1122,6 +697,76 @@
 <tr>
 	<td>click</td>
 	<td>_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=USAIN Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>USAIN Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=_delete</td>
 	<td></td>
 </tr>
 <tr>
@@ -1637,12 +1282,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Event</td>
+	<td>link=Association</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Event</td>
+	<td>Association</td>
 	<td></td>
 </tr>
 <tr>
@@ -1653,6 +1298,357 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Show Me the Primates!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value=&quot;Edit This Individual&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<!--Delete -->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Habitats for Apes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Habitats for Apes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value=&quot;Edit This Individual&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=NIH VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>NIH VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value=&quot;Edit This Individual&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=NIH VIVO Too</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>NIH VIVO Too</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value=&quot;Edit This Individual&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=VIVO Cornell Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Cornell Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value=&quot;Edit This Individual&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=VIVO Cornell Grant Too</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Cornell Grant Too</td>
 	<td></td>
 </tr>
 <tr>
