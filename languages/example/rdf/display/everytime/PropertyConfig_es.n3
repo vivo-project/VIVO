@@ -42,3 +42,5 @@
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasLeaderRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "jefe de"@es .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasMemberRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "miembro de"@es .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/personTelephoneConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "tel\u00E9fono"@es .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasSubOrganizationConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "tiene sub-organización"@es .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/subOrganizationWithinConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "organización dentro de"@es .
