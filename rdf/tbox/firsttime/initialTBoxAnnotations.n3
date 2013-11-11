@@ -5088,6 +5088,8 @@ vivo:termLabel
 
 skos:related
       rdfs:label "related"@en-US ;
+      vitro:customEntryFormAnnot
+              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddConceptThroughObjectPropertyGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
