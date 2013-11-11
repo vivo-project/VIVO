@@ -25,7 +25,7 @@
 
     <#if webpage?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
         <nav role="navigation">
-            <#local label = "Websites">  
+            <#local label = "${i18n().websites}">  
             <@p.addLinkWithLabel webpage editable label />           
             <#if webpage.statements?has_content> <#-- if there are any statements -->
                 <#include "individual-webpage.ftl" >

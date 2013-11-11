@@ -76,7 +76,7 @@
         </p>
     
         <p>
-            <label for="streetAddress">${i18n().street_address} 2 ${requiredHint}</label>
+            <label for="streetAddress">${i18n().street_address} 2</label>
             <input  size="40"  type="text" id="streetAddressTwo" name="streetAddressTwo" value="" />
             <input  type="hidden" id="streetAddress" name="streetAddress" value="${streetAddressValue}" />
         </p>

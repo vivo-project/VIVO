@@ -47,7 +47,8 @@ public class VivoISFAdvisingFields extends ContextNodeFields {
            " ?uri   core:relatedBy ?rel    . \n" +
            " ?rel   rdf:type       core:AdvisingRelationship   . \n" +
            " ?rel   core:relates   ?other  . \n" +
-           " ?other rdfs:label     ?result . \n" +           
+           " ?other rdfs:label     ?result . \n" + 
+           " FILTER( ?other != ?uri ) \n" +          
            "}";         
     }
     

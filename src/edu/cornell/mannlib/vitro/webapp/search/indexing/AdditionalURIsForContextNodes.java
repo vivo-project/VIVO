@@ -12,26 +12,21 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.hp.hpl.jena.ontology.OntModel;
-import com.hp.hpl.jena.query.Query;
-import com.hp.hpl.jena.query.QueryExecution;
-import com.hp.hpl.jena.query.QueryExecutionFactory;
-import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.QuerySolutionMap;
 import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.query.Syntax;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.rdf.model.Statement;
-import com.hp.hpl.jena.shared.Lock;
 
+import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.search.beans.StatementToURIsToUpdate;
 
 public class AdditionalURIsForContextNodes implements StatementToURIsToUpdate {
 
-    private OntModel model;
+    private final RDFService rdfService;
 	private Set<String> alreadyChecked;
 	private long accumulatedTime = 0;
 	
@@ -43,8 +38,8 @@ public class AdditionalURIsForContextNodes implements StatementToURIsToUpdate {
 	private Log log = LogFactory.getLog(AdditionalURIsForContextNodes.class);
     
     
-    public AdditionalURIsForContextNodes( OntModel jenaOntModel){
-        this.model = jenaOntModel; 
+    public AdditionalURIsForContextNodes( RDFService rdfService){
+        this.rdfService = rdfService;
     }
     
     @Override
@@ -93,42 +88,27 @@ public class AdditionalURIsForContextNodes implements StatementToURIsToUpdate {
     	
     	List<String> uriList = new ArrayList<String>();
 
-    	for(String query : queryList){
-    		
-    		//log.info("Executing query: "+ query);
-    		
-	        QuerySolutionMap initialBinding = new QuerySolutionMap();
-	        Resource uriResource = ResourceFactory.createResource(uri);        
-	        initialBinding.add("uri", uriResource);
-	        
-	        Query sparqlQuery = QueryFactory.create( query, Syntax.syntaxARQ);
-	        model.getLock().enterCriticalSection(Lock.READ);
-	        try{
-	            QueryExecution qExec = QueryExecutionFactory.create(sparqlQuery, model, initialBinding);
-	            try{                
-	                ResultSet results = qExec.execSelect();                
-	                while(results.hasNext()){                    
-	                    QuerySolution soln = results.nextSolution();                                   
-	                    Iterator<String> iter =  soln.varNames() ;
-	                    while( iter.hasNext()){
-	                        String name = iter.next();
-	                        RDFNode node = soln.get( name );
-	                        if( node != null ){
-	                        	uriList.add("" + node.toString());
-	                        }else{
-	                            log.debug(name + " is null");
-	                        }                        
-	                    }
-	                }
-	            }catch(Throwable t){
-	                    log.error(t,t);
-	            } finally{
-	                qExec.close();
-	            } 
-	        }finally{
-	            model.getLock().leaveCriticalSection();
-	        }
-    	}
+		for (String query : queryList) {
+			QuerySolutionMap initialBinding = new QuerySolutionMap();
+			Resource uriResource = ResourceFactory.createResource(uri);
+			initialBinding.add("uri", uriResource);
+
+			ResultSet results = QueryUtils.getQueryResults(query,
+					initialBinding, rdfService);
+			while (results.hasNext()) {
+				QuerySolution soln = results.nextSolution();
+				Iterator<String> iter = soln.varNames();
+				while (iter.hasNext()) {
+					String name = iter.next();
+					RDFNode node = soln.get(name);
+					if (node != null) {
+						uriList.add("" + node.toString());
+					} else {
+						log.debug(name + " is null");
+					}
+				}
+			}
+		}
         
     	if( log.isDebugEnabled() )
     	    log.debug( "additional uris for " + uri + " are " + uriList);
