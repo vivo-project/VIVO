@@ -3684,6 +3684,8 @@ vivo:hasPredecessorOrganization
               <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:offerCreateNewOptionAnnot
+              "true"^^xsd:boolean ;
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean .
 
@@ -5088,6 +5090,8 @@ vivo:termLabel
 
 skos:related
       rdfs:label "related"@en-US ;
+      vitro:customEntryFormAnnot
+              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddConceptThroughObjectPropertyGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot

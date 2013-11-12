@@ -12,11 +12,13 @@ import org.junit.Test;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
-import edu.cornell.mannlib.vitro.webapp.search.indexing.AdditionalURIsForContextNodes;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.jena.model.RDFServiceModel;
 
 
 public class AdditionalURIsForContextNodesTest {
 
+	private AdditionalURIsForContextNodes uriFinder;
+	
     @Test 
     public void testPositionChanges(){
         String n3 = 
@@ -59,12 +61,7 @@ public class AdditionalURIsForContextNodesTest {
         "<http://vivoweb.org/ontology/core#DateTimeInterval> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> . \n" +
         "<http://vivoweb.org/ontology/core#Department> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> . \n" ;
         
-        //make a test model with an person, an authorship context node and a book 
-        OntModel model = ModelFactory.createOntologyModel();
-        model.read( new StringReader(n3), null,  "N3");
-                
-        //make an AdditionalURIsForContextNodesTest object with that model
-        AdditionalURIsForContextNodes uriFinder = new AdditionalURIsForContextNodes( model );
+        populateModelAndCreateUriFinder(n3);
         
         //if the person changes then the org needs to be updated
         List<String> uris = uriFinder.findAdditionalURIsToIndex( "http://caruso-laptop.mannlib.cornell.edu:8090/vivo/individual/n932");       
@@ -107,21 +104,15 @@ public class AdditionalURIsForContextNodesTest {
         "      core:contributingRole <http://caruso-laptop.mannlib.cornell.edu:8090/vivo/individual/n2577> . \n" + 
         "      <http://vivo.scripps.edu/individual/n14979> a <http://xmlns.com/foaf/0.1/Person> , owl:Thing , <http://xmlns.com/foaf/0.1/Agent>   . \n"; 
         
-        
         //make a test model with an person, an authorship context node and a book 
-        OntModel model = ModelFactory.createOntologyModel();
-        model.read( new StringReader(n3), null,  "N3");
-       
-         
-        //make an AdditionalURIsForContextNodesTest object with that model
-        AdditionalURIsForContextNodes uriFinder = new AdditionalURIsForContextNodes( model );
+        populateModelAndCreateUriFinder(n3);
         
         //get additional uris for org
         List<String> uris = uriFinder.findAdditionalURIsToIndex( "http://caruso-laptop.mannlib.cornell.edu:8090/vivo/individual/n2592");
        
         assertTrue("did not find person for context node", uris.contains("http://vivo.scripps.edu/individual/n14979" ));
-                
     }
+
     
     @Test
     public void testLeaderRoleChanges(){
@@ -153,13 +144,7 @@ public class AdditionalURIsForContextNodesTest {
 			"<http://vivo.scripps.edu/individual/n7080> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Thing> . \n " +
 			"<http://vivo.scripps.edu/individual/n7080> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Organization> . \n " ;
             
-			
-        //make a test model with an person, a leader role node and a university 
-        OntModel model = ModelFactory.createOntologyModel();
-        model.read( new StringReader(n3), null,  "N3");
-                
-        //make an AdditionalURIsForContextNodesTest object with that model
-        AdditionalURIsForContextNodes uriFinder = new AdditionalURIsForContextNodes( model );
+        populateModelAndCreateUriFinder(n3);
         
         //if the person changes then the university needs to be updated
         List<String> uris = uriFinder.findAdditionalURIsToIndex( "http://vivo.scripps.edu/individual/n2027");       
@@ -168,8 +153,6 @@ public class AdditionalURIsForContextNodesTest {
         //if the university changes then the person needs to be updated
         uris = uriFinder.findAdditionalURIsToIndex( "http://vivo.scripps.edu/individual/n7080");       
         assertTrue("did not find person for context node", uris.contains("http://vivo.scripps.edu/individual/n2027" ));                        
-
-
     }
     
     
@@ -204,14 +187,7 @@ public class AdditionalURIsForContextNodesTest {
 			"<http://vivo.scripps.edu/individual/n6004> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Thing> . \n " + 
 			"<http://vivo.scripps.edu/individual/n6004> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Organization> . \n " ;
 				
-		
-				
-        //make a test model with an person, a member role node and a university 
-        OntModel model = ModelFactory.createOntologyModel();
-        model.read( new StringReader(n3), null,  "N3");
-                
-        //make an AdditionalURIsForContextNodesTest object with that model
-        AdditionalURIsForContextNodes uriFinder = new AdditionalURIsForContextNodes( model );
+        populateModelAndCreateUriFinder(n3);
         
         //if the person changes then the university needs to be updated
         List<String> uris = uriFinder.findAdditionalURIsToIndex( "http://vivo.scripps.edu/individual/n4519");       
@@ -254,15 +230,8 @@ public class AdditionalURIsForContextNodesTest {
 			"<http://vivo.scripps.edu/individual/n5177> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://vivoweb.org/ontology/core#Project> . \n" +
 			"<http://vivo.scripps.edu/individual/n5177> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Thing> . \n" +
 			"<http://vivo.scripps.edu/individual/n5177> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://vivoweb.org/ontology/core#Process> . \n" ;
-    		
-    	
 		
-        //make a test model with an person, a clinical role node and a project 
-        OntModel model = ModelFactory.createOntologyModel();
-        model.read( new StringReader(n3), null,  "N3");
-                
-        //make an AdditionalURIsForContextNodesTest object with that model
-        AdditionalURIsForContextNodes uriFinder = new AdditionalURIsForContextNodes( model );
+        populateModelAndCreateUriFinder(n3);
         
         //if the person changes then the project needs to be updated
         List<String> uris = uriFinder.findAdditionalURIsToIndex( "http://vivo.scripps.edu/individual/n4858");       
@@ -303,12 +272,7 @@ public class AdditionalURIsForContextNodesTest {
 			"<http://vivo.scripps.edu/individual/n4442> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Thing> . \n" +
 			"<http://vivo.scripps.edu/individual/n4442> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.obolibrary.org/obo/ERO_0000005> . \n" ;
 			
-        //make a test model with an person, a clinical role node and a service 
-        OntModel model = ModelFactory.createOntologyModel();
-        model.read( new StringReader(n3), null,  "N3");
-                
-        //make an AdditionalURIsForContextNodesTest object with that model
-        AdditionalURIsForContextNodes uriFinder = new AdditionalURIsForContextNodes( model );
+        populateModelAndCreateUriFinder(n3);
         
         //if the person changes then the service needs to be updated
         List<String> uris = uriFinder.findAdditionalURIsToIndex( "http://vivo.scripps.edu/individual/n5651");       
@@ -350,13 +314,7 @@ public class AdditionalURIsForContextNodesTest {
 			"<http://vivo.scripps.edu/individual/n1305> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/NET/c4dm/event.owl#Event> . \n" +
 			"<http://vivo.scripps.edu/individual/n1305> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Thing> . \n" ;
     	
-    	
-        //make a test model with an person, a presenter role node and a presentation 
-        OntModel model = ModelFactory.createOntologyModel();
-        model.read( new StringReader(n3), null,  "N3");
-                
-        //make an AdditionalURIsForContextNodesTest object with that model
-        AdditionalURIsForContextNodes uriFinder = new AdditionalURIsForContextNodes( model );
+        populateModelAndCreateUriFinder(n3);
         
         //if the person changes then the presentation needs to be updated
         List<String> uris = uriFinder.findAdditionalURIsToIndex( "http://vivo.scripps.edu/individual/n5596");       
@@ -398,13 +356,8 @@ public class AdditionalURIsForContextNodesTest {
 			"<http://vivo.scripps.edu/individual/n4107> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/NET/c4dm/event.owl#Event> . \n " + 
 			"<http://vivo.scripps.edu/individual/n4107> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Thing> . \n " + 
 			"<http://vivo.scripps.edu/individual/n4107> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://vivoweb.org/ontology/core#InvitedTalk> . \n " ;
-
-        //make a test model with an person, a presenter role node and an invited talk 
-        OntModel model = ModelFactory.createOntologyModel();
-        model.read( new StringReader(n3), null,  "N3");
-                
-        //make an AdditionalURIsForContextNodesTest object with that model
-        AdditionalURIsForContextNodes uriFinder = new AdditionalURIsForContextNodes( model );
+    	
+        populateModelAndCreateUriFinder(n3);
         
         //if the person changes then the invited talk needs to be updated
         List<String> uris = uriFinder.findAdditionalURIsToIndex( "http://vivo.scripps.edu/individual/n4112");       
@@ -447,13 +400,7 @@ public class AdditionalURIsForContextNodesTest {
 			"<http://vivo.scripps.edu/individual/n4252> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Thing> . \n" +
 			"<http://vivo.scripps.edu/individual/n4252> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://vivoweb.org/ontology/core#Grant> . \n" ;
     	
-    	
-        //make a test model with an person, a researcher role node and a grant
-        OntModel model = ModelFactory.createOntologyModel();
-        model.read( new StringReader(n3), null,  "N3");
-                
-        //make an AdditionalURIsForContextNodesTest object with that model
-        AdditionalURIsForContextNodes uriFinder = new AdditionalURIsForContextNodes( model );
+        populateModelAndCreateUriFinder(n3);
         
         //if the person changes then the grant needs to be updated
         List<String> uris = uriFinder.findAdditionalURIsToIndex( "http://vivo.scripps.edu/individual/n4957");       
@@ -497,14 +444,7 @@ public class AdditionalURIsForContextNodesTest {
 			"<http://vivo.scripps.edu/individual/n564> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Thing> . \n " +
 			"<http://vivo.scripps.edu/individual/n564> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://vivoweb.org/ontology/core#Process> . \n " ;
     	
-    	
-    	
-        //make a test model with an person, a researcher role node and a project
-        OntModel model = ModelFactory.createOntologyModel();
-        model.read( new StringReader(n3), null,  "N3");
-                
-        //make an AdditionalURIsForContextNodesTest object with that model
-        AdditionalURIsForContextNodes uriFinder = new AdditionalURIsForContextNodes( model );
+        populateModelAndCreateUriFinder(n3);
         
         //if the person changes then the project needs to be updated
         List<String> uris = uriFinder.findAdditionalURIsToIndex( "http://vivo.scripps.edu/individual/n2029");       
@@ -548,13 +488,7 @@ public class AdditionalURIsForContextNodesTest {
 			"<http://vivo.scripps.edu/individual/n1742> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Thing> . \n" + 
 			"<http://vivo.scripps.edu/individual/n1742> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://vivoweb.org/ontology/core#Grant> . \n" ;
     	
-    	
-        //make a test model with an person, a principal investigator role node and a grant
-        OntModel model = ModelFactory.createOntologyModel();
-        model.read( new StringReader(n3), null,  "N3");
-                
-        //make an AdditionalURIsForContextNodesTest object with that model
-        AdditionalURIsForContextNodes uriFinder = new AdditionalURIsForContextNodes( model );
+        populateModelAndCreateUriFinder(n3);
         
         //if the person changes then the grant needs to be updated
         List<String> uris = uriFinder.findAdditionalURIsToIndex( "http://vivo.scripps.edu/individual/n2368");       
@@ -598,13 +532,8 @@ public class AdditionalURIsForContextNodesTest {
 			"<http://vivo.scripps.edu/individual/n4931> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Thing> . \n" + 
 			"<http://vivo.scripps.edu/individual/n4931> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://vivoweb.org/ontology/core#Grant> . \n" ;
 						
-        //make a test model with an person, a co-principal investigator role node and a grant
-        OntModel model = ModelFactory.createOntologyModel();
-        model.read( new StringReader(n3), null,  "N3");
-                
-        //make an AdditionalURIsForContextNodesTest object with that model
-        AdditionalURIsForContextNodes uriFinder = new AdditionalURIsForContextNodes( model );
-        
+        populateModelAndCreateUriFinder(n3);
+
         //if the copi changes then the grant needs to be updated
         List<String> uris = uriFinder.findAdditionalURIsToIndex( "http://vivo.scripps.edu/individual/n1373");       
         assertTrue("did not find grant for co-pi", uris.contains("http://vivo.scripps.edu/individual/n4931" ));
@@ -646,14 +575,8 @@ public class AdditionalURIsForContextNodesTest {
 			"<http://vivo.scripps.edu/individual/n160> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Thing> . \n" +
 			"<http://vivo.scripps.edu/individual/n160> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://vivoweb.org/ontology/core#Grant> . \n" ;
     	
-    	
-        //make a test model with an person, a investigator role node and a grant
-        OntModel model = ModelFactory.createOntologyModel();
-        model.read( new StringReader(n3), null,  "N3");
-                
-        //make an AdditionalURIsForContextNodesTest object with that model
-        AdditionalURIsForContextNodes uriFinder = new AdditionalURIsForContextNodes( model );
-        
+        populateModelAndCreateUriFinder(n3);
+
         //if the investigator changes then the grant needs to be updated
         List<String> uris = uriFinder.findAdditionalURIsToIndex( "http://vivo.scripps.edu/individual/n5282");       
         assertTrue("did not find grant for investigator", uris.contains("http://vivo.scripps.edu/individual/n160" ));
@@ -661,10 +584,21 @@ public class AdditionalURIsForContextNodesTest {
         //if the grant changes then the investigator needs to be updated
         uris = uriFinder.findAdditionalURIsToIndex( "http://vivo.scripps.edu/individual/n160");       
         assertTrue("did not find investigator for grant", uris.contains("http://vivo.scripps.edu/individual/n5282" ));  
-
-
     	
     }
-    
-    
+
+	// ----------------------------------------------------------------------
+	// Helper methods
+	// ----------------------------------------------------------------------
+
+	/**
+	 * Build a Model from this N3 string, and create a URI Finder based on that
+	 * Model.
+	 */
+	private void populateModelAndCreateUriFinder(String n3String) {
+		OntModel model = ModelFactory.createOntologyModel();
+		model.read(new StringReader(n3String), null, "N3");
+		uriFinder = new AdditionalURIsForContextNodes(
+				new RDFServiceModel(model));
+	}
 }

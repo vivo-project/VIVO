@@ -240,11 +240,22 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
 	private String getUrlPatternToReturnTo(VitroRequest vreq) {
 		String subjectUri = EditConfigurationUtils.getSubjectUri(vreq);
 		String predicateUri = EditConfigurationUtils.getPredicateUri(vreq);
+		//Also add domain and range uris if they exist to enable cancel to work properly
+		String domainUri = (String) vreq.getParameter("domainUri");
+		String rangeUri = (String) vreq.getParameter("rangeUri");
 		String generatorName = "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForIndividualGenerator";
 		String editUrl = EditConfigurationUtils.getEditUrlWithoutContext(vreq);
-		return editUrl + "?subjectUri=" + UrlBuilder.urlEncode(subjectUri) + 
+		String returnPath =  editUrl + "?subjectUri=" + UrlBuilder.urlEncode(subjectUri) + 
 		"&predicateUri=" + UrlBuilder.urlEncode(predicateUri) + 
 		"&editForm=" + UrlBuilder.urlEncode(generatorName);
+		if(domainUri != null && !domainUri.isEmpty()) {
+			returnPath += "&domainUri=" + UrlBuilder.urlEncode(domainUri);
+		}
+		if(rangeUri != null && !rangeUri.isEmpty()) {
+			returnPath += "&rangeUri=" + UrlBuilder.urlEncode(rangeUri);
+		}
+		return returnPath;
+		
 	}
 
 	private String getLinkUri(VitroRequest vreq) {
