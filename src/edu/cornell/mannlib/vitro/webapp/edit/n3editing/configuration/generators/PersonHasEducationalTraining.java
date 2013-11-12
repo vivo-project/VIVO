@@ -296,8 +296,8 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
     final static String orgTypeQuery  =      
         "PREFIX rdfs: <"+ rdfs +">   \n"+
         "SELECT ?existingOrgType WHERE {\n"+
-        "?edTraining <http://purl.obolibrary.org/obo/RO_0002234> ?existingAwardedDegree . \n" +
-        "?existingAwardedDegree <http://vivoweb.org/ontology/core#assignedBy> ?existingOrg .\n"+
+        "?edTraining <http://purl.obolibrary.org/obo/RO_0000057> ?existingOrg . \n" +
+        "?existingOrg <http://purl.obolibrary.org/obo/RO_0000056> ?edTraining .\n"+
         "?existingOrg a ?existingOrgType .\n"+
         "?existingOrgType rdfs:subClassOf <"+ orgClass +"> .\n"+
         "}";

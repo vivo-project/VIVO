@@ -13,25 +13,25 @@
                 
         SELECT DISTINCT <collated> ?subclass </collated>
                         ?authorship
-                        ?person ?personName 
+                        ?author ?authorName 
         WHERE {
                 ?subject ?property ?authorship .
                 OPTIONAL { ?authorship core:rank ?rank } 
-                OPTIONAL { ?authorship core:relates ?person .
-                           ?person a foaf:Person .                      
-                           ?person rdfs:label ?personName 
+                OPTIONAL { ?authorship core:relates ?author .
+                           ?author a foaf:Agent .                      
+                           ?author rdfs:label ?authorName 
                 <collated> 
-                OPTIONAL { ?authorship core:relates ?person .
-                           ?person a foaf:Person .  
-                           ?person vitro:mostSpecificType ?subclass .
-                           ?subclass rdfs:subClassOf foaf:Person 
+                OPTIONAL { ?authorship core:relates ?author .
+                           ?author a foaf:Agent .  
+                           ?author vitro:mostSpecificType ?subclass .
+                           ?subclass rdfs:subClassOf foaf:Agent 
                 } 
                 </collated>
             }
             <critical-data-required>
-            FILTER ( bound(?person) )
+            FILTER ( bound(?author) )
             </critical-data-required>
-        } ORDER BY <collated> ?subclass </collated> ?rank ?personName   
+        } ORDER BY <collated> ?subclass </collated> ?rank ?authorName   
     </query-select>
    
     <query-construct>
@@ -43,11 +43,11 @@
             ?subject ?property ?authorship .
             ?authorship a core:Authorship .
             ?authorship ?authorshipProperty ?authorshipValue .
-            ?authorship core:relates ?person .
-            ?person a foaf:Person .
-            ?person rdfs:label ?personName .
-            ?person vitro:mostSpecificType ?subclass .
-            ?subclass rdfs:subClassOf foaf:Person          
+            ?authorship core:relates ?author .
+            ?author a foaf:Agent .
+            ?author rdfs:label ?authorName .
+            ?author vitro:mostSpecificType ?subclass .
+            ?subclass rdfs:subClassOf foaf:Agent          
         } WHERE {
             {
                 ?subject ?property ?authorship .
@@ -59,17 +59,17 @@
             } UNION {
                 ?subject ?property ?authorship .
                 ?authorship a core:Authorship .
-                ?authorship core:relates ?person .
-                ?person a foaf:Person .                      
-                ?person rdfs:label ?personName  
+                ?authorship core:relates ?author .
+                ?author a foaf:Agent .                      
+                ?author rdfs:label ?authorName  
             } UNION {
                 ?subject ?property ?authorship .
                 ?authorship a core:Authorship .
-                ?authorship core:relates ?person .
-                ?person a foaf:Person .
-                ?person rdfs:label ?personName . 
-                ?person vitro:mostSpecificType ?subclass .
-                ?subclass rdfs:subClassOf foaf:Person
+                ?authorship core:relates ?author .
+                ?author a foaf:Agent .
+                ?author rdfs:label ?authorName . 
+                ?author vitro:mostSpecificType ?subclass .
+                ?subclass rdfs:subClassOf foaf:Agent
             }
         } 
     </query-construct>

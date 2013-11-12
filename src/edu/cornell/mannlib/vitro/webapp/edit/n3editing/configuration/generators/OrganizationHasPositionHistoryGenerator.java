@@ -10,14 +10,14 @@ import com.hp.hpl.jena.vocabulary.XSD;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary.Precision;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.FirstAndLastNameValidator;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesWithParent;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaVClassOptions;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.OrganizationHasPositionValidator;
 
 public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 		implements EditConfigurationGenerator {
@@ -257,7 +257,7 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 		conf.addField(endField.setEditElement(new DateTimeWithPrecisionVTwo(
 				endField, URI_PRECISION_YEAR, URI_PRECISION_NONE)));
 
-        conf.addValidator(new OrganizationHasPositionValidator());
+        conf.addValidator(new FirstAndLastNameValidator("existingPerson"));
 		conf.addValidator(new AntiXssValidation());
 		conf.addValidator(new DateTimeIntervalValidationVTwo("startField",
 				"endField"));

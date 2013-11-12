@@ -11,7 +11,7 @@ import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.PersonHasAdviseesValidator;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.FirstAndLastNameValidator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
@@ -184,7 +184,7 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
 
         conf.addValidator(new DateTimeIntervalValidationVTwo("startField","endField"));
         conf.addValidator(new AntiXssValidation());
-        conf.addValidator(new PersonHasAdviseesValidator());
+        conf.addValidator(new FirstAndLastNameValidator("existingAdvisee"));
         addFormSpecificData(conf, vreq);
         
         prepare(vreq, conf);
