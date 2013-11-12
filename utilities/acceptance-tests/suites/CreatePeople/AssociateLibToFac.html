@@ -86,13 +86,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>selectAndWait</td>
+	<td>id=displayOption</td>
+	<td>label=All Classes</td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
-	<td>vivo:Librarian</td>
+	<td>Librarian (vivo)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=exact:vivo:Librarian</td>
+	<td>link=Librarian (vivo)</td>
 	<td></td>
 </tr>
 <tr>
@@ -113,13 +123,13 @@
 <!--Create the link-->
 <tr>
 	<td>select</td>
-	<td>SuperclassURI</td>
-	<td>label=vivo:Faculty Member</td>
+	<td>name=SuperclassURI</td>
+	<td>label=Facility Member (vivo)</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>SubclassURI</td>
-	<td>label=vivo:Librarian</td>
+	<td>name=SubclassURI</td>
+	<td>label=Librarian (vivo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -132,6 +142,36 @@
 	<td></td>
 </tr>
 <!--Make sure Lilly Librarian shows up in both categories-->
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Assistant Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Librarian, Lily Lou</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Assistant Librarian</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=People</td>
@@ -233,6 +273,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Faculty, Jane</td>
 	<td></td>
@@ -244,12 +289,52 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Librarian, Lily</td>
+	<td>link=Librarian, Lily Lou</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Assistant Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Librarian (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Librarian, Lily Lou</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Assistant Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty Member (2)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Librarian (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Person (2)</td>
 	<td></td>
 </tr>
 <!--Logout-->
