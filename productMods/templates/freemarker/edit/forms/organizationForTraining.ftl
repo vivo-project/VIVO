@@ -83,6 +83,9 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     	        <#else>
     	            ${submissionErrors[errorFieldName]}
     	        </#if>
+            	<#else>
+                    ${submissionErrors[errorFieldName]}
+    	        </#if>
 	        </#if>
         </#list>
         <#--Checking if Person Type field is empty-->

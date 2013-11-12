@@ -78,7 +78,7 @@
                             <div id="titleContainer"><span class="display-title-not-editable">${statement.preferredTitle}</span></div>
                         <#else>
                             <span class="display-title-editable">${statement.preferredTitle}</span>
-                            <@p.editingLinks "${title.localName}" "${title.name}" statement editable />
+                            <@p.editingLinks "${title.localName}" "${title.name}" statement editable title.rangeUri />
                         </#if>
                     </#list>
                 </#if>

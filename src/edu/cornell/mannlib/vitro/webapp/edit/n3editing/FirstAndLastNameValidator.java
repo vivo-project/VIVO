@@ -12,11 +12,16 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.N3ValidatorVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.MultiValueEditSubmission;
 
-public class OrganizationHasPositionValidator implements N3ValidatorVTwo {
+public class FirstAndLastNameValidator implements N3ValidatorVTwo {
 
     private static String MISSING_FIRST_NAME_ERROR = "You must enter a value in the First Name field.";
     private static String MISSING_LAST_NAME_ERROR = "You must enter a value in the Last Name field.";
     private static String MALFORMED_LAST_NAME_ERROR = "The last name field may not contain a comma. Please enter first name in First Name field.";
+    private String uriReceiver;
+    
+    public FirstAndLastNameValidator(String uriReceiver) {
+        this.uriReceiver = uriReceiver;
+    }
     
     @Override
     public Map<String, String> validate(EditConfigurationVTwo editConfig,
@@ -26,11 +31,11 @@ public class OrganizationHasPositionValidator implements N3ValidatorVTwo {
 
         Map<String,String> errors = new HashMap<String,String>();   
         
-        List<String> personUri = urisFromForm.get("existingPerson");
+        List<String> personUri = urisFromForm.get(uriReceiver);
         if (allListElementsEmpty(personUri) || personUri.contains(">SUBMITTED VALUE WAS BLANK<")) {
             personUri = null;
         }
-        // If there's an adviseeUri, then we're done. The firstName and lastName fields are
+        // If there's an personUri, then we're done. The firstName and lastName fields are
         // disabled and so don't get submitted.
         if (personUri != null) {
             return null;

@@ -77,7 +77,7 @@
                         </#if>
                         <#list title.statements as statement>
                             <span class="display-title<#if editable>-editable</#if>">${statement.preferredTitle}</span>
-                            <@p.editingLinks "${title.localName}" "${title.name}" statement editable />
+                            <@p.editingLinks "${title.localName}" "${title.name}" statement editable title.rangeUri />
                         </#list>
                     </#if>
                     <#-- If preferredTitle is unpopulated, display mostSpecificTypes -->

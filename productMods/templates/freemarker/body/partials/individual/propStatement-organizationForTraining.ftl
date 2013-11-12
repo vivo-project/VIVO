@@ -26,12 +26,12 @@
         <#if statement.degree??>
             ${statement.degreeAbbr!} <#if statement.majorField??> ${i18n().in} ${statement.majorField!} </#if>
         <#elseif statement.majorField??>
-            ${statement.majorField!}, ${statement.info!}
-        <#else>
+            ${statement.majorField!}
+        <#elseif statement.info??>
             ${statement.info!}
         </#if>
     </#local>
-    <@s.join [ linkedIndividual, detailedInfo ] /> 
+    <@s.join [ linkedIndividual, detailedInfo ] /> <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" false/>
 
 </#macro>
 

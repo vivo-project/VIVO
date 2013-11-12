@@ -164,34 +164,34 @@
     </query-construct>
 
     <query-construct>
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-
-        CONSTRUCT {
-            ?dateTimeInterval core:start ?dateTimeStartValue .                    
-            ?dateTimeStartValue core:dateTime ?dateTimeStart .
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?edTraining .
+            ?leaderRole core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:start ?dateTimeStartValue .
+            ?dateTimeStartValue core:dateTime ?dateTimeStart 
         } WHERE {
             ?subject ?property ?edTraining .
             ?edTraining a core:EducationalProcess .
-            ?edTraining core:dateTimeInterval ?dateTimeInterval .
-            ?dateTimeInterval core:start ?dateTimeStartValue .                    
-            ?dateTimeStartValue core:dateTime ?dateTimeStart .
-        }
+            ?leaderRole core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:start ?dateTimeStartValue .
+            ?dateTimeStartValue core:dateTime ?dateTimeStart 
+        } 
     </query-construct>
 
     <query-construct>
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-
-        CONSTRUCT {
-            ?dateTimeInterval core:end ?dateTimeEndValue . 
-            ?dateTimeEndValue core:dateTime ?dateTimeEnd  
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?edTraining .
+            ?leaderRole core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:end ?dateTimeEndValue .
+            ?dateTimeStartValue core:dateTime ?dateTimeEnd 
         } WHERE {
             ?subject ?property ?edTraining .
             ?edTraining a core:EducationalProcess .
-            ?edTraining core:dateTimeInterval ?dateTimeInterval .
-            ?dateTimeInterval core:end ?dateTimeEndValue . 
-            ?dateTimeEndValue core:dateTime ?dateTimeEnd  
+            ?leaderRole core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:end ?dateTimeEndValue .
+            ?dateTimeStartValue core:dateTime ?dateTimeEnd
         } 
     </query-construct>
     
