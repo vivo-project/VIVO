@@ -101,8 +101,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[14]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-hasGeographicLocation &gt; img.add-individual</td>
+	<td>css=a.add-RO_0001025 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -198,8 +203,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Department A Located in Building A </td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Department A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Department B</td>
 	<td></td>
 </tr>
 <tr>
@@ -219,17 +234,32 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Building</td>
+	<td>link=Campus</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Building</td>
+	<td>Campus</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Building A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Building A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Building A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Department A</td>
 	<td></td>
 </tr>
 <!--Logout-->
