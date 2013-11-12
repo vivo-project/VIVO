@@ -355,7 +355,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
         + "?subject core:relatedBy ?authorshipURI . \n"
         + "?authorshipURI a core:Authorship . \n"
         + "?authorshipURI core:relates ?authorURI . \n" 
-        + "?authorURI a foaf:Person . \n"
+        + "?authorURI a foaf:Agent . \n"
         + "OPTIONAL { ?authorURI rdfs:label ?authorName } \n"
         + "OPTIONAL { ?authorshipURI core:rank ?rank } \n" 
         + "} ORDER BY ?rank";

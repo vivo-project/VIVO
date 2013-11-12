@@ -25,7 +25,7 @@
             <#list phone.statements as statement>
                 <li role="listitem">
                     ${statement.number!}
-                    <@p.editingLinks "${phone.localName}" "${phone.name}" statement editable />
+                    <@p.editingLinks "${phone.localName}" "${phone.name}" statement editable phone.rangeUri />
                 </li>
             </#list>
         </ul>
@@ -47,7 +47,7 @@
                 <#list email.statements as statement>
                     <li role="listitem">
                         <a class="email" href="mailto:${statement.emailAddress!}" title="${i18n().email}">${statement.emailAddress!}</a>
-                        <@p.editingLinks "${email.localName}" "${email.name}" statement editable />
+                        <@p.editingLinks "${email.localName}" "${email.name}" statement editable email.rangeUri />
                     </li>
                 </#list>
             </ul>

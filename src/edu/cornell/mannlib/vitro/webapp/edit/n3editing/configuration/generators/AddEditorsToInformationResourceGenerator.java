@@ -27,7 +27,7 @@ import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.PublicationHasEditorValidator;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.FirstAndLastNameValidator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
@@ -84,7 +84,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
         //template file
         editConfiguration.setTemplate("addEditorsToInformationResource.ftl");
         //add validators
-        editConfiguration.addValidator(new PublicationHasEditorValidator());
+        editConfiguration.addValidator(new FirstAndLastNameValidator("personUri"));
 
         //Adding additional data, specifically edit mode
         addFormSpecificData(editConfiguration, vreq);
