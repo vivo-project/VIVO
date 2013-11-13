@@ -44,7 +44,7 @@ import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
  */
 public class AddPublicationToPersonGenerator extends VivoBaseGenerator implements EditConfigurationGenerator {
 
-    final static String collectionClass = bibo + "Periodical";
+    final static String collectionClass = bibo + "Journal";
     final static String bookClass = bibo + "Book";
     final static String documentClass = "http://purl.obolibrary.org/obo/IAO_0000030";
     final static String conferenceClass = bibo + "Conference";
@@ -241,7 +241,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     private String getN3ForNewCollectionNewPub() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?newPublication vivo:hasPublicationVenue ?newCollection . \n" +
-        "?newCollection a <" + collectionClass + ">  . \n" +
+        "?newCollection a <" + collectionClass + "> . \n" +
         "?newCollection vivo:publicationVenueFor ?newPublication . \n" + 
         "?newCollection <" + label + "> ?collection .";
     }
