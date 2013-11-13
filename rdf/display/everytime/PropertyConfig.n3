@@ -489,8 +489,8 @@ local:organizationForTrainingConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-organizationForTraining.xml"^^xsd:string ;
     :displayName "organization for training" ;
     vitro:displayRankAnnot 1;
-    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
-    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:nobody ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.OrganizationForTrainingGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupother> .
 
@@ -599,6 +599,21 @@ local:grantAdministeredByConfig a :ObjectPropertyDisplayConfig ;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.GrantAdministeredByGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:orgAdministersGrantContext a :ConfigContext ;
+    :hasConfiguration local:orgAdministersGrantConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Organization>  ;
+    :qualifiedBy      vivo:AdministratorRole .
+
+local:orgAdministersGrantConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-organizationAdministersGrant.xml"^^xsd:string ;
+    :displayName "administers grant" ;
+    vitro:displayRankAnnot 61;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.OrganizationAdministersGrantGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 ### vcard properties ###
@@ -1114,7 +1129,7 @@ local:awardOrHonorGivenConfig a :ObjectPropertyDisplayConfig ;
 
 local:orgAwardsGrantContext a :ConfigContext ;
     :hasConfiguration local:orgAwardsGrantConfig ;
-    :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
+    :configContextFor <http://vivoweb.org/ontology/core#assigns> ;
     :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#Grant> .
 
