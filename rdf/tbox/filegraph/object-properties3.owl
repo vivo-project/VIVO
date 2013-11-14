@@ -349,7 +349,16 @@
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Equipment"/>
         <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
     </owl:ObjectProperty>
-    
+   
+ 
+
+    <!-- http://vivoweb.org/ontology/core#hasEquipment -->
+
+    <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasEquipment">
+        <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#Equipment"/>
+        <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#equipmentFor"/>
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+    </owl:ObjectProperty> 
 
 
     <!-- http://vivoweb.org/ontology/core#facilityFor -->
@@ -400,7 +409,15 @@
         <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#hasGoverningAuthority"/>
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
     </owl:ObjectProperty>
-    
+
+    <!-- http://vivoweb.org/ontology/core#equipmentFor -->
+ 
+    <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#equipmentFor">
+        <rdfs:label xml:lang="en-us">equipment for</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="http://isf/deprecated_op"/>
+        <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Equipment"/>
+        <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+    </owl:ObjectProperty>    
 
 
     <!-- http://vivoweb.org/ontology/core#hasPredecessorOrganization -->

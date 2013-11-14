@@ -1,0 +1,58 @@
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/adviseeRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "aconsejado en"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/editorOfConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "editor de"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/educationalTrainingConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "la educaci\u00F3n y la formaci\u00F3n"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasOutreachProviderRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "extensi\u00F3n y servicio a la comunidad"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasServiceProviderRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "servicio a la profesi\u00F3n"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgTelephoneConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "tel\u00E9fono"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/organizationForPositionConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "personas"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "p\u00E1gina web"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasResearcherRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "actividades de investigaci\u00F3n"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/inEventSeriesConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "en la serie de eventos"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasEditorRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "recogida o editor de la serie de"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasTeacherRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "actividades docentes"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/personInPositionConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "posiciones"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/preferredTitleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "t\u00EDtulo preferido"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/authorInAuthorshipConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "publicaciones seleccionadas"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/fullNameConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "nombre y apellidos"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasReviewerRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "revisor de"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/informationResourceInAuthorshipConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "autores"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasAttendeeRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "asistido"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/includesEventConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "incluye eventos"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/primaryEmailConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "correo electr\u00F3nico principal"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasCo-PrincipalInvestigatorRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "investigador co-principal en"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/personFaxConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "fax"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantRelatesConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "contribuyente"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/informationResourceInEditorshipConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "editores"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/mailingAddressConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "direcci\u00F3n de env\u00EDo"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgFaxConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "fax"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasOrganizerRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "organizador del"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasPrincipalInvestigatorRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "investigador principal en"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/additionalEmailConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "correos electr\u00F3nicos adicionales"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/advisorRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "asesorados"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/awardOrHonorConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "premios y honores"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/awardOrHonorReceiptsConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "ingresos"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/awardReceiptsConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "la recepci\u00F3n de"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasInvestigatorRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "investigador en"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/awardReceiptsAwardForConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "premio o el honor de"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/eventWithinConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "caso, dentro de"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasClinicalRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "actividades cl\u00EDnicas"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasPresenterRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "presentaciones"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/testRemovalConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "relacionados por"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/bfo_0000055Config> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "part\u00EDcipe"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasLeaderRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "jefe de"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasMemberRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "miembro de"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/personTelephoneConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "tel\u00E9fono"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasSubOrganizationConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "tiene sub-organización"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/subOrganizationWithinConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "organización dentro de"@es-GO .
+
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantAdministeredByConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "administrado subvención por"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgAdministersGrantConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "administra la subvención"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/eventWithinConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "se produce dentro de evento"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/bldgGeographicallyContainsConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "contiene geográficamente"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/bldgGeographicallyWithinConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "geográficamente dentro de"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/bldgEquipmentLocationConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "ubicación de los equipos"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/bldgGeographicLocationOfConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "ubicación geográfica de"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/eventRelatedDocsConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "documentos relacionados"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantSubjectAreaConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "tiene en la materia"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantHasSubgrantConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "tiene sub-subvención"@es-GO .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantIsSubgrantOfConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "sub-subvención de"@es-GO .

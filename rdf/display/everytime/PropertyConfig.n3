@@ -1153,6 +1153,7 @@ local:grantAwardedByConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:grantSubjectAreaContext a :ConfigContext ;
@@ -1279,6 +1280,7 @@ local:orgAwardsGrantConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 61;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:addressLocationContext a :ConfigContext ;
