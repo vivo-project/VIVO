@@ -44,3 +44,15 @@
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/personTelephoneConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "tel\u00E9fono"@es .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasSubOrganizationConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "tiene sub-organización"@es .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/subOrganizationWithinConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "organización dentro de"@es .
+
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantAdministeredByConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "administrado subvención por"@es .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgAdministersGrantConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "administra la subvención"@es .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/eventWithinConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "se produce dentro de evento"@es .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/bldgGeographicallyContainsConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "contiene geográficamente"@es .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/bldgGeographicallyWithinConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "geográficamente dentro de"@es .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/bldgEquipmentLocationConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "ubicación de los equipos"@es .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/bldgGeographicLocationOfConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "ubicación geográfica de"@es .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/eventRelatedDocsConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "documentos relacionados"@es .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantSubjectAreaConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "tiene en la materia"@es .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantHasSubgrantConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "tiene sub-subvención"@es .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantIsSubgrantOfConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "sub-subvención de"@es .
