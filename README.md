@@ -8,7 +8,7 @@ The repository is structured this way
 * Within these, each Second-level directory contains files for a specific langauge, for that release. 
 These directories are named for the "locale" of the language and region that they represent.
 
-For example, a directory of files for French (fr), as used in Belgium (BE), for VIVO release 1.6:
+For example, a directory of files for the French language (fr), as used in Belgium (BE), for VIVO release 1.6:
 
     /vivo-1.6/fr_BE/
 
@@ -32,7 +32,7 @@ starting point for doing the translations yourself. Please send a note to [the d
 or directly to the [VIVO release manager][3], to find out if someone else is already working
 on a translation.
 
-If you create a translation, please consider contributing your langauge files to the VIVO community.
+If you create a translation, please consider contributing your language files to the VIVO community.
 
 [1]: https://wiki.duraspace.org/display/VIVO/Adding+a+language+to+VIVO
 [2]: mailto:vivo-dev-all@lists.sourceforge.net
