@@ -275,9 +275,6 @@ vivo:Licensure
 vivo:inPress
       rdfs:label "in press"@en-US .
 
-obo:IAO_0000078
-      rdfs:label "Curation Status Specification"@en-US .
-
 vivo:placeOfPublication
       rdfs:label "place of publication"@en-US ;
       vitro:displayLimitAnnot
@@ -292,9 +289,6 @@ vivo:placeOfPublication
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
               "City in which the publication was done."^^xsd:string .
-
-obo:IAO_0000125
-      rdfs:label "pending final vetting"@en-US .
 
 vivo:hasCollaborator
       rdfs:label "collaborator"@en-US ;
@@ -502,9 +496,6 @@ owl:sameAs
       vitro:stubObjectPropertyAnnot
               "true"^^xsd:boolean .
 
-obo:IAO_0000123
-      rdfs:label "metadata incomplete"@en-US .
-
 vcard:hasTimeZone
       rdfs:label "has time zone"@en-US .
 
@@ -559,9 +550,6 @@ geo:territory
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
-
-obo:IAO_0000122
-      rdfs:label "ready for release"@en-US .
 
 vcard:OrganizationName
       rdfs:label "Organization Name"@en-US .
@@ -722,9 +710,6 @@ bibo:Issue
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
-obo:IAO_0000121
-      rdfs:label "organizational term"@en-US .
-
 vcard:uid
       rdfs:label "uid"@en-US .
 
@@ -815,9 +800,6 @@ geo:codeFAOSTAT
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean .
-
-obo:IAO_0000120
-      rdfs:label "metadata complete"@en-US .
 
 vivo:AttendeeRole
       rdfs:label "Attendee Role"@en-US ;
@@ -1754,9 +1736,6 @@ geo:nameCurrencyFR
 obo:BFO_0000017
       rdfs:label "Realizable Entity"@en-US .
 
-obo:IAO_0000410
-      rdfs:label "universal"@en-US .
-
 vivo:hasGoverningAuthority
       rdfs:label "governing authority"@en-US ;
       vitro:displayLimitAnnot
@@ -2008,9 +1987,6 @@ vcard:note
 
 obo:ERO_0000779
       rdfs:label "Permanent Resident Role"@en-US .
-
-obo:IAO_0000226
-      rdfs:label "placeholder removed"@en-US .
 
 bibo:issue
       rdfs:label "issue"@en-US ;
@@ -2267,9 +2243,6 @@ vivo:description
       vitro:publicDescriptionAnnot
               "An account of the resource."^^xsd:string .
 
-obo:IAO_0000224
-      rdfs:label "core"@en-US .
-
 geo:hasCode
       rdfs:label "has code"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -2400,9 +2373,6 @@ vivo:hasSubjectArea
 
 obo:ARG_2000083
       rdfs:label "American Board of Plastic Surgery"@en-US .
-
-obo:IAO_0000225
-      rdfs:label "Obsolescence Reason Specification"@en-US .
 
 obo:ERO_0000398
       rdfs:label "is performed by"@en-US .
@@ -2715,9 +2685,6 @@ vivo:ClinicalOrganization
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
-obo:IAO_0000229
-      rdfs:label "term split"@en-US .
-
 vivo:Program
       rdfs:label "Program"@en-US ;
       vitro:displayLimitAnnot
@@ -2830,9 +2797,6 @@ obo:ERO_0000777
 
 obo:ARG_2000067
       rdfs:label "American Board of Colon and Rectal Surgery"@en-US .
-
-obo:IAO_0000228
-      rdfs:label "term imported"@en-US .
 
 bibo:Thesis
       rdfs:label "Thesis"@en-US ;
@@ -4430,9 +4394,6 @@ vivo:FacultyMember
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
-obo:IAO_0000428
-      rdfs:label "requires discussion"@en-US .
-
 vivo:hideFromDisplay
       rdfs:label "hide from display"@en-US ;
       vitro:displayRankAnnot
@@ -4597,9 +4558,6 @@ vivo:Internship
 
 obo:ARG_2000379
       rdfs:label "Contact"@en-US .
-
-obo:IAO_0000409
-      rdfs:label "Denotator Type"@en-US .
 
 vcard:RelatedType
       rdfs:label "Relation Type"@en-US .
@@ -4806,9 +4764,6 @@ vivo:InvestigatorRole
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
-
-obo:IAO_0000423
-      rdfs:label "to be replaced with external ontology term"@en-US .
 
 bibo:BookSection
       rdfs:label "Book Section"@en-US ;
@@ -5563,9 +5518,6 @@ geo:special_group
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
-obo:IAO_0000420
-      rdfs:label "Defined Class"@en-US .
-
 geo:countryAreaUnit
       rdfs:label "country area unit"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -5788,9 +5740,6 @@ bibo:eanucc13
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
               "EAN International-Uniform Code Council (EAN-UCC) was a supply chain standards family name, formally the EAN.UCC System, that included product barcodes which are printed on the great majority of products available in stores worldwide and electronic commerce standards."^^xsd:string .
-
-obo:IAO_0000421
-      rdfs:label "Named Class Expression"@en-US .
 
 bibo:EditedBook
       rdfs:label "Edited Book"@en-US ;
@@ -6576,9 +6525,6 @@ vivo:dateTimeInterval
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean .
 
-obo:IAO_0000103
-      rdfs:label "Failed Exploratory Term"@en-US .
-
 vcard:formattedName
       rdfs:label "has formatted name"@en-US .
 
@@ -6612,9 +6558,6 @@ obo:ARG_2000076
 
 obo:BFO_0000034
       rdfs:label "Function"@en-US .
-
-obo:IAO_0000002
-      rdfs:label "example to be eventually removed"@en-US .
 
 vivo:EmeritusProfessor
       rdfs:label "Professor Emeritus"@en-US ;
