@@ -123,11 +123,25 @@ $(document).ready(function(){
                    + i18nStrings.noDepartmentsFound + "</li></p></ul>";
         }
         else if ( deptNbr > 6 ) {
-            for ( var i=0;i<6;i++) {
-                html += "<li><a href='" + urlsBase + "/individual" 
-                        + academicDepartments[index].uri + "'>" 
-                        + academicDepartments[index].name + "</a></li>";
+        	//if there are more than 6 departments, we want to choose a random subset and display
+        	//and also to make sure the same department is not repeated twice
+        	var indicesUsed = {};//utilizing a hash since easier
+        	var indicesCount = 0;
+        	while(indicesCount < 6) {
                 index = Math.floor((Math.random()*deptNbr)+1)-1;
+                //if the index has already been used, this will be true
+                var indexFound = (index in indicesUsed);
+                //Check to see if this index hasn't already been employed
+                if(!indexFound) {
+                	//if this index hasn't already been employed then utilize it
+                	 html += "<li><a href='" + urlsBase + "/individual" 
+                     + academicDepartments[index].uri + "'>" 
+                     + academicDepartments[index].name + "</a></li>";
+                	 //add this index to the set of already used indices
+                	 indicesUsed[index] = true;
+                	 //keep count
+                	 indicesCount++;
+                }
             }
         }
         else {
