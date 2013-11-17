@@ -52,6 +52,7 @@
                     	    <li><a href="#language">Support for additional languages</a></li>
                     	    <li><a href="#extended_lod">More compact responses to Linked data requests</a></li>
                     	    <li><a href="#google_refine">Changes to default types for Google Refine</a></li>
+                    	    <li><a href="#developers">Special runtime settings for developers</a></li>
 	                    </ol>
 					</li>					
 					<li><a href="#upgrade_process">Upgrade Instructions</a></li>
@@ -424,6 +425,15 @@
                 	</li>
 
             	    <li>
+                	    <h4 id="developers">Special runtime settings for developers</h4>
+             	        <p>
+             	        	This release includes several settings to help developers by instumenting the 
+             	        	freemarker templates and the SPARQL queries on the RDFService. Check the wiki for
+             	        	details, or look in the home directory in <code>example.developer.properties</code>.
+             	        </p>
+                	</li>
+
+            	    <li>
                 	    <h4 id="browsers">Supported Browsers</h4>
                 	    <p>
             	            For this release, the following browsers are supported.
@@ -613,65 +623,6 @@
                         </td>
                     </tr>
 
-                    <tr>
-                        <td colspan="2">
-                          <b>For developers only.</b>
-                          Defeat the Freemarker template cache, so each template
-                          is read from disk on each request. This permits developers to immediately
-                          see the effect of changes to the template. The default is <code>false</code>, which
-                          means that a cached copy of each template will be used for 60 seconds 
-                          before the disk is checked for a new version.
-                          <br/><b>Setting this option to "true" slows down VIVO performance.</b>
-                        </td>
-                    </tr>
-                    <tr class="odd_row blue">
-                        <td>
-                          developer.defeatFreemarkerCache
-                        </td>
-                        <td>
-                          false
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2">
-                          <b>For developers only.</b>
-                          Defeat the cache of language-specific text strings,
-                          so the language file is read from disk on each request.
-                          This permits developers to immediately
-                          see the effect of changes to the text strings. 
-                          The default is <code>false</code>, which means that the language file is 
-                          read when VIVO starts up, or when a new theme is selected.
-                          <br/><b>Setting this option to "true" slows down VIVO performance.</b>
-                        </td>
-                    </tr>
-                    <tr class="odd_row blue">
-                        <td>
-                          developer.defeatI18nCache
-                        </td>
-                        <td>
-                          false
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td colspan="2">
-                          <b>For developers only.</b>
-                          Add starting and ending delimiters to each Freemarker template, so you can see
-                          which template were invoked by viewing the generated HTML. 
-                          The default is <code>false</code>.
-                          <br/><b>Setting this option to "true" slows down VIVO performance.</b>
-                        </td>
-                    </tr>
-                    <tr class="odd_row blue">
-                        <td>
-                          developer.insertFreemarkerDelimiters
-                        </td>
-                        <td>
-                          false
-                        </td>
-                    </tr>
-                    
                     <tr>
                         <td colspan="2" id="optionalMap">
                           On the VIVO home page, display a global map highlighting the geographical focus
