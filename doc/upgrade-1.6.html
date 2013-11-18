@@ -79,6 +79,13 @@
                 </li>
             </ul>
             <p>
+               If you have used temporary models in the database to stage ingested data,
+               you will want to clear out any unneeded models that remain listed on the Manage
+               Jena Models page (under "Ingest tools").  This step is especially important if 
+               these temporary models contain blank nodes, as this may cause unwanted or 
+               duplicate data to appear following the upgrade.
+            </p> 
+            <p>
                 The upgrade process is similar to the initial install process 
                 with  
                 the following exceptions: 
@@ -859,9 +866,9 @@
                                 <p>
                     Changes to the VIVO core ontology may require corresponding 
                     modifications to the knowledge base instance data and ontology annotations.
-                    Each time VIVO starts up, it will initiate a process to examine the knowledge 
-                    base and apply necessary changes. This process should be very quick on subsequent
-                    restarts if no data using the 1.5 ontology has been reintroduced. 
+                    The first time VIVO starts up following the upgrade, 
+                    it will initiate a process to examine the knowledge 
+                    base and apply necessary changes.
                     The knowledge base migration process for release 1.6 will make
                     the following types of changes: 
                 </p>
