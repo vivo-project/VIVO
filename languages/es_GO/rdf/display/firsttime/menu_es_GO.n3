@@ -1,0 +1,20 @@
+@prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+
+display:HomeMenuItem display:linkText "Inicio"@es-GO .
+display:PeopleMenuItem display:linkText "Personas"@es-GO .
+display:OrganizationsMenuItem display:linkText "Organizaciones"@es-GO .
+display:ResearchMenuItem display:linkText "Investigación"@es-GO .
+display:EventsMenuItem display:linkText "Eventos"@es-GO . 
+display:Home display:title "Inicio"@es-GO .
+display:Events display:title "Eventos"@es-GO .
+display:Organizations display:title "Organizaciones"@es-GO .
+display:People display:title "Personas"@es-GO .
+display:Research display:title "Investigación"@es-GO .
+display:pageListPage display:title "Páginas"@es-GO .
+
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> <http://www.w3.org/2000/01/rdf-schema#label> "SPARQL Query Resultados"@es_GO .
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.BrowseDataGetter> <http://www.w3.org/2000/01/rdf-schema#label> "Navegar P\u00E1gina"@es_GO .
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.InternalClassesDataGetter> <http://www.w3.org/2000/01/rdf-schema#label> "Grupo Page Group - Institucional Clase Interna"@es_GO .
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData> <http://www.w3.org/2000/01/rdf-schema#label> "Grupo Clase p\u00E1gina"@es_GO .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#DefaultMenu> <http://www.w3.org/2000/01/rdf-schema#label> "men\u00FA predeterminado"@es_GO .
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.IndividualsForClassesDataGetter> <http://www.w3.org/2000/01/rdf-schema#label> "Grupo Page Group - Clases seleccionadas"@es_GO .

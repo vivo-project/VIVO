@@ -101,7 +101,7 @@
 	     
 	      Override the core version, to get the 2-level effect.                      
 	     ================================= -->
-	<target name="revisionInfo" depends="vitroCore.revisionInfo" description="--> Store revision info in build">
+	<target name="revisionInfo" depends="vitroCore.revisionInfo" unless="skipinfo" description="--> Store revision info in build">
 		<addRevisionInfoLine productName="${ant.project.name}" productCheckoutDir="${basedir}" />
 	</target>
 

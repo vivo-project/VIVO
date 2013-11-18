@@ -816,7 +816,7 @@ issuing SPARQL queries that read data, and its URI for issuing SPARQL UPDATE com
                     <tr>
                         <td colspan="2">
 							Show only the most appropriate data values based on the Accept-Language 
-							header supplied by the browser.  Default is true if not set.
+							header supplied by the browser.  Default is false if not set.
                         </td>
                     </tr>
                     <tr class="odd_row">
@@ -824,7 +824,7 @@ issuing SPARQL queries that read data, and its URI for issuing SPARQL UPDATE com
                           RDFService.languageFilter
                         </td>
                         <td>
-                           true
+                           false
                         </td>
                     </tr>
 
@@ -863,65 +863,6 @@ issuing SPARQL queries that read data, and its URI for issuing SPARQL UPDATE com
                         </td>
                     </tr>
 
-                    <tr>
-                        <td colspan="2">
-                          <b>For developers only.</b>
-                          Defeat the Freemarker template cache, so each template
-                          is read from disk on each request. This permits developers to immediately
-                          see the effect of changes to the template. The default is <code>false</code>, which
-                          means that a cached copy of each template will be used for 60 seconds 
-                          before the disk is checked for a new version.
-                          <br/><b>Setting this option to "true" slows down VIVO performance.</b>
-                        </td>
-                    </tr>
-                    <tr class="odd_row">
-                        <td>
-                          developer.defeatFreemarkerCache
-                        </td>
-                        <td>
-                          false
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2">
-                          <b>For developers only.</b>
-                          Defeat the cache of language-specific text strings,
-                          so the language file is read from disk on each request.
-                          This permits developers to immediately
-                          see the effect of changes to the text strings. 
-                          The default is <code>false</code>, which means that the language file is 
-                          read when VIVO starts up, or when a new theme is selected.
-                          <br/><b>Setting this option to "true" slows down VIVO performance.</b>
-                        </td>
-                    </tr>
-                    <tr class="odd_row">
-                        <td>
-                          developer.defeatI18nCache = true
-                        </td>
-                        <td>
-                          false
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2">
-                          <b>For developers only.</b>
-                          Add starting and ending delimiters to each Freemarker template, so you can see
-                          which template were invoked by viewing the generated HTML. 
-                          The default is <code>false</code>.
-                          <br/><b>Setting this option to "true" slows down VIVO performance.</b>
-                        </td>
-                    </tr>
-                    <tr class="odd_row">
-                        <td>
-                          developer.insertFreemarkerDelimiters = true
-                        </td>
-                        <td>
-                          false
-                        </td>
-                    </tr>
-                    
                     <tr>
                         <td colspan="2">
                           On the VIVO home page, display a global map highlighting the geographical focus
