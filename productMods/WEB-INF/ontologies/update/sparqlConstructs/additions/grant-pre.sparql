@@ -7,5 +7,5 @@ CONSTRUCT {
     ?grant vivo:relates ?role    
 } WHERE {
     ?role vivo:roleContributesTo ?grant .
-    ?grant a vivo:Grant .
+    { ?grant a vivo:Grant } UNION { ?grant a vivo:Contract }
 }
