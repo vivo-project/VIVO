@@ -76,7 +76,10 @@
 
     <!-- http://aims.fao.org/aos/geopolitical.owl#hasMember -->
 
-    <owl:ObjectProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMember"/>
+    <owl:ObjectProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMember">
+        <rdfs:domain rdf:resource="http://aims.fao.org/aos/geopolitical.owl#group"/>
+        <rdfs:range rdf:resource="http://aims.fao.org/aos/geopolitical.owl#territory"/>
+    </owl:ObjectProperty>
     
 
 
