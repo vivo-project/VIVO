@@ -28,7 +28,6 @@
             ?role vitro:mostSpecificType ?subclass
             
             OPTIONAL {  ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
-                        ?activity a core:Grant .
                         ?activity rdfs:label ?activityLabel .
                         LET (?activityName := afn:localname(?activity)) 
             }                   
@@ -74,7 +73,6 @@
             ?subject ?property ?role .
             ?role a core:InvestigatorRole .
             ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
-            ?activity a core:Grant .
             ?role ?roleProperty ?roleValue . 
             ?activity rdfs:label ?activityLabel .
             ?activity core:assignedBy ?awardedBy .
@@ -114,6 +112,12 @@
                 ?adminedByRole &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?adminedBy .
                 ?adminedBy a foaf:Organization .
                 ?adminedBy rdfs:label ?adminedByLabel
+            } UNION {
+                ?subject ?property ?role .
+                ?role a core:InvestigatorRole .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity . 
+                ?activity a core:Contract .
+                ?activity rdfs:label ?activityLabel 
             }
         } 
     </query-construct>
@@ -162,13 +166,23 @@
             ?dateTimeIntervalGrant core:start ?dateTimeStartValueGrant .
             ?dateTimeStartValueGrant core:dateTime ?dateTimeStartGrant 
         } WHERE {
-            ?subject ?property ?role .
-            ?role a core:InvestigatorRole .
-            ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
-            ?activity a core:Grant .
-            ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
-            ?dateTimeIntervalGrant core:start ?dateTimeStartValueGrant .
-            ?dateTimeStartValueGrant core:dateTime ?dateTimeStartGrant 
+            {
+                ?subject ?property ?role .
+                ?role a core:InvestigatorRole .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
+                ?activity a core:Grant .
+                ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
+                ?dateTimeIntervalGrant core:start ?dateTimeStartValueGrant .
+                ?dateTimeStartValueGrant core:dateTime ?dateTimeStartGrant 
+            } UNION {
+                ?subject ?property ?role .
+                ?role a core:InvestigatorRole .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
+                ?activity a core:Contract .
+                ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
+                ?dateTimeIntervalGrant core:start ?dateTimeStartValueGrant .
+                ?dateTimeStartValueGrant core:dateTime ?dateTimeStartGrant 
+            }
         } 
     </query-construct>
 
@@ -178,18 +192,27 @@
             ?subject ?property ?role .
             ?role a core:InvestigatorRole .
             ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
-            ?activity a core:Grant .
             ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
             ?dateTimeIntervalGrant core:end ?dateTimeEndValueGrant .
             ?dateTimeEndValueGrant core:dateTime ?dateTimeEndGrant 
         } WHERE {
-            ?subject ?property ?role .
-            ?role a core:InvestigatorRole .
-            ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
-            ?activity a core:Grant .
-            ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
-            ?dateTimeIntervalGrant core:end ?dateTimeEndValueGrant .
-            ?dateTimeEndValueGrant core:dateTime ?dateTimeEndGrant 
+            {
+                ?subject ?property ?role .
+                ?role a core:InvestigatorRole .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
+                ?activity a core:Grant .
+                ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
+                ?dateTimeIntervalGrant core:end ?dateTimeEndValueGrant .
+                ?dateTimeEndValueGrant core:dateTime ?dateTimeEndGrant 
+            } UNION {
+                ?subject ?property ?role .
+                ?role a core:InvestigatorRole .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
+                ?activity a core:Contract .
+                ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
+                ?dateTimeIntervalGrant core:end ?dateTimeEndValueGrant .
+                ?dateTimeEndValueGrant core:dateTime ?dateTimeEndGrant 
+            }
         } 
     </query-construct>
 
