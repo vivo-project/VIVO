@@ -8,6 +8,6 @@ CONSTRUCT {
 } WHERE {
     ?agent <http://purl.obolibrary.org/obo/RO_0000053> ?role .
     ?role vivo:relatedBy ?grant .
-    ?grant a vivo:Grant .
+    { ?grant a vivo:Grant } UNION { ?grant a vivo:Contract }
     FILTER NOT EXISTS { ?grant vivo:relates ?agent } 
 }
