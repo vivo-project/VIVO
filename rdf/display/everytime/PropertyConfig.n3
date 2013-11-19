@@ -986,20 +986,6 @@ local:equipmentInFacilityConfig a :ObjectPropertyDisplayConfig ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGrouplocation> .
 
-local:hasRoomContext a :ConfigContext ;
-    :hasConfiguration local:hasRoomConfig ;
-    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000051> ;
-    :qualifiedByDomain      vivo:Building ;
-    :qualifiedBy      vivo:Room .
-
-local:hasRoomConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
-    :displayName "rooms" ;
-    vitro:displayRankAnnot 2;
-    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
-    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
-    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGrouplocation> .
-
 local:bldgGeographicallyContainsContext a :ConfigContext ;
     :hasConfiguration local:bldgGeographicallyContainsConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/BFO_0000051> ;

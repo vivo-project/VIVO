@@ -1,0 +1,22 @@
+PREFIX arg: <http://purl.obolibrary.org/obo/> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+PREFIX v:   <http://www.w3.org/2006/vcard/ns#> 
+PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+
+CONSTRUCT {
+    ?s arg:ARG_2000028 _:vcard .
+    _:vcard arg:ARG_2000029 ?s .
+    _:vcard a v:Group .
+} WHERE {
+    ?s a foaf:Group
+    FILTER ( 
+        EXISTS { ?s vivo:email ?email } || 
+        EXISTS { ?s vivo:primaryEmail ?primaryEmail } ||
+        EXISTS { ?s vivo:phoneNumber ?phoneNumber } ||
+        EXISTS { ?s vivo:primaryPhoneNumber ?primaryPhoneNumber } ||
+        EXISTS { ?s vivo:faxNumber ?faxNumber } ||
+        EXISTS { ?s vivo:mailingAddress ?address } ||
+        EXISTS { ?s vivo:webpage ?webpage } 
+    ) 
+    FILTER NOT EXISTS { ?s arg:ARG_2000028 ?vcardNode }
+}
