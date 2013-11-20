@@ -1282,6 +1282,20 @@ local:awardOrHonorGivenConfig a :ObjectPropertyDisplayConfig ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
+local:awardConferredByContext a :ConfigContext ;
+    :hasConfiguration local:awardConferredByConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#assignedBy> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#AwardReceipt> ;
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
+
+local:awardConferredByConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "award conferred by" ;
+    vitro:displayRankAnnot 3;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
 local:orgAwardsGrantContext a :ConfigContext ;
     :hasConfiguration local:orgAwardsGrantConfig ;
     :configContextFor <http://vivoweb.org/ontology/core#assigns> ;
