@@ -1279,7 +1279,7 @@ local:awardOrHonorGivenConfig a :ObjectPropertyDisplayConfig ;
     :displayName "award or honor given" ;
     vitro:displayRankAnnot 72;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
-    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:awardConferredByContext a :ConfigContext ;

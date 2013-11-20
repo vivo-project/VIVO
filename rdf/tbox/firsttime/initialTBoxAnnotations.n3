@@ -186,7 +186,7 @@ vivo:yearPrecision
       rdfs:label "year value"@en-US .
 
 vivo:assigneeFor
-      rdfs:label "assignee for"@en-US ;
+      rdfs:label "assignee for patent"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
