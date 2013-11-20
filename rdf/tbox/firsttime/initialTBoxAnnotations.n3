@@ -6158,7 +6158,11 @@ obo:ERO_0000789
 obo:BFO_0000050
       rdfs:label "part of"@en-US ;
       vitro:offerCreateNewOptionAnnot
-              "true"^^xsd:boolean .
+              "true"^^xsd:boolean ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
 bibo:Letter
       rdfs:label "Letter"@en-US ;
@@ -6248,7 +6252,11 @@ obo:RO_0002351
 obo:BFO_0000051
       rdfs:label "has part"@en-US ;
       vitro:offerCreateNewOptionAnnot
-              "true"^^xsd:boolean .
+              "true"^^xsd:boolean ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
 obo:ARG_2000008
       rdfs:label "Topic Weight Measurement"@en-US .
@@ -7163,7 +7171,11 @@ vcard:Location
       rdfs:label "Location"@en-US .
 
 obo:RO_0001015
-      rdfs:label "location of"@en-US .
+      rdfs:label "location of"@en-US ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
 vcard:OrganizationUnitName
       rdfs:label "Organizational Unit Name"@en-US .
