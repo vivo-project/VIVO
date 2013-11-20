@@ -94,6 +94,12 @@
                 <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/ontology/bibo/presents"/>
+                <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 

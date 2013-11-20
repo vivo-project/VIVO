@@ -860,6 +860,34 @@ local:preferredTitleConfig a :ObjectPropertyDisplayConfig ;
 
 ### properties using default editing form ##
 
+local:documentHasPartContext a :ConfigContext ;
+    :hasConfiguration local:documentHasPartConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000051> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/Document> ;
+    :qualifiedBy      <http://purl.org/ontology/bibo/DocumentPart> .
+
+local:documentHasPartConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "has part" ;
+    vitro:displayRankAnnot -1;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupother> .
+
+local:documentPartOfContext a :ConfigContext ;
+    :hasConfiguration local:documentPartOfConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000051> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/Document> ;
+    :qualifiedBy      <http://purl.org/ontology/bibo/DocumentPart> .
+
+local:documentPartOfConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "part of" ;
+    vitro:displayRankAnnot -1;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupother> .
+
 local:hasSubOrganizationContext a :ConfigContext ;
     :hasConfiguration local:hasSubOrganizationConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/BFO_0000051> ;
@@ -867,7 +895,7 @@ local:hasSubOrganizationContext a :ConfigContext ;
     :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
 
 local:hasSubOrganizationConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
     :displayName "has sub-organization" ;
     vitro:displayRankAnnot 15;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -881,7 +909,7 @@ local:subOrganizationWithinContext a :ConfigContext ;
     :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
 
 local:subOrganizationWithinConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
     :displayName "organization within" ;
     vitro:displayRankAnnot 20;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -920,7 +948,7 @@ local:inEventSeriesContext a :ConfigContext ;
     :hasConfiguration local:inEventSeriesConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
     :qualifiedByDomain      <http://purl.org/NET/c4dm/event.owl#Event> ;
-    :qualifiedBy      <http://purl.org/NET/c4dm/event.owl#EventSeries> .
+    :qualifiedBy      <http://vivoweb.org/ontology/core#EventSeries> .
 
 local:inEventSeriesConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
@@ -943,20 +971,6 @@ local:eventLocationConfig a :ObjectPropertyDisplayConfig ;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGrouplocation> .
-
-local:eventRelatedDocsContext a :ConfigContext ;
-    :hasConfiguration local:eventRelatedDocsConfig ;
-    :configContextFor <http://purl.org/ontology/bibo/presents> ;
-    :qualifiedByDomain      <http://purl.org/NET/c4dm/event.owl#Event> ;
-    :qualifiedBy      <http://purl.org/ontology/bibo/Document> .
-
-local:eventRelatedDocsConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
-    :displayName "related documents" ;
-    vitro:displayRankAnnot 2;
-    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
-    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
-    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibobscure> .
 
 local:organizationLocationContext a :ConfigContext ;
     :hasConfiguration local:organizationLocationConfig ;
@@ -985,6 +999,20 @@ local:equipmentInFacilityConfig a :ObjectPropertyDisplayConfig ;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGrouplocation> .
+
+local:hasRoomContext a :ConfigContext ;
+    :hasConfiguration local:hasRoomConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000051> ;
+    :qualifiedByDomain vivo:Building ;
+    :qualifiedBy vivo:Room .
+
+local:hasRoomConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "rooms" ;
+    vitro:displayRankAnnot 2;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupother> .
 
 local:bldgGeographicallyContainsContext a :ConfigContext ;
     :hasConfiguration local:bldgGeographicallyContainsConfig ;
