@@ -33,6 +33,7 @@
                                 ?award rdfs:label ?awardLabel
                     } 
                     OPTIONAL { ?awardReceipt core:relates ?givenTo .
+                               ?givenTo a foaf:Person .
                                ?givenTo rdfs:label ?givenToLabel
                     }                
                     OPTIONAL { ?awardReceipt core:dateTimeInterval ?dateTimeInterval .
@@ -64,6 +65,7 @@
                 ?award core:relatedBy ?awardReceipt . 
                 ?award rdfs:label ?awardLabel .
                 ?awardReceipt core:relates ?givenTo .
+                ?givenTo a foaf:Person .
                 ?givenTo rdfs:label ?givenToLabel .
                 ?awardReceipt core:dateTimeValue ?dateTimeValue .
                 ?dateTimeValue core:dateTime ?dateTime  
