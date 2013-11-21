@@ -2654,11 +2654,11 @@ vivo:contributingRole
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:inPropertyGroupAnnot
               <http://vivoweb.org/ontology#vitroPropertyGroupbiography> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean .
 
