@@ -213,14 +213,12 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
         List<List<String>> literalOptions = new ArrayList<List<String>>();
         literalOptions.add(list("http://purl.org/ontology/bibo/Book", "Book"));
         literalOptions.add(list("http://purl.org/ontology/bibo/Chapter", "Chapter"));
-        literalOptions.add(list("http://purl.org/ontology/bibo/Collection", "Collection"));
         literalOptions.add(list("http://purl.org/ontology/bibo/EditedBook", "Edited Book"));
         literalOptions.add(list("http://purl.org/ontology/bibo/Film", "Film"));
         literalOptions.add(list("http://purl.org/ontology/bibo/Magazine", "Magazine"));
         literalOptions.add(list("http://vivoweb.org/ontology/core#Newsletter", "Newsletter"));
         literalOptions.add(list("http://purl.org/ontology/bibo/Newspaper", "Newspaper"));
         literalOptions.add(list("http://vivoweb.org/ontology/core#NewsRelease", "News Release"));
-        literalOptions.add(list("http://purl.org/ontology/bibo/Periodical", "Periodical"));
         literalOptions.add(list("http://purl.org/ontology/bibo/Report", "Report"));
         literalOptions.add(list("http://vivoweb.org/ontology/core#Video", "Video"));
         literalOptions.add(list("http://purl.org/ontology/bibo/Webpage", "Webpage"));

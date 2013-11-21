@@ -50,7 +50,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <#assign yearHint     = "<span class='hint'>(${i18n().year_hint_format})</span>" />
 
 
-<h2>${titleVerb}&nbsp;${i18n().educational_training_for} ${editConfiguration.subjectName}</h2>
+<h2>${titleVerb}&nbsp;${i18n().editor_of_entry} ${editConfiguration.subjectName}</h2>
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
