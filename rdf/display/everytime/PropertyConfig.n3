@@ -860,6 +860,20 @@ local:preferredTitleConfig a :ObjectPropertyDisplayConfig ;
 
 ### properties using default editing form ##
 
+local:credentialOfContext a :ConfigContext ;
+    :hasConfiguration local:credentialOfConfig ;
+    :configContextFor vivo:relatedBy ;
+    :qualifiedByDomain      vivo:Credential ;
+    :qualifiedBy      vivo:IssuedCredential .
+
+local:credentialOfConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "credential of" ;
+    vitro:displayRankAnnot 6;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
 local:documentHasPartContext a :ConfigContext ;
     :hasConfiguration local:documentHasPartConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/BFO_0000051> ;
@@ -1236,8 +1250,8 @@ local:awardOrHonorReceiptsConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
     :displayName "receipts" ;
     vitro:displayRankAnnot 3;
-    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
-    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:nobody ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupother> .
 
 local:awardReceiptsContext a :ConfigContext ;
@@ -1337,7 +1351,7 @@ local:bfo_0000055Config a :ObjectPropertyDisplayConfig ;
     :displayName "participant" ;
     vitro:displayRankAnnot 1;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
-    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupother> .
 
 ### grant roles using the core:relates property ###
@@ -1353,7 +1367,7 @@ local:grantRelatesConfig a :ObjectPropertyDisplayConfig ;
     :displayName "contributor" ;
     vitro:displayRankAnnot 1;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
-    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbiography> .
 
 ### faux properties for dateTimeValue ###
