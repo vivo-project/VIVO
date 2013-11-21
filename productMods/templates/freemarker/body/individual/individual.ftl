@@ -18,6 +18,12 @@
     <!--postindividual overiew ftl-->
 </#assign>
 
+<#if individual.conceptSubclass() >
+    <#assign overview = propertyGroups.pullProperty("http://www.w3.org/2004/02/skos/core#broader")!> 
+    <#assign overview = propertyGroups.pullProperty("http://www.w3.org/2004/02/skos/core#narrower")!> 
+    <#assign overview = propertyGroups.pullProperty("http://www.w3.org/2004/02/skos/core#related")!> 
+</#if>
+
 <#include "individual-vitro.ftl">
 <script>
 var i18nStrings = {

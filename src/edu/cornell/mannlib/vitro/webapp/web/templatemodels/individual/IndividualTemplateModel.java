@@ -31,6 +31,11 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     
     private static final String FOAF = "http://xmlns.com/foaf/0.1/";
     private static final String PERSON_CLASS = FOAF + "Person";
+    private static final String AWARD_CLASS = "http://vivoweb.org/ontology/core#Award";
+    private static final String DEGREE_CLASS = "http://vivoweb.org/ontology/core#AcademicDegree";
+    private static final String CONTACT_CLASS = "http://purl.obolibrary.org/obo/ARG_2000376";
+    private static final String CREDENTIAL_CLASS = "http://vivoweb.org/ontology/core#Credential";
+    private static final String DTP_CLASS = "http://vivoweb.org/ontology/core#DateTimeValuePrecision";
     private static final String ORGANIZATION_CLASS = FOAF + "Organization";
     private static final String BASE_VISUALIZATION_URL = 
         UrlBuilder.getUrl(Route.VISUALIZATION_SHORT.path());
@@ -147,6 +152,14 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     }
     
     /* Template methods (for efficiency, not pre-computed) */
+    public boolean conceptSubclass() {
+        if ( isVClass(AWARD_CLASS) || isVClass(DEGREE_CLASS) ||isVClass(CONTACT_CLASS) || isVClass(CREDENTIAL_CLASS) || isVClass(DTP_CLASS) ) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     public boolean person() {
         return isVClass(PERSON_CLASS);
