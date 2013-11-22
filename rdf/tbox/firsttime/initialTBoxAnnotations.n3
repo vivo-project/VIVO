@@ -1586,7 +1586,7 @@ geo:population
 vcard:Geographical
       rdfs:label "Geographical"@en-US .
 
-obo:TODO_Dataset
+vivo:Dataset
       rdfs:label "Dataset"@en-US ;
       vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouppublications> ;
       vitro:displayLimitAnnot

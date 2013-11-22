@@ -10,9 +10,9 @@
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:core="http://vivoweb.org/ontology/core#">
 
- <!-- http://purl.obolibrary.org/obo/TODO_Dataset -->
+ <!-- http://vivoweb.org/ontology/core#Dataset -->
  
-     <owl:Class rdf:about="http://purl.obolibrary.org/obo/TODO_Dataset">
+     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Dataset">
  
          <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
              <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A named collection of data, usually containing only one type of data</obo:IAO_0000115>
@@ -31,7 +31,7 @@
          <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.org/spar/cito/citesAsDataSource"/>
-                <owl:allValuesFrom rdf:resource="http://purl.obolibrary.org/obo/TODO_Dataset"/>
+                <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#Dataset"/>
             </owl:Restriction>
          </rdfs:subClassOf>
 </owl:Class>
