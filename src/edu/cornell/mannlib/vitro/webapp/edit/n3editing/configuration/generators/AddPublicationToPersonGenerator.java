@@ -890,6 +890,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
     private List<List<String>> getPublicationTypeLiteralOptions() {
         List<List<String>> literalOptions = new ArrayList<List<String>>();
+        literalOptions.add(list("http://vivoweb.org/ontology/core#Abstract", "Abstract"));
         literalOptions.add(list("http://purl.org/ontology/bibo/AcademicArticle", "Academic Article"));
         literalOptions.add(list("http://purl.org/ontology/bibo/Article", "Article"));
         literalOptions.add(list("http://purl.org/ontology/bibo/AudioDocument", "Audio Document"));
@@ -901,6 +902,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         literalOptions.add(list("http://vivoweb.org/ontology/core#ConferencePaper", "Conference Paper"));
         literalOptions.add(list("http://vivoweb.org/ontology/core#ConferencePoster", "Conference Poster"));
         literalOptions.add(list("http://vivoweb.org/ontology/core#Database", "Database"));
+        literalOptions.add(list("http://purl.obolibrary.org/obo/TODO_Dataset", "Dataset"));
         literalOptions.add(list("http://purl.org/ontology/bibo/EditedBook", "Edited Book"));
         literalOptions.add(list("http://vivoweb.org/ontology/core#EditorialArticle", "Editorial Article"));
         literalOptions.add(list("http://purl.org/ontology/bibo/Film", "Film"));
