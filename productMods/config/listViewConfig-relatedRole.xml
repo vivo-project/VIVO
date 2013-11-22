@@ -36,9 +36,9 @@
             OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?indivInRole .
                        ?indivInRole rdfs:label ?indivLabel 
             }
-            OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/BFO_0000055&gt; ?indivInRole .
+            OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?indivInRole .
             }
-            OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/BFO_0000055&gt; ?indivInRole .
+            OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?indivInRole .
                        ?indivInRole rdfs:label ?indivLabel 
             }
 
@@ -92,7 +92,7 @@
             } UNION {
                ?subject ?property ?role .
                ?role a ?objectType .
-               ?role &lt;http://purl.obolibrary.org/obo/BFO_0000055&gt; ?indivInRole .
+               ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?indivInRole .
                ?indivInRole rdfs:label ?indivLabel
             }
         } 
