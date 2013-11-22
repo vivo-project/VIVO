@@ -14,7 +14,7 @@
  
      <owl:Class rdf:about="http://purl.obolibrary.org/obo/TODO_Dataset">
  
-         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000030"/>
+         <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
              <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A named collection of data, usually containing only one type of data</obo:IAO_0000115>
              <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">US Patent Data; US Job Data</obo:IAO_0000112>
 
