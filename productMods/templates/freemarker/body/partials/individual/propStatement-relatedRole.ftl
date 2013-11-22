@@ -28,25 +28,16 @@
          so use the type label instead if not collated by subclass.
     -->
     <#local roleLabel>
-    <#-- 
-            Display, e.g., "Principal Investigator" for "Principal Investigator Role", "Editor" for "Editor Role".
-            This information is redundant if the property is collated, since it appears in the subclass label.
-    -->
        
         <#if statement.roleTypeLabel?has_content>
-            <#assign roleTypeLabel = statement.roleTypeLabel >
-        <#else>
-            <#assign roleTypeLabel = "" >
+            <#assign roleTypeLabel = statement.roleTypeLabel!"" >
         </#if>
-        <#if statement.roleLabel?has_content>
-            <#if statement.roleLabel?lower_case?replace(" role", "") != roleTypeLabel?lower_case?replace(" role", "")>
-                ${statement.roleLabel?replace(" Role", "")}
-            </#if>
-        <#elseif (! property.collatedBySubclass ) && roleTypeLabel?has_content>
+        <#if statement.roleLabel??>
+            ${statement.roleLabel?replace(" Role", "")?replace(" role","")}
+        <#elseif !property.collatedBySubclass >
             ${roleTypeLabel?replace(" Role", "")}
         </#if>
     </#local>
 
     ${linkedIndividual}&nbsp;${roleLabel!}&nbsp;<@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
-
 </#macro>
