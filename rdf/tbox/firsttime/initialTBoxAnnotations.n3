@@ -103,7 +103,11 @@ vivo:SeminarSeries
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ARG_0000172
-      rdfs:label "patient ID"@en-US .
+      rdfs:label "patient ID"@en-US ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
 vivo:supplementalInformation
       rdfs:label "supplemental information"@en-US ;
@@ -124,9 +128,9 @@ vcard:Geo
       rdfs:label "Geo"@en-US .
 
 bibo:chapter
-      rdfs:label "chapter"@en-US ;
+      rdfs:label "chapter number"@en-US ;
       vitro:displayRankAnnot
-              "50"^^xsd:int ;
+              "53"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -190,15 +194,17 @@ vivo:assigneeFor
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
-              "5"^^xsd:int ;
+              "60"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:offerCreateNewOptionAnnot
               "true"^^xsd:boolean ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#selfEditor> ;
       vitro:selectFromExistingAnnot
-              "true"^^xsd:boolean .
+              "true"^^xsd:boolean ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> .
 
 vcard:organizationName
       rdfs:label "organization name"@en-US .
@@ -291,23 +297,24 @@ vivo:placeOfPublication
               "City in which the publication was done."^^xsd:string .
 
 vivo:hasCollaborator
-      rdfs:label "collaborator"@en-US ;
-      vitro:customEntryFormAnnot
-              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AutocompleteObjectPropertyFormGenerator"^^xsd:string ;
-      vitro:displayLimitAnnot
-              "5"^^xsd:int ;
-      vitro:displayRankAnnot
-              "60"^^xsd:int ;
+      rdfs:label "has collaborator"@en-US ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> ;
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:publicDescriptionAnnot
-              "Use for a simple assertion that a person or organization is your collaborator; to describe the relationship in more detail enter a role for each collaborator in some common endeavor."^^xsd:string ;
-      vitro:selectFromExistingAnnot
-              "true"^^xsd:boolean .
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
+# moved to /rdf/display/everytime/PropertyConfig.n3 to allow differentiated placement and labeling
+#      vitro:customEntryFormAnnot
+#              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AutocompleteObjectPropertyFormGenerator"^^xsd:string ;
+#      vitro:displayLimitAnnot
+#              "5"^^xsd:int ;
+#      vitro:displayRankAnnot
+#              "60"^^xsd:int ;
+#      vitro:inPropertyGroupAnnot
+#              <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> ;
+#      vitro:publicDescriptionAnnot
+#              "Use for a simple assertion that a person or organization is your collaborator; to describe the relationship in more detail enter a role for each collaborator in some common endeavor."^^xsd:string ;
+#      vitro:selectFromExistingAnnot
+#              "true"^^xsd:boolean .
 
 vivo:GovernmentAgency
       rdfs:label "Government Agency"@en-US ;
@@ -343,7 +350,7 @@ skos:narrower
               "true"^^xsd:boolean .
 
 vivo:affiliatedOrganization
-      rdfs:label "affliliated organization"@en-US ;
+      rdfs:label "has affiliated organization"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -412,11 +419,11 @@ bibo:pageStart
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
-              "40"^^xsd:int ;
+              "12"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+              <http://vivoweb.org/ontology#vitroPropertyGroupbibobscure> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
@@ -555,7 +562,11 @@ vcard:OrganizationName
       rdfs:label "Organization Name"@en-US .
 
 obo:ERO_0000076
-      rdfs:label "has input type"@en-US .
+      rdfs:label "has input type"@en-US ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
 vivo:researchAreaOf
       rdfs:label "research area of"@en-US ;
@@ -690,23 +701,31 @@ vivo:Video
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:IAO_0000142
-      rdfs:label "mentions" .
+      rdfs:label "mentions" ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobodyc> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
 vivo:submitted
       rdfs:label "submitted"@en-US .
 
 obo:ERO_0000077
-      rdfs:label "has output type"@en-US .
+      rdfs:label "has output type"@en-US ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
 bibo:Issue
       rdfs:label "Issue"@en-US ;
       vitro:displayLimitAnnot
-              "-1"^^xsd:int ;
+              "1"^^xsd:int ;
       vitro:displayRankAnnot
-              "-1"^^xsd:int ;
+              "21"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouppublications> ;
+      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGroupbibobscure> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
@@ -903,7 +922,7 @@ bibo:pmid
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
-              "10"^^xsd:int ;
+              "12"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -1137,11 +1156,11 @@ bibo:distributor
               "true"^^xsd:boolean .
 
 vivo:eligibleFor
-      rdfs:label "eligible for"@en-US ;
+      rdfs:label "credential eligibility attained"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
-              "2"^^xsd:int ;
+              "15"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -1150,6 +1169,8 @@ vivo:eligibleFor
               "true"^^xsd:boolean ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:publicDescriptionAnnot
+              "Used for the situation where a credential has a prerequisite training or degree, as in becoming board eligible in a field of medicine"^^xsd:string ;
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean .
 
@@ -1313,7 +1334,16 @@ bibo:presents
               "true"^^xsd:boolean .
 
 obo:ERO_0000054
-      rdfs:label "lab data format"@en-US .
+      rdfs:label "lab data format"@en-US ;
+      vitro:displayRankAnnot
+              "120"^^xsd:int ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#selfEditor> ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> .
+
 
 obo:IAO_0000144
       rdfs:label "Conclusion Textual Entity"@en-US .
@@ -1455,11 +1485,11 @@ vivo:localAwardId
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
-              "60"^^xsd:int ;
+              "72"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupidentifiers> ;
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#selfEditor> ;
       vitro:publicDescriptionAnnot
@@ -1480,7 +1510,20 @@ vivo:IssuedCredential
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ARG_0000197
-      rdfs:label "health care provider ID"@en-US .
+      rdfs:label "health care provider ID"@en-US ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupidentifiers> ;
+      vitro:displayRankAnnot
+              "40"^^xsd:int ;
+      vitro:displayLimitAnnot
+              "2"^^xsd:int ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#selfEditor> ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupidentifiers> .
+
 
 vcard:hasTelephone
       rdfs:label "has telephone"@en-US .
@@ -1498,13 +1541,12 @@ vivo:iclCode
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
-              """The International classification(s) to which the published application has been assigned.
-"""^^xsd:string .
+              """The International classification(s) to which the published application has been assigned."""^^xsd:string .
 
 bibo:presentedAt
-      rdfs:label "presented at"@en-US ;
+      rdfs:label "presented at event"@en-US ;
       vitro:displayRankAnnot
-              "200"^^xsd:int ;
+              "120"^^xsd:int ;
       vitro:fullPropertyNameAnnot
               "presentedAt"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -1532,7 +1574,7 @@ vivo:publisherOf
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
-              "51"^^xsd:int ;
+              "25"^^xsd:int ;
       vitro:fullPropertyNameAnnot
               "publisher of"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -1718,7 +1760,11 @@ vcard:Address
       rdfs:label "Address"@en-US .
 
 obo:ERO_0000031
-      rdfs:label "uses"@en-US .
+      rdfs:label "uses"@en-US ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
 vivo:Librarian
       rdfs:label "Librarian"@en-US ;
@@ -1797,7 +1843,7 @@ bibo:doi
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
-              "1"^^xsd:int ;
+              "3"^^xsd:int ;
       vitro:fullPropertyNameAnnot
               "doi"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -1871,7 +1917,7 @@ bibo:abstract
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
-              "59"^^xsd:int ;
+              "1"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -1972,7 +2018,7 @@ vivo:Review
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
-              "5"^^xsd:int ;
+              "19"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -2128,6 +2174,10 @@ bibo:draft
 
 bibo:issn
       rdfs:label "International Standard Serial Number (ISSN)"@en-US ;
+      vitro:displayLimitAnnot
+              "2"^^xsd:int ;
+      vitro:displayRankAnnot
+              "1"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -2247,7 +2297,7 @@ vivo:description
       vitro:displayLimitAnnot
               "3"^^xsd:int ;
       vitro:displayRankAnnot
-              "30"^^xsd:int ;
+              "15"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -2279,6 +2329,10 @@ vcard:timeZone
 
 <http://purl.org/spar/c4o/hasGlobalCountValue>
       rdfs:label "has global count value"@en-US ;
+      vitro:displayLimitAnnot
+              "1"^^xsd:int ;
+      vitro:displayRankAnnot
+              "3"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -2306,7 +2360,7 @@ vivo:grantSubcontractedThrough
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
-              "60"^^xsd:int ;
+              "15"^^xsd:int ;
       vitro:fullPropertyNameAnnot
               "grantSubcontractedThrough"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -2399,11 +2453,11 @@ vivo:geographicFocusOf
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
-              "20"^^xsd:int ;
+              "70"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGrouplocation> ;
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:selectFromExistingAnnot
@@ -2417,11 +2471,13 @@ vivo:freetextKeyword
       vitro:displayLimitAnnot
               "10"^^xsd:int ;
       vitro:displayRankAnnot
-              "56"^^xsd:int ;
+              "140"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
       vitro:publicDescriptionAnnot
               "Intended for a word or short phrase only where no instance of a controlled vocabulary can be identified. Can also be used to help in highlighting subtle difference in work."^^xsd:string .
 
@@ -2513,8 +2569,20 @@ vivo:informationResourceSupportedBy
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean .
 
-obo:ERO_0000397
-      rdfs:label "performs"@en-US .
+# duplicate
+# obo:ERO_0000397
+#      rdfs:label "performs technique"@en-US ;
+#      vitro:displayLimitAnnot
+#              "61"^^xsd:int ;
+#      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+#              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+#      vitro:offerCreateNewOptionAnnot
+#              "true"^^xsd:boolean ;
+#      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+#              <http://vitro.mannlib.cornell.edu/ns/vitro/role#selfEditor> ;
+#      vitro:selectFromExistingAnnot
+#              "true"^^xsd:boolean ;
+#      vitro:inPropertyGroupAnnot <http://vivoweb.org/ontology#vitroPropertyGroupoutreach> .
 
 vivo:ConferencePaper
       rdfs:label "Conference Paper"@en-US ;
@@ -2570,7 +2638,11 @@ obo:ARG_2000066
       rdfs:label "American Board of Anesthesiology"@en-US .
 
 obo:ARG_0000001
-      rdfs:label "is template"@en-US .
+      rdfs:label "is template"@en-US ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
 obo:RO_0000053
       rdfs:label "bearer of"@en-US .
@@ -2604,8 +2676,18 @@ obo:BFO_0000023
       rdfs:label "Role"@en-US .
 
 obo:ERO_0000045
-      rdfs:label "has restriction"@en-US .
-
+      rdfs:label "has restriction"@en-US ;
+      vitro:displayLimitAnnot
+              "1"^^xsd:int ;
+      vitro:displayRankAnnot
+              "30"^^xsd:int ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+     vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupbibobscure> .
+ 
 vivo:Division
       rdfs:label "Division"@en-US ;
       vitro:displayLimitAnnot
@@ -2663,10 +2745,12 @@ vivo:contributingRole
       rdfs:label "contributor"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
+      vitro:displayRankAnnot
+              "15"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupbiography> ;
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:selectFromExistingAnnot
@@ -2941,7 +3025,11 @@ vivo:validIn
               "true"^^xsd:boolean .
 
 obo:IAO_0000221
-      rdfs:label "is quality measurement of"@en-US .
+      rdfs:label "is quality measurement of"@en-US ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:Conference
       rdfs:label "Conference"@en-US ;
@@ -2971,7 +3059,11 @@ vivo:Department
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:RO_0002234
-      rdfs:label "has output"@en-US .
+      rdfs:label "has output"@en-US ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
 obo:BFO_0000020
       rdfs:label "Specifically Dependent Continuant"@en-US .
@@ -3034,7 +3126,16 @@ vivo:PrivateCompany
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0001520
-      rdfs:label "performs human study"@en-US .
+      rdfs:label "performs human study"@en-US ;
+      vitro:displayRankAnnot
+              "90"^^xsd:int ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupresearch> .
+
 
 vivo:AcademicDegree
       rdfs:label "Academic Degree"@en-US ;
@@ -3091,11 +3192,11 @@ bibo:pageEnd
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
-              "50"^^xsd:int ;
+              "13"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+              <http://vivoweb.org/ontology#vitroPropertyGroupbibobscure> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
@@ -3117,7 +3218,11 @@ bibo:AudioDocument
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:RO_0002233
-      rdfs:label "has input"@en-US .
+      rdfs:label "has input"@en-US ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
 geo:isPredecessorOf
       rdfs:label "is predecessor of"@en-US ;
@@ -3159,11 +3264,19 @@ vcard:Photo
 
 obo:ERO_0000029
       rdfs:label "provides access to"@en-US ;
+      vitro:displayLimitAnnot
+              "5"^^xsd:int ;
+      vitro:displayRankAnnot
+              "50"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:selectFromExistingAnnot
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+      vitro:offerCreateNewOptionAnnot
+              "true"^^xsd:boolean ;
+       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean .
 
 vcard:honorificSuffix
@@ -3174,7 +3287,7 @@ vcard:honorificSuffix
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
-              "5"^^xsd:int ;
+              "1"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -3183,6 +3296,8 @@ vcard:honorificSuffix
               "true"^^xsd:boolean ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:publicDescriptionAnnot
+              "A 'global citation frequency' is an entity referencing a distinct source, date, and value; include the value, source, and date in the label for clarity."^^xsd:string ;
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean .
 
@@ -3387,10 +3502,15 @@ vivo:StudentOrganization
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:OBI_0000312
-      rdfs:label "is specified output of"@en-US .
+      rdfs:label "is specified output of"@en-US ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
+# note that this applies to grants only; see hasOutputContext for obo:RO_0002234 in /rdf/display/everytime/propertyConfig.n3
 vivo:supportedInformationResource
-      rdfs:label "supported publications"@en-US ;
+      rdfs:label "supported publications or other works"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -3432,7 +3552,7 @@ geo:hasMember
 bibo:eissn
       rdfs:label "Electronic International Standard Serial Number (EISSN)"@en-US ;
       vitro:displayRankAnnot
-              "90"^^xsd:int ;
+              "2"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -3469,13 +3589,13 @@ vivo:publisher
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
-              "51"^^xsd:int ;
+              "18"^^xsd:int ;
       vitro:fullPropertyNameAnnot
               "publisher"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupbibobscure> ;
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
       vitro:offerCreateNewOptionAnnot
               "true"^^xsd:boolean ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -3659,7 +3779,7 @@ vivo:hasPredecessorOrganization
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+              <http://vivoweb.org/ontology#vitroPropertyGroupaddress> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:offerCreateNewOptionAnnot
@@ -3884,7 +4004,11 @@ geo:populationYear
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:IAO_0000136
-      rdfs:label "is about"@en-US .
+      rdfs:label "is about"@en-US ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
 geo:nationalityES
       rdfs:label "nationalityES"@en-US ;
@@ -4063,6 +4187,8 @@ vivo:hasFacility
       rdfs:label "has facility"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
+      vitro:displayRankAnnot
+              "90"^^xsd:int ;
       vitro:fullPropertyNameAnnot
               "has facility"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -4074,7 +4200,7 @@ vivo:hasFacility
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
-              "This relates something to a facility that it owns or runs."^^xsd:string ;
+              "This relates an organization to a facility that it owns or runs."^^xsd:string ;
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean .
 
@@ -4163,7 +4289,7 @@ vivo:geographicFocus
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupresearch> ;
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
       vitro:offerCreateNewOptionAnnot
               "true"^^xsd:boolean ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -4600,6 +4726,10 @@ vivo:EditorRole
 
 bibo:lccn
       rdfs:label "Library of Congress Control Number (LCCN)"@en-US ;
+      vitro:displayLimitAnnot
+              "1"^^xsd:int ;
+      vitro:displayRankAnnot
+              "15"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -4856,7 +4986,7 @@ bibo:Interview
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGrouptime> ;
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
@@ -4933,13 +5063,13 @@ bibo:translator
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
-              "55"^^xsd:int ;
+              "14"^^xsd:int ;
       vitro:fullPropertyNameAnnot
               "translator"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupbibobscure> ;
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
       vitro:offerCreateNewOptionAnnot
               "true"^^xsd:boolean ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -4965,12 +5095,14 @@ vivo:distributesFundingFrom
       rdfs:label "distributes funding from"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
+      vitro:displayRankAnnot
+              "64"^^xsd:int ;
       vitro:fullPropertyNameAnnot
               "distributes funding from"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+              <http://vivoweb.org/ontology#vitroPropertyGroupresearch> ;
       vitro:offerCreateNewOptionAnnot
               "true"^^xsd:boolean ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -5089,11 +5221,14 @@ vivo:abbreviation
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
-              "11"^^xsd:int ;
+              "5"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+      
 
 vcard:postalCode
       rdfs:label "postal code"@en-US .
@@ -5149,7 +5284,10 @@ vivo:governingAuthorityFor
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
-              "8"^^xsd:int .
+              "70"^^xsd:int ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
 
 vcard:Telephone
       rdfs:label "Telephone"@en-US .
@@ -5193,6 +5331,8 @@ vivo:providesFundingThrough
       rdfs:label "provides funding through"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
+      vitro:displayRankAnnot
+              "65"^^xsd:int ;
       vitro:fullPropertyNameAnnot
               "provides funding through"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -5204,7 +5344,7 @@ vivo:providesFundingThrough
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
-              "Relates an organization to the organization through which it provides its funding."^^xsd:string ;
+              "Relates a funding organization to another funding organization through which it provides its funding. Note that organizations may be asserted to be of more than one type."^^xsd:string ;
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean .
 
@@ -5418,7 +5558,7 @@ bibo:oclcnum
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
-              "1"^^xsd:int ;
+              "4"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -5566,11 +5706,11 @@ vivo:hasSuccessorOrganization
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
-              "60"^^xsd:int ;
+              "61"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+              <http://vivoweb.org/ontology#vitroPropertyGroupaddress> ;
       vitro:offerCreateNewOptionAnnot
               "true"^^xsd:boolean ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -5682,9 +5822,11 @@ vivo:translatorOf
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
-              "30"^^xsd:int ;
+              "70"^^xsd:int ;
       vitro:fullPropertyNameAnnot
               "translatorOf"^^xsd:string ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -5749,10 +5891,16 @@ vivo:hasFundingVehicle
       rdfs:label "funding provided via"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
+      vitro:displayRankAnnot
+              "35"^^xsd:int ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:offerCreateNewAnnot
+              "true"^^xsd:boolean ;
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean .
 
@@ -6038,10 +6186,34 @@ obo:RO_0001018
 
 obo:ERO_0000033
       rdfs:label "has expertise in technique"@en-US ;
+      vitro:displayLimitAnnot
+              "5"^^xsd:int ;
+      vitro:displayRankAnnot
+              "62"^^xsd:int ;
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean ;
       vitro:offerCreateNewOptionAnnot
-              "true"^^xsd:boolean .
+              "true"^^xsd:boolean ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupoutreach> .
+              
+obo:ERO_0000397
+      rdfs:label "performs technique"@en-US ;
+      vitro:displayLimitAnnot
+              "5"^^xsd:int ;
+       vitro:displayRankAnnot
+              "61"^^xsd:int ;
+      vitro:selectFromExistingAnnot
+              "true"^^xsd:boolean ;
+      vitro:offerCreateNewOptionAnnot
+              "true"^^xsd:boolean ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#selfEditor> ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupoutreach> .
+
 
 bibo:peerReviewed
       rdfs:label "peer reviewed"@en-US .
@@ -6124,7 +6296,11 @@ bibo:Code
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:RO_0002353
-      rdfs:label "output of"@en-US .
+      rdfs:label "output of"@en-US ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
 obo:ERO_0000038
       rdfs:label "specifies the use of"@en-US .
@@ -6160,7 +6336,11 @@ obo:ERO_0001716
       rdfs:label "Database"@en-US .
 
 <http://vivoweb.org/ontology/scientific-research#documentationFor>
-      rdfs:label "documentation for"@en-US ;
+      rdfs:label "documentation for service"@en-US ;
+      vitro:displayLimitAnnot
+              "2"^^xsd:int ;
+      vitro:displayRankAnnot
+              "75"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -6186,8 +6366,6 @@ obo:ERO_0000789
 
 obo:BFO_0000050
       rdfs:label "part of"@en-US ;
-      vitro:offerCreateNewOptionAnnot
-              "true"^^xsd:boolean ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -6379,7 +6557,22 @@ obo:ARG_2000009
       rdfs:label "Expertise Measurement"@en-US .
 
 obo:ERO_0000037
-      rdfs:label "provides service"@en-US .
+      rdfs:label "contact or provider for service"@en-US ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupoutreach> ;
+      vitro:offerCreateNewOptionAnnot
+              "true"^^xsd:boolean ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#selfEditor> ;
+      vitro:selectFromExistingAnnot
+              "true"^^xsd:boolean ;
+      vitro:displayLimitAnnot
+              "5"^^xsd:int ;
+      vitro:displayRankAnnot
+              "22"^^xsd:int .
+
 
 obo:ARG_2000028
       rdfs:label "has contact info"@en-US .
@@ -6552,13 +6745,13 @@ vivo:dateTimeInterval
       vitro:customEntryFormAnnot
               "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimeIntervalFormGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
-              "5"^^xsd:int ;
+              "1"^^xsd:int ;
       vitro:displayRankAnnot
-              "5"^^xsd:int ;
+              "19"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGrouptime> ;
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
       vitro:offerCreateNewOptionAnnot
               "true"^^xsd:boolean ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -6623,13 +6816,13 @@ vivo:subcontractsGrant
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
-              "62"^^xsd:int ;
+              "63"^^xsd:int ;
       vitro:fullPropertyNameAnnot
               "subcontractsGrant"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+              <http://vivoweb.org/ontology#vitroPropertyGroupresearch> ;
       vitro:offerCreateNewOptionAnnot
               "true"^^xsd:boolean ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -6924,10 +7117,16 @@ vivo:fundingVehicleFor
       rdfs:label "provides funding for"@en-US ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
+      vitro:displayRankAnnot
+              "58"^^xsd:int ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#dbAdmin> ;
+      vitro:offerCreateNewAnnot
+              "true"^^xsd:boolean ;
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean .
 
@@ -7045,6 +7244,10 @@ obo:ERO_0000543
 
 bibo:numPages
       rdfs:label "number of pages"@en-US ;
+      vitro:displayLimitAnnot
+              "1"^^xsd:int ;
+      vitro:displayRankAnnot
+              "11"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -7245,11 +7448,11 @@ bibo:status
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
-              "250"^^xsd:int ;
+              "16"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupbibobscure> ;
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:selectFromExistingAnnot
@@ -7330,7 +7533,7 @@ vivo:hasEquipment
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+              <http://vivoweb.org/ontology#vitroPropertyGroupservice> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:selectFromExistingAnnot
