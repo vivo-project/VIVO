@@ -12,7 +12,7 @@ $(document).ready(function(){
     $.extend(this, i18nStrings);
     
     getGeoFocusResearcherCount();
-    getGeoJsonForMaps();
+    
     
     $('a#globalLink').click(function() {
         buildGlobalMap();
@@ -37,14 +37,14 @@ $(document).ready(function(){
     
     function getLatLong(localName,popup) {
         var lat = [];
-        latLongJson.map(function (json) {
+        jQuery.map(latLongJson, function (json) {
             if ( json.local == localName) {
                 lat.push(json.data["longitude"]);
                 lat.push(json.data["latitude"]);
             }
         });
         if (lat.length == 0) {
-            latLongJson.map(function (json) {
+            jQuery.map(latLongJson, function (json) {
                 if ( json.name == popup) {
                     lat.push(json.data["longitude"]);
                     lat.push(json.data["latitude"]);
@@ -60,13 +60,13 @@ $(document).ready(function(){
 
     function getMapType(localName,popup) {
         var mt = "";
-        latLongJson.map(function (json) {
+        jQuery.map(latLongJson, function (json) {
             if ( json.local == localName) {
                 mt = json.data["mapType"];
             }
         });
         if ( mt.length == 0 ) {
-            latLongJson.map(function (json) {
+            jQuery.map(latLongJson, function (json) {
                 if ( json.name == popup) {
                     mt = json.data["mapType"];
                 }
@@ -77,13 +77,13 @@ $(document).ready(function(){
 
     function getGeoClass(localName,popup) {
         var gc = "";
-        latLongJson.map(function (json) {
+        jQuery.map(latLongJson, function (json) {
             if ( json.local == localName) {
                 gc = json.data["geoClass"];
             }
         });
         if ( gc.length == 0 ) { 
-            latLongJson.map(function (json) {
+            jQuery.map(latLongJson, function (json) {
                 if ( json.name == popup) {
                     gc = json.data["geoClass"];
                 }
@@ -404,6 +404,7 @@ $(document).ready(function(){
                 if ( results != null ) {
                     geoResearcherCount = results.count;
                 }
+                getGeoJsonForMaps();
             }
        });        
     }
