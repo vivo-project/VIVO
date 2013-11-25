@@ -989,7 +989,7 @@ local:documentHasPartContext a :ConfigContext ;
 
 local:documentHasPartConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
-    :displayName "has part" ;
+    :displayName "has document part" ;
     vitro:displayRankAnnot 51;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
@@ -1003,33 +1003,33 @@ local:documentPartOfContext a :ConfigContext ;
 
 local:documentPartOfConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
-    :displayName "part of" ;
+    :displayName "part of other document" ;
     vitro:displayRankAnnot 52;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
     
-local:spatialRegionHasPartContext a :ConfigContext ;
-    :hasConfiguration local:spatialRegionHasPartConfig ;
+local:geographicLocationContainsLocationContext a :ConfigContext ;
+    :hasConfiguration local:geographicLocationContainsLocationConfig ;
     :configContextFor  <http://purl.obolibrary.org/obo/BFO_0000051> ;
-    :qualifiedByDomain <http://purl.obolibrary.org/obo/BFO_0000006> ;
-    :qualifiedBy       <http://purl.obolibrary.org/obo/BFO_0000006> .
+    :qualifiedByDomain vivo:GeographicLocation ;
+    :qualifiedBy       vivo:GeographicLocation .
 
-local:spatialRegionHasPartConfig a :ObjectPropertyDisplayConfig ;
+local:geographicLocationContainsLocationConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
     :displayName "has part" ;
     vitro:displayRankAnnot 81;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
-    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupother> .
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
         
-local:spatialRegionPartOfContext a :ConfigContext ;
-    :hasConfiguration local:spatialRegionPartOfConfig ;
+local:geographicLocationWithinLocationContext a :ConfigContext ;
+    :hasConfiguration local:geographicLocationWithinLocationConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
-    :qualifiedByDomain <http://purl.obolibrary.org/obo/BFO_0000006> ;
-    :qualifiedBy       <http://purl.obolibrary.org/obo/BFO_0000006> .
+    :qualifiedByDomain vivo:GeographicLocation ;
+    :qualifiedBy       vivo:GeographicLocation .
             
-local:spatialRegionPartOfConfig a :ObjectPropertyDisplayConfig ;
+local:geographicLocationWithinLocationConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
     :displayName "part of" ;
     vitro:displayRankAnnot 82;
@@ -1172,24 +1172,38 @@ local:hasRoomContext a :ConfigContext ;
 local:hasRoomConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
     :displayName "rooms" ;
-    vitro:displayRankAnnot 2;
+    vitro:displayRankAnnot 22;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
-    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupother> .
-
-local:bldgGeographicallyContainsContext a :ConfigContext ;
-    :hasConfiguration local:bldgGeographicallyContainsConfig ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+    
+local:roomWithinBuildingContext a :ConfigContext ;
+    :hasConfiguration local:roomWithinBuildingConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/BFO_0000051> ;
-    :qualifiedByDomain      vivo:Building ;
-    :qualifiedBy      vivo:GeographicLocation .
+    :qualifiedByDomain vivo:Room ;
+    :qualifiedBy vivo:Building .
 
-local:bldgGeographicallyContainsConfig a :ObjectPropertyDisplayConfig ;
+local:roomWithinBuildingConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
-    :displayName "geographically contains" ;
-    vitro:displayRankAnnot 6;
+    :displayName "withing building" ;
+    vitro:displayRankAnnot 23;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
-    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGrouplocation> .
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:geographicLocationContainsBuildingContext a :ConfigContext ;
+    :hasConfiguration local:geographicalLocationContainsBuildingConfig ;
+    :configContextFor  <http://purl.obolibrary.org/obo/BFO_0000051> ;
+    :qualifiedByDomain vivo:GeographicLocation ;
+    :qualifiedBy       vivo:Building .
+
+local:geographicLocationContainsBuildingConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "location of building" ;
+    vitro:displayRankAnnot 26;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:bldgGeographicallyWithinContext a :ConfigContext ;
     :hasConfiguration local:bldgGeographicallyWithinConfig ;
@@ -1200,10 +1214,10 @@ local:bldgGeographicallyWithinContext a :ConfigContext ;
 local:bldgGeographicallyWithinConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
     :displayName "geographically within" ;
-    vitro:displayRankAnnot 10;
+    vitro:displayRankAnnot 20;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
-    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGrouplocation> .
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:bldgEquipmentLocationContext a :ConfigContext ;
     :hasConfiguration local:bldgEquipmentLocationConfig ;

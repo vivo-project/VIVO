@@ -6458,8 +6458,6 @@ obo:RO_0002351
 
 obo:BFO_0000051
       rdfs:label "has part"@en-US ;
-      vitro:offerCreateNewOptionAnnot
-              "true"^^xsd:boolean ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
