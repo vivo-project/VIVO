@@ -96,6 +96,9 @@
         <!-- Research Areas -->
         <#include "individual-researchAreas.ftl">
 
+        <!-- Geographic Focus -->
+        <#include "individual-geographicFocus.ftl">
+
 		<#include "individual-openSocial.ftl">
     </section>
     
