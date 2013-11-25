@@ -15,6 +15,7 @@ var newIndividualFormUtils = {
     this.lName = $('#lastName');
     this.mName = $('#middleName');
     this.rdfsLabel = $('#label');
+    this.submitButton = $('#submit');
     },
     
     bindEventListeners: function() {
@@ -22,6 +23,7 @@ var newIndividualFormUtils = {
         
         this.form.submit(function() {
             newIndividualFormUtils.buildRDFSLabel();
+            newIndividualFormUtils.submitButton.attr("disabled",true);
         });    
     
     },
