@@ -993,6 +993,8 @@ local:documentHasPartConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 51;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:documentPartOfContext a :ConfigContext ;
@@ -1119,6 +1121,8 @@ local:seriesForEventConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 17;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:eventLocationContext a :ConfigContext ;
@@ -1175,17 +1179,19 @@ local:hasRoomConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 22;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
     
 local:roomWithinBuildingContext a :ConfigContext ;
     :hasConfiguration local:roomWithinBuildingConfig ;
-    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000051> ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
     :qualifiedByDomain vivo:Room ;
     :qualifiedBy vivo:Building .
 
 local:roomWithinBuildingConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
-    :displayName "withing building" ;
+    :displayName "within building" ;
     vitro:displayRankAnnot 23;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
