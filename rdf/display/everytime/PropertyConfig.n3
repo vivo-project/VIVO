@@ -1197,6 +1197,20 @@ local:roomWithinBuildingConfig a :ObjectPropertyDisplayConfig ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
+local:facilityWithinBuildingContext a :ConfigContext ;
+    :hasConfiguration local:facilityWithinBuildingConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
+    :qualifiedByDomain vivo:Facility ;
+    :qualifiedBy <http://purl.obolibrary.org/obo/BFO_0000029> .
+
+local:facilityWithinBuildingConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "facility of" ;
+    vitro:displayRankAnnot 15;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
 local:geographicLocationContainsBuildingContext a :ConfigContext ;
     :hasConfiguration local:geographicalLocationContainsBuildingConfig ;
     :configContextFor  <http://purl.obolibrary.org/obo/BFO_0000051> ;
@@ -1214,7 +1228,7 @@ local:geographicLocationContainsBuildingConfig a :ObjectPropertyDisplayConfig ;
 local:bldgGeographicallyWithinContext a :ConfigContext ;
     :hasConfiguration local:bldgGeographicallyWithinConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
-    :qualifiedByDomain      vivo:Building ;
+    :qualifiedByDomain      <http://purl.obolibrary.org/obo/BFO_0000029> ;
     :qualifiedBy      vivo:GeographicLocation .
 
 local:bldgGeographicallyWithinConfig a :ObjectPropertyDisplayConfig ;
