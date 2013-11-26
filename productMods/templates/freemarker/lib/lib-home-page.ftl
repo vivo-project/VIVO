@@ -71,7 +71,7 @@
                         <#if !firstPopulatedClassGroup??>
                             <#assign firstPopulatedClassGroup = group />
                         </#if>
-                        <#if group.displayName != "equipment" && group.displayName != "courses" >
+                        <#if !group.uri?contains("equipment") && !group.uri?contains("course") >
                             <li>
                                 <a href="${urls.base}/browse">
                                     <p  class="stats-count">
@@ -91,7 +91,6 @@
                             <#assign groupCount = groupCount + 1>
                         </#if>
                     </#if>
-                    
                 </#list>
             </ul>
         </section>
