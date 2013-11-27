@@ -71,7 +71,7 @@
                         <#if !firstPopulatedClassGroup??>
                             <#assign firstPopulatedClassGroup = group />
                         </#if>
-                        <#if group.displayName != "equipment" && group.displayName != "courses" >
+                        <#if !group.uri?contains("equipment") && !group.uri?contains("course") >
                             <li>
                                 <a href="${urls.base}/browse">
                                     <p  class="stats-count">
@@ -91,7 +91,6 @@
                             <#assign groupCount = groupCount + 1>
                         </#if>
                     </#if>
-                    
                 </#list>
             </ul>
         </section>
@@ -122,10 +121,10 @@
     <h4>${i18n().research_capitalized}</h4>
     <ul>
         <#list classGroups as group>
-            <#if (group.individualCount > 0) && group.displayName == "research" >
+            <#if (group.individualCount > 0) && group.uri?contains("publications") >
                 <#assign foundClassGroup = true />
                 <#list group.classes as class>
-                    <#if (class.individualCount > 0) && (class.uri?contains("Academic Article") || class.uri?contains("Book") || class.uri?contains("Chapter") ||class.uri?contains("Conference Paper") || class.uri?contains("Proceedings") || class.uri?contains("Report")) >
+                    <#if (class.individualCount > 0) && (class.uri?contains("AcademicArticle") || class.uri?contains("Book") || class.uri?contains("Chapter") ||class.uri?contains("ConferencePaper") || class.uri?contains("Grant") || class.uri?contains("Report")) >
                         <li role="listitem">
                             <span>${class.individualCount!}</span>&nbsp;
                             <a href='${urls.base}/individuallist?vclassId=${class.uri?replace("#","%23")!}'>

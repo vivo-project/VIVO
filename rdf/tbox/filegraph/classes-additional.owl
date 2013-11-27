@@ -94,6 +94,12 @@
                 <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/ontology/bibo/presents"/>
+                <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -315,6 +321,22 @@
         </rdfs:subClassOf>
     </owl:Class>
     
+    <!-- http://vivoweb.org/ontology/core#GeographicLocation -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#GeographicLocation">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000050"/>
+                <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#GeographicLocation"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000051"/>
+                <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#GeographicLocation"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
 
 
     <!-- http://purl.org/ontology/bibo/DocumentPart -->
@@ -520,6 +542,50 @@
     </owl:Class>
     
 
+    <!-- http://vivoweb.org/ontology/core#Facility -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#Facility">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000050"/>
+                <owl:allValuesFrom rdf:resource="http://purl.obolibrary.org/obo/BFO_0000029"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000051"/>
+                <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#Facility"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+    <!-- http://vivoweb.org/ontology/core#Building -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#Building">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000050"/>
+                <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#Facility"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000051"/>
+                <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#Room"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+    <!-- http://vivoweb.org/ontology/core#Room -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#Room">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000050"/>
+                <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#Facility"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
 
     <!-- http://purl.org/spar/c4o/BibliographicInformationSource -->
 

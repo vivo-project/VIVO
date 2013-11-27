@@ -12,7 +12,7 @@ $(document).ready(function(){
     $.extend(this, i18nStrings);
     
     getGeoFocusResearcherCount();
-    getGeoJsonForMaps();
+    
     
     $('a#globalLink').click(function() {
         buildGlobalMap();
@@ -35,14 +35,22 @@ $(document).ready(function(){
         $('a#globalLink').removeClass("selected");
     });
     
-    function getLatLong(country) {
+    function getLatLong(localName,popup) {
         var lat = [];
-        latLongJson.map(function (json) {
-            if ( json.name == country) {
+        jQuery.map(latLongJson, function (json) {
+            if ( json.local == localName) {
                 lat.push(json.data["longitude"]);
                 lat.push(json.data["latitude"]);
             }
         });
+        if (lat.length == 0) {
+            jQuery.map(latLongJson, function (json) {
+                if ( json.name == popup) {
+                    lat.push(json.data["longitude"]);
+                    lat.push(json.data["latitude"]);
+                }
+            });
+        }
         if (lat.length == 0) {
             lat.push(0.0);
             lat.push(0.0);
@@ -50,23 +58,37 @@ $(document).ready(function(){
         return(lat);
     }
 
-    function getMapType(country) {
+    function getMapType(localName,popup) {
         var mt = "";
-        latLongJson.map(function (json) {
-            if ( json.name == country) {
+        jQuery.map(latLongJson, function (json) {
+            if ( json.local == localName) {
                 mt = json.data["mapType"];
             }
         });
+        if ( mt.length == 0 ) {
+            jQuery.map(latLongJson, function (json) {
+                if ( json.name == popup) {
+                    mt = json.data["mapType"];
+                }
+            });            
+        }
         return(mt);
     }
 
-    function getGeoClass(country) {
+    function getGeoClass(localName,popup) {
         var gc = "";
-        latLongJson.map(function (json) {
-            if ( json.name == country) {
+        jQuery.map(latLongJson, function (json) {
+            if ( json.local == localName) {
                 gc = json.data["geoClass"];
             }
         });
+        if ( gc.length == 0 ) { 
+            jQuery.map(latLongJson, function (json) {
+                if ( json.name == popup) {
+                    gc = json.data["geoClass"];
+                }
+            });
+        }
         return(gc);
     }
 
@@ -342,7 +364,6 @@ $(document).ready(function(){
                 action: "getGeoFocusLocations",
             },
             complete: function(xhr, status) {
-
                 var results = $.parseJSON(xhr.responseText);
                 if ( results.length == 0 ) {
                     var html = i18nStrings.currentlyNoResearchers;
@@ -355,10 +376,11 @@ $(document).ready(function(){
                 }
                 else {
                     $.each(results, function() {
-                        var locale = this.properties.popupContent;
-                        this.geometry.coordinates = getLatLong(locale);
-                        this.properties.mapType = getMapType(locale);
-                        this.properties.geoClass = getGeoClass(locale);
+                        var popup = this.properties.popupContent;
+                        var localName = this.properties.local;
+                        this.geometry.coordinates = getLatLong(localName,popup);
+                        this.properties.mapType = getMapType(localName,popup);
+                        this.properties.geoClass = getGeoClass(localName,popup);
                         researchAreas["features"].push(this);
                     });
                     buildGlobalMap();
@@ -382,6 +404,7 @@ $(document).ready(function(){
                 if ( results != null ) {
                     geoResearcherCount = results.count;
                 }
+                getGeoJsonForMaps();
             }
        });        
     }

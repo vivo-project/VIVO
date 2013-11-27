@@ -2,6 +2,8 @@
 
 </header>
 
+<#include "developer.ftl">
+
 <nav role="navigation">
     <ul id="main-nav" role="list">
         <#list menu.items as item>

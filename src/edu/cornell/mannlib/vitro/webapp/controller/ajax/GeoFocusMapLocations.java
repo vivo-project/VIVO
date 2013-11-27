@@ -36,7 +36,8 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
         + "PREFIX core: <http://vivoweb.org/ontology/core#>  \n"
         + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>  \n"
         + "PREFIX vivoc: <http://vivo.library.cornell.edu/ns/0.1#>  \n"
-        + "SELECT DISTINCT ?label ?location (COUNT(DISTINCT ?person) AS ?count)  \n"
+        + "PREFIX afn:  <http://jena.hpl.hp.com/ARQ/function#> "
+        + "SELECT DISTINCT ?label ?location (afn:localname(?location) AS ?localName) (COUNT(DISTINCT ?person) AS ?count)  \n"
         + "WHERE { { \n"
         + "    ?location rdf:type core:GeographicRegion .  \n"
         + "    ?location rdfs:label ?label .   \n"
@@ -77,6 +78,7 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
                 String label = map.get("label");
                 String html  = map.get("count");
                 String uri = map.get("location");
+                String local = map.get("localName");
                 if ( uri != null ) {
                     uri = UrlBuilder.urlEncode(uri);
                 }
@@ -107,6 +109,8 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
                                         + radius
                                         + ",\"uri\": \""
                                         + uri
+                                        + "\",\"local\": \""
+                                        + local
                                         + "\"}},";                 
                     response +=  tempStr;
                     previousLabel = label;

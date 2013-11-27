@@ -44,7 +44,7 @@ import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
  */
 public class AddPublicationToPersonGenerator extends VivoBaseGenerator implements EditConfigurationGenerator {
 
-    final static String collectionClass = bibo + "Periodical";
+    final static String collectionClass = bibo + "Journal";
     final static String bookClass = bibo + "Book";
     final static String documentClass = "http://purl.obolibrary.org/obo/IAO_0000030";
     final static String conferenceClass = bibo + "Conference";
@@ -241,7 +241,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     private String getN3ForNewCollectionNewPub() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?newPublication vivo:hasPublicationVenue ?newCollection . \n" +
-        "?newCollection a <" + collectionClass + ">  . \n" +
+        "?newCollection a <" + collectionClass + "> . \n" +
         "?newCollection vivo:publicationVenueFor ?newPublication . \n" + 
         "?newCollection <" + label + "> ?collection .";
     }
@@ -890,6 +890,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
     private List<List<String>> getPublicationTypeLiteralOptions() {
         List<List<String>> literalOptions = new ArrayList<List<String>>();
+        literalOptions.add(list("http://vivoweb.org/ontology/core#Abstract", "Abstract"));
         literalOptions.add(list("http://purl.org/ontology/bibo/AcademicArticle", "Academic Article"));
         literalOptions.add(list("http://purl.org/ontology/bibo/Article", "Article"));
         literalOptions.add(list("http://purl.org/ontology/bibo/AudioDocument", "Audio Document"));
@@ -901,6 +902,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         literalOptions.add(list("http://vivoweb.org/ontology/core#ConferencePaper", "Conference Paper"));
         literalOptions.add(list("http://vivoweb.org/ontology/core#ConferencePoster", "Conference Poster"));
         literalOptions.add(list("http://vivoweb.org/ontology/core#Database", "Database"));
+        literalOptions.add(list("http://vivoweb.org/ontology/core#Dataset", "Dataset"));
         literalOptions.add(list("http://purl.org/ontology/bibo/EditedBook", "Edited Book"));
         literalOptions.add(list("http://vivoweb.org/ontology/core#EditorialArticle", "Editorial Article"));
         literalOptions.add(list("http://purl.org/ontology/bibo/Film", "Film"));

@@ -85,7 +85,7 @@ public class GrantAdministeredByGenerator extends VivoBaseGenerator implements
     /* N3 assertions  */
 
     final static String n3ForNewAdminRole = 
-        "@prefix vivo: <" + vivoCore + "> . \n\n" +   
+        "@prefix vivo: <" + vivoCore + "> . \n" +   
         "?grant vivo:relates  ?adminRole . \n" +
         "?adminRole a  vivo:AdministratorRole . \n" +              
         "?adminRole vivo:relatedBy ?grant . " ;    
@@ -95,13 +95,17 @@ public class GrantAdministeredByGenerator extends VivoBaseGenerator implements
         "?adminRole <http://purl.obolibrary.org/obo/RO_0000052> ?newOrganization . \n" +
         "?newOrganization a <http://xmlns.com/foaf/0.1/Organization>  . \n" +
         "?newOrganization <http://purl.obolibrary.org/obo/RO_0000053> ?adminRole . \n" +
+        "?newOrganization vivo:relatedBy ?grant . \n" +
+        "?grant vivo:relates ?newOrganization . \n" +
         "?newOrganization <"+ label + "> ?orgLabel .";
     
     final static String n3ForExistingAdminOrganization  =      
         "@prefix vivo: <" + vivoCore + "> . \n\n" +   
         "?adminRole <http://purl.obolibrary.org/obo/RO_0000052> ?existingOrganization . \n" +
         "?existingOrganization a <http://xmlns.com/foaf/0.1/Organization>  . \n" +
-        "?existingOrganization <http://purl.obolibrary.org/obo/RO_0000053> ?adminRole . " ;
+        "?existingOrganization <http://purl.obolibrary.org/obo/RO_0000053> ?adminRole . " +
+        "?existingOrganization vivo:relatedBy ?grant . \n" +
+        "?grant vivo:relates ?existingOrganization . \n" ;
     
     /* Queries for editing an existing entry */
 

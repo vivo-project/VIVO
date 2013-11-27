@@ -53,6 +53,12 @@ foaf:Agent
                 owl:onProperty core:relatedBy
               ] .
 
+vivo:Equipment
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:onProperty <http://vivoweb.org/ontology/core#freetextKeyword> ;
+                owl:allValuesFrom <http://www.w3.org/2001/XMLSchema#string> 
+              ] .
 
 foaf:Person
       rdfs:subClassOf
