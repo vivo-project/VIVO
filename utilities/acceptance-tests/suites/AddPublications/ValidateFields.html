@@ -178,11 +178,6 @@
 </tr>
 <!--Select to add an book chapter again, this time without a title-->
 <tr>
-	<td>selectWindow</td>
-	<td>null</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>css=#relatedBy-Authorship &gt; a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
@@ -408,11 +403,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='wrapper-content']/ul/li[16]</td>
 	<td></td>
 </tr>
 <tr>
@@ -708,12 +698,22 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=anchor</td>
+	<td>id=label</td>
 	<td>Company Homepage</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=returnToIndividual</td>
 	<td></td>
 </tr>
 <tr>
@@ -894,16 +894,6 @@
 </tr>
 <!--Add Chapter, validating field first-->
 <tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='chapter']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyTextPresent</td>
 	<td>Add new entry for: chapter</td>
 	<td></td>
@@ -980,11 +970,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Features Name</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>link=Cancel</td>
 	<td></td>
@@ -1015,19 +1000,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Features Name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=object</td>
-	<td>Mouse</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ui-active-menuitem</td>
-	<td></td>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=Mouse, Minnie</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1128,17 +1103,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Relates a document to an event; for example, a paper to a conference.</td>
+	<td>There are no entries in the system from which to select.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Event Name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>If you don't find the appropriate entry on the selection list above:</td>
+	<td>Please create a new entry.</td>
 	<td></td>
 </tr>
 <tr>
@@ -1168,17 +1138,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Relates a document to an event; for example, a paper to a conference.</td>
+	<td>There are no entries in the system from which to select.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Event Name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>If you don't find the appropriate entry on the selection list above:</td>
+	<td>Please create a new entry.</td>
 	<td></td>
 </tr>
 <tr>
@@ -1198,7 +1163,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create &quot;presented at&quot; entry for Nintendo O.K. for Kids</td>
+	<td>Create &quot;presented at event&quot; entry for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
@@ -1233,11 +1198,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Status Name</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>link=Cancel</td>
 	<td></td>
@@ -1263,9 +1223,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Status Name</td>
-	<td></td>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=published</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1315,12 +1275,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Add an entry to: has part</td>
+	<td>Select an existing Document Part for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Has Part Name</td>
+	<td>If you don't find the appropriate entry on the selection list above:</td>
 	<td></td>
 </tr>
 <tr>
@@ -1345,12 +1305,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Add an entry to: has part</td>
+	<td>Select an existing Document Part for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Has Part Name</td>
+	<td>If you don't find the appropriate entry on the selection list above:</td>
 	<td></td>
 </tr>
 <tr>
@@ -1400,11 +1360,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Part Of Name</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>link=Cancel</td>
 	<td></td>
@@ -1425,29 +1380,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Add an entry to: part of</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Part Of Name</td>
-	<td></td>
-</tr>
-<tr>
 	<td>select</td>
-	<td>typeOfNew</td>
-	<td>label=Book (bibo)</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=offerCreate</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
+	<td>id=objectVar</td>
+	<td>label=Nintendo O.K. for Kids</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -2039,12 +1974,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Add an entry to: reproduces</td>
+	<td>Select an existing Document for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Reproduces Name</td>
+	<td>If you don't find the appropriate entry on the selection list above:</td>
 	<td></td>
 </tr>
 <tr>
@@ -2069,12 +2004,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Add an entry to: reproduces</td>
+	<td>Select an existing Document for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Reproduces Name</td>
+	<td>If you don't find the appropriate entry on the selection list above:</td>
 	<td></td>
 </tr>
 <tr>
@@ -2104,18 +2039,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=label</td>
+	<td>verifyTextPresent</td>
+	<td>Select an existing (Instrument or Service or Reagent or Research Project or Biological Specimen or Software or Database) for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Add an entry to: documentation for</td>
+	<td>There are no entries in the system from which to select. </td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Documentation For Name *</td>
+	<td>Please create a new entry.</td>
 	<td></td>
 </tr>
 <tr>
@@ -2144,8 +2079,38 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing (Instrument or Service or Reagent or Research Project or Biological Specimen or Software or Database) for Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>There are no entries in the system from which to select. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please create a new entry.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=typeOfNew</td>
+	<td>label=Service (obo)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
-	<td>id=object</td>
+	<td>id=name</td>
 	<td>Kids</td>
 </tr>
 <tr>
@@ -2181,12 +2146,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Global Citation Count Name</td>
+	<td>There are no entries in the system from which to select. </td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>If you don't find the appropriate entry on the selection list above:</td>
+	<td>Please create a new entry.</td>
 	<td></td>
 </tr>
 <tr>
@@ -2215,33 +2180,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>id=offerCreate</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyTextPresent</td>
 	<td>Select an existing Global Citation Count for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Global Citation Count Name</td>
+	<td>There are no entries in the system from which to select. </td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>If you don't find the appropriate entry on the selection list above:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Cancel</td>
+	<td>Please create a new entry.</td>
 	<td></td>
 </tr>
 <tr>
@@ -2269,11 +2219,6 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
 <!--Add presented at-->
 <tr>
 	<td>clickAndWait</td>
@@ -2292,17 +2237,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Relates a document to an event; for example, a paper to a conference.</td>
+	<td>There are no entries in the system from which to select. </td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Event Name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>If you don't find the appropriate entry on the selection list above:</td>
+	<td>Please create a new entry.</td>
 	<td></td>
 </tr>
 <tr>
@@ -2322,7 +2262,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create &quot;presented at&quot; entry for Nintendo O.K. for Kids </td>
+	<td>Create &quot;presented at event&quot; entry for Nintendo O.K. for Kids </td>
 	<td></td>
 </tr>
 <tr>
@@ -2357,17 +2297,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Relates a document to an event; for example, a paper to a conference.</td>
+	<td>There are no entries in the system from which to select. </td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Event Name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>If you don't find the appropriate entry on the selection list above:</td>
+	<td>Please create a new entry.</td>
 	<td></td>
 </tr>
 <tr>
@@ -2387,7 +2322,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create &quot;presented at&quot; entry for Nintendo O.K. for Kids </td>
+	<td>Create &quot;presented at event&quot; entry for Nintendo O.K. for Kids </td>
 	<td></td>
 </tr>
 <tr>
@@ -2398,7 +2333,12 @@
 <tr>
 	<td>type</td>
 	<td>id=name</td>
-	<td>Kids Now Conference</td>
+	<td>Kids Now</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2424,11 +2364,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Add an entry to: part of</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Part Of Name</td>
 	<td></td>
 </tr>
 <tr>
