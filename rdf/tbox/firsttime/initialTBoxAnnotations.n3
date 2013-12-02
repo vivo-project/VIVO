@@ -164,6 +164,7 @@ geo:non_self_governing
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
               "-1"^^xsd:int ;
+      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouplocations> ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -533,6 +534,7 @@ vivo:SubnationalRegion
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
               "-1"^^xsd:int ;
+      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouplocations> ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -547,6 +549,7 @@ geo:territory
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
               "-1"^^xsd:int ;
+      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouplocations> ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -968,6 +971,7 @@ geo:disputed
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
               "-1"^^xsd:int ;
+      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouplocations> ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -1033,6 +1037,8 @@ vivo:features
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
               <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+      vitro:offerCreateNewOptionAnnot
+              "true"^^xsd:boolean ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
@@ -3164,6 +3170,7 @@ obo:ERO_0001520
               "90"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
@@ -5245,6 +5252,7 @@ vivo:TransnationalRegion
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
               "-1"^^xsd:int ;
+      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouplocations> ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -6001,6 +6009,7 @@ vivo:GeopoliticalEntity
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
               "-1"^^xsd:int ;
+      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouplocations> ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
