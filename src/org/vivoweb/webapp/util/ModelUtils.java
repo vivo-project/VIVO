@@ -103,6 +103,7 @@ public class ModelUtils {
 		List<String> properties = new ArrayList<String>();
 		properties.add(processPropertyURI);
 		properties.add(nonProcessPropertyURI);
+		properties.add(grantPropertyURI);
 		return properties;
 	}
 	
@@ -110,6 +111,7 @@ public class ModelUtils {
 		List<String> properties = new ArrayList<String>();
 		properties.add(processPropertyInverseURI);
 		properties.add(nonProcessPropertyInverseURI);
+		properties.add(grantPropertyInverseURI);
 		return properties;
 	}
 }
