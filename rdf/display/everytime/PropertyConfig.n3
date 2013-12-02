@@ -1629,4 +1629,4 @@ local:yearAwardedConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 10;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
-    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGrouptime> .
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
