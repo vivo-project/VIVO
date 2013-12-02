@@ -1481,7 +1481,7 @@ local:awardOrHonorReceiptsConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
     :displayName "receipts" ;
     vitro:displayRankAnnot 3;
-    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:nobody ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 

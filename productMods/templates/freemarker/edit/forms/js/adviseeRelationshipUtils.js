@@ -83,7 +83,7 @@ var adviseeRelUtils = {
             // we don't want the user to see the label getting built, so hide the acSelector
             // field and display a bogus field that just has the last name in it.
             this.fauxLabel.val(lastName);
-            this.advisee.hide();
+            this.advisor.hide();
             this.fauxLabel.show();
             this.advisor.val(name);
             this.lastName.val(lastName);
