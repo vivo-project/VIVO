@@ -61,11 +61,20 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
 
         config.addFormSpecificData("baseEditWebpageUrl", path);                 
 
+        //Also add domainUri and rangeUri if they exist, adding here instead of template
+        String domainUri = (String) vreq.getParameter("domainUri");
+        String rangeUri = (String) vreq.getParameter("rangeUri");
         paramMap = new ParamMap();
         paramMap.put("subjectUri", config.getSubjectUri());
         paramMap.put("predicateUri", config.getPredicateUri());
         paramMap.put("editForm" , this.getEditForm() );
         paramMap.put("cancelTo", "manage");
+        if(domainUri != null && !domainUri.isEmpty()) {
+        	paramMap.put("domainUri", domainUri);
+        }
+        if(rangeUri != null && !rangeUri.isEmpty()) {
+        	paramMap.put("rangeUri", rangeUri);
+        }
         path = UrlBuilder.getUrl( UrlBuilder.Route.EDIT_REQUEST_DISPATCH ,paramMap);
 
         config.addFormSpecificData("showAddFormUrl", path);          
