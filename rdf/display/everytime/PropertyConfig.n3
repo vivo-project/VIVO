@@ -634,6 +634,8 @@ local:orgAdministersGrantConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 62;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.OrganizationAdministersGrantGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupresearch> .
     
@@ -1009,6 +1011,8 @@ local:documentPartOfConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 52;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
     
 local:geographicLocationContainsLocationContext a :ConfigContext ;
@@ -1253,6 +1257,20 @@ local:bldgGeographicallyWithinConfig a :ObjectPropertyDisplayConfig ;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:bldgGeographicaLocationOfContext a :ConfigContext ;
+    :hasConfiguration local:bldgGeographicaLocationOfConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001015> ;
+    :qualifiedByDomain      <http://purl.obolibrary.org/obo/BFO_0000029> ; 
+    :qualifiedBy      <http://purl.obolibrary.org/obo/BFO_0000004> .
+
+local:bldgGeographicaLocationOfConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "geographic location of" ;
+    vitro:displayRankAnnot 21;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
     
 local:projectUsesMaterialEntityContext a :ConfigContext ;
     :hasConfiguration local:projectUsesMaterialEntityConfig ;
@@ -1300,7 +1318,7 @@ local:facilityLocationOfServiceContext a :ConfigContext ;
     :hasConfiguration local:facilityLocationOfServiceConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0001015> ;
     :qualifiedByDomain  vivo:Facility ;
-    :qualifiedBy        vivo:Service .
+    :qualifiedBy        <http://purl.obolibrary.org/obo/ERO_0000005> .
 
 local:facilityLocationOfServiceConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
