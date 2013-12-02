@@ -122,9 +122,14 @@
 </tr>
 <!--Create the link-->
 <tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>name=SuperclassURI</td>
-	<td>label=Facility Member (vivo)</td>
+	<td>label=Faculty Member (vivo)</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -142,6 +147,16 @@
 	<td></td>
 </tr>
 <!--Make sure Lilly Librarian shows up in both categories-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
 <tr>
 	<td>refreshAndWait</td>
 	<td>10000</td>

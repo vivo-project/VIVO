@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:8080/" />
-<title>CreateNewNobodyUser</title>
+<link rel="selenium.base" href="" />
+<title>AddTestFaculty</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">CreateNewNobodyUser</td></tr>
+<tr><td rowspan="1" colspan="3">AddTestFaculty</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -21,7 +21,7 @@
 	<td>10000000</td>
 	<td></td>
 </tr>
-<!--Create a new unprivileged user-->
+<!--Manage Labels-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -59,134 +59,126 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<!--Create a new user-->
+<!--Verify manage labels icon is on profile-->
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Site Admin</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=User accounts</td>
+	<td>link=Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>User accounts</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Add new account']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>User accounts &gt; Add new account</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>email-address</td>
-	<td>JaneFaculty@cornell.edu</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>first-name</td>
-	<td>Jane</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>last-name</td>
-	<td>Faculty</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=externalAuthId</td>
-	<td>JaneFaculty@cornell.edu</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=associateProfileName</td>
-	<td>facult</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ui-active-menuitem</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>xpath=(//input[@name='role'])[4]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>initial-password</td>
-	<td>myPassword</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>confirm-password</td>
-	<td>myPassword</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submitAdd</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<!--Verify account-->
-<tr>
-	<td>verifyTextPresent</td>
-	<td>A new account for Jane Faculty was successfully created.</td>
+	<td>Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=JaneFaculty@cornell.edu</td>
+	<td>css=a.add-label &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<!--Check available labels-->
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-label &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Jane</td>
+	<td>Manage Labels for Furter, Frank </td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Faculty</td>
+	<td>Furter, Frank Edit Remove</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>ACTIVE</td>
+	<td>Test Label 1 Edit Remove</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Self Editor</td>
+	<td>Test Label 2 Edit Remove</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Remove</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#showCancelOnly &gt; a.cancel</td>
+	<td></td>
+</tr>
+<!--Remove first 2 labels-->
+<tr>
+	<td>click</td>
+	<td>link=Remove</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Remove</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Furter, Frank Edit Remove</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Label 1 Edit Remove</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>0</td>
+	<td>Test Label 2 Edit Remove</td>
+	<td></td>
+</tr>
+<!--Verify that new label displays-->
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#showCancelOnly &gt; a.cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Test Label 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Label 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test Label 1</td>
 	<td></td>
 </tr>
 <!--Logout-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Home</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log out</td>

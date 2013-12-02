@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>DeleteLibrarianImage</title>
+<title>DeleteTestFaculty</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">DeleteLibrarianImage</td></tr>
+<tr><td rowspan="1" colspan="3">DeleteTestFaculty</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -18,10 +18,10 @@
 </tr>
 <tr>
 	<td>setTimeout</td>
-	<td>200000</td>
+	<td>100000</td>
 	<td></td>
 </tr>
-<!--Delete the uploaded picture for Lily Librarian in the frontend-->
+<!--Delete test faculty members-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -32,7 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<!--Must not be logged in-->
+<!--Must not be logged in already-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -59,41 +59,88 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<!--Navigate to Lily Librarian-->
+<!--Navigate to index-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
 	<td></td>
 </tr>
+<!--Verify both people to be deleted are there-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Person</td>
+	<td></td>
+</tr>
+<!--Navigate to first faculty member-->
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Librarian</td>
+	<td>link=Faculty Member</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Librarian</td>
+	<td>Faculty Member</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Librarian, Lily Lou</td>
-	<td></td>
-</tr>
-<!--Select to delete the picture-->
-<tr>
-	<td>clickAndWait</td>
-	<td>css=img.delete-individual</td>
+	<td>link=Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Librarian, Lily Lou</td>
+	<td>Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>//img[@title='no image']</td>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<!--Delete first faculty member-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value=&quot;Edit This Individual&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
 <!--Logout-->

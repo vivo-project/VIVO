@@ -3,14 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
-<title>DeleteLibrarianImage</title>
+<link rel="selenium.base" href="http://localhost:8080/vivo" />
+<title>RebuildSearchIndex</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">DeleteLibrarianImage</td></tr>
+<tr><td rowspan="1" colspan="3">RebuildSearchIndex</td></tr>
 </thead><tbody>
+<!--Rebuild Search Index-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -18,10 +19,9 @@
 </tr>
 <tr>
 	<td>setTimeout</td>
-	<td>200000</td>
+	<td>100000000000</td>
 	<td></td>
 </tr>
-<!--Delete the uploaded picture for Lily Librarian in the frontend-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -32,7 +32,6 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<!--Must not be logged in-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -43,73 +42,64 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<!--Must log in as site admin-->
 <tr>
 	<td>type</td>
-	<td>loginName</td>
+	<td>id=loginName</td>
 	<td>testAdmin@cornell.edu</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>loginPassword</td>
+	<td>id=loginPassword</td>
 	<td>Password</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>loginForm</td>
-	<td></td>
-</tr>
-<!--Navigate to Lily Librarian-->
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Librarian</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Librarian</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Librarian, Lily Lou</td>
-	<td></td>
-</tr>
-<!--Select to delete the picture-->
-<tr>
-	<td>clickAndWait</td>
-	<td>css=img.delete-individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Librarian, Lily Lou</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>//img[@title='no image']</td>
-	<td></td>
-</tr>
-<!--Logout-->
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Home</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Log out</td>
+	<td>name=loginForm</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Rebuild search index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Rebuild Search Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=rebuild</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Rebuild Search Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Reset the search index and re-populate it.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
 	<td></td>
 </tr>
 </tbody></table>
