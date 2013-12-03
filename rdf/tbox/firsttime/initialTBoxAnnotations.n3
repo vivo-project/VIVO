@@ -164,7 +164,6 @@ geo:non_self_governing
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
               "-1"^^xsd:int ;
-      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouplocations> ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -534,7 +533,6 @@ vivo:SubnationalRegion
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
               "-1"^^xsd:int ;
-      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouplocations> ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -549,7 +547,6 @@ geo:territory
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
               "-1"^^xsd:int ;
-      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouplocations> ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -971,7 +968,6 @@ geo:disputed
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
               "-1"^^xsd:int ;
-      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouplocations> ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -5252,7 +5248,6 @@ vivo:TransnationalRegion
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
               "-1"^^xsd:int ;
-      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouplocations> ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -6009,7 +6004,6 @@ vivo:GeopoliticalEntity
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
               "-1"^^xsd:int ;
-      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouplocations> ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
