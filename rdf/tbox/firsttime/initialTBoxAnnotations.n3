@@ -495,7 +495,7 @@ owl:sameAs
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean ;
       vitro:stubObjectPropertyAnnot
-              "true"^^xsd:boolean .
+              "false"^^xsd:boolean .
 
 vcard:hasTimeZone
       rdfs:label "has time zone"@en-US .
