@@ -1203,7 +1203,7 @@ local:agentInFacilityContext a :ConfigContext ;
 
 local:agentInFacilityConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
-    :displayName "location in facility" ;
+    :displayName "located in facility" ;
     vitro:displayRankAnnot 32;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
@@ -1236,7 +1236,7 @@ local:hasRoomContext a :ConfigContext ;
 local:hasRoomConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
     :displayName "rooms" ;
-    vitro:displayRankAnnot 22;
+    vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
