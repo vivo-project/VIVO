@@ -1244,13 +1244,13 @@ local:geographicLocationContainsBuildingConfig a :ObjectPropertyDisplayConfig ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
-local:bldgGeographicallyWithinContext a :ConfigContext ;
-    :hasConfiguration local:bldgGeographicallyWithinConfig ;
+local:siteGeographicallyWithinGeoLocationContext a :ConfigContext ;
+    :hasConfiguration local:siteGeographicallyWithinGeoLocationConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
     :qualifiedByDomain      <http://purl.obolibrary.org/obo/BFO_0000029> ; ## Site
     :qualifiedBy      vivo:GeographicLocation .
 
-local:bldgGeographicallyWithinConfig a :ObjectPropertyDisplayConfig ;
+local:siteGeographicallyWithinGeoLocationConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
     :displayName "geographically within" ;
     vitro:displayRankAnnot 20;
@@ -1258,15 +1258,15 @@ local:bldgGeographicallyWithinConfig a :ObjectPropertyDisplayConfig ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
-local:bldgGeographicaLocationOfContext a :ConfigContext ;
-    :hasConfiguration local:bldgGeographicaLocationOfConfig ;
+local:facilitySiteOfEventContext a :ConfigContext ;
+    :hasConfiguration local:facilitySiteOfEventConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0001015> ;
-    :qualifiedByDomain      <http://purl.obolibrary.org/obo/BFO_0000029> ; 
-    :qualifiedBy      <http://purl.obolibrary.org/obo/BFO_0000004> .
+    :qualifiedByDomain   vivo:Facility ; ## was <http://purl.obolibrary.org/obo/BFO_0000029> ## Site
+    :qualifiedBy      <http://purl.org/NET/c4dm/event.owl#Event> . ## was <http://purl.obolibrary.org/obo/BFO_0000004> ## Independent Continuant
 
-local:bldgGeographicaLocationOfConfig a :ObjectPropertyDisplayConfig ;
+local:facilitySiteOfEventConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
-    :displayName "geographic location of" ;
+    :displayName "site of event" ;
     vitro:displayRankAnnot 21;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;

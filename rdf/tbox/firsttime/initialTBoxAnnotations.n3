@@ -486,7 +486,7 @@ owl:sameAs
       vitro:inPropertyGroupAnnot
               <http://vivoweb.org/ontology#vitroPropertyGroupidentifiers> ;
       vitro:offerCreateNewOptionAnnot
-              "false"^^xsd:boolean ;
+              "true"^^xsd:boolean ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#editor> ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
