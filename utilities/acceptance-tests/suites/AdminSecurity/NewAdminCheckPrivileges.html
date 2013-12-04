@@ -87,16 +87,6 @@
 </tr>
 <!--Verify available options-->
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Site Admin</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyTextPresent</td>
 	<td>Site Administration</td>
 	<td></td>
@@ -134,11 +124,6 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Menu ordering</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Restrict logins</td>
 	<td></td>
 </tr>
 <tr>
@@ -233,7 +218,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Refresh Content</td>
+	<td>Site Maintenance</td>
 	<td></td>
 </tr>
 <tr>
@@ -249,6 +234,16 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Recompute inferences</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Restrict logins</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Activate developer panel</td>
 	<td></td>
 </tr>
 <!--Make sure available Site Configuration options actually open up-->
@@ -460,51 +455,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Site Admin</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Restrict logins</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Restrict Logins</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Restrict Logins</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Logins are open to all.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Restrict Logins</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>We're sorry, but you are not authorized to view the page you requested. If you think this is an error, please contact us and we'll be happy to help.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Site Admin</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
 <tr>
@@ -875,7 +825,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=access provided by</td>
+	<td>link=access provided by (scires)</td>
 	<td></td>
 </tr>
 <tr>
@@ -1127,6 +1077,76 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Connect DB</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Manage Jena Models</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Subtract One Model from Another</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Convert CSV to RDF</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Convert XML to RDF</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Execute SPARQL CONSTRUCT</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Generate TBox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Name Blank Nodes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Smush Resources</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Merge Resources</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Change Namespace of Resources</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Process Property Value Strings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Split Property Value Strings into Multiple Property Values</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Harvest Person Data from CSV</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Harvest Grant Data from CSV</td>
 	<td></td>
 </tr>
 <tr>
@@ -1394,6 +1414,91 @@
 	<td>verifyValue</td>
 	<td>name=submit</td>
 	<td>Recompute Inferences</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Restrict logins</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Restrict Logins</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Restrict Logins</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Logins are open to all.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Restrict Logins</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>We're sorry, but you are not authorized to view the page you requested. If you think this is an error, please contact us and we'll be happy to help.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Activate developer panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>VIVO is running in developer mode. (click for Options)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=developerPanelClickText</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=developerEnabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=developerPanelSaveButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>We're sorry, but you are not authorized to view the page you requested. If you think this is an error, please contact us and we'll be happy to help.</td>
+	<td></td>
 </tr>
 <!--log out-->
 <tr>

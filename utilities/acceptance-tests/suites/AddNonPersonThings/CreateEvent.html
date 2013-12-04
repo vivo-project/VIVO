@@ -160,7 +160,7 @@
 <!--Test overview entry (image and webpage have been tested)-->
 <tr>
 	<td>click</td>
-	<td>//div[@id='wrapper-content']/ul/li[10]</td>
+	<td>//div[@id='wrapper-content']/ul/li[8]</td>
 	<td></td>
 </tr>
 <tr>
@@ -327,7 +327,7 @@
 <!--Test location entry-->
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-RO_0001025 &gt; img.add-individual</td>
+	<td>xpath=(//h3[@id='RO_0001025']/a)[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -337,12 +337,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Add an entry to: located in</td>
+	<td>Select an existing Geographic Location for Primate Health Conference</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Located In Nam</td>
+	<td>Geographic Location Name</td>
 	<td></td>
 </tr>
 <tr>
@@ -363,6 +363,32 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Primate Health Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-RO_0001025 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Facility for Primate Health Conference</td>
+	<td></td>
+</tr>
+<!--Need to add a new entry when this is working again-->
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
 	<td></td>
 </tr>
 <!--Test time entry-->
@@ -445,7 +471,7 @@
 <!--Test other entry-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='includesEvent']/a/img</td>
+	<td>css=a.add-BFO_0000051 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -455,7 +481,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Select an existing Event for Primate Health Conference</td>
+	<td>Add an entry to: includes event</td>
 	<td></td>
 </tr>
 <tr>
@@ -490,7 +516,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=exact:Can't find the concept you want? Create your own.</td>
+	<td>link=Can't find the concept you want? Create your own.</td>
 	<td></td>
 </tr>
 <tr>
@@ -561,7 +587,7 @@
 <!--Verify everything entered is displaying properly-->
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Health Conference</td>
+	<td>PrimHConf</td>
 	<td></td>
 </tr>
 <tr>
@@ -571,7 +597,32 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>PHC Proceedings</td>
+	<td>January 5, 2011 - January 9, 2011</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Health Check</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Animal Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=PHC Proceedings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Kenya</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=http://primatehealthintro.cornell.edu</td>
 	<td></td>
 </tr>
 <tr>
@@ -580,38 +631,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Kenya</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Congo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>January 5, 2011 - January 9, 2011</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>http://primatehealthintro.cornell.edu</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Primate Health Check</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Animal Health</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>PrimHConf</td>
+	<td>verifyElementPresent</td>
+	<td>link=Congo</td>
 	<td></td>
 </tr>
 <!--Logout-->
