@@ -1300,7 +1300,7 @@ local:facilitySiteOfEventContext a :ConfigContext ;
 
 local:facilitySiteOfEventConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
-    :displayName "site for event" ;
+    :displayName "facility for event" ;
     vitro:displayRankAnnot 22;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
@@ -1316,7 +1316,7 @@ local:facilitySiteOfAgentContext a :ConfigContext ;
 
 local:facilitySiteOfAgentConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
-    :displayName "site for person, group, or organization" ;
+    :displayName "facility for person, group, or organization" ;
     vitro:displayRankAnnot 20;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
