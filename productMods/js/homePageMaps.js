@@ -369,10 +369,11 @@ $(document).ready(function(){
                     var html = i18nStrings.currentlyNoResearchers;
                     $('section#home-geo-focus div#timeIndicatorGeo span').html(html);
                     $('section#home-geo-focus').css("height","175px");
-                    $('section#home-geo-focus div#timeIndicator').css("margin-top","50px");
+                    $('section#home-geo-focus div#timeIndicatorGeo').css("margin-top","50px");
                     $('section#home-geo-focus div#mapGlobal').hide();
                     $('section#home-geo-focus div#mapCountry').hide();
                     $('section#home-geo-focus div#mapLocal').hide();
+                    $('section#home-geo-focus div#mapControls').hide();
                 }
                 else {
                     $.each(results, function() {
