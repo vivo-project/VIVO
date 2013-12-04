@@ -8,4 +8,4 @@ geo:Australia_and_New_Zealand rdf:type core:Continent .
 geo:Europe rdf:type core:Continent .
 geo:South_America rdf:type core:Continent .
 geo:northern_America rdf:type core:Continent .
-geo:Oceania rdf:type core:Continent .
+geo:Antarctica rdf:type core:Continent .

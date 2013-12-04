@@ -33,7 +33,14 @@
     <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Article"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#localAwardId">
-    <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Grant"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Contract"/>
+          <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Grant"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#eRACommonsId">
     <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
@@ -48,7 +55,14 @@
     <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Authorship"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#grantDirectCosts">
-    <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Grant"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Contract"/>
+          <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Grant"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#majorField">
     <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#EducationalProcess"/>
@@ -69,7 +83,14 @@
     <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Report"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#sponsorAwardId">
-    <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Grant"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Contract"/>
+          <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Grant"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#licenseNumber">
     <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Licensure"/>
@@ -90,7 +111,14 @@
     <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Patent"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#totalAwardAmount">
-    <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Grant"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Contract"/>
+          <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Grant"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#outreachOverview">
     <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>

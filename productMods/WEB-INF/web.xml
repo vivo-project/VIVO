@@ -1119,6 +1119,16 @@
     <url-pattern>/admin/sparqlquery</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>SparqlUpdateApi</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.api.SparqlUpdateApiController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>SparqlUpdateApi</servlet-name>
+    <url-pattern>/api/sparqlUpdate</url-pattern>
+  </servlet-mapping>
+  
    <servlet>
     <servlet-name>StandardVisualizationController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.StandardVisualizationController</servlet-class>
