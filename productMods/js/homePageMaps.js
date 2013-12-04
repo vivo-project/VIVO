@@ -18,14 +18,14 @@ $(document).ready(function(){
         buildGlobalMap();
         $(this).addClass("selected");
         $('a#countryLink').removeClass("selected");
-        $('a#nyLink').removeClass("selected");
+        $('a#localLink').removeClass("selected");
     });
 
     $('a#countryLink').click(function() {
         buildCountryMap();
         $(this).addClass("selected");
         $('a#globalLink').removeClass("selected");
-        $('a#nyLink').removeClass("selected");
+        $('a#localLink').removeClass("selected");
     });
 
     $('a#localLink').click(function() {
