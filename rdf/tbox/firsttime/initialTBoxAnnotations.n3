@@ -5243,17 +5243,6 @@ obo:ERO_0000783
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
-vivo:TransnationalRegion
-      rdfs:label "Transnational Region"@en-US ;
-      vitro:displayLimitAnnot
-              "-1"^^xsd:int ;
-      vitro:displayRankAnnot
-              "-1"^^xsd:int ;
-      vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
-
 vivo:termLabel
       rdfs:label "term label"@en-US ;
       vitro:displayRankAnnot
