@@ -23,6 +23,9 @@ csv
 dwr
 ezmorph
 gson
+jackson-annotations-2.3.0
+jackson-core-2.3.0
+jackson-databind-2.3.0
 jakarta-jstl
 jarjar
 jmeter

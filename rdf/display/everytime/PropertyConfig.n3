@@ -952,6 +952,8 @@ local:outputOfConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 80 ;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
     
 local:hasOutputContext a :ConfigContext ;
@@ -966,6 +968,8 @@ local:hasOutputConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 80 ;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> .
 
 
@@ -1145,7 +1149,7 @@ local:eventsForSeriesConfig a :ObjectPropertyDisplayConfig ;
 
 local:eventLocationContext a :ConfigContext ;
     :hasConfiguration local:eventLocationConfig ;
-    :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ; ## located in
     :qualifiedByDomain      <http://purl.org/NET/c4dm/event.owl#Event> ;
     :qualifiedBy      vivo:GeographicLocation .
 
@@ -1155,11 +1159,13 @@ local:eventLocationConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
     
 local:eventInFacilityContext a :ConfigContext ;
     :hasConfiguration local:eventInFacilityConfig ;
-    :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ; ## located in
     :qualifiedByDomain      <http://purl.org/NET/c4dm/event.owl#Event> ;
     :qualifiedBy      vivo:Facility .
 
@@ -1169,25 +1175,45 @@ local:eventInFacilityConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 29;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
 
-local:organizationLocationContext a :ConfigContext ;
-    :hasConfiguration local:organizationLocationConfig ;
-    :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ;
-    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
-    :qualifiedBy      vivo:GeographicLocation .
+local:agentInGeoLocationContext a :ConfigContext ;
+    :hasConfiguration local:agentInGeoLocationConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ; ## located in
+    :qualifiedByDomain <http://xmlns.com/foaf/0.1/Agent> ;
+    :qualifiedBy       vivo:GeographicLocation .
 
-local:organizationLocationConfig a :ObjectPropertyDisplayConfig ;
+local:agentInGeoLocationConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
     :displayName "geographic location" ;
     vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:agentInFacilityContext a :ConfigContext ;
+    :hasConfiguration local:agentInFacilityConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ; ## located in
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Agent> ;
+    :qualifiedBy        vivo:Facility .
+
+local:agentInFacilityConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "located in facility" ;
+    vitro:displayRankAnnot 32;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
 
 local:materialEntityInFacilityContext a :ConfigContext ;
     :hasConfiguration local:materialEntityInFacilityConfig ;
-    :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ; ## located in
     :qualifiedByDomain      <http://purl.obolibrary.org/obo/BFO_0000040> ;
     :qualifiedBy      vivo:Facility .
 
@@ -1197,6 +1223,8 @@ local:materialEntityInFacilityConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
 
 local:hasRoomContext a :ConfigContext ;
@@ -1208,7 +1236,7 @@ local:hasRoomContext a :ConfigContext ;
 local:hasRoomConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
     :displayName "rooms" ;
-    vitro:displayRankAnnot 22;
+    vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
@@ -1227,21 +1255,25 @@ local:roomWithinBuildingConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 23;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 
 local:geographicLocationContainsBuildingContext a :ConfigContext ;
-    :hasConfiguration local:geographicalLocationContainsBuildingConfig ;
+    :hasConfiguration local:geographicLocationContainsBuildingConfig ;
     :configContextFor  <http://purl.obolibrary.org/obo/BFO_0000051> ;
     :qualifiedByDomain vivo:GeographicLocation ;
     :qualifiedBy       vivo:Building .
 
 local:geographicLocationContainsBuildingConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
-    :displayName "geographical location for facility" ;
-    vitro:displayRankAnnot 26;
+    :displayName "location of facility" ;
+    vitro:displayRankAnnot 85;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:siteGeographicallyWithinGeoLocationContext a :ConfigContext ;
@@ -1253,23 +1285,43 @@ local:siteGeographicallyWithinGeoLocationContext a :ConfigContext ;
 local:siteGeographicallyWithinGeoLocationConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
     :displayName "geographically within" ;
-    vitro:displayRankAnnot 20;
+    vitro:displayRankAnnot 40;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:facilitySiteOfEventContext a :ConfigContext ;
     :hasConfiguration local:facilitySiteOfEventConfig ;
-    :configContextFor <http://purl.obolibrary.org/obo/RO_0001015> ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001015> ; ## location of
     :qualifiedByDomain   vivo:Facility ; ## was <http://purl.obolibrary.org/obo/BFO_0000029> ## Site
     :qualifiedBy      <http://purl.org/NET/c4dm/event.owl#Event> . ## was <http://purl.obolibrary.org/obo/BFO_0000004> ## Independent Continuant
 
 local:facilitySiteOfEventConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
-    :displayName "site of event" ;
-    vitro:displayRankAnnot 21;
+    :displayName "facility for event" ;
+    vitro:displayRankAnnot 22;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+    
+local:facilitySiteOfAgentContext a :ConfigContext ;
+    :hasConfiguration local:facilitySiteOfAgentConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001015> ; ## location of
+    :qualifiedByDomain   vivo:Facility ; ## was <http://purl.obolibrary.org/obo/BFO_0000029> ## Site
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Agent> . ## was <http://purl.obolibrary.org/obo/BFO_0000004> ## Independent Continuant
+
+local:facilitySiteOfAgentConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :displayName "facility for person, group, or organization" ;
+    vitro:displayRankAnnot 20;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
     
 local:projectUsesMaterialEntityContext a :ConfigContext ;
@@ -1284,6 +1336,8 @@ local:projectUsesMaterialEntityConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 85;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
     
 local:materialEntityUsedByProjectContext a :ConfigContext ;
@@ -1298,11 +1352,13 @@ local:materialEntityUsedByProjectConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 85;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:facilityLocationOfEquipmentContext a :ConfigContext ;
     :hasConfiguration local:facilityLocationOfEquipmentConfig ;
-    :configContextFor  <http://purl.obolibrary.org/obo/RO_0001015> ;
+    :configContextFor  <http://purl.obolibrary.org/obo/RO_0001015> ; ## location of
     :qualifiedByDomain <http://purl.obolibrary.org/obo/BFO_0000029>  ; ## Site
     :qualifiedBy       <http://purl.obolibrary.org/obo/BFO_0000040> . ## Material Entity
 
@@ -1312,11 +1368,13 @@ local:facilityLocationOfEquipmentConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 14;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
-    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:facilityLocationOfServiceContext a :ConfigContext ;
     :hasConfiguration local:facilityLocationOfServiceConfig ;
-    :configContextFor <http://purl.obolibrary.org/obo/RO_0001015> ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001015> ; ## location of
     :qualifiedByDomain  vivo:Facility ;
     :qualifiedBy        <http://purl.obolibrary.org/obo/ERO_0000005> .
 
@@ -1326,7 +1384,7 @@ local:facilityLocationOfServiceConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 18;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
-    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
     vitro:publicDescriptionAnnot "This relates a facility as being used for a particular service."^^xsd:string ;
     vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean .
@@ -1343,6 +1401,8 @@ local:courseOfferedByConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:orgOffersCourseContext a :ConfigContext ;
@@ -1459,6 +1519,8 @@ local:grantHasSubgrantConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:grantIsSubgrantOfContext a :ConfigContext ;
@@ -1473,6 +1535,8 @@ local:grantIsSubgrantOfConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 32;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:grantGeographicFocusContext a :ConfigContext ;
@@ -1487,6 +1551,8 @@ local:grantGeographicFocusConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 20;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:awardOrHonorReceiptsContext a :ConfigContext ;
@@ -1576,7 +1642,7 @@ local:orgAwardsGrantConfig a :ObjectPropertyDisplayConfig ;
 
 local:addressLocationContext a :ConfigContext ;
     :hasConfiguration local:addressLocationConfig ;
-    :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ; ## located in
     :qualifiedByDomain      <http://www.w3.org/2006/vcard/ns#Address> ;
     :qualifiedBy      vivo:GeographicLocation .
 
@@ -1586,6 +1652,7 @@ local:addressLocationConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGrouplocation> .
 
 ### roles using the BFO_0000055 property ###
