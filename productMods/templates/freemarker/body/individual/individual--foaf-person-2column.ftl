@@ -96,6 +96,9 @@
         <!-- Research Areas -->
         <#include "individual-researchAreas.ftl">
 
+        <!-- Geographic Focus -->
+        <#include "individual-geographicFocus.ftl">
+
         <!-- Contact and Webpages -->
         <div id="contactsWebpages">
             <div id="contactContainer" >
