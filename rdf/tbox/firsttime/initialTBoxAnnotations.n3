@@ -3991,6 +3991,7 @@ obo:ERO_0000572
 
 obo:RO_0001000
       rdfs:label "derives from"@en-US ;
+      ## note -- has a "some values from" restriction on Organism <http://purl.obolibrary.org/obo/OBI_0100026>
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -7598,7 +7599,7 @@ geo:GDPUnit
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
 bibo:edition
       rdfs:label "edition"@en-US ;
@@ -7805,4 +7806,9 @@ vivo:hasEquipment
               "true"^^xsd:boolean .
 
 <http://purl.obolibrary.org/obo/OBI_0100026>
-      rdfs:label "Organism"@en-US .
+      rdfs:label "Organism"@en-US ;
+      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouppublications> ; ## classgroup label is research
+      vitro:displayRankAnnot
+              "1"^^xsd:int .
+
+
