@@ -7803,3 +7803,6 @@ vivo:hasEquipment
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean .
+
+<http://purl.obolibrary.org/obo/OBI_0100026>
+      rdfs:label "Organism"@en-US .
