@@ -351,61 +351,6 @@
     
 
 
-    <!-- http://purl.obolibrary.org/obo/ERO_0000076 -->
-
-    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000076">
-
-        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Imaging processing software that requires .jpg format files for analysis.</obo:IAO_0000112>
-        <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Carlo Torniai</obo:IAO_0000117>
-        <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
-        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Software data input format.</obo:IAO_0000115>
-        <obo:IAO_0000111 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has  input format</obo:IAO_0000111>
-        <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/ERO_0001554"/>
-        <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000120"/>
-        <rdfs:domain>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000071"/>
-                    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0001716"/>
-                </owl:unionOf>
-            </owl:Class>
-        </rdfs:domain>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/ERO_0000077 -->
-
-    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000077">
-
-        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Microsoft Excel arranges and saves data in .xlsx format.</obo:IAO_0000112>
-        <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Carlo Torniai</obo:IAO_0000117>
-        <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
-        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Software data output type.</obo:IAO_0000115>
-        <obo:IAO_0000111 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has output format</obo:IAO_0000111>
-        <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/ERO_0000071"/>
-        <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/ERO_0001554"/>
-        <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000120"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/ERO_0000078 -->
-
-    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000078">
-
-        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ImageJ software measures characteristics of digital images.</obo:IAO_0000112>
-        <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Carlo Torniai</obo:IAO_0000117>
-        <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
-        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Transformation objective of the software.</obo:IAO_0000115>
-        <obo:IAO_0000111 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">achieves objective</obo:IAO_0000111>
-        <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/ERO_0000071"/>
-        <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000120"/>
-        <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/OBI_0200166"/>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://purl.obolibrary.org/obo/ERO_0000390 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0000390">
@@ -631,24 +576,6 @@
 
 
 
-    <!-- http://purl.obolibrary.org/obo/ERO_0001057 -->
-
-    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0001057">
-
-        <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000117>
-        <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Melissa Haendel</obo:IAO_0000119>
-        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Paraffin embedding of tissue.</obo:IAO_0000112>
-        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Technique used to prepare the biological specimen.</obo:IAO_0000115>
-        <obo:IAO_0000111 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has preparation technique</obo:IAO_0000111>
-        <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/ERO_0000020"/>
-        <rdfs:subPropertyOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000543"/>
-        <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/ERO_0001707"/>
-        <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000120"/>
-    </owl:ObjectProperty>
-    
-    
-
-
     <!-- http://purl.obolibrary.org/obo/ERO_0001518 -->
 
     <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0001518">
@@ -695,48 +622,6 @@
         <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000120"/>
         <rdfs:subPropertyOf rdf:resource="http://www.obofoundry.org/ro/ro.owl#has_agent"/>
         <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-    </owl:ObjectProperty>
-    
-
-
-
-    <!-- http://purl.obolibrary.org/obo/ERO_0001811 -->
-
-    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0001811">
-
-        <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/ERO_0001554"/>
-        <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/IAO_0000098"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/ERO_0001824 -->
-
-    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0001824">
-
-        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Is a legal instrument (usually by way of contract law) governing the usage or redistribution of software.</obo:IAO_0000115>
-        <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Scott Hoffmann</obo:IAO_0000117>
-        <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://en.wikipedia.org/wiki/Software_license</obo:IAO_0000119>
-        <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/ERO_0000071"/>
-        <rdfs:range rdf:resource="http://www.ebi.ac.uk/swo/SWO_0000002"/>
-    </owl:ObjectProperty>
-    
-
-
-
-    <!-- http://purl.obolibrary.org/obo/ERO_0001908 -->
-
-    <owl:ObjectProperty rdf:about="http://purl.obolibrary.org/obo/ERO_0001908">
-
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Links an objective to a software operation whise execution achieves the objective. Is different from OBI:objective_achieved_by which links an objective to the process that achieves it.</rdfs:comment>
-        <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON:Matthew Brush</obo:IAO_0000117>
-        <obo:IAO_0000119 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON:Matthew Brush</obo:IAO_0000119>
-        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">a relation between a software objective (data transformation objective) and an operation whose execution in a software tool achieves the objective</obo:IAO_0000115>
-        <obo:IAO_0000116 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">software relation expanding to something like: 
-
-objective_achieved_by some (&apos;software/algorithm execution&apos; and (specified_by some &apos;data processing operation&apos;))</obo:IAO_0000116>
-        <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/ERO_0100287"/>
-        <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/OBI_0200166"/>
     </owl:ObjectProperty>
     
 
@@ -1934,14 +1819,6 @@ there is a measurement process p that has specified output m, a measurement datu
     </owl:ObjectProperty>
     
 
-
-    <!-- http://www.w3.org/2006/vcard/ns#hasRole -->
-
-    <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasRole">
-
-        <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#Role"/>
-    </owl:ObjectProperty>
-    
 
 
     <!-- http://www.w3.org/2006/vcard/ns#hasSound -->

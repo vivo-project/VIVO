@@ -556,13 +556,6 @@ geo:territory
 vcard:OrganizationName
       rdfs:label "Organization Name"@en-US .
 
-obo:ERO_0000076
-      rdfs:label "has input type"@en-US ;
-      vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
-      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
-
 vivo:researchAreaOf
       rdfs:label "research area of"@en-US ;
       vitro:displayLimitAnnot
@@ -705,13 +698,6 @@ obo:IAO_0000142
 vivo:submitted
       rdfs:label "submitted"@en-US .
 
-obo:ERO_0000077
-      rdfs:label "has output type"@en-US ;
-      vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
-      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
-
 bibo:Issue
       rdfs:label "Issue"@en-US ;
       vitro:displayLimitAnnot
@@ -796,9 +782,6 @@ vitro:moniker
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#editor> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#editor> .
-
-obo:ERO_0000078
-      rdfs:label "achieves objective"@en-US .
 
 geo:codeFAOSTAT
       rdfs:label "codeFAOSTAT"@en-US ;
@@ -1007,9 +990,6 @@ vivo:Continent
       vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouplocations> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
-
-obo:ERO_0001908
-      rdfs:label "objective achieved by operation"@en-US .
 
 geo:nameOfficialRU
       rdfs:label "nameOfficialRU"@en-US ;
@@ -1371,9 +1351,6 @@ vivo:PopulatedPlace
       vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouplocations> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
-
-obo:ERO_0001811
-      rdfs:label "has format"@en-US .
 
 vivo:FacultyAdministrativePosition
       rdfs:label "Faculty Administrative Position"@en-US ;
@@ -2657,23 +2634,6 @@ bibo:Website
       vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouppublications> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
-
-obo:ERO_0001057
-      rdfs:label "has preparation technique"@en-US ;
-      vitro:displayLimitAnnot
-              "2"^^xsd:int ;
-      vitro:displayRankAnnot
-              "53"^^xsd:int ;
-      vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
-      vitro:selectFromExistingAnnot
-              "true"^^xsd:boolean ;
-      vitro:offerCreateNewOptionAnnot
-              "true"^^xsd:boolean .
 
 obo:BFO_0000003
       rdfs:label "Occurrent" .
@@ -4224,9 +4184,6 @@ vivo:Screenplay
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
-
-obo:ERO_0001824
-      rdfs:label "has software license"@en-US .
 
 geo:nameOfficialAR
       rdfs:label "nameOfficialAR"@en-US ;
