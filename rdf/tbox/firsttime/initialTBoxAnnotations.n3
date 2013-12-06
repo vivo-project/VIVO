@@ -1625,7 +1625,7 @@ vivo:Contract
               "-1"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGroupresearch> ;
+      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouppublications> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
@@ -1845,22 +1845,22 @@ bibo:doi
 bibo:accepted
       rdfs:label "accepted"@en-US .
 
-obo:ERO_0000070
+obo:ERO_0000070 ## inverse of ERO_0000031
       rdfs:label "used by"@en-US ;
-      vitro:displayLimitAnnot
-              "2"^^xsd:int ;
-      vitro:displayRankAnnot
-              "15"^^xsd:int ;
+#      vitro:displayLimitAnnot
+#              "2"^^xsd:int ;
+#      vitro:displayRankAnnot
+#              "15"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
-      vitro:selectFromExistingAnnot
-              "true"^^xsd:boolean ;
-      vitro:offerCreateNewOptionAnnot
-              "true"^^xsd:boolean .
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
+#      vitro:inPropertyGroupAnnot
+#              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+#      vitro:selectFromExistingAnnot
+#              "true"^^xsd:boolean ;
+#      vitro:offerCreateNewOptionAnnot
+#              "true"^^xsd:boolean .
 
 vcard:Email
       rdfs:label "Email"@en-US .
@@ -3952,20 +3952,20 @@ obo:ERO_0000572
 obo:RO_0001000
       rdfs:label "derives from"@en-US ;
       ## note -- has a "some values from" restriction on Organism <http://purl.obolibrary.org/obo/OBI_0100026>
-      vitro:displayLimitAnnot
-              "5"^^xsd:int ;
-      vitro:displayRankAnnot
-              "50"^^xsd:int ;
+#      vitro:displayLimitAnnot
+#              "5"^^xsd:int ;
+#      vitro:displayRankAnnot
+#              "50"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
-      vitro:selectFromExistingAnnot
-              "true"^^xsd:boolean ;
-      vitro:offerCreateNewOptionAnnot
-              "true"^^xsd:boolean .
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
+#      vitro:inPropertyGroupAnnot
+#             <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+#      vitro:selectFromExistingAnnot
+#              "true"^^xsd:boolean ;
+#      vitro:offerCreateNewOptionAnnot
+#              "true"^^xsd:boolean .
 
 
 bibo:gtin14
@@ -4023,7 +4023,17 @@ vcard:Fax
       rdfs:label "Fax"@en-US .
 
 obo:ERO_0001521
-      rdfs:label "human study performed by"@en-US .
+      rdfs:label "performed by organization"@en-US ;
+      vitro:displayRankAnnot
+              "20"^^xsd:int ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
 
 vivo:nihmsid
       rdfs:label "NIH Manuscript Submission System ID"@en-US ;
@@ -4681,22 +4691,22 @@ vcard:hasLanguage
 vcard:hasURL
       rdfs:label "has URL"@en-US .
 
-obo:ERO_0000482
+obo:ERO_0000482 # deprecated
       rdfs:label "uses software"@en-US ;
-      vitro:displayLimitAnnot
-              "5"^^xsd:int ;
-      vitro:displayRankAnnot
-              "92"^^xsd:int ;
+#      vitro:displayLimitAnnot
+#              "5"^^xsd:int ;
+#      vitro:displayRankAnnot
+#              "92"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:selectFromExistingAnnot
-              "true"^^xsd:boolean ;
-      vitro:offerCreateNewOptionAnnot
-              "true"^^xsd:boolean ;
-      vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
+#      vitro:selectFromExistingAnnot
+#              "true"^^xsd:boolean ;
+#      vitro:offerCreateNewOptionAnnot
+#              "true"^^xsd:boolean ;
+#      vitro:inPropertyGroupAnnot
+#              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
               
 vivo:ResearchProposal
       rdfs:label "Research Proposal"@en-US ;
@@ -6099,20 +6109,20 @@ vcard:Muse
 
 obo:ERO_0000034
       rdfs:label "manufacturer"@en-US ;
-      vitro:displayLimitAnnot
-              "2"^^xsd:int ;
-      vitro:displayRankAnnot
-              "73"^^xsd:int ;
+#      vitro:displayLimitAnnot
+#              "2"^^xsd:int ;
+#      vitro:displayRankAnnot
+#              "73"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
-      vitro:selectFromExistingAnnot
-              "true"^^xsd:boolean ;
-      vitro:offerCreateNewOptionAnnot
-              "true"^^xsd:boolean .
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
+#      vitro:inPropertyGroupAnnot
+#              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+#      vitro:selectFromExistingAnnot
+#              "true"^^xsd:boolean ;
+#      vitro:offerCreateNewOptionAnnot
+#              "true"^^xsd:boolean .
 
 
 geo:area
@@ -6470,7 +6480,21 @@ vcard:hasRelated
       rdfs:label "has related"@en-US .
 
 obo:ERO_0000424
-      rdfs:label "has study population"@en-US .
+      rdfs:label "has study population"@en-US ;
+      vitro:displayLimitAnnot
+              "5"^^xsd:int ;
+      vitro:displayRankAnnot
+              "15"^^xsd:int ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+      vitro:selectFromExistingAnnot
+              "true"^^xsd:boolean ;
+      vitro:offerCreateNewOptionAnnot
+              "true"^^xsd:boolean .
 
 obo:ARG_2000079
       rdfs:label "American Board of Pathology"@en-US .
