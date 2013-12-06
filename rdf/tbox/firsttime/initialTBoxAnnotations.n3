@@ -7280,23 +7280,6 @@ bibo:Statute
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
-obo:ERO_0000405
-      rdfs:label "has accession number"@en-US ;
-      vitro:displayLimitAnnot
-              "2"^^xsd:int ;
-      vitro:displayRankAnnot
-              "10"^^xsd:int ;
-      vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
-      vitro:selectFromExistingAnnot
-              "true"^^xsd:boolean ;
-      vitro:offerCreateNewOptionAnnot
-              "true"^^xsd:boolean .
-
 
 vivo:fundingVehicleFor
       rdfs:label "provides funding for"@en-US ;
