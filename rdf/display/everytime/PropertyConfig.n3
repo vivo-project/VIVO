@@ -1323,38 +1323,39 @@ local:facilitySiteOfAgentConfig a :ObjectPropertyDisplayConfig ;
     vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
-    
-local:projectUsesMaterialEntityContext a :ConfigContext ;
-    :hasConfiguration local:projectUsesMaterialEntityConfig ;
-    :configContextFor  <http://purl.obolibrary.org/obo/ERO_0000031> ; 
-    :qualifiedByDomain vivo:Project  ;
-    :qualifiedBy       <http://purl.obolibrary.org/obo/BFO_0000040> . ## Material Entity
 
-local:projectUsesMaterialEntityConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
-    :displayName "uses equipment or instrument" ;
-    vitro:displayRankAnnot 85;
-    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
-    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
-    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
-    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
-    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
-    
-local:materialEntityUsedByProjectContext a :ConfigContext ;
-    :hasConfiguration local:MaterialEntityUsedByProjectConfig ;
-    :configContextFor  <http://purl.obolibrary.org/obo/ERO_0000070> ; 
-    :qualifiedByDomain <http://purl.obolibrary.org/obo/BFO_0000040> ; ## Material Entity
-    :qualifiedBy       vivo:Project .
+# uses and used by need work -- apply to continuants and occurrents, and material entities as well as information content entities   
+#local:projectUsesMaterialEntityContext a :ConfigContext ;
+#    :hasConfiguration local:projectUsesMaterialEntityConfig ;
+#    :configContextFor  <http://purl.obolibrary.org/obo/ERO_0000031> ; 
+#    :qualifiedByDomain vivo:Project  ;
+#    :qualifiedBy       <http://purl.obolibrary.org/obo/BFO_0000040> . ## Material Entity
 
-local:materialEntityUsedByProjectConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
-    :displayName "used by project" ;
-    vitro:displayRankAnnot 85;
-    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
-    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
-    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
-    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
-    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+#local:projectUsesMaterialEntityConfig a :ObjectPropertyDisplayConfig ;
+#    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+#    :displayName "uses specimen, equipment, instrument, organism, reagent, or software" ;
+#    vitro:displayRankAnnot 85;
+#    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+#    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+#    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+#    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+#    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+    
+#local:materialEntityUsedByProjectContext a :ConfigContext ;
+#    :hasConfiguration local:MaterialEntityUsedByProjectConfig ;
+#    :configContextFor  <http://purl.obolibrary.org/obo/ERO_0000070> ; 
+#    :qualifiedByDomain <http://purl.obolibrary.org/obo/BFO_0000040> ; ## Material Entity
+#    :qualifiedBy       vivo:Project .
+
+#local:materialEntityUsedByProjectConfig a :ObjectPropertyDisplayConfig ;
+#    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+#    :displayName "used by project" ;
+#    vitro:displayRankAnnot 85;
+#    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+#    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+#    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+#    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+#    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:facilityLocationOfEquipmentContext a :ConfigContext ;
     :hasConfiguration local:facilityLocationOfEquipmentConfig ;
