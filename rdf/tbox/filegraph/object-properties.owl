@@ -1407,7 +1407,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#offeredBy -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#offeredBy">
-
+        <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#offers"/>
     </owl:ObjectProperty>
     
 
@@ -1415,7 +1415,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#offers -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#offers">
-
+        <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#offeredBy"/>
     </owl:ObjectProperty>
     
 
