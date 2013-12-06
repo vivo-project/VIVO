@@ -1211,7 +1211,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/translator -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/translator">
-
+        <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#translatorOf"/>
     </owl:ObjectProperty>
     
 
@@ -1522,6 +1522,7 @@ there is a measurement process p that has specified output m, a measurement datu
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#translatorOf">
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+        <owl:inverseOf rdf:resource="http://purl.org/ontology/bibo/translator"/>
     </owl:ObjectProperty>
     
 
