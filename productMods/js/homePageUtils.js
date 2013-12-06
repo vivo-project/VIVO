@@ -60,7 +60,7 @@ $(document).ready(function(){
                         getFacultyMembers();
                     }
                     else {
-                        individualList = "<p><li>" + i18nStrings.noFacultyFound + "</li></p>";
+                        individualList = "<p><li style='padding-left:1.2em'>" + i18nStrings.noFacultyFound + "</li></p>";
                         $('div#tempSpacing').hide();
                         $('div#research-faculty-mbrs ul#facultyThumbs').append(individualList);
                     }
@@ -95,7 +95,7 @@ $(document).ready(function(){
             });
        }
        else {
-           individualList = "<p><li>" + i18nStrings.noFacultyFound + "</li></p>";
+           individualList = "<p><li style='padding-left:1.2em'>" + i18nStrings.noFacultyFound + "</li></p>";
            $('div#tempSpacing').hide();
            $('div#research-faculty-mbrs ul#facultyThumbs').append(individualList);
            $('div#research-faculty-mbrs ul#facultyThumbs').css("padding", "1.0em 0 0.825em 0.75em");
