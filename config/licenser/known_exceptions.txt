@@ -38,10 +38,5 @@ productMods/js/visualization/entitycomparison/jquery_plugins/*
 # PROBLEM: Can't find any info on licensing.
 productMods/js/jquery_plugins/jquery.truncator.js
 
-# See /doc/3rd-party-licenses.txt for LICENSE file
-src/edu/cornell/mannlib/semservices/util/ObjectUtils.java
-src/edu/cornell/mannlib/semservices/util/XMLGregorianCalendarConverter.java
-src/edu/cornell/mannlib/vitro/webapp/utils/ConceptSearchService/BeanToJsonSerializer.java
-
 # Part of the OpenSocial integration - should this really be under the Apache license?
 themes/wilma/css/openSocial/gadgets.css

@@ -1,0 +1,56 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xmls: <http://www.w3.org/2001/XMLSchema#> .
+@prefix local: <http://vivo.mydomain.edu/individual/> .
+@prefix vivo: <http://vivoweb.org/ontology/core#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+
+
+local:lodFacultyMember
+      a       vivo:FacultyMember ;
+      rdfs:label "Example, Bad "^^xmls:string ;
+      obo:ARG_2000028 local:lodVcard ;
+      obo:RO_0000053 local:lodMembership ;
+      vivo:overview "Not someone on whom you should base your actions." ;
+      vivo:scopusId "10982375409" ;
+      vivo:eRACommonsId "My_eRA_ID" .
+
+local:lodVcard
+      a       vcard:Kind , vcard:Individual ;
+      obo:ARG_2000029 local:lodFacultyMember ;
+      vcard:hasName local:lodName ;
+      vcard:hasURL local:lodWebsite .
+
+local:lodName
+      a       vcard:Name ;
+      vcard:familyName "Example"^^xmls:string ;
+      vcard:givenName "Bad"^^xmls:string ;
+      vcard:honorificPrefix "Mr."^^xmls:string .
+
+local:lodWebsite
+      a       vcard:URL ;
+      rdfs:label "Slashdot" ;
+      vivo:rank "1"^^xmls:int ;
+      vcard:url "http://www.slashdot.org"^^xmls:anyURI .
+
+local:lodMembership
+      a       vivo:MemberRole ;
+      rdfs:label "Bozo"^^xmls:string ;
+      obo:RO_0000052 local:lodFacultyMember ;
+      vivo:dateTimeInterval local:lodInterval ;
+      vivo:roleContributesTo local:lodDepartment .
+
+local:lodInterval
+      a       vivo:DateTimeInterval ;
+      vivo:start local:lodStartDate .
+
+local:lodStartDate
+      a       vivo:DateTimeValue ;
+      vivo:dateTime "1992-01-01T00:00:00"^^xmls:dateTime ;
+      vivo:dateTimePrecision vivo:yearPrecision .
+
+local:lodDepartment
+      a       vivo:AcademicDepartment ;
+      rdfs:label "Department of Redundancy Department"^^xmls:string ;
+      vivo:contributingRole local:lodMembership .
+

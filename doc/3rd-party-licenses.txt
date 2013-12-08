@@ -24,6 +24,9 @@ dwr
 ezmorph
 gson
 jakarta-jstl
+jackson-annotations-2.3.0
+jackson-core-2.3.0
+jackson-databind-2.3.0
 jarjar
 jmeter
 joda-time

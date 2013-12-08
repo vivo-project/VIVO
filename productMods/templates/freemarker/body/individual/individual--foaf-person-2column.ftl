@@ -61,7 +61,7 @@
                         <@p.verboseDisplay title />
                     </#if>
                     <#list title.statements as statement>
-                        <span class="display-title<#if editable>-editable</#if>">${statement.preferredTitle}</span>
+                        <span class="display-title<#if editable>-editable<#else>-not-editable</#if>">${statement.preferredTitle}</span>
                         <@p.editingLinks "${title.localName}" "${title.name}" statement editable title.rangeUri />
                     </#list>
                 </#if>
@@ -95,6 +95,9 @@
         
         <!-- Research Areas -->
         <#include "individual-researchAreas.ftl">
+
+        <!-- Geographic Focus -->
+        <#include "individual-geographicFocus.ftl">
 
         <!-- Contact and Webpages -->
         <div id="contactsWebpages">

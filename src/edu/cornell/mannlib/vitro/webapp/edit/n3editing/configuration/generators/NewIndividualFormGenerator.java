@@ -50,9 +50,14 @@ public class NewIndividualFormGenerator extends BaseEditConfigurationGenerator i
     	                  + " ?newVcardInd vcard:hasName  ?newVcardName . \n"
     	                  + " ?newVcardName a vcard:Name . \n"
     	                  + " ?newVcardName vcard:givenName ?firstName . \n"
-    	                  + " ?newVcardName vcard:familyName ?lastName . \n"
-    	                  + " ?newVcardName <http://vivoweb.org/ontology/core#middleName> ?middleName .",
-                N3_PREFIX + " ?newInd <" + RDFS.label.getURI() + "> ?label ."
+    	                  + " ?newVcardName vcard:familyName ?lastName . \n",
+                N3_PREFIX + " ?newInd <" + RDFS.label.getURI() + "> ?label .",
+                N3_PREFIX + "@prefix vcard:<http://www.w3.org/2006/vcard/ns#> .\n"
+                          + " ?newInd <http://purl.obolibrary.org/obo/ARG_2000028> ?newVcardInd . \n"
+    	                  + " ?newVcardInd a vcard:Individual . \n"
+    	                  + " ?newVcardInd vcard:hasName  ?newVcardName . \n"
+    	                  + " ?newVcardName a vcard:Name . \n"
+    	                  + " ?newVcardName <http://vivoweb.org/ontology/core#middleName> ?middleName ."
     	));
     	                    
     	config.addNewResource("newInd", vreq.getWebappDaoFactory().getDefaultNamespace());
