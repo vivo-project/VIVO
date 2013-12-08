@@ -172,7 +172,7 @@
 </tr>
 <!--Cancel out before entering in title-->
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>link=Cancel</td>
 	<td></td>
 </tr>
@@ -668,16 +668,6 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=img.add-individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
 	<td>Edit</td>
 	<td></td>
 </tr>
@@ -892,66 +882,10 @@
 	<td>Mouse, Minnie</td>
 	<td></td>
 </tr>
-<!--Add Chapter, validating field first-->
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: chapter</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>A chapter number. NOT to be used for the chapter title, which should be entered in the &quot;name&quot; field instead (the field in bold at the top of the page)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='chapter']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>15</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
 <!--Add Features, validating field first-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='features']/a/img</td>
+	<td>css=a.add-features &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -961,7 +895,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Add an entry to: features</td>
+	<td>Select an existing Agent for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
@@ -991,7 +925,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Add an entry to: features</td>
+	<td>Select an existing Agent for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
@@ -1316,7 +1250,7 @@
 <tr>
 	<td>select</td>
 	<td>typeOfNew</td>
-	<td>label=Document Part (bibo)</td>
+	<td>label=Chapter (bibo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1356,7 +1290,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Add an entry to: part of</td>
+	<td>Select an existing Document for Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>If you don't find the appropriate entry on the selection list above:</td>
 	<td></td>
 </tr>
 <tr>
@@ -1381,8 +1320,18 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=objectVar</td>
-	<td>label=Nintendo O.K. for Kids</td>
+	<td>id=typeOfNew</td>
+	<td>label=Book (bibo)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -1948,12 +1897,27 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Nintendo: Good or Bad for Kids?</td>
+	<td>id=typeOfNew</td>
+	<td>label=Book (bibo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>Nintendo: Good or Bad for Kids?</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -2111,8 +2075,9 @@
 <tr>
 	<td>type</td>
 	<td>id=name</td>
-	<td>Kids</td>
+	<td>Kids Now C</td>
 </tr>
+<!--Select Kids Now Conference-->
 <tr>
 	<td>click</td>
 	<td>id=ui-active-menuitem</td>
@@ -2333,8 +2298,9 @@
 <tr>
 	<td>type</td>
 	<td>id=name</td>
-	<td>Kids Now</td>
+	<td>Kids Now C</td>
 </tr>
+<!--Select Kids Now Conference-->
 <tr>
 	<td>click</td>
 	<td>id=ui-active-menuitem</td>
@@ -2353,7 +2319,7 @@
 <!--Add part of-->
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-BFO_0000050 &gt; img.add-individual</td>
+	<td>css=a.add-RO_0002353 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -2363,7 +2329,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Add an entry to: part of</td>
+	<td>Select an existing Process for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
@@ -2388,13 +2354,18 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-partOf &gt; img.add-individual</td>
+	<td>css=a.add-RO_0002353 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
 	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=Kids Now!</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2419,12 +2390,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Select an existing Information Content Entity for Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Information Content Entity Name</td>
+	<td>Select an existing Document for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
@@ -2459,12 +2425,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Select an existing Information Content Entity for Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Information Content Entity Name</td>
+	<td>Select an existing Document for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
@@ -2476,6 +2437,11 @@
 	<td>verifyElementPresent</td>
 	<td>link=Cancel</td>
 	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=typeOfNew</td>
+	<td>label=Academic Article (bibo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2490,6 +2456,11 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
@@ -2539,6 +2510,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=typeOfNew</td>
+	<td>label=Academic Article (bibo)</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>id=offerCreate</td>
 	<td></td>
@@ -2574,6 +2550,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=typeOfNew</td>
+	<td>label=Academic Article (bibo)</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>id=offerCreate</td>
 	<td></td>
@@ -2601,17 +2582,17 @@
 <!--Verify all fields display properly-->
 <tr>
 	<td>verifyElementPresent</td>
-	<td>//img[@title='click to view larger image']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
 	<td>link=Company Homepage</td>
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[12]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
-	<td>Company Homepage</td>
+	<td>This is a chapter in a book that provides various professional viewpoints as to the impact of Nintendo usage on kids.</td>
 	<td></td>
 </tr>
 <tr>
@@ -2625,13 +2606,123 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>1</td>
+	<td>verifyElementPresent</td>
+	<td>link=Mouse, Minnie</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=published</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>9</td>
+	<td>2009</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Marcel Dekker</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Kids Now Conference Proceedings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Nintendo: Good or Bad for Kids?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>15</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Mouse, Minnie&nbsp;&nbsp;Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Mouse, Minnie</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Raising Children in the 21st Century</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=United States of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Kids Now Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Kids Now!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Kids Now Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Kids Now!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Children</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Kids Today</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Children Today</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Kids of the 21st Century</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1234-5678-90</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>123456789</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>99</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>22</td>
 	<td></td>
 </tr>
 <tr>
@@ -2646,17 +2737,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Mouse, Minnie</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Marcel Dekker</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Marcel Dekker</td>
+	<td>1</td>
 	<td></td>
 </tr>
 <tr>
@@ -2665,123 +2746,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>This is a chapter in a book that provides various professional viewpoints as to the impact of Nintendo usage on kids.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Raising Children in the 21st Century</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Raising Children in the 21st Century</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Kids Now!</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Kids Now!</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=published</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>published</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Kids Now Conference Proceedings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Kids Now Conference Proceedings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=exact:Nintendo: Good or Bad for Kids?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Nintendo: Good or Bad for Kids?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=United States of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>2009</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>123456789</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>1234-5678-90</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>15</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>22</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Child Development</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Child Development</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Children</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Nintendo: Good or Bad for Kids?</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Nintendo: Good or Bad for Kids?</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Kids Now Conference Proceedings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Kids Now Conference Proceedings</td>
 	<td></td>
 </tr>
 <!--Verify Index is correct-->
@@ -2807,22 +2778,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>research</td>
+	<td>activities</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Book (2)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Chapter (1)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Concept (1)</td>
+	<td>Service (1)</td>
 	<td></td>
 </tr>
 <tr>
@@ -2832,7 +2793,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Competition (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Conference (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Event (2)</td>
 	<td></td>
 </tr>
 <tr>
@@ -2848,6 +2819,36 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Publisher (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Academic Article (3)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Article (3)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Book (2)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Chapter (2)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Concept (1)</td>
 	<td></td>
 </tr>
 <!--Navigate back to Frank Furter-->
@@ -2877,6 +2878,11 @@
 	<td></td>
 </tr>
 <!--Verify Book Chapter is there-->
+<tr>
+	<td>click</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
+	<td></td>
+</tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>chapter</td>
