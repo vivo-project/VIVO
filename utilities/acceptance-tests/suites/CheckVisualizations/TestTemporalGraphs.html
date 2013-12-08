@@ -103,7 +103,7 @@
 <!--Add people to department-->
 <tr>
 	<td>click</td>
-	<td>//div[@id='wrapper-content']/ul/li[16]</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
 	<td></td>
 </tr>
 <tr>
@@ -888,8 +888,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Child Development</td>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Child Development</td>
 	<td></td>
 </tr>
 <!--Clear visualization cache-->

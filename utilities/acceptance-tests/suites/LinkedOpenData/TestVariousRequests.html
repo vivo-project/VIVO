@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>CreateTestFacultyMember</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CreateTestFacultyMember</td></tr>
+</thead><tbody>
+<!--Ask for various types of RDF by URL or Format-->
+<tr>
+	<td>deleteAllVisibleCookies</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>100000000000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/vivo/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Log in to VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=loginName</td>
+	<td>testAdmin@cornell.edu</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=loginPassword</td>
+	<td>Password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=loginForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<!------->
+<tr>
+	<td>open</td>
+	<td>/vivo/individual/lodFacultyMember/lodFacultyMember.rdf</td>
+	<td></td>
+</tr>
+<!--Pause to check results-->
+<!--Should see ~80 lines of RDF/XML-->
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>?????</td>
+	<td></td>
+</tr>
+<!------->
+<tr>
+	<td>open</td>
+	<td>/vivo/display/lodFacultyMember?format=rdfxml</td>
+	<td></td>
+</tr>
+<!--Pause to check results-->
+<!--Should see ~80 lines of RDF/XML-->
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>?????</td>
+	<td></td>
+</tr>
+<!------->
+<tr>
+	<td>open</td>
+	<td>/vivo/individual/lodFacultyMember/lodFacultyMember.jsonld</td>
+	<td></td>
+</tr>
+<!--Pause to check results-->
+<!--Should see a really dense response of JSON-LD	Lots of “[“, “{“, “}”, and “]”-->
+<!--If you view the source, it’s all one long line.-->
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>?????</td>
+	<td></td>
+</tr>
+<!------->
+<tr>
+	<td>open</td>
+	<td>/vivo/display/lodFacultyMember?format=jsonld</td>
+	<td></td>
+</tr>
+<!--Pause to check results-->
+<!--Should see a really dense response of JSON-LD	Lots of “[“, “{“, “}”, and “]”-->
+<!--If you view the source, it’s all one long line-->
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>?????</td>
+	<td></td>
+</tr>
+<!------->
+<tr>
+	<td>open</td>
+	<td>/vivo/individual/lodFacultyMember/lodFacultyMember.n3</td>
+	<td></td>
+</tr>
+<!--Pause to check results-->
+<!--Browser will try to download a file called lodFacultyMember.n3, containing about 70 lines of N3 RDF-->
+<!--Browser may ask what program should be used to open the file-->
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>?????</td>
+	<td></td>
+</tr>
+<!------->
+<tr>
+	<td>open</td>
+	<td>/vivo/display/lodFacultyMember?format=n3</td>
+	<td></td>
+</tr>
+<!--Pause to check results-->
+<!--Browser will try to download a file called lodFacultyMember, containing about 70 lines of N3 RDF-->
+<!--Browser may ask what program should be used to open the file-->
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>?????</td>
+	<td></td>
+</tr>
+<!------->
+<tr>
+	<td>open</td>
+	<td>/vivo/individual/lodFacultyMember/lodFacultyMember.ttl</td>
+	<td></td>
+</tr>
+<!--Pause to check results-->
+<!--browser will try to download a file called lodFacultyMember.ttl, containing about 70 lines of TTL RDF-->
+<!--Browser may ask what program should be used to open the file-->
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>?????</td>
+	<td></td>
+</tr>
+<!------->
+<tr>
+	<td>open</td>
+	<td>/vivo/display/lodFacultyMember?format=ttl</td>
+	<td></td>
+</tr>
+<!--Pause to check results-->
+<!--browser will try to download a file called lodFacultyMember, containing about 70 lines of TTL RDF-->
+<!--Browser may ask what program should be used to open the file-->
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>?????</td>
+	<td></td>
+</tr>
+<!------->
+<tr>
+	<td>open</td>
+	<td>/vivo/display/bogus?format=jsonld</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/vivo/</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
