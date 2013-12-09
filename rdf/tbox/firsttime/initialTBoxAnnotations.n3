@@ -25,7 +25,8 @@ vivo:pmcid
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 obo:ERO_0000071
-      rdfs:label "Software"@en-US .
+      rdfs:label "Software"@en-US ;
+      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouppublications> .
 
 bibo:Note
       rdfs:label "Note"@en-US ;
@@ -400,7 +401,7 @@ obo:OBI_0000643
 
 obo:OBI_0000272
       rdfs:label "Protocol"@en-US ;
-      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGroupresearch> .
+      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouppublications> .
 
 vcard:Identification
       rdfs:label "Identification"@en-US .
@@ -6460,7 +6461,7 @@ obo:ERO_0001716
       rdfs:label "Database"@en-US .
 
 <http://vivoweb.org/ontology/scientific-research#documentationFor>
-      rdfs:label "documentation for service"@en-US ;
+      rdfs:label "documentation for project or resource"@en-US ;
       vitro:displayLimitAnnot
               "2"^^xsd:int ;
       vitro:displayRankAnnot
