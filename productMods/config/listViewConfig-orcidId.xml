@@ -11,7 +11,7 @@
         SELECT ?value
         WHERE {
                 ?subject ?property ?value 
-        } LIMIT 1
+        }
     </query-select>
 
     <query-construct>
