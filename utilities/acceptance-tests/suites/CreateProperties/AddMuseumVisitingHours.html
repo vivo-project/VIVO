@@ -11,7 +11,7 @@
 <thead>
 <tr><td rowspan="1" colspan="3">AddMuseumVisitingHours</td></tr>
 </thead><tbody>
-<!--Associate visiting hours with the Johnson Art Museum-->
+<!--Associate year founded with the Johnson Art Museum-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -102,23 +102,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='visitingHours']/a/img</td>
+	<td>selectWindow</td>
+	<td>null</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>typeOfNew</td>
-	<td>label=Date/Time Interval (vivo)</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>id=offerCreate</td>
+	<td>css=a.add-yearFounded &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -128,12 +118,12 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
-	<td>10am-4pm</td>
+	<td>id=startField-year</td>
+	<td>1959</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -141,10 +131,10 @@
 	<td>Johnson Art Museum</td>
 	<td></td>
 </tr>
-<!--Verify visiting hours have been set-->
+<!--Verify year founded has been set-->
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=10am-4pm</td>
+	<td>verifyTextPresent</td>
+	<td>1959 -</td>
 	<td></td>
 </tr>
 <!--Log out-->

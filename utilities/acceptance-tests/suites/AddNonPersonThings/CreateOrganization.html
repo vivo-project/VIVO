@@ -199,16 +199,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>selectWindow</td>
-	<td>null</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=li.nonSelectedGroupTab.clickable</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>css=a.add-offers &gt; img.add-individual</td>
 	<td></td>
@@ -241,16 +231,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>css=a.add-hasPredecessorOrganization &gt; img.add-individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='hasPredecessorOrganization']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -555,11 +535,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertTitle</td>
 	<td>Primate College of America</td>
 	<td></td>
@@ -817,12 +792,12 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=title</td>
+	<td>id=name</td>
 	<td>Primate Info</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -938,16 +913,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='hasGeographicLocation']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>id=object</td>
 	<td>northern Afr</td>
@@ -970,7 +935,7 @@
 <!--Test contact entry-->
 <tr>
 	<td>clickAndWait</td>
-	<td>xpath=(//img[@alt='add'])[33]</td>
+	<td>xpath=(//img[@alt='add'])[34]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1045,7 +1010,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>xpath=(//img[@alt='add'])[34]</td>
+	<td>xpath=(//img[@alt='add'])[35]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1279,7 +1244,7 @@
 <tr>
 	<td>select</td>
 	<td>id=typeOfNew</td>
-	<td>label=Blog (vivo)</td>
+	<td>label=Blog Posting (vivo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1412,19 +1377,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>Human and Ape Brain Comparison</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTitle</td>
 	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<!--Need to add details for performs human study-->
-<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td></td>
 	<td></td>
 </tr>
 <tr>
@@ -1637,22 +1611,12 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Primate Research Laboratory</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Primate Research Laboratory Laboratory</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
 	<td>link=Primate History Library</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Primate History Library Library</td>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Research Laboratory</td>
 	<td></td>
 </tr>
 <tr>
@@ -1668,11 +1632,6 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Primate History Library</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Primate History Library Library</td>
 	<td></td>
 </tr>
 <tr>
@@ -1733,11 +1692,6 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Info Database</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>invited talk</td>
 	<td></td>
 </tr>
@@ -1787,15 +1741,9 @@
 	<td>link=Primate Survival Planning Grant</td>
 	<td></td>
 </tr>
-<!--Add check for performs human study here-->
 <tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td></td>
+	<td>verifyElementPresent</td>
+	<td>link=Human and Ape Brain Comparison</td>
 	<td></td>
 </tr>
 <tr>
@@ -1820,13 +1768,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Introduction to Primates</td>
+	<td>verifyTextPresent</td>
+	<td>Primate Health Check Sponsor 2008 - 2010</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Primate Health Check Sponsor 2008 - 2010</td>
+	<td>verifyElementPresent</td>
+	<td>link=Portable Primate Habitat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Introduction to Primates</td>
 	<td></td>
 </tr>
 <!--Check CONTACT tab-->
@@ -1890,10 +1843,195 @@
 	<td>link=Primate Colleges of the World</td>
 	<td></td>
 </tr>
-<!--Check OTHER tab-->
+<!--Check VIEW ALL tab-->
 <tr>
 	<td>click</td>
 	<td>//div[@id='wrapper-content']/ul/li[14]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>PCoA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1959 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=B.S. Bachelor of Science</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Student of the Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Best Primate College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>faculty administrative position</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Person, Polly</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Person, Polly, Dr. 1999 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate History Library</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Research Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primates-r-us</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primates-r-us Founder 2010 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate History Library</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primates-r-us</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Colleges of the World</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Colleges of the World Member 2009 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Heart Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Heart Health Founder 2010 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=New Primate Students</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>New Primate Students 2003 - 2006</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primates in the Wild</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primates in the Wild 1997 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Info</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>invited talk</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Health and Fitness</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health and Fitness, Organizer 2008</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Happenings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=USA222333444555</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Heart Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Habitat Research Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Habitat Research Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Survival Planning Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Human and Ape Brain Comparison</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Gorillas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Gorilla Moving Company</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Health Check</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health Check Sponsor 2008 - 2010</td>
 	<td></td>
 </tr>
 <tr>
@@ -1902,20 +2040,63 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyElementPresent</td>
+	<td>link=Introduction to Primates</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
-	<td>Portable Primate Habitat</td>
-	<td></td>
-</tr>
-<!--Check VIEW ALL tab-->
-<!--Need to add a check of everything when it is available-->
-<tr>
-	<td></td>
-	<td></td>
+	<td>555-555-5555</td>
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>555-555-5554</td>
 	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>info@primates.edu</td>
 	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1234 Northern African Nation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Morocco City</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1234567890</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Morocco</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=northern Africa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate College of New York</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate University of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Colleges of the World</td>
 	<td></td>
 </tr>
 <!--Logout-->

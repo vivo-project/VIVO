@@ -67,16 +67,55 @@
 	<td>/vivo/display/lodFacultyMember</td>
 	<td></td>
 </tr>
-<!--Pause to check results-->
-<!--Should see profile page for Mr. Bad Example-->
+<!--Check out profile page for Mr. Bad Example-->
 <tr>
-	<td>pause</td>
-	<td>10000</td>
+	<td>assertTitle</td>
+	<td>Example, Bad</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>?????</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Not someone on whom you should base your actions.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Slashdot</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[18]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Department of Redundancy Department</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Department of Redundancy Department Bozo 1992 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Mr. Bad Example</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>My_eRA_ID</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=10982375409</td>
 	<td></td>
 </tr>
 <tr>

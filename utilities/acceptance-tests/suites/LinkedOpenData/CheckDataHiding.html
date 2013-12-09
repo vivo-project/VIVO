@@ -32,73 +32,22 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Log in</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Log in to VIVO</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=loginName</td>
-	<td>testAdmin@cornell.edu</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=loginPassword</td>
-	<td>Password</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=loginForm</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
 <!------->
+<!--Check that ScopusID is not publicly visible but eRACommonsID is-->
 <tr>
 	<td>open</td>
 	<td>/vivo/individual/lodFacultyMember/lodFacultyMember.rdf</td>
 	<td></td>
 </tr>
 <!--Pause to check results-->
-<!--Should see ~80 lines of RDF/XML-->
-<!--Check that it includes a line for vivo:eRACommonsId-->
-<!--Check that it does not include a line for vivo:scopusId	-->
 <tr>
 	<td>pause</td>
 	<td>10000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>vivo:eRACommonsId</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>vivo:scopusId	</td>
-	<td></td>
-</tr>
-<!------->
-<!--Check that ScopusID is not publicly visible-->
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Log out</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>Scopus Id	</td>
-	<td></td>
-</tr>
+<!--Should see ~80 lines of RDF/XML-->
+<!--vivo:eRACommonsId should be displayed-->
+<!--vivo:scopusId should NOT be displayed-->
 <!------->
 <!--Log in as Editor, Curator or Admin	-->
 <tr>
@@ -142,49 +91,35 @@
 	<td></td>
 </tr>
 <!------->
+<!--Check that ScopusID and eRACommonsID are visible for admin-->
 <tr>
 	<td>open</td>
 	<td>/vivo/individual/lodFacultyMember/lodFacultyMember.rdf</td>
 	<td></td>
 </tr>
 <!--Pause to check results-->
-<!--Should see ~80 lines of RDF/XML-->
-<!--Check that it now includes a line for vivo:scopusId-->
-<!--Check that ScopusID is visible to Editors, Curators and Admins-->
 <tr>
 	<td>pause</td>
 	<td>10000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>vivo:eRACommonsId</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>vivo:scopusId	</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>Scopus Id	</td>
-	<td></td>
-</tr>
+<!--Should see ~80 lines of RDF/XML-->
+<!--Check that it now includes a line for vivo:scopusId-->
+<!--Check that ScopusID is visible to Editors, Curators and Admins-->
 <!------->
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Log out</td>
-	<td></td>
-</tr>
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
 	<td></td>
 </tr>
 </tbody></table>

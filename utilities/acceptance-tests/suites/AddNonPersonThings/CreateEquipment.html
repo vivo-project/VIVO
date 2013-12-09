@@ -160,7 +160,7 @@
 <!--Test overview entry (image and webpage have been tested)-->
 <tr>
 	<td>click</td>
-	<td>//div[@id='wrapper-content']/ul/li[6]</td>
+	<td>//div[@id='wrapper-content']/ul/li[8]</td>
 	<td></td>
 </tr>
 <tr>
@@ -285,15 +285,141 @@
 	<td>Primate Research Lab Room 123</td>
 	<td></td>
 </tr>
+<!--Test remaining fields (added for 1.6)-->
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-ERO_0000070 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=Primate Research Laboratory</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Feeder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-RO_0003001 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Feeder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-RO_0003000 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=Primate Feeder</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Feeder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-OBI_0000304 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=Primate College of America</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Feeder</td>
+	<td></td>
+</tr>
 <!--Verify everything entered is displaying properly-->
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Primate Research Lab Room 123</td>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Research Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Research Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Portable Primate Habitat</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Primate Feeder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Feeder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Animal Diet</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Research Lab Room 123</td>
 	<td></td>
 </tr>
 <!--Logout-->
