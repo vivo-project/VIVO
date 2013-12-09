@@ -79,6 +79,7 @@
     <owl:ObjectProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMember">
         <rdfs:domain rdf:resource="http://aims.fao.org/aos/geopolitical.owl#group"/>
         <rdfs:range rdf:resource="http://aims.fao.org/aos/geopolitical.owl#territory"/>
+        <owl:inverseOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#isInGroup"/>
     </owl:ObjectProperty>
     
 
@@ -108,6 +109,7 @@
         <terms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">United Nations Statistics Division http://unstats.un.org/unsd/methods/m49/m49chang.htm</terms:source>
         <geopolitical:sourceIdentifier xml:lang="en">http://unstats.un.org/unsd/methods/m49/m49chang.htm</geopolitical:sourceIdentifier>
         <geopolitical:sourceIdentifier xml:lang="fr">http://unstats.un.org/unsd/methods/m49/m49chgef.htm</geopolitical:sourceIdentifier>
+        <owl:inverseOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#isSuccessorOf"/>
     </owl:ObjectProperty>
     
 
@@ -1031,6 +1033,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/citedBy">
         <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Document"/>
         <rdfs:range rdf:resource="http://purl.org/ontology/bibo/Document"/>
+        <owl:inverseOf rdf:resource="http://purl.org/ontology/bibo/cites"/>
     </owl:ObjectProperty>
     
 
@@ -1158,8 +1161,8 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://purl.org/ontology/bibo/reviewOf -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/reviewOf">
-
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The bibo:reviewOf public description was found here: http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html .  As of 26 May 2010, bibo:reviewOf is used with the class Review, but core:reviewIn doesn&apos;t seem to be being used.</obo:IAO_0000112>
+        <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#reviewedIn"/>
     </owl:ObjectProperty>
     
 
@@ -1196,7 +1199,7 @@ there is a measurement process p that has specified output m, a measurement datu
     
 
 
-    <!-- http://purl.org/ontology/bibo/translationOf -->
+    <!-- http://purl.org/ontology/bibo/translationOf inverse of hasTranslation -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/translationOf">
 
@@ -1361,7 +1364,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#hasAssociatedConcept -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasAssociatedConcept">
-
+        <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#conceptAssociatedWith"/>
     </owl:ObjectProperty>
     
 
@@ -1370,9 +1373,9 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#hasPrerequisite -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasPrerequisite">
-
         <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Course"/>
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#Course"/>
+        <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#prerequisiteFor"/>
     </owl:ObjectProperty>
     
 
@@ -1380,7 +1383,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#hasPublicationVenue -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasPublicationVenue">
-
+        <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#publicationVenueFor"/>
     </owl:ObjectProperty>
     
 
@@ -1398,8 +1401,8 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#hasTranslation -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasTranslation">
-
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Examples shows a book has French language version. Public description source: http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html .</obo:IAO_0000112>
+        <owl:inverseOf rdf:resource="http://purl.org/ontology/bibo/translationOf"/>
     </owl:ObjectProperty>
     
 
@@ -1407,7 +1410,6 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#offeredBy -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#offeredBy">
-        <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#offers"/>
     </owl:ObjectProperty>
     
 
@@ -1452,9 +1454,9 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#publisher -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#publisher">
-
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Public Definition source (http://www.answers.com/topic/publisher).</obo:IAO_0000112>
         <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+        <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#publisherOf"/>
     </owl:ObjectProperty>
     
 
@@ -1511,9 +1513,9 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#subcontractsGrant -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#subcontractsGrant">
-
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#Grant"/>
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+        <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/core#grantSubcontractedThrough"/>
     </owl:ObjectProperty>
     
 
@@ -1522,7 +1524,6 @@ there is a measurement process p that has specified output m, a measurement datu
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#translatorOf">
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
-        <owl:inverseOf rdf:resource="http://purl.org/ontology/bibo/translator"/>
     </owl:ObjectProperty>
     
 
@@ -1608,8 +1609,8 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2004/02/skos/core#broader -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2004/02/skos/core#broader">
-
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Public description modified from the information on this page: http://www.w3.org/TR/2005/WD-swbp-skos-core-guide-20050510/#sechierarchy .</obo:IAO_0000115>
+        <owl:inverseOf rdf:resource="http://www.w3.org/2004/02/skos/core#narrower"/>
     </owl:ObjectProperty>
     
 
@@ -1617,7 +1618,6 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://www.w3.org/2004/02/skos/core#narrower -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/2004/02/skos/core#narrower">
-
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Public description modified from the information on this page: http://www.w3.org/TR/2005/WD-swbp-skos-core-guide-20050510/#sechierarchy .</obo:IAO_0000115>
     </owl:ObjectProperty>
     
