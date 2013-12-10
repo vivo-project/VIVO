@@ -60,7 +60,7 @@ vivo:offeredBy
 vivo:dateTimeValue
       rdfs:label "date/time value"@en-US ;
       vitro:customEntryFormAnnot
-              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimeValueFormGenerator"^^xsd:string ;
+              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimePropertyGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -1227,7 +1227,7 @@ obo:IAO_0000007
 vivo:expirationDate
       rdfs:label "expiration date"@en-US ;
       vitro:customEntryFormAnnot
-              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimeValueFormGenerator"^^xsd:string ;
+              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimePropertyGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5125,7 +5125,7 @@ bibo:Interview
 <http://purl.org/spar/c4o/hasGlobalCountDate>
       rdfs:label "has global count date"@en-US ;
       vitro:customEntryFormAnnot
-              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimeValueFormGenerator"^^xsd:string ;
+              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimePropertyGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -6257,7 +6257,7 @@ geo:nameShortES
 vivo:dateIssued
       rdfs:label "date issued"@en-US ;
       vitro:customEntryFormAnnot
-              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimeValueFormGenerator"^^xsd:string ;
+              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimePropertyGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -7112,7 +7112,7 @@ vcard:hasSound
 vivo:dateFiled
       rdfs:label "date filed"@en-US ;
       vitro:customEntryFormAnnot
-              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimeValueFormGenerator"^^xsd:string ;
+              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimePropertyGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
