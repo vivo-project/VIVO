@@ -665,6 +665,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>ShowConfiguration</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.admin.ShowConfiguration</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowConfiguration</servlet-name>
+    <url-pattern>/admin/showConfiguration</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>StartupStatus</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.admin.StartupStatusController</servlet-class>
   </servlet>
