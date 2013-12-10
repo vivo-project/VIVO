@@ -320,13 +320,13 @@ vivo:GovernmentAgency
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 skos:narrower
-      rdfs:label "narrower term"@en-US ;
+      rdfs:label "narrower concept"@en-US ;
       vitro:customEntryFormAnnot
               "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddConceptThroughObjectPropertyGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
-              "50"^^xsd:int ;
+              "52"^^xsd:int ;
       vitro:fullPropertyNameAnnot
               "narrower term"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -338,7 +338,9 @@ skos:narrower
       vitro:publicDescriptionAnnot
               "This relates a term that is narrower in meaning (i.e. more specific) to another term that is broader in meaning, where the scope (meaning) of narrower term falls completely within the scope of the broader term."^^xsd:string ;
       vitro:selectFromExistingAnnot
-              "true"^^xsd:boolean .
+              "true"^^xsd:boolean ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 vivo:affiliatedOrganization
       rdfs:label "has affiliated organization"@en-US ;
@@ -1224,6 +1226,8 @@ obo:IAO_0000007
 
 vivo:expirationDate
       rdfs:label "expiration date"@en-US ;
+      vitro:customEntryFormAnnot
+              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimeValueFormGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5120,6 +5124,8 @@ bibo:Interview
 
 <http://purl.org/spar/c4o/hasGlobalCountDate>
       rdfs:label "has global count date"@en-US ;
+      vitro:customEntryFormAnnot
+              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimeValueFormGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -5320,13 +5326,13 @@ vivo:termLabel
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 skos:related
-      rdfs:label "related"@en-US ;
+      rdfs:label "related concept"@en-US ;
       vitro:customEntryFormAnnot
               "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddConceptThroughObjectPropertyGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
-              "60"^^xsd:int ;
+              "54"^^xsd:int ;
       vitro:fullPropertyNameAnnot
               "related"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -5338,7 +5344,9 @@ skos:related
       vitro:publicDescriptionAnnot
               "This indicates when a term is related to another term in the same vocabulary."^^xsd:string ;
       vitro:selectFromExistingAnnot
-              "true"^^xsd:boolean .
+              "true"^^xsd:boolean ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 obo:BFO_0000148
       rdfs:label "Zero-Dimensional Temporal Region"@en-US .
@@ -6248,6 +6256,8 @@ geo:nameShortES
 
 vivo:dateIssued
       rdfs:label "date issued"@en-US ;
+      vitro:customEntryFormAnnot
+              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimeValueFormGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -7101,6 +7111,8 @@ vcard:hasSound
 
 vivo:dateFiled
       rdfs:label "date filed"@en-US ;
+      vitro:customEntryFormAnnot
+              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimeValueFormGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -7653,6 +7665,8 @@ vcard:OrganizationUnitName
 
 vivo:dateTime
       rdfs:label "date/time"@en-US , "date/time"@en-US ;
+      vitro:customEntryFormAnnot
+              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimeValueFormGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
