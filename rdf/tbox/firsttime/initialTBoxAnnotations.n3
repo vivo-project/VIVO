@@ -4991,7 +4991,7 @@ obo:ERO_0001245
               "true"^^xsd:boolean .
 
 skos:broader
-      rdfs:label "broader term"@en-US ;
+      rdfs:label "broader concept"@en-US ;
       vitro:customEntryFormAnnot
               "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddConceptThroughObjectPropertyGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
