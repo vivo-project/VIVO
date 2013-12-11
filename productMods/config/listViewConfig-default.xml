@@ -34,16 +34,12 @@
                 ?object a foaf:Person .
                 ?object vitro:mostSpecificType ?typeUri .
                 ?typeUri rdfs:label ?type .
-                # Display only a mostSpecificType that belongs to a classgroup.
-                ?typeUri vitro:inClassGroup ?classGroup .
-                ?classGroup a vitro:ClassGroup 
             }
             
             OPTIONAL { ?object obo:ARG_2000028 ?vcard .
                        ?vcard vcard:hasTitle ?titleObj .
                        ?titleObj vcard:title ?title 
-            } 
-            
+            }             
             
             <collated>
             OPTIONAL { ?object a ?subclass } 
@@ -62,6 +58,7 @@
         
         CONSTRUCT {
             ?subject ?property ?object .
+            ?object a ?objectType .
             ?object a ?subclass .
             ?object rdfs:label ?label .
         } WHERE {
@@ -69,7 +66,8 @@
                 ?subject ?property ?object .
             } UNION {                
                 ?subject ?property ?object .
-                ?object a ?subclass . 
+                ?object a ?objectType . 
+                ?object a ?subclass .
             } UNION {      
                 ?subject ?property ?object .
                 ?object rdfs:label ?label .
@@ -87,8 +85,6 @@
         CONSTRUCT {
             ?subject ?property ?object .
             ?object vitro:mostSpecificType ?typeUri .
-            ?typeUri vitro:inClassGroup ?classGroup .
-            ?classGroup a vitro:ClassGroup .
             ?typeUri rdfs:label ?type .
             ?object obo:ARG_2000028 ?vcard . 
             ?vcard vcard:hasTitle ?titleObj .
@@ -96,10 +92,10 @@
         } WHERE {
             { 
                 ?subject ?property ?object .
+            } UNION {            
+                ?subject ?property ?object .
                 ?object vitro:mostSpecificType ?typeUri .
                 ?typeUri rdfs:label ?type .
-                ?typeUri vitro:inClassGroup ?classGroup .
-                ?classGroup a vitro:ClassGroup 
             } UNION {            
                 ?subject ?property ?object .
                 ?object obo:ARG_2000028 ?vcard . 
