@@ -523,7 +523,8 @@ vivo:relates
       rdfs:label "relates"@en-US .
 
 obo:ERO_0000007
-      rdfs:label "Technique"@en-US .
+      rdfs:label "Technique"@en-US ;
+      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouppublications> .
 
 vcard:hasCalendarLink
       rdfs:label "has calendar link"@en-US .
@@ -536,7 +537,8 @@ vivo:SubnationalRegion
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
-              "-1"^^xsd:int ;
+              "10"^^xsd:int ;
+      vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGrouplocations> ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
@@ -2452,7 +2454,15 @@ obo:ARG_2000083
       rdfs:label "American Board of Plastic Surgery"@en-US .
 
 obo:ERO_0000398
-      rdfs:label "is performed by"@en-US .
+      rdfs:label "is performed by"@en-US ;
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:selectFromExistingAnnot
+              "true"^^xsd:boolean .
 
 vcard:hasCalenderBusy
       rdfs:label "has calendar busy"@en-US .
@@ -4445,6 +4455,8 @@ geo:nameShortAR
               "5"^^xsd:int ;
       vitro:displayRankAnnot
               "5"^^xsd:int ;
+      vitro:inClassGroup
+              <http://vivoweb.org/ontology#vitroClassGrouppublications> ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
