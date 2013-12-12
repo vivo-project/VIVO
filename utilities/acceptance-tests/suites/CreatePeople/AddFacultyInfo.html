@@ -520,7 +520,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=label</td>
 	<td>USABC123456789</td>
 </tr>
 <tr>
@@ -635,7 +635,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=name</td>
+	<td>id=label</td>
 	<td>Primate Reactions</td>
 </tr>
 <tr>
@@ -883,7 +883,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=name</td>
+	<td>id=label</td>
 	<td>Primate Feeding</td>
 </tr>
 <tr>
@@ -982,6 +982,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=typeOfNew</td>
+	<td>label=Protocol (obo)</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>id=offerCreate</td>
 	<td></td>
@@ -993,7 +998,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=name</td>
+	<td>id=label</td>
 	<td>JF Feeding</td>
 </tr>
 <tr>
@@ -1012,6 +1017,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=typeOfNew</td>
+	<td>label=Protocol (obo)</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>id=offerCreate</td>
 	<td></td>
@@ -1023,12 +1033,17 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=name</td>
+	<td>id=label</td>
 	<td>JF Feeding Revised</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <!--Add Background tab fields-->
@@ -1139,12 +1154,12 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=label</td>
 	<td>Primate Expert Association</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -1996,8 +2011,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>faculty mentoring relationship</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Adams, Amy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Adams, Amy, 2013 -</td>
 	<td></td>
 </tr>
 <tr>
