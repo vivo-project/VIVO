@@ -11,7 +11,7 @@
 <thead>
 <tr><td rowspan="1" colspan="3">AddObjPropVisitingHours</td></tr>
 </thead><tbody>
-<!--Add Object Property visiting hours to Property Group Place-->
+<!--Add Object Property year founded to Property Group Place-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -83,7 +83,7 @@
 <!--Verify visiting hours does not already exist-->
 <tr>
 	<td>verifyElementNotPresent</td>
-	<td>link=visiting hours</td>
+	<td>link=year founded</td>
 	<td></td>
 </tr>
 <tr>
@@ -115,12 +115,12 @@
 <tr>
 	<td>type</td>
 	<td>name=LocalName</td>
-	<td>visitingHours</td>
+	<td>yearFounded</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name=DomainPublic</td>
-	<td>visiting hours</td>
+	<td>year founded</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -130,12 +130,12 @@
 <tr>
 	<td>type</td>
 	<td>name=LocalNameInverse</td>
-	<td>visitingHoursFor</td>
+	<td>yearFoundedFor</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name=RangePublic</td>
-	<td>visiting hours for</td>
+	<td>year founded for</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -168,6 +168,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>name=CustomEntryForm</td>
+	<td>edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimeIntervalFormGenerator</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>primaryAction</td>
 	<td></td>
@@ -180,7 +185,7 @@
 <!--Verify visiting hours has been properly added-->
 <tr>
 	<td>verifyTextPresent</td>
-	<td>visiting hours (bibo)</td>
+	<td>year founded (bibo)</td>
 	<td></td>
 </tr>
 <tr>
@@ -200,12 +205,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>visitingHours</td>
+	<td>yearFounded</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>visiting hours</td>
+	<td>year founded</td>
 	<td></td>
 </tr>
 <tr>
@@ -240,7 +245,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>(unspecified)</td>
+	<td>edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimeIntervalFormGenerator</td>
 	<td></td>
 </tr>
 <tr>
@@ -255,7 +260,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>http://purl.org/ontology/bibo/visitingHours</td>
+	<td>http://purl.org/ontology/bibo/yearFounded</td>
 	<td></td>
 </tr>
 <!--Log out-->

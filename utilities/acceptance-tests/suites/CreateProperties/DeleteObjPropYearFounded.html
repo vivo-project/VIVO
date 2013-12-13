@@ -4,14 +4,14 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>DeletePropertyGroupPlace</title>
+<title>DeleteObjPropVisitingHours</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">DeletePropertyGroupPlace</td></tr>
+<tr><td rowspan="1" colspan="3">DeleteObjPropVisitingHours</td></tr>
 </thead><tbody>
-<!--Delete test Property Group Place-->
+<!--Delete test Object Property year founded-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -43,7 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<!--Must login as site admin-->
+<!--Must log in as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -69,10 +69,10 @@
 	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
-<!--Navigate to Propery Groups-->
+<!--Navigate to Object Properties-->
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Property groups</td>
+	<td>link=Object property hierarchy</td>
 	<td></td>
 </tr>
 <tr>
@@ -80,24 +80,34 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<!--Make sure Place exists already-->
+<!--Verify that year founded does indeed exist-->
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Place</td>
+	<td>link=year founded (bibo)</td>
 	<td></td>
 </tr>
-<!--Navigate to Place-->
+<!--Select to edit year founded-->
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Place</td>
+	<td>link=year founded (bibo)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Property Group Editing Form</td>
+	<td>Object Property Control Panel</td>
 	<td></td>
 </tr>
-<!--Delete Place-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit Property Record']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Property Editing Form</td>
+	<td></td>
+</tr>
+<!--Delete visiting hours-->
 <tr>
 	<td>click</td>
 	<td>_delete</td>
@@ -118,10 +128,10 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<!--Verify that Place is gone-->
+<!--Verify visiting hours is gone-->
 <tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Place</td>
+	<td>verifyTextNotPresent</td>
+	<td>year founded (bibo)</td>
 	<td></td>
 </tr>
 <!--Logout-->

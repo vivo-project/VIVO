@@ -524,6 +524,8 @@ local:adviseeRoleContext a :ConfigContext ;
 local:adviseeRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-adviseeIn.xml"^^xsd:string ;
     :displayName "advisee of" ;
+    vitro:collateBySubclassAnnot
+              "true"^^xsd:boolean;
     vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
@@ -980,7 +982,7 @@ local:credentialOfContext a :ConfigContext ;
     :qualifiedBy      vivo:IssuedCredential .
 
 local:credentialOfConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "credential of" ;
     vitro:displayRankAnnot 6;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -994,7 +996,7 @@ local:documentHasPartContext a :ConfigContext ;
     :qualifiedBy      <http://purl.org/ontology/bibo/DocumentPart> .
 
 local:documentHasPartConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "has document part" ;
     vitro:displayRankAnnot 51;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1010,7 +1012,7 @@ local:documentPartOfContext a :ConfigContext ;
     :qualifiedBy       <http://purl.org/ontology/bibo/Document> .
 
 local:documentPartOfConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "part of other document" ;
     vitro:displayRankAnnot 52;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1026,7 +1028,7 @@ local:geographicLocationContainsLocationContext a :ConfigContext ;
     :qualifiedBy       vivo:GeographicLocation .
 
 local:geographicLocationContainsLocationConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "has part" ;
     vitro:displayRankAnnot 81;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1042,7 +1044,7 @@ local:geographicLocationWithinLocationContext a :ConfigContext ;
     :qualifiedBy       vivo:GeographicLocation .
             
 local:geographicLocationWithinLocationConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "part of" ;
     vitro:displayRankAnnot 82;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
@@ -1058,7 +1060,7 @@ local:hasSubOrganizationContext a :ConfigContext ;
     :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
 
 local:hasSubOrganizationConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "has sub-organization" ;
     vitro:displayRankAnnot 15;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
@@ -1074,7 +1076,7 @@ local:subOrganizationWithinContext a :ConfigContext ;
     :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
 
 local:subOrganizationWithinConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "organization within" ;
     vitro:displayRankAnnot 20;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
@@ -1090,7 +1092,7 @@ local:eventWithinContext a :ConfigContext ;
     :qualifiedBy      <http://purl.org/NET/c4dm/event.owl#Event> .
 
 local:eventWithinConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "occurs within event" ;
     vitro:displayRankAnnot 15;
      vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
@@ -1106,7 +1108,7 @@ local:includesEventContext a :ConfigContext ;
     :qualifiedBy      <http://purl.org/NET/c4dm/event.owl#Event> .
 
 local:includesEventConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "includes event" ;
     vitro:displayRankAnnot 16;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
@@ -1122,7 +1124,7 @@ local:inEventSeriesContext a :ConfigContext ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#EventSeries> .
 
 local:inEventSeriesConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "in event series" ;
     vitro:displayRankAnnot 17;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
@@ -1138,7 +1140,7 @@ local:eventsForSeriesContext a :ConfigContext ;
     :qualifiedBy       <http://purl.org/NET/c4dm/event.owl#Event> .
  
 local:eventsForSeriesConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "events in this series" ;
     vitro:displayRankAnnot 18;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1154,7 +1156,7 @@ local:eventLocationContext a :ConfigContext ;
     :qualifiedBy      vivo:GeographicLocation .
 
 local:eventLocationConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "held in geographic location" ;
     vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1170,7 +1172,7 @@ local:eventInFacilityContext a :ConfigContext ;
     :qualifiedBy      vivo:Facility .
 
 local:eventInFacilityConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "held in facility" ;
     vitro:displayRankAnnot 29;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1186,7 +1188,7 @@ local:agentInGeoLocationContext a :ConfigContext ;
     :qualifiedBy       vivo:GeographicLocation .
 
 local:agentInGeoLocationConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "geographic location" ;
     vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1202,7 +1204,7 @@ local:agentInFacilityContext a :ConfigContext ;
     :qualifiedBy        vivo:Facility .
 
 local:agentInFacilityConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "located in facility" ;
     vitro:displayRankAnnot 32;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1218,7 +1220,7 @@ local:materialEntityInFacilityContext a :ConfigContext ;
     :qualifiedBy      vivo:Facility .
 
 local:materialEntityInFacilityConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "housed in facility" ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1234,7 +1236,7 @@ local:hasRoomContext a :ConfigContext ;
     :qualifiedBy vivo:Room .
 
 local:hasRoomConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "rooms" ;
     vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1250,7 +1252,7 @@ local:roomWithinBuildingContext a :ConfigContext ;
     :qualifiedBy vivo:Building .
 
 local:roomWithinBuildingConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "within building" ;
     vitro:displayRankAnnot 23;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1267,7 +1269,7 @@ local:geographicLocationContainsBuildingContext a :ConfigContext ;
     :qualifiedBy       vivo:Building .
 
 local:geographicLocationContainsBuildingConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "location of facility" ;
     vitro:displayRankAnnot 85;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1283,7 +1285,7 @@ local:siteGeographicallyWithinGeoLocationContext a :ConfigContext ;
     :qualifiedBy      vivo:GeographicLocation .
 
 local:siteGeographicallyWithinGeoLocationConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "geographically within" ;
     vitro:displayRankAnnot 40;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1299,7 +1301,7 @@ local:facilitySiteOfEventContext a :ConfigContext ;
     :qualifiedBy      <http://purl.org/NET/c4dm/event.owl#Event> . ## was <http://purl.obolibrary.org/obo/BFO_0000004> ## Independent Continuant
 
 local:facilitySiteOfEventConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "facility for event" ;
     vitro:displayRankAnnot 22;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1315,7 +1317,7 @@ local:facilitySiteOfAgentContext a :ConfigContext ;
     :qualifiedBy      <http://xmlns.com/foaf/0.1/Agent> . ## was <http://purl.obolibrary.org/obo/BFO_0000004> ## Independent Continuant
 
 local:facilitySiteOfAgentConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "facility for person, group, or organization" ;
     vitro:displayRankAnnot 20;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1323,38 +1325,39 @@ local:facilitySiteOfAgentConfig a :ObjectPropertyDisplayConfig ;
     vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
-    
-local:projectUsesMaterialEntityContext a :ConfigContext ;
-    :hasConfiguration local:projectUsesMaterialEntityConfig ;
-    :configContextFor  <http://purl.obolibrary.org/obo/ERO_0000031> ; 
-    :qualifiedByDomain vivo:Project  ;
-    :qualifiedBy       <http://purl.obolibrary.org/obo/BFO_0000040> . ## Material Entity
 
-local:projectUsesMaterialEntityConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
-    :displayName "uses equipment or instrument" ;
-    vitro:displayRankAnnot 85;
-    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
-    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
-    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
-    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
-    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
-    
-local:materialEntityUsedByProjectContext a :ConfigContext ;
-    :hasConfiguration local:MaterialEntityUsedByProjectConfig ;
-    :configContextFor  <http://purl.obolibrary.org/obo/ERO_0000070> ; 
-    :qualifiedByDomain <http://purl.obolibrary.org/obo/BFO_0000040> ; ## Material Entity
-    :qualifiedBy       vivo:Project .
+# uses and used by need work -- apply to continuants and occurrents, and material entities as well as information content entities   
+#local:projectUsesMaterialEntityContext a :ConfigContext ;
+#    :hasConfiguration local:projectUsesMaterialEntityConfig ;
+#    :configContextFor  <http://purl.obolibrary.org/obo/ERO_0000031> ; 
+#    :qualifiedByDomain vivo:Project  ;
+#    :qualifiedBy       <http://purl.obolibrary.org/obo/BFO_0000040> . ## Material Entity
 
-local:materialEntityUsedByProjectConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
-    :displayName "used by project" ;
-    vitro:displayRankAnnot 85;
-    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
-    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
-    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
-    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
-    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+#local:projectUsesMaterialEntityConfig a :ObjectPropertyDisplayConfig ;
+#    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+#    :displayName "uses specimen, equipment, instrument, organism, reagent, or software" ;
+#    vitro:displayRankAnnot 85;
+#    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+#    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+#    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+#    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+#    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+    
+#local:materialEntityUsedByProjectContext a :ConfigContext ;
+#    :hasConfiguration local:MaterialEntityUsedByProjectConfig ;
+#    :configContextFor  <http://purl.obolibrary.org/obo/ERO_0000070> ; 
+#    :qualifiedByDomain <http://purl.obolibrary.org/obo/BFO_0000040> ; ## Material Entity
+#    :qualifiedBy       vivo:Project .
+
+#local:materialEntityUsedByProjectConfig a :ObjectPropertyDisplayConfig ;
+#    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+#    :displayName "used by project" ;
+#    vitro:displayRankAnnot 85;
+#    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+#    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+#    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+#    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+#    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:facilityLocationOfEquipmentContext a :ConfigContext ;
     :hasConfiguration local:facilityLocationOfEquipmentConfig ;
@@ -1363,7 +1366,7 @@ local:facilityLocationOfEquipmentContext a :ConfigContext ;
     :qualifiedBy       <http://purl.obolibrary.org/obo/BFO_0000040> . ## Material Entity
 
 local:facilityLocationOfEquipmentConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "location of equipment or instrument" ;
     vitro:displayRankAnnot 14;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1379,7 +1382,7 @@ local:facilityLocationOfServiceContext a :ConfigContext ;
     :qualifiedBy        <http://purl.obolibrary.org/obo/ERO_0000005> .
 
 local:facilityLocationOfServiceConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "facility for service" ;
     vitro:displayRankAnnot 18;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1396,7 +1399,7 @@ local:courseOfferedByContext a :ConfigContext ;
     :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
 
 local:courseOfferedByConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "offered by" ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1412,7 +1415,7 @@ local:orgOffersCourseContext a :ConfigContext ;
     :qualifiedBy      vivo:Course .
 
 local:orgOffersCourseConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "offers course" ;
     vitro:displayRankAnnot 90;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1428,7 +1431,7 @@ local:collegeOffersDegreeContext a :ConfigContext ;
     :qualifiedBy      vivo:AcademicDegree .
 
 local:collegeOffersDegreeConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "offers degree" ;
     vitro:displayRankAnnot 12;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1442,7 +1445,7 @@ local:deptOffersDegreeContext a :ConfigContext ;
     :qualifiedBy      vivo:AcademicDegree .
 
 local:deptOffersDegreeConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "offers degree" ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1456,7 +1459,7 @@ local:uniOffersDegreeContext a :ConfigContext ;
     :qualifiedBy      vivo:AcademicDegree .
 
 local:uniOffersDegreeConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "offers degree" ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1470,7 +1473,7 @@ local:labOffersServiceContext a :ConfigContext ;
     :qualifiedBy      <http://purl.obolibrary.org/obo/ERO_0000005> .
 
 local:labOffersServiceConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "offers service" ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1485,7 +1488,7 @@ local:grantAwardedByContext a :ConfigContext ;
     :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
 
 local:grantAwardedByConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "awarded by" ;
     vitro:displayRankAnnot 14;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1500,7 +1503,7 @@ local:grantSubjectAreaContext a :ConfigContext ;
     :qualifiedBy      <http://www.w3.org/2004/02/skos/core#Concept> .
 
 local:grantSubjectAreaConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "has subject area" ;
     vitro:displayRankAnnot 10;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1514,7 +1517,7 @@ local:grantHasSubgrantContext a :ConfigContext ;
     :qualifiedBy      vivo:Grant .
 
 local:grantHasSubgrantConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "has sub grant" ;
     vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1530,7 +1533,7 @@ local:grantIsSubgrantOfContext a :ConfigContext ;
     :qualifiedBy      vivo:Grant .
 
 local:grantIsSubgrantOfConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "sub grant of" ;
     vitro:displayRankAnnot 32;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1546,7 +1549,7 @@ local:grantGeographicFocusContext a :ConfigContext ;
     :qualifiedBy      vivo:GeographicRegion .
 
 local:grantGeographicFocusConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "geographic focus" ;
     vitro:displayRankAnnot 20;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1562,7 +1565,7 @@ local:awardOrHonorReceiptsContext a :ConfigContext ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#AwardReceipt> .
 
 local:awardOrHonorReceiptsConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "receipts" ;
     vitro:displayRankAnnot 3;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1576,7 +1579,7 @@ local:awardReceiptsContext a :ConfigContext ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#Award> .
 
 local:awardReceiptsConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "receipt of" ;
     vitro:displayRankAnnot 1;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1590,7 +1593,7 @@ local:awardReceiptsAwardForContext a :ConfigContext ;
     :qualifiedBy      <http://xmlns.com/foaf/0.1/Person> .
 
 local:awardReceiptsAwardForConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "award or honor for" ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1618,7 +1621,7 @@ local:awardConferredByContext a :ConfigContext ;
     :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
 
 local:awardConferredByConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "award conferred by" ;
     vitro:displayRankAnnot 3;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1632,7 +1635,7 @@ local:orgAwardsGrantContext a :ConfigContext ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#Grant> .
 
 local:orgAwardsGrantConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "awards grant" ;
     vitro:displayRankAnnot 60;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1647,7 +1650,7 @@ local:addressLocationContext a :ConfigContext ;
     :qualifiedBy      vivo:GeographicLocation .
 
 local:addressLocationConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-default.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     :displayName "has geographic location" ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;

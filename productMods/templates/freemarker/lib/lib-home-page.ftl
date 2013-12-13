@@ -141,7 +141,7 @@
             </#if>
         </#list>
         <#if !foundClassGroup>
-            <p><li>${i18n().no_research_content_found}</li></p> 
+            <p><li style="padding-left:1.2em">${i18n().no_research_content_found}</li></p> 
         </#if>
     </ul>
 </section>

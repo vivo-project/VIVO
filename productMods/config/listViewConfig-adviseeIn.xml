@@ -30,7 +30,8 @@
                      ?adviseeRole core:relatedBy ?advisingRel .
                      LET ( ?localName := afn:localname(?advisingRel) )
                      OPTIONAL { ?advisingRel rdfs:label ?advisingRelLabel  }
-                     OPTIONAL { ?advisingRel core:relates ?advisor .
+                     OPTIONAL { ?advisingRel core:relates ?advisorRole .
+                                ?advisorRole &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?advisor .
                                 ?advisor a foaf:Person .
                                 ?advisor rdfs:label ?advisorLabel
                      }
@@ -108,7 +109,8 @@
                 ?adviseeRole a core:AdviseeRole .
                 ?adviseeRole core:relatedBy ?advisingRel .
                 ?advisingRel a core:AdvisingRelationship .
-                ?advisingRel core:relates ?advisor .
+                ?advisingRel core:relates ?advisorRole .
+                ?advisorRole &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?advisor .
                 ?advisor a foaf:Person .
                 ?advisor rdfs:label ?advisorLabel .
                 ?advisor &lt;http://purl.obolibrary.org/obo/RO_0000053&gt; ?advisorRole .
@@ -127,7 +129,9 @@
                     ?adviseeRole a core:AdviseeRole .
                     ?adviseeRole core:relatedBy ?advisingRel .
                     ?advisingRel a core:AdvisingRelationship .
-                    ?advisingRel core:relates ?advisor .
+                    ?advisingRel core:relates ?advisorRole .
+                    ?advisorRole a core:AdvisorRole .
+                    ?advisorRole &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?advisor .
                     ?advisor a foaf:Person .
                     ?advisor &lt;http://purl.obolibrary.org/obo/RO_0000053&gt; ?advisorRole .
                     ?advisorRole a core:AdvisorRole .

@@ -3,15 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
-<title>DeletePropertyGroupPlace</title>
+<link rel="selenium.base" href="http://localhost:8080/vivo" />
+<title>RebuildSearchIndex</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">DeletePropertyGroupPlace</td></tr>
+<tr><td rowspan="1" colspan="3">RebuildSearchIndex</td></tr>
 </thead><tbody>
-<!--Delete test Property Group Place-->
+<!--Rebuild Search Index-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -19,7 +19,7 @@
 </tr>
 <tr>
 	<td>setTimeout</td>
-	<td>100000</td>
+	<td>100000000000</td>
 	<td></td>
 </tr>
 <tr>
@@ -32,7 +32,6 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<!--Must not be logged in already-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -43,20 +42,24 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<!--Must login as site admin-->
 <tr>
 	<td>type</td>
-	<td>loginName</td>
+	<td>id=loginName</td>
 	<td>testAdmin@cornell.edu</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>loginPassword</td>
+	<td>id=loginPassword</td>
 	<td>Password</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>loginForm</td>
+	<td>name=loginForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
@@ -69,75 +72,34 @@
 	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
-<!--Navigate to Propery Groups-->
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Property groups</td>
+	<td>link=Rebuild search index</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO</td>
+	<td>Rebuild Search Index</td>
 	<td></td>
 </tr>
-<!--Make sure Place exists already-->
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Place</td>
-	<td></td>
-</tr>
-<!--Navigate to Place-->
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Place</td>
+	<td>name=rebuild</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Property Group Editing Form</td>
-	<td></td>
-</tr>
-<!--Delete Place-->
-<tr>
-	<td>click</td>
-	<td>_delete</td>
+	<td>Rebuild Search Index</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertConfirmation</td>
-	<td>Are you SURE you want to delete this record? If in doubt, CANCEL.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td>20000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<!--Verify that Place is gone-->
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Place</td>
-	<td></td>
-</tr>
-<!--Logout-->
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Home</td>
+	<td>waitForTextPresent</td>
+	<td>Reset the search index and re-populate it.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log out</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
 	<td></td>
 </tr>
 </tbody></table>

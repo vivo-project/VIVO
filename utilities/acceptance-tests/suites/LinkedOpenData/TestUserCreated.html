@@ -4,14 +4,14 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>DeletePropertyGroupPlace</title>
+<title>CreateTestFacultyMember</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">DeletePropertyGroupPlace</td></tr>
+<tr><td rowspan="1" colspan="3">CreateTestFacultyMember</td></tr>
 </thead><tbody>
-<!--Delete test Property Group Place-->
+<!--Check that the user has been created-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -19,7 +19,7 @@
 </tr>
 <tr>
 	<td>setTimeout</td>
-	<td>100000</td>
+	<td>100000000000</td>
 	<td></td>
 </tr>
 <tr>
@@ -32,7 +32,6 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<!--Must not be logged in already-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -43,36 +42,19 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<!--Must login as site admin-->
 <tr>
 	<td>type</td>
-	<td>loginName</td>
+	<td>id=loginName</td>
 	<td>testAdmin@cornell.edu</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>loginPassword</td>
+	<td>id=loginPassword</td>
 	<td>Password</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>loginForm</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Site Admin</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<!--Navigate to Propery Groups-->
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Property groups</td>
+	<td>name=loginForm</td>
 	<td></td>
 </tr>
 <tr>
@@ -80,54 +62,60 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<!--Make sure Place exists already-->
+<tr>
+	<td>open</td>
+	<td>/vivo/display/lodFacultyMember</td>
+	<td></td>
+</tr>
+<!--Check out profile page for Mr. Bad Example-->
+<tr>
+	<td>assertTitle</td>
+	<td>Example, Bad</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Not someone on whom you should base your actions.</td>
+	<td></td>
+</tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Place</td>
+	<td>link=Slashdot</td>
 	<td></td>
 </tr>
-<!--Navigate to Place-->
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Place</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Property Group Editing Form</td>
-	<td></td>
-</tr>
-<!--Delete Place-->
 <tr>
 	<td>click</td>
-	<td>_delete</td>
+	<td>//div[@id='wrapper-content']/ul/li[18]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertConfirmation</td>
-	<td>Are you SURE you want to delete this record? If in doubt, CANCEL.</td>
+	<td>verifyElementPresent</td>
+	<td>link=Department of Redundancy Department</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForPageToLoad</td>
-	<td>20000</td>
+	<td>verifyTextPresent</td>
+	<td>Department of Redundancy Department Bozo 1992 -</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
+	<td>verifyTextPresent</td>
+	<td>Mr. Bad Example</td>
 	<td></td>
 </tr>
-<!--Verify that Place is gone-->
 <tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Place</td>
+	<td>verifyTextPresent</td>
+	<td>My_eRA_ID</td>
 	<td></td>
 </tr>
-<!--Logout-->
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Home</td>
+	<td>verifyElementPresent</td>
+	<td>link=10982375409</td>
 	<td></td>
 </tr>
 <tr>
@@ -136,8 +124,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
+	<td>open</td>
+	<td>/vivo/</td>
 	<td></td>
 </tr>
 </tbody></table>

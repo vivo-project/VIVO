@@ -610,15 +610,6 @@
 
 
 
-    <!-- http://vivoweb.org/ontology/core#translatorOf -->
-
-    <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#translatorOf">
-
-        <rdfs:range rdf:resource="http://purl.org/ontology/bibo/Document"/>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://vivoweb.org/ontology/core#validIn -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#validIn">
@@ -757,17 +748,6 @@
 
     <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/pageStart">
 
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://purl.org/spar/c4o/hasGlobalCountDate -->
-
-    <owl:DatatypeProperty rdf:about="http://purl.org/spar/c4o/hasGlobalCountDate">
-
-        <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The date on which the global citation count of the cited entity was recorded from a named bibliographic information source.</vitro:descriptionAnnot>
-        <rdfs:domain rdf:resource="http://purl.org/spar/c4o/GlobalCitationCount"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
     </owl:DatatypeProperty>
     
 

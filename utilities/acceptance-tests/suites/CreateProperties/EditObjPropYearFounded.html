@@ -4,14 +4,14 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>DeletePropertyGroupPlace</title>
+<title>EditObjPropVisitingHours</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">DeletePropertyGroupPlace</td></tr>
+<tr><td rowspan="1" colspan="3">EditObjPropVisitingHours</td></tr>
 </thead><tbody>
-<!--Delete test Property Group Place-->
+<!--Edit year founded Display Level and Display Tier-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -43,7 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<!--Must login as site admin-->
+<!--Must log in as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -69,10 +69,10 @@
 	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
-<!--Navigate to Propery Groups-->
+<!--Navigate to Object Property Hierarchy-->
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Property groups</td>
+	<td>link=Object property hierarchy</td>
 	<td></td>
 </tr>
 <tr>
@@ -80,51 +80,50 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<!--Make sure Place exists already-->
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Place</td>
-	<td></td>
-</tr>
-<!--Navigate to Place-->
+<!--Select to open visiting hours-->
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Place</td>
+	<td>link=year founded (bibo)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Property Group Editing Form</td>
-	<td></td>
-</tr>
-<!--Delete Place-->
-<tr>
-	<td>click</td>
-	<td>_delete</td>
+	<td>Object Property Control Panel</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertConfirmation</td>
-	<td>Are you SURE you want to delete this record? If in doubt, CANCEL.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td>20000</td>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit Property Record']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO</td>
+	<td>Property Editing Form</td>
 	<td></td>
 </tr>
-<!--Verify that Place is gone-->
+<!--Change Display Level to public and Display Tier to 1000-->
 <tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Place</td>
+	<td>select</td>
+	<td>name=HiddenFromDisplayBelowRoleLevelUsingRoleUri</td>
+	<td>label=public</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>primaryAction</td>
 	<td></td>
 </tr>
-<!--Logout-->
+<tr>
+	<td>assertTitle</td>
+	<td>Object Property Control Panel</td>
+	<td></td>
+</tr>
+<!--Verify that changes took place-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>public</td>
+	<td></td>
+</tr>
+<!--Log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

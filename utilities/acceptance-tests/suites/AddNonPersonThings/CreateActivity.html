@@ -478,7 +478,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Add new entry for: local award id</td>
+	<td>Add new entry for: local award ID</td>
 	<td></td>
 </tr>
 <tr>
@@ -587,7 +587,93 @@
 	<td>Primate Elderly Care</td>
 	<td></td>
 </tr>
+<!--Test remaining fields (added for 1.6)-->
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-BFO_0000051 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=Primate Habitat Research Grant</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-BFO_0000050 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=Primate Survival Planning Grant</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-supportedInformationResource</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=Primate Info</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Elderly Care</td>
+	<td></td>
+</tr>
 <!--Verify everything entered is displaying properly-->
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Grant</td>
+	<td></td>
+</tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Purpose of grant is to determine the appropriate environment, physical activity, and diet for primates as they age.</td>
@@ -601,6 +687,11 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Research Laboratory</td>
 	<td></td>
 </tr>
 <tr>
@@ -625,7 +716,12 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Primate Health Check</td>
+	<td>link=Primate Habitat Research Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Survival Planning Grant</td>
 	<td></td>
 </tr>
 <tr>
@@ -651,6 +747,11 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>P999-1234</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Info</td>
 	<td></td>
 </tr>
 <!--Logout-->

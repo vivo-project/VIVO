@@ -46,12 +46,9 @@ public class AddOrcidIdToPersonGenerator extends VivoBaseGenerator implements
         conf.setVarNameForObject("orcidId");
         
         conf.setN3Required( Arrays.asList( n3ForOrcidId ) );
-        
-        conf.addNewResource("orcidId", DEFAULT_NS_FOR_NEW_RESOURCE);
-                
+                        
         conf.setUrisOnform(Arrays.asList("orcidId"));
         
-//        conf.addSparqlForAdditionalUrisInScope("orcidId", orcidIdQuery);
         conf.addSparqlForExistingUris("orcidId", orcidIdQuery);
 
         conf.addField( new FieldVTwo().                        

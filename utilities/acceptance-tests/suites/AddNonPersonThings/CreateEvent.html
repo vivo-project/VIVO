@@ -215,7 +215,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=label</td>
 	<td>PHC Proceedings</td>
 </tr>
 <tr>
@@ -380,15 +380,34 @@
 	<td>Select an existing Facility for Primate Health Conference</td>
 	<td></td>
 </tr>
-<!--Need to add a new entry when this is working again-->
 <tr>
-	<td></td>
-	<td></td>
+	<td>select</td>
+	<td>id=typeOfNew</td>
+	<td>label=Facility (vivo)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
 	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=label</td>
+	<td>State Fair Park</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Health Conference</td>
 	<td></td>
 </tr>
 <!--Test time entry-->
@@ -481,7 +500,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Add an entry to: includes event</td>
+	<td>Select an existing Event for Primate Health Conference</td>
 	<td></td>
 </tr>
 <tr>
@@ -584,10 +603,86 @@
 	<td>Primate Health Conference</td>
 	<td></td>
 </tr>
+<!--Test remaining fields (added for 1.6)-->
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-BFO_0000050 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=Primate Health and Fitness</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Health Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//img[@alt='add'])[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Health Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-RO_0002234 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=Primate Happenings</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Health Conference</td>
+	<td></td>
+</tr>
 <!--Verify everything entered is displaying properly-->
 <tr>
 	<td>verifyTextPresent</td>
-	<td>PrimHConf</td>
+	<td>Primate Health Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Conference</td>
 	<td></td>
 </tr>
 <tr>
@@ -597,12 +692,27 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>PrimHConf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>January 5, 2011 - January 9, 2011</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
+	<td>link=Primate Health and Fitness</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
 	<td>link=Primate Health Check</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Health Talks</td>
 	<td></td>
 </tr>
 <tr>
@@ -622,12 +732,22 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
+	<td>link=Primate Happenings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
 	<td>link=http://primatehealthintro.cornell.edu</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>info@primateconf.org</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=State Fair Park</td>
 	<td></td>
 </tr>
 <tr>
