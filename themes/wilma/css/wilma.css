@@ -368,6 +368,11 @@ form.deleteForm {
     padding-top: 1em;
     border-top: 1px dotted #e3e9e9;
 }
+form.editForm span {
+    color: #c00;
+    font-weight: normal;
+    font-size: small;
+}
 form h3.delete-entry {
     padding-right: .8em;
     display: inline;
