@@ -5,35 +5,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>AddFacultyMemberRoles2</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AddFacultyMemberRoles2</td></tr>
+<tr><td rowspan="1" colspan="3">AddFacultyMemberRoles2</td></tr>
 </thead><tbody>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add new attendance role</td>
-	<td></td>
-</tr>
+<!--Add new attendance role-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must be logged off to start</td>
-	<td></td>
-</tr>
+<!--Must be logged off to start-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must login as the site admin</td>
-	<td></td>
-</tr>
+<!--Must login as the site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -94,11 +64,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Jane Faculty</td>
-	<td></td>
-</tr>
+<!--Navigate to Jane Faculty-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -124,11 +90,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Cancel out before adding attendee role</td>
-	<td></td>
-</tr>
+<!--Cancel out before adding attendee role-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=a.add-hasAttendeeRole &gt; img.add-individual</td>
@@ -159,11 +121,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Cancel out after selecting event type</td>
-	<td></td>
-</tr>
+<!--Cancel out after selecting event type-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=a.add-hasAttendeeRole</td>
@@ -194,11 +152,7 @@
 	<td>link=Cancel</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Enter attendance at conference</td>
-	<td></td>
-</tr>
+<!--Enter attendance at conference-->
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
@@ -269,11 +223,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate back to Jane Faculty</td>
-	<td></td>
-</tr>
+<!--Navigate back to Jane Faculty-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -299,11 +249,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify display</td>
-	<td></td>
-</tr>
+<!--Verify display-->
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=PoA Annual Conference</td>
@@ -314,11 +260,7 @@
 	<td>2000 - 2010</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Log out</td>
-	<td></td>
-</tr>
+<!--Log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

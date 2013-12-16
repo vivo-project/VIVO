@@ -5,29 +5,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>UploadNonPersonImage</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">UploadNonPersonImage</td></tr>
+<tr><td rowspan="1" colspan="3">UploadNonPersonImage</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -39,11 +21,7 @@
 	<td>200000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add image to non-person</td>
-	<td></td>
-</tr>
+<!--Add image to non-person-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must be logged off to start</td>
-	<td></td>
-</tr>
+<!--Must be logged off to start-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must login as the site admin</td>
-	<td></td>
-</tr>
+<!--Must login as the site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -89,11 +59,7 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to non-person</td>
-	<td></td>
-</tr>
+<!--Navigate to non-person-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -134,21 +100,13 @@
 	<td>Photo</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Make sure no image exists</td>
-	<td></td>
-</tr>
+<!--Make sure no image exists-->
 <tr>
 	<td>verifyTextNotPresent</td>
 	<td>//img[@title='click to view larger image']</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select to add an image</td>
-	<td></td>
-</tr>
+<!--Select to add an image-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//img[@alt='add']</td>
@@ -174,21 +132,13 @@
 	<td>Upload a photo (JPEG, GIF or PNG)</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Cancel before doing anything</td>
-	<td></td>
-</tr>
+<!--Cancel before doing anything-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Cancel</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Hit upload button without selecting a file</td>
-	<td></td>
-</tr>
+<!--Hit upload button without selecting a file-->
 <tr>
 	<td>assertTitle</td>
 	<td>Germany</td>
@@ -219,11 +169,7 @@
 	<td>Please browse and select a photo.</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Now select to add map then cancel in cropping</td>
-	<td></td>
-</tr>
+<!--Now select to add map then cancel in cropping-->
 <tr>
 	<td>type</td>
 	<td>datafile</td>
@@ -249,11 +195,7 @@
 	<td>Germany</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Now really add the map image</td>
-	<td></td>
-</tr>
+<!--Now really add the map image-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//img[@alt='add']</td>
@@ -299,11 +241,7 @@
 	<td>//img[@title='click to view larger image']@src</td>
 	<td>/vivo/file/*/thumbnail_germany1.jpg</td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Change image to German flag</td>
-	<td></td>
-</tr>
+<!--Change image to German flag-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//img[@alt='edit']</td>
@@ -334,11 +272,7 @@
 	<td>Replace Photo (JPEG, GIF or PNG)</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Cancel out and verify original image still there</td>
-	<td></td>
-</tr>
+<!--Cancel out and verify original image still there-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Cancel</td>
@@ -359,11 +293,7 @@
 	<td>//img[@title='click to view larger image']@src</td>
 	<td>/vivo/file/*/thumbnail_germany1.jpg</td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Cancel out again, this time in cropping phase</td>
-	<td></td>
-</tr>
+<!--Cancel out again, this time in cropping phase-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//img[@alt='edit']</td>
@@ -409,11 +339,7 @@
 	<td>//img[@title='click to view larger image']@src</td>
 	<td>/vivo/file/*/thumbnail_germany1.jpg</td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Now really change the map to a flag</td>
-	<td></td>
-</tr>
+<!--Now really change the map to a flag-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//img[@alt='edit']</td>
@@ -449,11 +375,7 @@
 	<td>Germany</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify image is changed</td>
-	<td></td>
-</tr>
+<!--Verify image is changed-->
 <tr>
 	<td>verifyElementPresent</td>
 	<td>//img[@title='click to view larger image']</td>
@@ -464,11 +386,7 @@
 	<td>//img[@title='click to view larger image']@src</td>
 	<td>/vivo/file/*/thumbnail_germany2.jpg</td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Now delete the image</td>
-	<td></td>
-</tr>
+<!--Now delete the image-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//img[@alt='delete']</td>
@@ -489,21 +407,13 @@
 	<td>Germany</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify no image is present</td>
-	<td></td>
-</tr>
+<!--Verify no image is present-->
 <tr>
 	<td>verifyElementNotPresent</td>
 	<td>//img[@title='click to view larger image']</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Log out</td>
-	<td></td>
-</tr>
+<!--Log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

@@ -53,6 +53,7 @@ public class VisualizationFrameworkConstants {
 	public static final String VIS_MODE_KEY = "vis_mode";
 	public static final String RENDER_MODE_KEY = "render_mode";
 	public static final String OUTPUT_FORMAT_KEY = "output";
+	public static final String REQUESTING_TEMPLATE_KEY = "template"; /* tlw72 - added in 1.6 for multi-view support */
 
 	/*
 	 * These values represent possible render modes.

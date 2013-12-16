@@ -1,10 +1,12 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
+$.extend(this, i18nStringsCoPi);
+
 var collaboratorTableMetadata = {
 	tableID: "coinvestigations_table",
 	tableContainer: "coinve_table_container",
-	tableCaption: "Co-investigators ",
-	tableColumnTitle1: "Investigator",
-	tableColumnTitle2: "Grants with <br />",
+	tableCaption: i18nStringsCoPi.coInvestigatorString + " ",
+	tableColumnTitle1: i18nStringsCoPi.investigatorString,
+	tableColumnTitle2: i18nStringsCoPi.grantsWithString + " <br />",
 	tableCSVFileLink: egoCoInvestigatorsListDataFileURL,
 	jsonNumberWorksProperty: "number_of_investigated_grants" 
 };
@@ -25,8 +27,8 @@ function renderStatsOnNodeClicked(json){
 	var latest_work = "";
 	var number_of_works = "";
 	
-	works = "Grant(s)";
-	persons = "Co-investigator(s)";
+	works = i18nStringsCoPi.grantsCapitalized;
+	persons = i18nStringsCoPi.coInvestigatorCapitalized;
 	relation = "coinvestigation";
 	earliest_work = obj.earliest_grant;
 	latest_work = obj.latest_grant;

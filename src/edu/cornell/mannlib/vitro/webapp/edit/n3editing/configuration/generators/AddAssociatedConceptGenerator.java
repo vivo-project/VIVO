@@ -16,8 +16,17 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
@@ -27,11 +36,13 @@ import edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty;
 import edu.cornell.mannlib.vitro.webapp.beans.ObjectPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
+import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.AddAssociatedConceptsPreprocessor;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.ConceptSemanticTypesPreprocessor;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.utils.ConceptSearchService.ConceptSearchServiceUtils;
 /**
@@ -45,16 +56,17 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	
 	private Log log = LogFactory.getLog(AddAssociatedConceptGenerator.class);
 	private String template = "addAssociatedConcept.ftl";
-	private static String SKOSConceptType = "http://www.w3.org/2004/02/skos/core#Concept";
-	
-		
+	//TODO: Set this to a dynamic mechanism
+	private static String VIVOCore = "http://vivoweb.org/ontology/core#";
+	private static String SKOSConceptType = "http://www.w3.org/2004/02/skos/core#Concept";	
+	private static String SKOSBroaderURI = "http://www.w3.org/2004/02/skos/core#broader";
+	private static String SKOSNarrowerURI = "http://www.w3.org/2004/02/skos/core#narrower";
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
     	EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();
 		initBasics(editConfiguration, vreq);
 		initPropertyParameters(vreq, session, editConfiguration);
 		initObjectPropForm(editConfiguration, vreq);
-
 		editConfiguration.setTemplate(template);
 
 		setVarNames(editConfiguration);
@@ -84,7 +96,8 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		setTemplate(editConfiguration, vreq);
 		// No validators required here
 		// Add preprocessors
-		addPreprocessors(editConfiguration, vreq.getWebappDaoFactory());
+		//Passing from servlet context for now but will have to see if there's a way to pass vreq
+		addPreprocessors(editConfiguration);
 		// Adding additional data, specifically edit mode
 		addFormSpecificData(editConfiguration, vreq);
 		// One override for basic functionality, changing url pattern
@@ -158,8 +171,10 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
     	List<String> n3Required = list(    	            	        
     	        getPrefixesString() + "\n" +
     	        "?subject ?predicate ?conceptNode .\n" + 
-    	        "?conceptNode <" + RDF.type.getURI() + "> <http://www.w3.org/2002/07/owl#Thing> ."
+    	        "?conceptNode <" + RDF.type.getURI() + "> <" + this.SKOSConceptType + "> ."
     	);
+        //"?conceptNode <" + RDF.type.getURI() + "> <http://www.w3.org/2002/07/owl#Thing> ."
+
     	List<String> inversePredicate = getInversePredicate(vreq);
 		//Adding inverse predicate if it exists
 		if(inversePredicate.size() > 0) {
@@ -168,10 +183,19 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		return n3Required;
     }
     
-   //Don't think there's any n3 optional here
+   //Optional N3, includes possibility of semantic type which may or may not be included
+    //label and source are independent of semantic type
+    //concept semantic type uri is a placeholder which is actually processed in the sparql update preprocessor
 	private List<String> generateN3Optional() {
 		return list("?conceptNode <" + RDFS.label.getURI() + "> ?conceptLabel .\n" + 
-    	        "?conceptNode <" + RDFS.isDefinedBy.getURI() + "> ?conceptSource ."  	            	        
+    	        "?conceptNode <" + RDFS.isDefinedBy.getURI() + "> ?conceptSource .", 
+				"?conceptNode <" + RDF.type + "> ?conceptSemanticTypeURI ." +  
+    	        "?conceptSemanticTypeURI <" + RDFS.label.getURI() + "> ?conceptSemanticTypeLabel ." + 
+    	        "?conceptSemanticTypeURI <" + RDFS.subClassOf + "> <" + SKOSConceptType + "> .",
+    	        "?conceptNode <" + this.SKOSNarrowerURI + "> ?conceptNarrowerURI ." + 
+    	        "?conceptNarrowerURI <" + this.SKOSBroaderURI + "> ?conceptNode .",
+    	        "?conceptNode <" + this.SKOSBroaderURI + "> ?conceptBroaderURI ." + 
+    	    	"?conceptBroaderURI <" + this.SKOSNarrowerURI + "> ?conceptNode ."
     	);
     }
 	
@@ -185,6 +209,8 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 			HashMap<String, String> newResources = new HashMap<String, String>();
 			//There are no new resources here, the concept node uri doesn't
 			//get created but already exists, and vocab uri should already exist as well
+			//Adding concept semantic type uri just to test - note this isn't really on the form at all
+			newResources.put("conceptSemanticTypeURI", null);
 			return newResources;
 		}
     
@@ -233,9 +259,14 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
     	//The URI of the node that defines the concept
     	urisOnForm.add("conceptNode");
     	urisOnForm.add("conceptSource");
+    	urisOnForm.add("conceptSemanticTypeURI");
+    	urisOnForm.add("conceptBroaderURI");
+    	urisOnForm.add("conceptNarrowerURI");
     	editConfiguration.setUrisOnform(urisOnForm);
     	//Also need to add the label of the concept
     	literalsOnForm.add("conceptLabel");
+    	literalsOnForm.add("conceptSemanticTypeLabel");
+
     	editConfiguration.setLiteralsOnForm(literalsOnForm);
     }
     
@@ -263,8 +294,25 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
     	setConceptNodeField(editConfiguration, vreq);
     	setConceptLabelField(editConfiguration, vreq);
     	setVocabURIField(editConfiguration, vreq);
+    	setConceptSemanticTypeURIField(editConfiguration,vreq);
+    	setConceptSemanticTypeLabelField(editConfiguration,vreq);
+    	setConceptBroaderURIField(editConfiguration, vreq);
+    	setConceptNarrowerURIField(editConfiguration, vreq);
     }
     
+	private void setConceptNarrowerURIField(
+			EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
+		editConfiguration.addField(new FieldVTwo().
+				setName("conceptNarrowerURI"));		
+	}
+
+	private void setConceptBroaderURIField(
+			EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
+		editConfiguration.addField(new FieldVTwo().
+				setName("conceptBroaderURI"));		
+		
+	}
+
 	//this field will be hidden and include the concept node URI
 	private void setConceptNodeField(EditConfigurationVTwo editConfiguration,
 			VitroRequest vreq) {
@@ -290,15 +338,35 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 				setRangeDatatypeUri(XSD.xstring.toString())
 				);
 	}
+	
+	//This will also be a URI
+	private void setConceptSemanticTypeURIField(EditConfigurationVTwo editConfiguration,
+			VitroRequest vreq) {
+		editConfiguration.addField(new FieldVTwo().
+				setName("conceptSemanticTypeURI")
+				);
+	}
+	
+	private void setConceptSemanticTypeLabelField(EditConfigurationVTwo editConfiguration,
+			VitroRequest vreq) {
+		editConfiguration.addField(new FieldVTwo().
+				setName("conceptSemanticTypeLabel").
+				setRangeDatatypeUri(XSD.xstring.toString())
+				);
+	}
     
    
     //Add preprocessor
 	
-   private void addPreprocessors(EditConfigurationVTwo editConfiguration, WebappDaoFactory wadf) {
+   private void addPreprocessors(EditConfigurationVTwo editConfiguration) {
 	  //An Edit submission preprocessor for enabling addition of multiple terms for a single search
-	  
+	   //TODO: Check if this is the appropriate way of getting model
+	 
+	   //Passing model to check for any URIs that are present
+	   
 	   editConfiguration.addEditSubmissionPreprocessor(
 			   new AddAssociatedConceptsPreprocessor(editConfiguration));
+	   editConfiguration.addModelChangePreprocessor(new ConceptSemanticTypesPreprocessor());
 	  
 	}
      
@@ -350,54 +418,112 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	}
 	
     
+	//To determine whether or not a concept is a user generated or one from an external vocab source.
+	//we cannot rely on whether or not it is a skos concept because incorporating UMLS semantic network classes as
+	//SKOS concept subclasses means that even concepts from an external vocab source might be considered SKOS concepts
+	//Instead, we will simply determine whether a concept is defined by an external vocabulary source and use that
+	//as the primary indicator of whether a concept is from an external vocabulary source or a user generated concept
 	private List<AssociatedConceptInfo> getAssociatedConceptInfo(
 			List<Individual> concepts, VitroRequest vreq) {
 		List<AssociatedConceptInfo> info = new ArrayList<AssociatedConceptInfo>();
 		 for ( Individual conceptIndividual : concepts ) {
-			 	boolean isSKOSConcept = false;
+			 	boolean userGenerated = true;
+			 	//Note that this isn't technically 
 			 	String conceptUri =  conceptIndividual.getURI();
 			 	String conceptLabel = conceptIndividual.getName();
-			 	//Check if SKOS Concept type
-			 	List<ObjectPropertyStatement> osl = conceptIndividual.getObjectPropertyStatements(RDF.type.getURI());
-			 	for(ObjectPropertyStatement os: osl) {
-			 		if(os.getObjectURI().equals(SKOSConceptType)) {
-			 			isSKOSConcept = true;
-			 			break;
-			 		}
-			 	}
+
+			 	//Check if defined by an external vocabulary source
+		 		List<ObjectPropertyStatement> vocabList = conceptIndividual.getObjectPropertyStatements(RDFS.isDefinedBy.getURI());
+		 		String vocabSource = null;
+		 		String vocabLabel = null;
+		 		if(vocabList != null && vocabList.size() > 0) {
+		 			userGenerated = false;
+		 			vocabSource = vocabList.get(0).getObjectURI();
+		 			Individual sourceIndividual = EditConfigurationUtils.getIndividual(vreq, vocabSource);
+		 			//Assuming name will get label
+		 			vocabLabel = sourceIndividual.getName();
+		 		}
+		 		
 			 	
-			 	if(isSKOSConcept) {
-			 		info.add(new AssociatedConceptInfo(conceptLabel, conceptUri, null, null, SKOSConceptType));
+			 	
+			 	if(userGenerated) {
+			 		//if the concept in question is skos - which would imply a user generated concept
+			 		info.add(new AssociatedConceptInfo(conceptLabel, conceptUri, null, null, SKOSConceptType, null, null));
 			 	} else {
-			 		//Get the vocab source and vocab label
-			 		List<ObjectPropertyStatement> vocabList = conceptIndividual.getObjectPropertyStatements(RDFS.isDefinedBy.getURI());
-			 		String vocabSource = null;
-			 		String vocabLabel = null;
-			 		if(vocabList != null && vocabList.size() > 0) {
-			 			vocabSource = vocabList.get(0).getObjectURI();
-			 			Individual sourceIndividual = EditConfigurationUtils.getIndividual(vreq, vocabSource);
-			 			//Assuming name will get label
-			 			vocabLabel = sourceIndividual.getName();
+			 		String conceptSemanticTypeURI = null;
+			 		String conceptSemanticTypeLabel = null;
+			 		//Can a concept have multiple semantic types?  Currently we are only returning the first one
+			 		//TODO: Change this into a sparql query that returns all types for the concept that are subclasses of SKOS concepts
+			 		HashMap<String, String> typeAndLabel = this.getConceptSemanticTypeQueryResults(conceptIndividual.getURI(), ModelAccess.on(vreq).getJenaOntModel());
+			 		if(typeAndLabel.containsKey("semanticTypeURI")) {
+			 			conceptSemanticTypeURI = typeAndLabel.get("semanticTypeURI");
 			 		}
-			 		info.add(new AssociatedConceptInfo(conceptLabel, conceptUri, vocabSource, vocabLabel, null));
+			 		if(typeAndLabel.containsKey("semanticTypeLabel")) {
+			 			conceptSemanticTypeLabel = typeAndLabel.get("semanticTypeLabel");
+			 		}
+
+			 		//Assuming this is from an external vocabulary source
+			 		info.add(new AssociatedConceptInfo(conceptLabel, conceptUri, vocabSource, vocabLabel, null, conceptSemanticTypeURI, conceptSemanticTypeLabel));
 
 			 	}
 		 }
 		 return info;
 	}
 	
+	private HashMap<String, String> getConceptSemanticTypeQueryResults(String conceptURI, OntModel ontModel) {
+		HashMap<String, String> typeAndLabel = new HashMap<String, String>();
+		String queryStr = "SELECT ?semanticTypeURI ?semanticTypeLabel WHERE { " + 
+				"<" + conceptURI + "> <" + RDF.type.getURI() + "> ?semanticTypeURI . " + 
+				"?semanticTypeURI <" + RDFS.subClassOf.getURI() + "> <" + this.SKOSConceptType + ">.  " + 
+				"?semanticTypeURI <" + RDFS.label.getURI() + "> ?semanticTypeLabel ." + 
+				"}";
+		 QueryExecution qe = null;
+	        try{
+	            Query query = QueryFactory.create(queryStr);
+	            qe = QueryExecutionFactory.create(query, ontModel);
+                ResultSet results = null;
+                results = qe.execSelect();
+                
+                while( results.hasNext()){
+                	QuerySolution qs = results.nextSolution();
+                	if(qs.get("semanticTypeURI") != null) {
+                		Resource semanticTypeURI = qs.getResource("semanticTypeURI");
+                		log.debug("Semantic Type URI returned " + semanticTypeURI.getURI());
+                		typeAndLabel.put("semanticTypeURI", semanticTypeURI.getURI());
+                	}
+                	if(qs.get("semanticTypeLabel") != null) {
+                		Literal semanticTypeLabel = qs.getLiteral("semanticTypeLabel");
+                		log.debug("Semantic Type label returned " + semanticTypeLabel.getString());
+                		typeAndLabel.put("semanticTypeLabel", semanticTypeLabel.getString());
+                	}
+                	
+                	
+                }
+	        }catch(Exception ex){
+	            throw new Error("Error in executing query string: \n" + queryStr + '\n' + ex.getMessage());
+	        }finally{
+	            if( qe != null)
+	                qe.close();
+	        }
+		return typeAndLabel;
+	}
+
 	public class AssociatedConceptInfo {
 		private String conceptLabel;
 		private String conceptURI;
 		private String vocabURI;
 		private String vocabLabel;
 		private String type; //In case of SKOS concept, will have skos concept type
-		public AssociatedConceptInfo(String inputLabel, String inputURI, String inputVocabURI, String inputVocabLabel, String inputType) {
+		private String conceptSemanticTypeURI; //For some services, such as UMLS, we have a semantic type associated
+		private String conceptSemanticTypeLabel;
+		public AssociatedConceptInfo(String inputLabel, String inputURI, String inputVocabURI, String inputVocabLabel, String inputType, String inputConceptSemanticTypeURI, String inputConceptSemanticTypeLabel) {
 			this.conceptLabel = inputLabel;
 			this.conceptURI = inputURI;
 			this.vocabURI = inputVocabURI;
 			this.vocabLabel = inputVocabLabel;
 			this.type = inputType;
+			this.conceptSemanticTypeURI = inputConceptSemanticTypeURI;
+			this.conceptSemanticTypeLabel = inputConceptSemanticTypeLabel;
 		}
 		
 		//Getters
@@ -419,6 +545,14 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		
 		public  String getType(){
 			return type;
+		}
+		
+		public  String getConceptSemanticTypeURI(){
+			return conceptSemanticTypeURI;
+		}
+		
+		public  String getConceptSemanticTypeLabel(){
+			return conceptSemanticTypeLabel;
 		}
 		
 	}

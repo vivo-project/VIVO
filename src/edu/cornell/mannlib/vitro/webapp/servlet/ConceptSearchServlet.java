@@ -11,18 +11,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONObject;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.cornell.mannlib.semservices.bo.Concept;
 import edu.cornell.mannlib.semservices.bo.ConceptInfo;
 import edu.cornell.mannlib.semservices.bo.SemanticServicesError;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.utils.ConceptSearchService.BeanToJsonSerializer;
 import edu.cornell.mannlib.vitro.webapp.utils.ConceptSearchService.ConceptSearchServiceUtils;
 
 public class ConceptSearchServlet extends VitroHttpServlet {
@@ -54,11 +54,13 @@ public class ConceptSearchServlet extends VitroHttpServlet {
         	catch (Exception ex) {
         		 SemanticServicesError semanticServicesError = new SemanticServicesError(
         	               "Exception encountered ", ex.getMessage(), "fatal");
-        		 log.error("An error occurred retrieving search results");
+        		 log.error("An error occurred retrieving search results", ex);
         		 conceptInfo.setSemanticServicesError(semanticServicesError);
         	}
         	conceptInfo.setConceptList(results);
+        	
         	String json = renderJson(conceptInfo);
+        	
         	json = StringUtils.replaceChars(json, "\r\t\n", "");
             PrintWriter writer = resp.getWriter();
             resp.setContentType("application/json");
@@ -70,12 +72,18 @@ public class ConceptSearchServlet extends VitroHttpServlet {
         }        
     }
     
+    
     protected String renderJson(ConceptInfo conceptInfo) {
+    	
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			return mapper.writeValueAsString(conceptInfo);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			log.error("An error occurred in rendering conceptInfo as json ", e);
+			return null;
+		}
+	}
 
-        JSONObject jsonObject = null;
-        jsonObject = BeanToJsonSerializer.serializeToJsonObject(conceptInfo);
-        log.debug(jsonObject.toString());
-        return jsonObject.toString();
-    }
 
 }

@@ -5,40 +5,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8080/" />
 <title>ValidateAdminProxy</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">ValidateAdminProxy</td></tr>
+<tr><td rowspan="1" colspan="3">ValidateAdminProxy</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Validate Admin Proxy Editing</td>
-	<td></td>
-</tr>
+<!--Validate Admin Proxy Editing-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -59,11 +37,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Login as admin</td>
-	<td></td>
-</tr>
+<!--Login as admin-->
 <tr>
 	<td>type</td>
 	<td>id=loginName</td>
@@ -79,11 +53,7 @@
 	<td>name=loginForm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to profile editing</td>
-	<td></td>
-</tr>
+<!--Navigate to profile editing-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Site Admin</td>
@@ -99,11 +69,7 @@
 	<td>link=Manage profile editing</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify that correct fields and text are present</td>
-	<td></td>
-</tr>
+<!--Verify that correct fields and text are present-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Manage profile editing</td>
@@ -129,11 +95,7 @@
 	<td>Profile editors</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Enter nothing and get error message</td>
-	<td></td>
-</tr>
+<!--Enter nothing and get error message-->
 <tr>
 	<td>click</td>
 	<td>name=createRelationship</td>
@@ -149,11 +111,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select profile, but not editor</td>
-	<td></td>
-</tr>
+<!--Select profile, but not editor-->
 <tr>
 	<td>type</td>
 	<td>//form[@id='add-relation']/fieldset[2]/section/input</td>
@@ -179,16 +137,13 @@
 	<td>link=Remove selection</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select editor, but not profile</td>
-	<td></td>
-</tr>
+<!--Select editor, but not profile-->
 <tr>
 	<td>type</td>
 	<td>id=selectProfileEditors</td>
 	<td>edito</td>
 </tr>
+<!--Select Eddie Editor-->
 <tr>
 	<td>click</td>
 	<td>id=ui-active-menuitem</td>
@@ -209,16 +164,13 @@
 	<td>link=Remove selection</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Enter one of each</td>
-	<td></td>
-</tr>
+<!--Enter one of each-->
 <tr>
 	<td>type</td>
 	<td>id=selectProfileEditors</td>
 	<td>edito</td>
 </tr>
+<!--Select Eddie Editor-->
 <tr>
 	<td>click</td>
 	<td>id=ui-active-menuitem</td>
@@ -254,11 +206,7 @@
 	<td>link=Remove selection</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Remove editor and attempt to save</td>
-	<td></td>
-</tr>
+<!--Remove editor and attempt to save-->
 <tr>
 	<td>click</td>
 	<td>link=Remove selection</td>
@@ -274,16 +222,13 @@
 	<td>You must select a minimum of 1 editor and profile.</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add back editor and then remove profile</td>
-	<td></td>
-</tr>
+<!--Add back editor and then remove profile-->
 <tr>
 	<td>type</td>
 	<td>id=selectProfileEditors</td>
 	<td>edito</td>
 </tr>
+<!--Select Eddie Editor-->
 <tr>
 	<td>click</td>
 	<td>id=ui-active-menuitem</td>
@@ -304,19 +249,10 @@
 	<td>You must select a minimum of 1 editor and profile.</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add one link</td>
-	<td></td>
-</tr>
+<!--Add one link-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Editor, Eddie |</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Remove selection</td>
 	<td></td>
 </tr>
 <tr>
@@ -327,6 +263,11 @@
 <tr>
 	<td>click</td>
 	<td>id=ui-active-menuitem</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Remove selection</td>
 	<td></td>
 </tr>
 <tr>
@@ -349,11 +290,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify relationship is set</td>
-	<td></td>
-</tr>
+<!--Verify relationship is set-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Editor, Eddie |</td>
@@ -384,11 +321,7 @@
 	<td>link=Remove selection</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Try to add relationship again</td>
-	<td></td>
-</tr>
+<!--Try to add relationship again-->
 <tr>
 	<td>type</td>
 	<td>id=selectProfileEditors</td>
@@ -429,11 +362,7 @@
 	<td>no match</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Test that editing works</td>
-	<td></td>
-</tr>
+<!--Test that editing works-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log out</td>
@@ -539,11 +468,7 @@
 	<td>Eddie is able to edit.</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Check My options </td>
-	<td></td>
-</tr>
+<!--Check My options -->
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=My account</td>
@@ -554,11 +479,7 @@
 	<td>link=My profile</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Logout</td>
-	<td></td>
-</tr>
+<!--Logout-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

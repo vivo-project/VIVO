@@ -3,9 +3,9 @@
 <#import "lib-vivo-form.ftl" as lvf>
 
 <#-- Custom form for managing web pages for individuals -->
-<h2>Manage People Affiliated with ${subjectName}</h2>
+<h2>${i18n().manage_affiliated_people} ${subjectName}</h2>
 <p style="margin-left:25px;margin-bottom:12px">
-Check those people you want to exclude from the profile page.
+${i18n().check_people_to_exclude}
 <script type="text/javascript">
     var peopleData = [];
 </script>
@@ -15,7 +15,7 @@ Check those people you want to exclude from the profile page.
 
        
     <#list allSubclasses as sub>
-    <h4>${sub}s</h4>
+    <h4>${sub}</h4>
         <section id="pubsContainer" role="container">
         <#assign peeps = people[sub]>
         <ul >
@@ -36,12 +36,16 @@ Check those people you want to exclude from the profile page.
 
 <br />    
 <p>
-    <a href="${urls.referringPage}#affiliation" title="return to profile page">Return to profile page</a>
+    <a href="${urls.referringPage}#affiliation" title="${i18n().return_to_profile}">${i18n().return_to_profile}</a>
 </p>
 
 <script type="text/javascript">
 var customFormData = {
     processingUrl: '${urls.base}/edit/primitiveRdfEdit'
+};
+var i18nStrings = {
+    personSuccessfullyExcluded: '${i18n().person_successfully_excluded}',
+    errorExcludingPerson: '${i18n().error_excluding_person}'
 };
 </script>
 

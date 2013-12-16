@@ -5,35 +5,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>NewAdminFirstLogin</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">NewAdminFirstLogin</td></tr>
+<tr><td rowspan="1" colspan="3">NewAdminFirstLogin</td></tr>
 </thead><tbody>
-<tr>
-	<td>comment</td>
-	<td class="comment">Login for first time with new admin account</td>
-	<td></td>
-</tr>
+<!--Login for first time with new admin account-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged in already</td>
-	<td></td>
-</tr>
+<!--Must not be logged in already-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -74,11 +48,7 @@
 	<td>Log in</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Try logging in without a password</td>
-	<td></td>
-</tr>
+<!--Try logging in without a password-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -104,11 +74,7 @@
 	<td>Password</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Try logging in with the wrong password</td>
-	<td></td>
-</tr>
+<!--Try logging in with the wrong password-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -139,11 +105,7 @@
 	<td>The email or password you entered is incorrect.</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Login with the correct password</td>
-	<td></td>
-</tr>
+<!--Login with the correct password-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -164,11 +126,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Now need to set a new password</td>
-	<td></td>
-</tr>
+<!--Now need to set a new password-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>New Password</td>
@@ -179,11 +137,7 @@
 	<td>Confirm Password</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Cancel out before doing anything</td>
-	<td></td>
-</tr>
+<!--Cancel out before doing anything-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Cancel</td>
@@ -194,11 +148,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Login with the correct password again</td>
-	<td></td>
-</tr>
+<!--Login with the correct password again-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -234,11 +184,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Try entering nothing in both fields</td>
-	<td></td>
-</tr>
+<!--Try entering nothing in both fields-->
 <tr>
 	<td>type</td>
 	<td>newPassword</td>
@@ -259,11 +205,7 @@
 	<td>Change Password to Log in</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Enter in an invalid password</td>
-	<td></td>
-</tr>
+<!--Enter in an invalid password-->
 <tr>
 	<td>type</td>
 	<td>newPassword</td>
@@ -281,14 +223,10 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Please enter a password between 6 and 12 characters in length.</td>
+	<td>Password must be between 6 and 12 characters.</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Try using the original password as the new password</td>
-	<td></td>
-</tr>
+<!--Try using the original password as the new password-->
 <tr>
 	<td>type</td>
 	<td>newPassword</td>
@@ -309,11 +247,7 @@
 	<td>Your new password cannot match the current one.</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Try entering in different passwords in each field</td>
-	<td></td>
-</tr>
+<!--Try entering in different passwords in each field-->
 <tr>
 	<td>type</td>
 	<td>newPassword</td>
@@ -334,11 +268,7 @@
 	<td>The passwords entered do not match.</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Enter valid passwords</td>
-	<td></td>
-</tr>
+<!--Enter valid passwords-->
 <tr>
 	<td>type</td>
 	<td>newPassword</td>
@@ -359,11 +289,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify new account is logged in and has access to correct options</td>
-	<td></td>
-</tr>
+<!--Verify new account is logged in and has access to correct options-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Sis</td>
@@ -389,11 +315,7 @@
 	<td>link=My profile</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">log out</td>
-	<td></td>
-</tr>
+<!--log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log out</td>

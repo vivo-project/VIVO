@@ -5,29 +5,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>AddConference</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AddConference</td></tr>
+<tr><td rowspan="1" colspan="3">AddConference</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -39,11 +21,7 @@
 	<td>100000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Conference Paper</td>
-	<td></td>
-</tr>
+<!--Add Conference Paper-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged in already</td>
-	<td></td>
-</tr>
+<!--Must not be logged in already-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must login as site admin</td>
-	<td></td>
-</tr>
+<!--Must login as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -89,21 +59,13 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Index</td>
-	<td></td>
-</tr>
+<!--Navigate to Index-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify that no conference papers currently exist</td>
-	<td></td>
-</tr>
+<!--Verify that no conference papers currently exist-->
 <tr>
 	<td>verifyTextNotPresent</td>
 	<td>Conference</td>
@@ -114,11 +76,7 @@
 	<td>Conference Paper</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Frank Furter</td>
-	<td></td>
-</tr>
+<!--Navigate to Frank Furter-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Faculty Member</td>
@@ -139,11 +97,7 @@
 	<td>Furter, Frank</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select to add a Publication</td>
-	<td></td>
-</tr>
+<!--Select to add a Publication-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='authorInAuthorship']/a/img</td>
@@ -164,11 +118,7 @@
 	<td>Publication Type</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select to add a conference paper</td>
-	<td></td>
-</tr>
+<!--Select to add a conference paper-->
 <tr>
 	<td>select</td>
 	<td>typeSelector</td>
@@ -219,11 +169,7 @@
 	<td>Nintendo Case Studies 2010</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Go back to conference</td>
-	<td></td>
-</tr>
+<!--Go back to conference-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Nintendo Case Studies</td>
@@ -234,11 +180,7 @@
 	<td>Nintendo Case Studies</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add details for Conference Paper</td>
-	<td></td>
-</tr>
+<!--Add details for Conference Paper-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='hasSubjectArea']/a/img</td>
@@ -354,21 +296,13 @@
 	<td>Nintendo Case Studies</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Naviage back to Index</td>
-	<td></td>
-</tr>
+<!--Naviage back to Index-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify Book link now appears</td>
-	<td></td>
-</tr>
+<!--Verify Book link now appears-->
 <tr>
 	<td>refreshAndWait</td>
 	<td>10000</td>
@@ -516,7 +450,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Book (1)</td>
+	<td>Book (3)</td>
 	<td></td>
 </tr>
 <tr>
@@ -539,11 +473,7 @@
 	<td>Conference Paper (1)</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify Conference Paper shows up for Frank Furter</td>
-	<td></td>
-</tr>
+<!--Verify Conference Paper shows up for Frank Furter-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Faculty Member</td>
@@ -579,11 +509,7 @@
 	<td>Nintendo Case Studies 2010</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Log out</td>
-	<td></td>
-</tr>
+<!--Log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

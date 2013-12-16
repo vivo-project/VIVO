@@ -3,13 +3,9 @@ package edu.cornell.mannlib.vitro.webapp.controller.freemarker;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,20 +19,16 @@ import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.Actions;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.VClass;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
-import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 import edu.cornell.mannlib.vitro.webapp.dao.VClassDao;
-import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
+import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 
 
 public class ManagePeopleForOrganizationController extends FreemarkerHttpServlet {
 
     private static final Log log = LogFactory.getLog(ManagePeopleForOrganizationController.class.getName());
-    private VClassDao vcDao = null;
     private static final String TEMPLATE_NAME = "managePeopleForOrganization.ftl";
-    private List<String> allSubclasses;
     
     @Override
 	protected Actions requiredActions(VitroRequest vreq) {
@@ -49,18 +41,13 @@ public class ManagePeopleForOrganizationController extends FreemarkerHttpServlet
         Map<String, Object> body = new HashMap<String, Object>();
 
         String subjectUri = vreq.getParameter("subjectUri");
-        
         body.put("subjectUri", subjectUri);
-
-        if (vreq.getAssertionsWebappDaoFactory() != null) {
-        	vcDao = vreq.getAssertionsWebappDaoFactory().getVClassDao();
-        } else {
-        	vcDao = vreq.getFullWebappDaoFactory().getVClassDao();
-        }
 
         HashMap<String, List<Map<String,String>>>  people = getPeople(subjectUri, vreq);
         log.debug("people = " + people);
         body.put("people", people);
+
+        List<String> allSubclasses = getAllSubclasses(people);
         body.put("allSubclasses", allSubclasses);
         
         Individual subject = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subjectUri);
@@ -73,23 +60,25 @@ public class ManagePeopleForOrganizationController extends FreemarkerHttpServlet
         return new TemplateResponseValues(TEMPLATE_NAME, body);
     }
   
-    
-    private static String PEOPLE_QUERY = ""
+	private static String PEOPLE_QUERY = ""
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
         + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
         + "PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> \n"
         + "PREFIX afn: <http://jena.hpl.hp.com/ARQ/function#> \n"
+        + "PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n"
         + "SELECT DISTINCT ?subclass ?position (str(?label) as ?name) ?person ?hideThis WHERE { \n"
-        + "    ?subject core:organizationForPosition ?position . \n"
-        + "    OPTIONAL { ?position core:positionForPerson  ?person . " 
+        + "    ?subject core:relatedBy ?position . \n"
+        + "    ?position a core:Position . \n"
+        + "    OPTIONAL { ?position core:relates  ?person . " 
+        + "               ?person a foaf:Person . \n"
         + "               ?person rdfs:label ?label } \n"
-        + "    OPTIONAL { ?position vitro:mostSpecificType ?subclass . \n"
-        + "              ?subclass rdfs:subClassOf core:Position } \n"
+        + "    OPTIONAL { ?position vitro:mostSpecificType ?subclass } \n"
         + "    OPTIONAL { ?position core:hideFromDisplay ?hideThis } \n "
         + "} ORDER BY ?subclass ?name";    
        
     HashMap<String, List<Map<String,String>>>  getPeople(String subjectUri, VitroRequest vreq) {
-          
+        VClassDao vcDao = vreq.getUnfilteredAssertionsWebappDaoFactory().getVClassDao();
+
         String queryStr = QueryUtils.subUriForQueryVar(PEOPLE_QUERY, "subject", subjectUri);
         log.debug("queryStr = " + queryStr);
         HashMap<String, List<Map<String,String>>>  subclassToPeople = new HashMap<String, List<Map<String,String>>>();
@@ -100,7 +89,7 @@ public class ManagePeopleForOrganizationController extends FreemarkerHttpServlet
                 RDFNode subclassUri= soln.get("subclass");
                 if ( subclassUri != null ) {
                     String subclassUriStr = soln.get("subclass").toString();
-                    VClass vClass = (VClass) vcDao.getVClassByURI(subclassUriStr);
+                    VClass vClass = vcDao.getVClassByURI(subclassUriStr);
                     String subclass = ((vClass.getName() == null) ? subclassUriStr : vClass.getName());
                     if(!subclassToPeople.containsKey(subclass)) {
                         subclassToPeople.put(subclass, new ArrayList<Map<String,String>>()); 
@@ -112,11 +101,17 @@ public class ManagePeopleForOrganizationController extends FreemarkerHttpServlet
         } catch (Exception e) {
             log.error(e, e);
         }    
-       
-        allSubclasses = new ArrayList<String>(subclassToPeople.keySet());
-        Collections.sort(allSubclasses);
+
         return subclassToPeople;
     }
+
+	private List<String> getAllSubclasses(
+			HashMap<String, List<Map<String, String>>> people) {
+        List<String> allSubclasses = new ArrayList<String>(people.keySet());
+        Collections.sort(allSubclasses);
+        return allSubclasses;
+	}
+
 }
 
 

@@ -2,6 +2,16 @@
 
 $(document).ready(function(){
     
+    // ensures proper layout when an organization has its webpage link displayed as a thumnail.
+    // there's a timing issue, so we can't check the length here, so check the role just to see
+    // if $('ul.webpages-withThumnails') exists
+    if ( $('ul.webpages-withThumbnails').children('li').length > 0 ) {
+        $('div.individual-overview').css("float","left");
+        $('div#activeGrantsLink').css("margin-top","30px");
+        $('section#individual-info').children('h2#overview').css("clear","both");
+    }
+    $.extend(this, i18nStrings);
+
     // "more"/"less" HTML truncator for showing more or less content in data property core:overview
     $('.overview-value').truncate({max_length: 500});
     
@@ -18,7 +28,7 @@ $(document).ready(function(){
             $toggleLink.click(function() {
                 $itemContainer.show();
                 $(this).attr('href', '#show less content');
-                $(this).text('less');
+                $(this).text(i18nStrings.displayLess);
                 togglePropDisplay.showLess($toggleLink, $itemContainer);
                 return false;
             });
@@ -28,7 +38,7 @@ $(document).ready(function(){
             $toggleLink.click(function() {
                 $itemContainer.hide();
                 $(this).attr('href', '#show more content');
-                $(this).text('more...');
+                $(this).text(i18nStrings.displayMoreEllipsis);
                 togglePropDisplay.showMore($toggleLink, $itemContainer);
                 return false;
             });
@@ -44,7 +54,7 @@ $(document).ready(function(){
             var $itemContainer = $('<div class="additionalItems" />').appendTo(this);
             
             // create toggle link
-            var $toggleLink = $('<a class="more-less" href="#show more content">more...</a>').appendTo(this);
+            var $toggleLink = $('<a class="more-less" href="#show more content" title="' + i18nStrings.showMoreContent + '">' + i18nStrings.displayMoreEllipsis + '</a>').appendTo(this);
             
             $additionalItems.appendTo($itemContainer);
             
@@ -62,7 +72,7 @@ $(document).ready(function(){
             var $itemContainer = $('<div class="additionalItems" />').appendTo(this);
             
             // create toggle link
-            var $toggleLink = $('<a class="more-less" href="#show more content">more...</a>').appendTo(this);
+            var $toggleLink = $('<a class="more-less" href="#show more content" title="' + i18nStrings.showMoreContent + '">' + i18nStrings.displayMoreEllipsis + '</a>').appendTo(this);
             
             $additionalItems.appendTo($itemContainer);
             
@@ -80,7 +90,7 @@ $(document).ready(function(){
         var $itemContainer = $('<div class="additionalItems" />').appendTo($subPropParent);
         
         // create toggle link
-        var $toggleLink = $('<a class="more-less" href="#show more content">more...</a>').appendTo($subPropParent);
+        var $toggleLink = $('<a class="more-less" href="#show more content" title="' + i18nStrings.showMoreContent + '">' + i18nStrings.displayMoreEllipsis + '</a>').appendTo($subPropParent);
         
         $additionalItems.appendTo($itemContainer);
         
@@ -90,7 +100,7 @@ $(document).ready(function(){
     }
     
     // Change background color button when verbose mode is off
-    $('a#verbosePropertySwitch:contains("Turn off")').addClass('verbose-off');
+    $('a#verbosePropertySwitch:contains("' + i18nStrings.verboseTurnOff + '")').addClass('verbose-off');
     
     // Reveal vCard QR code when QR icon is clicked
     $('#qrIcon, .qrCloseLink').click(function() {
@@ -112,20 +122,27 @@ $(document).ready(function(){
         
     // if there are no selected pubs, hide the manage link; same for grants
     // and affiliated people on the org profile page
-    if ( $('ul#authorInAuthorshipList').children('li').length < 1 && $('h3#authorInAuthorship').attr('class') != "hiddenPubs" ) {
+    if ( $('ul#relatedBy-Authorship-List').children('li').length < 1 && $('h3#relatedBy-Authorship').attr('class') != "hiddenPubs" ) {
         $('a#managePubLink').hide();
     }
 
-    if ( $('ul#hasResearcherRoleList').children('li').length < 1 &&
-            $('ul#hasPrincipalInvestigatorRoleList').children('li').length < 1 &&
-            $('ul#hasCo-PrincipalInvestigatorRoleList').children('li').length < 1 &&
-            $('ul#hasInvestigatorRoleList').children('li').length < 1 &&
-            $('h3#hasResearcherRole').attr('class') != "hiddenGrants" ) {
+    if ( $('ul#RO_0000053-ResearcherRole-List').children('li').length < 1 &&
+            $('ul#RO_0000053-PrincipalInvestigatorRole-List').children('li').length < 1 &&
+            $('ul#RO_0000053-CoPrincipalInvestigatorRole-List').children('li').length < 1 &&
+            $('ul#RO_0000053-InvestigatorRole-List').children('li').length < 1 &&
+            $('h3#RO_0000053-ResearcherRole').attr('class') != "hiddenGrants" ) {
                     $('a#manageGrantLink').hide();
     }
 
-    if ( $('ul#organizationForPositionList').children('li').length < 1 && $('h3#organizationForPosition').attr('class') != "hiddenPeople" ) {
+    if ( $('ul#relatedBy-Position-List').children('li').length < 1 && $('h3#relatedBy-Position').attr('class') != "hiddenPeople" ) {
         $('a#managePeopleLink').hide();
     }
-
+   
+    // if there are webpages but no contacts (email/phone), extend
+    // the webpage border the full width. Used with "2 column" profile view.
+    if ( $('h2#contactHeading').length < 1 ) {
+        if ( $('div#webpagesContainer').length ) {
+             $('div#webpagesContainer').css('width', '100%').css('clear','both');
+        }
+    }    
 });

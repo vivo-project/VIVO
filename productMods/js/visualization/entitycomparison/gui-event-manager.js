@@ -2,6 +2,8 @@
 
 $(document).ready(function() {
 
+    $.extend(this, i18nStringsGuiEvents);
+	
 	/*
 	 * This will set initial values of the constants present in constants.js
 	 * */
@@ -65,11 +67,13 @@ $(document).ready(function() {
                 	 * So below is used to replace text taht is specific to the errors that would have caused
                 	 * due to the original parameters.
                 	 * */
-                	var alternateVisInfo = COMPARISON_PARAMETERS_INFO[currentParameter].value 
-                							+ " Temporal Graph&nbsp;"
+                	var alternateVisInfo = COMPARISON_PARAMETERS_INFO[currentParameter].value + " " 
+                							+ i18nStringsGuiEvents.temporalGraphCapped + "&nbsp;"
                 							+ '<span id="noPubsOrGrants-span">|&nbsp;'
                 							+ '<a  href="' + COMPARISON_PARAMETERS_INFO[oldParameter].viewLink + '">'
-                							+ 'view ' + COMPARISON_PARAMETERS_INFO[oldParameter].pluralName + ' temporal graph</a></span>'
+                							+ i18nStringsGuiEvents.viewString + ' ' 
+                							+ COMPARISON_PARAMETERS_INFO[oldParameter].pluralName 
+                							+ i18nStringsGuiEvents.temporalGraphLower + '</a></span>'
                 	
                 	options.errorContainer.find("#alternative-vis-info").html(alternateVisInfo);
 
@@ -126,7 +130,7 @@ $(".disabled-checkbox-event-receiver").live("click", function () {
 
         createNotification("warning-notification", {
             title: 'Error',
-            text: 'A Maximum 10 entities can be compared. Please remove some & try again.'
+            text: i18nStringsGuiEvents.entityMaxNote
         }, {
             custom: true,
             expires: false
@@ -222,7 +226,7 @@ var processJSONData = {
 		
 	isParentEntityAvailable: false,	
 	
-	currentEntityLevel: "Organizations",
+	currentEntityLevel: i18nStringsGuiEvents.organizationsCappedString,
 	
 
 	/**
@@ -298,9 +302,9 @@ var processJSONData = {
 		    	 * Setup the entity level
 		    	 * */
 		    	if (val.visMode ===  "PERSON"){
-					entityLevels.push("People");
+					entityLevels.push(i18nStringsGuiEvents.peopleCappedString);
 				} else if (val.visMode ===  "ORGANIZATION"){
-					entityLevels.push("Organizations");
+					entityLevels.push(i18nStringsGuiEvents.organizationsCappedString);
 				}
 		    	
 		        
@@ -359,14 +363,14 @@ var processJSONData = {
 		 * to the parent organization. 
 		 * */
 		if (uniqueEntityLevels.length > 1) {
-			processJSONData.currentEntityLevel = "Organizations & People";
+			processJSONData.currentEntityLevel = i18nStringsGuiEvents.organizationsAndPeople;
 			$("#people-organizations-filter").show();
 		} else if (uniqueEntityLevels.length === 1) {
 			processJSONData.currentEntityLevel = uniqueEntityLevels[0];
 			$("#people-organizations-filter").hide();
 		} else {
 			/* To provide graceful degradation set entity level to a default error message.*/
-			processJSONData.currentEntityLevel = "ENTITY LEVEL UNDEFINED ERROR";
+			processJSONData.currentEntityLevel = i18nStringsGuiEvents.levelUndefinedError;
 		}
 	},	
 	
@@ -458,7 +462,7 @@ function setupLoadingScreen(visContainerDIV) {
     
     visContainerDIV.block({
         message: '<div id="loading-data-container"><h3><img id="data-loading-icon" src="' + loadingImageLink 
-        			+ '" />&nbsp;Loading data for <i>' 
+        			+ '" />&nbsp;' + i18nStringsGuiEvents.loadingDataFor + ' <i>' 
         			+ organizationLabel
         			+ '</i></h3></div>'
     });
@@ -469,9 +473,9 @@ function setupLoadingScreen(visContainerDIV) {
     	$("#loading-data-container")
     		.html('<h3><img id="refresh-page-icon" src="' 
     				+ refreshPageImageLink 
-	    			+ '" />&nbsp;Data for <i>' + organizationLabel
-	    			+ '</i> is now being refreshed. The visualization will load as soon as we are done computing, ' 
-	    			+ 'or you can search or browse other data in VIVO and come back in a few minutes.</h3>')
+	    			+ '" />&nbsp;' + i18nStringsGuiEvents.dataForString + ' <i>' + organizationLabel
+	    			+ '</i> ' + i18nStringsGuiEvents.refreshingDataMsg 
+	    			+ '</h3>')
 	    	.css({'cursor': 'pointer'});
     	
     }, 10 * 1000);
@@ -535,8 +539,8 @@ var lastCachedAtDateTimeParser = {
 			dateObject = this.getDateObjectFromRawXSDateTimeString(dateObject);
 		}
 		
-		var day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-		var month = ['January','February','March','April','May','June','July','August','September','October','November'];
+		var day = [i18nStringsGuiEvents.sundayString, i18nStringsGuiEvents.mondayString, i18nStringsGuiEvents.tuesdayString, i18nStringsGuiEvents.wednesdayString, i18nStringsGuiEvents.thursdayString, i18nStringsGuiEvents.fridayString, i18nStringsGuiEvents.saturdayString];
+		var month = [i18nStringsGuiEvents.januaryString, i18nStringsGuiEvents.februaryString, i18nStringsGuiEvents.marchString, i18nStringsGuiEvents.aprilString, i18nStringsGuiEvents.mayString, i18nStringsGuiEvents.juneString, i18nStringsGuiEvents.julyString, i18nStringsGuiEvents.augustString, i18nStringsGuiEvents.septemberString, i18nStringsGuiEvents.octoberString, i18nStringsGuiEvents.novemberString];
 		
 		return month[dateObject.getMonth()] + " " + dateObject.getDate() + ", " + dateObject.getFullYear() + ".";
 	},
@@ -610,10 +614,10 @@ temporalGraphProcessor = {
 
         if ($("#incomplete-data-disclaimer").length > 0 && lastCachedAtDateTimes.length > 0) {
         	
-        	var disclaimerText = "This information is based solely on " 
+        	var disclaimerText = i18nStringsGuiEvents.disclaimerTextOne + " " 
 				+ COMPARISON_PARAMETERS_INFO[currentParameter].value
-				+ " which have been loaded into the VIVO system"
-				+ " as of " + lastCachedAtDateTimeParser.getReadableDateString(lastCachedAtDateTimes[0]);
+				+ " " + i18nStringsGuiEvents.disclaimerTextTwo + " "
+				+ lastCachedAtDateTimeParser.getReadableDateString(lastCachedAtDateTimes[0]);
         	
         	$("#incomplete-data-disclaimer").attr(
         			"title", 
@@ -695,10 +699,10 @@ temporalGraphProcessor = {
         
         if ($("#incomplete-data-disclaimer").length > 0 && lastCachedAtDateTimes.length > 0) {
         	
-        	var disclaimerText = "This information is based solely on " 
+        	var disclaimerText = i18nStringsGuiEvents.disclaimerTextOne + " " 
         							+ COMPARISON_PARAMETERS_INFO[currentParameter].value
-        							+ " which have been loaded into the VIVO system"
-        							+ " as of " + lastCachedAtDateTimeParser.getReadableDateString(lastCachedAtDateTimes[0]);
+        							+ i18nStringsGuiEvents.disclaimerTextTwo + " "
+        							+ lastCachedAtDateTimeParser.getReadableDateString(lastCachedAtDateTimes[0]);
         	
         	$("#incomplete-data-disclaimer").attr(
         			"title", disclaimerText); 

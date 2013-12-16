@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-select>    
+        PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
+        
+        SELECT DISTINCT ?vcard 
+                        ?title
+                        ?preferredTitle
+        WHERE {
+            ?subject ?property ?vcard .
+            ?vcard vcard:hasTitle ?title .
+            ?title vcard:title ?preferredTitle
+            
+        } 
+    </query-select>
+       
+    <query-construct>
+        PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
+        CONSTRUCT { 
+            ?subject ?property ?vcard .
+            ?vcard vcard:hasTitle ?title .
+            ?title ?titleProperty ?titleValue 
+        } WHERE {
+            {
+               ?subject ?property ?vcard
+            } UNION {
+               ?subject ?property ?vcard .
+               ?vcard vcard:hasTitle ?title
+            } UNION {
+               ?subject ?property ?vcard .
+               ?vcard vcard:hasTitle ?title .
+               ?title ?titleProperty ?titleValue
+            } 
+        } 
+    </query-construct>
+              
+    <template>propStatement-preferredTitle.ftl</template>
+    <postprocessor>edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.MaintainDuplicatesObjectPropertyDataPostProcessor</postprocessor>
+</list-view-config>

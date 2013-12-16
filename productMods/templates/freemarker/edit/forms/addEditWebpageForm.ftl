@@ -13,8 +13,8 @@
 <#--Retrieve variables needed-->
 <#assign url = lvf.getFormFieldValue(editSubmission, editConfiguration, "url")/>
 <#assign urlTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "urlType")/>
-<#assign anchor = lvf.getFormFieldValue(editSubmission, editConfiguration, "anchor") />
-<#assign newRank = lvf.getFormFieldValue(editSubmission, editConfiguration, "newRank") />
+<#assign label = lvf.getFormFieldValue(editSubmission, editConfiguration, "label") />
+<#assign newRank = editConfiguration.pageData.newRank!"" />
 
 <#if url?has_content>
     <#assign editMode = "edit">
@@ -23,12 +23,12 @@
 </#if>
 
 <#if editMode == "edit">        
-        <#assign titleVerb="Edit webpage of">        
-        <#assign submitButtonText="Save changes">
+        <#assign titleVerb="${i18n().edit_wbpage_of}">        
+        <#assign submitButtonText="${i18n().save_changes}">
         <#assign disabledVal="disabled">
 <#else>
-        <#assign titleVerb="Add webpage for">        
-        <#assign submitButtonText="Add Web Page">
+        <#assign titleVerb="${i18n().add_webpage_for}">
+        <#assign submitButtonText="${i18n().add_webpage}">
         <#assign disabledVal=""/>
 </#if>
 
@@ -38,7 +38,7 @@
 
 <#if submissionErrors??>
 <section id="error-alert" role="alert">
-        <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
+        <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="${i18n().error_alert_icon}" />
         <p>       
         <#list submissionErrors?keys as errorFieldName>
             ${errorFieldName}: ${submissionErrors[errorFieldName]}  <br/>           
@@ -49,16 +49,16 @@
     
 <form class="customForm" action ="${submitUrl}">
 
-    <label for="urlType">URL Type${requiredHint}</label>
+    <label for="urlType">${i18n().url_type}${requiredHint}</label>
     <#assign urlTypeOpts = editConfiguration.pageData.urlType />
     <select name="urlType" style="margin-top:-2px" >
-        <option value="" <#if editMode == "add">selected</#if>>Select one</option>                
+        <option value="" <#if editMode == "add">selected</#if>>${i18n().select_one}</option>                
         <#list urlTypeOpts?keys as key>             
             <option value="${key}"  <#if urlTypeValue == key>selected</#if> >
                 <#if urlTypeOpts[key] == "F1000 Link">
-                    Faculty of 1000 Link
+                    ${i18n().faculty_of_1000}
                 <#else>
-                    Standard Web Link
+                    ${i18n().standard_web_link}
                 </#if>
             </option>         
         </#list>
@@ -66,8 +66,8 @@
     <label for="url">URL ${requiredHint}</label>
     <input  size="70"  type="text" id="url" name="url" value="${url}" role="input" />
    
-    <label for="anchor">Webpage Name</label>
-    <input  size="70"  type="text" id="anchor" name="anchor" value="${anchor}" role="input" />
+    <label for="label">${i18n().webpage_name}</label>
+    <input  size="70"  type="text" id="label" name="label" value="${label}" role="input" />
 
     <#if editMode="add">
         <input type="hidden" name="rank" value="${newRank}" />
@@ -75,8 +75,8 @@
     
     <input type="hidden" id="editKey" name="editKey" value="${editConfiguration.editKey}"/>
     <p class="submit">
-        <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> or </span>
-        <a class="cancel" href="${editConfiguration.cancelUrl}" title="Cancel">Cancel</a>
+        <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> ${i18n().or} </span>
+        <a class="cancel" href="${editConfiguration.cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
     </p>    
 </form>
 

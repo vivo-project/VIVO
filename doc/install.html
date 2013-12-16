@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
-        <title>VIVO Release V1.5 Installation Guide</title>
+        <title>VIVO Release V1.6 Installation Guide</title>
         <link rel="stylesheet" href="./css/doc.css" media="screen">
     </head>
     <body>
@@ -12,15 +12,15 @@
         </div>
         <!-- Start of content -->
         <div id="wrapper-content" role="main">
-            <h1>VIVO Release V1.5 Installation Guide</h1>
+            <h1>VIVO Release V1.6 Installation Guide</h1>
             <div>
-                June 30, 2012
+                October 9, 2013
             </div>
 
             <p>
               This document is a summary of the VIVO installation
               process. For information about this release, consult
-              the <a href="release.html">VIVO v1.5 Release
+              the <a href="release.html">VIVO v1.6 Release
               Announcement</a>.  This and other documentation can be found on
               the <a href="http://vivoweb.org/support">support
               page</a> at <a href="http://vivoweb.org">VIVOweb.org</a>. 
@@ -33,7 +33,11 @@
               install over an existing installation of an earlier version. 
             </p><p>
               If you are going to upgrade an existing service, please consult 
-              the <a href="upgrades.html">upgrade</a> in this directory. 
+              the <a href="upgrades.html">latest upgrade file</a> in this directory. 
+            </p><p>
+              Other servlet containers: If you want to use a servlet container 
+              other than Tomcat, please consult <a href="other_servlet_containers.html">
+              instructions for other servlet containers</a> in this directory.
             </p><p>
               VIVO Developers: If you are working on the VIVO source code from 
               Subversion, the instructions are slightly different. Please consult  
@@ -48,44 +52,54 @@
             <h4>The VIVO distribution directory</h4>
             <p>
                 This is created when you unpack the VIVO distribution file 
-                (see <a href="#download_code">Step III</a>, below). This is where you will 
-                create your deploy.properties file (see <a href="#deploy_properties">Step
-                IV</a>, below), and where you will make any modifications to the VIVO 
+                (see <a href="#download_code">Step 3</a>, below). This is where you will 
+                create your build.properties file (see <a href="#build_properties">Step
+                4</a>, below), and where you will make any modifications to the VIVO 
                 theme or code. You can create this wherever you choose. 
             </p>
             <h4>VIVO inside Tomcat</h4>
             <p>
                 When you run the build script to compile and deploy VIVO 
-                (see <a href="#deploy">Step VI</a>, below), the files will be deployed to a
+                (see <a href="#deploy">Step 5</a>, below), the files will be deployed to a
                 directory inside Tomcat. This is the actual executing code for VIVO, 
                 but you won’t need to look at it or change it. If you need to change 
                 VIVO, make the changes in the distribution directory, and run the build  
                 script again. Tell the build script where to find Tomcat by setting <code>tomcat.home</code>
-                in the deploy.properties file (see <a href="#deploy_properties">Step IV</a>,
+                in the build.properties file (see <a href="#build_properties">Step 4</a>,
                 below).
             </p>
             <h4>The VIVO home directory</h4>
             <p>
-                VIVO will use this area to store some of the data it uses. Uploaded 
+                This directory contains the runtime configuration properties for VIVO.
+                VIVO will also use this area to store some of its data. Uploaded 
                 image files are stored here, and the Solr home directory is stored here also. 
                 You can create this wherever you choose. Tell VIVO where to find the  
-                home directory by setting <code>vitro.home.directory</code>
-                in the deploy.properties file (see <a href="#deploy_properties">Step IV</a>, 
-                below). You must create this directory before starting VIVO, and you 
+                home directory by setting <code>vitro.home</code>
+                in the build.properties file (see <a href="#build_properties">Step 4</a>, 
+                below). You must create this directory before starting VIVO, 
+                you must create the <code>runtime.properties</code> file in this directory
+                (see <a href="#runtime_properties">Step 6</a>, below), and you 
                 must ensure that Tomcat has permission to read and write to this  
                 directory when it runs. 
             </p>
             <h4>The MySQL database</h4>
             <p>
-                Essentially all of the data that you store in VIVO will be given to 
-                MySQL for storage. The actual location of this data depends on what  
-                system you have, and on how you install MySQL (see <a href="#required_software">Step I</a>, below). but you won’t need to 
+                By default, nearly all of the data that you enter into VIVO will be  
+                stored in MySQL. The actual location of this data depends on what  
+                system you have, and on how you install MySQL (see <a href="#required_software">Step 1</a>, below). but you won’t need to 
                 know the location. You will access the data through VIVO, or  
                 occasionally through the MySQL client application. 
             </p>
+            <h4>Optional external triple store</h4>
+            <p>
+                VIVO can configured to use a different triple store for the bulk of its semantic data, so long as this triple store supports Web-based use of the SPARQL language to query and modify its data.  If you elect to use a separate triple store, note that VIVO's MySQL database is
+still required for basic configuration and user account data.  In order to connect VIVO to an 
+external triple store, you will need to know two URIs: the store's endpoint URI for 
+issuing SPARQL queries that read data, and its URI for issuing SPARQL UPDATE commands.  These URIs are typically kept separate in order to make it easier to secure the triple store against unauthorized edits.  With Sesame, for example, the update URI is usually the query endpoint URI with "/statements" appended.  You will need to know these two URIs later when you <a href="#runtime_properties">specify runtime properties</a>. 
+            </p>
             <toc>
                 <h3>Steps to Installation</h3>
-                <ol class="roman1">
+                <ol>
                     <li>
                         <a href="#required_software">Install required software</a>
                     </li>
@@ -96,10 +110,13 @@
                         <a href="#download_code">Download the VIVO Application Source</a>
                     </li>
                     <li>
-                        <a href="#deploy_properties">Specify deployment properties</a>
+                        <a href="#build_properties">Specify build properties</a>
                     </li>
                     <li>
                         <a href="#deploy">Compile and deploy</a>
+                    </li>
+                    <li>
+                        <a href="#runtime_properties">Specify runtime properties</a>
                     </li>
                     <li>
                         <a href="#tomcat_settings">Configure Tomcat</a>
@@ -115,7 +132,7 @@
                             using "Contact Us" form)</a>
                     </li>
                     <li>
-                        <a href="#tomcat_connector">Setup Apache Tomcat Connector</a>
+                        <a href="#httpd">Set up Apache HTTPD</a>
                     </li>
                     <li>
                         <a href="#external_auth">Using an External Authentication
@@ -132,17 +149,16 @@
                     </li>
                 </ol>
             </toc>
-            <h3 id="required_software">I. Install required software </h3>
+            <h3 id="required_software">1. Install required software </h3>
             <p>
                 Before installing VIVO, make sure that the following software is 
                 installed on the desired machine: 
             </p>
             <ul>
                 <li>
-                    Java (SE) 1.6.x <a href="http://java.sun.com">http://java.sun.com</a>
+                    Java (SE) 1.7.x <a href="http://java.sun.com">http://java.sun.com</a>
                     <ul>
-                    	<li>VIVO does not work with OpenJDK</li>
-                    	<li>VIVO does not work with Java 1.7</li>
+                    	<li>VIVO has not been tested with OpenJDK</li>
                     </ul>
                 </li>
                 <li>
@@ -168,25 +184,25 @@
     	    <ul>
     	    	<li>
     	    		Mac:
-		 	        <ul>
-		 	            <li>Chrome 8.0.552.237</li>
-		 	            <li>FireFox 3.6.13</li>
-		 	            <li>Opera 10.6.2</li>
-		 	            <li>Safari 5.0.3</li>
-		 	        </ul>
-    	    	</li>
-    	    	<li>
-		            PC:
-		 	        <ul>
-		 	            <li>Chrome 8.0.552.273</li>
-		 	            <li>FireFox 10.0.2</li>
-		 	            <li>Internet Explorer 7, 8, 9</li>
-		 	            <li>Opera 10.6.2</li>
-		 	        </ul>
+    		 	        <ul>
+    		 	            <li>Chrome 30.0.1599.69 and above</li>
+    		 	            <li>FireFox 3.6.28, 10.0.12, 24</li>
+    		 	            <li>Opera 12.02</li>
+    		 	            <li>Safari 5.0.3</li>
+    		 	        </ul>
+        	    	</li>
+        	    	<li>
+    		            PC:
+    		 	        <ul>
+    		 	            <li>Chrome 25.1364.2 and above</li>
+    		 	            <li>FireFox 10.0.12, 24</li>
+    		 	            <li>Internet Explorer 8, 9, 10</li>
+    		 	            <li>Opera 12.02</li>
+    		 	        </ul>
 		 	    </li>
     	    </ul>
 
-            <h3 id="create_database">II. Create an empty MySQL database </h3>
+            <h3 id="create_database">2. Create an empty MySQL database </h3>
             <p>
                 Decide on a database name, username, and password. Log into your 
                 MySQL server and create a new database in MySQL that uses <code>UTF-8
@@ -208,21 +224,29 @@
                 Keep track of the database name, username, and password for Step 
                 IV. 
             </p>
-            <h3 id="download_code">III. Download the VIVO Application Source 
+            <h3 id="download_code">3. Download the VIVO Application Source 
                 <br>
             </h3>
             <p>
-                Download the VIVO application source as either <code>rel-1.5.zip</code>
-                or <code>rel-1.5.gz</code>
+                Download the VIVO application source as either <code>rel-1.6.zip</code>
+                or <code>rel-1.6.gz</code>
                 file and unpack it on your web server: 
                 <br>
                 <a href="http://vivoweb.org/download">http://vivoweb.org/download</a>
             </p>
-            <h3 id="deploy_properties">IV. Specify deployment properties </h3>
+            <h3 id="build_properties">4. Specify build properties </h3>
             <p>
-                At the top level of the VIVO distribution directory, copy the file <code>example.deploy.properties</code>
-                to a file named simply <code>deploy.properties</code>. This file sets 
-                several properties used in compilation and deployment. 
+                At the top level of the VIVO distribution directory, 
+                copy the file <code>example.build.properties</code>
+                to a file named simply <code>build.properties</code>.
+                Edit the file to suit your installation, as described in the following table. 
+            </p>
+            <p>
+            	These properties are used in compilation and deployment. 
+            	They will be incorporated into VIVO when it is compiled in
+            	<a href="#deploy">Step 5</a>. If you want to change these properties at
+            	a later date, you will need to stop Tomcat, repeat <a href="#deploy">Step 5</a>, 
+            	and restart Tomcat.
             </p>
             <p>
                 <em>Windows:</em>
@@ -230,14 +254,7 @@
                 system, include the windows drive and use the forward slash "/" and not  
                 the back slash "\" in the directory locations, e.g. <code>c:/tomcat</code>.
             </p>
-            <p>
-                <em>External authentication:</em>
-                If you want to use an external 
-                authentication system like Shibboleth or CUWebAuth, you will need to 
-                set two additional properties in this file. See the step below  
-                entitled <a href="#external_auth">Using an External Authentication
-                    System with VIVO</a>. 
-            </p>
+
             <table border='1' bordercolor="#CCCCCC" cellspacing="5">
                 <tbody>
                     <tr>
@@ -247,30 +264,6 @@
                         <th>
                             Example Value 
                         </th>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            Default namespace: VIVO installations make their
-                            RDF resources available for harvest using linked data. Requests for RDF
-                            resource URIs redirect to HTML or RDF representations as specified by
-                            the client. To make this possible, VIVO's default namespace must have a
-                            certain structure and begin with the public web address of the VIVO
-                            installation. For example, if the web address of a VIVO installation is
-                            "http://vivo.example.edu/" the default namespace must be set to
-                            "http://vivo.example.edu/individual/" in order to support linked data.
-                            Similarly, if VIVO is installed at "http://www.example.edu/vivo" the
-                            default namespace must be set to
-                            "http://www.example.edu/vivo/individual/"<h5>* The namespace must end with "individual/" (including the
-                                trailing slash).</h5>
-                        </td>
-                    </tr>
-                    <tr class="odd_row">
-                        <td>
-                            Vitro.defaultNamespace 
-                        </td>
-                        <td>
-                            http://vivo.mydomain.edu/individual/ 
-                        </td>
                     </tr>
                     <tr>
                         <td colspan="2">
@@ -315,6 +308,166 @@
                     </tr>
                     <tr>
                         <td colspan="2">
+                            Directory where the VIVO application will store 
+                            the data that it creates. This includes uploaded files (usually images) 
+                            and the Solr search index. Be sure this directory exists and is  
+                            writable by the Tomcat service. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            vitro.home
+                        </td>
+                        <td>
+                            /usr/local/vivo/home
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Languages (in addition to American English) that will be built into your 
+                            VIVO site. The languages must be found in the
+                            <code>languages</code> directory of the VIVO distribution.
+                            See <a href="https://wiki.duraspace.org/display/VIVO/Building+a+multi-language+VIVO+instance">
+                            the VIVO Wiki</a> for more information.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            languages.addToBuild
+                        </td>
+                        <td>
+                            es_MX
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+							These values are used when deploying VIVO as an OpenSocial container
+							and integrating with OpenSocial gadgets 
+							(see <a href="#opensocial">Step 13</a>, below). If you are creating
+							a VIVO installation that does not use OpenSocial gadgets, these values are omitted.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                          OpenSocial.shindigURL<br>
+                          OpenSocial.tokenService<br>
+                          OpenSocial.tokenKeyFile<br>
+                          OpenSocial.sandbox
+                        </td>
+                        <td>
+                           &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 id="deploy">5. Compile and deploy</h3>
+            <p>
+                In <a href="#build_properties">Step 4</a>, you defined the location of the VIVO home directory, 
+                by specifying <code>vitro.home</code> in the <code>build.properties</code> file.
+                Create that directory now.
+            </p>
+            <p>
+                At the command line, from the top level of the VIVO distribution 
+                directory, type: 
+            <pre>                ant all            </pre>
+                to build VIVO and deploy to Tomcat's webapps directory. 
+            </p>
+            <p>
+                The build script may run for as much as five minutes, 
+                and creates more than 100 lines of output. 
+                The process comprises several steps:
+                <ul>
+                   <li>collecting the source files from the distribution directory,</li>
+                   <li>compiling the Java source code,</li>
+                   <li>compiling and running unit tests,</li>
+                   <li>preparing the Solr search engine,</li>
+                   <li>deploying VIVO and Solr to Tomcat.</li>
+                </ul> 
+            </p>
+            <p>
+                The output of the build may include a variety of warning messages.
+                The Java compiler may warn of code that is outdated.
+                Unit tests may produce warning messages, 
+                and some tests may be ignored if they do not produce consistent results.  
+            </p>
+            <table align="center"><tr><td>
+                BUILD SUCCESSFUL<br>Total time: 1 minute 49 seconds
+            </td></tr></table>
+            <p>
+                If the output ends with a success message, the build was successful. 
+                Proceed to the next step.
+            </p>
+            <table align="center"><tr><td>
+                BUILD FAILED<br>Total time: 35 seconds
+            </td></tr></table>
+            <p>
+                If the output ends with a failure message, the build has failed. 
+                Find the cause of the failure, fix the problem, and run the script again.
+            </p>
+
+            <h3 id="runtime_properties">6. Specify runtime properties </h3>
+            <p>
+                The build process in <a href="deploy">Step 5</a> created a file called <code>example.runtime.properties</code>
+                in your VIVO home directory (<code>vitro.home</code> in the <code>build.properties</code> file).
+                Rename this file to  <code>runtime.properties</code>, and  
+                edit the file to suit your installation, as described in the following table. 
+            </p>
+            <p>
+                These properties are loaded when VIVO starts up. If you want to change these 
+                properties at a later date, you will need to restart Tomcat for them to take 
+                effect. You will not need to repeat <a href="#deploy">Step 5</a>.
+            </p>
+            <p>
+                <em>Windows:</em>
+                For those installing on Windows operating 
+                system, include the windows drive and use the forward slash "/" and not  
+                the back slash "\" in the directory locations, e.g. <code>c:/tomcat</code>.
+            </p>
+            <p>
+                <em>External authentication:</em>
+                If you want to use an external 
+                authentication system like Shibboleth or CUWebAuth, you will need to 
+                set an additional property in this file. See the step below  
+                entitled <a href="#external_auth">Using an External Authentication
+                    System with VIVO</a>. 
+            </p>
+            <table border='1' bordercolor="#CCCCCC" cellspacing="5">
+                <tbody>
+                    <tr>
+                        <th>
+                            Property Name 
+                        </th>
+                        <th>
+                            Example Value 
+                        </th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Default namespace: VIVO installations make their
+                            RDF resources available for harvest using linked data. Requests for RDF
+                            resource URIs redirect to HTML or RDF representations as specified by
+                            the client. To make this possible, VIVO's default namespace must have a
+                            certain structure and begin with the public web address of the VIVO
+                            installation. For example, if the web address of a VIVO installation is
+                            "http://vivo.example.edu/" the default namespace must be set to
+                            "http://vivo.example.edu/individual/" in order to support linked data.
+                            Similarly, if VIVO is installed at "http://www.example.edu/vivo" the
+                            default namespace must be set to
+                            "http://www.example.edu/vivo/individual/"<h5>* The namespace must end with "individual/" (including the
+                                trailing slash).</h5>
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            Vitro.defaultNamespace 
+                        </td>
+                        <td>
+                            http://vivo.mydomain.edu/individual/ 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
                             URL of Solr context used in local VIVO search.
                             Should consist of:<pre>    scheme + servername + port + vivo_webapp_name + "solr"</pre>
                             In the standard installation, the Solr context will be on the same 
@@ -328,53 +481,6 @@
                         </td>
                         <td>
                             http://localhost:8080/vivosolr 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            Restricts access to the Solr search platform. 
-                            One or more regular expressions, separated by commas. When a request is 
-                            made to Solr, the IP address of the requestor must match one of the  
-                            patterns, or the request will be rejected. 
-                            <br>
-                            Examples:<code>
-                                <ul>
-                                    <li>
-                                        vitro.local.solr.ipaddress.mask = 127\.0\.0\.1 
-                                    </li>
-                                    <li>
-                                        vitro.local.solr.ipaddress.mask = 
-                                        127\.0\.0\.1,0:0:0:0:0:0:0:1 
-                                    </li>
-                                    <li>
-                                        vitro.local.solr.ipaddress.mask = 169.254.* 
-                                    </li>
-                                </ul>
-                            </code>
-                        </td>
-                    </tr>
-                    <tr class="odd_row">
-                        <td>
-                            vitro.local.solr.ipaddress.mask 
-                        </td>
-                        <td>
-                            127\.0\.0\.1|[0:]+:1
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            Directory where the VIVO application will store 
-                            the data that it creates. This includes uploaded files (usually images) 
-                            and the Solr search index. Be sure this directory exists and is  
-                            writable by the user who the Tomcat service is running as. 
-                        </td>
-                    </tr>
-                    <tr class="odd_row">
-                        <td>
-                            vitro.home.directory 
-                        </td>
-                        <td>
-                            /usr/local/vivo/data 
                         </td>
                     </tr>
                     <tr>
@@ -534,6 +640,26 @@
                     </tr>
                     <tr>
                         <td colspan="2">
+ Set the endpointURI only if you wish to store semantic data in an external triple store instead of MySQL.  Enter the URI of the triple store's SPARQL endpoint for querying data.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td colspan="2">
+                            VitroConnection.DataSource.endpointURI 
+                        </td>
+                    </tr>
+                    <tr>
+                       <td colspan="2">
+ Set the updateEndpointURI only if you wish to store semantic data in an external triple store instead of MySQL.  Enter the URI at which the triple store responds to SPARQL UPDATE requests.  This setting is only necessary if the triple store does not support updates via its main URI.  If the endpointURI above is not set, this setting has no effect.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td colspan="2">
+                            VitroConnection.DataSource.updateEndpointURI 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
                             Specify the email address of the root user
                             account for the VIVO application. This user will have an initial
                             temporary password of 'rootPassword'. You will be prompted to create a
@@ -574,21 +700,16 @@
                     <tr>
                         <td colspan="2">
                             If an external authentication system like Shibboleth or CUWebAuth is to be 
-                            used, these properties say how the login button should be labeled, and which  
-                            HTTP header will contain the user ID from the authentication system. If such 
-                            a system is not to be used, leave these commented out. Consult the installation  
-                            instructions for more details. 
+                            used, this property says which HTTP header will contain the user ID from 
+                            the authentication system. If such a system is not to be used, 
+                            leave this commented out.
                         </td>
                     </tr>
                     <tr class="odd_row">
                         <td>
-                            externalAuth.buttonText
-                            <br/>
                             externalAuth.netIdHeaderName
                         </td>
                         <td>
-                            Log in using BearCat Shibboleth
-                            <br/>
                             remote_userID 
                         </td>
                     </tr>
@@ -675,13 +796,17 @@
 
                     <tr>
                         <td colspan="2">
-							Show only the most appropriate data values based on the Accept-Language 
-							header supplied by the browser.  Default is true if not set.
+                            Tell VIVO to generate HTTP headers on its responses to facilitate caching the 
+                            profile pages that it creates. This can improve performance, but it can also
+                            result in serving stale data. Default is false if not set.
+                            For more information, see the VIVO wiki page: 
+                            <a href="https://wiki.duraspace.org/display/VIVO/Use+HTTP+caching+to+improve+performance">
+                            Use HTTP caching to improve performance </a>
                         </td>
                     </tr>
                     <tr class="odd_row">
                         <td>
-                          RDFService.languageFilter
+                          http.createCacheHeaders
                         </td>
                         <td>
                            true
@@ -690,37 +815,93 @@
 
                     <tr>
                         <td colspan="2">
-							These values are used when deploying VIVO as an OpenSocial container
-							and integrating with OpenSocial gadgets 
-							(see <a href="#opensocial">Step XII</a>, below). If you are creating
-							a VIVO installation that does not use OpenSocial gadgets, these values are omitted.
+							Show only the most appropriate data values based on the Accept-Language 
+							header supplied by the browser.  Default is false if not set.
                         </td>
                     </tr>
-
                     <tr class="odd_row">
                         <td>
-                          OpenSocial.shindigURL<br>
-                          OpenSocial.tokenService<br>
-                          OpenSocial.tokenKeyFile<br>
-                          OpenSocial.sandbox
+                          RDFService.languageFilter
                         </td>
                         <td>
-                           &nbsp;
+                           false
                         </td>
                     </tr>
 
+                    <tr>
+                        <td colspan="2">
+                          Force VIVO to use a specific language or Locale instead of those 
+                          specified by the browser. 
+                          This affects RDF data retrieved from the model, if RDFService.languageFilter is true.  
+                          This also affects the text of pages that have been modified to support multiple languages. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                          languages.forceLocale
+                        </td>
+                        <td>
+                          en_US
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                          A list of supported languages or Locales that the user may choose to
+                          use instead of the one specified by the browser. Selection images must
+                          be available in the i18n/images directory of the theme.
+                          This affects RDF data retrieved from the model, if RDFService.languageFilter is true.  
+                          This also affects the text of pages that have been modified to support multiple languages. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                          languages.selectableLocales
+                        </td>
+                        <td>
+                           en, es, fr_FR
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                          On the VIVO home page, display a global map highlighting the geographical focus
+                          of foaf:person individuals. The default is <code>enabled</code>.
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                          homePage.geoFocusMaps = enabled
+                        </td>
+                        <td>
+                          enabled
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2">
+                          <b>MultiViews for foaf:person profile pages.</b>
+                          VIVO supports the simultaneous use of a full foaf:Person profile page view 
+                          and a "quick" page view that emphasizes the individual's own webpage presence.
+                          <b>Implementing this feature requires an installation to develop a web service
+                          that captures images of web pages or to use an existing service outside of VIVO, 
+                          usually for a small fee.</b>
+                          The default is <code>disabled</code>.
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                          MultiViews.profilePageTypes=disabled
+                        </td>
+                        <td>
+                          disabled
+                        </td>
+                    </tr>
+                    
                 </tbody>
             </table>
-            <h3 id="deploy">V. Compile and deploy</h3>
-            <p>
-                At the command line, from the top level of the VIVO distribution 
-                directory, type: 
-            </p>
-            <pre>                ant all<br>            </pre>
-            <p>
-                to build VIVO and deploy to Tomcat's webapps directory. 
-            </p>
-            <h3 id="tomcat_settings">VI. Configure Tomcat</h3>
+
+            <h3 id="tomcat_settings">7. Configure Tomcat</h3>
             <h4>Set JVM parameters</h4>
             <p>
                 VIVO copies small sections of your RDF database into 
@@ -763,7 +944,7 @@
                 accepting percent-encoded UTF-8.
             </p>
             <p>
-                Edit Tomcat's conf/server.xml and add the following attribute to each of the 
+                Edit Tomcat's <code>conf/server.xml</code> and add the following attribute to each of the 
                 Connector elements: URIEncoding="UTF-8".
             </p>
             <pre>
@@ -775,6 +956,9 @@
                       &lt;/Service&gt;
                     &lt;/Server&gt;
             </pre>
+            <p>
+                Note: some versions of Tomcat already include this attribute as the default.
+            </p>
             <h4>Take care when creating Context elements</h4>
             <p>
                 Each of the webapps in the VIVO distribution (VIVO and
@@ -789,11 +973,11 @@
                 from the overridden context fragment.
             </p>
             <p>
-                See <a href="#tomcat_connector">Step X</a> below, 
+                See <a href="#httpd">Step 11</a> below, 
                 for an example of overriding the VIVO context fragment.
             </p>
 
-            <h3 id="start_tomcat">VII. Start Tomcat </h3>
+            <h3 id="start_tomcat">8. Start Tomcat </h3>
             <p>
                 Most Tomcat installations can be started by running <code>startup.sh</code>
                 or <code>startup.bat</code> in Tomcat's bin directory. Point your
@@ -805,9 +989,9 @@
                problem is detected the normal VIVO pages will redirect
                to a startup status page describing the problem. You
                can stop tomcat, attempt to fix the problem and
-               proceeded from <a href="#deploy">Step V</a>. The
-               startup status page may offer a continue link which
-               will allow you to use VIVO inspite of the problems.
+               proceed from <a href="#deploy">Step 5</a>. If the problem is not serious, the
+               startup status page may offer a <code>continue</code> link which
+               will allow you to use VIVO in spite of the problems.
 
             <p>
                 If Tomcat does not start up, or the VIVO application
@@ -817,7 +1001,7 @@
                 or <code>tomcat/logs/vivo.all.log</code>
                 or <code>tomcat/logs/localhost.log</code>
             </p>
-            <h3 id="add_rdf">VIII. Log in and add RDF data </h3>
+            <h3 id="add_rdf">9. Log in and add RDF data </h3>
             <p>
                 If the startup was successful, you will see a welcome
                 message informing you that you have successfully
@@ -863,7 +1047,7 @@
                 See more documentation for configuring VIVO, ingesting data, and 
                 manually adding data at <a href="http://vivoweb.org/support">http://vivoweb.org/support</a>.
             </p>
-            <h3 id="contact_email">IX. Set the Contact Email Address (if using
+            <h3 id="contact_email">10. Set the Contact Email Address (if using
                 "Contact Us" form)</h3>
             <p>
                 If you have configured your application to use the "Contact Us"
@@ -885,44 +1069,23 @@
                 provide an email address in this step, your users will receive a java  
                 error in the interface. 
             </p>
-            <h3 id="tomcat_connector">X. Set up Apache Tomcat Connector </h3>
+            <h3 id="httpd">11. Set up HTTPD </h3>
+
             <p>
-                It is recommended that a Tomcat Connector such as mod_jk be used to 
-                ensure that the site address does not include the port number (e.g. 
-                8080) and an additional reference to the Tomcat context name (e.g.  
-                /vivo). 
+                It is recommended to run an Apache HTTPD web server to accept requests
+                and then proxy them to the VIVO Tomcat context. This will make Vitro
+                available at "http://example.com" instead of "http://example.com:8080/vitro".
+                It will also allow the use of external authentication.
             </p>
             <p>
-                This will make VIVO available at "http://example.com" instead of 
-                "http://example.com:8080/vivo" 
+                Setup HTTPD to send all of the requests that it receives to Tomcat's AJP
+                connector. This can be done in HTTPD 2.x with a simple directive in httpd.conf:
             </p>
+            <pre>     ProxyPass / ajp://localhost:8009/ <br><br></pre>
             <p>
-                Using the mod_jk connector allows for communication between Tomcat 
-                and the primary web server. The <a href="http://tomcat.apache.org/connectors-doc/generic_howto/quick.html">Quick
-                    Start
-                    HowTo</a>
-                on the Apache site describes the minimum server 
-                configurations for several popular web servers. 
-            </p>
-            <p>
-                After setting up the mod_jk connector above, you will need to 
-                modify the Tomcat's server.xml (located in <code>[tomcat root]/conf/</code>)
-                to
-                respond 
-                to 
-                requests from Apache via the connector. Look for the  
-                &lt;connector&gt; directive and add the following properties: 
-            </p>
-            <pre>                connectionTimeout="20000" maxThreads="320" keepAliveTimeout="20000"&nbsp; <br>            </pre>
-            <p>
-                Note: the value for maxThreads (320) is equal to the value for 
-                MaxClients in the apache's <code>httpd.conf</code>
-                file. 
-            </p>
-            <p>
-                Locate the <code>&lt;Host name="localhost"...&gt;</code>
-                directive 
-                and update as follows: 
+                Modify the &lt;Host&gt; in Tomcat server.xml (located in <code>[tomcat root]/conf/</code>)
+                so that the context path is empty to allow VIVO to be servred from the root path.
+                Locate the <code>&lt;Host name="localhost"...&gt;</code> directive and update as follows: 
             </p>
             <pre>              &lt;Host name="localhost" appBase="webapps"
                        DeployOnStartup="false"
@@ -932,22 +1095,27 @@
                    &lt;Alias&gt;example.com&lt;/Alias&gt;
                    
                    &lt;Context path=""
-                           docBase="/usr/local/tomcat/webapps/vivo"
+                           docBase="/usr/local/tomcat/webapps/vitro"
                            reloadable="true"
                            cookies="true" &gt;
                    
                        &lt;Manager pathname="" /&gt;
-                   
-                       &lt;Environment type="java.lang.String" override="false"
-                               name="path.configuration"
-                               value="deploy.properties"
-                       /&gt;
                    &lt;/Context&gt;
                   
                    ...
             </pre>
+            <p>
+                After setting up the above, it is recommended that you modify the Tomcat AJP connector
+                parameters in server.xml. Look for the &lt;connector&gt; directive and add the
+                following properties: 
+            </p>
+            <pre>    connectionTimeout="20000" maxThreads="320" keepAliveTimeout="20000"&nbsp;<br><br></pre>
+            <p>
+                Note: the value for maxThreads (320) is equal or greater than the value for 
+                MaxClients in the apache's <code>httpd.conf</code> file. 
+            </p>
 
-            <h3 id="external_auth">XI. Using an External Authentication System 
+            <h3 id="external_auth">12. Using an External Authentication System 
                 with VIVO </h3>
             <p>
             </p>
@@ -984,7 +1152,7 @@
             <h4>Configuring VIVO</h4>
             <p>
                 To enable external authentication, VIVO requires three values in 
-                the <code>deploy.properties</code>
+                the <code>runtime.properties</code>
                 file. 
             </p>
             <ul>
@@ -999,7 +1167,7 @@
                     </p>
                     <p>
                         You need to tell VIVO the name of that HTTP header. Insert a 
-                        line like this in the deploy.properties file: 
+                        line like this in the runtime.properties file: 
                     </p>
                     <pre>externalAuth.netIdHeaderName = [the header name]</pre>
                     <p>
@@ -1013,13 +1181,18 @@
                     the VIVO login form. You need to tell VIVO what text should appear in
                     that button.
                     <p>
-                        Put a line like this in the deploy.properties file:
-                        externalAuth.buttonText = [the text for your login button] For example:
-                    </p>
-                    <pre>externalAuth.buttonText = Log in using BearCat Shibboleth</pre>
-                    <p>
+                        In your theme, add a line to the <code>all.properties</code> file,
+                        like this one: 
+                        <pre>external_login_text = <em>[the text for your login button]</em></pre>
+                        For example:
+                        <pre>external_login_text = Log in using BearCat Shibboleth</pre>
                         The VIVO login form will display a button labelled "Log in 
                         using BearCat Shibboleth". 
+                    </p>
+                    <p>
+                    	If your site supports additional languages, add lines to the corresponding files.
+                    	For example, <code>all_es.properties</code> might contain this line:
+                    	<pre>external_login_text = Entrar usando Shibboleth GatoOso</pre>
                     </p>
                 </li>
                 <li>
@@ -1030,7 +1203,7 @@
                         data model for a person with a property that matches the User’s network 
                         ID (the value of the property must be either a String literal or an 
                         untyped literal). You need to tell VIVO what property should be used  
-                        for matching. Insert a line like this in the deploy.properties file: 
+                        for matching. Insert a line like this in the runtime.properties file: 
                     </p>
                     <pre>selfEditing.idMatchingProperty = [the URI of the property]</pre>
                     <p>
@@ -1040,7 +1213,7 @@
                 </li>
             </ul>
             
-            <h3 id="opensocial">XII. Using VIVO as an OpenSocial platform </h3>
+            <h3 id="opensocial">13. Using VIVO as an OpenSocial platform </h3>
             <p>
             	VIVO now supports an extension of the OpenSocial API, 
             	known as Open Research Networking Gadgets, or ORNG (pronounced "ORNG")
@@ -1056,18 +1229,18 @@
             	<a href="setting_up_orng.html">setting_up_orng.html</a> in this directory.
             </p>
             
-            <h3 id="installation_check">XIII. Was the installation successful? </h3>
+            <h3 id="installation_check">14. Was the installation successful? </h3>
             <p>
                 If you have completed the previous steps, you have good indications 
                 that the installation was successful. 
             </p>
             <ul>
                 <li>
-                    Step VII showed that Tomcat recognized the webapp, and that the 
+                    Step 8 showed that Tomcat recognized the webapp, and that the 
                     webapp was able to present the initial page. 
                 </li>
                 <li>
-                    Step VIII verified that you can log in to the administrator 
+                    Step 9 verified that you can log in to the administrator 
                     account. 
                 </li>
             </ul>
@@ -1149,13 +1322,21 @@
                     index</strong>.
                 </li>
             </ul>
-            <h3 id="termsofuse">XIII. Review the VIVO Terms of Use</h3>
+            <h3 id="termsofuse">15. Review the VIVO Terms of Use</h3>
             <p>
                 VIVO comes with a "Terms of Use" statement linked from the footer. 
                 The "Site Name" you assign in the "Site Information" form under the <strong>Site Admin</strong>
                 area will be inserted into the "Terms of Use" 
                 statement.  If you want to edit the text content more than just  the 
-                "Site Name", the file can be found here:<pre>[vivo_source_dir]/vitro-core/webapp/web/templates/freemarker/body/termsOfUse.ftl</pre>
+                "Site Name", the file can be found here:
+                <pre>[vivo_source_dir]/vitro-core/webapp/web/templates/freemarker/body/termsOfUse.ftl</pre>
+            </p>
+            <p>
+            	Your "Terms of Use" statement is also referenced in the Linked Open Data (RDF) 
+            	that your site produces, so you should be sure that it accurately reflects 
+            	the way that your data may be used.
+            </p>
+            <p>
                 Be sure to make the changes in your source files and deploy them to your 
                 tomcat so you don't lose your changes next time you deploy for another reason.
             </p>

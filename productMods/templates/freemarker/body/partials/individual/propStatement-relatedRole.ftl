@@ -1,8 +1,6 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#-- Custom object property statement view for http://vivoweb.org/ontology/core#relatedRole and
-     http://vivoweb.org/ontology/core#linkedRole. 
-    
+<#-- 
      This template must be self-contained and not rely on other variables set for the individual page, because it
      is also used to generate the property statement during a deletion.  
  -->
@@ -18,10 +16,10 @@
   
     <#local linkedIndividual>
         <#if statement.indivInRole??>
-            <a href="${profileUrl(statement.uri("indivInRole"))}" title="name">${statement.indivLabel!statement.indivName}</a>
+            <a href="${profileUrl(statement.uri("indivInRole"))}" title="${i18n().name}">${statement.indivLabel!statement.indivName}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.uri("role"))}"  title="missing person">missing person in this role</a>
+            <a href="${profileUrl(statement.uri("role"))}"  title="${i18n().missing_person_in_role}">${i18n().missing_person_in_role}</a>
         </#if>
     </#local>
 
@@ -30,25 +28,16 @@
          so use the type label instead if not collated by subclass.
     -->
     <#local roleLabel>
-    <#-- 
-            Display, e.g., "Principal Investigator" for "Principal Investigator Role", "Editor" for "Editor Role".
-            This information is redundant if the property is collated, since it appears in the subclass label.
-    -->
        
         <#if statement.roleTypeLabel?has_content>
-            <#assign roleTypeLabel = statement.roleTypeLabel >
-        <#else>
-            <#assign roleTypeLabel = "" >
+            <#assign roleTypeLabel = statement.roleTypeLabel!"" >
         </#if>
-        <#if statement.roleLabel?has_content>
-            <#if statement.roleLabel?lower_case?replace(" role", "") != roleTypeLabel?lower_case?replace(" role", "")>
-                ${statement.roleLabel?replace(" Role", "")}
-            </#if>
-        <#elseif (! property.collatedBySubclass ) && roleTypeLabel?has_content>
+        <#if statement.roleLabel??>
+            ${statement.roleLabel?replace(" Role", "")?replace(" role","")}
+        <#elseif !property.collatedBySubclass >
             ${roleTypeLabel?replace(" Role", "")}
         </#if>
     </#local>
 
-    ${linkedIndividual} ${roleLabel!} <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
-
+    ${linkedIndividual}&nbsp;${roleLabel!}&nbsp;<@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
 </#macro>

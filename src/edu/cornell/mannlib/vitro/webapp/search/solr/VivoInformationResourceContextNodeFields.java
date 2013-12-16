@@ -11,7 +11,7 @@ import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.ContextNode
 
 /**
  * Class that adds text from context nodes to Solr Documents for 
- * core:InformationResource individuals.
+ * obo:IAO_0000030 individuals.
  * 
  * @author bdc34
  *
@@ -30,12 +30,13 @@ public class VivoInformationResourceContextNodeFields extends ContextNodeFields{
       + " prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  "
       + " prefix core: <http://vivoweb.org/ontology/core#>  "
       + " prefix foaf: <http://xmlns.com/foaf/0.1/> "
+      + " prefix obo: <http://purl.obolibrary.org/> "
       + " prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> "
       + " prefix localNav: <http://vitro.mannlib.cornell.edu/ns/localnav#>  "
       + " prefix bibo: <http://purl.org/ontology/bibo/>  ";
   
 
-  //queries for core:InformationResource
+  //queries for obo:IAO_0000030
   static {
       
         /* linked author labels */
@@ -43,8 +44,11 @@ public class VivoInformationResourceContextNodeFields extends ContextNodeFields{
         queriesForInformationResource
                 .add(prefix
                         + "SELECT (str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {"
-                        + " ?uri rdf:type core:InformationResource . "
-                        + "?uri core:informationResourceInAuthorship ?a . ?a core:linkedAuthor ?b ."
+                        + "?uri rdf:type obo:IAO_0000030 . "
+                        + "?uri core:relatedBy ?a . "
+                        + "?a rdf:type core:Authorship ."
+                        + "?a core:relates ?b ."
+                        + "?b rdf:type foaf:Agent ."
                         + "?b rdfs:label ?ContextNodeProperty .}");
 
         /* features */
@@ -52,7 +56,7 @@ public class VivoInformationResourceContextNodeFields extends ContextNodeFields{
         queriesForInformationResource
                 .add(prefix
                         + "SELECT (str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {"
-                        + "?uri rdf:type core:InformationResource . "
+                        + "?uri rdf:type obo:IAO_0000030 . "
                         + "?uri core:features ?i . ?i rdfs:label ?ContextNodeProperty ."
                         + "}");
 
@@ -61,8 +65,12 @@ public class VivoInformationResourceContextNodeFields extends ContextNodeFields{
         queriesForInformationResource
                 .add(prefix
                         + "SELECT (str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {"
-                        + "?uri rdf:type core:InformationResource . "
-                        + "?uri bibo:editor ?e . ?e rdfs:label ?ContextNodeProperty  ."
+                        + "?uri rdf:type obo:IAO_0000030 . "
+                        + "?uri core:relatedBy ?e . "
+                        + "?e rdf:type core:Editorship  ."
+                        + "?e core:relates ?i  ."
+                        + "?i rdf:type foaf:Agent ."
+                        + "?i rdfs:label ?ContextNodeProperty  ."
                         + "}");
 
         /* subject area */
@@ -70,7 +78,7 @@ public class VivoInformationResourceContextNodeFields extends ContextNodeFields{
         queriesForInformationResource
                 .add(prefix
                         + "SELECT (str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {"
-                        + "?uri rdf:type core:InformationResource . "
+                        + "?uri rdf:type obo:IAO_0000030 . "
                         + "?uri core:hasSubjectArea ?f . ?f rdfs:label ?ContextNodeProperty ."
                         + "}");              
     }

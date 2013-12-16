@@ -1,10 +1,12 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
+$.extend(this, i18nStrings);
+
 var DataTableWidget = Class.extend({
 	
 	dom: {
-		firstFilterLabel: "554 Subdisciplines",
-		secondFilterLabel: "13 Disciplines",
+		firstFilterLabel: "554 " + i18nStrings.subdisciplinesString,
+		secondFilterLabel: "13 " + i18nStrings.disciplinesString,
 		
 		searchBarParentContainerClass: "searchbar",
 		paginationContainerClass: "paginatedtabs",
@@ -118,22 +120,22 @@ var DataTableWidget = Class.extend({
 		var tr = $('<tr>');
 		
 		var levelOfScienceAreaTH = $('<th>');
-		levelOfScienceAreaTH.html('Level of Science Area');
+		levelOfScienceAreaTH.html(i18nStrings.scienceAreaLevel);
 		
 		var scienceAreasTH = $('<th>');
 		scienceAreasTH.attr("id", "science-areas-th");
 		if (this.currentSelectedFilter === SCIMAP_TYPE.SUBDISCIPLINE ) {
-			scienceAreasTH.html('Subdisciplines');
+			scienceAreasTH.html(i18nStrings.subdisciplinesString);
 		} else {
-			scienceAreasTH.html('Disciplines');
+			scienceAreasTH.html(i18nStrings.disciplinesString);
 		}
 		
 		var activityCountTH = $('<th>');
-		activityCountTH.html('# of pubs.');
+		activityCountTH.html('# ' + i18nStrings.numberOfPubs);
 		activityCountTH.attr("id", "activity-count-column");
 
 		var percentageActivityTH = $('<th>');
-		percentageActivityTH.html('% of activity');
+		percentageActivityTH.html('% ' + i18nStrings.ofActivityString);
 		percentageActivityTH.attr("id", "percentage-activity-column");
 
 		tr.append(levelOfScienceAreaTH);
@@ -209,7 +211,7 @@ var DataTableWidget = Class.extend({
 		    "bInfo": true,
 		    "oLanguage": {
 				"sInfo": "_START_ - _END_ of _TOTAL_",
-				"sInfoEmpty": "No matching science areas found",
+				"sInfoEmpty": i18nStrings.noMatchingScienceAreas,
 				"sInfoFiltered": ""
 			},
 		    "sPaginationType": "gmail_style",
@@ -227,8 +229,9 @@ var DataTableWidget = Class.extend({
 		
 		var searchInputBox = $("." + me.dom.searchBarParentContainerClass).find("input[type=text]");
 		searchInputBox.css("width", "140px");
-		searchInputBox.after("<span id='reset-search' title='Clear search query'>X</span>" 
-								+ "<img class='filterInfoIcon' id='searchInfoIcon' src='" + infoIconUrl + "' alt='information icon' title='' />");
+		searchInputBox.after("<span id='reset-search' title='" + i18nStrings.clearSearchQuery + "'>X</span>" 
+								+ "<img class='filterInfoIcon' id='searchInfoIcon' src='" + infoIconUrl 
+								+ "' alt='" + i18nStrings.infoIconString + "' title='' />");
 		$("#reset-search").live('click', function() {
 			me.widget.fnFilter("");
 		});
@@ -236,7 +239,7 @@ var DataTableWidget = Class.extend({
 		
 		var csvButton = '<hr class="subtle-hr"/><div id="main-science-areas-table-footer"><a id="csv" href="' +
 						entityMapOfScienceSubDisciplineCSVURL + 
-						'" class="map-of-science-links">Save All as CSV</a></div>';
+						'" class="map-of-science-links">' + i18nStrings.saveAllAsCSV + '</a></div>';
 		this.tableDiv.append(csvButton);
 		
 		var totalPublications = me.pubsWithNoJournals + me.pubsWithInvalidJournals + me.pubsMapped;
@@ -249,7 +252,7 @@ var DataTableWidget = Class.extend({
 		var me = this;
 		if (filterType === SCIMAP_TYPE.SUBDISCIPLINE) {
 			
-			$("#science-areas-th").html("Subdisciplines");
+			$("#science-areas-th").html(i18nStrings.subdisciplinesString);
 			if (me.widget) {
 				me.widget.fnSettings()._iDisplayLength = 10;
 			}
@@ -258,7 +261,7 @@ var DataTableWidget = Class.extend({
 			
 		} else {
 			
-			$("#science-areas-th").html("Disciplines");
+			$("#science-areas-th").html(i18nStrings.disciplinesString);
 			me.currentSelectedFilter = SCIMAP_TYPE.DISCIPLINE;
 			if (me.widget) {
 				me.widget.fnSettings()._iDisplayLength = 13;

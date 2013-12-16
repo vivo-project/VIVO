@@ -56,7 +56,7 @@ public abstract class RoleToPredicatePreprocessor extends BaseEditSubmissionPrep
     //Instantiate itemType etc. based on which version of preprocessor required
     abstract protected void setupVariableNames();
 
-	public void preprocess(MultiValueEditSubmission submission) {
+	public void preprocess(MultiValueEditSubmission submission, VitroRequest vreq) {
     	//Query for all statements using the original roleIn predicate replace
     	//with the appropriate roleRealizedIn or roleContributesTo
     	//In addition, need to ensure the inverse predicate is also set correctly

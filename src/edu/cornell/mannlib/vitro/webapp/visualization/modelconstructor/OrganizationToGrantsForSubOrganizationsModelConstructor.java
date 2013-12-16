@@ -40,7 +40,7 @@ public class OrganizationToGrantsForSubOrganizationsModelConstructor implements 
 		this.dataset = dataset;
 	}
 	
-	private Set<String> constructOrganizationGrantsQueryTemplate(String constructProperty, String roleTypeProperty) {
+	private Set<String> constructOrganizationGrantsQueryTemplate(String constructProperty, String roleType) {
 		
 		Set<String> differentPerspectiveQueries = new HashSet<String>();
 		
@@ -56,11 +56,16 @@ public class OrganizationToGrantsForSubOrganizationsModelConstructor implements 
 		+ " } "
 		+ " WHERE { "
 		+ "     <" + organizationURI + "> rdfs:label ?organizationLabel . "
-		+ "     <" + organizationURI + "> core:hasSubOrganization* ?subOrganization . "
-		+ "     ?subOrganization core:organizationForPosition ?Position .  "
-		+ "     ?Position core:positionForPerson ?Person .        "
-		+ "     ?Person core:" + roleTypeProperty + " ?Role .  "
-		+ "     ?Role core:roleContributesTo ?Grant . "
+		+ "     <" + organizationURI + "> <http://purl.obolibrary.org/obo/BFO_0000051>* ?subOrganization . "
+        + "     ?subOrganization rdf:type foaf:Organization .  "
+		+ "     ?subOrganization core:relatedBy ?Position .  "
+		+ "     ?Position rdf:type core:Position .  "
+		+ "     ?Position core:relates ?Person .  "
+		+ "     ?Person  rdf:type foaf:Person .  "
+		+ "     ?Person <http://purl.obolibrary.org/obo/RO_0000053> ?Role .  "
+	    + "     ?Role rdf:type core:" + roleType + " . "
+		+ "     ?Role core:relatedBy ?Grant . "
+		+ "     ?Grant rdf:type core:Grant . "
 		+ "     ?Grant rdfs:label ?grantLabel . "
 		+ "      "
 		+ "     LET(?now := afn:now()) "
@@ -77,11 +82,16 @@ public class OrganizationToGrantsForSubOrganizationsModelConstructor implements 
 			+ " } "
 			+ " WHERE { "
 			+ "     <" + organizationURI + "> rdfs:label ?organizationLabel . "
-			+ "     <" + organizationURI + "> core:hasSubOrganization* ?subOrganization . "
-			+ "     ?subOrganization core:organizationForPosition ?Position .  "
-			+ "     ?Position core:positionForPerson ?Person .        "
-			+ "     ?Person core:" + roleTypeProperty + " ?Role .  "
-			+ "     ?Role core:roleContributesTo ?Grant . "
+			+ "     <" + organizationURI + "> <http://purl.obolibrary.org/obo/BFO_0000051>* ?subOrganization . "
+            + "     ?subOrganization rdf:type foaf:Organization .  "
+		    + "     ?subOrganization core:relatedBy ?Position .  "
+		    + "     ?Position rdf:type core:Position .  "
+	        + "     ?Position core:relates ?Person .  "
+	        + "     ?Person  rdf:type foaf:Person .  "
+    		+ "     ?Person <http://purl.obolibrary.org/obo/RO_0000053> ?Role .  "
+    	    + "     ?Role rdf:type core:" + roleType + " . "
+    		+ "     ?Role core:relatedBy ?Grant . "
+    		+ "     ?Grant rdf:type core:Grant . "
 			+ "      "
 			+ "         ?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant .          "
 //			+ "         OPTIONAL { "
@@ -106,11 +116,16 @@ public class OrganizationToGrantsForSubOrganizationsModelConstructor implements 
 			+ " } "
 			+ " WHERE { "
 			+ "     <" + organizationURI + "> rdfs:label ?organizationLabel . "
-			+ "     <" + organizationURI + "> core:hasSubOrganization* ?subOrganization . "
-			+ "     ?subOrganization core:organizationForPosition ?Position .  "
-			+ "     ?Position core:positionForPerson ?Person .        "
-			+ "     ?Person core:" + roleTypeProperty + " ?Role .  "
-			+ "     ?Role core:roleContributesTo ?Grant . "
+			+ "     <" + organizationURI + "> <http://purl.obolibrary.org/obo/BFO_0000051>* ?subOrganization . "
+            + "     ?subOrganization rdf:type foaf:Organization .  "
+		    + "     ?subOrganization core:relatedBy ?Position .  "
+		    + "     ?Position rdf:type core:Position .  "
+	        + "     ?Position core:relates ?Person .  "
+	        + "     ?Person  rdf:type foaf:Person .  "
+    		+ "     ?Person <http://purl.obolibrary.org/obo/RO_0000053> ?Role .  "
+    	    + "     ?Role rdf:type core:" + roleType + " . "
+    		+ "     ?Role core:relatedBy ?Grant . "
+    		+ "     ?Grant rdf:type core:Grant . "
 			+ "      "
 			+ "         ?Role core:dateTimeInterval ?dateTimeIntervalValue . "
 //			+ "         OPTIONAL { "
@@ -137,9 +152,9 @@ public class OrganizationToGrantsForSubOrganizationsModelConstructor implements 
 
 		Set<String> differentInvestigatorTypeQueries = new HashSet<String>();
 		
-		Set<String> investigatorRoleQuery = constructOrganizationGrantsQueryTemplate("hasInvestigatorWithGrant", "hasInvestigatorRole");
-		Set<String> piRoleQuery = constructOrganizationGrantsQueryTemplate("hasPIWithGrant", "hasPrincipalInvestigatorRole");
-		Set<String> coPIRoleQuery = constructOrganizationGrantsQueryTemplate("hascoPIWithGrant", "hasCo-PrincipalInvestigatorRole");
+		Set<String> investigatorRoleQuery = constructOrganizationGrantsQueryTemplate("hasInvestigatorWithGrant", "InvestigatorRole");
+		Set<String> piRoleQuery = constructOrganizationGrantsQueryTemplate("hasPIWithGrant", "PrincipalInvestigatorRole");
+		Set<String> coPIRoleQuery = constructOrganizationGrantsQueryTemplate("hascoPIWithGrant", "CoPrincipalInvestigatorRole");
 
 		differentInvestigatorTypeQueries.addAll(investigatorRoleQuery);
 		differentInvestigatorTypeQueries.addAll(piRoleQuery);

@@ -5,35 +5,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>AddLibrarianRoles1</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AddLibrarianRoles1</td></tr>
+<tr><td rowspan="1" colspan="3">AddLibrarianRoles1</td></tr>
 </thead><tbody>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add 3 roles for Lily Librarian</td>
-	<td></td>
-</tr>
+<!--Add 3 roles for Lily Librarian-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must be logged off to start</td>
-	<td></td>
-</tr>
+<!--Must be logged off to start-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must login as the site admin</td>
-	<td></td>
-</tr>
+<!--Must login as the site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -89,11 +59,7 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Jane Faculty</td>
-	<td></td>
-</tr>
+<!--Navigate to Jane Faculty-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -119,11 +85,7 @@
 	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Start to add presentation and cancel out</td>
-	<td></td>
-</tr>
+<!--Start to add presentation and cancel out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='hasPresenterRole']/a/img</td>
@@ -154,11 +116,7 @@
 	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select presentation type then cancel out</td>
-	<td></td>
-</tr>
+<!--Select presentation type then cancel out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='hasPresenterRole']/a/img</td>
@@ -204,11 +162,7 @@
 	<td>link=Cancel</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Start to add presentation again, but enter no required field</td>
-	<td></td>
-</tr>
+<!--Start to add presentation again, but enter no required field-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Create presentation entry for Librarian, Lily</td>
@@ -259,11 +213,7 @@
 	<td>Please enter a new value in the Role field. </td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Start to add presentation again, but enter only first required field</td>
-	<td></td>
-</tr>
+<!--Start to add presentation again, but enter only first required field-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Create presentation entry for Librarian, Lily</td>
@@ -314,11 +264,7 @@
 	<td>Please enter a new value in the Role field. </td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add presentation correctly</td>
-	<td></td>
-</tr>
+<!--Add presentation correctly-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Create presentation entry for Librarian, Lily</td>
@@ -369,11 +315,7 @@
 	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate back to Lily Librarian</td>
-	<td></td>
-</tr>
+<!--Navigate back to Lily Librarian-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -399,11 +341,7 @@
 	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add presentation type of invited talk</td>
-	<td></td>
-</tr>
+<!--Add presentation type of invited talk-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='hasPresenterRole']/a/img</td>
@@ -479,11 +417,7 @@
 	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate back to Lily Librarian</td>
-	<td></td>
-</tr>
+<!--Navigate back to Lily Librarian-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -509,11 +443,7 @@
 	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify presentations display</td>
-	<td></td>
-</tr>
+<!--Verify presentations display-->
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Animal Librarianship</td>
@@ -534,11 +464,7 @@
 	<td>Presenter 2009</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add service to the profession - college</td>
-	<td></td>
-</tr>
+<!--Add service to the profession - college-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='hasServiceProviderRole']/a/img</td>
@@ -619,11 +545,7 @@
 	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate back to Lily Librarian</td>
-	<td></td>
-</tr>
+<!--Navigate back to Lily Librarian-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -649,11 +571,7 @@
 	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add service to the profession - college</td>
-	<td></td>
-</tr>
+<!--Add service to the profession - college-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='hasServiceProviderRole']/a/img</td>
@@ -734,11 +652,7 @@
 	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate back to Lily Librarian</td>
-	<td></td>
-</tr>
+<!--Navigate back to Lily Librarian-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -764,11 +678,7 @@
 	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify that service to the profession displays</td>
-	<td></td>
-</tr>
+<!--Verify that service to the profession displays-->
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Primates of the World</td>
@@ -789,11 +699,7 @@
 	<td>Consultant 2010 -</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add outreach and community service - committee</td>
-	<td></td>
-</tr>
+<!--Add outreach and community service - committee-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='hasOutreachProviderRole']/a/img</td>
@@ -874,11 +780,7 @@
 	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate back to Lily Librarian</td>
-	<td></td>
-</tr>
+<!--Navigate back to Lily Librarian-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -904,11 +806,7 @@
 	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add outreach and community service - event</td>
-	<td></td>
-</tr>
+<!--Add outreach and community service - event-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='hasOutreachProviderRole']/a/img</td>
@@ -989,11 +887,7 @@
 	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate back to Lily Librarian</td>
-	<td></td>
-</tr>
+<!--Navigate back to Lily Librarian-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -1019,11 +913,7 @@
 	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify outreach and community service display</td>
-	<td></td>
-</tr>
+<!--Verify outreach and community service display-->
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Show Me the Primates!</td>
@@ -1044,11 +934,7 @@
 	<td>Chair 2009 -</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Log out</td>
-	<td></td>
-</tr>
+<!--Log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

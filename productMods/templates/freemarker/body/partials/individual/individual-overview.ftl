@@ -10,7 +10,7 @@
             <div class="overview-value">
                 ${statement.value}
             </div>
-            <@p.editingLinks "${overview.name}" statement editable />
+            <@p.editingLinks "${overview.name}" "" statement editable />
         </div>
     </#list>
 </#if>

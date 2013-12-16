@@ -1,6 +1,6 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#-- Custom object property statement view for http://vivoweb.org/ontology/core#awardOrHonor. 
+<#-- Custom object property statement view for faux property "awards and honors". See the PropertyConfig.3 file for details. 
     
      This template must be self-contained and not rely on other variables set for the individual page, because it
      is also used to generate the property statement during a deletion.  
@@ -15,7 +15,9 @@
  
     <#local linkedIndividual>
         <#if statement.award??>
-            <a href="${profileUrl(statement.uri("award"))}" title="award name">${statement.awardLabel!statement.localName!}</a>
+            <a href="${profileUrl(statement.uri("award"))}" title="${i18n().award_name}">${statement.awardLabel!}</a>
+        <#else>
+            <a href="${profileUrl(statement.uri("awardReceipt"))}" title="${i18n().award_receipt_name}">${statement.receiptLabel!}</a>
         </#if>
     </#local>
 
@@ -27,11 +29,12 @@
         </#if>
     </#local>
 
-    <#local conferredByOrg>
-        <#if statement.conferredBy?has_content && statement.conferredByLabel?has_content>
-             conferred by <a href="${profileUrl(statement.uri("conferredBy"))}" title="conferred by">${statement.conferredByLabel}</a>
+    <#local assignedByOrg>
+        <#if statement.assignedBy?has_content && statement.assignedByLabel?has_content>
+             ${i18n().conferred_by} <a href="${profileUrl(statement.uri("assignedBy"))}" title="${i18n().conferred_by}">${statement.assignedByLabel}</a>
         </#if>
     </#local>
 
-    <@s.join [ linkedIndividual, conferredByOrg!,  dateTimeVal! ] />
+    <@s.join [ linkedIndividual, assignedByOrg!,  dateTimeVal! ] />
+
  </#macro>

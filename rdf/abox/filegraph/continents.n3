@@ -1,0 +1,11 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix core: <http://vivoweb.org/ontology/core#> .
+@prefix geo: <http://aims.fao.org/aos/geopolitical.owl#> .
+
+geo:Africa rdf:type core:Continent .
+geo:Asia rdf:type core:Continent .
+geo:Australia_and_New_Zealand rdf:type core:Continent .
+geo:Europe rdf:type core:Continent .
+geo:South_America rdf:type core:Continent .
+geo:northern_America rdf:type core:Continent .
+geo:Antarctica rdf:type core:Continent .

@@ -5,35 +5,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>AdminBookmarkedPage</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AdminBookmarkedPage</td></tr>
+<tr><td rowspan="1" colspan="3">AdminBookmarkedPage</td></tr>
 </thead><tbody>
-<tr>
-	<td>comment</td>
-	<td class="comment">Test various login/logout processes</td>
-	<td></td>
-</tr>
+<!--Test various login/logout processes-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -44,11 +22,7 @@
 	<td>100000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Access secure bookmarked page without being logged in</td>
-	<td></td>
-</tr>
+<!--Access secure bookmarked page without being logged in-->
 <tr>
 	<td>open</td>
 	<td>/vivo/siteAdmin</td>
@@ -74,11 +48,7 @@
 	<td>Site Admin</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Now login and verify secure page is brought up</td>
-	<td></td>
-</tr>
+<!--Now login and verify secure page is brought up-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -119,11 +89,7 @@
 	<td>link=My profile</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify available options</td>
-	<td></td>
-</tr>
+<!--Verify available options-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Site Admin</td>
@@ -166,7 +132,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Restrict Logins</td>
+	<td>link=Restrict logins</td>
 	<td></td>
 </tr>
 <tr>
@@ -279,11 +245,7 @@
 	<td>link=Recompute inferences</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Go to Site Information and then logout</td>
-	<td></td>
-</tr>
+<!--Go to Site Information and then logout-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Site information</td>
@@ -319,11 +281,7 @@
 	<td>Log in</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify back on front page when logging back in</td>
-	<td></td>
-</tr>
+<!--Verify back on front page when logging back in-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -339,11 +297,7 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Go to a public page, logout, and log back in going to directly to public page</td>
-	<td></td>
-</tr>
+<!--Go to a public page, logout, and log back in going to directly to public page-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>

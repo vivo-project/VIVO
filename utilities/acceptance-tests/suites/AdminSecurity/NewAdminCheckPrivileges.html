@@ -5,35 +5,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>NewAdminFirstLogin</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">NewAdminFirstLogin</td></tr>
+<tr><td rowspan="1" colspan="3">NewAdminFirstLogin</td></tr>
 </thead><tbody>
-<tr>
-	<td>comment</td>
-	<td class="comment">Check privileges for new admin account</td>
-	<td></td>
-</tr>
+<!--Check privileges for new admin account-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged in already</td>
-	<td></td>
-</tr>
+<!--Must not be logged in already-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -74,11 +48,7 @@
 	<td>Log in</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Login as new Admin</td>
-	<td></td>
-</tr>
+<!--Login as new Admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -94,11 +64,7 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify new account is logged in and has access to correct options</td>
-	<td></td>
-</tr>
+<!--Verify new account is logged in and has access to correct options-->
 <tr>
 	<td>assertTitle</td>
 	<td>VIVO</td>
@@ -119,11 +85,7 @@
 	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify available options</td>
-	<td></td>
-</tr>
+<!--Verify available options-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Site Admin</td>
@@ -166,7 +128,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Restrict Logins</td>
+	<td>link=Restrict logins</td>
 	<td></td>
 </tr>
 <tr>
@@ -279,11 +241,7 @@
 	<td>link=Recompute inferences</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Make sure available Site Configuration options actually open up</td>
-	<td></td>
-</tr>
+<!--Make sure available Site Configuration options actually open up-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Institutional internal class</td>
@@ -371,7 +329,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Page Management</td>
+	<td>Page management</td>
 	<td></td>
 </tr>
 <tr>
@@ -546,7 +504,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Email Address</td>
+	<td>Email address</td>
 	<td></td>
 </tr>
 <tr>
@@ -569,11 +527,7 @@
 	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Make sure available Ontology Editor options actually open up</td>
-	<td></td>
-</tr>
+<!--Make sure available Ontology Editor options actually open up-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Class groups</td>
@@ -721,7 +675,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Property Groups</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
@@ -784,11 +738,7 @@
 	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Make sure available Advanced Data Tools options actually open up</td>
-	<td></td>
-</tr>
+<!--Make sure available Advanced Data Tools options actually open up-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Add/Remove RDF data</td>
@@ -969,11 +919,7 @@
 	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Make sure available Refresh Content options actually open up</td>
-	<td></td>
-</tr>
+<!--Make sure available Refresh Content options actually open up-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Rebuild search index</td>
@@ -991,7 +937,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Most recent update was at</td>
+	<td>The most recent update was at</td>
 	<td></td>
 </tr>
 <tr>
@@ -1059,11 +1005,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">log out</td>
-	<td></td>
-</tr>
+<!--log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log out</td>

@@ -6,12 +6,12 @@
 <#if subjectName?contains(",") >
 <#assign lastName = subjectName?substring(0,subjectName?index_of(",")) />
 <#assign firstName = subjectName?substring(subjectName?index_of(",") + 1) />
-<h2>Manage Publications for ${firstName} ${lastName}</h2>
+<h2>${i18n().manage_publications_for} ${firstName} ${lastName}</h2>
 <#else>
-<h2>Manage Publications for ${subjectName}</h2>
+<h2>${i18n().manage_publications_for} ${subjectName}</h2>
 </#if>
 <p style="margin-left:25px;margin-bottom:12px">
-Check those publications you want to exclude from the profile page.
+${i18n().check_pubs_to_exclude}
 <script type="text/javascript">
     var publicationData = [];
 </script>
@@ -21,13 +21,24 @@ Check those publications you want to exclude from the profile page.
 
        
     <#list allSubclasses as sub>
-    <h4>${sub}s</h4>
+    <h4>
+        <#if sub = "Software">
+            ${sub}
+        <#elseif sub = "Thesis">
+            ${i18n().theses_capitalized}
+        <#elseif sub = "Speech">
+            ${i18n().speeches_capitalized}
+        <#else>
+            ${sub}s
+        </#if>
+    </h4>
         <section id="pubsContainer" role="container">
         <#assign pubs = publications[sub]>
         <ul >
             <#list pubs as pub>
             <li>
-                <input type="checkbox" class="pubCheckbox" <#if pub.hideThis??>checked</#if> />${pub.title}
+                <input type="checkbox" class="pubCheckbox" <#if pub.hideThis??>checked</#if> />
+                <#if pub.title?has_content>${pub.title!}<#else>${i18n().title_not_found}</#if>
             </li>
             <script type="text/javascript">
                 publicationData.push({
@@ -42,12 +53,16 @@ Check those publications you want to exclude from the profile page.
 
 <br />    
 <p>
-    <a href="${urls.referringPage}#publications" title="return to profile page">Return to profile page</a>
+    <a href="${urls.referringPage}#publications" title="${i18n().return_to_profile}">${i18n().return_to_profile}</a>
 </p>
 
 <script type="text/javascript">
 var customFormData = {
     processingUrl: '${urls.base}/edit/primitiveRdfEdit'
+};
+var i18nStrings = {
+    publicationSuccessfullyExcluded: '${i18n().publication_successfully_excluded}',
+    errorExcludingPublication: '${i18n().error_excluding_publication}'
 };
 </script>
 

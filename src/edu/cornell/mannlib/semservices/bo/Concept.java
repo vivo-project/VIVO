@@ -2,6 +2,9 @@
 
 package edu.cornell.mannlib.semservices.bo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Concept {
 
    private String definedBy;
@@ -11,13 +14,23 @@ public class Concept {
    private String type;
    private String definition;
    private String uri;
-
+   private String schemeURI;
+   private List<String> broaderURIList;
+   private List<String> narrowerURIList;
+   private List<String> exactMatchURIList;
+   private List<String> closeMatchURIList;
+   private List<String> altLabelList;
+   
    /**
     * default constructor
     */
    public Concept() {
-
+      this.broaderURIList = new ArrayList<String>();
+      this.narrowerURIList = new ArrayList<String>();
+      this.exactMatchURIList = new ArrayList<String>();
+      this.closeMatchURIList = new ArrayList<String>();
    }
+   
    /**
     * @return the conceptId
     */
@@ -91,6 +104,18 @@ public class Concept {
       this.definedBy = definedBy;
    }
    /**
+    * @return the schemeURI
+    */
+   public String getSchemeURI() {
+      return schemeURI;
+   }
+   /**
+    * @param schemeURI the schemeURI to set
+    */
+   public void setSchemeURI(String schemeURI) {
+      this.schemeURI = schemeURI;
+   }
+   /**
     * @return the bestMatch
     */
    public String getBestMatch() {
@@ -102,5 +127,37 @@ public class Concept {
    public void setBestMatch(String bestMatch) {
       this.bestMatch = bestMatch;
    }
+public List<String> getBroaderURIList() {
+	return broaderURIList;
+}
+public void setBroaderURIList(List<String> broaderURIList) {
+	this.broaderURIList = broaderURIList;
+}
+public List<String> getNarrowerURIList() {
+	return narrowerURIList;
+}
+public void setNarrowerURIList(List<String> narrowerURIList) {
+	this.narrowerURIList = narrowerURIList;
+}
+public List<String> getExactMatchURIList() {
+	return exactMatchURIList;
+}
+public void setExactMatchURIList(List<String> exactMatchURIList) {
+	this.exactMatchURIList = exactMatchURIList;
+}
+public List<String> getCloseMatchURIList() {
+	return closeMatchURIList;
+}
+public void setCloseMatchURIList(List<String> closeMatchURIList) {
+	this.closeMatchURIList = closeMatchURIList;
+}
+
+public List<String> getAltLabelList() {
+	return altLabelList;
+}
+
+public void setAltLabelList(List<String> altLabelList) {
+	this.altLabelList = altLabelList;
+}
 
 }

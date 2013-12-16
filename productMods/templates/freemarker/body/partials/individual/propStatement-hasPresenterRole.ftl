@@ -1,6 +1,6 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#-- Custom object property statement view for http://vivoweb.org/ontology/core#hasPresenterRole.
+<#-- Custom object property statement view for faux property "presentations". See the PropertyConfig.3 file for details.
     
      This template must be self-contained and not rely on other variables set for the individual page, because it
      is also used to generate the property statement during a deletion.  
@@ -16,10 +16,10 @@
 <#macro showRole statement>
     <#local linkedIndividual>
         <#if statement.presentation??>
-            <a href="${profileUrl(statement.uri("presentation"))}" title="presentation name">${statement.presentationLabel!statement.presentationName}</a>
+            <a href="${profileUrl(statement.uri("presentation"))}" title="${i18n().presentation_name}">${statement.presentationLabel!statement.presentationName!""}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.uri("role"))}" title="missing presentation">missing presentation</a>
+            <a href="${profileUrl(statement.uri("role"))}" title="${i18n().missing_presentation}">${i18n().missing_presentation}</a>
         </#if>
     </#local>
     
@@ -29,9 +29,9 @@
     
     <#local conference>
         <#if statement.conference?has_content && statement.conferenceLabel?has_content>
-            <a href="${profileUrl(statement.uri("conference"))}" title="conference">${statement.conferenceLabel}</a>
+            <a href="${profileUrl(statement.uri("conference"))}" title="${i18n().conference}">${statement.conferenceLabel}</a>
         <#elseif statement.series?has_content && statement.seriesLabel?has_content>
-            <a href="${profileUrl(statement.uri("series"))}" title="series">${statement.seriesLabel}</a>
+            <a href="${profileUrl(statement.uri("series"))}" title="${i18n().series}">${statement.seriesLabel}</a>
         </#if>
     </#local>
 

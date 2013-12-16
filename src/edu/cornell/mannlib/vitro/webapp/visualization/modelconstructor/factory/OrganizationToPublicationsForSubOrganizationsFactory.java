@@ -9,9 +9,14 @@ import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.Organizat
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.ConstructedModelTracker;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.ModelConstructor;
 
+import org.apache.commons.logging.LogFactory;
+import org.apache.commons.logging.Log;
+import java.util.concurrent.locks.Lock;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.CustomLock;
+
 public class OrganizationToPublicationsForSubOrganizationsFactory implements
 		ModelFactoryInterface {
-
+	private static final Log log = LogFactory.getLog(OrganizationToPublicationsForSubOrganizationsFactory.class.getName());
 	@Override
 	public Model getOrCreateModel(String uri, Dataset dataset)
 			throws MalformedQueryParametersException {
@@ -21,26 +26,39 @@ public class OrganizationToPublicationsForSubOrganizationsFactory implements
 				.generateModelIdentifier(
 						uri, 
 						OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE));
-		
+			
 		if (candidateModel != null) {
 			
 			return candidateModel;
 			
 		} else {
-		
-			ModelConstructor model = new OrganizationToPublicationsForSubOrganizationsModelConstructor(uri, dataset);
-			
-			Model constructedModel = model.getConstructedModel();
-			ConstructedModelTracker.trackModel(
-					ConstructedModelTracker
-						.generateModelIdentifier(
-								uri, 
-								OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE),
-								constructedModel);
-			
-			return constructedModel;
+			Lock customLock = CustomLock.getLock();
+			if (customLock.tryLock())	//Acquiring lock if available to construct the model
+			{
+				try
+				{
+                        	ModelConstructor model = new OrganizationToPublicationsForSubOrganizationsModelConstructor(uri, dataset);
+
+                        	Model constructedModel = model.getConstructedModel();
+                        	ConstructedModelTracker.trackModel(
+                                ConstructedModelTracker
+                                                .generateModelIdentifier(
+                                                                uri,
+                                                                OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE),
+                                                                constructedModel);
+                        	return constructedModel;
+				} finally {
+					customLock.unlock();
+				}
+			}
+			else
+			{
+				log.info("The Model construction process is going on");
+				return null;
+			}
+		}	
 		}
 	
 	}
 
-}
+

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-select>    
+        PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
+        
+        SELECT DISTINCT ?vcard ?phone
+                        ?number
+        WHERE {
+            ?subject ?property ?vcard .
+            ?vcard vcard:hasTelephone ?phone .
+            ?phone a vcard:Fax .
+            ?phone vcard:telephone ?number
+        } 
+    </query-select>
+       
+    <query-construct>
+        PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
+        CONSTRUCT { 
+            ?subject ?property ?vcard .
+            ?vcard vcard:hasTelephone ?phone .
+            ?phone a vcard:Fax .
+            ?phone ?phoneProperty ?phoneValue 
+        } WHERE {
+               ?subject ?property ?vcard .
+               ?vcard vcard:hasTelephone ?phone .
+               ?phone a vcard:Fax .
+               ?phone ?phoneProperty ?phoneValue 
+        } 
+    </query-construct>
+              
+    <template>propStatement-phoneFaxNumber.ftl</template>
+    <postprocessor>edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.MaintainDuplicatesObjectPropertyDataPostProcessor</postprocessor>
+</list-view-config>

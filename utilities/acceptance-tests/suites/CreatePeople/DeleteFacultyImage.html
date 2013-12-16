@@ -5,29 +5,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>DeleteFacultyImage</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">DeleteFacultyImage</td></tr>
+<tr><td rowspan="1" colspan="3">DeleteFacultyImage</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -39,11 +21,7 @@
 	<td>100000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Delete the uploaded picture for Jane Faculty in the backend</td>
-	<td></td>
-</tr>
+<!--Delete the uploaded picture for Jane Faculty in the backend-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged in</td>
-	<td></td>
-</tr>
+<!--Must not be logged in-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must log in as site admin</td>
-	<td></td>
-</tr>
+<!--Must log in as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -89,11 +59,7 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Jane Faculty</td>
-	<td></td>
-</tr>
+<!--Navigate to Jane Faculty-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -114,11 +80,7 @@
 	<td>link=Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify picture does exist</td>
-	<td></td>
-</tr>
+<!--Verify picture does exist-->
 <tr>
 	<td>assertTitle</td>
 	<td>Faculty, Jane</td>
@@ -129,11 +91,7 @@
 	<td>//img[@title='click to view larger image']@src</td>
 	<td>/vivo/file/*/thumbnail_Jane2.jpg</td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select to delete the picture</td>
-	<td></td>
-</tr>
+<!--Select to delete the picture-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//img[@alt='delete']</td>
@@ -179,11 +137,7 @@
 	<td>//img[@title='no image']</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Logout</td>
-	<td></td>
-</tr>
+<!--Logout-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

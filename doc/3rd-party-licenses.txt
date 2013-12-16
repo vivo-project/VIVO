@@ -24,6 +24,9 @@ dwr
 ezmorph
 gson
 jakarta-jstl
+jackson-annotations-2.3.0
+jackson-core-2.3.0
+jackson-databind-2.3.0
 jarjar
 jmeter
 joda-time
@@ -137,6 +140,7 @@ jai_core
 
 MIT
 ---
+amplify (licenses/mit.LICENSE.txt)
 BeanToJsonSerializer.java (licenses/mit.LICENSE.txt)
 blueprintcss (licenses/blueprintcss.LICENSE.txt)
 html5js (licenses/mit.LICENSE.txt)
@@ -175,7 +179,7 @@ googleanalytics (license/googleanalytics.LICENSE.txt)
 json (licenses/json.LICENSE.txt)
 jtidy (licenses/jtidy.LICENSE.txt)
 ojdbc (licenses/oracle.LICENSE.txt)
-
+leaflet (licenses/leaflet.LICENSE.txt)
 
 Unknown
 -------

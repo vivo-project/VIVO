@@ -4,6 +4,7 @@ package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesWithParent;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
 /**
  * Generates the edit configuration for adding a Role to a Person.  
@@ -46,8 +47,7 @@ public class AddEditorRoleToPersonGenerator extends AddRoleToPersonTwoStageGener
 
     @Override
     FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
-        return new 
-        ChildVClassesOptions(OPTION_CLASS_URI)
+        return new ChildVClassesOptions(OPTION_CLASS_URI)
             .setDefaultOptionLabel("Select type");
     }
     

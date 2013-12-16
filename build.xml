@@ -5,13 +5,15 @@
 <!-- ====================================================================== 
 	 Build script for the NIH VIVO product.
 	 
-	 The deploy.properties file contains both build properties and runtime 
-	 properties.
+	 The build.properties file contains build properties
+	 The runtime.properties file contains runtime properties.
 	     
 	 The required build properties are:
 	 	vitroCore.dir
-	    tomcat.home
 	    webapp.name
+	 A standard tomcat deploy also requires:
+	    vitro.home
+	    tomcat.home
 	     ====================================================================== -->
 <project name="nihvivo" default="describe">
 
@@ -23,18 +25,18 @@
 	<property name="appbase.dir" location="${build.dir}/appBase" />
 
 	<!--
-		Load the properties from deploy.properties.
+		Load the properties from build.properties.
 	-->
-	<property name="deploy.properties.file" location="deploy.properties" />
-	<fail message="You must create a &quot;${deploy.properties.file}&quot; file.">
+	<property name="build.properties.file" location="build.properties" />
+	<fail message="You must create a &quot;${build.properties.file}&quot; file.">
 		<condition>
 			<not>
-				<available file="${deploy.properties.file}" />
+				<available file="${build.properties.file}" />
 			</not>
 		</condition>
 	</fail>
-	<property file="${deploy.properties.file}" />
-	<fail unless="vitro.core.dir" message="${deploy.properties.file} must contain a value for vitro.core.dir" />
+	<property file="${build.properties.file}" />
+	<fail unless="vitro.core.dir" message="${build.properties.file} must contain a value for vitro.core.dir" />
 
 	<!--
 		Base it all on the core build file. 
@@ -46,7 +48,7 @@
           
           Override the core version, so we can merge the two levels before building.                      
          - - - - - - - - - - - - - - - - - -->
-	<target name="prepare" depends="compileUtilities,product-prepare,vitroCore.prepare" />
+	<target name="prepare" depends="product-prepare,vitroCore.prepare" />
 
 	<!-- - - - - - - - - - - - - - - - - - 
           target: product-prepare                      
@@ -67,8 +69,10 @@
 		<patternset id="appbase.patterns">
 			<include name="src/**/*" />
 			<include name="lib/**/*" />
+			<include name="rdf/**/*" />
 			<include name="test/**/*" />
 			<include name="themes/**/*" />
+			<include name="languages/**/*" />
 			<include name="config/*.properties" />
 			<include name="config/*.txt" />
 			<include name="config/jarlist/*.txt" />
@@ -97,7 +101,7 @@
 	     
 	      Override the core version, to get the 2-level effect.                      
 	     ================================= -->
-	<target name="revisionInfo" depends="vitroCore.revisionInfo" description="--> Store revision info in build">
+	<target name="revisionInfo" depends="vitroCore.revisionInfo" unless="skipinfo" description="--> Store revision info in build">
 		<addRevisionInfoLine productName="${ant.project.name}" productCheckoutDir="${basedir}" />
 	</target>
 

@@ -58,6 +58,18 @@ var contextPath = "${urls.base}";
 var visualizationDataRoot = "${dataVisualizationURLRoot}";
 
 // -->
+var i18nStringsCoauthorship = {
+    coAuthorsString: '${i18n().co_authors_capitalized}',
+    authorString: '${i18n().author_capitalized}',
+    publicationsWith: '${i18n().publications_with}',
+    publicationsString: '${i18n().publication_s_capitalized}',
+    coauthorsString: '${i18n().co_author_s_capitalized}'
+};
+var i18nStringsPersonLvl = {
+    fileCapitalized: '${i18n().file_capitalized}',
+    contentRequiresFlash: '${i18n().content_requires_flash}',
+    getFlashString: '${i18n().get_flash}'
+};
 </script>
 
 <script type="text/javascript" src="${coAuthorPersonLevelJavaScript}"></script>
@@ -77,7 +89,7 @@ ${stylesheets.add('<link rel="stylesheet" type="text/css" href="${urls.base}/css
 $(document).ready(function(){
 
     <#if (numOfCoAuthorShips?? && numOfCoAuthorShips > 0) >
-        $("#coauth_table_container").empty().html('<img id="loadingData" width="auto" src="${loadingImageLink}" />');
+        $("#coauth_table_container").empty().html('<img id="loadingData" width="auto" src="${loadingImageLink}" alt="${i18n().loading_data}"/>');
     </#if>
                 
     processProfileInformation("ego_label", 
@@ -118,7 +130,7 @@ $(document).ready(function(){
     <div id="ego_profile">
     
         <#-- Label -->
-        <h2><a href="${egoVivoProfileURL}" title="author name"><span id="ego_label" class="author_name"></span></a></h2>
+        <h2><a href="${egoVivoProfileURL}" title="${i18n().author_name}"><span id="ego_label" class="author_name"></span></a></h2>
     
         <#-- Moniker-->
         <em id="ego_moniker" class="moniker"></em>
@@ -127,9 +139,9 @@ $(document).ready(function(){
     
     <div class = "toggle_visualization">
         <div id="coinvestigator_link_container" class="collaboratorship-link-container">
-            <div class="collaboratorship-icon"><a href="${coprincipalinvestigatorURL}" title="co-investigator"><img src="${coInvestigatorIcon}" /></a></div>
+            <div class="collaboratorship-icon"><a href="${coprincipalinvestigatorURL}" title="${i18n().co_investigator}"><img src="${coInvestigatorIcon}" alt="${i18n().co_investigator_icon}"/></a></div>
             <div class="collaboratorship-link">
-                <h3><a href="${coprincipalinvestigatorURL}" title="co-investigator">Co-Investigator Network</a></h3>
+                <h3><a href="${coprincipalinvestigatorURL}" title="${i18n().co_investigator_network}">${i18n().co_investigator_network_capitalized}</a></h3>
             </div>
         </div>
     </div>
@@ -138,27 +150,25 @@ $(document).ready(function(){
     
     <#if (numOfAuthors?? && numOfAuthors > 0) >
     
-        <div  class="sub_headings"><h3>Co-Author Network </h3></div>
+        <div  class="sub_headings"><h3>${i18n().co_author_network} </h3></div>
         
         <#if (numOfCoAuthorShips?? && numOfCoAuthorShips > 0) || (numOfAuthors?? && numOfAuthors > 0) > 
-                <div class = "graphml-file-link"><a href="${egoCoAuthorshipNetworkDataFileURL}">(GraphML File)</a></div>
+                <div class = "graphml-file-link"><a href="${egoCoAuthorshipNetworkDataFileURL}" title="GraphML ${i18n().file}">(GraphML ${i18n().file_capitalized})</a></div>
         <#else>
 
                 <#if numOfAuthors?? && numOfAuthors <= 0 >
                     <#assign authorsText = "multi-author" />
                 </#if>
                 
-                <div id="no_coauthorships">Currently there are no ${authorsText!} papers for 
-                    <a href="${egoVivoProfileURL}" title="co-authorship"><span id="no_coauthorships_person" class="author_name">this author</span></a> 
-                    in the VIVO database.
+                <div id="no_coauthorships">${i18n().currently_no_papers_for(authorsText!)} 
+                    <a href="${egoVivoProfileURL}" title="${i18n().co_authorship}"><span id="no_coauthorships_person" class="author_name">${i18n().this_author}</span></a> ${i18n().in_the_vivo_db}
                 </div>                      
         </#if>
     
     <#else>
     
-        <span id="no_coauthorships">Currently there are no papers for 
-            <a href="${egoVivoProfileURL}" title="co-authorship"><span id="no_coauthorships_person" class="author_name">this author</span></a> in the 
-            VIVO database.
+        <span id="no_coauthorships">${i18n().no_papers_for} 
+            <a href="${egoVivoProfileURL}" title="${i18n().co_authorship}"><span id="no_coauthorships_person" class="author_name">${i18n().this_author}</span></a> ${i18n().in_the_vivo_db}
         </span>
     
     </#if>
@@ -174,7 +184,7 @@ $(document).ready(function(){
                 </script>
             </div>
             <div id="dataPanel">
-                <h4 id ="profileTitle">Profile</h4> 
+                <h4 id ="profileTitle">${i18n().profile_capitalized}</h4> 
                 
                 <div id="data-panel-content">
                 <div id="profileImage" class="thumbnail"></div>
@@ -182,23 +192,22 @@ $(document).ready(function(){
                 <h4><span id="authorName" class="neutral_author_name">&nbsp;</span></h4>
                 
                 <em id="profileMoniker" class="moniker"></em>
-                <div id="profile-links"><a href="#" id="profileUrl" title="VIVO profile">VIVO profile</a></div>
+                <div id="profile-links"><a href="#" id="profileUrl" title="${i18n().vivo_profile}">${i18n().vivo_profile}</a></div>
 
                 <div class="author_stats" id="num_works"><span class="numbers" style="width: 40px;" id="works"></span>&nbsp;&nbsp;
-                <span class="author_stats_text">Publication(s)</span></div>
+                <span class="author_stats_text">${i18n().publication_s_capitalized}</span></div>
                 <div class="author_stats" id="num_authors"><span class="numbers" style="width: 40px;" id="coAuthors"></span>
-                &nbsp;&nbsp;<span class="author_stats_text">Co-author(s)</span></div>
+                &nbsp;&nbsp;<span class="author_stats_text">${i18n().co_author_s_capitalized}</span></div>
                 
                 <div class="author_stats" id="fPub" style="visibility:hidden">
-                    <span class="numbers" style="width:40px;" id="firstPublication"></span>&nbsp;&nbsp;<span>First Publication</span></div>
+                    <span class="numbers" style="width:40px;" id="firstPublication"></span>&nbsp;&nbsp;<span>${i18n().first_publication}</span></div>
                 <div class="author_stats" id="lPub" style="visibility:hidden"><span class="numbers" style="width:40px;" id="lastPublication"></span>
-                &nbsp;&nbsp;<span>Last Publication</span></div>
-                <div id="incomplete-data">Note: This information is based solely on publications that have been loaded into the VIVO system. 
-                This may only be a small sample of the person's total work.<p></p><p></p>
+                &nbsp;&nbsp;<span>${i18n().last_publication}</span></div>
+                <div id="incomplete-data">${i18n().incomplete_data_note1}<p></p><p></p>
                 <#if user.loggedIn > 
-                    Go to your profile page to enter additional details about your publications.
+                    ${i18n().incomplete_data_note2}
                 <#else> 
-                    Log in to enter additional details about your publications on your profile page.
+                    ${i18n().incomplete_data_note3}
                 </#if>
                 </div>
                 </div>
@@ -222,15 +231,15 @@ $(document).ready(function(){
     
         <div class="vis_stats">
         
-        <div class="sub_headings" id="table_heading"><h3>Tables</h3></div>
+        <div class="sub_headings" id="table_heading"><h3>${i18n().tables_capitalized}</h3></div>
         
             <div class="vis-tables">
                 
                 <p id="publications_table_container" class="datatable">
 
                 <#assign tableID = "publication_data_table" />
-                <#assign tableCaption = "Publications per year " />
-                <#assign tableActivityColumnName = "Publications" />
+                <#assign tableCaption = "${i18n().publications_per_year} " />
+                <#assign tableActivityColumnName = "${i18n().publications_capitalized}" />
                 <#assign tableContent = egoPubSparklineVO.yearToActivityCount />
                 <#assign fileDownloadLink = egoPubSparklineVO.downloadDataLink />
                 

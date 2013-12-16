@@ -13,7 +13,7 @@
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
     <section id="error-alert" role="alert">
-        <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
+        <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="${i18n().error_alert_icon}" />
         <p>
         
         <#list submissionErrors?keys as errorFieldName>
@@ -38,17 +38,17 @@
 								
 	<div class="acSelection"> 
 	<p class="inline">
-	<label>Selected:</label> 
+	<label>${i18n().selected}:</label> 
 	<span class="acSelectionInfo"></span> 
 	
-	<a href="#" class="cancel">(Change selection)</a> 
+	<a href="#" class="cancel">(${i18n().change_selection})</a> 
 	</p>
 	</div>
     <br />
 
     <input type="submit" id="submit" value="${editConfiguration.submitLabel}" role="button"/>
-    <span class="or"> or </span>
-    <a title="Cancel" href="${cancelUrl}">Cancel</a>
+    <span class="or"> ${i18n().or} </span>
+    <a title="${i18n().cancel_title}" href="${cancelUrl}">${i18n().cancel_link}</a>
 
 </form>
 
@@ -69,6 +69,11 @@ Also multiple types parameter set to true only if more than one type returned-->
         sparqlForAcFilter: '${sparqlForAcFilter}',
         sparqlQueryUrl: '${sparqlQueryUrl}',
         defaultTypeName: '${propertyPublicName}'
+    };
+    var i18nStrings = {
+        selectExisting: '${i18n().select_an_existing}',
+        orCreateNewOne: '$i18n().or_create_new_one}',
+        selectedString: '$i18n().selected}'
     };
     </script>
 

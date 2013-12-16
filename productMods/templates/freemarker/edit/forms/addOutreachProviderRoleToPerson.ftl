@@ -18,8 +18,12 @@ roleExamples-->
 
 
 <#--Variable assignments for Add Clinical Role To Person-->
-<#assign roleDescriptor = "outreach & community service" />
-<#assign typeSelectorLabel = "outreach & community service in" />
+<#assign roleDescriptor = "${i18n().outreach_comm_service}" />
+<#assign typeSelectorLabel = "${i18n().outreach_comm_service_in}" />
+<#assign genericLabel = "${i18n().organization_capitalized}" />
+
+<#assign acMultipleTypes = "'true'" />
+<#assign acTypes = "{activity: 'http://xmlns.com/foaf/0.1/Organization,http://xmlns.com/foaf/0.1/Group,http://purl.obolibrary.org/obo/OBI_0000835,http://purl.org/NET/c4dm/event.owl#Event'}" />
 
 
 <#--Each of the two stage forms will include the form below-->

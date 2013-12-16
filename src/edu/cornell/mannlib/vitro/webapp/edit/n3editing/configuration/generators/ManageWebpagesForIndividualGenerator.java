@@ -37,7 +37,7 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
 
         EditConfigurationVTwo config = new EditConfigurationVTwo();
-        config.setTemplate("manageWebpagesForIndividual.ftl");
+        config.setTemplate(this.getTemplate());
 
         initBasics(config, vreq);
         initPropertyParameters(vreq, session, config);
@@ -55,17 +55,26 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
 
         ParamMap paramMap = new ParamMap();
         paramMap.put("subjectUri", config.getSubjectUri());
-        paramMap.put("editForm", AddEditWebpageFormGenerator.class.getName());
+        paramMap.put("editForm", this.getEditForm());
         paramMap.put("view", "form");
         String path = UrlBuilder.getUrl( UrlBuilder.Route.EDIT_REQUEST_DISPATCH ,paramMap);
 
         config.addFormSpecificData("baseEditWebpageUrl", path);                 
 
+        //Also add domainUri and rangeUri if they exist, adding here instead of template
+        String domainUri = (String) vreq.getParameter("domainUri");
+        String rangeUri = (String) vreq.getParameter("rangeUri");
         paramMap = new ParamMap();
         paramMap.put("subjectUri", config.getSubjectUri());
         paramMap.put("predicateUri", config.getPredicateUri());
-        paramMap.put("editForm" , AddEditWebpageFormGenerator.class.getName() );
+        paramMap.put("editForm" , this.getEditForm() );
         paramMap.put("cancelTo", "manage");
+        if(domainUri != null && !domainUri.isEmpty()) {
+        	paramMap.put("domainUri", domainUri);
+        }
+        if(rangeUri != null && !rangeUri.isEmpty()) {
+        	paramMap.put("rangeUri", rangeUri);
+        }
         path = UrlBuilder.getUrl( UrlBuilder.Route.EDIT_REQUEST_DISPATCH ,paramMap);
 
         config.addFormSpecificData("showAddFormUrl", path);          
@@ -83,17 +92,21 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
     
     private static String WEBPAGE_QUERY = ""
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
-        + "SELECT DISTINCT ?link ?url ?anchor ?rank WHERE { \n"
-        + "    ?subject core:webpage ?link . \n"
-        + "    OPTIONAL { ?link core:linkURI ?url } \n"
-        + "    OPTIONAL { ?link core:linkAnchorText ?anchor } \n"
+        + "PREFIX vcard: <http://www.w3.org/2006/vcard/ns#> \n"
+        + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
+        + "SELECT DISTINCT ?vcard ?link ?url ?label ?rank WHERE { \n"
+        + "    ?subject <http://purl.obolibrary.org/obo/ARG_2000028> ?vcard . \n"
+        + "    ?vcard vcard:hasURL ?link . \n"
+        + "    ?link a vcard:URL \n"
+        + "    OPTIONAL { ?link vcard:url ?url } \n"
+        + "    OPTIONAL { ?link rdfs:label ?label } \n"
         + "    OPTIONAL { ?link core:rank ?rank } \n"
         + "} ORDER BY ?rank";
     
        
     private List<Map<String, String>> getWebpages(String subjectUri, VitroRequest vreq) {
           
-        String queryStr = QueryUtils.subUriForQueryVar(WEBPAGE_QUERY, "subject", subjectUri);
+        String queryStr = QueryUtils.subUriForQueryVar(this.getQuery(), "subject", subjectUri);
         log.debug("Query string is: " + queryStr);
         List<Map<String, String>> webpages = new ArrayList<Map<String, String>>();
         try {
@@ -108,7 +121,20 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         } catch (Exception e) {
             log.error(e, e);
         }    
-        
+        log.debug("webpages = " + webpages);
         return webpages;
+    }
+    
+    //Putting this into a method allows overriding it in subclasses
+    protected String getEditForm() {
+    	return AddEditWebpageFormGenerator.class.getName();
+    }
+    
+    protected String getQuery() {
+    	return WEBPAGE_QUERY;
+    }
+    
+    protected String getTemplate() {
+    	return "manageWebpagesForIndividual.ftl";
     }
 }

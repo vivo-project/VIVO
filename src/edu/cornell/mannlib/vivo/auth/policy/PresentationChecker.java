@@ -13,13 +13,10 @@ import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AbstractPr
  * self-editor is authorized to modify?
  */
 public class PresentationChecker extends RelationshipChecker {
-	private static final String NS_CORE = "http://vivoweb.org/ontology/core#";
 	private static final String URI_PRESENTATION_TYPE = NS_CORE
 			+ "Presentation";
-	private static final String URI_RELATED_ROLE_PROPERTY = NS_CORE
-			+ "relatedRole";
-	private static final String URI_PRESENTER_ROLE_OF_PROPERTY = NS_CORE
-			+ "presenterRoleOf";
+	private static final String URI_PRESENTER_ROLE_TYPE = NS_CORE
+			+ "PresenterRole";
 
 	private final String[] resourceUris;
 
@@ -50,8 +47,8 @@ public class PresentationChecker extends RelationshipChecker {
 	}
 
 	private List<String> getUrisOfPresenters(String resourceUri) {
-		return getObjectsOfLinkedProperty(resourceUri,
-				URI_RELATED_ROLE_PROPERTY, URI_PRESENTER_ROLE_OF_PROPERTY);
+		return getObjectsThroughLinkingNode(resourceUri, URI_REALIZES,
+				URI_PRESENTER_ROLE_TYPE, URI_INHERES_IN);
 	}
 
 	private PolicyDecision authorizedPresenter(String resourceUri) {

@@ -1,5 +1,7 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
+$.extend(this, i18nStrings);
+
 var ErrorDisplayWidget = Class.extend({
 	
 	container: '',
@@ -36,7 +38,7 @@ var ErrorDisplayWidget = Class.extend({
 		 * */
 		if (isZeroPublicationsCase) {
 			
-			newErrorMessage += "No publications in the system have been attributed to this " + errorForType.toLowerCase() + ".";
+			newErrorMessage += i18nStrings.noAttributedPubs + " " + errorForType.toLowerCase() + ".";
 			
 		} else {
 		/*
@@ -60,12 +62,14 @@ var ErrorDisplayWidget = Class.extend({
 		var newErrorMessage = "";
 
 		if (totalPublications > 1) {
-			newErrorMessage = "None of the " + totalPublications + " publications attributed to this " 
-			+ errorForType.toLowerCase() + " have been 'science-located'.";	
+			newErrorMessage = i18nStrings.noneOfThe + " " + totalPublications + " " 
+			                    + i18nStrings.pubsAttributedTo + " " 
+			                    + errorForType.toLowerCase() 
+			                    + " " + i18nStrings.beenScienceLocated;	
 			
 		} else {
-			newErrorMessage = "The publication attributed to this " 
-				+ errorForType.toLowerCase() + " has not been 'science-located'.";
+			newErrorMessage = i18nStrings.pubAttributedTo + " " 
+				+ errorForType.toLowerCase() + " " + i18nStrings.notScienceLocated;
 		}
 		
 		
@@ -73,19 +77,19 @@ var ErrorDisplayWidget = Class.extend({
 		
 		if (responseData.pubsWithNoJournals && responseData.pubsWithNoJournals > 0) {
 			
-			var publicationsText = (responseData.pubsWithNoJournals > 1) ? "publications" : "publication";
+			var publicationsText = (responseData.pubsWithNoJournals > 1) ? i18nStrings.publicationsString : i18nStrings.publicationString;
 			
-			newErrorMessage += "<li>" + responseData.pubsWithNoJournals + " " + publicationsText + " have no journal" 
-				+ " information.</li>"
+			newErrorMessage += "<li>" + responseData.pubsWithNoJournals + " " + publicationsText 
+			                    + " " + i18nStrings.noJournalInformation + "</li>"
 				
 		}
 		
 		if (responseData.pubsWithInvalidJournals && responseData.pubsWithInvalidJournals > 0) {
 			
-			var publicationsText = (responseData.pubsWithInvalidJournals > 1) ? "publications" : "publication";
+			var publicationsText = (responseData.pubsWithInvalidJournals > 1) ? i18nStrings.publicationsString : i18nStrings.publicationString;
 			
 			newErrorMessage += "<li>" + responseData.pubsWithInvalidJournals + " " + publicationsText + " " 
-			+ " could not be matched with a map location using their journal information.</li>" 				
+			+ " " + i18nStrings.noMatchingMapLocation + "</li>" 				
 		}
 		
 		newErrorMessage += "</ul>";

@@ -5,15 +5,15 @@
 
 <#include "individual-qrCodeGenerator.ftl">
 
-<h2>Export QR Code <em>(<a href="${individual.qrData().aboutQrCodesUrl}" title="More info on QR codes">What is this?</a>)</em></h2>
+<h2>${i18n().export_qr_code} <em>(<a href="${individual.qrData().aboutQrCodesUrl}" title="${i18n().more_qr_info}">${i18n().what_is_this}</a>)</em></h2>
 
 <#assign thumbUrl = individual.thumbUrl! "${urls.images}/placeholders/person.thumbnail.jpg" >
-<img class="individual-photo qrCode" src="${thumbUrl}" width="160" />
+<img class="individual-photo qrCode" src="${thumbUrl}" width="160" alt="${i18n().alt_thumbnail_photo}"/>
 
-<h3 class="qrCode"><a href="${individual.profileUrl}" title="View this person's profile">${individual.nameStatement.value}</a></h3>
+<h3 class="qrCode"><a href="${individual.profileUrl}" title="${i18n().view_this_profile}">${individual.nameStatement.value}</a></h3>
 
 <section class="vcard">
-	<h4>VCard</h4>
+	<h4>${i18n().vcard}</h4>
 	<@qrCodeVCard qrCodeWidth />
 	<textarea name="qrCodeVCard" readonly>
 		&lt;img src="${getQrCodeUrlForVCard(qrCodeWidth)!}" /&gt;<#t>
@@ -21,7 +21,7 @@
 </section>
 
 <section>
-	<h4>Hyperlink</h4>
+	<h4>${i18n().hyperlink}</h4>
 	<@qrCodeLink qrCodeWidth />
 	<textarea name="qrCodeLink" readonly>
 		&lt;img src="${getQrCodeUrlForLink(qrCodeWidth)!}" /&gt;<#t>

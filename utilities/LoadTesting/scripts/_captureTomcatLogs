@@ -10,6 +10,7 @@ directory, for possible inspection later.
 --------------------------------------------------------------------------------
 =end
 
+require File.expand_path('subscripts/common', File.dirname(__FILE__))
 require 'date'
 require "#{File.dirname(__FILE__)}/subscripts/loadParms"
 
@@ -17,11 +18,19 @@ def figure_time_stamp()
   return DateTime.now.strftime("%Y-%m-%d_%H-%M-%S")
 end
 
-Dir.chdir("/home/jeb228/LoadTesting/versions/#{@version_name}") do |path|
-  @tomcat_logs_dir = "#{path}/tomcatLogs"
-  if (! File.directory?(@tomcat_logs_dir))
-    Dir.mkdir(@tomcat_logs_dir)
+def add_read_me() 
+  puts "Add a comment for the README.txt file"
+  comment = STDIN.gets.strip
+  return if comment.empty?
+
+  File.open('README.txt', "w") do |file|
+    file.puts comment
   end
+end
+
+@tomcat_logs_dir = version_file('tomcatLogs')
+if (! File.directory?(@tomcat_logs_dir))
+  Dir.mkdir(@tomcat_logs_dir)
 end
 
 Dir.chdir(@tomcat_logs_dir) do |path|
@@ -30,6 +39,6 @@ Dir.chdir(@tomcat_logs_dir) do |path|
 end
 
 Dir.chdir(@this_logs_dir) do |path|
-  system('cp ~/LoadTesting/tomcat/logs/* .')
+  system("cp #{@home}/tomcat/logs/* .")
+  add_read_me()
 end
-

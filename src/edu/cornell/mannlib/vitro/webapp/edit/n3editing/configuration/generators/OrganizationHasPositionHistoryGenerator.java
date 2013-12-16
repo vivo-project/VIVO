@@ -10,14 +10,14 @@ import com.hp.hpl.jena.vocabulary.XSD;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary.Precision;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.FirstAndLastNameValidator;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesWithParent;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaVClassOptions;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.OrganizationHasPositionValidator;
 
 public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 		implements EditConfigurationGenerator {
@@ -43,13 +43,13 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 			+ "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
 			+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
 			+ "SELECT ?existingPerson WHERE { \n"
-			+ "  ?position core:positionForPerson ?existingPerson .}";
+			+ "  ?position core:relates ?existingPerson .}";
 
 	private static final String QUERY_EXISTING_PERSON_LABEL = ""
 			+ "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
 			+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
 			+ "SELECT ?existingPersonLabel WHERE { \n"
-			+ "  ?position core:positionForPerson ?existingPerson . \n"
+			+ "  ?position core:relates ?existingPerson . \n"
 			+ "  ?existingPerson rdfs:label ?existingPersonLabel . }";
 
 	private static final String QUERY_EXISTING_INTERVAL_NODE = ""
@@ -113,33 +113,43 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 	private static final String N3_NEW_POSITION = ""
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
 			+ "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> . \n"
-			+ "?organization core:organizationForPosition ?position . \n"
+			+ "?organization core:relatedBy ?position . \n"
 			+ "?position a core:Position . \n" 
 			+ "?position a  ?positionType . \n"
 			+ "?position rdfs:label ?positionTitle . \n"
-			+ "?position core:positionInOrganization ?organization . ";
+			+ "?position core:relates ?organization . ";
 
     private static final String N3_NEW_PERSON = ""
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
 			+ "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> . \n"
 			+ "@prefix foaf: <http://xmlns.com/foaf/0.1/> . \n"
-    		+ "?position core:positionForPerson ?person . \n" 
-    		+ "?person core:personInPosition ?position . \n"
+    		+ "?position core:relates ?person . \n" 
+    		+ "?person core:relatedBy ?position . \n"
     		+ "?person a foaf:Person . \n"
     		+ "?person rdfs:label ?personLabel . ";
 
     private static final String N3_NEW_FIRST_NAME = ""
-    		+ "@prefix foaf: <http://xmlns.com/foaf/0.1/> . \n"
-        	+ "?person foaf:firstName ?firstName .";
+    		+ "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n"
+        	+ "?person <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n"
+        	+ "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?person . \n"
+        	+ "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n"
+        	+ "?vcardPerson vcard:hasName  ?vcardName . \n"
+        	+ "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n"
+        	+ "?vcardName vcard:givenName ?firstName .";
 
     private static final String N3_NEW_LAST_NAME = ""
-    		+ "@prefix foaf: <http://xmlns.com/foaf/0.1/> . \n"
-        	+ "?person foaf:lastName ?lastName .";
+		    + "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n"
+    	    + "?person <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n"
+    	    + "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?person . \n"
+    	    + "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n"
+    	    + "?vcardPerson vcard:hasName  ?vcardName . \n"
+    	    + "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n"
+    	    + "?vcardName vcard:familyName ?lastName .";
 
     private static final String N3_EXISTING_PERSON = ""
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
-        	+ "?position core:positionForPerson ?existingPerson . \n" 
-        	+ "?existingPerson core:personInPosition ?position . \n";
+        	+ "?position core:relates ?existingPerson . \n" 
+        	+ "?existingPerson core:relatedBy ?position . \n";
 
 	private static final String N3_NEW_START_NODE = ""
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
@@ -179,6 +189,8 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 
 		conf.addNewResource("position", DEFAULT_NS_FOR_NEW_RESOURCE);
 		conf.addNewResource("person", DEFAULT_NS_FOR_NEW_RESOURCE);
+		conf.addNewResource("vcardName", DEFAULT_NS_FOR_NEW_RESOURCE);
+		conf.addNewResource("vcardPerson", DEFAULT_NS_FOR_NEW_RESOURCE);
 		conf.addNewResource("intervalNode", DEFAULT_NS_FOR_NEW_RESOURCE);
 		conf.addNewResource("startNode", DEFAULT_NS_FOR_NEW_RESOURCE);
 		conf.addNewResource("endNode", DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -245,7 +257,7 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 		conf.addField(endField.setEditElement(new DateTimeWithPrecisionVTwo(
 				endField, URI_PRECISION_YEAR, URI_PRECISION_NONE)));
 
-        conf.addValidator(new OrganizationHasPositionValidator());
+        conf.addValidator(new FirstAndLastNameValidator("existingPerson"));
 		conf.addValidator(new AntiXssValidation());
 		conf.addValidator(new DateTimeIntervalValidationVTwo("startField",
 				"endField"));

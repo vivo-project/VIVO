@@ -4,7 +4,7 @@
 <#if (currentModels?size > 0)>
 
 	
-	Below cached models will be regenerated.<hr />
+	${i18n().cached_models_regenerated}<hr />
 
 	<ul>
 	<#list currentModels as model>
@@ -12,11 +12,11 @@
 		
 		<#if model.uri == "">
 			
-			URI Independent Model
+			${i18n().uri_independent_model}
 		
 		<#else>
 		
-			<a href="${urls.base}/individual?uri=${model.uri?url}" title="label">${model.individualLabel}</a>
+			<a href="${urls.base}/individual?uri=${model.uri?url}" title="${i18n().label}">${model.individualLabel}</a>
 			
 		</#if>
 		<span class="display-title">${model.humanReadableType}</span> 
@@ -27,7 +27,7 @@
 
 <#else>
 
-	Currently there are no constructed models for use by visualization.
+	${i18n().currently_no_constructed_models}
 
 </#if>
 

@@ -5,35 +5,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>AddDataPropArchDetails</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AddDataPropArchDetails</td></tr>
+<tr><td rowspan="1" colspan="3">AddDataPropArchDetails</td></tr>
 </thead><tbody>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Data Property of architectual details to the Place Propery Group</td>
-	<td></td>
-</tr>
+<!--Add Data Property of architectual details to the Place Propery Group-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged in already</td>
-	<td></td>
-</tr>
+<!--Must not be logged in already-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must log in as site admin</td>
-	<td></td>
-</tr>
+<!--Must log in as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -99,11 +69,7 @@
 	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Data Property Hierarchy</td>
-	<td></td>
-</tr>
+<!--Navigate to Data Property Hierarchy-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Data property hierarchy</td>
@@ -114,11 +80,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify that architectural details does not already exist</td>
-	<td></td>
-</tr>
+<!--Verify that architectural details does not already exist-->
 <tr>
 	<td>verifyElementNotPresent</td>
 	<td>link=architectural details</td>
@@ -134,11 +96,7 @@
 	<td>Data Property Editing Form</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add architectural details</td>
-	<td></td>
-</tr>
+<!--Add architectural details-->
 <tr>
 	<td>type</td>
 	<td>PublicName</td>
@@ -172,7 +130,7 @@
 <tr>
 	<td>select</td>
 	<td>DomainClassURI</td>
-	<td>label=Agent (FOAF)</td>
+	<td>label=foaf:Agent</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -189,11 +147,7 @@
 	<td>Data Property Control Panel</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify that architectural details has been added properly</td>
-	<td></td>
-</tr>
+<!--Verify that architectural details has been added properly-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>exact:vivo:architecturalDetails</td>
@@ -234,11 +188,7 @@
 	<td>public</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Check data properties hierarchy</td>
-	<td></td>
-</tr>
+<!--Check data properties hierarchy-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Site Admin</td>
@@ -266,22 +216,22 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Local Name:	vivo:architecturalDetails</td>
+	<td>vivo:architecturalDetails</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Group:	Place</td>
+	<td>Place</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Domain Class:	foaf:Agent </td>
+	<td>foaf:Agent </td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Range Class:string</td>
+	<td>string</td>
 	<td></td>
 </tr>
 <tr>
@@ -295,15 +245,71 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>vivo:architecturalDetails</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>architectural details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Place</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>VIVO core</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>architecturalDetails</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=exact:http://xmlns.com/foaf/0.1/Agent</td>
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Log out</td>
+	<td>verifyTextPresent</td>
+	<td>http://www.w3.org/2001/XMLSchema#string</td>
 	<td></td>
 </tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>editor, curator, site administrator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>public</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>(unspecified)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>http://vivoweb.org/ontology/core#architecturalDetails</td>
+	<td></td>
+</tr>
+<!--Log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

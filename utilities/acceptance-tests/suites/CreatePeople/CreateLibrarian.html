@@ -5,29 +5,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>CreateLibrarian</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">CreateLibrarian</td></tr>
+<tr><td rowspan="1" colspan="3">CreateLibrarian</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -39,11 +21,7 @@
 	<td>100000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Create Librarian person</td>
-	<td></td>
-</tr>
+<!--Create Librarian person-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged in already</td>
-	<td></td>
-</tr>
+<!--Must not be logged in already-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must login as site admin</td>
-	<td></td>
-</tr>
+<!--Must login as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -99,11 +69,7 @@
 	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to add new individual page</td>
-	<td></td>
-</tr>
+<!--Navigate to add new individual page-->
 <tr>
 	<td>select</td>
 	<td>VClassURI</td>
@@ -119,11 +85,7 @@
 	<td>Create a new Librarian</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Create a librarian individual</td>
-	<td></td>
-</tr>
+<!--Create a librarian individual-->
 <tr>
 	<td>type</td>
 	<td>firstName</td>
@@ -144,11 +106,7 @@
 	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Make individual an Assistant Librarian</td>
-	<td></td>
-</tr>
+<!--Make individual an Assistant Librarian-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=a.add-preferredTitle &gt; img.add-individual</td>
@@ -184,11 +142,7 @@
 	<td>10000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify that librarian was added sucessfully</td>
-	<td></td>
-</tr>
+<!--Verify that librarian was added sucessfully-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Librarian, Lily</td>
@@ -199,11 +153,7 @@
 	<td>Assistant Librarian</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Browse for new librarian</td>
-	<td></td>
-</tr>
+<!--Browse for new librarian-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -259,11 +209,7 @@
 	<td>Librarian, Lily Assistant Librarian</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Search for new librarian</td>
-	<td></td>
-</tr>
+<!--Search for new librarian-->
 <tr>
 	<td>type</td>
 	<td>querytext</td>
@@ -294,11 +240,7 @@
 	<td>Librarian, Lily Assistant Librarian</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Logout</td>
-	<td></td>
-</tr>
+<!--Logout-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

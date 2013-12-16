@@ -5,55 +5,25 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>AdminBookmarkedPage</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AdminBookmarkedPage</td></tr>
+<tr><td rowspan="1" colspan="3">AdminBookmarkedPage</td></tr>
 </thead><tbody>
-<tr>
-	<td>comment</td>
-	<td class="comment">Test People rowse</td>
-	<td></td>
-</tr>
+<!--Test People rowse-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Don't need to login</td>
-	<td></td>
-</tr>
+<!--Don't need to login-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify Home menu option </td>
-	<td></td>
-</tr>
+<!--Verify Home menu option -->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>
@@ -349,36 +319,23 @@
 	<td>Transnational Region</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify People menu option </td>
-	<td></td>
-</tr>
+<!--Verify People menu option -->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=People</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>There is currently no People content in the system</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>You can browse all of the public content currently in the system using the index page.</td>
+	<td>verifyElementPresent</td>
+	<td>link=Person (1)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=index page</td>
+	<td>link=Person, Polly</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify Organizations menu option </td>
-	<td></td>
-</tr>
+<!--Verify Organizations menu option -->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Organizations</td>
@@ -554,11 +511,7 @@
 	<td>link=Primates-r-us</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify Research menu option </td>
-	<td></td>
-</tr>
+<!--Verify Research menu option -->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Research</td>
@@ -754,11 +707,7 @@
 	<td>link=exact:http://primatehealthintro.cornell.edu</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify Events menu option </td>
-	<td></td>
-</tr>
+<!--Verify Events menu option -->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Events</td>
@@ -909,11 +858,7 @@
 	<td>link=Primate Health Conference</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Go back to Home</td>
-	<td></td>
-</tr>
+<!--Go back to Home-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

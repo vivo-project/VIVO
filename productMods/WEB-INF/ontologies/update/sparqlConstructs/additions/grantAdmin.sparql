@@ -1,0 +1,24 @@
+PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+CONSTRUCT {
+    ?agent <http://purl.obolibrary.org/obo/RO_0000053> _:adminRole .
+    _:adminRole a vivo:AdministratorRole .
+    _:adminRole <http://purl.obolibrary.org/obo/RO_0000052> ?agent .
+    _:adminRole vivo:relatedBy ?grant .
+    ?grant vivo:relates _:adminRole .
+    ?grant vivo:relates ?agent .
+    ?agent vivo:relatedBy ?grant .
+} WHERE {
+    { ?agent vivo:administers ?grant }
+      UNION
+    { ?grant vivo:administeredBy ?agent 
+      FILTER NOT EXISTS { ?agent vivo:administers ?grant } 
+    }
+    FILTER NOT EXISTS {
+        ?agent <http://purl.obolibrary.org/obo/RO_0000053> ?adminRoleNode .
+        ?adminRoleNode a vivo:AdministratorRole .
+        ?adminRoleNode vivo:relatedBy ?grant .
+    }
+}

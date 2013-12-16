@@ -9,14 +9,13 @@ import edu.cornell.mannlib.vitro.webapp.auth.policy.specialrelationships.Relatio
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AbstractPropertyStatementAction;
 
 /**
- * Does the requested action involve a change to an Advising Relationship that the self-editor
- * is authorized to modify?
+ * Does the requested action involve a change to an Advising Relationship that
+ * the self-editor is authorized to modify?
  */
 public class AdvisingRelationshipChecker extends RelationshipChecker {
-	private static final String NS_CORE = "http://vivoweb.org/ontology/core#";
 	private static final String URI_ADVISING_RELATIONSHIP_TYPE = NS_CORE
 			+ "AdvisingRelationship";
-	private static final String URI_ADVISOR_PROPERTY = NS_CORE + "advisor";
+	private static final String URI_ADVISOR_ROLE = NS_CORE + "AdvisorRole";
 
 	private final String[] resourceUris;
 
@@ -27,7 +26,8 @@ public class AdvisingRelationshipChecker extends RelationshipChecker {
 
 	/**
 	 * A self-editor is authorized to add, edit, or delete a statement if the
-	 * subject or object refers to an Advising Relationship, and if the self-editor:
+	 * subject or object refers to an Advising Relationship, and if the
+	 * self-editor:
 	 * 
 	 * 1) is an Advisor in that Relationship
 	 */
@@ -47,7 +47,8 @@ public class AdvisingRelationshipChecker extends RelationshipChecker {
 	}
 
 	private List<String> getUrisOfAdvisors(String resourceUri) {
-		return getObjectsOfProperty(resourceUri, URI_ADVISOR_PROPERTY);
+		return getObjectsThroughLinkingNode(resourceUri, URI_RELATES,
+				URI_ADVISOR_ROLE, URI_INHERES_IN);
 	}
 
 	private PolicyDecision authorizedAdvisor(String resourceUri) {

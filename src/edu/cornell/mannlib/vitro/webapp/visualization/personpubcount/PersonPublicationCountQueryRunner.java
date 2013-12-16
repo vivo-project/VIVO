@@ -121,9 +121,10 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<Activi
 							+ "WHERE { \n"
 							+ "<" + queryURI + "> rdf:type foaf:Person ;\n" 
 							+ 					" rdfs:label ?authorLabel \n;" 
-							+ 					" core:authorInAuthorship ?authorshipNode .  \n" 
+							+ 					" core:relatedBy ?authorshipNode .  \n" 
 							+ "	?authorshipNode rdf:type core:Authorship ;" 
-							+ 					" core:linkedInformationResource ?document . \n"
+							+ 					" core:relates ?document . \n"
+							+ "	?document rdf:type bibo:Document . \n" 
 							+  SPARQL_QUERY_COMMON_WHERE_CLAUSE
 							+ "}\n";
 

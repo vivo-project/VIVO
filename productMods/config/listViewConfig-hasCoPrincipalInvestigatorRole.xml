@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-select>    
+        PREFIX afn:   &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+        
+        SELECT DISTINCT 
+                        ?role 
+                        ?activity ?activityName 
+                        ?activityLabel
+                        ?awardedBy
+                        ?adminedBy
+                        ?awardedByLabel
+                        ?adminedByLabel
+                        ?dateTimeStartRole ?dateTimeEndRole
+                        ?dateTimeStartGrant ?dateTimeEndGrant
+                        ?hideThis
+        WHERE {
+                        
+            ?subject ?property ?role .
+            ?role a core:CoPrincipalInvestigatorRole .
+            
+            OPTIONAL {  ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
+                        ?activity rdfs:label ?activityLabel .
+                        LET (?activityName := afn:localname(?activity)) 
+            }                   
+            OPTIONAL { ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
+                       ?activity a core:Grant .
+                       ?activity core:assignedBy ?awardedBy .
+                       ?awardedBy rdfs:label ?awardedByLabel
+            }
+            OPTIONAL { ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
+                       ?activity a core:Grant .
+                       ?activity core:relates ?adminedByRole .
+                       ?adminedByRole &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?adminedBy .
+                       ?adminedBy rdfs:label ?adminedByLabel
+            }
+            OPTIONAL { ?role core:dateTimeInterval ?dateTimeIntervalRole .
+                       ?dateTimeIntervalRole core:start ?dateTimeStartValueRole .
+                       ?dateTimeStartValueRole core:dateTime ?dateTimeStartRole 
+            }
+             OPTIONAL { ?role core:dateTimeInterval ?dateTimeIntervalRole .
+                        ?dateTimeIntervalRole core:end ?dateTimeEndValueRole .
+                        ?dateTimeEndValueRole core:dateTime ?dateTimeEndRole 
+            }
+            OPTIONAL { ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
+                       ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
+                       ?dateTimeIntervalGrant core:start ?dateTimeStartValueGrant .
+                       ?dateTimeStartValueGrant core:dateTime ?dateTimeStartGrant 
+            }
+            OPTIONAL { ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
+                       ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
+                       ?dateTimeIntervalGrant core:end ?dateTimeEndValueGrant .
+                       ?dateTimeEndValueGrant core:dateTime ?dateTimeEndGrant 
+            }
+            OPTIONAL { ?role core:hideFromDisplay ?hideThis }
+        } ORDER BY DESC(?dateTimeEndRole) DESC(?dateTimeStartRole) DESC(?dateTimeEndGrant) DESC(?dateTimeStartGrant) ?activityLabel ?activityName
+    </query-select>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
+        PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;  
+        CONSTRUCT { 
+            ?subject ?property ?role .
+            ?role a core:CoPrincipalInvestigatorRole .
+            ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
+            ?role ?roleProperty ?roleValue . 
+            ?activity rdfs:label ?activityLabel .
+            ?activity core:assignedBy ?awardedBy .
+            ?awardedBy rdfs:label ?awardedByLabel .
+            ?activity core:relates ?adminedByRole .
+            ?adminedByRole &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?adminedBy .
+            ?adminedBy rdfs:label ?adminedByLabel
+        } WHERE {
+            {
+                ?subject ?property ?role .
+                ?role a core:CoPrincipalInvestigatorRole . 
+            } UNION {
+                ?subject ?property ?role .
+                ?role a core:CoPrincipalInvestigatorRole .
+                ?role ?roleProperty ?roleValue 
+            } UNION {
+                ?subject ?property ?role .
+                ?role a core:CoPrincipalInvestigatorRole .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity . 
+                ?activity a core:Grant .
+                ?activity rdfs:label ?activityLabel 
+            } UNION {
+                ?subject ?property ?role .
+                ?role a core:CoPrincipalInvestigatorRole .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
+                ?activity a core:Grant . 
+                ?activity core:assignedBy ?awardedBy .
+                ?awardedBy a foaf:Organization .
+                ?awardedBy rdfs:label ?awardedByLabel
+            } UNION {
+                ?subject ?property ?role .
+                ?role a core:CoPrincipalInvestigatorRole .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity . 
+                ?activity a core:Grant .
+                ?activity core:relates ?adminedByRole .
+                ?adminedByRole a core:AdminsitratorRole.
+                ?adminedByRole &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?adminedBy .
+                ?adminedBy a foaf:Organization .
+                ?adminedBy rdfs:label ?adminedByLabel
+            } UNION {
+                ?subject ?property ?role .
+                ?role a core:CoPrincipalInvestigatorRole .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity . 
+                ?activity a core:Contract .
+                ?activity rdfs:label ?activityLabel 
+            }
+        } 
+    </query-construct>
+   
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?role .
+            ?role a core:CoPrincipalInvestigatorRole .  
+            ?role core:dateTimeInterval ?dateTimeIntervalRole .
+            ?dateTimeIntervalRole core:start ?dateTimeStartValueRole .
+            ?dateTimeStartValueRole core:dateTime ?dateTimeStartRole 
+        } WHERE {
+            ?subject ?property ?role .  
+            ?role a core:CoPrincipalInvestigatorRole .
+            ?role core:dateTimeInterval ?dateTimeIntervalRole .
+            ?dateTimeIntervalRole core:start ?dateTimeStartValueRole .
+            ?dateTimeStartValueRole core:dateTime ?dateTimeStartRole 
+        } 
+    </query-construct>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?role .  
+            ?role a core:CoPrincipalInvestigatorRole .
+            ?role core:dateTimeInterval ?dateTimeIntervalRole .
+            ?dateTimeIntervalRole core:end ?dateTimeEndValueRole .
+            ?dateTimeEndValueRole core:dateTime ?dateTimeEndRole 
+        } WHERE {
+            ?subject ?property ?role .  
+            ?role a core:CoPrincipalInvestigatorRole .
+            ?role core:dateTimeInterval ?dateTimeIntervalRole .
+            ?dateTimeIntervalRole core:end ?dateTimeEndValueRole .
+            ?dateTimeEndValueRole core:dateTime ?dateTimeEndRole 
+        } 
+    </query-construct>
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?role .
+            ?role a core:CoPrincipalInvestigatorRole .
+            ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
+            ?activity a core:Grant .
+            ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
+            ?dateTimeIntervalGrant core:start ?dateTimeStartValueGrant .
+            ?dateTimeStartValueGrant core:dateTime ?dateTimeStartGrant 
+        } WHERE {
+            {
+                ?subject ?property ?role .
+                ?role a core:CoPrincipalInvestigatorRole .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
+                ?activity a core:Grant .
+                ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
+                ?dateTimeIntervalGrant core:start ?dateTimeStartValueGrant .
+                ?dateTimeStartValueGrant core:dateTime ?dateTimeStartGrant 
+            } UNION {
+                ?subject ?property ?role .
+                ?role a core:CoPrincipalInvestigatorRole .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
+                ?activity a core:Contract .
+                ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
+                ?dateTimeIntervalGrant core:start ?dateTimeStartValueGrant .
+                ?dateTimeStartValueGrant core:dateTime ?dateTimeStartGrant 
+            }
+        } 
+    </query-construct>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?role .
+            ?role a core:CoPrincipalInvestigatorRole .
+            ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
+            ?activity a core:Grant .
+            ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
+            ?dateTimeIntervalGrant core:end ?dateTimeEndValueGrant .
+            ?dateTimeEndValueGrant core:dateTime ?dateTimeEndGrant 
+        } WHERE {
+            {
+                ?subject ?property ?role .
+                ?role a core:CoPrincipalInvestigatorRole .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
+                ?activity a core:Grant .
+                ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
+                ?dateTimeIntervalGrant core:end ?dateTimeEndValueGrant .
+                ?dateTimeEndValueGrant core:dateTime ?dateTimeEndGrant 
+            } UNION {
+                ?subject ?property ?role .
+                ?role a core:CoPrincipalInvestigatorRole .
+                ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
+                ?activity a core:Contract .
+                ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
+                ?dateTimeIntervalGrant core:end ?dateTimeEndValueGrant .
+                ?dateTimeEndValueGrant core:dateTime ?dateTimeEndGrant 
+            }
+        } 
+    </query-construct>
+
+    <template>propStatement-hasInvestigatorRole.ftl</template>
+</list-view-config>

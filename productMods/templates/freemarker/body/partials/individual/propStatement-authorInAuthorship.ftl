@@ -1,6 +1,6 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#-- Custom object property statement view for http://vivoweb.org/ontology/core#authorInAuthorship. 
+<#-- Custom object property statement view for faux property "selected publications". See the PropertyConfig.3 file for details. 
     
      This template must be self-contained and not rely on other variables set for the individual page, because it
      is also used to generate the property statement during a deletion.  
@@ -18,8 +18,8 @@
     <span class="hideThis">&nbsp;</span>
     <script type="text/javascript" >
         $('span.hideThis').parent().parent().addClass("hideThis");
-        if ( $('h3#authorInAuthorship').attr('class').length == 0 ) {
-            $('h3#authorInAuthorship').addClass('hiddenPubs');
+        if ( $('h3#relatedBy-Authorship').attr('class').length == 0 ) {
+            $('h3#relatedBy-Authorship').addClass('hiddenPubs');
         }
         $('span.hideThis').parent().remove();
     </script>
@@ -50,7 +50,7 @@
                     <em>${statement.partOf!}</em>.
                 </#if>
                 <#if statement.editor??>
-                    Ed.&nbsp;${statement.editor!}.&nbsp;
+                    ${i18n().editor_abbreviated}&nbsp;${statement.editor!}.&nbsp;
                 </#if>
                 <#if statement.locale?? && statement.publisher??>
                     ${statement.locale!}:&nbsp;${statement.publisher!}.
@@ -65,11 +65,11 @@
                     ${statement.startPage!}.
                 </#if>
             <#elseif statement.subclass?contains("Book")>
-                <#if statement.volume??>
-                    Vol.&nbsp;${statement.volume!}.&nbsp;
+                <#if statement.volume?? && (statement.volume!?length > 0 )>
+                    ${i18n().volume_abbreviated}&nbsp;${statement.volume!}.&nbsp;
                 </#if>
                 <#if statement.editor??>
-                    Ed.&nbsp;${statement.editor!}.&nbsp;
+                    ${i18n().editor_abbreviated}&nbsp;${statement.editor!}.&nbsp;
                 </#if>
                 <#if statement.locale?? && statement.publisher??>
                     ${statement.locale!}:&nbsp;${statement.publisher!}.
@@ -87,7 +87,7 @@
                     <em>${statement.partOf!}</em>.
                 </#if>
                 <#if statement.editor??>
-                    Ed. ${statement.editor!}.&nbsp;
+                    ${i18n().editor_abbreviated} ${statement.editor!}.&nbsp;
                 </#if>
                 <#if statement.startPage?? && statement.endPage??>
                     ${statement.startPage!}-${statement.endPage!}.
@@ -101,16 +101,16 @@
     <#local resourceTitle>
         <#if statement.infoResource??>
             <#if citationDetails?has_content>
-                <a href="${profileUrl(statement.uri("infoResource"))}"  title="resource name">${statement.infoResourceName}</a>.&nbsp;
+                <a href="${profileUrl(statement.uri("infoResource"))}"  title="${i18n().resource_name}">${statement.infoResourceName}</a>.&nbsp;
             <#else>
-                <a href="${profileUrl(statement.uri("infoResource"))}"  title="resource name">${statement.infoResourceName}</a>
+                <a href="${profileUrl(statement.uri("infoResource"))}"  title="${i18n().resource_name}">${statement.infoResourceName}</a>
             </#if>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.uri("authorship"))}" title="missing resource">missing information resource</a>
+            <a href="${profileUrl(statement.uri("authorship"))}" title="${i18n().missing_info_resource}">${i18n().missing_info_resource}</a>
         </#if>
     </#local>
 
-    ${resourceTitle} ${citationDetails} <@dt.yearSpan "${statement.dateTime!}" />
+    ${resourceTitle} ${citationDetails} <@dt.yearSpan "${statement.dateTime!}" /> 
 </#if>
 </#macro>

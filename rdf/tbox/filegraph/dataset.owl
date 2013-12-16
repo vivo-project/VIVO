@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://purl.obolibrary.org/obo/arg/publication.owl#"
+     xml:base="http://purl.obolibrary.org/obo/arg/publication.owl"
+     xmlns:obo="http://purl.obolibrary.org/obo/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+     xmlns:vitro="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:core="http://vivoweb.org/ontology/core#">
+
+ <!-- http://vivoweb.org/ontology/core#Dataset -->
+ 
+     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Dataset">
+ 
+         <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
+             <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A named collection of data, usually containing only one type of data</obo:IAO_0000115>
+             <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">US Patent Data; US Job Data</obo:IAO_0000112>
+
+         <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/spar/cito/isCitedAsDataSourceBy"/>
+                <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
+            </owl:Restriction>
+         </rdfs:subClassOf>
+
+     </owl:Class>
+
+<owl:Class rdf:about="http://purl.org/ontology/bibo/Document">
+         <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/spar/cito/citesAsDataSource"/>
+                <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#Dataset"/>
+            </owl:Restriction>
+         </rdfs:subClassOf>
+</owl:Class>
+
+ <!-- http://purl.org/spar/cito/isCitedAsDataSourceBy -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/spar/cito/isCitedAsDataSourceBy">
+        <rdfs:label xml:lang="en">is cited as data source by</rdfs:label>
+        <rdfs:comment xml:lang="en">The cited entity is cited as a data source by the citing entity.</rdfs:comment>
+        <owl:inverseOf rdf:resource="http://purl.org/spar/cito/citesAsDataSource"/>
+    </owl:ObjectProperty>
+
+  <!-- http://purl.org/spar/cito/citesAsDataSource -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/spar/cito/citesAsDataSource">
+        <rdfs:label xml:lang="en">cites as data source</rdfs:label>
+        <rdfs:comment xml:lang="en">The citing entity cites the cited entity as source of data.</rdfs:comment>
+    </owl:ObjectProperty>
+
+</rdf:RDF>

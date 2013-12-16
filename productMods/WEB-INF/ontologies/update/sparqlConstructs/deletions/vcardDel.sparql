@@ -1,0 +1,73 @@
+PREFIX arg: <http://purl.obolibrary.org/obo/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX v:   <http://www.w3.org/2006/vcard/ns#>
+PREFIX vivo: <http://vivoweb.org/ontology/core#>
+PREFIX bibo: <http://purl.org/ontology/bibo/> 
+
+CONSTRUCT {
+        ?s foaf:firstName ?firstName .
+        ?s foaf:lastName ?lastName .
+        ?s vivo:middleName ?middleName .
+        ?s bibo:prefixName ?prefix .
+        ?s bibo:suffixName ?suffix .
+        ?s vivo:email ?email .
+        ?s vivo:primaryEmail ?primaryEmail . 
+        ?s vivo:phoneNumber ?phoneNumber .
+        ?s vivo:primaryPhoneNumber ?primaryPhoneNumber .
+        ?s vivo:faxNumber ?faxNumber .
+        ?s vivo:mailingAddress ?address .
+        ?address ?addressP ?addressO .
+        ?addressS ?addressQ ?address .
+        ?s vivo:webpage ?webpage .
+        ?webpage ?webpageP ?webpageO .
+} WHERE {
+    {
+        ?s foaf:firstName ?firstName .
+    } 
+    UNION {
+        ?s foaf:lastName ?lastName .
+    } 
+    UNION {
+        ?s vivo:middleName ?middleName .
+        ?s a foaf:Person .
+    }
+    UNION {
+        ?s bibo:prefixName ?prefix 
+    } 
+    UNION {
+        ?s bibo:suffixName ?suffix
+    } 
+    UNION {
+        ?s vivo:email ?email
+    } 
+    UNION {
+        ?s vivo:primaryEmail ?primaryEmail 
+    } 
+    UNION {
+        ?s vivo:phoneNumber ?phoneNumber 
+    } 
+    UNION {
+        ?s vivo:primaryPhoneNumber ?primaryPhoneNumber
+    } 
+    UNION {
+        ?s vivo:faxNumber ?faxNumber
+    } 
+    UNION {
+        ?s vivo:mailingAddress ?address .
+    }
+    UNION {
+        ?s vivo:mailingAddress ?address .
+        ?address ?addressP ?addressO
+    } 
+    UNION {
+        ?s vivo:mailingAddress ?address .
+        ?addressS ?addressQ ?address 
+    }
+    UNION {
+        ?s vivo:webpage ?webpage 
+    }
+    UNION {
+        ?s vivo:webpage ?webpage .
+        ?webpage ?webpageP ?webpageO
+    }
+}

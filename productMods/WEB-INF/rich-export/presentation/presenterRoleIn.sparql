@@ -5,13 +5,9 @@ CONSTRUCT {
      ?presentation rdfs:label ?presentationTitle . 
      ?presenterRole rdfs:label ?roleLabel .
 } WHERE {
-     PERSON_URI vivo:hasPresenterRole ?presenterRole .
-          
-     optional {?presenterRole rdfs:label ?roleLabel}
-          
-     {?presenterRole vivo:roleRealizedIn ?presentation}
-        union
-     {?presenterRole vivo:roleIn ?presentation}   
-     
+     PERSON_URI obo:RO_0000053 ?presenterRole .
+     ?presenterRole a core:PresenterRole .
+     ?presenterRole rdfs:label ?roleLAbel .
+     ?presenterRole obo:BFO_0000054 ?presentation .     
      ?presentation rdfs:label ?presentationTitle .
 }

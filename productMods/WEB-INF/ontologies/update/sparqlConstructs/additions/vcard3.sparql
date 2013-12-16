@@ -1,0 +1,16 @@
+PREFIX arg: <http://purl.obolibrary.org/obo/> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+PREFIX v:   <http://www.w3.org/2006/vcard/ns#> 
+PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+
+CONSTRUCT {
+    ?vcard v:hasEmail _:email .
+    _:email a v:Email .
+    _:email v:email ?email .
+} WHERE {
+    ?s vivo:email ?email .
+    ?s arg:ARG_2000028 ?vcard .
+    FILTER NOT EXISTS {
+        ?vcard v:hasEmail ?emailnode
+    }
+}

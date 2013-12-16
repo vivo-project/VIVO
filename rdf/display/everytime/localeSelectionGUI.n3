@@ -1,0 +1,12 @@
+# $This file is distributed under the terms of the license in /doc/license.txt$ 
+
+#
+# Associate the LocaleSelectionDataGetter with the languageSelector.ftl Freemarker template.
+#
+
+@prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+ 
+<freemarker:languageSelector.ftl> display:hasDataGetter display:localeSelectorDataGetter .
+ 
+display:localeSelectorDataGetter
+    a <java:edu.cornell.mannlib.vitro.webapp.i18n.selection.LocaleSelectionDataGetter> .

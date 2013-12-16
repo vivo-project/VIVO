@@ -5,35 +5,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>CheckRepairMode</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">CheckRepairMode</td></tr>
+<tr><td rowspan="1" colspan="3">CheckRepairMode</td></tr>
 </thead><tbody>
-<tr>
-	<td>comment</td>
-	<td class="comment">Test repair mode using Lily Librarian--originally tested auto-complete but doesn't work well within Selenium</td>
-	<td></td>
-</tr>
+<!--Test repair mode using Lily Librarian--originally tested auto-complete but doesn't work well within Selenium-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must be logged off to start</td>
-	<td></td>
-</tr>
+<!--Must be logged off to start-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must login as the site admin</td>
-	<td></td>
-</tr>
+<!--Must login as the site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -89,11 +59,7 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Lily Librarian</td>
-	<td></td>
-</tr>
+<!--Navigate to Lily Librarian-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -119,11 +85,7 @@
 	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Create a membership role in the front end</td>
-	<td></td>
-</tr>
+<!--Create a membership role in the front end-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='hasMemberRole']/a/img</td>
@@ -169,11 +131,7 @@
 	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify membership role</td>
-	<td></td>
-</tr>
+<!--Verify membership role-->
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=LITA</td>
@@ -204,11 +162,7 @@
 	<td>Member at Large 1999 - 2009</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Go to role node in backend editing</td>
-	<td></td>
-</tr>
+<!--Go to role node in backend editing-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Librarian, Lily</td>
@@ -239,11 +193,7 @@
 	<td>Individual Control Panel</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify role is there</td>
-	<td></td>
-</tr>
+<!--Verify role is there-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>LITA</td>
@@ -259,11 +209,7 @@
 	<td>link=Member at Large</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Delete relationship between role node and non-person thing</td>
-	<td></td>
-</tr>
+<!--Delete relationship between role node and non-person thing-->
 <tr>
 	<td>click</td>
 	<td>//input[@value='Delete']</td>
@@ -271,7 +217,7 @@
 </tr>
 <tr>
 	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete the property Member at Large related role?</td>
+	<td>Are you sure you want to delete the property Member at Large contributor?</td>
 	<td></td>
 </tr>
 <tr>
@@ -279,11 +225,7 @@
 	<td>5000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify role is gone</td>
-	<td></td>
-</tr>
+<!--Verify role is gone-->
 <tr>
 	<td>refreshAndWait</td>
 	<td>10000</td>
@@ -324,11 +266,7 @@
 	<td>link=Member at Large</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Go back to Lily Librarian in front end</td>
-	<td></td>
-</tr>
+<!--Go back to Lily Librarian in front end-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -354,11 +292,7 @@
 	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify condition of MEMBER OF</td>
-	<td></td>
-</tr>
+<!--Verify condition of MEMBER OF-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>missing activity Member at Large 1999 - 2009</td>
@@ -369,11 +303,7 @@
 	<td>link=missing activity</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Edit MEMBER OF to add data back</td>
-	<td></td>
-</tr>
+<!--Edit MEMBER OF to add data back-->
 <tr>
 	<td>clickAndWait</td>
 	<td>xpath=(//img[@alt='edit'])[5]</td>
@@ -394,11 +324,7 @@
 	<td>Membership In</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Don't select anything--just press enter button</td>
-	<td></td>
-</tr>
+<!--Don't select anything--just press enter button-->
 <tr>
 	<td>clickAndWait</td>
 	<td>submit</td>
@@ -414,11 +340,7 @@
 	<td>Please enter or select a value in the Name field.</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Have to re-select Association</td>
-	<td></td>
-</tr>
+<!--Have to re-select Association-->
 <tr>
 	<td>select</td>
 	<td>typeSelector</td>
@@ -469,21 +391,13 @@
 	<td>Edit</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Forgot to enter name of organization so error occurred</td>
-	<td></td>
-</tr>
+<!--Forgot to enter name of organization so error occurred-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Please enter or select a value in the Name field.</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Now enter the missing information</td>
-	<td></td>
-</tr>
+<!--Now enter the missing information-->
 <tr>
 	<td>type</td>
 	<td>id=activity</td>
@@ -524,11 +438,7 @@
 	<td>Member at Large 1999 - 2009</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Log out</td>
-	<td></td>
-</tr>
+<!--Log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

@@ -5,35 +5,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>ChangeEducationBackground</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">ChangeEducationBackground</td></tr>
+<tr><td rowspan="1" colspan="3">ChangeEducationBackground</td></tr>
 </thead><tbody>
-<tr>
-	<td>comment</td>
-	<td class="comment">Make changes to 3 degrees</td>
-	<td></td>
-</tr>
+<!--Make changes to 3 degrees-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged in already</td>
-	<td></td>
-</tr>
+<!--Must not be logged in already-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must log in as site admin</td>
-	<td></td>
-</tr>
+<!--Must log in as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -89,11 +59,7 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Jane Faculty via Index</td>
-	<td></td>
-</tr>
+<!--Navigate to Jane Faculty via Index-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -119,11 +85,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify all 3 degree entries exist</td>
-	<td></td>
-</tr>
+<!--Verify all 3 degree entries exist-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>B.S. in Business Administration, Carroll College 1980</td>
@@ -139,11 +101,7 @@
 	<td>M.Ed. in Business Education, University of Wisconsin, Graduate School Fellowship 2002 -</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Change department, year, and supplemental info for B.S. degree</td>
-	<td></td>
-</tr>
+<!--Change department, year, and supplemental info for B.S. degree-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//div[@id='wrapper-content']/section[7]/article[3]/ul/li[3]/a[2]/img</td>
@@ -204,11 +162,7 @@
 	<td>10000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify B.S. degree info changed but other 2 degrees the same</td>
-	<td></td>
-</tr>
+<!--Verify B.S. degree info changed but other 2 degrees the same-->
 <tr>
 	<td>assertTitle</td>
 	<td>Faculty, Jane</td>
@@ -229,11 +183,7 @@
 	<td>M.Ed. in Business Education, University of Wisconsin, Graduate School Fellowship 2002 -</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Change department for M.B.A. degree</td>
-	<td></td>
-</tr>
+<!--Change department for M.B.A. degree-->
 <tr>
 	<td>assertTitle</td>
 	<td>Faculty, Jane</td>
@@ -284,11 +234,7 @@
 	<td>10000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify M.B.A. school changed but other 2 degrees the same</td>
-	<td></td>
-</tr>
+<!--Verify M.B.A. school changed but other 2 degrees the same-->
 <tr>
 	<td>assertTitle</td>
 	<td>Faculty, Jane</td>
@@ -309,11 +255,7 @@
 	<td>M.Ed. in Business Education, University of Wisconsin, Graduate School Fellowship 2002 -</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Change M.Ed. to add department and delete supplemental info</td>
-	<td></td>
-</tr>
+<!--Change M.Ed. to add department and delete supplemental info-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=a.edit-educationalTraining &gt; img.edit-individual</td>
@@ -364,11 +306,7 @@
 	<td>10000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify M.Ed. degree info changed but other 2 degrees the same</td>
-	<td></td>
-</tr>
+<!--Verify M.Ed. degree info changed but other 2 degrees the same-->
 <tr>
 	<td>assertTitle</td>
 	<td>Faculty, Jane</td>
@@ -389,11 +327,7 @@
 	<td>M.Ed. in Business Education, University of Wisconsin, School of Business 2002 -</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Log out</td>
-	<td></td>
-</tr>
+<!--Log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

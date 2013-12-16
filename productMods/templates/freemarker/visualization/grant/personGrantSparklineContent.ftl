@@ -22,8 +22,8 @@
                 var onlyUnknownYearGrants = false;
     
                 var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Year');
-                data.addColumn('number', 'Grants');
+                data.addColumn('string', '${i18n().year_capitalized}');
+                data.addColumn('number', '${i18n().grants_capitalized}');
                 data.addRows(${sparklineVO.yearToEntityCountDataTable?size});
         
                 var knownYearGrantCounts = 0;
@@ -146,17 +146,17 @@
                     var totalGrants = onlyUnknownYearGrants ? unknownYearGrantCounts : renderedShortSparks;
                     
                     if (totalGrants === 1) {
-                        var grantDisplay = "grant";
+                        var grantDisplay = "${i18n().grant}";
                     } else {
-                        var grantDisplay = "grants";
+                        var grantDisplay = "${i18n().grants}";
                     }
                     
                     $('#${sparklineContainerID} td.sparkline_number').text(totalGrants).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + grantDisplay + " <br/></span>");
             
-                    var sparksText = '  within the last 10 years';
+                    var sparksText = '  ${i18n().within_last_10_years}';
                     
                     if (totalGrants !== totalGrantCount) {
-                        sparksText += ' (' + totalGrantCount + ' total)';
+                        sparksText += ' (' + totalGrantCount + ' ${i18n().total})';
                     }
             
                  <#else>
@@ -175,9 +175,9 @@
                     var totalGrants = onlyUnknownYearGrants ? unknownYearGrantCounts : renderedSparks;
                     
                     if (totalGrants === 1) {
-                        var grantDisplay = "grant";
+                        var grantDisplay = "${i18n().grant}";
                     } else {
-                        var grantDisplay = "grants";
+                        var grantDisplay = "${i18n().grants}";
                     }
                         
                     $('#${sparklineContainerID} td.sparkline_number').text(totalGrants).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + grantDisplay + " <br/></span>");
@@ -186,11 +186,11 @@
                                         + ' through ${sparklineVO.latestRenderedGrantYear?c}</span>';
                                         
                     if (totalGrants !== totalGrantCount) {
-                        sparksText += ' (' + totalGrantCount + ' total)';
+                        sparksText += ' (' + totalGrantCount + ' ${i18n().total})';
                     }                                        
                                
                     if (totalGrantCount) {
-                        sparksText += '<br /> <a href="${sparklineVO.downloadDataLink}"  title="csv file">(.CSV File)</a> ';                    
+                        sparksText += '<br /> <a href="${sparklineVO.downloadDataLink}"  title=".csv ${i18n().file}">(.CSV ${i18n().file_capitalized})</a> ';                    
                     }                                                
                                          
                  </#if>
@@ -265,7 +265,7 @@
     
     <#if sparklineVO.shortVisMode>
         <#--<span class="vis_link">-->
-            <p><a class="all-vivo-grants" href="${sparklineVO.fullTimelineNetworkLink}" title="view all grants">View all VIVO grants and corresponding co-investigator network.</a></p>
+            <p><a class="all-vivo-grants" href="${sparklineVO.fullTimelineNetworkLink}" title="${i18n().view_all_grants}">${i18n().view_all_grants_text}</a></p>
         <#--</span>-->
     <#else>
         <!-- For Full Sparkline - Print the Table of Grant Counts per Year -->
@@ -273,14 +273,14 @@
         
             <p> 
                 <#assign tableID = "grant_sparkline_data_table" />
-                <#assign tableCaption = "Grants per year" />
-                <#assign tableActivityColumnName = "Grants" />
+                <#assign tableCaption = "${i18n().grant_per_year}" />
+                <#assign tableActivityColumnName = "${i18n().grants_capitalized}" />
                 <#assign tableContent = sparklineVO.yearToActivityCount />
                 <#assign fileDownloadLink = sparklineVO.downloadDataLink />
                 
                 <#include "yearToActivityCountTable.ftl">
     
-                Download data as <a href="${sparklineVO.downloadDataLink}" title="csv link">.csv</a> file.
+                ${i18n().download_data_as} <a href="${sparklineVO.downloadDataLink}" title=".csv ${i18n().link}">.csv</a> ${i18n().file}.
                 <br />
             </p>
         

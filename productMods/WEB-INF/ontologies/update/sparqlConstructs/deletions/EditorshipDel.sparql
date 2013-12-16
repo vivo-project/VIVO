@@ -1,0 +1,14 @@
+PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+CONSTRUCT {
+    ?person vivo:editorOf ?document .
+    ?document vivo:editor ?person
+} WHERE {
+    { 
+      ?person vivo:editorOf ?document
+    } UNION {
+      ?document vivo:editor ?person
+    }
+}

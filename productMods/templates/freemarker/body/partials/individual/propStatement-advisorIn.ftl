@@ -1,6 +1,6 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#-- Custom object property statement view for http://vivoweb.org/ontology/core#mailingAddress. 
+<#-- Custom object property statement view for faux property "advisees". See the PropertyConfig.3 file for details. 
     
      This template must be self-contained and not rely on other variables set for the individual page, because it
      is also used to generate the property statement during a deletion.  
@@ -16,16 +16,16 @@
     <#local linkedIndividual>
         <#if statement.advisee??>
             <#if statement.degreeLabel?? || statement.dateTimeStart?? || statement.dateTimeEnd?? >
-                <a href="${profileUrl(statement.uri("advisee"))}" title="advisee label">${statement.adviseeLabel!}</a>,
+                <a href="${profileUrl(statement.uri("advisee"))}" title="${i18n().advisee_label}">${statement.adviseeLabel!}</a>,
             <#else>
-                <a href="${profileUrl(statement.uri("advisee"))}" title="advisee label">${statement.adviseeLabel!}</a>
+                <a href="${profileUrl(statement.uri("advisee"))}" title="${i18n().advisee_label}">${statement.adviseeLabel!}</a>
             </#if>
             <#if statement.degreeLabel??>
                 ${statement.degreeAbbr!statement.degreeLabel!} 
-                <#if statement.dateTimeStart?? || statement.dateTimeEnd?? >&nbsp;candidate,<#else>&nbsp;candidate</#if>
+                <#if statement.dateTimeStart?? || statement.dateTimeEnd?? >&nbsp;${i18n().candidate},<#else>&nbsp;${i18n().candidate}</#if>
             </#if>
-        <#elseif statement.advisoryLabel??>
-            <a href="${profileUrl(statement.uri("advisory"))}" title="advisory label">${statement.advisoryLabel!statement.localName}</a>
+        <#elseif statement.advisingRelLabel??>
+            <a href="${profileUrl(statement.uri("advisingRel"))}" title="${i18n().advisingRel_label}">${statement.advisingRelLabel!statement.localName}</a>
         </#if>
     </#local>
 

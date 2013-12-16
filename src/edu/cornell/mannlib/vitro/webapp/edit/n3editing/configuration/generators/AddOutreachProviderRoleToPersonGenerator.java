@@ -9,6 +9,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
 public class AddOutreachProviderRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
 	
 	private static String template = "addOutreachProviderRoleToPerson.ftl";
+	private static String OPTION_CLASS_URI = "http://xmlns.com/foaf/0.1/Organization";
 	
 	@Override
 	String getTemplate() {
@@ -23,38 +24,57 @@ public class AddOutreachProviderRoleToPersonGenerator extends AddRoleToPersonTwo
 	//Outreach Provider role involves hard-coded options for the "right side" of the role or activity
     @Override
     FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
-		return new ConstantFieldOptions(
-        "","Select type",
-        "http://vivoweb.org/ontology/core#Association","Association",
-        "http://vivoweb.org/ontology/core#Center","Center",
-        "http://vivoweb.org/ontology/core#ClinicalOrganization","Clinical Organization",
-        "http://vivoweb.org/ontology/core#College","College",
-        "http://vivoweb.org/ontology/core#Committee","Committee",
-        "http://vivoweb.org/ontology/core#Consortium","Consortium",
-        "http://vivoweb.org/ontology/core#Department","Department",
-        "http://vivoweb.org/ontology/core#Division","Division",
-        "http://purl.org/NET/c4dm/event.owl#Event","Event",
-        "http://vivoweb.org/ontology/core#ExtensionUnit","Extension Unit",
-        "http://vivoweb.org/ontology/core#Foundation","Foundation",
-        "http://vivoweb.org/ontology/core#FundingOrganization","Funding Organization",
-        "http://vivoweb.org/ontology/core#GovernmentAgency","Government Agency",
-        "http://vivoweb.org/ontology/core#Hospital","Hospital",
-        "http://vivoweb.org/ontology/core#Institute","Institute",
-        "http://vivoweb.org/ontology/core#Laboratory","Laboratory",
-        "http://vivoweb.org/ontology/core#Library","Library",
-        "http://vivoweb.org/ontology/core#Museum","Museum",
-        "http://xmlns.com/foaf/0.1/Organization","Organization",
-        "http://vivoweb.org/ontology/core#PrivateCompany","Private Company",
-        "http://vivoweb.org/ontology/core#Program","Program",
-        "http://vivoweb.org/ontology/core#Project","Project",
-        "http://vivoweb.org/ontology/core#Publisher","Publisher",
-        "http://vivoweb.org/ontology/core#ResearchOrganization","Research Organization",
-        "http://vivoweb.org/ontology/core#Team","Team",
-        "http://vivoweb.org/ontology/core#School","School",
-        "http://vivoweb.org/ontology/core#Service","Service",
-        "http://vivoweb.org/ontology/core#StudentOrganization","Student Organization",
-        "http://vivoweb.org/ontology/core#University","University");
-            
+                    return new ConstantFieldOptions(
+            "","Select type",
+            "http://vivoweb.org/ontology/core#AcademicDepartment","Academic Department",
+            "http://vivoweb.org/ontology/core#Association","Association",
+            "http://vivoweb.org/ontology/core#Center","Center",
+            "http://vivoweb.org/ontology/core#ClinicalOrganization","Clinical Organization",
+            "http://vivoweb.org/ontology/core#College","College",
+            "http://vivoweb.org/ontology/core#Committee","Committee",
+            "http://vivoweb.org/ontology/core#Company","Company",
+            "http://vivoweb.org/ontology/core#Competition", "Competition",
+            "http://purl.org/ontology/bibo/Conference", "Conference",
+            "http://vivoweb.org/ontology/core#ConferenceSeries", "Conference Series",
+            "http://vivoweb.org/ontology/core#Consortium","Consortium",
+            "http://vivoweb.org/ontology/core#CoreLaboratory","Core Laboratory",
+            "http://vivoweb.org/ontology/core#Course", "Course",
+            "http://vivoweb.org/ontology/core#Department","Department",
+            "http://vivoweb.org/ontology/core#Division","Division",
+            "http://purl.org/NET/c4dm/event.owl#Event","Event",
+            "http://vivoweb.org/ontology/core#EventSeries", "Event Series",
+            "http://vivoweb.org/ontology/core#Exhibit", "Exhibit",
+            "http://vivoweb.org/ontology/core#ExtensionUnit","Extension Unit",
+            "http://vivoweb.org/ontology/core#Foundation","Foundation",
+            "http://vivoweb.org/ontology/core#FundingOrganization","Funding Organization",
+            "http://vivoweb.org/ontology/core#GovernmentAgency","Government Agency",
+            "http://xmlns.com/foaf/0.1/Group","Group",
+            "http://purl.org/ontology/bibo/Hearing", "Hearing",
+            "http://vivoweb.org/ontology/core#Hospital","Hospital",
+            "http://vivoweb.org/ontology/core#Institute","Institute",
+            "http://purl.org/ontology/bibo/Interview", "Interview",
+            "http://vivoweb.org/ontology/core#InvitedTalk", "Invited Talk",
+            "http://vivoweb.org/ontology/core#Laboratory","Laboratory",
+            "http://vivoweb.org/ontology/core#Library","Library",
+            "http://purl.obolibrary.org/obo/OBI_0000835","Manufacturer",
+            "http://vivoweb.org/ontology/core#Meeting", "Meeting",
+            "http://vivoweb.org/ontology/core#Museum","Museum",
+            "http://xmlns.com/foaf/0.1/Organization","Organization",
+            "http://purl.org/ontology/bibo/Performance", "Performance",
+            "http://vivoweb.org/ontology/core#Presentation", "Presentation",
+            "http://vivoweb.org/ontology/core#PrivateCompany","Private Company",
+            "http://vivoweb.org/ontology/core#Program","Program",
+            "http://vivoweb.org/ontology/core#Publisher","Publisher",
+            "http://vivoweb.org/ontology/core#ResearchOrganization","Research Organization",
+            "http://vivoweb.org/ontology/core#School","School",
+            "http://vivoweb.org/ontology/core#SeminarSeries", "Seminar Series",
+            "http://vivoweb.org/ontology/core#Team","Team",
+            "http://vivoweb.org/ontology/core#ServiceProvidingLaboratory","Service Providing Lab",
+            "http://vivoweb.org/ontology/core#StudentOrganization","Student Organization",
+            "http://purl.obolibrary.org/obo/ERO_0000565","Technology Transfer Office",
+            "http://vivoweb.org/ontology/core#University","University",
+            "http://purl.org/ontology/bibo/Workshop", "Workshop",
+            "http://vivoweb.org/ontology/core#WorkshopSeries", "Workshop Series");
 	}
 
 	@Override

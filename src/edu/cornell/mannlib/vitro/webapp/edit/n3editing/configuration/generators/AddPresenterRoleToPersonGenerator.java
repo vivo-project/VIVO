@@ -26,12 +26,12 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
     final static String presentationClass = vivoCore + "Presentation";
     final static String roleClass = vivoCore + "PresenterRole";
     final static String conferenceClass = bibo + "Conference";
-    final static String hasRolePred = vivoCore + "hasPresenterRole";
-    final static String roleOfPred = vivoCore + "presenterRoleOf";
-    final static String roleRealizedInPred = vivoCore + "roleRealizedIn";
-    final static String realizedRolePred = vivoCore + "realizedRole";
-    final static String includesEventPred = vivoCore + "includesEvent";
-    final static String eventWithinPred = vivoCore + "eventWithin";
+    final static String hasRolePred = "http://purl.obolibrary.org/obo/RO_0000053";
+    final static String roleOfPred = "http://purl.obolibrary.org/obo/RO_0000052";
+    final static String roleRealizedInPred = "http://purl.obolibrary.org/obo/BFO_0000054";
+    final static String realizedRolePred = "http://purl.obolibrary.org/obo/BFO_0000055";
+    final static String includesEventPred = "http://purl.obolibrary.org/obo/BFO_0000051";
+    final static String eventWithinPred = "http://purl.obolibrary.org/obo/BFO_0000050";
     final static String roleToInterval = vivoCore + "dateTimeInterval";
     final static String intervalType = vivoCore + "DateTimeInterval";
     final static String intervalToStart = vivoCore + "start";
@@ -101,9 +101,8 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
         conf.addSparqlForExistingUris("endField-precision", 
                 existingEndPrecisionQuery);
         
-        conf.addField( new FieldVTwo().
-                setName("existingPresentation").
-                setOptions(new IndividualsViaVClassOptions(presentationClass))                
+        conf.addField( new FieldVTwo(). // an autocomplete field
+                setName("existingPresentation") 
                 );
 
         conf.addField( new FieldVTwo().                        
@@ -131,9 +130,8 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
                 setValidators( list("nonempty") )
                 );
 
-        conf.addField( new FieldVTwo().
-                setName("existingConference").
-                setOptions(new IndividualsViaVClassOptions(conferenceClass))
+        conf.addField( new FieldVTwo(). // an autocomplete field
+                setName("existingConference") 
                 );
         
         conf.addField( new FieldVTwo().

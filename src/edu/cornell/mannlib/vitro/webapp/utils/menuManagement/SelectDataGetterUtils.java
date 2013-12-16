@@ -31,7 +31,7 @@ public class SelectDataGetterUtils {
 	public static void processAndRetrieveData(VitroRequest vreq, ServletContext context, Map<String, Object> pageData, String dataGetterClass, Map<String, Object> templateData) {
 		//The type of the data getter will show how to process the data from the data getter
 		ProcessDataGetter processor = selectProcessor(dataGetterClass);
-		processor.populateTemplate(context, pageData, templateData);
+		processor.populateTemplate(vreq, pageData, templateData);
 	}
 	
 	//This will be different in VIVO than in VITRO

@@ -149,17 +149,17 @@
                     var totalPubs = onlyUnknownYearPublications ? unknownYearPublicationCounts : renderedShortSparks;
                     
                     if (totalPubs === 1) {
-                        var pubDisplay = "co-author";
+                        var pubDisplay = "${i18n().co_author}";
                     } else {
-                        var pubDisplay = "co-authors";
+                        var pubDisplay = "${i18n().co_authors}";
                     }
          
                     $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + pubDisplay + " <br/></span>");
             
-                    var sparksText = '  within the last 10 years';
+                    var sparksText = '  ${i18n().within_last_10_years}';
                                         
                     if (totalPubs !== totalPublicationCount) {
-                        sparksText += ' (' + totalPublicationCount + ' total)';
+                        sparksText += ' (' + totalPublicationCount + ' ${i18n().total})';
                     }
             
                  <#else>
@@ -178,22 +178,22 @@
                     var totalPubs = onlyUnknownYearPublications ? unknownYearPublicationCounts : renderedSparks;
                           
                     if ( totalPubs == 1 ) {
-                        var pubDisplay = "co-author";
+                        var pubDisplay = "${i18n().co_author}";
                     } else {
-                        var pubDisplay = "co-authors";
+                        var pubDisplay = "${i18n().co_authors}";
                     }
                           
                     $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + pubDisplay + " <br/></span>");
             
-                    var sparksText = '  from <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}' 
-                                        + ' to ${sparklineVO.latestRenderedPublicationYear?c}</span>';
+                    var sparksText = '  ${i18n().from} <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}' 
+                                        + ' ${i18n().to} ${sparklineVO.latestRenderedPublicationYear?c}</span>';
                                         
                     if (totalPubs !== totalPublicationCount) {
-                        sparksText += ' (' + totalPublicationCount + ' total)';
+                        sparksText += ' (' + totalPublicationCount + ' ${i18n().total})';
                     }
                     
                     if (totalPublicationCount) {
-                        sparksText += ' <br /><a href="${sparklineVO.downloadDataLink}" title="csv file">(.CSV File)</a> ';
+                        sparksText += ' <br /><a href="${sparklineVO.downloadDataLink}" title="csv ${i18n().file_capitalized}">(.CSV ${i18n().file_capitalized})</a> ';
                     }
                                          
                  </#if>
@@ -271,7 +271,7 @@
 
     <#if sparklineVO.shortVisMode>
         <#--<span class="vis_link">-->
-            <p><a class="all-vivo-publications" href="${sparklineVO.fullTimelineNetworkLink}" title="view full timeline">View full timeline and co-author network.</a></p>
+            <p><a class="all-vivo-publications" href="${sparklineVO.fullTimelineNetworkLink}" title="${i18n().view_full_timeline_and_network}">${i18n().view_full_timeline_and_network}</a></p>
         <#--</span>-->
     <#else>
         <!-- For Full Sparkline - Print the Table of Couauthor Counts per Year -->
@@ -280,14 +280,14 @@
         
                 <p> 
                     <#assign tableID = "coauthors_sparkline_data_table" />
-                    <#assign tableCaption = "Unique Co-Authors per year " />
-                    <#assign tableActivityColumnName = "Count" />
+                    <#assign tableCaption = "${i18n().unique_coauthors_per_year} " />
+                    <#assign tableActivityColumnName = "${i18n().count_capitalized}" />
                     <#assign tableContent = sparklineVO.yearToActivityCount />
                     <#assign fileDownloadLink = sparklineVO.downloadDataLink />
                     
                     <#include "yearToActivityCountTable.ftl">
         
-                    Download data as <a href="${sparklineVO.downloadDataLink}" title="csv download">.csv</a> file.
+                    ${i18n().download_data_as} <a href="${sparklineVO.downloadDataLink}" title="csv ${i18n().download}">.csv</a> ${i18n().file}.
                     <br />
                 </p>
         

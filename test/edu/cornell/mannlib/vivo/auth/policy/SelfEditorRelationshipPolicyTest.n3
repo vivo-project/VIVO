@@ -6,9 +6,11 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix bib: <http://purl.org/ontology/bibo/> .
 @prefix core: <http://vivoweb.org/ontology/core#> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
 @prefix mydomain: <http://vivo.mydomain.edu/individual/> .
 
-### This file is for the test InformationResourceEditingPolicyTest.java.
+
+### This file contains data for SelfEditorRelationshipPolicyTest.java.
 
 #
 # Bozo
@@ -21,8 +23,8 @@ mydomain:bozo
 	rdfs:label "Person, Bozo" ;
 	foaf:firstName "Bozo" ;
 	foaf:lastName "Person" ;
-	core:editorOf mydomain:bozoEditedIt ;
-	core:authorInAuthorship mydomain:authorshipBozo ;
+	core:relatedBy mydomain:authorshipBozo ;
+	core:relatedBy mydomain:editorshipBozo ;
 	.
 
 #
@@ -36,16 +38,16 @@ mydomain:joe
 	rdfs:label "Person, Joe" ;
 	foaf:firstName "Joe" ;
 	foaf:lastName "Person" ;
-	core:editorOf mydomain:joeEditedIt ;
-	core:authorInAuthorship mydomain:authorshipJoe ;
+	core:relatedBy mydomain:authorshipJoe ;
+	core:relatedBy mydomain:editorshipJoe ;
 	.
 
 #
-# info resource with no author or editor
+# info content entity with no author or editor
 #
 mydomain:nobodyWroteIt
 	a core:BlogPosting ;
-	a core:InformationResource ;
+	a obo:IAO_0000030 ;
 	a bib:Article ;
 	a bib:Document ;
 	a owl:Thing ;
@@ -53,45 +55,53 @@ mydomain:nobodyWroteIt
 	.
 
 #
-# info resource with Bozo as author
+# info content entity with Bozo as author
 #
 mydomain:bozoWroteIt
 	a core:BlogPosting ;
-	a core:InformationResource ;
+	a obo:IAO_0000030 ;
 	a bib:Article ;
 	a bib:Document ;
 	a owl:Thing ;
 	rdfs:label "Bozo is author" ;
-	core:informationResourceInAuthorship mydomain:authorshipBozo ;
+	core:relatedBy mydomain:authorshipBozo ;
 	.
 
 mydomain:authorshipBozo
 	a core:Authorship ;
 	a core:Relationship ;
 	a owl:Thing ;
-	core:linkedInformationResource mydomain:bozoWroteIt ;
-	core:linkedAuthor mydomain:bozo ;
+	core:relates mydomain:bozoWroteIt ;
+	core:relates mydomain:bozo ;
 	.
 
 #
-# info resource with Bozo as editor 
+# info content entity with Bozo as editor 
 #
 mydomain:bozoEditedIt
 	a core:BlogPosting ;
-	a core:InformationResource ;
+	a obo:IAO_0000030 ;
 	a bib:Article ;
 	a bib:Document ;
 	a owl:Thing ;
 	rdfs:label "Bozo is editor" ;
-	bib:editor mydomain:bozo ;
+	core:relatedBy mydomain:editorshipBozo ;
+	.
+
+mydomain:editorshipBozo
+	a core:Editorship ;
+	a core:Relationship ;
+	a owl:Thing ;
+	core:relates mydomain:bozoEditedIt ;
+	core:relates mydomain:bozo ;
 	.
 
 #
-# info resource with Bozo featured 
+# info content entity with Bozo featured 
 #
 mydomain:bozoFeaturedInIt
 	a core:BlogPosting ;
-	a core:InformationResource ;
+	a obo:IAO_0000030 ;
 	a bib:Article ;
 	a bib:Document ;
 	a owl:Thing ;
@@ -100,45 +110,53 @@ mydomain:bozoFeaturedInIt
 	.
 
 #
-# info resource with Joe as author
+# info content entity with Joe as author
 #
 mydomain:joeWroteIt
 	a core:BlogPosting ;
-	a core:InformationResource ;
+	a obo:IAO_0000030 ;
 	a bib:Article ;
 	a bib:Document ;
 	a owl:Thing ;
 	rdfs:label "Joe is author" ;
-	core:informationResourceInAuthorship mydomain:authorshipJoe ;
+	core:relatedBy mydomain:authorshipJoe ;
 	.
 
 mydomain:authorshipJoe
 	a core:Authorship ;
 	a core:Relationship ;
 	a owl:Thing ;
-	core:linkedInformationResource mydomain:joeWroteIt ;
-	core:linkedAuthor mydomain:joe ;
+	core:relates mydomain:joeWroteIt ;
+	core:relates mydomain:joe ;
 	.
 
 #
-# info resource with Joe as editor 
+# info content entity with Joe as editor 
 #
 mydomain:joeEditedIt
 	a core:BlogPosting ;
-	a core:InformationResource ;
+	a obo:IAO_0000030 ;
 	a bib:Article ;
 	a bib:Document ;
 	a owl:Thing ;
 	rdfs:label "Joe is editor" ;
-	bib:editor mydomain:joe ;
+	core:relatedBy mydomain:editorshipJoe ;
+	.
+
+mydomain:editorshipJoe
+	a core:Editorship ;
+	a core:Relationship ;
+	a owl:Thing ;
+	core:relates mydomain:joeEditedIt ;
+	core:relates mydomain:joe ;
 	.
 
 #
-# info resource with Joe featured 
+# info content entity with Joe featured 
 #
 mydomain:joeFeaturedInIt
 	a core:BlogPosting ;
-	a core:InformationResource ;
+	a obo:IAO_0000030 ;
 	a bib:Article ;
 	a bib:Document ;
 	a owl:Thing ;

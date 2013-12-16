@@ -5,29 +5,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>EditSiteInfo</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">EditSiteInfo</td></tr>
+<tr><td rowspan="1" colspan="3">EditSiteInfo</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -39,11 +21,7 @@
 	<td>10000000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Remove Menu Management Changes</td>
-	<td></td>
-</tr>
+<!--Remove Menu Management Changes-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must be logged out</td>
-	<td></td>
-</tr>
+<!--Must be logged out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must login as site admin</td>
-	<td></td>
-</tr>
+<!--Must login as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -89,11 +59,7 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Menu Management</td>
-	<td></td>
-</tr>
+<!--Navigate to Menu Management-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Site Admin</td>
@@ -114,11 +80,7 @@
 	<td>Pages</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify new tabs there</td>
-	<td></td>
-</tr>
+<!--Verify new tabs there-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Home</td>
@@ -164,24 +126,10 @@
 	<td>Locations</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Delete new menu items</td>
-	<td></td>
-</tr>
+<!--Delete new menu items-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=img[alt=&quot;delete&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you wish to delete this page: Activities?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -250,10 +198,26 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Verify new tabs gone</td>
+	<td>click</td>
+	<td>xpath=(//img[@alt='delete'])[7]</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you wish to delete this page:&nbsp;&nbsp;Test HTML Page?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Pages</td>
+	<td></td>
+</tr>
+<!--Verify new tabs gone-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Home</td>
@@ -299,11 +263,7 @@
 	<td>Locations</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Logout</td>
-	<td></td>
-</tr>
+<!--Logout-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

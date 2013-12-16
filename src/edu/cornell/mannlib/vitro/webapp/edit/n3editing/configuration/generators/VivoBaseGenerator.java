@@ -18,16 +18,13 @@ public abstract class VivoBaseGenerator extends BaseEditConfigurationGenerator i
     final static String label =rdfs+"label" ;
     final static String bibo = "http://purl.org/ontology/bibo/";
     
-    final static String trainingClass = vivoCore+"EducationalTraining" ;    
-    final static String degreeClass =vivoCore+"AcademicDegree" ;    
+    final static String edProcessClass = vivoCore+"EducationalProcess" ;    
+    final static String degreeTypeClass =vivoCore+"AcademicDegree" ;    
     final static String majorFieldPred =vivoCore+"majorField" ;
     final static String deptPred =vivoCore+"departmentOrSchool" ;
     final static String infoPred =vivoCore+"supplementalInformation" ;
-    final static String degreeEarned =vivoCore+"degreeEarned" ;
-    final static String degreeOutcomeOf =vivoCore+"degreeOutcomeOf" ;
-    final static String trainingAtOrg =vivoCore+"trainingAtOrganization" ;
     final static String authorRankPredicate = vivoCore + "authorRank";
-    final static String linkedAuthorPredicate = vivoCore + "linkedAuthor";
+    final static String linkedAuthorPredicate = vivoCore + "relates";
     
     final static String dateTimeValue =vivoCore+"dateTime";
     final static String dateTimeValueType =vivoCore+"DateTimeValue";

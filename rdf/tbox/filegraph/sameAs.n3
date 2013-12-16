@@ -1,0 +1,17 @@
+# $This file is distributed under the terms of the license in /doc/license.txt$ 
+
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+@prefix vitro:  <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+
+# This file is intended to provide the definitions required to 
+# enable editing of the owl:sameAs property in profile pages
+# of Vitro/VIVO. 
+
+owl:sameAs  a owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty ;
+            rdfs:domain        owl:Thing ;
+            rdfs:range         owl:Thing.

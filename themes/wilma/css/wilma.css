@@ -368,6 +368,11 @@ form.deleteForm {
     padding-top: 1em;
     border-top: 1px dotted #e3e9e9;
 }
+form.editForm span {
+    color: #c00;
+    font-weight: normal;
+    font-size: small;
+}
 form h3.delete-entry {
     padding-right: .8em;
     display: inline;
@@ -594,14 +599,14 @@ ul#main-nav {
     width: 930px;
     margin: 0 auto;
     background: #fff;
-    min-height: 550px;
+    min-height: 710px;
     padding: 20px;
 }
 /* INTRO-BLURB ------>  */
 #intro {
     float: left;
     width: 570px;
-    padding-bottom: 40px;
+    padding-bottom: 50px;
 }
 body.loggedIn #intro {
     width: 98%;
@@ -640,6 +645,12 @@ body.login #login {
     padding-left: 15px;
     padding-top: 18px;
     border-bottom: none;
+}
+h3.internal-auth {
+    color: #5E6363;
+}
+h3.internal-auth:hover {
+    color: #47B6D0;
 }
 #error-alert {
     margin-left: 0;
@@ -780,13 +791,14 @@ p.external-auth a.blue:hover {
 #search-home {
     float: left;
     width: 533px;
-    margin: 30px 0 0 24px;
+    margin: 30px 0 0 0;
 }
 #search-home h3 {
     padding: 0;
     font-size: 22px;
     margin-bottom: 15px;
     color: #2485AE;
+		padding-left: 24px;
 }
 #search-home-field {
     width: 483px;
@@ -814,6 +826,55 @@ input.search-home-vivo {
     margin-left: 4px;
     margin-top: 2px;
 }
+
+/* SEARCH HOME------>  */ 
+
+#search-home-field {
+		background: url(../images/search-field-and-button.gif) 0 0 no-repeat;
+		width: 520px;
+}
+#search-home-field input.search {
+	 	background-color: transparent;
+	 	color: #fff;
+		border: none;
+}
+a.filter-search {
+	right: 109px;
+}
+input.search-homepage {
+		border: 0;
+		background-color: #f9fafa;
+		background-position: right;
+		opacity: .5;
+		text-align:right; 
+}
+
+.filter-default {
+		background: url(../images/filteredSearch.gif) 0 0 no-repeat;
+}
+.filter-active {
+		background: url(../images/filteredSearchActive.gif) 0 0 no-repeat;
+}
+#filter-search-nav {
+		background-color: #2d3535;
+		color: #fff;
+		background-color: #2d3535;
+		color: #fff;
+		right: 109px;
+}
+#filter-search-nav li {
+		background-image: none;
+		padding-left: 0;
+		margin-left: 0;
+}
+#filter-search-nav a.active {
+   color: #fff; 
+}
+#filter-search-nav a {
+		border-bottom: 1px dotted #4f5656;
+		color: #1483A4;
+}
+
 /* BROWSE ------>  */
 ul#browse-classgroups a {
     padding-top: 3px;
@@ -850,6 +911,171 @@ p.view-all {
 }
 a.view-all-style {
     color: #303e4e
+}
+
+/* HOME STATS----->  */
+.home-sections {
+		border-top: 1px dotted #dbe3e3; /* stroke */
+		border-bottom: 1px dotted #dbe3e3; /* stroke */
+		background-color: #fff; /* layer fill content */
+}
+.home-sections h4 {
+		border-top: 1px solid rgba(220,228,227,.42); /* stroke */
+		border-bottom: 1px solid rgba(220,228,227,.42); /* stroke */
+		background-color: #395d7f; /* layer fill content */
+		border-bottom: 2px solid #62b6d7;
+		color: #fff;
+}
+#home-stats {
+		margin-top: 30px;
+}
+#home-stats h4 {
+		border-top: 1px solid rgba(220,228,227,.42); /* stroke */
+		border-bottom: 1px solid rgba(220,228,227,.42); /* stroke */
+		background-color: #395d7f; /* layer fill content */
+		border-bottom: 2px solid #62b6d7;
+		color: #fff;
+}
+#stats li {
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		border-radius: 6px; /* border radius */
+		-moz-background-clip: padding;
+		-webkit-background-clip: padding-box;
+		background-clip: padding-box; /* prevents bg color from leaking outside the border */
+		background: #5e6363 url(../images/stats-bg.png) repeat-x 0 0;
+		color: #fff;
+}
+#stats p {
+		color: #fff;
+}
+#stats li a:hover {
+		opacity: .5;
+}
+#stats .stats-count span {
+		color: #fff;
+		opacity: .5;
+}
+#home-research  {
+	width: 297px; 
+	float: left;
+	clear: both;
+}
+#home-research h4 {
+    display: inline;
+    padding: 3px 10px;
+}
+#home-research ul {
+	padding: 0.7em 0 0.6em 0.75em; 
+}
+#home-research li {
+	line-height: 1.25em;
+	margin-top: 0.7em; 
+	font-size: 0.9em;
+}
+#home-research li:last-child {
+	text-align:right;
+	padding: 4px 16px 0 0;
+}
+#home-research li span {
+	color: #fff;
+	background: url(../../../images/count-background.png) no-repeat;
+	width: 65px;
+	height: 27px;
+	display: inline-block;
+	padding: 6px 8px 0 0;
+	margin-left: 4px;
+	text-align: center;
+}
+#home-academic-depts  {
+	width: 297px; 
+	margin-left: 15px;
+	float: left;
+}
+#home-academic-depts h4 {
+    display: inline;
+    padding: 3px 10px;
+}
+#home-academic-depts ul {
+    list-style: disc outside url(../../../images/arrowIcon.gif); 
+	padding: 0.4em 0 0.6em 1.8em; 
+}
+#home-academic-depts li {
+	line-height: 1.25em;
+	padding-top: 1.0em;
+	padding-right: 4px;
+	font-size: 0.9em;
+}
+#home-faculty-mbrs  {
+	width: 297px; 
+	margin: 0 0 20px 15px;
+	float: left;
+}
+#home-faculty-mbrs h4 {
+    display: inline;
+    padding: 3px 10px;
+}
+div#tempSpacing {
+    margin-top:30px;
+    padding-left:20px;
+    height:325px;
+}
+div#research-faculty-mbrs {
+    font-size: 0.9em;
+    line-height: 16px;
+}
+div#research-faculty-mbrs li.individual {
+    clear: both;
+}
+div#research-faculty-mbrs ul li.individual:first-child {
+    clear: both;
+    padding-top: 20px
+}
+div#research-faculty-mbrs li h1 {
+    padding: 6px 0 2px 0;
+}
+div#research-faculty-mbrs li img {
+    width: 60px;  
+    float: left;
+    padding: 0px 8px 10px 10px; 
+}
+div#research-faculty-mbrs li span.title {
+    display: block;
+    font-size: 0.825em;
+    line-height: 1.25em;
+    padding-bottom: 8px;
+}
+div#research-faculty-mbrs ul#viewMoreFac  {
+    list-style:none;
+}
+div#research-faculty-mbrs ul#viewMoreFac li {
+    text-align:right;
+    padding: 0 16px 8px 0;
+    clear:both;
+}
+div#adjImgHeight {
+    height:65px;
+    overflow:hidden;
+    float:left;
+    margin-bottom:10px;
+}
+#home-geo-focus  {
+	clear: both;
+	display: inline-block; 
+    margin-top: 10px;
+    height: 632px;
+    width: 921px;
+}
+#home-geo-focus h4 {
+    display: inline;
+    padding: 3px 10px;
+}
+#home-geo-focus div#timeIndicatorGeo {
+    text-align:center;
+    margin-top:100px;
+}
+#noContentMsg {
+    clear: both;
 }
 /* FOOTER------>  */
 footer {
@@ -1163,8 +1389,6 @@ ul#alpha-browse-individuals a:hover {
 ul#alpha-browse-individuals a.selected {
     color: #2ea0cf;
     background: url(../images/arrowSmall.gif) -3px 7px no-repeat;
-    margin-right: 3px;
-    margin-left: 5px;
 }
 ul#alpha-browse-individuals .count-classes {
     font-size: .75em;
@@ -1276,6 +1500,9 @@ ul#individual-tools {
 h2#mainImage, #share-contact h2 {
     color: #5E6363;
 }
+h2#webpage {
+    font-weight: bold;
+}
 /* INDIVIDUAL INTRO - LEFT SIDE CONTENT ------>  */
 img.individual-photo {
     border: 7px solid #ebebeb;
@@ -1283,10 +1510,6 @@ img.individual-photo {
 .rdf-url {
     padding-top: .8em;
     display: block;
-}
-ul#individual-tools-people {
-    border-bottom: 1px solid #e8ece9;
-    color: #b2d15a;
 }
 ul#individual-tools-people li a {
     color: #b2d15a;  
@@ -1304,16 +1527,8 @@ ul#individual-tools li a {
     color: #5f6464;
 }
 ul.individual-urls {
-    list-style: url(../../../images/individual/arrow-grey.gif);
+    list-style: url(../../../images/individual/arrow-green.gif);
 }
-
-ul#individual-phone {
-    list-style-type: none;
-}
-ul#individual-phone li {
-    line-height: 1.6em;
-}
-
 ul.individual-urls li {
     font-size: .875em;
     line-height: 1.6em;
@@ -1333,7 +1548,7 @@ ul.individual-urls-people li a {
 }
 #individual-info h1.fn {
     font-size: 1.375em;
-    color: #2485ae;
+    color: #595B5B;
     line-height: 1.3em;
 }
 h1.fn .display-title {
@@ -1366,20 +1581,20 @@ ul#individual-personInPosition li a {
     padding-top: 10px;
     width: 100%;
 }
-ul#individual-hasResearchArea {
-    padding-bottom: 24px;
-}
 ul#individual-hasResearchArea li {
     border-right: 1px solid #A6B1B0;
 }
 ul#individual-hasResearchArea li:last-child {
     border-right: none;
 }
-ul#individual-hasResearchArea li a {
-    color: #2485ae;
+ul#individual-facultyMemberships li {
+    border-right: 1px solid #A6B1B0;
+}
+ul#individual-facultyMemberships li:last-child {
+    border-right: none;
 }
 /* INDIVIDUAL VISUALIZATION ------>  */
-#visualization h3 {
+#right-hand-column h3 {
     font-size: 1.25em;
     color: #2485ae;
 }
@@ -1395,12 +1610,14 @@ a.all-vivo-publications {
     color: #2485AE;
     font-size: .8em !important;
     text-decoration: underline;
+    vertical-align:text-top;
 }
 /* <------ MAP O' SCIENCE  */
 #map-of-science h3 a {
     color: #2485AE;
     font-size: .8em !important;
     text-decoration: underline;
+    vertical-align:text-top;
 }
 /* COAUTHORS ------>  */
 img.co-author {
@@ -1487,13 +1704,15 @@ input[type="submit"] {
     cursor: pointer;
 }
 .checkboxSpacer {
-    margin-left:150px;
+    margin-left:80px;
+}
+p.address-line {
+    margin-bottom: 0.3em;
 }
 /* EDITING DISPLAY------>  */
 .edit-individual {
     border-left: 1px dotted #B2D15A;
 }
-
 /* ------------------------------------------------->  */
 /* SITE ADMIN DASHBOARD ---------------------------->  */
 /* ------------------------------------------------->  */

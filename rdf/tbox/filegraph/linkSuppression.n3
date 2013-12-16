@@ -1,0 +1,13 @@
+@prefix core: <http://vivoweb.org/ontology/core#> .
+@prefix config: <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+core:webpageOf config:addLinkSuppressed "true"^^xsd:boolean .
+core:webpageOf config:editLinkSuppressed "true"^^xsd:boolean .
+core:webpageOf config:deleteLinkSuppressed "true"^^xsd:boolean .
+core:webpage config:deleteLinkSuppressed "true"^^xsd:boolean .
+core:hasResearchArea config:deleteLinkSuppressed "true"^^xsd:boolean .
+core:researchAreaOf config:deleteLinkSuppressed "true"^^xsd:boolean .
+core:hasSubjectArea config:deleteLinkSuppressed "true"^^xsd:boolean .
+core:subjectAreaFor config:deleteLinkSuppressed "true"^^xsd:boolean .
+core:geographicFocusOf config:editLinkSuppressed "true"^^xsd:boolean .

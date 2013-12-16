@@ -15,13 +15,13 @@
 
 <h1 id="noPubsOrGrants-header">${organizationLabel}</h1>
 
-    <h3 id="alternative-vis-info">${textForCurrentEntityComparisonType?capitalize} Temporal Graph 
-        <span id="noPubsOrGrants-span">|&nbsp;<a  href="${temporalGraphURL}" title="view">view ${textForOtherEntityComparisonType} temporal graph</a></span>
+    <h3 id="alternative-vis-info">${textForCurrentEntityComparisonType?capitalize} ${i18n().temporal_graph_capitalized} 
+        <span id="noPubsOrGrants-span">|&nbsp;<a  href="${temporalGraphURL}" title="${i18n().view}">${i18n().view}&nbsp${textForOtherEntityComparisonType}&nbsp;${i18n().temporal_graph}</a></span>
     </h3>
     <div id="error-body">
-        <p>This organization has neither sub-organizations nor people with 
-        <span id="comparison-parameter-unavailable-label">${textForCurrentEntityComparisonType}</span> in the system. 
-        Please visit the full ${organizationLabel} <a href="${organizationVivoProfileURL}" title="profile page">profile page</a> for a more complete overview.</p>
+        <p>${i18n().entity_comp_error_text1} 
+        <span id="comparison-parameter-unavailable-label">${textForCurrentEntityComparisonType}</span> ${i18n().entity_comp_error_text2} 
+        ${i18n().entity_comp_error_text3} ${organizationLabel} <a href="${organizationVivoProfileURL}" title="${i18n().profile_page}">${i18n().profile_page}</a> ${i18n().entity_comp_error_text4}</p>
     </div>
 
 </div>

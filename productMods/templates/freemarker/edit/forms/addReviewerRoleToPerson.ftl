@@ -18,9 +18,13 @@ roleExamples-->
 
 
 <#--Variable assignments for Add Clinical Role To Person-->
-<#assign roleDescriptor = "reviewer of" />
-<#assign typeSelectorLabel = "reviewer of" />
-<#assign buttonText = "Reviewer Role" />
+<#assign roleDescriptor = "${i18n().reviewer_of}" />
+<#assign typeSelectorLabel = "${i18n().reviewer_of}" />
+<#assign genericLabel = "${i18n().item_capitalized}" />
+
+<#assign acMultipleTypes = "'true'" />
+<#assign acTypes = "{activity: 'http://purl.org/ontology/bibo/Document,http://purl.org/ontology/bibo/Collection'}" />
 
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">
+

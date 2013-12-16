@@ -1,6 +1,6 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#-- Custom object property statement view for http://vivoweb.org/ontology/core#educationalTraining. 
+<#-- Custom object property statement view for faux property "education and training". See the PropertyConfig.3 file for details. 
     
      This template must be self-contained and not rely on other variables set for the individual page, because it
      is also used to generate the property statement during a deletion.  
@@ -8,7 +8,6 @@
 
 <#import "lib-sequence.ftl" as s>
 <#import "lib-datetime.ftl" as dt>
-
 <#-- Coming from propDelete, individual is not defined, but we are editing. -->
 <@showEducationalTraining statement=statement editable=(!individual?? || individual.editable) />
 
@@ -18,12 +17,8 @@
 
     <#local degree>
         <#if statement.degreeName??>
-            <#-- RY Giving up on join here. Freemarker insists on removing the space before "in"
-                 and leaving no space between the degree and major field, even though compress
-                 should only delete consecutive spaces. Even &nbsp; doesn't help.
-            <@s.join [ statement.degreeAbbr!statement.degreeName, statement.majorField! ], " in " /> -->
             ${statement.degreeAbbr!statement.degreeName} 
-            <#if statement.majorField??> in ${statement.majorField}</#if>
+            <#if statement.majorField??> ${i18n().in} ${statement.majorField}</#if>
         <#elseif statement.typeName??>
             ${statement.typeName!}
         </#if>
@@ -31,13 +26,13 @@
     
     <#local linkedIndividual>
         <#if statement.org??>
-            <a href="${profileUrl(statement.uri("org"))}" title="organization name">${statement.orgName}</a>
+            <a href="${profileUrl(statement.uri("org"))}" title="${i18n().organization_name}">${statement.orgName}</a>
         <#elseif editable>
             <#-- Show the link to the context node only if the user is editing the page. -->
-            <a href="${profileUrl(statement.uri("edTraining"))}" title="missing organization">missing organization</a>
+            <a href="${profileUrl(statement.uri("edTraining"))}" title="${i18n().missing_organization}">${i18n().missing_organization}</a>
         </#if>
     </#local>
 
-    <@s.join [ degree, linkedIndividual!, statement.deptOrSchool!, statement.info! ] /> <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" false/>
+    <@s.join [ degree, linkedIndividual!, statement.deptOrSchool!, statement.info! ] /> <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" false/> 
 
 </#macro>

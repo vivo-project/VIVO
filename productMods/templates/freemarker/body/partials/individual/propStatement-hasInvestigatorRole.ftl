@@ -1,13 +1,13 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#-- Custom object property statement view for http://vivoweb.org/ontology/core#hasRole and its child properties.
+<#-- Custom object property statement view for faux property "investigator on," "principal investigator on" and 
+     "co-principal investigator on." See the PropertyConfig.3 file for details.
     
      This template must be self-contained and not rely on other variables set for the individual page, because it
      is also used to generate the property statement during a deletion.  
  -->
 
 <#import "lib-datetime.ftl" as dt>
-
 <@showRole statement />
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
@@ -17,26 +17,26 @@
     <span class="hideThis">&nbsp;</span>
     <script type="text/javascript" >
         $('span.hideThis').parent().parent().addClass("hideThis");
-        if ( $('h3#hasResearcherRole').attr('class').length == 0 ) {
-            $('h3#hasResearcherRole').addClass('hiddenGrants');
+        if ( $('h3#RO_0000053-ResearcherRole').attr('class').length == 0 ) {
+            $('h3#RO_0000053-ResearcherRole').addClass('hiddenGrants');
         }
         $('span.hideThis').parent().remove();
     </script>
 <#else>
     <#local linkedIndividual>
         <#if statement.activity??>
-            <a href="${profileUrl(statement.uri("activity"))}" title="activity name">${statement.activityLabel!statement.activityName!}</a>
+            <a href="${profileUrl(statement.uri("activity"))}" title="${i18n().activity_name}">${statement.activityLabel!statement.activityName!}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.uri("role"))}" title="missing activity">missing activity</a>
+            <a href="${profileUrl(statement.uri("role"))}" title="${i18n().missing_activity}">${i18n().missing_activity}</a>
         </#if>
     </#local>
     
     <#local awardOrAdminBy>
         <#if statement.awardedByLabel??>
-            &nbsp;awarded by&nbsp;<a href="${profileUrl(statement.uri("awardedBy"))}" title="awarded by">${statement.awardedByLabel!}</a>
+            &nbsp;${i18n().awarded_by}&nbsp;<a href="${profileUrl(statement.uri("awardedBy"))}" title="${i18n().awarded_by}">${statement.awardedByLabel!}</a>
         <#elseif statement.adminedByLabel??>
-            &nbsp;administered by&nbsp;<a href="${profileUrl(statement.uri("adminedBy"))}" title="administered by">${statement.adminedByLabel!}</a>
+            &nbsp;${i18n().administered_by}&nbsp;<a href="${profileUrl(statement.uri("adminedBy"))}" title="${i18n().administered_by}">${statement.adminedByLabel!}</a>
         </#if>
     </#local>
         
@@ -48,6 +48,6 @@
         </#if>
     </#local>
     
-    ${linkedIndividual} ${awardOrAdminBy} ${dateTime!} ${statement.subclass!}
+    ${linkedIndividual} ${awardOrAdminBy} ${dateTime!} 
 </#if>
 </#macro>

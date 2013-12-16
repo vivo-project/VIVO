@@ -14,6 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.vivoweb.webapp.util.ModelUtils;
 
+import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.vocabulary.RDF;
@@ -22,6 +23,7 @@ import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
@@ -36,12 +38,6 @@ import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
 /**
  *  Custom form for adding a grant to an person for the predicates hasCo-PrincipalInvestigatorRole
      and hasPrincipalInvestigatorRole.
-     
-This is intended to create a set of statements like:
-
-?person  core:hasPrincipalInvestigatorRole ?newRole.
-?newRole rdf:type core:PrincipalInvestigatorRole ;
-         core:relatedRole ?someGrant . 
      
  *
  */
@@ -206,6 +202,8 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	String editString = getPrefixesString();
     	editString += "?role <" + getRoleToGrantPredicate(vreq) + "> ?grant .";
     	editString += "?grant a core:Grant . ";
+    	editString += "?person core:relatedBy ?grant . "; 
+    	editString += "?grant core:relates ?person . "; 
     	editString += "?grant <" + getGrantToRolePredicate(vreq) + "> ?role .";
     	editString += "?grant <" + RDFS.label.getURI() + "> ?grantLabel .";
     	return editString;
@@ -213,6 +211,8 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 	
 	public String getN3ForExistingGrant(VitroRequest vreq) {
     	String editString = getPrefixesString();
+    	editString += "?person core:relatedBy ?existingGrant . "; 
+    	editString += "?existingGrant core:relates ?person . "; 
     	editString += "?role <" + getRoleToGrantPredicate(vreq) + "> ?existingGrant . "; 
     	editString += "?existingGrant <" + getGrantToRolePredicate(vreq) + "> ?role .";
     	return editString;
@@ -275,8 +275,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	urisInScope.put("roleType", 
     			Arrays.asList(new String[]{getRoleType(vreq)}));
     	//Setting inverse role predicate
-    	urisInScope.put("inverseRolePredicate", getInversePredicate(vreq));
-    
+        urisInScope.put("inverseRolePredicate", getInversePredicate(vreq));
     	editConfiguration.setUrisInScope(urisInScope);
     	//Uris in scope include subject, predicate, and object var
     	//literals in scope empty initially, usually populated by code in prepare for update
@@ -565,7 +564,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 	
 	private void prepareForUpdate(VitroRequest vreq, HttpSession session, EditConfigurationVTwo editConfiguration) {
     	//Here, retrieve model from 
-    	Model model = (Model) session.getServletContext().getAttribute("jenaOntModel");
+		OntModel model = ModelAccess.on(session.getServletContext()).getJenaOntModel();
     	//Object property by definition
     	String objectUri = EditConfigurationUtils.getObjectUri(vreq);
     	if(objectUri != null) {
@@ -602,19 +601,20 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
      **/
   //role type will always be set based on particular form
 	public String getRoleType(VitroRequest vreq) {
-		String predicateUri = EditConfigurationUtils.getPredicateUri(vreq);
-		if(predicateUri.equals(getHasPrincipalInvestigatorURI())) {
+		String rangeUri = EditConfigurationUtils.getRangeUri(vreq);
+		if(rangeUri.equals(getPrincipalInvestigatorURI())) {
 			return getVivoOntologyCoreNamespace() + "PrincipalInvestigatorRole";
 		}
-		else if(predicateUri.equals(getHasCoPrincipalInvestigatorURI())) {
+		else if(rangeUri.equals(getCoPrincipalInvestigatorURI())) {
 			return getVivoOntologyCoreNamespace() + "CoPrincipalInvestigatorRole";
-		} else {
+		} 
+		else {
 			return getVivoOntologyCoreNamespace() + "InvestigatorRole";
 		}
 	}
 	
-	private Object getHasCoPrincipalInvestigatorURI() {
-		return getVivoOntologyCoreNamespace() + "hasCo-PrincipalInvestigatorRole";
+	private Object getCoPrincipalInvestigatorURI() {
+		return getVivoOntologyCoreNamespace() + "CoPrincipalInvestigatorRole";
 	}
 
 
@@ -623,8 +623,8 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 		return "http://vivoweb.org/ontology/core#";
 	}
 
-	private Object getHasPrincipalInvestigatorURI() {
-		return getVivoOntologyCoreNamespace() + "hasPrincipalInvestigatorRole";
+	private Object getPrincipalInvestigatorURI() {
+		return getVivoOntologyCoreNamespace() + "PrincipalInvestigatorRole";
 
 	}
 
@@ -661,12 +661,12 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 	//Some values will have a default value
 	//grantToRolePredicate
 	public String getDefaultgrantToRolePredicate() {
-		return "http://vivoweb.org/ontology/core#relatedRole";
+		return "http://vivoweb.org/ontology/core#relates";
 	}
 	
 	//roleToGrantPredicate
 	public String getDefaultroleToGrantPredicate() {
-		return "http://vivoweb.org/ontology/core#roleIn";
+		return "http://purl.obolibrary.org/obo/BFO_0000054";
 		
 	}
 	
@@ -726,6 +726,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 	public void addFormSpecificData(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
 		HashMap<String, Object> formSpecificData = new HashMap<String, Object>();
 		formSpecificData.put("editMode", getEditMode(vreq).name().toLowerCase());
+		formSpecificData.put("rangeUri", getRangeUri(vreq));
 		//In this case, passing back a sparql query
 		formSpecificData.put("sparqlForAcFilter", getSparqlForAcFilter(vreq));
 		//Put in the fact that we require field
@@ -744,8 +745,10 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 		return query;
 	}
 	
-	
-	
-	
+	private String getRangeUri(VitroRequest vreq) {
+        String rangeUri = vreq.getParameter("rangeUri"); 
+        
+		return rangeUri;
+	}
 	
 }

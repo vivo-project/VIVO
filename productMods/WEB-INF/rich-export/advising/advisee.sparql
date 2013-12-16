@@ -1,9 +1,16 @@
 PREFIX core: <http://vivoweb.org/ontology/core#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 CONSTRUCT {
-     ?person ?property ?object .
+     ?advisee ?property ?object .
 } WHERE {
-     PERSON_URI core:advisorIn ?advisingRelationship .
-     ?advisingRelationship core:advisee ?person .
-     ?person ?property ?object .
+     PERSON_URI core:relatedBy ?advisingRelationship .
+     ?advisingRelationship a core:AdvisingRelationship .
+     ?advisingRelationship core:relates ?advisee .
+     ?advisee a foaf:Person .
+     ?advisee obo:RO_0000053 ?adviseeRole .
+     ?adviseeRole a core:AdviseeRole .
+     ?adviseeRole core:relatedBy ?advisingRelationship .
+     ?advisee ?property ?object .
 }

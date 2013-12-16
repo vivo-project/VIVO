@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- VIVO-specific default list view config file for object properties 
+    
+     See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-select>    
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;  
+        SELECT ?value
+        WHERE {
+                ?subject ?property ?value 
+        }
+    </query-select>
+
+    <query-construct>
+        
+        CONSTRUCT {
+            ?subject ?property ?value 
+        } WHERE {
+                ?subject ?property ?value 
+        }
+    </query-construct>
+    
+    <template>propStatement-orcidId.ftl</template>
+</list-view-config>

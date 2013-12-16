@@ -1,0 +1,22 @@
+PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+CONSTRUCT {
+    ?person vivo:relatedBy _:Editorship .
+    _:Editorship a vivo:Editorship .
+    _:Editorship vivo:relates ?person .
+    _:Editorship vivo:relates ?document .
+    ?document vivo:relatedBy _:Editorship .
+} WHERE {
+    { 
+      ?person vivo:editorOf ?document
+    } UNION {
+      ?document vivo:editor ?person
+      FILTER NOT EXISTS { ?person vivo:editorOf ?document } 
+    } 
+    FILTER NOT EXISTS {
+        ?person vivo:relatedBy ?editorshipNode .
+        ?editorshipNode vivo:relates ?document .
+    }
+}

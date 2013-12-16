@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-select>    
+        PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        
+        SELECT DISTINCT ?vcard ?fullName
+                        ?firstName
+                        ?middleName
+                        ?lastName
+                        ?suffix
+                        ?prefix
+        WHERE {
+            ?subject ?property ?vcard .
+            ?vcard vcard:hasName ?fullName 
+            OPTIONAL { ?fullName vcard:givenName ?firstName  }
+            OPTIONAL { ?fullName core:middleName ?middleName  }
+            OPTIONAL { ?fullName vcard:familyName ?lastName  }
+            OPTIONAL { ?fullName vcard:honorificSuffix ?suffix  }
+            OPTIONAL { ?fullName vcard:honorificPrefix ?prefix  }
+        } 
+    </query-select>
+       
+    <query-construct>
+        PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
+        CONSTRUCT { 
+            ?subject ?property ?vcard .
+            ?vcard vcard:hasName ?fullName .
+            ?fullName ?fullNameProperty ?fullNameValue 
+        } WHERE {
+            {
+               ?subject ?property ?vcard
+            } UNION {
+               ?subject ?property ?vcard .
+               ?vcard vcard:hasName ?fullName .
+               ?fullName ?fullNameProperty ?fullNameValue 
+            } 
+        } 
+    </query-construct>
+              
+    <template>propStatement-fullName.ftl</template>
+    <postprocessor>edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.MaintainDuplicatesObjectPropertyDataPostProcessor</postprocessor>
+</list-view-config>

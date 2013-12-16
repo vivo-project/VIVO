@@ -1,5 +1,7 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
+$.extend(this, i18nStringsUtil);
+
 (function ($) {
 
     $.fn.dataTableExt.oPagination.gmail_style = {
@@ -19,10 +21,14 @@
 			nLast.innerHTML = oSettings.oLanguage.oPaginate.sLast;
 			*/
 
-            nFirst.innerHTML = "<span class='small-arrows'>&laquo;</span> <span class='paginate-nav-text'>First</span>";
-            nPrevious.innerHTML = "<span class='small-arrows'>&lsaquo;</span> <span class='paginate-nav-text'>Prev</span>";
-            nNext.innerHTML = "<span class='paginate-nav-text'>Next</span><span class='small-arrows'>&rsaquo;</span>";
-            nLast.innerHTML = "<span class='paginate-nav-text'>Last</span><span class='small-arrows'>&raquo;</span>";
+            nFirst.innerHTML = "<span class='small-arrows'>&laquo;</span> <span class='paginate-nav-text'>" 
+                                + i18nStringsUtil.firstString + "</span>";
+            nPrevious.innerHTML = "<span class='small-arrows'>&lsaquo;</span> <span class='paginate-nav-text'>"
+                                + i18nStringsUtil.previousString + "</span>";
+            nNext.innerHTML = "<span class='paginate-nav-text'>" + i18nStringsUtil.nextString 
+                                + "</span><span class='small-arrows'>&rsaquo;</span>";
+            nLast.innerHTML = "<span class='paginate-nav-text'>" + i18nStringsUtil.lastString 
+                                + "</span><span class='small-arrows'>&raquo;</span>";
 
             var oClasses = oSettings.oClasses;
             nFirst.className = oClasses.sPageButton + " " + oClasses.sPageFirst;
@@ -244,12 +250,12 @@ function init(graphContainer) {
 	
 	var optionSelected = $("select.comparisonValues option:selected").val();
 	// TODO: make use of the id on the select field instead of a generic one.
-	$("#comparisonParameter").text("Total Number of " + optionSelected);
-	$('#yaxislabel').html("Number of " + optionSelected).mbFlipText(false);
+	$("#comparisonParameter").text(i18nStringsUtil.totalNumberOf + " " + optionSelected);
+	$('#yaxislabel').html(i18nStringsUtil.numberOf + " " + optionSelected).mbFlipText(false);
 	$('#comparisonHeader').html(optionSelected).css('font-weight', 'bold');
-	$('#legend-unknown-bar-text').text(toTitleCase(COMPARISON_PARAMETERS_INFO[currentParameter].name) + " with unknown year");
-	$('#legend-known-bar-text').text(toTitleCase(COMPARISON_PARAMETERS_INFO[currentParameter].name) + " with known year");
-	$('#legend-current-year-bar-text').text(toTitleCase(COMPARISON_PARAMETERS_INFO[currentParameter].name) + " from current incomplete year");
+	$('#legend-unknown-bar-text').text(toTitleCase(COMPARISON_PARAMETERS_INFO[currentParameter].name) + " " + i18nStringsUtil.withUnknownYear);
+	$('#legend-known-bar-text').text(toTitleCase(COMPARISON_PARAMETERS_INFO[currentParameter].name) + " " + i18nStringsUtil.withKnownYear);
+	$('#legend-current-year-bar-text').text(toTitleCase(COMPARISON_PARAMETERS_INFO[currentParameter].name) + " " + i18nStringsUtil.fromIncompleteYear);
 	
 	var defaultFlotOptions = {
 			xaxis : {
@@ -704,8 +710,11 @@ function renderBarAndLabel(entity, divBar, divLabel, spanElement) {
     
     	var knownNormalizedWidth = getNormalizedWidth(entity, combinedCount.knownYearCount - combinedCount.currentYearCount);
         
-        var countExplanation = (combinedCount.knownYearCount - combinedCount.currentYearCount) + ' of ' 
-    	+ sum + ' were ' + COMPARISON_PARAMETERS_INFO[currentParameter].verbName + " in a completed year";
+        var countExplanation = (combinedCount.knownYearCount - combinedCount.currentYearCount) 
+                                + ' ' + i18nStringsUtil.ofString + ' ' + sum 
+    	                        + ' ' + i18nStringsUtil.wereString + ' ' 
+    	                        + COMPARISON_PARAMETERS_INFO[currentParameter].verbName 
+    	                        + ' ' + i18nStringsUtil.inCompletedYear;
 
         divBar.children(".known-bar").attr("title", countExplanation);
         
@@ -720,8 +729,10 @@ function renderBarAndLabel(entity, divBar, divLabel, spanElement) {
     if (combinedCount.unknownYearCount) {
     	var unknownNormalizedWidth = getNormalizedWidth(entity, combinedCount.unknownYearCount);
     	
-        var countExplanation = combinedCount.unknownYearCount + ' of ' 
-        + sum + ' have an unknown ' + COMPARISON_PARAMETERS_INFO[currentParameter].name + " year (not charted above)";
+        var countExplanation = combinedCount.unknownYearCount + ' ' + i18nStringsUtil.ofString + ' ' 
+                                + sum + ' ' + i18nStringsUtil.haveAnUnknown + ' '
+                                + COMPARISON_PARAMETERS_INFO[currentParameter].name 
+                                + ' ' + i18nStringsUtil.yearNotChartered;
         
         divBar.children(".unknown-bar").attr("title", countExplanation);
         
@@ -735,8 +746,10 @@ function renderBarAndLabel(entity, divBar, divLabel, spanElement) {
     if (combinedCount.currentYearCount) {
     	var currentNormalizedWidth = getNormalizedWidth(entity, combinedCount.currentYearCount);
     	
-        var countExplanation = combinedCount.currentYearCount + ' of ' 
-    	+ sum + ' were ' + COMPARISON_PARAMETERS_INFO[currentParameter].verbName + ' in the current incomplete year (not charted above)';
+        var countExplanation = combinedCount.currentYearCount + ' ' + i18nStringsUtil.ofString + ' ' + sum 
+                                + ' ' + i18nStringsUtil.wereString + ' ' 
+                                + COMPARISON_PARAMETERS_INFO[currentParameter].verbName + ' ' 
+                                + i18nStringsUtil.inIncompleteYear;
         
         divBar.children(".current-year-bar").attr("title", countExplanation);
         
@@ -837,8 +850,8 @@ function setOptionsForPagination(object, itemsPerPage, numberOfDisplayEntries,
 			items_per_page : itemsPerPage,
 			num_display_entries : numberOfDisplayEntries,
 			num_edge_entries : numOfEdgeEntries,
-			prev_text : "Prev",
-			next_text : "Next"
+			prev_text : i18nStringsUtil.previousString,
+			next_text : i18nStringsUtil.nextString
 	};
 }
 
@@ -1072,18 +1085,18 @@ function prepareTableForDataTablePagination(jsonData, dataTableParams){
 	checkboxTH.html(' ');
 	
 	var entityLabelTH = $('<th>');
-	entityLabelTH.html('Entity Name');
+	entityLabelTH.html(i18nStringsUtil.entityTypeString);
 	
 	var activityCountTH = $('<th>');
-	if ($("select.comparisonValues option:selected").text() === "by Publications") {
-		activityCountTH.html('Publication Count');
+	if ($("select.comparisonValues option:selected").text() === i18nStringsUtil.byPublications) {
+		activityCountTH.html(i18nStringsUtil.publicationCount);
 	} else {
-		activityCountTH.html('Grant Count');		
+		activityCountTH.html(i18nStringsUtil.grantCount);		
 	}
 	activityCountTH.attr("id", "activity-count-column");
 
 	var entityTypeTH = $('<th>');
-	entityTypeTH.html('Entity Type');
+	entityTypeTH.html(i18nStringsUtil.entityType);
 
 	tr.append(checkboxTH);
 	tr.append(entityLabelTH);
@@ -1141,7 +1154,7 @@ function prepareTableForDataTablePagination(jsonData, dataTableParams){
 	    "bInfo": true,
 	    "oLanguage": {
 			"sInfo": "Records _START_ - _END_ of _TOTAL_",
-			"sInfoEmpty": "No matching entities found",
+			"sInfoEmpty": i18nStringsUtil.noMatchingEntities,
 			"sInfoFiltered": ""
 		},
 	    "sPaginationType": "gmail_style",
@@ -1159,7 +1172,7 @@ function prepareTableForDataTablePagination(jsonData, dataTableParams){
 	
 	var searchInputBox = $("." + dataTableParams.searchBarParentContainerDIVClass).find("input[type=text]");
 	
-	searchInputBox.after("<span id='reset-search' title='Clear Search query'>X</span>");
+	searchInputBox.after("<span id='reset-search' title='" + i18nStringsUtil.clerSearchQuery + "'>X</span>");
 	
 	$("#reset-search").live('click', function() {
 		entityListTable.fnFilter("");
@@ -1197,10 +1210,10 @@ function reloadDataTablePagination(preselectedEntityURIs, jsonData){
 	
 	currentDataTable.fnClearTable();
 	
-	if ($("select.comparisonValues option:selected").text() === "by Publications") {
-		$("#activity-count-column").html('Publication Count');
+	if ($("select.comparisonValues option:selected").text() === "i18nStringsUtil.byPublications") {
+		$("#activity-count-column").html(i18nStringsUtil.publicationCount);
 	} else {
-		$("#activity-count-column").html('Grant Count');		
+		$("#activity-count-column").html(i18nStringsUtil.grantCount);		
 	}
 	
 	function addNewRowAfterReload(entity) {
@@ -1310,8 +1323,8 @@ function disableUncheckedEntities(){
 	 * */
 	if ($("#datatable").data("isEntitySelectionAllowed")) {
 		if ($.browser.msie) {
-			createNotification("warning-notification", { title:'Information', 
-				text:'A Maximum of 10 entities can be compared.' },{
+			createNotification("warning-notification", { title: i18nStringsUtil.informationString, 
+				text: i18nStringsUtil.shortMaxEntityNote },{
 				custom: false,
 				expires: false
 				});	

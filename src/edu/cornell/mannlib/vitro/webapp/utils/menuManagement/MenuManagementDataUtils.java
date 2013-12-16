@@ -14,8 +14,9 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 
+import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess;
+import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess.ModelID;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
-import edu.cornell.mannlib.vitro.webapp.dao.jena.ModelContext;
 
 /*
  * This class includes methods that help in selecting a data getter based on 
@@ -46,8 +47,8 @@ public class MenuManagementDataUtils {
 	}
 	
 	private static String retrieveInternalClass(ServletContext context) {
-		OntModel mainModel = ModelContext.getBaseOntModelSelector(context).getTBoxModel();
-		StmtIterator internalIt = mainModel.listStatements(null, ResourceFactory.createProperty(VitroVocabulary.IS_INTERNAL_CLASSANNOT), (RDFNode) null);
+		OntModel mainModel = ModelAccess.on(context).getOntModel(ModelID.BASE_TBOX);
+ 		StmtIterator internalIt = mainModel.listStatements(null, ResourceFactory.createProperty(VitroVocabulary.IS_INTERNAL_CLASSANNOT), (RDFNode) null);
 		if(internalIt.hasNext()) {			
 			String internalClass = internalIt.nextStatement().getSubject().getURI();
 			return internalClass;

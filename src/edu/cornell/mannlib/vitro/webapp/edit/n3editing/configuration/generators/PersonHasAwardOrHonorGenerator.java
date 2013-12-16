@@ -24,12 +24,12 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
     final static String awardReceiptClass = vivoCore + "AwardReceipt";
     final static String awardClass = vivoCore + "Award";
     final static String orgClass = "http://xmlns.com/foaf/0.1/Organization";
-    final static String awardReceiptPred = vivoCore + "awardOrHonor";
-    final static String awardForPred = vivoCore + "awardOrHonorFor";
-    final static String receiptPred =vivoCore+"receipt" ;
-    final static String receiptOfPred =vivoCore+"receiptOf" ;
-    final static String awardConferredByPred =vivoCore+"awardConferredBy" ;
-    final static String awardConferredPred =vivoCore+"awardConferred" ;
+    final static String awardReceiptPred = vivoCore + "relatedBy";
+    final static String awardForPred = vivoCore + "relates";
+    final static String receiptPred =vivoCore+"relatedBy" ;
+    final static String receiptOfPred =vivoCore+"relates" ;
+    final static String awardConferredByPred =vivoCore+"assignedBy" ;
+    final static String awardConferredPred =vivoCore+"assigns" ;
     final static String descriptionPred = vivoCore + "description";
     final static String yearAwardedPred = vivoCore + "dateTimeValue";
     final static String awardReceiptToInterval = vivoCore + "dateTimeInterval";
@@ -109,14 +109,12 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
                 setValidators( list("datatype:" + XSD.xstring.toString()) )
                 );
 
-        conf.addField( new FieldVTwo().//options will be added in browser by auto complete JS
+        conf.addField( new FieldVTwo(). // options will be added in browser by auto complete JS
                 setName("existingOrg")      
         );
 
-        conf.addField( new FieldVTwo().
-                setName("existingAward").
-                setOptions( new IndividualsViaVClassOptions(
-                        awardClass))
+        conf.addField( new FieldVTwo(). // options will be added in browser by auto complete JS
+                setName("existingAward")
         );        
 
         conf.addField( new FieldVTwo().
@@ -211,25 +209,25 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
         "?awardReceipt <"+ descriptionPred +"> ?description .";
 
     final static String n3ForExistingOrgNewAwardAssertion  =      
-        "?award <" + awardConferredByPred +"> ?existingOrg . \n" +
-        "?existingOrg <" + awardConferredPred + "> ?award . \n" +
+        "?awardReceipt <" + awardConferredByPred +"> ?existingOrg . \n" +
+        "?existingOrg <" + awardConferredPred + "> ?awardReceipt . \n" +
         "?award <"+ label + "> ?awardLabel .";    
 
     final static String n3ForExistingOrgExistingAwardAssertion  =      
-        "?existingAward <" + awardConferredByPred +"> ?existingOrg . \n" +
-        "?existingOrg <" + awardConferredPred + "> ?existingAward . ";    
+        "?awardReceipt <" + awardConferredByPred +"> ?existingOrg . \n" +
+        "?existingOrg <" + awardConferredPred + "> ?awardReceipt . ";    
 
     final static String n3ForNewOrgNewAwardAssertion  =      
         "?newOrg a <" + orgClass + "> . \n" +
-        "?award <" + awardConferredByPred +"> ?newOrg . \n" +
-        "?newOrg <" + awardConferredPred + "> ?award . \n" +
+        "?awardReceipt <" + awardConferredByPred +"> ?newOrg . \n" +
+        "?newOrg <" + awardConferredPred + "> ?awardReceipt . \n" +
         "?award <"+ label + "> ?awardLabel . \n" +   
         "?newOrg <"+ label + "> ?orgLabel .";    
 
     final static String n3ForNewOrgExistingAwardAssertion  =      
         "?newOrg a <" + orgClass + "> . \n" +
-        "?existingAward <" + awardConferredByPred +"> ?newOrg . \n" +
-        "?newOrg <" + awardConferredPred + "> ?existingAward . \n" +    
+        "?awardReceipt <" + awardConferredByPred +"> ?newOrg . \n" +
+        "?newOrg <" + awardConferredPred + "> ?awardReceipt . \n" +    
         "?newOrg <"+ label + "> ?orgLabel .";    
 
 	final static String n3ForYearAwarded = 
@@ -259,12 +257,13 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
     final static String existingAwardQuery =
         "SELECT ?existingAward WHERE { \n" +
         " ?awardReceipt <" + receiptOfPred + "> ?existingAward . \n" +
+        " ?existingAward a <" + awardClass + "> . \n" +
         "}";
 
     final static String existingOrgQuery  =      
         "SELECT ?existingOrg WHERE { \n" +
-        " ?awardReceipt <" + receiptOfPred + "> ?existingAward . \n" +
-        " ?existingAward<" + awardConferredByPred + "> ?existingOrg . \n" +
+        " ?awardReceipt <" + awardConferredByPred + "> ?existingOrg . \n" +
+        " ?existingOrg a <" + orgClass + ">  . \n" +
         " ?existingOrg <" + awardConferredPred + "> ?existingAward . }";
 
     final static String awardReceiptLabelQuery =
@@ -275,12 +274,14 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
     final static String awardLabelQuery =
         "SELECT ?existingAwardLabel WHERE { \n" +
         " ?awardReceipt <" + receiptOfPred + "> ?existingAward . \n" +
+        " ?existingAward a <" + awardClass + "> . \n" +
         " ?existingAward <" + label + "> ?existingAwardLabel . \n" +
         "}";
 
     final static String orgLabelQuery  =      
         "SELECT ?existingOrgLabel WHERE { \n" +
-        " ?award <" + awardConferredByPred + "> ?existingOrg . \n" +
+        " ?awardReceipt <" + awardConferredByPred + "> ?existingOrg . \n" +
+        " ?existingOrg a <" + orgClass + ">  . \n" +
         " ?existingOrg <" + label + "> ?existingOrgLabel . \n" +
         "}";
 

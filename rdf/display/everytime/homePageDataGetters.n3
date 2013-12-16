@@ -1,0 +1,30 @@
+# $This file is distributed under the terms of the license in /doc/license.txt$ 
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix core: <http://vivoweb.org/ontology/core#> .
+@prefix vivoweb: <http://vivoweb.org/ontology#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+ 
+# academic departments datagetter 
+
+<freemarker:lib-home-page.ftl> display:hasDataGetter display:academicDeptsDataGetter .
+
+display:academicDeptsDataGetter
+    a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> ;
+    display:saveToVar "academicDeptDG" ;
+    display:query """
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX vivo: <http://vivoweb.org/ontology/core#>
+
+    SELECT DISTINCT ?theURI (str(?label) as ?name)
+    WHERE
+    {
+          ?theURI a vivo:AcademicDepartment .
+          ?theURI rdfs:label ?label 
+    }
+    
+    """ .
+

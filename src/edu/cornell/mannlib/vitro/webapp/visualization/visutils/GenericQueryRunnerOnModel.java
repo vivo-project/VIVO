@@ -4,6 +4,9 @@ package edu.cornell.mannlib.vitro.webapp.visualization.visutils;
 
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -31,6 +34,8 @@ public class GenericQueryRunnerOnModel implements QueryRunner<ResultSet> {
 	private Model model;
 
 	private Map<String, String> fieldLabelToOutputFieldLabel;
+	
+	private Log log = LogFactory.getLog(GenericQueryRunnerOnModel.class.getName());
 
 	private String groupOrderClause;
 
@@ -83,6 +88,7 @@ public class GenericQueryRunnerOnModel implements QueryRunner<ResultSet> {
 		
 		sparqlQuery.append(this.groupOrderClause);
 		
+		log.debug("sparqlQuery = " + sparqlQuery.toString());
 		return sparqlQuery.toString();
 	}
 	

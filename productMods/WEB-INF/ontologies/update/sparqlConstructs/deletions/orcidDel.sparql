@@ -1,0 +1,9 @@
+PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+
+CONSTRUCT {
+    ?s vivo:orcidId ?orcidString .
+} WHERE {
+    ?s vivo:orcidId ?orcidString 
+    FILTER(isLiteral(?orcidString))
+}

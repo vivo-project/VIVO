@@ -180,7 +180,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
     {
     	String pathToHarvester = ConfigurationProperties.getBean(req).getProperty("harvester.location"); 
     	if (pathToHarvester == null) {
-    		log.error("The deploy.properties file does not contain a value for 'harvester.location'");
+    		log.error("The runtime.properties file does not contain a value for 'harvester.location'");
     		return "";
     	}
     	return pathToHarvester;

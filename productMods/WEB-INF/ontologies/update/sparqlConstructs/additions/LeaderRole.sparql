@@ -1,0 +1,21 @@
+PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+CONSTRUCT {
+    ?person <http://purl.obolibrary.org/obo/RO_0000053> _:leaderRole .
+    _:leaderRole <http://purl.obolibrary.org/obo/RO_0000052> ?person .
+    _:leaderRole a vivo:LeaderRole .
+    _:leaderRole vivo:roleContributesTo ?org .
+    ?org vivo:contributingRole _:leaderRole .
+} WHERE {
+    { ?person vivo:currentlyHeadOf ?org }
+      UNION 
+    { ?org vivo:currentlyHeadedBy ?person 
+      FILTER NOT EXISTS { ?person vivo:currentlyHeadOf ?org }
+    }
+    FILTER NOT EXISTS {
+        ?person <http://purl.obolibrary.org/obo/RO_0000053> ?leaderRoleNode .
+        ?leaderRoleNode vivo:roleContributesTo ?org .
+    }
+}

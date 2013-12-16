@@ -5,35 +5,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>AddPositions</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AddPositions</td></tr>
+<tr><td rowspan="1" colspan="3">AddPositions</td></tr>
 </thead><tbody>
-<tr>
-	<td>comment</td>
-	<td class="comment">Validate this form and add advises</td>
-	<td></td>
-</tr>
+<!--Validate this form and add advises-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged in already</td>
-	<td></td>
-</tr>
+<!--Must not be logged in already-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must log in as site admin</td>
-	<td></td>
-</tr>
+<!--Must log in as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -89,11 +59,7 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to test faculty member via Index</td>
-	<td></td>
-</tr>
+<!--Navigate to test faculty member via Index-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -119,11 +85,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select advises editing</td>
-	<td></td>
-</tr>
+<!--Select advises editing-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=a.add-advisorIn &gt; img.add-individual</td>
@@ -179,11 +141,7 @@
 	<td>End<br />Year</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Cancel without adding anything</td>
-	<td></td>
-</tr>
+<!--Cancel without adding anything-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Cancel</td>
@@ -199,11 +157,7 @@
 	<td>Edit</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add only type, which results in error</td>
-	<td></td>
-</tr>
+<!--Add only type, which results in error-->
 <tr>
 	<td>select</td>
 	<td>id=selector</td>
@@ -229,11 +183,7 @@
 	<td>You must enter a value in the First Name field. </td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add only type and last name, which results in error</td>
-	<td></td>
-</tr>
+<!--Add only type and last name, which results in error-->
 <tr>
 	<td>select</td>
 	<td>id=selector</td>
@@ -259,11 +209,7 @@
 	<td>You must enter a value in the First Name field. </td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add only type and first name, which results in error</td>
-	<td></td>
-</tr>
+<!--Add only type and first name, which results in error-->
 <tr>
 	<td>select</td>
 	<td>id=selector</td>
@@ -289,11 +235,7 @@
 	<td>You must enter a value in the Last Name field. </td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add only type. last name, and first name, which should be accepted</td>
-	<td></td>
-</tr>
+<!--Add only type. last name, and first name, which should be accepted-->
 <tr>
 	<td>select</td>
 	<td>id=selector</td>
@@ -314,11 +256,7 @@
 	<td>css=input.submit</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify display of first advises</td>
-	<td></td>
-</tr>
+<!--Verify display of first advises-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>undergraduate advising relationship</td>
@@ -329,11 +267,7 @@
 	<td>link=Smith, Joe</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add a second advises, including all fields</td>
-	<td></td>
-</tr>
+<!--Add a second advises, including all fields-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=a.add-advisorIn &gt; img.add-individual</td>
@@ -389,11 +323,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify display of first and second advises</td>
-	<td></td>
-</tr>
+<!--Verify display of first and second advises-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>undergraduate advising relationship</td>
@@ -419,11 +349,7 @@
 	<td>link=Doe, John</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add a third advises, exluding degree and end date</td>
-	<td></td>
-</tr>
+<!--Add a third advises, exluding degree and end date-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=a.add-advisorIn &gt; img.add-individual</td>
@@ -469,11 +395,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify all 3 advises together</td>
-	<td></td>
-</tr>
+<!--Verify all 3 advises together-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>undergraduate advising relationship</td>
@@ -514,11 +436,7 @@
 	<td>link=Adams, Jeff</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Log out</td>
-	<td></td>
-</tr>
+<!--Log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

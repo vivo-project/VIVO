@@ -68,7 +68,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			
 			
 			String filterRule = "?predicate = j.2:mainImage " 
-									+ "|| ?predicate = core:preferredTitle " 
+//									+ "|| ?predicate = core:preferredTitle "  
 									+ "|| ?predicate = rdfs:label";
 			
 			QueryRunner<GenericQueryMap> profileQueryHandler = 
@@ -123,9 +123,10 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			
 			String whereClause = 
 				"<" + individualURI + "> rdf:type foaf:Person ;" 
-					+ " core:authorInAuthorship ?authorshipNode . \n"
+					+ " core:relatedBy ?authorshipNode . \n"
 				+ "?authorshipNode rdf:type core:Authorship ;" 
-					+ " core:linkedInformationResource ?document .";
+					+ " core:relates ?document . \n"
+				+ "?document rdf:type bibo:Document .";
 
 			String groupOrderClause = "GROUP BY ?" + QueryFieldLabels.AUTHOR_URL + " \n"; 
 			
@@ -147,21 +148,27 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
 			
 			String aggregationRules = "(count(DISTINCT ?Grant) AS ?numOfGrants)";
-			String grantType = "http://vivoweb.org/ontology#Grant";
+			String grantType = "http://vivoweb.org/ontology/core#Grant";
 
 			ObjectProperty predicate = ModelUtils.getPropertyForRoleInClass(grantType, vitroRequest.getWebappDaoFactory());
 			String roleToGrantPredicate = "<" + predicate.getURI() + ">";
 			String whereClause = "{ <" + individualURI + "> rdf:type foaf:Person ;" 
-										+ " core:hasCo-PrincipalInvestigatorRole ?Role . \n"
+										+ " <http://purl.obolibrary.org/obo/RO_0000053> ?Role . \n"
+									+ "?Role rdf:type core:PrincipalInvestigatorRole . \n"
 									+ "?Role " + roleToGrantPredicate + " ?Grant . }"
 									+ "UNION \n"
 									+ "{ <" + individualURI + "> rdf:type foaf:Person ;" 
-										+ " core:hasPrincipalInvestigatorRole ?Role . \n"
+										+ " <http://purl.obolibrary.org/obo/RO_0000053> ?Role . \n"
+									+ "?Role rdf:type core:CoPrincipalInvestigatorRole . \n"
 									+ "?Role " + roleToGrantPredicate + " ?Grant . }"
 									+ "UNION \n"
 									+ "{ <" + individualURI + "> rdf:type foaf:Person ;" 
-										+ " core:hasInvestigatorRole ?Role . \n"
-									+ "?Role " + roleToGrantPredicate + " ?Grant . }";
+										+ " <http://purl.obolibrary.org/obo/RO_0000053> ?Role . \n"
+									+ "?Role rdf:type core:InvestigatorRole. \n"
+    								+ "?Role vitro:mostSpecificType ?subclass . \n"
+									+ "?Role " + roleToGrantPredicate + " ?Grant . \n" 
+									+ "FILTER (?subclass != core:PrincipalInvestigatorRole && "
+									+ "?subclass != core:CoPrincipalInvestigatorRole)}";
 
 			QueryRunner<ResultSet> numberOfGrantsQueryHandler = 
 			new GenericQueryRunner(fieldLabelToOutputFieldLabel,
@@ -302,9 +309,11 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			
 			String whereClause = "?organization rdf:type foaf:Organization ;" 
 								+ " rdfs:label ?organizationLabel . \n"  
-							+ "OPTIONAL { ?organization core:hasSubOrganization ?subOrg } . \n"
-							+ "OPTIONAL { ?organization core:subOrganizationWithin ?parent } . \n"
-							+ "FILTER ( !bound(?parent) ). \n";
+							    + "OPTIONAL { ?organization core:http://purl.obolibrary.org/obo/BFO_0000051 ?subOrg  . \n"
+						        + "           ?subOrg rdf:type foaf:Organization } . \n"
+							    + "OPTIONAL { ?organization core:http://purl.obolibrary.org/obo/BFO_0000050 ?parent } . \n"
+				                + "           ?parent rdf:type foaf:Organization } . \n"
+							    + "FILTER ( !bound(?parent) ). \n";
 			
 			String groupOrderClause = "GROUP BY ?organization ?organizationLabel \n" 
 										+ "ORDER BY DESC(?numOfChildren)\n" 

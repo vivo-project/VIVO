@@ -29,35 +29,35 @@ public class VivoAgentContextNodeFields extends ContextNodeFields{
       + " prefix foaf: <http://xmlns.com/foaf/0.1/> "
       + " prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> "
       + " prefix localNav: <http://vitro.mannlib.cornell.edu/ns/localnav#>  "
-      + " prefix bibo: <http://purl.org/ontology/bibo/>  ";
+      + " prefix bibo: <http://purl.org/ontology/bibo/>  "
+      + " prefix obo: <http://purl.obolibrary.org/obo/> \n" ;
   
 
   //queries for foaf:Agent
   static {
       
-      /*  Position */
+      /*  Positions for People */
     queriesForAgent.add(prefix +
             "SELECT " +
             "(str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {" +
-            " ?uri rdf:type foaf:Agent  ; ?b ?c . " +
+            " ?uri rdf:type foaf:Agent  . " +
+            " ?uri ?b ?c . " +
             " ?c rdf:type core:Position . " +
             " ?c core:hrJobTitle ?ContextNodeProperty . }");
     
     queriesForAgent.add(prefix +        "SELECT " +
             "(str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {" +
-            " ?uri rdf:type foaf:Agent  ; ?b ?c . " +
+            " ?uri rdf:type foaf:Agent  . " +
+            " ?uri ?b ?c . " +
             " ?c rdf:type core:Position . " +
-            " ?c core:involvedOrganizationName ?ContextNodeProperty . }");       
+            " ?c core:relates ?i . " +
+            " ?i rdf:type foaf:Organization . " +
+            " ?i rdfs:label ?ContextNodeProperty . }");
     
     queriesForAgent.add(prefix +        "SELECT " +
             "(str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {" +
-            " ?uri rdf:type foaf:Agent  ; ?b ?c . " +
-            " ?c rdf:type core:Position . " +
-            " ?c core:positionInOrganization ?i . ?i rdfs:label ?ContextNodeProperty . }");
-    
-    queriesForAgent.add(prefix +        "SELECT " +
-            "(str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {" +
-            " ?uri rdf:type foaf:Agent  ; ?b ?c . " +
+            " ?uri rdf:type foaf:Agent  . " +
+            " ?uri  ?b ?c . " +
             " ?c rdf:type core:Position . " +
             " ?c core:titleOrRole ?ContextNodeProperty .  }");
     
@@ -66,7 +66,6 @@ public class VivoAgentContextNodeFields extends ContextNodeFields{
     queriesForAgent.add(prefix +
             "SELECT " +
             "(str(?HRJobTitle) as ?hrJobTitle)  " +
-            "(str(?InvolvedOrganizationName) as ?involvedOrganizationName) " +
             "(str(?PositionInOrganization) as ?positionInOrganization) " +
             "(str(?TitleOrRole) as ?titleOrRole) WHERE {" 
             
@@ -74,8 +73,7 @@ public class VivoAgentContextNodeFields extends ContextNodeFields{
             + " ?c rdf:type core:Position . "
             
             + " OPTIONAL { ?c core:hrJobTitle ?HRJobTitle . } . "
-            + " OPTIONAL { ?c core:involvedOrganizationName ?InvolvedOrganizationName . } ."            
-            + " OPTIONAL { ?c core:positionInOrganization ?i . ?i rdfs:label ?PositionInOrganization .  } . "
+            + " OPTIONAL { ?c core:relates ?i . ?i rdf:type foaf:Organization . ?i rdfs:label ?PositionInOrganization .  } . "
             + " OPTIONAL { ?c core:titleOrRole ?TitleOrRole . } . "
             + " }");
     
@@ -84,36 +82,49 @@ public class VivoAgentContextNodeFields extends ContextNodeFields{
     queriesForAgent.add(prefix +        "SELECT " +
             "(str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {" +
             " ?uri rdf:type foaf:Agent  ; ?b ?c . " +
-            " ?c rdf:type core:Relationship . " +
-            " ?c core:advisee ?d . ?d rdfs:label ?ContextNodeProperty . }");
+            " ?c rdf:type core:AdvisingRelationship . " +
+            " ?c rdfs:label ?ContextNodeProperty . }");
     
     queriesForAgent.add(prefix +        "SELECT " +
             "(str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {" +
             " ?uri rdf:type foaf:Agent  ; ?b ?c . " +
-            " ?c rdf:type core:Relationship . " +
+            " ?c rdf:type core:AdvisingRelationship . " +
             " ?c core:degreeCandidacy ?e . ?e rdfs:label ?ContextNodeProperty . }");
-    
+
     queriesForAgent.add(prefix +        "SELECT " +
             "(str(?label) as ?adviseeLabel) WHERE {" +
             " ?uri rdf:type foaf:Agent  ." +            
-            " ?c rdf:type core:Relationship . " +
-            " ?c core:advisor ?uri . " +
-            " ?c core:advisee ?d . ?d rdfs:label ?label .}" );
+            " ?c rdf:type core:AdvisingRelationship . " +
+            " ?c core:relates ?uri . " +
+            " ?uri obo:RO_0000053 ?advisorRole . " +
+            " ?advisorRole rdf:type core:AdvisorRole . " +
+            " ?c core:relates ?d . " +
+            " ?d rdf:type foaf:Person . " +
+            " ?d obo:RO_0000053 ?adviseeRole . " +
+            " ?adviseeRole rdf:type core:AdviseeRole . " +
+            " ?d rdfs:label ?ContextNodeProperty . }");
     
     queriesForAgent.add(prefix +        "SELECT " +
             "(str(?label) as ?advisorLabel) WHERE {" +
             " ?uri rdf:type foaf:Agent  ." +            
-            " ?c rdf:type core:Relationship . " +
-            " ?c core:advisee ?uri . " +
-            " ?c core:advisor ?d . ?d rdfs:label ?label .}" );
+            " ?c rdf:type core:AdvisingRelationship . " +
+            " ?c core:relates ?uri . " +
+            " ?uri obo:RO_0000053 ?adviseeRole . " +
+            " ?adviseeRole rdf:type core:AdviseeRole . " +
+            " ?c core:relates ?d . " +
+            " ?d rdf:type foaf:Person . " +
+            " ?d obo:RO_0000053 ?advisorRole . " +
+            " ?advisorRole rdf:type core:AdvisorRole . " +
+            " ?d rdfs:label ?ContextNodeProperty . }");
     
     /* Author */
     
     queriesForAgent.add(prefix +        "SELECT " +
             "(str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {" +
             " ?uri rdf:type foaf:Agent  ; ?b ?c . " +
-            " ?c rdf:type core:Relationship . " +
-            " ?c core:linkedAuthor ?f . " +            
+            " ?c rdf:type core:Authorship . " +
+            " ?c core:relates ?f . " +            
+            " ?f rdf:type foaf:Person . " +
             " ?f rdfs:label ?ContextNodeProperty . " +
             " FILTER( ?f != ?uri  ) " +
             "}");
@@ -121,8 +132,9 @@ public class VivoAgentContextNodeFields extends ContextNodeFields{
     queriesForAgent.add(prefix +        "SELECT " +
             "(str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {" +
             " ?uri rdf:type foaf:Agent  ; ?b ?c . " +
-            " ?c rdf:type core:Relationship . " +
-            " ?c core:linkedInformationResource ?h . ?h rdfs:label ?ContextNodeProperty . }");
+            " ?c rdf:type core:Authorship . " +
+            " ?c core:relates ?h . " +
+            " ?h rdf:type obo:IAO_0000030 . ?h rdfs:label ?ContextNodeProperty . }");
     
     /* Award */        
 
@@ -134,8 +146,8 @@ public class VivoAgentContextNodeFields extends ContextNodeFields{
             "WHERE {"            
             + " ?uri rdf:type foaf:Agent  ; ?b ?c . "
             + " ?c rdf:type core:AwardReceipt . "            
-            + " OPTIONAL { ?c rdfs:label ?AwardLabel . } . "
-            + " OPTIONAL { ?c core:awardConferredBy ?d . ?d rdfs:label ?AwardConferredBy . } . "
+            + " OPTIONAL { ?c core:relates ?e . ?e rdf:type core:Award . ?e rdfs:label ?AwardLabel . } . "
+            + " OPTIONAL { ?c core:assignedBy ?d . ?d rdf:type foaf:Organization . ?d rdfs:label ?AwardConferredBy . } . "
             + " OPTIONAL { ?c core:description ?Description . } . "
             + " }");
     
@@ -143,8 +155,9 @@ public class VivoAgentContextNodeFields extends ContextNodeFields{
     
     queriesForAgent.add(prefix +
             "SELECT (str(?OrganizationLabel) as ?organizationLabel)  WHERE {" 
-            + "?uri rdf:type foaf:Agent  ; ?b ?c . "
-            + " ?c rdf:type core:Role ; core:roleIn ?Organization ."
+            + " ?uri rdf:type foaf:Agent  ; ?b ?c . "
+            + " ?c rdf:type obo:BFO_0000023 ; core:roleContributesTo ?Organization ."
+            + " ?Organization rdf:type core:Organization . "
             + " ?Organization rdfs:label ?OrganizationLabel . "
             + " }");    
                 
@@ -159,12 +172,16 @@ public class VivoAgentContextNodeFields extends ContextNodeFields{
             "(str(?TrainingAtOrganizationLabel) as ?trainingAtOrganizationLabel) WHERE {"
                 
                 + " ?uri rdf:type foaf:Agent ; ?b ?c . "
-                + " ?c rdf:type core:EducationalTraining . "
+                + " ?c rdf:type core:EducationalProcess . "
                   
-                +  "OPTIONAL { ?c core:degreeEarned ?d . ?d rdfs:label ?AcademicDegreeLabel ; core:abbreviation ?AcademicDegreeAbbreviation . } . "
+                +  "OPTIONAL { ?c core:relates ?d . "
+                +  "           ?d rdf:type core:AwardedDegree . "
+                +  "           ?d core:relates ?e . "
+                +  "           ?e rdf:type core:AcademicDegree . "
+                +  "           ?e rdfs:label ?AcademicDegreeLabel . } . "
                 +  "OPTIONAL { ?c core:majorField ?MajorField .} ."           
                 + " OPTIONAL { ?c core:departmentOrSchool ?DepartmentOrSchool . }"            
-                + " OPTIONAL { ?c core:trainingAtOrganization ?e . ?e rdfs:label ?TrainingAtOrganizationLabel . } . " 
+                + " OPTIONAL { ?c obo:RO_0000057 ?f . ?f rdf:type foaf:organization . ?f rdfs:label ?TrainingAtOrganizationLabel . } . " 
                 +"}");                 
   }
 }

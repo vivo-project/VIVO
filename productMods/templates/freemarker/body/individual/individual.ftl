@@ -8,15 +8,31 @@
 <#assign individualProductExtension>
     <#-- Include for any class specific template additions -->
     ${classSpecificExtension!}
-    <@vp.webpages propertyGroups editable />
+    ${departmentalGrantsExtension!} 
     <!--PREINDIVIDUAL OVERVIEW.FTL-->
+    <#include "individual-webpage.ftl">
     <#include "individual-overview.ftl">
+    ${affiliatedResearchAreas!}
         </section> <!-- #individual-info -->
     </section> <!-- #individual-intro -->
-    <!--postindiviudal overiew tfl-->
+    <!--postindividual overiew ftl-->
 </#assign>
 
+<#if individual.conceptSubclass() >
+    <#assign overview = propertyGroups.pullProperty("http://www.w3.org/2004/02/skos/core#broader")!> 
+    <#assign overview = propertyGroups.pullProperty("http://www.w3.org/2004/02/skos/core#narrower")!> 
+    <#assign overview = propertyGroups.pullProperty("http://www.w3.org/2004/02/skos/core#related")!> 
+</#if>
+
 <#include "individual-vitro.ftl">
+<script>
+var i18nStrings = {
+    displayLess: '${i18n().display_less}',
+    displayMoreEllipsis: '${i18n().display_more_ellipsis}',
+    showMoreContent: '${i18n().show_more_content}',
+    verboseTurnOff: '${i18n().verbose_turn_off}',
+};
+</script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />')}
 

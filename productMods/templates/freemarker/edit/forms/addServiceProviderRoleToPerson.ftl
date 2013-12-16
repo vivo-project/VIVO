@@ -18,9 +18,12 @@ roleExamples-->
 
 
 <#--Variable assignments for Add Service Provider Role To Person-->
-<#assign roleDescriptor = "service to the profession" />
-<#assign typeSelectorLabel = "service to the profession in" />
-<#assign buttonText = "Service Provider Role" />
+<#assign roleDescriptor = "${i18n().service_to_profession}" />
+<#assign typeSelectorLabel = "${i18n().service_to_profession_in}" />
+<#assign genericLabel = "${i18n().organization_capitalized}" />
+
+<#assign acMultipleTypes = "'true'" />
+<#assign acTypes = "{activity: 'http://xmlns.com/foaf/0.1/Organization,http://xmlns.com/foaf/0.1/Group,http://purl.obolibrary.org/obo/OBI_0000835,http://purl.org/NET/c4dm/event.owl#Event'}" />
 
 
 <#--Each of the two stage forms will include the form below-->

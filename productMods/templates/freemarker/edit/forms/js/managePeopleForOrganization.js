@@ -14,6 +14,7 @@ var managePeople = {
 
         // Get the custom form data from the page
         $.extend(this, customFormData);
+        $.extend(this, i18nStrings);
     },
 
     // Initial page setup. Called only at page load.
@@ -68,10 +69,10 @@ var managePeople = {
             complete: function(request, status) {
             
                 if (status === 'success') {
-                    window.status = "The person has been successfully excluded from the organization page."; 
+                    window.status = managePeople.personSuccessfullyExcluded; 
 
                 } else {
-                    alert('Error processing request: the person cannot be excluded from the organization page.');
+                    alert(managePeople.errorExcludingPerson);
                     $(person).removeAttr('checked');
                 }
             }

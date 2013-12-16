@@ -1,0 +1,38 @@
+# $This file is distributed under the terms of the license in /doc/license.txt$ 
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix vitroDisplay: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix core: <http://vivoweb.org/ontology/core#> .
+@prefix localNav: <http://vitro.mannlib.cornell.edu/ns/localnav#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+
+# See vitroSearchProhibited.n3 for more information about files in this directory.
+
+ vitroDisplay:SearchIndex 
+	rdf:type owl:Thing ; 
+	vitroDisplay:excludeClass obo:BFO_0000023  ;
+	vitroDisplay:excludeClass core:AdvisingRelationship ;
+	vitroDisplay:excludeClass core:Editorship ;
+	vitroDisplay:excludeClass core:Authorship ;
+	vitroDisplay:excludeClass core:Position ; 
+	vitroDisplay:excludeClass core:AwardReceipt ;
+	vitroDisplay:excludeClass core:AwardedDegree ;
+	vitroDisplay:excludeClass core:ResearchActivity ;
+	vitroDisplay:excludeClass core:EducationalProcess ;	
+	vitroDisplay:excludeClass bibo:DocumentStatus ;
+	vitroDisplay:excludeClass core:DateTimeValue ;
+    vitroDisplay:excludeClass core:DateTimeValuePrecision ;
+	vitroDisplay:excludeClass core:DateTimeInterval ;
+	vitroDisplay:excludeClass core:AcademicDegree ;
+	vitroDisplay:excludeClass vcard:URL ;
+	vitroDisplay:excludeClass vcard:Communication ;
+	vitroDisplay:excludeClass vcard:Code ;
+	vitroDisplay:excludeClass vcard:Explanatory ;
+	vitroDisplay:excludeClass vcard:Addressing ;
+	vitroDisplay:excludeClass vcard:Identification ;
+	vitroDisplay:excludeClass vcard:Kind ;
+	vitroDisplay:excludeClass <http://vitro.mannlib.cornell.edu/ns/vitro/public#File> ;
+	vitroDisplay:excludeClass <http://vitro.mannlib.cornell.edu/ns/vitro/public#FileByteStream> .

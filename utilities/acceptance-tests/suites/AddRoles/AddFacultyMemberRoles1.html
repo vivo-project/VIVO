@@ -5,35 +5,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>AddFacultyMemberRoles1</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AddFacultyMemberRoles1</td></tr>
+<tr><td rowspan="1" colspan="3">AddFacultyMemberRoles1</td></tr>
 </thead><tbody>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add grant roles for Jane Faculty--originally tested auto-complete but doesn't work well within Selenium</td>
-	<td></td>
-</tr>
+<!--Add grant roles for Jane Faculty--originally tested auto-complete but doesn't work well within Selenium-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must be logged off to start</td>
-	<td></td>
-</tr>
+<!--Must be logged off to start-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must login as the site admin</td>
-	<td></td>
-</tr>
+<!--Must login as the site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -89,11 +59,7 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Jane Faculty</td>
-	<td></td>
-</tr>
+<!--Navigate to Jane Faculty-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -119,11 +85,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Cancel out before adding Co-principal Investigator</td>
-	<td></td>
-</tr>
+<!--Cancel out before adding Co-principal Investigator-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='hasCo-PrincipalInvestigatorRole']/a/img</td>
@@ -169,11 +131,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add good Co-principal Investigator role</td>
-	<td></td>
-</tr>
+<!--Add good Co-principal Investigator role-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='hasCo-PrincipalInvestigatorRole']/a/img</td>
@@ -229,11 +187,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate back to Jane Faculty</td>
-	<td></td>
-</tr>
+<!--Navigate back to Jane Faculty-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -259,11 +213,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify Co-principal Investigator role is showing up</td>
-	<td></td>
-</tr>
+<!--Verify Co-principal Investigator role is showing up-->
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=NIH VIVO</td>
@@ -274,11 +224,7 @@
 	<td>NIH VIVO 2009 - 2010</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add second Co-principal Investigator role</td>
-	<td></td>
-</tr>
+<!--Add second Co-principal Investigator role-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='hasCo-PrincipalInvestigatorRole']/a/img</td>
@@ -339,11 +285,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate back to Jane Faculty</td>
-	<td></td>
-</tr>
+<!--Navigate back to Jane Faculty-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -369,11 +311,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify both Co-principal Investigator roles are showing up</td>
-	<td></td>
-</tr>
+<!--Verify both Co-principal Investigator roles are showing up-->
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=VIVO Cornell Grant</td>
@@ -394,11 +332,7 @@
 	<td>NIH VIVO 2009 - 2010</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Cancel out before adding Investigator</td>
-	<td></td>
-</tr>
+<!--Cancel out before adding Investigator-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='hasInvestigatorRole']/a/img</td>
@@ -444,11 +378,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Enter good Investigator role</td>
-	<td></td>
-</tr>
+<!--Enter good Investigator role-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='hasInvestigatorRole']/a/img</td>
@@ -509,11 +439,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate back to Jane Faculty</td>
-	<td></td>
-</tr>
+<!--Navigate back to Jane Faculty-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -539,11 +465,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify Investigator role is showing up</td>
-	<td></td>
-</tr>
+<!--Verify Investigator role is showing up-->
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=VIVO Cornell Grant Too</td>
@@ -554,11 +476,7 @@
 	<td>VIVO Cornell Grant Too 2009</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Principal Investigator role</td>
-	<td></td>
-</tr>
+<!--Add Principal Investigator role-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='hasPrincipalInvestigatorRole']/a/img</td>
@@ -619,11 +537,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate back to Jane Faculty</td>
-	<td></td>
-</tr>
+<!--Navigate back to Jane Faculty-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -649,11 +563,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify Principal Investigator role is showing up</td>
-	<td></td>
-</tr>
+<!--Verify Principal Investigator role is showing up-->
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=NIH VIVO Too</td>
@@ -664,11 +574,7 @@
 	<td>NIH VIVO Too 2010 -</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify that all grant roles are still there</td>
-	<td></td>
-</tr>
+<!--Verify that all grant roles are still there-->
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=NIH VIVO</td>
@@ -709,11 +615,7 @@
 	<td>NIH VIVO Too 2010 -</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Log out</td>
-	<td></td>
-</tr>
+<!--Log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

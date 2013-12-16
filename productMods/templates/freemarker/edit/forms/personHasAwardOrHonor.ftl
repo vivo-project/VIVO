@@ -44,19 +44,19 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 </#if>
 
 <#if editMode == "edit">    
-        <#assign titleVerb="Edit">        
-        <#assign submitButtonText="Save Changes">
+        <#assign titleVerb="${i18n().edit_capitalized}">        
+        <#assign submitButtonText="${i18n().save_changes}">
         <#assign disabledVal="disabled">
 <#else>
-        <#assign titleVerb="Create">        
-        <#assign submitButtonText="Create Entry">
+<#assign titleVerb="${i18n().create_capitalized}">        
+<#assign submitButtonText="${i18n().create_entry}">
         <#assign disabledVal=""/>
 </#if>
 
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
-<#assign yearHint     = "<span class='hint'>(YYYY)</span>" />
+<#assign yearHint     = "<span class='hint'>(${i18n().year_hint_format})</span>" />
 
-<h2>${titleVerb}&nbsp;award or honor for ${editConfiguration.subjectName}</h2>
+<h2>${titleVerb}&nbsp;${i18n().award_or_honor_for} ${editConfiguration.subjectName}</h2>
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
@@ -68,23 +68,23 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     </#if>
         
     <section id="error-alert" role="alert">
-        <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
+        <img src="${urls.images}/iconAlert.png" width="24" height="24" alt="${i18n().error_alert_icon}" />
         <p>
         <#--Checking if any required fields are empty-->
         <#if lvf.submissionErrorExists(editSubmission, "awardLabel")>
- 	        Please select an existing value or enter a new value in the Award or Honor Name field.
+ 	        ${i18n().select_Award_or_enter_name}
         </#if> 
         <#list submissionErrors?keys as errorFieldName>
         	<#if errorFieldName == "startField">
         	    <#if submissionErrors[errorFieldName]?contains("before")>
-        	        The Start Year must be earlier than the End Year.
+        	        ${i18n().start_year_must_precede_end}
         	    <#else>
         	        ${submissionErrors[errorFieldName]}
         	    </#if>
         	    
         	<#elseif errorFieldName == "endField">
     	        <#if submissionErrors[errorFieldName]?contains("after")>
-    	            The End Year must be later than the Start Year.
+    	            ${i18n().end_year_must_be_later}
     	        <#else>
     	            ${submissionErrors[errorFieldName]}
     	        </#if>
@@ -100,63 +100,63 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     
     <form id="personHasAwardOrHonor" class="customForm noIE67" action="${submitUrl}"  role="add/edit AwardOrHonor">
     <p>
-        <label for="relatedIndLabel">Award or Honor Name ${requiredHint}</label>
+        <label for="relatedIndLabel">${i18n().award_honor_name} ${requiredHint}</label>
             <input class="acSelector" size="50"  type="text" id="award" acGroupName="award" name="awardLabel" value="${awardLabelValue}">
             <input class="display" type="hidden" id="awardDisplay" acGroupName="award" name="awardLabelDisplay" value="${awardLabelDisplayValue}">
     </p>
 
     <div class="acSelection" acGroupName="award" id="awardAcSelection">
         <p class="inline">
-            <label>Selected Award:</label>
+            <label>${i18n().selected_award}:</label>
             <span class="acSelectionInfo"></span>
-            <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
-            <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
+            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+            <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="awardUri" name="existingAward" value="${awardValue}" ${flagClearLabelForExisting}="true" />
     </div>
   <p>
-      <label for="org">Conferred by</label>
+      <label for="org">${i18n().conferred_by_capitalized}</label>
       <input  class="acSelector" size="50" acGroupName="org" type="text" id="org" name="orgLabel" value="${orgLabelValue}" />
       <input  class="display" type="hidden" id="orgDisplay" acGroupName="org" name="orgLabelDisplay" value="${orgLabelDisplayValue}" />
   </p>
   
   <div class="acSelection" acGroupName="org" id="orgAcSelection">
       <p class="inline">
-          <label>Selected Conferrer:</label>
+          <label>${i18n().selected_conferred}:</label>
           <span class="acSelectionInfo"></span>
-            <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
-            <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
+          <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+          <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
       </p>
       <input class="acUriReceiver" type="hidden" id="orgUri" name="existingOrg" value="${orgValue}" ${flagClearLabelForExisting}="true"/>
   </div>
 <#if editMode == "edit">
   <div class="hidden" id="hiddenOrgLabel">
     <p class="inline">
-        <label>Selected Conferrer: </label>
+        <label>${i18n().selected_conferred}: </label>
         <span class="readOnly">${orgLabelValue}</span>
     </p>
   </div>
 </#if>
     <p>
-        <label for="description">Description</label>
+        <label for="description">${i18n().description}</label>
         <input  size="50"  type="text" id="description" name="description" value="${descriptionValue}" />
     </p>
     <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
     <p>
-        <label for="yearAwardedDisplay" id="yearAwarded">Year Awarded</label>
+        <label for="yearAwardedDisplay" id="yearAwarded">${i18n().year_awarded}</label>
         <input  size="4"  type="text" id="yearAwardedDisplay" name="yearAwardedDisplay" value="${yearAwardedDisplayValue}" /> ${yearHint}
     </p>
     <p>
-        <h4>Years Inclusive <span class="hint">&nbsp;(e.g., for multi-year awards)</span></h4>
+        <h4>${i18n().years_inclusive} <span class="hint">&nbsp;${i18n().award_hint}</span></h4>
     </p>
     <#--Need to draw edit elements for dates here-->
     <#if htmlForElements?keys?seq_contains("startField")>
-        <label class="dateTime" for="startField">Start</label>
+        <label class="dateTime" for="startField">${i18n().start_capitalized}</label>
 		${htmlForElements["startField"]} ${yearHint}
     </#if>
     <br/>
     <#if htmlForElements?keys?seq_contains("endField")>
-		<label class="dateTime" for="endField">End</label>
+		<label class="dateTime" for="endField">${i18n().end_capitalized}</label>
 	 	${htmlForElements["endField"]} ${yearHint}
     </#if>
 	<#--End draw elements-->
@@ -165,11 +165,11 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>
 
     <p class="submit">
-        <input type="submit" class="submit" value="${submitButtonText}"/><span class="or"> or </span>
-        <a class="cancel" href="${cancelUrl}" title="Cancel">Cancel</a>
-    </p>
+         <input type="submit" class="submit" value="${submitButtonText}"/><span class="or"> ${i18n().or} </span>
+         <a class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
+     </p>
 
-    <p id="requiredLegend" class="requiredHint">* required fields</p>
+    <p id="requiredLegend" class="requiredHint">* ${i18n().required_fields}</p>
 
     <#-- hide the html that gets written, and use java script to pass the value between the two -->
     <div class="hidden">
@@ -192,7 +192,15 @@ var customFormData  = {
     multipleTypeNames: {award: 'award', org: 'organization'},
     baseHref: '${urls.base}/individual?uri=',
     blankSentinel: '${blankSentinel}',
-    flagClearLabelForExisting: '${flagClearLabelForExisting}'};
+    flagClearLabelForExisting: '${flagClearLabelForExisting}'
+};
+var i18nStrings = {
+    selectAnOrganization: '${i18n().select_or_create_organization}',
+    selectAnExisting: '${i18n().select_an_existing}',
+    orCreateNewOne: '${i18n().or_create_new_one}',
+    selectedString: '${i18n().selected}',
+};
+
 </script>
 
  

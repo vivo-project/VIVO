@@ -1,0 +1,22 @@
+PREFIX arg: <http://purl.obolibrary.org/obo/> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX v:   <http://www.w3.org/2006/vcard/ns#> 
+PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+
+CONSTRUCT {
+    ?vcard v:hasURL _:url .
+   _:url a v:URL .
+   _:url v:url ?linkURI .
+   _:url rdfs:label ?linkAnchorText
+} WHERE {
+    ?s vivo:webpage ?webpage .
+    ?webpage vivo:linkURI ?linkURI .
+    ?s arg:ARG_2000028 ?vcard .
+    OPTIONAL {
+        ?webpage vivo:linkAnchorText ?linkAnchorText
+    }
+    FILTER NOT EXISTS {
+        ?vcard v:hasURL ?URLNode
+    }
+}

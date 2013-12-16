@@ -8,8 +8,7 @@ import java.util.List;
 
 public class ConceptInfo extends SemanticServicesInfoBase {
 
-    private List<Concept> conceptList;
-
+    private List<?> conceptList;
     /**
      *
      */
@@ -18,17 +17,16 @@ public class ConceptInfo extends SemanticServicesInfoBase {
     }
 
     /**
-     * @return the vivoDepartmentList
+     * @return the conceptList
      */
-    public List<Concept> getConceptList() {
+    public List<?> getConceptList() {
         return conceptList;
     }
 
     /**
-     * @param vivoDepartmentList the vivoDepartmentList to set
+     * @param conceptList the conceptList to set
      */
-    public void setConceptList(List<Concept> inputConceptList) {
-        this.conceptList = inputConceptList;
+    public void setConceptList(List<?> conceptList) {
+        this.conceptList = conceptList;
     }
-
 }

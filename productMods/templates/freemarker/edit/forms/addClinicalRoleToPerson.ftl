@@ -23,8 +23,12 @@ RoleToActivityPredicate
 
 
 <#--Variable assignments for Add Clinical Role To Person-->
-<#assign roleDescriptor = "clinical activity" />
-<#assign typeSelectorLabel = "clinical activity type" />
+<#assign roleDescriptor = "${i18n().clinical_activity}" />
+<#assign typeSelectorLabel = "${i18n().clinical_activity_type}" />
+<#assign genericLabel = "${i18n().clinical_activity?capitalize}" />
+
+<#assign acMultipleTypes = "'true'" />
+<#assign acTypes = "{activity: 'http://vivoweb.org/ontology/core#Project,http://purl.obolibrary.org/obo/ERO_0000005'}" />
 
 
 <#--Each of the two stage forms will include the form below-->

@@ -1,5 +1,7 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
+$.extend(this, i18nStringsPersonLvl);
+
 function getWellFormedURLs(given_uri, type) {
 	
 	if (!given_uri || given_uri == "") {
@@ -223,7 +225,7 @@ function createTable(tableID, tableContainer, tableData) {
 	
 	table.append($('<caption>').html(collaboratorTableMetadata.tableCaption 
 										+ "<a href=\"" + collaboratorTableMetadata.tableCSVFileLink 
-										+ "\">(.CSV File)</a>"));  
+										+ "\">(.CSV " + i18nStringsPersonLvl.fileCapitalized + ")</a>"));  
 
 	var header = $('<thead>');
 	
@@ -326,8 +328,8 @@ function renderCollaborationshipVisualization() {
 		);
 	} else {  // flash is too old or we can't detect the plugin
 		var alternateContent = '<br /><h3 style="color: red;">'
-			+ 'This content requires the Adobe Flash Player. '
-			+ '<a href=http://www.adobe.com/go/getflash/>Get Flash</a></h3>';
+			+ i18nStringsPersonLvl.contentRequiresFlash + ' '
+			+ '<a href=http://www.adobe.com/go/getflash/>' + i18nStringsPersonLvl.getFlashString + '</a></h3>';
 		document.write(alternateContent);  // insert non-flash content
 		
 	}

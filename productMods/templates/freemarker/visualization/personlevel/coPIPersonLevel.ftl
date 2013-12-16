@@ -57,6 +57,18 @@ var contextPath = "${urls.base}";
 var visualizationDataRoot = "${dataVisualizationURLRoot}";
 
 // -->
+var i18nStringsCoPi = {
+    coInvestigatorString: '${i18n().co_inestigators_capitalized}',
+    investigatorString: '${i18n().investigator_capitalized}',
+    grantsWithString: '${i18n().grants_with}',
+    grantsCapitalized: '${i18n().grant_s_capitalized}',
+    coInvestigatorCapitalized: '${i18n().co_investigator_s_capitalized}'
+};
+var i18nStringsPersonLvl = {
+    fileCapitalized: '${i18n().file_capitalized}',
+    contentRequiresFlash: '${i18n().content_requires_flash}',
+    getFlashString: '${i18n().get_flash}'
+};
 </script>
 
 <script type="text/javascript" src="${coInvestigatorPersonLevelJavaScript}"></script>
@@ -76,7 +88,7 @@ ${stylesheets.add('<link rel="stylesheet" type="text/css" href="${urls.base}/css
 $(document).ready(function(){
         
     <#if (numOfCoInvestigations?? && numOfCoInvestigations > 0) >
-        $("#coinve_table_container").empty().html('<img id="loadingData" width="auto" src="${loadingImageLink}" />');
+        $("#coinve_table_container").empty().html('<img id="loadingData" width="auto" src="${loadingImageLink}" alt="${i18n().loading_data}"/>');
     </#if>
                 
         
@@ -117,7 +129,7 @@ $(document).ready(function(){
     <div id="ego_profile">
             
         <#-- Label -->
-            <h2><a href="${egoVivoProfileURL}" title="investigator name"><span id="ego_label" class="investigator_name"></span></a></h2>
+            <h2><a href="${egoVivoProfileURL}" title="${i18n().investigator_name}"><span id="ego_label" class="investigator_name"></span></a></h2>
     
         <#-- Moniker-->
             <em id="ego_moniker" class="moniker"></em>
@@ -126,9 +138,9 @@ $(document).ready(function(){
     
     <div class = "toggle_visualization">
         <div id="coauthorship_link_container" class="collaboratorship-link-container">
-        	<div class="collaboratorship-icon"><a href="${coauthorshipURL}" title="co-author"><img src="${coAuthorIcon}" /></a></div>
+        	<div class="collaboratorship-icon"><a href="${coauthorshipURL}" title="${i18n().co_author}"><img src="${coAuthorIcon}" alt="${i18n().co_author_icon}"/></a></div>
             <div class="collaboratorship-link">
-                <h3><a href="${coauthorshipURL}" title="co-author network">Co-Author Network</a></h3>
+                <h3><a href="${coauthorshipURL}" title="${i18n().co_author_network}">${i18n().co_author_network}</a></h3>
             </div>
         </div>
     </div>
@@ -137,27 +149,25 @@ $(document).ready(function(){
     
     <#if (numOfInvestigators?? && numOfInvestigators > 0) >
     
-        <div class="sub_headings"><h3 >Co-Investigator Network </h3></div>
+        <div class="sub_headings"><h3 >${i18n().co_investigator_network_capitalized} </h3></div>
         
         <#if (numOfCoInvestigations?? && numOfCoInvestigations > 0) || (numOfInvestigators?? && numOfInvestigators > 0) > 
-                <div class = "graphml-file-link"><a href="${egoCoInvestigationNetworkDataFileURL}" title="co-investigator">(GraphML File)</a></div>
+                <div class = "graphml-file-link"><a href="${egoCoInvestigationNetworkDataFileURL}" title="${i18n().co_investigator}">(GraphML ${i18n().file_capitalized})</a></div>
         <#else>
 
             <#if numOfInvestigators?? && numOfInvestigators <= 0 >
                 <#assign investigatorsText = "multi-investigator" />
             </#if>
             
-            <span id="no_coinvestigations">Currently there are no ${investigatorsText!} grants for 
-                <a href="${egoVivoProfileURL}" title="investigator name"><span id="no_coinvestigations_person" class="investigator_name">this investigator</span></a> 
-                in the VIVO database.
+            <span id="no_coinvestigations">${i18n().currently_no_grants_for(investigatorsText!)} 
+                <a href="${egoVivoProfileURL}" title="${i18n().investigator_name}"><span id="no_coinvestigations_person" class="investigator_name">${i18n().this_investigator}</span></a> ${i18n().in_the_vivo_db}
             </span>                     
         </#if>
     
     <#else>
     
-        <span id="no_coinvestigations">Currently there are no grants for 
-            <a href="${egoVivoProfileURL}" title="co-investigator"><span id="no_coinvestigations_person" class="investigator_name">this investigator</span></a> in the 
-            VIVO database.
+        <span id="no_coinvestigations">${i18n().no_grants_for}
+            <a href="${egoVivoProfileURL}" title="${i18n().co_investigator}"><span id="no_coinvestigations_person" class="investigator_name">${i18n().this_investigator}</span></a> ${i18n().in_the_vivo_db}
         </span>
     
     </#if>
@@ -173,7 +183,7 @@ $(document).ready(function(){
                 </script>
             </div>
             <div id="dataPanel">
-                <h4 id ="profileTitle">Profile</h4>
+                <h4 id ="profileTitle">${i18n().profile_capitalized}</h4>
                     
                 <div id="data-panel-content">
                 <div id="profileImage" class="thumbnail"></div>
@@ -182,23 +192,22 @@ $(document).ready(function(){
                 
                 <em id="profileMoniker" class="moniker"></em>
                 
-                <div id="profile-links"><a href="#" id="profileUrl" title="VIVO profile">VIVO profile</a></div> 
+                <div id="profile-links"><a href="#" id="profileUrl" title="${i18n().vivo_profile}">${i18n().vivo_profile}</a></div> 
 
                 <div class="investigator_stats" id="num_works"><span class="numbers" style="width: 40px;" id="works"></span>&nbsp;&nbsp;
-                <span class="investigator_stats_text">Grant(s)</span></div>
+                <span class="investigator_stats_text">${i18n().grant_s_capitalized}</span></div>
                 <div class="investigator_stats" id="num_investigators"><span class="numbers" style="width: 40px;" id="coInvestigators"></span>
-                &nbsp;&nbsp;<span class="investigator_stats_text">Co-investigator(s)</span></div>
+                &nbsp;&nbsp;<span class="investigator_stats_text">${i18n().co_investigator_s_capitalized}</span></div>
                 
                 <div class="investigator_stats" id="fGrant" style="visibility:hidden">
-                    <span class="numbers" style="width:40px;" id="firstGrant"></span>&nbsp;&nbsp;<span>First Grant</span></div>
+                    <span class="numbers" style="width:40px;" id="firstGrant"></span>&nbsp;&nbsp;<span>${i18n().first_grant}</span></div>
                 <div class="investigator_stats" id="lGrant" style="visibility:hidden"><span class="numbers" style="width:40px;" id="lastGrant"></span>
-                &nbsp;&nbsp;<span>Last Grant</span></div>
-                <div id="incomplete-data">Note: This information is based solely on grants that have been loaded into the VIVO system. 
-                This may only be a small sample of the person's total work.<p></p><p></p>
+                &nbsp;&nbsp;<span>${i18n().last_grant}</span></div>
+                <div id="incomplete-data">${i18n().incomplete_grant_data_note1}<p></p><p></p>
                 <#if user.loggedIn > 
-                    Go to your profile page to enter additional details about your grants.
+                    ${i18n().incomplete_grant_data_note2}
                 <#else> 
-                    Log in to enter additional details about your grants on your profile page.
+                    ${i18n().incomplete_grant_data_note3}
                 </#if>
                 </div>
                 </div>
@@ -224,16 +233,16 @@ $(document).ready(function(){
 
         <div class="vis_stats">
         
-        <div class="sub_headings" id="table_heading"><h3>Tables</h3></div>
-            <p style="float:left;font-size:.9em">The information in the following tables is for all years.&nbsp;<img class="filterInfoIcon" width="16px" height="16px" id="imageIconThree" src="${urls.images}/iconInfo.png" alt="information icon" title="The spark lines shown above reflect grants through the last complete calendar year. These tables, however, show the grant information for all years, based on the information loaded in the VIVO system." /></p>
+        <div class="sub_headings" id="table_heading"><h3>${i18n().tables_capitalized}</h3></div>
+            <p style="float:left;font-size:.9em">${i18n().grant_info_for_all_years}&nbsp;<img class="filterInfoIcon" width="16px" height="16px" id="imageIconThree" src="${urls.images}/iconInfo.png" alt="${i18n().info_icon}" title="${i18n().grant_sparkline_note}" /></p>
         
             <div class="vis-tables">
 
                 <p id="grants_table_container" class="datatable">
 
                 <#assign tableID = "grant_data_table" />
-                <#assign tableCaption = "Grants per year" />
-                <#assign tableActivityColumnName = "Grants" />
+                <#assign tableCaption = "${i18n().grants_per_year}" />
+                <#assign tableActivityColumnName = "${i18n().grants_capitalized}" />
                 <#assign tableContent = egoGrantSparklineVO.yearToActivityCount />
                 <#assign fileDownloadLink = egoGrantSparklineVO.downloadDataLink />
                 

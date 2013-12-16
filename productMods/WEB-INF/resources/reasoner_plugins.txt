@@ -1,2 +1,1 @@
-org.vivoweb.reasoner.plugin.DCTitleForDocuments
-org.vivoweb.reasoner.plugin.DCCreatorForDocuments
+edu.cornell.mannlib.vitro.webapp.reasoner.plugin.DisableSameAs

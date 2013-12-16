@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-select>    
+        PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
+        
+        SELECT DISTINCT ?vcard 
+                        ?email
+                        ?emailAddress
+        WHERE {
+            ?subject ?property ?vcard .
+            ?vcard vcard:hasEmail ?email .
+            ?email vcard:email ?emailAddress 
+            MINUS {?email a vcard:Work}
+        } 
+    </query-select>
+       
+    <query-construct>
+        PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
+        CONSTRUCT { 
+            ?subject ?property ?vcard .
+            ?vcard vcard:hasEmail ?email .
+            ?email ?emailProperty ?emailValue 
+        } WHERE {
+               ?subject ?property ?vcard .
+               ?vcard vcard:hasEmail ?email .
+               ?email ?emailProperty ?emailValue 
+        } 
+    </query-construct>
+              
+    <template>propStatement-emailAddress.ftl</template>
+    <postprocessor>edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.MaintainDuplicatesObjectPropertyDataPostProcessor</postprocessor>
+</list-view-config>

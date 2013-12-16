@@ -2,38 +2,64 @@
 
 package edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+
 import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
-import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Route;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
+import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
-import edu.cornell.mannlib.vitro.webapp.dao.jena.ModelContext;
-import edu.cornell.mannlib.vitro.webapp.dao.jena.SimpleOntModelSelector;
-import edu.cornell.mannlib.vitro.webapp.dao.jena.WebappDaoFactorySDB;
 
 public class IndividualTemplateModel extends BaseIndividualTemplateModel {
 
     private static final Log log = LogFactory.getLog(IndividualTemplateModel.class);
     
     private static final String FOAF = "http://xmlns.com/foaf/0.1/";
-    private static final String CORE = "http://vivoweb.org/ontology/core#";
     private static final String PERSON_CLASS = FOAF + "Person";
+    private static final String AWARD_CLASS = "http://vivoweb.org/ontology/core#Award";
+    private static final String DEGREE_CLASS = "http://vivoweb.org/ontology/core#AcademicDegree";
+    private static final String CONTACT_CLASS = "http://purl.obolibrary.org/obo/ARG_2000376";
+    private static final String CREDENTIAL_CLASS = "http://vivoweb.org/ontology/core#Credential";
+    private static final String DTP_CLASS = "http://vivoweb.org/ontology/core#DateTimeValuePrecision";
     private static final String ORGANIZATION_CLASS = FOAF + "Organization";
     private static final String BASE_VISUALIZATION_URL = 
         UrlBuilder.getUrl(Route.VISUALIZATION_SHORT.path());
+    private static String VCARD_DATA_QUERY = ""
+        + "PREFIX obo: <http://purl.obolibrary.org/obo/> \n"
+        + "PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>  \n"
+        + "SELECT DISTINCT ?firstName ?lastName ?email ?phone ?title  \n"
+        + "WHERE {  \n"
+        + "    ?subject obo:ARG_2000028 ?vIndividual .  \n"
+        + "    ?vIndividual vcard:hasName ?vName .   \n"
+        + "    ?vName vcard:givenName ?firstName .  \n"
+        + "    ?vName vcard:familyName ?lastName .  \n"
+        + "    OPTIONAL { ?vIndividual vcard:hasEmail ?vEmail . \n"
+        + "               ?vEmail vcard:email ?email . \n"
+        + "    } \n"
+        + "    OPTIONAL { ?vIndividual vcard:hasTelephone ?vPhone .   \n"
+        + "               ?vPhone vcard:telephone ?phone .  \n"
+        + "    } \n"
+        + "    OPTIONAL { ?vIndividual vcard:hasTitle ?vTitle . \n"
+        + "               ?vTitle vcard:title ?title . \n"
+        + "    } \n"
+        + "} "  ;
     
+    private List<Map<String,String>>  vcardData;
     private Map<String, String> qrData = null;
     
     public IndividualTemplateModel(Individual individual, VitroRequest vreq) {
@@ -41,44 +67,73 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     }
 
     private Map<String, String> generateQrData() {
-
-        Map<String,String> qrData = new HashMap<String,String>();
         
-        WebappDaoFactory wdf = vreq.getUnfilteredWebappDaoFactory();
-        
-        Collection<DataPropertyStatement> firstNames = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, FOAF + "firstName");
-        Collection<DataPropertyStatement> lastNames = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, FOAF + "lastName");
-        Collection<DataPropertyStatement> preferredTitles = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, CORE + "preferredTitle");
-        Collection<DataPropertyStatement> phoneNumbers = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, CORE + "phoneNumber");
-        Collection<DataPropertyStatement> emails = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, CORE + "email");
+        try {
+            String firstName = "";
+            String lastName = "";
+            String preferredTitle = "";
+            String phoneNumber = "";
+            String email = "";
 
-        if(firstNames != null && ! firstNames.isEmpty())
-            qrData.put("firstName", firstNames.toArray(new DataPropertyStatement[firstNames.size()])[0].getData());
-        if(lastNames != null && ! lastNames.isEmpty())
-            qrData.put("lastName", lastNames.toArray(new DataPropertyStatement[firstNames.size()])[0].getData());
-        if(preferredTitles != null && ! preferredTitles.isEmpty())
-            qrData.put("preferredTitle", preferredTitles.toArray(new DataPropertyStatement[firstNames.size()])[0].getData());
-        if(phoneNumbers != null && ! phoneNumbers.isEmpty())
-            qrData.put("phoneNumber", phoneNumbers.toArray(new DataPropertyStatement[firstNames.size()])[0].getData());
-        if(emails != null && ! emails.isEmpty())
-            qrData.put("email", emails.toArray(new DataPropertyStatement[firstNames.size()])[0].getData());
+            vcardData = getVcardData(individual, vreq);
 
-        String tempUrl = vreq.getRequestURL().toString();
-        String prefix = "http://";
-        tempUrl = tempUrl.substring(0, tempUrl.replace(prefix, "").indexOf("/") + prefix.length());
-        String profileUrl = getProfileUrl();
-        String externalUrl = tempUrl + profileUrl;
-        qrData.put("externalUrl", externalUrl);
+            Map<String,String> qrData = new HashMap<String,String>();
 
-        String individualUri = individual.getURI();
-        String contextPath = vreq.getContextPath();
-        qrData.put("exportQrCodeUrl", contextPath + "/qrcode?uri=" + UrlBuilder.urlEncode(individualUri));
+            for (Map<String, String> map: vcardData) {        
+                firstName = map.get("firstName");
+                lastName = map.get("lastName");
+                preferredTitle = map.get("title");
+                phoneNumber = map.get("phone");
+                email = map.get("email");
+            }
+
+            if(firstName != null &&  firstName.length() > 0)
+                qrData.put("firstName", firstName);
+            if(lastName != null &&  lastName.length() > 0)
+                qrData.put("lastName", lastName);
+            if(preferredTitle != null &&  preferredTitle.length() > 0)
+                qrData.put("preferredTitle", preferredTitle);
+            if(phoneNumber != null &&  phoneNumber.length() > 0)
+                qrData.put("phoneNumber", phoneNumber);
+            if(email != null &&  email.length() > 0)
+                qrData.put("email", email);
+
+            String tempUrl = vreq.getRequestURL().toString();
+            String prefix = "http://";
+            tempUrl = tempUrl.substring(0, tempUrl.replace(prefix, "").indexOf("/") + prefix.length());
+            String profileUrl = getProfileUrl();
+            String externalUrl = tempUrl + profileUrl;
+            qrData.put("externalUrl", externalUrl);
+
+            String individualUri = individual.getURI();
+            String contextPath = vreq.getContextPath();
+            qrData.put("exportQrCodeUrl", contextPath + "/qrcode?uri=" + UrlBuilder.urlEncode(individualUri));
         
-        qrData.put("aboutQrCodesUrl", contextPath + "/qrcode/about");
-        
-        return qrData;
+            qrData.put("aboutQrCodesUrl", contextPath + "/qrcode/about");
+            return qrData;
+		} catch (Exception e) {
+			log.error("Failed getting QR code data", e);
+			return null;
+		}
     }
     
+    private List<Map<String,String>>  getVcardData(Individual individual, VitroRequest vreq) {
+        String queryStr = QueryUtils.subUriForQueryVar(VCARD_DATA_QUERY, "subject", individual.getURI());
+        log.debug("queryStr = " + queryStr);
+        List<Map<String,String>>  vcardData = new ArrayList<Map<String,String>>();
+        try {
+            ResultSet results = QueryUtils.getQueryResults(queryStr, vreq);
+            while (results.hasNext()) {
+                QuerySolution soln = results.nextSolution();
+                vcardData.add(QueryUtils.querySolutionToStringValueMap(soln));
+            }
+        } catch (Exception e) {
+            log.error(e, e);
+        }    
+       
+        return vcardData;
+    }
+
     private String getVisUrl(String visPath) {
         String visUrl;
         boolean isUsingDefaultNameSpace = UrlBuilder.isUriInDefaultNamespace(
@@ -97,6 +152,14 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     }
     
     /* Template methods (for efficiency, not pre-computed) */
+    public boolean conceptSubclass() {
+        if ( isVClass(AWARD_CLASS) || isVClass(DEGREE_CLASS) ||isVClass(CONTACT_CLASS) || isVClass(CREDENTIAL_CLASS) || isVClass(DTP_CLASS) ) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     public boolean person() {
         return isVClass(PERSON_CLASS);
