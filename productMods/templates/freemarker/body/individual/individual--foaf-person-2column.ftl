@@ -74,14 +74,7 @@
                 <#include "individual-iconControls.ftl">
             </span>
             <#if editable && profilePageTypesEnabled >
-                <div id="profileTypeContainer" <#if !user.hasSiteAdminAccess>style="top:55px"</#if> >
-                    <!-- The text in this h2 element is set via the wilma.css file -->
-                    <h2>${i18n().profile_type}</h2>
-                    <select id="profilePageType">
-                        <option value="standard" <#if profileType == "standard" || profileType == "none">selected</#if> >${i18n().standard_view}</option>
-                        <option value="quickView" <#if profileType == "quickView">selected</#if> >${i18n().quick_view}</option>
-                    </select>
-                </div>
+                <#include "individual-profilePageTypes.ftl">
             </#if>
         </header>     
         <!-- Positions -->
