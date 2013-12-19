@@ -3,7 +3,7 @@
     <section id="pageList">
         <#list affiliatedResearchAreas as firstRow>
         <#assign firstOrgLabel = firstRow["orgLabel"]?upper_case />
-        <#assign deptLink = "${urls.base}/individual?uri=${firstRow['orgURI']}" />
+        <#assign deptLink = "${urls.base}/individual?uri=${firstRow['org']}" />
         <#assign i18TextString1 = "" />
         <#if ( firstOrgLabel?index_of("THE") == 0 ) >
             <#assign i18TextString1 = "${i18n().individuals_with_researh_area_one(firstRow['orgLabel'],deptLink)}" />
