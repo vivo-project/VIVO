@@ -65,8 +65,8 @@ display:getDepartmentDataGetter
                         ?person 
                         (Str(?researchAreaLabel) AS ?raLabel) 
                         (str(?departmentLabel) AS ?orgLabel) 
-                        ?raURI
-                        ?orgURI
+                        ?ra
+                        ?org
         WHERE {
             ?orgURI vivo:relatedBy ?posn .
             ?posn a vivo:Position .
@@ -76,6 +76,8 @@ display:getDepartmentDataGetter
             ?person rdfs:label ?prsnLabel .
             ?person vivo:hasResearchArea ?raURI .
             ?raURI rdfs:label ?researchAreaLabel
+            BIND(?raURI AS ?ra)
+            BIND(?orgURI AS ?org)
 
         }
         ORDER BY ?personLabel
