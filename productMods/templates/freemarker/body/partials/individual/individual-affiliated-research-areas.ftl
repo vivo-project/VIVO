@@ -15,7 +15,7 @@
             <#assign moreDisplayed = false>
             <#list researchAreaResults as resultRow>
 		            <li class="raLink">
-		            <a class="raLink"  href="${urls.base}/${urlForDetailsPage}?orgURI=${individual.uri}&raURI=${resultRow["ra"]}" title="${i18n().research_area}">
+		            <a class="raLink"  href="${urls.base}/${urlForDetailsPage}?orgURI=${individual.uri?url}&raURI=${resultRow["ra"]?url}" title="${i18n().research_area}">
 		                ${resultRow["raLabel"]}
 		            </a>
 		        </li>
