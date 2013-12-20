@@ -20,13 +20,11 @@ import java.util.Set;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.UnavailableException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONException;
@@ -44,7 +42,6 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Exc
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.filestorage.backend.FileStorageSetup;
-import edu.cornell.mannlib.vitro.webapp.filestorage.uploadrequest.FileUploadServletRequest;
 
 public class FileHarvestController extends FreemarkerHttpServlet {
 
@@ -130,6 +127,18 @@ public class FileHarvestController extends FreemarkerHttpServlet {
 
 
     @Override
+	public long maximumMultipartFileSize() {
+    	return 1024 * 1024;
+	}
+
+
+	@Override
+	public boolean stashFileSizeException() {
+		return true;
+	}
+
+
+	@Override
     protected ResponseValues processRequest(VitroRequest vreq) {
         try {
             cleanUpOldSessions();
@@ -259,7 +268,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
             throws IOException, ServletException {
 
         try {
-            boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+            boolean isMultipart = new VitroRequest(request).isMultipart();
             String mode = request.getParameter(PARAMETER_MODE);
             if(isMultipart)
                 doFileUploadPost(request, response);
@@ -292,16 +301,14 @@ public class FileHarvestController extends FreemarkerHttpServlet {
         try {
             VitroRequest vreq = new VitroRequest(request);
 
-            //parse request for uploaded file
-            int maxFileSize = 1024 * 1024;
-            FileUploadServletRequest req = FileUploadServletRequest.parseRequest(vreq, maxFileSize);
-            if(req.hasFileUploadException()) {
-                Exception e = req.getFileUploadException();
-                new ExceptionVisibleToUser(e);
+            //check that the parsing was successful
+            if(vreq.hasFileSizeException()) {
+                Exception e = vreq.getFileSizeException();
+                throw new ExceptionVisibleToUser(e);
             }
 
             //get the job parameter
-            String jobParameter = req.getParameter(PARAMETER_JOB);
+            String jobParameter = vreq.getParameter(PARAMETER_JOB);
 
             //get the location where we want to save the files (it will end in a slash), then create a File object out of it
             String path = getUploadPath(vreq);
@@ -311,7 +318,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
             //  still have the same session ID and therefore the upload directory is unchanged.  Thus we must clear the
             //  upload directory if it exists (a "first upload" parameter, initialized to "true" but which gets set to
             //  "false" once the user starts uploading stuff is used for this).
-            String firstUpload = req.getParameter(PARAMETER_FIRST_UPLOAD); //clear directory on first upload
+            String firstUpload = vreq.getParameter(PARAMETER_FIRST_UPLOAD); //clear directory on first upload
             if(firstUpload.toLowerCase().equals("true")) {
                 if(directory.exists()) {
                     File[] children = directory.listFiles();
@@ -329,7 +336,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
             FileHarvestJob job = getJob(vreq, jobParameter);
 
             //get the files out of the parsed request (there should only be one)
-            Map<String, List<FileItem>> fileStreams = req.getFiles();
+            Map<String, List<FileItem>> fileStreams = vreq.getFiles();
             if(fileStreams.get(PARAMETER_UPLOADED_FILE) != null && fileStreams.get(PARAMETER_UPLOADED_FILE).size() > 0) {
 
                 //get the individual file data from the request
