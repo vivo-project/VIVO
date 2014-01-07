@@ -60,7 +60,7 @@ section#qv-share-contact {
     overflow:visible;
     clear:left;
 }
-h2#preferredTitle {
+section#label-title h2 {
     color: #5E6363;
     font-size: 1em;
     font-weight: bold;
