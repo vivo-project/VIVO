@@ -61,8 +61,12 @@
                         <@p.verboseDisplay title />
                     </#if>
                     <#list title.statements as statement>
-                        <span class="display-title<#if editable>-editable<#else>-not-editable</#if>">${statement.preferredTitle}</span>
-                        <@p.editingLinks "${title.localName}" "${title.name}" statement editable title.rangeUri />
+                        <#if !editable >
+                            <div id="titleContainer"><span class="display-title-not-editable">${statement.preferredTitle}</span></div>
+                        <#else>
+                            <span class="display-title-editable">${statement.preferredTitle}</span>
+                            <@p.editingLinks "${title.localName}" "${title.name}" statement editable title.rangeUri />
+                        </#if>
                     </#list>
                 </#if>
                 <#-- If preferredTitle is unpopulated, display mostSpecificTypes -->
