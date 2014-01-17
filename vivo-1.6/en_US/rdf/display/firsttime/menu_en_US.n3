@@ -1,16 +1,16 @@
 @prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
 
-display:HomeMenuItem display:linkText "Home"@en-GO .
-display:PeopleMenuItem display:linkText "People"@en-GO .
-display:OrganizationsMenuItem display:linkText "Organizations"@en-GO .
-display:ResearchMenuItem display:linkText "Research"@en-GO .
-display:EventsMenuItem display:linkText "Events"@en-GO . 
-display:Home display:title "Home"@en-GO .
-display:Events display:title "Events"@en-GO .
-display:Organizations display:title "Organizations"@en-GO .
-display:People display:title "People"@en-GO .
-display:Research display:title "Research"@en-GO .
-display:pageListPage display:title "Pages"@en-GO .
+display:HomeMenuItem display:linkText "Home"@en-US .
+display:PeopleMenuItem display:linkText "People"@en-US .
+display:OrganizationsMenuItem display:linkText "Organizations"@en-US .
+display:ResearchMenuItem display:linkText "Research"@en-US .
+display:EventsMenuItem display:linkText "Events"@en-US . 
+display:Home display:title "Home"@en-US .
+display:Events display:title "Events"@en-US .
+display:Organizations display:title "Organizations"@en-US .
+display:People display:title "People"@en-US .
+display:Research display:title "Research"@en-US .
+display:pageListPage display:title "Pages"@en-US .
 
 <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> <http://www.w3.org/2000/01/rdf-schema#label> "SPARQL Query Results"@en_US .
 <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.BrowseDataGetter> <http://www.w3.org/2000/01/rdf-schema#label> "Navigation Page"@en_US .
