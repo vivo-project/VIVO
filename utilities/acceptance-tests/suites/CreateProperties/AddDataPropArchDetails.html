@@ -109,18 +109,23 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>HiddenFromDisplayBelowRoleLevelUsingRoleUri</td>
-	<td>label=editor, curator, site administrator</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>ProhibitedFromUpdateBelowRoleLevelUsingRoleUri</td>
-	<td>label=public</td>
-</tr>
-<tr>
-	<td>select</td>
 	<td>name=Namespace</td>
 	<td>label=VIVO Core</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=HiddenFromDisplayBelowRoleLevelUsingRoleUri</td>
+	<td>label=self-editor and above</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=ProhibitedFromUpdateBelowRoleLevelUsingRoleUri</td>
+	<td>label=editor and above</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=HiddenFromPublishBelowRoleLevelUsingRoleUri</td>
+	<td>label=curator and above</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -174,6 +179,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyElementPresent</td>
+	<td>link=Agent (foaf)</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
 	<td>http://www.w3.org/2001/XMLSchema#string</td>
 	<td></td>
@@ -185,12 +195,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>editor, curator, site administrator</td>
+	<td>self-editor and above</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>public</td>
+	<td>editor and above</td>
 	<td></td>
 </tr>
 <tr>
@@ -206,6 +216,11 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>http://vivoweb.org/ontology/core#architecturalDetails </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>curator and above</td>
 	<td></td>
 </tr>
 <!--Check data properties hierarchy-->
@@ -306,12 +321,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>editor, curator, site administrator</td>
+	<td>self-editor and above</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>public</td>
+	<td>editor and above</td>
 	<td></td>
 </tr>
 <tr>
@@ -327,6 +342,11 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>http://vivoweb.org/ontology/core#architecturalDetails</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>curator and above</td>
 	<td></td>
 </tr>
 <!--Log out-->

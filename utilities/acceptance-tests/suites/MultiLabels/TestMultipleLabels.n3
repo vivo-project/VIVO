@@ -1,0 +1,52 @@
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix vcard:   <http://www.w3.org/2006/vcard/ns#> .
+@prefix obo:     <http://purl.obolibrary.org/obo/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vitro:   <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix vivo:    <http://vivoweb.org/ontology/core#> .
+
+<http://vivo.mydomain.edu/individual/MultiLabelFaculty>
+      a       foaf:Person , 
+              vivo:FacultyMember , 
+              foaf:Agent , 
+              owl:Thing , 
+              obo:BFO_0000002 , 
+              obo:BFO_0000001 , 
+              obo:BFO_0000004 ;
+      rdfs:label "Furter, Frank "^^xsd:string ;
+      rdfs:label "Test Label 1 "^^xsd:string ;
+      rdfs:label "Test Label 2 "^^xsd:string ;
+      obo:ARG_2000028 <http://vivo.mydomain.edu/individual/MultiLabelVCard> ;
+      vitro:mostSpecificType vivo:FacultyMember .
+
+<http://vivo.mydomain.edu/individual/MultiLabelVCard>
+      a       obo:BFO_0000031 , 
+              vcard:Kind , 
+              obo:ARG_2000379 , 
+              owl:Thing , 
+              obo:IAO_0000030 , 
+              obo:BFO_0000002 , 
+              obo:BFO_0000001 , 
+              vcard:Individual ;
+      obo:ARG_2000029 <http://vivo.mydomain.edu/individual/MultiLabelFaculty> ;
+      vitro:mostSpecificType vcard:Individual ;
+      vcard:hasName <http://vivo.mydomain.edu/individual/MultiLabelName> .
+
+<http://vivo.mydomain.edu/individual/MultiLabelName>
+      a       vcard:Name , 
+              vcard:Geographical , 
+              vcard:TimeZone , 
+              owl:Thing , 
+              vcard:Organizational , 
+              vcard:Geo , 
+              vcard:Communication , 
+              vcard:Explanatory , 
+              vcard:Identification , 
+              vcard:Security , 
+              vcard:Addressing , 
+              vcard:Calendar ;
+      vitro:mostSpecificType vcard:Name ;
+      vcard:familyName "Furter"^^xsd:string ;
+      vcard:givenName "Frank"^^xsd:string .
