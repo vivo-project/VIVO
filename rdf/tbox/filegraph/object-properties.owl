@@ -1392,6 +1392,11 @@ there is a measurement process p that has specified output m, a measurement datu
     
 
 
+    <!-- http://vivoweb.org/ontology/core#conceptAssociatedWith -->
+
+    <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#conceptAssociatedWith">
+    </owl:ObjectProperty>
+    
     <!-- http://vivoweb.org/ontology/core#hasAssociatedConcept -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasAssociatedConcept">

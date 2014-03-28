@@ -1,0 +1,188 @@
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<script src="js/jquery.js"></script>
+
+<script>
+function TestLOD() {
+	self = this;
+	
+	this.setup = setupButtons;
+	
+	this.uri = "lodFacultyMember";
+	
+	function setupButtons() {
+	    
+	    <!-- Extension buttons -->
+	    
+	    document.getElementById("RDFXML_EXTENSION_button").onclick = function() {
+			requestWithExtension(self.uri, "rdf");
+	    }
+	    document.getElementById("N3_EXTENSION_button").onclick = function() {
+			requestWithExtension(self.uri, "n3");
+	    }
+	    document.getElementById("TTL_EXTENSION_button").onclick = function() {
+			requestWithExtension(self.uri, "ttl");
+	    }
+	    document.getElementById("JSONLD_EXTENSION_button").onclick = function() {
+			requestWithExtension(self.uri, "jsonld");
+	    }
+	    
+	    <!-- Format buttons -->
+	    
+	    document.getElementById("RDFXML_FORMAT_button").onclick = function() {
+			requestWithFormat(self.uri, "rdfxml");
+	    }
+	    document.getElementById("N3_FORMAT_button").onclick = function() {
+			requestWithFormat(self.uri, "n3");
+	    }
+	    document.getElementById("TTL_FORMAT_button").onclick = function() {
+			requestWithFormat(self.uri, "ttl");
+	    }
+	    document.getElementById("JSONLD_FORMAT_button").onclick = function() {
+			requestWithFormat(self.uri, "jsonld");
+	    }
+	    
+	    <!-- Accept header buttons -->
+	    
+	    document.getElementById("RDFXML_HEADER_button").onclick = function() {
+			requestWithAcceptHeader(self.uri, "application/rdf+xml");
+	    }
+	    document.getElementById("N3_HEADER_button").onclick = function() {
+			requestWithAcceptHeader(self.uri, "text/n3");
+	    }
+	    document.getElementById("TTL_HEADER_button").onclick = function() {
+			requestWithAcceptHeader(self.uri, "text/turtle");
+	    }
+	    document.getElementById("JSONLD_HEADER_button").onclick = function() {
+			requestWithAcceptHeader(self.uri, "application/json");
+	    }
+	    
+	    <!-- Failure buttons -->
+	    
+	    document.getElementById("BOGUS_URI_button").onclick = function() {
+			requestWithAcceptHeader(self.uri + "XX", "application/rdf+xml");
+	    }
+	    document.getElementById("BOGUS_ACCEPT_button").onclick = function() {
+			requestWithAcceptHeader(self.uri, "image/png");
+	    }
+	    document.getElementById("BOGUS_FORMAT_button").onclick = function() {
+			requestWithFormat(self.uri, "bogus");
+	    }
+	    document.getElementById("BOGUS_EXTENSION_button").onclick = function() {
+			requestWithExtension(self.uri, "bogus");
+	    }
+
+	    document.getElementById("CLEAR_REQUEST_button").onclick = clearRequest
+	    document.getElementById("CLEAR_RESPONSE_button").onclick = clearResult
+	}
+	
+	function requestWithAcceptHeader(uri, mimetype) {
+		var parms = {
+	        url: "/vivo/individual/" + uri,
+	        headers: {Accept: mimetype}, 
+	        dataType: "text",
+	        complete: displayResult
+	    };
+	    displayRequest(parms);
+	    $.ajax(parms);
+	}
+	
+	function requestWithFormat(uri, format) {
+		var parms = {
+	        url: "/vivo/individual/" + uri + "?format=" + format,
+	        dataType: "text",
+	        complete: displayResult
+	    };
+	    displayRequest(parms);
+	    $.ajax(parms);
+	}
+	
+	function requestWithExtension(uri, extension) {
+		var parms = {
+	        url: "/vivo/individual/" + uri + "/" + uri + "." + extension,
+	        dataType: "text",
+	        complete: displayResult
+	    };
+	    displayRequest(parms);
+	    $.ajax(parms);
+	}
+
+    function displayRequest(parms) {
+        clearRequest();
+        $("#requestUrl").text(parms.url);
+        if (parms.headers) {
+            $("#acceptHeader").text(parms.headers.Accept);
+        }
+    }
+    	
+	function displayResult(xhr, status) {
+	    clearResult();
+	    $("#responseCode").text(xhr.status);
+	   	$("#mimeType").text(getMimeType(xhr));
+	   	$("#responseText").text(xhr.responseText);
+	}
+	
+	function clearRequest() {
+	    $("#requestUrl").text("No URL");
+	   	$("#acceptHeader").text("No header");
+	}
+	
+	function clearResult() {
+	    $("#responseCode").text("000");
+	   	$("#mimeType").text("No type");
+	   	$("#responseText").text("No text");
+	}
+	
+	function getMimeType(xhr) {
+		var header = xhr.getResponseHeader("Content-Type");
+		var where = header.indexOf(";");
+		if (where == -1) {
+			return header;
+		} else {
+			return header.substring(0, where);
+		}
+	}
+}
+
+$(document).ready(function() {   
+	new TestLOD().setup();	
+}); 
+</script>
+
+<h1>Test the Linked Open Data requests</h1>
+
+<h3>Request by extension</h3>
+<input type="submit" value="get RDFXML by extension" id="RDFXML_EXTENSION_button">
+<input type="submit" value="get N3 by extension" id="N3_EXTENSION_button">
+<input type="submit" value="get TTL by extension" id="TTL_EXTENSION_button">
+<input type="submit" value="get JSONLD by extension" id="JSONLD_EXTENSION_button">
+
+<h3>Request by format parameters</h3>
+<input type="submit" value="get RDFXML by format parameter" id="RDFXML_FORMAT_button">
+<input type="submit" value="get N3 by format parameter" id="N3_FORMAT_button">
+<input type="submit" value="get TTL by format parameter" id="TTL_FORMAT_button">
+<input type="submit" value="get JSONLD by format parameter" id="JSONLD_FORMAT_button">
+
+<h3>Request by accept headers</h3>
+<input type="submit" value="get RDFXML by accept header" id="RDFXML_HEADER_button">
+<input type="submit" value="get N3 by accept header" id="N3_HEADER_button">
+<input type="submit" value="get TTL by accept header" id="TTL_HEADER_button">
+<input type="submit" value="get JSONLD by accept header" id="JSONLD_HEADER_button">
+
+<h3>An assortment of failures</h3>
+<input type="submit" value="get BOGUS Individual" id="BOGUS_URI_button">
+<input type="submit" value="use BOGUS Accept header" id="BOGUS_ACCEPT_button">
+<input type="submit" value="use BOGUS format" id="BOGUS_FORMAT_button">
+<input type="submit" value="use BOGUS extension" id="BOGUS_EXTENSION_button">
+
+<h2>Request data</h2>
+<input type="submit" value="CLEAR request" id="CLEAR_REQUEST_button">
+<div>Request URL is <b><span id="requestUrl">No URL</span></b></div>
+<div>Accept header is <b><span id="acceptHeader">No header</span></b></div>
+
+<h2>Response data</h2>
+<input type="submit" value="CLEAR response" id="CLEAR_RESPONSE_button">
+<div>Response code is <b><span id="responseCode">000</span></b></div>
+<div>MIME type is <b><span id="mimeType">No type</span></b></div>
+<div>Text is:</div>
+<div><pre id="responseText" style="font-size:small;">No text</pre></div>
