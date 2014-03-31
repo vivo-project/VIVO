@@ -78,7 +78,7 @@ function TestLOD() {
 	
 	function requestWithAcceptHeader(uri, mimetype) {
 		var parms = {
-	        url: "individual/" + uri,
+	        url: "/vivo/individual/" + uri,
 	        headers: {Accept: mimetype}, 
 	        dataType: "text",
 	        complete: displayResult
@@ -89,7 +89,7 @@ function TestLOD() {
 	
 	function requestWithFormat(uri, format) {
 		var parms = {
-	        url: "individual/" + uri + "?format=" + format,
+	        url: "/vivo/individual/" + uri + "?format=" + format,
 	        dataType: "text",
 	        complete: displayResult
 	    };
@@ -99,7 +99,7 @@ function TestLOD() {
 	
 	function requestWithExtension(uri, extension) {
 		var parms = {
-	        url: "individual/" + uri + "/" + uri + "." + extension,
+	        url: "/vivo/individual/" + uri + "/" + uri + "." + extension,
 	        dataType: "text",
 	        complete: displayResult
 	    };

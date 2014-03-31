@@ -122,13 +122,16 @@
 	</target>
 
 	<!-- ================================= 
-          target: acceptance              
+          target: deployTestApp              
          ================================= -->
-	<target name="acceptance" description="--> Run the Selenium acceptance tests.">
-		<ant dir="${vitro.core.dir}/utilities/testrunner" target="run" inheritall="false">
-			<property name="acceptance.dir" location="${basedir}/utilities/acceptance-tests" />
-			<property name="acceptance.batch" value="${acceptance.batch}" />
-		</ant>
+	<target name="deployTestApp" depends="deployProperties" description="description">
+		<property name="testApp.webapp.dir" value="${tomcat.home}/webapps/testApp" />
+		<property name="testApp.source.dir" value="utilities/acceptance-tests/testApp" />
+
+		<mkdir dir="${testApp.webapp.dir}" />
+		<sync todir="${testApp.webapp.dir}" includeemptydirs="true">
+			<fileset dir="${testApp.source.dir}" />
+		</sync>
 	</target>
 
 </project>
