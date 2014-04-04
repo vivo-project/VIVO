@@ -4,15 +4,15 @@ PREFIX v:   <http://www.w3.org/2006/vcard/ns#>
 PREFIX vivo: <http://vivoweb.org/ontology/core#> 
 
 CONSTRUCT {
-    ?vcard v:hasAddress _:address .
-    _:address a v:Address .
-    _:address v:streetAddress ?streetAddress .
-    _:address v:locality ?addressCity .
-    _:address v:region ?addressState .
-    _:address v:postalCode ?addressPostalCode .
-    _:address v:country ?addressCountry .
-    _:address <http://purl.obolibrary.org/obo/RO_0001025> ?location .
-    ?location <http://purl.obolibrary.org/obo/RO_0001015> _:address .
+    ?vcard v:hasAddress ?address .
+    ?address a v:Address .
+    ?address v:streetAddress ?streetAddress .
+    ?address v:locality ?addressCity .
+    ?address v:region ?addressState .
+    ?address v:postalCode ?addressPostalCode .
+    ?address v:country ?addressCountry .
+    ?address <http://purl.obolibrary.org/obo/RO_0001025> ?location .
+    ?location <http://purl.obolibrary.org/obo/RO_0001015> ?address .
 } WHERE {
     ?s vivo:mailingAddress ?address .
     OPTIONAL { ?address vivo:addressCity ?addressCity }
