@@ -61,8 +61,12 @@
                         <@p.verboseDisplay title />
                     </#if>
                     <#list title.statements as statement>
-                        <span class="display-title<#if editable>-editable<#else>-not-editable</#if>">${statement.preferredTitle}</span>
-                        <@p.editingLinks "${title.localName}" "${title.name}" statement editable title.rangeUri />
+                        <#if !editable >
+                            <div id="titleContainer"><span class="display-title-not-editable">${statement.preferredTitle}</span></div>
+                        <#else>
+                            <span class="display-title-editable">${statement.preferredTitle}</span>
+                            <@p.editingLinks "${title.localName}" "${title.name}" statement editable title.rangeUri />
+                        </#if>
                     </#list>
                 </#if>
                 <#-- If preferredTitle is unpopulated, display mostSpecificTypes -->
@@ -74,14 +78,7 @@
                 <#include "individual-iconControls.ftl">
             </span>
             <#if editable && profilePageTypesEnabled >
-                <div id="profileTypeContainer" <#if !user.hasSiteAdminAccess>style="top:55px"</#if> >
-                    <!-- The text in this h2 element is set via the wilma.css file -->
-                    <h2>${i18n().profile_type}</h2>
-                    <select id="profilePageType">
-                        <option value="standard" <#if profileType == "standard" || profileType == "none">selected</#if> >${i18n().standard_view}</option>
-                        <option value="quickView" <#if profileType == "quickView">selected</#if> >${i18n().quick_view}</option>
-                    </select>
-                </div>
+                <#include "individual-profilePageTypes.ftl">
             </#if>
         </header>     
         <!-- Positions -->

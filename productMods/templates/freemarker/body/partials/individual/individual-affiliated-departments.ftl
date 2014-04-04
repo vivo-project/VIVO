@@ -10,7 +10,7 @@
             <#assign moreDisplayed = false>
             <#list departmentsResults as resultRow>
 		            <li class="raLink">
-		            <a class="raLink"  href="${urls.base}/${urlForDetailsPage}?orgURI=${resultRow["dept"]}&raURI=${individual.uri}" title="${i18n().organization}">
+		            <a class="raLink"  href="${urls.base}/${urlForDetailsPage}?orgURI=${resultRow["dept"]?url}&raURI=${individual.uri?url}" title="${i18n().organization}">
 		                ${resultRow["deptLabel"]}
 		            </a>
 		        </li>

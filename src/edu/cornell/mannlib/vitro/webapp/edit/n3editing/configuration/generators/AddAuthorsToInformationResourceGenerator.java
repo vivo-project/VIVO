@@ -378,6 +378,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
         } catch (Exception e) {
             log.error(e, e);
         }    
+        authorships = QueryUtils.removeDuplicatesMapsFromList(authorships, "authorShipURI", "authorURI");
         log.debug("authorships = " + authorships);
         return getAuthorshipInfo(authorships);
     }

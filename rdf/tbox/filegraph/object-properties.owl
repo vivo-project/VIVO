@@ -1264,15 +1264,6 @@ there is a measurement process p that has specified output m, a measurement datu
     </owl:ObjectProperty>
     
 
-    <!-- http://vivoweb.org/ontology/core#dateTime -->
-
-    <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#dateTime">
-
-        <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
-        <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#dateTimeValue"/>
-    </owl:ObjectProperty>
-    
-
 
     <!-- http://vivoweb.org/ontology/core#dateFiled -->
 
@@ -1281,18 +1272,6 @@ there is a measurement process p that has specified output m, a measurement datu
         <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Patent"/>
         <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#dateTimeValue"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://purl.org/spar/c4o/hasGlobalCountDate -->
-
-    <owl:ObjectProperty rdf:about="http://purl.org/spar/c4o/hasGlobalCountDate">
-
-        <rdfs:domain rdf:resource="http://purl.org/spar/c4o/GlobalCitationCount"/>
-        <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
-        <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#dateTimeValue"/>
-        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The date on which the global citation count of the cited entity was recorded from a named bibliographic information source.</obo:IAO_0000115>
     </owl:ObjectProperty>
     
 
@@ -1392,6 +1371,11 @@ there is a measurement process p that has specified output m, a measurement datu
     
 
 
+    <!-- http://vivoweb.org/ontology/core#conceptAssociatedWith -->
+
+    <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#conceptAssociatedWith">
+    </owl:ObjectProperty>
+    
     <!-- http://vivoweb.org/ontology/core#hasAssociatedConcept -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasAssociatedConcept">

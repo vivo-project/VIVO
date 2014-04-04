@@ -9,7 +9,15 @@ CONSTRUCT {
     _:vcard arg:ARG_2000029 ?s .
     _:vcard a v:Kind .
 } WHERE {
-    ?s vivo:webpage ?webpage 
-    FILTER NOT EXISTS { ?s a foaf:Agent } 
-    FILTER NOT EXISTS { ?s arg:ARG_2000028 ?existingvcard } 
+    ?s a owl:Thing
+    FILTER ( 
+        EXISTS { ?s vivo:email ?email } || 
+        EXISTS { ?s vivo:primaryEmail ?primaryEmail } ||
+        EXISTS { ?s vivo:phoneNumber ?phoneNumber } ||
+        EXISTS { ?s vivo:primaryPhoneNumber ?primaryPhoneNumber } ||
+        EXISTS { ?s vivo:faxNumber ?faxNumber } ||
+        EXISTS { ?s vivo:mailingAddress ?address } ||
+        EXISTS { ?s vivo:webpage ?webpage } 
+    ) 
+    FILTER NOT EXISTS { ?s arg:ARG_2000028 ?vcardNode }
 }

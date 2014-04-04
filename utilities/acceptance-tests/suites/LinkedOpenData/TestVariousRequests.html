@@ -65,7 +65,7 @@
 <!------->
 <tr>
 	<td>open</td>
-	<td>/vivo/individual/lodFacultyMember/lodFacultyMember.rdf</td>
+	<td>/vivo/TestLinkedOpenData.html</td>
 	<td></td>
 </tr>
 <!--Pause to check results-->
@@ -74,136 +74,525 @@
 	<td>10000</td>
 	<td></td>
 </tr>
-<!--Should see ~80 lines of RDF/XML-->
+<!--TEST ALL REQUEST FIELDS-->
 <!------->
 <tr>
-	<td>open</td>
-	<td>/vivo/display/lodFacultyMember?format=rdfxml</td>
-	<td></td>
-</tr>
-<!--Pause to check results-->
-<tr>
-	<td>pause</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<!--Should see ~80 lines of RDF/XML-->
-<!------->
-<tr>
-	<td>open</td>
-	<td>/vivo/individual/lodFacultyMember/lodFacultyMember.jsonld</td>
-	<td></td>
-</tr>
-<!--Pause to check results-->
-<tr>
-	<td>pause</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<!--Should see a really dense response of JSON-LD	Lots of “[“, “{“, “}”, and “]”-->
-<tr>
-	<td>verifyTextPresent</td>
-	<td>[{&quot;@id&quot;:&quot;http://localhost:8080/vivo/individual/lodFacultyMember/lodFacultyMember.jsonld&quot;,&quot;http://purl.org/dc/elements/1.1/rights&quot;:[{&quot;@id&quot;:&quot;http://vivo.mydomain.edu/termsOfUse&quot;}],&quot;http://purl.org/dc/elements/1.1/date&quot;:</td>
-	<td></td>
-</tr>
-<!--If you view the source, it’s all one long line.-->
-<!------->
-<tr>
-	<td>open</td>
-	<td>/vivo/display/lodFacultyMember?format=jsonld</td>
-	<td></td>
-</tr>
-<!--Pause to check results-->
-<tr>
-	<td>pause</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<!--Should see a really dense response of JSON-LD	Lots of “[“, “{“, “}”, and “]”-->
-<!--If you view the source, it’s all one long line-->
-<tr>
-	<td>verifyTextPresent</td>
-	<td>[{&quot;@id&quot;:&quot;http://localhost:8080/vivo/display/lodFacultyMember&quot;,&quot;http://purl.org/dc/elements/1.1/rights&quot;:[{&quot;@id&quot;:&quot;http://vivo.mydomain.edu/termsOfUse&quot;}],&quot;http://purl.org/dc/elements/1.1/date&quot;:[{&quot;@value&quot;:&quot;2013-12-09T15:25:39&quot;,&quot;@type&quot;:&quot;http:</td>
-	<td></td>
-</tr>
-<!------->
-<tr>
-	<td>open</td>
-	<td>/vivo/individual/lodFacultyMember/lodFacultyMember.n3</td>
-	<td></td>
-</tr>
-<!--Pause to check results-->
-<tr>
-	<td>pause</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<!--Browser will try to download a file called lodFacultyMember.n3, containing about 70 lines of N3 RDF-->
-<!--Browser may ask what program should be used to open the file-->
-<!------->
-<tr>
-	<td>open</td>
-	<td>/vivo/display/lodFacultyMember?format=n3</td>
-	<td></td>
-</tr>
-<!--Pause to check results-->
-<tr>
-	<td>pause</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<!--Browser will try to download a file called lodFacultyMember, containing about 70 lines of N3 RDF-->
-<!--Browser may ask what program should be used to open the file-->
-<!------->
-<tr>
-	<td>open</td>
-	<td>/vivo/individual/lodFacultyMember/lodFacultyMember.ttl</td>
-	<td></td>
-</tr>
-<!--Pause to check results-->
-<tr>
-	<td>pause</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<!--Browser will try to download a file called lodFacultyMember.ttl, containing about 70 lines of TTL RDF-->
-<!--Browser may ask what program should be used to open the file-->
-<!------->
-<tr>
-	<td>open</td>
-	<td>/vivo/display/lodFacultyMember?format=ttl</td>
-	<td></td>
-</tr>
-<!--Pause to check results-->
-<tr>
-	<td>pause</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<!--Browser will try to download a file called lodFacultyMember, containing about 70 lines of TTL RDF-->
-<!--Browser may ask what program should be used to open the file-->
-<!------->
-<tr>
-	<td>open</td>
-	<td>/vivo/display/bogus?format=jsonld</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Not Found</td>
+	<td>clickAndWait</td>
+	<td>id=N3_EXTENSION_button</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Individual not found:</td>
+	<td>Request URL is individual/lodFacultyMember/lodFacultyMember.n3</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>This id is the id of the entity to query for. netid also works.</td>
+	<td>Accept header is No header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Response code is 200</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>MIME type is text/n3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Text is:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>@prefix</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>&lt;http://vivo.mydomain.edu/individual/lodFacultyMember&gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>rdfs:label &quot;Example, Bad &quot;^^xsd:string</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>obo:ARG_2000028</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>obo:RO_0000053</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>vivo:overview &quot;Not someone on whom you should base your actions.&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>rdfs:label &quot;Faculty Member&quot;@en-US</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>rdfs:label &quot;Person&quot;@en-US</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>&lt;http://vivo.mydomain.edu/individual/lodMembership&gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>rdfs:label &quot;Bozo&quot;^^xsd:string</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>&lt;http://localhost:8080/vivo/individual/lodFacultyMember/lodFacultyMember.n3&gt;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>&lt;http://vivo.mydomain.edu/termsOfUse&gt; </td>
+	<td></td>
+</tr>
+<!--Pause to check results-->
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<!--TEST REQUEST BY EXTENSION-->
+<!------->
+<tr>
+	<td>open</td>
+	<td>/vivo/TestLinkedOpenData.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=RDFXML_EXTENSION_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Request URL is individual/lodFacultyMember/lodFacultyMember.rdf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Accept header is No header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Response code is 200</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>MIME type is application/rdf+xml</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Text is:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>&lt;rdf:RDF</td>
+	<td></td>
+</tr>
+<!--Pause to check results-->
+<tr>
+	<td>pause</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <!------->
+<tr>
+	<td>click</td>
+	<td>id=CLEAR_RESPONSE_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Response code is 000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>MIME type is No type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Text is:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No text</td>
+	<td></td>
+</tr>
+<!------->
+<tr>
+	<td>clickAndWait</td>
+	<td>id=N3_EXTENSION_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Request URL is individual/lodFacultyMember/lodFacultyMember.n3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Accept header is No header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Response code is 200</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>MIME type is text/n3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Text is:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>@prefix</td>
+	<td></td>
+</tr>
+<!--Pause to check results-->
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<!------->
+<tr>
+	<td>click</td>
+	<td>id=CLEAR_RESPONSE_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Response code is 000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>MIME type is No type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Text is:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No text</td>
+	<td></td>
+</tr>
+<!------->
+<tr>
+	<td>click</td>
+	<td>id=TTL_EXTENSION_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Request URL is individual/lodFacultyMember/lodFacultyMember.ttl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Accept header is No header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Response code is 200</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>MIME type is text/turtle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Text is:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>@prefix</td>
+	<td></td>
+</tr>
+<!--Pause to check results-->
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<!------->
+<tr>
+	<td>click</td>
+	<td>id=CLEAR_RESPONSE_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Response code is 000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>MIME type is No type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Text is:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No text</td>
+	<td></td>
+</tr>
+<!------->
+<tr>
+	<td>click</td>
+	<td>id=JSONLD_EXTENSION_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Request URL is individual/lodFacultyMember/lodFacultyMember.jsonld</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Accept header is No header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Response code is 200</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>MIME type is application/json</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Text is:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>[{&quot;@id&quot;:&quot;http://localhost:8080/vivo/individual/lodFacultyMember/lodFacultyMember.jsonld&quot;,&quot;http://purl.org/dc/elements/1.1/rights&quot;:[{&quot;@id&quot;:&quot;http://vivo.mydomain.edu/termsOfUse&quot;}],&quot;http://purl.org/dc/elements/1.1/date&quot;:[{&quot;@value&quot;:&quot;2014-03-14T16:54:12&quot;</td>
+	<td></td>
+</tr>
+<!--Pause to check results-->
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<!------->
+<tr>
+	<td>click</td>
+	<td>id=CLEAR_RESPONSE_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Response code is 000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>MIME type is No type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Text is:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No text</td>
+	<td></td>
+</tr>
+<!--TEST REQUEST BY FORMAT PARAMETERS-->
+<!------->
+<tr>
+	<td>clickAndWait</td>
+	<td>id=N3_EXTENSION_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Request URL is individual/lodFacultyMember/lodFacultyMember.n3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Accept header is No header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Response code is 200</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>MIME type is text/n3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Text is:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>@prefix</td>
+	<td></td>
+</tr>
+<!--Pause to check results-->
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<!------->
+<tr>
+	<td>click</td>
+	<td>id=CLEAR_RESPONSE_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Response code is 000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>MIME type is No type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Text is:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No text</td>
+	<td></td>
+</tr>
+<!--TEST REQUEST BY ACCEPT HEADERS-->
+<!------->
+<tr>
+	<td>clickAndWait</td>
+	<td>id=N3_EXTENSION_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Request URL is individual/lodFacultyMember/lodFacultyMember.n3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Accept header is No header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Response code is 200</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>MIME type is text/n3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Text is:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>@prefix</td>
+	<td></td>
+</tr>
+<!--Pause to check results-->
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<!------->
+<tr>
+	<td>click</td>
+	<td>id=CLEAR_RESPONSE_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Response code is 000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>MIME type is No type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Text is:</td>
+	<td></td>
+</tr>
+<!--TEST INVALID REQUESTS-->
+<!------->
+<!--Pause to check results-->
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<!------->
+<!--LOGOFF-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log out</td>

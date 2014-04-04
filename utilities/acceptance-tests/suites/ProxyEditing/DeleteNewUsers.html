@@ -101,7 +101,7 @@
 	<td>link=PollyProxy@cornell.edu</td>
 	<td></td>
 </tr>
-<!--Delete the accounts-->
+<!--Delete first account-->
 <tr>
 	<td>assertTitle</td>
 	<td>VIVO</td>
@@ -113,18 +113,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>xpath=(//input[@name='deleteAccount'])[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>xpath=(//input[@name='deleteAccount'])[3]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>name=delete-account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete these accounts??</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -134,7 +134,59 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>5 accounts</td>
+	<td>7 accounts</td>
+	<td></td>
+</tr>
+<!--Delete second account-->
+<tr>
+	<td>click</td>
+	<td>name=deleteAccount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=delete-account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete these accounts??</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<!--Delete third account-->
+<tr>
+	<td>click</td>
+	<td>name=deleteAccount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=delete-account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete these accounts??</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <!--Verify 3 user accounts are gone-->

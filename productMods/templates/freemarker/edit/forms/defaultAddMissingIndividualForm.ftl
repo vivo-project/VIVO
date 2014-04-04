@@ -75,7 +75,7 @@
     <p class="submit">
         <input type="submit" id="submit" value="${submitLabel}" role="submit" />
         <span class="or"> or </span>
-        <a title="${i18n().cancel_title}" href="${editConfiguration.cancelUrl}">${i18n().cancel_link}</a>
+        <a class="cancel" title="${i18n().cancel_title}" href="${editConfiguration.cancelUrl}">${i18n().cancel_link}</a>
     </p>     
 </form>
 

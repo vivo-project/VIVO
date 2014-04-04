@@ -1,0 +1,163 @@
+<style>
+form {
+	border: 2 solid black;
+	background-color: #E0E0E0;
+}
+input, textarea {
+	margin: 6px;
+}
+form a {
+	float: right;
+}
+</style>
+
+<h1>Test the SPARQL API</h1>
+
+<form action="api/sparqlUpdate" method="POST">
+    <a href="individual?uri=http%3A%2F%2Ftest.domain%2Fns%23book1&format=rdfxml">Get RDF</a>
+	<input type="text" name="email" value="testAdmin@cornell.edu" /> 
+	<input type="text" name="password" value="Password" />
+	<br/>
+	<textarea name="update" rows="6" cols="70" wrap="soft">
+INSERT DATA { 
+   GRAPH <http://vitro.mannlib.cornell.edu/default/vitro-kb-2> { 
+      <http://test.domain/ns#book1> 
+          <http://purl.org/dc/elements/1.1/title> 
+          "Fundamentals of Compiler Design" . 
+    } 
+}
+    </textarea>
+	<br/> 
+	<input type="submit" value="Successful INSERT">
+</form>
+
+<form action="api/sparqlUpdate" method="POST">
+    <a href="individual?uri=http%3A%2F%2Ftest.domain%2Fns%23book1&format=rdfxml">Get RDF</a>
+	<input type="text" name="email" value="testAdmin@cornell.edu" /> 
+	<input type="text" name="password" value="Password" />
+	<br/>
+	<textarea name="update" rows="7" cols="70" wrap="soft">
+DELETE DATA { 
+   GRAPH <http://vitro.mannlib.cornell.edu/default/vitro-kb-2> { 
+      <http://test.domain/ns#book1> 
+          <http://purl.org/dc/elements/1.1/title> 
+          "Fundamentals of Compiler Design" . 
+    } 
+}
+    </textarea>
+	<br/> 
+	<input type="submit" value="Successful DELETE">
+</form>
+
+<form action="api/sparqlUpdate" method="GET">
+	<input type="text" name="email" value="testAdmin@cornell.edu" /> 
+	<input type="text" name="password" value="Password" />
+	<br/>
+	<textarea name="update" rows="4" cols="70" wrap="soft">
+INSERT DATA { 
+   GRAPH <bogus> { 
+    } 
+}
+    </textarea>
+	<br/> 
+	<input type="submit" value="GET method not allowed">
+</form>
+
+<form action="api/sparqlUpdate" method="POST">
+	<textarea name="update" rows="4" cols="70" wrap="soft">
+INSERT DATA { 
+   GRAPH <bogus> { 
+    } 
+}
+    </textarea>
+	<br/> 
+	<input type="submit" value="Email and password missing">
+</form>
+
+<form action="api/sparqlUpdate" method="POST">
+	<input type="text" name="email" value="bogus@cornell.edu" /> 
+	<input type="text" name="password" value="Password" />
+	<br/> 
+	<textarea name="update" rows="4" cols="70" wrap="soft">
+INSERT DATA { 
+   GRAPH <bogus> { 
+    } 
+}
+    </textarea>
+	<br/> 
+	<input type="submit" value="No such user">
+</form>
+
+<form action="api/sparqlUpdate" method="POST">
+	<input type="text" name="email" value="testAdmin@cornell.edu" /> 
+	<input type="text" name="password" value="BOGUS" />
+	<br/> 
+	<textarea name="update" rows="4" cols="70" wrap="soft">
+INSERT DATA { 
+   GRAPH <bogus> { 
+    } 
+}
+    </textarea>
+	<br/> 
+	<input type="submit" value="Wrong password">
+</form>
+
+<form action="api/sparqlUpdate" method="POST">
+	<input type="text" name="email" value="joeUser@cornell.edu" /> 
+	<input type="text" name="password" value="Password" />
+	<br/> 
+	<textarea name="update" rows="4" cols="70" wrap="soft">
+INSERT DATA { 
+   GRAPH <bogus> { 
+    } 
+}
+    </textarea>
+	<br/> 
+	<input type="submit" value="Account not authorized">
+</form>
+
+<form action="api/sparqlUpdate" method="POST">
+	<input type="text" name="email" value="testAdmin@cornell.edu" /> 
+	<input type="text" name="password" value="Password" />
+	<input type="submit" value="SPARQL is missing">
+</form>
+
+<form action="api/sparqlUpdate" method="POST">
+	<input type="text" name="email" value="testAdmin@cornell.edu" /> 
+	<input type="text" name="password" value="Password" />
+	<br/> 
+	<textarea name="update" rows="4" cols="70" wrap="soft">
+INSERT DATA } { 
+   GRAPH <bogus> { 
+    } 
+}
+    </textarea>
+	<br/> 
+	<input type="submit" value="SPARQL is invalid">
+</form>
+
+<form action="api/sparqlUpdate" method="POST">
+	<input type="text" name="email" value="testAdmin@cornell.edu" /> 
+	<input type="text" name="password" value="Password" />
+	<br/>
+	<textarea name="update" rows="5" cols="70" wrap="soft">
+INSERT DATA { 
+  <http://test.domain/ns#book1> 
+      <http://purl.org/dc/elements/1.1/title> 
+      "Fundamentals of Compiler Design" . 
+}
+    </textarea>
+	<br/> 
+	<input type="submit" value="SPARQL doesn't specify a GRAPH">
+</form>
+
+<pre>
+200 Success
+400 Failed to parse SPARQL update
+400 SPARQL update must specify a GRAPH URI.
+403 username/password combination is not valid
+403 Account is not authorized
+405 Method not allowed
+500 Unknown error
+</pre>
+

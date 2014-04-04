@@ -132,8 +132,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForPageToLoad</td>
-	<td>10000</td>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -147,8 +147,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForPageToLoad</td>
-	<td>10000</td>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -322,8 +322,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForPageToLoad</td>
-	<td>10000</td>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -337,8 +337,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForPageToLoad</td>
-	<td>10000</td>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -1238,7 +1238,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Organization (1)</td>
+	<td>Organization (2)</td>
 	<td></td>
 </tr>
 <tr>
@@ -1288,7 +1288,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Protocol (2)</td>
+	<td>Technique (2)</td>
 	<td></td>
 </tr>
 <!--Delete stuff one section at a time-->
@@ -1787,11 +1787,6 @@
 	<td></td>
 </tr>
 <!--Delete research section-->
-<tr>
-	<td>selectWindow</td>
-	<td>null</td>
-	<td></td>
-</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Award or Honor</td>
@@ -2984,12 +2979,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Protocol</td>
+	<td>link=Technique</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Protocol</td>
+	<td>Technique</td>
 	<td></td>
 </tr>
 <tr>
@@ -3054,12 +3049,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Protocol</td>
+	<td>link=Technique</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Protocol</td>
+	<td>Technique</td>
 	<td></td>
 </tr>
 <tr>
@@ -3124,6 +3119,16 @@
 </tr>
 <!--Verify deletions and remainders-->
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refresh</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
 	<td>people</td>
 	<td></td>
@@ -3163,11 +3168,8 @@
 	<td>organizations</td>
 	<td></td>
 </tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>research</td>
-	<td></td>
-</tr>
+<!--Had to remove following code because of Research menu-->
+<!--verifyTextNotPresent research-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>locations</td>

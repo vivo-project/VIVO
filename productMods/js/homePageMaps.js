@@ -5,6 +5,7 @@ $(document).ready(function(){
     var globalMapBuilt = false;
     var countryMapBuilt = false;
     var localMapBuilt = false;
+    var legendIsVisible = false;
     var researchAreas = { "type": "FeatureCollection", "features": []};
     var geoResearcherCount = "0";
     
@@ -412,13 +413,15 @@ $(document).ready(function(){
 
     function getResearcherCount(area) {
         
+        var localResearcherCount = 0;
         var areaCount = 0;
+        var displayCount = "";
         var text = "";
         if ( area == "global" ) {
             text = " " + i18nStrings.countriesAndRegions;
         }
         else if ( area == "country" ) {
-            text = " " + i18nStrings.stateString;
+            text = " " + i18nStrings.statesString;
         }
         else {
             text = " " + i18nStrings.statewideLocations;
@@ -426,6 +429,7 @@ $(document).ready(function(){
 
         $.each(researchAreas.features, function() {
             if ( this.properties.mapType == area ) {
+                localResearcherCount = localResearcherCount + this.properties.html ;
                 areaCount = areaCount + 1; 
             }
         });
@@ -433,27 +437,45 @@ $(document).ready(function(){
         if ( areaCount == 1 && text == " states.") {
             text = " " + i18nStrings.stateString;
         }
-        if ( geoResearcherCount == 1 ) {
-            researcherText = " " + i18nStrings.researcherString + " " + i18nStrings.inString;
+        
+        if ( area == "global" ) {
+            if ( geoResearcherCount == 1 ) {
+                researcherText = " " + i18nStrings.researcherString + " " + i18nStrings.inString;
+            }
+            else {
+                researcherText = " " + i18nStrings.researchersString + " " + i18nStrings.inString;
+            }
+            
+            displayCount = geoResearcherCount;
         }
         else {
-            researcherText = " " + i18nStrings.researchersString
+            if ( localResearcherCount == 1 ) {
+                researcherText = " " + i18nStrings.researcherString + " " + i18nStrings.inString;
+            }
+            else {
+                researcherText = " " + i18nStrings.researchersString + " " + i18nStrings.inString;
+            }
+            
+            displayCount = localResearcherCount;
         }
 
         $('div#researcherTotal').html("<font style='font-size:1.05em;color:#167093'>" 
-                                        + geoResearcherCount 
+                                        + displayCount 
                                         + "</font> " + researcherText + " <font style='font-size:1.05em;color:#167093'>" 
                                         + areaCount + "</font>" + text);
     }
     function appendLegendToLeafletContainer() {
-        var htmlString = "<div class='leaflet-bottom leaflet-left' style='padding:0 0 8px 12px'><ul><li>"
+        if ( !this.legendIsVisible ) {
+            var htmlString = "<div class='leaflet-bottom leaflet-left' style='padding:0 0 8px 12px'><ul><li>"
                         + "<img alt='" + i18nStrings.regionsString + "' src='" + urlsBase 
                         + "/images/map_legend_countries.png' style='margin-right:5px'><font style='color:#555'>" 
                         + i18nStrings.countriesString + "</font></li><li><img alt='" + i18nStrings.regionsString 
                         + "' src='" + urlsBase 
                         + "/images/map_legend_regions.png' style='margin-right:5px'><font style='color:#555'>" 
                         + i18nStrings.regionsString + "</font></li></ul></div>";
-        $('div.leaflet-control-container').append(htmlString);       
+            $('div.leaflet-control-container').append(htmlString);
+            this.legendIsVisible = true;
+        }
     }
     
 }); 

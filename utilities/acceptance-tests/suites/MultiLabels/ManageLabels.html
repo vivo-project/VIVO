@@ -61,6 +61,11 @@
 </tr>
 <!--Verify manage labels icon is on profile-->
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Furter, Frank</td>
 	<td></td>
@@ -121,10 +126,46 @@
 	<td>css=#showCancelOnly &gt; a.cancel</td>
 	<td></td>
 </tr>
-<!--Remove first 2 labels-->
+<!--Remove first label-->
 <tr>
 	<td>click</td>
 	<td>link=Remove</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Furter, Frank Edit Remove</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Label 1 Edit Remove</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test Label 2 Edit Remove</td>
+	<td></td>
+</tr>
+<!--Remove second label-->
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#showCancelOnly &gt; a.cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Test Label 1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-label &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>

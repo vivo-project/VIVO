@@ -1102,7 +1102,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=label</td>
 	<td>Kids Now!</td>
 </tr>
 <tr>
@@ -1264,7 +1264,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=label</td>
 	<td>Kids Now Conference Proceedings</td>
 </tr>
 <tr>
@@ -1335,7 +1335,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=label</td>
 	<td>Nintendo: Good or Bad for Kids?</td>
 </tr>
 <tr>
@@ -1815,6 +1815,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTitle</td>
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
@@ -1897,23 +1902,8 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id=typeOfNew</td>
-	<td>label=Book (bibo)</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=offerCreate</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=name</td>
-	<td>Nintendo: Good or Bad for Kids?</td>
+	<td>id=objectVar</td>
+	<td>label=Nintendo: Good or Bad for Kids?</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2074,10 +2064,10 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=name</td>
-	<td>Kids Now C</td>
+	<td>id=label</td>
+	<td>Kids No</td>
 </tr>
-<!--Select Kids Now Conference-->
+<!--Select Kids Now!-->
 <tr>
 	<td>click</td>
 	<td>id=ui-active-menuitem</td>
@@ -2171,7 +2161,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=name</td>
+	<td>id=label</td>
 	<td>99</td>
 </tr>
 <tr>
@@ -2297,10 +2287,10 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=name</td>
+	<td>id=label</td>
 	<td>Kids Now C</td>
 </tr>
-<!--Select Kids Now Conference-->
+<!--Select Kids Now!-->
 <tr>
 	<td>click</td>
 	<td>id=ui-active-menuitem</td>
@@ -2470,7 +2460,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=name</td>
+	<td>id=label</td>
 	<td>Kids Today</td>
 </tr>
 <tr>
@@ -2526,7 +2516,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=name</td>
+	<td>id=label</td>
 	<td>Kids of the 21st Century</td>
 </tr>
 <tr>
@@ -2566,7 +2556,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=name</td>
+	<td>id=label</td>
 	<td>Children Today</td>
 </tr>
 <tr>
@@ -2607,7 +2597,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Mouse, Minnie</td>
+	<td>css=a[title=&quot;editor name&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -2667,22 +2657,17 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Kids Now Conference</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
 	<td>link=Kids Now!</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Kids Now Conference</td>
+	<td>css=#presentedAt-Event-List &gt; li &gt; a[title=&quot;name&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Kids Now!</td>
+	<td>css=#RO_0002353-BFO_0000015-List &gt; li &gt; a[title=&quot;name&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -2716,8 +2701,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>99</td>
+	<td>verifyElementPresent</td>
+	<td>link=99</td>
 	<td></td>
 </tr>
 <tr>
@@ -2851,6 +2836,11 @@
 	<td>Concept (1)</td>
 	<td></td>
 </tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Global Citation Count (1)</td>
+	<td></td>
+</tr>
 <!--Navigate back to Frank Furter-->
 <tr>
 	<td>clickAndWait</td>
@@ -2880,7 +2870,7 @@
 <!--Verify Book Chapter is there-->
 <tr>
 	<td>click</td>
-	<td>css=li.nonSelectedGroupTab.clickable</td>
+	<td>//div[@id='wrapper-content']/ul/li[6]</td>
 	<td></td>
 </tr>
 <tr>
