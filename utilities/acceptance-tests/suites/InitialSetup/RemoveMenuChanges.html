@@ -131,10 +131,40 @@
 	<td>Test HTML Page</td>
 	<td></td>
 </tr>
-<!--Delete new menu items-->
+<!--Delete new menu items one at a time, after going back to Page Management-->
 <tr>
 	<td>clickAndWait</td>
 	<td>xpath=(//img[@alt='delete this page'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you wish to delete this page:&nbsp;&nbsp;Activities?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Page management</td>
 	<td></td>
 </tr>
 <tr>
@@ -163,6 +193,26 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Page management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Pages</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>xpath=(//img[@alt='delete this page'])[6]</td>
 	<td></td>
@@ -183,6 +233,26 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Page management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Pages</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>xpath=(//img[@alt='delete this page'])[7]</td>
 	<td></td>
@@ -195,6 +265,26 @@
 <tr>
 	<td>waitForPageToLoad</td>
 	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Page management</td>
 	<td></td>
 </tr>
 <tr>
