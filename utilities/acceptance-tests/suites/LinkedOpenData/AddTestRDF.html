@@ -11,7 +11,7 @@
 <thead>
 <tr><td rowspan="1" colspan="3">CreateTestFacultyMember</td></tr>
 </thead><tbody>
-<!--Check for proper data hiding-->
+<!--Add test RDF-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -22,45 +22,6 @@
 	<td>100000000000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>open</td>
-	<td>/vivo/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<!------->
-<!--Check that ScopusID is not publicly visible but eRACommonsID is-->
-<tr>
-	<td>open</td>
-	<td>/testApp/TestLinkedOpenData.html</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=N3_EXTENSION_button</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>vivo:eRACommonsId</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>vivo:scopusId</td>
-	<td></td>
-</tr>
-<!------->
-<!--Log in as Editor, Curator or Admin	-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -102,41 +63,55 @@
 	<td></td>
 </tr>
 <!------->
-<!--Check that ScopusID and eRACommonsID are visible for admin-->
 <tr>
-	<td>open</td>
-	<td>/testApp/TestLinkedOpenData.html</td>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=N3_EXTENSION_button</td>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
+	<td>clickAndWait</td>
+	<td>link=Add/Remove RDF data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Ingest RDF Data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=rdfStream</td>
+	<td>C:\VIVO\vivo\utilities\acceptance-tests\suites\LinkedOpenData\TestLinkedOpenData.n3</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=language</td>
+	<td>label=N3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Ingest RDF Data</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>vivo:eRACommonsId</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>vivo:scopusId</td>
+	<td>RDF upload successful.</td>
 	<td></td>
 </tr>
 <!------->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
