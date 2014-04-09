@@ -43,15 +43,7 @@
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-dateTimeValue.xml</display:listViewConfigFile>
     </rdf:Description>
 
-    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#dateTime">
-        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-dateTimeValue.xml</display:listViewConfigFile>
-    </rdf:Description>
-
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#expirationDate">
-        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-dateTimeValue.xml</display:listViewConfigFile>
-    </rdf:Description>
-
-    <rdf:Description rdf:about="http://purl.org/spar/c4o/hasGlobalCountDate">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-dateTimeValue.xml</display:listViewConfigFile>
     </rdf:Description>
 

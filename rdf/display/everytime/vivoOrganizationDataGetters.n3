@@ -72,8 +72,8 @@ display:getResearchAreaDataGetter
                         ?person 
                         (str(?researchAreaLabel) AS ?raLabel) 
                         (str(?organizationLabel) AS ?orgLabel) 
-                        ?raURI
-                        ?orgURI
+                        ?ra
+                        ?org
         WHERE {
              ?orgURI vivo:relatedBy ?posn .
              ?posn a vivo:Position .
@@ -83,6 +83,8 @@ display:getResearchAreaDataGetter
              ?person rdfs:label ?prsnLabel .
              ?person vivo:hasResearchArea ?raURI .
              ?raURI rdfs:label ?researchAreaLabel
+             BIND(?raURI AS ?ra)
+             BIND(?orgURI AS ?org)
         }
         ORDER BY ?personLabel
         """ ;
@@ -107,9 +109,8 @@ display:getResearchAreaDataGetter
         SELECT DISTINCT (str (?prsnLabel) AS ?personLabel) 
                         ?person 
                         (Str(?researchAreaLabel) AS ?raLabel) 
-                        (str(?departmentLabel) AS ?orgLabel) 
-                        ?raURI
-                        ?orgURI
+                        (str(?organizationLabel) AS ?orgLabel) 
+                        ?ra
         WHERE {
             ?orgURI vivo:relatedBy ?posn .
             ?posn a vivo:Position .
@@ -119,6 +120,7 @@ display:getResearchAreaDataGetter
             ?person rdfs:label ?prsnLabel .
             ?person vivo:hasResearchArea ?raURI .
             ?raURI rdfs:label ?researchAreaLabel
+            BIND(?raURI AS ?ra)
 
         }
         ORDER BY ?personLabel

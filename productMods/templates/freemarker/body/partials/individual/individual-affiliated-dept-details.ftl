@@ -2,10 +2,10 @@
 <#if deptResearchAreas?has_content>
     <section id="pageList">
         <#list deptResearchAreas as firstRow>
-        <#assign raLink = "${urls.base}/individual?uri=${firstRow['raURI']}" />
+        <#assign raLink = "${urls.base}/individual?uri=${firstRow['ra']}" />
         <div class="tab">
             <h2>${firstRow["orgLabel"]}</h2>
-            <p>${i18n().individuals_with_dept(firstRow['raLabel'],raLink)} <a  href="${urls.base}/individual?uri=${firstRow["orgURI"]}">${i18n().view_all_individuals_in_dept}</a></p>
+            <p>${i18n().individuals_with_dept(firstRow['raLabel'],raLink)} <a  href="${urls.base}/individual?uri=${firstRow["org"]}">${i18n().view_all_individuals_in_dept}</a></p>
         </div>
         <#break>
         </#list>

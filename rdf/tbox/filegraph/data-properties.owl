@@ -1621,6 +1621,17 @@ modern society using the world of Star trek. Los Angeles Times, March
     
 
 
+    <!-- http://purl.org/spar/c4o/hasGlobalCountDate -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/spar/c4o/hasGlobalCountDate">
+
+        <rdfs:domain rdf:resource="http://purl.org/spar/c4o/GlobalCitationCount"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The date on which the global citation count of the cited entity was recorded from a named bibliographic information source.</obo:IAO_0000115>
+    </owl:DatatypeProperty>
+
+
+
     <!-- http://purl.org/spar/c4o/hasGlobalCountValue -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/spar/c4o/hasGlobalCountValue">
@@ -1657,6 +1668,15 @@ modern society using the world of Star trek. Los Angeles Times, March
 
     </owl:DatatypeProperty>
     
+
+
+    <!-- http://vivoweb.org/ontology/core#dateTime -->
+
+    <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#dateTime">
+
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+
 
 
     <!-- http://vivoweb.org/ontology/core#eRACommonsId -->
