@@ -1120,7 +1120,7 @@
 
   <servlet>
     <servlet-name>SparqlQuery</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.SparqlQueryServlet</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.admin.SparqlQueryController</servlet-class>
   </servlet>
 
   <servlet-mapping>
