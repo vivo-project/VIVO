@@ -1400,15 +1400,6 @@
     <url-pattern>/searchService/*</url-pattern>
   </servlet-mapping>
   
-  <servlet>
-    <servlet-name>SmokeTestController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.SmokeTestController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SmokeTestController</servlet-name>
-    <url-pattern>/smoketest</url-pattern>
-  </servlet-mapping>
-  
  
   <!-- ==================== tag libraries ============================== -->
   <jsp-config>
