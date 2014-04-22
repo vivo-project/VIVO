@@ -13,6 +13,8 @@ edu.cornell.mannlib.vitro.webapp.config.ConfigurationPropertiesSmokeTests
 
 edu.cornell.mannlib.vitro.webapp.utils.developer.DeveloperSettings$Setup
 
+edu.cornell.mannlib.vitro.webapp.application.ApplicationImpl$Setup
+
 edu.cornell.mannlib.vitro.webapp.config.RevisionInfoSetup
 
 edu.cornell.mannlib.vitro.webapp.email.FreemarkerEmailFactory$Setup
