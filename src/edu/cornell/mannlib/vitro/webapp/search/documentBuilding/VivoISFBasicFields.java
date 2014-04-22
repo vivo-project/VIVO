@@ -1,12 +1,12 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-package edu.cornell.mannlib.vitro.webapp.search.solr;
+package edu.cornell.mannlib.vitro.webapp.search.documentBuilding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
-import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.ContextNodeFields;
+import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.ContextNodeFields;
 
 /**
  * DocumentModifier to populate Solr fields for the basic ISF relationships. 

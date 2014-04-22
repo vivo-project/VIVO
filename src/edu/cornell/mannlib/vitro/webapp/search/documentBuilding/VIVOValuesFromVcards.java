@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-package edu.cornell.mannlib.vitro.webapp.search.solr;
+package edu.cornell.mannlib.vitro.webapp.search.documentBuilding;
 
 import static edu.cornell.mannlib.vitro.webapp.search.VitroSearchTermNames.ALLTEXT;
 import static edu.cornell.mannlib.vitro.webapp.search.VitroSearchTermNames.ALLTEXTUNSTEMMED;
@@ -19,7 +19,7 @@ import edu.cornell.mannlib.vitro.webapp.modules.searchEngine.SearchInputDocument
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.RDFServiceUtils;
-import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.DocumentModifier;
+import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.DocumentModifier;
 
 /**
  * If there are any VCards on this Individual with Title objects, store the text
