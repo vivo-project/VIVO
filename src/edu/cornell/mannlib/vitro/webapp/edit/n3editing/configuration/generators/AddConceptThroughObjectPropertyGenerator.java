@@ -18,9 +18,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ConstantFieldOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaObjectPropetyOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaSolrQueryOptions;
 
 /**
@@ -122,7 +120,6 @@ public class AddConceptThroughObjectPropertyGenerator extends DefaultObjectPrope
     		}
     		String[] typesArray = types.toArray(new String[types.size()]);
     		field.setOptions( new IndividualsViaSolrQueryOptions(
-			vreq.getSession().getServletContext(),
     				getSubjectUri(),
     				predicateUri,
     				getObjectUri(),

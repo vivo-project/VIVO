@@ -6,9 +6,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 
-import org.apache.solr.common.SolrInputDocument;
 import org.junit.Assert;
 import org.junit.Test;
+
+import stubs.edu.cornell.mannlib.vitro.webapp.modules.ApplicationStub;
+import stubs.edu.cornell.mannlib.vitro.webapp.modules.searchEngine.SearchEngineStub;
+import stubs.javax.servlet.ServletContextStub;
 
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
@@ -16,9 +19,11 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
 import edu.cornell.mannlib.vitro.testing.AbstractTestClass;
+import edu.cornell.mannlib.vitro.webapp.application.ApplicationUtils;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.WebappDaoFactoryJena;
+import edu.cornell.mannlib.vitro.webapp.modules.searchEngine.SearchInputDocument;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.RDFServiceFactorySingle;
@@ -32,6 +37,7 @@ public class VivoInformationResourceContextNodeFieldsTest extends AbstractTestCl
     
     @Test
     public void testNoLabel() throws IOException{
+    	ApplicationStub.setup(new ServletContextStub(), new SearchEngineStub());
     	
         //Test that rdfs:label is NOT added by the VivoInformationResourceContextNodeFields
         
@@ -51,13 +57,13 @@ public class VivoInformationResourceContextNodeFieldsTest extends AbstractTestCl
         
         RDFService rdfService = new RDFServiceModel(ontModel);
         RDFServiceFactory rdfServiceFactory = new RDFServiceFactorySingle(rdfService);
-        SolrInputDocument doc = new SolrInputDocument();
+        SearchInputDocument doc = ApplicationUtils.instance().getSearchEngine().createInputDocument();
         doc.addField("ALLTEXT", "");                
         
         VivoInformationResourceContextNodeFields vircnf = new VivoInformationResourceContextNodeFields(rdfServiceFactory);
         vircnf.modifyDocument(ind, doc, new StringBuffer());                
         
-        Collection values = doc.getFieldValues("ALLTEXT");
+        Collection<Object> values = doc.getField("ALLTEXT").getValues();
         for( Object value : values){
             Assert.assertFalse("rdf:label erroneously added by document modifier:", value.toString().contains(RDFS_LABEL_VALUE));
         }
