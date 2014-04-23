@@ -11,14 +11,14 @@ import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.ContextNodeField
 /*
  * This DocumentModifier is for the ISF style grants.
  * It will 
- *   add people's names to the grant's Solr Document
- *   add the grant's name to the people's Solr Document
- *   add the grant's name to the Organization's Solr Document
- *   add the organization's name to the grant's Solr Document
- *   add the grant's names to the project's Solr Document
- *   add the people's names to the project's Solr Document
- *   add the project's name to the grant's Solr Document
- *   add the project's name to the people's Solr Document
+ *   add people's names to the grant's search Document
+ *   add the grant's name to the people's search Document
+ *   add the grant's name to the Organization's search Document
+ *   add the organization's name to the grant's search Document
+ *   add the grant's names to the project's search Document
+ *   add the people's names to the project's search Document
+ *   add the project's name to the grant's search Document
+ *   add the project's name to the people's search Document
  */
 public class VivoISFGrantFields extends ContextNodeFields {
  private static String VIVONS = "http://vivoweb.org/ontology/core#";
@@ -35,7 +35,7 @@ public class VivoISFGrantFields extends ContextNodeFields {
     }
     
     /**
-     * Query to add people's names to the grant's Solr Document.
+     * Query to add people's names to the grant's search Document.
      * ?uri is the URI of a grant.
      */
     private static String  peopleForGrant =        
@@ -48,7 +48,7 @@ public class VivoISFGrantFields extends ContextNodeFields {
            "}";
 
     /**
-     * Query to add the grant's name to the people's Solr Document.
+     * Query to add the grant's name to the people's search Document.
      * ?uri is the URI of a person.
      */
     private static String  grantsForPerson =        
@@ -63,7 +63,7 @@ public class VivoISFGrantFields extends ContextNodeFields {
            "}";
 
     /**
-     * Query to add the grant's name to the Organization's Solr Document.
+     * Query to add the grant's name to the Organization's search Document.
      * ?uri is the URI of an Organization.
      */
     private static String  grantsForOrganization =        
@@ -76,7 +76,7 @@ public class VivoISFGrantFields extends ContextNodeFields {
            "}";
 
     /**
-     * Query to add the organization's name to the grant's Solr Document.
+     * Query to add the organization's name to the grant's search Document.
      * ?uri is the URI of a grant.
      */
     private static String  organizationsForGrant =
@@ -89,7 +89,7 @@ public class VivoISFGrantFields extends ContextNodeFields {
            "}";
 
     /**
-     * Query to add the grant's names to the project's Solr Document.
+     * Query to add the grant's names to the project's search Document.
      * ?uir is the URI of a Project.
      */
     private static String  grantsForProject =        
@@ -103,7 +103,7 @@ public class VivoISFGrantFields extends ContextNodeFields {
            "}";
 
     /**
-     * Query to add the people's names to the project's Solr Document.
+     * Query to add the people's names to the project's search Document.
      * ?uri is the URI of a Project.
      */
     private static String  peopleForProject =         
@@ -117,7 +117,7 @@ public class VivoISFGrantFields extends ContextNodeFields {
            "}";
 
     /**
-     * Query to add the project's name to the grant's Solr Document.
+     * Query to add the project's name to the grant's search Document.
      * ?uri is the URI of a grant.
      */
     private static String  projectsForGrant =        
@@ -133,7 +133,7 @@ public class VivoISFGrantFields extends ContextNodeFields {
            "}";
 
     /**
-     * Query to add the project's name to the people's Solr Document.
+     * Query to add the project's name to the people's search Document.
      * ?uri is the URI of a person.
      */
     private static String  projectsForPerson =        

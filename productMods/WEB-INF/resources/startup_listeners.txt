@@ -67,7 +67,7 @@ edu.ucsf.vitro.opensocial.OpenSocialSmokeTests
 # For multiple language support
 edu.cornell.mannlib.vitro.webapp.i18n.selection.LocaleSelectionSetup
 
-# Add VIVO specific DocumentModifers, this must come before SolrSetup
+# Add VIVO specific DocumentModifers, this must come before SearchIndexerSetup
 edu.cornell.mannlib.vitro.webapp.search.documentBuilding.VivoDocumentModifiers
 
 # The search indexer uses a "public" permission, so the PropertyRestrictionPolicyHelper 

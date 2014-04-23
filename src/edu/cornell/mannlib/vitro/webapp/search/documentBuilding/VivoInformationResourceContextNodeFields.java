@@ -8,7 +8,7 @@ import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
 import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.ContextNodeFields;
 
 /**
- * Class that adds text from context nodes to Solr Documents for 
+ * Class that adds text from context nodes to search index Documents for 
  * obo:IAO_0000030 individuals.
  * 
  * @author bdc34

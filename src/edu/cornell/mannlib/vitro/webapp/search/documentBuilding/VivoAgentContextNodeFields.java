@@ -8,7 +8,7 @@ import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
 import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.ContextNodeFields;
 
 /**
- * Class that adds text from context nodes to Solr Documents for 
+ * Class that adds text from context nodes to Search Documents for 
  * foaf:Agent individuals.
  */
 public class VivoAgentContextNodeFields extends ContextNodeFields{

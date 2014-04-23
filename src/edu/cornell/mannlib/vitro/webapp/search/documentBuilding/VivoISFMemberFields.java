@@ -10,8 +10,8 @@ import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.ContextNodeField
 
 /**
  * This class will:
- *   add people's names to organization's Solr Documents.
- *   add organization names to people's Solr Documents. 
+ *   add people's names to organization's search Documents.
+ *   add organization names to people's search Documents. 
  *   
  * @author bdc34
  *
@@ -31,7 +31,7 @@ public class VivoISFMemberFields extends ContextNodeFields {
     }
     
     /**
-     *   Add people's names to organization's Solr Documents.
+     *   Add people's names to organization's search Documents.
      */
     private static String  peopleForOrganization =         
             prefix +
@@ -43,7 +43,7 @@ public class VivoISFMemberFields extends ContextNodeFields {
             "}";
     
     /**
-     *   add organization names to people's Solr Documents.
+     *   add organization names to people's search Documents.
      */
     private static String  organizationForPeople =         
             prefix +

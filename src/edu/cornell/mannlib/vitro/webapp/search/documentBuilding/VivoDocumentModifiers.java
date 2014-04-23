@@ -44,9 +44,9 @@ public class VivoDocumentModifiers implements javax.servlet.ServletContextListen
         
         Dataset dataset = DatasetFactory.create(ModelAccess.on(context).getJenaOntModel());
         
-        /* Put DocumentModifiers into servlet context for use later in startup by SolrSetup 
+        /* Put DocumentModifiers into servlet context for use later in startup by SearchSetup 
          * This adds the code for VIVO specific additions to the building
-         * of solr Documents. */        
+         * of search input Documents. */        
         List<DocumentModifier> modifiers = (List<DocumentModifier>)context.getAttribute("DocumentModifiers");
         if( modifiers == null ){                    
             modifiers = new ArrayList<DocumentModifier>();
