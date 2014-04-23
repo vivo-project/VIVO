@@ -845,7 +845,22 @@
 <tr>
 	<td>type</td>
 	<td>id=lastName</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=lastName</td>
 	<td>Mous</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=lastName</td>
+	<td>${KEY_DOWN}</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -985,6 +1000,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTitle</td>
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
@@ -1103,7 +1123,7 @@
 <tr>
 	<td>type</td>
 	<td>id=label</td>
-	<td>Kids Now!</td>
+	<td>Focus on Kids!</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1412,7 +1432,22 @@
 <tr>
 	<td>type</td>
 	<td>id=object</td>
-	<td>United States of</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=object</td>
+	<td>United States of Am</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=object</td>
+	<td>${KEY_DOWN}</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -2065,13 +2100,7 @@
 <tr>
 	<td>type</td>
 	<td>id=label</td>
-	<td>Kids No</td>
-</tr>
-<!--Select Kids Now!-->
-<tr>
-	<td>click</td>
-	<td>id=ui-active-menuitem</td>
-	<td></td>
+	<td>Focus on Kids Project</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2286,15 +2315,14 @@
 	<td></td>
 </tr>
 <tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>id=label</td>
-	<td>Kids Now C</td>
-</tr>
-<!--Select Kids Now!-->
-<tr>
-	<td>click</td>
-	<td>id=ui-active-menuitem</td>
-	<td></td>
+	<td>Focus on Kids Too!</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2355,7 +2383,7 @@
 <tr>
 	<td>select</td>
 	<td>id=objectVar</td>
-	<td>label=Kids Now!</td>
+	<td>label=Focus on Kids!</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2657,7 +2685,17 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Kids Now!</td>
+	<td>link=Focus on Kids Project</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Focus on Kids!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Focus on Kids Too!</td>
 	<td></td>
 </tr>
 <tr>
@@ -2870,7 +2908,12 @@
 <!--Verify Book Chapter is there-->
 <tr>
 	<td>click</td>
-	<td>//div[@id='wrapper-content']/ul/li[6]</td>
+	<td>//div[@id='wrapper-content']/ul/li[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>

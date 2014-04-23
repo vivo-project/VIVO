@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-package edu.cornell.mannlib.vitro.webapp.search.solr;
+package edu.cornell.mannlib.vitro.webapp.search.documentBuilding;
 
 import static edu.cornell.mannlib.vitro.webapp.search.VitroSearchTermNames.ALLTEXT;
 import static edu.cornell.mannlib.vitro.webapp.search.VitroSearchTermNames.ALLTEXTUNSTEMMED;
@@ -9,17 +9,17 @@ import static edu.cornell.mannlib.vitro.webapp.search.VitroSearchTermNames.PREFE
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.solr.common.SolrInputDocument;
 
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
+import edu.cornell.mannlib.vitro.webapp.modules.searchEngine.SearchInputDocument;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.RDFServiceUtils;
-import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.DocumentModifier;
+import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.DocumentModifier;
 
 /**
  * If there are any VCards on this Individual with Title objects, store the text
@@ -44,7 +44,7 @@ public class VIVOValuesFromVcards implements DocumentModifier {
 
 	private static final ResultParser PREFERRED_TITLE_PARSER = new ResultParser() {
 		@Override
-		public void parse(String uri, QuerySolution solution, SolrInputDocument doc) {
+		public void parse(String uri, QuerySolution solution, SearchInputDocument doc) {
 			String title = getLiteralValue(solution, "title");
 			if (StringUtils.isNotBlank(title)) {
 				doc.addField(PREFERRED_TITLE, title);
@@ -68,7 +68,7 @@ public class VIVOValuesFromVcards implements DocumentModifier {
 	private static final ResultParser EMAIL_PARSER = new ResultParser() {
 		@Override
 		public void parse(String uri, QuerySolution solution,
-				SolrInputDocument doc) {
+				SearchInputDocument doc) {
 			String email = getLiteralValue(solution, "email");
 			if (StringUtils.isNotBlank(email)) {
 				doc.addField(ALLTEXT, email);
@@ -85,7 +85,7 @@ public class VIVOValuesFromVcards implements DocumentModifier {
 	}
 
 	@Override
-	public void modifyDocument(Individual individual, SolrInputDocument doc,
+	public void modifyDocument(Individual individual, SearchInputDocument doc,
 			StringBuffer addUri) {
 		if (individual == null)
 			return;
@@ -96,7 +96,7 @@ public class VIVOValuesFromVcards implements DocumentModifier {
 	}
 
 	private void processQuery(Individual individual, String queryTemplate,
-			ResultParser resultParser, SolrInputDocument doc) {
+			ResultParser resultParser, SearchInputDocument doc) {
 		String uri = "<" + individual.getURI() + "> ";
 		String query = queryTemplate.replaceAll("\\?uri", uri);
 
@@ -124,7 +124,7 @@ public class VIVOValuesFromVcards implements DocumentModifier {
 	}
 
 	private abstract static class ResultParser {
-		public abstract void parse(String uri, QuerySolution solution, SolrInputDocument doc);
+		public abstract void parse(String uri, QuerySolution solution, SearchInputDocument doc);
 
 		String getLiteralValue(QuerySolution solution, String name) {
 			RDFNode node = solution.get(name);

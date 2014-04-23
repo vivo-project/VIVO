@@ -1,0 +1,11 @@
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf:     <http://xmlns.com/foaf/0.1/> .
+@prefix vitro:    <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix vivo:     <http://vivoweb.org/ontology/core#> .
+@prefix myDomain: <http://vivo.mydomain.edu/individual/> .
+
+myDomain:SQapiPerson
+	a	                    foaf:Person;
+	rdfs:label              "Baker, Able "^^xsd:string ;
+	vitro:mostSpecificType  foaf:Person;
+	vivo:overview           "A simple bread-maker." .

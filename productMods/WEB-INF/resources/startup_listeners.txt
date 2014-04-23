@@ -13,6 +13,8 @@ edu.cornell.mannlib.vitro.webapp.config.ConfigurationPropertiesSmokeTests
 
 edu.cornell.mannlib.vitro.webapp.utils.developer.DeveloperSettings$Setup
 
+edu.cornell.mannlib.vitro.webapp.application.ApplicationImpl$Setup
+
 edu.cornell.mannlib.vitro.webapp.config.RevisionInfoSetup
 
 edu.cornell.mannlib.vitro.webapp.email.FreemarkerEmailFactory$Setup
@@ -65,12 +67,13 @@ edu.ucsf.vitro.opensocial.OpenSocialSmokeTests
 # For multiple language support
 edu.cornell.mannlib.vitro.webapp.i18n.selection.LocaleSelectionSetup
 
-# Add VIVO specific DocumentModifers, this must come before SolrSetup
-edu.cornell.mannlib.vitro.webapp.search.solr.VivoDocumentModifiers
+# Add VIVO specific DocumentModifers, this must come before SearchIndexerSetup
+edu.cornell.mannlib.vitro.webapp.search.documentBuilding.VivoDocumentModifiers
 
-# The Solr index uses a "public" permission, so the PropertyRestrictionPolicyHelper 
+# The search indexer uses a "public" permission, so the PropertyRestrictionPolicyHelper 
 #   and the PermissionRegistry must already be set up.
-edu.cornell.mannlib.vitro.webapp.search.solr.SolrSetup
+edu.cornell.mannlib.vitro.webapp.searchengine.SearchEngineSetup
+edu.cornell.mannlib.vitro.webapp.searchindex.SearchIndexerSetup
 
 edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerSetup
 edu.cornell.mannlib.vitro.webapp.freemarker.config.FreemarkerConfiguration$Setup

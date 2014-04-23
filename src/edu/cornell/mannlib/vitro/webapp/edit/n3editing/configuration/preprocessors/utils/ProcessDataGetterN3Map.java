@@ -18,7 +18,7 @@ public class ProcessDataGetterN3Map {
     	 map.put("edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData", "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.utils.ProcessClassGroupDataGetterN3");
     	 map.put("edu.cornell.mannlib.vitro.webapp.utils.dataGetter.InternalClassesDataGetter", "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.utils.ProcessInternalClassDataGetterN3");
     	 map.put("edu.cornell.mannlib.vitro.webapp.utils.dataGetter.FixedHTMLDataGetter", "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.utils.ProcessFixedHTMLN3");
-    	 map.put("edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SolrIndividualsDataGetter", "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.utils.ProcessSolrIndividualsDataGetterN3");
+    	 map.put("edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SearchIndividualsDataGetter", "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.utils.ProcessSearchIndividualsDataGetterN3");
 
     	 return map;
     }
