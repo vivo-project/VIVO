@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-package edu.cornell.mannlib.vitro.webapp.search.solr;
+package edu.cornell.mannlib.vitro.webapp.search.documentBuilding;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,7 +10,6 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.solr.common.SolrInputDocument;
 
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.Query;
@@ -27,8 +26,9 @@ import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.shared.Lock;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
+import edu.cornell.mannlib.vitro.webapp.modules.searchEngine.SearchInputDocument;
 import edu.cornell.mannlib.vitro.webapp.search.VitroSearchTermNames;
-import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.DocumentModifier;
+import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.DocumentModifier;
 
 
 public class CalculateParameters implements DocumentModifier {
@@ -241,17 +241,18 @@ public class CalculateParameters implements DocumentModifier {
 	}
    
 	@Override
-	public void modifyDocument(Individual individual, SolrInputDocument doc, StringBuffer addUri) {
+	public void modifyDocument(Individual individual, SearchInputDocument doc, StringBuffer addUri) {
 		// TODO Auto-generated method stub
 		 // calculate beta value.  
         log.debug("Parameter calculation starts..");
         float beta = calculateBeta(individual.getURI());
-        doc.addField(VitroSearchTermNames.BETA, beta);
+        doc.addField(VitroSearchTermNames.BETA, (Object) beta);
         doc.setDocumentBoost(beta + doc.getDocumentBoost() );   
         log.debug("Parameter calculation is done");
 	}
 	
 	
+	@Override
 	public void shutdown(){
         shutdown=true;
     }
@@ -267,6 +268,7 @@ class TotalInd implements Runnable{
 		this.totalCountQuery = totalCountQuery;
 		
 	}
+	@Override
 	public void run(){
 		    int totalInd=0;
 	        Query query;

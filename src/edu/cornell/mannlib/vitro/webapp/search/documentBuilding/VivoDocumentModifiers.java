@@ -1,5 +1,5 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
-package edu.cornell.mannlib.vitro.webapp.search.solr;
+package edu.cornell.mannlib.vitro.webapp.search.documentBuilding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,17 @@ import com.hp.hpl.jena.query.DatasetFactory;
 import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.RDFServiceUtils;
-import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.DocumentModifier;
-import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.ExcludeBasedOnNamespace;
-import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.SearchIndexExcluder;
+import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.CalculateParameters;
+import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.DocumentModifier;
+import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.ExcludeBasedOnNamespace;
+import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.SearchIndexExcluder;
+import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.VIVOValuesFromVcards;
+import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.VivoISFAdvisingFields;
+import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.VivoISFBasicFields;
+import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.VivoISFEducationFields;
+import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.VivoISFGrantFields;
+import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.VivoISFMemberFields;
+import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.VivoInformationResourceContextNodeFields;
 
 public class VivoDocumentModifiers implements javax.servlet.ServletContextListener{
     
@@ -36,9 +44,9 @@ public class VivoDocumentModifiers implements javax.servlet.ServletContextListen
         
         Dataset dataset = DatasetFactory.create(ModelAccess.on(context).getJenaOntModel());
         
-        /* Put DocumentModifiers into servlet context for use later in startup by SolrSetup 
+        /* Put DocumentModifiers into servlet context for use later in startup by SearchSetup 
          * This adds the code for VIVO specific additions to the building
-         * of solr Documents. */        
+         * of search input Documents. */        
         List<DocumentModifier> modifiers = (List<DocumentModifier>)context.getAttribute("DocumentModifiers");
         if( modifiers == null ){                    
             modifiers = new ArrayList<DocumentModifier>();

@@ -30,7 +30,7 @@
     </section>
 </#macro>
 
-<#-- We need the faculty count in order to randomly select 4 faculty using a solr query -->
+<#-- We need the faculty count in order to randomly select 4 faculty using a search query -->
 <#macro facultyMemberCount classGroups>
     <#assign foundClassGroup = false />
     <#list classGroups as group>
