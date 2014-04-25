@@ -19,7 +19,7 @@ import org.apache.commons.logging.Log;
 import com.google.gson.Gson;
 import com.hp.hpl.jena.query.Dataset;
 
-import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.Actions;
+import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
@@ -686,7 +686,7 @@ public class MapOfScienceVisualizationRequestHandler implements
 	}
 
 	@Override
-	public Actions getRequiredPrivileges() {
+	public AuthorizationRequest getRequiredPrivileges() {
 		// TODO Auto-generated method stub
 		return null;
 	} 

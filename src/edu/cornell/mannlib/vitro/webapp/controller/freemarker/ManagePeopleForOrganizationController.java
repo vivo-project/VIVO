@@ -15,7 +15,7 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.auth.permissions.SimplePermission;
-import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.Actions;
+import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.VClass;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -31,8 +31,8 @@ public class ManagePeopleForOrganizationController extends FreemarkerHttpServlet
     private static final String TEMPLATE_NAME = "managePeopleForOrganization.ftl";
     
     @Override
-	protected Actions requiredActions(VitroRequest vreq) {
-		return SimplePermission.DO_FRONT_END_EDITING.ACTIONS;
+	protected AuthorizationRequest requiredActions(VitroRequest vreq) {
+		return SimplePermission.DO_FRONT_END_EDITING.ACTION;
 	}
 
     @Override
