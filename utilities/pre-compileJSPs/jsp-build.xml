@@ -64,8 +64,7 @@
 	</target>
 
 	<target name="jspc" depends="prepare">
-		<jasper2 validateXml="false"
-		         uriroot="${build.webapp.dir}"
+		<jasper2 uriroot="${build.webapp.dir}"
 		         webXmlFragment="${build.jsp.dir}generated_web.xml"
 		         outputDir="${build.jsp.dir}/src"
 		         trimSpaces="true"
