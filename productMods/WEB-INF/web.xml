@@ -1400,7 +1400,15 @@
     <url-pattern>/searchService/*</url-pattern>
   </servlet-mapping>
   
- 
+  <servlet>
+    <servlet-name>OrcidIntegrationController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vivo.orcid.controller.OrcidIntegrationController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrcidIntegrationController</servlet-name>
+    <url-pattern>/orcid/*</url-pattern>
+  </servlet-mapping>
+  
   <!-- ==================== tag libraries ============================== -->
   <jsp-config>
     <taglib>
