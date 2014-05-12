@@ -26,7 +26,7 @@
     <#if orcidInfo.authorizedToConfirm>
         <script>
             $(document).ready(function(){
-                $('#orcidId a.add-orcidId').replaceWith("<a class='add-orcidId' style='padding-left:20px' href='${orcidInfo.orcidUrl}'><#if orcidInfo.orcids?size == 0>Add an ID<#else>${confirmThis}</#if></a> ");
+                $('#orcidId a.add-orcidId').replaceWith("<a class='add-orcidId' style='padding-left:20px' href='${orcidInfo.orcidUrl}'><#if orcidInfo.orcids?size == 0>Add an iD<#else>${confirmThis}</#if></a> ");
             });
         </script>
     </#if>

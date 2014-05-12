@@ -76,7 +76,7 @@ span.completed {
 
 <div>
 
-<section id="orcid-offer" role="region">z
+<section id="orcid-offer" role="region">
     <h2>Do you want to ${orcidTextOne} ORCID iD?</h2>
    
     <div class="step">
