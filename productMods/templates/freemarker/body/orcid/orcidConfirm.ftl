@@ -76,57 +76,57 @@ span.completed {
 
 <div>
 
-<section id="orcid-offer" role="region">
-    <h2>Do you want to ${orcidTextOne} ORCID Identification?</h2>
+<section id="orcid-offer" role="region">z
+    <h2>Do you want to ${orcidTextOne} ORCID iD?</h2>
    
     <div class="step">
       <#if "START" == orcidInfo.progress>
-        <h2>Step 1: ${orcidTextTwo} your ORCID ID</h2>
+        <h2>Step 1: ${orcidTextTwo} your ORCID iD</h2>
         <ul>
           <li>VIVO redirects you to ORCID's web site.</li>
           <li>You log in to your ORCID account.
             <ul class="inner"><li>If you don't have an account, you can create one.</li></ul>
             </li>
-          <li>You tell ORCID that VIVO may read your ORCID Record. (one-time permission)</li>
-          <li>VIVO reads your ORCID Record.</li>
-          <li>VIVO notes that your ORCID ID is confirmed.</li>
+          <li>You tell ORCID that VIVO may read your ORCID record. (one-time permission)</li>
+          <li>VIVO reads your ORCID record.</li>
+          <li>VIVO notes that your ORCID iD is confirmed.</li>
         </ul>
       <#elseif "DENIED_AUTHENTICATE" == orcidInfo.progress>
-        <h2>Step 1: ${orcidTextTwo} your ORCID ID</h2>
-        <p>You denied VIVO's request to read your ORCID profile.</p>
+        <h2>Step 1: ${orcidTextTwo} your ORCID iD</h2>
+        <p>You denied VIVO's request to read your ORCID record.</p>
         <p>Confirmation can't continue.</p>
       <#elseif "FAILED_AUTHENTICATE" == orcidInfo.progress>
-        <h2>Step 1: ${orcidTextTwo} your ORCID ID</h2>
-        <p>VIVO failed to read your ORCID profile.</p>
+        <h2>Step 1: ${orcidTextTwo} your ORCID iD</h2>
+        <p>VIVO failed to read your ORCID record.</p>
         <p>Confirmation can't continue.</p>
       <#else>
-        <h2>Step 1: ${orcidTextTwo} your ORCID ID <span class="completed">(step completed)</span></h2>
-        <p>Your ORCID ID is confirmed as ${orcidInfo.orcid}</p>
-        <p><a href="${orcidInfo.orcidUri}" target="_blank">View your ORCID profile page.</a></p>
+        <h2>Step 1: ${orcidTextTwo} your ORCID iD <span class="completed">(step completed)</span></h2>
+        <p>Your ORCID iD is confirmed as ${orcidInfo.orcid}</p>
+        <p><a href="${orcidInfo.orcidUri}" target="_blank">View your ORCID record.</a></p>
       </#if>
     </div>
     
     <div class="step ${step2dimmed}">
       <#if "ID_ALREADY_PRESENT" == orcidInfo.progress>
-        <h2>Step 2 (recommended): Linking your ORCID Record to VIVO <span class="completed">(step completed)</span></h2>
-        <p>Your ORCID profile already includes a link to VIVO.</p>
+        <h2>Step 2 (recommended): Linking your ORCID record to VIVO <span class="completed">(step completed)</span></h2>
+        <p>Your ORCID record already includes a link to VIVO.</p>
       <#elseif "DENIED_ID" == orcidInfo.progress>
-        <h2>Step 2 (recommended): Linking your ORCID Record to VIVO</h2>
-        <p>You denied VIVO's request to add an External ID to your ORCID profile.</p>
+        <h2>Step 2 (recommended): Linking your ORCID record to VIVO</h2>
+        <p>You denied VIVO's request to add an External ID to your ORCID record.</p>
         <p>Linking can't continue.</p>
       <#elseif "FAILED_ID" == orcidInfo.progress>
-        <h2>Step 2 (recommended): Linking your ORCID Record to VIVO</h2>
-        <p>VIVO failed to add an External ID to your ORCID profile.</p>
+        <h2>Step 2 (recommended): Linking your ORCID record to VIVO</h2>
+        <p>VIVO failed to add an External ID to your ORCID record.</p>
         <p>Linking can't continue.</p>
       <#elseif "ADDED_ID" == orcidInfo.progress>
-        <h2>Step 2 (recommended): Linking your ORCID Record to VIVO <span class="completed">(step completed)</span></h2>
-        <p>Your ORCID profile is linked to VIVO</p>
-        <p><a href="${orcidInfo.orcidUri}" target="_blank">View your ORCID profile page.</a></p>
+        <h2>Step 2 (recommended): Linking your ORCID record to VIVO <span class="completed">(step completed)</span></h2>
+        <p>Your ORCID record is linked to VIVO</p>
+        <p><a href="${orcidInfo.orcidUri}" target="_blank">View your ORCID record.</a></p>
       <#else>
-        <h2>Step 2 (recommended): Linking your ORCID Record to VIVO</h2>
+        <h2>Step 2 (recommended): Linking your ORCID record to VIVO</h2>
         <ul>
           <li>VIVO redirects you to ORCID's web site</li>
-          <li>You tell ORCID that VIVO may add an "external ID" to your ORCID Record. (one-time permission)</li>
+          <li>You tell ORCID that VIVO may add an "external ID" to your ORCID record. (one-time permission)</li>
           <li>VIVO adds the external ID.</li>
         </ul>
       </#if>
