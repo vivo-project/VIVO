@@ -42,4 +42,4 @@ productMods/js/jquery_plugins/jquery.truncator.js
 themes/wilma/css/openSocial/gadgets.css
 
 # JQuery for the Selenium test helper app.
-./utilities/acceptance-tests/testApp/js/jquery.js
+utilities/acceptance-tests/testApp/js/jquery.js
