@@ -87,7 +87,7 @@ $(document).ready(function(){
                     });
                     var viewMore = "<ul id='viewMoreFac'><li><a href='"
                                 + urlsBase
-                                + "/people/%23http://vivoweb.org/ontology/core%23FacultyMember' alt='" 
+                                + "/people#http://vivoweb.org/ontology/core#FacultyMember' alt='" 
                                 + i18nStrings.viewAllFaculty + "'>"
                                 + i18nStrings.viewAllString + "</a></li?</ul>";
                     $('div#research-faculty-mbrs').append(viewMore);
@@ -155,7 +155,7 @@ $(document).ready(function(){
             html += "</ul><ul style='list-style:none'>"
                     + "<li style='font-size:0.9em;text-align:right;padding: 6px 16px 0 0'><a href='" 
                     + urlsBase 
-                    + "/organizations/%23http://vivoweb.org/ontology/core%23AcademicDepartment' alt='" 
+                    + "/organizations#http://vivoweb.org/ontology/core#AcademicDepartment' alt='" 
                     + i18nStrings.viewAllDepartments + "'>" 
                     + i18nStrings.viewAllString + "</a></li></ul>";
         }
