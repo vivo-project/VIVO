@@ -9,6 +9,13 @@
 
 <#macro showStatement statement>
     <a href="${statement.value!}" title="ORCID iD" target="_blank">${statement.value!"ORCID iD not found"}</a>
+    <#if orcidInfo??>
+        <#if (orcidInfo.orcids[statement.value])!false>
+            <span style="color:#FF7700">(confirmed)</span>
+        <#else>
+            <span style="color:#FF7700">(pending confirmation)</span>
+        </#if>
+    </#if>
 </#macro>
 
 

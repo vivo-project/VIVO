@@ -1,0 +1,10 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix core:    <http://vivoweb.org/ontology/core#> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+
+core:confirmedOrcidId
+      a owl:ObjectProperty ;
+      rdfs:label "Orcid ID confirmation"@en-US ;
+      rdfs:comment "Indicates that the Orcid ID has been confirmed by this Person" ;
+      rdfs:range foaf:Person .

@@ -21,6 +21,10 @@
   <#assign languageCount = 1>
 </#if>
 <#assign visRequestingTemplate = "foaf-person-wilma">
+
+<#--add the VIVO-ORCID interface -->
+<#include "individual-orcidInterface.ftl">  
+        
 <section id="individual-intro" class="vcard person" role="region">
 
     <section id="share-contact" role="region"> 

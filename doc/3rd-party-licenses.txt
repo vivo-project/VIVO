@@ -191,3 +191,7 @@ xsdlib
 None
 ----
 Trippi
+
+ORCID API client
+----------------
+Written as part of the ORCID A&I grant. Source is available at https://github.com/j2blake/orcid-api-client

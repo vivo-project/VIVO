@@ -17,9 +17,9 @@ public class SiteAdminController extends BaseSiteAdminController {
     private static final Log log = LogFactory.getLog(SiteAdminController.class);
     
     @Override
-	protected Map<String, String> getSiteMaintenanceUrls(VitroRequest vreq) {
+	protected Map<String, Object> getSiteMaintenanceUrls(VitroRequest vreq) {
         
-        Map<String, String> urls = super.getSiteMaintenanceUrls(vreq);
+        Map<String, Object> urls = super.getSiteMaintenanceUrls(vreq);
 
         if (PolicyHelper.isAuthorizedForActions(vreq, ToolsRequestHandler.REQUIRED_ACTIONS)) {
             urls.put("rebuildVisCache", UrlBuilder.getUrl("/vis/tools"));            

@@ -1,0 +1,65 @@
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<script src="js/jquery.js"></script>
+
+<script>
+function TestListRdf() {
+	self = this;
+	
+	this.setup = setupButtons;
+	
+	function setupButtons() {
+	    document.getElementById("submit_button").onclick = function() {
+			requestWithAcceptHeader(
+					$("#acceptHeader").val(), 
+					$("#vclass").val());
+	    }
+	}
+
+	function requestWithAcceptHeader(mimetype, vclass) {
+		var parms = {
+			type: "GET",
+	        url: "/vivo/listrdf",
+	        headers: {Accept: mimetype}, 
+	        data: {vclass: vclass},
+	        dataType: "text",
+	        complete: displayResult
+	    };
+	    $.ajax(parms);
+	}
+
+	function displayResult(xhr, status) {
+	    $("#responseCode").text(xhr.status);
+	   	$("#mimeType").text(xhr.getResponseHeader("Content-Type"));
+	   	$("#responseText").text(xhr.responseText);
+	}
+}
+
+$(document).ready(function() {   
+	new TestListRdf().setup();	
+}); 
+</script>
+
+<h1>Test the List RDF API</h1>
+
+<h3>Request data</h3>
+<table>
+	<tr>
+		<td>Accept header</td>
+		<td><input type="text" size="40" id="acceptHeader"></td>
+	</tr>
+	<tr>
+		<td>VClass URI</td>
+		<td><input type="text" size="80" id="vclass"></td>
+	</tr>
+	<tr>
+		<td><input type="submit" value="submit the request" id="submit_button"></td>
+		<td>&nbsp;</td>
+	</tr>
+</table>
+
+<h2>Response data</h2>
+<div>Response code is <b><span id="responseCode">000</span></b></div>
+<div>MIME type is <b><span id="mimeType">No type</span></b></div>
+<div>Text is:</div>
+<div><pre id="responseText" style="font-size:small; font-family:monospace">No text</pre></div>

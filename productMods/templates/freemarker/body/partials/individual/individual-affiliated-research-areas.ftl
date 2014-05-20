@@ -11,15 +11,27 @@
         <h2 id="facultyResearchAreas" class="mainPropGroup">
             ${headingText} 
         </h2>
+        <#assign numberRows = researchAreaResults?size/>
         <ul id="individual-hasResearchArea" role="list">
+            <#assign totalLength = 0 >
             <#assign moreDisplayed = false>
             <#list researchAreaResults as resultRow>
+                <#if ( totalLength > 380 ) && !moreDisplayed >
+                    <li id="raMoreContainer" style="border:none">(...<a id="raMore" href="javascript:">more</a>)</li>
+                    <li class="raLinkMore" style="display:none">
+                    <#assign moreDisplayed = true>
+                <#elseif ( totalLength > 380 ) && moreDisplayed >
+		            <li class="raLinkMore" style="display:none">
+		        <#else>
 		            <li class="raLink">
-		            <a class="raLink"  href="${urls.base}/${urlForDetailsPage}?orgURI=${individual.uri?url}&raURI=${resultRow["ra"]?url}" title="${i18n().research_area}">
+		        </#if> 
+		            <a class="raLink" href="${urls.base}/deptResearchAreas?deptURI=${individual.uri}&raURI=${resultRow["ra"]}">
 		                ${resultRow["raLabel"]}
 		            </a>
 		        </li>
+		        <#assign totalLength = totalLength + resultRow["raLabel"]?length >
             </#list>
+            <#if ( totalLength > 380 ) ><li id="raLessContainer" style="display:none">(<a id="raLess" href="javascript:">less</a>)</li></#if>
         </ul>    
 </#if>
 <script>
