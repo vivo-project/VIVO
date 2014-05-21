@@ -1635,7 +1635,7 @@ local:orgAwardsGrantContext a :ConfigContext ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#Grant> .
 
 local:orgAwardsGrantConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-organizationAwardsGrant.xml"^^xsd:string ;
     :displayName "awards grant" ;
     vitro:displayRankAnnot 60;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
