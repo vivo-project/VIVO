@@ -67,7 +67,7 @@
     <input  size="70"  type="text" id="url" name="url" value="${url}" role="input" />
    
     <label for="label">${i18n().webpage_name}</label>
-    <input  size="70"  type="text" id="label" name="label" value="${label}" role="input" />
+    <input  size="70"  type="text" id="label" name="label" value="${label?html}" role="input" />
 
     <#if editMode="add">
         <input type="hidden" name="rank" value="${newRank}" />
