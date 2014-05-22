@@ -42,12 +42,12 @@ public class VivoISFAdvisingFields extends ContextNodeFields {
     private static String makeQueryForPeople(){        
         return prefix +
            "SELECT \n" +
-           "(str(?result) as ?result) WHERE \n" +
+           "(str(?rawresult) as ?result) WHERE \n" +
            "{\n" +              
            " ?uri   core:relatedBy ?rel    . \n" +
            " ?rel   rdf:type       core:AdvisingRelationship   . \n" +
            " ?rel   core:relates   ?other  . \n" +
-           " ?other rdfs:label     ?result . \n" + 
+           " ?other rdfs:label     ?rawresult . \n" + 
            " FILTER( ?other != ?uri ) \n" +          
            "}";         
     }
