@@ -34,6 +34,9 @@
                 ?object a foaf:Person .
                 ?object vitro:mostSpecificType ?typeUri .
                 ?typeUri rdfs:label ?type .
+                # Display only a mostSpecificType that belongs to a classgroup.
+                ?typeUri vitro:inClassGroup ?classGroup .
+                ?classGroup a vitro:ClassGroup
             }
             
             OPTIONAL { ?object obo:ARG_2000028 ?vcard .
@@ -83,6 +86,8 @@
         CONSTRUCT {
             ?subject ?property ?object .
             ?object vitro:mostSpecificType ?typeUri .
+            ?typeUri vitro:inClassGroup ?classGroup .
+            ?classGroup a vitro:ClassGroup .
             ?typeUri rdfs:label ?type .
             ?object obo:ARG_2000028 ?vcard . 
             ?vcard vcard:hasTitle ?titleObj .
@@ -94,6 +99,8 @@
                 ?subject ?property ?object .
                 ?object vitro:mostSpecificType ?typeUri .
                 ?typeUri rdfs:label ?type .
+                ?typeUri vitro:inClassGroup ?classGroup .
+                ?classGroup a vitro:ClassGroup
             } UNION {            
                 ?subject ?property ?object .
                 ?object obo:ARG_2000028 ?vcard . 
