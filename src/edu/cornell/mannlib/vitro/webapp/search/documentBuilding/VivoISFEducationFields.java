@@ -28,11 +28,11 @@ public class VivoISFEducationFields extends ContextNodeFields {
     private static String queryForDegree =        
            prefix +
            "SELECT \n" +
-           "(str(?result) as ?result) WHERE \n" +
+           "(str(?rawresult) as ?result) WHERE \n" +
            "{\n" +              
            " ?uri   core:relates ?deg    . \n" +
            " ?deg   rdf:type     core:AwardedDegree . \n" +           
-           " ?deg   rdfs:label   ?result . \n" +           
+           " ?deg   rdfs:label   ?rawresult . \n" +           
            "}";            
     
     /**
@@ -41,12 +41,12 @@ public class VivoISFEducationFields extends ContextNodeFields {
     private static String queryForOrganization =        
            prefix +
            "SELECT \n" +
-           "(str(?result) as ?result) WHERE \n" +
+           "(str(?rawresult) as ?result) WHERE \n" +
            "{\n" +              
            " ?uri   core:relates ?deg    . \n" +
            " ?deg   rdf:type     core:AwardedDegree . \n" +
            " ?deg   core:assignedBy ?org . \n" +
-           " ?org   rdfs:label   ?result . \n" +           
+           " ?org   rdfs:label   ?rawresult . \n" +           
            "}";
     
     static List<String> queries = new ArrayList<String>();

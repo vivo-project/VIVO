@@ -40,11 +40,11 @@ public class VivoISFGrantFields extends ContextNodeFields {
      */
     private static String  peopleForGrant =        
            prefix +
-           "SELECT (str(?result) as ?result) WHERE {\n" +
+           "SELECT (str(?rawresult) as ?result) WHERE {\n" +
            "  ?uri    rdf:type     core:Grant . \n" +
            "  ?uri    core:relates ?person . \n" +            
            "  ?person rdf:type     foaf:Person . \n" +           
-           "  ?person rdfs:label   ?result . \n" +           
+           "  ?person rdfs:label   ?rawresult . \n" +           
            "}";
 
     /**
@@ -54,12 +54,12 @@ public class VivoISFGrantFields extends ContextNodeFields {
     private static String  grantsForPerson =        
            prefix +
            "SELECT \n" +
-           "(str(?result) as ?result) WHERE \n" +
+           "(str(?rawresult) as ?result) WHERE \n" +
            "{\n" +
            " ?uri     rdf:type     foaf:Person . \n" +
            " ?grant   core:relates ?uri        . \n" +
            " ?grant   rdf:type     core:Grant  . \n" + 
-           " ?grant   rdfs:label   ?result     . \n" +
+           " ?grant   rdfs:label   ?rawresult     . \n" +
            "}";
 
     /**
@@ -68,11 +68,11 @@ public class VivoISFGrantFields extends ContextNodeFields {
      */
     private static String  grantsForOrganization =        
            prefix +
-           "SELECT (str(?result) as ?result) WHERE {\n" +              
+           "SELECT (str(?rawresult) as ?result) WHERE {\n" +              
            " ?uri   rdf:type     foaf:Organization . \n" +
            " ?grant core:relates ?uri              . \n" +
            " ?grant rdf:type     core:Grant        . \n" +           
-           " ?grant rdfs:label   ?result           . \n" +           
+           " ?grant rdfs:label   ?rawresult           . \n" +           
            "}";
 
     /**
@@ -81,11 +81,11 @@ public class VivoISFGrantFields extends ContextNodeFields {
      */
     private static String  organizationsForGrant =
            prefix +
-           "SELECT (str(?result) as ?result) WHERE {\n" +                   
+           "SELECT (str(?rawresult) as ?result) WHERE {\n" +                   
            "  ?uri  rdf:type     core:Grant . \n" + 
            "  ?uri  core:relates ?org . \n" +
            "  ?org  rdf:type     foaf:Organization . \n" +
-           "  ?org  rdfs:label   ?result . \n" +           
+           "  ?org  rdfs:label   ?rawresult . \n" +           
            "}";
 
     /**
@@ -94,12 +94,12 @@ public class VivoISFGrantFields extends ContextNodeFields {
      */
     private static String  grantsForProject =        
            prefix +
-           "SELECT (str(?result) as ?result) WHERE {\n" +              
+           "SELECT (str(?rawresult) as ?result) WHERE {\n" +              
            " ?uri   rdf:type        core:Project . \n" +
            " ?role  obo:BFO_0000054 ?uri . \n" +
            " ?grant core:relates    ?role . \n" +
            " ?grant rdf:type        core:Grant . \n" +            
-           " ?grant rdfs:label      ?result . \n" +           
+           " ?grant rdfs:label      ?rawresult . \n" +           
            "}";
 
     /**
@@ -108,12 +108,12 @@ public class VivoISFGrantFields extends ContextNodeFields {
      */
     private static String  peopleForProject =         
            prefix +
-           "SELECT (str(?result) as ?result) WHERE {\n" +              
+           "SELECT (str(?rawresult) as ?result) WHERE {\n" +              
            " ?uri    rdf:type        core:Project . \n" +
            " ?role   obo:BFO_0000054 ?uri . \n" +
            " ?role   obo:RO_0000053  ?person . \n" +
            " ?person rdf:type        foaf:Person . \n" + 
-           " ?person rdfs:label      ?result . \n" +           
+           " ?person rdfs:label      ?rawresult . \n" +           
            "}";
 
     /**
@@ -123,13 +123,13 @@ public class VivoISFGrantFields extends ContextNodeFields {
     private static String  projectsForGrant =        
            prefix +
            "SELECT \n" +
-           "(str(?result) as ?result) WHERE \n" +
+           "(str(?rawresult) as ?result) WHERE \n" +
            "{\n" +              
            " ?uri     rdf:type        core:Grant. \n" +
            " ?uri     core:relates    ?role . \n" +
            " ?role    obo:BFO_0000054 ?project . \n" +
            " ?project rdf:type        core:Project . \n" + 
-           " ?project rdfs:label      ?result . \n" +                      
+           " ?project rdfs:label      ?rawresult . \n" +                      
            "}";
 
     /**
@@ -138,12 +138,12 @@ public class VivoISFGrantFields extends ContextNodeFields {
      */
     private static String  projectsForPerson =        
            prefix +
-           "SELECT (str(?result) as ?result) WHERE {\n" +
+           "SELECT (str(?rawresult) as ?result) WHERE {\n" +
            " ?uri     rdf:type        foaf:Person . \n" +
            " ?uri     obo:RO_0000053  ?role . \n" +
            " ?role    obo:BFO_0000054 ?project . \n" +
            " ?project rdf:type        core:Project . \n" + 
-           " ?project rdfs:label      ?result . \n" +
+           " ?project rdfs:label      ?rawresult . \n" +
            "}";
         
     static List<String> queries = new ArrayList<String>();
