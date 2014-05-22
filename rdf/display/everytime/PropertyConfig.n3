@@ -500,6 +500,51 @@ local:educationalTrainingConfig a :ObjectPropertyDisplayConfig ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasEducationalTraining"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbiography> .
 
+local:educationalProcessPersonContext a :ConfigContext ;
+    :hasConfiguration local:educationalProcessPersonConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000057> ;
+    :qualifiedByDomain    <http://vivoweb.org/ontology/core#EducationalProcess>;
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Person> .
+
+local:educationalProcessPersonConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    :displayName "education and training of" ;
+    vitro:displayRankAnnot 10;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:educationalProcessOrgContext a :ConfigContext ;
+    :hasConfiguration local:educationalProcessOrgConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000057> ;
+    :qualifiedByDomain    <http://vivoweb.org/ontology/core#EducationalProcess>;
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
+
+local:educationalProcessOrgConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    :displayName "educational organization" ;
+    vitro:displayRankAnnot 15;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:educationalProcessDegreeContext a :ConfigContext ;
+    :hasConfiguration local:educationalProcessDegreeConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0002234> ;
+    :qualifiedByDomain    <http://vivoweb.org/ontology/core#EducationalProcess>;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#AwardedDegree> .
+
+local:educationalProcessDegreeConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    :displayName "degree earned" ;
+    vitro:displayRankAnnot 20;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
 local:organizationForTrainingContext a :ConfigContext ;
     :hasConfiguration local:organizationForTrainingConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000056> ;
@@ -636,7 +681,6 @@ local:contractAdministeredByConfig a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 16;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
-    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.GrantAdministeredByGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 local:orgAdministersGrantContext a :ConfigContext ;
