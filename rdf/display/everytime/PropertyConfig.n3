@@ -624,6 +624,21 @@ local:grantAdministeredByConfig a :ObjectPropertyDisplayConfig ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.GrantAdministeredByGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
+local:contractAdministeredByContext a :ConfigContext ;
+    :hasConfiguration local:contractAdministeredByConfig ;
+    :configContextFor vivo:relates ;
+    :qualifiedByDomain  vivo:Contract  ;
+    :qualifiedBy      vivo:AdministratorRole .
+
+local:contractAdministeredByConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-grantAdministeredBy.xml"^^xsd:string ;
+    :displayName "administered by" ;
+    vitro:displayRankAnnot 16;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.GrantAdministeredByGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
 local:orgAdministersGrantContext a :ConfigContext ;
     :hasConfiguration local:orgAdministersGrantConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
@@ -1496,6 +1511,21 @@ local:grantAwardedByConfig a :ObjectPropertyDisplayConfig ;
     vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
+local:contractAwardedByContext a :ConfigContext ;
+    :hasConfiguration local:contractAwardedByConfig ;
+    :configContextFor vivo:assignedBy ;
+    :qualifiedByDomain      vivo:Contract ;
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
+
+local:contractAwardedByConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    :displayName "awarded by" ;
+    vitro:displayRankAnnot 14;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
 local:grantSubjectAreaContext a :ConfigContext ;
     :hasConfiguration local:grantSubjectAreaConfig ;
     :configContextFor vivo:hasSubjectArea ;
@@ -1682,6 +1712,20 @@ local:grantRelatesContext a :ConfigContext ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#ResearcherRole> .
 
 local:grantRelatesConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-relatedRole.xml"^^xsd:string ;
+    :displayName "contributor" ;
+    vitro:displayRankAnnot 55;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
+
+local:contractRelatesContext a :ConfigContext ;
+    :hasConfiguration local:contractRelatesConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relates> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#Contract> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#ResearcherRole> .
+
+local:contractRelatesConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-relatedRole.xml"^^xsd:string ;
     :displayName "contributor" ;
     vitro:displayRankAnnot 55;
