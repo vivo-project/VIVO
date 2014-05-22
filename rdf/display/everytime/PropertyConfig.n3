@@ -537,7 +537,7 @@ local:educationalProcessDegreeContext a :ConfigContext ;
     :qualifiedBy      <http://vivoweb.org/ontology/core#AwardedDegree> .
 
 local:educationalProcessDegreeConfig a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-degreeEarned.xml"^^xsd:string ;
     :displayName "degree earned" ;
     vitro:displayRankAnnot 20;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
