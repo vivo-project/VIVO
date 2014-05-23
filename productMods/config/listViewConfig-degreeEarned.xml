@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-select>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+        
+        SELECT DISTINCT ?awardedDegree
+                        ?degree
+                        ?degreeName 
+                        ?degreeAbbr 
+            WHERE {
+                ?subject ?property ?awardedDegree .
+                ?awardedDegree core:relates ?degree .
+                ?degree rdfs:label ?degreeName 
+
+                OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
+            }  
+    </query-select>
+
+    <query-construct>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+
+        CONSTRUCT {
+                ?subject ?property ?awardedDegree .
+                ?awardedDegree core:relates ?degree .
+                ?degree rdfs:label ?degreeName .
+                ?degree core:abbreviation ?degreeAbbr 
+        } WHERE {
+            { 
+                ?subject ?property ?awardedDegree .
+                ?awardedDegree a core:AwardedDegree .
+                ?awardedDegree core:relates ?degree .
+                ?degree a core:AcademicDegree .
+                ?degree rdfs:label ?degreeName 
+            } UNION {
+                ?subject ?property ?awardedDegree .
+                ?awardedDegree a core:AwardedDegree .
+                ?awardedDegree core:relates ?degree .
+                ?degree a core:AcademicDegree .
+                ?degree core:abbreviation ?degreeAbbr 
+            }
+        }
+    </query-construct>
+
+    <template>propStatement-degreeEarned.ftl</template>
+</list-view-config>

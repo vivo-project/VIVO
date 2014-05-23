@@ -57,8 +57,10 @@
             <option value="${key}"  <#if urlTypeValue == key>selected</#if> >
                 <#if urlTypeOpts[key] == "F1000 Link">
                     ${i18n().faculty_of_1000}
-                <#else>
+                <#elseif urlTypeOpts[key] == "Other">
                     ${i18n().standard_web_link}
+                <#else>
+                    ${urlTypeOpts[key]}
                 </#if>
             </option>         
         </#list>
@@ -67,7 +69,7 @@
     <input  size="70"  type="text" id="url" name="url" value="${url}" role="input" />
    
     <label for="label">${i18n().webpage_name}</label>
-    <input  size="70"  type="text" id="label" name="label" value="${label}" role="input" />
+    <input  size="70"  type="text" id="label" name="label" value="${label?html}" role="input" />${label}
 
     <#if editMode="add">
         <input type="hidden" name="rank" value="${newRank}" />

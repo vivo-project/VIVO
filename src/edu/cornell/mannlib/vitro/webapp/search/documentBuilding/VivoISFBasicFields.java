@@ -60,12 +60,12 @@ public class VivoISFBasicFields extends ContextNodeFields {
         queries.add(
                prefix +
               "SELECT \n" +
-              "(str(?result) as ?result) WHERE \n" +
+              "(str(?rawresult) as ?result) WHERE \n" +
               "{\n" +              
               " ?uri   core:relatedBy ?rel    . \n" +
               " ?rel   rdf:type       ?type   . \n" +
               " ?rel   core:relates   ?other  . \n" +
-              " ?other rdfs:label     ?result . \n" +
+              " ?other rdfs:label     ?rawresult . \n" +
               " FILTER ( ?type IN ( " + types + " ) )\n" +
               "}" );        
     }
