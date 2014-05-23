@@ -94,13 +94,16 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
         + "PREFIX vcard: <http://www.w3.org/2006/vcard/ns#> \n"
         + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
-        + "SELECT DISTINCT ?vcard ?link ?url ?label ?rank WHERE { \n"
+        + "PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> \n"
+        + "SELECT DISTINCT ?vcard ?link ?url ?label ?rank ?typeLabel WHERE { \n"
         + "    ?subject <http://purl.obolibrary.org/obo/ARG_2000028> ?vcard . \n"
         + "    ?vcard vcard:hasURL ?link . \n"
         + "    ?link a vcard:URL \n"
         + "    OPTIONAL { ?link vcard:url ?url } \n"
         + "    OPTIONAL { ?link rdfs:label ?label } \n"
         + "    OPTIONAL { ?link core:rank ?rank } \n"
+        + "    OPTIONAL { ?link vitro:mostSpecificType ?type } \n"
+        + "    OPTIONAL { ?type rdfs:label ?typeLabel } \n"
         + "} ORDER BY ?rank";
     
        
