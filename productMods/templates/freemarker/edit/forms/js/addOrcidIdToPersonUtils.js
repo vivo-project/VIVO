@@ -29,8 +29,13 @@ var addOrcidIdToPersonUtils = {
         var orcidBase = "http://orcid.org/";
         var orcidIdVal = "";
         if ( this.orcidIdDisplay.val().length > 0 ) {
-            orcidIdVal = orcidBase + this.orcidIdDisplay.val();
-            this.orcidId.val(orcidIdVal);
+            if ( this.orcidIdDisplay.val().substring(0,17) == "http://orcid.org/" ) {
+                orcidIdVal = this.orcidIdDisplay.val();
+            }
+            else {
+                orcidIdVal = orcidBase + this.orcidIdDisplay.val();
+                this.orcidId.val(orcidIdVal);
+            }
         }
     },
        
