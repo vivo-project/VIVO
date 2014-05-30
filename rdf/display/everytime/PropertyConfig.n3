@@ -1745,6 +1745,7 @@ local:bfo_0000055Config a :ObjectPropertyDisplayConfig ;
     vitro:displayRankAnnot 17;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ProjectHasParticipantGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
 ### grant roles using the core:relates property ###
