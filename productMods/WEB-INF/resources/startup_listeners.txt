@@ -24,8 +24,7 @@ edu.cornell.mannlib.vitro.webapp.servlet.setup.JenaPersistentDataSourceSetup
  
 edu.cornell.mannlib.vitro.webapp.servlet.setup.RDFServiceSetup
 
-edu.cornell.mannlib.vitro.webapp.servlet.setup.ApplicationModelSetup
-edu.cornell.mannlib.vitro.webapp.servlet.setup.UserModelSetup
+edu.cornell.mannlib.vitro.webapp.servlet.setup.ConfigurationModelsSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ContentModelSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ModelMakerSetup
 
