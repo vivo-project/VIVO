@@ -24,8 +24,9 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
 
-public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implements EditConfigurationGenerator{            
+public class GrantHasContributorGenerator  extends VivoBaseGenerator implements EditConfigurationGenerator{            
 
+	// NOTE:  This generator is for contract as well as grants.
     //TODO: can we get rid of the session and get it form the vreq?
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) throws Exception {
  
@@ -35,16 +36,16 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
         initPropertyParameters(vreq, session, conf);
         initObjectPropForm(conf, vreq);               
         
-        conf.setTemplate("projectHasParticipant.ftl");
+        conf.setTemplate("grantHasContributor.ftl");
         
-        conf.setVarNameForSubject("project");
+        conf.setVarNameForSubject("subject");
         conf.setVarNameForPredicate("predicate");
-        conf.setVarNameForObject("projectRole");
+        conf.setVarNameForObject("theRole");
                 
-        conf.setN3Required( Arrays.asList( n3ForNewProjectRole ) );
+        conf.setN3Required( Arrays.asList( n3ForNewProjectRole, roleTypeAssertion ) );
         conf.setN3Optional(Arrays.asList( n3ForNewPerson, n3ForExistingPerson, firstNameAssertion, lastNameAssertion ) );
         
-        conf.addNewResource("projectRole", DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("theRole", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("newPerson",DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("vcardPerson", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("vcardName", DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -52,14 +53,13 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
         //uris in scope: none   
         //literals in scope: none
         
-        conf.setUrisOnform( Arrays.asList( "existingPerson"));
-        conf.setLiteralsOnForm( Arrays.asList("personLabel", "personLabelDisplay", "roleLabel", 
-                                              "roleLabeldisplay", "firstName", "lastName"));
+        conf.setUrisOnform( Arrays.asList( "existingPerson", "roleType"));
+        conf.setLiteralsOnForm( Arrays.asList("personLabel", "personLabelDisplay", "firstName", "lastName"));
 
         conf.addSparqlForExistingLiteral("personLabel", personLabelQuery);
-        conf.addSparqlForExistingLiteral("roleLabel", roleLabelQuery);
 
         conf.addSparqlForExistingUris("existingPerson", existingPersonQuery);
+		conf.addSparqlForExistingUris("roleType", roleTypeQuery);
                         
         conf.addField( new FieldVTwo().
                 setName("existingPerson")
@@ -72,18 +72,9 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
                 setValidators( list("datatype:" + XSD.xstring.toString())));
 
         conf.addField( new FieldVTwo().
-                setName("roleLabel").
-                setRangeDatatypeUri(XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString(),"nonempty")));
-            
-        conf.addField( new FieldVTwo().
                 setName("personLabelDisplay").
                 setRangeDatatypeUri(XSD.xstring.toString() ));
 
-        conf.addField( new FieldVTwo().
-                setName("roleLabelDisplay").
-                setRangeDatatypeUri(XSD.xstring.toString() ));
-                
         conf.addField( new FieldVTwo().
                 setName("firstName").
                 setRangeDatatypeUri(XSD.xstring.toString() ).
@@ -95,7 +86,14 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
                 setRangeDatatypeUri(XSD.xstring.toString() ).
                 setValidators( list("datatype:" + XSD.xstring.toString()) )
                 );
+		
+		conf.addField( new FieldVTwo().
+	            setName("roleType").
+	            setValidators( list("nonempty") ).
+	               setOptions( 
+	                        new ChildVClassesWithParent("http://vivoweb.org/ontology/core#ResearcherRole")));
 
+	    
         //Add validator
         conf.addValidator(new AntiXssValidation());
         conf.addValidator(new FirstAndLastNameValidator("existingPerson"));
@@ -111,20 +109,27 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
     final static String n3ForNewProjectRole =       
         "@prefix core: <"+ vivoCore +"> .\n" +
 		"@prefix rdfs: <"+ rdfs +">  . \n"+
-        "?project <http://purl.obolibrary.org/obo/BFO_0000055>  ?projectRole .\n" +
-        "?projectRole  a <http://vivoweb.org/ontology/core#ResearcherRole> .\n" +
-        "?projectRole <http://purl.obolibrary.org/obo/BFO_0000054> ?project . \n" +
-        "?projectRole <"+ label +"> ?roleLabel . \n" ;
+        "?subject core:relates  ?theRole .\n" +
+        "?theRole core:relatedBy ?subject . \n" ;
+
+	final static String roleTypeAssertion =
+	    "?theRole a ?roleType .";
 
     final static String n3ForNewPerson  =      
-        "?projectRole <http://purl.obolibrary.org/obo/RO_0000052> ?newPerson . \n" +
-        "?newPerson <http://purl.obolibrary.org/obo/RO_0000053> ?projectRole . \n" +
+        "@prefix core: <"+ vivoCore +"> .\n" +
+        "?theRole <http://purl.obolibrary.org/obo/RO_0000052> ?newPerson . \n" +
+        "?newPerson <http://purl.obolibrary.org/obo/RO_0000053> ?theRole . \n" +
+        "?subject core:relates ?newPerson . \n" +
+        "?newPerson core:relatedBy ?subject . \n" +
         "?newPerson a <http://xmlns.com/foaf/0.1/Person> . \n" +
         "?newPerson <"+ label +"> ?personLabel . ";
 
     final static String n3ForExistingPerson  =      
-        "?projectRole <http://purl.obolibrary.org/obo/RO_0000052> ?existingPerson . \n" +
-        "?existingPerson <http://purl.obolibrary.org/obo/RO_0000053> ?projectRole . \n" +
+        "@prefix core: <"+ vivoCore +"> .\n" +
+        "?theRole <http://purl.obolibrary.org/obo/RO_0000052> ?existingPerson . \n" +
+        "?existingPerson <http://purl.obolibrary.org/obo/RO_0000053> ?theRole . \n" +
+        "?subject core:relates ?newPerson . \n" +
+        "?newPerson core:relatedBy ?subject . \n" +
         " ";
     
     final static String firstNameAssertion  =      
@@ -147,23 +152,24 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
 
     /* Queries for editing an existing educational training entry */
 
-    final static String roleLabelQuery =      
-        "SELECT ?roleLabel WHERE {\n"+
-        "?projectRole <"+ label +"> ?roleLabel }\n";
+    final static String roleTypeQuery = 
+    	"PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
+        "SELECT ?roleType WHERE { \n" + 
+        "  ?theRole vitro:mostSpecificType ?roleType . }";
 
     final static String existingPersonQuery  =      
         "PREFIX rdfs: <"+ rdfs +">   \n"+
         "SELECT ?existingPerson WHERE {\n"+
-        "?projectRole <http://purl.obolibrary.org/obo/RO_0000052> ?existingPerson . \n" +
-        "?existingPerson <http://purl.obolibrary.org/obo/RO_0000053> ?projectRole . \n" +
+        "?theRole <http://purl.obolibrary.org/obo/RO_0000052> ?existingPerson . \n" +
+        "?existingPerson <http://purl.obolibrary.org/obo/RO_0000053> ?theRole . \n" +
         "?existingPerson a <http://xmlns.com/foaf/0.1/Person> . \n " +
         " }";
 
     final static String personLabelQuery  =      
         "PREFIX rdfs: <"+ rdfs +">   \n"+
         "SELECT ?existingPersonLabel WHERE {\n"+
-        "?projectRole <http://purl.obolibrary.org/obo/RO_0000052> ?existingPerson . \n" +
-        "?existingPerson <http://purl.obolibrary.org/obo/RO_0000053> ?projectRole .\n"+
+        "?theRole <http://purl.obolibrary.org/obo/RO_0000052> ?existingPerson . \n" +
+        "?existingPerson <http://purl.obolibrary.org/obo/RO_0000053> ?theRole .\n"+
         "?existingPerson <"+ label +"> ?existingPersonLabel .\n"+
         "?existingPerson a <http://xmlns.com/foaf/0.1/Person> . \n " +
         " }";
