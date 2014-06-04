@@ -737,9 +737,6 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 
     	List<String> validators = new ArrayList<String>();
     	validators.add("datatype:" + stringDatatypeUri);
-    	if(isShowRoleLabelField()) {
-    		validators.add("nonempty");
-    	}
     	field.setValidators(validators);    	    	    	    	
     	    	
     	fields.put(field.getName(), field);		

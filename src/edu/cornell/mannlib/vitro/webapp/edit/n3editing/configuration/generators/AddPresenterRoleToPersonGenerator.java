@@ -58,9 +58,9 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
         conf.setVarNameForPredicate("predicate");
         conf.setVarNameForObject("role");
         
-        conf.setN3Required( Arrays.asList( n3ForNewRole, 
-                                           roleLabelAssertion) );
-        conf.setN3Optional( Arrays.asList( n3ForNewPresentation, 
+        conf.setN3Required( Arrays.asList( n3ForNewRole ) );
+        conf.setN3Optional( Arrays.asList( n3ForRoleLabelAssertion,
+										   n3ForNewPresentation, 
                                            n3ForExistingPresentation, 
                                            n3ForNewConferenceNewPres, 
                                            n3ForNewConferenceExistingPres, 
@@ -125,10 +125,9 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
                 );
  
         conf.addField( new FieldVTwo().                        
-                setName("roleLabel")
-                .setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators( list("nonempty") )
-                );
+                setName("roleLabel").
+                setRangeDatatypeUri( XSD.xstring.toString() ).
+                setValidators(list("datatype:" + XSD.xstring.toString())));
 
         conf.addField( new FieldVTwo(). // an autocomplete field
                 setName("existingConference") 
@@ -169,14 +168,14 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
 
     /* N3 assertions  */
     final static String n3ForNewRole = 
-        "@prefix core: <" + vivoCore + "> . \n\n" +   
+        "@prefix core: <" + vivoCore + "> . \n" +   
         "?person <" + hasRolePred + ">  ?role . \n" +
-        "?role a  <" + roleClass + "> . \n" +              
+        "?role a  <" + roleClass + "> . \n" + 
         "?role <" + roleOfPred + "> ?person . ";
+
+	final static String n3ForRoleLabelAssertion = 
+		"?role <" + label + "> ?roleLabel . ";             
          
-    final static String roleLabelAssertion =
-        "?role <" + label + "> ?roleLabel .";
-        
     final static String n3ForNewPresentation = 
         "?role <" + roleRealizedInPred + "> ?presentation . \n" + 
         "?presentation <" + realizedRolePred + "> ?role . \n" +    
