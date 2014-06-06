@@ -40,7 +40,7 @@
                 <#if webpage.typeLabel??>(<#if webpage.typeLabel == "URL">Standard Web Link<#else>${webpage.typeLabel}</#if></#if>)
             </span>
             <span class="editingLinks">
-                <a href="${baseEditWebpageUrl}&objectUri=${webpage.vcard}&predicateUri=${predicateUri}&linkUri=${webpage.link}" class="edit" title="${i18n().edit_webpage_link}">${i18n().edit_capitalized}</a> | 
+                <a href="${baseEditWebpageUrl}&objectUri=${webpage.vcard}&predicateUri=${predicateUri}&linkUri=${webpage.link}&rangeUri=${editConfiguration.rangeUri?url}&domainUri=${editConfiguration.domainUri?url}" class="edit" title="${i18n().edit_webpage_link}">${i18n().edit_capitalized}</a> | 
                 <a href="${urls.base}${deleteWebpageUrl}" class="remove" title="${i18n().delete_webpage_link}">${i18n().delete_button}</a> 
             </span>
         </li>    
