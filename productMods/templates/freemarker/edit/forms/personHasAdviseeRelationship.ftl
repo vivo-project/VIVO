@@ -162,7 +162,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
   
     <#assign degreeOpts = editConfiguration.pageData.degree />  
     <select name="degree" id="degreeUri" >
-      <option value="" <#if degreeValue = "">selected</#if>>${i18n().select_one}</option>        
+      <option value="${blankSentinel}" <#if degreeValue = "">selected</#if>>${i18n().select_one}</option>        
              <#list degreeOpts?keys as key>                 
       <option value="${key}" <#if degreeValue = key>selected</#if>>${degreeOpts[key]}</option>                    
       </#list>                                
