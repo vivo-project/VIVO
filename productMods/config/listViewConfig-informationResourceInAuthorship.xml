@@ -33,8 +33,8 @@
                            ?author a vcard:Kind .                      
 				           ?author vcard:hasName ?vName .
 				           ?vName vcard:givenName ?firstName .
-				           ?vName core:middleName ?middleName .
 				           ?vName vcard:familyName ?lastName .
+				           OPTIONAL { ?vName core:middleName ?middleName . }
 						   bind ( COALESCE(?firstName, "") As ?firstName1) .
 				           bind ( COALESCE(?middleName, "") As ?middleName1) .
 				           bind ( COALESCE(?lastName, "") As ?lastName1) .
