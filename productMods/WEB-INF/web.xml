@@ -413,6 +413,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>DumpRestoreController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.datatools.dumprestore.DumpRestoreController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DumpRestoreController</servlet-name>
+    <url-pattern>/dumpRestore/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>EditFrontController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vedit.controller.EditFrontController</servlet-class>
   </servlet>
