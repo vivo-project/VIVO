@@ -11,6 +11,9 @@ edu.cornell.mannlib.vitro.webapp.config.ConfigurationPropertiesSetup
 
 edu.cornell.mannlib.vitro.webapp.config.ConfigurationPropertiesSmokeTests
 
+# For the conversion from 1.6 or earlier (RDB) to 1.7 or later (TDB)
+edu.cornell.mannlib.vitro.webapp.servlet.setup.GuardAgainstUnmigratedRDB
+
 edu.cornell.mannlib.vitro.webapp.utils.developer.DeveloperSettings$Setup
 
 edu.cornell.mannlib.vitro.webapp.application.ApplicationImpl$Setup
