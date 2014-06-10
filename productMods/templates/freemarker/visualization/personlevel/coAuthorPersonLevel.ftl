@@ -127,15 +127,20 @@ $(document).ready(function(){
 
 
 <div id="body">
-    <div id="ego_profile">
-    
-        <#-- Label -->
-        <h2><a href="${egoVivoProfileURL}" title="${i18n().author_name}"><span id="ego_label" class="author_name"></span></a></h2>
-    
-        <#-- Moniker-->
-        <em id="ego_moniker" class="moniker"></em>
+	
+	<div  class="sub_headings"><h2><a href="${egoVivoProfileURL}" title="${i18n().author_name}"><span id="ego_label"></span></a><br />${i18n().co_author_network} </h2></div>
+    <#if (numOfCoAuthorShips?? && numOfCoAuthorShips > 0) || (numOfAuthors?? && numOfAuthors > 0) > 
+            <div class = "graphml-file-link">(<a href="${egoCoAuthorshipNetworkDataFileURL}" title="GraphML ${i18n().file}">GraphML ${i18n().file}</a>)</div>
+    <#else>
 
-    </div>
+            <#if numOfAuthors?? && numOfAuthors <= 0 >
+                <#assign authorsText = "multi-author" />
+            </#if>
+            
+            <div id="no_coauthorships">${i18n().currently_no_papers_for(authorsText!)} 
+                <a href="${egoVivoProfileURL}" title="${i18n().co_authorship}"><span id="no_coauthorships_person" class="author_name">${i18n().this_author}</span></a> ${i18n().in_the_vivo_db}
+            </div>                      
+    </#if>
     
     <div class = "toggle_visualization">
         <div id="coinvestigator_link_container" class="collaboratorship-link-container">
@@ -150,20 +155,8 @@ $(document).ready(function(){
     
     <#if (numOfAuthors?? && numOfAuthors > 0) >
     
-        <div  class="sub_headings"><h3>${i18n().co_author_network} </h3></div>
         
-        <#if (numOfCoAuthorShips?? && numOfCoAuthorShips > 0) || (numOfAuthors?? && numOfAuthors > 0) > 
-                <div class = "graphml-file-link"><a href="${egoCoAuthorshipNetworkDataFileURL}" title="GraphML ${i18n().file}">(GraphML ${i18n().file_capitalized})</a></div>
-        <#else>
-
-                <#if numOfAuthors?? && numOfAuthors <= 0 >
-                    <#assign authorsText = "multi-author" />
-                </#if>
-                
-                <div id="no_coauthorships">${i18n().currently_no_papers_for(authorsText!)} 
-                    <a href="${egoVivoProfileURL}" title="${i18n().co_authorship}"><span id="no_coauthorships_person" class="author_name">${i18n().this_author}</span></a> ${i18n().in_the_vivo_db}
-                </div>                      
-        </#if>
+        
     
     <#else>
     
