@@ -4093,11 +4093,7 @@ obo:OBI_0000312
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:hiddenFromPublishBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-      vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
-      vitro:hiddenFromPublishBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 # note that this applies to grants only; see hasOutputContext for obo:RO_0002234 in /rdf/display/everytime/propertyConfig.n3
 vivo:supportedInformationResource
@@ -7797,7 +7793,7 @@ geo:landAreaTotal
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:hiddenFromPublishBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
