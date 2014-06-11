@@ -8,7 +8,6 @@
 <h2>Ingest Menu</h2>
 
 <ul class="ingestMenu">
-    <li><a href="ingest?action=connectDB" title="Connect to a Jena database">Connect DB</a></li>
     <li><a href="ingest?action=listModels"title="Manage all available Jena models">Manage Jena Models</a></li>
     <li><a href="ingest?action=subtractModels" title="Subtract one model from another and save difference to new model">Subtract One Model from Another</a></li>
 </ul>

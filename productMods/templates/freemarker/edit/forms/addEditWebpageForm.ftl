@@ -48,6 +48,8 @@
 </#if>    
     
 <form class="customForm" action ="${submitUrl}">
+	<input type="hidden" name="rangeUri" value="${editConfiguration.rangeUri!}">
+	<input type="hidden" name="domainUri" value="${editConfiguration.domainUri!}">
 
     <label for="urlType">${i18n().url_type}${requiredHint}</label>
     <#assign urlTypeOpts = editConfiguration.pageData.urlType />

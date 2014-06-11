@@ -81,9 +81,10 @@ p.datatable {
     margin-right: 10px;
 }
 .toggle_visualization { 
-    max-width: 180px;
+    max-width: 230px;
     float: right;
     display: none;
+	margin-top: -55PX;
 }
 #publication-count-sparkline-include {
     float: left;
@@ -116,7 +117,8 @@ table.sparkline_wrapper_table td, th {
   max-width: 50%;
 }
 #ego_label {
-    font-size: 1.1em;
+    color: inherit;
+	font-size: 1.375em;
 }
 #ego_profile_image {
   float: left;
@@ -236,7 +238,7 @@ table.sparkline_wrapper_table td, th {
     margin-right: 15px;
 }
 .graphml-file-link {
-    padding-top: 20px;
+    padding-top: 59px;
     height: 20px;
     font-size: .9em;
 }

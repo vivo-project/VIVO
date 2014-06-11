@@ -126,9 +126,9 @@ function setProfileMoniker(monikerContainerID, moniker, doEllipsis) {
 
 	var finalDisplayMoniker;
 	
-	if (moniker.length > 30 && doEllipsis) {
+	if (moniker.length > 40 && doEllipsis) {
 		
-		finalDisplayMoniker = moniker.substr(0,30) + "...";
+		finalDisplayMoniker = moniker.substr(0,40) + "...";
 		
 	} else {
 		
@@ -154,9 +154,9 @@ function setProfileName(nameContainerID, name, doNameEllipsis) {
 
 	var finalDisplayName;
 	
-	if (name.length > 30 && doNameEllipsis) {
+	if (name.length > 40 && doNameEllipsis) {
 		
-		finalDisplayName = name.substr(0,30) + "...";
+		finalDisplayName = name.substr(0,40) + "...";
 		
 	} else {
 		
@@ -188,7 +188,7 @@ function processProfileInformation(nameContainerID,
 
 			mainImageURL = set[0];
 
-		} else if (key.search(/moniker/i) > -1) {
+		} else if (key.search(/title/i) > -1) {
 
 			moniker = set[0];
 

@@ -99,8 +99,11 @@ public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
 							+ "SELECT "
 							+ "		(str(?predicate) as ?" + QueryFieldLabels.PREDICATE + ") " 
 							+ "		(str(?object) as ?" + QueryFieldLabels.OBJECT + ") "
-							+ "WHERE { "
-							+ "<" + queryURI + "> ?predicate ?object.  "
+							+ "WHERE { {"
+							+ "<" + queryURI + "> ?predicate ?object.  }"
+							+ "UNION {<" + queryURI + ">  <http://purl.obolibrary.org/obo/ARG_2000028> ?vCard . "
+							+ "?vCard <http://www.w3.org/2006/vcard/ns#hasTitle> ?vTitle . "
+							+ "?vTitle ?predicate ?object . }"
 							+ filterClause
 							+ "}";
             	

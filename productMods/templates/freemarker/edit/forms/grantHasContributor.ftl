@@ -32,7 +32,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <#assign personLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "personLabel") />
 <#assign personLabelDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "personLabelDisplay") />
 <#assign existingPersonValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingPerson") />
-<#assign roleLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "roleLabel") />
+<#assign roleTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "roleType")/>
 
 <#-- If edit submission exists, then retrieve validation errors if they exist-->
 <#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
@@ -90,8 +90,8 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
          <#if lvf.submissionErrorExists(editSubmission, "personLabel")>
  	        ${i18n().select_an_person_name}
         </#if>
-        <#--Checking if Training Type field is empty-->
-         <#if lvf.submissionErrorExists(editSubmission, "trainingType")>
+        <#--Checking if Role Type field is empty-->
+         <#if lvf.submissionErrorExists(editSubmission, "roleType")>
  	        ${i18n().select_educational_training_value}<br />
         </#if>
         
@@ -102,10 +102,9 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <@lvf.unsupportedBrowser urls.base /> 
 
-<section id="projectHasParticipant" role="region">        
+<section id="grantHasContributorSection" role="region">        
     
-    <form id="projectHasParticipant" class="customForm noIE67" action="${submitUrl}"  role="add/edit organizational training">
-    
+    <form id="grantHasContributor" class="customForm noIE67" action="${submitUrl}"  role="add/edit organizational training">
     <p >
         <label for="person">${i18n().person_capitalized}: ${i18n().last_name}  ${requiredHint}<span style="padding-left:322px">${i18n().first_name}  ${requiredHint}</span></label>
             <input class="acSelector" size="50"  type="text" acGroupName="person" id="person" name="personLabel" value="${personLabelValue}" >
@@ -124,11 +123,16 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         </p>
         <input class="acUriReceiver" type="hidden" id="personUri" name="existingPerson" value="${existingPersonValue}" ${flagClearLabelForExisting}="true" />
     </div>
-    <p>
-        <label for="dept">${i18n().researcher_role} ${requiredHint}</label>
-        <input  size="50"  type="text" id="roleLabel" name="roleLabel" value="${roleLabelValue}" />
-    </p>    
                                     
+    <label for="roleType">${i18n().role_type} ${requiredHint}</label>
+    <#assign roleTypeOpts = editConfiguration.pageData.roleType />
+    <select name="roleType" style="margin-top:-2px" >
+        <option value="" <#if roleTypeValue == "">selected</#if>>${i18n().select_one}</option>                
+        <#list roleTypeOpts?keys as key>             
+            <option value="${key}"  <#if roleTypeValue == key>selected</#if>><#if roleTypeOpts[key] == "Other">${i18n().researcher_role}<#else>${roleTypeOpts[key]}</#if></option>         
+        </#list>
+    </select>
+    
   	<#--End draw elements-->
     <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>
     <p class="submit">
@@ -159,7 +163,7 @@ var i18nStrings = {
 };
 
 $(document).ready(function() {
-    projectHasParticipantUtils.onLoad('${blankSentinel}');
+    grantHasContributorUtils.onLoad('${blankSentinel}');
 });
 </script>
 
@@ -175,7 +179,7 @@ ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/
              '<script type="text/javascript" src="${urls.base}/js/extensions/String.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.bgiframe.pack.js"></script>',
-             '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/projectHasParticipantUtils.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/grantHasContributorUtils.js"></script>',
              '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/customFormWithAutocomplete.js"></script>')}
 
 
