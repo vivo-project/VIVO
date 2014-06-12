@@ -265,7 +265,7 @@ vivo:NonAcademicPosition
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
-              "-1"^^xsd:int ;
+              "4"^^xsd:int ;
       vitro:extendedLinkedData
               "true"^^xsd:boolean ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -1556,7 +1556,7 @@ vivo:FacultyAdministrativePosition
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
-              "-1"^^xsd:int ;
+              "1"^^xsd:int ;
       vitro:extendedLinkedData
               "true"^^xsd:boolean ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -4543,7 +4543,7 @@ vivo:FacultyPosition
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
-              "-1"^^xsd:int ;
+              "2"^^xsd:int ;
       vitro:extendedLinkedData
               "true"^^xsd:boolean ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -5505,7 +5505,7 @@ vivo:LibrarianPosition
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
-              "-1"^^xsd:int ;
+              "3"^^xsd:int ;
       vitro:extendedLinkedData
               "true"^^xsd:boolean ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -7240,7 +7240,7 @@ vivo:PrimaryPosition
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
-              "5"^^xsd:int ;
+              "500"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:hiddenFromPublishBelowRoleLevelAnnot
@@ -8086,7 +8086,7 @@ vivo:NonFacultyAcademicPosition
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
-              "-1"^^xsd:int ;
+              "5"^^xsd:int ;
       vitro:extendedLinkedData
               "true"^^xsd:boolean ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -8573,7 +8573,7 @@ vivo:PostdocPosition
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
-              "-1"^^xsd:int ;
+              "6"^^xsd:int ;
       vitro:extendedLinkedData
               "true"^^xsd:boolean ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
