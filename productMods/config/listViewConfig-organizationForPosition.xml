@@ -25,6 +25,7 @@
             }     
             <collated>           
             OPTIONAL { ?position vitro:mostSpecificType ?subclass .
+						OPTIONAL { ?subclass vitro:displayRankAnnot ?displayRank . }
             }   
             </collated>
             OPTIONAL { ?position rdfs:label ?positionTitle }
@@ -43,6 +44,7 @@
               <critical-data-required>
               FILTER ( bound(?person) )
               </critical-data-required>
+			  <collated>FILTER ( ?displayRank &lt; 500 )</collated>
         } ORDER BY <collated> ?subclass </collated> ?personName
     </query-select>
     
@@ -53,12 +55,20 @@
         CONSTRUCT {
             ?subject ?property ?position .
             ?position a core:Position .
-            ?position vitro:mostSpecificType ?subclass 
-        } WHERE {
-            ?subject ?property ?position .
-            ?position a core:Position .
-            ?position vitro:mostSpecificType ?subclass 
-        }
+            ?position vitro:mostSpecificType ?subclass .
+			?subclass vitro:displayRankAnnot ?displayRank
+	    } WHERE { 
+	       {
+	        ?subject ?property ?position .
+	        ?position a core:Position .
+	        ?position vitro:mostSpecificType ?subclass 
+	    } UNION {
+	        ?subject ?property ?position .
+	      	?position a core:Position .
+	      	?position vitro:mostSpecificType ?subclass .
+			?subclass vitro:displayRankAnnot ?displayRank
+			}
+		}
     </query-construct>
     
     <query-construct>
