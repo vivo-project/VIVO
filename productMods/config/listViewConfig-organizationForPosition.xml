@@ -55,7 +55,7 @@
         CONSTRUCT {
             ?subject ?property ?position .
             ?position a core:Position .
-            ?position vitro:mostSpecificType ?subclass 
+            ?position vitro:mostSpecificType ?subclass .
 			?subclass vitro:displayRankAnnot ?displayRank
 	    } WHERE { 
 	       {
