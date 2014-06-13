@@ -17,8 +17,8 @@
     <span class="hideThis">&nbsp;</span>
     <script type="text/javascript" >
         $('span.hideThis').parent().parent().addClass("hideThis");
-        if ( $('h3#RO_0000053-ResearcherRole').attr('class').length == 0 ) {
-            $('h3#RO_0000053-ResearcherRole').addClass('hiddenGrants');
+        if ( $('h3#researchOverview').attr('class').length == 0 ) {
+            $('h3#researchOverview').addClass('hiddenGrants');
         }
         $('span.hideThis').parent().remove();
     </script>
