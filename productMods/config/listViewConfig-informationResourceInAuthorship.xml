@@ -12,7 +12,7 @@
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
         PREFIX vcard:  &lt;http://www.w3.org/2006/vcard/ns#&gt;
                 
-        SELECT DISTINCT <collated> ?subclass </collated>
+        SELECT DISTINCT ?subclass
                         ?authorship
                         ?author ?authorName 
         WHERE {
@@ -21,13 +21,12 @@
                 OPTIONAL { ?authorship core:relates ?author .
                            ?author a foaf:Agent .                      
                            ?author rdfs:label ?authorName 
-                <collated> 
+                
                 OPTIONAL { ?authorship core:relates ?author .
                            ?author a foaf:Agent .  
                            ?author vitro:mostSpecificType ?subclass .
                            ?subclass rdfs:subClassOf foaf:Agent 
                 } 
-                </collated>
                 }
                 OPTIONAL { ?authorship core:relates ?author .
                            ?author a vcard:Kind .                      
@@ -39,13 +38,12 @@
 				           bind ( COALESCE(?middleName, "") As ?middleName1) .
 				           bind ( COALESCE(?lastName, "") As ?lastName1) .
 				           bind (concat(str(?lastName1 + ", "),str(?middleName1 + " "),str(?firstName1)) as ?authorName) .
-                <collated> 
+                 
                 OPTIONAL { ?authorship core:relates ?author .
                            ?author a vcard:Kind .  
                            ?author vitro:mostSpecificType ?subclass .
                            ?subclass rdfs:subClassOf vcard:Kind 
                 } 
-                </collated>
             }
             <critical-data-required>
             FILTER ( bound(?author) )
