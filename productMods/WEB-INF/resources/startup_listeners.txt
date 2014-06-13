@@ -35,8 +35,8 @@ edu.cornell.mannlib.vitro.webapp.filestorage.backend.FileStorageSetup
 
 edu.cornell.mannlib.vitro.webapp.web.images.PlaceholderUtil$Setup
 
-# Update the URIs on Permission Sets on UserAccounts from model (1.4) to 1.5.
-edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdatePermissionSetUris
+# Some permissions were removed in release 1.7
+edu.cornell.mannlib.vitro.webapp.servlet.setup.RemoveObsoletePermissions
 
 edu.cornell.mannlib.vitro.webapp.servlet.setup.FileGraphSetup
 
