@@ -23,6 +23,7 @@ public class AdditionalUriFinders {
 		uriFinders.add(new AdditionalURIsForContextNodes(rdfService));
 		uriFinders.add(new AdditionalURIsForTypeStatements());
 		uriFinders.add(new URIsForClassGroupChange(indDao));
+		uriFinders.add(new AdditionalUrisForVCards(rdfService));
 		return uriFinders;
 	}
 
