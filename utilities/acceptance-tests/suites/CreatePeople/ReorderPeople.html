@@ -237,6 +237,11 @@
 </tr>
 <!--Add all people as Susie's collaborators-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[18]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>css=a.add-hasCollaborator &gt; img.add-individual</td>
 	<td></td>
@@ -374,17 +379,17 @@
 <!--Verify order is ascending-->
 <tr>
 	<td>verifyElementPresent</td>
-	<td>css=#hasCollaboratorList &gt; li</td>
+	<td>css=#hasCollaborator-Person-List &gt; li</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>//ul[@id='hasCollaboratorList']/li[2]</td>
+	<td>//ul[@id='hasCollaborator-Person-List']/li[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>//ul[@id='hasCollaboratorList']/li[3]</td>
+	<td>//ul[@id='hasCollaborator-Person-List']/li[3]</td>
 	<td></td>
 </tr>
 <!--Turn on verbose & update object property-->
@@ -460,11 +465,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>selectWindow</td>
-	<td>null</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>id=verbosePropertySwitch</td>
 	<td></td>
@@ -475,23 +475,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Booth, Susie</td>
+	<td>verifyElementPresent</td>
+	<td>css=#hasCollaborator-Person-List &gt; li</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>css=#hasCollaboratorList &gt; li</td>
+	<td>//ul[@id='hasCollaborator-Person-List']/li[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>//ul[@id='hasCollaboratorList']/li[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>//ul[@id='hasCollaboratorList']/li[3]</td>
+	<td>//ul[@id='hasCollaborator-Person-List']/li[3]</td>
 	<td></td>
 </tr>
 <!--Change order back to ascending-->
@@ -583,17 +578,17 @@
 <!--Verify order is ascending again-->
 <tr>
 	<td>verifyElementPresent</td>
-	<td>css=#hasCollaboratorList &gt; li</td>
+	<td>css=#hasCollaborator-Person-List &gt; li</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>//ul[@id='hasCollaboratorList']/li[2]</td>
+	<td>//ul[@id='hasCollaborator-Person-List']/li[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>//ul[@id='hasCollaboratorList']/li[3]</td>
+	<td>//ul[@id='hasCollaborator-Person-List']/li[3]</td>
 	<td></td>
 </tr>
 <!--Delete test people-->
