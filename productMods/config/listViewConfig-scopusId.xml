@@ -14,7 +14,7 @@
                 ?subject ?property ?value
                 FILTER isLiteral(?value) 
             
-        } ORDER BY ?object
+        } ORDER BY ?value
     </query-select>
 
     <query-construct>
