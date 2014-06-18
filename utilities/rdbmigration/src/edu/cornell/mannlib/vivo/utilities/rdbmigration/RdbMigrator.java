@@ -209,12 +209,20 @@ public class RdbMigrator {
 		return true;
 	}
 
-	private void askMigrateAllModels() throws IOException {
-		try {
-			ask("Migrate all models? (y/n)");
-		} catch (UserDeclinedException e) {
-			modelsToCopy = EXPECTED_MODELS;
+	private void askMigrateAllModels() throws IOException, UserDeclinedException {
+		System.out.println("Migrate all models, or only the required models?\n"
+				+ "   Enter 'all' or 'only', or anything else to quit.");
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String s = br.readLine();
+		if (s != null) {
+			if (s.trim().toLowerCase().equals("all")) {
+				return;
+			} else if (s.trim().toLowerCase().equals("only")) {
+				modelsToCopy = EXPECTED_MODELS;
+				return;
+			}
 		}
+		throw new UserDeclinedException("Enter 'all' or 'only'.");
 	}
 
 	private void askApprovalForMigrationPlan() throws SQLException,
@@ -334,6 +342,7 @@ public class RdbMigrator {
 	// Main routine
 	// ----------------------------------------------------------------------
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		if (args.length != 4) {
 			System.out.println("Usage: RdbMigrator vivoHomeDir, jdbcUrl, "
