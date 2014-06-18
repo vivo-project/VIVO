@@ -14,23 +14,34 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
+
+import org.apache.commons.lang.StringUtils;
 
 import com.hp.hpl.jena.db.DBConnection;
 import com.hp.hpl.jena.db.GraphRDB;
-import com.hp.hpl.jena.db.IDBConnection;
-import com.hp.hpl.jena.graph.Graph;
 import com.hp.hpl.jena.graph.Node;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.sparql.core.DatasetGraph;
 import com.hp.hpl.jena.tdb.TDBFactory;
 
 /**
- * TODO
+ * A free-standing application that walks the user through the process of
+ * copying VIVO configuration data from RDB to TDB.
  */
 public class RdbMigrator {
 	private static final String TABLE_RDB = "jena_graph";
 	private static final String TABLE_MIGRATED = "vivo_rdb_migrated";
+	private static final List<String> EXPECTED_MODELS = Arrays
+			.asList(new String[] {
+					"http://vitro.mannlib.cornell.edu/default/vitro-kb-displayMetadata",
+					"http://vitro.mannlib.cornell.edu/default/vitro-kb-displayMetadata-displayModel",
+					"http://vitro.mannlib.cornell.edu/default/vitro-kb-displayMetadataTBOX",
+					"http://vitro.mannlib.cornell.edu/default/vitro-kb-userAccounts" });
+
 	private final String vivoHomeDir;
 	private final String jdbcUrl;
 	private final String username;
@@ -38,13 +49,26 @@ public class RdbMigrator {
 
 	private File targetDir;
 	private boolean alreadyMigrated;
+	private List<String> modelsToCopy;
 
+	/**
+	 * Confirm all of the parameters. Ask the user for approval. Do the
+	 * migration.
+	 * 
+	 * @throws UserDeclinedException
+	 *             If the user decides not to continue.
+	 */
 	public RdbMigrator(String vivoHomeDir, String jdbcUrl, String username,
-			String password) throws UserDeclinedException, IOException, SQLException {
+			String password) throws UserDeclinedException, IOException,
+			SQLException {
 		this.vivoHomeDir = vivoHomeDir;
 		this.jdbcUrl = jdbcUrl;
 		this.username = username;
 		this.password = password;
+
+		testDbConnection();
+
+		checkThatRdbExists();
 
 		confirmTargetDirectory();
 
@@ -52,15 +76,40 @@ public class RdbMigrator {
 			askContinueOverTdb();
 		}
 
-		testDbConnection();
-
-		checkThatRdbExists();
-
 		if (isAlreadyMigrated()) {
 			askMigrateAgain();
 		}
 
+		getListOfRdbModels();
+
+		if (isUnexpectedModels()) {
+			askMigrateAllModels();
+		}
+
 		askApprovalForMigrationPlan();
+
+		migrate();
+	}
+
+	private void testDbConnection() {
+		try (Connection conn = getSqlConnection()) {
+			// Just open and close it.
+		} catch (SQLException e) {
+			quit("Can't log in to database: '" + jdbcUrl + "', '" + username
+					+ "', '" + password + "'\n" + e.getMessage());
+		}
+	}
+
+	private void checkThatRdbExists() throws SQLException {
+		try (Connection conn = getSqlConnection()) {
+			DatabaseMetaData md = conn.getMetaData();
+			try (ResultSet rs = md.getTables(null, null, TABLE_RDB, null);) {
+				if (!rs.next()) {
+					quit("The database at '" + jdbcUrl
+							+ "' contains no RDB tables.");
+				}
+			}
+		}
 	}
 
 	private void confirmTargetDirectory() {
@@ -98,27 +147,6 @@ public class RdbMigrator {
 		ask("A directory of TDB files exists at '" + targetDir + "'.\n"
 				+ "   Migration will replace the existing triples.\n"
 				+ "Continue? (y/n)");
-	}
-
-	private void testDbConnection() {
-		try (Connection conn = getSqlConnection()) {
-			// Just open and close it.
-		} catch (SQLException e) {
-			quit("Can't log in to database: '" + jdbcUrl + "', '" + username
-					+ "', '" + password + "'\n" + e.getMessage());
-		}
-	}
-
-	private void checkThatRdbExists() throws SQLException {
-		try (Connection conn = getSqlConnection()) {
-			DatabaseMetaData md = conn.getMetaData();
-			try (ResultSet rs = md.getTables(null, null, TABLE_RDB, null);) {
-				if (!rs.next()) {
-					quit("The database at '" + jdbcUrl
-							+ "' contains no RDB tables.");
-				}
-			}
-		}
 	}
 
 	private boolean isAlreadyMigrated() throws SQLException {
@@ -159,28 +187,46 @@ public class RdbMigrator {
 		ask("Migrate again? (y/n)");
 	}
 
+	private void getListOfRdbModels() throws SQLException {
+		try (Connection conn = getSqlConnection();
+				ClosingDBConnection rdb = new ClosingDBConnection(conn)) {
+			modelsToCopy = rdb.getAllModelNames().toList();
+		}
+	}
+
+	private boolean isUnexpectedModels() {
+		List<String> unexpectedModels = new ArrayList<>(modelsToCopy);
+		unexpectedModels.removeAll(EXPECTED_MODELS);
+		if (unexpectedModels.isEmpty()) {
+			return false;
+		}
+
+		System.out
+				.println("VIVO requires only these models from RDB:\n   "
+						+ StringUtils.join(EXPECTED_MODELS, "\n   ")
+						+ "\nYour RDB triple-store contains these additional models:\n   "
+						+ StringUtils.join(unexpectedModels, "\n   "));
+		return true;
+	}
+
+	private void askMigrateAllModels() throws IOException {
+		try {
+			ask("Migrate all models? (y/n)");
+		} catch (UserDeclinedException e) {
+			modelsToCopy = EXPECTED_MODELS;
+		}
+	}
+
 	private void askApprovalForMigrationPlan() throws SQLException,
 			UserDeclinedException, IOException {
 		int modelCount = 0;
 		int tripleCount = 0;
-		try (Connection conn = getSqlConnection()) {
-			IDBConnection rdb = null;
-			try {
-				rdb = getRdbConnection(conn);
-				for (String modelName : rdb.getAllModelNames().toList()) {
-					modelCount++;
-					Graph graph = new GraphRDB(
-							rdb,
-							modelName,
-							null,
-							GraphRDB.OPTIMIZE_ALL_REIFICATIONS_AND_HIDE_NOTHING,
-							false);
+		try (Connection conn = getSqlConnection();
+				ClosingDBConnection rdb = new ClosingDBConnection(conn)) {
+			for (String modelName : modelsToCopy) {
+				modelCount++;
+				try (ClosingGraphRDB graph = new ClosingGraphRDB(rdb, modelName)) {
 					tripleCount += graph.size();
-					graph.close();
-				}
-			} finally {
-				if (rdb != null) {
-					rdb.close();
 				}
 			}
 		}
@@ -192,49 +238,56 @@ public class RdbMigrator {
 		ask(question);
 	}
 
+	private void quit(String message) {
+		throw new IllegalArgumentException(
+				"--------------------------------------------------------------\n"
+						+ message
+						+ "\n--------------------------------------------------------------");
+	}
+
+	private void ask(String string) throws UserDeclinedException, IOException {
+		System.out.println(string);
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String s = br.readLine();
+		if ((s == null) || (!s.trim().toLowerCase().equals("y"))) {
+			throw new UserDeclinedException("OK.");
+		}
+	}
+
+	private static class UserDeclinedException extends Exception {
+		public UserDeclinedException(String message) {
+			super(message);
+		}
+	}
+
 	public void migrate() throws SQLException {
 		copyData();
-		writeMigratedRecord();
+		writeMigrationRecord();
 	}
 
 	private void copyData() throws SQLException {
-		try (Connection conn = getSqlConnection()) {
-			IDBConnection rdbConnection = null;
-			try {
-				rdbConnection = getRdbConnection(conn);
-				Dataset tdbDataset = TDBFactory.createDataset(targetDir
-						.getAbsolutePath());
-				copyGraphs(rdbConnection, tdbDataset);
-			} finally {
-				if (rdbConnection != null) {
-					rdbConnection.close();
-				}
-			}
+		try (Connection conn = getSqlConnection();
+				ClosingDBConnection rdb = new ClosingDBConnection(conn)) {
+			Dataset tdbDataset = TDBFactory.createDataset(targetDir
+					.getAbsolutePath());
+			copyGraphs(rdb, tdbDataset);
 		}
 	}
 
 	@SuppressWarnings("deprecation")
-	private void copyGraphs(IDBConnection rdbConnection, Dataset tdbDataset) {
+	private void copyGraphs(ClosingDBConnection rdb, Dataset tdbDataset) {
 		DatasetGraph tdbDsGraph = tdbDataset.asDatasetGraph();
-		for (String modelName : rdbConnection.getAllModelNames().toList()) {
-			Graph graph = null;
-			try {
-				graph = new GraphRDB(rdbConnection, modelName, null,
-						GraphRDB.OPTIMIZE_ALL_REIFICATIONS_AND_HIDE_NOTHING,
-						false);
+		for (String modelName : modelsToCopy) {
+			try (ClosingGraphRDB graph = new ClosingGraphRDB(rdb, modelName)) {
 				tdbDsGraph.addGraph(Node.createURI(modelName), graph);
 				System.out
 						.println(String.format("  copied %4d triples from %s",
 								graph.size(), modelName));
-			} finally {
-				if (graph != null) {
-					graph.close();
-				}
 			}
 		}
 	}
 
-	private void writeMigratedRecord() throws SQLException {
+	private void writeMigrationRecord() throws SQLException {
 		String createTable = String.format("CREATE TABLE %s (date DATE)",
 				TABLE_MIGRATED);
 		String deleteOldDates = String.format("DELETE FROM %s", TABLE_MIGRATED);
@@ -253,25 +306,6 @@ public class RdbMigrator {
 		}
 	}
 
-	private void quit(String message) {
-		throw new IllegalArgumentException(message);
-	}
-
-	private void ask(String string) throws UserDeclinedException, IOException {
-		System.out.println(string);
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		String s = br.readLine();
-		if ((s == null) || (!s.trim().toLowerCase().equals("y"))) {
-			throw new UserDeclinedException("OK.");
-		}
-	}
-
-	private static class UserDeclinedException extends Exception {
-		public UserDeclinedException(String message) {
-			super(message);
-		}
-	}
-
 	private Connection getSqlConnection() throws SQLException {
 		Properties connectionProps;
 		connectionProps = new Properties();
@@ -280,19 +314,34 @@ public class RdbMigrator {
 		return DriverManager.getConnection(jdbcUrl, connectionProps);
 	}
 
-	private IDBConnection getRdbConnection(Connection sqlConnection) {
-		return new DBConnection(sqlConnection, "MySQL");
+	private static class ClosingDBConnection extends DBConnection implements
+			AutoCloseable {
+		ClosingDBConnection(Connection sqlConnection) {
+			super(sqlConnection, "MySQL");
+		}
+
 	}
 
-	public static void main(String[] args) throws SQLException {
+	private static class ClosingGraphRDB extends GraphRDB implements
+			AutoCloseable {
+		ClosingGraphRDB(DBConnection rdb, String modelName) {
+			super(rdb, modelName, null,
+					GraphRDB.OPTIMIZE_ALL_REIFICATIONS_AND_HIDE_NOTHING, false);
+		}
+	}
+
+	// ----------------------------------------------------------------------
+	// Main routine
+	// ----------------------------------------------------------------------
+
+	public static void main(String[] args) {
 		if (args.length != 4) {
 			System.out.println("Usage: RdbMigrator vivoHomeDir, jdbcUrl, "
 					+ "username, password");
 		}
-	
+
 		try {
-			RdbMigrator rdbm = new RdbMigrator(args[0], args[1], args[2], args[3]);
-			rdbm.migrate();
+			new RdbMigrator(args[0], args[1], args[2], args[3]);
 		} catch (IllegalArgumentException | UserDeclinedException e) {
 			System.out.println(e.getMessage());
 		} catch (Exception e) {
