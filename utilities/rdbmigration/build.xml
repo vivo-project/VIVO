@@ -125,6 +125,8 @@
 			<arg value="${VitroConnection.DataSource.url}" />
 			<arg value="${VitroConnection.DataSource.username}" />
 			<arg value="${VitroConnection.DataSource.password}" />
+			<jvmarg value="-Xms512m"/>
+			<jvmarg value="-Xmx2048m"/>
 			<classpath refid="migrate.run.classpath" />
 		</java>
 	</target>
