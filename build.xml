@@ -134,14 +134,4 @@
 		</sync>
 	</target>
 	
-	<!-- ================================= 
-          target: migrateConfigurationModels              
-         ================================= -->
-    <target name="migrateConfigurationModels" description="description">
-    	<dirname property="nihvivobase.dir" file="${ant.file.nihvivo}" />
-    	<property name="rdbmigration.dir" location="${nihvivobase.dir}/utilities/rdbmigration" />
-        <ant dir="${rdbmigration.dir}" target="all"></ant>
-    </target>
-
-
 </project>
