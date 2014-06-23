@@ -13,7 +13,7 @@
 <p style="margin-left:25px;margin-bottom:12px">
 ${i18n().check_pubs_to_exclude}
 <script type="text/javascript">
-    var publicationData = [];
+    var itemData = [];
 </script>
 </p>
 
@@ -37,12 +37,12 @@ ${i18n().check_pubs_to_exclude}
         <ul >
             <#list pubs as pub>
             <li>
-                <input type="checkbox" class="pubCheckbox" <#if pub.hideThis??>checked</#if> />
+                <input type="checkbox" class="itemCheckbox" <#if pub.hideThis??>checked</#if> />
                 <#if pub.title?has_content>${pub.title!}<#else>${i18n().title_not_found}</#if>
             </li>
             <script type="text/javascript">
-                publicationData.push({
-                    "authorshipUri": "${pub.authorship}"              
+                itemData.push({
+                    "relatedUri": "${pub.authorship}"              
                 });
             </script>      
             
@@ -61,8 +61,8 @@ var customFormData = {
     processingUrl: '${urls.base}/edit/primitiveRdfEdit'
 };
 var i18nStrings = {
-    publicationSuccessfullyExcluded: '${i18n().publication_successfully_excluded}',
-    errorExcludingPublication: '${i18n().error_excluding_publication}'
+    itemSuccessfullyExcluded: '${i18n().publication_successfully_excluded}',
+    errorExcludingItem: '${i18n().error_excluding_publication}'
 };
 </script>
 
@@ -72,5 +72,5 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarke
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/utils.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
-                '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/managePublicationsForIndividual.js"></script>')}
+                '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/manageHideShowStatus.js"></script>')}
               
