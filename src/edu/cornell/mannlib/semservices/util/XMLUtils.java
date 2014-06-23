@@ -28,20 +28,15 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.xml.serialize.XMLSerializer;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
-import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-
-import edu.cornell.mannlib.semservices.util.MetadataNamespaceContext;
 
 /**
  * Convenience Class to parse XML strings to DOM Document for XML contents
@@ -117,14 +112,16 @@ public class XMLUtils {
     * @param doc
     * @throws IOException
     */
+    @SuppressWarnings("deprecation")
    public static void serializeDoc(Document doc) throws IOException {
-       XMLSerializer serializer = new XMLSerializer();
+       org.apache.xml.serialize.XMLSerializer serializer = new org.apache.xml.serialize.XMLSerializer();
        serializer.setOutputByteStream(System.out);
        serializer.serialize(doc);
     }
 
+   @SuppressWarnings("deprecation")
    public static String serializeDoctoString(Document doc) throws IOException {
-      XMLSerializer serializer = new XMLSerializer();
+	   org.apache.xml.serialize.XMLSerializer serializer = new org.apache.xml.serialize.XMLSerializer();
       ByteArrayOutputStream bout = new ByteArrayOutputStream();
 
       serializer.setOutputByteStream(bout);
