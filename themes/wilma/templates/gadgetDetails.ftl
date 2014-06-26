@@ -2,7 +2,7 @@
 
 <#-- Template for the body of the GadgetDetails page -->
 
-<div class="pageTitle" id="gadgets-title"><h2>${title}</h2></div>
+<div class="pageTitle" id="gadgets-title"><h2>${title!}</h2></div>
 
 <#-- VIVO OpenSocial Extension by UCSF -->
 <#if openSocial??>

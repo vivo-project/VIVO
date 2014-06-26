@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-var manageGrants = {
+var manageHideShowStatus = {
 
     /* *** Initial page setup *** */
    
@@ -20,7 +20,7 @@ var manageGrants = {
     // Initial page setup. Called only at page load.
     initPage: function() {
 
-        this.initGrantData();
+        this.initItemData();
        
         this.bindEventListeners();
                        
@@ -29,28 +29,28 @@ var manageGrants = {
     // On page load, associate data with each list item. Then we don't
     // have to keep retrieving data from or modifying the DOM as we manipulate the
     // items.
-    initGrantData: function() {
-        $('.grantCheckbox').each(function(index) {
-            $(this).data(grantData[index]);  
+    initItemData: function() {
+        $('.itemCheckbox').each(function(index) {
+            $(this).data(itemData[index]);  
         });
     },
     
     bindEventListeners: function() {
 
-        $('.grantCheckbox').click(function() {
-            manageGrants.processGrant(this);
+        $('.itemCheckbox').click(function() {
+            manageHideShowStatus.processItem(this);
             //return false;
         });
                
     },
                       
-    processGrant: function(grant) {
+    processItem: function(item) {
         
         var add = "";
         var retract = "";
-        var n3String = "<" + $(grant).data('roleUri') + "> <http://vivoweb.org/ontology/core#hideFromDisplay> \"true\" ." ;
+        var n3String = "<" + $(item).data('relatedUri') + "> <http://vivoweb.org/ontology/core#hideFromDisplay> \"true\" ." ;
 
-        if ( $(grant).is(':checked') ) {
+        if ( $(item).is(':checked') ) {
             add = n3String;
         }
         else {
@@ -58,22 +58,22 @@ var manageGrants = {
         } 
         
         $.ajax({
-            url: manageGrants.processingUrl,
+            url: manageHideShowStatus.processingUrl,
             type: 'POST', 
             data: {
                 additions: add,
                 retractions: retract
             },
             dataType: 'json',
-            context: grant, // context for callback
+            context: item, // context for callback
             complete: function(request, status) {
             
                 if (status === 'success') {
-                    window.status = manageGrants.grantSuccessfullyExcluded; 
+                    window.status = manageHideShowStatus.itemSuccessfullyExcluded; 
 
                 } else {
-                    alert(manageGrants.errorExcludingGrant);
-                    $(grant).removeAttr('checked');
+                    alert(manageHideShowStatus.errorExcludingItem);
+                    $(item).removeAttr('checked');
                 }
             }
         });        
@@ -82,5 +82,5 @@ var manageGrants = {
 };
 
 $(document).ready(function() {   
-    manageGrants.onLoad();
+    manageHideShowStatus.onLoad();
 }); 

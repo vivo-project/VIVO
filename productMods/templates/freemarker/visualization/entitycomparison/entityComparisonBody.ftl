@@ -53,7 +53,7 @@
                     <div id="error-notification" class="ui-state-error" style="padding:10px; -moz-box-shadow:0 0 6px #980000; -webkit-box-shadow:0 0 6px #980000; box-shadow:0 0 6px #980000;">
                         <a class="ui-notify-close" href="#" title="${i18n().error_notification}"><span class="ui-icon ui-icon-close" style="float:right"></span></a>
                         <span style="float:left; margin:0 5px 0 0;" class="ui-icon ui-icon-alert"></span>
-                        <h1>&#035;{title}</h1>
+                        <h1>&#035;{title!}</h1>
                         <p>&#035;{text}</p>
                         <p style="text-align:center"><a class="ui-notify-close" href="#">${i18n().close_me}</a></p>
                     </div>
@@ -61,7 +61,7 @@
                     <div id="warning-notification" class="ui-state-highlight ui-corner-all" >
                     <a class="ui-notify-close ui-notify-cross" href="#" title="${i18n().error_notification}">x</a>
                     <span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>
-                        <h1>&#035;{title}</h1>
+                        <h1>&#035;{title!}</h1>
                         <p>&#035;{text}</p>
                     </div>
                 

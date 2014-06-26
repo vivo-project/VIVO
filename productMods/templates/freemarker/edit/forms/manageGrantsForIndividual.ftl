@@ -13,7 +13,7 @@
 <p style="margin-left:25px;margin-bottom:12px">
 ${i18n().check_grants_to_exclude}
 <script type="text/javascript">
-    var grantData = [];
+    var itemData = [];
 </script>
 </p>
 <@lvf.unsupportedBrowser urls.base /> 
@@ -25,11 +25,11 @@ ${i18n().check_grants_to_exclude}
         <ul >
             <#list grantList as grant>
             <li>
-                <input type="checkbox" class="grantCheckbox" <#if grant.hideThis??>checked</#if> />${grant.label!grant.activity!}
+                <input type="checkbox" class="itemCheckbox" <#if grant.hideThis??>checked</#if> />${grant.label!grant.activity!}
             </li>
             <script type="text/javascript">
-                grantData.push({
-                    "roleUri": "${grant.role!}"              
+                itemData.push({
+                    "relatedUri": "${grant.role!}"              
                 });
             </script>      
             
@@ -48,8 +48,8 @@ var customFormData = {
     processingUrl: '${urls.base}/edit/primitiveRdfEdit'
 };
 var i18nStrings = {
-    grantSuccessfullyExcluded: '${i18n().grant_successfully_excluded}',
-    errorExcludingGrant: '${i18n().error_excluding_grant}'
+    itemSuccessfullyExcluded: '${i18n().grant_successfully_excluded}',
+    errorExcludingItem: '${i18n().error_excluding_grant}'
 };
 </script>
 
@@ -59,5 +59,5 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarke
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/utils.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
-                '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/manageGrantsForIndividual.js"></script>')}
+                '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/manageHideShowStatus.js"></script>')}
               
