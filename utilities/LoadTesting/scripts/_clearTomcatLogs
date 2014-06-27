@@ -9,4 +9,6 @@ Remove any Tomcat logs.
 --------------------------------------------------------------------------------
 =end
 
-puts system("rm ~/LoadTesting/tomcat/logs/*")
+require File.expand_path('subscripts/common', File.dirname(__FILE__))
+
+puts system("rm #{@home}/tomcat/logs/*")

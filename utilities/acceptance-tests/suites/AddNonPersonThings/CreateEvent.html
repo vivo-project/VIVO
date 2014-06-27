@@ -138,7 +138,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Please enter a value in the name field.</td>
+	<td>Please enter a value in the Name field.</td>
 	<td></td>
 </tr>
 <!--Now enter something in the field-->
@@ -158,6 +158,11 @@
 	<td></td>
 </tr>
 <!--Test overview entry (image and webpage have been tested)-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[8]</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='description']/a/img</td>
@@ -210,7 +215,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=label</td>
 	<td>PHC Proceedings</td>
 </tr>
 <tr>
@@ -302,7 +307,22 @@
 <tr>
 	<td>type</td>
 	<td>id=object</td>
-	<td>Keny</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=object</td>
+	<td>Kenya</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=object</td>
+	<td>${KEY_DOWN}</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -322,7 +342,7 @@
 <!--Test location entry-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasGeographicLocation']/a/img</td>
+	<td>xpath=(//h3[@id='RO_0001025']/a)[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -336,9 +356,29 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Geographic Location Name</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>id=object</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=object</td>
 	<td>Cong</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=object</td>
+	<td>${KEY_DOWN}</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -348,6 +388,51 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Health Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-RO_0001025 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Facility for Primate Health Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=typeOfNew</td>
+	<td>label=Facility (vivo)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=label</td>
+	<td>State Fair Park</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -408,6 +493,11 @@
 </tr>
 <!--Test related documents entry-->
 <tr>
+	<td>assertTitle</td>
+	<td>Primate Health Conference</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='presents']/a/img</td>
 	<td></td>
@@ -430,7 +520,7 @@
 <!--Test other entry-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='includesEvent']/a/img</td>
+	<td>css=a.add-BFO_0000051 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -475,7 +565,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=exact:Can't find the concept you want? Create your own.</td>
+	<td>link=Can't find the concept you want? Create your own.</td>
 	<td></td>
 </tr>
 <tr>
@@ -486,7 +576,22 @@
 <tr>
 	<td>type</td>
 	<td>id=relatedIndLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=relatedIndLabel</td>
 	<td>Anim</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=relatedIndLabel</td>
+	<td>${KEY_DOWN}</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -543,10 +648,86 @@
 	<td>Primate Health Conference</td>
 	<td></td>
 </tr>
+<!--Test remaining fields (added for 1.6)-->
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-BFO_0000050 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=Primate Health and Fitness</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Health Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//img[@alt='add'])[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Health Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-RO_0002234 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=Primate Happenings</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Health Conference</td>
+	<td></td>
+</tr>
 <!--Verify everything entered is displaying properly-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Primate Health Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Conference</td>
 	<td></td>
 </tr>
 <tr>
@@ -556,22 +737,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>PHC Proceedings</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>info@primateconf.org</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Kenya</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Congo</td>
+	<td>PrimHConf</td>
 	<td></td>
 </tr>
 <tr>
@@ -580,23 +746,58 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>http://primatehealthintro.cornell.edu</td>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Health and Fitness</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Health Check</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Health Talks</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Animal Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=PHC Proceedings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Kenya</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Happenings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=http://primatehealthintro.cornell.edu</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Health Check</td>
+	<td>info@primateconf.org</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Animal Health</td>
+	<td>verifyElementPresent</td>
+	<td>link=State Fair Park</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>PrimHConf</td>
+	<td>verifyElementPresent</td>
+	<td>link=Congo</td>
 	<td></td>
 </tr>
 <!--Logout-->

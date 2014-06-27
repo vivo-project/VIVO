@@ -9,5 +9,7 @@ Duh
 --------------------------------------------------------------------------------
 =end
 
-puts system("~/LoadTesting/tomcat/bin/shutdown.sh")
+require File.expand_path('subscripts/common', File.dirname(__FILE__))
+
+puts system("#{@home}/tomcat/bin/shutdown.sh")
 

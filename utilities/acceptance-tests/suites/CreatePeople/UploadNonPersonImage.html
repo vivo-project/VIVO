@@ -182,7 +182,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Crop Photo for Germany</td>
+	<td>Crop image for Germany</td>
 	<td></td>
 </tr>
 <tr>
@@ -218,7 +218,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Crop Photo for Germany</td>
+	<td>Crop image for Germany</td>
 	<td></td>
 </tr>
 <tr>
@@ -243,8 +243,13 @@
 </tr>
 <!--Change image to German flag-->
 <tr>
+	<td>assertTitle</td>
+	<td>Germany</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='edit']</td>
+	<td>css=img.edit-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -296,7 +301,7 @@
 <!--Cancel out again, this time in cropping phase-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='edit']</td>
+	<td>css=img.edit-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -316,7 +321,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Crop Photo for Germany</td>
+	<td>Crop image for Germany</td>
 	<td></td>
 </tr>
 <tr>
@@ -342,7 +347,7 @@
 <!--Now really change the map to a flag-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='edit']</td>
+	<td>css=img.edit-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -362,7 +367,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Crop Photo for Germany</td>
+	<td>Crop image for Germany</td>
 	<td></td>
 </tr>
 <tr>
@@ -389,17 +394,7 @@
 <!--Now delete the image-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this photo?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td>5000</td>
+	<td>css=img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>

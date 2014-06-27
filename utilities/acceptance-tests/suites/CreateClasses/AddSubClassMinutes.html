@@ -104,23 +104,23 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>HiddenFromDisplayBelowRoleLevelUsingRoleUri</td>
-	<td>label=editor, curator, site administrator</td>
+	<td>name=HiddenFromDisplayBelowRoleLevelUsingRoleUri</td>
+	<td>label=editor and above</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>ProhibitedFromUpdateBelowRoleLevelUsingRoleUri</td>
-	<td>label=editor, curator, site administrator</td>
+	<td>name=ProhibitedFromUpdateBelowRoleLevelUsingRoleUri</td>
+	<td>label=editor and above</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=HiddenFromPublishBelowRoleLevelUsingRoleUri</td>
+	<td>label=all users, including public</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>GroupURI</td>
 	<td>label=Times</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>Namespace</td>
-	<td>label=VIVO core</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -140,7 +140,7 @@
 <!--Verify new sub-class Minutes added properly-->
 <tr>
 	<td>verifyTextPresent</td>
-	<td>vivo:Minutes</td>
+	<td>Minutes</td>
 	<td></td>
 </tr>
 <tr>
@@ -150,12 +150,37 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>editor, curator, site administrator</td>
+	<td>(not identified)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>exact:http://vivoweb.org/ontology/core#minutes</td>
+	<td>minutes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>editor and above</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>(unspecified)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>http://vivo.mydomain.edu/individual/minutes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>all users, including public</td>
 	<td></td>
 </tr>
 <tr>
@@ -170,7 +195,17 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=vivo:Minutes</td>
+	<td>link=Minutes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Times</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>http://vivo.mydomain.edu/individual/</td>
 	<td></td>
 </tr>
 <!--Logout-->

@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 import com.hp.hpl.jena.query.Dataset;
 
 import edu.cornell.mannlib.vitro.webapp.auth.permissions.SimplePermission;
-import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.Actions;
+import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
@@ -30,7 +30,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequ
 public class ModelConstructorRequestHandler implements
 		VisualizationRequestHandler {
 
-    public static final Actions REQUIRED_ACTIONS = SimplePermission.REFRESH_VISUALIZATION_CACHE.ACTIONS;
+    public static final AuthorizationRequest REQUIRED_ACTIONS = SimplePermission.REFRESH_VISUALIZATION_CACHE.ACTION;
     
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
@@ -137,7 +137,7 @@ public class ModelConstructorRequestHandler implements
 	}
 
 	@Override
-	public Actions getRequiredPrivileges() {
+	public AuthorizationRequest getRequiredPrivileges() {
 		return REQUIRED_ACTIONS;
 	}
 

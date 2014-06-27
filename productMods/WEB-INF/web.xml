@@ -413,6 +413,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>DumpRestoreController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.datatools.dumprestore.DumpRestoreController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DumpRestoreController</servlet-name>
+    <url-pattern>/dumpRestore/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>EditFrontController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vedit.controller.EditFrontController</servlet-class>
   </servlet>
@@ -1120,12 +1129,22 @@
 
   <servlet>
     <servlet-name>SparqlQuery</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.SparqlQueryServlet</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.admin.SparqlQueryController</servlet-class>
   </servlet>
 
   <servlet-mapping>
     <servlet-name>SparqlQuery</servlet-name>
     <url-pattern>/admin/sparqlquery</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SparqlQueryApi</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.api.SparqlQueryApiController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>SparqlQueryApi</servlet-name>
+    <url-pattern>/api/sparqlQuery</url-pattern>
   </servlet-mapping>
   
   <servlet>
@@ -1391,15 +1410,14 @@
   </servlet-mapping>
   
   <servlet>
-    <servlet-name>SmokeTestController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.SmokeTestController</servlet-class>
+    <servlet-name>OrcidIntegrationController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vivo.orcid.controller.OrcidIntegrationController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>SmokeTestController</servlet-name>
-    <url-pattern>/smoketest</url-pattern>
+    <servlet-name>OrcidIntegrationController</servlet-name>
+    <url-pattern>/orcid/*</url-pattern>
   </servlet-mapping>
   
- 
   <!-- ==================== tag libraries ============================== -->
   <jsp-config>
     <taglib>

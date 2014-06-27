@@ -103,7 +103,7 @@
 
 <#assign sparqlQueryUrl = "${urls.base}/ajax/sparqlQuery" >
 <#--Passing in object types only if there are any types returned, otherwise
-the parameter should not be passed at all to the solr search.
+the parameter should not be passed at all to the search.
 Also multiple types parameter set to true only if more than one type returned-->
     <script type="text/javascript">	
     var customFormData  = {

@@ -109,18 +109,23 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>HiddenFromDisplayBelowRoleLevelUsingRoleUri</td>
-	<td>label=editor, curator, site administrator</td>
+	<td>name=Namespace</td>
+	<td>label=VIVO Core</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>ProhibitedFromUpdateBelowRoleLevelUsingRoleUri</td>
-	<td>label=public</td>
+	<td>name=HiddenFromDisplayBelowRoleLevelUsingRoleUri</td>
+	<td>label=self-editor and above</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>Namespace</td>
-	<td>label=VIVO core</td>
+	<td>name=ProhibitedFromUpdateBelowRoleLevelUsingRoleUri</td>
+	<td>label=editor and above</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=HiddenFromPublishBelowRoleLevelUsingRoleUri</td>
+	<td>label=curator and above</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -129,8 +134,8 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>DomainClassURI</td>
-	<td>label=foaf:Agent</td>
+	<td>name=DomainClassURI</td>
+	<td>label=Agent (foaf)</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -150,27 +155,12 @@
 <!--Verify that architectural details has been added properly-->
 <tr>
 	<td>verifyTextPresent</td>
-	<td>exact:vivo:architecturalDetails</td>
+	<td>Data Property Control Panel</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>VIVO core</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>architectural details</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=exact:http://xmlns.com/foaf/0.1/Agent</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>http://www.w3.org/2001/XMLSchema#string</td>
+	<td>architectural details (vivo)</td>
 	<td></td>
 </tr>
 <tr>
@@ -180,12 +170,57 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>editor, curator, site administrator</td>
+	<td>VIVO Core</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>public</td>
+	<td>architecturalDetails</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Agent (foaf)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>http://www.w3.org/2001/XMLSchema#string</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>self-editor and above</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>editor and above</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>(unspecified)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>http://vivoweb.org/ontology/core#architecturalDetails </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>curator and above</td>
 	<td></td>
 </tr>
 <!--Check data properties hierarchy-->
@@ -211,12 +246,12 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=architectural details</td>
+	<td>link=architectural details (vivo)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>vivo:architecturalDetails</td>
+	<td>architectural details (vivo)</td>
 	<td></td>
 </tr>
 <tr>
@@ -226,7 +261,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>foaf:Agent </td>
+	<td>Agent (foaf)</td>
 	<td></td>
 </tr>
 <tr>
@@ -236,7 +271,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=architectural details</td>
+	<td>link=architectural details (vivo)</td>
 	<td></td>
 </tr>
 <tr>
@@ -246,7 +281,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>vivo:architecturalDetails</td>
+	<td>architectural details (vivo)</td>
 	<td></td>
 </tr>
 <tr>
@@ -261,7 +296,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>VIVO core</td>
+	<td>VIVO Core</td>
 	<td></td>
 </tr>
 <tr>
@@ -271,7 +306,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=exact:http://xmlns.com/foaf/0.1/Agent</td>
+	<td>link=Agent (foaf)</td>
 	<td></td>
 </tr>
 <tr>
@@ -286,12 +321,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>editor, curator, site administrator</td>
+	<td>self-editor and above</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>public</td>
+	<td>editor and above</td>
 	<td></td>
 </tr>
 <tr>
@@ -307,6 +342,11 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>http://vivoweb.org/ontology/core#architecturalDetails</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>curator and above</td>
 	<td></td>
 </tr>
 <!--Log out-->

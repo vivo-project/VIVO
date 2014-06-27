@@ -87,8 +87,13 @@
 </tr>
 <!--Cancel out before adding Co-principal Investigator-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[6]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasCo-PrincipalInvestigatorRole']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[22]</td>
 	<td></td>
 </tr>
 <tr>
@@ -134,7 +139,12 @@
 <!--Add good Co-principal Investigator role-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasCo-PrincipalInvestigatorRole']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[22]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
@@ -227,7 +237,7 @@
 <!--Add second Co-principal Investigator role-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasCo-PrincipalInvestigatorRole']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[22]</td>
 	<td></td>
 </tr>
 <tr>
@@ -335,7 +345,7 @@
 <!--Cancel out before adding Investigator-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasInvestigatorRole']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[23]</td>
 	<td></td>
 </tr>
 <tr>
@@ -381,7 +391,7 @@
 <!--Enter good Investigator role-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasInvestigatorRole']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[23]</td>
 	<td></td>
 </tr>
 <tr>
@@ -479,7 +489,7 @@
 <!--Add Principal Investigator role-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasPrincipalInvestigatorRole']/a/img</td>
+	<td>css=#researchGroup &gt; article.property &gt; #RO_0000053 &gt; a.add-RO_0000053 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>

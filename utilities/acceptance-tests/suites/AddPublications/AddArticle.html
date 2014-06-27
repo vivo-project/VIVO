@@ -99,8 +99,13 @@
 </tr>
 <!--Select to add a Publication-->
 <tr>
+	<td>click</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td>css=#relatedBy-Authorship &gt; a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -175,8 +180,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Too Much Nintendo</td>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[4]</td>
 	<td></td>
 </tr>
 <tr>
@@ -186,7 +191,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Too Much Nintendo</td>
+	<td>Too Much Nintendo.&nbsp;&nbsp;Child Development.&nbsp;&nbsp;29:298-344. 2010</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Too Much Nintendo</td>
 	<td></td>
 </tr>
 <!--Go back to article-->
@@ -338,7 +348,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=exact:Can't find the concept you want? Create your own.</td>
+	<td>link=Can't find the concept you want? Create your own.</td>
 	<td></td>
 </tr>
 <tr>
@@ -349,7 +359,22 @@
 <tr>
 	<td>type</td>
 	<td>id=relatedIndLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=relatedIndLabel</td>
 	<td>Child</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=relatedIndLabel</td>
+	<td>${KEY_DOWN}</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -524,18 +549,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyTextPresent</td>
 	<td>Faculty Member (1)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Person</td>
+	<td>link=Faculty Member</td>
 	<td></td>
 </tr>
 <tr>
@@ -545,7 +565,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Organization</td>
+	<td>link=Person</td>
 	<td></td>
 </tr>
 <tr>
@@ -555,7 +575,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Publisher</td>
+	<td>link=Organization</td>
 	<td></td>
 </tr>
 <tr>
@@ -565,7 +585,12 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Academic Article</td>
+	<td>link=Publisher</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>research</td>
 	<td></td>
 </tr>
 <tr>
@@ -575,7 +600,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Article</td>
+	<td>link=Academic Article</td>
 	<td></td>
 </tr>
 <tr>
@@ -585,22 +610,27 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
+	<td>link=Article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Book (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
 	<td>link=Book</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Book (2)</td>
+	<td>Concept (1)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Concept</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Concept (1)</td>
 	<td></td>
 </tr>
 <!--Verify Article shows up for Frank Furter-->
@@ -625,18 +655,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[4]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
 	<td>academic article</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Too Much Nintendo</td>
+	<td>verifyTextPresent</td>
+	<td>Too Much Nintendo.&nbsp;&nbsp;Child Development.&nbsp;&nbsp;29:298-344. 2010</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Too Much Nintendo.&nbsp;&nbsp;Child Development.&nbsp;&nbsp;29:298-344. 2010</td>
+	<td>verifyElementPresent</td>
+	<td>link=Too Much Nintendo</td>
 	<td></td>
 </tr>
 <!--Verify article details-->
@@ -651,8 +686,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Supplement</td>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[12]</td>
 	<td></td>
 </tr>
 <tr>
@@ -662,32 +697,27 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>29</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>298</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>344</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>2010</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>987654321.1234567890</td>
+	<td>verifyElementPresent</td>
+	<td>link=Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=a[title=&quot;name&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>ABC111222333</td>
+	<td>Children</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Games</td>
 	<td></td>
 </tr>
 <tr>
@@ -706,23 +736,33 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Child Development</td>
+	<td>verifyTextPresent</td>
+	<td>987654321.1234567890</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Child Development</td>
+	<td>ABC111222333</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Children</td>
+	<td>298</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Games</td>
+	<td>344</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>29</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Supplement</td>
 	<td></td>
 </tr>
 <!--Log out-->

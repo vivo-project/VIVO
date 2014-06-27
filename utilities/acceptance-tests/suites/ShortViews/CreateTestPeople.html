@@ -107,7 +107,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-preferredTitle &gt; img.add-individual</td>
+	<td>css=header &gt; #ARG_2000028 &gt; a.add-ARG_2000028 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -116,13 +116,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>tinymce</td>
+	<td>id=preferredTitle</td>
 	<td>Professor</td>
 </tr>
 <tr>
@@ -177,8 +172,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-hasMemberRole &gt; img.add-individual</td>
+	<td>css=a.add-RO_0000053 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -191,12 +191,27 @@
 	<td>id=typeSelector</td>
 	<td>label=Academic Department</td>
 </tr>
+<!--Select Department A-->
 <tr>
 	<td>type</td>
 	<td>id=activity</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=activity</td>
 	<td>Depart</td>
 </tr>
-<!--Select Department A-->
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=activity</td>
+	<td>${KEY_DOWN}</td>
+</tr>
 <tr>
 	<td>click</td>
 	<td>id=ui-active-menuitem</td>
@@ -259,8 +274,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-hasLeaderRole &gt; img.add-individual</td>
+	<td>css=a.add-RO_0000053 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -273,12 +293,27 @@
 	<td>id=typeSelector</td>
 	<td>label=Department</td>
 </tr>
+<!--Select Department B-->
 <tr>
 	<td>type</td>
 	<td>id=activity</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=activity</td>
 	<td>Depart</td>
 </tr>
-<!--Select Department B-->
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=activity</td>
+	<td>${KEY_DOWN}</td>
+</tr>
 <tr>
 	<td>click</td>
 	<td>id=ui-active-menuitem</td>
@@ -428,8 +463,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
 	<td>Person (5)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Person</td>
 	<td></td>
 </tr>
 <tr>
@@ -448,8 +493,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Baker, Able Professor </td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td> Dog, Charlie Member of Department A </td>
 	<td></td>
 </tr>
 <tr>
@@ -458,8 +513,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td> Foxtrot, Echo Member of Department B</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Foxtrot, Echo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Henry, George </td>
 	<td></td>
 </tr>
 <tr>
@@ -493,8 +558,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Baker, Able Professor </td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dog, Charlie Faculty Member Member of Department A </td>
 	<td></td>
 </tr>
 <tr>
@@ -503,13 +578,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Foxtrot, Echo Faculty Member Member of Department B</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Foxtrot, Echo</td>
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Henry, George Faculty Member </td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Henry, George</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Jenkins, Iris</td>
 	<td></td>
 </tr>
 <tr>

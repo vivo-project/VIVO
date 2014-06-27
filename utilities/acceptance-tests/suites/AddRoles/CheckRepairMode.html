@@ -88,7 +88,7 @@
 <!--Create a membership role in the front end-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasMemberRole']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[9]</td>
 	<td></td>
 </tr>
 <tr>
@@ -153,13 +153,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>css=li.selectedGroupTab.clickable</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Member at Large 1999 - 2009</td>
+	<td>Member at Large</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1999 - 2009</td>
 	<td></td>
 </tr>
 <!--Go to role node in backend editing-->
@@ -211,7 +221,7 @@
 </tr>
 <!--Delete relationship between role node and non-person thing-->
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>//input[@value='Delete']</td>
 	<td></td>
 </tr>
@@ -294,6 +304,11 @@
 </tr>
 <!--Verify condition of MEMBER OF-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[18]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
 	<td>missing activity Member at Large 1999 - 2009</td>
 	<td></td>
@@ -306,7 +321,7 @@
 <!--Edit MEMBER OF to add data back-->
 <tr>
 	<td>clickAndWait</td>
-	<td>xpath=(//img[@alt='edit'])[5]</td>
+	<td>xpath=(//img[@alt='edit this entry'])[5]</td>
 	<td></td>
 </tr>
 <tr>
@@ -337,7 +352,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Please enter or select a value in the Name field.</td>
+	<td>Please select a type from the drop-down list.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please select an existing value or enter a new value in the Name field.</td>
 	<td></td>
 </tr>
 <!--Have to re-select Association-->
@@ -358,17 +378,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Association Name</td>
+	<td>Organization Name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Role in Association</td>
+	<td>Role in Organization</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Years of Participation in Association</td>
+	<td>Years of Participation</td>
 	<td></td>
 </tr>
 <tr>
@@ -394,7 +414,7 @@
 <!--Forgot to enter name of organization so error occurred-->
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Please enter or select a value in the Name field.</td>
+	<td>Please select an existing value or enter a new value in the Name field.</td>
 	<td></td>
 </tr>
 <!--Now enter the missing information-->
@@ -429,13 +449,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=LITA Too</td>
+	<td>verifyTextPresent</td>
+	<td>Member at Large 1999 - 2009</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Member at Large 1999 - 2009</td>
+	<td>verifyElementPresent</td>
+	<td>link=LITA Too</td>
 	<td></td>
 </tr>
 <!--Log out-->

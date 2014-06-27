@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-select>    
+        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
+        PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX obo:   &lt;http://purl.obolibrary.org/obo/&gt;
+
+        SELECT DISTINCT ?grantOrContract
+                        ?label
+
+        WHERE {
+                    ?subject ?property ?grantOrContract .
+                    OPTIONAL { ?grantOrContract rdfs:label ?label .
+                    }                
+        }  ORDER BY  ?label
+  </query-select>
+    
+    <query-construct>
+        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
+        PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX obo:   &lt;http://purl.obolibrary.org/obo/&gt;
+
+            CONSTRUCT {
+                ?subject ?property ?grantOrContract .
+                ?grantOrContract rdfs:label ?label .
+            } WHERE {
+            {
+                ?subject ?property ?grantOrContract .
+            } UNION {
+                ?subject ?property ?grantOrContract .
+                ?grantOrContract a core:Grant .
+                ?grantOrContract rdfs:label ?label .
+            } UNION {
+                ?subject ?property ?grantOrContract .
+                ?grantOrContract a core:Contract .
+                ?grantOrContract rdfs:label ?label .
+            }
+        }
+    </query-construct>
+              
+    <template>propStatement-organizationAwardsGrant.ftl</template>
+</list-view-config>

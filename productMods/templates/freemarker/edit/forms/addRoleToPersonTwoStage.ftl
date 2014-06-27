@@ -179,7 +179,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
             </div>
 
             <#if showRoleLabelField = true>
-            <p><label for="roleLabel">${i18n().role_in} ${genericLabel?capitalize} ${requiredHint} ${roleExamples}</label>
+            <p><label for="roleLabel">${i18n().role_in} ${genericLabel?capitalize} ${roleExamples}</label>
                 <input  size="50"  type="text" id="roleLabel" name="roleLabel" value="${roleLabel}" />
             </p>
         	</#if>

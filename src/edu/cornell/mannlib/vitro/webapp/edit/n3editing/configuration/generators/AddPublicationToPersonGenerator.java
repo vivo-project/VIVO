@@ -937,7 +937,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         String query = "PREFIX core:<" + vivoCore + "> " + 
         "SELECT ?pubUri WHERE { " + 
         "<" + subject + "> core:relatedBy ?authorshipUri . " + 
-        "?authorship a core:Authorship . " +  
+        "?authorshipUri a core:Authorship . " +  
         "?authorshipUri core:relates ?pubUri . }";
         return query;
     }

@@ -10,14 +10,14 @@ into an HTML file so we can easily compare them.
 --------------------------------------------------------------------------------
 =end
 
-require "#{File.dirname(__FILE__)}/subscripts/loadParms"
-require "#{File.dirname(__FILE__)}/subscripts/test_result_merger"
+require File.expand_path('subscripts/common', File.dirname(__FILE__))
+require 'subscripts/test_result_merger'
 
 properties  = {}
 
-source_dir = "/home/jeb228/LoadTesting/testinfo/results/#{@site_name}"
+source_dir = "#{@home}/testinfo/results/#{@site_name}"
 properties["source_directory"] = source_dir
-properties["target_directory"] = "/var/www/html/loadTesting/"
+properties["target_directory"] = "#{@home}/webpages/"
 properties["site_name"] = "#{@site_name}"
 
 suggestions = []
@@ -38,5 +38,3 @@ trm = TestResultMerger.new(properties)
 trm.merge
 
 puts "TestResultMerger was successful."
-
-

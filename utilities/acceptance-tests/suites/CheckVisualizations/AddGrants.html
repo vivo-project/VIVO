@@ -87,8 +87,13 @@
 </tr>
 <!--Add first grant-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[6]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasPrincipalInvestigatorRole']/a/img</td>
+	<td>css=#researchGroup &gt; article.property &gt; #RO_0000053 &gt; a.add-RO_0000053 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -124,7 +129,7 @@
 <!--Add second grant-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasInvestigatorRole']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[22]</td>
 	<td></td>
 </tr>
 <tr>
@@ -155,7 +160,7 @@
 <!--Add third grant-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasCo-PrincipalInvestigatorRole']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[23]</td>
 	<td></td>
 </tr>
 <tr>
@@ -191,7 +196,7 @@
 <!--Add fourth grant-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasCo-PrincipalInvestigatorRole']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[23]</td>
 	<td></td>
 </tr>
 <tr>
@@ -221,8 +226,13 @@
 </tr>
 <!--Verify Network Display-->
 <tr>
+	<td>verifyElementPresent</td>
+	<td>link=Co-investigator Network</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>link=Co-Investigator Network</td>
+	<td>link=Co-investigator Network</td>
 	<td></td>
 </tr>
 <tr>
@@ -231,13 +241,33 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank - Person Level Visualization</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
-	<td>link=Co-Author Network</td>
+	<td>id=ego_label</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Co-author Network</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Co-Investigator Network</td>
+	<td>Co-investigator Network</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=(GraphML File)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=profileUrl</td>
 	<td></td>
 </tr>
 <tr>
@@ -267,7 +297,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>from 2002 through 2011</td>
+	<td>from 2002 through 2013</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=(.CSV File)</td>
 	<td></td>
 </tr>
 <tr>
@@ -277,7 +312,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>from 2002 through 2011</td>
+	<td>from 2004 through 2013</td>
 	<td></td>
 </tr>
 <tr>
@@ -287,7 +322,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>The information in the following tables is for all years.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Grants per year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=caption &gt; a</td>
 	<td></td>
 </tr>
 <tr>
@@ -323,16 +368,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>2010</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>0 co-investigators</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>from 2002 through 2011</td>
 	<td></td>
 </tr>
 <!--Log out-->

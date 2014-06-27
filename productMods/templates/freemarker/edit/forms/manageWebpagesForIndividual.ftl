@@ -36,10 +36,11 @@
             </#if>
             
             <span class="webpageName">
-                <a href="${webpage.url}" title="${i18n().webpage_url}">${anchor}</a>
+                <a href="${webpage.url}" title="${i18n().webpage_url}">${anchor}</a> 
+                <#if webpage.typeLabel??>(<#if webpage.typeLabel == "URL">Standard Web Link<#else>${webpage.typeLabel}</#if></#if>)
             </span>
             <span class="editingLinks">
-                <a href="${baseEditWebpageUrl}&objectUri=${webpage.vcard}&predicateUri=${predicateUri}&linkUri=${webpage.link}" class="edit" title="${i18n().edit_webpage_link}">${i18n().edit_capitalized}</a> | 
+                <a href="${baseEditWebpageUrl}&objectUri=${webpage.vcard}&predicateUri=${predicateUri}&linkUri=${webpage.link}&rangeUri=${editConfiguration.rangeUri?url}&domainUri=${editConfiguration.domainUri?url}" class="edit" title="${i18n().edit_webpage_link}">${i18n().edit_capitalized}</a> | 
                 <a href="${urls.base}${deleteWebpageUrl}" class="remove" title="${i18n().delete_webpage_link}">${i18n().delete_button}</a> 
             </span>
         </li>    
@@ -84,4 +85,3 @@ ${scripts.add('<script type="text/javascript" src="${urls.base}/js/utils.js"></s
               '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
               '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/manageWebpagesForIndividual.js"></script>')}
-

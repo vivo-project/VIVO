@@ -9,15 +9,15 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.lang.StringEscapeUtils;
 
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.Syntax;
 import com.hp.hpl.jena.rdf.model.Model;
 
-import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.Actions;
+import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
@@ -44,7 +44,7 @@ public class ShortURLVisualizationController extends FreemarkerHttpServlet {
     public static ServletContext servletContext;
     
     @Override
-    protected Actions requiredActions(VitroRequest vreq) {
+    protected AuthorizationRequest requiredActions(VitroRequest vreq) {
     	/*
     	 * Based on the query parameters passed via URI get the appropriate visualization 
     	 * request handler.
@@ -54,7 +54,7 @@ public class ShortURLVisualizationController extends FreemarkerHttpServlet {
     	
     	if (visRequestHandler != null) {
     		
-    		Actions requiredPrivileges = visRequestHandler.getRequiredPrivileges();
+    		AuthorizationRequest requiredPrivileges = visRequestHandler.getRequiredPrivileges();
 			if (requiredPrivileges != null) {
     			return requiredPrivileges;
     		}

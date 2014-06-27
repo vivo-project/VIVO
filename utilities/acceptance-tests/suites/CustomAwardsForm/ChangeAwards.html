@@ -87,6 +87,11 @@
 </tr>
 <!--Verify position to be changed exisit-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[12]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
 	<td>Best Professor, conferred by Carroll College, 2012</td>
 	<td></td>
@@ -134,7 +139,7 @@
 <!--Correct the date of the Best Professor award-->
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.edit-awardOrHonor &gt; img.edit-individual</td>
+	<td>css=a.edit-relatedBy &gt; img.edit-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -206,7 +211,7 @@
 <!--Remove year but add year range to Primate Expert award-->
 <tr>
 	<td>clickAndWait</td>
-	<td>xpath=(//img[@alt='edit'])[4]</td>
+	<td>xpath=(//img[@alt='edit this entry'])[4]</td>
 	<td></td>
 </tr>
 <tr>
@@ -285,10 +290,15 @@
 	<td>link=Primates-R-Us</td>
 	<td></td>
 </tr>
-<!--Remove the year for the last award-->
+<!--Remove the year for the Professor of the Decade award-->
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.edit-awardOrHonor &gt; img.edit-individual</td>
+	<td>css=a.edit-relatedBy &gt; img.edit-individual</td>
 	<td></td>
 </tr>
 <tr>

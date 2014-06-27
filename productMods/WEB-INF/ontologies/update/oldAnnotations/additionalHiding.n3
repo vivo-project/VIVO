@@ -1,0 +1,45 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#> .
+@prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix datagetter: <java:edu/cornell/mannlib/vitro/webapp/utils/datagetter/> .
+@prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix role:  <http://vitro.mannlib.cornell.edu/ns/vitro/role#> .
+@prefix local: <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/> .
+@prefix vivo: <http://vivoweb.org/ontology/core#> . 
+
+@base <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration> .
+
+
+# warning: don't use blank nodes; the display model doesn't currently support them.
+
+<http://purl.obolibrary.org/obo/RO_0000053> 
+   vitro:hiddenFromDisplayBelowRoleLevelAnnot role:nobody ;
+   vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody .
+
+<http://purl.obolibrary.org/obo/ARG_2000028> 
+   vitro:hiddenFromDisplayBelowRoleLevelAnnot role:nobody ;
+   vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody .
+  
+vivo:relates 
+   vitro:hiddenFromDisplayBelowRoleLevelAnnot role:nobody ;
+   vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody .
+
+vivo:relatedBy 
+   vitro:hiddenFromDisplayBelowRoleLevelAnnot role:nobody ;
+   vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody .
+
+vivo:assigns 
+   vitro:hiddenFromDisplayBelowRoleLevelAnnot role:nobody ;
+   vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody .
+
+vivo:assignedBy 
+   vitro:hiddenFromDisplayBelowRoleLevelAnnot role:nobody ;
+   vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody .
+
+<http://purl.obolibrary.org/obo/RO_0000056>
+   vitro:hiddenFromDisplayBelowRoleLevelAnnot role:nobody ;
+   vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody .
+

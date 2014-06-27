@@ -73,9 +73,6 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <#if lvf.submissionErrorExists(editSubmission, "presentationLabel")>
  	        ${i18n().select_or_enter_name}
         </#if> 
-        <#if lvf.submissionErrorExists(editSubmission, "roleLabel")>
- 	        ${i18n().enter_new_role_value}
-        </#if> 
         <#list submissionErrors?keys as errorFieldName>
         	<#if errorFieldName == "startField">
         	    <#if submissionErrors[errorFieldName]?contains("before")>
@@ -128,7 +125,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <input class="acUriReceiver" type="hidden" id="presentationUri" name="existingPresentation" value="${existingPresentationValue}" ${flagClearLabelForExisting}="true" />
     </div>
      
-    <p><label for="roleLabel">${i18n().role_in} ${i18n().presentation_capitalized} ${requiredHint} <span class="hint">(${i18n().presentation_hint})</span></label>
+    <p><label for="roleLabel">${i18n().role_in} ${i18n().presentation_capitalized} <span class="hint">(${i18n().presentation_hint})</span></label>
         <input  size="50"  type="text" id="roleLabel" name="roleLabel" value="${roleLabelValue}" />
     </p>
   <p>

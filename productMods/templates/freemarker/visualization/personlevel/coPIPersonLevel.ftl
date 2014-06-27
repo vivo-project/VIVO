@@ -126,30 +126,9 @@ $(document).ready(function(){
 
 
 <div id="body">
-    <div id="ego_profile">
+    <div  class="sub_headings"><h2><a href="${egoVivoProfileURL}" title="${i18n().investigator_name}"><span id="ego_label"></span></a><br />${i18n().co_investigator_network_capitalized} </h2></div>
             
-        <#-- Label -->
-            <h2><a href="${egoVivoProfileURL}" title="${i18n().investigator_name}"><span id="ego_label" class="investigator_name"></span></a></h2>
-    
-        <#-- Moniker-->
-            <em id="ego_moniker" class="moniker"></em>
-        
-    </div>
-    
-    <div class = "toggle_visualization">
-        <div id="coauthorship_link_container" class="collaboratorship-link-container">
-        	<div class="collaboratorship-icon"><a href="${coauthorshipURL}" title="${i18n().co_author}"><img src="${coAuthorIcon}" alt="${i18n().co_author_icon}"/></a></div>
-            <div class="collaboratorship-link">
-                <h3><a href="${coauthorshipURL}" title="${i18n().co_author_network}">${i18n().co_author_network}</a></h3>
-            </div>
-        </div>
-    </div>
-        
-    <div style="clear:both;"></div>
-    
     <#if (numOfInvestigators?? && numOfInvestigators > 0) >
-    
-        <div class="sub_headings"><h3 >${i18n().co_investigator_network_capitalized} </h3></div>
         
         <#if (numOfCoInvestigations?? && numOfCoInvestigations > 0) || (numOfInvestigators?? && numOfInvestigators > 0) > 
                 <div class = "graphml-file-link"><a href="${egoCoInvestigationNetworkDataFileURL}" title="${i18n().co_investigator}">(GraphML ${i18n().file_capitalized})</a></div>
@@ -171,6 +150,18 @@ $(document).ready(function(){
         </span>
     
     </#if>
+    
+    <div class = "toggle_visualization">
+        <div id="coauthorship_link_container" class="collaboratorship-link-container">
+        	<div class="collaboratorship-icon"><a href="${coauthorshipURL}" title="${i18n().co_author}"><img src="${coAuthorIcon}" alt="${i18n().co_author_icon}"/></a></div>
+            <div class="collaboratorship-link">
+                <h3><a href="${coauthorshipURL}" title="${i18n().co_author_network}">${i18n().co_author_network}</a></h3>
+            </div>
+        </div>
+    </div>
+        
+    <div style="clear:both;"></div>
+    
             
     <#if (numOfCoInvestigations?? && numOfCoInvestigations > 0) || (numOfInvestigators?? && numOfInvestigators > 0) >
     

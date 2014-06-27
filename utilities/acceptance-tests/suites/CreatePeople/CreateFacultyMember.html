@@ -112,8 +112,13 @@
 </tr>
 <!--Make Jane Faculty an Assistant Professor-->
 <tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-preferredTitle &gt; img.add-individual</td>
+	<td>css=header &gt; #ARG_2000028 &gt; a.add-ARG_2000028 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -122,13 +127,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>tinymce</td>
+	<td>id=preferredTitle</td>
 	<td>Assistant Professor</td>
 </tr>
 <tr>
@@ -152,12 +152,33 @@
 	<td>Assistant Professor</td>
 	<td></td>
 </tr>
-<!--Logout-->
+<!--Verify front page updated-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No research content found.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<!--Logout-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log out</td>

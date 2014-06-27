@@ -21,7 +21,7 @@
 	<td>10000000</td>
 	<td></td>
 </tr>
-<!--Create a new unprivileged user-->
+<!--Create self-editor user named Jane Faculty-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -118,7 +118,27 @@
 <tr>
 	<td>type</td>
 	<td>id=associateProfileName</td>
-	<td>Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=associateProfileName</td>
+	<td>Faculty, Ja</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=associateProfileName</td>
+	<td>${KEY_DOWN}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>

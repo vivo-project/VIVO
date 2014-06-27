@@ -93,33 +93,7 @@
 <!--Cancel out before adding research activity-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasResearcherRole']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Create research activity entry for Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Research Activity Type</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<!--Cancel out after selecting research activity type-->
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='hasResearcherRole']/a/img</td>
+	<td>css=#RO_0000053-ResearcherRole &gt; a.add-RO_0000053 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -138,33 +112,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>typeSelector</td>
-	<td>label=Project</td>
-</tr>
-<tr>
 	<td>verifyTextPresent</td>
-	<td>Create research activity entry for Faculty, Jane</td>
+	<td>Research Activity Name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Research Activity Type</td>
+	<td>Role in Research Activity</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Project Name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Role in Project</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Years of Participation in Project</td>
+	<td>Years of Participation</td>
 	<td></td>
 </tr>
 <tr>
@@ -178,11 +137,26 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>link=Cancel</td>
 	<td></td>
 </tr>
-<!--Enter research activity without start year-->
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty, Jane</td>
+	<td></td>
+</tr>
+<!--Cancel out after selecting research activity type-->
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#RO_0000053-ResearcherRole &gt; a.add-RO_0000053 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Create research activity entry for Faculty, Jane</td>
@@ -191,6 +165,31 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Research Activity Type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Research Activity Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Role in Research Activity</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Years of Participation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <tr>
@@ -210,17 +209,73 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Project Name</td>
+	<td>Research Activity Name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Role in Project</td>
+	<td>Role in Research Activity</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Years of Participation in Project</td>
+	<td>Years of Participation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>End Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<!--Enter research activity without start year-->
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#RO_0000053-ResearcherRole &gt; a.add-RO_0000053 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>typeSelector</td>
+	<td>label=Project</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create research activity entry for Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Research Activity Type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Research Activity Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Role in Research Activity</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Years of Participation</td>
 	<td></td>
 </tr>
 <tr>
@@ -287,7 +342,7 @@
 <!--Add research activity - grant-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasResearcherRole']/a/img</td>
+	<td>css=#RO_0000053-ResearcherRole &gt; a.add-RO_0000053 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -322,17 +377,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Grant Name</td>
+	<td>Research Activity Name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Role in Grant</td>
+	<td>Role in Research Activity</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Years of Participation in Grant</td>
+	<td>Years of Participation</td>
 	<td></td>
 </tr>
 <tr>
@@ -403,8 +458,13 @@
 </tr>
 <!--Add teaching activity - conference-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[8]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasTeacherRole']/a/img</td>
+	<td>css=#teachingGroup &gt; article.property &gt; #RO_0000053 &gt; a.add-RO_0000053 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -429,17 +489,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Conference Name</td>
+	<td>Teaching Activity Name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Role in Conference</td>
+	<td>Role in Teaching Activity</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Years of Participation in Conference</td>
+	<td>Years of Participation</td>
 	<td></td>
 </tr>
 <tr>
@@ -511,7 +571,7 @@
 <!--Add teaching activity - course-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasTeacherRole']/a/img</td>
+	<td>css=#teachingGroup &gt; article.property &gt; #RO_0000053 &gt; a.add-RO_0000053 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -536,17 +596,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Course Name</td>
+	<td>Teaching Activity Name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Role in Course</td>
+	<td>Role in Teaching Activity</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Years of Participation in Course</td>
+	<td>Years of Participation</td>
 	<td></td>
 </tr>
 <tr>
@@ -618,7 +678,7 @@
 <!--Add teaching activity - workshop-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasTeacherRole']/a/img</td>
+	<td>css=#teachingGroup &gt; article.property &gt; #RO_0000053 &gt; a.add-RO_0000053 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -643,17 +703,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Workshop Name</td>
+	<td>Teaching Activity Name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Role in Workshop</td>
+	<td>Role in Teaching Activity</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Years of Participation in Workshop</td>
+	<td>Years of Participation</td>
 	<td></td>
 </tr>
 <tr>
@@ -724,8 +784,13 @@
 </tr>
 <!--Add clinical activity - project-->
 <tr>
+	<td>click</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasClinicalRole']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[11]</td>
 	<td></td>
 </tr>
 <tr>
@@ -760,17 +825,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Project Name</td>
+	<td>Clinical Activity Name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Role in Project</td>
+	<td>Role in Clinical Activity</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Years of Participation in Project</td>
+	<td>Years of Participation</td>
 	<td></td>
 </tr>
 <tr>
@@ -842,7 +907,7 @@
 <!--Add clinical activity - service-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasClinicalRole']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[11]</td>
 	<td></td>
 </tr>
 <tr>
@@ -877,17 +942,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Service Name</td>
+	<td>Clinical Activity Name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Role in Service</td>
+	<td>Role in Clinical Activity</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Years of Participation in Service</td>
+	<td>Years of Participation</td>
 	<td></td>
 </tr>
 <tr>
@@ -958,6 +1023,11 @@
 </tr>
 <!--Verify activities displayed for Jane Faculty-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[10]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Prototype New Ape Home</td>
 	<td></td>
@@ -1025,6 +1095,222 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Ape World Planner 2009</td>
+	<td></td>
+</tr>
+<!--Verify front page display-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=View all ...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Grant (5)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Habitats for Apes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=NIH VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=NIH VIVO Too</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=VIVO Cornell Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=VIVO Cornell Grant Too</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Assistant Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=a[alt=&quot;view all faculty&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>People</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty Member (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Librarian (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Person (2)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Faculty Member (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Assistant Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Librarian (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Librarian, Lily</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Associate Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Person (2)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Assistant Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Librarian, Lily</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Associate Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=p.stats-count</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//ul[@id='stats']/li[2]/a/p</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//ul[@id='stats']/li[3]/a/p</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//ul[@id='stats']/li[4]/a/p</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//ul[@id='stats']/li[5]/a/p</td>
 	<td></td>
 </tr>
 <!--Log out-->

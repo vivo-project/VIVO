@@ -82,8 +82,8 @@
 </tr>
 <!--Verify that core:Hour exists-->
 <tr>
-	<td>verifyTextPresent</td>
-	<td>exact:vivo:Hours</td>
+	<td>verifyElementPresent</td>
+	<td>link=Hours</td>
 	<td></td>
 </tr>
 <tr>
@@ -103,13 +103,13 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>VIVO core</td>
+	<td>http://vivo.mydomain.edu/individual/</td>
 	<td></td>
 </tr>
 <!--Navigate to core:Hours-->
 <tr>
 	<td>clickAndWait</td>
-	<td>link=vivo:Hours</td>
+	<td>link=Hours</td>
 	<td></td>
 </tr>
 <tr>
@@ -130,7 +130,7 @@
 <!--Verify core:Hours info is correct-->
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=exact:vivo:Hours</td>
+	<td>link=Hours</td>
 	<td></td>
 </tr>
 <tr>
@@ -150,37 +150,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>VIVO core</td>
+	<td>http://vivo.mydomain.edu/individual/</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=exact:vivo:Hours</td>
+	<td>link=Hours</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>Class Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Site Admin</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Class groups</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
 	<td></td>
 </tr>
 <!--View class groups-->

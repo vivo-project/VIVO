@@ -93,7 +93,7 @@
 <!--Cancel out before adding attendee role-->
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-hasAttendeeRole &gt; img.add-individual</td>
+	<td>xpath=(//img[@alt='add'])[12]</td>
 	<td></td>
 </tr>
 <tr>
@@ -124,7 +124,7 @@
 <!--Cancel out after selecting event type-->
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-hasAttendeeRole</td>
+	<td>xpath=(//img[@alt='add'])[12]</td>
 	<td></td>
 </tr>
 <tr>
@@ -148,12 +148,17 @@
 	<td>label=Conference</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>link=Cancel</td>
 	<td></td>
 </tr>
 <!--Enter attendance at conference-->
 <tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//img[@alt='add'])[12]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
 	<td></td>
@@ -175,12 +180,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Conference Name</td>
+	<td>Event Name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Years of Participation in Conference</td>
+	<td>Years of Participation</td>
 	<td></td>
 </tr>
 <tr>
@@ -251,13 +256,18 @@
 </tr>
 <!--Verify display-->
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=PoA Annual Conference</td>
+	<td>click</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>2000 - 2010</td>
+	<td>PoA Annual Conference 2000 - 2010</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=PoA Annual Conference</td>
 	<td></td>
 </tr>
 <!--Log out-->

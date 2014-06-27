@@ -581,6 +581,10 @@ var addAuthorForm = {
             
             this.labelField.val(name);
         }
+		// If user selected org via autocomplete, clear the org name field
+		if ( this.orgUriField.val() != '' ) {
+			this.orgName.val("");
+		}
 
     },    
     
@@ -765,6 +769,7 @@ var addAuthorForm = {
 	    if ( authType == "org" ) {
 	        this.personSection.hide();
 	        this.orgSection.show();
+			this.orgNameWrapper.show();
 	        // person fields
             this.personRadio.attr('checked', false);  // needed for reset when cancel button is clicked
 	        this.acSelector.removeClass("acSelector");

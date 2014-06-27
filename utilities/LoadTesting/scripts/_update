@@ -9,13 +9,12 @@ Use SVN to get the latest revisions to the currently-selected distro.
 --------------------------------------------------------------------------------
 =end
 
-require "#{File.dirname(__FILE__)}/subscripts/loadParms"
+require File.expand_path('subscripts/common', File.dirname(__FILE__))
 
-Dir.chdir("/home/jeb228/LoadTesting/distros/#{@distro_name}/vitro") do |path|
-  system "svn update"
+if (@is_git)
+  Dir.chdir(distro_file('Vitro')) { |path| system "git pull" }
+  Dir.chdir(distro_file('VIVO'))  { |path| system "git pull" }
+else
+  Dir.chdir(distro_file('vitro')) { |path| system "svn update" }
+  Dir.chdir(distro_file('vivo'))  { |path| system "svn update" }
 end
-
-Dir.chdir("/home/jeb228/LoadTesting/distros/#{@distro_name}/vivo") do |path|
-  system "svn update"
-end
-

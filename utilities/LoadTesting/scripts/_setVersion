@@ -10,12 +10,18 @@ record that choice.
 --------------------------------------------------------------------------------
 =end
 
-@version_parms_file = "#{File.dirname(__FILE__)}/subscripts/_current_version.rb"
+begin
+  require File.expand_path('subscripts/common', File.dirname(__FILE__))
+rescue LoadError => e
+  puts e
+end
+
+@version_parms_file = "#{@home}/scripts/subscripts/_current_version.rb"
 
 # Find out what versions we have available
 def build_version_list()
   @version_names = []
-  Dir.foreach("/home/jeb228/LoadTesting/versions") do |filename|
+  Dir.foreach("#{@home}/versions") do |filename|
     @version_names.push(filename) unless (filename[0,1] == "_") || (filename[0,1] == ".")
   end
   @version_names.sort!

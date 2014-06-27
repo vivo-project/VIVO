@@ -3,13 +3,12 @@
 package edu.cornell.mannlib.vitro.webapp.visualization.visutils;
 
 import org.apache.commons.lang.StringUtils;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.jena.iri.IRI;
+import org.apache.jena.iri.IRIFactory;
+import org.apache.jena.iri.Violation;
 
-import com.hp.hpl.jena.iri.IRI;
-import com.hp.hpl.jena.iri.IRIFactory;
-import com.hp.hpl.jena.iri.Violation;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
@@ -99,8 +98,11 @@ public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
 							+ "SELECT "
 							+ "		(str(?predicate) as ?" + QueryFieldLabels.PREDICATE + ") " 
 							+ "		(str(?object) as ?" + QueryFieldLabels.OBJECT + ") "
-							+ "WHERE { "
-							+ "<" + queryURI + "> ?predicate ?object.  "
+							+ "WHERE { {"
+							+ "<" + queryURI + "> ?predicate ?object.  }"
+							+ "UNION {<" + queryURI + ">  <http://purl.obolibrary.org/obo/ARG_2000028> ?vCard . "
+							+ "?vCard <http://www.w3.org/2006/vcard/ns#hasTitle> ?vTitle . "
+							+ "?vTitle ?predicate ?object . }"
 							+ filterClause
 							+ "}";
             	

@@ -23,7 +23,7 @@ $(document).ready(function(){
         var individualList = "";
 
         if ( facultyMemberCount > 0 ) {        
-            // determine the row at which to start the solr query
+            // determine the row at which to start the search query
             var rowStart = Math.floor((Math.random()*facultyMemberCount));
             var diff;
             var pageSize = 4; // the number of faculty to display on the home page
@@ -34,7 +34,7 @@ $(document).ready(function(){
             }
 
             // in case the random number is equal to or within 3 of the facultyMemberCount 
-            // subtract 1 from the facultyMemberCount because the Solr rows begin at 0, not 1
+            // subtract 1 from the facultyMemberCount because the search rows begin at 0, not 1
             if ( (rowStart + (pageSize-1)) > (facultyMemberCount-1) ) {
                 diff = (rowStart + (pageSize-1)) - (facultyMemberCount-1);
                 if ( diff == 0 ) {
@@ -48,7 +48,7 @@ $(document).ready(function(){
                 rowStart = 0;
             }
 
-            var dataServiceUrl = urlsBase + "/dataservice?getRandomSolrIndividualsByVClass=1&vclassId=";
+            var dataServiceUrl = urlsBase + "/dataservice?getRandomSearchIndividualsByVClass=1&vclassId=";
             var url = dataServiceUrl + encodeURIComponent("http://vivoweb.org/ontology/core#FacultyMember");
             url += "&page=" + rowStart + "&pageSize=" + pageSize;
 
@@ -87,7 +87,7 @@ $(document).ready(function(){
                     });
                     var viewMore = "<ul id='viewMoreFac'><li><a href='"
                                 + urlsBase
-                                + "/people/%23http://vivoweb.org/ontology/core%23FacultyMember' alt='" 
+                                + "/people#http://vivoweb.org/ontology/core#FacultyMember' alt='" 
                                 + i18nStrings.viewAllFaculty + "'>"
                                 + i18nStrings.viewAllString + "</a></li?</ul>";
                     $('div#research-faculty-mbrs').append(viewMore);
@@ -155,7 +155,7 @@ $(document).ready(function(){
             html += "</ul><ul style='list-style:none'>"
                     + "<li style='font-size:0.9em;text-align:right;padding: 6px 16px 0 0'><a href='" 
                     + urlsBase 
-                    + "/organizations/%23http://vivoweb.org/ontology/core%23AcademicDepartment' alt='" 
+                    + "/organizations#http://vivoweb.org/ontology/core#AcademicDepartment' alt='" 
                     + i18nStrings.viewAllDepartments + "'>" 
                     + i18nStrings.viewAllString + "</a></li></ul>";
         }

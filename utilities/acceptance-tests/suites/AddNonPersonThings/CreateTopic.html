@@ -138,7 +138,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Please enter a value in the name field.</td>
+	<td>Please enter a value in the Name field.</td>
 	<td></td>
 </tr>
 <!--Now enter something in the field-->
@@ -158,6 +158,11 @@
 	<td></td>
 </tr>
 <!--Test overview entry (image and webpage have been tested)-->
+<tr>
+	<td>click</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='broader']/a/img</td>
@@ -216,12 +221,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create &quot;narrower term&quot; entry for Primate Health</td>
+	<td>Create &quot;narrower concept&quot; entry for Primate Health</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=label</td>
 	<td>Primate Diet</td>
 </tr>
 <tr>
@@ -261,12 +266,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create &quot;related&quot; entry for Primate Health</td>
+	<td>Create &quot;related concept&quot; entry for Primate Health</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=name</td>
+	<td>id=label</td>
 	<td>Ape Health</td>
 </tr>
 <tr>
@@ -281,18 +286,18 @@
 </tr>
 <!--Verify everything entered is displaying properly-->
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Animal Health</td>
+	<td>verifyElementPresent</td>
+	<td>link=Animal Health</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Primate Diet</td>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Diet</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Ape Health</td>
+	<td>verifyElementPresent</td>
+	<td>link=Ape Health</td>
 	<td></td>
 </tr>
 <!--Logout-->

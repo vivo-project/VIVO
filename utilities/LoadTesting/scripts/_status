@@ -8,13 +8,14 @@ Show the SVN status of the currently-selected distro, both VIVO and Vitro.
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 =end
-require "#{File.dirname(__FILE__)}/subscripts/loadParms"
 
-Dir.chdir("/home/jeb228/LoadTesting/distros/#{@distro_name}/vitro") do |path|
-  system "svn status -u"
-end
+require File.expand_path('subscripts/common', File.dirname(__FILE__))
 
-Dir.chdir("/home/jeb228/LoadTesting/distros/#{@distro_name}/vivo") do |path|
-  system "svn status -u"
+if (@is_git)
+  Dir.chdir(distro_file('Vitro')) { |path| system "svn status -u" }
+  Dir.chdir(distro_file('VIVO'))  { |path| system "svn status -u" }
+else
+  Dir.chdir(distro_file('vitro')) { |path| system "svn status -u" }
+  Dir.chdir(distro_file('vivo'))  { |path| system "svn status -u" }
 end
 

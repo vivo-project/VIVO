@@ -315,6 +315,7 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
         " ?existingAdvisee <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         " ?existingAdvisee a <" + adviseeClass + ">  . \n" +
         " ?existingAdvisee <http://purl.obolibrary.org/obo/RO_0000053> ?existingAdviseeRole . \n" +
+		" ?existingAdviseeRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         " ?existingAdviseeRole a <" + adviseeRoleClass + ">  . \n" +
         "}";
 
@@ -327,6 +328,7 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
         " ?existingAdvisee a <" + adviseeClass + ">  . \n" +
         " ?existingAdvisee <"  + label + "> ?existingAdviseeLabel . \n" +
         " ?existingAdvisee <http://purl.obolibrary.org/obo/RO_0000053> ?existingAdviseeRole . \n" +
+		" ?existingAdviseeRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         " ?existingAdviseeRole a <" + adviseeRoleClass + ">  . \n" +
         "}";
 

@@ -40,3 +40,6 @@ productMods/js/jquery_plugins/jquery.truncator.js
 
 # Part of the OpenSocial integration - should this really be under the Apache license?
 themes/wilma/css/openSocial/gadgets.css
+
+# JQuery for the Selenium test helper app.
+utilities/acceptance-tests/testApp/js/jquery.js

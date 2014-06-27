@@ -87,8 +87,13 @@
 </tr>
 <!--Add a book-->
 <tr>
+	<td>click</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td>css=#relatedBy-Authorship &gt; a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -188,7 +193,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>label</td>
 	<td>Putnam</td>
 </tr>
 <tr>
@@ -198,7 +203,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>exact:Nintendo: Good or Bad for Kids?</td>
+	<td>Nintendo: Good or Bad for Kids?</td>
 	<td></td>
 </tr>
 <tr>
@@ -285,7 +290,7 @@
 <!--Add an Article-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td>css=#relatedBy-Authorship &gt; a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -410,7 +415,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>label</td>
 	<td>Childhood Today</td>
 </tr>
 <tr>
@@ -472,7 +477,7 @@
 <!--Add a Chapter-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td>css=#relatedBy-Authorship &gt; a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -649,7 +654,7 @@
 <!--Add a Conference-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td>css=#relatedBy-Authorship &gt; a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -709,7 +714,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>label</td>
 	<td>Game World 2005</td>
 </tr>
 <tr>
@@ -773,6 +778,12 @@
 	<td>5000</td>
 	<td></td>
 </tr>
+<!--Verify there are no co-investigators-->
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Co-investigator Network</td>
+	<td></td>
+</tr>
 <!--Verify Publication and Network Display-->
 <tr>
 	<td>verifyTextPresent</td>
@@ -781,7 +792,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>3 in the last 10 full</td>
+	<td>2 in the last 10 full</td>
 	<td></td>
 </tr>
 <tr>
@@ -791,22 +802,17 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Co-Author Network</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Co-Investigator Network</td>
+	<td>link=Co-author Network</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Map Of Science</td>
+	<td>link=Map of Science</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Co-Author Network</td>
+	<td>link=Co-author Network</td>
 	<td></td>
 </tr>
 <tr>
@@ -821,7 +827,22 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Co-Author Network</td>
+	<td>Furter, Frank </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Co-author Network</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=(GraphML File)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=(GraphML File)</td>
 	<td></td>
 </tr>
 <tr>
@@ -851,7 +872,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>from 2001 to 2011</td>
+	<td>from 2001 to 2013</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=(.CSV File)</td>
 	<td></td>
 </tr>
 <tr>
@@ -861,7 +887,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>from 2001 to 2011</td>
+	<td>from 2004 to 2013</td>
 	<td></td>
 </tr>
 <tr>
@@ -872,6 +898,11 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Publications per year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=caption &gt; a</td>
 	<td></td>
 </tr>
 <tr>
@@ -912,22 +943,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>1</td>
-	<td></td>
-</tr>
-<!--Verify there are no co-investigators-->
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Co-Investigator Network</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Person Level Visualization</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Currently there are no grants for this investigator in the VIVO database.</td>
 	<td></td>
 </tr>
 <!--Log out-->

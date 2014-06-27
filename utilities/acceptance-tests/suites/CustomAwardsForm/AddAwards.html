@@ -87,8 +87,18 @@
 </tr>
 <!--Select awards editing-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[12]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-awardOrHonor &gt; img.add-individual</td>
+	<td>xpath=(//img[@alt='add'])[40]</td>
 	<td></td>
 </tr>
 <tr>
@@ -109,8 +119,13 @@
 </tr>
 <!--Add only organization name, which results in error-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[12]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-awardOrHonor &gt; img.add-individual</td>
+	<td>xpath=(//img[@alt='add'])[40]</td>
 	<td></td>
 </tr>
 <tr>
@@ -188,7 +203,7 @@
 <!--Add second award using same organization-->
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-awardOrHonor &gt; img.add-individual</td>
+	<td>xpath=(//img[@alt='add'])[40]</td>
 	<td></td>
 </tr>
 <tr>
@@ -204,7 +219,22 @@
 <tr>
 	<td>type</td>
 	<td>id=org</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=org</td>
 	<td>Carr</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=org</td>
+	<td>${KEY_DOWN}</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -270,7 +300,7 @@
 <!--Add third award using new organization-->
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-awardOrHonor &gt; img.add-individual</td>
+	<td>xpath=(//img[@alt='add'])[40]</td>
 	<td></td>
 </tr>
 <tr>
@@ -396,8 +426,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Carroll College</td>
+	<td>verifyTextPresent</td>
+	<td>Best Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Award or Honor</td>
 	<td></td>
 </tr>
 <tr>
@@ -407,12 +442,17 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Best Professor (Faculty, Jane - 2012)</td>
+	<td>css=a[title=&quot;name&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>Best Professor (Faculty, Jane - 2012)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Yearly award for the best professor across departments. </td>
 	<td></td>
 </tr>
 <tr>
@@ -422,7 +462,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Faculty, Jane Assistant Professor</td>
+	<td>Faculty, Jane&nbsp;&nbsp;&nbsp;Assistant Professor</td>
 	<td></td>
 </tr>
 <tr>
@@ -431,8 +471,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Yearly award for the best professor across departments. </td>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll College</td>
 	<td></td>
 </tr>
 <tr>
@@ -481,8 +521,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Carroll College</td>
+	<td>verifyTextPresent</td>
+	<td>Professor of the Decade</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Award or Honor</td>
 	<td></td>
 </tr>
 <tr>
@@ -492,7 +537,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Professor of the Decade (Faculty, Jane - 2010)</td>
+	<td>css=a[title=&quot;name&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -502,17 +547,52 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Professor of the Decade</td>
+	<td>Professor of the Decade (Faculty, Jane - 2010)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Professor of the Decade</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a[title=&quot;name&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Professor of the Decade (Faculty, Jane - 2010)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Professor of the Decade (Faculty, Jane - 2010)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Faculty, Jane Assistant Professor</td>
+	<td>Professor of the Decade (Faculty, Jane - 2010)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Professor of the Decade</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty, Jane&nbsp;&nbsp;&nbsp;Assistant Professor</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll College</td>
 	<td></td>
 </tr>
 <tr>
@@ -566,8 +646,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Primates-R-Us</td>
+	<td>verifyTextPresent</td>
+	<td>Primate Expert</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Award or Honor</td>
 	<td></td>
 </tr>
 <tr>
@@ -586,18 +671,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Primate Expert</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
+	<td>verifyTextPresent</td>
 	<td>Primate Expert (Faculty, Jane - 2005)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Faculty, Jane Assistant Professor </td>
+	<td>Yearly award for the person who does the most to improve the life of primates.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Expert</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty, Jane&nbsp;&nbsp;&nbsp;Assistant Professor</td>
 	<td></td>
 </tr>
 <tr>
@@ -606,8 +696,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Yearly award for the person who does the most to improve the life of primates.</td>
+	<td>verifyElementPresent</td>
+	<td>link=Primates-R-Us</td>
 	<td></td>
 </tr>
 <tr>

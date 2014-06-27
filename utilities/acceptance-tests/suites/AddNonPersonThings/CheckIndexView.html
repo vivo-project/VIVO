@@ -11,11 +11,7 @@
 <thead>
 <tr><td rowspan="1" colspan="3">CheckIndexView</td></tr>
 </thead><tbody>
-<tr>
-	<td>comment</td>
-	<td>Check index for browse links for roles</td>
-	<td></td>
-</tr>
+<!--Check index for browse links for roles-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -31,24 +27,17 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td>No need to login</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td>Navigate to Index</td>
-	<td></td>
-</tr>
+<!--No need to login-->
+<!--Navigate to index-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
 	<td></td>
 </tr>
+<!--Verify headings appear-->
 <tr>
-	<td>comment</td>
-	<td>Verify headings appear</td>
+	<td>verifyTextPresent</td>
+	<td>people</td>
 	<td></td>
 </tr>
 <tr>
@@ -86,24 +75,35 @@
 	<td>locations</td>
 	<td></td>
 </tr>
+<!--Verify counts are correct-->
 <tr>
-	<td>comment</td>
-	<td>Verify counts correct</td>
+	<td>verifyTextPresent</td>
+	<td>Person (1)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Agreement (3)</td>
+	<td>Project (1)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Service (1)</td>
+	<td>Research Project (1)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Course (1)</td>
+	<td>Service (2)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Transport Service (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Course (2)</td>
 	<td></td>
 </tr>
 <tr>
@@ -113,7 +113,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Event (4)</td>
+	<td>Event (7)</td>
 	<td></td>
 </tr>
 <tr>
@@ -123,12 +123,32 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Performance (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Presentation (1)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>College (1)</td>
+	<td>Seminar Series (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Workshop (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>College (2)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Company (1)</td>
 	<td></td>
 </tr>
 <tr>
@@ -148,7 +168,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Organization (5)</td>
+	<td>Organization (7)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>University (1)</td>
 	<td></td>
 </tr>
 <tr>
@@ -158,7 +183,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Award or Honor (1)</td>
+	<td>Article (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Award or Honor (2)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Blog Posting (1)</td>
 	<td></td>
 </tr>
 <tr>
@@ -168,7 +203,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Concept (5)</td>
+	<td>Concept (7)</td>
 	<td></td>
 </tr>
 <tr>
@@ -183,6 +218,16 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Human Study (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Patent (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Proceedings (1)</td>
 	<td></td>
 </tr>
@@ -193,17 +238,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Address (1)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Building (1)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Campus (1)</td>
+	<td>Building (2)</td>
 	<td></td>
 </tr>
 <tr>
@@ -213,7 +248,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Facility (3)</td>
+	<td>Facility (5)</td>
 	<td></td>
 </tr>
 <tr>
@@ -221,19 +256,30 @@
 	<td>Room (1)</td>
 	<td></td>
 </tr>
+<!--Verify links are correct-->
 <tr>
-	<td>comment</td>
-	<td>Verify links correct</td>
+	<td>verifyElementPresent</td>
+	<td>link=Person</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Agreement</td>
+	<td>link=Project</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Research Project</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Service</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Transport Service</td>
 	<td></td>
 </tr>
 <tr>
@@ -258,12 +304,32 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
+	<td>link=Performance</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
 	<td>link=Presentation</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
+	<td>link=Seminar Series</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Workshop</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
 	<td>link=College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Company</td>
 	<td></td>
 </tr>
 <tr>
@@ -288,12 +354,27 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
+	<td>link=University</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
 	<td>link=Equipment</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
+	<td>link=Article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
 	<td>link=Award or Honor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Blog Posting</td>
 	<td></td>
 </tr>
 <tr>
@@ -318,6 +399,16 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
+	<td>link=Human Study</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Patent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
 	<td>link=Proceedings</td>
 	<td></td>
 </tr>
@@ -328,17 +419,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Address</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
 	<td>link=Building</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Campus</td>
 	<td></td>
 </tr>
 <tr>
@@ -351,11 +432,7 @@
 	<td>link=Room</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td>Go back to home page</td>
-	<td></td>
-</tr>
+<!--Go back to home page-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

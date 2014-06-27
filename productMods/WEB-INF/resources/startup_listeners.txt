@@ -11,6 +11,13 @@ edu.cornell.mannlib.vitro.webapp.config.ConfigurationPropertiesSetup
 
 edu.cornell.mannlib.vitro.webapp.config.ConfigurationPropertiesSmokeTests
 
+# For the conversion from 1.6 or earlier (RDB) to 1.7 or later (TDB)
+edu.cornell.mannlib.vitro.webapp.servlet.setup.GuardAgainstUnmigratedRDB
+
+edu.cornell.mannlib.vitro.webapp.utils.developer.DeveloperSettings$Setup
+
+edu.cornell.mannlib.vitro.webapp.application.ApplicationImpl$Setup
+
 edu.cornell.mannlib.vitro.webapp.config.RevisionInfoSetup
 
 edu.cornell.mannlib.vitro.webapp.email.FreemarkerEmailFactory$Setup
@@ -20,8 +27,7 @@ edu.cornell.mannlib.vitro.webapp.servlet.setup.JenaPersistentDataSourceSetup
  
 edu.cornell.mannlib.vitro.webapp.servlet.setup.RDFServiceSetup
 
-edu.cornell.mannlib.vitro.webapp.servlet.setup.ApplicationModelSetup
-edu.cornell.mannlib.vitro.webapp.servlet.setup.UserModelSetup
+edu.cornell.mannlib.vitro.webapp.servlet.setup.ConfigurationModelsSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ContentModelSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ModelMakerSetup
 
@@ -29,8 +35,8 @@ edu.cornell.mannlib.vitro.webapp.filestorage.backend.FileStorageSetup
 
 edu.cornell.mannlib.vitro.webapp.web.images.PlaceholderUtil$Setup
 
-# Update the URIs on Permission Sets on UserAccounts from model (1.4) to 1.5.
-edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdatePermissionSetUris
+# Some permissions were removed in release 1.7
+edu.cornell.mannlib.vitro.webapp.servlet.setup.RemoveObsoletePermissions
 
 edu.cornell.mannlib.vitro.webapp.servlet.setup.FileGraphSetup
 
@@ -63,12 +69,13 @@ edu.ucsf.vitro.opensocial.OpenSocialSmokeTests
 # For multiple language support
 edu.cornell.mannlib.vitro.webapp.i18n.selection.LocaleSelectionSetup
 
-# Add VIVO specific DocumentModifers, this must come before SolrSetup
-edu.cornell.mannlib.vitro.webapp.search.solr.VivoDocumentModifiers
+# Add VIVO specific DocumentModifers, this must come before SearchIndexerSetup
+edu.cornell.mannlib.vitro.webapp.search.documentBuilding.VivoDocumentModifiers
 
-# The Solr index uses a "public" permission, so the PropertyRestrictionPolicyHelper 
+# The search indexer uses a "public" permission, so the PropertyRestrictionPolicyHelper 
 #   and the PermissionRegistry must already be set up.
-edu.cornell.mannlib.vitro.webapp.search.solr.SolrSetup
+edu.cornell.mannlib.vitro.webapp.searchengine.SearchEngineSetup
+edu.cornell.mannlib.vitro.webapp.searchindex.SearchIndexerSetup
 
 edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerSetup
 edu.cornell.mannlib.vitro.webapp.freemarker.config.FreemarkerConfiguration$Setup
@@ -79,6 +86,8 @@ org.apache.commons.fileupload.servlet.FileCleanerCleanup
 # The VClassGroupCache index uses a "public" permission, so the PropertyRestrictionPolicyHelper 
 #   and the PermissionRegistry must already be set up.
 edu.cornell.mannlib.vitro.webapp.dao.jena.VClassGroupCache$Setup
+
+edu.cornell.mannlib.vivo.orcid.OrcidContextSetup
 
 # This should be near the end, because it will issue a warning if the connection to Solr times out.
 edu.cornell.mannlib.vitro.webapp.servlet.setup.SolrSmokeTest

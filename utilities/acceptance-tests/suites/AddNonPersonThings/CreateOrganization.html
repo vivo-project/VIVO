@@ -148,7 +148,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Please enter a value in the name field.</td>
+	<td>Please enter a value in the Name field.</td>
 	<td></td>
 </tr>
 <!--Now enter something in the field-->
@@ -200,7 +200,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='offersDegree']/a/img</td>
+	<td>css=a.add-offers &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -224,8 +224,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[12]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasPredecessorOrganization']/a/img</td>
+	<td>css=a.add-hasPredecessorOrganization &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -234,8 +239,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=typeOfNew</td>
+	<td>label=College (vivo)</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=label</td>
+	<td>Primate College of New York</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -244,8 +269,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[8]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='awardsGrant']/a/img</td>
+	<td>css=a.add-assigns &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -265,7 +295,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=label</td>
 	<td>Primate Habitat Research Grant</td>
 </tr>
 <tr>
@@ -279,8 +309,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='sponsors']/a/img</td>
+	<td>css=a.add-sponsors &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -300,7 +335,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=label</td>
 	<td>Primate Student of the Year</td>
 </tr>
 <tr>
@@ -315,17 +350,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='awardConferred']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=offerCreate</td>
+	<td>css=a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -335,12 +360,12 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=award</td>
 	<td>Best Primate College</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>css=input.submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -349,8 +374,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[14]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasEquipment']/a/img</td>
+	<td>css=a.add-hasEquipment &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -370,7 +400,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=label</td>
 	<td>Portable Primate Habitat</td>
 </tr>
 <tr>
@@ -384,8 +414,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[8]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='subcontractsGrant']/a/img</td>
+	<td>css=a.add-subcontractsGrant &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -405,7 +440,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=label</td>
 	<td>Primate Survival Planning Grant</td>
 </tr>
 <tr>
@@ -420,8 +455,13 @@
 </tr>
 <!--Test affiliation entry-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[4]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasSubOrganization']/a/img</td>
+	<td>css=a.add-BFO_0000051 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -446,7 +486,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=label</td>
 	<td>Primate Research Laboratory</td>
 </tr>
 <tr>
@@ -461,7 +501,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='subOrganizationWithin']/a/img</td>
+	<td>css=a.add-BFO_0000051 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -486,7 +526,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=label</td>
 	<td>Primate History Library</td>
 </tr>
 <tr>
@@ -501,7 +541,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='organizationForPosition']/a/img</td>
+	<td>css=#relatedBy-Position &gt; a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -521,11 +561,6 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>startField-year</td>
-	<td>1999</td>
-</tr>
-<tr>
-	<td>type</td>
 	<td>id=person</td>
 	<td>Person</td>
 </tr>
@@ -533,6 +568,11 @@
 	<td>type</td>
 	<td>id=firstName</td>
 	<td>Polly</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>startField-year</td>
+	<td>1999</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -546,7 +586,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasLeaderRole']/a/img</td>
+	<td>css=a.add-RO_0000053 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -556,8 +596,8 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>typeSelector</td>
-	<td>label=Organization</td>
+	<td>id=typeSelector</td>
+	<td>label=Company</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -586,7 +626,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='affiliatedOrganization']/a/img</td>
+	<td>css=a.add-affiliatedOrganization &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -611,7 +651,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasMemberRole']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[13]</td>
 	<td></td>
 </tr>
 <tr>
@@ -651,7 +691,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasCollaborator']/a/img</td>
+	<td>css=a.add-hasCollaborator &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -662,7 +702,22 @@
 <tr>
 	<td>type</td>
 	<td>id=object</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=object</td>
 	<td>Primate His</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=object</td>
+	<td>${KEY_DOWN}</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -681,7 +736,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasClinicalRole']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[14]</td>
 	<td></td>
 </tr>
 <tr>
@@ -721,8 +776,13 @@
 </tr>
 <!--Test publications entry-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[6]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td>css=a.add-publisherOf &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -732,17 +792,27 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>typeSelector</td>
-	<td>label=Database</td>
+	<td>id=typeOfNew</td>
+	<td>label=Database (vivo)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=title</td>
+	<td>id=label</td>
 	<td>Primate Info</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -752,7 +822,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasPresenterRole']/a</td>
+	<td>css=#publicationsGroup &gt; article.property &gt; #RO_0000053 &gt; a.add-RO_0000053 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -792,8 +862,13 @@
 </tr>
 <!--Test service entry-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[10]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasOutreachProviderRole']/a/img</td>
+	<td>css=#serviceGroup &gt; article.property &gt; #RO_0000053 &gt; a.add-RO_0000053 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -838,8 +913,13 @@
 </tr>
 <!--Test location entry-->
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[12]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasGeographicLocation']/a/img</td>
+	<td>css=a.add-RO_0001025 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -850,7 +930,22 @@
 <tr>
 	<td>type</td>
 	<td>id=object</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=object</td>
 	<td>northern Afr</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=object</td>
+	<td>${KEY_DOWN}</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -870,7 +965,7 @@
 <!--Test contact entry-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='email']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[34]</td>
 	<td></td>
 </tr>
 <tr>
@@ -879,18 +974,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>tinymce</td>
+	<td>id=emailAddress</td>
 	<td>info@primates.edu</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -900,7 +990,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-primaryEmail &gt; img.add-individual</td>
+	<td>css=article.property &gt; #ARG_2000028 &gt; a.add-ARG_2000028 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -909,48 +999,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>tinymce</td>
-	<td>info@primates.edu</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='phoneNumber']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
+	<td>id=telephoneNumber</td>
 	<td>555-555-5555</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -960,7 +1015,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='faxNumber']/a/img</td>
+	<td>xpath=(//h3[@id='ARG_2000028']/a)[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -969,18 +1024,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>tinymce</td>
+	<td>id=telephoneNumber</td>
 	<td>555-555-5554</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -990,7 +1040,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='mailingAddress']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[35]</td>
 	<td></td>
 </tr>
 <tr>
@@ -999,13 +1049,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=country</td>
-	<td>label=Morocco</td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>id=addrLineOne</td>
+	<td>id=streetAddressOne</td>
 	<td>1234 Northern African Nation</td>
 </tr>
 <tr>
@@ -1019,6 +1064,11 @@
 	<td>1234567890</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>id=countryEditMode</td>
+	<td>Morocco</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>id=submit</td>
 	<td></td>
@@ -1030,8 +1080,13 @@
 </tr>
 <!--Test time entry-->
 <tr>
+	<td>click</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='dateTimeInterval']/a/img</td>
+	<td>css=a.add-dateTimeInterval &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -1086,6 +1141,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[8]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='freetextKeyword']/a/img</td>
 	<td></td>
@@ -1115,60 +1175,493 @@
 	<td>Primate College of America</td>
 	<td></td>
 </tr>
+<!--Add additional 1.6 fields-->
+<tr>
+	<td>click</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//img[@alt='add'])[14]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=typeSelector</td>
+	<td>label=Workshop</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=activity</td>
+	<td>New Primate Students </td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=startField-year</td>
+	<td>2003</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=endField-year</td>
+	<td>2006</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//img[@alt='add'])[15]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=typeSelector</td>
+	<td>label=Performance</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=activity</td>
+	<td>Primates in the Wild</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=startField-year</td>
+	<td>1997</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-featuredIn &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=typeOfNew</td>
+	<td>label=Blog Posting (vivo)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=label</td>
+	<td>Primate Happenings</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-assigneeFor &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=label</td>
+	<td>USA222333444555</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-translatorOf &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=Primate Happenings</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[8]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#researchGroup &gt; article.property &gt; #RO_0000053 &gt; a.add-RO_0000053 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=grant</td>
+	<td>primate hab</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=grant</td>
+	<td>${KEY_DOWN}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-ERO_0001520 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=label</td>
+	<td>Human and Ape Brain Comparison</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[10]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-ERO_0000037 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=typeOfNew</td>
+	<td>label=Transport Service (obo)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=label</td>
+	<td>Gorilla Moving Company</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#serviceGroup &gt; article.property &gt; #offers &gt; a.add-offers &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=label</td>
+	<td>Introduction to Primates</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[12]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-hasSuccessorOrganization &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=typeOfNew</td>
+	<td>label=University (vivo)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=label</td>
+	<td>Primate University of America</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-governingAuthorityFor &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=object</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=object</td>
+	<td>primate colleges of the wor</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=object</td>
+	<td>${KEY_DOWN}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
 <!--Verify everything entered is displaying properly-->
+<!--Check OVERVIEW tab-->
 <tr>
-	<td>verifyTextPresent</td>
-	<td>The Primate College of America is a privately-funded college for the study of primates.</td>
+	<td>click</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>B.S. Bachelor of Science</td>
+	<td>PCoA</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate College of America</td>
+	<td>1959 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=B.S. Bachelor of Science</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Student of the Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Best Primate College</td>
+	<td></td>
+</tr>
+<!--Check AFFILIATION tab-->
+<tr>
+	<td>click</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate College of America</td>
+	<td>faculty administrative position</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Primate Habitat Research Grant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Primate Survival Planning Grant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Primate Student of the Year</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Best Primate College</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Portable Primate Habitat</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Primate Research Laboratory</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Primate History Library</td>
+	<td>verifyElementPresent</td>
+	<td>link=Person, Polly</td>
 	<td></td>
 </tr>
 <tr>
@@ -1177,13 +1670,38 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate History Library</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Research Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primates-r-us</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
 	<td>Primates-r-us Founder 2010 -</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Primates-r-us</td>
+	<td>verifyElementPresent</td>
+	<td>link=Primate History Library</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primates-r-us</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Colleges of the World</td>
 	<td></td>
 </tr>
 <tr>
@@ -1192,8 +1710,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Primate History Library</td>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Heart Health</td>
 	<td></td>
 </tr>
 <tr>
@@ -1202,13 +1720,44 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>database</td>
+	<td>verifyElementPresent</td>
+	<td>link=New Primate Students</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Info</td>
+	<td>New Primate Students 2003 - 2006</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primates in the Wild</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primates in the Wild 1997 -</td>
+	<td></td>
+</tr>
+<!--Check PUBLICATIONS tab-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Info</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>invited talk</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Health and Fitness</td>
 	<td></td>
 </tr>
 <tr>
@@ -1217,18 +1766,86 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Happenings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=USA222333444555</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=#translatorOf-Document-List &gt; li &gt; a[title=&quot;name&quot;]</td>
+	<td></td>
+</tr>
+<!--Check RESEARCH tab-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[8]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Habitat Research Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Habitat Research Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Survival Planning Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Human and Ape Brain Comparison</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Gorillas</td>
+	<td></td>
+</tr>
+<!--Check SERVICE tab-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[10]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Gorilla Moving Company</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Health Check</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
 	<td>Primate Health Check Sponsor 2008 - 2010</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>northern Africa</td>
+	<td>verifyElementPresent</td>
+	<td>link=Portable Primate Habitat</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>info@primates.edu</td>
+	<td>verifyElementPresent</td>
+	<td>link=Introduction to Primates</td>
+	<td></td>
+</tr>
+<!--Check CONTACT tab-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[12]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1242,8 +1859,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=1234 Northern African Nation</td>
+	<td>verifyTextPresent</td>
+	<td>info@primates.edu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1234 Northern African Nation</td>
 	<td></td>
 </tr>
 <tr>
@@ -1262,8 +1884,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>1959</td>
+	<td>verifyElementPresent</td>
+	<td>link=northern Africa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate College of New York</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate University of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Colleges of the World</td>
+	<td></td>
+</tr>
+<!--Check VIEW ALL tab-->
+<tr>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[14]</td>
 	<td></td>
 </tr>
 <tr>
@@ -1273,7 +1916,247 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>1959 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=B.S. Bachelor of Science</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Student of the Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Best Primate College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>faculty administrative position</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Person, Polly</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Person, Polly, Dr. 1999 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate History Library</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Research Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primates-r-us</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primates-r-us Founder 2010 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate History Library</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primates-r-us</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Colleges of the World</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Colleges of the World Member 2009 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Heart Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Heart Health Founder 2010 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=New Primate Students</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>New Primate Students 2003 - 2006</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primates in the Wild</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primates in the Wild 1997 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Info</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>invited talk</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Health and Fitness</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health and Fitness, Organizer 2008</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Happenings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=USA222333444555</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Happenings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Habitat Research Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Habitat Research Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Survival Planning Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Human and Ape Brain Comparison</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Gorillas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Gorilla Moving Company</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Health Check</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health Check Sponsor 2008 - 2010</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Portable Primate Habitat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Introduction to Primates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>555-555-5555</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>555-555-5554</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>info@primates.edu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1234 Northern African Nation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Morocco City</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1234567890</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Morocco</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=northern Africa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate College of New York</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate University of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Colleges of the World</td>
 	<td></td>
 </tr>
 <!--Logout-->

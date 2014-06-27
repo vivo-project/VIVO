@@ -87,17 +87,17 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=exact:Nintendo: Good or Bad for Kids?</td>
+	<td>link=Nintendo: Good or Bad for Kids?</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>exact:Nintendo: Good or Bad for Kids?</td>
+	<td>Nintendo: Good or Bad for Kids?</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='informationResourceInAuthorship']/a/img</td>
+	<td>css=a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -114,16 +114,6 @@
 	<td>type</td>
 	<td>lastName</td>
 	<td>Smith</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -168,7 +158,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='informationResourceInAuthorship']/a/img</td>
+	<td>css=a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -178,23 +168,18 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>showAddFormButton</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>lastName</td>
-	<td>Johnson</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=showAddFormButton</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
 	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>lastName</td>
+	<td>Johnson</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -212,8 +197,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>link=Return to Publication</td>
+	<td>id=returnLink</td>
 	<td></td>
 </tr>
 <tr>
@@ -223,12 +213,17 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='informationResourceInAuthorship']/a/img</td>
+	<td>css=a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=showAddFormButton</td>
 	<td></td>
 </tr>
 <tr>
@@ -240,16 +235,6 @@
 	<td>type</td>
 	<td>lastName</td>
 	<td>Zink</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -290,13 +275,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Furter, Frank</td>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
+	<td>assertTitle</td>
+	<td>Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
@@ -306,7 +291,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>3 in the last 10 full</td>
+	<td>2 in the last 10 full</td>
 	<td></td>
 </tr>
 <tr>
@@ -316,12 +301,12 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Co-Author Network</td>
+	<td>link=Co-author Network</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Map Of Science</td>
+	<td>link=Map of Science</td>
 	<td></td>
 </tr>
 <tr>
@@ -331,7 +316,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Co-Author Network</td>
+	<td>link=Co-author Network</td>
 	<td></td>
 </tr>
 <tr>
@@ -350,13 +335,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyElementPresent</td>
+	<td>id=ego_label</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
-	<td>Co-Author Network</td>
+	<td>Co-author Network</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=(GraphML File)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>VIVO profile</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=profileUrl</td>
 	<td></td>
 </tr>
 <tr>
@@ -386,7 +386,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>from 2001 to 2011</td>
+	<td>from 2001 to 2013</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=(.CSV File)</td>
 	<td></td>
 </tr>
 <tr>
@@ -396,7 +401,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>from 2001 to 2011</td>
+	<td>from 2001 to 2013</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=a[title=&quot;csv File&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -407,6 +417,21 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Publications per year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=caption &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Publications</td>
 	<td></td>
 </tr>
 <tr>
@@ -455,6 +480,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyElementPresent</td>
+	<td>css=#coauthorships_table &gt; caption &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Author</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
 	<td>Publications with</td>
 	<td></td>
@@ -476,16 +511,6 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Johnson, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>Zink, Zoe</td>
 	<td></td>
 </tr>
@@ -494,25 +519,14 @@
 	<td>1</td>
 	<td></td>
 </tr>
-<!--Verify that there are no co-investigators yet-->
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Co-Investigator Network</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Person Level Visualization</td>
+	<td>verifyTextPresent</td>
+	<td>Johnson, Jane</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Currently there are no grants for this investigator in the VIVO database.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Co-Author Network</td>
+	<td>1</td>
 	<td></td>
 </tr>
 <!--Logout-->

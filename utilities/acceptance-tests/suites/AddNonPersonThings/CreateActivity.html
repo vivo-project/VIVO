@@ -138,7 +138,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Please enter a value in the name field.</td>
+	<td>Please enter a value in the Name field.</td>
 	<td></td>
 </tr>
 <!--Now enter something in the field-->
@@ -159,28 +159,8 @@
 </tr>
 <!--Test overview entry (image and webpage have been tested)-->
 <tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='administeredBy']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Organization for Primate Elderly Care</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Primate Colleges of the World</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>click</td>
+	<td>//div[@id='wrapper-content']/ul/li[6]</td>
 	<td></td>
 </tr>
 <tr>
@@ -190,7 +170,52 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='grantAwardedBy']/a/img</td>
+	<td>css=a.add-relates &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=organization</td>
+	<td>primate colleges of the wor</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=organization</td>
+	<td>${KEY_DOWN}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-assignedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -387,7 +412,22 @@
 <tr>
 	<td>type</td>
 	<td>id=object</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=object</td>
 	<td>Afri</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=object</td>
+	<td>${KEY_DOWN}</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -468,7 +508,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Add new entry for: local award id</td>
+	<td>Add new entry for: local award ID</td>
 	<td></td>
 </tr>
 <tr>
@@ -505,7 +545,22 @@
 <tr>
 	<td>type</td>
 	<td>id=object</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=object</td>
 	<td>primate health chec</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=object</td>
+	<td>${KEY_DOWN}</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -544,7 +599,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=exact:Can't find the concept you want? Create your own.</td>
+	<td>link=Can't find the concept you want? Create your own.</td>
 	<td></td>
 </tr>
 <tr>
@@ -577,15 +632,91 @@
 	<td>Primate Elderly Care</td>
 	<td></td>
 </tr>
+<!--Test remaining fields (added for 1.6)-->
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-BFO_0000051 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=Primate Habitat Research Grant</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-BFO_0000050 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=Primate Survival Planning Grant</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-supportedInformationResource</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=Primate Info</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Elderly Care</td>
+	<td></td>
+</tr>
 <!--Verify everything entered is displaying properly-->
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Colleges of the World</td>
+	<td>Primate Elderly Care</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Research Laboratory</td>
+	<td>Grant</td>
 	<td></td>
 </tr>
 <tr>
@@ -595,7 +726,47 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Colleges of the World</td>
+	<td>September 1, 2010 - August 31, 2012</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Research Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Colleges of the World</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Colleges of the World</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Africa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Habitat Research Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Survival Planning Grant</td>
 	<td></td>
 </tr>
 <tr>
@@ -609,13 +780,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>1234-5678</td>
+	<td>verifyElementPresent</td>
+	<td>xpath=(//a[contains(text(),'Africa')])[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>September 1, 2010 - August 31, 2012</td>
+	<td>1234-5678</td>
 	<td></td>
 </tr>
 <tr>
@@ -625,12 +796,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Primate Health Check</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Elderly Care</td>
+	<td>link=Primate Info</td>
 	<td></td>
 </tr>
 <!--Logout-->

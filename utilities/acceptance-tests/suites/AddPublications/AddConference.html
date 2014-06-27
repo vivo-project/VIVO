@@ -100,7 +100,7 @@
 <!--Select to add a Publication-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td>css=#relatedBy-Authorship &gt; a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -160,13 +160,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Nintendo Case Studies</td>
+	<td>verifyTextPresent</td>
+	<td>Nintendo Case Studies.&nbsp;&nbsp;Games and Child Development. 2010</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Nintendo Case Studies 2010</td>
+	<td>verifyElementPresent</td>
+	<td>link=Nintendo Case Studies</td>
 	<td></td>
 </tr>
 <!--Go back to conference-->
@@ -198,7 +198,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=exact:Can't find the concept you want? Create your own.</td>
+	<td>link=Can't find the concept you want? Create your own.</td>
 	<td></td>
 </tr>
 <tr>
@@ -209,7 +209,22 @@
 <tr>
 	<td>type</td>
 	<td>id=relatedIndLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=relatedIndLabel</td>
 	<td>Child</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>sendKeys</td>
+	<td>id=relatedIndLabel</td>
+	<td>${KEY_DOWN}</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -354,18 +369,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyTextPresent</td>
 	<td>Faculty Member (1)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Person</td>
+	<td>link=Faculty Member</td>
 	<td></td>
 </tr>
 <tr>
@@ -375,7 +385,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Conference</td>
+	<td>link=Person</td>
 	<td></td>
 </tr>
 <tr>
@@ -385,7 +395,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Event</td>
+	<td>link=Conference</td>
 	<td></td>
 </tr>
 <tr>
@@ -395,7 +405,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Organization</td>
+	<td>link=Event</td>
 	<td></td>
 </tr>
 <tr>
@@ -405,7 +415,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Publisher</td>
+	<td>link=Organization</td>
 	<td></td>
 </tr>
 <tr>
@@ -415,17 +425,12 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Chapter</td>
+	<td>link=Publisher</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Chapter (1)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Academic Article</td>
+	<td>research</td>
 	<td></td>
 </tr>
 <tr>
@@ -435,7 +440,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Article</td>
+	<td>link=Academic Article</td>
 	<td></td>
 </tr>
 <tr>
@@ -445,17 +450,27 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
+	<td>link=Article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Book (2)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
 	<td>link=Book</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Book (3)</td>
+	<td>Chapter (1)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Concept</td>
+	<td>link=Chapter</td>
 	<td></td>
 </tr>
 <tr>
@@ -465,12 +480,27 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Conference Paper</td>
+	<td>link=Concept</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Conference Paper (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Conference Paper</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Journal (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Journal</td>
 	<td></td>
 </tr>
 <!--Verify Conference Paper shows up for Frank Furter-->
@@ -500,13 +530,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Nintendo Case Studies</td>
+	<td>verifyTextPresent</td>
+	<td>Nintendo Case Studies.&nbsp;&nbsp;Games and Child Development. 2010</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Nintendo Case Studies 2010</td>
+	<td>verifyElementPresent</td>
+	<td>link=Nintendo Case Studies</td>
 	<td></td>
 </tr>
 <!--Log out-->

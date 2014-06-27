@@ -138,7 +138,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Please enter a value in the name field.</td>
+	<td>Please enter a value in the Name field.</td>
 	<td></td>
 </tr>
 <!--Now enter something in the field-->
@@ -160,7 +160,7 @@
 <!--Test location entry-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasRoom']/a/img</td>
+	<td>css=a.add-BFO_0000051 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -190,7 +190,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=label</td>
 	<td>Lab Admin Office</td>
 </tr>
 <tr>
@@ -205,7 +205,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='geographicallyContains']/a/img</td>
+	<td>css=a.add-BFO_0000050 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -220,8 +220,8 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>typeOfNew</td>
-	<td>label=Campus (vivo)</td>
+	<td>id=typeOfNew</td>
+	<td>label=Geographic Location (vivo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -234,18 +234,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Create &quot;geographically contains&quot; entry for Jane Memorial Building</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>name</td>
-	<td>Primate Research Laboratory</td>
+	<td>id=label</td>
+	<td>Primate Quad</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -256,7 +251,7 @@
 <!--Test other entry-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='locationOfEquipment']/a/img</td>
+	<td>css=a.add-RO_0001015 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -266,7 +261,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Add an entry to: location of equipment</td>
+	<td>Select an existing Material Entity for Jane Memorial Building</td>
 	<td></td>
 </tr>
 <tr>
@@ -279,9 +274,10 @@
 	<td>Jane Memorial Building</td>
 	<td></td>
 </tr>
+<!--Test remaining fields (added for 1.6)-->
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-geographicLocationOf &gt; img.add-individual</td>
+	<td>xpath=(//img[@alt='add'])[3]</td>
 	<td></td>
 </tr>
 <tr>
@@ -290,14 +286,59 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=object</td>
-	<td>Primate Research labor</td>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=Primate Heart Health</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=ui-active-menuitem</td>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Jane Memorial Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//h3[@id='RO_0001015']/a)[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=Primate University of America</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Jane Memorial Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//img[@alt='add'])[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=objectVar</td>
+	<td>label=Primate Health Check</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -311,23 +352,33 @@
 </tr>
 <!--Verify everything entered is displaying properly-->
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Primate Research Laboratory</td>
+	<td>verifyElementPresent</td>
+	<td>link=Portable Primate Habitat</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Lab Admin Office</td>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Heart Health</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Primate Research Laboratory</td>
+	<td>verifyElementPresent</td>
+	<td>link=Primate University of America</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Portable Primate Habitat</td>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Health Check</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Lab Admin Office</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Quad</td>
 	<td></td>
 </tr>
 <!--Logout-->

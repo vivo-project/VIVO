@@ -1,0 +1,10 @@
+STACK AjaxVisualizationController
+#STACK IndividualRequestAnalysisContextImpl
+#STACK IndividualResponseBuilder
+# STACK BaseIndividualTemplateModel
+#STACK \WIndividualTemplateModel
+#STACK FileServingServlet
+#QUERY authorshipValue
+#QUERY infoResourceValue
+#QUERY editorObj
+#QUERY IAO_0000030

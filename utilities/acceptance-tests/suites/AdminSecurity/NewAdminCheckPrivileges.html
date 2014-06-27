@@ -87,19 +87,19 @@
 </tr>
 <!--Verify available options-->
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Site Admin</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
+	<td>verifyTextPresent</td>
+	<td>Site Administration</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Data Input</td>
 	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=submit</td>
+	<td>Add individual of this class</td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
@@ -124,11 +124,6 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Menu ordering</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Restrict logins</td>
 	<td></td>
 </tr>
 <tr>
@@ -163,12 +158,12 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Class groups</td>
+	<td>link=Class hierarchy</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Class hierarchy</td>
+	<td>link=Class groups</td>
 	<td></td>
 </tr>
 <tr>
@@ -178,12 +173,12 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Data property hierarchy</td>
+	<td>link=Object property hierarchy</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Object property hierarchy</td>
+	<td>link=Data property hierarchy</td>
 	<td></td>
 </tr>
 <tr>
@@ -223,7 +218,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Refresh Content</td>
+	<td>Site Maintenance</td>
 	<td></td>
 </tr>
 <tr>
@@ -239,6 +234,16 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Recompute inferences</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Restrict logins</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Activate developer panel</td>
 	<td></td>
 </tr>
 <!--Make sure available Site Configuration options actually open up-->
@@ -294,12 +299,22 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Relate profile editors and profiles</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Select editors</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Select profiles</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Profile editors</td>
 	<td></td>
 </tr>
 <tr>
@@ -334,7 +349,42 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>URL</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Custom Template</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Menu Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Controls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Use Menu Ordering to set the order of menu items.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=menuMgmtLink</td>
 	<td></td>
 </tr>
 <tr>
@@ -373,33 +423,28 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
-	<td>We're sorry, but you are not authorized to view the page you requested. If you think this is an error, please contact us and we'll be happy to help.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Site Admin</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Restrict Logins</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Restrict Logins</td>
+	<td>verifyTextPresent</td>
+	<td>People</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Restrict Logins</td>
+	<td>Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Events</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Refresh page after reordering menu items</td>
 	<td></td>
 </tr>
 <tr>
@@ -410,11 +455,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Site Admin</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
 <tr>
@@ -435,6 +475,31 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Editing Existing Record</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Site name (max 50 characters)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Contact email address contact form submissions will be sent to this address</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Theme</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Copyright text used in footer (e.g., name of your institution)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Copyright URL copyright text links to this URL</td>
 	<td></td>
 </tr>
 <tr>
@@ -504,7 +569,37 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Email address</td>
+	<td>Email Address</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>First name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Last name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Roles</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Login count</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Last Login</td>
 	<td></td>
 </tr>
 <tr>
@@ -530,22 +625,42 @@
 <!--Make sure available Ontology Editor options actually open up-->
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Class groups</td>
+	<td>link=Ontology list</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO</td>
+	<td>Ontologies</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Class Groups</td>
+	<td>Ontologies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>css=input.form-button</td>
+	<td>Add new ontology</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ontology</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Namespace</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Prefix</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=people</td>
+	<td>link=VIVO Core</td>
 	<td></td>
 </tr>
 <tr>
@@ -575,12 +690,32 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Class Hierarchy</td>
+	<td>Asserted Class Hierarchy</td>
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Display Options</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id=addClass</td>
+	<td>Add New Class</td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
-	<td>link=exact:vivo:Address</td>
+	<td>link=expand all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ontology</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Subclasses</td>
 	<td></td>
 </tr>
 <tr>
@@ -600,7 +735,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Data property hierarchy</td>
+	<td>link=Class groups</td>
 	<td></td>
 </tr>
 <tr>
@@ -610,12 +745,42 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Data Property Hierarchy</td>
+	<td>Class Groups</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Display Options</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=abbreviation</td>
+	<td>id=addClass</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=addGroup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=hide subclasses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Display Rank:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Classes:</td>
 	<td></td>
 </tr>
 <tr>
@@ -649,8 +814,108 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Display Options</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
-	<td>link=administered by</td>
+	<td>link=expand all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=access provided by (scires)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Local Name:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Group:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Domain Class:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Range Class:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>We're sorry, but you are not authorized to view the page you requested. If you think this is an error, please contact us and we'll be happy to help.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Data property hierarchy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Data Property Hierarchy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Display Options</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=addProperty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=expand all</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=abbreviation (vivo)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Local Name:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Group:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Domain Class:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Range Class:</td>
 	<td></td>
 </tr>
 <tr>
@@ -685,42 +950,27 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=overview</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>We're sorry, but you are not authorized to view the page you requested. If you think this is an error, please contact us and we'll be happy to help.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Site Admin</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Ontology list</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Ontologies</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Ontologies</td>
+	<td>id=addProperty</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=VIVO core</td>
+	<td>link=hide properties</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=contact</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Display Rank:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Properties:</td>
 	<td></td>
 </tr>
 <tr>
@@ -760,6 +1010,41 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Or upload a file from your computer: </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=rdfStream</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>add instance data (supports large data files)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>add mixed RDF (instances and/or ontology)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>remove mixed RDF (instances and/or ontology)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>create classgroups automatically</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextNotPresent</td>
 	<td>We're sorry, but you are not authorized to view the page you requested. If you think this is an error, please contact us and we'll be happy to help.</td>
 	<td></td>
@@ -795,6 +1080,81 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyElementPresent</td>
+	<td>link=Manage Jena Models</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Subtract One Model from Another</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Convert CSV to RDF</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Convert XML to RDF</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Execute SPARQL CONSTRUCT</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Generate TBox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Name Blank Nodes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Smush Resources</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Merge Resources</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Change Namespace of Resources</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Process Property Value Strings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Split Property Value Strings into Multiple Property Values</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Harvest Person Data from CSV</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Harvest Grant Data from CSV</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Execute Workflow</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextNotPresent</td>
 	<td>We're sorry, but you are not authorized to view the page you requested. If you think this is an error, please contact us and we'll be happy to help.</td>
 	<td></td>
@@ -827,6 +1187,11 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Select format</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -870,6 +1235,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Format for CONSTRUCT and DESCRIBE query results:</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextNotPresent</td>
 	<td>We're sorry, but you are not authorized to view the page you requested. If you think this is an error, please contact us and we'll be happy to help.</td>
 	<td></td>
@@ -905,6 +1275,21 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Predicate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Object</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>css=input.submit</td>
+	<td>Generate Query</td>
+</tr>
+<tr>
 	<td>verifyTextNotPresent</td>
 	<td>We're sorry, but you are not authorized to view the page you requested. If you think this is an error, please contact us and we'll be happy to help.</td>
 	<td></td>
@@ -937,7 +1322,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>The search indexer is idle.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>The most recent update was at</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>name=rebuild</td>
 	<td></td>
 </tr>
 <tr>
@@ -981,6 +1376,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Why is it needed?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>What's involved in the caching process?</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextNotPresent</td>
 	<td>We're sorry, but you are not authorized to view the page you requested. If you think this is an error, please contact us and we'll be happy to help.</td>
 	<td></td>
@@ -1003,6 +1408,96 @@
 <tr>
 	<td>assertTitle</td>
 	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>name=submit</td>
+	<td>Recompute Inferences</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Restrict logins</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Restrict Logins</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Restrict Logins</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Logins are open to all.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Restrict Logins</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>We're sorry, but you are not authorized to view the page you requested. If you think this is an error, please contact us and we'll be happy to help.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Activate developer panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>VIVO is running in developer mode. (click for Options)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=developerPanelClickText</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=developerEnabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=developerPanelSaveButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>We're sorry, but you are not authorized to view the page you requested. If you think this is an error, please contact us and we'll be happy to help.</td>
 	<td></td>
 </tr>
 <!--log out-->

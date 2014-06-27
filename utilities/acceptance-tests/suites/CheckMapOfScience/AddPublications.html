@@ -87,8 +87,13 @@
 </tr>
 <!--Add first journal article-->
 <tr>
+	<td>click</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td>css=#relatedBy-Authorship &gt; a.add-relatedBy</td>
 	<td></td>
 </tr>
 <tr>
@@ -104,6 +109,16 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Publication Type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Publication Date</td>
 	<td></td>
 </tr>
 <tr>
@@ -307,18 +322,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>id=submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>id=name</td>
+	<td>id=label</td>
 	<td>Alcohol</td>
 </tr>
 <tr>
@@ -359,8 +364,13 @@
 </tr>
 <!--Add second journal article-->
 <tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td>css=#relatedBy-Authorship &gt; a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -602,7 +612,7 @@
 <!--Add third journal article-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td>css=#relatedBy-Authorship &gt; a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -822,7 +832,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=name</td>
+	<td>id=label</td>
 	<td>Alcohol And Alcoholism</td>
 </tr>
 <tr>
@@ -864,7 +874,7 @@
 <!--Add fourth journal article-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td>css=#relatedBy-Authorship &gt; a.add-relatedBy &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -1084,7 +1094,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=name</td>
+	<td>id=label</td>
 	<td>ALCOHOL RESEARCH &amp; HEALTH</td>
 </tr>
 <tr>
@@ -1167,12 +1177,7 @@
 <!--Check Map of Science-->
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Map Of Science</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Explore activity</td>
+	<td>link=Map of Science</td>
 	<td></td>
 </tr>
 <tr>
@@ -1181,13 +1186,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
 	<td>pause</td>
 	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Furter, Frank</td>
+	<td>verifyElementPresent</td>
+	<td>id=entityMoniker</td>
 	<td></td>
 </tr>
 <tr>
@@ -1203,6 +1213,16 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>13 Disciplines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>id=second-filter</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Search:</td>
 	<td></td>
 </tr>
 <tr>

@@ -7,18 +7,18 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
+import org.apache.jena.iri.IRI;
+import org.apache.jena.iri.IRIFactory;
+import org.apache.jena.iri.Violation;
 import org.vivoweb.webapp.util.ModelUtils;
 
 import com.google.gson.Gson;
-import com.hp.hpl.jena.iri.IRI;
-import com.hp.hpl.jena.iri.IRIFactory;
-import com.hp.hpl.jena.iri.Violation;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
-import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.Actions;
+import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;
 import edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty;
 import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -68,8 +68,8 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			
 			
 			String filterRule = "?predicate = j.2:mainImage " 
-//									+ "|| ?predicate = core:preferredTitle "  
-									+ "|| ?predicate = rdfs:label";
+									+ " || ?predicate = rdfs:label "   
+									+ " || ?predicate =  <http://www.w3.org/2006/vcard/ns#title>";
 			
 			QueryRunner<GenericQueryMap> profileQueryHandler = 
 					new AllPropertiesQueryRunner(individualURI, 
@@ -496,7 +496,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 	}
 
 	@Override
-	public Actions getRequiredPrivileges() {
+	public AuthorizationRequest getRequiredPrivileges() {
 		// TODO Auto-generated method stub
 		return null;
 	}

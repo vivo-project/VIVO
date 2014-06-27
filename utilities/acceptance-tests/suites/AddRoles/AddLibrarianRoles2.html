@@ -87,8 +87,13 @@
 </tr>
 <!--Add Head of role-->
 <tr>
+	<td>click</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasLeaderRole']/a/img</td>
+	<td>css=a.add-RO_0000053 &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -113,17 +118,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Department Name</td>
+	<td>Organization Name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Role in Department</td>
+	<td>Role in Organization</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Years of Participation in Department</td>
+	<td>Years of Participation</td>
 	<td></td>
 </tr>
 <tr>
@@ -195,7 +200,7 @@
 <!--Add Member of role-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasMemberRole']/a/img</td>
+	<td>xpath=(//img[@alt='add'])[9]</td>
 	<td></td>
 </tr>
 <tr>
@@ -220,17 +225,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Association Name</td>
+	<td>Organization Name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Role in Association</td>
+	<td>Role in Organization</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Years of Participation in Association</td>
+	<td>Years of Participation</td>
 	<td></td>
 </tr>
 <tr>
@@ -301,23 +306,23 @@
 </tr>
 <!--Verify Head of and Member of roles display-->
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Reference Division</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyTextPresent</td>
 	<td>Reference Division Head Librarian 2009 -</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Amercian Library Association</td>
+	<td>link=Reference Division</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Amercian Library Association Member 1988 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Amercian Library Association</td>
 	<td></td>
 </tr>
 <!--Log out-->

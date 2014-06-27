@@ -93,17 +93,27 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Title</td>
+	<td>Add New Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Content Type</td>
+	<td>Title *</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Pretty URL</td>
+	<td>Content Type *</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add one or more types</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Pretty URL *</td>
 	<td></td>
 </tr>
 <tr>
@@ -123,7 +133,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Custom template</td>
+	<td>Custom template requiring content</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Custom template containing all content</td>
 	<td></td>
 </tr>
 <tr>
@@ -142,23 +157,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Select page permissions</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Cancel</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>id=cancelPage</td>
 	<td></td>
 </tr>
 <tr>
 	<td>refreshAndWait</td>
 	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
@@ -722,7 +737,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=rebuilding the search index</td>
+	<td>link=Try rebuilding the search index</td>
 	<td></td>
 </tr>
 <!--Check Courses menu tab-->
@@ -773,7 +788,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=rebuilding the search index</td>
+	<td>link=Try rebuilding the search index</td>
 	<td></td>
 </tr>
 <!--Check Equipment menu tab-->
@@ -824,7 +839,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=rebuilding the search index</td>
+	<td>link=Try rebuilding the search index</td>
 	<td></td>
 </tr>
 <!--Check Locations menu-->
@@ -846,6 +861,46 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Continent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Africa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Antarctica</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Asia</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Australia and New Zealand</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Europe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=North America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=South America</td>
 	<td></td>
 </tr>
 <!--Logout-->

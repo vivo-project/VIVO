@@ -15,7 +15,7 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.auth.permissions.SimplePermission;
-import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.Actions;
+import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.VClass;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -31,8 +31,8 @@ public class ManagePeopleForOrganizationController extends FreemarkerHttpServlet
     private static final String TEMPLATE_NAME = "managePeopleForOrganization.ftl";
     
     @Override
-	protected Actions requiredActions(VitroRequest vreq) {
-		return SimplePermission.DO_FRONT_END_EDITING.ACTIONS;
+	protected AuthorizationRequest requiredActions(VitroRequest vreq) {
+		return SimplePermission.DO_FRONT_END_EDITING.ACTION;
 	}
 
     @Override
@@ -72,8 +72,11 @@ public class ManagePeopleForOrganizationController extends FreemarkerHttpServlet
         + "    OPTIONAL { ?position core:relates  ?person . " 
         + "               ?person a foaf:Person . \n"
         + "               ?person rdfs:label ?label } \n"
-        + "    OPTIONAL { ?position vitro:mostSpecificType ?subclass } \n"
+        + "    OPTIONAL { ?position vitro:mostSpecificType ?subclass . \n"
+        + "               OPTIONAL { ?subclass vitro:displayRankAnnot ?displayRank } \n"
+		+ "    } \n "
         + "    OPTIONAL { ?position core:hideFromDisplay ?hideThis } \n "
+        + "    FILTER ( ?displayRank < 500 )"
         + "} ORDER BY ?subclass ?name";    
        
     HashMap<String, List<Map<String,String>>>  getPeople(String subjectUri, VitroRequest vreq) {

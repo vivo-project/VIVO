@@ -1,0 +1,14 @@
+# $This file is distributed under the terms of the license in /doc/license.txt$ 
+
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+
+# 
+# datagetter to fetch ORCID info for the person. 
+#
+
+<freemarker:individual-orcidInterface.ftl> display:hasDataGetter display:orcidIdDataGetter .
+
+display:orcidIdDataGetter
+    a <java:edu.cornell.mannlib.vivo.orcid.OrcidIdDataGetter> .
+

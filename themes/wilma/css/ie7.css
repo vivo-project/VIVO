@@ -1,8 +1,0 @@
-/* $This file is distributed under the terms of the license in /doc/license.txt$ */
-
-/* Fix browser issues in IE7 browsers */
-
-/* Fix for homepage */
-#search-home-field  input.search {
-    padding-left: 14px;
-}
