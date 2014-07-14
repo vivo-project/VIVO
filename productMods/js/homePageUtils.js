@@ -55,7 +55,7 @@ $(document).ready(function(){
             $.getJSON(url, function(results) {
             
                 if ( results == null || results.individuals.length == 0 ) {
-                    if ( retryCount < 3 ) {
+                    if ( retryCount < 5 ) {
                         retryCount = retryCount + 1;
                         getFacultyMembers();
                     }
