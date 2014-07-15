@@ -25,7 +25,7 @@
 		        <#else>
 		            <li class="raLink">
 		        </#if> 
-		            <a class="raLink" href="${urls.base}/deptResearchAreas?deptURI=${individual.uri}&raURI=${resultRow["ra"]}">
+		            <a class="raLink" href="${urls.base}/deptResearchAreas?orgURI=${individual.uri?replace("#","%23")}&raURI=${resultRow["ra"]}">
 		                ${resultRow["raLabel"]}
 		            </a>
 		        </li>
