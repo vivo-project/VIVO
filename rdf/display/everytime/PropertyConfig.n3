@@ -634,6 +634,8 @@ local:editorOfConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-editorship.xml"^^xsd:string ;
     :displayName "editor of" ;
     vitro:displayRankAnnot 20;
+    vitro:collateBySubclassAnnot
+              "true"^^xsd:boolean;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddEditorshipToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
