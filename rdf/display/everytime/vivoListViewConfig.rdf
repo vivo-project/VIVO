@@ -69,6 +69,10 @@
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasResearchArea">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasAssociatedConcept.xml</display:listViewConfigFile>
     </rdf:Description>
+ 
+   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#publisherOf">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-publisherOf.xml</display:listViewConfigFile>
+    </rdf:Description>
 
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#orcidId">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-orcidId.xml</display:listViewConfigFile>
