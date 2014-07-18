@@ -4342,7 +4342,7 @@ vivo:middleName
       vitro:displayLimitAnnot
               "1"^^xsd:int ;
       vitro:displayRankAnnot
-              "20"^^xsd:int ;
+              "3"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#selfEditor> ;
       vitro:hiddenFromPublishBelowRoleLevelAnnot
@@ -8138,6 +8138,12 @@ vivo:dateFiled
 
 vcard:givenName
       rdfs:label "first name"@en-US .
+      vitro:displayLimitAnnot
+              "1"^^xsd:int ;
+      vitro:displayRankAnnot
+              "1"^^xsd:int ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupaddress> ;
 
 vivo:OutreachProviderRole
       rdfs:label "Outreach Provider Role"@en-US ;
@@ -8553,6 +8559,12 @@ bibo:numPages
 
 vcard:familyName
       rdfs:label "has last name"@en-US .
+      vitro:displayLimitAnnot
+              "1"^^xsd:int ;
+      vitro:displayRankAnnot
+              "2"^^xsd:int ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupaddress> ;
 
 vivo:Association
       rdfs:label "Association"@en-US ;
