@@ -63,7 +63,7 @@
     <#local title = qrData.preferredTitle! >
     <#local phoneNumber = qrData.phoneNumber! >
     <#local email = qrData.email! >
-    <#local url = qrData.externalUrl! >
+    <#local url = individual.uri! >
     <#local photo = individual.thumbUrl! >
     <#local rev = "" >
     
