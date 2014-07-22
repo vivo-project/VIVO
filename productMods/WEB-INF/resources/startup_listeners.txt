@@ -22,14 +22,11 @@ edu.cornell.mannlib.vitro.webapp.config.RevisionInfoSetup
 
 edu.cornell.mannlib.vitro.webapp.email.FreemarkerEmailFactory$Setup
 
-### this listener must be run before SDBSetup, all models setups and WebappDaoSetup ###
-edu.cornell.mannlib.vitro.webapp.servlet.setup.JenaPersistentDataSourceSetup
- 
-edu.cornell.mannlib.vitro.webapp.servlet.setup.RDFServiceSetup
+# In 1.8, this should replace JenaPersistentDataSourceSetup, RDFServiceSetup, and maybe more.
+edu.cornell.mannlib.vitro.webapp.servlet.setup.rdfsetup.RDFSetup
 
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ConfigurationModelsSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ContentModelSetup
-edu.cornell.mannlib.vitro.webapp.servlet.setup.ModelMakerSetup
 
 edu.cornell.mannlib.vitro.webapp.filestorage.backend.FileStorageSetup
 
