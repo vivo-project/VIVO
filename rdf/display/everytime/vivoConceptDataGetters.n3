@@ -70,7 +70,7 @@ display:getDepartmentDataGetter
         WHERE {
             ?orgURI vivo:relatedBy ?posn .
             ?posn a vivo:Position .
-            ?orgURI rdfs:label ?orgLabel .
+            ?orgURI rdfs:label ?departmentLabel .
             ?posn  vivo:relates ?person .
             ?person a foaf:Person .
             ?person rdfs:label ?prsnLabel .
