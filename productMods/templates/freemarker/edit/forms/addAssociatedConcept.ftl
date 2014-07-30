@@ -111,7 +111,7 @@
     </#list>
     <p class="inline-search">
         <input type="text" id="searchTerm" label="Search" class="acSelector" size="35" />
-        <input type="button" class="submit concept-search" id="searchButton" name="searchButton" value="${i18n().search_button}"/>&nbsp;
+        <input type="button" class="submit concept-search" id="searchButton" name="searchButton" value="${i18n().search_service_btn}"/>&nbsp;
     </p><span id="createOwnOne"> ${i18n().or} &nbsp;<a href="${userDefinedConceptUrl}" title="${i18n().create_own_concept}">${i18n().create_own_concept}&nbsp;</a></span>
     <input type="hidden" id="conceptNode" name="conceptNode" value=""/> <!-- Field value populated by JavaScript -->
     <input type="hidden" id="conceptLabel" name="conceptLabel" value="" />  <!-- Field value populated by JavaScript -->
