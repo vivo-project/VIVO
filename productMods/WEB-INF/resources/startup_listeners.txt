@@ -28,8 +28,6 @@ edu.cornell.mannlib.vitro.webapp.servlet.setup.rdfsetup.RDFSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ConfigurationModelsSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ContentModelSetup
 
-edu.cornell.mannlib.vitro.webapp.filestorage.backend.FileStorageSetup
-
 edu.cornell.mannlib.vitro.webapp.web.images.PlaceholderUtil$Setup
 
 # Some permissions were removed in release 1.7
@@ -71,7 +69,6 @@ edu.cornell.mannlib.vitro.webapp.search.documentBuilding.VivoDocumentModifiers
 
 # The search indexer uses a "public" permission, so the PropertyRestrictionPolicyHelper 
 #   and the PermissionRegistry must already be set up.
-edu.cornell.mannlib.vitro.webapp.searchengine.SearchEngineSetup
 edu.cornell.mannlib.vitro.webapp.searchindex.SearchIndexerSetup
 
 edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerSetup
