@@ -28,8 +28,8 @@ import com.hp.hpl.jena.rdf.model.StmtIterator;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.DisplayVocabulary;
 import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess;
-import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess.ModelID;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
+import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelNames;
 
 /**
  * This will pass these variables to the template:
@@ -105,7 +105,7 @@ public class InternalClassesDataGetter extends IndividualsForClassesDataGetter{
 		//if internal class restriction specified and is true
 		if(internalClass != null && internalClass.equals("true")) {
 			//Get internal class
-			Model mainModel = ModelAccess.on(context).getOntModel(ModelID.BASE_TBOX); 
+			Model mainModel = ModelAccess.on(context).getOntModel(ModelNames.TBOX_ASSERTIONS); 
 			StmtIterator internalIt = mainModel.listStatements(null, ResourceFactory.createProperty(VitroVocabulary.IS_INTERNAL_CLASSANNOT), (RDFNode) null);
 			//Checks for just one statement 
 			if(internalIt.hasNext()){
