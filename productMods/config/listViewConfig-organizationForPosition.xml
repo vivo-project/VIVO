@@ -10,7 +10,8 @@
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
         PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
-        
+        PREFIX fn:   &lt;http://www.w3.org/2005/xpath-functions#&gt;
+
         SELECT DISTINCT <collated> ?subclass </collated>
                         ?position
                         ?positionTitle 
@@ -45,7 +46,7 @@
               FILTER ( bound(?person) )
               </critical-data-required>
 			  <collated>FILTER ( ?displayRank &lt; 500 )</collated>
-        } ORDER BY <collated> ?subclass </collated> ?personName
+        } ORDER BY <collated> ?subclass </collated> (fn:lower-case(?personName))
     </query-select>
     
     <query-construct>
