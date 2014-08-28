@@ -14,7 +14,8 @@
         PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
         PREFIX obo: &lt;http://purl.obolibrary.org/obo/&gt;
         PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
-          
+        PREFIX fn:   &lt;http://www.w3.org/2005/xpath-functions#&gt;  
+
         SELECT DISTINCT
                        ?person 
                        ?personName
@@ -43,7 +44,7 @@
                             ?org rdfs:label ?orgLabel 
                  }
         } 
-        ORDER BY ?personName
+        ORDER BY (fn:lower-case(?personName))
     </query-select>
 
     <query-construct>
