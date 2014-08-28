@@ -21,6 +21,8 @@
 </#if>	
 <#assign qrCodeIcon = "qr-code-icon.png">
 <#assign visRequestingTemplate = "foaf-person-2column">
+<#--add the VIVO-ORCID interface -->
+<#include "individual-orcidInterface.ftl">  
 <section id="individual-intro" class="vcard person" role="region">
     <section id="share-contact" role="region"> 
         <#-- Image -->           
