@@ -61,7 +61,7 @@ var manageWebpages = {
     /* Drag-and-drop */
     initDragAndDrop: function() {
         
-        var webpages = $('#webpageList');
+        var webpages = $('#dragDropList');
         
         // No DD if < 2 items
         if (webpages.children('li') < 2) {
@@ -113,7 +113,7 @@ var manageWebpages = {
                     // Seems we need to do this by hand. Can't see any way to do it with jQuery UI. ??
                     var pos = manageWebpages.getPosition(ui.item),                       
                         nextpos = pos + 1, 
-                        webpages = $('#webpageList'), 
+                        webpages = $('#dragDropList'), 
                         next = manageWebpages.findWebpage('position', nextpos);
                     
                     if (next.length) {
@@ -222,9 +222,9 @@ var manageWebpages = {
     
     // Disable DD and associated cues if only one item remains
     disableDD: function() {
-        var webpages = $('#webpageList');
+        var webpages = $('#dragDropList');
         
-        $('#webpageList').sortable({ disable: true } )
+        $('#dragDropList').sortable({ disable: true } )
                          /* Use class dd rather than jQuery UI's class ui-sortable, so that we can remove
                           * the class if there's fewer than one webpage. We don't want to remove the ui-sortable
                           * class, in case we want to re-enable DD without a page reload (e.g., if implementing

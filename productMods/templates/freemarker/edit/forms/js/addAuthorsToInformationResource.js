@@ -367,7 +367,7 @@ var addAuthorForm = {
     /* Drag-and-drop */
     initAuthorDD: function() {
         
-        var authorshipList = $('#authorships'),
+        var authorshipList = $('#dragDropList'),
             authorships = authorshipList.children('li');
         
         if (authorships.length < 2) {
@@ -420,7 +420,7 @@ var addAuthorForm = {
                     // Seems we need to do this by hand. Can't see any way to do it with jQuery UI. ??
                     var pos = addAuthorForm.getPosition(ui.item),                       
                         nextpos = pos + 1, 
-                        authorships = $('#authorships'), 
+                        authorships = $('#dragDropList'), 
                         next = addAuthorForm.findAuthorship('position', nextpos);
                     
                     if (next.length) {
@@ -719,7 +719,7 @@ var addAuthorForm = {
     
     // Disable DD and associated cues if only one author remains
     disableAuthorDD: function() {
-        var authorships = $('#authorships'),
+        var authorships = $('#dragDropList'),
             authorNameWrapper = $('.authorNameWrapper');
             
         authorships.sortable({ disable: true } );

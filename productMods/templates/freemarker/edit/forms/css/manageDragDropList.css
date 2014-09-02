@@ -1,54 +1,26 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-#authorships {
-    margin-left: 0;
+#dragDropList {
+    margin: 0 0 1.5em 0;
 }
-#authorships li {
+#dragDropList li {
     list-style: none;
     margin-bottom: .75em;
 }
 /* Use class dd rather than jQuery UI's class ui-sortable, so that we can remove 
 the class if there's fewer than one author. We don't want to remove the ui-sortable
 class, in case we want to re-enable DD without a page reload. */
-#authorships.dd li {
+#dragDropList.dd li {
     padding-left: 1em;
     background: url("../images/sortable_icon.png") no-repeat left center;  
     cursor: move;  
 }
-#authorships .authorNameWrapper {
+#dragDropList .itemName {
     display: inline-block;
     width: 15em;
 }
-#showAddForm span.or {
-    display: none;
-}
-#showAddForm a.cancel {
-    margin-left: 2em;
-}
-form h3 {
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-form a:link.cancel, 
-form a:visited.cancel,
-#authorships a:link.remove, 
-#authorships a:visited.remove,
-#authorships a:link.undo, 
-#authorships a:visited.undo,  
-#showAddForm a:link.cancel, 
-#showAddForm a:visited.cancel {
-    color: #f70;
-    border-color: #f70;
-}
-form a:hover.cancel,
-#authorships a:hover.remove,
-#authorships a:hover.undo,
-#showAddForm a:hover.cancel {
-    color: #fff;
-    background: #f70;
-}
-#authorships a.undo {
-    margin-left: 1em;
+#dragDropList .extra-wide {
+    width: 20em !important;
 }
 #content form p.inline {
     clear: left;
@@ -79,24 +51,6 @@ form a:hover.cancel,
 #content form p.submit {
     margin-top: 3em;
 }
-/* Disabling undo links for the present. Add back later. */
-/*
-a.undo {
-    display:  none;
-}
-*/
-
-/* Hide elements not used in non-JS version of form */
-/* rjy7 Currently not supporting non-JS version of this form. */
-/*
-#showAddForm,
-a.remove,
-a.undo {
-    display: none;
-}
-*/
-
-/* These styles will need to be redone or removed to support a non-JS version of the form. */
 form#addAuthorForm {
     display: none;
 }

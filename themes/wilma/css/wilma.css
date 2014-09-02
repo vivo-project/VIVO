@@ -205,8 +205,8 @@ form textarea {
     margin-top: 20px;
     width: 100%;
 }
-#authorships a.remove:link,
-#webpageList a.remove:link,
+#itemList a.remove:link,
+#itemList a.remove:visited,
 #showAddForm a.cancel:link,
 form a:link.cancel, 
 form a:visited.cancel{
@@ -215,10 +215,8 @@ form a:visited.cancel{
     border-color: none;
     padding-left: 3px;
 }
-#authorships a.remove:hover,
-#authorships a.remove:active,
-#webpageList a.remove:hover,
-#webpageList a.remove:active,
+#itemList a.remove:hover,
+#itemList a.remove:active,
 #showAddForm a.cancel:hover,
 #showAddForm a.cancel:active,
 form a:hover.cancel, 
