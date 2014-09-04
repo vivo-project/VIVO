@@ -98,6 +98,7 @@ public class GemetService implements ExternalConceptService  {
             concept.setUri(uri);
             concept.setConceptId(stripConceptId(uri));
             concept.setSchemeURI(schemeURI);
+            concept.setType("");
             if (json.has("preferredLabel")) {
                JSONObject preferredLabelObj = json
                      .getJSONObject("preferredLabel");

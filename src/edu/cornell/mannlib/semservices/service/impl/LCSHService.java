@@ -146,6 +146,7 @@ public class LCSHService implements ExternalConceptService {
 			}
 			log.debug("-" + uri + "-");
 			String conceptUriString = getSKOSURI(uri);
+			String baseConceptURI = getConceptURI(uri);
 			URI conceptURI = null;
 			try {
 				conceptURI = new URI(conceptUriString);
@@ -159,12 +160,14 @@ public class LCSHService implements ExternalConceptService {
 			log.debug("Number of skos concepts " + skosConcepts.size());
 			
 			for (SKOSConcept skosConcept : skosConcepts) {
-				
-				Concept c = this.createConcept(sdf, bestMatch, skosConcept, dataset);
-				if(c != null) {
-					conceptList.add(c);
+				//Close matches are also being returned in list of skos concepts and 
+				//we are interested in getting the main concept we requested only
+				if(skosConcept.getURI().toString().equals(baseConceptURI)) {
+					Concept c = this.createConcept(sdf, bestMatch, skosConcept, dataset);
+					if(c != null) {
+						conceptList.add(c);
+					}
 				}
-			
 			}
 			i++;
 			
@@ -397,6 +400,15 @@ public class LCSHService implements ExternalConceptService {
 		if (uri.endsWith(".xml")) {
 			skosURI = uri.substring(0, uri.length() - 4);
 			skosURI += skosSuffix;
+		}
+		return hostUri + skosURI;
+	}
+	
+	//Given the URI from the xml, get just the base URI
+	private String getConceptURI(String uri) {
+		String skosURI = uri;
+		if (uri.endsWith(".xml")) {
+			skosURI = uri.substring(0, uri.length() - 4);
 		}
 		return hostUri + skosURI;
 	}
