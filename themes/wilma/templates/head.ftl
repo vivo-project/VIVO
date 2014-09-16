@@ -4,7 +4,7 @@
 <!-- Google Chrome Frame open source plug-in brings Google Chrome's open web technologies and speedy JavaScript engine to Internet Explorer-->
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-<title>${title!siteName!}</title>
+<title>${(title?html)!siteName!}</title>
 
 <#-- VIVO OpenSocial Extension by UCSF -->
 <#if openSocial??>
