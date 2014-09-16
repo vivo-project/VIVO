@@ -5,7 +5,7 @@ Files that enable VIVO (supported by Vitro) to operate in languages beyond Ameri
 
 The repository is structured this way
 * Each top-level directory represents a different release of VIVO.
-* Within these, each Second-level directory contains files for a specific langauge, for that release. 
+* Within these, each Second-level directory contains files for a specific language, for that release. 
 These directories are named for the "locale" of the language and region that they represent.
 
 For example, a directory of files for the French language (fr), as used in Belgium (BE), for VIVO release 1.6:
