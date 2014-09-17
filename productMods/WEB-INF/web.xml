@@ -131,6 +131,17 @@
     <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
 
+  <filter>
+    <filter-name>ClickjackFilter</filter-name>
+    <filter-class>edu.cornell.mannlib.vitro.webapp.filters.ClickjackFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>ClickjackFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
+
    <filter>
     <filter-name>PageRoutingFilter</filter-name>
     <filter-class>edu.cornell.mannlib.vitro.webapp.filters.PageRoutingFilter</filter-class>
