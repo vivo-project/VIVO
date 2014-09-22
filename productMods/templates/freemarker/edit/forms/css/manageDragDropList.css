@@ -42,9 +42,6 @@ class, in case we want to re-enable DD without a page reload. */
 #content form p.inline span.hint {
     margin-left: .5em;
 }
-#selectedAuthor {
-    clear: left;
-}
 #content form #selectedAuthor p.inline label {
     width: 10em;
 }

@@ -48,7 +48,7 @@
 
 <h3>${i18n().manage_editors}</h3>
 
-<ul id="editorships" ${ulClass}>
+<ul id="dragDropList" ${ulClass}>
 
 <script type="text/javascript">
     var editorshipData = [];
@@ -67,7 +67,7 @@
 			<span class="editor">
 					<#-- This span is here to assign a width to. We can't assign directly to the a.editorName,
 					for the case when it's followed by an em tag - we want the width to apply to the whole thing. -->
-					<span class="editorNameWrapper">
+					<span class="itemName">
 							<#if (editorUri?length > 0)>
 									<span class="editorName">${editorName}</span>
 								<#else>      
@@ -169,7 +169,7 @@ var i18nStrings = {
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />',
 					'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />',
 					'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/autocomplete.css" />',
-					'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/addEditorsToInformationResource.css" />')}
+					'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/manageDragDropList.css" />')}
 
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>')}

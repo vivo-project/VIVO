@@ -328,7 +328,7 @@ var addEditorForm = {
     /* Drag-and-drop */
     initEditorDD: function() {
         
-        var editorshipList = $('#editorships'),
+        var editorshipList = $('#dragDropList'),
             editorships = editorshipList.children('li');
         
         if (editorships.length < 2) {
@@ -381,7 +381,7 @@ var addEditorForm = {
                     // Seems we need to do this by hand. Can't see any way to do it with jQuery UI. ??
                     var pos = addEditorForm.getPosition(ui.item),                       
                         nextpos = pos + 1, 
-                        editorships = $('#editorships'), 
+                        editorships = $('#dragDropList'), 
                         next = addEditorForm.findEditorship('position', nextpos);
                     
                     if (next.length) {
@@ -637,7 +637,7 @@ var addEditorForm = {
     
     // Disable DD and associated cues if only one editor remains
     disableEditorDD: function() {
-        var editorships = $('#editorships'),
+        var editorships = $('#dragDropList'),
             editorNameWrapper = $('.editorNameWrapper');
             
         editorships.sortable({ disable: true } );

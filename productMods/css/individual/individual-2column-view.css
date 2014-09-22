@@ -139,11 +139,6 @@ p#networks {
     border-top: 1px solid #DDE4E3;
     padding-top: 10px;
 }
-.collaboratorship-link-separator-solid { 
-    margin-top: 10px;
-    border-top: 1px solid #DDE4E3;
-    padding-top: 10px;
-}
 .sparkline_text {
     font-size: .9em; 
     text-align: left;
@@ -174,27 +169,21 @@ div#pub_count_short_sparkline_vis {
     height: 48px; 
     margin-bottom: 20px;
 }
-/* <------ INDIVIDUAL TEMPORAL GRAPH */
+/* <------ INDIVIDUAL TEMPORAL GRAPH & MAP O' SCIENCE*/
 #temporal-graph {
     padding: 0 3px 8px 0; 
     background-color: #fff;
     margin-top: -4px; 
 }
-#temporal-graph h3 img {
-    padding-right: 10px;
-    vertical-align: middle; 
-}
-
-/* <------ INDIVIDUAL MAP O' SCIENCE */
-#map-of-science {
-    padding: 0 3px 24px 0; 
-    background-color: #fff;
-}
+#temporal-graph h3 img,
 #map-of-science h3 img {
     padding-right: 10px;
     vertical-align: middle; 
 }
-
+#map-of-science {
+    padding: 0 3px 24px 0; 
+    background-color: #fff;
+}
 /* <------ POSITIONS */
 ul#individual-personInPosition {
     list-style-type: circle;
@@ -213,7 +202,7 @@ ul#individual-personInPosition li:last-child {
 div#contactsWebpages {
     width:100%;
     display:inline;
-    clear:both
+    clear:both;
 }
 div#contactContainer {
     width:50%;
@@ -264,15 +253,6 @@ span#qrCodeImage {
     overflow:visible;
     z-index:1000;
 }
-span#qrCodeImage img {
-    padding: 1.7em 1.7em 0 1.7em; 
-}
-a.qrCloseLink {
-    float: right; 
-    padding-right: 1em; 
-    margin-right: 0; 
-    font-size: .8em;
-}
 /* MISCELLANEOUS------>  */
 span#quickViewLink {
     clear:both;
@@ -280,10 +260,6 @@ span#quickViewLink {
 }
 span#quickViewLink img {
     margin-top:35px;
-}
-a#manageLabels { 
-    margin-left:20px;
-    font-size:0.7em;
 }
 /****** FROM WILMA.CSS ******/
 #individual-info h2.mainPropGroup { 

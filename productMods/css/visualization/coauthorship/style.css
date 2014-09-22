@@ -73,18 +73,8 @@ ul {
     height :23px; 
     display: block;
 }
+#topNav ul li a:hover,
 #topNav ul li a.hover {
-    background: url(../../../site_icons/visualization/coauthorship/top_btn_h.gif) no-repeat 0 0 #E1DBC7; 
-    color: #FFFFFF;
-    font: bold 11px/23px "Trebuchet MS", Arial, Helvetica, sans-serif;
-    text-transform: uppercase; 
-    text-align: center; 
-    text-decoration: none;
-    width: 65px; 
-    height: 23px; 
-    display: block;
-}
-#topNav ul li a:hover {
     background: url(../../../site_icons/visualization/coauthorship/top_btn_h.gif) no-repeat 0 0 #E1DBC7; 
     color: #FFFFFF;
     font: bold 11px/23px "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -145,18 +135,11 @@ ul {
     float: left;
     font: normal 24px/42px Georgia, "Times New Roman", Times, serif;
 }
+#eventLink h2 span,
 #bodyPannel form.search h2 span {
     background-color: #FFFFFF; 
     color: #0B0B0B;
     font: normal 24px/42px Georgia, "Times New Roman", Times, serif;
-}
-#bodyPannel form.search label {
-    background-color: #FFFFFF; 
-    color: #0B0B0B; 
-    margin: 0 0 8px 0; 
-    float: left;
-    font: bold 10px/28px Arial, Helvetica, sans-serif; 
-    text-transform: uppercase;
 }
 #bodyPannel form.search input {
     background-color: #EFEBDE; 
@@ -203,11 +186,6 @@ ul {
     background: url(../../../site_icons/visualization/coauthorship/event_link_bg.gif) no-repeat 0 7px #FFFFFF; 
     color: #786E4E;
     padding: 6px 0 10px 48px;
-    font: normal 28px/42px Georgia, "Times New Roman", Times, serif;
-}
-#eventLink h2 span {
-    background-color: #FFFFFF; 
-    color: #0B0B0B;
     font: normal 28px/42px Georgia, "Times New Roman", Times, serif;
 }
 #eventLink ul {
@@ -403,6 +381,7 @@ ul {
     color: #0B0B0B;
     font: normal 24px/30px Georgia, "Times New Roman", Times, serif;
 }
+#bodyPannel form.search label,
 #newsLetter form.newsLetter label {
     background-color: #FFFFFF; 
     color: #0B0B0B; 

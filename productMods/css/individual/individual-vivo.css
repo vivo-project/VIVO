@@ -68,9 +68,6 @@ ul#additional-emails li {
     margin-top: 10px;
 }
 /* <------ INDIVIDUAL INTRO - RIGHT SIDE CONTENT */
-#individual-info.withThumb {
-    width: 78%;
-}
 #individual-intro .individual-overview {
     margin: 0;
     display: inline;
@@ -168,34 +165,25 @@ p.view-all-coauthors {
     width:  200px;
     text-align: left;
 }
-/* <------ INDIVIDUAL TEMPORAL GRAPH */
+/* <------ INDIVIDUAL TEMPORAL GRAPH & MAP O' SCIENCE */
 #temporal-graph {
     padding: 0 3px 20px 0;
     background-color: #fff;
 }
-#temporal-graph h3 {
-    margin: 0;
-    padding: 0;
-}
-#temporal-graph h3 img {
-    padding-right: 10px;
-    vertical-align: text-top;
-}
-
-/* <------ INDIVIDUAL MAP O' SCIENCE */
-#map-of-science {
-    padding: 0 29px 20px 0;
-    background-color: #fff;
-}
-#map-of-science h3 {
-    margin: 0;
-    padding: 0;
-}
+#temporal-graph h3 img,
 #map-of-science h3 img {
     padding-right: 10px;
     vertical-align: text-top;
 }
-
+#map-of-science {
+    padding: 0 29px 20px 0;
+    background-color: #fff;
+}
+#map-of-science h3,
+#temporal-graph h3 {
+    margin: 0;
+    padding: 0;
+}
 /* <------ POSITIONS */
 ul#individual-personInPosition {
     list-style-type: circle;
@@ -209,12 +197,7 @@ ul#individual-personInPosition li:last-child {
 }
 
 /* <------ RESEARCH AREA */
-ul#individual-hasResearchArea li {
-    float: left;
-    padding-right: 10px;
-    margin-right: 10px;
-    border-right: 1px solid #5e6363;
-}
+ul#individual-hasResearchArea li,
 ul#individual-facultyMemberships li {
     float: left;
     padding-right: 10px;
