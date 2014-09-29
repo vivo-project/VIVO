@@ -9,7 +9,11 @@ list of partitioning expressions.
 2) The log file is scanned for records from the RDFServiceLogger, which are
    accumulated in the program storage.
 3) The partitioning expressions are tested against each log record, and matches
-   are recorded.
+   are recorded. 
+      Strings of white space are treated as single spaces, both in the 
+      partitioning expressions and in the log records. This makes the 
+      expressions easier to read, both in the partitions file and in the program 
+      output.
 4) For each partioning expression, report:
     a) the expression
     b) how many queries matched it

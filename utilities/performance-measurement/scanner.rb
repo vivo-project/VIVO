@@ -36,7 +36,7 @@ class LogFileParser
 
     log_record = LogRecord.new
     log_record.time = match[1].to_f
-    log_record.query = match[3].strip
+    log_record.query = match[3].strip.gsub(/\s+/, ' ')
     log_record.stack = []
     return log_record
   end

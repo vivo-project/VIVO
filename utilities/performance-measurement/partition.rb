@@ -3,6 +3,7 @@ class Criterion
   attr_accessor :count
   attr_accessor :total_time
   def initialize(expr)
+    expr = expr.gsub(/\s+/, ' ')
     @expression = Regexp.new(expr, Regexp::MULTILINE)
     @count = 0
     @total_time = 0.0
@@ -14,7 +15,7 @@ class Criterion
   end
 
   def to_s()
-    "#{self.class}: count=#{@count}, total_time=#{format("%.3f", @total_time)}, expression='#{@expression}'"
+    format("%19s: count=%5d, total_time=%9.3f, expression='%s'", self.class, @count, @total_time, @expression)
   end
 end
 
