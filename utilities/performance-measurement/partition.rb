@@ -1,10 +1,12 @@
 class Criterion
   attr_accessor :expression
+  attr_accessor :group_name
   attr_accessor :count
   attr_accessor :total_time
-  def initialize(expr)
+  def initialize(expr, current_group_name='')
     expr = expr.gsub(/\s+/, ' ')
     @expression = Regexp.new(expr, Regexp::MULTILINE)
+    @group_name = current_group_name || ''
     @count = 0
     @total_time = 0.0
   end
@@ -15,7 +17,7 @@ class Criterion
   end
 
   def to_s()
-    format("%19s: count=%5d, total_time=%9.3f, expression='%s'", self.class, @count, @total_time, @expression)
+    format("%s: count=%5d, total_time=%9.3f, expression='%s'", self.class, @count, @total_time, @expression.source)
   end
 end
 
@@ -63,6 +65,55 @@ class OverlapCriterion < WritingCriterion
   end
 end
 
+class GroupList
+  def initialize(criteria)
+    @list = []
+    criteria.each do |c|
+      add_to_group(c)
+    end
+  end
+
+  def add_to_group(c)
+    @list.each do |g|
+      if g.name == c.group_name
+        g.add(c)
+        return
+      end
+    end
+    @list << Group.new(c)
+  end
+
+  def to_s()
+    total_count = @list.inject(0) {|sum, g| sum + g.total_count}
+    total_time = @list.inject(0.0) {|sum, g| sum + g.total_time}
+    format("%s \nALL GROUPS: total count = %5d, total time = %9.3f seconds \n", @list.join("\n"), total_count, total_time)
+  end
+
+  class Group
+    attr :name
+    attr :criteria
+    attr :total_count
+    attr :total_time
+    def initialize(c)
+      @name = c.group_name
+      @criteria = []
+      @total_count = 0
+      @total_time = 0.0
+      add(c)
+    end
+
+    def add(c)
+      @criteria << c
+      @total_count += c.count
+      @total_time += c.total_time
+    end
+
+    def to_s()
+      format("GROUP '%s' \n  %s\n %20s total count = %5d, total time = %9.3f seconds \n", @name, @criteria.join("\n  "), ' ', @total_count, @total_time)
+    end
+  end
+end
+
 class Partition
   # ------------------------------------------------------------------------------------
   private
@@ -70,12 +121,17 @@ class Partition
   #
   def parse_partition_file(partition_file)
     @criteria = []
+    current_group_name = ''
     File.open(partition_file).each() do |line|
       next if line.strip().empty? || line.start_with?('#')
       if line.start_with?("QUERY ")
-        @criteria << QueryCriterion.new(line.slice(6..-1).strip)
+        @criteria << QueryCriterion.new(line.slice(6..-1).strip, current_group_name)
       elsif line.start_with?("STACK ")
-        @criteria << StackCriterion.new(line.slice(6..-1).strip)
+        @criteria << StackCriterion.new(line.slice(6..-1).strip, current_group_name)
+      elsif line.start_with?("GROUP ")
+        current_group_name = line.slice(6..-1).strip
+      elsif line.start_with?("GROUP")
+        current_group_name = ''
       else
         raise "Invalid line in partition file: '#{line}'"
       end
@@ -109,7 +165,7 @@ class Partition
   end
 
   def report
-    puts "#{@criteria.join("\n")}\n#{@overlap}\n#{@unmatched}"
+    puts "#{GroupList.new(@criteria)}\n#{@overlap}\n#{@unmatched}\n"
   end
 
 end
