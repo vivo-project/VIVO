@@ -210,6 +210,9 @@
     </script>
 </#if>
 <script type="text/javascript">
+var individualUri = '${individual.uri!}';
+var individualPhoto = '${individual.thumbNail!}';
+var exportQrCodeUrl = '${urls.base}/qrcode?uri=${individual.uri!}';
 var profileTypeData = {
     processingUrl: '${urls.base}/edit/primitiveRdfEdit',
     individualUri: '${individual.uri!}',

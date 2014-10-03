@@ -6,7 +6,6 @@
 -->
  
 <#include "individual-setup.ftl">
-<#import "individual-qrCodeGenerator.ftl" as qr>
 <#import "lib-vivo-properties.ftl" as vp>
 <#--Number of labels present-->
  <#if !labelCount??>
@@ -45,8 +44,13 @@
         <!-- Contact Info -->
         <div id="individual-tools-people">
             <span id="iconControlsLeftSide">
-                <img id="uriIcon" title="${individual.uri}" src="${urls.images}/individual/uriIcon.gif" alt="${i18n().uri_icon}"/>  
-                <@qr.renderCode "qr_icon.png" />
+                <img id="uriIcon" title="${individual.uri}" src="${urls.images}/individual/uriIcon.gif" alt="${i18n().uri_icon}"/>
+  				<#if checkNamesResult?has_content >
+					<img id="qrIcon"  src="${urls.images}/individual/qr_icon.png" alt="${i18n().qr_icon}" />
+                	<span id="qrCodeImage" class="hidden">${qrCodeLinkedImage!} 
+						<a class="qrCloseLink" href="#"  title="${i18n().qr_code}">${i18n().close_capitalized}</a>
+					</span>
+				</#if>
             </span>
         </div>
         <#include "individual-contactInfo.ftl">  
@@ -138,6 +142,9 @@
 </#if>
 <script>
     var imagesPath = '${urls.images}';
+	var individualUri = '${individual.uri!}';
+	var individualPhoto = '${individual.thumbNail!}';
+	var exportQrCodeUrl = '${urls.base}/qrcode?uri=${individual.uri!}';
     var i18nStrings = {
         displayLess: '${i18n().display_less}',
         displayMoreEllipsis: '${i18n().display_more_ellipsis}',

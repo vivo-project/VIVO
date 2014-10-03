@@ -676,6 +676,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>QrCodeAjax</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.ajax.QrCodeAjaxController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>QrCodeAjax</servlet-name>
+    <url-pattern>/qrCodeAjax</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>ShowAuth</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.admin.ShowAuthController</servlet-class>
   </servlet>

@@ -31,7 +31,7 @@
 -->
 <#macro renderCode imageFile display="icon" width="125">
     <#if hasValidVCard()>
-        <#local qrData = individual.qrData()>
+        <#local qrData = qrData>
         <#local qrCodeLinkedImage><a title="${i18n().export_qr_codes}" href="${qrData.exportQrCodeUrl}"><@qrCodeVCard qrCodeWidth=width /></a></#local>
         
         <#if (display == "full")>
@@ -51,7 +51,7 @@
 
 <#function getQrCodeUrlForVCard qrCodeWidth>
 
-    <#local qrData = individual.qrData()>
+    <#local qrData = qrData>
 
     <#local core = "http://vivoweb.org/ontology/core#">
     <#local foaf = "http://xmlns.com/foaf/0.1/">
@@ -95,13 +95,14 @@
 
 <#function getQrCodeUrlForLink qrCodeWidth>
 
-    <#local qrData = individual.qrData()>
+    <#local qrData = qrData>
 
-    <#local url = qrData.externalUrl! >
+    <#local externalUrl = qrData.externalUrl! >
 
     <#local qrCodeUrl = "">
-    <#if url != "">
-        <#local qrCodeContent = url?url> 
+    <#if externalUrl != "">
+    	<#local fullExternalUrl = externalUrl + individual.profileUrl> 
+    	<#local qrCodeContent = fullExternalUrl?url> 
         <#local qrCodeUrl = "https://chart.googleapis.com/chart?cht=qr&amp;chs=${qrCodeWidth}x${qrCodeWidth}&amp;chl=${qrCodeContent}&amp;choe=UTF-8" >
     </#if>
 
@@ -131,7 +132,7 @@
 
 <#function hasValidVCard>
 
-    <#local qrData = individual.qrData()>
+    <#local qrData = qrData>
 
     <#local firstName = qrData.firstName! >
     <#local lastName = qrData.lastName! >

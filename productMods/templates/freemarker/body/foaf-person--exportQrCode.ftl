@@ -5,7 +5,7 @@
 
 <#include "individual-qrCodeGenerator.ftl">
 
-<h2>${i18n().export_qr_code} <em>(<a href="${individual.qrData().aboutQrCodesUrl}" title="${i18n().more_qr_info}">${i18n().what_is_this}</a>)</em></h2>
+<h2>${i18n().export_qr_code} <em>(<a href="${qrData.aboutQrCodesUrl}" title="${i18n().more_qr_info}">${i18n().what_is_this}</a>)</em></h2>
 
 <#assign thumbUrl = individual.thumbUrl! "${urls.images}/placeholders/person.thumbnail.jpg" >
 <img class="individual-photo qrCode" src="${thumbUrl}" width="160" alt="${i18n().alt_thumbnail_photo}"/>
