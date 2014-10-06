@@ -68,7 +68,6 @@ public class QrCodeDetails extends AbstractAjaxResponder {
 	@Override
 	public String prepareResponse() throws IOException, JSONException {
 		try {
-
             Individual individual = getIndividualFromRequest(vreq);
             String firstName = "";
             String lastName = "";

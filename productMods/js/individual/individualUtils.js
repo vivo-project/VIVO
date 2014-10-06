@@ -109,7 +109,7 @@ $(document).ready(function(){
 		// only create the img the first time, so check if it already exists
 		if ( !$('img#codeImage').length ) {		
 			$.ajax({
-            	url: "/vivo/qrCodeAjax",
+            	url: baseUrl + "/qrCodeAjax",
             	dataType: "json",
             	data: {
                 	action: "getQrCodeDetails",
@@ -156,12 +156,15 @@ $(document).ready(function(){
 									  + "</a>";
 									
 							$('#qrCodeImage').prepend(spanStr);
+							$('#qrCodeImage').toggleClass('hidden');
 						}
                  	}
             	}
        		});        
         } 
-		$('#qrCodeImage').toggleClass('hidden');
+		else { 
+			$('#qrCodeImage').toggleClass('hidden');
+		}
     });
 
     // For pubs and grants on the foaf:person profile, and affiliated people

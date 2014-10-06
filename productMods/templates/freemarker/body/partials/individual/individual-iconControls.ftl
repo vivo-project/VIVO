@@ -3,10 +3,12 @@
 <#-- Icon controls displayed in upper-right corner -->
 
 <img id="uriIcon" title="${individual.uri}" src="${urls.images}/individual/share-uri-icon.png" alt="${i18n().share_the_uri}" />
-<img id="qrIcon"  src="${urls.images}/individual/qr_icon.png" alt="${i18n().qr_icon}" />
-<span id="qrCodeImage" class="hidden">${qrCodeLinkedImage!} 
-	<a class="qrCloseLink" href="#"  title="${i18n().qr_code}">${i18n().close_capitalized}</a>
-</span>
+<#if checkNamesResult?has_content >
+	<img id="qrIcon"  src="${urls.images}/individual/qr-code-icon.png" alt="${i18n().qr_icon}" />
+	<span id="qrCodeImage" class="hidden">${qrCodeLinkedImage!} 
+		<a class="qrCloseLink" href="#"  title="${i18n().qr_code}">${i18n().close_capitalized}</a>
+	</span>
+</#if>
 
 
 <#--

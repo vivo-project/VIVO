@@ -145,6 +145,7 @@
 	var individualUri = '${individual.uri!}';
 	var individualPhoto = '${individual.thumbNail!}';
 	var exportQrCodeUrl = '${urls.base}/qrcode?uri=${individual.uri!}';
+	var baseUrl = '${urls.base}';
     var i18nStrings = {
         displayLess: '${i18n().display_less}',
         displayMoreEllipsis: '${i18n().display_more_ellipsis}',

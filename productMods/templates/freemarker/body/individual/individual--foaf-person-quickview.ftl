@@ -213,6 +213,7 @@
 var individualUri = '${individual.uri!}';
 var individualPhoto = '${individual.thumbNail!}';
 var exportQrCodeUrl = '${urls.base}/qrcode?uri=${individual.uri!}';
+var baseUrl = '${urls.base}';
 var profileTypeData = {
     processingUrl: '${urls.base}/edit/primitiveRdfEdit',
     individualUri: '${individual.uri!}',
