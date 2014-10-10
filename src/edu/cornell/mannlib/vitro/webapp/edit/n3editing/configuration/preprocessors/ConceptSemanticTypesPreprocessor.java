@@ -8,30 +8,19 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.hp.hpl.jena.ontology.OntModel;
-import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QueryFactory;
-import com.hp.hpl.jena.query.QuerySolutionMap;
 import com.hp.hpl.jena.query.Syntax;
-import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.ResIterator;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.rdf.model.ResourceFactory;
-import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.shared.Lock;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess;
-import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
-import edu.cornell.mannlib.vitro.webapp.dao.jena.DatasetWrapper;
-import edu.cornell.mannlib.vitro.webapp.dao.jena.DatasetWrapperFactory;
+import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 
 //We are representing semantic types from the UMLS Semantic Network as OWL Classes
 //and this preprocessor will add the appropriate class information to the TBox

@@ -9,22 +9,19 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import com.hp.hpl.jena.rdf.model.Literal;
-import com.hp.hpl.jena.vocabulary.XSD;
 import com.hp.hpl.jena.query.Query;
-import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
-import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.sparql.resultset.ResultSetMem;
+import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
-import edu.cornell.mannlib.vitro.webapp.beans.ObjectPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
-import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.PersonHasPublicationValidator;
@@ -34,6 +31,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTw
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ConstantFieldOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
+import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
 
@@ -84,7 +82,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
                              "WHERE { <" + authorshipNode.getURI() + "> <" + relatesPred + "> ?obj . \n" +
                              "    ?obj a <" + documentClass + "> . } \n";
         Query pubQuery = QueryFactory.create(pubQueryStr);
-        QueryExecution qe = QueryExecutionFactory.create(pubQuery, ModelAccess.on(vreq).getJenaOntModel());
+        QueryExecution qe = QueryExecutionFactory.create(pubQuery, ModelAccess.on(vreq).getOntModel());
         try {
             ResultSetMem rs = new ResultSetMem(qe.execSelect());
             if(!rs.hasNext()){

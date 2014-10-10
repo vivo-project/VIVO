@@ -703,6 +703,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>ShowRDFSources</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.admin.ShowSourcesController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowRDFSources</servlet-name>
+    <url-pattern>/admin/showSources</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>StartupStatus</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.admin.StartupStatusController</servlet-class>
   </servlet>

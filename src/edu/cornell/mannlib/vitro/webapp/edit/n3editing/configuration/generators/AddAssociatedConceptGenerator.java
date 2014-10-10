@@ -26,7 +26,6 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
@@ -36,14 +35,13 @@ import edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty;
 import edu.cornell.mannlib.vitro.webapp.beans.ObjectPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
-import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess;
-import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.AddAssociatedConceptsPreprocessor;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.ConceptSemanticTypesPreprocessor;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
+import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.utils.ConceptSearchService.ConceptSearchServiceUtils;
 /**
  * Generates the edit configuration for importing concepts from external
@@ -454,7 +452,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 			 		String conceptSemanticTypeLabel = null;
 			 		//Can a concept have multiple semantic types?  Currently we are only returning the first one
 			 		//TODO: Change this into a sparql query that returns all types for the concept that are subclasses of SKOS concepts
-			 		HashMap<String, String> typeAndLabel = this.getConceptSemanticTypeQueryResults(conceptIndividual.getURI(), ModelAccess.on(vreq).getJenaOntModel());
+			 		HashMap<String, String> typeAndLabel = this.getConceptSemanticTypeQueryResults(conceptIndividual.getURI(), ModelAccess.on(vreq).getOntModel());
 			 		if(typeAndLabel.containsKey("semanticTypeURI")) {
 			 			conceptSemanticTypeURI = typeAndLabel.get("semanticTypeURI");
 			 		}

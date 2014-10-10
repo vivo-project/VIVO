@@ -5,8 +5,8 @@
 <%@ taglib uri="http://djpowell.net/tmp/sparql-tag/0.1/" prefix="sparql" %>
 <%@ taglib uri="http://jakarta.apache.org/taglibs/string-1.1" prefix="str" %>
 <%@ page import="java.net.URLDecoder" %>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.dao.ModelAccess"%>
-<% request.setAttribute("jenaOntModel", ModelAccess.on(getServletContext()).getJenaOntModel()); %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess"%>
+<% request.setAttribute("jenaOntModel", ModelAccess.on(getServletContext()).getOntModel()); %>
 
 <div id="content">
 

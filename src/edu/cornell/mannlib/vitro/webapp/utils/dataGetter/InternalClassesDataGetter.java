@@ -27,8 +27,8 @@ import com.hp.hpl.jena.rdf.model.StmtIterator;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.DisplayVocabulary;
-import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
+import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelNames;
 
 /**

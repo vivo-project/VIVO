@@ -3,7 +3,6 @@
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.Map;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
 
 import org.apache.commons.lang.StringUtils;
@@ -32,15 +30,14 @@ import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
 
-
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.dao.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.BaseEditSubmissionPreprocessorVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.MultiValueEditSubmission;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 
 public class AddAssociatedConceptsPreprocessor extends
 		BaseEditSubmissionPreprocessorVTwo {
@@ -90,7 +87,7 @@ public class AddAssociatedConceptsPreprocessor extends
 	public void preprocess(MultiValueEditSubmission inputSubmission, VitroRequest vreq) {
 		submission = inputSubmission;
 		this.wdf = vreq.getWebappDaoFactory();
-		this.ontModel = ModelAccess.on(vreq).getJenaOntModel();
+		this.ontModel = ModelAccess.on(vreq).getOntModel();
 		//Set the models that we need here
 		// Get the input elements for concept node and concept label as well
 		// as vocab uri (which is based on thge
