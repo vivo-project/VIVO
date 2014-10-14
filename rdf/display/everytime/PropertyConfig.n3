@@ -23,7 +23,6 @@ local:personInPositionContext a :ConfigContext ;
     :qualifiedBy vivo:Position .
 
 local:personInPositionConfig a :ObjectPropertyDisplayConfig ;
-    rdfs:label "personInPosition"@en-US;
     :displayName "positions" ;
     :listViewConfigFile "listViewConfig-personInPosition.xml"^^xsd:string ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> ;
@@ -40,7 +39,6 @@ local:organizationForPositionContext a :ConfigContext ;
     :qualifiedBy vivo:Position .
 
 local:organizationForPositionConfig a :ObjectPropertyDisplayConfig ;
-    rdfs:label "organizationForPosition"@en-US;
     :displayName "people" ;
     :listViewConfigFile "listViewConfig-organizationForPosition.xml"^^xsd:string ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> ;
@@ -59,7 +57,6 @@ local:authorInAuthorshipContext a :ConfigContext ;
 
 local:authorInAuthorshipConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-authorInAuthorship.xml"^^xsd:string ;
-    rdfs:label "authorInAuthorship"@en-US;
     :displayName "selected publications" ;
     vitro:collateBySubclassAnnot
               "true"^^xsd:boolean;
@@ -77,7 +74,6 @@ local:orgInAuthorshipContext a :ConfigContext ;
 
 local:orgInAuthorshipConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-authorInAuthorship.xml"^^xsd:string ;
-    rdfs:label "organizationInAuthorship"@en-US;
     :displayName "selected publications" ;
     vitro:collateBySubclassAnnot
               "true"^^xsd:boolean;
@@ -97,8 +93,7 @@ local:hasServiceProviderRoleContext a :ConfigContext ;
     
 local:hasServiceProviderRoleConfig a :ObjectPropertyDisplayConfig ;
    :listViewConfigFile "listViewConfig-roleContributesTo.xml"^^xsd:string ;
-   rdfs:label "hasServiceProviderRole"@en-US;
-    :displayName "professional service activities" ;
+   :displayName "professional service activities" ;
    vitro:displayRankAnnot 32;
    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
@@ -114,7 +109,6 @@ local:hasClinicalRoleContext a :ConfigContext ;
 
 local:hasClinicalRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-hasClinicalActivity.xml"^^xsd:string ;
-    rdfs:label "hasClinicalRole"@en-US;
     :displayName "clinical activities" ;
     vitro:displayRankAnnot 70;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -131,7 +125,6 @@ local:orgHasClinicalRoleContext a :ConfigContext ;
 
 local:orgHasClinicalRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-hasClinicalActivity.xml"^^xsd:string ;
-    rdfs:label "organizationHasClinicalRole"@en-US;
     :displayName "clinical activities" ;
     vitro:displayRankAnnot 70;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -148,7 +141,6 @@ local:hasLeaderRoleContext a :ConfigContext ;
 
 local:hasLeaderRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-roleContributesTo.xml"^^xsd:string ;
-    rdfs:label "hasLeaderRole"@en-US;
     :displayName "head of" ;
     vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -165,7 +157,6 @@ local:orgHasLeaderRoleContext a :ConfigContext ;
 
 local:orgHasLeaderRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-roleContributesTo.xml"^^xsd:string ;
-    rdfs:label "organizationHasLeaderRole"@en-US;
     :displayName "lead organization of" ;
     vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -182,7 +173,6 @@ local:hasMemberRoleContext a :ConfigContext ;
 
 local:hasMemberRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-roleContributesTo.xml"^^xsd:string ;
-    rdfs:label "hasMemberRole"@en-US;
     :displayName "member of" ;
     vitro:displayRankAnnot 50;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -199,7 +189,6 @@ local:orgHasMemberRoleContext a :ConfigContext ;
 
 local:orgHasMemberRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-roleContributesTo.xml"^^xsd:string ;
-    rdfs:label "organizationHasMemberRole"@en-US;
     :displayName "member of" ;
     vitro:displayRankAnnot 50;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -216,7 +205,6 @@ local:hasTeacherRoleContext a :ConfigContext ;
 
 local:hasTeacherRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-roleRealizedIn.xml"^^xsd:string ;
-    rdfs:label "hasTeacherRole"@en-US;
     :displayName "teaching activities" ;
     vitro:displayRankAnnot 20;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -233,7 +221,6 @@ local:hasEditorRoleContext a :ConfigContext ;
 
 local:hasEditorRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-hasEditorRole.xml"^^xsd:string ;
-    rdfs:label "hasEditorRole"@en-US;
     :displayName "collection or series editor for" ;
     vitro:displayRankAnnot 15;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -250,7 +237,6 @@ local:groupHasEditorRoleContext a :ConfigContext ;
 
 local:groupHasEditorRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-hasEditorRole.xml"^^xsd:string ;
-    rdfs:label "groupHasEditorRole"@en-US;
     :displayName "collection or series editorial group for" ;
     vitro:displayRankAnnot 15;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -267,7 +253,6 @@ local:hasReviewerRoleContext a :ConfigContext ;
 
 local:hasReviewerRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-hasReviewerRole.xml"^^xsd:string ;
-    rdfs:label "hasReviewerRole"@en-US;
     :displayName "reviewer of" ;
     vitro:displayRankAnnot 18;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -284,7 +269,6 @@ local:hasOrganizerRoleContext a :ConfigContext ;
 
 local:hasOrganizerRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-roleRealizedIn.xml"^^xsd:string ;
-    rdfs:label "hasOrganizerRole"@en-US;
     :displayName "organizer of event" ;
     vitro:displayRankAnnot 27;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -301,7 +285,6 @@ local:orgHasOrganizerRoleContext a :ConfigContext ;
 
 local:orgHasOrganizerRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-roleRealizedIn.xml"^^xsd:string ;
-    rdfs:label "orgHasOrganizerRole"@en-US;
     :displayName "convener of event" ;
     vitro:displayRankAnnot 80;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -318,7 +301,6 @@ local:hasOutreachProviderRoleContext a :ConfigContext ;
 
 local:hasOutreachProviderRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-roleContributesTo.xml"^^xsd:string ;
-    rdfs:label "hasOutreachProviderRole"@en-US;
     :displayName "outreach and community service activities" ;
     vitro:displayRankAnnot 50;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -335,7 +317,6 @@ local:orgHasOutreachProviderRoleContext a :ConfigContext ;
 
 local:orgHasOutreachProviderRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-roleContributesTo.xml"^^xsd:string ;
-    rdfs:label "orgHasOutreachProviderRole"@en-US;
     :displayName "outreach and community service activities" ;
     vitro:displayRankAnnot 50;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -352,7 +333,6 @@ local:hasAttendeeRoleContext a :ConfigContext ;
 
 local:hasAttendeeRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-hasAttendeeRole.xml"^^xsd:string ;
-    rdfs:label "hasAttendeeRole"@en-US;
     :displayName "attended event" ;
     vitro:displayRankAnnot 85;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -369,7 +349,6 @@ local:orgHasAttendeeRoleContext a :ConfigContext ;
 
 local:orgHasAttendeeRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-hasAttendeeRole.xml"^^xsd:string ;
-    rdfs:label "orgHasAttendeeRole"@en-US;
     :displayName "attended event" ;
     vitro:displayRankAnnot 85;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -386,7 +365,6 @@ local:hasResearcherRoleContext a :ConfigContext ;
 
 local:hasResearcherRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-researchActivities.xml"^^xsd:string ;
-    rdfs:label "hasResearcherRole"@en-US;
     :displayName "other research activities" ;
     vitro:displayRankAnnot 35;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -403,7 +381,6 @@ local:hasInvestigatorRoleContext a :ConfigContext ;
 
 local:hasInvestigatorRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-hasInvestigatorRole.xml"^^xsd:string ;
-    rdfs:label "hasInvestigatorRole"@en-US;
     :displayName "investigator on" ;
     vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -419,7 +396,6 @@ local:hasPrincipalInvestigatorRoleContext a :ConfigContext ;
 
 local:hasPrincipalInvestigatorRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-hasPrincipalInvestigatorRole.xml"^^xsd:string ;
-    rdfs:label "hasPrincipalInvestigatorRole"@en-US;
     :displayName "principal investigator on" ;
     vitro:displayRankAnnot 20;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -435,7 +411,6 @@ local:hasCo-PrincipalInvestigatorRoleContext a :ConfigContext ;
 
 local:hasCo-PrincipalInvestigatorRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-hasCoPrincipalInvestigatorRole.xml"^^xsd:string ;
-    rdfs:label "hasCo-PrincipalInvestigatorRole"@en-US;
     :displayName "co-principal investigator on" ;
     vitro:displayRankAnnot 25;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -451,7 +426,6 @@ local:hasPresenterRoleContext a :ConfigContext ;
 
 local:hasPresenterRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-hasPresenterRole.xml"^^xsd:string ;
-    rdfs:label "hasPresenterRole"@en-US;
     :displayName "presentations" ;
     vitro:collateBySubclassAnnot
               "true"^^xsd:boolean;
@@ -469,7 +443,6 @@ local:orgHasPresenterRoleContext a :ConfigContext ;
 
 local:orgHasPresenterRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-hasPresenterRole.xml"^^xsd:string ;
-    rdfs:label "organizationHasPresenterRole"@en-US;
     :displayName "presentations" ;
     vitro:collateBySubclassAnnot
               "true"^^xsd:boolean;
@@ -489,7 +462,6 @@ local:awardOrHonorContext a :ConfigContext ;
 
 local:awardOrHonorConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-awardOrHonor.xml"^^xsd:string ;
-    rdfs:label "awardOrHonor"@en-US;
     :displayName "awards and honors" ;
     vitro:displayRankAnnot 20;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -505,7 +477,6 @@ local:orgHasAwardOrHonorContext a :ConfigContext ;
 
 local:orgHasAwardOrHonorConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-awardOrHonor.xml"^^xsd:string ;
-    rdfs:label "organizationHasAwardOrHonor"@en-US;
     :displayName "awards and honors received" ;
     vitro:displayRankAnnot 75;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -521,7 +492,6 @@ local:educationalTrainingContext a :ConfigContext ;
 
 local:educationalTrainingConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-educationalTraining.xml"^^xsd:string ;
-    rdfs:label "educationalTraining"@en-US;
     :displayName "education and training" ;
     vitro:displayRankAnnot 10;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -538,7 +508,6 @@ local:educationalProcessPersonContext a :ConfigContext ;
 
 local:educationalProcessPersonConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "educationalProcessPerson"@en-US;
     :displayName "education and training of" ;
     vitro:displayRankAnnot 10;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -554,7 +523,6 @@ local:educationalProcessOrgContext a :ConfigContext ;
 
 local:educationalProcessOrgConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "educationalProcessOrganization"@en-US;
     :displayName "educational organization" ;
     vitro:displayRankAnnot 15;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -570,7 +538,6 @@ local:educationalProcessDegreeContext a :ConfigContext ;
 
 local:educationalProcessDegreeConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-degreeEarned.xml"^^xsd:string ;
-    rdfs:label "educationalProcessDegree"@en-US;
     :displayName "degree earned" ;
     vitro:displayRankAnnot 20;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -586,7 +553,6 @@ local:organizationForTrainingContext a :ConfigContext ;
 
 local:organizationForTrainingConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-organizationForTraining.xml"^^xsd:string ;
-    rdfs:label "organizationForTraining"@en-US;
     :displayName "organization for training" ;
     vitro:displayRankAnnot 1;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:nobody ;
@@ -602,7 +568,6 @@ local:adviseeRoleContext a :ConfigContext ;
 
 local:adviseeRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-adviseeIn.xml"^^xsd:string ;
-    rdfs:label "adviseeRole"@en-US;
     :displayName "advisee of" ;
     vitro:collateBySubclassAnnot
               "true"^^xsd:boolean;
@@ -620,7 +585,6 @@ local:advisorRoleContext a :ConfigContext ;
 
 local:advisorRoleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-advisorIn.xml"^^xsd:string ;
-    rdfs:label "advisorRole"@en-US;
     :displayName "advisees" ;
     vitro:collateBySubclassAnnot
               "true"^^xsd:boolean;
@@ -638,7 +602,6 @@ local:informationResourceInAuthorshipContext a :ConfigContext ;
 
 local:informationResourceInAuthorshipConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-informationResourceInAuthorship.xml"^^xsd:string ;
-    rdfs:label "informationResourceInAuthorship"@en-US;
     :displayName "authors" ;
     vitro:displayRankAnnot 10;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -654,7 +617,6 @@ local:informationResourceInEditorshipContext a :ConfigContext ;
 
 local:informationResourceInEditorshipConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-informationResourceInEditorship.xml"^^xsd:string ;
-    rdfs:label "informationResourceInEditorship"@en-US;
     :displayName "editors" ;
     vitro:displayRankAnnot 12;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -670,7 +632,6 @@ local:editorOfContext a :ConfigContext ;
 
 local:editorOfConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-editorship.xml"^^xsd:string ;
-    rdfs:label "editorOf"@en-US;
     :displayName "editor of" ;
     vitro:displayRankAnnot 20;
     vitro:collateBySubclassAnnot
@@ -688,7 +649,6 @@ local:issuedCredentialContext a :ConfigContext ;
 
 local:issuedCredentialConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-issuedCredential.xml"^^xsd:string ;
-    rdfs:label "issuedCredential"@en-US;
     :displayName "credentials" ;
     vitro:displayRankAnnot 12;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -704,7 +664,6 @@ local:grantAdministeredByContext a :ConfigContext ;
 
 local:grantAdministeredByConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-grantAdministeredBy.xml"^^xsd:string ;
-    rdfs:label "grantAdministeredBy"@en-US;
     :displayName "administered by" ;
     vitro:displayRankAnnot 16;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -720,7 +679,6 @@ local:contractAdministeredByContext a :ConfigContext ;
 
 local:contractAdministeredByConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-grantAdministeredBy.xml"^^xsd:string ;
-    rdfs:label "contractAdministeredBy"@en-US;
     :displayName "administered by" ;
     vitro:displayRankAnnot 16;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -735,7 +693,6 @@ local:orgAdministersGrantContext a :ConfigContext ;
 
 local:orgAdministersGrantConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-organizationAdministersGrant.xml"^^xsd:string ;
-    rdfs:label "orgAdministersGrant"@en-US;
     :displayName "administers grant" ;
     vitro:displayRankAnnot 62;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -759,7 +716,6 @@ local:hasCollaboratorConfig a :ObjectPropertyDisplayConfig ;
     vitro:customEntryFormAnnot
          "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AutocompleteObjectPropertyFormGenerator"^^xsd:string ;
 #    :listViewConfigFile "listViewConfig-roleRealizedIn.xml"^^xsd:string ;
-    rdfs:label "hasCollaborator"@en-US;
     :displayName "has collaborator" ;
     vitro:displayLimitAnnot
           "5"^^xsd:int ;
@@ -786,7 +742,6 @@ local:orgHasCollaboratorConfig a :ObjectPropertyDisplayConfig ;
     vitro:customEntryFormAnnot
          "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AutocompleteObjectPropertyFormGenerator"^^xsd:string ;
 #    :listViewConfigFile "listViewConfig-roleRealizedIn.xml"^^xsd:string ;
-    rdfs:label "organizationHasCollaborator"@en-US;
     :displayName "has collaborating organization or group" ;
     vitro:displayLimitAnnot
           "5"^^xsd:int ;
@@ -815,7 +770,6 @@ local:mailingAddressContext a :ConfigContext ;
 
 local:mailingAddressConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-mailingAddress.xml"^^xsd:string ;
-    rdfs:label "mailingAddress"@en-US;
     :displayName "mailing address" ;
     vitro:displayRankAnnot 29;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -832,7 +786,6 @@ local:mailingAddressOrgContext a :ConfigContext ;
 
 local:mailingAddressOrgConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-mailingAddress.xml"^^xsd:string ;
-    rdfs:label "mailingAddressOrganization"@en-US;
     :displayName "mailing address" ;
     vitro:displayRankAnnot 29;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -849,7 +802,6 @@ local:personTelephoneContext a :ConfigContext ;
 
 local:personTelephoneConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-telephoneNumber.xml"^^xsd:string ;
-    rdfs:label "personTelephone"@en-US;
     :displayName "phone" ;
     vitro:displayRankAnnot 60;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -866,7 +818,6 @@ local:orgTelephoneContext a :ConfigContext ;
 
 local:orgTelephoneConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-telephoneNumber.xml"^^xsd:string ;
-    rdfs:label "organizationTelephone"@en-US;
     :displayName "phone" ;
     vitro:displayRankAnnot 10;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -883,7 +834,6 @@ local:personFaxContext a :ConfigContext ;
 
 local:personFaxConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-faxNumber.xml"^^xsd:string ;
-    rdfs:label "personFax"@en-US;
     :displayName "fax" ;
     vitro:displayRankAnnot 60;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -900,7 +850,6 @@ local:orgFaxContext a :ConfigContext ;
 
 local:orgFaxConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-faxNumber.xml"^^xsd:string ;
-    rdfs:label "organizationFax"@en-US;
     :displayName "fax" ;
     vitro:displayRankAnnot 20;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -917,7 +866,6 @@ local:additionalEmailContext a :ConfigContext ;
 
 local:additionalEmailConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-additionalEmail.xml"^^xsd:string ;
-    rdfs:label "additionalEmail"@en-US;
     :displayName "additional emails" ;
     vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -934,7 +882,6 @@ local:organizationEmailContext a :ConfigContext ;
 
 local:organizationEmailConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-additionalEmail.xml"^^xsd:string ;
-    rdfs:label "organizationEmail"@en-US;
     :displayName "email address" ;
     vitro:displayRankAnnot 28;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -951,7 +898,6 @@ local:primaryEmailContext a :ConfigContext ;
 
 local:primaryEmailConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-primaryEmail.xml"^^xsd:string ;
-    rdfs:label "primaryEmail"@en-US;
     :displayName "primary email" ;
     vitro:displayRankAnnot 20;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -968,7 +914,6 @@ local:webpagePersonContext a :ConfigContext ;
 
 local:webpagePersonConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
-    rdfs:label "webpagePerson"@en-US;
     :displayName "webpage" ;
     vitro:displayRankAnnot 40;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -985,7 +930,6 @@ local:webpageOrgContext a :ConfigContext ;
 
 local:webpageOrgConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
-    rdfs:label "webpageOrganization"@en-US;
     :displayName "webpage" ;
     vitro:displayRankAnnot 40;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1002,7 +946,6 @@ local:webpageInfoContext a :ConfigContext ;
 
 local:webpageInfoConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
-    rdfs:label "webpageInfo"@en-US;
     :displayName "webpage" ;
     vitro:displayRankAnnot 40;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1019,7 +962,6 @@ local:webpageEventContext a :ConfigContext ;
 
 local:webpageEventConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
-    rdfs:label "webpageEvent"@en-US;
     :displayName "webpage" ;
     vitro:displayRankAnnot 40;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1036,7 +978,6 @@ local:fullNameContext a :ConfigContext ;
 
 local:fullNameConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fullName.xml"^^xsd:string ;
-    rdfs:label "fullName"@en-US;
     :displayName "full name" ;
     vitro:displayRankAnnot 10;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1053,7 +994,6 @@ local:preferredTitleContext a :ConfigContext ;
 
 local:preferredTitleConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-preferredTitle.xml"^^xsd:string ;
-    rdfs:label "preferredTitle"@en-US;
     :displayName "preferred title" ;
     vitro:displayRankAnnot 8;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1071,7 +1011,6 @@ local:outputOfContext a :ConfigContext ;
     :qualifiedBy        obo:BFO_0000015 . # Process
 
 local:outputOfConfig a :ObjectPropertyDisplayConfig ;
-    rdfs:label "outputOf"@en-US;
     :displayName "output of process or event" ;
     vitro:displayRankAnnot 80 ;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1088,7 +1027,6 @@ local:hasOutputContext a :ConfigContext ;
 
 
 local:hasOutputConfig a :ObjectPropertyDisplayConfig ;
-    rdfs:label "hasOutput"@en-US;
     :displayName "output publications or other works" ;
     vitro:displayRankAnnot 80 ;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1106,7 +1044,6 @@ local:credentialOfContext a :ConfigContext ;
 
 local:credentialOfConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "credentialOf"@en-US;
     :displayName "credential of" ;
     vitro:displayRankAnnot 6;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1121,7 +1058,6 @@ local:documentHasPartContext a :ConfigContext ;
 
 local:documentHasPartConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "documentHasPart"@en-US;
     :displayName "has document part" ;
     vitro:displayRankAnnot 51;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1138,7 +1074,6 @@ local:documentPartOfContext a :ConfigContext ;
 
 local:documentPartOfConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "documentPartOf"@en-US;
     :displayName "part of other document" ;
     vitro:displayRankAnnot 52;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1155,7 +1090,6 @@ local:geographicLocationContainsLocationContext a :ConfigContext ;
 
 local:geographicLocationContainsLocationConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "geographicLocationContainsLocation"@en-US;
     :displayName "has part" ;
     vitro:displayRankAnnot 81;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1172,7 +1106,6 @@ local:geographicLocationWithinLocationContext a :ConfigContext ;
             
 local:geographicLocationWithinLocationConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "geographicLocationWithinLocation"@en-US;
     :displayName "part of" ;
     vitro:displayRankAnnot 82;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
@@ -1189,7 +1122,6 @@ local:hasSubOrganizationContext a :ConfigContext ;
 
 local:hasSubOrganizationConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "hasSubOrganization"@en-US;
     :displayName "has sub-organization" ;
     vitro:displayRankAnnot 15;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
@@ -1206,7 +1138,6 @@ local:subOrganizationWithinContext a :ConfigContext ;
 
 local:subOrganizationWithinConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "subOrganizationWithin"@en-US;
     :displayName "organization within" ;
     vitro:displayRankAnnot 20;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
@@ -1223,7 +1154,6 @@ local:eventWithinContext a :ConfigContext ;
 
 local:eventWithinConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "eventWithin"@en-US;
     :displayName "occurs within event" ;
     vitro:displayRankAnnot 15;
      vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
@@ -1240,7 +1170,6 @@ local:includesEventContext a :ConfigContext ;
 
 local:includesEventConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "includesEvent"@en-US;
     :displayName "includes event" ;
     vitro:displayRankAnnot 16;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
@@ -1257,7 +1186,6 @@ local:inEventSeriesContext a :ConfigContext ;
 
 local:inEventSeriesConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "inEventSeries"@en-US;
     :displayName "in event series" ;
     vitro:displayRankAnnot 17;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
@@ -1274,7 +1202,6 @@ local:eventsForSeriesContext a :ConfigContext ;
  
 local:eventsForSeriesConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "eventsForSeries"@en-US;
     :displayName "events in this series" ;
     vitro:displayRankAnnot 18;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1291,7 +1218,6 @@ local:eventLocationContext a :ConfigContext ;
 
 local:eventLocationConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "eventLocation"@en-US;
     :displayName "held in geographic location" ;
     vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1308,7 +1234,6 @@ local:eventInFacilityContext a :ConfigContext ;
 
 local:eventInFacilityConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "eventInFacility"@en-US;
     :displayName "held in facility" ;
     vitro:displayRankAnnot 29;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1325,7 +1250,6 @@ local:agentInGeoLocationContext a :ConfigContext ;
 
 local:agentInGeoLocationConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "agentInGeoLocation"@en-US;
     :displayName "geographic location" ;
     vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1342,7 +1266,6 @@ local:agentInFacilityContext a :ConfigContext ;
 
 local:agentInFacilityConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "agentInFacility"@en-US;
     :displayName "located in facility" ;
     vitro:displayRankAnnot 32;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1359,7 +1282,6 @@ local:materialEntityInFacilityContext a :ConfigContext ;
 
 local:materialEntityInFacilityConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "materialEntityInFacility"@en-US;
     :displayName "housed in facility" ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1376,7 +1298,6 @@ local:hasRoomContext a :ConfigContext ;
 
 local:hasRoomConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "hasRoom"@en-US;
     :displayName "rooms" ;
     vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1393,7 +1314,6 @@ local:roomWithinBuildingContext a :ConfigContext ;
 
 local:roomWithinBuildingConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "roomWithinBuilding"@en-US;
     :displayName "within building" ;
     vitro:displayRankAnnot 23;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1411,7 +1331,6 @@ local:geographicLocationContainsBuildingContext a :ConfigContext ;
 
 local:geographicLocationContainsBuildingConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "geographicLocationContainsBuilding"@en-US;
     :displayName "location of facility" ;
     vitro:displayRankAnnot 85;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1428,7 +1347,6 @@ local:siteGeographicallyWithinGeoLocationContext a :ConfigContext ;
 
 local:siteGeographicallyWithinGeoLocationConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "siteGeographicallyWithinGeoLocation"@en-US;
     :displayName "geographically within" ;
     vitro:displayRankAnnot 40;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1445,7 +1363,6 @@ local:facilitySiteOfEventContext a :ConfigContext ;
 
 local:facilitySiteOfEventConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "facilitySiteOfEvent"@en-US;
     :displayName "facility for event" ;
     vitro:displayRankAnnot 22;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1462,7 +1379,6 @@ local:facilitySiteOfAgentContext a :ConfigContext ;
 
 local:facilitySiteOfAgentConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "facilitySiteOfAgent"@en-US;
     :displayName "facility for person, group, or organization" ;
     vitro:displayRankAnnot 20;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1480,8 +1396,7 @@ local:facilitySiteOfAgentConfig a :ObjectPropertyDisplayConfig ;
 
 #local:projectUsesMaterialEntityConfig a :ObjectPropertyDisplayConfig ;
 #    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-#    rdfs:label "projectUsesMaterialEntity"@en-US;
-    :displayName "uses specimen, equipment, instrument, organism, reagent, or software" ;
+#    :displayName "uses specimen, equipment, instrument, organism, reagent, or software" ;
 #    vitro:displayRankAnnot 85;
 #    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
 #    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
@@ -1497,8 +1412,7 @@ local:facilitySiteOfAgentConfig a :ObjectPropertyDisplayConfig ;
 
 #local:materialEntityUsedByProjectConfig a :ObjectPropertyDisplayConfig ;
 #    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-#    rdfs:label "materialEntityUsedByProject"@en-US;
-    :displayName "used by project" ;
+#    :displayName "used by project" ;
 #    vitro:displayRankAnnot 85;
 #    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
 #    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
@@ -1514,7 +1428,6 @@ local:facilityLocationOfEquipmentContext a :ConfigContext ;
 
 local:facilityLocationOfEquipmentConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "facilityLocationOfEquipment"@en-US;
     :displayName "location of equipment or instrument" ;
     vitro:displayRankAnnot 14;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1531,7 +1444,6 @@ local:facilityLocationOfServiceContext a :ConfigContext ;
 
 local:facilityLocationOfServiceConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "facilityLocationOfService"@en-US;
     :displayName "facility for service" ;
     vitro:displayRankAnnot 18;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1549,7 +1461,6 @@ local:courseOfferedByContext a :ConfigContext ;
 
 local:courseOfferedByConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "courseOfferedBy"@en-US;
     :displayName "offered by" ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1566,7 +1477,6 @@ local:orgOffersCourseContext a :ConfigContext ;
 
 local:orgOffersCourseConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "organizationOffersCourse"@en-US;
     :displayName "offers course" ;
     vitro:displayRankAnnot 90;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1583,7 +1493,6 @@ local:collegeOffersDegreeContext a :ConfigContext ;
 
 local:collegeOffersDegreeConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "collegeOffersDegree"@en-US;
     :displayName "offers degree" ;
     vitro:displayRankAnnot 12;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1598,7 +1507,6 @@ local:deptOffersDegreeContext a :ConfigContext ;
 
 local:deptOffersDegreeConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "deptOffersDegree"@en-US;
     :displayName "offers degree" ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1613,7 +1521,6 @@ local:uniOffersDegreeContext a :ConfigContext ;
 
 local:uniOffersDegreeConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "universityOffersDegree"@en-US;
     :displayName "offers degree" ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1628,7 +1535,6 @@ local:labOffersServiceContext a :ConfigContext ;
 
 local:labOffersServiceConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "labOffersService"@en-US;
     :displayName "offers service" ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1644,7 +1550,6 @@ local:grantAwardedByContext a :ConfigContext ;
 
 local:grantAwardedByConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "grantAwardedBy"@en-US;
     :displayName "awarded by" ;
     vitro:displayRankAnnot 14;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1660,7 +1565,6 @@ local:contractAwardedByContext a :ConfigContext ;
 
 local:contractAwardedByConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "contractAwardedBy"@en-US;
     :displayName "awarded by" ;
     vitro:displayRankAnnot 14;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1676,7 +1580,6 @@ local:grantSubjectAreaContext a :ConfigContext ;
 
 local:grantSubjectAreaConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "grantSubjectArea"@en-US;
     :displayName "has subject area" ;
     vitro:displayRankAnnot 10;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1691,7 +1594,6 @@ local:grantHasSubgrantContext a :ConfigContext ;
 
 local:grantHasSubgrantConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "grantHasSubgrant"@en-US;
     :displayName "has sub grant" ;
     vitro:displayRankAnnot 30;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1708,7 +1610,6 @@ local:grantIsSubgrantOfContext a :ConfigContext ;
 
 local:grantIsSubgrantOfConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "grantIsSubgrantOf"@en-US;
     :displayName "sub grant of" ;
     vitro:displayRankAnnot 32;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1725,7 +1626,6 @@ local:grantGeographicFocusContext a :ConfigContext ;
 
 local:grantGeographicFocusConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "grantGeographicFocus"@en-US;
     :displayName "geographic focus" ;
     vitro:displayRankAnnot 20;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1742,7 +1642,6 @@ local:awardOrHonorReceiptsContext a :ConfigContext ;
 
 local:awardOrHonorReceiptsConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "awardOrHonorReceipts"@en-US;
     :displayName "receipts" ;
     vitro:displayRankAnnot 3;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1757,7 +1656,6 @@ local:awardReceiptsContext a :ConfigContext ;
 
 local:awardReceiptsConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "awardReceipts"@en-US;
     :displayName "receipt of" ;
     vitro:displayRankAnnot 1;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1772,7 +1670,6 @@ local:awardReceiptsAwardForContext a :ConfigContext ;
 
 local:awardReceiptsAwardForConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "awardReceiptsAwardFor"@en-US;
     :displayName "award or honor for" ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1787,7 +1684,6 @@ local:awardOrHonorGivenContext a :ConfigContext ;
 
 local:awardOrHonorGivenConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-awardOrHonorGiven.xml"^^xsd:string ;
-    rdfs:label "awardOrHonorGiven"@en-US;
     :displayName "award or honor given" ;
     vitro:displayRankAnnot 72;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1802,7 +1698,6 @@ local:awardConferredByContext a :ConfigContext ;
 
 local:awardConferredByConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "awardConferredBy"@en-US;
     :displayName "award conferred by" ;
     vitro:displayRankAnnot 3;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1817,7 +1712,6 @@ local:orgAwardsGrantContext a :ConfigContext ;
 
 local:orgAwardsGrantConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-organizationAwardsGrant.xml"^^xsd:string ;
-    rdfs:label "orgAwardsGrant"@en-US;
     :displayName "awards grant" ;
     vitro:displayRankAnnot 60;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1833,7 +1727,6 @@ local:addressLocationContext a :ConfigContext ;
 
 local:addressLocationConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
-    rdfs:label "addressLocation"@en-US;
     :displayName "has geographic location" ;
     vitro:displayRankAnnot 2;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1850,7 +1743,6 @@ local:bfo_0000055Context a :ConfigContext ;
 
 local:bfo_0000055Config a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-relatedRole.xml"^^xsd:string ;
-    rdfs:label "relatedRole"@en-US;
     :displayName "participant" ;
     vitro:displayRankAnnot 17;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1868,7 +1760,6 @@ local:grantRelatesContext a :ConfigContext ;
 
 local:grantRelatesConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-relatedRole.xml"^^xsd:string ;
-    rdfs:label "grantRelates"@en-US;
     :displayName "contributor" ;
     vitro:displayRankAnnot 55;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1884,7 +1775,6 @@ local:contractRelatesContext a :ConfigContext ;
 
 local:contractRelatesConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-relatedRole.xml"^^xsd:string ;
-    rdfs:label "contractRelates"@en-US;
     :displayName "contributor" ;
     vitro:displayRankAnnot 55;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1902,7 +1792,6 @@ local:publicationDateContext a :ConfigContext ;
 
 local:publicationDateConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-dateTimeValue.xml"^^xsd:string ;
-    rdfs:label "publicationDate"@en-US;
     :displayName "publication date" ;
     vitro:displayRankAnnot 17;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
@@ -1917,7 +1806,6 @@ local:yearAwardedContext a :ConfigContext ;
 
 local:yearAwardedConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-dateTimeValue.xml"^^xsd:string ;
-    rdfs:label "yearAwarded"@en-US;
     :displayName "year awarded" ;
     vitro:displayRankAnnot 10;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
