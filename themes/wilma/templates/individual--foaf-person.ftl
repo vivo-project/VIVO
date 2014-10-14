@@ -24,7 +24,7 @@
 <#--add the VIVO-ORCID interface -->
 <#include "individual-orcidInterface.ftl">  
         
-<section id="individual-intro" class="vcard person" role="region">
+<section itemscope itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
 
     <section id="share-contact" role="region"> 
         <!-- Image -->           
@@ -72,7 +72,7 @@
             <#else>                
                 <h1 class="vcard foaf-person">
                     <#-- Label -->
-                    <span class="fn"><@p.label individual editable labelCount localesCount/></span>
+                    <span itemprop="alternateName" class="fn"><@p.label individual editable labelCount localesCount/></span>
 
                     <#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->
                     <#assign title = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Title")!>
@@ -84,7 +84,7 @@
                             <@p.verboseDisplay title />
                         </#if>
                         <#list title.statements as statement>
-                            <span class="display-title<#if editable>-editable</#if>">${statement.preferredTitle}</span>
+                            <span itemprop="jobTitle" class="display-title<#if editable>-editable</#if>">${statement.preferredTitle}</span>
                             <@p.editingLinks "${title.localName}" "${title.name}" statement editable title.rangeUri />
                         </#list>
                     </#if>
