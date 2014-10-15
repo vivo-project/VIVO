@@ -51,7 +51,7 @@
     </#if>
 </#if>
 </#if>
-<section id="individual-intro" class="vcard person" role="region">
+<section itemscope itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
     <section id="label-title" <#if editable>style="width:45%"</#if> >
         <header>
             <#if relatedSubject??>
