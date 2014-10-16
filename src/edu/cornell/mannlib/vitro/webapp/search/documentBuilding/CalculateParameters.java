@@ -241,7 +241,7 @@ public class CalculateParameters implements DocumentModifier {
 	}
    
 	@Override
-	public void modifyDocument(Individual individual, SearchInputDocument doc, StringBuffer addUri) {
+	public void modifyDocument(Individual individual, SearchInputDocument doc) {
 		// TODO Auto-generated method stub
 		 // calculate beta value.  
         log.debug("Parameter calculation starts..");

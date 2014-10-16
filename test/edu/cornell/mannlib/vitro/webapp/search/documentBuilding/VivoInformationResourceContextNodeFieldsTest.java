@@ -61,7 +61,7 @@ public class VivoInformationResourceContextNodeFieldsTest extends AbstractTestCl
         doc.addField("ALLTEXT", "");                
         
         VivoInformationResourceContextNodeFields vircnf = new VivoInformationResourceContextNodeFields(rdfServiceFactory);
-        vircnf.modifyDocument(ind, doc, new StringBuffer());                
+        vircnf.modifyDocument(ind, doc);                
         
         Collection<Object> values = doc.getField("ALLTEXT").getValues();
         for( Object value : values){
@@ -69,7 +69,7 @@ public class VivoInformationResourceContextNodeFieldsTest extends AbstractTestCl
         }
         
         VivoAgentContextNodeFields vacnf = new VivoAgentContextNodeFields(rdfServiceFactory);
-        vacnf.modifyDocument(ind, doc, new StringBuffer());
+        vacnf.modifyDocument(ind, doc);
         
      }
        
