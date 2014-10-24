@@ -53,7 +53,8 @@
         editMode: 'add',
         typeName: 'Concept',
         defaultTypeName: 'concept', // used in repair mode to generate button text
-        baseHref: '${urls.base}/individual?uri='
+        baseHref: '${urls.base}/individual?uri=',
+        limitToConceptClasses:["http://www.w3.org/2004/02/skos/core#Concept"]
     };
     var i18nStrings = {
         selectAnExisting: '${i18n().select_an_existing}',
