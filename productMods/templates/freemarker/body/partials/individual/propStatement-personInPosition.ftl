@@ -20,17 +20,21 @@
     </#local>
     <#local linkedIndividual>
         <#if statement.org??>
-          <a itemprop="worksFor" itemscope itemtype="http://schema.org/Organization" href="${profileUrl(statement.uri("org"))}" title="${i18n().organization_name}">${statement.orgName}</a>
+            <span itemprop="worksFor" itemscope itemtype="http://schema.org/Organization">
+               <a itemprop="name" href="${profileUrl(statement.uri("org"))}" title="${i18n().organization_name}">${statement.orgName}</a>
+            </span>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a itemprop="worksFor" itemscope itemtype="http://schema.org/Organization" href="${profileUrl(statement.uri("position"))}" title="${i18n().missing_organization}">${i18n().missing_organization}</a>
+            <a href="${profileUrl(statement.uri("position"))}" title="${i18n().missing_organization}">${i18n().missing_organization}</a>
         </#if>
     </#local>
     <#-- The sparql query returns both the org's parent (middleOrg) and grandparent (outerOrg).
          For now, we are only displaying the parent in the list view. -->
     <#local middleOrganization>
         <#if statement.middleOrg??>
-            <a itemprop="worksFor" itemscope itemtype="http://schema.org/Organization" href="${profileUrl(statement.uri("middleOrg"))}" title="${i18n().middle_organization}">${statement.middleOrgName!}</a>
+            <span itemprop="worksFor" itemscope itemtype="http://schema.org/Organization">
+                <a itemprop="name" href="${profileUrl(statement.uri("middleOrg"))}" title="${i18n().middle_organization}">${statement.middleOrgName!}</a>
+            </span>
         </#if>
     </#local>
     
