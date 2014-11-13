@@ -5,9 +5,6 @@ package edu.cornell.mannlib.vitro.webapp.search.documentBuilding;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
-import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.ContextNodeFields;
-
 /**
  * This class will:
  *   add people's names to organization's search Documents.
@@ -26,8 +23,8 @@ public class VivoISFMemberFields extends ContextNodeFields {
           + " prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> \n" 
           + " prefix obo: <http://purl.obolibrary.org/obo/> \n" ;
     
-    public VivoISFMemberFields(RDFServiceFactory rdfServiceFactory){                
-        super(queries,rdfServiceFactory);        
+    public VivoISFMemberFields(){                
+        super(queries);        
     }
     
     /**

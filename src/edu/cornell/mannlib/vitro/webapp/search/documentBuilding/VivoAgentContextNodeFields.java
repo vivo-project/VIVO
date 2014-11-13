@@ -4,9 +4,6 @@ package edu.cornell.mannlib.vitro.webapp.search.documentBuilding;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
-import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.ContextNodeFields;
-
 /**
  * Class that adds text from context nodes to Search Documents for 
  * foaf:Agent individuals.
@@ -15,8 +12,8 @@ public class VivoAgentContextNodeFields extends ContextNodeFields{
     
     static List<String> queriesForAgent = new ArrayList<String>();    
     
-    public VivoAgentContextNodeFields(RDFServiceFactory rdfServiceFactory){        
-        super(queriesForAgent,rdfServiceFactory);
+    public VivoAgentContextNodeFields(){        
+        super(queriesForAgent);
     }
       
   protected static final String prefix = 

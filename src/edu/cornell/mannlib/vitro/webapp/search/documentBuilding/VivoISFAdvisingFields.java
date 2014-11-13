@@ -5,9 +5,6 @@ package edu.cornell.mannlib.vitro.webapp.search.documentBuilding;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
-import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.ContextNodeFields;
-
 /**
  * DocumentModifier for adding rdfs:labels of individuals related via
  * a advising relationship.
@@ -31,8 +28,8 @@ public class VivoISFAdvisingFields extends ContextNodeFields {
         queries.add( makeQueryForPeople() );
     }
     
-    public VivoISFAdvisingFields(RDFServiceFactory rdfServiceFactory){                
-        super(queries,rdfServiceFactory);        
+    public VivoISFAdvisingFields(){                
+        super(queries);        
     }
     
     /**

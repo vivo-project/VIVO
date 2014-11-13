@@ -5,9 +5,6 @@ package edu.cornell.mannlib.vitro.webapp.search.documentBuilding;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
-import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.ContextNodeFields;
-
 /*
  * This DocumentModifier is for the ISF style grants.
  * It will 
@@ -30,8 +27,8 @@ public class VivoISFGrantFields extends ContextNodeFields {
           + " prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> \n" 
           + " prefix obo: <http://purl.obolibrary.org/obo/> \n" ;
     
-    public VivoISFGrantFields(RDFServiceFactory rdfServiceFactory){                
-        super(queries,rdfServiceFactory);        
+    public VivoISFGrantFields(){                
+        super(queries);        
     }
     
     /**

@@ -9,6 +9,8 @@ import java.io.InputStream;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import stubs.edu.cornell.mannlib.vitro.webapp.modelaccess.ContextModelAccessStub;
+
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
@@ -18,17 +20,14 @@ import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import edu.cornell.mannlib.vitro.testing.AbstractTestClass;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.IndividualImpl;
-import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
-import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
-import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.RDFServiceFactorySingle;
+import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess.WhichService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.jena.model.RDFServiceModel;
 
 
 public class VivoAgentContextNodeFieldsTest extends AbstractTestClass{
         
         static String SPCA = "http://vivo.mydomain.edu/individual/n8087";
-        
-        static RDFServiceFactory rdfServiceFactory;
+        static ContextModelAccessStub contextModels;
         
         @BeforeClass
         public static void setup(){
@@ -44,8 +43,8 @@ public class VivoAgentContextNodeFieldsTest extends AbstractTestClass{
                 assertTrue("expect statements about SPCA",
                                 m.contains(ResourceFactory.createResource(SPCA),(Property) null,(RDFNode) null));
                 
-        RDFService rdfService = new RDFServiceModel(m);
-        rdfServiceFactory = new RDFServiceFactorySingle(rdfService);
+        contextModels = new ContextModelAccessStub();
+        contextModels.setRDFService(WhichService.CONTENT, new RDFServiceModel(m));
         }
         
         @Test
@@ -53,7 +52,8 @@ public class VivoAgentContextNodeFieldsTest extends AbstractTestClass{
                 Individual ind = new IndividualImpl();
         ind.setURI(SPCA);
         
-        VivoAgentContextNodeFields vacnf = new VivoAgentContextNodeFields(rdfServiceFactory);
+        VivoAgentContextNodeFields vacnf = new VivoAgentContextNodeFields();
+        vacnf.setContextModels(contextModels);
         StringBuffer sb = vacnf.getValues( ind );
         
         assertNotNull( sb );
@@ -68,7 +68,8 @@ public class VivoAgentContextNodeFieldsTest extends AbstractTestClass{
                 Individual ind = new IndividualImpl();
         ind.setURI(SPCA);
         
-        VivoAgentContextNodeFields vacnf = new VivoAgentContextNodeFields(rdfServiceFactory);
+        VivoAgentContextNodeFields vacnf = new VivoAgentContextNodeFields();
+        vacnf.setContextModels(contextModels);
         StringBuffer sb = vacnf.getValues( ind );
         
         assertNotNull( sb );
@@ -83,7 +84,8 @@ public class VivoAgentContextNodeFieldsTest extends AbstractTestClass{
                 Individual ind = new IndividualImpl();
         ind.setURI(SPCA);
         
-        VivoAgentContextNodeFields vacnf = new VivoAgentContextNodeFields(rdfServiceFactory);
+        VivoAgentContextNodeFields vacnf = new VivoAgentContextNodeFields();
+        vacnf.setContextModels(contextModels);
         StringBuffer sb = vacnf.getValues( ind );
         
         assertNotNull( sb );
