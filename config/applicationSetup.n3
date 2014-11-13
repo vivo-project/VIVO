@@ -1,0 +1,35 @@
+@prefix : <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#> .
+
+:application 
+    a   <java:edu.cornell.mannlib.vitro.webapp.application.ApplicationImpl> ,
+        <java:edu.cornell.mannlib.vitro.webapp.modules.Application> ;
+    :hasSearchEngine              :searchEngineWrapper ;
+    :hasImageProcessor            :imageProcessor ;
+    :hasFileStorage               :fileStorage ;
+    :hasContentTripleSource       :contentTripleSource ;
+    :hasConfigurationTripleSource :configurationTripleSource .
+
+:imageProcessor 
+    a   <java:edu.cornell.mannlib.vitro.webapp.imageprocessor.jai.JaiImageProcessor> ,
+        <java:edu.cornell.mannlib.vitro.webapp.modules.imageProcessor.ImageProcessor> .
+
+:fileStorage 
+    a   <java:edu.cornell.mannlib.vitro.webapp.filestorage.impl.FileStorageImplWrapper> ,
+        <java:edu.cornell.mannlib.vitro.webapp.modules.fileStorage.FileStorage> .
+               
+:searchEngineWrapper 
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchengine.InstrumentedSearchEngineWrapper> , 
+        <java:edu.cornell.mannlib.vitro.webapp.modules.searchEngine.SearchEngine> ;
+    :wraps :searchEngine .
+
+:searchEngine
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchengine.solr.SolrSearchEngine> ,
+        <java:edu.cornell.mannlib.vitro.webapp.modules.searchEngine.SearchEngine> .
+
+:contentTripleSource
+    a   <java:edu.cornell.mannlib.vitro.webapp.triplesource.impl.sdb.ContentTripleSourceSDB> ,
+        <java:edu.cornell.mannlib.vitro.webapp.modules.tripleSource.ContentTripleSource> .
+
+:configurationTripleSource
+    a   <java:edu.cornell.mannlib.vitro.webapp.triplesource.impl.tdb.ConfigurationTripleSourceTDB> ,
+        <java:edu.cornell.mannlib.vitro.webapp.modules.tripleSource.ConfigurationTripleSource> .

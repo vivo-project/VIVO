@@ -7,6 +7,8 @@
 
 edu.cornell.mannlib.vitro.webapp.servlet.setup.JvmSmokeTests
 
+edu.cornell.mannlib.vitro.webapp.application.ApplicationSetup
+
 edu.cornell.mannlib.vitro.webapp.config.ConfigurationPropertiesSetup
 
 edu.cornell.mannlib.vitro.webapp.config.ConfigurationPropertiesSmokeTests
@@ -16,14 +18,11 @@ edu.cornell.mannlib.vitro.webapp.servlet.setup.GuardAgainstUnmigratedRDB
 
 edu.cornell.mannlib.vitro.webapp.utils.developer.DeveloperSettings$Setup
 
-edu.cornell.mannlib.vitro.webapp.application.ApplicationImpl$Setup
+edu.cornell.mannlib.vitro.webapp.application.ApplicationImpl$ComponentsSetup
 
 edu.cornell.mannlib.vitro.webapp.config.RevisionInfoSetup
 
 edu.cornell.mannlib.vitro.webapp.email.FreemarkerEmailFactory$Setup
-
-# In 1.8, this should replace JenaPersistentDataSourceSetup, RDFServiceSetup, and maybe more.
-edu.cornell.mannlib.vitro.webapp.servlet.setup.rdfsetup.RDFSetup
 
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ConfigurationModelsSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ContentModelSetup

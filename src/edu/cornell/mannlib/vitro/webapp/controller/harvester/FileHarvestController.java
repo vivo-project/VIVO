@@ -34,6 +34,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import edu.cornell.mannlib.vitro.webapp.application.ApplicationUtils;
 import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
@@ -213,13 +214,8 @@ public class FileHarvestController extends FreemarkerHttpServlet {
      */
     private static String getUploadPathBase(ServletContext context) throws Exception
     {
-        String vitroHomeDirectoryName = ConfigurationProperties.getBean(context).getProperty(FileStorageImplWrapper.PROPERTY_VITRO_HOME_DIR);
-        if (vitroHomeDirectoryName == null) {
-            throw new Exception("Vitro home directory name could not be found.");
-        }
-
-        String pathBase = vitroHomeDirectoryName + "/" + FileStorageImplWrapper.FILE_STORAGE_SUBDIRECTORY + "/" + PATH_TO_UPLOADS;
-        return pathBase;
+        String vitroHomeDirectoryName = ApplicationUtils.instance().getHomeDirectory().getPath().toString(); 
+        return vitroHomeDirectoryName + "/" + FileStorageImplWrapper.FILE_STORAGE_SUBDIRECTORY + "/" + PATH_TO_UPLOADS;
     }
 
     /**
