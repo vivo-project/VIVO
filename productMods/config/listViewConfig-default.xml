@@ -24,6 +24,7 @@
                ?title WHERE {
   
             ?subject ?property ?object .
+			?object a ?objectType .
                 LET (?localName := afn:localname(?object)) 
             
             OPTIONAL { ?object rdfs:label ?label } 
@@ -60,6 +61,7 @@
         
         CONSTRUCT {
             ?subject ?property ?object .
+			?object a ?objectType .
             ?object a ?subclass .
             ?object rdfs:label ?label .
         } WHERE {
@@ -67,9 +69,10 @@
                 ?subject ?property ?object .
             } UNION {                
                 ?subject ?property ?object .
-                ?object a ?subclass .
+				?object a ?objectType .
             } UNION {      
                 ?subject ?property ?object .
+				?object a ?objectType .
                 ?object rdfs:label ?label .
             }        
         }
@@ -84,6 +87,7 @@
 
         CONSTRUCT {
             ?subject ?property ?object .
+			?object a ?objectType .
             ?object vitro:mostSpecificType ?typeUri .
             ?typeUri vitro:inClassGroup ?classGroup .
             ?classGroup a vitro:ClassGroup .
@@ -96,12 +100,14 @@
                 ?subject ?property ?object .
             } UNION {            
                 ?subject ?property ?object .
+				?object a ?objectType .
                 ?object vitro:mostSpecificType ?typeUri .
                 ?typeUri rdfs:label ?type .
                 ?typeUri vitro:inClassGroup ?classGroup .
                 ?classGroup a vitro:ClassGroup
             } UNION {            
                 ?subject ?property ?object .
+				?object a ?objectType .
                 ?object obo:ARG_2000028 ?vcard . 
                 ?vcard vcard:hasTitle ?titleObj .
                 ?titleObj vcard:title ?title
