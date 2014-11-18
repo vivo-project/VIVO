@@ -5,9 +5,6 @@ package edu.cornell.mannlib.vitro.webapp.search.documentBuilding;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
-import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.ContextNodeFields;
-
 /**
  * DocumentModifier to populate Search index fields for the basic ISF relationships. 
  * 
@@ -23,8 +20,7 @@ public class VivoISFBasicFields extends ContextNodeFields {
      * Subtypes of vivo:Relationship that get handled by this class.
      */
     private static String[] RELATIONSHIP_TYPES = {
-        //VIVONS + "Relationship",
-        VIVONS + "Postion",
+        VIVONS + "Position",
         VIVONS + "Authorship",
         VIVONS + "Collaboration",
         VIVONS + "Affiliation"
@@ -32,8 +28,8 @@ public class VivoISFBasicFields extends ContextNodeFields {
     
     static List<String> queries = new ArrayList<String>();    
     
-    public VivoISFBasicFields(RDFServiceFactory rdfServiceFactory){        
-        super(queries,rdfServiceFactory);
+    public VivoISFBasicFields(){        
+        super(queries);
     }
       
     protected static final String prefix =               

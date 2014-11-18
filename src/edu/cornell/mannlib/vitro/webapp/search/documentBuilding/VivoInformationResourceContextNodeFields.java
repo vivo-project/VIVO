@@ -4,9 +4,6 @@ package edu.cornell.mannlib.vitro.webapp.search.documentBuilding;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
-import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.ContextNodeFields;
-
 /**
  * Class that adds text from context nodes to search index Documents for 
  * obo:IAO_0000030 individuals.
@@ -18,8 +15,8 @@ public class VivoInformationResourceContextNodeFields extends ContextNodeFields{
     
     static List<String> queriesForInformationResource = new ArrayList<String>();
     
-    public VivoInformationResourceContextNodeFields(RDFServiceFactory rdfServiceFactory){        
-        super(queriesForInformationResource, rdfServiceFactory);
+    public VivoInformationResourceContextNodeFields(){        
+        super(queriesForInformationResource);
     }
       
   protected static final String prefix = 

@@ -5,9 +5,6 @@ package edu.cornell.mannlib.vitro.webapp.search.documentBuilding;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
-import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.ContextNodeFields;
-
 public class VivoISFEducationFields extends ContextNodeFields {
     private static String VIVONS = "http://vivoweb.org/ontology/core#";
     
@@ -18,8 +15,8 @@ public class VivoISFEducationFields extends ContextNodeFields {
           + " prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> \n" 
           + " prefix obo: <http://purl.obolibrary.org/obo/> \n" ;
     
-    public VivoISFEducationFields(RDFServiceFactory rdfServiceFactory){                
-        super(queries,rdfServiceFactory);        
+    public VivoISFEducationFields(){                
+        super(queries);        
     }
     
     /**

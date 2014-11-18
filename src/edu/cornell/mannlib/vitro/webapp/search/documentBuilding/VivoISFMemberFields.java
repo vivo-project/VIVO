@@ -5,9 +5,6 @@ package edu.cornell.mannlib.vitro.webapp.search.documentBuilding;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
-import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.ContextNodeFields;
-
 /**
  * This class will:
  *   add people's names to organization's search Documents.
@@ -26,8 +23,8 @@ public class VivoISFMemberFields extends ContextNodeFields {
           + " prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> \n" 
           + " prefix obo: <http://purl.obolibrary.org/obo/> \n" ;
     
-    public VivoISFMemberFields(RDFServiceFactory rdfServiceFactory){                
-        super(queries,rdfServiceFactory);        
+    public VivoISFMemberFields(){                
+        super(queries);        
     }
     
     /**
@@ -37,7 +34,7 @@ public class VivoISFMemberFields extends ContextNodeFields {
             prefix +
             "SELECT (str(?rawresult) as ?result) WHERE {\n" +              
             " ?uri    rdf:type               foaf:Organization . \n" +
-            " ?role   core:roleContrigutesTo ?uri . \n" +
+            " ?role   core:roleContributesTo ?uri . \n" +
             " ?person obo:RO_0000053         ?role . \n" +
             " ?person rdfs:label             ?rawresult .\n" +                       
             "}";
@@ -49,7 +46,7 @@ public class VivoISFMemberFields extends ContextNodeFields {
             prefix +
             "SELECT (str(?rawresult) as ?result) WHERE {\n" +              
             " ?uri    rdf:type               foaf:Person . \n" +
-            " ?uri obo:RO_0000053 / core:roleContrigutesTo / rdfs:label ?rawresult . \n" +                        
+            " ?uri obo:RO_0000053 / core:roleContributesTo / rdfs:label ?rawresult . \n" +                        
             "}";
     
         

@@ -75,6 +75,7 @@
 			<include name="languages/**/*" />
 			<include name="config/*.properties" />
 			<include name="config/*.txt" />
+			<include name="config/*.n3" />
 			<include name="config/jarlist/*.txt" />
 			<include name="config/solr/*" />
 			<include name="context.xml" />
