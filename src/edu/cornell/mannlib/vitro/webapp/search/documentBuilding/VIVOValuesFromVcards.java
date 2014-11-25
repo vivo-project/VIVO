@@ -15,11 +15,11 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
+import edu.cornell.mannlib.vitro.webapp.modelaccess.ContextModelAccess;
 import edu.cornell.mannlib.vitro.webapp.modules.searchEngine.SearchInputDocument;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
-import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.RDFServiceUtils;
-import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.DocumentModifier;
+import edu.cornell.mannlib.vitro.webapp.utils.configuration.ContextModelsUser;
 
 /**
  * If there are any VCards on this Individual with Title objects, store the text
@@ -28,7 +28,7 @@ import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.DocumentModifier
  * If there are any VCards on this Individual with EMail objects, store the text
  * in the ALL_TEXT field.
  */
-public class VIVOValuesFromVcards implements DocumentModifier {
+public class VIVOValuesFromVcards implements DocumentModifier, ContextModelsUser {
 	private static final Log log = LogFactory
 			.getLog(VIVOValuesFromVcards.class);
 
@@ -77,16 +77,16 @@ public class VIVOValuesFromVcards implements DocumentModifier {
 			}
 		}};
 
-	private RDFServiceFactory rdfServiceFactory;
+	private RDFService rdfService;
 	private boolean shutdown = false;
 
-	public VIVOValuesFromVcards(RDFServiceFactory rdfServiceFactory) {
-		this.rdfServiceFactory = rdfServiceFactory;
+	@Override
+	public void setContextModels(ContextModelAccess models) {
+		this.rdfService = models.getRDFService();
 	}
 
 	@Override
-	public void modifyDocument(Individual individual, SearchInputDocument doc,
-			StringBuffer addUri) {
+	public void modifyDocument(Individual individual, SearchInputDocument doc) {
 		if (individual == null)
 			return;
 
@@ -101,7 +101,6 @@ public class VIVOValuesFromVcards implements DocumentModifier {
 		String query = queryTemplate.replaceAll("\\?uri", uri);
 
 		try {
-			RDFService rdfService = rdfServiceFactory.getRDFService();
 			ResultSet results = RDFServiceUtils.sparqlSelectQuery(query,
 					rdfService);
 			if (results != null) {

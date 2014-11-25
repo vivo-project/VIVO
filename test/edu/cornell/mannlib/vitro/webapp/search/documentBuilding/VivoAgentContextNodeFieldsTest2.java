@@ -10,6 +10,8 @@ import org.apache.commons.lang.StringUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import stubs.edu.cornell.mannlib.vitro.webapp.modelaccess.ContextModelAccessStub;
+
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
@@ -19,9 +21,7 @@ import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import edu.cornell.mannlib.vitro.testing.AbstractTestClass;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.IndividualImpl;
-import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
-import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
-import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.RDFServiceFactorySingle;
+import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess.WhichService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.jena.model.RDFServiceModel;
 
 /**
@@ -32,9 +32,8 @@ import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.jena.model.RDFServiceMod
 public class VivoAgentContextNodeFieldsTest2  extends AbstractTestClass{
 	    	
 	static String HISTORY_DEPT = "http://vivo.colorado.edu/deptid_10238" ;
-	
-	static RDFServiceFactory rdfServiceFactory;
-	
+    static ContextModelAccessStub contextModels;
+
 	@BeforeClass
 	public static void setup(){
 		Model m = ModelFactory.createDefaultModel();
@@ -52,8 +51,8 @@ public class VivoAgentContextNodeFieldsTest2  extends AbstractTestClass{
 		assertTrue("expect statements about HISTORY_DEPT", 
 				m.contains(ResourceFactory.createResource(HISTORY_DEPT),(Property) null,(RDFNode) null));
 		
-        RDFService rdfService = new RDFServiceModel(m);
-        rdfServiceFactory = new RDFServiceFactorySingle(rdfService);
+        contextModels = new ContextModelAccessStub();
+        contextModels.setRDFService(WhichService.CONTENT, new RDFServiceModel(m));
 	}
 	
 	/**
@@ -65,7 +64,8 @@ public class VivoAgentContextNodeFieldsTest2  extends AbstractTestClass{
 		Individual ind = new IndividualImpl();
         ind.setURI(HISTORY_DEPT);
         
-        VivoAgentContextNodeFields vacnf = new VivoAgentContextNodeFields(rdfServiceFactory);
+        VivoAgentContextNodeFields vacnf = new VivoAgentContextNodeFields();
+        vacnf.setContextModels(contextModels);
         StringBuffer sb = vacnf.getValues( ind );
         
         assertNotNull( sb );        

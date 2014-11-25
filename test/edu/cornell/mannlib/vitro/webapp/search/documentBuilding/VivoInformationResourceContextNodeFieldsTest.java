@@ -9,6 +9,7 @@ import java.util.Collection;
 import org.junit.Assert;
 import org.junit.Test;
 
+import stubs.edu.cornell.mannlib.vitro.webapp.modelaccess.ContextModelAccessStub;
 import stubs.edu.cornell.mannlib.vitro.webapp.modules.ApplicationStub;
 import stubs.edu.cornell.mannlib.vitro.webapp.modules.searchEngine.SearchEngineStub;
 import stubs.javax.servlet.ServletContextStub;
@@ -23,10 +24,8 @@ import edu.cornell.mannlib.vitro.webapp.application.ApplicationUtils;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.WebappDaoFactoryJena;
+import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess.WhichService;
 import edu.cornell.mannlib.vitro.webapp.modules.searchEngine.SearchInputDocument;
-import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
-import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
-import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.RDFServiceFactorySingle;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.jena.model.RDFServiceModel;
 
 public class VivoInformationResourceContextNodeFieldsTest extends AbstractTestClass {
@@ -54,22 +53,25 @@ public class VivoInformationResourceContextNodeFieldsTest extends AbstractTestCl
         WebappDaoFactory wadf = new WebappDaoFactoryJena(ontModel);        
         Individual ind = wadf.getIndividualDao().getIndividualByURI(DOCUMENT_URI);
         Assert.assertNotNull(ind);
-        
-        RDFService rdfService = new RDFServiceModel(ontModel);
-        RDFServiceFactory rdfServiceFactory = new RDFServiceFactorySingle(rdfService);
+
+        ContextModelAccessStub contextModels = new ContextModelAccessStub();
+        contextModels.setRDFService(WhichService.CONTENT, new RDFServiceModel(ontModel));
+
         SearchInputDocument doc = ApplicationUtils.instance().getSearchEngine().createInputDocument();
         doc.addField("ALLTEXT", "");                
         
-        VivoInformationResourceContextNodeFields vircnf = new VivoInformationResourceContextNodeFields(rdfServiceFactory);
-        vircnf.modifyDocument(ind, doc, new StringBuffer());                
+        VivoInformationResourceContextNodeFields vircnf = new VivoInformationResourceContextNodeFields();
+        vircnf.setContextModels(contextModels);
+        vircnf.modifyDocument(ind, doc);                
         
         Collection<Object> values = doc.getField("ALLTEXT").getValues();
         for( Object value : values){
             Assert.assertFalse("rdf:label erroneously added by document modifier:", value.toString().contains(RDFS_LABEL_VALUE));
         }
         
-        VivoAgentContextNodeFields vacnf = new VivoAgentContextNodeFields(rdfServiceFactory);
-        vacnf.modifyDocument(ind, doc, new StringBuffer());
+        VivoAgentContextNodeFields vacnf = new VivoAgentContextNodeFields();
+        vacnf.setContextModels(contextModels);
+        vacnf.modifyDocument(ind, doc);
         
      }
        

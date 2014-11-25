@@ -12,6 +12,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.hp.hpl.jena.query.Dataset;
+import com.hp.hpl.jena.query.DatasetFactory;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -26,12 +27,13 @@ import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.shared.Lock;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
+import edu.cornell.mannlib.vitro.webapp.modelaccess.ContextModelAccess;
 import edu.cornell.mannlib.vitro.webapp.modules.searchEngine.SearchInputDocument;
 import edu.cornell.mannlib.vitro.webapp.search.VitroSearchTermNames;
-import edu.cornell.mannlib.vitro.webapp.search.documentBuilding.DocumentModifier;
+import edu.cornell.mannlib.vitro.webapp.utils.configuration.ContextModelsUser;
 
 
-public class CalculateParameters implements DocumentModifier {
+public class CalculateParameters implements DocumentModifier, ContextModelsUser {
 
     private boolean shutdown = false;
 	private Dataset dataset;
@@ -60,15 +62,11 @@ public class CalculateParameters implements DocumentModifier {
      
     private static Log log = LogFactory.getLog(CalculateParameters.class);
     
-	public CalculateParameters(Dataset dataset){
-		 this.dataset =dataset;
-		// new Thread(new TotalInd(this.dataset,totalCountQuery)).start();
+	@Override
+	public void setContextModels(ContextModelAccess models) {
+		 this.dataset = DatasetFactory.create(models.getOntModel());
 	}
-	
-	public CalculateParameters(){
-		super();
-	}
-	
+
 	public float calculateBeta(String uri){
 		float beta=0;
 		int Conn=0; 
@@ -241,7 +239,7 @@ public class CalculateParameters implements DocumentModifier {
 	}
    
 	@Override
-	public void modifyDocument(Individual individual, SearchInputDocument doc, StringBuffer addUri) {
+	public void modifyDocument(Individual individual, SearchInputDocument doc) {
 		// TODO Auto-generated method stub
 		 // calculate beta value.  
         log.debug("Parameter calculation starts..");
