@@ -165,8 +165,7 @@ var academicDepartments = [
     <#list academicDeptDG as resultRow>
         <#assign uri = resultRow["theURI"] />
         <#assign label = resultRow["name"] />
-        <#assign localName = uri?substring(uri?last_index_of("/")) />
-            {"uri": "${localName}", "name": "${label}"}<#if (resultRow_has_next)>,</#if>
+        {"uri": "${uri?url}", "name": "${label}"}<#if (resultRow_has_next)>,</#if>
     </#list>        
 </#if>
 ];
