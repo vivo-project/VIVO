@@ -37,7 +37,7 @@ edu.cornell.mannlib.vitro.webapp.servlet.setup.FileGraphSetup
 # Invokes process to perform updates to align with ontology changes if needed -->
 edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdateKnowledgeBase
 
-edu.cornell.mannlib.vitro.webapp.servlet.setup.PelletReasonerSetup
+edu.cornell.mannlib.vitro.webapp.application.ApplicationImpl$ReasonersSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.SimpleReasonerSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.TBoxReasonerSmokeTest
 
