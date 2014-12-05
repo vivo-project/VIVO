@@ -39,7 +39,7 @@
                 <#if (class.uri?contains("FacultyMember")) >
                     <#assign foundClassGroup = true />
                     <#if (class.individualCount > 0) >
-                        <script>var facultyMemberCount = ${class.individualCount?string?replace(",","")};</script>
+                        <script>var facultyMemberCount = ${class.individualCount?string?replace(",","")?replace(".","")};</script>
                     <#else>
                         <script>var facultyMemberCount = 0;</script>
                     </#if>
