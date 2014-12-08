@@ -3,33 +3,38 @@
 :application 
     a   <java:edu.cornell.mannlib.vitro.webapp.application.ApplicationImpl> ,
         <java:edu.cornell.mannlib.vitro.webapp.modules.Application> ;
-    :hasSearchEngine              :searchEngineWrapper ;
-    :hasImageProcessor            :imageProcessor ;
-    :hasFileStorage               :fileStorage ;
-    :hasContentTripleSource       :contentTripleSource ;
-    :hasConfigurationTripleSource :configurationTripleSource .
+    :hasSearchEngine              :instrumentedSearchEngineWrapper ;
+    :hasImageProcessor            :jaiImageProcessor ;
+    :hasFileStorage               :ptiFileStorage ;
+    :hasContentTripleSource       :sdbContentTripleSource ;
+    :hasConfigurationTripleSource :tdbConfigurationTripleSource ;
+    :hasTBoxReasonerModule        :pelletTBoxReasonerModule .
 
-:imageProcessor 
+:jaiImageProcessor 
     a   <java:edu.cornell.mannlib.vitro.webapp.imageprocessor.jai.JaiImageProcessor> ,
         <java:edu.cornell.mannlib.vitro.webapp.modules.imageProcessor.ImageProcessor> .
 
-:fileStorage 
+:ptiFileStorage 
     a   <java:edu.cornell.mannlib.vitro.webapp.filestorage.impl.FileStorageImplWrapper> ,
         <java:edu.cornell.mannlib.vitro.webapp.modules.fileStorage.FileStorage> .
                
-:searchEngineWrapper 
+:instrumentedSearchEngineWrapper 
     a   <java:edu.cornell.mannlib.vitro.webapp.searchengine.InstrumentedSearchEngineWrapper> , 
         <java:edu.cornell.mannlib.vitro.webapp.modules.searchEngine.SearchEngine> ;
-    :wraps :searchEngine .
+    :wraps :solrSearchEngine .
 
-:searchEngine
+:solrSearchEngine
     a   <java:edu.cornell.mannlib.vitro.webapp.searchengine.solr.SolrSearchEngine> ,
         <java:edu.cornell.mannlib.vitro.webapp.modules.searchEngine.SearchEngine> .
 
-:contentTripleSource
+:sdbContentTripleSource
     a   <java:edu.cornell.mannlib.vitro.webapp.triplesource.impl.sdb.ContentTripleSourceSDB> ,
         <java:edu.cornell.mannlib.vitro.webapp.modules.tripleSource.ContentTripleSource> .
 
-:configurationTripleSource
+:tdbConfigurationTripleSource
     a   <java:edu.cornell.mannlib.vitro.webapp.triplesource.impl.tdb.ConfigurationTripleSourceTDB> ,
         <java:edu.cornell.mannlib.vitro.webapp.modules.tripleSource.ConfigurationTripleSource> .
+        
+:pelletTBoxReasonerModule
+    a   <java:edu.cornell.mannlib.vitro.webapp.tboxreasoner.impl.pellet.PelletTBoxReasonerModule> ,
+        <java:edu.cornell.mannlib.vitro.webapp.modules.tboxreasoner.TBoxReasonerModule> .
