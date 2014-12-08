@@ -24,7 +24,7 @@
         <ul id="individual-phone" role="list" <#if editable>style="list-style:none;margin-left:0;"</#if>>
             <#list phone.statements as statement>
                 <li role="listitem">
-                    ${statement.number!}
+                    <span itemprop="telephone">${statement.number!}</span>
                     <@p.editingLinks "${phone.localName}" "${phone.name}" statement editable phone.rangeUri />
                 </li>
             </#list>
@@ -46,7 +46,7 @@
             <ul id="${listId}" class="individual-emails" role="list" <#if editable>style="list-style:none;margin-left:0;"</#if>>
                 <#list email.statements as statement>
                     <li role="listitem">
-                        <a class="email" href="mailto:${statement.emailAddress!}" title="${i18n().email}">${statement.emailAddress!}</a>
+                        <a itemprop="email" class="email" href="mailto:${statement.emailAddress!}" title="${i18n().email}">${statement.emailAddress!}</a>
                         <@p.editingLinks "${email.localName}" "${email.name}" statement editable email.rangeUri />
                     </li>
                 </#list>

@@ -134,7 +134,7 @@ $(document).ready(function(){
                 //Check to see if this index hasn't already been employed
                 if(!indexFound) {
                 	//if this index hasn't already been employed then utilize it
-                	 html += "<li><a href='" + urlsBase + "/individual" 
+                	 html += "<li><a href='" + urlsBase + "/individual?uri=" 
                      + academicDepartments[index].uri + "'>" 
                      + academicDepartments[index].name + "</a></li>";
                 	 //add this index to the set of already used indices
@@ -146,7 +146,7 @@ $(document).ready(function(){
         }
         else {
             for ( var i=0;i<deptNbr;i++) {
-                html += "<li><a href='" + urlsBase + "/individual" 
+                html += "<li><a href='" + urlsBase + "/individual?uri=" 
                         + academicDepartments[i].uri + "'>" 
                         + academicDepartments[i].name + "</a></li>";
             }
