@@ -47,7 +47,7 @@ edu.cornell.mannlib.vitro.webapp.auth.permissions.PermissionRegistry$Setup
 
 edu.cornell.mannlib.vitro.webapp.auth.permissions.PermissionSetsSmokeTest
 
-edu.cornell.mannlib.vitro.webapp.auth.policy.bean.PropertyRestrictionPolicyHelper$Setup
+edu.cornell.mannlib.vitro.webapp.auth.policy.bean.PropertyRestrictionBean$Setup
 
 edu.cornell.mannlib.vitro.webapp.auth.policy.setup.CommonPolicyFamilySetup
 
