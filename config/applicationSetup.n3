@@ -8,7 +8,7 @@
     :hasFileStorage               :ptiFileStorage ;
     :hasContentTripleSource       :sdbContentTripleSource ;
     :hasConfigurationTripleSource :tdbConfigurationTripleSource ;
-    :hasTBoxReasonerModule        :pelletTBoxReasonerModule .
+    :hasTBoxReasonerModule        :jfactTBoxReasonerModule .
 
 :jaiImageProcessor 
     a   <java:edu.cornell.mannlib.vitro.webapp.imageprocessor.jai.JaiImageProcessor> ,
@@ -35,6 +35,6 @@
     a   <java:edu.cornell.mannlib.vitro.webapp.triplesource.impl.tdb.ConfigurationTripleSourceTDB> ,
         <java:edu.cornell.mannlib.vitro.webapp.modules.tripleSource.ConfigurationTripleSource> .
         
-:pelletTBoxReasonerModule
-    a   <java:edu.cornell.mannlib.vitro.webapp.tboxreasoner.impl.pellet.PelletTBoxReasonerModule> ,
+:jfactTBoxReasonerModule
+    a   <java:edu.cornell.mannlib.vitro.webapp.tboxreasoner.impl.jfact.JFactTBoxReasonerModule> ,
         <java:edu.cornell.mannlib.vitro.webapp.modules.tboxreasoner.TBoxReasonerModule> .
