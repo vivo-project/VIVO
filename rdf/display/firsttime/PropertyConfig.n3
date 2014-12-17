@@ -1181,7 +1181,7 @@ local:documentHasPartContext a :ConfigContext ;
     :hasConfiguration local:documentHasPartConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/BFO_0000051> ;
     :qualifiedByDomain      <http://purl.org/ontology/bibo/Document> ;
-    :qualifiedBy      <http://purl.org/ontology/bibo/DocumentPart> .
+    :qualifiedBy      <http://purl.org/ontology/bibo/Document> .
 
 local:documentHasPartConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
