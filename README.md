@@ -12,6 +12,8 @@ http://vivoweb.org/
 ### DuraSpace Wiki:
 https://wiki.duraspace.org/display/VIVO/
 
+Installation instructions for the latest release can be found at this location on the wiki:  https://wiki.duraspace.org/display/VIVO/VIVO+Technical+Documentation
+
 ## Contact us
 There are several ways to contact the VIVO community. 
 Whatever your interest, we would be pleased to hear from you.
