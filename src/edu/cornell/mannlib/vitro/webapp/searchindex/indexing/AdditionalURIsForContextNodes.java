@@ -21,25 +21,27 @@ import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.rdf.model.Statement;
 
 import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
+import edu.cornell.mannlib.vitro.webapp.modelaccess.ContextModelAccess;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
+import edu.cornell.mannlib.vitro.webapp.utils.configuration.ContextModelsUser;
 
-public class AdditionalURIsForContextNodes implements StatementToURIsToUpdate {
-
-    private final RDFService rdfService;
-	private Set<String> alreadyChecked;
-	private long accumulatedTime = 0;
+public class AdditionalURIsForContextNodes implements IndexingUriFinder, ContextModelsUser {
+	private Log log = LogFactory.getLog(AdditionalURIsForContextNodes.class);
 	
     private static final List<String> multiValuedQueriesForAgent = new ArrayList<String>();	
 	private static final String multiValuedQueryForInformationContentEntity;
 	private static final List<String> multiValuedQueriesForRole = new ArrayList<String>();
 	private static final List<String>queryList;	
 	
-	private Log log = LogFactory.getLog(AdditionalURIsForContextNodes.class);
+    private RDFService rdfService;
+    private Set<String> alreadyChecked;
+    private long accumulatedTime = 0;
     
     
-    public AdditionalURIsForContextNodes( RDFService rdfService){
-        this.rdfService = rdfService;
-    }
+    @Override
+	public void setContextModels(ContextModelAccess models) {
+    	this.rdfService = models.getRDFService();
+	}
     
     @Override
     public List<String> findAdditionalURIsToIndex(Statement stmt) {
@@ -78,7 +80,7 @@ public class AdditionalURIsForContextNodes implements StatementToURIsToUpdate {
     }
 
     @Override
-    public void endIndxing() {
+    public void endIndexing() {
         log.debug( "Accumulated time for this run of the index: " + accumulatedTime + " msec");
         alreadyChecked = null;        
     }
@@ -763,6 +765,11 @@ public class AdditionalURIsForContextNodes implements StatementToURIsToUpdate {
 	    tmpList.addAll(queriesForPosition());
 	    
         queryList = Collections.unmodifiableList(tmpList);
+	}
+
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName();
 	}
 
 }

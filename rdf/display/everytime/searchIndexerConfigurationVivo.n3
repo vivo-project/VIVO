@@ -1,0 +1,56 @@
+@prefix : <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#> .
+
+#
+# Specify the SearchIndexExcluders, DocumentModifiers and IndexingUriFinders for VIVO. 
+# These are in addition to the ones specified for VIVO.
+#
+
+:vivoSearchExcluder_namespaceExcluder
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.exclusions.ExcludeBasedOnNamespace> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.exclusions.SearchIndexExcluder> ;
+    :excludes
+        "http://purl.obolibrary.org/obo/" .
+
+# ------------------------------------
+
+:vivodocumentModifier_calculateParameters
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.CalculateParameters> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
+
+:vivodocumentModifier_valuesFromVcards
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.VIVOValuesFromVcards> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
+
+:vivodocumentModifier_ISFBasicFields
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.VivoISFBasicFields> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
+
+:vivodocumentModifier_ISFAdvisingFields
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.VivoISFAdvisingFields> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
+
+:vivodocumentModifier_ISFEducationFields
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.VivoISFEducationFields> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
+
+:vivodocumentModifier_ISFGrantFields
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.VivoISFGrantFields> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
+
+:vivodocumentModifier_ISFMemberFields
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.VivoISFMemberFields> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
+
+:vivodocumentModifier_informationResourceContextNodeFields
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.VivoInformationResourceContextNodeFields> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
+
+# ------------------------------------
+
+:uriFinder_forContextNodes
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.AdditionalURIsForContextNodes> .
+
+:uriFinder_forVCards
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.AdditionalUrisForVCards> .

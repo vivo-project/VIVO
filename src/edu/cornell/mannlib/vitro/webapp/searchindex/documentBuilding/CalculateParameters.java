@@ -254,6 +254,13 @@ public class CalculateParameters implements DocumentModifier, ContextModelsUser 
 	public void shutdown(){
         shutdown=true;
     }
+	
+
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName() + "[]";
+	}
+
 }
 
 class TotalInd implements Runnable{

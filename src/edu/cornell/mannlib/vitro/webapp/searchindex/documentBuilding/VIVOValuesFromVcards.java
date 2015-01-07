@@ -122,6 +122,12 @@ public class VIVOValuesFromVcards implements DocumentModifier, ContextModelsUser
 		shutdown = true;
 	}
 
+
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName() + "[]";
+	}
+
 	private abstract static class ResultParser {
 		public abstract void parse(String uri, QuerySolution solution, SearchInputDocument doc);
 

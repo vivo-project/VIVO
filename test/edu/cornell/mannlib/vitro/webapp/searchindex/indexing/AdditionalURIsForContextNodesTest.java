@@ -9,9 +9,12 @@ import java.util.List;
 
 import org.junit.Test;
 
+import stubs.edu.cornell.mannlib.vitro.webapp.modelaccess.ContextModelAccessStub;
+
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
+import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess.WhichService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.jena.model.RDFServiceModel;
 
 
@@ -598,7 +601,11 @@ public class AdditionalURIsForContextNodesTest {
 	private void populateModelAndCreateUriFinder(String n3String) {
 		OntModel model = ModelFactory.createOntologyModel();
 		model.read(new StringReader(n3String), null, "N3");
-		uriFinder = new AdditionalURIsForContextNodes(
-				new RDFServiceModel(model));
+		
+		ContextModelAccessStub cmas = new ContextModelAccessStub();
+		cmas.setRDFService(WhichService.CONTENT, new RDFServiceModel(model));
+		
+		uriFinder = new AdditionalURIsForContextNodes();
+		uriFinder.setContextModels(cmas);
 	}
 }
