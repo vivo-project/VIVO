@@ -4,6 +4,7 @@
     a   <java:edu.cornell.mannlib.vitro.webapp.application.ApplicationImpl> ,
         <java:edu.cornell.mannlib.vitro.webapp.modules.Application> ;
     :hasSearchEngine              :instrumentedSearchEngineWrapper ;
+    :hasSearchIndexer             :basicSearchIndexer ;
     :hasImageProcessor            :jaiImageProcessor ;
     :hasFileStorage               :ptiFileStorage ;
     :hasContentTripleSource       :sdbContentTripleSource ;
@@ -27,6 +28,10 @@
     a   <java:edu.cornell.mannlib.vitro.webapp.searchengine.solr.SolrSearchEngine> ,
         <java:edu.cornell.mannlib.vitro.webapp.modules.searchEngine.SearchEngine> .
 
+:basicSearchIndexer
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.SearchIndexerImpl> ,
+        <java:edu.cornell.mannlib.vitro.webapp.modules.searchIndexer.SearchIndexer> .
+    
 :sdbContentTripleSource
     a   <java:edu.cornell.mannlib.vitro.webapp.triplesource.impl.sdb.ContentTripleSourceSDB> ,
         <java:edu.cornell.mannlib.vitro.webapp.modules.tripleSource.ContentTripleSource> .
