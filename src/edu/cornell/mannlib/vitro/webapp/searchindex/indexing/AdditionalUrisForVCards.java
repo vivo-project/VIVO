@@ -39,7 +39,7 @@ public class AdditionalUrisForVCards implements IndexingUriFinder, ContextModels
 			+ "  ?uri obo:ARG_2000028 ?contactInfo . \n " //
 			+ "}";
 
-    private RDFService rdfService;
+    private volatile RDFService rdfService;
     
     @Override
 	public void setContextModels(ContextModelAccess models) {

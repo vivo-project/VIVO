@@ -33,9 +33,8 @@ public class AdditionalURIsForContextNodes implements IndexingUriFinder, Context
 	private static final List<String> multiValuedQueriesForRole = new ArrayList<String>();
 	private static final List<String>queryList;	
 	
-    private RDFService rdfService;
-    private Set<String> alreadyChecked;
-    private long accumulatedTime = 0;
+	private final Set<String> alreadyChecked = Collections.synchronizedSet(new HashSet<String>());
+    private volatile RDFService rdfService;
     
     
     @Override
@@ -47,8 +46,6 @@ public class AdditionalURIsForContextNodes implements IndexingUriFinder, Context
     public List<String> findAdditionalURIsToIndex(Statement stmt) {
                 
         if( stmt != null ){
-            long start = System.currentTimeMillis();
-            
             List<String>urisToIndex = new ArrayList<String>();
             if(stmt.getSubject() != null && stmt.getSubject().isURIResource() ){        
                 String subjUri = stmt.getSubject().getURI();
@@ -66,7 +63,6 @@ public class AdditionalURIsForContextNodes implements IndexingUriFinder, Context
                 }
             }
             
-            accumulatedTime += (System.currentTimeMillis() - start ) ;
             return urisToIndex;
         }else{
             return Collections.emptyList();
@@ -75,14 +71,12 @@ public class AdditionalURIsForContextNodes implements IndexingUriFinder, Context
     
     @Override
     public void startIndexing() { 
-        alreadyChecked = new HashSet<String>();
-        accumulatedTime = 0L;
+        alreadyChecked.clear();
     }
 
     @Override
     public void endIndexing() {
-        log.debug( "Accumulated time for this run of the index: " + accumulatedTime + " msec");
-        alreadyChecked = null;        
+    	// Nothing to clear
     }
     
     protected List<String> findAdditionalURIsToIndex(String uri) {    	        
