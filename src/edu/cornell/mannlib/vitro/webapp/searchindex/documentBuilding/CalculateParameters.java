@@ -36,7 +36,7 @@ import edu.cornell.mannlib.vitro.webapp.utils.configuration.ContextModelsUser;
 public class CalculateParameters implements DocumentModifier, ContextModelsUser {
 
     private boolean shutdown = false;
-	private Dataset dataset;
+	private volatile Dataset dataset;
    // public static int totalInd=1;
     
     private static final String prefix = "prefix owl: <http://www.w3.org/2002/07/owl#> "
