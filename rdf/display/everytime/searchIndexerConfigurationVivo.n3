@@ -29,25 +29,140 @@
     a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.CalculateParameters> ,
         <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
 
-:vivodocumentModifier_valuesFromVcards
-    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.VIVOValuesFromVcards> ,
-        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
+:vivodocumentModifier_PreferredTitle
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SimpleSparqlQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "Preferred title" ;
+    :hasTargetField "ALLTEXT" ;
+    :hasTargetField "ALLTEXTUNSTEMMED" ;
+    :hasTargetField "PREFERRED_TITLE" ;
+    :hasSparqlQuery """
+        PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+        PREFIX obo: <http://purl.obolibrary.org/obo/>
+		SELECT ?title 
+		WHERE {
+			?uri obo:ARG_2000028 ?card .
+			?card a vcard:Individual .
+			?card vcard:hasTitle ?titleHolder .
+			?titleHolder vcard:title ?title .
+		}
+        """ .
+    
+:vivodocumentModifier_EmailAddress
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SimpleSparqlQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "Email address" ;
+    :hasTargetField "ALLTEXT" ;
+    :hasTargetField "ALLTEXTUNSTEMMED" ;
+    :hasSparqlQuery """
+        PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+        PREFIX obo: <http://purl.obolibrary.org/obo/>
+		SELECT ?email 
+		WHERE {
+			?uri obo:ARG_2000028 ?card .
+			?card a vcard:Individual .
+			?card vcard:hasEmail ?emailHolder .
+			?emailHolder vcard:email ?email .
+		}
+        """ .
+:vivodocumentModifier_NamesAcrossContextNodes
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SimpleSparqlQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "Names of objects across context nodes" ;
+    :hasSparqlQuery """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX core: <http://vivoweb.org/ontology/core#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+        PREFIX obo: <http://purl.obolibrary.org/obo/>
+        SELECT (str(?rawresult) as ?result) 
+        WHERE {
+            ?uri   core:relatedBy ?rel    .
+            ?rel   rdf:type       ?type   .
+            ?rel   core:relates   ?other  .
+            ?other rdfs:label     ?rawresult .
+            FILTER ( ?type IN ( core:Position, core:Authorship, core:Collaboration, core:Affiliation ) )
+        }        
+        """ .
 
-:vivodocumentModifier_ISFBasicFields
-    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.VivoISFBasicFields> ,
-        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
+:vivodocumentModifier_MembershipFields
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SimpleSparqlQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "Add people to organization and vice versa." ;
+    :hasSparqlQuery """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+        PREFIX core: <http://vivoweb.org/ontology/core#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+        PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#> 
+        PREFIX obo: <http://purl.obolibrary.org/obo/>
+        SELECT (str(?rawresult) as ?result) 
+        WHERE {              
+            ?uri    rdf:type               foaf:Organization .
+            ?role   core:roleContributesTo ?uri .
+            ?person obo:RO_0000053         ?role .
+            ?person rdfs:label             ?rawresult .
+        }
+        """ ;
+    :hasSparqlQuery """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+        PREFIX core: <http://vivoweb.org/ontology/core#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+        PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#> 
+        PREFIX obo: <http://purl.obolibrary.org/obo/>
+        SELECT (str(?rawresult) as ?result) 
+        WHERE {              
+            ?uri    rdf:type               foaf:Person .
+            ?uri obo:RO_0000053 / core:roleContributesTo / rdfs:label ?rawresult .
+        }
+        """ .
 
-:vivodocumentModifier_ISFAdvisingFields
-    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.VivoISFAdvisingFields> ,
-        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
-
-:vivodocumentModifier_ISFEducationFields
-    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.VivoISFEducationFields> ,
-        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
-
-:vivodocumentModifier_ISFMemberFields
-    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.VivoISFMemberFields> ,
-        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
+:vivodocumentModifier_EducationFields
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SimpleSparqlQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "Labels for a degree and the granting organization." ;
+    :hasSparqlQuery """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+        PREFIX core: <http://vivoweb.org/ontology/core#>
+        PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#> 
+        SELECT (str(?rawresult) as ?result) 
+        WHERE {
+            ?uri   core:relates ?deg    . 
+            ?deg   rdf:type     core:AwardedDegree .           
+            ?deg   rdfs:label   ?rawresult .
+        }            
+        """ ;
+    :hasSparqlQuery """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+        PREFIX core: <http://vivoweb.org/ontology/core#>
+        PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#> 
+        SELECT (str(?rawresult) as ?result) 
+        WHERE {
+            ?uri   core:relates ?deg    .
+            ?deg   rdf:type     core:AwardedDegree .
+            ?deg   core:assignedBy ?org .
+            ?org   rdfs:label   ?rawresult .
+        }
+        """ .
+        
+:vivodocumentModifier_AdvisingFields
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SimpleSparqlQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "Labels for people in an advising relationship." ;
+    :hasSparqlQuery """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+        PREFIX core: <http://vivoweb.org/ontology/core#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+        PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#> 
+        PREFIX obo: <http://purl.obolibrary.org/obo/>
+        SELECT (str(?rawresult) as ?result) 
+        WHERE {
+            ?uri   core:relatedBy ?rel    .
+            ?rel   rdf:type       core:AdvisingRelationship   .
+            ?rel   core:relates   ?other  .
+            ?other rdfs:label     ?rawresult .
+            FILTER( ?other != ?uri )
+        }         
+        """ .
 
 :vivodocumentModifier_Grants_Projects_ForPerson
     a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SimpleSparqlQueryDocumentModifier> ,
