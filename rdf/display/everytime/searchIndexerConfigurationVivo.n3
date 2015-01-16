@@ -1,4 +1,6 @@
 @prefix : <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> . 
+
 
 #
 # Specify the SearchIndexExcluders, DocumentModifiers and IndexingUriFinders for VIVO. 
@@ -10,6 +12,16 @@
         <java:edu.cornell.mannlib.vitro.webapp.searchindex.exclusions.SearchIndexExcluder> ;
     :excludes
         "http://purl.obolibrary.org/obo/" .
+
+# ------------------------------------
+
+:uriFinder_forContextNodes
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.AdditionalURIsForContextNodes> .
+
+:uriFinder_forVCards
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.AdditionalUrisForVCards> .
 
 # ------------------------------------
 
@@ -33,24 +45,180 @@
     a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.VivoISFEducationFields> ,
         <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
 
-:vivodocumentModifier_ISFGrantFields
-    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.VivoISFGrantFields> ,
-        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
-
 :vivodocumentModifier_ISFMemberFields
     a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.VivoISFMemberFields> ,
         <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
 
-:vivodocumentModifier_informationResourceContextNodeFields
-    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.VivoInformationResourceContextNodeFields> ,
-        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
+:vivodocumentModifier_Grants_Projects_ForPerson
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SimpleSparqlQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "Grants and projects for person" ;
+    :hasTypeRestriction "http://xmlns.com/foaf/0.1/Person" ;
+    :hasSparqlQuery """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+        PREFIX core: <http://vivoweb.org/ontology/core#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+        PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#> 
+        SELECT (str(?rawresult) as ?result) 
+        WHERE {
+            ?grant   core:relates ?uri        .
+            ?grant   rdf:type     core:Grant  . 
+            ?grant   rdfs:label   ?rawresult  .
+        }
+        """ ;
+    :hasSparqlQuery """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+        PREFIX core: <http://vivoweb.org/ontology/core#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+        PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#> 
+        PREFIX obo: <http://purl.obolibrary.org/obo/>
+        SELECT (str(?rawresult) as ?result) WHERE {
+            ?uri     obo:RO_0000053  ?role .
+            ?role    obo:BFO_0000054 ?project .
+            ?project rdf:type        core:Project .
+            ?project rdfs:label      ?rawresult .
+        }
+        """ .
+    
+:vivodocumentModifier_People_Organizations_Projects_ForGrant
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SimpleSparqlQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "People, organizations, and projects for grant" ;
+    :hasTypeRestriction "http://vivoweb.org/ontology/core#Grant" ;
+    :hasSparqlQuery """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+        PREFIX core: <http://vivoweb.org/ontology/core#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+        PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#> 
+        SELECT (str(?rawresult) as ?result) 
+        WHERE {
+            ?uri    core:relates ?person .             
+            ?person rdf:type     foaf:Person .            
+            ?person rdfs:label   ?rawresult .            
+        }
+        """ ;
+    :hasSparqlQuery """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+        PREFIX core: <http://vivoweb.org/ontology/core#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+        PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#> 
+        SELECT (str(?rawresult) as ?result) WHERE {
+            ?uri  core:relates ?org .
+            ?org  rdf:type     foaf:Organization .
+            ?org  rdfs:label   ?rawresult .           
+        }
+        """ ;
+    :hasSparqlQuery """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+        PREFIX core: <http://vivoweb.org/ontology/core#>
+        PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#> 
+        PREFIX obo: <http://purl.obolibrary.org/obo/>
+        SELECT (str(?rawresult) as ?result) WHERE {
+            ?uri     core:relates    ?role .
+            ?role    obo:BFO_0000054 ?project .
+            ?project rdf:type        core:Project .
+            ?project rdfs:label      ?rawresult .
+        }
+        """ .
 
-# ------------------------------------
+:vivodocumentModifier_Grants_People_ForProject
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SimpleSparqlQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "Grants and people for project" ;
+    :hasTypeRestriction "http://vivoweb.org/ontology/core#Project" ;
+    :hasSparqlQuery """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+        PREFIX core: <http://vivoweb.org/ontology/core#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+        PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#> 
+        PREFIX obo: <http://purl.obolibrary.org/obo/>
+        SELECT (str(?rawresult) as ?result) WHERE {
+            ?role  obo:BFO_0000054 ?uri .
+            ?grant core:relates    ?role .
+            ?grant rdf:type        core:Grant .
+            ?grant rdfs:label      ?rawresult .
+        }
+        """ ;
+    :hasSparqlQuery """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+        PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#> 
+        PREFIX obo: <http://purl.obolibrary.org/obo/>
+        SELECT (str(?rawresult) as ?result) WHERE {
+            ?role   obo:BFO_0000054 ?uri .
+            ?role   obo:RO_0000053  ?person .
+            ?person rdf:type        foaf:Person .
+            ?person rdfs:label      ?rawresult .
+        }
+        """ .
 
-:uriFinder_forContextNodes
-    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
-        <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.AdditionalURIsForContextNodes> .
+:vivodocumentModifier_GrantsForOrganization
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SimpleSparqlQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "Grants for organization" ;
+    :hasTypeRestriction "http://xmlns.com/foaf/0.1/Organization" ;
+    :hasSparqlQuery """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+        PREFIX core: <http://vivoweb.org/ontology/core#>
+        PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#> 
+        SELECT (str(?rawresult) as ?result) WHERE {
+            ?grant core:relates ?uri              .
+            ?grant rdf:type     core:Grant        .
+            ?grant rdfs:label   ?rawresult        .
+        }
+        """ .
 
-:uriFinder_forVCards
-    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
-        <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.AdditionalUrisForVCards> .
+:vivodocumentModifier_InformationResources
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SimpleSparqlQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "Authors, featured, editors, and subject area for InformationResource" ;
+    :hasTypeRestriction "http://purl.obolibrary.org/IAO_0000030" ;
+    :hasSparqlQuery """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX core: <http://vivoweb.org/ontology/core#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+        SELECT (str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {
+            ?uri core:relatedBy ?a .
+            ?a rdf:type core:Authorship .
+            ?a core:relates ?b .
+            ?b rdf:type foaf:Agent .
+            ?b rdfs:label ?ContextNodeProperty .
+        }
+        """ ;
+    :hasSparqlQuery """
+        PREFIX core: <http://vivoweb.org/ontology/core#>
+        PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+        SELECT (str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {
+            ?uri core:features ?i . 
+            ?i rdfs:label ?ContextNodeProperty .
+        }
+        """ ;
+    :hasSparqlQuery """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX core: <http://vivoweb.org/ontology/core#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+        SELECT (str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {
+            ?uri core:relatedBy ?e .
+            ?e rdf:type core:Editorship  .
+            ?e core:relates ?i  .
+            ?i rdf:type foaf:Agent .
+            ?i rdfs:label ?ContextNodeProperty  .
+        }
+        """ ;
+    :hasSparqlQuery """
+        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+        PREFIX vitroDisplay: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX core: <http://vivoweb.org/ontology/core#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX obo: <http://purl.obolibrary.org/>
+        PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX localNav: <http://vitro.mannlib.cornell.edu/ns/localnav#>
+        PREFIX bibo: <http://purl.org/ontology/bibo/>
+        SELECT (str(?ContextNodeProperty) as ?contextNodeProperty) WHERE {
+            ?uri core:hasSubjectArea ?f . 
+            ?f rdfs:label ?ContextNodeProperty .
+        }
+        """ .
