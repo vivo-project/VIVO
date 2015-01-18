@@ -30,7 +30,8 @@
 
 :basicSearchIndexer
     a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.SearchIndexerImpl> ,
-        <java:edu.cornell.mannlib.vitro.webapp.modules.searchIndexer.SearchIndexer> .
+        <java:edu.cornell.mannlib.vitro.webapp.modules.searchIndexer.SearchIndexer> ;
+    :threadPoolSize "10" .
     
 :sdbContentTripleSource
     a   <java:edu.cornell.mannlib.vitro.webapp.triplesource.impl.sdb.ContentTripleSourceSDB> ,
