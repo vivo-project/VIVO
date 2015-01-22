@@ -520,7 +520,7 @@ geo:hasMinLongitude
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 bibo:Manuscript
-      rdfs:label "manuscript"@en-US , "Manuscript"@en-US ;
+      rdfs:label "manuscript"@en-US ;
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
       vitro:displayRankAnnot
@@ -535,7 +535,7 @@ bibo:Manuscript
 owl:sameAs
       a owl:ObjectProperty ;
       rdfs:domain owl:Thing ;
-      rdfs:label "mismo que"@es , "same as"@en-US ;
+      rdfs:label "same as"@en-US ;
       rdfs:range owl:Thing ;
       rdfs:subPropertyOf owl:topObjectProperty ;
       vitro:displayLimitAnnot
