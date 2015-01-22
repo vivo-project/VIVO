@@ -2,24 +2,23 @@
 
 <#-- Page providing details on how QR codes work -->
 
-<h2>About QR Codes</h2>
+<h2> Sobre QR Codes </h2>
 
-<h3>What is QR?</h3>
+<h3> O que é QR? </h3>
 
-<p>QR, which stands for <i>Quick Response</i>, is a standard for two-dimensional barcodes that can be read by mobile devices equipped with cameras (such as a smartphone).</p>
+<p> QR, que está para o <i>Resposta Rapida</i>, é um padrão para códigos de barras bidimensionais que podem ser lidas por dispositivos móveis equipados com câmeras (como um smartphone). </p>
 
-<h3>What kind of data is in a QR code?</h3>
+<h3> Que tipo de dados é um QR code ? </h3>
 
-<p>QR codes can encode many different types of data.  The QR code on the profile page of a person in VIVO encodes information about that person in <i>vCard</i> format.  This is a sort of digital business card, containing information about the person's name, address, telephone number, email address, and more.</p>
+<P> QR Code pode codificar muitos tipos diferentes de dados. O QR Code na página do perfil de uma pessoa em VIVO codifica a informação sobre essa pessoa em <i>vCard</i> formato. Esta é uma espécie de cartão de visitas digital, que contém informações sobre o nome da pessoa, endereço, número de telefone, endereço de e-mail, e muito mais.</p>
 
-<p>If you click on a person's QR code in VIVO, you will be taken to the <i>QR Export</i> page for that person.  This page contains the vCard QR code seen on the front page, as well as a QR code containing a simple hyperlink to the user's VIVO profile.  It also contains an HTML tag for each code, that can be embedded in a web page to display that code on other sites.</p>
+<P> Se você clicar no QR Code de uma pessoa na VIVO, você será levado para o <i>QR Export</i> página para essa pessoa. Esta página contém o QR Code vCard visto na primeira página, bem como um código QR contendo um hiperlink simples de perfil VIVO do usuário. Ele também contém uma tag HTML para cada código, que pode ser incorporado em uma página web para mostrar que o código em outros sites. </p>
 <#-- todo: make VIVO API?  Currently pasting Google API code into export area, this will be static and not change if VIVO data is updated. -->
 
-<h3>How do I read a QR code?</h3>
+<h3> Como faço para ler um QR Code? </h3>
 
-<p>There are apps you can download for the iPhone and Android phones that allow you to use your phone's camera to interact with QR codes placed on objects in the real world.</p>
+<P> Existem aplicativos que você pode baixar para os telefones iPhone e Android que permitem que você use a câmera do seu telefone para interagir com os códigos QR colocadas em objetos do mundo real. </p>
 
-<h3>What can I do with a QR code?</h3>
+<h3> O que posso fazer com um QR Code? </h3>
 
-<p>Anything!  For a state-of-the-art business card, put your hyperlink QR code on the back of it.  That way anyone with a properly-equipped smartphone can quickly go to your VIVO profile by simply pointing their camera at the code.  Or put your vCard QR code on your office door to provide more contact information.</p>
-
+<P> Qualquer coisa! Para um cartão de visita state-of-the-art, coloque o seu hyperlink QR Code na parte traseira do mesmo. Dessa forma, qualquer pessoa com um smartphone devidamente equipado pode ir rapidamente para o seu perfil VIVO simplesmente apontando sua câmera para o código. Ou colocar o seu QR Code vCard em sua porta do escritório para fornecer mais informações de contato. </p>
