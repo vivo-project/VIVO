@@ -21,7 +21,6 @@
 #    7498   89730 2277668 first_pass.output
 #
 
-test/edu/cornell/mannlib/vitro/webapp/search/solr/NIHVIVO3853_DataSet1.rdf
 productMods/WEB-INF/ontologies/update/oldVersion/vivo-event-1.5.owl
 productMods/WEB-INF/ontologies/update/oldAnnotations/vivo-core-1.5-annotations.rdf
 productMods/WEB-INF/ontologies/update/diff.tab.txt
