@@ -16,5 +16,5 @@ display:pageListPage display:title "Paginas"@pt-BR.
 <Java: edu.cornell.mannlib.vitro.webapp.utils.dataGetter.BrowseDataGetter> <http://www.w3.org/2000/01/rdf-schema#label> "Página de Navegação"@pt-BR.
 <Java: edu.cornell.mannlib.vitro.webapp.utils.dataGetter.InternalClassesDataGetter> <http://www.w3.org/2000/01/rdf-schema#label> "Grupo de Páginas -  Classes Institucionais"@pt-BR.
 <Java: edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData> <http://www.w3.org/2000/01/rdf-schema#label> "Grupo Classe das Páginas"@pt-BR.
-<Http://vitro.mannlib.cornell.edu/ontologies/display/1.1#DefaultMenu> <http://www.w3.org/2000/01/rdf-schema#label> "Menu Padrão"@pt-BR.
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#DefaultMenu> <http://www.w3.org/2000/01/rdf-schema#label> "Menu Padrão"@pt-BR.
 <Java: edu.cornell.mannlib.vitro.webapp.utils.dataGetter.IndividualsForClassesDataGetter> <http://www.w3.org/2000/01/rdf-schema#label> "Grupo de Páginas - Classes selecionadas"@pt-BR.
