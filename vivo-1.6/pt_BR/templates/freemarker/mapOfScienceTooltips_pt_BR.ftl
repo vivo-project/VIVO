@@ -2,69 +2,67 @@
 
 <#-- START TOOLTIP TEXT -->
 
-<div id="toolTipOne" style="display:none;">
-VIVO's Map of Science visualization depicts the topical expertise a university, organization, or person has 
-based on past publications loaded into VIVO. Shown here is the expertise profile of the ${entityLabel}--larger 
-circle sizes denote more publications per topic area.<br /><br />
+<div id = style "toolTipOne" = "display: none;">
+VIVO Mapa de visualização Ciêntifica retrata a experiência de uma universidade, organização ou pessoa tem
+com base na últimas publicações carregadas no VIVO. Aqui é mostrado o perfil de especialização da ${entityLabel}--largo círculos denotam mais as publicações por área temática. <br /> <br />
 
-<a href='${subEntityMapOfScienceCommonURL}about'>Learn more about VIVO's Map of Science visualization?</a>
+<a href='${subEntityMapOfScienceCommonURL}about'> Saiba mais sobre VIVO Mapas de visualização Ciêntifica? </a>
 </div>
 
 <div id="toolTipTwo" style="display:none;">
-The table below summarizes the publications plotted on the Map of Science. Each row corresponds to a 
-(sub)discipline on the map<br /><br />
+A tabela abaixo resume as publicações plotadas no Mapa da Ciência. Cada linha corresponde a uma
+(Sub)disciplina no mapa <br /> <br />
 
-The <b># of pubs.</b> column shows how many of the publications were mapped to each (sub)discipline. This count can be 
-fractional because some publication venues are associated with more than one (sub)discipline. Each publication 
-in such a venue contributes fractionally to all associated (sub)disciplines according to a weighting scheme.<br /><br />
+A coluna <b># de pubs.</b> mostra quantas das publicações foram mapeadas para cada (sub)disciplina. Esta contagem pode ser fraccionada, porque alguns publicação estão associadas a mais do que uma (sub)disciplina. Cada publicação
+em tal local contribui fração de todas as (sub)disciplinas associadas de acordo com um sistema de ponderação.<br /> <br />
 
-The <b>% of activity</b> column shows what proportion of the publications were mapped to each (sub)discipline.
+A coluna <b>% of activity </b> mostra que proporção das publicações foram mapeados para cada (sub)disciplina.
 
 </div>
 
 <div id="toolTipThree" style="display:none;">
-This visualization is based on the publications we were able to 'science locate' for ${entityLabel}, and 
-therefore it may not be fully representative of the overall publication activity for ${entityLabel}.<br /><br />
+Esta visualização é baseada nas publicações, fomos capazes de 'localizar ciência' para ${entityLabel}, e
+portanto, não pode ser plenamente representativo a atividade de publicação global para ${entityLabel}. <br /> <br />
 
-The publication coverage of this visualization can be improved by including more publication data in the VIVO 
-system, and by ensuring that each publication in the VIVO system is associated with a journal that the Map of 
-Science recognizes (based on the holdings of Thomson's ISI database and Elsevier's Scopus database). Journal 
-names containing typos or other idiosyncrasies may need to be cleaned up before they are recognized. You may 
-contact a VIVO system administrator if publication coverage is a concern.</div>
+A cobertura da visualização desta publicação pode ser melhorados através da inclusão de mais dados na publicação VIVO
+sistema, e por garantir que cada publicação no sistema dentro VIVO é associada com um jornal que o Mapa de
+Ciência reconheca (com base nas participações do banco de dados da Thomson ISI e banco de dados Scopus da Elsevier).  
+Os nomes dos jornais que contenham erros de digitação podem precisar de ser revisados antes de serem reconhecidos. 
+Você pode entrar em contato com o administrador do sistema VIVO se a cobertura da publicação é uma preocupação.</div>
 
 <div id="exploreTooltipText" style="display:none;">
-	Overlay and examine expertise profiles for a organization. Color coding by discipline.
+	Overlay e examine o pergil para uma organização. Cor definida para disciplina.
 </div>
 
 <div id="compareTooltipText" style="display:none;">
-	Overlay and examine expertise profiles for one or more organizations. Color coding by organization.
+	Overlay e examine o pergil para uma ou mais organizações. Cor definida para organização.
 </div>
 
 <div id="searchInfoTooltipText" style="display:none;">
-	List only (sub)disciplines whose names contain this text.
+	Lista única de (sub)disciplinas cuja os nomes contenham este texto.
 </div>
 
 
 <#-- COMPARISON TOOLTIP TEXT -->
 
 <div id="comparisonToolTipTwo" style="display:none;">
-The listed organizations are children of the ${entityLabel} node in the organizational hierarchy. 
-You may 'drill down' to see the organizations below a given sub-organization by selecting the chart icon 
-next to a selected sub-organization's name below the graph on the right.
-<br /><br />
+As organizações listadas são filhos do nó ${entityLabel} na hierarquia organizacional.
+Você pode 'drill down' para ver as organizações abaixo de um determinado sub-organização, selecionando o ícone gráfico
+ao lado do nome de uma sub-organização selecionada abaixo do gráfico à direita.
+<br /> <br />
 
-The <b># of pubs.</b> column shows how many of the publications were mapped to each subdiscipline. This 
-count can be fractional because some publication venues are associated with more than one subdiscipline. 
-Each publication in such a venue contributes fractionally to all associated subdisciplines according to 
-a weighting scheme. 
+A coluna <b># de pubs.</b> mostra quantos dos publicações foram mapeados para cada especialidade. Este
+contagem pode ser fraccionada porque alguns publicação associadas a mais do que um subcampo.
+Cada publicação em tal local contribui fragmentação de todas as sub-disciplinas associadas de acordo com a
+um sistema de ponderação.
 
-<br /><br />
-The <b>% of activity</b> column shows what proportion of the publications were mapped to each subdiscipline.
+<br /> <br />
+A coluna <b>% da atividade</b> mostra que proporção das publicações foram mapeados para cada especialidade.
 
 </div>
 
 <div id="comparisonSearchInfoTooltipText" style="display:none;">
 	<!-- Search for specific subdiscipline (or discipline) label in the first column of the table. -->
-	List only organizations <!--(or people) -->whose name contains this text.
+	Listar apenas organizações <!--(or people) --> cujo nome contém este texto.
 </div>
-<#-- END TOOLTIP TEXT -->
+<# - END TOOLTIP TEXTO ->

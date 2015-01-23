@@ -2,11 +2,11 @@
 
 display:HomeMenuItem display:linkText "Home"@pt .
 display:PeopleMenuItem display:linkText "Pessoas"@pt .
-display:OrganizationsMenuItem display:linkText "Organizations"@pt .
-display:ResearchMenuItem display:linkText "Research"@pt .
+display:OrganizationsMenuItem display:linkText "Organizações"@pt .
+display:ResearchMenuItem display:linkText "Pesquisa"@pt .
 display:EventsMenuItem display:linkText "Events"@pt .
 display:Home display:title "Home"@pt-BR .
-display:Events display:title "Events"@pt-BR .
+display:Events display:title "Eventos"@pt-BR .
 display:Organizations display:title "Organizations"@pt .
 display:People display:title "People"@pt .
 display:Research display:title "Research"@pt .
