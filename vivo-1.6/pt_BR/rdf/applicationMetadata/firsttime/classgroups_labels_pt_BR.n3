@@ -1,5 +1,5 @@
 <Http://vivoweb.org/ontology#vitroClassGrouppeople> <http://www.w3.org/2000/01/rdf-schema#label> "pessoas"@pt-BR.
-<Http://vivoweb.org/ontology#vitroClassGrouppublications> <http://www.w3.org/2000/01/rdf-schema#label> "research"@pt-BR.
+<Http://vivoweb.org/ontology#vitroClassGrouppublications> <http://www.w3.org/2000/01/rdf-schema#label> "pesquisas"@pt-BR.
 <Http://vivoweb.org/ontology#vitroClassGrouporganizations> <http://www.w3.org/2000/01/rdf-schema#label> "organizações"@pt-BR.
 <Http://vivoweb.org/ontology#vitroClassGroupactivities> <http://www.w3.org/2000/01/rdf-schema#label> "atividades"@pt-BR.
 <Http://vivoweb.org/ontology#vitroClassGroupcourses> <http://www.w3.org/2000/01/rdf-schema#label> "cursos"@pt-BR.
