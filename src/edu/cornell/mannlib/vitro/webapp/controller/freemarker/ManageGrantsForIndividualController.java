@@ -44,7 +44,9 @@ public class ManageGrantsForIndividualController extends FreemarkerHttpServlet {
         body.put("subjectUri", subjectUri);
 
         HashMap<String, List<Map<String,String>>>  grants = getGrants(subjectUri, vreq);
-        log.debug("grants = " + grants);
+        if ( log.isDebugEnabled() ) {
+			log.debug("grants = " + grants);
+		}
         body.put("grants", grants);
 
         List<String> allSubclasses = getAllSubclasses(grants);

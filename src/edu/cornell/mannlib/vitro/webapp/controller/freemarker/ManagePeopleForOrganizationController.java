@@ -44,7 +44,9 @@ public class ManagePeopleForOrganizationController extends FreemarkerHttpServlet
         body.put("subjectUri", subjectUri);
 
         HashMap<String, List<Map<String,String>>>  people = getPeople(subjectUri, vreq);
-        log.debug("people = " + people);
+		if ( log.isDebugEnabled() ) {
+        	log.debug("people = " + people);
+		}
         body.put("people", people);
 
         List<String> allSubclasses = getAllSubclasses(people);

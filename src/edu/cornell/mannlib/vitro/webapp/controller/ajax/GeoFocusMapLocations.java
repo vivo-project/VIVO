@@ -120,7 +120,9 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
 			    response = response.substring(0, response.lastIndexOf(","));
 			}
 			response += " ]";
-			log.debug(response);
+			if ( log.isDebugEnabled() ) {
+				log.debug(response);
+			}
 			return response;
 		} catch (Exception e) {
 			log.error("Failed geographic focus locations", e);
