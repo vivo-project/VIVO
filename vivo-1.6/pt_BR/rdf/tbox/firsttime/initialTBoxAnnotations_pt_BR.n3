@@ -1,268 +1,268 @@
-<Http://purl.org/ontology/bibo/section> <http://www.w3.org/2000/01/rdf-schema#label> "seção"@pt-BR.
-<Http://vivoweb.org/ontology/core#dateTime> <http://www.w3.org/2000/01/rdf-schema#label> "data/hora"@pt-BR.
-<Http://purl.org/ontology/bibo/Webpage> <http://www.w3.org/2000/01/rdf-schema#label> "Website"@pt-BR.
-<Http://vivoweb.org/ontology/core#yearMonthDayTimePrecision> <http://www.w3.org/2000/01/rdf-schema#label> "ano-mês-dia-time valor"@pt-BR.
-<Http://vivoweb.org/ontology/core#relates> <http://www.w3.org/2000/01/rdf-schema#label> "refere-se"@pt-BR.
-<Http://purl.org/ontology/bibo/Hearing> <http://www.w3.org/2000/01/rdf-schema#label> "Audição"@pt-BR.
-<Http://vivoweb.org/ontology/core#invited> <http://www.w3.org/2000/01/rdf-schema#label> "convidado"@pt-BR.
-<Http://vivoweb.org/ontology/core#Video> <http://www.w3.org/2000/01/rdf-schema#label> "Video"@pt-BR.
-<Http://purl.org/ontology/bibo/Collection> <http://www.w3.org/2000/01/rdf-schema#label> "Coleção"@pt-BR.
-<Http://purl.org/ontology/bibo/Film> <http://www.w3.org/2000/01/rdf-schema#label> "Filme"@pt-BR.
-<Http://purl.org/ontology/bibo/AudioVisualDocument> <http://www.w3.org/2000/01/rdf-schema#label> "Documentos Audio-Visuais"@pt-BR.
-<Http://vivoweb.org/ontology/core#ClinicalRole> <http://www.w3.org/2000/01/rdf-schema#label> "Regras Clínicas"@pt-BR.
-<Http://purl.org/ontology/bibo/numPages> <http://www.w3.org/2000/01/rdf-schema#label> "número de páginas"@pt-BR.
-<Http://vivoweb.org/ontology/core#iclCode> <http://www.w3.org/2000/01/rdf-schema#label> "Classificação Internacional código (ICL)"@pt-BR.
-<Http://purl.org/ontology/bibo/Book> <http://www.w3.org/2000/01/rdf-schema#label> "Livros"@pt-BR.
-<Http://vivoweb.org/ontology/core#AcademicDegree> <http://www.w3.org/2000/01/rdf-schema#label> "Grau Acadêmico"@pt-BR.
-<Http://purl.org/ontology/bibo/asin> <http://www.w3.org/2000/01/rdf-schema#label> " Número Padrão de Identificação Amazon (ASIN)"@pt-BR.
-<Http://vivoweb.org/ontology/core#isCorrespondingAuthor> <http://www.w3.org/2000/01/rdf-schema#label> "Será que essa pessoa um autor correspondente?"@pt-BR.
-<Http://vivoweb.org/ontology/core#PostdoctoralTraining> <http://www.w3.org/2000/01/rdf-schema#label> "Formação de Pós-Doutorado"@pt-BR.
-<Http://purl.org/ontology/bibo/EditedBook> <http://www.w3.org/2000/01/rdf-schema#label> "Livro Editado"@pt-BR.
-<Http://purl.org/ontology/bibo/Excerpt> <http://www.w3.org/2000/01/rdf-schema#label> "Trecho"@pt-BR.
-<Http://vivoweb.org/ontology/core#entryTerm> <http://www.w3.org/2000/01/rdf-schema#label> "termo de entrada"@pt-BR.
-<Http://vivoweb.org/ontology/core#DateTimeInterval> <http://www.w3.org/2000/01/rdf-schema#label> "Intervalo Data/Hota"@pt-BR.
-<Http://vivoweb.org/ontology/core#Screenplay> <http://www.w3.org/2000/01/rdf-schema#label> "Screenplay"@pt-BR.
-<Http://purl.org/ontology/bibo/performer> <http://www.w3.org/2000/01/rdf-schema#label> "performesse"@pt-BR.
-<Http://vivoweb.org/ontology/core#Exhibit> <http://www.w3.org/2000/01/rdf-schema#label> "Exibido"@pt-BR.
-<Http://vivoweb.org/ontology/core#prerequisiteFor> <http://www.w3.org/2000/01/rdf-schema#label> "pré-requisito para"@pt-BR.
-<Http://vivoweb.org/ontology/core#WorkshopSeries> <http://www.w3.org/2000/01/rdf-schema#label> "Série Workshop" @ en-U.
-<Http://vivoweb.org/ontology/core#supportedBy> <http://www.w3.org/2000/01/rdf-schema#label> "apoiado por"@pt-BR.
-<Http://vivoweb.org/ontology/core#Department> <http://www.w3.org/2000/01/rdf-schema#label> "Departamento"@pt-BR.
-<Http://vivoweb.org/ontology/core#Museum> <http://www.w3.org/2000/01/rdf-schema#label> "Museo"@pt-BR.
-<Http://vivoweb.org/ontology/core#features> <http://www.w3.org/2000/01/rdf-schema#label> "características"@pt-BR.
-<Http://purl.org/ontology/bibo/PersonalCommunicationDocument> <http://www.w3.org/2000/01/rdf-schema#label> "Documentação Pessoal de Comunicação"@pt-BR.
-<Http://purl.org/ontology/bibo/Map> <http://www.w3.org/2000/01/rdf-schema#label> "Mapa"@pt-BR.
-<Http://vivoweb.org/ontology/core#nihmsid> <http://www.w3.org/2000/01/rdf-schema#label> "NIH Manuscript Submission Sistema ID"@pt-BR.
-<Http://vivoweb.org/ontology/core#geographicFocusOf> <http://www.w3.org/2000/01/rdf-schema#label> "foco geográfico de"@pt-BR.
-<Http://vivoweb.org/ontology/core#licenseNumber> <http://www.w3.org/2000/01/rdf-schema#label> "número de licença"@pt-BR.
-<Http://purl.org/ontology/bibo/citedBy> <http://www.w3.org/2000/01/rdf-schema#label> "citado por"@pt-BR.
-<Http://vivoweb.org/ontology/core#CoPrincipalInvestigatorRole> <http://www.w3.org/2000/01/rdf-schema#label> "Regra Principa de Co-investigador"@pt-BR.
-<Http://vivoweb.org/ontology/core#placeOfPublication> <http://www.w3.org/2000/01/rdf-schema#label> "local da publicação"@pt-BR.
-<Http://purl.org/ontology/bibo/AcademicArticle> <http://www.w3.org/2000/01/rdf-schema#label> "Artigo Acadêmico"@pt-BR.
-<Http://vivoweb.org/ontology/core#middleName> <http://www.w3.org/2000/01/rdf-schema#label> "nome do meio ou inicial"@pt-BR.
-<Http://vivoweb.org/ontology/core#Institute> <http://www.w3.org/2000/01/rdf-schema#label> "Instituto"@pt-BR.
-<Http://purl.org/ontology/bibo/court> <http://www.w3.org/2000/01/rdf-schema#label> "tribunal"@pt-BR.
-<Http://vivoweb.org/ontology/core#Database> <http://www.w3.org/2000/01/rdf-schema#label> "Base de Dados"@pt-BR.
-<Http://vivoweb.org/ontology/core#publicationVenueFor> <http://www.w3.org/2000/01/rdf-schema#label> "publicação venue de"@pt-BR.
-<Http://vivoweb.org/ontology/core#Facility> <http://www.w3.org/2000/01/rdf-schema#label> "Facildade"@pt-BR.
-<Http://purl.org/ontology/bibo/Statute> <http://www.w3.org/2000/01/rdf-schema#label> "Estatuto"@pt-BR.
-<Http://vivoweb.org/ontology/core#BlogPosting> <http://www.w3.org/2000/01/rdf-schema#label> "Blog Posting"@pt-BR.
-<Http://purl.org/ontology/bibo/Issue> <http://www.w3.org/2000/01/rdf-schema#label> "Emissão"@pt-BR.
-<Http://vivoweb.org/ontology/core#Student> <http://www.w3.org/2000/01/rdf-schema#label> "Estudante"@pt-BR.
-<Http://purl.org/ontology/bibo/issuer> <http://www.w3.org/2000/01/rdf-schema#label> "emissor"@pt-BR.
-<Http://vivoweb.org/ontology/core#Country> <http://www.w3.org/2000/01/rdf-schema#label> "País"@pt-BR.
-<Http://purl.org/ontology/bibo/transcriptOf> <http://www.w3.org/2000/01/rdf-schema#label> "transcrição"@pt-BR.
-<Http://vitro.mannlib.cornell.edu/ns/vitro/0.7#moniker> <http://www.w3.org/2000/01/rdf-schema#label> "apelido (reprovado)" @ pt BR.
-<Http://purl.org/ontology/bibo/presents> <http://www.w3.org/2000/01/rdf-schema#label> "documentos relacionados"@pt-BR.
-<Http://vivoweb.org/ontology/core#majorField> <http://www.w3.org/2000/01/rdf-schema#label> "campo de atuação do grau"@pt-BR.
-<Http://vivoweb.org/ontology/core#EditorRole> <http://www.w3.org/2000/01/rdf-schema#label> "Regra do Editor"@pt-BR.
-<Http://purl.org/ontology/bibo/Image> <http://www.w3.org/2000/01/rdf-schema#label> "Imagem"@pt-BR.
-<Http://vivoweb.org/ontology/core#fundingVehicleFor> <http://www.w3.org/2000/01/rdf-schema#label> "financia"@pt-BR.
-<Http://vivoweb.org/ontology/core#GeopoliticalEntity> <http://www.w3.org/2000/01/rdf-schema#label> "Instituição Geopolítica"@pt-BR.
-<Http://purl.org/ontology/bibo/issue> <http://www.w3.org/2000/01/rdf-schema#label> "questão"@pt-BR.
-<Http://purl.org/ontology/bibo/Proceedings> <http://www.w3.org/2000/01/rdf-schema#label> "Procedimento"@pt-BR.
-<Http://purl.org/ontology/bibo/Conference> <http://www.w3.org/2000/01/rdf-schema#label> "Conferência"@pt-BR.
-<Http://vivoweb.org/ontology/core#hrJobTitle> <http://www.w3.org/2000/01/rdf-schema#label> "cargo HR"@pt-BR.
-<Http://vivoweb.org/ontology/core#CaseStudy> <http://www.w3.org/2000/01/rdf-schema#label> "Estudo de Caso"@pt-BR.
-<Http://vivoweb.org/ontology/core#ExtensionUnit> <http://www.w3.org/2000/01/rdf-schema#label> "Unidade de extensão"@pt-BR.
-<Http://vivoweb.org/ontology/core#grantSubcontractedThrough> <http://www.w3.org/2000/01/rdf-schema#label> "subcontratado através de"@pt-BR.
-<Http://vivoweb.org/ontology/core#ServiceProvidingLaboratory> <http://www.w3.org/2000/01/rdf-schema#label> "Prestadoras de Serviços do laboratorio"@pt-BR.
-<Http://vivoweb.org/ontology/core#hasFundingVehicle> <http://www.w3.org/2000/01/rdf-schema#label> "financiamento fornecido via"@pt-BR.
-<Http://vivoweb.org/ontology/core#scopusId> <http://www.w3.org/2000/01/rdf-schema#label> "Scopus ID"@pt-BR.
-<Http://vivoweb.org/ontology/core#offeredBy> <http://www.w3.org/2000/01/rdf-schema#label> "oferecido por"@pt-BR.
-<Http://vivoweb.org/ontology/core#assigns> <http://www.w3.org/2000/01/rdf-schema#label> "cessionários"@pt-BR.
-<Http://vivoweb.org/ontology/core#degreeCandidacy> <http://www.w3.org/2000/01/rdf-schema#label> "grau candidatura"@pt-BR.
-<Http://vivoweb.org/ontology/core#hasResearchArea> <http://www.w3.org/2000/01/rdf-schema#label> "áreas de investigação"@pt-BR.
-<Http://vivoweb.org/ontology/core#NewsRelease> <http://www.w3.org/2000/01/rdf-schema#label> "Novas Versões"@pt-BR.
-<Http://purl.org/ontology/bibo/> <http://www.w3.org/2000/01/rdf-schema#label> "Bibo Ontologia"@pt-BR.
-<Http://vivoweb.org/ontology/core#ConferenceSeries> <http://www.w3.org/2000/01/rdf-schema#label> "Ciclo de Conferências"@pt-BR.
-<Http://vivoweb.org/ontology/core#hasSuccessorOrganization> <http://www.w3.org/2000/01/rdf-schema#label> "organização sucessora"@pt-BR.
-<Http://purl.org/ontology/bibo/Report> <http://www.w3.org/2000/01/rdf-schema#label> "Relatório"@pt-BR.
-<Http://vivoweb.org/ontology/core#AwardedDegree> <http://www.w3.org/2000/01/rdf-schema#label> "grau concedido"@pt-BR.
-<Http://purl.org/ontology/bibo/isbn13> <http://www.w3.org/2000/01/rdf-schema#label> "International Standard Book Number (ISBN) 13"@pt-BR.
-<Http://vivoweb.org/ontology/core#Location> <http://www.w3.org/2000/01/rdf-schema#label> "Localização"@pt-BR.
-<Http://vivoweb.org/ontology/core#seatingCapacity> <http://www.w3.org/2000/01/rdf-schema#label> "capacidade"@pt-BR.
-<Http://purl.org/ontology/bibo/DocumentStatus> <http://www.w3.org/2000/01/rdf-schema#label> "Status da Documentação"@pt-BR.
-<Http://purl.org/ontology/bibo/LegalDecision> <http://www.w3.org/2000/01/rdf-schema#label> "decisão"@pt-BR.
-<Http://vivoweb.org/ontology/core#Library> <http://www.w3.org/2000/01/rdf-schema#label> "Biblioteca"@pt-BR.
-<Http://vivoweb.org/ontology/core#GeographicLocation> <http://www.w3.org/2000/01/rdf-schema#label> "Localização Geográfica"@pt-BR.
-<Http://vivoweb.org/ontology/core#subjectAreaOf> <http://www.w3.org/2000/01/rdf-schema#label> "área temática de"@pt-BR.
-<Http://purl.org/ontology/bibo/Quote> <http://www.w3.org/2000/01/rdf-schema#label> "Citação"@pt-BR.
-<Http://vivoweb.org/ontology/core#Dataset> <http://www.w3.org/2000/01/rdf-schema#label> "Dataset"@pt-BR.
-<Http://vivoweb.org/ontology/core#contributingRole> <http://www.w3.org/2000/01/rdf-schema#label> "contribuinte"@pt-BR.
-<Http://purl.org/ontology/bibo/sici> <http://www.w3.org/2000/01/rdf-schema#label> "Serial item e Contribuição Identifier (SICI)"@pt-BR.
-<Http://vivoweb.org/ontology/core#NonAcademic> <http://www.w3.org/2000/01/rdf-schema#label> "não académico"@pt-BR.
-<Http://vivoweb.org/ontology/core#departmentOrSchool> <http://www.w3.org/2000/01/rdf-schema#label> "departamento ou nome da escola dentro instituição"@pt-BR.
-<Http://vivoweb.org/ontology/core#CoreLaboratory> <http://www.w3.org/2000/01/rdf-schema#label> "Núcleo de Laboratório"@pt-BR.
-<Http://purl.org/ontology/bibo/degree> <http://www.w3.org/2000/01/rdf-schema#label> "grau relacionados"@pt-BR.
-<Http://vivoweb.org/ontology/core#relatedBy> <http://www.w3.org/2000/01/rdf-schema#label> "relacionados por"@pt-BR.
-<Http://purl.org/ontology/bibo/Chapter> <http://www.w3.org/2000/01/rdf-schema#label> "número do capítulo"@pt-BR.
-<Http://purl.org/ontology/bibo/cites> <http://www.w3.org/2000/01/rdf-schema#label> "cita"@pt-BR.
-<Http://purl.org/ontology/bibo/pageEnd> <http://www.w3.org/2000/01/rdf-schema#label> "página final"@pt-BR.
-<Http://vivoweb.org/ontology/core#hasEquipment> <http://www.w3.org/2000/01/rdf-schema#label> "tem equipamentos"@pt-BR.
-<Http://vivoweb.org/ontology/core#localAwardId> <http://www.w3.org/2000/01/rdf-schema#label> "prêmio locais ID"@pt-BR.
-<Http://vivoweb.org/ontology/core#Room> <http://www.w3.org/2000/01/rdf-schema#label> "Quarto"@pt-BR.
-<Http://purl.org/ontology/bibo/draft> <http://www.w3.org/2000/01/rdf-schema#label> "rascunho"@pt-BR.
-<Http://purl.org/ontology/bibo/CourtReporter> <http://www.w3.org/2000/01/rdf-schema#label> "Court Reporter"@pt-BR.
-<Http://vivoweb.org/ontology/core#cclCode> <http://www.w3.org/2000/01/rdf-schema#label> "publicado US Classificação Classe / subclasse (CCL) código"@pt-BR.
-<Http://purl.org/ontology/bibo/Newspaper> <http://www.w3.org/2000/01/rdf-schema#label> "Jornal"@pt-BR.
-<Http://purl.org/ontology/bibo/translator> <http://www.w3.org/2000/01/rdf-schema#label> "tradutor"@pt-BR.
-<Http://purl.org/ontology/bibo/LegalCaseDocument> <http://www.w3.org/2000/01/rdf-schema#label> "Documento Processo Legal"@pt-BR.
-<Http://xmlns.com/foaf/0.1/Person> <http://www.w3.org/2000/01/rdf-schema#label> "Pessoa"@pt-BR.
-<Http://purl.org/ontology/bibo/abstract> <http://www.w3.org/2000/01/rdf-schema#label> "abstrato"@pt-BR.
-<Http://vivoweb.org/ontology/core#Authorship> <http://www.w3.org/2000/01/rdf-schema#label> "Autoria"@pt-BR.
-<Http://vivoweb.org/ontology/core#Competition> <http://www.w3.org/2000/01/rdf-schema#label> "Competição"@pt-BR.
-<Http://purl.org/dc/terms/relation> <http://www.w3.org/2000/01/rdf-schema#label> "relação"@pt-BR.
-<Http://vivoweb.org/ontology/core#AcademicYear> <http://www.w3.org/2000/01/rdf-schema#label> "Ano Lectivo"@pt-BR.
-<Http://purl.org/ontology/bibo/recipient> <http://www.w3.org/2000/01/rdf-schema#label> "destinatário"@pt-BR.
-<Http://vivoweb.org/ontology/core#teachingOverview> <http://www.w3.org/2000/01/rdf-schema#label> "ensinando visão geral"@pt-BR.
-<Http://vivoweb.org/ontology/core#GeographicRegion> <http://www.w3.org/2000/01/rdf-schema#label> "Região Geográfica"@pt-BR.
-<Http://vivoweb.org/ontology/core#Translation> <http://www.w3.org/2000/01/rdf-schema#label> "Tradução"@pt-BR.
-<Http://vivoweb.org/ontology/core#SeminarSeries> <http://www.w3.org/2000/01/rdf-schema#label> "Série de Seminários"@pt-BR.
-<Http://purl.org/ontology/bibo/uri> <http://www.w3.org/2000/01/rdf-schema#label> "URI"@pt-BR.
-<Http://vivoweb.org/ontology/core#Foundation> <http://www.w3.org/2000/01/rdf-schema#label> "Fundação"@pt-BR.
-<Http://vivoweb.org/ontology/core#MedicalResidency> <http://www.w3.org/2000/01/rdf-schema#label> "Residência Médica"@pt-BR.
-<Http://vivoweb.org/ontology/core#totalAwardAmount> <http://www.w3.org/2000/01/rdf-schema#label> "montante total prêmio"@pt-BR.
-<Http://purl.org/ontology/bibo/Interview> <http://www.w3.org/2000/01/rdf-schema#label> "Entrevista"@pt-BR.
-<Http://vivoweb.org/ontology/core#GraduateAdvisingRelationship> <http://www.w3.org/2000/01/rdf-schema#label> "Pós-Graduação Assessoria de Relacionamento"@pt-BR.
-<Http://purl.org/ontology/bibo/Code> <http://www.w3.org/2000/01/rdf-schema#label> "Código"@pt-BR.
-<Http://vivoweb.org/ontology/core#FacultyAdministrativePosition> <http://www.w3.org/2000/01/rdf-schema#label> "Posição administrativa da Faculdade"@pt-BR.
-<Http://vivoweb.org/ontology/core#AttendeeRole> <http://www.w3.org/2000/01/rdf-schema#label> "participante Papel"@pt-BR.
-<Http://vivoweb.org/ontology/core#overview> <http://www.w3.org/2000/01/rdf-schema#label> "visão geral"@pt-BR.
-<Http://vivoweb.org/ontology/core#FundingOrganization> <http://www.w3.org/2000/01/rdf-schema#label> "Financiado"@pt-BR.
-<Http://vivoweb.org/ontology/core#assignedBy> <http://www.w3.org/2000/01/rdf-schema#label> "atribuído pelo"@pt-BR.
-<Http://vivoweb.org/ontology/core#DateTimeValue> <http://www.w3.org/2000/01/rdf-schema#label> "Data/Hora Valor"@pt-BR.
-<Http://vivoweb.org/ontology/core#description> <http://www.w3.org/2000/01/rdf-schema#label> "descrição"@pt-BR.
-<Http://vivoweb.org/ontology/core#distributesFundingFrom> <http://www.w3.org/2000/01/rdf-schema#label> "distribui financiamento do"@pt-BR.
-<Http://purl.org/ontology/bibo/prefixName> <http://www.w3.org/2000/01/rdf-schema#label> "nome do prefixo"@pt-BR.
-<Http://vivoweb.org/ontology/core#School> <http://www.w3.org/2000/01/rdf-schema#label> "Escola"@pt-BR.
-<Http://purl.org/ontology/bibo/Journal> <http://www.w3.org/2000/01/rdf-schema#label> "Jornal"@pt-BR.
-<Http://vivoweb.org/ontology/core#LibrarianPosition> <http://www.w3.org/2000/01/rdf-schema#label> "Posição Bibliotecário"@pt-BR.
-<Http://vivoweb.org/ontology/core#dateIssued> <http://www.w3.org/2000/01/rdf-schema#label> "data de emissão"@pt-BR.
-<Http://purl.org/ontology/bibo/ThesisDegree> <http://www.w3.org/2000/01/rdf-schema#label> "Tese de Licenciatura"@pt-BR.
-<Http://purl.org/ontology/bibo/BookSection> <http://www.w3.org/2000/01/rdf-schema#label> "Seção Livro"@pt-BR.
-<Http://vivoweb.org/ontology/core#hasPredecessorOrganization> <http://www.w3.org/2000/01/rdf-schema#label> "organização predecessor"@pt-BR.
-<Http://purl.org/ontology/bibo/Legislation> <http://www.w3.org/2000/01/rdf-schema#label> "Legislação"@pt-BR.
-<Http://vivoweb.org/ontology/core#OrganizerRole> <http://www.w3.org/2000/01/rdf-schema#label> "Papel do organizador"@pt-BR.
-<Http://vivoweb.org/ontology/core#F1000Link> <http://www.w3.org/2000/01/rdf-schema#label> "F1000 Link"@pt-BR.
-<Http://vivoweb.org/ontology/core#reproduces> <http://www.w3.org/2000/01/rdf-schema#label> "F1000 Link"@pt-BR.
-<Http://vivoweb.org/ontology/core#NonAcademicPosition> <http://www.w3.org/2000/01/rdf-schema#label> "Posição não académico"@pt-BR.
-<Http://purl.org/ontology/bibo/presentedAt> <http://www.w3.org/2000/01/rdf-schema#label> "apresentado no evento"@pt-BR.
-<Http://vivoweb.org/ontology/core#providesFundingThrough> <http://www.w3.org/2000/01/rdf-schema#label> "prevê o financiamento através de"@pt-BR.
-<Http://purl.org/ontology/bibo/reversedBy> <http://www.w3.org/2000/01/rdf-schema#label> "revertida por"@pt-BR.
-<Http://vivoweb.org/ontology/core#WorkingPaper> <http://www.w3.org/2000/01/rdf-schema#label> "documento de trabalho"@pt-BR.
-<Http://purl.org/ontology/bibo/Slideshow> <http://www.w3.org/2000/01/rdf-schema#label> "Slideshow"@pt-BR.
-<Http://vivoweb.org/ontology/core#Award> <http://www.w3.org/2000/01/rdf-schema#label> "Prêmio"@pt-BR.
-<Http://purl.org/ontology/bibo/Website> <http://www.w3.org/2000/01/rdf-schema#label> "Website"@pt-BR.
-<Http://vivoweb.org/ontology/core#EmeritusProfessor> <http://www.w3.org/2000/01/rdf-schema#label> "Professor Emérito"@pt-BR.
-<Http://vivoweb.org/ontology/core#Editorship> <http://www.w3.org/2000/01/rdf-schema#label> "Redação"@pt-BR.
-<Http://purl.org/ontology/bibo/annotates> <http://www.w3.org/2000/01/rdf-schema#label> "anota"@pt-BR.
-<Http://vivoweb.org/ontology/core#Committee> <http://www.w3.org/2000/01/rdf-schema#label> "Comitê"@pt-BR.
-<Http://vivoweb.org/ontology/core#EventSeries> <http://www.w3.org/2000/01/rdf-schema#label> "o evento da série"@pt-BR.
-<Http://purl.org/ontology/bibo/identifier> <http://www.w3.org/2000/01/rdf-schema#label> "identificador"@pt-BR.
-<Http://vivoweb.org/ontology/core#IssuedCredential> <http://www.w3.org/2000/01/rdf-schema#label> "Emitido Credencial"@pt-BR.
-<Http://purl.org/NET/c4dm/event.owl#Event> <http://www.w3.org/2000/01/rdf-schema#label> "Evento"@pt-BR.
-<Http://vivoweb.org/ontology/core#eRACommonsId> <http://www.w3.org/2000/01/rdf-schema#label> "ERA Commons ID"@pt-BR.
-<Http://vivoweb.org/ontology/core#License> <http://www.w3.org/2000/01/rdf-schema#label> "Licença"@pt-BR.
-<Http://vivoweb.org/ontology/core#sponsoredBy> <http://www.w3.org/2000/01/rdf-schema#label> "prêmio patrocinado pela"@pt-BR.
-<Http://vivoweb.org/ontology/core#GovernmentAgency> <http://www.w3.org/2000/01/rdf-schema#label> "Agência do Governo"@pt-BR.
-<Http://purl.org/ontology/bibo/published> <http://www.w3.org/2000/01/rdf-schema#label> "publicada"@pt-BR.
-<Http://vivoweb.org/ontology/core#hasValue> <http://www.w3.org/2000/01/rdf-schema#label> "tem valor" @ pt-BRO.
-<Http://vivoweb.org/ontology/core#EducationalProcess> <http://www.w3.org/2000/01/rdf-schema#label> "Processo Educacional"@pt-BR.
-<Http://vivoweb.org/ontology/core#identifier> <http://www.w3.org/2000/01/rdf-schema#label> "identificador"@pt-BR.
-<Http://vivoweb.org/ontology/core#Review> <http://www.w3.org/2000/01/rdf-schema#label> "Revisão"@pt-BR.
-<Http://vivoweb.org/ontology/core#PostdocOrFellowAdvisingRelationship> <http://www.w3.org/2000/01/rdf-schema#label> "Assessoria de Relacionamento para Postdoc ou Bolsistas "@pt-BR.
-<Http://vivoweb.org/ontology/core#TeacherRole> <http://www.w3.org/2000/01/rdf-schema#label> "Regras do Professor"@pt-BR.
-<Http://vivoweb.org/ontology/core#outreachOverview> <http://www.w3.org/2000/01/rdf-schema#label> "Visão Geral alcance"@pt-BR.
-<Http://vivoweb.org/ontology/core#informationResourceSupportedBy> <http://www.w3.org/2000/01/rdf-schema#label> "apoiado por"@pt-BR.
-<Http://vivoweb.org/ontology/core#dateTimePrecision> <http://www.w3.org/2000/01/rdf-schema#label> "/ hora precisão data"@pt-BR.
-<Http://vivoweb.org/ontology/core#publisher> <http://www.w3.org/2000/01/rdf-schema#label> "editor"@pt-BR.
-<Http://vivoweb.org/ontology/core#OutreachProviderRole> <http://www.w3.org/2000/01/rdf-schema#label> "alcance da função"@pt-BR.
-<Http://purl.org/ontology/bibo/Note> <http://www.w3.org/2000/01/rdf-schema#label> "Nota"@pt-BR.
-<Http://vivoweb.org/ontology/core#AdministratorRole> <http://www.w3.org/2000/01/rdf-schema#label> "Função de administrador"@pt-BR.
-<Http://vivoweb.org/ontology/core#FacultyPosition> <http://www.w3.org/2000/01/rdf-schema#label> "Corpo Docente"@pt-BR.
-<Http://purl.org/ontology/bibo/isbn10> <http://www.w3.org/2000/01/rdf-schema#label> "International Standard Book Number (ISBN) 10"@pt-BR.
-<Http://purl.org/ontology/bibo/eanucc13> <http://www.w3.org/2000/01/rdf-schema#label> "EAN Internacional- Uniform Code Council (EAN- UCC) 13"@pt-BR.
-<Http://vitro.mannlib.cornell.edu/ns/vitro/public> <http://www.w3.org/2000/01/rdf-schema#label> "Public Vitro Ontologia"@pt-BR.
-<Http://vivoweb.org/ontology/core#Building> <http://www.w3.org/2000/01/rdf-schema#label> "Contruindo"@pt-BR.
-<Http://purl.org/ontology/bibo/Manual> <http://www.w3.org/2000/01/rdf-schema#label> "Manual"@pt-BR.
-<Http://vivoweb.org/ontology/core#freetextKeyword> <http://www.w3.org/2000/01/rdf-schema#label> "palavras-chave"@pt-BR.
-<Http://purl.org/ontology/bibo/rejected> <http://www.w3.org/2000/01/rdf-schema#label> "rejeitado"@pt-BR.
-<Http://purl.org/ontology/bibo/issn> <http://www.w3.org/2000/01/rdf-schema#label> "International Standard Serial Number (ISSN)"@pt-BR.
-<Http://vivoweb.org/ontology/core#hasAssociatedConcept> <http://www.w3.org/2000/01/rdf-schema#label> "conceito associado"@pt-BR.
-<Http://vivoweb.org/ontology/core#yearPrecision> <http://www.w3.org/2000/01/rdf-schema#label> "valor do ano"@pt-BR.
-<Http://vivoweb.org/ontology/core#Continent> <http://www.w3.org/2000/01/rdf-schema#label> "Continente"@pt-BR.
-<Http://vivoweb.org/ontology/core#ResearchProposal> <http://www.w3.org/2000/01/rdf-schema#label> "Proposta de Pesquisa"@pt-BR.
-<Http://vivoweb.org/ontology/core#preferredDisplayOrder> <http://www.w3.org/2000/01/rdf-schema#label> "ordem de exibição preferido"@pt-BR.
-<Http://vivoweb.org/ontology/core#Speech> <http://www.w3.org/2000/01/rdf-schema#label> "Velocidade"@pt-BR.
-<Http://vivoweb.org/ontology/core#contactInformation> <http://www.w3.org/2000/01/rdf-schema#label> "informações de contato"@pt-BR.
-<Http://vivoweb.org/ontology/core#Division> <http://www.w3.org/2000/01/rdf-schema#label> "Divisão"@pt-BR.
-<Http://purl.org/ontology/bibo/director> <http://www.w3.org/2000/01/rdf-schema#label> "diretor"@pt-BR.
-<Http://purl.org/ontology/bibo/Patent> <http://www.w3.org/2000/01/rdf-schema#label> "Patente"@pt-BR.
-<Http://vivoweb.org/ontology/core#hasPrerequisite> <http://www.w3.org/2000/01/rdf-schema#label> "tem pré-requisito"@pt-BR.
-<Http://purl.org/ontology/bibo/reviewOf> <http://www.w3.org/2000/01/rdf-schema#label> "revisão de"@pt-BR.
-<Http://vivoweb.org/ontology/core#grantDirectCosts> <http://www.w3.org/2000/01/rdf-schema#label> "custos diretos"@pt-BR.
-<Http://vivoweb.org/ontology/core#geographicFocus> <http://www.w3.org/2000/01/rdf-schema#label> "foco geográfico"@pt-BR.
-<Http://vivoweb.org/ontology/core#Campus> <http://www.w3.org/2000/01/rdf-schema#label> "Campus"@pt-BR.
-<Http://vivoweb.org/ontology/core#Center> <http://www.w3.org/2000/01/rdf-schema#label> "Centro"@pt-BR.
-<Http://vivoweb.org/ontology/core#Abstract> <http://www.w3.org/2000/01/rdf-schema#label> "Abstrato"@pt-BR.
-<Http://vivoweb.org/ontology/core#affiliatedOrganization> <http://www.w3.org/2000/01/rdf-schema#label> "tem organização filiadas"@pt-BR.
-<Http://purl.org/ontology/bibo/distributor> <http://www.w3.org/2000/01/rdf-schema#label> "distribuidor"@pt-BR.
-<Http://vivoweb.org/ontology/core#SubnationalRegion> <http://www.w3.org/2000/01/rdf-schema#label> "Subnações Região"@pt-BR.
-<Http://vivoweb.org/ontology/core#Association> <http://www.w3.org/2000/01/rdf-schema#label> "Associação"@pt-BR.
-<Http://purl.org/ontology/bibo/Manuscript> <http://www.w3.org/2000/01/rdf-schema#label> "manuscrito"@pt-BR, "Manuscrito"@pt-BR.
-<Http://vivoweb.org/ontology/core#NonFacultyAcademicPosition> <http://www.w3.org/2000/01/rdf-schema#label> "Sem Posição Acadêmica"@pt-BR.
-<Http://vivoweb.org/ontology/core#AttendingProcess> <http://www.w3.org/2000/01/rdf-schema#label> "Atender Processo"@pt-BR.
-<Http://vivoweb.org/ontology/core#reportId> <http://www.w3.org/2000/01/rdf-schema#label> "identificador relatório"@pt-BR.
-<Http://purl.org/ontology/bibo/Slide> <http://www.w3.org/2000/01/rdf-schema#label> "Deslizar"@pt-BR.
-<Http://vivoweb.org/ontology/core#ConferencePaper> <http://www.w3.org/2000/01/rdf-schema#label> "Papel da Conferência"@pt-BR.
-<Http://vivoweb.org/ontology/core#PeerReviewerRole> <http://www.w3.org/2000/01/rdf-schema#label> "Papel do Avaliador"@pt-BR.
-<Http://vivoweb.org/ontology/core#patentNumber> <http://www.w3.org/2000/01/rdf-schema#label> "número de patentes"@pt-BR.
-<Http://purl.org/ontology/bibo/AudioDocument> <http://www.w3.org/2000/01/rdf-schema#label> "Audio Document"@pt-BR.
-<Http://purl.org/ontology/bibo/chapter> <http://www.w3.org/2000/01/rdf-schema#label> "número do capítulo"@pt-BR.
-<Http://vivoweb.org/ontology/core#InvitedTalk> <http://www.w3.org/2000/01/rdf-schema#label> "convidado Talk"@pt-BR.
-<Http://purl.org/ontology/bibo/accepted> <http://www.w3.org/2000/01/rdf-schema#label> "aceito"@pt-BR.
-<Http://vivoweb.org/ontology/core#Internship> <http://www.w3.org/2000/01/rdf-schema#label> "estágio"@pt-BR.
-<Http://vivoweb.org/ontology/core#PrivateCompany> <http://www.w3.org/2000/01/rdf-schema#label> "empresa privada"@pt-BR.
-<Http://vivoweb.org/ontology/core#hasMonetaryAmount> <http://www.w3.org/2000/01/rdf-schema#label> "tem valor monetário"@pt-BR.
-<Http://vivoweb.org/ontology/core#reviewedIn> <http://www.w3.org/2000/01/rdf-schema#label> "revista"@pt-BR.
-<Http://vivoweb.org/ontology/core#supports> <http://www.w3.org/2000/01/rdf-schema#label> "apoia"@pt-BR.
-<Http://xmlns.com/foaf/0.1/Agent> <http://www.w3.org/2000/01/rdf-schema#label> "Agente"@pt-BR.
-<Http://vivoweb.org/ontology/core#Contract> <http://www.w3.org/2000/01/rdf-schema#label> "Contrato"@pt-BR.
-<Http://purl.org/ontology/bibo/LegalDocument> <http://www.w3.org/2000/01/rdf-schema#label> "Documento Legal"@pt-BR.
-<Http://vivoweb.org/ontology/core#MemberRole> <http://www.w3.org/2000/01/rdf-schema#label> "Regra do Membro"@pt-BR.
-<Http://purl.org/ontology/bibo/ReferenceSource> <http://www.w3.org/2000/01/rdf-schema#label> "Fonte de Referência"@pt-BR.
-<Http://vivoweb.org/ontology/core#Catalog> <http://www.w3.org/2000/01/rdf-schema#label> "Catálogo"@pt-BR.
-<Http://purl.org/ontology/bibo/subsequentLegalDecision> <http://www.w3.org/2000/01/rdf-schema#label> "decisão judicial posterior"@pt-BR.
-<Http://vivoweb.org/ontology/core#Team> <http://www.w3.org/2000/01/rdf-schema#label> "Equipe"@pt-BR.
-<Http://vivoweb.org/ontology/core#hasProceedings> <http://www.w3.org/2000/01/rdf-schema#label> "processo"@pt-BR.
-<Http://vivoweb.org/ontology/core#hasTranslation> <http://www.w3.org/2000/01/rdf-schema#label> "tem tradução"@pt-BR.
-<Http://vivoweb.org/ontology/core#subcontractsGrant> <http://www.w3.org/2000/01/rdf-schema#label> "conceder subcontratos"@pt-BR.
-<Http://vivoweb.org/ontology/core#Laboratory> <http://www.w3.org/2000/01/rdf-schema#label> "laboratório"@pt-BR.
-<Http://vivoweb.org/ontology/core#AwardReceipt> <http://www.w3.org/2000/01/rdf-schema#label> "Premio Recebido"@pt-BR.
-<Http://purl.org/ontology/bibo/Magazine> <http://www.w3.org/2000/01/rdf-schema#label> "Revista"@pt-BR.
-<Http://vivoweb.org/ontology/core#ConferencePoster> <http://www.w3.org/2000/01/rdf-schema#label> "Impressão da Conferência"@pt-BR.
-<Http://purl.org/ontology/bibo/Brief> <http://www.w3.org/2000/01/rdf-schema#label> "Resumo"@pt-BR.
-<Http://vivoweb.org/ontology/core#Company> <http://www.w3.org/2000/01/rdf-schema#label> "Companhia"@pt-BR.
-<Http://purl.org/ontology/bibo/Workshop> <http://www.w3.org/2000/01/rdf-schema#label> "Workshop"@pt-BR.
-<Http://vivoweb.org/ontology/core#PostdocPosition> <http://www.w3.org/2000/01/rdf-schema#label> "Posição de Pós-Doutorado"@pt-BR.
-<Http://vivoweb.org/ontology/core#translatorOf> <http://www.w3.org/2000/01/rdf-schema#label> "tradutor de"@pt-BR.
-<Http://xmlns.com/foaf/0.1/Organization> <http://www.w3.org/2000/01/rdf-schema#label> "Organização"@pt-BR.
-<Http://vivoweb.org/ontology/core#Course> <http://www.w3.org/2000/01/rdf-schema#label> "Cursos"@pt-BR.
-<Http://purl.org/ontology/bibo/CollectedDocument> <http://www.w3.org/2000/01/rdf-schema#label> "Documento Recebidos"@pt-BR.
-<Http://vivoweb.org/ontology/core#Newsletter> <http://www.w3.org/2000/01/rdf-schema#label> "Boletim Informativo"@pt-BR.
-<Http://vivoweb.org/ontology/core#AdviseeRole> <http://www.w3.org/2000/01/rdf-schema#label> "Reggra do orientando"@pt-BR.
-<Http://vivoweb.org/ontology/core#proceedingsOf> <http://www.w3.org/2000/01/rdf-schema#label> "processo de"@pt-BR.
-<Http://vivoweb.org/ontology/core#researchOverview> <http://www.w3.org/2000/01/rdf-schema#label> "Visão Geral da pesquisa"@pt-BR.
-<Http://vivoweb.org/ontology/core#supplementalInformation> <http://www.w3.org/2000/01/rdf-schema#label> "informações suplementares"@pt-BR.
-<Http://purl.org/ontology/bibo/peerReviewed> <http://www.w3.org/2000/01/rdf-schema#label> "revisão por pares"@pt-BR.
-<Http://vivoweb.org/ontology/core#EditorialArticle> <http://www.w3.org/2000/01/rdf-schema#label> "Artigo Editorial"@pt-BR.
-<Http://vivoweb.org/ontology/core#Meeting> <http://www.w3.org/2000/01/rdf-schema#label> "Reúnião"@pt-BR.
-<Http://vivoweb.org/ontology/core#distributes> <http://www.w3.org/2000/01/rdf-schema#label> "distribui"@pt-BR.
-<Http://vivoweb.org/ontology/core#hasSubjectArea> <http://www.w3.org/2000/01/rdf-schema#label> "tem uma área de assunto"@pt-BR.
-<Http://vivoweb.org/ontology/core#termLabel> <http://www.w3.org/2000/01/rdf-schema#label> "termo do rótulo"@pt-BR.
-<Http://purl.org/ontology/bibo/Performance> <http://www.w3.org/2000/01/rdf-schema#label> "Performance"@pt-BR.
-<Http://vivoweb.org/ontology/core#PopulatedPlace> <http://www.w3.org/2000/01/rdf-schema#label> "Lugar povoado"@pt-BR.
+<http://purl.org/ontology/bibo/section> <http://www.w3.org/2000/01/rdf-schema#label> "seção"@pt-BR.
+<http://vivoweb.org/ontology/core#dateTime> <http://www.w3.org/2000/01/rdf-schema#label> "data/hora"@pt-BR.
+<http://purl.org/ontology/bibo/Webpage> <http://www.w3.org/2000/01/rdf-schema#label> "Website"@pt-BR.
+<http://vivoweb.org/ontology/core#yearMonthDayTimePrecision> <http://www.w3.org/2000/01/rdf-schema#label> "ano-mês-dia-time valor"@pt-BR.
+<http://vivoweb.org/ontology/core#relates> <http://www.w3.org/2000/01/rdf-schema#label> "refere-se"@pt-BR.
+<http://purl.org/ontology/bibo/Hearing> <http://www.w3.org/2000/01/rdf-schema#label> "Audição"@pt-BR.
+<http://vivoweb.org/ontology/core#invited> <http://www.w3.org/2000/01/rdf-schema#label> "convidado"@pt-BR.
+<http://vivoweb.org/ontology/core#Video> <http://www.w3.org/2000/01/rdf-schema#label> "Video"@pt-BR.
+<http://purl.org/ontology/bibo/Collection> <http://www.w3.org/2000/01/rdf-schema#label> "Coleção"@pt-BR.
+<http://purl.org/ontology/bibo/Film> <http://www.w3.org/2000/01/rdf-schema#label> "Filme"@pt-BR.
+<http://purl.org/ontology/bibo/AudioVisualDocument> <http://www.w3.org/2000/01/rdf-schema#label> "Documentos Audio-Visuais"@pt-BR.
+<http://vivoweb.org/ontology/core#ClinicalRole> <http://www.w3.org/2000/01/rdf-schema#label> "Regras Clínicas"@pt-BR.
+<http://purl.org/ontology/bibo/numPages> <http://www.w3.org/2000/01/rdf-schema#label> "número de páginas"@pt-BR.
+<http://vivoweb.org/ontology/core#iclCode> <http://www.w3.org/2000/01/rdf-schema#label> "Classificação Internacional código (ICL)"@pt-BR.
+<http://purl.org/ontology/bibo/Book> <http://www.w3.org/2000/01/rdf-schema#label> "Livros"@pt-BR.
+<http://vivoweb.org/ontology/core#AcademicDegree> <http://www.w3.org/2000/01/rdf-schema#label> "Grau Acadêmico"@pt-BR.
+<http://purl.org/ontology/bibo/asin> <http://www.w3.org/2000/01/rdf-schema#label> " Número Padrão de Identificação Amazon (ASIN)"@pt-BR.
+<http://vivoweb.org/ontology/core#isCorrespondingAuthor> <http://www.w3.org/2000/01/rdf-schema#label> "Será que essa pessoa um autor correspondente?"@pt-BR.
+<http://vivoweb.org/ontology/core#PostdoctoralTraining> <http://www.w3.org/2000/01/rdf-schema#label> "Formação de Pós-Doutorado"@pt-BR.
+<http://purl.org/ontology/bibo/EditedBook> <http://www.w3.org/2000/01/rdf-schema#label> "Livro Editado"@pt-BR.
+<http://purl.org/ontology/bibo/Excerpt> <http://www.w3.org/2000/01/rdf-schema#label> "Trecho"@pt-BR.
+<http://vivoweb.org/ontology/core#entryTerm> <http://www.w3.org/2000/01/rdf-schema#label> "termo de entrada"@pt-BR.
+<http://vivoweb.org/ontology/core#DateTimeInterval> <http://www.w3.org/2000/01/rdf-schema#label> "Intervalo Data/Hota"@pt-BR.
+<http://vivoweb.org/ontology/core#Screenplay> <http://www.w3.org/2000/01/rdf-schema#label> "Screenplay"@pt-BR.
+<http://purl.org/ontology/bibo/performer> <http://www.w3.org/2000/01/rdf-schema#label> "performesse"@pt-BR.
+<http://vivoweb.org/ontology/core#Exhibit> <http://www.w3.org/2000/01/rdf-schema#label> "Exibido"@pt-BR.
+<http://vivoweb.org/ontology/core#prerequisiteFor> <http://www.w3.org/2000/01/rdf-schema#label> "pré-requisito para"@pt-BR.
+<http://vivoweb.org/ontology/core#WorkshopSeries> <http://www.w3.org/2000/01/rdf-schema#label> "Série Workshop" @ en-U.
+<http://vivoweb.org/ontology/core#supportedBy> <http://www.w3.org/2000/01/rdf-schema#label> "apoiado por"@pt-BR.
+<http://vivoweb.org/ontology/core#Department> <http://www.w3.org/2000/01/rdf-schema#label> "Departamento"@pt-BR.
+<http://vivoweb.org/ontology/core#Museum> <http://www.w3.org/2000/01/rdf-schema#label> "Museo"@pt-BR.
+<http://vivoweb.org/ontology/core#features> <http://www.w3.org/2000/01/rdf-schema#label> "características"@pt-BR.
+<http://purl.org/ontology/bibo/PersonalCommunicationDocument> <http://www.w3.org/2000/01/rdf-schema#label> "Documentação Pessoal de Comunicação"@pt-BR.
+<http://purl.org/ontology/bibo/Map> <http://www.w3.org/2000/01/rdf-schema#label> "Mapa"@pt-BR.
+<http://vivoweb.org/ontology/core#nihmsid> <http://www.w3.org/2000/01/rdf-schema#label> "NIH Manuscript Submission Sistema ID"@pt-BR.
+<http://vivoweb.org/ontology/core#geographicFocusOf> <http://www.w3.org/2000/01/rdf-schema#label> "foco geográfico de"@pt-BR.
+<http://vivoweb.org/ontology/core#licenseNumber> <http://www.w3.org/2000/01/rdf-schema#label> "número de licença"@pt-BR.
+<http://purl.org/ontology/bibo/citedBy> <http://www.w3.org/2000/01/rdf-schema#label> "citado por"@pt-BR.
+<http://vivoweb.org/ontology/core#CoPrincipalInvestigatorRole> <http://www.w3.org/2000/01/rdf-schema#label> "Regra Principa de Co-investigador"@pt-BR.
+<http://vivoweb.org/ontology/core#placeOfPublication> <http://www.w3.org/2000/01/rdf-schema#label> "local da publicação"@pt-BR.
+<http://purl.org/ontology/bibo/AcademicArticle> <http://www.w3.org/2000/01/rdf-schema#label> "Artigo Acadêmico"@pt-BR.
+<http://vivoweb.org/ontology/core#middleName> <http://www.w3.org/2000/01/rdf-schema#label> "nome do meio ou inicial"@pt-BR.
+<http://vivoweb.org/ontology/core#Institute> <http://www.w3.org/2000/01/rdf-schema#label> "Instituto"@pt-BR.
+<http://purl.org/ontology/bibo/court> <http://www.w3.org/2000/01/rdf-schema#label> "tribunal"@pt-BR.
+<http://vivoweb.org/ontology/core#Database> <http://www.w3.org/2000/01/rdf-schema#label> "Base de Dados"@pt-BR.
+<http://vivoweb.org/ontology/core#publicationVenueFor> <http://www.w3.org/2000/01/rdf-schema#label> "publicação venue de"@pt-BR.
+<http://vivoweb.org/ontology/core#Facility> <http://www.w3.org/2000/01/rdf-schema#label> "Facildade"@pt-BR.
+<http://purl.org/ontology/bibo/Statute> <http://www.w3.org/2000/01/rdf-schema#label> "Estatuto"@pt-BR.
+<http://vivoweb.org/ontology/core#BlogPosting> <http://www.w3.org/2000/01/rdf-schema#label> "Blog Posting"@pt-BR.
+<http://purl.org/ontology/bibo/Issue> <http://www.w3.org/2000/01/rdf-schema#label> "Emissão"@pt-BR.
+<http://vivoweb.org/ontology/core#Student> <http://www.w3.org/2000/01/rdf-schema#label> "Estudante"@pt-BR.
+<http://purl.org/ontology/bibo/issuer> <http://www.w3.org/2000/01/rdf-schema#label> "emissor"@pt-BR.
+<http://vivoweb.org/ontology/core#Country> <http://www.w3.org/2000/01/rdf-schema#label> "País"@pt-BR.
+<http://purl.org/ontology/bibo/transcriptOf> <http://www.w3.org/2000/01/rdf-schema#label> "transcrição"@pt-BR.
+<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#moniker> <http://www.w3.org/2000/01/rdf-schema#label> "apelido (reprovado)" @ pt BR.
+<http://purl.org/ontology/bibo/presents> <http://www.w3.org/2000/01/rdf-schema#label> "documentos relacionados"@pt-BR.
+<http://vivoweb.org/ontology/core#majorField> <http://www.w3.org/2000/01/rdf-schema#label> "campo de atuação do grau"@pt-BR.
+<http://vivoweb.org/ontology/core#EditorRole> <http://www.w3.org/2000/01/rdf-schema#label> "Regra do Editor"@pt-BR.
+<http://purl.org/ontology/bibo/Image> <http://www.w3.org/2000/01/rdf-schema#label> "Imagem"@pt-BR.
+<http://vivoweb.org/ontology/core#fundingVehicleFor> <http://www.w3.org/2000/01/rdf-schema#label> "financia"@pt-BR.
+<http://vivoweb.org/ontology/core#GeopoliticalEntity> <http://www.w3.org/2000/01/rdf-schema#label> "Instituição Geopolítica"@pt-BR.
+<http://purl.org/ontology/bibo/issue> <http://www.w3.org/2000/01/rdf-schema#label> "questão"@pt-BR.
+<http://purl.org/ontology/bibo/Proceedings> <http://www.w3.org/2000/01/rdf-schema#label> "Procedimento"@pt-BR.
+<http://purl.org/ontology/bibo/Conference> <http://www.w3.org/2000/01/rdf-schema#label> "Conferência"@pt-BR.
+<http://vivoweb.org/ontology/core#hrJobTitle> <http://www.w3.org/2000/01/rdf-schema#label> "cargo HR"@pt-BR.
+<http://vivoweb.org/ontology/core#CaseStudy> <http://www.w3.org/2000/01/rdf-schema#label> "Estudo de Caso"@pt-BR.
+<http://vivoweb.org/ontology/core#ExtensionUnit> <http://www.w3.org/2000/01/rdf-schema#label> "Unidade de extensão"@pt-BR.
+<http://vivoweb.org/ontology/core#grantSubcontractedThrough> <http://www.w3.org/2000/01/rdf-schema#label> "subcontratado através de"@pt-BR.
+<http://vivoweb.org/ontology/core#ServiceProvidingLaboratory> <http://www.w3.org/2000/01/rdf-schema#label> "Prestadoras de Serviços do laboratorio"@pt-BR.
+<http://vivoweb.org/ontology/core#hasFundingVehicle> <http://www.w3.org/2000/01/rdf-schema#label> "financiamento fornecido via"@pt-BR.
+<http://vivoweb.org/ontology/core#scopusId> <http://www.w3.org/2000/01/rdf-schema#label> "Scopus ID"@pt-BR.
+<http://vivoweb.org/ontology/core#offeredBy> <http://www.w3.org/2000/01/rdf-schema#label> "oferecido por"@pt-BR.
+<http://vivoweb.org/ontology/core#assigns> <http://www.w3.org/2000/01/rdf-schema#label> "cessionários"@pt-BR.
+<http://vivoweb.org/ontology/core#degreeCandidacy> <http://www.w3.org/2000/01/rdf-schema#label> "grau candidatura"@pt-BR.
+<http://vivoweb.org/ontology/core#hasResearchArea> <http://www.w3.org/2000/01/rdf-schema#label> "áreas de investigação"@pt-BR.
+<http://vivoweb.org/ontology/core#NewsRelease> <http://www.w3.org/2000/01/rdf-schema#label> "Novas Versões"@pt-BR.
+<http://purl.org/ontology/bibo/> <http://www.w3.org/2000/01/rdf-schema#label> "Bibo Ontologia"@pt-BR.
+<http://vivoweb.org/ontology/core#ConferenceSeries> <http://www.w3.org/2000/01/rdf-schema#label> "Ciclo de Conferências"@pt-BR.
+<http://vivoweb.org/ontology/core#hasSuccessorOrganization> <http://www.w3.org/2000/01/rdf-schema#label> "organização sucessora"@pt-BR.
+<http://purl.org/ontology/bibo/Report> <http://www.w3.org/2000/01/rdf-schema#label> "Relatório"@pt-BR.
+<http://vivoweb.org/ontology/core#AwardedDegree> <http://www.w3.org/2000/01/rdf-schema#label> "grau concedido"@pt-BR.
+<http://purl.org/ontology/bibo/isbn13> <http://www.w3.org/2000/01/rdf-schema#label> "International Standard Book Number (ISBN) 13"@pt-BR.
+<http://vivoweb.org/ontology/core#Location> <http://www.w3.org/2000/01/rdf-schema#label> "Localização"@pt-BR.
+<http://vivoweb.org/ontology/core#seatingCapacity> <http://www.w3.org/2000/01/rdf-schema#label> "capacidade"@pt-BR.
+<http://purl.org/ontology/bibo/DocumentStatus> <http://www.w3.org/2000/01/rdf-schema#label> "Status da Documentação"@pt-BR.
+<http://purl.org/ontology/bibo/LegalDecision> <http://www.w3.org/2000/01/rdf-schema#label> "decisão"@pt-BR.
+<http://vivoweb.org/ontology/core#Library> <http://www.w3.org/2000/01/rdf-schema#label> "Biblioteca"@pt-BR.
+<http://vivoweb.org/ontology/core#GeographicLocation> <http://www.w3.org/2000/01/rdf-schema#label> "Localização Geográfica"@pt-BR.
+<http://vivoweb.org/ontology/core#subjectAreaOf> <http://www.w3.org/2000/01/rdf-schema#label> "área temática de"@pt-BR.
+<http://purl.org/ontology/bibo/Quote> <http://www.w3.org/2000/01/rdf-schema#label> "Citação"@pt-BR.
+<http://vivoweb.org/ontology/core#Dataset> <http://www.w3.org/2000/01/rdf-schema#label> "Dataset"@pt-BR.
+<http://vivoweb.org/ontology/core#contributingRole> <http://www.w3.org/2000/01/rdf-schema#label> "contribuinte"@pt-BR.
+<http://purl.org/ontology/bibo/sici> <http://www.w3.org/2000/01/rdf-schema#label> "Serial item e Contribuição Identifier (SICI)"@pt-BR.
+<http://vivoweb.org/ontology/core#NonAcademic> <http://www.w3.org/2000/01/rdf-schema#label> "não académico"@pt-BR.
+<http://vivoweb.org/ontology/core#departmentOrSchool> <http://www.w3.org/2000/01/rdf-schema#label> "departamento ou nome da escola dentro instituição"@pt-BR.
+<http://vivoweb.org/ontology/core#CoreLaboratory> <http://www.w3.org/2000/01/rdf-schema#label> "Núcleo de Laboratório"@pt-BR.
+<http://purl.org/ontology/bibo/degree> <http://www.w3.org/2000/01/rdf-schema#label> "grau relacionados"@pt-BR.
+<http://vivoweb.org/ontology/core#relatedBy> <http://www.w3.org/2000/01/rdf-schema#label> "relacionados por"@pt-BR.
+<http://purl.org/ontology/bibo/Chapter> <http://www.w3.org/2000/01/rdf-schema#label> "número do capítulo"@pt-BR.
+<http://purl.org/ontology/bibo/cites> <http://www.w3.org/2000/01/rdf-schema#label> "cita"@pt-BR.
+<http://purl.org/ontology/bibo/pageEnd> <http://www.w3.org/2000/01/rdf-schema#label> "página final"@pt-BR.
+<http://vivoweb.org/ontology/core#hasEquipment> <http://www.w3.org/2000/01/rdf-schema#label> "tem equipamentos"@pt-BR.
+<http://vivoweb.org/ontology/core#localAwardId> <http://www.w3.org/2000/01/rdf-schema#label> "prêmio locais ID"@pt-BR.
+<http://vivoweb.org/ontology/core#Room> <http://www.w3.org/2000/01/rdf-schema#label> "Quarto"@pt-BR.
+<http://purl.org/ontology/bibo/draft> <http://www.w3.org/2000/01/rdf-schema#label> "rascunho"@pt-BR.
+<http://purl.org/ontology/bibo/CourtReporter> <http://www.w3.org/2000/01/rdf-schema#label> "Court Reporter"@pt-BR.
+<http://vivoweb.org/ontology/core#cclCode> <http://www.w3.org/2000/01/rdf-schema#label> "publicado US Classificação Classe / subclasse (CCL) código"@pt-BR.
+<http://purl.org/ontology/bibo/Newspaper> <http://www.w3.org/2000/01/rdf-schema#label> "Jornal"@pt-BR.
+<http://purl.org/ontology/bibo/translator> <http://www.w3.org/2000/01/rdf-schema#label> "tradutor"@pt-BR.
+<http://purl.org/ontology/bibo/LegalCaseDocument> <http://www.w3.org/2000/01/rdf-schema#label> "Documento Processo Legal"@pt-BR.
+<http://xmlns.com/foaf/0.1/Person> <http://www.w3.org/2000/01/rdf-schema#label> "Pessoa"@pt-BR.
+<http://purl.org/ontology/bibo/abstract> <http://www.w3.org/2000/01/rdf-schema#label> "abstrato"@pt-BR.
+<http://vivoweb.org/ontology/core#Authorship> <http://www.w3.org/2000/01/rdf-schema#label> "Autoria"@pt-BR.
+<http://vivoweb.org/ontology/core#Competition> <http://www.w3.org/2000/01/rdf-schema#label> "Competição"@pt-BR.
+<http://purl.org/dc/terms/relation> <http://www.w3.org/2000/01/rdf-schema#label> "relação"@pt-BR.
+<http://vivoweb.org/ontology/core#AcademicYear> <http://www.w3.org/2000/01/rdf-schema#label> "Ano Lectivo"@pt-BR.
+<http://purl.org/ontology/bibo/recipient> <http://www.w3.org/2000/01/rdf-schema#label> "destinatário"@pt-BR.
+<http://vivoweb.org/ontology/core#teachingOverview> <http://www.w3.org/2000/01/rdf-schema#label> "ensinando visão geral"@pt-BR.
+<http://vivoweb.org/ontology/core#GeographicRegion> <http://www.w3.org/2000/01/rdf-schema#label> "Região Geográfica"@pt-BR.
+<http://vivoweb.org/ontology/core#Translation> <http://www.w3.org/2000/01/rdf-schema#label> "Tradução"@pt-BR.
+<http://vivoweb.org/ontology/core#SeminarSeries> <http://www.w3.org/2000/01/rdf-schema#label> "Série de Seminários"@pt-BR.
+<http://purl.org/ontology/bibo/uri> <http://www.w3.org/2000/01/rdf-schema#label> "URI"@pt-BR.
+<http://vivoweb.org/ontology/core#Foundation> <http://www.w3.org/2000/01/rdf-schema#label> "Fundação"@pt-BR.
+<http://vivoweb.org/ontology/core#MedicalResidency> <http://www.w3.org/2000/01/rdf-schema#label> "Residência Médica"@pt-BR.
+<http://vivoweb.org/ontology/core#totalAwardAmount> <http://www.w3.org/2000/01/rdf-schema#label> "montante total prêmio"@pt-BR.
+<http://purl.org/ontology/bibo/Interview> <http://www.w3.org/2000/01/rdf-schema#label> "Entrevista"@pt-BR.
+<http://vivoweb.org/ontology/core#GraduateAdvisingRelationship> <http://www.w3.org/2000/01/rdf-schema#label> "Pós-Graduação Assessoria de Relacionamento"@pt-BR.
+<http://purl.org/ontology/bibo/Code> <http://www.w3.org/2000/01/rdf-schema#label> "Código"@pt-BR.
+<http://vivoweb.org/ontology/core#FacultyAdministrativePosition> <http://www.w3.org/2000/01/rdf-schema#label> "Posição administrativa da Faculdade"@pt-BR.
+<http://vivoweb.org/ontology/core#AttendeeRole> <http://www.w3.org/2000/01/rdf-schema#label> "participante Papel"@pt-BR.
+<http://vivoweb.org/ontology/core#overview> <http://www.w3.org/2000/01/rdf-schema#label> "visão geral"@pt-BR.
+<http://vivoweb.org/ontology/core#FundingOrganization> <http://www.w3.org/2000/01/rdf-schema#label> "Financiado"@pt-BR.
+<http://vivoweb.org/ontology/core#assignedBy> <http://www.w3.org/2000/01/rdf-schema#label> "atribuído pelo"@pt-BR.
+<http://vivoweb.org/ontology/core#DateTimeValue> <http://www.w3.org/2000/01/rdf-schema#label> "Data/Hora Valor"@pt-BR.
+<http://vivoweb.org/ontology/core#description> <http://www.w3.org/2000/01/rdf-schema#label> "descrição"@pt-BR.
+<http://vivoweb.org/ontology/core#distributesFundingFrom> <http://www.w3.org/2000/01/rdf-schema#label> "distribui financiamento do"@pt-BR.
+<http://purl.org/ontology/bibo/prefixName> <http://www.w3.org/2000/01/rdf-schema#label> "nome do prefixo"@pt-BR.
+<http://vivoweb.org/ontology/core#School> <http://www.w3.org/2000/01/rdf-schema#label> "Escola"@pt-BR.
+<http://purl.org/ontology/bibo/Journal> <http://www.w3.org/2000/01/rdf-schema#label> "Jornal"@pt-BR.
+<http://vivoweb.org/ontology/core#LibrarianPosition> <http://www.w3.org/2000/01/rdf-schema#label> "Posição Bibliotecário"@pt-BR.
+<http://vivoweb.org/ontology/core#dateIssued> <http://www.w3.org/2000/01/rdf-schema#label> "data de emissão"@pt-BR.
+<http://purl.org/ontology/bibo/ThesisDegree> <http://www.w3.org/2000/01/rdf-schema#label> "Tese de Licenciatura"@pt-BR.
+<http://purl.org/ontology/bibo/BookSection> <http://www.w3.org/2000/01/rdf-schema#label> "Seção Livro"@pt-BR.
+<http://vivoweb.org/ontology/core#hasPredecessorOrganization> <http://www.w3.org/2000/01/rdf-schema#label> "organização predecessor"@pt-BR.
+<http://purl.org/ontology/bibo/Legislation> <http://www.w3.org/2000/01/rdf-schema#label> "Legislação"@pt-BR.
+<http://vivoweb.org/ontology/core#OrganizerRole> <http://www.w3.org/2000/01/rdf-schema#label> "Papel do organizador"@pt-BR.
+<http://vivoweb.org/ontology/core#F1000Link> <http://www.w3.org/2000/01/rdf-schema#label> "F1000 Link"@pt-BR.
+<http://vivoweb.org/ontology/core#reproduces> <http://www.w3.org/2000/01/rdf-schema#label> "F1000 Link"@pt-BR.
+<http://vivoweb.org/ontology/core#NonAcademicPosition> <http://www.w3.org/2000/01/rdf-schema#label> "Posição não académico"@pt-BR.
+<http://purl.org/ontology/bibo/presentedAt> <http://www.w3.org/2000/01/rdf-schema#label> "apresentado no evento"@pt-BR.
+<http://vivoweb.org/ontology/core#providesFundingThrough> <http://www.w3.org/2000/01/rdf-schema#label> "prevê o financiamento através de"@pt-BR.
+<http://purl.org/ontology/bibo/reversedBy> <http://www.w3.org/2000/01/rdf-schema#label> "revertida por"@pt-BR.
+<http://vivoweb.org/ontology/core#WorkingPaper> <http://www.w3.org/2000/01/rdf-schema#label> "documento de trabalho"@pt-BR.
+<http://purl.org/ontology/bibo/Slideshow> <http://www.w3.org/2000/01/rdf-schema#label> "Slideshow"@pt-BR.
+<http://vivoweb.org/ontology/core#Award> <http://www.w3.org/2000/01/rdf-schema#label> "Prêmio"@pt-BR.
+<http://purl.org/ontology/bibo/Website> <http://www.w3.org/2000/01/rdf-schema#label> "Website"@pt-BR.
+<http://vivoweb.org/ontology/core#EmeritusProfessor> <http://www.w3.org/2000/01/rdf-schema#label> "Professor Emérito"@pt-BR.
+<http://vivoweb.org/ontology/core#Editorship> <http://www.w3.org/2000/01/rdf-schema#label> "Redação"@pt-BR.
+<http://purl.org/ontology/bibo/annotates> <http://www.w3.org/2000/01/rdf-schema#label> "anota"@pt-BR.
+<http://vivoweb.org/ontology/core#Committee> <http://www.w3.org/2000/01/rdf-schema#label> "Comitê"@pt-BR.
+<http://vivoweb.org/ontology/core#EventSeries> <http://www.w3.org/2000/01/rdf-schema#label> "o evento da série"@pt-BR.
+<http://purl.org/ontology/bibo/identifier> <http://www.w3.org/2000/01/rdf-schema#label> "identificador"@pt-BR.
+<http://vivoweb.org/ontology/core#IssuedCredential> <http://www.w3.org/2000/01/rdf-schema#label> "Emitido Credencial"@pt-BR.
+<http://purl.org/NET/c4dm/event.owl#Event> <http://www.w3.org/2000/01/rdf-schema#label> "Evento"@pt-BR.
+<http://vivoweb.org/ontology/core#eRACommonsId> <http://www.w3.org/2000/01/rdf-schema#label> "ERA Commons ID"@pt-BR.
+<http://vivoweb.org/ontology/core#License> <http://www.w3.org/2000/01/rdf-schema#label> "Licença"@pt-BR.
+<http://vivoweb.org/ontology/core#sponsoredBy> <http://www.w3.org/2000/01/rdf-schema#label> "prêmio patrocinado pela"@pt-BR.
+<http://vivoweb.org/ontology/core#GovernmentAgency> <http://www.w3.org/2000/01/rdf-schema#label> "Agência do Governo"@pt-BR.
+<http://purl.org/ontology/bibo/published> <http://www.w3.org/2000/01/rdf-schema#label> "publicada"@pt-BR.
+<http://vivoweb.org/ontology/core#hasValue> <http://www.w3.org/2000/01/rdf-schema#label> "tem valor" @ pt-BRO.
+<http://vivoweb.org/ontology/core#EducationalProcess> <http://www.w3.org/2000/01/rdf-schema#label> "Processo Educacional"@pt-BR.
+<http://vivoweb.org/ontology/core#identifier> <http://www.w3.org/2000/01/rdf-schema#label> "identificador"@pt-BR.
+<http://vivoweb.org/ontology/core#Review> <http://www.w3.org/2000/01/rdf-schema#label> "Revisão"@pt-BR.
+<http://vivoweb.org/ontology/core#PostdocOrFellowAdvisingRelationship> <http://www.w3.org/2000/01/rdf-schema#label> "Assessoria de Relacionamento para Postdoc ou Bolsistas "@pt-BR.
+<http://vivoweb.org/ontology/core#TeacherRole> <http://www.w3.org/2000/01/rdf-schema#label> "Regras do Professor"@pt-BR.
+<http://vivoweb.org/ontology/core#outreachOverview> <http://www.w3.org/2000/01/rdf-schema#label> "Visão Geral alcance"@pt-BR.
+<http://vivoweb.org/ontology/core#informationResourceSupportedBy> <http://www.w3.org/2000/01/rdf-schema#label> "apoiado por"@pt-BR.
+<http://vivoweb.org/ontology/core#dateTimePrecision> <http://www.w3.org/2000/01/rdf-schema#label> "/ hora precisão data"@pt-BR.
+<http://vivoweb.org/ontology/core#publisher> <http://www.w3.org/2000/01/rdf-schema#label> "editor"@pt-BR.
+<http://vivoweb.org/ontology/core#OutreachProviderRole> <http://www.w3.org/2000/01/rdf-schema#label> "alcance da função"@pt-BR.
+<http://purl.org/ontology/bibo/Note> <http://www.w3.org/2000/01/rdf-schema#label> "Nota"@pt-BR.
+<http://vivoweb.org/ontology/core#AdministratorRole> <http://www.w3.org/2000/01/rdf-schema#label> "Função de administrador"@pt-BR.
+<http://vivoweb.org/ontology/core#FacultyPosition> <http://www.w3.org/2000/01/rdf-schema#label> "Corpo Docente"@pt-BR.
+<http://purl.org/ontology/bibo/isbn10> <http://www.w3.org/2000/01/rdf-schema#label> "International Standard Book Number (ISBN) 10"@pt-BR.
+<http://purl.org/ontology/bibo/eanucc13> <http://www.w3.org/2000/01/rdf-schema#label> "EAN Internacional- Uniform Code Council (EAN- UCC) 13"@pt-BR.
+<http://vitro.mannlib.cornell.edu/ns/vitro/public> <http://www.w3.org/2000/01/rdf-schema#label> "Public Vitro Ontologia"@pt-BR.
+<http://vivoweb.org/ontology/core#Building> <http://www.w3.org/2000/01/rdf-schema#label> "Contruindo"@pt-BR.
+<http://purl.org/ontology/bibo/Manual> <http://www.w3.org/2000/01/rdf-schema#label> "Manual"@pt-BR.
+<http://vivoweb.org/ontology/core#freetextKeyword> <http://www.w3.org/2000/01/rdf-schema#label> "palavras-chave"@pt-BR.
+<http://purl.org/ontology/bibo/rejected> <http://www.w3.org/2000/01/rdf-schema#label> "rejeitado"@pt-BR.
+<http://purl.org/ontology/bibo/issn> <http://www.w3.org/2000/01/rdf-schema#label> "International Standard Serial Number (ISSN)"@pt-BR.
+<http://vivoweb.org/ontology/core#hasAssociatedConcept> <http://www.w3.org/2000/01/rdf-schema#label> "conceito associado"@pt-BR.
+<http://vivoweb.org/ontology/core#yearPrecision> <http://www.w3.org/2000/01/rdf-schema#label> "valor do ano"@pt-BR.
+<http://vivoweb.org/ontology/core#Continent> <http://www.w3.org/2000/01/rdf-schema#label> "Continente"@pt-BR.
+<http://vivoweb.org/ontology/core#ResearchProposal> <http://www.w3.org/2000/01/rdf-schema#label> "Proposta de Pesquisa"@pt-BR.
+<http://vivoweb.org/ontology/core#preferredDisplayOrder> <http://www.w3.org/2000/01/rdf-schema#label> "ordem de exibição preferido"@pt-BR.
+<http://vivoweb.org/ontology/core#Speech> <http://www.w3.org/2000/01/rdf-schema#label> "Velocidade"@pt-BR.
+<http://vivoweb.org/ontology/core#contactInformation> <http://www.w3.org/2000/01/rdf-schema#label> "informações de contato"@pt-BR.
+<http://vivoweb.org/ontology/core#Division> <http://www.w3.org/2000/01/rdf-schema#label> "Divisão"@pt-BR.
+<http://purl.org/ontology/bibo/director> <http://www.w3.org/2000/01/rdf-schema#label> "diretor"@pt-BR.
+<http://purl.org/ontology/bibo/Patent> <http://www.w3.org/2000/01/rdf-schema#label> "Patente"@pt-BR.
+<http://vivoweb.org/ontology/core#hasPrerequisite> <http://www.w3.org/2000/01/rdf-schema#label> "tem pré-requisito"@pt-BR.
+<http://purl.org/ontology/bibo/reviewOf> <http://www.w3.org/2000/01/rdf-schema#label> "revisão de"@pt-BR.
+<http://vivoweb.org/ontology/core#grantDirectCosts> <http://www.w3.org/2000/01/rdf-schema#label> "custos diretos"@pt-BR.
+<http://vivoweb.org/ontology/core#geographicFocus> <http://www.w3.org/2000/01/rdf-schema#label> "foco geográfico"@pt-BR.
+<http://vivoweb.org/ontology/core#Campus> <http://www.w3.org/2000/01/rdf-schema#label> "Campus"@pt-BR.
+<http://vivoweb.org/ontology/core#Center> <http://www.w3.org/2000/01/rdf-schema#label> "Centro"@pt-BR.
+<http://vivoweb.org/ontology/core#Abstract> <http://www.w3.org/2000/01/rdf-schema#label> "Abstrato"@pt-BR.
+<http://vivoweb.org/ontology/core#affiliatedOrganization> <http://www.w3.org/2000/01/rdf-schema#label> "tem organização filiadas"@pt-BR.
+<http://purl.org/ontology/bibo/distributor> <http://www.w3.org/2000/01/rdf-schema#label> "distribuidor"@pt-BR.
+<http://vivoweb.org/ontology/core#SubnationalRegion> <http://www.w3.org/2000/01/rdf-schema#label> "Subnações Região"@pt-BR.
+<http://vivoweb.org/ontology/core#Association> <http://www.w3.org/2000/01/rdf-schema#label> "Associação"@pt-BR.
+<http://purl.org/ontology/bibo/Manuscript> <http://www.w3.org/2000/01/rdf-schema#label> "manuscrito"@pt-BR, "Manuscrito"@pt-BR.
+<http://vivoweb.org/ontology/core#NonFacultyAcademicPosition> <http://www.w3.org/2000/01/rdf-schema#label> "Sem Posição Acadêmica"@pt-BR.
+<http://vivoweb.org/ontology/core#AttendingProcess> <http://www.w3.org/2000/01/rdf-schema#label> "Atender Processo"@pt-BR.
+<http://vivoweb.org/ontology/core#reportId> <http://www.w3.org/2000/01/rdf-schema#label> "identificador relatório"@pt-BR.
+<http://purl.org/ontology/bibo/Slide> <http://www.w3.org/2000/01/rdf-schema#label> "Deslizar"@pt-BR.
+<http://vivoweb.org/ontology/core#ConferencePaper> <http://www.w3.org/2000/01/rdf-schema#label> "Papel da Conferência"@pt-BR.
+<http://vivoweb.org/ontology/core#PeerReviewerRole> <http://www.w3.org/2000/01/rdf-schema#label> "Papel do Avaliador"@pt-BR.
+<http://vivoweb.org/ontology/core#patentNumber> <http://www.w3.org/2000/01/rdf-schema#label> "número de patentes"@pt-BR.
+<http://purl.org/ontology/bibo/AudioDocument> <http://www.w3.org/2000/01/rdf-schema#label> "Audio Document"@pt-BR.
+<http://purl.org/ontology/bibo/chapter> <http://www.w3.org/2000/01/rdf-schema#label> "número do capítulo"@pt-BR.
+<http://vivoweb.org/ontology/core#InvitedTalk> <http://www.w3.org/2000/01/rdf-schema#label> "convidado Talk"@pt-BR.
+<http://purl.org/ontology/bibo/accepted> <http://www.w3.org/2000/01/rdf-schema#label> "aceito"@pt-BR.
+<http://vivoweb.org/ontology/core#Internship> <http://www.w3.org/2000/01/rdf-schema#label> "estágio"@pt-BR.
+<http://vivoweb.org/ontology/core#PrivateCompany> <http://www.w3.org/2000/01/rdf-schema#label> "empresa privada"@pt-BR.
+<http://vivoweb.org/ontology/core#hasMonetaryAmount> <http://www.w3.org/2000/01/rdf-schema#label> "tem valor monetário"@pt-BR.
+<http://vivoweb.org/ontology/core#reviewedIn> <http://www.w3.org/2000/01/rdf-schema#label> "revista"@pt-BR.
+<http://vivoweb.org/ontology/core#supports> <http://www.w3.org/2000/01/rdf-schema#label> "apoia"@pt-BR.
+<http://xmlns.com/foaf/0.1/Agent> <http://www.w3.org/2000/01/rdf-schema#label> "Agente"@pt-BR.
+<http://vivoweb.org/ontology/core#Contract> <http://www.w3.org/2000/01/rdf-schema#label> "Contrato"@pt-BR.
+<http://purl.org/ontology/bibo/LegalDocument> <http://www.w3.org/2000/01/rdf-schema#label> "Documento Legal"@pt-BR.
+<http://vivoweb.org/ontology/core#MemberRole> <http://www.w3.org/2000/01/rdf-schema#label> "Regra do Membro"@pt-BR.
+<http://purl.org/ontology/bibo/ReferenceSource> <http://www.w3.org/2000/01/rdf-schema#label> "Fonte de Referência"@pt-BR.
+<http://vivoweb.org/ontology/core#Catalog> <http://www.w3.org/2000/01/rdf-schema#label> "Catálogo"@pt-BR.
+<http://purl.org/ontology/bibo/subsequentLegalDecision> <http://www.w3.org/2000/01/rdf-schema#label> "decisão judicial posterior"@pt-BR.
+<http://vivoweb.org/ontology/core#Team> <http://www.w3.org/2000/01/rdf-schema#label> "Equipe"@pt-BR.
+<http://vivoweb.org/ontology/core#hasProceedings> <http://www.w3.org/2000/01/rdf-schema#label> "processo"@pt-BR.
+<http://vivoweb.org/ontology/core#hasTranslation> <http://www.w3.org/2000/01/rdf-schema#label> "tem tradução"@pt-BR.
+<http://vivoweb.org/ontology/core#subcontractsGrant> <http://www.w3.org/2000/01/rdf-schema#label> "conceder subcontratos"@pt-BR.
+<http://vivoweb.org/ontology/core#Laboratory> <http://www.w3.org/2000/01/rdf-schema#label> "laboratório"@pt-BR.
+<http://vivoweb.org/ontology/core#AwardReceipt> <http://www.w3.org/2000/01/rdf-schema#label> "Premio Recebido"@pt-BR.
+<http://purl.org/ontology/bibo/Magazine> <http://www.w3.org/2000/01/rdf-schema#label> "Revista"@pt-BR.
+<http://vivoweb.org/ontology/core#ConferencePoster> <http://www.w3.org/2000/01/rdf-schema#label> "Impressão da Conferência"@pt-BR.
+<http://purl.org/ontology/bibo/Brief> <http://www.w3.org/2000/01/rdf-schema#label> "Resumo"@pt-BR.
+<http://vivoweb.org/ontology/core#Company> <http://www.w3.org/2000/01/rdf-schema#label> "Companhia"@pt-BR.
+<http://purl.org/ontology/bibo/Workshop> <http://www.w3.org/2000/01/rdf-schema#label> "Workshop"@pt-BR.
+<http://vivoweb.org/ontology/core#PostdocPosition> <http://www.w3.org/2000/01/rdf-schema#label> "Posição de Pós-Doutorado"@pt-BR.
+<http://vivoweb.org/ontology/core#translatorOf> <http://www.w3.org/2000/01/rdf-schema#label> "tradutor de"@pt-BR.
+<http://xmlns.com/foaf/0.1/Organization> <http://www.w3.org/2000/01/rdf-schema#label> "Organização"@pt-BR.
+<http://vivoweb.org/ontology/core#Course> <http://www.w3.org/2000/01/rdf-schema#label> "Cursos"@pt-BR.
+<http://purl.org/ontology/bibo/CollectedDocument> <http://www.w3.org/2000/01/rdf-schema#label> "Documento Recebidos"@pt-BR.
+<http://vivoweb.org/ontology/core#Newsletter> <http://www.w3.org/2000/01/rdf-schema#label> "Boletim Informativo"@pt-BR.
+<http://vivoweb.org/ontology/core#AdviseeRole> <http://www.w3.org/2000/01/rdf-schema#label> "Reggra do orientando"@pt-BR.
+<http://vivoweb.org/ontology/core#proceedingsOf> <http://www.w3.org/2000/01/rdf-schema#label> "processo de"@pt-BR.
+<http://vivoweb.org/ontology/core#researchOverview> <http://www.w3.org/2000/01/rdf-schema#label> "Visão Geral da pesquisa"@pt-BR.
+<http://vivoweb.org/ontology/core#supplementalInformation> <http://www.w3.org/2000/01/rdf-schema#label> "informações suplementares"@pt-BR.
+<http://purl.org/ontology/bibo/peerReviewed> <http://www.w3.org/2000/01/rdf-schema#label> "revisão por pares"@pt-BR.
+<http://vivoweb.org/ontology/core#EditorialArticle> <http://www.w3.org/2000/01/rdf-schema#label> "Artigo Editorial"@pt-BR.
+<http://vivoweb.org/ontology/core#Meeting> <http://www.w3.org/2000/01/rdf-schema#label> "Reúnião"@pt-BR.
+<http://vivoweb.org/ontology/core#distributes> <http://www.w3.org/2000/01/rdf-schema#label> "distribui"@pt-BR.
+<http://vivoweb.org/ontology/core#hasSubjectArea> <http://www.w3.org/2000/01/rdf-schema#label> "tem uma área de assunto"@pt-BR.
+<http://vivoweb.org/ontology/core#termLabel> <http://www.w3.org/2000/01/rdf-schema#label> "termo do rótulo"@pt-BR.
+<http://purl.org/ontology/bibo/Performance> <http://www.w3.org/2000/01/rdf-schema#label> "Performance"@pt-BR.
+<http://vivoweb.org/ontology/core#PopulatedPlace> <http://www.w3.org/2000/01/rdf-schema#label> "Lugar povoado"@pt-BR.
 <http://vivoweb.org/ontology/core#rank> <http://www.w3.org/2000/01/rdf-schema#label> "rank"@pt-BR.
 <http://vivoweb.org/ontology/core#Credential> <http://www.w3.org/2000/01/rdf-schema#label> "Credencial"@pt-BR.
 <http://vivoweb.org/ontology/core#County> <http://www.w3.org/2000/01/rdf-schema#label> "País"@pt-BR.

@@ -1,8 +1,8 @@
-<Http://vivoweb.org/ontology#vitroClassGrouppeople> <http://www.w3.org/2000/01/rdf-schema#label> "pessoas"@pt-BR.
-<Http://vivoweb.org/ontology#vitroClassGrouppublications> <http://www.w3.org/2000/01/rdf-schema#label> "research"@pt-BR.
-<Http://vivoweb.org/ontology#vitroClassGrouporganizations> <http://www.w3.org/2000/01/rdf-schema#label> "organizações"@pt-BR.
-<Http://vivoweb.org/ontology#vitroClassGroupactivities> <http://www.w3.org/2000/01/rdf-schema#label> "atividades"@pt-BR.
-<Http://vivoweb.org/ontology#vitroClassGroupcourses> <http://www.w3.org/2000/01/rdf-schema#label> "cursos"@pt-BR.
-<Http://vivoweb.org/ontology#vitroClassGroupevents> <http://www.w3.org/2000/01/rdf-schema#label> "eventos"@pt-BR.
-<Http://vivoweb.org/ontology#vitroClassGroupequipment> <http://www.w3.org/2000/01/rdf-schema#label> "equipamento"@pt-BR.
-<Http://vivoweb.org/ontology#vitroClassGrouplocations> <http://www.w3.org/2000/01/rdf-schema#label> "locais"@pt-BR.
+<http://vivoweb.org/ontology#vitroClassGrouppeople> <http://www.w3.org/2000/01/rdf-schema#label> "pessoas"@es-GO .
+<http://vivoweb.org/ontology#vitroClassGrouppublications> <http://www.w3.org/2000/01/rdf-schema#label> "pesquisas"@es-GO .
+<http://vivoweb.org/ontology#vitroClassGrouporganizations> <http://www.w3.org/2000/01/rdf-schema#label> "organizações"@es-GO .
+<http://vivoweb.org/ontology#vitroClassGroupactivities> <http://www.w3.org/2000/01/rdf-schema#label> "atividades"@es-GO .
+<http://vivoweb.org/ontology#vitroClassGroupcourses> <http://www.w3.org/2000/01/rdf-schema#label> "cursos"@es-GO .
+<http://vivoweb.org/ontology#vitroClassGroupevents> <http://www.w3.org/2000/01/rdf-schema#label> "eventos"@es-GO .
+<http://vivoweb.org/ontology#vitroClassGroupequipment> <http://www.w3.org/2000/01/rdf-schema#label> "equipamento"@es-GO .
+<http://vivoweb.org/ontology#vitroClassGrouplocations> <http://www.w3.org/2000/01/rdf-schema#label> "locais"@es-GO .
