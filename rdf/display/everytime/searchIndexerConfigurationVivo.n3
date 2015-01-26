@@ -52,8 +52,6 @@
     a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SimpleSparqlQueryDocumentModifier> ,
         <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
     rdfs:label "Email address" ;
-    :hasTargetField "ALLTEXT" ;
-    :hasTargetField "ALLTEXTUNSTEMMED" ;
     :hasSparqlQuery """
         PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
         PREFIX obo: <http://purl.obolibrary.org/obo/>
@@ -273,7 +271,6 @@
         PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#> 
         PREFIX obo: <http://purl.obolibrary.org/obo/>
         SELECT  (str(?AcademicDegreeLabel) as ?academicDegreeLabel)
-                (str(?AcademicDegreeAbbreviation) as ?academicDegreeAbbreviation)
                 (str(?MajorField) as ?majorField)
                 (str(?DepartmentOrSchool) as ?departmentOrSchool)
                 (str(?TrainingAtOrganizationLabel) as ?trainingAtOrganizationLabel)
@@ -370,7 +367,7 @@
             ?rel   core:relates   ?other  .
             ?other rdfs:label     ?rawresult .
             FILTER( ?other != ?uri )
-        }         
+        }
         """ .
 
 :vivodocumentModifier_Grants_Projects_ForPerson
