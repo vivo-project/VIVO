@@ -1774,6 +1774,8 @@ vivo:publisherOf
               "25"^^xsd:int ;
       vitro:fullPropertyNameAnnot
               "publisher of"^^xsd:string ;
+	  vitro:customEntryFormAnnot
+		      "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AutocompleteObjectPropertyFormGenerator"^^xsd:string ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:hiddenFromPublishBelowRoleLevelAnnot
