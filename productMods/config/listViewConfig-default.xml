@@ -31,10 +31,11 @@
 
             OPTIONAL {
                 # Get mostSpecificType only for Persons
-                ?object vitro:mostSpecificType ?subclass .
-                ?subclass rdfs:label ?type .
+                ?object a foaf:Person .
+                ?object vitro:mostSpecificType ?typeUri .
+                ?typeUri rdfs:label ?type .
                 # Display only a mostSpecificType that belongs to a classgroup.
-                ?subclass vitro:inClassGroup ?classGroup .
+                ?typeUri vitro:inClassGroup ?classGroup .
                 ?classGroup a vitro:ClassGroup
             }
             
@@ -44,6 +45,7 @@
             }             
             
             <collated>
+            OPTIONAL { ?object a ?subclass } 
             FILTER ( afn:namespace(?subclass) != "http://vitro.mannlib.cornell.edu/ns/vitro/0.7#" )   
             </collated>
         
@@ -60,6 +62,7 @@
         CONSTRUCT {
             ?subject ?property ?object .
 			?object a ?objectType .
+            ?object a ?subclass .
             ?object rdfs:label ?label .
         } WHERE {
             { 
@@ -83,10 +86,10 @@
         CONSTRUCT {
             ?subject ?property ?object .
 			?object a ?objectType .
-            ?object vitro:mostSpecificType ?subclass .
-            ?subclass vitro:inClassGroup ?classGroup .
+            ?object vitro:mostSpecificType ?typeUri .
+            ?typeUri vitro:inClassGroup ?classGroup .
             ?classGroup a vitro:ClassGroup .
-            ?subclass rdfs:label ?type .
+            ?typeUri rdfs:label ?type .
             ?object obo:ARG_2000028 ?vcard . 
             ?vcard vcard:hasTitle ?titleObj .
             ?titleObj vcard:title ?title
@@ -97,9 +100,9 @@
             } UNION {            
                 ?subject ?property ?object .
 				?object a ?objectType .
-                ?object vitro:mostSpecificType ?subclass .
-                ?subclass rdfs:label ?type .
-                ?subclass vitro:inClassGroup ?classGroup .
+                ?object vitro:mostSpecificType ?typeUri .
+                ?typeUri rdfs:label ?type .
+                ?typeUri vitro:inClassGroup ?classGroup .
                 ?classGroup a vitro:ClassGroup
             } UNION {            
                 ?subject ?property ?object .
