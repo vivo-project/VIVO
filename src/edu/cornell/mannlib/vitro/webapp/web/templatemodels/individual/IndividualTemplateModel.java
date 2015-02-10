@@ -38,6 +38,7 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     private static final String DTP_CLASS = "http://vivoweb.org/ontology/core#DateTimeValuePrecision";
     private static final String ORGANIZATION_CLASS = FOAF + "Organization";
     private static final String EVENT_CLASS = "http://purl.org/NET/c4dm/event.owl#Event";
+    private static final String INFO_CONTENT_ENTITY_CLASS = "http://purl.obolibrary.org/obo/IAO_0000030";
     private static final String BASE_VISUALIZATION_URL = 
         UrlBuilder.getUrl(Route.VISUALIZATION_SHORT.path());
     
@@ -82,6 +83,10 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     
     public boolean event() {
         return isVClass(EVENT_CLASS);        
+    }
+
+    public boolean infoContentEntity() {
+        return isVClass(INFO_CONTENT_ENTITY_CLASS);        
     }
 
     public String coAuthorVisUrl() {   	
