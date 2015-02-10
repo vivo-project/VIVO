@@ -26,7 +26,7 @@
     
     <#local linkedIndividual>
         <#if statement.org??>
-            <a href="${profileUrl(statement.uri("org"))}" title="${i18n().organization_name}">${statement.orgName}</a>
+            <a itemscope itemtype="http://schema.org/CollegeOrUniversity" href="${profileUrl(statement.uri("org"))}" title="${i18n().organization_name}"><span itemprop="name">${statement.orgName}</span></a>
         <#elseif editable>
             <#-- Show the link to the context node only if the user is editing the page. -->
             <a href="${profileUrl(statement.uri("edTraining"))}" title="${i18n().missing_organization}">${i18n().missing_organization}</a>
