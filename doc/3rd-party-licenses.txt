@@ -86,20 +86,6 @@ GNU AGPL 3
 licenses/agpl.LICENSE.txt
 
 iText
-pellet-cli
-pellet-core
-pellet-datatypes
-pellet-dig
-pellet-el
-pellet-explanation
-pellet
-pellet-jena
-pellet-modularity
-pellet-owlapi
-pellet-pellint
-pellet-query
-pellet-rules
-pellet-test
 
 
 GNU GPL 2

@@ -49,7 +49,7 @@
                 <h2>${relatedSubject.relatingPredicateDomainPublic} ${i18n().for} ${relatedSubject.name}</h2>
                 <p><a href="${relatedSubject.url}" title="${i18n().return_to(relatedSubject.name)}">&larr; ${i18n().return_to(relatedSubject.name)}</a></p>
             <#else>  
-                <h1 class="vcard foaf-person fn" <#if !editable>style="float:left;border-right:1px solid #A6B1B0;"</#if>> 
+                <h1 itemprop="name" class="vcard foaf-person fn" <#if !editable>style="float:left;border-right:1px solid #A6B1B0;"</#if>> 
                     <#-- Label -->
                     <@p.label individual editable labelCount localesCount/>
                 </h1>
@@ -64,9 +64,9 @@
                     </#if>
                     <#list title.statements as statement>
                         <#if !editable >
-                            <div id="titleContainer"><span class="display-title-not-editable">${statement.preferredTitle}</span></div>
+                            <div id="titleContainer"><span itemprop="jobTitle" class="display-title-not-editable">${statement.preferredTitle}</span></div>
                         <#else>
-                            <span class="display-title-editable">${statement.preferredTitle}</span>
+                            <span itemprop="jobTitle" class="display-title-editable">${statement.preferredTitle}</span>
                             <@p.editingLinks "${title.localName}" "${title.name}" statement editable title.rangeUri />
                         </#if>
                     </#list>

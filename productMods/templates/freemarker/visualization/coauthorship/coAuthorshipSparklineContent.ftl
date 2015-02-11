@@ -186,7 +186,7 @@
                     $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + pubDisplay + " <br/></span>");
             
                     var sparksText = '  ${i18n().from} <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}' 
-                                        + ' ${i18n().to} ${sparklineVO.latestRenderedPublicationYear?c}</span>';
+                                        + ' - ${sparklineVO.latestRenderedPublicationYear?c}</span>';
                                         
                     if (totalPubs !== totalPublicationCount) {
                         sparksText += ' (' + totalPublicationCount + ' ${i18n().total})';

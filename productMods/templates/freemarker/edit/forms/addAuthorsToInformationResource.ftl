@@ -192,7 +192,7 @@ var i18nStrings = {
     authorTypeText: '${i18n().author_capitalized}',
     organizationTypeText: '${i18n().organization_capitalized}',
     helpTextSelect: '${i18n().select_an_existing}',
-    helptextAdd: '${i18n().or_add_new_one}'
+    helpTextAdd: '${i18n().or_add_new_one}'
 };
 </script>
 

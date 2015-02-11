@@ -44,7 +44,9 @@ public class ManagePublicationsForIndividualController extends FreemarkerHttpSer
         body.put("subjectUri", subjectUri);
 
         HashMap<String, List<Map<String,String>>>  publications = getPublications(subjectUri, vreq);
-        log.debug("publications = " + publications);
+        if ( log.isDebugEnabled() ) {
+			log.debug("publications = " + publications);
+		}
         body.put("publications", publications);
 
         List<String> allSubclasses = getAllSubclasses(publications);

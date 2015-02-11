@@ -1,7 +1,7 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
 $(document).ready(function(){
-    
+
     // ensures proper layout when an organization has its webpage link displayed as a thumnail.
     // there's a timing issue, so we can't check the length here, so check the role just to see
     // if $('ul.webpages-withThumnails') exists
@@ -48,7 +48,8 @@ $(document).ready(function(){
     // var $propList = $('.property-list').not('>li>ul');
     var $propList = $('.property-list:not(:has(>li>ul))');
     $propList.each(function() {
-        var $additionalItems = $(this).find('li:gt(4)');
+	    var limit = $(this).attr("displayLimit"); 
+        var $additionalItems = $(this).find('li:gt(' + (limit - 1) + ')');
         if ( $additionalItems.exists() ) {
             // create container for additional elements
             var $itemContainer = $('<div class="additionalItems" />').appendTo(this);
@@ -66,7 +67,8 @@ $(document).ready(function(){
     
     var $subPropList = $('.subclass-property-list');
     $subPropList.each(function() {
-        var $additionalItems = $(this).find('li:gt(4)');
+		var limit = $(this).parent().parent().attr("displayLimit"); 
+        var $additionalItems = $(this).find('li:gt(' + (limit - 1) + ')');
         if ( $additionalItems.exists() ) {
             // create container for additional elements
             var $itemContainer = $('<div class="additionalItems" />').appendTo(this);

@@ -1,0 +1,92 @@
+@prefix : <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> . 
+
+
+#
+# Specify the SearchIndexExcluders, DocumentModifiers and IndexingUriFinders for VIVO. 
+# These are in addition to the ones specified for VIVO.
+#
+
+:vivoSearchExcluder_namespaceExcluder
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.exclusions.ExcludeBasedOnNamespace> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.exclusions.SearchIndexExcluder> ;
+    :excludes
+        "http://purl.obolibrary.org/obo/" .
+
+# ------------------------------------
+
+:extension_forContextNodes
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.extensions.LabelsAcrossContextNodes> .
+
+# ------------------------------------
+
+:vivodocumentModifier_calculateParameters
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.CalculateParameters> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
+
+# ------------------------------------
+
+:vivoUriFinder_VCard
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.SelectQueryUriFinder> ;
+    rdfs:label "Preferred title" ;
+    :hasPredicateRestriction "http://www.w3.org/2006/vcard/ns#title" ;
+    :hasPredicateRestriction "http://www.w3.org/2006/vcard/ns#email" ;
+    :hasSelectQuery """
+        PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+        PREFIX obo: <http://purl.obolibrary.org/obo/>
+        SELECT ?uri
+        WHERE {
+            ?uri obo:ARG_2000028 ?card .
+            ?card a vcard:Individual .
+            ?card vcard:hasTitle ?subject .
+        }
+        """ ;
+    :hasSelectQuery """
+        PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+        PREFIX obo: <http://purl.obolibrary.org/obo/>
+        SELECT ?uri
+        WHERE {
+            ?uri obo:ARG_2000028 ?card .
+            ?card a vcard:Individual .
+            ?card vcard:hasEmail ?subject .
+        }
+        """ .
+
+:vivodocumentModifier_PreferredTitle
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SelectQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "Preferred title" ;
+    :hasTargetField "ALLTEXT" ;
+    :hasTargetField "ALLTEXTUNSTEMMED" ;
+    :hasTargetField "PREFERRED_TITLE" ;
+    :hasSelectQuery """
+        PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+        PREFIX obo: <http://purl.obolibrary.org/obo/>
+		SELECT ?title 
+		WHERE {
+			?uri obo:ARG_2000028 ?card .
+			?card a vcard:Individual .
+			?card vcard:hasTitle ?titleHolder .
+			?titleHolder vcard:title ?title .
+		}
+        """ .
+    
+:vivodocumentModifier_EmailAddress
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SelectQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "Email address" ;
+    :hasSelectQuery """
+        PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+        PREFIX obo: <http://purl.obolibrary.org/obo/>
+		SELECT ?email 
+		WHERE {
+			?uri obo:ARG_2000028 ?card .
+			?card a vcard:Individual .
+			?card vcard:hasEmail ?emailHolder .
+			?emailHolder vcard:email ?email .
+		}
+        """ .
+

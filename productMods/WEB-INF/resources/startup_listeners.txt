@@ -13,9 +13,6 @@ edu.cornell.mannlib.vitro.webapp.config.ConfigurationPropertiesSetup
 
 edu.cornell.mannlib.vitro.webapp.config.ConfigurationPropertiesSmokeTests
 
-# For the conversion from 1.6 or earlier (RDB) to 1.7 or later (TDB)
-edu.cornell.mannlib.vitro.webapp.servlet.setup.GuardAgainstUnmigratedRDB
-
 edu.cornell.mannlib.vitro.webapp.utils.developer.DeveloperSettings$Setup
 
 edu.cornell.mannlib.vitro.webapp.application.ApplicationImpl$ComponentsSetup
@@ -36,7 +33,9 @@ edu.cornell.mannlib.vitro.webapp.servlet.setup.FileGraphSetup
 
 # Invokes process to perform updates to align with ontology changes if needed -->
 edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdateKnowledgeBase
+edu.cornell.mannlib.vitro.webapp.migration.Release18Migrator
 
+edu.cornell.mannlib.vitro.webapp.application.ApplicationImpl$ReasonersSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.SimpleReasonerSetup
 
 # Must run after JenaDataSourceSetup
@@ -46,7 +45,7 @@ edu.cornell.mannlib.vitro.webapp.auth.permissions.PermissionRegistry$Setup
 
 edu.cornell.mannlib.vitro.webapp.auth.permissions.PermissionSetsSmokeTest
 
-edu.cornell.mannlib.vitro.webapp.auth.policy.bean.PropertyRestrictionPolicyHelper$Setup
+edu.cornell.mannlib.vitro.webapp.auth.policy.bean.PropertyRestrictionBean$Setup
 
 edu.cornell.mannlib.vitro.webapp.auth.policy.setup.CommonPolicyFamilySetup
 

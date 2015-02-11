@@ -162,7 +162,7 @@ var i18nStrings = {
     removeEditorshipAlert: '${i18n().error_processing_editor_request}',
     editorTypeText: '${i18n().editor_capitalized}',
     helpTextSelect: '${i18n().select_an_existing}',
-    helptextAdd: '${i18n().or_add_new_one}'
+    helpTextAdd: '${i18n().or_add_new_one}'
 };
 </script>
 

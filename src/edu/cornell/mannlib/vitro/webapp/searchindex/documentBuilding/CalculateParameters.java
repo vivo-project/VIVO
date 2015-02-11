@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-package edu.cornell.mannlib.vitro.webapp.search.documentBuilding;
+package edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -36,7 +36,7 @@ import edu.cornell.mannlib.vitro.webapp.utils.configuration.ContextModelsUser;
 public class CalculateParameters implements DocumentModifier, ContextModelsUser {
 
     private boolean shutdown = false;
-	private Dataset dataset;
+	private volatile Dataset dataset;
    // public static int totalInd=1;
     
     private static final String prefix = "prefix owl: <http://www.w3.org/2002/07/owl#> "
@@ -254,6 +254,13 @@ public class CalculateParameters implements DocumentModifier, ContextModelsUser 
 	public void shutdown(){
         shutdown=true;
     }
+	
+
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName() + "[]";
+	}
+
 }
 
 class TotalInd implements Runnable{

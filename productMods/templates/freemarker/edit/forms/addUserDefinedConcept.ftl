@@ -7,6 +7,10 @@
 
 <#assign sparqlForAcFilter = editConfiguration.pageData.sparqlForAcFilter />
 
+<#--This flag is for clearing the label field on submission for an existing object being selected from autocomplete.
+Set this flag on the input acUriReceiver where you would like this behavior to occur. -->
+<#assign flagClearLabelForExisting = "flagClearLabelForExisting" />
+
 <h2>${i18n().create_own_concept_all_caps}</h2>
 
 <@lvf.unsupportedBrowser urls.base /> 
@@ -26,7 +30,7 @@
                         <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
                         <a href="#" class="changeSelection" id="changeSelection" title="${i18n().change_selection}">${i18n().change_selection})</a>
 		            </p>
-		            <input class="acUriReceiver" type="hidden" id="conceptNode" name="conceptNode" value="" />
+		            <input class="acUriReceiver" type="hidden" id="conceptNode" name="conceptNode" value="" ${flagClearLabelForExisting}="true"/>
         </div>
 
     <br />
@@ -54,7 +58,8 @@
         typeName: 'Concept',
         defaultTypeName: 'concept', // used in repair mode to generate button text
         baseHref: '${urls.base}/individual?uri=',
-        limitToConceptClasses:["http://www.w3.org/2004/02/skos/core#Concept"]
+        limitToConceptClasses:["http://www.w3.org/2004/02/skos/core#Concept"],
+        flagClearLabelForExisting: '${flagClearLabelForExisting}'
     };
     var i18nStrings = {
         selectAnExisting: '${i18n().select_an_existing}',

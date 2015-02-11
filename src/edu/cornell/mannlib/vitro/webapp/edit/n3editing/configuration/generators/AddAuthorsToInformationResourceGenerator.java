@@ -360,7 +360,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
         + "  OPTIONAL { ?authorURI rdfs:label ?authorName } \n"
         + "  OPTIONAL { ?authorshipURI core:rank ?rank } \n" 
 	    + "} UNION {  \n" 
-	    + "	 <http://vivo.cornell.edu/individual/n2251> core:relatedBy ?authorshipURI .  \n" 
+	    + "	 ?subject core:relatedBy ?authorshipURI .  \n" 
 	    + "	 ?authorshipURI a core:Authorship .  \n" 
 	    + "	 ?authorshipURI core:relates ?authorURI .  \n" 
 	    + "	 ?authorURI a vcard:Individual .  \n" 
