@@ -35,9 +35,6 @@ edu.cornell.mannlib.vitro.webapp.servlet.setup.FileGraphSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdateKnowledgeBase
 edu.cornell.mannlib.vitro.webapp.migration.Release18Migrator
 
-edu.cornell.mannlib.vitro.webapp.application.ApplicationImpl$ReasonersSetup
-edu.cornell.mannlib.vitro.webapp.servlet.setup.SimpleReasonerSetup
-
 # Must run after JenaDataSourceSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ThemeInfoSetup
 
@@ -65,6 +62,10 @@ edu.cornell.mannlib.vitro.webapp.i18n.selection.LocaleSelectionSetup
 # The search indexer uses a "public" permission, so the PropertyRestrictionPolicyHelper 
 #   and the PermissionRegistry must already be set up.
 edu.cornell.mannlib.vitro.webapp.searchindex.SearchIndexerSetup
+
+# Must run after the search indexer setup
+edu.cornell.mannlib.vitro.webapp.application.ApplicationImpl$ReasonersSetup
+edu.cornell.mannlib.vitro.webapp.servlet.setup.SimpleReasonerSetup
 
 edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerSetup
 edu.cornell.mannlib.vitro.webapp.freemarker.config.FreemarkerConfiguration$Setup
