@@ -321,6 +321,22 @@
         </rdfs:subClassOf>
     </owl:Class>
     
+    
+    
+    <!-- http://purl.org/ontology/bibo/Report -->
+    
+    <owl:Class rdf:about="http://purl.org/ontology/bibo/Report">
+        
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#publisher"/>
+                <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    
+    
     <!-- http://vivoweb.org/ontology/core#GeographicLocation -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#GeographicLocation">
