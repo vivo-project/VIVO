@@ -241,18 +241,7 @@
 
     <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/translationOf">
 
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://purl.org/ontology/bibo/translator -->
-
-    <owl:ObjectProperty rdf:about="http://purl.org/ontology/bibo/translator">
-
-        <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/contributor"/>
-        <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/IAO_0000030"/>
-    </owl:ObjectProperty>
-    
+    </owl:ObjectProperty>    
 
 
     <!-- http://purl.org/spar/c4o/hasGlobalCitationFrequency -->
