@@ -308,7 +308,6 @@
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Division">
 
-        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#ExtensionUnit"/>
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A major unit or section within a larger organization.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cardiovascular Medicine (division within medicine)</obo:IAO_0000112>
