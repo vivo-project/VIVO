@@ -162,7 +162,7 @@
     <core:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&lt;p&gt;Academic public health degree. (contrast with M.P.H.).&amp;nbsp; The M.S.P.H. is more research-oriented than the M.P.H.&lt;/p&gt;
 &lt;p&gt;See the Wikipedia entry at:  http://en.wikipedia.org/wiki/Professional_degrees_of_public_health&lt;/p&gt;</core:description>
     <rdfs:label xml:lang="en-US">M.S.P.H. Master of Science in Public Health</rdfs:label>
-    <core:abbreviation">M.S.P.H.</core:abbreviation>
+    <core:abbreviation>M.S.P.H.</core:abbreviation>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree67">
