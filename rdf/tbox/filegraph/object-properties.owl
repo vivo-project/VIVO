@@ -1549,9 +1549,16 @@ there is a measurement process p that has specified output m, a measurement datu
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#translatorOf">
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
-        <rdfs:range rdf:resource="http://purl.org/ontology/bibo/Document"/>
+        <rdfs:range>
+            <owl:Class>    
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="http://purl.org/ontology/bibo/Collection"/>
+                    <owl:Class rdf:about="http://purl.org/ontology/bibo/Document"/>
+               </owl:unionOf>
+            </owl:Class>    
+        </rdfs:range>
     </owl:ObjectProperty>
-    
+     
 
 
     <!-- http://vivoweb.org/ontology/scientific-research#accessProvidedBy -->
