@@ -126,6 +126,9 @@ public class LabelsAcrossContextNodesTest extends AbstractTestClass {
 
 		lacn = new LabelsAcrossContextNodes();
 		lacn.setContextModels(models);
+		lacn.setIncomingProperty(CORE_RELATED_BY);
+		lacn.setOutgoingProperty(CORE_RELATES);
+		lacn.validate();
 	}
 
 	// ----------------------------------------------------------------------

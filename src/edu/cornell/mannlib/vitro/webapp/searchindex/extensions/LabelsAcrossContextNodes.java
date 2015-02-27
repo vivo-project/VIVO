@@ -36,8 +36,10 @@ import edu.cornell.mannlib.vitro.webapp.utils.configuration.Validation;
  * individual should include the labels of the partners across those nodes. The
  * labels will be added to the ALLTEXT and ALLTEXTUNSTEMMED fields.
  * 
- * We can add restrictions to say that this only applies to individuals of
- * certain types. We can also restrict the type of the applicable context nodes.
+ * We must specify what property leads to a context node (incoming), and what
+ * property leads from a context node (outgoing). We may add restrictions to say
+ * that this only applies to individuals of certain types. We may also restrict
+ * the type of the applicable context nodes.
  * 
  * An instance of this class acts as both a DocumentModifier and an
  * IndexingUriFinder:
@@ -52,6 +54,8 @@ import edu.cornell.mannlib.vitro.webapp.utils.configuration.Validation;
  * <pre>
  * Configuration:
  *     rdfs:label -- Optional. Appears in the timings and debug statements.
+ *     :hasIncomingProperty -- Required. Property leading to the context node.
+ *     :hasOutgoingProperty -- Required. Property leading from the context node.
  *     :hasTypeRestriction -- Optional. Match any. If none, then no restriction.
  *     :appliesToContextNodeType -- Optional. Match any. If none, then no restriction.
  * </pre>
@@ -68,6 +72,16 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 	 * then a descriptive label will be created.
 	 */
 	private String label;
+
+	/**
+	 * The URI of the property that leads into the context node. Required.
+	 */
+	private String incomingPropertyUri;
+
+	/**
+	 * The URI of the property that leads from the context node. Required.
+	 */
+	private String outgoingPropertyUri;
 
 	/**
 	 * URIs of the types of individuals to whom this instance applies.
@@ -95,6 +109,28 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 		label = l;
 	}
 
+	@Property(uri = "http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#hasIncomingProperty")
+	public void setIncomingProperty(String incomingUri) {
+		if (incomingPropertyUri == null) {
+			incomingPropertyUri = incomingUri;
+		} else {
+			throw new IllegalStateException(
+					"Configuration includes multiple declarations for hasIncomingProperty: "
+							+ incomingPropertyUri + ", and " + incomingUri);
+		}
+	}
+
+	@Property(uri = "http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#hasOutgoingProperty")
+	public void setOutgoingProperty(String outgoingUri) {
+		if (outgoingPropertyUri == null) {
+			outgoingPropertyUri = outgoingUri;
+		} else {
+			throw new IllegalStateException(
+					"Configuration includes multiple declarations for hasOutgoingProperty: "
+							+ outgoingPropertyUri + ", and " + outgoingUri);
+		}
+	}
+
 	@Property(uri = "http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#hasTypeRestriction")
 	public void addTypeRestriction(String typeUri) {
 		typeRestrictions.add(typeUri);
@@ -112,6 +148,14 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 					.getClass().getSimpleName(),
 					formatRestrictions(typeRestrictions),
 					formatRestrictions(contextNodeClasses));
+		}
+		if (incomingPropertyUri == null) {
+			throw new IllegalStateException(
+					"Configuration did not declare hasIncomingProperty.");
+		}
+		if (outgoingPropertyUri == null) {
+			throw new IllegalStateException(
+					"Configuration did not declare hasOutgoingProperty.");
 		}
 	}
 
@@ -146,23 +190,21 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 	// ----------------------------------------------------------------------
 
 	private static final String LABELS_WITHOUT_RESTRICTION = ""
-			+ "PREFIX vivo: <http://vivoweb.org/ontology/core#> \n"
 			+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
 			+ "SELECT ?label  \n" //
 			+ "WHERE { \n" //
-			+ "   ?uri vivo:relatedBy ?contextNode . \n" //
-			+ "   ?contextNode vivo:relates ?partner . \n" //
+			+ "   ?uri ?incoming ?contextNode . \n" //
+			+ "   ?contextNode ?outgoing ?partner . \n" //
 			+ "   ?partner rdfs:label ?label . \n" //
 			+ "   FILTER( ?uri != ?partner  ) \n" //
 			+ "} \n";
 	private static final String LABELS_FOR_SPECIFIC_CONTEXT_NODE_TYPE = ""
-			+ "PREFIX vivo: <http://vivoweb.org/ontology/core#> \n"
 			+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
 			+ "SELECT ?label  \n" //
 			+ "WHERE { \n" //
-			+ "   ?uri vivo:relatedBy ?contextNode . \n" //
+			+ "   ?uri ?incoming ?contextNode . \n" //
 			+ "   ?contextNode a ?nodeType . \n" //
-			+ "   ?contextNode vivo:relates ?partner . \n" //
+			+ "   ?contextNode ?outgoing ?partner . \n" //
 			+ "   ?partner rdfs:label ?label . \n" //
 			+ "   FILTER( ?uri != ?partner  ) \n" //
 			+ "} \n";
@@ -202,8 +244,10 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 			SearchInputDocument doc) {
 		addValuesToTextFields(doc,
 				createQueryContext(rdfService, LABELS_WITHOUT_RESTRICTION)
-						.bindVariableToUri("uri", ind.getURI()).execute()
-						.getStringFields("label").flatten());
+						.bindVariableToUri("uri", ind.getURI())
+						.bindVariableToUri("incoming", incomingPropertyUri)
+						.bindVariableToUri("outgoing", outgoingPropertyUri)
+						.execute().getStringFields("label").flatten());
 	}
 
 	private void addLabelsFromContextNodeClass(Individual ind,
@@ -214,6 +258,8 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 						LABELS_FOR_SPECIFIC_CONTEXT_NODE_TYPE)
 						.bindVariableToUri("uri", ind.getURI())
 						.bindVariableToUri("nodeType", contextNodeClass)
+						.bindVariableToUri("incoming", incomingPropertyUri)
+						.bindVariableToUri("outgoing", outgoingPropertyUri)
 						.execute().getStringFields("label").flatten());
 	}
 
@@ -234,30 +280,25 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 	// IndexingUriFinder
 	// ----------------------------------------------------------------------
 
-	private static final String URI_VIVO_RELATES = "http://vivoweb.org/ontology/core#relates";
-
 	private static final String LOCATE_PARTNERS_WITHOUT_RESTRICTION = ""
-			+ "PREFIX vivo: <http://vivoweb.org/ontology/core#> \n"
 			+ "SELECT ?partner  \n" //
 			+ "WHERE { \n" //
-			+ "   ?uri vivo:relatedBy ?contextNode . \n" //
-			+ "   ?contextNode vivo:relates ?partner . \n" //
+			+ "   ?uri ?incoming ?contextNode . \n" //
+			+ "   ?contextNode ?outgoing ?partner . \n" //
 			+ "   FILTER( ?uri != ?partner  ) \n" //
 			+ "} \n";
 	private static final String LOCATE_PARTNERS_ON_CONTEXT_NODE_TYPE = ""
-			+ "PREFIX vivo: <http://vivoweb.org/ontology/core#> \n"
 			+ "SELECT ?partner  \n" //
 			+ "WHERE { \n" //
-			+ "   ?uri vivo:relatedBy ?contextNode . \n" //
-			+ "   ?contextNode vivo:relates ?partner . \n" //
+			+ "   ?uri ?incoming ?contextNode . \n" //
+			+ "   ?contextNode ?outgoing ?partner . \n" //
 			+ "   ?contextNode a ?nodeType . \n" //
 			+ "   FILTER( ?uri != ?partner  ) \n" //
 			+ "} \n";
 	private static final String LOCATE_OTHER_PARTNERS_ON_THIS_NODE = ""
-			+ "PREFIX vivo: <http://vivoweb.org/ontology/core#> \n"
 			+ "SELECT ?partner  \n" //
 			+ "WHERE { \n" //
-			+ "   ?contextNode vivo:relates ?partner . \n" //
+			+ "   ?contextNode ?outgoing ?partner . \n" //
 			+ "   FILTER( ?uri != ?partner  ) \n" //
 			+ "} \n";
 	private static final String GET_TYPES = "" //
@@ -275,17 +316,18 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 	 * If this is a "label" statement, check to see if the subject has any
 	 * acceptable partners across acceptable context nodes.
 	 * 
-	 * If this is a "relates" statement on an acceptable context node, check to
-	 * see if there are any other acceptable partners on this node.
+	 * If this is a statement that involves the specified outgoing property on
+	 * an acceptable context node, check to see if there are any other
+	 * acceptable partners on this node.
 	 * 
-	 * We could also check for "relatedBy" statements, but they should happen in
-	 * pairs with the "relates" statements.
+	 * We could also check for statements that involve the specified incoming
+	 * property, but they should happen in pairs with the "outgoing" statements.
 	 */
 	@Override
 	public List<String> findAdditionalURIsToIndex(Statement stmt) {
 		if (isLabelStatement(stmt)) {
 			return filterByType(locatePartners(stmt));
-		} else if (isRelatesStatementOnAcceptableContextNode(stmt)) {
+		} else if (isOutgoingStatementOnAcceptableContextNode(stmt)) {
 			return filterByType(locateOtherPartners(stmt));
 		}
 		return Collections.emptyList();
@@ -308,11 +350,13 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 			return uris;
 		}
 	}
-	
+
 	private Set<String> locatePartnersWithoutRestriction(String uri) {
 		return createQueryContext(rdfService,
 				LOCATE_PARTNERS_WITHOUT_RESTRICTION)
-				.bindVariableToUri("uri", uri).execute()
+				.bindVariableToUri("uri", uri)
+				.bindVariableToUri("incoming", incomingPropertyUri)
+				.bindVariableToUri("outgoing", outgoingPropertyUri).execute()
 				.getStringFields("partner").flattenToSet();
 	}
 
@@ -321,15 +365,17 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 		return createQueryContext(rdfService,
 				LOCATE_PARTNERS_ON_CONTEXT_NODE_TYPE)
 				.bindVariableToUri("uri", uri)
-				.bindVariableToUri("nodeType", contextNodeClass).execute()
+				.bindVariableToUri("nodeType", contextNodeClass)
+				.bindVariableToUri("incoming", incomingPropertyUri)
+				.bindVariableToUri("outgoing", outgoingPropertyUri).execute()
 				.getStringFields("partner").flattenToSet();
 	}
 
-	private boolean isRelatesStatementOnAcceptableContextNode(Statement stmt) {
+	private boolean isOutgoingStatementOnAcceptableContextNode(Statement stmt) {
 		String subjectUri = stmt.getSubject().getURI();
 		String predicateUri = stmt.getPredicate().getURI();
 
-		if (URI_VIVO_RELATES.equals(predicateUri)
+		if (outgoingPropertyUri.equals(predicateUri)
 				&& (contextNodeClasses.isEmpty() || isAnyMatch(
 						contextNodeClasses, getTypes(subjectUri)))) {
 			return true;
@@ -362,7 +408,8 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 		return createQueryContext(rdfService,
 				LOCATE_OTHER_PARTNERS_ON_THIS_NODE)
 				.bindVariableToUri("contextNode", nodeUri)
-				.bindVariableToUri("uri", objectUri).execute()
+				.bindVariableToUri("uri", objectUri)
+				.bindVariableToUri("outgoing", outgoingPropertyUri).execute()
 				.getStringFields("partner").flattenToSet();
 	}
 
