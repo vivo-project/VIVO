@@ -278,42 +278,42 @@ public class LabelsAcrossContextNodesTest extends AbstractTestClass {
 	}
 
 	@Test
-	public void relates_returnsPartner() {
+	public void relatedBy_returnsPartner() {
 		setTypeRestrictions();
 		setContextNodeTypes();
-		exerciseUriFinder(stmt(URI_POSITION1, CORE_RELATES, URI_PERSON1));
+		exerciseUriFinder(stmt(URI_POSITION1, CORE_RELATED_BY, URI_PERSON1));
 		assertExpectedUris(URI_ORGANIZATION1);
 	}
 
 	@Test
-	public void relates_inclusiveTypeRestriction_returnsPartner() {
+	public void relatedBy_inclusiveTypeRestriction_returnsPartner() {
 		setTypeRestrictions(FOAF_ORGANIZATION);
 		setContextNodeTypes();
-		exerciseUriFinder(stmt(URI_POSITION1, CORE_RELATES, URI_PERSON1));
+		exerciseUriFinder(stmt(URI_POSITION1, CORE_RELATED_BY, URI_PERSON1));
 		assertExpectedUris(URI_ORGANIZATION1);
 	}
 	
 	@Test
-	public void relates_exclusiveTypeRestriction_returnsNothing() {
+	public void relatedBy_exclusiveTypeRestriction_returnsNothing() {
 		setTypeRestrictions(CORE_ADVISING_RELATIONSHIP);
 		setContextNodeTypes();
-		exerciseUriFinder(stmt(URI_POSITION1, CORE_RELATES, URI_PERSON1));
+		exerciseUriFinder(stmt(URI_POSITION1, CORE_RELATED_BY, URI_PERSON1));
 		assertExpectedUris();
 	}
 	
 	@Test
-	public void relates_inclusiveContextType_returnsPartner() {
+	public void relatedBy_inclusiveContextType_returnsPartner() {
 		setTypeRestrictions();
 		setContextNodeTypes(CORE_POSITION);
-		exerciseUriFinder(stmt(URI_POSITION1, CORE_RELATES, URI_PERSON1));
+		exerciseUriFinder(stmt(URI_POSITION1, CORE_RELATED_BY, URI_PERSON1));
 		assertExpectedUris(URI_ORGANIZATION1);
 	}
 	
 	@Test
-	public void relates_exclusiveContextType_returnsNothing() {
+	public void relatedBy_exclusiveContextType_returnsNothing() {
 		setTypeRestrictions();
 		setContextNodeTypes(CORE_ADVISING_RELATIONSHIP);
-		exerciseUriFinder(stmt(URI_POSITION1, CORE_RELATES, URI_PERSON1));
+		exerciseUriFinder(stmt(URI_POSITION1, CORE_RELATED_BY, URI_PERSON1));
 		assertExpectedUris();
 	}
 	

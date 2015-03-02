@@ -283,15 +283,15 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 	private static final String LOCATE_PARTNERS_WITHOUT_RESTRICTION = ""
 			+ "SELECT ?partner  \n" //
 			+ "WHERE { \n" //
-			+ "   ?uri ?incoming ?contextNode . \n" //
-			+ "   ?contextNode ?outgoing ?partner . \n" //
+			+ "   ?partner ?incoming ?contextNode . \n" //
+			+ "   ?contextNode ?outgoing ?uri . \n" //
 			+ "   FILTER( ?uri != ?partner  ) \n" //
 			+ "} \n";
 	private static final String LOCATE_PARTNERS_ON_CONTEXT_NODE_TYPE = ""
 			+ "SELECT ?partner  \n" //
 			+ "WHERE { \n" //
-			+ "   ?uri ?incoming ?contextNode . \n" //
-			+ "   ?contextNode ?outgoing ?partner . \n" //
+			+ "   ?partner ?incoming ?contextNode . \n" //
+			+ "   ?contextNode ?outgoing ?uri . \n" //
 			+ "   ?contextNode a ?nodeType . \n" //
 			+ "   FILTER( ?uri != ?partner  ) \n" //
 			+ "} \n";
@@ -316,18 +316,15 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 	 * If this is a "label" statement, check to see if the subject has any
 	 * acceptable partners across acceptable context nodes.
 	 * 
-	 * If this is a statement that involves the specified outgoing property on
-	 * an acceptable context node, check to see if there are any other
-	 * acceptable partners on this node.
-	 * 
-	 * We could also check for statements that involve the specified incoming
-	 * property, but they should happen in pairs with the "outgoing" statements.
+	 * If this is a statement that involves the specified incoming property on
+	 * an acceptable context node, check to see if there are any acceptable
+	 * partners on this node.
 	 */
 	@Override
 	public List<String> findAdditionalURIsToIndex(Statement stmt) {
 		if (isLabelStatement(stmt)) {
 			return filterByType(locatePartners(stmt));
-		} else if (isOutgoingStatementOnAcceptableContextNode(stmt)) {
+		} else if (isIncomingStatementOnAcceptableContextNode(stmt)) {
 			return filterByType(locateOtherPartners(stmt));
 		}
 		return Collections.emptyList();
@@ -371,11 +368,11 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 				.getStringFields("partner").flattenToSet();
 	}
 
-	private boolean isOutgoingStatementOnAcceptableContextNode(Statement stmt) {
+	private boolean isIncomingStatementOnAcceptableContextNode(Statement stmt) {
 		String subjectUri = stmt.getSubject().getURI();
 		String predicateUri = stmt.getPredicate().getURI();
 
-		if (outgoingPropertyUri.equals(predicateUri)
+		if (incomingPropertyUri.equals(predicateUri)
 				&& (contextNodeClasses.isEmpty() || isAnyMatch(
 						contextNodeClasses, getTypes(subjectUri)))) {
 			return true;
