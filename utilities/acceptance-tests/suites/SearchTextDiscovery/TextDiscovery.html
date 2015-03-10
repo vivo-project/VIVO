@@ -11,7 +11,7 @@
 <thead>
 <tr><td rowspan="1" colspan="3">DeleteMuseum</td></tr>
 </thead><tbody>
-<!--Deete Johnson Art Museum-->
+<!--Search Text Discovery-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -64,30 +64,1122 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<!--Navigate to edit via Index-->
+<!--Label on self-->
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Index</td>
+	<td>selectWindow</td>
+	<td>null</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Museum</td>
+	<td>link=Site Admin</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Museum</td>
+	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=VClassURI</td>
+	<td>label=Person (foaf)</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>link=Johnson Art Museum</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Johnson Art Museum</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=firstName</td>
+	<td>Able</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lastName</td>
+	<td>Baker</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.fn</td>
+	<td>Baker, Able</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>Person</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>baker</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>baker - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h2.searchResultsHeader</td>
+	<td>Search results for 'baker'</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>Person</td>
+</tr>
+<!--Data property-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-overview &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.fn</td>
+	<td>Baker, Able</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>Person</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.overview-value</td>
+	<td>seeker of truth</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>seeker</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>seeker - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h2.searchResultsHeader</td>
+	<td>Search results for 'seeker'</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>Person</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=p.snippet</td>
+	<td>... seeker of truth ...</td>
+</tr>
+<!--Special case: preferred title-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=header &gt; #ARG_2000028 &gt; a.add-ARG_2000028 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=preferredTitle</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.fn</td>
+	<td>Baker, Able</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title-editable</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.overview-value</td>
+	<td>seeker of truth</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Honcho - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h2.searchResultsHeader</td>
+	<td>Search results for 'Honcho'</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=people</td>
+	<td>people</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=strong</td>
+	<td>Honcho</td>
+</tr>
+<!--Special case: email-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-ARG_2000028 &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=emailAddress</td>
+	<td>abaker@mydomain.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.fn</td>
+	<td>Baker, Able</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title-editable</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.overview-value</td>
+	<td>seeker of truth</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=abaker@mydomain.com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>abaker</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>abaker - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h2.searchResultsHeader</td>
+	<td>Search results for 'abaker'</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=p.snippet</td>
+	<td>... [abaker@mydomain.com] ...</td>
+</tr>
+<!--Object property-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-geographicFocus &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=label</td>
+	<td>Atlantis</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.fn</td>
+	<td>Baker, Able</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title-editable</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.overview-value</td>
+	<td>seeker of truth</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Atlantis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#individual-hasResearchArea &gt; li</td>
+	<td>Atlantis&nbsp;&nbsp;Continent</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=abaker@mydomain.com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>atlantis</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>atlantis - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h2.searchResultsHeader</td>
+	<td>Search results for 'atlantis'</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=locations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Atlantis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>Continent</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/span</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=strong</td>
+	<td>Atlantis</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>baker</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>baker - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h2.searchResultsHeader</td>
+	<td>Search results for 'baker'</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=locations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Atlantis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/span</td>
+	<td>Continent</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/p</td>
+	<td>... Baker, Able ...</td>
+</tr>
+<!--Object through context node: role-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//img[@alt='add'])[8]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=typeSelector</td>
+	<td>label=Department</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=activity</td>
+	<td>Advanced Tinkering</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=roleLabel</td>
+	<td>Burnisher</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.fn</td>
+	<td>Baker, Able</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title-editable</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.overview-value</td>
+	<td>seeker of truth</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Atlantis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#individual-hasResearchArea &gt; li</td>
+	<td>Atlantis&nbsp;&nbsp;Continent</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=abaker@mydomain.com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Advanced Tinkering</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#RO_0000053-MemberRole-List &gt; li</td>
+	<td>Advanced Tinkering Burnisher</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>tinkering</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>tinkering - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h2.searchResultsHeader</td>
+	<td>Search results for 'tinkering'</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Advanced Tinkering</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>Department</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/span</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/p</td>
+	<td>... Advanced Tinkering ...</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>baker</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>baker - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h2.searchResultsHeader</td>
+	<td>Search results for 'baker'</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=locations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Advanced Tinkering</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/span</td>
+	<td>Department</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/p</td>
+	<td>... Baker, Able ...</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Atlantis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[3]/span</td>
+	<td>Continent</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[3]/p</td>
+	<td>... Baker, Able ...</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>burnisher</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>burnisher - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h2.searchResultsHeader</td>
+	<td>Search results for 'burnisher'</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Advanced Tinkering</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>Department</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=strong</td>
+	<td>Burnisher</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/span</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/p/strong</td>
+	<td>Burnisher</td>
+</tr>
+<!--Object through standard context node-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=li.nonSelectedGroupTab.clickable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#relatedBy-Authorship &gt; a.add-relatedBy &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=typeSelector</td>
+	<td>label=Academic Article</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=option[value=&quot;http://purl.org/ontology/bibo/AcademicArticle&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=title</td>
+	<td>Thoughts</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.fn</td>
+	<td>Baker, Able</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title-editable</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.overview-value</td>
+	<td>seeker of truth</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Atlantis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=#individual-hasResearchArea &gt; li</td>
+	<td>Atlantis&nbsp;&nbsp;Continent</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=abaker@mydomain.com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=li.subclass &gt; h3</td>
+	<td>academic article</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Thoughts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>thoughts</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>thoughts - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h2.searchResultsHeader</td>
+	<td>Search results for 'thoughts'</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Thoughts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>Academic Article</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/span</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=strong</td>
+	<td>Thoughts</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>baker</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>baker - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h2.searchResultsHeader</td>
+	<td>Search results for 'baker'</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=locations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Advanced Tinkering</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/span</td>
+	<td>Department</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=strong</td>
+	<td>Baker</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Thoughts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[3]/span</td>
+	<td>Academic Article</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[3]/p</td>
+	<td>... Baker, Able ...</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Atlantis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[4]/span</td>
+	<td>Continent</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[4]/p/strong</td>
+	<td>Baker</td>
+</tr>
+<!--Change label on related object-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Atlantis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Atlantis</td>
 	<td></td>
 </tr>
 <tr>
@@ -100,10 +1192,9 @@
 	<td>Individual Control Panel</td>
 	<td></td>
 </tr>
-<!--Delete Johnson Art Museum-->
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value=&quot;Edit This Individual&quot;]</td>
+	<td>//input[@value='Edit This Individual']</td>
 	<td></td>
 </tr>
 <tr>
@@ -112,141 +1203,65 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>_delete</td>
-	<td></td>
+	<td>type</td>
+	<td>name=Name</td>
+	<td>Lemuria</td>
 </tr>
 <tr>
-	<td>assertConfirmation</td>
-	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td>5000</td>
+	<td>clickAndWait</td>
+	<td>id=primaryAction</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Index</td>
+	<td>Individual Control Panel</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
-	<td>50000</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<!--Atlantis: nothing-->
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>Atlantis</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
 	<td></td>
 </tr>
 <tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
+	<td>assertTitle</td>
+	<td>Atlantis - VIVO Search Results</td>
 	<td></td>
 </tr>
 <tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
+	<td>verifyElementNotPresent</td>
+	<td>link=Atlantis</td>
 	<td></td>
 </tr>
 <tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
+	<td>verifyElementNotPresent</td>
+	<td>link=Baker, Able</td>
 	<td></td>
 </tr>
+<!--Lemuria: Lemuria, Baker-->
 <tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
+	<td></td>
+	<td></td>
 	<td></td>
 </tr>
+<!--Baker: Baker, Lemuria, Tinkering, Thoughts-->
 <tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
+	<td></td>
+	<td></td>
 	<td></td>
 </tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<!--Verify Museum link is gone-->
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>Museum</td>
-	<td></td>
-</tr>
+<!--Change label on object through context node: role-->
+<!--Change label on object through standard contect node-->
 <!--Log out-->
 <tr>
 	<td>clickAndWait</td>
