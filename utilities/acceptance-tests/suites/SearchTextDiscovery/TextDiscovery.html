@@ -187,6 +187,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>seeker of truth</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>id=submit</td>
 	<td></td>
@@ -1171,7 +1181,7 @@
 	<td>//div[@id='wrapper-content']/div/ul/li[4]/p/strong</td>
 	<td>Baker</td>
 </tr>
-<!--Change label on related object-->
+<!--Change label on related object...-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Atlantis</td>
@@ -1203,9 +1213,24 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=9900editLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
-	<td>name=Name</td>
+	<td>tinymce</td>
 	<td>Lemuria</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=9900okLink</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1222,7 +1247,7 @@
 	<td>5000</td>
 	<td></td>
 </tr>
-<!--Atlantis: nothing-->
+<!--...then search for Atlantis-->
 <tr>
 	<td>type</td>
 	<td>name=querytext</td>
@@ -1235,33 +1260,664 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Atlantis - VIVO Search Results</td>
+	<td>Search for 'Atlantis'</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Atlantis</td>
+	<td>verifyText</td>
+	<td>css=h2</td>
+	<td>Search for 'Atlantis'</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=p</td>
+	<td>No matching results.</td>
+</tr>
+<!--...then search for Lemuria-->
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>Lemuria</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertTitle</td>
+	<td>Lemuria - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h2.searchResultsHeader</td>
+	<td>Search results for 'Lemuria'</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=locations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Lemuria</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>Continent</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
 	<td>link=Baker, Able</td>
 	<td></td>
 </tr>
-<!--Lemuria: Lemuria, Baker-->
 <tr>
-	<td></td>
-	<td></td>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/span</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=strong</td>
+	<td>Lemuria</td>
+</tr>
+<!--...then search for Baker-->
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>baker</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
 	<td></td>
 </tr>
-<!--Baker: Baker, Lemuria, Tinkering, Thoughts-->
 <tr>
-	<td></td>
-	<td></td>
+	<td>assertTitle</td>
+	<td>baker - VIVO Search Results</td>
 	<td></td>
 </tr>
-<!--Change label on object through context node: role-->
-<!--Change label on object through standard contect node-->
+<tr>
+	<td>verifyText</td>
+	<td>css=h2.searchResultsHeader</td>
+	<td>Search results for 'baker'</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=locations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Advanced Tinkering</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/span</td>
+	<td>Department</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=strong</td>
+	<td>Baker</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Thoughts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[3]/span</td>
+	<td>Academic Article</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[3]/p/strong</td>
+	<td>Baker</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Lemuria</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[4]/span</td>
+	<td>Continent</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[4]/p</td>
+	<td>... Baker, Able ...</td>
+</tr>
+<!--Change label on object through context node: role...-->
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Advanced Tinkering</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Advanced Tinkering</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=9903editLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>Advanced Puttering</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=9903okLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=primaryAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<!--...then search for tinkering-->
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>tinkering</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Search for 'tinkering'</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h2</td>
+	<td>Search for 'tinkering'</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=p</td>
+	<td>No matching results.</td>
+</tr>
+<!--...then search for puttering-->
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>puttering</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>puttering - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h2.searchResultsHeader</td>
+	<td>Search results for 'puttering'</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Advanced Puttering</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>Department</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/span</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/p</td>
+	<td>... Advanced Puttering ...</td>
+</tr>
+<!--...then search for baker-->
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>baker</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>baker - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h2.searchResultsHeader</td>
+	<td>Search results for 'baker'</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=locations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Thoughts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/span</td>
+	<td>Academic Article</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/p</td>
+	<td>... Baker, Able ...</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Advanced Puttering</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[3]/span</td>
+	<td>Department</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[3]/p</td>
+	<td>... Baker, Able ...</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Lemuria</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[4]/span</td>
+	<td>Continent</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[4]/p/strong</td>
+	<td>Baker</td>
+</tr>
+<!--Change label on object through standard contect node...-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Thoughts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Thoughts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=9915editLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>Musings</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=9915okLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=primaryAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<!--...then search for thoughts-->
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>thoughts</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Search for 'thoughts'</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h2</td>
+	<td>Search for 'thoughts'</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=p</td>
+	<td>No matching results.</td>
+</tr>
+<!--...then search for musings-->
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>musings</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>musings - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h2.searchResultsHeader</td>
+	<td>Search results for 'musings'</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Musings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>Academic Article</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/span</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=strong</td>
+	<td>Musings</td>
+</tr>
+<!--...then search for baker-->
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>baker</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>baker - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h2.searchResultsHeader</td>
+	<td>Search results for 'baker'</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=locations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>Honcho</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Advanced Puttering</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/span</td>
+	<td>Department</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=strong</td>
+	<td>Baker</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Musings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[3]/span</td>
+	<td>Academic Article</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[3]/p</td>
+	<td>... Baker, Able ...</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Lemuria</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[4]/span</td>
+	<td>Continent</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[4]/p</td>
+	<td>... Baker, Able ...</td>
+</tr>
 <!--Log out-->
 <tr>
 	<td>clickAndWait</td>
