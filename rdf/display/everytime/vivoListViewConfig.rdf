@@ -83,6 +83,40 @@
     </rdf:Description>
 
     <!--
+     ***********************************************************************
+     these properties have a range that is the union of 1 or more classes
+     ***********************************************************************
+    -->
+
+    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000029">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-rangeUnion.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000031">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-rangeUnion.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000038">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-rangeUnion.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000390">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-rangeUnion.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000398">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-rangeUnion.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#translatorOf">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-rangeUnion.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#documentationFor">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-rangeUnion.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#protocolRealizedBy">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-rangeUnion.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.w3.org/2006/vcard/ns#hasMember">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-rangeUnion.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+    <!--
      ******************************************************************
      data property custom list views
      ****************************************************************** 
