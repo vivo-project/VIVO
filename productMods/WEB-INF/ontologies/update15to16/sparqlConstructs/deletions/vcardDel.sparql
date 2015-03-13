@@ -1,0 +1,131 @@
+PREFIX arg: <http://purl.obolibrary.org/obo/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX v:   <http://www.w3.org/2006/vcard/ns#>
+PREFIX vivo: <http://vivoweb.org/ontology/core#>
+PREFIX bibo: <http://purl.org/ontology/bibo/> 
+
+CONSTRUCT {
+        ?s foaf:firstName ?firstName .
+        ?s foaf:lastName ?lastName .
+        ?s vivo:middleName ?middleName .
+        ?s bibo:prefixName ?prefix .
+        ?s bibo:suffixName ?suffix .
+        ?s vivo:email ?email .
+        ?s vivo:primaryEmail ?primaryEmail . 
+        ?s vivo:phoneNumber ?phoneNumber .
+        ?s vivo:primaryPhoneNumber ?primaryPhoneNumber .
+        ?s vivo:faxNumber ?faxNumber .
+        ?s vivo:mailingAddress ?address .
+        ?address vivo:mailingAddressFor ?s .
+        ?address a ?addressType .
+        ?address vivo:address1 ?address1 .
+        ?address vivo:address2 ?address2 .
+        ?address vivo:address3 ?address3 .
+        ?address vivo:addressCity ?city .
+        ?address vivo:addressState ?state .
+        ?address vivo:addressPostalCode ?postalCode .
+        ?address vivo:addressCountry ?country .
+        ?address vivo:hasGeographicLocation ?location .
+        ?location vivo:geographicLocationOf ?address .
+        ?s vivo:webpage ?webpage .
+        ?webpage vivo:webpageOf ?s .
+        ?webpage vivo:linkAnchorText ?linkAnchorText .
+        ?webpage vivo:linkURI ?linkURI .
+        ?webpage a vivo:URLLink .
+} WHERE {
+    {
+        ?s foaf:firstName ?firstName .
+    } 
+    UNION {
+        ?s foaf:lastName ?lastName .
+    } 
+    UNION {
+        ?s vivo:middleName ?middleName .
+        ?s a foaf:Person .
+    }
+    UNION {
+        ?s bibo:prefixName ?prefix 
+    } 
+    UNION {
+        ?s bibo:suffixName ?suffix
+    } 
+    UNION {
+        ?s vivo:email ?email
+    } 
+    UNION {
+        ?s vivo:primaryEmail ?primaryEmail 
+    } 
+    UNION {
+        ?s vivo:phoneNumber ?phoneNumber 
+    } 
+    UNION {
+        ?s vivo:primaryPhoneNumber ?primaryPhoneNumber
+    } 
+    UNION {
+        ?s vivo:faxNumber ?faxNumber
+    } 
+    UNION {
+        ?s vivo:mailingAddress ?address .
+    }
+    UNION {
+        ?address vivo:mailingAddressFor ?s .
+    }
+    UNION {
+        ?s vivo:mailingAddress ?address .
+        ?address a ?addressType 
+        FILTER(regex(str(?addressType),"vivoweb.org/ontology/core"))
+    }
+    UNION {
+        ?s vivo:mailingAddress ?address .
+        ?address vivo:address1 ?address1 .
+    } 
+    UNION {
+        ?s vivo:mailingAddress ?address .
+        ?address vivo:address2 ?address2 .
+    } 
+    UNION {
+        ?s vivo:mailingAddress ?address .
+        ?address vivo:address3 ?address3 .
+    } 
+    UNION {
+        ?s vivo:mailingAddress ?address .
+        ?address vivo:addressCity ?city .
+    } 
+    UNION {
+        ?s vivo:mailingAddress ?address .
+        ?address vivo:addressState ?state .
+    } 
+    UNION {
+        ?s vivo:mailingAddress ?address .
+        ?address vivo:addressPostalCode ?postalCode .
+    } 
+    UNION {
+        ?s vivo:mailingAddress ?address .
+        ?address vivo:addressCountry ?country .
+    } 
+    UNION {
+        ?s vivo:mailingAddress ?address .
+        ?address vivo:hasGeographicLocation ?location .
+    } 
+    UNION {
+        ?s vivo:mailingAddress ?address .
+        ?location vivo:geographicLocationOf ?address .
+    } 
+    UNION {
+        ?s vivo:webpage ?webpage 
+    }
+    UNION {
+        ?webpage vivo:webpageOf ?s
+    }
+    UNION {
+        ?s vivo:webpage ?webpage 
+    } 
+    UNION {
+        ?s vivo:webpage ?webpage .
+        ?webpage vivo:linkURI ?linkURI 
+    } 
+    UNION {
+        ?s vivo:webpage ?webpage .
+        ?webpage vivo:linkAnchorText ?linkAnchorText 
+    }
+}

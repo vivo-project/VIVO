@@ -1,0 +1,15 @@
+PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+CONSTRUCT {
+    ?educationalProcess <http://purl.obolibrary.org/obo/BFO_0000055> ?role .
+    ?role <http://purl.obolibrary.org/obo/BFO_0000054> ?educationalProcess .
+} WHERE {
+    ?educationalProcess vivo:contributingAdvising ?advising .
+    ?person <http://purl.obolibrary.org/obo/RO_0000056> ?educationalProcess .
+    ?person a foaf:Person .
+    ?educationalProcess a vivo:EducationalProcess .
+    ?advising vivo:relates ?role .
+    ?role a <http://purl.obolibrary.org/obo/BFO_0000023> .
+}
