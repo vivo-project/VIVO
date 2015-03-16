@@ -201,5 +201,6 @@ ${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/in
               '<script type="text/javascript" src="${urls.base}/js/individual/individualQtipBubble.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js?vers=1.5.1"></script>',
+			  '<script type="text/javascript" src="${urls.base}/js/individual/moreLessController.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/individual/individualProfilePageType.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/imageUpload/imageUploadUtils.js"></script>')}
