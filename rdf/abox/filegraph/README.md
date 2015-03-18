@@ -1,4 +1,4 @@
-This directory contains "ABox" files with with RDF assertions about named individuals to be loaded by the VIVO application when it starts.  There is a companion "abox" directory that contains RDF assertions about named individuals.
+This directory contains "ABox" files with with RDF assertions about named individuals to be loaded by the VIVO application when it starts.  There is a companion "tbox" directory that contains ontology class and property definitions.
 
 The TBox and ABox are separated because VIVO caches ontology classes and properties in memory for improved performance.  The contents of this directory will not be added to the cache.
 
