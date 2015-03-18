@@ -8,7 +8,7 @@ http://vitro.mannlib.cornell.edu/filegraph/tbox/example.owl
 
 At next startup, this graph will be checked against the contents of the file in the directory.  If the two are not isomorphic, the graph in the store will be cleared and reloaded to match the current contents of the file.  If the file no longer exists in the directory, the graph will be dropped entirely.
 
-If a syntactic error exists anywhere in one of these files, that file will not be able to be parsed and its corresponding graph will not be updated at all.  The parse error will be logged in vivo.all.log.
+If a file contains any syntax errors, it will not be able to be parsed and its corresponding graph will not be updated at all. The parse error will be logged in vivo.all.log.
 
 The following file formats are supported:
 
