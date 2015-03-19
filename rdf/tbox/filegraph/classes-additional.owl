@@ -307,12 +307,16 @@
                 <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+	<!-- This next one is commented out because it is handled by a faux property in the PropertyConfig.n3 file. -->
+	<!-- When uncommented, it results in duplicate properties being displayed.                                  -->
+	<!--
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000051"/>
                 <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/DocumentPart"/>
             </owl:Restriction>
-        </rdfs:subClassOf>
+        </rdfs:subClassOf>  
+	-->
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.org/ontology/bibo/numPages"/>
@@ -358,13 +362,16 @@
     <!-- http://purl.org/ontology/bibo/DocumentPart -->
 
     <owl:Class rdf:about="http://purl.org/ontology/bibo/DocumentPart">
-
+	<!-- This next one is commented out because it is handled by a faux property in the PropertyConfig.n3 file. -->
+	<!-- When uncommented, it results in duplicate properties being displayed.                                  -->
+	<!--
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/BFO_0000050"/>
                 <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
             </owl:Restriction>
-        </rdfs:subClassOf>
+        </rdfs:subClassOf>  
+	-->
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#publisher"/>
