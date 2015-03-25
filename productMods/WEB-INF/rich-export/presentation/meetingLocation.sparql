@@ -1,4 +1,4 @@
-PREFIX vivo: <http://vivoweb.org/ontology/core#>
+PREFIX core: <http://vivoweb.org/ontology/core#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 
