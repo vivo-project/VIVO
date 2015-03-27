@@ -15,15 +15,19 @@
 
 # ------------------------------------
 
-:extension_forContextNodes_1
+# Most context nodes look like this: relatedBy ==> node ==> relates
+#                                      relates <== node <== relatedBy
+:extension_forContextNodes
     a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
         <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ,
         <java:edu.cornell.mannlib.vitro.webapp.searchindex.extensions.LabelsAcrossContextNodes> ;
     rdfs:label "Labels across relatedBy/relates" ;
     :hasIncomingProperty "http://vivoweb.org/ontology/core#relatedBy" ;
     :hasOutgoingProperty "http://vivoweb.org/ontology/core#relates" .
-        
-:extension_forContextNodes_2
+
+# Some roles look like this:  bearerOf ==> role ==> roleContributesTo
+#                            inheresIn <== role <== contributingRole        
+:extension_forContextNodes_role_contributes_1
     a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
         <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ,
         <java:edu.cornell.mannlib.vitro.webapp.searchindex.extensions.LabelsAcrossContextNodes> ;
@@ -31,12 +35,48 @@
     :hasIncomingProperty "http://purl.obolibrary.org/obo/RO_0000053" ;
     :hasOutgoingProperty "http://vivoweb.org/ontology/core#roleContributesTo" .
         
-:extension_forContextNodes_3
+:extension_forContextNodes_role_contributes_2
     a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
         <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ,
         <java:edu.cornell.mannlib.vitro.webapp.searchindex.extensions.LabelsAcrossContextNodes> ;
     rdfs:label "Labels across contributor/inheresIn" ;
     :hasIncomingProperty "http://vivoweb.org/ontology/core#contributingRole" ;
+    :hasOutgoingProperty "http://purl.obolibrary.org/obo/RO_0000052" .
+        
+# Other roles look like this:  bearerOf ==> role ==> realizedIn
+#                             inheresIn <== role <== realizes        
+:extension_forContextNodes_role_realizedIn_1
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.extensions.LabelsAcrossContextNodes> ;
+    rdfs:label "Labels across bearerOf/realizedIn" ;
+    :hasIncomingProperty "http://purl.obolibrary.org/obo/RO_0000053" ;
+    :hasOutgoingProperty "http://purl.obolibrary.org/obo/BFO_0000054" .
+        
+:extension_forContextNodes_role_realizedIn_2
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.extensions.LabelsAcrossContextNodes> ;
+    rdfs:label "Labels across realizes/inheresIn" ;
+    :hasIncomingProperty "http://purl.obolibrary.org/obo/BFO_0000055" ;
+    :hasOutgoingProperty "http://purl.obolibrary.org/obo/RO_0000052" .
+        
+# Roles on grants look like this:  bearerOf ==> role ==> relatedBy
+#                                 inheresIn <== role <== relates
+:extension_forContextNodes_roles_on_grants_1
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.extensions.LabelsAcrossContextNodes> ;
+    rdfs:label "Labels across bearerOf/relates" ;
+    :hasIncomingProperty "http://purl.obolibrary.org/obo/RO_0000053" ;
+    :hasOutgoingProperty "http://vivoweb.org/ontology/core#relatedBy" .
+        
+:extension_forContextNodes_roles_on_grants_2
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.extensions.LabelsAcrossContextNodes> ;
+    rdfs:label "Labels across contributor/relatedBy" ;
+    :hasIncomingProperty "http://vivoweb.org/ontology/core#relates" ;
     :hasOutgoingProperty "http://purl.obolibrary.org/obo/RO_0000052" .
         
 
