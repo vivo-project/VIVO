@@ -5866,8 +5866,6 @@ bibo:Interview
 
 <http://purl.org/spar/c4o/hasGlobalCountDate>
       rdfs:label "has global count date"@en-US ;
-      vitro:customEntryFormAnnot
-              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimePropertyGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
@@ -8751,8 +8749,6 @@ vcard:OrganizationUnitName
 
 vivo:dateTime
       rdfs:label "date/time"@en-US , "date/time"@en-US ;
-      vitro:customEntryFormAnnot
-              "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.DateTimePropertyGenerator"^^xsd:string ;
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
