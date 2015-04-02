@@ -51,6 +51,7 @@ import com.hp.hpl.jena.rdf.model.Resource;
 
 import edu.cornell.mannlib.semservices.bo.Concept;
 import edu.cornell.mannlib.semservices.service.ExternalConceptService;
+import edu.cornell.mannlib.semservices.util.SKOSUtils;
 import edu.cornell.mannlib.semservices.util.XMLUtils;
 
 public class AgrovocService implements ExternalConceptService  {
@@ -70,16 +71,15 @@ public class AgrovocService implements ExternalConceptService  {
 	@Override
 	public List<Concept> getConcepts(String term) throws Exception {
 		List<Concept> conceptList = new ArrayList<Concept>();
-		//System.out.println("Searching for term: "+ term);
 		String result = getURIByTermAndLangXML(this.ontologyName, term, this.searchMode, this.format, this.lang);
 		// return empty conceptList if conceptUri is empty
         if (StringUtils.isEmpty(result)) {
         	return conceptList;
         }
 		
-		// First create a new SKOSManager
+		// Get the concept URI
 		String conceptUri = getConceptURIFromRDF(result);
-        SKOSManager manager = new SKOSManager();
+       
         
         // return empty conceptList if conceptUri is empty
         if (StringUtils.isEmpty(conceptUri)) {
@@ -89,11 +89,37 @@ public class AgrovocService implements ExternalConceptService  {
 		try {
 			uri = new URI(conceptUri);
 		} catch (URISyntaxException e) { 
-			e.printStackTrace();
+			logger.error("Error occurred with creating the URI ", e);
 			return conceptList;
 		}
 		
+		//Returns concept information in the format specified, which is currently XML
+		//This will return 
+		String conceptInfo = this.getConceptInfoByURI(this.ontologyName, conceptUri, this.format);
+		if(StringUtils.isNotEmpty(conceptInfo)) {
+			Concept c = this.createConcept("true", conceptUri, conceptInfo);
+			if(c != null) {
+				//Get definition from dbpedia references stored in the close Match list
+				List<String> closeMatches = c.getCloseMatchURIList();
+				for(String closeMatch: closeMatches) {
+					
+	            	if (closeMatch.startsWith("http://dbpedia.org")) {
+	            		String description = getDbpediaDescription(closeMatch);
+	            		//System.out.println("description: "+ description);
+	            		c.setDefinition(description);
+	            	}
+				}
+				conceptList.add(c);
+			}
+			
+		}
+		
+
+		//Get the concept itself using Agrovoc's own service or OWL ontology manager
+		
+		
 		//System.out.println("uri: "+uri); 
+		/*
         SKOSDataset dataset = manager.loadDataset(uri);
         
         for (SKOSConcept skosConcept : dataset.getSKOSConcepts()) {
@@ -153,91 +179,10 @@ public class AgrovocService implements ExternalConceptService  {
 					logger.debug("Literal retrieved for altlabel was null and was ignored");
 				}
 			}
-            concept.setAltLabelList(altLabelList);
             
-            
-            
-            // get the broader property URI
-            List<String> broaderURIList = new ArrayList<String>();
-            for (SKOSAnnotation annotation: skosConcept.getSKOSAnnotationsByURI(dataset, manager.getSKOSDataFactory().getSKOSBroaderProperty().getURI())) {
-            	String value = new String();
-            	if (annotation.isAnnotationByConstant()) {
-                   SKOSLiteral literal = annotation.getAnnotationValueAsConstant();
-                   value = literal.getLiteral(); 
-            	   //System.out.println("broder uri: "+ value);
-            	} else {
-                    // annotation is some resource
-                    SKOSEntity entity = annotation.getAnnotationValue();
-                    value = entity.getURI().toString();
-                }
-            	//System.out.println("broader uri: "+value);
-            	broaderURIList.add(value);
-            }
-            concept.setBroaderURIList(broaderURIList);
-            
-            // get the narrower property URI
-            List<String> narrowerURIList = new ArrayList<String>();
-            for (SKOSAnnotation annotation: skosConcept.getSKOSAnnotationsByURI(dataset, manager.getSKOSDataFactory().getSKOSNarrowerProperty().getURI())) {
-            	String value = new String();
-            	if (annotation.isAnnotationByConstant()) {
-                   SKOSLiteral literal = annotation.getAnnotationValueAsConstant();
-                   value = literal.getLiteral(); 
-            	   //System.out.println("narrower uri: "+ value);
-            	} else {
-                    // annotation is some resource
-                    SKOSEntity entity = annotation.getAnnotationValue();
-                    value = entity.getURI().toString();
-                }
-            	//System.out.println("narrower uri: "+value);
-            	narrowerURIList.add(value);
-            }
-            concept.setNarrowerURIList(narrowerURIList);
-            
-            // exact match
-            List<String> exactMatchURIList = new ArrayList<String>();
-            for (SKOSAnnotation annotation: skosConcept.getSKOSAnnotationsByURI(dataset, manager.getSKOSDataFactory().getSKOSExactMatchProperty().getURI())) {
-            	String value = new String();
-            	if (annotation.isAnnotationByConstant()) {
-                   SKOSLiteral literal = annotation.getAnnotationValueAsConstant();
-                   value = literal.getLiteral(); 
-            	   //System.out.println("exact match: "+ value);
-            	} else {
-                    // annotation is some resource
-                    SKOSEntity entity = annotation.getAnnotationValue();
-                    value = entity.getURI().toString();
-                }
-            	//System.out.println("exact match: "+value);
-            	exactMatchURIList.add(value);
-            }
-            concept.setExactMatchURIList(exactMatchURIList);
-            
-            // close match
-            List<String> closeMatchURIList = new ArrayList<String>();
-            for (SKOSAnnotation annotation: skosConcept.getSKOSAnnotationsByURI(dataset, manager.getSKOSDataFactory().getSKOSCloseMatchProperty().getURI())) {
-            	String value = new String();
-            	if (annotation.isAnnotationByConstant()) {
-                   SKOSLiteral literal = annotation.getAnnotationValueAsConstant();
-                   value = literal.getLiteral(); 
-            	   //System.out.println("close match: "+ value);
-            	} else {
-                    // annotation is some resource
-                    SKOSEntity entity = annotation.getAnnotationValue();
-                    value = entity.getURI().toString();
-                }
-            	//System.out.println("close match: "+value);
-            	closeMatchURIList.add(value);
-            	if (value.startsWith("http://dbpedia.org")) {
-            		String description = getDbpediaDescription(value);
-            		//System.out.println("description: "+ description);
-            		concept.setDefinition(description);
-            	}
-            }
-            concept.setCloseMatchURIList(closeMatchURIList);
-            
-            conceptList.add(concept);
              
 
-        }
+        }*/
 		return conceptList;
 	}
 
@@ -245,6 +190,32 @@ public class AgrovocService implements ExternalConceptService  {
        return getConcepts(term);
    }
    
+   
+   public Concept createConcept(String bestMatch, String skosConceptURI, String results) {
+
+	   Concept concept = new Concept();
+       //System.out.println("Concept: " + skosConcept.getURI());
+       concept.setUri(skosConceptURI);
+       concept.setConceptId(stripConceptId(skosConceptURI));
+       concept.setBestMatch(bestMatch);
+       concept.setDefinedBy(schemeUri);
+       concept.setSchemeURI(this.schemeUri);
+       concept.setType("");
+       String lang = "";
+       //Will need to get the language attribute
+		
+		//Utilize the XML directly instead of the SKOS API
+		try {
+			concept = SKOSUtils.createConceptUsingXML(concept, results, "xmlns", "en");
+			
+		}  catch(Exception ex) {
+			logger.debug("Error occurred for creating concept " + skosConceptURI, ex);
+			return null;
+		}
+		
+		
+		return concept;
+	}
    
    
    @Deprecated
@@ -511,5 +482,24 @@ public class AgrovocService implements ExternalConceptService  {
    }
    
    
+   //Get concept using agrovoc service
+   protected String getConceptInfoByURI(String ontologyName, String conceptURI, String format) {
+	      String result = new String();
+	      ACSWWebServiceServiceLocator locator = new ACSWWebServiceServiceLocator();
+	      try {
+	         URL url = new URL(AgrovocWS_address);
+	         ACSWWebService agrovoc_service = locator.getACSWWebService(url);
+	         result = agrovoc_service.getConceptByURI(ontologyName, conceptURI, format);
+	      } catch (ServiceException e) {
+	         logger.error("service exception", e);
+	         e.printStackTrace();
+	      }  catch (RemoteException e) {
+	         e.printStackTrace();
+	      } catch (MalformedURLException e) {
+	         e.printStackTrace();
+	      }
+
+	      return result;
+	   }
 
 }
