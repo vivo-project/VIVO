@@ -25,13 +25,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fao.www.webservices.AgrovocWS.ACSWWebService;
 import org.fao.www.webservices.AgrovocWS.ACSWWebServiceServiceLocator;
-import org.semanticweb.skos.SKOSAnnotation;
-import org.semanticweb.skos.SKOSConcept;
-import org.semanticweb.skos.SKOSDataset;
-import org.semanticweb.skos.SKOSEntity;
-import org.semanticweb.skos.SKOSLiteral;
-import org.semanticweb.skos.SKOSUntypedLiteral;
-import org.semanticweb.skosapibinding.SKOSManager;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -53,20 +46,20 @@ import edu.cornell.mannlib.semservices.bo.Concept;
 import edu.cornell.mannlib.semservices.service.ExternalConceptService;
 import edu.cornell.mannlib.semservices.util.SKOSUtils;
 import edu.cornell.mannlib.semservices.util.XMLUtils;
+import edu.cornell.mannlib.vitro.webapp.web.URLEncoder;
 
 public class AgrovocService implements ExternalConceptService  {
 	
    protected final Log logger = LogFactory.getLog(getClass());
    private java.lang.String AgrovocWS_address = "http://agrovoc.fao.org/axis/services/SKOSWS";
    private final String schemeUri = "http://aims.fao.org/aos/agrovoc/agrovocScheme";
-   private final String baseUri = "http://aims.fao.org/aos/agrovoc/";
    private final String ontologyName = "agrovoc";
    private final String format = "SKOS";
    private final String lang = "en";
-   private final String codeName = "hasCodeAgrovoc";
    private final String searchMode = "Exact Match";
    protected final String dbpedia_endpoint = " http://dbpedia.org/sparql";
-  
+   //URL to get all the information for a concept
+   protected final String conceptSkosMosURL = "http://aims.fao.org/skosmos/rest/v1/agrovoc/data?";
    
 	@Override
 	public List<Concept> getConcepts(String term) throws Exception {
@@ -94,25 +87,25 @@ public class AgrovocService implements ExternalConceptService  {
 		}
 		
 		//Returns concept information in the format specified, which is currently XML
-		//This will return 
-		String conceptInfo = this.getConceptInfoByURI(this.ontologyName, conceptUri, this.format);
-		if(StringUtils.isNotEmpty(conceptInfo)) {
-			Concept c = this.createConcept("true", conceptUri, conceptInfo);
-			if(c != null) {
-				//Get definition from dbpedia references stored in the close Match list
-				List<String> closeMatches = c.getCloseMatchURIList();
-				for(String closeMatch: closeMatches) {
-					
-	            	if (closeMatch.startsWith("http://dbpedia.org")) {
-	            		String description = getDbpediaDescription(closeMatch);
-	            		//System.out.println("description: "+ description);
-	            		c.setDefinition(description);
-	            	}
-				}
-				conceptList.add(c);
+		//Utilizing Agrovoc's getConceptInfo returns alternate and preferred labels but
+		//none of the exact match or close match descriptions
+	
+		Concept c = this.createConcept("true", conceptUri);
+		if(c != null) {
+			//Get definition from dbpedia references stored in the close Match list
+			List<String> closeMatches = c.getCloseMatchURIList();
+			for(String closeMatch: closeMatches) {
+				
+            	if (closeMatch.startsWith("http://dbpedia.org")) {
+            		String description = getDbpediaDescription(closeMatch);
+            		//System.out.println("description: "+ description);
+            		c.setDefinition(description);
+            	}
 			}
-			
+			conceptList.add(c);
 		}
+			
+	
 		
 
 		//Get the concept itself using Agrovoc's own service or OWL ontology manager
@@ -191,7 +184,7 @@ public class AgrovocService implements ExternalConceptService  {
    }
    
    
-   public Concept createConcept(String bestMatch, String skosConceptURI, String results) {
+   public Concept createConcept(String bestMatch, String skosConceptURI) {
 
 	   Concept concept = new Concept();
        //System.out.println("Concept: " + skosConcept.getURI());
@@ -201,12 +194,15 @@ public class AgrovocService implements ExternalConceptService  {
        concept.setDefinedBy(schemeUri);
        concept.setSchemeURI(this.schemeUri);
        concept.setType("");
-       String lang = "";
-       //Will need to get the language attribute
+     
+       String encodedURI = URLEncoder.encode(skosConceptURI);
+       String encodedFormat = URLEncoder.encode("application/rdf+xml");
+       String url = conceptSkosMosURL + "uri=" + encodedURI + "&format="+ encodedFormat;
 		
 		//Utilize the XML directly instead of the SKOS API
 		try {
-			concept = SKOSUtils.createConceptUsingXML(concept, results, "xmlns", "en");
+			
+			concept = SKOSUtils.createConceptUsingXMLFromURI(concept, url, "abbreviated", "en");
 			
 		}  catch(Exception ex) {
 			logger.debug("Error occurred for creating concept " + skosConceptURI, ex);

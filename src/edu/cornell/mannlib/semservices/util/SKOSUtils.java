@@ -71,12 +71,12 @@ public class SKOSUtils {
 	// Downloading the XML from the URI itself
 	//No language tag support here but can be specified if need be at this level as well
 	public static Concept createConceptUsingXMLFromURI(Concept concept,
-			String conceptUriString, String relationshipScheme) {
+			String conceptUriString, String relationshipScheme, String langTagValue) {
 		String results = getConceptXML(conceptUriString);
 		if (StringUtils.isEmpty(results)) {
 			return null;
 		}
-		return createConceptUsingXML(concept, results, relationshipScheme, null);
+		return createConceptUsingXML(concept, results, relationshipScheme, langTagValue);
 	}
 
 
@@ -169,6 +169,10 @@ public class SKOSUtils {
 	// Attribute name returns the value for the attribute on the node
 	// MatchAttributeValue: returns NODE values that MATCH this value for
 	// attributeName
+	//Extending this based on specific SKOSMos search for Agrovoc, sometimes
+	//results in format <skos:closeMatch rdf:resource "x">, other times in format <skos:closeMatch> <rfd:Description rdf:about="matchURI">..
+	//closeMatch and exactMatch use these patterns
+	//broader and narrower may be either rdf:resource pattern above or <skos:broader><skos:Concept rdf:about="...">...etc.
 	public static List<String> getValuesFromXML(NodeList nodes,
 			String attributeName, String matchAttributeValue) {
 		int len = nodes.getLength();
@@ -265,4 +269,15 @@ public class SKOSUtils {
 		return relationshipHash.get("narrower");
 	}
 
+	
+	//Custom cases for Agrovoc and/or similar patterns if they exist
+	//get about URI from <tag> <rdf:Description about="x"> - returns "x"
+	public static String getTagNestedAbout(Node n) {
+		return null;
+	}
+	
+	//get about URI from <tag><skos:Concept about="x">, returns "x"
+	public static String getTagNestedSKOSConceptAbout(Node n) {
+		return null;
+	}
 }
