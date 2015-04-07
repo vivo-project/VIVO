@@ -150,7 +150,7 @@ public class LCSHService implements ExternalConceptService {
 		//Utilize the XML directly instead of the SKOS API
 		try {
 			//LCSH doesn't need a language tag right now as results in english
-			concept = SKOSUtils.createConceptUsingXMLFromURI(concept, skosConceptURI, "abbreviated", null);
+			concept = SKOSUtils.createConceptUsingXMLFromURI(concept, skosConceptURI, null);
 			
 		}  catch(Exception ex) {
 			log.debug("Error occurred for annotation retrieval for skos concept " + skosConceptURI, ex);

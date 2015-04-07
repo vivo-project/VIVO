@@ -71,12 +71,12 @@ public class SKOSUtils {
 	// Downloading the XML from the URI itself
 	//No language tag support here but can be specified if need be at this level as well
 	public static Concept createConceptUsingXMLFromURI(Concept concept,
-			String conceptUriString, String relationshipScheme, String langTagValue) {
+			String conceptUriString, String langTagValue) {
 		String results = getConceptXML(conceptUriString);
 		if (StringUtils.isEmpty(results)) {
 			return null;
 		}
-		return createConceptUsingXML(concept, results, relationshipScheme, langTagValue);
+		return createConceptUsingXML(concept, results,  langTagValue);
 	}
 
 
@@ -85,9 +85,9 @@ public class SKOSUtils {
 	// Lang tag value, if populated, will return pref label and alt label which
 	// match that language tag value
 	public static Concept createConceptUsingXML(Concept concept,
-			String results, String relationshipScheme, String langTagValue) {
+			String results, String langTagValue) {
 
-		HashMap<String, String> relationshipHash = getRelationshipHash(relationshipScheme);
+		HashMap<String, String> relationshipHash = getRelationshipHash();
 		try {
 			Document doc = XMLUtils.parse(results);
 			// Preferred label
@@ -124,18 +124,19 @@ public class SKOSUtils {
 
 			
 			//Broder, narrower, exact match, and close match properties
-			List<String> broaderURIList = getValuesFromXMLNodes(doc,
-					getBroaderTag(relationshipHash), "rdf:resource");
+			String conceptURI = concept.getUri();
+			List<String> broaderURIList = getBroaderOrNarrowerURIs(doc, getBroaderTag(relationshipHash));
+			broaderURIList = removeConceptURIFromList(broaderURIList, conceptURI);
 			concept.setBroaderURIList(broaderURIList);
-			List<String> narrowerURIList = getValuesFromXMLNodes(doc,
-					getNarrowerTag(relationshipHash), "rdf:resource");
+			List<String> narrowerURIList = getBroaderOrNarrowerURIs(doc, getNarrowerTag(relationshipHash));
+			narrowerURIList = removeConceptURIFromList(narrowerURIList, conceptURI);
 			concept.setNarrowerURIList(narrowerURIList);
 
-			List<String> exactMatchURIList = getValuesFromXMLNodes(doc,
-					getExactMatchTag(relationshipHash), "rdf:resource");
+			List<String> exactMatchURIList = getCloseOrExactMatchURIs(doc, getExactMatchTag(relationshipHash));
+			exactMatchURIList = removeConceptURIFromList(exactMatchURIList, conceptURI);
 			concept.setExactMatchURIList(exactMatchURIList);
-			List<String> closeMatchURIList = getValuesFromXMLNodes(doc,
-					getCloseMatchTag(relationshipHash), "rdf:resource");
+			List<String> closeMatchURIList =  getCloseOrExactMatchURIs(doc, getCloseMatchTag(relationshipHash));
+			closeMatchURIList = removeConceptURIFromList(closeMatchURIList, conceptURI);
 			concept.setCloseMatchURIList(closeMatchURIList);
 
 		} catch (IOException e) {
@@ -149,6 +150,15 @@ public class SKOSUtils {
 		return concept;
 
 	}
+	
+	//Because of the fact the xml returns matches by tag name, and the XML may look like <skos:narrower><skos:Concept ..><skos:broader rdf:resource:"conceptURI">
+	//where conceptURI is the concept that is the subject of skos:narrower, we need to ensure we are not returning the same uri as that of the main concept
+	public static List<String> removeConceptURIFromList(List<String> uris, String conceptURI) {
+		//remove will return a boolean if the value exists in the list and is removed
+		//if/when it returns false, the URI is not in the list
+		while(uris.remove(conceptURI)) {};
+		return uris;
+	}
 
 	// Default to English for search results but this should be made
 	// configurable
@@ -160,7 +170,7 @@ public class SKOSUtils {
 	public static List<String> getValuesFromXMLNodes(Document doc,
 			String tagName, String attributeName, String matchAttributeValue) {
 		NodeList nodes = doc.getElementsByTagName(tagName);
-
+		
 		return getValuesFromXML(nodes, attributeName, matchAttributeValue);
 	}
 
@@ -181,32 +191,41 @@ public class SKOSUtils {
 		List<String> values = new ArrayList<String>();
 		for (i = 0; i < len; i++) {
 			Node node = nodes.item(i);
-			// If no attribute name specified, then get the node content
-			if (StringUtils.isEmpty(attributeName)) {
-				values.add(node.getTextContent());
-			} else {
-				// Attribute name is specified
-				// Get the value for the attribute itself
-				String attributeValue = getAttributeValue(attributeName, node);
-				// If no matching value for attribute specified, return the
-				// value of the attribute itself
-				// e.g. value of "lang" attribute which is "en"
-				if (StringUtils.isEmpty(matchAttributeValue)) {
-					values.add(attributeValue);
-				} else {
-					// match attribute and match value are both specified, so
-					// return NODE value that matches attribute value for given
-					// attribute name
-					// e.g. preferred label node value where lang = "en"
-					if (attributeValue.equals(matchAttributeValue)) {
-						values.add(node.getTextContent());
-					}
-				}
+			String nodeValue = getNodeValue(node, attributeName, matchAttributeValue);
+			if(StringUtils.isNotEmpty(nodeValue)) {
+				values.add(nodeValue);
 			}
 		}
 		return values;
 	}
 
+	public static String getNodeValue(Node node, String attributeName, String matchAttributeValue) {
+		String value = null;
+		if (StringUtils.isEmpty(attributeName)) {
+			value = node.getTextContent();
+		} else {
+			// Attribute name is specified
+			// Get the value for the attribute itself
+			String attributeValue = getAttributeValue(attributeName, node);
+			// If no matching value for attribute specified, return the
+			// value of the attribute itself
+			// e.g. value of "lang" attribute which is "en"
+			if (StringUtils.isEmpty(matchAttributeValue)) {
+				value = attributeValue;
+			} else {
+				// match attribute and match value are both specified, so
+				// return NODE value that matches attribute value for given
+				// attribute name
+				// e.g. preferred label node value where lang = "en"
+				if (attributeValue.equals(matchAttributeValue)) {
+					value = node.getTextContent();
+				}
+			}
+		}
+		return value;
+	}
+	
+	
 	public static String getAttributeValue(String attributeName, Node node) {
 		NamedNodeMap attrs = node.getAttributes();
 		Attr a = (Attr) attrs.getNamedItem(attributeName);
@@ -218,26 +237,18 @@ public class SKOSUtils {
 
 	// The Hash will depend on the particular RDF results
 	// TODO: Refactor this in a better method
-	public static HashMap<String, String> getRelationshipHash(String tagset) {
+	public static HashMap<String, String> getRelationshipHash() {
 		HashMap<String, String> relationshipHash = new HashMap<String, String>();
 		String[] tagsArray = { "prefLabel", "altLabel", "broader", "narrower",
 				"exactMatch", "closeMatch" };
 		List<String> tags = Arrays.asList(tagsArray);
 
-		switch (tagset) {
-		case "xmlns":
-			for (String tag : tags) {
-				relationshipHash.put(tag, tag);
-			}
-			break;
-		case "abbreviated":
+		
+		
 			for (String tag : tags) {
 				relationshipHash.put(tag, "skos:" + tag);
 			}
-			break;
-		default:
-			break;
-		}
+			
 		return relationshipHash;
 
 	}
@@ -270,14 +281,110 @@ public class SKOSUtils {
 	}
 
 	
-	//Custom cases for Agrovoc and/or similar patterns if they exist
-	//get about URI from <tag> <rdf:Description about="x"> - returns "x"
-	public static String getTagNestedAbout(Node n) {
-		return null;
+	/**
+	 * 
+	 * Broader, narrower, close match, and exact match may be nested values - e.g. Agrovoc
+	 * Even with Agrovoc, they may be nested sometimes and not be nested other times
+	 * The code below handles both situations so the URIs can be returned
+	 */
+	
+	//Broader and narrower values
+	//Attribute name will be language tag
+
+	
+	public static List<String> getBroaderOrNarrowerURIs(Document doc,
+			String tagName) {
+		NodeList nodes = doc.getElementsByTagName(tagName);
+		List<String> uris = getPossiblyNestedValuesFromXML(nodes, "rdf:resource", "skos:Concept", "rdf:about");
+		return uris;
+	}	
+	
+	//Close and exact match
+	public static List<String> getCloseOrExactMatchURIs(Document doc,
+			String tagName) {
+		NodeList nodes = doc.getElementsByTagName(tagName);
+		List<String> uris = getPossiblyNestedValuesFromXML(nodes, "rdf:resource", "rdf:Description", "rdf:about");
+		return uris;
 	}
 	
-	//get about URI from <tag><skos:Concept about="x">, returns "x"
-	public static String getTagNestedSKOSConceptAbout(Node n) {
-		return null;
+	
+	
+	public static List<String> getPossiblyNestedValuesFromXML(NodeList nodes, String nodeAttributeName, String childNodeTagName, String childNodeAttributeName ) {
+		int len = nodes.getLength();
+		int i;
+
+		List<String> values = new ArrayList<String>();
+		for (i = 0; i < len; i++) {
+			Node node = nodes.item(i);
+			//String nodeValue = getNodeValue(node, attributeName, matchAttributeValue);
+			String nodeValue = getPossiblyNestedNodeValue(node, nodeAttributeName, childNodeTagName, childNodeAttributeName);
+			if(StringUtils.isNotEmpty(nodeValue)) {
+				values.add(nodeValue);
+			}
+		}
+		return values;
 	}
+	//Given node = <tag attrb="attrbvalue">
+	//If tag has no attribute that matches attributeName with attributevalue
+	//and tag has nested children with a given tag name, i.e. <tag><nestedtag nestedattributename=nestedattributevalue>
+	//then retrieve the nested attribute value
+	//For example:
+	//if the node looks like <skos:closeMatch rdf:resource="x"> then get x
+	//but if the node looks like <skos:closeMatch><rdf:description rdf:about="x"> then get x 
+	public static String getPossiblyNestedNodeValue(Node node, String nodeAttributeName, String childNodeTagName,
+			String childNodeAttributeName) {
+		String value = null;
+		String attributeValue = getAttributeValue(nodeAttributeName, node);
+		if(StringUtils.isNotEmpty(attributeValue)) {
+			value = attributeValue;
+		} else {
+			//Check child nodes and see if any of those have the same name as childNodeTagName
+			NodeList childNodes = node.getChildNodes();
+			int numberNodes = childNodes.getLength();
+			int i;
+			for(i = 0; i < numberNodes; i++) {
+				Node childNode = childNodes.item(i);
+				String nodeName = childNode.getNodeName();
+				if(nodeName.equals(childNodeTagName)) {
+					value = getAttributeValue(childNodeAttributeName, childNode);
+					break; //will only get the first one
+				}
+				
+			}
+			
+			
+		}
+		
+		
+		return value;
+	}
+	
+	//Custom cases for Agrovoc and/or similar patterns if they exist
+		//get about URI from <tag> <rdf:Description about="x"> - returns "x"
+		public static String getTagNestedAbout(Node n) {
+			NodeList childNodes = n.getChildNodes();
+			int numberNodes = childNodes.getLength();
+			int i;
+			for(i = 0; i < numberNodes; i++) {
+				Node childNode = childNodes.item(i);
+				String nodeName = childNode.getNodeName();
+				String aboutValue = getAttributeValue("about", childNode);
+			}
+			return null;
+		}
+		
+		//get about URI from <tag><skos:Concept about="x">, returns "x"
+		public static String getTagNestedSKOSConceptAbout(Node n) {
+			NodeList childNodes = n.getChildNodes();
+			int numberNodes = childNodes.getLength();
+			int i;
+			for(i = 0; i < numberNodes; i++) {
+				Node childNode = childNodes.item(i);
+				String nodeName = childNode.getNodeName();
+				String aboutValue = getAttributeValue("about", childNode);
+
+			}
+			return null;
+		}
+	
 }

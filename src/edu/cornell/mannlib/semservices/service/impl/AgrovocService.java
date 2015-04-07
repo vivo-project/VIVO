@@ -104,78 +104,7 @@ public class AgrovocService implements ExternalConceptService  {
 			}
 			conceptList.add(c);
 		}
-			
-	
 		
-
-		//Get the concept itself using Agrovoc's own service or OWL ontology manager
-		
-		
-		//System.out.println("uri: "+uri); 
-		/*
-        SKOSDataset dataset = manager.loadDataset(uri);
-        
-        for (SKOSConcept skosConcept : dataset.getSKOSConcepts()) {
-        	Concept concept = new Concept();
-            //System.out.println("Concept: " + skosConcept.getURI());
-            concept.setUri(skosConcept.getURI().toString());
-            concept.setConceptId(stripConceptId(skosConcept.getURI().toString()));
-            concept.setBestMatch("true");
-            concept.setDefinedBy(schemeUri);
-            concept.setSchemeURI(this.schemeUri);
-            concept.setType("");
-            String lang = "";
-            
-            for (SKOSLiteral literal : skosConcept.getSKOSRelatedConstantByProperty(dataset, manager.getSKOSDataFactory().getSKOSPrefLabelProperty())) {
-              if(literal != null) {
-	              if (!literal.isTyped()) {
-	                  // if it has  language
-	                  SKOSUntypedLiteral untypedLiteral = literal.getAsSKOSUntypedLiteral();
-	                  if (untypedLiteral.hasLang()) {
-	                      lang = untypedLiteral.getLang();
-	                  } else {
-	                	  lang = "";
-	                  }
-	              }
-	              if (lang.equals("en")) {
-	                 //System.out.println("prefLabel: " + literal.getLiteral());
-	                 
-	                 concept.setLabel(literal.getLiteral());
-	              }
-              } else {
-            	  logger.debug("Literal returned for preferred label was null and was ignored");
-              }
-            }
-            
-            // get altLabels
-            List<String> altLabelList = new ArrayList<String>();
-			for (SKOSLiteral literal : skosConcept
-					.getSKOSRelatedConstantByProperty(dataset, manager
-							.getSKOSDataFactory().getSKOSAltLabelProperty())) {
-				if(literal != null) {
-					if (!literal.isTyped()) {
-						// if it has language
-						SKOSUntypedLiteral untypedLiteral = literal
-								.getAsSKOSUntypedLiteral();
-						if (untypedLiteral.hasLang()) {
-							lang = untypedLiteral.getLang();
-						} else {
-							lang = "";
-						}
-					}
-					//System.out.println("literal: "+ literal.getLiteral());
-					if (lang.equals("en")) {
-						//System.out.println("altLabel: " + literal.getLiteral());
-						altLabelList.add(literal.getLiteral());
-					}
-				} else {
-					logger.debug("Literal retrieved for altlabel was null and was ignored");
-				}
-			}
-            
-             
-
-        }*/
 		return conceptList;
 	}
 
@@ -187,7 +116,6 @@ public class AgrovocService implements ExternalConceptService  {
    public Concept createConcept(String bestMatch, String skosConceptURI) {
 
 	   Concept concept = new Concept();
-       //System.out.println("Concept: " + skosConcept.getURI());
        concept.setUri(skosConceptURI);
        concept.setConceptId(stripConceptId(skosConceptURI));
        concept.setBestMatch(bestMatch);
@@ -202,7 +130,7 @@ public class AgrovocService implements ExternalConceptService  {
 		//Utilize the XML directly instead of the SKOS API
 		try {
 			
-			concept = SKOSUtils.createConceptUsingXMLFromURI(concept, url, "abbreviated", "en");
+			concept = SKOSUtils.createConceptUsingXMLFromURI(concept, url, "en");
 			
 		}  catch(Exception ex) {
 			logger.debug("Error occurred for creating concept " + skosConceptURI, ex);
