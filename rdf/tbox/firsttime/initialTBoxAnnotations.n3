@@ -7648,7 +7648,9 @@ vivo:publicationVenueFor
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
       vitro:displayRankAnnot
-              "60"^^xsd:int ;
+              "6"^^xsd:int ;
+      vitro:inPropertyGroupAnnot
+              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:hiddenFromPublishBelowRoleLevelAnnot
