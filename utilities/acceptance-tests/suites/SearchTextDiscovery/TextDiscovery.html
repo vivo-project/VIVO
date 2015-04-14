@@ -256,11 +256,6 @@
 	<td>css=span.display-title</td>
 	<td>Person</td>
 </tr>
-<tr>
-	<td>verifyText</td>
-	<td>css=p.snippet</td>
-	<td>... seeker of truth ...</td>
-</tr>
 <!--Special case: preferred title-->
 <tr>
 	<td>clickAndWait</td>
@@ -639,16 +634,6 @@
 	<td>link=Atlantis</td>
 	<td></td>
 </tr>
-<tr>
-	<td>verifyText</td>
-	<td>//div[@id='wrapper-content']/div/ul/li[2]/span</td>
-	<td>Continent</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>//div[@id='wrapper-content']/div/ul/li[2]/p</td>
-	<td>... Baker, Able ...</td>
-</tr>
 <!--Object through context node: role-->
 <tr>
 	<td>clickAndWait</td>
@@ -791,9 +776,14 @@
 	<td>Honcho</td>
 </tr>
 <tr>
+	<td>verifyElementPresent</td>
+	<td>link=Advanced Tinkering</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyText</td>
-	<td>//div[@id='wrapper-content']/div/ul/li[2]/p</td>
-	<td>... Advanced Tinkering ...</td>
+	<td>css=span.display-title</td>
+	<td>Department</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -851,11 +841,6 @@
 	<td>Department</td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>//div[@id='wrapper-content']/div/ul/li[2]/p</td>
-	<td>... Baker, Able ...</td>
-</tr>
-<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Atlantis</td>
 	<td></td>
@@ -864,11 +849,6 @@
 	<td>verifyText</td>
 	<td>//div[@id='wrapper-content']/div/ul/li[3]/span</td>
 	<td>Continent</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>//div[@id='wrapper-content']/div/ul/li[3]/p</td>
-	<td>... Baker, Able ...</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -1155,11 +1135,6 @@
 	<td>verifyText</td>
 	<td>//div[@id='wrapper-content']/div/ul/li[3]/span</td>
 	<td>Academic Article</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>//div[@id='wrapper-content']/div/ul/li[3]/p</td>
-	<td>... Baker, Able ...</td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
