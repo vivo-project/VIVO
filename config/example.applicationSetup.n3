@@ -101,7 +101,7 @@
 #    :hasTdbDirectory "tdbContentModels" .
 
 #:sparqlContentTripleSource
-#    a   <java:edu.cornell.mannlib.vitro.webapp.triplesource.impl.virtuoso.ContentTripleSourceSPARQL> ,
+#    a   <java:edu.cornell.mannlib.vitro.webapp.triplesource.impl.sparql.ContentTripleSourceSPARQL> ,
 #        <java:edu.cornell.mannlib.vitro.webapp.modules.tripleSource.ContentTripleSource> ;
 #    # The URI of the SPARQL endpoint for your triple-store.
 #    :hasEndpointURI "PUT_YOUR_SPARQL_ENDPOINT_URI_HERE" ;
