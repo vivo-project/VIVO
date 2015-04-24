@@ -41,16 +41,8 @@ public class LCSHService implements ExternalConceptService {
 	private final String schemeUri = hostUri + "/authorities/subjects";
 	private final String baseUri = hostUri + "/search/";
 
-	protected final String dbpedia_endpoint = " http://dbpedia.org/sparql";
-	//Property uris used for SKOS
-	protected final String SKOSNotePropertyURI = "http://www.w3.org/2004/02/skos/core#note";
-	protected final String SKOSPrefLabelURI = "http://www.w3.org/2004/02/skos/core#prefLabel";
-	protected final String SKOSAltLabelURI = "http://www.w3.org/2008/05/skos-xl#altLabel";
-	protected final String SKOSBroaderURI = "http://www.w3.org/2004/02/skos/core#broader";
-	protected final String SKOSNarrowerURI = "http://www.w3.org/2004/02/skos/core#narrower";
-	protected final String SKOSExactMatchURI = "http://www.w3.org/2004/02/skos/core#exactMatch";
-	protected final String SKOSCloseMatchURI = "http://www.w3.org/2004/02/skos/core#closeMatch";
-
+	
+	
 	@Override
 	public List<Concept> getConcepts(String term) throws Exception {
 		List<Concept> conceptList = new ArrayList<Concept>();
@@ -95,12 +87,7 @@ public class LCSHService implements ExternalConceptService {
 	// that might exist
 	private List<Concept> processOutput(String results) throws Exception {
 		List<Concept> conceptList = new ArrayList<Concept>();
-		//SKOSManager manager = new SKOSManager();
 		// Get uris from the results
-		// Properties we will be querying for
-		//SKOSDataFactory sdf = manager.getSKOSDataFactory();
-		
-
 		List<String> uris = getConceptURIFromXML(results);
 		String bestMatch = "true";
 		int i = 0;
@@ -109,17 +96,19 @@ public class LCSHService implements ExternalConceptService {
 				bestMatch = "false";
 			}
 			log.debug("-" + uri + "-");
-			String conceptUriString = getSKOSURI(uri);
+			//This is the URL for retrieving the concept - the pattern is http://id.loc.gov/authorities/subjects/sh85014203.skos.rdf
+			//This is not the URI itself which would be http://id.loc.gov/authorities/subjects/sh85014203
+			String conceptURLString = getSKOSURL(uri);
 			String baseConceptURI = getConceptURI(uri);
-			URI conceptURI = null;
+			URL conceptURL = null;
 			try {
-				conceptURI = new URI(conceptUriString);
-			} catch (URISyntaxException e) {
-				log.error("URI syntax exception in trying to get concept uri " + conceptUriString, e);
+				conceptURL = new URL(conceptURLString);
+			} catch (Exception e) {
+				log.error("Error in trying to retrieve concept " + conceptURLString, e);
 				return conceptList;
 			}
-			log.debug("loading concept uri " + conceptUriString);
-			Concept c = this.createConcept(bestMatch, conceptUriString);
+			log.debug("loading concept uri " + conceptURLString);
+			Concept c = this.createConcept(bestMatch, conceptURLString, baseConceptURI);
 			if(c != null) {
 				conceptList.add(c);
 			}
@@ -133,7 +122,7 @@ public class LCSHService implements ExternalConceptService {
 	//Load individual concept using a request
 	//private 
 	
-	public Concept createConcept(String bestMatch, String skosConceptURI) {
+	public Concept createConcept(String bestMatch, String conceptURLString, String skosConceptURI) {
 
 		Concept concept = new Concept();
 		
@@ -150,7 +139,8 @@ public class LCSHService implements ExternalConceptService {
 		//Utilize the XML directly instead of the SKOS API
 		try {
 			//LCSH doesn't need a language tag right now as results in english
-			concept = SKOSUtils.createConceptUsingXMLFromURI(concept, skosConceptURI, null);
+			//Also want to add skos notes as definition
+			concept = SKOSUtils.createConceptUsingXMLFromURL(concept, conceptURLString, null, true);
 			
 		}  catch(Exception ex) {
 			log.debug("Error occurred for annotation retrieval for skos concept " + skosConceptURI, ex);
@@ -163,7 +153,7 @@ public class LCSHService implements ExternalConceptService {
 	
 
 
-	private String getSKOSURI(String uri) {
+	private String getSKOSURL(String uri) {
 		// Strip .xml at the end and replace with .skos.rdf
 		String skosURI = uri;
 		if (uri.endsWith(".xml")) {
