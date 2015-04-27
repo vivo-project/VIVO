@@ -111,10 +111,11 @@
 #:virtuosoContentTripleSource
 #    a   <java:edu.cornell.mannlib.vitro.webapp.triplesource.impl.virtuoso.ContentTripleSourceVirtuoso> ,
 #        <java:edu.cornell.mannlib.vitro.webapp.modules.tripleSource.ContentTripleSource> ;
-#    # The URI of Virtuoso's SPARQL endpoint.
-#    :hasEndpointURI "PUT_YOUR_VIRTUOSO_URI_HERE" ;
-#    # The URI to use for SPARQL UPDATE calls against Virtuoso. 
-#    :hasUpdateEndpointURI "PUT_THE UPDATE_URI_HERE" .
+#    # The URI where Virtuoso can be accessed: don't include the /sparql path.
+#    :hasBaseURI "http://localhost:8890" ;
+#    # The name and password of a Virtuoso account that has the SPARQL_UPDATE role.
+#    :hasUsername "USERNAME" ;
+#    :hasPassword "PASSWORD" .
 
 
 # ----------------------------
