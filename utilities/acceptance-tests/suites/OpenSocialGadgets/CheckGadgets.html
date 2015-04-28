@@ -86,14 +86,15 @@
 	<td></td>
 </tr>
 <!--Verify gadgets appear-->
+<!--IF ANY GADGETS APPEAR THE TEST IS PASSED!-->
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Websites</td>
+	<td>link=Hello RDF!</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Hello RDF!</td>
+	<td>link=Websites</td>
 	<td></td>
 </tr>
 <tr>
@@ -142,6 +143,21 @@
 	<td>verifyTextPresent</td>
 	<td>OpenSocial</td>
 	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=remote_iframe_0_title</td>
+	<td>Google site search: full text search results XX</td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>remote_iframe_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>id=content</td>
+	<td>Additional search results for frank</td>
 </tr>
 <!--Log out-->
 <tr>
