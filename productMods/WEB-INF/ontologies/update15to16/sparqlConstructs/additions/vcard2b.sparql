@@ -1,0 +1,13 @@
+PREFIX arg: <http://purl.obolibrary.org/obo/> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+PREFIX v:   <http://www.w3.org/2006/vcard/ns#> 
+PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+CONSTRUCT {
+    ?name v:givenName ?firstName .
+} WHERE {
+     ?s foaf:firstName ?firstName .
+     ?s arg:ARG_2000028 ?vcard .
+     ?vcard v:hasName ?name
+}

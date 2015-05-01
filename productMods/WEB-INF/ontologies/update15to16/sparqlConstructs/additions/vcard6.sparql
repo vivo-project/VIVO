@@ -1,0 +1,19 @@
+PREFIX arg: <http://purl.obolibrary.org/obo/> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+PREFIX v:   <http://www.w3.org/2006/vcard/ns#> 
+PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+
+CONSTRUCT {
+    ?vcard v:hasTelephone _:primaryTelephone .
+    _:primaryTelephone a v:Telephone .
+    _:primaryTelephone a v:Voice .
+    _:primaryTelephone a v:Work .
+    _:primaryTelephone v:telephone ?primaryPhoneNumber .
+} WHERE {
+    ?s vivo:primaryPhoneNumber ?primaryPhoneNumber .
+    ?s arg:ARG_2000028 ?vcard .
+    FILTER NOT EXISTS {
+        ?vcard v:hasTelephone ?telephoneNode .
+        ?vcard a v:Work .
+    }
+}

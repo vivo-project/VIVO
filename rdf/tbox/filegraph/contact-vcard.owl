@@ -540,7 +540,7 @@
 
         <owl:equivalentClass>
             <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
+                <owl:unionOf rdf:parseType="Collection">
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
                             <owl:Restriction>
@@ -589,7 +589,7 @@
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
-                </owl:intersectionOf>
+                </owl:unionOf>
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">These types are concerned with information related to the delivery addressing or label for the vCard object</rdfs:comment>
@@ -786,7 +786,7 @@ Was called CALADRURI in vCard</rdfs:comment>
 
         <owl:equivalentClass>
             <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
+                <owl:unionOf rdf:parseType="Collection">
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
                             <owl:Restriction>
@@ -835,7 +835,7 @@ Was called CALADRURI in vCard</rdfs:comment>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
-                </owl:intersectionOf>
+                </owl:unionOf>
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">These properties describe information about how to communicate with the object the vCard represents</rdfs:comment>
@@ -927,7 +927,7 @@ Was called CALADRURI in vCard</rdfs:comment>
 
         <owl:equivalentClass>
             <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
+                <owl:unionOf rdf:parseType="Collection">
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
                             <owl:Restriction>
@@ -976,7 +976,7 @@ Was called CALADRURI in vCard</rdfs:comment>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
-                </owl:intersectionOf>
+                </owl:unionOf>
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">These properties are concerned with additional explanations, such as that related to informational notes or revisions specific to the  vCard</rdfs:comment>
@@ -1131,7 +1131,7 @@ Was called CALADRURI in vCard</rdfs:comment>
 
         <owl:equivalentClass>
             <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
+                <owl:unionOf rdf:parseType="Collection">
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
                             <owl:Restriction>
@@ -1180,7 +1180,7 @@ Was called CALADRURI in vCard</rdfs:comment>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
-                </owl:intersectionOf>
+                </owl:unionOf>
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">These types are used to capture information associated with the identification and naming of the entity associated with the vCard</rdfs:comment>

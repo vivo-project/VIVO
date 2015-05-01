@@ -1,0 +1,12 @@
+PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+CONSTRUCT {
+    ?award vivo:assignedBy ?org .
+    ?org vivo:assigns ?award .
+} WHERE {
+    ?org vivo:assigns ?award .
+    ?award a vivo:Award .
+    ?org a foaf:Organization .
+}

@@ -1,0 +1,18 @@
+# $This file is distributed under the terms of the license in /doc/license.txt$ 
+	
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+## The example below demonstrates how you can associate particular ModelChangePreprocessors
+## with the application as a whole.  These preprocessors will be run with
+## every edit/addition in N3EditUtils.preprocessModels(changes, configuration, vreq);	
+
+## Defines the preprocessor class 
+## Can extend this to define what the constructor arguments should be if required, and then N3EditUtils.java should be modified
+## to know it can pull out parameters based on what is defined in the display  model
+
+# Testing to see if this will be read in BECAUSE this has changed and should be read in
+# <java:edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.TestModelChangePreprocessor>   
+# a <java:edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.ModelChangePreprocessor>  .  

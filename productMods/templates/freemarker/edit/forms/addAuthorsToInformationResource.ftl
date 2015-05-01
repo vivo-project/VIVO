@@ -51,7 +51,7 @@
 
 <h3>${i18n().manage_authors}</h3>
 
-<ul id="authorships" ${ulClass}>
+<ul id="dragDropList" ${ulClass}>
 
 <script type="text/javascript">
     var authorshipData = [];
@@ -67,10 +67,10 @@
 	<li class="authorship">
 			<#-- span.author will be used in the next phase, when we display a message that the author has been
 			removed. That text will replace the a.authorName, which will be removed. -->    
-			<span class="author">
+			<span class="authorship">
 					<#-- This span is here to assign a width to. We can't assign directly to the a.authorName,
 					for the case when it's followed by an em tag - we want the width to apply to the whole thing. -->
-					<span class="authorNameWrapper">
+					<span class="itemName">
 							<#if (authorUri?length > 0)>
 									<span class="authorName">${authorName}</span>
 								<#else>      
@@ -108,7 +108,7 @@
     <h3>${i18n().add_an_author}</h3>
 
     <div style="display:inline">
-        <input type="radio" name="authorType" class="person-radio" value="" role="radio" checked style="display:inline;margin-top:20px" />
+        <input type="radio" name="authorType" class="person-radio" value="" role="radio" checked />
         <label class="inline" for="Person" >${i18n().person_capitalized}</label>
         <input type="radio" name="authorType" class="org-radio" value="http://xmlns.com/foaf/0.1/Organization" role="radio" style="display:inline;margin-left:18px" />
         <label class="inline" for="Organization">${i18n().organization_capitalized}</label>
@@ -192,14 +192,14 @@ var i18nStrings = {
     authorTypeText: '${i18n().author_capitalized}',
     organizationTypeText: '${i18n().organization_capitalized}',
     helpTextSelect: '${i18n().select_an_existing}',
-    helptextAdd: '${i18n().or_add_new_one}'
+    helpTextAdd: '${i18n().or_add_new_one}'
 };
 </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />',
 					'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />',
 					'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/autocomplete.css" />',
-					'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/addAuthorsToInformationResource.css" />')}
+					'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/manageDragDropList.css" />')}
 
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>')}

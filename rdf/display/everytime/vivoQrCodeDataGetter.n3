@@ -1,0 +1,37 @@
+# $This file is distributed under the terms of the license in /doc/license.txt$ 
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix core: <http://vivoweb.org/ontology/core#> .
+@prefix vivoweb: <http://vivoweb.org/ontology#> .
+@prefix afn:  <http://jena.hpl.hp.com/ARQ/function#> .
+
+ 
+#### Check to see if the person being viewed has a first and last name. ####
+#### If so, the page will display the QR code icon link.                ####
+
+## associate the classes with the datagetter (COUNT(?vIndividual) AS ?theCount)##
+
+<http://xmlns.com/foaf/0.1/Person> display:hasDataGetter display:checkNamesForQrCodeDG .
+ 
+ 
+## define the datagetter ##
+
+display:checkNamesForQrCodeDG
+    a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter>;
+    display:saveToVar "checkNamesResult";
+    display:query 
+        """
+        PREFIX obo: <http://purl.obolibrary.org/obo/> 
+        PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+        SELECT DISTINCT ?vIndividual
+        WHERE {
+            ?individualURI obo:ARG_2000028 ?vIndividual .
+            ?vIndividual vcard:hasName ?vName . 
+            ?vName vcard:givenName ?firstName .
+            ?vName vcard:familyName ?lastName .
+        }
+        """ .
+

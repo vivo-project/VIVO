@@ -9,7 +9,11 @@ list of partitioning expressions.
 2) The log file is scanned for records from the RDFServiceLogger, which are
    accumulated in the program storage.
 3) The partitioning expressions are tested against each log record, and matches
-   are recorded.
+   are recorded. 
+      Strings of white space are treated as single spaces, both in the 
+      partitioning expressions and in the log records. This makes the 
+      expressions easier to read, both in the partitions file and in the program 
+      output.
 4) For each partioning expression, report:
     a) the expression
     b) how many queries matched it
@@ -37,6 +41,11 @@ Partitioning expressions: parse the lines in the file
    If a line begins with the word "QUERY ", then the remainder of the line
       (trimmed) is a regular expression to be matched against the query text of
       each log record.
+   If a line begins with the word "GROUP ", then the remainder of the line
+      (trimmed) is the text name of the group. All matchers that follow are
+      included in that named group, for summary output purposes. Matcher found
+      before the first GROUP line are in the unnamed group, as are any that
+      follow a GROUP line with no name.
    Otherwise, abort.
 
 --------------------------------------------------------------------------------

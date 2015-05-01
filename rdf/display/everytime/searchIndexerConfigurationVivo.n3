@@ -1,0 +1,152 @@
+@prefix : <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> . 
+
+
+#
+# Specify the SearchIndexExcluders, DocumentModifiers and IndexingUriFinders for VIVO. 
+# These are in addition to the ones specified for VIVO.
+#
+
+:vivoSearchExcluder_namespaceExcluder
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.exclusions.ExcludeBasedOnNamespace> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.exclusions.SearchIndexExcluder> ;
+    :excludes
+        "http://purl.obolibrary.org/obo/" .
+
+# ------------------------------------
+
+# Most context nodes look like this: relatedBy ==> node ==> relates
+#                                      relates <== node <== relatedBy
+:extension_forContextNodes
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.extensions.LabelsAcrossContextNodes> ;
+    rdfs:label "Labels across relatedBy/relates" ;
+    :hasIncomingProperty "http://vivoweb.org/ontology/core#relatedBy" ;
+    :hasOutgoingProperty "http://vivoweb.org/ontology/core#relates" .
+
+# Some roles look like this:  bearerOf ==> role ==> roleContributesTo
+#                            inheresIn <== role <== contributingRole        
+:extension_forContextNodes_role_contributes_1
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.extensions.LabelsAcrossContextNodes> ;
+    rdfs:label "Labels across bearerOf/contributesTo" ;
+    :hasIncomingProperty "http://purl.obolibrary.org/obo/RO_0000053" ;
+    :hasOutgoingProperty "http://vivoweb.org/ontology/core#roleContributesTo" .
+        
+:extension_forContextNodes_role_contributes_2
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.extensions.LabelsAcrossContextNodes> ;
+    rdfs:label "Labels across contributor/inheresIn" ;
+    :hasIncomingProperty "http://vivoweb.org/ontology/core#contributingRole" ;
+    :hasOutgoingProperty "http://purl.obolibrary.org/obo/RO_0000052" .
+        
+# Other roles look like this:  bearerOf ==> role ==> realizedIn
+#                             inheresIn <== role <== realizes        
+:extension_forContextNodes_role_realizedIn_1
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.extensions.LabelsAcrossContextNodes> ;
+    rdfs:label "Labels across bearerOf/realizedIn" ;
+    :hasIncomingProperty "http://purl.obolibrary.org/obo/RO_0000053" ;
+    :hasOutgoingProperty "http://purl.obolibrary.org/obo/BFO_0000054" .
+        
+:extension_forContextNodes_role_realizedIn_2
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.extensions.LabelsAcrossContextNodes> ;
+    rdfs:label "Labels across realizes/inheresIn" ;
+    :hasIncomingProperty "http://purl.obolibrary.org/obo/BFO_0000055" ;
+    :hasOutgoingProperty "http://purl.obolibrary.org/obo/RO_0000052" .
+        
+# Roles on grants look like this:  bearerOf ==> role ==> relatedBy
+#                                 inheresIn <== role <== relates
+:extension_forContextNodes_roles_on_grants_1
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.extensions.LabelsAcrossContextNodes> ;
+    rdfs:label "Labels across bearerOf/relates" ;
+    :hasIncomingProperty "http://purl.obolibrary.org/obo/RO_0000053" ;
+    :hasOutgoingProperty "http://vivoweb.org/ontology/core#relatedBy" .
+        
+:extension_forContextNodes_roles_on_grants_2
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.extensions.LabelsAcrossContextNodes> ;
+    rdfs:label "Labels across contributor/relatedBy" ;
+    :hasIncomingProperty "http://vivoweb.org/ontology/core#relates" ;
+    :hasOutgoingProperty "http://purl.obolibrary.org/obo/RO_0000052" .
+        
+
+# ------------------------------------
+
+:vivodocumentModifier_calculateParameters
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.CalculateParameters> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> .
+
+# ------------------------------------
+
+:vivoUriFinder_VCard
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.indexing.SelectQueryUriFinder> ;
+    rdfs:label "Preferred title" ;
+    :hasPredicateRestriction "http://www.w3.org/2006/vcard/ns#title" ;
+    :hasPredicateRestriction "http://www.w3.org/2006/vcard/ns#email" ;
+    :hasSelectQuery """
+        PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+        PREFIX obo: <http://purl.obolibrary.org/obo/>
+        SELECT ?uri
+        WHERE {
+            ?uri obo:ARG_2000028 ?card .
+            ?card a vcard:Individual .
+            ?card vcard:hasTitle ?subject .
+        }
+        """ ;
+    :hasSelectQuery """
+        PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+        PREFIX obo: <http://purl.obolibrary.org/obo/>
+        SELECT ?uri
+        WHERE {
+            ?uri obo:ARG_2000028 ?card .
+            ?card a vcard:Individual .
+            ?card vcard:hasEmail ?subject .
+        }
+        """ .
+
+:vivodocumentModifier_PreferredTitle
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SelectQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "Preferred title" ;
+    :hasTargetField "ALLTEXT" ;
+    :hasTargetField "ALLTEXTUNSTEMMED" ;
+    :hasTargetField "PREFERRED_TITLE" ;
+    :hasSelectQuery """
+        PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+        PREFIX obo: <http://purl.obolibrary.org/obo/>
+		SELECT ?title 
+		WHERE {
+			?uri obo:ARG_2000028 ?card .
+			?card a vcard:Individual .
+			?card vcard:hasTitle ?titleHolder .
+			?titleHolder vcard:title ?title .
+		}
+        """ .
+    
+:vivodocumentModifier_EmailAddress
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SelectQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "Email address" ;
+    :hasSelectQuery """
+        PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+        PREFIX obo: <http://purl.obolibrary.org/obo/>
+		SELECT ?email 
+		WHERE {
+			?uri obo:ARG_2000028 ?card .
+			?card a vcard:Individual .
+			?card vcard:hasEmail ?emailHolder .
+			?emailHolder vcard:email ?email .
+		}
+        """ .
+

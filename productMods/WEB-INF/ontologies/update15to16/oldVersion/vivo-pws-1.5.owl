@@ -1,0 +1,39 @@
+<rdf:RDF
+    xmlns:geo="http://aims.fao.org/aos/geopolitical.owl#"
+    xmlns:skco="http://www.w3.org/2004/02/skos/core#"
+    xmlns:event="http://purl.org/NET/c4dm/event.owl#"
+    xmlns:pvs="http://vivoweb.org/ontology/provenance-support#"
+    xmlns:dcelem="http://purl.org/dc/elements/1.1/"
+    xmlns:owl2="http://www.w3.org/2006/12/owl2-xml#"
+    xmlns:scirr="http://vivoweb.org/ontology/scientific-research-resource#"
+    xmlns:vivo="http://vivoweb.org/ontology/core#"
+    xmlns:vann="http://purl.org/vocab/vann/"
+    xmlns:vitro="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#"
+    xmlns:skos="http://www.w3.org/2008/05/skos#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:bibo="http://purl.org/ontology/bibo/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:swvs="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <owl:Class rdf:about="http://vivoweb.org/ontology/provenance-support#PersonAsListed">
+    <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >For data ingest from authoritative sources to record the actual way a person was listed, as potentially valuable information for provenance and person disambiguation. Represents one person's information from one source at one particular time.</vitro:descriptionAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >For data ingest from authoritative sources to record the actual way a person was listed, as potentially valuable information for provenance and person disambiguation.</vitro:shortDef>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/provenance-support#authorAsListed">
+    <rdfs:range rdf:resource="http://vivoweb.org/ontology/provenance-support#PersonAsListed"/>
+    <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Authorship"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/provenance-support#listedAuthorFor"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/provenance-support#listedAuthorFor">
+    <rdfs:domain rdf:resource="http://vivoweb.org/ontology/provenance-support#PersonAsListed"/>
+    <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#Authorship"/>
+    <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/provenance-support#authorAsListed"/>
+  </owl:ObjectProperty>
+</rdf:RDF>

@@ -136,7 +136,7 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
         conf.addField( new FieldVTwo().
                 setName("orgType").
                 setOptions( 
-                        new ChildVClassesOptions(orgClass)));
+                        new ChildVClassesWithParent(orgClass)));
         
         conf.addField( new FieldVTwo().setName("startField").
                 setEditElement( 

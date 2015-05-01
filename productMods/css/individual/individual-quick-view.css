@@ -78,9 +78,6 @@ span#qrCodeImage {
     text-align:middle; 
     overflow:visible;
 }
-span#qrCodeImage img {
-    padding: 1.7em 1.7em 0 1.7em; 
-}
 /* <----- WEBPAGE CONTENT LEFT SIDE -----> */
 .edit-mainImage {
     position: absolute;
@@ -190,15 +187,6 @@ div#profileTypeContainer h2 {
     padding-top:0 !important;
     background:red !important;
 }
-ul#individual-visualization li {
-    float: left;
-    padding-right: 10px;
-    margin-right: 10px;
-    border-right: 1px solid #5e6363;
-}
-ul#individual-visualization li:last-child {
-    border: none;
-}
 /* <------ POSITIONS ------> */
 ul#individual-personInPosition {
     list-style-type: circle;
@@ -221,13 +209,15 @@ ul#individual-personInPosition li {
     margin-left: 8px !important;
 }
 /* <------ GEOGRAPHIC FOCUS */
-ul#individual-geographicFocus li {
+ul#individual-geographicFocus li,
+ul#individual-visualization li {
     float: left;
     padding-right: 10px;
     margin-right: 10px;
     border-right: 1px solid #5e6363;
 }
-ul#individual-geographicFocus li:last-child {
+ul#individual-geographicFocus li:last-child,
+ul#individual-visualization li:last-child {
     border: none;
 }
 /* <------ MISC. ------> */

@@ -46,10 +46,6 @@ p.datatable {
     width: 67%;
     float: right;
 }
-#profileImage img{
-    width: 90px;
-    height: auto;
-}
 #body h1 {
     margin: 0;
 } 
@@ -61,10 +57,7 @@ p.datatable {
     vertical-align: bottom;
 }
 .investigator_name,
-.author_name {
-    color: #2485AE;
-    font-weight: bold;
-}
+.author_name,
 .neutral_investigator_name,
 .neutral_author_name {
     color: #2485AE;
@@ -86,18 +79,12 @@ p.datatable {
     display: none;
 	margin-top: -55PX;
 }
-#publication-count-sparkline-include {
-    float: left;
-    width: 50%;
-}
-#coauthor-count-sparkline-include {
-    float: right;
-    width: 50%;
-}
+#publication-count-sparkline-include,
 #grant-count-sparkline-include {
     float: left;
     width: 50%;
 }
+#coauthor-count-sparkline-include,
 #coinvestigator-count-sparkline-include {
     float: right;
     width: 50%;
@@ -124,7 +111,8 @@ table.sparkline_wrapper_table td, th {
   float: left;
   padding-right: 5px;
 }
-#ego_profile_image img {
+#ego_profile_image img,
+#profileImage img {
   width: 90px;
   height: auto;
 }

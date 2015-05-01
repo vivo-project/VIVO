@@ -53,7 +53,7 @@ public class AddEditorRoleToPersonGenerator extends AddRoleToPersonTwoStageGener
     
 	/** Do not show the role label field for the AddEditorRoleToPerson form */
 	@Override	
-	boolean isShowRoleLabelField() { return false;	}
+	boolean isShowRoleLabelField() { return true;	}
 
    /* 
     * Use the methods below to change the date/time precision in the

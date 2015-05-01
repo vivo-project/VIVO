@@ -1,0 +1,15 @@
+PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+CONSTRUCT {
+    ?concept a owl:Thing .
+} WHERE {
+   GRAPH ?g {
+    { ?s vivo:hasResearchArea ?concept .
+           ?concept a owl:Thing }
+       UNION
+    { ?s vivo:hasSubjectArea ?concept .
+              ?concept a owl:Thing }
+   } FILTER (!regex(str(?g), "kb-inf"))
+}

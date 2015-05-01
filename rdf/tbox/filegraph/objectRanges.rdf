@@ -27,7 +27,14 @@
     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#translatorOf">
-    <rdfs:range rdf:resource="http://purl.org/ontology/bibo/Document"/>
+    <rdfs:range>
+      <owl:Class>    
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="http://purl.org/ontology/bibo/Collection"/>
+          <owl:Class rdf:about="http://purl.org/ontology/bibo/Document"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasSuccessorOrganization">
     <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>

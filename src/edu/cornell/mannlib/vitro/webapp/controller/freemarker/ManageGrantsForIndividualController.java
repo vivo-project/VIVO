@@ -44,7 +44,9 @@ public class ManageGrantsForIndividualController extends FreemarkerHttpServlet {
         body.put("subjectUri", subjectUri);
 
         HashMap<String, List<Map<String,String>>>  grants = getGrants(subjectUri, vreq);
-        log.debug("grants = " + grants);
+        if ( log.isDebugEnabled() ) {
+			log.debug("grants = " + grants);
+		}
         body.put("grants", grants);
 
         List<String> allSubclasses = getAllSubclasses(grants);
@@ -66,13 +68,15 @@ public class ManageGrantsForIndividualController extends FreemarkerHttpServlet {
         + "PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> \n"
         + "PREFIX afn:  <http://jena.hpl.hp.com/ARQ/function#> \n"
         + "SELECT DISTINCT ?subclass ?role (str(?label2) as ?label) ?activity ?hideThis WHERE { \n"
-        + "    ?subject ?roleProp ?role . \n"
+        + "    ?subject <http://purl.obolibrary.org/obo/RO_0000053> ?role . \n"
         + "    ?role a core:ResearcherRole . \n"
         + "    ?role vitro:mostSpecificType ?subclass \n"
-        + "    OPTIONAL { ?role core:relatedBy ?activity . \n" 
+        + "    OPTIONAL { ?role core:relatedBy ?activity . \n"
+		+ "               ?activity a core:Grant . \n" 
         + "               OPTIONAL {?activity rdfs:label ?label2}  \n" 
         + "    } \n"
         + "    OPTIONAL { ?role <http://purl.obolibrary.org/obo/BFO_0000054> ?activity . \n" 
+		+ "               ?activity a core:Project . \n" 
         + "               OPTIONAL {?activity rdfs:label ?label2}  \n" 
         + "    } \n"
         + "    OPTIONAL { ?role core:hideFromDisplay ?hideThis } \n" 

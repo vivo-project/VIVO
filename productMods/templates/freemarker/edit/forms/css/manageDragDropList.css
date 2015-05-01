@@ -1,0 +1,53 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+#dragDropList {
+    margin: 0 0 1.5em 0;
+}
+#dragDropList li {
+    list-style: none;
+    margin-bottom: .75em;
+}
+/* Use class dd rather than jQuery UI's class ui-sortable, so that we can remove 
+the class if there's fewer than one author. We don't want to remove the ui-sortable
+class, in case we want to re-enable DD without a page reload. */
+#dragDropList.dd li {
+    padding-left: 1em;
+    background: url("../images/sortable_icon.png") no-repeat left center;  
+    cursor: move;  
+}
+#dragDropList .itemName {
+    display: inline-block;
+    width: 15em;
+}
+#dragDropList .extra-wide {
+    width: 20em !important;
+}
+#content form p.inline {
+    clear: left;
+    margin-bottom: 0;
+    padding-top: 1em;
+}
+#content form p.inline input,
+#content form p.inline label {
+    float: left;
+    clear: none;
+}
+#content form p.inline label {
+    width: 13em;
+    margin-top: 0;
+}
+#content form p.inline input {
+    margin-bottom: 0;
+}
+#content form p.inline span.hint {
+    margin-left: .5em;
+}
+#content form #selectedAuthor p.inline label {
+    width: 10em;
+}
+#content form p.submit {
+    margin-top: 3em;
+}
+form#addAuthorForm {
+    display: none;
+}

@@ -39,7 +39,7 @@
                 <#if (class.uri?contains("FacultyMember")) >
                     <#assign foundClassGroup = true />
                     <#if (class.individualCount > 0) >
-                        <script>var facultyMemberCount = ${class.individualCount?string?replace(",","")};</script>
+                        <script>var facultyMemberCount = ${class.individualCount?string?replace(",","")?replace(".","")};</script>
                     <#else>
                         <script>var facultyMemberCount = 0;</script>
                     </#if>
@@ -165,8 +165,7 @@ var academicDepartments = [
     <#list academicDeptDG as resultRow>
         <#assign uri = resultRow["theURI"] />
         <#assign label = resultRow["name"] />
-        <#assign localName = uri?substring(uri?last_index_of("/")) />
-            {"uri": "${localName}", "name": "${label}"}<#if (resultRow_has_next)>,</#if>
+        {"uri": "${uri?url}", "name": "${label}"}<#if (resultRow_has_next)>,</#if>
     </#list>        
 </#if>
 ];

@@ -70,7 +70,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <#if editMode == "edit">        
         <#assign titleVerb="${i18n().edit_capitalized}">        
-        <#assign submitButtonText="${i18n().Save_changes}">
+        <#assign submitButtonText="${i18n().save_changes}">
         <#assign disabledVal="disabled">
 <#else>
         <#assign titleVerb="${i18n().create_capitalized}">        

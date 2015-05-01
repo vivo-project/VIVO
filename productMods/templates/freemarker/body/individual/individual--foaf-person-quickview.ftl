@@ -51,7 +51,7 @@
     </#if>
 </#if>
 </#if>
-<section id="individual-intro" class="vcard person" role="region">
+<section itemscope itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
     <section id="label-title" <#if editable>style="width:45%"</#if> >
         <header>
             <#if relatedSubject??>
@@ -60,7 +60,7 @@
             <#else> 
                 <#-- Image  -->
                 <div id="photo-wrapper">${individualImage}</div>
-                <h1 class="vcard foaf-person fn" <#if !editable>style="float:left;border-right:1px solid #A6B1B0;"</#if>> 
+                <h1 itemprop="name" class="vcard foaf-person fn" <#if !editable>style="float:left;border-right:1px solid #A6B1B0;"</#if>> 
                     <#-- Label -->
                     <@p.label individual editable labelCount localesCount/>
                 </h1>
@@ -75,9 +75,9 @@
                     </#if>
                     <#list title.statements as statement>
                         <#if !editable >
-                            <div id="titleContainer"><span class="display-title-not-editable">${statement.preferredTitle}</span></div>
+                            <div id="titleContainer"><span itemprop="jobTitle" class="display-title-not-editable">${statement.preferredTitle}</span></div>
                         <#else>
-                            <span class="display-title-editable">${statement.preferredTitle}</span>
+                            <span itemprop="jobTitle" class="display-title-editable">${statement.preferredTitle}</span>
                             <@p.editingLinks "${title.localName}" "${title.name}" statement editable title.rangeUri />
                         </#if>
                     </#list>
@@ -210,6 +210,10 @@
     </script>
 </#if>
 <script type="text/javascript">
+var individualUri = '${individual.uri!}';
+var individualPhoto = '${individual.thumbNail!}';
+var exportQrCodeUrl = '${urls.base}/qrcode?uri=${individual.uri!}';
+var baseUrl = '${urls.base}';
 var profileTypeData = {
     processingUrl: '${urls.base}/edit/primitiveRdfEdit',
     individualUri: '${individual.uri!}',
@@ -258,5 +262,6 @@ ${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/in
               '<script type="text/javascript" src="${urls.base}/js/individual/individualQtipBubble.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>',
+              '<script type="text/javascript" src="${urls.base}/js/individual/moreLessController.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/individual/individualProfilePageType.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/imageUpload/imageUploadUtils.js"></script>')}

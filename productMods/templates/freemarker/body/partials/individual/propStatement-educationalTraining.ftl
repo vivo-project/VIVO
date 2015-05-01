@@ -26,7 +26,14 @@
     
     <#local linkedIndividual>
         <#if statement.org??>
-            <a href="${profileUrl(statement.uri("org"))}" title="${i18n().organization_name}">${statement.orgName}</a>
+			<#assign schemaType = "http://schema.org/Organization" />
+			<#assign subclass = statement.subclass!"" />
+			<#if subclass?contains("Educational") >
+				<#assign schemaType = "http://schema.org/CollegeOrUniversity" />
+			</#if>
+			<span itemscope itemtype="${schemaType}" >
+            	<a itemprop="name" href="${profileUrl(statement.uri("org"))}" title="${i18n().organization_name}">${statement.orgName}</a>
+            </span>
         <#elseif editable>
             <#-- Show the link to the context node only if the user is editing the page. -->
             <a href="${profileUrl(statement.uri("edTraining"))}" title="${i18n().missing_organization}">${i18n().missing_organization}</a>

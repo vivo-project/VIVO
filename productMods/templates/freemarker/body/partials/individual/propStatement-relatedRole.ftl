@@ -31,6 +31,8 @@
        
         <#if statement.roleTypeLabel?has_content>
             <#assign roleTypeLabel = statement.roleTypeLabel!"" >
+		<#else>
+			<#assign roleTypeLabel = "" >
         </#if>
         <#if statement.roleLabel??>
             ${statement.roleLabel?replace(" Role", "")?replace(" role","")}

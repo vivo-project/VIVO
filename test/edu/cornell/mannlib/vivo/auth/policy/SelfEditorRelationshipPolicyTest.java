@@ -17,7 +17,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import stubs.edu.cornell.mannlib.vitro.webapp.auth.policy.bean.PropertyRestrictionPolicyHelperStub;
+import stubs.edu.cornell.mannlib.vitro.webapp.auth.policy.bean.PropertyRestrictionBeanStub;
 import stubs.javax.servlet.ServletContextStub;
 
 import com.hp.hpl.jena.ontology.OntModel;
@@ -31,7 +31,6 @@ import edu.cornell.mannlib.vitro.testing.AbstractTestClass;
 import edu.cornell.mannlib.vitro.webapp.auth.identifier.ArrayIdentifierBundle;
 import edu.cornell.mannlib.vitro.webapp.auth.identifier.IdentifierBundle;
 import edu.cornell.mannlib.vitro.webapp.auth.identifier.common.HasProfile;
-import edu.cornell.mannlib.vitro.webapp.auth.policy.bean.PropertyRestrictionPolicyHelper;
 import edu.cornell.mannlib.vitro.webapp.auth.policy.ifaces.Authorization;
 import edu.cornell.mannlib.vitro.webapp.auth.policy.ifaces.PolicyDecision;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.RequestedAction;
@@ -123,9 +122,7 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	@Before
 	public void setupPolicy() {
 		ServletContextStub ctx = new ServletContextStub();
-		PropertyRestrictionPolicyHelper prph = PropertyRestrictionPolicyHelperStub
-				.getInstance(new String[] { NS_RESTRICTED });
-		PropertyRestrictionPolicyHelper.setBean(ctx, prph);
+		PropertyRestrictionBeanStub.getInstance(new String[] { NS_RESTRICTED });
 
 		policy = new SelfEditorRelationshipPolicy(ctx);
 	}

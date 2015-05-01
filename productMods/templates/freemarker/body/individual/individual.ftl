@@ -10,6 +10,7 @@
     ${classSpecificExtension!}
     ${departmentalGrantsExtension!} 
     <!--PREINDIVIDUAL OVERVIEW.FTL-->
+    <#include "individual-vocabularyService.ftl">
     <#include "individual-webpage.ftl">
     <#include "individual-overview.ftl">
     ${affiliatedResearchAreas!}

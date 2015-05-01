@@ -1,0 +1,141 @@
+# ------------------------------------------------------------------------------
+#
+# This file specifies the structure of the Vitro application: which modules
+# are used, and what parameters they require.
+#
+# Most Vitro installations will not need to modify this file. 
+#
+# For most installations, only the settings in the runtime.properties file will
+# be changed.
+#
+# ------------------------------------------------------------------------------
+
+@prefix : <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#> .
+
+# ----------------------------
+#
+# Describe the application by its implementing class and by references to the 
+# modules it uses.
+# 
+
+:application 
+    a   <java:edu.cornell.mannlib.vitro.webapp.application.ApplicationImpl> ,
+        <java:edu.cornell.mannlib.vitro.webapp.modules.Application> ;
+    :hasSearchEngine              :instrumentedSearchEngineWrapper ;
+    :hasSearchIndexer             :basicSearchIndexer ;
+    :hasImageProcessor            :jaiImageProcessor ;
+    :hasFileStorage               :ptiFileStorage ;
+    :hasContentTripleSource       :sdbContentTripleSource ;
+    :hasConfigurationTripleSource :tdbConfigurationTripleSource ;
+    :hasTBoxReasonerModule        :jfactTBoxReasonerModule .
+
+# ----------------------------
+#
+# Image processor module: 
+#    The JAI-based implementation is the only standard option.
+#    It requires no parameters.
+#
+
+:jaiImageProcessor 
+    a   <java:edu.cornell.mannlib.vitro.webapp.imageprocessor.jai.JaiImageProcessor> ,
+        <java:edu.cornell.mannlib.vitro.webapp.modules.imageProcessor.ImageProcessor> .
+
+# ----------------------------
+#
+# File storage module: 
+#    The PairTree-inspired implementation is the only standard option.
+#    It requires no parameters.
+#
+
+:ptiFileStorage 
+    a   <java:edu.cornell.mannlib.vitro.webapp.filestorage.impl.FileStorageImplWrapper> ,
+        <java:edu.cornell.mannlib.vitro.webapp.modules.fileStorage.FileStorage> .
+               
+# ----------------------------
+#
+# Search engine module: 
+#    The Solr-based implementation is the only standard option, but it can be
+#    wrapped in an "instrumented" wrapper, which provides additional logging 
+#    and more rigorous life-cycle checking.
+#
+
+:instrumentedSearchEngineWrapper 
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchengine.InstrumentedSearchEngineWrapper> , 
+        <java:edu.cornell.mannlib.vitro.webapp.modules.searchEngine.SearchEngine> ;
+    :wraps :solrSearchEngine .
+
+:solrSearchEngine
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchengine.solr.SolrSearchEngine> ,
+        <java:edu.cornell.mannlib.vitro.webapp.modules.searchEngine.SearchEngine> .
+
+# ----------------------------
+#
+# Search indexer module: 
+#    There is only one standard implementation. You must specify the number of 
+#    worker threads in the thread pool.
+#
+
+:basicSearchIndexer
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.SearchIndexerImpl> ,
+        <java:edu.cornell.mannlib.vitro.webapp.modules.searchIndexer.SearchIndexer> ;
+    :threadPoolSize "10" .
+    
+# ----------------------------
+#
+# Content triples source module: holds data contents
+#    The SDB-based implementation is the default option. It reads its parameters
+#    from the runtime.properties file, for backward compatibility.
+#
+#    Other implementations are based on a local TDB instance, a "standard" SPARQL 
+#    endpoint, or a Virtuoso endpoint, with parameters as shown.
+#
+
+:sdbContentTripleSource
+    a   <java:edu.cornell.mannlib.vitro.webapp.triplesource.impl.sdb.ContentTripleSourceSDB> ,
+        <java:edu.cornell.mannlib.vitro.webapp.modules.tripleSource.ContentTripleSource> .
+
+#:tdbContentTripleSource
+#    a   <java:edu.cornell.mannlib.vitro.webapp.triplesource.impl.tdb.ContentTripleSourceTDB> ,
+#        <java:edu.cornell.mannlib.vitro.webapp.modules.tripleSource.ContentTripleSource> ;
+#    # May be an absolute path, or relative to the Vitro home directory.
+#    :hasTdbDirectory "tdbContentModels" .
+
+#:sparqlContentTripleSource
+#    a   <java:edu.cornell.mannlib.vitro.webapp.triplesource.impl.sparql.ContentTripleSourceSPARQL> ,
+#        <java:edu.cornell.mannlib.vitro.webapp.modules.tripleSource.ContentTripleSource> ;
+#    # The URI of the SPARQL endpoint for your triple-store.
+#    :hasEndpointURI "PUT_YOUR_SPARQL_ENDPOINT_URI_HERE" ;
+#    # The URI to use for SPARQL UPDATE calls against your triple-store. 
+#    :hasUpdateEndpointURI "PUT_THE UPDATE_URI_HERE" .
+
+#:virtuosoContentTripleSource
+#    a   <java:edu.cornell.mannlib.vitro.webapp.triplesource.impl.virtuoso.ContentTripleSourceVirtuoso> ,
+#        <java:edu.cornell.mannlib.vitro.webapp.modules.tripleSource.ContentTripleSource> ;
+#    # The URI where Virtuoso can be accessed: don't include the /sparql path.
+#    :hasBaseURI "http://localhost:8890" ;
+#    # The name and password of a Virtuoso account that has the SPARQL_UPDATE role.
+#    :hasUsername "USERNAME" ;
+#    :hasPassword "PASSWORD" .
+
+
+# ----------------------------
+#
+# Configuration triples source module: holds configuration data and user accounts
+#    The TDB-based implementation is the only standard option.
+#    It requires no parameters.
+#
+
+:tdbConfigurationTripleSource
+    a   <java:edu.cornell.mannlib.vitro.webapp.triplesource.impl.tdb.ConfigurationTripleSourceTDB> ,
+        <java:edu.cornell.mannlib.vitro.webapp.modules.tripleSource.ConfigurationTripleSource> .
+        
+# ----------------------------
+#
+# TBox reasoner module: 
+#    The JFact-based implementation is the only standard option.
+#    It requires no parameters.
+#
+
+:jfactTBoxReasonerModule
+    a   <java:edu.cornell.mannlib.vitro.webapp.tboxreasoner.impl.jfact.JFactTBoxReasonerModule> ,
+        <java:edu.cornell.mannlib.vitro.webapp.modules.tboxreasoner.TBoxReasonerModule> .

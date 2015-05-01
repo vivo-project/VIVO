@@ -1,0 +1,51 @@
+<rdf:RDF
+    xmlns:geo="http://aims.fao.org/aos/geopolitical.owl#"
+    xmlns:skco="http://www.w3.org/2004/02/skos/core#"
+    xmlns:event="http://purl.org/NET/c4dm/event.owl#"
+    xmlns:pvs="http://vivoweb.org/ontology/provenance-support#"
+    xmlns:dcelem="http://purl.org/dc/elements/1.1/"
+    xmlns:owl2="http://www.w3.org/2006/12/owl2-xml#"
+    xmlns:scirr="http://vivoweb.org/ontology/scientific-research-resource#"
+    xmlns:vivo="http://vivoweb.org/ontology/core#"
+    xmlns:vann="http://purl.org/vocab/vann/"
+    xmlns:vitro="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#"
+    xmlns:skos="http://www.w3.org/2008/05/skos#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:bibo="http://purl.org/ontology/bibo/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:swvs="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <owl:Class rdf:about="http://purl.org/spar/c4o/BibliographicInformationSource">
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A source of information about bibliographic citations, such as Google Scholar, Web of Science or Scopus.</vitro:descriptionAnnot>
+  </owl:Class>
+  <owl:Class rdf:about="http://purl.org/spar/c4o/GlobalCitationCount">
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The number of times a work has been cited globally, as determined from a particular bibliographic information source on a particular date.</vitro:descriptionAnnot>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://purl.org/spar/c4o/hasGlobalCitationFrequency">
+    <rdfs:range rdf:resource="http://purl.org/spar/c4o/GlobalCitationCount"/>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A property linking a publication entity to the property c40:GlobalCitationCount that specify how many times a work has been cited by others, according to a particular information source on a particular date.</vitro:descriptionAnnot>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://purl.org/spar/c4o/hasGlobalCountSource">
+    <rdfs:domain rdf:resource="http://purl.org/spar/c4o/GlobalCitationCount"/>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A property linking the property c40:GlobalCitationCount to the bibliographic information source providing the global citation count information for a particular publication on a particular date.</vitro:descriptionAnnot>
+    <rdfs:range rdf:resource="http://purl.org/spar/c4o/BibliographicInformationSource"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://purl.org/spar/c4o/hasGlobalCountValue">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="http://purl.org/spar/c4o/GlobalCitationCount"/>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An integer defining the value of the global citation count of a cited entity recorded from a named bibliographic information source on a particular date.</vitro:descriptionAnnot>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://purl.org/spar/c4o/hasGlobalCountDate">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:domain rdf:resource="http://purl.org/spar/c4o/GlobalCitationCount"/>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The date on which the global citation count of the cited entity was recorded from a named bibliographic information source.</vitro:descriptionAnnot>
+  </owl:DatatypeProperty>
+</rdf:RDF>

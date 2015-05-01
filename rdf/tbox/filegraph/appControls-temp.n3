@@ -68,11 +68,6 @@ foaf:Person
               ] ;
       rdfs:subClassOf
               [ a       owl:Restriction ;
-                owl:onProperty <http://vivoweb.org/ontology/core#hasResearchArea> ;
-                owl:allValuesFrom <http://www.w3.org/2004/02/skos/core#Concept> 
-              ] ;
-      rdfs:subClassOf
-              [ a       owl:Restriction ;
                 owl:onProperty <http://vivoweb.org/ontology/core#freetextKeyword> ;
                 owl:allValuesFrom <http://www.w3.org/2001/XMLSchema#string> 
               ] .

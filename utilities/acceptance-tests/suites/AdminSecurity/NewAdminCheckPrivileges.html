@@ -133,11 +133,6 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Startup status</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
 	<td>link=User accounts</td>
 	<td></td>
 </tr>
@@ -234,6 +229,11 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Recompute inferences</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Startup status</td>
 	<td></td>
 </tr>
 <tr>
@@ -915,7 +915,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Range Class:</td>
+	<td>Range Data Type:</td>
 	<td></td>
 </tr>
 <tr>
@@ -1076,11 +1076,6 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Connect DB</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
 	<td>link=Manage Jena Models</td>
 	<td></td>
 </tr>
@@ -1152,6 +1147,11 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Execute Workflow</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Dump or Restore the knowledge base</td>
 	<td></td>
 </tr>
 <tr>
@@ -1231,7 +1231,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Format for SELECT query results:</td>
+	<td>Format for SELECT and ASK query results:</td>
 	<td></td>
 </tr>
 <tr>
@@ -1322,12 +1322,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>The search indexer is idle.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>The most recent update was at</td>
+	<td>The search indexer has been idle since</td>
 	<td></td>
 </tr>
 <tr>
@@ -1481,23 +1476,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=developerPanelClickText</td>
+	<td>verifyTextNotPresent</td>
+	<td>We're sorry, but you are not authorized to view the page you requested. If you think this is an error, please contact us and we'll be happy to help.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=developerEnabled</td>
+	<td>id=developerPanelClickMe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=developer_enabled</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
 	<td>id=developerPanelSaveButton</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>We're sorry, but you are not authorized to view the page you requested. If you think this is an error, please contact us and we'll be happy to help.</td>
 	<td></td>
 </tr>
 <!--log out-->

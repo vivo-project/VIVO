@@ -1,0 +1,1989 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#> .
+@prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix datagetter: <java:edu/cornell/mannlib/vitro/webapp/utils/datagetter/> .
+@prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix role:  <http://vitro.mannlib.cornell.edu/ns/vitro/role#> .
+@prefix local: <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/> .
+@prefix vivo: <http://vivoweb.org/ontology/core#> . 
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+
+@base <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration> .
+
+
+# warning: don't use blank nodes; the display model doesn't currently support them.
+
+local:personInPositionContext a :ConfigContext ;
+    :hasConfiguration local:personInPositionConfig ;
+    :configContextFor vivo:relatedBy ;
+    :qualifiedByDomain <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedBy vivo:Position .
+
+local:personInPositionConfig a :ObjectPropertyDisplayConfig ;
+    rdfs:label "personInPosition"@en-US;
+    :displayName "positions" ;
+    :listViewConfigFile "listViewConfig-personInPosition.xml"^^xsd:string ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> ;
+    vitro:displayRankAnnot 40;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasPositionHistoryGenerator"^^xsd:string .
+
+local:organizationForPositionContext a :ConfigContext ;
+    :hasConfiguration local:organizationForPositionConfig ;
+    :configContextFor vivo:relatedBy ;
+    :qualifiedByDomain <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedBy vivo:Position .
+
+local:organizationForPositionConfig a :ObjectPropertyDisplayConfig ;
+    rdfs:label "organizationForPosition"@en-US;
+    :displayName "people" ;
+    :listViewConfigFile "listViewConfig-organizationForPosition.xml"^^xsd:string ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> ;
+    vitro:collateBySubclassAnnot
+              "true"^^xsd:boolean;
+    vitro:displayRankAnnot 10;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.OrganizationHasPositionHistoryGenerator"^^xsd:string .
+
+local:authorInAuthorshipContext a :ConfigContext ;
+    :hasConfiguration local:authorInAuthorshipConfig ;
+    :configContextFor vivo:relatedBy ;
+    :qualifiedByDomain <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedBy vivo:Authorship .
+
+local:authorInAuthorshipConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-authorInAuthorship.xml"^^xsd:string ;
+    rdfs:label "authorInAuthorship"@en-US;
+    :displayName "selected publications" ;
+    vitro:collateBySubclassAnnot
+              "true"^^xsd:boolean;
+    vitro:displayRankAnnot 1;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddPublicationToPersonGenerator"^^xsd:string ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> . 
+
+local:orgInAuthorshipContext a :ConfigContext ;
+    :hasConfiguration local:orgInAuthorshipConfig ;
+    :configContextFor vivo:relatedBy ;
+    :qualifiedByDomain <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedBy vivo:Authorship .
+
+local:orgInAuthorshipConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-authorInAuthorship.xml"^^xsd:string ;
+    rdfs:label "organizationInAuthorship"@en-US;
+    :displayName "selected publications" ;
+    vitro:collateBySubclassAnnot
+              "true"^^xsd:boolean;
+    vitro:displayRankAnnot 1;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddPublicationToPersonGenerator"^^xsd:string ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> . 
+
+#### role contexts and configurations ###
+
+local:hasServiceProviderRoleContext a :ConfigContext ;
+    :hasConfiguration local:hasServiceProviderRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain   <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedBy      <http://purl.obolibrary.org/obo/ERO_0000012> .
+    
+local:hasServiceProviderRoleConfig a :ObjectPropertyDisplayConfig ;
+   :listViewConfigFile "listViewConfig-roleContributesTo.xml"^^xsd:string ;
+   rdfs:label "hasServiceProviderRole"@en-US;
+    :displayName "professional service activities" ;
+   vitro:displayRankAnnot 32;
+   vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+   vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+   vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+   vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddServiceProviderRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+   :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoutreach> .
+  
+local:hasClinicalRoleContext a :ConfigContext ;
+    :hasConfiguration local:hasClinicalRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#ClinicalRole> .
+
+local:hasClinicalRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-hasClinicalActivity.xml"^^xsd:string ;
+    rdfs:label "hasClinicalRole"@en-US;
+    :displayName "clinical activities" ;
+    vitro:displayRankAnnot 70;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddClinicalRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
+
+local:orgHasClinicalRoleContext a :ConfigContext ;
+    :hasConfiguration local:orgHasClinicalRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Organization>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#ClinicalRole> .
+
+local:orgHasClinicalRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-hasClinicalActivity.xml"^^xsd:string ;
+    rdfs:label "organizationHasClinicalRole"@en-US;
+    :displayName "clinical activities" ;
+    vitro:displayRankAnnot 70;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddClinicalRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
+
+local:hasLeaderRoleContext a :ConfigContext ;
+    :hasConfiguration local:hasLeaderRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#LeaderRole> .
+
+local:hasLeaderRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-roleContributesTo.xml"^^xsd:string ;
+    rdfs:label "hasLeaderRole"@en-US;
+    :displayName "head of" ;
+    vitro:displayRankAnnot 30;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddHeadOfRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
+
+local:orgHasLeaderRoleContext a :ConfigContext ;
+    :hasConfiguration local:orgHasLeaderRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Organization>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#LeaderRole> .
+
+local:orgHasLeaderRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-roleContributesTo.xml"^^xsd:string ;
+    rdfs:label "organizationHasLeaderRole"@en-US;
+    :displayName "lead organization of" ;
+    vitro:displayRankAnnot 30;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddHeadOfRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
+
+local:hasMemberRoleContext a :ConfigContext ;
+    :hasConfiguration local:hasMemberRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#MemberRole> .
+
+local:hasMemberRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-roleContributesTo.xml"^^xsd:string ;
+    rdfs:label "hasMemberRole"@en-US;
+    :displayName "member of" ;
+    vitro:displayRankAnnot 50;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddMemberRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
+
+local:orgHasMemberRoleContext a :ConfigContext ;
+    :hasConfiguration local:orgHasMemberRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Organization>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#MemberRole> .
+
+local:orgHasMemberRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-roleContributesTo.xml"^^xsd:string ;
+    rdfs:label "organizationHasMemberRole"@en-US;
+    :displayName "member of" ;
+    vitro:displayRankAnnot 50;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddMemberRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
+
+local:hasTeacherRoleContext a :ConfigContext ;
+    :hasConfiguration local:hasTeacherRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#TeacherRole> .
+
+local:hasTeacherRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-roleRealizedIn.xml"^^xsd:string ;
+    rdfs:label "hasTeacherRole"@en-US;
+    :displayName "teaching activities" ;
+    vitro:displayRankAnnot 20;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddTeacherRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupteaching> .
+
+local:hasEditorRoleContext a :ConfigContext ;
+    :hasConfiguration local:hasEditorRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#EditorRole> .
+
+local:hasEditorRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-hasEditorRole.xml"^^xsd:string ;
+    rdfs:label "hasEditorRole"@en-US;
+    :displayName "collection or series editor for" ;
+    vitro:displayRankAnnot 15;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddEditorRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> .
+
+local:groupHasEditorRoleContext a :ConfigContext ;
+    :hasConfiguration local:groupHasEditorRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Group>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#EditorRole> .
+
+local:groupHasEditorRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-hasEditorRole.xml"^^xsd:string ;
+    rdfs:label "groupHasEditorRole"@en-US;
+    :displayName "collection or series editorial group for" ;
+    vitro:displayRankAnnot 15;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddEditorRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:hasReviewerRoleContext a :ConfigContext ;
+    :hasConfiguration local:hasReviewerRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#ReviewerRole> .
+
+local:hasReviewerRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-hasReviewerRole.xml"^^xsd:string ;
+    rdfs:label "hasReviewerRole"@en-US;
+    :displayName "reviewer of" ;
+    vitro:displayRankAnnot 18;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddReviewerRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoutreach> .
+
+local:hasOrganizerRoleContext a :ConfigContext ;
+    :hasConfiguration local:hasOrganizerRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#OrganizerRole> .
+
+local:hasOrganizerRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-roleRealizedIn.xml"^^xsd:string ;
+    rdfs:label "hasOrganizerRole"@en-US;
+    :displayName "organizer of event" ;
+    vitro:displayRankAnnot 27;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddOrganizerRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoutreach> .
+
+local:orgHasOrganizerRoleContext a :ConfigContext ;
+    :hasConfiguration local:orgHasOrganizerRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Organization>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#OrganizerRole> .
+
+local:orgHasOrganizerRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-roleRealizedIn.xml"^^xsd:string ;
+    rdfs:label "orgHasOrganizerRole"@en-US;
+    :displayName "convener of event" ;
+    vitro:displayRankAnnot 80;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddOrganizerRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
+
+local:hasOutreachProviderRoleContext a :ConfigContext ;
+    :hasConfiguration local:hasOutreachProviderRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#OutreachProviderRole> .
+
+local:hasOutreachProviderRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-roleContributesTo.xml"^^xsd:string ;
+    rdfs:label "hasOutreachProviderRole"@en-US;
+    :displayName "outreach and community service activities" ;
+    vitro:displayRankAnnot 50;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddOutreachProviderRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoutreach> .
+
+local:orgHasOutreachProviderRoleContext a :ConfigContext ;
+    :hasConfiguration local:orgHasOutreachProviderRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Organization>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#OutreachProviderRole> .
+
+local:orgHasOutreachProviderRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-roleContributesTo.xml"^^xsd:string ;
+    rdfs:label "orgHasOutreachProviderRole"@en-US;
+    :displayName "outreach and community service activities" ;
+    vitro:displayRankAnnot 50;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddOutreachProviderRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoutreach> .
+
+local:hasAttendeeRoleContext a :ConfigContext ;
+    :hasConfiguration local:hasAttendeeRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain   <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#AttendeeRole> .
+
+local:hasAttendeeRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-hasAttendeeRole.xml"^^xsd:string ;
+    rdfs:label "hasAttendeeRole"@en-US;
+    :displayName "attended event" ;
+    vitro:displayRankAnnot 85;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddAttendeeRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
+
+local:orgHasAttendeeRoleContext a :ConfigContext ;
+    :hasConfiguration local:orgHasAttendeeRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain   <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#AttendeeRole> .
+
+local:orgHasAttendeeRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-hasAttendeeRole.xml"^^xsd:string ;
+    rdfs:label "orgHasAttendeeRole"@en-US;
+    :displayName "attended event" ;
+    vitro:displayRankAnnot 85;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddAttendeeRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
+
+local:hasResearcherRoleContext a :ConfigContext ;
+    :hasConfiguration local:hasResearcherRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#ResearcherRole> .
+
+local:hasResearcherRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-researchActivities.xml"^^xsd:string ;
+    rdfs:label "hasResearcherRole"@en-US;
+    :displayName "other research activities" ;
+    vitro:displayRankAnnot 35;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddResearcherRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupresearch> .
+
+local:hasInvestigatorRoleContext a :ConfigContext ;
+    :hasConfiguration local:hasInvestigatorRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#InvestigatorRole> .
+
+local:hasInvestigatorRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-hasInvestigatorRole.xml"^^xsd:string ;
+    rdfs:label "hasInvestigatorRole"@en-US;
+    :displayName "investigator on" ;
+    vitro:displayRankAnnot 30;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddGrantRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupresearch> .
+
+local:hasPrincipalInvestigatorRoleContext a :ConfigContext ;
+    :hasConfiguration local:hasPrincipalInvestigatorRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#PrincipalInvestigatorRole> .
+
+local:hasPrincipalInvestigatorRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-hasPrincipalInvestigatorRole.xml"^^xsd:string ;
+    rdfs:label "hasPrincipalInvestigatorRole"@en-US;
+    :displayName "principal investigator on" ;
+    vitro:displayRankAnnot 20;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddGrantRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupresearch> .
+
+local:hasCo-PrincipalInvestigatorRoleContext a :ConfigContext ;
+    :hasConfiguration local:hasCo-PrincipalInvestigatorRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#CoPrincipalInvestigatorRole> .
+
+local:hasCo-PrincipalInvestigatorRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-hasCoPrincipalInvestigatorRole.xml"^^xsd:string ;
+    rdfs:label "hasCo-PrincipalInvestigatorRole"@en-US;
+    :displayName "co-principal investigator on" ;
+    vitro:displayRankAnnot 25;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddGrantRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupresearch> .
+
+local:hasPresenterRoleContext a :ConfigContext ;
+    :hasConfiguration local:hasPresenterRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#PresenterRole> .
+
+local:hasPresenterRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-hasPresenterRole.xml"^^xsd:string ;
+    rdfs:label "hasPresenterRole"@en-US;
+    :displayName "presentations" ;
+    vitro:collateBySubclassAnnot
+              "true"^^xsd:boolean;
+    vitro:displayRankAnnot 30;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddPresenterRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> .
+
+local:orgHasPresenterRoleContext a :ConfigContext ;
+    :hasConfiguration local:orgHasPresenterRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Organization>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#PresenterRole> .
+
+local:orgHasPresenterRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-hasPresenterRole.xml"^^xsd:string ;
+    rdfs:label "organizationHasPresenterRole"@en-US;
+    :displayName "presentations" ;
+    vitro:collateBySubclassAnnot
+              "true"^^xsd:boolean;
+    vitro:displayRankAnnot 30;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddPresenterRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> .
+    
+### awards and educational training ###
+
+local:awardOrHonorContext a :ConfigContext ;
+    :hasConfiguration local:awardOrHonorConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#AwardReceipt> .
+
+local:awardOrHonorConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-awardOrHonor.xml"^^xsd:string ;
+    rdfs:label "awardOrHonor"@en-US;
+    :displayName "awards and honors" ;
+    vitro:displayRankAnnot 20;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasAwardOrHonorGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbiography> .
+
+local:orgHasAwardOrHonorContext a :ConfigContext ;
+    :hasConfiguration local:orgHasAwardOrHonorConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Organization>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#AwardReceipt> .
+
+local:orgHasAwardOrHonorConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-awardOrHonor.xml"^^xsd:string ;
+    rdfs:label "organizationHasAwardOrHonor"@en-US;
+    :displayName "awards and honors received" ;
+    vitro:displayRankAnnot 75;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasAwardOrHonorGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:educationalTrainingContext a :ConfigContext ;
+    :hasConfiguration local:educationalTrainingConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000056> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#EducationalProcess> .
+
+local:educationalTrainingConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-educationalTraining.xml"^^xsd:string ;
+    rdfs:label "educationalTraining"@en-US;
+    :displayName "education and training" ;
+    vitro:displayRankAnnot 10;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasEducationalTraining"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbiography> .
+
+local:educationalProcessPersonContext a :ConfigContext ;
+    :hasConfiguration local:educationalProcessPersonConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000057> ;
+    :qualifiedByDomain    <http://vivoweb.org/ontology/core#EducationalProcess>;
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Person> .
+
+local:educationalProcessPersonConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "educationalProcessPerson"@en-US;
+    :displayName "education and training of" ;
+    vitro:displayRankAnnot 10;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:educationalProcessOrgContext a :ConfigContext ;
+    :hasConfiguration local:educationalProcessOrgConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000057> ;
+    :qualifiedByDomain    <http://vivoweb.org/ontology/core#EducationalProcess>;
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
+
+local:educationalProcessOrgConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "educationalProcessOrganization"@en-US;
+    :displayName "educational organization" ;
+    vitro:displayRankAnnot 15;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:educationalProcessDegreeContext a :ConfigContext ;
+    :hasConfiguration local:educationalProcessDegreeConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0002234> ;
+    :qualifiedByDomain    <http://vivoweb.org/ontology/core#EducationalProcess>;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#AwardedDegree> .
+
+local:educationalProcessDegreeConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-degreeEarned.xml"^^xsd:string ;
+    rdfs:label "educationalProcessDegree"@en-US;
+    :displayName "degree earned" ;
+    vitro:displayRankAnnot 20;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:organizationForTrainingContext a :ConfigContext ;
+    :hasConfiguration local:organizationForTrainingConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000056> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#EducationalProcess> .
+
+local:organizationForTrainingConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-organizationForTraining.xml"^^xsd:string ;
+    rdfs:label "organizationForTraining"@en-US;
+    :displayName "organization for training" ;
+    vitro:displayRankAnnot 1;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:nobody ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.OrganizationForTrainingGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
+
+local:adviseeRoleContext a :ConfigContext ;
+    :hasConfiguration local:adviseeRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#AdviseeRole> .
+
+local:adviseeRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-adviseeIn.xml"^^xsd:string ;
+    rdfs:label "adviseeRole"@en-US;
+    :displayName "advisee of" ;
+    vitro:collateBySubclassAnnot
+              "true"^^xsd:boolean;
+    vitro:displayRankAnnot 30;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasAdviseeRelationshipGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbiography> .
+
+local:advisorRoleContext a :ConfigContext ;
+    :hasConfiguration local:advisorRoleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#AdvisorRole> .
+
+local:advisorRoleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-advisorIn.xml"^^xsd:string ;
+    rdfs:label "advisorRole"@en-US;
+    :displayName "advisees" ;
+    vitro:collateBySubclassAnnot
+              "true"^^xsd:boolean;
+    vitro:displayRankAnnot 40;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasAdvisorRelationshipGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupteaching> .
+
+local:informationResourceInAuthorshipContext a :ConfigContext ;
+    :hasConfiguration local:informationResourceInAuthorshipConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
+    :qualifiedByDomain      <http://purl.obolibrary.org/obo/IAO_0000030> ; # Information Content Entity
+    :qualifiedBy      <http://vivoweb.org/ontology/core#Authorship> .
+
+local:informationResourceInAuthorshipConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-informationResourceInAuthorship.xml"^^xsd:string ;
+    rdfs:label "informationResourceInAuthorship"@en-US;
+    :displayName "authors" ;
+    vitro:displayRankAnnot 10;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddAuthorsToInformationResourceGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:informationResourceInEditorshipContext a :ConfigContext ;
+    :hasConfiguration local:informationResourceInEditorshipConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
+    :qualifiedByDomain      <http://purl.obolibrary.org/obo/IAO_0000030> ; # Information Content Entity
+    :qualifiedBy      <http://vivoweb.org/ontology/core#Editorship> .
+
+local:informationResourceInEditorshipConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-informationResourceInEditorship.xml"^^xsd:string ;
+    rdfs:label "informationResourceInEditorship"@en-US;
+    :displayName "editors" ;
+    vitro:displayRankAnnot 12;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddEditorsToInformationResourceGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:editorOfContext a :ConfigContext ;
+    :hasConfiguration local:editorOfConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#Editorship> .
+
+local:editorOfConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-editorship.xml"^^xsd:string ;
+    rdfs:label "editorOf"@en-US;
+    :displayName "editor of" ;
+    vitro:displayRankAnnot 20;
+    vitro:collateBySubclassAnnot
+              "true"^^xsd:boolean;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddEditorshipToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> .
+
+local:issuedCredentialContext a :ConfigContext ;
+    :hasConfiguration local:issuedCredentialConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#IssuedCredential> .
+
+local:issuedCredentialConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-issuedCredential.xml"^^xsd:string ;
+    rdfs:label "issuedCredential"@en-US;
+    :displayName "credentials" ;
+    vitro:displayRankAnnot 12;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasIssuedCredentialGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbiography> .
+
+local:grantAdministeredByContext a :ConfigContext ;
+    :hasConfiguration local:grantAdministeredByConfig ;
+    :configContextFor vivo:relates ;
+    :qualifiedByDomain  vivo:Grant  ;
+    :qualifiedBy      vivo:AdministratorRole .
+
+local:grantAdministeredByConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-grantAdministeredBy.xml"^^xsd:string ;
+    rdfs:label "grantAdministeredBy"@en-US;
+    :displayName "administered by" ;
+    vitro:displayRankAnnot 16;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.GrantAdministeredByGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:contractAdministeredByContext a :ConfigContext ;
+    :hasConfiguration local:contractAdministeredByConfig ;
+    :configContextFor vivo:relates ;
+    :qualifiedByDomain  vivo:Contract  ;
+    :qualifiedBy      vivo:AdministratorRole .
+
+local:contractAdministeredByConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-grantAdministeredBy.xml"^^xsd:string ;
+    rdfs:label "contractAdministeredBy"@en-US;
+    :displayName "administered by" ;
+    vitro:displayRankAnnot 16;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:orgAdministersGrantContext a :ConfigContext ;
+    :hasConfiguration local:orgAdministersGrantConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Organization>  ;
+    :qualifiedBy      vivo:AdministratorRole .
+
+local:orgAdministersGrantConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-organizationAdministersGrant.xml"^^xsd:string ;
+    rdfs:label "orgAdministersGrant"@en-US;
+    :displayName "administers grant" ;
+    vitro:displayRankAnnot 62;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.OrganizationAdministersGrantGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupresearch> .
+    
+### collaborator properties ###
+
+# formerly defined in common for all Agents in initialTBoxAnnotations.n3 where allows cross-linking people and orgs
+    
+local:hasCollaboratorContext a :ConfigContext ; # persons
+    :hasConfiguration local:hasCollaboratorConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#hasCollaborator> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Person>  ;
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Person> .
+
+local:hasCollaboratorConfig a :ObjectPropertyDisplayConfig ;
+    vitro:customEntryFormAnnot
+         "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AutocompleteObjectPropertyFormGenerator"^^xsd:string ;
+#    :listViewConfigFile "listViewConfig-roleRealizedIn.xml"^^xsd:string ;
+    rdfs:label "hasCollaborator"@en-US;
+    :displayName "has collaborator" ;
+    vitro:displayLimitAnnot
+          "5"^^xsd:int ;
+    vitro:displayRankAnnot
+          "55"^^xsd:int ;
+    vitro:selectFromExistingAnnot
+          "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+#    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+#    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddOrganizerRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+     vitro:publicDescriptionAnnot
+         "Use for a simple assertion that another person is an ongoing collaborator; to describe the relationship in more detail enter a role for each collaborator in some common endeavor."^^xsd:string ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
+    
+local:orgHasCollaboratorContext a :ConfigContext ;
+    :hasConfiguration local:orgHasCollaboratorConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#hasCollaborator> ;
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Organization>  ;
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Agent> .
+
+local:orgHasCollaboratorConfig a :ObjectPropertyDisplayConfig ;
+    vitro:customEntryFormAnnot
+         "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AutocompleteObjectPropertyFormGenerator"^^xsd:string ;
+#    :listViewConfigFile "listViewConfig-roleRealizedIn.xml"^^xsd:string ;
+    rdfs:label "organizationHasCollaborator"@en-US;
+    :displayName "has collaborating organization or group" ;
+    vitro:displayLimitAnnot
+          "5"^^xsd:int ;
+    vitro:displayRankAnnot
+          "35"^^xsd:int ;
+    vitro:selectFromExistingAnnot
+          "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+#    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
+#    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddOrganizerRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+     vitro:publicDescriptionAnnot
+         "Use for a simple assertion that an organization or group is an ongoing collaborator; to describe the relationship in more detail enter a role for each collaborator in some common endeavor."^^xsd:string ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
+
+
+### vcard properties ###
+
+local:mailingAddressContext a :ConfigContext ;
+    :hasConfiguration local:mailingAddressConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Address> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> .
+
+local:mailingAddressConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-mailingAddress.xml"^^xsd:string ;
+    rdfs:label "mailingAddress"@en-US;
+    :displayName "mailing address" ;
+    vitro:displayRankAnnot 29;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.SubjectHasMailingAddressGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:mailingAddressOrgContext a :ConfigContext ;
+    :hasConfiguration local:mailingAddressOrgConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Address> .
+
+local:mailingAddressOrgConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-mailingAddress.xml"^^xsd:string ;
+    rdfs:label "mailingAddressOrganization"@en-US;
+    :displayName "mailing address" ;
+    vitro:displayRankAnnot 29;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.SubjectHasMailingAddressGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:personTelephoneContext a :ConfigContext ;
+    :hasConfiguration local:personTelephoneConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Telephone> .
+
+local:personTelephoneConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-telephoneNumber.xml"^^xsd:string ;
+    rdfs:label "personTelephone"@en-US;
+    :displayName "phone" ;
+    vitro:displayRankAnnot 60;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.SubjectHasPhoneFaxNumberGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:orgTelephoneContext a :ConfigContext ;
+    :hasConfiguration local:orgTelephoneConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Telephone> .
+
+local:orgTelephoneConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-telephoneNumber.xml"^^xsd:string ;
+    rdfs:label "organizationTelephone"@en-US;
+    :displayName "phone" ;
+    vitro:displayRankAnnot 10;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.SubjectHasPhoneFaxNumberGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:personFaxContext a :ConfigContext ;
+    :hasConfiguration local:personFaxConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Fax> .
+
+local:personFaxConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-faxNumber.xml"^^xsd:string ;
+    rdfs:label "personFax"@en-US;
+    :displayName "fax" ;
+    vitro:displayRankAnnot 60;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.SubjectHasPhoneFaxNumberGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:orgFaxContext a :ConfigContext ;
+    :hasConfiguration local:orgFaxConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Fax> .
+
+local:orgFaxConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-faxNumber.xml"^^xsd:string ;
+    rdfs:label "organizationFax"@en-US;
+    :displayName "fax" ;
+    vitro:displayRankAnnot 20;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.SubjectHasPhoneFaxNumberGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:additionalEmailContext a :ConfigContext ;
+    :hasConfiguration local:additionalEmailConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Email> .
+
+local:additionalEmailConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-additionalEmail.xml"^^xsd:string ;
+    rdfs:label "additionalEmail"@en-US;
+    :displayName "additional emails" ;
+    vitro:displayRankAnnot 30;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasEmailGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:organizationEmailContext a :ConfigContext ;
+    :hasConfiguration local:organizationEmailConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Email> .
+
+local:organizationEmailConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-additionalEmail.xml"^^xsd:string ;
+    rdfs:label "organizationEmail"@en-US;
+    :displayName "email address" ;
+    vitro:displayRankAnnot 28;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasEmailGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:primaryEmailContext a :ConfigContext ;
+    :hasConfiguration local:primaryEmailConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Work> .
+
+local:primaryEmailConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-primaryEmail.xml"^^xsd:string ;
+    rdfs:label "primaryEmail"@en-US;
+    :displayName "primary email" ;
+    vitro:displayRankAnnot 20;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasEmailGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:webpagePersonContext a :ConfigContext ;
+    :hasConfiguration local:webpagePersonConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+
+local:webpagePersonConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
+    rdfs:label "webpagePerson"@en-US;
+    :displayName "webpage" ;
+    vitro:displayRankAnnot 40;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForIndividualGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:webpageOrgContext a :ConfigContext ;
+    :hasConfiguration local:webpageOrgConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+
+local:webpageOrgConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
+    rdfs:label "webpageOrganization"@en-US;
+    :displayName "webpage" ;
+    vitro:displayRankAnnot 40;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForIndividualGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:webpageInfoContext a :ConfigContext ;
+    :hasConfiguration local:webpageInfoConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.obolibrary.org/obo/IAO_0000030> ; # Information Content Entity
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+
+local:webpageInfoConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
+    rdfs:label "webpageInfo"@en-US;
+    :displayName "webpage" ;
+    vitro:displayRankAnnot 40;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForIndividualGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:webpageSoftwareContext a :ConfigContext ;
+    :hasConfiguration local:webpageSoftwareConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.obolibrary.org/obo/ERO_0000071> ; 
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+
+local:webpageSoftwareConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
+    :displayName "webpage" ;
+    vitro:displayRankAnnot 40;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForIndividualGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:webpageFacilityContext a :ConfigContext ;
+    :hasConfiguration local:webpageFacilityConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#Facility> ; 
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+
+local:webpageFacilityConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
+    :displayName "webpage" ;
+    vitro:displayRankAnnot 40;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForIndividualGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:webpageProjectContext a :ConfigContext ;
+    :hasConfiguration local:webpageProjectConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#Project> ; 
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+
+local:webpageProjectConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
+    :displayName "webpage" ;
+    vitro:displayRankAnnot 40;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForIndividualGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:webpageEventContext a :ConfigContext ;
+    :hasConfiguration local:webpageEventConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://purl.org/NET/c4dm/event.owl#Event> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+
+local:webpageEventConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
+    rdfs:label "webpageEvent"@en-US;
+    :displayName "webpage" ;
+    vitro:displayRankAnnot 40;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForIndividualGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:webpageEventSeriesContext a :ConfigContext ;
+    :hasConfiguration local:webpageEventSeriesConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#EventSeries> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
+
+local:webpageEventSeriesConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-webpage.xml"^^xsd:string ;
+    :displayName "webpage" ;
+    vitro:displayRankAnnot 40;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForIndividualGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:fullNameContext a :ConfigContext ;
+    :hasConfiguration local:fullNameConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Name> .
+
+local:fullNameConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fullName.xml"^^xsd:string ;
+    rdfs:label "fullName"@en-US;
+    :displayName "full name" ;
+    vitro:displayRankAnnot 10;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddFullNameToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:preferredTitleContext a :ConfigContext ;
+    :hasConfiguration local:preferredTitleConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Person> ;
+    :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
+    :qualifiedBy      <http://www.w3.org/2006/vcard/ns#Title> .
+
+local:preferredTitleConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-preferredTitle.xml"^^xsd:string ;
+    rdfs:label "preferredTitle"@en-US;
+    :displayName "preferred title" ;
+    vitro:displayRankAnnot 8;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.PersonHasPreferredTitleGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+### properties using default editing form ##
+
+
+local:outputOfContext a :ConfigContext ;
+    :hasConfiguration local:outputOfConfig ;
+    :configContextFor obo:RO_0002353 ;
+    :qualifiedByDomain  obo:IAO_0000030 ; # Information Content Entity
+    :qualifiedBy        obo:BFO_0000015 . # Process
+
+local:outputOfConfig a :ObjectPropertyDisplayConfig ;
+    rdfs:label "outputOf"@en-US;
+    :displayName "output of process or event" ;
+    vitro:displayRankAnnot 80 ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+    
+local:hasOutputContext a :ConfigContext ;
+    :hasConfiguration local:hasOutputConfig ;
+    :configContextFor obo:RO_0002234 ;
+    :qualifiedByDomain  obo:BFO_0000015 ; # Process
+    :qualifiedBy        obo:IAO_0000030 . # Information Content Entity
+
+
+local:hasOutputConfig a :ObjectPropertyDisplayConfig ;
+    rdfs:label "hasOutput"@en-US;
+    :displayName "output publications or other works" ;
+    vitro:displayRankAnnot 80 ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> .
+
+
+local:credentialOfContext a :ConfigContext ;
+    :hasConfiguration local:credentialOfConfig ;
+    :configContextFor vivo:relatedBy ;
+    :qualifiedByDomain      vivo:Credential ;
+    :qualifiedBy      vivo:IssuedCredential .
+
+local:credentialOfConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "credentialOf"@en-US;
+    :displayName "credential of" ;
+    vitro:displayRankAnnot 6;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:documentHasPartContext a :ConfigContext ;
+    :hasConfiguration local:documentHasPartConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000051> ;
+    :qualifiedByDomain      <http://purl.org/ontology/bibo/Document> ;
+    :qualifiedBy      <http://purl.org/ontology/bibo/Document> .
+
+local:documentHasPartConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "documentHasPart"@en-US;
+    :displayName "has document part" ;
+    vitro:displayRankAnnot 51;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:documentPartOfContext a :ConfigContext ;
+    :hasConfiguration local:documentPartOfConfig ;
+    :configContextFor  <http://purl.obolibrary.org/obo/BFO_0000050> ;
+    :qualifiedByDomain <http://purl.org/ontology/bibo/DocumentPart> ;
+    :qualifiedBy       <http://purl.org/ontology/bibo/Document> .
+
+local:documentPartOfConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "documentPartOf"@en-US;
+    :displayName "part of other document" ;
+    vitro:displayRankAnnot 52;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+    
+local:geographicLocationContainsLocationContext a :ConfigContext ;
+    :hasConfiguration local:geographicLocationContainsLocationConfig ;
+    :configContextFor  <http://purl.obolibrary.org/obo/BFO_0000051> ;
+    :qualifiedByDomain vivo:GeographicLocation ;
+    :qualifiedBy       vivo:GeographicLocation .
+
+local:geographicLocationContainsLocationConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "geographicLocationContainsLocation"@en-US;
+    :displayName "has part" ;
+    vitro:displayRankAnnot 81;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+        
+local:geographicLocationWithinLocationContext a :ConfigContext ;
+    :hasConfiguration local:geographicLocationWithinLocationConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
+    :qualifiedByDomain vivo:GeographicLocation ;
+    :qualifiedBy       vivo:GeographicLocation .
+            
+local:geographicLocationWithinLocationConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "geographicLocationWithinLocation"@en-US;
+    :displayName "part of" ;
+    vitro:displayRankAnnot 82;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:hasSubOrganizationContext a :ConfigContext ;
+    :hasConfiguration local:hasSubOrganizationConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000051> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
+
+local:hasSubOrganizationConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "hasSubOrganization"@en-US;
+    :displayName "has sub-organization" ;
+    vitro:displayRankAnnot 15;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
+
+local:subOrganizationWithinContext a :ConfigContext ;
+    :hasConfiguration local:subOrganizationWithinConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
+
+local:subOrganizationWithinConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "subOrganizationWithin"@en-US;
+    :displayName "organization within" ;
+    vitro:displayRankAnnot 20;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
+
+local:eventWithinContext a :ConfigContext ;
+    :hasConfiguration local:eventWithinConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
+    :qualifiedByDomain      <http://purl.org/NET/c4dm/event.owl#Event> ;
+    :qualifiedBy      <http://purl.org/NET/c4dm/event.owl#Event> .
+
+local:eventWithinConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "eventWithin"@en-US;
+    :displayName "occurs within event" ;
+    vitro:displayRankAnnot 15;
+     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:includesEventContext a :ConfigContext ;
+    :hasConfiguration local:includesEventConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000051> ;
+    :qualifiedByDomain      <http://purl.org/NET/c4dm/event.owl#Event> ;
+    :qualifiedBy      <http://purl.org/NET/c4dm/event.owl#Event> .
+
+local:includesEventConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "includesEvent"@en-US;
+    :displayName "includes event" ;
+    vitro:displayRankAnnot 16;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:inEventSeriesContext a :ConfigContext ;
+    :hasConfiguration local:inEventSeriesConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
+    :qualifiedByDomain      <http://purl.org/NET/c4dm/event.owl#Event> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#EventSeries> .
+
+local:inEventSeriesConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "inEventSeries"@en-US;
+    :displayName "in event series" ;
+    vitro:displayRankAnnot 17;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+    
+local:eventsForSeriesContext a :ConfigContext ;
+    :hasConfiguration  local:eventsForSeriesConfig ;
+    :configContextFor  <http://purl.obolibrary.org/obo/BFO_0000051> ;
+    :qualifiedByDomain <http://vivoweb.org/ontology/core#EventSeries> ;
+    :qualifiedBy       <http://purl.org/NET/c4dm/event.owl#Event> .
+ 
+local:eventsForSeriesConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "eventsForSeries"@en-US;
+    :displayName "events in this series" ;
+    vitro:displayRankAnnot 18;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:eventLocationContext a :ConfigContext ;
+    :hasConfiguration local:eventLocationConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ; ## located in
+    :qualifiedByDomain      <http://purl.org/NET/c4dm/event.owl#Event> ;
+    :qualifiedBy      vivo:GeographicLocation .
+
+local:eventLocationConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "eventLocation"@en-US;
+    :displayName "held in geographic location" ;
+    vitro:displayRankAnnot 30;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+    
+local:eventInFacilityContext a :ConfigContext ;
+    :hasConfiguration local:eventInFacilityConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ; ## located in
+    :qualifiedByDomain      <http://purl.org/NET/c4dm/event.owl#Event> ;
+    :qualifiedBy      vivo:Facility .
+
+local:eventInFacilityConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "eventInFacility"@en-US;
+    :displayName "held in facility" ;
+    vitro:displayRankAnnot 29;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:agentInGeoLocationContext a :ConfigContext ;
+    :hasConfiguration local:agentInGeoLocationConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ; ## located in
+    :qualifiedByDomain <http://xmlns.com/foaf/0.1/Agent> ;
+    :qualifiedBy       vivo:GeographicLocation .
+
+local:agentInGeoLocationConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "agentInGeoLocation"@en-US;
+    :displayName "geographic location" ;
+    vitro:displayRankAnnot 30;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:agentInFacilityContext a :ConfigContext ;
+    :hasConfiguration local:agentInFacilityConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ; ## located in
+    :qualifiedByDomain  <http://xmlns.com/foaf/0.1/Agent> ;
+    :qualifiedBy        vivo:Facility .
+
+local:agentInFacilityConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "agentInFacility"@en-US;
+    :displayName "located in facility" ;
+    vitro:displayRankAnnot 32;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:materialEntityInFacilityContext a :ConfigContext ;
+    :hasConfiguration local:materialEntityInFacilityConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ; ## located in
+    :qualifiedByDomain      <http://purl.obolibrary.org/obo/BFO_0000040> ;
+    :qualifiedBy      vivo:Facility .
+
+local:materialEntityInFacilityConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "materialEntityInFacility"@en-US;
+    :displayName "housed in facility" ;
+    vitro:displayRankAnnot 2;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+
+local:hasRoomContext a :ConfigContext ;
+    :hasConfiguration local:hasRoomConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000051> ;
+    :qualifiedByDomain vivo:Building ;
+    :qualifiedBy vivo:Room .
+
+local:hasRoomConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "hasRoom"@en-US;
+    :displayName "rooms" ;
+    vitro:displayRankAnnot 30;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+    
+local:roomWithinBuildingContext a :ConfigContext ;
+    :hasConfiguration local:roomWithinBuildingConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
+    :qualifiedByDomain vivo:Room ;
+    :qualifiedBy vivo:Building .
+
+local:roomWithinBuildingConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "roomWithinBuilding"@en-US;
+    :displayName "within building" ;
+    vitro:displayRankAnnot 23;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+
+local:geographicLocationContainsBuildingContext a :ConfigContext ;
+    :hasConfiguration local:geographicLocationContainsBuildingConfig ;
+    :configContextFor  <http://purl.obolibrary.org/obo/BFO_0000051> ;
+    :qualifiedByDomain vivo:GeographicLocation ;
+    :qualifiedBy       vivo:Building .
+
+local:geographicLocationContainsBuildingConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "geographicLocationContainsBuilding"@en-US;
+    :displayName "location of facility" ;
+    vitro:displayRankAnnot 85;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:siteGeographicallyWithinGeoLocationContext a :ConfigContext ;
+    :hasConfiguration local:siteGeographicallyWithinGeoLocationConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
+    :qualifiedByDomain      <http://purl.obolibrary.org/obo/BFO_0000029> ; ## Site
+    :qualifiedBy      vivo:GeographicLocation .
+
+local:siteGeographicallyWithinGeoLocationConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "siteGeographicallyWithinGeoLocation"@en-US;
+    :displayName "geographically within" ;
+    vitro:displayRankAnnot 40;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:facilitySiteOfEventContext a :ConfigContext ;
+    :hasConfiguration local:facilitySiteOfEventConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001015> ; ## location of
+    :qualifiedByDomain   vivo:Facility ; ## was <http://purl.obolibrary.org/obo/BFO_0000029> ## Site
+    :qualifiedBy      <http://purl.org/NET/c4dm/event.owl#Event> . ## was <http://purl.obolibrary.org/obo/BFO_0000004> ## Independent Continuant
+
+local:facilitySiteOfEventConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "facilitySiteOfEvent"@en-US;
+    :displayName "facility for event" ;
+    vitro:displayRankAnnot 22;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+    
+local:facilitySiteOfAgentContext a :ConfigContext ;
+    :hasConfiguration local:facilitySiteOfAgentConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001015> ; ## location of
+    :qualifiedByDomain   vivo:Facility ; ## was <http://purl.obolibrary.org/obo/BFO_0000029> ## Site
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Agent> . ## was <http://purl.obolibrary.org/obo/BFO_0000004> ## Independent Continuant
+
+local:facilitySiteOfAgentConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "facilitySiteOfAgent"@en-US;
+    :displayName "facility for person, group, or organization" ;
+    vitro:displayRankAnnot 20;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+# uses and used by need work -- apply to continuants and occurrents, and material entities as well as information content entities   
+#local:projectUsesMaterialEntityContext a :ConfigContext ;
+#    :hasConfiguration local:projectUsesMaterialEntityConfig ;
+#    :configContextFor  <http://purl.obolibrary.org/obo/ERO_0000031> ; 
+#    :qualifiedByDomain vivo:Project  ;
+#    :qualifiedBy       <http://purl.obolibrary.org/obo/BFO_0000040> . ## Material Entity
+
+#local:projectUsesMaterialEntityConfig a :ObjectPropertyDisplayConfig ;
+#    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+#    rdfs:label "projectUsesMaterialEntity"@en-US;
+#    :displayName "uses specimen, equipment, instrument, organism, reagent, or software" ;
+#    vitro:displayRankAnnot 85;
+#    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+#    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+#    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+#    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+#    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+    
+#local:materialEntityUsedByProjectContext a :ConfigContext ;
+#    :hasConfiguration local:MaterialEntityUsedByProjectConfig ;
+#    :configContextFor  <http://purl.obolibrary.org/obo/ERO_0000070> ; 
+#    :qualifiedByDomain <http://purl.obolibrary.org/obo/BFO_0000040> ; ## Material Entity
+#    :qualifiedBy       vivo:Project .
+
+#local:materialEntityUsedByProjectConfig a :ObjectPropertyDisplayConfig ;
+#    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+#    rdfs:label "materialEntityUsedByProject"@en-US;
+#    :displayName "used by project" ;
+#    vitro:displayRankAnnot 85;
+#    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+#    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+#    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+#    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+#    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:facilityLocationOfEquipmentContext a :ConfigContext ;
+    :hasConfiguration local:facilityLocationOfEquipmentConfig ;
+    :configContextFor  <http://purl.obolibrary.org/obo/RO_0001015> ; ## location of
+    :qualifiedByDomain <http://purl.obolibrary.org/obo/BFO_0000029>  ; ## Site
+    :qualifiedBy       <http://purl.obolibrary.org/obo/BFO_0000040> . ## Material Entity
+
+local:facilityLocationOfEquipmentConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "facilityLocationOfEquipment"@en-US;
+    :displayName "location of equipment or instrument" ;
+    vitro:displayRankAnnot 14;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:facilityLocationOfServiceContext a :ConfigContext ;
+    :hasConfiguration local:facilityLocationOfServiceConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001015> ; ## location of
+    :qualifiedByDomain  vivo:Facility ;
+    :qualifiedBy        <http://purl.obolibrary.org/obo/ERO_0000005> .
+
+local:facilityLocationOfServiceConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "facilityLocationOfService"@en-US;
+    :displayName "facility for service" ;
+    vitro:displayRankAnnot 18;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> ;
+    vitro:publicDescriptionAnnot "This relates a facility as being used for a particular service."^^xsd:string ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean .
+
+local:courseOfferedByContext a :ConfigContext ;
+    :hasConfiguration local:courseOfferedByConfig ;
+    :configContextFor vivo:offeredBy ;
+    :qualifiedByDomain      vivo:Course ;
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
+
+local:courseOfferedByConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "courseOfferedBy"@en-US;
+    :displayName "offered by" ;
+    vitro:displayRankAnnot 2;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:orgOffersCourseContext a :ConfigContext ;
+    :hasConfiguration local:orgOffersCourseConfig ;
+    :configContextFor vivo:offers ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedBy      vivo:Course .
+
+local:orgOffersCourseConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "organizationOffersCourse"@en-US;
+    :displayName "offers course" ;
+    vitro:displayRankAnnot 90;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoutreach> .
+
+local:collegeOffersDegreeContext a :ConfigContext ;
+    :hasConfiguration local:collegeOffersDegreeConfig ;
+    :configContextFor vivo:offers ;
+    :qualifiedByDomain      vivo:College ;
+    :qualifiedBy      vivo:AcademicDegree .
+
+local:collegeOffersDegreeConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "collegeOffersDegree"@en-US;
+    :displayName "offers degree" ;
+    vitro:displayRankAnnot 12;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:deptOffersDegreeContext a :ConfigContext ;
+    :hasConfiguration local:deptOffersDegreeConfig ;
+    :configContextFor vivo:offers ;
+    :qualifiedByDomain      vivo:AcademicDepartment ;
+    :qualifiedBy      vivo:AcademicDegree .
+
+local:deptOffersDegreeConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "deptOffersDegree"@en-US;
+    :displayName "offers degree" ;
+    vitro:displayRankAnnot 2;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:uniOffersDegreeContext a :ConfigContext ;
+    :hasConfiguration local:uniOffersDegreeConfig ;
+    :configContextFor vivo:offers ;
+    :qualifiedByDomain      vivo:University ;
+    :qualifiedBy      vivo:AcademicDegree .
+
+local:uniOffersDegreeConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "universityOffersDegree"@en-US;
+    :displayName "offers degree" ;
+    vitro:displayRankAnnot 2;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:labOffersServiceContext a :ConfigContext ;
+    :hasConfiguration local:labOffersServiceConfig ;
+    :configContextFor vivo:offers ;
+    :qualifiedByDomain      vivo:Laboratory ;
+    :qualifiedBy      <http://purl.obolibrary.org/obo/ERO_0000005> .
+
+local:labOffersServiceConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "labOffersService"@en-US;
+    :displayName "offers service" ;
+    vitro:displayRankAnnot 2;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:grantAwardedByContext a :ConfigContext ;
+    :hasConfiguration local:grantAwardedByConfig ;
+    :configContextFor vivo:assignedBy ;
+    :qualifiedByDomain      vivo:Grant ;
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
+
+local:grantAwardedByConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "grantAwardedBy"@en-US;
+    :displayName "awarded by" ;
+    vitro:displayRankAnnot 14;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:contractAwardedByContext a :ConfigContext ;
+    :hasConfiguration local:contractAwardedByConfig ;
+    :configContextFor vivo:assignedBy ;
+    :qualifiedByDomain      vivo:Contract ;
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
+
+local:contractAwardedByConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "contractAwardedBy"@en-US;
+    :displayName "awarded by" ;
+    vitro:displayRankAnnot 14;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:grantSubjectAreaContext a :ConfigContext ;
+    :hasConfiguration local:grantSubjectAreaConfig ;
+    :configContextFor vivo:hasSubjectArea ;
+    :qualifiedByDomain      vivo:Grant ;
+    :qualifiedBy      <http://www.w3.org/2004/02/skos/core#Concept> .
+
+local:grantSubjectAreaConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "grantSubjectArea"@en-US;
+    :displayName "has subject area" ;
+    vitro:displayRankAnnot 10;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:grantHasSubgrantContext a :ConfigContext ;
+    :hasConfiguration local:grantHasSubgrantConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000051> ;
+    :qualifiedByDomain      vivo:Grant ;
+    :qualifiedBy      vivo:Grant .
+
+local:grantHasSubgrantConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "grantHasSubgrant"@en-US;
+    :displayName "has sub grant" ;
+    vitro:displayRankAnnot 30;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:grantIsSubgrantOfContext a :ConfigContext ;
+    :hasConfiguration local:grantIsSubgrantOfConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
+    :qualifiedByDomain      vivo:Grant ;
+    :qualifiedBy      vivo:Grant .
+
+local:grantIsSubgrantOfConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "grantIsSubgrantOf"@en-US;
+    :displayName "sub grant of" ;
+    vitro:displayRankAnnot 32;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:grantGeographicFocusContext a :ConfigContext ;
+    :hasConfiguration local:grantGeographicFocusConfig ;
+    :configContextFor vivo:geographicFocus ;
+    :qualifiedByDomain      vivo:Grant ;
+    :qualifiedBy      vivo:GeographicRegion .
+
+local:grantGeographicFocusConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "grantGeographicFocus"@en-US;
+    :displayName "geographic focus" ;
+    vitro:displayRankAnnot 20;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:awardOrHonorReceiptsContext a :ConfigContext ;
+    :hasConfiguration local:awardOrHonorReceiptsConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relatedBy> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#Award> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#AwardReceipt> .
+
+local:awardOrHonorReceiptsConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "awardOrHonorReceipts"@en-US;
+    :displayName "receipts" ;
+    vitro:displayRankAnnot 3;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:awardReceiptsContext a :ConfigContext ;
+    :hasConfiguration local:awardReceiptsConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relates> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#AwardReceipt> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#Award> .
+
+local:awardReceiptsConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "awardReceipts"@en-US;
+    :displayName "receipt of" ;
+    vitro:displayRankAnnot 1;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:awardReceiptsAwardForContext a :ConfigContext ;
+    :hasConfiguration local:awardReceiptsAwardForConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relates> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#AwardReceipt> ;
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Person> .
+
+local:awardReceiptsAwardForConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "awardReceiptsAwardFor"@en-US;
+    :displayName "award or honor for" ;
+    vitro:displayRankAnnot 2;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:awardOrHonorGivenContext a :ConfigContext ;
+    :hasConfiguration local:awardOrHonorGivenConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#assigns> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#AwardReceipt> .
+
+local:awardOrHonorGivenConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-awardOrHonorGiven.xml"^^xsd:string ;
+    rdfs:label "awardOrHonorGiven"@en-US;
+    :displayName "award or honor given" ;
+    vitro:displayRankAnnot 72;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:awardConferredByContext a :ConfigContext ;
+    :hasConfiguration local:awardConferredByConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#assignedBy> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#AwardReceipt> ;
+    :qualifiedBy      <http://xmlns.com/foaf/0.1/Organization> .
+
+local:awardConferredByConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "awardConferredBy"@en-US;
+    :displayName "award conferred by" ;
+    vitro:displayRankAnnot 3;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:orgAwardsGrantContext a :ConfigContext ;
+    :hasConfiguration local:orgAwardsGrantConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#assigns> ;
+    :qualifiedByDomain      <http://xmlns.com/foaf/0.1/Organization> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#Grant> .
+
+local:orgAwardsGrantConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-organizationAwardsGrant.xml"^^xsd:string ;
+    rdfs:label "orgAwardsGrant"@en-US;
+    :displayName "awards grant" ;
+    vitro:displayRankAnnot 60;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupresearch> .
+
+local:addressLocationContext a :ConfigContext ;
+    :hasConfiguration local:addressLocationConfig ;
+    :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ; ## located in
+    :qualifiedByDomain      <http://www.w3.org/2006/vcard/ns#Address> ;
+    :qualifiedBy      vivo:GeographicLocation .
+
+local:addressLocationConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
+    rdfs:label "addressLocation"@en-US;
+    :displayName "has geographic location" ;
+    vitro:displayRankAnnot 2;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGrouplocation> .
+
+### roles using the BFO_0000055 property ###
+
+local:bfo_0000055Context a :ConfigContext ;
+    :hasConfiguration local:bfo_0000055Config ;
+    :configContextFor <http://purl.obolibrary.org/obo/BFO_0000055> ;
+    :qualifiedBy      <http://purl.obolibrary.org/obo/BFO_0000023> .
+
+local:bfo_0000055Config a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-relatedRole.xml"^^xsd:string ;
+    rdfs:label "relatedRole"@en-US;
+    :displayName "participant" ;
+    vitro:displayRankAnnot 17;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ProjectHasParticipantGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+### grant roles using the core:relates property ###
+
+local:grantRelatesContext a :ConfigContext ;
+    :hasConfiguration local:grantRelatesConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relates> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#Grant> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#ResearcherRole> .
+
+local:grantRelatesConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-relatedRole.xml"^^xsd:string ;
+    rdfs:label "grantRelates"@en-US;
+    :displayName "contributor" ;
+    vitro:displayRankAnnot 55;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.GrantHasContributorGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
+
+local:contractRelatesContext a :ConfigContext ;
+    :hasConfiguration local:contractRelatesConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#relates> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#Contract> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#ResearcherRole> .
+
+local:contractRelatesConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-relatedRole.xml"^^xsd:string ;
+    rdfs:label "contractRelates"@en-US;
+    :displayName "contributor" ;
+    vitro:displayRankAnnot 55;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody ;
+    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.GrantHasContributorGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
+
+### faux properties for dateTimeValue ###
+
+local:publicationDateContext a :ConfigContext ;
+    :hasConfiguration local:publicationDateConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#dateTimeValue> ;
+    :qualifiedByDomain      <http://purl.obolibrary.org/obo/IAO_0000030> ; # Information Content Entity
+    :qualifiedBy      <http://vivoweb.org/ontology/core#DateTimeValue> .
+
+local:publicationDateConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-dateTimeValue.xml"^^xsd:string ;
+    rdfs:label "publicationDate"@en-US;
+    :displayName "publication date" ;
+    vitro:displayRankAnnot 17;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
+
+local:yearAwardedContext a :ConfigContext ;
+    :hasConfiguration local:yearAwardedConfig ;
+    :configContextFor <http://vivoweb.org/ontology/core#dateTimeValue> ;
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#AwardReceipt> ;
+    :qualifiedBy      <http://vivoweb.org/ontology/core#DateTimeValue> .
+
+local:yearAwardedConfig a :ObjectPropertyDisplayConfig ;
+    :listViewConfigFile "listViewConfig-dateTimeValue.xml"^^xsd:string ;
+    rdfs:label "yearAwarded"@en-US;
+    :displayName "year awarded" ;
+    vitro:displayRankAnnot 10;
+    vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .

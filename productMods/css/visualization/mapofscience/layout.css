@@ -13,11 +13,6 @@
 	margin-bottom: 6px;
 	margin-top: 6px;
 }
-
-.hide-dom-on-init {
-	display: none;
-}
-
 #left-column {
 	float: left;
 	width: 260px;
@@ -211,11 +206,7 @@ hr.subtle-hr {
 	height: 30px;
 }
 
-.datatable-table {
-	font-size: 0.9em;
-	width: 100%;
-}
-
+.datatable-table,
 .entity-datatable-table {
 	font-size: 0.9em;
 	width: 100%;
@@ -262,10 +253,7 @@ a.map-of-science-links {
     margin-top: 0;
 }
 
-.filterInfo {
-	font-size: 0.81em;
-}
-
+.filterInfo, 
 .paginatedtabs {
 	font-size: 0.81em;
 }
@@ -286,7 +274,8 @@ a.map-of-science-links {
 /* -------------------------------------------------------------->  */
 /* SPECIAL STYLES FOR THE error  */
 /* -------------------------------------------------------------->  */
-#error-container {
+#error-container,
+.hide-dom-on-init {
     display: none;
 }
 

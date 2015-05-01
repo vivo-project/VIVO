@@ -1,0 +1,29 @@
+PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+CONSTRUCT {
+    ?educationalProcess <http://purl.obolibrary.org/obo/RO_0002234>  _:awardedDegree .
+    _:awardedDegree <http://purl.obolibrary.org/obo/RO_0002353> ?educationalProcess .
+    _:awardedDegree a vivo:AwardedDegree .
+    _:awardedDegree vivo:relates ?degree .
+    ?degree vivo:relatedBy _:awardedDegree .
+    _:awardedDegree vivo:relates ?person .
+    ?person vivo:relatedBy _:awardedDegree .
+    _:awardedDegree vivo:assignedBy ?org .
+    ?org vivo:assigns _:awardedDegree .
+} WHERE {
+    ?person <http://purl.obolibrary.org/obo/RO_0000056> ?educationalProcess .
+    ?person a foaf:Person .
+    ?educationalProcess a vivo:EducationalProcess .
+    ?educationalProcess <http://purl.obolibrary.org/obo/RO_0002234> ?degree .
+    ?degree a vivo:AcademicDegree .
+    OPTIONAL {
+        ?educationalProcess <http://purl.obolibrary.org/obo/RO_0000057> ?org . 
+        ?org a foaf:Organization 
+    }
+    FILTER NOT EXISTS {
+        ?educationalProcess <http://purl.obolibrary.org/obo/RO_0002234>  ?awardedDegreeNode .
+        ?person vivo:relatedBy ?awardedDegreeNode .
+    }
+}

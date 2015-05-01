@@ -1,7 +1,7 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
 $(document).ready(function(){
-    
+
     // ensures proper layout when an organization has its webpage link displayed as a thumnail.
     // there's a timing issue, so we can't check the length here, so check the role just to see
     // if $('ul.webpages-withThumnails') exists
@@ -14,98 +14,73 @@ $(document).ready(function(){
 
     // "more"/"less" HTML truncator for showing more or less content in data property core:overview
     $('.overview-value').truncate({max_length: 500});
-    
-    $.fn.exists = function () {
-        return this.length !== 0;
-    }
-    
-    $.fn.moreLess = function () {
-        $(this).each
-    }
-    
-    var togglePropDisplay = {
-        showMore: function($toggleLink, $itemContainer) {
-            $toggleLink.click(function() {
-                $itemContainer.show();
-                $(this).attr('href', '#show less content');
-                $(this).text(i18nStrings.displayLess);
-                togglePropDisplay.showLess($toggleLink, $itemContainer);
-                return false;
-            });
-        },
         
-        showLess: function($toggleLink, $itemContainer) {
-            $toggleLink.click(function() {
-                $itemContainer.hide();
-                $(this).attr('href', '#show more content');
-                $(this).text(i18nStrings.displayMoreEllipsis);
-                togglePropDisplay.showMore($toggleLink, $itemContainer);
-                return false;
-            });
-        }
-    };
-    
-    // var $propList = $('.property-list').not('>li>ul');
-    var $propList = $('.property-list:not(:has(>li>ul))');
-    $propList.each(function() {
-        var $additionalItems = $(this).find('li:gt(4)');
-        if ( $additionalItems.exists() ) {
-            // create container for additional elements
-            var $itemContainer = $('<div class="additionalItems" />').appendTo(this);
-            
-            // create toggle link
-            var $toggleLink = $('<a class="more-less" href="#show more content" title="' + i18nStrings.showMoreContent + '">' + i18nStrings.displayMoreEllipsis + '</a>').appendTo(this);
-            
-            $additionalItems.appendTo($itemContainer);
-            
-            $itemContainer.hide();
-            
-            togglePropDisplay.showMore($toggleLink, $itemContainer);
-        }
-    });
-    
-    var $subPropList = $('.subclass-property-list');
-    $subPropList.each(function() {
-        var $additionalItems = $(this).find('li:gt(4)');
-        if ( $additionalItems.exists() ) {
-            // create container for additional elements
-            var $itemContainer = $('<div class="additionalItems" />').appendTo(this);
-            
-            // create toggle link
-            var $toggleLink = $('<a class="more-less" href="#show more content" title="' + i18nStrings.showMoreContent + '">' + i18nStrings.displayMoreEllipsis + '</a>').appendTo(this);
-            
-            $additionalItems.appendTo($itemContainer);
-            
-            $itemContainer.hide();
-            
-            togglePropDisplay.showMore($toggleLink, $itemContainer);
-        }
-    });
-    
-    var $subPropSibs = $subPropList.closest('li').last().nextAll();
-    var $subPropParent = $subPropList.closest('li').last().parent();
-    var $additionalItems = $subPropSibs.slice(3);
-    if ( $additionalItems.length > 0 ) {
-        // create container for additional elements
-        var $itemContainer = $('<div class="additionalItems" />').appendTo($subPropParent);
-        
-        // create toggle link
-        var $toggleLink = $('<a class="more-less" href="#show more content" title="' + i18nStrings.showMoreContent + '">' + i18nStrings.displayMoreEllipsis + '</a>').appendTo($subPropParent);
-        
-        $additionalItems.appendTo($itemContainer);
-        
-        $itemContainer.hide();
-        
-        togglePropDisplay.showMore($toggleLink, $itemContainer);
-    }
-    
     // Change background color button when verbose mode is off
     $('a#verbosePropertySwitch:contains("' + i18nStrings.verboseTurnOff + '")').addClass('verbose-off');
     
     // Reveal vCard QR code when QR icon is clicked
     $('#qrIcon, .qrCloseLink').click(function() {
-        $('#qrCodeImage').toggleClass('hidden');
-        return false;
+	
+		
+		// only create the img the first time, so check if it already exists
+		if ( !$('img#codeImage').length ) {		
+			$.ajax({
+            	url: baseUrl + "/qrCodeAjax",
+            	dataType: "json",
+            	data: {
+                	action: "getQrCodeDetails",
+					uri: individualUri,
+            	},
+            	complete: function(xhr, status) {
+                	var results = $.parseJSON(xhr.responseText);
+                	if ( results.length == 0 ) {
+                    	var html = i18nStrings.currentlyNoResearchers;
+                	}
+                	else {
+						if ( results[0].firstName.length < 1 || results[1].lastName.length < 1 ) {
+							$('#qrCodeImage').css("width","225px");
+							var noCodeStr = "<div style='padding:25px 0 30px 22px;font-size:13px'>"
+							                + "The QR Code could not be generated due to incomplete information about this person. </div>"
+							$('#qrCodeImage').prepend(noCodeStr);
+						}
+						else if ( results[0].firstName.length > 0 || results[1] == null || results[1].lastName.length > 0 ) {
+							var vcard = "";
+							vcard += "BEGIN:VCARD" + String.fromCharCode(13);
+							vcard += "VERSION:3.0" + String.fromCharCode(13);
+							vcard += "N:" + results[1].lastName + String.fromCharCode(13);
+							vcard += "FN:" + results[0].firstName + String.fromCharCode(13);
+							if ( results[2].preferredTitle.length > 0 ) {
+								vcard += "TITLE:" + results[2].preferredTitle + String.fromCharCode(13);
+							}
+							if ( results[3].phoneNumber.length > 0 ) {
+								vcard += "TEL;TYPE=WORK,VOICE:" + results[3].phoneNumber + String.fromCharCode(13);
+							}
+							if ( results[4].email.length > 0 ) {
+								vcard += "EMAIL;TYPE=PREF,INTERNET:" + results[4].email + String.fromCharCode(13);
+							}
+							vcard += "URL:" + individualUri + String.fromCharCode(13);
+							if ( individualPhoto.length > 0 ) {
+								vcard += "PHOTO;VALUE=URL;TYPE=JPG:" + individualPhoto + String.fromCharCode(13);
+							}
+							vcard += "END:VCARD";
+							
+							spanStr = "<a title='${i18n().export_qr_codes}' href='"
+							          + exportQrCodeUrl + "'>"
+							          + "<img id='codeImage' src='https://chart.googleapis.com/chart?cht=qr&amp;chs=125x125&amp;chl="
+									  + vcard 
+									  + "&amp;choe=UTF-8'/>"
+									  + "</a>";
+									
+							$('#qrCodeImage').prepend(spanStr);
+							$('#qrCodeImage').toggleClass('hidden');
+						}
+                 	}
+            	}
+       		});        
+        } 
+		else { 
+			$('#qrCodeImage').toggleClass('hidden');
+		}
     });
 
     // For pubs and grants on the foaf:person profile, and affiliated people

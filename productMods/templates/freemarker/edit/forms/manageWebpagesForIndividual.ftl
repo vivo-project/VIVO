@@ -26,7 +26,7 @@
     <p>${i18n().has_no_webpages}</p>
 </#if>
 
-<ul id="webpageList" ${ulClass} role="list">
+<ul id="dragDropList" ${ulClass} role="list">
     <#list editConfiguration.pageData.webpages as webpage>
         <li class="webpage" role="listitem">
             <#if webpage.label??>
@@ -35,7 +35,7 @@
                 <#assign anchor=webpage.url >
             </#if>
             
-            <span class="webpageName">
+            <span class="itemName extra-wide">
                 <a href="${webpage.url}" title="${i18n().webpage_url}">${anchor}</a> 
                 <#if webpage.typeLabel??>(<#if webpage.typeLabel == "URL">Standard Web Link<#else>${webpage.typeLabel}</#if></#if>)
             </span>
@@ -57,8 +57,8 @@
     <#-- There is no editConfig at this stage, so we don't need to go through postEditCleanup.jsp on cancel.
          These can just be ordinary links, rather than a v:input element, as in 
          addAuthorsToInformationResource.jsp. -->   
-    <a href="${showAddFormUrl}" id="showAddForm" class="button green" title="${i18n().add_new_web_page}">${i18n().add_new_web_page}</a>
-       
+    <a href="${showAddFormUrl}" id="showAddFormButton" title="${i18n().add_new_web_page}">${i18n().add_new_web_page}</a>
+     <span class="or"> ${i18n().or} </span>  
     <a href="${cancelUrl}" id="returnToIndividual" class="return" title="${i18n().return_to_profile}">${i18n().return_to_profile}</a>
     <img id="indicator" class="indicator hidden" src="${urls.base}/images/indicatorWhite.gif" alt="${i18n().processing_indicator}"/>
 </section>
@@ -78,7 +78,7 @@ var i18nStrings = {
 </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />',
-                  '<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/manageWebpagesForIndividual.css" />',
+                  '<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/manageDragDropList.css" />',
                   '<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/utils.js"></script>',

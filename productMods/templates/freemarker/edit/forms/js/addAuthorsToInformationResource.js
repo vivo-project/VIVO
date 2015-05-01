@@ -113,7 +113,7 @@ var addAuthorForm = {
    // after hitting 'cancel.'
    initAuthorListOnlyView: function() {
        
-        if ($('.authorship').length) {  // make sure we have at least one author
+        if ($('li.authorship').length) {  // make sure we have at least one author
             // Reorder authors on page load so that previously unranked authors get a rank. Otherwise,
             // when we add a new author, it will get put ahead of any previously unranked authors, instead
             // of at the end of the list. (It is also helpful to normalize the data before we get started.)            
@@ -282,7 +282,7 @@ var addAuthorForm = {
     setAcFilter: function() {
         this.acFilter = [];
         
-        $('.authorship').each(function() {
+        $('li.authorship').each(function() {
             var uri = $(this).data('authorUri');
             addAuthorForm.acFilter.push(uri);
          });
@@ -367,7 +367,7 @@ var addAuthorForm = {
     /* Drag-and-drop */
     initAuthorDD: function() {
         
-        var authorshipList = $('#authorships'),
+        var authorshipList = $('#dragDropList'),
             authorships = authorshipList.children('li');
         
         if (authorships.length < 2) {
@@ -404,7 +404,7 @@ var addAuthorForm = {
             type: 'POST',
             success: function(data, status, request) {
                 var pos;
-                $('.authorship').each(function(index){
+                $('li.authorship').each(function(index){
                     pos = index + 1;
                     // Set the new position for this element. The only function of this value 
                     // is so we can reset an element to its original position in case reordering fails.
@@ -420,7 +420,7 @@ var addAuthorForm = {
                     // Seems we need to do this by hand. Can't see any way to do it with jQuery UI. ??
                     var pos = addAuthorForm.getPosition(ui.item),                       
                         nextpos = pos + 1, 
-                        authorships = $('#authorships'), 
+                        authorships = $('#dragDropList'), 
                         next = addAuthorForm.findAuthorship('position', nextpos);
                     
                     if (next.length) {
@@ -440,7 +440,7 @@ var addAuthorForm = {
     // have to keep retrieving data from or modifying the DOM as we manipulate the
     // authorships.
     initAuthorshipData: function() {
-        $('.authorship').each(function(index) {
+        $('li.authorship').each(function(index) {
             $(this).data(authorshipData[index]);    
             
             // RY We might still need position to put back an element after reordering
@@ -462,7 +462,7 @@ var addAuthorForm = {
     findAuthorship: function(key, value) {
         var matchingAuthorship = $(); // if we don't find one, return an empty jQuery set
         
-        $('.authorship').each(function() {
+        $('li.authorship').each(function() {
             var authorship = $(this);
             if ( authorship.data(key) === value ) {
                 matchingAuthorship = authorship; 
@@ -644,7 +644,7 @@ var addAuthorForm = {
             url: $(link).attr('href'),
             type: 'POST', 
             data: {
-                deletion: $(link).parents('.authorship').data('authorshipUri')
+                deletion: $(link).parents('li.authorship').data('authorshipUri')
             },
             dataType: 'json',
             context: link, // context for callback
@@ -654,7 +654,7 @@ var addAuthorForm = {
             
                 if (status === 'success') {
                     
-                    authorship = $(this).parents('.authorship');
+                    authorship = $(this).parents('li.authorship');
                 
                     // Clear autocomplete cache entries matching this author's name, else
                     // autocomplete will be retrieved from the cache, which excludes the removed author.
@@ -673,7 +673,7 @@ var addAuthorForm = {
                         $(this).remove();
                         
                         // Actions that depend on the author having been removed from the DOM:
-                        numAuthors = $('.authorship').length; // retrieve the length after removing authorship from the DOM
+                        numAuthors = $('li.authorship').length; // retrieve the length after removing authorship from the DOM
                         
                         // If removed item not last, reorder to remove any gaps
                         if (numAuthors > 0 && ! removeLast) {
@@ -719,7 +719,7 @@ var addAuthorForm = {
     
     // Disable DD and associated cues if only one author remains
     disableAuthorDD: function() {
-        var authorships = $('#authorships'),
+        var authorships = $('#dragDropList'),
             authorNameWrapper = $('.authorNameWrapper');
             
         authorships.sortable({ disable: true } );

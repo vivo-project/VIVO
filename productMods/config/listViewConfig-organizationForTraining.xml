@@ -167,13 +167,13 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
         CONSTRUCT { 
             ?subject ?property ?edTraining .
-            ?leaderRole core:dateTimeInterval ?dateTimeInterval .
+            ?edTraining core:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval core:start ?dateTimeStartValue .
             ?dateTimeStartValue core:dateTime ?dateTimeStart 
         } WHERE {
             ?subject ?property ?edTraining .
             ?edTraining a core:EducationalProcess .
-            ?leaderRole core:dateTimeInterval ?dateTimeInterval .
+            ?edTraining core:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval core:start ?dateTimeStartValue .
             ?dateTimeStartValue core:dateTime ?dateTimeStart 
         } 
@@ -183,15 +183,15 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
         CONSTRUCT { 
             ?subject ?property ?edTraining .
-            ?leaderRole core:dateTimeInterval ?dateTimeInterval .
+            ?edTraining core:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval core:end ?dateTimeEndValue .
-            ?dateTimeStartValue core:dateTime ?dateTimeEnd 
+            ?dateTimeEndValue core:dateTime ?dateTimeEnd 
         } WHERE {
             ?subject ?property ?edTraining .
             ?edTraining a core:EducationalProcess .
-            ?leaderRole core:dateTimeInterval ?dateTimeInterval .
+            ?edTraining core:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval core:end ?dateTimeEndValue .
-            ?dateTimeStartValue core:dateTime ?dateTimeEnd
+            ?dateTimeEndValue core:dateTime ?dateTimeEnd
         } 
     </query-construct>
     

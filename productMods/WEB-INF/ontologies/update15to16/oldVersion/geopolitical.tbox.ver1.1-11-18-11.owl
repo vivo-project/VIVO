@@ -1,0 +1,1868 @@
+<rdf:RDF
+    xmlns:geo="http://aims.fao.org/aos/geopolitical.owl#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dcelem="http://purl.org/dc/elements/1.1/"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <owl:Ontology rdf:about="http://aims.fao.org/aos/geopolitical.owl">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    > prior version : " http://aims.fao.org/aos/geopolitical_v10.owl"   </rdfs:comment>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The use of the information presented on the FAO Country Profiles portal is governed by FAO's copyright reservation. Any queries regarding the content, sources or use, please contact FAO-country-profiles@fao.org or visit http://www.fao.org/countryprofiles. </rdfs:comment>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO DISCLAIMER:  Information on the FAO Country Profiles portal is provided as and when available. The designations employed and the presentation of information do not imply the expression of any opinion whatsoever on the part of the Food and Agriculture Organization of the United Nations (FAO) concerning the legal status of any country, territory, city or area, or of its authorities, or concerning the delimitation of its frontiers or boundaries. FAO makes every effort to ensure, but does not guarantee, the accuracy or completeness of and declines responsibility for any loss, damage, liability or expense suffered which is claimed to result from its use. </rdfs:comment>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Version 1.1 of the ontology includes a structured description of sources (source creator, source identifier by language, and last updated date on source) . 
+   </rdfs:comment>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO's geopolitical ontology version 1.1 was populated with FAO, UN and internationally recognized data sources.    </rdfs:comment>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-08-11</dcterms:modified>
+    <owl:versionInfo xml:lang="en">version 1.1</owl:versionInfo>
+  </owl:Ontology>
+  <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#other">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#territory"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#non_self_governing">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#territory"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#isAdministeredBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#self_governing"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#isAdministeredBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#isAdministeredBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >UN Cartographic Section, Department of Field Support</geo:sourceCreator>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.un.org/Depts/Cartographic/map/profile/world00.pdf</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-05-01</geo:sourceModified>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >UN Cartographic Section, Department of Field Support http://www.un.org/Depts/Cartographic/map/profile/world00.pdf</dcterms:source>
+  </owl:Class>
+  <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#self_governing">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#territory"/>
+    </rdfs:subClassOf>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United Nations Map Library</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="en">http://www.un.org/depts/dhl/maplib/countinfo.htm</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-09-08</geo:sourceModified>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United Nations Map Library http://www.un.org/depts/dhl/maplib/countinfo.htm</dcterms:source>
+  </owl:Class>
+  <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#geographical_region">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#group"/>
+    </rdfs:subClassOf>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United Nations statistics department</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="fr">http://unstats.un.org/unsd/methods/m49/m49regnf.htm</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://unstats.un.org/unsd/methods/m49/m49regin.htm</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-04-01</geo:sourceModified>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United Nations statistics department http://unstats.un.org/unsd/methods/m49/m49regin.htm</dcterms:source>
+  </owl:Class>
+  <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#territory">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMinLatitude"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#GDPTotalInCurrentPrices"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nationalityZH"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#GDPYear"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeCurrency"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMaxLatitude"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#landAreaTotal"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#countryAreaUnit"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaUnit"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#populationUnit"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMinLongitude"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaNotes"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nationalityRU"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#GDPNotes"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#area"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#countryAreaTotal"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nationalityES"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#populationTotal"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameCurrencyIT"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#populationNotes"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMaxLongitude"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nationalityIT"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#HDIUnit"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#HDITotal"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#landAreaUnit"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameCurrencyES"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameCurrencyRU"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaYear"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameCurrencyZH"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nationalityFR"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#landAreaYear"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nationalityAR"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameCurrencyEN"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#HDINotes"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#countryAreaNotes"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#GDPUnit"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#populationYear"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#countryAreaYear"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nationalityEN"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaTotal"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#landAreaNotes"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameCurrencyFR"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#HDIYear"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#area">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameShortRU"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameOfficialRU"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameOfficialFR"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameListEN"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeISO2"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeAGROVOC"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameListES"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameOfficialAR"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeUN"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameListZH"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#validSince"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeISO3"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameShortFR"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeFAOSTAT"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameOfficialZH"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameShortIT"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameOfficialIT"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameShortEN"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameShortES"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#validUntil"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameShortAR"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeDBPediaID"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameShortZH"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeGAUL"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameOfficialEN"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameOfficialES"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameListRU"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeUNDP"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeFAOTERM"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameListIT"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameListFR"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameListAR"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#disputed">
+    <rdfs:subClassOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#territory"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#special_group">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#group"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#economic_region">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#group"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#group">
+    <rdfs:subClassOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#area"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://aims.fao.org/aos/geopolitical.owl#organization">
+    <rdfs:subClassOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#group"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#isSuccessorOf">
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United Nations Statistics Division</geo:sourceCreator>
+    <rdfs:domain rdf:resource="http://aims.fao.org/aos/geopolitical.owl#area"/>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United Nations Statistics Division http://unstats.un.org/unsd/methods/m49/m49chang.htm</dcterms:source>
+    <geo:sourceIdentifier xml:lang="en">http://unstats.un.org/unsd/methods/m49/m49chang.htm</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-04-15</geo:sourceModified>
+    <geo:sourceIdentifier xml:lang="fr">http://unstats.un.org/unsd/methods/m49/m49chgef.htm</geo:sourceIdentifier>
+    <rdfs:range rdf:resource="http://aims.fao.org/aos/geopolitical.owl#area"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#isPredecessorOf"/>
+    </owl:inverseOf>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#isInGroup">
+    <rdfs:domain rdf:resource="http://aims.fao.org/aos/geopolitical.owl#territory"/>
+    <rdfs:range rdf:resource="http://aims.fao.org/aos/geopolitical.owl#group"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMember"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasBorderWith">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+    <rdfs:domain rdf:resource="http://aims.fao.org/aos/geopolitical.owl#territory"/>
+    <rdfs:range rdf:resource="http://aims.fao.org/aos/geopolitical.owl#territory"/>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United Nations cartographic maps</geo:sourceCreator>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.un.org/Depts/Cartographic/map/profile/world00.pdf</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-05-01</geo:sourceModified>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United Nations cartographic maps http://www.un.org/Depts/Cartographic/map/profile/world00.pdf</dcterms:source>
+    <owl:inverseOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasBorderWith"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMember">
+    <rdfs:domain rdf:resource="http://aims.fao.org/aos/geopolitical.owl#group"/>
+    <rdfs:range rdf:resource="http://aims.fao.org/aos/geopolitical.owl#territory"/>
+    <owl:inverseOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#isInGroup"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#isPredecessorOf">
+    <geo:sourceIdentifier xml:lang="fr">http://unstats.un.org/unsd/methods/m49/m49chgef.htm</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United Nations Statistics Division</geo:sourceCreator>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-04-15</geo:sourceModified>
+    <rdfs:domain rdf:resource="http://aims.fao.org/aos/geopolitical.owl#area"/>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United Nations Statistics Division http://unstats.un.org/unsd/methods/m49/m49chang.htm</dcterms:source>
+    <geo:sourceIdentifier xml:lang="en">http://unstats.un.org/unsd/methods/m49/m49chang.htm</geo:sourceIdentifier>
+    <rdfs:range rdf:resource="http://aims.fao.org/aos/geopolitical.owl#area"/>
+    <owl:inverseOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#isSuccessorOf"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#isAdministeredBy">
+    <rdfs:domain rdf:resource="http://aims.fao.org/aos/geopolitical.owl#non_self_governing"/>
+    <rdfs:range rdf:resource="http://aims.fao.org/aos/geopolitical.owl#self_governing"/>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United Nations cartographic maps</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="en">http://www.un.org/Depts/Cartographic/map/profile/world00.pdf</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-05-01</geo:sourceModified>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United Nations cartographic maps http://www.un.org/Depts/Cartographic/map/profile/world00.pdf</dcterms:source>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaYear">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#agriculturalArea"/>
+    </rdfs:subPropertyOf>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasCoordinate">
+    <rdfs:domain rdf:resource="http://aims.fao.org/aos/geopolitical.owl#territory"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameOfficialEN">
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasOfficialName"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameShortFR">
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasShortName"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaNotes">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#agriculturalArea"/>
+    </rdfs:subPropertyOf>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameListZH">
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasListName"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameListES">
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasListName"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#agriculturalArea">
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasStatistics"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier xml:lang="en">http://faostat.fao.org/DesktopDefault.aspx?PageID=377&amp;lang=en#ancor</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://faostat.fao.org/DesktopDefault.aspx?PageID=377&amp;lang=en#ancor</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAOSTAT</geo:sourceCreator>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAOSTAT http://faostat.fao.org/DesktopDefault.aspx?PageID=377&amp;lang=en#ancor</dcterms:source>
+    <geo:sourceIdentifier xml:lang="fr">http://faostat.fao.org/DesktopDefault.aspx?PageID=377&amp;lang=fr#ancor</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-07-21</geo:sourceModified>
+    <dcterms:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Agricultural area, this category is the sum of areas under a) arable land - land under temporary agricultural crops (multiple-cropped areas are counted only once), temporary meadows for mowing or pasture, land under market and kitchen gardens and land temporarily fallow (less than five years). The abandoned land resulting from shifting cultivation is not included in this category. Data for “Arable land” are not meant to indicate the amount of land that is potentially cultivable; (b) permanent crops - land cultivated with long-term crops which do not have to be replanted for several years (such as cocoa and coffee); land under trees and shrubs producing flowers, such as roses and jasmine; and nurseries (except those for forest trees, which should be classified under "forest"); and (c) permanent meadows and pastures - land used permanently (five years or more) to grow herbaceous forage crops, either cultivated or growing wild (wild prairie or grazing land). Data are expressed in 1000 hectares. http://faostat.fao.org/site/375/default.aspx </dcterms:description>
+    <geo:sourceIdentifier xml:lang="es">http://faostat.fao.org/DesktopDefault.aspx?PageID=377&amp;lang=es#ancor</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeFAOTERM">
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasCode"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameCurrencyAR">
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasCurrency"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#HDITotal">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#HDI"/>
+    </rdfs:subPropertyOf>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameOfficialZH">
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasOfficialName"/>
+    </rdfs:subPropertyOf>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameListAR">
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasListName"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeCurrency">
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasCurrency"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#populationYear">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#population"/>
+    </rdfs:subPropertyOf>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nationalityZH">
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasNationality"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#GDPNotes">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#GDP"/>
+    </rdfs:subPropertyOf>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nationalityES">
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasNationality"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameOfficialES">
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasOfficialName"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#populationTotal">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#population"/>
+    </rdfs:subPropertyOf>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameOfficialRU">
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasOfficialName"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#population">
+    <geo:sourceIdentifier xml:lang="en">http://faostat.fao.org/DesktopDefault.aspx?PageID=550&amp;lang=en#ancor</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://faostat.fao.org/DesktopDefault.aspx?PageID=550&amp;lang=en#ancor</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2009-09-21</geo:sourceModified>
+    <dcterms:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The total population usually refers to the present-in-area (de facto) population which includes all persons physically present within the present geographical boundaries of countries at the mid-point of the reference period.  http://faostat.fao.org/site/375/default.aspx</dcterms:description>
+    <geo:sourceIdentifier xml:lang="es">http://faostat.fao.org/DesktopDefault.aspx?PageID=550&amp;lang=es#ancor</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAOSTAT</geo:sourceCreator>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasStatistics"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier xml:lang="fr">http://faostat.fao.org/DesktopDefault.aspx?PageID=550&amp;lang=fr#ancor</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAOSTAT http://faostat.fao.org/site/550/default.aspx</dcterms:source>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeUNDP">
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasCode"/>
+    </rdfs:subPropertyOf>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nationalityFR">
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasNationality"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameCurrencyZH">
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasCurrency"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameOfficialIT">
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasOfficialName"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#HDIUnit">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#HDI"/>
+    </rdfs:subPropertyOf>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameShortES">
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasShortName"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#landAreaYear">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#landArea"/>
+    </rdfs:subPropertyOf>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#GDPTotalInCurrentPrices">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#GDP"/>
+    </rdfs:subPropertyOf>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nationalityIT">
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasNationality"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasStatistics">
+    <rdfs:domain rdf:resource="http://aims.fao.org/aos/geopolitical.owl#territory"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMaxLatitude">
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasCoordinate"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasCurrency">
+    <rdfs:domain rdf:resource="http://aims.fao.org/aos/geopolitical.owl#territory"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#GDP">
+    <geo:sourceIdentifier xml:lang="ar">http://data.albankaldawli.org/indicator/NY.GDP.MKTP.CD</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >World Bank http://data.worldbank.org/indicator/NY.GDP.MKTP.CD</dcterms:source>
+    <geo:sourceIdentifier xml:lang="fr">http://donnees.banquemondiale.org/indicateur/NY.GDP.MKTP.CD</geo:sourceIdentifier>
+    <dcterms:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >GDP at purchaser's prices is the sum of gross value added by all resident producers in the economy plus any product taxes and minus any subsidies not included in the value of the products. It is calculated without making deductions for depreciation of fabricated assets or for depletion and degradation of natural resources. Data are in current U.S. dollars. Dollar figures for GDP are converted from domestic currencies using single year official exchange rates. For a few countries where the official exchange rate does not reflect the rate effectively applied to actual foreign exchange transactions, an alternative conversion factor is used. Source: World Bank national accounts data, and OECD National Accounts data files. http://data.worldbank.org/indicator/NY.GDP.MKTP.CD</dcterms:description>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-12-16</geo:sourceModified>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >World Bank</geo:sourceCreator>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasStatistics"/>
+    <geo:sourceIdentifier xml:lang="es">ttp://datos.bancomundial.org/indicador/NY.GDP.MKTP.CD</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://data.worldbank.org/indicator/NY.GDP.MKTP.CD</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://data.worldbank.org/indicator/NY.GDP.MKTP.CD</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameShortEN">
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasShortName"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#landArea">
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAOSTAT</geo:sourceCreator>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-07-21</geo:sourceModified>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAOSTAT http://faostat.fao.org/DesktopDefault.aspx?PageID=377&amp;lang=en#ancor</dcterms:source>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://faostat.fao.org/DesktopDefault.aspx?PageID=377&amp;lang=en#ancor</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://faostat.fao.org/DesktopDefault.aspx?PageID=377&amp;lang=en#ancor</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="es">http://faostat.fao.org/DesktopDefault.aspx?PageID=377&amp;lang=es#ancor</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://faostat.fao.org/DesktopDefault.aspx?PageID=377&amp;lang=fr#ancor</geo:sourceIdentifier>
+    <dcterms:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Land area is the total area of the country excluding area under inland water bodies. Possible variations in the data may be due to updating and revisions of the country data and not necessarily to any change of area. Data are expressed in 1 000 hectares. http://faostat.fao.org/site/375/default.aspx </dcterms:description>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasStatistics"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameListIT">
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasListName"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameCurrencyIT">
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasCurrency"/>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#countryAreaNotes">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#countryArea"/>
+    </rdfs:subPropertyOf>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#populationUnit">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#population"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameCurrencyRU">
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasCurrency"/>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasListName">
+    <rdfs:domain rdf:resource="http://aims.fao.org/aos/geopolitical.owl#area"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaTotal">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#agriculturalArea"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#landAreaNotes">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#landArea"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMaxLongitude">
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasCoordinate"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#landAreaUnit">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#landArea"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameShortRU">
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasShortName"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nationalityAR">
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasNationality"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nationalityEN">
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasNationality"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameCurrencyEN">
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasCurrency"/>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeISO3">
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasCode"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United Nations Statistics Division</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="en">http://unstats.un.org/unsd/methods/m49/m49alpha.htm</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://unstats.un.org/unsd/methods/m49/m49alphaf.htm</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-04-01</geo:sourceModified>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United Nations Statistics Division http://unstats.un.org/unsd/methods/m49/m49alpha.htm</dcterms:source>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameOfficialAR">
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasOfficialName"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#validSince">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The value of the datatype property *validSince* associated to a particular area (territory or group) indicates the area's  first year of validity.  The geopolitical ontology traces back historic changes only until 1985, therefore, if an area has a validSince = 1985, this indicates that the area is/was valid since 1985 or before.       </rdfs:comment>
+    <rdfs:domain rdf:resource="http://aims.fao.org/aos/geopolitical.owl#area"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#countryAreaUnit">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#countryArea"/>
+    </rdfs:subPropertyOf>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasOfficialName">
+    <rdfs:domain rdf:resource="http://aims.fao.org/aos/geopolitical.owl#area"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeDBPediaID">
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasCode"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >DBpedia</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="en">http://dbpedia.org/About</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-04-28</geo:sourceModified>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >DBpedia http://dbpedia.org/About</dcterms:source>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#countryArea">
+    <geo:sourceIdentifier xml:lang="fr">http://faostat.fao.org/DesktopDefault.aspx?PageID=377&amp;lang=fr#ancor</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-07-21</geo:sourceModified>
+    <dcterms:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Country area, area of the country including area under inland water bodies, but excluding offshore territorial waters. Possible variations in the data may be due to updating and revisions of the country data and not necessarily to any change of area. Data are expressed in 1000 hectares. http://faostat.fao.org/site/375/default.aspx </dcterms:description>
+    <geo:sourceIdentifier xml:lang="es">http://faostat.fao.org/DesktopDefault.aspx?PageID=377&amp;lang=es#ancor</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://faostat.fao.org/DesktopDefault.aspx?PageID=377&amp;lang=en#ancor</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://faostat.fao.org/DesktopDefault.aspx?PageID=377&amp;lang=en#ancor</geo:sourceIdentifier>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasStatistics"/>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAOSTAT http://faostat.fao.org/DesktopDefault.aspx?PageID=377&amp;lang=en#ancor</dcterms:source>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAOSTAT</geo:sourceCreator>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameListEN">
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasListName"/>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameShortIT">
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasShortName"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeFAOSTAT">
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasCode"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAOSTAT</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="en">http://faostat.fao.org</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="es">http://faostat.fao.org/default.aspx?lang=es</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://faostat.fao.org/default.aspx?lang=fr</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAOSTAT http://faostat.fao.org</dcterms:source>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameCurrencyFR">
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasCurrency"/>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#GDPUnit">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#GDP"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasCode">
+    <rdfs:domain rdf:resource="http://aims.fao.org/aos/geopolitical.owl#area"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeAGROVOC">
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasCode"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >AGROVOC</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="fr">http://aims.fao.org/fr/website/Search-AGROVOC/sub</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >AGROVOC http://aims.fao.org/website/Search-AGROVOC/sub</dcterms:source>
+    <geo:sourceIdentifier xml:lang="zh">http://aims.fao.org/zh-hans/website/Search-AGROVOC/sub</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://aims.fao.org/ar/website/Search-AGROVOC/sub</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="es">http://aims.fao.org/es/website/Search-AGROVOC/sub</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://aims.fao.org/website/Search-AGROVOC/sub</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasNationality">
+    <rdfs:domain rdf:resource="http://aims.fao.org/aos/geopolitical.owl#territory"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameListFR">
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasListName"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#countryAreaYear">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#countryArea"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameShortZH">
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasShortName"/>
+    </rdfs:subPropertyOf>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameCurrencyES">
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasCurrency"/>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#countryAreaTotal">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#countryArea"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasShortName">
+    <rdfs:domain rdf:resource="http://aims.fao.org/aos/geopolitical.owl#area"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeGAUL">
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasCode"/>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Global Administrative Unit Layers</geo:sourceCreator>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/geonetwork/srv/en/metadata.show?id=12691</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2008-12-10</geo:sourceModified>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Global Administrative Unit Layers http://www.fao.org/geonetwork/srv/en/metadata.show?id=12691</dcterms:source>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameListRU">
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasListName"/>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaUnit">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#agriculturalArea"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeISO2">
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasCode"/>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >ISO 3166-1</geo:sourceCreator>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.iso.org/iso/country_codes/iso_3166_code_lists.htm</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >ISO 3166-1 http://www.iso.org/iso/country_codes/iso_3166_code_lists.htm</dcterms:source>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameOfficialFR">
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasOfficialName"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nationalityRU">
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasNationality"/>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#HDI">
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://hdrstats.undp.org/en/indicators/49806.html</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://hdrstats.undp.org/en/indicators/49806.html</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://hdrstats.undp.org/fr/indicateurs/49806.html</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-11-04</geo:sourceModified>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >UNDP - HDRO</geo:sourceCreator>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasStatistics"/>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >UNDP - HDRO http://hdrstats.undp.org/en/indicators/49806.html</dcterms:source>
+    <dcterms:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    > composite index measuring average achievement in three basic dimensions of human development—a long and healthy life, knowledge and a decent standard of living. Source: Calculated based on data from UNDESA (2009d), Barro and Lee (2010), UNESCO Institute for Statistics (2010b), World Bank (2010b) and IMF(2010a) . http://hdrstats.undp.org/en/indicators/49806.html</dcterms:description>
+    <geo:sourceIdentifier xml:lang="es">http://hdrstats.undp.org/es/indicadores/49806.html</geo:sourceIdentifier>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#populationNotes">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#population"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#HDINotes">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#HDI"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMinLongitude">
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasCoordinate"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameShortAR">
+    <geo:sourceIdentifier xml:lang="es">http://www.fao.org/termportal/contr/es/</geo:sourceIdentifier>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology http://www.fao.org/termportal/en/</dcterms:source>
+    <geo:sourceIdentifier xml:lang="ar">http://www.fao.org/termportal/contr/ar/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="en">http://www.fao.org/termportal/contr/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.fao.org/termportal/en/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="zh">http://www.fao.org/termportal/contr/zh/</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://www.fao.org/termportal/contr/fr/</geo:sourceIdentifier>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO terminology</geo:sourceCreator>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-06-24</geo:sourceModified>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasShortName"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeUN">
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasCode"/>
+    <geo:sourceCreator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United Nations Statistics Division</geo:sourceCreator>
+    <geo:sourceIdentifier xml:lang="en">http://unstats.un.org/unsd/methods/m49/m49alpha.htm</geo:sourceIdentifier>
+    <geo:sourceIdentifier xml:lang="fr">http://unstats.un.org/unsd/methods/m49/m49alphaf.htm</geo:sourceIdentifier>
+    <geo:sourceModified rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010-04-01</geo:sourceModified>
+    <dcterms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United Nations Statistics Division http://unstats.un.org/unsd/methods/m49/m49alpha.htm</dcterms:source>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#HDIYear">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#HDI"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#validUntil">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The value of the datatype property *validUntil* associated to a particular area (territory or group) indicates the area's last year of validity. In case the area is currently valid, this value is set by default to 9999.
+      </rdfs:comment>
+    <rdfs:domain rdf:resource="http://aims.fao.org/aos/geopolitical.owl#area"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMinLatitude">
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#hasCoordinate"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#landAreaTotal">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#landArea"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#GDPYear">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:subPropertyOf rdf:resource="http://aims.fao.org/aos/geopolitical.owl#GDP"/>
+  </owl:DatatypeProperty>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/source"/>
+  <owl:AnnotationProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#sourceModified"/>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/description"/>
+  <owl:AnnotationProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#sourceCreator"/>
+  <owl:AnnotationProperty rdf:about="http://aims.fao.org/aos/geopolitical.owl#sourceIdentifier"/>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/modified"/>
+</rdf:RDF>

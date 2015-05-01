@@ -345,20 +345,35 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 		editConfiguration.setFormSpecificData(formSpecificData);
 	}
 
-    private static String AUTHORSHIPS_QUERY = ""
+    private static String AUTHORSHIPS_QUERY = " \n"
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
         + "PREFIX afn:  <http://jena.hpl.hp.com/ARQ/function#> \n"
         + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
         + "PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n"
+        + "PREFIX vcard:  <http://www.w3.org/2006/vcard/ns#> \n"
         + "SELECT ?authorshipURI (afn:localname(?authorshipURI) AS ?authorshipName) ?authorURI ?authorName ?rank \n"
-        + "WHERE { \n"
-        + "?subject core:relatedBy ?authorshipURI . \n"
-        + "?authorshipURI a core:Authorship . \n"
-        + "?authorshipURI core:relates ?authorURI . \n" 
-        + "?authorURI a foaf:Agent . \n"
-        + "OPTIONAL { ?authorURI rdfs:label ?authorName } \n"
-        + "OPTIONAL { ?authorshipURI core:rank ?rank } \n" 
-        + "} ORDER BY ?rank";
+        + "WHERE { { \n"
+        + "  ?subject core:relatedBy ?authorshipURI . \n"
+        + "  ?authorshipURI a core:Authorship . \n"
+        + "  ?authorshipURI core:relates ?authorURI . \n" 
+        + "  ?authorURI a foaf:Agent . \n"
+        + "  OPTIONAL { ?authorURI rdfs:label ?authorName } \n"
+        + "  OPTIONAL { ?authorshipURI core:rank ?rank } \n" 
+	    + "} UNION {  \n" 
+	    + "	 ?subject core:relatedBy ?authorshipURI .  \n" 
+	    + "	 ?authorshipURI a core:Authorship .  \n" 
+	    + "	 ?authorshipURI core:relates ?authorURI .  \n" 
+	    + "	 ?authorURI a vcard:Individual .  \n" 
+	    + "	 ?authorURI vcard:hasName ?vName . \n" 
+	    + "	 ?vName vcard:givenName ?firstName . \n" 
+	    + "	 ?vName vcard:familyName ?lastName . \n" 
+	    + "	 OPTIONAL { ?vName core:middleName ?middleName . } \n" 
+	    + "	 OPTIONAL { ?authorshipURI core:rank ?rank }  \n" 
+	    + "	 bind ( COALESCE(?firstName, \"\") As ?firstName1) . \n" 
+	    + "	 bind ( COALESCE(?middleName, \"\") As ?middleName1) . \n" 
+	    + "	 bind ( COALESCE(?lastName, \"\") As ?lastName1) . \n" 
+	    + "	 bind (concat(str(?lastName1 + \", \"),str(?middleName1 + \" \"),str(?firstName1)) as ?authorName) . \n" 
+        + "} } ORDER BY ?rank";
     
        
     private List<AuthorshipInfo> getExistingAuthorships(String subjectUri, VitroRequest vreq) {

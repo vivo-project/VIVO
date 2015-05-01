@@ -35,23 +35,48 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Search']</td>
+	<td>css=input.search</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Search for 'lecturer'</td>
+	<td>lecturer - VIVO Search Results</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Search for 'lecturer'</td>
+	<td>verifyText</td>
+	<td>css=h2.searchResultsHeader</td>
+	<td>Search results for 'lecturer'</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>No matching results.</td>
+	<td>verifyElementPresent</td>
+	<td>link=organizations</td>
 	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=span.display-title</td>
+	<td>College</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[2]/span</td>
+	<td>Assistant Professor</td>
 </tr>
 <!--Search for professor, which should bring up Assistant Professor and Professor-->
 <tr>
@@ -80,13 +105,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Faculty, Jane Assistant Professor</td>
+	<td>verifyElementPresent</td>
+	<td>link=organizations</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Assistant Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll University</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>University</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Cornell University</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>University</td>
 	<td></td>
 </tr>
 <!--Search for Carroll, which should bring up 2 organizations-->
@@ -112,12 +162,12 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=organizations</td>
+	<td>link=people</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Carroll College College</td>
+	<td>verifyElementPresent</td>
+	<td>link=organizations</td>
 	<td></td>
 </tr>
 <tr>
@@ -127,13 +177,28 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Carroll University University</td>
+	<td>Carroll College College</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Carroll University</td>
 	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Carroll University University</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[3]/span</td>
+	<td>Assistant Professor</td>
 </tr>
 <!--Link to Carroll College to verify Jane Faculty is not listed-->
 <tr>
@@ -179,12 +244,12 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=organizations</td>
+	<td>link=people</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Carroll University University</td>
+	<td>verifyElementPresent</td>
+	<td>link=organizations</td>
 	<td></td>
 </tr>
 <tr>
@@ -194,12 +259,27 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Cornell University University</td>
+	<td>Carroll University University</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Carroll University</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Cornell University University</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='wrapper-content']/div/ul/li[3]/span</td>
+	<td>Assistant Professor</td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty, Jane</td>
 	<td></td>
 </tr>
 <!--Make sure Jane Faculty is associated with Carroll and Cornell-->

@@ -6,7 +6,6 @@
 -->
  
 <#include "individual-setup.ftl">
-<#import "individual-qrCodeGenerator.ftl" as qr>
 <#import "lib-vivo-properties.ftl" as vp>
 <#--Number of labels present-->
  <#if !labelCount??>
@@ -25,7 +24,7 @@
 <#--add the VIVO-ORCID interface -->
 <#include "individual-orcidInterface.ftl">  
         
-<section id="individual-intro" class="vcard person" role="region">
+<section itemscope itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
 
     <section id="share-contact" role="region"> 
         <!-- Image -->           
@@ -45,8 +44,13 @@
         <!-- Contact Info -->
         <div id="individual-tools-people">
             <span id="iconControlsLeftSide">
-                <img id="uriIcon" title="${individual.uri}" src="${urls.images}/individual/uriIcon.gif" alt="${i18n().uri_icon}"/>  
-                <@qr.renderCode "qr_icon.png" />
+                <img id="uriIcon" title="${individual.uri}" src="${urls.images}/individual/uriIcon.gif" alt="${i18n().uri_icon}"/>
+  				<#if checkNamesResult?has_content >
+					<img id="qrIcon"  src="${urls.images}/individual/qr_icon.png" alt="${i18n().qr_icon}" />
+                	<span id="qrCodeImage" class="hidden">${qrCodeLinkedImage!} 
+						<a class="qrCloseLink" href="#"  title="${i18n().qr_code}">${i18n().close_capitalized}</a>
+					</span>
+				</#if>
             </span>
         </div>
         <#include "individual-contactInfo.ftl">  
@@ -68,7 +72,7 @@
             <#else>                
                 <h1 class="vcard foaf-person">
                     <#-- Label -->
-                    <span class="fn"><@p.label individual editable labelCount localesCount/></span>
+                    <span itemprop="name" class="fn"><@p.label individual editable labelCount localesCount/></span>
 
                     <#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->
                     <#assign title = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Title")!>
@@ -80,7 +84,7 @@
                             <@p.verboseDisplay title />
                         </#if>
                         <#list title.statements as statement>
-                            <span class="display-title<#if editable>-editable</#if>">${statement.preferredTitle}</span>
+                            <span itemprop="jobTitle" class="display-title<#if editable>-editable</#if>">${statement.preferredTitle}</span>
                             <@p.editingLinks "${title.localName}" "${title.name}" statement editable title.rangeUri />
                         </#list>
                     </#if>
@@ -138,6 +142,10 @@
 </#if>
 <script>
     var imagesPath = '${urls.images}';
+	var individualUri = '${individual.uri!}';
+	var individualPhoto = '${individual.thumbNail!}';
+	var exportQrCodeUrl = '${urls.base}/qrcode?uri=${individual.uri!}';
+	var baseUrl = '${urls.base}';
     var i18nStrings = {
         displayLess: '${i18n().display_less}',
         displayMoreEllipsis: '${i18n().display_more_ellipsis}',
@@ -164,5 +172,6 @@ ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tiny_mce/
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/individual/individualQtipBubble.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/individual/individualUriRdf.js"></script>',
+			  '<script type="text/javascript" src="${urls.base}/js/individual/moreLessController.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/imageUpload/imageUploadUtils.js"></script>')}

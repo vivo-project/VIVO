@@ -14,7 +14,7 @@
         <h2>${i18TextString} ${firstRow["deptLabel"]} ${i18n().department}</h2>
         <#break>
     </#list>
-<table id="pageList" >
+<table id="table-listing" >
     <tr>
         <th>${i18n().grant_name}</th>
         <th>${i18n().close_date}</th>

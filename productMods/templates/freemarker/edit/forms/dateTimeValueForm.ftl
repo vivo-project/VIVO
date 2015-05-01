@@ -10,7 +10,7 @@
 <#if editMode == "edit">        
         <#assign titleVerb="${i18n().edit_capitalized}">        
         <#assign disabledVal="disabled">
-        <#assign submitButtonText="${i18n().edit_date_time_value}">
+        <#assign submitButtonText="${i18n().save_changes}">
 <#else>
         <#assign titleVerb="${i18n().create_capitalized}">        
         <#assign submitButtonText="${i18n().create_date_time_value}">
