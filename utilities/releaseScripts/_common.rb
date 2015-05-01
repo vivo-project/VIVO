@@ -253,7 +253,7 @@ end
 
 def tag_exists?(dir, tag)
 	Dir.chdir(dir) do |path|
-		re = Regexp.new("\\b#{tag}\\b")
+		re = Regexp.new("^#{tag}$")
 		`git tag`.index(re)
 	end
 end
