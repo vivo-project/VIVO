@@ -80,18 +80,28 @@
         PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
         PREFIX obo:   &lt;http://purl.obolibrary.org/obo/&gt;
         CONSTRUCT { 
-            ?subject ?property ?position .
-            ?position ?positionProperty ?positionValue .
-            ?org rdfs:label ?orgName .
-            ?org obo:BFO_0000050 ?middleOrg .
-            ?middleOrg rdfs:label ?middleOrgName .
-            ?middleOrg obo:BFO_0000050 ?outerOrg .
-            ?outerOrg rdfs:label ?outerOrgName
+        	?subject ?property ?position .
+			?position rdfs:label ?positionTitle . 
+			?position core:hrJobTitle ?hrJobTitle .
+			?position core:rank ?rank .
+			?position core:relates ?org .
+        	?org rdfs:label ?orgName .
+        	?org obo:BFO_0000050 ?middleOrg .
+        	?middleOrg rdfs:label ?middleOrgName .
+        	?middleOrg obo:BFO_0000050 ?outerOrg .
+        	?outerOrg rdfs:label ?outerOrgName .
         } WHERE {
             {
                ?subject ?property ?position .
                ?position a core:Position .
-               ?position ?positionProperty ?positionValue 
+            } UNION {
+               ?subject ?property ?position .
+               ?position a core:Position .
+               ?position rdfs:label ?positionTitle .
+            } UNION {
+               ?subject ?property ?position .
+               ?position a core:Position .
+               ?position core:rank ?rank 
             } UNION {
                ?subject ?property ?position .
                ?position a core:Position .

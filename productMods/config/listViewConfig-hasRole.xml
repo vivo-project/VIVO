@@ -110,7 +110,7 @@
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
         CONSTRUCT { 
             ?subject ?property ?role .
-            ?role ?roleProperty ?roleValue . 
+            ?role rdfs:label ?roleLabel . 
             ?activity rdfs:label ?activityName 
         } WHERE {
             {
@@ -119,7 +119,7 @@
             } UNION {
                 ?subject ?property ?role .
                 ?role a ?objectType .
-                ?role ?roleProperty ?roleValue 
+                ?role rdfs:label ?roleLabel . 
             } UNION {
                 ?subject ?property ?role .
                 ?role a ?objectType .

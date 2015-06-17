@@ -79,7 +79,8 @@
         CONSTRUCT { 
             ?subject ?property ?position .
             ?position a core:Position .
-            ?position ?positionProperty ?positionValue .
+            ?position core:hideFromDisplay ?hideThis .
+			?position rdfs:label ?positionTitle .
             ?position core:relates ?person .
             ?person a foaf:Person .
             ?person rdfs:label ?personName  
@@ -90,7 +91,11 @@
             } UNION {
                ?subject ?property ?position .
                ?position a core:Position .
-               ?position ?positionProperty ?positionValue 
+               ?position core:hideFromDisplay ?hideThis 
+            } UNION {
+               ?subject ?property ?position .
+               ?position a core:Position .
+               ?position rdfs:label ?positionTitle 
             } UNION {
                ?subject ?property ?position .
                ?position core:relates ?person .

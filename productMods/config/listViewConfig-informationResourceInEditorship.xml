@@ -43,7 +43,7 @@
         CONSTRUCT { 
             ?subject ?property ?editorship .
             ?editorship a core:Editorship .
-            ?editorship ?editorshipProperty ?editorshipValue .
+            ?editorship core:rank ?rank .
             ?editorship core:relates ?person .
             ?person a foaf:Person .
             ?person rdfs:label ?personName .
@@ -56,7 +56,7 @@
             } UNION {
                 ?subject ?property ?editorship .
                 ?editorship a core:Editorship .
-                ?editorship ?editorshipProperty ?editorshipValue 
+                ?editorship core:rank ?rank 
             } UNION {
                 ?subject ?property ?editorship .
                 ?editorship a core:Editorship .

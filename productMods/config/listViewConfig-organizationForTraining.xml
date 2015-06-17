@@ -112,7 +112,8 @@
         CONSTRUCT {
             ?subject ?property ?edTraining .
             ?edTraining a core:EducationalProcess .
-            ?edTraining ?edTrainingProp ?edTrainingValue .
+            ?edTraining core:majorField ?majorField .
+            ?edTraining core:supplementalInformation ?info .
             ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0000057&gt; ?person .
             ?person a foaf:Person .
             ?person rdfs:label ?personName
@@ -124,7 +125,11 @@
             UNION {
                 ?subject ?property ?edTraining .
                 ?edTraining a core:EducationalProcess .
-                ?edTraining ?edTrainingProp ?edTrainingValue 
+                ?edTraining core:majorField ?majorField . 
+	        UNION {
+	            ?subject ?property ?edTraining .
+	            ?edTraining a core:EducationalProcess 
+                ?edTraining core:supplementalInformation ?info . 
             }
             UNION {
                 ?subject ?property ?edTraining .
