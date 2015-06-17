@@ -14,18 +14,19 @@
 
         SELECT ?vcard ?link 
                (afn:localname(?link) AS ?linkName) 
-               ?label 
+               (group_concat(distinct ?linkLabel;separator="/") as ?label)
                ?url 
                ?rank WHERE {
             ?subject ?property ?vcard .
             ?vcard vcard:hasURL ?link
-            OPTIONAL { ?link rdfs:label ?label }
+            OPTIONAL { ?link rdfs:label ?linkLabel }
             OPTIONAL { ?link vcard:url ?url }
             OPTIONAL { ?link core:rank ?rank }
         <critical-data-required>
         FILTER ( bound(?link) )    
         </critical-data-required>  
-        } ORDER BY ?rank ?label
+        } GROUP BY ?vcard ?link ?url ?rank
+          ORDER BY ?rank ?linkLabel
     </query-select>
 
     <query-construct>    	
@@ -37,7 +38,7 @@
             ?vcard vcard:hasURL ?link .
             ?link vcard:url ?url .
             ?link core:rank ?rank .
-            ?link rdfs:label ?label
+            ?link rdfs:label ?linkLabel
         } WHERE {
             { 
                 ?subject ?property ?vcard .
@@ -53,7 +54,7 @@
             } UNION {
                 ?subject ?property ?vcard .
                 ?vcard vcard:hasURL ?link .
-                ?link rdfs:label ?label
+                ?link rdfs:label ?linkLabel
             } 
         }
     </query-construct>

@@ -95,16 +95,17 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         + "PREFIX vcard: <http://www.w3.org/2006/vcard/ns#> \n"
         + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
         + "PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> \n"
-        + "SELECT DISTINCT ?vcard ?link ?url ?label ?rank ?typeLabel WHERE { \n"
+        + "SELECT DISTINCT ?vcard ?link ?url ?rank ?typeLabel (group_concat(distinct ?linkLabel;separator=\"/\") as ?label) WHERE { \n"
         + "    ?subject <http://purl.obolibrary.org/obo/ARG_2000028> ?vcard . \n"
         + "    ?vcard vcard:hasURL ?link . \n"
         + "    ?link a vcard:URL \n"
         + "    OPTIONAL { ?link vcard:url ?url } \n"
-        + "    OPTIONAL { ?link rdfs:label ?label } \n"
+        + "    OPTIONAL { ?link rdfs:label ?linkLabel } \n"
         + "    OPTIONAL { ?link core:rank ?rank } \n"
         + "    OPTIONAL { ?link vitro:mostSpecificType ?type } \n"
         + "    OPTIONAL { ?type rdfs:label ?typeLabel } \n"
-        + "} ORDER BY ?rank";
+        + "} GROUP BY ?rank ?vcard ?link ?url ?typeLabel \n" 
+    	+ "  ORDER BY ?rank";
     
        
     private List<Map<String, String>> getWebpages(String subjectUri, VitroRequest vreq) {
