@@ -16,7 +16,7 @@
                         ?role 
                         ?roleLabel 
                         ?activity ?activityName 
-                        ?activityLabel
+						?activityLabel
                         ?dateTimeStart ?dateTimeEnd 
                         ?hideThis
                         ?objectType
@@ -32,7 +32,7 @@
                         </collated>
             }           
             OPTIONAL {  ?role core:roleContributesTo ?activity .
-                        ?activity rdfs:label ?activityLabel 
+                        ?activity rdfs:label ?activityName 
                         
                         <collated>
                         ?activity vitro:mostSpecificType ?subclass   
@@ -92,7 +92,7 @@
         CONSTRUCT { 
             ?subject ?property ?role .
             ?role a core:ClinicalRole .
-            ?role ?roleProperty ?roleValue . 
+            ?role rdfs:label ?roleLabel . 
             ?activity rdfs:label ?activityName 
         } WHERE {
             {
@@ -101,7 +101,7 @@
             } UNION {
                 ?subject ?property ?role .
                 ?role a core:ClinicalRole .
-                ?role ?roleProperty ?roleValue 
+                ?role rdfs:label ?roleLabel 
             } UNION {
                 ?subject ?property ?role .
                 ?role a core:ClinicalRole .

@@ -71,7 +71,6 @@
             ?subject ?property ?role .
             ?role a core:CoPrincipalInvestigatorRole .
             ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
-            ?role ?roleProperty ?roleValue . 
             ?activity rdfs:label ?activityLabel .
             ?activity core:assignedBy ?awardedBy .
             ?awardedBy rdfs:label ?awardedByLabel .
@@ -82,10 +81,6 @@
             {
                 ?subject ?property ?role .
                 ?role a core:CoPrincipalInvestigatorRole . 
-            } UNION {
-                ?subject ?property ?role .
-                ?role a core:CoPrincipalInvestigatorRole .
-                ?role ?roleProperty ?roleValue 
             } UNION {
                 ?subject ?property ?role .
                 ?role a core:CoPrincipalInvestigatorRole .

@@ -75,37 +75,6 @@
     </query-construct>
         
     <query-construct>
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-        CONSTRUCT {
-            ?subject ?property ?advisorRole .
-            ?advisorRole a core:AdvisorRole .
-            ?advisorRole core:relatedBy ?advisingRel .
-            ?advisingRel a core:AdvisingRelationship .
-            ?advisingRel ?advisingRelProperty ?advisingRelValue .
-            ?advisingRel rdfs:label ?advisingRelLabel .
-        } WHERE {
-            {
-               ?subject ?property ?advisorRole .
-               ?advisorRole a core:AdvisorRole .
-               ?advisorRole core:relatedBy ?advisingRel .
-               ?advisingRel a core:AdvisingRelationship
-            } UNION {
-               ?subject ?property ?advisorRole .
-               ?advisorRole a core:AdvisorRole .
-               ?advisorRole core:relatedBy ?advisingRel .
-               ?advisingRel a core:AdvisingRelationship .
-            } UNION {
-               ?subject ?property ?advisorRole .
-               ?advisorRole a core:AdvisorRole .
-               ?advisorRole core:relatedBy ?advisingRel .
-               ?advisingRel a core:AdvisingRelationship .
-               ?advisingRel rdfs:label ?advisingRelLabel
-            }
-        }
-    </query-construct>
-    
-    <query-construct>
             PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt;
             PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
             PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
@@ -116,6 +85,7 @@
                 ?advisorRole a core:AdvisorRole .
                 ?advisorRole core:relatedBy ?advisingRel .
                 ?advisingRel a core:AdvisingRelationship .
+				?advisingRel rdfs:label ?advisingRelLabel .
                 ?advisingRel core:relates ?adviseeRole .
                 ?adviseeRole &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?advisee .
                 ?advisee a foaf:Person .
@@ -131,6 +101,12 @@
                     ?advisorRole a core:AdvisorRole .
                     ?advisorRole core:relatedBy ?advisingRel .
                     ?advisingRel a core:AdvisingRelationship .
+                } UNION {
+                    ?subject ?property ?advisorRole .
+                    ?advisorRole a core:AdvisorRole .
+                    ?advisorRole core:relatedBy ?advisingRel .
+                    ?advisingRel a core:AdvisingRelationship .
+					?advisingRel rdfs:label ?advisingRelLabel
                 } UNION {
                     ?subject ?property ?advisorRole .
                     ?advisorRole a core:AdvisorRole .

@@ -94,8 +94,10 @@
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
         CONSTRUCT { 
             ?subject ?property ?role .
-            ?role ?roleProperty ?roleValue . 
-            ?activity rdfs:label ?activityName 
+            ?role rdfs:label ?roleLabel .
+            ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?activity . 
+            ?role core:roleContributesTo ?activity .
+            ?activity rdfs:label ?activityName .
         } WHERE {
             {
                 ?subject ?property ?role .
@@ -103,7 +105,7 @@
             } UNION {
                 ?subject ?property ?role .
                 ?role a ?objectType .
-                ?role ?roleProperty ?roleValue 
+                ?role rdfs:label ?roleLabel
             } UNION {
                 ?subject ?property ?role .
                 ?role a ?objectType .

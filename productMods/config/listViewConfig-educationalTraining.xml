@@ -70,7 +70,6 @@
         CONSTRUCT {
             ?subject ?property ?edTraining .
             ?edTraining a core:EducationalProcess .
-            ?edTraining ?edTrainingProp ?edTrainingValue .
             ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0002234&gt; ?awardedDegree .
             ?awardedDegree core:relates ?degree .
             ?edTraining core:dateTimeInterval ?dateTimeInterval
@@ -82,7 +81,17 @@
             UNION {
                 ?subject ?property ?edTraining .
                 ?edTraining a core:EducationalProcess .
-                ?edTraining ?edTrainingProp ?edTrainingValue 
+                ?edTraining core:majorField ?majorField .
+            }
+            UNION {
+                ?subject ?property ?edTraining .
+                ?edTraining a core:EducationalProcess .
+                ?edTraining core:departmentOrSchool ?deptOrSchool .
+            }
+            UNION {
+                ?subject ?property ?edTraining .
+                ?edTraining a core:EducationalProcess .
+                ?edTraining core:supplementalInformation ?info .
             }
             UNION {
                 ?subject ?property ?edTraining .
@@ -111,7 +120,6 @@
         CONSTRUCT {
             ?subject ?property ?edTraining .
             ?edTraining a core:EducationalProcess .
-            ?edTraining ?edTrainingProp ?edTrainingValue .
             ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0000057&gt; ?org .
             ?org a foaf:Organization .
             ?org rdfs:label ?orgName .
@@ -119,11 +127,6 @@
             {
                 ?subject ?property ?edTraining .
                 ?edTraining a core:EducationalProcess
-            }
-            UNION {
-                ?subject ?property ?edTraining .
-                ?edTraining a core:EducationalProcess .
-                ?edTraining ?edTrainingProp ?edTrainingValue 
             }
             UNION {
                 ?subject ?property ?edTraining .

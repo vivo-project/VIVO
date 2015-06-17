@@ -60,7 +60,7 @@
         CONSTRUCT { 
             ?subject ?property ?authorship .
             ?authorship a core:Authorship .
-            ?authorship ?authorshipProperty ?authorshipValue .
+            ?authorship core:rank ?rank .
             ?authorship core:relates ?author .
             ?author a foaf:Agent .
             ?author rdfs:label ?authorName .
@@ -73,7 +73,7 @@
             } UNION {
                 ?subject ?property ?authorship .
                 ?authorship a core:Authorship .
-                ?authorship ?authorshipProperty ?authorshipValue 
+                ?authorship core:rank ?rank . 
             } UNION {
                 ?subject ?property ?authorship .
                 ?authorship a core:Authorship .
@@ -100,7 +100,7 @@
         CONSTRUCT { 
             ?subject ?property ?authorship .
             ?authorship a core:Authorship .
-            ?authorship ?authorshipProperty ?authorshipValue .
+            ?authorship core:rank ?rank .
             ?authorship core:relates ?author .
             ?author a vcard:Kind .
             ?author vcard:hasName ?vName .
@@ -116,7 +116,7 @@
             } UNION {
                 ?subject ?property ?authorship .
                 ?authorship a core:Authorship .
-                ?authorship ?authorshipProperty ?authorshipValue 
+                ?authorship core:rank ?rank . 
             } UNION {
                 ?subject ?property ?authorship .
                 ?authorship a core:Authorship .

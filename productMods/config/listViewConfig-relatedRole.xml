@@ -36,11 +36,6 @@
             OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?indivInRole .
                        ?indivInRole rdfs:label ?indivLabel 
             }
-            OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?indivInRole .
-            }
-            OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?indivInRole .
-                       ?indivInRole rdfs:label ?indivLabel 
-            }
 
             OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval .
                        ?dateTimeInterval core:start ?dateTimeStartValue .                    
@@ -63,9 +58,10 @@
         CONSTRUCT { 
             ?subject ?property ?role .
             ?role a ?objectType .
-            ?role ?roleProperty ?roleValue .
+            ?role rdfs:label ?roleLabel .
             ?role vitro:mostSpecificType ?subclass .
             ?subclass rdfs:label ?roleTypeLabel .
+            ?role &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?indivInRole .
             ?indivInRole rdfs:label ?indivLabel
         } WHERE {
             {
@@ -74,7 +70,7 @@
             } UNION {
                ?subject ?property ?role .
                ?role a ?objectType .
-               ?role ?roleProperty ?roleValue  
+               ?role rdfs:label ?roleLabel  
             } UNION {
                ?subject ?property ?role .
                ?role a ?objectType .
@@ -88,11 +84,10 @@
                ?subject ?property ?role .
                ?role a ?objectType .
                ?role &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?indivInRole .
-               ?indivInRole rdfs:label ?indivLabel
             } UNION {
                ?subject ?property ?role .
                ?role a ?objectType .
-               ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?indivInRole .
+               ?role &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?indivInRole .
                ?indivInRole rdfs:label ?indivLabel
             }
         } 

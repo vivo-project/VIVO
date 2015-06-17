@@ -91,7 +91,6 @@
         CONSTRUCT { 
             ?subject ?property ?authorship .  
             ?authorship a core:Authorship . 
-            ?authorship ?authorshipProperty ?authorshipValue .
             ?authorship core:relates ?infoResource .
             ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
             ?infoResource rdfs:label ?infoResourceName .
@@ -105,7 +104,6 @@
             UNION {
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
-               ?authorship ?authorshipProperty ?authorshipValue 
             } UNION {
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
@@ -142,10 +140,12 @@
         CONSTRUCT { 
             ?subject ?property ?authorship .  
             ?authorship a core:Authorship .
-            ?authorship ?authorshipProperty ?authorshipValue .
             ?authorship core:relates ?infoResource .
             ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-            ?infoResource ?infoResourceProperty ?infoResourceValue .
+			?infoResource bibo:volume ?volume .
+			?infoResource bibo:pageStart ?startPage .
+			?infoResource bibo:pageEnd ?endPage .
+			?infoResource core:placeOfPublication ?locale .
             ?infoResource bibo:reproducedIn ?appearsInObj .
             ?infoResource core:publisher ?publisherObj .
             ?infoResource core:relatedBy ?editorship .
@@ -165,7 +165,6 @@
             UNION {
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
-               ?authorship ?authorshipProperty ?authorshipValue 
             } UNION {
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
@@ -176,7 +175,25 @@
                ?authorship a core:Authorship .
                ?authorship core:relates ?infoResource .
                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-               ?infoResource ?infoResourceProperty ?infoResourceValue 
+			   ?infoResource bibo:volume ?volume .
+            } UNION {
+               ?subject ?property ?authorship .
+               ?authorship a core:Authorship .
+               ?authorship core:relates ?infoResource .
+               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+			   ?infoResource bibo:pageStart ?startPage .
+            } UNION {
+               ?subject ?property ?authorship .
+               ?authorship a core:Authorship .
+               ?authorship core:relates ?infoResource .
+               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+			   ?infoResource bibo:pageEnd ?endPage .
+            } UNION {
+               ?subject ?property ?authorship .
+               ?authorship a core:Authorship .
+               ?authorship core:relates ?infoResource .
+               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+			   ?infoResource core:placeOfPublication ?locale .
             } UNION {
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .

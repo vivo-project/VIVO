@@ -140,16 +140,11 @@
         CONSTRUCT { 
             ?subject ?property ?role .
             ?role a vivo:AttendeeRole .
-            ?role ?roleProperty ?roleValue . 
             ?event1 rdfs:label ?event1Label 
         } WHERE {
             {
                 ?subject ?property ?role .
                 ?role a vivo:AttendeeRole .
-            } UNION {
-                ?subject ?property ?role .
-                ?role a vivo:AttendeeRole .
-                ?role ?roleProperty ?roleValue 
             } UNION {
                 ?subject ?property ?role .
                 ?role a vivo:AttendeeRole .
