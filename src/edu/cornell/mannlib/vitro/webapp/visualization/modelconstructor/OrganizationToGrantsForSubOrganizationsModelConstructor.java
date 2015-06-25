@@ -68,7 +68,7 @@ public class OrganizationToGrantsForSubOrganizationsModelConstructor implements 
 		+ "     ?Grant rdf:type core:Grant . "
 		+ "     ?Grant rdfs:label ?grantLabel . "
 		+ "      "
-		+ "     LET(?now := afn:now()) "
+		+ "     LET(?now := now()) "
 		+ " } ";
 
 		String justDateTimeOnGrantsQuery = ""
@@ -103,7 +103,7 @@ public class OrganizationToGrantsForSubOrganizationsModelConstructor implements 
 //			+ "             ?endDateForGrant core:dateTime ?endDateTimeValueForGrant   "
 //			+ "         }     "
 			+ "      "
-			+ "     LET(?now := afn:now()) "
+			+ "     LET(?now := now()) "
 			+ " } ";
 		
 		String justDateTimeOnRolesQuery = ""
@@ -138,7 +138,7 @@ public class OrganizationToGrantsForSubOrganizationsModelConstructor implements 
 //			+ "             ?endDate core:dateTime ?endDateTimeValue .           "
 //			+ "         }     "
 			+ "      "
-			+ "     LET(?now := afn:now()) "
+			+ "     LET(?now := now()) "
 			+ " } ";
 		
 		differentPerspectiveQueries.add(justGrantsQuery);

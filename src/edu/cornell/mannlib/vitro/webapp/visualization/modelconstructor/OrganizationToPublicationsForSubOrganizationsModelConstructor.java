@@ -75,7 +75,7 @@ public class OrganizationToPublicationsForSubOrganizationsModelConstructor imple
 		+ "     		?journal rdfs:label ?journalLabel .  "
 		+ "         }  "
 		+ "          "
-		+ "         LET(?now := afn:now()) "
+		+ "         LET(?now := now()) "
 		+ " } ";
 
 	}

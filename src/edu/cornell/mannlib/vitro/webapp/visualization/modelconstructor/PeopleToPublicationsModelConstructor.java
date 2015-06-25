@@ -65,7 +65,7 @@ public class PeopleToPublicationsModelConstructor implements ModelConstructor {
 		+ "     		?journal rdfs:label ?journalLabel .  "
 		+ "         }  "
 		+ "          "
-		+ "         LET(?now := afn:now()) "
+		+ "         LET(?now := now()) "
 		+ " } ";
 	}
 	
