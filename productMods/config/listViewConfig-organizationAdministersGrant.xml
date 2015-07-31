@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+<!-- See guidelines at https://wiki.duraspace.org/x/ExUdB -->
 
 <list-view-config>
-    <query-select>    
+    <query-select>
         PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
         PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
@@ -20,10 +20,10 @@
                     OPTIONAL { ?administratorRole core:relatedBy ?grant .
                                ?grant core:relates ?administratorRole .
                                ?grant rdfs:label ?grantLabel .
-                    }                
+                    }
         }  ORDER BY  ?grantLabel
   </query-select>
-    
+
     <query-construct>
         PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
         PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
@@ -50,6 +50,6 @@
             }
         }
     </query-construct>
-              
+
     <template>propStatement-organizationAdministersGrant.ftl</template>
 </list-view-config>

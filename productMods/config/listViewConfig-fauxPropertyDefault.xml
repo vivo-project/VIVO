@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<!-- VIVO-specific default list view config file for object properties 
-    
-     See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+<!-- VIVO-specific default list view config file for object properties
+
+     See guidelines at https://wiki.duraspace.org/x/ExUdB -->
 
 <list-view-config>
-    <query-select>    
+    <query-select>
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
         PREFIX obo: &lt;http://purl.obolibrary.org/obo/&gt;
         PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
-          
+
         SELECT <collated> ?subclass </collated>
-               ?object 
-               ?label 
-               ?localName 
+               ?object
+               ?label
+               ?localName
                ?type
                ?objectType
                ?title WHERE {
-  
+
             ?subject ?property ?object .
             ?object a ?objectType
-                LET (?localName := afn:localname(?object)) 
-            
-            OPTIONAL { ?object rdfs:label ?label } 
+                LET (?localName := afn:localname(?object))
+
+            OPTIONAL { ?object rdfs:label ?label }
 
             OPTIONAL {
                 # Get mostSpecificType only for Persons
@@ -38,47 +38,47 @@
                 ?typeUri vitro:inClassGroup ?classGroup .
                 ?classGroup a vitro:ClassGroup
             }
-            
+
             OPTIONAL { ?object obo:ARG_2000028 ?vcard .
                        ?vcard vcard:hasTitle ?titleObj .
-                       ?titleObj vcard:title ?title 
-            }             
-            
+                       ?titleObj vcard:title ?title
+            }
+
             <collated>
-            OPTIONAL { ?object a ?subclass } 
-            FILTER ( afn:namespace(?subclass) != "http://vitro.mannlib.cornell.edu/ns/vitro/0.7#" )   
+            OPTIONAL { ?object a ?subclass }
+            FILTER ( afn:namespace(?subclass) != "http://vitro.mannlib.cornell.edu/ns/vitro/0.7#" )
             </collated>
-        
+
         # Order by ?type is important, because if the object has more than one mostSpecificType,
         # they all get returned, but postprocessing culls out all but one. Ordering by ?type
         # will ensure that at least we'll get the same one every time.
-        } ORDER BY <collated> ?subclass </collated> ASC( ?label ) ASC( ?localName ) ?type 
+        } ORDER BY <collated> ?subclass </collated> ASC( ?label ) ASC( ?localName ) ?type
     </query-select>
 
     <query-construct>
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
-        
+
         CONSTRUCT {
             ?subject ?property ?object .
             ?object a ?subclass .
             ?object rdfs:label ?label .
         } WHERE {
-            { 
+            {
                 ?subject ?property ?object .
-            } UNION {                
+            } UNION {
                 ?subject ?property ?object .
                 ?object a ?subclass .
-            } UNION {      
+            } UNION {
                 ?subject ?property ?object .
                 ?object rdfs:label ?label .
-            }        
+            }
         }
     </query-construct>
-    
+
     <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
         PREFIX obo: &lt;http://purl.obolibrary.org/obo/&gt;
         PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
@@ -89,24 +89,24 @@
             ?typeUri vitro:inClassGroup ?classGroup .
             ?classGroup a vitro:ClassGroup .
             ?typeUri rdfs:label ?type .
-            ?object obo:ARG_2000028 ?vcard . 
+            ?object obo:ARG_2000028 ?vcard .
             ?vcard vcard:hasTitle ?titleObj .
             ?titleObj vcard:title ?title
         } WHERE {
-            { 
+            {
                 ?subject ?property ?object .
-            } UNION {            
+            } UNION {
                 ?subject ?property ?object .
                 ?object vitro:mostSpecificType ?typeUri .
                 ?typeUri rdfs:label ?type .
                 ?typeUri vitro:inClassGroup ?classGroup .
                 ?classGroup a vitro:ClassGroup
-            } UNION {            
+            } UNION {
                 ?subject ?property ?object .
-                ?object obo:ARG_2000028 ?vcard . 
+                ?object obo:ARG_2000028 ?vcard .
                 ?vcard vcard:hasTitle ?titleObj .
                 ?titleObj vcard:title ?title
-            }          
+            }
         }
     </query-construct>
 

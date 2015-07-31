@@ -2,20 +2,20 @@
 <!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
 <!-- Custom list view config file for core:webpage
-    
-     See guidelines in vitro/doc/list_view_configuration_guidelines.txt --> 
+
+     See guidelines at https://wiki.duraspace.org/x/ExUdB -->
 
 <list-view-config>
-    <query-select>            
-        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt; 
+    <query-select>
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
 
-        SELECT ?vcard ?link 
-               (afn:localname(?link) AS ?linkName) 
+        SELECT ?vcard ?link
+               (afn:localname(?link) AS ?linkName)
                (group_concat(distinct ?linkLabel;separator="/") as ?label)
-               ?url 
+               ?url
                ?rank WHERE {
             ?subject ?property ?vcard .
             ?vcard vcard:hasURL ?link
@@ -23,13 +23,13 @@
             OPTIONAL { ?link vcard:url ?url }
             OPTIONAL { ?link core:rank ?rank }
         <critical-data-required>
-        FILTER ( bound(?link) )    
-        </critical-data-required>  
+        FILTER ( bound(?link) )
+        </critical-data-required>
         } GROUP BY ?vcard ?link ?url ?rank
           ORDER BY ?rank ?linkLabel
     </query-select>
 
-    <query-construct>    	
+    <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
@@ -40,13 +40,13 @@
             ?link core:rank ?rank .
             ?link rdfs:label ?linkLabel
         } WHERE {
-            { 
+            {
                 ?subject ?property ?vcard .
                 ?vcard vcard:hasURL ?link
             } UNION {
                 ?subject ?property ?vcard .
                 ?vcard vcard:hasURL ?link .
-                ?link vcard:url ?url 
+                ?link vcard:url ?url
             } UNION {
                 ?subject ?property ?vcard .
                 ?vcard vcard:hasURL ?link .
@@ -55,10 +55,10 @@
                 ?subject ?property ?vcard .
                 ?vcard vcard:hasURL ?link .
                 ?link rdfs:label ?linkLabel
-            } 
+            }
         }
     </query-construct>
-    
+
     <template>propStatement-webpage.ftl</template>
     <postprocessor>edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.MaintainDuplicatesObjectPropertyDataPostProcessor</postprocessor>
 </list-view-config>

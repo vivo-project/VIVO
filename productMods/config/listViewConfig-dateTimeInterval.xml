@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+<!-- See guidelines at https://wiki.duraspace.org/x/ExUdB -->
 
 <list-view-config>
-    <query-select>     
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+    <query-select>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
-        
+
         SELECT DISTINCT ?dateTimeInterval ?label
                         ?valueStart ?valueStartName
-                        ?dateTimeStart 
+                        ?dateTimeStart
                         ?precisionStart
-                        ?valueEnd ?valueEndName 
-                        ?dateTimeEnd 
+                        ?valueEnd ?valueEndName
+                        ?dateTimeEnd
                         ?precisionEnd WHERE {
             ?subject ?property ?dateTimeInterval
-                      
+
             OPTIONAL { ?dateTimeInterval core:start ?valueStart
-                           LET (?valueStartName := afn:localname(?valueStart)) 
+                           LET (?valueStartName := afn:localname(?valueStart))
                        OPTIONAL { ?valueStart core:dateTime ?dateTimeStart }
                        OPTIONAL { ?valueStart core:dateTimePrecision ?dateTimePrecisionStart
-                                      LET (?precisionStart := afn:localname(?dateTimePrecisionStart))  
+                                      LET (?precisionStart := afn:localname(?dateTimePrecisionStart))
                        }
-            }                      
+            }
             OPTIONAL { ?dateTimeInterval core:end ?valueEnd
-                           LET (?valueEndName := afn:localname(?valueEnd))  
+                           LET (?valueEndName := afn:localname(?valueEnd))
                        OPTIONAL { ?valueEnd core:dateTime ?dateTimeEnd }
                        OPTIONAL { ?valueEnd core:dateTimePrecision ?dateTimePrecisionEnd
-                                      LET (?precisionEnd := afn:localname(?dateTimePrecisionEnd))  
+                                      LET (?precisionEnd := afn:localname(?dateTimePrecisionEnd))
                        }
             }
             OPTIONAL {?dateTimeInterval rdfs:label ?label}
-            
+
             <critical-data-required>
-            FILTER ( bound(?dateTimeStart) || bound(?dateTimeEnd) ) 
+            FILTER ( bound(?dateTimeStart) || bound(?dateTimeEnd) )
             </critical-data-required>
-        }  
+        }
     </query-select>
 
     <query-construct>
@@ -52,7 +52,7 @@
         } WHERE {
             {
                 ?subject ?property ?dateTimeInterval
-            } 
+            }
             UNION {
                 ?subject ?property ?dateTimeInterval .
                 ?dateTimeInterval core:start ?valueStart
@@ -70,8 +70,8 @@
 
     <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-       
-        CONSTRUCT { 
+
+        CONSTRUCT {
             ?valueStart ?p ?o
         } WHERE {
             ?subject ?property ?dateTimeInterval .
@@ -82,8 +82,8 @@
 
     <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-       
-        CONSTRUCT { 
+
+        CONSTRUCT {
             ?valueEnd ?p ?o
         } WHERE {
             ?subject ?property ?dateTimeInterval .
