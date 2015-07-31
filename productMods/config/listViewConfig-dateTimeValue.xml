@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+<!-- See guidelines at https://wiki.duraspace.org/x/ExUdB -->
 
 <list-view-config>
-    <query-select>     
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+    <query-select>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
-        
-        SELECT DISTINCT ?dateTimeValue 
-                        (afn:localname(?dateTimePrecision) AS ?precision) 
+
+        SELECT DISTINCT ?dateTimeValue
+                        (afn:localname(?dateTimePrecision) AS ?precision)
                         ?dateTime  WHERE {
-            ?subject ?property ?dateTimeValue 
+            ?subject ?property ?dateTimeValue
             OPTIONAL { ?dateTimeValue core:dateTime ?dateTime }
             OPTIONAL { ?dateTimeValue core:dateTimePrecision ?dateTimePrecision }
             <critical-data-required>
             FILTER ( bound(?dateTime) )
             </critical-data-required>
-        }  
+        }
     </query-select>
 
     <query-construct>
@@ -27,14 +27,14 @@
             ?dateTimeValue ?p ?o .
         } WHERE {
             {
-                ?subject ?property ?dateTimeValue  
-            } 
+                ?subject ?property ?dateTimeValue
+            }
             UNION {
                 ?subject ?property ?dateTimeValue .
                 ?dateTimeValue ?p ?o .
             }
-        } 
+        }
     </query-construct>
-    
+
     <template>propStatement-dateTimeValue.ftl</template>
 </list-view-config>

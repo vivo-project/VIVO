@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+<!-- See guidelines at https://wiki.duraspace.org/x/ExUdB -->
 
 <!-- Note: ?workshop is a generic name for any intervening event between a presentation and -->
 <!-- a conference, such as a workshop or session or exhibit.  tlw72 -->
 
 <list-view-config>
-    <query-select>    
+    <query-select>
         PREFIX afn:   &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         PREFIX bibo:  &lt;http://purl.org/ontology/bibo/&gt;
         PREFIX vivo:  &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX owl:   &lt;http://www.w3.org/2002/07/owl#&gt;
         PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
-        
+
         SELECT DISTINCT <collated>?subclass</collated>
-                        ?role ?roleLabel                         
+                        ?role ?roleLabel
                         ?presentation ?presentationName ?presentationLabel
                         ?conference ?conferenceLabel
                         ?series ?seriesLabel
-                        ?workshop 
+                        ?workshop
                         ?dateTime
-                        
+
             WHERE {
-                        
+
                 ?subject ?property ?role .
-                ?role a vivo:PresenterRole 
-                
+                ?role a vivo:PresenterRole
+
                 OPTIONAL { ?role rdfs:label ?roleLabel }
-                
+
                 OPTIONAL {  ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                             ?presentation a vivo:Presentation .
                             ?presentation rdfs:label ?presentationLabel .
-                            LET (?presentationName := afn:localname(?presentation)) 
+                            LET (?presentationName := afn:localname(?presentation))
                 }
                 OPTIONAL {  ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                             ?presentation a vivo:Presentation .
                             ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?conference .
                             ?conference &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
                             ?conference a bibo:Conference .
-                            ?conference rdfs:label ?conferenceLabel 
+                            ?conference rdfs:label ?conferenceLabel
                 }
                 OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                            ?presentation a vivo:Presentation .
                            ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?workshop .
                            ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
                            ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?conference .
-                           ?conference &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?workshop .           
-                           ?conference rdfs:label ?conferenceLabel 
+                           ?conference &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?workshop .
+                           ?conference rdfs:label ?conferenceLabel
                 }
                 OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                            ?presentation a vivo:Presentation .
                            ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series .
                            ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
-                           ?series rdfs:label ?seriesLabel 
+                           ?series rdfs:label ?seriesLabel
                 }
                 OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                            ?presentation a vivo:Presentation .
                            ?presentation &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?workshop .
-                           ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .                
+                           ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
                            ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series .
                            ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?workshop .
-                           ?series rdfs:label ?seriesLabel 
+                           ?series rdfs:label ?seriesLabel
                 }
                 <collated>
                 OPTIONAL { ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
@@ -70,24 +70,24 @@
                            ?presentation vitro:mostSpecificType ?subclass .
                 }
                 </collated>
-                                   
+
                 OPTIONAL { ?role vivo:dateTimeInterval ?dateTimeInterval .
                            ?dateTimeInterval vivo:start ?dateTimeStartValue .
-                           ?dateTimeStartValue vivo:dateTime ?dateTime 
-                }  
-                
+                           ?dateTimeStartValue vivo:dateTime ?dateTime
+                }
+
                 <critical-data-required>
                 FILTER ( bound(?presentation) )
                 </critical-data-required>
-        
+
             } ORDER BY <collated>?subclass</collated> DESC(?dateTime) ?presentationLabel ?presentationName
     </query-select>
- 
+
     <query-construct>
         PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; 
-        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;   
-        CONSTRUCT { 
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+        CONSTRUCT {
             ?subject ?property ?role .
             ?role a vivo:PresenterRole .
             ?role rdfs:label ?roleLabel .
@@ -98,7 +98,7 @@
         } WHERE {
             {
                 ?subject ?property ?role .
-                ?role a vivo:PresenterRole 
+                ?role a vivo:PresenterRole
             } UNION {
                 ?subject ?property ?role .
                 ?role a vivo:PresenterRole .
@@ -106,9 +106,9 @@
             } UNION {
                 ?subject ?property ?role .
                 ?role a vivo:PresenterRole .
-                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation . 
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?presentation a vivo:Presentation .
-                ?presentation rdfs:label ?presentationLabel 
+                ?presentation rdfs:label ?presentationLabel
             } UNION {
                 ?subject ?property ?role .
                 ?role a vivo:PresenterRole .
@@ -116,14 +116,14 @@
                 ?presentation a vivo:Presentation .
                 ?presentation vitro:mostSpecificType ?subclass .
             }
-        } 
+        }
     </query-construct>
 
     <query-construct>
         PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt;
-        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt; 
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; 
-        
+        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+
         CONSTRUCT {
             ?subject ?property ?role .
             ?role a vivo:PresenterRole .
@@ -134,10 +134,10 @@
             ?conference &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
             ?conference rdfs:label ?conferenceLabel
         } WHERE {
-        
+
             {
                 ?subject ?property ?role .
-                ?role a vivo:PresenterRole .                 
+                ?role a vivo:PresenterRole .
             } UNION {
                 ?subject ?property ?role .
                 ?role a vivo:PresenterRole .
@@ -148,14 +148,14 @@
                 ?conference a bibo:Conference .
                 ?conference rdfs:label ?conferenceLabel
             }
-        }        
+        }
     </query-construct>
 
     <query-construct>
         PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt;
-        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt; 
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; 
-        
+        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+
         CONSTRUCT {
             ?subject ?property ?role .
             ?role a vivo:PresenterRole .
@@ -167,7 +167,7 @@
             ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?conference .
             ?conference &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?workshop .
             ?conference a bibo:Conference .
-            ?conference rdfs:label ?conferenceLabel 
+            ?conference rdfs:label ?conferenceLabel
         } WHERE {
             {
                 ?subject ?property ?role .
@@ -184,16 +184,16 @@
                 ?workshop &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?conference .
                 ?conference &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?workshop .
                 ?conference a bibo:Conference .
-                ?conference rdfs:label ?conferenceLabel 
+                ?conference rdfs:label ?conferenceLabel
             }
-        }        
+        }
     </query-construct>
 
     <query-construct>
         PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt;
-        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt; 
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; 
-        
+        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+
         CONSTRUCT {
             ?subject ?property ?role .
             ?role a vivo:PresenterRole .
@@ -204,7 +204,7 @@
             ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
             ?series rdfs:label ?seriesLabel
         } WHERE {
-        
+
             {
                 ?subject ?property ?role .
                 ?role a vivo:PresenterRole .
@@ -218,14 +218,14 @@
                 ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?presentation .
                 ?series rdfs:label ?seriesLabel
             }
-        }        
+        }
     </query-construct>
 
     <query-construct>
         PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt;
-        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt; 
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; 
-        
+        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+
         CONSTRUCT {
             ?subject ?property ?role .
             ?role a vivo:PresenterRole .
@@ -255,25 +255,25 @@
                 ?series a vivo:EventSeries .
                 ?series rdfs:label ?seriesLabel
             }
-        }        
+        }
     </query-construct>
 
     <query-construct>
-        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;   
-        CONSTRUCT { 
+        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;
+        CONSTRUCT {
             ?subject ?property ?role .
-            ?role a vivo:PresenterRole .  
+            ?role a vivo:PresenterRole .
             ?role vivo:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval vivo:start ?dateTimeStartValue .
-            ?dateTimeStartValue vivo:dateTime ?dateTimeStart 
+            ?dateTimeStartValue vivo:dateTime ?dateTimeStart
         } WHERE {
             ?subject ?property ?role .
-            ?role a vivo:PresenterRole .  
+            ?role a vivo:PresenterRole .
             ?role vivo:dateTimeInterval ?dateTimeInterval .
             ?dateTimeInterval vivo:start ?dateTimeStartValue .
-            ?dateTimeStartValue vivo:dateTime ?dateTimeStart 
-        } 
+            ?dateTimeStartValue vivo:dateTime ?dateTimeStart
+        }
     </query-construct>
-    
+
     <template>propStatement-hasPresenterRole.ftl</template>
 </list-view-config>
