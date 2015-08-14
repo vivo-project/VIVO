@@ -3,7 +3,7 @@
 
 <!-- VIVO-specific default list view config file for object properties 
     
-     See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+     See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
 
 <list-view-config>
     <query-select>    
