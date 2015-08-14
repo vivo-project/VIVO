@@ -60,7 +60,7 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
     		+ "     ?Grant rdf:type core:Grant . "
 			+ "     ?Grant rdfs:label ?grantLabel . "
 			+ "      "
-			+ "     LET(?now := afn:now()) "
+			+ "     LET(?now := now()) "
 			+ " } ";
 
 		String justDateTimeOnGrantsQuery = ""
@@ -86,7 +86,7 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 //			+ "             ?endDateForGrant core:dateTime ?endDateTimeValueForGrant   "
 //			+ "         }     "
 			+ "      "
-			+ "     LET(?now := afn:now()) "
+			+ "     LET(?now := now()) "
 			+ " } ";
 		
 		String justDateTimeOnRolesQuery = ""
@@ -112,7 +112,7 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 //			+ "             ?endDate core:dateTime ?endDateTimeValue .           "
 //			+ "         }     "
 			+ "      "
-			+ "     LET(?now := afn:now()) "
+			+ "     LET(?now := now()) "
 			+ " } ";
 		
 		differentPerspectiveQueries.add(justGrantsQuery);
