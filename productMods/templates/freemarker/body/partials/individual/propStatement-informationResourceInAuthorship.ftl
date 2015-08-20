@@ -14,7 +14,11 @@
 <#macro showAuthorship statement>
     <#if statement.author??>
     	<#if statement.subclass?? && statement.subclass?contains("vcard")>
-        	${statement.authorName}
+			<#if statement.authorName?replace(" ","")?length == statement.authorName?replace(" ","")?last_index_of(",") + 1 >
+        		${statement.authorName?replace(",","")}
+			<#else>
+				${statement.authorName}
+			</#if>
     	<#else>
         	<a href="${profileUrl(statement.uri("author"))}" title="${i18n().author_name}">${statement.authorName}</a>
     	</#if>
