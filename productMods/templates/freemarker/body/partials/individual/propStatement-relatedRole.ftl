@@ -16,7 +16,15 @@
   
     <#local linkedIndividual>
         <#if statement.indivInRole??>
-            <a href="${profileUrl(statement.uri("indivInRole"))}" title="${i18n().name}">${statement.indivLabel!statement.indivName}</a>
+    		<#if statement.vSubclass?? && statement.vSubclass?contains("vcard")>
+				<#if statement.indivLabel?replace(" ","")?length == statement.indivLabel?replace(" ","")?last_index_of(",") + 1 >
+        			${statement.indivLabel?replace(",","")}
+				<#else>
+					${statement.indivLabel}
+				</#if>
+    		<#else>
+        			<a href="${profileUrl(statement.uri("indivInRole"))}" title="${i18n().name}">${statement.indivLabel!statement.indivName}</a>
+    		</#if>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
             <a href="${profileUrl(statement.uri("role"))}"  title="${i18n().missing_person_in_role}">${i18n().missing_person_in_role}</a>
