@@ -118,7 +118,7 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
             while (results.hasNext()) {
                 QuerySolution soln = results.nextSolution();
                 RDFNode node = soln.get("link");
-                if (node.isURIResource()) {
+                if (node != null && node.isURIResource()) {
                     webpages.add(QueryUtils.querySolutionToStringValueMap(soln));        
                 }
             }
