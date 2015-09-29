@@ -332,6 +332,7 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree116">
     <rdfs:label xml:lang="en-US">Dip.Ed. Diploma of Education</rdfs:label>
+    <core:abbreviation>Dip.Ed.</core:abbreviation>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree32">
@@ -527,7 +528,7 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree118">
     <core:abbreviation>A.D.N.</core:abbreviation>
-    <rdfs:label xml:lang="en-US">ADN Associate Degree Nursing</rdfs:label>
+    <rdfs:label xml:lang="en-US">A.D.N. Associate Degree Nursing</rdfs:label>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree132">
@@ -576,7 +577,7 @@
     <core:abbreviation>M.Ed.</core:abbreviation>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree133">
-    <rdfs:label xml:lang="en-US">Ed.M Master of Education</rdfs:label>
+    <rdfs:label xml:lang="en-US">Ed.M. Master of Education</rdfs:label>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
     <core:abbreviation>Ed.M.</core:abbreviation>
   </rdf:Description>
@@ -734,7 +735,7 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree135">
     <rdfs:label xml:lang="en-US">F.R.C.S. Fellowship of the Royal College of Surgeons</rdfs:label>
-    <core:abbreviation>F.R.S.C.</core:abbreviation>
+    <core:abbreviation>F.R.C.S.</core:abbreviation>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree136">
