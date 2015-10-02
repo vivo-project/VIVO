@@ -4,11 +4,13 @@ package edu.cornell.mannlib.vitro.webapp.visualization.coauthorship;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -401,15 +403,15 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 								+ " core:relatedBy ?authorshipNode . \n"
 			+ "?authorshipNode rdf:type core:Authorship ;" 
 								+ " core:relates ?document . \n"
-            + "?document rdf:type bibo:Document . \n" 
-			+ "?document core:relatedBy ?coAuthorshipNode . \n" 
-			+ "?coAuthorshipNode rdf:type core:Authorship . \n" 
-			+ "?coAuthorshipNode core:relates ?coAuthorPerson . \n" 
-			+ "?coAuthorPerson rdf:type foaf:Person . \n"
-			+ "?coAuthorPerson rdfs:label ?coAuthorPersonLabel . \n"
+            + "?document rdf:type bibo:Document ; \n"
+			+ "core:relatedBy ?coAuthorshipNode . \n"
+			+ "?coAuthorshipNode rdf:type core:Authorship ; \n"
+			+ "core:relates ?coAuthorPerson . \n"
+			+ "?coAuthorPerson rdf:type foaf:Person ; \n"
+			+ "rdfs:label ?coAuthorPersonLabel . \n"
 			+ "OPTIONAL {  ?document core:dateTimeValue ?dateTimeValue . \n" 
-			+ "				?dateTimeValue core:dateTime ?publicationDate } .\n" 
-			+ "} \n" 
+			+ "				?dateTimeValue core:dateTime ?publicationDate } .\n"
+			+ "} \n"
 			+ "ORDER BY ?document ?coAuthorPerson\n";
 
 		log.debug("COAUTHORSHIP QUERY - " + sparqlQuery);
@@ -421,25 +423,96 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 	public CollaborationData getQueryResult()
 		throws MalformedQueryParametersException {
 
+		CollaborationData data = getCachedData(this.egoURI);
+		if (data != null) {
+			return data;
+		}
+
+		return getQueryResultAndCache();
+	}
+
+	private CollaborationData getCachedData(String egoURI) {
+		CollaborationDataCacheEntry entry = collaborationDataCache.get(egoURI);
+		if (entry != null && !entry.hasExpired()) {
+			entry.accessTime = new Date().getTime();
+			expireCache();
+			return entry.data;
+		}
+
+		return null;
+	}
+
+	private synchronized CollaborationData getQueryResultAndCache()
+			throws MalformedQueryParametersException {
+
+		CollaborationData data = getCachedData(this.egoURI);
+		if (data != null) {
+			return data;
+		}
+
 		if (StringUtils.isNotBlank(this.egoURI)) {
 			/*
         	 * To test for the validity of the URI submitted.
         	 * */
-        	IRIFactory iRIFactory = IRIFactory.jenaImplementation();
-    		IRI iri = iRIFactory.create(this.egoURI);
-            if (iri.hasViolation(false)) {
-                String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
-                log.error("Ego Co-Authorship Vis Query " + errorMsg);
-                throw new MalformedQueryParametersException(
-                		"URI provided for an individual is malformed.");
-            }
-        } else {
-            throw new MalformedQueryParametersException("URI parameter is either null or empty.");
-        }
+			IRIFactory iRIFactory = IRIFactory.jenaImplementation();
+			IRI iri = iRIFactory.create(this.egoURI);
+			if (iri.hasViolation(false)) {
+				String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
+				log.error("Ego Co-Authorship Vis Query " + errorMsg);
+				throw new MalformedQueryParametersException(
+						"URI provided for an individual is malformed.");
+			}
+		} else {
+			throw new MalformedQueryParametersException("URI parameter is either null or empty.");
+		}
 
 		ResultSet resultSet	= executeQuery(generateEgoCoAuthorshipSparqlQuery(this.egoURI),
-										   this.dataset);
-		return createQueryResult(resultSet);
+				this.dataset);
+
+		data = createQueryResult(resultSet);
+
+		CollaborationDataCacheEntry newEntry = new CollaborationDataCacheEntry();
+
+		newEntry.uri = this.egoURI;
+		newEntry.data = data;
+		newEntry.creationTime = newEntry.accessTime = new Date().getTime();
+
+		// Remove dead entries
+		expireCache();
+
+		// Cache the new entry
+		collaborationDataCache.put(this.egoURI, newEntry);
+
+		return data;
 	}
 
+	private synchronized void expireCache() {
+		for (String key : collaborationDataCache.keySet()) {
+			CollaborationDataCacheEntry entry = collaborationDataCache.get(key);
+			if (entry != null && entry.hasExpired()) {
+				collaborationDataCache.remove(key);
+			}
+		}
+	}
+
+	private static final Map<String, CollaborationDataCacheEntry> collaborationDataCache = new ConcurrentHashMap<String, CollaborationDataCacheEntry>();
+
+	private static class CollaborationDataCacheEntry {
+		String uri;
+		CollaborationData data;
+		long creationTime;
+		long accessTime;
+
+		boolean hasExpired() {
+			long now = new Date().getTime();
+
+			// If it's older than five minutes, and it hasn't *just* been accessed, it's expired
+			if (creationTime < (now - 300000L) && accessTime < (now - 3000L)) {
+				return true;
+			}
+
+			// Otherwise, if it is more than 30 seconds old, expire it
+			return accessTime < (now - 30000L);
+		}
+	}
 }

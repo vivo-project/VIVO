@@ -4,11 +4,13 @@ package edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -385,33 +387,101 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 	public CollaborationData getQueryResult()
 		throws MalformedQueryParametersException {
 
-	if (StringUtils.isNotBlank(this.egoURI)) {
-		/*
-    	 * To test for the validity of the URI submitted.
-    	 * */
-    	IRIFactory iRIFactory = IRIFactory.jenaImplementation();
-		IRI iri = iRIFactory.create(this.egoURI);
-        if (iri.hasViolation(false)) {
-            String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
-            log.error("Ego Co-PI Vis Query " + errorMsg);
-            throw new MalformedQueryParametersException(
-            		"URI provided for an individual is malformed.");
-        }
-    } else {
-        throw new MalformedQueryParametersException("URI parameter is either null or empty.");
-    }
+		CollaborationData data = getCachedData(this.egoURI);
+		if (data != null) {
+			return data;
+		}
 
-	before = System.currentTimeMillis();
-	
-	ResultSet resultSet = executeQuery(generateEgoCoPIquery(this.egoURI), this.dataSource);
-	
-	after = System.currentTimeMillis();
-	
-	log.debug("Time taken to execute the SELECT queries is in milliseconds: " + (after - before));
-	
-	return createQueryResult(resultSet);
+		return getQueryResultAndCache();
 	}
-	
+
+	private CollaborationData getCachedData(String egoURI) {
+		CollaborationDataCacheEntry entry = collaborationDataCache.get(egoURI);
+		if (entry != null && !entry.hasExpired()) {
+			entry.accessTime = new Date().getTime();
+			expireCache();
+			return entry.data;
+		}
+
+		return null;
+	}
+
+	private synchronized CollaborationData getQueryResultAndCache()
+			throws MalformedQueryParametersException {
+
+		CollaborationData data = getCachedData(this.egoURI);
+		if (data != null) {
+			return data;
+		}
+
+		if (StringUtils.isNotBlank(this.egoURI)) {
+			/*
+			 * To test for the validity of the URI submitted.
+			 * */
+			IRIFactory iRIFactory = IRIFactory.jenaImplementation();
+			IRI iri = iRIFactory.create(this.egoURI);
+			if (iri.hasViolation(false)) {
+				String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
+				log.error("Ego Co-PI Vis Query " + errorMsg);
+				throw new MalformedQueryParametersException(
+						"URI provided for an individual is malformed.");
+			}
+		} else {
+			throw new MalformedQueryParametersException("URI parameter is either null or empty.");
+		}
+
+		before = System.currentTimeMillis();
+		ResultSet resultSet = executeQuery(generateEgoCoPIquery(this.egoURI), this.dataSource);
+		after = System.currentTimeMillis();
+
+		log.debug("Time taken to execute the SELECT queries is in milliseconds: " + (after - before));
+
+		data = createQueryResult(resultSet);
+
+		CollaborationDataCacheEntry newEntry = new CollaborationDataCacheEntry();
+
+		newEntry.uri = this.egoURI;
+		newEntry.data = data;
+		newEntry.creationTime = newEntry.accessTime = new Date().getTime();
+
+		// Remove dead entries
+		expireCache();
+
+		// Cache the new entry
+		collaborationDataCache.put(this.egoURI, newEntry);
+		return data;
+	}
+
+	private synchronized void expireCache() {
+		for (String key : collaborationDataCache.keySet()) {
+			CollaborationDataCacheEntry entry = collaborationDataCache.get(key);
+			if (entry != null && entry.hasExpired()) {
+				collaborationDataCache.remove(key);
+			}
+		}
+	}
+
+	private static final Map<String, CollaborationDataCacheEntry> collaborationDataCache = new ConcurrentHashMap<String, CollaborationDataCacheEntry>();
+
+	private static class CollaborationDataCacheEntry {
+		String uri;
+		CollaborationData data;
+		long creationTime;
+		long accessTime;
+
+		boolean hasExpired() {
+			long now = new Date().getTime();
+
+			// If it's older than five minutes, and it hasn't *just* been accessed, it's expired
+			if (creationTime < (now - 300000L) && accessTime < (now - 3000L)) {
+				return true;
+			}
+
+			// Otherwise, if it is more than 30 seconds old, expire it
+			return accessTime < (now - 30000L);
+		}
+	}
+
 	
 	private Collaboration getExistingEdge(
 			Collaborator collaboratingNode1, 
