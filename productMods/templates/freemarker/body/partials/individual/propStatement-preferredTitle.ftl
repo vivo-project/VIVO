@@ -10,8 +10,6 @@
      next statement -->
 <#macro showPreferredTitle statement>
  
-    <#if statement.number?has_content>
-            ${statement.preferredTitle}
-    </#if>    
+     ${statement.preferredTitle!}
           
 </#macro>
