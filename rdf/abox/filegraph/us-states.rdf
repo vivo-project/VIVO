@@ -14,6 +14,11 @@
       <rdfs:label xml:lang="en">Alaska</rdfs:label>
       <obo:BFO_0000050 rdf:resource="http://aims.fao.org/aos/geopolitical.owl#United_States_of_America"/>
    </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/American_Samoa">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">American Samoa</rdfs:label>
+      <obo:BFO_0000050 rdf:resource="http://aims.fao.org/aos/geopolitical.owl#United_States_of_America"/>
+   </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/Arizona">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
       <rdfs:label xml:lang="en">Arizona</rdfs:label>
@@ -44,6 +49,11 @@
       <rdfs:label xml:lang="en">Delaware</rdfs:label>
       <obo:BFO_0000050 rdf:resource="http://aims.fao.org/aos/geopolitical.owl#United_States_of_America"/>
    </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Washington,_D.C.">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">District of Columbia</rdfs:label>
+      <obo:BFO_0000050 rdf:resource="http://aims.fao.org/aos/geopolitical.owl#United_States_of_America"/>
+   </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/Florida">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
       <rdfs:label xml:lang="en">Florida</rdfs:label>
@@ -52,6 +62,11 @@
    <rdf:Description rdf:about="http://dbpedia.org/resource/Georgia">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
       <rdfs:label xml:lang="en">Georgia</rdfs:label>
+      <obo:BFO_0000050 rdf:resource="http://aims.fao.org/aos/geopolitical.owl#United_States_of_America"/>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Guam">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Guam</rdfs:label>
       <obo:BFO_0000050 rdf:resource="http://aims.fao.org/aos/geopolitical.owl#United_States_of_America"/>
    </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/Hawaii">
@@ -121,7 +136,7 @@
    </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/Mississipi">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
-      <rdfs:label xml:lang="en">Mississipi</rdfs:label>
+      <rdfs:label xml:lang="en">Mississippi</rdfs:label>
       <obo:BFO_0000050 rdf:resource="http://aims.fao.org/aos/geopolitical.owl#United_States_of_America"/>
    </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/Missouri">
@@ -174,6 +189,11 @@
       <rdfs:label xml:lang="en">North Dakota</rdfs:label>
       <obo:BFO_0000050 rdf:resource="http://aims.fao.org/aos/geopolitical.owl#United_States_of_America"/>
    </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Northern_Mariana_Islands">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Northern Mariana Islands</rdfs:label>
+      <obo:BFO_0000050 rdf:resource="http://aims.fao.org/aos/geopolitical.owl#United_States_of_America"/>
+   </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/Ohio">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
       <rdfs:label xml:lang="en">Ohio</rdfs:label>
@@ -192,6 +212,11 @@
    <rdf:Description rdf:about="http://dbpedia.org/resource/Pennsylvania">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
       <rdfs:label xml:lang="en">Pennsylvania</rdfs:label>
+      <obo:BFO_0000050 rdf:resource="http://aims.fao.org/aos/geopolitical.owl#United_States_of_America"/>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Puerto_Rico">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Puerto Rico</rdfs:label>
       <obo:BFO_0000050 rdf:resource="http://aims.fao.org/aos/geopolitical.owl#United_States_of_America"/>
    </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/Rhode_Island">
@@ -219,6 +244,11 @@
       <rdfs:label xml:lang="en">Texas</rdfs:label>
       <obo:BFO_0000050 rdf:resource="http://aims.fao.org/aos/geopolitical.owl#United_States_of_America"/>
    </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/United_States_Virgin_Islands">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">US Virgin Islands</rdfs:label>
+      <obo:BFO_0000050 rdf:resource="http://aims.fao.org/aos/geopolitical.owl#United_States_of_America"/>
+   </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/Utah">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
       <rdfs:label xml:lang="en">Utah</rdfs:label>
@@ -232,6 +262,11 @@
    <rdf:Description rdf:about="http://dbpedia.org/resource/Virginia">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
       <rdfs:label xml:lang="en">Virginia</rdfs:label>
+      <obo:BFO_0000050 rdf:resource="http://aims.fao.org/aos/geopolitical.owl#United_States_of_America"/>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Wake_Island">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Wake Island</rdfs:label>
       <obo:BFO_0000050 rdf:resource="http://aims.fao.org/aos/geopolitical.owl#United_States_of_America"/>
    </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/Washington">
@@ -257,6 +292,7 @@
    <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#United_States_of_America">
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Alabama"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Alaska"/>
+      <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/American_Samoa"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Arizona"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Arkansas"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/California"/>
@@ -265,6 +301,7 @@
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Delaware"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Florida"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Georgia"/>
+      <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Guam"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Hawaii"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Idaho"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Illinois"/>
@@ -289,19 +326,24 @@
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/New_York"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/North_Carolina"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/North_Dakota"/>
+      <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Northern_Mariana_Islands"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Ohio"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Oklahoma"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Oregon"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Pennsylvania"/>
+      <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Puerto_Rico"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Rhode_Island"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/South_Carolina"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/South_Dakota"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Tennessee"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Texas"/>
+      <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/United_States_Virgin_Islands"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Utah"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Vermont"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Virginia"/>
+      <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Wake_Island"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Washington"/>
+      <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Washington,_D.C."/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/West_Virginia"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Wisconsin"/>
       <obo:BFO_0000051 rdf:resource="http://dbpedia.org/resource/Wyoming"/>
