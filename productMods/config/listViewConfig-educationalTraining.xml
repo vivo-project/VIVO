@@ -73,6 +73,8 @@
             ?awardedDegree core:relates ?degree .
             ?edTraining core:dateTimeInterval ?dateTimeInterval .
             ?edTraining core:majorField ?majorField .
+            ?edTraining core:departmentOrSchool ?deptOrSchool .
+            ?edTraining core:supplementalInformation ?info .
         } WHERE {
             {
                 ?subject ?property ?edTraining .
