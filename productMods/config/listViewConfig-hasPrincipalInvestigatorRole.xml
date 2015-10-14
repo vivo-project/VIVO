@@ -62,7 +62,13 @@
             OPTIONAL { ?role core:hideFromDisplay ?hideThis }
         } ORDER BY DESC(?dateTimeEndRole) DESC(?dateTimeStartRole) DESC(?dateTimeEndGrant) DESC(?dateTimeStartGrant) ?activityLabel ?activityName
     </query-select>
-
+<!--
+            ?role rdfs:label ?roleLabel .
+            } UNION {
+                ?subject ?property ?role .
+                ?role a core:PrincipalInvestigatorRole .
+                ?role rdfs:label ?roleLabel .
+-->
     <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; 
@@ -71,7 +77,7 @@
             ?subject ?property ?role .
             ?role a core:PrincipalInvestigatorRole .
             ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
-            ?role ?roleProperty ?roleValue . 
+            ?role core:hideFromDisplay ?hideThis .
             ?activity rdfs:label ?activityLabel .
             ?activity core:assignedBy ?awardedBy .
             ?awardedBy rdfs:label ?awardedByLabel .
@@ -85,7 +91,7 @@
             } UNION {
                 ?subject ?property ?role .
                 ?role a core:PrincipalInvestigatorRole .
-                ?role ?roleProperty ?roleValue 
+                ?role core:hideFromDisplay ?hideThis .
             } UNION {
                 ?subject ?property ?role .
                 ?role a core:PrincipalInvestigatorRole .
