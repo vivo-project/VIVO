@@ -29,8 +29,10 @@
 </ul>
 
 <ul class="ingestMenu">
+<!--
     <li><a href="harvester/harvest?job=csvPerson" title="Use the harvester to ingest person data from CSV files">Harvest Person Data from CSV</a></li>
     <li><a href="harvester/harvest?job=csvGrant" title="Use the harvester to ingest grant data from CSV files">Harvest Grant Data from CSV</a></li>
+-->
     <li><a href="ingest?action=executeWorkflow" title="Execute an RDF-encoded ingest workflow">Execute Workflow</a></li>
 </ul>
 
