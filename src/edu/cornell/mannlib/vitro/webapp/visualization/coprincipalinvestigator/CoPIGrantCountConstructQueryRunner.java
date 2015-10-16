@@ -1,9 +1,13 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator;
 
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
 
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.RDFServiceUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,7 +34,7 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 
 	private String egoURI;
 
-	private Dataset dataset;
+	private RDFService rdfService;
 
 	private long before, after;
 
@@ -42,10 +46,9 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 			+ "?Grant rdf:type core:Grant ."
 			+ "?Grant core:relates ?RelatedRole . ";
 
-	public CoPIGrantCountConstructQueryRunner(String egoURI, Dataset dataset,
-			Log log) {
+	public CoPIGrantCountConstructQueryRunner(String egoURI, RDFService rdfService, Log log) {
 		this.egoURI = egoURI;
-		this.dataset = dataset;
+		this.rdfService = rdfService;
 		// this.log = log;
 	}
 
@@ -220,38 +223,29 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 		return sparqlQuery;
 	}
 
-	private Model executeQuery(Set<String> constructQueries, Dataset dataset) {
+	private Model executeQuery(Set<String> constructQueries, RDFService rdfService) {
 
 		Model constructedModel = ModelFactory.createDefaultModel();
 
 		for (String queryString : constructQueries) {
-
 			before = System.currentTimeMillis();
-
 			log.debug("CONSTRUCT query string : " + queryString);
 
-			Query query = null;
-
+			InputStream is = null;
 			try {
-				query = QueryFactory.create(
-						QueryConstants.getSparqlPrefixQuery() + queryString,
-						SYNTAX);
-			} catch (Throwable th) {
-				log.error("Could not create CONSTRUCT SPARQL query for query "
-						+ "string. " + th.getMessage());
-				log.error(queryString);
-			}
-
-			QueryExecution qe = QueryExecutionFactory.create(query, dataset);
-			try {
-				qe.execConstruct(constructedModel);
+				is = rdfService.sparqlConstructQuery(QueryConstants.getSparqlPrefixQuery() + queryString, RDFService.ModelSerializationFormat.N3);
+				constructedModel.read(is, null, RDFServiceUtils.getSerializationFormatString(RDFService.ModelSerializationFormat.N3));
+			} catch (RDFServiceException e) {
+				log.error("Unable to execute query", e);
+				throw new RuntimeException(e);
 			} finally {
-				qe.close();
+				if (is != null) {
+					try { is.close(); } catch (Throwable t) { }
+				}
 			}
 
 			after = System.currentTimeMillis();
-			log.debug("Time taken to execute the CONSTRUCT query is in milliseconds: "
-					+ (after - before));
+			log.debug("Time taken to execute the CONSTRUCT query is in milliseconds: " + (after - before));
 
 		}
 
@@ -282,7 +276,7 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 
 		populateConstructQueries(constructQueries);
 
-		Model model = executeQuery(constructQueries, this.dataset);
+		Model model = executeQuery(constructQueries, this.rdfService);
 
 		return model;
 

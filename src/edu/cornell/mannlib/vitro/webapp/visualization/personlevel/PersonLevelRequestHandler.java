@@ -104,11 +104,11 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 			
 			
         	ModelConstructor constructQueryRunner = 
-        			new CoPIGrantCountConstructQueryRunner(egoURI, dataset, log);
+        			new CoPIGrantCountConstructQueryRunner(egoURI, vitroRequest.getRDFService(), log);
     		Model constructedModel = constructQueryRunner.getConstructedModel();
     		
     		QueryRunner<CollaborationData> coPIQueryManager = 
-    				new CoPIGrantCountQueryRunner(egoURI, constructedModel, log);
+    				new CoPIGrantCountQueryRunner(egoURI, vitroRequest.getRDFService(), log);
            
             CollaborationData coPIData = coPIQueryManager.getQueryResult();
             

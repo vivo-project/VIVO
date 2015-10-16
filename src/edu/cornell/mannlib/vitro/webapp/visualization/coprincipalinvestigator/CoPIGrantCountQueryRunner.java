@@ -2,6 +2,7 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -12,6 +13,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.hp.hpl.jena.query.ResultSetFactory;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -52,7 +56,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 	
 	private String egoURI;
 	
-	private Model dataSource;
+	private RDFService rdfService;
 
 	private Log log = LogFactory.getLog(CoPIGrantCountQueryRunner.class.getName());
 
@@ -86,10 +90,10 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 	
 	
 	public CoPIGrantCountQueryRunner(String egoURI,
-			Model dataSource, Log log) {
+			RDFService rdfService, Log log) {
 
 		this.egoURI = egoURI;
-		this.dataSource = dataSource;
+		this.rdfService = rdfService;
 	//	this.log = log;
 		
 		this.nodeIDGenerator = new UniqueIDGenerator();
@@ -114,276 +118,134 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			+ "{ "  	
 			+ 		"<" + queryURI + "> rdfs:label ?PILabel . "  	
 			+  		"{ "
-			        	
 			+			"<" + queryURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
-
 		    +			"?Role rdf:type core:CoPrincipalInvestigatorRole . "
-
 			+			"?Role core:relatedBy ?Grant . "
-
 			+			"?Grant rdf:type core:Grant . "
-
 			+			"?Grant core:relates ?RelatedRole . "
-
-			+			"?RelatedRole rdf:type core:PrincipalInvestigatorRole . " 
-
-			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . " 
-
+			+			"?RelatedRole rdf:type core:PrincipalInvestigatorRole . "
+			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . "
 	        +			"?CoPI rdf:type foaf:Person .	"
-
 			+			"?CoPI rdfs:label ?CoPILabel .	"
-
 			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
-			
 			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
-			
 			+ 		"} "
-				
 			+		"UNION "
-
 			+  		"{ "
-			        	
 			+			"<" + queryURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
-
 	        +			"?Role rdf:type core:CoPrincipalInvestigatorRole . "
-
 			+			"?Role core:relatedBy ?Grant . "
-
 			+			"?Grant rdf:type core:Grant . "
-
 			+			"?Grant core:relates ?RelatedRole . "
-
-			+			"?RelatedRole rdf:type core:InvestigatorRole . " 
-
-			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . " 
-
+			+			"?RelatedRole rdf:type core:InvestigatorRole . "
+			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . "
 	        +			"?CoPI rdf:type foaf:Person .	"
-
 			+			"?CoPI rdfs:label ?CoPILabel .	"
-
 			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
-
 			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
-			
-			
 			+ 		"} "
-			
 			+		"UNION "
-					
 			+  		"{ "
-			        	
 			+			"<" + queryURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
-
 	        +			"?Role rdf:type core:CoPrincipalInvestigatorRole . "
-
 			+			"?Role core:relatedBy ?Grant . "
-
 			+			"?Grant rdf:type core:Grant . "
-
 			+			"?Grant core:relates ?RelatedRole . "
-
-			+			"?RelatedRole rdf:type core:CoPrincipalInvestigatorRole  . " 
-
-			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . " 
-
+			+			"?RelatedRole rdf:type core:CoPrincipalInvestigatorRole  . "
+			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . "
 	        +			"?CoPI rdf:type foaf:Person .	"
-
 			+			"?CoPI rdfs:label ?CoPILabel .	"
-
 			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
-
 			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
-			
-			
 			+ 		"} "
-				
 			+		"UNION "
-			
-			
 			+		"{ "
-			        	
 			+			"<" + queryURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
-
 	        +			"?Role rdf:type core:PrincipalInvestigatorRole . "
-
 			+			"?Role core:relatedBy ?Grant . "
-
 			+			"?Grant rdf:type core:Grant . "
-
 			+			"?Grant core:relates ?RelatedRole . "
-
-			+			"?RelatedRole rdf:type core:PrincipalInvestigatorRole  . " 
-
-			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . " 
-
-	        +			"?CoPI rdf:type foaf:Person .	"
-
+			+			"?RelatedRole rdf:type core:PrincipalInvestigatorRole  . "
+			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . "
+			+			"?CoPI rdf:type foaf:Person .	"
 			+			"?CoPI rdfs:label ?CoPILabel .	"
-
 			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
-			
 			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
-
-			
 			+ 		"} "
-
 			+		"UNION "
-			
 			+		"{ "
-			        	
 			+			"<" + queryURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
-
 	        +			"?Role rdf:type core:PrincipalInvestigatorRole . "
-
 			+			"?Role core:relatedBy ?Grant . "
-
 			+			"?Grant rdf:type core:Grant . "
-
 			+			"?Grant core:relates ?RelatedRole . "
-
-			+			"?RelatedRole rdf:type core:InvestigatorRole  . " 
-
-			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . " 
-
+			+			"?RelatedRole rdf:type core:InvestigatorRole  . "
+			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . "
 	        +			"?CoPI rdf:type foaf:Person .	"
-
 			+			"?CoPI rdfs:label ?CoPILabel .	"
-
 			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
-			
 			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
-			
-			
 			+ 		"} "
-				
 			+		"UNION "
-					
 			+		"{ "
-			        	
 			+			"<" + queryURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
-
 	        +			"?Role rdf:type core:PrincipalInvestigatorRole . "
-
 			+			"?Role core:relatedBy ?Grant . "
-
 			+			"?Grant rdf:type core:Grant . "
-
 			+			"?Grant core:relates ?RelatedRole . "
-
-			+			"?RelatedRole rdf:type core:CoPrincipalInvestigatorRole . " 
-
-			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . " 
-
+			+			"?RelatedRole rdf:type core:CoPrincipalInvestigatorRole . "
+			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . "
 	        +			"?CoPI rdf:type foaf:Person .	"
-
 			+			"?CoPI rdfs:label ?CoPILabel .	"
-
 			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
-			
 			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
-			
-			
 			+ 		"} "
-			
 			+		"UNION "
-					
 			+		"{ "
-			        	
 			+			"<" + queryURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
-
 	        +			"?Role rdf:type core:InvestigatorRole . "
-
 			+			"?Role core:relatedBy ?Grant . "
-
 			+			"?Grant rdf:type core:Grant . "
-
 			+			"?Grant core:relates ?RelatedRole . "
-
-			+			"?RelatedRole rdf:type core:InvestigatorRole  . " 
-
-			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . " 
-
+			+			"?RelatedRole rdf:type core:InvestigatorRole  . "
+			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . "
 	        +			"?CoPI rdf:type foaf:Person .	"
-
 			+			"?CoPI rdfs:label ?CoPILabel .	"
-
 			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
-			
 			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
-			
-			
 			+ 		"} "
-			
 			+		"UNION "
-			
 			+		"{ "
-			        	
 			+			"<" + queryURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
-
 	        +			"?Role rdf:type core:InvestigatorRole . "
-
 			+			"?Role core:relatedBy ?Grant . "
-
 			+			"?Grant rdf:type core:Grant . "
-
 			+			"?Grant core:relates ?RelatedRole . "
-
-			+			"?RelatedRole rdf:type core:CoPrincipalInvestigatorRole  . " 
-
-			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . " 
-
+			+			"?RelatedRole rdf:type core:CoPrincipalInvestigatorRole  . "
+			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . "
 	        +			"?CoPI rdf:type foaf:Person .	"
-
 			+			"?CoPI rdfs:label ?CoPILabel .	"
-
 			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
-			
 			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
-			
-			
 			+ 		"} "
-			
 			+		"UNION "
-			
 			+		"{ "
-			        	
 			+			"<" + queryURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
-
 	        +			"?Role rdf:type core:InvestigatorRole . "
-
 			+			"?Role core:relatedBy ?Grant . "
-
 			+			"?Grant rdf:type core:Grant . "
-
 			+			"?Grant core:relates ?RelatedRole . "
-
-			+			"?RelatedRole rdf:type core:PrincipalInvestigatorRole . " 
-
-			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . " 
-
+			+			"?RelatedRole rdf:type core:PrincipalInvestigatorRole . "
+			+			"?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?CoPI . "
 		    +			"?CoPI rdf:type foaf:Person .	"
-
 			+			"?CoPI rdfs:label ?CoPILabel .	"
-
 			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
-			
 			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
-			
-			
-			+ 		"} "			
+			+ 		"} "
 			+ "} ";
 		return sparqlQuery;
 	}
 
-	private ResultSet executeQuery(String queryText, Model dataSource) {
-
-		QueryExecution queryExecution = null;
-		Query query = QueryFactory.create(queryText, SYNTAX);
-
-		queryExecution = QueryExecutionFactory.create(query, dataSource);
-		return queryExecution.execSelect();
-	}
-	
 	public CollaborationData getQueryResult()
 		throws MalformedQueryParametersException {
 
@@ -431,12 +293,24 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 		}
 
 		before = System.currentTimeMillis();
-		ResultSet resultSet = executeQuery(generateEgoCoPIquery(this.egoURI), this.dataSource);
+
+		InputStream is = null;
+		ResultSet rs = null;
+		try {
+			is = rdfService.sparqlSelectQuery(generateEgoCoPIquery(this.egoURI), RDFService.ResultFormat.JSON);
+			rs = ResultSetFactory.fromJSON(is);
+			data = createQueryResult(rs);
+		} catch (RDFServiceException e) {
+			log.error("Unable to execute query", e);
+			throw new RuntimeException(e);
+		} finally {
+			if (is != null) {
+				try { is.close(); } catch (Throwable t) { }
+			}
+		}
 		after = System.currentTimeMillis();
 
 		log.debug("Time taken to execute the SELECT queries is in milliseconds: " + (after - before));
-
-		data = createQueryResult(resultSet);
 
 		CollaborationDataCacheEntry newEntry = new CollaborationDataCacheEntry();
 
