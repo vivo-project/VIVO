@@ -2,6 +2,7 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.coauthorship;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -12,17 +13,15 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.hp.hpl.jena.query.ResultSetFactory;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.jena.iri.IRI;
 import org.apache.jena.iri.IRIFactory;
 import org.apache.jena.iri.Violation;
 
-import com.hp.hpl.jena.query.Dataset;
-import com.hp.hpl.jena.query.Query;
-import com.hp.hpl.jena.query.QueryExecution;
-import com.hp.hpl.jena.query.QueryExecutionFactory;
-import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.Syntax;
@@ -54,9 +53,9 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
 	private String egoURI;
-	
-	private Dataset dataset;
 
+	private RDFService rdfService;
+	
 	private Log log;
 
 	private UniqueIDGenerator nodeIDGenerator;
@@ -64,10 +63,10 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 	private UniqueIDGenerator edgeIDGenerator;
 
 	public CoAuthorshipQueryRunner(String egoURI,
-			Dataset dataset, Log log) {
+			RDFService rdfService, Log log) {
 
 		this.egoURI = egoURI;
-		this.dataset = dataset;
+		this.rdfService = rdfService;
 		this.log = log;
 		
 		this.nodeIDGenerator = new UniqueIDGenerator();
@@ -376,16 +375,6 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 			return biboDocument;
 	}
 	
-	private ResultSet executeQuery(String queryText,
-								   Dataset dataset) {
-
-        QueryExecution queryExecution = null;
-        Query query = QueryFactory.create(queryText, SYNTAX);
-
-        queryExecution = QueryExecutionFactory.create(query, dataset);
-        return queryExecution.execSelect();
-    }
-
 	private String generateEgoCoAuthorshipSparqlQuery(String queryURI) {
 
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
@@ -466,10 +455,20 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 			throw new MalformedQueryParametersException("URI parameter is either null or empty.");
 		}
 
-		ResultSet resultSet	= executeQuery(generateEgoCoAuthorshipSparqlQuery(this.egoURI),
-				this.dataset);
-
-		data = createQueryResult(resultSet);
+		InputStream is = null;
+		ResultSet rs = null;
+		try {
+			is = rdfService.sparqlSelectQuery(generateEgoCoAuthorshipSparqlQuery(this.egoURI), RDFService.ResultFormat.JSON);
+			rs = ResultSetFactory.fromJSON(is);
+			data = createQueryResult(rs);
+		} catch (RDFServiceException e) {
+			log.error("Unable to execute query", e);
+			throw new RuntimeException(e);
+		} finally {
+			if (is != null) {
+				try { is.close(); } catch (Throwable t) { }
+			}
+		}
 
 		CollaborationDataCacheEntry newEntry = new CollaborationDataCacheEntry();
 

@@ -166,7 +166,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         } else {
         	
         	QueryRunner<CollaborationData> coAuthorshipQueryManager = 
-        			new CoAuthorshipQueryRunner(egoURI, dataset, log);
+        			new CoAuthorshipQueryRunner(egoURI, vitroRequest.getRDFService(), log);
         
         	CollaborationData coAuthorshipData = coAuthorshipQueryManager.getQueryResult();
         	
