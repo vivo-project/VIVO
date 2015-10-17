@@ -9,9 +9,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
 
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
@@ -20,6 +17,9 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
+import edu.cornell.mannlib.vitro.webapp.visualization.utilities.CachingRDFServiceExecutor;
+import edu.cornell.mannlib.vitro.webapp.visualization.utilities.OrgUtils;
+import edu.cornell.mannlib.vitro.webapp.visualization.utilities.VisualizationCaches;
 import mapping.ScienceMapping;
 import mapping.ScienceMappingResult;
 
@@ -40,9 +40,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.MapOfScienceCons
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.temporalgraph.OrganizationUtilityFunctions;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.GenericQueryMap;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.MapOfScienceActivity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.json.MapOfScience;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
@@ -93,14 +91,13 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
 	}
 
-
 	private Map<String, String> getSubjectPersonEntityAndGenerateDataResponse(
 			VitroRequest vitroRequest, String subjectEntityURI, String entityLabel, VisConstants.DataVisMode dataOuputFormat)
 					throws MalformedQueryParametersException {
 
 		RDFService rdfService = vitroRequest.getRDFService();
 
-		Map<String, Set<String>> personToPublicationMap = cachedPersonToPublication.get(rdfService);
+		Map<String, Set<String>> personToPublicationMap = VisualizationCaches.cachedPersonToPublication.get(rdfService);
 		Map<String, String> publicationToJournalMap = cachedPublicationToJournal.get(rdfService);
 
 		if (!personToPublicationMap.containsKey(subjectEntityURI)) {
@@ -163,25 +160,13 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 		}
 	}
 
-	private Set<String> addOrgAndAllSubOrgs(Set<String> allSubOrgs, String org, Map<String, Set<String>> subOrgMap) {
-		if (allSubOrgs.add(org)) {
-			if (subOrgMap.containsKey(org)) {
-				for (String subOrg : subOrgMap.get(org)) {
-					addOrgAndAllSubOrgs(allSubOrgs, subOrg, subOrgMap);
-				}
-			}
-		}
-
-		return allSubOrgs;
-	}
-
 	private Map<String, String> getSubjectEntityAndGenerateDataResponse(
 			VitroRequest vitroRequest, String subjectEntityURI, String entityLabel, VisConstants.DataVisMode dataOuputFormat)
 			throws MalformedQueryParametersException {
 
 		RDFService rdfService = vitroRequest.getRDFService();
 
-		Map<String, String> orgLabelMap = cachedOrganizationLabels.get(rdfService);
+		Map<String, String> orgLabelMap = VisualizationCaches.cachedOrganizationLabels.get(rdfService);
 
 		if (orgLabelMap.get(subjectEntityURI) == null) {
 			if (VisConstants.DataVisMode.JSON.equals(dataOuputFormat)) {
@@ -191,9 +176,9 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 			}
 		}
 
-		Map<String, Set<String>> subOrgMap = cachedOrganizationSubOrgs.get(rdfService);
-		Map<String, Set<String>> organisationToPeopleMap = cachedOrganisationToPeopleMap.get(rdfService);
-		Map<String, Set<String>> personToPublicationMap = cachedPersonToPublication.get(rdfService);
+		Map<String, Set<String>> subOrgMap = VisualizationCaches.cachedOrganizationSubOrgs.get(rdfService);
+		Map<String, Set<String>> organisationToPeopleMap = VisualizationCaches.cachedOrganisationToPeopleMap.get(rdfService);
+		Map<String, Set<String>> personToPublicationMap = VisualizationCaches.cachedPersonToPublication.get(rdfService);
 		Map<String, String> publicationToJournalMap = cachedPublicationToJournal.get(rdfService);
 
 		Set<String> orgPublications       = new HashSet<String>();
@@ -201,44 +186,15 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 
 		Map<String, Set<String>> subOrgPublicationsMap = new HashMap<String, Set<String>>();
 
-		if (subOrgMap.containsKey(subjectEntityURI)) {
-			for (String topSubOrg : subOrgMap.get(subjectEntityURI)) {
-				Set<String> subOrgPublications       = new HashSet<String>();
-				Set<String> subOrgPublicationsPeople = new HashSet<String>();
-
-				Set<String> fullSubOrgs  = addOrgAndAllSubOrgs(new HashSet<String>(), topSubOrg, subOrgMap);
-
-				for (String subOrg : fullSubOrgs) {
-					Set<String> peopleInSubOrg = organisationToPeopleMap.get(subOrg);
-					if (peopleInSubOrg != null) {
-						for (String person : peopleInSubOrg) {
-							if (personToPublicationMap.containsKey(person)) {
-								if (subOrgPublicationsPeople.add(person)) {
-									subOrgPublications.addAll(personToPublicationMap.get(person));
-
-									if (orgPublicationsPeople.add(person)) {
-										orgPublications.addAll(personToPublicationMap.get(person));
-									}
-								}
-							}
-						}
-					}
-				}
-
-				subOrgPublicationsMap.put(topSubOrg, subOrgPublications);
-			}
-		}
-
-		Set<String> people = organisationToPeopleMap.get(subjectEntityURI);
-		if (people != null) {
-			for (String person : people) {
-				if (personToPublicationMap.containsKey(person)) {
-					if (orgPublicationsPeople.add(person)) {
-						orgPublications.addAll(personToPublicationMap.get(person));
-					}
-				}
-			}
-		}
+		OrgUtils.getObjectMappingsForOrgAnSubOrgs(
+				subjectEntityURI,
+				orgPublications,
+				orgPublicationsPeople,
+				subOrgPublicationsMap,
+				subOrgMap,
+				organisationToPeopleMap,
+				personToPublicationMap
+		);
 
 		if (orgPublications.isEmpty()) {
 			if (VisConstants.DataVisMode.JSON.equals(dataOuputFormat)) {
@@ -584,191 +540,11 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 		return null;
 	}
 
-	private static CachingRDFServiceExecutor<Map<String, String>> cachedOrganizationLabels =
-			new CachingRDFServiceExecutor<>(
-					new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>() {
-						@Override
-						Map<String, String> callWithService(RDFService rdfService) throws Exception {
-							String query = QueryConstants.getSparqlPrefixQuery() +
-									"SELECT ?org ?orgLabel\n" +
-									"WHERE\n" +
-									"{\n" +
-									"  ?org a foaf:Organization .\n" +
-									"  ?org rdfs:label ?orgLabel .\n" +
-									"}\n";
-
-							Map<String, String> map = new HashMap<>();
-
-							InputStream is = null;
-							ResultSet rs = null;
-							try {
-								is = rdfService.sparqlSelectQuery(query, RDFService.ResultFormat.JSON);
-								rs = ResultSetFactory.fromJSON(is);
-
-								while (rs.hasNext()) {
-									QuerySolution qs = rs.next();
-									String org      = qs.getResource("org").getURI();
-									String orgLabel = qs.getLiteral("orgLabel").getString();
-
-									map.put(org, orgLabel);
-								}
-							} finally {
-								silentlyClose(is);
-							}
-
-							return map;
-						}
-					}
-			);
-
-	private static CachingRDFServiceExecutor<Map<String, Set<String>>> cachedOrganizationSubOrgs =
-			new CachingRDFServiceExecutor<>(
-					new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, Set<String>>>() {
-						@Override
-						Map<String, Set<String>> callWithService(RDFService rdfService) throws Exception {
-							String query = QueryConstants.getSparqlPrefixQuery() +
-									"SELECT ?org ?subOrg\n" +
-									"WHERE\n" +
-									"{\n" +
-									"  ?org a foaf:Organization .\n" +
-									"  ?org <http://purl.obolibrary.org/obo/BFO_0000051> ?subOrg .\n" +
-									"}\n";
-
-							Map<String, Set<String>> map = new HashMap<>();
-
-							InputStream is = null;
-							ResultSet rs = null;
-							try {
-								is = rdfService.sparqlSelectQuery(query, RDFService.ResultFormat.JSON);
-								rs = ResultSetFactory.fromJSON(is);
-
-								while (rs.hasNext()) {
-									QuerySolution qs = rs.next();
-									String org    = qs.getResource("org").getURI();
-									String subOrg = qs.getResource("subOrg").getURI();
-
-									Set<String> subOrgs = map.get(org);
-									if (subOrgs == null) {
-										subOrgs = new HashSet<String>();
-										subOrgs.add(subOrg);
-										map.put(org, subOrgs);
-									} else {
-										subOrgs.add(subOrg);
-									}
-								}
-							} finally {
-								silentlyClose(is);
-							}
-
-							return map;
-						}
-					}
-			);
-
-	private static CachingRDFServiceExecutor<Map<String, Set<String>>> cachedOrganisationToPeopleMap =
-			new CachingRDFServiceExecutor<Map<String, Set<String>>>(
-					new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, Set<String>>>() {
-						@Override
-						public Map<String, Set<String>> callWithService(RDFService rdfService) throws Exception {
-							String query = QueryConstants.getSparqlPrefixQuery() +
-									"SELECT ?organisation ?person\n" +
-									"WHERE\n" +
-									"{\n" +
-									"  ?organisation a foaf:Organization .\n" +
-									"  ?organisation core:relatedBy ?position .\n" +
-									"  ?position core:relates ?person .\n" +
-									"  ?person a foaf:Person .\n" +
-									"}\n";
-
-							// TODO Critical section?
-
-							Map<String, Set<String>> orgToPeopleMap = new HashMap<String, Set<String>>();
-
-							InputStream is = null;
-							ResultSet rs = null;
-							try {
-								is = rdfService.sparqlSelectQuery(query, RDFService.ResultFormat.JSON);
-								rs = ResultSetFactory.fromJSON(is);
-
-								while (rs.hasNext()) {
-									QuerySolution qs = rs.next();
-									String org    = qs.getResource("organisation").getURI();
-									String person = qs.getResource("person").getURI();
-
-									Set<String> people = orgToPeopleMap.get(org);
-									if (people == null) {
-										people = new HashSet<String>();
-										people.add(person);
-										orgToPeopleMap.put(org, people);
-									} else {
-										people.add(person);
-									}
-								}
-							} finally {
-								silentlyClose(is);
-							}
-
-							return orgToPeopleMap;
-						}
-					}
-			);
-
-	private static CachingRDFServiceExecutor<Map<String, Set<String>>> cachedPersonToPublication =
-			new CachingRDFServiceExecutor<Map<String, Set<String>>>(
-					new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, Set<String>>>() {
-						@Override
-						public Map<String, Set<String>> callWithService(RDFService rdfService) throws Exception {
-							String query = QueryConstants.getSparqlPrefixQuery() +
-									"SELECT ?person ?document\n" +
-									"WHERE\n" +
-									"{\n" +
-									"  ?person a foaf:Person .\n" +
-									"  ?person core:relatedBy ?authorship .\n" +
-									"  ?authorship core:relates ?document .\n" +
-									"  ?document a bibo:Document .\n" +
-									"}\n";
-
-							Map<String, Set<String>> map = new HashMap<String, Set<String>>();
-
-							InputStream is = null;
-							ResultSet rs = null;
-							try {
-								is = rdfService.sparqlSelectQuery(query, RDFService.ResultFormat.JSON);
-								rs = ResultSetFactory.fromJSON(is);
-
-								while (rs.hasNext()) {
-									QuerySolution qs = rs.next();
-
-									Resource person   = qs.getResource("person");
-									Resource document = qs.getResource("document");
-
-									if (person != null && document != null) {
-										String personURI = person.getURI();
-
-										Set<String> documents = map.get(personURI);
-										if (documents == null) {
-											documents = new HashSet<String>();
-											documents.add(document.getURI());
-											map.put(personURI, documents);
-										} else {
-											documents.add(document.getURI());
-										}
-									}
-								}
-							} finally {
-								silentlyClose(is);
-							}
-
-							return map;
-						}
-					}
-			);
-
 	private static CachingRDFServiceExecutor<Map<String, String>> cachedPublicationToJournal =
 			new CachingRDFServiceExecutor<>(
 					new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>() {
 						@Override
-						Map<String, String> callWithService(RDFService rdfService) throws Exception {
+						protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
 							String query = QueryConstants.getSparqlPrefixQuery() +
 									"SELECT ?document ?journalLabel\n" +
 									"WHERE\n" +
@@ -830,107 +606,6 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 			return total;
 		}
 	}
-
-	private static class CachingRDFServiceExecutor<T> {
-		private T cachedResults;
-		private long lastCacheTime;
-
-		private RDFServiceCallable<T> resultBuilder;
-		private FutureTask<T> backgroundTask = null;
-
-		CachingRDFServiceExecutor(RDFServiceCallable<T> resultBuilder) {
-			this.resultBuilder = resultBuilder;
-		}
-
-		synchronized T get(RDFService rdfService) {
-			if (cachedResults != null) {
-				if (!resultBuilder.invalidateCache(System.currentTimeMillis() - lastCacheTime)) {
-					return cachedResults;
-				}
-			}
-
-			try {
-				if (backgroundTask == null) {
-					resultBuilder.setRDFService(rdfService);
-					backgroundTask = new FutureTask<T>(resultBuilder);
-
-					Thread thread = new Thread(backgroundTask);
-					thread.setDaemon(true);
-					thread.start();
-
-					if (cachedResults == null || resultBuilder.executionTime < 2000) {
-						completeBackgroundTask();
-					}
-				} else if (backgroundTask.isDone()) {
-					completeBackgroundTask();
-				}
-			} catch (InterruptedException e) {
-				abortBackgroundTask();
-			} catch (ExecutionException e) {
-				abortBackgroundTask();
-				throw new RuntimeException("Background RDF thread through an exception", e.getCause());
-			}
-
-			return cachedResults;
-		}
-
-		private void abortBackgroundTask() {
-			if (backgroundTask != null) {
-				backgroundTask.cancel(true);
-				backgroundTask = null;
-			}
-		}
-
-		private void completeBackgroundTask() throws InterruptedException, ExecutionException {
-			if (backgroundTask != null) {
-				cachedResults = backgroundTask.get();
-				lastCacheTime = System.currentTimeMillis();
-				backgroundTask = null;
-			}
-		}
-		static abstract class RDFServiceCallable<T> implements Callable<T> {
-			private RDFService rdfService;
-			private long executionTime = -1;
-
-			final void setRDFService(RDFService rdfService) {
-				this.rdfService = rdfService;
-			}
-
-			@Override
-			final public T call() throws Exception {
-				long start = System.currentTimeMillis();
-				T val = callWithService(rdfService);
-				executionTime = System.currentTimeMillis() - start;
-				return val;
-			}
-
-			abstract T callWithService(RDFService rdfService) throws Exception;
-
-			boolean invalidateCache(long timeCached) {
-				if (executionTime > -1) {
-					/*
-						Determine validity as a function of the time it takes to execute the query.
-
-						Query exec time  | Keep cache for
-						-----------------+-----------------
-						10 seconds       | 20 minutes
-						30 seconds       | 1 hour
-						1 minute         | 2 hours
-						5 minutes        | 10 hours
-
-
-						Multiplier of the last execution time is 120.
-
-						At most, keep a cache for one day (24 * 60 * 60 * 1000 = 86400000)
-					 */
-
-					return timeCached > Math.min(executionTime * 120, 86400000);
-				}
-				return false;
-			}
-		}
-	}
-
 	private static void silentlyClose(InputStream is) {
 		try {
 			if (is != null) {
