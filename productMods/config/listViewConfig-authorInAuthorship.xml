@@ -89,7 +89,8 @@
         PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt; 
         CONSTRUCT { 
             ?subject ?property ?authorship .  
-            ?authorship a core:Authorship . 
+            ?authorship a core:Authorship .
+            ?authorship core:hideFromDisplay ?hideThis .
             ?authorship core:relates ?infoResource .
             ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
             ?infoResource rdfs:label ?infoResourceName .
@@ -103,6 +104,10 @@
             UNION {
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
+            } UNION {
+                ?subject ?property ?authorship .
+                ?authorship a core:Authorship .
+                ?authorship core:hideFromDisplay ?hideThis .
             } UNION {
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
@@ -165,7 +170,7 @@
             UNION {
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
-            UNION {
+            } UNION {
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
                ?authorship core:hideFromDisplay ?hideThis .
