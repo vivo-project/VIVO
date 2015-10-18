@@ -1,24 +1,56 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
 package edu.cornell.mannlib.vitro.webapp.visualization.utilities;
 
 import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.query.ResultSetFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import org.joda.time.DateTime;
 
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Holder for the caches we are using in the visualizations
+ */
 final public class VisualizationCaches {
-    public static final CachingRDFServiceExecutor<Map<String, String>> cachedOrganizationLabels =
+    // Affinity object to ensure that only one background thread can be running at once when updating the caches
+    private static final CachingRDFServiceExecutor.Affinity visualizationAffinity = new CachingRDFServiceExecutor.Affinity();
+
+    /**
+     * Rebuild all the caches
+     */
+    public static void rebuildAll() { rebuildAll(null); }
+
+    /**
+     * Rebuild all the caches
+     * @param rdfService if not null, use this service in foreground, otherwise may use the background thread
+     */
+    public static void rebuildAll(RDFService rdfService) {
+        organizationLabels.build(rdfService);
+        organizationSubOrgs.build(rdfService);
+        organizationToMostSpecificLabel.build(rdfService);
+        organisationToPeopleMap.build(rdfService);
+        personLabels.build(rdfService);
+        personToMostSpecificLabel.build(rdfService);
+        personToPublication.build(rdfService);
+        publicationToJournal.build(rdfService);
+        publicationToYear.build(rdfService);
+        personToGrant.build(rdfService);
+        grantToYear.build(rdfService);
+    }
+
+    /**
+     * Cache of organization labels (uri -> label)
+     */
+    public static final CachingRDFServiceExecutor<Map<String, String>> organizationLabels =
             new CachingRDFServiceExecutor<>(
-                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>() {
+                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>(visualizationAffinity) {
                         @Override
                         protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
@@ -29,33 +61,29 @@ final public class VisualizationCaches {
                                     "  ?org rdfs:label ?orgLabel .\n" +
                                     "}\n";
 
-                            Map<String, String> map = new HashMap<>();
+                            final Map<String, String> map = new HashMap<>();
 
-                            InputStream is = null;
-                            ResultSet rs = null;
-                            try {
-                                is = rdfService.sparqlSelectQuery(query, RDFService.ResultFormat.JSON);
-                                rs = ResultSetFactory.fromJSON(is);
-
-                                while (rs.hasNext()) {
-                                    QuerySolution qs = rs.next();
+                            rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
+                                @Override
+                                protected void processQuerySolution(QuerySolution qs) {
                                     String org      = qs.getResource("org").getURI();
                                     String orgLabel = qs.getLiteral("orgLabel").getString();
 
                                     map.put(org, orgLabel);
                                 }
-                            } finally {
-                                silentlyClose(is);
-                            }
+                            });
 
                             return map;
                         }
                     }
             );
 
-    public static final CachingRDFServiceExecutor<Map<String, Set<String>>> cachedOrganizationSubOrgs =
+    /**
+     * Cache of organization to sub organizations (uri -> list of uris)
+     */
+    public static final CachingRDFServiceExecutor<Map<String, Set<String>>> organizationSubOrgs =
             new CachingRDFServiceExecutor<>(
-                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, Set<String>>>() {
+                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, Set<String>>>(visualizationAffinity) {
                         @Override
                         protected Map<String, Set<String>> callWithService(RDFService rdfService) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
@@ -66,16 +94,11 @@ final public class VisualizationCaches {
                                     "  ?org <http://purl.obolibrary.org/obo/BFO_0000051> ?subOrg .\n" +
                                     "}\n";
 
-                            Map<String, Set<String>> map = new HashMap<>();
+                            final Map<String, Set<String>> map = new HashMap<>();
 
-                            InputStream is = null;
-                            ResultSet rs = null;
-                            try {
-                                is = rdfService.sparqlSelectQuery(query, RDFService.ResultFormat.JSON);
-                                rs = ResultSetFactory.fromJSON(is);
-
-                                while (rs.hasNext()) {
-                                    QuerySolution qs = rs.next();
+                            rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
+                                @Override
+                                protected void processQuerySolution(QuerySolution qs) {
                                     String org    = qs.getResource("org").getURI();
                                     String subOrg = qs.getResource("subOrg").getURI();
 
@@ -88,16 +111,17 @@ final public class VisualizationCaches {
                                         subOrgs.add(subOrg);
                                     }
                                 }
-                            } finally {
-                                silentlyClose(is);
-                            }
+                            });
 
                             return map;
                         }
                     }
             );
 
-    public static final CachingRDFServiceExecutor<Map<String, String>> cachedOrganizationToMostSpecificLabel =
+    /**
+     * Organization most specific type label (uri -> string)
+     */
+    public static final CachingRDFServiceExecutor<Map<String, String>> organizationToMostSpecificLabel =
             new CachingRDFServiceExecutor<>(
                     new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>() {
                         @Override
@@ -111,32 +135,28 @@ final public class VisualizationCaches {
                                     "    ?type rdfs:label ?typeLabel .\n" +
                                     "}\n";
 
-                            Map<String, String> map = new HashMap<>();
+                            final Map<String, String> map = new HashMap<>();
 
-                            InputStream is = null;
-                            ResultSet rs = null;
-                            try {
-                                is = rdfService.sparqlSelectQuery(query, RDFService.ResultFormat.JSON);
-                                rs = ResultSetFactory.fromJSON(is);
-
-                                while (rs.hasNext()) {
-                                    QuerySolution qs = rs.next();
+                            rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
+                                @Override
+                                protected void processQuerySolution(QuerySolution qs) {
                                     String org = qs.getResource("org").getURI();
                                     String typeLabel  = qs.getLiteral("typeLabel").getString();
                                     map.put(org, String.valueOf(typeLabel));
                                 }
-                            } finally {
-                                silentlyClose(is);
-                            }
+                            });
 
                             return map;
                         }
                     }
             );
 
-    public static final CachingRDFServiceExecutor<Map<String, Set<String>>> cachedOrganisationToPeopleMap =
+    /**
+     * Map of people within an organisation (org uri -> list of person uri)
+     */
+    public static final CachingRDFServiceExecutor<Map<String, Set<String>>> organisationToPeopleMap =
             new CachingRDFServiceExecutor<Map<String, Set<String>>>(
-                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, Set<String>>>() {
+                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, Set<String>>>(visualizationAffinity) {
                         @Override
                         protected Map<String, Set<String>> callWithService(RDFService rdfService) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
@@ -145,22 +165,16 @@ final public class VisualizationCaches {
                                     "{\n" +
                                     "  ?organisation a foaf:Organization .\n" +
                                     "  ?organisation core:relatedBy ?position .\n" +
+                                    "  ?position a core:Position .\n" +
                                     "  ?position core:relates ?person .\n" +
                                     "  ?person a foaf:Person .\n" +
                                     "}\n";
 
-                            // TODO Critical section?
+                            final Map<String, Set<String>> orgToPeopleMap = new HashMap<String, Set<String>>();
 
-                            Map<String, Set<String>> orgToPeopleMap = new HashMap<String, Set<String>>();
-
-                            InputStream is = null;
-                            ResultSet rs = null;
-                            try {
-                                is = rdfService.sparqlSelectQuery(query, RDFService.ResultFormat.JSON);
-                                rs = ResultSetFactory.fromJSON(is);
-
-                                while (rs.hasNext()) {
-                                    QuerySolution qs = rs.next();
+                            rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
+                                @Override
+                                protected void processQuerySolution(QuerySolution qs) {
                                     String org    = qs.getResource("organisation").getURI();
                                     String person = qs.getResource("person").getURI();
 
@@ -173,18 +187,19 @@ final public class VisualizationCaches {
                                         people.add(person);
                                     }
                                 }
-                            } finally {
-                                silentlyClose(is);
-                            }
+                            });
 
                             return orgToPeopleMap;
                         }
                     }
             );
 
-    public static final CachingRDFServiceExecutor<Map<String, String>> cachedPersonLabels =
+    /**
+     * Display labels for people (uri -> label)
+     */
+    public static final CachingRDFServiceExecutor<Map<String, String>> personLabels =
             new CachingRDFServiceExecutor<>(
-                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>() {
+                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>(visualizationAffinity) {
                         @Override
                         protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
@@ -195,33 +210,62 @@ final public class VisualizationCaches {
                                     "  ?person rdfs:label ?personLabel .\n" +
                                     "}\n";
 
-                            Map<String, String> map = new HashMap<>();
+                            final Map<String, String> map = new HashMap<>();
 
-                            InputStream is = null;
-                            ResultSet rs = null;
-                            try {
-                                is = rdfService.sparqlSelectQuery(query, RDFService.ResultFormat.JSON);
-                                rs = ResultSetFactory.fromJSON(is);
-
-                                while (rs.hasNext()) {
-                                    QuerySolution qs = rs.next();
+                            rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
+                                @Override
+                                protected void processQuerySolution(QuerySolution qs) {
                                     String person      = qs.getResource("person").getURI();
                                     String personLabel = qs.getLiteral("personLabel").getString();
 
                                     map.put(person, personLabel);
                                 }
-                            } finally {
-                                silentlyClose(is);
-                            }
+                            });
 
                             return map;
                         }
                     }
             );
 
-    public static final CachingRDFServiceExecutor<Map<String, Set<String>>> cachedPersonToPublication =
+    /**
+     * Most specific type for person (uri -> label)
+     */
+    public static final CachingRDFServiceExecutor<Map<String, String>> personToMostSpecificLabel =
+            new CachingRDFServiceExecutor<>(
+                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>(visualizationAffinity) {
+                        @Override
+                        protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
+                            String query = QueryConstants.getSparqlPrefixQuery() +
+                                    "SELECT ?person ?typeLabel\n" +
+                                    "WHERE\n" +
+                                    "{\n" +
+                                    "    ?person a foaf:Person .\n" +
+                                    "    ?person vitro:mostSpecificType ?type .\n" +
+                                    "    ?type rdfs:label ?typeLabel .\n" +
+                                    "}\n";
+
+                            final Map<String, String> map = new HashMap<>();
+
+                            rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
+                                @Override
+                                protected void processQuerySolution(QuerySolution qs) {
+                                    String person = qs.getResource("person").getURI();
+                                    String typeLabel  = qs.getLiteral("typeLabel").getString();
+                                    map.put(person, String.valueOf(typeLabel));
+                                }
+                            });
+
+                            return map;
+                        }
+                    }
+            );
+
+    /**
+     * Person to publication Map (person uri -> list of publication uri)
+     */
+    public static final CachingRDFServiceExecutor<Map<String, Set<String>>> personToPublication =
             new CachingRDFServiceExecutor<Map<String, Set<String>>>(
-                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, Set<String>>>() {
+                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, Set<String>>>(visualizationAffinity) {
                         @Override
                         protected Map<String, Set<String>> callWithService(RDFService rdfService) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
@@ -235,17 +279,11 @@ final public class VisualizationCaches {
                                     "  ?document a bibo:Document .\n" +
                                     "}\n";
 
-                            Map<String, Set<String>> map = new HashMap<String, Set<String>>();
+                            final Map<String, Set<String>> map = new HashMap<String, Set<String>>();
 
-                            InputStream is = null;
-                            ResultSet rs = null;
-                            try {
-                                is = rdfService.sparqlSelectQuery(query, RDFService.ResultFormat.JSON);
-                                rs = ResultSetFactory.fromJSON(is);
-
-                                while (rs.hasNext()) {
-                                    QuerySolution qs = rs.next();
-
+                            rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
+                                @Override
+                                protected void processQuerySolution(QuerySolution qs) {
                                     Resource person   = qs.getResource("person");
                                     Resource document = qs.getResource("document");
 
@@ -262,18 +300,53 @@ final public class VisualizationCaches {
                                         }
                                     }
                                 }
-                            } finally {
-                                silentlyClose(is);
-                            }
+                            });
 
                             return map;
                         }
                     }
             );
 
-    public static final CachingRDFServiceExecutor<Map<String, String>> cachedPublicationToYear =
+    /**
+     * Publication to journal (publication uri -> journal label)
+     */
+    public static final CachingRDFServiceExecutor<Map<String, String>> publicationToJournal =
             new CachingRDFServiceExecutor<>(
-                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>() {
+                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>(visualizationAffinity) {
+                        @Override
+                        protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
+                            String query = QueryConstants.getSparqlPrefixQuery() +
+                                    "SELECT ?document ?journalLabel\n" +
+                                    "WHERE\n" +
+                                    "{\n" +
+                                    "  ?document a bibo:Document .\n" +
+                                    "  ?document core:hasPublicationVenue ?journal . \n" +
+                                    "  ?journal rdfs:label ?journalLabel . \n" +
+                                    "}\n";
+
+                            final Map<String, String> map = new HashMap<>();
+
+                            rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
+                                @Override
+                                protected void processQuerySolution(QuerySolution qs) {
+                                    String document      = qs.getResource("document").getURI();
+                                    String journalLabel = qs.getLiteral("journalLabel").getString();
+
+                                    map.put(document, journalLabel);
+                                }
+                            });
+
+                            return map;
+                        }
+                    }
+            );
+
+    /**
+     * Publication to year (publication uri -> year)
+     */
+    public static final CachingRDFServiceExecutor<Map<String, String>> publicationToYear =
+            new CachingRDFServiceExecutor<>(
+                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>(visualizationAffinity) {
                         @Override
                         protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
@@ -285,16 +358,11 @@ final public class VisualizationCaches {
                                     "  ?dateTimeValue core:dateTime ?publicationDate . \n" +
                                     "}\n";
 
-                            Map<String, String> map = new HashMap<>();
+                            final Map<String, String> map = new HashMap<>();
 
-                            InputStream is = null;
-                            ResultSet rs = null;
-                            try {
-                                is = rdfService.sparqlSelectQuery(query, RDFService.ResultFormat.JSON);
-                                rs = ResultSetFactory.fromJSON(is);
-
-                                while (rs.hasNext()) {
-                                    QuerySolution qs = rs.next();
+                            rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
+                                @Override
+                                protected void processQuerySolution(QuerySolution qs) {
                                     String document = qs.getResource("document").getURI();
                                     String pubDate  = qs.getLiteral("publicationDate").getString();
                                     if (pubDate != null) {
@@ -306,18 +374,19 @@ final public class VisualizationCaches {
                                         }
                                     }
                                 }
-                            } finally {
-                                silentlyClose(is);
-                            }
+                            });
 
                             return map;
                         }
                     }
             );
 
-    public static final CachingRDFServiceExecutor<Map<String, Set<String>>> cachedPersonToGrant =
+    /**
+     * Person to grant (person uri -> grant uri)
+     */
+    public static final CachingRDFServiceExecutor<Map<String, Set<String>>> personToGrant =
             new CachingRDFServiceExecutor<Map<String, Set<String>>>(
-                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, Set<String>>>() {
+                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, Set<String>>>(visualizationAffinity) {
                         @Override
                         protected Map<String, Set<String>> callWithService(RDFService rdfService) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
@@ -331,17 +400,11 @@ final public class VisualizationCaches {
                                     "  ?grant a core:Grant .\n" +
                                     "}\n";
 
-                            Map<String, Set<String>> map = new HashMap<String, Set<String>>();
+                            final Map<String, Set<String>> map = new HashMap<String, Set<String>>();
 
-                            InputStream is = null;
-                            ResultSet rs = null;
-                            try {
-                                is = rdfService.sparqlSelectQuery(query, RDFService.ResultFormat.JSON);
-                                rs = ResultSetFactory.fromJSON(is);
-
-                                while (rs.hasNext()) {
-                                    QuerySolution qs = rs.next();
-
+                            rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
+                                @Override
+                                protected void processQuerySolution(QuerySolution qs) {
                                     Resource person = qs.getResource("person");
                                     Resource grant  = qs.getResource("grant");
 
@@ -358,18 +421,19 @@ final public class VisualizationCaches {
                                         }
                                     }
                                 }
-                            } finally {
-                                silentlyClose(is);
-                            }
+                            });
 
                             return map;
                         }
                     }
             );
 
-    public static final CachingRDFServiceExecutor<Map<String, String>> cachedGrantToYear =
+    /**
+     * Grant to year (grant uri -> year)
+     */
+    public static final CachingRDFServiceExecutor<Map<String, String>> grantToYear =
             new CachingRDFServiceExecutor<>(
-                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>() {
+                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>(visualizationAffinity) {
                         @Override
                         protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
@@ -382,16 +446,11 @@ final public class VisualizationCaches {
                                     "  ?startDate core:dateTime ?startDateTimeValue . \n" +
                                     "}\n";
 
-                            Map<String, String> map = new HashMap<>();
+                            final Map<String, String> map = new HashMap<>();
 
-                            InputStream is = null;
-                            ResultSet rs = null;
-                            try {
-                                is = rdfService.sparqlSelectQuery(query, RDFService.ResultFormat.JSON);
-                                rs = ResultSetFactory.fromJSON(is);
-
-                                while (rs.hasNext()) {
-                                    QuerySolution qs = rs.next();
+                            rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
+                                @Override
+                                protected void processQuerySolution(QuerySolution qs) {
                                     String grant = qs.getResource("grant").getURI();
                                     String startDate  = qs.getLiteral("startDateTimeValue").getString();
                                     if (startDate != null) {
@@ -403,18 +462,19 @@ final public class VisualizationCaches {
                                         }
                                     }
                                 }
-                            } finally {
-                                silentlyClose(is);
-                            }
+                            });
 
                             return map;
                         }
                     }
             );
 
-    public static final CachingRDFServiceExecutor<Map<String, String>> cachedGrantToRoleYear =
+    /**
+     * Grant to year of start in role (grant uri -> year)
+     */
+    public static final CachingRDFServiceExecutor<Map<String, String>> grantToRoleYear =
             new CachingRDFServiceExecutor<>(
-                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>() {
+                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>(visualizationAffinity) {
                         @Override
                         protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
@@ -428,16 +488,11 @@ final public class VisualizationCaches {
                                     "  ?startDate core:dateTime ?startDateTimeValue . \n" +
                                     "}\n";
 
-                            Map<String, String> map = new HashMap<>();
+                            final Map<String, String> map = new HashMap<>();
 
-                            InputStream is = null;
-                            ResultSet rs = null;
-                            try {
-                                is = rdfService.sparqlSelectQuery(query, RDFService.ResultFormat.JSON);
-                                rs = ResultSetFactory.fromJSON(is);
-
-                                while (rs.hasNext()) {
-                                    QuerySolution qs = rs.next();
+                            rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
+                                @Override
+                                protected void processQuerySolution(QuerySolution qs) {
                                     String grant = qs.getResource("grant").getURI();
                                     String startDate  = qs.getLiteral("startDateTimeValue").getString();
                                     if (startDate != null) {
@@ -449,59 +504,10 @@ final public class VisualizationCaches {
                                         }
                                     }
                                 }
-                            } finally {
-                                silentlyClose(is);
-                            }
+                            });
 
                             return map;
                         }
                     }
             );
-
-    public static final CachingRDFServiceExecutor<Map<String, String>> cachedPersonToMostSpecificLabel =
-            new CachingRDFServiceExecutor<>(
-                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>() {
-                        @Override
-                        protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
-                            String query = QueryConstants.getSparqlPrefixQuery() +
-                                    "SELECT ?person ?typeLabel\n" +
-                                    "WHERE\n" +
-                                    "{\n" +
-                                    "    ?person a foaf:Person .\n" +
-                                    "    ?person vitro:mostSpecificType ?type .\n" +
-                                    "    ?type rdfs:label ?typeLabel .\n" +
-                                    "}\n";
-
-                            Map<String, String> map = new HashMap<>();
-
-                            InputStream is = null;
-                            ResultSet rs = null;
-                            try {
-                                is = rdfService.sparqlSelectQuery(query, RDFService.ResultFormat.JSON);
-                                rs = ResultSetFactory.fromJSON(is);
-
-                                while (rs.hasNext()) {
-                                    QuerySolution qs = rs.next();
-                                    String person = qs.getResource("person").getURI();
-                                    String typeLabel  = qs.getLiteral("typeLabel").getString();
-                                    map.put(person, String.valueOf(typeLabel));
-                                }
-                            } finally {
-                                silentlyClose(is);
-                            }
-
-                            return map;
-                        }
-                    }
-            );
-
-    private static void silentlyClose(InputStream is) {
-        try {
-            if (is != null) {
-                is.close();
-            }
-        } catch (Throwable t) {
-
-        }
-    }
 }

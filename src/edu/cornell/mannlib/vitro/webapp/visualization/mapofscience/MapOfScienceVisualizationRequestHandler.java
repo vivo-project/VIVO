@@ -3,21 +3,14 @@
 package edu.cornell.mannlib.vitro.webapp.visualization.mapofscience;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.query.ResultSetFactory;
-import com.hp.hpl.jena.rdf.model.Resource;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
-import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.utilities.CachingRDFServiceExecutor;
 import edu.cornell.mannlib.vitro.webapp.visualization.utilities.OrgUtils;
 import edu.cornell.mannlib.vitro.webapp.visualization.utilities.VisualizationCaches;
 import mapping.ScienceMapping;
@@ -97,8 +90,8 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 
 		RDFService rdfService = vitroRequest.getRDFService();
 
-		Map<String, Set<String>> personToPublicationMap = VisualizationCaches.cachedPersonToPublication.get(rdfService);
-		Map<String, String> publicationToJournalMap = cachedPublicationToJournal.get(rdfService);
+		Map<String, Set<String>> personToPublicationMap = VisualizationCaches.personToPublication.get(rdfService);
+		Map<String, String> publicationToJournalMap = VisualizationCaches.publicationToJournal.get(rdfService);
 
 		if (!personToPublicationMap.containsKey(subjectEntityURI)) {
 			if (VisConstants.DataVisMode.JSON.equals(dataOuputFormat)) {
@@ -166,7 +159,7 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 
 		RDFService rdfService = vitroRequest.getRDFService();
 
-		Map<String, String> orgLabelMap = VisualizationCaches.cachedOrganizationLabels.get(rdfService);
+		Map<String, String> orgLabelMap = VisualizationCaches.organizationLabels.get(rdfService);
 
 		if (orgLabelMap.get(subjectEntityURI) == null) {
 			if (VisConstants.DataVisMode.JSON.equals(dataOuputFormat)) {
@@ -176,10 +169,10 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 			}
 		}
 
-		Map<String, Set<String>> subOrgMap = VisualizationCaches.cachedOrganizationSubOrgs.get(rdfService);
-		Map<String, Set<String>> organisationToPeopleMap = VisualizationCaches.cachedOrganisationToPeopleMap.get(rdfService);
-		Map<String, Set<String>> personToPublicationMap = VisualizationCaches.cachedPersonToPublication.get(rdfService);
-		Map<String, String> publicationToJournalMap = cachedPublicationToJournal.get(rdfService);
+		Map<String, Set<String>> subOrgMap = VisualizationCaches.organizationSubOrgs.get(rdfService);
+		Map<String, Set<String>> organisationToPeopleMap = VisualizationCaches.organisationToPeopleMap.get(rdfService);
+		Map<String, Set<String>> personToPublicationMap = VisualizationCaches.personToPublication.get(rdfService);
+		Map<String, String> publicationToJournalMap = VisualizationCaches.publicationToJournal.get(rdfService);
 
 		Set<String> orgPublications       = new HashSet<String>();
 		Set<String> orgPublicationsPeople = new HashSet<String>();
@@ -540,44 +533,6 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 		return null;
 	}
 
-	private static CachingRDFServiceExecutor<Map<String, String>> cachedPublicationToJournal =
-			new CachingRDFServiceExecutor<>(
-					new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>() {
-						@Override
-						protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
-							String query = QueryConstants.getSparqlPrefixQuery() +
-									"SELECT ?document ?journalLabel\n" +
-									"WHERE\n" +
-									"{\n" +
-									"  ?document a bibo:Document .\n" +
-									"  ?document core:hasPublicationVenue ?journal . \n" +
-									"  ?journal rdfs:label ?journalLabel . \n" +
-									"}\n";
-
-							Map<String, String> map = new HashMap<>();
-
-							InputStream is = null;
-							ResultSet rs = null;
-							try {
-								is = rdfService.sparqlSelectQuery(query, RDFService.ResultFormat.JSON);
-								rs = ResultSetFactory.fromJSON(is);
-
-								while (rs.hasNext()) {
-									QuerySolution qs = rs.next();
-									String document      = qs.getResource("document").getURI();
-									String journalLabel = qs.getLiteral("journalLabel").getString();
-
-									map.put(document, journalLabel);
-								}
-							} finally {
-								silentlyClose(is);
-							}
-
-							return map;
-						}
-					}
-			);
-
 	private static class JournalPublicationCounts {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		int noJournalCount = 0;
@@ -604,15 +559,6 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 
 		long getTotal() {
 			return total;
-		}
-	}
-	private static void silentlyClose(InputStream is) {
-		try {
-			if (is != null) {
-				is.close();
-			}
-		} catch (Throwable t) {
-
 		}
 	}
 }

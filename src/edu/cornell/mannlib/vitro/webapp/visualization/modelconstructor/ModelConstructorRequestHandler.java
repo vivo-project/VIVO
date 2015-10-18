@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import edu.cornell.mannlib.vitro.webapp.visualization.utilities.VisualizationCaches;
 import org.apache.commons.logging.Log;
 
 import com.google.gson.Gson;
@@ -83,6 +84,8 @@ public class ModelConstructorRequestHandler implements
 	private Map<String, String> regenerateConstructedModels(VitroRequest vitroRequest, 
 															Dataset dataSource) {
 
+		VisualizationCaches.rebuildAll(vitroRequest.getRDFService());
+
 		List<ConstructedModel> refreshedModels = new ArrayList<ConstructedModel>();
 
 		Set<String> currentModelIdentifiers = new HashSet<String>(ConstructedModelTracker.getAllModels().keySet());
@@ -117,6 +120,7 @@ public class ModelConstructorRequestHandler implements
 		
 		fileData.put(DataVisualizationController.FILE_CONTENT_KEY,
 				json.toJson(refreshedModels));
+
 		return fileData;
 	}
 

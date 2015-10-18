@@ -76,8 +76,8 @@ public class TemporalPublicationVisualizationRequestHandler implements
 
 		RDFService rdfService = vitroRequest.getRDFService();
 
-		Map<String, String> orgLabelMap = VisualizationCaches.cachedOrganizationLabels.get(rdfService);
-		Map<String, String> personLabelMap = VisualizationCaches.cachedPersonLabels.get(rdfService);
+		Map<String, String> orgLabelMap = VisualizationCaches.organizationLabels.get(rdfService);
+		Map<String, String> personLabelMap = VisualizationCaches.personLabels.get(rdfService);
 
 		if (orgLabelMap.get(subjectEntityURI) == null) {
 			if (VisConstants.DataVisMode.JSON.equals(visMode)) {
@@ -87,12 +87,12 @@ public class TemporalPublicationVisualizationRequestHandler implements
 			}
 		}
 
-		Map<String, Set<String>> subOrgMap               = VisualizationCaches.cachedOrganizationSubOrgs.get(rdfService);
-		Map<String, String> orgMostSpecificLabelMap      = VisualizationCaches.cachedOrganizationToMostSpecificLabel.get(rdfService);
-		Map<String, String> personMostSpecificLabelMap   = VisualizationCaches.cachedPersonToMostSpecificLabel.get(rdfService);
-		Map<String, Set<String>> organisationToPeopleMap = VisualizationCaches.cachedOrganisationToPeopleMap.get(rdfService);
-		Map<String, Set<String>> personToPublicationMap  = VisualizationCaches.cachedPersonToPublication.get(rdfService);
-		Map<String, String>      publicationToYearMap    = VisualizationCaches.cachedPublicationToYear.get(rdfService);
+		Map<String, Set<String>> subOrgMap               = VisualizationCaches.organizationSubOrgs.get(rdfService);
+		Map<String, String> orgMostSpecificLabelMap      = VisualizationCaches.organizationToMostSpecificLabel.get(rdfService);
+		Map<String, String> personMostSpecificLabelMap   = VisualizationCaches.personToMostSpecificLabel.get(rdfService);
+		Map<String, Set<String>> organisationToPeopleMap = VisualizationCaches.organisationToPeopleMap.get(rdfService);
+		Map<String, Set<String>> personToPublicationMap  = VisualizationCaches.personToPublication.get(rdfService);
+		Map<String, String>      publicationToYearMap    = VisualizationCaches.publicationToYear.get(rdfService);
 
 		Set<String> orgPublications       = new HashSet<String>();
 		Set<String> orgPublicationsPeople = new HashSet<String>();

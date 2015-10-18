@@ -2,7 +2,6 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.temporalgraph;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,7 +13,6 @@ import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.visualization.utilities.CounterUtils;
 import edu.cornell.mannlib.vitro.webapp.visualization.utilities.OrgUtils;
 import edu.cornell.mannlib.vitro.webapp.visualization.utilities.VisualizationCaches;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Individual;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -28,15 +26,10 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Res
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Entity;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SubEntity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.json.JsonObject;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.json.SubjectEntityJSON;
-import edu.cornell.mannlib.vitro.webapp.visualization.visutils.SelectOnModelUtilities;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
@@ -143,8 +136,8 @@ public class TemporalGrantVisualizationRequestHandler implements
 
 		RDFService rdfService = vitroRequest.getRDFService();
 
-		Map<String, String> orgLabelMap = VisualizationCaches.cachedOrganizationLabels.get(rdfService);
-		Map<String, String> personLabelMap = VisualizationCaches.cachedPersonLabels.get(rdfService);
+		Map<String, String> orgLabelMap = VisualizationCaches.organizationLabels.get(rdfService);
+		Map<String, String> personLabelMap = VisualizationCaches.personLabels.get(rdfService);
 
 		if (orgLabelMap.get(subjectEntityURI) == null) {
 			if (VisConstants.DataVisMode.JSON.equals(visMode)) {
@@ -154,12 +147,12 @@ public class TemporalGrantVisualizationRequestHandler implements
 			}
 		}
 
-		Map<String, Set<String>> subOrgMap               = VisualizationCaches.cachedOrganizationSubOrgs.get(rdfService);
-		Map<String, Set<String>> organisationToPeopleMap = VisualizationCaches.cachedOrganisationToPeopleMap.get(rdfService);
-		Map<String, String> orgMostSpecificLabelMap      = VisualizationCaches.cachedOrganizationToMostSpecificLabel.get(rdfService);
-		Map<String, String> personMostSpecificLabelMap   = VisualizationCaches.cachedPersonToMostSpecificLabel.get(rdfService);
-		Map<String, Set<String>> personToGrantMap        = VisualizationCaches.cachedPersonToGrant.get(rdfService);
-		Map<String, String>      grantToYearMap          = VisualizationCaches.cachedGrantToYear.get(rdfService);
+		Map<String, Set<String>> subOrgMap               = VisualizationCaches.organizationSubOrgs.get(rdfService);
+		Map<String, Set<String>> organisationToPeopleMap = VisualizationCaches.organisationToPeopleMap.get(rdfService);
+		Map<String, String> orgMostSpecificLabelMap      = VisualizationCaches.organizationToMostSpecificLabel.get(rdfService);
+		Map<String, String> personMostSpecificLabelMap   = VisualizationCaches.personToMostSpecificLabel.get(rdfService);
+		Map<String, Set<String>> personToGrantMap        = VisualizationCaches.personToGrant.get(rdfService);
+		Map<String, String>      grantToYearMap          = VisualizationCaches.grantToYear.get(rdfService);
 
 		Set<String> orgGrants       = new HashSet<String>();
 		Set<String> orgGrantsPeople = new HashSet<String>();
