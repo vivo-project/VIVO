@@ -140,6 +140,7 @@
             ?subject ?property ?authorship .  
             ?authorship a core:Authorship .
             ?authorship core:relates ?infoResource .
+            ?authorship core:hideFromDisplay ?hideThis .
             ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
 			?infoResource bibo:volume ?volume .
 			?infoResource bibo:pageStart ?startPage .
@@ -164,6 +165,10 @@
             UNION {
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
+            UNION {
+               ?subject ?property ?authorship .
+               ?authorship a core:Authorship .
+               ?authorship core:hideFromDisplay ?hideThis .
             } UNION {
                ?subject ?property ?authorship .
                ?authorship a core:Authorship .
