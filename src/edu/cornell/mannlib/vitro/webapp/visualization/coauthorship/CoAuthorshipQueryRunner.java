@@ -398,8 +398,8 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 			+ "core:relates ?coAuthorPerson . \n"
 			+ "?coAuthorPerson rdf:type foaf:Person ; \n"
 			+ "rdfs:label ?coAuthorPersonLabel . \n"
-			+ "OPTIONAL {  ?document core:dateTimeValue ?dateTimeValue . \n" 
-			+ "				?dateTimeValue core:dateTime ?publicationDate } .\n"
+			+ "OPTIONAL {  ?document core:dateTimeValue ?dateTimeValue . \n"
+			+ "				OPTIONAL { ?dateTimeValue core:dateTime ?publicationDate . } } .\n"
 			+ "} \n"
 			+ "ORDER BY ?document ?coAuthorPerson\n";
 

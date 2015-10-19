@@ -5,6 +5,9 @@ package edu.cornell.mannlib.vitro.webapp.visualization.personpubcount;
 import java.util.HashSet;
 import java.util.Set;
 
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.jena.iri.IRI;
@@ -41,91 +44,38 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<Activi
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
 	private String personURI;
-	private Dataset dataset;
+	private RDFService rdfService;
 
-	private Individual author; 
+	private String authorName;
 
-	public Individual getAuthor() {
-		return author;
+	public String getAuthorName() {
+		return authorName;
 	}
 
 	private Log log;
 
-	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = "" 
-		+ "SELECT (str(?authorLabel) as ?" + QueryFieldLabels.AUTHOR_LABEL + ") \n" 
-		+ "		(str(?document) as ?" + QueryFieldLabels.DOCUMENT_URL + ") \n"
-		+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ")\n";
-
-	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE = "" 
-			+ "?document rdfs:label ?documentLabel .\n" 
-			+ "OPTIONAL {  ?document core:dateTimeValue ?dateTimeValue . \n" 
-			+ "				?dateTimeValue core:dateTime ?publicationDate } .\n";
-	
 	public PersonPublicationCountQueryRunner(String personURI,
-			Dataset dataset, Log log) {
+			RDFService rdfService, Log log) {
 
 		this.personURI = personURI;
-		this.dataset = dataset;
+		this.rdfService = rdfService;
 		this.log = log;
 
 	}
 
-	private Set<Activity> createJavaValueObjects(ResultSet resultSet) {
-		Set<Activity> authorDocuments = new HashSet<Activity>();
-		
-		while (resultSet.hasNext()) {
-			QuerySolution solution = resultSet.nextSolution();
-
-			Activity biboDocument = new Activity(
-											solution.get(QueryFieldLabels.DOCUMENT_URL)
-												.toString());
-
-			RDFNode publicationDateNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
-			if (publicationDateNode != null) {
-				biboDocument.setActivityDate(publicationDateNode.toString());
-			}
-
-			/*
-			 * Since we are getting publication count for just one author at a time we need
-			 * to create only one "Individual" instance. We test against the null for "author" to
-			 * make sure that it has not already been instantiated. 
-			 * */
-			RDFNode authorURLNode = solution.get(QueryFieldLabels.AUTHOR_URL);
-			if (authorURLNode != null && author == null) {
-				author = new Individual(authorURLNode.toString());
-				RDFNode authorLabelNode = solution.get(QueryFieldLabels.AUTHOR_LABEL);
-				if (authorLabelNode != null) {
-					author.setIndividualLabel(authorLabelNode.toString());
-				}
-			}
-
-			authorDocuments.add(biboDocument);
-		}
-		return authorDocuments;
-	}
-
-	private ResultSet executeQuery(String queryURI,
-            Dataset dataset) {
-
-        QueryExecution queryExecution = null;
-        Query query = QueryFactory.create(getSparqlQuery(queryURI), SYNTAX);
-        queryExecution = QueryExecutionFactory.create(query, dataset);
-        return queryExecution.execSelect();
-    }
-
 	private String getSparqlQuery(String queryURI) {
 
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
-							+ SPARQL_QUERY_COMMON_SELECT_CLAUSE
-							+ "(str(<" + queryURI + ">) as ?authPersonLit)\n "
+							+ "SELECT ?authorName ?document ?publicationDate\n"
 							+ "WHERE { \n"
-							+ "<" + queryURI + "> rdf:type foaf:Person ;\n" 
-							+ 					" rdfs:label ?authorLabel \n;" 
-							+ 					" core:relatedBy ?authorshipNode .  \n" 
-							+ "	?authorshipNode rdf:type core:Authorship ;" 
-							+ 					" core:relates ?document . \n"
-							+ "	?document rdf:type bibo:Document . \n" 
-							+  SPARQL_QUERY_COMMON_WHERE_CLAUSE
+							+ "    <" + queryURI + "> rdf:type foaf:Person ;\n"
+							+ "                       rdfs:label ?authorName ;  \n"
+							+ "                       core:relatedBy ?authorshipNode .  \n"
+							+ "    ?authorshipNode rdf:type core:Authorship ;"
+							+ "                    core:relates ?document . \n"
+							+ "	   ?document rdf:type bibo:Document . \n"
+							+ "    ?document rdfs:label ?documentLabel .\n"
+							+ "    OPTIONAL { ?document core:dateTimeValue ?dateTimeValue . OPTIONAL { ?dateTimeValue core:dateTime ?publicationDate } } .\n"
 							+ "}\n";
 
 		log.debug(sparqlQuery);
@@ -154,10 +104,46 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<Activi
         	throw new MalformedQueryParametersException("URL parameter is either null or empty.");
         }
 
-		ResultSet resultSet	= executeQuery(this.personURI,
-										   this.dataset);
+		PersonPublicationConsumer consumer = new PersonPublicationConsumer();
+		try {
+			rdfService.sparqlSelectQuery(getSparqlQuery(this.personURI), consumer);
+		} catch (RDFServiceException r) {
+			throw new RuntimeException(r);
+		}
 
-		return createJavaValueObjects(resultSet);
+		authorName = consumer.getAuthorName();
+		return consumer.getAuthorDocuments();
 	}
 
+	private static class PersonPublicationConsumer extends ResultSetConsumer {
+		Set<Activity> authorDocuments = new HashSet<Activity>();
+		String authorName = null;
+
+		@Override
+		protected void processQuerySolution(QuerySolution qs) {
+			Activity biboDocument = new Activity(qs.get("document").asResource().getURI());
+
+			RDFNode publicationDateNode = qs.get("publicationDate");
+			if (publicationDateNode != null) {
+				biboDocument.setActivityDate(publicationDateNode.asLiteral().getString());
+			}
+
+			if (authorName == null) {
+				RDFNode authorNameNode = qs.get("authorName");
+				if (authorNameNode != null) {
+					authorName = authorNameNode.asLiteral().getString();
+				}
+			}
+
+			authorDocuments.add(biboDocument);
+		}
+
+		public Set<Activity> getAuthorDocuments() {
+			return authorDocuments;
+		}
+
+		public String getAuthorName() {
+			return authorName;
+		}
+	}
 }
