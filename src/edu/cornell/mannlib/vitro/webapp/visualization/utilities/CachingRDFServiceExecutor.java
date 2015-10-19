@@ -44,6 +44,10 @@ public class CachingRDFServiceExecutor<T> {
         this.resultBuilder = resultBuilder;
     }
 
+    public boolean isCached() {
+        return cachedResults != null;
+    }
+
     /**
      * Return the cached results if present, or start the task.
      * Will wait for completion if the cache is not already populated, otherwise the refresh will happen in the background.
