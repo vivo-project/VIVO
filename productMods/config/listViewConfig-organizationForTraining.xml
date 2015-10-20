@@ -124,10 +124,11 @@
             UNION {
                 ?subject ?property ?edTraining .
                 ?edTraining a core:EducationalProcess .
-                ?edTraining core:majorField ?majorField . 
+                ?edTraining core:majorField ?majorField .
+            }
 	        UNION {
 	            ?subject ?property ?edTraining .
-	            ?edTraining a core:EducationalProcess 
+	            ?edTraining a core:EducationalProcess .
                 ?edTraining core:supplementalInformation ?info . 
             }
             UNION {
