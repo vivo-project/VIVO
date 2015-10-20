@@ -21,7 +21,7 @@ ${i18n().check_people_to_exclude}
         <ul >
             <#list peeps as person>
             <li>
-                <input type="checkbox" class="itemCheckbox" <#if person.hideThis??>checked</#if> />${person.name}
+                <input type="checkbox" class="itemCheckbox" <#if person.hideThis??>checked</#if> />${person.name}<#if person.positionLabel??> <span class="listEmphasis">${person.positionLabel}</span></#if>
             </li>
             <script type="text/javascript">
                 itemData.push({
