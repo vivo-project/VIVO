@@ -67,7 +67,6 @@
 				?object a ?objectType .
             } UNION {      
                 ?subject ?property ?object .
-				?object a ?objectType .
                 ?object rdfs:label ?label .
             }        
         }
@@ -96,15 +95,13 @@
 				?object a ?objectType .
             } UNION {            
                 ?subject ?property ?object .
-				?object a ?objectType .
                 ?object vitro:mostSpecificType ?subclass .
                 ?subclass rdfs:label ?type .
                 ?subclass vitro:inClassGroup ?classGroup .
                 ?classGroup a vitro:ClassGroup
             } UNION {            
                 ?subject ?property ?object .
-				?object a ?objectType .
-                ?object obo:ARG_2000028 ?vcard . 
+                ?object obo:ARG_2000028 ?vcard .
                 ?vcard vcard:hasTitle ?titleObj .
                 ?titleObj vcard:title ?title
             }          
