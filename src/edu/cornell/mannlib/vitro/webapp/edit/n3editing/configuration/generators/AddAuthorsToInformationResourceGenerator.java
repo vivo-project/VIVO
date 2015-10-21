@@ -447,7 +447,6 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
     
        
     private List<AuthorshipInfo> getExistingAuthorships(String subjectUri, VitroRequest vreq) {
-
 		RDFService rdfService = vreq.getRDFService();
 
 		List<Map<String, String>> authorships = new ArrayList<Map<String, String>>();
@@ -461,14 +460,18 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 			log.debug("Query string is: " + queryStr);
 
 			QueryExecution qe = QueryExecutionFactory.create(queryStr, constructedModel);
-			ResultSet results = qe.execSelect();
-            while (results.hasNext()) {
-                QuerySolution soln = results.nextSolution();
-                RDFNode node = soln.get("authorshipURI");
-                if (node.isURIResource()) {
-                    authorships.add(QueryUtils.querySolutionToStringValueMap(soln));        
-                }
-            }
+			try {
+				ResultSet results = qe.execSelect();
+				while (results.hasNext()) {
+					QuerySolution soln = results.nextSolution();
+					RDFNode node = soln.get("authorshipURI");
+					if (node.isURIResource()) {
+						authorships.add(QueryUtils.querySolutionToStringValueMap(soln));
+					}
+				}
+			} finally {
+				qe.close();
+			}
         } catch (Exception e) {
             log.error(e, e);
         }    
