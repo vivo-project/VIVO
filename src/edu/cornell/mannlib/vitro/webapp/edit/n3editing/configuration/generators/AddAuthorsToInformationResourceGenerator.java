@@ -12,6 +12,11 @@ import java.util.Map.Entry;
 
 import javax.servlet.http.HttpSession;
 
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -345,6 +350,71 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 		editConfiguration.setFormSpecificData(formSpecificData);
 	}
 
+	private static String AUTHORSHIPS_MODEL = " \n"
+			+ "PREFIX core: <http://vivoweb.org/ontology/core#>\n"
+			+ "PREFIX afn:  <http://jena.hpl.hp.com/ARQ/function#>\n"
+			+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+			+ "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+			+ "PREFIX vcard:  <http://www.w3.org/2006/vcard/ns#>\n"
+			+ "CONSTRUCT\n"
+			+ "{\n"
+			+ "    ?subject core:relatedBy ?authorshipURI .\n"
+			+ "    ?authorshipURI a core:Authorship .\n"
+			+ "    ?authorshipURI core:relates ?authorURI .\n"
+			+ "    ?authorURI a ?type .\n"
+			+ "    ?authorURI rdfs:label ?authorName .\n"
+			+ "    ?authorURI vcard:hasName ?vName .\n"
+			+ "    ?vName vcard:givenName ?firstName .\n"
+			+ "    ?vName vcard:familyName ?lastName .\n"
+			+ "    ?vName core:middleName ?middleName .\n"
+			+ "}\n"
+			+ "WHERE\n"
+			+ "{\n"
+			+ "    {\n"
+			+ "        ?subject core:relatedBy ?authorshipURI .\n"
+			+ "        ?authorshipURI a core:Authorship .\n"
+			+ "        ?authorshipURI core:relates ?authorURI .\n"
+			+ "        ?authorURI a foaf:Agent .\n"
+			+ "        ?authorURI a ?type .\n"
+			+ "    }\n"
+			+ "    UNION\n"
+			+ "    {\n"
+			+ "        ?subject core:relatedBy ?authorshipURI .\n"
+			+ "        ?authorshipURI a core:Authorship .\n"
+			+ "        ?authorshipURI core:relates ?authorURI .\n"
+			+ "        ?authorURI a foaf:Agent .\n"
+			+ "        ?authorURI rdfs:label ?authorName\n"
+			+ "    }\n"
+			+ "    UNION\n"
+			+ "    {\n"
+			+ "        ?subject core:relatedBy ?authorshipURI .\n"
+			+ "        ?authorshipURI a core:Authorship .\n"
+			+ "        ?authorshipURI core:rank ?rank\n"
+			+ "    }\n"
+			+ "    UNION\n"
+			+ "    {\n"
+			+ "        ?subject core:relatedBy ?authorshipURI .\n"
+			+ "        ?authorshipURI a core:Authorship .\n"
+			+ "        ?authorshipURI core:relates ?authorURI .\n"
+			+ "        ?authorURI a vcard:Individual .\n"
+			+ "        ?authorURI a ?type .\n"
+			+ "        ?authorURI vcard:hasName ?vName .\n"
+			+ "        ?vName vcard:givenName ?firstName .\n"
+			+ "        ?vName vcard:familyName ?lastName .\n"
+			+ "    }\n"
+			+ "    UNION\n"
+			+ "    {\n"
+			+ "         ?subject core:relatedBy ?authorshipURI .\n"
+			+ "         ?authorshipURI a core:Authorship .\n"
+			+ "         ?authorshipURI core:relates ?authorURI .\n"
+			+ "         ?authorURI a vcard:Individual .\n"
+			+ "         ?authorURI a ?type .\n"
+			+ "         ?authorURI vcard:hasName ?vName .\n"
+			+ "         ?vName core:middleName ?middleName .\n"
+			+ "    }\n"
+			+ "}\n"
+	;
+
     private static String AUTHORSHIPS_QUERY = " \n"
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
         + "PREFIX afn:  <http://jena.hpl.hp.com/ARQ/function#> \n"
@@ -377,12 +447,21 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
     
        
     private List<AuthorshipInfo> getExistingAuthorships(String subjectUri, VitroRequest vreq) {
+
+		RDFService rdfService = vreq.getRDFService();
+
+		List<Map<String, String>> authorships = new ArrayList<Map<String, String>>();
+		try {
+			String constructStr = QueryUtils.subUriForQueryVar(AUTHORSHIPS_MODEL, "subject", subjectUri);
+
+			Model constructedModel = ModelFactory.createDefaultModel();
+			rdfService.sparqlConstructQuery(constructStr, constructedModel);
           
-        String queryStr = QueryUtils.subUriForQueryVar(this.getAuthorshipsQuery(), "subject", subjectUri);
-        log.debug("Query string is: " + queryStr);
-        List<Map<String, String>> authorships = new ArrayList<Map<String, String>>();
-        try {
-            ResultSet results = QueryUtils.getQueryResults(queryStr, vreq);
+			String queryStr = QueryUtils.subUriForQueryVar(this.getAuthorshipsQuery(), "subject", subjectUri);
+			log.debug("Query string is: " + queryStr);
+
+			QueryExecution qe = QueryExecutionFactory.create(queryStr, constructedModel);
+			ResultSet results = qe.execSelect();
             while (results.hasNext()) {
                 QuerySolution soln = results.nextSolution();
                 RDFNode node = soln.get("authorshipURI");
