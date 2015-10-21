@@ -1,21 +1,29 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Collaboration;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Collaborator;
 
 public class CoAuthorshipData extends CollaborationData {
+	private Map<String, Activity> documentMap = new HashMap<>();
 
 	public CoAuthorshipData(Collaborator egoCollaborator,
-			Set<Collaborator> collaborators, Set<Collaboration> collaborations) {
+			Set<Collaborator> collaborators, Set<Collaboration> collaborations, Map<String, Activity> documentMap) {
 		super(egoCollaborator, collaborators, collaborations);
+		this.documentMap = documentMap;
 	}
-	
+
+	public Map<String, Activity> getDocuments() {
+		return documentMap;
+	}
+
 	public Set<Map<String, String>> initializeEdgeSchema() {
 
 		Set<Map<String, String>> edgeSchema = new HashSet<Map<String, String>>();

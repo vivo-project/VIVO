@@ -13,7 +13,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.ResultSetFactory;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
@@ -217,7 +222,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 		}
 
 		public CollaborationData getCollaborationData() {
-			return new CoAuthorshipData(egoNode, nodes, edges);
+			return new CoAuthorshipData(egoNode, nodes, edges, biboDocumentURLToVO);
 		}
 
 		private Activity createDocumentVO(QuerySolution solution, String documentURL) {
@@ -372,37 +377,70 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 	private String generateEgoCoAuthorshipSparqlQuery(String queryURI) {
 
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
-			+ "SELECT \n"
-			+ "		(str(<" + queryURI + ">) as ?" + QueryFieldLabels.AUTHOR_URL + ") \n" 
-			+ "		(str(?authorLabel) as ?" + QueryFieldLabels.AUTHOR_LABEL + ") \n" 
-			+ "		(str(?coAuthorPerson) as ?" + QueryFieldLabels.CO_AUTHOR_URL + ") \n" 
-			+ "		(str(?coAuthorPersonLabel) as ?" + QueryFieldLabels.CO_AUTHOR_LABEL + ") \n"
-			+ "		(str(?document) as ?" + QueryFieldLabels.DOCUMENT_URL + ") \n"
-			+ "		(str(?publicationDate) as ?" 
-							+ QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") \n"
-			+ "WHERE { \n"
-			+ "<" + queryURI + "> rdf:type foaf:Person ;"
-								+ " rdfs:label ?authorLabel ;" 
-								+ " core:relatedBy ?authorshipNode . \n"
-			+ "?authorshipNode rdf:type core:Authorship ;" 
-								+ " core:relates ?document . \n"
-            + "?document rdf:type bibo:Document ; \n"
-			+ "core:relatedBy ?coAuthorshipNode . \n"
-			+ "?coAuthorshipNode rdf:type core:Authorship ; \n"
-			+ "core:relates ?coAuthorPerson . \n"
-			+ "?coAuthorPerson rdf:type foaf:Person ; \n"
-			+ "rdfs:label ?coAuthorPersonLabel . \n"
-			+ "OPTIONAL {  ?document core:dateTimeValue ?dateTimeValue . \n"
-			+ "				OPTIONAL { ?dateTimeValue core:dateTime ?publicationDate . } } .\n"
-			+ "} \n"
-			+ "ORDER BY ?document ?coAuthorPerson\n";
+				+ "PREFIX local: <http://localhost/>\n"
+				+ "SELECT \n"
+				+ "		(str(<" + queryURI + ">) as ?" + QueryFieldLabels.AUTHOR_URL + ") \n"
+				+ "		(str(?authorLabel) as ?" + QueryFieldLabels.AUTHOR_LABEL + ") \n"
+				+ "		(str(?coAuthorPerson) as ?" + QueryFieldLabels.CO_AUTHOR_URL + ") \n"
+				+ "		(str(?coAuthorPersonLabel) as ?" + QueryFieldLabels.CO_AUTHOR_LABEL + ") \n"
+				+ "		(str(?document) as ?" + QueryFieldLabels.DOCUMENT_URL + ") \n"
+				+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") \n"
+				+ "WHERE { \n"
+				+ "    <" + queryURI + "> local:authorLabel ?authorLabel ;"
+								  + " local:authorOf ?document . \n"
+	            + "    ?document local:coAuthor ?coAuthorPerson . \n"
+				+ "    ?coAuthorPerson rdfs:label ?coAuthorPersonLabel . \n"
+				+ "    OPTIONAL { ?document local:publicationDate ?publicationDate . } \n"
+				+ "} \n"
+				+ "ORDER BY ?document ?coAuthorPerson\n";
 
 		log.debug("COAUTHORSHIP QUERY - " + sparqlQuery);
 
 		return sparqlQuery;
 	}
 
-	
+	private String generateEgoCoAuthorshipSparqlConstruct(String queryURI) {
+		String sparqlConstruct = QueryConstants.getSparqlPrefixQuery()
+				+ "PREFIX local: <http://localhost/>\n"
+				+ "CONSTRUCT\n"
+				+ "{\n"
+				+ "    <" + queryURI + "> local:authorLabel ?authorLabel .\n"
+				+ "    <" + queryURI + "> local:authorOf ?document .\n"
+                + "    ?document local:publicationDate ?publicationDate .\n"
+                + "    ?document local:coAuthor ?coAuthorPerson .\n"
+                + "    ?coAuthorPerson rdfs:label ?coAuthorPersonLabel .\n"
+				+ "}\n"
+				+ "WHERE\n"
+				+ "{\n"
+                + "    {\n"
+                + "        <" + queryURI + "> rdf:type foaf:Person ;"
+                + "                rdfs:label ?authorLabel ;"
+                + "                core:relatedBy ?authorshipNode . \n"
+                + "        ?authorshipNode rdf:type core:Authorship ;"
+                + "                core:relates ?document . \n"
+                + "        ?document rdf:type <http://purl.obolibrary.org/obo/IAO_0000030> ; \n"
+                + "                core:relatedBy ?coAuthorshipNode . \n"
+                + "        ?coAuthorshipNode rdf:type core:Authorship ; \n"
+                + "                core:relates ?coAuthorPerson . \n"
+                + "        ?coAuthorPerson rdf:type foaf:Person ; \n"
+                + "                rdfs:label ?coAuthorPersonLabel . \n"
+                + "    }\n"
+                + "    UNION\n"
+                + "    {\n"
+                + "        <" + queryURI + "> rdf:type foaf:Person ;"
+                + "                rdfs:label ?authorLabel ;"
+                + "                core:relatedBy ?authorshipNode . \n"
+                + "        ?authorshipNode rdf:type core:Authorship ;"
+                + "                core:relates ?document . \n"
+                + "        ?document core:dateTimeValue ?dateTimeValue . \n"
+                + "		   ?dateTimeValue core:dateTime ?publicationDate . \n"
+                + "    }\n"
+				+ "}\n"
+		;
+
+		return sparqlConstruct;
+	}
+
 	public CollaborationData getQueryResult()
 		throws MalformedQueryParametersException {
 
@@ -450,8 +488,15 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 		}
 
 		try {
-			QueryResultConsumer consumer = new QueryResultConsumer();
-			rdfService.sparqlSelectQuery(generateEgoCoAuthorshipSparqlQuery(this.egoURI), consumer);
+            Model constructedModel = ModelFactory.createDefaultModel();
+            rdfService.sparqlConstructQuery(generateEgoCoAuthorshipSparqlConstruct(this.egoURI), constructedModel);
+            QueryResultConsumer consumer = new QueryResultConsumer();
+            QueryExecution qe = QueryExecutionFactory.create(generateEgoCoAuthorshipSparqlQuery(this.egoURI), constructedModel);
+            try {
+                consumer.processResultSet(qe.execSelect());
+            } finally {
+                qe.close();
+            }
 			data = consumer.getCollaborationData();
 		} catch (RDFServiceException e) {
 			log.error("Unable to execute query", e);
