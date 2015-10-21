@@ -114,13 +114,21 @@
 			   ?infoResource core:placeOfPublication ?locale .
             } UNION {
                ?subject ?property ?infoResource .
-               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+               ?infoResource a bibo:Book .
                ?infoResource core:relatedBy ?editorship .
                ?editorship a core:Editorship . 
                ?editorship core:relates ?editorObj .
                ?editorObj a foaf:Person .
                ?editorObj rdfs:label ?editor
-            } 
+            } UNION {
+                ?subject ?property ?infoResource .
+                ?infoResource a bibo:BookSection .
+                ?infoResource core:relatedBy ?editorship .
+                ?editorship a core:Editorship .
+                ?editorship core:relates ?editorObj .
+                ?editorObj a foaf:Person .
+                ?editorObj rdfs:label ?editor
+            }
         } 
     </query-construct>
 
