@@ -12,6 +12,11 @@ import java.util.Map.Entry;
 
 import javax.servlet.http.HttpSession;
 
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -308,6 +313,44 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 		editConfiguration.setFormSpecificData(formSpecificData);
 	}
 
+	private static String EDITORSHIPS_MODEL = ""
+			+ "PREFIX core: <http://vivoweb.org/ontology/core#>\n"
+			+ "PREFIX afn:  <http://jena.hpl.hp.com/ARQ/function#>\n"
+			+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
+			+ "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+			+ "CONSTRUCT\n"
+			+ "{\n"
+			+ "    ?subject core:relatedBy ?editorshipURI .\n"
+			+ "    ?editorshipURI a core:Editorship .\n"
+			+ "    ?editorshipURI core:relates ?editorURI .\n"
+			+ "    ?editorshipURI core:rank ?rank.\n"
+			+ "    ?editorURI a foaf:Person .\n"
+			+ "    ?editorURI rdfs:label ?editorName .\n"
+			+ "}\n"
+			+ "WHERE\n"
+			+ "{\n"
+			+ "    {\n"
+			+ "        ?subject core:relatedBy ?editorshipURI .\n"
+			+ "        ?editorshipURI a core:Editorship .\n"
+			+ "        ?editorshipURI core:relates ?editorURI .\n"
+			+ "        ?editorURI a foaf:Person .\n"
+			+ "    }\n"
+			+ "    UNION\n"
+			+ "    {\n"
+			+ "        ?subject core:relatedBy ?editorshipURI .\n"
+			+ "        ?editorshipURI a core:Editorship .\n"
+			+ "        ?editorshipURI core:relates ?editorURI .\n"
+			+ "        ?editorURI a foaf:Person .\n"
+			+ "        ?editorURI rdfs:label ?editorName .\n"
+			+ "    }\n"
+			+ "    UNION\n"
+			+ "    {\n"
+			+ "        ?subject core:relatedBy ?editorshipURI .\n"
+			+ "        ?editorshipURI a core:Editorship .\n"
+			+ "        ?editorshipURI core:rank ?rank.\n"
+			+ "    }\n"
+			+ "}\n";
+
     private static String EDITORSHIPS_QUERY = ""
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
         + "PREFIX afn:  <http://jena.hpl.hp.com/ARQ/function#> \n"
@@ -325,19 +368,31 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
     
        
     private List<EditorshipInfo> getExistingEditorships(String subjectUri, VitroRequest vreq) {
-          
-        String queryStr = QueryUtils.subUriForQueryVar(this.getEditorshipsQuery(), "subject", subjectUri);
-        log.debug("Query string is: " + queryStr);
-        List<Map<String, String>> editorships = new ArrayList<Map<String, String>>();
-        try {
-            ResultSet results = QueryUtils.getQueryResults(queryStr, vreq);
-            while (results.hasNext()) {
-                QuerySolution soln = results.nextSolution();
-                RDFNode node = soln.get("editorshipURI");
-                if (node.isURIResource()) {
-                    editorships.add(QueryUtils.querySolutionToStringValueMap(soln));        
-                }
-            }
+		RDFService rdfService = vreq.getRDFService();
+
+		List<Map<String, String>> editorships = new ArrayList<Map<String, String>>();
+		try {
+			String constructStr = QueryUtils.subUriForQueryVar(EDITORSHIPS_MODEL, "subject", subjectUri);
+
+			Model constructedModel = ModelFactory.createDefaultModel();
+			rdfService.sparqlConstructQuery(constructStr, constructedModel);
+
+			String queryStr = QueryUtils.subUriForQueryVar(this.getEditorshipsQuery(), "subject", subjectUri);
+			log.debug("Query string is: " + queryStr);
+
+			QueryExecution qe = QueryExecutionFactory.create(queryStr, constructedModel);
+			try {
+				ResultSet results = qe.execSelect();
+				while (results.hasNext()) {
+					QuerySolution soln = results.nextSolution();
+					RDFNode node = soln.get("editorshipURI");
+					if (node.isURIResource()) {
+						editorships.add(QueryUtils.querySolutionToStringValueMap(soln));
+					}
+				}
+			} finally {
+				qe.close();
+			}
         } catch (Exception e) {
             log.error(e, e);
         }    
