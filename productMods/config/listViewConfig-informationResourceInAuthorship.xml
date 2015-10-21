@@ -86,7 +86,6 @@
                 ?author a foaf:Agent .
                 ?author rdfs:label ?authorName . 
                 ?author vitro:mostSpecificType ?subclass .
-                ?subclass rdfs:subClassOf foaf:Agent
             }
         } 
     </query-construct>
@@ -146,7 +145,6 @@
                 ?authorship core:relates ?author .
                 ?author a vcard:Kind .
                 ?author vitro:mostSpecificType ?subclass .
-                ?subclass rdfs:subClassOf vcard:Kind
             }
        } 
     </query-construct>

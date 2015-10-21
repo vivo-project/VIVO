@@ -69,7 +69,6 @@
                 ?person a foaf:Person .
                 ?person rdfs:label ?personName . 
                 ?person vitro:mostSpecificType ?subclass .
-                ?subclass rdfs:subClassOf foaf:Person
             }
         } 
     </query-construct>
