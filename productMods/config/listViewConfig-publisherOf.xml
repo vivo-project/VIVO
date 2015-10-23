@@ -4,183 +4,195 @@
 <!-- See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
 
 <list-view-config>
-    <query-select>    
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
-        PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt; 
-        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
-        PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
-              
-        SELECT DISTINCT ?subclass 
-                        ?infoResource ?infoResourceName 
-                        ?dateTime
-                        ?journal
-                        ?volume
-                        ?startPage
-                        ?endPage
-                        ?locale
-                        ?appearsIn
-                        ?partOf
-        WHERE {
-                ?subject ?property ?infoResource .
-                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .                      
-                ?infoResource rdfs:label ?infoResourceName .
-            
-               OPTIONAL { ?infoResource bibo:volume ?volume }
-               OPTIONAL { ?infoResource bibo:pageStart ?startPage }
-               OPTIONAL { ?infoResource bibo:pageEnd ?endPage }
-               OPTIONAL { ?infoResource core:placeOfPublication ?locale }
-               OPTIONAL { ?infoResource bibo:reproducedIn ?appearsInObj .
-                          ?appearsInObj rdfs:label ?appearsIn
-               }
-               OPTIONAL { ?infoResource &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?partOfObj .
-                          ?partOfObj rdfs:label ?partOf
-               }
-               OPTIONAL { ?infoResource core:hasPublicationVenue ?publishedIn .
-                          ?publishedIn  rdfs:label ?journal 
-               }
-               OPTIONAL { ?infoResource vitro:mostSpecificType ?subclass }     
-               OPTIONAL { ?infoResource core:dateTimeValue ?dateTimeValue .
-                          ?dateTimeValue core:dateTime ?dateTime  
-               }
-
-            <critical-data-required>
-            FILTER ( bound(?infoResource) )
-            </critical-data-required>
-        } ORDER BY ?subclass  DESC(?dateTime) ?infoResourceName   
-    </query-select>
-
-    <query-construct>
+    <query-select>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt;
-        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;    
-        CONSTRUCT {
-            ?subject ?property ?infoResource .
-            ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-            ?infoResource vitro:mostSpecificType ?subclass 
-        } WHERE {
-            ?subject ?property ?infoResource .
-            ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-            ?infoResource vitro:mostSpecificType ?subclass 
-        }
-    </query-construct>
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+        PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
 
-    <query-construct>
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
-        PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt; 
-        CONSTRUCT { 
+        SELECT DISTINCT ?subclass
+            ?infoResource ?infoResourceName
+            ?dateTime
+            ?journal
+            ?volume
+            ?startPage
+            ?endPage
+            ?locale
+            ?appearsIn
+            ?partOf
+        WHERE
+        {
             ?subject ?property ?infoResource .
             ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
             ?infoResource rdfs:label ?infoResourceName .
-            ?infoResource core:hasPublicationVenue ?publishedIn .
-            ?publishedIn  rdfs:label ?journal 
-        } WHERE {
+
+            OPTIONAL { ?infoResource vitro:mostSpecificType ?subclass }
+            OPTIONAL { ?infoResource bibo:volume ?volume }
+            OPTIONAL { ?infoResource bibo:pageStart ?startPage }
+            OPTIONAL { ?infoResource bibo:pageEnd ?endPage }
+            OPTIONAL { ?infoResource core:placeOfPublication ?locale }
+            OPTIONAL
             {
-               ?subject ?property ?infoResource .
-               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt;  
-            } UNION {
-               ?subject ?property ?infoResource .
-               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-               ?infoResource rdfs:label ?infoResourceName 
-            } UNION {
-               ?subject ?property ?infoResource .
-               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-               ?infoResource core:hasPublicationVenue ?publishedIn 
-            } UNION {
-               ?subject ?property ?infoResource .
-               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-               ?infoResource core:hasPublicationVenue ?publishedIn .
-               ?publishedIn  rdfs:label ?journal
+                ?infoResource bibo:reproducedIn ?appearsInObj .
+                ?appearsInObj rdfs:label ?appearsIn .
             }
-        } 
-    </query-construct>
+            OPTIONAL
+            {
+                ?infoResource &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?partOfObj .
+                ?partOfObj rdfs:label ?partOf .
+            }
+            OPTIONAL
+            {
+                ?infoResource core:hasPublicationVenue ?publishedIn .
+                ?publishedIn  rdfs:label ?journal .
+            }
+            OPTIONAL
+            {
+                ?infoResource core:dateTimeValue ?dateTimeValue .
+                ?dateTimeValue core:dateTime ?dateTime .
+            }
+
+        <critical-data-required>
+            FILTER ( bound(?infoResource) )
+        </critical-data-required>
+        } ORDER BY ?subclass  DESC(?dateTime) ?infoResourceName
+    </query-select>
 
     <query-construct>
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
-        PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt; 
-        PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
-        CONSTRUCT { 
+        PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX bibo:  &lt;http://purl.org/ontology/bibo/&gt;
+        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+
+        CONSTRUCT
+        {
             ?subject ?property ?infoResource .
             ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-			?infoResource rdfs:label ?infoResourceName .
-			?infoResource bibo:volume ?volume .
-			?infoResource bibo:pageStart ?startPage .
-			?infoResource bibo:pageEnd ?endPage .
-			?infoResource core:placeOfPublication ?locale .
+            ?infoResource vitro:mostSpecificType ?subclass .
+            ?infoResource rdfs:label ?infoResourceName .
+            ?infoResource bibo:volume ?volume .
+            ?infoResource bibo:pageStart ?startPage .
+            ?infoResource bibo:pageEnd ?endPage .
+            ?infoResource core:placeOfPublication ?locale .
+            ?infoResource core:dateTimeValue ?dateTimeValue .
+            ?dateTimeValue core:dateTime ?dateTime .
+
+            ?infoResource core:hasPublicationVenue ?publishedIn .
+            ?publishedIn  rdfs:label ?journal .
+
             ?infoResource bibo:reproducedIn ?appearsInObj .
-            ?infoResource core:publisher ?publisherObj .
+            ?appearsInObj rdfs:label ?appearsIn .
+
+            ?infoResource &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?partOfObj .
+            ?partOfObj rdfs:label ?partOf .
+
             ?infoResource core:relatedBy ?editorship .
             ?editorship a core:Editorship .
             ?editorship core:relates ?editorObj .
             ?editorObj a foaf:Person .
-            ?infoResource &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?partOfObj .
-            ?appearsInObj rdfs:label ?appearsIn .
             ?editorObj rdfs:label ?editor .
-            ?partOfObj rdfs:label ?partOf
-        } WHERE {
+        }
+        WHERE
+        {
             {
-               ?subject ?property ?infoResource .
-               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; . 
-			   ?infoResource rdfs:label ?infoResourceName .
-            } UNION {
-               ?subject ?property ?infoResource .
-               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-			   ?infoResource bibo:volume ?volume .
-            } UNION {
-               ?subject ?property ?infoResource .
-               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-			   ?infoResource bibo:pageStart ?startPage .
-            } UNION {
-               ?subject ?property ?infoResource .
-               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-			   ?infoResource bibo:pageEnd ?endPage .
-            } UNION {
-               ?subject ?property ?infoResource .
-               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-			   ?infoResource core:placeOfPublication ?locale .
-            } UNION {
-               ?subject ?property ?infoResource .
-               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-               ?infoResource bibo:reproducedIn ?appearsInObj .
-               ?appearsInObj rdfs:label ?appearsIn
-            } UNION {
-               ?subject ?property ?infoResource .
-               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-               ?infoResource core:relatedBy ?editorship .
-               ?editorship a core:Editorship . 
-               ?editorship core:relates ?editorObj .
-               ?editorObj a foaf:Person .
-               ?editorObj rdfs:label ?editor
-            } UNION {
-               ?subject ?property ?infoResource .
-               ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-               ?infoResource &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?partOfObj .
-               ?partOfObj rdfs:label ?partOf
-            } 
-        } 
-    </query-construct>
-
-    <query-construct>
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
-        PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt; 
-        CONSTRUCT { 
-            ?subject ?property ?infoResource .
-            ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-            ?infoResource rdfs:label ?infoResourceName .
-            ?infoResource core:dateTimeValue ?dateTimeValue .
-            ?dateTimeValue core:dateTime ?dateTime  
-        } WHERE {
-            ?subject ?property ?infoResource .
-            ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
-            ?infoResource rdfs:label ?infoResourceName .
-            ?infoResource core:dateTimeValue ?dateTimeValue .
-            ?dateTimeValue core:dateTime ?dateTime  
+                ?subject ?property ?infoResource .
+                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt;  .
+            }
+            UNION
+            {
+                ?subject ?property ?infoResource .
+                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+                ?infoResource vitro:mostSpecificType ?subclass .
+            }
+            UNION
+            {
+                ?subject ?property ?infoResource .
+                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+                ?infoResource rdfs:label ?infoResourceName .
+            }
+            UNION
+            {
+                ?subject ?property ?infoResource .
+                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+                ?infoResource bibo:volume ?volume .
+            }
+            UNION
+            {
+                ?subject ?property ?infoResource .
+                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+                ?infoResource bibo:pageStart ?startPage .
+            }
+            UNION
+            {
+                ?subject ?property ?infoResource .
+                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+                ?infoResource bibo:pageEnd ?endPage .
+            }
+            UNION
+            {
+                ?subject ?property ?infoResource .
+                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+                ?infoResource core:placeOfPublication ?locale .
+            }
+            UNION
+            {
+                ?subject ?property ?infoResource .
+                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+                ?infoResource rdfs:label ?infoResourceName .
+                ?infoResource core:dateTimeValue ?dateTimeValue .
+                ?dateTimeValue core:dateTime ?dateTime .
+            }
+            UNION
+            {
+                ?subject ?property ?infoResource .
+                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+                ?infoResource core:hasPublicationVenue ?publishedIn .
+            }
+            UNION
+            {
+                ?subject ?property ?infoResource .
+                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+                ?infoResource core:hasPublicationVenue ?publishedIn .
+                ?publishedIn  rdfs:label ?journal .
+            }
+            UNION
+            {
+                ?subject ?property ?infoResource .
+                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+                ?infoResource bibo:reproducedIn ?appearsInObj .
+                ?appearsInObj rdfs:label ?appearsIn .
+            }
+            UNION
+            {
+                ?subject ?property ?infoResource .
+                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+                ?infoResource &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?partOfObj .
+                ?partOfObj rdfs:label ?partOf .
+            }
+            UNION
+            {
+                ?subject ?property ?infoResource .
+                ?infoResource a bibo:Book .
+                ?infoResource core:relatedBy ?editorship .
+                ?editorship a core:Editorship .
+                ?editorship core:relates ?editorObj .
+                ?editorObj a foaf:Person .
+                ?editorObj rdfs:label ?editor .
+            }
+            UNION
+            {
+                ?subject ?property ?infoResource .
+                ?infoResource a bibo:BookSection .
+                ?infoResource core:relatedBy ?editorship .
+                ?editorship a core:Editorship .
+                ?editorship core:relates ?editorObj .
+                ?editorObj a foaf:Person .
+                ?editorObj rdfs:label ?editor .
+            }
         }
     </query-construct>
-   
+
     <template>propStatement-publisherOf.ftl</template>
 </list-view-config>

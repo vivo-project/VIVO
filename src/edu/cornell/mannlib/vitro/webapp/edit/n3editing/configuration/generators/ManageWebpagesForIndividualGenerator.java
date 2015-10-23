@@ -7,6 +7,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -88,8 +93,61 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         prepare(vreq, config);
         return config;
     }
-  
-    
+
+    private static String WEBPAGE_MODEL = ""
+            + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
+            + "PREFIX vcard: <http://www.w3.org/2006/vcard/ns#> \n"
+            + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
+            + "PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>\n"
+            + "CONSTRUCT\n"
+            + "{\n"
+            + "    ?subject <http://purl.obolibrary.org/obo/ARG_2000028> ?vcard .\n"
+            + "    ?vcard vcard:hasURL ?link .\n"
+            + "    ?link a vcard:URL .\n"
+            + "    ?link vcard:url ?url .\n"
+            + "    ?link rdfs:label ?linkLabel .\n"
+            + "    ?link core:rank ?rank .\n"
+            + "    ?link vitro:mostSpecificType ?type .\n"
+            + "    ?type rdfs:label ?typeLabel .\n"
+            + "}\n"
+            + "WHERE\n"
+            + "{\n"
+            + "    {\n"
+            + "        ?subject <http://purl.obolibrary.org/obo/ARG_2000028> ?vcard .\n"
+            + "        ?vcard vcard:hasURL ?link .\n"
+            + "        ?link a vcard:URL .\n"
+            + "    }\n"
+            + "    UNION\n"
+            + "    {\n"
+            + "        ?subject <http://purl.obolibrary.org/obo/ARG_2000028> ?vcard .\n"
+            + "        ?vcard vcard:hasURL ?link .\n"
+            + "        ?link a vcard:URL .\n"
+            + "        ?link vcard:url ?url .\n"
+            + "    }\n"
+            + "    UNION\n"
+            + "    {\n"
+            + "        ?subject <http://purl.obolibrary.org/obo/ARG_2000028> ?vcard .\n"
+            + "        ?vcard vcard:hasURL ?link .\n"
+            + "        ?link a vcard:URL .\n"
+            + "        ?link rdfs:label ?linkLabel .\n"
+            + "    }\n"
+            + "    UNION\n"
+            + "    {\n"
+            + "        ?subject <http://purl.obolibrary.org/obo/ARG_2000028> ?vcard . \n"
+            + "        ?vcard vcard:hasURL ?link .\n"
+            + "        ?link a vcard:URL .\n"
+            + "        ?link core:rank ?rank .\n"
+            + "    }\n"
+            + "    UNION\n"
+            + "    {\n"
+            + "        ?subject <http://purl.obolibrary.org/obo/ARG_2000028> ?vcard .\n"
+            + "        ?vcard vcard:hasURL ?link .\n"
+            + "        ?link a vcard:URL .\n"
+            + "        ?link vitro:mostSpecificType ?type .\n"
+            + "        ?type rdfs:label ?typeLabel .\n"
+            + "    }\n"
+            + "}\n";
+
     private static String WEBPAGE_QUERY = ""
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
         + "PREFIX vcard: <http://www.w3.org/2006/vcard/ns#> \n"
@@ -109,18 +167,31 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
     
        
     private List<Map<String, String>> getWebpages(String subjectUri, VitroRequest vreq) {
-          
-        String queryStr = QueryUtils.subUriForQueryVar(this.getQuery(), "subject", subjectUri);
-        log.debug("Query string is: " + queryStr);
+        RDFService rdfService = vreq.getRDFService();
+
         List<Map<String, String>> webpages = new ArrayList<Map<String, String>>();
         try {
-            ResultSet results = QueryUtils.getQueryResults(queryStr, vreq);
-            while (results.hasNext()) {
-                QuerySolution soln = results.nextSolution();
-                RDFNode node = soln.get("link");
-                if (node != null && node.isURIResource()) {
-                    webpages.add(QueryUtils.querySolutionToStringValueMap(soln));        
+            String constructStr = QueryUtils.subUriForQueryVar(WEBPAGE_MODEL, "subject", subjectUri);
+
+            Model constructedModel = ModelFactory.createDefaultModel();
+            rdfService.sparqlConstructQuery(constructStr, constructedModel);
+
+            String queryStr = QueryUtils.subUriForQueryVar(this.getQuery(), "subject", subjectUri);
+            log.debug("Query string is: " + queryStr);
+
+            QueryExecution qe = QueryExecutionFactory.create(queryStr, constructedModel);
+            try {
+                ResultSet results = qe.execSelect();
+
+                while (results.hasNext()) {
+                    QuerySolution soln = results.nextSolution();
+                    RDFNode node = soln.get("link");
+                    if (node != null && node.isURIResource()) {
+                        webpages.add(QueryUtils.querySolutionToStringValueMap(soln));
+                    }
                 }
+            } finally {
+                qe.close();
             }
         } catch (Exception e) {
             log.error(e, e);

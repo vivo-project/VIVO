@@ -5,6 +5,7 @@ package edu.cornell.mannlib.vitro.webapp.visualization.personlevel;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CoAuthorshipData;
 import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.query.Dataset;
@@ -104,11 +105,11 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 			
 			
         	ModelConstructor constructQueryRunner = 
-        			new CoPIGrantCountConstructQueryRunner(egoURI, dataset, log);
+        			new CoPIGrantCountConstructQueryRunner(egoURI, vitroRequest.getRDFService(), log);
     		Model constructedModel = constructQueryRunner.getConstructedModel();
     		
     		QueryRunner<CollaborationData> coPIQueryManager = 
-    				new CoPIGrantCountQueryRunner(egoURI, constructedModel, log);
+    				new CoPIGrantCountQueryRunner(egoURI, vitroRequest.getRDFService(), log);
            
             CollaborationData coPIData = coPIQueryManager.getQueryResult();
             
@@ -166,28 +167,32 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         } else {
         	
         	QueryRunner<CollaborationData> coAuthorshipQueryManager = 
-        			new CoAuthorshipQueryRunner(egoURI, dataset, log);
+        			new CoAuthorshipQueryRunner(egoURI, vitroRequest.getRDFService(), log);
         
         	CollaborationData coAuthorshipData = coAuthorshipQueryManager.getQueryResult();
-        	
-        	/*
-			 * When the front-end for the person level vis has to be displayed we render couple of 
-			 * sparklines. This will prepare all the data for the sparklines & other requested 
+
+			/*
+			 * When the front-end for the person level vis has to be displayed we render couple of
+			 * sparklines. This will prepare all the data for the sparklines & other requested
 			 * files.
 			 * */
-    		SubEntity person = new SubEntity(egoURI,
-											 UtilityFunctions
-											 	.getIndividualLabelFromDAO(vitroRequest, egoURI));
+			SubEntity person = new SubEntity(egoURI,
+					UtilityFunctions
+							.getIndividualLabelFromDAO(vitroRequest, egoURI));
 
-    		Map<String, Activity> publicationsToURI = SelectOnModelUtilities.getPublicationsForPerson(dataset, person, false);
-			
+			Map<String, Activity> publicationsToURI;
+			if (coAuthorshipData instanceof CoAuthorshipData) {
+				publicationsToURI = ((CoAuthorshipData)coAuthorshipData).getDocuments();
+			} else {
+				publicationsToURI = SelectOnModelUtilities.getPublicationsForPerson(dataset, person, false);
+			}
+
 	    	/*
 	    	 * Create a map from the year to number of publications. Use the BiboDocument's
 	    	 * parsedPublicationYear to populate the data.
 	    	 * */
-	    	Map<String, Integer> yearToPublicationCount = 
-	    			UtilityFunctions.getYearToActivityCount(publicationsToURI.values());
-	    														
+			Map<String, Integer> yearToPublicationCount =
+					UtilityFunctions.getYearToActivityCount(publicationsToURI.values());
 	    	/*
 	    	 * Computations required to generate HTML for the sparklines & related context.
 	    	 * */

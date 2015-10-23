@@ -67,8 +67,8 @@ VisualizationRequestHandler {
 										VisualizationFrameworkConstants.REQUESTING_TEMPLATE_KEY);  
 
 		QueryRunner<Set<Activity>> queryManager = new PersonPublicationCountQueryRunner(
-															personURI, 
-															dataset, 
+															personURI,
+															vitroRequest.getRDFService(),
 															log);
 
 		Set<Activity> authorDocuments = queryManager.getQueryResult();
@@ -80,8 +80,17 @@ VisualizationRequestHandler {
 		Map<String, Integer> yearToPublicationCount = 
 				UtilityFunctions.getYearToActivityCount(authorDocuments);
 
-		boolean shouldVIVOrenderVis = 
-				yearToPublicationCount.size() > 0 ? true : false;
+		boolean shouldVIVOrenderVis = false;
+
+		if (yearToPublicationCount.containsKey("Unknown")) {
+			if (yearToPublicationCount.size() > 1) {
+				shouldVIVOrenderVis = true;
+			}
+		} else {
+			if (yearToPublicationCount.size() > 0) {
+				shouldVIVOrenderVis = true;
+			}
+		}
 
 		/*
 		 * Computations required to generate HTML for the sparkline & related
@@ -118,8 +127,8 @@ VisualizationRequestHandler {
 		.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 
 		QueryRunner<Set<Activity>> queryManager = new PersonPublicationCountQueryRunner(
-																personURI, 
-																dataset, 
+																personURI,
+																vitroRequest.getRDFService(),
 																log);
 
 		Set<Activity> authorDocuments = queryManager.getQueryResult();
@@ -131,10 +140,10 @@ VisualizationRequestHandler {
 		Map<String, Integer> yearToPublicationCount = 
 				UtilityFunctions.getYearToActivityCount(authorDocuments);
 
-		Individual author = ((PersonPublicationCountQueryRunner) queryManager).getAuthor();
+		String authorName = ((PersonPublicationCountQueryRunner) queryManager).getAuthorName();
 
-		return prepareDataResponse(author, 
-								   authorDocuments,
+
+		return prepareDataResponse(authorName,
 								   yearToPublicationCount);
 
 	}
@@ -154,8 +163,8 @@ VisualizationRequestHandler {
 									VisualizationFrameworkConstants.VIS_CONTAINER_KEY);
 
 		QueryRunner<Set<Activity>> queryManager = new PersonPublicationCountQueryRunner(
-																personURI, 
-																dataset, 
+																personURI,
+																vitroRequest.getRDFService(),
 																log);
 
 		Set<Activity> authorDocuments = queryManager.getQueryResult();
@@ -213,19 +222,8 @@ VisualizationRequestHandler {
 	 * @param yearToPublicationCount
 	 * @return
 	 */
-	private Map<String, String> prepareDataResponse(Individual author,
-			Set<Activity> authorDocuments,
+	private Map<String, String> prepareDataResponse(String authorName,
 			Map<String, Integer> yearToPublicationCount) {
-
-		String authorName = null;
-
-		/*
-		 * To protect against cases where there are no author documents
-		 * associated with the individual.
-		 */
-		if (authorDocuments.size() > 0) {
-			authorName = author.getIndividualLabel();
-		}
 
 		/*
 		 * To make sure that null/empty records for author names do not cause

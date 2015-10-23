@@ -6,108 +6,108 @@
      See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
 
 <list-view-config>
-    <query-select>    
+    <query-select>
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
         PREFIX obo: &lt;http://purl.obolibrary.org/obo/&gt;
         PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
-          
-        SELECT <collated> ?subclass </collated>
-               ?object 
-               ?label 
-               ?localName 
-               ?type
-               ?objectType
-               ?title WHERE {
-  
-            ?subject ?property ?object .
-			?object a ?objectType .
-                LET (?localName := afn:localname(?object)) 
-            
-            OPTIONAL { ?object rdfs:label ?label } 
 
-            OPTIONAL {
+        SELECT <collated> ?subclass </collated>
+            ?object
+            ?label
+            ?localName
+            ?type
+            ?objectType
+            ?title
+        WHERE
+        {
+            ?subject ?property ?object .
+            ?object a ?objectType .
+            LET (?localName := afn:localname(?object))
+
+            OPTIONAL
+            {
+                ?object rdfs:label ?label .
+            }
+
+            OPTIONAL
+            {
                 # Get mostSpecificType only for Persons
                 ?object vitro:mostSpecificType ?subclass .
                 ?subclass rdfs:label ?type .
+
                 # Display only a mostSpecificType that belongs to a classgroup.
-                ?subclass vitro:inClassGroup ?classGroup .
-                ?classGroup a vitro:ClassGroup
+                # CONSTRUCT will apply this filter
+                # ?subclass vitro:inClassGroup ?classGroup .
+                # ?classGroup a vitro:ClassGroup .
             }
-            
-            OPTIONAL { ?object obo:ARG_2000028 ?vcard .
-                       ?vcard vcard:hasTitle ?titleObj .
-                       ?titleObj vcard:title ?title 
-            }             
-            
-            <collated>
-            FILTER ( afn:namespace(?subclass) != "http://vitro.mannlib.cornell.edu/ns/vitro/0.7#" )   
-            </collated>
-        
+
+            OPTIONAL
+            {
+                ?object obo:ARG_2000028 ?vcard .
+                ?vcard vcard:hasTitle ?titleObj .
+                ?titleObj vcard:title ?title .
+            }
+
+        <collated>
+            FILTER ( afn:namespace(?subclass) != "http://vitro.mannlib.cornell.edu/ns/vitro/0.7#" )
+        </collated>
+
         # Order by ?type is important, because if the object has more than one mostSpecificType,
         # they all get returned, but postprocessing culls out all but one. Ordering by ?type
         # will ensure that at least we'll get the same one every time.
-        } ORDER BY <collated> ?subclass </collated> ASC( ?label ) ASC( ?localName ) ?type 
+        } ORDER BY <collated> ?subclass </collated> ASC( ?label ) ASC( ?localName ) ?type
     </query-select>
 
     <query-construct>
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
-        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
-        
-        CONSTRUCT {
-            ?subject ?property ?object .
-			?object a ?objectType .
-            ?object rdfs:label ?label .
-        } WHERE {
-            { 
-                ?subject ?property ?object .
-				?object a ?objectType .
-            } UNION {      
-                ?subject ?property ?object .
-				?object a ?objectType .
-                ?object rdfs:label ?label .
-            }        
-        }
-    </query-construct>
-    
-    <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
         PREFIX obo: &lt;http://purl.obolibrary.org/obo/&gt;
         PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
 
-        CONSTRUCT {
+        CONSTRUCT
+        {
             ?subject ?property ?object .
-			?object a ?objectType .
+            ?object a ?objectType .
+            ?object rdfs:label ?label .
             ?object vitro:mostSpecificType ?subclass .
-            ?subclass vitro:inClassGroup ?classGroup .
-            ?classGroup a vitro:ClassGroup .
             ?subclass rdfs:label ?type .
-            ?object obo:ARG_2000028 ?vcard . 
+            ?object obo:ARG_2000028 ?vcard .
             ?vcard vcard:hasTitle ?titleObj .
-            ?titleObj vcard:title ?title
-        } WHERE {
-            { 
+            ?titleObj vcard:title ?title .
+        }
+        WHERE
+        {
+            {
                 ?subject ?property ?object .
-				?object a ?objectType .
-            } UNION {            
+                ?object a ?objectType .
+            }
+            UNION
+            {
                 ?subject ?property ?object .
-				?object a ?objectType .
+                ?object rdfs:label ?label .
+            }
+            UNION
+            {
+                ?subject ?property ?object .
                 ?object vitro:mostSpecificType ?subclass .
                 ?subclass rdfs:label ?type .
+
+                # Display only a mostSpecificType that belongs to a classgroup.
                 ?subclass vitro:inClassGroup ?classGroup .
-                ?classGroup a vitro:ClassGroup
-            } UNION {            
+                ?classGroup a vitro:ClassGroup .
+            }
+            UNION
+            {
                 ?subject ?property ?object .
-				?object a ?objectType .
-                ?object obo:ARG_2000028 ?vcard . 
+                ?object obo:ARG_2000028 ?vcard .
                 ?vcard vcard:hasTitle ?titleObj .
-                ?titleObj vcard:title ?title
-            }          
+                ?titleObj vcard:title ?title .
+            }
         }
     </query-construct>
 

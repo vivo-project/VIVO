@@ -21,6 +21,13 @@ public class SubjectEntityJSON {
 		this.setParentURIToLabel(parentOrganizations);
 	}
 
+	public SubjectEntityJSON(String subjectEntityURI, String label,
+							 Map<String, String> parentURIToLabel) {
+		this.subjectEntityURI = subjectEntityURI;
+		this.subjectEntityLabel = label;
+		this.parentURIToLabel = parentURIToLabel;
+	}
+
 	public String getSubjectEntityURI() {
 		return subjectEntityURI;
 	}

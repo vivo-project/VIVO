@@ -48,11 +48,7 @@
                         minValue: '${sparklineVO.earliestRenderedPublicationYear?c}',
                         maxValue: '${sparklineVO.latestRenderedPublicationYear?c}'
                 }]));
-         
-                <#else>
 
-                </#if>
-         
                 var visualizationOptions = {
                     width: 150,
                     height: 60,
@@ -60,7 +56,18 @@
                     chartType: 'ls',
                     chartLabel: 'r'
                 }
-                
+                <#else>
+
+                var visualizationOptions = {
+                    width: 250,
+                    height: 75,
+                    color: '3399CC',
+                    chartType: 'ls',
+                    chartLabel: 'r'
+                }
+                </#if>
+         
+
                 /*
                 This means that all the publications have unknown years & we do not need to display
                 the sparkline.
@@ -168,7 +175,7 @@
                      * Sparks that will be rendered will always be the one's which has 
                      * any year associated with it. Hence.
                      * */
-                    var renderedSparks = ${sparklineVO.renderedSparks};
+                    var renderedSparks = ${sparklineVO.renderedSparks?c};
                     
                     /*
                     In case that there are only unknown publications we want the text to mention these counts,

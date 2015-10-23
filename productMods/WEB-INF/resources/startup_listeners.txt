@@ -55,6 +55,8 @@ edu.cornell.mannlib.vitro.webapp.auth.policy.RestrictHomeMenuItemEditingPolicy$S
 
 edu.cornell.mannlib.vitro.webapp.services.shortview.ShortViewServiceSetup
 
+edu.cornell.mannlib.vitro.webapp.visualization.setup.VisualizationSetup
+
 edu.ucsf.vitro.opensocial.OpenSocialSmokeTests
 
 # For multiple language support

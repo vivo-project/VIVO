@@ -4,91 +4,89 @@
 <!-- See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
 
 <list-view-config>
-    <query-select>     
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+    <query-select>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
-        
+
         SELECT DISTINCT ?dateTimeInterval ?label
-                        ?valueStart ?valueStartName
-                        ?dateTimeStart 
-                        ?precisionStart
-                        ?valueEnd ?valueEndName 
-                        ?dateTimeEnd 
-                        ?precisionEnd WHERE {
+            ?valueStart ?valueStartName
+            ?dateTimeStart
+            ?precisionStart
+            ?valueEnd ?valueEndName
+            ?dateTimeEnd
+            ?precisionEnd
+
+        WHERE
+        {
             ?subject ?property ?dateTimeInterval
-                      
-            OPTIONAL { ?dateTimeInterval core:start ?valueStart
-                           LET (?valueStartName := afn:localname(?valueStart)) 
-                       OPTIONAL { ?valueStart core:dateTime ?dateTimeStart }
-                       OPTIONAL { ?valueStart core:dateTimePrecision ?dateTimePrecisionStart
-                                      LET (?precisionStart := afn:localname(?dateTimePrecisionStart))  
-                       }
-            }                      
-            OPTIONAL { ?dateTimeInterval core:end ?valueEnd
-                           LET (?valueEndName := afn:localname(?valueEnd))  
-                       OPTIONAL { ?valueEnd core:dateTime ?dateTimeEnd }
-                       OPTIONAL { ?valueEnd core:dateTimePrecision ?dateTimePrecisionEnd
-                                      LET (?precisionEnd := afn:localname(?dateTimePrecisionEnd))  
-                       }
+
+            OPTIONAL
+            {
+                ?dateTimeInterval core:start ?valueStart
+                LET (?valueStartName := afn:localname(?valueStart))
+
+                OPTIONAL { ?valueStart core:dateTime ?dateTimeStart }
+                OPTIONAL
+                {
+                    ?valueStart core:dateTimePrecision ?dateTimePrecisionStart
+                    LET (?precisionStart := afn:localname(?dateTimePrecisionStart))
+                }
+            }
+            OPTIONAL
+            {
+                ?dateTimeInterval core:end ?valueEnd
+                LET (?valueEndName := afn:localname(?valueEnd))
+                OPTIONAL { ?valueEnd core:dateTime ?dateTimeEnd }
+                OPTIONAL
+                {
+                    ?valueEnd core:dateTimePrecision ?dateTimePrecisionEnd
+                    LET (?precisionEnd := afn:localname(?dateTimePrecisionEnd))
+                }
             }
             OPTIONAL {?dateTimeInterval rdfs:label ?label}
-            
+
             <critical-data-required>
-            FILTER ( bound(?dateTimeStart) || bound(?dateTimeEnd) ) 
+                FILTER ( bound(?dateTimeStart) || bound(?dateTimeEnd) )
             </critical-data-required>
-        }  
+        }
     </query-select>
 
     <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
 
-        CONSTRUCT {
+        CONSTRUCT
+        {
             ?subject ?property ?dateTimeInterval .
-            ?dateTimeInterval core:start ?valueStart .
-            ?dateTimeInterval core:end ?valueEnd .
-            ?dateTimeInterval rdfs:label ?label
-        } WHERE {
+            ?dateTimeInterval rdfs:label ?label .
+            ?dateTimeInterval core:start ?sStart .
+            ?dateTimeInterval core:end ?sEnd .
+            ?sStart ?p ?o .
+            ?sEnd ?p ?o .
+        }
+        WHERE
+        {
             {
-                ?subject ?property ?dateTimeInterval
-            } 
-            UNION {
-                ?subject ?property ?dateTimeInterval .
-                ?dateTimeInterval core:start ?valueStart
+                ?subject core:dateTimeInterval ?dateTimeInterval .
             }
-            UNION {
-                ?subject ?property ?dateTimeInterval .
-                ?dateTimeInterval core:end ?valueEnd
+            UNION
+            {
+                ?subject core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval rdfs:label ?label .
             }
-            UNION {
+            UNION
+            {
                 ?subject ?property ?dateTimeInterval .
-                ?dateTimeInterval rdfs:label ?label
+                ?dateTimeInterval core:start ?sStart .
+                ?sStart ?p ?o .
             }
-        }
-    </query-construct>
-
-    <query-construct>
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-       
-        CONSTRUCT { 
-            ?valueStart ?p ?o
-        } WHERE {
-            ?subject ?property ?dateTimeInterval .
-            ?dateTimeInterval core:start ?valueStart .
-            ?valueStart ?p ?o
-        }
-    </query-construct>
-
-    <query-construct>
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-       
-        CONSTRUCT { 
-            ?valueEnd ?p ?o
-        } WHERE {
-            ?subject ?property ?dateTimeInterval .
-            ?dateTimeInterval core:end ?valueEnd .
-            ?valueEnd ?p ?o
+            UNION
+            {
+                ?subject ?property ?dateTimeInterval .
+                ?dateTimeInterval core:end ?sEnd .
+                ?sEnd ?p ?o .
+            }
         }
     </query-construct>
 

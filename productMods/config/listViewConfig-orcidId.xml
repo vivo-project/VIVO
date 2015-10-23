@@ -7,7 +7,6 @@
 
 <list-view-config>
     <query-select>    
-        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;  
         SELECT ?value
         WHERE {
                 ?subject ?property ?value 
