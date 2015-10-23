@@ -28,48 +28,48 @@
         WHERE
         {
             ?subject ?property ?authorship .
+            ?authorship a core:Authorship .
             ?authorship core:relates ?infoResource .
             ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
             ?infoResource rdfs:label ?infoResourceName .
-
+            OPTIONAL { ?infoResource vitro:mostSpecificType ?subclass }
             OPTIONAL { ?infoResource bibo:volume ?volume }
             OPTIONAL { ?infoResource bibo:pageStart ?startPage }
             OPTIONAL { ?infoResource bibo:pageEnd ?endPage }
             OPTIONAL { ?infoResource core:placeOfPublication ?locale }
-            OPTIONAL {
+            OPTIONAL
+            {
                 ?infoResource bibo:reproducedIn ?appearsInObj .
-                ?appearsInObj rdfs:label ?appearsIn
+                ?appearsInObj rdfs:label ?appearsIn .
             }
-
-            OPTIONAL {
+            OPTIONAL
+            {
                 ?infoResource core:publisher ?publisherObj .
-                ?publisherObj rdfs:label ?publisher
+                ?publisherObj rdfs:label ?publisher .
             }
-
-            OPTIONAL {
+            OPTIONAL
+            {
+                ?infoResource &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?partOfObj .
+                ?partOfObj rdfs:label ?partOf .
+            }
+            OPTIONAL
+            {
+                ?infoResource core:hasPublicationVenue ?publishedIn .
+                ?publishedIn  rdfs:label ?journal .
+            }
+            OPTIONAL
+            {
+                ?infoResource core:dateTimeValue ?dateTimeValue .
+                ?dateTimeValue core:dateTime ?dateTime .
+            }
+            OPTIONAL
+            {
                 ?infoResource core:relatedBy ?editorship .
                 ?editorship a core:Editorship .
                 ?editorship core:relates ?editorObj .
-                ?editorObj rdfs:label ?editor
-            }
-
-            OPTIONAL {
-                ?infoResource &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?partOfObj .
-                ?partOfObj rdfs:label ?partOf
-            }
-
-            OPTIONAL { ?infoResource vitro:mostSpecificType ?subclass }
-            OPTIONAL {
-                ?infoResource core:hasPublicationVenue ?publishedIn .
-                ?publishedIn  rdfs:label ?journal
-            }
-
-            OPTIONAL {
-                ?infoResource core:dateTimeValue ?dateTimeValue .
-                ?dateTimeValue core:dateTime ?dateTime
+                ?editorObj rdfs:label ?editor .
             }
             OPTIONAL { ?authorship core:hideFromDisplay ?hideThis }
-
         <critical-data-required>
             FILTER ( bound(?infoResource) )
         </critical-data-required>
