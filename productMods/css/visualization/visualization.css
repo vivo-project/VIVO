@@ -12,9 +12,19 @@ span.incomplete-data-holder,
     border: dotted 1px #eee;
     background-color: #ffb;
 }
+#incomplete-data-small {
+    padding: 5px;
+    font-size: .8em;
+    color: #444;
+    border: dotted 1px #eee;
+    background-color: #ffb;
+}
 #incomplete-data {
     margin-top: 1.6em;
     font-size: 1em;
+}
+#incomplete-data-small {
+    margin-top: 1.6em;
 }
 .collaboratorship-icon {
     float: left;

@@ -240,6 +240,9 @@ table.sparkline_wrapper_table td, th {
     line-height: 150%;
     margin-right: 15px;
 }
+#incomplete-data-small {
+    margin-right: 15px;
+}
 .graphml-file-link {
     padding-top: 59px;
     height: 20px;
