@@ -4,6 +4,9 @@ package edu.cornell.mannlib.vitro.webapp.visualization.visutils;
 
 import java.util.Map;
 
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -100,5 +103,14 @@ public class GenericQueryRunner implements QueryRunner<ResultSet> {
 										   this.dataset);
 
 		return resultSet;
+	}
+
+	public void sparqlSelectQuery(RDFService rdfService, ResultSetConsumer consumer) throws MalformedQueryParametersException {
+		try {
+			rdfService.sparqlSelectQuery(generateGenericSparqlQuery(), consumer);
+		} catch (RDFServiceException e) {
+			log.error("Unable to execute: [" + generateGenericSparqlQuery() + "]", e);
+			throw new MalformedQueryParametersException(e);
+		}
 	}
 }

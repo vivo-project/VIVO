@@ -123,7 +123,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 											 UtilityFunctions
 											 	.getIndividualLabelFromDAO(vitroRequest, egoURI));
 
-    		Map<String, Activity> grantsToURI = SelectOnModelUtilities.getGrantsForPerson(dataset, person, false);
+    		Map<String, Activity> grantsToURI = SelectOnModelUtilities.getGrantsForPerson(vitroRequest.getRDFService(), person, false);
     		
         	/*
         	 * Create a map from the year to number of grants. Use the Grant's

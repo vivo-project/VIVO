@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import org.apache.commons.lang.StringUtils;
 
 import com.hp.hpl.jena.query.Dataset;
@@ -73,53 +74,6 @@ public class SelectOnModelUtilities {
 		entityWithSubOrganizations.addParents(entityWithParentOrganizations.getParents());
 		
 		return entityWithSubOrganizations;
-	}
-	
-	public static Entity getSubjectPersonEntity(Dataset dataset,
-			String subjectEntityURI) throws MalformedQueryParametersException {
-		
-		Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
-		fieldLabelToOutputFieldLabel.put("authorLabel", QueryFieldLabels.AUTHOR_LABEL);
-		
-		String whereClause = ""
-			+ " <" + subjectEntityURI + "> rdfs:label ?authorLabel . ";
-		
-		QueryRunner<ResultSet> personQuery = 
-			new GenericQueryRunner(fieldLabelToOutputFieldLabel,
-									"",
-									whereClause,
-									"",
-									dataset);
-		
-		Entity personEntity = new Entity(subjectEntityURI);
-		
-		ResultSet queryResult = personQuery.getQueryResult();
-		
-		while (queryResult.hasNext()) {
-			
-			QuerySolution solution = queryResult.nextSolution();
-				
-			RDFNode personLabelNode = solution.get(QueryFieldLabels.AUTHOR_LABEL);
-			if (personLabelNode != null) {
-				personEntity.setEntityLabel(personLabelNode.toString());
-			}
-			
-		}
-		
-		/*
-		 * We are adding A person as it's own subentity in order to make our code for geenrating csv, json 
-		 * & other data as streamlined as possible between entities of type Organization & Person. 
-		 * */
-		SubEntity subEntity = new SubEntity(subjectEntityURI, personEntity.getEntityLabel());
-		subEntity.setEntityClass(VOConstants.EntityClassType.PERSON);
-		
-		personEntity.addSubEntity(subEntity);
-		
-//		Entity entityWithParentOrganizations = getAllParentOrganizations(dataset, subjectEntityURI);
-//		
-//		personEntity.addParents(entityWithParentOrganizations.getParents());
-		
-		return personEntity;
 	}
 	
 	public static Entity getAllParentOrganizations(Dataset dataset,
@@ -757,7 +711,7 @@ public class SelectOnModelUtilities {
 	}
 	
 	public static Map<String, Activity> getGrantsForPerson(
-			Dataset dataset, SubEntity person, boolean doCache)
+			RDFService rdfService, SubEntity person, boolean doCache)
 			throws MalformedQueryParametersException {
 		
 		Map<String, Activity> allGrantURIToVOs = new HashMap<String, Activity>();
@@ -775,10 +729,10 @@ public class SelectOnModelUtilities {
 											.getOrConstructModel(
 													person.getIndividualURI(),
 													PersonToGrantsModelConstructor.MODEL_TYPE,
-													dataset);	
+													rdfService);
 		} else {
 			
-			ModelConstructor model = new PersonToGrantsModelConstructor(person.getIndividualURI(), dataset);
+			ModelConstructor model = new PersonToGrantsModelConstructor(person.getIndividualURI(), rdfService);
 			personGrantsModel = model.getConstructedModel();
 		}
 		

@@ -4,10 +4,12 @@ package edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.factory;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.rdf.model.Model;
 
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 
 public interface ModelFactoryInterface {
 	
 	public Model getOrCreateModel(String uri, Dataset dataset) throws MalformedQueryParametersException;
 
+	public Model getOrCreateModel(String uri, RDFService rdfService) throws MalformedQueryParametersException;
 }

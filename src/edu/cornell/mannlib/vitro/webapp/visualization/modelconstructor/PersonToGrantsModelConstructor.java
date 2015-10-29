@@ -4,14 +4,10 @@ package edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor;
 import java.util.HashSet;
 import java.util.Set;
 
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.hp.hpl.jena.query.Dataset;
-import com.hp.hpl.jena.query.Query;
-import com.hp.hpl.jena.query.QueryExecution;
-import com.hp.hpl.jena.query.QueryExecutionFactory;
-import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.Syntax;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -24,7 +20,7 @@ public class PersonToGrantsModelConstructor implements ModelConstructor {
 	
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 	
-	private Dataset dataset;
+	private RDFService rdfService;
 	
 	public static final String MODEL_TYPE = "PERSON_TO_GRANTS"; 
 	public static final String MODEL_TYPE_HUMAN_READABLE = "Grants for specific person via all roles";
@@ -35,9 +31,9 @@ public class PersonToGrantsModelConstructor implements ModelConstructor {
 	
 	private long before, after;
 	
-	public PersonToGrantsModelConstructor(String personURI, Dataset dataset) {
+	public PersonToGrantsModelConstructor(String personURI, RDFService rdfService) {
 		this.personURI = personURI;
-		this.dataset = dataset;
+		this.rdfService = rdfService;
 	}
 	
 private Set<String> constructPersonGrantsQueryTemplate(String constructProperty, String roleType) {
@@ -138,33 +134,20 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 	}
 	
 	private Model executeQuery(Set<String> constructQueries) {
-		
 		Model constructedModel = ModelFactory.createDefaultModel();
 
 		before = System.currentTimeMillis();
 		log.debug("CONSTRUCT query string : " + constructQueries);
 		
 		for (String currentQuery : constructQueries) {
-
-			
-			Query query = null;
-
 			try {
-				query = QueryFactory.create(QueryConstants.getSparqlPrefixQuery() + currentQuery, SYNTAX);
+				rdfService.sparqlConstructQuery(QueryConstants.getSparqlPrefixQuery() + currentQuery, constructedModel);
 			} catch (Throwable th) {
 				log.error("Could not create CONSTRUCT SPARQL query for query "
 						+ "string. " + th.getMessage());
 				log.error(currentQuery);
 			}
-			
-			
-			QueryExecution qe = QueryExecutionFactory.create(query, dataset);
-			
-			try {
-				qe.execConstruct(constructedModel);
-			} finally {
-				qe.close();
-			}
+
 		}
 		
 		after = System.currentTimeMillis();

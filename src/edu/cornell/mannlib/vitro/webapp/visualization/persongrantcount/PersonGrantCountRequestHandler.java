@@ -55,7 +55,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 									personURI,
 									UtilityFunctions.getIndividualLabelFromDAO(vitroRequest, personURI));
 		
-		Map<String, Activity> grantsToURI = SelectOnModelUtilities.getGrantsForPerson(dataset, person, false);
+		Map<String, Activity> grantsToURI = SelectOnModelUtilities.getGrantsForPerson(vitroRequest.getRDFService(), person, false);
 		
 		
 		/*
@@ -96,7 +96,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 				personURI,
 				UtilityFunctions.getIndividualLabelFromDAO(vitroRequest, personURI));
 
-		Map<String, Activity> grantsToURI = SelectOnModelUtilities.getGrantsForPerson(dataset, person, false);
+		Map<String, Activity> grantsToURI = SelectOnModelUtilities.getGrantsForPerson(vitroRequest.getRDFService(), person, false);
 		
     	/*
     	 * Create a map from the year to number of grants. Use the Grant's
@@ -147,7 +147,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 				personURI,
 				UtilityFunctions.getIndividualLabelFromDAO(vitroRequest, personURI));
 
-		Map<String, Activity> grantsToURI = SelectOnModelUtilities.getGrantsForPerson(dataset, person, false);
+		Map<String, Activity> grantsToURI = SelectOnModelUtilities.getGrantsForPerson(vitroRequest.getRDFService(), person, false);
 		
     	/*
     	 * Create a map from the year to number of grants. Use the Grant's

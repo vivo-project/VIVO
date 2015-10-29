@@ -4,6 +4,7 @@ package edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.factory;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.rdf.model.Model;
 
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.OrganizationToPublicationsForSubOrganizationsModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.ConstructedModelTracker;
@@ -58,7 +59,12 @@ public class OrganizationToPublicationsForSubOrganizationsFactory implements
 			}
 		}	
 		}
-	
+
+	@Override
+	public Model getOrCreateModel(String uri, RDFService rdfService) throws MalformedQueryParametersException {
+		return null;
 	}
+
+}
 
 
