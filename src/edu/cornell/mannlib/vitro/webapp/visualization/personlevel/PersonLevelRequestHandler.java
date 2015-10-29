@@ -5,7 +5,10 @@ package edu.cornell.mannlib.vitro.webapp.visualization.personlevel;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CoAuthorshipData;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.CollaborationDataViewHelper;
+import org.apache.axis.utils.StringUtils;
 import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.query.Dataset;
@@ -238,8 +241,14 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		Map<String, Object> body = new HashMap<String, Object>();
 		
         String	standaloneTemplate = "coAuthorPersonLevel.ftl";
-        
-        body.put("egoURIParam", egoURI);
+
+		String property = ConfigurationProperties.getBean(vitroRequest).getProperty("visualization.d3");
+		if ("enabled".equalsIgnoreCase(property)) {
+			body.put("coAuthorshipData", new CollaborationDataViewHelper(coAuthorshipVO));
+			standaloneTemplate = "coAuthorPersonLevelD3.ftl";
+		}
+
+		body.put("egoURIParam", egoURI);
         
         body.put("egoLocalName", UtilityFunctions.getIndividualLocalName(egoURI, vitroRequest));
         
@@ -290,7 +299,13 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		}
 		
         String	standaloneTemplate = "coPIPersonLevel.ftl";
-		
+
+		String property = ConfigurationProperties.getBean(vitroRequest).getProperty("visualization.d3");
+		if ("enabled".equalsIgnoreCase(property)) {
+			body.put("coInvestigatorData", new CollaborationDataViewHelper(coPIVO));
+			standaloneTemplate = "coPIPersonLevelD3.ftl";
+		}
+
 		body.put("egoGrantSparklineVO", egoGrantSparklineVO);
 		body.put("uniqueCoInvestigatorsSparklineVO", uniqueCopisSparklineVO);        	
 

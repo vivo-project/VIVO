@@ -18,6 +18,11 @@ a.no_href_styles {
     width: 67%;
     margin-left: 33%;
 }
+.vis_stats_full {
+    background: #fff;
+    clear: right;
+    width: 100%;
+}
 .vis-tables {
     padding: 10px;
     background-color: #FFF;
@@ -26,6 +31,12 @@ a.no_href_styles {
     font-size: 0.8em;
     width: 44%;
     margin: 0 10px 10px 0;
+}
+#chord-info-div {
+    border: 1px solid #000000;
+    background: #F5F5F5;
+    padding: 5px;
+    z-index: 10;
 }
 p.datatable {
     font-size: 12px;
@@ -45,6 +56,10 @@ p.datatable {
     margin-left: 33%;
     width: 67%;
     float: right;
+}
+#sparkline-container-full {
+    clear: both;
+    width: 100%;
 }
 #body h1 {
     margin: 0;
