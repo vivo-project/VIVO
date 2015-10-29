@@ -13,11 +13,6 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.ModelConstructor;
 public class PersonToGrantsFactory implements ModelFactoryInterface {
 
 	@Override
-	public Model getOrCreateModel(String uri, Dataset dataset) {
-		return null;
-	}
-
-	@Override
 	public Model getOrCreateModel(String uri, RDFService rdfService)
 			throws MalformedQueryParametersException {
 		

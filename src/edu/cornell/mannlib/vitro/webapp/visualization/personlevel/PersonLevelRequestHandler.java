@@ -169,26 +169,12 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 	    	
         } else {
         	
-        	QueryRunner<CollaborationData> coAuthorshipQueryManager = 
+        	CoAuthorshipQueryRunner coAuthorshipQueryManager =
         			new CoAuthorshipQueryRunner(egoURI, vitroRequest.getRDFService(), log);
-        
-        	CollaborationData coAuthorshipData = coAuthorshipQueryManager.getQueryResult();
 
-			/*
-			 * When the front-end for the person level vis has to be displayed we render couple of
-			 * sparklines. This will prepare all the data for the sparklines & other requested
-			 * files.
-			 * */
-			SubEntity person = new SubEntity(egoURI,
-					UtilityFunctions
-							.getIndividualLabelFromDAO(vitroRequest, egoURI));
+			CoAuthorshipData coAuthorshipData = coAuthorshipQueryManager.getQueryResult();
 
-			Map<String, Activity> publicationsToURI;
-			if (coAuthorshipData instanceof CoAuthorshipData) {
-				publicationsToURI = ((CoAuthorshipData)coAuthorshipData).getDocuments();
-			} else {
-				publicationsToURI = SelectOnModelUtilities.getPublicationsForPerson(dataset, person, false);
-			}
+			Map<String, Activity> publicationsToURI = coAuthorshipData.getDocuments();
 
 	    	/*
 	    	 * Create a map from the year to number of publications. Use the BiboDocument's

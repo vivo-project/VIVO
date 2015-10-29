@@ -9,7 +9,5 @@ import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryP
 
 public interface ModelFactoryInterface {
 	
-	public Model getOrCreateModel(String uri, Dataset dataset) throws MalformedQueryParametersException;
-
 	public Model getOrCreateModel(String uri, RDFService rdfService) throws MalformedQueryParametersException;
 }

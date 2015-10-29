@@ -52,7 +52,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UniqueIDGenerator
  * 
  * @author cdtank
  */
-public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
+public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 
 	private static final int MAX_AUTHORS_PER_PAPER_ALLOWED = 100;
 
@@ -221,7 +221,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 					edgeUniqueIdentifierToVO);
 		}
 
-		public CollaborationData getCollaborationData() {
+		public CoAuthorshipData getCollaborationData() {
 			return new CoAuthorshipData(egoNode, nodes, edges, biboDocumentURLToVO);
 		}
 
@@ -441,10 +441,10 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 		return sparqlConstruct;
 	}
 
-	public CollaborationData getQueryResult()
+	public CoAuthorshipData getQueryResult()
 		throws MalformedQueryParametersException {
 
-		CollaborationData data = getCachedData(this.egoURI);
+		CoAuthorshipData data = getCachedData(this.egoURI);
 		if (data != null) {
 			return data;
 		}
@@ -452,7 +452,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 		return getQueryResultAndCache();
 	}
 
-	private CollaborationData getCachedData(String egoURI) {
+	private CoAuthorshipData getCachedData(String egoURI) {
 		CollaborationDataCacheEntry entry = collaborationDataCache.get(egoURI);
 		if (entry != null && !entry.hasExpired()) {
 			entry.accessTime = new Date().getTime();
@@ -463,10 +463,10 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 		return null;
 	}
 
-	private synchronized CollaborationData getQueryResultAndCache()
+	private synchronized CoAuthorshipData getQueryResultAndCache()
 			throws MalformedQueryParametersException {
 
-		CollaborationData data = getCachedData(this.egoURI);
+		CoAuthorshipData data = getCachedData(this.egoURI);
 		if (data != null) {
 			return data;
 		}
@@ -531,7 +531,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 
 	private static class CollaborationDataCacheEntry {
 		String uri;
-		CollaborationData data;
+		CoAuthorshipData data;
 		long creationTime;
 		long accessTime;
 

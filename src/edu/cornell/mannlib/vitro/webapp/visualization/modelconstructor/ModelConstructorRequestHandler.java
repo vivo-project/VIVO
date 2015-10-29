@@ -100,7 +100,7 @@ public class ModelConstructorRequestHandler implements
 													parseModelIdentifier.getType());
 
 				ModelConstructorUtilities.getOrConstructModel(parseModelIdentifier.getUri(), 
-															  parseModelIdentifier.getType(), dataSource);
+															  parseModelIdentifier.getType(), vitroRequest.getRDFService());
 				refreshedModels.add(parseModelIdentifier);
 
 			} catch (IllegalConstructedModelIdentifierException e) {
