@@ -2,6 +2,7 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.temporalgraph;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -126,12 +127,16 @@ public class TemporalPublicationVisualizationRequestHandler implements
 				for (String subOrg : subOrgPublicationsMap.keySet()) {
 					JsonObject entityJson = new JsonObject(orgLabelMap.get(subOrg));
 
-					List<List<Integer>> yearPubCounts = CounterUtils.getObjectCountByYear(subOrgPublicationsMap.get(subOrg), publicationToYearMap);
+					if (subOrgPublicationsMap.containsKey(subOrg)) {
+						List<List<Integer>> yearPubCounts = CounterUtils.getObjectCountByYear(subOrgPublicationsMap.get(subOrg), publicationToYearMap);
+						entityJson.setYearToActivityCount(yearPubCounts);
+					} else {
+						entityJson.setYearToActivityCount(new ArrayList<List<Integer>>());
+					}
 
 					String type = orgMostSpecificLabelMap.get(subOrg);
-
-					entityJson.setYearToActivityCount(yearPubCounts);
 					entityJson.setOrganizationTypes(Arrays.asList(type == null ? "Organization" : type));
+
 					entityJson.setEntityURI(subOrg);
 					entityJson.setVisMode("ORGANIZATION");
 
@@ -142,12 +147,16 @@ public class TemporalPublicationVisualizationRequestHandler implements
 				for (String person : orgPublicationsPeople) {
 					JsonObject entityJson = new JsonObject(personLabelMap.get(person));
 
-					List<List<Integer>> yearPubCounts = CounterUtils.getObjectCountByYear(personToPublicationMap.get(person), publicationToYearMap);
+					if (personToPublicationMap.containsKey(person)) {
+						List<List<Integer>> yearPubCounts = CounterUtils.getObjectCountByYear(personToPublicationMap.get(person), publicationToYearMap);
+						entityJson.setYearToActivityCount(yearPubCounts);
+					} else {
+						entityJson.setYearToActivityCount(new ArrayList<List<Integer>>());
+					}
 
 					String type = personMostSpecificLabelMap.get(person);
-
-					entityJson.setYearToActivityCount(yearPubCounts);
 					entityJson.setOrganizationTypes(Arrays.asList(type == null ? "Person" : type));
+
 					entityJson.setEntityURI(person);
 					entityJson.setVisMode("PERSON");
 

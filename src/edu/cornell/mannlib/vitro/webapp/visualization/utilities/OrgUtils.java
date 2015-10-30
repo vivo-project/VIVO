@@ -65,8 +65,8 @@ public class OrgUtils {
         Set<String> people = organisationToPeopleMap.get(orgUri);
         if (people != null) {
             for (String person : people) {
-                if (personToObjectMap.containsKey(person)) {
-                    if (orgObjectsIncludesPeople.add(person)) {
+                if (orgObjectsIncludesPeople.add(person)) {
+                    if (personToObjectMap.containsKey(person)) {
                         orgObjects.addAll(personToObjectMap.get(person));
                     }
                 }
