@@ -254,6 +254,10 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		body.put("egoPubSparklineVO", egoPubSparklineVO);
 		body.put("uniqueCoauthorsSparklineVO", uniqueCoauthorsSparklineVO);
 
+		if (coAuthorshipVO.getBuiltFromCacheTime() != null) {
+			body.put("builtFromCacheTime", coAuthorshipVO.getBuiltFromCacheTime());
+		}
+
 		body.put("title",  title + "Person Level Visualization");
 
 		return new TemplateResponseValues(standaloneTemplate, body);

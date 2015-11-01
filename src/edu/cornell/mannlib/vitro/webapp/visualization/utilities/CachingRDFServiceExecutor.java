@@ -6,6 +6,7 @@ import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.utils.threads.VitroBackgroundThread;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -35,6 +36,7 @@ public class CachingRDFServiceExecutor<T> {
      * Background task tracker
      */
     private FutureTask<T> backgroundTask = null;
+    private Thread backgroundCompletion = null;
     private long backgroundTaskStartTime = -1;
 
     /**
@@ -49,6 +51,8 @@ public class CachingRDFServiceExecutor<T> {
     public boolean isCached() {
         return cachedResults != null;
     }
+
+    public Date cachedWhen() { return new Date(lastCacheTime); }
 
     /**
      * Return the cached results if present, or start the task.
@@ -100,19 +104,32 @@ public class CachingRDFServiceExecutor<T> {
      *
      * @param rdfService an RDF service to use, if the background RDF service is not set
      */
-    public synchronized void build(RDFService rdfService) {
+    public void build(RDFService rdfService) {
         // First, check if there are results from the previous background task, and update the cache
+        if (backgroundTask != null && backgroundTask.isDone()) {
+            buildComplete();
+        } else if (backgroundTask == null) {
+            buildStart(rdfService);
+        }
+    }
+
+    private synchronized void buildComplete() {
         if (backgroundTask != null && backgroundTask.isDone()) {
             completeBackgroundTask();
         }
+    }
 
-        // If we have a background RDF service, we can launch the task in the background and leave it
-        if (backgroundRDFService != null) {
-            startBackgroundTask(backgroundRDFService);
-        } else if (rdfService != null) {
-            // No background service, so use the paassed RDF service, and wait for completion
-            startBackgroundTask(backgroundRDFService);
-            completeBackgroundTask();
+    private synchronized void buildStart(RDFService rdfService) {
+        if (backgroundTask == null) {
+            // If we have a background RDF service, we can launch the task in the background and leave it
+            if (backgroundRDFService != null) {
+                startBackgroundTask(backgroundRDFService);
+                completeBackgroundTaskAsync();
+            } else if (rdfService != null) {
+                // No background service, so use the paassed RDF service, and wait for completion
+                startBackgroundTask(backgroundRDFService);
+                completeBackgroundTask();
+            }
         }
     }
 
@@ -189,6 +206,26 @@ public class CachingRDFServiceExecutor<T> {
     /**
      * Complete the background task
      */
+    private synchronized void completeBackgroundTaskAsync() {
+        if (backgroundCompletion == null) {
+            backgroundCompletion = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(500);
+                        completeBackgroundTask(-1);
+                    } catch (InterruptedException e) {
+                    }
+                }
+            });
+            backgroundCompletion.setDaemon(true);
+            backgroundCompletion.start();
+        }
+    }
+
+    /**
+     * Complete the background task
+     */
     private void completeBackgroundTask() {
         completeBackgroundTask(-1);
     }
@@ -215,6 +252,7 @@ public class CachingRDFServiceExecutor<T> {
                 // Clear the background task information
                 backgroundTask = null;
                 backgroundTaskStartTime = -1;
+                backgroundCompletion = null;
             }
         } catch (InterruptedException e) {
             // Task was interrupted, so abort it
@@ -307,7 +345,6 @@ public class CachingRDFServiceExecutor<T> {
                     affinity.complete();
                 }
             }
-
         }
 
         /**

@@ -45,6 +45,32 @@ final public class VisualizationCaches {
         grantToYear.build(rdfService);
     }
 
+    public static void buildMissing() {
+        if (!organizationLabels.isCached())              { organizationLabels.build(null); }
+        if (!organizationSubOrgs.isCached())             { organizationSubOrgs.build(null); }
+        if (!organizationToMostSpecificLabel.isCached()) { organizationToMostSpecificLabel.build(null); }
+        if (!organisationToPeopleMap.isCached())         { organisationToPeopleMap.build(null); }
+        if (!personLabels.isCached())                    { personLabels.build(null); }
+        if (!personToMostSpecificLabel.isCached())       { personToMostSpecificLabel.build(null); }
+        if (!personToPublication.isCached())             { personToPublication.build(null); }
+        if (!publicationToJournal.isCached())            { publicationToJournal.build(null); }
+        if (!publicationToYear.isCached())               { publicationToYear.build(null); }
+        if (!personToGrant.isCached())                   { personToGrant.build(null); }
+        if (!grantToYear.isCached())                     { grantToYear.build(null); }
+    }
+
+    /**
+     * Rebuild the specifield caches
+     * @param executors
+     */
+    public static void rebuild(CachingRDFServiceExecutor... executors) {
+        if (executors != null) {
+            for (CachingRDFServiceExecutor e : executors) {
+                e.build(null);
+            }
+        }
+    }
+
     /**
      * Cache of organization labels (uri -> label)
      */
@@ -263,11 +289,11 @@ final public class VisualizationCaches {
     /**
      * Person to publication Map (person uri -> list of publication uri)
      */
-    public static final CachingRDFServiceExecutor<Map<String, Set<String>>> personToPublication =
-            new CachingRDFServiceExecutor<Map<String, Set<String>>>(
-                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, Set<String>>>(visualizationAffinity) {
+    public static final CachingRDFServiceExecutor<PersonPublicationMaps> personToPublication =
+            new CachingRDFServiceExecutor<PersonPublicationMaps>(
+                    new CachingRDFServiceExecutor.RDFServiceCallable<PersonPublicationMaps>(visualizationAffinity) {
                         @Override
-                        protected Map<String, Set<String>> callWithService(RDFService rdfService) throws Exception {
+                        protected PersonPublicationMaps callWithService(RDFService rdfService) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?person ?document\n" +
                                     "WHERE\n" +
@@ -276,10 +302,10 @@ final public class VisualizationCaches {
                                     "  ?person core:relatedBy ?authorship .\n" +
                                     "  ?authorship a core:Authorship .\n" +
                                     "  ?authorship core:relates ?document .\n" +
-                                    "  ?document a bibo:Document .\n" +
+                                    "  ?document a <http://purl.obolibrary.org/obo/IAO_0000030> .\n" +
                                     "}\n";
 
-                            final Map<String, Set<String>> map = new HashMap<String, Set<String>>();
+                            final PersonPublicationMaps map = new PersonPublicationMaps();
 
                             rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
                                 @Override
@@ -289,15 +315,9 @@ final public class VisualizationCaches {
 
                                     if (person != null && document != null) {
                                         String personURI = person.getURI();
+                                        String documentURI = document.getURI();
 
-                                        Set<String> documents = map.get(personURI);
-                                        if (documents == null) {
-                                            documents = new HashSet<String>();
-                                            documents.add(document.getURI());
-                                            map.put(personURI, documents);
-                                        } else {
-                                            documents.add(document.getURI());
-                                        }
+                                        map.put(personURI, documentURI);
                                     }
                                 }
                             });
@@ -319,7 +339,7 @@ final public class VisualizationCaches {
                                     "SELECT ?document ?journalLabel\n" +
                                     "WHERE\n" +
                                     "{\n" +
-                                    "  ?document a bibo:Document .\n" +
+                                    "  ?document a <http://purl.obolibrary.org/obo/IAO_0000030> .\n" +
                                     "  ?document core:hasPublicationVenue ?journal . \n" +
                                     "  ?journal rdfs:label ?journalLabel . \n" +
                                     "}\n";
@@ -353,7 +373,7 @@ final public class VisualizationCaches {
                                     "SELECT ?document ?publicationDate\n" +
                                     "WHERE\n" +
                                     "{\n" +
-                                    "  ?document a bibo:Document .\n" +
+                                    "  ?document a <http://purl.obolibrary.org/obo/IAO_0000030> .\n" +
                                     "  ?document core:dateTimeValue ?dateTimeValue . \n" +
                                     "  ?dateTimeValue core:dateTime ?publicationDate . \n" +
                                     "}\n";

@@ -92,7 +92,7 @@ public class TemporalPublicationVisualizationRequestHandler implements
 		Map<String, String> orgMostSpecificLabelMap      = VisualizationCaches.organizationToMostSpecificLabel.get(rdfService);
 		Map<String, String> personMostSpecificLabelMap   = VisualizationCaches.personToMostSpecificLabel.get(rdfService);
 		Map<String, Set<String>> organisationToPeopleMap = VisualizationCaches.organisationToPeopleMap.get(rdfService);
-		Map<String, Set<String>> personToPublicationMap  = VisualizationCaches.personToPublication.get(rdfService);
+		Map<String, Set<String>> personToPublicationMap  = VisualizationCaches.personToPublication.get(rdfService).personToPublication;
 		Map<String, String>      publicationToYearMap    = VisualizationCaches.publicationToYear.get(rdfService);
 
 		Set<String> orgPublications       = new HashSet<String>();
@@ -249,14 +249,17 @@ public class TemporalPublicationVisualizationRequestHandler implements
 			} 
 			
 		} 
-		
-		return getSubjectEntityAndGenerateDataResponse(
-				vitroRequest, 
-				log,
-				dataset,
-				entityURI,
-				currentDataMode);
-		
+
+		try {
+			return getSubjectEntityAndGenerateDataResponse(
+					vitroRequest,
+					log,
+					dataset,
+					entityURI,
+					currentDataMode);
+		} finally {
+			VisualizationCaches.buildMissing();
+		}
 	}
 	
 	
@@ -268,14 +271,18 @@ public class TemporalPublicationVisualizationRequestHandler implements
 	private TemplateResponseValues prepareStandaloneMarkupResponse(VitroRequest vreq, String entityURI) {
         String standaloneTemplate = "entityComparisonOnPublicationsStandalone.ftl";
         String organizationLabel = OrganizationUtilityFunctions.getEntityLabelFromDAO(vreq, entityURI);
-        
+
         Map<String, Object> body = new HashMap<String, Object>();
         body.put("title", organizationLabel + " - Temporal Graph Visualization");
         body.put("organizationURI", entityURI);
         body.put("organizationLocalName", UtilityFunctions.getIndividualLocalName(entityURI, vreq));
         body.put("vivoDefaultNamespace", vreq.getWebappDaoFactory().getDefaultNamespace());
         body.put("organizationLabel", organizationLabel);
-        
+
+		if (VisualizationCaches.personToPublication.isCached()) {
+			body.put("builtFromCacheTime", VisualizationCaches.personToPublication.cachedWhen());
+		}
+
         return new TemplateResponseValues(standaloneTemplate, body);
 	}
 

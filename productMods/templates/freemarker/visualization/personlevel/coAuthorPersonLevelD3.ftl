@@ -266,8 +266,11 @@ $(document).ready(function(){
         </div>
     </div>
     
+    <#if (builtFromCacheTime??) >
+        <div class="cache-info-small">${i18n().using_cache_time} ${builtFromCacheTime?time} (${builtFromCacheTime?date?string("MMM dd yyyy")})</div>
+    </#if>
     <div style="clear:both;"></div>
-    
+
     <#if (numOfAuthors?? && numOfAuthors > 0) >
     <#else>
     

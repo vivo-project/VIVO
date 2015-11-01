@@ -7,6 +7,9 @@ corresponding changes in the included Templates. -->
 <#include "mapOfScienceSetup.ftl">
 
 <div id="map-of-science-response">
+	<#if (builtFromCacheTime??) >
+		<div class="cache-info-vis">${i18n().using_cache_time} ${builtFromCacheTime?time} (${builtFromCacheTime?date?string("MMM dd yyyy")})</div>
+	</#if>
 
 <#--
 <div id="subject-parent-entity" class="hide-dom-on-init">
@@ -84,3 +87,5 @@ corresponding changes in the included Templates. -->
 </div>
 
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip-1.0.0-rc3.min.js"></script>')}
+
+${stylesheets.add('<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/visualization.css" />')}

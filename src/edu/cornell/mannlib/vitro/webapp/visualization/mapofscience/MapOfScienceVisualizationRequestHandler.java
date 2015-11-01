@@ -90,7 +90,7 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 
 	private Set<String> getPublicationsForPerson(RDFService rdfService, String personUri) {
 		if (preferCachesForPersonMap() && VisualizationCaches.personToPublication.isCached()) {
-			Map<String, Set<String>> personToPublicationMap = VisualizationCaches.personToPublication.get(rdfService);
+			Map<String, Set<String>> personToPublicationMap = VisualizationCaches.personToPublication.get(rdfService).personToPublication;
 			return personToPublicationMap.get(personUri);
 		} else {
 			final Set<String> queryResults = new HashSet<String>();
@@ -253,7 +253,7 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 
 		Map<String, Set<String>> subOrgMap = VisualizationCaches.organizationSubOrgs.get(rdfService);
 		Map<String, Set<String>> organisationToPeopleMap = VisualizationCaches.organisationToPeopleMap.get(rdfService);
-		Map<String, Set<String>> personToPublicationMap = VisualizationCaches.personToPublication.get(rdfService);
+		Map<String, Set<String>> personToPublicationMap = VisualizationCaches.personToPublication.get(rdfService).personToPublication;
 		Map<String, String> publicationToJournalMap = VisualizationCaches.publicationToJournal.get(rdfService);
 
 		Set<String> orgPublications       = new HashSet<String>();
@@ -397,22 +397,22 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 				.getIndividualDao()
 				.getIndividualByURI(entityURI);
 
-		if (individual != null && individual.isVClass("http://xmlns.com/foaf/0.1/Person")) {
-
-			return getSubjectPersonEntityAndGenerateDataResponse(
-					vitroRequest, 
-					entityURI,
-					individual != null ? individual.getDataValue("http://www.w3.org/2000/01/rdf-schema#label") : "",
-					currentDataVisMode);
-			
-		} else {
-
-			return getSubjectEntityAndGenerateDataResponse(
-					vitroRequest, 
-					entityURI,
-					individual != null ? individual.getDataValue("http://www.w3.org/2000/01/rdf-schema#label") : "",
-					currentDataVisMode);
-		
+		try {
+			if (individual != null && individual.isVClass("http://xmlns.com/foaf/0.1/Person")) {
+				return getSubjectPersonEntityAndGenerateDataResponse(
+						vitroRequest,
+						entityURI,
+						individual != null ? individual.getDataValue("http://www.w3.org/2000/01/rdf-schema#label") : "",
+						currentDataVisMode);
+			} else {
+				return getSubjectEntityAndGenerateDataResponse(
+						vitroRequest,
+						entityURI,
+						individual != null ? individual.getDataValue("http://www.w3.org/2000/01/rdf-schema#label") : "",
+						currentDataVisMode);
+			}
+		} finally {
+			VisualizationCaches.buildMissing();
 		}
 	}
 	
@@ -437,11 +437,17 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
         
         if (UtilityFunctions.isEntityAPerson(vreq, entityURI)) {
         	body.put("entityType", "PERSON");
-        	
+			if (preferCachesForPersonMap() && VisualizationCaches.personToPublication.isCached()) {
+				body.put("builtFromCacheTime", VisualizationCaches.personToPublication.cachedWhen());
+			}
         } else {
         	body.put("entityType", "ORGANIZATION");
+			if (VisualizationCaches.personToPublication.isCached()) {
+				body.put("builtFromCacheTime", VisualizationCaches.personToPublication.cachedWhen());
+			}
         }
-        
+
+
         body.put("vivoDefaultNamespace", vreq.getWebappDaoFactory().getDefaultNamespace());
         
         return new TemplateResponseValues(standaloneTemplate, body);

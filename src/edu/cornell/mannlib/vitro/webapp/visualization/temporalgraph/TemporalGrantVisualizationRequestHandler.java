@@ -102,14 +102,17 @@ public class TemporalGrantVisualizationRequestHandler implements
 			} 
 			
 		} 		
-		
-		return getSubjectEntityAndGenerateDataResponse(
-				vitroRequest, 
-				log,
-				dataset,
-				entityURI,
-				currentDataMode);
-		
+
+		try {
+			return getSubjectEntityAndGenerateDataResponse(
+					vitroRequest,
+					log,
+					dataset,
+					entityURI,
+					currentDataMode);
+		} finally {
+			VisualizationCaches.buildMissing();
+		}
 	}
 	
 	private Map<String, String> prepareDataErrorResponse() {
@@ -279,17 +282,21 @@ public class TemporalGrantVisualizationRequestHandler implements
 			   String entityURI) {
 
 		String standaloneTemplate = "entityComparisonOnGrantsStandalone.ftl";
-		
+
 		String organizationLabel = OrganizationUtilityFunctions.getEntityLabelFromDAO(vreq,
 											  entityURI);
-		
+
 		Map<String, Object> body = new HashMap<String, Object>();
 		body.put("title", organizationLabel + " - Temporal Graph Visualization");
 		body.put("organizationURI", entityURI);
 		body.put("organizationLocalName", UtilityFunctions.getIndividualLocalName(entityURI, vreq));
 		body.put("vivoDefaultNamespace", vreq.getWebappDaoFactory().getDefaultNamespace());
 		body.put("organizationLabel", organizationLabel);
-		
+
+		if (VisualizationCaches.personToGrant.isCached()) {
+			body.put("builtFromCacheTime", VisualizationCaches.personToGrant.cachedWhen());
+		}
+
 		return new TemplateResponseValues(standaloneTemplate, body);
 	}
 	
