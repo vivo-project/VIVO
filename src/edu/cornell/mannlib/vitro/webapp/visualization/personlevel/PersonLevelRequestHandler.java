@@ -224,7 +224,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         String	standaloneTemplate = "coAuthorPersonLevel.ftl";
 
 		String property = ConfigurationProperties.getBean(vitroRequest).getProperty("visualization.d3");
-		if ("enabled".equalsIgnoreCase(property)) {
+		if (!"disabled".equalsIgnoreCase(property)) {
 			body.put("coAuthorshipData", new CollaborationDataViewHelper(coAuthorshipVO));
 			standaloneTemplate = "coAuthorPersonLevelD3.ftl";
 		}
@@ -286,7 +286,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         String	standaloneTemplate = "coPIPersonLevel.ftl";
 
 		String property = ConfigurationProperties.getBean(vitroRequest).getProperty("visualization.d3");
-		if ("enabled".equalsIgnoreCase(property)) {
+		if (!"disabled".equalsIgnoreCase(property)) {
 			body.put("coInvestigatorData", new CollaborationDataViewHelper(coPIVO));
 			standaloneTemplate = "coPIPersonLevelD3.ftl";
 		}
