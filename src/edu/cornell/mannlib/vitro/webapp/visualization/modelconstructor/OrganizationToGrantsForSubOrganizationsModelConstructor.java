@@ -4,6 +4,7 @@ package edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor;
 import java.util.HashSet;
 import java.util.Set;
 
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -20,11 +21,15 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.ModelConstructor;
 
+/**
+ * No longer used - will be removed
+ */
+@Deprecated
 public class OrganizationToGrantsForSubOrganizationsModelConstructor implements ModelConstructor {
 	
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 	
-	private Dataset dataset;
+	private RDFService rdfService;
 	
 	public static final String MODEL_TYPE = "ORGANIZATION_TO_GRANTS_FOR_SUBORGANIZATIONS";
 	public static final String MODEL_TYPE_HUMAN_READABLE = "Grants for specific organization via all descendants"; 
@@ -35,9 +40,9 @@ public class OrganizationToGrantsForSubOrganizationsModelConstructor implements 
 	
 	private long before, after;
 	
-	public OrganizationToGrantsForSubOrganizationsModelConstructor(String organizationURI, Dataset dataset) {
+	public OrganizationToGrantsForSubOrganizationsModelConstructor(String organizationURI, RDFService rdfService) {
 		this.organizationURI = organizationURI;
-		this.dataset = dataset;
+		this.rdfService = rdfService;
 	}
 	
 	private Set<String> constructOrganizationGrantsQueryTemplate(String constructProperty, String roleType) {
@@ -171,23 +176,12 @@ public class OrganizationToGrantsForSubOrganizationsModelConstructor implements 
 		log.debug("CONSTRUCT query string : " + constructQueries);
 		
 		for (String currentQuery : constructQueries) {
-
-			Query query = null;
-
 			try {
-				query = QueryFactory.create(QueryConstants.getSparqlPrefixQuery() + currentQuery, SYNTAX);
+				rdfService.sparqlConstructQuery(QueryConstants.getSparqlPrefixQuery() + currentQuery, constructedModel);
 			} catch (Throwable th) {
 				log.error("Could not create CONSTRUCT SPARQL query for query "
 						+ "string. " + th.getMessage());
 				log.error(currentQuery);
-			}
-
-			QueryExecution qe = QueryExecutionFactory.create(query, dataset);
-			
-			try {
-				qe.execConstruct(constructedModel);
-			} finally {
-				qe.close();
 			}
 		}
 		

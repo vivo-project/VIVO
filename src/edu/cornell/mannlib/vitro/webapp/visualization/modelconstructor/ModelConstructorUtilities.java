@@ -11,33 +11,49 @@ import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryP
 import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.factory.ModelFactoryInterface;
 import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.factory.PersonToGrantsFactory;
 
-@SuppressWarnings("serial")
+@SuppressWarnings("deprecation,serial")
 public class ModelConstructorUtilities {
-	
+
+	/**
+	 * @deprecated
+	 */
 	private static final Map<String, ModelFactoryInterface> modelTypeIdentifierToFactory = new HashMap<String, ModelFactoryInterface>() {{
-//		put(PersonToPublicationsModelConstructor.MODEL_TYPE, new PersonToPublicationsFactory());
-//		put(PeopleToPublicationsModelConstructor.MODEL_TYPE, new PeopleToPublicationsFactory());
+		// Currently in use, but probably should be deprecated with the others
 		put(PersonToGrantsModelConstructor.MODEL_TYPE, new PersonToGrantsFactory());
-//		put(PeopleToGrantsModelConstructor.MODEL_TYPE, new PeopleToGrantsFactory());
-//		put(OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE, new OrganizationToPublicationsForSubOrganizationsFactory());
-//		put(OrganizationToGrantsForSubOrganizationsModelConstructor.MODEL_TYPE, new OrganizationToGrantsForSubOrganizationsFactory());
-//		put(OrganizationAssociatedPeopleModelWithTypesConstructor.MODEL_TYPE, new OrganizationAssociatedPeopleModelWithTypesFactory());
-//		put(OrganizationModelWithTypesConstructor.MODEL_TYPE, new OrganizationModelWithTypesFactory());
-//		put(SubOrganizationWithinModelConstructor.MODEL_TYPE, new SubOrganizationWithinModelFactory());
+
+		/**
+		 * The following models are deprecated and will be removed
+		 */
+		put(PersonToPublicationsModelConstructor.MODEL_TYPE, new edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.factory.PersonToPublicationsFactory());
+		put(PeopleToPublicationsModelConstructor.MODEL_TYPE, new edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.factory.PeopleToPublicationsFactory());
+		put(PeopleToGrantsModelConstructor.MODEL_TYPE, new edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.factory.PeopleToGrantsFactory());
+		put(OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE, new edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.factory.OrganizationToPublicationsForSubOrganizationsFactory());
+		put(OrganizationToGrantsForSubOrganizationsModelConstructor.MODEL_TYPE, new edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.factory.OrganizationToGrantsForSubOrganizationsFactory());
+		put(OrganizationAssociatedPeopleModelWithTypesConstructor.MODEL_TYPE, new edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.factory.OrganizationAssociatedPeopleModelWithTypesFactory());
+		put(OrganizationModelWithTypesConstructor.MODEL_TYPE, new edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.factory.OrganizationModelWithTypesFactory());
+		put(SubOrganizationWithinModelConstructor.MODEL_TYPE, new edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.factory.SubOrganizationWithinModelFactory());
 	}};
-	
+
+	/**
+	 * @deprecated
+	 */
 	public static final Map<String, String> modelTypeToHumanReadableName = new HashMap<String, String>() {{
-//		put(PersonToPublicationsModelConstructor.MODEL_TYPE, PersonToPublicationsModelConstructor.MODEL_TYPE_HUMAN_READABLE);
-//		put(PeopleToPublicationsModelConstructor.MODEL_TYPE, PeopleToPublicationsModelConstructor.MODEL_TYPE_HUMAN_READABLE);
+		// Currently in use, but probably should be deprecated with the others
 		put(PersonToGrantsModelConstructor.MODEL_TYPE, PersonToGrantsModelConstructor.MODEL_TYPE_HUMAN_READABLE);
-//		put(PeopleToGrantsModelConstructor.MODEL_TYPE, PeopleToGrantsModelConstructor.MODEL_TYPE_HUMAN_READABLE);
-//		put(OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE, OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE_HUMAN_READABLE);
-//		put(OrganizationToGrantsForSubOrganizationsModelConstructor.MODEL_TYPE, OrganizationToGrantsForSubOrganizationsModelConstructor.MODEL_TYPE_HUMAN_READABLE);
-//		put(OrganizationAssociatedPeopleModelWithTypesConstructor.MODEL_TYPE, OrganizationAssociatedPeopleModelWithTypesConstructor.MODEL_TYPE_HUMAN_READABLE);
-//		put(OrganizationModelWithTypesConstructor.MODEL_TYPE, OrganizationModelWithTypesConstructor.MODEL_TYPE_HUMAN_READABLE);
-//		put(SubOrganizationWithinModelConstructor.MODEL_TYPE, SubOrganizationWithinModelConstructor.MODEL_TYPE_HUMAN_READABLE);
+
+		/**
+		 * The following models are deprecated and will be removed
+		 */
+		put(PersonToPublicationsModelConstructor.MODEL_TYPE, PersonToPublicationsModelConstructor.MODEL_TYPE_HUMAN_READABLE);
+		put(PeopleToPublicationsModelConstructor.MODEL_TYPE, PeopleToPublicationsModelConstructor.MODEL_TYPE_HUMAN_READABLE);
+		put(PeopleToGrantsModelConstructor.MODEL_TYPE, PeopleToGrantsModelConstructor.MODEL_TYPE_HUMAN_READABLE);
+		put(OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE, OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE_HUMAN_READABLE);
+		put(OrganizationToGrantsForSubOrganizationsModelConstructor.MODEL_TYPE, OrganizationToGrantsForSubOrganizationsModelConstructor.MODEL_TYPE_HUMAN_READABLE);
+		put(OrganizationAssociatedPeopleModelWithTypesConstructor.MODEL_TYPE, OrganizationAssociatedPeopleModelWithTypesConstructor.MODEL_TYPE_HUMAN_READABLE);
+		put(OrganizationModelWithTypesConstructor.MODEL_TYPE, OrganizationModelWithTypesConstructor.MODEL_TYPE_HUMAN_READABLE);
+		put(SubOrganizationWithinModelConstructor.MODEL_TYPE, SubOrganizationWithinModelConstructor.MODEL_TYPE_HUMAN_READABLE);
 	}};
-	
+
 	public static Model getOrConstructModel(String uri, String modelType, RDFService rdfService)
 			throws MalformedQueryParametersException {
 		return modelTypeIdentifierToFactory.get(modelType).getOrCreateModel(uri, rdfService);

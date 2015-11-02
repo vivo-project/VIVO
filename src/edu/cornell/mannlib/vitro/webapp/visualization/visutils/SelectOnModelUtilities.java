@@ -1,7 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.visutils;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -10,29 +9,16 @@ import java.util.Set;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import org.apache.commons.lang.StringUtils;
 
-import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
-import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.ModelConstructorUtilities;
-import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.OrganizationAssociatedPeopleModelWithTypesConstructor;
-import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.OrganizationModelWithTypesConstructor;
-import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.OrganizationToGrantsForSubOrganizationsModelConstructor;
-import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.OrganizationToPublicationsForSubOrganizationsModelConstructor;
-import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.PeopleToGrantsModelConstructor;
-import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.PeopleToPublicationsModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.PersonToGrantsModelConstructor;
-import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.PersonToPublicationsModelConstructor;
-import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.SubOrganizationWithinModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Entity;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Individual;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.MapOfScienceActivity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SubEntity;
 
 public class SelectOnModelUtilities {

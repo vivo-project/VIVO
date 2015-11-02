@@ -1,6 +1,7 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor;
 
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -17,6 +18,10 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.ModelConstructor;
 
+/**
+ * No longer used - will be removed
+ */
+@Deprecated
 public class SubOrganizationWithinModelConstructor implements ModelConstructor {
 	
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
@@ -24,7 +29,7 @@ public class SubOrganizationWithinModelConstructor implements ModelConstructor {
 	public static final String MODEL_TYPE = "SUBORGANIZATION_WITHIN_HIERARCHY_MODEL"; 
 	public static final String MODEL_TYPE_HUMAN_READABLE = "Bottom-up Organization hierarchy";
 	
-	private Dataset dataset;
+	private RDFService rdfService;
 	
 	private Model constructedModel;
 	
@@ -32,17 +37,8 @@ public class SubOrganizationWithinModelConstructor implements ModelConstructor {
 	
 	private long before, after;
 	
-	public SubOrganizationWithinModelConstructor(Dataset dataset) {
-		this.dataset = dataset;
-	}
-	
-	/**
-	 * This constructor is present so that we can abstract out the model construction process.
-	 * @param uri
-	 * @param dataset
-	 */
-	public SubOrganizationWithinModelConstructor(String uri, Dataset dataset) {
-		this.dataset = dataset;
+	public SubOrganizationWithinModelConstructor(RDFService rdfService) {
+		this.rdfService = rdfService;
 	}
 	
 	private String constructAllSubOrganizationsWithinQuery() {
@@ -74,23 +70,12 @@ public class SubOrganizationWithinModelConstructor implements ModelConstructor {
 		before = System.currentTimeMillis();
 		log.debug("CONSTRUCT query string : " + constructQuery);
 
-		Query query = null;
-
 		try {
-			query = QueryFactory.create(QueryConstants.getSparqlPrefixQuery()
-					+ constructQuery, SYNTAX);
+			rdfService.sparqlConstructQuery(QueryConstants.getSparqlPrefixQuery() + constructQuery, constructedModel);
 		} catch (Throwable th) {
 			log.error("Could not create CONSTRUCT SPARQL query for query "
 					+ "string. " + th.getMessage());
 			log.error(constructQuery);
-		}
-
-		QueryExecution qe = QueryExecutionFactory.create(query, dataset);
-
-		try {
-			qe.execConstruct(constructedModel);
-		} finally {
-			qe.close();
 		}
 
 		after = System.currentTimeMillis();
