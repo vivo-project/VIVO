@@ -232,10 +232,10 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 		return sparqlQuery;
 	}
 
-	public CollaborationData getQueryResult()
+	public CoInvestigationData getQueryResult()
 		throws MalformedQueryParametersException {
 
-		CollaborationData data = getCachedData(this.egoURI);
+		CoInvestigationData data = getCachedData(this.egoURI);
 		if (data != null) {
 			return data;
 		}
@@ -243,7 +243,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 		return getQueryResultAndCache();
 	}
 
-	private CollaborationData getCachedData(String egoURI) {
+	private CoInvestigationData getCachedData(String egoURI) {
 		CollaborationDataCacheEntry entry = collaborationDataCache.get(egoURI);
 		if (entry != null && !entry.hasExpired()) {
 			entry.accessTime = new Date().getTime();
@@ -254,10 +254,10 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 		return null;
 	}
 
-	private synchronized CollaborationData getQueryResultAndCache()
+	private synchronized CoInvestigationData getQueryResultAndCache()
 			throws MalformedQueryParametersException {
 
-		CollaborationData data = getCachedData(this.egoURI);
+		CoInvestigationData data = getCachedData(this.egoURI);
 		if (data != null) {
 			return data;
 		}
@@ -319,7 +319,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 
 	private static class CollaborationDataCacheEntry {
 		String uri;
-		CollaborationData data;
+		CoInvestigationData data;
 		long creationTime;
 		long accessTime;
 
@@ -489,8 +489,8 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 		}
 
 
-		public CollaborationData getData() {
-			return new CoInvestigationData(egoNode, nodes, edges);
+		public CoInvestigationData getData() {
+			return new CoInvestigationData(egoNode, nodes, edges, grantURLToVO);
 		}
 
 		private void createCoPIEdges(Map<String, Activity> grantURLToVO,
