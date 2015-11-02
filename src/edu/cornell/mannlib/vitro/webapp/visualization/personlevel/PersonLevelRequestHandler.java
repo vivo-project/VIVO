@@ -7,6 +7,7 @@ import java.util.Map;
 
 import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CoAuthorshipData;
+import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CoInvestigationData;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.CollaborationDataViewHelper;
 import org.apache.axis.utils.StringUtils;
 import org.apache.commons.logging.Log;
@@ -103,19 +104,11 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 			VitroRequest vitroRequest, Log log, Dataset dataset, String egoURI,
 			String visMode) throws MalformedQueryParametersException {
 		
-		if (VisualizationFrameworkConstants.COPI_VIS_MODE.equalsIgnoreCase(visMode)) { 
-        	
-			
-			
-        	ModelConstructor constructQueryRunner = 
-        			new CoPIGrantCountConstructQueryRunner(egoURI, vitroRequest.getRDFService(), log);
-    		Model constructedModel = constructQueryRunner.getConstructedModel();
-    		
-    		QueryRunner<CollaborationData> coPIQueryManager = 
-    				new CoPIGrantCountQueryRunner(egoURI, vitroRequest.getRDFService(), log);
-           
-            CollaborationData coPIData = coPIQueryManager.getQueryResult();
-            
+		if (VisualizationFrameworkConstants.COPI_VIS_MODE.equalsIgnoreCase(visMode)) {
+			CoPIGrantCountQueryRunner coPIQueryManager = new CoPIGrantCountQueryRunner(egoURI, vitroRequest.getRDFService(), log);
+
+			CoInvestigationData coPIData = coPIQueryManager.getQueryResult();
+
 	    	/*
 	    	 * grants over time sparkline
 	    	 */
@@ -123,8 +116,10 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 											 UtilityFunctions
 											 	.getIndividualLabelFromDAO(vitroRequest, egoURI));
 
-    		Map<String, Activity> grantsToURI = SelectOnModelUtilities.getGrantsForPerson(vitroRequest.getRDFService(), person, false);
-    		
+//    		Map<String, Activity> grantsToURI = SelectOnModelUtilities.getGrantsForPerson(vitroRequest.getRDFService(), person, false);
+
+			Map<String, Activity> grantsToURI = coPIData.getGrants();
+
         	/*
         	 * Create a map from the year to number of grants. Use the Grant's
         	 * parsedGrantYear to populate the data.
