@@ -15,7 +15,24 @@
 <div class="staticPageBackground">
     <div id="${visContainerID}">
         <script type="text/javascript">
-    
+            <#if sparklineVO.shortVisMode>
+                var visualizationOptions = {
+                    width: 150,
+                    height: 60,
+                    color: '3399CC',
+                    chartType: 'ls',
+                    chartLabel: 'r'
+                };
+            <#else>
+                var visualizationOptions = {
+                    width: 250,
+                    height: 75,
+                    color: '3399CC',
+                    chartType: 'ls',
+                    chartLabel: 'r'
+                };
+            </#if>
+
             function drawGrantCountVisualization(providedSparklineImgTD) {
             
                 var unknownYearGrantCounts = ${sparklineVO.unknownYearGrants};
@@ -50,17 +67,10 @@
                 }]));
 
                 <#else>
-         
-                </#if>    
+
+                </#if>
                 
-                 var visualizationOptions = {
-                    width: 150,
-                    height: 60,
-                    color: '3399CC',
-                    chartType: 'ls',
-                    chartLabel: 'r'
-                }
-                
+
                 /*
                 This means that all the publications have unknown years & we do not need to display
                 the sparkline.
@@ -236,7 +246,7 @@
                     var row = $('<tr>');
                     sparklineImgTD = $('<td>');
                     sparklineImgTD.attr('id', '${sparklineContainerID}_img');
-                    sparklineImgTD.attr('width', '150');
+                    sparklineImgTD.attr('width', visualizationOptions.width);
                     sparklineImgTD.attr('class', 'sparkline_style');
             
                     row.append(sparklineImgTD);

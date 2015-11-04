@@ -2,6 +2,7 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,6 +16,8 @@ public abstract class CollaborationData {
 	private Collaborator egoCollaborator;
 	private Set<Map<String, String>> NODE_SCHEMA;
 	private Set<Map<String, String>> EDGE_SCHEMA;
+
+	private Date builtFromCacheTime = null;
 		
 	public CollaborationData(Collaborator egoCollaborator, 
 							Set<Collaborator> collaborators, 
@@ -23,7 +26,9 @@ public abstract class CollaborationData {
 		this.collaborators = collaborators;
 		this.collaborations = collaborations;
 	}
-	
+
+	public Date getBuiltFromCacheTime() { return builtFromCacheTime; }
+
 	public Set<Collaborator> getCollaborators() {
 		return collaborators;
 	}
@@ -59,6 +64,8 @@ public abstract class CollaborationData {
 		
 		return EDGE_SCHEMA;
 	}
+
+	public void setBuiltFromCacheTime(Date time) { this.builtFromCacheTime = time; }
 
 	abstract Set<Map<String, String>> initializeEdgeSchema();
 	

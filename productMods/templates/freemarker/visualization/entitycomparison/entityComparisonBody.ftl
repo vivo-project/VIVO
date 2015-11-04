@@ -1,6 +1,9 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
 <div id="body">
+        <#if (builtFromCacheTime??) >
+            <div class="cache-info-vis">${i18n().using_cache_time} ${builtFromCacheTime?time} (${builtFromCacheTime?date?string("MMM dd yyyy")})</div>
+        </#if>
         <h2 id="header-entity-label">
             <span>
                 <a id="organizationMoniker" href="${organizationVivoProfileURL}" title="${i18n().organization_name}">${organizationLabel}</a>

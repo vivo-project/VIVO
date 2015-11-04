@@ -5,7 +5,11 @@ package edu.cornell.mannlib.vitro.webapp.visualization.personlevel;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CoAuthorshipData;
+import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CoInvestigationData;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.CollaborationDataViewHelper;
+import org.apache.axis.utils.StringUtils;
 import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.query.Dataset;
@@ -100,19 +104,11 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 			VitroRequest vitroRequest, Log log, Dataset dataset, String egoURI,
 			String visMode) throws MalformedQueryParametersException {
 		
-		if (VisualizationFrameworkConstants.COPI_VIS_MODE.equalsIgnoreCase(visMode)) { 
-        	
-			
-			
-        	ModelConstructor constructQueryRunner = 
-        			new CoPIGrantCountConstructQueryRunner(egoURI, vitroRequest.getRDFService(), log);
-    		Model constructedModel = constructQueryRunner.getConstructedModel();
-    		
-    		QueryRunner<CollaborationData> coPIQueryManager = 
-    				new CoPIGrantCountQueryRunner(egoURI, vitroRequest.getRDFService(), log);
-           
-            CollaborationData coPIData = coPIQueryManager.getQueryResult();
-            
+		if (VisualizationFrameworkConstants.COPI_VIS_MODE.equalsIgnoreCase(visMode)) {
+			CoPIGrantCountQueryRunner coPIQueryManager = new CoPIGrantCountQueryRunner(egoURI, vitroRequest.getRDFService(), log);
+
+			CoInvestigationData coPIData = coPIQueryManager.getQueryResult();
+
 	    	/*
 	    	 * grants over time sparkline
 	    	 */
@@ -120,8 +116,10 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 											 UtilityFunctions
 											 	.getIndividualLabelFromDAO(vitroRequest, egoURI));
 
-    		Map<String, Activity> grantsToURI = SelectOnModelUtilities.getGrantsForPerson(dataset, person, false);
-    		
+//    		Map<String, Activity> grantsToURI = SelectOnModelUtilities.getGrantsForPerson(vitroRequest.getRDFService(), person, false);
+
+			Map<String, Activity> grantsToURI = coPIData.getGrants();
+
         	/*
         	 * Create a map from the year to number of grants. Use the Grant's
         	 * parsedGrantYear to populate the data.
@@ -166,26 +164,12 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 	    	
         } else {
         	
-        	QueryRunner<CollaborationData> coAuthorshipQueryManager = 
+        	CoAuthorshipQueryRunner coAuthorshipQueryManager =
         			new CoAuthorshipQueryRunner(egoURI, vitroRequest.getRDFService(), log);
-        
-        	CollaborationData coAuthorshipData = coAuthorshipQueryManager.getQueryResult();
 
-			/*
-			 * When the front-end for the person level vis has to be displayed we render couple of
-			 * sparklines. This will prepare all the data for the sparklines & other requested
-			 * files.
-			 * */
-			SubEntity person = new SubEntity(egoURI,
-					UtilityFunctions
-							.getIndividualLabelFromDAO(vitroRequest, egoURI));
+			CoAuthorshipData coAuthorshipData = coAuthorshipQueryManager.getQueryResult();
 
-			Map<String, Activity> publicationsToURI;
-			if (coAuthorshipData instanceof CoAuthorshipData) {
-				publicationsToURI = ((CoAuthorshipData)coAuthorshipData).getDocuments();
-			} else {
-				publicationsToURI = SelectOnModelUtilities.getPublicationsForPerson(dataset, person, false);
-			}
+			Map<String, Activity> publicationsToURI = coAuthorshipData.getDocuments();
 
 	    	/*
 	    	 * Create a map from the year to number of publications. Use the BiboDocument's
@@ -238,8 +222,14 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		Map<String, Object> body = new HashMap<String, Object>();
 		
         String	standaloneTemplate = "coAuthorPersonLevel.ftl";
-        
-        body.put("egoURIParam", egoURI);
+
+		String property = ConfigurationProperties.getBean(vitroRequest).getProperty("visualization.d3");
+		if (!"disabled".equalsIgnoreCase(property)) {
+			body.put("coAuthorshipData", new CollaborationDataViewHelper(coAuthorshipVO));
+			standaloneTemplate = "coAuthorPersonLevelD3.ftl";
+		}
+
+		body.put("egoURIParam", egoURI);
         
         body.put("egoLocalName", UtilityFunctions.getIndividualLocalName(egoURI, vitroRequest));
         
@@ -258,6 +248,10 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		
 		body.put("egoPubSparklineVO", egoPubSparklineVO);
 		body.put("uniqueCoauthorsSparklineVO", uniqueCoauthorsSparklineVO);
+
+		if (coAuthorshipVO.getBuiltFromCacheTime() != null) {
+			body.put("builtFromCacheTime", coAuthorshipVO.getBuiltFromCacheTime());
+		}
 
 		body.put("title",  title + "Person Level Visualization");
 
@@ -290,7 +284,13 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		}
 		
         String	standaloneTemplate = "coPIPersonLevel.ftl";
-		
+
+		String property = ConfigurationProperties.getBean(vitroRequest).getProperty("visualization.d3");
+		if (!"disabled".equalsIgnoreCase(property)) {
+			body.put("coInvestigatorData", new CollaborationDataViewHelper(coPIVO));
+			standaloneTemplate = "coPIPersonLevelD3.ftl";
+		}
+
 		body.put("egoGrantSparklineVO", egoGrantSparklineVO);
 		body.put("uniqueCoInvestigatorsSparklineVO", uniqueCopisSparklineVO);        	
 

@@ -46,6 +46,9 @@ $(document).ready(function () {
 <#assign currentParameterObject = grantParameter>
 
 <div id="temporal-graph-response">
+<#if (builtFromCacheTime??) >
+    <div class="cache-info-small">${i18n().using_cache_time} ${builtFromCacheTime?time} (${builtFromCacheTime?date?string("MMM dd yyyy")})</div>
+</#if>
 
 <#include "entityComparisonBody.ftl">
 

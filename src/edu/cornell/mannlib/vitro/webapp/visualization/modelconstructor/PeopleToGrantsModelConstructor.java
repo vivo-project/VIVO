@@ -4,6 +4,7 @@ package edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor;
 import java.util.HashSet;
 import java.util.Set;
 
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -20,11 +21,15 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.ModelConstructor;
 
+/**
+ * No longer used - will be removed
+ */
+@Deprecated
 public class PeopleToGrantsModelConstructor implements ModelConstructor {
 	
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 	
-	private Dataset dataset;
+	private RDFService rdfService;
 	
 	public static final String MODEL_TYPE = "PEOPLE_TO_GRANTS"; 
 	public static final String MODEL_TYPE_HUMAN_READABLE = "Grants for all people via all roles";
@@ -33,8 +38,8 @@ public class PeopleToGrantsModelConstructor implements ModelConstructor {
 	
 	private long before, after;
 	
-	public PeopleToGrantsModelConstructor(Dataset dataset) {
-		this.dataset = dataset;
+	public PeopleToGrantsModelConstructor(RDFService rdfService) {
+		this.rdfService = rdfService;
 	}
 	
 private Set<String> constructPersonGrantsQueryTemplate(String constructProperty, String roleType) {
@@ -142,25 +147,12 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 		log.debug("CONSTRUCT query string : " + constructQueries);
 		
 		for (String currentQuery : constructQueries) {
-
-			
-			Query query = null;
-
 			try {
-				query = QueryFactory.create(QueryConstants.getSparqlPrefixQuery() + currentQuery, SYNTAX);
+				rdfService.sparqlConstructQuery(QueryConstants.getSparqlPrefixQuery() + currentQuery, constructedModel);
 			} catch (Throwable th) {
 				log.error("Could not create CONSTRUCT SPARQL query for query "
 						+ "string. " + th.getMessage());
 				log.error(currentQuery);
-			}
-			
-			
-			QueryExecution qe = QueryExecutionFactory.create(query, dataset);
-			
-			try {
-				qe.execConstruct(constructedModel);
-			} finally {
-				qe.close();
 			}
 		}
 		

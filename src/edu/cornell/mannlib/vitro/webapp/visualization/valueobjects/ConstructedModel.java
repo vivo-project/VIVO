@@ -3,6 +3,7 @@ package edu.cornell.mannlib.vitro.webapp.visualization.valueobjects;
 
 import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.ModelConstructorUtilities;
 
+@SuppressWarnings("deprecation")
 public class ConstructedModel {
 	
 	private String uri;

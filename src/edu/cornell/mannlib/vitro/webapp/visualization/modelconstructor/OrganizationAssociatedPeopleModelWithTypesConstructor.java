@@ -1,6 +1,8 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor;
 
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -17,6 +19,10 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.ModelConstructor;
 
+/**
+ * No longer used - will be removed
+ */
+@Deprecated
 public class OrganizationAssociatedPeopleModelWithTypesConstructor implements ModelConstructor {
 	
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
@@ -24,7 +30,7 @@ public class OrganizationAssociatedPeopleModelWithTypesConstructor implements Mo
 	public static final String MODEL_TYPE = "ORGANIZATION_ASSOCIATED_MODEL_WITH_TYPES";
 	public static final String MODEL_TYPE_HUMAN_READABLE = "People for specific organization"; 
 	
-	private Dataset dataset;
+	private RDFService rdfService;
 	
 	private Model constructedModel;
 	
@@ -34,8 +40,8 @@ public class OrganizationAssociatedPeopleModelWithTypesConstructor implements Mo
 
 	private String organizationURI;
 	
-	public OrganizationAssociatedPeopleModelWithTypesConstructor(String organizationURI, Dataset dataset) {
-		this.dataset = dataset;
+	public OrganizationAssociatedPeopleModelWithTypesConstructor(String organizationURI, RDFService rdfService) {
+		this.rdfService = rdfService;
 		this.organizationURI = organizationURI;
 	}
 	
@@ -73,23 +79,11 @@ public class OrganizationAssociatedPeopleModelWithTypesConstructor implements Mo
 		before = System.currentTimeMillis();
 		log.debug("CONSTRUCT query string : " + constructQuery);
 
-		Query query = null;
-
 		try {
-			query = QueryFactory.create(QueryConstants.getSparqlPrefixQuery()
-					+ constructQuery, SYNTAX);
+			rdfService.sparqlConstructQuery(QueryConstants.getSparqlPrefixQuery() + constructQuery, constructedModel);
 		} catch (Throwable th) {
-			log.error("Could not create CONSTRUCT SPARQL query for query "
-					+ "string. " + th.getMessage());
+			log.error("Could not create CONSTRUCT SPARQL query for query string. " + th.getMessage());
 			log.error(constructQuery);
-		}
-
-		QueryExecution qe = QueryExecutionFactory.create(query, dataset);
-
-		try {
-			qe.execConstruct(constructedModel);
-		} finally {
-			qe.close();
 		}
 
 		after = System.currentTimeMillis();

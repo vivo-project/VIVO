@@ -2,7 +2,6 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.coauthorship;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -15,14 +14,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
-import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.query.ResultSetFactory;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
-import net.sf.jga.algorithms.Unique;
+import edu.cornell.mannlib.vitro.webapp.visualization.utilities.VisualizationCaches;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.jena.iri.IRI;
@@ -34,7 +31,6 @@ import com.hp.hpl.jena.query.Syntax;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CoAuthorshipData;
-import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CollaborationData;
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CollaboratorComparator;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
@@ -52,11 +48,13 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UniqueIDGenerator
  * 
  * @author cdtank
  */
-public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
+public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 
 	private static final int MAX_AUTHORS_PER_PAPER_ALLOWED = 100;
 
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
+
+	private static boolean preferCaches = false;
 
 	private String egoURI;
 
@@ -90,34 +88,46 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 
 		@Override
 		protected void processQuerySolution(QuerySolution qs) {
+			RDFNode egoAuthorURLNode = qs.get(QueryFieldLabels.AUTHOR_URL);
+			RDFNode authorLabelNode = qs.get(QueryFieldLabels.AUTHOR_LABEL);
+			RDFNode documentNode = qs.get(QueryFieldLabels.DOCUMENT_URL);
+			RDFNode coAuthorURLNode = qs.get(QueryFieldLabels.CO_AUTHOR_URL);
+			RDFNode coAuthorLabelNode = qs.get(QueryFieldLabels.CO_AUTHOR_LABEL);
+			RDFNode publicationDateNode = qs.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
+
+			String authorURI    = egoAuthorURLNode == null ? null : egoAuthorURLNode.asLiteral().getString();
+			String authorName   = authorLabelNode == null ? null : authorLabelNode.asLiteral().getString();
+			String documentURI  = documentNode == null ? null : documentNode.asLiteral().getString();
+			String documentDate = publicationDateNode == null ? null : publicationDateNode.asLiteral().getString();
+			String coAuthorURI  = coAuthorURLNode == null ? null : coAuthorURLNode.asLiteral().getString();
+			String coAuthorName = coAuthorLabelNode == null ? null : coAuthorLabelNode.asLiteral().getString();
+
+			processEntry(authorURI, authorName, documentURI, documentDate, coAuthorURI, coAuthorName);
+		}
+
+		public void processEntry(String authorURI, String authorName, String documentURI, String documentDate, String coAuthorURI, String coAuthorName) {
 			/*
 			 * We only want to create only ONE ego node.
 			 * */
-			RDFNode egoAuthorURLNode = qs.get(QueryFieldLabels.AUTHOR_URL);
-			if (nodeURLToVO.containsKey(egoAuthorURLNode.toString())) {
-
-				egoNode = nodeURLToVO.get(egoAuthorURLNode.toString());
-
+			if (nodeURLToVO.containsKey(authorURI)) {
+				egoNode = nodeURLToVO.get(authorURI);
 			} else {
-
-				egoNode = new Collaborator(egoAuthorURLNode.toString(), nodeIDGenerator);
+				egoNode = new Collaborator(authorURI, nodeIDGenerator);
 				nodes.add(egoNode);
-				nodeURLToVO.put(egoAuthorURLNode.toString(), egoNode);
+				nodeURLToVO.put(authorURI, egoNode);
 
-				RDFNode authorLabelNode = qs.get(QueryFieldLabels.AUTHOR_LABEL);
-				if (authorLabelNode != null) {
-					egoNode.setCollaboratorName(authorLabelNode.toString());
+				if (authorName != null) {
+					egoNode.setCollaboratorName(authorName);
 				}
 			}
 
-			RDFNode documentNode = qs.get(QueryFieldLabels.DOCUMENT_URL);
 			Activity biboDocument;
 
-			if (biboDocumentURLToVO.containsKey(documentNode.toString())) {
-				biboDocument = biboDocumentURLToVO.get(documentNode.toString());
+			if (biboDocumentURLToVO.containsKey(documentURI)) {
+				biboDocument = biboDocumentURLToVO.get(documentURI);
 			} else {
-				biboDocument = createDocumentVO(qs, documentNode.toString());
-				biboDocumentURLToVO.put(documentNode.toString(), biboDocument);
+				biboDocument = createDocumentVO(documentURI, documentDate);
+				biboDocumentURLToVO.put(documentURI, biboDocument);
 			}
 
 			egoNode.addActivity(biboDocument);
@@ -127,27 +137,21 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 			 * we do not want a co-author node or Collaboration if the publication has only one
 			 * author and that happens to be the ego.
 			 * */
-			if (qs.get(QueryFieldLabels.AUTHOR_URL).toString().equalsIgnoreCase(
-					qs.get(QueryFieldLabels.CO_AUTHOR_URL).toString())) {
+			if (authorURI.equalsIgnoreCase(coAuthorURI)) {
 				return;
 			}
 
 			Collaborator coAuthorNode;
 
-			RDFNode coAuthorURLNode = qs.get(QueryFieldLabels.CO_AUTHOR_URL);
-			if (nodeURLToVO.containsKey(coAuthorURLNode.toString())) {
-
-				coAuthorNode = nodeURLToVO.get(coAuthorURLNode.toString());
-
+			if (nodeURLToVO.containsKey(coAuthorURI)) {
+				coAuthorNode = nodeURLToVO.get(coAuthorURI);
 			} else {
-
-				coAuthorNode = new Collaborator(coAuthorURLNode.toString(), nodeIDGenerator);
+				coAuthorNode = new Collaborator(coAuthorURI, nodeIDGenerator);
 				nodes.add(coAuthorNode);
-				nodeURLToVO.put(coAuthorURLNode.toString(), coAuthorNode);
+				nodeURLToVO.put(coAuthorURI, coAuthorNode);
 
-				RDFNode coAuthorLabelNode = qs.get(QueryFieldLabels.CO_AUTHOR_LABEL);
-				if (coAuthorLabelNode != null) {
-					coAuthorNode.setCollaboratorName(coAuthorLabelNode.toString());
+				if (coAuthorName != null) {
+					coAuthorNode.setCollaboratorName(coAuthorName);
 				}
 			}
 
@@ -221,17 +225,16 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 					edgeUniqueIdentifierToVO);
 		}
 
-		public CollaborationData getCollaborationData() {
+		public CoAuthorshipData getCollaborationData() {
 			return new CoAuthorshipData(egoNode, nodes, edges, biboDocumentURLToVO);
 		}
 
-		private Activity createDocumentVO(QuerySolution solution, String documentURL) {
+		private Activity createDocumentVO(String documentURL, String documentDate) {
 
 			Activity biboDocument = new Activity(documentURL);
 
-			RDFNode publicationDateNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
-			if (publicationDateNode != null) {
-				biboDocument.setActivityDate(publicationDateNode.toString());
+			if (documentDate != null) {
+				biboDocument.setActivityDate(documentDate);
 			}
 
 			return biboDocument;
@@ -413,17 +416,17 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 				+ "WHERE\n"
 				+ "{\n"
                 + "    {\n"
-                + "        <" + queryURI + "> rdf:type foaf:Person ;"
-                + "                rdfs:label ?authorLabel ;"
-                + "                core:relatedBy ?authorshipNode . \n"
-                + "        ?authorshipNode rdf:type core:Authorship ;"
-                + "                core:relates ?document . \n"
-                + "        ?document rdf:type <http://purl.obolibrary.org/obo/IAO_0000030> ; \n"
-                + "                core:relatedBy ?coAuthorshipNode . \n"
-                + "        ?coAuthorshipNode rdf:type core:Authorship ; \n"
-                + "                core:relates ?coAuthorPerson . \n"
-                + "        ?coAuthorPerson rdf:type foaf:Person ; \n"
-                + "                rdfs:label ?coAuthorPersonLabel . \n"
+				+ "        <" + queryURI + "> rdf:type foaf:Person ;"
+				+ "                rdfs:label ?authorLabel ;"
+				+ "                core:relatedBy ?authorshipNode . \n"
+				+ "        ?authorshipNode rdf:type core:Authorship ;"
+				+ "                core:relates ?document . \n"
+				+ "        ?document rdf:type <http://purl.obolibrary.org/obo/IAO_0000030> ; \n"
+				+ "                core:relatedBy ?coAuthorshipNode . \n"
+				+ "        ?coAuthorshipNode rdf:type core:Authorship ; \n"
+				+ "                core:relates ?coAuthorPerson . \n"
+				+ "        ?coAuthorPerson rdf:type foaf:Person ; \n"
+				+ "                rdfs:label ?coAuthorPersonLabel . \n"
                 + "    }\n"
                 + "    UNION\n"
                 + "    {\n"
@@ -441,10 +444,10 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 		return sparqlConstruct;
 	}
 
-	public CollaborationData getQueryResult()
+	public CoAuthorshipData getQueryResult()
 		throws MalformedQueryParametersException {
 
-		CollaborationData data = getCachedData(this.egoURI);
+		CoAuthorshipData data = getCachedData(this.egoURI);
 		if (data != null) {
 			return data;
 		}
@@ -452,7 +455,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 		return getQueryResultAndCache();
 	}
 
-	private CollaborationData getCachedData(String egoURI) {
+	private CoAuthorshipData getCachedData(String egoURI) {
 		CollaborationDataCacheEntry entry = collaborationDataCache.get(egoURI);
 		if (entry != null && !entry.hasExpired()) {
 			entry.accessTime = new Date().getTime();
@@ -463,10 +466,10 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 		return null;
 	}
 
-	private synchronized CollaborationData getQueryResultAndCache()
+	private synchronized CoAuthorshipData getQueryResultAndCache()
 			throws MalformedQueryParametersException {
 
-		CollaborationData data = getCachedData(this.egoURI);
+		CoAuthorshipData data = getCachedData(this.egoURI);
 		if (data != null) {
 			return data;
 		}
@@ -487,20 +490,60 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 			throw new MalformedQueryParametersException("URI parameter is either null or empty.");
 		}
 
-		try {
-            Model constructedModel = ModelFactory.createDefaultModel();
-            rdfService.sparqlConstructQuery(generateEgoCoAuthorshipSparqlConstruct(this.egoURI), constructedModel);
-            QueryResultConsumer consumer = new QueryResultConsumer();
-            QueryExecution qe = QueryExecutionFactory.create(generateEgoCoAuthorshipSparqlQuery(this.egoURI), constructedModel);
-            try {
-                consumer.processResultSet(qe.execSelect());
-            } finally {
-                qe.close();
-            }
-			data = consumer.getCollaborationData();
-		} catch (RDFServiceException e) {
-			log.error("Unable to execute query", e);
-			throw new RuntimeException(e);
+		Date cacheTime = null;
+		QueryResultConsumer consumer = new QueryResultConsumer();
+
+		// If we've had long running queries (preferCaches), and the caches are available, use the cache
+		if (preferCaches && VisualizationCaches.personToPublication.isCached()) {
+			cacheTime = VisualizationCaches.personToPublication.cachedWhen();
+
+			Map<String, String>      personLabelsMap         = VisualizationCaches.personLabels.get(rdfService);
+			Map<String, Set<String>> personToPublicationMap  = VisualizationCaches.personToPublication.get(rdfService).personToPublication;
+			Map<String, Set<String>> publicationToPersonMap  = VisualizationCaches.personToPublication.get(rdfService).publicationToPerson;
+			Map<String, String>      publicationToYearMap    = VisualizationCaches.publicationToYear.get(rdfService);
+
+			String authorURI = this.egoURI;
+			String authorName = personLabelsMap.get(authorURI);
+			for (String documentURI : personToPublicationMap.get(authorURI)) {
+				String documentDate = publicationToYearMap.get(documentURI);
+				for (String coAuthorURI : publicationToPersonMap.get(documentURI)) {
+					String coAuthorName = personLabelsMap.get(coAuthorURI);
+					consumer.processEntry(authorURI, authorName, documentURI, documentDate, coAuthorURI, coAuthorName);
+				}
+			}
+			consumer.endProcessing();
+		} else {
+			// Not use the caches, so query the triple store - recording the time it took
+			long queryStart = System.currentTimeMillis();
+			try {
+				Model constructedModel = ModelFactory.createDefaultModel();
+				rdfService.sparqlConstructQuery(generateEgoCoAuthorshipSparqlConstruct(this.egoURI), constructedModel);
+				QueryExecution qe = QueryExecutionFactory.create(generateEgoCoAuthorshipSparqlQuery(this.egoURI), constructedModel);
+				try {
+					consumer.processResultSet(qe.execSelect());
+				} finally {
+					qe.close();
+				}
+			} catch (RDFServiceException e) {
+				log.error("Unable to execute query", e);
+				throw new RuntimeException(e);
+			} finally {
+				// If the query took more than 5 seconds, start using the caches
+				if (System.currentTimeMillis() - queryStart > 5000) {
+					// If the caches haven't already been built, request a rebuild
+					if (!preferCaches && !VisualizationCaches.personToPublication.isCached()) {
+						VisualizationCaches.rebuildAll();
+					}
+
+					// Attempt to use caches next time
+					preferCaches = true;
+				}
+			}
+		}
+
+		data = consumer.getCollaborationData();
+		if (cacheTime != null) {
+			data.setBuiltFromCacheTime(cacheTime);
 		}
 
 		CollaborationDataCacheEntry newEntry = new CollaborationDataCacheEntry();
@@ -531,7 +574,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 
 	private static class CollaborationDataCacheEntry {
 		String uri;
-		CollaborationData data;
+		CoAuthorshipData data;
 		long creationTime;
 		long accessTime;
 

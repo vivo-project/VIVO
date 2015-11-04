@@ -70,9 +70,6 @@
                 ?editorObj rdfs:label ?editor .
             }
             OPTIONAL { ?authorship core:hideFromDisplay ?hideThis }
-        <critical-data-required>
-            FILTER ( bound(?infoResource) )
-        </critical-data-required>
         } ORDER BY ?subclass  DESC(?dateTime) ?infoResourceName
     </query-select>
 

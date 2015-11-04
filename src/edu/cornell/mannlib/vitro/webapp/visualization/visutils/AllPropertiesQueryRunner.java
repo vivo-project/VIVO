@@ -2,6 +2,9 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.visutils;
 
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -37,52 +40,21 @@ public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
 	private String filterRule, individualURI;
-	private Dataset dataset;
+	private RDFService rdfService;
 
 	private Log log = LogFactory.getLog(AllPropertiesQueryRunner.class.getName());
 
 	public AllPropertiesQueryRunner(String individualURI,
 							   String filterRule,
-							   Dataset dataset, 
+							   RDFService rdfService,
 							   Log log) {
 
 		this.individualURI = individualURI;
 		this.filterRule = filterRule;
-		this.dataset = dataset;
+		this.rdfService = rdfService;
 		this.log = log;
 		
 	}
-
-	private GenericQueryMap createJavaValueObjects(ResultSet resultSet) {
-		
-		GenericQueryMap queryResult = new GenericQueryMap();
-		
-		while (resultSet.hasNext()) {
-			QuerySolution solution = resultSet.nextSolution();
-			
-			
-			RDFNode predicateNode = solution.get(QueryFieldLabels.PREDICATE);
-			RDFNode objectNode = solution.get(QueryFieldLabels.OBJECT);
-			
-			if (predicateNode != null && objectNode != null) {
-				queryResult.addEntry(predicateNode.toString(), 
-									   objectNode.toString());
-			} 
-			
-		}
-		
-		return queryResult;
-	}
-
-	private ResultSet executeQuery(String queryText,
-								   Dataset dataset) {
-
-        QueryExecution queryExecution = null;
-        Query query = QueryFactory.create(queryText, SYNTAX);
-
-        queryExecution = QueryExecutionFactory.create(query, dataset);
-        return queryExecution.execSelect();
-    }
 
 	private String generateGenericSparqlQuery(String queryURI, String filterRule) {
 //		Resource uri1 = ResourceFactory.createResource(queryURI);
@@ -130,11 +102,35 @@ public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
             throw new MalformedQueryParametersException("URI parameter is either null or empty.");
         }
 
-		ResultSet resultSet	= executeQuery(generateGenericSparqlQuery(
-												this.individualURI, 
-												this.filterRule),
-										   this.dataset);
+		CreateJavaVOConsumer consumer = new CreateJavaVOConsumer();
+		try {
+			rdfService.sparqlSelectQuery(generateGenericSparqlQuery(
+					this.individualURI,
+					this.filterRule),
+					consumer);
+		} catch (RDFServiceException e) {
+			log.error("Unable to execute query", e);
+			throw new MalformedQueryParametersException(e);
+		}
+		return consumer.getMap();
+	}
 
-		return createJavaValueObjects(resultSet);
+	private class CreateJavaVOConsumer extends ResultSetConsumer {
+		GenericQueryMap queryResult = new GenericQueryMap();
+
+		@Override
+		protected void processQuerySolution(QuerySolution qs) {
+			RDFNode predicateNode = qs.get(QueryFieldLabels.PREDICATE);
+			RDFNode objectNode = qs.get(QueryFieldLabels.OBJECT);
+
+			if (predicateNode != null && objectNode != null) {
+				queryResult.addEntry(predicateNode.toString(),
+						objectNode.toString());
+			}
+		}
+
+		public GenericQueryMap getMap() {
+			return queryResult;
+		}
 	}
 }

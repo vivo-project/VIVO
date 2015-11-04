@@ -5,6 +5,8 @@ package edu.cornell.mannlib.vitro.webapp.visualization.utilities;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.jena.iri.IRI;
@@ -71,10 +73,10 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 									+ " || ?predicate = rdfs:label "   
 									+ " || ?predicate =  <http://www.w3.org/2006/vcard/ns#title>";
 			
-			QueryRunner<GenericQueryMap> profileQueryHandler = 
+			AllPropertiesQueryRunner profileQueryHandler =
 					new AllPropertiesQueryRunner(individualURI, 
 												  filterRule,
-												  dataset,
+												  vitroRequest.getRDFService(),
 												  log);
 			
 			GenericQueryMap profilePropertiesToValues = 
@@ -104,15 +106,16 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			
 			
 			
-			QueryRunner<ResultSet> imageQueryHandler = 
+			GenericQueryRunner imageQueryHandler =
 					new GenericQueryRunner(fieldLabelToOutputFieldLabel,
 											"",
 											whereClause,
 											"",
 											dataset);
-			
-			return getThumbnailInformation(imageQueryHandler.getQueryResult(),
-											   fieldLabelToOutputFieldLabel, vitroRequest);
+
+			ThumbnailInformationConsumer consumer = new ThumbnailInformationConsumer(vitroRequest, fieldLabelToOutputFieldLabel);
+			imageQueryHandler.sparqlSelectQuery(vitroRequest.getRDFService(), consumer);
+			return consumer.getInformation();
 
 		} else if (VisualizationFrameworkConstants.ARE_PUBLICATIONS_AVAILABLE_UTILS_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
@@ -130,7 +133,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 
 			String groupOrderClause = "GROUP BY ?" + QueryFieldLabels.AUTHOR_URL + " \n"; 
 			
-			QueryRunner<ResultSet> numberOfPublicationsQueryHandler = 
+			GenericQueryRunner numberOfPublicationsQueryHandler =
 			new GenericQueryRunner(fieldLabelToOutputFieldLabel,
 									aggregationRules,
 									whereClause,
@@ -138,9 +141,10 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 									dataset);
 			
 			Gson publicationsInformation = new Gson();
-			
-			return publicationsInformation.toJson(getNumberOfPublicationsForIndividual(
-					numberOfPublicationsQueryHandler.getQueryResult()));
+
+			NumPubsForIndividualConsumer consumer = new NumPubsForIndividualConsumer();
+			numberOfPublicationsQueryHandler.sparqlSelectQuery(vitroRequest.getRDFService(), consumer);
+			return publicationsInformation.toJson(consumer.getMap());
 				
 		} else if (VisualizationFrameworkConstants.ARE_GRANTS_AVAILABLE_UTILS_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
@@ -170,7 +174,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 									+ "FILTER (?subclass != core:PrincipalInvestigatorRole && "
 									+ "?subclass != core:CoPrincipalInvestigatorRole)}";
 
-			QueryRunner<ResultSet> numberOfGrantsQueryHandler = 
+			GenericQueryRunner numberOfGrantsQueryHandler =
 			new GenericQueryRunner(fieldLabelToOutputFieldLabel,
 									aggregationRules,
 									whereClause,
@@ -178,9 +182,11 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 									dataset);
 			
 			Gson grantsInformation = new Gson();
-			
-			return grantsInformation.toJson(getNumberOfGrantsForIndividual(
-					numberOfGrantsQueryHandler.getQueryResult()));
+
+			NumGrantsForIndividualConsumer consumer = new NumGrantsForIndividualConsumer();
+			numberOfGrantsQueryHandler.sparqlSelectQuery(vitroRequest.getRDFService(), consumer);
+
+			return grantsInformation.toJson(consumer.getMap());
 				
 		} else if (VisualizationFrameworkConstants.COAUTHOR_UTILS_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
@@ -319,17 +325,16 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 										+ "ORDER BY DESC(?numOfChildren)\n" 
 										+ "LIMIT 1\n";
 			
-			QueryRunner<ResultSet> highestLevelOrganizationQueryHandler = 
+			GenericQueryRunner highestLevelOrganizationQueryHandler =
 					new GenericQueryRunner(fieldLabelToOutputFieldLabel,
 											aggregationRules,
 											whereClause,
 											groupOrderClause,
 											dataset);
-			
-			return getHighestLevelOrganizationTemporalGraphVisURL(
-							highestLevelOrganizationQueryHandler.getQueryResult(),
-							fieldLabelToOutputFieldLabel,
-							vitroRequest);
+
+			HighetTopLevelOrgTemporalGraphURLConsumer consumer = new HighetTopLevelOrgTemporalGraphURLConsumer(vitroRequest, fieldLabelToOutputFieldLabel);
+			highestLevelOrganizationQueryHandler.sparqlSelectQuery(vitroRequest.getRDFService(), consumer);
+			return consumer.getTopLevelURL();
 			
 		} else {
 			
@@ -343,110 +348,136 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 
 	}
 
-	private String getHighestLevelOrganizationTemporalGraphVisURL(ResultSet resultSet,
-			   Map<String, String> fieldLabelToOutputFieldLabel,
-			   VitroRequest vitroRequest) {
+	private class HighetTopLevelOrgTemporalGraphURLConsumer extends ResultSetConsumer {
+		private VitroRequest vitroRequest;
+		private Map<String, String> fieldLabelToOutputFieldLabel;
+		private String topLevelURL = null;
+		private GenericQueryMap queryResult = new GenericQueryMap();
 
-		GenericQueryMap queryResult = new GenericQueryMap();
-		
-		
-		while (resultSet.hasNext())  {
-			QuerySolution solution = resultSet.nextSolution();
-			
-			
-			RDFNode organizationNode = solution.get(
-									fieldLabelToOutputFieldLabel
-											.get("organization"));
-			
+		HighetTopLevelOrgTemporalGraphURLConsumer(VitroRequest vitroRequest, Map<String, String> fieldLabelToOutputFieldLabel) {
+			this.vitroRequest = vitroRequest;
+			this.fieldLabelToOutputFieldLabel = fieldLabelToOutputFieldLabel;
+		}
+
+		@Override
+		protected void processQuerySolution(QuerySolution qs) {
+			if (topLevelURL != null) {
+				return;
+			}
+
+			RDFNode organizationNode = qs.get(fieldLabelToOutputFieldLabel.get("organization"));
+
 			if (organizationNode != null) {
-				queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organization"), 
-									 organizationNode.toString());
-				
-				String individualLocalName = UtilityFunctions.getIndividualLocalName(
-													organizationNode.toString(),
-													vitroRequest);
-				
-				if (StringUtils.isNotBlank(individualLocalName)) {
-					
-					return UrlBuilder.getUrl(VisualizationFrameworkConstants.SHORT_URL_VISUALIZATION_REQUEST_PREFIX)
-					 			+ "/" + VisualizationFrameworkConstants.PUBLICATION_TEMPORAL_VIS_SHORT_URL
-					 			+ "/" + individualLocalName;
-				} 				
-				
-				ParamMap highestLevelOrganizationTemporalGraphVisURLParams = new ParamMap(
-						VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
-						organizationNode.toString(),
-						VisualizationFrameworkConstants.VIS_TYPE_KEY,
-						VisualizationFrameworkConstants.ENTITY_COMPARISON_VIS);
+				queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organization"), organizationNode.toString());
 
-				return UrlBuilder.getUrl(
+				String individualLocalName = UtilityFunctions.getIndividualLocalName(organizationNode.toString(), vitroRequest);
+
+				if (StringUtils.isNotBlank(individualLocalName)) {
+
+					topLevelURL = UrlBuilder.getUrl(VisualizationFrameworkConstants.SHORT_URL_VISUALIZATION_REQUEST_PREFIX)
+							+ "/" + VisualizationFrameworkConstants.PUBLICATION_TEMPORAL_VIS_SHORT_URL
+							+ "/" + individualLocalName;
+				} else {
+
+					ParamMap highestLevelOrganizationTemporalGraphVisURLParams = new ParamMap(
+							VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+							organizationNode.toString(),
+							VisualizationFrameworkConstants.VIS_TYPE_KEY,
+							VisualizationFrameworkConstants.ENTITY_COMPARISON_VIS);
+
+					topLevelURL = UrlBuilder.getUrl(
 							VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
 							highestLevelOrganizationTemporalGraphVisURLParams);
-				
-				
-			}
-			
-			RDFNode organizationLabelNode = solution.get(
-									fieldLabelToOutputFieldLabel
-											.get("organizationLabel"));
-			
-			if (organizationLabelNode != null) {
-				queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organizationLabel"), 
-									 organizationLabelNode.toString());
-			}
-			
-			RDFNode numberOfChildrenNode = solution.getLiteral("numOfChildren");
-			
-			if (numberOfChildrenNode != null) {
-				queryResult.addEntry("numOfChildren", 
-									 String.valueOf(numberOfChildrenNode.asLiteral().getInt()));
-			}
-		}
-		
-		return "";
-	}
-	
-	private GenericQueryMap getNumberOfGrantsForIndividual(ResultSet resultSet) {
 
-		GenericQueryMap queryResult = new GenericQueryMap();
-		
-		
-		while (resultSet.hasNext())  {
-			QuerySolution solution = resultSet.nextSolution();
-			
-			RDFNode numberOfGrantsNode = solution.getLiteral("numOfGrants");
-			
-			if (numberOfGrantsNode != null) {
-				queryResult.addEntry("numOfGrants", 
-									 String.valueOf(numberOfGrantsNode.asLiteral().getInt()));
-			}
-		}
-		
-		return queryResult;
-	}
-	
-	
-	private GenericQueryMap getNumberOfPublicationsForIndividual(ResultSet resultSet) {
-
-		GenericQueryMap queryResult = new GenericQueryMap();
-		
-		
-		while (resultSet.hasNext())  {
-			QuerySolution solution = resultSet.nextSolution();
-			
-			RDFNode numberOfPublicationsNode = solution.getLiteral("numOfPublications");
-			
-				if (numberOfPublicationsNode != null) {
-					queryResult.addEntry(
-							"numOfPublications", 
-							String.valueOf(numberOfPublicationsNode.asLiteral().getInt()));
 				}
+			} else {
+				RDFNode organizationLabelNode = qs.get(fieldLabelToOutputFieldLabel.get("organizationLabel"));
+
+				if (organizationLabelNode != null) {
+					queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organizationLabel"), organizationLabelNode.toString());
+				}
+
+				RDFNode numberOfChildrenNode = qs.getLiteral("numOfChildren");
+
+				if (numberOfChildrenNode != null) {
+					queryResult.addEntry("numOfChildren",
+							String.valueOf(numberOfChildrenNode.asLiteral().getInt()));
+				}
+			}
 		}
-		
-		return queryResult;
+
+		public String getTopLevelURL() {
+			return topLevelURL == null ? "" : topLevelURL;
+		}
 	}
 
-	
+	private static class NumGrantsForIndividualConsumer extends ResultSetConsumer {
+		GenericQueryMap queryResult = new GenericQueryMap();
+
+		@Override
+		protected void processQuerySolution(QuerySolution qs) {
+			RDFNode numberOfGrantsNode = qs.getLiteral("numOfGrants");
+
+			if (numberOfGrantsNode != null) {
+				queryResult.addEntry("numOfGrants", String.valueOf(numberOfGrantsNode.asLiteral().getInt()));
+			}
+
+		}
+
+		public GenericQueryMap getMap() {
+			return queryResult;
+		}
+	}
+
+	private static class NumPubsForIndividualConsumer extends ResultSetConsumer {
+		GenericQueryMap queryResult = new GenericQueryMap();
+
+		@Override
+		protected void processQuerySolution(QuerySolution qs) {
+			RDFNode numberOfPublicationsNode = qs.getLiteral("numOfPublications");
+
+			if (numberOfPublicationsNode != null) {
+				queryResult.addEntry("numOfPublications", String.valueOf(numberOfPublicationsNode.asLiteral().getInt()));
+			}
+
+		}
+
+		public GenericQueryMap getMap() {
+			return queryResult;
+		}
+	}
+
+	private static class ThumbnailInformationConsumer extends ResultSetConsumer {
+		private VitroRequest vitroRequest;
+		private Map<String, String> fieldLabelToOutputFieldLabel;
+		private String finalThumbNailLocation = "";
+
+		ThumbnailInformationConsumer(VitroRequest vitroRequest, Map<String, String> fieldLabelToOutputFieldLabel) {
+			this.vitroRequest = vitroRequest;
+			this.fieldLabelToOutputFieldLabel = fieldLabelToOutputFieldLabel;
+		}
+
+		@Override
+		protected void processQuerySolution(QuerySolution qs) {
+			RDFNode downloadLocationNode = qs.get(
+					fieldLabelToOutputFieldLabel
+							.get("downloadLocation"));
+			RDFNode fileNameNode = qs.get(fieldLabelToOutputFieldLabel.get("fileName"));
+
+			if (downloadLocationNode != null && fileNameNode != null) {
+				finalThumbNailLocation =
+						FileServingHelper
+								.getBytestreamAliasUrl(downloadLocationNode.toString(),
+										fileNameNode.toString(),
+										vitroRequest.getSession().getServletContext());
+			}
+		}
+
+		public String getInformation() {
+			return finalThumbNailLocation;
+		}
+	}
+
 	private String getThumbnailInformation(ResultSet resultSet,
 										   Map<String, String> fieldLabelToOutputFieldLabel,
 										   VitroRequest vitroRequest) {
@@ -457,18 +488,6 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			QuerySolution solution = resultSet.nextSolution();
 			
 			
-			RDFNode downloadLocationNode = solution.get(
-													fieldLabelToOutputFieldLabel
-															.get("downloadLocation"));
-			RDFNode fileNameNode = solution.get(fieldLabelToOutputFieldLabel.get("fileName"));
-			
-			if (downloadLocationNode != null && fileNameNode != null) {
-				finalThumbNailLocation = 
-						FileServingHelper
-								.getBytestreamAliasUrl(downloadLocationNode.toString(),
-										fileNameNode.toString(), 
-										vitroRequest.getSession().getServletContext());
-			}
 		}
 		return finalThumbNailLocation;
 	}

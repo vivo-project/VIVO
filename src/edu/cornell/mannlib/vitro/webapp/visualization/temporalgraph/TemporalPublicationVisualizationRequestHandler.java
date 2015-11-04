@@ -2,6 +2,7 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.temporalgraph;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -91,7 +92,7 @@ public class TemporalPublicationVisualizationRequestHandler implements
 		Map<String, String> orgMostSpecificLabelMap      = VisualizationCaches.organizationToMostSpecificLabel.get(rdfService);
 		Map<String, String> personMostSpecificLabelMap   = VisualizationCaches.personToMostSpecificLabel.get(rdfService);
 		Map<String, Set<String>> organisationToPeopleMap = VisualizationCaches.organisationToPeopleMap.get(rdfService);
-		Map<String, Set<String>> personToPublicationMap  = VisualizationCaches.personToPublication.get(rdfService);
+		Map<String, Set<String>> personToPublicationMap  = VisualizationCaches.personToPublication.get(rdfService).personToPublication;
 		Map<String, String>      publicationToYearMap    = VisualizationCaches.publicationToYear.get(rdfService);
 
 		Set<String> orgPublications       = new HashSet<String>();
@@ -126,12 +127,16 @@ public class TemporalPublicationVisualizationRequestHandler implements
 				for (String subOrg : subOrgPublicationsMap.keySet()) {
 					JsonObject entityJson = new JsonObject(orgLabelMap.get(subOrg));
 
-					List<List<Integer>> yearPubCounts = CounterUtils.getObjectCountByYear(subOrgPublicationsMap.get(subOrg), publicationToYearMap);
+					if (subOrgPublicationsMap.containsKey(subOrg)) {
+						List<List<Integer>> yearPubCounts = CounterUtils.getObjectCountByYear(subOrgPublicationsMap.get(subOrg), publicationToYearMap);
+						entityJson.setYearToActivityCount(yearPubCounts);
+					} else {
+						entityJson.setYearToActivityCount(new ArrayList<List<Integer>>());
+					}
 
 					String type = orgMostSpecificLabelMap.get(subOrg);
-
-					entityJson.setYearToActivityCount(yearPubCounts);
 					entityJson.setOrganizationTypes(Arrays.asList(type == null ? "Organization" : type));
+
 					entityJson.setEntityURI(subOrg);
 					entityJson.setVisMode("ORGANIZATION");
 
@@ -142,12 +147,16 @@ public class TemporalPublicationVisualizationRequestHandler implements
 				for (String person : orgPublicationsPeople) {
 					JsonObject entityJson = new JsonObject(personLabelMap.get(person));
 
-					List<List<Integer>> yearPubCounts = CounterUtils.getObjectCountByYear(personToPublicationMap.get(person), publicationToYearMap);
+					if (personToPublicationMap.containsKey(person)) {
+						List<List<Integer>> yearPubCounts = CounterUtils.getObjectCountByYear(personToPublicationMap.get(person), publicationToYearMap);
+						entityJson.setYearToActivityCount(yearPubCounts);
+					} else {
+						entityJson.setYearToActivityCount(new ArrayList<List<Integer>>());
+					}
 
 					String type = personMostSpecificLabelMap.get(person);
-
-					entityJson.setYearToActivityCount(yearPubCounts);
 					entityJson.setOrganizationTypes(Arrays.asList(type == null ? "Person" : type));
+
 					entityJson.setEntityURI(person);
 					entityJson.setVisMode("PERSON");
 
@@ -240,14 +249,17 @@ public class TemporalPublicationVisualizationRequestHandler implements
 			} 
 			
 		} 
-		
-		return getSubjectEntityAndGenerateDataResponse(
-				vitroRequest, 
-				log,
-				dataset,
-				entityURI,
-				currentDataMode);
-		
+
+		try {
+			return getSubjectEntityAndGenerateDataResponse(
+					vitroRequest,
+					log,
+					dataset,
+					entityURI,
+					currentDataMode);
+		} finally {
+			VisualizationCaches.buildMissing();
+		}
 	}
 	
 	
@@ -259,14 +271,18 @@ public class TemporalPublicationVisualizationRequestHandler implements
 	private TemplateResponseValues prepareStandaloneMarkupResponse(VitroRequest vreq, String entityURI) {
         String standaloneTemplate = "entityComparisonOnPublicationsStandalone.ftl";
         String organizationLabel = OrganizationUtilityFunctions.getEntityLabelFromDAO(vreq, entityURI);
-        
+
         Map<String, Object> body = new HashMap<String, Object>();
         body.put("title", organizationLabel + " - Temporal Graph Visualization");
         body.put("organizationURI", entityURI);
         body.put("organizationLocalName", UtilityFunctions.getIndividualLocalName(entityURI, vreq));
         body.put("vivoDefaultNamespace", vreq.getWebappDaoFactory().getDefaultNamespace());
         body.put("organizationLabel", organizationLabel);
-        
+
+		if (VisualizationCaches.personToPublication.isCached()) {
+			body.put("builtFromCacheTime", VisualizationCaches.personToPublication.cachedWhen());
+		}
+
         return new TemplateResponseValues(standaloneTemplate, body);
 	}
 

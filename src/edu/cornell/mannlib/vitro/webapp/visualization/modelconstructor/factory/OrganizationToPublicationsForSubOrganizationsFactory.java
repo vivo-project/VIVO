@@ -1,11 +1,10 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.factory;
 
-import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.rdf.model.Model;
 
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.OrganizationToPublicationsForSubOrganizationsModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.ConstructedModelTracker;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.ModelConstructor;
 
@@ -14,18 +13,21 @@ import org.apache.commons.logging.Log;
 import java.util.concurrent.locks.Lock;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.CustomLock;
 
-public class OrganizationToPublicationsForSubOrganizationsFactory implements
-		ModelFactoryInterface {
-	private static final Log log = LogFactory.getLog(OrganizationToPublicationsForSubOrganizationsFactory.class.getName());
-	@Override
-	public Model getOrCreateModel(String uri, Dataset dataset)
-			throws MalformedQueryParametersException {
+/**
+ * No longer used - will be removed
+ */
+@Deprecated
+@SuppressWarnings("deprecation")
+public class OrganizationToPublicationsForSubOrganizationsFactory implements ModelFactoryInterface {
+	private Log log = LogFactory.getLog(OrganizationToPublicationsForSubOrganizationsFactory.class);
 
+	@Override
+	public Model getOrCreateModel(String uri, RDFService rdfService) throws MalformedQueryParametersException {
 		Model candidateModel = ConstructedModelTracker.getModel(
 				ConstructedModelTracker
 				.generateModelIdentifier(
-						uri, 
-						OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE));
+						uri,
+						edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE));
 			
 		if (candidateModel != null) {
 			
@@ -37,14 +39,14 @@ public class OrganizationToPublicationsForSubOrganizationsFactory implements
 			{
 				try
 				{
-                        	ModelConstructor model = new OrganizationToPublicationsForSubOrganizationsModelConstructor(uri, dataset);
+                        	ModelConstructor model = new edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.OrganizationToPublicationsForSubOrganizationsModelConstructor(uri, rdfService);
 
                         	Model constructedModel = model.getConstructedModel();
                         	ConstructedModelTracker.trackModel(
                                 ConstructedModelTracker
                                                 .generateModelIdentifier(
                                                                 uri,
-                                                                OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE),
+														edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE),
                                                                 constructedModel);
                         	return constructedModel;
 				} finally {

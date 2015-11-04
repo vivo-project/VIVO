@@ -7,14 +7,16 @@ corresponding changes in the included Templates. -->
 <#include "mapOfScienceSetup.ftl">
 
 <div id="map-of-science-response">
-
 <#--
 <div id="subject-parent-entity" class="hide-dom-on-init">
 	<a id="subject-parent-entity-profile-url" href="#" title="${i18n().parent_entity}"></a>&nbsp;
     <a id="subject-parent-entity-temporal-url" href="#" title="${i18n().map_of_science}"><img src="${mapOfScienceIcon}" width="15px" height="15px" alt="${i18n().map_of_science_icon}"/></a>
 </div>
 -->
-        
+
+<#if (builtFromCacheTime??) >
+    <div class="cache-info-vis">${i18n().using_cache_time} ${builtFromCacheTime?time} (${builtFromCacheTime?date?string("MMM dd yyyy")})</div>
+</#if>
 <h2 id="header-entity-label" class="hide-dom-on-init"><span><a id="entityMoniker" href="${entityVivoProfileURL}" title="${i18n().entity_label}">${entityLabel}</a></span></h2>
 
 <div id="map-of-science-info" class="hide-dom-on-init"> ${i18n().explore_activity} (<span id="mapped-publications" style="font-weight: bold"></span> ${i18n().publications}) ${i18n().across_subdisciplines} 
@@ -84,3 +86,5 @@ corresponding changes in the included Templates. -->
 </div>
 
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip-1.0.0-rc3.min.js"></script>')}
+
+${stylesheets.add('<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/visualization.css" />')}

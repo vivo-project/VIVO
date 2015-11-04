@@ -12,6 +12,13 @@ span.incomplete-data-holder,
     border: dotted 1px #eee;
     background-color: #ffb;
 }
+#incomplete-data-small {
+    padding: 5px;
+    font-size: .8em;
+    color: #444;
+    border: dotted 1px #eee;
+    background-color: #ffb;
+}
 #incomplete-data {
     margin-top: 1.6em;
     font-size: 1em;
@@ -79,6 +86,21 @@ span.incomplete-data-holder,
 }
 .infoIcon {
     padding-right:30px;
+}
+.cache-info-small {
+    padding: 5px;
+    font-size: .8em;
+    color: #444;
+    border: dotted 1px #eee;
+    background-color: #ffb;
+    float: right;
+}
+.cache-info-vis {
+    padding: 5px;
+    color: #444;
+    border: dotted 1px #eee;
+    background-color: #ffb;
+    float: right;
 }
 
 /* ---------------------------*/

@@ -15,7 +15,24 @@
 <div class="staticPageBackground">
     <div id="${visContainerID}">
         <script type="text/javascript">
-    
+            <#if sparklineVO.shortVisMode>
+                var visualizationOptions = {
+                    width: 150,
+                    height: 60,
+                    color: '3399CC',
+                    chartType: 'ls',
+                    chartLabel: 'r'
+                };
+            <#else>
+                var visualizationOptions = {
+                    width: 250,
+                    height: 75,
+                    color: '3399CC',
+                    chartType: 'ls',
+                    chartLabel: 'r'
+                };
+            </#if>
+
             function drawPubCountVisualization(providedSparklineImgTD) {
     
                 var unknownYearPublicationCounts = ${sparklineVO.unknownYearPublications};
@@ -50,21 +67,8 @@
                         maxValue: '${sparklineVO.latestRenderedPublicationYear?c}'
                 }]));
 
-                var visualizationOptions = {
-                    width: 150,
-                    height: 60,
-                    color: '3399CC',
-                    chartType: 'ls',
-                    chartLabel: 'r'
-                }
                 <#else>
-                var visualizationOptions = {
-                    width: 250,
-                    height: 75,
-                    color: '3399CC',
-                    chartType: 'ls',
-                    chartLabel: 'r'
-                }
+
                 </#if>
                 
 
@@ -247,7 +251,7 @@
                     var row = $('<tr>');
                     sparklineImgTD = $('<td>');
                     sparklineImgTD.attr('id', '${sparklineContainerID}_img');
-                    sparklineImgTD.attr('width', '150');
+                    sparklineImgTD.attr('width', visualizationOptions.width);
                     sparklineImgTD.attr('class', 'sparkline_style');
             
                     row.append(sparklineImgTD);

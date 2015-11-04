@@ -2,6 +2,7 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.temporalgraph;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -101,14 +102,17 @@ public class TemporalGrantVisualizationRequestHandler implements
 			} 
 			
 		} 		
-		
-		return getSubjectEntityAndGenerateDataResponse(
-				vitroRequest, 
-				log,
-				dataset,
-				entityURI,
-				currentDataMode);
-		
+
+		try {
+			return getSubjectEntityAndGenerateDataResponse(
+					vitroRequest,
+					log,
+					dataset,
+					entityURI,
+					currentDataMode);
+		} finally {
+			VisualizationCaches.buildMissing();
+		}
 	}
 	
 	private Map<String, String> prepareDataErrorResponse() {
@@ -157,13 +161,13 @@ public class TemporalGrantVisualizationRequestHandler implements
 		Set<String> orgGrants       = new HashSet<String>();
 		Set<String> orgGrantsPeople = new HashSet<String>();
 
-		Map<String, Set<String>> subOrgPublicationsMap = new HashMap<String, Set<String>>();
+		Map<String, Set<String>> subOrgGrantsMap = new HashMap<String, Set<String>>();
 
 		OrgUtils.getObjectMappingsForOrgAnSubOrgs(
 				subjectEntityURI,
 				orgGrants,
 				orgGrantsPeople,
-				subOrgPublicationsMap,
+				subOrgGrantsMap,
 				subOrgMap,
 				organisationToPeopleMap,
 				personToGrantMap
@@ -183,15 +187,19 @@ public class TemporalGrantVisualizationRequestHandler implements
 				Set subEntitiesJson = new HashSet();
 
 				// For each suborganisation
-				for (String subOrg : subOrgPublicationsMap.keySet()) {
+				for (String subOrg : subOrgGrantsMap.keySet()) {
 					JsonObject entityJson = new JsonObject(orgLabelMap.get(subOrg));
 
-					List<List<Integer>> yearPubCounts = CounterUtils.getObjectCountByYear(subOrgPublicationsMap.get(subOrg), grantToYearMap);
+					if (subOrgGrantsMap.containsKey(subOrg)) {
+						List<List<Integer>> yearPubCounts = CounterUtils.getObjectCountByYear(subOrgGrantsMap.get(subOrg), grantToYearMap);
+						entityJson.setYearToActivityCount(yearPubCounts);
+					} else {
+						entityJson.setYearToActivityCount(new ArrayList<List<Integer>>());
+					}
 
 					String type = orgMostSpecificLabelMap.get(subOrg);
-
-					entityJson.setYearToActivityCount(yearPubCounts);
 					entityJson.setOrganizationTypes(Arrays.asList(type == null ? "Organization" : type));
+
 					entityJson.setEntityURI(subOrg);
 					entityJson.setVisMode("ORGANIZATION");
 
@@ -202,12 +210,16 @@ public class TemporalGrantVisualizationRequestHandler implements
 				for (String person : orgGrantsPeople) {
 					JsonObject entityJson = new JsonObject(personLabelMap.get(person));
 
-					List<List<Integer>> yearPubCounts = CounterUtils.getObjectCountByYear(personToGrantMap.get(person), grantToYearMap);
+					if (personToGrantMap.containsKey(person)) {
+						List<List<Integer>> yearPubCounts = CounterUtils.getObjectCountByYear(personToGrantMap.get(person), grantToYearMap);
+						entityJson.setYearToActivityCount(yearPubCounts);
+					} else {
+						entityJson.setYearToActivityCount(new ArrayList<List<Integer>>());
+					}
 
 					String type = personMostSpecificLabelMap.get(person);
-
-					entityJson.setYearToActivityCount(yearPubCounts);
 					entityJson.setOrganizationTypes(Arrays.asList(type == null ? "Person" : type));
+
 					entityJson.setEntityURI(person);
 					entityJson.setVisMode("PERSON");
 
@@ -234,11 +246,11 @@ public class TemporalGrantVisualizationRequestHandler implements
 
 				csvFileContent.append("Entity Name, Grant Count, Entity Type\n");
 
-				for (String subOrg : subOrgPublicationsMap.keySet()) {
+				for (String subOrg : subOrgGrantsMap.keySet()) {
 					csvFileContent.append(StringEscapeUtils.escapeCsv(orgLabelMap.get(subOrg)));
 					csvFileContent.append(", ");
 
-					csvFileContent.append(subOrgPublicationsMap.get(subOrg).size());
+					csvFileContent.append(subOrgGrantsMap.get(subOrg).size());
 					csvFileContent.append(", ");
 
 					csvFileContent.append("Organization");
@@ -270,17 +282,21 @@ public class TemporalGrantVisualizationRequestHandler implements
 			   String entityURI) {
 
 		String standaloneTemplate = "entityComparisonOnGrantsStandalone.ftl";
-		
+
 		String organizationLabel = OrganizationUtilityFunctions.getEntityLabelFromDAO(vreq,
 											  entityURI);
-		
+
 		Map<String, Object> body = new HashMap<String, Object>();
 		body.put("title", organizationLabel + " - Temporal Graph Visualization");
 		body.put("organizationURI", entityURI);
 		body.put("organizationLocalName", UtilityFunctions.getIndividualLocalName(entityURI, vreq));
 		body.put("vivoDefaultNamespace", vreq.getWebappDaoFactory().getDefaultNamespace());
 		body.put("organizationLabel", organizationLabel);
-		
+
+		if (VisualizationCaches.personToGrant.isCached()) {
+			body.put("builtFromCacheTime", VisualizationCaches.personToGrant.cachedWhen());
+		}
+
 		return new TemplateResponseValues(standaloneTemplate, body);
 	}
 	
