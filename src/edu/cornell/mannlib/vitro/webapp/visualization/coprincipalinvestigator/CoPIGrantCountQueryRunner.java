@@ -12,9 +12,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,6 +52,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 	private String egoURI;
 	
 	private RDFService rdfService;
+	private VitroRequest vitroRequest;
 
 	private Log log = LogFactory.getLog(CoPIGrantCountQueryRunner.class.getName());
 
@@ -78,11 +81,11 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 		+ 		"}";	
 	
 	
-	public CoPIGrantCountQueryRunner(String egoURI,
-			RDFService rdfService, Log log) {
+	public CoPIGrantCountQueryRunner(String egoURI, VitroRequest vreq, Log log) {
 
 		this.egoURI = egoURI;
-		this.rdfService = rdfService;
+		this.rdfService = vreq.getRDFService();
+		this.vitroRequest = vreq;
 	//	this.log = log;
 	}
 	
@@ -283,6 +286,9 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 		try {
 			QueryResultConsumer consumer = new QueryResultConsumer();
 			rdfService.sparqlSelectQuery(generateEgoCoPIquery(this.egoURI), consumer);
+			if (consumer.egoNode == null) {
+				consumer.egoNode = makeEgoNode();
+			}
 			data = consumer.getData();
 		} catch (RDFServiceException e) {
 			log.error("Unable to execute query", e);
@@ -304,6 +310,13 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 		// Cache the new entry
 		collaborationDataCache.put(this.egoURI, newEntry);
 		return data;
+	}
+
+	private Collaborator makeEgoNode() {
+		Collaborator collab = new Collaborator(egoURI, new UniqueIDGenerator());
+		collab.setCollaboratorName(UtilityFunctions.getIndividualLabelFromDAO(vitroRequest, egoURI));
+
+		return collab;
 	}
 
 	private synchronized void expireCache() {
@@ -656,6 +669,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			}
 
 		}
+
 		/** END QUERY RESULT CONSUMER **/
 	}
 }

@@ -65,7 +65,7 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 								.VIS_MODE_KEY);
 
 		CoAuthorshipQueryRunner queryManager =
-		new CoAuthorshipQueryRunner(egoURI, vitroRequest.getRDFService(), log);
+		new CoAuthorshipQueryRunner(egoURI, vitroRequest, log);
 		
 		CollaborationData authorNodesAndEdges = 
 		queryManager.getQueryResult();

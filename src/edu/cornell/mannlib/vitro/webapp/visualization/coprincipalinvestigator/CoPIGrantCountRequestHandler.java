@@ -58,7 +58,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		Model constructedModel = constructQueryRunner.getConstructedModel();
 		
 		QueryRunner<CollaborationData> queryManager = 
-				new CoPIGrantCountQueryRunner(egoURI, vitroRequest.getRDFService(), log);
+				new CoPIGrantCountQueryRunner(egoURI, vitroRequest, log);
 		
 		CollaborationData investigatorNodesAndEdges = queryManager.getQueryResult();
 				

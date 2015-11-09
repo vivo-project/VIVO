@@ -105,18 +105,9 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 			String visMode) throws MalformedQueryParametersException {
 		
 		if (VisualizationFrameworkConstants.COPI_VIS_MODE.equalsIgnoreCase(visMode)) {
-			CoPIGrantCountQueryRunner coPIQueryManager = new CoPIGrantCountQueryRunner(egoURI, vitroRequest.getRDFService(), log);
+			CoPIGrantCountQueryRunner coPIQueryManager = new CoPIGrantCountQueryRunner(egoURI, vitroRequest, log);
 
 			CoInvestigationData coPIData = coPIQueryManager.getQueryResult();
-
-	    	/*
-	    	 * grants over time sparkline
-	    	 */
-    		SubEntity person = new SubEntity(egoURI,
-											 UtilityFunctions
-											 	.getIndividualLabelFromDAO(vitroRequest, egoURI));
-
-//    		Map<String, Activity> grantsToURI = SelectOnModelUtilities.getGrantsForPerson(vitroRequest.getRDFService(), person, false);
 
 			Map<String, Activity> grantsToURI = coPIData.getGrants();
 
@@ -136,8 +127,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 	    			yearToGrantCount,
 	    			log);
 	    	
-	    	SparklineData grantSparklineVO = personGrantCountVisCodeGenerator
-			.getValueObjectContainer();
+	    	SparklineData grantSparklineVO = personGrantCountVisCodeGenerator.getValueObjectContainer();
 	    	
 	    	
 	    	/*
@@ -151,10 +141,8 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 	    			UtilityFunctions.getActivityYearToCollaborators(coPIData),
 	    			log);
 	    	
-	    	SparklineData uniqueCopisSparklineVO = uniqueCopisVisCodeGenerator
-			.getValueObjectContainer();
-	    	
-	    	
+	    	SparklineData uniqueCopisSparklineVO = uniqueCopisVisCodeGenerator.getValueObjectContainer();
+
 	    	return prepareCoPIStandaloneResponse(
 					egoURI, 
 					grantSparklineVO,
@@ -165,7 +153,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         } else {
         	
         	CoAuthorshipQueryRunner coAuthorshipQueryManager =
-        			new CoAuthorshipQueryRunner(egoURI, vitroRequest.getRDFService(), log);
+        			new CoAuthorshipQueryRunner(egoURI, vitroRequest, log);
 
 			CoAuthorshipData coAuthorshipData = coAuthorshipQueryManager.getQueryResult();
 
