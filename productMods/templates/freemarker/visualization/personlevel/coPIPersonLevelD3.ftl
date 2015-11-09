@@ -254,22 +254,7 @@ $(document).ready(function(){
         
         <#if (numOfCoInvestigations?? && numOfCoInvestigations > 0) || (numOfInvestigators?? && numOfInvestigators > 0) > 
                 <div class = "graphml-file-link"><a href="${egoCoInvestigationNetworkDataFileURL}" title="${i18n().co_investigator}">(GraphML ${i18n().file_capitalized})</a></div>
-        <#else>
-
-            <#if numOfInvestigators?? && numOfInvestigators <= 0 >
-                <#assign investigatorsText = "multi-investigator" />
-            </#if>
-            
-            <span id="no_coinvestigations">${i18n().currently_no_grants_for(investigatorsText!)} 
-                <a href="${egoVivoProfileURL}" title="${i18n().investigator_name}"><span id="no_coinvestigations_person" class="investigator_name">${i18n().this_investigator}</span></a> ${i18n().in_the_vivo_db}
-            </span>                     
         </#if>
-    
-    <#else>
-    
-        <span id="no_coinvestigations">${i18n().no_grants_for}
-            <a href="${egoVivoProfileURL}" title="${i18n().co_investigator}"><span id="no_coinvestigations_person" class="investigator_name">${i18n().this_investigator}</span></a> ${i18n().in_the_vivo_db}
-        </span>
     
     </#if>
     
@@ -290,6 +275,14 @@ $(document).ready(function(){
         <div id="bodyPannel">
             <div id="chord" style="float: right;"></div>
         </div>
+    <#else>
+        <#if numOfInvestigators?? && numOfInvestigators <= 0 >
+            <#assign investigatorsText = "multi-investigator" />
+        </#if>
+
+        <span id="no_coinvestigations">${i18n().currently_no_grants_for(investigatorsText!)}
+            <a href="${egoVivoProfileURL}" title="${i18n().investigator_name}"><span id="no_coinvestigations_person" class="investigator_name">${i18n().this_investigator}</span></a> ${i18n().in_the_vivo_db}
+        </span>
     </#if>
 
 

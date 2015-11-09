@@ -16,10 +16,12 @@ import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
 import edu.cornell.mannlib.vitro.webapp.visualization.utilities.VisualizationCaches;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.jena.iri.IRI;
@@ -59,14 +61,16 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 	private String egoURI;
 
 	private RDFService rdfService;
+
+	private VitroRequest vitroRequest;
 	
 	private Log log;
 
-	public CoAuthorshipQueryRunner(String egoURI,
-			RDFService rdfService, Log log) {
+	public CoAuthorshipQueryRunner(String egoURI, VitroRequest vreq, Log log) {
 
 		this.egoURI = egoURI;
-		this.rdfService = rdfService;
+		this.rdfService = vreq.getRDFService();
+		this.vitroRequest = vreq;
 		this.log = log;
 
 	}
@@ -541,6 +545,10 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 			}
 		}
 
+		if (consumer.egoNode == null) {
+			consumer.egoNode = makeEgoNode();
+		}
+
 		data = consumer.getCollaborationData();
 		if (cacheTime != null) {
 			data.setBuiltFromCacheTime(cacheTime);
@@ -559,6 +567,13 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 		collaborationDataCache.put(this.egoURI, newEntry);
 
 		return data;
+	}
+
+	private Collaborator makeEgoNode() {
+		Collaborator collab = new Collaborator(egoURI, new UniqueIDGenerator());
+		collab.setCollaboratorName(UtilityFunctions.getIndividualLabelFromDAO(vitroRequest, egoURI));
+
+		return collab;
 	}
 
 	private synchronized void expireCache() {
