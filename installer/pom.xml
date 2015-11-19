@@ -1,0 +1,89 @@
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.vivoweb</groupId>
+    <artifactId>vivo-installer</artifactId>
+    <version>1.9.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>VIVO Installer</name>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <version>1.4.16</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+                <executions>
+                    <execution>
+                        <id>unpack-home</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeArtifactIds>vivo-home</includeArtifactIds>
+                            <overWriteReleases>true</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                            <outputDirectory>target/home</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <executions>
+                    <execution>
+                        <id>install-home</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>/usr/local/vitro/test</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>target/home</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                            <includeEmptyDirs>true</includeEmptyDirs>
+                            <overwrite>true</overwrite>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <modules>
+        <module>home</module>
+        <module>webapp</module>
+    </modules>
+
+    <!-- dependencies>
+        <dependency>
+            <groupId>org.vivoweb</groupId>
+            <artifactId>vivo-home</artifactId>
+            <version>1.9.0-SNAPSHOT</version>
+            <type>tar.gz</type>
+        </dependency>
+        <dependency>
+            <groupId>org.vivoweb</groupId>
+            <artifactId>vivo-webapp</artifactId>
+            <version>1.9.0-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+    </dependencies -->
+</project>
