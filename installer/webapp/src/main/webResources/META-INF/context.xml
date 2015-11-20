@@ -1,0 +1,9 @@
+<Context crossContext="true" override="true">
+   <Environment
+        type="java.lang.String" 
+        name="vitro/home"
+        value="${home-dir}" override="true"/>
+
+   <!-- Disable persist sessions on shut down.-->
+   <Manager pathname="" />
+</Context>

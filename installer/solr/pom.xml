@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.vivoweb</groupId>
-    <artifactId>vivo</artifactId>
+    <artifactId>solr</artifactId>
     <version>1.9.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -17,15 +17,11 @@
         <relativePath>..</relativePath>
     </parent>
 
-    <name>VIVO Prepare Web App</name>
+    <name>VIVO Prepare Solr App</name>
 
     <build>
-        <!-- filters>
-            <filter>${filters.file}</filter>
-        </filters -->
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.6</version>
                 <configuration>
@@ -38,7 +34,7 @@
                     <overlays>
                         <overlay>
                             <groupId>org.vivoweb</groupId>
-                            <artifactId>vivo-webapp</artifactId>
+                            <artifactId>vitro-solr</artifactId>
                             <type>war</type>
                         </overlay>
                     </overlays>
@@ -69,7 +65,7 @@
                                     <version>${project.version}</version>
                                     <type>war</type>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${tomcat-dir}/webapps/${app-name}</outputDirectory>
+                                    <outputDirectory>${tomcat-dir}/webapps/${app-name}solr</outputDirectory>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
@@ -89,12 +85,7 @@
     <dependencies>
         <dependency>
             <groupId>org.vivoweb</groupId>
-            <artifactId>vivo-api</artifactId>
-            <version>1.9.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.vivoweb</groupId>
-            <artifactId>vivo-webapp</artifactId>
+            <artifactId>vitro-solr</artifactId>
             <version>1.9.0-SNAPSHOT</version>
             <type>war</type>
         </dependency>

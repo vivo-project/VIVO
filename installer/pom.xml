@@ -12,9 +12,15 @@
 
     <name>VIVO Installer</name>
 
+    <properties>
+        <app-name>vivo</app-name>
+        <home-dir>/usr/local/vivo/home</home-dir>
+        <tomcat-dir>/usr/local/tomcat</tomcat-dir>
+    </properties>
+
     <build>
         <plugins>
-            <plugin>
+            <!-- plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
                 <version>1.4.16</version>
@@ -63,27 +69,20 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin -->
+            <plugin>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>
 
     <modules>
         <module>home</module>
+        <module>solr</module>
         <module>webapp</module>
     </modules>
-
-    <!-- dependencies>
-        <dependency>
-            <groupId>org.vivoweb</groupId>
-            <artifactId>vivo-home</artifactId>
-            <version>1.9.0-SNAPSHOT</version>
-            <type>tar.gz</type>
-        </dependency>
-        <dependency>
-            <groupId>org.vivoweb</groupId>
-            <artifactId>vivo-webapp</artifactId>
-            <version>1.9.0-SNAPSHOT</version>
-            <type>war</type>
-        </dependency>
-    </dependencies -->
 </project>
