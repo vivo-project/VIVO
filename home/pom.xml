@@ -54,7 +54,7 @@
                         <configuration>
                             <artifacts>
                                 <artifact>
-                                    <file>target/${pom.artifactId}-${pom.version}.tar.gz</file>
+                                    <file>target/${project.artifactId}-${project.version}.tar.gz</file>
                                     <type>tar.gz</type>
                                     <!-- classifier>optional</classifier -->
                                 </artifact>
