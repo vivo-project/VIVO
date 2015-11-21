@@ -12,64 +12,8 @@
 
     <name>VIVO Installer</name>
 
-    <properties>
-        <app-name>vivo</app-name>
-        <home-dir>/usr/local/vivo/home</home-dir>
-        <tomcat-dir>/usr/local/tomcat</tomcat-dir>
-    </properties>
-
     <build>
         <plugins>
-            <!-- plugin>
-                <groupId>org.codehaus.cargo</groupId>
-                <artifactId>cargo-maven2-plugin</artifactId>
-                <version>1.4.16</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.10</version>
-                <executions>
-                    <execution>
-                        <id>unpack-home</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>unpack-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <includeArtifactIds>vivo-home</includeArtifactIds>
-                            <overWriteReleases>true</overWriteReleases>
-                            <overWriteSnapshots>true</overWriteSnapshots>
-                            <outputDirectory>target/home</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.7</version>
-                <executions>
-                    <execution>
-                        <id>install-home</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>/usr/local/vitro/test</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>target/home</directory>
-                                    <filtering>false</filtering>
-                                </resource>
-                            </resources>
-                            <includeEmptyDirs>true</includeEmptyDirs>
-                            <overwrite>true</overwrite>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin -->
             <plugin>
                 <artifactId>maven-install-plugin</artifactId>
                 <version>2.5.2</version>
@@ -85,4 +29,65 @@
         <module>solr</module>
         <module>webapp</module>
     </modules>
+
+    <profiles>
+        <profile>
+            <id>skip-install</id>
+            <activation>
+                <property><name>!vivo-dir</name></property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.1</version>
+                        <executions>
+                            <execution>
+                                <id>default-compile</id>
+                                <phase />
+                            </execution>
+                            <execution>
+                                <id>default-testCompile</id>
+                                <phase />
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>2.6</version>
+                        <executions>
+                            <execution>
+                                <id>default-resources</id>
+                                <phase />
+                            </execution>
+                            <execution>
+                                <id>default-testResources</id>
+                                <phase />
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.12.4</version>
+                        <executions>
+                            <execution>
+                                <id>test</id>
+                                <phase/>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>2.6</version>
+                        <executions>
+                            <execution>
+                                <id>default-war</id>
+                                <phase/>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

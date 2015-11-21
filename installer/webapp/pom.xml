@@ -19,63 +19,73 @@
 
     <name>VIVO Prepare Web App</name>
 
-    <build>
-        <!-- filters>
-            <filter>${filters.file}</filter>
-        </filters -->
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.6</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                        </manifest>
-                    </archive>
-                    <archiveClasses>false</archiveClasses>
-                    <overlays>
-                        <overlay>
-                            <groupId>org.vivoweb</groupId>
-                            <artifactId>vivo-webapp</artifactId>
-                            <type>war</type>
-                        </overlay>
-                    </overlays>
-                    <webResources>
-                        <resource>
-                            <directory>src/main/webResources</directory>
-                            <filtering>true</filtering>
-                        </resource>
-                    </webResources>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.10</version>
-                <executions>
-                    <execution>
-                        <id>install</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
+    <profiles>
+        <profile>
+            <id>install</id>
+            <activation>
+                <property><name>vivo-dir</name></property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>2.6</version>
                         <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>${project.artifactId}</artifactId>
-                                    <version>${project.version}</version>
+                            <archive>
+                                <manifest>
+                                    <addClasspath>true</addClasspath>
+                                </manifest>
+                            </archive>
+                            <archiveClasses>false</archiveClasses>
+                            <overlays>
+                                <overlay>
+                                    <groupId>org.vivoweb</groupId>
+                                    <artifactId>vivo-webapp</artifactId>
                                     <type>war</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>${tomcat-dir}/webapps/${app-name}</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
+                                </overlay>
+                            </overlays>
+                            <webResources>
+                                <resource>
+                                    <directory>src/main/webResources</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </webResources>
                         </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>2.10</version>
+                        <executions>
+                            <execution>
+                                <id>install</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>${project.groupId}</groupId>
+                                            <artifactId>${project.artifactId}</artifactId>
+                                            <version>${project.version}</version>
+                                            <type>war</type>
+                                            <overWrite>true</overWrite>
+                                            <outputDirectory>${tomcat-dir}/webapps/${app-name}</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
             <plugin>
                 <artifactId>maven-install-plugin</artifactId>
                 <version>2.5.2</version>

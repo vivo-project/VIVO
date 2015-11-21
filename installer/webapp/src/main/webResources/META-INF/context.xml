@@ -2,7 +2,7 @@
    <Environment
         type="java.lang.String" 
         name="vitro/home"
-        value="${home-dir}" override="true"/>
+        value="${vivo-dir}" override="true"/>
 
    <!-- Disable persist sessions on shut down.-->
    <Manager pathname="" />
