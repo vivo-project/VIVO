@@ -75,9 +75,7 @@
             ?authorVCardMST rdfs:subClassOf vcard:Kind .
 
             ?authorVCard vcard:hasName ?vName .
-            ?vName vcard:familyName ?lastName .
-            ?vName vcard:givenName ?firstName .
-            ?vName core:middleName ?middleName .
+            ?vName ?vNameProperty ?vNameValue .
         } WHERE {
             {
                 ?subject ?property ?authorship .
@@ -110,21 +108,7 @@
                 ?authorship core:relates ?authorVCard .
                 ?authorVCard a vcard:Kind .
                 ?authorVCard vcard:hasName ?vName .
-                ?vName vcard:familyName ?lastName .
-            } UNION {
-                ?subject ?property ?authorship .
-                ?authorship a core:Authorship .
-                ?authorship core:relates ?authorVCard .
-                ?authorVCard a vcard:Kind .
-                ?authorVCard vcard:hasName ?vName .
-                ?vName vcard:givenName ?firstName .
-            } UNION {
-                ?subject ?property ?authorship .
-                ?authorship a core:Authorship .
-                ?authorship core:relates ?authorVCard .
-                ?authorVCard a vcard:Kind .
-                ?author vcard:hasName ?vName .
-                ?vName core:middleName ?middleName .
+                ?vName ?vNameProperty ?vNameValue .
             }
         }
     </query-construct>
