@@ -22,7 +22,6 @@
         <module>api</module>
         <module>webapp</module>
         <module>home</module>
-        <module>installer</module>
     </modules>
 
     <profiles>
@@ -38,9 +37,25 @@
             </modules>
         </profile>
         <profile>
-            <id>vivo-installer</id>
+            <id>installer</id>
+            <activation>
+                <property>
+                    <name>!installer-dir</name>
+                </property>
+            </activation>
             <modules>
                 <module>installer</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>external-installer</id>
+            <activation>
+                <property>
+                    <name>installer-dir</name>
+                </property>
+            </activation>
+            <modules>
+                <module>${installer-dir}</module>
             </modules>
         </profile>
     </profiles>
