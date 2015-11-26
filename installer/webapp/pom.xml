@@ -21,11 +21,12 @@
 
     <profiles>
         <profile>
-            <id>install</id>
+            <id>package</id>
             <activation>
-                <property><name>vivo-dir</name></property>
+                <property><name>app-name</name></property>
             </activation>
             <build>
+                <finalName>${app-name}</finalName>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -53,6 +54,34 @@
                             </webResources>
                         </configuration>
                     </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>pinstall</id>
+            <activation>
+                <property><name>tomcat-dir</name></property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.3</version>
+                        <executions>
+                            <execution>
+                                <id>remove-webapp</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <tasks>
+                                        <delete dir="${tomcat-dir}/webapps/${build.finalName}" />
+                                    </tasks>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
@@ -72,7 +101,7 @@
                                             <version>${project.version}</version>
                                             <type>war</type>
                                             <overWrite>true</overWrite>
-                                            <outputDirectory>${tomcat-dir}/webapps/${app-name}</outputDirectory>
+                                            <outputDirectory>${tomcat-dir}/webapps/${build.finalName}</outputDirectory>
                                         </artifactItem>
                                     </artifactItems>
                                 </configuration>
