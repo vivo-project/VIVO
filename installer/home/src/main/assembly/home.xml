@@ -16,6 +16,7 @@
         <fileSet>
             <directory>${project.basedir}/src/main/resources</directory>
             <outputDirectory>/</outputDirectory>
+            <filtered>true</filtered>
         </fileSet>
     </fileSets>
 </assembly>

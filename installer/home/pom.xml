@@ -19,6 +19,10 @@
 
     <name>VIVO Prepare Home</name>
 
+    <properties>
+        <default-theme>wilma</default-theme>
+    </properties>
+
     <profiles>
         <profile>
             <id>install</id>

@@ -40,7 +40,7 @@
             <id>installer</id>
             <activation>
                 <property>
-                    <name>!installer-dir</name>
+                    <name>!vivo-installer-dir</name>
                 </property>
             </activation>
             <modules>
@@ -51,11 +51,11 @@
             <id>external-installer</id>
             <activation>
                 <property>
-                    <name>installer-dir</name>
+                    <name>vivo-installer-dir</name>
                 </property>
             </activation>
             <modules>
-                <module>${installer-dir}</module>
+                <module>${vivo-installer-dir}</module>
             </modules>
         </profile>
     </profiles>
