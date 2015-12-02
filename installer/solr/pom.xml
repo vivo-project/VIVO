@@ -75,7 +75,7 @@
                                 </goals>
                                 <configuration>
                                     <tasks>
-                                        <delete dir="${tomcat-dir}/webapps/${build.finalName}" />
+                                        <delete dir="${tomcat-dir}/webapps/${project.build.finalName}" />
                                     </tasks>
                                 </configuration>
                             </execution>
@@ -100,7 +100,7 @@
                                             <version>${project.version}</version>
                                             <type>war</type>
                                             <overWrite>true</overWrite>
-                                            <outputDirectory>${tomcat-dir}/webapps/${build.finalName}</outputDirectory>
+                                            <outputDirectory>${tomcat-dir}/webapps/${project.build.finalName}</outputDirectory>
                                         </artifactItem>
                                     </artifactItems>
                                 </configuration>
