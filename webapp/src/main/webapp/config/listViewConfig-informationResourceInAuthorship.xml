@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
+
+<list-view-config>
+    <query-select>
+        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+        PREFIX vcard:  &lt;http://www.w3.org/2006/vcard/ns#&gt;
+        PREFIX fn:   &lt;http://www.w3.org/2005/xpath-functions#&gt;
+
+        SELECT DISTINCT ?subclass
+            ?authorship
+            ?author ?authorName
+        WHERE {
+            ?subject ?property ?authorship .
+            OPTIONAL { ?authorship core:rank ?rank }
+            OPTIONAL { ?authorship core:relates ?author .
+                ?author a foaf:Agent .
+                ?author rdfs:label ?authorName .
+
+                OPTIONAL { ?authorship core:relates ?author .
+                    ?author a foaf:Agent .
+                    ?author vitro:mostSpecificType ?subclass .
+                    ?subclass rdfs:subClassOf foaf:Agent .
+                }
+            }
+            OPTIONAL { ?authorship core:relates ?author .
+                ?author a vcard:Kind .
+                ?author vcard:hasName ?vName .
+                ?vName vcard:familyName ?lastName .
+                OPTIONAL { ?vName vcard:givenName ?firstName . }
+                OPTIONAL { ?vName core:middleName ?middleName . }
+                bind ( COALESCE(?firstName, "") As ?firstName1) .
+                bind ( COALESCE(?middleName, "") As ?middleName1) .
+                bind ( COALESCE(?lastName, "") As ?lastName1) .
+                bind (concat(str(?lastName1 + ", "),str(?firstName1 + " "),str(?middleName1)) as ?authorName) .
+
+                OPTIONAL { ?authorship core:relates ?author .
+                    ?author a vcard:Kind .
+                    ?author vitro:mostSpecificType ?subclass .
+                    ?subclass rdfs:subClassOf vcard:Kind .
+                }
+            }
+        <critical-data-required>
+            FILTER ( bound(?author) )
+        </critical-data-required>
+        } ORDER BY <collated> ?subclass </collated> ?rank (fn:lower-case(?authorName))
+    </query-select>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+        PREFIX vcard:  &lt;http://www.w3.org/2006/vcard/ns#&gt;
+        CONSTRUCT {
+            ?subject ?property ?authorship .
+
+            ?authorship a core:Authorship .
+            ?authorship core:rank ?rank .
+
+            ?authorship core:relates ?authorAgent .
+            ?authorAgent a foaf:Agent .
+            ?authorAgent rdfs:label ?authorName .
+            ?authorAgent vitro:mostSpecificType ?authorAgentMST .
+            ?authorAgentMST rdfs:subClassOf foaf:Agent .
+
+            ?authorship core:relates ?authorVCard .
+            ?authorVCard a vcard:Kind .
+            ?authorVCard vitro:mostSpecificType ?authorVCardMST .
+            ?authorVCardMST rdfs:subClassOf vcard:Kind .
+
+            ?authorVCard vcard:hasName ?vName .
+            ?vName ?vNameProperty ?vNameValue .
+        } WHERE {
+            {
+                ?subject ?property ?authorship .
+                ?authorship a core:Authorship
+            } UNION {
+                ?subject ?property ?authorship .
+                ?authorship a core:Authorship .
+                ?authorship core:rank ?rank .
+            } UNION {
+                ?subject ?property ?authorship .
+                ?authorship a core:Authorship .
+                ?authorship core:relates ?authorAgent .
+                ?authorAgent a foaf:Agent .
+                ?authorAgent vitro:mostSpecificType ?authorAgentMST .
+            } UNION {
+                ?subject ?property ?authorship .
+                ?authorship a core:Authorship .
+                ?authorship core:relates ?authorAgent .
+                ?authorAgent a foaf:Agent .
+                ?authorAgent rdfs:label ?authorName
+            } UNION {
+                ?subject ?property ?authorship .
+                ?authorship a core:Authorship .
+                ?authorship core:relates ?authorVCard .
+                ?authorVCard a vcard:Kind .
+                ?authorVCard vitro:mostSpecificType ?authorVCardMST .
+            } UNION {
+                ?subject ?property ?authorship .
+                ?authorship a core:Authorship .
+                ?authorship core:relates ?authorVCard .
+                ?authorVCard a vcard:Kind .
+                ?authorVCard vcard:hasName ?vName .
+                ?vName ?vNameProperty ?vNameValue .
+            }
+        }
+    </query-construct>
+
+    <template>propStatement-informationResourceInAuthorship.ftl</template>
+</list-view-config>
