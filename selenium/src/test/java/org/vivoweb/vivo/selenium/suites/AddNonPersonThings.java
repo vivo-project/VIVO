@@ -7,13 +7,15 @@ import org.junit.runners.Suite.SuiteClasses;
 import org.vivoweb.vivo.selenium.DriverFactory;
 import org.vivoweb.vivo.selenium.VIVOSuite;
 import org.vivoweb.vivo.selenium.tests.CreateOrganization;
+import org.vivoweb.vivo.selenium.tests.DeleteOrganization;
 import org.vivoweb.vivo.selenium.tests.RebuildSearchIndex;
 
 @RunWith(VIVOSuite.class)
 @SuiteClasses(
     {
         RebuildSearchIndex.class,
-        CreateOrganization.class
+        CreateOrganization.class,
+        DeleteOrganization.class
     }
 )
 public class AddNonPersonThings {

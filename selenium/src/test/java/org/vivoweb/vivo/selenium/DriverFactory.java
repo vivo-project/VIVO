@@ -2,6 +2,7 @@ package org.vivoweb.vivo.selenium;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 
 public final class DriverFactory {
     private static WebDriver driver = null;

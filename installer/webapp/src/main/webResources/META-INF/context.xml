@@ -1,4 +1,4 @@
-<Context crossContext="true" override="true">
+<Context> <!-- useHttpOnly="false" -->
    <Environment
         type="java.lang.String" 
         name="vitro/home"

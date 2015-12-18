@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -61,6 +63,47 @@ public class AbstractSeleniumTest {
         driver.findElement(by).sendKeys(text);
     }
 
+    protected void typeAutoCompleteSelect(By by, String text, Keys... keys) {
+        WebElement element = driver.findElement(by);
+
+        int count = 0;
+        WebElement autoComplete = null;
+        while (autoComplete == null) {
+            element.sendKeys(text);
+
+            try {
+                Thread.sleep(500);
+                autoComplete = driver.findElement(By.className("ui-autocomplete"));
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (NoSuchElementException nse) {
+                for (int i = 0; i < text.length(); i++) {
+                    element.sendKeys(Keys.BACK_SPACE);
+                }
+
+                if (count > 4) {
+                    throw nse;
+                }
+            }
+
+            count++;
+        }
+
+//        WebDriverWait wait = new WebDriverWait(driver, 5);
+//        WebElement autoComplete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("ui-autocomplete")));
+
+        if (keys != null && keys.length > 0) {
+            for (Keys key : keys) {
+                element.sendKeys(key);
+            }
+        }
+
+        WebElement selected = driver.findElement(By.id("ui-active-menuitem"));
+        if (selected != null) {
+            selected.click();
+        }
+    }
+
     protected void typeTinyMCE(String text) {
 //        <td> tinyMCE.activeEditor.setContent('The Primate College of America is a privately-funded college for the study of primates.')</td>
 
@@ -69,6 +112,10 @@ public class AbstractSeleniumTest {
         element.click();
         element.sendKeys(text);
         driver.switchTo().defaultContent();
+    }
+
+    protected void verifyElementPresent(By by) {
+        Assert.assertNotNull(driver.findElement(by));
     }
 
     protected void verifyTextPresent(String text) {
