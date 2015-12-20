@@ -1,9 +1,11 @@
 package org.vivoweb.vivo.selenium.tests;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
@@ -19,6 +21,17 @@ import org.vivoweb.vivo.selenium.SeleniumUtils;
 
 public class AbstractSeleniumTest {
     protected WebDriver driver;
+
+    public void assertConfirmation(String text) {
+        WebDriverWait wait = new WebDriverWait(driver, 2);
+        wait.until(ExpectedConditions.alertIsPresent());
+        Alert alert = driver.switchTo().alert();
+        if (!StringUtils.isEmpty(text)) {
+            Assert.assertTrue(text.equalsIgnoreCase(alert.getText()));
+        }
+        alert.accept();
+        driver.switchTo().defaultContent();
+    }
 
     protected void assertTitle(String title) {
         Assert.assertEquals(title, driver.getTitle());
@@ -60,7 +73,9 @@ public class AbstractSeleniumTest {
     }
 
     protected void type(By by, String text) {
-        driver.findElement(by).sendKeys(text);
+        WebElement element = driver.findElement(by);
+        element.click();
+        element.sendKeys(text);
     }
 
     protected void typeAutoCompleteSelect(By by, String text, Keys... keys) {
@@ -77,11 +92,12 @@ public class AbstractSeleniumTest {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             } catch (NoSuchElementException nse) {
-                for (int i = 0; i < text.length(); i++) {
-                    element.sendKeys(Keys.BACK_SPACE);
-                }
+                element.clear();
+//                for (int i = 0; i < text.length(); i++) {
+//                    element.sendKeys(Keys.BACK_SPACE);
+//                }
 
-                if (count > 4) {
+                if (count > 10) {
                     throw nse;
                 }
             }
@@ -119,7 +135,8 @@ public class AbstractSeleniumTest {
     }
 
     protected void verifyTextPresent(String text) {
-        Assert.assertNotNull(driver.findElement(xpathForTextPresent(text)));
+        Assert.assertTrue(driver.findElement(By.xpath("//body")).getText().contains(text));
+//        Assert.assertNotNull(driver.findElement(xpathForTextPresent(text)));
     }
 
     protected boolean waitForElementPresent(By by) {

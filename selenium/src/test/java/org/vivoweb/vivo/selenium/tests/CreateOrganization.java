@@ -330,13 +330,14 @@ public class CreateOrganization extends AbstractSeleniumTest {
         clickAndWait(By.id("submit"));
         assertTitle("Primate College of America");
 
-        clickAndWait(By.cssSelector("li.nonSelectedGroupTab.clickable"));
+        clickAndWait(By.xpath("//div[@id='wrapper-content']/ul/li[14]"));
         clickAndWait(By.xpath("(//img[@alt='add'])[14]"));
         assertTitle("Edit");
 
         type(By.id("typeSelector"), "Workshop");
         type(By.id("activity"), "New Primate Students ");
-        type(By.id("startField-year"), "2006");
+        type(By.id("startField-year"), "2003");
+        type(By.id("endField-year"), "2006");
 
         clickAndWait(By.id("submit"));
         assertTitle("Primate College of America");
@@ -453,14 +454,14 @@ public class CreateOrganization extends AbstractSeleniumTest {
 
         // Verify everything entered is displaying properly
 
-        clickAndWait(By.cssSelector("li.nonSelectedGroupTab.clickable"));
+        clickAndWait(By.xpath("//div[@id='wrapper-content']/ul/li[2]"));
         verifyTextPresent("PCoA");
         verifyTextPresent("1959 -");
         verifyElementPresent(By.linkText("B.S. Bachelor of Science"));
         verifyElementPresent(By.linkText("Primate Student of the Year"));
         verifyElementPresent(By.linkText("Best Primate College"));
 
-        clickAndWait(By.cssSelector("li.nonSelectedGroupTab.clickable"));
+        clickAndWait(By.xpath("//div[@id='wrapper-content']/ul/li[4]"));
         verifyTextPresent("faculty administrative position");
         verifyElementPresent(By.linkText("Person, Polly"));
         verifyTextPresent("Person, Polly, Dr. 1999 -");
