@@ -3,9 +3,8 @@ package org.vivoweb.vivo.selenium.tests;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 
-public class CreateOrganization extends AbstractSeleniumTest {
+public class CreateOrganization extends AbstractVIVOSeleniumTest {
     @Test
     public void createOrganization() {
         deleteAllVisibleCookies();
@@ -13,7 +12,7 @@ public class CreateOrganization extends AbstractSeleniumTest {
         open("/");
         assertTitle("VIVO");
 
-        logIn("testAdmin@cornell.edu", "Password");
+        vivoLogIn("testAdmin@cornell.edu", "Password");
 
         clickAndWait(By.linkText("Site Admin"));
         assertTitle("VIVO Site Administration");
@@ -206,7 +205,7 @@ public class CreateOrganization extends AbstractSeleniumTest {
         clickAndWait(By.cssSelector("a.add-hasCollaborator > img.add-individual"));
         assertTitle("Edit");
 
-        typeAutoCompleteSelect(By.id("object"), "Primate His", Keys.ARROW_DOWN);
+        vivoAutoCompleteSelect(By.id("object"), "Primate His", Keys.ARROW_DOWN);
 
         clickAndWait(By.id("submit"));
         assertTitle("Primate College of America");
@@ -264,7 +263,7 @@ public class CreateOrganization extends AbstractSeleniumTest {
         clickAndWait(By.cssSelector("a.add-RO_0001025 > img.add-individual"));
         assertTitle("Edit");
 
-        typeAutoCompleteSelect(By.id("object"), "northern Afr", Keys.ARROW_DOWN);
+        vivoAutoCompleteSelect(By.id("object"), "northern Afr", Keys.ARROW_DOWN);
 
         clickAndWait(By.id("submit"));
         assertTitle("Primate College of America");
@@ -389,7 +388,7 @@ public class CreateOrganization extends AbstractSeleniumTest {
         clickAndWait(By.cssSelector("#researchGroup > article.property > #RO_0000053 > a.add-RO_0000053 > img.add-individual"));
         assertTitle("Edit");
 
-        typeAutoCompleteSelect(By.id("grant"), "primate hab", Keys.ARROW_DOWN);
+        vivoAutoCompleteSelect(By.id("grant"), "primate hab", Keys.ARROW_DOWN);
 
         clickAndWait(By.cssSelector("input.submit"));
         assertTitle("Primate College of America");
@@ -447,7 +446,7 @@ public class CreateOrganization extends AbstractSeleniumTest {
         clickAndWait(By.cssSelector("a.add-governingAuthorityFor > img.add-individual"));
         assertTitle("Edit");
 
-        typeAutoCompleteSelect(By.id("object"), "primate colleges of the wor", Keys.ARROW_DOWN);
+        vivoAutoCompleteSelect(By.id("object"), "primate colleges of the wor", Keys.ARROW_DOWN);
 
         clickAndWait(By.id("submit"));
         assertTitle("Primate College of America");
@@ -455,34 +454,37 @@ public class CreateOrganization extends AbstractSeleniumTest {
         // Verify everything entered is displaying properly
 
         clickAndWait(By.xpath("//div[@id='wrapper-content']/ul/li[2]"));
-        verifyTextPresent("PCoA");
-        verifyTextPresent("1959 -");
+        verifyTextPresent(
+                "PCoA",
+                "1959 -"
+        );
         verifyElementPresent(By.linkText("B.S. Bachelor of Science"));
         verifyElementPresent(By.linkText("Primate Student of the Year"));
         verifyElementPresent(By.linkText("Best Primate College"));
 
         clickAndWait(By.xpath("//div[@id='wrapper-content']/ul/li[4]"));
-        verifyTextPresent("faculty administrative position");
+        verifyTextPresent(
+                "faculty administrative position",
+                "Person, Polly, Dr. 1999 -",
+                "Primates-r-us Founder 2010 -",
+                "Primate Colleges of the World Member 2009 -",
+                "Primate Heart Health Founder 2010 -",
+                "New Primate Students 2003 - 2006",
+                "Primates in the Wild 1997 -"
+        );
         verifyElementPresent(By.linkText("Person, Polly"));
-        verifyTextPresent("Person, Polly, Dr. 1999 -");
         verifyElementPresent(By.linkText("Primate History Library"));
         verifyElementPresent(By.linkText("Primate Research Laboratory"));
         verifyElementPresent(By.linkText("Primates-r-us"));
-        verifyTextPresent("Primates-r-us Founder 2010 -");
         verifyElementPresent(By.linkText("Primate Colleges of the World"));
-        verifyTextPresent("Primate Colleges of the World Member 2009 -");
         verifyElementPresent(By.linkText("Primate Heart Health"));
-        verifyTextPresent("Primate Heart Health Founder 2010 -");
         verifyElementPresent(By.linkText("New Primate Students"));
-        verifyTextPresent("New Primate Students 2003 - 2006");
         verifyElementPresent(By.linkText("Primates in the Wild"));
-        verifyTextPresent("Primates in the Wild 1997 -");
 
         clickAndWait(By.xpath("//div[@id='wrapper-content']/ul/li[6]"));
+        verifyTextPresent("invited talk", "Primate Health and Fitness, Organizer 2008");
         verifyElementPresent(By.linkText("Primate Info"));
-        verifyTextPresent("invited talk");
         verifyElementPresent(By.linkText("Primate Health and Fitness"));
-        verifyTextPresent("Primate Health and Fitness, Organizer 2008");
         verifyElementPresent(By.linkText("Primate Happenings"));
         verifyElementPresent(By.linkText("USA222333444555"));
 
@@ -493,73 +495,76 @@ public class CreateOrganization extends AbstractSeleniumTest {
         verifyTextPresent("Gorillas");
 
         clickAndWait(By.xpath("//div[@id='wrapper-content']/ul/li[10]"));
+        verifyTextPresent("Primate Health Check Sponsor 2008 - 2010");
         verifyElementPresent(By.linkText("Gorilla Moving Company"));
         verifyElementPresent(By.linkText("Primate Health Check"));
-        verifyTextPresent("Primate Health Check Sponsor 2008 - 2010");
         verifyElementPresent(By.linkText("Portable Primate Habitat"));
         verifyElementPresent(By.linkText("Introduction to Primates"));
 
         clickAndWait(By.xpath("//div[@id='wrapper-content']/ul/li[12]"));
-        verifyTextPresent("555-555-5555");
-        verifyTextPresent("555-555-5554");
-        verifyTextPresent("info@primates.edu");
-        verifyTextPresent("1234 Northern African Nation");
-        verifyTextPresent("Morocco City");
-        verifyTextPresent("1234567890");
-        verifyTextPresent("Morocco");
+        verifyTextPresent(
+                "555-555-5555",
+                "555-555-5554",
+                "info@primates.edu",
+                "1234 Northern African Nation",
+                "Morocco City",
+                "1234567890",
+                "Morocco");
         verifyElementPresent(By.linkText("northern Africa"));
         verifyElementPresent(By.linkText("Primate College of New York"));
         verifyElementPresent(By.linkText("Primate University of America"));
         verifyElementPresent(By.linkText("Primate Colleges of the World"));
 
         clickAndWait(By.xpath("//div[@id='wrapper-content']/ul/li[14]"));
-        verifyTextPresent("PCoA");
-        verifyTextPresent("1959 -");
+        verifyTextPresent(
+                "PCoA",
+                "1959 -",
+                "faculty administrative position",
+                "Person, Polly, Dr. 1999 -",
+                "Primates-r-us Founder 2010 -",
+                "Primate Colleges of the World Member 2009 -",
+                "Primate Heart Health Founder 2010 -",
+                "New Primate Students 2003 - 2006",
+                "Primates in the Wild 1997 -",
+                "invited talk",
+                "Primate Health and Fitness, Organizer 2008",
+                "Gorillas",
+                "Primate Health Check Sponsor 2008 - 2010",
+                "555-555-5555",
+                "555-555-5554",
+                "info@primates.edu",
+                "1234 Northern African Nation",
+                "Morocco City",
+                "1234567890",
+                "Morocco"
+        );
         verifyElementPresent(By.linkText("B.S. Bachelor of Science"));
         verifyElementPresent(By.linkText("Primate Student of the Year"));
         verifyElementPresent(By.linkText("Best Primate College"));
-        verifyTextPresent("faculty administrative position");
         verifyElementPresent(By.linkText("Person, Polly"));
-        verifyTextPresent("Person, Polly, Dr. 1999 -");
         verifyElementPresent(By.linkText("Primate History Library"));
         verifyElementPresent(By.linkText("Primate Research Laboratory"));
         verifyElementPresent(By.linkText("Primates-r-us"));
-        verifyTextPresent("Primates-r-us Founder 2010 -");
         verifyElementPresent(By.linkText("Primate Colleges of the World"));
-        verifyTextPresent("Primate Colleges of the World Member 2009 -");
         verifyElementPresent(By.linkText("Primate Heart Health"));
-        verifyTextPresent("Primate Heart Health Founder 2010 -");
         verifyElementPresent(By.linkText("New Primate Students"));
-        verifyTextPresent("New Primate Students 2003 - 2006");
         verifyElementPresent(By.linkText("Primates in the Wild"));
-        verifyTextPresent("Primates in the Wild 1997 -");
         verifyElementPresent(By.linkText("Primate Info"));
-        verifyTextPresent("invited talk");
         verifyElementPresent(By.linkText("Primate Health and Fitness"));
-        verifyTextPresent("Primate Health and Fitness, Organizer 2008");
         verifyElementPresent(By.linkText("Primate Happenings"));
         verifyElementPresent(By.linkText("USA222333444555"));
         verifyElementPresent(By.linkText("Primate Habitat Research Grant"));
         verifyElementPresent(By.linkText("Primate Survival Planning Grant"));
         verifyElementPresent(By.linkText("Human and Ape Brain Comparison"));
-        verifyTextPresent("Gorillas");
         verifyElementPresent(By.linkText("Gorilla Moving Company"));
         verifyElementPresent(By.linkText("Primate Health Check"));
-        verifyTextPresent("Primate Health Check Sponsor 2008 - 2010");
         verifyElementPresent(By.linkText("Portable Primate Habitat"));
         verifyElementPresent(By.linkText("Introduction to Primates"));
-        verifyTextPresent("555-555-5555");
-        verifyTextPresent("555-555-5554");
-        verifyTextPresent("info@primates.edu");
-        verifyTextPresent("1234 Northern African Nation");
-        verifyTextPresent("Morocco City");
-        verifyTextPresent("1234567890");
-        verifyTextPresent("Morocco");
         verifyElementPresent(By.linkText("northern Africa"));
         verifyElementPresent(By.linkText("Primate College of New York"));
         verifyElementPresent(By.linkText("Primate University of America"));
         verifyElementPresent(By.linkText("Primate Colleges of the World"));
 
-        logOut();
+        vivoLogOut();
     }
 }

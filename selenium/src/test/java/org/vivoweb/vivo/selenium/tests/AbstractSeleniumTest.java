@@ -4,15 +4,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -45,23 +40,6 @@ public class AbstractSeleniumTest {
         driver.manage().deleteAllCookies();
     }
 
-    protected void logIn(String email, String password) {
-        clickAndWait(By.linkText("Log in"));                    // clickAndWait,link=Log in
-        assertTitle("Log in to VIVO");                          // aseertTitle,Log in to VIVO
-
-        type(By.id("loginName"), email);                        // type,id=loginName,testAdmin@cornell.edu
-        type(By.id("loginPassword"), password);                 // type,id=loginPassword,Password
-
-        clickAndWait(By.name("loginForm"));                     // clickAndWait,name=loginForm
-        assertTitle("VIVO");                                    // assertTitle,VIVO
-    }
-
-    protected void logOut() {
-        Actions actions = new Actions(driver);
-        actions.moveToElement( driver.findElement(By.id("user-menu")) ).perform();
-        driver.findElement(By.linkText("Log out")).click();
-    }
-
     protected void open(String urlPart) {
         SeleniumUtils.navigate(driver, urlPart);
     }
@@ -74,50 +52,7 @@ public class AbstractSeleniumTest {
 
     protected void type(By by, String text) {
         WebElement element = driver.findElement(by);
-        element.click();
         element.sendKeys(text);
-    }
-
-    protected void typeAutoCompleteSelect(By by, String text, Keys... keys) {
-        WebElement element = driver.findElement(by);
-
-        int count = 0;
-        WebElement autoComplete = null;
-        while (autoComplete == null) {
-            element.sendKeys(text);
-
-            try {
-                Thread.sleep(500);
-                autoComplete = driver.findElement(By.className("ui-autocomplete"));
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            } catch (NoSuchElementException nse) {
-                element.clear();
-//                for (int i = 0; i < text.length(); i++) {
-//                    element.sendKeys(Keys.BACK_SPACE);
-//                }
-
-                if (count > 10) {
-                    throw nse;
-                }
-            }
-
-            count++;
-        }
-
-//        WebDriverWait wait = new WebDriverWait(driver, 5);
-//        WebElement autoComplete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("ui-autocomplete")));
-
-        if (keys != null && keys.length > 0) {
-            for (Keys key : keys) {
-                element.sendKeys(key);
-            }
-        }
-
-        WebElement selected = driver.findElement(By.id("ui-active-menuitem"));
-        if (selected != null) {
-            selected.click();
-        }
     }
 
     protected void typeTinyMCE(String text) {
@@ -134,8 +69,13 @@ public class AbstractSeleniumTest {
         Assert.assertNotNull(driver.findElement(by));
     }
 
-    protected void verifyTextPresent(String text) {
-        Assert.assertTrue(driver.findElement(By.xpath("//body")).getText().contains(text));
+    protected void verifyTextPresent(String... text) {
+        if (text != null) {
+            String bodyText = driver.findElement(By.xpath("//body")).getText();
+            for (String str : text) {
+                Assert.assertTrue(bodyText.contains(str));
+            }
+        }
 //        Assert.assertNotNull(driver.findElement(xpathForTextPresent(text)));
     }
 
