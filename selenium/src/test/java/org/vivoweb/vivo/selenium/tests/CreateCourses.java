@@ -2,6 +2,7 @@ package org.vivoweb.vivo.selenium.tests;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 public class CreateCourses extends AbstractVIVOSeleniumTest {
     @Test
@@ -68,7 +69,7 @@ public class CreateCourses extends AbstractVIVOSeleniumTest {
         clickAndWait(By.xpath("//h3[@id='geographicFocus']/a/img"));
         assertTitle("Edit");
 
-        vivoAutoCompleteSelect(By.id("object"), "Afri");
+        vivoAutoCompleteSelect(By.id("object"), "Afri", Keys.ARROW_DOWN);
 
         clickAndWait(By.id("submit"));
         assertTitle("Introduction to Primate Health");
@@ -89,7 +90,7 @@ public class CreateCourses extends AbstractVIVOSeleniumTest {
         clickAndWait(By.id("submit"));
         assertTitle("Introduction to Primate Health");
 
-        clickAndWait(By.xpath("//div[@id='wrapper-content']/ul/li[8]"));
+        clickAndWait(By.xpath("//div[@id='wrapper-content']/ul/li[@groupname='viewAll']"));
 
         clickAndWait(By.cssSelector("a.add-BFO_0000051 > img.add-individual"));
         assertTitle("Edit");
@@ -104,7 +105,7 @@ public class CreateCourses extends AbstractVIVOSeleniumTest {
 
         clickAndWait(By.id("showAddFormButton"));
 
-        clickAndWait(By.linkText("Select or create a VIVO-defined concept."));
+        clickAndWait(By.linkText("Select or create a VIVO-defined concept. "));
         assertTitle("Edit");
 
         type(By.id("relatedIndLabel"), "Animal Health");
@@ -137,7 +138,7 @@ public class CreateCourses extends AbstractVIVOSeleniumTest {
         assertTitle("Introduction to Primate Health");
 
         // Test publication tab entry
-        clickAndWait(By.cssSelector("li.nonSelectedGroupTab.clickable"));
+        clickAndWait(By.xpath("//div[@id='wrapper-content']/ul/li[@groupname='publications']"));
 
         clickAndWait(By.xpath("//h3[@id='presents']/a/img"));
         assertTitle("Edit");
@@ -148,7 +149,7 @@ public class CreateCourses extends AbstractVIVOSeleniumTest {
         clickAndWait(By.id("offerCreate"));
         assertTitle("Edit");
 
-        verifyTextPresent("Create &quot;related documents&quot; entry for Introduction to Primate Health");
+        verifyTextPresent("Create \"related documents\" entry for Introduction to Primate Health");
 
         type(By.id("label"), "http://primatehealthintro.cornell.edu");
 
@@ -163,7 +164,7 @@ public class CreateCourses extends AbstractVIVOSeleniumTest {
         clickAndWait(By.id("submit"));
         assertTitle("Introduction to Primate Health");
 
-        clickAndWait(By.xpath("//div[@id='wrapper-content']/ul/li[6]"));
+        clickAndWait(By.xpath("//div[@id='wrapper-content']/ul/li[@groupname='contact']"));
         clickAndWait(By.xpath("//h3[@id='contactInformation']/a/img"));
         assertTitle("Edit");
 
@@ -177,7 +178,7 @@ public class CreateCourses extends AbstractVIVOSeleniumTest {
         clickAndWait(By.xpath("(//h3[@id='RO_0001025']/a)[2]"));
         assertTitle("Edit");
 
-        vivoAutoCompleteSelect(By.id("label"), "lib");
+        vivoAutoCompleteSelect(By.id("object"), "lib", Keys.ARROW_DOWN);
 
         clickAndWait(By.id("submit"));
         assertTitle("Introduction to Primate Health");
@@ -193,7 +194,7 @@ public class CreateCourses extends AbstractVIVOSeleniumTest {
         clickAndWait(By.id("submit"));
         assertTitle("Introduction to Primate Health");
 
-        clickAndWait(By.xpath("//div[@id='wrapper-content']/ul/li[8]"));
+        clickAndWait(By.xpath("//div[@id='wrapper-content']/ul/li[@groupname='viewAll']"));
         clickAndWait(By.xpath("//h3[@id='courseCredits']/a/img"));
         assertTitle("Edit");
 
@@ -210,7 +211,7 @@ public class CreateCourses extends AbstractVIVOSeleniumTest {
         clickAndWait(By.id("submit"));
         assertTitle("Introduction to Primate Health");
 
-        clickAndWait(By.xpath("//div[@id='wrapper-content']/ul/li[8]"));
+        clickAndWait(By.xpath("//div[@id='wrapper-content']/ul/li[@groupname='viewAll']"));
         verifyTextPresent(
                 "Introduction to Primate Health",
                 "Course",

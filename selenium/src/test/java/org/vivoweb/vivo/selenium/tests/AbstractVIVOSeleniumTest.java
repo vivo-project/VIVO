@@ -33,6 +33,7 @@ public class AbstractVIVOSeleniumTest extends AbstractSeleniumTest {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             } catch (NoSuchElementException nse) {
+                System.out.println("Failure number: " + count);
                 element.clear();
 //                for (int i = 0; i < text.length(); i++) {
 //                    element.sendKeys(Keys.BACK_SPACE);
@@ -53,6 +54,15 @@ public class AbstractVIVOSeleniumTest extends AbstractSeleniumTest {
             for (Keys key : keys) {
                 element.sendKeys(key);
             }
+        } else {
+            // If no key presses specified, use default action to select the first entry in the autocomplete
+            element.sendKeys(Keys.ARROW_DOWN);
+        }
+
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
 
         WebElement selected = driver.findElement(By.id("ui-active-menuitem"));
