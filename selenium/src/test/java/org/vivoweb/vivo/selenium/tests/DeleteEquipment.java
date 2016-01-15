@@ -23,7 +23,7 @@ public class DeleteEquipment extends AbstractVIVOSeleniumTest {
         assertTitle("Portable Primate Habitat");
 
         vivoDeleteIndividual();
-/*
+/* From CreateEquipment */
         clickAndWait(By.linkText("Equipment"));
         assertTitle("Equipment");
 
@@ -31,7 +31,7 @@ public class DeleteEquipment extends AbstractVIVOSeleniumTest {
         assertTitle("Primate Feeder");
 
         vivoDeleteIndividual();
-*/
+/* */
 
         vivoLogOut();
     }

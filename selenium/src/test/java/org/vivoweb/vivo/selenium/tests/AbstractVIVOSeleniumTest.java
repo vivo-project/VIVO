@@ -28,7 +28,7 @@ public class AbstractVIVOSeleniumTest extends AbstractSeleniumTest {
             element.sendKeys(text);
 
             try {
-                Thread.sleep(500);
+                Thread.sleep(1000);
                 autoComplete = driver.findElement(By.className("ui-autocomplete"));
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -42,7 +42,7 @@ public class AbstractVIVOSeleniumTest extends AbstractSeleniumTest {
 
             if (autoComplete == null) {
                 element.clear();
-                if (count > 10) {
+                if (count > 5) {
                     throw new NoSuchElementException("Auto complete is not visible");
                 }
 

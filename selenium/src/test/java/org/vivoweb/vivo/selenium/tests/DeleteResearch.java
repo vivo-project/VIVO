@@ -57,7 +57,7 @@ public class DeleteResearch extends AbstractVIVOSeleniumTest {
 
         vivoDeleteIndividual();
 /* */
-/*
+/* From CreateTopic */
         clickAndWait(By.linkText("Index"));
         assertTitle("Index of Contents");
 
@@ -90,7 +90,7 @@ public class DeleteResearch extends AbstractVIVOSeleniumTest {
         assertTitle("Primate Health");
 
         vivoDeleteIndividual();
-*/
+/* */
     /* From CreateActivity */
         clickAndWait(By.linkText("Index"));
         assertTitle("Index of Contents");
