@@ -46,17 +46,18 @@ public class DeleteEvents extends AbstractVIVOSeleniumTest {
 
         vivoDeleteIndividual();
 
+/* From CreateEvent */
         clickAndWait(By.linkText("Index"));
         assertTitle("Index of Contents");
 
         clickAndWait(By.linkText("Event"));
         assertTitle("Event");
-/*
+
         clickAndWait(By.linkText("Primate Health Conference"));
         assertTitle("Primate Health Conference");
 
         vivoDeleteIndividual();
-*/
+/* */
         clickAndWait(By.linkText("Index"));
         assertTitle("Index of Contents");
 
@@ -67,7 +68,8 @@ public class DeleteEvents extends AbstractVIVOSeleniumTest {
         assertTitle("Primates in the Wild");
 
         vivoDeleteIndividual();
-/*
+
+    /* From CreateCourses */
         clickAndWait(By.linkText("Index"));
         assertTitle("Index of Contents");
 
@@ -78,7 +80,7 @@ public class DeleteEvents extends AbstractVIVOSeleniumTest {
         assertTitle("Primate Health Talks");
 
         vivoDeleteIndividual();
-*/
+    /* */
         // Where is Introduction to Primates??
 
         vivoLogOut();

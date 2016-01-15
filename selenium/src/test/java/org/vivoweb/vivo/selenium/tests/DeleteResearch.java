@@ -45,7 +45,7 @@ public class DeleteResearch extends AbstractVIVOSeleniumTest {
         assertTitle("Primate Student of the Year");
 
         vivoDeleteIndividual();
-/*
+/* From CreateEvent */
         clickAndWait(By.linkText("Index"));
         assertTitle("Index of Contents");
 
@@ -56,18 +56,8 @@ public class DeleteResearch extends AbstractVIVOSeleniumTest {
         assertTitle("PHC Proceedings");
 
         vivoDeleteIndividual();
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Concept"));
-        assertTitle("Concept");
-
-        clickAndWait(By.linkText("Animal Health"));
-        assertTitle("Animal Health");
-
-        vivoDeleteIndividual();
-
+/* */
+/*
         clickAndWait(By.linkText("Index"));
         assertTitle("Index of Contents");
 
@@ -76,17 +66,6 @@ public class DeleteResearch extends AbstractVIVOSeleniumTest {
 
         clickAndWait(By.linkText("Ape Health"));
         assertTitle("Ape Health");
-
-        vivoDeleteIndividual();
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Concept"));
-        assertTitle("Concept");
-
-        clickAndWait(By.linkText("Elderly Care"));
-        assertTitle("Elderly Care");
 
         vivoDeleteIndividual();
 
@@ -112,6 +91,31 @@ public class DeleteResearch extends AbstractVIVOSeleniumTest {
 
         vivoDeleteIndividual();
 */
+    /* From CreateActivity */
+        clickAndWait(By.linkText("Index"));
+        assertTitle("Index of Contents");
+
+        clickAndWait(By.linkText("Concept"));
+        assertTitle("Concept");
+
+        clickAndWait(By.linkText("Elderly Care"));
+        assertTitle("Elderly Care");
+
+        vivoDeleteIndividual();
+    /* */
+
+    /* From CreateCourses */
+        clickAndWait(By.linkText("Index"));
+        assertTitle("Index of Contents");
+
+        clickAndWait(By.linkText("Concept"));
+        assertTitle("Concept");
+
+        clickAndWait(By.linkText("Animal Health"));
+        assertTitle("Animal Health");
+
+        vivoDeleteIndividual();
+    /* */
         clickAndWait(By.linkText("Index"));
         assertTitle("Index of Contents");
 
@@ -122,7 +126,8 @@ public class DeleteResearch extends AbstractVIVOSeleniumTest {
         assertTitle("Primate Info");
 
         vivoDeleteIndividual();
-/*
+
+    /* Delete grant from createActivity */
         clickAndWait(By.linkText("Index"));
         assertTitle("Index of Contents");
 
@@ -133,7 +138,8 @@ public class DeleteResearch extends AbstractVIVOSeleniumTest {
         assertTitle("Primate Elderly Care");
 
         vivoDeleteIndividual();
-*/
+    /* */
+
         clickAndWait(By.linkText("Index"));
         assertTitle("Index of Contents");
 
@@ -166,7 +172,8 @@ public class DeleteResearch extends AbstractVIVOSeleniumTest {
         assertTitle("USA222333444555");
 
         vivoDeleteIndividual();
-/*
+
+    /* From CreateCourses */
         clickAndWait(By.linkText("Index"));
         assertTitle("Index of Contents");
 
@@ -177,7 +184,7 @@ public class DeleteResearch extends AbstractVIVOSeleniumTest {
         assertTitle("http://primatehealthintro.cornell.edu");
 
         vivoDeleteIndividual();
-*/
+    /* */
         vivoLogOut();
     }
 }

@@ -6,12 +6,15 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite.SuiteClasses;
 import org.vivoweb.vivo.selenium.DriverFactory;
 import org.vivoweb.vivo.selenium.VIVOSuite;
+import org.vivoweb.vivo.selenium.tests.CreateActivity;
 import org.vivoweb.vivo.selenium.tests.CreateCourses;
+import org.vivoweb.vivo.selenium.tests.CreateEvent;
 import org.vivoweb.vivo.selenium.tests.CreateOrganization;
 import org.vivoweb.vivo.selenium.tests.DeleteActivities;
 import org.vivoweb.vivo.selenium.tests.DeleteCourses;
 import org.vivoweb.vivo.selenium.tests.DeleteEquipment;
 import org.vivoweb.vivo.selenium.tests.DeleteEvents;
+import org.vivoweb.vivo.selenium.tests.DeleteLocations;
 import org.vivoweb.vivo.selenium.tests.DeleteOrganization;
 import org.vivoweb.vivo.selenium.tests.DeleteResearch;
 import org.vivoweb.vivo.selenium.tests.RebuildSearchIndex;
@@ -22,8 +25,11 @@ import org.vivoweb.vivo.selenium.tests.RebuildSearchIndex;
                 RebuildSearchIndex.class,
                 CreateOrganization.class,
                 CreateCourses.class,
+                CreateActivity.class,
+                CreateEvent.class,
                 DeleteActivities.class,
                 DeleteCourses.class,
+                DeleteLocations.class,
                 DeleteEvents.class,
                 DeleteResearch.class,
                 DeleteEquipment.class,

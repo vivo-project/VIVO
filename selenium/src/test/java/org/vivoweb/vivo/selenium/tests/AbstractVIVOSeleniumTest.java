@@ -34,21 +34,21 @@ public class AbstractVIVOSeleniumTest extends AbstractSeleniumTest {
                 throw new RuntimeException(e);
             } catch (NoSuchElementException nse) {
                 System.out.println("Failure number: " + count);
-                element.clear();
-//                for (int i = 0; i < text.length(); i++) {
-//                    element.sendKeys(Keys.BACK_SPACE);
-//                }
-
-                if (count > 10) {
-                    throw nse;
-                }
             }
 
-            count++;
-        }
+            if (autoComplete != null && !autoComplete.isDisplayed()) {
+                autoComplete = null;
+            }
 
-//        WebDriverWait wait = new WebDriverWait(driver, 5);
-//        WebElement autoComplete = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("ui-autocomplete")));
+            if (autoComplete == null) {
+                element.clear();
+                if (count > 10) {
+                    throw new NoSuchElementException("Auto complete is not visible");
+                }
+
+                count++;
+            }
+        }
 
         if (keys != null && keys.length > 0) {
             for (Keys key : keys) {
@@ -69,6 +69,19 @@ public class AbstractVIVOSeleniumTest extends AbstractSeleniumTest {
         if (selected != null) {
             selected.click();
         }
+    }
+
+    protected void vivoDeleteIndividual(String category, String individual) {
+        clickAndWait(By.linkText("Index"));
+        assertTitle("Index of Contents");
+
+        clickAndWait(By.linkText(category));
+        assertTitle(category);
+
+        clickAndWait(By.linkText(individual));
+        assertTitle(individual);
+
+        vivoDeleteIndividual();
     }
 
     protected void vivoDeleteIndividual() {

@@ -44,6 +44,12 @@ public class AbstractSeleniumTest {
         SeleniumUtils.navigate(driver, urlPart);
     }
 
+    protected void pause(long timeout) {
+        try {
+            Thread.sleep(timeout);
+        } catch (InterruptedException e) {
+        }
+    }
     protected void selectByLabel(By by, String label) {
         Select select = new Select(driver.findElement(by));
         select.selectByVisibleText(label);

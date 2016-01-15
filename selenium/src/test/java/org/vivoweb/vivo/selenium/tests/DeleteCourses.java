@@ -12,7 +12,8 @@ public class DeleteCourses extends AbstractVIVOSeleniumTest {
         assertTitle("VIVO");
 
         vivoLogIn("testAdmin@cornell.edu", "Password");
-/*
+
+    /* From CreateCourses */
         clickAndWait(By.linkText("Index"));
         assertTitle("Index of Contents");
 
@@ -23,7 +24,8 @@ public class DeleteCourses extends AbstractVIVOSeleniumTest {
         assertTitle("Introduction to Primate Health");
 
         vivoDeleteIndividual();
-*/
+    /*  */
+
         clickAndWait(By.linkText("Index"));
         assertTitle("Index of Contents");
 
