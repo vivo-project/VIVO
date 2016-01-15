@@ -67,16 +67,6 @@ public class CreateEvent extends AbstractVIVOSeleniumTest {
         clickAndWait(By.id("submit"));
         assertTitle("Primate Health Conference");
 
-        // Wait for index to catch up
-        pause(4000);
-
-        clickAndWait(By.linkText("Index"));
-        clickAndWait(By.linkText("Conference"));
-        assertTitle("Conference");
-
-        clickAndWait(By.linkText("Primate Health Conference"));
-        assertTitle("Primate Health Conference");
-
         clickAndWait(By.xpath("//h3[@id='contactInformation']/a/img"));
         assertTitle("Edit");
 
