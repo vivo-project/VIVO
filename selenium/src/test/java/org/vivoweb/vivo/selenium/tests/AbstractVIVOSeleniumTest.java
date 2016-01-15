@@ -27,19 +27,21 @@ public class AbstractVIVOSeleniumTest extends AbstractSeleniumTest {
         while (autoComplete == null) {
             element.sendKeys(text);
 
-            try {
-                int findElementCount = 0;
-                while (autoComplete == null && findElementCount < 6) {
-                    Thread.sleep(250);
-                    autoComplete = driver.findElement(By.className("ui-autocomplete"));
-                    if (autoComplete != null && !autoComplete.isDisplayed()) {
-                        autoComplete = null;
-                    }
+            int findElementCount = 0;
+            while (autoComplete == null && findElementCount < 6) {
+                try {
+                Thread.sleep(250);
+
+                autoComplete = driver.findElement(By.className("ui-autocomplete"));
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                } catch (NoSuchElementException nse) {
+                    System.out.println("Failure number: " + count);
                 }
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            } catch (NoSuchElementException nse) {
-                System.out.println("Failure number: " + count);
+
+                if (autoComplete != null && !autoComplete.isDisplayed()) {
+                    autoComplete = null;
+                }
             }
 
             if (autoComplete == null) {
@@ -79,6 +81,25 @@ public class AbstractVIVOSeleniumTest extends AbstractSeleniumTest {
 
         clickAndWait(By.linkText(category));
         assertTitle(category);
+
+        WebElement individualLink = null;
+        int pageCount = 1;
+        do {
+            try {
+                individualLink = driver.findElement(By.linkText(individual));
+            } catch (NoSuchElementException nse) {
+            }
+
+            if (individualLink == null) {
+                pageCount++;
+                try {
+                    clickAndWait(By.linkText(Integer.toString(pageCount, 10)));
+                } catch (NoSuchElementException nse) {
+                    break;
+                }
+
+            }
+        } while (individualLink == null);
 
         clickAndWait(By.linkText(individual));
         assertTitle(individual);
