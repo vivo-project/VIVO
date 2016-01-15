@@ -10,6 +10,7 @@ import org.vivoweb.vivo.selenium.tests.CreateActivity;
 import org.vivoweb.vivo.selenium.tests.CreateCourses;
 import org.vivoweb.vivo.selenium.tests.CreateEquipment;
 import org.vivoweb.vivo.selenium.tests.CreateEvent;
+import org.vivoweb.vivo.selenium.tests.CreateLocation;
 import org.vivoweb.vivo.selenium.tests.CreateOrganization;
 import org.vivoweb.vivo.selenium.tests.CreateTopic;
 import org.vivoweb.vivo.selenium.tests.DeleteActivities;
@@ -31,6 +32,7 @@ import org.vivoweb.vivo.selenium.tests.RebuildSearchIndex;
                 CreateEvent.class,
                 CreateTopic.class,
                 CreateEquipment.class,
+                CreateLocation.class,
                 DeleteActivities.class,
                 DeleteCourses.class,
                 DeleteLocations.class,

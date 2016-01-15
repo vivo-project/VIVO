@@ -24,6 +24,9 @@ public class DeleteEquipment extends AbstractVIVOSeleniumTest {
 
         vivoDeleteIndividual();
 /* From CreateEquipment */
+        clickAndWait(By.linkText("Index"));
+        assertTitle("Index of Contents");
+
         clickAndWait(By.linkText("Equipment"));
         assertTitle("Equipment");
 

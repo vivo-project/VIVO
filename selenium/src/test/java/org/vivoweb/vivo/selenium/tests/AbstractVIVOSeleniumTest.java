@@ -28,21 +28,23 @@ public class AbstractVIVOSeleniumTest extends AbstractSeleniumTest {
             element.sendKeys(text);
 
             try {
-                Thread.sleep(1000);
-                autoComplete = driver.findElement(By.className("ui-autocomplete"));
+                int findElementCount = 0;
+                while (autoComplete == null && findElementCount < 6) {
+                    Thread.sleep(250);
+                    autoComplete = driver.findElement(By.className("ui-autocomplete"));
+                    if (autoComplete != null && !autoComplete.isDisplayed()) {
+                        autoComplete = null;
+                    }
+                }
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             } catch (NoSuchElementException nse) {
                 System.out.println("Failure number: " + count);
             }
 
-            if (autoComplete != null && !autoComplete.isDisplayed()) {
-                autoComplete = null;
-            }
-
             if (autoComplete == null) {
                 element.clear();
-                if (count > 5) {
+                if (count > 3) {
                     throw new NoSuchElementException("Auto complete is not visible");
                 }
 

@@ -19,72 +19,17 @@ public class DeleteLocations extends AbstractVIVOSeleniumTest {
 
         vivoDeleteIndividual("Building", "Primate Memorial Building");
 /* */
+/* from CreateLocation */
+        clickAndWait(By.linkText("Index"));
+        assertTitle("Index of Contents");
 
+        vivoDeleteIndividual("Building", "Jane Memorial Building");
+/* */
         vivoLogOut();
     }
 }
 /*
 <!--Delete Locations-->
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Building</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Building</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Jane Memorial Building</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Jane Memorial Building</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Edit this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value=&quot;Edit This Individual&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>_delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
