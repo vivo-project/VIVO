@@ -24,6 +24,7 @@ import org.vivoweb.vivo.selenium.tests.DeleteLocations;
 import org.vivoweb.vivo.selenium.tests.DeleteOrganization;
 import org.vivoweb.vivo.selenium.tests.DeleteResearch;
 import org.vivoweb.vivo.selenium.tests.RebuildSearchIndex;
+import org.vivoweb.vivo.selenium.tests.TestMenuManagement;
 import org.vivoweb.vivo.selenium.tests.VerifyAllThingsSearchable;
 
 @RunWith(VIVOSuite.class)
@@ -42,7 +43,7 @@ import org.vivoweb.vivo.selenium.tests.VerifyAllThingsSearchable;
                 CheckPublicView.class,
                 CheckIndexView.class,
                 CheckBrowseOptions.class,
-//                TestMenuManagement.class,
+                TestMenuManagement.class,
                 DeleteActivities.class,
                 DeleteCourses.class,
                 DeleteLocations.class,
