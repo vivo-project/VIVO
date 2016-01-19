@@ -6,6 +6,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite.SuiteClasses;
 import org.vivoweb.vivo.selenium.DriverFactory;
 import org.vivoweb.vivo.selenium.VIVOSuite;
+import org.vivoweb.vivo.selenium.tests.CheckBrowseOptions;
+import org.vivoweb.vivo.selenium.tests.CheckIndexView;
 import org.vivoweb.vivo.selenium.tests.CheckPublicView;
 import org.vivoweb.vivo.selenium.tests.CreateActivity;
 import org.vivoweb.vivo.selenium.tests.CreateCourses;
@@ -38,7 +40,8 @@ import org.vivoweb.vivo.selenium.tests.VerifyAllThingsSearchable;
                 RebuildSearchIndex.class,
                 VerifyAllThingsSearchable.class,
                 CheckPublicView.class,
-//                CheckIndexView.class,
+                CheckIndexView.class,
+                CheckBrowseOptions.class,
 //                TestMenuManagement.class,
                 DeleteActivities.class,
                 DeleteCourses.class,
