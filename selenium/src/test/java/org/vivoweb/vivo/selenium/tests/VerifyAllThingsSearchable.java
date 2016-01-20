@@ -11,7 +11,7 @@ public class VerifyAllThingsSearchable extends AbstractVIVOSeleniumTest {
         open("/");
         assertTitle("VIVO");
 
-        type(By.id("querytext"), "primates");
+        type(By.name("querytext"), "primates");
 
         clickAndWait(By.xpath("//input[@value='Search']"));
 
@@ -46,10 +46,10 @@ public class VerifyAllThingsSearchable extends AbstractVIVOSeleniumTest {
         verifyElementPresent(By.linkText("Primate Health Check"));
         verifyElementPresent(By.linkText("Primate Health Conference"));
         verifyElementPresent(By.linkText("Primate Heart Health"));
-        verifyElementPresent(By.linkText("New Primate Student"));
+        verifyElementPresent(By.linkText("New Primate Students"));
         verifyElementPresent(By.linkText("Primate Habitat Research Grant"));
-        verifyElementPresent(By.linkText("Primate Memorial Building"));
-        verifyElementPresent(By.linkText("Primate Student of the Year"));
+        verifyElementPresent(By.linkText("Best Primate College"));
+        verifyElementPresent(By.linkText("Primate History Library"));
 
         verifyTextPresent(
                 "Primates in the Wild Performance",
@@ -75,15 +75,15 @@ public class VerifyAllThingsSearchable extends AbstractVIVOSeleniumTest {
                 "Primate Heart Health Service",
                 "New Primate Students Workshop",
                 "Primate Habitat Research Grant Grant",
-                "Primate Memorial Building Building",
-                "Primate Student of the Year Award or Honor"
+                "Best Primate College Award or Honor",
+                "Primate History Library Library"
         );
 
         clickAndWait(By.linkText("2"));
         assertTitle("primates - VIVO Search Results");
 
-        verifyElementPresent(By.linkText("Best Primate College"));
-        verifyElementPresent(By.linkText("Primate History Library"));
+        verifyElementPresent(By.linkText("Primate Memorial Building"));
+        verifyElementPresent(By.linkText("Primate Student of the Year"));
         verifyElementPresent(By.linkText("Primate Survival Planning Grant"));
         verifyElementPresent(By.linkText("Primate College of New York"));
         verifyElementPresent(By.linkText("Primate Research Lab Room 123"));
@@ -91,7 +91,7 @@ public class VerifyAllThingsSearchable extends AbstractVIVOSeleniumTest {
         verifyElementPresent(By.linkText("Ape Health"));
         verifyElementPresent(By.linkText("Elderly Care"));
         verifyElementPresent(By.linkText("Jane Memorial Building"));
-//        verifyElementPresent(By.linkText("exact:http://primatehealthintro.cornell.edu"));
+        verifyElementPresent(By.linkText("http://primatehealthintro.cornell.edu"));
         verifyElementPresent(By.linkText("Human and Ape Brain Comparison"));
         verifyElementPresent(By.linkText("Person, Polly"));
         verifyElementPresent(By.linkText("Gorilla Moving Company"));
@@ -102,8 +102,8 @@ public class VerifyAllThingsSearchable extends AbstractVIVOSeleniumTest {
         verifyElementPresent(By.linkText("Kenya"));
 
         verifyTextPresent(
-                "Best Primate College Award or Honor",
-                "Primate History Library Library",
+                "Primate Memorial Building Building",
+                "Primate Student of the Year Award or Honor",
                 "Primate Survival Planning Grant Grant",
                 "Primate College of New York College",
                 "Primate Research Lab Room 123 Facility",

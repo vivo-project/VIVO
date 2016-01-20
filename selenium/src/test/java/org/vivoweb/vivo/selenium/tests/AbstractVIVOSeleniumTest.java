@@ -28,11 +28,12 @@ public class AbstractVIVOSeleniumTest extends AbstractSeleniumTest {
             element.sendKeys(text);
 
             int findElementCount = 0;
-            while (autoComplete == null && findElementCount < 6) {
+            while (autoComplete == null && findElementCount < 5) {
+                findElementCount++;
                 try {
-                Thread.sleep(250);
+                    Thread.sleep(250);
 
-                autoComplete = driver.findElement(By.className("ui-autocomplete"));
+                    autoComplete = driver.findElement(By.className("ui-autocomplete"));
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 } catch (NoSuchElementException nse) {
@@ -50,6 +51,11 @@ public class AbstractVIVOSeleniumTest extends AbstractSeleniumTest {
                     throw new NoSuchElementException("Auto complete is not visible");
                 }
 
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 count++;
             }
         }

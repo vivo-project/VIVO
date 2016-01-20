@@ -19,6 +19,8 @@ public class RebuildSearchIndex extends AbstractVIVOSeleniumTest {
         clickAndWait(By.linkText("Rebuild search index"));      // clickAndWait,link=Rebuild search index
         assertTitle("Rebuild Search Index");                    // assertTitle,Rebuild Search Index
 
+        waitForTextPresent("Reset the search index and re-populate it.");       // waitForTextPresent,Reset the search index and re-populate it.
+
         clickAndWait(By.name("rebuild"));                       // clickAndWait,name=rebuild
         assertTitle("Rebuild Search Index");                    // assertTitle, Rebuild Search Index
 

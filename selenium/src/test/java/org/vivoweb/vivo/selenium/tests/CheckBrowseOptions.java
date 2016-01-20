@@ -15,8 +15,8 @@ public class CheckBrowseOptions extends AbstractVIVOSeleniumTest {
         verifyElementPresent(By.linkText("Grants"));
 
         verifyTextPresent(
-                "1  Books ",
-                "3  Grants "
+                "1  Books",
+                "3  Grants"
         );
 
         clickAndWait(By.linkText("View all ..."));
@@ -60,27 +60,33 @@ public class CheckBrowseOptions extends AbstractVIVOSeleniumTest {
         verifyElementPresent(By.linkText("University (1)"));
 
         clickAndWait(By.xpath("//li[@id='college']/a"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Primate College of New York"));
         verifyElementPresent(By.linkText("Primate College of America"));
 
         clickAndWait(By.linkText("Company (1)"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Primates-r-us"));
 
         clickAndWait(By.xpath("//li[@id='consortium']/a"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Primate Colleges of the World"));
 
         clickAndWait(By.xpath("//li[@id='laboratory']/a"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Primate Research Laboratory"));
 
         clickAndWait(By.xpath("//li[@id='library']/a"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Primate History Library"));
 
         clickAndWait(By.xpath("//li[@id='organization']/a"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Primate College of America"));
         verifyElementPresent(By.linkText("Primate College of New York"));
@@ -91,7 +97,9 @@ public class CheckBrowseOptions extends AbstractVIVOSeleniumTest {
         verifyElementPresent(By.linkText("Primates-r-us"));
 
         clickAndWait(By.xpath("//li[@id='organization']/a"));
+        pause(500);
         clickAndWait(By.linkText("P"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Primate College of America"));
         verifyElementPresent(By.linkText("Primate College of New York"));
@@ -102,6 +110,7 @@ public class CheckBrowseOptions extends AbstractVIVOSeleniumTest {
         verifyElementPresent(By.linkText("Primates-r-us"));
 
         clickAndWait(By.linkText("University (1)"));
+        pause(500);
         verifyElementPresent(By.linkText("Primate University of America"));
 
         clickAndWait(By.linkText("Research"));
@@ -120,16 +129,20 @@ public class CheckBrowseOptions extends AbstractVIVOSeleniumTest {
         verifyElementPresent(By.linkText("Webpage (1)"));
 
         clickAndWait(By.linkText("Article (1)"));
+        pause(500);
         verifyElementPresent(By.linkText("Primate Happenings"));
 
         clickAndWait(By.linkText("Award or Honor (2)"));
+        pause(500);
         verifyElementPresent(By.linkText("Best Primate College"));
         verifyElementPresent(By.linkText("Primate Student of the Year"));
 
         clickAndWait(By.xpath("//li[@id='book']/a"));
+        pause(500);
         verifyElementPresent(By.linkText("PHC Proceedings"));
 
         clickAndWait(By.xpath("//li[@id='concept']/a"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Animal Health"));
         verifyElementPresent(By.linkText("Ape Health"));
@@ -140,35 +153,43 @@ public class CheckBrowseOptions extends AbstractVIVOSeleniumTest {
         verifyElementPresent(By.linkText("Primate Student of the Year"));
 
         clickAndWait(By.xpath("//li[@id='concept']/a"));
+        pause(500);
         clickAndWait(By.linkText("P"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Primate Diet"));
         verifyElementPresent(By.linkText("Primate Health"));
         verifyElementPresent(By.linkText("Primate Student of the Year"));
 
         clickAndWait(By.xpath("//li[@id='database']/a"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Primate Info"));
 
         clickAndWait(By.xpath("//li[@id='grant']/a"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Primate Elderly Care"));
         verifyElementPresent(By.linkText("Primate Habitat Research Grant"));
         verifyElementPresent(By.linkText("Primate Survival Planning Grant"));
 
         clickAndWait(By.linkText("Human Study (1)"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Human and Ape Brain Comparison"));
 
         clickAndWait(By.linkText("Patent (1)"));
+        pause(500);
 
         verifyElementPresent(By.linkText("USA222333444555"));
 
         clickAndWait(By.xpath("//li[@id='proceedings']/a"));
+        pause(500);
 
         verifyElementPresent(By.linkText("PHC Proceedings"));
 
         clickAndWait(By.xpath("//li[@id='webpage']/a"));
+        pause(500);
 
         verifyElementPresent(By.linkText("http://primatehealthintro.cornell.edu"));
 
@@ -184,10 +205,12 @@ public class CheckBrowseOptions extends AbstractVIVOSeleniumTest {
         verifyElementPresent(By.linkText("Workshop (1)"));
 
         clickAndWait(By.xpath("//li[@id='conference']/a"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Primate Health Conference"));
 
         clickAndWait(By.xpath("//li[@id='event']/a"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Introduction to Primate Health"));
         verifyElementPresent(By.linkText("Introduction to Primates"));
@@ -198,22 +221,27 @@ public class CheckBrowseOptions extends AbstractVIVOSeleniumTest {
         verifyElementPresent(By.linkText("Primates in the Wild"));
 
         clickAndWait(By.xpath("//li[@id='invitedTalk']/a"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Primate Health and Fitness"));
 
         clickAndWait(By.linkText("Performance (1)"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Primates in the Wild"));
 
         clickAndWait(By.linkText("Presentation (1)"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Primate Health and Fitness"));
 
         clickAndWait(By.linkText("Seminar Series (1)"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Primate Health Talks"));
 
         clickAndWait(By.linkText("Workshop (1)"));
+        pause(500);
 
         verifyElementPresent(By.linkText("New Primate Students"));
 

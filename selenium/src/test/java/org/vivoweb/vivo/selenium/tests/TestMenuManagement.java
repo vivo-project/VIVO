@@ -27,7 +27,7 @@ public class TestMenuManagement extends AbstractVIVOSeleniumTest {
         selectByLabel(By.id("typeSelect"), "Browse Class Group");
         selectByLabel(By.id("selectClassGroup"), "activities");
 
-        clickAndWait(By.cssSelector("option[value=\"http://vivoweb.org/ontology#vitroClassGroupactivities\"]"));
+//        clickAndWait(By.cssSelector("option[value=\"http://vivoweb.org/ontology#vitroClassGroupactivities\"]"));
         clickAndWait(By.id("doneWithContent"));
         clickAndWait(By.id("menuCheckbox"));
 
@@ -51,7 +51,7 @@ public class TestMenuManagement extends AbstractVIVOSeleniumTest {
         selectByLabel(By.id("typeSelect"), "Browse Class Group");
         selectByLabel(By.id("selectClassGroup"), "courses");
 
-        clickAndWait(By.cssSelector("option[value=\"http://vivoweb.org/ontology#vitroClassGroupactivities\"]"));
+//        clickAndWait(By.cssSelector("option[value=\"http://vivoweb.org/ontology#vitroClassGroupactivities\"]"));
         clickAndWait(By.id("doneWithContent"));
         clickAndWait(By.id("menuCheckbox"));
 
@@ -76,7 +76,7 @@ public class TestMenuManagement extends AbstractVIVOSeleniumTest {
         selectByLabel(By.id("typeSelect"), "Browse Class Group");
         selectByLabel(By.id("selectClassGroup"), "equipment");
 
-        clickAndWait(By.cssSelector("option[value=\"http://vivoweb.org/ontology#vitroClassGroupactivities\"]"));
+//        clickAndWait(By.cssSelector("option[value=\"http://vivoweb.org/ontology#vitroClassGroupactivities\"]"));
         clickAndWait(By.id("doneWithContent"));
         clickAndWait(By.id("menuCheckbox"));
 
@@ -111,7 +111,7 @@ public class TestMenuManagement extends AbstractVIVOSeleniumTest {
         selectByLabel(By.id("typeSelect"), "Browse Class Group");
         selectByLabel(By.id("selectClassGroup"), "locations");
 
-        clickAndWait(By.cssSelector("option[value=\"http://vivoweb.org/ontology#vitroClassGroupactivities\"]"));
+//        clickAndWait(By.cssSelector("option[value=\"http://vivoweb.org/ontology#vitroClassGroupactivities\"]"));
         clickAndWait(By.id("doneWithContent"));
         clickAndWait(By.id("menuCheckbox"));
 
@@ -132,19 +132,23 @@ public class TestMenuManagement extends AbstractVIVOSeleniumTest {
         assertTitle("Activities");
 
         clickAndWait(By.linkText("Project (1)"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Human and Ape Brain Comparison"));
 
         clickAndWait(By.linkText("Research Project (1)"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Human and Ape Brain Comparison"));
 
         clickAndWait(By.linkText("Service (2)"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Gorilla Moving Company"));
         verifyElementPresent(By.linkText("Primate Heart Health"));
 
         clickAndWait(By.linkText("Transport Service (1)"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Gorilla Moving Company"));
 
@@ -152,6 +156,7 @@ public class TestMenuManagement extends AbstractVIVOSeleniumTest {
         assertTitle("Courses");
 
         clickAndWait(By.linkText("Course (2)"));
+        pause(500);
 
         verifyTextPresent("Course");
         verifyElementPresent(By.linkText("Introduction to Primates"));
@@ -161,6 +166,7 @@ public class TestMenuManagement extends AbstractVIVOSeleniumTest {
         assertTitle("Equipment");
 
         clickAndWait(By.linkText("Equipment (2)"));
+        pause(500);
 
         verifyTextPresent("Equipment");
         verifyElementPresent(By.linkText("Portable Primate Habitat"));
@@ -170,12 +176,14 @@ public class TestMenuManagement extends AbstractVIVOSeleniumTest {
         assertTitle("Locations");
 
         clickAndWait(By.linkText("Building (2)"));
+        pause(500);
 
         verifyTextPresent("Building");
         verifyElementPresent(By.linkText("Jane Memorial Building"));
         verifyElementPresent(By.linkText("Primate Memorial Building"));
 
         clickAndWait(By.linkText("Facility (5)"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Jane Memorial Building"));
         verifyElementPresent(By.linkText("Lab Admin Office"));
@@ -184,6 +192,7 @@ public class TestMenuManagement extends AbstractVIVOSeleniumTest {
         verifyElementPresent(By.linkText("State Fair Park"));
 
         clickAndWait(By.linkText("Room (1)"));
+        pause(500);
 
         verifyElementPresent(By.linkText("Lab Admin Office"));
 
