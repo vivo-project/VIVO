@@ -361,6 +361,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 			+ "    ?subject core:relatedBy ?authorshipURI .\n"
 			+ "    ?authorshipURI a core:Authorship .\n"
 			+ "    ?authorshipURI core:relates ?authorURI .\n"
+			+ "    ?authorshipURI core:rank ?rank .\n"
 			+ "    ?authorURI a ?type .\n"
 			+ "    ?authorURI rdfs:label ?authorName .\n"
 			+ "    ?authorURI vcard:hasName ?vName .\n"
