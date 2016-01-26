@@ -1,42 +1,35 @@
 package org.vivoweb.vivo.selenium.tests;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
+import static org.vivoweb.vivo.selenium.VIVOAppTester.*;
 
-public class DeleteCourses extends AbstractVIVOSeleniumTest {
-    @Test
-    public void deleteCourses() {
-        deleteAllVisibleCookies();
-
-        open("/");
-        assertTitle("VIVO");
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class DeleteCourses {
+    @BeforeClass
+    public static void setUp() {
+        startTests();
         vivoLogIn("testAdmin@cornell.edu", "Password");
+    }
 
-    /* From CreateCourses */
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Course"));
-        assertTitle("Course");
-
-        clickAndWait(By.linkText("Introduction to Primate Health"));
-        assertTitle("Introduction to Primate Health");
-
-        vivoDeleteIndividual();
-    /*  */
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Course"));
-        assertTitle("Course");
-
-        clickAndWait(By.linkText("Introduction to Primates"));
-        assertTitle("Introduction to Primates");
-
-        vivoDeleteIndividual();
-
+    @AfterClass
+    public static void tearDown() {
         vivoLogOut();
+        endTests();
+    }
+
+    @Test
+    public void deleteCourseIntroductionPrimateHealth() {
+        // From CreateCourses
+        vivoDeleteIndividual("Course", "Introduction to Primate Health");
+    }
+
+    @Test
+    public void deleteCourseIntroductionPrimates() {
+        vivoDeleteIndividual("Course", "Introduction to Primates");
     }
 }

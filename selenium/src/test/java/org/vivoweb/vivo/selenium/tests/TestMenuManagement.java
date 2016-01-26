@@ -1,18 +1,26 @@
 package org.vivoweb.vivo.selenium.tests;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import static org.vivoweb.vivo.selenium.VIVOAppTester.*;
 
-public class TestMenuManagement extends AbstractVIVOSeleniumTest {
+public class TestMenuManagement {
+    @BeforeClass
+    public static void setUp() {
+        startTests();
+        vivoLogIn("testAdmin@cornell.edu", "Password");
+    }
+
+    @AfterClass
+    public static void tearDown() {
+        vivoLogOut();
+        endTests();
+    }
+
     @Test
     public void testMenuManagement() {
-        deleteAllVisibleCookies();
-
-        open("/");
-        assertTitle("VIVO");
-
-        vivoLogIn("testAdmin@cornell.edu", "Password");
-
         clickAndWait(By.linkText("Site Admin"));
         assertTitle("VIVO Site Administration");
 
@@ -239,7 +247,5 @@ public class TestMenuManagement extends AbstractVIVOSeleniumTest {
         assertConfirmation("Are you sure you wish to delete this page:  Locations?");
 
         assertTitle("Pages");
-
-        vivoLogOut();                                               // clickAndWait,Log out
     }
 }

@@ -1,106 +1,64 @@
 package org.vivoweb.vivo.selenium.tests;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
+import static org.vivoweb.vivo.selenium.VIVOAppTester.*;
 
-public class DeleteOrganization extends AbstractVIVOSeleniumTest {
-    @Test
-    public void deleteOrganization() {
-        deleteAllVisibleCookies();
-
-        open("/");
-        assertTitle("VIVO");
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class DeleteOrganization {
+    @BeforeClass
+    public static void setUp() {
+        startTests();
         vivoLogIn("testAdmin@cornell.edu", "Password");
+    }
 
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Organization"));
-        assertTitle("Organization");
-
-        clickAndWait(By.linkText("Primate College of America"));
-        assertTitle("Primate College of America");
-
-        vivoDeleteIndividual();
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Organization"));
-        assertTitle("Organization");
-
-        clickAndWait(By.linkText("Primate College of New York"));
-        assertTitle("Primate College of New York");
-
-        vivoDeleteIndividual();
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Organization"));
-        assertTitle("Organization");
-
-        clickAndWait(By.linkText("Primate Colleges of the World"));
-        assertTitle("Primate Colleges of the World");
-
-        vivoDeleteIndividual();
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Organization"));
-        assertTitle("Organization");
-
-        clickAndWait(By.linkText("Primate History Library"));
-        assertTitle("Primate History Library");
-
-        vivoDeleteIndividual();
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Organization"));
-        assertTitle("Organization");
-
-        clickAndWait(By.linkText("Primate Research Laboratory"));
-        assertTitle("Primate Research Laboratory");
-
-        vivoDeleteIndividual();
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Organization"));
-        assertTitle("Organization");
-
-        clickAndWait(By.linkText("Primate University of America"));
-        assertTitle("Primate University of America");
-
-        vivoDeleteIndividual();
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Organization"));
-        assertTitle("Organization");
-
-        clickAndWait(By.linkText("Primates-r-us"));
-        assertTitle("Primates-r-us");
-
-        vivoDeleteIndividual();
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Person"));
-        assertTitle("Person");
-
-        clickAndWait(By.linkText("Person, Polly"));
-        assertTitle("Person, Polly");
-
-        vivoDeleteIndividual();
-
+    @AfterClass
+    public static void tearDown() {
         vivoLogOut();
+        endTests();
+    }
+
+    @Test
+    public void deletePrimateCollegeOfAmerica() {
+        vivoDeleteIndividual("Organization", "Primate College of America");
+    }
+
+    @Test
+    public void deletePrimateCollegeOfNewYork() {
+        vivoDeleteIndividual("Organization", "Primate College of New York");
+    }
+
+    @Test
+    public void deletePrimateCollegesOfTheWorld() {
+        vivoDeleteIndividual("Organization", "Primate Colleges of the World");
+    }
+
+    @Test
+    public void deletePrimateHistoryLibrary() {
+        vivoDeleteIndividual("Organization", "Primate History Library");
+    }
+
+    @Test
+    public void deletePrimateResearchLaboratory() {
+        vivoDeleteIndividual("Organization", "Primate Research Laboratory");
+    }
+
+    @Test
+    public void deletePrimateUniversityOfAmerica() {
+        vivoDeleteIndividual("Organization", "Primate University of America");
+    }
+
+    @Test
+    public void deletePrimatesRUs() {
+        vivoDeleteIndividual("Organization", "Primates-r-us");
+    }
+
+    @Test
+    public void deletePollyPerson() {
+        vivoDeleteIndividual("Person", "Person, Polly");
     }
 }

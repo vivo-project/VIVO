@@ -4,7 +4,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite.SuiteClasses;
-import org.vivoweb.vivo.selenium.DriverFactory;
+import org.vivoweb.vivo.selenium.VIVOAppTester;
 import org.vivoweb.vivo.selenium.VIVOSuite;
 import org.vivoweb.vivo.selenium.tests.CheckBrowseOptions;
 import org.vivoweb.vivo.selenium.tests.CheckIndexView;
@@ -56,11 +56,11 @@ import org.vivoweb.vivo.selenium.tests.VerifyAllThingsSearchable;
 public class AddNonPersonThings {
     @BeforeClass
     public static void setup() {
-        DriverFactory.setCloseToken(AddNonPersonThings.class);
+        VIVOAppTester.startTests();
     }
 
     @AfterClass
     public static void shutdown() {
-        DriverFactory.close(AddNonPersonThings.class);
+        VIVOAppTester.endTests();
     }
 }

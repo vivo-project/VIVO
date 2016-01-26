@@ -1,41 +1,35 @@
 package org.vivoweb.vivo.selenium.tests;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
+import static org.vivoweb.vivo.selenium.VIVOAppTester.*;
 
-public class DeleteEquipment extends AbstractVIVOSeleniumTest {
-    @Test
-    public void deleteEquipment() {
-        deleteAllVisibleCookies();
-
-        open("/");
-        assertTitle("VIVO");
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class DeleteEquipment {
+    @BeforeClass
+    public static void setUp() {
+        startTests();
         vivoLogIn("testAdmin@cornell.edu", "Password");
+    }
 
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Equipment"));
-        assertTitle("Equipment");
-
-        clickAndWait(By.linkText("Portable Primate Habitat"));
-        assertTitle("Portable Primate Habitat");
-
-        vivoDeleteIndividual();
-/* From CreateEquipment */
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Equipment"));
-        assertTitle("Equipment");
-
-        clickAndWait(By.linkText("Primate Feeder"));
-        assertTitle("Primate Feeder");
-
-        vivoDeleteIndividual();
-/* */
-
+    @AfterClass
+    public static void tearDown() {
         vivoLogOut();
+        endTests();
+    }
+
+    @Test
+    public void deleteEquipmentPortablePrimateHabitat() {
+        vivoDeleteIndividual("Equipment", "Portable Primate Habitat");
+    }
+
+    @Test
+    public void deleteEquipmentPrimateFeeder() {
+        // From CreateEquipment
+        vivoDeleteIndividual("Equipment", "Primate Feeder");
     }
 }

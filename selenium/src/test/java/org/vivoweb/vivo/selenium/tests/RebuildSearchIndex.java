@@ -1,18 +1,27 @@
 package org.vivoweb.vivo.selenium.tests;
 
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import static org.vivoweb.vivo.selenium.VIVOAppTester.*;
 
-public class RebuildSearchIndex extends AbstractVIVOSeleniumTest {
+public class RebuildSearchIndex {
+    @BeforeClass
+    public static void setUp() {
+        startTests();
+        vivoLogIn("testAdmin@cornell.edu", "Password");
+    }
+
+    @AfterClass
+    public static void tearDown() {
+        vivoLogOut();
+        endTests();
+    }
+
     @Test
     public void rebuildSearchIndexTest() {
-        deleteAllVisibleCookies();
-
-        open("/");
-        assertTitle("VIVO");                                    // assertTitle,VIVO
-
-        vivoLogIn("testAdmin@cornell.edu", "Password");
-
         clickAndWait(By.linkText("Site Admin"));                // clickAndWait,link=Site Admin
         assertTitle("VIVO Site Administration");                // assertTitle,VIVO Site Administration
 
@@ -25,7 +34,5 @@ public class RebuildSearchIndex extends AbstractVIVOSeleniumTest {
         assertTitle("Rebuild Search Index");                    // assertTitle, Rebuild Search Index
 
         waitForTextPresent("Reset the search index and re-populate it.");       // waitForTextPresent,Reset the search index and re-populate it.
-
-        vivoLogOut();                                               // clickAndWait,Log out
     }
 }

@@ -1,55 +1,60 @@
 package org.vivoweb.vivo.selenium.tests;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
+import static org.vivoweb.vivo.selenium.VIVOAppTester.*;
 
-public class DeleteLocations extends AbstractVIVOSeleniumTest {
-    @Test
-    public void deleteLocations() {
-        deleteAllVisibleCookies();
-
-        open("/");
-        assertTitle("VIVO");
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class DeleteLocations {
+    @BeforeClass
+    public static void setUp() {
+        startTests();
         vivoLogIn("testAdmin@cornell.edu", "Password");
+    }
 
-/* from CreateCourses */
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        vivoDeleteIndividual("Building", "Primate Memorial Building");
-/* */
-/* from CreateEquipment */
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        vivoDeleteIndividual("Facility", "Primate Research Lab Room 123");
-/* */
-/* from CreateEvent */
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        vivoDeleteIndividual("Facility", "State Fair Park");
-/* */
-/* from CreateLocation */
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        vivoDeleteIndividual("Building", "Jane Memorial Building");
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        vivoDeleteIndividual("Facility", "Lab Admin Office");
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        vivoDeleteIndividual("Geographic Location", "Primate Quad");
-/* */
+    @AfterClass
+    public static void tearDown() {
         vivoLogOut();
+        endTests();
+    }
+
+    @Test
+    public void deleteBuildingPrimateMemorialBuilding() {
+        // from CreateCourses
+        vivoDeleteIndividual("Building", "Primate Memorial Building");
+    }
+
+    @Test
+    public void deleteFacilityPrimateResearchLabRoom123() {
+        // from CreateEquipment
+        vivoDeleteIndividual("Facility", "Primate Research Lab Room 123");
+    }
+
+    @Test
+    public void deleteFacilityStateFairPark() {
+        // from CreateEvent
+        vivoDeleteIndividual("Facility", "State Fair Park");
+    }
+
+    @Test
+    public void deleteBuildingJaneMemorialBuilding() {
+        // from CreateLocation
+        vivoDeleteIndividual("Building", "Jane Memorial Building");
+    }
+
+    @Test
+    public void deleteFacilityLabAdminOffice() {
+        // from CreateLocation
+        vivoDeleteIndividual("Facility", "Lab Admin Office");
+    }
+
+    @Test
+    public void deleteGeograpihcPrimateQuad() {
+        // from CreateLocation
+        vivoDeleteIndividual("Geographic Location", "Primate Quad");
     }
 }
-/*
-Primate Quad
- */

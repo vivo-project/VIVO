@@ -1,16 +1,28 @@
 package org.vivoweb.vivo.selenium.tests;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
+import static org.vivoweb.vivo.selenium.VIVOAppTester.*;
 
-public class CheckPublicView extends AbstractVIVOSeleniumTest {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class CheckPublicView {
+    @BeforeClass
+    public static void setUp() {
+        startTests();
+        vivoLogOut();
+    }
+
+    @AfterClass
+    public static void tearDown() {
+        endTests();
+    }
+
     @Test
     public void checkPublicView() {
-        deleteAllVisibleCookies();
-
-        open("/");
-        assertTitle("VIVO");
-
         clickAndWait(By.linkText("Index"));
         assertTitle("Index of Contents");
 

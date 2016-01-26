@@ -1,19 +1,30 @@
 package org.vivoweb.vivo.selenium.tests;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import static org.vivoweb.vivo.selenium.VIVOAppTester.*;
 
-public class CreateActivity extends AbstractVIVOSeleniumTest {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class CreateActivity {
+    @BeforeClass
+    public static void setUp() {
+        startTests();
+        vivoLogIn("testAdmin@cornell.edu", "Password");
+    }
+
+    @AfterClass
+    public static void tearDown() {
+        vivoLogOut();
+        endTests();
+    }
+
     @Test
     public void createActivity() {
-        deleteAllVisibleCookies();
-
-        open("/");
-        assertTitle("VIVO");
-
-        vivoLogIn("testAdmin@cornell.edu", "Password");
-
         clickAndWait(By.linkText("Site Admin"));
         assertTitle("VIVO Site Administration");
 
@@ -205,7 +216,5 @@ public class CreateActivity extends AbstractVIVOSeleniumTest {
         verifyElementPresent(By.linkText("Primate Habitat Research Grant"));
         verifyElementPresent(By.linkText("Primate Survival Planning Grant"));
         verifyElementPresent(By.linkText("Primate Info"));
-
-        vivoLogOut();
     }
 }

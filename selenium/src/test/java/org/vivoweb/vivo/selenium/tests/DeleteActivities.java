@@ -1,51 +1,39 @@
 package org.vivoweb.vivo.selenium.tests;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
+import static org.vivoweb.vivo.selenium.VIVOAppTester.*;
 
-public class DeleteActivities extends AbstractVIVOSeleniumTest {
-    @Test
-    public void deleteActivities() {
-        deleteAllVisibleCookies();
-
-        open("/");
-        assertTitle("VIVO");
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class DeleteActivities {
+    @BeforeClass
+    public static void setUp() {
+        startTests();
         vivoLogIn("testAdmin@cornell.edu", "Password");
+    }
 
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Project"));
-        assertTitle("Project");
-
-        clickAndWait(By.linkText("Human and Ape Brain Comparison"));
-        assertTitle("Human and Ape Brain Comparison");
-
-        vivoDeleteIndividual();
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Service"));
-        assertTitle("Service");
-
-        clickAndWait(By.linkText("Gorilla Moving Company"));
-        assertTitle("Gorilla Moving Company");
-
-        vivoDeleteIndividual();
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Service"));
-        assertTitle("Service");
-
-        clickAndWait(By.linkText("Primate Heart Health"));
-        assertTitle("Primate Heart Health");
-
-        vivoDeleteIndividual();
-
+    @AfterClass
+    public static void tearDown() {
         vivoLogOut();
+        endTests();
+    }
+
+    @Test
+    public void deleteProjectHumanApeBrainComparison() {
+        vivoDeleteIndividual("Project", "Human and Ape Brain Comparison");
+    }
+
+    @Test
+    public void deleteServiceGorillaMovingCompany() {
+        vivoDeleteIndividual("Service", "Gorilla Moving Company");
+    }
+
+    @Test
+    public void deleteServicePrimateHeartHealth() {
+        vivoDeleteIndividual("Service", "Primate Heart Health");
     }
 }

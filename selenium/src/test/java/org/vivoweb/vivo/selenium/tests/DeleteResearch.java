@@ -1,190 +1,115 @@
 package org.vivoweb.vivo.selenium.tests;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
+import static org.vivoweb.vivo.selenium.VIVOAppTester.*;
 
-public class DeleteResearch extends AbstractVIVOSeleniumTest {
-    @Test
-    public void deleteResearch() {
-        deleteAllVisibleCookies();
-
-        open("/");
-        assertTitle("VIVO");
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class DeleteResearch {
+    @BeforeClass
+    public static void setUp() {
+        startTests();
         vivoLogIn("testAdmin@cornell.edu", "Password");
+    }
 
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Article"));
-        assertTitle("Article");
-
-        clickAndWait(By.linkText("Primate Happenings"));
-        assertTitle("Primate Happenings");
-
-        vivoDeleteIndividual();
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Award or Honor"));
-        assertTitle("Award or Honor");
-
-        clickAndWait(By.linkText("Best Primate College"));
-        assertTitle("Best Primate College");
-
-        vivoDeleteIndividual();
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Award or Honor"));
-        assertTitle("Award or Honor");
-
-        clickAndWait(By.linkText("Primate Student of the Year"));
-        assertTitle("Primate Student of the Year");
-
-        vivoDeleteIndividual();
-/* From CreateEvent */
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Book"));
-        assertTitle("Book");
-
-        clickAndWait(By.linkText("PHC Proceedings"));
-        assertTitle("PHC Proceedings");
-
-        vivoDeleteIndividual();
-/* */
-/* From CreateTopic */
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Concept"));
-        assertTitle("Concept");
-
-        clickAndWait(By.linkText("Ape Health"));
-        assertTitle("Ape Health");
-
-        vivoDeleteIndividual();
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Concept"));
-        assertTitle("Concept");
-
-        clickAndWait(By.linkText("Primate Diet"));
-        assertTitle("Primate Diet");
-
-        vivoDeleteIndividual();
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Concept"));
-        assertTitle("Concept");
-
-        clickAndWait(By.linkText("Primate Health"));
-        assertTitle("Primate Health");
-
-        vivoDeleteIndividual();
-/* */
-    /* From CreateActivity */
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Concept"));
-        assertTitle("Concept");
-
-        clickAndWait(By.linkText("Elderly Care"));
-        assertTitle("Elderly Care");
-
-        vivoDeleteIndividual();
-    /* */
-
-    /* From CreateCourses */
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Concept"));
-        assertTitle("Concept");
-
-        clickAndWait(By.linkText("Animal Health"));
-        assertTitle("Animal Health");
-
-        vivoDeleteIndividual();
-    /* */
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Database"));
-        assertTitle("Database");
-
-        clickAndWait(By.linkText("Primate Info"));
-        assertTitle("Primate Info");
-
-        vivoDeleteIndividual();
-
-    /* Delete grant from createActivity */
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Grant"));
-        assertTitle("Grant");
-
-        clickAndWait(By.linkText("Primate Elderly Care"));
-        assertTitle("Primate Elderly Care");
-
-        vivoDeleteIndividual();
-    /* */
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Grant"));
-        assertTitle("Grant");
-
-        clickAndWait(By.linkText("Primate Habitat Research Grant"));
-        assertTitle("Primate Habitat Research Grant");
-
-        vivoDeleteIndividual();
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Grant"));
-        assertTitle("Grant");
-
-        clickAndWait(By.linkText("Primate Survival Planning Grant"));
-        assertTitle("Primate Survival Planning Grant");
-
-        vivoDeleteIndividual();
-
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Patent"));
-        assertTitle("Patent");
-
-        clickAndWait(By.linkText("USA222333444555"));
-        assertTitle("USA222333444555");
-
-        vivoDeleteIndividual();
-
-    /* From CreateCourses */
-        clickAndWait(By.linkText("Index"));
-        assertTitle("Index of Contents");
-
-        clickAndWait(By.linkText("Webpage"));
-        assertTitle("Webpage");
-
-        clickAndWait(By.linkText("http://primatehealthintro.cornell.edu"));
-        assertTitle("http://primatehealthintro.cornell.edu");
-
-        vivoDeleteIndividual();
-    /* */
+    @AfterClass
+    public static void tearDown() {
         vivoLogOut();
+        endTests();
+    }
+
+    @Test
+    public void deleteArticlePrimateHappenings() {
+        vivoDeleteIndividual("Article", "Primate Happenings");
+    }
+
+    @Test
+    public void deleteAwardBestPrimateCollege() {
+        vivoDeleteIndividual("Award or Honor", "Best Primate College");
+    }
+
+    @Test
+    public void deleteAwardPrimateStudentOfTheYear() {
+        vivoDeleteIndividual("Award or Honor", "Primate Student of the Year");
+    }
+
+    @Test
+    public void deleteBookPHCProceedings() {
+        // From CreateEvent
+
+        vivoDeleteIndividual("Book", "PHC Proceedings");
+    }
+
+    @Test
+    public void deleteConceptApeHealth() {
+        // From CreateTopic
+
+        vivoDeleteIndividual("Concept", "Ape Health");
+    }
+
+    @Test
+    public void deleteConceptPrimateDiet() {
+        // From CreateTopic
+
+        vivoDeleteIndividual("Concept", "Primate Diet");
+    }
+
+    @Test
+    public void deleteConceptPrimateHealth() {
+        // From CreateTopic
+
+        vivoDeleteIndividual("Concept", "Primate Health");
+    }
+
+    @Test
+    public void deleteConceptElderlyCare() {
+        // From CreateActivity
+
+        vivoDeleteIndividual("Concept", "Elderly Care");
+    }
+
+    @Test
+    public void deleteConceptAnimalHealth() {
+        // From CreateCourses
+
+        vivoDeleteIndividual("Concept", "Animal Health");
+    }
+
+    @Test
+    public void deleteDatabasePrimateInfo() {
+        vivoDeleteIndividual("Database", "Primate Info");
+    }
+
+    @Test
+    public void deleteGrantPrimateElderlyCare() {
+        // From CreateActivity
+
+        vivoDeleteIndividual("Grant", "Primate Elderly Care");
+    }
+
+    @Test
+    public void deleteGrantPrimateHabitatResearchGrant() {
+        vivoDeleteIndividual("Grant", "Primate Habitat Research Grant");
+    }
+
+    @Test
+    public void deleteGrantPrimateSurvivalPlanningGrant() {
+        vivoDeleteIndividual("Grant", "Primate Survival Planning Grant");
+    }
+
+    @Test
+    public void deletePatentUSA222333444555() {
+        vivoDeleteIndividual("Patent", "USA222333444555");
+    }
+
+    @Test
+    public void deleteWebPagePrimateHealthIntro() {
+        // From CreateCourses
+
+        vivoDeleteIndividual("Webpage", "http://primatehealthintro.cornell.edu");
     }
 }

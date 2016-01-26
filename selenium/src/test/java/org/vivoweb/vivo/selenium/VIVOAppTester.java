@@ -1,26 +1,18 @@
-package org.vivoweb.vivo.selenium.tests;
+package org.vivoweb.vivo.selenium;
 
-import org.apache.commons.lang3.StringUtils;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.vivoweb.vivo.selenium.DriverFactory;
-import org.vivoweb.vivo.selenium.SeleniumUtils;
 
-public class AbstractVIVOSeleniumTest extends AbstractSeleniumTest {
-    protected void vivoAutoCompleteSelect(By by, String text, Keys... keys) {
-        WebElement element = driver.findElement(by);
+public final class VIVOAppTester extends WebAppTester {
+    private static String loggedInAs = null;
+
+    private VIVOAppTester() { }
+
+    public static void vivoAutoCompleteSelect(By by, String text, Keys... keys) {
+        WebElement element = driver().findElement(by);
 
         int count = 0;
         WebElement autoComplete = null;
@@ -33,7 +25,7 @@ public class AbstractVIVOSeleniumTest extends AbstractSeleniumTest {
                 try {
                     Thread.sleep(250);
 
-                    autoComplete = driver.findElement(By.className("ui-autocomplete"));
+                    autoComplete = driver().findElement(By.className("ui-autocomplete"));
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 } catch (NoSuchElementException nse) {
@@ -75,13 +67,13 @@ public class AbstractVIVOSeleniumTest extends AbstractSeleniumTest {
             throw new RuntimeException(e);
         }
 
-        WebElement selected = driver.findElement(By.id("ui-active-menuitem"));
+        WebElement selected = driver().findElement(By.id("ui-active-menuitem"));
         if (selected != null) {
             selected.click();
         }
     }
 
-    protected void vivoDeleteIndividual(String category, String individual) {
+    public static void vivoDeleteIndividual(String category, String individual) {
         clickAndWait(By.linkText("Index"));
         assertTitle("Index of Contents");
 
@@ -92,7 +84,7 @@ public class AbstractVIVOSeleniumTest extends AbstractSeleniumTest {
         int pageCount = 1;
         do {
             try {
-                individualLink = driver.findElement(By.linkText(individual));
+                individualLink = driver().findElement(By.linkText(individual));
             } catch (NoSuchElementException nse) {
             }
 
@@ -113,7 +105,7 @@ public class AbstractVIVOSeleniumTest extends AbstractSeleniumTest {
         vivoDeleteIndividual();
     }
 
-    protected void vivoDeleteIndividual() {
+    public static void vivoDeleteIndividual() {
         clickAndWait(By.linkText("Edit this individual"));
         assertTitle("Individual Control Panel");
 
@@ -126,7 +118,11 @@ public class AbstractVIVOSeleniumTest extends AbstractSeleniumTest {
         assertTitle("VIVO Site Administration");
     }
 
-    protected void vivoLogIn(String email, String password) {
+    public static void vivoLogIn(String email, String password) {
+        if (loggedInAs != null) {
+            vivoLogOut();
+        }
+
         clickAndWait(By.linkText("Log in"));                    // clickAndWait,link=Log in
         assertTitle("Log in to VIVO");                          // aseertTitle,Log in to VIVO
 
@@ -135,13 +131,40 @@ public class AbstractVIVOSeleniumTest extends AbstractSeleniumTest {
 
         clickAndWait(By.name("loginForm"));                     // clickAndWait,name=loginForm
         assertTitle("VIVO");                                    // assertTitle,VIVO
+
+        loggedInAs = email;
     }
 
-    protected void vivoLogOut() {
-        Actions actions = new Actions(driver);
-        actions.moveToElement( driver.findElement(By.id("user-menu")) ).perform();
-        driver.findElement(By.linkText("Log out")).click();
+    public static void vivoLogOut() {
+        if (loggedInAs != null) {
+            Actions actions = new Actions(driver());
+            actions.moveToElement(driver().findElement(By.id("user-menu"))).perform();
+            driver().findElement(By.linkText("Log out")).click();
+            loggedInAs = null;
+        }
     }
 
+    public static void startTests() {
+        Class token = getCallingClass(VIVOAppTester.class);
+
+        if (token != null) {
+            if (DriverFactory.setCloseToken(token)) {
+                deleteAllVisibleCookies();
+            }
+        }
+
+        open("/");
+        assertTitle("VIVO");
+    }
+
+    public static void endTests() {
+        Class token = getCallingClass(VIVOAppTester.class);
+
+        if (token != null) {
+            DriverFactory.close(token);
+        } else {
+            DriverFactory.close();
+        }
+    }
 
 }
