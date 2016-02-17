@@ -1,0 +1,2004 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+@charset "UTF-8";
+/* CSS Document */
+
+/* Tell the browser to render HTML 5 elements as block */
+header,
+hgroup,
+section,
+nav,
+article,
+aside,
+footer{
+    display: block;
+}
+time{
+    font-weight: normal;
+}
+html,
+body {
+    padding: 0;
+    height: 100%; /* needed for container min-height */
+    font-family: Calibri,"Helvetica Neue",Helvetica,Arial,sans-serif; 
+    height: auto !important; /* real browsers */
+    height: 100%; /* IE6: treaded as min-height*/;
+    min-height: 100%; /* real browsers */
+    margin: 0 auto;
+}
+body {
+   background: #d4d5d6; 
+}
+a {
+    color: #0082bf;
+}
+a:hover,
+h2 a:hover,
+h2 a:active,
+ul#header-nav a:link,
+ul#header-nav a:visited,
+.pagination.menupage li a {
+    text-decoration: none;
+}
+
+#wrapper-content a { 
+    font-weight: 700;
+    text-decoration: none;
+}
+
+    #wrapper-content a:hover { 
+        text-decoration: underline;
+    }
+
+li { line-height: 1.15em; }
+
+em {
+    font-style: italic;
+}
+/* h1,h2,h3,h4,h5,h6 ------>  */
+h2 {
+    padding: 10px 0 12px 0;
+    margin: 0;
+    font-size: 1.375em;
+    color: #064d68;
+    line-height: 1.5em;
+}
+h2 a {
+    color: #2485ae; 
+}
+h2 a:link, 
+h2 a:visited {
+    text-decoration: underline; 
+}
+h3 {
+    padding: 10px 0 12px 0;
+    margin: 0;
+    font-size: 1.125em;
+    color: #064d68; 
+}
+h4 {
+    padding: 10px 0 12px 0;
+    margin: 0;
+    font-size: 1em;
+    color: #064d68; 
+}
+h5 {
+    padding: 10px 0 12px 0;
+    margin: 0;
+    font-size: .875em;
+    color: #064d68; 
+}
+/* ------------------------------------------------->  */
+/* EDITING STYLES ---------------------------------->  */
+/* ------------------------------------------------->  */
+input[type="text"],
+select,  
+input[type="password"] {
+    border: 0;
+    font-size: 14px;
+    padding: .5em;
+    background: #fff;
+    border: 1px solid #e0dfdf;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    margin-bottom: .8em;
+}
+input.block {
+    margin-bottom: 20px;
+}
+label {
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+label.inline {
+    display: inline;
+    font-weight: normal;
+    font-size: .9em;
+}
+.verbose-toggle,
+.verbose-toggle:visited,
+#showAddFormButton,
+#showAddFormButton:visited,
+input.submit, 
+input.submit:visited,
+/* the id selectors are used temporarily due to the custom jsp tags (<v:input>) 
+for editing forms which require an id and do not allow a class. This will be 
+removed once we refactor the editing forms to Freemarker */
+input#submit, 
+input#submit:visited,
+input.form-button,
+input.form-button:visited {
+    background: #222 url(../images/alert-overlay.png) repeat-x;
+    display: inline-block;
+    padding: 5px 18px 7px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px; 
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    position: relative;
+    border: 0;
+    margin: 0;
+    background-color: #749a02;
+    color: #fff;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+    margin-right: .6em;
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+#verbose-mode .small {
+    font-size: 12px;
+    color: #fff;
+}
+#verbose-mode b {
+    color: #595B5B;
+}
+#verbose-mode .verbose-off{
+    background: #706a66;
+}
+input.delete,
+input.delete:visited,
+input#delete,
+input#delete:visited {
+    background: #222 url(../images/alert-overlay.png) repeat-x;
+    display: inline-block;
+    padding: 5px 18px 7px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px; 
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    border: 0;
+    margin: 0;
+    background-color: #398aac;
+    color: #fff;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+    margin-right: .6em;
+}
+.verbose-toggle:hover,
+#showAddFormButton:hover,
+input.submit:hover,
+input#submit:hover,
+input.form-button:hover {
+    color: #fff;
+    background-color: #b2d15a;
+}
+input.delete:hover,
+input#delete:hover {
+    color: #fff;
+    background-color: #93c3d4;
+}
+.verbose-toggle,
+.verbose-toggle:active,
+#showAddFormButton:active,
+input.delete:active,
+input#delete:active,
+input.submit:active,
+input#submit:active,
+input.form-button:active,
+.button:active,
+input.add-account:active,
+section.accounts input.delete:active {
+    top: 1px;
+}
+form textarea {
+    border: 1px solid #e0dfdf; 
+    border-radius: 4px; 
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px; 
+}
+.maxWidth {
+    margin-top: 20px;
+    width: 100%;
+}
+#itemList a.remove:link,
+#itemList a.remove:visited,
+#showAddForm a.cancel:link,
+form a:link.cancel, 
+form a:visited.cancel,
+a.return:link,
+a.return:visited {
+    text-decoration: underline;
+    color: #f70;
+    border-color: none;
+    padding-left: 3px;
+}
+#itemList a.remove:hover,
+#itemList a.remove:active,
+#showAddForm a.cancel:hover,
+#showAddForm a.cancel:active,
+form a:hover.cancel, 
+form a:active.cancel {
+    text-decoration: none;
+    color: #f70;
+    background: none;
+}
+.validationError {
+    font-weight: normal;
+    color: #cc0000;
+    margin-bottom: .3em;
+}
+p.submit {
+  margin-top: 0;
+  padding-top: 0;
+}
+.editingForm table {
+    border-color: #dfe6e6;
+}
+.editingForm td {
+    padding: 3px;
+}
+.editingForm .entryFormHead {
+    background-color: #f1f2ee;
+    border-color: #dfe6e6;
+}
+.form-item {
+    margin-top:.3em;
+    background-color: #fff;
+    border-color: #e0dfdf;
+    font-size: .8em;
+    border-width: 1px;
+    color: #595B5B;
+    padding: .3em;
+}
+a.return:hover,
+a.return:active {
+    text-decoration: none;
+    color: #f70;
+    background: none;
+}
+.database_header {
+    background-color: #f1f2ee;
+    color: #2485ae;
+    font-size: 1em;
+}
+.database_upperleftcorner {
+    color: #5F6464;
+    font-size: 1em;
+}
+.database_upperleftcenter {
+    background-color: #B0C4DE;
+    color: #5F6464;
+    font-size: 1em;
+}
+.rownumheader,
+.rownum {
+    background-color: #F1F2EE;
+    color: #5F6464;
+    font-size: 1em;
+}
+.headercenter {
+    color:  #5F6464;
+    font-size: 10pt;
+    font-style: normal;
+    text-align: center;
+}
+.postheader {
+    background-color: #E6E6FA;
+    color: #777;
+    font-size: 1em;
+}
+.database_postheader {
+    background-color: #f7f9f9;
+    font-size: 1em;
+}
+.postheadercenter,
+.postheaderright {
+    font-size: 1em;
+}
+.verticalfieldlabel {
+    color: #5E6363; /*#5F6464;*/
+    font-style: normal !important;
+    font-size: 10pt !important;
+    line-height: 2em !important;
+}
+.row, .rowvert {
+    background-color: #f7f9f9;
+    color: #5F6464;
+    font-size: 10pt;
+    font-style: normal;
+    text-align: left;
+    line-height: 2em;
+}
+.rowalternate {
+    background-color: #fff;
+    color: #5F6464;
+    font-size: 1em;
+    line-height: 2em;
+}
+.rowbold {
+    background-color: #FFFAFA;
+    color: #5F6464;
+    font-size: 10pt; /*1em;*/
+    line-height: 2em;
+}
+.form-background {
+    background-color: #fff;
+}
+.formsEdit p {
+    /*padding-top: 1em;*/
+    margin-bottom: 1em;
+    padding-bottom: 0;
+    margin-top: 0;
+}
+.formsEdit p.validationError {
+    margin-bottom: 1.8em;
+    margin-top: 0;
+    padding-top: 0;
+    font-size: .8em;
+}
+form.deleteForm {
+    margin-top: 2em;
+    padding-top: 1em;
+    border-top: 1px dotted #e3e9e9;
+}
+form.editForm span {
+    color: #c00;
+    font-weight: normal;
+    font-size: small;
+}
+form h3.delete-entry {
+    padding-right: .8em;
+    display: inline;
+}
+form h2 {
+    margin-bottom: 0;
+    padding-bottom: 10px;
+}
+form select {
+   border: 0;
+   font-size: 14px;
+   padding: .5em;
+   background: #fff;
+   border: 1px solid #e0dfdf;
+   border-radius: 5px;
+   -moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+   margin-bottom: .8em;
+   margin-top: .7em;
+   margin-right: .5em;
+}
+.notice { 
+    margin-top: 1em; 
+    border: 1px dotted #FFD324;
+}
+a.ingestMenu:link, 
+a.ingestMenu:visited,
+a.account-menu:link,
+a.account-menu:visited {
+    text-decoration: none;
+    color: #2485AE;
+}
+a.ingestMenu:hover, 
+a.ingestMenu:active,
+a.account-menu:hover,
+a.account-menu:active,
+ul#alpha-browse-individuals a,
+ul#browse-classes a,
+ul#find-filters a,
+ul#vgraph-classes a {
+    text-decoration: none;
+    color: #5E6363;
+}
+ul.ingestMenu {
+    margin-bottom: 1.5em;
+}
+.toBeDeleted {
+    margin-bottom: 0;
+}
+/* BACK-END FORMS -------------->  */
+.display-inline {
+    display: inline-block;
+}
+.theme-dir,
+#noContentMsg {
+    clear: both;
+}
+tr.editformcell td input[type="text"] {
+    width: 30% !important;
+}
+tr.editformcell td input.fullWidthInput {
+    width: 70% !important;
+    margin-top: 0.7em !important;
+}
+tr.editformcell td input.shortInput {
+    width: 20% !important;
+    margin-top: 0.7em !important;
+}
+tr.editformcell td textarea.matchingInput {
+    width: 95%;
+    height:10ex;
+    margin-top:0.7em;
+    font-family: "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica, sans-serif; 
+    font-size:0.95em;
+}
+hr.formDivider {
+    background-color: #3196C4;
+    border: 0 none;
+    height: 1px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    opacity: 0.3;   
+}
+.editingForm table {
+    width: 100%;
+    border: none;
+}
+/* ------------------------------------------------->  */
+/* HOMEPAGE AND INTERIOR PAGES STYLES -------------->  */
+/* ------------------------------------------------->  */
+
+/* HEADER ------>  */
+header {
+    z-index: 0;
+    background-color: #FFF;
+}
+
+#branding {
+	background-image: linear-gradient(#fff 50px, #b1a3c7 15%, #61468B 100%);
+    padding-bottom: 1em;
+    position: relative;
+    width: 970px;
+    margin: 0 auto;
+}
+/* Northwestern Medicine */
+    #NM-hdr {
+        height: 25px;
+        padding: 15px;
+    }
+    #NMLogo {
+        background: url("http://deptcommon.fsm.northwestern.edu/images/nm/NM-FSM-sprite.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+        display: block;
+        float: left;
+        height: 40px;
+        position: relative;
+        width: 200px;
+    }
+    #NMLogo a {
+        display: block;
+        float: left;
+        height: 40px;
+        width: 140px;
+    }
+
+    #NMLogo  a .alt {
+       display: none;
+    }
+    
+    #NMLogo:hover {
+        background-position: 0 -50px;
+    }
+    
+    #NMLogo:hover .arrow {
+        display: inline-block;
+        opacity: 0.5;
+    }
+
+    #NMLogo .arrow {
+        background: url("http://deptcommon.fsm.northwestern.edu/images/nm/NM-FSM-sprite.png") no-repeat scroll -150px -100px rgba(0, 0, 0, 0);
+        display: none;
+        float: left;
+        height: 15px;
+        margin-left: 20px;
+        margin-top: 5px;
+        width: 15px;
+    }
+
+#FeinbergHomeText {
+	font: 16px "Helvetica Neue",Helvetica,Arial;
+}
+
+#FeinbergHomeText h4 {
+    margin-top: 5px;
+    padding: 0;
+}
+
+	#FeinbergHomeText a {
+	    color: #ffffff;
+	    text-decoration: none;
+	}
+
+		#FeinbergHomeText a:hover {
+			opacity: 0.7;
+		}
+
+        #FeinbergHomeText h4 a:hover .arrow {
+            background: url("http://deptcommon.fsm.northwestern.edu/images/nm/NM-FSM-sprite.png") no-repeat scroll -100px -98px rgba(0, 0, 0, 0);
+            display: inline-block;
+            height: 16px;
+            margin-left: 12px;
+            opacity: 0.5;
+            width: 15px;
+        }
+
+	#FeinbergHomeText h1 {
+	    font-size: 40px;
+	    margin: 0;
+	}
+
+#branding #search {
+    width: 260px !important;
+}
+#branding #search #search-form {
+    width: 260px !important;
+}
+#branding #search .search-vivo {
+    clear: none;
+    color: #6C7272 !important;
+    float: left !important;
+    font-style: italic;
+    width: 200px !important;
+}
+#branding #search .search {
+    float: right;
+    position: absolute;
+    left: 215px;
+}
+
+
+
+/* HEADER NAV------>  */
+header#branding nav { position:absolute; top: 0; right: 0; }
+ul#header-nav {
+    color: #7f8283;
+    float: right;
+    list-style: none;
+    height: 30px;
+    padding-top: 10px;
+    margin-right: 13px;
+    z-index: 1000 !important;
+}
+ul#header-nav li {
+    float: left;
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-right: 1px solid #7c7d7f;
+    font-size: .7em;
+}
+ul#header-nav li:last-child {
+    padding-left: 1px;
+    padding-right: 0;
+    border-right: none;
+}
+ul#header-nav a {
+    text-decoration: none;
+    color: #7f8283 !important;
+}
+ul#header-nav a:hover {
+    opactiy: 0.7 !important;
+}
+ul#header-nav a.log-out {
+    padding-left: 10px;
+}
+/* SEARCH ------>  */
+#search {
+    position: absolute;
+    width: 396px;
+    height: 38px;
+    top: 88px;
+    right: 10px;
+    padding-top: 5px;
+}
+#search-field {
+    width: 396px;
+    height: 38px;
+    /*background: url(../images/search-interior-pages.png) 0 0 no-repeat; */
+}
+
+input.search-vivo {
+    /*background-color: #FFF;
+    border: 0 none;
+    border-radius: 0;
+    color: #6d6e71;
+    float: left;
+    font: italic 17px Calibri,Helvetica,Arial;
+    margin-left: 5px;
+    outline: medium none;
+    padding: 0;*/
+    background-color: #FFF !important;
+    float: right;
+    opacity: 1 !important;
+    position: absolute;
+    width: 225px !important;
+    /*
+    background-color: #FFF;
+    border-color: #ccc;
+    border-radius: 0;
+    border-style: solid;
+    border-width: 1px 0 1px 1px;
+    height: 23px;
+    margin-left: 0;
+    margin-top: 0;
+    text-align: right;
+    width: 274px;
+    */
+}
+#search-form-modifier {
+    display: none;
+}
+
+.home #browse { padding-top: 7px; float: right; font-size: .85em; }
+
+.home #browse:before { content:"or ";}
+
+/* MAIN NAVIGATION------>  */
+ul#main-nav {
+    display: block;
+    width: 968px;
+    height: 42px;
+    border: none;
+    background-color: #e6e6e6;
+    margin: 0 auto;
+    list-style: none;
+    font-size: 1em;
+    color: #706a66;
+}
+#main-nav li {
+    float: left;
+    line-height: 42px;
+}
+
+    #main-nav li:first-of-type { padding-left: 15px; }
+    	#main-nav li:first-of-type a { border-left: 2px solid #FFF; }
+
+#main-nav li a {
+    border-right: 2px solid #FFF;
+    font-size: 18px;
+    padding: 0px 10px;
+    display: block;
+    color: #54585a;
+    text-decoration: none;
+}
+#main-nav li a:hover {
+    background-color: #d4d5d6;
+    color: #0082bf;
+}
+#main-nav li a.selected {
+    background-color: #FFF;
+    border-right: medium none;
+    margin-top: -4px;
+    padding-top: 4px;
+    position: relative;
+}
+
+	#main-nav li > a.selected {
+	    margin-left: -2px;
+	}
+
+/* WRAPPER CONTENT------>  */
+#wrapper-content {
+    clear: both;
+    width: 930px;
+    margin: 0 auto;
+    background: #fff;
+    min-height: 710px;
+    overflow: auto;
+    padding: 20px;
+}
+/* INTRO-BLURB ------>  */
+#intro {
+    float: left;
+    width: 570px;
+    padding-bottom: 50px;
+}
+#intro h2 {
+    padding: 15px 0 12px 24px;
+    border-bottom: none;
+    color: #2485AE;
+}
+#intro p {
+    font-size: 16px;
+    color: #5f6464;
+    line-height: 1.3em;
+    padding: 0 24px 0 24px;
+}
+#intro a,
+#individual-intro ul.individual-urls li a,
+#revision-build-date h3,
+#terms h3,
+#visual-graph h5,
+.blue,
+p.forgot-password a,
+ul#individual-personInPosition li a,
+ul.individual-urls li a,
+ul.individual-urls-people li a {
+    color: #2485ae
+}
+
+.home #home-image {
+    border: 8px solid #fff;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.38);
+    float: right;
+    height: 300px;
+}
+
+/* LOG IN------>  */          
+#login {
+    float: right;
+    width: 314px;
+    border: 1px solid #e8ece9;
+    margin-right: 25px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+body.login #login {
+    float: none;
+}
+#login h2 {
+    font-size: 22px;
+    color: #2485ae;
+    padding-left: 15px;
+    padding-top: 18px;
+    border-bottom: none;
+}
+h3.internal-auth:hover {
+    color: #47B6D0;
+}
+#error-alert {
+    margin-left: 0;
+    margin-bottom: 12px;
+    padding: 12px;
+    padding-bottom: 12px;
+    border: 1px dotted #a12424;
+}
+#error-alert img {
+    float: left;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+#error-alert p {
+    padding-left: 40px;
+    font-size: .8em;
+    line-height: 1.3em;
+    color: #a12424;
+    padding-top: 5px;
+}
+#login-form label {
+    display: block;
+    color: #5e6363;
+    padding-top: 0;
+    padding-left: 38px;
+    font-size: 14px;
+}
+#login-form input.text-field {
+    border: 0;
+    font-size: 14px;
+    padding: 5px;
+    width: 219px;
+    height: 24px;
+    margin-left: 38px;
+    background: #fff;
+    border: 1px solid #e0dfdf;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;     
+}
+#login-form input.text-field:focus {
+    border: 1px solid rgba(57, 138, 172, .5);  
+    background-color: rgba(57, 138, 172, .1);   
+}
+#login-form p.submit {
+    width: 100px;
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 38px;
+}
+#login-form p.submit-password {
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 38px;
+}
+#login-form input.checkbox-remember-me {
+    float: left;
+    height: 14px;
+    width: 14px;
+    color: #5e6363;
+    padding: 0;
+    margin-top: 33px;
+    margin-left: 20px;
+}
+#login-form label.label-remember-me {
+    display: block;
+    float: right;
+    color: #5e6363;
+    font-size: 12px;
+    width: 100px;
+    margin: 0;
+    padding: 0;
+    margin-top: 29px;
+    margin-right: 32px;
+}
+p.forgot-password {
+    clear: both;
+    margin-left: 38px;
+    font-size: 12px;
+    padding-top: 1.2em;
+    padding-bottom: 1.2em;
+}
+p.request-account {
+    width: 219px;
+    clear: both;
+    float: left;
+    margin-left: 38px;
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: 1px solid #e8ece9;
+}
+p.password-note {
+    font-size: 12px;
+    color: #949696;
+    padding-left: 38px;   
+}
+#flash-message {
+    border: 1px dotted #E2C822;
+    background-color: #FFF9D7;
+    padding: .5em;  
+    margin-bottom: 10px;
+}
+#welcome-message {
+    border: 1px dotted #E2C822;
+    background-color: #FFF9D7;
+    padding: .25em;
+    margin-bottom: 8px;
+}
+#welcome-msg-container {
+    margin-bottom: 8px;
+    margin-top: -10px;
+    margin-right:-10px;
+    height:34px;
+}
+p.external-auth {
+    margin: 0 auto;
+}
+p.external-auth a.blue,
+p.external-auth a.blue:visited {
+     background-color: #398AAC;
+     width: 180px;
+     margin-bottom: 17px;
+     line-height: 1.3em;
+     padding-top: 10px;
+}
+p.external-auth a.blue:hover {
+    background-color: #58A2C1;
+    color: #fff;
+}
+/* HOME SEARCH ------>  */
+#search-home {
+    float: left;
+    width: 533px;
+    margin: 30px 0 0 0;
+}
+#search-home h3 {
+    padding: 0;
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #2485AE;
+	padding-left: 24px;
+}
+
+input.search {
+    background:  url(../images/search-icon_FSM.png) center center no-repeat #D4D5D6;
+    border-color: #CCC !important;
+    border-style: solid !important;
+    border-width: 1px 1px 1px 0px !important;
+    color: #fff;
+    font-size: 0px !important;
+    height: 39px;
+    padding: 9px;
+    position: absolute;
+    text-decoration: none;
+    width: 39px;
+}
+#search-home-field input.search {
+    position: relative !important;
+}
+	input.search:hover,
+    #search-home-field input.search:hover {
+        background-color: #a9abac;
+    }
+
+input.search-home-vivo {
+    float: left;
+    margin: 10px 0 0 8px;
+    width: 350px;
+    height: 26px;
+    border: 0;
+    font-size: 18px;
+    color: #5E6363;
+    margin-left: 4px;
+    margin-top: 2px;
+}
+
+/* SEARCH HOME------>  */ 
+#search-home-field {
+		background-color: #F9FAFA;
+        height: auto !important;
+        width: 418px;
+}
+#search-home-field input.search {
+/*	 	background-color: url(../images/search-field-and-button.gif) center center no-repeat; */
+        color: #fff;
+		border: none;
+}
+
+input.search-vivo,
+input.search-homepage {
+        border-color: #CCC;
+        border-style: solid;
+		border-width: 1px 0px 1px 1px;
+		background-color: #f9fafa;
+		background-position: right;
+        border-radius: 0;
+        height: 23px;
+        margin-left: 0;
+        margin-top: 0;
+		opacity: .5;
+		text-align:right;
+        width: 324px; 
+}
+
+#search-homepage a.filter-search {
+    background-image: url("../images/filteredSearch_new.gif");
+    height: 39px;
+    right: 130px;
+    width: 39px
+}
+    .filter-default {
+    		background-position: 0 0;
+    }
+    .filter-active {
+    		background-position: 0px 38px;
+    }
+#filter-search-nav {
+		background-color: #6C7474;
+		color: #fff;
+		right: 109px;
+}
+#filter-search-nav li {
+		background-image: none;
+		padding-left: 0;
+		margin-left: 0;
+}
+#filter-search-nav a.active,
+#stats p,
+p.request-account a,
+ul#header-nav a {
+   color: #fff; 
+}
+#filter-search-nav a {
+		border-bottom: 1px dotted #cfcfcf;
+		color: #ccc;
+}
+
+/* HOME IMAGE------>  */ 
+
+#image-home {
+    float: right;
+    padding: 20px;
+    width: 300px;
+}
+    #image-home img { 
+        border-radius: 10px;
+    }
+
+/* BROWSE ------>  */
+ul#browse-classgroups a {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+ul#browse-classgroups a.selected,
+ul#browse-classgroups a:hover,
+ul#classes-in-classgroup a:hover,
+ul#classes-in-classgroup a.selected,
+ul#vgraph-classes a:hover,
+ul#vgraph-classes a.selected {
+    background: url(../images/arrow.gif) 0 10px no-repeat;
+    color: #2ea0cf;
+}
+svg text:hover {
+    color: #2EA0CF;
+}
+p.view-all {
+    clear: both;
+    width: 200px;
+    font-size: 14px;
+    text-align: right;
+    color: #303e4e;
+}
+a.view-all-style {
+    color: #303e4e
+}
+
+/* HOME STATS----->  */
+.home-sections {
+	background-color: #fff; /* layer fill content */
+}
+.home-sections h4 {
+    color: #61468b;
+}
+
+
+#home-stats {
+		margin-top: 30px;
+}
+#stats li {
+	border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.38);
+}
+#stats li a:hover {
+		opacity: .8;
+}
+#stats .stats-count { 
+    color: #61468b;
+}
+    #stats .stats-count span {
+        display: inline-block !important;
+        opacity: .5;
+    }
+    
+#stats a:hover { text-decoration: none !important;}
+#stats .stats-type {
+    border-top: 1px solid #CCC;
+    color: #595b5b;
+}
+
+#home-research  {
+	width: 297px; 
+	float: left;
+	clear: both;
+}
+#home-research ul {
+    list-style: none;
+    margin-top: .25em;
+    /* list-style: outside url('http://deptcommon.fsm.northwestern.edu/images/sidebar-arrow-gray.gif') disc !important; */
+    padding: 0.4em 0 0.6em 0.5em;
+}
+#home-research li {
+    clear: both;
+	line-height: 1.25em;
+	margin-top: 0.7em; 
+	font-size: 0.9em;
+}
+#home-research li:last-child {
+	text-align:right;
+	padding: 4px 16px 0 0;
+}
+#home-research li a .number {
+    background: url("../images/li-background_FSM-angle.png") no-repeat scroll 0 0 #775E9E;
+    float: left;
+    height: 28px;
+    margin-bottom: 1em;
+    margin-right: .5em;
+    padding-left: 10px;
+    padding-top: 0.2em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    top: -5px;
+    vertical-align: middle;
+    width: 47px;
+}
+    
+    #home-research li a .number span {
+        color: #FFF;
+        display: block;
+        font-size: 1em;
+        margin-top:3px; 
+    }
+
+#home-academic-depts  {
+	width: 297px; 
+	margin-left: 15px;
+	float: left;
+}
+#home-academic-depts h4,
+#home-faculty-mbrs h4,
+#home-geo-focus h4,
+#home-research h4 {
+    display: inline;
+    padding: 3px 10px;
+}
+#home-academic-depts ul {
+    list-style: outside url("http://deptcommon.fsm.northwestern.edu/images/sidebar-arrow-gray.gif") disc; 
+	padding: 0.4em 0 0.6em 1.65em;
+}
+#home-academic-depts li {
+	line-height: 1.25em;
+	padding-top: 1.0em;
+	padding-right: 4px;
+	font-size: 0.9em;
+}
+#home-faculty-mbrs  {
+	width: 297px; 
+	margin: 0 0 20px 15px;
+	float: left;
+}
+div#tempSpacing {
+    margin-top:30px;
+    padding-left:20px;
+    height:325px;
+}
+
+#home-faculty-mbrs ul#facultyThumbs {
+    margin-left: .7em;
+}
+
+div#research-faculty-mbrs {
+    font-size: 0.9em;
+    line-height: 16px;
+    margin-top: -0.35em;
+}
+div#research-faculty-mbrs li.individual {
+    clear: both;
+}
+div#research-faculty-mbrs ul li.individual:first-child {
+    clear: both;
+    padding-top: 20px
+}
+div#research-faculty-mbrs li h1 {
+    padding: 6px 0 2px 0;
+}
+div#research-faculty-mbrs li img {
+    width: 60px;  
+    float: left;
+}
+div#research-faculty-mbrs li span.title {
+    display: block;
+    font-size: 0.825em;
+    line-height: 1.25em;
+    padding-bottom: 8px;
+}
+div#research-faculty-mbrs ul#viewMoreFac  {
+    list-style:none;
+}
+div#research-faculty-mbrs ul#viewMoreFac li {
+    text-align:right;
+    padding: 0 16px 8px 0;
+    clear:both;
+}
+div.adjImgHeight,
+div#adjImgHeight {
+    border-radius: 5px;
+    float: left;
+    height: 75px;
+    margin: 0 10px 10px 0;
+    overflow: hidden;
+    width: 60px;
+}
+    /* Fix for short images */
+    #home-faculty-mbrs #research-faculty-mbrs ul#facultyThumbs li.individual > img {
+        border-radius: 5px;
+        margin: 0 10px 10px 0;
+    }
+
+#home-geo-focus  {
+	clear: both;
+	display: inline-block; 
+    margin-top: 30px;
+    height: 632px;
+    width: 921px;
+}
+#home-geo-focus div#timeIndicatorGeo {
+    text-align:center;
+    margin-top:100px;
+}
+/* FOOTER------>  */
+footer {
+    clear: both;
+    width: 970px;
+    height: 88px;
+    margin: 0 auto;
+    font-size: .85em;
+    color: #4e5051;
+    background-color: #61468b;
+}
+footer p.copyright {
+    float: left;
+    padding-top: 55px;
+    padding-left: 30px;
+    width: 600px;
+}
+footer p.copyright small {
+    font-size: 1em;
+}
+ul#footer-nav {
+    float: right;
+    list-style: none;
+    width: 200px;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+    padding-top: 55px;
+    padding-right: 20px;
+}
+ul#footer-nav li {
+    float: left;
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-right: 1px solid #c9c8c8;
+}
+ul#footer-nav li:last-child,
+ul#header-nav li.last,
+ul#individual-hasResearchArea li:last-child,
+ul#individual-facultyMemberships li:last-child {
+    border-right: none;
+}
+#footer-nav a {
+    color: #4e5051
+}
+#footer-nav a:hover,
+a.terms,
+a.powered-by-vivo {
+    color: #09C;
+    text-decoration: none;
+}
+p {
+    margin-bottom: 1.3em;
+}
+
+/* NU/NUCATS FOOTER */
+  footer {
+      margin-bottom: 1em;
+      margin-left: auto;
+      margin-right: auto;
+      min-height: 165px;
+      max-width: 930px;
+      padding: 20px;
+  }
+
+    footer p { line-height: 130%;}
+
+    footer p,
+    footer a { color: #FFF; text-decoration: none; }
+        footer a:hover { opacity: .7; text-decoration: underline; }
+
+    footer .vivo { color: #FFF; float: right; list-style-type: none; }
+        footer .vivo a { color: #FFF; }
+
+  /* NU Logo */
+    footer #NU-logo {
+      float: left;
+      height: 133px;
+      margin-right: 25px;
+      margin-top: 25px;
+      padding-right: 4px;
+      position: relative;
+      top: -20px;
+      width: 221px;
+    }
+
+.multiSiteFooter ul { list-style-type: none; }
+    .multiSiteFooter li { float: left; margin-left: 3px; } 
+        .multiSiteFooter li:first-child { margin-left: 0px; }
+        .multiSiteFooter li:after { content: " | "; color: #FFF; }
+        .multiSiteFooter li:last-child:after { content: ""; }
+
+
+/* STYLED BUTTONS ------>  */
+.button,
+.button:visited {
+    background: #222 url(../images/alert-overlay.png) repeat-x;
+    display: inline-block;
+    padding: 7px 22px 8px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px; /*This box should have a rounded corners in browsers supporting CSS3*/
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    border: 0;
+}
+.button:hover {
+    background-color: #111;
+    color: #fff;
+}
+.green,
+ul#individual-tools li a,
+ul#individual-tools-people li a {
+    color: #b2d15a;
+}
+.small.button,
+.small.button:visited {
+    font-size: 11px
+}
+.button,
+.button:visited {
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1; 
+}
+.green.button,
+.green.button:visited {
+    background-color: #749a02;
+    color: #fff;
+}
+.green.button:hover {
+    background-color: #b2d15a;
+}
+.blue.button,
+.blue.button:visited {
+    background-color: #398aac;
+    color: #fff;
+}
+.blue.button:hover {
+    background-color: #58a2c1;
+}
+
+/* ------------------------------------------------->  */
+/* INDIVIDUAL LIST --------------------------------->  */
+/* ------------------------------------------------->  */
+.pagination li.selectedNavPage {
+    color: #91b039;
+}
+.individualList ul.individualData li {
+    border-right: solid 1px #a0a0a0;
+}
+.individualList ul { 
+    margin-left: 0; 
+}
+.individualList li,
+.individualList li span { 
+  color: #9c9c9c;
+ }
+.individualList li a { 
+    font-weight: normal; 
+    color: #2485AE;
+}
+
+/* ------------------------------------------------->  */
+/* MENU PAGES -------------------------------------->  */
+/* ------------------------------------------------->  */
+
+/* VISUAL GRAPH------>  */
+.property-group,
+#menupage-intro {
+    width: 920px;
+    background: #fff;
+    margin: 0.5em auto !important;
+}
+#menupage-intro h2 {
+    font-size: 1.375em;
+    color: #064d68;
+    font-weight: normal;
+    padding-bottom: 0px !important;
+}
+#menupage-intro.people h2 {
+    float: left;
+}
+#menupage-content.people {
+    border-right: 1px solid #e8ece9;
+}
+#menupage-content {
+    width: 900px;
+}
+#menupage-content h3 {
+    font-size: 1.5em;
+    color: #002b44;
+    font-weight: normal;
+    border-bottom: 1px solid #f3f3f4;
+}
+/* FIND BY ------>  */
+#find-by {
+    border: 1px solid #e4eae9;
+}
+#find-by h3 {
+    font-size: 1.125em;
+    color: #2485ae;
+    font-weight: normal;
+}
+ul#find-filters a:hover,
+ul#find-filters a.selected {
+    background: url(../images/arrow.gif) 0 6px no-repeat;
+    color: #2ea0cf;
+}
+/* RESEARCHERS ------>  */
+#researchers {
+    width: 920px;
+    background: #f7f9f9;
+    border: 1px solid #d7e6e6;
+}
+#researchers h3 {
+    font-size: 1.25em;
+    color: #2485ae;
+    font-weight: normal;
+    background: url(../images/arrow.gif) 140px 27px no-repeat;
+}
+#researchers p {
+    font-size: 1.125em;
+    color: #5e6363;
+}
+#researchers-slider {
+    border: 1px solid #e8e8e8;
+    background: #fff;
+}
+#alpha-display {
+    font-size: 4.375em;
+    text-align: center;
+    float: left;
+    color: #2485ae;
+    border-right: 1px dotted #dde4e3;
+    font-weight: bold;
+}
+#profile-photo-display {
+    width: 600px;
+}
+#profile-photo-display img {    
+    border: 1px solid #dde4e3;
+}
+#nav-display p {
+    font-size: 26px;
+    color: #2485ae;
+}
+#nav-display img {
+    border-left: 1px solid #e8e8e8;
+}
+/* BROWSE BY ------>  */
+#browse-by {
+    width: 920px;
+}
+#browse-by h2 {
+    background: #5e6363;
+    font-size: 1.375em;
+    color: #fff;
+}
+/* BROWSE CLASSES ------>  */
+ul#browse-classes {
+    list-style: outside url('http://deptcommon.fsm.northwestern.edu/images/sidebar-arrow-gray.gif') disc !important; */
+    background-color: #fff;
+    border: 1px solid #dde4e3;
+    border-radius: 5px 0px 0px 5px;
+    border-right: 0;
+    position: relative;
+    right: -2px;
+}
+ul#browse-classes li,
+ul#vgraph-classes li {
+    border-bottom: 1px solid #dde4e3;
+    font-size: 1em;
+}
+ul#browse-classes a { font-weight: normal !important; }
+
+ul#browse-classes a:hover,
+ul#browse-classes a.selected {
+    /*color: #2ea0cf; */
+}
+ul#browse-classes .count-classes {    
+    font-size: 12px; 
+}
+/* ALPHA BROWSE------>  */
+ul#alpha-browse-individuals {
+    background-color: #fff;
+}
+ul#alpha-browse-individuals a:hover,
+ul#alpha-browse-individuals a.selected {
+    color: #2ea0cf;
+}
+ul#alpha-browse-individuals .count-classes,
+ul#vgraph-classes .count-classes {
+    font-size: .75em;
+}
+.alphaIndex,
+.pagination.menupage,
+tr.editformcell td select,
+ul#alpha-browse-individuals li {    
+    font-size: .8em;
+}
+nav#alpha-browse-container {
+    border: 1px solid #dde4e3;
+    border-bottom: 0px;
+    border-radius: 5px 5px 0px 0px;
+    background-color: #fff;
+}
+/* BROWSE INDIVIDUALS------>  */
+#individuals-in-class {
+    width: 629px;
+    border: 1px solid #dde4e3;
+    border-radius: 0px 0px 5px 5px;
+    background-color: #fff;
+}
+#individuals-in-class li.individual {
+    border-bottom: 1px solid #dde4e3;
+}
+#individuals-in-class li img {
+    border-radius: 5px;
+}
+#individuals-in-class li h1,
+#property-group-menu ul,
+article.property ul.property-list {
+    color: #5e6363;
+    font-size: 1em;
+}
+.pagination.menupage li a:hover {
+    background: #5e6363;
+}
+
+/* ------------------------------------------------->  */
+/* IMAGE UPLOAD------------------------------------->  */
+/* ------------------------------------------------->  */
+/* <------ UPLOAD PICTURE*/
+#photoUploadDefaultImage img {
+    border: 4px solid #DDE4E3;
+}
+#photoUploadForm {
+    border-left: 1px dotted #DDE4E3;
+}
+/* <------ CROP PICTURE*/
+#photoCropping img {
+    border: 1px solid #DDE4E3;
+}
+#photoCropping {
+    margin-left: 20px;
+    padding-left: 40px;
+    background: url(../images/pointToCropPreview.jpg) 0 30px no-repeat;
+}
+#photoCroppingPreview {
+    width: 210px;
+}
+.photoCroppedPreview {
+    border: 4px solid #DDE4E3;
+}
+/* <------ DELETE PICTURE*/
+#photoDeletingContainer {
+    border: 1px solid #bdbcbc;
+}
+/* ------------------------------------------------->  */
+/* INDIVIDUAL DISPLAY ------------------------------>  */
+/* ------------------------------------------------->  */
+
+/* ADMIN PANEL ------>  */
+#admin {
+    background-color: #f2f9fb;
+}
+#admin h3 {
+    background: #2485AE;
+    color: #fff;
+}
+#admin .uri-link,
+#verbose-mode span {
+    color: #888c8c;
+}
+#admin a {
+    color: #2a98bc;
+}
+
+/* INDIVIDUAL INTRO FOR ANY CLASS ------>  */
+.preferred {
+    padding-top: .2em;
+}
+
+    #individual-intro h1 .fn {
+        color: #61468b;
+        font-size: 1.875em;
+    }
+
+
+#individual-intro span.display-title,
+h1.fn span.display-title {
+    display: block;
+    margin-top: .5em;
+    line-height: .65em !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+	h1.fn span.display-title {
+		font-size: .65em !important;
+	}
+
+ul#individual-tools {
+    color: #8AA149;
+}
+h2#webpage {
+    font-weight: bold;
+}
+
+/* INDIVIDUAL INTRO - LEFT SIDE CONTENT ------>  */
+img.individual-photo {
+    border-radius: 10px;
+}
+.rdf-url {
+    padding-top: .8em;
+    display: block;
+}
+ul#individual-tools {
+    color: #8AA149
+}
+#share-contact a.email,
+#share-contact a.tel,
+.editingForm .entryFormHead h2,
+.header,
+.navlinkblock {
+    color: #5f6464;
+}
+ul.individual-urls {
+    list-style: url(../../../images/individual/arrow-green.gif);
+}
+ul.individual-urls li {
+    font-size: .875em;
+    line-height: 1.6em;
+}
+ul.individual-urls-people {
+    list-style: url(../../../images/individual/arrow-grey.gif);
+}
+/* INDIVIDUAL RIGHT CONTENT ------>  */
+#individual-info,
+#property-group-menu a,
+.grey,
+.pagination.menupage li.selected,
+h2#mainImage, 
+#share-contact h2,
+h3.internal-auth {
+    color: #5e6363;
+}
+#individual-info h1.fn {
+    font-size: 1.75em;
+    color: #61468b !important;
+    line-height: 1em;
+}
+#individual-info h2 {
+    color: #5E6363;
+    font-size: 1em;
+    font-weight: bold;
+}
+#individual-info h3 {
+    font-size: 1.125em;
+    line-height: 1.2em;
+}
+ul#individual-personInPosition {
+    font-size: 1em;
+    list-style: url("http://deptcommon.fsm.northwestern.edu/images/sidebar-arrow-gray.gif"); 
+}
+ul#individual-personInPosition li {
+    line-height: 1.15em;
+    margin-bottom: 0.5em;
+}
+.individual-overview {
+    font-size: 1em;
+    padding-right: 10px;
+    padding-top: 10px;
+    width: 100%;
+}
+ul#individual-hasResearchArea li {
+    border-right: 1px solid #A6B1B0;
+}
+ul#individual-facultyMemberships li {
+    border-right: 1px solid #A6B1B0;
+}
+/* INDIVIDUAL VISUALIZATION ------>  */
+.publication-year-range,
+p.view-all-coauthors {
+    font-size: .875em;
+}
+a.all-vivo-publications {
+    font-size: .875em;
+    color: #5e6363;
+}
+/* <------ TEMPORAL GRAPH and MAP O' SCIENCE  */
+#temporal-graph h3 a,
+#map-of-science h3 a {
+    color: #2485AE;
+    font-size: .8em !important;
+    text-decoration: underline;
+    vertical-align:text-top;
+}
+/* COAUTHORS ------>  */
+img.co-author {
+    border: 2px solid #ebebeb;
+}
+#co-authors h3,
+#right-hand-column h3 {
+    font-size: 1.25em;
+    color: #2485ae;
+}
+/* PROPERTY GROUP MENU ------>  */
+#property-group-menu {
+    width: 920px;
+    background: #f1f2ee;
+}
+#property-group-menu li {
+    background: url(../../../images/individual/separator-property-group-nav.jpg) right 10px no-repeat;
+}
+#property-group-menu a:hover {
+    color: #002b44;
+}
+#property-group-menu li:last-child {
+    background: none;
+}
+/* PROPERTY GROUP ------>  */
+div#wrapper-content section.property-group div article.property:first-of-type { 
+    margin-top: -15px !important; 
+}
+
+section.property-group h2:first-of-type {
+    border-top: 0px !important;
+    margin-top: 0 !important;
+}
+section.property-group h2 {
+    background-color: #efefef !important;
+    margin-bottom: -1em !important;
+}
+
+section.property-group div article.property { margin-top: -15px !important; }
+
+section.property-group { border-top: 1px solid #DFE6E5; }
+
+section.property-group h2 { margin-top: -1em !important; }
+
+section.property-group h2,
+#menupage-content h4 {
+    font-size: 1.25em;
+    color: #2485ae;
+    font-weight: normal;
+}
+article.property {
+    width: 100%;
+}
+article.property h3 {
+    background: #efefef;
+    background-color: #fafaf9;
+    color: #61468b;
+    font-size: 1.063em;
+}
+.property-group div article.property:first-child {
+    border-width: 0px 0px 1px 0px;
+}
+article.property ul.property-list li.subclass h3 {
+    font-size: 1.063em;
+    color: #5E6363;
+}
+article.property .data-property-statement {
+    background: #fff;
+    font-size: 1em;
+    color: #5e6363;
+}
+article.property ul.property-list li a {
+    /*color: #2485ae;*/   /* cappadona: seems unnecessarily specific and is overriding .more-less from individual.css so I'm commenting out for now */
+    line-height: 1.6em;
+}
+/* MISCELLANEOUS ------>  */
+.displace {
+    position: absolute;
+    left: -9999px;
+}
+a {
+    text-decoration: underline
+}
+.middle {
+    vertical-align: middle;
+}
+input[type="submit"] {
+    cursor: pointer;
+}
+.checkboxSpacer {
+    margin-left:80px;
+}
+p.address-line {
+    margin-bottom: 0.3em;
+}
+/* EDITING DISPLAY------>  */
+.edit-individual {
+    border-left: 1px dotted #B2D15A;
+}
+/* ------------------------------------------------->  */
+/* SITE ADMIN DASHBOARD ---------------------------->  */
+/* ------------------------------------------------->  */
+#adminDashboard .pageBodyGroup {
+  padding: 0 1em .5em 1em;
+}
+#adminDashboard .pageBodyGroup h3 {
+  background-color: #fff;
+  border-bottom: 1px dotted #AFB2B2;
+  font-weight: bold;
+  padding: .625em;
+  color: #064D68;
+  margin-bottom: .625em;
+}
+#adminDashboard .pageBodyGroup ul {
+  margin: 0 0 1em .6em;
+}
+#adminDashboard .pageBodyGroup h4 {
+  color: #5E6363;
+  font-size: 1em;
+  margin-left: .6em;
+  font-weight: bold;
+}
+#adminDashboard .pageBodyGroup h4 a {
+  color: #5E6363;
+  font-size: 1em;
+  margin-left: 0;
+  font-weight: bold;
+}
+
+
+
+
+/* ------------------------------------------------->  */
+/* REVISION INFO ----------------------------------->  */
+/* ------------------------------------------------->  */
+
+#revision-build-date {
+    border-left: 1px solid #DFE6E6;
+}
+#revision-levels caption {
+    font-size: 18px;
+    color: #2485ae;
+}
+#revision-levels th {
+    font-weight: bold;
+    border: 1px solid #DFE6E6;
+}
+#revision-levels td {
+    border: 1px solid #DFE6E6;
+}
+
+/* ------------------------------------------------->  */
+/* IE message when JS is disabled  ----------------->  */
+/* ------------------------------------------------->  */
+.ie-alert {
+    color: #f00;
+    font-weight: bold;
+}
+
+/* ------------------------------------------------->  */
+/* VERBOSE DISPLAY  -------------------------------->  */
+/* ------------------------------------------------->  */
+section.verbosePropertyListing {
+    font-size: 12px;
+    font-weight: normal;
+    color: #5E6363;
+}
+section.verbosePropertyListing span {
+    color: #9bae5a;
+}
+h2#email .verbosePropertyListing,
+h2#phoneNumber .verbosePropertyListing {
+    margin-top: 10px;
+    line-height: 1.4em;
+}
+article.property h3 {
+    padding: 10px 0 10px 20px;
+    margin: 0;
+    text-transform: uppercase;
+}
+h2#personInPosition .verbosePropertyListing,
+h2#hasResearchArea .verbosePropertyListing,
+h2#preferredTitle .verbosePropertyListing {
+    display: block;
+}
+
+/* ------------------------------------------------->  */
+/* ACCOUNT PAGE ------------------------------------>  */
+/* ------------------------------------------------->  */
+form.customForm p {
+    margin-top: 8px;
+}
+section.accounts input.delete,
+section.accounts input.delete:visited {
+    background-color: #FFF;
+    color: #2485AE;
+    border: 1px solid #96c5da;
+}
+section.accounts input.delete:hover {
+    color: #fff;
+    background-color: #88acbb;
+    border: 1px solid #88acbb;
+}
+input.add-account,
+input.add-account:visited {
+    background: url(../images/addNewAccount.png) 0 center no-repeat;
+    color: #fff;
+    padding-left: 35px;
+}
+input.add-account:hover {
+    color: #fff;
+    background-color: #88acbb;
+    background: url(../images/addNewAccountOver.png) 0 center no-repeat;
+}
+.disabledSubmit {
+    color: #ede ! important;
+    background-color: #b2d15a ! important;
+    cursor: default ! important;
+}
+/* ------------------------------------------------->  */
+/* CONTACT FORM ------------------------------------>  */
+/* ------------------------------------------------->  */
+#contact_form input[type="text"] {
+    width: 20em;
+}
+#contact_form textarea {
+    width: 40em;
+}
+/* ------------------------------------------------->  */
+/* ASSOCIATE PROFILE ------------------------------->  */
+/* ------------------------------------------------->  */
+#associateProfileBackgroundThree {
+    padding:7px 94px 26px 12px; 
+    margin-top:-136px; 
+}
+#associateProfileBackgroundTwo {
+    padding:7px 94px 40px 0;
+    margin-top:-136px; 
+}
+#associateProfileBackgroundFour {
+    margin-top:-12px;
+}
+
+/* ------------------------------------------------->  */
+/* CLASS HIERARCHY  -------------------------------->  */
+/* ------------------------------------------------->  */
+span.headerSpanPlus {
+    width: 12px;
+    background: url(../images/green_plus_sign.gif) left center no-repeat;
+    cursor:default;
+}
+span.headerSpanMinus {
+    width: 12px;
+    background: url(../images/green_minus_sign.gif) left center no-repeat;
+    cursor:default;
+}
+span.subclassExpandPlus {
+    padding-right: 14px;
+    background: url(../images/green_plus_sign.gif) left center no-repeat;
+    cursor:default;
+}
+span.subclassExpandMinus {
+    padding-right: 14px;
+    background: url(../images/green_minus_sign.gif) left center no-repeat;
+    cursor:default;
+}
+/* ------------------------------------------------->  */
+/* PAGE MANAGEMENT  -------------------------------->  */
+/* ------------------------------------------------->  */
+.expandArrow {
+    background:url(../images/green_plus_sign.gif) right center no-repeat;
+    min-height:18px;
+}
+.collapseArrow {
+    background:url(../images/green_minus_sign.gif) right center no-repeat;
+    min-height:18px;
+}
+
+/* CUSTOM */
+ul.no-bullet { list-style: none !important; margin: 0 !important; padding: 0; }
+ul.no-bullet li { margin-left: 0 !important; }
+.siteMap h2 { text-transform: capitalize !important; }
+
+span#sparklineHeading, div#vis_container_coauthor { display: none; }
+#individual-info ul { font-size: 0.9em; }
+ul.propertyTabsList { margin-top: 0; }
+
