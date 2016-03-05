@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Command line suite]">
+  <test name="Command line test" preserve-order="false">
+    <classes>
+      <class name="org.vivoweb.vivo.selenium.tests.RebuildSearchIndex"/>
+    </classes>
+  </test> <!-- Command line test -->
+  <test name="Command line test(failed)">
+    <classes>
+      <class name="org.vivoweb.vivo.selenium.tests.RebuildSearchIndex">
+        <methods>
+          <include name="cleanup"/>
+          <include name="rebuildSearchIndexTest"/>
+          <include name="vivoSetup"/>
+          <include name="setUp"/>
+          <include name="vivoTeardown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- org.vivoweb.vivo.selenium.tests.RebuildSearchIndex -->
+    </classes>
+  </test> <!-- Command line test(failed) -->
+</suite> <!-- Failed suite [Command line suite] -->

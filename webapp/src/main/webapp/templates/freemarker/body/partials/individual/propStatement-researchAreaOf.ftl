@@ -14,15 +14,17 @@
     <#local linkedIndividual>
         <a href="${profileUrl(statement.uri("person"))}" title="${i18n().person_name}">${statement.personName!}</a>
     </#local>
-    <#if statement.title?has_content >
-        <#local posnTitle = statement.title>
-    <#elseif statement.posnLabel?has_content>
-        <#local posnTitle = statement.posnLabel>
-    </#if>
-    <#if statement.org??>
-        <#local orgString>
-            <a href="${profileUrl(statement.uri("org"))}" title="${i18n().organization_name}">${statement.orgLabel!""}</a>
-        </#local>
+    <#if !(statement.dateTimeEnd?has_content)>
+        <#if statement.title?has_content >
+            <#local posnTitle = statement.title>
+        <#elseif statement.posnLabel?has_content>
+            <#local posnTitle = statement.posnLabel>
+        </#if>
+        <#if statement.org??>
+            <#local orgString>
+                <a href="${profileUrl(statement.uri("org"))}" title="${i18n().organization_name}">${statement.orgLabel!""}</a>
+            </#local>
+        </#if>
     </#if>
 
     <@s.join [ linkedIndividual, posnTitle!, orgString! ] />
