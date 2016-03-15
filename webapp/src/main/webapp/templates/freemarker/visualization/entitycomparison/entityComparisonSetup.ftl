@@ -125,6 +125,7 @@ var i18nStringsUtil = {
     byPublications: '${i18n().by_publications}',
     publicationCount: '${i18n().publication_count}',
     grantCount: '${i18n().grant_count}',
+    entityLabel: '${i18n().entity_label}',
     entityType: '${i18n().entity_type}',
     noMatchingEntities: '${i18n().no_matching_entities_found}',
     clerSearchQuery: '${i18n().clear_search_query}',

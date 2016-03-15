@@ -1085,7 +1085,7 @@ function prepareTableForDataTablePagination(jsonData, dataTableParams){
 	checkboxTH.html(' ');
 	
 	var entityLabelTH = $('<th>');
-	entityLabelTH.html(i18nStringsUtil.entityTypeString);
+	entityLabelTH.html(i18nStringsUtil.entityLabel);
 	
 	var activityCountTH = $('<th>');
 	if ($("select.comparisonValues option:selected").text() === i18nStringsUtil.byPublications) {
