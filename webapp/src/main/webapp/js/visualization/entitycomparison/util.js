@@ -221,7 +221,10 @@ var DatatableCustomFilters = {
 		
 		var currentEntityVisMode = URIToEntityRecord[entityURI].visMode;
 
-		if (currentEntityVisMode === "ORGANIZATION" 
+    if (temporalGraphProcessor.currentSelectedFilter === "NONE") {
+      return true;
+    }
+    else if (currentEntityVisMode === "ORGANIZATION" 
 				&& temporalGraphProcessor.currentSelectedFilter === "ORGANIZATIONS") {
 			return true;
 		} else if (currentEntityVisMode === "PERSON" 
@@ -1065,7 +1068,7 @@ function prepareTableForDataTablePagination(jsonData, dataTableParams){
 	
 //	console.log(processJSONData.currentEntityLevel);
 	
-	if (processJSONData.currentEntityLevel.toUpperCase() === "ORGANIZATIONS & PEOPLE") {
+	if (processJSONData.currentEntityLevel.toUpperCase() === "ORGANIZATIONS AND PEOPLE") {
 		$.fn.dataTableExt.afnFiltering.push(DatatableCustomFilters.peopleOrOrganizations);
 	}
 		
@@ -1189,7 +1192,7 @@ function prepareTableForDataTablePagination(jsonData, dataTableParams){
  */	
 function reloadDataTablePagination(preselectedEntityURIs, jsonData){
 	
-	if (processJSONData.currentEntityLevel.toUpperCase() === "ORGANIZATIONS & PEOPLE") {
+	if (processJSONData.currentEntityLevel.toUpperCase() === "ORGANIZATIONS AND PEOPLE") {
 		
 		/*
 		 * This will make sure that duplicate filters are not added.

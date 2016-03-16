@@ -164,12 +164,20 @@ $(".filter-option").live('click', function() {
 		if ($(this).attr('id') === 'people-filter') {
 			
 			$("#organizations-filter").removeClass('active-filter');
+      $("#no-filter").removeClass('active-filter');
 			temporalGraphProcessor.currentSelectedFilter = "PEOPLE";
 			
 		} else if ($(this).attr('id') === 'organizations-filter') {
 			
 			$("#people-filter").removeClass('active-filter');
+      $("#no-filter").removeClass('active-filter');
 			temporalGraphProcessor.currentSelectedFilter = "ORGANIZATIONS";
+		} 
+    else if ($(this).attr('id') === 'no-filter') {
+			
+			$("#people-filter").removeClass('active-filter');
+      $("#organizations-filter").removeClass('active-filter');
+			temporalGraphProcessor.currentSelectedFilter = "NONE";
 		} 
 		
 		$(this).addClass('active-filter');
@@ -638,11 +646,6 @@ temporalGraphProcessor = {
 				currentSelectedEntityURIs.push(index);
 			});	
 		}
-		
-		/*
-		 * Reset the "is default selections maintained" value. 
-		 * */
-		temporalGraphProcessor.isDefaultSelectionsMaintained = true;
 		
 		clearRenderedObjects();
 		

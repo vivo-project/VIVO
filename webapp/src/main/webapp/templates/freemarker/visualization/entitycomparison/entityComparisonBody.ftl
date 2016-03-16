@@ -69,10 +69,11 @@
                     </div>
                 
                 </div>
-                <h3>${i18n().what_to_compare}</h3>
                 <div id="people-organizations-filter">
-                	<span id="organizations-filter" class="filter-option active-filter">${i18n().organizations_capitalized}</span> | 
-                	<span id="people-filter" class="filter-option">${i18n().people_capitalized}</span>
+                  <h3>${i18n().what_to_compare}</h3>
+                	<span id="organizations-filter" class="filter-option">${i18n().organizations_capitalized}</span> | 
+                	<span id="people-filter" class="filter-option">${i18n().people_capitalized}</span> | 
+                  <span id="no-filter" class="filter-option">${i18n().view_all}</span>
                 	<img class="filterInfoIcon" src="${urls.images}/iconInfo.png" 
                 		 alt="${i18n().info_icon}" 
                 		 title="${i18n().organization_hierarchy_note(organizationLabel)}" />
