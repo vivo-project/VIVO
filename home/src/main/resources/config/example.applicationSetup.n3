@@ -23,7 +23,7 @@
         <java:edu.cornell.mannlib.vitro.webapp.modules.Application> ;
     :hasSearchEngine              :instrumentedSearchEngineWrapper ;
     :hasSearchIndexer             :basicSearchIndexer ;
-    :hasImageProcessor            :jaiImageProcessor ;
+    :hasImageProcessor            :iioImageProcessor ;
     :hasFileStorage               :ptiFileStorage ;
     :hasContentTripleSource       :sdbContentTripleSource ;
     :hasConfigurationTripleSource :tdbConfigurationTripleSource ;
@@ -32,12 +32,10 @@
 # ----------------------------
 #
 # Image processor module: 
-#    The JAI-based implementation is the only standard option.
-#    It requires no parameters.
 #
 
-:jaiImageProcessor 
-    a   <java:edu.cornell.mannlib.vitro.webapp.imageprocessor.jai.JaiImageProcessor> ,
+:iioImageProcessor
+    a   <java:edu.cornell.mannlib.vitro.webapp.imageprocessor.imageio.IIOImageProcessor> ,
         <java:edu.cornell.mannlib.vitro.webapp.modules.imageProcessor.ImageProcessor> .
 
 # ----------------------------
