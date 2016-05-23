@@ -14,6 +14,8 @@
         <vitro-core>../Vitro</vitro-core>
         <vitro-version>${project.version}</vitro-version>
         <vivo-dir>${basedir}</vivo-dir>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+        <build.timestamp>${maven.build.timestamp}</build.timestamp>
     </properties>
 
     <name>VIVO</name>
@@ -113,9 +115,31 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <doCheck>false</doCheck>
+                    <doUpdate>false</doUpdate>
+                    <shortRevisionLength>7</shortRevisionLength>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
+    <!--
+        Add a custom repository, which is actually just a simple GitHub project
+        in order to distribute some dependencies that aren't part of Maven central
+    -->
     <repositories>
         <repository>
             <id>vivo-dependencies</id>
@@ -123,4 +147,16 @@
             <url>https://raw.github.com/vivo-project/dependencies/master/</url>
         </repository>
     </repositories>
+
+    <!--
+       The SCM repository location is used by Continuum to update against
+       when changes have occurred.  This spawns a new build cycle and releases
+       snapshots into the snapshot repository below.
+    -->
+    <scm>
+        <connection>scm:git:git@github.com:vivo-project/VIVO.git</connection>
+        <developerConnection>scm:git:git@github.com:vivo-project/VIVO.git</developerConnection>
+        <url>git@github.com:vivo-project/VIVO.git</url>
+        <tag>HEAD</tag>
+    </scm>
 </project>
