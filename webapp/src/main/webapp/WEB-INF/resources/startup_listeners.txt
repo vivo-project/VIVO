@@ -57,6 +57,7 @@ edu.cornell.mannlib.vitro.webapp.services.shortview.ShortViewServiceSetup
 
 edu.cornell.mannlib.vitro.webapp.visualization.setup.VisualizationSetup
 
+org.vivoweb.webapp.startup.GeneratorSetup
 org.vivoweb.webapp.startup.SearchResultTemplateModelSetup
 
 edu.ucsf.vitro.opensocial.OpenSocialSmokeTests

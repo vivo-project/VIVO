@@ -36,7 +36,7 @@ public class AddConceptThroughObjectPropertyGenerator extends DefaultObjectPrope
             HttpSession session) throws Exception {
 		EditConfigurationVTwo editConfig = super.getEditConfiguration(vreq, session);
 		//If this isn't adding a new individual, then override  template/types
-		if(!DefaultAddMissingIndividualFormGenerator.isCreateNewIndividual(vreq, session)) {
+		if(!VIVODefaultAddMissingIndividualFormGenerator.isCreateNewIndividual(vreq, session)) {
 			//return rangetypes in form specific data
 			editConfig.addFormSpecificData("createNewTypes", getCreateNewTypesOptions(vreq));
 			//override templates with ones that will override create new types portion
