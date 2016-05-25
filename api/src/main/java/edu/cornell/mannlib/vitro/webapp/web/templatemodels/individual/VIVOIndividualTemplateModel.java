@@ -33,15 +33,6 @@ public class VIVOIndividualTemplateModel extends IndividualTemplateModel {
         super(individual, vreq);
     }
 
-    public static void setAsDefault() {
-        IndividualTemplateModelBuilder.setCustomBuilder(new IndividualTemplateModelBuilder.IIndividualTemplateModelBuilder() {
-            @Override
-            public VIVOIndividualTemplateModel build(Individual individual, VitroRequest vreq) {
-                return new VIVOIndividualTemplateModel(individual, vreq);
-            }
-        });
-    }
-    
     private String getVisUrl(String visPath) {
         String visUrl;
         boolean isUsingDefaultNameSpace = UrlBuilder.isUriInDefaultNamespace(

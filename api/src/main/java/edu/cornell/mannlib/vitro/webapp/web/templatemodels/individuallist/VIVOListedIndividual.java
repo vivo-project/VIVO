@@ -33,16 +33,6 @@ public class VIVOListedIndividual extends ListedIndividual {
         title = findPreferredTitle();
     }
 
-    public static void setAsDefault() {
-        ListedIndividualBuilder.setCustomBuilder(new ListedIndividualBuilder.ILIstedIndividualBuilder() {
-            @Override
-            public ListedIndividual build(Individual individual, VitroRequest vreq) {
-                return new VIVOListedIndividual(individual, vreq);
-            }
-        });
-
-    }
-
     private String findPreferredTitle() {
         String queryStr = QueryUtils.subUriForQueryVar(VCARD_DATA_QUERY, "subject", individual.getURI());
         log.debug("queryStr = " + queryStr);
