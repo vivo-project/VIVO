@@ -60,6 +60,7 @@ edu.cornell.mannlib.vitro.webapp.visualization.setup.VisualizationSetup
 org.vivoweb.webapp.startup.DataGetterN3Setup
 org.vivoweb.webapp.startup.GeneratorSetup
 org.vivoweb.webapp.startup.MenuManagementSetup
+org.vivoweb.webapp.startup.TemplateModelSetup
 org.vivoweb.webapp.startup.SearchResultTemplateModelSetup
 
 edu.ucsf.vitro.opensocial.OpenSocialSmokeTests

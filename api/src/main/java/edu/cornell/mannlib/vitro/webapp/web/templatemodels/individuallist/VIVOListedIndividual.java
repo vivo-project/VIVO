@@ -13,8 +13,8 @@ import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 
-public class ListedIndividual extends BaseListedIndividual {
-    private static final Log log = LogFactory.getLog(ListedIndividual.class);
+public class VIVOListedIndividual extends ListedIndividual {
+    private static final Log log = LogFactory.getLog(VIVOListedIndividual.class);
 
     private static String VCARD_DATA_QUERY = ""
             + "PREFIX obo: <http://purl.obolibrary.org/obo/> \n"
@@ -28,9 +28,19 @@ public class ListedIndividual extends BaseListedIndividual {
 
     private final String title;
     
-    public ListedIndividual(Individual individual, VitroRequest vreq) {
+    VIVOListedIndividual(Individual individual, VitroRequest vreq) {
         super(individual, vreq);
         title = findPreferredTitle();
+    }
+
+    public static void setAsDefault() {
+        ListedIndividualBuilder.setCustomBuilder(new ListedIndividualBuilder.ILIstedIndividualBuilder() {
+            @Override
+            public ListedIndividual build(Individual individual, VitroRequest vreq) {
+                return new VIVOListedIndividual(individual, vreq);
+            }
+        });
+
     }
 
     private String findPreferredTitle() {
