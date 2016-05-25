@@ -26,10 +26,6 @@ public class VIVODefaultAddMissingIndividualFormGenerator extends DefaultAddMiss
 	
 	private Log log = LogFactory.getLog(VIVODefaultAddMissingIndividualFormGenerator.class);
 
-	public static void register() {
-		DefaultAddMissingIndividualFormGenerator.registerGeneratorClass(VIVOIndividualSearchResult.class);
-	}
-
     protected Map<String, String> generateNewResources(VitroRequest vreq) {
 		Map<String, String> newResources = super.generateNewResources(vreq);
 		newResources.put("newVcardInd", null);

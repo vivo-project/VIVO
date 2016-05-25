@@ -27,7 +27,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.
  * Generates the edit configuration for a default property form.
  * ModelChangePreprocessor creates the rdfs:label statement. 
  */
-public class NewIndividualFormGenerator extends BaseEditConfigurationGenerator implements EditConfigurationGenerator {
+public class VIVONewIndividualFormGenerator extends BaseEditConfigurationGenerator implements EditConfigurationGenerator {
 
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
