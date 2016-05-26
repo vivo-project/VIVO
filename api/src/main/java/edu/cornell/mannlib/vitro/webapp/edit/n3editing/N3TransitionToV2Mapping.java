@@ -1,13 +1,18 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing;
 
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.JspToGeneratorMapping;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class N3TransitionToV2Mapping extends HashMap<String, String>{        
     public N3TransitionToV2Mapping(){
         Map<String,String> map = this;
-        
+
+        map.put("defaultAddMissingIndividualForm.jsp",
+                edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.VIVODefaultAddMissingIndividualFormGenerator.class.getName());
+
         // vivo forms:
 
         map.put("addAuthorsToInformationResource.jsp",                
@@ -15,7 +20,7 @@ public class N3TransitionToV2Mapping extends HashMap<String, String>{
         map.put("manageWebpagesForIndividual.jsp",
                 edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForIndividualGenerator.class.getName());
         map.put("newIndividualForm.jsp",
-                edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.NewIndividualFormGenerator.class.getName());
+                edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.VIVONewIndividualFormGenerator.class.getName());
         map.put("organizationHasPositionHistory.jsp",
                 edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.OrganizationHasPositionHistoryGenerator.class.getName());
         map.put("personHasEducationalTraining.jsp",

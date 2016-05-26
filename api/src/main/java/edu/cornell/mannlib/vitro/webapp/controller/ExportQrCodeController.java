@@ -3,17 +3,16 @@
 package edu.cornell.mannlib.vitro.webapp.controller; 
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.IndividualTemplateModelBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
@@ -25,7 +24,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.individual.IndividualRequestA
 import edu.cornell.mannlib.vitro.webapp.controller.individual.IndividualRequestAnalyzer;
 import edu.cornell.mannlib.vitro.webapp.controller.individual.IndividualRequestInfo;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
-import edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.IndividualTemplateModel;
+import edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.VIVOIndividualTemplateModel;
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.DefaultObjectWrapper;
 
@@ -67,7 +66,7 @@ public class ExportQrCodeController extends FreemarkerHttpServlet {
             wrapper.setExposureLevel(BeansWrapper.EXPOSE_SAFE);
             
             Map<String, Object> body = new HashMap<String, Object>();
-            body.put("individual", wrapper.wrap(new IndividualTemplateModel(individual, vreq)));
+            body.put("individual", wrapper.wrap(IndividualTemplateModelBuilder.build(individual, vreq)));
             body.put("qrData", qrData);
             return new TemplateResponseValues(TEMPLATE_DEFAULT, body);
         } catch (Throwable e) {

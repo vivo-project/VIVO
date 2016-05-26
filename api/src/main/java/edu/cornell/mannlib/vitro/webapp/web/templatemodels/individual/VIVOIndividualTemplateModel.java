@@ -2,32 +2,19 @@
 
 package edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.rdf.model.RDFNode;
-
-import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Route;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
-import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
-import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 
-public class IndividualTemplateModel extends BaseIndividualTemplateModel {
+public class VIVOIndividualTemplateModel extends IndividualTemplateModel {
 
-    private static final Log log = LogFactory.getLog(IndividualTemplateModel.class);
+    private static final Log log = LogFactory.getLog(VIVOIndividualTemplateModel.class);
     
     private static final String FOAF = "http://xmlns.com/foaf/0.1/";
     private static final String PERSON_CLASS = FOAF + "Person";
@@ -42,10 +29,10 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     private static final String BASE_VISUALIZATION_URL = 
         UrlBuilder.getUrl(Route.VISUALIZATION_SHORT.path());
     
-    public IndividualTemplateModel(Individual individual, VitroRequest vreq) {
+    VIVOIndividualTemplateModel(Individual individual, VitroRequest vreq) {
         super(individual, vreq);
     }
-    
+
     private String getVisUrl(String visPath) {
         String visUrl;
         boolean isUsingDefaultNameSpace = UrlBuilder.isUriInDefaultNamespace(

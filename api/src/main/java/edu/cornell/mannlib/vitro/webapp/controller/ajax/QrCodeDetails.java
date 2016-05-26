@@ -2,16 +2,12 @@
 package edu.cornell.mannlib.vitro.webapp.controller.ajax;
 
 import java.io.IOException;
-import java.lang.Integer;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,21 +15,13 @@ import org.json.JSONException;
 
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.controller.ajax.VitroAjaxController;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ExceptionResponseValues;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.individual.IndividualRequestAnalysisContextImpl;
 import edu.cornell.mannlib.vitro.webapp.controller.individual.IndividualRequestAnalyzer;
 import edu.cornell.mannlib.vitro.webapp.controller.individual.IndividualRequestInfo;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
-import edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.IndividualTemplateModel;
 
 
 public class QrCodeDetails extends AbstractAjaxResponder {

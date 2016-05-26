@@ -13,8 +13,8 @@ import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 
-public class IndividualSearchResult extends BaseIndividualSearchResult {
-    private static final Log log = LogFactory.getLog(IndividualSearchResult.class);
+public class VIVOIndividualSearchResult extends IndividualSearchResult {
+    private static final Log log = LogFactory.getLog(VIVOIndividualSearchResult.class);
 
     private static String VCARD_DATA_QUERY = ""
             + "PREFIX obo: <http://purl.obolibrary.org/obo/> \n"
@@ -33,7 +33,7 @@ public class IndividualSearchResult extends BaseIndividualSearchResult {
     private String email = "";
     private String title = "";
        
-    public IndividualSearchResult(Individual individual, VitroRequest vreq) {
+    public VIVOIndividualSearchResult(Individual individual, VitroRequest vreq) {
     	super(individual, vreq);
     	log.debug("Called Individual Search Result");
     	findVcardInfo();
@@ -71,4 +71,7 @@ public class IndividualSearchResult extends BaseIndividualSearchResult {
     	return email;
     }
 
+    public static void register() {
+        IndividualSearchResult.registerResultClass(VIVOIndividualSearchResult.class);
+    }
 }

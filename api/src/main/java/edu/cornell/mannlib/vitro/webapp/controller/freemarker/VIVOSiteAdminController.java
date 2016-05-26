@@ -11,10 +11,10 @@ import edu.cornell.mannlib.vitro.webapp.auth.policy.PolicyHelper;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.visualization.tools.ToolsRequestHandler;
 
-public class SiteAdminController extends BaseSiteAdminController {
+public class VIVOSiteAdminController extends BaseSiteAdminController {
     
     private static final long serialVersionUID = 1L;
-    private static final Log log = LogFactory.getLog(SiteAdminController.class);
+    private static final Log log = LogFactory.getLog(VIVOSiteAdminController.class);
     
     @Override
 	protected Map<String, Object> getSiteMaintenanceUrls(VitroRequest vreq) {

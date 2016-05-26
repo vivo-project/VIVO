@@ -18,7 +18,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTw
  *This generator selects the actual generator to be employed based on whether the individual is a Person 
  *or another individual.  Adding a label for a person relies on first/name last name information i.e. object properties.
  */
-public class ManageLabelsGenerator extends BaseEditConfigurationGenerator implements EditConfigurationGenerator {
+public class VIVOManageLabelsGenerator extends BaseEditConfigurationGenerator implements EditConfigurationGenerator {
     public static Log log = LogFactory.getLog(ManageLabelsForIndividualGenerator.class);
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
