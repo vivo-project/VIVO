@@ -12,7 +12,7 @@ var visualization = {
             url: url,
 			data: {
 				'render_mode': 'dynamic',
-				'vis': 'person_pub_count',
+				'vis': 'person_grant_count',
 				'vis_mode': 'short',
 				'container': containerIdCoAuthor
 			},
