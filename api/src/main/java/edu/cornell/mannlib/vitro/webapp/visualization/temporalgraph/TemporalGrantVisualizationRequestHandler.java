@@ -163,7 +163,7 @@ public class TemporalGrantVisualizationRequestHandler implements
 
 		Map<String, Set<String>> subOrgGrantsMap = new HashMap<String, Set<String>>();
 
-		OrgUtils.getObjectMappingsForOrgAnSubOrgs(
+		OrgUtils.getObjectMappingsForOrgAndSubOrgs(
 				subjectEntityURI,
 				orgGrants,
 				orgGrantsPeople,

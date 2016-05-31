@@ -25,7 +25,7 @@ public class OrgUtils {
         return parentURIsToLabel;
     }
 
-    public static void getObjectMappingsForOrgAnSubOrgs(
+    public static void getObjectMappingsForOrgAndSubOrgs(
             String orgUri,
             Set<String> orgObjects,
             Set<String> orgObjectsIncludesPeople,
