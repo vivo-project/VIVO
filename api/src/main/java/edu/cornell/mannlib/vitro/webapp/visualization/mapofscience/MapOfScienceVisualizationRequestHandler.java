@@ -261,7 +261,7 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 
 		Map<String, Set<String>> subOrgPublicationsMap = new HashMap<String, Set<String>>();
 
-		OrgUtils.getObjectMappingsForOrgAnSubOrgs(
+		OrgUtils.getObjectMappingsForOrgAndSubOrgs(
 				subjectEntityURI,
 				orgPublications,
 				orgPublicationsPeople,

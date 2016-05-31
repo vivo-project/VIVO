@@ -100,7 +100,7 @@ public class TemporalPublicationVisualizationRequestHandler implements
 
 		Map<String, Set<String>> subOrgPublicationsMap = new HashMap<String, Set<String>>();
 
-		OrgUtils.getObjectMappingsForOrgAnSubOrgs(
+		OrgUtils.getObjectMappingsForOrgAndSubOrgs(
 				subjectEntityURI,
 				orgPublications,
 				orgPublicationsPeople,
@@ -193,6 +193,22 @@ public class TemporalPublicationVisualizationRequestHandler implements
 					csvFileContent.append("Organization");
 					csvFileContent.append("\n");
 
+				}
+
+				// For each person
+				for (String person : orgPublicationsPeople) {
+					csvFileContent.append(StringEscapeUtils.escapeCsv(personLabelMap.get(person)));
+					csvFileContent.append(", ");
+
+					if (personToPublicationMap.containsKey(person)) {
+						csvFileContent.append(personToPublicationMap.get(person).size());
+						csvFileContent.append(", ");
+					} else {
+						csvFileContent.append("0, ");
+					}
+
+					csvFileContent.append("Person");
+					csvFileContent.append("\n");
 				}
 
 				String outputFileName = UtilityFunctions.slugify(entityLabel) + "_publications-per-year" + ".csv";
