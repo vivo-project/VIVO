@@ -104,31 +104,19 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 		this.rdfService = models.getRDFService();
 	}
 
-	@Property(uri = "http://www.w3.org/2000/01/rdf-schema#label")
+	@Property(uri = "http://www.w3.org/2000/01/rdf-schema#label", maxOccurs = 1)
 	public void setLabel(String l) {
 		label = l;
 	}
 
-	@Property(uri = "http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#hasIncomingProperty")
+	@Property(uri = "http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#hasIncomingProperty", minOccurs = 1, maxOccurs = 1)
 	public void setIncomingProperty(String incomingUri) {
-		if (incomingPropertyUri == null) {
-			incomingPropertyUri = incomingUri;
-		} else {
-			throw new IllegalStateException(
-					"Configuration includes multiple declarations for hasIncomingProperty: "
-							+ incomingPropertyUri + ", and " + incomingUri);
-		}
+		incomingPropertyUri = incomingUri;
 	}
 
-	@Property(uri = "http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#hasOutgoingProperty")
+	@Property(uri = "http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#hasOutgoingProperty", minOccurs = 1, maxOccurs = 1)
 	public void setOutgoingProperty(String outgoingUri) {
-		if (outgoingPropertyUri == null) {
-			outgoingPropertyUri = outgoingUri;
-		} else {
-			throw new IllegalStateException(
-					"Configuration includes multiple declarations for hasOutgoingProperty: "
-							+ outgoingPropertyUri + ", and " + outgoingUri);
-		}
+		outgoingPropertyUri = outgoingUri;
 	}
 
 	@Property(uri = "http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#hasTypeRestriction")
@@ -148,14 +136,6 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 					.getClass().getSimpleName(),
 					formatRestrictions(typeRestrictions),
 					formatRestrictions(contextNodeClasses));
-		}
-		if (incomingPropertyUri == null) {
-			throw new IllegalStateException(
-					"Configuration did not declare hasIncomingProperty.");
-		}
-		if (outgoingPropertyUri == null) {
-			throw new IllegalStateException(
-					"Configuration did not declare hasOutgoingProperty.");
 		}
 	}
 
