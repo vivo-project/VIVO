@@ -390,6 +390,7 @@ DetailsPanel.prototype.showDetails = function(mode, id) {
             .append(title = $("<h2>Term: " + decodeURIComponent(id) + "</h2>")
                 .bind("click", function() {
                     highlight(id);
+                    detailsPane.showDetails(mode, id);
                 })
                 .css("cursor", "pointer")
                 .prepend($("<span/>").addClass("orange-square"))
@@ -450,6 +451,7 @@ DetailsPanel.prototype.groupInfo = function(i, group, mode, id) {
             }).join(", ") + "</h2>")
                 .bind("click", function() {
                     highlight(i);
+                    detailsPane.showDetails("group", i);
                 })
                 .css("cursor", "pointer")
                 .prepend($("<span/>").addClass("blue-circle"))
