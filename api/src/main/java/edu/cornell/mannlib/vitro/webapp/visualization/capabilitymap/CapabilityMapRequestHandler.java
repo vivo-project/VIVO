@@ -41,81 +41,99 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
 
     @Override
     public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log, Dataset dataSource) throws MalformedQueryParametersException {
-        CapabilityMapResponse response = new CapabilityMapResponse();
-
-        String query = vitroRequest.getParameter("query");
-
         ConceptLabelMap conceptLabelMap = VisualizationCaches.conceptToLabel.get(vitroRequest.getRDFService());
         ConceptPeopleMap conceptPeopleMap = VisualizationCaches.conceptToPeopleMap.get(vitroRequest.getRDFService());
         OrganizationPeopleMap organizationPeopleMap = VisualizationCaches.organisationToPeopleMap.get(vitroRequest.getRDFService());
         Map<String, String> organizationLabels = VisualizationCaches.organizationLabels.get(vitroRequest.getRDFService());
         Map<String, Person> peopleMap = VisualizationCaches.people.get(vitroRequest.getRDFService());
 
-        Set<String> matchedConcepts = conceptLabelMap.lowerLabelToConcepts.get(query.toLowerCase());
+        String data = vitroRequest.getParameter("data");
+        if (!StringUtils.isEmpty(data)) {
+            if ("concepts".equalsIgnoreCase(data)) {
+                Set<String> concepts = new HashSet<String>();
 
-        Set<String> people = new HashSet<String>();
-        if (matchedConcepts != null) {
-            for (String uri : matchedConcepts) {
-                Set<String> peopleSet = conceptPeopleMap.conceptToPeople.get(uri);
-                if (peopleSet != null) {
-                    people.addAll(peopleSet);
+                for (String conceptKey : conceptPeopleMap.conceptToPeople.keySet()) {
+                    concepts.add(conceptLabelMap.conceptToLabel.get(conceptKey));
                 }
+
+                Gson gson = new Gson();
+                return gson.toJson(concepts);
             }
+            return "";
         }
 
-        Set<String> clusterConcepts = new HashSet<String>();
-        for (String person : people) {
-            if (conceptPeopleMap.personToConcepts.containsKey(person)) {
-                clusterConcepts.addAll(conceptPeopleMap.personToConcepts.get(person));
-            }
-        }
+        String query = vitroRequest.getParameter("query");
+        if (!StringUtils.isEmpty(query)) {
+            CapabilityMapResponse response = new CapabilityMapResponse();
 
-        if (matchedConcepts != null) {
-            clusterConcepts.removeAll(matchedConcepts);
-        }
+            Set<String> matchedConcepts = conceptLabelMap.lowerLabelToConcepts.get(query.toLowerCase());
 
-        Set<String> clusterLabels = new HashSet<String>();
-        for (String clusterConcept : clusterConcepts) {
-            clusterLabels.add(conceptLabelMap.conceptToLabel.get(clusterConcept));
-        }
-
-        String[] clusters = clusterLabels.toArray(new String[clusterLabels.size()]);
-
-        for (String person : people) {
-            Person personObj = peopleMap.get(person);
-            if (personObj != null) {
-                CapabilityMapResult result = new CapabilityMapResult();
-                result.profileId = person;
-                result.query = query;
-                result.firstName = personObj.firstName;
-                result.lastName = personObj.lastName;
-                result.thumbNail = personObj.thumbnailUrl;
-                result.preferredTitle = personObj.preferredTitle;
-                Set<String> concepts = conceptPeopleMap.personToConcepts.get(person);
-                if (concepts != null) {
-                    result.subjectArea = concepts.toArray(new String[concepts.size()]);
-                }
-                Set<String> organizations = organizationPeopleMap.organizationToPeople.get(person);
-                if (organizations != null) {
-                    for (String org : organizations) {
-                        result.department = organizationLabels.get(org);
-                        if (!StringUtils.isEmpty(result.department)) {
-                            break;
-                        }
+            Set<String> people = new HashSet<String>();
+            if (matchedConcepts != null) {
+                for (String uri : matchedConcepts) {
+                    Set<String> peopleSet = conceptPeopleMap.conceptToPeople.get(uri);
+                    if (peopleSet != null) {
+                        people.addAll(peopleSet);
                     }
                 }
-                result.clusters = clusters;
-                response.results.add(result);
             }
+
+            Set<String> clusterConcepts = new HashSet<String>();
+            for (String person : people) {
+                if (conceptPeopleMap.personToConcepts.containsKey(person)) {
+                    clusterConcepts.addAll(conceptPeopleMap.personToConcepts.get(person));
+                }
+            }
+
+            if (matchedConcepts != null) {
+                clusterConcepts.removeAll(matchedConcepts);
+            }
+
+            Set<String> clusterLabels = new HashSet<String>();
+            for (String clusterConcept : clusterConcepts) {
+                clusterLabels.add(conceptLabelMap.conceptToLabel.get(clusterConcept));
+            }
+
+            String[] clusters = clusterLabels.toArray(new String[clusterLabels.size()]);
+
+            for (String person : people) {
+                Person personObj = peopleMap.get(person);
+                if (personObj != null) {
+                    CapabilityMapResult result = new CapabilityMapResult();
+                    result.profileId = person;
+                    result.query = query;
+                    result.firstName = personObj.firstName;
+                    result.lastName = personObj.lastName;
+                    result.thumbNail = personObj.thumbnailUrl;
+                    result.preferredTitle = personObj.preferredTitle;
+                    Set<String> concepts = conceptPeopleMap.personToConcepts.get(person);
+                    if (concepts != null) {
+                        result.subjectArea = concepts.toArray(new String[concepts.size()]);
+                    }
+                    Set<String> organizations = organizationPeopleMap.organizationToPeople.get(person);
+                    if (organizations != null) {
+                        for (String org : organizations) {
+                            result.department = organizationLabels.get(org);
+                            if (!StringUtils.isEmpty(result.department)) {
+                                break;
+                            }
+                        }
+                    }
+                    result.clusters = clusters;
+                    response.results.add(result);
+                }
+            }
+
+            Gson gson = new Gson();
+
+            String callback = vitroRequest.getParameter("callback");
+            if (!StringUtils.isEmpty(callback)) {
+                return callback + "(" + gson.toJson(response) + ");";
+            }
+            return gson.toJson(response);
         }
 
-        Gson gson = new Gson();
-
-        String callback = vitroRequest.getParameter("callback");
-        if (!StringUtils.isEmpty(callback)) {
-            return callback + "(" + gson.toJson(response) + ");";
-        }
-        return gson.toJson(response);
+        return "";
     }
 
     @Override
