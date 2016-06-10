@@ -65,18 +65,21 @@ var Capability = function(term, cutoff, numpeople) {
  */
 var Person = function(info) {
     this.id = info["md_1"];
-    this.info = info;
-    if (this.info["md_Z"] === undefined) { this.info["md_Z"] = ""; } else { this.info["md_Z"] = this.info["md_Z"].replace(/^.*\|/g, ""); } // stop things like "PROFTAYLOR|PROF"
-    if (this.info["md_A"] === undefined) { this.info["md_A"] = ""; } else { this.info["md_A"] = this.info["md_A"].replace(/<\/?strong>/g, ""); }
-    if (this.info["md_B"] === undefined) { this.info["md_B"] = ""; } else { this.info["md_B"] = this.info["md_B"].replace(/<\/?strong>/g, ""); }
-    if (this.info["md_4"] === undefined) { this.info["md_4"] = ""; }
-    this.fullInfo = {};
+    this.setInfo(info);
 }
 Person.prototype.fullname = function() {
     return this.info["md_Z"] + " " + this.info["md_A"] + " " + this.info["md_B"];
 }
 Person.prototype.queryText = function(capabilities) {
     return ("\"" + this.info["md_A"] + "+" + this.info["md_B"] + "\"+[" + capabilities.map(function(a) { return decodeURIComponent(a.term); }).join("+") + "]").replace(/<\/?strong>/g, "");
+}
+Person.prototype.setInfo = function(info) {
+    this.info = info;
+    if (this.info["md_Z"] === undefined) { this.info["md_Z"] = ""; } else { this.info["md_Z"] = this.info["md_Z"].replace(/^.*\|/g, ""); } // stop things like "PROFTAYLOR|PROF"
+    if (this.info["md_A"] === undefined) { this.info["md_A"] = ""; } else { this.info["md_A"] = this.info["md_A"].replace(/<\/?strong>/g, ""); }
+    if (this.info["md_B"] === undefined) { this.info["md_B"] = ""; } else { this.info["md_B"] = this.info["md_B"].replace(/<\/?strong>/g, ""); }
+    if (this.info["md_4"] === undefined) { this.info["md_4"] = ""; }
+    this.fullInfo = {};
 }
 
 /**
@@ -351,10 +354,15 @@ var FullResultQueryUnit = function(capabilities, person) {
     this.person = person;
 }
 FullResultQueryUnit.prototype.fetch = function() {
-    var query = this.person.queryText(this.capabilities);
-    query = encodeURI(query);
+    var jsonurl = contextPath + "/visualizationAjax?vis=capabilitymap&person=" + encodeURI(this.person.id)  + "&callback=ipretFullResults";
+    var request = new JSONscriptRequest(jsonurl);
+    request.buildScriptTag();
+    request.addScriptTag();
+
 /*
     TODO - create a new endpoint
+ var query = this.person.queryText(this.capabilities);
+ query = encodeURI(query);
     var jsonurl = contextPath + "/search.html?collection=unimelb-researchers&type.max_clusters=40&&topic.max_clusters=40&form=faeJSON&query=" + query + "&num_ranks=1&callback=ipretFullResults"
     var request = new JSONscriptRequest(jsonurl);
     request.buildScriptTag();
@@ -966,6 +974,7 @@ var retrieveFullResults = function() {
 }
 var ipretFullResults = function(result) {
     if (g.people[result["results"][0]["md_1"]] != undefined) { // otherwise reset
+        g.people[result["results"][0]["md_1"]].setInfo(result["results"][0]);
         g.people[result["results"][0]["md_1"]].fullInfo = result["results"][0];
         progressBar.progress(1, retrieveFullResults, g.people[result["results"][0]["md_1"]].info["md_B"]);
     }

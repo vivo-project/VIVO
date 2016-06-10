@@ -60,7 +60,7 @@ final public class VisualizationCaches {
         publicationToYear.build(rdfService);
         personToGrant.build(rdfService);
         grantToYear.build(rdfService);
-        people.build(rdfService);
+//        people.build(rdfService);
     }
 
     public static void buildMissing() {
@@ -77,7 +77,7 @@ final public class VisualizationCaches {
         if (!publicationToYear.isCached())               { publicationToYear.build(null); }
         if (!personToGrant.isCached())                   { personToGrant.build(null); }
         if (!grantToYear.isCached())                     { grantToYear.build(null); }
-        if (!people.isCached())                          { people.build(null); }
+//        if (!people.isCached())                          { people.build(null); }
     }
 
     /**
