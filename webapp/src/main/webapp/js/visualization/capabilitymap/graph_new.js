@@ -533,7 +533,7 @@ DetailsPanel.makeslidedown = function(q, l, name) {
                     ? $("<li/>")
                     /*.append(
                         $("<a>(view more)</a>")
-                        .attr("href", contextPath + "/search.html?query=" + encodeURI(q) + "&collection=unimelb-researchers&referrer=www.findanexpert.unimelb.edu.au")
+                        .attr("href", contextPath + "?query=" + encodeURI(q))
                         .attr("target", "_blank")
                     )*/
                     : ""
