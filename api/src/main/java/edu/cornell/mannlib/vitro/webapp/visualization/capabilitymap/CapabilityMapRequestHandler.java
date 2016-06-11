@@ -61,7 +61,10 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
                 Set<String> concepts = new HashSet<String>();
 
                 for (String conceptKey : conceptPeopleMap.conceptToPeople.keySet()) {
-                    concepts.add(conceptLabelMap.conceptToLabel.get(conceptKey));
+                    String label = conceptLabelMap.conceptToLabel.get(conceptKey);
+                    if (!StringUtils.isEmpty(label)) {
+                        concepts.add(conceptLabelMap.conceptToLabel.get(conceptKey));
+                    }
                 }
 
                 Gson gson = new Gson();
@@ -131,7 +134,10 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
 
             Set<String> clusterLabels = new HashSet<String>();
             for (String clusterConcept : clusterConcepts) {
-                clusterLabels.add(conceptLabelMap.conceptToLabel.get(clusterConcept));
+                String label = conceptLabelMap.conceptToLabel.get(clusterConcept);
+                if (!StringUtils.isEmpty(label)) {
+                    clusterLabels.add(label);
+                }
             }
 
             String[] clusters = clusterLabels.toArray(new String[clusterLabels.size()]);
