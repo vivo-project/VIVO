@@ -69,7 +69,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 					.equalsIgnoreCase(visMode)) {
 			
 			
-			String filterRule = "?predicate = j.2:mainImage " 
+			String filterRule = "?predicate = public:mainImage "
 									+ " || ?predicate = rdfs:label "   
 									+ " || ?predicate =  <http://www.w3.org/2006/vcard/ns#title>";
 			
@@ -100,9 +100,9 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			fieldLabelToOutputFieldLabel.put("fileName", QueryFieldLabels.THUMBNAIL_FILENAME);
 			
 			String whereClause = "<" + individualURI 
-									+ "> j.2:thumbnailImage ?thumbnailImage .  " 
-									+ "?thumbnailImage j.2:downloadLocation " 
-									+ "?downloadLocation ; j.2:filename ?fileName .";
+									+ "> public:thumbnailImage ?thumbnailImage .  "
+									+ "?thumbnailImage public:downloadLocation "
+									+ "?downloadLocation ; public:filename ?fileName .";
 			
 			
 			
