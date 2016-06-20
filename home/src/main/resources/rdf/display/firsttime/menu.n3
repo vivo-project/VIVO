@@ -19,7 +19,8 @@ display:DefaultMenu
     display:hasElement display:HomeMenuItem ;
     display:hasElement display:OrganizationsMenuItem ;
     display:hasElement display:PeopleMenuItem ;
-    display:hasElement display:ResearchMenuItem .
+    display:hasElement display:ResearchMenuItem ;
+    display:hasElement display:CapabilityMapMenuItem .
 
 #### Menu Items for Default Menu ####
 
@@ -53,7 +54,13 @@ display:EventsMenuItem
     display:linkText "Events";
     display:toPage display:Events .        
     
-display:Home 
+display:CapabilityMapMenuItem
+    a display:NavigationElement ;
+    display:menuPosition 6;
+    display:linkText "Capability Map";
+    display:toPage display:CapabilityMap .
+
+display:Home
     a display:HomePage ;    
     a display:Page ;
     display:title "Home" ;    
@@ -93,8 +100,12 @@ display:Research
     display:urlMapping "/research" ;
     display:hasDataGetter display:researchDataGetter .
 
+display:CapabilityMap
+    a display:Page ;
+    display:title "Capability Map" ;
+    display:urlMapping "/vis/capabilitymap" ;
+    display:hasDataGetter display:capabilityMapDataGetter .
 
-    
 #The data getter objects used above
 display:peopleDataGetter
       a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData>;
@@ -118,3 +129,8 @@ display:eventsDataGetter
               
 display:homeDataGetter
       a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.BrowseDataGetter> .
+
+display:capabilityMapDataGetter
+      a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.FixedHTMLDataGetter>;
+      display:htmlValue """Capability Map"""@en ;
+      display:saveToVar "capabilityMap" .

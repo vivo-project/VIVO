@@ -107,18 +107,6 @@ ${stylesheets.add(
                 This will also increase the complexity of the graph,
                 however, and may make it difficult to identify patterns.
             </p>
-            <h4>Exporting data</h4>
-            <p>
-                Once you have built a graph, you might wish to &lsquo;save it for later&rsquo;.
-                The graph itself can be exported and imported from the
-                &lsquo;Data&rsquo; tab.
-                Exporting the graph in such a manner preserves all mapped
-                capabilities, as well as respecting any people or nodes
-                removed from the graph manually.
-                To preserve the data, copy the data from the text field and save it.
-                To re-import the graph at a later point, the data can be pasted back into the field,
-                and &lsquo;Import Graph Data&rsquo; selected.
-            </p>
         </div>
 
         <div id="center-container">

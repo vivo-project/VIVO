@@ -1057,7 +1057,7 @@ $(document).ready(function() {
         console.log($(this).val());
         if ($(this).data("prev") != $(this).val() && $("#infovis").html() != "") {
             $("#cutofflabel").empty().append($("<img/>")
-                .attr("src", "refresh.png")
+                .attr("src", contextPath + "/images/visualization/capabilitymap/refresh.png")
                 .bind("click", function() {
                     $.each(g.getCapabilities(), function(i, c) {
                         if (c.cutoff != queryCutoffElem.value) {
