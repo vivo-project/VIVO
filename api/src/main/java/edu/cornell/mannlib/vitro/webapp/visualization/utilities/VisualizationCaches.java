@@ -2,11 +2,21 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.utilities;
 
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.rdf.model.Literal;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
+import edu.cornell.mannlib.vitro.webapp.visualization.model.ConceptLabelMap;
+import edu.cornell.mannlib.vitro.webapp.visualization.model.ConceptPeopleMap;
+import edu.cornell.mannlib.vitro.webapp.visualization.model.OrganizationPeopleMap;
+import edu.cornell.mannlib.vitro.webapp.visualization.model.Person;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import org.joda.time.DateTime;
 
@@ -17,6 +27,11 @@ import java.util.Set;
 
 /**
  * Holder for the caches we are using in the visualizations
+ *
+ * String.intern() was a problem pre-Java 7, but has greater utility now.
+ * Please see the following guide for information on the implementation of String.intern()
+ *
+ * http://java-performance.info/string-intern-in-java-6-7-8/
  */
 final public class VisualizationCaches {
     // Affinity object to ensure that only one background thread can be running at once when updating the caches
@@ -32,6 +47,8 @@ final public class VisualizationCaches {
      * @param rdfService if not null, use this service in foreground, otherwise may use the background thread
      */
     public static void rebuildAll(RDFService rdfService) {
+        conceptToLabel.build(rdfService);
+        conceptToPeopleMap.build(rdfService);
         organizationLabels.build(rdfService);
         organizationSubOrgs.build(rdfService);
         organizationToMostSpecificLabel.build(rdfService);
@@ -43,9 +60,12 @@ final public class VisualizationCaches {
         publicationToYear.build(rdfService);
         personToGrant.build(rdfService);
         grantToYear.build(rdfService);
+//        people.build(rdfService);
     }
 
     public static void buildMissing() {
+        if (!conceptToLabel.isCached())                  { conceptToLabel.build(null); }
+        if (!conceptToPeopleMap.isCached())              { conceptToPeopleMap.build(null); }
         if (!organizationLabels.isCached())              { organizationLabels.build(null); }
         if (!organizationSubOrgs.isCached())             { organizationSubOrgs.build(null); }
         if (!organizationToMostSpecificLabel.isCached()) { organizationToMostSpecificLabel.build(null); }
@@ -57,6 +77,7 @@ final public class VisualizationCaches {
         if (!publicationToYear.isCached())               { publicationToYear.build(null); }
         if (!personToGrant.isCached())                   { personToGrant.build(null); }
         if (!grantToYear.isCached())                     { grantToYear.build(null); }
+//        if (!people.isCached())                          { people.build(null); }
     }
 
     /**
@@ -70,6 +91,139 @@ final public class VisualizationCaches {
             }
         }
     }
+
+    /**
+     * Cache of people
+     */
+    public static final CachingRDFServiceExecutor<Map<String, Person>> people =
+            new CachingRDFServiceExecutor<>(
+                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, Person>>(visualizationAffinity) {
+                        @Override
+                        protected Map<String, Person> callWithService(RDFService rdfService) throws Exception {
+                            final Map<String, Person> map = new HashMap<String, Person>();
+
+                            String construct = QueryConstants.getSparqlPrefixQuery() +
+                                    "CONSTRUCT {\n" +
+                                    "  ?person a foaf:Person .\n" +
+                                    "  ?person foaf:lastName ?lastName .\n" +
+                                    "  ?person foaf:firstName ?firstName .\n" +
+                                    "  ?person obo:ARG_2000028 ?contactInfo .\n" +
+                                    "  ?contactInfo vcard:hasName ?contactName .\n" +
+                                    "  ?contactName vcard:familyName ?familyName .\n" +
+                                    "  ?contactName vcard:givenName ?givenName .\n" +
+                                    "  ?contactInfo vcard:hasTitle ?contactTitle .\n" +
+                                    "  ?contactTitle vcard:title ?contactTitleLabel  .\n" +
+                                    "  ?person public:thumbnailImage ?directDownloadUrl .\n" +
+                                    "} WHERE {\n" +
+                                    "  { \n" +
+                                    "    ?person a foaf:Person .\n" +
+                                    "  } UNION { \n" +
+                                    "    ?person a foaf:Person .\n" +
+                                    "    ?person foaf:lastName ?lastName .\n" +
+                                    "  } UNION { \n" +
+                                    "    ?person a foaf:Person .\n" +
+                                    "    ?person foaf:firstName ?firstName .\n" +
+                                    "  } UNION { \n" +
+                                    "    ?person a foaf:Person .\n" +
+                                    "    ?person obo:ARG_2000028 ?contactInfo .\n" +
+                                    "    ?contactInfo vcard:hasName ?contactName .\n" +
+                                    "    ?contactName vcard:familyName ?familyName .\n" +
+                                    "  } UNION { \n" +
+                                    "    ?person a foaf:Person .\n" +
+                                    "    ?person obo:ARG_2000028 ?contactInfo .\n" +
+                                    "    ?contactInfo vcard:hasName ?contactName .\n" +
+                                    "    ?contactName vcard:givenName ?givenName .\n" +
+                                    "  } UNION { \n" +
+                                    "    ?person a foaf:Person .\n" +
+                                    "    ?person obo:ARG_2000028 ?contactInfo .\n" +
+                                    "    ?contactInfo vcard:hasTitle ?contactTitle .\n" +
+                                    "    ?contactTitle vcard:title ?contactTitleLabel .\n" +
+                                    "  } UNION { \n" +
+                                    "    ?person a foaf:Person .\n" +
+                                    "    ?person public:mainImage ?mainImage .\n" +
+                                    "    ?mainImage public:thumbnailImage ?thumbnailImage .\n" +
+                                    "    ?thumbnailImage public:downloadLocation ?downloadLocation .\n" +
+                                    "    ?downloadLocation public:directDownloadUrl ?directDownloadUrl .\n" +
+                                    "  } \n" +
+                                    "}\n";
+
+                            Model constructedModel = ModelFactory.createDefaultModel();
+                            rdfService.sparqlConstructQuery(construct, constructedModel);
+
+                            String nameQuery = QueryConstants.getSparqlPrefixQuery() +
+                                    "SELECT ?person ?familyName ?givenName ?lastName ?firstName ?title ?thumbnailUrl\n" +
+                                    "WHERE\n" +
+                                    "{\n" +
+                                    "  ?person a foaf:Person .\n" +
+                                    "  OPTIONAL {\n" +
+                                    "    ?person obo:ARG_2000028 ?contactInfo .\n" +
+                                    "    ?contactInfo vcard:hasName ?contactName .\n" +
+                                    "    OPTIONAL { ?contactName vcard:familyName ?familyName . }\n" +
+                                    "    OPTIONAL { ?contactName vcard:givenName  ?givenName . }\n" +
+                                    "  }\n" +
+                                    "  OPTIONAL {\n" +
+                                    "    ?person obo:ARG_2000028 ?contactInfo .\n" +
+                                    "    ?contactInfo vcard:hasTitle ?contactTitle .\n" +
+                                    "    ?contactTitle vcard:title ?title .\n" +
+                                    "  }\n" +
+                                    "  OPTIONAL { ?person foaf:lastName ?lastName . }\n" +
+                                    "  OPTIONAL { ?person foaf:firstName  ?firstName . }\n" +
+                                    "  OPTIONAL { ?person public:thumbnailImage ?thumbnailUrl . }\n" +
+                                    "}\n";
+
+                            QueryExecution qe = QueryExecutionFactory.create(nameQuery, constructedModel);
+                            try {
+                                new ResultSetConsumer() {
+                                    @Override
+                                    protected void processQuerySolution(QuerySolution qs) {
+                                        String personUri = qs.getResource("person").getURI();
+                                        String familyName = null;
+                                        String givenName = null;
+                                        String thumbnailUrl = null;
+                                        String title = null;
+
+                                        Literal familyNameNode = qs.getLiteral("familyName");
+                                        if (familyNameNode != null) {
+                                            familyName = familyNameNode.getString();
+                                        } else {
+                                            Literal lastNameNode = qs.getLiteral("lastName");
+                                            familyName = lastNameNode == null ? null : lastNameNode.getString();
+                                        }
+
+                                        Literal givenNameNode = qs.getLiteral("givenName");
+                                        if (givenNameNode != null) {
+                                            givenName = givenNameNode.getString();
+                                        } else {
+                                            Literal firstNameNode = qs.getLiteral("firstName");
+                                            givenName = firstNameNode == null ? null : firstNameNode.getString();
+                                        }
+
+                                        Literal thumbnailUrlNode = qs.getLiteral("thumbnailUrl");
+                                        thumbnailUrl = thumbnailUrlNode == null ? null : thumbnailUrlNode.getString();
+
+                                        Literal titleNode = qs.getLiteral("title");
+                                        title = titleNode == null ? null : titleNode.getString();
+
+                                        Person person = map.get(personUri);
+                                        if (person == null) {
+                                            person = new Person();
+                                            map.put(personUri.intern(), person);
+                                        }
+
+                                        person.firstName = givenName == null ? null : givenName.intern();
+                                        person.lastName  = familyName == null ? null : familyName.intern();
+                                        person.preferredTitle = title == null ? null : title.intern();
+                                        person.thumbnailUrl = thumbnailUrl;
+                                    }
+                                }.processResultSet(qe.execSelect());
+                            } finally {
+                                qe.close();
+                            }
+
+                            return map;
+                        }
+                    }
+            );
 
     /**
      * Cache of organization labels (uri -> label)
@@ -95,7 +249,7 @@ final public class VisualizationCaches {
                                     String org      = qs.getResource("org").getURI();
                                     String orgLabel = qs.getLiteral("orgLabel").getString();
 
-                                    map.put(org, orgLabel);
+                                    map.put(org.intern(), orgLabel.intern());
                                 }
                             });
 
@@ -131,10 +285,10 @@ final public class VisualizationCaches {
                                     Set<String> subOrgs = map.get(org);
                                     if (subOrgs == null) {
                                         subOrgs = new HashSet<String>();
-                                        subOrgs.add(subOrg);
-                                        map.put(org, subOrgs);
+                                        subOrgs.add(subOrg.intern());
+                                        map.put(org.intern(), subOrgs);
                                     } else {
-                                        subOrgs.add(subOrg);
+                                        subOrgs.add(subOrg.intern());
                                     }
                                 }
                             });
@@ -168,7 +322,7 @@ final public class VisualizationCaches {
                                 protected void processQuerySolution(QuerySolution qs) {
                                     String org = qs.getResource("org").getURI();
                                     String typeLabel  = qs.getLiteral("typeLabel").getString();
-                                    map.put(org, String.valueOf(typeLabel));
+                                    map.put(org.intern(), typeLabel.intern());
                                 }
                             });
 
@@ -180,11 +334,11 @@ final public class VisualizationCaches {
     /**
      * Map of people within an organisation (org uri -> list of person uri)
      */
-    public static final CachingRDFServiceExecutor<Map<String, Set<String>>> organisationToPeopleMap =
-            new CachingRDFServiceExecutor<Map<String, Set<String>>>(
-                    new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, Set<String>>>(visualizationAffinity) {
+    public static final CachingRDFServiceExecutor<OrganizationPeopleMap> organisationToPeopleMap =
+            new CachingRDFServiceExecutor<OrganizationPeopleMap>(
+                    new CachingRDFServiceExecutor.RDFServiceCallable<OrganizationPeopleMap>(visualizationAffinity) {
                         @Override
-                        protected Map<String, Set<String>> callWithService(RDFService rdfService) throws Exception {
+                        protected OrganizationPeopleMap callWithService(RDFService rdfService) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?organisation ?person\n" +
                                     "WHERE\n" +
@@ -196,26 +350,132 @@ final public class VisualizationCaches {
                                     "  ?person a foaf:Person .\n" +
                                     "}\n";
 
-                            final Map<String, Set<String>> orgToPeopleMap = new HashMap<String, Set<String>>();
+                            final OrganizationPeopleMap orgToPeopleMap = new OrganizationPeopleMap();
 
                             rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
                                 @Override
                                 protected void processQuerySolution(QuerySolution qs) {
-                                    String org    = qs.getResource("organisation").getURI();
-                                    String person = qs.getResource("person").getURI();
+                                    String org    = qs.getResource("organisation").getURI().intern();
+                                    String person = qs.getResource("person").getURI().intern();
 
-                                    Set<String> people = orgToPeopleMap.get(org);
+                                    Set<String> people = orgToPeopleMap.organizationToPeople.get(org);
                                     if (people == null) {
                                         people = new HashSet<String>();
                                         people.add(person);
-                                        orgToPeopleMap.put(org, people);
+                                        orgToPeopleMap.organizationToPeople.put(org, people);
                                     } else {
                                         people.add(person);
+                                    }
+
+                                    Set<String> organizations = orgToPeopleMap.personToOrganizations.get(org);
+                                    if (organizations == null) {
+                                        organizations = new HashSet<String>();
+                                        organizations.add(org);
+                                        orgToPeopleMap.organizationToPeople.put(person, organizations);
+                                    } else {
+                                        organizations.add(org);
                                     }
                                 }
                             });
 
                             return orgToPeopleMap;
+                        }
+                    }
+            );
+
+    /**
+     * Concept to label
+     */
+    public static final CachingRDFServiceExecutor<ConceptLabelMap> conceptToLabel =
+            new CachingRDFServiceExecutor<>(
+                    new CachingRDFServiceExecutor.RDFServiceCallable<ConceptLabelMap>() {
+                        @Override
+                        protected ConceptLabelMap callWithService(RDFService rdfService) throws Exception {
+                            String query = QueryConstants.getSparqlPrefixQuery() +
+                                    "SELECT ?concept ?label\n" +
+                                    "WHERE\n" +
+                                    "{\n" +
+                                    "    ?person a foaf:Person .\n" +
+                                    "    ?person core:hasResearchArea ?concept .\n" +
+                                    "    ?concept a skos:Concept .\n" +
+                                    "    ?concept rdfs:label ?label .\n" +
+                                    "}\n";
+
+//                            final Map<String, String> map = new HashMap<>();
+                            final ConceptLabelMap map = new ConceptLabelMap();
+
+                            rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
+                                @Override
+                                protected void processQuerySolution(QuerySolution qs) {
+                                    String conceptURI = qs.getResource("concept").getURI().intern();
+                                    String label  = qs.getLiteral("label").getString().intern();
+                                    String labelLower = label.toLowerCase().intern();
+
+                                    map.conceptToLabel.put(conceptURI, label);
+
+                                    Set<String> conceptSet = map.lowerLabelToConcepts.get(labelLower);
+                                    if (conceptSet == null) {
+                                        conceptSet = new HashSet<String>();
+                                        conceptSet.add(conceptURI);
+                                        map.lowerLabelToConcepts.put(labelLower, conceptSet);
+                                    } else {
+                                        conceptSet.add(conceptURI);
+                                    }
+
+                                }
+                            });
+
+                            return map;
+                        }
+                    }
+            );
+
+    /**
+     * Map of people associated with a concept
+     */
+    public static final CachingRDFServiceExecutor<ConceptPeopleMap> conceptToPeopleMap =
+            new CachingRDFServiceExecutor<ConceptPeopleMap>(
+                    new CachingRDFServiceExecutor.RDFServiceCallable<ConceptPeopleMap>(visualizationAffinity) {
+                        @Override
+                        protected ConceptPeopleMap callWithService(RDFService rdfService) throws Exception {
+                            String query = QueryConstants.getSparqlPrefixQuery() +
+                                    "SELECT ?person ?concept\n" +
+                                    "WHERE\n" +
+                                    "{\n" +
+                                    "  ?person a foaf:Person .\n" +
+                                    "  ?person core:hasResearchArea ?concept .\n" +
+                                    "  ?concept a skos:Concept .\n" +
+                                    "}\n";
+
+                            final ConceptPeopleMap conceptPeopleMap = new ConceptPeopleMap();
+
+                            rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
+                                @Override
+                                protected void processQuerySolution(QuerySolution qs) {
+                                    String concept = qs.getResource("concept").getURI().intern();
+                                    String person  = qs.getResource("person").getURI().intern();
+
+                                    Set<String> people = conceptPeopleMap.conceptToPeople.get(concept);
+                                    if (people == null) {
+                                        people = new HashSet<String>();
+                                        people.add(person);
+                                        conceptPeopleMap.conceptToPeople.put(concept, people);
+                                    } else {
+                                        people.add(person);
+                                    }
+
+                                    Set<String> concepts = conceptPeopleMap.personToConcepts.get(person);
+                                    if (concepts == null) {
+                                        concepts = new HashSet<String>();
+                                        concepts.add(concept);
+                                        conceptPeopleMap.personToConcepts.put(person, concepts);
+                                    } else {
+                                        concepts.add(concept);
+                                    }
+                                }
+                            });
+
+                            return conceptPeopleMap;
                         }
                     }
             );
@@ -244,7 +504,7 @@ final public class VisualizationCaches {
                                     String person      = qs.getResource("person").getURI();
                                     String personLabel = qs.getLiteral("personLabel").getString();
 
-                                    map.put(person, personLabel);
+                                    map.put(person.intern(), personLabel.intern());
                                 }
                             });
 
@@ -277,7 +537,7 @@ final public class VisualizationCaches {
                                 protected void processQuerySolution(QuerySolution qs) {
                                     String person = qs.getResource("person").getURI();
                                     String typeLabel  = qs.getLiteral("typeLabel").getString();
-                                    map.put(person, String.valueOf(typeLabel));
+                                    map.put(person.intern(), String.valueOf(typeLabel).intern());
                                 }
                             });
 
@@ -317,7 +577,7 @@ final public class VisualizationCaches {
                                         String personURI = person.getURI();
                                         String documentURI = document.getURI();
 
-                                        map.put(personURI, documentURI);
+                                        map.put(personURI.intern(), documentURI.intern());
                                     }
                                 }
                             });
@@ -352,7 +612,7 @@ final public class VisualizationCaches {
                                     String document      = qs.getResource("document").getURI();
                                     String journalLabel = qs.getLiteral("journalLabel").getString();
 
-                                    map.put(document, journalLabel);
+                                    map.put(document.intern(), journalLabel.intern());
                                 }
                             });
 
@@ -390,7 +650,7 @@ final public class VisualizationCaches {
                                                 .getValidParsedDateTimeObject(pubDate);
 
                                         if (validParsedDateTimeObject != null) {
-                                            map.put(document, String.valueOf(validParsedDateTimeObject.getYear()));
+                                            map.put(document.intern(), String.valueOf(validParsedDateTimeObject.getYear()).intern());
                                         }
                                     }
                                 }
@@ -434,10 +694,10 @@ final public class VisualizationCaches {
                                         Set<String> documents = map.get(personURI);
                                         if (documents == null) {
                                             documents = new HashSet<String>();
-                                            documents.add(grant.getURI());
-                                            map.put(personURI, documents);
+                                            documents.add(grant.getURI().intern());
+                                            map.put(personURI.intern(), documents);
                                         } else {
-                                            documents.add(grant.getURI());
+                                            documents.add(grant.getURI().intern());
                                         }
                                     }
                                 }
@@ -478,7 +738,7 @@ final public class VisualizationCaches {
                                                 .getValidParsedDateTimeObject(startDate);
 
                                         if (validParsedDateTimeObject != null) {
-                                            map.put(grant, String.valueOf(validParsedDateTimeObject.getYear()));
+                                            map.put(grant.intern(), String.valueOf(validParsedDateTimeObject.getYear()).intern());
                                         }
                                     }
                                 }
@@ -520,7 +780,7 @@ final public class VisualizationCaches {
                                                 .getValidParsedDateTimeObject(startDate);
 
                                         if (validParsedDateTimeObject != null) {
-                                            map.put(grant, String.valueOf(validParsedDateTimeObject.getYear()));
+                                            map.put(grant.intern(), String.valueOf(validParsedDateTimeObject.getYear()).intern());
                                         }
                                     }
                                 }

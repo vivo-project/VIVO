@@ -39,11 +39,12 @@ public class QueryConstants {
 			put("wos", "http://vivo.mannlib.cornell.edu/ns/ThomsonWOS/0.1#");
 			put("core", "http://vivoweb.org/ontology/core#");
 			put("vivo", "http://vivo.library.cornell.edu/ns/0.1#");
-			put("j.1", "http://aims.fao.org/aos/geopolitical.owl#");
-			put("j.2", "http://vitro.mannlib.cornell.edu/ns/vitro/public#");
+			put("geo", "http://aims.fao.org/aos/geopolitical.owl#");
+			put("public", "http://vitro.mannlib.cornell.edu/ns/vitro/public#");
 			put("afn", "http://jena.hpl.hp.com/ARQ/function#");
 			put("vivosocnet", "http://vivo.cns.iu.edu/ns/#");
-			
+			put("obo", "http://purl.obolibrary.org/obo/");
+			put("vcard", "http://www.w3.org/2006/vcard/ns#");
 	} };
 	
 	public static String getSparqlPrefixQuery() {
