@@ -11,7 +11,6 @@
     <packaging>pom</packaging>
 
     <properties>
-        <vitro-core>../Vitro</vitro-core>
         <vitro-version>${project.version}</vitro-version>
         <vivo-dir>${basedir}</vivo-dir>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
@@ -31,11 +30,11 @@
             <id>vitro</id>
             <activation>
                 <file>
-                    <exists>${vivo-dir}/${vitro-core}/pom.xml</exists>
+                    <exists>../Vitro/pom.xml</exists>
                 </file>
             </activation>
             <modules>
-                <module>${vitro-core}</module>
+                <module>../Vitro</module>
             </modules>
         </profile>
         <profile>
