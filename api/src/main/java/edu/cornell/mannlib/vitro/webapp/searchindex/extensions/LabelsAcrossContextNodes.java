@@ -4,7 +4,7 @@ package edu.cornell.mannlib.vitro.webapp.searchindex.extensions;
 
 import static edu.cornell.mannlib.vitro.webapp.search.VitroSearchTermNames.ALLTEXT;
 import static edu.cornell.mannlib.vitro.webapp.search.VitroSearchTermNames.ALLTEXTUNSTEMMED;
-import static edu.cornell.mannlib.vitro.webapp.utils.sparql.SelectQueryRunner.createQueryContext;
+import static edu.cornell.mannlib.vitro.webapp.utils.sparqlrunner.SparqlQueryRunner.createSelectQueryContext;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -242,25 +242,26 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 
 	private void addLabelsFromAllContextNodeClasses(Individual ind,
 			SearchInputDocument doc) {
-		addValuesToTextFields(doc,
-				createQueryContext(rdfService, LABELS_WITHOUT_RESTRICTION)
+		addValuesToTextFields(
+				doc,
+				createSelectQueryContext(rdfService, LABELS_WITHOUT_RESTRICTION)
 						.bindVariableToUri("uri", ind.getURI())
 						.bindVariableToUri("incoming", incomingPropertyUri)
 						.bindVariableToUri("outgoing", outgoingPropertyUri)
-						.execute().getStringFields("label").flatten());
+						.execute().toStringFields("label").flatten());
 	}
 
 	private void addLabelsFromContextNodeClass(Individual ind,
 			SearchInputDocument doc, String contextNodeClass) {
 		addValuesToTextFields(
 				doc,
-				createQueryContext(rdfService,
+				createSelectQueryContext(rdfService,
 						LABELS_FOR_SPECIFIC_CONTEXT_NODE_TYPE)
 						.bindVariableToUri("uri", ind.getURI())
 						.bindVariableToUri("nodeType", contextNodeClass)
 						.bindVariableToUri("incoming", incomingPropertyUri)
 						.bindVariableToUri("outgoing", outgoingPropertyUri)
-						.execute().getStringFields("label").flatten());
+						.execute().toStringFields("label").flatten());
 	}
 
 	private void addValuesToTextFields(SearchInputDocument doc,
@@ -349,23 +350,23 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 	}
 
 	private Set<String> locatePartnersWithoutRestriction(String uri) {
-		return createQueryContext(rdfService,
+		return createSelectQueryContext(rdfService,
 				LOCATE_PARTNERS_WITHOUT_RESTRICTION)
 				.bindVariableToUri("uri", uri)
 				.bindVariableToUri("incoming", incomingPropertyUri)
 				.bindVariableToUri("outgoing", outgoingPropertyUri).execute()
-				.getStringFields("partner").flattenToSet();
+				.toStringFields("partner").flattenToSet();
 	}
 
 	private Collection<? extends String> locatePartnersAcrossContextNodeClass(
 			String uri, String contextNodeClass) {
-		return createQueryContext(rdfService,
+		return createSelectQueryContext(rdfService,
 				LOCATE_PARTNERS_ON_CONTEXT_NODE_TYPE)
 				.bindVariableToUri("uri", uri)
 				.bindVariableToUri("nodeType", contextNodeClass)
 				.bindVariableToUri("incoming", incomingPropertyUri)
 				.bindVariableToUri("outgoing", outgoingPropertyUri).execute()
-				.getStringFields("partner").flattenToSet();
+				.toStringFields("partner").flattenToSet();
 	}
 
 	private boolean isIncomingStatementOnAcceptableContextNode(Statement stmt) {
@@ -388,9 +389,9 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 	}
 
 	private Set<String> getTypes(String uri) {
-		return createQueryContext(rdfService, GET_TYPES)
-				.bindVariableToUri("uri", uri).execute()
-				.getStringFields("type").flattenToSet();
+		return createSelectQueryContext(rdfService, GET_TYPES)
+				.bindVariableToUri("uri", uri).execute().toStringFields("type")
+				.flattenToSet();
 	}
 
 	private Set<String> locateOtherPartners(Statement stmt) {
@@ -402,12 +403,12 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 		String objectUri = (stmt.getObject().isURIResource()) ? stmt
 				.getObject().asResource().getURI() : "NO_MATCH";
 
-		return createQueryContext(rdfService,
+		return createSelectQueryContext(rdfService,
 				LOCATE_OTHER_PARTNERS_ON_THIS_NODE)
 				.bindVariableToUri("contextNode", nodeUri)
 				.bindVariableToUri("uri", objectUri)
 				.bindVariableToUri("outgoing", outgoingPropertyUri).execute()
-				.getStringFields("partner").flattenToSet();
+				.toStringFields("partner").flattenToSet();
 	}
 
 	private List<String> filterByType(Collection<String> uris) {
