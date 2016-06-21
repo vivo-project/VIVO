@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
+import edu.cornell.mannlib.vitro.webapp.visualization.model.OrganizationPeopleMap;
 import edu.cornell.mannlib.vitro.webapp.visualization.utilities.CounterUtils;
 import edu.cornell.mannlib.vitro.webapp.visualization.utilities.OrgUtils;
 import edu.cornell.mannlib.vitro.webapp.visualization.utilities.VisualizationCaches;
@@ -91,7 +92,7 @@ public class TemporalPublicationVisualizationRequestHandler implements
 		Map<String, Set<String>> subOrgMap               = VisualizationCaches.organizationSubOrgs.get(rdfService);
 		Map<String, String> orgMostSpecificLabelMap      = VisualizationCaches.organizationToMostSpecificLabel.get(rdfService);
 		Map<String, String> personMostSpecificLabelMap   = VisualizationCaches.personToMostSpecificLabel.get(rdfService);
-		Map<String, Set<String>> organisationToPeopleMap = VisualizationCaches.organisationToPeopleMap.get(rdfService);
+		OrganizationPeopleMap organisationToPeopleMap = VisualizationCaches.organisationToPeopleMap.get(rdfService);
 		Map<String, Set<String>> personToPublicationMap  = VisualizationCaches.personToPublication.get(rdfService).personToPublication;
 		Map<String, String>      publicationToYearMap    = VisualizationCaches.publicationToYear.get(rdfService);
 
@@ -106,7 +107,7 @@ public class TemporalPublicationVisualizationRequestHandler implements
 				orgPublicationsPeople,
 				subOrgPublicationsMap,
 				subOrgMap,
-				organisationToPeopleMap,
+				organisationToPeopleMap.organizationToPeople,
 				personToPublicationMap
 		);
 

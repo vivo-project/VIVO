@@ -202,13 +202,8 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		
 		Map<String, Object> body = new HashMap<String, Object>();
 		
-        String	standaloneTemplate = "coAuthorPersonLevel.ftl";
-
-		String property = ConfigurationProperties.getBean(vitroRequest).getProperty("visualization.d3");
-		if (!"disabled".equalsIgnoreCase(property)) {
-			body.put("coAuthorshipData", new CollaborationDataViewHelper(coAuthorshipVO));
-			standaloneTemplate = "coAuthorPersonLevelD3.ftl";
-		}
+        String	standaloneTemplate = "coAuthorPersonLevelD3.ftl";
+		body.put("coAuthorshipData", new CollaborationDataViewHelper(coAuthorshipVO));
 
 		body.put("egoURIParam", egoURI);
         
@@ -264,13 +259,8 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 			body.put("numOfCoInvestigations", coPIVO.getCollaborations().size());
 		}
 		
-        String	standaloneTemplate = "coPIPersonLevel.ftl";
-
-		String property = ConfigurationProperties.getBean(vitroRequest).getProperty("visualization.d3");
-		if (!"disabled".equalsIgnoreCase(property)) {
-			body.put("coInvestigatorData", new CollaborationDataViewHelper(coPIVO));
-			standaloneTemplate = "coPIPersonLevelD3.ftl";
-		}
+        String	standaloneTemplate = "coPIPersonLevelD3.ftl";
+		body.put("coInvestigatorData", new CollaborationDataViewHelper(coPIVO));
 
 		body.put("egoGrantSparklineVO", egoGrantSparklineVO);
 		body.put("uniqueCoInvestigatorsSparklineVO", uniqueCopisSparklineVO);        	

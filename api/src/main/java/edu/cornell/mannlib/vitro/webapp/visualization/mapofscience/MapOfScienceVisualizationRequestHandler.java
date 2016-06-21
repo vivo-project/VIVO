@@ -15,6 +15,7 @@ import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
+import edu.cornell.mannlib.vitro.webapp.visualization.model.OrganizationPeopleMap;
 import edu.cornell.mannlib.vitro.webapp.visualization.utilities.OrgUtils;
 import edu.cornell.mannlib.vitro.webapp.visualization.utilities.VisualizationCaches;
 import mapping.ScienceMapping;
@@ -252,7 +253,7 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 		}
 
 		Map<String, Set<String>> subOrgMap = VisualizationCaches.organizationSubOrgs.get(rdfService);
-		Map<String, Set<String>> organisationToPeopleMap = VisualizationCaches.organisationToPeopleMap.get(rdfService);
+		OrganizationPeopleMap organisationToPeopleMap = VisualizationCaches.organisationToPeopleMap.get(rdfService);
 		Map<String, Set<String>> personToPublicationMap = VisualizationCaches.personToPublication.get(rdfService).personToPublication;
 		Map<String, String> publicationToJournalMap = VisualizationCaches.publicationToJournal.get(rdfService);
 
@@ -267,7 +268,7 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 				orgPublicationsPeople,
 				subOrgPublicationsMap,
 				subOrgMap,
-				organisationToPeopleMap,
+				organisationToPeopleMap.organizationToPeople,
 				personToPublicationMap
 		);
 
