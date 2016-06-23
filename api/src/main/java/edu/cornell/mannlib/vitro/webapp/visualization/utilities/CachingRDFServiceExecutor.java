@@ -59,7 +59,6 @@ public class CachingRDFServiceExecutor<T> {
      * Will wait for completion if the cache is not already populated, otherwise the refresh will happen in the background.
      *
      * @param rdfService an RDF service to use, in foreground mode, if the background service is missing
-     * @return
      */
     public synchronized T get(RDFService rdfService) {
         // First, check if there are results from the previous background task, and update the cache
@@ -171,7 +170,7 @@ public class CachingRDFServiceExecutor<T> {
 
     /**
      * Create and start a background thread using the configured task
-     * @param rdfService
+     * @param rdfService An RDFService
      */
     private void startBackgroundTask(RDFService rdfService) {
         // Ensure that there isn't already a task
@@ -271,7 +270,7 @@ public class CachingRDFServiceExecutor<T> {
 
     /**
      * Set the RDF service to be used for background threads (called from a startup servlet)
-     * @param rdfService
+     * @param rdfService An RDFService
      */
     public static void setBackgroundRDFService(RDFService rdfService) {
         backgroundRDFService = rdfService;
@@ -299,13 +298,13 @@ public class CachingRDFServiceExecutor<T> {
 
         /**
          * Constructor that allows an affinity object to be supplied
-         * @param affinity
+         * @param affinity Affinity
          */
         public RDFServiceCallable(Affinity affinity) { this.affinity = affinity; }
 
         /**
          * Set the RDF service to be used
-         * @param rdfService
+         * @param rdfService An RDFService
          */
         final void setRDFService(RDFService rdfService) {
             this.rdfService = rdfService;
@@ -313,7 +312,6 @@ public class CachingRDFServiceExecutor<T> {
 
         /**
          * Entry point for the background threads, ensuring the right start / cleanup is done
-         * @return
          * @throws Exception
          */
         @Override
@@ -349,8 +347,7 @@ public class CachingRDFServiceExecutor<T> {
 
         /**
          * Method for users to implement, to return the results
-         * @param rdfService
-         * @return
+         * @param rdfService An RDFService
          * @throws Exception
          */
         protected abstract T callWithService(RDFService rdfService) throws Exception;
@@ -358,8 +355,7 @@ public class CachingRDFServiceExecutor<T> {
         /**
          * Method to determine if the cache should be invalidated for the current results
          * Default implementation dynamically adjusts the cache time based on the efficiency of creating results
-         * @param timeCached
-         * @return
+         * @param timeCached The time of caching
          */
         boolean invalidateCache(long timeCached) {
             if (executionTime > -1) {
@@ -416,8 +412,8 @@ public class CachingRDFServiceExecutor<T> {
 
         /**
          * Adds a thread to the map, returns whether the thread needs to wait
-         * @param thread
-         * @param time
+         * @param thread The thread to add
+         * @param time start time of the thread
          * @return true if the thread needs to wait, false if it can continue
          */
         private synchronized boolean queueThis(Thread thread, Long time) {

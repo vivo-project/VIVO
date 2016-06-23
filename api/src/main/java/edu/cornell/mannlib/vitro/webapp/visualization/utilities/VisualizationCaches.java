@@ -82,7 +82,7 @@ final public class VisualizationCaches {
 
     /**
      * Rebuild the specifield caches
-     * @param executors
+     * @param executors  Caching RDF executors
      */
     public static void rebuild(CachingRDFServiceExecutor... executors) {
         if (executors != null) {

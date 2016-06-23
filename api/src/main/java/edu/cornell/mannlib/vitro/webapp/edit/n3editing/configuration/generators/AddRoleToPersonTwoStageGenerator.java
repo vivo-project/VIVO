@@ -436,7 +436,6 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 	
 	/**
      * Utility method for subclasses to make a query for type from a ChildVClassesOptions object.
-     * @throws Exception 
      */
 	protected String getActivityTypeQueryForChildVClassOptions(VitroRequest vreq, ChildVClassesOptions opts){
 	    log.debug("objectClassUri = " + opts.getClassUri());
@@ -447,7 +446,6 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 	
 	/**
      * Utility method for subclasses to make a query for type from a IndividualsViaClassGroupOptions object.
-     * @throws Exception 
      */
     protected String getActivityTypeQueryForIndividualsViaClassGroupOptions(VitroRequest vreq, IndividualsViaClassGroupOptions opts){
         log.debug("ClassGroupUri = " + opts.getClassGroupUri());

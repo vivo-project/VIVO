@@ -221,8 +221,7 @@ public class LCSHService implements ExternalConceptService {
 	}
 
 	/**
-	 * @param uri
-	 * @return
+	 * @param uri URI
 	 */
 	protected String stripConceptId(String uri) {
 		String conceptId = new String();
@@ -232,8 +231,7 @@ public class LCSHService implements ExternalConceptService {
 	}
 
 	/**
-	 * @param str
-	 * @return
+	 * @param str String with concept id
 	 */
 	protected String extractConceptId(String str) {
 		try {

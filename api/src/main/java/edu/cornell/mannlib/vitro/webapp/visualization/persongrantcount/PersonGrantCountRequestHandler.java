@@ -199,9 +199,8 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	/**
 	 * Provides response when csv file containing the grant count over the years
 	 * is requested.
-	 * @param investigator
-	 * @param yearToGrantCount
-	 * @return 
+	 * @param investigator Investigator entiry
+	 * @param yearToGrantCount Year / grant counts
 	 */
 	private Map<String, String> prepareDataResponse(
 						SubEntity investigator,
@@ -225,9 +224,8 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	
 	/**
 	 * Provides response when an entire page dedicated to grant sparkline is requested.
-	 * @param vreq
-	 * @param valueObjectContainer
-	 * @return 
+	 * @param vreq Vitro Request
+	 * @param valueObjectContainer Sparkline data
 	 */
 	private TemplateResponseValues prepareStandaloneResponse(VitroRequest vreq,
 			SparklineData valueObjectContainer) {
@@ -245,10 +243,9 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	/**
 	 * Provides response when the grant sparkline has to be rendered in already existing 
 	 * page, e.g. profile page.
-	 * @param vreq
-	 * @param valueObjectContainer
-	 * @param shouldVIVOrenderVis
-	 * @return 
+	 * @param vreq Vitro Request
+	 * @param valueObjectContainer Sparkline data
+	 * @param shouldVIVOrenderVis Flag to render visualization
 	 */
 	private TemplateResponseValues prepareDynamicResponse(
 			VitroRequest vreq,

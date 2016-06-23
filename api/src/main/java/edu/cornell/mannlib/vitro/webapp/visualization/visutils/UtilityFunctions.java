@@ -77,8 +77,7 @@ public class UtilityFunctions {
 	/**
 	 * This method is used to return a mapping between activity year & all the collaborators
 	 * that published with ego in that year. 
-	 * @param collaborationData
-	 * @return
+	 * @param collaborationData Collaboration data
 	 */
 	public static Map<String, Set<Collaborator>> getActivityYearToCollaborators(
 										CollaborationData collaborationData) {
@@ -121,8 +120,7 @@ public class UtilityFunctions {
 	/**
 	 * Currently the approach for slugifying filenames is naive. In future if there is need, 
 	 * we can write more sophisticated method.
-	 * @param textToBeSlugified
-	 * @return
+	 * @param textToBeSlugified Text to process
 	 */
 	public static String slugify(String textToBeSlugified) {
 		String textBlockSeparator = "-";
@@ -186,7 +184,6 @@ public class UtilityFunctions {
 	 * The 2 choices, in order, are,
 	 * 		1. parsed year from core:DateTime object saved in core:dateTimeValue 
 	 * 		2. Default Entity Year 
-	 * @return
 	 */
 	public static String getValidYearFromCoreDateTimeString(String inputDate,
 															String defaultYearInCaseOfError) {
@@ -279,9 +276,8 @@ public class UtilityFunctions {
 	 * 
 	 * This method will test whether the current uri is based off of default namespace. If so, 
 	 * go ahead & provide local name. 
-	 * @param givenURI
-	 * @param vitroRequest
-	 * @return
+	 * @param givenURI URI
+	 * @param vitroRequest Vitro Request
 	 */
 	public static String getIndividualLocalName(String givenURI, VitroRequest vitroRequest) {
 		

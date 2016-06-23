@@ -481,8 +481,7 @@ public class AgrovocService implements ExternalConceptService {
 	}
 
 	/**
-	 * @param uri
-	 * @return
+	 * @param uri The URI
 	 */
 	protected String stripConceptId(String uri) {
 		String conceptId = new String();
@@ -492,8 +491,7 @@ public class AgrovocService implements ExternalConceptService {
 	}
 
 	/**
-	 * @param str
-	 * @return
+	 * @param str The String
 	 */
 	protected String extractConceptId(String str) {
 		try {

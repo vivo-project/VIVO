@@ -75,8 +75,7 @@ public class GemetService implements ExternalConceptService  {
 	}
 
    /**
-    * @param results
-    * @return
+    * @param results Results to process
     */
    private List<Concept> processOutput(String results) throws Exception  {
 
@@ -145,9 +144,8 @@ public class GemetService implements ExternalConceptService  {
 
    /**
     * Get a string from a json object or an empty string if there is no value for the given key
-   * @param obj
-   * @param key
-   * @return
+   * @param obj JSON Object
+   * @param key Key to retrieve
    */
   protected String getJsonValue(JSONObject obj, String key) {
       if (obj.has(key)) {
@@ -159,8 +157,7 @@ public class GemetService implements ExternalConceptService  {
 
 
    /**
-    * @param concept_uri
-    * @return
+    * @param concept_uri Concept URI
     * @throws Exception
     */
    protected String getAvailableLangs(String concept_uri) throws Exception {
@@ -177,8 +174,7 @@ public class GemetService implements ExternalConceptService  {
    }
 
    /**
-    * @param concept_uri
-    * @return
+    * @param concept_uri concept URI
     * @throws Exception
     */
    protected String getConcept(String concept_uri) throws Exception {
@@ -196,9 +192,8 @@ public class GemetService implements ExternalConceptService  {
    }
 
    /**
-    * @param concept_uri
-    * @param property
-    * @return
+    * @param concept_uri Concept URI
+    * @param property Property
     * @throws Exception
     */
    protected String getAllTranslationsForConcept(String concept_uri, String property) throws Exception {
@@ -235,9 +230,8 @@ public class GemetService implements ExternalConceptService  {
 
 
    /**
-    * @param concept_uri
-    * @param relation
-    * @return
+    * @param concept_uri Concept URI
+    * @param relation Relations
     * @throws Exception
     */
    protected String getRelatedConcepts(String concept_uri, String relation) throws Exception {
@@ -266,8 +260,7 @@ public class GemetService implements ExternalConceptService  {
 
 
    /**
-    * @param keyword
-    * @return
+    * @param keyword Keyword
     * @throws Exception
     */
    protected String getConceptsMatchingKeyword(String keyword) throws Exception {
@@ -288,8 +281,7 @@ public class GemetService implements ExternalConceptService  {
    }
 
    /**
-    * @param url
-    * @return
+    * @param url URI
     */
    protected String getGemetResults(String url) throws Exception  {
       String results = new String();

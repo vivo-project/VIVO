@@ -177,8 +177,7 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 	/**
 	 * Provides response when a csv file containing number & names of unique co-authors per 
 	 * year is requested. 
-	 * @param authorNodesAndEdges
-	 * @param response
+	 * @param authorNodesAndEdges Author nodes and edges
 	 */
 	private Map<String, String> prepareCoauthorsCountPerYearDataResponse(
 					CollaborationData authorNodesAndEdges) {
@@ -214,8 +213,7 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 	/**
 	 * Provides response when a csv file containing number & names of unique co-authors per 
 	 * year is requested. 
-	 * @param authorNodesAndEdges
-	 * @param response
+	 * @param coAuthorshipData   Co authorship data
 	 */
 	private Map<String, String> prepareCoauthorsListDataResponse(
 					CollaborationData coAuthorshipData) {
@@ -246,8 +244,7 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 	/**
 	 * Provides a response when graphml formatted co-authorship network is requested, typically by 
 	 * the flash vis.
-	 * @param authorNodesAndEdges
-	 * @param response
+	 * @param authorNodesAndEdges Author nodes and edges
 	 */
 	private Map<String, String> prepareNetworkStreamDataResponse(
 									CollaborationData authorNodesAndEdges) {

@@ -217,10 +217,8 @@ VisualizationRequestHandler {
 	 * Provides response when csv file containing the publication count over the
 	 * years is requested.
 	 * 
-	 * @param author
-	 * @param authorDocuments
-	 * @param yearToPublicationCount
-	 * @return
+	 * @param authorName Name of author
+	 * @param yearToPublicationCount Year / publication counts
 	 */
 	private Map<String, String> prepareDataResponse(String authorName,
 			Map<String, Integer> yearToPublicationCount) {
@@ -251,9 +249,8 @@ VisualizationRequestHandler {
 	 * Provides response when an entire page dedicated to publication sparkline
 	 * is requested.
 	 * 
-	 * @param vreq
-	 * @param valueObjectContainer
-	 * @return
+	 * @param vreq Vitro Request
+	 * @param valueObjectContainer Sparkline Data
 	 */
 	private TemplateResponseValues prepareStandaloneResponse(VitroRequest vreq,
 			SparklineData valueObjectContainer) {
@@ -272,10 +269,10 @@ VisualizationRequestHandler {
 	 * Provides response when the publication sparkline has to be rendered in
 	 * already existing page, e.g. profile page.
 	 * 
-	 * @param vreq
-	 * @param valueObjectContainer
-	 * @param yearToPublicationCount
-	 * @return
+	 * @param vreq Vitro Request
+	 * @param valueObjectContainer Sparkline data
+	 * @param shouldVIVOrenderVis Flag to render visualization
+	 * @param requestingTemplate Requesting template name
 	 */
 	private TemplateResponseValues prepareDynamicResponse(VitroRequest vreq,
 			SparklineData valueObjectContainer, boolean shouldVIVOrenderVis, String requestingTemplate) {

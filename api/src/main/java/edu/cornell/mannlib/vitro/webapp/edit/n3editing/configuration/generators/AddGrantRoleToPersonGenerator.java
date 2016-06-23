@@ -556,9 +556,9 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 
 	/**
 	 * Prepare edit configuration for update
-	 * @param vreq
-	 * @param session
-	 * @param editConfiguration
+	 * @param vreq - current VitroRequest
+	 * @param session - the HTTP session
+	 * @param editConfiguration - Edit configuration
 	 */
 	
 	private void prepareForUpdate(VitroRequest vreq, HttpSession session, EditConfigurationVTwo editConfiguration) {

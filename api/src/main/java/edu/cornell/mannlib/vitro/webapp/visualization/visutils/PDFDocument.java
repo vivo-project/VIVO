@@ -155,9 +155,9 @@ public class PDFDocument {
 	
     /**
      * Prints a square and fills half of it with a gray rectangle.
-     * @param x
-     * @param y
-     * @param cb
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @param cb Content byte
      * @throws Exception
      */
     public void pictureBackdrop(float x, float y, PdfContentByte cb) throws Exception {
@@ -172,9 +172,9 @@ public class PDFDocument {
 
     /**
      * Prints 3 circles in different colors that intersect with eachother.
-     * @param x
-     * @param y
-     * @param cb
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @param cb Content byte
      * @throws Exception
      */
     public void pictureCircles(float x, float y, PdfContentByte cb) throws Exception {

@@ -62,9 +62,8 @@ public class PersonPublicationCountVisCodeGenerator {
 	/**
 	 * This method is used to setup parameters for the sparkline value object. These parameters
 	 * will be used in the template to construct the actual html/javascript code.
-	 * @param visMode
-	 * @param visContainer
-	 * @return 
+	 * @param visMode Visualization mode
+	 * @param providedVisContainerID container id
 	 */
 	private SparklineData setupSparklineParameters(String visMode,
 			  							  String providedVisContainerID) {
