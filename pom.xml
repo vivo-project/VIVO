@@ -22,6 +22,15 @@
         </license>
     </licenses>
 
+    <developers>
+        <developer>
+            <name>Graham Triggs</name>
+            <email>gtriggs@duraspace.org</email>
+            <organization>DuraSpace</organization>
+            <organizationUrl>http://vivoweb.org/</organizationUrl>
+        </developer>
+    </developers>
+
     <!--
        The SCM repository location is used by Continuum to update against
        when changes have occurred.  This spawns a new build cycle and releases
