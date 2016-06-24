@@ -29,6 +29,12 @@
             <organization>DuraSpace</organization>
             <organizationUrl>http://vivoweb.org/</organizationUrl>
         </developer>
+        <developer>
+            <name>John Fereira</name>
+            <email>jaf30@cornell.edu</email>
+            <organization>Cornell University</organization>
+            <organizationUrl>https://github.com/fereira</organizationUrl>
+        </developer>
     </developers>
 
     <!--
