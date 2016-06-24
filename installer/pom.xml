@@ -22,6 +22,10 @@
 
     <name>VIVO Installer</name>
 
+    <properties>
+        <vitro-version>${project.version}</vitro-version>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -46,6 +50,34 @@
         <module>solr</module>
         <module>webapp</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.vivoweb</groupId>
+                <artifactId>vitro-solr</artifactId>
+                <version>${vitro-version}</version>
+                <type>war</type>
+            </dependency>
+            <dependency>
+                <groupId>org.vivoweb</groupId>
+                <artifactId>vivo-home</artifactId>
+                <version>${vitro-version}</version>
+                <type>tar.gz</type>
+            </dependency>
+            <dependency>
+                <groupId>org.vivoweb</groupId>
+                <artifactId>vivo-api</artifactId>
+                <version>${vitro-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.vivoweb</groupId>
+                <artifactId>vivo-webapp</artifactId>
+                <version>${vitro-version}</version>
+                <type>war</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <profiles>
         <profile>

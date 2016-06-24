@@ -208,6 +208,18 @@
             </dependency>
             <dependency>
                 <groupId>org.vivoweb</groupId>
+                <artifactId>vitro-dependencies</artifactId>
+                <version>${vitro-version}</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.vivoweb</groupId>
+                <artifactId>vitro-home</artifactId>
+                <version>${vitro-version}</version>
+                <type>tar.gz</type>
+            </dependency>
+            <dependency>
+                <groupId>org.vivoweb</groupId>
                 <artifactId>vitro-webapp</artifactId>
                 <version>${vitro-version}</version>
                 <type>war</type>
