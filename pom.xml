@@ -30,6 +30,12 @@
             <organizationUrl>http://vivoweb.org/</organizationUrl>
         </developer>
         <developer>
+            <name>Jim Blake</name>
+            <email>jeb228@cornell.edu</email>
+            <organization>Cornell University Library</organization>
+            <organizationUrl>https://github.com/j2blake</organizationUrl>
+        </developer>
+        <developer>
             <name>John Fereira</name>
             <email>jaf30@cornell.edu</email>
             <organization>Cornell University</organization>
