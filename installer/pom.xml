@@ -10,6 +10,16 @@
     <version>1.9.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <!--
+        The parent POM is normally retrieved from Maven Central
+        In the event of a build failure, it's possible to remove this definition.
+    -->
+    <parent>
+        <groupId>org.vivoweb</groupId>
+        <artifactId>vivo-project</artifactId>
+        <version>1.9.0-SNAPSHOT</version>
+    </parent>
+
     <name>VIVO Installer</name>
 
     <build>
