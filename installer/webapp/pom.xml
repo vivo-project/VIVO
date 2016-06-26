@@ -58,7 +58,7 @@
             </build>
         </profile>
         <profile>
-            <id>pinstall</id>
+            <id>install</id>
             <activation>
                 <property><name>tomcat-dir</name></property>
             </activation>
@@ -120,6 +120,16 @@
                 <version>2.5.2</version>
                 <configuration>
                     <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>overlays</directory>
+                        </fileset>
+                    </filesets>
                 </configuration>
             </plugin>
         </plugins>
