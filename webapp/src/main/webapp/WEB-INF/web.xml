@@ -1324,6 +1324,20 @@
     <url-pattern>/selectLocale</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <description>SiteMap support</description>
+    <servlet-name>SiteMapServlet</servlet-name>
+    <servlet-class>org.vivoweb.webapp.sitemap.SiteMapServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SiteMapServlet</servlet-name>
+    <url-pattern>/robots.txt</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SiteMapServlet</servlet-name>
+    <url-pattern>/sitemap.xml</url-pattern>
+  </servlet-mapping>
+
     
   <!-- ============================== servlet-mappings ======================== -->
    <servlet-mapping>
