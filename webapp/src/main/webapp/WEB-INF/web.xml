@@ -1191,6 +1191,16 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>DistributeDataApi</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.api.DistributeDataApiController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DistributeDataApi</servlet-name>
+    <url-pattern>/api/dataRequest/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>SparqlUpdateApi</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.api.SparqlUpdateApiController</servlet-class>
   </servlet>
