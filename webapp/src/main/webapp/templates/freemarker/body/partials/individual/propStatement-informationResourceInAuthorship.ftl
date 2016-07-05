@@ -7,6 +7,8 @@
  -->
 
 <#import "lib-sequence.ftl" as s>
+<#import "lib-meta-tags.ftl" as lmt>
+
 <@showAuthorship statement />
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
@@ -22,6 +24,7 @@
     	<#else>
         	<a href="${profileUrl(statement.uri("author"))}" title="${i18n().author_name}">${statement.authorName}</a>
     	</#if>
+		<@lmt.addCitationMetaTag uri="http://vivoweb.org/ontology/core#Authorship" content=statement.authorName />
     <#else>
         <#-- This shouldn't happen, but we must provide for it -->
         <a href="${profileUrl(statement.uri("authorship"))}" title="${i18n().missing_author}">${i18n().missing_author}</a>

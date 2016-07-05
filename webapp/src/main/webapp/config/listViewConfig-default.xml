@@ -20,17 +20,21 @@
             ?label
             ?localName
             ?type
-            ?objectType
+            ?specificObjectType
             ?title
         WHERE
         {
             ?subject ?property ?object .
-            ?object a ?objectType .
             LET (?localName := afn:localname(?object))
 
             OPTIONAL
             {
                 ?object rdfs:label ?label .
+            }
+
+            OPTIONAL
+            {
+                ?object vitro:mostSpecificType ?specificObjectType .
             }
 
             OPTIONAL
@@ -72,7 +76,6 @@
         CONSTRUCT
         {
             ?subject ?property ?object .
-            ?object a ?objectType .
             ?object rdfs:label ?label .
             ?object vitro:mostSpecificType ?subclass .
             ?subclass rdfs:label ?type .
@@ -84,12 +87,16 @@
         {
             {
                 ?subject ?property ?object .
-                ?object a ?objectType .
             }
             UNION
             {
                 ?subject ?property ?object .
                 ?object rdfs:label ?label .
+            }
+            UNION
+            {
+                ?subject ?property ?object .
+                ?object vitro:mostSpecificType ?subclass .
             }
             UNION
             {
