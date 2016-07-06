@@ -31,7 +31,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
-                        <version>2.6</version>
                         <configuration>
                             <archive>
                                 <manifest>
@@ -66,7 +65,6 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.8</version>
                         <executions>
                             <execution>
                                 <id>remove-webapp</id>
@@ -85,7 +83,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
-                        <version>2.10</version>
                         <executions>
                             <execution>
                                 <id>install</id>
@@ -117,7 +114,6 @@
         <plugins>
             <plugin>
                 <artifactId>maven-install-plugin</artifactId>
-                <version>2.5.2</version>
                 <configuration>
                     <skip>true</skip>
                 </configuration>
