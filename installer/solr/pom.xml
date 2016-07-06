@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.vivoweb</groupId>
-    <artifactId>solr</artifactId>
+    <artifactId>vivo-installer-solr</artifactId>
     <version>1.9.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -17,7 +17,7 @@
         <relativePath>..</relativePath>
     </parent>
 
-    <name>VIVO Prepare Solr App</name>
+    <name>VIVO Install Solr App</name>
 
     <profiles>
         <profile>
@@ -65,7 +65,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.3</version>
+                        <version>1.8</version>
                         <executions>
                             <execution>
                                 <id>remove-webapp</id>
