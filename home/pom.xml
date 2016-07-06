@@ -23,7 +23,6 @@
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.5.5</version>
                 <configuration>
                     <tarLongFileMode>posix</tarLongFileMode>
                     <descriptors>
@@ -43,7 +42,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.9.1</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
