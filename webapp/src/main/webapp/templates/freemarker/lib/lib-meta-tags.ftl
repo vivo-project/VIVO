@@ -1,6 +1,6 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#macro addCitationMetaTag uri content>
+<#macro addCitationMetaTag uri="" content="">
     <#if metaTags?? && uri?? && content??>
         <#switch uri>
             <#case "http://vivoweb.org/ontology/core#Authorship">
