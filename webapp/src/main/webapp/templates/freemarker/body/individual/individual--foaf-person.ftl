@@ -21,6 +21,8 @@
 
 <#include "individual-setup.ftl">
 
+${scripts.add('<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>')}
+
 <#-- 
     First, check to see if profile page types are enabled. If not, get the 2 column template:
     "individual--foaf-person-2column.ftl".

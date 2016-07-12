@@ -111,6 +111,20 @@
         </#if>
     </#local>
 
-    ${resourceTitle} ${citationDetails} <@dt.yearSpan "${statement.dateTime!}" /> 
+    <#local altMetric>
+        <#if altmetricEnabled??>
+            <#if statement.doi??>
+                <div data-badge-popover="right" data-badge-type="4" data-doi="${statement.doi}" data-hide-no-mentions="true" class="altmetric-embed" style="display: inline;"></div>
+            <#elseif statement.pimd??>
+                <div data-badge-popover="right" data-badge-type="4" data-pmid="${statement.pmid}" data-hide-no-mentions="true" class="altmetric-embed" style="display: inline;"></div>
+            <#elseif statement.isbn10??>
+                <div data-badge-popover="right" data-badge-type="4" data-isbn="${statement.isbn10}" data-hide-no-mentions="true" class="altmetric-embed" style="display: inline;"></div>
+            <#elseif statement.isbn13??>
+                <div data-badge-popover="right" data-badge-type="4" data-isbn="${statement.isbn13}" data-hide-no-mentions="true" class="altmetric-embed" style="display: inline;"></div>
+            </#if>
+        </#if>
+    </#local>
+
+    ${resourceTitle} ${citationDetails} <@dt.yearSpan "${statement.dateTime!}" /> ${altMetric}
 </#if>
 </#macro>
