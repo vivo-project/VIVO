@@ -62,7 +62,7 @@ ${stylesheets.add(
             </p>
             <h3>Getting Started</h3>
             <p>
-                Enter a research area into the search field above and press ‘Search’.
+                Enter a research area into the search field above and press 'Search'.
                 The resulting diagram displays the search term, rendered in orange,
                 connected to the blue group of researchers that are active in that area.
                 Enter another search term to see how researchers from both searches relate.
@@ -76,7 +76,7 @@ ${stylesheets.add(
             <p>
                 By clicking on any node in the visualisation,
                 additional information can be viewed in the
-                ‘Info’ tab on the right-hand side.
+                'Info' tab on the right-hand side.
                 For groups of people, the participants in the group
                 and their information can be viewed,
                 and individual researchers can be removed from the graph.
