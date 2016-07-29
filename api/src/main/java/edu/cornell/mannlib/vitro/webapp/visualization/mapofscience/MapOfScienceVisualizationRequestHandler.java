@@ -454,9 +454,10 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 
 		ConfigurationProperties properties = ConfigurationProperties.getBean(vreq);
 		if (properties != null) {
-			body.put("googleMapsKey", properties.getProperty("google.maps.key", "AIzaSyCAexrHLqAu6Rb18DWqwrb-vx1PQQFkAQA"));
-		} else {
-			body.put("googleMapsKey", "AIzaSyCAexrHLqAu6Rb18DWqwrb-vx1PQQFkAQA");
+			String key = properties.getProperty("google.maps.key");
+			if (!StringUtils.isEmpty(key)) {
+				body.put("googleMapsKey", key);
+			}
 		}
 
         return new TemplateResponseValues(standaloneTemplate, body);
