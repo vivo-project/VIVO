@@ -181,6 +181,7 @@
                             <doCheck>false</doCheck>
                             <doUpdate>false</doUpdate>
                             <shortRevisionLength>7</shortRevisionLength>
+                            <revisionOnScmFailure>true</revisionOnScmFailure>
                         </configuration>
                     </plugin>
                 </plugins>
