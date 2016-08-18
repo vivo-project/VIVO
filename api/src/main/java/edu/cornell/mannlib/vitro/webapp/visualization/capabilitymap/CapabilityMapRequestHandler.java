@@ -50,10 +50,10 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
 
     @Override
     public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log, Dataset dataSource) throws MalformedQueryParametersException {
-        ConceptLabelMap conceptLabelMap = VisualizationCaches.conceptToLabel.get(vitroRequest.getRDFService());
-        ConceptPeopleMap conceptPeopleMap = VisualizationCaches.conceptToPeopleMap.get(vitroRequest.getRDFService());
-        OrganizationPeopleMap organizationPeopleMap = VisualizationCaches.organisationToPeopleMap.get(vitroRequest.getRDFService());
-        Map<String, String> organizationLabels = VisualizationCaches.organizationLabels.get(vitroRequest.getRDFService());
+        ConceptLabelMap       conceptLabelMap = VisualizationCaches.conceptToLabel.getNoWait(vitroRequest.getRDFService());
+        ConceptPeopleMap      conceptPeopleMap = VisualizationCaches.conceptToPeopleMap.getNoWait(vitroRequest.getRDFService());
+        OrganizationPeopleMap organizationPeopleMap = VisualizationCaches.organisationToPeopleMap.getNoWait(vitroRequest.getRDFService());
+        Map<String, String>   organizationLabels = VisualizationCaches.organizationLabels.getNoWait(vitroRequest.getRDFService());
 
         String data = vitroRequest.getParameter("data");
         if (!StringUtils.isEmpty(data)) {
