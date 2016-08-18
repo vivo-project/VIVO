@@ -90,11 +90,16 @@ public class CachingRDFServiceExecutor<T> {
         if (cachedResults != null) {
             // If the background service exists, and the cache is considered invalid
             if (backgroundRDFService != null && resultBuilder.invalidateCache(System.currentTimeMillis() - lastCacheTime)) {
-                // Determine how long we are prepared to wait for an answer
-                long waitFor = (backgroundTask == null ? 1000 : 500);
+                // In most cases, only wait for half a second
+                long waitFor = 500;
 
-                // Start the background task to refresh the cache
-                startBackgroundTask(rdfService);
+                if (backgroundTask == null) {
+                    // Start the background task to refresh the cache
+                    startBackgroundTask(backgroundRDFService);
+
+                    // As we've just started the background task, allow a wait time of 1 second
+                    waitFor = 1000;
+                }
 
                 // See if we expect it to complete in time, and if so, wait for it
                 if (allowWaits && isExpectedToCompleteIn(waitFor)) {
