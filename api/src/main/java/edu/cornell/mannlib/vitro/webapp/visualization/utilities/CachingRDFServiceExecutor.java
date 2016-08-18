@@ -61,6 +61,26 @@ public class CachingRDFServiceExecutor<T> {
      * @param rdfService an RDF service to use, in foreground mode, if the background service is missing
      */
     public synchronized T get(RDFService rdfService) {
+        return get(rdfService, false);
+    }
+
+    /**
+     * Return the cached results if present, or start the task.
+     * Will wait for completion if the cache is not already populated, otherwise the refresh will happen in the background.
+     *
+     * @param rdfService an RDF service to use, in foreground mode, if the background service is missing
+     */
+    public synchronized T getNoWait(RDFService rdfService) {
+        return get(rdfService, true);
+    }
+
+    /**
+     * Return the cached results if present, or start the task.
+     * Will wait for completion if the cache is not already populated, otherwise the refresh will happen in the background.
+     *
+     * @param rdfService an RDF service to use, in foreground mode, if the background service is missing
+     */
+    public synchronized T get(RDFService rdfService, boolean allowWaits) {
         // First, check if there are results from the previous background task, and update the cache
         if (backgroundTask != null && backgroundTask.isDone()) {
             completeBackgroundTask();
@@ -77,7 +97,7 @@ public class CachingRDFServiceExecutor<T> {
                 startBackgroundTask(rdfService);
 
                 // See if we expect it to complete in time, and if so, wait for it
-                if (isExpectedToCompleteIn(waitFor)) {
+                if (allowWaits && isExpectedToCompleteIn(waitFor)) {
                     completeBackgroundTask(waitFor);
                 }
             }
