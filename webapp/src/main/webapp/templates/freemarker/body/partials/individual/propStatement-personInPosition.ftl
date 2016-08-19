@@ -21,7 +21,7 @@
     <#local linkedIndividual>
         <#if statement.org??>
             <span itemprop="worksFor" itemscope itemtype="http://schema.org/Organization">
-               <a itemprop="name" href="${profileUrl(statement.uri("org"))}" title="${i18n().organization_name}">${statement.orgName}</a>
+               <a href="${profileUrl(statement.uri("org"))}" title="${i18n().organization_name}"><span itemprop="name">${statement.orgName}</span></a>
             </span>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
