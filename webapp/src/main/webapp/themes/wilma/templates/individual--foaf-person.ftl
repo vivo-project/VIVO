@@ -24,7 +24,7 @@
 <#--add the VIVO-ORCID interface -->
 <#include "individual-orcidInterface.ftl">  
         
-<section itemscope itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
+<section id="individual-intro" class="vcard person" role="region">
 
     <section id="share-contact" role="region"> 
         <!-- Image -->           
@@ -110,7 +110,7 @@
 		<#include "individual-openSocial.ftl">
     </section>
     
-</section>
+</span></section>
 
 <#assign nameForOtherGroup = "${i18n().other}"> 
 

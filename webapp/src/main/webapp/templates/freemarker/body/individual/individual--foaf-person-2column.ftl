@@ -23,7 +23,7 @@
 <#assign visRequestingTemplate = "foaf-person-2column">
 <#--add the VIVO-ORCID interface -->
 <#include "individual-orcidInterface.ftl">  
-<section itemscope itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
+<section id="individual-intro" class="vcard person" role="region"><span itemscope itemtype="http://schema.org/Person">
     <section id="share-contact" role="region"> 
         <#-- Image -->           
         <#assign individualImage>
@@ -117,7 +117,7 @@
         </div> <!-- contactsWebpages -->
         <#include "individual-openSocial.ftl">
     </section> <!-- end individual-info -->
-</section> <!-- end individual-intro -->
+</span></section> <!-- end individual-intro -->
 
 <#assign nameForOtherGroup = "${i18n().other}">
 <#if !editable>
