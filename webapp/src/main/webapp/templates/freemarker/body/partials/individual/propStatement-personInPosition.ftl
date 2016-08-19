@@ -33,7 +33,7 @@
     <#local middleOrganization>
         <#if statement.middleOrg??>
             <span itemprop="worksFor" itemscope itemtype="http://schema.org/Organization">
-                <a itemprop="name" href="${profileUrl(statement.uri("middleOrg"))}" title="${i18n().middle_organization}">${statement.middleOrgName!}</a>
+                <a href="${profileUrl(statement.uri("middleOrg"))}" title="${i18n().middle_organization}"><span itemprop="name">${statement.middleOrgName!}</span></a>
             </span>
         </#if>
     </#local>
