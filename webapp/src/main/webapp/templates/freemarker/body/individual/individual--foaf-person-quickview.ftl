@@ -51,7 +51,7 @@
     </#if>
 </#if>
 </#if>
-<section itemscope itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
+<section id="individual-intro" class="vcard person" role="region"><span itemscope itemtype="http://schema.org/Person">
     <section id="label-title" <#if editable>style="width:45%"</#if> >
         <header>
             <#if relatedSubject??>
@@ -174,7 +174,7 @@
 
 		<#include "individual-openSocial.ftl">
     </section> <!-- end individual-info -->
-</section> <!-- end end individual-intro -->
+</span></section> <!-- end end individual-intro -->
 <!-- we need these 3 lines of html to provide proper spacing and alignment -->
 <p style="clear:both">
     <br />
