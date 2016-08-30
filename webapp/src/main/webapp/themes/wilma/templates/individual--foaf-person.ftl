@@ -70,7 +70,7 @@
                 <h2>${relatedSubject.relatingPredicateDomainPublic} ${i18n().indiv_foafperson_for} ${relatedSubject.name}</h2>
                 <p><a href="${relatedSubject.url}" title="${i18n().indiv_foafperson_return}">&larr; ${i18n().indiv_foafperson_return} ${relatedSubject.name}</a></p>
             <#else>                
-                <h1 class="vcard foaf-person">
+                <h1 class="foaf-person">
                     <#-- Label -->
                     <span itemprop="name" class="fn"><@p.label individual editable labelCount localesCount/></span>
 
