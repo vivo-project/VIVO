@@ -2,7 +2,7 @@
 
 package org.vivoweb.webapp.sitemap;
 
-import com.hp.hpl.jena.query.QuerySolution;
+import org.apache.jena.query.QuerySolution;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;

@@ -13,7 +13,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.utilities.VisualizationCac
 import org.apache.commons.logging.Log;
 
 import com.google.gson.Gson;
-import com.hp.hpl.jena.query.Dataset;
+import org.apache.jena.query.Dataset;
 
 import edu.cornell.mannlib.vitro.webapp.auth.permissions.SimplePermission;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;

@@ -24,9 +24,9 @@ import org.apache.jena.iri.IRI;
 import org.apache.jena.iri.IRIFactory;
 import org.apache.jena.iri.Violation;
 
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.query.Syntax;
-import com.hp.hpl.jena.rdf.model.RDFNode;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.Syntax;
+import org.apache.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CoInvestigationData;
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CollaborationData;

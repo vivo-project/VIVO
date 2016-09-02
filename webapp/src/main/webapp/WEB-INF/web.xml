@@ -1558,11 +1558,6 @@
     </taglib>
 
     <taglib>
-      <taglib-uri>http://mannlib.cornell.edu/vitro/ListSparqlTag/0.1/</taglib-uri>
-      <taglib-location>/WEB-INF/tlds/ListSparqlTag.tld</taglib-location>
-    </taglib>
-
-    <taglib>
       <taglib-uri>http://jakarta.apache.org/taglibs/string-1.1</taglib-uri>
       <taglib-location>/WEB-INF/tlds/taglibs-string.tld</taglib-location>
     </taglib>
