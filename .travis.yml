@@ -6,7 +6,7 @@ env:
   - MAVEN_OPTS=-Xmx1024M
 
 install:
-  - git clone https://github.com/vivo-project/Vitro.git ../Vitro
+  - git clone -b maint-rel-1.9 https://github.com/vivo-project/Vitro.git ../Vitro
 
 script:
   - "mvn clean package -Dmaven.test.skip=false"
