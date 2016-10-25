@@ -43,7 +43,7 @@ public class VIVONewIndividualFormGenerator extends BaseEditConfigurationGenerat
     	//Person uses first name and last name whereas individual of other class would use label 
     	//middle name is also optional
     	config.setN3Optional(list(
-    	        N3_PREFIX + "@prefix vcard:<http://www.w3.org/2006/vcard/ns#> .\n"
+    	        N3_PREFIX + "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .\n"
     	                  + " ?newInd <http://purl.obolibrary.org/obo/ARG_2000028> ?newVcardInd . \n"
     	                  + " ?newVcardInd <http://purl.obolibrary.org/obo/ARG_2000029> ?newInd . \n"
     	                  + " ?newVcardInd a vcard:Individual . \n"
@@ -52,7 +52,7 @@ public class VIVONewIndividualFormGenerator extends BaseEditConfigurationGenerat
     	                  + " ?newVcardName vcard:givenName ?firstName . \n"
     	                  + " ?newVcardName vcard:familyName ?lastName . \n",
                 N3_PREFIX + " ?newInd <" + RDFS.label.getURI() + "> ?label .",
-                N3_PREFIX + "@prefix vcard:<http://www.w3.org/2006/vcard/ns#> .\n"
+                N3_PREFIX + "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .\n"
                           + " ?newInd <http://purl.obolibrary.org/obo/ARG_2000028> ?newVcardInd . \n"
     	                  + " ?newVcardInd a vcard:Individual . \n"
     	                  + " ?newVcardInd vcard:hasName  ?newVcardName . \n"
@@ -204,5 +204,5 @@ public class VIVONewIndividualFormGenerator extends BaseEditConfigurationGenerat
 	    	editConfiguration.setLiteralsInScope(new HashMap<String, List<Literal>>());
 	    }
 	
-	private String N3_PREFIX = "@prefix foaf:<http://xmlns.com/foaf/0.1/> .\n";
+	private String N3_PREFIX = "@prefix foaf: <http://xmlns.com/foaf/0.1/> .\n";
 }

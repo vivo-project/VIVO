@@ -556,6 +556,6 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
     	}
     }
     
-	private String N3_PREFIX = "@prefix foaf:<http://xmlns.com/foaf/0.1/> .\n";
+	private String N3_PREFIX = "@prefix foaf: <http://xmlns.com/foaf/0.1/> .\n";
 
 }
