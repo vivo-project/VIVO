@@ -35,7 +35,7 @@ public class VIVODefaultAddMissingIndividualFormGenerator extends DefaultAddMiss
 
     protected List<String> getN3Prefixes() {
     	List<String> prefixStrings = super.getN3Prefixes();
-    	prefixStrings.add("@prefix vcard:<http://www.w3.org/2006/vcard/ns#> .");
+    	prefixStrings.add("@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .");
     	return prefixStrings;
     }
     
