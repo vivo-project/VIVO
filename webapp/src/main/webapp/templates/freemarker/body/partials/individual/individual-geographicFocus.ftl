@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#-- List of research areas for the individual -->
 <#assign geographicFoci = propertyGroups.pullProperty("${core}geographicFocus")!> 

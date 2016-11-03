@@ -1,4 +1,4 @@
-/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+/* $This file is distributed under the terms of the license in LICENSE$ */
 /**
  * This is the Google MAP API utilities file to make sure all calls to 
  * Google API is correct. Please add all common utilities at here.

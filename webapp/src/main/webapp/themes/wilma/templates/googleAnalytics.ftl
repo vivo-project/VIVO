@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#-- NOTICE: This is SAMPLE Google Analytics code. You must replace it with your institution's code. 
 Please see documentation at https://confluence.cornell.edu/display/ennsrd/Google+Analytics+for+UI. -->

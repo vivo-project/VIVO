@@ -1,4 +1,4 @@
-/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+/* $This file is distributed under the terms of the license in LICENSE$ */
 /** 
  * This tooltip source is modified based on the example of Google map V3. The demo html 
  * is at http://philmap.000space.com/gmap-api/poly-hov.html

@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#-- List of positions for the individual -->
 <#assign positions = propertyGroups.pullProperty("${core}relatedBy", "${core}Position")!>

@@ -1,4 +1,4 @@
-/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+/* $This file is distributed under the terms of the license in LICENSE$ */
 /**
  * The scaler is used for scaling based on the predefined minimum value and
  * maximum value. You also can control the returned maximum scale and minimum 
