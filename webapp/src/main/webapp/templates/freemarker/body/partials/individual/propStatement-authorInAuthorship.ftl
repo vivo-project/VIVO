@@ -1,11 +1,11 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
 <#-- Custom object property statement view for faux property "selected publications". See the PropertyConfig.n3 file for details.
-    
+
      This template must be self-contained and not rely on other variables set for the individual page, because it
-     is also used to generate the property statement during a deletion.  
+     is also used to generate the property statement during a deletion.
  -->
- 
+
 <#import "lib-sequence.ftl" as s>
 <#import "lib-datetime.ftl" as dt>
 
@@ -49,8 +49,8 @@
                 <#elseif statement.partOf??>
                     <em>${statement.partOf!}</em>.
                 </#if>
-                <#if statement.editor??>
-                    ${i18n().editor_abbreviated}&nbsp;${statement.editor!}.&nbsp;
+                <#if statement.editors??>
+                  ${i18n().editor_abbreviated}&nbsp;${statement.editorNames!}.&nbsp;
                 </#if>
                 <#if statement.locale?? && statement.publisher??>
                     ${statement.locale!}:&nbsp;${statement.publisher!}.
@@ -68,8 +68,8 @@
                 <#if statement.volume?? && (statement.volume!?length > 0 )>
                     ${i18n().volume_abbreviated}&nbsp;${statement.volume!}.&nbsp;
                 </#if>
-                <#if statement.editor??>
-                    ${i18n().editor_abbreviated}&nbsp;${statement.editor!}.&nbsp;
+                <#if statement.editors??>
+                    ${i18n().editor_abbreviated}&nbsp;${statement.editorNames!}.&nbsp;
                 </#if>
                 <#if statement.locale?? && statement.publisher??>
                     ${statement.locale!}:&nbsp;${statement.publisher!}.
@@ -87,7 +87,7 @@
                     <em>${statement.partOf!}</em>.
                 </#if>
                 <#if statement.editor??>
-                    ${i18n().editor_abbreviated} ${statement.editor!}.&nbsp;
+                    ${i18n().editor_abbreviated}&nbsp;${statement.editorNames!}.&nbsp;
                 </#if>
                 <#if statement.startPage?? && statement.endPage??>
                     ${statement.startPage!}-${statement.endPage!}.

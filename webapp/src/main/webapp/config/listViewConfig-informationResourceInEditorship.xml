@@ -4,74 +4,114 @@
 <!-- See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
 
 <list-view-config>
-    <query-select>    
-        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+    <query-select>
+        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+        PREFIX vcard:  &lt;http://www.w3.org/2006/vcard/ns#&gt;
         PREFIX fn:   &lt;http://www.w3.org/2005/xpath-functions#&gt;
-        
-        SELECT DISTINCT <collated> ?subclass </collated>
-                        ?editorship
-                        ?person ?personName 
+
+        SELECT DISTINCT ?subclass
+            ?editorship
+            ?editor ?editorName
         WHERE {
-                ?subject ?property ?editorship .
-                OPTIONAL { ?editorship core:rank ?rank } 
-                OPTIONAL { ?editorship core:relates ?person .
-                           ?person a foaf:Person .                      
-                           ?person rdfs:label ?personName 
+            ?subject ?property ?editorship .
+            OPTIONAL { ?editorship core:rank ?rank }
+            OPTIONAL { ?editorship core:relates ?editor .
+                ?editor a foaf:Agent .
+                ?editor rdfs:label ?editorName .
+
+                OPTIONAL { ?editorship core:relates ?editor .
+                    ?editor a foaf:Agent .
+                    ?editor vitro:mostSpecificType ?subclass .
+                    ?subclass rdfs:subClassOf foaf:Agent .
                 }
-                <collated> 
-                OPTIONAL { ?editorship core:relates ?person .
-                           ?person a foaf:Person .
-                           ?person vitro:mostSpecificType ?subclass .
-                           ?subclass rdfs:subClassOf foaf:Person 
-                } 
-                </collated>
-            <critical-data-required>
-            FILTER ( bound(?person) )
-            </critical-data-required>
-        } ORDER BY <collated> ?subclass </collated> ?rank (fn:lower-case(?personName))   
+            }
+            OPTIONAL { ?editorship core:relates ?editor .
+                ?editor a vcard:Kind .
+                ?editor vcard:hasName ?vName .
+                ?vName vcard:familyName ?lastName .
+                OPTIONAL { ?vName vcard:givenName ?firstName . }
+                OPTIONAL { ?vName core:middleName ?middleName . }
+                bind ( COALESCE(?firstName, "") As ?firstName1) .
+                bind ( COALESCE(?middleName, "") As ?middleName1) .
+                bind ( COALESCE(?lastName, "") As ?lastName1) .
+                bind (concat(str(?lastName1 + ", "),str(?firstName1 + " "),str(?middleName1)) as ?editorName) .
+
+                OPTIONAL { ?editorship core:relates ?editor .
+                    ?editor a vcard:Kind .
+                    ?editor vitro:mostSpecificType ?subclass .
+                    ?subclass rdfs:subClassOf vcard:Kind .
+                }
+            }
+        <critical-data-required>
+            FILTER ( bound(?editor) )
+        </critical-data-required>
+        } ORDER BY <collated> ?subclass </collated> ?rank (fn:lower-case(?editorName))
     </query-select>
 
     <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; 
-        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt; 
-        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt; 
-        CONSTRUCT { 
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+        PREFIX vcard:  &lt;http://www.w3.org/2006/vcard/ns#&gt;
+        CONSTRUCT {
             ?subject ?property ?editorship .
+
             ?editorship a core:Editorship .
             ?editorship core:rank ?rank .
-            ?editorship core:relates ?person .
-            ?person a foaf:Person .
-            ?person rdfs:label ?personName .
-            ?person vitro:mostSpecificType ?subclass .
-            ?subclass rdfs:subClassOf foaf:Person          
+
+            ?editorship core:relates ?editorAgent .
+            ?editorAgent a foaf:Agent .
+            ?editorAgent rdfs:label ?editorName .
+            ?editorAgent vitro:mostSpecificType ?editorAgentMST .
+            ?editorAgentMST rdfs:subClassOf foaf:Agent .
+
+            ?editorship core:relates ?editorVCard .
+            ?editorVCard a vcard:Kind .
+            ?editorVCard vitro:mostSpecificType ?editorVCardMST .
+            ?editorVCardMST rdfs:subClassOf vcard:Kind .
+
+            ?editorVCard vcard:hasName ?vName .
+            ?vName ?vNameProperty ?vNameValue .
         } WHERE {
             {
                 ?subject ?property ?editorship .
-                ?editorship a core:Editorship 
+                ?editorship a core:Editorship
             } UNION {
                 ?subject ?property ?editorship .
                 ?editorship a core:Editorship .
-                ?editorship core:rank ?rank 
+                ?editorship core:rank ?rank .
             } UNION {
                 ?subject ?property ?editorship .
                 ?editorship a core:Editorship .
-                ?editorship core:relates ?person .
-                ?person a foaf:Person .                      
-                ?person rdfs:label ?personName  
+                ?editorship core:relates ?editorAgent .
+                ?editorAgent a foaf:Agent .
+                ?editorAgent vitro:mostSpecificType ?editorAgentMST .
             } UNION {
                 ?subject ?property ?editorship .
                 ?editorship a core:Editorship .
-                ?editorship core:relates ?person .
-                ?person a foaf:Person .
-                ?person rdfs:label ?personName . 
-                ?person vitro:mostSpecificType ?subclass .
+                ?editorship core:relates ?editorAgent .
+                ?editorAgent a foaf:Agent .
+                ?editorAgent rdfs:label ?editorName
+            } UNION {
+                ?subject ?property ?editorship .
+                ?editorship a core:Editorship .
+                ?editorship core:relates ?editorVCard .
+                ?editorVCard a vcard:Kind .
+                ?editorVCard vitro:mostSpecificType ?editorVCardMST .
+            } UNION {
+                ?subject ?property ?editorship .
+                ?editorship a core:Editorship .
+                ?editorship core:relates ?editorVCard .
+                ?editorVCard a vcard:Kind .
+                ?editorVCard vcard:hasName ?vName .
+                ?vName ?vNameProperty ?vNameValue .
             }
-        } 
+        }
     </query-construct>
-    
+
     <template>propStatement-informationResourceInEditorship.ftl</template>
 </list-view-config>
