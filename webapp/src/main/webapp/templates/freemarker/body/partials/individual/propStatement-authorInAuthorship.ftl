@@ -86,7 +86,7 @@
                 <#elseif statement.partOf??>
                     <em>${statement.partOf!}</em>.
                 </#if>
-                <#if statement.editor??>
+                <#if statement.editors??>
                     ${i18n().editor_abbreviated}&nbsp;${statement.editorNames!}.&nbsp;
                 </#if>
                 <#if statement.startPage?? && statement.endPage??>
