@@ -232,7 +232,7 @@ var DataTableWidget = Class.extend({
 		searchInputBox.after("<span id='reset-search' title='" + i18nStrings.clearSearchQuery + "'>X</span>" 
 								+ "<img class='filterInfoIcon' id='searchInfoIcon' src='" + infoIconUrl 
 								+ "' alt='" + i18nStrings.infoIconString + "' title='' />");
-		$("#reset-search").live('click', function() {
+		$( document ).on('click', "#reset-search", function() {
 			me.widget.fnFilter("");
 		});
 		createToolTip($("#searchInfoIcon"), $('#searchInfoTooltipText').html(), "topLeft");

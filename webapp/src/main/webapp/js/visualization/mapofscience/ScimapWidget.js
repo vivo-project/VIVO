@@ -52,7 +52,7 @@ var ScimapWidget = Class.extend({
 				checked: true,
 				text: i18nStrings.showDisciplineLabels,
 				click: function() {
-					if($(this).attr('checked')) {
+					if($(this).prop('checked')) {
 						me.labelsMarkerManager.showMarkers();
 					} else {
 						me.labelsMarkerManager.hideMarkers();

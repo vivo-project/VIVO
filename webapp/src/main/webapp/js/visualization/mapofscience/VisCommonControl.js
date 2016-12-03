@@ -50,9 +50,8 @@ function switchVisMode(visMode) {
 }
 
 function initFilter(dom) {
-	
 	// Switch filter handling
-	$("." + dom.filterOptionClass).live('click', function() { 
+	$( document ).on( 'click', "." + dom.filterOptionClass, function() {
 		var obj = $(this);
 		if (!obj.hasClass(dom.activeFilterClass)) {
 			var checked = obj.attr('id');
