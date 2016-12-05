@@ -71,7 +71,7 @@ var ComparisonDataTableWidget = Class.extend({
 	    	*/
 	    	'<img class="' + dom.filterInfoIconClass + '" id="comparisonImageIconTwo" src="'+ infoIconUrl +'" alt="' + i18nStrings.infoIconString + '" title="" /></div>');
 		me.tableDiv.append(filter);
-		createToolTip($("#comparisonImageIconTwo"), $("#comparisonToolTipTwo").html(), "topLeft");
+		createToolTip($("#comparisonImageIconTwo"), $("#comparisonToolTipTwo").html(), "top left");
 		initFilter(dom);
 		
 		/* Create table */
@@ -205,7 +205,7 @@ var ComparisonDataTableWidget = Class.extend({
 		$("#comparison-reset-search").live('click', function() {
 			me.widget.fnFilter("");
 		});
-		createToolTip($("#comparisonSearchInfoIcon"), $("#comparisonSearchInfoTooltipText").html(), "topLeft");
+		createToolTip($("#comparisonSearchInfoIcon"), $("#comparisonSearchInfoTooltipText").html(), "top left");
 		
 		/* Create csv download button */
 		var csvButton = '<hr class="subtle-hr"/><div id="main-science-areas-table-footer"><a href="' +

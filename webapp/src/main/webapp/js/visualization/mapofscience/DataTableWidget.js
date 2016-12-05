@@ -109,7 +109,7 @@ var DataTableWidget = Class.extend({
 		    	'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">' + dom.secondFilterLabel + '</span>' +
 		    	'<img class="'+ dom.filterInfoIconClass +'" id="imageIconTwo" src="'+ infoIconUrl +'" alt="information icon" title="" /></div>');
 		me.tableDiv.append(filter);
-		createToolTip($("#imageIconTwo"), $('#toolTipTwo').html(), "topLeft");
+		createToolTip($("#imageIconTwo"), $('#toolTipTwo').html(), "top left");
 		initFilter(dom);
 		
 		var table = $('<table>');
@@ -235,7 +235,7 @@ var DataTableWidget = Class.extend({
 		$( document ).on('click', "#reset-search", function() {
 			me.widget.fnFilter("");
 		});
-		createToolTip($("#searchInfoIcon"), $('#searchInfoTooltipText').html(), "topLeft");
+		createToolTip($("#searchInfoIcon"), $('#searchInfoTooltipText').html(), "top left");
 		
 		var csvButton = '<hr class="subtle-hr"/><div id="main-science-areas-table-footer"><a id="csv" href="' +
 						entityMapOfScienceSubDisciplineCSVURL + 
