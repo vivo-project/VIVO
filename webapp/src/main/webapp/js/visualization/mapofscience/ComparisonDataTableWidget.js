@@ -143,9 +143,9 @@ var ComparisonDataTableWidget = Class.extend({
 			var index = element.attr("value");
 			var item = me.subEntities[index];
 			var color = "grey";
-			if (element.attr('checked')) {
+			if (element.prop('checked')) {
 				if ($("input:checkbox[class=chk]:checked").length > 3) {
-					element.attr('checked', false);
+					element.prop('checked', false);
 					alert(i18nStrings.maxNbrForComp);
 				} else {
 					me.loadEntity(item.uri, index);
@@ -202,7 +202,7 @@ var ComparisonDataTableWidget = Class.extend({
 		searchInputBox.css("width", "140px");
 		searchInputBox.after("<span id='comparison-reset-search' title='" + i18nStrings.clearSearchQuery + "'>X</span>" 
 								+ "<img class='comparisonFilterInfoIcon' id='comparisonSearchInfoIcon' src='" + infoIconUrl + "' alt='" + i18nStrings.infoIconString + "' title='' />");
-		$("#comparison-reset-search").live('click', function() {
+		$( document ).on('click', "#comparison-reset-search", function() {
 			me.widget.fnFilter("");
 		});
 		createToolTip($("#comparisonSearchInfoIcon"), $("#comparisonSearchInfoTooltipText").html(), "top left");

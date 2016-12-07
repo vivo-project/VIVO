@@ -683,7 +683,7 @@ var addEditorForm = {
         if ( authType == "person" ) {
 	        this.personSection.show();
             this.acSelector.addClass("acSelector");
-            this.personRadio.attr('checked', true);  // needed for reset when cancel button is clicked
+            this.personRadio.prop('checked', true);  // needed for reset when cancel button is clicked
 	        this.selectedEditor.addClass("acSelection");
 	        this.selectedEditorName.addClass("acSelectionInfo");
 	        this.personLink.addClass("verifyMatch");

@@ -73,7 +73,7 @@ var manageHideShowStatus = {
 
                 } else {
                     alert(manageHideShowStatus.errorExcludingItem);
-                    $(item).removeAttr('checked');
+                    $(item).prop('checked', null);
                 }
             }
         });        
