@@ -1,16 +1,18 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 $.extend(this, i18nStrings);
 
-var disciplineOrSubdisciplineDataTableFilter = function(oSettings, aData, iDataIndex) {
+var disciplineOrSubdisciplineDataTableFilter = function(oSettings, aData, iDataIndex, rawData) {
 
 	/*
 	 * We are not showing the first column which holds the info on whether that row contains info on
 	 * discipline OR subdiscipline. 
 	 * */
 	
-	if (aData[0] === ACTIVE_DISCIPLINE_SUBDISCIPLINE_FILTER) {
-		return true; 
-	} else {
+	if (rawData[0] === ACTIVE_DISCIPLINE_SUBDISCIPLINE_FILTER) {
+        return true;
+    } else if (aData[0] === ACTIVE_DISCIPLINE_SUBDISCIPLINE_FILTER) {
+        return true;
+    } else {
 		return false;
 	}
 }	

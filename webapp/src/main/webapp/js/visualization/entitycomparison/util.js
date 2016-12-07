@@ -210,31 +210,32 @@ $.extend(this, i18nStringsUtil);
 
 var DatatableCustomFilters = {
 	
-	peopleOrOrganizations: function(oSettings, aData, iDataIndex) {
+	peopleOrOrganizations: function(oSettings, aData, iDataIndex, rawData) {
 
-		/*
-		 * We know for a fact that the unique identifier for each row is the value for the checkbox, 
-		 * that is found in the first column for each row.
-		 * */
-		var row_data = aData[0];
-		var entityURI = $(row_data).filter("input[type=checkbox]").val();
-		
-		var currentEntityVisMode = URIToEntityRecord[entityURI].visMode;
-
-    if (temporalGraphProcessor.currentSelectedFilter === "NONE") {
-      return true;
-    }
-    else if (currentEntityVisMode === "ORGANIZATION" 
-				&& temporalGraphProcessor.currentSelectedFilter === "ORGANIZATIONS") {
-			return true;
-		} else if (currentEntityVisMode === "PERSON" 
-			&& temporalGraphProcessor.currentSelectedFilter === "PEOPLE") {
-			return true;
+		if (temporalGraphProcessor.currentSelectedFilter === "NONE") {
+		  return true;
 		} else {
-//			console.log(entityURI);
+			/*
+			 * We know for a fact that the unique identifier for each row is the value for the checkbox,
+			 * that is found in the first column for each row.
+			 * */
+			var row_data = rawData[0];
+			var entityURI = $(row_data).filter("input[type=checkbox]").val();
+			if (entityURI) {
+				var currentEntityVisMode = URIToEntityRecord[entityURI].visMode;
+
+				if (currentEntityVisMode === "ORGANIZATION"
+					&& temporalGraphProcessor.currentSelectedFilter === "ORGANIZATIONS") {
+					return true;
+				} else if (currentEntityVisMode === "PERSON"
+					&& temporalGraphProcessor.currentSelectedFilter === "PEOPLE") {
+					return true;
+				}
+			}
+
 			return false;
 		}
-		
+
 		return true;
 	}	
 		
