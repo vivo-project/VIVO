@@ -254,7 +254,7 @@ function init(graphContainer) {
 	var optionSelected = $("select.comparisonValues option:selected").val();
 	// TODO: make use of the id on the select field instead of a generic one.
 	$("#comparisonParameter").text(i18nStringsUtil.totalNumberOf + " " + optionSelected);
-	$('#yaxislabel').html(i18nStringsUtil.numberOf + " " + optionSelected).mbFlipText(false);
+	$('#yaxislabel').html(i18nStringsUtil.numberOf + " " + optionSelected).jangle(-90);
 	$('#comparisonHeader').html(optionSelected).css('font-weight', 'bold');
 	$('#legend-unknown-bar-text').text(toTitleCase(COMPARISON_PARAMETERS_INFO[currentParameter].name) + " " + i18nStringsUtil.withUnknownYear);
 	$('#legend-known-bar-text').text(toTitleCase(COMPARISON_PARAMETERS_INFO[currentParameter].name) + " " + i18nStringsUtil.withKnownYear);
@@ -642,14 +642,14 @@ function createLegendRow(entity, bottomDiv) {
 
     var checkbox = $('<input>');
     checkbox.attr('type', 'checkbox');
-    checkbox.attr('checked', true);
+    checkbox.prop('checked', true);
     checkbox.attr('id', 'checkbox');
     checkbox.attr('class', 'easyDeselectCheckbox');
     checkbox.attr('value', entity.entityURI);
 
     var hiddenLabel = $('<label>');
     hiddenLabel.attr('type', 'hidden');
-    hiddenLabel.attr('value', entity.label);
+    hiddenLabel.prop('value', entity.label);
 
     var barDiv = $('<div>');
     barDiv.attr('id', 'bar');
@@ -985,7 +985,7 @@ function generateCheckBoxes(label, checkedFlag, fontFlag){
 	checkbox.attr('class', entityCheckboxSelectorDOMClass);
 	checkbox.attr('value', label);
 	if(checkedFlag == 1){
-		checkbox.attr('checked');
+		checkbox.prop('checked');
 	}
 	
 	var a = $('<a/>');
@@ -1005,7 +1005,7 @@ function clearRenderedObjects(){
 	
 	$.each(URIToCheckedEntities, function(index, val){
 		if($(val).is(':checked')){
-			$(val).attr("checked", false);
+			$(val).prop("checked", false);
 			updateRowHighlighter(val);
 			removeUsedColor(URIToEntityRecord[$(val).attr("value")]);
 			removeEntityUnChecked(renderedObjects, URIToEntityRecord[$(val).attr("value")]);
@@ -1176,8 +1176,8 @@ function prepareTableForDataTablePagination(jsonData, dataTableParams){
 	var searchInputBox = $("." + dataTableParams.searchBarParentContainerDIVClass).find("input[type=text]");
 	
 	searchInputBox.after("<span id='reset-search' title='" + i18nStringsUtil.clerSearchQuery + "'>X</span>");
-	
-	$("#reset-search").live('click', function() {
+
+	$( document ).on('click', "#reset-search", function() {
 		entityListTable.fnFilter("");
 	});
 	
