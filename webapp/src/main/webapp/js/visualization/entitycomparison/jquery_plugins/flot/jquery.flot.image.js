@@ -108,7 +108,7 @@ images (like Google Maps).
                     callback(loaded);
             };
 
-            $('<img />').load(handler).error(handler).attr('src', url);
+            $('<img />').on("load", handler).error(handler).attr('src', url);
         });
     }
     

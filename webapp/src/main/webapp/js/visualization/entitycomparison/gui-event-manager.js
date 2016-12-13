@@ -99,12 +99,12 @@ $(document).ready(function() {
 });
         
 //click event handler for clear button
-$("a.clear-selected-entities").live('click', function(){
+$( document ).on('click', "a.clear-selected-entities", function(){
     clearRenderedObjects();
-}); 
+});
 
-$("input[type=checkbox].easyDeselectCheckbox").live('click', function(){
-    
+$( document ).on('click', "input[type=checkbox].easyDeselectCheckbox", function(){
+
     var checkbox = $(this);
     var checkboxValue = $(this).attr("value");
     var linkedCheckbox = URIToCheckedEntities[checkboxValue];
@@ -117,15 +117,15 @@ $("input[type=checkbox].easyDeselectCheckbox").live('click', function(){
         removeEntityUnChecked(renderedObjects, entityToBeRemoved);                          
         removeLegendRow(linkedCheckbox);
         removeCheckBoxFromGlobalSet(linkedCheckbox);
-        $(linkedCheckbox).attr('checked', false);
+        $(linkedCheckbox).prop('checked', false);
         checkIfColorLimitIsReached();
         displayLineGraphs();
         updateCounter();                
     }
 });
 
-$(".disabled-checkbox-event-receiver").live("click", function () {
-    
+$( document ).on("click", ".disabled-checkbox-event-receiver", function () {
+
     if ($(this).next().is(':disabled')) {
 
         createNotification("warning-notification", {
@@ -138,8 +138,8 @@ $(".disabled-checkbox-event-receiver").live("click", function () {
     }
 });
 
-$("#copy-vis-viewlink-icon").live('click', function() {
-	
+$( document ).on('click', "#copy-vis-viewlink-icon", function() {
+
 	if ($("#copy-vis-viewlink").is(':visible')) {
 		
 		$("#copy-vis-viewlink").hide();
@@ -157,8 +157,8 @@ $("#copy-vis-viewlink-icon").live('click', function() {
 	
 });
 
-$(".filter-option").live('click', function() {
-	
+$( document ).on('click', ".filter-option", function() {
+
 	if (!$(this).hasClass('active-filter')) {
 		
 		if ($(this).attr('id') === 'people-filter') {
@@ -422,7 +422,7 @@ function entityCheckboxOperatedOnEventListener() {
      * When the elements in the paginated div
      * are clicked this event handler is called
      */
-    $("input." + entityCheckboxSelectorDOMClass).live('click', function () {
+	$( document ).on('click', "input." + entityCheckboxSelectorDOMClass, function () {
 
         var checkbox = $(this);
         var checkboxValue = $(this).attr("value");
@@ -566,7 +566,7 @@ var entitySelector = {
 		
 	manuallyTriggerSelectOnDataTableCheckbox: function(checkbox) {
 	
-		checkbox.attr('checked', true);
+		checkbox.prop('checked', true);
 	    
 	    var checkboxValue = checkbox.attr("value");
 	    var entity = URIToEntityRecord[checkboxValue];
