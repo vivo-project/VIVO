@@ -71,7 +71,7 @@
         <geopolitical:sourceIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://data.worldbank.org/indicator/NY.GDP.MKTP.CD</geopolitical:sourceIdentifier>
         <geopolitical:sourceIdentifier xml:lang="ar">http://data.albankaldawli.org/indicator/NY.GDP.MKTP.CD</geopolitical:sourceIdentifier>
         <geopolitical:sourceIdentifier xml:lang="en">http://data.worldbank.org/indicator/NY.GDP.MKTP.CD</geopolitical:sourceIdentifier>
-        <geopolitical:sourceIdentifier xml:lang="es">ttp://datos.bancomundial.org/indicador/NY.GDP.MKTP.CD</geopolitical:sourceIdentifier>
+        <geopolitical:sourceIdentifier xml:lang="es">http://datos.bancomundial.org/indicador/NY.GDP.MKTP.CD</geopolitical:sourceIdentifier>
         <geopolitical:sourceIdentifier xml:lang="fr">http://donnees.banquemondiale.org/indicateur/NY.GDP.MKTP.CD</geopolitical:sourceIdentifier>
     </owl:DatatypeProperty>
     

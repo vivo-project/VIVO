@@ -1,6 +1,6 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#-- Custom object property statement view for faux property "advisees". See the PropertyConfig.3 file for details. 
+<#-- Custom object property statement view for faux property "advisees". See the PropertyConfig.n3 file for details.
     
      This template must be self-contained and not rely on other variables set for the individual page, because it
      is also used to generate the property statement during a deletion.  

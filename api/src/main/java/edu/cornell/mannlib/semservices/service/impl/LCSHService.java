@@ -49,7 +49,7 @@ public class LCSHService implements ExternalConceptService {
 		String results = null;
 		String dataUrl = baseUri + "?q=" + URLEncoder.encode(term, "UTF-8")
 				+ "&q=cs%3Ahttp%3A%2F%2Fid.loc.gov%2Fauthorities%2Fsubjects"
-				+ "&format=XML";
+				+ "&format=atom";
 		log.debug("dataURL " + dataUrl);
 
 		try {
@@ -81,7 +81,7 @@ public class LCSHService implements ExternalConceptService {
 		return conceptList;
 	}
 
-	// Results are in json format (atom) - atom entries need to be extracted
+	// Results are in XML format (atom) - atom entries need to be extracted
 	// retrieve the URIs and get the SKOS version of the entry, getting broader
 	// and narrower terms as applicable as well as any description (skos:note)
 	// that might exist
@@ -99,7 +99,7 @@ public class LCSHService implements ExternalConceptService {
 			//This is the URL for retrieving the concept - the pattern is http://id.loc.gov/authorities/subjects/sh85014203.skos.rdf
 			//This is not the URI itself which would be http://id.loc.gov/authorities/subjects/sh85014203
 			String conceptURLString = getSKOSURL(uri);
-			String baseConceptURI = getConceptURI(uri);
+			String baseConceptURI = uri;
 			URL conceptURL = null;
 			try {
 				conceptURL = new URL(conceptURLString);
@@ -154,23 +154,12 @@ public class LCSHService implements ExternalConceptService {
 
 
 	private String getSKOSURL(String uri) {
-		// Strip .xml at the end and replace with .skos.rdf
-		String skosURI = uri;
-		if (uri.endsWith(".xml")) {
-			skosURI = uri.substring(0, uri.length() - 4);
-			skosURI += skosSuffix;
-		}
-		return hostUri + skosURI;
+		String skosURI = uri + skosSuffix;
+		
+		return skosURI;
 	}
 	
-	//Given the URI from the xml, get just the base URI
-	private String getConceptURI(String uri) {
-		String skosURI = uri;
-		if (uri.endsWith(".xml")) {
-			skosURI = uri.substring(0, uri.length() - 4);
-		}
-		return hostUri + skosURI;
-	}
+	
 
 	public List<String> getConceptURISFromJSON(String results) {
 		List<String> uris = new ArrayList<String>();
@@ -192,14 +181,25 @@ public class LCSHService implements ExternalConceptService {
 		String conceptUri = new String();
 		try {
 			Document doc = XMLUtils.parse(rdf);
-			NodeList nodes = doc.getElementsByTagName("search:result");
+			NodeList nodes = doc.getElementsByTagName("entry");
 			int len = nodes.getLength();
-			int i;
+			int i, j;
 			for (i = 0; i < len; i++) {
 				Node node = nodes.item(i);
-				NamedNodeMap attrs = node.getAttributes();
-				Attr idAttr = (Attr) attrs.getNamedItem("uri");
-				conceptUri = idAttr.getTextContent();
+				NodeList childNodes = node.getChildNodes();
+				for(j = 0; j < childNodes.getLength(); j++) {
+					Node childNode = childNodes.item(j);
+					if(childNode.getNodeName().equals("link")) {
+						NamedNodeMap attrs = childNode.getAttributes();
+						Attr hrefAttr = (Attr) attrs.getNamedItem("href");
+						//if type doesn't exist, this is the direct URL without extension
+						if((hrefAttr != null) && ((Attr)attrs.getNamedItem("type") == null)) {
+							conceptUri = hrefAttr.getTextContent();
+						}
+
+					}
+				}
+				
 				log.debug("concept uri is " + conceptUri);
 				uris.add(conceptUri);
 			}
@@ -221,8 +221,7 @@ public class LCSHService implements ExternalConceptService {
 	}
 
 	/**
-	 * @param uri
-	 * @return
+	 * @param uri URI
 	 */
 	protected String stripConceptId(String uri) {
 		String conceptId = new String();
@@ -232,8 +231,7 @@ public class LCSHService implements ExternalConceptService {
 	}
 
 	/**
-	 * @param str
-	 * @return
+	 * @param str String with concept id
 	 */
 	protected String extractConceptId(String str) {
 		try {
@@ -250,12 +248,6 @@ public class LCSHService implements ExternalConceptService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	
-	
-	
-
 	
 
 }

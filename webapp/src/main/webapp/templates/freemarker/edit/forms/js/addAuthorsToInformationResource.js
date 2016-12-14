@@ -222,7 +222,7 @@ var addAuthorForm = {
         var urlString;
         var authType;
         
-        if  ( this.personRadio.attr("checked") ) {
+        if  ( this.personRadio.prop("checked") ) {
             $acField = this.lastNameField;
             urlString = addAuthorForm.acUrl + addAuthorForm.personUrl + addAuthorForm.tokenize;
             authType = "person";
@@ -771,7 +771,7 @@ var addAuthorForm = {
 	        this.orgSection.show();
 			this.orgNameWrapper.show();
 	        // person fields
-            this.personRadio.attr('checked', false);  // needed for reset when cancel button is clicked
+            this.personRadio.prop('checked', false);  // needed for reset when cancel button is clicked
 	        this.acSelector.removeClass("acSelector");
 	        this.acSelector.removeClass(this.acHelpTextClass);
 	        this.selectedAuthor.removeClass("acSelection");
@@ -786,7 +786,7 @@ var addAuthorForm = {
 	        this.middleNameField.val('');
 	        this.lastNameField.val('');
 	        // org fields
-	        this.orgRadio.attr('checked', true); // needed for reset when cancel button is clicked
+	        this.orgRadio.prop('checked', true); // needed for reset when cancel button is clicked
 	        this.orgName.addClass("acSelector");
 	        this.selectedOrg.addClass("acSelection");
 	        this.selectedOrgName.addClass("acSelectionInfo");
@@ -802,7 +802,7 @@ var addAuthorForm = {
 	        this.orgSection.hide();
 	        this.personSection.show();
 	        // org fields
-	        this.orgRadio.attr('checked', false);  // needed for reset when cancel button is clicked
+	        this.orgRadio.prop('checked', false);  // needed for reset when cancel button is clicked
 	        this.orgName.removeClass("acSelector");
 	        this.orgName.removeClass(this.acHelpTextClass);
 	        this.selectedOrg.removeClass("acSelection");
@@ -814,7 +814,7 @@ var addAuthorForm = {
 	        this.orgUriField.val('');
             // person fields
             this.acSelector.addClass("acSelector");
-            this.personRadio.attr('checked', true);  // needed for reset when cancel button is clicked
+            this.personRadio.prop('checked', true);  // needed for reset when cancel button is clicked
 	        this.selectedAuthor.addClass("acSelection");
 	        this.selectedAuthorName.addClass("acSelectionInfo");
 	        this.personLink.addClass("verifyMatch");

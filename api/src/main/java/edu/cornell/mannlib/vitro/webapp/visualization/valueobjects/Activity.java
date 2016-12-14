@@ -36,7 +36,6 @@ public class Activity extends Individual {
 	 * The 2 choices, in order, are,
 	 * 		1. parsed year from xs:DateTime object saved in core:dateTimeValue 
 	 * 		2. Default Publication Year 
-	 * @return
 	 */
 	public String getParsedActivityYear() {
 		
@@ -47,7 +46,6 @@ public class Activity extends Individual {
 	/**
 	 * This method should be used to get the raw date & not the parsed publication year. 
 	 * For the later use getParsedPublicationYear.
-	 * @return
 	 */
 	public String getActivityDate() {
 		return activityDate;

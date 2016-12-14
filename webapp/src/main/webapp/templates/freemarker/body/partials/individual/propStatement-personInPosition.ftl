@@ -1,6 +1,6 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#-- Custom object property statement view for faux property "positions". See the PropertyConfig.3 file for details. 
+<#-- Custom object property statement view for faux property "positions". See the PropertyConfig.n3 file for details.
     
      This template must be self-contained and not rely on other variables set for the individual page, because it
      is also used to generate the property statement during a deletion.  
@@ -21,7 +21,7 @@
     <#local linkedIndividual>
         <#if statement.org??>
             <span itemprop="worksFor" itemscope itemtype="http://schema.org/Organization">
-               <a itemprop="name" href="${profileUrl(statement.uri("org"))}" title="${i18n().organization_name}">${statement.orgName}</a>
+               <a href="${profileUrl(statement.uri("org"))}" title="${i18n().organization_name}"><span itemprop="name">${statement.orgName}</span></a>
             </span>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
@@ -33,7 +33,7 @@
     <#local middleOrganization>
         <#if statement.middleOrg??>
             <span itemprop="worksFor" itemscope itemtype="http://schema.org/Organization">
-                <a itemprop="name" href="${profileUrl(statement.uri("middleOrg"))}" title="${i18n().middle_organization}">${statement.middleOrgName!}</a>
+                <a href="${profileUrl(statement.uri("middleOrg"))}" title="${i18n().middle_organization}"><span itemprop="name">${statement.middleOrgName!}</span></a>
             </span>
         </#if>
     </#local>
