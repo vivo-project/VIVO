@@ -66,7 +66,7 @@ public class ManagePeopleForOrganizationController extends FreemarkerHttpServlet
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
         + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
         + "PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> \n"
-        + "PREFIX afn: <http://jena.hpl.hp.com/ARQ/function#> \n"
+        + "PREFIX afn: <http://jena.apache.org/ARQ/function#> \n"
         + "PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n"
         + "SELECT DISTINCT ?subclass ?position ?positionLabel (str(?label) as ?name) ?person ?hideThis WHERE { \n"
         + "    ?subject core:relatedBy ?position . \n"
