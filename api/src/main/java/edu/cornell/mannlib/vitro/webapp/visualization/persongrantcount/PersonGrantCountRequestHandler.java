@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.logging.Log;
 
 import org.apache.jena.query.Dataset;

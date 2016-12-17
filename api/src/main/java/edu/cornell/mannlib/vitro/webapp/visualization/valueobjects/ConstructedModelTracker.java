@@ -4,7 +4,7 @@ package edu.cornell.mannlib.vitro.webapp.visualization.valueobjects;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import org.apache.jena.rdf.model.Model;
 
