@@ -6,16 +6,18 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.skife.csv.SimpleReader;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-
 
 
 /**
@@ -214,75 +216,48 @@ class CsvFileHarvestJob implements FileHarvestJob {
     @SuppressWarnings("rawtypes")
     public String validateUpload(File file) {
         try {
-            SimpleReader reader = new SimpleReader();
-
-            List templateCsv = reader.parse(this.templateFile);
-            String[] templateFirstLine = (String[])templateCsv.get(0);
-
-            //if a line ends in a comma (absolutely a comma, no whitespace), SimpleReader will not consider the part after the comma to be a blank section.
-            List csv = reader.parse(file);
-            boolean[] linesEndingInComma = getLinesEndingInComma(file);
-
-            int length = csv.size();
-
-            if(length == 0)
-                return "No data in file";
-
-            for(int i = 0; i < length; i++) {
-                String[] line = (String[])csv.get(i);
-                boolean endsInComma = linesEndingInComma[i];
-                if(i == 0) {
-                    String errorMessage = validateCsvFirstLine(templateFirstLine, line);
-                    if(errorMessage != null)
-                        return errorMessage;
-                }
-                else if(line.length != 0) {
-                    int actualLineLength = line.length + (endsInComma ? 1 : 0);
-                    if(actualLineLength != templateFirstLine.length) {
-                        return "Mismatch in number of entries in row " + i + ": expected " + templateFirstLine.length + ", found " + actualLineLength;
+            String message = "No data in file";
+            CSVParser cReader = new CSVParser(new FileReader(file), CSVFormat.DEFAULT);
+            try {
+                int rowNum = 0;
+                int numberFields = 0;
+                String errorMsg = "File header does not match template";
+                for (CSVRecord cRecord : cReader) {
+                    rowNum++;
+                    if (false) {
+                        numberFields = cRecord.size();
+                        errorMsg += "file header items: ";
+                        for(int i = 0; i < cRecord.size(); i++) {
+                            errorMsg += cRecord.get(i) + ", ";
+                        }
+                    } else {
+                        if (cRecord.size() > 0)  {
+                            if(cRecord.size() != numberFields) {
+                                if (errorMsg != null) {
+                                    errorMsg += "template items: ";
+                                    for(int i = 0; i < cRecord.size(); i++) {
+                                        errorMsg += cRecord.get(i) + ", ";
+                                    }
+                                    return errorMsg;
+                                }
+                                return "Mismatch in number of entries in row " + rowNum + ": expected " + numberFields + ", found " + cRecord.size();
+                            }
+                        }
+                        message  = null;
+                        errorMsg = null;
                     }
                 }
-            }
 
+                return message;
+            } finally {
+                cReader.close();
+            }
         } catch (IOException e) {
             log.error(e, e);
             return e.getMessage();
         }
-        return null;
     }
 
-    /**
-     * Makes sure that the first line of the CSV file is identical to the first line of the template file.  This is
-     * assuming we are expecting all user CSV files to contain an initial header line.  If this is not the case, then
-     * this method is unnecessary.
-     * @param templateFirstLine the parsed-out contents of the first line of the template file
-     * @param line the parsed-out contents of the first line of the input file
-     * @return an error message if the two lines don't match, or null if they do
-     */
-    private String validateCsvFirstLine(String[] templateFirstLine, String[] line) {
-        String errorMessage = "File header does not match template";
-        if(line.length != templateFirstLine.length) {
-            //return errorMessage + ": " + "file header columns = " + line.length + ", template columns = " + templateFirstLine.length;
-            String errorMsg = "";
-            errorMsg += "file header items: ";
-            for(int i = 0; i < line.length; i++) {
-                errorMsg += line[i] + ", ";
-            }
-            errorMsg += "template items: ";
-            for(int i = 0; i < templateFirstLine.length; i++) {
-                errorMsg += templateFirstLine[i] + ", ";
-            }
-            return errorMsg;
-        }
-        for(int i = 0; i < line.length; i++)
-        {
-            if(!line[i].equals(templateFirstLine[i]))
-                return errorMessage + ": file header column " + (i + 1) + " = " + line[i] + ", template column " + (i + 1) + " = " + templateFirstLine[i];
-        }
-        return null;
-    }
-
-    
 /*    
     private void prepareWorkspaceDirectory() {
         String path = FileHarvestController.getFileHarvestRootPath() + "workspaces/" + this.sessionId;
