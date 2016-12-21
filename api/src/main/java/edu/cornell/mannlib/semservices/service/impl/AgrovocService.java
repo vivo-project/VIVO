@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.rpc.ServiceException;
@@ -28,8 +29,6 @@ import net.sf.json.JSONSerializer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fao.www.webservices.AgrovocWS.ACSWWebService;
-import org.fao.www.webservices.AgrovocWS.ACSWWebServiceServiceLocator;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -56,7 +55,6 @@ import edu.cornell.mannlib.vitro.webapp.web.URLEncoder;
 public class AgrovocService implements ExternalConceptService {
 
 	protected final Log logger = LogFactory.getLog(getClass());
-	private java.lang.String AgrovocWS_address = "http://agrovoc.fao.org/axis/services/SKOSWS";
 	private final String schemeUri = "http://aims.fao.org/aos/agrovoc/agrovocScheme";
 	private final String ontologyName = "agrovoc";
 	private final String format = "SKOS";
@@ -136,9 +134,8 @@ public class AgrovocService implements ExternalConceptService {
 
 					if (closeMatch.startsWith("http://dbpedia.org")) {
 						try {
-						String description = getDbpediaDescription(closeMatch);
-						// System.out.println("description: "+ description);
-						c.setDefinition(description);
+							String description = getDbpediaDescription(closeMatch);
+							c.setDefinition(description);
 						} catch (Exception ex) {
 							logger.error("An error occurred in the process of retrieving dbpedia description", ex);
 						}
@@ -188,153 +185,6 @@ public class AgrovocService implements ExternalConceptService {
 		}
 
 		return concept;
-	}
-
-	@Deprecated
-	protected String getTermcodeByTerm(String term) throws Exception {
-		String result = new String();
-		ACSWWebServiceServiceLocator locator = new ACSWWebServiceServiceLocator();
-		try {
-			URL url = new URL(AgrovocWS_address);
-			ACSWWebService agrovoc_service = locator.getACSWWebService(url);
-			result = agrovoc_service.getTermcodeByTerm(term);
-		} catch (ServiceException e) {
-			logger.error("service exception", e);
-			throw e;
-		} catch (RemoteException e) {
-			logger.error("remote exception", e);
-			throw e;
-		} catch (MalformedURLException e) {
-			logger.error("malformed URL exception", e);
-			throw e;
-		}
-		return result;
-	}
-
-	protected String getTermCodeByTermAndLangXML(String ontologyName,
-			String searchString, String lang, String codeName, String format) {
-		String result = new String();
-		ACSWWebServiceServiceLocator locator = new ACSWWebServiceServiceLocator();
-		try {
-			URL url = new URL(AgrovocWS_address);
-			ACSWWebService agrovoc_service = locator.getACSWWebService(url);
-			result = agrovoc_service.getTermCodeByTermAndLangXML(ontologyName,
-					searchString, lang, codeName, format);
-		} catch (ServiceException e) {
-			logger.error("service exception", e);
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-
-	protected String getURIByTermAndLangXML(String ontologyName, String term,
-			String searchMode, String format, String lang) {
-		String result = new String();
-		ACSWWebServiceServiceLocator locator = new ACSWWebServiceServiceLocator();
-		try {
-			URL url = new URL(AgrovocWS_address);
-			ACSWWebService agrovoc_service = locator.getACSWWebService(url);
-			result = agrovoc_service.getURIByTermAndLangXML(ontologyName, term,
-					searchMode, format, lang);
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-
-		return result;
-	}
-
-	// Creating method for term expansion
-	protected String getTermExpansion(String ontologyName, String term,
-			String searchMode, String format, String lang) {
-		String result = new String();
-		ACSWWebServiceServiceLocator locator = new ACSWWebServiceServiceLocator();
-		try {
-			URL url = new URL(AgrovocWS_address);
-			ACSWWebService agrovoc_service = locator.getACSWWebService(url);
-			result = agrovoc_service.getTermExpansion(ontologyName, term,
-					format, searchMode, lang); // the actual call has this order
-												// for parameters
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-
-		return result;
-	}
-
-	protected String getConceptInfoByTermcodeXML(String termcode, String format) {
-		String result = new String();
-		ACSWWebServiceServiceLocator locator = new ACSWWebServiceServiceLocator();
-		try {
-			URL url = new URL(AgrovocWS_address);
-			ACSWWebService agrovoc_service = locator.getACSWWebService(url);
-			result = agrovoc_service.getConceptInfoByTermcodeXML(termcode,
-					format);
-		} catch (ServiceException e) {
-			logger.error("service exception", e);
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-
-		return result;
-	}
-
-	protected String getConceptByKeyword(String ontologyName,
-			String searchString, String format, String searchMode, String lang) {
-		String result = new String();
-		ACSWWebServiceServiceLocator locator = new ACSWWebServiceServiceLocator();
-		try {
-			URL url = new URL(AgrovocWS_address);
-			ACSWWebService agrovoc_service = locator.getACSWWebService(url);
-			result = agrovoc_service.getConceptByKeyword(ontologyName,
-					searchString, format, searchMode, lang);
-		} catch (ServiceException e) {
-			logger.error("service exception", e);
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-
-		return result;
-	}
-
-	protected String getWsdl() {
-		String result = new String();
-		try {
-
-			StringWriter sw = new StringWriter();
-			URL rss = new URL(this.AgrovocWS_address + "?wsdl");
-
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					rss.openStream()));
-			String inputLine;
-			while ((inputLine = in.readLine()) != null) {
-				sw.write(inputLine);
-			}
-			in.close();
-
-			result = sw.toString();
-
-		} catch (Exception ex) {
-			logger.error("error occurred in servlet", ex);
-		}
-		return result;
 	}
 
 	public List<Concept> getConceptsByURIWithSparql(String uri)
@@ -440,8 +290,8 @@ public class AgrovocService implements ExternalConceptService {
 		try {
 
 			Query query = QueryFactory.create(qs);
-			qexec = QueryExecutionFactory.sparqlService(this.dbpedia_endpoint,
-					query);
+			qexec = QueryExecutionFactory.sparqlService(this.dbpedia_endpoint, query);
+			qexec.setTimeout(5000, TimeUnit.MILLISECONDS);
 			resultList = new ArrayList<HashMap>();
 			ResultSet resultSet = qexec.execSelect();
 			int resultSetSize = 0;
@@ -501,28 +351,6 @@ public class AgrovocService implements ExternalConceptService {
 		}
 	}
 
-	// Get concept using agrovoc service
-	protected String getConceptInfoByURI(String ontologyName,
-			String conceptURI, String format) {
-		String result = new String();
-		ACSWWebServiceServiceLocator locator = new ACSWWebServiceServiceLocator();
-		try {
-			URL url = new URL(AgrovocWS_address);
-			ACSWWebService agrovoc_service = locator.getACSWWebService(url);
-			result = agrovoc_service.getConceptByURI(ontologyName, conceptURI,
-					format);
-		} catch (ServiceException e) {
-			logger.error("service exception", e);
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-
-		return result;
-	}
-	
 	/**
 	 * The code here utilizes the SKOSMOS REST API for Agrovoc
 	 * This returns JSON LD so we would parse JSON instead of RDF
