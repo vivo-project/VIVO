@@ -51,7 +51,7 @@
     </#if>
 </#if>
 </#if>
-<section itemscope itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
+<section id="individual-intro" class="vcard person" role="region"><span itemscope itemtype="http://schema.org/Person">
     <section id="label-title" <#if editable>style="width:45%"</#if> >
         <header>
             <#if relatedSubject??>
@@ -174,7 +174,7 @@
 
 		<#include "individual-openSocial.ftl">
     </section> <!-- end individual-info -->
-</section> <!-- end end individual-intro -->
+</span></section> <!-- end end individual-intro -->
 <!-- we need these 3 lines of html to provide proper spacing and alignment -->
 <p style="clear:both">
     <br />
@@ -250,18 +250,23 @@ var i18nStringsUriRdf = {
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual.css" />',
                   '<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />',
                   '<link rel="stylesheet" href="${urls.base}/css/individual/individual-quick-view.css" />',
-                  '<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
+                  '<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />',
+                  '<link rel="stylesheet" type="text/css" href="${urls.base}/css/jquery_plugins/qtip/jquery.qtip.min.css" />')}
 
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tiny_mce/tiny_mce.js"></script>',
-                  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip-1.0.0-rc3.min.js"></script>',
+                  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip.min.js"></script>',
                   '<script type="text/javascript" src="${urls.base}/js/amplify/amplify.store.min.js"></script>',
                   '<script type="text/javascript" src="${urls.base}/js/json2.js"></script>',
                   '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>')}
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/individualUriRdf.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/individual/individualQtipBubble.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
+              '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/individual/moreLessController.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/individual/individualProfilePageType.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/imageUpload/imageUploadUtils.js"></script>')}
+
+<script type="text/javascript">
+    i18n_confirmDelete = "${i18n().confirm_delete}";
+</script>

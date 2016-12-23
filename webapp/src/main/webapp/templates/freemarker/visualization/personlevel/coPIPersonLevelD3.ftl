@@ -42,7 +42,7 @@ var visualizationDataRoot = "${dataVisualizationURLRoot}";
 
 // -->
 var i18nStringsCoPi = {
-    coInvestigatorString: '${i18n().co_inestigators_capitalized}',
+    coInvestigatorString: '${i18n().co_investigators_capitalized}',
     investigatorString: '${i18n().investigator_capitalized}',
     grantsWithString: '${i18n().grants_with}',
     grantsCapitalized: '${i18n().grant_s_capitalized}',

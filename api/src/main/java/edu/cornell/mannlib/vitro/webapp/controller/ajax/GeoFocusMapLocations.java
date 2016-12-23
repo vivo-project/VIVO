@@ -16,9 +16,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONException;
 
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.rdf.model.RDFNode;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.ajax.VitroAjaxController;
@@ -36,7 +36,7 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
         + "PREFIX core: <http://vivoweb.org/ontology/core#>  \n"
         + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>  \n"
         + "PREFIX vivoc: <http://vivo.library.cornell.edu/ns/0.1#>  \n"
-        + "PREFIX afn:  <http://jena.hpl.hp.com/ARQ/function#> "
+        + "PREFIX afn:  <http://jena.apache.org/ARQ/function#> "
         + "SELECT DISTINCT ?label ?location (afn:localname(?location) AS ?localName) (COUNT(DISTINCT ?person) AS ?count)  \n"
         + "WHERE { { \n"
         + "    ?location rdf:type core:GeographicRegion .  \n"

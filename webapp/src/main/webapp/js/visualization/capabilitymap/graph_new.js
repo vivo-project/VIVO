@@ -68,7 +68,7 @@ var Person = function(info) {
     this.setInfo(info);
 }
 Person.prototype.fullname = function() {
-    return this.info["md_Z"] + " " + this.info["md_A"] + " " + this.info["md_B"];
+    return this.info["md_A"] + " " + this.info["md_B"] + ", " + this.info["md_Z"];
 }
 Person.prototype.queryText = function(capabilities) {
     return ("\"" + this.info["md_A"] + "+" + this.info["md_B"] + "\"+[" + capabilities.map(function(a) { return decodeURIComponent(a.term); }).join("+") + "]").replace(/<\/?strong>/g, "");

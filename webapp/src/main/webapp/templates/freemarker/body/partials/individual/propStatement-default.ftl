@@ -6,6 +6,8 @@
      is also used to generate the property statement during a deletion.  
 -->
 
+<#import "lib-meta-tags.ftl" as lmt>
+
 <@showStatement statement />
 
 <#macro showStatement statement>
@@ -15,4 +17,5 @@
 	<#else>
     	<a href="${profileUrl(statement.uri("object"))}" title="${i18n().name}">${statement.label!statement.localName!}</a>&nbsp; ${statement.title!statement.type!}
 	</#if>
+	<@lmt.addCitationMetaTag uri=(statement.specificObjectType) content=(statement.label!) />
 </#macro>

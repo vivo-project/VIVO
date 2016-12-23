@@ -95,7 +95,7 @@
     <rdfs:label xml:lang="en-US">M.P.H. Master of Public Health</rdfs:label>
     <core:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&lt;p&gt;Professional public health degree. (contrast with M.S.P.H.)&lt;/p&gt;
 &lt;p&gt;See the Wikipedia entry at: http://en.wikipedia.org/wiki/Professional_degrees_of_public_health&lt;/p&gt;</core:description>
-    <core:abbreviation rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">M.P.H.</core:abbreviation>
+    <core:abbreviation>M.P.H.</core:abbreviation>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree101">
@@ -398,7 +398,7 @@
     <core:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abbreviation commonly used by Canadian and British universities.</core:description>
     <rdfs:label xml:lang="en-US">B.Sc. Bachelor of Science</rdfs:label>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
-    <core:abbreviation rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">B.Sc.</core:abbreviation>
+    <core:abbreviation>B.Sc.</core:abbreviation>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree17">
     <rdfs:label xml:lang="en-US">B.D. Bachelor of Divinity</rdfs:label>

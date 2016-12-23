@@ -11,14 +11,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.vivoweb.webapp.util.ModelUtils;
 
-import com.hp.hpl.jena.vocabulary.RDF;
-import com.hp.hpl.jena.vocabulary.RDFS;
-import com.hp.hpl.jena.vocabulary.XSD;
+import org.apache.jena.vocabulary.RDF;
+import org.apache.jena.vocabulary.RDFS;
+import org.apache.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -436,7 +436,6 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 	
 	/**
      * Utility method for subclasses to make a query for type from a ChildVClassesOptions object.
-     * @throws Exception 
      */
 	protected String getActivityTypeQueryForChildVClassOptions(VitroRequest vreq, ChildVClassesOptions opts){
 	    log.debug("objectClassUri = " + opts.getClassUri());
@@ -447,7 +446,6 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 	
 	/**
      * Utility method for subclasses to make a query for type from a IndividualsViaClassGroupOptions object.
-     * @throws Exception 
      */
     protected String getActivityTypeQueryForIndividualsViaClassGroupOptions(VitroRequest vreq, IndividualsViaClassGroupOptions opts){
         log.debug("ClassGroupUri = " + opts.getClassGroupUri());

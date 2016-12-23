@@ -17,9 +17,9 @@ public class SemanticServicesError {
 
 
    /**
-    * @param exception
-    * @param message
-    * @param severity
+    * @param exception Exception description
+    * @param message Error message
+    * @param severity Severity
     */
    public SemanticServicesError(String exception, String message, String severity) {
       super();

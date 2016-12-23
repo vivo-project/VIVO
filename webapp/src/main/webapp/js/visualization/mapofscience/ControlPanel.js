@@ -130,7 +130,7 @@ var CheckBoxPanel = ControlPanel.extend({
 		div.css("margin-right", "10px");
 		div.append(checkBox);
 		
-		me.checkBox.attr('checked', me.options.checked);
+		me.checkBox.prop('checked', me.options.checked);
 		/* Init contents if it is given */
 		var click = me.options.click;
 		if (click) {
@@ -141,7 +141,7 @@ var CheckBoxPanel = ControlPanel.extend({
 		this.checkBox.click(handlerFunc);
 	},
 	isChecked: function() {
-		return this.checkBox.attr('checked');
+		return this.checkBox.prop('checked');
 	}
 });
 

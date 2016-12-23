@@ -19,6 +19,10 @@
             ?volume
             ?startPage
             ?endPage
+            ?doi
+            ?pmid
+            ?isbn10
+            ?isbn13
             ?publisher
             ?locale
             ?appearsIn
@@ -36,6 +40,10 @@
             OPTIONAL { ?infoResource bibo:volume ?volume }
             OPTIONAL { ?infoResource bibo:pageStart ?startPage }
             OPTIONAL { ?infoResource bibo:pageEnd ?endPage }
+            OPTIONAL { ?infoResource bibo:doi ?doi }
+            OPTIONAL { ?infoResource bibo:pmid ?doi }
+            OPTIONAL { ?infoResource bibo:isbn10 ?isbn10 }
+            OPTIONAL { ?infoResource bibo:isbn13 ?isbn13 }
             OPTIONAL { ?infoResource core:placeOfPublication ?locale }
             OPTIONAL
             {
@@ -91,6 +99,10 @@
             ?infoResource bibo:volume ?volume .
             ?infoResource bibo:pageStart ?startPage .
             ?infoResource bibo:pageEnd ?endPage .
+            ?infoResource bibo:doi ?doi .
+            ?infoResource bibo:pmid ?pmid .
+            ?infoResource bibo:isbn10 ?isbn10 .
+            ?infoResource bibo:isbn13 ?isbn13 .
             ?infoResource core:placeOfPublication ?locale .
             ?infoResource bibo:reproducedIn ?appearsInObj .
             ?appearsInObj rdfs:label ?appearsIn .
@@ -171,6 +183,38 @@
                 ?authorship core:relates ?infoResource .
                 ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
                 ?infoResource bibo:pageEnd ?endPage .
+            }
+            UNION
+            {
+                ?subject ?property ?authorship .
+                ?authorship a core:Authorship .
+                ?authorship core:relates ?infoResource .
+                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+                ?infoResource bibo:doi ?doi .
+            }
+            UNION
+            {
+                ?subject ?property ?authorship .
+                ?authorship a core:Authorship .
+                ?authorship core:relates ?infoResource .
+                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+                ?infoResource bibo:pmid ?pmid .
+            }
+            UNION
+            {
+                ?subject ?property ?authorship .
+                ?authorship a core:Authorship .
+                ?authorship core:relates ?infoResource .
+                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+                ?infoResource bibo:isbn10 ?isbn10 .
+            }
+            UNION
+            {
+                ?subject ?property ?authorship .
+                ?authorship a core:Authorship .
+                ?authorship core:relates ?infoResource .
+                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+                ?infoResource bibo:isbn13 ?isbn13 .
             }
             UNION
             {

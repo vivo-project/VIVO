@@ -9,13 +9,13 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.hp.hpl.jena.query.Dataset;
-import com.hp.hpl.jena.query.Syntax;
-import com.hp.hpl.jena.rdf.model.Model;
+import org.apache.jena.query.Dataset;
+import org.apache.jena.query.Syntax;
+import org.apache.jena.rdf.model.Model;
 
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -168,7 +168,7 @@ public class ShortURLVisualizationController extends FreemarkerHttpServlet {
 							+ matchedPatternGroups.get(1);
 		}
 		
-		subjectURI = StringEscapeUtils.escapeHtml(subjectURI);
+		subjectURI = StringEscapeUtils.ESCAPE_HTML4.translate(subjectURI);
 		parameters.put(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY, subjectURI);
 
 		if (VisualizationFrameworkConstants.COAUTHORSHIP_VIS_SHORT_URL
@@ -243,7 +243,7 @@ public class ShortURLVisualizationController extends FreemarkerHttpServlet {
 
 		List<String> matchedGroups = new ArrayList<String>(); 
 		String subURIString = vitroRequest.getRequestURI().substring(vitroRequest.getContextPath().length()+1);
-		String[] urlParams = StringEscapeUtils.escapeHtml(subURIString).split("/");
+		String[] urlParams = StringEscapeUtils.ESCAPE_HTML4.translate(subURIString).split("/");
 		
 		if (urlParams.length > 1 
 				&& urlParams[0].equalsIgnoreCase("vis")) {

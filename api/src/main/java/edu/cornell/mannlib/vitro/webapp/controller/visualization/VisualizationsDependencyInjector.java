@@ -19,8 +19,7 @@ public class VisualizationsDependencyInjector {
 	 * This method is used to inject vis dependencies i.e. the vis algorithms that are 
      * being implemented into the vis controller. Modified Dependency Injection pattern is 
      * used here. XML file containing the location of all the vis is saved in accessible folder. 
-	 * @param servletContext
-	 * @return
+	 * @param servletContext Servlet context
 	 */
 	private synchronized static Map<String, VisualizationRequestHandler> initVisualizations(
 			ServletContext servletContext) {

@@ -70,7 +70,7 @@
 
 <script>
 
-$('img#img-${identifier}').load(function(){
+$('img#img-${identifier}').on("load", function(){
     $('span#span-${identifier}').hide();
     $('img#img-${identifier}').fadeIn();
     $('img#icon-${identifier}').fadeIn();

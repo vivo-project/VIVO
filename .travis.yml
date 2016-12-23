@@ -1,9 +1,17 @@
 language: java
 sudo: false
 
+jdk:
+  - oraclejdk8
+
 env:
   # Give Maven 1GB of memory to work with
   - MAVEN_OPTS=-Xmx1024M
+
+cache:
+  directories:
+  - .autoconf
+  - $HOME/.m2
 
 install:
   - git clone https://github.com/vivo-project/Vitro.git ../Vitro
