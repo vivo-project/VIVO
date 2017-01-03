@@ -23,6 +23,10 @@
 
 <#include "headScripts.ftl">
 
+<#if metaTags??>
+    ${metaTags.list()}
+</#if>
+
 <!--[if (gte IE 6)&(lte IE 8)]>
 <script type="text/javascript" src="${urls.base}/js/selectivizr.js"></script>
 <![endif]-->

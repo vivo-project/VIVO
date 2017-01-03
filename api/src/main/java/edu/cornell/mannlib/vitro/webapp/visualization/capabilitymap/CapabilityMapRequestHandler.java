@@ -3,13 +3,13 @@
 package edu.cornell.mannlib.vitro.webapp.visualization.capabilitymap;
 
 import com.google.gson.Gson;
-import com.hp.hpl.jena.query.Dataset;
-import com.hp.hpl.jena.query.QueryExecution;
-import com.hp.hpl.jena.query.QueryExecutionFactory;
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.rdf.model.Literal;
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
+import org.apache.jena.query.Dataset;
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.rdf.model.Literal;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
@@ -50,10 +50,10 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
 
     @Override
     public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log, Dataset dataSource) throws MalformedQueryParametersException {
-        ConceptLabelMap conceptLabelMap = VisualizationCaches.conceptToLabel.get(vitroRequest.getRDFService());
-        ConceptPeopleMap conceptPeopleMap = VisualizationCaches.conceptToPeopleMap.get(vitroRequest.getRDFService());
-        OrganizationPeopleMap organizationPeopleMap = VisualizationCaches.organisationToPeopleMap.get(vitroRequest.getRDFService());
-        Map<String, String> organizationLabels = VisualizationCaches.organizationLabels.get(vitroRequest.getRDFService());
+        ConceptLabelMap       conceptLabelMap = VisualizationCaches.conceptToLabel.getNoWait(vitroRequest.getRDFService());
+        ConceptPeopleMap      conceptPeopleMap = VisualizationCaches.conceptToPeopleMap.getNoWait(vitroRequest.getRDFService());
+        OrganizationPeopleMap organizationPeopleMap = VisualizationCaches.organisationToPeopleMap.getNoWait(vitroRequest.getRDFService());
+        Map<String, String>   organizationLabels = VisualizationCaches.organizationLabels.getNoWait(vitroRequest.getRDFService());
 
         String data = vitroRequest.getParameter("data");
         if (!StringUtils.isEmpty(data)) {

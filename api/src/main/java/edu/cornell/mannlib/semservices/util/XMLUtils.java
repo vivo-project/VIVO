@@ -50,7 +50,6 @@ public class XMLUtils {
 
 
     /**
-     * @return
      * @throws ParserConfigurationException
      */
     public static DocumentBuilder getDocumentBuilder()
@@ -68,8 +67,7 @@ public class XMLUtils {
     }
 
     /**
-     * @param xmlString
-     * @return
+     * @param xmlString XML String
      * @throws IOException
      * @throws SAXException
      * @throws ParserConfigurationException
@@ -82,8 +80,7 @@ public class XMLUtils {
     }
 
     /**
-     * @param stream
-     * @return
+     * @param stream Input stream
      * @throws IOException
      * @throws SAXException
      * @throws ParserConfigurationException
@@ -94,9 +91,8 @@ public class XMLUtils {
     }
 
     /**
-     * @param document
-     * @param name
-     * @return
+     * @param document DOM Document
+     * @param name Name
      */
     public static String getElementByName(Document document, String name) {
         NodeList nodes = document.getElementsByTagName(name);
@@ -109,7 +105,7 @@ public class XMLUtils {
     }
 
     /**
-    * @param doc
+    * @param doc DOM Document
     * @throws IOException
     */
     @SuppressWarnings("deprecation")
@@ -130,7 +126,7 @@ public class XMLUtils {
    }
 
     /**
-    * @param xml
+    * @param xml XML String
     */
    public static void prettyPrint(String xml) {
        Source xmlInput = new StreamSource(new StringReader(xml));
@@ -160,7 +156,7 @@ public class XMLUtils {
     }
 
    /**
-    * @param xml
+    * @param xml XML String
     */
    public static String prettyPrintToString(String xml) {
        Source xmlInput = new StreamSource(new StringReader(xml));
@@ -190,7 +186,7 @@ public class XMLUtils {
     }
 
     /**
-    * @param node
+    * @param node DOM Node
     */
    public static void displayNodeInfo(Node node) {
        switch (node.getNodeType()) {
@@ -222,7 +218,7 @@ public class XMLUtils {
     }
 
     /**
-    * @param node
+    * @param node DOM Node
     * @throws IOException
     */
    public static void serializeNode(Node node) throws IOException {
@@ -308,7 +304,7 @@ public class XMLUtils {
      }
 
     /**
-    * @param s
+    * @param s String
     * @throws IOException
     */
    private static void print(String s) throws IOException {
@@ -336,8 +332,8 @@ public class XMLUtils {
      }
 
     /**
-     * @param doc (either a Document or a Node)
-     * @param expression
+     * @param obj (either a Document or a Node)
+     * @param expression Expression
      * @return string contents
      */
     public static Node getNodeWithXpath(Object obj, String expression) {

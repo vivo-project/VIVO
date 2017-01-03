@@ -4,8 +4,7 @@ VIVO is an open source semantic web tool for research discovery -- finding peopl
 
 VIVO supports editing, searching, browsing and visualizing research activity in order to discover people, programs, 
 facilities, funding, scholarly works and events. VIVO's search returns results faceted by type for rapid retrieval of 
-desired information across disciplines at one institution or, through a prototype at vivosearch.org, across multiple 
-distributed institutions. 
+desired information across disciplines.
 
 ## Resources
 
@@ -15,8 +14,10 @@ http://vivoweb.org/
 ### VIVO Project Wiki
 https://wiki.duraspace.org/display/VIVO/
 
+### Installation Instructions
+
 Installation instructions for the latest release can be found at this location on the wiki:  
-https://wiki.duraspace.org/display/VIVO/VIVO+Technical+Documentation
+https://wiki.duraspace.org/display/VIVODOC19x/Installing+VIVO#InstallingVIVO-Git
 
 ## Contact us
 There are several ways to contact the VIVO community. 

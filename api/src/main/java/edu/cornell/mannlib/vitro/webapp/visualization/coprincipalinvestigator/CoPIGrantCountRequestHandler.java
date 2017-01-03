@@ -10,8 +10,8 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
-import com.hp.hpl.jena.query.Dataset;
-import com.hp.hpl.jena.rdf.model.Model;
+import org.apache.jena.query.Dataset;
+import org.apache.jena.rdf.model.Model;
 
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -174,8 +174,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 	/**
 	 * Provides response when a csv file containing number & names of unique co-pis per 
 	 * year is requested. 
-	 * @param piNodesAndEdges
-	 * @param response
+	 * @param piNodesAndEdges PI nodes and edges
 	 */
 	private Map<String, String> prepareCoPIsCountPerYearDataResponse(
 					CollaborationData piNodesAndEdges) {
@@ -211,8 +210,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 	/**
 	 * Provides response when a csv file containing number & names of unique co-pis per 
 	 * year is requested. 
-	 * @param coPIData
-	 * @param response
+	 * @param coPIData Co Principal Investigator Data
 	 */
 	private Map<String, String> prepareCoPIsListDataResponse(CollaborationData coPIData) {
 		
@@ -242,8 +240,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 	/**
 	 * Provides a response when graphml formatted co-pi network is requested, typically by 
 	 * the flash vis.
-	 * @param coPIData
-	 * @param response
+	 * @param coPIData Co Investigator data
 	 */
 	private Map<String, String> prepareNetworkStreamDataResponse(CollaborationData coPIData) {
 	

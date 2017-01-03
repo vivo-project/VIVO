@@ -97,8 +97,7 @@ public class UMLSService implements ExternalConceptService {
    }
 
    /**
-    * @param uri
-    * @return
+    * @param uri URI
     */
 	public List<Concept> getConceptsByURIWithSparql(String uri)
 			throws Exception {
@@ -108,8 +107,7 @@ public class UMLSService implements ExternalConceptService {
 	}
 
    /**
-    * @param results
-    * @return
+    * @param results Results to process
     */
    private List<Concept> processOutput(String results) throws Exception {
 
@@ -193,9 +191,8 @@ public class UMLSService implements ExternalConceptService {
 
    /**
     * Get a string from a json object or an empty string if there is no value for the given key
-   * @param obj
-   * @param key
-   * @return
+   * @param obj JSON Object
+   * @param key Key to retrieve
    */
   protected String getJsonValue(JSONObject obj, String key) {
       if (obj.has(key)) {

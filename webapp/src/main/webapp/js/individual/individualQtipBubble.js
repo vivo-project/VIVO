@@ -6,47 +6,43 @@ $(document).ready(function(){
     
     $.extend(this, i18nStrings);
 
+    $('head').append('<style id="researchAreaCSS">.qtip { font-size: 14px; max-width: none !important; } .researchAreaTip { background: url(' + imagesPath + '/individual/researchAreaBubble.png) no-repeat; } </style>');
+    padding: '0em',
+//        textAlign: 'center',
+//        fontSize: '0.7em',
+//        lineHeight: '15px',
+//        border: 'none',
+
     $('#researchAreaIcon').each(function()
     {   
         $(this).qtip(
         {
+            prerender: true,
             content: {
-                prerender: true,
                 text: '<div style="padding-top:0.5em;margin-left:-14px;color:white">' + i18nStrings.researchAreaTooltipOne + '</div><div style="margin-left:-14px;color:white">' + i18nStrings.researchAreaTooltipTwo + '</div>'
             },
             position: {
-                corner: {
-                    target: 'topleft',
-                    tooltip: 'bottomcenter'
-                },
+                my: 'top left',
+                at: 'bottom center',
                 adjust: {
                     x:22,
                     y:30
                 }
             },
-            show: {
-                when: {
-                    event: 'mouseenter'
-                }
-            },
-            hide: {
-                fixed: false, 
-                when: {
-                    event: 'mouseleave'
-                }
-            },
             style: {
-                padding: '0em',
+                classes: 'researchAreaTip',
                 height: 56,
-                textAlign: 'center',
-                fontSize: '0.7em',
-                lineHeight: '15px',
                 width: 180,
-                border: 'none',
-                background:'url(' + imagesPath + '/individual/researchAreaBubble.png)  no-repeat'
             }
         });
     });
+
+    $('head').append('<style id="bubbleCSS">.qtip { font-size: 14px; max-width: none !important; } .bubbleTip { url(' + imagesPath + '/individual/toolTipBubble.png) no-repeat; } </style>');
+//    padding: '0em',
+//    textAlign: 'center',
+//    fontSize: '0.7em',
+//    lineHeight: '15px',
+//    border: 'none',
 
     $('#fullViewIcon').each(function()
     {
@@ -56,36 +52,18 @@ $(document).ready(function(){
                 text: '<div style="padding-top:0.5em;color:white">' + i18nStrings.quickviewTooltip + '</div>'
             },
             position: {
-                corner: {
-                    target: 'topleft',
-                    tooltip: 'bottomcenter'
-                },
+                my: 'top left',
+                at: 'bottom center',
                 adjust: {
                     x:27,
                     y:30
                 }
             },
-            show: {
-                
-                when: {
-                    event: 'mouseenter'
-                }
-            },
-            hide: {
-                fixed: false, 
-                when: {
-                    event: 'mouseleave'
-                }
-            },
             style: {
-                padding: '0em',
+                classes: 'bubbleTip',
                 height: 56,
-                textAlign: 'center',
-                fontSize: '0.7em',
-                lineHeight: '15px',
                 width: 140,
-                border: 'none',
-                background: 'url(' + imagesPath + '/individual/toolTipBubble.png)  no-repeat'
+
             }
         });
     });
@@ -98,33 +76,17 @@ $(document).ready(function(){
                 text: '<div style="padding-top:0.5em;color:white">' + i18nStrings.standardviewTooltipOne + '</div><div style="color:white">' + i18nStrings.standardviewTooltipTwo + '</div>'
             },
             position: {
-                corner: {
-                    target: 'topleft',
-                    tooltip: 'bottomcenter'
-                },
+                my: 'top left',
+                at: 'bottom center',
                 adjust: {
                     x:28,
                     y:30
                 }
             },
-            show: {
-                when: {event: 'mouseenter'}
-            },
-            hide: {
-                fixed: false, 
-                when: {
-                    event: 'mouseleave'
-                }
-            },
             style: {
-                padding: '0em',
+                classes: 'bubbleTip',
                 height: 56,
-                textAlign: 'center',
-                fontSize: '0.7em',
-                lineHeight: '15px',
                 width: 144,
-                border: 'none',
-                background: 'url(' + imagesPath + '/individual/toolTipBubble.png)  no-repeat'
             }
         });
     });

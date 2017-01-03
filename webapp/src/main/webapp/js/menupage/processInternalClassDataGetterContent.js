@@ -39,17 +39,17 @@ var processInternalClassDataGetterContent = {
 		//Uncheck all since default is checked - but only if classesSelected is nonempty - 
 		//if no individual classes returned, then assume entire class group is selected
 		if(numberSelected > 0) {
-			pageContentSection.find("input[name='classInClassGroup']").removeAttr("checked");
+			pageContentSection.find("input[name='classInClassGroup']").prop("checked", null);
 			for(i = 0; i < numberSelected; i++) {
 				var classSelected = classesSelected[i];
-				pageContentSection.find("input[name='classInClassGroup'][value='" + classSelected + "']").attr("checked", "checked");
+				pageContentSection.find("input[name='classInClassGroup'][value='" + classSelected + "']").prop("checked", "checked");
 			}
 		}
 		//internal class
 		var isInternal = existingContentObject["isInternal"];
 		//Also internal class needs to be selected
 		if(isInternal == "true") {
-			pageContentSection.find("input[name='display-internalClass']").attr("checked", "checked");
+			pageContentSection.find("input[name='display-internalClass']").prop("checked", "checked");
 		} 
 		//Since this is populating content from the template, no need to "uncheck" anything
 		var results = existingContentObject["results"];
@@ -60,7 +60,7 @@ var processInternalClassDataGetterContent = {
 	    	if(resultsClasses != null) {
 	    		var numberClasses = resultsClasses.length;
 	    		if(numberClasses != numberSelected) {
-	    			pageContentSection.find("input[name='allSelected']").removeAttr("checked");
+	    			pageContentSection.find("input[name='allSelected']").prop("checked", null);
 	    		}
 	    	}
 		}

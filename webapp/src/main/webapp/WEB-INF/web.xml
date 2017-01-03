@@ -1324,6 +1324,20 @@
     <url-pattern>/selectLocale</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <description>SiteMap support</description>
+    <servlet-name>SiteMapServlet</servlet-name>
+    <servlet-class>org.vivoweb.webapp.sitemap.SiteMapServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SiteMapServlet</servlet-name>
+    <url-pattern>/robots.txt</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SiteMapServlet</servlet-name>
+    <url-pattern>/sitemap.xml</url-pattern>
+  </servlet-mapping>
+
     
   <!-- ============================== servlet-mappings ======================== -->
    <servlet-mapping>
@@ -1541,11 +1555,6 @@
     <taglib>
       <taglib-uri>http://vitro.mannlib.cornell.edu/vitro/tags</taglib-uri>
       <taglib-location>/WEB-INF/tlds/vitroForm.tld</taglib-location>
-    </taglib>
-
-    <taglib>
-      <taglib-uri>http://mannlib.cornell.edu/vitro/ListSparqlTag/0.1/</taglib-uri>
-      <taglib-location>/WEB-INF/tlds/ListSparqlTag.tld</taglib-location>
     </taglib>
 
     <taglib>

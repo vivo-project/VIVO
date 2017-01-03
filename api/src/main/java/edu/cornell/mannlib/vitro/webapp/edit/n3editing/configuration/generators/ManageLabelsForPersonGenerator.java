@@ -21,9 +21,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.rdf.model.Literal;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.rdf.model.Literal;
 
 import edu.cornell.mannlib.vitro.webapp.auth.policy.PolicyHelper;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AddDataPropertyStatement;
@@ -556,6 +556,6 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
     	}
     }
     
-	private String N3_PREFIX = "@prefix foaf:<http://xmlns.com/foaf/0.1/> .\n";
+	private String N3_PREFIX = "@prefix foaf: <http://xmlns.com/foaf/0.1/> .\n";
 
 }

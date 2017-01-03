@@ -50,9 +50,8 @@ function switchVisMode(visMode) {
 }
 
 function initFilter(dom) {
-	
 	// Switch filter handling
-	$("." + dom.filterOptionClass).live('click', function() { 
+	$( document ).on( 'click', "." + dom.filterOptionClass, function() {
 		var obj = $(this);
 		if (!obj.hasClass(dom.activeFilterClass)) {
 			var checked = obj.attr('id');
@@ -85,41 +84,36 @@ function initVisModeTypeButton() {
 }
 
 function initGlobalToolTips() {
-
-	createToolTip($("#imageIconOne"), $('#toolTipOne').html(), "topLeft");
-	createToolTip($("#exploreInfoIcon"), $('#exploreTooltipText').html(), "topLeft");
-	createToolTip($("#compareInfoIcon"), $('#compareTooltipText').html(), "topLeft");
-	createToolTip($("#imageIconThree"), $('#toolTipThree').html(), "topRight");
+	createToolTip($("#imageIconOne"), $('#toolTipOne').html(), "top left");
+	createToolTip($("#exploreInfoIcon"), $('#exploreTooltipText').html(), "top left");
+	createToolTip($("#compareInfoIcon"), $('#compareTooltipText').html(), "top left");
+	createToolTip($("#imageIconThree"), $('#toolTipThree').html(), "top right");
 }
 
+var visCommonToolTipInit = true;
 function createToolTip(target, tipText, tipLocation) {
+	if (visCommonToolTipInit) {
+		$('head').append('<style id="visCommonToolTipCSS">.qtip { font-size: .7em; max-width: none !important; } .visCommonToolTip {'
+			+ ' background-color: #ffffc0;'
+			+ ' textAlign: left;'
+			+ ' padding: 6px 10px 6px 10px;'
+			+ ' lineHeight: 14px;'
+			+ '} </style>');
+
+		visCommonToolTipInit = false;
+	}
+
 	target.qtip({
         content: {
             text: tipText
         },
-        position: {
-            corner: {
-                target: 'center',
-                tooltip: tipLocation
-            }
-        },
-        show: {
-            when: {
-                event: 'mouseover'
-            }
-        },
-        hide: {
-            fixed: true // Make it fixed so it can be hovered over
-        },
+		position: {
+			my: tipLocation,
+			at: 'center'
+		},
         style: {
-            padding: '6px 6px',
-            // Give it some extra padding
+			classes: 'visCommonToolTip',
             width: 500,
-            textAlign: 'left',
-            backgroundColor: '#ffffc0',
-            fontSize: '.7em',
-            padding: '6px 10px 6px 10px',
-            lineHeight: '14px'
         }
     });
 }
