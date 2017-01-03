@@ -24,7 +24,7 @@ import edu.cornell.mannlib.semservices.service.ExternalConceptService;
 
 public class GemetService implements ExternalConceptService  {
    protected final Log logger = LogFactory.getLog(getClass());
-   private final String GemetWS_address = "http://www.eionet.europa.eu/gemet/";
+   private final String GemetWS_address = "https://www.eionet.europa.eu/gemet/";
    private final String narrowerUri = "http://www.w3.org/2004/02/skos/core%23narrower";
    private final String broaderUri = "http://www.w3.org/2004/02/skos/core%23broader";
    private final String relatedUri = "http://www.w3.org/2004/02/skos/core%23related";

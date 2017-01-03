@@ -3,6 +3,7 @@
 package edu.cornell.mannlib.vitro.webapp.visualization.capabilitymap;
 
 import com.google.gson.Gson;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.query.Dataset;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -24,7 +25,6 @@ import edu.cornell.mannlib.vitro.webapp.visualization.model.ConceptPeopleMap;
 import edu.cornell.mannlib.vitro.webapp.visualization.model.OrganizationPeopleMap;
 import edu.cornell.mannlib.vitro.webapp.visualization.utilities.VisualizationCaches;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
-import org.apache.axis.utils.StringUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.HashMap;

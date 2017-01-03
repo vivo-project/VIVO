@@ -1,7 +1,7 @@
 package org.vivoweb.vivo.selenium;
 
 import com.sun.tools.internal.xjc.Driver;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang33.StringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;

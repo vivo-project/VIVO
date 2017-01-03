@@ -1,5 +1,5 @@
 @prefix hr:      <http://vivo.cornell.edu/ns/hr/0.9/hr.owl#> .
-@prefix afn:     <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix afn:     <http://jena.apache.org/ARQ/function#> .
 @prefix :        <http://vivoweb.org/ontology/activity-insight#> .
 @prefix scires:  <http://vivoweb.org/ontology/scientific-research#> .
 @prefix aka:     <http://vivoweb.org/ontology/aka#> .

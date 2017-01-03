@@ -5,7 +5,7 @@
 
 <list-view-config>
     <query-select>
-        PREFIX afn:   &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        PREFIX afn:   &lt;http://jena.apache.org/ARQ/function#&gt;
         PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
