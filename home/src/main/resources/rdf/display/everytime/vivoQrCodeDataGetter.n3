@@ -6,7 +6,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix core: <http://vivoweb.org/ontology/core#> .
 @prefix vivoweb: <http://vivoweb.org/ontology#> .
-@prefix afn:  <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix afn:  <http://jena.apache.org/ARQ/function#> .
 
  
 #### Check to see if the person being viewed has a first and last name. ####

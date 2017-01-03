@@ -7,11 +7,6 @@ $(document).ready(function(){
     $.extend(this, i18nStrings);
 
     $('head').append('<style id="researchAreaCSS">.qtip { font-size: 14px; max-width: none !important; } .researchAreaTip { background: url(' + imagesPath + '/individual/researchAreaBubble.png) no-repeat; } </style>');
-    padding: '0em',
-//        textAlign: 'center',
-//        fontSize: '0.7em',
-//        lineHeight: '15px',
-//        border: 'none',
 
     $('#researchAreaIcon').each(function()
     {   
@@ -38,11 +33,6 @@ $(document).ready(function(){
     });
 
     $('head').append('<style id="bubbleCSS">.qtip { font-size: 14px; max-width: none !important; } .bubbleTip { url(' + imagesPath + '/individual/toolTipBubble.png) no-repeat; } </style>');
-//    padding: '0em',
-//    textAlign: 'center',
-//    fontSize: '0.7em',
-//    lineHeight: '15px',
-//    border: 'none',
 
     $('#fullViewIcon').each(function()
     {
