@@ -24,11 +24,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -293,7 +294,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
     private void doFileUploadPost(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException {
 
-        JSONObject json = generateJson(false);
+        ObjectNode json = generateJson(false);
         try {
             VitroRequest vreq = new VitroRequest(request);
 
@@ -362,41 +363,23 @@ public class FileHarvestController extends FreemarkerHttpServlet {
                 }
 
                 //prepare the results which will be sent back to the browser for display
-                try {
-                    json.put("success", success);
-                    json.put("fileName", name);
-                    json.put("errorMessage", errorMessage);
-                }
-                catch(JSONException e) {
-                    log.error(e, e);
-                    return;
-                }
-
+                json.put("success", success);
+                json.put("fileName", name);
+                json.put("errorMessage", errorMessage);
             } else {
 
                 //if for some reason no file was included with the request, send an error back
-                try {
-                    json.put("success", false);
-                    json.put("fileName", "(none)");
-                    json.put("errorMessage", "No file uploaded");
-                } catch(JSONException e) {
-                    log.error(e, e);
-                    return;
-                }
-
+                json.put("success", false);
+                json.put("fileName", "(none)");
+                json.put("errorMessage", "No file uploaded");
             }
         } catch(ExceptionVisibleToUser e) {
             log.error(e, e);
 
             //handle exceptions whose message is for the user
-            try {
-                json.put("success", false);
-                json.put("filename", "(none)");
-                json.put("errorMessage", e.getMessage());
-            } catch(JSONException f) {
-                log.error(f, f);
-                return;
-            }
+            json.put("success", false);
+            json.put("filename", "(none)");
+            json.put("errorMessage", e.getMessage());
         } catch(Exception e) {
             log.error(e, e);
             json = generateJson(true);
@@ -414,7 +397,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
      */
     private void doHarvestPost(HttpServletRequest request, HttpServletResponse response) {
 
-    	JSONObject json;
+    	ObjectNode json;
         try {
             VitroRequest vreq = new VitroRequest(request);
             FileHarvestJob job = getJob(vreq, vreq.getParameter(PARAMETER_JOB));
@@ -452,7 +435,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
      */
     private void doCheckHarvestStatusPost(HttpServletRequest request, HttpServletResponse response) {
 
-        JSONObject json;
+        ObjectNode json;
         try {
             String newline = "\n";
 
@@ -502,8 +485,11 @@ public class FileHarvestController extends FreemarkerHttpServlet {
 	                json = generateJson(false);
 	                json.put("progressSinceLastCheck", progressSinceLastCheck);
 	                json.put("finished", finished);
-	                json.put("newlyAddedUris", newlyAddedUris);
-	                json.put("newlyAddedUrls", newlyAddedUrls);
+	                ArrayNode uris = json.putArray("newlyAddedUris");
+	                for (String uri : newlyAddedUris) {
+	                    uris.add(uri);
+                    }
+
                 } else {
                 	json = generateJson(true);
                 	log.error("File harvest terminated abnormally.");
@@ -748,14 +734,10 @@ public class FileHarvestController extends FreemarkerHttpServlet {
      * @param fatalError whether the fatal error flag should be set on this object
      * @return the new JSON object
      */
-    private JSONObject generateJson(boolean fatalError) {
-    	JSONObject json = null;
-    	try {
-	        json = new JSONObject();
-	        json.put("fatalError", fatalError);
-    	} catch(JSONException e) {
-    		log.error(e.getMessage(), e);
-    	}
+    private ObjectNode generateJson(boolean fatalError) {
+    	ObjectNode json = null;
+        json = new ObjectMapper().createObjectNode();
+        json.put("fatalError", fatalError);
         return json;
     }
 

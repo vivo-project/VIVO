@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.JsonMappingException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.json.JSONException;
 
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
@@ -65,7 +65,7 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
     }
 
 	@Override
-	public String prepareResponse() throws IOException, JSONException {
+	public String prepareResponse() throws IOException, JsonMappingException {
 		try {
             geoLocations = getGeoLocations(vreq);
             
