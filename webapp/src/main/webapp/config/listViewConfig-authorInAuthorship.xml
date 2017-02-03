@@ -41,7 +41,7 @@
             OPTIONAL { ?infoResource bibo:pageStart ?startPage }
             OPTIONAL { ?infoResource bibo:pageEnd ?endPage }
             OPTIONAL { ?infoResource bibo:doi ?doi }
-            OPTIONAL { ?infoResource bibo:pmid ?doi }
+            OPTIONAL { ?infoResource bibo:pmid ?pmid }
             OPTIONAL { ?infoResource bibo:isbn10 ?isbn10 }
             OPTIONAL { ?infoResource bibo:isbn13 ?isbn13 }
             OPTIONAL { ?infoResource core:placeOfPublication ?locale }
