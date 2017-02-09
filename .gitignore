@@ -22,3 +22,5 @@ utilities/rdbmigration/.work
 **/.settings
 **/.classpath
 **/.project
+/api/
+/installer/
