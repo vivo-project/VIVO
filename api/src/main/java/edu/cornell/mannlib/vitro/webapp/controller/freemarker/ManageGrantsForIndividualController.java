@@ -66,7 +66,7 @@ public class ManageGrantsForIndividualController extends FreemarkerHttpServlet {
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
         + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
         + "PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> \n"
-        + "PREFIX afn:  <http://jena.hpl.hp.com/ARQ/function#> \n"
+        + "PREFIX afn:  <http://jena.apache.org/ARQ/function#> \n"
         + "SELECT DISTINCT ?subclass ?role (str(?label2) as ?label) ?activity ?hideThis WHERE { \n"
         + "    ?subject <http://purl.obolibrary.org/obo/RO_0000053> ?role . \n"
         + "    ?role a core:ResearcherRole . \n"

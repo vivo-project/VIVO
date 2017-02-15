@@ -83,7 +83,7 @@ function helper() {
 }
 
 /* Using .load instead of .ready due to issue with IE and Google Maps API */
-$(window).load(function() {
+$(window).bind("load",function() {
 	
 	ERROR_DISPLAY_WIDGET = new ErrorDisplayWidget({
 		containerID: 'error-container'

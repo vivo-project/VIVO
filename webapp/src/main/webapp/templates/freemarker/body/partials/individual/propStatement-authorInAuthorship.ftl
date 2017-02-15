@@ -115,7 +115,7 @@
         <#if altmetricEnabled??>
             <#if statement.doi??>
                 <div data-badge-popover="right" data-badge-type="4" data-doi="${statement.doi}" data-hide-no-mentions="true" class="altmetric-embed" style="display: inline;"></div>
-            <#elseif statement.pimd??>
+            <#elseif statement.pmid??>
                 <div data-badge-popover="right" data-badge-type="4" data-pmid="${statement.pmid}" data-hide-no-mentions="true" class="altmetric-embed" style="display: inline;"></div>
             <#elseif statement.isbn10??>
                 <div data-badge-popover="right" data-badge-type="4" data-isbn="${statement.isbn10}" data-hide-no-mentions="true" class="altmetric-embed" style="display: inline;"></div>

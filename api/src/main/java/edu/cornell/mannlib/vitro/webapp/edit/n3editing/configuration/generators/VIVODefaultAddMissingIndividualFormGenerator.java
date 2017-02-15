@@ -39,7 +39,7 @@ public class VIVODefaultAddMissingIndividualFormGenerator extends DefaultAddMiss
     	return prefixStrings;
     }
     
-    private String getN3ForName() {
+    protected String getN3ForName() {
     	return "?" + objectVarName + " rdfs:label ?label .";
     }
     

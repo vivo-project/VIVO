@@ -8,7 +8,7 @@
     xmlns:vivo="http://vivoweb.org/ontology/core#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:bibo="http://purl.org/ontology/bibo/"
-    xmlns:afn="http://jena.hpl.hp.com/ARQ/function#"
+    xmlns:afn="http://jena.apache.org/ARQ/function#"
     xmlns:foaf="http://xmlns.com/foaf/0.1/"
     xmlns:scires="http://vivoweb.org/ontology/scientific-research#"
     xmlns:dcterms="http://purl.org/dc/terms/"

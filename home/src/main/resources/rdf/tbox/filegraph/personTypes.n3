@@ -1,4 +1,4 @@
-@prefix afn:     <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix afn:     <http://jena.apache.org/ARQ/function#> .
 @prefix :        <http://purl.obolibrary.org/obo/arg/app-views/vivo/vivo-app.owl#> .
 @prefix hr:      <http://vivo.cornell.edu/ns/hr/0.9/hr.owl#> .
 @prefix ns:      <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
