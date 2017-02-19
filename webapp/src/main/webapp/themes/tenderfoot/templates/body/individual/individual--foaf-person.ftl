@@ -22,75 +22,78 @@
 <#assign visRequestingTemplate = "foaf-person-tenderfoot">
 
 <#--add the VIVO-ORCID interface -->
-<#include "individual-orcidInterface.ftl">  
-        
+<#include "individual-orcidInterface.ftl">
+
 <section id="individual-intro" class="vcard person" role="region"><span itemscope itemtype="http://schema.org/Person">
-	<div class="row title" style="margin-bottom: 10px;">
-		<div class="col-md-12">
-			<h1 class="vcard foaf-person">
-				<#-- Label -->
-				<span itemprop="name" class="fn"><@p.label individual editable labelCount localesCount/></span>
-			</h1>
-		</div>
-	</div>
 	<div class="row row-eq-height">
 		<div class="col-md-2 photo-wrapper">
-			<!-- Image -->           
+			<!-- Image -->
 			<#assign individualImage>
-				<@p.image individual=individual 
-						  propertyGroups=propertyGroups 
-						  namespaces=namespaces 
-						  editable=editable 
-						  showPlaceholder="always" />
+				<@p.image individual=individual
+				propertyGroups=propertyGroups
+				namespaces=namespaces
+				editable=editable
+				showPlaceholder="always" />
 			</#assign>
 			<#if ( individualImage?contains('<img class="individual-photo"') )>
 				<#assign infoClass = 'class="withThumb"'/>
 			</#if>
 
-			<!-- div id="photo-wrapper">${individualImage}</div -->
-			${individualImage}
+            <!-- div id="photo-wrapper">${individualImage}</div -->
+		${individualImage}
 		</div>
-		<div class="col-md-7 person-details">
-			<h2>
-				<#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->
-				<#assign title = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Title")!>
-				<#if title?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-					<#if (title.statements?size < 1) >
-						<@p.addLinkWithLabel title editable /> 
-					<#elseif editable>
-						<h2>${title.name?capitalize!}</h2>
-						<@p.verboseDisplay title />
-					</#if>
-					<#list title.statements as statement>
-						<span itemprop="jobTitle" class="display-title<#if editable>-editable</#if>">${statement.preferredTitle}</span>
-						<@p.editingLinks "${title.localName}" "${title.name}" statement editable title.rangeUri />
-					</#list>
-				</#if>
-				<#-- If preferredTitle is unpopulated, display mostSpecificTypes -->
-				<#if ! (title.statements)?has_content>
-					<@p.mostSpecificTypes individual />
-				</#if>                        
-			</h2>
+		<div class="col-md-10 person-details">
+			<div class="row title" style="margin-bottom: 10px;">
+				<div class="col-md-12">
+					<h1 class="vcard foaf-person">
+						<#-- Label -->
+						<span itemprop="name" class="fn"><@p.label individual editable labelCount localesCount/></span>
+
+						<#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->
+						<#assign title = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Title")!>
+						<#if title?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
+							<#if (title.statements?size < 1) >
+								<@p.addLinkWithLabel title editable />
+							<#elseif editable>
+                                <h2>${title.name?capitalize!}</h2>
+								<@p.verboseDisplay title />
+							</#if>
+							<#list title.statements as statement>
+                                <span itemprop="jobTitle" class="display-title<#if editable>-editable</#if>">${statement.preferredTitle}</span>
+								<@p.editingLinks "${title.localName}" "${title.name}" statement editable title.rangeUri />
+							</#list>
+						</#if>
+						<#-- If preferredTitle is unpopulated, display mostSpecificTypes -->
+						<#if ! (title.statements)?has_content>
+							<@p.mostSpecificTypes individual />
+						</#if>
+					</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 person-details">
+				</div>
+			</div>
 		</div>
-		<div class="col-md-3 person-details" style="margin-left: 10px;">
-			<section id="share-contact" role="region"> 
-				<!-- Research Areas -->
+        <!-- div class="col-md-3 person-details" style="margin-left: 10px;">
+			<section id="share-contact" role="region">
+				<!-- Research Areas --    >
 				<#include "individual-researchAreas.ftl">
 			</section>
-		</div>
+		</div -->
 	</div>
 </span></section>
 
 <section itemscope itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
-    <section id="individual-info" ${infoClass!} role="region"> 
-    	<div class="row">
-			<div class="col-md-12">
+    <section id="individual-info" ${infoClass!} role="region">
+        <div class="row">
+            <div class="col-md-12">
 				<#include "individual-adminPanel.ftl">
-			</div>
-    	</div>
-		<!-- Positions -->   
-		<!-- #include "individual-positions.ftl" -->
-         
+            </div>
+        </div>
+        <!-- Positions -->
+        <!-- #include "individual-positions.ftl" -->
+
         <!-- Overview -->
         <!-- #include "individual-overview.ftl" -->
 
@@ -99,56 +102,56 @@
     </section>
 </section>
 
-<#assign nameForOtherGroup = "${i18n().other}"> 
+<#assign nameForOtherGroup = "${i18n().other}">
 
 <#-- Ontology properties -->
 <#if !editable>
-	<#-- We don't want to see the first name and last name unless we might edit them. -->
-	<#assign skipThis = propertyGroups.pullProperty("http://xmlns.com/foaf/0.1/firstName")!> 
-	<#assign skipThis = propertyGroups.pullProperty("http://xmlns.com/foaf/0.1/lastName")!> 
+<#-- We don't want to see the first name and last name unless we might edit them. -->
+	<#assign skipThis = propertyGroups.pullProperty("http://xmlns.com/foaf/0.1/firstName")!>
+	<#assign skipThis = propertyGroups.pullProperty("http://xmlns.com/foaf/0.1/lastName")!>
 </#if>
 
 <section style="overflow: hidden">
-	<div class="row row-eq-height">
-		<div id="property-tabs" class="col-md-9">
-			<#include "individual-property-group-tabs.ftl">
-		</div>
-		<div class="col-md-3 person-details" style="margin-left: 10px;">
-			<#include "individual-visualizationFoafPerson.ftl">    
+    <div class="row row-eq-height">
+        <div class="col-md-2">
+		<#include "individual-visualizationFoafPerson.ftl">
 
-			<!-- Contact Info -->
-			<div id="individual-tools-people">
+            <!-- Contact Info -->
+            <div id="individual-tools-people">
 				<span id="iconControlsLeftSide">
 					<img id="uriIcon" title="${individual.uri}" src="${urls.images}/individual/uriIcon.gif" alt="${i18n().uri_icon}"/>
-					<#if checkNamesResult?has_content >
-						<img id="qrIcon"  src="${urls.images}/individual/qr_icon.png" alt="${i18n().qr_icon}" />
-						<span id="qrCodeImage" class="hidden">${qrCodeLinkedImage!} 
-							<a class="qrCloseLink" href="#"  title="${i18n().qr_code}">${i18n().close_capitalized}</a>
+				<#if checkNamesResult?has_content >
+                    <img id="qrIcon"  src="${urls.images}/individual/qr_icon.png" alt="${i18n().qr_icon}" />
+						<span id="qrCodeImage" class="hidden">${qrCodeLinkedImage!}
+                            <a class="qrCloseLink" href="#"  title="${i18n().qr_code}">${i18n().close_capitalized}</a>
 						</span>
-					</#if>
+				</#if>
 				</span>
-			</div>
-			<#include "individual-contactInfo.ftl">  
-		
-			<!-- Websites -->
-			<#include "individual-webpage.ftl">
-		</div>
-	</div>
+            </div>
+		<#include "individual-contactInfo.ftl">
+
+            <!-- Websites -->
+		<#include "individual-webpage.ftl">
+        </div>
+        <div id="property-tabs" class="col-md-10">
+		<#include "individual-property-group-tabs.ftl">
+        </div>
+    </div>
 </section>
 
 <#assign rdfUrl = individual.rdfUrl>
 
 <#if rdfUrl??>
-    <script>
-        var individualRdfUrl = '${rdfUrl}';
-    </script>
+<script>
+    var individualRdfUrl = '${rdfUrl}';
+</script>
 </#if>
 <script>
     var imagesPath = '${urls.images}';
-	var individualUri = '${individual.uri!}';
-	var individualPhoto = '${individual.thumbNail!}';
-	var exportQrCodeUrl = '${urls.base}/qrcode?uri=${individual.uri!}';
-	var baseUrl = '${urls.base}';
+    var individualUri = '${individual.uri!}';
+    var individualPhoto = '${individual.thumbNail!}';
+    var exportQrCodeUrl = '${urls.base}/qrcode?uri=${individual.uri!}';
+    var baseUrl = '${urls.base}';
     var i18nStrings = {
         displayLess: '${i18n().display_less}',
         displayMoreEllipsis: '${i18n().display_more_ellipsis}',
@@ -165,15 +168,15 @@
 </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual.css" />',
-                  '<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />',
-                  '<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
+'<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />',
+'<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />')}
 
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tiny_mce/tiny_mce.js"></script>',
-                  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip-1.0.0-rc3.min.js"></script>',
-                  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>')}
+'<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip.min.js"></script>',
+'<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>')}
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/individual/individualQtipBubble.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/individual/individualUriRdf.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/imageUpload/imageUploadUtils.js"></script>')}
+'<script type="text/javascript" src="${urls.base}/js/individual/individualQtipBubble.js"></script>',
+'<script type="text/javascript" src="${urls.base}/js/individual/individualUriRdf.js"></script>',
+'<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
+'<script type="text/javascript" src="${urls.base}/js/imageUpload/imageUploadUtils.js"></script>')}

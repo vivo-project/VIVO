@@ -54,7 +54,7 @@ td {
     font-weight: inherit;
     font-style: inherit;
     font-size: 100%;
-    font-family: inherit;
+    font-family: "Noto Sans", "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica, sans-serif;
     vertical-align: baseline;
     color: #595b5b;
     font-weight: normal;
@@ -99,4 +99,15 @@ fieldset {
 }
 legend {    
     display: none; 
+}
+.row {
+    font-size: 100%;
+}
+.navbar {
+    margin-bottom: 0px;
+    border: 0px solid transparent;
+}
+.navbar-collapse {
+    padding-left: 0px;
+    padding-right: 0px;
 }

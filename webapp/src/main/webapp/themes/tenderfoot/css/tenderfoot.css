@@ -1,13 +1,13 @@
 header {
-	height:114px;
+    height:114px;
 }
 
 legend {
-	display: none;
+    display: none;
 }
 
 #nav {
-	background: #f7f9f9;
+    background: #f7f9f9;
 }
 
 #nav.affix {
@@ -33,47 +33,47 @@ body {
 }
 
 #property-tabs {
-	padding-right: 0px;
+    padding-right: 0px;
 }
 
 .row {
-	background: #ffffff;
+    background: #ffffff;
 }
 
 .row.title {
-	background: #398AAC;
+    background: #398AAC;
 }
 
 .row.title span {
-	color: #ffffff;
+    color: #ffffff;
 }
 
 .row.title h1 {
-	margin-left: 10px;
+    margin-left: 10px;
 }
 
 .row-eq-height {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
 }
 .photo-wrapper {
-	padding: 0 !important;
-	margin: 0 !important;
-	background: #f3f3f0;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #f3f3f0;
 }
-   
+
 .photo-wrapper img {
-	height: 100%;
-	width: 100%;
-	padding: 0 !important;
-	margin: 0 !important;
-	object-fit: contain;
+    height: 100%;
+    width: 100%;
+    padding: 0 !important;
+    margin: 0 !important;
+    object-fit: contain;
 }
 
 .person-details {
-	background: #f3f3f0;
+    background: #f3f3f0;
 }
 
 /* HEADER ------>  */
@@ -84,7 +84,7 @@ body {
     margin: 0 auto;
 }
 #branding .row {
-	background-color:rgba(255, 255, 255, 0);
+    background-color:rgba(255, 255, 255, 0);
 }
 /* HEADER NAV------>  */
 ul#header-nav {
@@ -157,7 +157,7 @@ h1.vivo-logo {
     position: absolute;
     width: 442px;
     height: 59px;
-    top: 10px;
+    top: 30px;
     left: 0;
     background: url(../images/VIVO-logo.png) 0 0 no-repeat;
 }
@@ -178,4 +178,19 @@ h1.vivo-logo a {
     color: #337ab7;
     font-weight: 400;
     transition: all 0.5s;
+}
+
+#individual-intro h1 {
+    font-size: 1.375em;
+    color: #2485ae;
+}
+
+#individual-intro span.display-title {
+    padding-left: 10px;
+    margin-left: 10px;
+}
+
+#individual-intro span.display-title, h1.fn .display-title {
+    font-size: .825em;
+    border-left: 1px solid #a6b1b0;
 }
