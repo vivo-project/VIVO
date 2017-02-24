@@ -28,16 +28,16 @@
 	<div class="row row-eq-height">
 		<div class="col-md-2 photo-wrapper">
 			<!-- Image -->
-			<#assign individualImage>
-				<@p.image individual=individual
-				propertyGroups=propertyGroups
-				namespaces=namespaces
-				editable=editable
-				showPlaceholder="always" />
-			</#assign>
-			<#if ( individualImage?contains('<img class="individual-photo"') )>
-				<#assign infoClass = 'class="withThumb"'/>
-			</#if>
+		<#assign individualImage>
+			<@p.image individual=individual
+			propertyGroups=propertyGroups
+			namespaces=namespaces
+			editable=editable
+			showPlaceholder="always" />
+		</#assign>
+		<#if ( individualImage?contains('<img class="individual-photo"') )>
+			<#assign infoClass = 'class="withThumb"'/>
+		</#if>
 
             <!-- div id="photo-wrapper">${individualImage}</div -->
 		${individualImage}
@@ -47,7 +47,7 @@
 				<div class="col-md-12">
 					<h1 class="vcard foaf-person">
 						<#-- Label -->
-						<span itemprop="name" class="fn"><@p.label individual editable labelCount localesCount/></span>
+                            <span itemprop="name" class="fn"><@p.label individual editable labelCount localesCount/></span>
 
 						<#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->
 						<#assign title = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Title")!>
@@ -70,17 +70,16 @@
 					</h1>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-12 person-details">
+			<div class="row person-details">
+				<div class="col-md-12">
+					<#include "individual-adminPanel.ftl">
+                        <!-- Positions -->
+					<#include "individual-positions.ftl">
+                        <!-- Research Areas -->
+					<#include "individual-researchAreas.ftl">
 				</div>
 			</div>
 		</div>
-        <!-- div class="col-md-3 person-details" style="margin-left: 10px;">
-			<section id="share-contact" role="region">
-				<!-- Research Areas --    >
-				<#include "individual-researchAreas.ftl">
-			</section>
-		</div -->
 	</div>
 </span></section>
 
@@ -88,11 +87,9 @@
     <section id="individual-info" ${infoClass!} role="region">
         <div class="row">
             <div class="col-md-12">
-				<#include "individual-adminPanel.ftl">
+			<#include "individual-adminPanel.ftl">
             </div>
         </div>
-        <!-- Positions -->
-        <!-- #include "individual-positions.ftl" -->
 
         <!-- Overview -->
         <!-- #include "individual-overview.ftl" -->
@@ -111,10 +108,14 @@
 	<#assign skipThis = propertyGroups.pullProperty("http://xmlns.com/foaf/0.1/lastName")!>
 </#if>
 
+<section id="property-tabs" class="col-md-12">
+	<#include "individual-property-group-tabs.ftl">
+</section>
+
 <section style="overflow: hidden">
     <div class="row row-eq-height">
         <div class="col-md-2">
-		<#include "individual-visualizationFoafPerson.ftl">
+			<#include "individual-visualizationFoafPerson.ftl">
 
             <!-- Contact Info -->
             <div id="individual-tools-people">
@@ -132,9 +133,6 @@
 
             <!-- Websites -->
 		<#include "individual-webpage.ftl">
-        </div>
-        <div id="property-tabs" class="col-md-10">
-		<#include "individual-property-group-tabs.ftl">
         </div>
     </div>
 </section>
@@ -169,7 +167,8 @@
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual.css" />',
 '<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />',
-'<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />')}
+'<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />',
+'<link rel="stylesheet" type="text/css" href="${urls.base}/css/jquery_plugins/qtip/jquery.qtip.min.css" />')}
 
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tiny_mce/tiny_mce.js"></script>',
 '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip.min.js"></script>',

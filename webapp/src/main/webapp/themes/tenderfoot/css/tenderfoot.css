@@ -17,6 +17,15 @@ legend {
     z-index:10;
 }
 
+#nav .container {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+p.navbar-text {
+    margin-left: 15px;
+}
+
 body {
     padding: 0;
     height: 100%; /* needed for container min-height */
@@ -42,6 +51,8 @@ body {
 
 .row.title {
     background: #398AAC;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .row.title span {
@@ -107,6 +118,9 @@ ul#header-nav li:last-child {
     padding-left: 1px;
     padding-right: 0;
     border-right: none;
+}
+ul#header-nav a {
+    color: #fff;
 }
 ul#header-nav a:hover,
 ul#header-nav a:active {
@@ -178,6 +192,15 @@ h1.vivo-logo a {
     color: #337ab7;
     font-weight: 400;
     transition: all 0.5s;
+    padding: .2em .6em .3em;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+#individual-hasResearchArea a:hover {
+    background: #337ab7;
+    color: #fff;
+    text-decoration: none;
 }
 
 #individual-intro h1 {
@@ -193,4 +216,12 @@ h1.vivo-logo a {
 #individual-intro span.display-title, h1.fn .display-title {
     font-size: .825em;
     border-left: 1px solid #a6b1b0;
+}
+
+ul#individual-hasResearchArea li,
+ul#individual-facultyMemberships li {
+    float: left;
+    padding-right: 10px;
+    margin-right: 10px;
+    border-right: none;
 }

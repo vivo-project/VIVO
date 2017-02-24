@@ -21,16 +21,16 @@
 						<#assign groupNameHtmlId = "${i18n().properties}" >
 					</#if>
 					<#if tabCount = 1 >
-						<li class="active" groupName="${groupNameHtmlId?replace("/","-")}"><a href="#">${groupName?capitalize}</a></li>
+						<li data-toggle="tab" class="active" href="#${groupNameHtmlId?replace("/","-")}"><a href="#">${groupName?capitalize}</a></li>
 						<#assign tabCount = 2>
 					<#else>
-						<li groupName="${groupNameHtmlId?replace("/","-")}"><a href="#">${groupName?capitalize}</a></li>
+						<li data-toggle="tab" href="#${groupNameHtmlId?replace("/","-")}"><a href="#">${groupName?capitalize}</a></li>
 					</#if>
 				</#if>
 			</#list>
-			<#if (propertyGroups.all?size > 1) >
-				<li groupName="viewAll"><a href="#">${i18n().view_all_capitalized}</a></li>
-			</#if>
+			<#-- if (propertyGroups.all?size > 1) >
+				<li data-toggle="tab" href="viewAll"><a href="#">${i18n().view_all_capitalized}</a></li>
+			</#if -->
 		</ul>
 	</div>
 </div>
@@ -43,8 +43,8 @@
 				<#assign verbose = (verbosePropertySwitch.currentValue)!false>
 
 				<div id="${groupNameHtmlId?replace("/","-")}"
-					class="tab-pane <#if (sectionCount > 1) >hidden<#else>active</#if>" 
-					role="tabpanel">
+                     class="tab-pane <#if (sectionCount == 1) >active</#if>"
+                     role="tabpanel">
 					<#-- Display the group heading --> 
 					<#if groupName?has_content>
 						<#--the function replaces spaces in the name with underscores, also called for the property group menu-->
