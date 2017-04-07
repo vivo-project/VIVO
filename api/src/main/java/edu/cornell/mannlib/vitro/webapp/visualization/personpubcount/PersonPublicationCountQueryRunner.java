@@ -75,6 +75,7 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<Activi
 				+ "{\n"
 				+ "    <" + queryURI + "> rdfs:label ?authorName .\n"
 				+ "    <" + queryURI + "> core:authorOf ?document .\n"
+				+ "    ?document vitro:mostSpecificType ?publicationType .\n"
 				+ "    ?document core:publicationDate ?publicationDate .\n"
 				+ "}\n"
 				+ "WHERE"
@@ -86,7 +87,8 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<Activi
 				+ "    ?authorshipNode rdf:type core:Authorship ; \n"
 				+ "                    core:relates ?document . \n"
 				+ "	   ?document rdf:type bibo:Document ; \n"
-				+ "              rdfs:label ?documentLabel .\n"
+				+ "              rdfs:label ?documentLabel ;\n"
+				+ "              vitro:mostSpecificType ?publicationType .\n"
 				+ "    } UNION {\n"
 				+ "    <" + queryURI + "> rdf:type foaf:Person ;\n"
 				+ "                       core:relatedBy ?authorshipNode .  \n"
@@ -106,9 +108,10 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<Activi
 	private String getSparqlQuery(String queryURI) {
 
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
-							+ "SELECT ?document ?publicationDate\n"
+							+ "SELECT ?document ?publicationType ?publicationDate\n"
 							+ "WHERE { \n"
 							+ "    <" + queryURI + "> core:authorOf ?document . \n"
+							+ "	   OPTIONAL { ?document vitro:mostSpecificType ?publicationType . } .\n"
 							+ "	   OPTIONAL { ?document core:publicationDate ?publicationDate . } .\n"
 							+ "}\n";
 
@@ -170,6 +173,11 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<Activi
 			RDFNode publicationDateNode = qs.get("publicationDate");
 			if (publicationDateNode != null) {
 				biboDocument.setActivityDate(publicationDateNode.asLiteral().getString());
+			}
+
+			RDFNode publicationType = qs.get("publicationType");
+			if (publicationType != null) {
+				biboDocument.setActivityType(publicationType.asResource().getURI());
 			}
 
 			authorDocuments.add(biboDocument);

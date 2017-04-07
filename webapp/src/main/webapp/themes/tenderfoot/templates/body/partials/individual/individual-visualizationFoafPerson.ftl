@@ -18,16 +18,120 @@
     <#assign standardVisualizationURLRoot ="/visualization">
         
         <#if isAuthor>
+            ${scripts.add('<script type="text/javascript" src="${urls.base}/js/d3.min.js"></script>')}
+
             <#assign coAuthorIcon = "${urls.images}/visualization/coauthorship/co_author_icon.png">
             <#assign mapOfScienceIcon = "${urls.images}/visualization/mapofscience/scimap_icon.png">
             <#assign coAuthorVisUrl = individual.coAuthorVisUrl()>
             <#assign mapOfScienceVisUrl = individual.mapOfScienceUrl()>
             
-            <#assign googleJSAPI = "https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22imagesparkline%22%5D%7D%5D%7D"> 
-            
-            <span id="sparklineHeading">${i18n().publications_in_vivo}</span>   
-            
-            <div id="vis_container_coauthor">&nbsp;</div>
+            <span id="publicationsHeading">${i18n().publications_in_vivo}</span>
+
+            <svg width="360" height="200" id="publicationsChart" onload="renderPublicationsChart()">
+            </svg>
+
+            <script>
+                var dataUrl = '${urls.base}/visualizationAjax?vis=cumulative_pub_count&uri=${individual.uri?url}';
+
+                function renderPublicationsChart() {
+                    var svg = d3.select("#publicationsChart"),
+                            margin = {top: 30, right: 20, bottom: 30, left: 40},
+                            width = +svg.attr("width") - margin.left - margin.right,
+                            height = +svg.attr("height") - margin.top - margin.bottom,
+                            g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                    var x = d3.scaleBand()
+                            .rangeRound([0, width])
+                            .paddingInner(0.05)
+                            .align(0.1);
+
+                    var y = d3.scaleLinear()
+                            .rangeRound([height, 0]);
+
+                    var z = d3.scaleOrdinal()
+                            .range(["#777777", "#1f77b4", "#aec7e8", "#ff7f0e"]);
+
+                    d3.csv(dataUrl, function (d, i, columns) {
+                        for (i = 1, t = 0; i < columns.length; ++i) t += d[columns[i]] = +d[columns[i]];
+                        d.total = t;
+                        return d;
+                    }, function (error, data) {
+                        if (error) throw error;
+
+                        var keys = data.columns.slice(1);
+
+                        x.domain(data.map(function (d) {
+                            return d.Year;
+                        }));
+                        y.domain([0, d3.max(data, function (d) {
+                            return d.total;
+                        })]).nice();
+                        z.domain(keys);
+
+                        g.append("g")
+                                .selectAll("g")
+                                .data(d3.stack().keys(keys)(data))
+                                .enter().append("g")
+                                .attr("fill", function (d) {
+                                    return z(d.key);
+                                })
+                                .selectAll("rect")
+                                .data(function (d) {
+                                    return d;
+                                })
+                                .enter().append("rect")
+                                .attr("x", function (d) {
+                                    return x(d.data.Year);
+                                })
+                                .attr("y", function (d) {
+                                    return y(d[1]);
+                                })
+                                .attr("height", function (d) {
+                                    return y(d[0]) - y(d[1]);
+                                })
+                                .attr("width", x.bandwidth());
+
+                        g.append("g")
+                                .attr("class", "axis")
+                                .attr("transform", "translate(0," + height + ")")
+                                .call(d3.axisBottom(x));
+
+                        g.append("g")
+                                .attr("class", "axis")
+                                .call(d3.axisLeft(y).ticks(null, "s"))
+                                .append("text")
+                                .attr("x", 2)
+                                .attr("y", y(y.ticks().pop()) + 0.5)
+                                .attr("dy", "0.32em")
+                                .attr("fill", "#000");
+
+                        var legend = g.append("g")
+                                .attr("font-family", "sans-serif")
+                                .attr("font-size", 10)
+                                .attr("text-anchor", "end")
+                                .selectAll("g")
+                                .data(keys.slice(1,4).reverse())
+                                .enter().append("g")
+                                .attr("transform", function (d, i) {
+                                    return "translate(-" + (200 - i * 80) +",-25)";
+                                });
+
+                        legend.append("rect")
+                                .attr("x", width - 19)
+                                .attr("width", 19)
+                                .attr("height", 19)
+                                .attr("fill", z);
+
+                        legend.append("text")
+                                .attr("x", width - 24)
+                                .attr("y", 9.5)
+                                .attr("dy", "0.32em")
+                                .text(function (d) {
+                                    return d;
+                                });
+                    });
+                }
+            </script>
 
             <div id="coauthorship_link_container" class="collaboratorship-link-container">
                 <a href="${coAuthorVisUrl}" title="${i18n().co_author_network}" class="btn btn-info" role="button">
@@ -42,15 +146,6 @@
                     ${i18n().map_of_science_capitalized}
                 </a>
             </div>
-            
-            ${scripts.add('<script type="text/javascript" src="${googleJSAPI}"></script>',
-                          '<script type="text/javascript" src="${urls.base}/js/visualization/visualization-helper-functions.js"></script>',
-                          '<script type="text/javascript" src="${urls.base}/js/visualization/sparkline.js"></script>')}           
-            
-            <script type="text/javascript">
-                var visualizationUrl = '${urls.base}/visualizationAjax?uri=${individual.uri?url}&template=${visRequestingTemplate!}';
-                var infoIconSrc = '${urls.images}/iconInfo.png';
-            </script>
         </#if>
         
         <#if isInvestigator>

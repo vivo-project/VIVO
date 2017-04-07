@@ -14,6 +14,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 public class Activity extends Individual {
 	
 	private String activityDate;
+	private String activityType;
 
 	public Activity(String activityURI) {
 		super(activityURI);
@@ -30,6 +31,10 @@ public class Activity extends Individual {
 	public void setActivityLabel(String activityLabel) {
 		this.setIndividualLabel(activityLabel);
 	}
+
+	public String getActivityType() { return this.activityType; }
+
+	public void setActivityType(String activityType) { this.activityType = activityType; }
 	
 	/**
 	 * This method will be called to get the final/inferred year for the publication. 

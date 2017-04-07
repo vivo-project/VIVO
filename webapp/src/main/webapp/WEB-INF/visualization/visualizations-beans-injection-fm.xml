@@ -12,6 +12,9 @@
 	<bean id="capability_map"
 		  class="edu.cornell.mannlib.vitro.webapp.visualization.capabilitymap.CapabilityMapRequestHandler" />
 
+	<bean id="cumulative_pub_count"
+		  class="edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.CumulativeCountRequestHandler" />
+
 	<bean id="person_pub_count"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.PersonPublicationCountRequestHandler" />
 	
@@ -51,6 +54,10 @@
 			<map>
 				<entry key="capabilitymap">
 					<ref bean="capability_map"></ref>
+				</entry>
+
+				<entry key="cumulative_pub_count">
+					<ref bean="cumulative_pub_count"></ref>
 				</entry>
 
 				<entry key="person_pub_count">
