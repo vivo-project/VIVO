@@ -68,6 +68,16 @@
 							<@p.mostSpecificTypes individual />
 						</#if>
 					</h1>
+					<span id="iconControlsRightSide">
+						<img id="uriIcon" title="${individual.uri}" src="${urls.images}/individual/uriIcon.gif" alt="${i18n().uri_icon}"/>
+						<#if checkNamesResult?has_content >
+							<img id="qrIcon"  src="${urls.images}/individual/qr_icon.png" alt="${i18n().qr_icon}" />
+							<span id="qrCodeImage" class="hidden">${qrCodeLinkedImage!}
+								<a class="qrCloseLink" href="#"  title="${i18n().qr_code}">${i18n().close_capitalized}</a>
+							</span>
+						</#if>
+				</span>
+
 				</div>
 			</div>
 			<div class="row person-details">
@@ -115,30 +125,13 @@
 	<div class="col-md-4">
 		<#include "individual-visualizationFoafPerson.ftl">
 
+		<!-- Contact Info -->
+		<#include "individual-contactInfo.ftl">
+
 		<!-- Websites -->
 		<#include "individual-webpage.ftl">
 	</div>
 </div>
-
-<section style="overflow: hidden">
-    <div class="row row-eq-height">
-        <div class="col-md-2">
-            <!-- Contact Info -->
-            <div id="individual-tools-people">
-				<span id="iconControlsLeftSide">
-					<img id="uriIcon" title="${individual.uri}" src="${urls.images}/individual/uriIcon.gif" alt="${i18n().uri_icon}"/>
-				<#if checkNamesResult?has_content >
-                    <img id="qrIcon"  src="${urls.images}/individual/qr_icon.png" alt="${i18n().qr_icon}" />
-						<span id="qrCodeImage" class="hidden">${qrCodeLinkedImage!}
-                            <a class="qrCloseLink" href="#"  title="${i18n().qr_code}">${i18n().close_capitalized}</a>
-						</span>
-				</#if>
-				</span>
-            </div>
-			<#include "individual-contactInfo.ftl">
-        </div>
-    </div>
-</section>
 
 <#assign rdfUrl = individual.rdfUrl>
 
