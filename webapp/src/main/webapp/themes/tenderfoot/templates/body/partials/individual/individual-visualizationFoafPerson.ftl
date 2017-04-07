@@ -133,18 +133,20 @@
                 }
             </script>
 
-            <div id="coauthorship_link_container" class="collaboratorship-link-container">
-                <a href="${coAuthorVisUrl}" title="${i18n().co_author_network}" class="btn btn-info" role="button">
-                    <img src="${coAuthorIcon}" alt="${i18n().co_author}" width="25px" height="25px" />
-                    ${i18n().co_author_network}
-                </a>
-            </div>
-            
-  	      	<div id="mapofscience_link_container" class="collaboratorship-link-container">
-                <a href="${mapOfScienceVisUrl}" title="${i18n().map_of_science}" class="btn btn-info" role="button">
-                    <img src="${mapOfScienceIcon}" alt="${i18n().map_of_science}" width="25px" height="25px" />
-                    ${i18n().map_of_science_capitalized}
-                </a>
+            <div class="visualization-buttons">
+                <div id="coauthorship_link_container" class="collaboratorship-link-container">
+                    <a href="${coAuthorVisUrl}" title="${i18n().co_author_network}" class="btn btn-info" role="button">
+                        <img src="${coAuthorIcon}" alt="${i18n().co_author}" width="25px" height="25px" />
+                        ${i18n().co_author_network}
+                    </a>
+                </div>
+
+                <div id="mapofscience_link_container" class="collaboratorship-link-container">
+                    <a href="${mapOfScienceVisUrl}" title="${i18n().map_of_science}" class="btn btn-info" role="button">
+                        <img src="${mapOfScienceIcon}" alt="${i18n().map_of_science}" width="25px" height="25px" />
+                        ${i18n().map_of_science_capitalized}
+                    </a>
+                </div>
             </div>
         </#if>
         

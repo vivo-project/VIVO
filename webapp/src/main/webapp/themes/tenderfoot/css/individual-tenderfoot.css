@@ -12,3 +12,29 @@ article.property h3 {
 article.property li h3 {
     background-image: none;
 }
+
+.collaboratorship-link-container {
+    margin: 12px 0 8px 0;
+    width: auto;
+}
+
+.collaboratorship-link-container a {
+    min-width: 185px;
+}
+
+.collaboratorship-link-container a.btn-info {
+    background-image: -o-linear-gradient(top, #fff 0%, #e0e0e0 100%);
+    background-image: linear-gradient(to bottom, #fff 0%, #e0e0e0 100%);
+    background-color: #e0e0e0;
+    border-color: #ccc;
+    color: #333;
+}
+
+.collaboratorship-link-container img {
+    height: 14px;
+    width: 14px;
+}
+
+.visualization-buttons {
+    text-align: center;
+}
