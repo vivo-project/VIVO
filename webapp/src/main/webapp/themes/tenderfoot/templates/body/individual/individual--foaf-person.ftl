@@ -108,15 +108,21 @@
 	<#assign skipThis = propertyGroups.pullProperty("http://xmlns.com/foaf/0.1/lastName")!>
 </#if>
 
-<section id="property-tabs" class="col-md-12">
-	<#include "individual-property-group-tabs.ftl">
-</section>
+<div class="row">
+	<div id="property-tabs" class="col-md-8">
+		<#include "individual-property-group-tabs.ftl">
+	</div>
+	<div class="col-md-4">
+		<#include "individual-visualizationFoafPerson.ftl">
+
+		<!-- Websites -->
+		<#include "individual-webpage.ftl">
+	</div>
+</div>
 
 <section style="overflow: hidden">
     <div class="row row-eq-height">
         <div class="col-md-2">
-			<#include "individual-visualizationFoafPerson.ftl">
-
             <!-- Contact Info -->
             <div id="individual-tools-people">
 				<span id="iconControlsLeftSide">
@@ -129,10 +135,7 @@
 				</#if>
 				</span>
             </div>
-		<#include "individual-contactInfo.ftl">
-
-            <!-- Websites -->
-		<#include "individual-webpage.ftl">
+			<#include "individual-contactInfo.ftl">
         </div>
     </div>
 </section>
