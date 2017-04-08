@@ -175,11 +175,16 @@ footer {
     height: 88px;
     margin: 0 auto;
     font-size: .7em;
-    color: #4e5051;
+    color: white;
+    background-color: black;
+}
+footer .row {
+    background-color: black;
 }
 footer p.copyright {
     float: left;
     padding-top: 55px;
+    color: white;
 }
 footer p.copyright small {
     font-size: 1em;
@@ -206,17 +211,17 @@ ul#individual-facultyMemberships li:last-child {
     border-right: none;
 }
 #footer-nav a {
-    color: #4e5051
+    color: white;
 }
 #footer-nav a:hover,
 a.terms,
 a.powered-by-vivo {
-    color: #09C;
+    color: white;
     text-decoration: none;
 }
 #footer-nav  a.terms:hover,
 a.powered-by-vivo:hover {
-    color: #4e5051;
+    color: white;
     text-decoration: none;
 }
 #footer-nav p {

@@ -25,63 +25,92 @@
     </head>
     
     <body class="${bodyClasses!}" onload="${bodyOnload!}">
-    <#-- supplies the faculty count to the js function that generates a random row number for the search query -->
+        <#-- supplies the faculty count to the js function that generates a random row number for the search query -->
         <@lh.facultyMemberCount  vClassGroups! />
 		<header id="branding" role="banner">
 			<#include "identity.ftl">
 		</header>
         <#include "menu.ftl">
-
-        <section id="intro" role="region">
-            <h2>${i18n().intro_title}</h2>
-
-            <p>${i18n().intro_para1}</p>
-            <p>${i18n().intro_para2}</p>
-
-            <section id="search-home" role="region">
-                <h3>${i18n().intro_searchvivo} <span class="search-filter-selected">filteredSearch</span></h3>
-        
-                <fieldset>
-                    <legend>${i18n().search_form}</legend>
-                    <form id="search-homepage" action="${urls.search}" name="search-home" role="search" method="post" > 
-                        <div id="search-home-field">
-                            <input type="text" name="querytext" class="search-homepage" value="" autocapitalize="off" />
-                            <input type="submit" value="${i18n().search_button}" class="search" />
-                            <input type="hidden" name="classgroup"  value="" autocapitalize="off" />
+        <div class="row hero">
+            <div class="theme-showcase">
+                <div class="col-md-12">
+                    <div class="container" role="main">
+                        <div class="jumbotron">
+                            <h1>${i18n().intro_title}</h1>
                         </div>
-                
-                        <a class="filter-search filter-default" href="#" title="${i18n().intro_filtersearch}">
-                            <span class="displace">${i18n().intro_filtersearch}</span>
-                        </a>
-                
-                        <ul id="filter-search-nav">
-                            <li><a class="active" href="">${i18n().all_capitalized}</a></li>
-                            <@lh.allClassGroupNames vClassGroups! />  
-                        </ul>
-                    </form>
-                </fieldset>
-            </section> <!-- #search-home -->
-        
-        </section> <!-- #intro -->
-        
-        <@widget name="login" />
-        
-        <!-- List of research classes: e.g., articles, books, collections, conference papers -->
-        <@lh.researchClasses />
-                
-        <!-- List of four randomly selected faculty members -->
-        <@lh.facultyMbrHtml />
+                        <section id="search-home" role="region">
+                            <h3>${i18n().intro_searchvivo} <span class="search-filter-selected">filteredSearch</span></h3>
 
-        <!-- List of randomly selected academic departments -->
-        <@lh.academicDeptsHtml />
+                            <fieldset>
+                                <legend>${i18n().search_form}</legend>
+                                <form id="search-homepage" action="${urls.search}" name="search-home" role="search" method="post" >
+                                    <div id="search-home-field">
+                                        <input type="text" name="querytext" class="search-homepage" value="" autocapitalize="off" />
+                                        <input type="submit" value="${i18n().search_button}" class="search" />
+                                        <input type="hidden" name="classgroup"  value="" autocapitalize="off" />
+                                    </div>
+
+                                    <a class="filter-search filter-default" href="#" title="${i18n().intro_filtersearch}">
+                                        <span class="displace">${i18n().intro_filtersearch}</span>
+                                    </a>
+
+                                    <ul id="filter-search-nav">
+                                        <li><a class="active" href="">${i18n().all_capitalized}</a></li>
+                                    <@lh.allClassGroupNames vClassGroups! />
+                                    </ul>
+                                </form>
+                            </fieldset>
+                        </section> <!-- #search-home -->
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="container">
+                        <div class="jumbotron">
+                            <p>${i18n().intro_para1}</p>
+                            <p>${i18n().intro_para2}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row faculty-home">
+            <div class="container">
+                <div class="col-md-12">
+                    <!-- List of research classes: e.g., articles, books, collections, conference papers -->
+                    <@lh.researchClasses />
+                
+                    <!-- List of four randomly selected faculty members -->
+                    <@lh.facultyMbrHtml />
+
+                    <!-- List of randomly selected academic departments -->
+                    <@lh.academicDeptsHtml />
+                </div>
+            </div>
+        </div>
 
         <#if geoFocusMapsEnabled >
-            <!-- Map display of researchers' areas of geographic focus. Must be enabled in runtime.properties -->
-            <@lh.geographicFocusHtml />
+            <div class="row geo-focus">
+                <div class="container">
+                    <div class="col-md-12">
+                        <!-- Map display of researchers' areas of geographic focus. Must be enabled in runtime.properties -->
+                        <@lh.geographicFocusHtml />
+                    </div>
+                </div>
+            </div>
         </#if>
-        
-        <!-- Statistical information relating to property groups and their classes; displayed horizontally, not vertically-->
-        <@lh.allClassGroups vClassGroups! />
+
+        <!-- List of research classes: e.g., articles, books, collections, conference papers -->
+        <div class="row research-count">
+            <div class="container">
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-6">
+                    <!-- Statistical information relating to property groups and their classes; displayed horizontally, not vertically-->
+                    <@lh.allClassGroups vClassGroups! />
+                </div>
+            </div>
+        </div>
 
         <#include "footer.ftl">
         <#-- builds a json object that is used by js to render the academic departments section -->
