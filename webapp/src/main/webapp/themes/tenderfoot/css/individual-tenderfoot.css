@@ -38,3 +38,7 @@ article.property li h3 {
 .visualization-buttons {
     text-align: center;
 }
+
+.pastPosition {
+    display: none;
+}
