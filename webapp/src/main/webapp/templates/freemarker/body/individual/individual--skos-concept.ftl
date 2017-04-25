@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#-- Individual profile page template for skos:Concept individuals (extends individual.ftl in vivo)-->
 

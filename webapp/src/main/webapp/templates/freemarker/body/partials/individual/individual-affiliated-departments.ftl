@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 <#if departmentsResults?has_content>
     <#-- is strictly a usability issue so we can refer accurately to "faculty members" within the dept.     -->
     <#assign urlForDetailsPage = "affiliatedDepartments" />

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<!-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

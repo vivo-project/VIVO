@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 <#--Sets up script for custom form data. Including here instead of as separate javascript
 file to ensure this script is always loaded first.  Can also make sure placed first in 
 scripts list.-->

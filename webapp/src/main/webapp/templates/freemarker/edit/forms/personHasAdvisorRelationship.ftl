@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 <#--The blank sentinel indicates what value should be put in a URI when no autocomplete result has been selected.
 If the blank value is non-null or non-empty, n3 editing for an existing object will remove the original relationship
 if nothing is selected for that object-->

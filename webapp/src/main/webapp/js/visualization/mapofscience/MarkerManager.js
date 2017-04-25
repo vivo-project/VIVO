@@ -1,4 +1,4 @@
-/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+/* $This file is distributed under the terms of the license in LICENSE$ */
 /**
  * The MarkerManager is more like a composite class of Marker. It manages 
  * markers by grouping the markers by keys. 

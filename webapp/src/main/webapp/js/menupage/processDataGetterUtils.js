@@ -1,4 +1,4 @@
-/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+/* $This file is distributed under the terms of the license in LICENSE$ */
 
 //This class is responsible for the product-specific form processing/content selection that might be possible
 //Overrides the usual behavior of selecting the specific JavaScript class needed to convert the form inputs

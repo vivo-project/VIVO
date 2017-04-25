@@ -1,4 +1,4 @@
-<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<!-- $This file is distributed under the terms of the license in LICENSE$ -->
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"

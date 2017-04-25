@@ -1,4 +1,4 @@
-/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+/* $This file is distributed under the terms of the license in LICENSE$ */
 
 // THIS FILE IS USED TO PROVIDE GEOJSON DATA TO THE JAVASCRIPT THAT BUILDS THE MAP ON THE VIVO HOME PAGE.
 // NOTE THAT THIS DATA IS NOT INTENDED TO BE COMPLETE AND DEFINITIVE; RESEARCHERS AT YOUR INSTITUTION

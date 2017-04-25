@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 <#if researchAreaResults?has_content>
     <#-- If the organization is an Academic Department, we use a different datagetter and detail page. This -->
     <#-- is strictly a usability issue so we can refer accurately to "faculty members" within the dept.     -->

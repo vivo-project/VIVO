@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 <#assign today = .now >
 <#assign todayDate = today?date>
 Results from ${siteName} for ${querytext} on ${todayDate}

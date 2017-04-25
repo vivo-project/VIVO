@@ -1,4 +1,4 @@
-# $This file is distributed under the terms of the license in /doc/license.txt$ 
+# $This file is distributed under the terms of the license in LICENSE$ 
 
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
