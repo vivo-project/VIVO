@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 <#--Overriding default form here to allow just concepts to show in the list-->
 	 
 	 <#if rangeOptionsExist  = true >

@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#--The original concept javascript is service independent, i.e. all vocabulary service information is returned from the servlet
 and the template itself generates the same display for all the services.  Right now we would like to show a different label

@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#-- Custom object property statement view for the roleRealizedIn, roleContributesTo, researchActivities, hasRole 
      and hasClinicalActivities custom list views. See those list view and the PropertyConfig.n3 file for details.

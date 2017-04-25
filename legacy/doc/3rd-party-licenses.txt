@@ -37,6 +37,7 @@ solr
 spring
 stax-api
 toggle
+trippi
 xalan
 xercesImpl
 xml-apis
@@ -65,11 +66,15 @@ sesame-repository (licenses/aduna.LICENSE.txt)
 sesame-rio (licenses/aduna.LICENSE.txt)
 sparqltag (licenses/sparqltag.LICENSE.txt)
 xpp3_min (licenses/extreme.LICENSE.txt)
+xsdlib (licenses/xsdlib.LICENSE.txt)
 xstream (licenses/xstream.LICENSE.txt)
+
 
 BSD 3-clause
 ---
 antisamy (licenses/antisamy.LICENSE.txt)
+aterms-java (licenses/aterms-java.LICENSE.txt)
+relaxngDatatype (licenses/relaxngDatatype.LICENSE.txt)
 
 
 CDDL 1.0
@@ -77,9 +82,11 @@ CDDL 1.0
 jaxrpc (licenses/cddl.LICENSE.txt)
 saaj (licenses/cddl.LICENSE.txt)
 
+
 ECLIPSE PUBLIC LICENSE v1.0
 --------
 webserviceutils (licenses/eclipse.LICENSE.txt)
+
 
 GNU AGPL 3
 ----------	
@@ -143,6 +150,7 @@ slf4j-api (licenses/mit.LICENSE.txt)
 slf4j-log4j12 (licenses/mit.LICENSE.txt)
 XMLGregorianCalendarConverter.java (licenses/mit.LICENSE.txt)
 
+
 MPL 1.1
 -------
 licenses/mpl.LICENSE.txt
@@ -167,16 +175,6 @@ jtidy (licenses/jtidy.LICENSE.txt)
 ojdbc (licenses/oracle.LICENSE.txt)
 leaflet (licenses/leaflet.LICENSE.txt)
 
-Unknown
--------
-aterm-java
-relaxngDatatype
-xsdlib
-
-
-None
-----
-Trippi
 
 ORCID API client
 ----------------
