@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#-- Macros used to insert microformats into non-foaf person profiles via the individual-vitro.ftl template. -->
 <#macro sectionSchema individual>

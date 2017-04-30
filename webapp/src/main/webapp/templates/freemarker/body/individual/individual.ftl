@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#-- Default VIVO individual profile page template (extends individual.ftl in vitro) -->
 
@@ -7,6 +7,7 @@
 
 <#assign individualProductExtensionPreHeader>
     <#include "individual-altmetric.ftl">
+    <#include "individual-plum.ftl">
 </#assign>
 
 <#assign individualProductExtension>
@@ -44,3 +45,4 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/indi
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>')}
+${scripts.add('<script type="text/javascript" src="//cdn.plu.mx/widget-popup.js"></script>')}

@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 <#import "lib-vivo-form.ftl" as lvf>
 
 <#-- Template for adding a grant role, such as principal investigator, to a foaf:Persons -->

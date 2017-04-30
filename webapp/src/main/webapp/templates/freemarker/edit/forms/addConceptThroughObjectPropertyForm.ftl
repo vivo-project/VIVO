@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#--Assign variables from editConfig-->
 <#assign rangeOptions = editConfiguration.pageData.objectVar />

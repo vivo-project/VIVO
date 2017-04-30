@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#-- Custom object property statement view for the roleRealizedIn, roleContributesTo, researchActivities, hasRole 
      and hasClinicalActivities custom list views. See those list view and the PropertyConfig.n3 file for details.
@@ -17,7 +17,7 @@
     <span class="hideThis">&nbsp;</span>
     <script type="text/javascript" >
         $('span.hideThis').parent().parent().addClass("hideThis");
-        if ( $('h3#RO_0000053-ResearcherRole').attr('class').length == 0 ) {
+        if ( jQuery.isEmptyObject($('h3#RO_0000053-ResearcherRole').attr('class')) ) {
             $('h3#RO_0000053-ResearcherRole').addClass('hiddenGrants');
         }
         $('span.hideThis').parent().remove();

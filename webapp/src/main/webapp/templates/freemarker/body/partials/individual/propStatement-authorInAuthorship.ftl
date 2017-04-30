@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#-- Custom object property statement view for faux property "selected publications". See the PropertyConfig.n3 file for details.
     
@@ -18,7 +18,7 @@
     <span class="hideThis">&nbsp;</span>
     <script type="text/javascript" >
         $('span.hideThis').parent().parent().addClass("hideThis");
-        if ( $('h3#relatedBy-Authorship').attr('class').length == 0 ) {
+        if ( jQuery.isEmptyObject($('h3#relatedBy-Authorship').attr('class')) ) {
             $('h3#relatedBy-Authorship').addClass('hiddenPubs');
         }
         $('span.hideThis').parent().remove();
@@ -125,6 +125,32 @@
         </#if>
     </#local>
 
-    ${resourceTitle} ${citationDetails} <@dt.yearSpan "${statement.dateTime!}" /> ${altMetric}
+    <#local plum>
+        <#if plumPrintEnabled??>
+            <#if statement.doi??>
+                <#assign plumIdParam = "doi=${statement.doi}">
+            <#elseif statement.pmid??>
+                <#assign plumIdParam = "pmid=${statement.pmid}">
+            <#elseif statement.isbn10??>
+                <#assign plumIdParam = "isbn=${statement.isbn10}">
+            <#elseif statement.isbn13??>
+                <#assign plumIdParam = "isbn=${statement.isbn13}">
+            <#elseif statement.oclc??>
+                <#assign plumIdParam = "oclc=${statement.oclc}">
+            </#if>
+            <#if plumIdParam??>
+                <div class="plum-print-wrapper" style="display: inline-block">
+                    <a class="plumx-plum-print-popup"
+                       href="https://plu.mx/plum/a/?${plumIdParam}"
+                       data-popup="hidden"
+                       data-hide-when-empty="${plumPrintHideEmpty}"
+                       data-site="plum"
+                       data-badge="true"></a>
+                </div>
+            </#if>
+        </#if>
+    </#local>
+
+    ${resourceTitle} ${citationDetails} <@dt.yearSpan "${statement.dateTime!}" /> ${altMetric} ${plum}
 </#if>
 </#macro>

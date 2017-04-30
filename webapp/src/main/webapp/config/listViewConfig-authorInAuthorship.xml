@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<!-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <!-- See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
 
@@ -44,6 +44,7 @@
             OPTIONAL { ?infoResource bibo:pmid ?pmid }
             OPTIONAL { ?infoResource bibo:isbn10 ?isbn10 }
             OPTIONAL { ?infoResource bibo:isbn13 ?isbn13 }
+            OPTIONAL { ?infoResource bibo:oclc ?oclc }
             OPTIONAL { ?infoResource core:placeOfPublication ?locale }
             OPTIONAL
             {
@@ -103,6 +104,7 @@
             ?infoResource bibo:pmid ?pmid .
             ?infoResource bibo:isbn10 ?isbn10 .
             ?infoResource bibo:isbn13 ?isbn13 .
+            ?infoResource bibo:oclc ?oclc .
             ?infoResource core:placeOfPublication ?locale .
             ?infoResource bibo:reproducedIn ?appearsInObj .
             ?appearsInObj rdfs:label ?appearsIn .
@@ -215,6 +217,14 @@
                 ?authorship core:relates ?infoResource .
                 ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
                 ?infoResource bibo:isbn13 ?isbn13 .
+            }
+            UNION
+            {
+                ?subject ?property ?authorship .
+                ?authorship a core:Authorship .
+                ?authorship core:relates ?infoResource .
+                ?infoResource a &lt;http://purl.obolibrary.org/obo/IAO_0000030&gt; .
+                ?infoResource bibo:oclc ?oclc .
             }
             UNION
             {

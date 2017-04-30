@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#-- The Order of each element in this file is very important. Do not make any changes to it unless making
 corresponding changes in the included Templates. -->

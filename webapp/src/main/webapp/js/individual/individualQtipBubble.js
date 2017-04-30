@@ -1,4 +1,4 @@
-/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+/* $This file is distributed under the terms of the license in LICENSE$ */
 
 $(document).ready(function(){
     // This function creates and styles the "qTip" tooltip that displays the bubble text when the user hovers

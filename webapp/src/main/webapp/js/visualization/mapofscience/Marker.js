@@ -1,4 +1,4 @@
-/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+/* $This file is distributed under the terms of the license in LICENSE$ */
 /**
  * Marker Object for that hold external information - data. Please refer to the
  * Google.map.MakerOptions for options' details

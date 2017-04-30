@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#-- 
     Individual profile page template for foaf:Person individuals. This is the default template for foaf persons
@@ -176,7 +176,8 @@ ${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/in
 			  '<script type="text/javascript" src="${urls.base}/js/individual/moreLessController.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/imageUpload/imageUploadUtils.js"></script>',
-              '<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>')}
+              '<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>',
+              '<script type="text/javascript" src="//cdn.plu.mx/widget-popup.js"></script>')}
 
 <script type="text/javascript">
     i18n_confirmDelete = "${i18n().confirm_delete}";

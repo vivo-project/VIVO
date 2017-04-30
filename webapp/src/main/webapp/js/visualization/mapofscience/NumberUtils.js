@@ -1,4 +1,4 @@
-/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+/* $This file is distributed under the terms of the license in LICENSE$ */
 // Adapted from http://www.mredkj.com/javascript/numberFormat.html
 // format number to a better human readable text
 function addCommasToNumber(nStr) {
