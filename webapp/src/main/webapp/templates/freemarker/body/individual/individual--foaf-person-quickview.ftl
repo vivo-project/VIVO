@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#-- The "quick view" individual profile page template for foaf:Person individuals -->
 <!--[if IE 7]>

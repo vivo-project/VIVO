@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 <#-- Custom form for managing labels for individuals - specific to VIVO which handles people as well -->
 <#assign isPersonType = "false"/>
 <#if editConfiguration.pageData.isPersonType?has_content>

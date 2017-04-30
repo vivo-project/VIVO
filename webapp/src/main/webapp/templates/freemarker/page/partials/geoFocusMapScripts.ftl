@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#-- Template for scripts and css relating to the geographic focus maps on the home page. -->
 

@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 
 <#assign webpage = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#URL")!>

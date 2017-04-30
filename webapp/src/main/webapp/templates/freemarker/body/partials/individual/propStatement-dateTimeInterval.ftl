@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#-- Custom object property statement view for http://vivoweb.org/ontology/core#dateTimeInterval. 
     

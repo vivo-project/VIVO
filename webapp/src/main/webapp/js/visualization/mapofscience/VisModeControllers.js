@@ -1,4 +1,4 @@
-/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+/* $This file is distributed under the terms of the license in LICENSE$ */
 var ENTITY_VIS_MODE = "ENTITY";
 var COMPARISON_VIS_MODE = "COMPARISON";
 

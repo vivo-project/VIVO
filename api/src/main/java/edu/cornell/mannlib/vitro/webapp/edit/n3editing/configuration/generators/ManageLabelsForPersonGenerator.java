@@ -1,4 +1,4 @@
-/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+/* $This file is distributed under the terms of the license in LICENSE$ */
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
 import static edu.cornell.mannlib.vitro.webapp.auth.requestedAction.RequestedAction.SOME_LITERAL;
