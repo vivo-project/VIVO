@@ -164,7 +164,7 @@ $(document).ready(function(){
 
     var chord_ticks = svg.append('g')
             .selectAll('g')
-            .data(function(chords) { return chords.groups; })
+            .data(function (chords) { return chords.groups; })
             .enter().append('g')
             .selectAll('g')
             .data(group_ticks)
@@ -176,14 +176,14 @@ $(document).ready(function(){
     svg.append('g')
             .attr('class', 'chord')
             .selectAll('path')
-            .data(function(chords) { return chords; })
+            .data(function (chords) { return chords; })
             .enter().append('path')
             .style('fill', function (d) { return fill(d.target.index); })
-            .attr('d', d3.svg.chord().radius(inner_radius))
+            .attr('d', d3.ribbon().radius(inner_radius))
             .style('opacity', .8);
 
     svg.append("g").selectAll(".arc")
-            .data(function(chords) { return chords.groups; })
+            .data(function (chords) { return chords.groups; })
             .enter().append("svg:text")
             .attr("dy", ".35em")
             .attr("style", function(d) { return d.index == 0 ? "font-size: .75em; font-weight: bold;" : "font-size: .70em;"; } )
