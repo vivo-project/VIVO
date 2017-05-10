@@ -147,18 +147,18 @@
                         ${i18n().map_of_science_capitalized}
                     </a>
                 </div>
-            </div>
-        </#if>
-        
-        <#if isInvestigator>
-            <#assign coInvestigatorVisUrl = individual.coInvestigatorVisUrl()>
-            <#assign coInvestigatorIcon = "${urls.images}/visualization/coauthorship/co_investigator_icon.png">
-            
-            <div id="coinvestigator_link_container" class="collaboratorship-link-container">
-                <a href="${coInvestigatorVisUrl}" title="${i18n().co_investigator_network}" class="btn btn-info" role="button">
-                    <img src="${coInvestigatorIcon}" alt="${i18n().co_investigator_network}" width="25px" height="25px" />
-                    ${i18n().co_investigator_network_capitalized}
-                </a>
+
+                <#if isInvestigator>
+                    <#assign coInvestigatorVisUrl = individual.coInvestigatorVisUrl()>
+                    <#assign coInvestigatorIcon = "${urls.images}/visualization/coauthorship/co_investigator_icon.png">
+
+                    <div id="coinvestigator_link_container" class="collaboratorship-link-container">
+                        <a href="${coInvestigatorVisUrl}" title="${i18n().co_investigator_network}" class="btn btn-info" role="button">
+                            <img src="${coInvestigatorIcon}" alt="${i18n().co_investigator_network}" width="25px" height="25px" />
+                        ${i18n().co_investigator_network_capitalized}
+                        </a>
+                    </div>
+                </#if>
             </div>
         </#if>
 </#if>
