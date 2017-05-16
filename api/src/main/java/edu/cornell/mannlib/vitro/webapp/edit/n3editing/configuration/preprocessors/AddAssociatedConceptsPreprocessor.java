@@ -8,14 +8,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.json.JSON;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONSerializer;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
@@ -30,6 +25,9 @@ import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.RDFS;
 import org.apache.jena.vocabulary.XSD;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.BaseEditSubmissionPreprocessorVTwo;
@@ -38,6 +36,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTw
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.MultiValueEditSubmission;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
+import edu.cornell.mannlib.vitro.webapp.utils.json.JacksonUtils;
 
 public class AddAssociatedConceptsPreprocessor extends
 		BaseEditSubmissionPreprocessorVTwo {
@@ -174,10 +173,10 @@ public class AddAssociatedConceptsPreprocessor extends
 		if(uris.size() > 0) {
 			String jsonString = uris.get(0);
 			if(jsonString != null && !jsonString.isEmpty()) {
-				JSON json = JSONSerializer.toJSON(jsonString);
+				JsonNode json = JacksonUtils.parseJson(jsonString);
 				//This should be an array
 				if(json.isArray()) {
-					JSONArray jsonArray = (JSONArray) JSONSerializer.toJSON(jsonString);
+					ArrayNode jsonArray = (ArrayNode) JacksonUtils.parseJson(jsonString);
 					//Convert to list of strings
 					return convertJsonArrayToList(jsonArray);
 				}
@@ -186,12 +185,12 @@ public class AddAssociatedConceptsPreprocessor extends
 		return uris;
 	}
 
-	private List<String> convertJsonArrayToList(JSONArray jsonArray) {
+	private List<String> convertJsonArrayToList(ArrayNode jsonArray) {
 		List<String> stringList = new ArrayList<String>();
 		int len = jsonArray.size();
 		int i = 0;
 		for(i = 0; i < len; i++) {
-			stringList.add(jsonArray.getString(i));
+			stringList.add(jsonArray.get(i).asText());
 		}
 		return stringList;
 	}

@@ -1,8 +1,4 @@
 /.build/
-/.classpath
-/.project
-/.settings
-/bin/
 /deploy.properties
 /build.properties
 /runtime.properties
@@ -22,3 +18,4 @@ utilities/rdbmigration/.work
 **/.settings
 **/.classpath
 **/.project
+**/bin/
