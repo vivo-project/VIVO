@@ -298,3 +298,17 @@ ul#individual-facultyMemberships li {
     border-right: none;
 }
 
+.jumbotron {
+    background-color: transparent;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 1px 1px 4px #000;
+}
+
+.jumbotron p {
+    color: #dddddd;
+}
+
+.hero {
+    background: #283a4b;
+}

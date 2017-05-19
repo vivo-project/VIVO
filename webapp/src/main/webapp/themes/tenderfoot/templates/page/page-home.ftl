@@ -38,29 +38,26 @@
                         <div class="jumbotron">
                             <h1>${i18n().intro_title}</h1>
                         </div>
-                        <section id="search-home" role="region">
-                            <h3>${i18n().intro_searchvivo} <span class="search-filter-selected">filteredSearch</span></h3>
-
+                        <form id="search-homepage" action="${urls.search}" name="search-home" role="search" method="post" placeholder="${i18n().search_form}" class="form-horizontal">
                             <fieldset>
-                                <legend>${i18n().search_form}</legend>
-                                <form id="search-homepage" action="${urls.search}" name="search-home" role="search" method="post" >
-                                    <div id="search-home-field">
-                                        <input type="text" name="querytext" class="search-homepage" value="" autocapitalize="off" />
-                                        <input type="submit" value="${i18n().search_button}" class="search" />
-                                        <input type="hidden" name="classgroup"  value="" autocapitalize="off" />
+                                <div class="input-group">
+                                    <input type="text" name="querytext" class="form-control" value="" autocapitalize="off" />
+                                    <div class="input-group-btn">
+                                        <select class="form-control" id="classgroup" name="classgroup">
+                                            <option value="">${i18n().all_capitalized}</option>
+                                            <#list vClassGroups as group>
+                                                <#if (group.individualCount > 0)>
+                                                    <option value="${group.uri}">${group.displayName?capitalize}</option>
+                                                </#if>
+                                            </#list>
+                                        </select>
+                                        <button class="btn btn-default" type="submit">
+                                            <span class="icon-search">${i18n().search_button}</span>
+                                        </button>
                                     </div>
-
-                                    <a class="filter-search filter-default" href="#" title="${i18n().intro_filtersearch}">
-                                        <span class="displace">${i18n().intro_filtersearch}</span>
-                                    </a>
-
-                                    <ul id="filter-search-nav">
-                                        <li><a class="active" href="">${i18n().all_capitalized}</a></li>
-                                    <@lh.allClassGroupNames vClassGroups! />
-                                    </ul>
-                                </form>
+                                </div>
                             </fieldset>
-                        </section> <!-- #search-home -->
+                        </form>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -76,13 +73,15 @@
 
         <div class="row faculty-home">
             <div class="container">
-                <div class="col-md-12">
+                <div class="col-md-4">
                     <!-- List of research classes: e.g., articles, books, collections, conference papers -->
                     <@lh.researchClasses />
-                
+                </div>
+                <div class="col-md-4">
                     <!-- List of four randomly selected faculty members -->
                     <@lh.facultyMbrHtml />
-
+                </div>
+                <div class="col-md-4">
                     <!-- List of randomly selected academic departments -->
                     <@lh.academicDeptsHtml />
                 </div>
