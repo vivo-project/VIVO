@@ -10,16 +10,16 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import edu.cornell.mannlib.semservices.bo.Concept;
 import edu.cornell.mannlib.semservices.exceptions.ConceptsNotFoundException;
 import edu.cornell.mannlib.semservices.service.ExternalConceptService;
+import edu.cornell.mannlib.vitro.webapp.utils.json.JacksonUtils;
 
 /**
  * @author jaf30
@@ -118,20 +118,20 @@ public class UMLSService implements ExternalConceptService {
       boolean allFound = false;
 
       try {
-         JSONObject json = (JSONObject) JSONSerializer.toJSON( results );
+         ObjectNode json = (ObjectNode) JacksonUtils.parseJson(results);
          //System.out.println(json.toString());
          if (json.has("Best Match")) {
             bestMatchFound = true;
             //System.out.println("Best Match");
 
-            JSONArray bestMatchArray = json.getJSONArray("Best Match");
+            ArrayNode bestMatchArray = (ArrayNode) json.get("Best Match");
             int len = bestMatchArray.size();
             if (len > 1) {
                logger.debug("Found this many best matches: "+ len);
             }
             int i;
             for (i = 0; i < len; i++) {
-               JSONObject o = bestMatchArray.getJSONObject(i);
+               ObjectNode o = (ObjectNode) bestMatchArray.get(i);
                //System.out.println(o.toString());
                Concept concept = new Concept();
                concept.setDefinedBy(schemeURI);
@@ -150,12 +150,12 @@ public class UMLSService implements ExternalConceptService {
          }
          if (json.has("All")) {
             allFound = true;
-            JSONArray allArray = json.getJSONArray("All");
+            ArrayNode allArray = (ArrayNode) json.get("All");
             int len = allArray.size();
             //System.out.println("size of best match array: "+ len);
             int i;
             for (i = 0; i < len; i++) {
-               JSONObject o = allArray.getJSONObject(i);
+               ObjectNode o = (ObjectNode) allArray.get(i);
                //System.out.println(o.toString());
                Concept concept = new Concept();
                concept.setDefinedBy(schemeURI);
@@ -194,9 +194,9 @@ public class UMLSService implements ExternalConceptService {
    * @param obj JSON Object
    * @param key Key to retrieve
    */
-  protected String getJsonValue(JSONObject obj, String key) {
+  protected String getJsonValue(ObjectNode obj, String key) {
       if (obj.has(key)) {
-         return obj.getString(key);
+         return obj.get(key).asText();
       } else {
          return new String("");
       }
