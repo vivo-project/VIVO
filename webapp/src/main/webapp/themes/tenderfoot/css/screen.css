@@ -19,6 +19,13 @@ VIVO tenderfoot theme: screen styles
 @import url("../bootstrap/css/bootstrap.min.css");
 @import url("../bootstrap/css/bootstrap-theme.min.css");
 @import url("reset.css");
-@import url("individual-tenderfoot.css");
 @import url("tenderfoot.css");
+@import url("edit.css");
+@import url("page-admin.css");
+@import url("page-browse.css");
+@import url("page-home.css");
+@import url("page-imageupload.css");
+@import url("page-individual.css");
+@import url("page-login.css");
+@import url("page-menu.css");
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans");
