@@ -38,22 +38,26 @@
                         <div class="jumbotron">
                             <h1>${i18n().intro_title}</h1>
                         </div>
-                        <form id="search-homepage" action="${urls.search}" name="search-home" role="search" method="post" placeholder="${i18n().search_form}" class="form-horizontal">
+                        <form id="search-homepage" action="${urls.search}" name="search-home" role="search" method="post" class="form-horizontal">
                             <fieldset>
-                                <div class="input-group">
-                                    <input type="text" name="querytext" class="form-control" value="" autocapitalize="off" />
-                                    <div class="input-group-btn">
-                                        <select class="form-control" id="classgroup" name="classgroup">
-                                            <option value="">${i18n().all_capitalized}</option>
-                                            <#list vClassGroups as group>
-                                                <#if (group.individualCount > 0)>
-                                                    <option value="${group.uri}">${group.displayName?capitalize}</option>
-                                                </#if>
-                                            </#list>
-                                        </select>
-                                        <button class="btn btn-default" type="submit">
-                                            <span class="icon-search">${i18n().search_button}</span>
-                                        </button>
+                                <div class="form-group pull-left" style="margin-right: 5px;">
+                                    <select class="form-control" id="classgroup" name="classgroup">
+                                        <option value="">${i18n().all_capitalized}</option>
+                                        <#list vClassGroups as group>
+                                            <#if (group.individualCount > 0)>
+                                                <option value="${group.uri}">${group.displayName?capitalize}</option>
+                                            </#if>
+                                        </#list>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" name="querytext" class="form-control" value="" placeholder="${i18n().search_form}" autocapitalize="off" />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="submit">
+                                                <span class="icon-search">${i18n().search_button}</span>
+                                            </button>
+                                        </span>
                                     </div>
                                 </div>
                             </fieldset>

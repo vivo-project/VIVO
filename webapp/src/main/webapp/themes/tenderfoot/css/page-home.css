@@ -13,6 +13,14 @@
     background: #283a4b;
 }
 
+.hero form input,
+.hero form select {
+    margin-bottom: 0em;
+    margin-top: 0em;
+    margin-right: 0em;
+    margin-left: 0em;
+}
+
 .home-sections {
     border-top: 1px dotted #dbe3e3; /* stroke */
     border-bottom: 1px dotted #dbe3e3; /* stroke */
