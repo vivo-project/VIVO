@@ -1,3 +1,5 @@
+<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
 <div id="nav">
     <div class="container">
         <nav class="navbar navbar-default">

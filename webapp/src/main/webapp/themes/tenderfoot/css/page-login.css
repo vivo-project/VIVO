@@ -122,19 +122,15 @@ p.password-note {
     border: 1px dotted #E2C822;
     background-color: #FFF9D7;
     padding: .5em;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 #welcome-message {
     border: 1px dotted #E2C822;
     background-color: #FFF9D7;
-    padding: .25em;
-    margin-bottom: 8px;
-}
-#welcome-msg-container {
-    margin-bottom: 8px;
-    margin-top: -10px;
-    margin-right:-10px;
-    height:34px;
+    padding: .5em;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 p.external-auth {
     margin: 0 auto;

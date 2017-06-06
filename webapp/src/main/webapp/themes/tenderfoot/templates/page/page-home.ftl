@@ -31,6 +31,7 @@
 			<#include "identity.ftl">
 		</header>
         <#include "menu.ftl">
+        <#include "message.ftl">
         <div class="row hero">
             <div class="theme-showcase">
                 <div class="col-md-12">

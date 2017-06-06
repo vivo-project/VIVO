@@ -13,6 +13,7 @@
 			<#include "identity.ftl">
 		</header>
         <#include "menu.ftl">
+		<#include "message.ftl">
 
 		<div id="wrapper-content" role="main" class="container">        
 			<#if flash?has_content>

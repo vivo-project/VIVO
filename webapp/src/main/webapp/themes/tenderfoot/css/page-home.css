@@ -166,3 +166,10 @@ div#adjImgHeight {
     text-align:center;
     margin-top:100px;
 }
+div.faculty-home {
+    padding-top: 20px;
+}
+.faculty-home,
+.research-count {
+    background-color: #fff;
+}
