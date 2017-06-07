@@ -82,10 +82,9 @@
 			</div>
 			<div class="row person-details">
 				<div class="col-md-12">
-					<#include "individual-adminPanel.ftl">
-                        <!-- Positions -->
+					<!-- Positions -->
 					<#include "individual-positions.ftl">
-                        <!-- Research Areas -->
+					<!-- Research Areas -->
 					<#include "individual-researchAreas.ftl">
 				</div>
 			</div>

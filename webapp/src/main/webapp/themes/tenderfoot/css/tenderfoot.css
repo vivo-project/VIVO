@@ -278,3 +278,24 @@ h5 {
     font-size: .875em;
     color: #064d68;
 }
+label {
+    display: block;
+}
+#developerPanel h1 {
+    line-height: 1.5em;
+}
+#developerPanel .container {
+    width: auto;
+}
+
+table.classHierarchy {
+    min-width: auto;
+    max-width: none;
+    display: block;
+    margin-right: 0px;
+}
+
+
+section#container div {
+    width: auto;
+}

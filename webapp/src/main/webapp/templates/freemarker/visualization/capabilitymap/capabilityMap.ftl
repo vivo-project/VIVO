@@ -112,7 +112,7 @@ ${stylesheets.add(
         <div id="center-container">
             <div id="log"></div>
             <div id="infovis"></div>
-            <div class="progress"><div id="progressbar"></div></div>
+            <div class="capability-progress"><div id="progressbar"></div></div>
         </div>
 
         <div id="right-container">

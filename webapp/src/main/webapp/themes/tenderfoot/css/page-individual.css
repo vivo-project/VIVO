@@ -77,13 +77,19 @@ article.property li h3 {
 }
 
 #individual-intro span.display-title {
-    padding-left: 10px;
+    padding-left: 0px;
     margin-left: 10px;
 }
 
-#individual-intro span.display-title, h1.fn .display-title {
+#individual-intro h1.foaf-person span.display-title {
     font-size: .825em;
     border-left: 1px solid #a6b1b0;
+    padding-left: 10px;
+}
+
+#individual-intro h2 {
+    clear: both;
+    margin-left: 10px;
 }
 
 ul#individual-hasResearchArea li,

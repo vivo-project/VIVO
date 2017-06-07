@@ -12,22 +12,11 @@
 		<header id="branding" role="banner" -->
 			<#include "identity.ftl">
 		</header>
-        <#include "menu.ftl">
+		<#include "developer.ftl">
+		<#include "menu.ftl">
 		<#include "message.ftl">
 
 		<div id="wrapper-content" role="main" class="container">        
-			<#if flash?has_content>
-				<#if flash?starts_with(i18n().menu_welcomestart) >
-					<section  id="welcome-msg-container" role="container">
-						<section  id="welcome-message" role="alert">${flash}</section>
-					</section>
-				<#else>
-					<section id="flash-message" role="alert">
-						${flash}
-					</section>
-				</#if>
-			</#if>
-			
 			<!--[if lte IE 8]>
 			<noscript>
 				<p class="ie-alert">This site uses HTML elements that are not recognized by Internet Explorer 8 and below in the absence of JavaScript. As a result, the site will not be rendered appropriately. To correct this, please either enable JavaScript, upgrade to Internet Explorer 9, or use another browser. Here are the <a href="http://www.enable-javascript.com"  title="java script instructions">instructions for enabling JavaScript in your web browser</a>.</p>

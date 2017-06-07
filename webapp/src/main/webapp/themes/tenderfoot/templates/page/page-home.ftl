@@ -30,6 +30,7 @@
 		<header id="branding" role="banner">
 			<#include "identity.ftl">
 		</header>
+        <#include "developer.ftl">
         <#include "menu.ftl">
         <#include "message.ftl">
         <div class="row hero">
