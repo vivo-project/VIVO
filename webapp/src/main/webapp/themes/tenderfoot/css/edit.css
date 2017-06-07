@@ -231,17 +231,21 @@ a.return:active {
     font-size: 10pt !important;
     line-height: 2em !important;
 }
-.row, .rowvert {
+td.row, .rowvert {
     background-color: #f7f9f9;
     color: #5F6464;
+}
+.row, .rowvert {
     font-size: 10pt;
     font-style: normal;
     text-align: left;
     line-height: 2em;
 }
-.rowalternate {
+td.rowalternate {
     background-color: #fff;
     color: #5F6464;
+}
+.rowalternate {
     font-size: 1em;
     line-height: 2em;
 }
