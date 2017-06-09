@@ -18,6 +18,9 @@ ul#browse-classes .count-classes {
     font-size: 12px;
 }
 /* ALPHA BROWSE------>  */
+nav#alpha-browse-container {
+    width: 739px;
+}
 ul#alpha-browse-individuals {
     background-color: #fff;
 }
@@ -41,4 +44,25 @@ nav#alpha-browse-container {
     background-color: #fff;
     border-left: 1px solid #dde4e3;
     border-bottom: none;
+}
+/* BROWSE INDIVIDUALS------>  */
+#individuals-in-class {
+    width: 739px;
+    border: 1px solid #dde4e3;
+    background-color: #fff;
+}
+#individuals-in-class li.individual {
+    border-bottom: 1px solid #dde4e3;
+}
+#individuals-in-class li img {
+    border: 2px solid #dde4e3;
+}
+#individuals-in-class li h1,
+#property-group-menu ul,
+article.property ul.property-list {
+    color: #5e6363;
+    font-size: 1em;
+}
+.pagination.menupage li a:hover {
+    background: #5e6363;
 }

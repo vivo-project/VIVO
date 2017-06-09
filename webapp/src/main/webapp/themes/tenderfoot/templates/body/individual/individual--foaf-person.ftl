@@ -24,6 +24,14 @@
 <#--add the VIVO-ORCID interface -->
 <#include "individual-orcidInterface.ftl">
 
+<section id="individual-admin">
+	<div class="row">
+		<div class="col-md-12">
+			<#include "individual-adminPanel.ftl">
+		</div>
+	</div>
+</section>
+
 <section id="individual-intro" class="vcard person" role="region"><span itemscope itemtype="http://schema.org/Person">
 	<div class="row row-eq-height">
 		<div class="col-md-2 photo-wrapper">
@@ -43,7 +51,7 @@
 		${individualImage}
 		</div>
 		<div class="col-md-10 person-details">
-			<div class="row title" style="margin-bottom: 10px;">
+			<div class="row title">
 				<div class="col-md-12">
 					<h1 class="vcard foaf-person">
 						<#-- Label -->
@@ -94,12 +102,6 @@
 
 <section itemscope itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
     <section id="individual-info" ${infoClass!} role="region">
-        <div class="row">
-            <div class="col-md-12">
-			<#include "individual-adminPanel.ftl">
-            </div>
-        </div>
-
         <!-- Overview -->
         <!-- #include "individual-overview.ftl" -->
 

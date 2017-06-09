@@ -50,7 +50,7 @@ article.property li h3 {
     color: #337ab7;
     font-weight: 400;
     transition: all 0.5s;
-    padding: .2em .6em .3em;
+    padding: .1em .4em .1em;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
@@ -71,9 +71,11 @@ article.property li h3 {
     float: right;
     background-color: #fff;
     margin-right: 10px;
-    padding-top: 4px;
-    padding-left: 4px;
-    padding-right: 4px;
+    padding-top: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-bottom: 1px;
+    line-height: 1em;
 }
 
 #individual-intro span.display-title {
@@ -98,4 +100,12 @@ ul#individual-facultyMemberships li {
     padding-right: 10px;
     margin-right: 10px;
     border-right: none;
+}
+#admin {
+    background-color: #f3f3f0;
+    margin-top: 15px;
+}
+#admin h3 {
+    background-color: #398AAC;
+    color: #fff;
 }
