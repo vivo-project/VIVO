@@ -246,17 +246,17 @@ ul.visible {
     position:relative;
     top:-2px;
 }
-.progress, .progress div {
+.capability-progress, .capability-progress div {
     height:10px;
     margin-bottom:-10px;
 }
-.progress {
+.capability-progress {
     position:absolute;
     top:0px;
     left:0px;
     width:100%;
 }
-.progress div {
+.capability-progress div {
     background-color:#9999FF;
     width:0%;
     white-space:nowrap;
@@ -268,7 +268,7 @@ hr {
     background:#efefef;
 }
 .tabs {
-    width: auto;
+    width: 300px;
     margin-bottom: 15px;
     border: 0;
     z-index: 10;

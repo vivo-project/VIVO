@@ -1,0 +1,24 @@
+#menupage-intro {
+    width: 920px;
+    background: #fff;
+}
+#menupage-intro h2 {
+    font-size: 1.375em;
+    color: #064d68;
+    font-weight: normal;
+}
+#menupage-intro.people h2 {
+    float: left;
+}
+#menupage-content.people {
+    border-right: 1px solid #e8ece9;
+}
+#menupage-content {
+    width: 900px;
+}
+#menupage-content h3 {
+    font-size: 1.5em;
+    color: #002b44;
+    font-weight: normal;
+    border-bottom: 1px solid #f3f3f4;
+}
