@@ -35,6 +35,8 @@ body {
 
 #wrapper-content {
     background: none repeat scroll 0 0 #fff;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 #property-tabs {

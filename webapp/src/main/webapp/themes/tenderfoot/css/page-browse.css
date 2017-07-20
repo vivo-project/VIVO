@@ -66,3 +66,14 @@ article.property ul.property-list {
 .pagination.menupage li a:hover {
     background: #5e6363;
 }
+.pagination>li {
+    display: inline-block;
+    padding-right: 2px;
+}
+.pagination>li>a {
+    float: none;
+}
+
+.pagination>li.selectedNavPage {
+    padding-right: 7px;
+}
