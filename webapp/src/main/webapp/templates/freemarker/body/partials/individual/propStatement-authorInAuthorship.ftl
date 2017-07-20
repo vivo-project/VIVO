@@ -139,12 +139,13 @@
                 <#assign plumIdParam = "oclc=${statement.oclc}">
             </#if>
             <#if plumIdParam??>
-                <div class="plum-print-wrapper" style="display: inline-block">
+                <div class="plum-print-wrapper" style="display: inline-block; vertical-align: top">
                     <a class="plumx-plum-print-popup"
                        href="https://plu.mx/plum/a/?${plumIdParam}"
                        data-popup="hidden"
                        data-hide-when-empty="${plumPrintHideEmpty}"
                        data-site="plum"
+                       data-size="tiny"
                        data-badge="true"></a>
                 </div>
             </#if>

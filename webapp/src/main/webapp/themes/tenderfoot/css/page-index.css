@@ -1,0 +1,13 @@
+/* <------ INDEX PAGE*/
+.siteMap h2 {
+    padding-bottom: 0;
+}
+.class-group {
+    margin-right:25px;
+}
+#isotope-container {
+    overflow:visible !important;
+}
+#isotope-container li {
+    width:290px;
+}

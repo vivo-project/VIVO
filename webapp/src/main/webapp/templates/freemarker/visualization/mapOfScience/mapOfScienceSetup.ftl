@@ -113,7 +113,7 @@ var i18nStrings = {
     ${scripts.add('<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>')}
 </#if>
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.blockUI.min.js"></script>',
+			  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.blockUI.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/datatable/1.10.12/jquery.dataTables.min.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/dataTables.helper.js"></script>', 
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/visualization-helper-functions.js"></script>',
@@ -140,7 +140,7 @@ ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/ComparisonDataTableWidget.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/VisModeControllers.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/VisCommonControl.js"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/InitializeMap.js"></script>')}              
+			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/InitializeMap.js"></script>')}
 
 <#-- CSS files -->
 

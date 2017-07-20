@@ -1,0 +1,32 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+/****************************************
+****************************************
+  __  __   __  __  __    ___   
+ /\ \/\ \\/\ \/\ \/\ \  / __`\ 
+ \ \ \_/ |\ \ \ \ \_/ |/\ \L\ \
+  \ \___/  \ \_\ \___/ \ \____/
+   \/__/    \/_/\/__/   \/___/
+ 
+               
+VIVO tenderfoot theme: screen styles
+
+*****************************************
+*****************************************/
+
+@charset "UTF-8";
+
+@import url("../bootstrap/css/bootstrap.min.css");
+@import url("../bootstrap/css/bootstrap-theme.min.css");
+@import url("reset.css");
+@import url("tenderfoot.css");
+@import url("edit.css");
+@import url("page-admin.css");
+@import url("page-browse.css");
+@import url("page-home.css");
+@import url("page-imageupload.css");
+@import url("page-index.css");
+@import url("page-individual.css");
+@import url("page-login.css");
+@import url("page-menu.css");
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans");

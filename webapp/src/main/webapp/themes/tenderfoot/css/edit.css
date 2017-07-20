@@ -1,0 +1,369 @@
+/* ------------------------------------------------->  */
+/* EDITING STYLES ---------------------------------->  */
+/* ------------------------------------------------->  */
+input[type="text"],
+select,
+input[type="password"] {
+    border: 0;
+    font-size: 14px;
+    padding: .5em;
+    background: #fff;
+    border: 1px solid #e0dfdf;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    margin-bottom: .8em;
+}
+input.block {
+    margin-bottom: 20px;
+}
+label {
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+label.inline {
+    display: inline;
+    font-weight: normal;
+    font-size: .9em;
+}
+.verbose-toggle,
+.verbose-toggle:visited,
+#showAddFormButton,
+#showAddFormButton:visited,
+input.submit,
+input.submit:visited,
+    /* the id selectors are used temporarily due to the custom jsp tags (<v:input>)
+    for editing forms which require an id and do not allow a class. This will be
+    removed once we refactor the editing forms to Freemarker */
+input#submit,
+input#submit:visited,
+input.form-button,
+input.form-button:visited {
+    background: #222 url(../images/alert-overlay.png) repeat-x;
+    display: inline-block;
+    padding: 5px 18px 7px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    position: relative;
+    border: 0;
+    margin: 0;
+    /* background-color: #749a02; */
+    background-color: #3446A0;
+    color: #fff;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+    margin-right: .6em;
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+#verbose-mode .small {
+    font-size: 12px;
+    color: #fff;
+}
+#verbose-mode b {
+    color: #595B5B;
+}
+#verbose-mode .verbose-off{
+    background: #706a66;
+}
+input.delete,
+input.delete:visited,
+input#delete,
+input#delete:visited {
+    background: #222 url(../images/alert-overlay.png) repeat-x;
+    display: inline-block;
+    padding: 5px 18px 7px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    border: 0;
+    margin: 0;
+    /* background-color: #398aac; */
+    background-color: #0c0cb5;
+    color: #fff;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+    margin-right: .6em;
+}
+.verbose-toggle:hover,
+#showAddFormButton:hover,
+input.submit:hover,
+input#submit:hover,
+input.form-button:hover {
+    color: #fff;
+    background-color: #3E8BAA;
+}
+input.delete:hover,
+input#delete:hover {
+    color: #fff;
+    background-color: #93c3d4;
+}
+.verbose-toggle,
+.verbose-toggle:active,
+#showAddFormButton:active,
+input.delete:active,
+input#delete:active,
+input.submit:active,
+input#submit:active,
+input.form-button:active,
+.button:active,
+input.add-account:active,
+section.accounts input.delete:active {
+    top: 1px;
+}
+form textarea {
+    border: 1px solid #e0dfdf;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+.maxWidth {
+    margin-top: 20px;
+    width: 100%;
+}
+#itemList a.remove:link,
+#itemList a.remove:visited,
+#showAddForm a.cancel:link,
+form a:link.cancel,
+form a:visited.cancel,
+a.return:link,
+a.return:visited {
+    text-decoration: underline;
+    color: #f70;
+    border-color: none;
+    padding-left: 3px;
+}
+#itemList a.remove:hover,
+#itemList a.remove:active,
+#showAddForm a.cancel:hover,
+#showAddForm a.cancel:active,
+form a:hover.cancel,
+form a:active.cancel {
+    text-decoration: none;
+    color: #f70;
+    background: none;
+}
+.validationError {
+    font-weight: normal;
+    color: #cc0000;
+    margin-bottom: .3em;
+}
+p.submit {
+    margin-top: 0;
+    padding-top: 0;
+}
+.editingForm table {
+    border-color: #dfe6e6;
+}
+.editingForm td {
+    padding: 3px;
+}
+.editingForm .entryFormHead {
+    background-color: #f1f2ee;
+    border-color: #dfe6e6;
+}
+.form-item {
+    margin-top:.3em;
+    background-color: #fff;
+    border-color: #e0dfdf;
+    font-size: .8em;
+    border-width: 1px;
+    color: #595B5B;
+    padding: .3em;
+}
+a.return:hover,
+a.return:active {
+    text-decoration: none;
+    color: #f70;
+    background: none;
+}
+.database_header {
+    background-color: #f1f2ee;
+    color: #2485ae;
+    font-size: 1em;
+}
+.database_upperleftcorner {
+    color: #5F6464;
+    font-size: 1em;
+}
+.database_upperleftcenter {
+    background-color: #B0C4DE;
+    color: #5F6464;
+    font-size: 1em;
+}
+.rownumheader,
+.rownum {
+    background-color: #F1F2EE;
+    color: #5F6464;
+    font-size: 1em;
+}
+.headercenter {
+    color:  #5F6464;
+    font-size: 10pt;
+    font-style: normal;
+    text-align: center;
+}
+.postheader {
+    background-color: #E6E6FA;
+    color: #777;
+    font-size: 1em;
+}
+.database_postheader {
+    background-color: #f7f9f9;
+    font-size: 1em;
+}
+.postheadercenter,
+.postheaderright {
+    font-size: 1em;
+}
+.verticalfieldlabel {
+    color: #5E6363; /*#5F6464;*/
+    font-style: normal !important;
+    font-size: 10pt !important;
+    line-height: 2em !important;
+}
+td.row, .rowvert {
+    background-color: #f7f9f9;
+    color: #5F6464;
+}
+.row, .rowvert {
+    font-size: 10pt;
+    font-style: normal;
+    text-align: left;
+    line-height: 2em;
+}
+td.rowalternate {
+    background-color: #fff;
+    color: #5F6464;
+}
+.rowalternate {
+    font-size: 1em;
+    line-height: 2em;
+}
+.rowbold {
+    background-color: #FFFAFA;
+    color: #5F6464;
+    font-size: 10pt; /*1em;*/
+    line-height: 2em;
+}
+.form-background {
+    background-color: #fff;
+}
+.formsEdit p {
+    /*padding-top: 1em;*/
+    margin-bottom: 1em;
+    padding-bottom: 0;
+    margin-top: 0;
+}
+.formsEdit p.validationError {
+    margin-bottom: 1.8em;
+    margin-top: 0;
+    padding-top: 0;
+    font-size: .8em;
+}
+form.deleteForm {
+    margin-top: 2em;
+    padding-top: 1em;
+    border-top: 1px dotted #e3e9e9;
+}
+form.editForm span {
+    color: #c00;
+    font-weight: normal;
+    font-size: small;
+}
+form h3.delete-entry {
+    padding-right: .8em;
+    display: inline;
+}
+form h2 {
+    margin-bottom: 0;
+    padding-bottom: 10px;
+}
+form select {
+    border: 0;
+    font-size: 14px;
+    padding: .5em;
+    background: #fff;
+    border: 1px solid #e0dfdf;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    margin-bottom: .8em;
+    margin-top: .7em;
+    margin-right: .5em;
+}
+.notice {
+    margin-top: 1em;
+    border: 1px dotted #FFD324;
+}
+a.ingestMenu:link,
+a.ingestMenu:visited,
+a.account-menu:link,
+a.account-menu:visited {
+    text-decoration: none;
+    color: #2485AE;
+}
+a.ingestMenu:hover,
+a.ingestMenu:active,
+a.account-menu:hover,
+a.account-menu:active,
+ul#alpha-browse-individuals a,
+ul#browse-classes a,
+ul#find-filters a,
+ul#vgraph-classes a {
+    text-decoration: none;
+    color: #5E6363;
+}
+ul.ingestMenu {
+    margin-bottom: 1.5em;
+}
+.toBeDeleted {
+    margin-bottom: 0;
+}
+/* BACK-END FORMS -------------->  */
+.display-inline {
+    display: inline-block;
+}
+.theme-dir,
+#noContentMsg {
+    clear: both;
+}
+tr.editformcell td input[type="text"] {
+    width: 30% !important;
+}
+tr.editformcell td input.fullWidthInput {
+    width: 70% !important;
+    margin-top: 0.7em !important;
+}
+tr.editformcell td input.shortInput {
+    width: 20% !important;
+    margin-top: 0.7em !important;
+}
+tr.editformcell td textarea.matchingInput {
+    width: 95%;
+    height:10ex;
+    margin-top:0.7em;
+    font-family: "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica, sans-serif;
+    font-size:0.95em;
+}
+hr.formDivider {
+    background-color: #3196C4;
+    border: 0 none;
+    height: 1px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    opacity: 0.3;
+}
+.editingForm table {
+    width: 100%;
+    border: none;
+}
