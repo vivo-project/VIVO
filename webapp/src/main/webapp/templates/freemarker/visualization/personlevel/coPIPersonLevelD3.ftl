@@ -119,10 +119,9 @@ $(document).ready(function(){
         uris.push("${collaborator.collaboratorURI}");
     </#list>
 
-    var chord = d3.layout.chord()
-            .padding(0.05)
-            .sortSubgroups(d3.descending)
-            .matrix(matrix);
+    var chord = d3.chord()
+            .padAngle(0.05)
+            .sortSubgroups(d3.descending);
 
     var width  = 725;
     var height = 725;
@@ -130,17 +129,25 @@ $(document).ready(function(){
     var inner_radius = Math.min(width, height) * 0.37;
     var outer_radius = Math.min(width, height) * 0.39;
 
-    var fill = d3.scale.category10();
+    var fill = d3.scaleOrdinal()
+            .domain(d3.range(20))
+            .range(["#000000", "#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78",
+                "#2ca02c", "#98df8a", "#d62728", "#ff9896", "#9467bd",
+                "#c5b0d5", "#8c564b", "#c49c94", "#e377c2", "#f7b6d2",
+                "#7f7f7f", "#c7c7c7", "#bcbd22", "#dbdb8d", "#17becf"
+            ]);
+    // #9edae5
 
     var svg = d3.select('#chord').append('svg')
             .attr('width', width+padding)
             .attr('height', height+padding)
-            .append('g').attr('transform', 'translate(' + (width+padding) / 2 + ',' + (height+padding) / 2 +')');
+            .append('g').attr('transform', 'translate(' + (width+padding) / 2 + ',' + (height+padding) / 2 +')')
+            .datum(chord(matrix));
 
-    svg.append('g').selectAll('path').data(chord.groups).enter()
-            .append('path').style('fill', function(val) { return val.index == 0 ? "#000000" : fill(val.index); })
-            .style('stroke', function(val) { return val.index == 0 ? "#000000" : fill(val.index); })
-            .attr('d', d3.svg.arc().innerRadius(inner_radius).outerRadius(outer_radius))
+    svg.append('g').selectAll('path').data(function(chords) { return chords.groups; }).enter()
+            .append('path').style('fill', function(val) { return fill(val.index); })
+            .style('stroke', function(val) { return fill(val.index); })
+            .attr('d', d3.arc().innerRadius(inner_radius).outerRadius(outer_radius))
             .on('click', chord_click())
             .on("mouseover", chord_hover(.05))
             .on("mouseout", chord_hover(.8));
@@ -157,7 +164,7 @@ $(document).ready(function(){
 
     var chord_ticks = svg.append('g')
             .selectAll('g')
-            .data(chord.groups)
+            .data(function (chords) { return chords.groups; })
             .enter().append('g')
             .selectAll('g')
             .data(group_ticks)
@@ -169,14 +176,14 @@ $(document).ready(function(){
     svg.append('g')
             .attr('class', 'chord')
             .selectAll('path')
-            .data(chord.chords)
+            .data(function (chords) { return chords; })
             .enter().append('path')
             .style('fill', function (d) { return fill(d.target.index); })
-            .attr('d', d3.svg.chord().radius(inner_radius))
+            .attr('d', d3.ribbon().radius(inner_radius))
             .style('opacity', .8);
 
     svg.append("g").selectAll(".arc")
-            .data(chord.groups)
+            .data(function (chords) { return chords.groups; })
             .enter().append("svg:text")
             .attr("dy", ".35em")
             .attr("style", function(d) { return d.index == 0 ? "font-size: .75em; font-weight: bold;" : "font-size: .70em;"; } )

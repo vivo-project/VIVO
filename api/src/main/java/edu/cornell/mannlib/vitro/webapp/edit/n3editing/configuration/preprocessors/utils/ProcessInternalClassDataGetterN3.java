@@ -2,16 +2,14 @@
 
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.utils;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+
+import javax.servlet.ServletContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
@@ -23,13 +21,13 @@ import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.ResourceFactory;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import edu.cornell.mannlib.vitro.webapp.dao.DisplayVocabulary;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
-import javax.servlet.ServletContext;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
 //Returns the appropriate n3 for selection of classes from within class group
 public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClassesDataGetterN3 {
 	private static String classType = "java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.InternalClassesDataGetter";
@@ -167,11 +165,11 @@ public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClas
    }
 
    
-   public JSONObject getExistingValuesJSON(String dataGetterURI, OntModel queryModel, ServletContext context) {
-	   JSONObject jObject = new JSONObject();
-	   jObject.element("dataGetterClass", classType);
+   public ObjectNode getExistingValuesJSON(String dataGetterURI, OntModel queryModel, ServletContext context) {
+	   ObjectNode jObject = new ObjectMapper().createObjectNode();
+	   jObject.put("dataGetterClass", classType);
 	   //Update to include class type as variable
-	   jObject.element(classTypeVarBase, classType);
+	   jObject.put(classTypeVarBase, classType);
 	   //Get selected class group, if internal class, and classes selected from class group
 	   getExistingClassGroupAndInternalClass(dataGetterURI, jObject, queryModel);
 	   //Get all classes in the class group
@@ -179,7 +177,7 @@ public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClas
 	   return jObject;
    }
    
-   private void getExistingClassGroupAndInternalClass(String dataGetterURI, JSONObject jObject, OntModel queryModel) {
+   private void getExistingClassGroupAndInternalClass(String dataGetterURI, ObjectNode jObject, OntModel queryModel) {
 	   String querystr = getExistingValuesInternalClass(dataGetterURI);
 	   QueryExecution qe = null;
 	   Literal internalClassLiteral = null;
@@ -187,7 +185,7 @@ public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClas
            Query query = QueryFactory.create(querystr);
            qe = QueryExecutionFactory.create(query, queryModel);
            ResultSet results = qe.execSelect();
-           JSONArray individualsForClasses = new JSONArray();
+           ArrayNode individualsForClasses = new ObjectMapper().createArrayNode();
            String classGroupURI = null;
            while( results.hasNext()){
         	   QuerySolution qs = results.nextSolution();
@@ -208,14 +206,14 @@ public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClas
            }
            
            
-          jObject.element("classGroup", classGroupURI);
+          jObject.put("classGroup", classGroupURI);
           //this is a json array
-          jObject.element(individualClassVarNameBase, individualsForClasses);
+          jObject.set(individualClassVarNameBase, individualsForClasses);
           //Internal class - if null then add false otherwise use the value
           if(internalClassLiteral != null) {
-        	  jObject.element(internalClassVarNameBase, internalClassLiteral.getString());
+        	  jObject.put(internalClassVarNameBase, internalClassLiteral.getString());
           } else {
-        	  jObject.element(internalClassVarNameBase, "false");
+        	  jObject.put(internalClassVarNameBase, "false");
           }
        } catch(Exception ex) {
     	   log.error("Exception occurred in retrieving existing values with query " + querystr, ex);

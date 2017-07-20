@@ -2,6 +2,8 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.coauthorship;
 
+import java.io.OutputStreamWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,45 +18,77 @@ import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.Collabo
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CollaboratorComparator;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Collaboration;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Collaborator;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 public class CoAuthorshipGraphMLWriter {
 	
 	private StringBuilder coAuthorshipGraphMLContent;
 
-	private final String GRAPHML_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" 
-			+ "	<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\"\n"
-			+ "  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
-	        + "  xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns\n"
-	        + "  http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">\n\n";
-
-	private final String GRAPHML_FOOTER = "</graphml>";
+	private final String GRAPHML_NS = "http://graphml.graphdrawing.org/xmlns";
 	
 	public CoAuthorshipGraphMLWriter(CollaborationData visVOContainer) {
 		coAuthorshipGraphMLContent = createCoAuthorshipGraphMLContent(visVOContainer);
 	}
 
-	private StringBuilder createCoAuthorshipGraphMLContent(
-			CollaborationData coAuthorshipData) {
-		
+	private StringBuilder createCoAuthorshipGraphMLContent(CollaborationData coAuthorshipData) {
+
 		StringBuilder graphMLContent = new StringBuilder();
-		
-		graphMLContent.append(GRAPHML_HEADER);
-		
-		/*
-		 * We are side-effecting "graphMLContent" object in this method since creating 
-		 * another String object to hold key definition data will be redundant & will
-		 * not serve the purpose.
-		 * */
-		generateKeyDefinitionContent(coAuthorshipData, graphMLContent);
-		
-		/*
-		 * Used to generate graph content. It will contain both the nodes & edge information.
-		 * We are side-effecting "graphMLContent".
-		 * */
-		generateGraphContent(coAuthorshipData, graphMLContent);
-		
-		graphMLContent.append(GRAPHML_FOOTER);
-		
+
+		try {
+			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+			docFactory.setNamespaceAware(true);
+			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+			// root elements
+			Document doc = docBuilder.newDocument();
+			doc.setXmlVersion("1.0");
+			Element rootElement = doc.createElementNS(GRAPHML_NS, "graphml");
+			doc.appendChild(rootElement);
+
+			/*
+			 * We are side-effecting "graphMLContent" object in this method since creating
+			 * another String object to hold key definition data will be redundant & will
+			 * not serve the purpose.
+			 * */
+			generateKeyDefinitionContent(coAuthorshipData, rootElement);
+
+			/*
+			 * Used to generate graph content. It will contain both the nodes & edge information.
+			 * We are side-effecting "graphMLContent".
+			 * */
+			generateGraphContent(coAuthorshipData, rootElement);
+
+			DOMSource source = new DOMSource(doc);
+			TransformerFactory transFactory = TransformerFactory.newInstance();
+			Transformer transformer = transFactory.newTransformer();
+			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+			StringWriter writer = new StringWriter();
+			StreamResult result = new StreamResult(writer);
+			transformer.transform(source, result);
+
+			graphMLContent.append(writer.toString());
+		} catch (TransformerConfigurationException e) {
+			throw new IllegalStateException("XML error generating GraphML", e);
+		} catch (TransformerException e) {
+			throw new IllegalStateException("XML error generating GraphML", e);
+		} catch (ParserConfigurationException e) {
+			throw new IllegalStateException("XML error generating GraphML", e);
+		}
+
 		return graphMLContent;
 	}
 	
@@ -62,119 +96,110 @@ public class CoAuthorshipGraphMLWriter {
 		return coAuthorshipGraphMLContent;
 	}
 
-	private void generateGraphContent(CollaborationData coAuthorshipData,
-			StringBuilder graphMLContent) {
+	private void generateGraphContent(CollaborationData coAuthorshipData, Element rootElement) {
+		Document doc = rootElement.getOwnerDocument();
 
-		graphMLContent.append("\n<graph edgedefault=\"undirected\">\n");
-		
-		if (coAuthorshipData.getCollaborators() != null 
-					&& coAuthorshipData.getCollaborators().size() > 0) {
-			generateNodeSectionContent(coAuthorshipData, graphMLContent);
+		Element graph = doc.createElementNS(GRAPHML_NS, "graph");
+		graph.setAttribute("edgedefault", "undirected");
+		rootElement.appendChild(graph);
+
+		if (coAuthorshipData.getCollaborators() != null && coAuthorshipData.getCollaborators().size() > 0) {
+			generateNodeSectionContent(coAuthorshipData, graph);
 		}
 		
-		if (coAuthorshipData.getCollaborations() != null 
-					&& coAuthorshipData.getCollaborations().size() > 0) {
-			generateEdgeSectionContent(coAuthorshipData, graphMLContent);
+		if (coAuthorshipData.getCollaborations() != null && coAuthorshipData.getCollaborations().size() > 0) {
+			generateEdgeSectionContent(coAuthorshipData, graph);
 		}
-		
-		graphMLContent.append("</graph>\n");
 	}
 
-	private void generateEdgeSectionContent(CollaborationData coAuthorshipData,
-			StringBuilder graphMLContent) {
-		
-		graphMLContent.append("<!-- edges -->\n");
-		
-		Set<Collaboration> edges = coAuthorshipData.getCollaborations();
-		
+	private void generateEdgeSectionContent(CollaborationData coAuthorshipData, Element graphElement) {
+		Document doc = graphElement.getOwnerDocument();
+
+		graphElement.appendChild(doc.createComment("edges"));
+
+		Set<Collaboration>  edges = coAuthorshipData.getCollaborations();
 		List<Collaboration> orderedEdges = new ArrayList<Collaboration>(edges);
-		
 		Collections.sort(orderedEdges, new CollaborationComparator());
 
 		for (Collaboration currentEdge : orderedEdges) {
-			
 			/*
 			 * This method actually creates the XML code for a single Collaboration. 
 			 * "graphMLContent" is being side-effected. 
 			 * */
-			getEdgeContent(graphMLContent, currentEdge);
+			getEdgeContent(graphElement, currentEdge);
 		}
 	}
 
-	private void getEdgeContent(StringBuilder graphMLContent, Collaboration currentEdge) {
-		
-		graphMLContent.append("<edge " 
-									+ "id=\"" + currentEdge.getCollaborationID() + "\" " 
-									+ "source=\"" + currentEdge.getSourceCollaborator()
-																	.getCollaboratorID() + "\" "
-									+ "target=\"" + currentEdge.getTargetCollaborator()
-																	.getCollaboratorID() + "\" "
-									+ ">\n");
-		
-		graphMLContent.append("\t<data key=\"collaborator1\">" 
-								+ currentEdge.getSourceCollaborator().getCollaboratorName() 
-								+ "</data>\n");
-		
-		graphMLContent.append("\t<data key=\"collaborator2\">" 
-								+ currentEdge.getTargetCollaborator().getCollaboratorName() 
-								+ "</data>\n");
-		
-		graphMLContent.append("\t<data key=\"number_of_coauthored_works\">" 
-								+ currentEdge.getNumOfCollaborations()
-							+ "</data>\n");
-		
+	private void getEdgeContent(Element graphElement, Collaboration currentEdge) {
+		Document doc = graphElement.getOwnerDocument();
+
+		Element edge = doc.createElementNS(GRAPHML_NS, "edge");
+		edge.setAttribute("id", String.valueOf(currentEdge.getCollaborationID()));
+		edge.setAttribute("source", String.valueOf(currentEdge.getSourceCollaborator().getCollaboratorID()));
+		edge.setAttribute("target", String.valueOf(currentEdge.getTargetCollaborator().getCollaboratorID()));
+		graphElement.appendChild(edge);
+
+		Element collaborator1 = doc.createElementNS(GRAPHML_NS, "data");
+		collaborator1.setAttribute("key", "collaborator1");
+		collaborator1.setTextContent(currentEdge.getSourceCollaborator().getCollaboratorName());
+		edge.appendChild(collaborator1);
+
+		Element collaborator2 = doc.createElementNS(GRAPHML_NS, "data");
+		collaborator2.setAttribute("key", "collaborator2");
+		collaborator2.setTextContent(currentEdge.getTargetCollaborator().getCollaboratorName());
+		edge.appendChild(collaborator2);
+
+		Element works = doc.createElementNS(GRAPHML_NS, "data");
+		works.setAttribute("key", "number_of_coauthored_works");
+		works.setTextContent(String.valueOf(currentEdge.getNumOfCollaborations()));
+		edge.appendChild(works);
+
 		if (currentEdge.getEarliestCollaborationYearCount() != null) {
-			
 			/*
 			 * There is no clean way of getting the map contents in java even though
 			 * we are sure to have only one entry on the map. So using the for loop.
 			 * */
-			for (Map.Entry<String, Integer> publicationInfo
-						: currentEdge.getEarliestCollaborationYearCount().entrySet()) {
-				
-				graphMLContent.append("\t<data key=\"earliest_collaboration\">" 
-											+ publicationInfo.getKey() 
-										+ "</data>\n");
+			for (Map.Entry<String, Integer> publicationInfo : currentEdge.getEarliestCollaborationYearCount().entrySet()) {
 
-				graphMLContent.append("\t<data key=\"num_earliest_collaboration\">" 
-											+ publicationInfo.getValue() 
-										+ "</data>\n");
+				Element earliest = doc.createElementNS(GRAPHML_NS, "data");
+				earliest.setAttribute("key", "earliest_collaboration");
+				earliest.setTextContent(publicationInfo.getKey());
+				edge.appendChild(earliest);
+
+				Element earliestCount = doc.createElementNS(GRAPHML_NS, "data");
+				earliestCount.setAttribute("key", "num_earliest_collaboration");
+				earliestCount.setTextContent(publicationInfo.getValue().toString());
+				edge.appendChild(earliestCount);
 			}
-			
 		}
 		
 		if (currentEdge.getLatestCollaborationYearCount() != null) {
-			
-			for (Map.Entry<String, Integer> publicationInfo 
-						: currentEdge.getLatestCollaborationYearCount().entrySet()) {
-				
-				graphMLContent.append("\t<data key=\"latest_collaboration\">" 
-											+ publicationInfo.getKey() 
-										+ "</data>\n");
+			for (Map.Entry<String, Integer> publicationInfo : currentEdge.getLatestCollaborationYearCount().entrySet()) {
+				Element latest = doc.createElementNS(GRAPHML_NS, "data");
+				latest.setAttribute("key", "latest_collaboration");
+				latest.setTextContent(publicationInfo.getKey());
+				edge.appendChild(latest);
 
-				graphMLContent.append("\t<data key=\"num_latest_collaboration\">" 
-											+ publicationInfo.getValue() 
-										+ "</data>\n");
+				Element latestCount = doc.createElementNS(GRAPHML_NS, "data");
+				latestCount.setAttribute("key", "num_latest_collaboration");
+				latestCount.setTextContent(publicationInfo.getValue().toString());
+				edge.appendChild(latestCount);
 			}
-			
 		}
 		
 		if (currentEdge.getUnknownCollaborationYearCount() != null) {
-			
-				graphMLContent.append("\t<data key=\"num_unknown_collaboration\">" 
-											+ currentEdge.getUnknownCollaborationYearCount() 
-										+ "</data>\n");
-				
+			Element unknown = doc.createElementNS(GRAPHML_NS, "data");
+			unknown.setAttribute("key", "num_unknown_collaboration");
+			unknown.setTextContent(String.valueOf(currentEdge.getUnknownCollaborationYearCount()));
+			edge.appendChild(unknown);
 		}
-		
-		graphMLContent.append("</edge>\n");
 	}
 
-	private void generateNodeSectionContent(CollaborationData coAuthorshipData,
-			StringBuilder graphMLContent) {
-		
-		graphMLContent.append("<!-- nodes -->\n");
-		
+	private void generateNodeSectionContent(CollaborationData coAuthorshipData, Element graphElement) {
+		Document doc = graphElement.getOwnerDocument();
+
+		graphElement.appendChild(doc.createComment("nodes"));
+
 		Collaborator egoNode = coAuthorshipData.getEgoCollaborator();
 		Set<Collaborator> authorNodes = coAuthorshipData.getCollaborators();
 		
@@ -184,142 +209,130 @@ public class CoAuthorshipGraphMLWriter {
 		 * of the co-author vis. Ego should always come first.
 		 * 
 		 * */
-		getNodeContent(graphMLContent, egoNode);
+		getNodeContent(graphElement, egoNode);
 		
 		List<Collaborator> orderedAuthorNodes = new ArrayList<Collaborator>(authorNodes);
 		orderedAuthorNodes.remove(egoNode);
 		
 		Collections.sort(orderedAuthorNodes, new CollaboratorComparator());
 		
-		
 		for (Collaborator currNode : orderedAuthorNodes) {
-			
 			/*
 			 * We have already printed the Ego Collaborator info.
 			 * */
 			if (currNode != egoNode) {
-				
-				getNodeContent(graphMLContent, currNode);
-				
+				getNodeContent(graphElement, currNode);
 			}
-			
 		}
 		
 	}
 
-	private void getNodeContent(StringBuilder graphMLContent, Collaborator node) {
+	private void getNodeContent(Element graphElement, Collaborator collaborator) {
+		Document doc = graphElement.getOwnerDocument();
 
 		ParamMap individualProfileURLParams = 
-					new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
-								 node.getCollaboratorURI());
+					new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY, collaborator.getCollaboratorURI());
 
-		String profileURL = UrlBuilder.getUrl(VisualizationFrameworkConstants.INDIVIDUAL_URL_PREFIX,
-			individualProfileURLParams);
-		
-		graphMLContent.append("<node id=\"" + node.getCollaboratorID() + "\">\n");
-		graphMLContent.append("\t<data key=\"url\">" + node.getCollaboratorURI() + "</data>\n");
-		graphMLContent.append("\t<data key=\"label\">" + node.getCollaboratorName() + "</data>\n");
-		
+		String profileURL = UrlBuilder.getUrl(VisualizationFrameworkConstants.INDIVIDUAL_URL_PREFIX, individualProfileURLParams);
+
+		Element node = doc.createElementNS(GRAPHML_NS, "node");
+		node.setAttribute("id", String.valueOf(collaborator.getCollaboratorID()));
+		graphElement.appendChild(node);
+
+		Element url = doc.createElementNS(GRAPHML_NS, "data");
+		url.setAttribute("key", "url");
+		url.setTextContent(collaborator.getCollaboratorURI());
+		node.appendChild(url);
+
+		Element label = doc.createElementNS(GRAPHML_NS, "data");
+		label.setAttribute("key", "label");
+		label.setTextContent(collaborator.getCollaboratorName());
+		node.appendChild(label);
+
 		if (profileURL != null) {
-			graphMLContent.append("\t<data key=\"profile_url\">" + profileURL + "</data>\n");
+			Element profile = doc.createElementNS(GRAPHML_NS, "data");
+			profile.setAttribute("key", "profile_url");
+			profile.setTextContent(profileURL);
+			node.appendChild(profile);
 		}
 		
-		
-		graphMLContent.append("\t<data key=\"number_of_authored_works\">" 
-								+ node.getNumOfActivities()
-							+ "</data>\n");
-		
-		if (node.getEarliestActivityYearCount() != null) {
-			
+		Element works = doc.createElementNS(GRAPHML_NS, "data");
+		works.setAttribute("key", "number_of_authored_works");
+		works.setTextContent(String.valueOf(collaborator.getNumOfActivities()));
+		node.appendChild(works);
+
+		if (collaborator.getEarliestActivityYearCount() != null) {
 			/*
 			 * There is no clean way of getting the map contents in java even though
 			 * we are sure to have only one entry on the map. So using the for loop.
 			 * I am feeling dirty just about now. 
 			 * */
-			for (Map.Entry<String, Integer> publicationInfo 
-						: node.getEarliestActivityYearCount().entrySet()) {
-				
-				graphMLContent.append("\t<data key=\"earliest_publication\">" 
-											+ publicationInfo.getKey() 
-										+ "</data>\n");
+			for (Map.Entry<String, Integer> publicationInfo : collaborator.getEarliestActivityYearCount().entrySet()) {
+				Element earliest = doc.createElementNS(GRAPHML_NS, "data");
+				earliest.setAttribute("key", "earliest_publication");
+				earliest.setTextContent(publicationInfo.getKey());
+				node.appendChild(earliest);
 
-				graphMLContent.append("\t<data key=\"num_earliest_publication\">" 
-											+ publicationInfo.getValue() 
-										+ "</data>\n");
+				Element earliestCount = doc.createElementNS(GRAPHML_NS, "data");
+				earliestCount.setAttribute("key", "num_earliest_publication");
+				earliestCount.setTextContent(publicationInfo.getValue().toString());
+				node.appendChild(earliestCount);
 			}
-			
 		}
 		
-		if (node.getLatestActivityYearCount() != null) {
-			
-			for (Map.Entry<String, Integer> publicationInfo 
-						: node.getLatestActivityYearCount().entrySet()) {
-				
-				graphMLContent.append("\t<data key=\"latest_publication\">" 
-											+ publicationInfo.getKey() 
-										+ "</data>\n");
+		if (collaborator.getLatestActivityYearCount() != null) {
+			for (Map.Entry<String, Integer> publicationInfo : collaborator.getLatestActivityYearCount().entrySet()) {
+				Element latest = doc.createElementNS(GRAPHML_NS, "data");
+				latest.setAttribute("key", "latest_publication");
+				latest.setTextContent(publicationInfo.getKey());
+				node.appendChild(latest);
 
-				graphMLContent.append("\t<data key=\"num_latest_publication\">" 
-											+ publicationInfo.getValue() 
-										+ "</data>\n");
+				Element latestCount = doc.createElementNS(GRAPHML_NS, "data");
+				latestCount.setAttribute("key", "num_latest_publication");
+				latestCount.setTextContent(publicationInfo.getValue().toString());
+				node.appendChild(latestCount);
 			}
-			
 		}
 		
-		if (node.getUnknownActivityYearCount() != null) {
-			
-				graphMLContent.append("\t<data key=\"num_unknown_publication\">" 
-											+ node.getUnknownActivityYearCount() 
-										+ "</data>\n");
-				
+		if (collaborator.getUnknownActivityYearCount() != null) {
+			Element unknown = doc.createElementNS(GRAPHML_NS, "data");
+			unknown.setAttribute("key", "num_unknown_publication");
+			unknown.setTextContent(String.valueOf(collaborator.getUnknownActivityYearCount()));
+			node.appendChild(unknown);
 		}
-		
-		graphMLContent.append("</node>\n");
 	}
 
-	private void generateKeyDefinitionContent(CollaborationData visVOContainer, 
-											  StringBuilder graphMLContent) {
-		
+	private void generateKeyDefinitionContent(CollaborationData visVOContainer, Element rootElement) {
 		/*
 		 * Generate the key definition content for node. 
 		 * */
-		getKeyDefinitionFromSchema(visVOContainer.getNodeSchema(), graphMLContent);
+		getKeyDefinitionFromSchema(visVOContainer.getNodeSchema(), rootElement);
 		
 		/*
 		 * Generate the key definition content for edge. 
 		 * */
-		getKeyDefinitionFromSchema(visVOContainer.getEdgeSchema(), graphMLContent);
+		getKeyDefinitionFromSchema(visVOContainer.getEdgeSchema(), rootElement);
 		
 		
 	}
 
-	private void getKeyDefinitionFromSchema(Set<Map<String, String>> schema,
-			StringBuilder graphMLContent) {
-		
-		for (Map<String, String> currentNodeSchemaAttribute : schema) {
-			
-			graphMLContent.append("\n<key ");
-			
-			for (Map.Entry<String, String> currentAttributeKey 
-						: currentNodeSchemaAttribute.entrySet()) {
-				
-				graphMLContent.append(currentAttributeKey.getKey() 
-										+ "=\"" + currentAttributeKey.getValue() 
-										+ "\" ");
+	private void getKeyDefinitionFromSchema(Set<Map<String, String>> schema, Element rootElement) {
+		Document doc = rootElement.getOwnerDocument();
 
+		for (Map<String, String> currentNodeSchemaAttribute : schema) {
+			Element key = doc.createElementNS(GRAPHML_NS, "key");
+
+			for (Map.Entry<String, String> currentAttributeKey : currentNodeSchemaAttribute.entrySet()) {
+				key.setAttribute(currentAttributeKey.getKey(), currentAttributeKey.getValue());
 			}
 			
 			if (currentNodeSchemaAttribute.containsKey("default")) {
-				
-				graphMLContent.append(">\n");
-				graphMLContent.append("<default>");
-				graphMLContent.append(currentNodeSchemaAttribute.get("default"));
-				graphMLContent.append("</default>\n");
-				graphMLContent.append("</key>\n");
-				
-			} else {
-				graphMLContent.append("/>\n");
+				Element def = doc.createElementNS(GRAPHML_NS, "default");
+				def.setTextContent(currentNodeSchemaAttribute.get("default"));
+				key.appendChild(def);
 			}
+
+			rootElement.appendChild(key);
 		}
 	}
 }

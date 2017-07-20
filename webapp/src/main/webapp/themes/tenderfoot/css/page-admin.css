@@ -1,0 +1,29 @@
+/* ------------------------------------------------->  */
+/* SITE ADMIN DASHBOARD ---------------------------->  */
+/* ------------------------------------------------->  */
+#adminDashboard .pageBodyGroup {
+    padding: 0 1em .5em 1em;
+}
+#adminDashboard .pageBodyGroup h3 {
+    background-color: #fff;
+    border-bottom: 1px dotted #AFB2B2;
+    font-weight: bold;
+    padding: .625em;
+    color: #064D68;
+    margin-bottom: .625em;
+}
+#adminDashboard .pageBodyGroup ul {
+    margin: 0 0 1em .6em;
+}
+#adminDashboard .pageBodyGroup h4 {
+    color: #5E6363;
+    font-size: 1em;
+    margin-left: .6em;
+    font-weight: bold;
+}
+#adminDashboard .pageBodyGroup h4 a {
+    color: #5E6363;
+    font-size: 1em;
+    margin-left: 0;
+    font-weight: bold;
+}
