@@ -2,15 +2,7 @@
 
 package edu.cornell.mannlib.vivo.orcid;
 
-import static edu.cornell.mannlib.orcidclient.context.OrcidClientContext.Setting.AUTHORIZED_API_BASE_URL;
-import static edu.cornell.mannlib.orcidclient.context.OrcidClientContext.Setting.CALLBACK_PATH;
-import static edu.cornell.mannlib.orcidclient.context.OrcidClientContext.Setting.CLIENT_ID;
-import static edu.cornell.mannlib.orcidclient.context.OrcidClientContext.Setting.CLIENT_SECRET;
-import static edu.cornell.mannlib.orcidclient.context.OrcidClientContext.Setting.MESSAGE_VERSION;
-import static edu.cornell.mannlib.orcidclient.context.OrcidClientContext.Setting.OAUTH_AUTHORIZE_URL;
-import static edu.cornell.mannlib.orcidclient.context.OrcidClientContext.Setting.OAUTH_TOKEN_URL;
-import static edu.cornell.mannlib.orcidclient.context.OrcidClientContext.Setting.PUBLIC_API_BASE_URL;
-import static edu.cornell.mannlib.orcidclient.context.OrcidClientContext.Setting.WEBAPP_BASE_URL;
+import static edu.cornell.mannlib.orcidclient.context.OrcidClientContext.Setting.*;
 import static edu.cornell.mannlib.vivo.orcid.controller.OrcidIntegrationController.DEFAULT_EXTERNAL_ID_COMMON_NAME;
 import static edu.cornell.mannlib.vivo.orcid.controller.OrcidIntegrationController.PROPERTY_EXTERNAL_ID_COMMON_NAME;
 
@@ -66,16 +58,10 @@ public class OrcidContextSetup implements ServletContextListener {
 			settings.put(CLIENT_ID, props.getProperty("orcid.clientId"));
 			settings.put(CLIENT_SECRET,
 					props.getProperty("orcid.clientPassword"));
-			settings.put(PUBLIC_API_BASE_URL,
-					props.getProperty("orcid.publicApiBaseUrl"));
-			settings.put(AUTHORIZED_API_BASE_URL,
-					props.getProperty("orcid.authorizedApiBaseUrl"));
-			settings.put(OAUTH_AUTHORIZE_URL,
-					props.getProperty("orcid.oauthAuthorizeUrl"));
-			settings.put(OAUTH_TOKEN_URL,
-					props.getProperty("orcid.oauthTokenUrl"));
-			settings.put(MESSAGE_VERSION,
-					props.getProperty("orcid.messageVersion"));
+			settings.put(API_VERSION,
+					props.getProperty("orcid.apiVersion"));
+			settings.put(API_ENVIRONMENT,
+					props.getProperty("orcid.api"));
 			settings.put(WEBAPP_BASE_URL,
 					props.getProperty("orcid.webappBaseUrl"));
 			settings.put(CALLBACK_PATH, "orcid/callback");

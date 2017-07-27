@@ -12,12 +12,13 @@ import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.cornell.mannlib.orcidclient.actions.ActionManager;
+import edu.cornell.mannlib.orcidclient.model.OrcidProfile;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import edu.cornell.mannlib.orcidclient.auth.AuthorizationManager;
 import edu.cornell.mannlib.orcidclient.context.OrcidClientContext;
-import edu.cornell.mannlib.orcidclient.orcidmessage.OrcidMessage;
 import edu.cornell.mannlib.vedit.beans.LoginStatusBean;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.ObjectPropertyStatement;
@@ -40,6 +41,7 @@ public abstract class OrcidAbstractHandler {
 	protected final VitroRequest vreq;
 	protected final OrcidClientContext occ;
 	protected final AuthorizationManager auth;
+	protected final ActionManager manager;
 	protected final OrcidConfirmationState state;
 	protected final UserAccount currentUser;
 
@@ -47,6 +49,7 @@ public abstract class OrcidAbstractHandler {
 		this.vreq = vreq;
 		this.occ = OrcidClientContext.getInstance();
 		this.auth = this.occ.getAuthorizationManager(vreq);
+		this.manager = this.occ.getActionManager(vreq);
 		this.state = OrcidConfirmationState.fetch(vreq);
 		this.currentUser = LoginStatusBean.getCurrentUser(vreq);
 	}
@@ -110,8 +113,8 @@ public abstract class OrcidAbstractHandler {
 	}
 
 	protected ResponseValues showConfirmationPage(Progress p,
-			OrcidMessage... messages) {
-		state.progress(p, messages);
+			OrcidProfile... profiles) {
+		state.progress(p, profiles);
 		return showConfirmationPage();
 	}
 

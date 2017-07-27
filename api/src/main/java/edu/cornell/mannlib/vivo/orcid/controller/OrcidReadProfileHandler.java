@@ -8,13 +8,13 @@ import static edu.cornell.mannlib.vivo.orcid.controller.OrcidConfirmationState.P
 import static edu.cornell.mannlib.vivo.orcid.controller.OrcidConfirmationState.Progress.GOT_PROFILE;
 import static edu.cornell.mannlib.vivo.orcid.controller.OrcidConfirmationState.Progress.ID_ALREADY_PRESENT;
 
+import edu.cornell.mannlib.orcidclient.model.OrcidProfile;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import edu.cornell.mannlib.orcidclient.OrcidClientException;
 import edu.cornell.mannlib.orcidclient.actions.ReadPublicBioAction;
 import edu.cornell.mannlib.orcidclient.auth.AuthorizationStatus;
-import edu.cornell.mannlib.orcidclient.orcidmessage.OrcidMessage;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 
@@ -26,7 +26,7 @@ public class OrcidReadProfileHandler extends OrcidAbstractHandler {
 			.getLog(OrcidReadProfileHandler.class);
 
 	private AuthorizationStatus status;
-	private OrcidMessage profile;
+	private OrcidProfile profile;
 
 	protected OrcidReadProfileHandler(VitroRequest vreq) {
 		super(vreq);
@@ -53,8 +53,7 @@ public class OrcidReadProfileHandler extends OrcidAbstractHandler {
 	}
 
 	private void readProfile() throws OrcidClientException {
-		profile = new ReadPublicBioAction().execute(status.getAccessToken()
-				.getOrcid());
+		profile = manager.createReadPublicBioAction().execute(status.getAccessToken().getOrcid());
 		log.debug("Read profile");
 	}
 

@@ -67,9 +67,9 @@
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>org.vivoweb.dependencies</groupId>
+            <groupId>org.vivoweb</groupId>
             <artifactId>orcid-api-client</artifactId>
-            <version>0.2</version>
+            <version>0.3</version>
         </dependency>
 
         <dependency>
