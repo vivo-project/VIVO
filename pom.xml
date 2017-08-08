@@ -190,7 +190,7 @@
                         <configuration>
                             <serverId>ossrh</serverId>
                             <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
                     </plugin>
                     <plugin>
@@ -208,7 +208,7 @@
                             <doCheck>false</doCheck>
                             <doUpdate>false</doUpdate>
                             <shortRevisionLength>7</shortRevisionLength>
-                            <revisionOnScmFailure>true</revisionOnScmFailure>
+                            <revisionOnScmFailure>Detached</revisionOnScmFailure>
                         </configuration>
                     </plugin>
                 </plugins>
