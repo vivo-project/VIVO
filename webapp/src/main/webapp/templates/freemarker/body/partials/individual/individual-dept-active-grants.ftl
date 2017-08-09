@@ -35,5 +35,5 @@
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/menupage/pageList.css" />')}
 
-${scripts.add('<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>')}
+${scripts.add('<script async type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>')}
 
