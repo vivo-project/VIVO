@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,6 +31,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequ
  * @author cdtank
  */
 @SuppressWarnings("serial")
+@WebServlet(name = "DataVisualizationController", urlPatterns = {"/visualizationData"})
 public class DataVisualizationController extends VitroHttpServlet {
 
 	public static final String URL_ENCODING_SCHEME = "UTF-8";

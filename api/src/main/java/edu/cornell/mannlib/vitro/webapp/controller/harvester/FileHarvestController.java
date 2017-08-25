@@ -20,6 +20,7 @@ import java.util.Set;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -44,6 +45,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Res
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.filestorage.impl.FileStorageImplWrapper;
 
+@WebServlet(name = "FileHarvestController", urlPatterns = {"/harvester/harvest"})
 public class FileHarvestController extends FreemarkerHttpServlet {
 
     private static final long serialVersionUID = 1L;

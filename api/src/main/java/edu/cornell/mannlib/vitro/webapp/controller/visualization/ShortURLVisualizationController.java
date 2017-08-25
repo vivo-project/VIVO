@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.annotation.WebServlet;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.logging.Log;
@@ -33,6 +34,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequ
  * @author cdtank
  */
 @SuppressWarnings("serial")
+@WebServlet(name = "ShortURLVisualizationController", urlPatterns = {"/vis/*"})
 public class ShortURLVisualizationController extends FreemarkerHttpServlet {
 
 	public static final String URL_ENCODING_SCHEME = "UTF-8";

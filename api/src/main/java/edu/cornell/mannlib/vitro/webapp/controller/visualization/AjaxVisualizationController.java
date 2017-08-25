@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,6 +33,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequ
  * @author cdtank
  */
 @SuppressWarnings("serial")
+@WebServlet(name = "AjaxVisualizationController", urlPatterns = {"/visualizationAjax"})
 public class AjaxVisualizationController extends FreemarkerHttpServlet {
 
 	public static final String URL_ENCODING_SCHEME = "UTF-8";

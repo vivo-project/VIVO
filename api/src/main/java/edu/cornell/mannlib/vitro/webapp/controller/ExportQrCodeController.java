@@ -28,6 +28,9 @@ import edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.VIVOIndivi
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.DefaultObjectWrapper;
 
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet(name = "ExportQrCodeController", urlPatterns = {"/qrcode"})
 public class ExportQrCodeController extends FreemarkerHttpServlet {
     
     private static final long serialVersionUID = 1L;
