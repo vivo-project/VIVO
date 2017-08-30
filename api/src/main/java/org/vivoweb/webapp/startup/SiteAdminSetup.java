@@ -13,8 +13,8 @@ import javax.servlet.ServletContextListener;
 public class SiteAdminSetup implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        SiteAdminController.registerSiteMaintenanceUrl("rebuildVisCache", UrlBuilder.getUrl("/vis/tools"), ToolsRequestHandler.REQUIRED_ACTIONS);
-        SiteAdminController.registerSiteConfigData("internalClass", UrlBuilder.getUrl("/processInstitutionalInternalClass"), InstitutionalInternalClassController.REQUIRED_ACTIONS);
+        SiteAdminController.registerSiteMaintenanceUrl("rebuildVisCache", "/vis/tools", null, ToolsRequestHandler.REQUIRED_ACTIONS);
+        SiteAdminController.registerSiteConfigData("internalClass", "/processInstitutionalInternalClass", null, InstitutionalInternalClassController.REQUIRED_ACTIONS);
    }
 
     @Override
