@@ -57,7 +57,7 @@ public class FedSearchController extends PagedSearchController {
                 Map<String, Object> body = new HashMap<String, Object>();
                 response.setCharacterEncoding("UTF-8");
                 response.setContentType("text/xml;charset=UTF-8");
-                response.setHeader("Content-Disposition", "attachment; filename=search.xml");
+                response.setHeader("Content-Disposition", "attachment; filename=FS.xml");
 
                 ApplicationDao aDao = vreq.getUnfilteredWebappDaoFactory().getApplicationDao();
                 ApplicationBean applicationForEditing = aDao.getApplicationBean();
