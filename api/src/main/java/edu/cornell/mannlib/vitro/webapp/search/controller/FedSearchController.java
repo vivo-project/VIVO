@@ -9,7 +9,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +19,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-@WebServlet(name = "FedSearchController", urlPatterns = {"/FS.xml","/ctsasearch"} ) // fedsearch
 public class FedSearchController extends PagedSearchController {
     private static final Log log = LogFactory.getLog(FedSearchController.class);
 
