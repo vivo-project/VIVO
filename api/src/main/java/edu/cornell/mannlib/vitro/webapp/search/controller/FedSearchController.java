@@ -84,10 +84,15 @@ public class FedSearchController extends PagedSearchController {
                 response.setContentType("text/xml;charset=UTF-8");
                 response.setHeader("Content-Disposition", "attachment; filename=search.xml");
                 Map<String, Object> body = new HashMap<String, Object>();
+
                 body.putAll(rvalues.getMap());
-                body.put("serverBase", serverBase);
-                body.put("classgroup", classgroup);
+                // Note - the template requires the following properties from the above map
+                // querytext
+                // hitCount
+
                 body.put("populationType", getPopulationType(request));
+                body.put("classgroup", classgroup);
+                body.put("serverBase", serverBase);
                 writeTemplate("search-fsresult.ftl", body, request, response);
             } catch (Exception e) {
                 log.error(e, e);
