@@ -104,7 +104,6 @@
     line-height: 1.25em;
     padding-top: 1.0em;
     padding-right: 4px;
-    font-size: 0.9em;
 }
 #home-faculty-mbrs  {
     width: 297px;
@@ -172,4 +171,7 @@ div.faculty-home {
 .faculty-home,
 .research-count {
     background-color: #fff;
+}
+.faculty-home a {
+    font-size: 1.2em;
 }
