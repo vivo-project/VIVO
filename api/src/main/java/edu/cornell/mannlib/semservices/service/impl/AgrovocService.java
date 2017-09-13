@@ -58,9 +58,9 @@ public class AgrovocService implements ExternalConceptService {
 	protected final String dbpedia_endpoint = " http://dbpedia.org/sparql";
 	// URL to get all the information for a concept
 	
-	protected final String conceptSkosMosBase = "http://aims.fao.org/skosmos/rest/v1/";
+	protected final String conceptSkosMosBase = "http://artemide.art.uniroma2.it:8081/skosmos/rest/v1/";
 	protected final String conceptsSkosMosSearch = conceptSkosMosBase + "search?";
-	protected final String conceptSkosMosURL = conceptSkosMosBase + "/agrovoc/data?";
+	protected final String conceptSkosMosURL = conceptSkosMosBase + "data?";
 	@Override
 	public List<Concept> getConcepts(String term) throws Exception {
 		List<Concept> conceptList = new ArrayList<Concept>();
@@ -145,7 +145,7 @@ public class AgrovocService implements ExternalConceptService {
 
 
 
-	
+
 
 
 	public List<Concept> processResults(String term) throws Exception {

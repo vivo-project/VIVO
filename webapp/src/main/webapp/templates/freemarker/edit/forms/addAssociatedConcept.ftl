@@ -42,40 +42,48 @@
     </script>
     <#if (existingConcepts?size > 0)>
     	 <li class="conceptHeadings conceptsListContainer">
-    	 	<div class="row">
-    	 		 <div class="column conceptLabelInfo"> 
-    	 		 	<h4>Concept (Type)</h4>
-    	 		 </div>
-    	 		 <div class="column conceptVocabSource"> 
-    	 		 	<h4>Vocabulary Source</h4>
-    	 		 </div>
-    	 		 <div class="column conceptRemoval">&nbsp;
-    	 		 </div>
-    	 	</div>	
+             <div class="container">
+                 <div class="row">
+                     <div class="col-12">
+                         <div class="column conceptLabelInfo">
+                            <h4>Concept (Type)</h4>
+                         </div>
+                         <div class="column conceptVocabSource">
+                            <h4>Vocabulary Source</h4>
+                         </div>
+                         <div class="column conceptRemoval">&nbsp;
+                         </div>
+                     </div>
+                 </div>
+             </div>
     	 </li>
     </#if>
     
     <#list existingConcepts as existingConcept>
         <li class="existingConcept conceptsListContainer">
+            <div class="container">
                 <div class="row">
-                   <div class="column conceptLabelInfo"> ${existingConcept.conceptLabel} 
-                   	<#if existingConcept.conceptSemanticTypeLabel?has_content>
-                   	 (${existingConcept.conceptSemanticTypeLabel})
-                   	</#if>
-                   	</div>
-                   	<div class="column conceptVocabSource">
-                   	<#if existingConcept.vocabURI?has_content && existingConcept.vocabLabel?has_content>
-                   		${existingConcept.vocabLabel}
-                   	<#else>
-                   		&nbsp;
-                   		<#--We still want the column to be there even if no vocabulary source is present-->	
-                   	</#if>
-                  	</div> 
-                  	<div class="column conceptRemoval">
-                  	     <a href="${urls.base}/edit/primitiveRdfEdit" class="remove" title="${i18n().remove_capitalized}">${i18n().remove_capitalized}</a>
-                  	
-                  	</div>
+                    <div class="col-12">
+                        <div class="column conceptLabelInfo"> ${existingConcept.conceptLabel}
+                            <#if existingConcept.conceptSemanticTypeLabel?has_content>
+                                (${existingConcept.conceptSemanticTypeLabel})
+                            </#if>
+                        </div>
+                        <div class="column conceptVocabSource">
+                            <#if existingConcept.vocabURI?has_content && existingConcept.vocabLabel?has_content>
+                            ${existingConcept.vocabLabel}
+                            <#else>
+                                &nbsp;
+                            <#--We still want the column to be there even if no vocabulary source is present-->
+                            </#if>
+                        </div>
+                        <div class="column conceptRemoval">
+                            <a href="${urls.base}/edit/primitiveRdfEdit" class="remove" title="${i18n().remove_capitalized}">${i18n().remove_capitalized}</a>
+
+                        </div>
+                    </div>
                 </div>
+            </div>
         </li>    
         
         <script type="text/javascript">
