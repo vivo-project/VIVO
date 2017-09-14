@@ -28,9 +28,6 @@ var orgForTrainingUtils = {
     this.personUri = $('#personUri');
     this.aDLabel = $('#awardedDegreeLabel');
     this.degreeSelector = $('#degreeUri');    
-
-    // may not need this
-    this.firstName.attr('disabled', '');
     
     },
     

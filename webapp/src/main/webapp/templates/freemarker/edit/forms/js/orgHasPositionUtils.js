@@ -23,9 +23,6 @@ var orgHasPositionUtils = {
     this.firstName = $('#firstName');
     this.lastName = $('#lastName');
     this.personUri = $('#personUri');    
-
-    // may not need this
-    this.firstName.attr('disabled', '');
     
     },
     

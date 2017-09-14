@@ -60,9 +60,6 @@ var publicationToPersonUtils = {
         this.fieldsForNewPub = $('#fieldsForNewPub');
         this.changeLink = this.pubAcSelection.children('p').children('#changeSelection');
         
-        // may not need this
-        this.firstName.attr('disabled', '');
-        
     },
     
     bindEventListeners: function() {

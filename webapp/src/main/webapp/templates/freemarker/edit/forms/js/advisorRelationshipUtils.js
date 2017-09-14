@@ -34,10 +34,6 @@ var advisorRelUtils = {
     this.saveAdviseeLabel = $('#saveAdviseeLabel');
     this.adviseeAcSelection = $('div#adviseeAcSelection');
     
-
-    // may not need this
-    this.firstName.attr('disabled', '');
-    
     },
     
     bindEventListeners: function() {
