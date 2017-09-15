@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.json.JSONException;
 
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
@@ -54,7 +53,7 @@ public class QrCodeDetails extends AbstractAjaxResponder {
     }
 
 	@Override
-	public String prepareResponse() throws IOException, JSONException {
+	public String prepareResponse() throws IOException {
 		try {
             Individual individual = getIndividualFromRequest(vreq);
             String firstName = "";
