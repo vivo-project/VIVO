@@ -2,6 +2,7 @@
 
 package org.vivoweb.webapp.startup;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
@@ -14,8 +15,6 @@ import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -29,7 +28,7 @@ public class JSONWrapperSetup implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         IndividualJsonWrapper.setAddJSONFields(new IndividualJsonWrapper.AddJSONFields() {
             @Override
-            public void add(JSONObject jo, VitroRequest vreq, Individual ind) throws JSONException {
+            public void add(ObjectNode jo, VitroRequest vreq, Individual ind) {
                 jo.put("preferredTitle", findPreferredTitle(vreq, ind));
             }
 
