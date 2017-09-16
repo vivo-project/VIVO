@@ -14,6 +14,7 @@
 
     <properties>
         <vitro-version>${project.version}</vitro-version>
+        <maven-site-plugin.skip>true</maven-site-plugin.skip>
     </properties>
 
     <build>
@@ -234,4 +235,36 @@
             </build>
         </profile>
     </profiles>
+
+    <distributionManagement>
+        <site>
+            <id>vivo-installer</id>
+            <url>http://vivo-project.github.io/</url>
+        </site>
+    </distributionManagement>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.9</version>
+                <configuration>
+                    <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <!--
+        Add a custom repository, which is actually just a simple GitHub project
+        in order to distribute some dependencies that aren't part of Maven central
+    -->
+    <repositories>
+        <repository>
+            <id>vivo-dependencies</id>
+            <name>VIVO Dependencies</name>
+            <url>https://raw.github.com/vivo-project/dependencies/master/</url>
+        </repository>
+    </repositories>
 </project>
