@@ -1,8 +1,6 @@
 package org.vivoweb.webapp.startup;
 
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.JspToGeneratorMapping;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.VIVODefaultAddMissingIndividualFormGenerator;
-import edu.cornell.mannlib.vitro.webapp.web.templatemodels.searchresult.VIVOIndividualSearchResult;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

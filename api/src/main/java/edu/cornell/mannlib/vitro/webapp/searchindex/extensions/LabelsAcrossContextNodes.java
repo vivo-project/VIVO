@@ -353,13 +353,9 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 		String subjectUri = stmt.getSubject().getURI();
 		String predicateUri = stmt.getPredicate().getURI();
 
-		if (incomingPropertyUri.equals(predicateUri)
+		return incomingPropertyUri.equals(predicateUri)
 				&& (contextNodeClasses.isEmpty() || isAnyMatch(
-						contextNodeClasses, getTypes(subjectUri)))) {
-			return true;
-		} else {
-			return false;
-		}
+				contextNodeClasses, getTypes(subjectUri)));
 	}
 
 	private boolean isAnyMatch(Set<String> set1, Set<String> set2) {

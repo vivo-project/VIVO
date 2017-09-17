@@ -2,26 +2,20 @@
 package edu.cornell.mannlib.vitro.webapp.controller.ajax;
 
 import java.io.IOException;
-import java.lang.Integer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
-import org.apache.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.controller.ajax.VitroAjaxController;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 
 public class GeoFocusResearcherCount extends AbstractAjaxResponder {
@@ -47,15 +41,15 @@ public class GeoFocusResearcherCount extends AbstractAjaxResponder {
 		try {
             geoFocusCount = getGeoFocusCount(vreq);
             
-            String response = "{ ";
+            StringBuilder response = new StringBuilder("{ ");
             
             for (Map<String, String> map: geoFocusCount) {
                 String theCount  = map.get("count");
-                response += "\"count\": \"" + theCount + "\"";
+                response.append("\"count\": \"").append(theCount).append("\"");
             }
-			response += " }";
-			log.debug(response);
-			return response;
+			response.append(" }");
+			log.debug(response.toString());
+			return response.toString();
 		} catch (Exception e) {
 			log.error("Failed geographic focus count", e);
 			return EMPTY_RESPONSE;

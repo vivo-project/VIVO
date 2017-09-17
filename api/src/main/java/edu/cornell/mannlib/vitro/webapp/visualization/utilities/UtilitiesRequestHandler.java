@@ -5,7 +5,6 @@ package edu.cornell.mannlib.vitro.webapp.visualization.utilities;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -34,7 +33,6 @@ import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryP
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.GenericQueryMap;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.AllPropertiesQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.GenericQueryRunner;
-import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 

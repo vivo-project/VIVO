@@ -190,7 +190,7 @@ public class AgrovocService implements ExternalConceptService {
 	}
 
 	protected String getAgrovocTermCode(String rdf) throws Exception {
-		String termcode = new String();
+		String termcode = "";
 		try {
 			Document doc = XMLUtils.parse(rdf);
 			NodeList nodes = doc.getElementsByTagName("hasCodeAgrovoc");
@@ -199,13 +199,7 @@ public class AgrovocService implements ExternalConceptService {
 				termcode = node.getTextContent();
 			}
 
-		} catch (SAXException e) {
-			// e.printStackTrace();
-			throw e;
-		} catch (ParserConfigurationException e) {
-			// e.printStackTrace();
-			throw e;
-		} catch (IOException e) {
+		} catch (SAXException | IOException | ParserConfigurationException e) {
 			// e.printStackTrace();
 			throw e;
 		}
@@ -213,7 +207,7 @@ public class AgrovocService implements ExternalConceptService {
 	}
 
 	protected String getConceptURIFromRDF(String rdf) {
-		String conceptUri = new String();
+		String conceptUri = "";
 		try {
 			Document doc = XMLUtils.parse(rdf);
 			NodeList nodes = doc.getElementsByTagName("skos:Concept");
@@ -222,13 +216,7 @@ public class AgrovocService implements ExternalConceptService {
 			NamedNodeMap attrs = node.getAttributes();
 			Attr idAttr = (Attr) attrs.getNamedItem("rdf:about");
 			conceptUri = idAttr.getTextContent();
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("rdf: " + rdf);
-		} catch (SAXException e) {
-			e.printStackTrace();
-			System.err.println("rdf: " + rdf);
-		} catch (ParserConfigurationException e) {
+		} catch (IOException | ParserConfigurationException | SAXException e) {
 			e.printStackTrace();
 			System.err.println("rdf: " + rdf);
 		}
@@ -254,13 +242,7 @@ public class AgrovocService implements ExternalConceptService {
 				}
 
 			
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("rdf: " + rdf);
-		} catch (SAXException e) {
-			e.printStackTrace();
-			System.err.println("rdf: " + rdf);
-		} catch (ParserConfigurationException e) {
+		} catch (IOException | ParserConfigurationException | SAXException e) {
 			e.printStackTrace();
 			System.err.println("rdf: " + rdf);
 		}
@@ -270,7 +252,7 @@ public class AgrovocService implements ExternalConceptService {
 
 	protected String getDbpediaDescription(String uri) throws Exception {
 		String descriptionSource = " (Source: DBpedia)";
-		String description = new String();
+		String description = "";
 		String qs = ""
 				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
 				+ "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n"
@@ -329,7 +311,7 @@ public class AgrovocService implements ExternalConceptService {
 	 * @param uri The URI
 	 */
 	protected String stripConceptId(String uri) {
-		String conceptId = new String();
+		String conceptId = "";
 		int lastslash = uri.lastIndexOf('/');
 		conceptId = uri.substring(lastslash + 1, uri.length());
 		return conceptId;

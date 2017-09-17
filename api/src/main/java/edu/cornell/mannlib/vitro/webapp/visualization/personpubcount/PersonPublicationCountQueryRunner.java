@@ -7,7 +7,6 @@ import java.util.Set;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.vocabulary.RDFS;
@@ -20,21 +19,17 @@ import org.apache.jena.iri.IRI;
 import org.apache.jena.iri.IRIFactory;
 import org.apache.jena.iri.Violation;
 
-import org.apache.jena.query.Dataset;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.QuerySolution;
-import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.Syntax;
 import org.apache.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Individual;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 
 

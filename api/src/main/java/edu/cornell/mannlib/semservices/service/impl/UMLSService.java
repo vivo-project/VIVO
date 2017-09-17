@@ -132,7 +132,7 @@ public class UMLSService implements ExternalConceptService {
     private List<Concept> processOutput(String results) throws Exception {
         List<Concept> conceptList = new ArrayList<Concept>();
         List<String> bestMatchIdList = new ArrayList<String>();
-        String bestMatchId = new String();
+        String bestMatchId = "";
 
         try {
             ObjectNode json = (ObjectNode) JacksonUtils.parseJson(results);
@@ -179,13 +179,13 @@ public class UMLSService implements ExternalConceptService {
         if (obj.has(key)) {
             return obj.get(key).asText();
         } else {
-            return new String("");
+            return "";
         }
     }
 
 
     protected String stripConceptId(String uri) {
-        String conceptId = new String();
+        String conceptId = "";
         int lastslash = uri.lastIndexOf('/');
         conceptId = uri.substring(lastslash + 1, uri.length());
         return conceptId;
@@ -196,7 +196,7 @@ public class UMLSService implements ExternalConceptService {
             throw new IllegalStateException("Unable to read umls.properties");
         }
 
-        if (ticketGrantingTicketURL == null || lastUpdate + 28700000l < System.currentTimeMillis()) {
+        if (ticketGrantingTicketURL == null || lastUpdate + 28700000L < System.currentTimeMillis()) {
             try {
                 if (!StringUtils.isEmpty(apikey)) {
                     ticketGrantingTicketURL = Request.Post(UMLS_AUTH_KEY_URL).useExpectContinue().version(HttpVersion.HTTP_1_1)

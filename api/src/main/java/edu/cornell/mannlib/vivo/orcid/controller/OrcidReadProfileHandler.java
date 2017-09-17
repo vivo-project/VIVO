@@ -13,7 +13,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import edu.cornell.mannlib.orcidclient.OrcidClientException;
-import edu.cornell.mannlib.orcidclient.actions.ReadPublicBioAction;
 import edu.cornell.mannlib.orcidclient.auth.AuthorizationStatus;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;

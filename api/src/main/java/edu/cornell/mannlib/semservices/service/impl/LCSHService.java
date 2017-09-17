@@ -176,7 +176,7 @@ public class LCSHService implements ExternalConceptService {
 
 	protected List<String> getConceptURIFromXML(String rdf) {
 		List<String> uris = new ArrayList<String>();
-		String conceptUri = new String();
+		String conceptUri = "";
 		try {
 			Document doc = XMLUtils.parse(rdf);
 			NodeList nodes = doc.getElementsByTagName("entry");
@@ -202,15 +202,10 @@ public class LCSHService implements ExternalConceptService {
 				uris.add(conceptUri);
 			}
 
-		} catch (IOException e) {
+		} catch (IOException | ParserConfigurationException | SAXException e) {
 			log.error("error occurred in parsing " +rdf, e);
-		} catch (SAXException e) {
-			log.error("error occurred in parsing " +rdf, e);
-		} catch (ParserConfigurationException e) {
-			log.error("error occurred in parsing " +rdf, e);
-
 		}
-		return uris;
+        return uris;
 
 	}
 
@@ -222,7 +217,7 @@ public class LCSHService implements ExternalConceptService {
 	 * @param uri URI
 	 */
 	protected String stripConceptId(String uri) {
-		String conceptId = new String();
+		String conceptId = "";
 		int lastslash = uri.lastIndexOf('/');
 		conceptId = uri.substring(lastslash + 1, uri.length());
 		return conceptId;

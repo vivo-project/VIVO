@@ -1,13 +1,8 @@
 package org.vivoweb.webapp.startup;
 
-import edu.cornell.mannlib.vitro.webapp.beans.Individual;
-import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.VIVOIndividualTemplateModel;
 import edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.IndividualTemplateModelBuilder;
 import edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.VIVOIndividualTemplateModelBuilder;
-import edu.cornell.mannlib.vitro.webapp.web.templatemodels.individuallist.ListedIndividual;
 import edu.cornell.mannlib.vitro.webapp.web.templatemodels.individuallist.ListedIndividualBuilder;
-import edu.cornell.mannlib.vitro.webapp.web.templatemodels.individuallist.VIVOListedIndividual;
 import edu.cornell.mannlib.vitro.webapp.web.templatemodels.individuallist.VIVOListedIndividualBuilder;
 
 import javax.servlet.ServletContextEvent;

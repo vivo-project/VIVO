@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 
 @WebServlet(name = "SiteMapServlet", urlPatterns = {"/robots.txt","/sitemap.xml"})
 public class SiteMapServlet extends VitroHttpServlet {

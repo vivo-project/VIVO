@@ -2,7 +2,6 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.coauthorship;
 
-import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +25,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -81,15 +79,11 @@ public class CoAuthorshipGraphMLWriter {
 			transformer.transform(source, result);
 
 			graphMLContent.append(writer.toString());
-		} catch (TransformerConfigurationException e) {
-			throw new IllegalStateException("XML error generating GraphML", e);
-		} catch (TransformerException e) {
-			throw new IllegalStateException("XML error generating GraphML", e);
-		} catch (ParserConfigurationException e) {
+		} catch (ParserConfigurationException | TransformerException e) {
 			throw new IllegalStateException("XML error generating GraphML", e);
 		}
 
-		return graphMLContent;
+        return graphMLContent;
 	}
 	
 	public StringBuilder getCoAuthorshipGraphMLContent() {

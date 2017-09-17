@@ -3,7 +3,6 @@
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import java.util.HashMap;
 import java.util.List;

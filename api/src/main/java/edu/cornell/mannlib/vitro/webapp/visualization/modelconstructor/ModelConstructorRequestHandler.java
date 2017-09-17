@@ -103,13 +103,10 @@ public class ModelConstructorRequestHandler implements
 															  parseModelIdentifier.getType(), vitroRequest.getRDFService());
 				refreshedModels.add(parseModelIdentifier);
 
-			} catch (IllegalConstructedModelIdentifierException e) {
-				e.printStackTrace();
-			} catch (MalformedQueryParametersException e) {
-				// TODO Auto-generated catch block
+			} catch (IllegalConstructedModelIdentifierException | MalformedQueryParametersException e) {
 				e.printStackTrace();
 			}
-		}
+        }
 
 		Map<String, String> fileData = new HashMap<String, String>();
 

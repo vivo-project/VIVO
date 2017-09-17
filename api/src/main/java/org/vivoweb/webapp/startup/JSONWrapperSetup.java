@@ -7,10 +7,7 @@ import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.individuallist.IndividualJsonWrapper;
-import edu.cornell.mannlib.vitro.webapp.dao.ObjectPropertyStatementDao;
-import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -18,8 +15,6 @@ import org.apache.commons.logging.LogFactory;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.util.Collection;
-import java.util.Map;
 
 public class JSONWrapperSetup implements ServletContextListener {
     private static final Log log = LogFactory.getLog(JSONWrapperSetup.class);

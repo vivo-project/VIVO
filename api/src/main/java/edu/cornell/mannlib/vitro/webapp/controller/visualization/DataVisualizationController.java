@@ -92,10 +92,8 @@ public class DataVisualizationController extends VitroHttpServlet {
 						   response,
 						   log);
 			}
-			
-            return;
-            
-    	} else {
+
+        } else {
     		
     		UtilityFunctions.handleMalformedParameters(
     								"Inappropriate query parameters were submitted.",

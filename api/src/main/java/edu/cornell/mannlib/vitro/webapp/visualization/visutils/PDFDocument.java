@@ -96,9 +96,6 @@ public class PDFDocument {
 		
         createImage(document, pdfWriter, featureHeaderStyle);
 		
-		} catch (DocumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,6 +1,5 @@
 package org.vivoweb.webapp.startup;
 
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.VIVODefaultAddMissingIndividualFormGenerator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.utils.ProcessDataGetterN3Map;
 
 import javax.servlet.ServletContextEvent;

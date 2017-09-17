@@ -455,9 +455,9 @@ public class FileHarvestController extends FreemarkerHttpServlet {
                     unsentLogLinesList.clear();
                 }
 
-                String progressSinceLastCheck = "";
+                StringBuilder progressSinceLastCheck = new StringBuilder();
                 for(int i = 0; i < unsentLogLines.length; i++) {
-                    progressSinceLastCheck += unsentLogLines[i] + newline;
+                    progressSinceLastCheck.append(unsentLogLines[i]).append(newline);
                 }
 
                 boolean finished = sessionInfo.isFinished();
@@ -484,7 +484,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
 
                 if(!abnormalTermination) {
 	                json = generateJson(false);
-	                json.put("progressSinceLastCheck", progressSinceLastCheck);
+	                json.put("progressSinceLastCheck", progressSinceLastCheck.toString());
 	                json.put("finished", finished);
 	                json.put("newlyAddedUris", newlyAddedUris);
 	                json.put("newlyAddedUrls", newlyAddedUrls);
@@ -635,9 +635,10 @@ public class FileHarvestController extends FreemarkerHttpServlet {
                 boolean match = false;
                 String[] validRdfTypesForJob = job.getRdfTypesForLinks();
                 for(String rdfType : validRdfTypesForJob) {
-                	if(types.contains(rdfType))
-                		match = true;
-                	break;
+                	if(types.contains(rdfType)) {
+                        match = true;
+                        break;
+                    }
                 }
                 
                 if(match) {

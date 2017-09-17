@@ -2,9 +2,6 @@ package org.vivoweb.webapp.startup;
 
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.InstitutionalInternalClassController;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.SiteAdminController;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
-import edu.cornell.mannlib.vitro.webapp.utils.menuManagement.MenuManagementDataUtils;
-import edu.cornell.mannlib.vitro.webapp.utils.menuManagement.VIVOMenuManagementDataUtils;
 import edu.cornell.mannlib.vitro.webapp.visualization.tools.ToolsRequestHandler;
 
 import javax.servlet.ServletContextEvent;

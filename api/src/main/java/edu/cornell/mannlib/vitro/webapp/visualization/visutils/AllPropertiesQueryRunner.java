@@ -12,13 +12,7 @@ import org.apache.jena.iri.IRI;
 import org.apache.jena.iri.IRIFactory;
 import org.apache.jena.iri.Violation;
 
-import org.apache.jena.query.Dataset;
-import org.apache.jena.query.Query;
-import org.apache.jena.query.QueryExecution;
-import org.apache.jena.query.QueryExecutionFactory;
-import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.QuerySolution;
-import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.Syntax;
 import org.apache.jena.rdf.model.RDFNode;
 
@@ -78,7 +72,7 @@ public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
 							+ filterClause
 							+ "}";
             	
-        log.debug("sparqlQuery = " + sparqlQuery.toString());
+        log.debug("sparqlQuery = " + sparqlQuery);
         
 		return sparqlQuery;
 	}

@@ -17,14 +17,11 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import edu.cornell.mannlib.orcidclient.model.ExternalIdentifier;
-import edu.cornell.mannlib.orcidclient.model.ExternalIdentifiers;
 import edu.cornell.mannlib.orcidclient.model.OrcidBio;
 import edu.cornell.mannlib.orcidclient.model.OrcidId;
 import edu.cornell.mannlib.orcidclient.model.OrcidProfile;
