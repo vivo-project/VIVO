@@ -33,7 +33,7 @@
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
-            <version>5.0.6</version>
+            <version>5.5.12</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
