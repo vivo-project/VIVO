@@ -29,9 +29,7 @@ public class JsonObject {
 	}
 	
 	public void setOrganizationTypes(Set<String> givenOrganizationType) {
-		for (String type : givenOrganizationType) {
-			this.organizationType.add(type);
-		}
+		this.organizationType.addAll(givenOrganizationType);
 	}
 
 	public String getEntityURI() {
