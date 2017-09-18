@@ -301,13 +301,13 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
 			}
 		}
 		//Sort list by language label and return
-		Collections.sort(availableLocales, new Comparator<HashMap<String, String>>() {
-			public int compare(HashMap<String, String> h1, HashMap<String, String> h2) {
-				String languageName1 = (String) h1.get("label");
-				String languageName2 = (String) h2.get("label");
-				return languageName1.compareTo(languageName2);
-			}
-		});
+		availableLocales.sort(new Comparator<HashMap<String, String>>() {
+            public int compare(HashMap<String, String> h1, HashMap<String, String> h2) {
+                String languageName1 = (String) h1.get("label");
+                String languageName2 = (String) h2.get("label");
+                return languageName1.compareTo(languageName2);
+            }
+        });
 		
 		return availableLocales;
 	}
@@ -397,7 +397,7 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
 		LabelInformationComparator lic = new LabelInformationComparator();
 		for(String languageName: labelsHash.keySet()) {
 			List<LabelInformation> labelInfo = labelsHash.get(languageName);
-			Collections.sort(labelInfo, lic);
+			labelInfo.sort(lic);
 		}
 		return labelsHash;
 		
