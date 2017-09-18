@@ -173,12 +173,12 @@ class Harvester {
      */
     public static String[] stringsToArray(Object ... args) {
         ArrayList<String> allData = new ArrayList<String>();
-        for(int i = 0; i < args.length; i++) {
-            if(args[i] instanceof String[]) {
-                String[] array = (String[])(args[i]);
+        for (Object arg : args) {
+            if (arg instanceof String[]) {
+                String[] array = (String[]) (arg);
                 Collections.addAll(allData, array);
             } else {
-                allData.add(args[i].toString());
+                allData.add(arg.toString());
             }
         }
         return allData.toArray(new String[allData.size()]);

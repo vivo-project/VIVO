@@ -350,7 +350,6 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 		private VitroRequest vitroRequest;
 		private Map<String, String> fieldLabelToOutputFieldLabel;
 		private String topLevelURL = null;
-		private GenericQueryMap queryResult = new GenericQueryMap();
 
 		HighetTopLevelOrgTemporalGraphURLConsumer(VitroRequest vitroRequest, Map<String, String> fieldLabelToOutputFieldLabel) {
 			this.vitroRequest = vitroRequest;
@@ -366,8 +365,6 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			RDFNode organizationNode = qs.get(fieldLabelToOutputFieldLabel.get("organization"));
 
 			if (organizationNode != null) {
-				queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organization"), organizationNode.toString());
-
 				String individualLocalName = UtilityFunctions.getIndividualLocalName(organizationNode.toString(), vitroRequest);
 
 				if (StringUtils.isNotBlank(individualLocalName)) {
@@ -387,19 +384,6 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 							VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
 							highestLevelOrganizationTemporalGraphVisURLParams);
 
-				}
-			} else {
-				RDFNode organizationLabelNode = qs.get(fieldLabelToOutputFieldLabel.get("organizationLabel"));
-
-				if (organizationLabelNode != null) {
-					queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organizationLabel"), organizationLabelNode.toString());
-				}
-
-				RDFNode numberOfChildrenNode = qs.getLiteral("numOfChildren");
-
-				if (numberOfChildrenNode != null) {
-					queryResult.addEntry("numOfChildren",
-							String.valueOf(numberOfChildrenNode.asLiteral().getInt()));
 				}
 			}
 		}

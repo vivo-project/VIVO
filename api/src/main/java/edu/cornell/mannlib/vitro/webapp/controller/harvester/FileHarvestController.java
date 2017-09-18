@@ -456,8 +456,8 @@ public class FileHarvestController extends FreemarkerHttpServlet {
                 }
 
                 StringBuilder progressSinceLastCheck = new StringBuilder();
-                for(int i = 0; i < unsentLogLines.length; i++) {
-                    progressSinceLastCheck.append(unsentLogLines[i]).append(newline);
+                for (String unsentLogLine : unsentLogLines) {
+                    progressSinceLastCheck.append(unsentLogLine).append(newline);
                 }
 
                 boolean finished = sessionInfo.isFinished();
