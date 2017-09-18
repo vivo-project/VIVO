@@ -113,7 +113,7 @@ public class CoAuthorshipGraphMLWriter {
 
 		Set<Collaboration>  edges = coAuthorshipData.getCollaborations();
 		List<Collaboration> orderedEdges = new ArrayList<Collaboration>(edges);
-		Collections.sort(orderedEdges, new CollaborationComparator());
+		orderedEdges.sort(new CollaborationComparator());
 
 		for (Collaboration currentEdge : orderedEdges) {
 			/*
@@ -208,7 +208,7 @@ public class CoAuthorshipGraphMLWriter {
 		List<Collaborator> orderedAuthorNodes = new ArrayList<Collaborator>(authorNodes);
 		orderedAuthorNodes.remove(egoNode);
 		
-		Collections.sort(orderedAuthorNodes, new CollaboratorComparator());
+		orderedAuthorNodes.sort(new CollaboratorComparator());
 		
 		for (Collaborator currNode : orderedAuthorNodes) {
 			/*

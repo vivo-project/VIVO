@@ -801,7 +801,7 @@ public class AddAssociatedConceptsPreprocessor extends
 						//Make or retrieve URI for this label
 						//TODO: Do we create this string with empty inputs ?
 						String  uri = getURIForSemanticTypeLabel(label);
-						if(uri != "") {
+						if(!StringUtils.isEmpty(uri)) {
 							//uri var shouldn't be repeated?
 							if(!this.conceptSemanticTypeURIVarToValueMap.containsKey(uriVar)) {
 							this.conceptSemanticTypeURIVarToValueMap.put(uriVar, new ArrayList<String>());

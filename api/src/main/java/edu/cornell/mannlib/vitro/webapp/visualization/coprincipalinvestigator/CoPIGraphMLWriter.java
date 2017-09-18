@@ -116,7 +116,7 @@ public class CoPIGraphMLWriter {
 		
 		Set<Collaboration> edges = coPIData.getCollaborations();
 		List<Collaboration> orderedEdges = new ArrayList<Collaboration>(edges);
-		Collections.sort(orderedEdges, new CollaborationComparator());
+		orderedEdges.sort(new CollaborationComparator());
 
 		for (Collaboration currentEdge : orderedEdges) {
 			/*
@@ -213,7 +213,7 @@ public class CoPIGraphMLWriter {
 		List<Collaborator> orderedPINodes = new ArrayList<Collaborator>(piNodes);
 		orderedPINodes.remove(egoNode);
 		
-		Collections.sort(orderedPINodes, new CollaboratorComparator());
+		orderedPINodes.sort(new CollaboratorComparator());
 		
 		
 		for (Collaborator currNode : orderedPINodes) {
