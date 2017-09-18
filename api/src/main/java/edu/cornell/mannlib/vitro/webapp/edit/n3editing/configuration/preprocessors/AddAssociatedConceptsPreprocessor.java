@@ -758,7 +758,7 @@ public class AddAssociatedConceptsPreprocessor extends
 				if(numberLabels == 1) {
 					String label = conceptSemanticTypeLabels[0];
 					String  uri = getURIForSemanticTypeLabel(label);
-					if(uri != "") {
+					if(!StringUtils.isEmpty(uri)) {
 						String[] urisToAdd = new String[1];
 						urisToAdd[0] = uri;
 						pseudoInputString = new StringBuilder(uri);
