@@ -24,8 +24,13 @@ var i18nStrings = {
 			offset: {
 				top: $('header').height()
 			}
-		});	
-	});
+		});
+
+        $( window ).resize(function() {
+            $('#nav-wrapper').height($("#nav").height());
+        });
+
+    });
 </script>
 
 ${headScripts.list()} 
