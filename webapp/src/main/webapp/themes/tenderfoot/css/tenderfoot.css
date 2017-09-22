@@ -293,7 +293,31 @@ table.classHierarchy {
     margin-right: 0px;
 }
 
-
 section#container div {
     width: auto;
+}
+
+#flash-message {
+    border: 1px dotted #E2C822;
+    background-color: #FFF9D7;
+    padding: .5em;
+    margin-bottom: 10px;
+}
+#welcome-message {
+    border: 1px dotted #E2C822;
+    background-color: #FFF9D7;
+    padding: .25em;
+    margin-bottom: 8px;
+}
+#flash-msg-container,
+#welcome-msg-container {
+    width: 600px;
+    height:34px;
+    position: absolute;
+    z-index: 99;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top: 0;
 }
