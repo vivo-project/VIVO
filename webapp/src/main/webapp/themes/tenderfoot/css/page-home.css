@@ -10,7 +10,7 @@
 }
 
 .hero {
-    background: #283a4b;
+    background: #283a4b url(../images/hero-background.jpg) repeat-x 0 0;
 }
 
 .hero form input,
