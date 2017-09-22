@@ -694,7 +694,7 @@ var addAuthorForm = {
                                 $(this).show();
                             });
                             addAuthorForm.showFormButton.removeClass('disabledSubmit');
-                            addAuthorForm.showFormButton.attr('disabled','');
+                            addAuthorForm.showFormButton.attr('disabled',false);
                         }
                         else {
                             $('img#indicatorTwo').fadeOut(100, function() {
@@ -705,7 +705,7 @@ var addAuthorForm = {
                                  $(this).show();
                              });
                              addAuthorForm.submit.removeClass('disabledSubmit');
-                             addAuthorForm.submit.attr('disabled','');
+                             addAuthorForm.submit.attr('disabled',false);
                         }
                     });
 
@@ -791,8 +791,8 @@ var addAuthorForm = {
 	        this.selectedOrg.addClass("acSelection");
 	        this.selectedOrgName.addClass("acSelectionInfo");
 	        this.orgLink.addClass("verifyMatch");
-	        this.orgName.attr('disabled', '');
-	        this.orgUriField.attr('disabled', '');
+	        this.orgName.attr('disabled', false);
+	        this.orgUriField.attr('disabled', false);
 
 	        addAuthorForm.addAcHelpText(this.orgName);
 	        addAuthorForm.initAutocomplete();
@@ -818,10 +818,10 @@ var addAuthorForm = {
 	        this.selectedAuthor.addClass("acSelection");
 	        this.selectedAuthorName.addClass("acSelectionInfo");
 	        this.personLink.addClass("verifyMatch");
-	        this.acSelector.attr('disabled', '');
-	        this.firstNameField.attr('disabled', '');
-	        this.middleNameField.attr('disabled', '');
-	        this.lastNameField.attr('disabled', '');
+	        this.acSelector.attr('disabled', false);
+	        this.firstNameField.attr('disabled', false);
+	        this.middleNameField.attr('disabled', false);
+	        this.lastNameField.attr('disabled', false);
 
 	        addAuthorForm.addAcHelpText(this.acSelector);
 	        addAuthorForm.initAutocomplete();
