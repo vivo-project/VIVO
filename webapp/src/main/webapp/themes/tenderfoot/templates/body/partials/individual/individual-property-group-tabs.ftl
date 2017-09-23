@@ -14,7 +14,7 @@
 			<#if ( groupTabs.properties?size > 0 ) >
 				<#assign groupName = groupTabs.getName(nameForOtherGroup)>
 				<#if groupName?has_content>
-				<#--the function replaces spaces in the name with underscores, also called for the property group menu-->
+					<#--the function replaces spaces in the name with underscores, also called for the property group menu-->
 					<#assign groupNameHtmlId = p.createPropertyGroupHtmlId(groupName) >
 				<#else>
 					<#assign groupName = "${i18n().properties_capitalized}">
@@ -29,7 +29,7 @@
 			</#if>
 		</#list>
 		<#if (propertyGroups.all?size > 1) >
-            <li id="viewAllTab" data-toggle="tab" href="#viewAll"><a href="#">${i18n().view_all_capitalized}</a></li>
+            <li id="viewAllTab" data-toggle="tab" groupName="viewAll" href="#viewAll"><a href="#">${i18n().view_all_capitalized}</a></li>
 		</#if>
         </ul>
     </div>
@@ -45,15 +45,15 @@
                 <div id="${groupNameHtmlId?replace("/","-")}"
                      class="tab-pane <#if (sectionCount == 1) >active</#if>"
                      role="tabpanel">
-				<#-- Display the group heading -->
+					<#-- Display the group heading -->
 					<#if groupName?has_content>
-					<#--the function replaces spaces in the name with underscores, also called for the property group menu-->
+						<#--the function replaces spaces in the name with underscores, also called for the property group menu-->
 						<#assign groupNameHtmlId = p.createPropertyGroupHtmlId(groupName) >
                         <h2 id="${groupNameHtmlId?replace("/","-")}" pgroup="tabs" class="hidden">${groupName?capitalize}</h2>
 					<#else>
                         <h2 id="properties" pgroup="tabs" class="hidden">${i18n().properties_capitalized}</h2>
 					</#if>
-				<#-- List the properties in the group   -->
+					<#-- List the properties in the group   -->
 					<#include "individual-properties.ftl">
                 </div>
 				<#assign sectionCount = 2 >
