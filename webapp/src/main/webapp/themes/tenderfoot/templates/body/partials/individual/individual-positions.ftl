@@ -18,10 +18,6 @@
             <#local rangeUri = "" />
         </#if>
         <#if statement.dateTimeEnd??>
-            <li role="listitem" class="pastPosition">
-                <#include "${template}">
-                <@p.editingLinks "${property.localName}" "${property.name}" statement editable rangeUri/>
-            </li>
         <#else>
             <li role="listitem" class="currentPosition">
                 <#include "${template}">
@@ -29,4 +25,42 @@
             </li>
         </#if>
     </#list>
+    <#list statements as statement>
+        <#if property.rangeUri?? >
+            <#local rangeUri = property.rangeUri />
+        <#else>
+            <#local rangeUri = "" />
+        </#if>
+        <#if statement.dateTimeEnd??>
+            <li role="listitem" class="pastPosition">
+                <#include "${template}">
+                <@p.editingLinks "${property.localName}" "${property.name}" statement editable rangeUri/>
+            </li>
+        </#if>
+    </#list>
 </#macro>
+
+<script language="JavaScript">
+    $('ul#individual-personInPosition').each(function(){
+
+        var LiN = $(this).find('li').length;
+
+        if( LiN > 1) {
+            $('li', this).eq(0).nextAll().hide().addClass('toggleable');
+            $(this).append('<li class="more">More...</li>');
+        }
+
+    });
+
+
+    $('ul#individual-personInPosition').on('click','.more', function(){
+        if( $(this).hasClass('less') ){
+            $(this).text('More...').removeClass('less');
+        }else{
+            $(this).text('Less...').addClass('less');
+        }
+
+        $(this).siblings('li.toggleable').slideToggle();
+
+    });
+</script>

@@ -94,6 +94,10 @@ article.property li h3 {
     margin-left: 10px;
 }
 
+ul#individual-hasResearchArea {
+    margin-left: 10px;
+}
+
 ul#individual-hasResearchArea li,
 ul#individual-facultyMemberships li {
     float: left;
@@ -108,4 +112,17 @@ ul#individual-facultyMemberships li {
 #admin h3 {
     background-color: #398AAC;
     color: #fff;
+}
+
+ul#individual-personInPosition {
+    list-style: none;
+    padding-left: 10px;
+}
+
+ul#individual-personInPosition li {
+    line-height: 1.3em;
+}
+
+ul#individual-personInPosition li:last-child {
+    padding-bottom: 5px;
 }
