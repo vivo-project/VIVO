@@ -1,7 +1,7 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
 <div id="nav-wrapper">
-    <div id="nav" data-spy="affix">
+    <div id="nav">
         <div class="container">
             <nav class="navbar navbar-default">
                 <p class="navbar-text visible-xs-inline-block">Menu</p>
