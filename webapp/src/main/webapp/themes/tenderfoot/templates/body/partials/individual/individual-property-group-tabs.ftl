@@ -21,10 +21,10 @@
 					<#assign groupNameHtmlId = "${i18n().properties}" >
 				</#if>
 				<#if tabCount = 1 >
-                    <li data-toggle="tab" class="active" href="#${groupNameHtmlId?replace("/","-")}"><a href="#">${groupName?capitalize}</a></li>
+                    <li data-toggle="tab" groupName="${groupNameHtmlId?replace("/","-")}" class="active" href="#${groupNameHtmlId?replace("/","-")}"><a href="#">${groupName?capitalize}</a></li>
 					<#assign tabCount = 2>
 				<#else>
-                    <li data-toggle="tab" href="#${groupNameHtmlId?replace("/","-")}"><a href="#">${groupName?capitalize}</a></li>
+                    <li data-toggle="tab" groupName="${groupNameHtmlId?replace("/","-")}" href="#${groupNameHtmlId?replace("/","-")}"><a href="#">${groupName?capitalize}</a></li>
 				</#if>
 			</#if>
 		</#list>
