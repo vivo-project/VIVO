@@ -21,10 +21,10 @@
 					<#assign groupNameHtmlId = "${i18n().properties}" >
 				</#if>
 				<#if tabCount = 1 >
-                    <li data-toggle="tab" groupName="${groupNameHtmlId?replace("/","-")}" class="active" href="#panel-${groupNameHtmlId?replace("/","-")}"><a href="#">${groupName?capitalize}</a></li>
+                    <li data-toggle="tab" groupName="${groupNameHtmlId?replace("/","-")}" class="active" href="#${groupNameHtmlId?replace("/","-")}Group"><a href="#">${groupName?capitalize}</a></li>
 					<#assign tabCount = 2>
 				<#else>
-                    <li data-toggle="tab" groupName="${groupNameHtmlId?replace("/","-")}" href="#panel-${groupNameHtmlId?replace("/","-")}"><a href="#">${groupName?capitalize}</a></li>
+                    <li data-toggle="tab" groupName="${groupNameHtmlId?replace("/","-")}" href="#${groupNameHtmlId?replace("/","-")}Group"><a href="#">${groupName?capitalize}</a></li>
 				</#if>
 			</#if>
 		</#list>
@@ -42,7 +42,7 @@
 				<#assign groupNameHtmlId = p.createPropertyGroupHtmlId(groupName) >
 				<#assign verbose = (verbosePropertySwitch.currentValue)!false>
 
-                <div id="panel-${groupNameHtmlId?replace("/","-")}"
+                <div id="${groupNameHtmlId?replace("/","-")}Group"
                      class="tab-pane <#if (sectionCount == 1) >active</#if>"
                      role="tabpanel">
 					<#-- Display the group heading -->
