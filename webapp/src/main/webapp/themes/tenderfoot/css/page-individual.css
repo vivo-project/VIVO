@@ -147,3 +147,11 @@ ul#individual-personInPosition li {
 ul#individual-personInPosition li:last-child {
     padding-bottom: 5px;
 }
+
+section.vcard {
+    float: left;
+}
+
+section#preferredTitle {
+    float: left;
+}

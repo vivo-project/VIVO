@@ -73,12 +73,13 @@
                 <h1 class="foaf-person">
                     <#-- Label -->
                     <span itemprop="name" class="fn"><@p.label individual editable labelCount localesCount/></span>
-
+                </h1>
+                <section id="preferredTitle">
                     <#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->
                     <#assign title = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Title")!>
                     <#if title?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
                         <#if (title.statements?size < 1) >
-                            <@p.addLinkWithLabel title editable /> 
+                            <@p.addLinkWithLabel title editable />
                         <#elseif editable>
                             <h2>${title.name?capitalize!}</h2>
                             <@p.verboseDisplay title />
@@ -91,8 +92,8 @@
                     <#-- If preferredTitle is unpopulated, display mostSpecificTypes -->
                     <#if ! (title.statements)?has_content>
                         <@p.mostSpecificTypes individual />
-                    </#if>                        
-                </h1>
+                    </#if>
+                </section>
             </#if>
             <!-- Positions -->   
             <#include "individual-positions.ftl">
