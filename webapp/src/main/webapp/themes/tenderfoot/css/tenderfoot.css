@@ -321,3 +321,7 @@ section#container div {
     right: 0;
     top: 0;
 }
+img.add-individual {
+    height: 15px;
+    width: 15px;
+}
