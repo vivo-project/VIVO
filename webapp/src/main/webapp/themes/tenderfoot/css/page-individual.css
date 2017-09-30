@@ -155,3 +155,9 @@ section.vcard {
 section#preferredTitle {
     float: left;
 }
+
+section#preferredTitle h2 {
+    float: left;
+    font-size: 1em;
+    color: #ccc;
+}
