@@ -109,7 +109,7 @@ ul#individual-facultyMemberships li {
 .edit-mainImage {
     position: absolute;
     background: rgba(255, 255, 255, 0.6);
-    padding: 0 6px 0 0;
+    padding: 0 6px 0 6px;
     top: 6px;
     left: 21px;
 }
@@ -121,9 +121,9 @@ a.edit-mainImage img.edit-individual {
 .delete-mainImage {
     position: absolute;
     top: 6px;
-    left: 51px;
+    left: 55px;
     background: rgba(255, 255, 255, 0.6);
-    padding: 0 6px 0 8px;
+    padding: 0 6px 0 6px;
 }
 
 #admin {
