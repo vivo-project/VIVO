@@ -2,6 +2,10 @@ legend {
     display: none;
 }
 
+.navbar {
+    z-index: 10;
+}
+
 #nav {
     background: #f7f9f9;
 }
@@ -10,12 +14,16 @@ legend {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index:10;
+    z-index: 10;
 }
 
 #nav .container {
     padding-left: 0px;
     padding-right: 0px;
+}
+
+.navbar-collapse.in #main-nav {
+    padding-left: 15px;
 }
 
 p.navbar-text {
