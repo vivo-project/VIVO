@@ -148,14 +148,6 @@ ul#individual-personInPosition li:last-child {
     padding-bottom: 5px;
 }
 
-section.vcard {
-    float: left;
-}
-
-section#preferredTitle {
-    float: left;
-}
-
 section#preferredTitle h2 {
     float: left;
     font-size: 1em;
