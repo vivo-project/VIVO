@@ -40,7 +40,7 @@
 
                     d3.select("#publicationsChart").selectAll("*").remove();
                     d3.select("#publicationsChart").style("height", chartHeight);
-                    
+
                     var svg = d3.select("#publicationsChart"),
                             margin = {top: 30, right: 20, bottom: 30, left: 40},
                             width = (chartWidth - margin.left - margin.right),
