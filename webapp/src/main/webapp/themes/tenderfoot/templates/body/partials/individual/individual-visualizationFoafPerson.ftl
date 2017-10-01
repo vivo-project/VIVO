@@ -27,17 +27,24 @@
             
             <span id="publicationsHeading">${i18n().publications_in_vivo}</span>
 
-            <svg width="360" height="200" id="publicationsChart" onload="renderPublicationsChart()">
+            <svg width="100%" id="publicationsChart" onload="renderPublicationsChart()" onresize="renderPublicationsChart()">
             </svg>
 
             <script>
                 var dataUrl = '${urls.base}/visualizationAjax?vis=cumulative_pub_count&uri=${individual.uri?url}';
 
                 function renderPublicationsChart() {
+                    var chartWidth = parseInt(d3.select("#publicationsChart").style("width"),10);
+//                    var chartHeight =  parseInt(d3.select("#publicationsChart").style("height"),10);
+                    var chartHeight = chartWidth * (2/3);
+
+                    d3.select("#publicationsChart").selectAll("*").remove();
+                    d3.select("#publicationsChart").style("height", chartHeight);
+                    
                     var svg = d3.select("#publicationsChart"),
                             margin = {top: 30, right: 20, bottom: 30, left: 40},
-                            width = +svg.attr("width") - margin.left - margin.right,
-                            height = +svg.attr("height") - margin.top - margin.bottom,
+                            width = (chartWidth - margin.left - margin.right),
+                            height = (chartHeight - margin.top - margin.bottom),
                             g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
                     var x = d3.scaleBand()
