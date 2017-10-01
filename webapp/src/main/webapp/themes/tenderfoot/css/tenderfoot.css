@@ -26,8 +26,28 @@ legend {
     padding-left: 15px;
 }
 
+.navbar-toggle .button-label {
+    display: inline-block;
+    float: left;
+    font-weight: bold;
+    line-height: 14px;
+    padding-right: 10px;
+}
+.button-bars {
+    display: inline-block;
+    float: left;
+}
+
 p.navbar-text {
     margin-left: 15px;
+}
+
+#nav-searchbox {
+    float: right;
+}
+
+button.navbar-toggle {
+    z-index: 999;
 }
 
 body {

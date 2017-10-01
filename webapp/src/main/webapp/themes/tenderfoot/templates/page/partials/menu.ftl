@@ -4,12 +4,13 @@
     <div id="nav">
         <div class="container">
             <nav class="navbar navbar-default">
-                <p class="navbar-text visible-xs-inline-block">Menu</p>
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                <button class="navbar-toggle pull-left" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="button-label">Menu</span>
+                    <div class="button-bars">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </div>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarContent">
                     <ul id="main-nav" role="list" class="nav navbar-nav mr-auto mt-2 mt-md-0">
@@ -22,6 +23,7 @@
                         <#include "search.ftl">
                         </li>
                     </ul>
+                </div>
             </nav>
         </div>
     </div>
