@@ -13,7 +13,7 @@
                 </div>
 
                 <button class="navbar-toggle pull-left" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="button-label">Menu</span>
+                    <span class="button-label">${i18n().collapsed_menu_name}</span>
                     <div class="button-bars">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
