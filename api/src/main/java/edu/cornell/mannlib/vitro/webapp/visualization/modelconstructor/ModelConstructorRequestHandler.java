@@ -9,10 +9,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cornell.mannlib.vitro.webapp.visualization.utilities.VisualizationCaches;
 import org.apache.commons.logging.Log;
 
-import com.google.gson.Gson;
 import org.apache.jena.query.Dataset;
 
 import edu.cornell.mannlib.vitro.webapp.auth.permissions.SimplePermission;
@@ -35,7 +36,7 @@ public class ModelConstructorRequestHandler implements
     
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
-			Dataset dataSource) throws MalformedQueryParametersException {
+			Dataset dataSource) throws MalformedQueryParametersException, JsonProcessingException {
 		return regenerateConstructedModels(vitroRequest, dataSource);
 	}
 
@@ -82,7 +83,7 @@ public class ModelConstructorRequestHandler implements
 	}
 
 	private Map<String, String> regenerateConstructedModels(VitroRequest vitroRequest, 
-															Dataset dataSource) {
+															Dataset dataSource) throws JsonProcessingException {
 
 		VisualizationCaches.rebuildAll(vitroRequest.getRDFService());
 
@@ -112,11 +113,10 @@ public class ModelConstructorRequestHandler implements
 
 		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY,
 				"application/octet-stream");
-		
-		Gson json = new Gson();
-		
+
+		ObjectMapper mapper = new ObjectMapper();
 		fileData.put(DataVisualizationController.FILE_CONTENT_KEY,
-				json.toJson(refreshedModels));
+				mapper.writeValueAsString(refreshedModels));
 
 		return fileData;
 	}

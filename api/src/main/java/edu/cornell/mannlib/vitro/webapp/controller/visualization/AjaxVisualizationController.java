@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -140,7 +141,7 @@ public class AjaxVisualizationController extends FreemarkerHttpServlet {
 				return visRequestHandler.generateAjaxVisualization(vitroRequest, 
 														log, 
 														dataset);
-			} catch (MalformedQueryParametersException e) {
+			} catch (JsonProcessingException|MalformedQueryParametersException e) {
 				return UtilityFunctions.handleMalformedParameters(
 						"Ajax Visualization Query Error - Individual Publication Count", 
 						e.getMessage(), 

@@ -9,6 +9,11 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.jena.query.QuerySolution;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
@@ -26,7 +31,6 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 
-import com.google.gson.Gson;
 import org.apache.jena.query.Dataset;
 
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;
@@ -164,7 +168,7 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 
 	private Map<String, String> getSubjectPersonEntityAndGenerateDataResponse(
 			VitroRequest vitroRequest, String subjectEntityURI, String entityLabel, VisConstants.DataVisMode dataOuputFormat)
-					throws MalformedQueryParametersException {
+			throws MalformedQueryParametersException, JsonProcessingException {
 
 		long startTime = System.currentTimeMillis();
 		try {
@@ -191,7 +195,6 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 
 				Map<String, String> fileData = new HashMap<String, String>();
 				if (VisConstants.DataVisMode.JSON.equals(dataOuputFormat)) {
-					Gson json = new Gson();
 					Set jsonContent = new HashSet();
 
 					MapOfScience entityJson = new MapOfScience(subjectEntityURI);
@@ -203,8 +206,10 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 
 					jsonContent.add(entityJson);
 
+					ObjectMapper mapper = new ObjectMapper();
+
 					fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, "application/octet-stream");
-					fileData.put(DataVisualizationController.FILE_CONTENT_KEY, json.toJson(jsonContent));
+					fileData.put(DataVisualizationController.FILE_CONTENT_KEY, mapper.writeValueAsString(jsonContent));
 				} else {
 					if (StringUtils.isBlank(entityLabel)) {
 						entityLabel = "no-name";
@@ -239,7 +244,7 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 
 	private Map<String, String> getSubjectEntityAndGenerateDataResponse(
 			VitroRequest vitroRequest, String subjectEntityURI, String entityLabel, VisConstants.DataVisMode dataOuputFormat)
-			throws MalformedQueryParametersException {
+			throws MalformedQueryParametersException, JsonProcessingException {
 
 		RDFService rdfService = vitroRequest.getRDFService();
 
@@ -290,7 +295,6 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 
 			Map<String, String> fileData = new HashMap<String, String>();
 			if (VisConstants.DataVisMode.JSON.equals(dataOuputFormat)) {
-				Gson json = new Gson();
 				Set jsonContent = new HashSet();
 
 				MapOfScience entityJson = new MapOfScience(subjectEntityURI);
@@ -312,8 +316,10 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 
 				jsonContent.add(entityJson);
 
+				ObjectMapper mapper = new ObjectMapper();
+
 				fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, "application/octet-stream");
-				fileData.put(DataVisualizationController.FILE_CONTENT_KEY, json.toJson(jsonContent));
+				fileData.put(DataVisualizationController.FILE_CONTENT_KEY, mapper.writeValueAsString(jsonContent));
 			} else {
 				if (StringUtils.isBlank(entityLabel)) {
 					entityLabel = "no-organization";
@@ -356,26 +362,25 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 		return fileData;
 	}
 
-	private Map<String, String> prepareStandaloneDataErrorResponse() {
+	private Map<String, String> prepareStandaloneDataErrorResponse() throws JsonProcessingException {
 		
 		GenericQueryMap errorDataResponse = new GenericQueryMap();
 		errorDataResponse.addEntry("error", "No Publications for this Entity found in VIVO.");
-		
-		Gson jsonErrorResponse = new Gson();
 		
 		Map<String, String> fileData = new HashMap<String, String>();
 		
 		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
 					 "application/octet-stream");
-		
-		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, jsonErrorResponse.toJson(errorDataResponse));
+
+		ObjectMapper mapper = new ObjectMapper();
+		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, mapper.writeValueAsString(errorDataResponse));
 		
 		return fileData;
 	}
 
 	@Override
 	public Map<String, String> generateDataVisualization(VitroRequest vitroRequest, Log log, Dataset dataset)
-			throws MalformedQueryParametersException {
+			throws MalformedQueryParametersException, JsonProcessingException {
 
 		String entityURI = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		

@@ -1,21 +1,41 @@
 /* $This file is distributed under the terms of the license in LICENSE$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.json;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MapOfScience {
-	
+	@JsonProperty
 	private String uri;
+
+	@JsonProperty
 	private String label;
+
+	@JsonProperty
 	private String type;
+
+	@JsonProperty
 	private int pubsMapped;
+
+	@JsonProperty
 	private int pubsWithNoJournals;
+
+	@JsonProperty
 	private int pubsWithInvalidJournals;
+
+	@JsonProperty
 	private String lastCachedAtDateTime;
+
+	@JsonProperty
 	private Map<Integer, Float> subdisciplineActivity = new HashMap<Integer, Float>();
+
+	@JsonProperty
 	private Set<SubEntityInfo> subEntities = new HashSet<SubEntityInfo>();
 
 	public MapOfScience(String uri) {
@@ -84,11 +104,18 @@ public class MapOfScience {
 		return subEntities;
 	}
 
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private class SubEntityInfo {
-		
+		@JsonProperty
 		private String uri;
+
+		@JsonProperty
 		private String label;
+
+		@JsonProperty
 		private String type;
+
+		@JsonProperty
 		private int pubs;
 		
 		public SubEntityInfo(String uri, String label, String type, int pubs) {
@@ -129,7 +156,5 @@ public class MapOfScience {
 		public void setPubs(int pubs) {
 			this.pubs = pubs;
 		}
-		
-		
 	}
 }
