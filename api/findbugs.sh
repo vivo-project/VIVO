@@ -1,4 +1,4 @@
 #!/bin/sh
 
-mvn compile findbugs:findbugs findbugs:gui
+mvn -Dfindbugs.maxHeap=4096 -Dfindbugs.timeout=6000000 compile findbugs:findbugs findbugs:gui
 
