@@ -577,10 +577,10 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 	}
 
 	private synchronized void expireCache() {
-		for (String key : collaborationDataCache.keySet()) {
-			CollaborationDataCacheEntry entry = collaborationDataCache.get(key);
-			if (entry != null && entry.hasExpired()) {
-				collaborationDataCache.remove(key);
+		for (Map.Entry<String, CollaborationDataCacheEntry> entry : collaborationDataCache.entrySet()) {
+			CollaborationDataCacheEntry cacheEntry = entry.getValue();
+			if (cacheEntry != null && cacheEntry.hasExpired()) {
+				collaborationDataCache.remove(entry.getKey());
 			}
 		}
 	}

@@ -483,8 +483,8 @@ public class CachingRDFServiceExecutor<T> {
                     boolean favourStartTime = false;
 
                     // Find the thread that expects to take the least time
-                    for (Thread thread : threadToExecutionTime.keySet()) {
-                        ThreadControl threadControl = threadToExecutionTime.get(thread);
+                    for (Map.Entry<Thread, ThreadControl> entry : threadToExecutionTime.entrySet()) {
+                        ThreadControl threadControl = entry.getValue();
 
                         // If there are threads that have been waiting over 2 seconds, favour the oldest thread
                         if (threadControl.started + 2000 < current) {
@@ -492,17 +492,17 @@ public class CachingRDFServiceExecutor<T> {
                         }
 
                         if (nextToRelease == null) {
-                            nextToRelease = thread;
+                            nextToRelease = entry.getKey();
                             nextToReleaseControl = threadControl;
                         } else {
                             if (favourStartTime) {
                                 // Find the oldest thread
                                 if (threadControl.started < nextToReleaseControl.started) {
-                                    nextToRelease = thread;
+                                    nextToRelease = entry.getKey();
                                     nextToReleaseControl = threadControl;
                                 }
                             } else if (threadControl.expectedDuration < nextToReleaseControl.expectedDuration) {
-                                nextToRelease = thread;
+                                nextToRelease = entry.getKey();
                                 nextToReleaseControl = threadControl;
                             }
                         }

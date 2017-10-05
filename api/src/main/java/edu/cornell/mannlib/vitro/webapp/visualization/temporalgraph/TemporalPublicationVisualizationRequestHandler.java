@@ -128,20 +128,16 @@ public class TemporalPublicationVisualizationRequestHandler implements
 				Set subEntitiesJson = new HashSet();
 
 				// For each suborganisation
-				for (String subOrg : subOrgPublicationsMap.keySet()) {
-					JsonObject entityJson = new JsonObject(orgLabelMap.get(subOrg));
+				for (Map.Entry<String, Set<String>> entry : subOrgPublicationsMap.entrySet()) {
+					JsonObject entityJson = new JsonObject(orgLabelMap.get(entry.getKey()));
 
-					if (subOrgPublicationsMap.containsKey(subOrg)) {
-						List<List<Integer>> yearPubCounts = CounterUtils.getObjectCountByYear(subOrgPublicationsMap.get(subOrg), publicationToYearMap);
-						entityJson.setYearToActivityCount(yearPubCounts);
-					} else {
-						entityJson.setYearToActivityCount(new ArrayList<List<Integer>>());
-					}
+					List<List<Integer>> yearPubCounts = CounterUtils.getObjectCountByYear(entry.getValue(), publicationToYearMap);
+					entityJson.setYearToActivityCount(yearPubCounts);
 
-					String type = orgMostSpecificLabelMap.get(subOrg);
+					String type = orgMostSpecificLabelMap.get(entry.getKey());
 					entityJson.setOrganizationTypes(Arrays.asList(type == null ? "Organization" : type));
 
-					entityJson.setEntityURI(subOrg);
+					entityJson.setEntityURI(entry.getKey());
 					entityJson.setVisMode("ORGANIZATION");
 
 					subEntitiesJson.add(entityJson);

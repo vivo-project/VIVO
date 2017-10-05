@@ -191,20 +191,16 @@ public class TemporalGrantVisualizationRequestHandler implements
 				Set subEntitiesJson = new HashSet();
 
 				// For each suborganisation
-				for (String subOrg : subOrgGrantsMap.keySet()) {
-					JsonObject entityJson = new JsonObject(orgLabelMap.get(subOrg));
+				for (Map.Entry<String, Set<String>> entry : subOrgGrantsMap.entrySet()) {
+					JsonObject entityJson = new JsonObject(orgLabelMap.get(entry.getKey()));
 
-					if (subOrgGrantsMap.containsKey(subOrg)) {
-						List<List<Integer>> yearPubCounts = CounterUtils.getObjectCountByYear(subOrgGrantsMap.get(subOrg), grantToYearMap);
-						entityJson.setYearToActivityCount(yearPubCounts);
-					} else {
-						entityJson.setYearToActivityCount(new ArrayList<List<Integer>>());
-					}
+					List<List<Integer>> yearPubCounts = CounterUtils.getObjectCountByYear(entry.getValue(), grantToYearMap);
+					entityJson.setYearToActivityCount(yearPubCounts);
 
-					String type = orgMostSpecificLabelMap.get(subOrg);
+					String type = orgMostSpecificLabelMap.get(entry.getKey());
 					entityJson.setOrganizationTypes(Arrays.asList(type == null ? "Organization" : type));
 
-					entityJson.setEntityURI(subOrg);
+					entityJson.setEntityURI(entry.getKey());
 					entityJson.setVisMode("ORGANIZATION");
 
 					subEntitiesJson.add(entityJson);
