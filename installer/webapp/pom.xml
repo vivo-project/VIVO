@@ -44,6 +44,17 @@
                                     <artifactId>vivo-webapp</artifactId>
                                     <type>war</type>
                                 </overlay>
+                                <!-- Overlays for multilingual support -->
+                                <!-- overlay>
+                                    <groupId>org.vivoweb</groupId>
+                                    <artifactId>vitro-languages-webapp</artifactId>
+                                    <type>war</type>
+                                </overlay>
+                                <overlay>
+                                    <groupId>org.vivoweb</groupId>
+                                    <artifactId>vivo-languages-webapp</artifactId>
+                                    <type>war</type>
+                                </overlay -->
                             </overlays>
                             <webResources>
                                 <resource>
@@ -141,6 +152,19 @@
             <artifactId>vivo-webapp</artifactId>
             <type>war</type>
         </dependency>
+        <!-- Dependencies for multilingual support -->
+        <!-- dependency>
+            <groupId>org.vivoweb</groupId>
+            <artifactId>vitro-languages-webapp</artifactId>
+            <version>[1.10.0,1.11.0)</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>org.vivoweb</groupId>
+            <artifactId>vivo-languages-webapp</artifactId>
+            <version>[1.10.0,1.11.0)</version>
+            <type>war</type>
+        </dependency -->
 
         <dependency>
             <groupId>javax.servlet</groupId>

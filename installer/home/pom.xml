@@ -107,5 +107,13 @@
             <artifactId>vivo-home</artifactId>
             <type>tar.gz</type>
         </dependency>
+        <!-- Dependency for multilingual support -->
+        <!-- dependency>
+            <groupId>org.vivoweb</groupId>
+            <artifactId>vivo-languages-home</artifactId>
+            <version>1.10.0-SNAPSHOT</version>
+            <version>[1.10.0,1.11.0)</version>
+            <type>tar.gz</type>
+        </dependency -->
     </dependencies>
 </project>
