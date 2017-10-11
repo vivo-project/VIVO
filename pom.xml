@@ -285,7 +285,7 @@
                 <artifactId>maven-site-plugin</artifactId>
                 <configuration>
                     <skip>${maven-site-plugin.skip}</skip>
-                    <stagingDirectory>${stagingBase}</stagingDirectory>
+                    <stagingDirectory>${stagingBase}/vivo/${project.version}</stagingDirectory>
                 </configuration>
             </plugin>
         </plugins>
