@@ -28,7 +28,7 @@
             {
                 <precise-subquery>?subject ?property ?role .
                 ?role a core:ClinicalRole .</precise-subquery>
-                ?role core:relates ?activity .
+                ?role core:roleContributesTo ?activity .
                 ?activity rdfs:label ?activityLabel .
 
                 <collated>
