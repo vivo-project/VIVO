@@ -44,12 +44,12 @@
                 LET (?valueEndName := afn:localname(?valueEnd))
                 OPTIONAL {
                     <precise-subquery>?subject ?property ?dateTimeInterval .
-                    ?dateTimeInterval core:start ?valueEnd .</precise-subquery>
+                    ?dateTimeInterval core:end ?valueEnd .</precise-subquery>
                     ?valueEnd core:dateTime ?dateTimeEnd .
                 }
                 OPTIONAL {
                     <precise-subquery>?subject ?property ?dateTimeInterval .
-                    ?dateTimeInterval core:start ?valueEnd .</precise-subquery>
+                    ?dateTimeInterval core:end ?valueEnd .</precise-subquery>
                     ?valueEnd core:dateTimePrecision ?dateTimePrecisionEnd .
                     LET (?precisionEnd := afn:localname(?dateTimePrecisionEnd))
                 }
