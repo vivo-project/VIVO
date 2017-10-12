@@ -22,7 +22,6 @@
                 <precise-subquery>?subject ?property ?administratorRole .
                 ?administratorRole a core:AdministratorRole .</precise-subquery>
                 ?administratorRole core:relatedBy ?grant .
-                ?grant core:relates ?administratorRole .
                 ?grant rdfs:label ?grantLabel .
             }
         }  ORDER BY  ?grantLabel

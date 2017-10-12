@@ -69,7 +69,6 @@
                 ?dateTimeInterval core:end ?dateTimeEndValue .
                 ?dateTimeEndValue core:dateTime ?dateTimeEnd .
             }
-            FILTER ( ?roleSubclass = core:ResearcherRole)
         } ORDER BY <collated>?subclass</collated> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityLabel ?activityName
     </query-select>
 

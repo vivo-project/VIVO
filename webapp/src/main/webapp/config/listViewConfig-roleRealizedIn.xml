@@ -22,7 +22,22 @@
         WHERE {                
             ?subject ?property ?role .
             ?role a ?objectType .
-            
+
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?role .
+                ?role a ?objectType .</precise-subquery>
+                ?role rdfs:label ?roleLabel .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?role .
+                ?role a ?objectType .</precise-subquery>
+                ?role core:roleContributesTo ?activity .
+                ?activity rdfs:label ?activityLabel .
+
+                <collated>
+                ?activity vitro:mostSpecificType ?subclass .
+                </collated>
+            }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
                 ?role a ?objectType .</precise-subquery>
@@ -33,11 +48,6 @@
                 ?activity vitro:mostSpecificType ?subclass .
                 </collated>
             }           
-            OPTIONAL {
-                <precise-subquery>?subject ?property ?role .
-                ?role a ?objectType .</precise-subquery>
-                ?role rdfs:label ?roleLabel .
-            }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
                 ?role a ?objectType .</precise-subquery>

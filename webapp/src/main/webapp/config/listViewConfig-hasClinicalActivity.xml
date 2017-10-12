@@ -24,8 +24,7 @@
             ?subject ?property ?role .
             ?role a core:ClinicalRole .
 
-            OPTIONAL
-            {
+            OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
                 ?role a core:ClinicalRole .</precise-subquery>
                 ?role core:roleContributesTo ?activity .
@@ -33,6 +32,16 @@
 
                 <collated>
                     ?activity vitro:mostSpecificType ?subclass .
+                </collated>
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?role .
+                ?role a core:ClinicalRole .</precise-subquery>
+                ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?activity .
+                ?activity rdfs:label ?activityLabel .
+
+                <collated>
+                ?activity vitro:mostSpecificType ?subclass .
                 </collated>
             }
             OPTIONAL {

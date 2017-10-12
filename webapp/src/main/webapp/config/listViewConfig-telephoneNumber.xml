@@ -13,7 +13,11 @@
             ?subject ?property ?vcard .
             ?vcard vcard:hasTelephone ?phone . 
             ?phone vcard:telephone ?number .
-            MINUS {?phone a vcard:Fax}
+            MINUS {
+                <precise-subquery>?subject ?property ?vcard .
+                ?vcard vcard:hasTelephone ?phone .</precise-subquery>
+                ?phone a vcard:Fax .
+            }
         } 
     </query-select>
 

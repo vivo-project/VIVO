@@ -35,15 +35,6 @@
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
                 ?role a ?objectType .</precise-subquery>
-                ?role core:relates ?activity .
-                ?activity rdfs:label ?activityLabel .
-                <collated>
-                ?activity vitro:mostSpecificType ?subclass .
-                </collated>
-            }           
-            OPTIONAL {
-                <precise-subquery>?subject ?property ?role .
-                ?role a ?objectType .</precise-subquery>
                 ?role core:roleContributesTo ?activity .
                 ?activity rdfs:label ?activityLabel .
                         

@@ -28,16 +28,22 @@
         WHERE
         {
             ?subject ?property ?adviseeRole .
+            ?adviseeRole a core:AdviseeRole .
             ?adviseeRole core:relatedBy ?advisingRel .
+            ?advisingRel a core:AdvisingRelationship .
             LET ( ?localName := afn:localname(?advisingRel) )
             OPTIONAL {
                 <precise-subquery>?subject ?property ?adviseeRole .
-                ?adviseeRole core:relatedBy ?advisingRel .</precise-subquery>
+                ?adviseeRole a core:AdviseeRole .
+                ?adviseeRole core:relatedBy ?advisingRel .
+                ?advisingRel a core:AdvisingRelationship .</precise-subquery>
                 ?advisingRel rdfs:label ?advisingRelLabel .
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?adviseeRole .
-                ?adviseeRole core:relatedBy ?advisingRel .</precise-subquery>
+                ?adviseeRole a core:AdviseeRole .
+                ?adviseeRole core:relatedBy ?advisingRel .
+                ?advisingRel a core:AdvisingRelationship .</precise-subquery>
                 ?advisingRel core:relates ?advisorRole .
                 ?advisorRole &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?advisor .
                 ?advisor a foaf:Person .
@@ -45,34 +51,44 @@
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?adviseeRole .
-                ?adviseeRole core:relatedBy ?advisingRel .</precise-subquery>
+                ?adviseeRole a core:AdviseeRole .
+                ?adviseeRole core:relatedBy ?advisingRel .
+                ?advisingRel a core:AdvisingRelationship .</precise-subquery>
                 ?advisingRel core:degreeCandidacy ?degree .
                 ?degree rdfs:label ?degreeLabel .
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?adviseeRole .
-                ?adviseeRole core:relatedBy ?advisingRel .</precise-subquery>
+                ?adviseeRole a core:AdviseeRole .
+                ?adviseeRole core:relatedBy ?advisingRel .
+                ?advisingRel a core:AdvisingRelationship .</precise-subquery>
                 ?advisingRel core:degreeCandidacy ?degree .
                 ?degree core:abbreviation ?degreeAbbr .
             }
         <collated>
             OPTIONAL {
                 <precise-subquery>?subject ?property ?adviseeRole .
-                ?adviseeRole core:relatedBy ?advisingRel .</precise-subquery>
+                ?adviseeRole a core:AdviseeRole .
+                ?adviseeRole core:relatedBy ?advisingRel .
+                ?advisingRel a core:AdvisingRelationship .</precise-subquery>
                 ?advisingRel vitro:mostSpecificType ?subclass .
                 ?subclass rdfs:subClassOf core:AdvisingRelationship .
             }
         </collated>
             OPTIONAL {
                 <precise-subquery>?subject ?property ?adviseeRole .
-                ?adviseeRole core:relatedBy ?advisingRel .</precise-subquery>
+                ?adviseeRole a core:AdviseeRole .
+                ?adviseeRole core:relatedBy ?advisingRel .
+                ?advisingRel a core:AdvisingRelationship .</precise-subquery>
                 ?advisingRel core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:start ?dateTimeStartValue .
                 ?dateTimeStartValue core:dateTime ?dateTimeStart .
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?adviseeRole .
-                ?adviseeRole core:relatedBy ?advisingRel .</precise-subquery>
+                ?adviseeRole a core:AdviseeRole .
+                ?adviseeRole core:relatedBy ?advisingRel .
+                ?advisingRel a core:AdvisingRelationship .</precise-subquery>
                 ?advisingRel core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:end ?dateTimeEndValue .
                 ?dateTimeEndValue core:dateTime ?dateTimeEnd .

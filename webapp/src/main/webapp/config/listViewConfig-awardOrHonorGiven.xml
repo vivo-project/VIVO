@@ -27,36 +27,42 @@
             ?subject ?property ?awardReceipt .
             ?awardReceipt a core:AwardReceipt .
             OPTIONAL {
-                <precise-subquery>?subject ?property ?awardReceipt .</precise-subquery>
+                <precise-subquery>?subject ?property ?awardReceipt .
+                ?awardReceipt a core:AwardReceipt .</precise-subquery>
                 ?awardReceipt rdfs:label ?receiptLabel .
             }
             OPTIONAL {
-                <precise-subquery>?subject ?property ?awardReceipt .</precise-subquery>
+                <precise-subquery>?subject ?property ?awardReceipt .
+                ?awardReceipt a core:AwardReceipt .</precise-subquery>
                 ?awardReceipt core:relates ?award .
                 ?award a core:Award .
                 ?award core:relatedBy ?awardReceipt .
                 ?award rdfs:label ?awardLabel .
             }
             OPTIONAL {
-                <precise-subquery>?subject ?property ?awardReceipt .</precise-subquery>
+                <precise-subquery>?subject ?property ?awardReceipt .
+                ?awardReceipt a core:AwardReceipt .</precise-subquery>
                 ?awardReceipt core:relates ?givenTo .
                 ?givenTo a foaf:Person .
                 ?givenTo rdfs:label ?givenToLabel .
             }
             OPTIONAL {
-                <precise-subquery>?subject ?property ?awardReceipt .</precise-subquery>
+                <precise-subquery>?subject ?property ?awardReceipt .
+                ?awardReceipt a core:AwardReceipt .</precise-subquery>
                 ?awardReceipt core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:start ?dateTimeStartValue .
                 ?dateTimeStartValue core:dateTime ?dateTimeStart .
             }
             OPTIONAL {
-                <precise-subquery>?subject ?property ?awardReceipt .</precise-subquery>
+                <precise-subquery>?subject ?property ?awardReceipt .
+                ?awardReceipt a core:AwardReceipt .</precise-subquery>
                 ?awardReceipt core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:end ?dateTimeEndValue .
                 ?dateTimeEndValue core:dateTime ?dateTimeEnd .
             }
             OPTIONAL {
-                <precise-subquery>?subject ?property ?awardReceipt .</precise-subquery>
+                <precise-subquery>?subject ?property ?awardReceipt .
+                ?awardReceipt a core:AwardReceipt .</precise-subquery>
                 ?awardReceipt core:dateTimeValue ?dateTimeValue .
                 ?dateTimeValue core:dateTime ?dateTime .
             }

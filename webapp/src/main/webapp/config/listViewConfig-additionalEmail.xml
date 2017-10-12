@@ -14,7 +14,11 @@
             ?subject ?property ?vcard .
             ?vcard vcard:hasEmail ?email .
             ?email vcard:email ?emailAddress .
-            MINUS { ?email a vcard:Work . }
+            MINUS {
+                <precise-subquery>?subject ?property ?vcard .
+                ?vcard vcard:hasEmail ?email .</precise-subquery>
+                ?email a vcard:Work .
+            }
         } 
     </query-select>
 

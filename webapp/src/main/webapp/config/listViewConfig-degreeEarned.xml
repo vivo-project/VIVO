@@ -15,12 +15,15 @@
                         ?degreeAbbr 
             WHERE {
                 ?subject ?property ?awardedDegree .
+                ?awardedDegree a core:AwardedDegree .
                 ?awardedDegree core:relates ?degree .
                 ?degree rdfs:label ?degreeName .
 
                 OPTIONAL {
                     <precise-subquery>?subject ?property ?awardedDegree .
+                    ?awardedDegree a core:AwardedDegree .
                     ?awardedDegree core:relates ?degree .</precise-subquery>
+                    ?degree a core:AcademicDegree .
                     ?degree core:abbreviation ?degreeAbbr .
                 }
             }  
