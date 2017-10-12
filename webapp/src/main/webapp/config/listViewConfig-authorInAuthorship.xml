@@ -154,6 +154,7 @@
                 ?infoResource core:relatedBy ?editorship .
                 ?editorship a core:Editorship .
                 ?editorship core:relates ?editorObj .
+                ?editorObj a foaf:Person .
                 ?editorObj rdfs:label ?editor .
             }
             OPTIONAL {
