@@ -11,20 +11,11 @@
         SELECT ?value
         WHERE {
   
-                ?subject ?property ?value
+                ?subject ?property ?value .
                 FILTER isLiteral(?value) 
             
         } ORDER BY ?value
     </query-select>
 
-    <query-construct>
-        
-        CONSTRUCT {
-            ?subject ?property ?value 
-        } WHERE {
-                ?subject ?property ?value 
-        }
-    </query-construct>
-    
     <template>propStatement-scopusId.ftl</template>
 </list-view-config>

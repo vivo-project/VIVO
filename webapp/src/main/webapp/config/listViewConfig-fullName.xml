@@ -16,32 +16,35 @@
                         ?prefix
         WHERE {
             ?subject ?property ?vcard .
-            ?vcard vcard:hasName ?fullName 
-            OPTIONAL { ?fullName vcard:givenName ?firstName  }
-            OPTIONAL { ?fullName core:middleName ?middleName  }
-            OPTIONAL { ?fullName vcard:familyName ?lastName  }
-            OPTIONAL { ?fullName vcard:honorificSuffix ?suffix  }
-            OPTIONAL { ?fullName vcard:honorificPrefix ?prefix  }
+            ?vcard vcard:hasName ?fullName .
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?vcard .
+                ?vcard vcard:hasName ?fullName .</precise-subquery>
+                ?fullName vcard:givenName ?firstName .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?vcard .
+                ?vcard vcard:hasName ?fullName .</precise-subquery>
+                ?fullName core:middleName ?middleName .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?vcard .
+                ?vcard vcard:hasName ?fullName .</precise-subquery>
+                ?fullName vcard:familyName ?lastName .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?vcard .
+                ?vcard vcard:hasName ?fullName .</precise-subquery>
+                ?fullName vcard:honorificSuffix ?suffix .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?vcard .
+                ?vcard vcard:hasName ?fullName .</precise-subquery>
+                ?fullName vcard:honorificPrefix ?prefix .
+            }
         } 
     </query-select>
-       
-    <query-construct>
-        PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
-        CONSTRUCT { 
-            ?subject ?property ?vcard .
-            ?vcard vcard:hasName ?fullName .
-            ?fullName ?fullNameProperty ?fullNameValue 
-        } WHERE {
-            {
-               ?subject ?property ?vcard
-            } UNION {
-               ?subject ?property ?vcard .
-               ?vcard vcard:hasName ?fullName .
-               ?fullName ?fullNameProperty ?fullNameValue 
-            } 
-        } 
-    </query-construct>
-              
+
     <template>propStatement-fullName.ftl</template>
     <postprocessor>edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.MaintainDuplicatesObjectPropertyDataPostProcessor</postprocessor>
 </list-view-config>

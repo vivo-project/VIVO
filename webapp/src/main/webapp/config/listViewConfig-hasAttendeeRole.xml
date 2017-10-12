@@ -24,75 +24,75 @@
                         
             WHERE {
                         
-                ?subject ?property ?role  
+                ?subject ?property ?role .
                 
-                OPTIONAL { ?role rdfs:label ?roleLabel }
+                OPTIONAL { ?role rdfs:label ?roleLabel . }
                 
-                OPTIONAL {  ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 
+                OPTIONAL {  ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?event1 .
                             LET (?event1Name := afn:localname(?event1)) 
                         
-                            OPTIONAL { ?event1 rdfs:label ?event1Label }
+                            OPTIONAL { ?event1 rdfs:label ?event1Label . }
                         
                             OPTIONAL { ?event2 a event:Event .
-                                       OPTIONAL { ?event2 rdfs:label ?event2Label }
+                                       OPTIONAL { ?event2 rdfs:label ?event2Label . }
                                        
                                        { 
-                                           ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event2 
+                                           ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event2 .
                                        }  UNION {                                                                                                              
-                                           ?event2 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 
+                                           ?event2 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 .
                                        }
                             }
                             OPTIONAL {
                                        { 
                                             ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event3 .
-                                            ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event2 
+                                            ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event2 .
                                        }  UNION {   
                                             ?event2 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event3 .                                                                                                          
-                                            ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 
+                                            ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 .
                                            
                                        }
-                                       OPTIONAL { ?event3 rdfs:label ?event3Label }
+                                       OPTIONAL { ?event3 rdfs:label ?event3Label . }
                             }
                             
 
                             OPTIONAL { ?series a vivo:EventSeries .
-                                       OPTIONAL { ?series rdfs:label ?seriesLabel }
+                                       OPTIONAL { ?series rdfs:label ?seriesLabel . }
                                        
                                        { 
-                                           ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series
+                                           ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series .
                                        }  UNION {                                                                                                              
-                                           ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 
+                                           ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 .
                                        }
                             }
                             OPTIONAL {
                                        { 
                                            ?event1 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?event3 .
-                                           ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series 
+                                           ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000050&gt; ?series .
                                        }  UNION {                                                                                                              
                                            ?event3 &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event1 .
-                                           ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event3 
+                                           ?series &lt;http://purl.obolibrary.org/obo/BFO_0000051&gt; ?event3 .
                                        }
-                                       OPTIONAL { ?series rdfs:label ?seriesLabel }
+                                       OPTIONAL { ?series rdfs:label ?seriesLabel . }
                             }
 
                             <collated>
                             ?event1 vitro:mostSpecificType ?subclass .
                             
                             { 
-                                ?subclass rdfs:subClassOf event:Event 
+                                ?subclass rdfs:subClassOf event:Event .
                             } UNION {
-                                ?subclass  owl:equivalentClass event:Event 
+                                ?subclass  owl:equivalentClass event:Event .
                             }
                             </collated>
                            
                 }   
         
-                OPTIONAL { ?role vivo:dateTimeInterval ?dateTimeInterval 
+                OPTIONAL { ?role vivo:dateTimeInterval ?dateTimeInterval .
                            OPTIONAL { ?dateTimeInterval vivo:start ?dateTimeStartValue .
-                                      ?dateTimeStartValue vivo:dateTime ?dateTimeStart 
+                                      ?dateTimeStartValue vivo:dateTime ?dateTimeStart .
                            }
                            OPTIONAL { ?dateTimeInterval vivo:end ?dateTimeEndValue .
-                                      ?dateTimeEndValue vivo:dateTime ?dateTimeEnd 
+                                      ?dateTimeEndValue vivo:dateTime ?dateTimeEnd .
                            }
                 }  
                 

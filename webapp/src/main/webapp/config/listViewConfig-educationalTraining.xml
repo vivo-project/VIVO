@@ -19,181 +19,66 @@
         WHERE
         {
             ?subject ?property ?edTraining .
-            ?edTraining a core:EducationalProcess
-            OPTIONAL { ?edTraining vitro:mostSpecificType ?subclass . }
-            OPTIONAL
-            {
+            ?edTraining a core:EducationalProcess .
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?edTraining .
+                ?edTraining a core:EducationalProcess .</precise-subquery>
+                ?edTraining vitro:mostSpecificType ?subclass .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?edTraining .
+                ?edTraining a core:EducationalProcess .</precise-subquery>
                 ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0002234&gt; ?awardedDegree .
                 ?awardedDegree core:relates ?degree .
                 ?degree a core:AcademicDegree .
                 ?degree rdfs:label ?degreeName .
             }
-            OPTIONAL
-            {
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?edTraining .
+                ?edTraining a core:EducationalProcess .</precise-subquery>
                 ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0002234&gt; ?awardedDegree .
                 ?awardedDegree core:relates ?degree .
                 ?degree a core:AcademicDegree .
                 ?degree core:abbreviation ?degreeAbbr .
             }
-            OPTIONAL
-            {
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?edTraining .
+                ?edTraining a core:EducationalProcess .</precise-subquery>
                 ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0000057&gt; ?org .
                 ?org a foaf:Organization .
                 ?org rdfs:label ?orgName .
             }
-            OPTIONAL { ?edTraining core:majorField ?majorField }
-            OPTIONAL { ?edTraining core:departmentOrSchool ?deptOrSchool }
-            OPTIONAL { ?edTraining core:supplementalInformation ?info }
-            OPTIONAL
-            {
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?edTraining .
+                ?edTraining a core:EducationalProcess .</precise-subquery>
+                ?edTraining core:majorField ?majorField .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?edTraining .
+                ?edTraining a core:EducationalProcess .</precise-subquery>
+                ?edTraining core:departmentOrSchool ?deptOrSchool .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?edTraining .
+                ?edTraining a core:EducationalProcess .</precise-subquery>
+                ?edTraining core:supplementalInformation ?info .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?edTraining .
+                ?edTraining a core:EducationalProcess .</precise-subquery>
                 ?edTraining core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:start ?dateTimeStartValue .
                 ?dateTimeStartValue core:dateTime ?dateTimeStart .
             }
-            OPTIONAL
-            {
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?edTraining .
+                ?edTraining a core:EducationalProcess .</precise-subquery>
                 ?edTraining core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:end ?dateTimeEndValue .
                 ?dateTimeEndValue core:dateTime ?dateTimeEnd .
             }
         }  ORDER BY ?subclass DESC(?dateTimeEnd) DESC(?dateTimeStart)
     </query-select>
-
-    <query-construct>
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
-        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
-
-        CONSTRUCT
-        {
-            ?subject ?property ?edTraining .
-
-            ?edTraining a core:EducationalProcess .
-            ?edTraining vitro:mostSpecificType ?subclass .
-            ?edTraining core:majorField ?majorField .
-            ?edTraining core:departmentOrSchool ?deptOrSchool .
-            ?edTraining core:supplementalInformation ?info .
-
-            ?edTraining core:dateTimeInterval ?dateTimeInterval .
-
-            ?dateTimeInterval core:start ?dateTimeStartValue .
-            ?dateTimeStartValue core:dateTime ?dateTimeStart .
-
-            ?dateTimeInterval core:end ?dateTimeEndValue .
-            ?dateTimeEndValue core:dateTime ?dateTimeEnd .
-
-            ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0002234&gt; ?awardedDegree .
-            ?awardedDegree core:relates ?degree .
-
-            ?degree a core:AcademicDegree .
-            ?degree rdfs:label ?degreeName .
-            ?degree core:abbreviation ?degreeAbbr .
-
-            ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0000057&gt; ?org .
-            ?org a foaf:Organization .
-            ?org rdfs:label ?orgName .
-        }
-        WHERE
-        {
-            {
-                ?subject ?property ?edTraining .
-                ?edTraining a core:EducationalProcess .
-            }
-            UNION
-            {
-                ?subject ?property ?edTraining .
-                ?edTraining a core:EducationalProcess .
-                ?edTraining vitro:mostSpecificType ?subclass .
-            }
-            UNION
-            {
-                ?subject ?property ?edTraining .
-                ?edTraining a core:EducationalProcess .
-                ?edTraining core:majorField ?majorField .
-            }
-            UNION
-            {
-                ?subject ?property ?edTraining .
-                ?edTraining a core:EducationalProcess .
-                ?edTraining core:departmentOrSchool ?deptOrSchool .
-            }
-            UNION
-            {
-                ?subject ?property ?edTraining .
-                ?edTraining a core:EducationalProcess .
-                ?edTraining core:supplementalInformation ?info .
-            }
-            UNION
-            {
-                ?subject ?property ?edTraining .
-                ?edTraining a core:EducationalProcess .
-                ?edTraining core:dateTimeInterval ?dateTimeInterval .
-            }
-            UNION
-            {
-                ?subject ?property ?edTraining .
-                ?edTraining a core:EducationalProcess .
-                ?edTraining core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-            }
-            UNION
-            {
-                ?subject ?property ?edTraining .
-                ?edTraining a core:EducationalProcess .
-                ?edTraining core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:end ?dateTimeEndValue .
-                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
-            }
-            UNION
-            {
-                ?subject ?property ?edTraining .
-                ?edTraining a core:EducationalProcess .
-                ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0002234&gt; ?awardedDegree .
-            }
-            UNION
-            {
-                ?subject ?property ?edTraining .
-                ?edTraining a core:EducationalProcess .
-                ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0002234&gt; ?awardedDegree .
-                ?awardedDegree core:relates ?degree .
-            }
-            UNION
-            {
-                ?subject ?property ?edTraining .
-                ?edTraining a core:EducationalProcess .
-                ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0000057&gt; ?org .
-                ?org a foaf:Organization .
-            }
-            UNION
-            {
-                ?subject ?property ?edTraining .
-                ?edTraining a core:EducationalProcess .
-                ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0000057&gt; ?org .
-                ?org a foaf:Organization .
-                ?org rdfs:label ?orgName .
-            }
-            UNION
-            {
-                ?subject ?property ?edTraining .
-                ?edTraining a core:EducationalProcess .
-                ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0002234&gt; ?awardedDegree .
-                ?awardedDegree core:relates ?degree .
-                ?degree a core:AcademicDegree .
-                ?degree rdfs:label ?degreeName .
-            }
-            UNION
-            {
-                ?subject ?property ?edTraining .
-                ?edTraining a core:EducationalProcess .
-                ?edTraining &lt;http://purl.obolibrary.org/obo/RO_0002234&gt; ?awardedDegree .
-                ?awardedDegree core:relates ?degree .
-                ?degree a core:AcademicDegree .
-                ?degree core:abbreviation ?degreeAbbr .
-            }
-        }
-    </query-construct>
 
     <template>propStatement-educationalTraining.ftl</template>
 </list-view-config>
