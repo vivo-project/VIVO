@@ -30,7 +30,7 @@
 
             OPTIONAL {
                 <precise-subquery>?subject ?property ?object .
-                ?object a ?objectType</precise-subquery>
+                ?object a ?objectType .</precise-subquery>
                 ?object rdfs:label ?label .
             }
 
