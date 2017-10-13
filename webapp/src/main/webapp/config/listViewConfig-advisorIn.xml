@@ -13,7 +13,7 @@
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
 
-        SELECT <collated>?subclass</collated>
+        SELECT DISTINCT <collated>?subclass</collated>
             ?advisorRole
             ?advisingRel
             ?advisingRelLabel
