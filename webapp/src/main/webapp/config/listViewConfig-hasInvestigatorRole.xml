@@ -25,6 +25,8 @@
         WHERE {
             ?subject ?property ?role .
             ?role a core:InvestigatorRole .
+            ?role vitro:mostSpecificType ?roleSubclass .
+            ?roleSubclass a core:InvestigatorRole .
 
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
