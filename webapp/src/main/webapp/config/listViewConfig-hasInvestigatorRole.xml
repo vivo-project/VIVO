@@ -24,12 +24,11 @@
             ?hideThis
         WHERE {
             ?subject ?property ?role .
-            ?role a core:InvestigatorRole .
             ?role vitro:mostSpecificType core:InvestigatorRole .
 
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
-                ?role a core:InvestigatorRole .</precise-subquery>
+                ?role vitro:mostSpecificType core:InvestigatorRole .</precise-subquery>
                 ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
                 ?activity a core:Contract .
                 ?activity rdfs:label ?activityLabel .
@@ -37,7 +36,7 @@
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
-                ?role a core:InvestigatorRole .</precise-subquery>
+                ?role vitro:mostSpecificType core:InvestigatorRole .</precise-subquery>
                 ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
                 ?activity a core:Contract .
                 ?activity core:assignedBy ?awardedBy .
@@ -45,7 +44,7 @@
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
-                ?role a core:InvestigatorRole .</precise-subquery>
+                ?role vitro:mostSpecificType core:InvestigatorRole .</precise-subquery>
                 ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
                 ?activity a core:Contract .
                 ?activity core:relates ?adminedByRole .
@@ -54,7 +53,7 @@
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
-                ?role a core:InvestigatorRole .</precise-subquery>
+                ?role vitro:mostSpecificType core:InvestigatorRole .</precise-subquery>
                 ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
                 ?activity a core:Grant .
                 ?activity rdfs:label ?activityLabel .
@@ -62,7 +61,7 @@
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
-                ?role a core:InvestigatorRole .</precise-subquery>
+                ?role vitro:mostSpecificType core:InvestigatorRole .</precise-subquery>
                 ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
                 ?activity a core:Grant .
                 ?activity core:assignedBy ?awardedBy .
@@ -70,7 +69,7 @@
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
-                ?role a core:InvestigatorRole .</precise-subquery>
+                ?role vitro:mostSpecificType core:InvestigatorRole .</precise-subquery>
                 ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
                 ?activity a core:Grant .
                 ?activity core:relates ?adminedByRole .
@@ -81,21 +80,21 @@
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
-                ?role a core:InvestigatorRole .</precise-subquery>
+                ?role vitro:mostSpecificType core:InvestigatorRole .</precise-subquery>
                 ?role core:dateTimeInterval ?dateTimeIntervalRole .
                 ?dateTimeIntervalRole core:start ?dateTimeStartValueRole .
                 ?dateTimeStartValueRole core:dateTime ?dateTimeStartRole .
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
-                ?role a core:InvestigatorRole .</precise-subquery>
+                ?role vitro:mostSpecificType core:InvestigatorRole .</precise-subquery>
                 ?role core:dateTimeInterval ?dateTimeIntervalRole .
                 ?dateTimeIntervalRole core:end ?dateTimeEndValueRole .
                 ?dateTimeEndValueRole core:dateTime ?dateTimeEndRole .
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
-                ?role a core:InvestigatorRole .</precise-subquery>
+                ?role vitro:mostSpecificType core:InvestigatorRole .</precise-subquery>
                 ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
                 ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
                 ?activity a core:Contract .
@@ -104,7 +103,7 @@
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
-                ?role a core:InvestigatorRole .</precise-subquery>
+                ?role vitro:mostSpecificType core:InvestigatorRole .</precise-subquery>
                 ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
                 ?activity a core:Contract .
                 ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
@@ -113,7 +112,7 @@
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
-                ?role a core:InvestigatorRole .</precise-subquery>
+                ?role vitro:mostSpecificType core:InvestigatorRole .</precise-subquery>
                 ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
                 ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
                 ?activity a core:Grant .
@@ -122,7 +121,7 @@
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
-                ?role a core:InvestigatorRole .</precise-subquery>
+                ?role vitro:mostSpecificType core:InvestigatorRole .</precise-subquery>
                 ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
                 ?activity a core:Grant .
                 ?activity core:dateTimeInterval ?dateTimeIntervalGrant .
@@ -131,7 +130,7 @@
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
-                ?role a core:InvestigatorRole .</precise-subquery>
+                ?role vitro:mostSpecificType core:InvestigatorRole .</precise-subquery>
                 ?role core:hideFromDisplay ?hideThis .
             }
         } ORDER BY DESC(?dateTimeEndRole) DESC(?dateTimeStartRole) DESC(?dateTimeEndGrant) DESC(?dateTimeStartGrant) ?activityLabel ?activityName

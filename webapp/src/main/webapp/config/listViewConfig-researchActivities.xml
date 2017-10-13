@@ -22,12 +22,11 @@
         WHERE
         {
             ?subject ?property ?role .
-            ?role a core:ResearcherRole .
             ?role vitro:mostSpecificType core:ResearcherRole .
 
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
-                ?role a core:ResearcherRole .</precise-subquery>
+                ?role vitro:mostSpecificType core:ResearcherRole .</precise-subquery>
                 ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?activity .
                 ?activity rdfs:label ?activityLabel .
 
@@ -37,7 +36,7 @@
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
-                ?role a core:ResearcherRole .</precise-subquery>
+                ?role vitro:mostSpecificType core:ResearcherRole .</precise-subquery>
                 ?role core:relatedBy ?activity .
                 ?activity rdfs:label ?activityLabel .
 
@@ -47,24 +46,24 @@
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
-                ?role a core:ResearcherRole .</precise-subquery>
+                ?role vitro:mostSpecificType core:ResearcherRole .</precise-subquery>
                 ?role rdfs:label ?roleLabel .
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
-                ?role a core:ResearcherRole .</precise-subquery>
+                ?role vitro:mostSpecificType core:ResearcherRole .</precise-subquery>
                 ?role core:hideFromDisplay ?hideThis .
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
-                ?role a core:ResearcherRole .</precise-subquery>
+                ?role vitro:mostSpecificType core:ResearcherRole .</precise-subquery>
                 ?role core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:start ?dateTimeStartValue .
                 ?dateTimeStartValue core:dateTime ?dateTimeStart .
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
-                ?role a core:ResearcherRole .</precise-subquery>
+                ?role vitro:mostSpecificType core:ResearcherRole .</precise-subquery>
                 ?role core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:end ?dateTimeEndValue .
                 ?dateTimeEndValue core:dateTime ?dateTimeEnd .
