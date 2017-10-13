@@ -16,36 +16,36 @@
                         
         WHERE {
             ?subject ?property ?vcard .
-            ?vcard vcard:hasAddress ?address 
-            OPTIONAL { ?address vcard:streetAddress ?street  }
-            OPTIONAL { ?address vcard:locality ?locality  }
-            OPTIONAL { ?address vcard:region ?region  }
-            OPTIONAL { ?address vcard:postalCode ?postalCode  }
-            OPTIONAL { ?address vcard:country ?country  }            
+            ?vcard vcard:hasAddress ?address .
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?vcard .
+                ?vcard vcard:hasAddress ?address .</precise-subquery>
+                ?address vcard:streetAddress ?street  .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?vcard .
+                ?vcard vcard:hasAddress ?address .</precise-subquery>
+                ?address vcard:locality ?locality .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?vcard .
+                ?vcard vcard:hasAddress ?address .</precise-subquery>
+                ?address vcard:region ?region .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?vcard .
+                ?vcard vcard:hasAddress ?address .</precise-subquery>
+                ?address vcard:postalCode ?postalCode .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?vcard .
+                ?vcard vcard:hasAddress ?address .</precise-subquery>
+                ?address vcard:country ?country .
+            }
             
         } ORDER BY ?country ?region ?street
     </query-select>
-       
-    <query-construct>
-        PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
-        CONSTRUCT { 
-            ?subject ?property ?vcard .
-            ?vcard vcard:hasAddress ?address .
-            ?address ?addressProperty ?addressValue 
-        } WHERE {
-            {
-               ?subject ?property ?vcard
-            } UNION {
-               ?subject ?property ?vcard .
-               ?vcard vcard:hasAddress ?address
-            } UNION {
-               ?subject ?property ?vcard .
-               ?vcard vcard:hasAddress ?address .
-               ?address ?addressProperty ?addressValue 
-            } 
-        } 
-    </query-construct>
-              
+
     <template>propStatement-mailingAddress.ftl</template>
     <postprocessor>edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.MaintainDuplicatesObjectPropertyDataPostProcessor</postprocessor>
 </list-view-config>

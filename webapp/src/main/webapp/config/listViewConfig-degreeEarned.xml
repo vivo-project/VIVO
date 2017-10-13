@@ -15,38 +15,19 @@
                         ?degreeAbbr 
             WHERE {
                 ?subject ?property ?awardedDegree .
-                ?awardedDegree core:relates ?degree .
-                ?degree rdfs:label ?degreeName 
-
-                OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
-            }  
-    </query-select>
-
-    <query-construct>
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-
-        CONSTRUCT {
-                ?subject ?property ?awardedDegree .
+                ?awardedDegree a core:AwardedDegree .
                 ?awardedDegree core:relates ?degree .
                 ?degree rdfs:label ?degreeName .
-                ?degree core:abbreviation ?degreeAbbr 
-        } WHERE {
-            { 
-                ?subject ?property ?awardedDegree .
-                ?awardedDegree a core:AwardedDegree .
-                ?awardedDegree core:relates ?degree .
-                ?degree a core:AcademicDegree .
-                ?degree rdfs:label ?degreeName 
-            } UNION {
-                ?subject ?property ?awardedDegree .
-                ?awardedDegree a core:AwardedDegree .
-                ?awardedDegree core:relates ?degree .
-                ?degree a core:AcademicDegree .
-                ?degree core:abbreviation ?degreeAbbr 
-            }
-        }
-    </query-construct>
+
+                OPTIONAL {
+                    <precise-subquery>?subject ?property ?awardedDegree .
+                    ?awardedDegree a core:AwardedDegree .
+                    ?awardedDegree core:relates ?degree .</precise-subquery>
+                    ?degree a core:AcademicDegree .
+                    ?degree core:abbreviation ?degreeAbbr .
+                }
+            }  
+    </query-select>
 
     <template>propStatement-degreeEarned.ftl</template>
 </list-view-config>

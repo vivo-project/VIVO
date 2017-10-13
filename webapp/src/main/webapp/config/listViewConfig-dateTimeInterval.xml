@@ -19,76 +19,51 @@
 
         WHERE
         {
-            ?subject ?property ?dateTimeInterval
+            ?subject ?property ?dateTimeInterval .
 
-            OPTIONAL
-            {
-                ?dateTimeInterval core:start ?valueStart
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?dateTimeInterval .</precise-subquery>
+                ?dateTimeInterval core:start ?valueStart .
                 LET (?valueStartName := afn:localname(?valueStart))
 
-                OPTIONAL { ?valueStart core:dateTime ?dateTimeStart }
-                OPTIONAL
-                {
-                    ?valueStart core:dateTimePrecision ?dateTimePrecisionStart
+                OPTIONAL {
+                    <precise-subquery>?subject ?property ?dateTimeInterval .
+                    ?dateTimeInterval core:start ?valueStart .</precise-subquery>
+                    ?valueStart core:dateTime ?dateTimeStart .
+                }
+                OPTIONAL {
+                    <precise-subquery>?subject ?property ?dateTimeInterval .
+                    ?dateTimeInterval core:start ?valueStart .</precise-subquery>
+                    ?valueStart core:dateTimePrecision ?dateTimePrecisionStart .
                     LET (?precisionStart := afn:localname(?dateTimePrecisionStart))
                 }
             }
-            OPTIONAL
-            {
-                ?dateTimeInterval core:end ?valueEnd
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?dateTimeInterval .</precise-subquery>
+                ?dateTimeInterval core:end ?valueEnd .
                 LET (?valueEndName := afn:localname(?valueEnd))
-                OPTIONAL { ?valueEnd core:dateTime ?dateTimeEnd }
-                OPTIONAL
-                {
-                    ?valueEnd core:dateTimePrecision ?dateTimePrecisionEnd
+                OPTIONAL {
+                    <precise-subquery>?subject ?property ?dateTimeInterval .
+                    ?dateTimeInterval core:end ?valueEnd .</precise-subquery>
+                    ?valueEnd core:dateTime ?dateTimeEnd .
+                }
+                OPTIONAL {
+                    <precise-subquery>?subject ?property ?dateTimeInterval .
+                    ?dateTimeInterval core:end ?valueEnd .</precise-subquery>
+                    ?valueEnd core:dateTimePrecision ?dateTimePrecisionEnd .
                     LET (?precisionEnd := afn:localname(?dateTimePrecisionEnd))
                 }
             }
-            OPTIONAL {?dateTimeInterval rdfs:label ?label}
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?dateTimeInterval .</precise-subquery>
+                ?dateTimeInterval rdfs:label ?label .
+            }
 
             <critical-data-required>
                 FILTER ( bound(?dateTimeStart) || bound(?dateTimeEnd) )
             </critical-data-required>
         }
     </query-select>
-
-    <query-construct>
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-
-        CONSTRUCT
-        {
-            ?subject ?property ?dateTimeInterval .
-            ?dateTimeInterval rdfs:label ?label .
-            ?dateTimeInterval core:start ?sStart .
-            ?dateTimeInterval core:end ?sEnd .
-            ?sStart ?p ?o .
-            ?sEnd ?p ?o .
-        }
-        WHERE
-        {
-            {
-                ?subject core:dateTimeInterval ?dateTimeInterval .
-            }
-            UNION
-            {
-                ?subject core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval rdfs:label ?label .
-            }
-            UNION
-            {
-                ?subject ?property ?dateTimeInterval .
-                ?dateTimeInterval core:start ?sStart .
-                ?sStart ?p ?o .
-            }
-            UNION
-            {
-                ?subject ?property ?dateTimeInterval .
-                ?dateTimeInterval core:end ?sEnd .
-                ?sEnd ?p ?o .
-            }
-        }
-    </query-construct>
 
     <template>propStatement-dateTimeInterval.ftl</template>
 </list-view-config>
