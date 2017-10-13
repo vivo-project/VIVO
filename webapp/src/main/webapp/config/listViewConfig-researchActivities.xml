@@ -23,8 +23,7 @@
         {
             ?subject ?property ?role .
             ?role a core:ResearcherRole .
-            ?role vitro:mostSpecificType ?roleSubclass .
-            ?roleSubclass a core:ResearcherRole .
+            ?role vitro:mostSpecificType core:ResearcherRole .
 
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
