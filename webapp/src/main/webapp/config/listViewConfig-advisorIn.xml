@@ -48,6 +48,8 @@
                 ?adviseeRole a core:AdviseeRole .
                 ?adviseeRole &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?advisee .
                 ?advisee a foaf:Person .
+                ?advisee &lt;http://purl.obolibrary.org/obo/RO_0000053&gt; ?adviseeRole .
+                ?adviseeRole a core:AdviseeRole .
                 ?advisee rdfs:label ?adviseeLabel .
             }
             OPTIONAL {

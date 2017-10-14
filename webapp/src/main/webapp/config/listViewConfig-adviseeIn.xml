@@ -47,6 +47,8 @@
                 ?advisingRel core:relates ?advisorRole .
                 ?advisorRole &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?advisor .
                 ?advisor a foaf:Person .
+                ?advisor &lt;http://purl.obolibrary.org/obo/RO_0000053&gt; ?advisorRole .
+                ?advisorRole a core:AdvisorRole .
                 ?advisor rdfs:label ?advisorLabel .
             }
             OPTIONAL {
