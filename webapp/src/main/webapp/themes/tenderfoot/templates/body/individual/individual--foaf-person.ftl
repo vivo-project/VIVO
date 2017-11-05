@@ -182,7 +182,7 @@ ${scripts.add(
 	'<script async type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>',
 	'<script async type="text/javascript" src="${urls.base}/js/individual/individualQtipBubble.js"></script>',
 	'<script async type="text/javascript" src="${urls.base}/js/individual/individualUriRdf.js"></script>',
-    '<script type="text/javascript" src="${urls.base}/js/individual/moreLessController.js"></script>',
+    '<script async type="text/javascript" src="${urls.base}/js/individual/moreLessController.js"></script>',
 	'<script async type="text/javascript" src="${urls.base}/js/imageUpload/imageUploadUtils.js"></script>',
 	'<script async type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>',
 	'<script async type="text/javascript" src="//cdn.plu.mx/widget-popup.js"></script>'
