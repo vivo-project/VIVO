@@ -50,42 +50,44 @@
             <!-- div id="photo-wrapper">${individualImage}</div -->
 		${individualImage}
 		</div>
-		<div class="col-md-10 person-details">
+		<div class="col-xs-10 person-details">
 			<div class="row title">
 				<div class="col-md-12">
-					<h1 class="vcard foaf-person">
-						<#-- Label -->
-                            <span itemprop="name" class="fn"><@p.label individual editable labelCount localesCount/></span>
-
-						<#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->
-						<#assign title = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Title")!>
-						<#if title?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-							<#if (title.statements?size < 1) >
-								<@p.addLinkWithLabel title editable />
-							<#elseif editable>
-                                <h2>${title.name?capitalize!}</h2>
-								<@p.verboseDisplay title />
-							</#if>
-							<#list title.statements as statement>
-                                <span itemprop="jobTitle" class="display-title<#if editable>-editable</#if>">${statement.preferredTitle}</span>
-								<@p.editingLinks "${title.localName}" "${title.name}" statement editable title.rangeUri />
-							</#list>
-						</#if>
-						<#-- If preferredTitle is unpopulated, display mostSpecificTypes -->
-						<#if ! (title.statements)?has_content>
-							<@p.mostSpecificTypes individual />
-						</#if>
-					</h1>
 					<span id="iconControlsRightSide">
 						<img id="uriIcon" title="${individual.uri}" src="${urls.images}/individual/uriIcon.gif" alt="${i18n().uri_icon}"/>
 						<#if checkNamesResult?has_content >
 							<img id="qrIcon"  src="${urls.images}/individual/qr_icon.png" alt="${i18n().qr_icon}" />
-							<span id="qrCodeImage" class="hidden">${qrCodeLinkedImage!}
-								<a class="qrCloseLink" href="#"  title="${i18n().qr_code}">${i18n().close_capitalized}</a>
-							</span>
+								<span id="qrCodeImage" class="hidden">${qrCodeLinkedImage!}
+									<a class="qrCloseLink" href="#"  title="${i18n().qr_code}">${i18n().close_capitalized}</a>
+								</span>
 						</#if>
-				</span>
-
+					</span>
+					<section class="vcard person">
+						<h1 class="foaf-person">
+							<#-- Label -->
+								<span itemprop="name" class="fn"><@p.label individual editable labelCount localesCount/></span>
+						</h1>
+						<section id="preferredTitle">
+							<#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->
+							<#assign title = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Title")!>
+							<#if title?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
+								<#if (title.statements?size < 1) >
+									<@p.addLinkWithLabel title editable />
+								<#elseif editable>
+									<h2>${title.name?capitalize!}</h2>
+									<@p.verboseDisplay title />
+								</#if>
+								<#list title.statements as statement>
+									<span itemprop="jobTitle" class="display-title<#if editable>-editable</#if>">${statement.preferredTitle}</span>
+									<@p.editingLinks "${title.localName}" "${title.name}" statement editable title.rangeUri />
+								</#list>
+							</#if>
+							<#-- If preferredTitle is unpopulated, display mostSpecificTypes -->
+							<#if ! (title.statements)?has_content>
+								<@p.mostSpecificTypes individual />
+							</#if>
+						</section>
+					</section>
 				</div>
 			</div>
 			<div class="row person-details">
@@ -162,17 +164,26 @@
     };
 </script>
 
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual.css" />',
-'<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />',
-'<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />',
-'<link rel="stylesheet" type="text/css" href="${urls.base}/css/jquery_plugins/qtip/jquery.qtip.min.css" />')}
+${stylesheets.add(
+	'<link rel="stylesheet" href="${urls.base}/css/individual/individual.css" />',
+	'<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />',
+	'<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />',
+	'<link rel="stylesheet" type="text/css" href="${urls.base}/css/jquery_plugins/qtip/jquery.qtip.min.css" />'
+)}
 
-${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tiny_mce/tiny_mce.js"></script>',
-'<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip.min.js"></script>',
-'<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>')}
+${headScripts.add(
+	'<script type="text/javascript" src="${urls.base}/js/tiny_mce/tiny_mce.js"></script>',
+	'<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip.min.js"></script>',
+	'<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>'
+)}
 
-${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>',
-'<script type="text/javascript" src="${urls.base}/js/individual/individualQtipBubble.js"></script>',
-'<script type="text/javascript" src="${urls.base}/js/individual/individualUriRdf.js"></script>',
-'<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
-'<script type="text/javascript" src="${urls.base}/js/imageUpload/imageUploadUtils.js"></script>')}
+${scripts.add(
+	'<script async type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
+	'<script async type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>',
+	'<script async type="text/javascript" src="${urls.base}/js/individual/individualQtipBubble.js"></script>',
+	'<script async type="text/javascript" src="${urls.base}/js/individual/individualUriRdf.js"></script>',
+    '<script async type="text/javascript" src="${urls.base}/js/individual/moreLessController.js"></script>',
+	'<script async type="text/javascript" src="${urls.base}/js/imageUpload/imageUploadUtils.js"></script>',
+	'<script async type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>',
+	'<script async type="text/javascript" src="//cdn.plu.mx/widget-popup.js"></script>'
+)}

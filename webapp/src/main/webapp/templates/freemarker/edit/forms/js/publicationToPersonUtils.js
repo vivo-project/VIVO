@@ -61,7 +61,7 @@ var publicationToPersonUtils = {
         this.changeLink = this.pubAcSelection.children('p').children('#changeSelection');
         
         // may not need this
-        this.firstName.attr('disabled', '');
+        this.firstName.attr('disabled', false);
         
     },
     

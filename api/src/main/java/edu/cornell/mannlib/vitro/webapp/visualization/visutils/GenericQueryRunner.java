@@ -76,12 +76,11 @@ public class GenericQueryRunner implements QueryRunner<ResultSet> {
 		for (Map.Entry<String, String> currentfieldLabelToOutputFieldLabel 
 				: this.fieldLabelToOutputFieldLabel.entrySet()) {
 			
-			sparqlQuery.append("\t(str(?" + currentfieldLabelToOutputFieldLabel.getKey() + ") as ?" 
-									+ currentfieldLabelToOutputFieldLabel.getValue() + ")\n");
+			sparqlQuery.append("\t(str(?").append(currentfieldLabelToOutputFieldLabel.getKey()).append(") as ?").append(currentfieldLabelToOutputFieldLabel.getValue()).append(")\n");
 			
 		}
 		
-		sparqlQuery.append("\n" + this.aggregationRules + "\n");
+		sparqlQuery.append("\n").append(this.aggregationRules).append("\n");
 		
 		sparqlQuery.append("WHERE {\n");
 		

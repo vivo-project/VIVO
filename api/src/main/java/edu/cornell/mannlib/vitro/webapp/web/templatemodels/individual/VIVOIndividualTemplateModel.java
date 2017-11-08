@@ -52,12 +52,7 @@ public class VIVOIndividualTemplateModel extends IndividualTemplateModel {
     
     /* Template methods (for efficiency, not pre-computed) */
     public boolean conceptSubclass() {
-        if ( isVClass(AWARD_CLASS) || isVClass(DEGREE_CLASS) ||isVClass(CONTACT_CLASS) || isVClass(CREDENTIAL_CLASS) || isVClass(DTP_CLASS) ) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return isVClass(AWARD_CLASS) || isVClass(DEGREE_CLASS) || isVClass(CONTACT_CLASS) || isVClass(CREDENTIAL_CLASS) || isVClass(DTP_CLASS);
     }
 
     public boolean person() {

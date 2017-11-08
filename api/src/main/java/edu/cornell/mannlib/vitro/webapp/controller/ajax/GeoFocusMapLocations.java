@@ -7,21 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.json.JSONException;
 
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
-import org.apache.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.controller.ajax.VitroAjaxController;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 
@@ -65,11 +60,11 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
     }
 
 	@Override
-	public String prepareResponse() throws IOException, JSONException {
+	public String prepareResponse() throws IOException {
 		try {
             geoLocations = getGeoLocations(vreq);
             
-            String response = "[";
+            StringBuilder response = new StringBuilder("[");
             String geometry = "{\"geometry\": {\"type\": \"Point\",\"coordinates\": \"\"},";
             String typeProps = "\"type\": \"Feature\",\"properties\": {\"mapType\": \"\",";
             String previousLabel = "";
@@ -112,18 +107,18 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
                                         + "\",\"local\": \""
                                         + local
                                         + "\"}},";                 
-                    response +=  tempStr;
+                    response.append(tempStr);
                     previousLabel = label;
                 }
             }
 			if ( response.lastIndexOf(",") > 0 ) {
-			    response = response.substring(0, response.lastIndexOf(","));
+			    response = new StringBuilder(response.substring(0, response.lastIndexOf(",")));
 			}
-			response += " ]";
+			response.append(" ]");
 			if ( log.isDebugEnabled() ) {
-				log.debug(response);
+				log.debug(response.toString());
 			}
-			return response;
+			return response.toString();
 		} catch (Exception e) {
 			log.error("Failed geographic focus locations", e);
 			return EMPTY_RESPONSE;

@@ -3,6 +3,7 @@
 package edu.cornell.mannlib.vitro.webapp.controller.visualization;
 
 import javax.servlet.ServletContext;
+import javax.servlet.annotation.WebServlet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -27,6 +28,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequ
  * @author cdtank
  */
 @SuppressWarnings("serial")
+@WebServlet(name = "StandardVisualizationController", urlPatterns = {"/visualizationfm","/visualization"})
 public class StandardVisualizationController extends FreemarkerHttpServlet {
 
 	public static final String URL_ENCODING_SCHEME = "UTF-8";

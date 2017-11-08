@@ -205,7 +205,7 @@ var addConceptForm = {
                 var i;
                 //For each result, display
                 if(numberTotalMatches > 0) {
-                	htmlAdd = "<ul class='dd' id='concepts' name='concepts'>";
+                	htmlAdd = "<div class='container'><ul class='dd' id='concepts' name='concepts'>";
                 	htmlAdd+= addConceptForm.addResultsHeader(vocabSourceValue);
                 	//Show best matches first
 	                for(i = 0; i < numberBestMatches; i++) {
@@ -217,7 +217,7 @@ var addConceptForm = {
 	                	var conceptResult = alternateResults[i];
 	                	htmlAdd+= addConceptForm.displayConceptSearchResult(conceptResult, false);
 	                }
-	                htmlAdd+= "</ul>";
+	                htmlAdd+= "</ul></div>";
                 } else {
                 	htmlAdd+= "<p>" + addConceptForm.noResultsFound + "</p>";
                 }
@@ -273,8 +273,8 @@ var addConceptForm = {
     	return {"bestMatch":bestMatchResults, "alternate":alternateResults};
     },
     addResultsHeader:function(vocabSourceValue) {
-    	var htmlAdd = "<li class='concepts'><div class='row'><span class='column conceptLabel'>" + 
-    	addConceptForm.getVocabSpecificColumnLabel(vocabSourceValue) + " </span><span class='column conceptDefinition'>" + addConceptForm.definitionString + "</span><span class='column'>" + addConceptForm.bestMatchString + "</span></div></li>";
+    	var htmlAdd = "<li class='concepts'><div class='row'><div class='col-12'><span class='column conceptLabel'>" +
+    	addConceptForm.getVocabSpecificColumnLabel(vocabSourceValue) + " </span><span class='column conceptDefinition'>" + addConceptForm.definitionString + "</span><span class='column'>" + addConceptForm.bestMatchString + "</span></div></div></li>";
     	return htmlAdd;
     },
     //currently just the first column label depends on which service has been utilized
@@ -333,14 +333,16 @@ var addConceptForm = {
     }, 
     generateIndividualConceptDisplay: function(cuiURI, label, altLabels, definition, type, definedBy, isBestMatch, broaderUris, narrowerUris) {
     	var htmlAdd = "<li class='concepts'>" + 
-    	"<div class='row'>" + 
+    	"<div class='row'>" +
+        "<div class='col-12'>" +
     	"<div class='column conceptLabel'>" +
     	addConceptForm.generateIndividualCUIInput(cuiURI, label, type, definedBy, broaderUris, narrowerUris) +  
     	addConceptForm.generateIndividualLabelsDisplay(label, altLabels) + addConceptForm.generateIndividualTypeDisplay(type) + "</div>" + 
     	addConceptForm.generateIndividualDefinitionDisplay(definition) + 
     	addConceptForm.generateBestOrAlternate(isBestMatch) +
-    	"</div>" +  
-    	"</li>";	
+    	"</div>" +
+        "</div>" +
+        "</li>";
     	return htmlAdd;
     }, 
     generateIndividualCUIInput:function(cuiURI, label, type, definedBy, broaderUris, narrowerUris) {

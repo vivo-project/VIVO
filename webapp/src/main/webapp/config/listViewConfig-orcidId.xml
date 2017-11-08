@@ -9,18 +9,9 @@
     <query-select>    
         SELECT ?value
         WHERE {
-                ?subject ?property ?value 
+                ?subject ?property ?value .
         }
     </query-select>
 
-    <query-construct>
-        
-        CONSTRUCT {
-            ?subject ?property ?value 
-        } WHERE {
-                ?subject ?property ?value 
-        }
-    </query-construct>
-    
     <template>propStatement-orcidId.ftl</template>
 </list-view-config>

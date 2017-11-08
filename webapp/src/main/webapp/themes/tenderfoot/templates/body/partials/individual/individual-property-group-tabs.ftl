@@ -14,22 +14,22 @@
 			<#if ( groupTabs.properties?size > 0 ) >
 				<#assign groupName = groupTabs.getName(nameForOtherGroup)>
 				<#if groupName?has_content>
-				<#--the function replaces spaces in the name with underscores, also called for the property group menu-->
+					<#--the function replaces spaces in the name with underscores, also called for the property group menu-->
 					<#assign groupNameHtmlId = p.createPropertyGroupHtmlId(groupName) >
 				<#else>
 					<#assign groupName = "${i18n().properties_capitalized}">
 					<#assign groupNameHtmlId = "${i18n().properties}" >
 				</#if>
 				<#if tabCount = 1 >
-                    <li data-toggle="tab" class="active" href="#${groupNameHtmlId?replace("/","-")}"><a href="#">${groupName?capitalize}</a></li>
+                    <li data-toggle="tab" groupName="${groupNameHtmlId?replace("/","-")}" class="active" href="#${groupNameHtmlId?replace("/","-")}Group"><a href="#">${groupName?capitalize}</a></li>
 					<#assign tabCount = 2>
 				<#else>
-                    <li data-toggle="tab" href="#${groupNameHtmlId?replace("/","-")}"><a href="#">${groupName?capitalize}</a></li>
+                    <li data-toggle="tab" groupName="${groupNameHtmlId?replace("/","-")}" href="#${groupNameHtmlId?replace("/","-")}Group"><a href="#">${groupName?capitalize}</a></li>
 				</#if>
 			</#if>
 		</#list>
 		<#if (propertyGroups.all?size > 1) >
-            <li id="viewAllTab" data-toggle="tab" href="#viewAll"><a href="#">${i18n().view_all_capitalized}</a></li>
+            <li id="viewAllTab" data-toggle="tab" groupName="viewAll" href="#viewAll"><a href="#">${i18n().view_all_capitalized}</a></li>
 		</#if>
         </ul>
     </div>
@@ -42,18 +42,18 @@
 				<#assign groupNameHtmlId = p.createPropertyGroupHtmlId(groupName) >
 				<#assign verbose = (verbosePropertySwitch.currentValue)!false>
 
-                <div id="${groupNameHtmlId?replace("/","-")}"
+                <div id="${groupNameHtmlId?replace("/","-")}Group"
                      class="tab-pane <#if (sectionCount == 1) >active</#if>"
                      role="tabpanel">
-				<#-- Display the group heading -->
+					<#-- Display the group heading -->
 					<#if groupName?has_content>
-					<#--the function replaces spaces in the name with underscores, also called for the property group menu-->
+						<#--the function replaces spaces in the name with underscores, also called for the property group menu-->
 						<#assign groupNameHtmlId = p.createPropertyGroupHtmlId(groupName) >
                         <h2 id="${groupNameHtmlId?replace("/","-")}" pgroup="tabs" class="hidden">${groupName?capitalize}</h2>
 					<#else>
                         <h2 id="properties" pgroup="tabs" class="hidden">${i18n().properties_capitalized}</h2>
 					</#if>
-				<#-- List the properties in the group   -->
+					<#-- List the properties in the group   -->
 					<#include "individual-properties.ftl">
                 </div>
 				<#assign sectionCount = 2 >
@@ -67,5 +67,4 @@
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual-property-groups.css" />')}
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/amplify/amplify.store.min.js"></script>')}
-${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/propertyGroupControls.js"></script>')}
 ${scripts.add('<script src="${urls.theme}/js/propertyGroupControls-bootstrap.js"></script>')}

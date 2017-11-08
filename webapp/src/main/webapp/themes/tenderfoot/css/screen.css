@@ -21,6 +21,7 @@ VIVO tenderfoot theme: screen styles
 @import url("reset.css");
 @import url("tenderfoot.css");
 @import url("edit.css");
+@import url("navbar-breakpoint.css");
 @import url("page-admin.css");
 @import url("page-browse.css");
 @import url("page-home.css");
@@ -30,3 +31,4 @@ VIVO tenderfoot theme: screen styles
 @import url("page-login.css");
 @import url("page-menu.css");
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans");
+@import url("../../../local/css/local.css");

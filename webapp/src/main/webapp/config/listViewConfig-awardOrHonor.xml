@@ -26,119 +26,47 @@
         {
             ?subject ?property ?awardReceipt .
             ?awardReceipt a core:AwardReceipt .
-            OPTIONAL { ?awardReceipt rdfs:label ?receiptLabel  }
-            OPTIONAL
-            {
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?awardReceipt .
+                ?awardReceipt a core:AwardReceipt .</precise-subquery>
+                ?awardReceipt rdfs:label ?receiptLabel .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?awardReceipt .
+                ?awardReceipt a core:AwardReceipt .</precise-subquery>
                 ?awardReceipt core:relates ?award .
                 ?award a core:Award .
                 ?award core:relatedBy ?awardReceipt .
                 ?award rdfs:label ?awardLabel .
             }
-            OPTIONAL
-            {
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?awardReceipt .
+                ?awardReceipt a core:AwardReceipt .</precise-subquery>
                 ?awardReceipt core:assignedBy ?assignedBy .
                 ?assignedBy rdfs:label ?assignedByLabel .
             }
-            OPTIONAL
-            {
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?awardReceipt .
+                ?awardReceipt a core:AwardReceipt .</precise-subquery>
                 ?awardReceipt core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:start ?dateTimeStartValue .
                 ?dateTimeStartValue core:dateTime ?dateTimeStart .
             }
-            OPTIONAL
-            {
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?awardReceipt .
+                ?awardReceipt a core:AwardReceipt .</precise-subquery>
                 ?awardReceipt core:dateTimeInterval ?dateTimeInterval .
                 ?dateTimeInterval core:end ?dateTimeEndValue .
                 ?dateTimeEndValue core:dateTime ?dateTimeEnd .
             }
-            OPTIONAL
-            {
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?awardReceipt .
+                ?awardReceipt a core:AwardReceipt .</precise-subquery>
                 ?awardReceipt core:dateTimeValue ?dateTimeValue .
                 ?dateTimeValue core:dateTime ?dateTime .
             }
         }  ORDER BY  DESC(?dateTime) DESC(?dateTimeEnd)
     </query-select>
 
-    <query-construct>
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-        CONSTRUCT
-        {
-            ?subject ?property ?awardReceipt .
-            ?awardReceipt a core:AwardReceipt .
-            ?awardReceipt rdfs:label ?receiptLabel .
-
-            ?awardReceipt core:dateTimeValue ?dateTimeValue .
-            ?dateTimeValue core:dateTime ?dateTime .
-
-            ?awardReceipt core:dateTimeInterval ?dateTimeInterval .
-
-            ?dateTimeInterval core:start ?dateTimeStartValue .
-            ?dateTimeStartValue core:dateTime ?dateTimeStart .
-
-            ?dateTimeInterval core:end ?dateTimeEndValue .
-            ?dateTimeEndValue core:dateTime ?dateTimeEnd .
-
-            ?awardReceipt core:assignedBy ?assignedBy .
-            ?assignedBy rdfs:label ?assignedByLabel .
-
-            ?awardReceipt core:relates ?award .
-            ?award a core:Award .
-            ?award core:relatedBy ?awardReceipt .
-            ?award rdfs:label ?awardLabel .
-        }
-        WHERE
-        {
-            {
-                ?subject ?property ?awardReceipt .
-                ?awardReceipt a core:AwardReceipt .
-            }
-            UNION
-            {
-                ?subject ?property ?awardReceipt .
-                ?awardReceipt a core:AwardReceipt .
-                ?awardReceipt rdfs:label ?receiptLabel .
-            }
-            UNION
-            {
-                ?subject ?property ?awardReceipt .
-                ?awardReceipt a core:AwardReceipt .
-                ?awardReceipt core:dateTimeValue ?dateTimeValue .
-                ?dateTimeValue core:dateTime ?dateTime .
-            }
-            UNION
-            {
-                ?subject ?property ?awardReceipt .
-                ?awardReceipt a core:AwardReceipt .
-                ?awardReceipt core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-            }
-            UNION
-            {
-                ?subject ?property ?awardReceipt .
-                ?awardReceipt a core:AwardReceipt .
-                ?awardReceipt core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:end ?dateTimeEndValue .
-                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
-            }
-            UNION
-            {
-                ?subject ?property ?awardReceipt .
-                ?awardReceipt a core:AwardReceipt .
-                ?awardReceipt core:assignedBy ?assignedBy .
-                ?assignedBy rdfs:label ?assignedByLabel .
-            }
-            UNION
-            {
-                ?subject ?property ?awardReceipt .
-                ?awardReceipt a core:AwardReceipt .
-                ?awardReceipt core:relates ?award .
-                ?award a core:Award .
-                ?award core:relatedBy ?awardReceipt .
-                ?award rdfs:label ?awardLabel .
-            }
-        }
-    </query-construct>
     <template>propStatement-awardOrHonor.ftl</template>
 </list-view-config>

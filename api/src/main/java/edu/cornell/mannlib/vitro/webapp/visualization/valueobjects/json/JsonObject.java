@@ -1,6 +1,9 @@
 /* $This file is distributed under the terms of the license in LICENSE$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.json;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -11,13 +14,24 @@ import java.util.Set;
  * @author bkoniden
  * Deepak Konidena
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class JsonObject {
-	
+	@JsonProperty
 	private String label;
+
+	@JsonProperty
 	private String lastCachedAtDateTime;
+
+	@JsonProperty
 	private List<List<Integer>> data = new ArrayList<List<Integer>>();
+
+	@JsonProperty
 	private String entityURI;
+
+	@JsonProperty
 	private String visMode;
+
+	@JsonProperty
 	private List<String> organizationType = new ArrayList<String>();
 	
 	public List<String> getOrganizationTypes() {
@@ -29,9 +43,7 @@ public class JsonObject {
 	}
 	
 	public void setOrganizationTypes(Set<String> givenOrganizationType) {
-		for (String type : givenOrganizationType) {
-			this.organizationType.add(type);
-		}
+		this.organizationType.addAll(givenOrganizationType);
 	}
 
 	public String getEntityURI() {

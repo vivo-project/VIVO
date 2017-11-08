@@ -411,7 +411,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	
 	
 	private void sortConcepts(List<AssociatedConceptInfo> concepts) {
-	    Collections.sort(concepts, new AssociatedConceptInfoComparator());
+	    concepts.sort(new AssociatedConceptInfoComparator());
 	    log.debug("Concepts should be sorted now" + concepts.toString());
 	}
 	

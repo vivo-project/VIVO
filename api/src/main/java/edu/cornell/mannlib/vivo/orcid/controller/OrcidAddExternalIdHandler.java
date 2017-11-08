@@ -3,19 +3,18 @@
 package edu.cornell.mannlib.vivo.orcid.controller;
 
 import static edu.cornell.mannlib.orcidclient.actions.ApiAction.ADD_EXTERNAL_ID;
-import static edu.cornell.mannlib.orcidclient.orcidmessage.Visibility.PUBLIC;
+import static edu.cornell.mannlib.orcidclient.beans.Visibility.PUBLIC;
 import static edu.cornell.mannlib.vivo.orcid.controller.OrcidConfirmationState.Progress.ADDED_ID;
 import static edu.cornell.mannlib.vivo.orcid.controller.OrcidConfirmationState.Progress.DENIED_ID;
 import static edu.cornell.mannlib.vivo.orcid.controller.OrcidConfirmationState.Progress.FAILED_ID;
 
+import edu.cornell.mannlib.orcidclient.model.OrcidProfile;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import edu.cornell.mannlib.orcidclient.OrcidClientException;
-import edu.cornell.mannlib.orcidclient.actions.AddExternalIdAction;
 import edu.cornell.mannlib.orcidclient.auth.AuthorizationStatus;
 import edu.cornell.mannlib.orcidclient.beans.ExternalId;
-import edu.cornell.mannlib.orcidclient.orcidmessage.OrcidMessage;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
@@ -28,7 +27,7 @@ public class OrcidAddExternalIdHandler extends OrcidAbstractHandler {
 			.getLog(OrcidAddExternalIdHandler.class);
 
 	private AuthorizationStatus status;
-	private OrcidMessage profile;
+	private OrcidProfile profile;
 
 	protected OrcidAddExternalIdHandler(VitroRequest vreq) {
 		super(vreq);
@@ -53,8 +52,7 @@ public class OrcidAddExternalIdHandler extends OrcidAbstractHandler {
 				.setUrl(individual.getURI()).setVisibility(PUBLIC);
 
 		log.debug("Adding external VIVO ID");
-		profile = new AddExternalIdAction().execute(externalId,
-				status.getAccessToken());
+		profile = manager.createAddExternalIdAction().execute(externalId, status.getAccessToken());
 	}
 
 }

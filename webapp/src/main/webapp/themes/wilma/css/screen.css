@@ -24,3 +24,4 @@ VIVO wilma theme: screen styles
 
 @import url("reset.css");
 @import url("wilma.css");
+@import url("../../../local/css/local.css");

@@ -21,7 +21,6 @@ import edu.cornell.mannlib.vitro.webapp.controller.visualization.DataVisualizati
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Individual;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SparklineData;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;

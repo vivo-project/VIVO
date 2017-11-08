@@ -533,7 +533,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			 * */
 					List<Collaborator> coPINodes =
 							new ArrayList<Collaborator>(currentGrantEntry.getValue());
-					Collections.sort(coPINodes, new CollaboratorComparator());
+					coPINodes.sort(new CollaboratorComparator());
 
 					int numOfCoPIs = coPINodes.size();
 

@@ -5,7 +5,11 @@ package edu.cornell.mannlib.vitro.webapp.visualization.utilities;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -14,7 +18,6 @@ import org.apache.jena.iri.IRIFactory;
 import org.apache.jena.iri.Violation;
 import org.vivoweb.webapp.util.ModelUtils;
 
-import com.google.gson.Gson;
 import org.apache.jena.query.Dataset;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
@@ -34,7 +37,6 @@ import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryP
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.GenericQueryMap;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.AllPropertiesQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.GenericQueryRunner;
-import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
@@ -52,8 +54,8 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 	
 	public Object generateAjaxVisualization(VitroRequest vitroRequest,
 											Log log, 
-											Dataset dataset) 
-			throws MalformedQueryParametersException {
+											Dataset dataset)
+			throws MalformedQueryParametersException, JsonProcessingException {
 
         String individualURI = vitroRequest.getParameter(
         									VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
@@ -81,11 +83,11 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			
 			GenericQueryMap profilePropertiesToValues = 
 						profileQueryHandler.getQueryResult();
-			
-			Gson profileInformation = new Gson();
-			
-			return profileInformation.toJson(profilePropertiesToValues);
-				
+
+			ObjectMapper mapper = new ObjectMapper();
+
+			return mapper.writeValueAsString(profilePropertiesToValues);
+
 				
 		} else if (VisualizationFrameworkConstants.IMAGE_UTILS_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
@@ -139,13 +141,14 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 									whereClause,
 									groupOrderClause,
 									dataset);
-			
-			Gson publicationsInformation = new Gson();
 
 			NumPubsForIndividualConsumer consumer = new NumPubsForIndividualConsumer();
 			numberOfPublicationsQueryHandler.sparqlSelectQuery(vitroRequest.getRDFService(), consumer);
-			return publicationsInformation.toJson(consumer.getMap());
-				
+
+			ObjectMapper mapper = new ObjectMapper();
+
+			return mapper.writeValueAsString(consumer.getMap());
+
 		} else if (VisualizationFrameworkConstants.ARE_GRANTS_AVAILABLE_UTILS_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
 
@@ -181,12 +184,11 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 									"",
 									dataset);
 			
-			Gson grantsInformation = new Gson();
-
 			NumGrantsForIndividualConsumer consumer = new NumGrantsForIndividualConsumer();
 			numberOfGrantsQueryHandler.sparqlSelectQuery(vitroRequest.getRDFService(), consumer);
 
-			return grantsInformation.toJson(consumer.getMap());
+			ObjectMapper mapper = new ObjectMapper();
+			return mapper.writeValueAsString(consumer.getMap());
 				
 		} else if (VisualizationFrameworkConstants.COAUTHOR_UTILS_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
@@ -352,7 +354,6 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 		private VitroRequest vitroRequest;
 		private Map<String, String> fieldLabelToOutputFieldLabel;
 		private String topLevelURL = null;
-		private GenericQueryMap queryResult = new GenericQueryMap();
 
 		HighetTopLevelOrgTemporalGraphURLConsumer(VitroRequest vitroRequest, Map<String, String> fieldLabelToOutputFieldLabel) {
 			this.vitroRequest = vitroRequest;
@@ -368,8 +369,6 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			RDFNode organizationNode = qs.get(fieldLabelToOutputFieldLabel.get("organization"));
 
 			if (organizationNode != null) {
-				queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organization"), organizationNode.toString());
-
 				String individualLocalName = UtilityFunctions.getIndividualLocalName(organizationNode.toString(), vitroRequest);
 
 				if (StringUtils.isNotBlank(individualLocalName)) {
@@ -389,19 +388,6 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 							VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
 							highestLevelOrganizationTemporalGraphVisURLParams);
 
-				}
-			} else {
-				RDFNode organizationLabelNode = qs.get(fieldLabelToOutputFieldLabel.get("organizationLabel"));
-
-				if (organizationLabelNode != null) {
-					queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organizationLabel"), organizationLabelNode.toString());
-				}
-
-				RDFNode numberOfChildrenNode = qs.getLiteral("numOfChildren");
-
-				if (numberOfChildrenNode != null) {
-					queryResult.addEntry("numOfChildren",
-							String.valueOf(numberOfChildrenNode.asLiteral().getInt()));
 				}
 			}
 		}

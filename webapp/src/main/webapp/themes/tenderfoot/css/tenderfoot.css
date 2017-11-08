@@ -2,6 +2,10 @@ legend {
     display: none;
 }
 
+.navbar {
+    z-index: 10;
+}
+
 #nav {
     background: #f7f9f9;
 }
@@ -10,16 +14,47 @@ legend {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index:10;
+    z-index: 10;
 }
+/*
+    If you don't want navbar that anchors to the top of the screen, replace with
+
+    #nav.affix {
+        position: relative;
+    }
+ */
 
 #nav .container {
     padding-left: 0px;
     padding-right: 0px;
 }
 
+.navbar-collapse.in #main-nav {
+    padding-left: 15px;
+}
+
+.navbar-toggle .button-label {
+    display: inline-block;
+    float: left;
+    font-weight: bold;
+    line-height: 14px;
+    padding-right: 10px;
+}
+.button-bars {
+    display: inline-block;
+    float: left;
+}
+
 p.navbar-text {
     margin-left: 15px;
+}
+
+#nav-searchbox {
+    float: right;
+}
+
+button.navbar-toggle {
+    z-index: 999;
 }
 
 body {
@@ -245,7 +280,7 @@ h1.vivo-logo a {
     position: absolute;
 }
 h2 {
-    padding: 5px 0 6px 0;
+    padding: 5px 0 3px 0;
     margin: 0;
     font-size: 1.375em;
     color: #064d68;
@@ -293,7 +328,35 @@ table.classHierarchy {
     margin-right: 0px;
 }
 
-
 section#container div {
     width: auto;
+}
+
+#flash-message {
+    border: 1px dotted #E2C822;
+    background-color: #FFF9D7;
+    padding: .5em;
+    margin-bottom: 10px;
+}
+#welcome-message {
+    border: 1px dotted #E2C822;
+    background-color: #FFF9D7;
+    padding: .25em;
+    margin-bottom: 8px;
+}
+#flash-msg-container,
+#welcome-msg-container {
+    width: 600px;
+    height:34px;
+    position: absolute;
+    z-index: 99;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+img.add-individual {
+    height: 15px;
+    width: 15px;
 }

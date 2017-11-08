@@ -746,7 +746,7 @@ public class AddAssociatedConceptsPreprocessor extends
 	//This will either generate or retrieve URIs for the concept semantic type labels if they exist
 	//We will then update the submission to include this 
 		private String getConceptSemanticTypeURIValues() {
-			String pseudoInputString = "";
+			StringBuilder pseudoInputString = new StringBuilder();
 			if(conceptSemanticTypeLabelValues !=  null && !conceptSemanticTypeLabelValues.isEmpty()) {
 				String[] conceptSemanticTypeLabels = convertDelimitedStringToArray(conceptSemanticTypeLabelValues);
 				//keep track of what label values already exist and to which label variables they map
@@ -758,10 +758,10 @@ public class AddAssociatedConceptsPreprocessor extends
 				if(numberLabels == 1) {
 					String label = conceptSemanticTypeLabels[0];
 					String  uri = getURIForSemanticTypeLabel(label);
-					if(uri != "") {
+					if(!StringUtils.isEmpty(uri)) {
 						String[] urisToAdd = new String[1];
 						urisToAdd[0] = uri;
-						pseudoInputString = uri;
+						pseudoInputString = new StringBuilder(uri);
 						log.debug("uris to add" + uri);
 						submission.addUriToForm(this.editConfiguration, "conceptSemanticTypeURI", urisToAdd);
 					}
@@ -801,7 +801,7 @@ public class AddAssociatedConceptsPreprocessor extends
 						//Make or retrieve URI for this label
 						//TODO: Do we create this string with empty inputs ?
 						String  uri = getURIForSemanticTypeLabel(label);
-						if(uri != "") {
+						if(!StringUtils.isEmpty(uri)) {
 							//uri var shouldn't be repeated?
 							if(!this.conceptSemanticTypeURIVarToValueMap.containsKey(uriVar)) {
 							this.conceptSemanticTypeURIVarToValueMap.put(uriVar, new ArrayList<String>());
@@ -809,21 +809,21 @@ public class AddAssociatedConceptsPreprocessor extends
 							}
 						}
 						if(i != 0) {
-							pseudoInputString += ","; 
+							pseudoInputString.append(",");
 						}
-						pseudoInputString += uri;
+						pseudoInputString.append(uri);
 					
 					}
 					
 					//Add this string to the uris for the form
 					String[] urisToAdd = new String[1];
-					urisToAdd[0] = pseudoInputString;
+					urisToAdd[0] = pseudoInputString.toString();
 					log.debug("uris to add" + pseudoInputString);
 					submission.addUriToForm(this.editConfiguration, "conceptSemanticTypeURI", urisToAdd);
 					
 				}
 			}
-			return pseudoInputString;
+			return pseudoInputString.toString();
 		}
 		
 	private String getURIForSemanticTypeLabel(String label) {

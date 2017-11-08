@@ -77,3 +77,10 @@ article.property ul.property-list {
 .pagination>li.selectedNavPage {
     padding-right: 7px;
 }
+
+nav#alpha-browse-container {
+    float: right;
+}
+#individuals-in-class {
+    margin-right: 0px;
+}

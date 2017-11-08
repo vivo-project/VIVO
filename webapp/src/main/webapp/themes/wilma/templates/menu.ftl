@@ -19,8 +19,8 @@
                 <section  id="welcome-message" role="alert">${flash}</section>
             </section>
         <#else>
-            <section id="flash-message" role="alert">
-                ${flash}
+            <section  id="flash-msg-container" role="container">
+                <section id="flash-message" role="alert">${flash}</section>
             </section>
         </#if>
     </#if>

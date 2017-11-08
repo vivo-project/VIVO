@@ -72,15 +72,11 @@ public class ConceptSearchServiceUtils {
 	        Class classDefinition = Class.forName(searchServiceClassName);
 	        object = classDefinition.newInstance();
 	        conceptServiceClass = (ExternalConceptService) object;
-	    } catch (InstantiationException e) {
+	    } catch (InstantiationException | ClassNotFoundException | IllegalAccessException e) {
 	        System.out.println(e);
-	    } catch (IllegalAccessException e) {
-	        System.out.println(e);
-	    } catch (ClassNotFoundException e) {
-	        System.out.println(e);
-	    }    	
-    
-	    if(conceptServiceClass == null){
+	    }
+
+        if(conceptServiceClass == null){
 	    	log.error("could not find Concept Search Class for " + searchServiceName);
 	    	return null;
 	    } 

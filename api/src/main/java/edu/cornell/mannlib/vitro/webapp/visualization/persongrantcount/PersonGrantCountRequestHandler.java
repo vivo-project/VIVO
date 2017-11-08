@@ -112,7 +112,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 				UtilityFunctions.getYearToActivityCount(authorGrants);
 
 
-		boolean shouldVIVOrenderVis = yearToGrantCount.size() > 0 ? true : false;
+		boolean shouldVIVOrenderVis = (yearToGrantCount.size() > 0);
 			
 			/*
 	    	 * Computations required to generate HTML for the sparkline & related context.

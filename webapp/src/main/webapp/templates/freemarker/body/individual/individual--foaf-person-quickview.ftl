@@ -259,13 +259,15 @@ ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tiny_mce/
                   '<script type="text/javascript" src="${urls.base}/js/json2.js"></script>',
                   '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>')}
 
-${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/individualUriRdf.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/individual/individualQtipBubble.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/individual/moreLessController.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/individual/individualProfilePageType.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/imageUpload/imageUploadUtils.js"></script>')}
+${scripts.add('<script async type="text/javascript" src="${urls.base}/js/individual/individualUriRdf.js"></script>',
+              '<script async type="text/javascript" src="${urls.base}/js/individual/individualQtipBubble.js"></script>',
+              '<script async type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
+              '<script async type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>',
+              '<script async type="text/javascript" src="${urls.base}/js/individual/moreLessController.js"></script>',
+              '<script async type="text/javascript" src="${urls.base}/js/individual/individualProfilePageType.js"></script>',
+              '<script async type="text/javascript" src="${urls.base}/js/imageUpload/imageUploadUtils.js"></script>',
+              '<script async type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>',
+              '<script async type="text/javascript" src="//cdn.plu.mx/widget-popup.js"></script>')}
 
 <script type="text/javascript">
     i18n_confirmDelete = "${i18n().confirm_delete}";

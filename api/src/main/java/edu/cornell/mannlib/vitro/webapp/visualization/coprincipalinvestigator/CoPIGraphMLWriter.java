@@ -25,7 +25,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -83,15 +82,11 @@ public class CoPIGraphMLWriter {
 			transformer.transform(source, result);
 
 			graphMLContent.append(writer.toString());
-		} catch (TransformerConfigurationException e) {
-			throw new IllegalStateException("XML error generating GraphML", e);
-		} catch (TransformerException e) {
-			throw new IllegalStateException("XML error generating GraphML", e);
-		} catch (ParserConfigurationException e) {
+		} catch (ParserConfigurationException | TransformerException e) {
 			throw new IllegalStateException("XML error generating GraphML", e);
 		}
 
-		return graphMLContent;
+        return graphMLContent;
 	}
 	
 	public StringBuilder getCoPIGraphMLContent(){
@@ -121,7 +116,7 @@ public class CoPIGraphMLWriter {
 		
 		Set<Collaboration> edges = coPIData.getCollaborations();
 		List<Collaboration> orderedEdges = new ArrayList<Collaboration>(edges);
-		Collections.sort(orderedEdges, new CollaborationComparator());
+		orderedEdges.sort(new CollaborationComparator());
 
 		for (Collaboration currentEdge : orderedEdges) {
 			/*
@@ -218,7 +213,7 @@ public class CoPIGraphMLWriter {
 		List<Collaborator> orderedPINodes = new ArrayList<Collaborator>(piNodes);
 		orderedPINodes.remove(egoNode);
 		
-		Collections.sort(orderedPINodes, new CollaboratorComparator());
+		orderedPINodes.sort(new CollaboratorComparator());
 		
 		
 		for (Collaborator currNode : orderedPINodes) {

@@ -737,6 +737,7 @@ p.password-note {
     padding: .25em;
     margin-bottom: 8px;
 }
+#flash-msg-container,
 #welcome-msg-container {
     margin-bottom: 8px;
     margin-top: -10px;

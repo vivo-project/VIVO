@@ -5,7 +5,6 @@ package edu.cornell.mannlib.vitro.webapp.visualization.personlevel;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CoAuthorshipData;
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CoInvestigationData;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.CollaborationDataViewHelper;

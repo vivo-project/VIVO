@@ -2,7 +2,6 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.coauthorship;
 
-import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +25,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -81,15 +79,11 @@ public class CoAuthorshipGraphMLWriter {
 			transformer.transform(source, result);
 
 			graphMLContent.append(writer.toString());
-		} catch (TransformerConfigurationException e) {
-			throw new IllegalStateException("XML error generating GraphML", e);
-		} catch (TransformerException e) {
-			throw new IllegalStateException("XML error generating GraphML", e);
-		} catch (ParserConfigurationException e) {
+		} catch (ParserConfigurationException | TransformerException e) {
 			throw new IllegalStateException("XML error generating GraphML", e);
 		}
 
-		return graphMLContent;
+        return graphMLContent;
 	}
 	
 	public StringBuilder getCoAuthorshipGraphMLContent() {
@@ -119,7 +113,7 @@ public class CoAuthorshipGraphMLWriter {
 
 		Set<Collaboration>  edges = coAuthorshipData.getCollaborations();
 		List<Collaboration> orderedEdges = new ArrayList<Collaboration>(edges);
-		Collections.sort(orderedEdges, new CollaborationComparator());
+		orderedEdges.sort(new CollaborationComparator());
 
 		for (Collaboration currentEdge : orderedEdges) {
 			/*
@@ -214,7 +208,7 @@ public class CoAuthorshipGraphMLWriter {
 		List<Collaborator> orderedAuthorNodes = new ArrayList<Collaborator>(authorNodes);
 		orderedAuthorNodes.remove(egoNode);
 		
-		Collections.sort(orderedAuthorNodes, new CollaboratorComparator());
+		orderedAuthorNodes.sort(new CollaboratorComparator());
 		
 		for (Collaborator currNode : orderedAuthorNodes) {
 			/*

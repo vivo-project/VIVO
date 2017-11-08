@@ -8,6 +8,7 @@ import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -45,6 +46,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Res
  *      show orcidSuccess.ftl with "return to profile" and "view profile" links.
  * </pre>
  */
+@WebServlet(name = "OrcidIntegrationController", urlPatterns = {"/orcid/*"})
 public class OrcidIntegrationController extends FreemarkerHttpServlet {
 	private static final Log log = LogFactory
 			.getLog(OrcidIntegrationController.class);

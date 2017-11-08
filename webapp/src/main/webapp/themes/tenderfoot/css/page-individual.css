@@ -94,6 +94,10 @@ article.property li h3 {
     margin-left: 10px;
 }
 
+ul#individual-hasResearchArea {
+    margin-left: 10px;
+}
+
 ul#individual-hasResearchArea li,
 ul#individual-facultyMemberships li {
     float: left;
@@ -101,6 +105,27 @@ ul#individual-facultyMemberships li {
     margin-right: 10px;
     border-right: none;
 }
+
+.edit-mainImage {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 0 6px 0 6px;
+    top: 6px;
+    left: 21px;
+}
+a.edit-mainImage img.edit-individual {
+    border: 0;
+    padding-left: 0px;
+    margin-left: 8px;
+}
+.delete-mainImage {
+    position: absolute;
+    top: 6px;
+    left: 55px;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 0 6px 0 6px;
+}
+
 #admin {
     background-color: #f3f3f0;
     margin-top: 15px;
@@ -108,4 +133,23 @@ ul#individual-facultyMemberships li {
 #admin h3 {
     background-color: #398AAC;
     color: #fff;
+}
+
+ul#individual-personInPosition {
+    list-style: none;
+    padding-left: 10px;
+}
+
+ul#individual-personInPosition li {
+    line-height: 1.3em;
+}
+
+ul#individual-personInPosition li:last-child {
+    padding-bottom: 5px;
+}
+
+section#preferredTitle h2 {
+    float: left;
+    font-size: 1em;
+    color: #ccc;
 }

@@ -150,7 +150,7 @@ public class GemetService implements ExternalConceptService  {
       if (obj.has(key)) {
          return obj.get(key).asText();
       } else {
-         return new String("");
+         return "";
       }
    }
 
@@ -160,7 +160,7 @@ public class GemetService implements ExternalConceptService  {
     * @throws Exception
     */
    protected String getAvailableLangs(String concept_uri) throws Exception {
-      String result = new String();
+      String result = "";
       String serviceUrl = GemetWS_address + "getAvailableLanguages" +
       "?concept_uri=" + concept_uri;
       try {
@@ -177,7 +177,7 @@ public class GemetService implements ExternalConceptService  {
     * @throws Exception
     */
    protected String getConcept(String concept_uri) throws Exception {
-      String result = new String();
+      String result = "";
       String serviceUrl = GemetWS_address + "getConcept" +
       "?concept_uri=" + concept_uri +
       "&language=en";
@@ -196,20 +196,27 @@ public class GemetService implements ExternalConceptService  {
     * @throws Exception
     */
    protected String getAllTranslationsForConcept(String concept_uri, String property) throws Exception {
-      String result = new String();
-      String property_uri = new String();
-      if (property.equals("definition")) {
-         property_uri = definitionUri;
-      } else if (property.equals("preferredLabel")) {
-         property_uri = prefLabelUri;
-      } else if (property.equals("scopeNote")) {
-         property_uri = scopeNoteUri;
-      } else if (property.equals("nonPreferredLabels")) {
-         property_uri = altLabelUri;
-      } else if (property.equals("example")) {
-         property_uri = exampleUri;
-      } else if (property.equals("acronymLabel")) {
-         property_uri = acronymLabelUri;
+      String result = "";
+      String property_uri = "";
+      switch (property) {
+         case "definition":
+            property_uri = definitionUri;
+            break;
+         case "preferredLabel":
+            property_uri = prefLabelUri;
+            break;
+         case "scopeNote":
+            property_uri = scopeNoteUri;
+            break;
+         case "nonPreferredLabels":
+            property_uri = altLabelUri;
+            break;
+         case "example":
+            property_uri = exampleUri;
+            break;
+         case "acronymLabel":
+            property_uri = acronymLabelUri;
+            break;
       }
 
       String serviceUrl = GemetWS_address + "getAllTranslationsForConcept" +
@@ -234,14 +241,18 @@ public class GemetService implements ExternalConceptService  {
     * @throws Exception
     */
    protected String getRelatedConcepts(String concept_uri, String relation) throws Exception {
-      String result = new String();
-      String relation_uri = new String();
-      if (relation.equals("broader")) {
-         relation_uri = broaderUri;
-      } else if (relation.equals("narrower")) {
-         relation_uri = narrowerUri;
-      } else if (relation.equals("related")) {
-         relation_uri = relatedUri;
+      String result = "";
+      String relation_uri = "";
+      switch (relation) {
+         case "broader":
+            relation_uri = broaderUri;
+            break;
+         case "narrower":
+            relation_uri = narrowerUri;
+            break;
+         case "related":
+            relation_uri = relatedUri;
+            break;
       }
       String serviceUrl = GemetWS_address + "getRelatedConcepts" +
       "?concept_uri=" + concept_uri +
@@ -263,7 +274,7 @@ public class GemetService implements ExternalConceptService  {
     * @throws Exception
     */
    protected String getConceptsMatchingKeyword(String keyword) throws Exception {
-      String result = new String();
+      String result = "";
       String encodedKeyword = URLEncoder.encode(keyword, "UTF-8"); 
       String serviceUrl = GemetWS_address + "getConceptsMatchingKeyword" +
       "?keyword="  + encodedKeyword +
@@ -283,7 +294,7 @@ public class GemetService implements ExternalConceptService  {
     * @param url URI
     */
    protected String getGemetResults(String url) throws Exception  {
-      String results = new String();
+      String results = "";
       //System.out.println("url: "+url);
       try {
 
@@ -310,7 +321,7 @@ public class GemetService implements ExternalConceptService  {
     
    protected List<String> getRelatedUris(String json) {
 	   List<String> uriList = new ArrayList<String>();
-	   String uri = new String();
+	   String uri = "";
 	   ArrayNode jsonArray = (ArrayNode) JacksonUtils.parseJson(json);
 	    if (jsonArray.size() == 0) {
            return new ArrayList<String>();
@@ -338,7 +349,7 @@ public class GemetService implements ExternalConceptService  {
 	}
 
    protected String stripConceptId(String uri) {
-	     String conceptId = new String();
+	     String conceptId = "";
 	     int lastslash = uri.lastIndexOf('/');
 	     conceptId = uri.substring(lastslash + 1, uri.length());
 	     return conceptId;

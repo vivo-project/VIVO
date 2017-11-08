@@ -18,12 +18,19 @@ var i18nStrings = {
 <script src="${urls.theme}/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+        $('#nav-wrapper').height($("#nav").height());
+
 		$('#nav').affix({
 			offset: {
 				top: $('header').height()
 			}
-		});	
-	});
+		});
+
+        $( window ).resize(function() {
+            $('#nav-wrapper').height($("#nav").height());
+        });
+
+    });
 </script>
 
 ${headScripts.list()} 
