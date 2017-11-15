@@ -6,7 +6,7 @@
 <h3>Reference Basemap</h3>
 <p>The VIVO Map of Science visualization uses the UCSD map of science and classification 
 system that was computed using paper-level data from about 25,000 journals from Elsevier's 
-Scopus and and Thomson Reuters' Web of Science (WoS) for the years 2001-2010. The UCSD map 
+Scopus and Clarivate Analytics' Web of Science (WoS) for the years 2001-2010. The UCSD map 
 of science assigns the 25,000 journals to 554 subdisciplines that are further aggregated 
 into 13 main disciplines of science. In the map, each discipline has a distinct color 
 (green for 'Biology', brown for 'Earth Sciences', etc.) and a label. (Sub)disciplines that 
@@ -46,7 +46,7 @@ map, on the right to reduce number of subdisciplines shown to improve legibility
 
 <h3>Links</h3>
 <p>For more information on the UCSD map of science and classification system, see 
-<a href="http://sci.cns.iu.edu/ucsdmap" target="_blank">http://sci.cns.iu.edu/ucsdmap</a>. 
+<a href="https://doi.org/10.1371/journal.pone.0039464" target="_blank">https://doi.org/10.1371/journal.pone.0039464</a>. 
 For other maps of science, see 
 <a href="http://scimaps.org" target="_blank">http://scimaps.org</a> and 
 <a href="http://mapofscience.com" target="_blank">http://mapofscience.com</a>.</p>

@@ -4,7 +4,7 @@
 
 <div id="toolTipOne" style="display:none;">
 VIVO's Map of Science visualization depicts the topical expertise a university, organization, or person has 
-based on past publications loaded into VIVO. Shown here is the expertise profile of the ${entityLabel}--larger 
+based on past publications loaded into VIVO. The ${entityLabel} expertise profile is shown here--larger 
 circle sizes denote more publications per topic area.<br /><br />
 
 <a href='${subEntityMapOfScienceCommonURL}about'>Learn more about VIVO's Map of Science visualization?</a>
@@ -28,7 +28,7 @@ therefore it may not be fully representative of the overall publication activity
 
 The publication coverage of this visualization can be improved by including more publication data in the VIVO 
 system, and by ensuring that each publication in the VIVO system is associated with a journal that the Map of 
-Science recognizes (based on the holdings of Thomson's ISI database and Elsevier's Scopus database). Journal 
+Science recognizes (based on the holdings of Clarivate Analytics' Web of Science database and Elsevier's Scopus database). Journal 
 names containing typos or other idiosyncrasies may need to be cleaned up before they are recognized. You may 
 contact a VIVO system administrator if publication coverage is a concern.</div>
 
