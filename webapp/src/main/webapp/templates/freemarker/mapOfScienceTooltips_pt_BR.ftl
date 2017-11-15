@@ -26,7 +26,7 @@ portanto, não pode ser plenamente representativo a atividade de publicação gl
 
 A cobertura da visualização desta publicação pode ser melhorados através da inclusão de mais dados na publicação VIVO
 sistema, e por garantir que cada publicação no sistema dentro VIVO é associada com um jornal que o Mapa de
-Ciência reconheca (com base nas participações do banco de dados da Thomson ISI e banco de dados Scopus da Elsevier).  
+Ciência reconheca (com base nas participações do banco de dados da Clarivate Analytics Web of Science e banco de dados Scopus da Elsevier).  
 Os nomes dos jornais que contenham erros de digitação podem precisar de ser revisados antes de serem reconhecidos. 
 Você pode entrar em contato com o administrador do sistema VIVO se a cobertura da publicação é uma preocupação.</div>
 

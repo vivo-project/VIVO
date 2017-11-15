@@ -6,7 +6,7 @@
 <h3>Mapa base de referencia</h3>
 <p>El mapa VIVO de la visualización de la ciencia utiliza el mapa UCSD de la ciencia y clasificación,
 sistema que se calcula a partir de datos de papel a nivel de alrededor de 25 000 revistas de Elsevier
-Scopus y y Thomson Reuters Web of Science (WoS) para los años 2001-2010. El mapa UCSD
+Scopus y Clarivate Analytics Web of Science (WoS) para los años 2001-2010. El mapa UCSD
 de la ciencia se encarga de los 25.000 diarios a 554 subdisciplinas que se agregan más
 en 13 disciplinas principales de la ciencia. En el mapa, cada disciplina tiene un color distinto
 (verde para 'Biología', marrón de 'Ciencias de la Tierra', etc) y una etiqueta. (Sub) disciplinas que
@@ -47,7 +47,7 @@ del mapa, sobre la derecha a reducir el número de subdisciplinas mostrando mejo
 
 <h3>Enlaces</h3>
 <p>Para obtener más información sobre el mapa UCSD de la ciencia y el sistema de clasificación, véase 
-<a href="http://sci.cns.iu.edu/ucsdmap" target="_blank">http://sci.cns.iu.edu/ucsdmap</a>. 
+<a href="https://doi.org/10.1371/journal.pone.0039464" target="_blank">https://doi.org/10.1371/journal.pone.0039464</a>. 
 Para otros mapas de la ciencia, ver
 <a href="http://scimaps.org" target="_blank">http://scimaps.org</a> y
 <a href="http://mapofscience.com" target="_blank">http://mapofscience.com</a>.</p>
