@@ -620,93 +620,252 @@
 <http://purl.obolibrary.org/obo/RO_0003001> <http://www.w3.org/2000/01/rdf-schema#label> "producido por"@es .
 <http://purl.org/spar/c4o/hasGlobalCountSource> <http://www.w3.org/2000/01/rdf-schema#label> "tiene una fuente de recuento global"@es .
 <http://aims.fao.org/aos/geopolitical.owl#nameCurrencyIT> <http://www.w3.org/2000/01/rdf-schema#label> "nombre Moneda IT"@es .
-
-
-
-
-
-<http://vivoweb.org/ontology/core#dateTime> <http://www.w3.org/2000/01/rdf-schema#label> "Fecha / hora"@es .
-<http://purl.org/ontology/bibo/numPages> <http://www.w3.org/2000/01/rdf-schema#label> "N\u00FAmero de p\u00E1ginas"@es .
-<http://purl.org/ontology/bibo/Book> <http://www.w3.org/2000/01/rdf-schema#label> "Libro"@es .
-<http://vivoweb.org/ontology/core#PostdoctoralTraining> <http://www.w3.org/2000/01/rdf-schema#label> "Formaci\u00F3n postdoctoral"@es .
-<http://purl.org/ontology/bibo/EditedBook> <http://www.w3.org/2000/01/rdf-schema#label> "Libro editado"@es .
-<http://vivoweb.org/ontology/core#Exhibit> <http://www.w3.org/2000/01/rdf-schema#label> "Exhibici\u00F3n"@es .
-<http://vivoweb.org/ontology/core#prerequisiteFor> <http://www.w3.org/2000/01/rdf-schema#label> "Requisito previo para"@es .
-<http://vivoweb.org/ontology/core#publicationVenueFor> <http://www.w3.org/2000/01/rdf-schema#label> "Lugar de publicaci\u00F3n"@es .
-<http://purl.org/ontology/bibo/Statute> <http://www.w3.org/2000/01/rdf-schema#label> "Estatuto"@es .
-<http://vivoweb.org/ontology/core#fundingVehicleFor> <http://www.w3.org/2000/01/rdf-schema#label> "Proporciona fondos para"@es .
-<http://vivoweb.org/ontology/core#GeopoliticalEntity> <http://www.w3.org/2000/01/rdf-schema#label> "Entidad geopol\u00EDtica"@es .
-<http://vivoweb.org/ontology/core#hrJobTitle> <http://www.w3.org/2000/01/rdf-schema#label> "Puesto de trabajo HR"@es .
-<http://vivoweb.org/ontology/core#hasFundingVehicle> <http://www.w3.org/2000/01/rdf-schema#label> "Financiaci\u00F3n proporcionada a trav\u00E9s de"@es .
-<http://vivoweb.org/ontology/core#scopusId> <http://www.w3.org/2000/01/rdf-schema#label> "Scopus ID"@es .
-<http://vivoweb.org/ontology/core#degreeCandidacy> <http://www.w3.org/2000/01/rdf-schema#label> "Grado de candidatura"@es .
-<http://vivoweb.org/ontology/core#hasResearchArea> <http://www.w3.org/2000/01/rdf-schema#label> "\u00C1reas de investigaci\u00F3n"@es .
-<http://vivoweb.org/ontology/core#NewsRelease> <http://www.w3.org/2000/01/rdf-schema#label> "Comunicado de prensa"@es .
+<http://www.w3.org/2006/vcard/ns#TextPhone> <http://www.w3.org/2000/01/rdf-schema#label> "Teléfono de texto"@es .
+<http://purl.obolibrary.org/obo/ERO_0000391> <http://www.w3.org/2000/01/rdf-schema#label> "Servicio de acceso"@es .
+<http://www.w3.org/2006/vcard/ns#Crush> <http://www.w3.org/2000/01/rdf-schema#label> "Aplastar"@es .
+<http://vivoweb.org/ontology/core#MemberRole> <http://www.w3.org/2000/01/rdf-schema#label> "Rol de miembro"@es .
+<http://www.w3.org/2006/vcard/ns#Work> <http://www.w3.org/2000/01/rdf-schema#label> "Trabajo"@es .
+<http://purl.obolibrary.org/obo/ARG_2000012> <http://www.w3.org/2000/01/rdf-schema#label> "Etiqueta de medición"@es .
+<http://purl.obolibrary.org/obo/ERO_0000780> <http://www.w3.org/2000/01/rdf-schema#label> "Rol de residente no permanente"@es .
 <http://purl.org/ontology/bibo/> <http://www.w3.org/2000/01/rdf-schema#label> "Ontolog\u00EDa bibliografica"@es .
-<http://vivoweb.org/ontology/core#ConferenceSeries> <http://www.w3.org/2000/01/rdf-schema#label> "Ciclo de conferencias"@es .
+<http://purl.org/net/OCRe/research.owl> <http://www.w3.org/2000/01/rdf-schema#label> "Investigación OCRe"@es .
+<http://aims.fao.org/aos/geopolitical.owl#special_group> <http://www.w3.org/2000/01/rdf-schema#label> "Grupo especial"@es .
+<http://aims.fao.org/aos/geopolitical.owl#countryAreaUnit> <http://www.w3.org/2000/01/rdf-schema#label> "unidad de área de país"@es .
+<http://www.w3.org/2006/vcard/ns#geo> <http://www.w3.org/2000/01/rdf-schema#label> "geo"@es .
 <http://vivoweb.org/ontology/core#hasSuccessorOrganization> <http://www.w3.org/2000/01/rdf-schema#label> "Organizaci\u00F3n sucesora"@es .
-<http://purl.org/ontology/bibo/Report> <http://www.w3.org/2000/01/rdf-schema#label> "Informe"@es .
+<http://purl.obolibrary.org/obo/RO_0003000> <http://www.w3.org/2000/01/rdf-schema#label> "produce"@es .
+<http://vivoweb.org/ontology/core#prerequisiteFor> <http://www.w3.org/2000/01/rdf-schema#label> "Requisito previo para"@es .
 <http://purl.org/ontology/bibo/isbn13> <http://www.w3.org/2000/01/rdf-schema#label> "N\u00FAmero Est\u00E1ndar Internacional de Libros (ISBN) 13"@es .
-<http://vivoweb.org/ontology/core#Library> <http://www.w3.org/2000/01/rdf-schema#label> "Biblioteca"@es .
-<http://purl.org/ontology/bibo/Quote> <http://www.w3.org/2000/01/rdf-schema#label> "Cita"@es .
-<http://vivoweb.org/ontology/core#relatedBy> <http://www.w3.org/2000/01/rdf-schema#label> "Relacionados por"@es .
-<http://vivoweb.org/ontology/core#hasEquipment> <http://www.w3.org/2000/01/rdf-schema#label> "Equipos"@es .
-<http://vivoweb.org/ontology/core#Room> <http://www.w3.org/2000/01/rdf-schema#label> "Habitaci\u00F3n"@es .
-<http://purl.org/ontology/bibo/CourtReporter> <http://www.w3.org/2000/01/rdf-schema#label> "Reportero de la corte"@es .
 <http://vivoweb.org/ontology/core#cclCode> <http://www.w3.org/2000/01/rdf-schema#label> "C\u00F3digo (CCL)"@es .
-<http://vivoweb.org/ontology/core#Translation> <http://www.w3.org/2000/01/rdf-schema#label> "Traducci\u00F3n"@es .
+<http://aims.fao.org/aos/geopolitical.owl#hasNationality> <http://www.w3.org/2000/01/rdf-schema#label> "tiene nacionalidad"@es .
+<http://vivoweb.org/ontology/core#InvitedTalk> <http://www.w3.org/2000/01/rdf-schema#label> "Invitado a charla"@es .
 <http://purl.org/ontology/bibo/uri> <http://www.w3.org/2000/01/rdf-schema#label> "URI"@es .
-<http://vivoweb.org/ontology/core#Foundation> <http://www.w3.org/2000/01/rdf-schema#label> "Fundaci\u00F3n"@es .
+<http://www.w3.org/2006/vcard/ns#Agent> <http://www.w3.org/2000/01/rdf-schema#label> "Agente"@es .
+<http://purl.obolibrary.org/obo/ERO_0000392> <http://www.w3.org/2000/01/rdf-schema#label> "Servicio de almacenamiento"@es .
+<http://vivoweb.org/ontology/core#translatorOf> <http://www.w3.org/2000/01/rdf-schema#label> "Traductor de"@es .
+<http://purl.org/ontology/bibo/Document> <http://www.w3.org/2000/01/rdf-schema#label> "Documento"@es .
+<http://purl.obolibrary.org/obo/ERO_0000394> <http://www.w3.org/2000/01/rdf-schema#label> "Servicio de procesamiento de materiales"@es .
+<http://purl.obolibrary.org/obo/ARG_2000011> <http://www.w3.org/2000/01/rdf-schema#label> "Proceso de medición de experiencia"@es .
+<http://aims.fao.org/aos/geopolitical.owl#nameCurrencyES> <http://www.w3.org/2000/01/rdf-schema#label> "nombre Moneda ES"@es .
+<http://aims.fao.org/aos/geopolitical.owl#countryAreaTotal> <http://www.w3.org/2000/01/rdf-schema#label> "área total del país"@es .
+<http://purl.org/ontology/bibo/ReferenceSource> <http://www.w3.org/2000/01/rdf-schema#label> "Fuente de referencia"@es .
+<http://vivoweb.org/ontology/core#hasFundingVehicle> <http://www.w3.org/2000/01/rdf-schema#label> "Financiaci\u00F3n proporcionada a trav\u00E9s de"@es .
+<http://aims.fao.org/aos/geopolitical.owl#nationalityRU> <http://www.w3.org/2000/01/rdf-schema#label> "nacionalidad RU"@es .
+<http://purl.org/ontology/bibo/eanucc13> <http://www.w3.org/2000/01/rdf-schema#label> "C\u00F3digo Uniforme Internacional EAN 13 (EAN-UCC)"@es .
+<http://purl.org/ontology/bibo/EditedBook> <http://www.w3.org/2000/01/rdf-schema#label> "Libro editado"@es .
+<http://www.w3.org/2006/vcard/ns#Male> <http://www.w3.org/2000/01/rdf-schema#label> "Masculino"@es .
+<http://www.w3.org/2006/vcard/ns#calendarLink> <http://www.w3.org/2000/01/rdf-schema#label> "enlace del calendario"@es .
+<http://purl.obolibrary.org/obo/BFO_0000008> <http://www.w3.org/2000/01/rdf-schema#label> "Región temporal"@es .
+<http://vivoweb.org/ontology/core#GeopoliticalEntity> <http://www.w3.org/2000/01/rdf-schema#label> "Entidad geopol\u00EDtica"@es .
+<http://purl.obolibrary.org/obo/ERO_0000393> <http://www.w3.org/2000/01/rdf-schema#label> "Servicio de entrenamiento"@es .
+<http://vivoweb.org/ontology/core#sponsors> <http://www.w3.org/2000/01/rdf-schema#label> "Patrocinadores de premio u honor"@es .
+<http://purl.obolibrary.org/obo/ARG_2000029> <http://www.w3.org/2000/01/rdf-schema#label> "información de contacto para"@es .
+<http://vivoweb.org/ontology/core#Room> <http://www.w3.org/2000/01/rdf-schema#label> "Habitaci\u00F3n"@es .
+<http://vivoweb.org/ontology/core#eRACommonsId> <http://www.w3.org/2000/01/rdf-schema#label> "eRA Commons ID"@es .
+<http://www.w3.org/2006/vcard/ns#Muse> <http://www.w3.org/2000/01/rdf-schema#label> "Musa"@es .
+<http://purl.obolibrary.org/obo/ERO_0000034> <http://www.w3.org/2000/01/rdf-schema#label> "fabricante"@es .
+<http://aims.fao.org/aos/geopolitical.owl#area> <http://www.w3.org/2000/01/rdf-schema#label> "Zona"@es .
+<http://www.w3.org/2006/vcard/ns#productId> <http://www.w3.org/2000/01/rdf-schema#label> "ID del Producto"@es .
+<http://purl.org/net/OCRe/study_design.owl#Phase_2> <http://www.w3.org/2000/01/rdf-schema#label> "Fase 2"@es .
+<http://aims.fao.org/aos/geopolitical.owl#codeCurrency> <http://www.w3.org/2000/01/rdf-schema#label> "código moneda"@es .
+<http://vivoweb.org/ontology/core#hasTranslation> <http://www.w3.org/2000/01/rdf-schema#label> "Traducci\u00F3n"@es .
+<http://www.w3.org/2006/vcard/ns#Coresident> <http://www.w3.org/2000/01/rdf-schema#label> "Coresident"@es .
+<http://purl.obolibrary.org/obo/BFO_0000054> <http://www.w3.org/2000/01/rdf-schema#label> "realizado en"@es .
+<http://vivoweb.org/ontology/core#College> <http://www.w3.org/2000/01/rdf-schema#label> "Colegio"@es .
+<http://aims.fao.org/aos/geopolitical.owl#nameShortES> <http://www.w3.org/2000/01/rdf-schema#label> "nombre corto ES"@es .
+<http://purl.org/net/OCRe/study_design.owl#Phase_3> <http://www.w3.org/2000/01/rdf-schema#label> "Fase 3"@es .
+<http://vivoweb.org/ontology/core#dateIssued> <http://www.w3.org/2000/01/rdf-schema#label> "Fecha de publicaci\u00F3n"@es .
+<http://www.w3.org/2006/vcard/ns#region> <http://www.w3.org/2000/01/rdf-schema#label> "región"@es .
+<http://aims.fao.org/aos/geopolitical.owl#GDP> <http://www.w3.org/2000/01/rdf-schema#label> "PIB"@es .
+<http://purl.obolibrary.org/obo/ARG_0000015> <http://www.w3.org/2000/01/rdf-schema#label> "etiqueta definida por el usuario"@es .
+<http://www.w3.org/2006/vcard/ns#Name> <http://www.w3.org/2000/01/rdf-schema#label> "Nombre"@es .
+<http://purl.obolibrary.org/obo/BFO_0000055> <http://www.w3.org/2000/01/rdf-schema#label> "se da cuenta"@es .
+<http://aims.fao.org/aos/geopolitical.owl#nationalityAR> <http://www.w3.org/2000/01/rdf-schema#label> "nacionalidad AR"@es .
+<http://purl.org/ontology/bibo/CourtReporter> <http://www.w3.org/2000/01/rdf-schema#label> "Reportero de la corte"@es .
+<http://purl.obolibrary.org/obo/BFO_0000016> <http://www.w3.org/2000/01/rdf-schema#label> "Disposición"@es .
+<http://www.w3.org/2006/vcard/ns#hasMember> <http://www.w3.org/2000/01/rdf-schema#label> "miembro"@es .
+<http://vivoweb.org/ontology/core#PresenterRole> <http://www.w3.org/2000/01/rdf-schema#label> "Rol de presentador"@es .
+<http://vivoweb.org/ontology/core#PrimaryPosition> <http://www.w3.org/2000/01/rdf-schema#label> "Posici\u00F3n primaria"@es .
+<http://purl.org/net/OCRe/study_design.owl#Phase_4> <http://www.w3.org/2000/01/rdf-schema#label> "Fase 4"@es .
+<http://purl.obolibrary.org/obo/ERO_0000565> <http://www.w3.org/2000/01/rdf-schema#label> "Oficina de transferencia de tecnología"@es .
+<http://www.w3.org/2006/vcard/ns#hasOrganizationName> <http://www.w3.org/2000/01/rdf-schema#label> "tiene nombre de organización"@es .
+<http://www.w3.org/2006/vcard/ns#Addressing> <http://www.w3.org/2000/01/rdf-schema#label> "Direccionamiento"@es .
+<http://purl.obolibrary.org/obo/RO_0001018> <http://www.w3.org/2000/01/rdf-schema#label> "contenida en"@es .
+<http://purl.obolibrary.org/obo/ERO_0000033> <http://www.w3.org/2000/01/rdf-schema#label> "tem experiência em técnica"@es .
+<http://purl.obolibrary.org/obo/ERO_0000397> <http://www.w3.org/2000/01/rdf-schema#label> "realiza la técnica"@es .
+<http://purl.org/ontology/bibo/peerReviewed> <http://www.w3.org/2000/01/rdf-schema#label> "Revisi\u00F3n por pares"@es .
+<http://vivoweb.org/ontology/core#identifier> <http://www.w3.org/2000/01/rdf-schema#label> "Identificador"@es .
+<http://aims.fao.org/aos/geopolitical.owl#populationNotes> <http://www.w3.org/2000/01/rdf-schema#label> "notas de población"@es .
+<http://vivoweb.org/ontology/core#Campus> <http://www.w3.org/2000/01/rdf-schema#label> "Campus"@es .
+<http://purl.obolibrary.org/obo/BFO_0000015> <http://www.w3.org/2000/01/rdf-schema#label> "Proceso"@es .
+<http://purl.obolibrary.org/obo/RO_0001019> <http://www.w3.org/2000/01/rdf-schema#label> "contiene"@es .
+<http://purl.org/ontology/bibo/Slide> <http://www.w3.org/2000/01/rdf-schema#label> "Diapositiva"@es .
 <http://vivoweb.org/ontology/core#totalAwardAmount> <http://www.w3.org/2000/01/rdf-schema#label> "Cantidad total de premio"@es .
 <http://purl.org/ontology/bibo/Code> <http://www.w3.org/2000/01/rdf-schema#label> "c\u00F3digo"@es .
-<http://vivoweb.org/ontology/core#dateIssued> <http://www.w3.org/2000/01/rdf-schema#label> "Fecha de publicaci\u00F3n"@es .
-<http://vivoweb.org/ontology/core#OrganizerRole> <http://www.w3.org/2000/01/rdf-schema#label> "Rol de organizador"@es .
-<http://vivoweb.org/ontology/core#EmeritusProfessor> <http://www.w3.org/2000/01/rdf-schema#label> "Profesor em\u00E9rito"@es .
-<http://vivoweb.org/ontology/core#eRACommonsId> <http://www.w3.org/2000/01/rdf-schema#label> "eRA Commons ID"@es .
-<http://vivoweb.org/ontology/core#identifier> <http://www.w3.org/2000/01/rdf-schema#label> "Identificador"@es .
-<http://vivoweb.org/ontology/core#OutreachProviderRole> <http://www.w3.org/2000/01/rdf-schema#label> "Rol de alcance"@es .
-<http://vivoweb.org/ontology/core#AdministratorRole> <http://www.w3.org/2000/01/rdf-schema#label> "Rol de administrador"@es .
-<http://purl.org/ontology/bibo/eanucc13> <http://www.w3.org/2000/01/rdf-schema#label> "C\u00F3digo Uniforme Internacional EAN 13 (EAN-UCC)"@es .
-<http://vivoweb.org/ontology/core#preferredDisplayOrder> <http://www.w3.org/2000/01/rdf-schema#label> "Orden de visualizaci\u00F3n preferido"@es .
-<http://vivoweb.org/ontology/core#Campus> <http://www.w3.org/2000/01/rdf-schema#label> "Campus"@es .
-<http://vivoweb.org/ontology/core#Association> <http://www.w3.org/2000/01/rdf-schema#label> "Asociaci\u00F3n"@es .
-<http://vivoweb.org/ontology/core#NonFacultyAcademicPosition> <http://www.w3.org/2000/01/rdf-schema#label> "Posici\u00F3n no acad\u00E9mica en la facultad"@es .
-<http://purl.org/ontology/bibo/Slide> <http://www.w3.org/2000/01/rdf-schema#label> "Diapositiva"@es .
-<http://purl.org/ontology/bibo/chapter> <http://www.w3.org/2000/01/rdf-schema#label> "N\u00FAmero de cap\u00EDtulo"@es .
-<http://vivoweb.org/ontology/core#InvitedTalk> <http://www.w3.org/2000/01/rdf-schema#label> "Invitado a charla"@es .
-<http://xmlns.com/foaf/0.1/Agent> <http://www.w3.org/2000/01/rdf-schema#label> "Agente"@es .
-<http://vivoweb.org/ontology/core#MemberRole> <http://www.w3.org/2000/01/rdf-schema#label> "Rol de miembro"@es .
-<http://purl.org/ontology/bibo/ReferenceSource> <http://www.w3.org/2000/01/rdf-schema#label> "Fuente de referencia"@es .
-<http://vivoweb.org/ontology/core#Catalog> <http://www.w3.org/2000/01/rdf-schema#label> "Cat\u00E1logo"@es .
-<http://purl.org/ontology/bibo/subsequentLegalDecision> <http://www.w3.org/2000/01/rdf-schema#label> "Decisi\u00F3n legal posterior"@es .
-<http://vivoweb.org/ontology/core#hasProceedings> <http://www.w3.org/2000/01/rdf-schema#label> "Actas"@es .
-<http://vivoweb.org/ontology/core#hasTranslation> <http://www.w3.org/2000/01/rdf-schema#label> "Traducci\u00F3n"@es .
-<http://vivoweb.org/ontology/core#subcontractsGrant> <http://www.w3.org/2000/01/rdf-schema#label> "Concesión de subcontratos"@es .
-<http://vivoweb.org/ontology/core#PostdocPosition> <http://www.w3.org/2000/01/rdf-schema#label> "Posici\u00F3n postdoctoral"@es .
-<http://vivoweb.org/ontology/core#translatorOf> <http://www.w3.org/2000/01/rdf-schema#label> "Traductor de"@es .
-<http://purl.org/ontology/bibo/peerReviewed> <http://www.w3.org/2000/01/rdf-schema#label> "Revisi\u00F3n por pares"@es .
-<http://vivoweb.org/ontology/core#distributes> <http://www.w3.org/2000/01/rdf-schema#label> "Distribuye fondos de"@es .
-<http://vivoweb.org/ontology/core#hasSubjectArea> <http://www.w3.org/2000/01/rdf-schema#label> "\u00C1rea tem\u00E1tica"@es .
+<http://purl.obolibrary.org/obo/RO_0002353> <http://www.w3.org/2000/01/rdf-schema#label> "salida de"@es .
+<http://purl.obolibrary.org/obo/ERO_0000038> <http://www.w3.org/2000/01/rdf-schema#label> "especifica el uso de"@es .
+<http://purl.obolibrary.org/obo/OBI_0000833> <http://www.w3.org/2000/01/rdf-schema#label> "objetivo logrado por"@es .
+<http://vivoweb.org/ontology/core#Library> <http://www.w3.org/2000/01/rdf-schema#label> "Biblioteca"@es .
 <http://purl.org/ontology/bibo/Performance> <http://www.w3.org/2000/01/rdf-schema#label> "Rendimiento"@es .
-<http://vivoweb.org/ontology/core#County> <http://www.w3.org/2000/01/rdf-schema#label> "Condado"@es .
-<http://vivoweb.org/ontology/core#PresenterRole> <http://www.w3.org/2000/01/rdf-schema#label> "Rol de presentador"@es .
-<http://vivoweb.org/ontology/core#dateFiled> <http://www.w3.org/2000/01/rdf-schema#label> "Fecha de presentaci\u00F3n"@es .
-<http://purl.org/ontology/bibo/Series> <http://www.w3.org/2000/01/rdf-schema#label> "Serie"@es .
-<http://purl.org/ontology/bibo/coden> <http://www.w3.org/2000/01/rdf-schema#label> "Coden"@es .
-<http://vivoweb.org/ontology/core#Certificate> <http://www.w3.org/2000/01/rdf-schema#label> "Certificado"@es .
-<http://purl.org/ontology/bibo/status> <http://www.w3.org/2000/01/rdf-schema#label> "Estado"@es .
-<http://vivoweb.org/ontology/core#Project> <http://www.w3.org/2000/01/rdf-schema#label> "Proyecto"@es .
-<http://purl.org/ontology/bibo/edition> <http://www.w3.org/2000/01/rdf-schema#label> "Edici\u00F3n"@es .
-<http://vivoweb.org/ontology/core#sponsorAwardId> <http://www.w3.org/2000/01/rdf-schema#label> "Identificador del patrocinador"@es .
-<http://purl.org/ontology/bibo/DocumentPart> <http://www.w3.org/2000/01/rdf-schema#label> "Parte del documento"@es .
-<http://vivoweb.org/ontology/core#College> <http://www.w3.org/2000/01/rdf-schema#label> "Colegio"@es .
-<http://vivoweb.org/ontology/core#GraduateStudent> <http://www.w3.org/2000/01/rdf-schema#label> "Estudiante graduado"@es .
-<http://vivoweb.org/ontology/core#PrimaryPosition> <http://www.w3.org/2000/01/rdf-schema#label> "Posici\u00F3n primaria"@es .
-<http://vivoweb.org/ontology/core#yearMonthPrecision> <http://www.w3.org/2000/01/rdf-schema#label> "Valor del a\u00F1o - mes"@es .
-<http://vivoweb.org/ontology/core#UndergraduateStudent> <http://www.w3.org/2000/01/rdf-schema#label> "Estudiante de pregrado"@es .
-<http://purl.org/dc/terms/contributor> <http://www.w3.org/2000/01/rdf-schema#label> "Contribuyente"@es .
+<http://purl.obolibrary.org/obo/ERO_0001716> <http://www.w3.org/2000/01/rdf-schema#label> "Base de datos"@es .
+<http://vivoweb.org/ontology/scientific-research#documentationFor> <http://www.w3.org/2000/01/rdf-schema#label> "documentación para proyecto o recurso"@es .
+<http://www.w3.org/2006/vcard/ns#hasRelated> <http://www.w3.org/2000/01/rdf-schema#label> "tiene relacionado"@es .
+<http://purl.obolibrary.org/obo/ERO_0000424> <http://www.w3.org/2000/01/rdf-schema#label> "tiene población de estudio"@es .
+<http://purl.obolibrary.org/obo/ARG_2000079> <http://www.w3.org/2000/01/rdf-schema#label> "Junta Americana de Patología"@es .
+<http://purl.obolibrary.org/obo/ERO_0000789> <http://www.w3.org/2000/01/rdf-schema#label> "Papel del personal"@es .
+<http://purl.obolibrary.org/obo/BFO_0000050> <http://www.w3.org/2000/01/rdf-schema#label> "parte de"@es .
 <http://purl.org/ontology/bibo/Letter> <http://www.w3.org/2000/01/rdf-schema#label> "Carta"@es .
-<http://purl.org/ontology/bibo/Document> <http://www.w3.org/2000/01/rdf-schema#label> "Documento"@es .
-<http://vivoweb.org/ontology/core#dateTimeInterval> <http://www.w3.org/2000/01/rdf-schema#label> "Intervalo de fecha / hora"@es .
-<http://vivoweb.org/ontology/core#sponsors> <http://www.w3.org/2000/01/rdf-schema#label> "Patrocinadores de premio u honor"@es .
+<http://aims.fao.org/aos/geopolitical.owl#nameCurrencyZH> <http://www.w3.org/2000/01/rdf-schema#label> "nombre Moneda ZH"@es .
+<http://vivoweb.org/ontology/core#distributes> <http://www.w3.org/2000/01/rdf-schema#label> "Distribuye fondos de"@es .
+<http://purl.obolibrary.org/obo/OBI_0000304> <http://www.w3.org/2000/01/rdf-schema#label> "fabricado por"@es .
+<http://www.w3.org/2006/vcard/ns#hasFormattedName> <http://www.w3.org/2000/01/rdf-schema#label> "tiene nombre formateado"@es .
+<http://purl.obolibrary.org/obo/IAO_0000027> <http://www.w3.org/2000/01/rdf-schema#label> "Elemento de datos"@es .
+<http://purl.org/spar/fabio/Erratum> <http://www.w3.org/2000/01/rdf-schema#label> "Errata"@es .
+<http://www.w3.org/2006/vcard/ns#Individual> <http://www.w3.org/2000/01/rdf-schema#label> "Individual"@es .
+<http://www.w3.org/2006/vcard/ns#Friend> <http://www.w3.org/2000/01/rdf-schema#label> "Amigo"@es .
+<http://www.w3.org/2006/vcard/ns#Acquaintance> <http://www.w3.org/2000/01/rdf-schema#label> "Conocido"@es .
+<http://www.w3.org/2006/vcard/ns#Nickname> <http://www.w3.org/2000/01/rdf-schema#label> "Apodo"@es .
+<http://xmlns.com/foaf/0.1/Agent> <http://www.w3.org/2000/01/rdf-schema#label> "Agente"@es .
+<http://purl.obolibrary.org/obo/RO_0002351> <http://www.w3.org/2000/01/rdf-schema#label> "tiene miembro"@es .
+<http://purl.obolibrary.org/obo/BFO_0000051> <http://www.w3.org/2000/01/rdf-schema#label> "tiene parte"@es .
+<http://purl.obolibrary.org/obo/ARG_2000008> <http://www.w3.org/2000/01/rdf-schema#label> "Medida del peso del tema"@es .
+<http://www.w3.org/2006/vcard/ns#logo> <http://www.w3.org/2000/01/rdf-schema#label> "logo"@es .
+<http://purl.obolibrary.org/obo/BFO_0000031> <http://www.w3.org/2000/01/rdf-schema#label> "Continuo genéricamente dependiente"@es .
+<http://vivoweb.org/ontology/core#GraduateStudent> <http://www.w3.org/2000/01/rdf-schema#label> "Estudiante graduado"@es .
+<http://vivoweb.org/ontology/core#relatedBy> <http://www.w3.org/2000/01/rdf-schema#label> "Relacionados por"@es .
+<http://purl.obolibrary.org/obo/ARG_2000077> <http://www.w3.org/2000/01/rdf-schema#label> "Junta Americana de Cirugía Ortopédica"@es .
+<http://purl.obolibrary.org/obo/ERO_0000787> <http://www.w3.org/2000/01/rdf-schema#label> "Papel del empleado"@es .
+<http://vivoweb.org/ontology/core#publicationVenueFor> <http://www.w3.org/2000/01/rdf-schema#label> "Lugar de publicaci\u00F3n"@es .
+<http://purl.org/net/OCRe/study_design.owl#Phase_0> <http://www.w3.org/2000/01/rdf-schema#label> "Fase 0"@es .
+<http://vivoweb.org/ontology/scientific-research#Phase2ClinicalTrial> <http://www.w3.org/2000/01/rdf-schema#label> "Prueba clínica de fase 2"@es .
+<http://aims.fao.org/aos/geopolitical.owl#codeAGROVOC> <http://www.w3.org/2000/01/rdf-schema#label> "código AGROVOC"@es .
+<http://purl.org/dc/terms/contributor> <http://www.w3.org/2000/01/rdf-schema#label> "Contribuyente"@es .
+<http://purl.obolibrary.org/obo/RO_0002350> <http://www.w3.org/2000/01/rdf-schema#label> "miembro de"@es .
+<http://www.w3.org/2006/vcard/ns#telephone> <http://www.w3.org/2000/01/rdf-schema#label> "Teléfono"@es .
+<http://purl.obolibrary.org/obo/ARG_2000009> <http://www.w3.org/2000/01/rdf-schema#label> "Medición de experiencia"@es .
+<http://purl.obolibrary.org/obo/ERO_0000037> <http://www.w3.org/2000/01/rdf-schema#label> "contacto o proveedor para el servicio"@es .
+<http://purl.obolibrary.org/obo/ARG_2000028> <http://www.w3.org/2000/01/rdf-schema#label> "tiene información de contacto"@es .
 <http://vivoweb.org/ontology/core#ResearchOrganization> <http://www.w3.org/2000/01/rdf-schema#label> "Organizaci\u00F3n de investigaci\u00F3n"@es .
+<http://purl.obolibrary.org/obo/OBI_0000835> <http://www.w3.org/2000/01/rdf-schema#label> "Fabricante"@es .
+<http://www.w3.org/2006/vcard/ns#honorificPrefix> <http://www.w3.org/2000/01/rdf-schema#label> "prefijo honorífico"@es .
+<http://vivoweb.org/ontology/scientific-research#Phase0ClinicalTrial> <http://www.w3.org/2000/01/rdf-schema#label> "Fase 0 Ensayo clínico"@es .
+<http://vivoweb.org/ontology/core#Translation> <http://www.w3.org/2000/01/rdf-schema#label> "Traducci\u00F3n"@es .
+<http://purl.obolibrary.org/obo/ERO_0000788> <http://www.w3.org/2000/01/rdf-schema#label> "Papel de la facultad"@es .
+<http://purl.obolibrary.org/obo/ARG_2000078> <http://www.w3.org/2000/01/rdf-schema#label> "Junta Americana de Otorrinolaringología"@es .
+<http://aims.fao.org/aos/geopolitical.owl#landAreaTotal> <http://www.w3.org/2000/01/rdf-schema#label> "área total de la tierra"@es .
+<http://vivoweb.org/ontology/core#hrJobTitle> <http://www.w3.org/2000/01/rdf-schema#label> "Puesto de trabajo HR"@es .
+<http://purl.org/net/OCRe/study_design.owl#Phase_1> <http://www.w3.org/2000/01/rdf-schema#label> "Fase 1"@es .
+<http://vivoweb.org/ontology/core#hasResearchArea> <http://www.w3.org/2000/01/rdf-schema#label> "\u00C1reas de investigaci\u00F3n"@es .
+<http://aims.fao.org/aos/geopolitical.owl#hasCoordinate> <http://www.w3.org/2000/01/rdf-schema#label> "tiene coordenadas"@es .
+<http://purl.org/vocab/vann/preferredNamespaceUri> <http://www.w3.org/2000/01/rdf-schema#label> "URI de espacio de nombre preferido"@es .
+<http://purl.obolibrary.org/obo/ERO_0000914> <http://www.w3.org/2000/01/rdf-schema#label> "Rol de aprendiz de posgrado"@es .
+<http://purl.org/ontology/bibo/Report> <http://www.w3.org/2000/01/rdf-schema#label> "Informe"@es .
+<http://purl.obolibrary.org/obo/ARG_2000075> <http://www.w3.org/2000/01/rdf-schema#label> "Junta Estadounidense de Obstetricia y Ginecología"@es .
+<http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaNotes> <http://www.w3.org/2000/01/rdf-schema#label> "notas de área agrícola"@es .
+<http://aims.fao.org/aos/geopolitical.owl#nameListZH> <http://www.w3.org/2000/01/rdf-schema#label> "lista de nombres ZH"@es .
+<http://vivoweb.org/ontology/scientific-research#studyPopulationCount> <http://www.w3.org/2000/01/rdf-schema#label> "conteo de población de estudio"@es .
+<http://www.w3.org/2006/vcard/ns#CalendarBusy> <http://www.w3.org/2000/01/rdf-schema#label> "Calendario Ocupado"@es .
+<http://purl.obolibrary.org/obo/IAO_0000003> <http://www.w3.org/2000/01/rdf-schema#label> "Etiqueta de unidad de medida"@es .
+<http://aims.fao.org/aos/geopolitical.owl#nameListAR> <http://www.w3.org/2000/01/rdf-schema#label> "lista de nombres AR"@es .
+<http://vivoweb.org/ontology/core#dateTimeInterval> <http://www.w3.org/2000/01/rdf-schema#label> "Intervalo de fecha / hora"@es .
+<http://www.w3.org/2006/vcard/ns#formattedName> <http://www.w3.org/2000/01/rdf-schema#label> "tiene nombre formateado"@es .
+<http://aims.fao.org/aos/geopolitical.owl#economic_region> <http://www.w3.org/2000/01/rdf-schema#label> "Región económica"@es .
+<http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.w3.org/2000/01/rdf-schema#label> "es definido por"@es .
+<http://vivoweb.org/ontology/core#AdministratorRole> <http://www.w3.org/2000/01/rdf-schema#label> "Rol de administrador"@es .
+<http://purl.obolibrary.org/obo/ARG_2000076> <http://www.w3.org/2000/01/rdf-schema#label> "Junta Americana de Oftalmología"@es .
+<http://purl.obolibrary.org/obo/BFO_0000034> <http://www.w3.org/2000/01/rdf-schema#label> "Función"@es .
+<http://vivoweb.org/ontology/core#EmeritusProfessor> <http://www.w3.org/2000/01/rdf-schema#label> "Profesor em\u00E9rito"@es .
+<http://vivoweb.org/ontology/core#yearMonthPrecision> <http://www.w3.org/2000/01/rdf-schema#label> "Valor del a\u00F1o - mes"@es .
+<http://www.w3.org/2006/vcard/ns#instantMessage> <http://www.w3.org/2000/01/rdf-schema#label> "mensaje instantáneo"@es .
+<http://vivoweb.org/ontology/core#subcontractsGrant> <http://www.w3.org/2000/01/rdf-schema#label> "Concesión de subcontratos"@es .
+<http://vivoweb.org/ontology/core#ConferenceSeries> <http://www.w3.org/2000/01/rdf-schema#label> "Ciclo de conferencias"@es .
+<http://vivoweb.org/ontology/scientific-research#protocolRealizedBy> <http://www.w3.org/2000/01/rdf-schema#label> "protocolo realizado por"@es .
+<http://vivoweb.org/ontology/core#UndergraduateStudent> <http://www.w3.org/2000/01/rdf-schema#label> "Estudiante de pregrado"@es .
+<http://purl.obolibrary.org/obo/IAO_0000104> <http://www.w3.org/2000/01/rdf-schema#label> "Especificación del plan"@es .
+<http://purl.org/ontology/bibo/Quote> <http://www.w3.org/2000/01/rdf-schema#label> "Cita"@es .
+<http://vivoweb.org/ontology/core#NonFacultyAcademicPosition> <http://www.w3.org/2000/01/rdf-schema#label> "Posici\u00F3n no acad\u00E9mica en la facultad"@es .
+<http://www.w3.org/2006/vcard/ns#Colleague> <http://www.w3.org/2000/01/rdf-schema#label> "Colega"@es .
+<http://aims.fao.org/aos/geopolitical.owl#landAreaUnit> <http://www.w3.org/2000/01/rdf-schema#label> "unidad de área terrestre"@es .
+<http://www.w3.org/2006/vcard/ns#hasSound> <http://www.w3.org/2000/01/rdf-schema#label> "tiene sonido"@es .
+<http://vivoweb.org/ontology/core#dateFiled> <http://www.w3.org/2000/01/rdf-schema#label> "Fecha de presentaci\u00F3n"@es .
+<http://www.w3.org/2006/vcard/ns#givenName> <http://www.w3.org/2000/01/rdf-schema#label> "nombre de pila"@es .
+<http://vivoweb.org/ontology/core#OutreachProviderRole> <http://www.w3.org/2000/01/rdf-schema#label> "Rol de alcance"@es .
+<http://purl.obolibrary.org/obo/ARG_2000073> <http://www.w3.org/2000/01/rdf-schema#label> "Junta Americana de Cirugía Neurológica"@es .
+<http://purl.obolibrary.org/obo/IAO_0000005> <http://www.w3.org/2000/01/rdf-schema#label> "Especificación objetiva"@es .
+<http://www.w3.org/2006/vcard/ns#Organization> <http://www.w3.org/2000/01/rdf-schema#label> "Organización"@es .
+<http://www.w3.org/2006/vcard/ns#country> <http://www.w3.org/2000/01/rdf-schema#label> "país"@es .
+<http://purl.org/net/OCRe/study_design.owl#OCRE100038> <http://www.w3.org/2000/01/rdf-schema#label> "Fase"@es .
+<http://purl.org/ontology/bibo/Series> <http://www.w3.org/2000/01/rdf-schema#label> "Serie"@es .
+<http://vivoweb.org/ontology/core#Foundation> <http://www.w3.org/2000/01/rdf-schema#label> "Fundaci\u00F3n"@es .
+<http://purl.org/ontology/bibo/subsequentLegalDecision> <http://www.w3.org/2000/01/rdf-schema#label> "Decisi\u00F3n legal posterior"@es .
+<http://purl.org/ontology/bibo/coden> <http://www.w3.org/2000/01/rdf-schema#label> "Coden"@es .
+<http://www.w3.org/2006/vcard/ns#revision> <http://www.w3.org/2000/01/rdf-schema#label> "revisión"@es .
+<http://www.w3.org/2006/vcard/ns#Language> <http://www.w3.org/2000/01/rdf-schema#label> "Idioma"@es .
+<http://www.w3.org/2006/vcard/ns#Me> <http://www.w3.org/2000/01/rdf-schema#label> "Yo"@es .
+<http://vivoweb.org/ontology/core#OrganizerRole> <http://www.w3.org/2000/01/rdf-schema#label> "Rol de organizador"@es .
+<http://purl.obolibrary.org/obo/ARG_2000074> <http://www.w3.org/2000/01/rdf-schema#label> "Junta Americana de Medicina Nuclear"@es .
+<http://www.w3.org/2006/vcard/ns#Gender> <http://www.w3.org/2000/01/rdf-schema#label> "Género"@es .
+<http://vivoweb.org/ontology/core#Exhibit> <http://www.w3.org/2000/01/rdf-schema#label> "Exhibici\u00F3n"@es .
+<http://aims.fao.org/aos/geopolitical.owl#hasMinLatitude> <http://www.w3.org/2000/01/rdf-schema#label> "tiene una latitud mínima"@es .
+<http://vivoweb.org/ontology/core#County> <http://www.w3.org/2000/01/rdf-schema#label> "Condado"@es .
+<http://vivoweb.org/ontology/core#Certificate> <http://www.w3.org/2000/01/rdf-schema#label> "Certificado"@es .
+<http://www.w3.org/2006/vcard/ns#Sound> <http://www.w3.org/2000/01/rdf-schema#label> "Sonar"@es .
+<http://www.w3.org/2006/vcard/ns#category> <http://www.w3.org/2000/01/rdf-schema#label> "categoría"@es .
+<http://vivoweb.org/ontology/core#scopusId> <http://www.w3.org/2000/01/rdf-schema#label> "Scopus ID"@es .
+<http://purl.org/ontology/bibo/Statute> <http://www.w3.org/2000/01/rdf-schema#label> "Estatuto"@es .
+<http://vivoweb.org/ontology/core#fundingVehicleFor> <http://www.w3.org/2000/01/rdf-schema#label> "Proporciona fondos para"@es .
+<http://purl.obolibrary.org/obo/ARG_2000071> <http://www.w3.org/2000/01/rdf-schema#label> "Junta Americana de Medicina Interna"@es .
+<http://www.w3.org/2006/vcard/ns#nickName> <http://www.w3.org/2000/01/rdf-schema#label> "apodo"@es .
+<http://purl.obolibrary.org/obo/RO_0002220> <http://www.w3.org/2000/01/rdf-schema#label> "adyacente a"@es .
+<http://www.w3.org/2006/vcard/ns#Key> <http://www.w3.org/2000/01/rdf-schema#label> "Llave"@es .
+<http://purl.org/ontology/bibo/DocumentPart> <http://www.w3.org/2000/01/rdf-schema#label> "Parte del documento"@es .
+<http://purl.org/ontology/bibo/Book> <http://www.w3.org/2000/01/rdf-schema#label> "Libro"@es .
+<http://www.w3.org/2006/vcard/ns#Related> <http://www.w3.org/2000/01/rdf-schema#label> "Relacionado"@es .
+<http://vivoweb.org/ontology/core#Project> <http://www.w3.org/2000/01/rdf-schema#label> "Proyecto"@es .
+<http://vivoweb.org/ontology/core#PostdoctoralTraining> <http://www.w3.org/2000/01/rdf-schema#label> "Formaci\u00F3n postdoctoral"@es .
+<http://purl.obolibrary.org/obo/ERO_0000918> <http://www.w3.org/2000/01/rdf-schema#label> "proyecto de investigación relacionado"@es .
+<http://purl.obolibrary.org/obo/OBI_0000417> <http://www.w3.org/2000/01/rdf-schema#label> "logra el objetivo planificado"@es .
+<http://vivoweb.org/ontology/core#preferredDisplayOrder> <http://www.w3.org/2000/01/rdf-schema#label> "Orden de visualizaci\u00F3n preferido"@es .
+<http://www.w3.org/2006/vcard/ns#hasNote> <http://www.w3.org/2000/01/rdf-schema#label> "tiene nota"@es .
+<http://purl.obolibrary.org/obo/ARG_2000072> <http://www.w3.org/2000/01/rdf-schema#label> "Junta Americana de Genética Médica"@es .
+<http://www.w3.org/2006/vcard/ns#hasName> <http://www.w3.org/2000/01/rdf-schema#label> "tiene nombre"@es .
+<http://vivoweb.org/ontology/core#sponsorAwardId> <http://www.w3.org/2000/01/rdf-schema#label> "Identificador del patrocinador"@es .
+<http://purl.obolibrary.org/obo/IAO_0000109> <http://www.w3.org/2000/01/rdf-schema#label> "Datum de medición"@es .
+<http://www.w3.org/2006/vcard/ns#CalendarRequest> <http://www.w3.org/2000/01/rdf-schema#label> "Solicitud de calendario"@es .
+<http://www.w3.org/2006/vcard/ns#sound> <http://www.w3.org/2000/01/rdf-schema#label> "sonar"@es .
+<http://purl.obolibrary.org/obo/ERO_0000543> <http://www.w3.org/2000/01/rdf-schema#label> "técnica relacionada"@es .
+<http://purl.org/ontology/bibo/numPages> <http://www.w3.org/2000/01/rdf-schema#label> "N\u00FAmero de p\u00E1ginas"@es .
+<http://www.w3.org/2006/vcard/ns#familyName> <http://www.w3.org/2000/01/rdf-schema#label> "tiene apellido"@es .
+<http://vivoweb.org/ontology/core#Association> <http://www.w3.org/2000/01/rdf-schema#label> "Asociaci\u00F3n"@es .
+<http://vivoweb.org/ontology/core#PostdocPosition> <http://www.w3.org/2000/01/rdf-schema#label> "Posici\u00F3n postdoctoral"@es .
+<http://www.w3.org/2006/vcard/ns#title> <http://www.w3.org/2000/01/rdf-schema#label> "título"@es .
+<http://purl.obolibrary.org/obo/OBI_0000017> <http://www.w3.org/2000/01/rdf-schema#label> "Papel regulatorio"@es .
+<http://purl.obolibrary.org/obo/BFO_0000038> <http://www.w3.org/2000/01/rdf-schema#label> "Región temporal unidimensional"@es .
+<http://vivoweb.org/ontology/core#degreeCandidacy> <http://www.w3.org/2000/01/rdf-schema#label> "Grado de candidatura"@es .
+<http://aims.fao.org/aos/geopolitical.owl#landAreaNotes> <http://www.w3.org/2000/01/rdf-schema#label> "notas de área de tierra"@es .
+<http://www.w3.org/2006/vcard/ns#email> <http://www.w3.org/2000/01/rdf-schema#label> "correo electrónico"@es .
+<http://www.w3.org/2006/vcard/ns#CalendarLink> <http://www.w3.org/2000/01/rdf-schema#label> "Enlace del calendario"@es .
+<http://www.w3.org/2006/vcard/ns#Group> <http://www.w3.org/2000/01/rdf-schema#label> "Grupo"@es .
+<http://aims.fao.org/aos/geopolitical.owl#hasOfficialName> <http://www.w3.org/2000/01/rdf-schema#label> "tiene nombre oficial"@es .
+<http://aims.fao.org/aos/geopolitical.owl#codeDBPediaID> <http://www.w3.org/2000/01/rdf-schema#label> "código DBPediaID"@es .
+<http://www.w3.org/2006/vcard/ns#Contact> <http://www.w3.org/2000/01/rdf-schema#label> "Contacto"@es .
+<http://vivoweb.org/ontology/core#hasProceedings> <http://www.w3.org/2000/01/rdf-schema#label> "Actas"@es .
+<http://aims.fao.org/aos/geopolitical.owl#GDPUnit> <http://www.w3.org/2000/01/rdf-schema#label> "Unidad de PIB"@es .
+<http://purl.org/ontology/bibo/edition> <http://www.w3.org/2000/01/rdf-schema#label> "Edici\u00F3n"@es .
+<http://aims.fao.org/aos/geopolitical.owl#nameShortZH> <http://www.w3.org/2000/01/rdf-schema#label> "nombre corto ZH"@es .
+<http://purl.obolibrary.org/obo/ARG_2000070> <http://www.w3.org/2000/01/rdf-schema#label> "Consejo Estadounidense de Medicina Familiar"@es .
+<http://www.w3.org/2006/vcard/ns#Location> <http://www.w3.org/2000/01/rdf-schema#label> "Ubicación"@es .
+<http://purl.obolibrary.org/obo/RO_0001015> <http://www.w3.org/2000/01/rdf-schema#label> "ubicación de"@es .
+<http://www.w3.org/2006/vcard/ns#OrganizationUnitName> <http://www.w3.org/2000/01/rdf-schema#label> "Nombre Unidad Organizacional"@es .
+<http://vivoweb.org/ontology/core> <http://www.w3.org/2000/01/rdf-schema#label> "VIVO Núcleo"@es .
+<http://vivoweb.org/ontology/core#dateTime> <http://www.w3.org/2000/01/rdf-schema#label> "Fecha / hora"@es .
+<http://aims.fao.org/aos/geopolitical.owl#codeUN> <http://www.w3.org/2000/01/rdf-schema#label> "código UN"@es .
+<http://purl.obolibrary.org/obo/OBI_0000011> <http://www.w3.org/2000/01/rdf-schema#label> "Proceso planeado"@es .
+<http://purl.obolibrary.org/obo/ERO_0000919> <http://www.w3.org/2000/01/rdf-schema#label> "espécimen biológico relacionado"@es .
+<http://purl.org/ontology/bibo/status> <http://www.w3.org/2000/01/rdf-schema#label> "Estado"@es .
+<http://www.w3.org/2006/vcard/ns#hasInstantMessage> <http://www.w3.org/2000/01/rdf-schema#label> "tiene mensajes"@es .
+<http://vivoweb.org/ontology/core#Catalog> <http://www.w3.org/2000/01/rdf-schema#label> "Cat\u00E1logo"@es .
+<http://vivoweb.org/ontology/core#hasEquipment> <http://www.w3.org/2000/01/rdf-schema#label> "Equipos"@es .
+<http://purl.org/spar/cito/isCitedAsDataSourceBy> <http://www.w3.org/2000/01/rdf-schema#label> "se cita como fuente de datos por"@es .
+<http://purl.org/spar/cito/citesAsDataSource> <http://www.w3.org/2000/01/rdf-schema#label> "cita como fuente de datos"@es .
+<http://purl.obolibrary.org/obo/OBI_0100026> <http://www.w3.org/2000/01/rdf-schema#label> "Organismo"@es .
