@@ -524,7 +524,7 @@
 <http://vivoweb.org/ontology/core#AttendingProcess> <http://www.w3.org/2000/01/rdf-schema#label> "Attending Process"@en-US .
 <http://www.w3.org/2006/vcard/ns#hasLanguage> <http://www.w3.org/2000/01/rdf-schema#label> "has language"@en-US .
 <http://www.w3.org/2006/vcard/ns#hasURL> <http://www.w3.org/2000/01/rdf-schema#label> "has URL"@en-US .
-<http://purl.obolibrary.org/obo/ERO_0000482 # deprecated> <http://www.w3.org/2000/01/rdf-schema#label> "uses software"@en-US .
+<http://purl.obolibrary.org/obo/ERO_0000482> <http://www.w3.org/2000/01/rdf-schema#label> "uses software"@en-US .
 <http://vivoweb.org/ontology/core#ResearchProposal> <http://www.w3.org/2000/01/rdf-schema#label> "Research Proposal"@en-US .
 <http://purl.org/ontology/bibo/director> <http://www.w3.org/2000/01/rdf-schema#label> "director"@en-US .
 <http://vivoweb.org/ontology/core#Course> <http://www.w3.org/2000/01/rdf-schema#label> "Course"@en-US .
