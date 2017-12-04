@@ -22,7 +22,7 @@
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasResearcherRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "outras actividades de investigação"@pt-BR .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasInvestigatorRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "investigador"@pt-BR .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasPrincipalInvestigatorRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "investigador principal"@pt-BR .
-<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasCo-PrincipalInvestigatorRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "co-investigador principal no "@ pt-BR.
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasCo-PrincipalInvestigatorRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "co-investigador principal no "@pt-BR .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasPresenterRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "apresentações"@pt-BR .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgHasPresenterRoleConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "apresentações"@pt-BR .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/awardOrHonorConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "prêmios e honrarias"@pt-BR .
@@ -55,9 +55,9 @@
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpagePersonConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "webpage"@pt-BR .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageOrgConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "webpage"@pt-BR .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageInfoConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "webpage"@pt-BR .
-<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageSoftwareConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "webpage"@pt_BR .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageSoftwareConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "webpage"@pt-BR .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageFacilityConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "webpage"@pt-BR .
-<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageProjectConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "webpage"@pt_BR .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageProjectConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "webpage"@pt-BR .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageEventConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "webpage"@pt-BR .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageEventSeriesConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "webpage"@pt-BR .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/fullNameConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "nome completo"@pt-BR .
@@ -81,11 +81,11 @@
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/agentInFacilityConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "localizado na academia"@pt-BR .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/materialEntityInFacilityConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "alojados em instalações"@pt-BR .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasRoomConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "quartos"@pt-BR .
-<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/roomWithinBuildingConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "dentro do edifício" @ en-S .
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/roomWithinBuildingConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "dentro do edifício"@pt-BR .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/geographicLocationContainsBuildingConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "localização da instalação"@pt-BR .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/siteGeographicallyWithinGeoLocationConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "geograficamente dentro"@pt-BR .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/facilitySiteOfEventConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "facilidade para o evento"@pt-BR .
-<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/facilitySiteOfAgentConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "instalação para a pessoa, grupo ou organização "@ pt-BR.
+<http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/facilitySiteOfAgentConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "instalação para a pessoa, grupo ou organização "@pt-BR .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/facilityLocationOfEquipmentConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "localização de equipamento ou instrumento"@pt-BR .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/facilityLocationOfServiceConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "facilidade para o serviço"@pt-BR .
 <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/courseOfferedByConfig> <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#displayName> "oferecido por"@pt-BR .

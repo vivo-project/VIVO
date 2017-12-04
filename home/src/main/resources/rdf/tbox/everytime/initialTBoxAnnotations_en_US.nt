@@ -287,7 +287,7 @@
 <http://purl.obolibrary.org/obo/ERO_0000775> <http://www.w3.org/2000/01/rdf-schema#label> "has residency requirement"@en-US .
 <http://purl.org/ontology/bibo/reviewOf> <http://www.w3.org/2000/01/rdf-schema#label> "review of"@en-US .
 <http://purl.obolibrary.org/obo/ERO_0001263> <http://www.w3.org/2000/01/rdf-schema#label> "Material Modification Service"@en-US .
-<http://vivoweb.org/ontology/core#informationResourceSupportedBy> <http://www.w3.org/2000/01/rdf-schema#label> "supported by"@en-US , "supported by"@en-US .
+<http://vivoweb.org/ontology/core#informationResourceSupportedBy> <http://www.w3.org/2000/01/rdf-schema#label> "supported by"@en-US .
 <http://vivoweb.org/ontology/core#ConferencePaper> <http://www.w3.org/2000/01/rdf-schema#label> "Conference Paper"@en-US .
 <http://aims.fao.org/aos/geopolitical.owl#landAreaYear> <http://www.w3.org/2000/01/rdf-schema#label> "landAreaYear"@en-US .
 <http://purl.org/ontology/bibo/Website> <http://www.w3.org/2000/01/rdf-schema#label> "Website"@en-US .
@@ -528,7 +528,7 @@
 <http://vivoweb.org/ontology/core#ResearchProposal> <http://www.w3.org/2000/01/rdf-schema#label> "Research Proposal"@en-US .
 <http://purl.org/ontology/bibo/director> <http://www.w3.org/2000/01/rdf-schema#label> "director"@en-US .
 <http://vivoweb.org/ontology/core#Course> <http://www.w3.org/2000/01/rdf-schema#label> "Course"@en-US .
-<http://vitro.mannlib.cornell.edu/ns/vitro/0.7> <http://www.w3.org/2000/01/rdf-schema#label> "Vitro internals"^^xsd:string .
+<http://vitro.mannlib.cornell.edu/ns/vitro/0.7> <http://www.w3.org/2000/01/rdf-schema#label> "Vitro internals"@en-US .
 <http://purl.org/ontology/bibo/Magazine> <http://www.w3.org/2000/01/rdf-schema#label> "Magazine"@en-US .
 <http://vivoweb.org/ontology/core#LibrarianPosition> <http://www.w3.org/2000/01/rdf-schema#label> "Librarian Position"@en-US .
 <http://aims.fao.org/aos/geopolitical.owl#nameShortIT> <http://www.w3.org/2000/01/rdf-schema#label> "nameShortIT"@en-US .
@@ -691,7 +691,7 @@
 <http://purl.obolibrary.org/obo/BFO_0000016> <http://www.w3.org/2000/01/rdf-schema#label> "Disposition"@en-US .
 <http://www.w3.org/2006/vcard/ns#hasMember> <http://www.w3.org/2000/01/rdf-schema#label> "member"@en-US .
 <http://vivoweb.org/ontology/core#PresenterRole> <http://www.w3.org/2000/01/rdf-schema#label> "Presenter Role"@en-US .
-<http://vivoweb.org/ontology/core#PrimaryPosition> <http://www.w3.org/2000/01/rdf-schema#label> "Primary Position"@en-US , "Primary Position"@en-US .
+<http://vivoweb.org/ontology/core#PrimaryPosition> <http://www.w3.org/2000/01/rdf-schema#label> "Primary Position"@en-US .
 <http://purl.org/net/OCRe/study_design.owl#Phase_4> <http://www.w3.org/2000/01/rdf-schema#label> "Phase 4"@en-US .
 <http://purl.obolibrary.org/obo/ERO_0000565> <http://www.w3.org/2000/01/rdf-schema#label> "Technology Transfer Office"@en-US .
 <http://www.w3.org/2006/vcard/ns#hasOrganizationName> <http://www.w3.org/2000/01/rdf-schema#label> "has organization name"@en-US .
@@ -864,7 +864,7 @@
 <http://purl.obolibrary.org/obo/RO_0001015> <http://www.w3.org/2000/01/rdf-schema#label> "location of"@en-US .
 <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> <http://www.w3.org/2000/01/rdf-schema#label> "Organizational Unit Name"@en-US .
 <http://vivoweb.org/ontology/core> <http://www.w3.org/2000/01/rdf-schema#label> "VIVO Core"@en-US .
-<http://vivoweb.org/ontology/core#dateTime> <http://www.w3.org/2000/01/rdf-schema#label> "date/time"@en-US , "date/time"@en-US .
+<http://vivoweb.org/ontology/core#dateTime> <http://www.w3.org/2000/01/rdf-schema#label> "date/time"@en-US .
 <http://aims.fao.org/aos/geopolitical.owl#codeUN> <http://www.w3.org/2000/01/rdf-schema#label> "codeUN"@en-US .
 <http://purl.obolibrary.org/obo/OBI_0000011> <http://www.w3.org/2000/01/rdf-schema#label> "Planned Process"@en-US .
 <http://purl.obolibrary.org/obo/ERO_0000919> <http://www.w3.org/2000/01/rdf-schema#label> "related biological specimen"@en-US .

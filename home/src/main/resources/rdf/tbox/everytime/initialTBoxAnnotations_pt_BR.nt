@@ -48,7 +48,7 @@
 <http://www.w3.org/2006/vcard/ns#Security> <http://www.w3.org/2000/01/rdf-schema#label> "Segurança"@pt-BR .
 <http://www.w3.org/2006/vcard/ns#hasCalendarRequest> <http://www.w3.org/2000/01/rdf-schema#label> "tem um pedido de calendário"@pt-BR .
 <http://aims.fao.org/aos/geopolitical.owl#hasMinLongitude> <http://www.w3.org/2000/01/rdf-schema#label> "tem uma longitude mínima"@pt-BR .
-<http://purl.org/ontology/bibo/Manuscript> <http://www.w3.org/2000/01/rdf-schema#label> "manuscrito"@pt-BR, "Manuscrito"@pt-BR .
+<http://purl.org/ontology/bibo/Manuscript> <http://www.w3.org/2000/01/rdf-schema#label> "Manuscrito"@pt-BR .
 <http://www.w3.org/2002/07/owl#sameAs> <http://www.w3.org/2000/01/rdf-schema#label> "igual a"@pt-BR .
 <http://www.w3.org/2006/vcard/ns#hasTimeZone> <http://www.w3.org/2000/01/rdf-schema#label> "tem fuso horário"@pt-BR .
 <http://vivoweb.org/ontology/core#Presentation> <http://www.w3.org/2000/01/rdf-schema#label> "Presentation"@pt-BR .
@@ -87,7 +87,7 @@
 <http://www.ebi.ac.uk/efo/swo/SWO_0000740> <http://www.w3.org/2000/01/rdf-schema#label> "implementa"@pt-BR .
 <http://www.w3.org/2006/vcard/ns#locality> <http://www.w3.org/2000/01/rdf-schema#label> "localidade"@pt-BR .
 <http://purl.obolibrary.org/obo/ERO_0000005> <http://www.w3.org/2000/01/rdf-schema#label> "Serviço"@pt-BR .
-<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#moniker> <http://www.w3.org/2000/01/rdf-schema#label> "apelido (reprovado)" @ pt BR.
+<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#moniker> <http://www.w3.org/2000/01/rdf-schema#label> "apelido (reprovado)"@pt-BR .
 <http://aims.fao.org/aos/geopolitical.owl#codeFAOSTAT> <http://www.w3.org/2000/01/rdf-schema#label> "codeFAOSTAT"@pt-BR .
 <http://vivoweb.org/ontology/scientific-research#accessProvidedBy> <http://www.w3.org/2000/01/rdf-schema#label> "acesso fornecido por"@pt-BR .
 <http://vivoweb.org/ontology/core#AttendeeRole> <http://www.w3.org/2000/01/rdf-schema#label> "participante Papel"@pt-BR .
@@ -417,7 +417,7 @@
 <http://purl.obolibrary.org/obo/ARG_2000390> <http://www.w3.org/2000/01/rdf-schema#label> "contexto para"@pt-BR .
 <http://www.w3.org/2006/vcard/ns#anniversary> <http://www.w3.org/2000/01/rdf-schema#label> "aniversário"@pt-BR .
 <http://vivoweb.org/ontology/core#middleName> <http://www.w3.org/2000/01/rdf-schema#label> "nome do meio ou inicial"@pt-BR .
-<http://vivoweb.org/ontology/core#WorkshopSeries> <http://www.w3.org/2000/01/rdf-schema#label> "Série Workshop" @ en-U.
+<http://vivoweb.org/ontology/core#WorkshopSeries> <http://www.w3.org/2000/01/rdf-schema#label> "Série Workshop"@pt-BR .
 <http://purl.obolibrary.org/obo/ERO_0000225> <http://www.w3.org/2000/01/rdf-schema#label> "Papel do educador"@pt-BR .
 <http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaTotal> <http://www.w3.org/2000/01/rdf-schema#label> "Área agrícola Total"@pt-BR .
 <http://purl.org/NET/c4dm/event.owl#Event> <http://www.w3.org/2000/01/rdf-schema#label> "Evento"@pt-BR .
@@ -575,7 +575,7 @@
 <http://vivoweb.org/ontology/core#termLabel> <http://www.w3.org/2000/01/rdf-schema#label> "termo do rótulo"@pt-BR .
 <http://www.w3.org/2004/02/skos/core#related> <http://www.w3.org/2000/01/rdf-schema#label> "conceito relacionado"@pt-BR .
 <http://purl.obolibrary.org/obo/BFO_0000148> <http://www.w3.org/2000/01/rdf-schema#label> "Região Temporal Zero-Dimensional"@pt-BR .
-<http://vivoweb.org/ontology/core#hasValue> <http://www.w3.org/2000/01/rdf-schema#label> "tem valor" @ pt-BR.
+<http://vivoweb.org/ontology/core#hasValue> <http://www.w3.org/2000/01/rdf-schema#label> "tem valor"@pt-BR .
 <http://vivoweb.org/ontology/core#abbreviation> <http://www.w3.org/2000/01/rdf-schema#label> "abreviação"@pt-BR .
 <http://www.w3.org/2006/vcard/ns#postalCode> <http://www.w3.org/2000/01/rdf-schema#label> "Código postal"@pt-BR .
 <http://purl.obolibrary.org/obo/ERO_0000014> <http://www.w3.org/2000/01/rdf-schema#label> "Projeto de pesquisa"@pt-BR .
