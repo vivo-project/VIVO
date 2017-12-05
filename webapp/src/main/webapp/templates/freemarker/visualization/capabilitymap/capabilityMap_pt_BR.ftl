@@ -33,8 +33,8 @@ ${stylesheets.add(
 </script>
 <div class="main" id="main-content" role="main">
     <div class="col-8">
-        <h2>Capability Map</h2>
-        <p>Build a &lsquo;first pass&rsquo; capability map by typing in a<!-- set of--> search term<!--s--> that could be said to represent a broad research capability.</p>
+        <h2>Mapa de Capacidade</h2>
+        <p>Crie um 'primeiro passe' mapa de capacidade digitando um termo de pesquisa que poderia ser dito representar uma ampla capacidade de pesquisa.</p>
     </div>
 
     <div id="queryform">
