@@ -1,0 +1,24 @@
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#DefaultMenu> <http://www.w3.org/2000/01/rdf-schema#label> "Menu Padrão"@pt-BR .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#HomeMenuItem> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Home"@pt-BR .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#PeopleMenuItem> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Pessoas"@pt-BR .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#OrganizationsMenuItem> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Organizações"@pt-BR .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#ResearchMenuItem> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Pesquisa"@pt-BR .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#EventsMenuItem> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Eventos"@pt-BR .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#CapabilityMapMenuItem> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Mapa de capacidades"@pt-BR .
+
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Home> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Home"@pt-BR .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Events> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Eventos"@pt-BR .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Organizations> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Organizações"@pt-BR .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#People> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Pessoas"@pt-BR .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Research> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Pesquisa"@pt-BR .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#pageListPage> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Páginas"@pt-BR .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#CapabilityMap> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Mapa de capacidades"@pt-BR .
+
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> <http://www.w3.org/2000/01/rdf-schema#label> "SPARQL Query Results"@pt-BR .
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.BrowseDataGetter> <http://www.w3.org/2000/01/rdf-schema#label> "Navigation Page"@pt-BR .
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.InternalClassesDataGetter> <http://www.w3.org/2000/01/rdf-schema#label> "Group Page Group - Internal Institutional Class"@pt-BR .
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData> <http://www.w3.org/2000/01/rdf-schema#label> "Group Class Page"@pt-BR .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#DefaultMenu> <http://www.w3.org/2000/01/rdf-schema#label> "Default Menu"@pt-BR .
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.IndividualsForClassesDataGetter> <http://www.w3.org/2000/01/rdf-schema#label> "Group Page Group - selected classes"@pt-BR .
+
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#capabilityMapDataGetter> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#htmlValue> "Mapa de capacidades"@pt-BR .
