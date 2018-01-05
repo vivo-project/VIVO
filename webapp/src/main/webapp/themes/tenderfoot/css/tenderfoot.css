@@ -264,15 +264,17 @@ a.powered-by-vivo:hover {
 /* BRANDING ------>  */
 h1.vivo-logo {
     position: absolute;
-    width: 442px;
+    width: 100%;
+    max-width: 442px;
     height: 59px;
     top: 30px;
     left: 0;
     background: url(../images/VIVO-logo.png) 0 0 no-repeat;
+    background-size: 100% auto;
 }
 h1.vivo-logo a {
     display: block;
-    width: 386px;
+    width: 100%;
     height: 59px;
 }
 .displace {
