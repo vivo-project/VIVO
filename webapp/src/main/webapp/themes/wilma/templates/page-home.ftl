@@ -21,7 +21,7 @@
         <#if geoFocusMapsEnabled >
             <#include "geoFocusMapScripts.ftl">
         </#if>
-        <script async type="text/javascript" src="${urls.base}/js/homePageUtils.js"></script>
+        <script async type="text/javascript" src="${urls.base}/js/homePageUtils.js?version=x"></script>
     </head>
     
     <body class="${bodyClasses!}" onload="${bodyOnload!}">

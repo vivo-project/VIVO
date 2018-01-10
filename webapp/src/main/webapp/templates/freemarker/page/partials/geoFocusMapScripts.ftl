@@ -8,5 +8,5 @@
 <![endif]-->
 <link rel="stylesheet" href="${urls.base}/css/home-page-maps.css" />
 <script src="${urls.base}/js/leaflet/dist/leaflet.js"></script>
-<script type="text/javascript" src="${urls.base}/js/latLongJson.js"></script>
-<script type="text/javascript" src="${urls.base}/js/homePageMaps.js"></script>
+<script type="text/javascript" src="${urls.base}/js/latLongJson.js?version=1"></script>
+<script type="text/javascript" src="${urls.base}/js/homePageMaps.js?version=x"></script>
