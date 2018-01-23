@@ -7,6 +7,6 @@ CONSTRUCT {
 } WHERE {
     ?s vivo:orcidId ?orcidString 
     FILTER(isLiteral(?orcidString))
-    FILTER (regex(str(?orcidString), "^[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]([0-9]|X)$"))
+    FILTER (regex(str(?orcidString), "^([0-9]{4}-){3}[0-9]{3}([0-9]|X)$"))
     BIND(IRI(concat("http://orcid.org/", str(?orcidString))) AS ?orcidURI)
 }
