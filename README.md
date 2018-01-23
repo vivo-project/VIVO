@@ -40,3 +40,8 @@ The best place to get your hands dirty in the VIVO Project.
 Developers and implementers frequent this list to get the latest on feature design, 
 development, implementation, and testing.
 
+## Contributing Code
+If you would like to contribute code to the VIVO project, please open a ticket 
+in our [JIRA](https://jira.duraspace.org/projects/VIVO), and prepare a 
+pull request that references your ticket.  Contributors welcome!
+
