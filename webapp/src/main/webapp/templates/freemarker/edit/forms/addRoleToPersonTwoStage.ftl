@@ -40,9 +40,18 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 	<#assign roleActivityVClass = "" />
 </#if>
 
+<#if !roleCode?has_content>
+	<#assign roleCode = "" />
+</#if>
+
+<#if !nameLabel?has_content>
+	<#assign nameLabel = "" />
+</#if>
+
 <#--Setting values for titleVerb, submitButonText, and disabled Value-->
 <#if editConfiguration.objectUri?has_content>
 	<#assign titleVerb = "${i18n().edit_capitalized}"/>
+	<#assign title= editTitle/>
 	<#assign submitButtonText>${i18n().save_changes}</#assign>
 	<#if editMode = "repair">
 		<#assign disabledVal = ""/>
@@ -50,6 +59,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 		<#assign disabledVal = "disabled"/>
 	</#if>
 <#else>
+	<#assign title= createTitle/>
 	<#assign titleVerb = "${i18n().create_capitalized}"/>
 	<#assign submitButtonText>${i18n().create_entry}</#assign>
 	<#assign disabledVal = ""/>
@@ -77,8 +87,8 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
 <#assign yearHint     = "<span class='hint'>(${i18n().year_hint_format})</span>" />
 
-<h2>${titleVerb}&nbsp;${roleDescriptor} ${i18n().entry_for} ${editConfiguration.subjectName}</h2>
 
+<h2>${editConfiguration.subjectName}${title} </h2>
 <#--Display error messages if any-->
 <#if activityLabelDisplayValue?has_content >
     <#assign activityLabelValue = activityLabelDisplayValue />
@@ -187,18 +197,18 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
             <#if numDateFields == 1 >
                <#--Generated html is a map with key name mapping to html string-->
                <#if htmlForElements?keys?seq_contains("startField")>
-                	<label class="dateTimeLabel" for="startField">${i18n().start_year}</label>
+                	<label class="dateTimeLabel" >${i18n().start_year}</label>
                		${htmlForElements["startField"]} ${yearHint}
                </#if>
             <#else>
                 <h4 class="label">${i18n().years_participating} </h4>
                 <#if htmlForElements?keys?seq_contains("startField")>
-                	    <label class="dateTime" for="startField">${i18n().start_capitalized}</label>
+                	    <label class="dateTime" >${i18n().start_capitalized}</label>
                		    ${htmlForElements["startField"]} ${yearHint}
                </#if>
                <p></p>
                <#if htmlForElements?keys?seq_contains("endField")>
-               		    <label class="dateTime" for="endField">${i18n().end_capitalized}</label>
+               		    <label class="dateTime" >${i18n().end_capitalized}</label>
                		    ${htmlForElements["endField"]} ${yearHint}
                </#if>
             </#if>

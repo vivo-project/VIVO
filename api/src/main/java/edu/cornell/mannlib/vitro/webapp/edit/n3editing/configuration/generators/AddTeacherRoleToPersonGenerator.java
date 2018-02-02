@@ -26,10 +26,10 @@ public class AddTeacherRoleToPersonGenerator extends AddRoleToPersonTwoStageGene
 	@Override
     FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
 		return new ConstantFieldOptions(
-          "", "Select one",
-          "http://purl.org/ontology/bibo/Conference", "Conference", 
-          "http://vivoweb.org/ontology/core#Course",  "Course",
-          "http://purl.org/ontology/bibo/Workshop",   "Workshop");		
+		          "", "Select one",
+		          "http://purl.org/ontology/bibo/Conference", "Conference", 
+		          "http://vivoweb.org/ontology/core#Course",  "Course",
+		          "http://purl.org/ontology/bibo/Workshop",   "Workshop");	
 	}
 
 	@Override

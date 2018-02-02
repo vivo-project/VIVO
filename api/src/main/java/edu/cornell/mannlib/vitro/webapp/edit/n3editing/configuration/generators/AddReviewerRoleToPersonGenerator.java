@@ -104,8 +104,7 @@ public class AddReviewerRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
                 "http://vivoweb.org/ontology/core#Video", "Video",
                 "http://purl.org/ontology/bibo/Webpage", "Webpage",
                 "http://purl.org/ontology/bibo/Website", "Website",
-                "http://vivoweb.org/ontology/core#WorkingPaper", "Working Paper"
-        );
+                "http://vivoweb.org/ontology/core#WorkingPaper", "Working Paper"        );
     }
     
 	//isShowRoleLabelField remains true for this so doesn't need to be overwritten
