@@ -1,7 +1,7 @@
 **Thank you for submitting a pull request! Title this pull request with a brief description of what the pull request fixes/improves/changes. Please describe the pull request in detail using the template below.**
 * * *
 
-**[JIRA Issue](https://jira.duraspace.org)**: (please link to issue)
+**[JIRA Issue](https://jira.duraspace.org/projects/VIVO)**: (please link to issue)
 
 * Other Relevant Links (Mailing list discussion, related pull requests, etc.)
 
