@@ -48,7 +48,7 @@ public class AddEditorRoleToPersonGenerator extends AddRoleToPersonTwoStageGener
     @Override
     FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
         return new ChildVClassesOptions(OPTION_CLASS_URI)
-        		.setDefaultOptionLabel("Select type");
+            .setDefaultOptionLabel("Select type");
     }
     
 	/** Do not show the role label field for the AddEditorRoleToPerson form */
