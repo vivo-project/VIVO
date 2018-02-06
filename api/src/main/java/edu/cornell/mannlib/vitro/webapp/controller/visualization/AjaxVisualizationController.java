@@ -6,9 +6,11 @@ import java.io.IOException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -32,6 +34,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequ
  * @author cdtank
  */
 @SuppressWarnings("serial")
+@WebServlet(name = "AjaxVisualizationController", urlPatterns = {"/visualizationAjax"})
 public class AjaxVisualizationController extends FreemarkerHttpServlet {
 
 	public static final String URL_ENCODING_SCHEME = "UTF-8";
@@ -138,7 +141,7 @@ public class AjaxVisualizationController extends FreemarkerHttpServlet {
 				return visRequestHandler.generateAjaxVisualization(vitroRequest, 
 														log, 
 														dataset);
-			} catch (MalformedQueryParametersException e) {
+			} catch (JsonProcessingException|MalformedQueryParametersException e) {
 				return UtilityFunctions.handleMalformedParameters(
 						"Ajax Visualization Query Error - Individual Publication Count", 
 						e.getMessage(), 

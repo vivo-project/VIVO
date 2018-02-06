@@ -61,6 +61,7 @@ org.vivoweb.webapp.startup.DataGetterN3Setup
 org.vivoweb.webapp.startup.GeneratorSetup
 org.vivoweb.webapp.startup.JSONWrapperSetup
 org.vivoweb.webapp.startup.MenuManagementSetup
+org.vivoweb.webapp.startup.SiteAdminSetup
 org.vivoweb.webapp.startup.TemplateModelSetup
 org.vivoweb.webapp.startup.SearchResultTemplateModelSetup
 
@@ -87,3 +88,5 @@ edu.cornell.mannlib.vivo.orcid.OrcidContextSetup
 
 # This should be near the end, because it will issue a warning if the connection to Solr times out.
 edu.cornell.mannlib.vitro.webapp.servlet.setup.SolrSmokeTest
+
+org.vivoweb.webapp.startup.i18nSetup

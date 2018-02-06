@@ -210,7 +210,7 @@ var manageWebpages = {
                             $(this).show();
                         });
                         $('a#showAddForm').removeClass('disabledSubmit');
-                        $('a#showAddForm').attr('disabled', '');
+                        $('a#showAddForm').attr('disabled', false);
                     });
 
                 } else {

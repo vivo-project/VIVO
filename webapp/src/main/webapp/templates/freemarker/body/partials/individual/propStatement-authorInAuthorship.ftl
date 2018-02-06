@@ -18,7 +18,7 @@
     <span class="hideThis">&nbsp;</span>
     <script type="text/javascript" >
         $('span.hideThis').parent().parent().addClass("hideThis");
-        if ( $('h3#relatedBy-Authorship').attr('class').length == 0 ) {
+        if ( jQuery.isEmptyObject($('h3#relatedBy-Authorship').attr('class')) ) {
             $('h3#relatedBy-Authorship').addClass('hiddenPubs');
         }
         $('span.hideThis').parent().remove();
@@ -125,6 +125,33 @@
         </#if>
     </#local>
 
-    ${resourceTitle} ${citationDetails} <@dt.yearSpan "${statement.dateTime!}" /> ${altMetric}
+    <#local plum>
+        <#if plumPrintEnabled??>
+            <#if statement.doi??>
+                <#assign plumIdParam = "doi=${statement.doi}">
+            <#elseif statement.pmid??>
+                <#assign plumIdParam = "pmid=${statement.pmid}">
+            <#elseif statement.isbn10??>
+                <#assign plumIdParam = "isbn=${statement.isbn10}">
+            <#elseif statement.isbn13??>
+                <#assign plumIdParam = "isbn=${statement.isbn13}">
+            <#elseif statement.oclc??>
+                <#assign plumIdParam = "oclc=${statement.oclc}">
+            </#if>
+            <#if plumIdParam??>
+                <div class="plum-print-wrapper" style="display: inline-block; vertical-align: top">
+                    <a class="plumx-plum-print-popup"
+                       href="https://plu.mx/plum/a/?${plumIdParam}"
+                       data-popup="hidden"
+                       data-hide-when-empty="${plumPrintHideEmpty}"
+                       data-site="plum"
+                       data-size="tiny"
+                       data-badge="true"></a>
+                </div>
+            </#if>
+        </#if>
+    </#local>
+
+    ${resourceTitle} ${citationDetails} <@dt.yearSpan "${statement.dateTime!}" /> ${altMetric} ${plum}
 </#if>
 </#macro>

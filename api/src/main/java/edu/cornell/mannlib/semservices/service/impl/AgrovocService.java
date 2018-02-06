@@ -6,36 +6,21 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.rpc.ServiceException;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -45,11 +30,21 @@ import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import edu.cornell.mannlib.semservices.bo.Concept;
 import edu.cornell.mannlib.semservices.service.ExternalConceptService;
 import edu.cornell.mannlib.semservices.util.SKOSUtils;
 import edu.cornell.mannlib.semservices.util.XMLUtils;
+import edu.cornell.mannlib.vitro.webapp.utils.json.JacksonUtils;
 import edu.cornell.mannlib.vitro.webapp.web.URLEncoder;
 
 public class AgrovocService implements ExternalConceptService {
@@ -63,9 +58,9 @@ public class AgrovocService implements ExternalConceptService {
 	protected final String dbpedia_endpoint = " http://dbpedia.org/sparql";
 	// URL to get all the information for a concept
 	
-	protected final String conceptSkosMosBase = "http://aims.fao.org/skosmos/rest/v1/";
+	protected final String conceptSkosMosBase = "http://artemide.art.uniroma2.it:8081/skosmos/rest/v1/";
 	protected final String conceptsSkosMosSearch = conceptSkosMosBase + "search?";
-	protected final String conceptSkosMosURL = conceptSkosMosBase + "/agrovoc/data?";
+	protected final String conceptSkosMosURL = conceptSkosMosBase + "data?";
 	@Override
 	public List<Concept> getConcepts(String term) throws Exception {
 		List<Concept> conceptList = new ArrayList<Concept>();
@@ -150,7 +145,7 @@ public class AgrovocService implements ExternalConceptService {
 
 
 
-	
+
 
 
 	public List<Concept> processResults(String term) throws Exception {
@@ -195,7 +190,7 @@ public class AgrovocService implements ExternalConceptService {
 	}
 
 	protected String getAgrovocTermCode(String rdf) throws Exception {
-		String termcode = new String();
+		String termcode = "";
 		try {
 			Document doc = XMLUtils.parse(rdf);
 			NodeList nodes = doc.getElementsByTagName("hasCodeAgrovoc");
@@ -204,13 +199,7 @@ public class AgrovocService implements ExternalConceptService {
 				termcode = node.getTextContent();
 			}
 
-		} catch (SAXException e) {
-			// e.printStackTrace();
-			throw e;
-		} catch (ParserConfigurationException e) {
-			// e.printStackTrace();
-			throw e;
-		} catch (IOException e) {
+		} catch (SAXException | IOException | ParserConfigurationException e) {
 			// e.printStackTrace();
 			throw e;
 		}
@@ -218,7 +207,7 @@ public class AgrovocService implements ExternalConceptService {
 	}
 
 	protected String getConceptURIFromRDF(String rdf) {
-		String conceptUri = new String();
+		String conceptUri = "";
 		try {
 			Document doc = XMLUtils.parse(rdf);
 			NodeList nodes = doc.getElementsByTagName("skos:Concept");
@@ -227,13 +216,7 @@ public class AgrovocService implements ExternalConceptService {
 			NamedNodeMap attrs = node.getAttributes();
 			Attr idAttr = (Attr) attrs.getNamedItem("rdf:about");
 			conceptUri = idAttr.getTextContent();
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("rdf: " + rdf);
-		} catch (SAXException e) {
-			e.printStackTrace();
-			System.err.println("rdf: " + rdf);
-		} catch (ParserConfigurationException e) {
+		} catch (IOException | ParserConfigurationException | SAXException e) {
 			e.printStackTrace();
 			System.err.println("rdf: " + rdf);
 		}
@@ -259,13 +242,7 @@ public class AgrovocService implements ExternalConceptService {
 				}
 
 			
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("rdf: " + rdf);
-		} catch (SAXException e) {
-			e.printStackTrace();
-			System.err.println("rdf: " + rdf);
-		} catch (ParserConfigurationException e) {
+		} catch (IOException | ParserConfigurationException | SAXException e) {
 			e.printStackTrace();
 			System.err.println("rdf: " + rdf);
 		}
@@ -275,7 +252,7 @@ public class AgrovocService implements ExternalConceptService {
 
 	protected String getDbpediaDescription(String uri) throws Exception {
 		String descriptionSource = " (Source: DBpedia)";
-		String description = new String();
+		String description = "";
 		String qs = ""
 				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
 				+ "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n"
@@ -334,7 +311,7 @@ public class AgrovocService implements ExternalConceptService {
 	 * @param uri The URI
 	 */
 	protected String stripConceptId(String uri) {
-		String conceptId = new String();
+		String conceptId = "";
 		int lastslash = uri.lastIndexOf('/');
 		conceptId = uri.substring(lastslash + 1, uri.length());
 		return conceptId;
@@ -398,16 +375,16 @@ public class AgrovocService implements ExternalConceptService {
 		//JSON-LD array
 		private List<String> getConceptURIsListFromSkosMosResult(String results) {
 			List<String> conceptURIs = new ArrayList<String>();
-			JSONObject json = (JSONObject) JSONSerializer.toJSON(results);
+			ObjectNode json = (ObjectNode) JacksonUtils.parseJson(results);
 			//Format should be: { ..."results":["uri":uri...]
-			if (json.containsKey("results")) {
-				JSONArray jsonArray = json.getJSONArray("results");
+			if (json.has("results")) {
+				ArrayNode jsonArray = (ArrayNode) json.get("results");
 				int numberResults = jsonArray.size();
 				int i;
 				for(i = 0; i < numberResults; i++) {
-					JSONObject jsonObject = jsonArray.getJSONObject(i);
-					if(jsonObject.containsKey("uri")) {
-						conceptURIs.add(jsonObject.getString("uri"));
+					ObjectNode jsonObject = (ObjectNode) jsonArray.get(i);
+					if(jsonObject.has("uri")) {
+						conceptURIs.add(jsonObject.get("uri").asText());
 					}
 				}
 			}

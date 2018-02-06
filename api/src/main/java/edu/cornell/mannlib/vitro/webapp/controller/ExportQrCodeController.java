@@ -24,10 +24,12 @@ import edu.cornell.mannlib.vitro.webapp.controller.individual.IndividualRequestA
 import edu.cornell.mannlib.vitro.webapp.controller.individual.IndividualRequestAnalyzer;
 import edu.cornell.mannlib.vitro.webapp.controller.individual.IndividualRequestInfo;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
-import edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.VIVOIndividualTemplateModel;
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.DefaultObjectWrapper;
 
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet(name = "ExportQrCodeController", urlPatterns = {"/qrcode"})
 public class ExportQrCodeController extends FreemarkerHttpServlet {
     
     private static final long serialVersionUID = 1L;

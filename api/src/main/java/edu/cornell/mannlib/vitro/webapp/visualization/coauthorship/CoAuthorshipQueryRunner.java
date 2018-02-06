@@ -285,7 +285,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 					List<Collaborator> coAuthorNodes =
 							new ArrayList<Collaborator>(currentBiboDocumentEntry.getValue());
 
-					Collections.sort(coAuthorNodes, new CollaboratorComparator());
+					coAuthorNodes.sort(new CollaboratorComparator());
 
 					int numOfCoAuthors = coAuthorNodes.size();
 

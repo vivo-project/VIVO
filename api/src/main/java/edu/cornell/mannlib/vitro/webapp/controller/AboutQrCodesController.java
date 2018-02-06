@@ -14,6 +14,9 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Exc
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet(name = "AboutQrCodesController", urlPatterns = {"/qrcode/about"})
 public class AboutQrCodesController extends FreemarkerHttpServlet {
     
     private static final long serialVersionUID = 1L;

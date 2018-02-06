@@ -14,35 +14,19 @@
                         ?label
 
         WHERE {
-                    ?subject ?property ?grantOrContract .
-                    OPTIONAL { ?grantOrContract rdfs:label ?label .
-                    }                
-        }  ORDER BY  ?label
-  </query-select>
-    
-    <query-construct>
-        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
-        PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-        PREFIX obo:   &lt;http://purl.obolibrary.org/obo/&gt;
-
-            CONSTRUCT {
-                ?subject ?property ?grantOrContract .
-                ?grantOrContract rdfs:label ?label .
-            } WHERE {
-            {
-                ?subject ?property ?grantOrContract .
-            } UNION {
-                ?subject ?property ?grantOrContract .
+            ?subject ?property ?grantOrContract .
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?grantOrContract .</precise-subquery>
                 ?grantOrContract a core:Grant .
                 ?grantOrContract rdfs:label ?label .
-            } UNION {
-                ?subject ?property ?grantOrContract .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?grantOrContract .</precise-subquery>
                 ?grantOrContract a core:Contract .
                 ?grantOrContract rdfs:label ?label .
             }
-        }
-    </query-construct>
-              
+        }  ORDER BY  ?label
+  </query-select>
+
     <template>propStatement-organizationAwardsGrant.ftl</template>
 </list-view-config>

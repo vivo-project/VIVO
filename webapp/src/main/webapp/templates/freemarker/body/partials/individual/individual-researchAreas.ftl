@@ -8,8 +8,9 @@
     <h2 id="${localName}" class="mainPropGroup" title="${researchAreas.publicDescription!}">
         ${researchAreas.name?capitalize} 
         <img id="researchAreaIcon" src="${urls.images}/individual/research-group-icon.png" alt="${i18n().research_areas}" />
-        <@p.addLink researchAreas editable /> <@p.verboseDisplay researchAreas />
+        <@p.addLink researchAreas editable />
     </h2>
+    <@p.verboseDisplay researchAreas />
     <ul id="individual-${localName}" role="list" >
         <@p.objectProperty researchAreas editable />
     </ul> 

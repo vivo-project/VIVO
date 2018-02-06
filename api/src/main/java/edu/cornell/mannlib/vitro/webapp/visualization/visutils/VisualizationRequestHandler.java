@@ -3,6 +3,7 @@ package edu.cornell.mannlib.vitro.webapp.visualization.visutils;
 
 import java.util.Map;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.commons.logging.Log;
 
 import org.apache.jena.query.Dataset;
@@ -38,10 +39,10 @@ public interface VisualizationRequestHandler {
 	
 	Object generateAjaxVisualization(VitroRequest vitroRequest,
 								     Log log, 
-								     Dataset dataSource) throws MalformedQueryParametersException;
+								     Dataset dataSource) throws MalformedQueryParametersException, JsonProcessingException;
 	
 	Map<String, String> generateDataVisualization(VitroRequest vitroRequest,
 								   	 Log log, 
-								   	 Dataset dataset) throws MalformedQueryParametersException;
+								   	 Dataset dataset) throws MalformedQueryParametersException, JsonProcessingException;
 	
 }

@@ -52,8 +52,7 @@ public class QueryConstants {
 		StringBuilder prefixSection = new StringBuilder(); 
 		
 		for (Map.Entry<String, String> prefixEntry : PREFIX_TO_NAMESPACE.entrySet()) {
-			prefixSection.append("PREFIX " + prefixEntry.getKey() 
-									+ ": <" + prefixEntry.getValue() + ">\n");
+			prefixSection.append("PREFIX ").append(prefixEntry.getKey()).append(": <").append(prefixEntry.getValue()).append(">\n");
 		}
 		return prefixSection.toString();
 	}

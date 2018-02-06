@@ -102,12 +102,6 @@ public class CollaborationDataViewHelper {
         // Now add the person that is the focus to the start of the list
         collaborators.add(0, data.getEgoCollaborator());
 
-        // Generate a list of collaborator IDs for use in filling the matrix
-        List<Integer> collabIDs = new ArrayList<Integer>(collaborators.size());
-        for (Collaborator collaborator : collaborators) {
-            collabIDs.add(collaborator.getCollaboratorID());
-        }
-
         // If we only want to visualize collaborations between the main focus and others, set this to false
         boolean fullMatrix = true;
 

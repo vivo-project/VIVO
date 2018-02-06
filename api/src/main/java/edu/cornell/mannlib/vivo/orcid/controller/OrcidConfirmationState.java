@@ -17,18 +17,14 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import edu.cornell.mannlib.orcidclient.orcidmessage.ExternalIdentifier;
-import edu.cornell.mannlib.orcidclient.orcidmessage.ExternalIdentifiers;
-import edu.cornell.mannlib.orcidclient.orcidmessage.OrcidBio;
-import edu.cornell.mannlib.orcidclient.orcidmessage.OrcidId;
-import edu.cornell.mannlib.orcidclient.orcidmessage.OrcidMessage;
-import edu.cornell.mannlib.orcidclient.orcidmessage.OrcidProfile;
+import edu.cornell.mannlib.orcidclient.model.ExternalIdentifier;
+import edu.cornell.mannlib.orcidclient.model.OrcidBio;
+import edu.cornell.mannlib.orcidclient.model.OrcidId;
+import edu.cornell.mannlib.orcidclient.model.OrcidProfile;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 
 /**
@@ -73,7 +69,7 @@ class OrcidConfirmationState {
 	private Progress progress;
 	private String individualUri;
 	private Set<String> existingOrcids;
-	private OrcidMessage profile;
+	private OrcidProfile profile;
 	private String profilePageUrl;
 
 	public void reset(String uri, String profileUrl) {
@@ -88,17 +84,17 @@ class OrcidConfirmationState {
 		existingOrcids = new HashSet<>(existing);
 	}
 
-	public void progress(Progress p, OrcidMessage... messages) {
+	public void progress(Progress p, OrcidProfile... profiles) {
 		progress = p;
 
 		if (requiresMessage.contains(p)) {
-			if (messages.length != 1) {
+			if (profiles.length != 1) {
 				throw new IllegalStateException("Progress to " + p
 						+ " requires an OrcidMessage");
 			}
-			profile = messages[0];
+			profile = profiles[0];
 		} else {
-			if (messages.length != 0) {
+			if (profiles.length != 0) {
 				throw new IllegalStateException("Progress to " + p
 						+ " does not accept an OrcidMessage");
 			}
@@ -143,7 +139,7 @@ class OrcidConfirmationState {
 
 	public ExternalIdentifier getVivoId() {
 		for (ExternalIdentifier id : getExternalIds()) {
-			if (individualUri.equals(id.getExternalIdUrl().getValue())) {
+			if (individualUri.equals(id.getExternalIdUrl())) {
 				return id;
 			}
 		}
@@ -161,17 +157,11 @@ class OrcidConfirmationState {
 			return Collections.emptyList();
 		}
 
-		ExternalIdentifiers identifiers = bio.getExternalIdentifiers();
-		if (identifiers == null) {
+		if (bio.getExternalIdentifiers() == null) {
 			return Collections.emptyList();
 		}
 
-		List<ExternalIdentifier> list = identifiers.getExternalIdentifier();
-		if (list == null) {
-			return Collections.emptyList();
-		}
-
-		return list;
+		return bio.getExternalIdentifiers();
 	}
 
 	private String getElementFromOrcidIdentifier(String elementName) {
@@ -186,19 +176,13 @@ class OrcidConfirmationState {
 			return "";
 		}
 
-		List<JAXBElement<String>> idElements = id.getContent();
-		if (idElements != null) {
-			for (JAXBElement<String> idElement : idElements) {
-				QName name = idElement.getName();
-				if (name != null && elementName.equals(name.getLocalPart())) {
-					String value = idElement.getValue();
-					if (value != null) {
-						return value;
-					}
-				}
-			}
+		if ("path".equalsIgnoreCase(elementName)) {
+			return id.getPath();
+		} else if ("uri".equalsIgnoreCase(elementName)) {
+			return id.getUri();
 		}
-		log.warn("Didn't find the element '' in the ORCID Identifier: " + idElements);
+
+		log.warn("Didn't find the element '' in the ORCID Identifier");
 		return "";
 	}
 
@@ -207,12 +191,7 @@ class OrcidConfirmationState {
 			return null;
 		}
 
-		OrcidProfile orcidProfile = profile.getOrcidProfile();
-		if (orcidProfile == null) {
-			return null;
-		}
-
-		return orcidProfile;
+		return profile;
 	}
 
 	public Map<String, Object> toMap() {
@@ -240,9 +219,9 @@ class OrcidConfirmationState {
 		List<Map<String, String>> list = new ArrayList<>();
 		for (ExternalIdentifier id : getExternalIds()) {
 			Map<String, String> map = new HashMap<>();
-			map.put("commonName", id.getExternalIdCommonName().getContent());
-			map.put("reference", id.getExternalIdReference().getContent());
-			map.put("uri", id.getExternalIdUrl().getValue());
+			map.put("commonName", id.getExternalIdCommonName());
+			map.put("reference", id.getExternalIdReference());
+			map.put("uri", id.getExternalIdUrl());
 			list.add(map);
 		}
 		return list;

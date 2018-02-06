@@ -1876,8 +1876,8 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#researcherId">
 
-        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RearcherID is a Thomson Reuters project where researchers have a place to manage and share their professional information. It will allow them to solve author identity issues while simultaneously adding dynamic citation metrics and collaboration networks to your personal profile.
-Definition source: http://isiwebofknowledge.com/researcherid/</obo:IAO_0000112>
+        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ResearcherID is a Clarivate Analytics project where researchers have a place to manage and share their professional information. It will allow them to solve author identity issues while simultaneously adding dynamic citation metrics and collaboration networks to their personal profile through integration with the Web of Science.
+Definition source: https://clarivate.com/products/researcherid/</obo:IAO_0000112>
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#identifier"/>
     </owl:DatatypeProperty>
     

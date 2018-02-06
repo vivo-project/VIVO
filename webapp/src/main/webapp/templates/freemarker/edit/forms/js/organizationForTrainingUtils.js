@@ -30,7 +30,7 @@ var orgForTrainingUtils = {
     this.degreeSelector = $('#degreeUri');    
 
     // may not need this
-    this.firstName.attr('disabled', '');
+    this.firstName.attr('disabled', false);
     
     },
     

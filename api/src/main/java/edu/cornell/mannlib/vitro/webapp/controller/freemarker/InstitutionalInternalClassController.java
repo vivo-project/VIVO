@@ -7,6 +7,7 @@ import static edu.cornell.mannlib.vitro.webapp.modelaccess.ModelNames.TBOX_ASSER
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
@@ -34,6 +35,7 @@ import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
  * Custom controller for menu management.  This will be replaced later once N3 Editing
  * has been successfully refactored and integrated with menu management.
  */
+@WebServlet(name = "InstitutionalInternalClassController", urlPatterns = {"/processInstitutionalInternalClass"} )
 public class InstitutionalInternalClassController extends FreemarkerHttpServlet {
     private static final Log log = LogFactory.getLog(InstitutionalInternalClassController.class);
    

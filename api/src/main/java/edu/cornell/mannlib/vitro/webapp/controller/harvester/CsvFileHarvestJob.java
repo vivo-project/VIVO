@@ -6,10 +6,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -221,24 +219,24 @@ class CsvFileHarvestJob implements FileHarvestJob {
             try {
                 int rowNum = 0;
                 int numberFields = 0;
-                String errorMsg = "File header does not match template";
+                StringBuilder errorMsg = new StringBuilder("File header does not match template");
                 for (CSVRecord cRecord : cReader) {
                     rowNum++;
                     if (false) {
                         numberFields = cRecord.size();
-                        errorMsg += "file header items: ";
+                        errorMsg.append("file header items: ");
                         for(int i = 0; i < cRecord.size(); i++) {
-                            errorMsg += cRecord.get(i) + ", ";
+                            errorMsg.append(cRecord.get(i)).append(", ");
                         }
                     } else {
                         if (cRecord.size() > 0)  {
                             if(cRecord.size() != numberFields) {
                                 if (errorMsg != null) {
-                                    errorMsg += "template items: ";
+                                    errorMsg.append("template items: ");
                                     for(int i = 0; i < cRecord.size(); i++) {
-                                        errorMsg += cRecord.get(i) + ", ";
+                                        errorMsg.append(cRecord.get(i)).append(", ");
                                     }
-                                    return errorMsg;
+                                    return errorMsg.toString();
                                 }
                                 return "Mismatch in number of entries in row " + rowNum + ": expected " + numberFields + ", found " + cRecord.size();
                             }

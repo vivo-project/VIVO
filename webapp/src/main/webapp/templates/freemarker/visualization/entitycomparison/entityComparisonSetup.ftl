@@ -139,7 +139,7 @@ ${scripts.add('<!--[if IE]><script type="text/javascript" src="${urls.base}/js/v
               '<script type="text/javascript" src="${urls.base}/js/visualization/entitycomparison/jquery_plugins/flot/r293/jquery.flot.min.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/visualization/entitycomparison/jquery_plugins/jquery-jangle.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.blockUI.min.js"></script>',
+              '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.blockUI.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/datatable/1.10.12/jquery.dataTables.min.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/visualization/entitycomparison/util.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/visualization/entitycomparison/constants.js"></script>',

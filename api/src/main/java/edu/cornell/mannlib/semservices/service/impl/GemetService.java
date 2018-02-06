@@ -11,16 +11,16 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import edu.cornell.mannlib.semservices.bo.Concept;
 import edu.cornell.mannlib.semservices.exceptions.ConceptsNotFoundException;
 import edu.cornell.mannlib.semservices.service.ExternalConceptService;
+import edu.cornell.mannlib.vitro.webapp.utils.json.JacksonUtils;
 
 public class GemetService implements ExternalConceptService  {
    protected final Log logger = LogFactory.getLog(getClass());
@@ -82,7 +82,7 @@ public class GemetService implements ExternalConceptService  {
       List<Concept> conceptList = new ArrayList<Concept>();
 
       try {
-         JSONArray jsonArray = (JSONArray) JSONSerializer.toJSON( results );
+         ArrayNode jsonArray = (ArrayNode) JacksonUtils.parseJson(results);
          if (jsonArray.size() == 0) {
             throw new ConceptsNotFoundException();
          }
@@ -91,7 +91,7 @@ public class GemetService implements ExternalConceptService  {
             Concept concept = new Concept();
             concept.setDefinedBy(schemeURI);
             concept.setBestMatch("true");
-            JSONObject json = jsonArray.getJSONObject(i);
+            ObjectNode json = (ObjectNode) jsonArray.get(i);
             String uri = getJsonValue(json, "uri");
 
             concept.setUri(uri);
@@ -99,15 +99,14 @@ public class GemetService implements ExternalConceptService  {
             concept.setSchemeURI(schemeURI);
             concept.setType("");
             if (json.has("preferredLabel")) {
-               JSONObject preferredLabelObj = json
-                     .getJSONObject("preferredLabel");
+               ObjectNode preferredLabelObj = (ObjectNode) json.get("preferredLabel");
                if (preferredLabelObj.has("string")) {
                   concept.setLabel(getJsonValue(preferredLabelObj,
                         "string"));
                }
             }
             if (json.has("definition")) {
-               JSONObject definitionObj = json.getJSONObject("definition");
+               ObjectNode definitionObj = (ObjectNode) json.get("definition");
                if (definitionObj.has("string")) {
                   concept.setDefinition(getJsonValue(definitionObj,
                         "string"));
@@ -147,11 +146,11 @@ public class GemetService implements ExternalConceptService  {
    * @param obj JSON Object
    * @param key Key to retrieve
    */
-  protected String getJsonValue(JSONObject obj, String key) {
+  protected String getJsonValue(ObjectNode obj, String key) {
       if (obj.has(key)) {
-         return obj.getString(key);
+         return obj.get(key).asText();
       } else {
-         return new String("");
+         return "";
       }
    }
 
@@ -161,7 +160,7 @@ public class GemetService implements ExternalConceptService  {
     * @throws Exception
     */
    protected String getAvailableLangs(String concept_uri) throws Exception {
-      String result = new String();
+      String result = "";
       String serviceUrl = GemetWS_address + "getAvailableLanguages" +
       "?concept_uri=" + concept_uri;
       try {
@@ -178,7 +177,7 @@ public class GemetService implements ExternalConceptService  {
     * @throws Exception
     */
    protected String getConcept(String concept_uri) throws Exception {
-      String result = new String();
+      String result = "";
       String serviceUrl = GemetWS_address + "getConcept" +
       "?concept_uri=" + concept_uri +
       "&language=en";
@@ -197,20 +196,27 @@ public class GemetService implements ExternalConceptService  {
     * @throws Exception
     */
    protected String getAllTranslationsForConcept(String concept_uri, String property) throws Exception {
-      String result = new String();
-      String property_uri = new String();
-      if (property.equals("definition")) {
-         property_uri = definitionUri;
-      } else if (property.equals("preferredLabel")) {
-         property_uri = prefLabelUri;
-      } else if (property.equals("scopeNote")) {
-         property_uri = scopeNoteUri;
-      } else if (property.equals("nonPreferredLabels")) {
-         property_uri = altLabelUri;
-      } else if (property.equals("example")) {
-         property_uri = exampleUri;
-      } else if (property.equals("acronymLabel")) {
-         property_uri = acronymLabelUri;
+      String result = "";
+      String property_uri = "";
+      switch (property) {
+         case "definition":
+            property_uri = definitionUri;
+            break;
+         case "preferredLabel":
+            property_uri = prefLabelUri;
+            break;
+         case "scopeNote":
+            property_uri = scopeNoteUri;
+            break;
+         case "nonPreferredLabels":
+            property_uri = altLabelUri;
+            break;
+         case "example":
+            property_uri = exampleUri;
+            break;
+         case "acronymLabel":
+            property_uri = acronymLabelUri;
+            break;
       }
 
       String serviceUrl = GemetWS_address + "getAllTranslationsForConcept" +
@@ -235,14 +241,18 @@ public class GemetService implements ExternalConceptService  {
     * @throws Exception
     */
    protected String getRelatedConcepts(String concept_uri, String relation) throws Exception {
-      String result = new String();
-      String relation_uri = new String();
-      if (relation.equals("broader")) {
-         relation_uri = broaderUri;
-      } else if (relation.equals("narrower")) {
-         relation_uri = narrowerUri;
-      } else if (relation.equals("related")) {
-         relation_uri = relatedUri;
+      String result = "";
+      String relation_uri = "";
+      switch (relation) {
+         case "broader":
+            relation_uri = broaderUri;
+            break;
+         case "narrower":
+            relation_uri = narrowerUri;
+            break;
+         case "related":
+            relation_uri = relatedUri;
+            break;
       }
       String serviceUrl = GemetWS_address + "getRelatedConcepts" +
       "?concept_uri=" + concept_uri +
@@ -264,7 +274,7 @@ public class GemetService implements ExternalConceptService  {
     * @throws Exception
     */
    protected String getConceptsMatchingKeyword(String keyword) throws Exception {
-      String result = new String();
+      String result = "";
       String encodedKeyword = URLEncoder.encode(keyword, "UTF-8"); 
       String serviceUrl = GemetWS_address + "getConceptsMatchingKeyword" +
       "?keyword="  + encodedKeyword +
@@ -284,7 +294,7 @@ public class GemetService implements ExternalConceptService  {
     * @param url URI
     */
    protected String getGemetResults(String url) throws Exception  {
-      String results = new String();
+      String results = "";
       //System.out.println("url: "+url);
       try {
 
@@ -311,13 +321,13 @@ public class GemetService implements ExternalConceptService  {
     
    protected List<String> getRelatedUris(String json) {
 	   List<String> uriList = new ArrayList<String>();
-	   String uri = new String();
-	   JSONArray jsonArray = (JSONArray) JSONSerializer.toJSON( json );
+	   String uri = "";
+	   ArrayNode jsonArray = (ArrayNode) JacksonUtils.parseJson(json);
 	    if (jsonArray.size() == 0) {
            return new ArrayList<String>();
         }
 	    for (int i = 0; i < jsonArray.size(); i++) {
-	    	JSONObject jsonObj = jsonArray.getJSONObject(i);	    	
+	    	ObjectNode jsonObj = (ObjectNode) jsonArray.get(i);	    	
             uri = getJsonValue(jsonObj, "uri");	
             uriList.add(uri);
 	    }
@@ -328,19 +338,18 @@ public class GemetService implements ExternalConceptService  {
    
 	protected List<String> getPropertyFromJson(String json) {
 		List<String> props = new ArrayList<String>();
-		JSONArray jsonArray = (JSONArray) JSONSerializer.toJSON(json);
+		ArrayNode jsonArray = (ArrayNode) JacksonUtils.parseJson(json);
 		if (jsonArray.size() == 0) {
 			return new ArrayList<String>();
 		}
 		for (int i = 0; i < jsonArray.size(); i++) {
-			JSONObject jsonObj = jsonArray.getJSONObject(i);
-			System.out.println(jsonObj.toString());
+			System.out.println((jsonArray.get(i)).toString());
 		}
 		return props;
 	}
 
    protected String stripConceptId(String uri) {
-	     String conceptId = new String();
+	     String conceptId = "";
 	     int lastslash = uri.lastIndexOf('/');
 	     conceptId = uri.substring(lastslash + 1, uri.length());
 	     return conceptId;

@@ -2,9 +2,6 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.visutils;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Stroke;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -30,15 +27,6 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 public class PDFDocument {
-
-	
-	static Stroke stroke = new BasicStroke(5.f, BasicStroke.CAP_ROUND,
-            BasicStroke.JOIN_ROUND);
-
-    final static Color bg = Color.green;
-
-    final static Color fg = Color.black;
-    
 	public PDFDocument(String authorName,
 					   Map<String, Integer> yearToPublicationCount, 
 					   Document document,
@@ -57,7 +45,7 @@ public class PDFDocument {
 		Paragraph header = new Paragraph();
 		
 		Font pageHeaderStyle = FontFactory.getFont(FontFactory.TIMES_ROMAN, 15, Font.BOLDITALIC | Font.UNDERLINE);
-		Font featureHeaderStyle = FontFactory.getFont(FontFactory.TIMES_ROMAN, 10, new BaseColor(Color.red));
+		Font featureHeaderStyle = FontFactory.getFont(FontFactory.TIMES_ROMAN, 10, BaseColor.RED);
 		
 		header.add(new Chunk("PDF Pipeline Prototype v2 using iText\n", 
 							 pageHeaderStyle));
@@ -96,9 +84,6 @@ public class PDFDocument {
 		
         createImage(document, pdfWriter, featureHeaderStyle);
 		
-		} catch (DocumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -161,8 +146,8 @@ public class PDFDocument {
      * @throws Exception
      */
     public void pictureBackdrop(float x, float y, PdfContentByte cb) throws Exception {
-        cb.setColorStroke(new BaseColor(Color.black));
-        cb.setColorFill(new BaseColor(Color.gray));
+        cb.setColorStroke(BaseColor.BLACK);
+        cb.setColorFill(BaseColor.GRAY);
         cb.rectangle(x, y, 100, 200);
         cb.fill();
         cb.setLineWidth(2);
@@ -183,15 +168,15 @@ public class PDFDocument {
 		PdfGState gs1 = new PdfGState();
 		gs1.setFillOpacity(1.0f);
 		cb.setGState(gs1);
-        cb.setColorFill(new BaseColor(Color.red));
+        cb.setColorFill(BaseColor.RED);
         cb.circle(x + 70, y + 70, 50);
         cb.fill();
 		cb.restoreState();
 
-        cb.setColorFill(new BaseColor(Color.yellow));
+        cb.setColorFill(BaseColor.YELLOW);
         cb.circle(x + 100, y + 130, 50);
         cb.fill();
-        cb.setColorFill(new BaseColor(Color.blue));
+        cb.setColorFill(BaseColor.BLUE);
         cb.circle(x + 130, y + 70, 50);
         cb.fill();
     }
@@ -202,7 +187,7 @@ public class PDFDocument {
 		Font summaryContentStyle = FontFactory.getFont(FontFactory.TIMES_ROMAN, 11, Font.BOLDITALIC);
 		BaseColor summaryBackgroundColor = new BaseColor(0xEE, 0xEE, 0xEE);
 		BaseColor headerBackgroundColor = new BaseColor(0xC3, 0xD9, 0xFF);
-		BaseColor bodyBackgroundColor = new BaseColor(Color.white);
+		BaseColor bodyBackgroundColor = BaseColor.WHITE;
 		
 		PdfPTable table = new PdfPTable(2);
 		table.setWidthPercentage(36.0f);

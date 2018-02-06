@@ -1,6 +1,6 @@
 ${scripts.add(
-    '<script type="text/javascript" src="${urls.base}/js/d3.min.js"></script>',
     '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
+    '<script type="text/javascript" src="${urls.base}/js/visualization/capabilitymap/d3v3.min.js"></script>',
     '<script type="text/javascript" src="${urls.base}/js/visualization/capabilitymap/jquery.color.js"></script>',
     '<script type="text/javascript" src="${urls.base}/js/visualization/capabilitymap/jsr_class.js"></script>',
     '<script type="text/javascript" src="${urls.base}/js/visualization/capabilitymap/graph_new.js"></script>'
@@ -112,7 +112,7 @@ ${stylesheets.add(
         <div id="center-container">
             <div id="log"></div>
             <div id="infovis"></div>
-            <div class="progress"><div id="progressbar"></div></div>
+            <div class="capability-progress"><div id="progressbar"></div></div>
         </div>
 
         <div id="right-container">

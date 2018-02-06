@@ -6,9 +6,11 @@ import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -30,6 +32,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequ
  * @author cdtank
  */
 @SuppressWarnings("serial")
+@WebServlet(name = "DataVisualizationController", urlPatterns = {"/visualizationData"})
 public class DataVisualizationController extends VitroHttpServlet {
 
 	public static final String URL_ENCODING_SCHEME = "UTF-8";
@@ -90,10 +93,8 @@ public class DataVisualizationController extends VitroHttpServlet {
 						   response,
 						   log);
 			}
-			
-            return;
-            
-    	} else {
+
+        } else {
     		
     		UtilityFunctions.handleMalformedParameters(
     								"Inappropriate query parameters were submitted.",
@@ -126,18 +127,18 @@ public class DataVisualizationController extends VitroHttpServlet {
 		Dataset dataset = setupJENADataSource(vitroRequest);
         
 		if (dataset != null && visRequestHandler != null) {
-				return visRequestHandler.generateDataVisualization(vitroRequest, 
-														log, 
-														dataset);
-        	
-        } else {
-        	
-    		String errorMessage = "Data Model Empty &/or Inappropriate " 
-    									+ "query parameters were submitted. ";
-    		
-    		throw new MalformedQueryParametersException(errorMessage);
-			
+			try {
+				return visRequestHandler.generateDataVisualization(vitroRequest,
+						log,
+						dataset);
+			} catch (JsonProcessingException e) {
+			}
         }
+        	
+		String errorMessage = "Data Model Empty &/or Inappropriate "
+									+ "query parameters were submitted. ";
+
+		throw new MalformedQueryParametersException(errorMessage);
 	}
 
 	private VisualizationRequestHandler getVisualizationRequestHandler(

@@ -27,40 +27,14 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 
 public class OrganizationUtilityFunctions {
 
-	public static String getHighestLevelOrganizationURI(ResultSet resultSet,
-			Map<String, String> fieldLabelToOutputFieldLabel) {
-
-		GenericQueryMap queryResult = new GenericQueryMap();
-
+	public static String getHighestLevelOrganizationURI(ResultSet resultSet, Map<String, String> fieldLabelToOutputFieldLabel) {
 		while (resultSet.hasNext()) {
 			QuerySolution solution = resultSet.nextSolution();
 
-			RDFNode organizationNode = solution
-					.get(fieldLabelToOutputFieldLabel.get("organization"));
+			RDFNode organizationNode = solution.get(fieldLabelToOutputFieldLabel.get("organization"));
 
 			if (organizationNode != null) {
-				queryResult.addEntry(
-						fieldLabelToOutputFieldLabel.get("organization"),
-						organizationNode.toString());
-
 				return organizationNode.toString();
-
-			}
-
-			RDFNode organizationLabelNode = solution
-					.get(fieldLabelToOutputFieldLabel.get("organizationLabel"));
-
-			if (organizationLabelNode != null) {
-				queryResult.addEntry(
-						fieldLabelToOutputFieldLabel.get("organizationLabel"),
-						organizationLabelNode.toString());
-			}
-
-			RDFNode numberOfChildrenNode = solution.getLiteral("numOfChildren");
-
-			if (numberOfChildrenNode != null) {
-				queryResult.addEntry("numOfChildren", String
-						.valueOf(numberOfChildrenNode.asLiteral().getInt()));
 			}
 		}
 

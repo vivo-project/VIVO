@@ -24,7 +24,10 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Tem
 import edu.cornell.mannlib.vitro.webapp.dao.VClassDao;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 
+import javax.servlet.annotation.WebServlet;
 
+
+@WebServlet(name = "ManagePeopleForOrganizationController", urlPatterns = {"/managePeople"} )
 public class ManagePeopleForOrganizationController extends FreemarkerHttpServlet {
 
     private static final Log log = LogFactory.getLog(ManagePeopleForOrganizationController.class.getName());

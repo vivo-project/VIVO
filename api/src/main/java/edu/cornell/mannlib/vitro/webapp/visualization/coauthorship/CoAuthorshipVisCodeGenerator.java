@@ -101,14 +101,11 @@ public class CoAuthorshipVisCodeGenerator {
 		if (yearToUniqueCoauthors.size() > 0) {
 			try {
 				minPublishedYear = Integer.parseInt(Collections.min(publishedYears));
-			} catch (NoSuchElementException e1) {
+			} catch (NoSuchElementException | NumberFormatException e1) {
 				log.debug("vis: " + e1.getMessage() + " error occurred for " 
 							+ yearToUniqueCoauthors.toString());
-			} catch (NumberFormatException e2) {
-				log.debug("vis: " + e2.getMessage() + " error occurred for " 
-							+ yearToUniqueCoauthors.toString());
 			}
-		}
+        }
 		
 		int minPubYearConsidered = 0;
 		

@@ -8,14 +8,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.json.JSON;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONSerializer;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
@@ -30,6 +25,9 @@ import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.RDFS;
 import org.apache.jena.vocabulary.XSD;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.BaseEditSubmissionPreprocessorVTwo;
@@ -38,6 +36,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTw
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.MultiValueEditSubmission;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
+import edu.cornell.mannlib.vitro.webapp.utils.json.JacksonUtils;
 
 public class AddAssociatedConceptsPreprocessor extends
 		BaseEditSubmissionPreprocessorVTwo {
@@ -174,10 +173,10 @@ public class AddAssociatedConceptsPreprocessor extends
 		if(uris.size() > 0) {
 			String jsonString = uris.get(0);
 			if(jsonString != null && !jsonString.isEmpty()) {
-				JSON json = JSONSerializer.toJSON(jsonString);
+				JsonNode json = JacksonUtils.parseJson(jsonString);
 				//This should be an array
 				if(json.isArray()) {
-					JSONArray jsonArray = (JSONArray) JSONSerializer.toJSON(jsonString);
+					ArrayNode jsonArray = (ArrayNode) JacksonUtils.parseJson(jsonString);
 					//Convert to list of strings
 					return convertJsonArrayToList(jsonArray);
 				}
@@ -186,12 +185,12 @@ public class AddAssociatedConceptsPreprocessor extends
 		return uris;
 	}
 
-	private List<String> convertJsonArrayToList(JSONArray jsonArray) {
+	private List<String> convertJsonArrayToList(ArrayNode jsonArray) {
 		List<String> stringList = new ArrayList<String>();
 		int len = jsonArray.size();
 		int i = 0;
 		for(i = 0; i < len; i++) {
-			stringList.add(jsonArray.getString(i));
+			stringList.add(jsonArray.get(i).asText());
 		}
 		return stringList;
 	}
@@ -747,7 +746,7 @@ public class AddAssociatedConceptsPreprocessor extends
 	//This will either generate or retrieve URIs for the concept semantic type labels if they exist
 	//We will then update the submission to include this 
 		private String getConceptSemanticTypeURIValues() {
-			String pseudoInputString = "";
+			StringBuilder pseudoInputString = new StringBuilder();
 			if(conceptSemanticTypeLabelValues !=  null && !conceptSemanticTypeLabelValues.isEmpty()) {
 				String[] conceptSemanticTypeLabels = convertDelimitedStringToArray(conceptSemanticTypeLabelValues);
 				//keep track of what label values already exist and to which label variables they map
@@ -759,10 +758,10 @@ public class AddAssociatedConceptsPreprocessor extends
 				if(numberLabels == 1) {
 					String label = conceptSemanticTypeLabels[0];
 					String  uri = getURIForSemanticTypeLabel(label);
-					if(uri != "") {
+					if(!StringUtils.isEmpty(uri)) {
 						String[] urisToAdd = new String[1];
 						urisToAdd[0] = uri;
-						pseudoInputString = uri;
+						pseudoInputString = new StringBuilder(uri);
 						log.debug("uris to add" + uri);
 						submission.addUriToForm(this.editConfiguration, "conceptSemanticTypeURI", urisToAdd);
 					}
@@ -802,7 +801,7 @@ public class AddAssociatedConceptsPreprocessor extends
 						//Make or retrieve URI for this label
 						//TODO: Do we create this string with empty inputs ?
 						String  uri = getURIForSemanticTypeLabel(label);
-						if(uri != "") {
+						if(!StringUtils.isEmpty(uri)) {
 							//uri var shouldn't be repeated?
 							if(!this.conceptSemanticTypeURIVarToValueMap.containsKey(uriVar)) {
 							this.conceptSemanticTypeURIVarToValueMap.put(uriVar, new ArrayList<String>());
@@ -810,21 +809,21 @@ public class AddAssociatedConceptsPreprocessor extends
 							}
 						}
 						if(i != 0) {
-							pseudoInputString += ","; 
+							pseudoInputString.append(",");
 						}
-						pseudoInputString += uri;
+						pseudoInputString.append(uri);
 					
 					}
 					
 					//Add this string to the uris for the form
 					String[] urisToAdd = new String[1];
-					urisToAdd[0] = pseudoInputString;
+					urisToAdd[0] = pseudoInputString.toString();
 					log.debug("uris to add" + pseudoInputString);
 					submission.addUriToForm(this.editConfiguration, "conceptSemanticTypeURI", urisToAdd);
 					
 				}
 			}
-			return pseudoInputString;
+			return pseudoInputString.toString();
 		}
 		
 	private String getURIForSemanticTypeLabel(String label) {

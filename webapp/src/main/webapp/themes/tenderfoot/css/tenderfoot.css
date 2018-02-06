@@ -1,0 +1,364 @@
+legend {
+    display: none;
+}
+
+.navbar {
+    z-index: 10;
+}
+
+#nav {
+    background: #f7f9f9;
+}
+
+#nav.affix {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+/*
+    If you don't want navbar that anchors to the top of the screen, replace with
+
+    #nav.affix {
+        position: relative;
+    }
+ */
+
+#nav .container {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.navbar-collapse.in #main-nav {
+    padding-left: 15px;
+}
+
+.navbar-toggle .button-label {
+    display: inline-block;
+    float: left;
+    font-weight: bold;
+    line-height: 14px;
+    padding-right: 10px;
+}
+.button-bars {
+    display: inline-block;
+    float: left;
+}
+
+p.navbar-text {
+    margin-left: 15px;
+}
+
+#nav-searchbox {
+    float: right;
+}
+
+button.navbar-toggle {
+    z-index: 999;
+}
+
+body {
+    padding: 0;
+    height: 100%; /* needed for container min-height */
+    font-family: "Noto Sans", "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica, sans-serif;
+    height: auto !important; /* real browsers */
+    height: 100%; /* IE6: treaded as min-height*/;
+    min-height: 100%; /* real browsers */
+    margin: 0 auto;
+    background: #f3f3f0 url(../images/header-background.png) center 0 no-repeat;
+}
+
+#wrapper-content {
+    background: none repeat scroll 0 0 #fff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#property-tabs {
+    /*
+    padding-left: 0px;
+    padding-right: 0px;
+    */
+}
+
+.row {
+    background: #ffffff;
+}
+
+.row.title {
+    background: #398AAC;
+    padding-top: 7px;
+    padding-bottom: 3px;
+}
+
+.row.title span {
+    color: #ffffff;
+}
+
+.row.title h1 {
+    margin-left: 10px;
+}
+
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.photo-wrapper {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #f3f3f0;
+    vertical-align: top;
+}
+
+.photo-wrapper img {
+//    height: 100%;
+    width: 100%;
+    padding: 0 !important;
+    margin: 0 !important;
+    object-fit: contain;
+}
+
+.person-details {
+    background: #f3f3f0;
+    padding-bottom: 5px;
+}
+
+/* HEADER ------>  */
+#branding {
+    position: relative;
+//    width: 970px;
+    height: 114px;
+    margin: 0 auto;
+}
+#branding .row {
+    background-color:rgba(255, 255, 255, 0);
+}
+/* HEADER NAV------>  */
+ul#header-nav {
+    float: right;
+    list-style: none;
+    height: 30px;
+    padding-top: 10px;
+    margin-right: 13px;
+}
+ul#header-nav li {
+    float: left;
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-right: 1px solid #7c7d7f;
+    font-size: .7em;
+    color: #fff;
+}
+ul#header-nav li:last-child {
+    padding-left: 1px;
+    padding-right: 0;
+    border-right: none;
+}
+ul#header-nav a {
+    color: #fff;
+}
+ul#header-nav a:hover,
+ul#header-nav a:active {
+    text-decoration: none;
+    color: #999;
+}
+ul#header-nav a.log-out {
+    padding-left: 10px;
+}
+/* SEARCH ------>  */
+#search {
+    width: 396px;
+    height: 38px;
+    right: 10px;
+    padding-top: 5px;
+}
+#search-field {
+    width: 396px;
+    height: 38px;
+    background: url(../images/search-interior-pages.png) 0 0 no-repeat;
+}
+#search-field input.search {
+    text-decoration: none;
+    background-color: transparent;
+    color: #fff;
+    font-size: 14px;
+    border: none;
+    padding-left: 25px;
+    padding-top: 8px;
+    cursor: pointer;
+}
+input.search-vivo {
+    float: left;
+    width: 290px;
+    height: 25px;
+    border: 0;
+    font-size: 16px;
+    color: #5e6363;
+    margin-left: 10px;
+    margin-top: 5px;
+    padding: 0;
+}
+#search-form-modifier {
+    display: none;
+}
+/* FOOTER------>  */
+footer {
+    height: 88px;
+    margin: 0 auto;
+    font-size: .7em;
+    color: white;
+    background-color: black;
+}
+footer .row {
+    background-color: black;
+}
+footer p.copyright {
+    float: left;
+    padding-top: 55px;
+    color: white;
+}
+footer p.copyright small {
+    font-size: 1em;
+}
+ul#footer-nav {
+    float: right;
+    list-style: none;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+    padding-top: 55px;
+}
+ul#footer-nav li {
+    float: left;
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-right: 1px solid #c9c8c8;
+}
+ul#footer-nav li:last-child,
+ul#header-nav li.last,
+ul#individual-hasResearchArea li:last-child,
+ul#individual-facultyMemberships li:last-child {
+    border-right: none;
+}
+#footer-nav a {
+    color: white;
+}
+#footer-nav a:hover,
+a.terms,
+a.powered-by-vivo {
+    color: white;
+    text-decoration: none;
+}
+#footer-nav  a.terms:hover,
+a.powered-by-vivo:hover {
+    color: white;
+    text-decoration: none;
+}
+#footer-nav p {
+    margin-bottom: 1.3em;
+}
+/* BRANDING ------>  */
+h1.vivo-logo {
+    position: absolute;
+    width: 100%;
+    max-width: 442px;
+    height: 59px;
+    top: 30px;
+    left: 0;
+    background: url(../images/VIVO-logo.png) 0 0 no-repeat;
+    background-size: 100% auto;
+}
+h1.vivo-logo a {
+    display: block;
+    width: 100%;
+    height: 59px;
+}
+.displace {
+    left: -9999px;
+    position: absolute;
+}
+h2 {
+    padding: 5px 0 3px 0;
+    margin: 0;
+    font-size: 1.375em;
+    color: #064d68;
+    line-height: 1.5em;
+}
+h2 a {
+    color: #2485ae;
+}
+h2 a:link,
+h2 a:visited {
+    text-decoration: underline;
+}
+h3 {
+    padding: 5px 0 6px 0;
+    margin: 0;
+    font-size: 1.125em;
+    color: #064d68;
+}
+h4 {
+    padding: 5px 0 6px 0;
+    margin: 0;
+    font-size: 1em;
+    color: #064d68;
+}
+h5 {
+    padding: 5px 0 6px 0;
+    margin: 0;
+    font-size: .875em;
+    color: #064d68;
+}
+label {
+    display: block;
+}
+#developerPanel h1 {
+    line-height: 1.5em;
+}
+#developerPanel .container {
+    width: auto;
+}
+
+table.classHierarchy {
+    min-width: auto;
+    max-width: none;
+    display: block;
+    margin-right: 0px;
+}
+
+section#container div {
+    width: auto;
+}
+
+#flash-message {
+    border: 1px dotted #E2C822;
+    background-color: #FFF9D7;
+    padding: .5em;
+    margin-bottom: 10px;
+}
+#welcome-message {
+    border: 1px dotted #E2C822;
+    background-color: #FFF9D7;
+    padding: .25em;
+    margin-bottom: 8px;
+}
+#flash-msg-container,
+#welcome-msg-container {
+    width: 600px;
+    height:34px;
+    position: absolute;
+    z-index: 99;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+img.add-individual {
+    height: 15px;
+    width: 15px;
+}

@@ -7,13 +7,13 @@
 
     <groupId>org.vivoweb</groupId>
     <artifactId>vivo-installer-home</artifactId>
-    <version>1.10.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
         <groupId>org.vivoweb</groupId>
         <artifactId>vivo-installer</artifactId>
-        <version>1.10.0-SNAPSHOT</version>
+        <version>2.0.0-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
 
@@ -107,5 +107,12 @@
             <artifactId>vivo-home</artifactId>
             <type>tar.gz</type>
         </dependency>
+        <!-- Dependency for multilingual support -->
+        <!-- dependency>
+            <groupId>org.vivoweb</groupId>
+            <artifactId>vivo-languages-home</artifactId>
+            <version>[2.0.0,2.1.0)</version>
+            <type>tar.gz</type>
+        </dependency -->
     </dependencies>
 </project>

@@ -16,12 +16,25 @@
                (afn:localname(?link) AS ?linkName) 
                (group_concat(distinct ?linkLabel;separator="/") as ?label)
                ?url 
-               ?rank WHERE {
+               ?rank
+        WHERE {
             ?subject ?property ?vcard .
-            ?vcard vcard:hasURL ?link
-            OPTIONAL { ?link rdfs:label ?linkLabel }
-            OPTIONAL { ?link vcard:url ?url }
-            OPTIONAL { ?link core:rank ?rank }
+            ?vcard vcard:hasURL ?link .
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?vcard .
+                ?vcard vcard:hasURL ?link .</precise-subquery>
+                ?link rdfs:label ?linkLabel .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?vcard .
+                ?vcard vcard:hasURL ?link .</precise-subquery>
+                ?link vcard:url ?url .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?vcard .
+                ?vcard vcard:hasURL ?link .</precise-subquery>
+                ?link core:rank ?rank .
+            }
         <critical-data-required>
         FILTER ( bound(?link) )    
         </critical-data-required>  
@@ -29,36 +42,6 @@
           ORDER BY ?rank ?linkLabel
     </query-select>
 
-    <query-construct>    	
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-        PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
-        CONSTRUCT {
-            ?subject ?property ?vcard .
-            ?vcard vcard:hasURL ?link .
-            ?link vcard:url ?url .
-            ?link core:rank ?rank .
-            ?link rdfs:label ?linkLabel
-        } WHERE {
-            { 
-                ?subject ?property ?vcard .
-                ?vcard vcard:hasURL ?link
-            } UNION {
-                ?subject ?property ?vcard .
-                ?vcard vcard:hasURL ?link .
-                ?link vcard:url ?url 
-            } UNION {
-                ?subject ?property ?vcard .
-                ?vcard vcard:hasURL ?link .
-                ?link core:rank ?rank
-            } UNION {
-                ?subject ?property ?vcard .
-                ?vcard vcard:hasURL ?link .
-                ?link rdfs:label ?linkLabel
-            } 
-        }
-    </query-construct>
-    
     <template>propStatement-webpage.ftl</template>
     <postprocessor>edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.MaintainDuplicatesObjectPropertyDataPostProcessor</postprocessor>
 </list-view-config>

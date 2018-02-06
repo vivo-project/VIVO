@@ -12,12 +12,14 @@ import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
-
-import com.google.gson.Gson;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -151,10 +153,10 @@ public class UtilityFunctions {
 		GenericQueryMap errorDataResponse = new GenericQueryMap();
 		errorDataResponse.addEntry("error", errorMessage);
 		
-		Gson jsonErrorResponse = new Gson();
-		
+		ObjectMapper mapper = new ObjectMapper();
+
     	response.setContentType("application/octet-stream");
-    	response.getWriter().write(jsonErrorResponse.toJson(errorDataResponse));
+    	mapper.writeValue(response.getWriter(), errorDataResponse);
 	}
     
 	public static DateTime getValidParsedDateTimeObject(String unparsedDateTime) {

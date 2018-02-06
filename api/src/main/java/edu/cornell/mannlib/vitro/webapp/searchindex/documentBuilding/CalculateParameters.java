@@ -213,7 +213,7 @@ public class CalculateParameters implements DocumentModifier, ContextModelsUser 
     		queryList = null;	
     		Iterator<String> itr = adjacentNodes.iterator();
     		while(itr.hasNext()){
-    			adjacentNodesConcat.append(itr.next() + " ");
+    			adjacentNodesConcat.append(itr.next()).append(" ");
     		}
     		
     		info[0] = adjacentNodesConcat.toString();

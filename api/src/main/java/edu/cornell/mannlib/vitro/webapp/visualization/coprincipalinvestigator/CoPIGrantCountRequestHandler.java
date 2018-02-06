@@ -164,7 +164,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		
 		String coPISeparator = ";";
 		for (Collaborator currentCoPI : coInvestigators) {
-			coPIsMerged.append(currentCoPI.getCollaboratorName() + coPISeparator);
+			coPIsMerged.append(currentCoPI.getCollaboratorName()).append(coPISeparator);
 		}
 		
 		return StringUtils.removeEnd(coPIsMerged.toString(), coPISeparator);

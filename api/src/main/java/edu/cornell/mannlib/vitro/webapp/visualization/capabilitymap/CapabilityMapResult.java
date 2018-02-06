@@ -2,67 +2,71 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.capabilitymap;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 class CapabilityMapResult {
+    @JsonProperty
     String[] clusters;
 
-    @SerializedName("md_1")
+    @JsonProperty("md_1")
     String profileId;
 
-    @SerializedName("md_2")
+    @JsonProperty("md_2")
     String description;
 
-    @SerializedName("md_3")
+    @JsonProperty("md_3")
     String thumbNail;
 
-    @SerializedName("md_4")
+    @JsonProperty("md_4")
     String department;
 
-    @SerializedName("md_5")
+    @JsonProperty("md_5")
     String overview;
 
-    @SerializedName("md_6")
+    @JsonProperty("md_6")
     String geographicFocus;
 
-    @SerializedName("md_7")
+    @JsonProperty("md_7")
     String geographicLocation;
 
-    @SerializedName("md_8")
+    @JsonProperty("md_8")
     String[] grants;
 
-    @SerializedName("md_A")
+    @JsonProperty("md_A")
     String firstName;
 
-    @SerializedName("md_B")
+    @JsonProperty("md_B")
     String lastName;
 
-    @SerializedName("md_F")
+    @JsonProperty("md_F")
     String fax;
 
-    @SerializedName("md_G")
+    @JsonProperty("md_G")
     String email;
 
-    @SerializedName("md_H")
+    @JsonProperty("md_H")
     String availableForSupervision;
 
-    @SerializedName("md_I")
+    @JsonProperty("md_I")
     String homepage;
 
-    @SerializedName("md_L")
+    @JsonProperty("md_L")
     String phoneNumber;
 
-    @SerializedName("md_U")
+    @JsonProperty("md_U")
     String[] publications;
 
-    @SerializedName("md_X")
+    @JsonProperty("md_X")
     String[] researchOverview;
 
-    @SerializedName("md_Y")
+    @JsonProperty("md_Y")
     String[] subjectArea;
 
-    @SerializedName("md_Z")
+    @JsonProperty("md_Z")
     String preferredTitle;
 
+    @JsonProperty
     String query;
 }

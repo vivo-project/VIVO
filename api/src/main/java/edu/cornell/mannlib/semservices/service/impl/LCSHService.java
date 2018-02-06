@@ -6,17 +6,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
-
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -28,10 +23,13 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import edu.cornell.mannlib.semservices.bo.Concept;
 import edu.cornell.mannlib.semservices.service.ExternalConceptService;
 import edu.cornell.mannlib.semservices.util.SKOSUtils;
 import edu.cornell.mannlib.semservices.util.XMLUtils;
+import edu.cornell.mannlib.vitro.webapp.utils.json.JacksonUtils;
 
 public class LCSHService implements ExternalConceptService {
 
@@ -164,7 +162,7 @@ public class LCSHService implements ExternalConceptService {
 	public List<String> getConceptURISFromJSON(String results) {
 		List<String> uris = new ArrayList<String>();
 		try {
-			JSONObject json = (JSONObject) JSONSerializer.toJSON(results);
+			ObjectNode json = (ObjectNode) JacksonUtils.parseJson(results);
 			log.debug(json.toString());
 			// Get atom entry elements
 
@@ -178,7 +176,7 @@ public class LCSHService implements ExternalConceptService {
 
 	protected List<String> getConceptURIFromXML(String rdf) {
 		List<String> uris = new ArrayList<String>();
-		String conceptUri = new String();
+		String conceptUri = "";
 		try {
 			Document doc = XMLUtils.parse(rdf);
 			NodeList nodes = doc.getElementsByTagName("entry");
@@ -204,15 +202,10 @@ public class LCSHService implements ExternalConceptService {
 				uris.add(conceptUri);
 			}
 
-		} catch (IOException e) {
+		} catch (IOException | ParserConfigurationException | SAXException e) {
 			log.error("error occurred in parsing " +rdf, e);
-		} catch (SAXException e) {
-			log.error("error occurred in parsing " +rdf, e);
-		} catch (ParserConfigurationException e) {
-			log.error("error occurred in parsing " +rdf, e);
-
 		}
-		return uris;
+        return uris;
 
 	}
 
@@ -224,7 +217,7 @@ public class LCSHService implements ExternalConceptService {
 	 * @param uri URI
 	 */
 	protected String stripConceptId(String uri) {
-		String conceptId = new String();
+		String conceptId = "";
 		int lastslash = uri.lastIndexOf('/');
 		conceptId = uri.substring(lastslash + 1, uri.length());
 		return conceptId;

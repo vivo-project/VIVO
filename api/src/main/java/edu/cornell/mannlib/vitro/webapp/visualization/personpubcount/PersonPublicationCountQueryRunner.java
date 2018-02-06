@@ -7,7 +7,6 @@ import java.util.Set;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.vocabulary.RDFS;
@@ -20,21 +19,17 @@ import org.apache.jena.iri.IRI;
 import org.apache.jena.iri.IRIFactory;
 import org.apache.jena.iri.Violation;
 
-import org.apache.jena.query.Dataset;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.QuerySolution;
-import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.Syntax;
 import org.apache.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Individual;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 
 
@@ -75,6 +70,7 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<Activi
 				+ "{\n"
 				+ "    <" + queryURI + "> rdfs:label ?authorName .\n"
 				+ "    <" + queryURI + "> core:authorOf ?document .\n"
+				+ "    ?document vitro:mostSpecificType ?publicationType .\n"
 				+ "    ?document core:publicationDate ?publicationDate .\n"
 				+ "}\n"
 				+ "WHERE"
@@ -86,7 +82,8 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<Activi
 				+ "    ?authorshipNode rdf:type core:Authorship ; \n"
 				+ "                    core:relates ?document . \n"
 				+ "	   ?document rdf:type bibo:Document ; \n"
-				+ "              rdfs:label ?documentLabel .\n"
+				+ "              rdfs:label ?documentLabel ;\n"
+				+ "              vitro:mostSpecificType ?publicationType .\n"
 				+ "    } UNION {\n"
 				+ "    <" + queryURI + "> rdf:type foaf:Person ;\n"
 				+ "                       core:relatedBy ?authorshipNode .  \n"
@@ -106,9 +103,10 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<Activi
 	private String getSparqlQuery(String queryURI) {
 
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
-							+ "SELECT ?document ?publicationDate\n"
+							+ "SELECT ?document ?publicationType ?publicationDate\n"
 							+ "WHERE { \n"
 							+ "    <" + queryURI + "> core:authorOf ?document . \n"
+							+ "	   OPTIONAL { ?document vitro:mostSpecificType ?publicationType . } .\n"
 							+ "	   OPTIONAL { ?document core:publicationDate ?publicationDate . } .\n"
 							+ "}\n";
 
@@ -170,6 +168,11 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<Activi
 			RDFNode publicationDateNode = qs.get("publicationDate");
 			if (publicationDateNode != null) {
 				biboDocument.setActivityDate(publicationDateNode.asLiteral().getString());
+			}
+
+			RDFNode publicationType = qs.get("publicationType");
+			if (publicationType != null) {
+				biboDocument.setActivityType(publicationType.asResource().getURI());
 			}
 
 			authorDocuments.add(biboDocument);

@@ -22,7 +22,6 @@ import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFr
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CollaborationData;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Collaborator;
-import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
@@ -168,7 +167,7 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 		
 		String coAuthorSeparator = "; ";
 		for (Collaborator currCoAuthor : coAuthors) {
-			coAuthorsMerged.append(currCoAuthor.getCollaboratorName() + coAuthorSeparator);
+			coAuthorsMerged.append(currCoAuthor.getCollaboratorName()).append(coAuthorSeparator);
 		}
 		
 		return StringUtils.removeEnd(coAuthorsMerged.toString(), coAuthorSeparator);

@@ -2,213 +2,228 @@
 
 package edu.cornell.mannlib.semservices.service.impl;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.StringWriter;
-import java.net.URL;
-import java.net.URLEncoder;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
+import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import edu.cornell.mannlib.semservices.bo.Concept;
 import edu.cornell.mannlib.semservices.exceptions.ConceptsNotFoundException;
 import edu.cornell.mannlib.semservices.service.ExternalConceptService;
+import edu.cornell.mannlib.vitro.webapp.utils.json.JacksonUtils;
+import org.apache.http.HttpVersion;
+import org.apache.http.client.fluent.Form;
+import org.apache.http.client.fluent.Request;
+import org.apache.http.client.utils.URIBuilder;
+import org.springframework.util.StringUtils;
 
 /**
  * @author jaf30
  *
  */
 public class UMLSService implements ExternalConceptService {
-   protected final Log logger = LogFactory.getLog(getClass());
-   private static final String submissionUrl = "http://link.informatics.stonybrook.edu/MeaningLookup/MlServiceServlet?";
-   private static final String baseUri = "http://link.informatics.stonybrook.edu/umls/CUI/";
-   private static final String endpoint = "http://link.informatics.stonybrook.edu/sparql/";
-   private static final String schemeURI = "http://link.informatics.stonybrook.edu/umls";
-   
-   
-   
-	@Override
-	public List<Concept> getConcepts(String term) throws Exception {
-		List<Concept> conceptList = new ArrayList<Concept>();
+    protected final Log logger = LogFactory.getLog(getClass());
 
-		String results = null;
-		String dataUrl = submissionUrl + "textToProcess="
-				+ URLEncoder.encode(term, "UTF-8") 
-				+ "&format=json";
+    private static String UTS_REST_API_URL = "https://uts-ws.nlm.nih.gov/rest";
+    private static String SEARCH_PATH = "/search/current";
+    private static String SEARCH_PARAMETER = "string";
+    private static String SEARCH_TYPE_PARAMETER = "searchType";
+    private static String SEARCH_TYPE = "rightTruncation";
+    private static String PAGE_SIZE_PARAMETER = "pageSize";
+    private static String RETURN_TYPE_PARAMETER = "returnIdType";
+    private static String RETURN_TYPE = "concept";
+    private static String TICKET_PARAMETER = "ticket";
 
-		try {
+    private static String ticketGrantingTicketURL = null;
 
-			StringWriter sw = new StringWriter();
-			URL rss = new URL(dataUrl);
+    private static long lastUpdate = -1;
 
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					rss.openStream()));
-			String inputLine;
-			while ((inputLine = in.readLine()) != null) {
-				sw.write(inputLine);
-			}
-			in.close();
+    private static String username = null;
+    private static String password = null;
+    private static String apikey = null;
 
-			results = sw.toString();
-			//System.out.println("results before processing: "+results);
-			conceptList = processOutput(results);
-			return conceptList;
+    private static String pageSize = "50";
 
-		} catch (Exception ex) {
-			logger.error("error occurred in servlet", ex);
-			return null;
-		}
-	}
+    private static String UMLS_AUTH_USER_URL = "https://utslogin.nlm.nih.gov/cas/v1/tickets";
+    private static String UMLS_AUTH_KEY_URL = "https://utslogin.nlm.nih.gov/cas/v1/api-key";
+    private static String UTS_SERVICE_URL   = "http://umlsks.nlm.nih.gov";
 
-   public List<Concept> processResults(String term) throws Exception {
-      String results = null;
-      String dataUrl = submissionUrl + "textToProcess="
-            + URLEncoder.encode(term, "UTF-8") + "&format=json";
+    {
+        if (username == null || apikey == null) {
+            final Properties properties = new Properties();
+            try (InputStream stream = getClass().getResourceAsStream("/umls.properties")) {
+                properties.load(stream);
+                username = properties.getProperty("username");
+                password = properties.getProperty("password");
+                apikey   = properties.getProperty("apikey");
 
-      try {
-
-         StringWriter sw = new StringWriter();
-         URL rss = new URL(dataUrl);
-
-         BufferedReader in = new BufferedReader(new InputStreamReader(rss.openStream()));
-         String inputLine;
-         while ((inputLine = in.readLine()) != null) {
-            sw.write(inputLine);
-         }
-         in.close();
-
-         results = sw.toString();
-         //System.out.println("results before processing: "+results);
-         List<Concept> conceptList = processOutput(results);
-         return conceptList;
-
-      } catch (Exception ex) {
-         logger.error("error occurred in servlet", ex);
-         return null;
-      }
-
-   }
-
-   /**
-    * @param uri URI
-    */
-	public List<Concept> getConceptsByURIWithSparql(String uri)
-			throws Exception {
-		// deprecating this method...just return an empty list
-		List<Concept> conceptList = new ArrayList<Concept>();
-		return conceptList;
-	}
-
-   /**
-    * @param results Results to process
-    */
-   private List<Concept> processOutput(String results) throws Exception {
-
-      List<Concept> conceptList = new ArrayList<Concept>();
-      List<String> bestMatchIdList = new ArrayList<String>();
-      String bestMatchId = new String();
-      boolean bestMatchFound = false;
-      boolean allFound = false;
-
-      try {
-         JSONObject json = (JSONObject) JSONSerializer.toJSON( results );
-         //System.out.println(json.toString());
-         if (json.has("Best Match")) {
-            bestMatchFound = true;
-            //System.out.println("Best Match");
-
-            JSONArray bestMatchArray = json.getJSONArray("Best Match");
-            int len = bestMatchArray.size();
-            if (len > 1) {
-               logger.debug("Found this many best matches: "+ len);
+                String exPageSize = properties.getProperty("pagesize");
+                try {
+                    if (!StringUtils.isEmpty(exPageSize)) {
+                        int iPageSize = Integer.parseInt(exPageSize, 10);
+                        if (iPageSize > 5 && iPageSize < 200) {
+                            pageSize = Integer.toString(iPageSize, 10);
+                        }
+                    }
+                } catch (Exception e) {
+                }
+            } catch (IOException e) {
             }
-            int i;
-            for (i = 0; i < len; i++) {
-               JSONObject o = bestMatchArray.getJSONObject(i);
-               //System.out.println(o.toString());
-               Concept concept = new Concept();
-               concept.setDefinedBy(schemeURI);
-               concept.setBestMatch("true");
-               String cui = getJsonValue(o, "CUI");
-               bestMatchIdList.add(cui);
+        }
+    }
 
-               concept.setConceptId(cui);
-               concept.setLabel(getJsonValue(o, "label"));
-               concept.setType(getJsonValue(o, "type"));
-               concept.setDefinition(getJsonValue(o, "definition"));
-               concept.setUri(baseUri + cui);
-               concept.setSchemeURI(schemeURI);
-               conceptList.add(concept);
-            }
-         }
-         if (json.has("All")) {
-            allFound = true;
-            JSONArray allArray = json.getJSONArray("All");
+    public boolean isConfigured() {
+        return !(StringUtils.isEmpty(username) && StringUtils.isEmpty(apikey));
+    }
+
+    @Override
+    public List<Concept> getConcepts(String term) throws Exception {
+        String ticket = getSingleUseTicket();
+
+        List<Concept> conceptList = new ArrayList<Concept>();
+
+        String results = null;
+
+        try {
+            URIBuilder b = new URIBuilder(UTS_REST_API_URL + SEARCH_PATH);
+            b.addParameter(SEARCH_PARAMETER, term);
+            b.addParameter(RETURN_TYPE_PARAMETER, RETURN_TYPE);
+            b.addParameter(SEARCH_TYPE_PARAMETER, SEARCH_TYPE);
+            b.addParameter(PAGE_SIZE_PARAMETER, pageSize);
+            b.addParameter(TICKET_PARAMETER, ticket);
+
+            results = Request.Get(b.build())
+                    .connectTimeout(3000)
+                    .socketTimeout(3000)
+                    .execute().returnContent().asString();
+
+            conceptList = processOutput(results);
+            return conceptList;
+
+        } catch (Exception ex) {
+            logger.error("error occurred in servlet", ex);
+            return null;
+        }
+    }
+
+    public List<Concept> processResults(String term) throws Exception {
+        return getConcepts(term);
+    }
+
+    /**
+     * @param uri URI
+     */
+    public List<Concept> getConceptsByURIWithSparql(String uri) throws Exception {
+        // deprecating this method...just return an empty list
+        List<Concept> conceptList = new ArrayList<Concept>();
+        return conceptList;
+    }
+
+    /**
+     * @param results Results to process
+     */
+    private List<Concept> processOutput(String results) throws Exception {
+        List<Concept> conceptList = new ArrayList<Concept>();
+        List<String> bestMatchIdList = new ArrayList<String>();
+        String bestMatchId = "";
+
+        try {
+            ObjectNode json = (ObjectNode) JacksonUtils.parseJson(results);
+            ArrayNode allArray = (ArrayNode) json.get("result").get("results");
             int len = allArray.size();
-            //System.out.println("size of best match array: "+ len);
             int i;
             for (i = 0; i < len; i++) {
-               JSONObject o = allArray.getJSONObject(i);
-               //System.out.println(o.toString());
-               Concept concept = new Concept();
-               concept.setDefinedBy(schemeURI);
-               String cui = getJsonValue(o, "CUI");
-               concept.setConceptId(cui);
+                ObjectNode o = (ObjectNode) allArray.get(i);
 
-               concept.setLabel(getJsonValue(o, "label"));
-               concept.setType(getJsonValue(o, "type"));
-               concept.setDefinition(getJsonValue(o, "definition"));
-               concept.setUri(baseUri + cui);
-               concept.setSchemeURI(schemeURI);
-               // prevent duplicate concepts in list
-               if (! bestMatchIdList.contains(cui)) {
-                  concept.setBestMatch("false");
-                  conceptList.add(concept);
-               }
+                Concept concept = new Concept();
+                concept.setDefinedBy(UTS_SERVICE_URL);
+                concept.setSchemeURI(UTS_SERVICE_URL);
+
+                concept.setType(RETURN_TYPE);
+                concept.setConceptId(getJsonValue(o, "ui"));
+                concept.setLabel(getJsonValue(o, "name"));
+                concept.setUri(getJsonValue(o, "uri"));
+
+                concept.setBestMatch("false");
+                conceptList.add(concept);
             }
-         }
-      } catch (Exception ex ) {
-         ex.printStackTrace();
-         logger.error("Could not get concepts", ex);
-         throw ex;
-      }
-      if (! bestMatchFound && !allFound) {
-         // we did not get a bestMatch or All element
-         throw new ConceptsNotFoundException();
-      }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            logger.error("Could not get concepts", ex);
+            throw ex;
+        }
 
-      //
-      return conceptList;
+        if (conceptList.size() == 0) {
+            throw new ConceptsNotFoundException();
+        }
 
-   }
+        //
+        return conceptList;
 
-   /**
-    * Get a string from a json object or an empty string if there is no value for the given key
-   * @param obj JSON Object
-   * @param key Key to retrieve
-   */
-  protected String getJsonValue(JSONObject obj, String key) {
-      if (obj.has(key)) {
-         return obj.getString(key);
-      } else {
-         return new String("");
-      }
-   }
+    }
+
+    /**
+     * Get a string from a json object or an empty string if there is no value for the given key
+     *
+     * @param obj JSON Object
+     * @param key Key to retrieve
+     */
+    protected String getJsonValue(ObjectNode obj, String key) {
+        if (obj.has(key)) {
+            return obj.get(key).asText();
+        } else {
+            return "";
+        }
+    }
 
 
+    protected String stripConceptId(String uri) {
+        String conceptId = "";
+        int lastslash = uri.lastIndexOf('/');
+        conceptId = uri.substring(lastslash + 1, uri.length());
+        return conceptId;
+    }
 
-  protected String stripConceptId(String uri) {
-     String conceptId = new String();
-     int lastslash = uri.lastIndexOf('/');
-     conceptId = uri.substring(lastslash + 1, uri.length());
-     return conceptId;
-  }
+    private synchronized void getTicketGrantingTicket() {
+        if (StringUtils.isEmpty(username) && StringUtils.isEmpty(apikey)) {
+            throw new IllegalStateException("Unable to read umls.properties");
+        }
 
+        if (ticketGrantingTicketURL == null || lastUpdate + 28700000L < System.currentTimeMillis()) {
+            try {
+                if (!StringUtils.isEmpty(apikey)) {
+                    ticketGrantingTicketURL = Request.Post(UMLS_AUTH_KEY_URL).useExpectContinue().version(HttpVersion.HTTP_1_1)
+                            .bodyForm(Form.form().add("apikey", apikey).build())
+                            .execute().returnResponse().getFirstHeader("location").getValue();
+                } else {
+                    ticketGrantingTicketURL = Request.Post(UMLS_AUTH_USER_URL).useExpectContinue().version(HttpVersion.HTTP_1_1)
+                            .bodyForm(Form.form().add("username", username).add("password", password).build())
+                            .execute().returnResponse().getFirstHeader("location").getValue();
+                }
+            } catch (IOException e) {
+                throw new IllegalStateException("Unable to get ticket granting ticket.");
+            }
+            lastUpdate = System.currentTimeMillis();
+        }
+    }
+
+    private String getSingleUseTicket() {
+        getTicketGrantingTicket();
+        String ticket = "";
+        try {
+            ticket = Request.Post(ticketGrantingTicketURL).useExpectContinue().version(HttpVersion.HTTP_1_1)
+                    .bodyForm(Form.form().add("service", UTS_SERVICE_URL).build())
+                    .execute().returnContent().asString();
+        } catch (IOException e) {
+            throw new IllegalStateException("Unable to get ticket.");
+        }
+        return ticket;
+    }
 }

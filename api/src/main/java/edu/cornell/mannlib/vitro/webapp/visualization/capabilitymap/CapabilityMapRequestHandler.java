@@ -2,7 +2,11 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.capabilitymap;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.query.Dataset;
 import org.apache.jena.query.QueryExecution;
@@ -49,7 +53,7 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
     }
 
     @Override
-    public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log, Dataset dataSource) throws MalformedQueryParametersException {
+    public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log, Dataset dataSource) throws MalformedQueryParametersException, JsonProcessingException {
         ConceptLabelMap       conceptLabelMap = VisualizationCaches.conceptToLabel.getNoWait(vitroRequest.getRDFService());
         ConceptPeopleMap      conceptPeopleMap = VisualizationCaches.conceptToPeopleMap.getNoWait(vitroRequest.getRDFService());
         OrganizationPeopleMap organizationPeopleMap = VisualizationCaches.organisationToPeopleMap.getNoWait(vitroRequest.getRDFService());
@@ -67,8 +71,8 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
                     }
                 }
 
-                Gson gson = new Gson();
-                return gson.toJson(concepts);
+                ObjectMapper mapper = new ObjectMapper();
+                return mapper.writeValueAsString(concepts);
             }
             return "";
         }
@@ -96,13 +100,13 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
             }
             response.results.add(result);
 
-            Gson gson = new Gson();
+            ObjectMapper mapper = new ObjectMapper();
 
             String callback = vitroRequest.getParameter("callback");
             if (!StringUtils.isEmpty(callback)) {
-                return callback + "(" + gson.toJson(response) + ");";
+                return callback + "(" + mapper.writeValueAsString(response) + ");";
             }
-            return gson.toJson(response);
+            return mapper.writeValueAsString(response);
         }
 
         String query = vitroRequest.getParameter("query");
@@ -150,13 +154,12 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
                 response.results.add(result);
             }
 
-            Gson gson = new Gson();
-
+            ObjectMapper mapper = new ObjectMapper();
             String callback = vitroRequest.getParameter("callback");
             if (!StringUtils.isEmpty(callback)) {
-                return callback + "(" + gson.toJson(response) + ");";
+                return callback + "(" + mapper.writeValueAsString(response) + ");";
             }
-            return gson.toJson(response);
+            return mapper.writeValueAsString(response);
         }
 
         return "";

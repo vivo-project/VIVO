@@ -27,7 +27,7 @@ var grantHasContributorUtils = {
     this.personUri = $('#personUri');
 
     // may not need this
-    this.firstName.attr('disabled', '');
+    this.firstName.attr('disabled', false);
     
     },
     

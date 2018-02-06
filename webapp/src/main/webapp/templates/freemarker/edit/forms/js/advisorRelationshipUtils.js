@@ -36,7 +36,7 @@ var advisorRelUtils = {
     
 
     // may not need this
-    this.firstName.attr('disabled', '');
+    this.firstName.attr('disabled', false);
     
     },
     

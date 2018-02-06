@@ -11,30 +11,22 @@
         
         SELECT DISTINCT ?dateTimeValue 
                         (afn:localname(?dateTimePrecision) AS ?precision) 
-                        ?dateTime  WHERE {
-            ?subject ?property ?dateTimeValue 
-            OPTIONAL { ?dateTimeValue core:dateTime ?dateTime }
-            OPTIONAL { ?dateTimeValue core:dateTimePrecision ?dateTimePrecision }
+                        ?dateTime
+        WHERE {
+            ?subject ?property ?dateTimeValue .
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?dateTimeValue .</precise-subquery>
+                ?dateTimeValue core:dateTime ?dateTime .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?dateTimeValue .</precise-subquery>
+                ?dateTimeValue core:dateTimePrecision ?dateTimePrecision .
+            }
             <critical-data-required>
             FILTER ( bound(?dateTime) )
             </critical-data-required>
         }  
     </query-select>
 
-    <query-construct>
-        CONSTRUCT {
-            ?subject ?property ?dateTimeValue .
-            ?dateTimeValue ?p ?o .
-        } WHERE {
-            {
-                ?subject ?property ?dateTimeValue  
-            } 
-            UNION {
-                ?subject ?property ?dateTimeValue .
-                ?dateTimeValue ?p ?o .
-            }
-        } 
-    </query-construct>
-    
     <template>propStatement-dateTimeValue.ftl</template>
 </list-view-config>
