@@ -40,14 +40,6 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 	<#assign roleActivityVClass = "" />
 </#if>
 
-<#if !roleCode?has_content>
-	<#assign roleCode = "" />
-</#if>
-
-<#if !nameLabel?has_content>
-	<#assign nameLabel = "" />
-</#if>
-
 <#--Setting values for titleVerb, submitButonText, and disabled Value-->
 <#if editConfiguration.objectUri?has_content>
 	<#assign titleVerb = "${i18n().edit_capitalized}"/>

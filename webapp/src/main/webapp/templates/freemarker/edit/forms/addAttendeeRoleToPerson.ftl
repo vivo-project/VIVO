@@ -30,8 +30,5 @@ roleExamples-->
 
 <#assign createTitle = "${i18n().create_entry_for_attendee_role}"/>
 
-<#assign nameLabel = "${i18n().institution_name}"/>
-
-<#assign  roleInLabel = "${i18n().role_in_institution}"/>
-<#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">
+
