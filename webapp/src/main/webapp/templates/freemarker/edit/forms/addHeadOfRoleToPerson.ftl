@@ -24,14 +24,9 @@ roleExamples-->
 
 <#assign acTypes = "{activity: 'http://xmlns.com/foaf/0.1/Organization'}" />
 
-<#assign roleCode = "Head" />
-
 <#assign editTitle = "${i18n().edit_entry_for_head_role}"/>
 
 <#assign createTitle = "${i18n().create_entry_for_head_role}"/>
 
-<#assign nameLabel = "${i18n().institution_name}"/>
-
-<#assign  roleInLabel = "${i18n().role_in_institution}"/>
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">

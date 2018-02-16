@@ -24,14 +24,10 @@ roleExamples-->
 
 <#assign acTypes = "{activity: 'http://purl.org/ontology/bibo/Collection'}" />
 
-<#assign roleCode="Editor">
 
 <#assign editTitle = "${i18n().edit_entry_for_editor_role}"/>
 
 <#assign createTitle = "${i18n().create_entry_for_editor_role}"/>
 
-<#assign nameLabel = "${i18n().institution_name}"/>
-
-<#assign  roleInLabel = "${i18n().role_in_institution}"/>
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">
