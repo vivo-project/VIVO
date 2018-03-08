@@ -189,18 +189,18 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
             <#if numDateFields == 1 >
                <#--Generated html is a map with key name mapping to html string-->
                <#if htmlForElements?keys?seq_contains("startField")>
-                	<label class="dateTimeLabel" >${i18n().start_year}</label>
+                	<label class="dateTimeLabel" for="startField" >${i18n().start_year}</label>
                		${htmlForElements["startField"]} ${yearHint}
                </#if>
             <#else>
                 <h4 class="label">${i18n().years_participating} </h4>
                 <#if htmlForElements?keys?seq_contains("startField")>
-                	    <label class="dateTime" >${i18n().start_capitalized}</label>
+                	    <label class="dateTime" for="startField">${i18n().start_capitalized}</label>
                		    ${htmlForElements["startField"]} ${yearHint}
                </#if>
                <p></p>
                <#if htmlForElements?keys?seq_contains("endField")>
-               		    <label class="dateTime" >${i18n().end_capitalized}</label>
+               		    <label class="dateTime" for="startField">${i18n().end_capitalized}</label>
                		    ${htmlForElements["endField"]} ${yearHint}
                </#if>
             </#if>
