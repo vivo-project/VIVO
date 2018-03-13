@@ -17,12 +17,17 @@ showRoleLAbelField
 roleExamples-->
 
 
-<#--Variable assignments for Add Clinical Role To Person-->
+<#--Variable assignments for Add Member Role To Person-->
 <#assign roleDescriptor = "${i18n().membership}" />
 <#assign typeSelectorLabel = "${i18n().membership_in}" />
 <#assign roleActivityVClass = "${i18n().organizations}" />
 <#assign genericLabel = "${i18n().organization_capitalized}" />
 <#assign acMultipleTypes = "'true'" />
 <#assign acTypes = "{activity: 'http://xmlns.com/foaf/0.1/Organization,http://xmlns.com/foaf/0.1/Group,http://purl.obolibrary.org/obo/OBI_0000835'}" />
+
+<#assign editTitle = "${i18n().edit_entry_for_member_role}"/>
+
+<#assign createTitle = "${i18n().create_entry_for_member_role}"/>
+
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">

@@ -43,6 +43,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <#--Setting values for titleVerb, submitButonText, and disabled Value-->
 <#if editConfiguration.objectUri?has_content>
 	<#assign titleVerb = "${i18n().edit_capitalized}"/>
+	<#assign title= editTitle/>
 	<#assign submitButtonText>${i18n().save_changes}</#assign>
 	<#if editMode = "repair">
 		<#assign disabledVal = ""/>
@@ -50,6 +51,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 		<#assign disabledVal = "disabled"/>
 	</#if>
 <#else>
+	<#assign title= createTitle/>
 	<#assign titleVerb = "${i18n().create_capitalized}"/>
 	<#assign submitButtonText>${i18n().create_entry}</#assign>
 	<#assign disabledVal = ""/>
@@ -77,8 +79,8 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
 <#assign yearHint     = "<span class='hint'>(${i18n().year_hint_format})</span>" />
 
-<h2>${titleVerb}&nbsp;${roleDescriptor} ${i18n().entry_for} ${editConfiguration.subjectName}</h2>
 
+<h2>${editConfiguration.subjectName}${title} </h2>
 <#--Display error messages if any-->
 <#if activityLabelDisplayValue?has_content >
     <#assign activityLabelValue = activityLabelDisplayValue />

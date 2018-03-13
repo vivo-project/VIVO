@@ -110,7 +110,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     </p>
 
     <p>
-        <label for="presentation">${i18n().presentation_capitalized} ${i18n().name_capitalized} ${requiredHint}</label>
+        <label for="presentation">${i18n().presentation_name_capitalized} ${requiredHint}</label>
             <input class="acSelector" size="50"  type="text" id="presentation" acGroupName="presentation" name="presentationLabel" value="${presentationLabelValue}">
             <input class="display" type="hidden" id="presentationDisplay" acGroupName="presentation" name="presentationLabelDisplay" value="${presentationLabelDisplayValue}">
     </p>
@@ -125,7 +125,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <input class="acUriReceiver" type="hidden" id="presentationUri" name="existingPresentation" value="${existingPresentationValue}" ${flagClearLabelForExisting}="true" />
     </div>
      
-    <p><label for="roleLabel">${i18n().role_in} ${i18n().presentation_capitalized} <span class="hint">(${i18n().presentation_hint})</span></label>
+    <p><label for="roleLabel">${i18n().role_in_presentation_capitalized} <span class="hint">(${i18n().presentation_hint})</span></label>
         <input  size="50"  type="text" id="roleLabel" name="roleLabel" value="${roleLabelValue}" />
     </p>
   <p>
