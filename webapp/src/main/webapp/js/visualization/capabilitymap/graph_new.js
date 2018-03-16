@@ -50,6 +50,15 @@ var schemes = {
 };
 var scheme = schemes["white"];
 
+
+var i18nStrings = {
+		
+		onLoad: function() {
+			 $.extend(this, i18nStringsMap);
+		}
+		
+}
+
 /**
  * The Capability prototype represents a search term. It does not directly store the results of the
  * search term, rather,the top-level unit is a group of People (see the Graph prototype).
@@ -395,7 +404,7 @@ DetailsPanel.prototype.showDetails = function(mode, id) {
     if (mode != "group") {
         $(this.panel)
             .empty()
-            .append(title = $("<h2>Term: " + decodeURIComponent(id) + "</h2>")
+            .append(title = $("<h2>"+ i18nStrings.capability_map_term + decodeURIComponent(id) + "</h2>")
                 .bind("click", function() {
                     highlight(id);
                     detailsPane.showDetails(mode, id);
@@ -403,7 +412,7 @@ DetailsPanel.prototype.showDetails = function(mode, id) {
                 .css("cursor", "pointer")
                 .prepend($("<span/>").addClass("orange-square"))
             )
-            .append($("<button>Remove capability</button>")
+            .append($("<button>"+i18nStrings.capability_map_remove_capability+"</button>")
                 .bind("click", function() {
                     g.removeCapability(id);
                     that.clearDetails();
@@ -411,7 +420,7 @@ DetailsPanel.prototype.showDetails = function(mode, id) {
                 })
             )
             .append($("<span> </span>"))
-            .append($("<button>Expand</button>")
+            .append($("<button>"+i18nStrings.capability_map_expand+"</button>")
                 .bind("click", function() {
                     expandLastQuery = 1;
                     addKwd(decodeURIComponent(id));
@@ -454,7 +463,7 @@ DetailsPanel.prototype.groupInfo = function(i, group, mode, id) {
     });
     return $("<div/>")
         .append(
-            $("<h2>" + "Group: " + group.capabilities.map(function(c) {
+            $("<h2>" + i18nStrings.capability_map_group + group.capabilities.map(function(c) {
                 return decodeURIComponent(c.term);
             }).join(", ") + "</h2>")
                 .bind("click", function() {
@@ -464,7 +473,7 @@ DetailsPanel.prototype.groupInfo = function(i, group, mode, id) {
                 .css("cursor", "pointer")
                 .prepend($("<span/>").addClass("blue-circle"))
         )
-        .append($("<button>Remove group</button>")
+        .append($("<button>"+i18nStrings.capability_map_remove_group+"</button>")
             .bind("click", function() {
                 g.removeGroup(group);
                 that.clearDetails();
@@ -615,12 +624,12 @@ var ipretResults = function(results) {
 var disableSubButton = function() {
     subButton.disabled = true;
     $("#sExpand").attr("disabled", true);
-    $("#resetButton").val("Stop");
+    $("#resetButton").val(i18nStrings.capability_map_reset);
 }
 var enableSubButton = function() {
     subButton.disabled = false;
     $("#sExpand").attr("disabled", false);
-    $("#resetButton").val("Reset");
+    $("#resetButton").val(i18nStrings.capability_map_reset);
 }
 var getLinkColor = function() {
     var linkColor = $("#linkColor").val();
@@ -832,30 +841,30 @@ var render = function() {
     });
     
     // refresh UI
-    $("#log").empty().append($("<button>pause</button>")
+    $("#log").empty().append($("<button>"+i18nStrings.capability_map_pause+"</button>")
         .bind("click", function() {
-            if ($(this).html() != "resume") {
-                $(this).html("resume");
+            if ($(this).html() != i18nStrings.capability_map_resume) {
+                $(this).html(i18nStrings.capability_map_resume);
                 force.stop();
                 force2.stop();
             } else {
-                $(this).html("pause");
+                $(this).html(i18nStrings.capability_map_pause);
                 force.resume();
                 force2.resume();
             }
         })
-    ).append(" ").append($("<button>hide group labels</button>")
+    ).append(" ").append($("<button>"+i18nStrings.capability_map_hide_group_labels+"</button>")
         .bind("click", function() {
-            if ($(this).html() != "show group labels") {
-                $(this).html("show group labels");
+            if ($(this).html() != i18nStrings.capability_map_show_group_labels) {
+                $(this).html(i18nStrings.capability_map_show_group_labels);
                 $(".label-group").css("visibility", "hidden");
             } else {
-                $(this).html("hide group labels");
+                $(this).html(i18nStrings.capability_map_hide_group_labels);
                 $(".label-group").css("visibility", "visible");
             }
         })
     );
-    $("#log_printout").empty().append($("<button>Delete selected</button>").bind("click", function() {
+    $("#log_printout").empty().append($("<button>"+i18nStrings.capability_map_delete_selected+"</button>").bind("click", function() {
         $("input[type=checkbox]:checked").each(function() {
             g.removeCapability($(this).attr("name"));
             $(this).parent().remove();
@@ -1066,7 +1075,7 @@ $(document).ready(function() {
                         }
                     });
                     $(this).unbind("click");
-                    $(this).parent().html("Cutoff:");
+                    $(this).parent().html($i18nStringsMap.capability_map_cutoff);
                     progressBar.reset(queryQueue.length, 1);
                     addKwd(false);
                     return false;
@@ -1074,7 +1083,7 @@ $(document).ready(function() {
             );
             setTimeout(function() {
                 $("#cutofflabel img").unbind("click");
-                $("#cutofflabel").html("Cutoff:");
+                $("#cutofflabel").html($i18nStringsMap.capability_map_cutoff);
             }, 5000);
         }
         $(this).data("prev", $(this).val());
@@ -1125,4 +1134,7 @@ var transformto = function(a, b) { // a = b
     }
     
 }
-            
+ 
+$(document).ready(function() {   
+	i18nStrings.onLoad();
+});
