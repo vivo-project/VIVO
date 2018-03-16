@@ -1,11 +1,9 @@
+
 ${scripts.add(
     '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
     '<script type="text/javascript" src="${urls.base}/js/visualization/capabilitymap/d3v3.min.js"></script>',
     '<script type="text/javascript" src="${urls.base}/js/visualization/capabilitymap/jquery.color.js"></script>',
-    '<script type="text/javascript" src="${urls.base}/js/visualization/capabilitymap/jsr_class.js"></script>',
-    '<script type="text/javascript" src="${urls.base}/js/visualization/capabilitymap/graph_new.js"></script>'
-    '<script type="text/JavaScript" src="${urls.base}/js/jquery_plugins/jquery.i18n.properties.min.js"></script>',
-    '<script type="text/JavaScript" src="${urls.base}/js/jquery_plugins/jquery.i18n.properties.js"></script>'
+    '<script type="text/javascript" src="${urls.base}/js/visualization/capabilitymap/jsr_class.js"></script>'
 )}
 
 ${stylesheets.add(
@@ -33,8 +31,22 @@ ${stylesheets.add(
         });
     });
     
-    
+
+var i18nStringsMap = {
+    capability_map_term: '${i18n().capability_map_term}',
+    capability_map_remove_capability: '${i18n().capability_map_remove_capability}',
+    capability_map_expand: '${i18n().capability_map_expand}',
+    capability_map_group: '${i18n().capability_map_group}',
+    capability_map_remove_group: '${i18n().capability_map_remove_group}',
+    capability_map_reset: '${i18n().capability_map_reset}',
+    capability_map_pause: '${i18n().capability_map_pause}',
+    capability_map_hide_group_labels: '${i18n().capability_map_hide_group_labels}',
+    capability_map_show_group_labels: '${i18n().capability_map_show_group_labels}',
+    capability_map_delete_selected: '${i18n().capability_map_delete_selected}',
+    capability_map_cutoff: '${i18n().capability_map_cutoff}'
+};
 </script>
+
 <div class="main" id="main-content" role="main">
     <div class="col-8">
         <h2>${i18n().capability_map_title}</h2>
@@ -94,8 +106,8 @@ ${stylesheets.add(
             <div class="tabs">
                 <ul  class="titles">
                     <li><a href="#demo">${i18n().capability_map_search_terms_tab_title}</a></li>
-                    <li><a href="#logg">${i18n().capability_map_info}</a></li>
-                    <!-- li><a href="#extractData">${i18n().capability_map_data}</a></li -->
+                    <li><a href="#logg">${i18n().capability_map_info_tab_title}</a></li>
+                    <!-- li><a href="#extractData">${i18n().capability_map_data_tab_title}</a></li -->
                 </ul>
 
                 <div class="result_body">
@@ -136,4 +148,6 @@ ${stylesheets.add(
         </div>
     </div>
 </div>
-
+${scripts.add(
+    '<script type="text/javascript" src="${urls.base}/js/visualization/capabilitymap/graph_new.js"></script>'
+)}
