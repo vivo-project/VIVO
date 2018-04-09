@@ -501,10 +501,10 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 		if (preferCaches && VisualizationCaches.personToPublication.isCached()) {
 			cacheTime = VisualizationCaches.personToPublication.cachedWhen();
 
-			Map<String, String>      personLabelsMap         = VisualizationCaches.personLabels.get(rdfService);
-			Map<String, Set<String>> personToPublicationMap  = VisualizationCaches.personToPublication.get(rdfService).personToPublication;
-			Map<String, Set<String>> publicationToPersonMap  = VisualizationCaches.personToPublication.get(rdfService).publicationToPerson;
-			Map<String, String>      publicationToYearMap    = VisualizationCaches.publicationToYear.get(rdfService);
+			Map<String, String>      personLabelsMap         = VisualizationCaches.personLabels.get(rdfService, null);
+			Map<String, Set<String>> personToPublicationMap  = VisualizationCaches.personToPublication.get(rdfService, null).personToPublication;
+			Map<String, Set<String>> publicationToPersonMap  = VisualizationCaches.personToPublication.get(rdfService, null).publicationToPerson;
+			Map<String, String>      publicationToYearMap    = VisualizationCaches.publicationToYear.get(rdfService, null);
 
 			String authorURI = this.egoURI;
 			String authorName = personLabelsMap.get(authorURI);

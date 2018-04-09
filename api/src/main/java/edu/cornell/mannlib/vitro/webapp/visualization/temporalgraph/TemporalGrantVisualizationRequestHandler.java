@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -145,8 +146,10 @@ public class TemporalGrantVisualizationRequestHandler implements
 
 		RDFService rdfService = vitroRequest.getRDFService();
 
-		Map<String, String> orgLabelMap = VisualizationCaches.organizationLabels.get(rdfService);
-		Map<String, String> personLabelMap = VisualizationCaches.personLabels.get(rdfService);
+		Locale locale= vitroRequest.getLocale();
+		
+		Map<String, String> orgLabelMap = VisualizationCaches.organizationLabels.get(rdfService, locale);
+		Map<String, String> personLabelMap = VisualizationCaches.personLabels.get(rdfService, locale);
 
 		if (orgLabelMap.get(subjectEntityURI) == null) {
 			if (VisConstants.DataVisMode.JSON.equals(visMode)) {
@@ -155,13 +158,13 @@ public class TemporalGrantVisualizationRequestHandler implements
 				return prepareDataErrorResponse();
 			}
 		}
-
-		Map<String, Set<String>> subOrgMap               = VisualizationCaches.organizationSubOrgs.get(rdfService);
-		OrganizationPeopleMap organisationToPeopleMap = VisualizationCaches.organisationToPeopleMap.get(rdfService);
-		Map<String, String> orgMostSpecificLabelMap      = VisualizationCaches.organizationToMostSpecificLabel.get(rdfService);
-		Map<String, String> personMostSpecificLabelMap   = VisualizationCaches.personToMostSpecificLabel.get(rdfService);
-		Map<String, Set<String>> personToGrantMap        = VisualizationCaches.personToGrant.get(rdfService);
-		Map<String, String>      grantToYearMap          = VisualizationCaches.grantToYear.get(rdfService);
+		
+		Map<String, Set<String>> subOrgMap               = VisualizationCaches.organizationSubOrgs.get(rdfService, locale);
+		OrganizationPeopleMap organisationToPeopleMap = VisualizationCaches.organisationToPeopleMap.get(rdfService, locale);
+		Map<String, String> orgMostSpecificLabelMap      = VisualizationCaches.organizationToMostSpecificLabel.get(rdfService, locale);
+		Map<String, String> personMostSpecificLabelMap   = VisualizationCaches.personToMostSpecificLabel.get(rdfService, locale);
+		Map<String, Set<String>> personToGrantMap        = VisualizationCaches.personToGrant.get(rdfService, locale);
+		Map<String, String>      grantToYearMap          = VisualizationCaches.grantToYear.get(rdfService, locale);
 
 		Set<String> orgGrants       = new HashSet<String>();
 		Set<String> orgGrantsPeople = new HashSet<String>();

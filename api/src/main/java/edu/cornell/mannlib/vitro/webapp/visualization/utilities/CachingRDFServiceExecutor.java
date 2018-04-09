@@ -8,6 +8,7 @@ import edu.cornell.mannlib.vitro.webapp.utils.threads.VitroBackgroundThread;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
@@ -38,6 +39,7 @@ public class CachingRDFServiceExecutor<T> {
     private FutureTask<T> backgroundTask = null;
     private Thread backgroundCompletion = null;
     private long backgroundTaskStartTime = -1;
+	private static Locale locale;
 
     /**
      * RDF Service to be used by background threads
@@ -60,8 +62,8 @@ public class CachingRDFServiceExecutor<T> {
      *
      * @param rdfService an RDF service to use, in foreground mode, if the background service is missing
      */
-    public synchronized T get(RDFService rdfService) {
-        return get(rdfService, false);
+    public synchronized T get(RDFService rdfService, Locale locale) {
+        return get(rdfService, false,  locale);
     }
 
     /**
@@ -70,8 +72,8 @@ public class CachingRDFServiceExecutor<T> {
      *
      * @param rdfService an RDF service to use, in foreground mode, if the background service is missing
      */
-    public synchronized T getNoWait(RDFService rdfService) {
-        return get(rdfService, true);
+    public synchronized T getNoWait(RDFService rdfService, Locale locale) {
+        return get(rdfService, true,  locale);
     }
 
     /**
@@ -79,15 +81,20 @@ public class CachingRDFServiceExecutor<T> {
      * Will wait for completion if the cache is not already populated, otherwise the refresh will happen in the background.
      *
      * @param rdfService an RDF service to use, in foreground mode, if the background service is missing
+     * @param locale 
      */
-    public synchronized T get(RDFService rdfService, boolean allowWaits) {
+    public synchronized T get(RDFService rdfService, boolean allowWaits, Locale loc) {
+    	
         // First, check if there are results from the previous background task, and update the cache
+    	
         if (backgroundTask != null && backgroundTask.isDone()) {
             completeBackgroundTask();
         }
 
-        // If we have cached results
-        if (cachedResults != null) {
+        // If we have cached results 
+        //then we need to check if they are in the right language
+        
+        if (cachedResults != null &&  locale.equals(loc)) {
             // If the background service exists, and the cache is considered invalid
             if (backgroundRDFService != null && resultBuilder.invalidateCache(System.currentTimeMillis() - lastCacheTime)) {
                 // In most cases, only wait for half a second
@@ -107,6 +114,7 @@ public class CachingRDFServiceExecutor<T> {
                 }
             }
         } else {
+        	locale =loc;
             // No cached results, so fetch the results using any available RDF service
             if (rdfService != null) {
                 startBackgroundTask(rdfService);
@@ -120,6 +128,7 @@ public class CachingRDFServiceExecutor<T> {
             completeBackgroundTask();
         }
 
+      
         return cachedResults;
     }
 
@@ -345,7 +354,7 @@ public class CachingRDFServiceExecutor<T> {
                 startedAt = System.currentTimeMillis();
 
                 // Call the user implementation, passing the RDF service
-                T val = callWithService(rdfService);
+                T val = callWithService(rdfService, locale);
 
                 // Record how long it to to execute
                 executionTime = System.currentTimeMillis() - startedAt;
@@ -368,7 +377,7 @@ public class CachingRDFServiceExecutor<T> {
          * @param rdfService An RDFService
          * @throws Exception Any exception
          */
-        protected abstract T callWithService(RDFService rdfService) throws Exception;
+        protected abstract T callWithService(RDFService rdfService, Locale locale) throws Exception;
 
         /**
          * Method to determine if the cache should be invalidated for the current results
@@ -425,7 +434,7 @@ public class CachingRDFServiceExecutor<T> {
          * Called by a background thread to determine if it is allowed to start
          * @param expectedExecutionTime time that the thread expects to take (usually the last execution time)
          */
-        private void requestStart(long expectedExecutionTime) {
+        void requestStart(long expectedExecutionTime) {
             Thread executingThread = Thread.currentThread();
 
             // Ask if the task needs to be queued
@@ -468,7 +477,7 @@ public class CachingRDFServiceExecutor<T> {
         /**
          * Complete a thread
          */
-        private synchronized void complete() {
+        synchronized void complete() {
             // Check that we are tracking this thread
             if (executingThreads.contains(Thread.currentThread())) {
 
