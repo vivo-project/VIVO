@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -81,9 +82,9 @@ public class TemporalPublicationVisualizationRequestHandler implements
             throws MalformedQueryParametersException, JsonProcessingException {
 
 		RDFService rdfService = vitroRequest.getRDFService();
-
-		Map<String, String> orgLabelMap = VisualizationCaches.organizationLabels.get(rdfService);
-		Map<String, String> personLabelMap = VisualizationCaches.personLabels.get(rdfService);
+		Locale locale= vitroRequest.getLocale();
+		Map<String, String> orgLabelMap = VisualizationCaches.organizationLabels.get(rdfService, locale);
+		Map<String, String> personLabelMap = VisualizationCaches.personLabels.get(rdfService, locale);
 
 		if (orgLabelMap.get(subjectEntityURI) == null) {
 			if (VisConstants.DataVisMode.JSON.equals(visMode)) {
@@ -93,12 +94,12 @@ public class TemporalPublicationVisualizationRequestHandler implements
 			}
 		}
 
-		Map<String, Set<String>> subOrgMap               = VisualizationCaches.organizationSubOrgs.get(rdfService);
-		Map<String, String> orgMostSpecificLabelMap      = VisualizationCaches.organizationToMostSpecificLabel.get(rdfService);
-		Map<String, String> personMostSpecificLabelMap   = VisualizationCaches.personToMostSpecificLabel.get(rdfService);
-		OrganizationPeopleMap organisationToPeopleMap = VisualizationCaches.organisationToPeopleMap.get(rdfService);
-		Map<String, Set<String>> personToPublicationMap  = VisualizationCaches.personToPublication.get(rdfService).personToPublication;
-		Map<String, String>      publicationToYearMap    = VisualizationCaches.publicationToYear.get(rdfService);
+		Map<String, Set<String>> subOrgMap               = VisualizationCaches.organizationSubOrgs.get(rdfService, locale);
+		Map<String, String> orgMostSpecificLabelMap      = VisualizationCaches.organizationToMostSpecificLabel.get(rdfService, locale);
+		Map<String, String> personMostSpecificLabelMap   = VisualizationCaches.personToMostSpecificLabel.get(rdfService, locale);
+		OrganizationPeopleMap organisationToPeopleMap = VisualizationCaches.organisationToPeopleMap.get(rdfService, locale);
+		Map<String, Set<String>> personToPublicationMap  = VisualizationCaches.personToPublication.get(rdfService, locale).personToPublication;
+		Map<String, String>      publicationToYearMap    = VisualizationCaches.publicationToYear.get(rdfService, locale);
 
 		Set<String> orgPublications       = new HashSet<String>();
 		Set<String> orgPublicationsPeople = new HashSet<String>();
