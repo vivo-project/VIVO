@@ -1,14 +1,25 @@
 @prefix bibo:    <http://purl.org/ontology/bibo/> .
-@prefix event:   <http://purl.org/NET/c4dm/event.owl#> .
+@prefix cito:    <http://purl.org/spar/cito/> .
+@prefix c4o:     <http://purl.org/spar/c4o/> .
+@prefix dcterms:   <http://purl.org/dc/terms/> .
+@prefix event:   <http://purl.org/NET/c4dm/event.owl> .
+@prefix fabio:   <http://purl.org/spar/fabio/> .
 @prefix foaf:    <http://xmlns.com/foaf/0.1/> .
-@prefix geo:     <http://aims.fao.org/aos/geopolitical.owl#> .
+@prefix geo:     <http://aims.fao.org/aos/geopolitical.owl> .
 @prefix obo:     <http://purl.obolibrary.org/obo/> .
 @prefix ocrer:   <http://purl.org/net/OCRe/research.owl> .
+@prefix ocresd:   <http://purl.org/net/OCRe/study_design.owl> .
+@prefix ocresp:   <http://purl.org/net/OCRe/study_protocol.owl> .
+@prefix ocrest:   <http://purl.org/net/OCRe/statistics.owl> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
-@prefix vcard:   <http://www.w3.org/2006/vcard/ns#> .
+@prefix ro:      <http://purl.obolibrary.org/obo/ro.owl> .
+@prefix scires:  <http://vivoweb.org/ontology/scientific-research> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core> .
+@prefix swo:     <http://www.ebi.ac.uk/efo/swo/> .
+@prefix vann:    <http://purl.org/vocab/vann/> .
+@prefix vcard:   <http://www.w3.org/2006/vcard/ns> .
 @prefix vitro:   <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
 @prefix vitro-public:  <http://vitro.mannlib.cornell.edu/ns/vitro/public#> .
 @prefix vivo:    <http://vivoweb.org/ontology/core#> .
@@ -16,71 +27,83 @@
 
 bibo:
       rdfs:label "Bibliographic Ontology"@en-US ;
-      vitro:ontologyPrefixAnnot "bibo"^^xsd:string .
+      vitro:ontologyPrefixAnnot "bibo" .
 
-<http://www.w3.org/2004/02/skos/core>
+skos:
       rdfs:label "SKOS (Simple Knowledge Organization System)"@en-US ;
-      vitro:ontologyPrefixAnnot
-              "skos"^^xsd:string .
-                  
-<http://vivoweb.org/ontology/applicationConfiguration>
-      rdfs:label "VIVO Application Configuration Ontology"@en-US ;
-      vitro:ontologyPrefixAnnot "vac"^^xsd:string .
+      vitro:ontologyPrefixAnnot "skos" .
       
-<http://vivoweb.org/ontology/core>
+vivo:
       rdfs:label "VIVO Core Ontology"@en-US ;
-      vitro:ontologyPrefixAnnot "vivo"^^xsd:string .
+      vitro:ontologyPrefixAnnot "vivo" .
 
 ocrer:
       rdfs:label "OCRe Research"@en-US ;
-      vitro:ontologyPrefixAnnot "ocrer"^^xsd:string .
+      vitro:ontologyPrefixAnnot "ocrer" .
       
-<http://purl.org/net/OCRe/study_design.owl>
+ocresd:
       rdfs:label "OCRe Study Design"@en-US ;
-      vitro:ontologyPrefixAnnot "ocresd"^^xsd:string .
+      vitro:ontologyPrefixAnnot "ocresd" .
       
-<http://aims.fao.org/aos/geopolitical.owl>
+ocresp:
+      rdfs:label "OCRe Study Protocol"@en-US ;
+      vitro:ontologyPrefixAnnot "ocresp" .
+      
+ocrest:
+      rdfs:label "OCRe Statistics"@en-US ;
+      vitro:ontologyPrefixAnnot "ocresst" .
+      
+geo:
       rdfs:label "Geopolitical Ontology"@en-US ;
-      vitro:ontologyPrefixAnnot
-              "geo"^^xsd:string .
+      vitro:ontologyPrefixAnnot "geo" .
       
-<http://purl.org/NET/c4dm/event.owl>
+event:
       rdfs:label "Event Ontology"@en-US ;
-      vitro:ontologyPrefixAnnot
-              "event"^^xsd:string .
+      vitro:ontologyPrefixAnnot "event" .
 
-obo:  rdfs:label "OBO Foundry"@en-US ;
-      vitro:ontologyPrefixAnnot
-              "obo"^^xsd:string .
+obo:  
+      rdfs:label "OBO Foundry"@en-US ;
+      vitro:ontologyPrefixAnnot "obo" .
               
-<http://www.w3.org/2006/vcard/ns>
+vcard:
       rdfs:label "VCard"@en-US ;
-      vitro:ontologyPrefixAnnot
-              "vcard"^^xsd:string .
+      vitro:ontologyPrefixAnnot "vcard" .
               
 foaf:
       rdfs:label "FOAF (Friend of a Friend)"@en-US ;
-      vitro:ontologyPrefixAnnot
-              "foaf"^^xsd:string .
+      vitro:ontologyPrefixAnnot "foaf" .
 
-<http://vivoweb.org/ontology/scientific-research>
-       rdfs:label "VIVO Scientific Research Ontology"@en-US ;
-      vitro:ontologyPrefixAnnot
-              "scires"^^xsd:string .
+scires:
+      rdfs:label "VIVO Scientific Research Ontology"@en-US ;
+      vitro:ontologyPrefixAnnot "scires" .
 
-<http://purl.org/spar/fabio/>
-       rdfs:label "FaBiO (FRBR-Aligned Bibliographic Ontology)"@en-US ;
-      vitro:ontologyPrefixAnnot
-              "fabio"^^xsd:string .
+fabio:
+      rdfs:label "FaBiO (FRBR-Aligned Bibliographic Ontology)"@en-US ;
+      vitro:ontologyPrefixAnnot "fabio" .
 
-<http://purl.org/spar/c4o/>
-    vitro:ontologyPrefixAnnot "c4o"^^xsd:string ;
-    rdfs:label "Citation Counting and Context Characterization Ontology"@en-US .
+c4o:
+      rdfs:label "Citation Counting and Context Characterization Ontology"@en-US ;
+      vitro:ontologyPrefixAnnot "c4o" .
 
-<http://purl.org/spar/cito/>
-    vitro:ontologyPrefixAnnot "cito"^^xsd:string ;
-    rdfs:label "CiTO (Citation Typing Ontology)"@en-US .
-
+cito:
+      rdfs:label "CiTO (Citation Typing Ontology)"@en-US ;
+      vitro:ontologyPrefixAnnot "cito" .
+    
+dcterms:
+      rdfs:label "Dublin Core Terms"@en-US ;
+      vitro:ontologyPrefixAnnot "dcterms" .  
+    
+vann:
+      rdfs:label "Vocabulary for Annotating Vocabulary Descriptions"@en-US ;
+      vitro:ontologyPrefixAnnot "vann" .
+      
+ro:
+      rdfs:label "Relations Ontology"@en-US ;
+      vitro:ontologyPrefixAnnot "ro" .    
+      
+swo:
+      rdfs:label "Software Ontology"@en-US ;
+      vitro:ontologyPrefixAnnot "swo" . 
 
 vivo:pmcid
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
