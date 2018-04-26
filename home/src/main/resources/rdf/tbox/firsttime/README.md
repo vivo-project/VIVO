@@ -3,4 +3,4 @@ These are loaded by the VIVO application when it starts for the first time, afte
 the initial installation or after an upgrade installation that involves changes 
 to these files.
 
-See VIVO/rdf/tbox/filegraph/README.md for more information about "TBox" files.
+See ../filegraph/README.md for more information about "TBox" files.
