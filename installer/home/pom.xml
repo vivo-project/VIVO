@@ -75,7 +75,6 @@
 									<goal>copy-resources</goal>
 								</goals>
 								<configuration>
-									<encoding>UTF-8</encoding>
 									<outputDirectory>${vivo-dir}</outputDirectory>
 									<resources>
 										<resource>
