@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -96,7 +97,7 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 
 	private Set<String> getPublicationsForPerson(RDFService rdfService, String personUri) {
 		if (preferCachesForPersonMap() && VisualizationCaches.personToPublication.isCached()) {
-			Map<String, Set<String>> personToPublicationMap = VisualizationCaches.personToPublication.get(rdfService).personToPublication;
+			Map<String, Set<String>> personToPublicationMap = VisualizationCaches.personToPublication.get(rdfService,null).personToPublication;
 			return personToPublicationMap.get(personUri);
 		} else {
 			final Set<String> queryResults = new HashSet<String>();
@@ -127,7 +128,7 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 
 	private Map<String, String> getJournalsForPerson(RDFService rdfService, String personUri) {
 		if (preferCachesForPersonMap() && VisualizationCaches.publicationToJournal.isCached()) {
-			return VisualizationCaches.publicationToJournal.get(rdfService);
+			return VisualizationCaches.publicationToJournal.get(rdfService,null);
 		} else {
 			final Map<String, String> queryResults = new HashMap<String, String>();
 			String query = QueryConstants.getSparqlPrefixQuery() +
@@ -248,7 +249,9 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 
 		RDFService rdfService = vitroRequest.getRDFService();
 
-		Map<String, String> orgLabelMap = VisualizationCaches.organizationLabels.get(rdfService);
+		Locale locale= vitroRequest.getLocale();
+		
+		Map<String, String> orgLabelMap = VisualizationCaches.organizationLabels.get(rdfService, locale);
 
 		if (orgLabelMap.get(subjectEntityURI) == null) {
 			if (VisConstants.DataVisMode.JSON.equals(dataOuputFormat)) {
@@ -258,10 +261,10 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
 			}
 		}
 
-		Map<String, Set<String>> subOrgMap = VisualizationCaches.organizationSubOrgs.get(rdfService);
-		OrganizationPeopleMap organisationToPeopleMap = VisualizationCaches.organisationToPeopleMap.get(rdfService);
-		Map<String, Set<String>> personToPublicationMap = VisualizationCaches.personToPublication.get(rdfService).personToPublication;
-		Map<String, String> publicationToJournalMap = VisualizationCaches.publicationToJournal.get(rdfService);
+		Map<String, Set<String>> subOrgMap = VisualizationCaches.organizationSubOrgs.get(rdfService, locale);
+		OrganizationPeopleMap organisationToPeopleMap = VisualizationCaches.organisationToPeopleMap.get(rdfService, locale);
+		Map<String, Set<String>> personToPublicationMap = VisualizationCaches.personToPublication.get(rdfService, locale).personToPublication;
+		Map<String, String> publicationToJournalMap = VisualizationCaches.publicationToJournal.get(rdfService, locale);
 
 		Set<String> orgPublications       = new HashSet<String>();
 		Set<String> orgPublicationsPeople = new HashSet<String>();

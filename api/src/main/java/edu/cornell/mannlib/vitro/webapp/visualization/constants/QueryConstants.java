@@ -37,10 +37,9 @@ public class QueryConstants {
 			put("stars", "http://vitro.mannlib.cornell.edu/ns/cornell/stars/classes#");
 			put("temp", "http://vitro.mannlib.cornell.edu/ns/temp#");
 			put("wos", "http://vivo.mannlib.cornell.edu/ns/ThomsonWOS/0.1#");
-			put("core", "http://vivoweb.org/ontology/core#");
-			put("vivo", "http://vivo.library.cornell.edu/ns/0.1#");
+			put("vivo", "http://vivoweb.org/ontology/core#");
 			put("geo", "http://aims.fao.org/aos/geopolitical.owl#");
-			put("public", "http://vitro.mannlib.cornell.edu/ns/vitro/public#");
+			put("vitro-public", "http://vitro.mannlib.cornell.edu/ns/vitro/public#");
 			put("afn", "http://jena.apache.org/ARQ/function#");
 			put("vivosocnet", "http://vivo.cns.iu.edu/ns/#");
 			put("obo", "http://purl.obolibrary.org/obo/");

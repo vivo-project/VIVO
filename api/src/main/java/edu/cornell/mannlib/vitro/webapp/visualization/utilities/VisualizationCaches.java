@@ -21,6 +21,7 @@ import org.joda.time.DateTime;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -98,7 +99,7 @@ final public class VisualizationCaches {
             new CachingRDFServiceExecutor<>(
                     new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, Person>>(visualizationAffinity) {
                         @Override
-                        protected Map<String, Person> callWithService(RDFService rdfService) throws Exception {
+                        protected Map<String, Person> callWithService(RDFService rdfService, Locale locale) throws Exception {
                             final Map<String, Person> map = new HashMap<String, Person>();
 
                             String construct = QueryConstants.getSparqlPrefixQuery() +
@@ -231,13 +232,14 @@ final public class VisualizationCaches {
             new CachingRDFServiceExecutor<>(
                     new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>(visualizationAffinity) {
                         @Override
-                        protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
+                        protected Map<String, String> callWithService(RDFService rdfService, Locale locale) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?org ?orgLabel\n" +
                                     "WHERE\n" +
                                     "{\n" +
                                     "  ?org a foaf:Organization .\n" +
                                     "  ?org rdfs:label ?orgLabel .\n" +
+                                    "    FILTER(langMatches( lang(?orgLabel), '"+locale.toLanguageTag()+"' ))"+
                                     "}\n";
 
                             final Map<String, String> map = new HashMap<>();
@@ -264,7 +266,7 @@ final public class VisualizationCaches {
             new CachingRDFServiceExecutor<>(
                     new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, Set<String>>>(visualizationAffinity) {
                         @Override
-                        protected Map<String, Set<String>> callWithService(RDFService rdfService) throws Exception {
+                        protected Map<String, Set<String>> callWithService(RDFService rdfService, Locale locale) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?org ?subOrg\n" +
                                     "WHERE\n" +
@@ -304,7 +306,7 @@ final public class VisualizationCaches {
             new CachingRDFServiceExecutor<>(
                     new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>() {
                         @Override
-                        protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
+                        protected Map<String, String> callWithService(RDFService rdfService, Locale locale) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?org ?typeLabel\n" +
                                     "WHERE\n" +
@@ -312,6 +314,7 @@ final public class VisualizationCaches {
                                     "    ?org a foaf:Organization .\n" +
                                     "    ?org vitro:mostSpecificType ?type .\n" +
                                     "    ?type rdfs:label ?typeLabel .\n" +
+                                    "    FILTER(langMatches( lang(?typeLabel), '"+locale.toLanguageTag()+"' ))"+
                                     "}\n";
 
                             final Map<String, String> map = new HashMap<>();
@@ -337,15 +340,15 @@ final public class VisualizationCaches {
             new CachingRDFServiceExecutor<OrganizationPeopleMap>(
                     new CachingRDFServiceExecutor.RDFServiceCallable<OrganizationPeopleMap>(visualizationAffinity) {
                         @Override
-                        protected OrganizationPeopleMap callWithService(RDFService rdfService) throws Exception {
+                        protected OrganizationPeopleMap callWithService(RDFService rdfService, Locale locale) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?organisation ?person\n" +
                                     "WHERE\n" +
                                     "{\n" +
                                     "  ?organisation a foaf:Organization .\n" +
-                                    "  ?organisation core:relatedBy ?position .\n" +
-                                    "  ?position a core:Position .\n" +
-                                    "  ?position core:relates ?person .\n" +
+                                    "  ?organisation vivo:relatedBy ?position .\n" +
+                                    "  ?position a vivo:Position .\n" +
+                                    "  ?position vivo:relates ?person .\n" +
                                     "  ?person a foaf:Person .\n" +
                                     "}\n";
 
@@ -389,18 +392,18 @@ final public class VisualizationCaches {
             new CachingRDFServiceExecutor<>(
                     new CachingRDFServiceExecutor.RDFServiceCallable<ConceptLabelMap>() {
                         @Override
-                        protected ConceptLabelMap callWithService(RDFService rdfService) throws Exception {
+                        protected ConceptLabelMap callWithService(RDFService rdfService, Locale locale) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?concept ?label\n" +
-                                    "WHERE\n" +
-                                    "{\n" +
-                                    "    ?person a foaf:Person .\n" +
-                                    "    ?person core:hasResearchArea ?concept .\n" +
+                                    "WHERE {\n" +
+                                    "    ?person  a foaf:Person .\n" +
+                                    "    ?person  vivo:hasResearchArea ?concept .\n" +
                                     "    ?concept a skos:Concept .\n" +
                                     "    ?concept rdfs:label ?label .\n" +
+                                    "    FILTER(langMatches( lang(?label), '"+locale.toLanguageTag()+"' ))"+
                                     "}\n";
 
-//                            final Map<String, String> map = new HashMap<>();
+
                             final ConceptLabelMap map = new ConceptLabelMap();
 
                             rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
@@ -436,13 +439,13 @@ final public class VisualizationCaches {
             new CachingRDFServiceExecutor<ConceptPeopleMap>(
                     new CachingRDFServiceExecutor.RDFServiceCallable<ConceptPeopleMap>(visualizationAffinity) {
                         @Override
-                        protected ConceptPeopleMap callWithService(RDFService rdfService) throws Exception {
+                        protected ConceptPeopleMap callWithService(RDFService rdfService, Locale locale) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?person ?concept\n" +
                                     "WHERE\n" +
                                     "{\n" +
                                     "  ?person a foaf:Person .\n" +
-                                    "  ?person core:hasResearchArea ?concept .\n" +
+                                    "  ?person vivo:hasResearchArea ?concept .\n" +
                                     "  ?concept a skos:Concept .\n" +
                                     "}\n";
 
@@ -486,13 +489,14 @@ final public class VisualizationCaches {
             new CachingRDFServiceExecutor<>(
                     new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>(visualizationAffinity) {
                         @Override
-                        protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
+                        protected Map<String, String> callWithService(RDFService rdfService, Locale locale) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?person ?personLabel\n" +
                                     "WHERE\n" +
                                     "{\n" +
                                     "  ?person a foaf:Person .\n" +
                                     "  ?person rdfs:label ?personLabel .\n" +
+                                    "    FILTER(langMatches( lang(?personLabel), '"+locale.toLanguageTag()+"' ))"+
                                     "}\n";
 
                             final Map<String, String> map = new HashMap<>();
@@ -519,7 +523,7 @@ final public class VisualizationCaches {
             new CachingRDFServiceExecutor<>(
                     new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>(visualizationAffinity) {
                         @Override
-                        protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
+                        protected Map<String, String> callWithService(RDFService rdfService, Locale locale) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?person ?typeLabel\n" +
                                     "WHERE\n" +
@@ -527,6 +531,7 @@ final public class VisualizationCaches {
                                     "    ?person a foaf:Person .\n" +
                                     "    ?person vitro:mostSpecificType ?type .\n" +
                                     "    ?type rdfs:label ?typeLabel .\n" +
+                                    "    FILTER(langMatches( lang(?typeLabel), '"+locale.toLanguageTag()+"' ))"+
                                     "}\n";
 
                             final Map<String, String> map = new HashMap<>();
@@ -552,15 +557,15 @@ final public class VisualizationCaches {
             new CachingRDFServiceExecutor<PersonPublicationMaps>(
                     new CachingRDFServiceExecutor.RDFServiceCallable<PersonPublicationMaps>(visualizationAffinity) {
                         @Override
-                        protected PersonPublicationMaps callWithService(RDFService rdfService) throws Exception {
+                        protected PersonPublicationMaps callWithService(RDFService rdfService, Locale locale) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?person ?document\n" +
                                     "WHERE\n" +
                                     "{\n" +
                                     "  ?person a foaf:Person .\n" +
-                                    "  ?person core:relatedBy ?authorship .\n" +
-                                    "  ?authorship a core:Authorship .\n" +
-                                    "  ?authorship core:relates ?document .\n" +
+                                    "  ?person vivo:relatedBy ?authorship .\n" +
+                                    "  ?authorship a vivo:Authorship .\n" +
+                                    "  ?authorship vivo:relates ?document .\n" +
                                     "  ?document a <http://purl.obolibrary.org/obo/IAO_0000030> .\n" +
                                     "}\n";
 
@@ -593,14 +598,15 @@ final public class VisualizationCaches {
             new CachingRDFServiceExecutor<>(
                     new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>(visualizationAffinity) {
                         @Override
-                        protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
+                        protected Map<String, String> callWithService(RDFService rdfService, Locale locale) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?document ?journalLabel\n" +
                                     "WHERE\n" +
                                     "{\n" +
                                     "  ?document a <http://purl.obolibrary.org/obo/IAO_0000030> .\n" +
-                                    "  ?document core:hasPublicationVenue ?journal . \n" +
+                                    "  ?document vivo:hasPublicationVenue ?journal . \n" +
                                     "  ?journal rdfs:label ?journalLabel . \n" +
+                                    "  LANG(FILTER(langMatches( lang(?journalLabel), '"+locale.toLanguageTag()+"' ))"+
                                     "}\n";
 
                             final Map<String, String> map = new HashMap<>();
@@ -627,14 +633,14 @@ final public class VisualizationCaches {
             new CachingRDFServiceExecutor<>(
                     new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>(visualizationAffinity) {
                         @Override
-                        protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
+                        protected Map<String, String> callWithService(RDFService rdfService, Locale locale) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?document ?publicationDate\n" +
                                     "WHERE\n" +
                                     "{\n" +
                                     "  ?document a <http://purl.obolibrary.org/obo/IAO_0000030> .\n" +
-                                    "  ?document core:dateTimeValue ?dateTimeValue . \n" +
-                                    "  ?dateTimeValue core:dateTime ?publicationDate . \n" +
+                                    "  ?document vivo:dateTimeValue ?dateTimeValue . \n" +
+                                    "  ?dateTimeValue vivo:dateTime ?publicationDate . \n" +
                                     "}\n";
 
                             final Map<String, String> map = new HashMap<>();
@@ -667,16 +673,16 @@ final public class VisualizationCaches {
             new CachingRDFServiceExecutor<Map<String, Set<String>>>(
                     new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, Set<String>>>(visualizationAffinity) {
                         @Override
-                        protected Map<String, Set<String>> callWithService(RDFService rdfService) throws Exception {
+                        protected Map<String, Set<String>> callWithService(RDFService rdfService, Locale locale) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?person ?grant\n" +
                                     "WHERE\n" +
                                     "{\n" +
                                     "  ?person a foaf:Person .\n" +
                                     "  ?person <http://purl.obolibrary.org/obo/RO_0000053> ?role .\n" +
-                                    "  { ?role a core:PrincipalInvestigatorRole . } UNION { ?role a core:CoPrincipalInvestigatorRole . } \n" +
-                                    "  ?role core:relatedBy ?grant .\n" +
-                                    "  ?grant a core:Grant .\n" +
+                                    "  { ?role a vivo:PrincipalInvestigatorRole . } UNION { ?role a vivo:CoPrincipalInvestigatorRole . } \n" +
+                                    "  ?role vivo:relatedBy ?grant .\n" +
+                                    "  ?grant a vivo:Grant .\n" +
                                     "}\n";
 
                             final Map<String, Set<String>> map = new HashMap<String, Set<String>>();
@@ -714,15 +720,15 @@ final public class VisualizationCaches {
             new CachingRDFServiceExecutor<>(
                     new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>(visualizationAffinity) {
                         @Override
-                        protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
+                        protected Map<String, String> callWithService(RDFService rdfService, Locale locale) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?grant ?startDateTimeValue\n" +
                                     "WHERE\n" +
                                     "{\n" +
-                                    "  ?grant a core:Grant .\n" +
-                                    "  ?grant core:dateTimeInterval ?dateTimeIntervalValue . \n" +
-                                    "  ?dateTimeIntervalValue core:start ?startDate . \n" +
-                                    "  ?startDate core:dateTime ?startDateTimeValue . \n" +
+                                    "  ?grant a vivo:Grant .\n" +
+                                    "  ?grant vivo:dateTimeInterval ?dateTimeIntervalValue . \n" +
+                                    "  ?dateTimeIntervalValue vivo:start ?startDate . \n" +
+                                    "  ?startDate vivo:dateTime ?startDateTimeValue . \n" +
                                     "}\n";
 
                             final Map<String, String> map = new HashMap<>();
@@ -755,16 +761,16 @@ final public class VisualizationCaches {
             new CachingRDFServiceExecutor<>(
                     new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>(visualizationAffinity) {
                         @Override
-                        protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
+                        protected Map<String, String> callWithService(RDFService rdfService, Locale locale) throws Exception {
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?grant ?startDateTimeValue\n" +
                                     "WHERE\n" +
                                     "{\n" +
-                                    "  ?grant a core:Grant .\n" +
-                                    "  ?grant core:relates ?role .\n" +
-                                    "  ?role core:dateTimeInterval ?dateTimeIntervalValue . \n" +
-                                    "  ?dateTimeIntervalValue core:start ?startDate . \n" +
-                                    "  ?startDate core:dateTime ?startDateTimeValue . \n" +
+                                    "  ?grant a vivo:Grant .\n" +
+                                    "  ?grant vivo:relates ?role .\n" +
+                                    "  ?role vivo:dateTimeInterval ?dateTimeIntervalValue . \n" +
+                                    "  ?dateTimeIntervalValue vivo:start ?startDate . \n" +
+                                    "  ?startDate vivo:dateTime ?startDateTimeValue . \n" +
                                     "}\n";
 
                             final Map<String, String> map = new HashMap<>();

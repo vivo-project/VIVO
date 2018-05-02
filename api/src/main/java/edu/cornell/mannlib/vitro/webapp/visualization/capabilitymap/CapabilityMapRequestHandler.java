@@ -19,6 +19,8 @@ import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationReques
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
+import edu.cornell.mannlib.vitro.webapp.controller.visualization.DataVisualizationController;
+import edu.cornell.mannlib.vitro.webapp.i18n.selection.SelectedLocale;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
@@ -30,13 +32,20 @@ import edu.cornell.mannlib.vitro.webapp.visualization.model.OrganizationPeopleMa
 import edu.cornell.mannlib.vitro.webapp.visualization.utilities.VisualizationCaches;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 import org.apache.commons.logging.Log;
+import org.apache.commons.lang3.LocaleUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
 public class CapabilityMapRequestHandler implements VisualizationRequestHandler {
+	
+	private static final Log log = LogFactory.getLog(CapabilityMapRequestHandler.class.getName());
+	
     @Override
     public AuthorizationRequest getRequiredPrivileges() {
         return null;
@@ -54,12 +63,19 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
 
     @Override
     public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log, Dataset dataSource) throws MalformedQueryParametersException, JsonProcessingException {
-        ConceptLabelMap       conceptLabelMap = VisualizationCaches.conceptToLabel.getNoWait(vitroRequest.getRDFService());
-        ConceptPeopleMap      conceptPeopleMap = VisualizationCaches.conceptToPeopleMap.getNoWait(vitroRequest.getRDFService());
-        OrganizationPeopleMap organizationPeopleMap = VisualizationCaches.organisationToPeopleMap.getNoWait(vitroRequest.getRDFService());
-        Map<String, String>   organizationLabels = VisualizationCaches.organizationLabels.getNoWait(vitroRequest.getRDFService());
+        
+        
+        Locale locale= vitroRequest.getLocale();
+    	    	
+    	ConceptLabelMap       conceptLabelMap = VisualizationCaches.conceptToLabel.getNoWait(vitroRequest.getRDFService(), locale);
+        ConceptPeopleMap      conceptPeopleMap = VisualizationCaches.conceptToPeopleMap.getNoWait(vitroRequest.getRDFService(), locale);
+        OrganizationPeopleMap organizationPeopleMap = VisualizationCaches.organisationToPeopleMap.getNoWait(vitroRequest.getRDFService(), locale);
+        Map<String, String>   organizationLabels = VisualizationCaches.organizationLabels.getNoWait(vitroRequest.getRDFService(), locale);
 
+        
+        
         String data = vitroRequest.getParameter("data");
+        
         if (!StringUtils.isEmpty(data)) {
             if ("concepts".equalsIgnoreCase(data)) {
                 Set<String> concepts = new HashSet<String>();
@@ -67,7 +83,7 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
                 for (String conceptKey : conceptPeopleMap.conceptToPeople.keySet()) {
                     String label = conceptLabelMap.conceptToLabel.get(conceptKey);
                     if (!StringUtils.isEmpty(label)) {
-                        concepts.add(conceptLabelMap.conceptToLabel.get(conceptKey));
+                        concepts.add(label);
                     }
                 }
 
@@ -81,7 +97,7 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
         if (!StringUtils.isEmpty(personParam)) {
             CapabilityMapResponse response = new CapabilityMapResponse();
             CapabilityMapResult result = new CapabilityMapResult();
-            fillPersonDetails(vitroRequest.getRDFService(), personParam, result);
+            fillPersonDetails(vitroRequest.getRDFService(), personParam, result, locale);
             if (StringUtils.isEmpty(result.firstName) && StringUtils.isEmpty(result.lastName)) {
                 result.lastName = "Missing Name";
             }
@@ -179,7 +195,7 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
         return new TemplateResponseValues(standaloneTemplate, body);
     }
 
-    private void fillPersonDetails(final RDFService rdfService, final String personUri, final CapabilityMapResult result) {
+    private void fillPersonDetails(final RDFService rdfService, final String personUri, final CapabilityMapResult result, Locale locale) {
         try {
             String construct = QueryConstants.getSparqlPrefixQuery() +
                     "CONSTRUCT {\n" +
@@ -192,29 +208,34 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
                     "  ?contactName vcard:givenName ?givenName .\n" +
                     "  ?contactInfo vcard:hasTitle ?contactTitle .\n" +
                     "  ?contactTitle vcard:title ?contactTitleLabel  .\n" +
-                    "  <" + personUri + "> public:thumbnailImage ?directDownloadUrl .\n" +
+                    "  <" + personUri + "> vitro-public:thumbnailImage ?directDownloadUrl .\n" +
                     "} WHERE {\n" +
                     "  { \n" +
                     "    <" + personUri + "> foaf:lastName ?lastName .\n" +
+                    "    FILTER(langMatches( lang(?lastName), '"+locale.toLanguageTag()+"' ))"+
                     "  } UNION { \n" +
                     "    <" + personUri + "> foaf:firstName ?firstName .\n" +
+                    "    FILTER(langMatches( lang(?firstName), '"+locale.toLanguageTag()+"' ))"+
                     "  } UNION { \n" +
                     "    <" + personUri + "> obo:ARG_2000028 ?contactInfo .\n" +
                     "    ?contactInfo vcard:hasName ?contactName .\n" +
                     "    ?contactName vcard:familyName ?familyName .\n" +
+                    "    FILTER(langMatches( lang(?familyName), '"+locale.toLanguageTag()+"' ))"+
                     "  } UNION { \n" +
                     "    <" + personUri + "> obo:ARG_2000028 ?contactInfo .\n" +
                     "    ?contactInfo vcard:hasName ?contactName .\n" +
                     "    ?contactName vcard:givenName ?givenName .\n" +
+                    "    FILTER(langMatches( lang(?givenName), '"+locale.toLanguageTag()+"' ))"+
                     "  } UNION { \n" +
                     "    <" + personUri + "> obo:ARG_2000028 ?contactInfo .\n" +
                     "    ?contactInfo vcard:hasTitle ?contactTitle .\n" +
                     "    ?contactTitle vcard:title ?contactTitleLabel .\n" +
+                    "    FILTER(langMatches( lang(?contactTitleLabel), '"+locale.toLanguageTag()+"' ))"+
                     "  } UNION { \n" +
-                    "    <" + personUri + "> public:mainImage ?mainImage .\n" +
-                    "    ?mainImage public:thumbnailImage ?thumbnailImage .\n" +
-                    "    ?thumbnailImage public:downloadLocation ?downloadLocation .\n" +
-                    "    ?downloadLocation public:directDownloadUrl ?directDownloadUrl .\n" +
+                    "    <" + personUri + "> vitro-public:mainImage ?mainImage .\n" +
+                    "    ?mainImage vitro-public:thumbnailImage ?thumbnailImage .\n" +
+                    "    ?thumbnailImage vitro-public:downloadLocation ?downloadLocation .\n" +
+                    "    ?downloadLocation vitro-public:directDownloadUrl ?directDownloadUrl .\n" +
                     "  } \n" +
                     "}\n";
 
@@ -229,17 +250,26 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
                     "  OPTIONAL {\n" +
                     "    <" + personUri + ">  obo:ARG_2000028 ?contactInfo .\n" +
                     "    ?contactInfo vcard:hasName ?contactName .\n" +
-                    "    OPTIONAL { ?contactName vcard:familyName ?familyName . }\n" +
-                    "    OPTIONAL { ?contactName vcard:givenName  ?givenName . }\n" +
+                    "    OPTIONAL { ?contactName vcard:familyName ?familyName . "+
+                    "               FILTER(langMatches( lang(?familyName), '"+locale.toLanguageTag()+"' ))"+
+                     			 "}\n" +
+                    "    OPTIONAL { ?contactName vcard:givenName  ?givenName . "+
+                    "               FILTER(langMatches( lang(?givenName), '"+locale.toLanguageTag()+"' ))"+
+                    			 "}\n" +
                     "  }\n" +
                     "  OPTIONAL {\n" +
                     "    <" + personUri + ">  obo:ARG_2000028 ?contactInfo .\n" +
                     "    ?contactInfo vcard:hasTitle ?contactTitle .\n" +
                     "    ?contactTitle vcard:title ?title .\n" +
+                    "               FILTER(langMatches( lang(?title), '"+locale.toLanguageTag()+"' ))"+
                     "  }\n" +
-                    "  OPTIONAL { <" + personUri + ">  foaf:lastName ?lastName . }\n" +
-                    "  OPTIONAL { <" + personUri + ">  foaf:firstName  ?firstName . }\n" +
-                    "  OPTIONAL { <" + personUri + ">  public:thumbnailImage ?thumbnailUrl . }\n" +
+                    "  OPTIONAL { <" + personUri + ">  foaf:lastName ?lastName . "+
+                    "               FILTER(langMatches( lang(?lastName), '"+locale.toLanguageTag()+"' ))"+
+                    		 	"}\n" +
+                    "  OPTIONAL { <" + personUri + ">  foaf:firstName  ?firstName . "+
+                    "               FILTER(langMatches( lang(?firstName), '"+locale.toLanguageTag()+"' ))"+
+                    		 "}\n" +
+                    "  OPTIONAL { <" + personUri + ">  vitro-public:thumbnailImage ?thumbnailUrl . }\n" +
                     "}\n";
 
             QueryExecution qe = QueryExecutionFactory.create(nameQuery, constructedModel);
