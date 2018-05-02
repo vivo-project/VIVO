@@ -8,14 +8,14 @@
     <includeBaseDirectory>false</includeBaseDirectory>
     <dependencySets>
         <dependencySet>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory>.</outputDirectory>
             <unpack>true</unpack>
         </dependencySet>
     </dependencySets>
     <fileSets>
         <fileSet>
             <directory>${project.basedir}/src/main/resources</directory>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory>.</outputDirectory>
             <filtered>true</filtered>
         </fileSet>
     </fileSets>

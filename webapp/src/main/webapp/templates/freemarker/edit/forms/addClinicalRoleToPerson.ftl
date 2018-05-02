@@ -28,8 +28,12 @@ RoleToActivityPredicate
 <#assign genericLabel = "${i18n().clinical_activity?capitalize}" />
 
 <#assign acMultipleTypes = "'true'" />
+
 <#assign acTypes = "{activity: 'http://vivoweb.org/ontology/core#Project,http://purl.obolibrary.org/obo/ERO_0000005'}" />
 
+<#assign editTitle = "${i18n().edit_entry_for_clinical_role}"/>
+
+<#assign createTitle = "${i18n().create_entry_for_clinical_role}"/>
 
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">
