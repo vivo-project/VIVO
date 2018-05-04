@@ -32,7 +32,7 @@ bibo:
 skos:
       rdfs:label "SKOS (Simple Knowledge Organization System)"@en-US ;
       vitro:ontologyPrefixAnnot "skos" .
-      
+
 vivo:
       rdfs:label "VIVO Core Ontology"@en-US ;
       vitro:ontologyPrefixAnnot "vivo" .
@@ -40,35 +40,35 @@ vivo:
 ocrer:
       rdfs:label "OCRe Research"@en-US ;
       vitro:ontologyPrefixAnnot "ocrer" .
-      
+
 ocresd:
       rdfs:label "OCRe Study Design"@en-US ;
       vitro:ontologyPrefixAnnot "ocresd" .
-      
+
 ocresp:
       rdfs:label "OCRe Study Protocol"@en-US ;
       vitro:ontologyPrefixAnnot "ocresp" .
-      
+
 ocrest:
       rdfs:label "OCRe Statistics"@en-US ;
       vitro:ontologyPrefixAnnot "ocresst" .
-      
+
 geo:
       rdfs:label "Geopolitical Ontology"@en-US ;
       vitro:ontologyPrefixAnnot "geo" .
-      
+
 event:
       rdfs:label "Event Ontology"@en-US ;
       vitro:ontologyPrefixAnnot "event" .
 
-obo:  
+obo:
       rdfs:label "OBO Foundry"@en-US ;
       vitro:ontologyPrefixAnnot "obo" .
-              
+
 vcard:
       rdfs:label "VCard"@en-US ;
       vitro:ontologyPrefixAnnot "vcard" .
-              
+
 foaf:
       rdfs:label "FOAF (Friend of a Friend)"@en-US ;
       vitro:ontologyPrefixAnnot "foaf" .
@@ -88,19 +88,19 @@ c4o:
 cito:
       rdfs:label "CiTO (Citation Typing Ontology)"@en-US ;
       vitro:ontologyPrefixAnnot "cito" .
-    
+
 dcterms:
       rdfs:label "Dublin Core Terms"@en-US ;
-      vitro:ontologyPrefixAnnot "dcterms" .  
-    
+      vitro:ontologyPrefixAnnot "dcterms" .
+
 vann:
       rdfs:label "Vocabulary for Annotating Vocabulary Descriptions"@en-US ;
       vitro:ontologyPrefixAnnot "vann" .
-      
+
 ro:
       rdfs:label "Relations Ontology"@en-US ;
-      vitro:ontologyPrefixAnnot "ro" .    
-      
+      vitro:ontologyPrefixAnnot "ro" .
+
 swo:
       rdfs:label "Software Ontology"@en-US ;
       vitro:ontologyPrefixAnnot "swo" . 
