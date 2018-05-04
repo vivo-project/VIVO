@@ -5,8 +5,7 @@
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:vitro="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#">
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
     <owl:Ontology rdf:about="http://xmlns.com/foaf/0.1/"/>
     <owl:Ontology rdf:about="http://purl.org/NET/c4dm/event.owl"/>
     <owl:Ontology rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/public"/>
@@ -29,73 +28,4 @@
     <owl:Ontology rdf:about="http://purl.obolibrary.org/obo/ro.owl"/>
     <owl:Ontology rdf:about="http://www.ebi.ac.uk/efo/swo/"/>
 
-    <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl">
-        <vitro:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">geo</vitro:ontologyPrefixAnnot>
-        <rdfs:label xml:lang="en-US">Geopolitical Ontology</rdfs:label>
-    </rdf:Description>
-
-    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/">
-        <vitro:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">obo</vitro:ontologyPrefixAnnot>
-        <rdfs:label xml:lang="en-US">OBO Foundry</rdfs:label>
-    </rdf:Description>
-
-    <rdf:Description rdf:about="http://purl.org/NET/c4dm/event.owl">
-        <vitro:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">event</vitro:ontologyPrefixAnnot>
-        <rdfs:label xml:lang="en-US">Event Ontology</rdfs:label>
-    </rdf:Description>
-
-    <rdf:Description rdf:about="http://purl.org/net/OCRe/research.owl">
-        <vitro:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ocrer</vitro:ontologyPrefixAnnot>
-        <rdfs:label xml:lang="en-US">OCRe Research</rdfs:label>
-    </rdf:Description>
-
-    <rdf:Description rdf:about="http://purl.org/net/OCRe/study_design.owl">
-        <vitro:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ocresd</vitro:ontologyPrefixAnnot>
-        <rdfs:label xml:lang="en-US">OCRe Study Design</rdfs:label>
-    </rdf:Description>
-
-    <rdf:Description rdf:about="http://purl.org/ontology/bibo/">
-        <vitro:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bibo</vitro:ontologyPrefixAnnot>
-        <rdfs:label xml:lang="en-US">Bibliographic Ontology</rdfs:label>
-    </rdf:Description>
-
-    <rdf:Description rdf:about="http://purl.org/spar/c4o/">
-        <vitro:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">c4o</vitro:ontologyPrefixAnnot>
-        <rdfs:label xml:lang="en-US">Citation Counting and Context Characterization Ontology</rdfs:label>
-    </rdf:Description>
-
-    <rdf:Description rdf:about="http://purl.org/spar/cito/">
-        <vitro:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">cito</vitro:ontologyPrefixAnnot>
-        <rdfs:label xml:lang="en-US">CiTO (Citation Typing Ontology)</rdfs:label>
-    </rdf:Description>
-
-    <rdf:Description rdf:about="http://purl.org/spar/fabio/">
-        <vitro:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fabio</vitro:ontologyPrefixAnnot>
-        <rdfs:label xml:lang="en-US">FaBiO (FRBR-Aligned Bibliographic Ontology)</rdfs:label>
-    </rdf:Description>
-
-    <rdf:Description rdf:about="http://vivoweb.org/ontology/core">
-        <vitro:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vivo</vitro:ontologyPrefixAnnot>
-        <rdfs:label xml:lang="en-US">VIVO Core Ontology</rdfs:label>
-    </rdf:Description>
-
-    <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research">
-        <vitro:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">scires</vitro:ontologyPrefixAnnot>
-        <rdfs:label xml:lang="en-US">VIVO Scientific Research Ontology</rdfs:label>
-    </rdf:Description>
-
-    <rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core">
-        <vitro:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">skos</vitro:ontologyPrefixAnnot>
-        <rdfs:label xml:lang="en-US">SKOS (Simple Knowledge Organization System)</rdfs:label>
-    </rdf:Description>
-
-    <rdf:Description rdf:about="http://www.w3.org/2006/vcard/ns">
-        <vitro:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vcard</vitro:ontologyPrefixAnnot>
-        <rdfs:label xml:lang="en-US">VCard</rdfs:label>
-    </rdf:Description>
-
-    <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/">
-        <vitro:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">foaf</vitro:ontologyPrefixAnnot>
-        <rdfs:label xml:lang="en-US">FOAF (Friend of a Friend)</rdfs:label>
-    </rdf:Description>
-</rdf:RDF>
+</rdf:RDF> 
