@@ -42,7 +42,7 @@ of publications is given below the comparison map. Data can be saved as CSV file
 on a node in the map brings up the number of fractionally associated journal publications 
 and the percentage of publications mapped to this (sub)discipline. Hover over a discipline 
 in the table on the left to see what circles it corresponds to on the map. Use slider below 
-map, on the right to reduce number of subdisciplines shown to improve legibility</p>
+map, on the right to reduce number of subdisciplines shown to improve legibility.</p>
 
 <h3>Links</h3>
 <p>For more information on the UCSD map of science and classification system, see 
