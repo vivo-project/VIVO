@@ -12,7 +12,7 @@
     <owl:Ontology rdf:about="http://purl.org/ontology/bibo/"/>
     <owl:Ontology rdf:about="http://vivoweb.org/ontology/core"/>
     <owl:Ontology rdf:about="http://purl.obolibrary.org/obo/"/>
-    <owl:Ontology rdf:about="http://www.w3.org/2006/vcard/ns"/>
+    <owl:Ontology rdf:about="http://www.w3.org/2006/vcard/ns"/>   
     <owl:Ontology rdf:about="http://aims.fao.org/aos/geopolitical.owl"/>
     <owl:Ontology rdf:about="http://purl.org/net/OCRe/research.owl"/>
     <owl:Ontology rdf:about="http://purl.org/net/OCRe/study_design.owl"/>
@@ -27,5 +27,5 @@
     <owl:Ontology rdf:about="http://purl.org/vocab/vann/"/>
     <owl:Ontology rdf:about="http://purl.obolibrary.org/obo/ro.owl"/>
     <owl:Ontology rdf:about="http://www.ebi.ac.uk/efo/swo/"/>
-
+    
 </rdf:RDF> 
