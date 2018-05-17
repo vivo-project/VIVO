@@ -603,7 +603,7 @@ var ipretResults = function(results) {
             var c = new Capability(term, queryCutoffElem.value, resultlist.length);
             var people = [];
             for (var i = 0; i < Math.min(queryCutoffElem.value, resultlist.length); i++) {
-                if (resultlist[i]["md_1"] == undefined) continue;
+                if (resultlist[i]["md_1"] == undefined) continue; $("#resetButton").val(i18nStrings.capability_map_reset);
                 var person = g.createPerson(resultlist[i]);
                 people.push(person);
                 updatedPeople.push(person.id);
@@ -624,12 +624,10 @@ var ipretResults = function(results) {
 var disableSubButton = function() {
     subButton.disabled = true;
     $("#sExpand").attr("disabled", true);
-    $("#resetButton").val(i18nStrings.capability_map_reset);
 }
 var enableSubButton = function() {
     subButton.disabled = false;
     $("#sExpand").attr("disabled", false);
-    $("#resetButton").val(i18nStrings.capability_map_reset);
 }
 var getLinkColor = function() {
     var linkColor = $("#linkColor").val();
