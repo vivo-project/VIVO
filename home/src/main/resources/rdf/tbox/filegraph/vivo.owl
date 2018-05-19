@@ -4659,6 +4659,9 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#overview">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:label xml:lang="en">overview</rdfs:label>
+        <obo:IAO_0000112 xml:lang="en">My research focuses on diseases of pine crops in the southeastern United States.</obo:IAO_0000112>
+        <obo:IAO_0000115 xml:lang="en">Short text for presentation describing the agent's purpose, activities, and/or accomplishments.</obo:IAO_0000115>
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
     </owl:DatatypeProperty>
     
 
