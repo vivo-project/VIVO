@@ -4466,6 +4466,7 @@ modern society using the world of Star trek. Los Angeles Times, March
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#dateTime">
         <rdfs:label xml:lang="en">date/time</rdfs:label>
+        <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
     </owl:DatatypeProperty>
     
@@ -4494,6 +4495,7 @@ modern society using the world of Star trek. Los Angeles Times, March
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#eRACommonsId">
         <rdfs:label xml:lang="en">eRA Commons ID</rdfs:label>
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#identifier"/>
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     </owl:DatatypeProperty>
     
 
@@ -4523,7 +4525,14 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#grantDirectCosts">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:label xml:lang="en">direct costs</rdfs:label>
-        <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Grant"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Contract"/>
+                    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Grant"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
     </owl:DatatypeProperty>
     
 
@@ -4600,6 +4609,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
 
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#licenseNumber">
         <rdfs:label xml:lang="en">license number</rdfs:label>
+        <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Licensure"/>
     </owl:DatatypeProperty>
     
 
@@ -4610,6 +4620,14 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
         <rdfs:label xml:lang="en">local award ID</rdfs:label>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">core:localAwardId has a domain of core:Grant, and should be public since that&apos;s its public identifier for local use by OSP, accounting, department admins, and the PI </obo:IAO_0000112>
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#identifier"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Contract"/>
+                    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Grant"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
     </owl:DatatypeProperty>
     
 
@@ -4745,6 +4763,7 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RearcherID is a Thomson Reuters project where researchers have a place to manage and share their professional information. It will allow them to solve author identity issues while simultaneously adding dynamic citation metrics and collaboration networks to your personal profile.
 Definition source: http://isiwebofknowledge.com/researcherid/</obo:IAO_0000112>
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#identifier"/>
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     </owl:DatatypeProperty>
     
 
@@ -4755,6 +4774,7 @@ Definition source: http://isiwebofknowledge.com/researcherid/</obo:IAO_0000112>
         <rdfs:label xml:lang="en">Scopus ID</rdfs:label>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Home page for Scopus: http://www.scopus.com/home.url</obo:IAO_0000112>
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#identifier"/>
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     </owl:DatatypeProperty>
     
 
@@ -4766,6 +4786,7 @@ Definition source: http://isiwebofknowledge.com/researcherid/</obo:IAO_0000112>
         <rdfs:label xml:lang="en">seating capacity</rdfs:label>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">55</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">definition modified from: source (http://en.wikipedia.org/wiki/Seating_capacity).</obo:IAO_0000112>
+        <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Room"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
     </owl:DatatypeProperty>
     
@@ -4782,6 +4803,14 @@ Definition source: http://isiwebofknowledge.com/researcherid/</obo:IAO_0000112>
 See also core:localAwardId.
 </obo:IAO_0000112>
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#identifier"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Contract"/>
+                    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Grant"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
     </owl:DatatypeProperty>
     
 
@@ -4826,6 +4855,14 @@ See also core:localAwardId.
     <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#totalAwardAmount">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:label xml:lang="en">total award amount</rdfs:label>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Contract"/>
+                    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Grant"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
     </owl:DatatypeProperty>
     
 
