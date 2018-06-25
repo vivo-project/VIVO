@@ -10,8 +10,9 @@
 <@showStatement statement property />
 
 <#macro showStatement statement property>
-    <a href="https://doi.org/${statement.value!}" title="${i18n().doi_link}" target="_blank">${statement.value!}</a>
-    <@lmt.addCitationMetaTag uri=(property.uri!) content=(statement.value!) />
+    <#assign doi = (statement.value!).replace("http://doi.org/", "").replace("https://doi.org/", "")>
+    <a href="https://doi.org/${doi}" title="${i18n().doi_link}" target="_blank">${doi}</a>
+    <@lmt.addCitationMetaTag uri=(property.uri!) content=(doi) />
 </#macro>
 
 
