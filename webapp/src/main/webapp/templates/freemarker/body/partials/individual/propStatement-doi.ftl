@@ -16,8 +16,9 @@
                     replace("http://dx.doi.org/", "").
                     replace("https://dx.doi.org/", "").
                     replace("doi:", "").trim()>
-    <a href="https://doi.org/${doi}" title="${i18n().doi_link}" target="_blank">${doi}</a>
-    <@lmt.addCitationMetaTag uri=(property.uri!) content=(doi) />
+    <#assign doiUrl = "https://doi.org/" + doi>
+    <a href="${doiUrl}" title="${i18n().doi_link}" target="_blank">${doiUrl}</a>
+    <@lmt.addCitationMetaTag uri=(property.uri!) content=(doiUrl) />
 </#macro>
 
 
