@@ -28,6 +28,8 @@ edu.cornell.mannlib.vitro.webapp.web.images.PlaceholderUtil$Setup
 
 edu.cornell.mannlib.vitro.webapp.servlet.setup.FileGraphSetup
 
+edu.cornell.mannlib.vitro.webapp.migration.auth.AuthMigrator
+
 # Invokes process to perform updates to align with ontology changes if needed -->
 # edu.cornell.mannlib.vitro.webapp.migration.rel16.Release16Migrator
 # edu.cornell.mannlib.vitro.webapp.migration.rel17.Release17Migrator
@@ -42,8 +44,6 @@ edu.cornell.mannlib.vitro.webapp.servlet.setup.ThemeInfoSetup
 edu.cornell.mannlib.vitro.webapp.auth.permissions.PermissionRegistry$Setup
 
 edu.cornell.mannlib.vitro.webapp.auth.permissions.PermissionSetsSmokeTest
-
-edu.cornell.mannlib.vitro.webapp.auth.policy.bean.PropertyRestrictionBean$Setup
 
 edu.cornell.mannlib.vitro.webapp.auth.policy.setup.CommonPolicyFamilySetup
 
