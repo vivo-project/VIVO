@@ -8616,7 +8616,6 @@ has super-classes</obo:IAO_0000115>
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Department"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A distinct, usually specialized educational unit within an educational organization.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Endodontics (department within a College of Dentistry); English (department within a College of Liberal Arts)</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -8725,7 +8724,6 @@ has super-classes</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A formal organization of people or groups of people around a subject or practice.</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A group of persons or organizations organized for a common purpose.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Special Libraries Association; Association for Computing Machinery(ACM); American Medical Informatics Association(AMIA)</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -8971,7 +8969,6 @@ This class allows for linking an author to a publication while indicating inform
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alchohol Education Center; Center for Arts and Public Policy; Hearing Research Center</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organization where a specified activity is concentrated.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Short Definition take from http://www.thefreedictionary.com/center.</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -9006,7 +9003,6 @@ This class allows for linking an author to a publication while indicating inform
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Any organization that offers significant health services or routinely provides medical care to patients.</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Any organization with a significant clinical function as a matter of course and not just through occasional clinical roles</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">In the future we may be able to make this a defined class that would not need to be directly asserted, but the consensus seems to be that some organizations &quot;are&quot; clinical and some &quot;are&quot; research organizations and that the distinction is important enough to warrant the additional class and class assertions</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -9039,7 +9035,6 @@ This class allows for linking an author to a publication while indicating inform
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A primary academic unit within a University or a free-standing higher education organization without graduate degree programs</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A primary academic unit within a University or a free-standing higher education organization without graduate degree programs.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">College of Arts &amp; Sciences; Ivy Tech Community College</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -9053,7 +9048,6 @@ This class allows for linking an author to a publication while indicating inform
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A group of people organized for a specific purpose, whose members are often selected from a larger group to serve for designated periods of time.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Curriculum Steering Committee; PhD Advisory Committee</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">There could be many subclasses such as thesis committee or tenure committee, but these may typically be differentiated via the moniker unless distinct properties become important.</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -9066,7 +9060,6 @@ This class allows for linking an author to a publication while indicating inform
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A legally-recognized business organization</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A legally-recognized business organization.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">from Wikipedia: &quot;A company is a form of business organization. It is an association or collection of individual real persons and/or other companies ... This collection, group or association of persons can be made to exist in law and then a company is itself considered a &quot;legal person&quot;. The name company arose because, at least originally, it represented or was owned by more than one real or legal person.&quot;</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -9127,7 +9120,6 @@ This class allows for linking an author to a publication while indicating inform
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A group  of independent organizations working together toward a common goal, under an expressed agreement.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Committee on Institutional Cooperation (CIC); The Five Colleges of Ohio</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -9343,7 +9335,6 @@ This class allows for linking an author to a publication while indicating inform
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A unit within a larger organization that addresses a specific subject or area of activity.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition modified from the definition here: http://dictionary.reference.com/browse/department. It is difficult to tell the difference between and department and a division.</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Legal (department within a company); Use for any non-academic department</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -9356,7 +9347,6 @@ This class allows for linking an author to a publication while indicating inform
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A major unit or section within a larger organization.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cardiovascular Medicine (division within medicine)</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition modified from http://www.thefreedictionary.com/division.  It is difficult to tell the difference between a division and a department.</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -9531,7 +9521,6 @@ This class allows for linking an author to a publication while indicating inform
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A unit devoted primarily to extension activities, whether for outreach or research</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A unit devoted primarily to extension activities, whether for outreach or research.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alachua County Extension Office</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -9623,7 +9612,6 @@ This class allows for linking an author to a publication while indicating inform
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An institution founded with an endowment to support educational, research, artistic or other charitable activities.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition take from: http://dictionary.reference.com/browse/foundation.</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Ford Foundation</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -9642,7 +9630,6 @@ This class allows for linking an author to a publication while indicating inform
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A defined class of organizations that fund Grants</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organization that provides financial support to individuals or organizations to carry out specified activities.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">National Institute of Health (NIH)</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -9703,7 +9690,6 @@ This class allows for linking an author to a publication while indicating inform
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A unit of government responsible for oversight and regulation of certain activities or the administration and provision of specific services.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition take from: http://en.wikipedia.org/wiki/Government_agency.</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">United States Library of Congress</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -9784,7 +9770,6 @@ This class allows for linking an author to a publication while indicating inform
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An institution that provides medical, surgical, psychiatric or nursing care.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition take from: http://dictionary.reference.com/browse/hospital.</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Shands at the University of Florida</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -9797,7 +9782,6 @@ This class allows for linking an author to a publication while indicating inform
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An Institute normally has a research focus but may also fulfill instructional or outreach roles</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organization founded to pursue or promote certain research, educational or public policy interests or activities.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Institute for Fundamental Theory</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -9889,7 +9873,6 @@ This class allows for linking an author to a publication while indicating inform
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organization unit that facilitates or conduits observation, testing, experimentation, or research in a field of study or practice.</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organizational unit (as opposed to the physical facility) that performs research, provides services, or processes materials</obo:IAO_0000115>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -9935,7 +9918,6 @@ This class allows for linking an author to a publication while indicating inform
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organization maintaining one or more collections of physical and/or electronic information resources for access or lending.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Marston Science Library</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Used information from this definition: http://dictionary.reference.com/browse/library.</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -10012,7 +9994,6 @@ This class allows for linking an author to a publication while indicating inform
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organization devoted to the acquisition, conservation, study, exhibition, and educational interpretation of objects having scientific, historical, cultural or artistic value.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition was take from here:  http://dictionary.reference.com/browse/museum</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Getty Museum</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -10271,7 +10252,6 @@ Contents
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A private company is one that is privately-owned, and thus, is not publicly-traded in the stock market. Members of the general public cannot purchase stock in a private company unless that company chooses to go public and become a public company.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition obtained here: http://answers.ask.com/Business/Finance/what_is_a_private_company.  Examples of private companies found here: http://www.forbes.com/2008/11/03/largest-private-companies-biz-privates08-cx_sr_1103private_land.html</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Publix Super Markets; Ernst &amp; Young; PricewaterhouseCoopers</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -10283,7 +10263,6 @@ Contents
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A Cornell graduate field (http://vivo.cornell.edu/index.jsp?home=65535&amp;collection=820)</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An ongoing academic initiative not formalized with department or division status.</obo:IAO_0000115>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -10326,7 +10305,6 @@ Contents
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A person or company whose business is the publishing of books, periodicals, engravings, computer software, etc.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition found here: http://dictionary.reference.com/browse/publisher</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Elsevier; Harper &amp; Row; Indiana University Press</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -10348,7 +10326,6 @@ Contents
         <rdfs:label xml:lang="en">Research Organization</rdfs:label>
         <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Any organization (likely also asserted as another class of Organization) with a primary, ongoing research function, not just through occasional roles</obo:IAO_0000115>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -10421,7 +10398,6 @@ Contents
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An institution for instruction in a particular skill or field.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition take from here: http://dictionary.reference.com/browse/school.</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">School of Architecture; School of Music</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -10465,7 +10441,6 @@ Contents
         <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Laboratory"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A laboratory that provides services</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ideally a defined class -- a Laboratory the provides some Service via the property</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -10511,7 +10486,6 @@ Contents
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A student organization is an organization, operated by students at a university, whose membership normally consists only of students.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Dancin&apos; Gators</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition take from here: http://en.wikipedia.org/wiki/Student_society</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -10547,7 +10521,6 @@ Contents
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A group of people working together.</obo:IAO_0000115>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An informal organization brought together for the purposes of a project or event</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">VIVO Outreach Team; VIVO Ontology Team</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
@@ -10590,7 +10563,6 @@ Contents
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An institution of higher education and research, which grants academic degrees in a variety of subjects, and provides both undergraduate education and postgraduate education.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition taken from: http://en.wikipedia.org/wiki/University</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">University of Florida; Washington University in St. Louis</obo:IAO_0000112>
-        <obo:IAO_0000412 rdf:resource="http://vivoweb.org/ontology/core"/>
     </owl:Class>
     
 
