@@ -4,7 +4,7 @@ tags:
   - ontology
   - semantic-web
   - linked-data
- - research-discovery
+  - research-discovery
   - open-scholarship
   - linked-open-data
   - open-science
@@ -65,10 +65,8 @@ authors:
    orcid: 0000-0002-8143-6345
    affiliation: 14
  - name: Jose Luis Martin
-   orcid:
    affiliation: 15
  - name: Steve McKay
-   orcid:
    affiliation: 16
  - name: Simon Porter
    orcid: 0000-0002-6151-8423
@@ -80,10 +78,8 @@ authors:
    Orcid: 0000-0001-5059-4132
    affiliation: 17
  - name: Stefan Wolff
-   orcid:
    affiliation: 18
  - name: Rebecca Younes
-   orcid:
    affiliation: 4
 affiliations:
  - name: University of Florida, Gainesville, Florida, US
