@@ -36,16 +36,22 @@ import org.apache.commons.lang3.LocaleUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
+import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess.LanguageOption;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.ArrayList;
+
+import edu.cornell.mannlib.vitro.webapp.rdfservice.filter.LanguageFilteringRDFService;
 
 public class CapabilityMapRequestHandler implements VisualizationRequestHandler {
-	
+
 	private static final Log log = LogFactory.getLog(CapabilityMapRequestHandler.class.getName());
-	
+
     @Override
     public AuthorizationRequest getRequiredPrivileges() {
         return null;
@@ -63,19 +69,24 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
 
     @Override
     public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log, Dataset dataSource) throws MalformedQueryParametersException, JsonProcessingException {
-        
-        
-        Locale locale= vitroRequest.getLocale();
-    	    	
-    	ConceptLabelMap       conceptLabelMap = VisualizationCaches.conceptToLabel.getNoWait(vitroRequest.getRDFService(), locale);
-        ConceptPeopleMap      conceptPeopleMap = VisualizationCaches.conceptToPeopleMap.getNoWait(vitroRequest.getRDFService(), locale);
-        OrganizationPeopleMap organizationPeopleMap = VisualizationCaches.organisationToPeopleMap.getNoWait(vitroRequest.getRDFService(), locale);
-        Map<String, String>   organizationLabels = VisualizationCaches.organizationLabels.getNoWait(vitroRequest.getRDFService(), locale);
 
-        
-        
+    	Locale locale= vitroRequest.getLocale();
+
+    	ArrayList<String> list = new ArrayList<String>(1);
+
+        list.add(locale.toLanguageTag());
+
+    	LanguageFilteringRDFService languageFilteringService= new LanguageFilteringRDFService(vitroRequest.getRDFService(), list);
+
+    	ConceptLabelMap       conceptLabelMap = VisualizationCaches.conceptToLabel.getNoWait(languageFilteringService);
+        ConceptPeopleMap      conceptPeopleMap = VisualizationCaches.conceptToPeopleMap.getNoWait(languageFilteringService);
+        OrganizationPeopleMap organizationPeopleMap = VisualizationCaches.organisationToPeopleMap.getNoWait(languageFilteringService);
+        Map<String, String>   organizationLabels = VisualizationCaches.organizationLabels.getNoWait(languageFilteringService);
+
+
+
         String data = vitroRequest.getParameter("data");
-        
+
         if (!StringUtils.isEmpty(data)) {
             if ("concepts".equalsIgnoreCase(data)) {
                 Set<String> concepts = new HashSet<String>();
@@ -97,7 +108,8 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
         if (!StringUtils.isEmpty(personParam)) {
             CapabilityMapResponse response = new CapabilityMapResponse();
             CapabilityMapResult result = new CapabilityMapResult();
-            fillPersonDetails(vitroRequest.getRDFService(), personParam, result, locale);
+
+            fillPersonDetails(languageFilteringService, personParam, result, locale);
             if (StringUtils.isEmpty(result.firstName) && StringUtils.isEmpty(result.lastName)) {
                 result.lastName = "Missing Name";
             }
@@ -212,25 +224,20 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
                     "} WHERE {\n" +
                     "  { \n" +
                     "    <" + personUri + "> foaf:lastName ?lastName .\n" +
-                    "    FILTER(langMatches( lang(?lastName), '"+locale.toLanguageTag()+"' ))"+
                     "  } UNION { \n" +
                     "    <" + personUri + "> foaf:firstName ?firstName .\n" +
-                    "    FILTER(langMatches( lang(?firstName), '"+locale.toLanguageTag()+"' ))"+
                     "  } UNION { \n" +
                     "    <" + personUri + "> obo:ARG_2000028 ?contactInfo .\n" +
                     "    ?contactInfo vcard:hasName ?contactName .\n" +
                     "    ?contactName vcard:familyName ?familyName .\n" +
-                    "    FILTER(langMatches( lang(?familyName), '"+locale.toLanguageTag()+"' ))"+
                     "  } UNION { \n" +
                     "    <" + personUri + "> obo:ARG_2000028 ?contactInfo .\n" +
                     "    ?contactInfo vcard:hasName ?contactName .\n" +
                     "    ?contactName vcard:givenName ?givenName .\n" +
-                    "    FILTER(langMatches( lang(?givenName), '"+locale.toLanguageTag()+"' ))"+
                     "  } UNION { \n" +
                     "    <" + personUri + "> obo:ARG_2000028 ?contactInfo .\n" +
                     "    ?contactInfo vcard:hasTitle ?contactTitle .\n" +
                     "    ?contactTitle vcard:title ?contactTitleLabel .\n" +
-                    "    FILTER(langMatches( lang(?contactTitleLabel), '"+locale.toLanguageTag()+"' ))"+
                     "  } UNION { \n" +
                     "    <" + personUri + "> vitro-public:mainImage ?mainImage .\n" +
                     "    ?mainImage vitro-public:thumbnailImage ?thumbnailImage .\n" +
@@ -250,25 +257,16 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
                     "  OPTIONAL {\n" +
                     "    <" + personUri + ">  obo:ARG_2000028 ?contactInfo .\n" +
                     "    ?contactInfo vcard:hasName ?contactName .\n" +
-                    "    OPTIONAL { ?contactName vcard:familyName ?familyName . "+
-                    "               FILTER(langMatches( lang(?familyName), '"+locale.toLanguageTag()+"' ))"+
-                     			 "}\n" +
-                    "    OPTIONAL { ?contactName vcard:givenName  ?givenName . "+
-                    "               FILTER(langMatches( lang(?givenName), '"+locale.toLanguageTag()+"' ))"+
-                    			 "}\n" +
+                    "    OPTIONAL { ?contactName vcard:familyName ?familyName . }\n" +
+                    "    OPTIONAL { ?contactName vcard:givenName  ?givenName . }\n" +
                     "  }\n" +
                     "  OPTIONAL {\n" +
                     "    <" + personUri + ">  obo:ARG_2000028 ?contactInfo .\n" +
                     "    ?contactInfo vcard:hasTitle ?contactTitle .\n" +
                     "    ?contactTitle vcard:title ?title .\n" +
-                    "               FILTER(langMatches( lang(?title), '"+locale.toLanguageTag()+"' ))"+
                     "  }\n" +
-                    "  OPTIONAL { <" + personUri + ">  foaf:lastName ?lastName . "+
-                    "               FILTER(langMatches( lang(?lastName), '"+locale.toLanguageTag()+"' ))"+
-                    		 	"}\n" +
-                    "  OPTIONAL { <" + personUri + ">  foaf:firstName  ?firstName . "+
-                    "               FILTER(langMatches( lang(?firstName), '"+locale.toLanguageTag()+"' ))"+
-                    		 "}\n" +
+                    "  OPTIONAL { <" + personUri + ">  foaf:lastName ?lastName . }\n" +
+                    "  OPTIONAL { <" + personUri + ">  foaf:firstName  ?firstName . }\n" +
                     "  OPTIONAL { <" + personUri + ">  vitro-public:thumbnailImage ?thumbnailUrl . }\n" +
                     "}\n";
 

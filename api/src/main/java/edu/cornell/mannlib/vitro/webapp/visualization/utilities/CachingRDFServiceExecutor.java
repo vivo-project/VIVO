@@ -62,8 +62,8 @@ public class CachingRDFServiceExecutor<T> {
      *
      * @param rdfService an RDF service to use, in foreground mode, if the background service is missing
      */
-    public synchronized T get(RDFService rdfService, Locale locale) {
-        return get(rdfService, false,  locale);
+    public synchronized T get(RDFService rdfService) {
+        return get(rdfService, false);
     }
 
     /**
@@ -72,8 +72,8 @@ public class CachingRDFServiceExecutor<T> {
      *
      * @param rdfService an RDF service to use, in foreground mode, if the background service is missing
      */
-    public synchronized T getNoWait(RDFService rdfService, Locale locale) {
-        return get(rdfService, true,  locale);
+    public synchronized T getNoWait(RDFService rdfService) {
+        return get(rdfService, true);
     }
 
     /**
@@ -81,20 +81,17 @@ public class CachingRDFServiceExecutor<T> {
      * Will wait for completion if the cache is not already populated, otherwise the refresh will happen in the background.
      *
      * @param rdfService an RDF service to use, in foreground mode, if the background service is missing
-     * @param locale 
+     * @param locale
      */
-    public synchronized T get(RDFService rdfService, boolean allowWaits, Locale loc) {
-    	
+    public synchronized T get(RDFService rdfService, boolean allowWaits) {
         // First, check if there are results from the previous background task, and update the cache
-    	
+
         if (backgroundTask != null && backgroundTask.isDone()) {
             completeBackgroundTask();
         }
 
-        // If we have cached results 
-        //then we need to check if they are in the right language
-        
-        if (cachedResults != null &&  locale.equals(loc)) {
+        // If we have cached results
+        if (cachedResults != null) {
             // If the background service exists, and the cache is considered invalid
             if (backgroundRDFService != null && resultBuilder.invalidateCache(System.currentTimeMillis() - lastCacheTime)) {
                 // In most cases, only wait for half a second
@@ -114,7 +111,6 @@ public class CachingRDFServiceExecutor<T> {
                 }
             }
         } else {
-        	locale =loc;
             // No cached results, so fetch the results using any available RDF service
             if (rdfService != null) {
                 startBackgroundTask(rdfService);
@@ -128,7 +124,6 @@ public class CachingRDFServiceExecutor<T> {
             completeBackgroundTask();
         }
 
-      
         return cachedResults;
     }
 
@@ -354,7 +349,7 @@ public class CachingRDFServiceExecutor<T> {
                 startedAt = System.currentTimeMillis();
 
                 // Call the user implementation, passing the RDF service
-                T val = callWithService(rdfService, locale);
+                T val = callWithService(rdfService);
 
                 // Record how long it to to execute
                 executionTime = System.currentTimeMillis() - startedAt;
@@ -377,7 +372,7 @@ public class CachingRDFServiceExecutor<T> {
          * @param rdfService An RDFService
          * @throws Exception Any exception
          */
-        protected abstract T callWithService(RDFService rdfService, Locale locale) throws Exception;
+        protected abstract T callWithService(RDFService rdfService) throws Exception;
 
         /**
          * Method to determine if the cache should be invalidated for the current results

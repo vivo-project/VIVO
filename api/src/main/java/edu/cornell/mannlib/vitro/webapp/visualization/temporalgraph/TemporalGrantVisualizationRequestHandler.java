@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -43,12 +42,12 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequ
 
 public class TemporalGrantVisualizationRequestHandler implements
 		VisualizationRequestHandler {
-	
+
 	@Override
 	public ResponseValues generateStandardVisualization(
 			VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
-		
+
 		String entityURI = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		return generateStandardVisualizationForGrantTemporalVis(vitroRequest, log, dataset, entityURI);
 	}
@@ -61,15 +60,15 @@ public class TemporalGrantVisualizationRequestHandler implements
 		if (StringUtils.isBlank(entityURI)) {
 			entityURI = OrganizationUtilityFunctions.getStaffProvidedOrComputedHighestLevelOrganization(
 										log,
-										dataset, 
+										dataset,
 										vitroRequest);
-			
+
 		}
-		
+
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
 	}
-	
-	
+
+
 	@Override
 	public ResponseValues generateVisualizationForShortURLRequests(
 			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
@@ -77,7 +76,7 @@ public class TemporalGrantVisualizationRequestHandler implements
 
 		return generateStandardVisualizationForGrantTemporalVis(
 				vitroRequest, log, dataset, parameters.get(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY));
-		
+
 	}
 
 	@Override
@@ -85,29 +84,29 @@ public class TemporalGrantVisualizationRequestHandler implements
 			throws MalformedQueryParametersException, JsonProcessingException {
 
 		String entityURI = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
-		
+
 		VisConstants.DataVisMode currentDataMode = VisConstants.DataVisMode.CSV;
-		
+
 		/*
-		 * This will provide the data in json format mainly used for standalone temporal vis. 
+		 * This will provide the data in json format mainly used for standalone temporal vis.
 		 * */
 		if (VisualizationFrameworkConstants.JSON_OUTPUT_FORMAT
 					.equalsIgnoreCase(vitroRequest
 							.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY))) {
-			
+
 			currentDataMode = VisConstants.DataVisMode.JSON;
-			
+
 			if (StringUtils.isBlank(entityURI)) {
-				
+
 				entityURI = OrganizationUtilityFunctions
 								.getStaffProvidedOrComputedHighestLevelOrganization(
 										log,
 										dataset,
-										vitroRequest);								
-								
-			} 
-			
-		} 		
+										vitroRequest);
+
+			}
+
+		}
 
 		try {
 			return getSubjectEntityAndGenerateDataResponse(
@@ -120,25 +119,25 @@ public class TemporalGrantVisualizationRequestHandler implements
 			VisualizationCaches.buildMissing();
 		}
 	}
-	
+
 	private Map<String, String> prepareDataErrorResponse() {
 		String outputFileName = "no-organization_grants-per-year.csv";
-		
+
 		Map<String, String> fileData = new HashMap<String, String>();
-		
+
 		fileData.put(DataVisualizationController.FILE_NAME_KEY, outputFileName);
 		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, "application/octet-stream");
 		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, "");
 		return fileData;
 	}
-	
+
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
-		
+
 		throw new UnsupportedOperationException("Entity Grant Count does not provide Ajax response.");
 	}
-	
+
 	private Map<String, String> getSubjectEntityAndGenerateDataResponse(
 			VitroRequest vitroRequest, Log log, Dataset dataset,
 			String subjectEntityURI, VisConstants.DataVisMode visMode)
@@ -146,10 +145,8 @@ public class TemporalGrantVisualizationRequestHandler implements
 
 		RDFService rdfService = vitroRequest.getRDFService();
 
-		Locale locale= vitroRequest.getLocale();
-		
-		Map<String, String> orgLabelMap = VisualizationCaches.organizationLabels.get(rdfService, locale);
-		Map<String, String> personLabelMap = VisualizationCaches.personLabels.get(rdfService, locale);
+		Map<String, String> orgLabelMap = VisualizationCaches.organizationLabels.get(rdfService);
+		Map<String, String> personLabelMap = VisualizationCaches.personLabels.get(rdfService);
 
 		if (orgLabelMap.get(subjectEntityURI) == null) {
 			if (VisConstants.DataVisMode.JSON.equals(visMode)) {
@@ -158,13 +155,13 @@ public class TemporalGrantVisualizationRequestHandler implements
 				return prepareDataErrorResponse();
 			}
 		}
-		
-		Map<String, Set<String>> subOrgMap               = VisualizationCaches.organizationSubOrgs.get(rdfService, locale);
-		OrganizationPeopleMap organisationToPeopleMap = VisualizationCaches.organisationToPeopleMap.get(rdfService, locale);
-		Map<String, String> orgMostSpecificLabelMap      = VisualizationCaches.organizationToMostSpecificLabel.get(rdfService, locale);
-		Map<String, String> personMostSpecificLabelMap   = VisualizationCaches.personToMostSpecificLabel.get(rdfService, locale);
-		Map<String, Set<String>> personToGrantMap        = VisualizationCaches.personToGrant.get(rdfService, locale);
-		Map<String, String>      grantToYearMap          = VisualizationCaches.grantToYear.get(rdfService, locale);
+
+		Map<String, Set<String>> subOrgMap               = VisualizationCaches.organizationSubOrgs.get(rdfService);
+		OrganizationPeopleMap organisationToPeopleMap = VisualizationCaches.organisationToPeopleMap.get(rdfService);
+		Map<String, String> orgMostSpecificLabelMap      = VisualizationCaches.organizationToMostSpecificLabel.get(rdfService);
+		Map<String, String> personMostSpecificLabelMap   = VisualizationCaches.personToMostSpecificLabel.get(rdfService);
+		Map<String, Set<String>> personToGrantMap        = VisualizationCaches.personToGrant.get(rdfService);
+		Map<String, String>      grantToYearMap          = VisualizationCaches.grantToYear.get(rdfService);
 
 		Set<String> orgGrants       = new HashSet<String>();
 		Set<String> orgGrantsPeople = new HashSet<String>();
@@ -279,14 +276,14 @@ public class TemporalGrantVisualizationRequestHandler implements
 	private Map<String, String> prepareStandaloneDataErrorResponse() {
 
 		Map<String, String> fileData = new HashMap<String, String>();
-		
-		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
+
+		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY,
 					 "application/octet-stream");
-		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
+		fileData.put(DataVisualizationController.FILE_CONTENT_KEY,
 					 "{\"error\" : \"No Grants for this Organization found in VIVO.\"}");
 		return fileData;
 	}
-	
+
 	private TemplateResponseValues prepareStandaloneMarkupResponse(VitroRequest vreq,
 			   String entityURI) {
 
@@ -308,9 +305,9 @@ public class TemporalGrantVisualizationRequestHandler implements
 
 		return new TemplateResponseValues(standaloneTemplate, body);
 	}
-	
+
 	@Override
 	public AuthorizationRequest getRequiredPrivileges() {
 		return null;
-	}	
+	}
 }
