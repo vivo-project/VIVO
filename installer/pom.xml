@@ -6,7 +6,7 @@
 
     <groupId>org.vivoweb</groupId>
     <artifactId>vivo-installer</artifactId>
-    <version>1.10.0-SNAPSHOT</version>
+    <version>1.11.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
 
@@ -261,13 +261,27 @@
 		</plugins>
 	</reporting>
 
-	<!-- Add a custom repository, which is actually just a simple GitHub project 
-		in order to distribute some dependencies that aren't part of Maven central -->
-	<repositories>
-		<repository>
-			<id>vivo-dependencies</id>
-			<name>VIVO Dependencies</name>
-			<url>https://raw.github.com/vivo-project/dependencies/master/</url>
-		</repository>
-	</repositories>
+    <!--
+        Add a custom repository, which is actually just a simple GitHub project
+        in order to distribute some dependencies that aren't part of Maven central
+    -->
+    <repositories>
+        <repository>
+            <id>vivo-dependencies</id>
+            <name>VIVO Dependencies</name>
+            <url>https://raw.github.com/vivo-project/dependencies/master/</url>
+        </repository>
+
+        <repository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 </project>
