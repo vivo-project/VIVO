@@ -109,7 +109,7 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
             CapabilityMapResponse response = new CapabilityMapResponse();
             CapabilityMapResult result = new CapabilityMapResult();
 
-            fillPersonDetails(languageFilteringService, personParam, result, locale);
+            fillPersonDetails(languageFilteringService, personParam, result);
             if (StringUtils.isEmpty(result.firstName) && StringUtils.isEmpty(result.lastName)) {
                 result.lastName = "Missing Name";
             }
@@ -207,7 +207,7 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
         return new TemplateResponseValues(standaloneTemplate, body);
     }
 
-    private void fillPersonDetails(final RDFService rdfService, final String personUri, final CapabilityMapResult result, Locale locale) {
+    private void fillPersonDetails(final RDFService rdfService, final String personUri, final CapabilityMapResult result) {
         try {
             String construct = QueryConstants.getSparqlPrefixQuery() +
                     "CONSTRUCT {\n" +
