@@ -7,6 +7,7 @@ import java.util.List;
 import edu.cornell.mannlib.vitro.webapp.auth.policy.ifaces.PolicyDecision;
 import edu.cornell.mannlib.vitro.webapp.auth.policy.specialrelationships.RelationshipChecker;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AbstractPropertyStatementAction;
+import org.apache.jena.ontology.OntModel;
 
 /**
  * Does the requested action involve a change to a Project or Service that the
@@ -20,13 +21,6 @@ public class ProjectOrServiceChecker extends RelationshipChecker {
 	private static final String URI_CONTRIBUTING_ROLE_PROPERTY = NS_CORE
 			+ "contributingRole";
 
-	private final String[] resourceUris;
-
-	public ProjectOrServiceChecker(AbstractPropertyStatementAction action) {
-		super(action.getOntModel());
-		this.resourceUris = action.getResourceUris();
-	}
-
 	/**
 	 * A self-editor is authorized to add, edit, or delete a statement if the
 	 * subject or object refers to a Project or a Service, and if the
@@ -34,45 +28,41 @@ public class ProjectOrServiceChecker extends RelationshipChecker {
 	 * 
 	 * 1) is a Clinical Agent of that Project or Service
 	 */
-	public PolicyDecision isAuthorized(List<String> userUris) {
-		for (String resourceUri : resourceUris) {
-			if (isProject(resourceUri)) {
-				if (anyUrisInCommon(userUris,
-						getClinicalAgentsOfProject(resourceUri))) {
-					return authorizedClinicalAgent(resourceUri);
+	public boolean isRelated(OntModel ontModel, List<String> fromUris, List<String> toUris) {
+		for (String resourceUri : fromUris) {
+			if (isProject(ontModel, resourceUri)) {
+				if (anyUrisInCommon(ontModel, toUris,
+						getClinicalAgentsOfProject(ontModel, resourceUri))) {
+					return true;
 				}
 			}
-			if (isService(resourceUri)) {
-				if (anyUrisInCommon(userUris,
-						getClinicalAgentsOfService(resourceUri))) {
-					return authorizedClinicalAgent(resourceUri);
+			if (isService(ontModel, resourceUri)) {
+				if (anyUrisInCommon(ontModel, toUris,
+						getClinicalAgentsOfService(ontModel, resourceUri))) {
+					return true;
 				}
 			}
 		}
-		return null;
+
+		return false;
 	}
 
-	private boolean isProject(String resourceUri) {
-		return isResourceOfType(resourceUri, URI_PROJECT_TYPE);
+	private boolean isProject(OntModel ontModel, String resourceUri) {
+		return isResourceOfType(ontModel, resourceUri, URI_PROJECT_TYPE);
 	}
 
-	private boolean isService(String resourceUri) {
-		return isResourceOfType(resourceUri, URI_SERVICE_TYPE);
+	private boolean isService(OntModel ontModel, String resourceUri) {
+		return isResourceOfType(ontModel, resourceUri, URI_SERVICE_TYPE);
 	}
 
-	private List<String> getClinicalAgentsOfProject(String resourceUri) {
-		return getObjectsThroughLinkingNode(resourceUri, URI_REALIZES,
+	private List<String> getClinicalAgentsOfProject(OntModel ontModel, String resourceUri) {
+		return getObjectsThroughLinkingNode(ontModel, resourceUri, URI_REALIZES,
 				URI_CLINICAL_ROLE_TYPE, URI_INHERES_IN);
 	}
 
-	private List<String> getClinicalAgentsOfService(String resourceUri) {
-		return getObjectsThroughLinkingNode(resourceUri,
+	private List<String> getClinicalAgentsOfService(OntModel ontModel, String resourceUri) {
+		return getObjectsThroughLinkingNode(ontModel, resourceUri,
 				URI_CONTRIBUTING_ROLE_PROPERTY, URI_CLINICAL_ROLE_TYPE,
 				URI_INHERES_IN);
 	}
-
-	private PolicyDecision authorizedClinicalAgent(String resourceUri) {
-		return authorizedDecision("User has a Clinical Role on " + resourceUri);
-	}
-
 }
