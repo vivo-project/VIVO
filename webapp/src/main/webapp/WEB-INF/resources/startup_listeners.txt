@@ -33,6 +33,9 @@ edu.cornell.mannlib.vitro.webapp.servlet.setup.FileGraphSetup
 # edu.cornell.mannlib.vitro.webapp.migration.rel17.Release17Migrator
 edu.cornell.mannlib.vitro.webapp.migration.rel18.Release18Migrator
 
+edu.cornell.mannlib.vitro.webapp.migration.auth.AuthMigrator
+
+
 edu.cornell.mannlib.vitro.webapp.application.ApplicationImpl$ReasonersSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.SimpleReasonerSetup
 
@@ -43,13 +46,11 @@ edu.cornell.mannlib.vitro.webapp.auth.permissions.PermissionRegistry$Setup
 
 edu.cornell.mannlib.vitro.webapp.auth.permissions.PermissionSetsSmokeTest
 
-edu.cornell.mannlib.vitro.webapp.auth.policy.bean.PropertyRestrictionBean$Setup
-
 edu.cornell.mannlib.vitro.webapp.auth.policy.setup.CommonPolicyFamilySetup
 
 edu.cornell.mannlib.vitro.webapp.auth.policy.RootUserPolicy$Setup
 
-edu.cornell.mannlib.vivo.auth.policy.SelfEditorRelationshipPolicy$Setup
+edu.cornell.mannlib.vivo.auth.policy.SelfEditorRelationship$Setup
 
 edu.cornell.mannlib.vitro.webapp.auth.policy.RestrictHomeMenuItemEditingPolicy$Setup
 

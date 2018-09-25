@@ -7,6 +7,7 @@ import java.util.List;
 import edu.cornell.mannlib.vitro.webapp.auth.policy.ifaces.PolicyDecision;
 import edu.cornell.mannlib.vitro.webapp.auth.policy.specialrelationships.RelationshipChecker;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AbstractPropertyStatementAction;
+import org.apache.jena.ontology.OntModel;
 
 /**
  * Does the requested action involve a change to a Grant that the self-editor is
@@ -19,13 +20,6 @@ public class GrantChecker extends RelationshipChecker {
 	private static final String URI_CO_PI_ROLE_TYPE = NS_CORE
 			+ "CoPrincipalInvestigatorRole";
 
-	private final String[] resourceUris;
-
-	public GrantChecker(AbstractPropertyStatementAction action) {
-		super(action.getOntModel());
-		this.resourceUris = action.getResourceUris();
-	}
-
 	/**
 	 * A self-editor is authorized to add, edit, or delete a statement if the
 	 * subject or object refers to a Grant, and if the self-editor:
@@ -34,44 +28,34 @@ public class GrantChecker extends RelationshipChecker {
 	 *
 	 * 2) is a co-Principal Investigator (co-PI) of that Grant
 	 */
-	public PolicyDecision isAuthorized(List<String> userUris) {
-		for (String resourceUri : resourceUris) {
-			if (isGrant(resourceUri)) {
-				if (anyUrisInCommon(userUris,
-						getUrisOfPrincipalInvestigators(resourceUri))) {
-					return authorizedPI(resourceUri);
+	public boolean isRelated(OntModel ontModel, List<String> fromUris, List<String> toUris) {
+		for (String resourceUri : fromUris) {
+			if (isGrant(ontModel, resourceUri)) {
+				if (anyUrisInCommon(ontModel, toUris,
+						getUrisOfPrincipalInvestigators(ontModel, resourceUri))) {
+					return true;
 				}
-				if (anyUrisInCommon(userUris,
-						getUrisOfCoPrincipalInvestigators(resourceUri))) {
-					return authorizedCoPI(resourceUri);
+				if (anyUrisInCommon(ontModel, toUris,
+						getUrisOfCoPrincipalInvestigators(ontModel, resourceUri))) {
+					return true;
 				}
 			}
 		}
-		return null;
+
+		return false;
 	}
 
-	private boolean isGrant(String resourceUri) {
-		return isResourceOfType(resourceUri, URI_GRANT_TYPE);
+	private boolean isGrant(OntModel ontModel, String resourceUri) {
+		return isResourceOfType(ontModel, resourceUri, URI_GRANT_TYPE);
 	}
 
-	private List<String> getUrisOfPrincipalInvestigators(String resourceUri) {
-		return getObjectsThroughLinkingNode(resourceUri, URI_RELATES,
+	private List<String> getUrisOfPrincipalInvestigators(OntModel ontModel, String resourceUri) {
+		return getObjectsThroughLinkingNode(ontModel, resourceUri, URI_RELATES,
 				URI_PI_ROLE_TYPE, URI_INHERES_IN);
 	}
 
-	private List<String> getUrisOfCoPrincipalInvestigators(String resourceUri) {
-		return getObjectsThroughLinkingNode(resourceUri, URI_RELATES,
+	private List<String> getUrisOfCoPrincipalInvestigators(OntModel ontModel, String resourceUri) {
+		return getObjectsThroughLinkingNode(ontModel, resourceUri, URI_RELATES,
 				URI_CO_PI_ROLE_TYPE, URI_INHERES_IN);
 	}
-
-	private PolicyDecision authorizedPI(String resourceUri) {
-		return authorizedDecision("User is Principal Investigator of "
-				+ resourceUri);
-	}
-
-	private PolicyDecision authorizedCoPI(String resourceUri) {
-		return authorizedDecision("User is Co-Principal Investigator of "
-				+ resourceUri);
-	}
-
 }

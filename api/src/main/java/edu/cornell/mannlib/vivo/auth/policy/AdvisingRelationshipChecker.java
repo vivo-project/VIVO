@@ -7,6 +7,7 @@ import java.util.List;
 import edu.cornell.mannlib.vitro.webapp.auth.policy.ifaces.PolicyDecision;
 import edu.cornell.mannlib.vitro.webapp.auth.policy.specialrelationships.RelationshipChecker;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AbstractPropertyStatementAction;
+import org.apache.jena.ontology.OntModel;
 
 /**
  * Does the requested action involve a change to an Advising Relationship that
@@ -17,13 +18,6 @@ public class AdvisingRelationshipChecker extends RelationshipChecker {
 			+ "AdvisingRelationship";
 	private static final String URI_ADVISOR_ROLE = NS_CORE + "AdvisorRole";
 
-	private final String[] resourceUris;
-
-	public AdvisingRelationshipChecker(AbstractPropertyStatementAction action) {
-		super(action.getOntModel());
-		this.resourceUris = action.getResourceUris();
-	}
-
 	/**
 	 * A self-editor is authorized to add, edit, or delete a statement if the
 	 * subject or object refers to an Advising Relationship, and if the
@@ -31,28 +25,24 @@ public class AdvisingRelationshipChecker extends RelationshipChecker {
 	 *
 	 * 1) is an Advisor in that Relationship
 	 */
-	public PolicyDecision isAuthorized(List<String> userUris) {
-		for (String resourceUri : resourceUris) {
-			if (isAdvisingRelationship(resourceUri)) {
-				if (anyUrisInCommon(userUris, getUrisOfAdvisors(resourceUri))) {
-					return authorizedAdvisor(resourceUri);
+	public boolean isRelated(OntModel ontModel, List<String> fromUris, List<String> toUris) {
+		for (String resourceUri : fromUris) {
+			if (isAdvisingRelationship(ontModel, resourceUri)) {
+				if (anyUrisInCommon(ontModel, toUris, getUrisOfAdvisors(ontModel, resourceUri))) {
+					return true;
 				}
 			}
 		}
-		return null;
+
+		return false;
 	}
 
-	private boolean isAdvisingRelationship(String resourceUri) {
-		return isResourceOfType(resourceUri, URI_ADVISING_RELATIONSHIP_TYPE);
+	private boolean isAdvisingRelationship(OntModel ontModel, String resourceUri) {
+		return isResourceOfType(ontModel, resourceUri, URI_ADVISING_RELATIONSHIP_TYPE);
 	}
 
-	private List<String> getUrisOfAdvisors(String resourceUri) {
-		return getObjectsThroughLinkingNode(resourceUri, URI_RELATES,
+	private List<String> getUrisOfAdvisors(OntModel ontModel, String resourceUri) {
+		return getObjectsThroughLinkingNode(ontModel, resourceUri, URI_RELATES,
 				URI_ADVISOR_ROLE, URI_INHERES_IN);
 	}
-
-	private PolicyDecision authorizedAdvisor(String resourceUri) {
-		return authorizedDecision("User is an Advisor of " + resourceUri);
-	}
-
 }
