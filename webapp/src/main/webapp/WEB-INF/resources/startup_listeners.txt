@@ -86,7 +86,7 @@ edu.cornell.mannlib.vitro.webapp.dao.jena.VClassGroupCache$Setup
 
 edu.cornell.mannlib.vivo.orcid.OrcidContextSetup
 
-# This should be near the end, because it will issue a warning if the connection to Solr times out.
-edu.cornell.mannlib.vitro.webapp.servlet.setup.SolrSmokeTest
+# This should be near the end, because it will issue a warning if the connection to Solr or ElasticSearch times out.
+edu.cornell.mannlib.vitro.webapp.servlet.setup.SearchEngineSmokeTest
 
 org.vivoweb.webapp.startup.i18nSetup
