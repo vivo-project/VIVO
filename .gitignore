@@ -13,6 +13,7 @@ utilities/rdbmigration/.work
 **/target
 
 **/overlays
+*~
 
 # Eclipse artifacts
 **/.settings
