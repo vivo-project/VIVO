@@ -1911,7 +1911,7 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#hasCollaborator -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasCollaborator">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ReflexiveProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <rdfs:label xml:lang="en">has collaborator</rdfs:label>
