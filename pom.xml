@@ -229,6 +229,9 @@
             <activation>
                 <jdk>1.8</jdk>
             </activation>
+            <properties>
+                <javac.version>9+181-r4173-1</javac.version>
+            </properties>
             <build>
                 <plugins>
                     <plugin>
