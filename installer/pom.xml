@@ -16,6 +16,8 @@
         <vitro-version>${project.version}</vitro-version>
         <maven-site-plugin.skip>true</maven-site-plugin.skip>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+        <build.timestamp>${maven.build.timestamp}</build.timestamp>
     </properties>
 
     <build>

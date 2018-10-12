@@ -19,6 +19,13 @@
 
     <name>VIVO Install Web App</name>
 
+    <scm>
+        <connection>scm:git:git@github.com:vivo-project/VIVO.git</connection>
+        <developerConnection>scm:git:git@github.com:vivo-project/VIVO.git</developerConnection>
+        <url>git@github.com:vivo-project/VIVO.git</url>
+        <tag>HEAD</tag>
+    </scm>
+
     <profiles>
         <profile>
             <id>package</id>
@@ -28,6 +35,24 @@
             <build>
                 <finalName>${app-name}</finalName>
                 <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>buildnumber-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>create</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <doCheck>false</doCheck>
+                            <doUpdate>false</doUpdate>
+                            <shortRevisionLength>7</shortRevisionLength>
+                            <revisionOnScmFailure>Detached</revisionOnScmFailure>
+                        </configuration>
+                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
