@@ -4,9 +4,7 @@ package edu.cornell.mannlib.vivo.auth.policy;
 
 import java.util.List;
 
-import edu.cornell.mannlib.vitro.webapp.auth.policy.ifaces.PolicyDecision;
 import edu.cornell.mannlib.vitro.webapp.auth.policy.specialrelationships.RelationshipChecker;
-import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AbstractPropertyStatementAction;
 import org.apache.jena.ontology.OntModel;
 
 /**
