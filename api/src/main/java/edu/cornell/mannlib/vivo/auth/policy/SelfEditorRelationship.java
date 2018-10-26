@@ -2,7 +2,6 @@
 
 package edu.cornell.mannlib.vivo.auth.policy;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -30,9 +29,11 @@ import edu.cornell.mannlib.vitro.webapp.utils.RelationshipCheckerRegistry;
  * relationship (to be used in the decision).
  */
 public class SelfEditorRelationship {
-	// ----------------------------------------------------------------------
-	// helper classes
-	// ----------------------------------------------------------------------
+	/**
+	 * Helper class for initialising relationships for the self-editor functionality
+	 *
+	 * Note that an inner Setup class is used for consistency with other classes called from the startup_listerner file.
+	 */
 
 	/**
 	 * When the system starts up, install the policy. This class must be a
@@ -43,8 +44,6 @@ public class SelfEditorRelationship {
 	public static class Setup implements ServletContextListener {
 		@Override
 		public void contextInitialized(ServletContextEvent sce) {
-			ServletContext ctx = sce.getServletContext();
-
 			RelationshipCheckerRegistry.registerRelationshipChecker(new InfoContentEntityChecker());
 			RelationshipCheckerRegistry.registerRelationshipChecker(new GrantChecker());
 			RelationshipCheckerRegistry.registerRelationshipChecker(new ProjectOrServiceChecker());
