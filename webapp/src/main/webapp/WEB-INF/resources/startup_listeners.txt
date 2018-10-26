@@ -33,6 +33,7 @@ edu.cornell.mannlib.vitro.webapp.servlet.setup.FileGraphSetup
 # edu.cornell.mannlib.vitro.webapp.migration.rel17.Release17Migrator
 edu.cornell.mannlib.vitro.webapp.migration.rel18.Release18Migrator
 
+# Migrate any existing role-based permissions to the new permission sets
 edu.cornell.mannlib.vitro.webapp.migration.auth.AuthMigrator
 
 
