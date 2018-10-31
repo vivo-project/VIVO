@@ -1,5 +1,7 @@
 # VIVO: Connect, Share, Discover
 
+[![Build Status](https://travis-ci.org/vivo-project/VIVO.png?branch=develop)](https://travis-ci.org/vivo-project/VIVO)
+
 VIVO is an open source semantic web tool for research discovery -- finding people and the research they do.
 
 VIVO supports editing, searching, browsing and visualizing research activity in order to discover people, programs, 
