@@ -1,4 +1,4 @@
-<#-- $This file is distributed under the terms of the license in LICENSE$ -->
+<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
 <#-- VIVO-specific default data property statement template. 
     
@@ -13,15 +13,12 @@
 	<#assign datatype = "none" />
 </#if>
 <@showStatement statement property datatype />
-
 <#macro showStatement statement property datatype>
-
     <#assign theValue = statement.value />
 
-<#-- create a weblink if the property range is a URI AND it contains http -->
-    <#if property.rangeDatatypeURI?? && theValue?contains("http")>
-        <#assign theValue = "<a href=\"" + statement.value + "\" target=\"_blank\">" + statement.value + "</a>" />
-    </#if>
+   <#if datatype == "anyURI" && theValue?starts_with("http")>
+	<#assign theValue = "<a href=\"" + statement.value + "\" target=\"_blank\">" + statement.value + "</a>" />
+   </#if>
 	
     <#if theValue?contains("<ul>") >
         <#assign theValue = theValue?replace("<ul>","<ul class='tinyMCEDisc'>") />
