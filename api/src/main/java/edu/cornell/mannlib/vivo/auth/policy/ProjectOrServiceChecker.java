@@ -29,13 +29,13 @@ public class ProjectOrServiceChecker extends RelationshipChecker {
 	public boolean isRelated(OntModel ontModel, List<String> fromUris, List<String> toUris) {
 		for (String resourceUri : fromUris) {
 			if (isProject(ontModel, resourceUri)) {
-				if (anyUrisInCommon(ontModel, toUris,
+				if (anyUrisInCommon(toUris,
 						getClinicalAgentsOfProject(ontModel, resourceUri))) {
 					return true;
 				}
 			}
 			if (isService(ontModel, resourceUri)) {
-				if (anyUrisInCommon(ontModel, toUris,
+				if (anyUrisInCommon(toUris,
 						getClinicalAgentsOfService(ontModel, resourceUri))) {
 					return true;
 				}

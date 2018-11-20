@@ -24,7 +24,7 @@ public class CourseChecker extends RelationshipChecker {
 	public boolean isRelated(OntModel ontModel, List<String> fromUris, List<String> toUris) {
 		for (String resourceUri : fromUris) {
 			if (isCourse(ontModel, resourceUri)) {
-				if (anyUrisInCommon(ontModel, toUris, getUrisOfTeachers(ontModel, resourceUri))) {
+				if (anyUrisInCommon(toUris, getUrisOfTeachers(ontModel, resourceUri))) {
 					return true;
 				}
 			}

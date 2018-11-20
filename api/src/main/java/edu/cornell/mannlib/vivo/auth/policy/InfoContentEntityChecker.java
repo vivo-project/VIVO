@@ -31,13 +31,13 @@ public class InfoContentEntityChecker extends RelationshipChecker {
 	public boolean isRelated(OntModel ontModel, List<String> fromUris, List<String> toUris) {
 		for (String resourceUri : fromUris) {
 			if (isInfoContentEntity(ontModel, resourceUri)) {
-				if (anyUrisInCommon(ontModel, toUris, getUrisOfAuthors(ontModel, resourceUri))) {
+				if (anyUrisInCommon(toUris, getUrisOfAuthors(ontModel, resourceUri))) {
 					return true;
 				}
-				if (anyUrisInCommon(ontModel, toUris, getUrisOfEditors(ontModel, resourceUri))) {
+				if (anyUrisInCommon(toUris, getUrisOfEditors(ontModel, resourceUri))) {
 					return true;
 				}
-				if (anyUrisInCommon(ontModel, toUris, getUrisOfFeatured(ontModel, resourceUri))) {
+				if (anyUrisInCommon(toUris, getUrisOfFeatured(ontModel, resourceUri))) {
 					return true;
 				}
 			}
