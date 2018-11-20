@@ -29,11 +29,11 @@ public class GrantChecker extends RelationshipChecker {
 	public boolean isRelated(OntModel ontModel, List<String> fromUris, List<String> toUris) {
 		for (String resourceUri : fromUris) {
 			if (isGrant(ontModel, resourceUri)) {
-				if (anyUrisInCommon(ontModel, toUris,
+				if (anyUrisInCommon(toUris,
 						getUrisOfPrincipalInvestigators(ontModel, resourceUri))) {
 					return true;
 				}
-				if (anyUrisInCommon(ontModel, toUris,
+				if (anyUrisInCommon(toUris,
 						getUrisOfCoPrincipalInvestigators(ontModel, resourceUri))) {
 					return true;
 				}

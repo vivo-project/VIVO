@@ -26,7 +26,7 @@ public class PresentationChecker extends RelationshipChecker {
 	public boolean isRelated(OntModel ontModel, List<String> fromUris, List<String> toUris) {
 		for (String resourceUri : fromUris) {
 			if (isPresentation(ontModel, resourceUri)) {
-				if (anyUrisInCommon(ontModel, toUris, getUrisOfPresenters(ontModel, resourceUri))) {
+				if (anyUrisInCommon(toUris, getUrisOfPresenters(ontModel, resourceUri))) {
 					return true;
 				}
 			}

@@ -26,7 +26,7 @@ public class AdvisingRelationshipChecker extends RelationshipChecker {
 	public boolean isRelated(OntModel ontModel, List<String> fromUris, List<String> toUris) {
 		for (String resourceUri : fromUris) {
 			if (isAdvisingRelationship(ontModel, resourceUri)) {
-				if (anyUrisInCommon(ontModel, toUris, getUrisOfAdvisors(ontModel, resourceUri))) {
+				if (anyUrisInCommon(toUris, getUrisOfAdvisors(ontModel, resourceUri))) {
 					return true;
 				}
 			}
