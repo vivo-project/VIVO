@@ -86,7 +86,7 @@ public class AgrovocService implements ExternalConceptService {
 			return conceptList;
 		int conceptCounter = 0;
 		
-		HashSet<String> encounteredURI = new HashSet<String>();
+		HashSet<String> encounteredURI = new HashSet<>();
 		
 		// Loop through each of these URIs and load using the SKOSManager
 		for (String conceptUri : conceptUris) {
@@ -276,7 +276,7 @@ public class AgrovocService implements ExternalConceptService {
 				resultSetSize++;
 				QuerySolution solution = resultSet.nextSolution();
 				Iterator varnames = solution.varNames();
-				HashMap<String, String> hm = new HashMap<String, String>();
+				HashMap<String, String> hm = new HashMap<>();
 				while (varnames.hasNext()) {
 					String name = (String) varnames.next();
 					RDFNode rdfnode = solution.get(name);
