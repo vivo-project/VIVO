@@ -26,6 +26,10 @@ public class CrossrefCreateAndLinkResourceProvider implements CreateAndLinkResou
                 return doiTrimmed.substring(19);
             } else if (doiTrimmed.startsWith("http://dx.doi.org/")) {
                 return doiTrimmed.substring(18);
+            } else if (doiTrimmed.startsWith("https://doi.org/")) {
+                return doiTrimmed.substring(16);
+            } else if (doiTrimmed.startsWith("http://doi.org/")) {
+                return doiTrimmed.substring(15);
             }
 
             return doiTrimmed;
