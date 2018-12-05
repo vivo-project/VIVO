@@ -1,0 +1,62 @@
+.citation_claimed:before {
+    content: url('../../../images/createAndLink/tick.png');
+    zoom: 75%; margin-left: 535px;
+    float: left;
+    position: absolute;
+}
+.citation_claimed:hover:before {
+    opacity: 0.2;
+}
+.citation_claimed .citation {
+    opacity: 0.2;
+}
+.citation_claimed:hover .citation {
+    opacity: 1.0;
+}
+.citation_type {
+    font-style: italic;
+    padding: 5px;
+}
+.citation_title {
+    font-weight: bold;
+}
+.citation_journal {
+    font-style: italic;
+}
+.claimed {
+    font-weight: bold;
+}
+.linked {
+    font-style: italic;
+}
+.entryId {
+    background-color: #3e8baa; /* #E0E0E0; */
+    color: #ffffff;
+    padding: 5px;
+    font-weight: bold;
+    display: inline-block;
+}
+.entry {
+    border: 2px solid #3e8baa; /* #E0E0E0; */
+    padding: 5px;
+}
+label {
+    display: inline;
+}
+.radioWithLabel:checked + .labelForRadio {
+    font-weight: bold;
+}
+.description {
+    padding-left: 22px;
+}
+.remainder {
+    font-style: italic;
+}
+.claim-for {
+    float: right;
+    border: 2px solid #3e8baa; /* #E0E0E0; */
+    padding: 5px;
+}
+.claim-for h3 {
+    text-align: center;
+}
