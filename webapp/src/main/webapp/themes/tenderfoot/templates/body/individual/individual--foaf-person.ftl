@@ -104,11 +104,23 @@
 
 <section itemscope itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
     <section id="individual-info" ${infoClass!} role="region">
-        <!-- Overview -->
-        <!-- #include "individual-overview.ftl" -->
-
-        <!-- Geographic Focus -->
-        <!-- #include "individual-geographicFocus.ftl" -->
+		<#if editable>
+			<#if claimSources?size &gt; 0>
+				${i18n().claim_publications_by}
+				<#if claimSources?seq_contains("doi")>
+					<form action="${urls.base}/createAndLink/doi" method="get" style="display: inline-block;">
+						<input type="hidden" name="profileUri" value="${individual.uri}" />
+						<input type="submit" class="submit" value="${i18n().claim_publications_by_doi}" />
+					</form>
+				</#if>
+				<#if claimSources?seq_contains("pmid")>
+					<form action="${urls.base}/createAndLink/pmid" method="get" style="display: inline-block;">
+						<input type="hidden" name="profileUri" value="${individual.uri}" />
+						<input type="submit" class="submit" value="${i18n().claim_publications_by_pmid}" />
+					</form>
+				</#if>
+			</#if>
+		</#if>
     </section>
 </section>
 

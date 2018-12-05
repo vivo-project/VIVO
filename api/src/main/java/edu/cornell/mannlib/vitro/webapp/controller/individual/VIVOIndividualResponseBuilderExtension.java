@@ -2,6 +2,7 @@ package edu.cornell.mannlib.vitro.webapp.controller.individual;
 
 import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import org.vivoweb.webapp.controller.freemarker.CreateAndLinkResourceController;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -24,6 +25,13 @@ public class VIVOIndividualResponseBuilderExtension implements IndividualRespons
     public void addOptions(VitroRequest vreq, Map<String, Object> body) {
         addAltMetricOptions(vreq, body);
         addPlumPrintOptions(vreq, body);
+        addEnabledClaimingSources(vreq, body);
+    }
+
+    private void addEnabledClaimingSources(VitroRequest vreq, Map<String, Object> body) {
+        ConfigurationProperties props = ConfigurationProperties.getBean(vreq);
+        body.put("claimSources", CreateAndLinkResourceController.getEnabledProviders(props));
+
     }
 
     private void addAltMetricOptions(VitroRequest vreq, Map<String, Object> body) {
