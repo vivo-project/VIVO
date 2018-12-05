@@ -18,7 +18,7 @@
                         ?property
                         ?role   
                         ?roleLabel ?roleTypeLabel                          
-                        ?indivInRole (afn:localname(?indivInRole) AS ?indivName)
+                        ?indivInRole (REPLACE(STR(?indivInRole),"^.*(#)(.*)$", "$2") AS ?indivName)
                         ?indivLabel
                         ?dateTimeInterval ?dateTimeStart ?dateTimeEnd ?objectType
         WHERE {

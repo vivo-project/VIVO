@@ -31,7 +31,7 @@
             ?adviseeRole a core:AdviseeRole .
             ?adviseeRole core:relatedBy ?advisingRel .
             ?advisingRel a core:AdvisingRelationship .
-            LET ( ?localName := afn:localname(?advisingRel) )
+            LET ( ?localName := REPLACE(STR(?advisingRel),"^.*(#)(.*)$", "$2") )
             OPTIONAL {
                 <precise-subquery>?subject ?property ?adviseeRole .
                 ?adviseeRole a core:AdviseeRole .

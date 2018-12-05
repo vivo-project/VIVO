@@ -55,7 +55,7 @@
                 }
                 </collated>
 
-                LET (?event1Name := afn:localname(?event1))
+                LET (?event1Name := REPLACE(STR(?event1),"^.*(#)(.*)$", "$2"))
 
                 OPTIONAL {
                     <precise-subquery>

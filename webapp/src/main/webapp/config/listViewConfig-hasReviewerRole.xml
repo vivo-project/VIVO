@@ -14,7 +14,7 @@
                         ?role
                         ?subclassLabel
                         ?activity 
-                        (afn:localname(?activity) AS ?activityLocal)
+                        (REPLACE(STR(?activity),"^.*(#)(.*)$", "$2") AS ?activityLocal)
                         ?activityName
                         ?dateTimeStart 
                         ?dateTimeEnd 

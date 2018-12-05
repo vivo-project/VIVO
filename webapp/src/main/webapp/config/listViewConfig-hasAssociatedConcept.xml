@@ -13,7 +13,7 @@
         SELECT ?concept ?conceptLabel ?conceptName ?vocabularySource ?vocabularySourceName
         WHERE {
          	?subject ?property ?concept .
-         	LET (?conceptName := afn:localname(?concept)) 
+         	LET (?conceptName := REPLACE(STR(?concept),"^.*(#)(.*)$", "$2")) 
          	OPTIONAL {
                 <precise-subquery>?subject ?property ?concept .</precise-subquery>
                 ?concept rdfs:label ?conceptLabel .

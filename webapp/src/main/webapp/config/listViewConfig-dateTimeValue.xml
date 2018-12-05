@@ -10,7 +10,7 @@
         PREFIX afn:  &lt;http://jena.apache.org/ARQ/function#&gt;
         
         SELECT DISTINCT ?dateTimeValue 
-                        (afn:localname(?dateTimePrecision) AS ?precision) 
+                        (REPLACE(STR(?dateTimePrecision),"^.*(#)(.*)$", "$2") AS ?precision) 
                         ?dateTime
         WHERE {
             ?subject ?property ?dateTimeValue .

@@ -26,7 +26,7 @@
         {
             ?subject ?property ?object .
             ?object a ?objectType .
-            LET (?localName := afn:localname(?object))
+            LET (?localName := REPLACE(STR(?object),"^.*(#)(.*)$", "$2"))
 
             OPTIONAL {
                 <precise-subquery>?subject ?property ?object .

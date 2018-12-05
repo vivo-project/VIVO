@@ -38,7 +38,7 @@
                 ?role &lt;http://purl.obolibrary.org/obo/BFO_0000054&gt; ?presentation .
                 ?presentation a vivo:Presentation .
                 ?presentation rdfs:label ?presentationLabel .
-                LET (?presentationName := afn:localname(?presentation))
+                LET (?presentationName := REPLACE(STR(?presentation),"^.*(#)(.*)$", "$2"))
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .

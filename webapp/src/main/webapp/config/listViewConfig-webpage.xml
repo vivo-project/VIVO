@@ -13,7 +13,7 @@
         PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
 
         SELECT ?vcard ?link 
-               (afn:localname(?link) AS ?linkName) 
+               (REPLACE(STR(?link),"^.*(#)(.*)$", "$2") AS ?linkName) 
                (group_concat(distinct ?linkLabel;separator="/") as ?label)
                ?url 
                ?rank

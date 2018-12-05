@@ -32,7 +32,7 @@
                 ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
                 ?activity a core:Contract .
                 ?activity rdfs:label ?activityLabel .
-                LET (?activityName := afn:localname(?activity))
+                LET (?activityName := REPLACE(STR(?activity),"^.*(#)(.*)$", "$2"))
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
@@ -57,7 +57,7 @@
                 ?role &lt;http://vivoweb.org/ontology/core#relatedBy&gt; ?activity .
                 ?activity a core:Grant .
                 ?activity rdfs:label ?activityLabel .
-                LET (?activityName := afn:localname(?activity))
+                LET (?activityName := REPLACE(STR(?activity),"^.*(#)(.*)$", "$2"))
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
