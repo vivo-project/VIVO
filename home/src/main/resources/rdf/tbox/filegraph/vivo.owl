@@ -9341,6 +9341,20 @@ This class allows for linking an author to a publication while indicating inform
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Legal (department within a company); Use for any non-academic department</obo:IAO_0000112>
     </owl:Class>
     
+    <!-- http://vivoweb.org/ontology/core#AdministrativeUnit -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#AdministrativeUnit">
+        <rdfs:label xml:lang="en">Administrative Unit</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Health Science Center of the University of Florida is an administrative unit of the university. It is not a center.</obo:IAO_0000112><!-- example of usage -->
+        <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000122"/><!-- curation status: ready for release -->
+        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A part of an organization that is not recognized as a department or other part of an organization.</obo:IAO_0000115><!-- definition -->
+        <obo:IAO_0000116 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Not to be confused with local administrative unit that Wikipedia uses to describe parts of countries.  VIVO will likely add the term LocalAdministrativeUnit in the future. See Wikipedia. https://en.wikipedia.org/wiki/Local_administrative_unit</obo:IAO_0000116><!-- editor's administrative note -->
+        <obo:IAO_0000116 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Not to be confused with administrative department which does not yet exist in VIVO.  Administrative departments are departments.  Administrative units are not departments. VIVO will likely add the term AdministrativeDepartment in the future, as many organizations in the VIVO domain have a common practice to classify some departments as administrative and others as academic.</obo:IAO_0000116><!-- editor's administrative note -->
+        <obo:IAO_0000117 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PERSON: Michael Conlon</obo:IAO_0000117><!-- name of editor -->
+        <obo:IAO_0000118 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Organization Administrative Unit</obo:IAO_0000118><!-- alternative name for term -->
+    </owl:Class>
+    
 
 
     <!-- http://vivoweb.org/ontology/core#Division -->
