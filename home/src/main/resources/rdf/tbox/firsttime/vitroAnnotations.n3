@@ -7544,5 +7544,22 @@ vivo:assignedBy
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
+vivo:overview
+      vitro:editing
+              "HTML"^^xsd:string .
 
+vivo:teachingOverview
+      vitro:editing
+              "HTML"^^xsd:string .
 
+vivo:researchOverview
+      vitro:editing
+              "HTML"^^xsd:string .
+
+vivo:outreachOverview
+      vitro:editing
+              "HTML"^^xsd:string .
+
+bibo:abstract
+      vitro:editing
+              "HTML"^^xsd:string .
