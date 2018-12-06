@@ -31,7 +31,7 @@
         <#break>
     </#switch>
     <textarea name="externalIds" rows="15" cols="50"></textarea><br />
-    <input type="submit" class="submit" /><br />
+    <input type="submit" value="${i18n().create_and_link_submit_ids}" class="submit" /><br />
     <input type="hidden" name="action" value="findID" />
     <input type="hidden" name="profileUri" value="${profileUri!}" />
 </form>

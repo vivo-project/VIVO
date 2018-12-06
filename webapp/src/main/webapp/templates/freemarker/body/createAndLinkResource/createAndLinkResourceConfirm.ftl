@@ -117,7 +117,7 @@
     </#if>
     <div class="buttons">
         <input type="hidden" name="action" value="confirmID" />
-        <input type="submit" value="Confirm" class="submit" />
+        <input type="submit" value="${i18n().create_and_link_submit_confirm}" class="submit" />
         <#if remainderCount??>
             <span class="remainder">${i18n().create_and_link_remaining(remainderCount)}</span>
         </#if>
