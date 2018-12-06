@@ -1,3 +1,5 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
 package org.vivoweb.webapp.createandlink.pubmed;
 
 import com.fasterxml.jackson.core.JsonFactory;
@@ -77,6 +79,8 @@ public class PubMedCreateAndLinkResourceProvider implements CreateAndLinkResourc
                 }
 
                 if (!parser.isClosed()) {
+                    // We have reached the field for our ID, but we need to be on the next token for the mapper to work
+                    JsonToken token = parser.nextToken();
                     ObjectMapper objectMapper = new ObjectMapper();
                     objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                     PubMedSummaryResponse response = objectMapper.readValue(parser, PubMedSummaryResponse.class);
@@ -120,6 +124,8 @@ public class PubMedCreateAndLinkResourceProvider implements CreateAndLinkResourc
                 }
 
                 if (!parser.isClosed()) {
+                    // We have reached the field for our ID, but we need to be on the next token for the mapper to work
+                    JsonToken token = parser.nextToken();
                     ObjectMapper objectMapper = new ObjectMapper();
                     objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                     PubMedSummaryResponse response = objectMapper.readValue(parser, PubMedSummaryResponse.class);
