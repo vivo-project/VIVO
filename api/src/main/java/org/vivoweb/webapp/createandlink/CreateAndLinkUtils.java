@@ -1,3 +1,5 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
 package org.vivoweb.webapp.createandlink;
 
 import org.apache.commons.lang3.StringUtils;
