@@ -47,17 +47,19 @@ public class PubMedCreateAndLinkResourceProvider implements CreateAndLinkResourc
         ids.PubMedID = externalId;
 
         String json = readUrl(PUBMED_ID_API + externalId);
-        PubMedIDResponse response = null;
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            response = objectMapper.readValue(json, PubMedIDResponse.class);
-        } catch (IOException e) {
-            logger.error("Unable to read JSON", e);
-        }
-        if (response != null && !ArrayUtils.isEmpty(response.records)) {
-            ids.DOI = response.records[0].doi;
-            ids.PubMedCentralID = response.records[0].pmcid;
+        if (!StringUtils.isEmpty(json)) {
+            PubMedIDResponse response = null;
+            try {
+                ObjectMapper objectMapper = new ObjectMapper();
+                objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+                response = objectMapper.readValue(json, PubMedIDResponse.class);
+            } catch (IOException e) {
+                logger.error("Unable to read JSON", e);
+            }
+            if (response != null && !ArrayUtils.isEmpty(response.records)) {
+                ids.DOI = response.records[0].doi;
+                ids.PubMedCentralID = response.records[0].pmcid;
+            }
         }
 
         return ids;
@@ -170,10 +172,19 @@ public class PubMedCreateAndLinkResourceProvider implements CreateAndLinkResourc
 
                         if (response.articleids != null) {
                             for (PubMedSummaryResponse.ArticleID articleID : response.articleids) {
-                                if ("doi".equalsIgnoreCase(articleID.idtype)) {
-                                    resourceModel.DOI = articleID.value;
-                                } else if ("pmc".equalsIgnoreCase(articleID.idtype)) {
-                                    resourceModel.PubMedCentralID = articleID.idtype;
+                                if (!StringUtils.isEmpty(articleID.value)) {
+                                    if ("doi".equalsIgnoreCase(articleID.idtype)) {
+                                        resourceModel.DOI = articleID.value.trim();
+                                    } else if ("pmc".equalsIgnoreCase(articleID.idtype)) {
+                                        resourceModel.PubMedCentralID = articleID.value.trim();
+                                    } else if ("pmcid".equalsIgnoreCase(articleID.idtype)) {
+                                        if (StringUtils.isEmpty(resourceModel.PubMedCentralID)) {
+                                            String id = articleID.value.replaceAll(".*(PMC[0-9]+).*", "$1");
+                                            if (!StringUtils.isEmpty(id)) {
+                                                resourceModel.PubMedCentralID = id;
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }

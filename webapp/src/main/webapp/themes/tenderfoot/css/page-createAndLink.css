@@ -1,3 +1,13 @@
+.citation_error:before {
+    content: url('../../../images/createAndLink/error.png');
+    zoom: 50%;
+    margin-top: 10px;
+    margin-right: 10px;
+    float: left;
+}
+.citation_error {
+    height: 70px;
+}
 .citation_claimed:before {
     content: url('../../../images/createAndLink/tick.png');
     zoom: 75%; margin-left: 535px;

@@ -429,7 +429,6 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
                                 citation.externalProvider = externalProvider;
                             }
                         }
-
                     }
 
                     // Guess which author in the available metadata is the user claiming the work
@@ -441,6 +440,9 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
 
                         // Increment the count of processed identifiers
                         idCount++;
+                    } else {
+                        citation.showError = true;
+                        citations.add(citation);
                     }
                 }
             }
@@ -890,7 +892,21 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
 
         // Add a DOI
         if (!StringUtils.isEmpty(resourceModel.DOI)) {
-            work.addProperty(model.createProperty(BIBO_DOI), resourceModel.DOI.toLowerCase());
+            // Normalise the DOI according to link guidelines
+            String doi = resourceModel.DOI.toLowerCase();
+            if (doi.startsWith("http://dx.doi.org/")) {
+                doi = "https://doi.org/" + doi.substring(18);
+            } else if (doi.startsWith("https://dx.doi.org/")) {
+                doi = "https://doi.org/" + doi.substring(18);
+            } else if (doi.startsWith("http://doi.org/")) {
+                doi = "https://doi.org/" + doi.substring(15);
+            } else if (!doi.startsWith("http")) {
+                doi = "https://doi.org/" + doi;
+            }
+
+            if (doi.startsWith("https://doi.org/")) {
+                work.addProperty(model.createProperty(BIBO_DOI), doi);
+            }
         }
 
         // Add a PubMed ID
@@ -1459,21 +1475,21 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
                             }
                             break;
 
-                        // Relationships - we are really interested in authors
+                        // Relationships - we are really interested in authors and editors
                         case VIVO_RELATEDBY:
                             // Get the relationship context
                             Resource relationship = stmt.getResource();
                             if (relationship != null) {
                                 Integer rank = null;
 
-                                // If it isn't an authorship, skip it
-                                if (!isResourceOfType(relationship, VIVO_AUTHORSHIP)) {
+                                // If it isn't an authorship or editorship, skip it
+                                if (!isResourceOfType(relationship, VIVO_AUTHORSHIP) &&
+                                    !isResourceOfType(relationship, VIVO_EDITORSHIP)) {
                                     break;
                                 }
 
-                                // Now loop over the properties of the authorship context
-                                Citation.Name newAuthor = null;
-                                Resource authorResource = null;
+                                // Now loop over the properties of the author/editorship context
+                                Resource personResource = null;
                                 StmtIterator relationshipIter = relationship.listProperties();
                                 try {
                                     while (relationshipIter.hasNext()) {
@@ -1483,7 +1499,7 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
                                             case VIVO_RELATES:
                                                 // If it isn't pointing to the resource, it must be pointing to a person
                                                 if (!vivoUri.equals(relationshipStmt.getResource().getURI())) {
-                                                    authorResource = relationshipStmt.getResource();
+                                                    personResource = relationshipStmt.getResource();
                                                 }
                                                 break;
 
@@ -1497,80 +1513,86 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
                                     relationshipIter.close();
                                 }
 
+                                Citation.Name newAuthor = null;
+
                                 // If we've got an author
-                                if (authorResource != null) {
+                                if (personResource != null) {
                                     // If the author is the user, then they have already claimed this publication
-                                    if (profileUri.equals(authorResource.getURI())) {
+                                    if (profileUri.equals(personResource.getURI())) {
                                         citation.alreadyClaimed = true;
                                     }
 
-                                    boolean linked = false;
+                                    if (isResourceOfType(relationship, VIVO_AUTHORSHIP)) {
+                                        boolean linked = false;
 
-                                    // Now get the name of the author, from either the VCARD or the foaf:Person
-                                    Statement familyName = null;
-                                    Statement givenName = null;
-                                    if (isResourceOfType(authorResource, VCARD_INDIVIDUAL)) {
-                                        if (authorResource.hasProperty(model.getProperty(VCARD_HAS_NAME))) {
-                                            Statement vcardName = authorResource.getProperty(model.getProperty(VCARD_HAS_NAME));
-                                            if (vcardName != null) {
-                                                givenName = vcardName.getProperty(model.getProperty(VCARD_GIVENNAME));
-                                                familyName = vcardName.getProperty(model.getProperty(VCARD_FAMILYNAME));
+                                        // Now get the name of the author, from either the VCARD or the foaf:Person
+                                        Statement familyName = null;
+                                        Statement givenName = null;
+                                        if (isResourceOfType(personResource, VCARD_INDIVIDUAL)) {
+                                            if (personResource.hasProperty(model.getProperty(VCARD_HAS_NAME))) {
+                                                Statement vcardName = personResource.getProperty(model.getProperty(VCARD_HAS_NAME));
+                                                if (vcardName != null) {
+                                                    givenName = vcardName.getProperty(model.getProperty(VCARD_GIVENNAME));
+                                                    familyName = vcardName.getProperty(model.getProperty(VCARD_FAMILYNAME));
+                                                }
+                                            }
+                                        } else if (personResource.hasProperty(model.getProperty(OBO_HAS_CONTACT_INFO))) {
+                                            Resource vCard = personResource.getProperty(model.getProperty(OBO_HAS_CONTACT_INFO)).getResource();
+                                            if (vCard.hasProperty(model.getProperty(VCARD_HAS_NAME))) {
+                                                Statement vcardName = vCard.getProperty(model.getProperty(VCARD_HAS_NAME));
+                                                if (vcardName != null) {
+                                                    givenName = vcardName.getProperty(model.getProperty(VCARD_GIVENNAME));
+                                                    familyName = vcardName.getProperty(model.getProperty(VCARD_FAMILYNAME));
+                                                }
+                                                linked = true;
                                             }
                                         }
-                                    } else if (authorResource.hasProperty(model.getProperty(OBO_HAS_CONTACT_INFO))) {
-                                        Resource vCard = authorResource.getProperty(model.getProperty(OBO_HAS_CONTACT_INFO)).getResource();
-                                        if (vCard.hasProperty(model.getProperty(VCARD_HAS_NAME))) {
-                                            Statement vcardName = vCard.getProperty(model.getProperty(VCARD_HAS_NAME));
-                                            if (vcardName != null) {
-                                                givenName = vcardName.getProperty(model.getProperty(VCARD_GIVENNAME));
-                                                familyName = vcardName.getProperty(model.getProperty(VCARD_FAMILYNAME));
-                                            }
+
+                                        if (givenName == null) {
+                                            // It's a foaf person, which means it is already linked to a full profile in VIVO
+                                            givenName = personResource.getProperty(model.getProperty(FOAF_FIRSTNAME));
+                                            familyName = personResource.getProperty(model.getProperty(FOAF_LASTNAME));
                                             linked = true;
                                         }
-                                    }
 
-                                    if (givenName == null) {
-                                        // It's a foaf person, which means it is already linked to a full profile in VIVO
-                                        givenName = authorResource.getProperty(model.getProperty(FOAF_FIRSTNAME));
-                                        familyName = authorResource.getProperty(model.getProperty(FOAF_LASTNAME));
-                                        linked = true;
-                                    }
-
-                                    // If we have an author name, format it
-                                    if (familyName != null) {
-                                        newAuthor = new Citation.Name();
-                                        if (givenName != null) {
-                                            newAuthor.name = CreateAndLinkUtils.formatAuthorString(familyName.getString(), givenName.getString());
-                                        } else {
-                                            newAuthor.name = CreateAndLinkUtils.formatAuthorString(familyName.getString(), null);
-                                        }
-
-                                        // Record whether the author is a full profile, or just a VCARD
-                                        newAuthor.linked = linked;
-                                    } else {
-                                        Statement label = authorResource.getProperty(RDFS.label);
-                                        if (label != null) {
-                                            String name = label.getString();
-                                            if (name.contains(",")) {
-                                                String[] parts = name.split("\\s*,\\s*");
-                                                if (parts.length > 1) {
-                                                    name = CreateAndLinkUtils.formatAuthorString(parts[0], parts[parts.length - 1]);
-                                                }
+                                        // If we have an author name, format it
+                                        if (familyName != null) {
+                                            newAuthor = new Citation.Name();
+                                            if (givenName != null) {
+                                                newAuthor.name = CreateAndLinkUtils.formatAuthorString(familyName.getString(), givenName.getString());
                                             } else {
-                                                String[] parts = name.split("\\s*");
-                                                if (parts.length > 1) {
-                                                    name = CreateAndLinkUtils.formatAuthorString(parts[parts.length - 1], parts[0]);
-                                                }
+                                                newAuthor.name = CreateAndLinkUtils.formatAuthorString(familyName.getString(), null);
                                             }
 
-                                            newAuthor = new Citation.Name();
-                                            newAuthor.name = name;
+                                            // Record whether the author is a full profile, or just a VCARD
                                             newAuthor.linked = linked;
+                                        } else {
+                                            Statement label = personResource.getProperty(RDFS.label);
+                                            if (label != null) {
+                                                String name = label.getString();
+                                                if (name.contains(",")) {
+                                                    String[] parts = name.split("\\s*,\\s*");
+                                                    if (parts.length > 1) {
+                                                        name = CreateAndLinkUtils.formatAuthorString(parts[0], parts[parts.length - 1]);
+                                                    }
+                                                } else {
+                                                    String[] parts = name.split("\\s*");
+                                                    if (parts.length > 1) {
+                                                        name = CreateAndLinkUtils.formatAuthorString(parts[parts.length - 1], parts[0]);
+                                                    }
+                                                }
+
+                                                newAuthor = new Citation.Name();
+                                                newAuthor.name = name;
+                                                newAuthor.linked = linked;
+                                            }
                                         }
                                     }
                                 } else {
-                                    newAuthor = new Citation.Name();
-                                    newAuthor.name = "Deleted Author";
+                                    if (isResourceOfType(relationship, VIVO_AUTHORSHIP)) {
+                                        newAuthor = new Citation.Name();
+                                        newAuthor.name = "Deleted Author";
+                                    }
                                 }
 
                                 // If we have an author
