@@ -1730,7 +1730,9 @@ vivo:outreachOverview
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
-              "Please enter a single summary narrative of your outreach goals and/or contributions"^^xsd:string .
+              "Please enter a single summary narrative of your outreach goals and/or contributions"^^xsd:string ;
+      vitro:editing
+              "HTML"^^xsd:string .
 
 obo:ERO_0000031
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -1912,7 +1914,9 @@ bibo:abstract
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
-              "A summary of the resource."^^xsd:string .
+              "A summary of the resource."^^xsd:string ;
+      vitro:editing
+              "HTML"^^xsd:string .
 
 vivo:PrincipalInvestigatorRole
       vitro:displayLimitAnnot
@@ -2141,7 +2145,9 @@ vivo:teachingOverview
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
-              "Please enter a single narrative summary description of your teaching activities, goals, and/or experience"^^xsd:string .
+              "Please enter a single narrative summary description of your teaching activities, goals, and/or experience"^^xsd:string ;
+      vitro:editing
+              "HTML"^^xsd:string .
 
 vivo:rank
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -2268,7 +2274,9 @@ vivo:overview
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
-              "A short narrative summary to be used as a single descriptive overview statement."^^xsd:string .
+              "A short narrative summary to be used as a single descriptive overview statement."^^xsd:string ;
+      vitro:editing
+              "HTML"^^xsd:string .
 
 vivo:description
       vitro:displayLimitAnnot
@@ -5405,7 +5413,9 @@ vivo:researchOverview
       vitro:inPropertyGroupAnnot
               <http://vivoweb.org/ontology#vitroPropertyGroupresearch> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:editing
+              "HTML"^^xsd:string .
 
 obo:ERO_0000390
       vitro:displayLimitAnnot
