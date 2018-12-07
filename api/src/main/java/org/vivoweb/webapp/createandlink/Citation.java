@@ -20,6 +20,7 @@ public class Citation {
     public String DOI;
 
     public boolean alreadyClaimed = false;
+    public boolean showError = false;
 
     public String getExternalId() { return externalId; }
     public String getExternalProvider() { return externalProvider; }
@@ -53,6 +54,8 @@ public class Citation {
     }
 
     public boolean getAlreadyClaimed() { return alreadyClaimed; }
+
+    public boolean getShowError() { return showError; }
 
     public static class Name {
         public String name;
