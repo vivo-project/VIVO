@@ -4104,7 +4104,16 @@ Definition and description came from Wikipedia here: http://en.wikipedia.org/wik
         <ns:term_status>stable</ns:term_status>
         <rdfs:comment xml:lang="en">Digital Object Identifier</rdfs:comment>
         <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/IAO_0000030"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
         <rdfs:subPropertyOf rdf:resource="http://purl.org/ontology/bibo/identifier"/>
+		<obo:IAO_0000112 xml:lang="en">OpenVIVO: Transparency in Scholarship has DOI https://doi.org/10.3389/frma.2017.00012</obo:IAO_0000112><!-- example of usage -->
+		<obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000120"/><!-- curation status -->
+		<obo:IAO_0000115 xml:lang="en">In computing, a Digital Object Identifier or DOI is a persistent identifier or handle used to uniquely identify objects, standardized by the International Organization for Standardization (ISO). https://en.wikipedia.org/wiki/Digital_object_identifier</obo:IAO_0000115><!-- definition -->
+		<obo:IAO_0000116 xml:lang="en">VIVO is adding a range declaration of anyURI to bibo:doi to move toward the CrossRef recommendation (2017) for displaying DOI as URI. As URI, Vitro and VIVO will render them as clickable links, providing access to the object's landing page for all objects with doi.</obo:IAO_0000116><!-- editor's administrative note -->
+		<obo:IAO_0000116 xml:lang="en">VIVO is considering a proposal to represent identifiers as entities rather than datatype properties.  This would permit the classification of DOI as a handle and as a PURL, which we cannot represent now.  Hence the curation status 120.</obo:IAO_0000116><!-- editor's administrative note -->
+		<obo:IAO_0000117 xml:lang="en">PERSON: Michael Conlon</obo:IAO_0000117><!-- name of editor -->
+		<obo:IAO_0000119 xml:lang="en">ISO 26324:2012(en) Information and documentation — Digital object identifier system https://www.iso.org/obp/ui/#iso:std:iso:26324:ed-1:v1:en</obo:IAO_0000119><!-- citation -->
+		<obo:IAO_0000119 xml:lang="en">Crossref DOI Display https://www.crossref.org/display-guidelines/</obo:IAO_0000119><!-- citation -->
     </owl:DatatypeProperty>
     
 
