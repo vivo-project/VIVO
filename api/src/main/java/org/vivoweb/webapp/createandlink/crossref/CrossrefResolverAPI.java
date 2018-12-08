@@ -5,6 +5,7 @@ package org.vivoweb.webapp.createandlink.crossref;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cornell.mannlib.vitro.webapp.utils.http.HttpClientFactory;
+import edu.cornell.mannlib.vitro.webapp.web.URLEncoder;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -40,7 +41,7 @@ public class CrossrefResolverAPI {
     public String findInExternal(String id, Citation citation) {
         try {
             // Read JSON from the resolver
-            String json = readJSON(CROSSREF_RESOLVER + id);
+            String json = readJSON(CROSSREF_RESOLVER + URLEncoder.encode(id));
 
             if (StringUtils.isEmpty(json)) {
                 return null;

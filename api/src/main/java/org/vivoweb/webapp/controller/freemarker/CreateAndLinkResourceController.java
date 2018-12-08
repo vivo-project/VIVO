@@ -4,6 +4,7 @@ package org.vivoweb.webapp.controller.freemarker;
 
 import edu.cornell.mannlib.vedit.beans.LoginStatusBean;
 import edu.cornell.mannlib.vitro.webapp.auth.permissions.SimplePermission;
+import edu.cornell.mannlib.vitro.webapp.auth.policy.PolicyHelper;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.SelfEditingConfiguration;
@@ -251,19 +252,27 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
             person = individualDao.getIndividualByURI(profileUri);
         }
 
-        // If we haven't got a valid person
-        if (person == null) {
-            // Get the currently logged in user
-            UserAccount loggedInAccount = LoginStatusBean.getCurrentUser(vreq);
-            SelfEditingConfiguration sec = SelfEditingConfiguration.getBean(vreq);
+        boolean isProfileUriForLoggedIn = false;
 
-            // Find the profile(s) associated with this user
-            List<Individual> assocInds = sec.getAssociatedIndividuals(vreq.getWebappDaoFactory().getIndividualDao(), loggedInAccount.getExternalAuthId());
-            if (!assocInds.isEmpty()) {
+        // Get the currently logged in user
+        UserAccount loggedInAccount = LoginStatusBean.getCurrentUser(vreq);
+        SelfEditingConfiguration sec = SelfEditingConfiguration.getBean(vreq);
+
+        // Find the profile(s) associated with this user
+        List<Individual> assocInds = sec.getAssociatedIndividuals(vreq.getWebappDaoFactory().getIndividualDao(), loggedInAccount.getExternalAuthId());
+        if (!assocInds.isEmpty()) {
+            if (person == null) {
                 // If we have associated profiles, ensure that a valid person profile really does exist
                 profileUri = assocInds.get(0).getURI();
                 if (!StringUtils.isEmpty(profileUri)) {
                     person = individualDao.getIndividualByURI(profileUri);
+                    isProfileUriForLoggedIn = true;
+                }
+            } else if (!StringUtils.isEmpty(profileUri)){
+                for (Individual ind : assocInds) {
+                    if (ind.getURI().equalsIgnoreCase(profileUri)) {
+                        isProfileUriForLoggedIn = true;
+                    }
                 }
             }
         }
@@ -273,7 +282,12 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
             return new TemplateResponseValues("unknownProfile.ftl");
         }
 
-        // Create a map of common values to pass to the templates
+        // If the profile isn't associated with the logged in user, check that we have back end editing privileges
+        if (!isProfileUriForLoggedIn && !PolicyHelper.isAuthorizedForActions(vreq, SimplePermission.DO_BACK_END_EDITING.ACTION)) {
+            return new TemplateResponseValues("unauthorizedForProfile.ftl");
+        }
+
+            // Create a map of common values to pass to the templates
         Map<String, Object> templateValues = new HashMap<>();
         templateValues.put("link", profileUri);
         templateValues.put("label", provider.getLabel());
@@ -374,8 +388,8 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
             Set<String> remainderIds = new HashSet<>();
             List<Citation> citations = new ArrayList<>();
 
-            // Split the passed IDs into a parseable array (separated by whitespace, comma or semicolon)
-            String[] externalIdArr = externalIdsToFind.split("[\\s,;]+");
+            // Split the passed IDs into a parseable array (separated by whitespace, oe comma)
+            String[] externalIdArr = externalIdsToFind.split("[\\s,]+");
 
             // Go through each identifier
             for (String externalId : externalIdArr) {
@@ -892,21 +906,8 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
 
         // Add a DOI
         if (!StringUtils.isEmpty(resourceModel.DOI)) {
-            // Normalise the DOI according to link guidelines
-            String doi = resourceModel.DOI.toLowerCase();
-            if (doi.startsWith("http://dx.doi.org/")) {
-                doi = "https://doi.org/" + doi.substring(18);
-            } else if (doi.startsWith("https://dx.doi.org/")) {
-                doi = "https://doi.org/" + doi.substring(18);
-            } else if (doi.startsWith("http://doi.org/")) {
-                doi = "https://doi.org/" + doi.substring(15);
-            } else if (!doi.startsWith("http")) {
-                doi = "https://doi.org/" + doi;
-            }
-
-            if (doi.startsWith("https://doi.org/")) {
-                work.addProperty(model.createProperty(BIBO_DOI), doi);
-            }
+            String doi = new CrossrefCreateAndLinkResourceProvider().normalize(resourceModel.DOI);
+            work.addProperty(model.createProperty(BIBO_DOI), doi);
         }
 
         // Add a PubMed ID
@@ -1308,6 +1309,22 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
                     "  {\n" +
                     "  \t?work <http://purl.org/ontology/bibo/doi> \"" + doi + "\" .\n" +
                     "  }\n" +
+                    "  UNION\n" +
+                    "  {\n" +
+                    "  \t?work <http://purl.org/ontology/bibo/doi> \"http://doi.org/" + doi + "\" .\n" +
+                    "  }\n" +
+                    "  UNION\n" +
+                    "  {\n" +
+                    "  \t?work <http://purl.org/ontology/bibo/doi> \"https://doi.org/" + doi + "\" .\n" +
+                    "  }\n" +
+                    "  UNION\n" +
+                    "  {\n" +
+                    "  \t?work <http://purl.org/ontology/bibo/doi> \"http://dx.doi.org/" + doi + "\" .\n" +
+                    "  }\n" +
+                    "  UNION\n" +
+                    "  {\n" +
+                    "  \t?work <http://purl.org/ontology/bibo/doi> \"https://dx.doi.org/" + doi + "\" .\n" +
+                    "  }\n" +
                     "}\n";
 
             try {
@@ -1324,7 +1341,7 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
             }
 
             // We've found a resource, so return it's Uri
-            if (works.size() == 1) {
+            if (works.size() > 0) {
                 return works.get(0);
             }
         }
