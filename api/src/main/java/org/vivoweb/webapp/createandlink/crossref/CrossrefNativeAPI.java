@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import edu.cornell.mannlib.vitro.webapp.utils.http.HttpClientFactory;
+import edu.cornell.mannlib.vitro.webapp.web.URLEncoder;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -45,7 +46,7 @@ public class CrossrefNativeAPI {
      */
     public String findInExternal(String id, Citation citation) {
         // Get JSON from the CrossRef API
-        String json = readUrl(CROSSREF_API + id);
+        String json = readUrl(CROSSREF_API + URLEncoder.encode(id));
 
         if (StringUtils.isEmpty(json)) {
             return null;
