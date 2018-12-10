@@ -309,7 +309,6 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 
 	private static String EDITORSHIPS_MODEL = ""
 			+ "PREFIX core: <http://vivoweb.org/ontology/core#>\n"
-			+ "PREFIX afn:  <http://jena.apache.org/ARQ/function#>\n"
 			+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
 			+ "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
 			+ "CONSTRUCT\n"
@@ -347,10 +346,9 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 
     private static String EDITORSHIPS_QUERY = ""
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
-        + "PREFIX afn:  <http://jena.apache.org/ARQ/function#> \n"
         + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
         + "PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n"
-        + "SELECT ?editorshipURI (afn:localname(?editorshipURI) AS ?editorshipName) ?editorURI ?editorName ?rank \n"
+        + "SELECT ?editorshipURI (REPLACE(STR(?editorshipURI),\"^.*(#)(.*)$\", \"$2\") AS ?editorshipName) ?editorURI ?editorName ?rank \n"
         + "WHERE { \n"
         + "?subject core:relatedBy ?editorshipURI . \n"
         + "?editorshipURI a core:Editorship . \n"

@@ -7,7 +7,7 @@
 
 <list-view-config>
     <query-select>
-        PREFIX afn:  &lt;http://jena.apache.org/ARQ/function#&gt;
+        
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
@@ -63,7 +63,7 @@
                 ?object a ?objectType .</precise-subquery>
                 ?object a ?subclass .
             }
-            FILTER ( afn:namespace(?subclass) != "http://vitro.mannlib.cornell.edu/ns/vitro/0.7#" )
+            FILTER ( REPLACE(STR(?subclass),"^(.*)(#)(.*)$", "$1$2") != "http://vitro.mannlib.cornell.edu/ns/vitro/0.7#" )
         </collated>
 
         # Order by ?type is important, because if the object has more than one mostSpecificType,
