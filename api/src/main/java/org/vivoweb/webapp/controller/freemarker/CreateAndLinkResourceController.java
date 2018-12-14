@@ -6,6 +6,8 @@ import edu.cornell.mannlib.vedit.beans.LoginStatusBean;
 import edu.cornell.mannlib.vitro.webapp.auth.permissions.SimplePermission;
 import edu.cornell.mannlib.vitro.webapp.auth.policy.PolicyHelper;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;
+import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AddDataPropertyStatement;
+import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AddObjectPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.SelfEditingConfiguration;
 import edu.cornell.mannlib.vitro.webapp.beans.UserAccount;
@@ -60,6 +62,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import static edu.cornell.mannlib.vitro.webapp.auth.requestedAction.RequestedAction.SOME_LITERAL;
+import static edu.cornell.mannlib.vitro.webapp.auth.requestedAction.RequestedAction.SOME_PREDICATE;
+import static edu.cornell.mannlib.vitro.webapp.auth.requestedAction.RequestedAction.SOME_URI;
 
 /**
  * Main controller class for claiming (creating and/or linking) resources to a profile
@@ -282,9 +288,17 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
             return new TemplateResponseValues("unknownProfile.ftl");
         }
 
-        // If the profile isn't associated with the logged in user, check that we have back end editing privileges
-        if (!isProfileUriForLoggedIn && !PolicyHelper.isAuthorizedForActions(vreq, SimplePermission.DO_BACK_END_EDITING.ACTION)) {
-            return new TemplateResponseValues("unauthorizedForProfile.ftl");
+        // If the profile isn't associated with the logged in user
+        if (!isProfileUriForLoggedIn) {
+            // Check that we have back end editing priveleges
+            if (!PolicyHelper.isAuthorizedForActions(vreq, SimplePermission.DO_BACK_END_EDITING.ACTION)) {
+                // If all else fails, can we add statements to this individual?
+                AddDataPropertyStatement adps = new AddDataPropertyStatement(vreq.getJenaOntModel(), profileUri, SOME_URI, SOME_LITERAL);
+                AddObjectPropertyStatement aops = new AddObjectPropertyStatement(vreq.getJenaOntModel(), profileUri, SOME_PREDICATE, SOME_URI);
+                if (!PolicyHelper.isAuthorizedForActions(vreq, adps.or(aops))) {
+                    return new TemplateResponseValues("unauthorizedForProfile.ftl");
+                }
+            }
         }
 
             // Create a map of common values to pass to the templates
