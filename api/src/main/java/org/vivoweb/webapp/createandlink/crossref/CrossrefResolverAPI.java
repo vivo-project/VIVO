@@ -29,7 +29,7 @@ public class CrossrefResolverAPI {
     protected final Log logger = LogFactory.getLog(getClass());
 
     // Base URL for the resolver
-    private static final String CROSSREF_RESOLVER = "http://dx.doi.org/";
+    private static final String CROSSREF_RESOLVER = "https://doi.org/";
 
     /**
      * Find the DOI in CrossRef, filling the citation object
