@@ -65,81 +65,70 @@ span.completed {
 }
 </style>
 
-<#assign orcidTextOne = "add an" />
-<#assign orcidTextTwo = "Adding" />
+<#assign orcidTitle = i18n().orcid_title_add />
+<#assign orcidStepHeading = i18n().orcid_step1_add />
 <#if (orcidInfo.existingOrcids?size > 0) >
-    <#assign orcidTextOne = "confirm your" />
-    <#assign orcidTextTwo = "Confirming" />
+    <#assign orcidTitle = i18n().orcid_title_confirm />
+    <#assign orcidStepHeading = i18n().orcid_step1_confirm />
 </#if>
 <#assign step2dimmed = (["START", "FAILED_AUTHENTICATE", "DENIED_AUTHENTICATE"]?seq_contains(orcidInfo.progress))?string("dimmed", "") />
-<#assign continueAppears = (["START", "GOT_PROFILE"]?seq_contains(orcidInfo.progress))/>
+<#assign continueAppears = (["START"]?seq_contains(orcidInfo.progress))/>
+<#if orcidApiLevel == "member">
+    <#assign continueAppears = (["START", "GOT_PROFILE"]?seq_contains(orcidInfo.progress))/>
+</#if>
 
 <div>
 
 <section id="orcid-offer" role="region">
-    <h2>Do you want to ${orcidTextOne} ORCID iD?</h2>
-   
+    <h2>${orcidTitle}</h2>
+
     <div class="step">
       <#if "START" == orcidInfo.progress>
-        <h2>Step 1: ${orcidTextTwo} your ORCID iD</h2>
-        <ul>
-          <li>VIVO redirects you to ORCID's web site.</li>
-          <li>You log in to your ORCID account.
-            <ul class="inner"><li>If you don't have an account, you can create one.</li></ul>
-            </li>
-          <li>You tell ORCID that VIVO may read your ORCID record. (one-time permission)</li>
-          <li>VIVO reads your ORCID record.</li>
-          <li>VIVO notes that your ORCID iD is confirmed.</li>
-        </ul>
+          <h2>${orcidStepHeading}</h2>
+          ${i18n().orcid_step1_description}
       <#elseif "DENIED_AUTHENTICATE" == orcidInfo.progress>
-        <h2>Step 1: ${orcidTextTwo} your ORCID iD</h2>
-        <p>You denied VIVO's request to read your ORCID record.</p>
-        <p>Confirmation can't continue.</p>
+          <h2>${orcidStepHeading}</h2>
+          ${i18n().orcid_step1_denied}
       <#elseif "FAILED_AUTHENTICATE" == orcidInfo.progress>
-        <h2>Step 1: ${orcidTextTwo} your ORCID iD</h2>
-        <p>VIVO failed to read your ORCID record.</p>
-        <p>Confirmation can't continue.</p>
+          <h2>${orcidStepHeading}</h2>
+          ${i18n().orcid_step1_failed}
       <#else>
-        <h2>Step 1: ${orcidTextTwo} your ORCID iD <span class="completed">(step completed)</span></h2>
-        <p>Your ORCID iD is confirmed as ${orcidInfo.orcid}</p>
-        <p><a href="${orcidInfo.orcidUri}" target="_blank">View your ORCID record.</a></p>
+          <h2>${orcidStepHeading} <span class="completed">${i18n().orcid_step_completed}</span></h2>
+          ${i18n().orcid_step1_confirmed(orcidInfo.orcid)}
+          <p><a href="${orcidInfo.orcidUri}" target="_blank">${i18n().orcid_view_orcid_record}</a></p>
       </#if>
     </div>
-    
-    <div class="step ${step2dimmed}">
-      <#if "ID_ALREADY_PRESENT" == orcidInfo.progress>
-        <h2>Step 2 (recommended): Linking your ORCID record to VIVO <span class="completed">(step completed)</span></h2>
-        <p>Your ORCID record already includes a link to VIVO.</p>
-      <#elseif "DENIED_ID" == orcidInfo.progress>
-        <h2>Step 2 (recommended): Linking your ORCID record to VIVO</h2>
-        <p>You denied VIVO's request to add an External ID to your ORCID record.</p>
-        <p>Linking can't continue.</p>
-      <#elseif "FAILED_ID" == orcidInfo.progress>
-        <h2>Step 2 (recommended): Linking your ORCID record to VIVO</h2>
-        <p>VIVO failed to add an External ID to your ORCID record.</p>
-        <p>Linking can't continue.</p>
-      <#elseif "ADDED_ID" == orcidInfo.progress>
-        <h2>Step 2 (recommended): Linking your ORCID record to VIVO <span class="completed">(step completed)</span></h2>
-        <p>Your ORCID record is linked to VIVO</p>
-        <p><a href="${orcidInfo.orcidUri}" target="_blank">View your ORCID record.</a></p>
-      <#else>
-        <h2>Step 2 (recommended): Linking your ORCID record to VIVO</h2>
-        <ul>
-          <li>VIVO redirects you to ORCID's web site</li>
-          <li>You tell ORCID that VIVO may add an "external ID" to your ORCID record. (one-time permission)</li>
-          <li>VIVO adds the external ID.</li>
-        </ul>
-      </#if>
-    </div>
-    
+
+    <#if orcidApiLevel == "member">
+        <div class="step ${step2dimmed}">
+        <#if "ID_ALREADY_PRESENT" == orcidInfo.progress>
+            <h2>${i18n().orcid_step2_heading} <span class="completed">${i18n().orcid_step_completed}</span></h2>
+            ${i18n().orcid_step2_already_present}
+        <#elseif "DENIED_ID" == orcidInfo.progress>
+            <h2>${i18n().orcid_step2_heading}</h2>
+            ${i18n().orcid_step2_denied}
+        <#elseif "FAILED_ID" == orcidInfo.progress>
+            <h2>${i18n().orcid_step2_heading}</h2>
+            ${i18n().orcid_step2_failed}
+        <#elseif "ADDED_ID" == orcidInfo.progress>
+            <h2>${i18n().orcid_step2_heading} <span class="completed">${i18n().orcid_step_completed}</span></h2>
+            ${i18n().orcid_step2_added}
+            <p><a href="${orcidInfo.orcidUri}" target="_blank">${i18n().orcid_view_orcid_record}</a></p>
+        <#else>
+            <h2>${i18n().orcid_step2_heading}</h2>
+            ${i18n().orcid_step2_description}
+        </#if>
+        </div>
+    </#if>
+
     <div class=links>
       <form method="GET" action="${orcidInfo.progressUrl}">
         <p>
           <#if continueAppears>
-            <input type="submit" name="submit" value="Continue <#if "START" == orcidInfo.progress>Step 1<#else>Step 2</#if>" class="submit"/>
+            <input type="submit" name="submit" value="<#if "START" == orcidInfo.progress>${i18n().orcid_button_step1}<#else>${i18n().orcid_button_step1}</#if>" class="submit"/>
             or 
           </#if>
-          <a class="cancel" href="${orcidInfo.profilePage}">Return to your VIVO profile page</a>
+          <a class="cancel" href="${orcidInfo.profilePage}">${i18n().orcid_return_to_vivo}</a>
         </p>
       </form>
     </div>

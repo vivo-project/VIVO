@@ -45,6 +45,8 @@ public abstract class OrcidAbstractHandler {
 	protected final OrcidConfirmationState state;
 	protected final UserAccount currentUser;
 
+	private static String apiLevel = "member";
+
 	protected OrcidAbstractHandler(VitroRequest vreq) {
 		this.vreq = vreq;
 		this.occ = OrcidClientContext.getInstance();
@@ -121,7 +123,12 @@ public abstract class OrcidAbstractHandler {
 	protected ResponseValues showConfirmationPage() {
 		Map<String, Object> map = new HashMap<>();
 		map.put("orcidInfo", state.toMap());
+		map.put("orcidApiLevel", apiLevel);
 		return new TemplateResponseValues(TEMPLATE_CONFIRM, map);
+	}
+
+	public static void setAPiLevelPublic() {
+		apiLevel = "public";
 	}
 
 }
