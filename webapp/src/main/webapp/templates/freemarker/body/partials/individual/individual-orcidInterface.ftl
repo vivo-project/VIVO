@@ -19,7 +19,7 @@
     
     <#list orcidInfo.orcids?keys as key>
         <#if "no" == orcidInfo.orcids[key]?string("yes","no") >
-            <#assign confirmThis = "Confirm the ID" />
+            <#assign confirmThis = i18n().confirm_orcid_id />
             </#if>
     </#list>
         
