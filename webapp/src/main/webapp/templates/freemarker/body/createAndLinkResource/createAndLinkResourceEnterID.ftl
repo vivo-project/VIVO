@@ -1,6 +1,4 @@
-<style>
-</style>
-<form method="post">
+<form id="createAndLink" method="post">
     <#if personLabel??>
         <div class="claim-for">
             <h3>${i18n().create_and_link_claim_for(personLabel)}</h3>
@@ -21,7 +19,7 @@
         <#case "doi">
             ${i18n().create_and_link_enter_dois_intro}<br />
             <i>ID</i>:  10.1038/nature01234<br />
-            <i>URL</i>: http://dx.doi.org/10.1038/nature01234<br />
+            <i>URL</i>: https://doi.org/10.1038/nature01234<br />
             <br />
             ${i18n().create_and_link_enter_dois_supported}<br /><br />
         <#break>

@@ -1,7 +1,5 @@
-<style>
-</style>
 <#setting number_format="computer">
-<form method="post">
+<form id="createAndLink" method="post">
     <#if personLabel??>
         <div class="claim-for">
             <h3>${i18n().create_and_link_claim_for(personLabel)}</h3>
