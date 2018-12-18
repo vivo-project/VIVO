@@ -1,14 +1,14 @@
-.citation_error:before {
+#createAndLink .citation_error:before {
     content: url('../../../images/createAndLink/error.png');
     transform: scale(0.5);
     margin-top: 10px;
     margin-right: 10px;
     float: left;
 }
-.citation_error {
+#createAndLink .citation_error {
     height: 70px;
 }
-.citation_claimed:before {
+#createAndLink .citation_claimed:before {
     content: url('../../../images/createAndLink/tick.png');
     transform: scale(0.75);
     margin-top: -17px;
@@ -16,59 +16,59 @@
     float: left;
     position: absolute;
 }
-.citation_claimed:hover:before {
+#createAndLink .citation_claimed:hover:before {
     opacity: 0.2;
 }
-.citation_claimed .citation {
+#createAndLink .citation_claimed .citation {
     opacity: 0.2;
 }
-.citation_claimed:hover .citation {
+#createAndLink .citation_claimed:hover .citation {
     opacity: 1.0;
 }
-.citation_type {
+#createAndLink .citation_type {
     font-style: italic;
     padding: 5px;
 }
-.citation_title {
+#createAndLink .citation_title {
     font-weight: bold;
 }
-.citation_journal {
+#createAndLink .citation_journal {
     font-style: italic;
 }
-.claimed {
+#createAndLink .claimed {
     font-weight: bold;
 }
-.linked {
+#createAndLink .linked {
     font-style: italic;
 }
-.entryId {
+#createAndLink .entryId {
     background-color: #3e8baa; /* #E0E0E0; */
     color: #ffffff;
     padding: 5px;
     font-weight: bold;
     display: inline-block;
 }
-.entry {
+#createAndLink .entry {
     border: 2px solid #3e8baa; /* #E0E0E0; */
     padding: 5px;
 }
-label {
+#createAndLink label {
     display: inline;
 }
-.radioWithLabel:checked + .labelForRadio {
+#createAndLink .radioWithLabel:checked + .labelForRadio {
     font-weight: bold;
 }
-.description {
+#createAndLink .description {
     padding-left: 22px;
 }
-.remainder {
+#createAndLink .remainder {
     font-style: italic;
 }
-.claim-for {
+#createAndLink .claim-for {
     float: right;
     border: 2px solid #3e8baa; /* #E0E0E0; */
     padding: 5px;
 }
-.claim-for h3 {
+#createAndLink .claim-for h3 {
     text-align: center;
 }
