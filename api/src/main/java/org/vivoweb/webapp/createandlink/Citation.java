@@ -10,6 +10,7 @@ public class Citation {
     public String vivoUri;
 
     public String type;
+    public String typeUri;
     public String title;
     public Name[] authors;
     public String journal;
@@ -29,6 +30,7 @@ public class Citation {
     public String getVivoUri() { return vivoUri; }
 
     public String getType() { return type; }
+    public String getTypeUri() { return typeUri; }
     public String getTitle() { return title; }
     public Name[] getAuthors() {
         return authors;
