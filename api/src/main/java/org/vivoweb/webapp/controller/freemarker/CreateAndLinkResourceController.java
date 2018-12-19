@@ -57,6 +57,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -352,6 +353,9 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
                             if (StringUtils.isEmpty(vivoUri)) {
                                 ResourceModel resourceModel = null;
 
+                                // Get the publication type from the form
+                                String typeUri = vreq.getParameter("type" + externalId);
+
                                 // Get the appropriate resource provider for the external ID from the form
                                 String resourceProvider = vreq.getParameter("externalProvider" + externalId);
 
@@ -364,7 +368,7 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
 
                                 // If we have an intermediate model, create the VIVO representation from the model
                                 if (resourceModel != null) {
-                                    vivoUri = createVIVOObject(vreq, updatedModel, resourceModel);
+                                    vivoUri = createVIVOObject(vreq, updatedModel, resourceModel, typeUri);
                                 }
                             } else {
                                 // Get the existing statements for the model, and add them to the both in-memory models
@@ -462,6 +466,9 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
                     // Guess which author in the available metadata is the user claiming the work
                     proposeAuthorToLink(vreq, citation, profileUri);
 
+                    // Conver the type in the citation to a VIVO type uri for use in the confirmation form
+                    citation.typeUri = typeToClassMap.getOrDefault(citation.type, BIBO_ARTICLE);
+
                     // If we have found a citation, add it to the list of citations to display
                     if (citation.vivoUri != null || citation.externalResource != null) {
                         citations.add(citation);
@@ -479,6 +486,9 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
             if (citations.size() > 0) {
                 // Add the citations to the values to pass to the template
                 templateValues.put("citations", citations);
+
+                // Add the list of known publication types
+                templateValues.put("publicationTypes", getPublicationTypes(vreq));
 
                 // If there are IDs still left to process, add them to the values passed to the template
                 if (remainderIds.size() > 0) {
@@ -904,14 +914,29 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
      * @param resourceModel
      * @return
      */
-    protected String createVIVOObject(VitroRequest vreq, Model model, ResourceModel resourceModel) {
+    protected String createVIVOObject(VitroRequest vreq, Model model, ResourceModel resourceModel, String typeUri) {
         String vivoUri = getUnusedUri(vreq);
 
         // Create the resource in our model
         Resource work = model.createResource(vivoUri);
 
         // Add the correct type to the resource
-        work.addProperty(RDF.type, model.getResource(typeToClassMap.getOrDefault(resourceModel.type, BIBO_ARTICLE)));
+        if (!StringUtils.isEmpty(typeUri)) {
+            // If the form passed a type uri, ensure that it is a known type URI
+            for (PublicationType publicationType: getPublicationTypes(vreq)) {
+                // We have a known type, so record it on the work
+                if (typeUri.equals(publicationType.getUri())) {
+                    work.addProperty(RDF.type, model.getResource(typeUri));
+                    break;
+                }
+            }
+        }
+
+        // If the work does not have a type set
+        if (!work.hasProperty(RDF.type)) {
+            // Try to map the type in the external model, or use academic article if none.
+            work.addProperty(RDF.type, model.getResource(typeToClassMap.getOrDefault(resourceModel.type, BIBO_ARTICLE)));
+        }
 
         // Add the title
         if (!StringUtils.isEmpty(resourceModel.title)) {
@@ -1770,4 +1795,66 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
         return new ByteArrayInputStream(out.toByteArray());
     }
 
+    /**
+     * Get a list of publication types - classes that are a bibo:Document - from the triple store
+     * @param vreq
+     * @return
+     */
+    private List<PublicationType> getPublicationTypes(VitroRequest vreq) {
+        // List of publication types to return (final so it can be used in the ResultSetConsumer
+        final List<PublicationType> types = new ArrayList<>();
+
+        try {
+            // Find all classes that are a subclass of Document, and their labels
+            String query = "PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>\n" +
+                    "\n" +
+                    "SELECT ?uri ?label\n" +
+                    "WHERE {\n" +
+                    "\t?uri rdfs:label ?label .\n" +
+                    "\t?uri rdfs:subClassOf  <http://purl.org/ontology/bibo/Document> .\n" +
+                    "}\n";
+
+            vreq.getRDFService().sparqlSelectQuery(query, new ResultSetConsumer() {
+                @Override
+                protected void processQuerySolution(QuerySolution qs) {
+                    // Add a publication type to the list
+                    types.add(new PublicationType(
+                        qs.getLiteral("label").getString(),
+                        qs.getResource("uri").getURI()
+                    ));
+                }
+            });
+        } catch (RDFServiceException e) {
+        }
+
+        // Sort the publication type list
+        types.sort(new Comparator<PublicationType>() {
+            @Override
+            public int compare(PublicationType o1, PublicationType o2) {
+                return o1.getLabel().compareTo(o2.getLabel());
+            }
+        });
+
+        return types;
+    }
+
+    public class PublicationType {
+        private String label;
+        private String uri;
+
+        public PublicationType(String label, String uri) {
+            this.label = label;
+            this.uri = uri;
+        }
+
+        public String getLabel() {
+            return label;
+        }
+
+        public String getUri() {
+            return uri;
+        }
+    }
 }
+
+

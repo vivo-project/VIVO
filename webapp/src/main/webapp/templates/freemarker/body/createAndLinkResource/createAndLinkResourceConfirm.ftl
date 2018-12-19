@@ -24,29 +24,11 @@
             </#if>
         </div>
         <#if citation.type?has_content>
-            <span class="citation_type"><#switch citation.type>
-                <#case "article">${i18n().create_and_link_type_article}<#break>
-                <#case "article-journal">${i18n().create_and_link_type_article_journal}<#break>
-                <#case "book">${i18n().create_and_link_type_book}<#break>
-                <#case "chapter">${i18n().create_and_link_type_chapter}<#break>
-                <#case "dataset">${i18n().create_and_link_type_dataset}<#break>
-                <#case "figure">${i18n().create_and_link_type_figure}<#break>
-                <#case "graphic">${i18n().create_and_link_type_graphic}<#break>
-                <#case "legal_case">${i18n().create_and_link_type_legal_case}<#break>
-                <#case "legislation">${i18n().create_and_link_type_legislation}<#break>
-                <#case "manuscript">${i18n().create_and_link_type_manuscript}<#break>
-                <#case "map">${i18n().create_and_link_type_map}<#break>
-                <#case "musical_score">${i18n().create_and_link_type_musical_score}<#break>
-                <#case "paper-conference">${i18n().create_and_link_type_paper_conference}<#break>
-                <#case "patent">${i18n().create_and_link_type_patent}<#break>
-                <#case "personal_communication">${i18n().create_and_link_type_personal_communication}<#break>
-                <#case "post-weblog">${i18n().create_and_link_type_post_weblog}<#break>
-                <#case "report">${i18n().create_and_link_type_report}<#break>
-                <#case "review">${i18n().create_and_link_type_review}<#break>
-                <#case "speech">${i18n().create_and_link_type_speech}<#break>
-                <#case "thesis">${i18n().create_and_link_type_thesis}<#break>
-                <#case "webpage">${i18n().create_and_link_type_webpage}<#break>
-            </#switch></span><br/>
+            <select name="type${citation.externalId}">
+                <#list publicationTypes as publicationType>
+                    <option value="${publicationType.uri}" <#if publicationType.uri == citation.typeUri>selected</#if>>${publicationType.label}</option>
+                </#list>
+            </select><br/>
         </#if>
         <div class="entry">
             <#if citation.showError>
