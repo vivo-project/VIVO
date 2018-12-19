@@ -967,7 +967,7 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
                 // Try to find the ISSN in VIVO
                 String journalUri = findVIVOUriForISSNs(vreq.getRDFService(), resourceModel.ISSN);
 
-                if (journalUri != null) {
+                if (!StringUtils.isEmpty(journalUri)) {
                     // If we jave a Journal URI, get the resource from the model
                     journal = model.getResource(journalUri);
                 } else {
@@ -980,11 +980,21 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
                     }
 
                     if (!StringUtils.isEmpty(resourceModel.publisher)) {
-                        Resource publisher = model.createResource(getPublisherURI(vreq, resourceModel.publisher));
-                        publisher.addProperty(RDFS.label, resourceModel.publisher);
-                        publisher.addProperty(RDF.type, model.getResource(VIVO_PUBLISHER_CLASS));
-                        publisher.addProperty(model.createProperty(VIVO_PUBLISHER_OF), journal);
-                        journal.addProperty(model.createProperty(VIVO_PUBLISHER), publisher);
+                        String publisherUri = findVIVOUriForPublisher(vreq.getRDFService(), resourceModel.publisher);
+
+                        Resource publisher = null;
+                        if (!StringUtils.isEmpty(publisherUri)) {
+                            publisher = model.getResource(publisherUri);
+                        } else {
+                            publisher = model.createResource(getPublisherURI(vreq, resourceModel.publisher));
+                            publisher.addProperty(RDFS.label, resourceModel.publisher);
+                            publisher.addProperty(RDF.type, model.getResource(VIVO_PUBLISHER_CLASS));
+                        }
+
+                        if (publisher != null) {
+                            publisher.addProperty(model.createProperty(VIVO_PUBLISHER_OF), journal);
+                            journal.addProperty(model.createProperty(VIVO_PUBLISHER), publisher);
+                        }
                     }
                 }
 
@@ -1328,6 +1338,46 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
         }
 
         // No books found, so return null
+        return null;
+    }
+
+    /**
+     * Find a Uri for an Publisher
+     *
+     * @param rdfService
+     * @param publisher The name of the publisher
+     * @return
+     */
+    private String findVIVOUriForPublisher(RDFService rdfService, String publisher) {
+        // First look to see if any publishers already have that label
+        final List<String> publisherUris = new ArrayList<>();
+        String query = "SELECT ?publisher\n" +
+                "WHERE\n" +
+                "{\n" +
+                "  {\n" +
+                "  \t?publisher a <" + VIVO_PUBLISHER_CLASS + "> .\n" +
+                "  \t?publisher <" + RDFS.label + "> \"" + publisher + "\" .\n" +
+                "  }\n" +
+                "}\n";
+
+        try {
+            rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
+                @Override
+                protected void processQuerySolution(QuerySolution qs) {
+                    Resource publisherUri = qs.getResource("publisher");
+                    if (publisherUri != null) {
+                        publisherUris.add(publisherUri.getURI());
+                    }
+                }
+            });
+        } catch (RDFServiceException e) {
+        }
+
+        // We've found a publisher that matches, so use that
+        if (publisherUris.size() > 0) {
+            return publisherUris.get(0);
+        }
+
         return null;
     }
 
