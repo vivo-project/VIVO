@@ -8,6 +8,7 @@ import java.util.Map;
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CoAuthorshipData;
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CoInvestigationData;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.CollaborationDataViewHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 
 import org.apache.jena.query.Dataset;
@@ -73,23 +74,40 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 
         String visMode = vitroRequest.getParameter(
         							VisualizationFrameworkConstants.VIS_MODE_KEY);
-        
-        return generateStandardVisualizationForPersonLevelVis(vitroRequest,
-				log, dataset, egoURI, visMode);
-        
+
+        if (!StringUtils.isEmpty(egoURI)) {
+			return generateStandardVisualizationForPersonLevelVis(vitroRequest,
+					log, dataset, egoURI, visMode);
+		} else {
+			return UtilityFunctions.handleMalformedParameters(
+					"Visualization Query Error",
+					"Inappropriate query parameters were submitted.",
+					vitroRequest);
+		}
+
 	}
 
 	@Override
 	public ResponseValues generateVisualizationForShortURLRequests(
 			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
 			Dataset dataset) throws MalformedQueryParametersException {
-        
-        return generateStandardVisualizationForPersonLevelVis(
-        				vitroRequest,
-        				log, 
-        				dataset, 
-        				parameters.get(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY), 
-        				parameters.get(VisualizationFrameworkConstants.VIS_MODE_KEY));
+
+		String egoURI = parameters.get(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
+		String visMode = parameters.get(VisualizationFrameworkConstants.VIS_MODE_KEY);
+
+		if (!StringUtils.isEmpty(egoURI)) {
+			return generateStandardVisualizationForPersonLevelVis(
+							vitroRequest,
+							log,
+							dataset,
+							egoURI,
+							visMode);
+		} else {
+			return UtilityFunctions.handleMalformedParameters(
+					"Visualization Query Error",
+					"Inappropriate query parameters were submitted.",
+					vitroRequest);
+		}
 	}
 
 	private ResponseValues generateStandardVisualizationForPersonLevelVis(
