@@ -23,6 +23,7 @@
         searchIndex:documentBuilding.DocumentModifier ,
         searchIndex:extensions.LabelsAcrossContextNodes ;
     rdfs:label "Labels across relatedBy/relates" ;
+    :hasTypeRestriction "http://vivoweb.org/ontology/core#Relationship" ;
     :hasIncomingProperty "http://vivoweb.org/ontology/core#relatedBy" ;
     :hasOutgoingProperty "http://vivoweb.org/ontology/core#relates" .
 
@@ -150,4 +151,3 @@
 			?emailHolder vcard:email ?email .
 		}
         """ .
-
