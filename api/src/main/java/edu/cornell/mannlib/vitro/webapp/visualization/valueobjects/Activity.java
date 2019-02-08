@@ -4,6 +4,9 @@ package edu.cornell.mannlib.vitro.webapp.visualization.valueobjects;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * This interface will make sure that VOs conveying any person's academic output like publications,
  * grants etc implement certain methods which will be used to generalize methods which are just 
@@ -14,7 +17,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 public class Activity extends Individual {
 	
 	private String activityDate;
-	private String activityType;
+	private Set<String> activityTypes = new HashSet<String>();
 
 	public Activity(String activityURI) {
 		super(activityURI);
@@ -32,9 +35,9 @@ public class Activity extends Individual {
 		this.setIndividualLabel(activityLabel);
 	}
 
-	public String getActivityType() { return this.activityType; }
+	public Set<String> getActivityTypes() { return this.activityTypes; }
 
-	public void setActivityType(String activityType) { this.activityType = activityType; }
+	public void addActivityType(String activityType) { this.activityTypes.add(activityType); }
 	
 	/**
 	 * This method will be called to get the final/inferred year for the publication. 

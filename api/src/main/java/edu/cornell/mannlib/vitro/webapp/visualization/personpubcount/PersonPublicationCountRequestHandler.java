@@ -2,6 +2,7 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.personpubcount;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -65,12 +66,12 @@ VisualizationRequestHandler {
             					.getParameter(
 										VisualizationFrameworkConstants.REQUESTING_TEMPLATE_KEY);  
 
-		QueryRunner<Set<Activity>> queryManager = new PersonPublicationCountQueryRunner(
+		QueryRunner<Collection<Activity>> queryManager = new PersonPublicationCountQueryRunner(
 															personURI,
 															vitroRequest.getRDFService(),
 															log);
 
-		Set<Activity> authorDocuments = queryManager.getQueryResult();
+		Collection<Activity> authorDocuments = queryManager.getQueryResult();
 
 		/*
 		 * Create a map from the year to number of publications. Use the
@@ -125,12 +126,12 @@ VisualizationRequestHandler {
 		String personURI = vitroRequest
 		.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 
-		QueryRunner<Set<Activity>> queryManager = new PersonPublicationCountQueryRunner(
+		QueryRunner<Collection<Activity>> queryManager = new PersonPublicationCountQueryRunner(
 																personURI,
 																vitroRequest.getRDFService(),
 																log);
 
-		Set<Activity> authorDocuments = queryManager.getQueryResult();
+		Collection<Activity> authorDocuments = queryManager.getQueryResult();
 
 		/*
 		 * Create a map from the year to number of publications. Use the
@@ -161,12 +162,12 @@ VisualizationRequestHandler {
 		String visContainer = vitroRequest.getParameter(
 									VisualizationFrameworkConstants.VIS_CONTAINER_KEY);
 
-		QueryRunner<Set<Activity>> queryManager = new PersonPublicationCountQueryRunner(
+		QueryRunner<Collection<Activity>> queryManager = new PersonPublicationCountQueryRunner(
 																personURI,
 																vitroRequest.getRDFService(),
 																log);
 
-		Set<Activity> authorDocuments = queryManager.getQueryResult();
+		Collection<Activity> authorDocuments = queryManager.getQueryResult();
 
 		/*
 		 * Create a map from the year to number of publications. Use the

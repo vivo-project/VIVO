@@ -56,7 +56,7 @@
                             .rangeRound([height, 0]);
 
                     var z = d3.scaleOrdinal()
-                            .range(["#777777", "#1f77b4", "#aec7e8", "#ff7f0e"]);
+                        .range(["#777777", "#1f77b4", "#aec7e8", "#ff7f0e", "#ff0000"]);
 
                     d3.csv(dataUrl, function (d, i, columns) {
                         for (i = 1, t = 0; i < columns.length; ++i) t += d[columns[i]] = +d[columns[i]];
@@ -112,15 +112,19 @@
                                 .attr("dy", "0.32em")
                                 .attr("fill", "#000");
 
+                        var keyOffset = 200;
+                        if (keys.length > 4)
+                            keyOffset = 240;
+
                         var legend = g.append("g")
                                 .attr("font-family", "sans-serif")
                                 .attr("font-size", 10)
                                 .attr("text-anchor", "end")
                                 .selectAll("g")
-                                .data(keys.slice(1,4).reverse())
+                                .data(keys.slice(1,5).reverse())
                                 .enter().append("g")
                                 .attr("transform", function (d, i) {
-                                    return "translate(-" + (200 - i * 80) +",-25)";
+                                    return "translate(-" + (keyOffset - i * 80) +",-25)";
                                 });
 
                         legend.append("rect")
