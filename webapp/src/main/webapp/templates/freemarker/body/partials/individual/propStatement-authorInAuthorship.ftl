@@ -137,8 +137,10 @@
                 <#assign plumIdParam = "isbn=${statement.isbn13}">
             <#elseif statement.oclc??>
                 <#assign plumIdParam = "oclc=${statement.oclc}">
+            <#else>
+                <#assign plumIdParam = "">
             </#if>
-            <#if plumIdParam??>
+            <#if plumIdParam?has_content>
                 <div class="plum-print-wrapper" style="display: inline-block; vertical-align: top">
                     <a class="plumx-plum-print-popup"
                        href="https://plu.mx/plum/a/?${plumIdParam}"
