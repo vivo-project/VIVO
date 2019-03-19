@@ -42,5 +42,5 @@ to find out if someone else is already working on a translation.
 
 If you create a translation, please consider contributing your language files to the VIVO community.
 
-[1]: https://wiki.duraspace.org/display/VIVODOC19x/Internationalization
+[1]: https://wiki.duraspace.org/display/VIVODOC110x/Internationalization#Internationalization-AddinganexistinglanguagetoyourVIVOsite
 [2]: mailto:vivo-tech@googlegroups.com
