@@ -41,7 +41,6 @@ public class QueryConstants {
 			put("vivo", "http://vivo.library.cornell.edu/ns/0.1#");
 			put("geo", "http://aims.fao.org/aos/geopolitical.owl#");
 			put("public", "http://vitro.mannlib.cornell.edu/ns/vitro/public#");
-			put("afn", "http://jena.apache.org/ARQ/function#");
 			put("vivosocnet", "http://vivo.cns.iu.edu/ns/#");
 			put("obo", "http://purl.obolibrary.org/obo/");
 			put("vcard", "http://www.w3.org/2006/vcard/ns#");
