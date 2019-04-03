@@ -19,7 +19,7 @@
 			<#if statement.authorName?replace(" ","")?length == statement.authorName?replace(" ","")?last_index_of(",") + 1 >
         		${statement.authorName?replace(",","")}
 			<#else>
-				${statement.authorName}
+				${statement.authorName!i18n().missing_author}
 			</#if>
     	<#else>
         	<a href="${profileUrl(statement.uri("author"))}" title="${i18n().author_name}">${statement.authorName}</a>

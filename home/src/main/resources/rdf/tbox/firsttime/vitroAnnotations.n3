@@ -1,107 +1,107 @@
 @prefix bibo:    <http://purl.org/ontology/bibo/> .
 @prefix cito:    <http://purl.org/spar/cito/> .
 @prefix c4o:     <http://purl.org/spar/c4o/> .
-@prefix dcterms:   <http://purl.org/dc/terms/> .
-@prefix event:   <http://purl.org/NET/c4dm/event.owl> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix event:   <http://purl.org/NET/c4dm/event.owl#> .
 @prefix fabio:   <http://purl.org/spar/fabio/> .
 @prefix foaf:    <http://xmlns.com/foaf/0.1/> .
-@prefix geo:     <http://aims.fao.org/aos/geopolitical.owl> .
+@prefix geo:     <http://aims.fao.org/aos/geopolitical.owl#> .
 @prefix obo:     <http://purl.obolibrary.org/obo/> .
-@prefix ocrer:   <http://purl.org/net/OCRe/research.owl> .
-@prefix ocresd:   <http://purl.org/net/OCRe/study_design.owl> .
-@prefix ocresp:   <http://purl.org/net/OCRe/study_protocol.owl> .
-@prefix ocrest:   <http://purl.org/net/OCRe/statistics.owl> .
+@prefix ocrer:   <http://purl.org/net/OCRe/research.owl#> .
+@prefix ocresd:  <http://purl.org/net/OCRe/study_design.owl#> .
+@prefix ocresp:  <http://purl.org/net/OCRe/study_protocol.owl#> .
+@prefix ocrest:  <http://purl.org/net/OCRe/statistics.owl#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix ro:      <http://purl.obolibrary.org/obo/ro.owl> .
-@prefix scires:  <http://vivoweb.org/ontology/scientific-research> .
-@prefix skos:    <http://www.w3.org/2004/02/skos/core> .
+@prefix ro:      <http://purl.obolibrary.org/obo/ro.owl#> .
+@prefix scires:  <http://vivoweb.org/ontology/scientific-research#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
 @prefix swo:     <http://www.ebi.ac.uk/efo/swo/> .
 @prefix vann:    <http://purl.org/vocab/vann/> .
-@prefix vcard:   <http://www.w3.org/2006/vcard/ns> .
+@prefix vcard:   <http://www.w3.org/2006/vcard/ns#> .
 @prefix vitro:   <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
 @prefix vitro-public:  <http://vitro.mannlib.cornell.edu/ns/vitro/public#> .
 @prefix vivo:    <http://vivoweb.org/ontology/core#> .
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
-bibo:
+<http://purl.org/ontology/bibo/>
       rdfs:label "Bibliographic Ontology"@en-US ;
       vitro:ontologyPrefixAnnot "bibo" .
 
-skos:
+<http://www.w3.org/2004/02/skos/core>
       rdfs:label "SKOS (Simple Knowledge Organization System)"@en-US ;
       vitro:ontologyPrefixAnnot "skos" .
       
-vivo:
+<http://vivoweb.org/ontology/core>
       rdfs:label "VIVO Core Ontology"@en-US ;
       vitro:ontologyPrefixAnnot "vivo" .
 
-ocrer:
+<http://purl.org/net/OCRe/research.owl>
       rdfs:label "OCRe Research"@en-US ;
       vitro:ontologyPrefixAnnot "ocrer" .
       
-ocresd:
+<http://purl.org/net/OCRe/study_design.owl>
       rdfs:label "OCRe Study Design"@en-US ;
       vitro:ontologyPrefixAnnot "ocresd" .
       
-ocresp:
+<http://purl.org/net/OCRe/study_protocol.owl>
       rdfs:label "OCRe Study Protocol"@en-US ;
       vitro:ontologyPrefixAnnot "ocresp" .
       
-ocrest:
+<http://purl.org/net/OCRe/statistics.owl>
       rdfs:label "OCRe Statistics"@en-US ;
       vitro:ontologyPrefixAnnot "ocresst" .
       
-geo:
+<http://aims.fao.org/aos/geopolitical.owl>
       rdfs:label "Geopolitical Ontology"@en-US ;
       vitro:ontologyPrefixAnnot "geo" .
       
-event:
+<http://purl.org/NET/c4dm/event.owl>
       rdfs:label "Event Ontology"@en-US ;
       vitro:ontologyPrefixAnnot "event" .
 
-obo:  
+<http://purl.obolibrary.org/obo/>  
       rdfs:label "OBO Foundry"@en-US ;
       vitro:ontologyPrefixAnnot "obo" .
               
-vcard:
+<http://www.w3.org/2006/vcard/ns>
       rdfs:label "VCard"@en-US ;
       vitro:ontologyPrefixAnnot "vcard" .
               
-foaf:
+<http://xmlns.com/foaf/0.1/>
       rdfs:label "FOAF (Friend of a Friend)"@en-US ;
       vitro:ontologyPrefixAnnot "foaf" .
 
-scires:
+<http://vivoweb.org/ontology/scientific-research>
       rdfs:label "VIVO Scientific Research Ontology"@en-US ;
       vitro:ontologyPrefixAnnot "scires" .
 
-fabio:
+<http://purl.org/spar/fabio/>
       rdfs:label "FaBiO (FRBR-Aligned Bibliographic Ontology)"@en-US ;
       vitro:ontologyPrefixAnnot "fabio" .
 
-c4o:
+<http://purl.org/spar/c4o/>
       rdfs:label "Citation Counting and Context Characterization Ontology"@en-US ;
       vitro:ontologyPrefixAnnot "c4o" .
 
-cito:
+<http://purl.org/spar/cito/>
       rdfs:label "CiTO (Citation Typing Ontology)"@en-US ;
       vitro:ontologyPrefixAnnot "cito" .
     
-dcterms:
+<http://purl.org/dc/terms/>
       rdfs:label "Dublin Core Terms"@en-US ;
       vitro:ontologyPrefixAnnot "dcterms" .  
     
-vann:
+<http://purl.org/vocab/vann/>
       rdfs:label "Vocabulary for Annotating Vocabulary Descriptions"@en-US ;
       vitro:ontologyPrefixAnnot "vann" .
       
-ro:
+<http://purl.obolibrary.org/obo/ro.owl>
       rdfs:label "Relations Ontology"@en-US ;
       vitro:ontologyPrefixAnnot "ro" .    
       
-swo:
+<http://www.ebi.ac.uk/efo/swo/>
       rdfs:label "Software Ontology"@en-US ;
       vitro:ontologyPrefixAnnot "swo" . 
 
@@ -1730,7 +1730,9 @@ vivo:outreachOverview
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
-              "Please enter a single summary narrative of your outreach goals and/or contributions"^^xsd:string .
+              "Please enter a single summary narrative of your outreach goals and/or contributions"^^xsd:string ;
+      vitro:editing
+              "HTML"^^xsd:string .
 
 obo:ERO_0000031
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -1912,7 +1914,9 @@ bibo:abstract
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
-              "A summary of the resource."^^xsd:string .
+              "A summary of the resource."^^xsd:string ;
+      vitro:editing
+              "HTML"^^xsd:string .
 
 vivo:PrincipalInvestigatorRole
       vitro:displayLimitAnnot
@@ -2141,7 +2145,9 @@ vivo:teachingOverview
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
-              "Please enter a single narrative summary description of your teaching activities, goals, and/or experience"^^xsd:string .
+              "Please enter a single narrative summary description of your teaching activities, goals, and/or experience"^^xsd:string ;
+      vitro:editing
+              "HTML"^^xsd:string .
 
 vivo:rank
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -2268,7 +2274,9 @@ vivo:overview
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
-              "A short narrative summary to be used as a single descriptive overview statement."^^xsd:string .
+              "A short narrative summary to be used as a single descriptive overview statement."^^xsd:string ;
+      vitro:editing
+              "HTML"^^xsd:string .
 
 vivo:description
       vitro:displayLimitAnnot
@@ -5405,7 +5413,9 @@ vivo:researchOverview
       vitro:inPropertyGroupAnnot
               <http://vivoweb.org/ontology#vitroPropertyGroupresearch> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:editing
+              "HTML"^^xsd:string .
 
 obo:ERO_0000390
       vitro:displayLimitAnnot

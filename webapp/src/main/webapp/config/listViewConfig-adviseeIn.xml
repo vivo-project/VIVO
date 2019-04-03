@@ -6,7 +6,7 @@
 <list-view-config>
     <query-select>
         PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
-        PREFIX afn:   &lt;http://jena.apache.org/ARQ/function#&gt;
+        
         PREFIX bibo:  &lt;http://purl.org/ontology/bibo/&gt;
         PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX owl:   &lt;http://www.w3.org/2002/07/owl#&gt;
@@ -31,7 +31,7 @@
             ?adviseeRole a core:AdviseeRole .
             ?adviseeRole core:relatedBy ?advisingRel .
             ?advisingRel a core:AdvisingRelationship .
-            LET ( ?localName := afn:localname(?advisingRel) )
+            LET ( ?localName := REPLACE(STR(?advisingRel),"^.*(#)(.*)$", "$2") )
             OPTIONAL {
                 <precise-subquery>?subject ?property ?adviseeRole .
                 ?adviseeRole a core:AdviseeRole .

@@ -1911,12 +1911,16 @@ there is a measurement process p that has specified output m, a measurement datu
     <!-- http://vivoweb.org/ontology/core#hasCollaborator -->
 
     <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasCollaborator">
-        <rdfs:label xml:lang="en">has collaborator</rdfs:label>
-        <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+        <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+        <rdfs:label xml:lang="en">has collaborator</rdfs:label>
+        <obo:IAO_0000112 xml:lang="en">Fran has collaborator Jim, they work together regularly.</obo:IAO_0000112>
+        <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000120"/>
+        <obo:IAO_0000115 xml:lang="en">Two agents are collaborators if they work together to produce common results.</obo:IAO_0000115>
+        <obo:IAO_0000117 xml:lang="en">PERSON: Michael Conlon</obo:IAO_0000117>
+        <obo:IAO_0000119 xml:lang="en">Merriam Webster (https://www.merriam-webster.com/dictionary/collaborator)</obo:IAO_0000119>
     </owl:ObjectProperty>
-    
-
 
     <!-- http://vivoweb.org/ontology/core#hasEquipment -->
 

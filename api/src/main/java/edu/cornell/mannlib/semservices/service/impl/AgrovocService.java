@@ -58,12 +58,12 @@ public class AgrovocService implements ExternalConceptService {
 	protected final String dbpedia_endpoint = " http://dbpedia.org/sparql";
 	// URL to get all the information for a concept
 	
-	protected final String conceptSkosMosBase = "http://artemide.art.uniroma2.it:8081/skosmos/rest/v1/";
+	protected final String conceptSkosMosBase = "http://agrovoc.uniroma2.it/agrovoc/rest/v1/";
 	protected final String conceptsSkosMosSearch = conceptSkosMosBase + "search?";
 	protected final String conceptSkosMosURL = conceptSkosMosBase + "data?";
 	@Override
 	public List<Concept> getConcepts(String term) throws Exception {
-		List<Concept> conceptList = new ArrayList<Concept>();
+		List<Concept> conceptList = new ArrayList<>();
 		
 		//For the RDF webservices mechanism, utilize the following
 		/*
@@ -86,7 +86,7 @@ public class AgrovocService implements ExternalConceptService {
 			return conceptList;
 		int conceptCounter = 0;
 		
-		HashSet<String> encounteredURI = new HashSet<String>();
+		HashSet<String> encounteredURI = new HashSet<>();
 		
 		// Loop through each of these URIs and load using the SKOSManager
 		for (String conceptUri : conceptUris) {
@@ -185,7 +185,7 @@ public class AgrovocService implements ExternalConceptService {
 	public List<Concept> getConceptsByURIWithSparql(String uri)
 			throws Exception {
 		// deprecating this method...just return an empty list
-		List<Concept> conceptList = new ArrayList<Concept>();
+		List<Concept> conceptList = new ArrayList<>();
 		return conceptList;
 	}
 
@@ -227,7 +227,7 @@ public class AgrovocService implements ExternalConceptService {
 	// When utilizing the getTermExpansion method, will get a list of URIs back
 	// and not just one URI
 	protected List<String> getConceptURIsListFromRDF(String rdf) {
-		List<String> conceptUris = new ArrayList<String>();
+		List<String> conceptUris = new ArrayList<>();
 		try {
 			Document doc = XMLUtils.parse(rdf);
 				NodeList nodes = doc.getElementsByTagName("skos:Concept");
@@ -262,21 +262,21 @@ public class AgrovocService implements ExternalConceptService {
 				+ "> rdfs:comment ?description . \n"
 				+ "FILTER (LANG(?description)='en' ) \n" + "}";
 		// System.out.println(qs);
-		List<HashMap> resultList = new ArrayList<HashMap>();
+		List<HashMap> resultList = new ArrayList<>();
 		QueryExecution qexec = null;
 		try {
 
 			Query query = QueryFactory.create(qs);
 			qexec = QueryExecutionFactory.sparqlService(this.dbpedia_endpoint, query);
 			qexec.setTimeout(5000, TimeUnit.MILLISECONDS);
-			resultList = new ArrayList<HashMap>();
+			resultList = new ArrayList<>();
 			ResultSet resultSet = qexec.execSelect();
 			int resultSetSize = 0;
 			while (resultSet.hasNext()) {
 				resultSetSize++;
 				QuerySolution solution = resultSet.nextSolution();
 				Iterator varnames = solution.varNames();
-				HashMap<String, String> hm = new HashMap<String, String>();
+				HashMap<String, String> hm = new HashMap<>();
 				while (varnames.hasNext()) {
 					String name = (String) varnames.next();
 					RDFNode rdfnode = solution.get(name);
@@ -374,7 +374,7 @@ public class AgrovocService implements ExternalConceptService {
 		
 		//JSON-LD array
 		private List<String> getConceptURIsListFromSkosMosResult(String results) {
-			List<String> conceptURIs = new ArrayList<String>();
+			List<String> conceptURIs = new ArrayList<>();
 			ObjectNode json = (ObjectNode) JacksonUtils.parseJson(results);
 			//Format should be: { ..."results":["uri":uri...]
 			if (json.has("results")) {

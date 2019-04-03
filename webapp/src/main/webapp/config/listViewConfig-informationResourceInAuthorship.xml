@@ -64,7 +64,7 @@
                 bind ( COALESCE(?firstName, "") As ?firstName1) .
                 bind ( COALESCE(?middleName, "") As ?middleName1) .
                 bind ( COALESCE(?lastName, "") As ?lastName1) .
-                bind (concat(str(?lastName1 + ", "),str(?firstName1 + " "),str(?middleName1)) as ?authorName) .
+                bind (concat(str(?lastName1),", ",str(?firstName1)," ",str(?middleName1)) as ?authorName) .
 
                 OPTIONAL {
                     <precise-subquery>?subject ?property ?authorship .

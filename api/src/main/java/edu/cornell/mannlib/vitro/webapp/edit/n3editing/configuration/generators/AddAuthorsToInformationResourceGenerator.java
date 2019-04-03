@@ -346,7 +346,6 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 
 	private static String AUTHORSHIPS_MODEL = " \n"
 			+ "PREFIX core: <http://vivoweb.org/ontology/core#>\n"
-			+ "PREFIX afn:  <http://jena.apache.org/ARQ/function#>\n"
 			+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
 			+ "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
 			+ "PREFIX vcard:  <http://www.w3.org/2006/vcard/ns#>\n"
@@ -412,11 +411,10 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 
     private static String AUTHORSHIPS_QUERY = " \n"
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
-        + "PREFIX afn:  <http://jena.apache.org/ARQ/function#> \n"
         + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
         + "PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n"
         + "PREFIX vcard:  <http://www.w3.org/2006/vcard/ns#> \n"
-        + "SELECT ?authorshipURI (afn:localname(?authorshipURI) AS ?authorshipName) ?authorURI ?authorName ?rank \n"
+        + "SELECT ?authorshipURI (REPLACE(STR(?authorshipURI),\"^.*(#)(.*)$\", \"$2\") AS ?authorshipName) ?authorURI ?authorName ?rank \n"
         + "WHERE { { \n"
         + "  ?subject core:relatedBy ?authorshipURI . \n"
         + "  ?authorshipURI a core:Authorship . \n"

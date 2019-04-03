@@ -7,13 +7,13 @@
 
 <list-view-config>
     <query-select>            
-        PREFIX afn:  &lt;http://jena.apache.org/ARQ/function#&gt;
+        
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
 
         SELECT ?vcard ?link 
-               (afn:localname(?link) AS ?linkName) 
+               (REPLACE(STR(?link),"^.*(#)(.*)$", "$2") AS ?linkName) 
                (group_concat(distinct ?linkLabel;separator="/") as ?label)
                ?url 
                ?rank

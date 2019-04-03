@@ -25,6 +25,8 @@ roleExamples-->
 <#assign acMultipleTypes = "'true'" />
 <#assign acTypes = "{activity: 'http://xmlns.com/foaf/0.1/Organization,http://xmlns.com/foaf/0.1/Group,http://purl.obolibrary.org/obo/OBI_0000835,http://purl.org/NET/c4dm/event.owl#Event'}" />
 
+<#assign editTitle = "${i18n().edit_entry_for_service_provider_role}"/>
+<#assign createTitle = "${i18n().create_entry_for_service_provider_role}"/>
 
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">

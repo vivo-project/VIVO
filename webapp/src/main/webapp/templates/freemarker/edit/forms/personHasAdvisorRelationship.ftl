@@ -114,7 +114,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         </#list>
       <#else>
         <select id="selector" name="advisingRelType"  ${disabledVal} >
-            <option value="${blankSentinel}" selected="selected">${i18n().select_one}</option>                
+            <option value="" selected="selected">${i18n().select_one}</option>
             <#list advisingRelTypeOpts?keys as key>             
                 <option value="${key}"  <#if advisingRelTypeValue = key>selected</#if>>${advisingRelTypeOpts[key]}</option>            
             </#list>
