@@ -9,14 +9,14 @@
 <#assign obo_RO53 = "http://purl.obolibrary.org/obo/RO_0000053">
 
 <#assign isInvestigator = ( p.hasVisualizationStatements(propertyGroups, "${obo_RO53}", "${core}InvestigatorRole") ||
-                            p.hasVisualizationStatements(propertyGroups, "${obo_RO53}", "${core}PrincipalInvestigatorRole") || 
+                            p.hasVisualizationStatements(propertyGroups, "${obo_RO53}", "${core}PrincipalInvestigatorRole") ||
                             p.hasVisualizationStatements(propertyGroups, "${obo_RO53}", "${core}CoPrincipalInvestigatorRole") ) >
 
 <#if (isAuthor || isInvestigator)>
- 
+
     ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/visualization/visualization.css" />')}
     <#assign standardVisualizationURLRoot ="/visualization">
-        
+
         <#if isAuthor>
             ${scripts.add('<script type="text/javascript" src="${urls.base}/js/d3.min.js"></script>')}
 
@@ -24,7 +24,7 @@
             <#assign mapOfScienceIcon = "${urls.images}/visualization/mapofscience/scimap_icon.png">
             <#assign coAuthorVisUrl = individual.coAuthorVisUrl()>
             <#assign mapOfScienceVisUrl = individual.mapOfScienceUrl()>
-            
+
             <span id="publicationsHeading">${i18n().publications_in_vivo}</span>
 
             <svg width="100%" id="publicationsChart" onload="renderPublicationsChart()" onresize="renderPublicationsChart()">
@@ -46,6 +46,8 @@
                             width = (chartWidth - margin.left - margin.right),
                             height = (chartHeight - margin.top - margin.bottom),
                             g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                    svg.attr("width", chartWidth).attr("height",chartHeight)
 
                     var x = d3.scaleBand()
                             .rangeRound([0, width])
