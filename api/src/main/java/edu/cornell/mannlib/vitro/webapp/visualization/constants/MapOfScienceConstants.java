@@ -11,7 +11,7 @@ import java.util.Map;
  */
 @SuppressWarnings("serial")
 public class MapOfScienceConstants {
-	
+
 	public static final Map<Integer, String> DISCIPLINE_ID_TO_LABEL = new HashMap<Integer, String>() {{
 		put(1, "Health Professionals");
 		put(2, "Chemistry");
@@ -26,9 +26,9 @@ public class MapOfScienceConstants {
 		put(11, "Chemical, Mechanical, & Civil Engineering");
 		put(12, "Math & Physics");
 		put(13, "Electrical Engineering & Computer Science");
-	}};	
+	}};
 
-	
+
 	public static final Map<Integer, String> SUB_DISCIPLINE_ID_TO_LABEL = new HashMap<Integer, String>() {{
 		put(1, "Clinical Cancer Research");
 		put(2, "Circulation");
@@ -584,9 +584,9 @@ public class MapOfScienceConstants {
 		put(552, "GIS (non English)");
 		put(553, "Power Transmission & Control");
 		put(554, "Agricultural Environmental Medicine");
-	}};		
-	
-	public static final Map<Integer, Integer> SUB_DISCIPLINE_ID_TO_DISCIPLINE_ID = new HashMap<Integer, Integer>() {{ 
+	}};
+
+	public static final Map<Integer, Integer> SUB_DISCIPLINE_ID_TO_DISCIPLINE_ID = new HashMap<Integer, Integer>() {{
 		put(1, 7);
 		put(2, 6);
 		put(3, 13);

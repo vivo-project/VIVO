@@ -45,18 +45,18 @@ import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.utils.ConceptSearchService.ConceptSearchServiceUtils;
 /**
  * Generates the edit configuration for importing concepts from external
- * search services, e.g. UMLS etc.      
- * 
+ * search services, e.g. UMLS etc.
+ *
  * Since editing/deletion is handled by separate custom code, this generator always assumes
- * property addition mode. 
+ * property addition mode.
  */
 public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements EditConfigurationGenerator {
-	
+
 	private Log log = LogFactory.getLog(AddAssociatedConceptGenerator.class);
 	private String template = "addAssociatedConcept.ftl";
 	//TODO: Set this to a dynamic mechanism
 	private static String VIVOCore = "http://vivoweb.org/ontology/core#";
-	private static String SKOSConceptType = "http://www.w3.org/2004/02/skos/core#Concept";	
+	private static String SKOSConceptType = "http://www.w3.org/2004/02/skos/core#Concept";
 	private static String SKOSBroaderURI = "http://www.w3.org/2004/02/skos/core#broader";
 	private static String SKOSNarrowerURI = "http://www.w3.org/2004/02/skos/core#narrower";
     @Override
@@ -111,15 +111,15 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		prepare(vreq, editConfiguration);
 		return editConfiguration;
     }
-    
+
     //In this case, the generator is not equipped to handle any deletion
     //Editing in the usual sense does not exist for this form
     //So we will disable editing
     @Override
-    void initObjectPropForm(EditConfigurationVTwo editConfiguration,VitroRequest vreq) {                      
-        editConfiguration.setObject( null );        
-    }    
-    
+    void initObjectPropForm(EditConfigurationVTwo editConfiguration,VitroRequest vreq) {
+        editConfiguration.setObject( null );
+    }
+
     //Ensuring that editing property logic does not get executed on processing
     //since form's deletions are handled separately
     @Override
@@ -132,9 +132,9 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
             editConfig.setPredicateUri( EditConfigurationUtils.getPredicateUri(vreq));
         //Always set creation
         editConfig.prepareForNonUpdate(model);
-        
+
     }
-    
+
 
 	private void setVarNames(EditConfigurationVTwo editConfiguration) {
 		  editConfiguration.setVarNameForSubject("subject");
@@ -148,27 +148,27 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	protected void setTemplate(EditConfigurationVTwo editConfiguration,
 			VitroRequest vreq) {
     	editConfiguration.setTemplate(template);
-		
+
 	}
-   
-   
-    
+
+
+
    /*
-    * N3 Required and Optional Generators as well as supporting methods 
+    * N3 Required and Optional Generators as well as supporting methods
     */
-	
+
 	private String getPrefixesString() {
 		//TODO: Include dynamic way of including this
 		return "@prefix core: <http://vivoweb.org/ontology/core#> .";
 	}
-	
+
 	//The only string always required is that linking the subject to the concept node
 	//Since the concept node from an external vocabulary may already be in the system
 	//The label and is defined by may already be defined and don't require re-saving
     private List<String> generateN3Required(VitroRequest vreq) {
-    	List<String> n3Required = list(    	            	        
+    	List<String> n3Required = list(
     	        getPrefixesString() + "\n" +
-    	        "?subject ?predicate ?conceptNode .\n" + 
+    	        "?subject ?predicate ?conceptNode .\n" +
     	        "?conceptNode <" + RDF.type.getURI() + "> <" + this.SKOSConceptType + "> ."
     	);
         //"?conceptNode <" + RDF.type.getURI() + "> <http://www.w3.org/2002/07/owl#Thing> ."
@@ -180,26 +180,26 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		}
 		return n3Required;
     }
-    
+
    //Optional N3, includes possibility of semantic type which may or may not be included
     //label and source are independent of semantic type
     //concept semantic type uri is a placeholder which is actually processed in the sparql update preprocessor
 	private List<String> generateN3Optional() {
-		return list("?conceptNode <" + RDFS.label.getURI() + "> ?conceptLabel .\n" + 
-    	        "?conceptNode <" + RDFS.isDefinedBy.getURI() + "> ?conceptSource .", 
-				"?conceptNode <" + RDF.type + "> ?conceptSemanticTypeURI ." +  
-    	        "?conceptSemanticTypeURI <" + RDFS.label.getURI() + "> ?conceptSemanticTypeLabel ." + 
+		return list("?conceptNode <" + RDFS.label.getURI() + "> ?conceptLabel .\n" +
+    	        "?conceptNode <" + RDFS.isDefinedBy.getURI() + "> ?conceptSource .",
+				"?conceptNode <" + RDF.type + "> ?conceptSemanticTypeURI ." +
+    	        "?conceptSemanticTypeURI <" + RDFS.label.getURI() + "> ?conceptSemanticTypeLabel ." +
     	        "?conceptSemanticTypeURI <" + RDFS.subClassOf + "> <" + SKOSConceptType + "> .",
-    	        "?conceptNode <" + this.SKOSNarrowerURI + "> ?conceptNarrowerURI ." + 
+    	        "?conceptNode <" + this.SKOSNarrowerURI + "> ?conceptNarrowerURI ." +
     	        "?conceptNarrowerURI <" + this.SKOSBroaderURI + "> ?conceptNode .",
-    	        "?conceptNode <" + this.SKOSBroaderURI + "> ?conceptBroaderURI ." + 
+    	        "?conceptNode <" + this.SKOSBroaderURI + "> ?conceptBroaderURI ." +
     	    	"?conceptBroaderURI <" + this.SKOSNarrowerURI + "> ?conceptNode ."
     	);
     }
-	
-	
-  
-	
+
+
+
+
 	/*
 	 * Get new resources
 	 */
@@ -211,34 +211,34 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 			newResources.put("conceptSemanticTypeURI", null);
 			return newResources;
 		}
-    
 
-	
-	
+
+
+
 	/*
 	 * Set URIS and Literals In Scope and on form and supporting methods
 	 */
-    
+
     private void setUrisAndLiteralsInScope(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
     	HashMap<String, List<String>> urisInScope = new HashMap<String, List<String>>();
     	//note that at this point the subject, predicate, and object var parameters have already been processed
     	//these two were always set when instantiating an edit configuration object from json,
     	//although the json itself did not specify subject/predicate as part of uris in scope
-    	urisInScope.put(editConfiguration.getVarNameForSubject(), 
+    	urisInScope.put(editConfiguration.getVarNameForSubject(),
     			Arrays.asList(new String[]{editConfiguration.getSubjectUri()}));
-    	urisInScope.put(editConfiguration.getVarNameForPredicate(), 
+    	urisInScope.put(editConfiguration.getVarNameForPredicate(),
     			Arrays.asList(new String[]{editConfiguration.getPredicateUri()}));
     	//Setting inverse role predicate
     	urisInScope.put("inverseRolePredicate", getInversePredicate(vreq));
-    	
-    	
+
+
     	editConfiguration.setUrisInScope(urisInScope);
     	//Uris in scope include subject, predicate, and object var
     	//literals in scope empty initially, usually populated by code in prepare for update
     	//with existing values for variables
     	editConfiguration.setLiteralsInScope(new HashMap<String, List<Literal>>());
     }
-    
+
     private List<String> getInversePredicate(VitroRequest vreq) {
 		List<String> inversePredicateArray = new ArrayList<String>();
 		ObjectProperty op = EditConfigurationUtils.getObjectProperty(vreq);
@@ -249,8 +249,8 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	}
 
 	//n3 should look as follows
-    //?subject ?predicate ?objectVar 
-    
+    //?subject ?predicate ?objectVar
+
     private void setUrisAndLiteralsOnForm(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
     	List<String> urisOnForm = new ArrayList<String>();
     	List<String> literalsOnForm = new ArrayList<String>();
@@ -267,13 +267,13 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 
     	editConfiguration.setLiteralsOnForm(literalsOnForm);
     }
-    
-    
+
+
     /**
      * Set SPARQL Queries and supporting methods
      */
-    
-    
+
+
     private void setSparqlQueries(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
     	//Sparql queries defining retrieval of literals etc.
     	editConfiguration.setSparqlForAdditionalLiteralsInScope(new HashMap<String, String>());
@@ -281,13 +281,13 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
       	editConfiguration.setSparqlForExistingLiterals(new HashMap<String, String>());
     	editConfiguration.setSparqlForExistingUris(new HashMap<String, String>());
     }
-    
+
 
 	/**
-	 * 
+	 *
 	 * Set Fields and supporting methods
 	 */
-	
+
 	private void setFields(EditConfigurationVTwo editConfiguration, VitroRequest vreq, String predicateUri) {
     	setConceptNodeField(editConfiguration, vreq);
     	setConceptLabelField(editConfiguration, vreq);
@@ -297,18 +297,18 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
     	setConceptBroaderURIField(editConfiguration, vreq);
     	setConceptNarrowerURIField(editConfiguration, vreq);
     }
-    
+
 	private void setConceptNarrowerURIField(
 			EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
 		editConfiguration.addField(new FieldVTwo().
-				setName("conceptNarrowerURI"));		
+				setName("conceptNarrowerURI"));
 	}
 
 	private void setConceptBroaderURIField(
 			EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
 		editConfiguration.addField(new FieldVTwo().
-				setName("conceptBroaderURI"));		
-		
+				setName("conceptBroaderURI"));
+
 	}
 
 	//this field will be hidden and include the concept node URI
@@ -316,7 +316,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 			VitroRequest vreq) {
 		editConfiguration.addField(new FieldVTwo().
 				setName("conceptNode").
-				setValidators(list("nonempty")));		
+				setValidators(list("nonempty")));
 	}
 
 
@@ -336,7 +336,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 				setRangeDatatypeUri(XSD.xstring.toString())
 				);
 	}
-	
+
 	//This will also be a URI
 	private void setConceptSemanticTypeURIField(EditConfigurationVTwo editConfiguration,
 			VitroRequest vreq) {
@@ -344,7 +344,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 				setName("conceptSemanticTypeURI")
 				);
 	}
-	
+
 	private void setConceptSemanticTypeLabelField(EditConfigurationVTwo editConfiguration,
 			VitroRequest vreq) {
 		editConfiguration.addField(new FieldVTwo().
@@ -352,23 +352,23 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 				setRangeDatatypeUri(XSD.xstring.toString())
 				);
 	}
-    
-   
+
+
     //Add preprocessor
-	
+
    private void addPreprocessors(EditConfigurationVTwo editConfiguration) {
 	  //An Edit submission preprocessor for enabling addition of multiple terms for a single search
 	   //TODO: Check if this is the appropriate way of getting model
-	 
+
 	   //Passing model to check for any URIs that are present
-	   
+
 	   editConfiguration.addEditSubmissionPreprocessor(
 			   new AddAssociatedConceptsPreprocessor(editConfiguration));
 	   editConfiguration.addModelChangePreprocessor(new ConceptSemanticTypesPreprocessor());
-	  
+
 	}
-     
-   
+
+
 	//Form specific data
 	public void addFormSpecificData(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
 		HashMap<String, Object> formSpecificData = new HashMap<String, Object>();
@@ -386,36 +386,36 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		}
 		editConfiguration.setFormSpecificData(formSpecificData);
 	}
-	
-	
+
+
 	//
 	private Object getUserDefinedConceptUrl(VitroRequest vreq) {
 		String subjectUri = EditConfigurationUtils.getSubjectUri(vreq);
 		String predicateUri = EditConfigurationUtils.getPredicateUri(vreq);
 		String generatorName = "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddUserDefinedConceptGenerator";
 		String editUrl = EditConfigurationUtils.getEditUrl(vreq);
-		
-		return editUrl + "?subjectUri=" + UrlBuilder.urlEncode(subjectUri) + 
-		"&predicateUri=" + UrlBuilder.urlEncode(predicateUri) + 
+
+		return editUrl + "?subjectUri=" + UrlBuilder.urlEncode(subjectUri) +
+		"&predicateUri=" + UrlBuilder.urlEncode(predicateUri) +
 		"&editForm=" + UrlBuilder.urlEncode(generatorName);
 	}
 
 	private List<AssociatedConceptInfo> getExistingConcepts(VitroRequest vreq) {
 		Individual individual = EditConfigurationUtils.getSubjectIndividual(vreq);
 	    List<Individual> concepts = individual.getRelatedIndividuals(
-	    		EditConfigurationUtils.getPredicateUri(vreq));  
+	    		EditConfigurationUtils.getPredicateUri(vreq));
 		List<AssociatedConceptInfo> associatedConcepts = getAssociatedConceptInfo(concepts, vreq);
 		sortConcepts(associatedConcepts);
 		return associatedConcepts;
 	}
-	
-	
+
+
 	private void sortConcepts(List<AssociatedConceptInfo> concepts) {
 	    concepts.sort(new AssociatedConceptInfoComparator());
 	    log.debug("Concepts should be sorted now" + concepts.toString());
 	}
-	
-    
+
+
 	//To determine whether or not a concept is a user generated or one from an external vocab source.
 	//we cannot rely on whether or not it is a skos concept because incorporating UMLS semantic network classes as
 	//SKOS concept subclasses means that even concepts from an external vocab source might be considered SKOS concepts
@@ -426,7 +426,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		List<AssociatedConceptInfo> info = new ArrayList<AssociatedConceptInfo>();
 		 for ( Individual conceptIndividual : concepts ) {
 			 	boolean userGenerated = true;
-			 	//Note that this isn't technically 
+			 	//Note that this isn't technically
 			 	String conceptUri =  conceptIndividual.getURI();
 			 	String conceptLabel = conceptIndividual.getName();
 
@@ -441,9 +441,9 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		 			//Assuming name will get label
 		 			vocabLabel = sourceIndividual.getName();
 		 		}
-		 		
-			 	
-			 	
+
+
+
 			 	if(userGenerated) {
 			 		//if the concept in question is skos - which would imply a user generated concept
 			 		info.add(new AssociatedConceptInfo(conceptLabel, conceptUri, null, null, SKOSConceptType, null, null));
@@ -467,13 +467,13 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		 }
 		 return info;
 	}
-	
+
 	private HashMap<String, String> getConceptSemanticTypeQueryResults(String conceptURI, OntModel ontModel) {
 		HashMap<String, String> typeAndLabel = new HashMap<String, String>();
-		String queryStr = "SELECT ?semanticTypeURI ?semanticTypeLabel WHERE { " + 
-				"<" + conceptURI + "> <" + RDF.type.getURI() + "> ?semanticTypeURI . " + 
-				"?semanticTypeURI <" + RDFS.subClassOf.getURI() + "> <" + this.SKOSConceptType + ">.  " + 
-				"?semanticTypeURI <" + RDFS.label.getURI() + "> ?semanticTypeLabel ." + 
+		String queryStr = "SELECT ?semanticTypeURI ?semanticTypeLabel WHERE { " +
+				"<" + conceptURI + "> <" + RDF.type.getURI() + "> ?semanticTypeURI . " +
+				"?semanticTypeURI <" + RDFS.subClassOf.getURI() + "> <" + this.SKOSConceptType + ">.  " +
+				"?semanticTypeURI <" + RDFS.label.getURI() + "> ?semanticTypeLabel ." +
 				"}";
 		 QueryExecution qe = null;
 	        try{
@@ -481,7 +481,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	            qe = QueryExecutionFactory.create(query, ontModel);
                 ResultSet results = null;
                 results = qe.execSelect();
-                
+
                 while( results.hasNext()){
                 	QuerySolution qs = results.nextSolution();
                 	if(qs.get("semanticTypeURI") != null) {
@@ -494,8 +494,8 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
                 		log.debug("Semantic Type label returned " + semanticTypeLabel.getString());
                 		typeAndLabel.put("semanticTypeLabel", semanticTypeLabel.getString());
                 	}
-                	
-                	
+
+
                 }
 	        }catch(Exception ex){
 	            throw new Error("Error in executing query string: \n" + queryStr + '\n' + ex.getMessage());
@@ -523,38 +523,38 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 			this.conceptSemanticTypeURI = inputConceptSemanticTypeURI;
 			this.conceptSemanticTypeLabel = inputConceptSemanticTypeLabel;
 		}
-		
+
 		//Getters
 		public String getConceptLabel() {
 			return conceptLabel;
 		}
-		
+
 		public  String getConceptURI() {
 			return conceptURI;
 		}
-		
+
 		public  String getVocabURI() {
 			return vocabURI;
 		}
-		
+
 		public  String getVocabLabel(){
 			return vocabLabel;
 		}
-		
+
 		public  String getType(){
 			return type;
 		}
-		
+
 		public  String getConceptSemanticTypeURI(){
 			return conceptSemanticTypeURI;
 		}
-		
+
 		public  String getConceptSemanticTypeLabel(){
 			return conceptSemanticTypeLabel;
 		}
-		
+
 	}
-	
+
 	public class AssociatedConceptInfoComparator implements Comparator<AssociatedConceptInfo>{
 		public int compare(AssociatedConceptInfo concept1, AssociatedConceptInfo concept2) {
 	    	String concept1Label = concept1.getConceptLabel().toLowerCase();
@@ -562,8 +562,8 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	    	return concept1Label.compareTo(concept2Label);
 	    }
 	}
-	
-	
-	
-	
+
+
+
+
 }

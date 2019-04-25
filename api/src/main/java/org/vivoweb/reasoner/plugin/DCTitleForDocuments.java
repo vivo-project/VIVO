@@ -10,9 +10,9 @@ import edu.cornell.mannlib.vitro.webapp.reasoner.plugin.SimplePropertyAndTypeRul
 public class DCTitleForDocuments extends SimplePropertyAndTypeRule implements ReasonerPlugin {
 
 	public DCTitleForDocuments() {
-		super(RDFS.label.getURI(), 
-		      "http://purl.org/ontology/bibo/Document", 
+		super(RDFS.label.getURI(),
+		      "http://purl.org/ontology/bibo/Document",
 		      "http://purl.org/dc/terms/title");
 	}
-			   
+
 }

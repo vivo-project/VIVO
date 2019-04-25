@@ -211,22 +211,22 @@ h5.qrCode {
 }
 span#qrCodeImage {
     position: absolute;
-    top: 27px; 
-    left: 175px !important; 
-    width:180px; 
+    top: 27px;
+    left: 175px !important;
+    width:180px;
     border: solid 2px #ccc;
-    background: #fff; 
-    text-align:middle; 
+    background: #fff;
+    text-align:middle;
     overflow:visible;
     z-index:1000;
 }
 span#qrCodeImage img {
-    padding: 1.7em 1.7em 0 1.7em; 
+    padding: 1.7em 1.7em 0 1.7em;
 }
 a.qrCloseLink {
-    float: right; 
-    padding-right: 1em; 
-    margin-right: 0; 
+    float: right;
+    padding-right: 1em;
+    margin-right: 0;
     font-size: .8em;
 }/* MISCELLANEOUS------>  */
 .listDateTime {
@@ -246,7 +246,7 @@ a.manageLinks {
 /*    padding-top: 20px; */
 }
 ul#individual-webpage li:first-child {
-    padding: 0 0 5px 0;    
+    padding: 0 0 5px 0;
 }
 ul.webpages-withThumbnails li:nth-child(2) {
     padding: 105px 0 0 15px;

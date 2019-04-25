@@ -113,7 +113,7 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
 			+ "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> . \n"
 			+ "?organization core:relatedBy ?position . \n"
-			+ "?position a core:Position . \n" 
+			+ "?position a core:Position . \n"
 			+ "?position a  ?positionType . \n"
 			+ "?position rdfs:label ?positionTitle . \n"
 			+ "?position core:relates ?organization . ";
@@ -122,7 +122,7 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
 			+ "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> . \n"
 			+ "@prefix foaf: <http://xmlns.com/foaf/0.1/> . \n"
-    		+ "?position core:relates ?person . \n" 
+    		+ "?position core:relates ?person . \n"
     		+ "?person core:relatedBy ?position . \n"
     		+ "?person a foaf:Person . \n"
     		+ "?person rdfs:label ?personLabel . ";
@@ -147,7 +147,7 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 
     private static final String N3_EXISTING_PERSON = ""
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
-        	+ "?position core:relates ?existingPerson . \n" 
+        	+ "?position core:relates ?existingPerson . \n"
         	+ "?existingPerson core:relatedBy ?position . \n";
 
 	private static final String N3_NEW_START_NODE = ""
@@ -221,7 +221,7 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 		conf.addField(new FieldVTwo()
 				.setName("positionType")
 				.setValidators(list("nonempty"))
-				.setOptions( 
+				.setOptions(
 				        new ChildVClassesWithParent(URI_POSITION_CLASS))
 				);
 
@@ -260,7 +260,7 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 		conf.addValidator(new AntiXssValidation());
 		conf.addValidator(new DateTimeIntervalValidationVTwo("startField",
 				"endField"));
-		
+
 		prepare(vreq, conf);
 		return conf;
 	}

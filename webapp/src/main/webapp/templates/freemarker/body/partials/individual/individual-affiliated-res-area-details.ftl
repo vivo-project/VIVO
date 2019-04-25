@@ -26,7 +26,7 @@
 		        </li>
             </#list>
         </ul>
-    
+
     </section>
 </#if>
 

@@ -46,7 +46,7 @@ public class QrCodeDetails extends AbstractAjaxResponder {
         + "               ?vTitle vcard:title ?title . \n"
         + "    } \n"
         + "} "  ;
-    
+
 	public QrCodeDetails(HttpServlet parent, VitroRequest vreq,
 			HttpServletResponse resp) {
 		super(parent, vreq, resp);
@@ -62,17 +62,17 @@ public class QrCodeDetails extends AbstractAjaxResponder {
             String phoneNumber = "";
             String email = "";
 			String response = "[";
-			
+
 			vcardData = getVcardData(individual, vreq);
 
-            for (Map<String, String> map: vcardData) {        
+            for (Map<String, String> map: vcardData) {
                 firstName = map.get("firstName");
                 lastName = map.get("lastName");
                 preferredTitle = map.get("title");
                 phoneNumber = map.get("phone");
                 email = map.get("email");
             }
-            
+
 /*
             String tempUrl = vreq.getRequestURL().toString();
             String prefix = "http://";
@@ -121,7 +121,7 @@ public class QrCodeDetails extends AbstractAjaxResponder {
 			return EMPTY_RESPONSE;
 		}
 	}
-           
+
     private List<Map<String,String>>  getVcardData(Individual individual, VitroRequest vreq) {
         String queryStr = QueryUtils.subUriForQueryVar(VCARD_DATA_QUERY, "subject", individual.getURI());
         log.debug("queryStr = " + queryStr);
@@ -134,8 +134,8 @@ public class QrCodeDetails extends AbstractAjaxResponder {
             }
         } catch (Exception e) {
             log.error(e, e);
-        }    
-       
+        }
+
         return vcardData;
     }
 

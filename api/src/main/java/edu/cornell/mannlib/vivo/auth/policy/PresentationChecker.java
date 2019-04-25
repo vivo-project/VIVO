@@ -28,7 +28,7 @@ public class PresentationChecker extends RelationshipChecker {
 	/**
 	 * A self-editor is authorized to add, edit, or delete a statement if the
 	 * subject or object refers to a Presentation, and if the self-editor:
-	 * 
+	 *
 	 * 1) is a Presenter of that Presentation
 	 */
 	public PolicyDecision isAuthorized(List<String> userUris) {

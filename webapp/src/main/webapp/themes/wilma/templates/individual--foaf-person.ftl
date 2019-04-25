@@ -1,10 +1,10 @@
 <#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
-<#-- 
+<#--
     Individual profile page template for foaf:Person individuals. This is the default template for foaf persons
-    in the Wilma theme and should reside in the themes/wilma/templates directory. 
+    in the Wilma theme and should reside in the themes/wilma/templates directory.
 -->
- 
+
 <#include "individual-setup.ftl">
 <#import "lib-vivo-properties.ftl" as vp>
 <#--Number of labels present-->
@@ -22,17 +22,17 @@
 <#assign visRequestingTemplate = "foaf-person-wilma">
 
 <#--add the VIVO-ORCID interface -->
-<#include "individual-orcidInterface.ftl">  
-        
+<#include "individual-orcidInterface.ftl">
+
 <section id="individual-intro" class="vcard person" role="region">
 
-    <section id="share-contact" role="region"> 
-        <!-- Image -->           
+    <section id="share-contact" role="region">
+        <!-- Image -->
         <#assign individualImage>
-            <@p.image individual=individual 
-                      propertyGroups=propertyGroups 
-                      namespaces=namespaces 
-                      editable=editable 
+            <@p.image individual=individual
+                      propertyGroups=propertyGroups
+                      namespaces=namespaces
+                      editable=editable
                       showPlaceholder="always" />
         </#assign>
 
@@ -47,29 +47,29 @@
                 <img id="uriIcon" title="${individual.uri}" src="${urls.images}/individual/uriIcon.gif" alt="${i18n().uri_icon}"/>
   				<#if checkNamesResult?has_content >
 					<img id="qrIcon"  src="${urls.images}/individual/qr_icon.png" alt="${i18n().qr_icon}" />
-                	<span id="qrCodeImage" class="hidden">${qrCodeLinkedImage!} 
+                	<span id="qrCodeImage" class="hidden">${qrCodeLinkedImage!}
 						<a class="qrCloseLink" href="#"  title="${i18n().qr_code}">${i18n().close_capitalized}</a>
 					</span>
 				</#if>
             </span>
         </div>
-        <#include "individual-contactInfo.ftl">  
-                
+        <#include "individual-contactInfo.ftl">
+
         <!-- Websites -->
         <#include "individual-webpage.ftl">
     </section>
 
-    <section id="individual-info" ${infoClass!} role="region"> 
+    <section id="individual-info" ${infoClass!} role="region">
     <section id="right-hand-column" role="region">
-        <#include "individual-visualizationFoafPerson.ftl">    
+        <#include "individual-visualizationFoafPerson.ftl">
         </section>
         <#include "individual-adminPanel.ftl">
-        
+
         <header>
             <#if relatedSubject??>
                 <h2>${relatedSubject.relatingPredicateDomainPublic} ${i18n().indiv_foafperson_for} ${relatedSubject.name}</h2>
                 <p><a href="${relatedSubject.url}" title="${i18n().indiv_foafperson_return}">&larr; ${i18n().indiv_foafperson_return} ${relatedSubject.name}</a></p>
-            <#else>                
+            <#else>
                 <h1 class="foaf-person">
                     <#-- Label -->
                     <span itemprop="name" class="fn"><@p.label individual editable labelCount localesCount/></span>
@@ -95,13 +95,13 @@
                     </#if>
                 </section>
             </#if>
-            <!-- Positions -->   
+            <!-- Positions -->
             <#include "individual-positions.ftl">
         </header>
-         
+
         <!-- Overview -->
         <#include "individual-overview.ftl">
-        
+
         <!-- Research Areas -->
         <#include "individual-researchAreas.ftl">
 
@@ -110,25 +110,25 @@
 
 		<#include "individual-openSocial.ftl">
     </section>
-    
+
 </span></section>
 
-<#assign nameForOtherGroup = "${i18n().other}"> 
+<#assign nameForOtherGroup = "${i18n().other}">
 
 <#-- Ontology properties -->
 <#if !editable>
 	<#-- We don't want to see the first name and last name unless we might edit them. -->
-	<#assign skipThis = propertyGroups.pullProperty("http://xmlns.com/foaf/0.1/firstName")!> 
-	<#assign skipThis = propertyGroups.pullProperty("http://xmlns.com/foaf/0.1/lastName")!> 
+	<#assign skipThis = propertyGroups.pullProperty("http://xmlns.com/foaf/0.1/firstName")!>
+	<#assign skipThis = propertyGroups.pullProperty("http://xmlns.com/foaf/0.1/lastName")!>
 </#if>
 
 <!-- Property group menu or tabs -->
-<#-- 
+<#--
      With release 1.6 there are now two types of property group displays: the original property group
      menu and the horizontal tab display, which is the default. If you prefer to use the property
      group menu, simply substitute the include statement below with the one that appears after this
      comment section.
-     
+
      <#include "individual-property-group-menus.ftl">
 -->
 

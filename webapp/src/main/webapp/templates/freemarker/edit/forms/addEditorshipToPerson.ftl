@@ -36,12 +36,12 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 	<#assign submissionErrors = editSubmission.validationErrors/>
 </#if>
 
-<#if editMode == "edit" || editMode == "repair">    
-        <#assign titleVerb="${i18n().edit_capitalized}">        
+<#if editMode == "edit" || editMode == "repair">
+        <#assign titleVerb="${i18n().edit_capitalized}">
         <#assign submitButtonText="${i18n().save_changes}">
         <#assign disabledVal="disabled">
 <#else>
-        <#assign titleVerb="${i18n().create_capitalized}">        
+        <#assign titleVerb="${i18n().create_capitalized}">
         <#assign submitButtonText="${i18n().create_entry}">
         <#assign disabledVal=""/>
 </#if>
@@ -73,45 +73,45 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     </section>
 </#if>
 
-<@lvf.unsupportedBrowser urls.base /> 
+<@lvf.unsupportedBrowser urls.base />
 
-<section id="addEditorshipToPerson" role="region">        
-    
+<section id="addEditorshipToPerson" role="region">
+
     <form id="addEditorshipToPerson" class="customForm noIE67" action="${submitUrl}"  role="add/edit editorship">
 
-    
-    <p class="inline">    
+
+    <p class="inline">
         <label for="orgType">${i18n().document_type_capitalized} ${requiredHint}</label>
         <#assign docTypeOpts = editConfiguration.pageData.documentType />
         <select id="typeSelector" name="documentType" acGroupName="document">
-            <option value="" selected="selected">${i18n().select_one}</option>                
-            <#list docTypeOpts?keys as key>             
+            <option value="" selected="selected">${i18n().select_one}</option>
+            <#list docTypeOpts?keys as key>
                 <#if documentTypeValue = key>
-                    <option value="${key}"  selected >${docTypeOpts[key]}</option>     
+                    <option value="${key}"  selected >${docTypeOpts[key]}</option>
                 <#else>
                     <option value="${key}">${docTypeOpts[key]}</option>
                 </#if>
             </#list>
         </select>
-    </p>     
-    
+    </p>
+
     <p>
         <label for="relatedIndLabel">${i18n().document_name_capitalized} ${requiredHint}</label>
         <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="documentLabel" acGroupName="document" value="${documentLabelValue}"  />
         <input class="display" type="hidden" id="documentDisplay" acGroupName="document" name="documentLabelDisplay" value="${documentLabelDisplayValue}">
     </p>
-        
+
     <div class="acSelection" acGroupName="document">
         <p class="inline">
             <label>${i18n().selected_document}:</label>
             <span class="acSelectionInfo"></span>
-            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
             <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="documentUri" name="existingDocument" value="${existingDocumentValue}" ${flagClearLabelForExisting}="true" />
     </div>
-    
-                                    
+
+
   	<#--End draw elements-->
     <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>
     <p class="submit">
@@ -144,7 +144,7 @@ var i18nStrings = {
 </script>
 
 </section>
- 
+
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customFormWithAutocomplete.css" />')}

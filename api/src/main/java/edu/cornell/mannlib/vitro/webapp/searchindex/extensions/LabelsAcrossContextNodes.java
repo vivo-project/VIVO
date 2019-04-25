@@ -35,22 +35,22 @@ import edu.cornell.mannlib.vitro.webapp.utils.configuration.Validation;
  * If an individual has context nodes then the search document for that
  * individual should include the labels of the partners across those nodes. The
  * labels will be added to the ALLTEXT and ALLTEXTUNSTEMMED fields.
- * 
+ *
  * We must specify what property leads to a context node (incoming), and what
  * property leads from a context node (outgoing). We may add restrictions to say
  * that this only applies to individuals of certain types. We may also restrict
  * the type of the applicable context nodes.
- * 
+ *
  * An instance of this class acts as both a DocumentModifier and an
  * IndexingUriFinder:
- * 
+ *
  * As a DocumentModifier, it looks across approved context nodes to fetch the
  * labels of the partners.
- * 
+ *
  * As an IndexingUriFinder, it recognizes that this relationship can be changed
  * by a change to a "label" statement, or to a "relates" property, and finds all
  * partners as candidates for reindexing.
- * 
+ *
  * <pre>
  * Configuration:
  *     rdfs:label -- Optional. Appears in the timings and debug statements.
@@ -85,7 +85,7 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 
 	/**
 	 * URIs of the types of individuals to whom this instance applies.
-	 * 
+	 *
 	 * If this is not empty and an individual does not have any of these types,
 	 * then skip that individual.
 	 */
@@ -93,7 +93,7 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 
 	/**
 	 * URIs of the types of acceptable context nodes.
-	 * 
+	 *
 	 * If this is not empty and a context node does not have any of these types,
 	 * then skip that context node's label.
 	 */
@@ -296,7 +296,7 @@ public class LabelsAcrossContextNodes implements IndexingUriFinder,
 	/**
 	 * If this is a "label" statement, check to see if the subject has any
 	 * acceptable partners across acceptable context nodes.
-	 * 
+	 *
 	 * If this is a statement that involves the specified incoming property on
 	 * an acceptable context node, check to see if there are any acceptable
 	 * partners on this node.

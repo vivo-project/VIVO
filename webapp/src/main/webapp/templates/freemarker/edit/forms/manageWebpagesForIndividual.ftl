@@ -17,7 +17,7 @@
 </#if>
 
 <h3>${i18n().manage_web_pages}</h3>
-       
+
 <script type="text/javascript">
     var webpageData = [];
 </script>
@@ -34,31 +34,31 @@
             <#else>
                 <#assign anchor=webpage.url >
             </#if>
-            
+
             <span class="itemName extra-wide">
-                <a href="${webpage.url}" title="${i18n().webpage_url}">${anchor}</a> 
+                <a href="${webpage.url}" title="${i18n().webpage_url}">${anchor}</a>
                 <#if webpage.typeLabel??>(<#if webpage.typeLabel == "URL">Standard Web Link<#else>${webpage.typeLabel}</#if></#if>)
             </span>
             <span class="editingLinks">
-                <a href="${baseEditWebpageUrl}&objectUri=${webpage.vcard}&predicateUri=${predicateUri}&linkUri=${webpage.link}&rangeUri=${editConfiguration.rangeUri?url}&domainUri=${editConfiguration.domainUri?url}" class="edit" title="${i18n().edit_webpage_link}">${i18n().edit_capitalized}</a> | 
-                <a href="${urls.base}${deleteWebpageUrl}" class="remove" title="${i18n().delete_webpage_link}">${i18n().delete_button}</a> 
+                <a href="${baseEditWebpageUrl}&objectUri=${webpage.vcard}&predicateUri=${predicateUri}&linkUri=${webpage.link}&rangeUri=${editConfiguration.rangeUri?url}&domainUri=${editConfiguration.domainUri?url}" class="edit" title="${i18n().edit_webpage_link}">${i18n().edit_capitalized}</a> |
+                <a href="${urls.base}${deleteWebpageUrl}" class="remove" title="${i18n().delete_webpage_link}">${i18n().delete_button}</a>
             </span>
-        </li>    
-        
+        </li>
+
         <script type="text/javascript">
             webpageData.push({
-                "webpageUri": "${webpage.link}"              
+                "webpageUri": "${webpage.link}"
             });
-        </script>      
-    </#list>  
+        </script>
+    </#list>
 </ul>
 
 <section id="addAndCancelLinks" role="section">
     <#-- There is no editConfig at this stage, so we don't need to go through postEditCleanup.jsp on cancel.
-         These can just be ordinary links, rather than a v:input element, as in 
-         addAuthorsToInformationResource.jsp. -->   
+         These can just be ordinary links, rather than a v:input element, as in
+         addAuthorsToInformationResource.jsp. -->
     <a href="${showAddFormUrl}" id="showAddFormButton" title="${i18n().add_new_web_page}">${i18n().add_new_web_page}</a>
-     <span class="or"> ${i18n().or} </span>  
+     <span class="or"> ${i18n().or} </span>
     <a href="${cancelUrl}" id="returnToIndividual" class="return" title="${i18n().return_to_profile}">${i18n().return_to_profile}</a>
     <img id="indicator" class="indicator hidden" src="${urls.base}/images/indicatorWhite.gif" alt="${i18n().processing_indicator}"/>
 </section>

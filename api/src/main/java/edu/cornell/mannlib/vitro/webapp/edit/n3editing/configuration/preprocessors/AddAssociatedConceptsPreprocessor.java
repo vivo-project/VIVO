@@ -67,10 +67,10 @@ public class AddAssociatedConceptsPreprocessor extends
 	private static List<String> conceptBroaderURIValues =  null;
 	private static List<String> conceptNarrowerURIValues = null;
 	private static MultiValueEditSubmission submission = null;
-	
+
 	private static String SKOSBroaderURI = "http://www.w3.org/2004/02/skos/core#broader";
 	private static String SKOSNarrowerURI = "http://www.w3.org/2004/02/skos/core#narrower";
-	private static String SKOSConceptType = "http://www.w3.org/2004/02/skos/core#Concept";	
+	private static String SKOSConceptType = "http://www.w3.org/2004/02/skos/core#Concept";
 
 	// String datatype
 
@@ -92,8 +92,8 @@ public class AddAssociatedConceptsPreprocessor extends
 		// as vocab uri (which is based on thge
 		// For query parameters, check whether CUI
 		copySubmissionValues();
-		
-		
+
+
 		if (conceptNodeValues != null) {
 			String[] conceptNodes = convertDelimitedStringToArray(conceptNodeValues);
 			int numberConcepts = conceptNodes.length;
@@ -112,8 +112,8 @@ public class AddAssociatedConceptsPreprocessor extends
 		}
 
 	}
-	
-	
+
+
 
 	//Since we will change the uris and literals from form, we should make copies
 	//of the original values and store them, this will also make iterations
@@ -127,10 +127,10 @@ public class AddAssociatedConceptsPreprocessor extends
 		log.debug("concept label values are " + conceptLabelValues);
 
 	}
-	
-	
-	//For broader and narrower relationships, we will be 
-	//linking the concept to broader and narrower terms where those terms already 
+
+
+	//For broader and narrower relationships, we will be
+	//linking the concept to broader and narrower terms where those terms already
 	//exist in the system
 	//This method or approach may change later in which case this method should change
 	private void getExistingConceptRelationships() {
@@ -154,7 +154,7 @@ public class AddAssociatedConceptsPreprocessor extends
 		}
 		this.conceptBroaderURIValues = existingBroaderURIs;
 	}
-	
+
 	//get the broader and narrower uri values that already exist in the system from the ones returned in the search
 	//and use those to populate relationships between the concept and other concepts already in the system
 	//We should also make sure to use bidirectional n3 so the graph has both sets of relationships represented
@@ -165,7 +165,7 @@ public class AddAssociatedConceptsPreprocessor extends
 	private List<String> getConceptBroaderURIValues() {
 		return this.getJSONFormURIValues("conceptBroaderURI");
 	}
-	
+
 	private List<String> getJSONFormURIValues(String varName) {
 		Map<String, List<String>> urisFromForm = submission.getUrisFromForm();
 		List<String> uris =  urisFromForm.get(varName);
@@ -202,16 +202,16 @@ public class AddAssociatedConceptsPreprocessor extends
 		List<String> existingBroaderURIs = this.getExistingURIs(broaderURIs);
 		return existingBroaderURIs;
 	}
-	
+
 	private List<String> getExistingNarrowerURIs(List<String> narrowerURIs) {
-		if(narrowerURIs == null) 
+		if(narrowerURIs == null)
 			return new ArrayList<String>();
 		List<String> existingNarrowerURIs = this.getExistingURIs(narrowerURIs);
 		return existingNarrowerURIs;
 	}
-	
+
 	//We need to keep the number of elements the same if there are any entries at all in the original
-	//So we will use an empty string or null 
+	//So we will use an empty string or null
 	private List<String> getExistingURIs(List<String> uris) {
 		//Important to keep the same formatting as original, because a comma delimited string as an element in the array
 		//refers to a list of uris appropriate for a given concept, where each element in the array corresponds to a different
@@ -236,26 +236,26 @@ public class AddAssociatedConceptsPreprocessor extends
 			} else {
 				if(uri != null && !uri.isEmpty() && this.wdf.hasExistingURI(uri)) {
 					existingURIs.add(uri);
-				} 
-				else 
+				}
+				else
 				{
 					existingURIs.add("");
 				}
-				
+
 			}
 		}
 		return existingURIs;
 	}
-	 
-	
+
+
 	//Process the semantic type label and URI values for the concepts
 	private void processConceptSemanticValues() {
 		conceptSemanticTypeLabelValues = getConceptSemanticTypeLabelValues();
 		conceptSemanticTypeURIValues = getConceptSemanticTypeURIValues();
-		
+
 		//We are first going to handle the single value case and then handle additional values
 		//where the rest of the additional values are handled
-		
+
 	}
 
 
@@ -303,14 +303,14 @@ public class AddAssociatedConceptsPreprocessor extends
 						editConfiguration.addNewResource(newResourceName, null);
 					}
 				}
-				
+
 			}
 		} else if(conceptSemanticTypeLabels != null && conceptSemanticTypeLabels.length > numberConcepts){
 			log.error("Number of concept semantic type labels is greater than number of concepts");
 		} else{
 			log.error("Concept semantic type labels returned are null");
-		}		
-		
+		}
+
 	}
 
 	//This is where the actual values will be submitted as if they were separate input fields
@@ -331,7 +331,7 @@ public class AddAssociatedConceptsPreprocessor extends
 	}
 
 	private void addConceptNodeInputs(int numberConcepts) {
-		
+
 		String[] conceptNodes = convertDelimitedStringToArray(conceptNodeValues);
 		if(conceptNodes != null && conceptNodes.length == numberConcepts) {
 			int i;
@@ -349,7 +349,7 @@ public class AddAssociatedConceptsPreprocessor extends
 		} else{
 			log.error("Concept nodes returned were null");
 		}
-		
+
 	}
 
 	private void addConceptSourceInputs(int numberConcepts) {
@@ -388,7 +388,7 @@ public class AddAssociatedConceptsPreprocessor extends
 				} else {
 					log.error("Corresponding field for " + labelInputName + " was not added to edit configuration");
 				}
-				
+
 			}
 		} else if(labels != null && labels.length != numberConcepts){
 			log.error("Number of concept labels did not match the number of concepts to be added");
@@ -396,7 +396,7 @@ public class AddAssociatedConceptsPreprocessor extends
 			log.error("Concept labels returned were null");
 		}
 	}
-	
+
 	private void addConceptSemanticTypeLabelAndURIInputs(int numberConcepts) {
 		String[] labels = convertDelimitedStringToArray(conceptSemanticTypeLabelValues);
 		HashSet<String> uniqueLabelValues = new HashSet<String>();
@@ -422,18 +422,18 @@ public class AddAssociatedConceptsPreprocessor extends
 				} else {
 					log.error("Corresponding field for " + labelInputName + " was not added to edit configuration");
 				}
-				
+
 			}
 		} else if(labels != null && labels.length != numberConcepts){
 			log.error("Number of concept semantic type labels did not match the number of concepts to be added");
 		} else{
 			log.error("Concept labels returned were null");
-		}	
+		}
 	}
-	
+
 	private void addConceptSemanticTypeURIInputForLabel(String conceptSemanticTypeLabel, int suffix) {
 		//String[] conceptSemanticTypeURIs= convertDelimitedStringToArray(conceptSemanticTypeURIValues);
-		
+
 		//Get the semantic type URI variable name associated with this label
 		String uriInputName = this.getConceptSemanticTypeURIFieldName(conceptSemanticTypeLabel, suffix);
 		//List<>
@@ -465,8 +465,8 @@ public class AddAssociatedConceptsPreprocessor extends
 					submission.addUriToForm(editConfiguration, conceptBroaderURIInputName, broaderURISet);
 				}
 			}
-		} 
-		
+		}
+
 	}
 	private void addConceptNarrowerURIInputs(int numberConcepts) {
 		int i;
@@ -486,11 +486,11 @@ public class AddAssociatedConceptsPreprocessor extends
 					submission.addUriToForm(editConfiguration, conceptNarrowerURIInputName, narrowerURISet);
 				}
 			}
-		} 	
+		}
 	}
-	
+
 	//Fields
-	
+
 	private void addFields(int numberConcepts) {
 		//Clear out all fields in edit configuration first
 		editConfiguration.setFields(new HashMap<String, FieldVTwo>());
@@ -516,13 +516,13 @@ public class AddAssociatedConceptsPreprocessor extends
 				conceptSemanticTypeUris.add(conceptSemanticTypeURI);
 				addConceptSemanticTypeURIField(conceptSemanticTypeURI);
 			}
-			
+
 			//add fields for concept broader and narrower uris
 			addConceptBroaderURIField(conceptBroaderURI);
 			addConceptNarrowerURIField(conceptNarrowerURI);
 		}
 	}
-	
+
 
 
 	private void addConceptNodeField(String conceptNode) {
@@ -530,7 +530,7 @@ public class AddAssociatedConceptsPreprocessor extends
 		validators.add("nonempty");
 		editConfiguration.addField(new FieldVTwo().
 				setName(conceptNode).
-				setValidators(validators));		
+				setValidators(validators));
 	}
 
 	private void addLabelField(String label) {
@@ -538,15 +538,15 @@ public class AddAssociatedConceptsPreprocessor extends
 				setName(label).
 				setRangeDatatypeUri(XSD.xstring.toString())
 				);
-		
+
 	}
 
 	private void addSourceField(String source) {
 		editConfiguration.addField(new FieldVTwo().
 				setName(source));
-		
+
 	}
-	
+
 	//TODO: Do we need to check if label is empty string?
 	private void addConceptSemanticTypeLabelField(String label) {
 		if(label != null) {
@@ -555,28 +555,28 @@ public class AddAssociatedConceptsPreprocessor extends
 					setRangeDatatypeUri(XSD.xstring.toString())
 					);
 		}
-		
+
 	}
-	
+
 	private void addConceptSemanticTypeURIField(String conceptSemanticTypeURI) {
 		if(conceptSemanticTypeURI != null) {
 			editConfiguration.addField(new FieldVTwo().
-					setName(conceptSemanticTypeURI));		
+					setName(conceptSemanticTypeURI));
 		}
 	}
 
 	private void addConceptNarrowerURIField(String conceptNarrowerURI) {
 		editConfiguration.addField(new FieldVTwo().
 				setName(conceptNarrowerURI));
-		
+
 	}
 
 	private void addConceptBroaderURIField(String conceptBroaderURI) {
 		editConfiguration.addField(new FieldVTwo().
 				setName(conceptBroaderURI));
-		
+
 	}
-	
+
 	//original literals on form: label, uris on form: conceptNode and conceptSource
 	//This will overwrite the original values in the edit configuration
 	private void addLiteralsAndUrisOnForm(int numberTerms) {
@@ -597,7 +597,7 @@ public class AddAssociatedConceptsPreprocessor extends
 			String conceptBroaderURI = conceptBroaderURIBase + suffix;
 			String conceptNarrowerURI = conceptNarrowerURIBase + suffix;
 			urisOnForm.add(conceptNode);
-			urisOnForm.add(source); 
+			urisOnForm.add(source);
 			if(!conceptSemanticTypeURIs.contains(conceptSemanticTypeURI)) {
 				conceptSemanticTypeURIs.add(conceptSemanticTypeURI);
 				urisOnForm.add(conceptSemanticTypeURI);
@@ -621,14 +621,14 @@ public class AddAssociatedConceptsPreprocessor extends
 		List<String> n3Required = new ArrayList<String>();
 		int index;
 		String nodeBase = "?" + conceptNodeBase;
-		
+
 		String prefixStr = "@prefix core: <http://vivoweb.org/ontology/core#> .";
 		// First one already included so add new ones here
 		for (index = 1; index <= numberConcepts; index++) {
 			int suffix = index;
 			String node = nodeBase + suffix;
 			String n3String = prefixStr;
-			n3String += "?subject ?predicate " + node + " . \n" + 
+			n3String += "?subject ?predicate " + node + " . \n" +
 			node + " <" + RDF.type.getURI() + "> <" + this.SKOSConceptType + "> .";
 			n3Required.add(n3String);
 		}
@@ -656,23 +656,23 @@ public class AddAssociatedConceptsPreprocessor extends
 			String source = sourceVar + suffix;
 			String conceptSemanticTypeLabel = conceptSemanticTypeLabelVar + suffix;
 			//get the URI appropriate for the concept semantic type label var
-			String conceptSemanticTypeURI = getConceptSemanticTypeURIVar(conceptSemanticTypeLabelBase + suffix, suffix); 
+			String conceptSemanticTypeURI = getConceptSemanticTypeURIVar(conceptSemanticTypeLabelBase + suffix, suffix);
 			String conceptBroaderURI = conceptBroaderURIVar + suffix;
 			String conceptNarrowerURI = conceptNarrowerURIVar + suffix;
 			//Set up the n3 strings
 			String n3String = prefixStr;
-			n3String += node + " <" + RDFS.label.getURI() + "> " + label + " .\n" + 
-			        node + " <" + RDFS.isDefinedBy.getURI() + "> " + source + " ."; 
+			n3String += node + " <" + RDFS.label.getURI() + "> " + label + " .\n" +
+			        node + " <" + RDFS.isDefinedBy.getURI() + "> " + source + " .";
 			String n3ConceptTypeString = prefixStr;
-			n3ConceptTypeString += node + " <" + RDF.type.getURI() + "> " + conceptSemanticTypeURI + " ." + 
-			conceptSemanticTypeURI +  " <" + RDFS.label.getURI() + "> " + conceptSemanticTypeLabel + " .\n" + 
+			n3ConceptTypeString += node + " <" + RDF.type.getURI() + "> " + conceptSemanticTypeURI + " ." +
+			conceptSemanticTypeURI +  " <" + RDFS.label.getURI() + "> " + conceptSemanticTypeLabel + " .\n" +
 	        conceptSemanticTypeURI +  " <" + RDFS.subClassOf.getURI() + "> <http://www.w3.org/2004/02/skos/core#Concept> .\n"  ;
 			//String representing the broader and narrower uri(s) for each of the concepts - these may or may not exist
-			String n3ConceptBroaderURI = prefixStr + node + " <" + this.SKOSNarrowerURI + "> " + conceptNarrowerURI + " ." + 
+			String n3ConceptBroaderURI = prefixStr + node + " <" + this.SKOSNarrowerURI + "> " + conceptNarrowerURI + " ." +
 		 	        conceptNarrowerURI + " <" + this.SKOSBroaderURI + "> " + node + " .";
-			String n3ConceptNarrowerURI = prefixStr + node + " <" + this.SKOSBroaderURI + "> " + conceptBroaderURI + " ." + 
+			String n3ConceptNarrowerURI = prefixStr + node + " <" + this.SKOSBroaderURI + "> " + conceptBroaderURI + " ." +
 		 	    	conceptBroaderURI + " <" + this.SKOSNarrowerURI + "> " + node + " .";
-			
+
 			n3Optional.add(n3String);
 			//adding separately so their resolution does not depend on each other
 			n3Optional.add(n3ConceptTypeString);
@@ -681,7 +681,7 @@ public class AddAssociatedConceptsPreprocessor extends
 
 		}
 		//Already have n3 required so need to add to that
-		
+
 		editConfiguration.setN3Optional(n3Optional);
 	}
 
@@ -692,7 +692,7 @@ public class AddAssociatedConceptsPreprocessor extends
 		// TODO Auto-generated method stub
 		return "?" + this.getConceptSemanticTypeURIFieldName(labelVar, suffix);
 	}
-	
+
 	private String getConceptSemanticTypeURIFieldName(String labelVar, int suffix) {
 		// TODO Auto-generated method stub
 		if(this.labelVarToUriVarHash.containsKey(labelVar)) {
@@ -711,27 +711,27 @@ public class AddAssociatedConceptsPreprocessor extends
 		return inputArray;
 
 	}
-	
-	
-	//Get values from submission 
+
+
+	//Get values from submission
 	private String getConceptNodeValues() {
 		Map<String, List<String>> urisFromForm = submission.getUrisFromForm();
 		List<String> conceptNodes =  urisFromForm.get("conceptNode");
 		return (String) getFirstElement(conceptNodes);
 	}
-	
+
 	private String getConceptSourceValues() {
 		Map<String, List<String>> urisFromForm = submission.getUrisFromForm();
 		return (String) getFirstElement(urisFromForm.get("conceptSource"));
 	}
-	
+
 	private String getConceptLabelValues() {
 		Map<String, List<Literal>> literalsFromForm = submission.getLiteralsFromForm();
 		Map<String, List<String>> transformed = EditConfigurationUtils.transformLiteralMap(literalsFromForm);
 		return (String) getFirstElement(transformed.get("conceptLabel"));
 
 	}
-	
+
 	private String getConceptSemanticTypeLabelValues() {
 		Map<String, List<Literal>> literalsFromForm = submission.getLiteralsFromForm();
 		Map<String, List<String>> transformed = EditConfigurationUtils.transformLiteralMap(literalsFromForm);
@@ -739,12 +739,12 @@ public class AddAssociatedConceptsPreprocessor extends
 		if(label == null) {
 			label = "";
 		}
-		
+
 		return label;
 	}
-	
+
 	//This will either generate or retrieve URIs for the concept semantic type labels if they exist
-	//We will then update the submission to include this 
+	//We will then update the submission to include this
 		private String getConceptSemanticTypeURIValues() {
 			StringBuilder pseudoInputString = new StringBuilder();
 			if(conceptSemanticTypeLabelValues !=  null && !conceptSemanticTypeLabelValues.isEmpty()) {
@@ -752,7 +752,7 @@ public class AddAssociatedConceptsPreprocessor extends
 				//keep track of what label values already exist and to which label variables they map
 				HashMap<String, List<Integer>> labelValueToVarSuffix = new HashMap<String, List<Integer>>();
 				int numberLabels = conceptSemanticTypeLabels.length;
-				
+
 				//The rest of this code is really only relevant for multiple values, so we could break out the old code above
 				//as we don't need to set up hashes etc. if there is only one concept node being added
 				if(numberLabels == 1) {
@@ -765,12 +765,12 @@ public class AddAssociatedConceptsPreprocessor extends
 						log.debug("uris to add" + uri);
 						submission.addUriToForm(this.editConfiguration, "conceptSemanticTypeURI", urisToAdd);
 					}
-					
+
 				}
 				//if there is more than one concept node, we may have duplicate semantic types
 				//which will need to be referred to by the same semantic type uri
 				else if (numberLabels > 1){
-				
+
 					for(int i = 0; i < numberLabels; i++) {
 						int suffix = i + 1;
 						String label = conceptSemanticTypeLabels[i];
@@ -790,14 +790,14 @@ public class AddAssociatedConceptsPreprocessor extends
 							if(suffixList != null && suffixList.size() > 0) {
 								thisSuffix = suffixList.get(0);
 							}
-							
+
 						}
-						
+
 						//Now add the uri var to the hash mapping label variable to uri variable
 						String uriVar = this.conceptSemanticTypeURIBase + thisSuffix.intValue();
 						this.labelVarToUriVarHash.put(labelVar, uriVar);
-						
-						
+
+
 						//Make or retrieve URI for this label
 						//TODO: Do we create this string with empty inputs ?
 						String  uri = getURIForSemanticTypeLabel(label);
@@ -812,20 +812,20 @@ public class AddAssociatedConceptsPreprocessor extends
 							pseudoInputString.append(",");
 						}
 						pseudoInputString.append(uri);
-					
+
 					}
-					
+
 					//Add this string to the uris for the form
 					String[] urisToAdd = new String[1];
 					urisToAdd[0] = pseudoInputString.toString();
 					log.debug("uris to add" + pseudoInputString);
 					submission.addUriToForm(this.editConfiguration, "conceptSemanticTypeURI", urisToAdd);
-					
+
 				}
 			}
 			return pseudoInputString.toString();
 		}
-		
+
 	private String getURIForSemanticTypeLabel(String label) {
 		String existingURI = this.getExistingSemanticTypeURI(label);
 		if(existingURI != null) {
@@ -834,11 +834,11 @@ public class AddAssociatedConceptsPreprocessor extends
 		//if we leave this as null, we should be able to generate a new resource
 		//empty string because there may be more than one value returned for labels
 		else return "";
-		
+
 	}
-	
+
 	private String getExistingSemanticTypeURI(String label) {
-		String queryStr = "SELECT ?semanticType WHERE { ?semanticType <" + RDF.type.getURI() + "> <" + OWL.Class.getURI() + "> . " + 
+		String queryStr = "SELECT ?semanticType WHERE { ?semanticType <" + RDF.type.getURI() + "> <" + OWL.Class.getURI() + "> . " +
 				"?semanticType <" + RDFS.label.getURI() + "> \"" + label + "\"^^<http://www.w3.org/2001/XMLSchema#string>  . }";
 		 QueryExecution qe = null;
 	        try{
@@ -846,7 +846,7 @@ public class AddAssociatedConceptsPreprocessor extends
 	            qe = QueryExecutionFactory.create(query, this.ontModel);
                 ResultSet results = null;
                 results = qe.execSelect();
-                
+
                 while( results.hasNext()){
                 	QuerySolution qs = results.nextSolution();
                 	if(qs.get("semanticType") != null) {
@@ -863,13 +863,13 @@ public class AddAssociatedConceptsPreprocessor extends
 	        }
 		return null;
 	}
-	
+
 	private Object getFirstElement(List inputList) {
 		if(inputList == null || inputList.size() == 0)
 			return null;
 		return inputList.get(0);
 	}
-	
-	
+
+
 
 }

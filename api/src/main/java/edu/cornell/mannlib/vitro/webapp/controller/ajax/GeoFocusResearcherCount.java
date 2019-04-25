@@ -30,7 +30,7 @@ public class GeoFocusResearcherCount extends AbstractAjaxResponder {
         + "    ?person a foaf:Person .  \n"
         + "    ?person core:geographicFocus ?focus   \n"
         + "}" ;
-    
+
 	public GeoFocusResearcherCount(HttpServlet parent, VitroRequest vreq,
 			HttpServletResponse resp) {
 		super(parent, vreq, resp);
@@ -40,9 +40,9 @@ public class GeoFocusResearcherCount extends AbstractAjaxResponder {
 	public String prepareResponse() throws IOException {
 		try {
             geoFocusCount = getGeoFocusCount(vreq);
-            
+
             StringBuilder response = new StringBuilder("{ ");
-            
+
             for (Map<String, String> map: geoFocusCount) {
                 String theCount  = map.get("count");
                 response.append("\"count\": \"").append(theCount).append("\"");
@@ -55,9 +55,9 @@ public class GeoFocusResearcherCount extends AbstractAjaxResponder {
 			return EMPTY_RESPONSE;
 		}
 	}
-           
+
     private List<Map<String,String>>  getGeoFocusCount(VitroRequest vreq) {
-          
+
         String queryStr = GEO_FOCUS_COUNT_QUERY;
         log.debug("queryStr = " + queryStr);
         List<Map<String,String>>  count = new ArrayList<Map<String,String>>();
@@ -69,8 +69,8 @@ public class GeoFocusResearcherCount extends AbstractAjaxResponder {
             }
         } catch (Exception e) {
             log.error(e, e);
-        }    
-       
+        }
+
         return count;
     }
 }

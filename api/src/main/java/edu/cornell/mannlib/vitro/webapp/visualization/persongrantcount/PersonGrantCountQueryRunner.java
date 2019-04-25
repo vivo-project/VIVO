@@ -31,7 +31,7 @@ import java.util.Set;
 /**
  * This query runner is used to execute a sparql query that will fetch all the publications
  * defined by bibo:Document property for a particular individual.
- * 
+ *
  * @author cdtank
  */
 public class PersonGrantCountQueryRunner implements QueryRunner<Set<Activity>> {
@@ -107,7 +107,7 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Activity>> {
 							+ "} GROUP BY ?grant\n";
 
 		log.debug(sparqlQuery);
-		
+
 		return sparqlQuery;
 	}
 
@@ -127,7 +127,7 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Activity>> {
                 throw new MalformedQueryParametersException(
                 		"URI provided for an individual is malformed.");
             }
-        	
+
         } else {
         	throw new MalformedQueryParametersException("URL parameter is either null or empty.");
         }

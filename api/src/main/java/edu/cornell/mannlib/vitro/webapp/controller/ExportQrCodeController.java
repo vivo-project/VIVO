@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in LICENSE$ */
 
-package edu.cornell.mannlib.vitro.webapp.controller; 
+package edu.cornell.mannlib.vitro.webapp.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +31,7 @@ import javax.servlet.annotation.WebServlet;
 
 @WebServlet(name = "ExportQrCodeController", urlPatterns = {"/qrcode"})
 public class ExportQrCodeController extends FreemarkerHttpServlet {
-    
+
     private static final long serialVersionUID = 1L;
     private static final Log log = LogFactory.getLog(ExportQrCodeController.class);
     private static final String TEMPLATE_DEFAULT = "foaf-person--exportQrCode.ftl";
@@ -61,12 +61,12 @@ public class ExportQrCodeController extends FreemarkerHttpServlet {
     protected ResponseValues processRequest(VitroRequest vreq) {
         try {
         	Individual individual = getIndividualFromRequest(vreq);
-            
+
 			qrData = generateQrData(individual, vreq);
 
             DefaultObjectWrapper wrapper = new DefaultObjectWrapper();
             wrapper.setExposureLevel(BeansWrapper.EXPOSE_SAFE);
-            
+
             Map<String, Object> body = new HashMap<String, Object>();
             body.put("individual", wrapper.wrap(IndividualTemplateModelBuilder.build(individual, vreq)));
             body.put("qrData", qrData);
@@ -94,7 +94,7 @@ public class ExportQrCodeController extends FreemarkerHttpServlet {
     }
 
     private Map<String, String> generateQrData(Individual individual, VitroRequest vreq) {
-        
+
         try {
             String firstName = "";
             String lastName = "";
@@ -106,7 +106,7 @@ public class ExportQrCodeController extends FreemarkerHttpServlet {
 
             Map<String,String> qrData = new HashMap<String,String>();
 
-            for (Map<String, String> map: vcardData) {        
+            for (Map<String, String> map: vcardData) {
                 firstName = map.get("firstName");
                 lastName = map.get("lastName");
                 preferredTitle = map.get("title");
@@ -128,13 +128,13 @@ public class ExportQrCodeController extends FreemarkerHttpServlet {
             String tempUrl = vreq.getRequestURL().toString();
             String prefix = "http://";
             tempUrl = tempUrl.substring(0, tempUrl.replace(prefix, "").indexOf("/") + prefix.length());
-            String externalUrl = tempUrl ; 
+            String externalUrl = tempUrl ;
             qrData.put("externalUrl", externalUrl);
 
             String individualUri = individual.getURI();
             String contextPath = vreq.getContextPath();
             qrData.put("exportQrCodeUrl", contextPath + "/qrcode?uri=" + UrlBuilder.urlEncode(individualUri));
-        
+
             qrData.put("aboutQrCodesUrl", contextPath + "/qrcode/about");
             return qrData;
 		} catch (Exception e) {
@@ -155,8 +155,8 @@ public class ExportQrCodeController extends FreemarkerHttpServlet {
             }
         } catch (Exception e) {
             log.error(e, e);
-        }    
-       
+        }
+
         return vcardData;
     }
 

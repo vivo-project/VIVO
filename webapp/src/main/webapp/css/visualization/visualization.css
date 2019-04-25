@@ -1,9 +1,9 @@
 /* $This file is distributed under the terms of the license in LICENSE$ */
 
 /*****************************
- visualization styles       
+ visualization styles
 ******************************/
-                            
+
 span.incomplete-data-holder,
 #incomplete-data {
     padding: 5px;
@@ -67,7 +67,7 @@ span.incomplete-data-holder,
 }
 .google-visualization-sparkline-image {
     border: 1px solid #cfe4ed;
-    display: block; 
+    display: block;
 }
 .google-visualization-sparkline-selected {
     background-color: blue;

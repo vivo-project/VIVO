@@ -92,7 +92,7 @@ public class LabelsAcrossContextNodesTest extends AbstractTestClass {
 	/**
 	 * Create these relationships (where "r/r" denotes "relatedBy/relates"
 	 * combination.
-	 * 
+	 *
 	 * <pre>
 	 * Person1 r/r Position1 r/r Organization1
 	 * Person1 r/r AdvisingRelationship1 r/r Person2
@@ -138,12 +138,12 @@ public class LabelsAcrossContextNodesTest extends AbstractTestClass {
 	/*
 	 * If there is a type restriction and the individual does not meet it, no
 	 * change.
-	 * 
+	 *
 	 * If contextNodeClasses are not specified, get labels from all context
 	 * nodes. note that a partner without a label should just be a no-op.
-	 * 
+	 *
 	 * If contextNodeClasses are specified, accept some and ignore others.
-	 * 
+	 *
 	 * Confirm that the expected data is written to the text fields.
 	 */
 
@@ -202,11 +202,11 @@ public class LabelsAcrossContextNodesTest extends AbstractTestClass {
 	/**
 	 * <pre>
 	 * If neither a label nor a relates, ignore it.
-	 * 
+	 *
 	 * If label, test if no partners, if some partners, if some partners restricted by type.
 	 *   test with both contextNodeClasses and not.
 	 * Test with typeRestrictions or without.
-	 * 
+	 *
 	 * If relates, and fails contextNodeClasses, ignore it.
 	 * Test with contextNodeClasses and without.
 	 * Find partners, both with typeRestrictions and without.
@@ -292,7 +292,7 @@ public class LabelsAcrossContextNodesTest extends AbstractTestClass {
 		exerciseUriFinder(stmt(URI_POSITION1, CORE_RELATED_BY, URI_PERSON1));
 		assertExpectedUris(URI_ORGANIZATION1);
 	}
-	
+
 	@Test
 	public void relatedBy_exclusiveTypeRestriction_returnsNothing() {
 		setTypeRestrictions(CORE_ADVISING_RELATIONSHIP);
@@ -300,7 +300,7 @@ public class LabelsAcrossContextNodesTest extends AbstractTestClass {
 		exerciseUriFinder(stmt(URI_POSITION1, CORE_RELATED_BY, URI_PERSON1));
 		assertExpectedUris();
 	}
-	
+
 	@Test
 	public void relatedBy_inclusiveContextType_returnsPartner() {
 		setTypeRestrictions();
@@ -308,7 +308,7 @@ public class LabelsAcrossContextNodesTest extends AbstractTestClass {
 		exerciseUriFinder(stmt(URI_POSITION1, CORE_RELATED_BY, URI_PERSON1));
 		assertExpectedUris(URI_ORGANIZATION1);
 	}
-	
+
 	@Test
 	public void relatedBy_exclusiveContextType_returnsNothing() {
 		setTypeRestrictions();
@@ -316,7 +316,7 @@ public class LabelsAcrossContextNodesTest extends AbstractTestClass {
 		exerciseUriFinder(stmt(URI_POSITION1, CORE_RELATED_BY, URI_PERSON1));
 		assertExpectedUris();
 	}
-	
+
 	// ----------------------------------------------------------------------
 	// Helper methods
 	// ----------------------------------------------------------------------

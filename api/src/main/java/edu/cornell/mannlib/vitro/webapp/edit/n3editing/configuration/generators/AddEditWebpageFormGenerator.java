@@ -24,8 +24,8 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.
 /**
 
 Custom form for adding or editing a webpage associated with an individual. The primary page,
-ManageWebpagesForIndividual, should forward to this page if: (a) we are adding a new page, or 
-(b) an edit link in the Manage Webpages view has been clicked. But right now (a) is not implemented. 
+ManageWebpagesForIndividual, should forward to this page if: (a) we are adding a new page, or
+(b) an edit link in the Manage Webpages view has been clicked. But right now (a) is not implemented.
 
 
 */
@@ -40,41 +40,41 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
         prepare(vreq, config);
         return config;
     }
- 
+
     //Have broken this method down into two portions to allow for overriding of edit configuration
     //without having to copy the entire method and before prepare is called
-    
-    protected EditConfigurationVTwo setupConfig(VitroRequest vreq, HttpSession session) throws Exception{ 
-    		
+
+    protected EditConfigurationVTwo setupConfig(VitroRequest vreq, HttpSession session) throws Exception{
+
     	EditConfigurationVTwo config = new EditConfigurationVTwo();
-    
+
 	    config.setTemplate(this.getTemplate());
-	    
+
 	    initBasics(config, vreq);
 	    initPropertyParameters(vreq, session, config);
-	    initObjectPropForm(config, vreq);       
+	    initObjectPropForm(config, vreq);
 	    String linkUri = getLinkUri(vreq);
 	    String domainUri = vreq.getParameter("domainUri");
 	    String vcardIndividualType = "http://www.w3.org/2006/vcard/ns#Kind";
 
-	            
+
 	    config.setVarNameForSubject("subject");
 	    config.setVarNameForObject("vcard");
-	
+
 	    config.addNewResource("vcard", DEFAULT_NS_FOR_NEW_RESOURCE);
 	    config.addNewResource("link", DEFAULT_NS_FOR_NEW_RESOURCE);
-	    
+
 	    config.setN3Required(list( this.getN3ForWebpage(), N3_FOR_URLTYPE ));
 	    config.setN3Optional(list( N3_FOR_ANCHOR, N3_FOR_RANK));
-	    
+
 	    config.addUrisInScope("webpageProperty",     list( "http://purl.obolibrary.org/obo/ARG_2000028" ));
 	    config.addUrisInScope("inverseProperty",     list( "http://purl.obolibrary.org/obo/ARG_2000029" ));
 	    config.addUrisInScope("linkUrlPredicate",             list( "http://www.w3.org/2006/vcard/ns#url" ));
 	    config.addUrisInScope("linkLabelPredicate",  list( "http://www.w3.org/2000/01/rdf-schema#label" ));
 	    config.addUrisInScope("rankPredicate",       list( core + "rank"));
 	    config.addUrisInScope("vcardType",       list( vcardIndividualType ));
-	    
-	    
+
+
 	    if ( config.isUpdate() ) {
 	        config.addUrisInScope("link",  list( linkUri ));
 	    }
@@ -87,45 +87,45 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
 	        }
 	    }
 	    config.addSparqlForAdditionalUrisInScope("vcard", individualVcardQuery);
-	    
+
 	    config.setUrisOnForm("urlType");
 	    config.setLiteralsOnForm(list("url","label","rank"));
-	
+
 	    config.addSparqlForExistingLiteral("url",    URL_QUERY);
 	    config.addSparqlForExistingLiteral("label", ANCHOR_QUERY);
 	    config.addSparqlForExistingLiteral("rank",   MAX_RANK_QUERY);
 	    config.addSparqlForExistingUris("urlType", URLTYPE_QUERY);
-	        
+
 	    config.addField(new FieldVTwo().
 	            setName("url").
 	            setValidators(list("nonempty", "datatype:"+XSD.anyURI.toString(), "httpUrl")).
 	            setRangeDatatypeUri(XSD.anyURI.toString()));
-	    
+
 	    config.addField( new FieldVTwo().
 	            setName("urlType").
 	            setValidators( list("nonempty") ).
-	            setOptions( 
+	            setOptions(
 	                new ChildVClassesWithParent("http://www.w3.org/2006/vcard/ns#URL")));
-	
+
 	    config.addField(new FieldVTwo().
 	            setName("label"));
-	    
+
 	    config.addField(new FieldVTwo().
 	            setName("rank").
 	            setRangeDatatypeUri(XSD.xint.toString()));
-	    
-	    config.addFormSpecificData("newRank", 
-	            getMaxRank( EditConfigurationUtils.getObjectUri(vreq), 
+
+	    config.addFormSpecificData("newRank",
+	            getMaxRank( EditConfigurationUtils.getObjectUri(vreq),
 	                        EditConfigurationUtils.getSubjectUri(vreq), vreq )
 	                    + 1 );
-	            
+
 	    config.addValidator(new AntiXssValidation());
-	    
+
 	    //might be null
 	    config.addFormSpecificData("subjectName", getName( config, vreq));
     	return config;
     }
-    
+
     /** may be null */
     private Object getName(EditConfigurationVTwo config, VitroRequest vreq) {
         Individual ind = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(config.getSubjectUri());
@@ -136,40 +136,40 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
     }
 
     /* ********* N3 Assertions *********** */
-    static String N3_FOR_WEBPAGE = 
+    static String N3_FOR_WEBPAGE =
         "?subject ?webpageProperty ?vcard . \n"+
         "?vcard ?inverseProperty ?subject . \n"+
         "?vcard a ?vcardType . \n" +
         "?vcard <http://www.w3.org/2006/vcard/ns#hasURL> ?link ."+
         "?link a <http://www.w3.org/2006/vcard/ns#URL> . \n" +
-        "?link ?linkUrlPredicate ?url .";    
-    
+        "?link ?linkUrlPredicate ?url .";
+
     static String N3_FOR_URLTYPE =
         "?link a ?urlType .";
 
     static String N3_FOR_ANCHOR =
         "?link ?linkLabelPredicate ?label .";
-    
-    static String N3_FOR_RANK = 
+
+    static String N3_FOR_RANK =
         "?link ?rankPredicate ?rank .";
 
     /* *********** SPARQL queries for existing values ************** */
-    
-    static String URL_QUERY = 
+
+    static String URL_QUERY =
         "SELECT ?urlExisting WHERE { ?link ?linkUrlPredicate ?urlExisting }";
-    
-    static String URLTYPE_QUERY = 
+
+    static String URLTYPE_QUERY =
         "PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
         "SELECT ?linkClassExisting WHERE { ?link vitro:mostSpecificType ?linkClassExisting }";
-    
-    static String ANCHOR_QUERY = 
+
+    static String ANCHOR_QUERY =
         "SELECT ?labelExisting WHERE { ?link ?linkLabelPredicate ?labelExisting }";
 
     static String RANK_QUERY =
         "SELECT ?rankExisting WHERE { ?link ?rankPredicate ?rankExisting }";
-    
+
     static String core = "http://vivoweb.org/ontology/core#";
-    
+
     static String individualVcardQuery =
         "SELECT ?existingVcard WHERE { \n" +
         "?subject <http://purl.obolibrary.org/obo/ARG_2000028>  ?existingVcard . \n" +
@@ -177,7 +177,7 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
 
     /* Note on ordering by rank in sparql: if there is a non-integer value on a link, that will be returned,
      * since it's ranked highest. Preventing that would require getting all the ranks and sorting in Java,
-     * throwing out non-int values. 
+     * throwing out non-int values.
      */
     private static String MAX_RANK_QUERY = ""
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
@@ -187,23 +187,23 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
         + "    ?vcard vcard:hasURL ?link . \n"
         + "    ?link core:rank ?rank .\n"
         + "} ORDER BY DESC(?rank) LIMIT 1";
-        
+
     private int getMaxRank(String objectUri, String subjectUri, VitroRequest vreq) {
 
-        int maxRank = 0; // default value 
-        if (objectUri == null) { // adding new webpage   
+        int maxRank = 0; // default value
+        if (objectUri == null) { // adding new webpage
             String queryStr = QueryUtils.subUriForQueryVar(this.getMaxRankQueryStr(), "subject", subjectUri);
             log.debug("Query string is: " + queryStr);
             try {
                 ResultSet results = QueryUtils.getQueryResults(queryStr, vreq);
                 if (results != null && results.hasNext()) { // there is at most one result
-                    QuerySolution soln = results.next(); 
+                    QuerySolution soln = results.next();
                     RDFNode node = soln.get("rank");
                     if (node != null && node.isLiteral()) {
-                        // node.asLiteral().getInt() won't return an xsd:string that 
+                        // node.asLiteral().getInt() won't return an xsd:string that
                         // can be parsed as an int.
                         int rank = Integer.parseInt(node.asLiteral().getLexicalForm());
-                        if (rank > maxRank) {  
+                        if (rank > maxRank) {
                             log.debug("setting maxRank to " + rank);
                             maxRank = rank;
                         }
@@ -217,11 +217,11 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
         }
         return maxRank;
     }
-    
+
     protected String getTemplate() {
     	return formTemplate;
     }
-    
+
     protected String getMaxRankQueryStr() {
     	return MAX_RANK_QUERY;
     }
@@ -238,8 +238,8 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
 		String rangeUri = (String) vreq.getParameter("rangeUri");
 		String generatorName = "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForIndividualGenerator";
 		String editUrl = EditConfigurationUtils.getEditUrlWithoutContext(vreq);
-		String returnPath =  editUrl + "?subjectUri=" + UrlBuilder.urlEncode(subjectUri) + 
-		"&predicateUri=" + UrlBuilder.urlEncode(predicateUri) + 
+		String returnPath =  editUrl + "?subjectUri=" + UrlBuilder.urlEncode(subjectUri) +
+		"&predicateUri=" + UrlBuilder.urlEncode(predicateUri) +
 		"&editForm=" + UrlBuilder.urlEncode(generatorName);
 		if(domainUri != null && !domainUri.isEmpty()) {
 			returnPath += "&domainUri=" + UrlBuilder.urlEncode(domainUri);
@@ -248,12 +248,12 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
 			returnPath += "&rangeUri=" + UrlBuilder.urlEncode(rangeUri);
 		}
 		return returnPath;
-		
+
 	}
 
 	private String getLinkUri(VitroRequest vreq) {
-	    String linkUri = vreq.getParameter("linkUri"); 
-        
+	    String linkUri = vreq.getParameter("linkUri");
+
 		return linkUri;
 	}
 }

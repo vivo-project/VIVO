@@ -41,7 +41,7 @@
         <#list submissionErrors?keys as errorFieldName>
         		  ${submissionErrors[errorFieldName]} <br/>
         </#list>
-        
+
         </p>
     </section>
 </#if>
@@ -63,14 +63,14 @@
 
 	<li class="editorship">
 			<#-- span.editor will be used in the next phase, when we display a message that the editor has been
-			removed. That text will replace the a.editorName, which will be removed. -->    
+			removed. That text will replace the a.editorName, which will be removed. -->
 			<span class="editor">
 					<#-- This span is here to assign a width to. We can't assign directly to the a.editorName,
 					for the case when it's followed by an em tag - we want the width to apply to the whole thing. -->
 					<span class="itemName">
 							<#if (editorUri?length > 0)>
 									<span class="editorName">${editorName}</span>
-								<#else>      
+								<#else>
 									<span class="editorName">${editorship.editorshipName}</span><em> (${i18n().no_linked_editor})</em>
 							</#if>
 					</span>
@@ -83,7 +83,7 @@
 			editorshipData.push({
 					"editorshipUri": "${editorship.editorshipUri}",
 					"editorUri": "${editorUri}",
-					"editorName": "${editorName}"                
+					"editorName": "${editorName}"
 			});
 	</script>
 </#list>
@@ -96,7 +96,7 @@
     <span class="or"> ${i18n().or} </span>
     <a id="returnLink" class="cancel" href="${cancelUrl}&url=/individual" title="${i18n().cancel_title}">${i18n().return_to_publication}</a>
     <img id="indicatorOne" class="indicator hidden" alt="${i18n().processing_indicator}" src="${urls.base}/images/indicatorWhite.gif" />
-</section> 
+</section>
 
 <form id="addEditorForm" action ="${submitUrl}" class="customForm noIE67">
     <h3>${i18n().add_an_editor}</h3>
@@ -108,17 +108,17 @@
         <label for="lastName">${i18n().last_name} <span class='requiredHint'> *</span></label>
         <input class="acSelector" size="35"  type="text" id="lastName" name="lastName" value="${lastNameValue}" role="input" />
         </p>
-				
+
 				<p class="inline">
         <label for="firstName">${i18n().first_name} ${requiredHint} ${initialHint}</label>
         <input  size="20"  type="text" id="firstName" name="firstName" value="${firstNameValue}"  role="input" />
         </p>
-        
+
 				<p class="inline">
 				<label for="middleName">${i18n().middle_name} <span class='hint'>(${i18n().initial_okay})</span></label>
         <input  size="20"  type="text" id="middleName" name="middleName" value="${middleNameValue}"  role="input" />
         </p>
-      
+
         <div id="selectedEditor" class="acSelection">
             <p class="inline">
                 <label>${i18n().selected_editor}:&nbsp;</label>
@@ -133,13 +133,13 @@
 
 
         <input type="hidden" name="rank" id="rank" value="${newRank}" role="input" />
-    
+
         <p class="submit">
             <input type="hidden" name = "editKey" value="${editKey}" role="input" />
             <input type="submit" id="submit" value="${i18n().add_editor}" role="button" role="input" />
-            
+
             <span class="or"> ${i18n().or} </span>
-            
+
             <a id="returnLink" class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
             <img id="indicatorTwo" alt="${i18n().processing_indicator}" class="indicator hidden" src="${urls.base}/images/indicatorWhite.gif" />
         </p>

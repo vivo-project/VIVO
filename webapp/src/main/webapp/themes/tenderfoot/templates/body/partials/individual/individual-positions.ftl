@@ -8,7 +8,7 @@
     <@p.verboseDisplay positions />
     <ul id="individual-personInPosition" role="list">
         <@positionsList positions editable />
-    </ul> 
+    </ul>
 </#if>
 
 <#macro positionsList property editable statements=property.statements template=property.template>

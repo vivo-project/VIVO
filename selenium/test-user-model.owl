@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
          xmlns:owl="http://www.w3.org/2002/07/owl#"
          xmlns:vitro="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#"
@@ -14,8 +14,8 @@
     <auth:lastName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Admin</auth:lastName>
     <auth:md5password rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DC647EB65E6711E155375218212B3964</auth:md5password>
     <auth:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</auth:status>
-    <auth:loginCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</auth:loginCount>  
-    <auth:passwordLinkExpires rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</auth:passwordLinkExpires>  
+    <auth:loginCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</auth:loginCount>
+    <auth:passwordLinkExpires rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</auth:passwordLinkExpires>
     <auth:hasPermissionSet rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/authorization#ADMIN"/>
 </auth:UserAccount>
 
@@ -26,8 +26,8 @@
     <auth:lastName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Curator</auth:lastName>
     <auth:md5password rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DC647EB65E6711E155375218212B3964</auth:md5password>
     <auth:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</auth:status>
-    <auth:loginCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</auth:loginCount>  
-    <auth:passwordLinkExpires rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</auth:passwordLinkExpires>  
+    <auth:loginCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</auth:loginCount>
+    <auth:passwordLinkExpires rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</auth:passwordLinkExpires>
     <auth:hasPermissionSet rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/authorization#CURATOR"/>
 </auth:UserAccount>
 
@@ -38,8 +38,8 @@
     <auth:lastName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Editor</auth:lastName>
     <auth:md5password rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DC647EB65E6711E155375218212B3964</auth:md5password>
     <auth:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</auth:status>
-    <auth:loginCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</auth:loginCount>  
-    <auth:passwordLinkExpires rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</auth:passwordLinkExpires>  
+    <auth:loginCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</auth:loginCount>
+    <auth:passwordLinkExpires rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</auth:passwordLinkExpires>
     <auth:hasPermissionSet rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/authorization#EDITOR"/>
 </auth:UserAccount>
 
@@ -50,8 +50,8 @@
     <auth:lastName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">User</auth:lastName>
     <auth:md5password rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DC647EB65E6711E155375218212B3964</auth:md5password>
     <auth:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACTIVE</auth:status>
-    <auth:loginCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</auth:loginCount>  
-    <auth:passwordLinkExpires rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</auth:passwordLinkExpires>  
+    <auth:loginCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</auth:loginCount>
+    <auth:passwordLinkExpires rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</auth:passwordLinkExpires>
     <auth:hasPermissionSet rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/authorization#SELF_EDITOR"/>
 </auth:UserAccount>
 

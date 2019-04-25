@@ -28,12 +28,12 @@
 	<#assign submissionErrors = editSubmission.validationErrors/>
 </#if>
 
-<#if editMode == "edit">    
-        <#assign titleVerb="${i18n().edit_capitalized}">        
+<#if editMode == "edit">
+        <#assign titleVerb="${i18n().edit_capitalized}">
         <#assign submitButtonText="${i18n().save_changes}">
         <#assign disabledVal="disabled">
 <#else>
-        <#assign titleVerb="${i18n().create_capitalized}">        
+        <#assign titleVerb="${i18n().create_capitalized}">
         <#assign submitButtonText="${titleVerb}" + " ${i18n().full_name}">
         <#assign disabledVal=""/>
 </#if>
@@ -50,18 +50,18 @@
             <#--Checking if any required fields are empty-->
             <#if lvf.submissionErrorExists(editSubmission, "firstName")>
  	            ${i18n().enter_first_name}<br />
-            </#if>        
+            </#if>
             <#if lvf.submissionErrorExists(editSubmission, "lastName")>
  	            ${i18n().enter_last_name}<br />
-            </#if>        
+            </#if>
         </p>
     </section>
 </#if>
 
-<@lvf.unsupportedBrowser urls.base /> 
+<@lvf.unsupportedBrowser urls.base />
 
-<section id="addFullNameToPerson" role="region">        
-    
+<section id="addFullNameToPerson" role="region">
+
     <form id="addFullNameToPerson" class="customForm noIE67" action="${submitUrl}"  role="add/edit name">
 
         <p>
@@ -93,7 +93,7 @@
     </form>
 
 </section>
- 
+
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customFormWithAutocomplete.css" />')}

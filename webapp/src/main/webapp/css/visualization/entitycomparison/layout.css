@@ -31,7 +31,7 @@ This is for the overlay that happens when you change the parameter. Somehow the 
 for the message is getting set to 50%, hence we need to override it here.
 */
 .blockElement {
-	top: 10px !important;	
+	top: 10px !important;
 }
 
 .easy-deselect-label a.temporal-vis-url {
@@ -144,7 +144,7 @@ a.clear-selected-entities,
 }
 #loading-comparisons img {
     vertical-align: sub;
-} 
+}
 #reset-search {
     color: #2485AE;
     cursor: pointer;
@@ -177,7 +177,7 @@ a.clear-selected-entities,
 }
 #functions{
     margin-top: 20px;
-    margin-bottom: -40px;   
+    margin-bottom: -40px;
 }
 #bar {
     height: 20px;
@@ -187,7 +187,7 @@ a.clear-selected-entities,
     margin-left: 10px;
 }
 #checkbox{
-    float:left; 
+    float:left;
 }
 .easy-deselect-label {
     float: left;
@@ -195,7 +195,7 @@ a.clear-selected-entities,
     width: 160px;
     text-align: left;
 }
-.easy-deselect-label a, 
+.easy-deselect-label a,
 #text {
     text-decoration: none;
     color: black;
@@ -226,8 +226,8 @@ sans-serif;
     overflow: hidden;
 }
 .entity-label-url {
-    width: 125px; 
-    margin-left: 10px; 
+    width: 125px;
+    margin-left: 10px;
     display: inline-block;
     text-decoration: underline;
     color: #2485AE;
@@ -240,7 +240,7 @@ sans-serif;
 }
 #graphContainer {
     margin-bottom: 15px;
-    width: 450px; 
+    width: 450px;
     height: 250px;
     margin-left: 23px;
 }
@@ -297,9 +297,9 @@ p.displayCounter{
     border-bottom: 1px solid gray;
 }
 #comparisonHeader,
-#entityHeader, 
-#entitylevelheading, 
-#comparisonParameter, 
+#entityHeader,
+#entitylevelheading,
+#comparisonParameter,
 #headerText {
     color: #2485ae;
 }

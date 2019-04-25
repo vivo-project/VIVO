@@ -1,10 +1,10 @@
 /* $This file is distributed under the terms of the license in LICENSE$ */
 /**
  * The scaler is used for scaling based on the predefined minimum value and
- * maximum value. You also can control the returned maximum scale and minimum 
+ * maximum value. You also can control the returned maximum scale and minimum
  * scale.
  */
-var Scaler = Class.extend({ 
+var Scaler = Class.extend({
 	init: function(options) {
 		this.options = $.extend({}, this.options, options);
 	},
@@ -35,7 +35,7 @@ function ReallySimpleAreaScale(value, minValue, maxValue, minScale, maxScale) {
 /* Scaling that cares about minScale and maxScale */
 function SimpleAreaScale(value, minValue, maxValue, minScale, maxScale) {
 	if (maxValue != minValue) {
-		var scale = minScale; 
+		var scale = minScale;
 		if (value > minValue) {
 			var valueDiff = maxValue - minValue;
 			var areaScale = value / valueDiff;
@@ -63,13 +63,13 @@ var CircleSizeCoder = Class.extend({
 	getSize: function(value) {
 		var o = this.options;
 		var radius = o.scaler.getScale(value) * o.maxRadius;
-		
+
 		if (radius < o.minRadius) {
 			radius = o.minRadius;
 		} else if (radius > o.maxRadius) {
 			radius = o.maxRadius;
 		}
-		
+
 		return radius;
 	},
 	getMaxValue: function() {

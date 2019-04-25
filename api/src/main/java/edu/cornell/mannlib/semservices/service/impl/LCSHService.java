@@ -39,8 +39,8 @@ public class LCSHService implements ExternalConceptService {
 	private final String schemeUri = hostUri + "/authorities/subjects";
 	private final String baseUri = hostUri + "/search/";
 
-	
-	
+
+
 	@Override
 	public List<Concept> getConcepts(String term) throws Exception {
 		List<Concept> conceptList = new ArrayList<Concept>();
@@ -111,19 +111,19 @@ public class LCSHService implements ExternalConceptService {
 				conceptList.add(c);
 			}
 			i++;
-			
+
 		}
 		return conceptList;
 	}
 
-	
+
 	//Load individual concept using a request
-	//private 
-	
+	//private
+
 	public Concept createConcept(String bestMatch, String conceptURLString, String skosConceptURI) {
 
 		Concept concept = new Concept();
-		
+
 		log.debug("SKOSConceptURI is " + skosConceptURI);
 		// get skos version of uri
 
@@ -133,31 +133,31 @@ public class LCSHService implements ExternalConceptService {
 		concept.setDefinedBy(schemeUri);
 		concept.setSchemeURI(schemeUri);
 		concept.setType("");
-		
+
 		//Utilize the XML directly instead of the SKOS API
 		try {
 			//LCSH doesn't need a language tag right now as results in english
 			//Also want to add skos notes as definition
 			concept = SKOSUtils.createConceptUsingXMLFromURL(concept, conceptURLString, null, true);
-			
+
 		}  catch(Exception ex) {
 			log.debug("Error occurred for annotation retrieval for skos concept " + skosConceptURI, ex);
 			return null;
 		}
-		
-		
+
+
 		return concept;
 	}
-	
+
 
 
 	private String getSKOSURL(String uri) {
 		String skosURI = uri + skosSuffix;
-		
+
 		return skosURI;
 	}
-	
-	
+
+
 
 	public List<String> getConceptURISFromJSON(String results) {
 		List<String> uris = new ArrayList<String>();
@@ -197,7 +197,7 @@ public class LCSHService implements ExternalConceptService {
 
 					}
 				}
-				
+
 				log.debug("concept uri is " + conceptUri);
 				uris.add(conceptUri);
 			}
@@ -241,6 +241,6 @@ public class LCSHService implements ExternalConceptService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 
 }

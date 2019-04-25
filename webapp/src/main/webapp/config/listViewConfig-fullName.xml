@@ -4,10 +4,10 @@
 <!-- See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
 
 <list-view-config>
-    <query-select>    
+    <query-select>
         PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        
+
         SELECT DISTINCT ?vcard ?fullName
                         ?firstName
                         ?middleName
@@ -42,7 +42,7 @@
                 ?vcard vcard:hasName ?fullName .</precise-subquery>
                 ?fullName vcard:honorificPrefix ?prefix .
             }
-        } 
+        }
     </query-select>
 
     <template>propStatement-fullName.ftl</template>

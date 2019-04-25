@@ -4,21 +4,21 @@
 <!-- See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
 
 <list-view-config>
-    <query-select>    
+    <query-select>
         PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
-        
+
         SELECT DISTINCT ?vcard ?phone
                         ?number
         WHERE {
             ?subject ?property ?vcard .
-            ?vcard vcard:hasTelephone ?phone . 
+            ?vcard vcard:hasTelephone ?phone .
             ?phone vcard:telephone ?number .
             MINUS {
                 <precise-subquery>?subject ?property ?vcard .
                 ?vcard vcard:hasTelephone ?phone .</precise-subquery>
                 ?phone a vcard:Fax .
             }
-        } 
+        }
     </query-select>
 
     <template>propStatement-phoneFaxNumber.ftl</template>

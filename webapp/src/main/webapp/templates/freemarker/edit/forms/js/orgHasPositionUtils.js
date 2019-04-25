@@ -1,14 +1,14 @@
 /* $This file is distributed under the terms of the license in LICENSE$ */
 
 var orgHasPositionUtils = {
-        
+
     onLoad: function(blankSentinel) {
         this.sentinel = '';
         if ( blankSentinel ) { this.sentinel = blankSentinel; }
 
-        this.initObjectReferences();                 
+        this.initObjectReferences();
         this.bindEventListeners();
-        
+
         $.extend(this, vitro.customFormUtils);
 
         if ( this.findValidationErrors() ) {
@@ -17,26 +17,26 @@ var orgHasPositionUtils = {
     },
 
     initObjectReferences: function() {
-    
+
     this.form = $('#organizationHasPositionHistory');
     this.person = $('#person');
     this.firstName = $('#firstName');
     this.lastName = $('#lastName');
-    this.personUri = $('#personUri');    
+    this.personUri = $('#personUri');
 
     // may not need this
     this.firstName.attr('disabled', false);
-    
+
     },
-    
+
     bindEventListeners: function() {
         this.idCache = {};
-        
+
         this.form.submit(function() {
             orgHasPositionUtils.resolvePersonNames();
-        });            
+        });
     },
-    
+
     resolvePersonNames: function() {
         var firstName,
             lastName,
@@ -46,20 +46,20 @@ var orgHasPositionUtils = {
         if (this.personUri.val() == '' || this.personUri.val() == this.sentinel ) {
             firstName = this.firstName.val();
             lastName = this.person.val();
-            
+
             name = lastName;
             if (firstName) {
                 name += ', ' + firstName;
             }
             this.person.val(name);
             this.lastName.val(lastName);
-        } 
+        }
         else {
             this.firstName.attr('disabled', 'disabled');
             this.lastName.attr('disabled', 'disabled');
         }
 
-    },    
+    },
 
     resetLastNameLabel: function() {
         var indx = this.person.val().indexOf(", ");
@@ -68,5 +68,5 @@ var orgHasPositionUtils = {
             this.person.val(temp);
         }
     }
-    
-} 
+
+}

@@ -1,4 +1,4 @@
-# $This file is distributed under the terms of the license in LICENSE$ 
+# $This file is distributed under the terms of the license in LICENSE$
 
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix vitroDisplay: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
@@ -11,17 +11,17 @@
 
 # See vitroSearchProhibited.n3 for more information about files in this directory.
 
- vitroDisplay:SearchIndex 
-	rdf:type owl:Thing ; 
+ vitroDisplay:SearchIndex
+	rdf:type owl:Thing ;
 	vitroDisplay:excludeClass obo:BFO_0000023  ;
 	vitroDisplay:excludeClass core:AdvisingRelationship ;
 	vitroDisplay:excludeClass core:Editorship ;
 	vitroDisplay:excludeClass core:Authorship ;
-	vitroDisplay:excludeClass core:Position ; 
+	vitroDisplay:excludeClass core:Position ;
 	vitroDisplay:excludeClass core:AwardReceipt ;
 	vitroDisplay:excludeClass core:AwardedDegree ;
 	vitroDisplay:excludeClass core:ResearchActivity ;
-	vitroDisplay:excludeClass core:EducationalProcess ;	
+	vitroDisplay:excludeClass core:EducationalProcess ;
 	vitroDisplay:excludeClass bibo:DocumentStatus ;
 	vitroDisplay:excludeClass core:DateTimeValue ;
     vitroDisplay:excludeClass core:DateTimeValuePrecision ;

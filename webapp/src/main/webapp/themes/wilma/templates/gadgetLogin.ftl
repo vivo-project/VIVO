@@ -3,13 +3,13 @@
 <#-- Template for the body of the GadgetDetails page -->
 
 <style media="screen" type="text/css">
-th { 
+th {
   vertical-align: top;
   width: 150px;
   text-align: right;
   padding-right: 10px;
 }
-</style>	
+</style>
 
 <div class="pageTitle" id="gadgets-title"><h2>${title!}</h2></div>
 
@@ -51,4 +51,4 @@ th {
             </tr>
         </table>
    	</form>
-</#if>	
+</#if>

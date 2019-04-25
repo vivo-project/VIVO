@@ -14,10 +14,10 @@
 		<#include "languageSelector.ftl">
 		<li role="listitem"><a href="${urls.index}" title="${i18n().identity_index}">${i18n().identity_index}</a></li>
 		<#if user.loggedIn>
-			<#-- COMMENTING OUT THE EDIT PAGE LINK FOR RELEASE 1.5. WE NEED TO IMPLEMENT THIS IN A MORE 
+			<#-- COMMENTING OUT THE EDIT PAGE LINK FOR RELEASE 1.5. WE NEED TO IMPLEMENT THIS IN A MORE
 				 USER FRIENDLY WAY. PERHAPS INCLUDE A LINK ON THE PAGES THEMSELVES AND DISPLAY IF THE
 				 USER IS A SITE ADMIN. tlw72
-				 
+
 				 <#if (page??) && (page?is_hash || page?is_hash_ex) && (page.URLToEditPage??) >
 					<li role="listitem"><a href="${page.URLToEditPage}" title="${i18n().identity_edit}">${i18n().identity_edit}</a></li>
 				 </#if>
@@ -40,11 +40,11 @@
 						</li>
 					 </ul>
 				 </li>
-				 
 
-			
+
+
 			${scripts.add('<script type="text/javascript" src="${urls.base}/js/userMenu/userMenuUtils.js"></script>')}
-			
+
 		<#else>
 			<li role="listitem"><a class="log-out" title="${i18n().menu_loginfull}" href="${urls.login}">${i18n().menu_login}</a></li>
 		</#if>

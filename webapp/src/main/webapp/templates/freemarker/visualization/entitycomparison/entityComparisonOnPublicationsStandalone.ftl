@@ -22,7 +22,7 @@ var currentParameter = "${currentParameter}";
 
 /*
 This is used in util.js to print grant temporal graph links for all sub-organizations.
-*/    
+*/
 var temporalGraphCommonURL = subOrganizationPublicationTemporalGraphCommonURL;
 
 var temporalGraphDataURL = '${temporalGraphDataURL}';
@@ -33,9 +33,9 @@ $(document).ready(function () {
 		responseContainer: $("div#temporal-graph-response"),
 		bodyContainer: $("#body"),
 		errorContainer: $("#error-container"),
-		dataURL: temporalGraphDataURL	
+		dataURL: temporalGraphDataURL
 	};
-	
+
 	renderTemporalGraphVisualization(options);
 
 });
@@ -49,9 +49,9 @@ $(document).ready(function () {
 
 <#include "entityComparisonBody.ftl">
 
-<#-- 
+<#--
 Right now we include the error message by default because currently I could not devise any more smarted solution. By default
-the CSS of the #error-container is display:none; so it will be hidden unless explicitly commanded to be shown which we do in 
+the CSS of the #error-container is display:none; so it will be hidden unless explicitly commanded to be shown which we do in
 via JavaScript.
 -->
 <#include "entityPublicationComparisonError.ftl">

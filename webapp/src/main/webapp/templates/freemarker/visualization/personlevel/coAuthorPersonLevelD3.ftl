@@ -71,14 +71,14 @@ $(document).ready(function(){
                               "ego_moniker",
                               "ego_profile_image",
                               jQuery.parseJSON(getWellFormedURLs("${egoURIParam}", "profile_info")));
-    
-    <#if (numOfCoAuthorShips?? && numOfCoAuthorShips <= 0) || (numOfAuthors?? && numOfAuthors <= 0) >  
+
+    <#if (numOfCoAuthorShips?? && numOfCoAuthorShips <= 0) || (numOfAuthors?? && numOfAuthors <= 0) >
         if ($('#ego_label').text().length > 0) {
             setProfileName('no_coauthorships_person', $('#ego_label').text());
         }
     </#if>
-    
-    
+
+
     $.ajax({
             url: "${urls.base}/visualizationAjax",
             data: ({vis: "utilities", vis_mode: "SHOW_GRANTS_LINK", uri: '${egoURIParam}'}),
@@ -95,7 +95,7 @@ $(document).ready(function(){
 
             }
         });
-                    
+
 // RENDER CHORD
 
     var labels = [];
@@ -251,7 +251,7 @@ $(document).ready(function(){
 
 <div id="body">
 	<div  class="sub_headings"><h2><a href="${egoVivoProfileURL}" title="${i18n().author_name}"><span id="ego_label"></span></a><br />${i18n().co_author_network} </h2></div>
-    <#if (numOfCoAuthorShips?? && numOfCoAuthorShips > 0) || (numOfAuthors?? && numOfAuthors > 0) > 
+    <#if (numOfCoAuthorShips?? && numOfCoAuthorShips > 0) || (numOfAuthors?? && numOfAuthors > 0) >
         <div class = "graphml-file-link">(<a href="${egoCoAuthorshipNetworkDataFileURL}" title="GraphML ${i18n().file}">GraphML ${i18n().file}</a>)</div>
     </#if>
 
@@ -263,7 +263,7 @@ $(document).ready(function(){
             </div>
         </div>
     </div>
-    
+
     <#if (builtFromCacheTime??) >
         <div class="cache-info-small">${i18n().using_cache_time} ${builtFromCacheTime?time} (${builtFromCacheTime?date?string("MMM dd yyyy")})</div>
     </#if>
@@ -271,15 +271,15 @@ $(document).ready(function(){
 
     <#if (numOfAuthors?? && numOfAuthors > 0) >
     <#else>
-    
-        <span id="no_coauthorships">${i18n().no_papers_for} 
+
+        <span id="no_coauthorships">${i18n().no_papers_for}
             <a href="${egoVivoProfileURL}" title="${i18n().co_authorship}"><span id="no_coauthorships_person" class="author_name">${i18n().this_author}</span></a> ${i18n().in_the_vivo_db}
         </span>
-    
+
     </#if>
-            
+
     <#if (numOfCoAuthorShips?? && numOfCoAuthorShips > 0) || (numOfAuthors?? && numOfAuthors > 0) >
-    
+
         <div id="bodyPannel">
             <div id="chord" style="float: right;"></div>
         </div>
@@ -300,22 +300,22 @@ $(document).ready(function(){
 
         <#-- Sparkline -->
         <div id="sparkline-container-full">
-            
+
             <#assign displayTable = false />
-            
+
             <#assign sparklineVO = egoPubSparklineVO />
             <div id="publication-count-sparkline-include"><#include "personPublicationSparklineContent.ftl"></div>
-    
+
             <#assign sparklineVO = uniqueCoauthorsSparklineVO />
             <div id="coauthor-count-sparkline-include"><#include "coAuthorshipSparklineContent.ftl"></div>
-        </div>  
-    
+        </div>
+
         <div class="vis_stats_full">
-        
+
         <div class="sub_headings" id="table_heading"><h3>${i18n().tables_capitalized}</h3></div>
-        
+
             <div class="vis-tables">
-                
+
                 <p id="publications_table_container" class="datatable">
 
                 <#assign tableID = "publication_data_table" />
@@ -323,15 +323,15 @@ $(document).ready(function(){
                 <#assign tableActivityColumnName = "${i18n().publications_capitalized}" />
                 <#assign tableContent = egoPubSparklineVO.yearToActivityCount />
                 <#assign fileDownloadLink = egoPubSparklineVO.downloadDataLink />
-                
+
                 <#include "yearToActivityCountTable.ftl">
 
                 </p>
-                
+
             </div>
-            
+
             <#if (numOfCoAuthorShips?? && numOfCoAuthorShips > 0) >
-        
+
                 <div class="vis-tables">
                     <p id="coauth_table_container" class="datatable">
                         <#assign tableID = "coauthorships_table" />
@@ -344,14 +344,14 @@ $(document).ready(function(){
                         <#include "collaboratorToActivityCountTable.ftl">
                     </p>
                 </div>
-            
+
             </#if>
-            
+
             <div style="clear:both"></div>
-        
+
         </div>
-        
+
     </#if>
-    
+
 </div>
 <div id="chord-info-div" style="display: none;"></div>

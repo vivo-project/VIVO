@@ -3,12 +3,12 @@ PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX bibo: <http://purl.org/ontology/bibo/>
 
 CONSTRUCT {
-     ?assignee ?property ?object .   
+     ?assignee ?property ?object .
 } WHERE {
      PERSON_URI core:relatedBy ?authorship .
      ?authorship a core:Authorship .
-     ?authorship core:relates ?patent . 
+     ?authorship core:relates ?patent .
      ?patent rdf:type bibo:Patent .
      ?patent core:assignee ?assignee .
-     ?assignee ?property ?object .   
+     ?assignee ?property ?object .
 }

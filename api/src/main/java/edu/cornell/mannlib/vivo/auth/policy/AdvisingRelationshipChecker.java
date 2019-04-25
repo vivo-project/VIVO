@@ -28,7 +28,7 @@ public class AdvisingRelationshipChecker extends RelationshipChecker {
 	 * A self-editor is authorized to add, edit, or delete a statement if the
 	 * subject or object refers to an Advising Relationship, and if the
 	 * self-editor:
-	 * 
+	 *
 	 * 1) is an Advisor in that Relationship
 	 */
 	public PolicyDecision isAuthorized(List<String> userUris) {

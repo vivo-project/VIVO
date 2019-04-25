@@ -15,10 +15,10 @@
 
 
 <#if organizationLocalName?has_content >
-    
+
     <#assign organizationPublicationTemporalGraphURL = '${urls.base}${shortVisualizationURLRoot}/publication-graph/${organizationLocalName}'>
     <#assign organizationGrantTemporalGraphURL = "${urls.base}${shortVisualizationURLRoot}/grant-graph/${organizationLocalName}">
-    
+
 <#else>
 
     <#assign organizationPublicationTemporalGraphURL = '${urls.base}${shortVisualizationURLRoot}/publication-graph/?uri=${organizationURI}'>
@@ -37,31 +37,31 @@
 <#assign publicationParameter = {   "name": "${i18n().publication}",
                                     "pluralName": "${i18n().publications}",
                                     "verbName": "${i18n().published}",
-                                    "dropDownText": "${i18n().by_publications}", 
+                                    "dropDownText": "${i18n().by_publications}",
                                     "viewLink": "${organizationPublicationTemporalGraphURL}",
                                     "viewBaseLink": "${subOrganizationPublicationTemporalGraphCommonURL}",
                                     "dataLink": "${organizationPublicationTemporalGraphDataURL}",
-                                    "csvLink": "${temporalGraphDownloadCSVCommonURL}&vis=entity_comparison", 
+                                    "csvLink": "${temporalGraphDownloadCSVCommonURL}&vis=entity_comparison",
                                     "value": "${i18n().publications}" }>
-                                    
+
 <#assign grantParameter = {   "name": "${i18n().grant}",
                               "pluralName": "${i18n().grants}",
                               "verbName": "${i18n().granted}",
-                              "dropDownText": "${i18n().by_grants}", 
+                              "dropDownText": "${i18n().by_grants}",
                               "viewLink": "${organizationGrantTemporalGraphURL}",
-                              "viewBaseLink": "${subOrganizationGrantTemporalGraphCommonURL}", 
+                              "viewBaseLink": "${subOrganizationGrantTemporalGraphCommonURL}",
                               "dataLink": "${organizationGrantTemporalGraphDataURL}",
                               "csvLink": "${temporalGraphDownloadCSVCommonURL}&vis=entity_grant_count",
                               "value": "${i18n().grants}" }>
-                              
+
 <#assign parameterOptions = [publicationParameter, grantParameter]>
 
 <#assign entityCheckboxSelectorDOMClass = "entity-selector-checkbox">
-                                    
+
 <#-- Javascript files -->
 
 <#-- Currently we are using the developer build version for both flot & excanvas libraries,
-this is because IE 9 complains about certain properties. After testing it seems that dev 
+this is because IE 9 complains about certain properties. After testing it seems that dev
 build version is stable enough. If in next couple of days we feel that there are some issues
 we will default to using the stable version unless the request comes from IE 9 in which case
 we will use rev 293 (dev build version) of the flot & excanvas files.
@@ -154,11 +154,11 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/sm
                   '<link rel="stylesheet" href="${urls.base}/css/visualization/visualization.css" />',
                   '<link rel="stylesheet" href="${urls.base}/css/jquery_plugins/ui.notify.css" />',
                   '<!--[if IE]><link href="${urls.base}/css/visualization/entitycomparison/layout-ie.css" rel="stylesheet" type="text/css" /><![endif]-->',
-                  '<!--[if lt IE 8]><link href="${urls.base}/css/visualization/entitycomparison/layout-ie-67.css" rel="stylesheet" type="text/css" /><![endif]-->')}                  
- 
+                  '<!--[if lt IE 8]><link href="${urls.base}/css/visualization/entitycomparison/layout-ie-67.css" rel="stylesheet" type="text/css" /><![endif]-->')}
+
 <#-- variables passed from server-side code -->
 <script language="JavaScript" type="text/javascript">
-    
+
 var contextPath = "${urls.base}";
 var temporalGraphDrillUpIcon = "${temporalGraphDrillUpIcon}";
 var temporalGraphDrillDownIcon = "${temporalGraphDrillDownIcon}";
@@ -193,11 +193,11 @@ var COMPARISON_PARAMETERS_INFO = {
     <#list parameter?keys as key>
         ${key}:"${parameter[key]}"<#if key_has_next>,</#if>
     </#list>
-    
+
     }<#if parameter_has_next>,</#if>
 
 </#list>
-    
+
 }
 
 </script>

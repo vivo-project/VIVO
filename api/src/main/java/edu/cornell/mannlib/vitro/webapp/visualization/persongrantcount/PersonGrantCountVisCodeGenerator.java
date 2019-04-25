@@ -22,19 +22,19 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 
 
 public class PersonGrantCountVisCodeGenerator {
-	
+
 	/*
 	 * There are 2 modes of sparkline that are available via this visualization.
 	 * 		1. Short Sparkline - This sparkline will render all the data points (or sparks),
 	 * 			which in this case are the grants over the years, from the last 10 years.
-	 * 
-	 * 		2. Full Sparkline - This sparkline will render all the data points (or sparks) 
+	 *
+	 * 		2. Full Sparkline - This sparkline will render all the data points (or sparks)
 	 * 			spanning the career of the person & last 10 years at the minimum, in case if
 	 * 			the person started his career in the last 10 yeras.
 	 * */
-	
+
 	private static final String DEFAULT_VIS_CONTAINER_DIV_ID = "grant_count_vis_container";
-	
+
 	private Map<String, Integer> yearToGrantCount;
 
 	private Log log;
@@ -42,7 +42,7 @@ public class PersonGrantCountVisCodeGenerator {
 	private SparklineData sparklineParameterVO;
 
 	private String individualURI;
-	
+
 	public PersonGrantCountVisCodeGenerator(String individualURIParam,
 			String visMode, String visContainer, Map<String, Integer> yearToGrantCount,
 			Log log) {
@@ -50,13 +50,13 @@ public class PersonGrantCountVisCodeGenerator {
 		this.individualURI = individualURIParam;
 
 		this.yearToGrantCount = yearToGrantCount;
-		
+
 		this.log = log;
-		
+
 		this.sparklineParameterVO = setupSparklineParameters(visMode, visContainer);
 
 	}
-	
+
 	/**
 	 * This method is used to setup parameters for the sparkline value object. These parameters
 	 * will be used in the template to construct the actual html/javascript code.
@@ -65,16 +65,16 @@ public class PersonGrantCountVisCodeGenerator {
 	 */
 	private SparklineData setupSparklineParameters(String visMode,
 			  							  String providedVisContainerID) {
-		
+
 		SparklineData sparklineData = new SparklineData();
 		sparklineData.setYearToActivityCount(yearToGrantCount);
-		
+
 		int numOfYearsToBeRendered = 0;
-		
+
 		/*
-		 * It was decided that to prevent downward curve that happens if there are no publications 
+		 * It was decided that to prevent downward curve that happens if there are no publications
 		 * in the current year seems a bit harsh, so we consider only publications from the last 10
-		 * complete years. 
+		 * complete years.
 		 * */
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR) - 1;
 		int shortSparkMinYear = currentYear
@@ -137,7 +137,7 @@ public class PersonGrantCountVisCodeGenerator {
 		 */
 		int renderedFullSparks = 0;
 
-		List<YearToEntityCountDataElement> yearToGrantCountDataTable = 
+		List<YearToEntityCountDataElement> yearToGrantCountDataTable =
 					new ArrayList<YearToEntityCountDataElement>();
 
 		for (int grantYear = minGrantYearConsidered; grantYear <= currentYear; grantYear++) {
@@ -211,12 +211,12 @@ public class PersonGrantCountVisCodeGenerator {
 		}
 
 		if (yearToGrantCount.size() > 0) {
-			
+
 			sparklineData.setFullTimelineNetworkLink(
 					UtilityFunctions.getCollaboratorshipNetworkLink(individualURI,
 						VisualizationFrameworkConstants.PERSON_LEVEL_VIS,
 						VisualizationFrameworkConstants.COPI_VIS_MODE));
-			
+
 			sparklineData.setDownloadDataLink(
 					UtilityFunctions.getCSVDownloadURL(
 							individualURI,
@@ -225,7 +225,7 @@ public class PersonGrantCountVisCodeGenerator {
 		}
 		return sparklineData;
 	}
-	
+
 	public SparklineData getValueObjectContainer() {
 		return this.sparklineParameterVO;
 	}

@@ -1,0 +1,810 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO]
+[INFO] Vitro
+[INFO] Vitro Dependencies
+[INFO] Vitro API
+[INFO] VIVO
+[INFO] VIVO API
+[INFO] Vitro Web App
+[INFO] VIVO Web App
+[INFO] Vitro Home
+[INFO] VIVO Home
+[INFO] Vitro Solr App
+[INFO] Vitro Installer
+[INFO] Vitro Install Home
+[INFO] Vitro Install Solr App
+[INFO] Vitro Install Web App
+[INFO] VIVO Installer
+[INFO] VIVO Install Home
+[INFO] VIVO Install Solr App
+[INFO] VIVO Install Web App
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Vitro 1.11.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ vitro-project ---
+[INFO]
+[INFO] --- buildnumber-maven-plugin:1.4:create (default) @ vitro-project ---
+[INFO] ShortRevision tag detected. The value is '7'.
+[INFO] Executing: /bin/sh -c cd '/Users/benjamingross/Documents/git/Vitro' && 'git' 'rev-parse' '--verify' '--short=7' 'HEAD'
+[INFO] Working directory: /Users/benjamingross/Documents/git/Vitro
+[INFO] Storing buildNumber: 129e121 at timestamp: 1544232832342
+[INFO] Storing buildScmBranch: bugfix/VIVO-1610
+[INFO]
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ vitro-project ---
+[INFO] Installing /Users/benjamingross/Documents/git/Vitro/pom.xml to /Users/benjamingross/.m2/repository/org/vivoweb/vitro-project/1.11.0-SNAPSHOT/vitro-project-1.11.0-SNAPSHOT.pom
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Vitro Dependencies 1.11.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ vitro-dependencies ---
+[INFO]
+[INFO] --- buildnumber-maven-plugin:1.4:create (default) @ vitro-dependencies ---
+[INFO] ShortRevision tag detected. The value is '7'.
+[INFO] Executing: /bin/sh -c cd '/Users/benjamingross/Documents/git/Vitro/dependencies' && 'git' 'rev-parse' '--verify' '--short=7' 'HEAD'
+[INFO] Working directory: /Users/benjamingross/Documents/git/Vitro/dependencies
+[INFO] Storing buildNumber: 129e121 at timestamp: 1544232832498
+[INFO] Storing buildScmBranch: bugfix/VIVO-1610
+[INFO]
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ vitro-dependencies ---
+[INFO] Installing /Users/benjamingross/Documents/git/Vitro/dependencies/pom.xml to /Users/benjamingross/.m2/repository/org/vivoweb/vitro-dependencies/1.11.0-SNAPSHOT/vitro-dependencies-1.11.0-SNAPSHOT.pom
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Vitro API 1.11.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ vitro-api ---
+[INFO] Deleting /Users/benjamingross/Documents/git/Vitro/api/target
+[INFO]
+[INFO] --- buildnumber-maven-plugin:1.4:create (default) @ vitro-api ---
+[INFO] ShortRevision tag detected. The value is '7'.
+[INFO] Executing: /bin/sh -c cd '/Users/benjamingross/Documents/git/Vitro/api' && 'git' 'rev-parse' '--verify' '--short=7' 'HEAD'
+[INFO] Working directory: /Users/benjamingross/Documents/git/Vitro/api
+[INFO] Storing buildNumber: 129e121 at timestamp: 1544232833378
+[INFO] Storing buildScmBranch: bugfix/VIVO-1610
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ vitro-api ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 15 resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ vitro-api ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1093 source files to /Users/benjamingross/Documents/git/Vitro/api/target/classes
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ vitro-api ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 50 resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ vitro-api ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 162 source files to /Users/benjamingross/Documents/git/Vitro/api/target/test-classes
+[INFO]
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ vitro-api ---
+[INFO] Surefire report directory: /Users/benjamingross/Documents/git/Vitro/api/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running edu.cornell.mannlib.vedit.util.OperationUtils_CloneBeanTest
+Tests run: 25, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.124 sec
+Running edu.cornell.mannlib.vitro.webapp.rdfservice.adapters.VitroModelFactoryTest
+Tests run: 20, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.621 sec
+Running edu.cornell.mannlib.vitro.webapp.rdfservice.filter.LanguageFilteringRDFServiceTest
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec
+Running edu.cornell.mannlib.vitro.webapp.filters.VitroURLTest
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec
+Running edu.cornell.mannlib.vitro.webapp.filters.URLRewritingHttpServletResponseTest
+Tests run: 173, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.056 sec
+Running edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdateKnowledgeBaseTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running edu.cornell.mannlib.vitro.webapp.config.RevisionInfoBeanTest
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.081 sec
+Running edu.cornell.mannlib.vitro.webapp.config.RevisionInfoSetupTest
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec
+Running edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequestTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec
+Running edu.cornell.mannlib.vitro.webapp.auth.identifier.factory.IsUserFactoryTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec
+Running edu.cornell.mannlib.vitro.webapp.auth.identifier.factory.HasPermissionFactoryTest
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec
+Running edu.cornell.mannlib.vitro.webapp.auth.identifier.factory.IsRootUserFactoryTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec
+Running edu.cornell.mannlib.vitro.webapp.auth.policy.SelfEditingPolicyTest
+Tests run: 20, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.044 sec
+Running edu.cornell.mannlib.vitro.webapp.auth.policy.bean.PropertyRestrictionBeanImplTest
+Tests run: 37, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.02 sec
+Running edu.cornell.mannlib.vitro.webapp.auth.policy.SelfEditingPolicy_2_Test
+Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec
+Running edu.cornell.mannlib.vitro.webapp.auth.policy.PolicyHelper_AuthorizationRequestTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec
+Running edu.cornell.mannlib.vitro.webapp.auth.policy.PolicyHelper_StatementsTest
+Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec
+Running edu.cornell.mannlib.vitro.webapp.auth.policy.PolicyHelper_ModelsTest
+Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 sec
+Running edu.cornell.mannlib.vitro.webapp.web.templatemodels.customlistview.CustomListViewConfigFileTest
+Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 sec
+Running edu.cornell.mannlib.vitro.webapp.web.templatemodels.TagsTest
+Tests run: 24, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.02 sec
+Running edu.cornell.mannlib.vitro.webapp.web.templatemodels.BaseTemplateModelTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.ObjectPropertyTemplateModel_PropertyListConfigTest
+ERROR 2018-12-07 18:34:23.697 [main] (ConfigurationProperties) ConfigurationProperties bean has not been set.
+WARN 2018-12-07 18:34:23.698 [main] (DummyConfigurationProperties) ConfigurationProperties has not been initialized: getProperty("listview.usePreciseSubquery")
+Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.044 sec
+Running edu.cornell.mannlib.vitro.webapp.web.ContentTypeTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec
+Running edu.cornell.mannlib.vitro.webapp.freemarker.loader.FreemarkerTemplateLoaderTest
+Tests run: 34, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec
+Running edu.cornell.mannlib.vitro.webapp.dao.filtering.filters.VitroFiltersFactoryTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec
+Running edu.cornell.mannlib.vitro.webapp.dao.filtering.IndividualFilteringByStatementTest
+Tests run: 24, Failures: 0, Errors: 0, Skipped: 12, Time elapsed: 0.007 sec
+Running edu.cornell.mannlib.vitro.webapp.dao.jena.JenaBaseDaoTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.439 sec
+Running edu.cornell.mannlib.vitro.webapp.dao.jena.OntModelSegementationTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.016 sec
+Running edu.cornell.mannlib.vitro.webapp.dao.jena.VClassDaoTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec
+Running edu.cornell.mannlib.vitro.webapp.dao.jena.DataPropertyDaoJenaTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec
+Running edu.cornell.mannlib.vitro.webapp.dao.jena.MenuDaoJenaTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.068 sec
+Running edu.cornell.mannlib.vitro.webapp.dao.jena.UserAccountsDaoJenaTest
+Tests run: 27, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.102 sec
+Running edu.cornell.mannlib.vitro.webapp.dao.jena.VClassJenaTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec
+Running edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtilsTest
+Tests run: 13, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.013 sec
+Running edu.cornell.mannlib.vitro.webapp.dao.jena.VClassGroupCacheTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec
+Running edu.cornell.mannlib.vitro.webapp.dao.jena.ObjectPropertyStatementDaoJenaTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running edu.cornell.mannlib.vitro.webapp.dao.jena.DependentResourceDeleteJenaTest
+Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.043 sec
+Running edu.cornell.mannlib.vitro.webapp.dao.jena.JenaBaseDao_2_Test
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 sec
+Running edu.cornell.mannlib.vitro.webapp.dao.jena.PropertyInstanceDaoJenaTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.078 sec
+Running edu.cornell.mannlib.vitro.webapp.dao.jena.ObjectPropertyDaoJenaTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 sec
+Running edu.cornell.mannlib.vitro.webapp.dao.vclassgroup.ProhibitedFromSearchTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec
+Running edu.cornell.mannlib.vitro.webapp.dao.NewURIMakerVitroTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
+Running edu.cornell.mannlib.vitro.webapp.filestorage.impl.FileStorageImplTest
+Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.033 sec
+Running edu.cornell.mannlib.vitro.webapp.filestorage.impl.FileStorageHelperTest
+Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec
+Running edu.cornell.mannlib.vitro.webapp.filestorage.FileServingHelperTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec
+Running edu.cornell.mannlib.vitro.webapp.utils.configuration.ConfigurationBeanLoader_PropertyTest
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.065 sec
+Running edu.cornell.mannlib.vitro.webapp.utils.configuration.ConfigurationBeanLoader_NamespacesTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec
+Running edu.cornell.mannlib.vitro.webapp.utils.configuration.ConfigurationBeanLoader_ValidationTest
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.024 sec
+Running edu.cornell.mannlib.vitro.webapp.utils.configuration.ConfigurationBeanLoaderTest
+Tests run: 30, Failures: 0, Errors: 0, Skipped: 3, Time elapsed: 0.041 sec
+Running edu.cornell.mannlib.vitro.webapp.utils.configuration.ConfigurationBeanLoader_Cardinality_Test
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec
+Running edu.cornell.mannlib.vitro.webapp.utils.jena.JenaIngestUtilsTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec
+Running edu.cornell.mannlib.vitro.webapp.utils.dataGetter.DataGetterUtilsTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec
+Running edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetterTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec
+Running edu.cornell.mannlib.vitro.webapp.utils.ingest.JenaIngestUtilsTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.101 sec
+Running edu.cornell.mannlib.vitro.webapp.utils.searchengine.AutoCompleteWordsTest
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec
+Running edu.cornell.mannlib.vitro.webapp.utils.json.JacksonUtilsTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec
+Running edu.cornell.mannlib.vitro.webapp.utils.http.ContentTypeUtilTest
+Tests run: 32, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 sec
+Running edu.cornell.mannlib.vitro.webapp.utils.sparqlrunner.QueryHolderTest
+Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec
+Running edu.cornell.mannlib.vitro.webapp.utils.sparqlrunner.ResultSetParserTest
+Tests run: 19, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.033 sec
+Running edu.cornell.mannlib.vitro.webapp.utils.sparqlrunner.SparqlQueryRunnerTest
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.054 sec
+Running edu.cornell.mannlib.vitro.webapp.utils.sparqlrunner.StringResultsMappingTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec
+Running edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.ThumbnailImageURLTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.039 sec
+Running edu.cornell.mannlib.vitro.webapp.searchindex.exclusions.ExcludeBasedOnTypeTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec
+Running edu.cornell.mannlib.vitro.webapp.searchindex.indexing.AdditionalURIsForClassGroupChangesTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.025 sec
+Running edu.cornell.mannlib.vitro.webapp.searchindex.indexing.AdditionalURIsForTypeStatementsTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec
+Running edu.cornell.mannlib.vitro.webapp.searchindex.indexing.SelectQueryUriFinderTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 sec
+Running edu.cornell.mannlib.vitro.webapp.searchindex.indexing.AdditionalURIsForObjectPropertiesTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec
+Running edu.cornell.mannlib.vitro.webapp.modelaccess.adapters.MemoryMappingModelMakerTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 sec
+Running edu.cornell.mannlib.vitro.webapp.modelaccess.adapters.ListCachingModelMakerTest
+Tests run: 24, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec
+Running edu.cornell.mannlib.vitro.webapp.modelaccess.adapters.ModelMakerWithPersistentEmptyModelsTest
+Tests run: 24, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 sec
+Running edu.cornell.mannlib.vitro.webapp.searchengine.base.BaseSearchInputDocumentTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.authenticate.ProgramLoginTest
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.129 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.freemarker.ListPropertyGroupsControllerTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.155 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.freemarker.ShowDataPropertyHierarchyControllerTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.freemarker.ShowClassHierarchyControllerTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.freemarker.ListClassGroupsControllerTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilderTest
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.freemarker.ListPropertyWebappsControllerTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.freemarker.ListVClassWebappsControllerTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.freemarker.ShowObjectPropertyHierarchyControllerTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.freemarker.ListDatatypePropertiesControllerTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.grefine.JSONReconcileServletTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.datatools.dumprestore.NQuadLineSplitterTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.edit.AuthenticateTest
+Tests run: 26, Failures: 0, Errors: 0, Skipped: 5, Time elapsed: 1.328 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.edit.PrimitiveRdfEditTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.json.JsonServletTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.019 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.accounts.UserAccountsSelectorTest
+Tests run: 29, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.233 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.accounts.UserAccountsSelectionCriteriaTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.accounts.manageproxies.ProxyRelationshipSelectorTest
+Tests run: 16, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0.103 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.api.sparqlquery.SparqlQueryApiExecutorTest
+Tests run: 29, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.183 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.api.SparqlUpdateApiTest
+yep
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.individual.IndividualRequestAnalyzerTest
+Tests run: 21, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec
+Running edu.cornell.mannlib.vitro.webapp.controller.individual.IndividualRdfAssemblerTest
+Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.122 sec
+Running edu.cornell.mannlib.vitro.webapp.reasoner.SimpleReasonerPluginTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.077 sec
+Running edu.cornell.mannlib.vitro.webapp.reasoner.SimpleReasonerSameAsTest
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.995 sec
+Running edu.cornell.mannlib.vitro.webapp.reasoner.SimpleReasonerInversePropertyTest
+Tests run: 20, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.404 sec
+Running edu.cornell.mannlib.vitro.webapp.reasoner.SimpleReasonerTest
+Tests run: 26, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 1.084 sec
+Running edu.cornell.mannlib.vitro.webapp.search.controller.PagedSearchControllerTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 sec
+Running edu.cornell.mannlib.vitro.webapp.search.controller.UpdateUrisInIndexTest
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec
+Running edu.cornell.mannlib.vitro.webapp.edit.EditLiteralTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec
+Running edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidationTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.306 sec
+Running edu.cornell.mannlib.vitro.webapp.edit.n3editing.processEdit.RdfLiteralHashTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec
+Running edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditN3UtilsTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec
+Running edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.ProcessRdfFormTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.023 sec
+Running edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtilsTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditN3GeneratorVTwoTest
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec
+Running edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.BasicValidationVTwoTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running edu.cornell.mannlib.vitro.webapp.i18n.selection.LocaleSelectionSetupTest
+Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.02 sec
+Running edu.cornell.mannlib.vitro.webapp.i18n.I18nTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
+Running edu.cornell.mannlib.vitro.webapp.startup.StartupManagerTest
+Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec
+Running freemarker.ext.dump.DumpDirectiveTest
+Tests run: 30, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.14 sec
+Running freemarker.ext.dump.DumpAllDirectiveTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+
+Results :
+
+Tests run: 1274, Failures: 0, Errors: 0, Skipped: 30
+
+[INFO]
+[INFO] --- maven-jar-plugin:3.0.2:jar (default-jar) @ vitro-api ---
+[INFO] Building jar: /Users/benjamingross/Documents/git/Vitro/api/target/vitro-api-1.11.0-SNAPSHOT.jar
+[INFO]
+[INFO] --- maven-jar-plugin:3.0.2:test-jar (default) @ vitro-api ---
+[INFO] Building jar: /Users/benjamingross/Documents/git/Vitro/api/target/vitro-api-1.11.0-SNAPSHOT-tests.jar
+[INFO]
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ vitro-api ---
+[INFO] Installing /Users/benjamingross/Documents/git/Vitro/api/target/vitro-api-1.11.0-SNAPSHOT.jar to /Users/benjamingross/.m2/repository/org/vivoweb/vitro-api/1.11.0-SNAPSHOT/vitro-api-1.11.0-SNAPSHOT.jar
+[INFO] Installing /Users/benjamingross/Documents/git/Vitro/api/pom.xml to /Users/benjamingross/.m2/repository/org/vivoweb/vitro-api/1.11.0-SNAPSHOT/vitro-api-1.11.0-SNAPSHOT.pom
+[INFO] Installing /Users/benjamingross/Documents/git/Vitro/api/target/vitro-api-1.11.0-SNAPSHOT-tests.jar to /Users/benjamingross/.m2/repository/org/vivoweb/vitro-api/1.11.0-SNAPSHOT/vitro-api-1.11.0-SNAPSHOT-tests.jar
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building VIVO 1.11.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ vivo-project ---
+[INFO]
+[INFO] --- buildnumber-maven-plugin:1.4:create (default) @ vivo-project ---
+[INFO] ShortRevision tag detected. The value is '7'.
+[INFO] Executing: /bin/sh -c cd '/Users/benjamingross/Documents/git/VIVO' && 'git' 'rev-parse' '--verify' '--short=7' 'HEAD'
+[INFO] Working directory: /Users/benjamingross/Documents/git/VIVO
+[INFO] Storing buildNumber: 1df4324 at timestamp: 1544232872595
+[INFO] Storing buildScmBranch: bugfix/VIVO-1610
+[INFO]
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ vivo-project ---
+[INFO] Installing /Users/benjamingross/Documents/git/VIVO/pom.xml to /Users/benjamingross/.m2/repository/org/vivoweb/vivo-project/1.11.0-SNAPSHOT/vivo-project-1.11.0-SNAPSHOT.pom
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building VIVO API 1.11.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ vivo-api ---
+[INFO] Deleting /Users/benjamingross/Documents/git/VIVO/api/target
+[INFO]
+[INFO] --- buildnumber-maven-plugin:1.4:create (default) @ vivo-api ---
+[INFO] ShortRevision tag detected. The value is '7'.
+[INFO] Executing: /bin/sh -c cd '/Users/benjamingross/Documents/git/VIVO/api' && 'git' 'rev-parse' '--verify' '--short=7' 'HEAD'
+[INFO] Working directory: /Users/benjamingross/Documents/git/VIVO/api
+[INFO] Storing buildNumber: 1df4324 at timestamp: 1544232872782
+[INFO] Storing buildScmBranch: bugfix/VIVO-1610
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ vivo-api ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/benjamingross/Documents/git/VIVO/api/src/main/resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ vivo-api ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 209 source files to /Users/benjamingross/Documents/git/VIVO/api/target/classes
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ vivo-api ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 3 resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ vivo-api ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 3 source files to /Users/benjamingross/Documents/git/VIVO/api/target/test-classes
+[INFO]
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ vivo-api ---
+[INFO] Surefire report directory: /Users/benjamingross/Documents/git/VIVO/api/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running edu.cornell.mannlib.vitro.webapp.searchindex.extensions.LabelsAcrossContextNodesTest
+Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.881 sec
+Running edu.cornell.mannlib.semservices.service.impl.UMLSServiceTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
+Running edu.cornell.mannlib.vivo.auth.policy.SelfEditorRelationshipPolicyTest
+Tests run: 35, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.116 sec
+
+Results :
+
+Tests run: 55, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO]
+[INFO] --- maven-jar-plugin:3.0.2:jar (default-jar) @ vivo-api ---
+[INFO] Building jar: /Users/benjamingross/Documents/git/VIVO/api/target/vivo-api-1.11.0-SNAPSHOT.jar
+[INFO]
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ vivo-api ---
+[INFO] Installing /Users/benjamingross/Documents/git/VIVO/api/target/vivo-api-1.11.0-SNAPSHOT.jar to /Users/benjamingross/.m2/repository/org/vivoweb/vivo-api/1.11.0-SNAPSHOT/vivo-api-1.11.0-SNAPSHOT.jar
+[INFO] Installing /Users/benjamingross/Documents/git/VIVO/api/pom.xml to /Users/benjamingross/.m2/repository/org/vivoweb/vivo-api/1.11.0-SNAPSHOT/vivo-api-1.11.0-SNAPSHOT.pom
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Vitro Web App 1.11.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ vitro-webapp ---
+[INFO] Deleting /Users/benjamingross/Documents/git/Vitro/webapp/target
+[INFO]
+[INFO] --- buildnumber-maven-plugin:1.4:create (default) @ vitro-webapp ---
+[INFO] ShortRevision tag detected. The value is '7'.
+[INFO] Executing: /bin/sh -c cd '/Users/benjamingross/Documents/git/Vitro/webapp' && 'git' 'rev-parse' '--verify' '--short=7' 'HEAD'
+[INFO] Working directory: /Users/benjamingross/Documents/git/Vitro/webapp
+[INFO] Storing buildNumber: 129e121 at timestamp: 1544232884436
+[INFO] Storing buildScmBranch: bugfix/VIVO-1610
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ vitro-webapp ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/benjamingross/Documents/git/Vitro/webapp/src/main/resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ vitro-webapp ---
+[INFO] No sources to compile
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ vitro-webapp ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/benjamingross/Documents/git/Vitro/webapp/src/test/resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ vitro-webapp ---
+[INFO] No sources to compile
+[INFO]
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ vitro-webapp ---
+[INFO] No tests to run.
+[INFO]
+[INFO] --- maven-war-plugin:3.2.0:war (default-war) @ vitro-webapp ---
+[INFO] Packaging webapp
+[INFO] Assembling webapp [vitro-webapp] in [/Users/benjamingross/Documents/git/Vitro/webapp/target/vitro-webapp-1.11.0-SNAPSHOT]
+[INFO] Processing war project
+[INFO] Copying webapp webResources [/Users/benjamingross/Documents/git/Vitro/webapp/src/main/webResources] to [/Users/benjamingross/Documents/git/Vitro/webapp/target/vitro-webapp-1.11.0-SNAPSHOT]
+[INFO] Copying webapp resources [/Users/benjamingross/Documents/git/Vitro/webapp/src/main/webapp]
+[INFO] Webapp assembled in [1475 msecs]
+[INFO] Building war: /Users/benjamingross/Documents/git/Vitro/webapp/target/vitro-webapp-1.11.0-SNAPSHOT.war
+[INFO]
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ vitro-webapp ---
+[INFO] Installing /Users/benjamingross/Documents/git/Vitro/webapp/target/vitro-webapp-1.11.0-SNAPSHOT.war to /Users/benjamingross/.m2/repository/org/vivoweb/vitro-webapp/1.11.0-SNAPSHOT/vitro-webapp-1.11.0-SNAPSHOT.war
+[INFO] Installing /Users/benjamingross/Documents/git/Vitro/webapp/pom.xml to /Users/benjamingross/.m2/repository/org/vivoweb/vitro-webapp/1.11.0-SNAPSHOT/vitro-webapp-1.11.0-SNAPSHOT.pom
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building VIVO Web App 1.11.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ vivo-webapp ---
+[INFO] Deleting /Users/benjamingross/Documents/git/VIVO/webapp/target
+[INFO]
+[INFO] --- buildnumber-maven-plugin:1.4:create (default) @ vivo-webapp ---
+[INFO] ShortRevision tag detected. The value is '7'.
+[INFO] Executing: /bin/sh -c cd '/Users/benjamingross/Documents/git/VIVO/webapp' && 'git' 'rev-parse' '--verify' '--short=7' 'HEAD'
+[INFO] Working directory: /Users/benjamingross/Documents/git/VIVO/webapp
+[INFO] Storing buildNumber: 1df4324 at timestamp: 1544232887017
+[INFO] Storing buildScmBranch: bugfix/VIVO-1610
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ vivo-webapp ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/benjamingross/Documents/git/VIVO/webapp/src/main/resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ vivo-webapp ---
+[INFO] No sources to compile
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ vivo-webapp ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/benjamingross/Documents/git/VIVO/webapp/src/test/resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ vivo-webapp ---
+[INFO] No sources to compile
+[INFO]
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ vivo-webapp ---
+[INFO] No tests to run.
+[INFO]
+[INFO] --- maven-war-plugin:3.2.0:war (default-war) @ vivo-webapp ---
+[INFO] Packaging webapp
+[INFO] Assembling webapp [vivo-webapp] in [/Users/benjamingross/Documents/git/VIVO/webapp/target/vivo-webapp-1.11.0-SNAPSHOT]
+[INFO] Processing war project
+[INFO] Copying webapp webResources [/Users/benjamingross/Documents/git/VIVO/webapp/src/main/webResources] to [/Users/benjamingross/Documents/git/VIVO/webapp/target/vivo-webapp-1.11.0-SNAPSHOT]
+[INFO] Copying webapp resources [/Users/benjamingross/Documents/git/VIVO/webapp/src/main/webapp]
+[INFO] Processing overlay [ id org.vivoweb:vitro-webapp]
+[INFO] Webapp assembled in [2762 msecs]
+[INFO] Building war: /Users/benjamingross/Documents/git/VIVO/webapp/target/vivo-webapp-1.11.0-SNAPSHOT.war
+[INFO]
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ vivo-webapp ---
+[INFO] Installing /Users/benjamingross/Documents/git/VIVO/webapp/target/vivo-webapp-1.11.0-SNAPSHOT.war to /Users/benjamingross/.m2/repository/org/vivoweb/vivo-webapp/1.11.0-SNAPSHOT/vivo-webapp-1.11.0-SNAPSHOT.war
+[INFO] Installing /Users/benjamingross/Documents/git/VIVO/webapp/pom.xml to /Users/benjamingross/.m2/repository/org/vivoweb/vivo-webapp/1.11.0-SNAPSHOT/vivo-webapp-1.11.0-SNAPSHOT.pom
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Vitro Home 1.11.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ vitro-home ---
+[INFO] Deleting /Users/benjamingross/Documents/git/Vitro/home/target
+[INFO]
+[INFO] --- buildnumber-maven-plugin:1.4:create (default) @ vitro-home ---
+[INFO] ShortRevision tag detected. The value is '7'.
+[INFO] Executing: /bin/sh -c cd '/Users/benjamingross/Documents/git/Vitro/home' && 'git' 'rev-parse' '--verify' '--short=7' 'HEAD'
+[INFO] Working directory: /Users/benjamingross/Documents/git/Vitro/home
+[INFO] Storing buildNumber: 129e121 at timestamp: 1544232890589
+[INFO] Storing buildScmBranch: bugfix/VIVO-1610
+[INFO]
+[INFO] --- maven-assembly-plugin:2.5.5:single (default) @ vitro-home ---
+[INFO] Reading assembly descriptor: src/main/assembly/home.xml
+[WARNING] Cannot include project artifact: org.vivoweb:vitro-home:pom:1.11.0-SNAPSHOT; it doesn't have an associated file or directory.
+[INFO] Building tar: /Users/benjamingross/Documents/git/Vitro/home/target/vitro-home-1.11.0-SNAPSHOT.tar.gz
+[INFO]
+[INFO] --- build-helper-maven-plugin:1.9.1:attach-artifact (attach-artifacts) @ vitro-home ---
+[INFO]
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ vitro-home ---
+[INFO] Installing /Users/benjamingross/Documents/git/Vitro/home/pom.xml to /Users/benjamingross/.m2/repository/org/vivoweb/vitro-home/1.11.0-SNAPSHOT/vitro-home-1.11.0-SNAPSHOT.pom
+[INFO] Installing /Users/benjamingross/Documents/git/Vitro/home/target/vitro-home-1.11.0-SNAPSHOT.tar.gz to /Users/benjamingross/.m2/repository/org/vivoweb/vitro-home/1.11.0-SNAPSHOT/vitro-home-1.11.0-SNAPSHOT.tar.gz
+[INFO] Installing /Users/benjamingross/Documents/git/Vitro/home/target/vitro-home-1.11.0-SNAPSHOT.tar.gz to /Users/benjamingross/.m2/repository/org/vivoweb/vitro-home/1.11.0-SNAPSHOT/vitro-home-1.11.0-SNAPSHOT.tar.gz
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building VIVO Home 1.11.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ vivo-home ---
+[INFO] Deleting /Users/benjamingross/Documents/git/VIVO/home/target
+[INFO]
+[INFO] --- buildnumber-maven-plugin:1.4:create (default) @ vivo-home ---
+[INFO] ShortRevision tag detected. The value is '7'.
+[INFO] Executing: /bin/sh -c cd '/Users/benjamingross/Documents/git/VIVO/home' && 'git' 'rev-parse' '--verify' '--short=7' 'HEAD'
+[INFO] Working directory: /Users/benjamingross/Documents/git/VIVO/home
+[INFO] Storing buildNumber: 1df4324 at timestamp: 1544232892214
+[INFO] Storing buildScmBranch: bugfix/VIVO-1610
+[INFO]
+[INFO] --- maven-assembly-plugin:2.5.5:single (default) @ vivo-home ---
+[INFO] Reading assembly descriptor: src/main/assembly/home.xml
+[WARNING] Cannot include project artifact: org.vivoweb:vivo-home:pom:1.11.0-SNAPSHOT; it doesn't have an associated file or directory.
+[INFO] Building tar: /Users/benjamingross/Documents/git/VIVO/home/target/vivo-home-1.11.0-SNAPSHOT.tar.gz
+[INFO]
+[INFO] --- build-helper-maven-plugin:1.9.1:attach-artifact (attach-artifacts) @ vivo-home ---
+[INFO]
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ vivo-home ---
+[INFO] Installing /Users/benjamingross/Documents/git/VIVO/home/pom.xml to /Users/benjamingross/.m2/repository/org/vivoweb/vivo-home/1.11.0-SNAPSHOT/vivo-home-1.11.0-SNAPSHOT.pom
+[INFO] Installing /Users/benjamingross/Documents/git/VIVO/home/target/vivo-home-1.11.0-SNAPSHOT.tar.gz to /Users/benjamingross/.m2/repository/org/vivoweb/vivo-home/1.11.0-SNAPSHOT/vivo-home-1.11.0-SNAPSHOT.tar.gz
+[INFO] Installing /Users/benjamingross/Documents/git/VIVO/home/target/vivo-home-1.11.0-SNAPSHOT.tar.gz to /Users/benjamingross/.m2/repository/org/vivoweb/vivo-home/1.11.0-SNAPSHOT/vivo-home-1.11.0-SNAPSHOT.tar.gz
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Vitro Solr App 1.11.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ vitro-solr ---
+[INFO] Deleting /Users/benjamingross/Documents/git/Vitro/solr/target
+[INFO]
+[INFO] --- buildnumber-maven-plugin:1.4:create (default) @ vitro-solr ---
+[INFO] ShortRevision tag detected. The value is '7'.
+[INFO] Executing: /bin/sh -c cd '/Users/benjamingross/Documents/git/Vitro/solr' && 'git' 'rev-parse' '--verify' '--short=7' 'HEAD'
+[INFO] Working directory: /Users/benjamingross/Documents/git/Vitro/solr
+[INFO] Storing buildNumber: 129e121 at timestamp: 1544232893977
+[INFO] Storing buildScmBranch: bugfix/VIVO-1610
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ vitro-solr ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ vitro-solr ---
+[INFO] No sources to compile
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ vitro-solr ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/benjamingross/Documents/git/Vitro/solr/src/test/resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ vitro-solr ---
+[INFO] No sources to compile
+[INFO]
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ vitro-solr ---
+[INFO] No tests to run.
+[INFO]
+[INFO] --- maven-war-plugin:3.2.0:war (default-war) @ vitro-solr ---
+[INFO] Packaging webapp
+[INFO] Assembling webapp [vitro-solr] in [/Users/benjamingross/Documents/git/Vitro/solr/target/vitro-solr-1.11.0-SNAPSHOT]
+[INFO] Processing war project
+[INFO] Processing overlay [ id org.apache.solr:solr]
+[INFO] Webapp assembled in [1159 msecs]
+[INFO] Building war: /Users/benjamingross/Documents/git/Vitro/solr/target/vitro-solr-1.11.0-SNAPSHOT.war
+[INFO]
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ vitro-solr ---
+[INFO] Installing /Users/benjamingross/Documents/git/Vitro/solr/target/vitro-solr-1.11.0-SNAPSHOT.war to /Users/benjamingross/.m2/repository/org/vivoweb/vitro-solr/1.11.0-SNAPSHOT/vitro-solr-1.11.0-SNAPSHOT.war
+[INFO] Installing /Users/benjamingross/Documents/git/Vitro/solr/pom.xml to /Users/benjamingross/.m2/repository/org/vivoweb/vitro-solr/1.11.0-SNAPSHOT/vitro-solr-1.11.0-SNAPSHOT.pom
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Vitro Installer 1.11.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ vitro-installer ---
+[INFO]
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ vitro-installer ---
+[INFO] Skipping artifact installation
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Vitro Install Home 1.11.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ vitro-installer-home ---
+[INFO]
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ vitro-installer-home ---
+[INFO] Skipping artifact installation
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Vitro Install Solr App 1.11.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ vitro-installer-solr ---
+[INFO]
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ vitro-installer-solr ---
+[INFO] No tests to run.
+[INFO]
+[INFO] --- maven-antrun-plugin:1.8:run (remove-webapp) @ vitro-installer-solr ---
+[INFO] Skipping Antrun execution
+[INFO]
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ vitro-installer-solr ---
+[INFO] Skipping artifact installation
+[INFO]
+[INFO] --- maven-dependency-plugin:2.10:unpack (install) @ vitro-installer-solr ---
+[INFO] Skipping plugin execution
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Vitro Install Web App 1.11.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ vitro-installer-webapp ---
+[INFO]
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ vitro-installer-webapp ---
+[INFO] No tests to run.
+[INFO]
+[INFO] --- maven-antrun-plugin:1.8:run (remove-webapp) @ vitro-installer-webapp ---
+[INFO] Skipping Antrun execution
+[INFO]
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ vitro-installer-webapp ---
+[INFO] Skipping artifact installation
+[INFO]
+[INFO] --- maven-dependency-plugin:2.10:unpack (install) @ vitro-installer-webapp ---
+[INFO] Skipping plugin execution
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building VIVO Installer 1.11.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ vivo-installer ---
+[INFO]
+[INFO] --- maven-enforcer-plugin:1.4.1:enforce (enforce-properties) @ vivo-installer ---
+[INFO]
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ vivo-installer ---
+[INFO] Skipping artifact installation
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building VIVO Install Home 1.11.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ vivo-installer-home ---
+[INFO] Deleting /Users/benjamingross/Documents/git/VIVO/installer/home/target
+[INFO]
+[INFO] --- maven-enforcer-plugin:1.4.1:enforce (enforce-properties) @ vivo-installer-home ---
+[INFO]
+[INFO] --- maven-assembly-plugin:2.5.5:single (default) @ vivo-installer-home ---
+[INFO] Reading assembly descriptor: src/main/assembly/home.xml
+[WARNING] Cannot include project artifact: org.vivoweb:vivo-installer-home:pom:1.11.0-SNAPSHOT; it doesn't have an associated file or directory.
+[INFO] Copying files to /Users/benjamingross/Documents/git/VIVO/installer/home/target/vivo-installer-home-1.11.0-SNAPSHOT
+[WARNING] Assembly file: /Users/benjamingross/Documents/git/VIVO/installer/home/target/vivo-installer-home-1.11.0-SNAPSHOT is not a regular file (it may be a directory). It cannot be attached to the project build for installation or deployment.
+[INFO]
+[INFO] --- maven-antrun-plugin:1.8:run (remove-webapp) @ vivo-installer-home ---
+[INFO] Executing tasks
+
+main:
+   [delete] Deleting directory /usr/local/vivodev/home/rdf
+[INFO] Executed tasks
+[INFO]
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ vivo-installer-home ---
+[INFO] Skipping artifact installation
+[INFO]
+[INFO] --- maven-resources-plugin:2.7:copy-resources (install) @ vivo-installer-home ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 155 resources
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building VIVO Install Solr App 1.11.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ vivo-installer-solr ---
+[INFO] Deleting /Users/benjamingross/Documents/git/VIVO/installer/solr/target
+[INFO]
+[INFO] --- maven-enforcer-plugin:1.4.1:enforce (enforce-properties) @ vivo-installer-solr ---
+[INFO]
+[INFO] --- maven-resources-plugin:2.7:resources (default-resources) @ vivo-installer-solr ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/benjamingross/Documents/git/VIVO/installer/solr/src/main/resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ vivo-installer-solr ---
+[INFO] No sources to compile
+[INFO]
+[INFO] --- maven-resources-plugin:2.7:testResources (default-testResources) @ vivo-installer-solr ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/benjamingross/Documents/git/VIVO/installer/solr/src/test/resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ vivo-installer-solr ---
+[INFO] No sources to compile
+[INFO]
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ vivo-installer-solr ---
+[INFO] No tests to run.
+[INFO]
+[INFO] --- maven-war-plugin:3.2.0:war (default-war) @ vivo-installer-solr ---
+[INFO] Packaging webapp
+[INFO] Assembling webapp [vivo-installer-solr] in [/Users/benjamingross/Documents/git/VIVO/installer/solr/target/vivodevsolr]
+[INFO] Processing war project
+[INFO] Copying webapp webResources [/Users/benjamingross/Documents/git/VIVO/installer/solr/src/main/webResources] to [/Users/benjamingross/Documents/git/VIVO/installer/solr/target/vivodevsolr]
+[INFO] Processing overlay [ id org.vivoweb:vitro-solr]
+[INFO] Webapp assembled in [1150 msecs]
+[INFO] Building war: /Users/benjamingross/Documents/git/VIVO/installer/solr/target/vivodevsolr.war
+[INFO]
+[INFO] --- maven-antrun-plugin:1.8:run (remove-webapp) @ vivo-installer-solr ---
+[INFO] Executing tasks
+
+main:
+   [delete] Deleting directory /usr/local/tomcat/webapps/vivodevsolr
+[INFO] Executed tasks
+[INFO]
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ vivo-installer-solr ---
+[INFO] Skipping artifact installation
+[INFO]
+[INFO] --- maven-dependency-plugin:2.10:unpack (install) @ vivo-installer-solr ---
+[INFO] Configured Artifact: org.vivoweb:vivo-installer-solr:1.11.0-SNAPSHOT:war
+[INFO] Unpacking /Users/benjamingross/Documents/git/VIVO/installer/solr/target/vivodevsolr.war to /usr/local/tomcat/webapps/vivodevsolr with includes "" and excludes ""
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building VIVO Install Web App 1.11.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.0.0:clean (default-clean) @ vivo-installer-vivo ---
+[INFO] Deleting /Users/benjamingross/Documents/git/VIVO/installer/webapp/target
+[INFO]
+[INFO] --- maven-enforcer-plugin:1.4.1:enforce (enforce-properties) @ vivo-installer-vivo ---
+[INFO]
+[INFO] --- maven-resources-plugin:2.7:resources (default-resources) @ vivo-installer-vivo ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/benjamingross/Documents/git/VIVO/installer/webapp/src/main/resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ vivo-installer-vivo ---
+[INFO] No sources to compile
+[INFO]
+[INFO] --- maven-resources-plugin:2.7:testResources (default-testResources) @ vivo-installer-vivo ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/benjamingross/Documents/git/VIVO/installer/webapp/src/test/resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ vivo-installer-vivo ---
+[INFO] No sources to compile
+[INFO]
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ vivo-installer-vivo ---
+[INFO] No tests to run.
+[INFO]
+[INFO] --- maven-war-plugin:3.2.0:war (default-war) @ vivo-installer-vivo ---
+[INFO] Packaging webapp
+[INFO] Assembling webapp [vivo-installer-vivo] in [/Users/benjamingross/Documents/git/VIVO/installer/webapp/target/vivodev]
+[INFO] Processing war project
+[INFO] Copying webapp webResources [/Users/benjamingross/Documents/git/VIVO/installer/webapp/src/main/webResources] to [/Users/benjamingross/Documents/git/VIVO/installer/webapp/target/vivodev]
+[INFO] Copying webapp resources [/Users/benjamingross/Documents/git/VIVO/installer/webapp/src/main/webapp]
+[INFO] Processing overlay [ id org.vivoweb:vivo-webapp]
+[INFO] Webapp assembled in [2899 msecs]
+[INFO] Building war: /Users/benjamingross/Documents/git/VIVO/installer/webapp/target/vivodev.war
+[INFO]
+[INFO] --- maven-antrun-plugin:1.8:run (remove-webapp) @ vivo-installer-vivo ---
+[INFO] Executing tasks
+
+main:
+   [delete] Deleting directory /usr/local/tomcat/webapps/vivodev
+[INFO] Executed tasks
+[INFO]
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ vivo-installer-vivo ---
+[INFO] Skipping artifact installation
+[INFO]
+[INFO] --- maven-dependency-plugin:2.10:unpack (install) @ vivo-installer-vivo ---
+[INFO] Configured Artifact: org.vivoweb:vivo-installer-vivo:1.11.0-SNAPSHOT:war
+[INFO] Unpacking /Users/benjamingross/Documents/git/VIVO/installer/webapp/target/vivodev.war to /usr/local/tomcat/webapps/vivodev with includes "" and excludes ""
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO]
+[INFO] Vitro .............................................. SUCCESS [  0.513 s]
+[INFO] Vitro Dependencies ................................. SUCCESS [  0.032 s]
+[INFO] Vitro API .......................................... SUCCESS [ 40.067 s]
+[INFO] VIVO ............................................... SUCCESS [  0.031 s]
+[INFO] VIVO API ........................................... SUCCESS [ 11.565 s]
+[INFO] Vitro Web App ...................................... SUCCESS [  2.238 s]
+[INFO] VIVO Web App ....................................... SUCCESS [  4.007 s]
+[INFO] Vitro Home ......................................... SUCCESS [  1.775 s]
+[INFO] VIVO Home .......................................... SUCCESS [  1.657 s]
+[INFO] Vitro Solr App ..................................... SUCCESS [  1.701 s]
+[INFO] Vitro Installer .................................... SUCCESS [  0.027 s]
+[INFO] Vitro Install Home ................................. SUCCESS [  0.002 s]
+[INFO] Vitro Install Solr App ............................. SUCCESS [  0.396 s]
+[INFO] Vitro Install Web App .............................. SUCCESS [  0.018 s]
+[INFO] VIVO Installer ..................................... SUCCESS [  0.106 s]
+[INFO] VIVO Install Home .................................. SUCCESS [  1.906 s]
+[INFO] VIVO Install Solr App .............................. SUCCESS [  2.569 s]
+[INFO] VIVO Install Web App ............................... SUCCESS [  8.136 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 01:17 min
+[INFO] Finished at: 2018-12-07T18:35:08-07:00
+[INFO] Final Memory: 45M/642M
+[INFO] ------------------------------------------------------------------------

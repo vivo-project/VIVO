@@ -4,9 +4,9 @@ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 CONSTRUCT {
      ?coAuthorship ?property1 ?object1 .
-     ?person ?property2 ?object2 .   
+     ?person ?property2 ?object2 .
 } WHERE {
-     PERSON_URI core:relatedBy ?authorship . 
+     PERSON_URI core:relatedBy ?authorship .
      ?authorship a core:Authorship .
      ?authorship core:relates ?publication .
      ?publication a obo:IAO_0000030 .

@@ -8,5 +8,5 @@
 <#if openSocial??>
 	<#if openSocial.visible>
        	<div id="gadgets-detail" class="gadgets-gadget-parent"></div>
-    </#if>	
-</#if>	
+    </#if>
+</#if>

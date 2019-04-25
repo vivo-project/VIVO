@@ -4,7 +4,7 @@
 var issuedCredentialUtils = {
 
     onLoad: function() {
-        this.initObjectReferences();                 
+        this.initObjectReferences();
         this.bindEventListeners();
         $.extend(this, credentials);
 
@@ -15,7 +15,7 @@ var issuedCredentialUtils = {
     },
 
     initObjectReferences: function() {
-    
+
         this.form = $('#personHasIssuedCredential');
         this.yearCredentialed = $('#yearCredentialed-year');
         this.displayedYear = $('#yearCredentialedDisplay');
@@ -23,23 +23,23 @@ var issuedCredentialUtils = {
         this.issuedType = $('#issuedCredentialType');
 
     },
-    
+
     bindEventListeners: function() {
         this.idCache = {};
-        
+
         this.form.submit(function() {
             issuedCredentialUtils.setIssuedCredentialType($(issuedCredentialUtils.typeSelector).find(":selected").text());
             issuedCredentialUtils.setYearCredentialedValue();
-        }); 
-        
+        });
+
     },
-    
+
     setYearCredentialedValue: function() {
         this.yearCredentialed.val(this.displayedYear.val());
     },
-    
+
     setIssuedCredentialType: function(val) {
         this.issuedType.val(credentials[val]);
     }
-       
+
 }

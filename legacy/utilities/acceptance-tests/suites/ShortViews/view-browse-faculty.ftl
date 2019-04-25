@@ -35,6 +35,6 @@
 <#if (details[0].deptName)?? >
     <span class="title"><em>Member of</em> ${details[0].deptName}</span>
 </#if>
-    
+
 </li>
 

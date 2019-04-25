@@ -25,9 +25,9 @@ var	PINK_PURPLE = "#CC00CC";
 var	HOT_PINK = "#FF00B4";
 var MEHENDI_GREEN = "#7A7900";
 
-var colorConstantQueue = [ LIGHT_BLUE, DARK_ORANGE, VIBRANT_GREEN, 
-                           NAVY_BLUE, RED, PINK_PURPLE, 
-                           DARK_TURQUOISE, MEHENDI_GREEN, HOT_PINK, 
+var colorConstantQueue = [ LIGHT_BLUE, DARK_ORANGE, VIBRANT_GREEN,
+                           NAVY_BLUE, RED, PINK_PURPLE,
+                           DARK_TURQUOISE, MEHENDI_GREEN, HOT_PINK,
                            DARK_RED ];
 
 var freeColors;
@@ -36,7 +36,7 @@ var globalDateObject;
 
 var year;
 
-var colors, prevColor, colorToAssign, 
+var colors, prevColor, colorToAssign,
 	colorToRemove, renderedObjects, URIToEntityRecord,
 	setOfLabels, URIToCheckedEntities, STOP_WORDS_FOR_TABLE;
 
@@ -50,18 +50,18 @@ var lastCachedAtDateTimes;
 var FlotOptions;
 
 function initConstants() {
-	
+
 	freeColors = colorConstantQueue.slice();
-	
+
 	globalDateObject = new Date();
-	
+
 	year = {
 			min: globalDateObject.getFullYear() - 9,
 			max: globalDateObject.getFullYear(),
 			globalMin: globalDateObject.getFullYear() - 9,
 			globalMax: globalDateObject.getFullYear()
 	};
-	
+
 	colors = {};
 	prevColor = {};
 	colorToAssign, colorToRemove;
@@ -69,11 +69,11 @@ function initConstants() {
 	URIToEntityRecord = {};
 	setOfLabels = [];
 	URIToCheckedEntities = {};
-	
+
 	STOP_WORDS_FOR_TABLE = ["Person", "Organization", "Agent"];
-	
+
 	lastCachedAtDateTimes = [];
-	
+
 	//options for Flot
 	FlotOptions = {
 			legend : {
@@ -87,9 +87,9 @@ function initConstants() {
 			},
 			xaxis : {
 				/*
-				 * This is done to guarantee no-downward-trend on account of no content added for the 
+				 * This is done to guarantee no-downward-trend on account of no content added for the
 				 * current year.
-				 * */  
+				 * */
 				max : globalDateObject.getFullYear() - 1,
 				tickDecimals : 0,
 				tickSize : 10

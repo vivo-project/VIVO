@@ -22,7 +22,7 @@ public class PersonHasPublicationValidator implements N3ValidatorVTwo {
     private static String MISSING_FIRST_NAME_ERROR = "You must enter a value in the First Name field.";
     private static String MISSING_LAST_NAME_ERROR = "You must enter a value in the Last Name field.";
     private static String MALFORMED_LAST_NAME_ERROR = "The last name field may not contain a comma. Please enter first name in First Name field.";
-    
+
     @Override
     public Map<String, String> validate(EditConfigurationVTwo editConfig,
             MultiValueEditSubmission editSub) {
@@ -30,11 +30,11 @@ public class PersonHasPublicationValidator implements N3ValidatorVTwo {
         Map<String,List<String>> urisFromForm = editSub.getUrisFromForm();
         Map<String,List<Literal>> literalsFromForm = editSub.getLiteralsFromForm();
 
-        Map<String,String> errors = new HashMap<String,String>();   
-        
-        // The Editor field is optional for all publication subclasses. Validation is only necessary if the user only enters a 
+        Map<String,String> errors = new HashMap<String,String>();
+
+        // The Editor field is optional for all publication subclasses. Validation is only necessary if the user only enters a
         // last name or only enters a first name
-        
+
         //Expecting only one first name in this case
         //To Do: update logic if multiple first names considered
         List<Literal> firstNameList = literalsFromForm.get("firstName");
@@ -42,8 +42,8 @@ public class PersonHasPublicationValidator implements N3ValidatorVTwo {
         if(firstNameList != null && firstNameList.size() > 0) {
     	    firstName = firstNameList.get(0);
         }
-        if ( firstName != null && 
-    		    firstName.getLexicalForm() != null && 
+        if ( firstName != null &&
+    		    firstName.getLexicalForm() != null &&
     		    "".equals(firstName.getLexicalForm()) )
                 firstName = null;
 
@@ -67,22 +67,22 @@ public class PersonHasPublicationValidator implements N3ValidatorVTwo {
         else if ( firstName == null && lastName != null) {
             errors.put("firstName", MISSING_FIRST_NAME_ERROR);
         }
-        else if (lastNameValue.contains(",")) {            
+        else if (lastNameValue.contains(",")) {
             errors.put("lastName", MALFORMED_LAST_NAME_ERROR);
         }
         else {
             return null;
-        }               
-        
+        }
+
         return errors.size() != 0 ? errors : null;
     }
-    
+
     private Object getFirstElement(List checkList) {
     	if(checkList == null || checkList.size() == 0) {
     		return null;
     	}
     	return checkList.get(0);
     }
-    
+
 
 }

@@ -3,11 +3,11 @@
 var manageHideShowStatus = {
 
     /* *** Initial page setup *** */
-   
+
     onLoad: function() {
-    
-            this.mixIn();               
-            this.initPage();       
+
+            this.mixIn();
+            this.initPage();
         },
 
     mixIn: function() {
@@ -21,9 +21,9 @@ var manageHideShowStatus = {
     initPage: function() {
 
         this.initItemData();
-       
+
         this.bindEventListeners();
-                       
+
     },
 
     // On page load, associate data with each list item. Then we don't
@@ -31,21 +31,21 @@ var manageHideShowStatus = {
     // items.
     initItemData: function() {
         $('.itemCheckbox').each(function(index) {
-            $(this).data(itemData[index]);  
+            $(this).data(itemData[index]);
         });
     },
-    
+
     bindEventListeners: function() {
 
         $('.itemCheckbox').click(function() {
             manageHideShowStatus.processItem(this);
             //return false;
         });
-               
+
     },
-                      
+
     processItem: function(item) {
-        
+
         var add = "";
         var retract = "";
         var n3String = "<" + $(item).data('relatedUri') + "> <http://vivoweb.org/ontology/core#hideFromDisplay> \"true\" ." ;
@@ -55,11 +55,11 @@ var manageHideShowStatus = {
         }
         else {
             retract = n3String;
-        } 
-        
+        }
+
         $.ajax({
             url: manageHideShowStatus.processingUrl,
-            type: 'POST', 
+            type: 'POST',
             data: {
                 additions: add,
                 retractions: retract
@@ -67,20 +67,20 @@ var manageHideShowStatus = {
             dataType: 'json',
             context: item, // context for callback
             complete: function(request, status) {
-            
+
                 if (status === 'success') {
-                    window.status = manageHideShowStatus.itemSuccessfullyExcluded; 
+                    window.status = manageHideShowStatus.itemSuccessfullyExcluded;
 
                 } else {
                     alert(manageHideShowStatus.errorExcludingItem);
                     $(item).prop('checked', null);
                 }
             }
-        });        
+        });
     },
 
 };
 
-$(document).ready(function() {   
+$(document).ready(function() {
     manageHideShowStatus.onLoad();
-}); 
+});

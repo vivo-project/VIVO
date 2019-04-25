@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in LICENSE$ */
 /**
- * Manage async download contents and make sure don't have the same 
+ * Manage async download contents and make sure don't have the same
  * download request in the same time. Provide ability to abort download.
  */
 

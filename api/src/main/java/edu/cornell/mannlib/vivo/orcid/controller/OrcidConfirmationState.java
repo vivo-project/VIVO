@@ -34,8 +34,8 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 class OrcidConfirmationState {
 	private static final Log log = LogFactory
 			.getLog(OrcidConfirmationState.class);
-	
-	
+
+
 	// ----------------------------------------------------------------------
 	// The factory
 	// ----------------------------------------------------------------------

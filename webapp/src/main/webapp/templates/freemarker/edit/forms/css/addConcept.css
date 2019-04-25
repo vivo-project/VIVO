@@ -24,14 +24,14 @@
 .emptyColumn {
 	width:67px;
 	height:18px;
-	background: url("../images/conceptSpacer.png") no-repeat left center;  
+	background: url("../images/conceptSpacer.png") no-repeat left center;
 }
 
 /*For adding the checkmark under the best match column*/
 .bestMatchFlag {
 	width:67px;
 	height:18px;
-	background: url("../images/conceptCheckMark.png") no-repeat left center;  
+	background: url("../images/conceptCheckMark.png") no-repeat left center;
 }
 
 form#addConceptForm {
@@ -50,7 +50,7 @@ form#addConceptForm span#createOwnOne{
 	float:left;
 }
 
-.existingConcept .column, 
+.existingConcept .column,
 .conceptHeadings .column,
 .concepts .column {
 	float:left;
@@ -59,9 +59,9 @@ form#addConceptForm span#createOwnOne{
 }
 /*label and semantic type if it exists*/
 .conceptLabel,
-.existingConcept .conceptLabelInfo, 
+.existingConcept .conceptLabelInfo,
 .conceptHeadings .conceptLabelInfo,
-existingConcept .conceptVocabSource, 
+existingConcept .conceptVocabSource,
 .conceptHeadings .conceptVocabSource {
 	width:220px;
 }

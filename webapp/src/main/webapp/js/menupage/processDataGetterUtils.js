@@ -7,8 +7,8 @@
 //The internal class specific processor class is in VIVO, while all other javascript files are in Vitro
 
 var processDataGetterUtils = {
-		dataGetterProcessorMap:{"browseClassGroup": processClassGroupDataGetterContent, 
-								"sparqlQuery": processSparqlDataGetterContent, 
+		dataGetterProcessorMap:{"browseClassGroup": processClassGroupDataGetterContent,
+								"sparqlQuery": processSparqlDataGetterContent,
 								"fixedHtml":processFixedHTMLDataGetterContent,
 								"internalClass":processInternalClassDataGetterContent,
 								"searchIndividuals":processSearchDataGetterContent},
@@ -25,8 +25,8 @@ var processDataGetterUtils = {
 				if( isInternalSelected.length > 0 || allClassesSelected.length == 0) {
 					contentType = "internalClass";
 				}
-			} 
-			
+			}
+
 			return contentType;
 	    },
 	    isRelatedToBrowseClassGroup:function(contentType) {
@@ -35,7 +35,7 @@ var processDataGetterUtils = {
 	    getContentTypeForCloning:function(contentType) {
 	    	if(contentType == "browseClassGroup" || contentType == "internalClass") {
 	    		return "browseClassGroup";
-	    	} 
+	    	}
 	    	return contentType;
 	    }
 };

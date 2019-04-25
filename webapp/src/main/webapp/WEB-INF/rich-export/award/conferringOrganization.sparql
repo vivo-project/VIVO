@@ -6,7 +6,7 @@ CONSTRUCT {
 } WHERE {
      PERSON_URI core:relatedBy ?awardReceipt .
      ?awardReceipt a core:AwardReceipt .
-     ?awardReceipt core:assignedBy ?organization . 
+     ?awardReceipt core:assignedBy ?organization .
      ?organization a foaf:Organization .
      ?organization ?property ?object .
 }

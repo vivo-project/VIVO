@@ -68,12 +68,12 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <#assign startPageValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "startPage") />
 <#assign endPageValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "endPage") />
 
-<#if editMode == "edit">        
-        <#assign titleVerb="${i18n().edit_capitalized}">        
+<#if editMode == "edit">
+        <#assign titleVerb="${i18n().edit_capitalized}">
         <#assign submitButtonText="${i18n().save_changes}">
         <#assign disabledVal="disabled">
 <#else>
-        <#assign titleVerb="${i18n().create_capitalized}">        
+        <#assign titleVerb="${i18n().create_capitalized}">
         <#assign submitButtonText="${i18n().create_entry}">
         <#assign disabledVal=""/>
 </#if>
@@ -107,7 +107,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <#--below shows examples of both printing out all error messages and checking the error message for a specific field-->
         <#if lvf.submissionErrorExists(editSubmission, "title")>
  	        ${i18n().select_existing_pub_or_enter_new}<br />
-        <#else> 
+        <#else>
             <#list submissionErrors?keys as errorFieldName>
         	    ${submissionErrors[errorFieldName]} <br/>
             </#list>
@@ -121,14 +121,14 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <#assign yearHint     = "<span class='hint'>(${i18n().year_hint_format})</span>" />
 
 <#if editMode = "error">
- <div>${i18n().unable_to_handle_publication_editing}</div>      
+ <div>${i18n().unable_to_handle_publication_editing}</div>
 <#else>
 
-<section id="addPublicationToPerson" role="region">        
-    
+<section id="addPublicationToPerson" role="region">
+
 <@lvf.unsupportedBrowser urls.base/>
 <form id="addpublicationToPerson" class="customForm noIE67" action="${submitUrl}"  role="add/edit publication">
-        
+
         <#--TODO: Check if possible to have existing publication options here in order to select-->
     <p class="inline"><label for="typeSelector">${i18n().publication_type}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
         <select id="typeSelector" name="pubType" acGroupName="publication" >
@@ -147,7 +147,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
             <p class="inline">
                 <label>${i18n().selected_publication}:</label>
                 <span class="acSelectionInfo"></span>
-                <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+                <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
                 <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
             </p>
             <input class="acUriReceiver" type="hidden" id="pubUri" name="pubUri" value="${pubUriValue}"  ${flagClearLabelForExisting}="true" />
@@ -164,7 +164,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <p class="inline">
             <label>${i18n().selected_journal}:</label>
             <span class="acSelectionInfo"></span>
-            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
             <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="collectionUri" name="collectionUri" value="${collectionUriValue}" ${flagClearLabelForExisting}="true" />
@@ -175,13 +175,13 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <label for="book">${i18n().published_in}</label>
         <input class="acSelector" size="50"  type="text" id="book" name="book" acGroupName="book"  value="${bookValue}" />
         <input class="display" type="hidden"  id="bookDisplay" name="bookDisplay" acGroupName="book"  value="${bookDisplayValue}" />
-    </p> 
+    </p>
 
     <div class="acSelection" acGroupName="book" >
         <p class="inline">
             <label>${i18n().selected_book}:</label>
             <span class="acSelectionInfo"></span>
-            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
             <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="bookUri" name="bookUri" value="${bookUriValue}" ${flagClearLabelForExisting}="true" />
@@ -198,12 +198,12 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <p class="inline">
             <label>${i18n().selected_event}:</label>
             <span class="acSelectionInfo"></span>
-            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
             <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="conferenceUri" name="conferenceUri" value="${conferenceUriValue}" ${flagClearLabelForExisting}="true" />
     </div>
-        
+
     <#-- Proceedings of -->
     <p>
         <label for="event">${i18n().proceedings_of}</label>
@@ -215,7 +215,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <p class="inline">
             <label>${i18n().selected_organization}:</label>
             <span class="acSelectionInfo"></span>
-            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
             <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="eventUri" name="eventUri" value="${eventUriValue}" ${flagClearLabelForExisting}="true" />
@@ -237,7 +237,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <p class="inline">
             <label>${i18n().selected_editor}:</label>
             <span class="acSelectionInfo"></span>
-            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
             <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="editorUri" name="editorUri" value="${editorUriValue}" ${flagClearLabelForExisting}="true" />
@@ -254,18 +254,18 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <p class="inline">
             <label>${i18n().selected_publisher}:</label>
             <span class="acSelectionInfo"></span>
-            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
             <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="publisherUri" name="publisherUri" value="${publisherUriValue}" ${flagClearLabelForExisting}="true" />
     </div>
-    
+
     <#-- Place of Publication -->
     <p>
         <label for="locale">${i18n().place_of_publication}</label>
         <input  size="30"  type="text" id="locale" name="locale" acGroupName="locale"  value="${localeValue}" />
     </p>
-    
+
     <#-- Volume, Number and Issue -->
     <p class="inline">
         <label for="volume" id="volLabel">${i18n().volume_capitalized}</label>
@@ -330,11 +330,11 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         selectedString: '${i18n().selected}'
     };
     </script>
-    
+
     <script type="text/javascript">
      $(document).ready(function(){
         publicationToPersonUtils.onLoad('${urls.base}/individual?uri=', '${blankSentinel}');
-    }); 
+    });
     </script>
 </section>
 </#if>
@@ -346,6 +346,6 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/sm
 
  ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',             
-              '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/publicationToPersonUtils.js"></script>',             
+              '<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',
+              '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/publicationToPersonUtils.js"></script>',
               '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/customFormWithAutocomplete.js"></script>')}

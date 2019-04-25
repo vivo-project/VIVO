@@ -1,20 +1,20 @@
 /* $This file is distributed under the terms of the license in LICENSE$ */
 
 $(document).ready(function(){
-    
+
     var globalMapBuilt = false;
     var countryMapBuilt = false;
     var localMapBuilt = false;
     var legendIsVisible = false;
     var researchAreas = { "type": "FeatureCollection", "features": []};
     var geoResearcherCount = "0";
-    
+
     $.extend(this, urlsBase);
     $.extend(this, i18nStrings);
-    
+
     getGeoFocusResearcherCount();
-    
-    
+
+
     $('a#globalLink').click(function() {
         buildGlobalMap();
         $(this).addClass("selected");
@@ -35,7 +35,7 @@ $(document).ready(function(){
         $('a#countryLink').removeClass("selected");
         $('a#globalLink').removeClass("selected");
     });
-    
+
     function getLatLong(localName,popup) {
         var lat = [];
         jQuery.map(latLongJson, function (json) {
@@ -71,7 +71,7 @@ $(document).ready(function(){
                 if ( json.name == popup) {
                     mt = json.data["mapType"];
                 }
-            });            
+            });
         }
         return(mt);
     }
@@ -83,7 +83,7 @@ $(document).ready(function(){
                 gc = json.data["geoClass"];
             }
         });
-        if ( gc.length == 0 ) { 
+        if ( gc.length == 0 ) {
             jQuery.map(latLongJson, function (json) {
                 if ( json.name == popup) {
                     gc = json.data["geoClass"];
@@ -96,7 +96,7 @@ $(document).ready(function(){
 	function onEachFeature(feature, layer) {
 		var popupContent = "";
         var uri = "";
-        
+
 		if (feature.properties && feature.properties.popupContent) {
 			popupContent += feature.properties.popupContent;
 		}
@@ -156,7 +156,7 @@ $(document).ready(function(){
 			geoClass = feature.properties.geoClass;
 		}
 		if ( geoClass == "region") {
-		    fillColor = "#abf7f8"; 
+		    fillColor = "#abf7f8";
 		}
 		else {
 		    fillColor = "#fdf9cd"
@@ -188,16 +188,16 @@ $(document).ready(function(){
         if ( !theLatLng.equals([0,0]) && mt == "local" ) {
 		    return true;
 		}
-		return false;  
+		return false;
 	}
 
     function buildGlobalMap() {
         $('div#mapGlobal').show();
         $('div#mapCountry').hide();
         $('div#mapLocal').hide();
-        
+
         if ( !globalMapBuilt ) {
-        
+
             var mapGlobal = L.map('mapGlobal').setView([25.25, 23.20], 2);
             L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile\/{z}\/{y}\/{x}.png', {
     		    maxZoom: 12,
@@ -208,49 +208,49 @@ $(document).ready(function(){
             }).addTo(mapGlobal);
 
 	        L.geoJson(researchAreas, {
-    		
+
 		        filter: checkGlobalCoordinates,
 		        onEachFeature: onEachFeature,
 
 			    pointToLayer: function(feature, latlng) {
 		            return L.circleMarker(latlng, {
         		        radius: getMarkerRadius(feature),
-        		        fillColor: getMarkerFillColor(feature), 
+        		        fillColor: getMarkerFillColor(feature),
         		        color: "none",
         		        weight: 1,
         		        opacity: 0.8,
         		        fillOpacity: 0.8
         	        });
-        	    }       		
+        	    }
             }).addTo(mapGlobal);
 
     	    L.geoJson(researchAreas, {
 
-		        filter: checkGlobalCoordinates, 
+		        filter: checkGlobalCoordinates,
     	        onEachFeature: onEachFeature,
 
 		        pointToLayer: function(feature, latlng) {
 		            return L.marker(latlng, {
 				        icon: getDivIcon(feature)
 			        });
-			    }	
+			    }
             }).addTo(mapGlobal);
-            
+
             globalMapBuilt = true;
         }
-    
+
         getResearcherCount("global");
         appendLegendToLeafletContainer();
-    } 
+    }
 
     function buildCountryMap() {
         $('div#mapGlobal').hide();
         $('div#mapLocal').hide();
         $('div#mapCountry').show();
-        
+
         if ( !countryMapBuilt ) {
 
-            // CHANGE THE setView COORDINATES SO THAT THE COUNTRY YOU WANT TO 
+            // CHANGE THE setView COORDINATES SO THAT THE COUNTRY YOU WANT TO
             // DISPLAY IS CENTERED CORRECTLY.  THE COORDINATES BELOW CENTERS THE MAP ON THE U.S.
             var mapCountry = L.map('mapCountry').setView([46.0, -97.0], 3);
             L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile\/{z}\/{y}\/{x}.png', {
@@ -270,41 +270,41 @@ $(document).ready(function(){
     			pointToLayer: function(feature, latlng) {
     		        return L.circleMarker(latlng, {
             		    radius: getMarkerRadius(feature),
-            		    fillColor: "#fdf9cd", //fdf38a", 
+            		    fillColor: "#fdf9cd", //fdf38a",
             		    color: "none",
             		    weight: 1,
             		    opacity: 0.8,
             		    fillOpacity: 0.8
             	    });
-            	}       		
+            	}
             }).addTo(mapCountry);
 
         	L.geoJson(researchAreas, {
 
-    		    filter: checkCountryCoordinates, 
+    		    filter: checkCountryCoordinates,
         	    onEachFeature: onEachFeature,
 
     		    pointToLayer: function(feature, latlng) {
     		        return L.marker(latlng, {
     				    icon: getDivIcon(feature)
     			    });
-    			}	
+    			}
             }).addTo(mapCountry);
-            
+
             countryMapBuilt = true;
         }
-            
+
         getResearcherCount("country");
-    } 
+    }
 
     function buildLocalMap() {
         $('div#mapGlobal').hide();
         $('div#mapCountry').hide();
         $('div#mapLocal').show();
-        
+
         if ( !localMapBuilt ) {
-            
-            // CHANGE THE setView COORDINATES SO THAT THE LOCAL AREA (E.G. A STATE OR PROVINCE) YOU WANT TO 
+
+            // CHANGE THE setView COORDINATES SO THAT THE LOCAL AREA (E.G. A STATE OR PROVINCE) YOU WANT TO
             // DISPLAY IS CENTERED CORRECTLY.  THE COORDINATES BELOW CENTERS THE MAP ON NEW YORK STATE.
             var mapLocal = L.map('mapLocal').setView([42.83, -75.50], 7);
             L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile\/{z}\/{y}\/{x}.png', {
@@ -330,27 +330,27 @@ $(document).ready(function(){
     			pointToLayer: function(feature, latlng) {
     		        return L.circleMarker(latlng, {
             		    radius: getMarkerRadius(feature) + 3,
-            		    fillColor: "#fdf9cd", 
+            		    fillColor: "#fdf9cd",
             		    color: "none",
             		    weight: 1,
             		    opacity: 0.8,
             		    fillOpacity: 0.8
             	    });
-            	}       		
+            	}
             }).addTo(mapLocal);
 
         	L.geoJson(researchAreas, {
 
-    		    filter: checkLocalCoordinates, 
+    		    filter: checkLocalCoordinates,
         	    onEachFeature: onEachFeature,
 
     		    pointToLayer: function(feature, latlng) {
     		        return L.marker(latlng, {
     				    icon: getDivIcon(feature)
     			    });
-    			}	
+    			}
             }).addTo(mapLocal);
-                        
+
             localMapBuilt = true;
         }
 
@@ -389,7 +389,7 @@ $(document).ready(function(){
                     $('div#timeIndicatorGeo').hide();
                 }
             }
-       });        
+       });
     }
 
     function getGeoFocusResearcherCount() {
@@ -400,7 +400,7 @@ $(document).ready(function(){
                 action: "getGeoFocusResearcherCount",
             },
             complete: function(xhr, status) {
-                
+
                 var results = $.parseJSON(xhr.responseText);
                 // there will only ever be one key/value pair
                 if ( results != null ) {
@@ -408,11 +408,11 @@ $(document).ready(function(){
                 }
                 getGeoJsonForMaps();
             }
-       });        
+       });
     }
 
     function getResearcherCount(area) {
-        
+
         var localResearcherCount = 0;
         var areaCount = 0;
         var displayCount = "";
@@ -430,14 +430,14 @@ $(document).ready(function(){
         $.each(researchAreas.features, function() {
             if ( this.properties.mapType == area ) {
                 localResearcherCount = localResearcherCount + this.properties.html ;
-                areaCount = areaCount + 1; 
+                areaCount = areaCount + 1;
             }
         });
 
         if ( areaCount == 1 && text == " states.") {
             text = " " + i18nStrings.stateString;
         }
-        
+
         if ( area == "global" ) {
             if ( geoResearcherCount == 1 ) {
                 researcherText = " " + i18nStrings.researcherString + " " + i18nStrings.inString;
@@ -445,7 +445,7 @@ $(document).ready(function(){
             else {
                 researcherText = " " + i18nStrings.researchersString + " " + i18nStrings.inString;
             }
-            
+
             displayCount = geoResearcherCount;
         }
         else {
@@ -455,27 +455,27 @@ $(document).ready(function(){
             else {
                 researcherText = " " + i18nStrings.researchersString + " " + i18nStrings.inString;
             }
-            
+
             displayCount = localResearcherCount;
         }
 
-        $('div#researcherTotal').html("<font style='font-size:1.05em;color:#167093'>" 
-                                        + displayCount 
-                                        + "</font> " + researcherText + " <font style='font-size:1.05em;color:#167093'>" 
+        $('div#researcherTotal').html("<font style='font-size:1.05em;color:#167093'>"
+                                        + displayCount
+                                        + "</font> " + researcherText + " <font style='font-size:1.05em;color:#167093'>"
                                         + areaCount + "</font>" + text);
     }
     function appendLegendToLeafletContainer() {
         if ( !this.legendIsVisible ) {
             var htmlString = "<div class='leaflet-bottom leaflet-left' style='padding:0 0 8px 12px'><ul><li>"
-                        + "<img alt='" + i18nStrings.regionsString + "' src='" + urlsBase 
-                        + "/images/map_legend_countries.png' style='margin-right:5px'><font style='color:#555'>" 
-                        + i18nStrings.countriesString + "</font></li><li><img alt='" + i18nStrings.regionsString 
-                        + "' src='" + urlsBase 
-                        + "/images/map_legend_regions.png' style='margin-right:5px'><font style='color:#555'>" 
+                        + "<img alt='" + i18nStrings.regionsString + "' src='" + urlsBase
+                        + "/images/map_legend_countries.png' style='margin-right:5px'><font style='color:#555'>"
+                        + i18nStrings.countriesString + "</font></li><li><img alt='" + i18nStrings.regionsString
+                        + "' src='" + urlsBase
+                        + "/images/map_legend_regions.png' style='margin-right:5px'><font style='color:#555'>"
                         + i18nStrings.regionsString + "</font></li></ul></div>";
             $('div.leaflet-control-container').append(htmlString);
             this.legendIsVisible = true;
         }
     }
-    
-}); 
+
+});

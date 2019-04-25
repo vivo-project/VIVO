@@ -22,14 +22,14 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaSearchQueryOptions;
 
 /**
- * This generator is for the case where a new concept is being added for an object property other than research/subject areas where the 
+ * This generator is for the case where a new concept is being added for an object property other than research/subject areas where the
  * default object property form generator would work instead of the generator for managing concepts.
  * In this case, we don't want the dropdown list for types for "add a new item of this type" to show concept subclasses, so we are overriding
  * the fields to just include the Concept class.
  */
 public class AddConceptThroughObjectPropertyGenerator extends DefaultObjectPropertyFormGenerator implements EditConfigurationGenerator {
 
-	private Log log = LogFactory.getLog(AddConceptThroughObjectPropertyGenerator.class);	
+	private Log log = LogFactory.getLog(AddConceptThroughObjectPropertyGenerator.class);
 
 	@Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
@@ -44,7 +44,7 @@ public class AddConceptThroughObjectPropertyGenerator extends DefaultObjectPrope
 		}
 		return editConfig;
 	}
-	
+
 	private HashMap<String, String> getCreateNewTypesOptions(VitroRequest vreq) {
 		HashMap<String, String> options = new HashMap<String, String>();
 		List<VClass> rangeTypes = getRangeTypes(vreq);
@@ -53,7 +53,7 @@ public class AddConceptThroughObjectPropertyGenerator extends DefaultObjectPrope
 		}
 		return options;
 	}
-	
+
     //We will override range types as well so that autocomplete and other fields dependent on range
     //will only consider the main concept type to be the range type
     @Override
@@ -73,44 +73,44 @@ public class AddConceptThroughObjectPropertyGenerator extends DefaultObjectPrope
    		if (rangeUri != null) {
    		    VClass rangeVClass = ctxDaoFact.getVClassDao().getVClassByURI(rangeUri);
    		    if (!rangeVClass.isUnion()) {
-   		        types.add(rangeVClass);    
+   		        types.add(rangeVClass);
    		    } else {
 				types.addAll(rangeVClass.getUnionComponents());
    		    }
 	        return types;
    		} else {
-   			//This should never happen 
+   			//This should never happen
    			log.warn("Range not found for this property so employing SKOS concept class");
    			String vclassURI = "http://www.w3.org/2004/02/skos/core#Concept";
    			VClass rangeVClass = ctxDaoFact.getVClassDao().getVClassByURI(vclassURI);
    			types.add(rangeVClass);
    		}
-   		
+
         return types;
-	}	
-    
+	}
+
     //Should override the method in default object property
     private String getTemplate(
 			VitroRequest vreq) {
-    	
+
     	String acObjectPropertyTemplate = "addConceptThroughObjectPropertyAutoComplete.ftl";
     	String objectPropertyTemplate = "addConceptThroughObjectPropertyForm.ftl";
     	String template = objectPropertyTemplate;
 		if( doAutoComplete )
 			template = acObjectPropertyTemplate;
 		return template;
-		
+
 	}
-    
+
     @Override
     protected void setFields(EditConfigurationVTwo editConfiguration, VitroRequest vreq, String predicateUri, List<VClass> rangeTypes) throws Exception {
 		FieldVTwo field = new FieldVTwo();
-    	field.setName("objectVar");    	
-    	
+    	field.setName("objectVar");
+
     	List<String> validators = new ArrayList<String>();
     	validators.add("nonempty");
     	field.setValidators(validators);
-    	    	
+
     	if( ! doAutoComplete ){
     		List<String> types = new ArrayList<String>();
     		for(VClass v: rangeTypes) {
@@ -125,11 +125,11 @@ public class AddConceptThroughObjectPropertyGenerator extends DefaultObjectPrope
     	}else{
     		field.setOptions(null);
     	}
-    	
+
     	Map<String, FieldVTwo> fields = new HashMap<String, FieldVTwo>();
-    	fields.put(field.getName(), field);    	
-    	    	    	
+    	fields.put(field.getName(), field);
+
     	editConfiguration.setFields(fields);
-    }       
+    }
 
 }

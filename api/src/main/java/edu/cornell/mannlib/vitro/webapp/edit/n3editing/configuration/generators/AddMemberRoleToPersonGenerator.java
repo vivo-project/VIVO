@@ -7,19 +7,19 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ConstantField
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
 
 public class AddMemberRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
-	
+
 	private static String template = "addMemberRoleToPerson.ftl";
 	private static String VCLASS_URI = "http://xmlns.com/foaf/0.1/Organization";
 	@Override
 	String getTemplate() {
 		return template;
-	}   
-	
+	}
+
 	@Override
-	String getRoleType() {	
+	String getRoleType() {
 		return "http://vivoweb.org/ontology/core#MemberRole";
 	}
-	
+
     @Override
     FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
                     return new ConstantFieldOptions(
@@ -58,11 +58,11 @@ public class AddMemberRoleToPersonGenerator extends AddRoleToPersonTwoStageGener
             "http://purl.obolibrary.org/obo/ERO_0000565","Technology Transfer Office",
             "http://vivoweb.org/ontology/core#University","University");
     }
-	
-	@Override
-	boolean isShowRoleLabelField(){return true;}    
 
-   /* 
+	@Override
+	boolean isShowRoleLabelField(){return true;}
+
+   /*
     * Use the methods below to change the date/time precision in the
     * custom form associated with this generator. When not used, the
     * precision will be YEAR. The other precisons are MONTH, DAY, HOUR,
@@ -78,5 +78,5 @@ public class AddMemberRoleToPersonGenerator extends AddRoleToPersonTwoStageGener
         String precision = VitroVocabulary.Precision.DAY.uri();
 	    return precision;
     }
-*/    
+*/
 }

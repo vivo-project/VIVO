@@ -2,7 +2,7 @@
 
 <#-- Overview on individual profile page -->
 
-<#assign overview = propertyGroups.pullProperty("${core}overview")!> 
+<#assign overview = propertyGroups.pullProperty("${core}overview")!>
 <#if overview?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
     <@p.addLinkWithLabel overview editable />
     <#list overview.statements as statement>

@@ -5,9 +5,9 @@ var disciplineOrSubdisciplineDataTableFilter = function(oSettings, aData, iDataI
 
 	/*
 	 * We are not showing the first column which holds the info on whether that row contains info on
-	 * discipline OR subdiscipline. 
+	 * discipline OR subdiscipline.
 	 * */
-	
+
 	if (rawData[0] === ACTIVE_DISCIPLINE_SUBDISCIPLINE_FILTER) {
         return true;
     } else if (aData[0] === ACTIVE_DISCIPLINE_SUBDISCIPLINE_FILTER) {
@@ -15,10 +15,10 @@ var disciplineOrSubdisciplineDataTableFilter = function(oSettings, aData, iDataI
     } else {
 		return false;
 	}
-}	
-	
+}
+
 $.fn.dataTableExt.oPagination.gmail_style = {
-    		
+
         "fnInit": function (oSettings, nPaging, fnCallbackDraw) {
             //var nInfo = document.createElement( 'div' );
             var nFirst = document.createElement('span');
@@ -26,13 +26,13 @@ $.fn.dataTableExt.oPagination.gmail_style = {
             var nNext = document.createElement('span');
             var nLast = document.createElement('span');
 
-            nFirst.innerHTML = "<span class='small-arrows'>&laquo;</span> <span class='paginate-nav-text'>" 
+            nFirst.innerHTML = "<span class='small-arrows'>&laquo;</span> <span class='paginate-nav-text'>"
                                 + i18nStrings.firstString + "</span>";
-            nPrevious.innerHTML = "<span class='small-arrows'>&lsaquo;</span> <span class='paginate-nav-text'>" 
+            nPrevious.innerHTML = "<span class='small-arrows'>&lsaquo;</span> <span class='paginate-nav-text'>"
                                 + i18nStrings.previousString + "</span>";
-            nNext.innerHTML = "<span class='paginate-nav-text'>" 
+            nNext.innerHTML = "<span class='paginate-nav-text'>"
                                 + i18nStrings.nextString + "</span><span class='small-arrows'>&rsaquo;</span>";
-            nLast.innerHTML = "<span class='paginate-nav-text'>" 
+            nLast.innerHTML = "<span class='paginate-nav-text'>"
                                 + i18nStrings.lastString + "</span><span class='small-arrows'>&raquo;</span>";
 
             var oClasses = oSettings.oClasses;
@@ -107,7 +107,7 @@ $.fn.dataTableExt.oPagination.gmail_style = {
             var iCurrentPage = Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength) + 1;
             var iStartButton, iEndButton, i, iLen;
             var oClasses = oSettings.oClasses;
-            
+
             /* Pages calculation */
             if (iPages < iPageCount) {
                 iStartButton = 1;
@@ -166,11 +166,11 @@ $.fn.dataTableExt.oPagination.gmail_style = {
                     anStatic[3].className += " " + oClasses.sPageButton;
                 }
             }
-            
+
             if (typeof GMAIL_STYLE_PAGINATION_CONTAINER_CLASS === 'undefined') {
             	GMAIL_STYLE_PAGINATION_CONTAINER_CLASS = 'paginatedtabs';
             }
-            
+
             if (iPages <= 1) {
             	$("." + GMAIL_STYLE_PAGINATION_CONTAINER_CLASS).hide();
             } else {

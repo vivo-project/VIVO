@@ -19,14 +19,14 @@ import edu.cornell.mannlib.orcidclient.context.OrcidClientContext;
 
 /**
  * Handle the callbacks during the OAuth dance.
- * 
+ *
  * This is not like other handlers. It is created and invoked from doGet(), not
  * from processRequest().
  */
 public class OrcidCallbackHandler {
 	private static final Log log = LogFactory
 			.getLog(OrcidCallbackHandler.class);
-	
+
 	private final HttpServletRequest req;
 	private final HttpServletResponse resp;
 

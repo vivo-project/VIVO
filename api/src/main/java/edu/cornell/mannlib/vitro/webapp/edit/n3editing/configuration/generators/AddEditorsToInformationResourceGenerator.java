@@ -35,9 +35,9 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.
 
 /**
  * This is a slightly unusual generator that is used by Manage Editors on
- * information resources. 
+ * information resources.
  *
- * It is intended to always be an add, and never an update. 
+ * It is intended to always be an add, and never an update.
  */
 public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator implements EditConfigurationGenerator {
     public static Log log = LogFactory.getLog(AddEditorsToInformationResourceGenerator.class);
@@ -45,7 +45,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
             HttpSession session) {
-        EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();    	    	
+        EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();
         initBasics(editConfiguration, vreq);
         initPropertyParameters(vreq, session, editConfiguration);
 
@@ -53,21 +53,21 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
         setUrlToReturnTo(editConfiguration, vreq);
 
         //set variable names
-        editConfiguration.setVarNameForSubject("infoResource");               
-        editConfiguration.setVarNameForPredicate("predicate");      
-        editConfiguration.setVarNameForObject("editorshipUri");                          
+        editConfiguration.setVarNameForSubject("infoResource");
+        editConfiguration.setVarNameForPredicate("predicate");
+        editConfiguration.setVarNameForObject("editorshipUri");
 
         // Required N3
-        editConfiguration.setN3Required( list( getN3NewEditorship() ) );    
+        editConfiguration.setN3Required( list( getN3NewEditorship() ) );
 
-        // Optional N3 
-        editConfiguration.setN3Optional( generateN3Optional());	
+        // Optional N3
+        editConfiguration.setN3Optional( generateN3Optional());
 
         editConfiguration.addNewResource("editorshipUri", DEFAULT_NS_TOKEN);
         editConfiguration.addNewResource("newPerson", DEFAULT_NS_TOKEN);
         editConfiguration.addNewResource("vcardPerson", DEFAULT_NS_TOKEN);
         editConfiguration.addNewResource("vcardName", DEFAULT_NS_TOKEN);
-        
+
         //In scope
         setUrisAndLiteralsInScope(editConfiguration, vreq);
 
@@ -87,130 +87,130 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 
         //Adding additional data, specifically edit mode
         addFormSpecificData(editConfiguration, vreq);
-        
+
         editConfiguration.addValidator(new AntiXssValidation());
-        
-        //NOITCE this generator does not run prepare() since it 
+
+        //NOITCE this generator does not run prepare() since it
         //is never an update and has no SPARQL for existing
-        
+
         return editConfiguration;
     }
-		
+
 	private void setUrlToReturnTo(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
-		editConfiguration.setUrlPatternToReturnTo(EditConfigurationUtils.getFormUrlWithoutContext(vreq));		
+		editConfiguration.setUrlPatternToReturnTo(EditConfigurationUtils.getFormUrlWithoutContext(vreq));
 	}
-	
+
 	/***N3 strings both required and optional***/
-	
+
 	public String getN3PrefixString() {
-		return "@prefix core: <" + vivoCore + "> .\n" + 
+		return "@prefix core: <" + vivoCore + "> .\n" +
 		 "@prefix foaf: <" + foaf + "> .  \n"   ;
 	}
-	
+
 	private String getN3NewEditorship() {
-		return getN3PrefixString() + 
-		"?editorshipUri a core:Editorship ;\n" + 
-        "  core:relates ?infoResource .\n" + 
+		return getN3PrefixString() +
+		"?editorshipUri a core:Editorship ;\n" +
+        "  core:relates ?infoResource .\n" +
         "?infoResource core:relatedBy ?editorshipUri .";
 	}
-	
+
 	private String getN3EditorshipRank() {
-		return getN3PrefixString() +   
+		return getN3PrefixString() +
         "?editorshipUri core:editorRank ?rank .";
 	}
-	
+
 	//first name, middle name, last name, and new perseon for new editor being created, and n3 for existing person
 	//if existing person selected as editor
 	public List<String> generateN3Optional() {
 		return list(
 		        getN3NewPersonFirstName() ,
                 getN3NewPersonMiddleName(),
-                getN3NewPersonLastName(),                
+                getN3NewPersonLastName(),
                 getN3NewPerson(),
                 getN3EditorshipRank(),
                 getN3ForExistingPerson());
 	}
-	
-	
+
+
 	private String getN3NewPersonFirstName() {
-		return getN3PrefixString() + 
+		return getN3PrefixString() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
             "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
-            "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+            "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
             "?vcardPerson vcard:hasName  ?vcardName . \n" +
-            "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
+            "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +
             "?vcardName vcard:givenName ?firstName .";
 	}
-	
+
 	private String getN3NewPersonMiddleName() {
-		return getN3PrefixString() +  
+		return getN3PrefixString() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
             "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
-            "?vcardPerson a vcard:Individual . \n" + 
+            "?vcardPerson a vcard:Individual . \n" +
             "?vcardPerson vcard:hasName  ?vcardName . \n" +
-            "?vcardName a vcard:Name . \n" +   
+            "?vcardName a vcard:Name . \n" +
             "?vcardName <http://vivoweb.org/ontology/core#middleName> ?middleName .";
 	}
-	
+
 	private String getN3NewPersonLastName() {
-		return getN3PrefixString() + 
+		return getN3PrefixString() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
             "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
-            "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+            "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
             "?vcardPerson vcard:hasName  ?vcardName . \n" +
-            "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
+            "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +
             "?vcardName vcard:familyName ?lastName .";
 	}
-	
+
 	private String getN3NewPerson() {
-		return  getN3PrefixString() + 
-        "?newPerson a foaf:Person ;\n" + 
-        "<" + RDFS.label.getURI() + "> ?label .\n" + 
-        "?editorshipUri core:relates ?newPerson .\n" + 
+		return  getN3PrefixString() +
+        "?newPerson a foaf:Person ;\n" +
+        "<" + RDFS.label.getURI() + "> ?label .\n" +
+        "?editorshipUri core:relates ?newPerson .\n" +
         "?newPerson core:relatedBy ?editorshipUri . ";
 	}
-	
+
 	private String getN3ForExistingPerson() {
-		return getN3PrefixString() + 
-		"?editorshipUri core:relates ?personUri .\n" + 
+		return getN3PrefixString() +
+		"?editorshipUri core:relates ?personUri .\n" +
 		"?personUri core:relatedBy ?editorshipUri .";
 	}
-	
+
 	/**  Get new resources	 */
 	//A new editorship uri will always be created when an editor is added
 	//A new person may be added if a person not in the system will be added as editor
-	 private Map<String, String> generateNewResources(VitroRequest vreq) {					
-			
-			
-			HashMap<String, String> newResources = new HashMap<String, String>();			
+	 private Map<String, String> generateNewResources(VitroRequest vreq) {
+
+
+			HashMap<String, String> newResources = new HashMap<String, String>();
 			newResources.put("editorshipUri", DEFAULT_NS_TOKEN);
 			newResources.put("newPerson", DEFAULT_NS_TOKEN);
 			newResources.put("vcardPerson", DEFAULT_NS_TOKEN);
 			newResources.put("vcardName", DEFAULT_NS_TOKEN);
 			return newResources;
 		}
-	
-	/** Set URIS and Literals In Scope and on form and supporting methods	 */   
+
+	/** Set URIS and Literals In Scope and on form and supporting methods	 */
     private void setUrisAndLiteralsInScope(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
     	//Uris in scope always contain subject and predicate
     	HashMap<String, List<String>> urisInScope = new HashMap<String, List<String>>();
-    	urisInScope.put(editConfiguration.getVarNameForSubject(), 
+    	urisInScope.put(editConfiguration.getVarNameForSubject(),
     			Arrays.asList(new String[]{editConfiguration.getSubjectUri()}));
-    	urisInScope.put(editConfiguration.getVarNameForPredicate(), 
+    	urisInScope.put(editConfiguration.getVarNameForPredicate(),
     			Arrays.asList(new String[]{editConfiguration.getPredicateUri()}));
     	editConfiguration.setUrisInScope(urisInScope);
-    	//no literals in scope    	    
+    	//no literals in scope
     }
-	
+
     public void setUrisAndLiteralsOnForm(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
-    	List<String> urisOnForm = new ArrayList<String>();    	
+    	List<String> urisOnForm = new ArrayList<String>();
     	//If an existing person is being used as an editor, need to get the person uri
     	urisOnForm.add("personUri");
     	editConfiguration.setUrisOnform(urisOnForm);
-    	
+
     	//for person who is not in system, need to add first name, last name and middle name
     	//Also need to store editorship rank and label of editor
     	List<String> literalsOnForm = list("firstName",
@@ -219,10 +219,10 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
     			"rank",
     			"label");
     	editConfiguration.setLiteralsOnForm(literalsOnForm);
-    }   
-    
-    /** Set SPARQL Queries and supporting methods. */        
-    private void setSparqlQueries(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {        
+    }
+
+    /** Set SPARQL Queries and supporting methods. */
+    private void setSparqlQueries(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
         //Sparql queries are all empty for existing values
     	//This form is different from the others that it gets multiple editors on the same page
     	//and that information will be queried and stored in the additional form specific data
@@ -232,12 +232,12 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
     	editConfiguration.setSparqlForAdditionalUrisInScope(new HashMap<String, String>());
     	editConfiguration.setSparqlForAdditionalLiteralsInScope(new HashMap<String, String>());
     }
-    
+
     /**
-	 * 
+	 *
 	 * Set Fields and supporting methods
 	 */
-	
+
 	public void setFields(EditConfigurationVTwo editConfiguration, VitroRequest vreq, String predicateUri) {
     	setLabelField(editConfiguration);
     	setFirstNameField(editConfiguration);
@@ -246,7 +246,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
     	setRankField(editConfiguration);
     	setPersonUriField(editConfiguration);
     }
-	
+
 	private void setLabelField(EditConfigurationVTwo editConfiguration) {
 		editConfiguration.addField(new FieldVTwo().
 				setName("label").
@@ -352,13 +352,13 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
         + "WHERE { \n"
         + "?subject core:relatedBy ?editorshipURI . \n"
         + "?editorshipURI a core:Editorship . \n"
-        + "?editorshipURI core:relates ?editorURI . \n" 
+        + "?editorshipURI core:relates ?editorURI . \n"
         + "?editorURI a foaf:Person . \n"
         + "OPTIONAL { ?editorURI rdfs:label ?editorName } \n"
-        + "OPTIONAL { ?editorshipURI core:rank ?rank } \n" 
+        + "OPTIONAL { ?editorshipURI core:rank ?rank } \n"
         + "} ORDER BY ?rank";
-    
-       
+
+
     private List<EditorshipInfo> getExistingEditorships(String subjectUri, VitroRequest vreq) {
 		RDFService rdfService = vreq.getRDFService();
 
@@ -387,7 +387,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 			}
         } catch (Exception e) {
             log.error(e, e);
-        }    
+        }
         log.debug("editorships = " + editorships);
         return getEditorshipInfo(editorships);
     }
@@ -399,22 +399,22 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
         + "    ?editorship a core:Editorship . \n"
         + "    ?editorship core:rank ?rank .\n"
         + "} ORDER BY DESC(?rank) LIMIT 1";
-        
+
     private int getMaxRank(String subjectUri, VitroRequest vreq) {
 
-        int maxRank = 0; // default value 
+        int maxRank = 0; // default value
         String queryStr = QueryUtils.subUriForQueryVar(this.getMaxRankQueryStr(), "subject", subjectUri);
         log.debug("maxRank query string is: " + queryStr);
         try {
             ResultSet results = QueryUtils.getQueryResults(queryStr, vreq);
             if (results != null && results.hasNext()) { // there is at most one result
-                QuerySolution soln = results.next(); 
+                QuerySolution soln = results.next();
                 RDFNode node = soln.get("rank");
                 if (node != null && node.isLiteral()) {
-                    // node.asLiteral().getInt() won't return an xsd:string that 
+                    // node.asLiteral().getInt() won't return an xsd:string that
                     // can be parsed as an int.
                     int rank = Integer.parseInt(node.asLiteral().getLexicalForm());
-                    if (rank > maxRank) {  
+                    if (rank > maxRank) {
                         log.debug("setting maxRank to " + rank);
                         maxRank = rank;
                     }
@@ -468,8 +468,8 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 		//Editor information for editorship node
 		private String editorUri;
 		private String editorName;
-		
-		public EditorshipInfo(String inputEditorshipUri, 
+
+		public EditorshipInfo(String inputEditorshipUri,
 				String inputEditorshipName,
 				String inputEditorUri,
 				String inputEditorName) {
@@ -479,25 +479,25 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 			editorName = inputEditorName;
 
 		}
-		
+
 		//Getters - specifically required for Freemarker template's access to POJO
 		public String getEditorshipUri() {
 			return editorshipUri;
 		}
-		
+
 		public String getEditorshipName() {
 			return editorshipName;
 		}
-		
+
 		public String getEditorUri() {
 			return editorUri;
 		}
-		
+
 		public String getEditorName() {
 			return editorName;
 		}
 	}
-	
+
 	static final String DEFAULT_NS_TOKEN=null; //null forces the default NS
 
     protected String getMaxRankQueryStr() {

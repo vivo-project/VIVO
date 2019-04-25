@@ -4,9 +4,9 @@
 <!-- See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
 
 <list-view-config>
-    <query-select>    
+    <query-select>
         PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
-        
+
         SELECT DISTINCT ?vcard ?phone
                         ?number
         WHERE {
@@ -14,7 +14,7 @@
             ?vcard vcard:hasTelephone ?phone .
             ?phone a vcard:Fax .
             ?phone vcard:telephone ?number .
-        } 
+        }
     </query-select>
 
     <template>propStatement-phoneFaxNumber.ftl</template>

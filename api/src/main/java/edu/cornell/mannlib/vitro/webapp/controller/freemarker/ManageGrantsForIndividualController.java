@@ -32,7 +32,7 @@ public class ManageGrantsForIndividualController extends FreemarkerHttpServlet {
 
     private static final Log log = LogFactory.getLog(ManageGrantsForIndividualController.class.getName());
     private static final String TEMPLATE_NAME = "manageGrantsForIndividual.ftl";
-    
+
     @Override
 	protected AuthorizationRequest requiredActions(VitroRequest vreq) {
 		return SimplePermission.DO_FRONT_END_EDITING.ACTION;
@@ -54,17 +54,17 @@ public class ManageGrantsForIndividualController extends FreemarkerHttpServlet {
 
         List<String> allSubclasses = getAllSubclasses(grants);
         body.put("allSubclasses", allSubclasses);
-        
+
         Individual subject = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subjectUri);
         if( subject != null && subject.getName() != null ){
              body.put("subjectName", subject.getName());
         }else{
              body.put("subjectName", null);
         }
-        
+
         return new TemplateResponseValues(TEMPLATE_NAME, body);
     }
-  
+
     private static String GRANT_QUERY = ""
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
         + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
@@ -87,12 +87,12 @@ public class ManageGrantsForIndividualController extends FreemarkerHttpServlet {
 		+ "        ?activity a core:Project . \n"
         + "        ?activity rdfs:label ?label2 . \n"
         + "    } \n"
-        + "    OPTIONAL { ?role core:hideFromDisplay ?hideThis } \n" 
+        + "    OPTIONAL { ?role core:hideFromDisplay ?hideThis } \n"
         + "} ORDER BY ?subclass ?label2";
-    
+
     HashMap<String, List<Map<String,String>>>  getGrants(String subjectUri, VitroRequest vreq) {
-        VClassDao vcDao = vreq.getUnfilteredAssertionsWebappDaoFactory().getVClassDao(); 
-          
+        VClassDao vcDao = vreq.getUnfilteredAssertionsWebappDaoFactory().getVClassDao();
+
         String queryStr = QueryUtils.subUriForQueryVar(GRANT_QUERY, "subject", subjectUri);
         log.debug("queryStr = " + queryStr);
         HashMap<String, List<Map<String,String>>>  subclassToGrants = new HashMap<String, List<Map<String,String>>>();
@@ -109,13 +109,13 @@ public class ManageGrantsForIndividualController extends FreemarkerHttpServlet {
                         subclassToGrants.put(subclass, new ArrayList<Map<String,String>>()); //list of grant information
                     }
                     List<Map<String,String>> grantsList = subclassToGrants.get(subclass);
-                    grantsList.add(QueryUtils.querySolutionToStringValueMap(soln)); 
-                }       
+                    grantsList.add(QueryUtils.querySolutionToStringValueMap(soln));
+                }
             }
         } catch (Exception e) {
             log.error(e, e);
-        }    
-       
+        }
+
         return subclassToGrants;
     }
 

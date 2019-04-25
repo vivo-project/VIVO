@@ -29,9 +29,9 @@ public class GrantChecker extends RelationshipChecker {
 	/**
 	 * A self-editor is authorized to add, edit, or delete a statement if the
 	 * subject or object refers to a Grant, and if the self-editor:
-	 * 
+	 *
 	 * 1) is a Principal Investigator (PI) of that Grant, or
-	 * 
+	 *
 	 * 2) is a co-Principal Investigator (co-PI) of that Grant
 	 */
 	public PolicyDecision isAuthorized(List<String> userUris) {

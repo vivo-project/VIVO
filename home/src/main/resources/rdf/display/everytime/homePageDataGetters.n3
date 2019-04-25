@@ -1,4 +1,4 @@
-# $This file is distributed under the terms of the license in LICENSE$ 
+# $This file is distributed under the terms of the license in LICENSE$
 
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
@@ -7,8 +7,8 @@
 @prefix core: <http://vivoweb.org/ontology/core#> .
 @prefix vivoweb: <http://vivoweb.org/ontology#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
- 
-# academic departments datagetter 
+
+# academic departments datagetter
 
 <freemarker:lib-home-page.ftl> display:hasDataGetter display:academicDeptsDataGetter .
 
@@ -23,8 +23,8 @@ display:academicDeptsDataGetter
     WHERE
     {
           ?theURI a vivo:AcademicDepartment .
-          ?theURI rdfs:label ?label 
+          ?theURI rdfs:label ?label
     }
-    
+
     """ .
 

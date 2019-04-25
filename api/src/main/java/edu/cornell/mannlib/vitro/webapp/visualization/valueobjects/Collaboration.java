@@ -13,9 +13,9 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UniqueIDGenerator
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 
 /**
- * 
+ *
  * This is stores collaboration information mainly for ego-centric visualizations.
- * 
+ *
  * @author cdtank
  *
  */
@@ -27,8 +27,8 @@ public class Collaboration {
 	private Collaborator sourceCollaborator;
 	private Collaborator targetCollaborator;
 
-	public Collaboration(Collaborator sourceCollaborator, 
-						 Collaborator  targetCollaborator, 
+	public Collaboration(Collaborator sourceCollaborator,
+						 Collaborator  targetCollaborator,
 						 Activity seedActivity,
 						 UniqueIDGenerator uniqueIDGenerator) {
 		collaborationID = uniqueIDGenerator.getNextNumericID();
@@ -40,7 +40,7 @@ public class Collaboration {
 	public int getCollaborationID() {
 		return collaborationID;
 	}
-	
+
 	public Collaborator getSourceCollaborator() {
 		return sourceCollaborator;
 	}
@@ -48,11 +48,11 @@ public class Collaboration {
 	public Collaborator getTargetCollaborator() {
 		return targetCollaborator;
 	}
-	
+
 	public Set<Activity> getCollaborationActivities() {
 		return activities;
 	}
-	
+
 	public int getNumOfCollaborations() {
 		return activities.size();
 	}
@@ -60,16 +60,16 @@ public class Collaboration {
 	public void addActivity(Activity activity) {
 		this.activities.add(activity);
 	}
-	
+
 	public Map<String, Integer> getYearToActivityCount() {
 		if (yearToActivityCount == null) {
 			yearToActivityCount = UtilityFunctions.getYearToActivityCount(activities);
 		}
 		return yearToActivityCount;
 	}
-	
+
 	/*
-	 * getEarliest, Latest & Unknown Activity YearCount should only be used after 
+	 * getEarliest, Latest & Unknown Activity YearCount should only be used after
 	 * the parsing of the entire sparql is done. Else it will give results based on
 	 * incomplete dataset.
 	 * */
@@ -77,25 +77,25 @@ public class Collaboration {
 	public Map<String, Integer> getEarliestCollaborationYearCount() {
 
 		/*
-		 * We do not want to consider the default Activity year when we are checking 
-		 * for the min or max Activity year. 
+		 * We do not want to consider the default Activity year when we are checking
+		 * for the min or max Activity year.
 		 * */
 		Set<String> yearsToBeConsidered = new HashSet<String>(this.getYearToActivityCount()
 																	.keySet());
 		yearsToBeConsidered.remove(VOConstants.DEFAULT_ACTIVITY_YEAR);
-		
+
 		/*
 		 * There can be a case when the only Activity the author has no attached year to it
-		 * so essentially an "Unknown". In that case Collections.max or min will throw an 
+		 * so essentially an "Unknown". In that case Collections.max or min will throw an
 		 * NoSuchElementException.
-		 * 
+		 *
 		 * If there is no maximum year available then we should imply so by returning a "null".
 		 * */
 		if (yearsToBeConsidered.size() > 0) {
 			final String earliestYear = Collections.min(yearsToBeConsidered);
 			final Integer earliestYearActivityCount = this.getYearToActivityCount()
 															.get(earliestYear);
-			
+
 			return new HashMap<String, Integer>() { {
 				put(earliestYear, earliestYearActivityCount);
 			} };
@@ -106,26 +106,26 @@ public class Collaboration {
 
 	@SuppressWarnings("serial")
 	public Map<String, Integer> getLatestCollaborationYearCount() {
-		
+
 		/*
-		 * We do not want to consider the default Activity year when we are checking 
-		 * for the min or max Activity year. 
+		 * We do not want to consider the default Activity year when we are checking
+		 * for the min or max Activity year.
 		 * */
 		Set<String> yearsToBeConsidered = new HashSet<String>(this.getYearToActivityCount()
 																	.keySet());
 		yearsToBeConsidered.remove(VOConstants.DEFAULT_ACTIVITY_YEAR);
-		
+
 		/*
 		 * There can be a case when the only Activity the collaborator has no attached year to it
-		 * so essentially an "Unknown". In that case Collections.max or min will throw an 
+		 * so essentially an "Unknown". In that case Collections.max or min will throw an
 		 * NoSuchElementException.
-		 * 
+		 *
 		 * If there is no maximum year available then we should imply so by returning a "null".
 		 * */
 		if (yearsToBeConsidered.size() > 0) {
 			final String latestYear = Collections.max(yearsToBeConsidered);
 			final Integer latestYearActivityCount = this.getYearToActivityCount().get(latestYear);
-			
+
 			return new HashMap<String, Integer>() { {
 				put(latestYear, latestYearActivityCount);
 			} };
@@ -133,12 +133,12 @@ public class Collaboration {
 			return null;
 		}
 	}
-	
+
 	public Integer getUnknownCollaborationYearCount() {
-		
+
 		Integer unknownYearActivityCount = this.getYearToActivityCount()
 										.get(VOConstants.DEFAULT_ACTIVITY_YEAR);
-		
+
 		/*
 		 * If there is no unknown year available then we should imply so by returning a "null".
 		 * */
@@ -148,6 +148,6 @@ public class Collaboration {
 			return null;
 		}
 	}
-	
+
 
 }

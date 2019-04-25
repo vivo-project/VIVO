@@ -4,13 +4,13 @@ PREFIX bibo: <http://purl.org/ontology/bibo/>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 CONSTRUCT {
-     ?person ?property ?object .   
+     ?person ?property ?object .
 } WHERE {
      PERSON_URI core:relatedBy ?authorship .
      ?authorship a core:Authorship .
-     ?authorship core:relates ?patent . 
+     ?authorship core:relates ?patent .
      ?patent rdf:type bibo:Patent .
      ?authorship core:relates ?person .
      ?person a foaf:Person .
-     ?person ?property ?object .   
+     ?person ?property ?object .
 }

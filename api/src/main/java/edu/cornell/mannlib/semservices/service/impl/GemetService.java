@@ -37,15 +37,15 @@ public class GemetService implements ExternalConceptService  {
    private final String endpoint = "http://cr.eionet.europa.eu/sparql";
    private final String schemeURI = "http://www.eionet.europa.eu/gemet/gemetThesaurus";
 
-   
+
 	@Override
 	public List<Concept> getConcepts(String term) throws Exception {
 		List<Concept> conceptList = new ArrayList<Concept>();
 	      try {
 	         String results = getConceptsMatchingKeyword(term);
 	         //System.out.println(results);
-	         conceptList = processOutput(results);         
-	          
+	         conceptList = processOutput(results);
+
 	      } catch (Exception ex) {
 	         return new ArrayList<Concept>();
 	         //ex.printStackTrace();
@@ -112,22 +112,22 @@ public class GemetService implements ExternalConceptService  {
                         "string"));
                }
             }
-            
+
             String narrower = getRelatedConcepts(uri, "narrower");
             List<String> narrowerURIList = getRelatedUris(narrower);
-            concept.setNarrowerURIList(narrowerURIList);            
-            
+            concept.setNarrowerURIList(narrowerURIList);
+
             String broader = getRelatedConcepts(uri, "broader");
             List<String> broaderURIList = getRelatedUris(broader);
-            concept.setBroaderURIList(broaderURIList); 
-            
+            concept.setBroaderURIList(broaderURIList);
+
             /*String related = getRelatedConcepts(uri, "related");
             List<String> relatedURIList = getRelatedUris(related);
             for (String s: relatedURIList) {
             	System.out.println("related uri: "+s);
             }*/
             //String altLabels = getAllTranslationsForConcept(uri, "nonPreferredLabels");
-            
+
             conceptList.add(concept);
 
          }
@@ -226,7 +226,7 @@ public class GemetService implements ExternalConceptService  {
       try {
          result = getGemetResults(serviceUrl);
          List<String> props = getPropertyFromJson(result);
-          
+
       } catch (Exception e) {
          e.printStackTrace();
          throw e;
@@ -275,7 +275,7 @@ public class GemetService implements ExternalConceptService  {
     */
    protected String getConceptsMatchingKeyword(String keyword) throws Exception {
       String result = "";
-      String encodedKeyword = URLEncoder.encode(keyword, "UTF-8"); 
+      String encodedKeyword = URLEncoder.encode(keyword, "UTF-8");
       String serviceUrl = GemetWS_address + "getConceptsMatchingKeyword" +
       "?keyword="  + encodedKeyword +
       "&search_mode=0" +
@@ -317,8 +317,8 @@ public class GemetService implements ExternalConceptService  {
       }
       return results;
    }
-   
-    
+
+
    protected List<String> getRelatedUris(String json) {
 	   List<String> uriList = new ArrayList<String>();
 	   String uri = "";
@@ -327,15 +327,15 @@ public class GemetService implements ExternalConceptService  {
            return new ArrayList<String>();
         }
 	    for (int i = 0; i < jsonArray.size(); i++) {
-	    	ObjectNode jsonObj = (ObjectNode) jsonArray.get(i);	    	
-            uri = getJsonValue(jsonObj, "uri");	
+	    	ObjectNode jsonObj = (ObjectNode) jsonArray.get(i);
+            uri = getJsonValue(jsonObj, "uri");
             uriList.add(uri);
 	    }
-       
+
 	   return uriList;
-	   
+
    }
-   
+
 	protected List<String> getPropertyFromJson(String json) {
 		List<String> props = new ArrayList<String>();
 		ArrayNode jsonArray = (ArrayNode) JacksonUtils.parseJson(json);
@@ -354,7 +354,7 @@ public class GemetService implements ExternalConceptService  {
 	     conceptId = uri.substring(lastslash + 1, uri.length());
 	     return conceptId;
 	  }
-   
-   
+
+
 
 }

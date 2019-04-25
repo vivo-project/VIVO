@@ -10,13 +10,13 @@
     <ul style="font-size:1em;padding-bottom:4px"><li><strong>${i18n().contact_info}</strong></li></ul>
 </#if>
 
-<#-- Primary Email -->    
+<#-- Primary Email -->
 <@emailLinks "primaryEmail" primaryEmail />
 
-<#-- Additional Emails --> 
-<@emailLinks "email" addlEmail />   
-  
-<#-- Phone --> 
+<#-- Additional Emails -->
+<@emailLinks "email" addlEmail />
+
+<#-- Phone -->
 
 <#if phone?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
     <@p.addLinkWithLabel phone editable />
@@ -39,7 +39,7 @@
     <#else>
         <#local listId = "additional-emails">
         <#local label = "${i18n().additional_emails_capitalized}">
-    </#if>     
+    </#if>
     <#if email?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
         <@p.addLinkWithLabel email editable label/>
         <#if email.statements?has_content> <#-- if there are any statements -->

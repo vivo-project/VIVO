@@ -27,7 +27,7 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
     private static String GEO_FOCUS_QUERY = ""
         + "PREFIX geo: <http://aims.fao.org/aos/geopolitical.owl#> \n"
         + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  \n"
-        + "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n" 
+        + "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n"
         + "PREFIX core: <http://vivoweb.org/ontology/core#>  \n"
         + "PREFIX foaf: <http://xmlns.com/foaf/0.1/>  \n"
         + "PREFIX vivoc: <http://vivo.library.cornell.edu/ns/0.1#>  \n"
@@ -52,7 +52,7 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
         + "    ?person rdf:type foaf:Person   \n"
         + "} }  \n"
         + "GROUP BY ?label ?location  \n";
-    
+
 	public GeoFocusMapLocations(HttpServlet parent, VitroRequest vreq,
 			HttpServletResponse resp) {
 		super(parent, vreq, resp);
@@ -62,12 +62,12 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
 	public String prepareResponse() throws IOException {
 		try {
             geoLocations = getGeoLocations(vreq);
-            
+
             StringBuilder response = new StringBuilder("[");
             String geometry = "{\"geometry\": {\"type\": \"Point\",\"coordinates\": \"\"},";
             String typeProps = "\"type\": \"Feature\",\"properties\": {\"mapType\": \"\",";
             String previousLabel = "";
-            
+
             for (Map<String, String> map: geoLocations) {
                 String label = map.get("label");
                 String html  = map.get("count");
@@ -79,7 +79,7 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
                 Integer count    = Integer.parseInt(map.get("count"));
                 String radius   = String.valueOf(calculateRadius(count));
                 String name = "";
-                
+
                 if ( label != null && !label.equals(previousLabel) ) {
                     if ( label.contains("Ivoire") ) {
                         name = "Ivory Coast";
@@ -94,18 +94,18 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
                         name = label;
                     }
                     String tempStr = geometry; //+label
-                    tempStr += typeProps //+ label 
+                    tempStr += typeProps //+ label
                                         + "\"popupContent\": \""
-                                        + name 
+                                        + name
                                         + "\",\"html\":"
-                                        + html 
+                                        + html
                                         + ",\"radius\":"
                                         + radius
                                         + ",\"uri\": \""
                                         + uri
                                         + "\",\"local\": \""
                                         + local
-                                        + "\"}},";                 
+                                        + "\"}},";
                     response.append(tempStr);
                     previousLabel = label;
                 }
@@ -123,9 +123,9 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
 			return EMPTY_RESPONSE;
 		}
 	}
-           
+
     private List<Map<String,String>>  getGeoLocations(VitroRequest vreq) {
-          
+
         String queryStr = GEO_FOCUS_QUERY;
         log.debug("queryStr = " + queryStr);
         List<Map<String,String>>  locations = new ArrayList<Map<String,String>>();
@@ -137,12 +137,12 @@ public class GeoFocusMapLocations extends AbstractAjaxResponder {
             }
         } catch (Exception e) {
             log.error(e, e);
-        }    
-       
+        }
+
         return locations;
     }
     private Integer calculateRadius(Integer count) {
-          
+
         int radius = 8;
         if ( count != null ) {
             if ( count < 4 ) {

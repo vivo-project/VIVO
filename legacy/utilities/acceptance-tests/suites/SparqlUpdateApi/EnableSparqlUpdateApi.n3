@@ -2,5 +2,5 @@
 @prefix auth: <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#> .
 @prefix simplePermission: <java:edu.cornell.mannlib.vitro.webapp.auth.permissions.SimplePermission#> .
 
-auth:ADMIN 
-  	auth:hasPermission simplePermission:UseSparqlUpdateApi ;    
+auth:ADMIN
+  	auth:hasPermission simplePermission:UseSparqlUpdateApi ;

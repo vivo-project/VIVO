@@ -16,42 +16,42 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.
 
 public class GrantAdministeredByGenerator extends VivoBaseGenerator implements
         EditConfigurationGenerator {
-    
+
     public GrantAdministeredByGenerator() {}
-    
+
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
             HttpSession session) throws Exception {
-        
+
         EditConfigurationVTwo conf = new EditConfigurationVTwo();
-        
+
         initBasics(conf, vreq);
         initPropertyParameters(vreq, session, conf);
-        initObjectPropForm(conf, vreq);               
-        
+        initObjectPropForm(conf, vreq);
+
         conf.setTemplate("grantAdministeredBy.ftl");
-        
+
         conf.setVarNameForSubject("grant");
         conf.setVarNameForPredicate("predicate");
         conf.setVarNameForObject("adminRole");
-        
+
         conf.setN3Required( Arrays.asList( n3ForNewAdminRole) );
-        conf.setN3Optional( Arrays.asList( n3ForNewAdminOrganization, 
+        conf.setN3Optional( Arrays.asList( n3ForNewAdminOrganization,
                                            n3ForExistingAdminOrganization ) );
-        
+
         conf.addNewResource("newOrganization", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("adminRole", DEFAULT_NS_FOR_NEW_RESOURCE);
-        
+
         conf.setUrisOnform(Arrays.asList("existingOrganization"));
         conf.setLiteralsOnForm(Arrays.asList("orgLabel", "orgLabelDisplay" ));
-        
-        conf.addSparqlForExistingLiteral("orgLabel", orgLabelQuery);       
+
+        conf.addSparqlForExistingLiteral("orgLabel", orgLabelQuery);
         conf.addSparqlForExistingUris("existingOrganization", existingOrganizationQuery);
-        
+
 
         conf.addField( new FieldVTwo(). // options will be added in browser by auto complete JS
                 setName("existingOrganization")
-        );        
+        );
 
         conf.addField( new FieldVTwo().
                 setName("orgLabel").
@@ -67,7 +67,7 @@ public class GrantAdministeredByGenerator extends VivoBaseGenerator implements
 
         conf.addValidator(new AntiXssValidation());
         conf.addValidator(new AutocompleteRequiredInputValidator("existingOrganization", "orgLabel"));
-        
+
 //        addFormSpecificData(conf, vreq);
         prepare(vreq, conf);
         return conf;
@@ -75,29 +75,29 @@ public class GrantAdministeredByGenerator extends VivoBaseGenerator implements
 
     /* N3 assertions  */
 
-    final static String n3ForNewAdminRole = 
-        "@prefix vivo: <" + vivoCore + "> . \n" +   
+    final static String n3ForNewAdminRole =
+        "@prefix vivo: <" + vivoCore + "> . \n" +
         "?grant vivo:relates  ?adminRole . \n" +
-        "?adminRole a  vivo:AdministratorRole . \n" +              
-        "?adminRole vivo:relatedBy ?grant . " ;    
-    
-    final static String n3ForNewAdminOrganization  =      
-        "@prefix vivo: <" + vivoCore + "> . \n\n" +   
+        "?adminRole a  vivo:AdministratorRole . \n" +
+        "?adminRole vivo:relatedBy ?grant . " ;
+
+    final static String n3ForNewAdminOrganization  =
+        "@prefix vivo: <" + vivoCore + "> . \n\n" +
         "?adminRole <http://purl.obolibrary.org/obo/RO_0000052> ?newOrganization . \n" +
         "?newOrganization a <http://xmlns.com/foaf/0.1/Organization>  . \n" +
         "?newOrganization <http://purl.obolibrary.org/obo/RO_0000053> ?adminRole . \n" +
         "?newOrganization vivo:relatedBy ?grant . \n" +
         "?grant vivo:relates ?newOrganization . \n" +
         "?newOrganization <"+ label + "> ?orgLabel .";
-    
-    final static String n3ForExistingAdminOrganization  =      
-        "@prefix vivo: <" + vivoCore + "> . \n\n" +   
+
+    final static String n3ForExistingAdminOrganization  =
+        "@prefix vivo: <" + vivoCore + "> . \n\n" +
         "?adminRole <http://purl.obolibrary.org/obo/RO_0000052> ?existingOrganization . \n" +
         "?existingOrganization a <http://xmlns.com/foaf/0.1/Organization>  . \n" +
         "?existingOrganization <http://purl.obolibrary.org/obo/RO_0000053> ?adminRole . " +
         "?existingOrganization vivo:relatedBy ?grant . \n" +
         "?grant vivo:relates ?existingOrganization . \n" ;
-    
+
     /* Queries for editing an existing entry */
 
     final static String existingOrganizationQuery =

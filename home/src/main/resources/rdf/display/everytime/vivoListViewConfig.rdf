@@ -53,23 +53,23 @@
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#end">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-dateTimeValue.xml</display:listViewConfigFile>
     </rdf:Description>
-    
+
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#webpage">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-webpage.xml</display:listViewConfigFile>
-    </rdf:Description>    
-  
+    </rdf:Description>
+
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasAssociatedConcept">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasAssociatedConcept.xml</display:listViewConfigFile>
     </rdf:Description>
-    
+
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasSubjectArea">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasAssociatedConcept.xml</display:listViewConfigFile>
     </rdf:Description>
-    
+
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasResearchArea">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasAssociatedConcept.xml</display:listViewConfigFile>
     </rdf:Description>
- 
+
    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#publisherOf">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-publisherOf.xml</display:listViewConfigFile>
     </rdf:Description>
@@ -119,9 +119,9 @@
     <!--
      ******************************************************************
      data property custom list views
-     ****************************************************************** 
+     ******************************************************************
     -->
-        
+
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#scopusId">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-scopusId.xml</display:listViewConfigFile>
     </rdf:Description>
@@ -129,5 +129,5 @@
     <rdf:Description rdf:about="http://purl.org/ontology/bibo/doi">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-doi.xml</display:listViewConfigFile>
     </rdf:Description>
-        
+
 </rdf:RDF>

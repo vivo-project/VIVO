@@ -1,10 +1,10 @@
 <#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
-<#-- Custom object property statement view for faux property "investigator on," "principal investigator on" and 
+<#-- Custom object property statement view for faux property "investigator on," "principal investigator on" and
      "co-principal investigator on." See the PropertyConfig.n3 file for details.
-    
+
      This template must be self-contained and not rely on other variables set for the individual page, because it
-     is also used to generate the property statement during a deletion.  
+     is also used to generate the property statement during a deletion.
  -->
 
 <#import "lib-datetime.ftl" as dt>
@@ -31,7 +31,7 @@
             <a href="${profileUrl(statement.uri("role"))}" title="${i18n().missing_activity}">${i18n().missing_activity}</a>
         </#if>
     </#local>
-    
+
     <#local awardOrAdminBy>
         <#if statement.awardedByLabel??>
             &nbsp;${i18n().awarded_by}&nbsp;<a href="${profileUrl(statement.uri("awardedBy"))}" title="${i18n().awarded_by}">${statement.awardedByLabel!}</a>
@@ -39,7 +39,7 @@
             &nbsp;${i18n().administered_by}&nbsp;<a href="${profileUrl(statement.uri("adminedBy"))}" title="${i18n().administered_by}">${statement.adminedByLabel!}</a>
         </#if>
     </#local>
-        
+
     <#local dateTime>
         <#if statement.dateTimeStartRole?has_content || statement.dateTimeEndRole?has_content>
             <@dt.yearIntervalSpan "${statement.dateTimeStartRole!}" "${statement.dateTimeEndRole!}" />
@@ -47,7 +47,7 @@
             <@dt.yearIntervalSpan "${statement.dateTimeStartGrant!}" "${statement.dateTimeEndGrant!}" />
         </#if>
     </#local>
-    
-    ${linkedIndividual} ${awardOrAdminBy} ${dateTime!} 
+
+    ${linkedIndividual} ${awardOrAdminBy} ${dateTime!}
 </#if>
 </#macro>

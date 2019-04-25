@@ -33,4 +33,4 @@ var i18nStrings = {
     });
 </script>
 
-${headScripts.list()} 
+${headScripts.list()}

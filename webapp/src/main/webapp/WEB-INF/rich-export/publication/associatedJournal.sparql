@@ -2,12 +2,12 @@ PREFIX core: <http://vivoweb.org/ontology/core#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 
 CONSTRUCT {
-     ?publicationVenue ?property ?object .   
+     ?publicationVenue ?property ?object .
 } WHERE {
-     PERSON_URI core:relatedBy ?authorship . 
+     PERSON_URI core:relatedBy ?authorship .
      ?authorship a core:Authorship .
      ?authorship core:relates ?publication .
      ?publication a obo:IAO_0000030 .
      ?publication core:hasPublicationVenue ?publicationVenue .
-     ?publicationVenue ?property ?object .   
+     ?publicationVenue ?property ?object .
 }

@@ -14,16 +14,16 @@ $(document).ready(function(){
 
     // "more"/"less" HTML truncator for showing more or less content in data property core:overview
     $('.overview-value').truncate({max_length: 500});
-        
+
     // Change background color button when verbose mode is off
     $('a#verbosePropertySwitch:contains("' + i18nStrings.verboseTurnOff + '")').addClass('verbose-off');
-    
+
     // Reveal vCard QR code when QR icon is clicked
     $('#qrIcon, .qrCloseLink').click(function() {
-	
-		
+
+
 		// only create the img the first time, so check if it already exists
-		if ( !$('img#codeImage').length ) {		
+		if ( !$('img#codeImage').length ) {
 			$.ajax({
             	url: baseUrl + "/qrCodeAjax",
             	dataType: "json",
@@ -63,38 +63,38 @@ $(document).ready(function(){
 								vcard += "PHOTO;VALUE=URL;TYPE=JPG:" + individualPhoto + String.fromCharCode(13);
 							}
 							vcard += "END:VCARD";
-							
+
 							spanStr = "<a title='${i18n().export_qr_codes}' href='"
 							          + exportQrCodeUrl + "'>"
 							          + "<img id='codeImage' src='https://chart.googleapis.com/chart?cht=qr&amp;chs=125x125&amp;chl="
-									  + vcard 
+									  + vcard
 									  + "&amp;choe=UTF-8'/>"
 									  + "</a>";
-									
+
 							$('#qrCodeImage').prepend(spanStr);
 							$('#qrCodeImage').toggleClass('hidden');
 						}
                  	}
             	}
-       		});        
-        } 
-		else { 
+       		});
+        }
+		else {
 			$('#qrCodeImage').toggleClass('hidden');
 		}
     });
 
     // For pubs and grants on the foaf:person profile, and affiliated people
-    // on the foaf:organization profile -- if a pub/grant/person has been hidden 
+    // on the foaf:organization profile -- if a pub/grant/person has been hidden
     // via the "manage" link, we need to ensure that the subclass heading gets removed
     // if there are no items to display for that subclass.
     $.each($('h3'), function() {
         if ( $(this).next().attr('class') == "subclass-property-list hideThis" ) {
-            if ( $(this).next().children().length == 0 ) {       
+            if ( $(this).next().children().length == 0 ) {
                     $(this).closest('li').remove();
             }
         }
     });
-        
+
     // if there are no selected pubs, hide the manage link; same for grants
     // and affiliated people on the org profile page
     if ( $('ul#relatedBy-Authorship-List').children('li').length < 1 && $('h3#relatedBy-Authorship').attr('class') != "hiddenPubs" ) {
@@ -112,12 +112,12 @@ $(document).ready(function(){
     if ( $('ul#relatedBy-Position-List').children('li').length < 1 && $('h3#relatedBy-Position').attr('class') != "hiddenPeople" ) {
         $('a#managePeopleLink').hide();
     }
-   
+
     // if there are webpages but no contacts (email/phone), extend
     // the webpage border the full width. Used with "2 column" profile view.
     if ( $('h2#contactHeading').length < 1 ) {
         if ( $('div#webpagesContainer').length ) {
              $('div#webpagesContainer').css('width', '100%').css('clear','both');
         }
-    }    
+    }
 });

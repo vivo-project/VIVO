@@ -48,7 +48,7 @@ The plugin allso adds the following methods to the plot object:
   setSelection will trigger the "plotselected" event when called. If
   you don't want that to happen, e.g. if you're inside a
   "plotselected" handler, pass true as the second parameter.
-  
+
 - clearSelection(preventEvent)
 
   Clear the selection rectangle. Pass in true to avoid getting a
@@ -88,7 +88,7 @@ The plugin allso adds the following methods to the plot object:
         function onMouseDown(e) {
             if (e.which != 1)  // only accept left-click
                 return;
-            
+
             // cancel out any text selections
             document.body.focus();
 
@@ -105,7 +105,7 @@ The plugin allso adds the following methods to the plot object:
             setSelectionPos(selection.first, e);
 
             selection.active = true;
-            
+
             $(document).one("mouseup", onMouseUp);
         }
 

@@ -27,12 +27,12 @@
 	<#assign submissionErrors = editSubmission.validationErrors/>
 </#if>
 
-<#if editMode == "edit">    
-        <#assign titleVerb="${i18n().edit_capitalized}">        
+<#if editMode == "edit">
+        <#assign titleVerb="${i18n().edit_capitalized}">
         <#assign submitButtonText="${i18n().save_changes}">
         <#assign disabledVal="disabled">
 <#else>
-        <#assign titleVerb="${i18n().create_capitalized}">        
+        <#assign titleVerb="${i18n().create_capitalized}">
         <#assign submitButtonText="${i18n().create_mailing_address}">
         <#assign disabledVal=""/>
 </#if>
@@ -59,22 +59,22 @@
          <#if lvf.submissionErrorExists(editSubmission, "postalCode")>
  	        ${i18n().enter_postal_code}
         </#if>
-        
+
         </p>
     </section>
 </#if>
 
-<@lvf.unsupportedBrowser urls.base /> 
+<@lvf.unsupportedBrowser urls.base />
 
-<section id="personHasMailingAddress" role="region">        
-    
+<section id="personHasMailingAddress" role="region">
+
     <form id="personHasMailingAddress" class="customForm noIE67" action="${submitUrl}"  role="add/edit mailing address">
 
         <p>
             <label for="streetAddress">${i18n().street_address} 1 ${requiredHint}</label>
             <input  size="40"  type="text" id="streetAddressOne" name="streetAddressOne" value="" />
         </p>
-    
+
         <p>
             <label for="streetAddress">${i18n().street_address} 2</label>
             <input  size="40"  type="text" id="streetAddressTwo" name="streetAddressTwo" value="" />
@@ -96,11 +96,11 @@
             <input  size="20"  type="text" id="postalCode" name="postalCode" value="${postalCodeValue}" />
         </p>
 
-        <p>    
+        <p>
             <label for="country" style="margin-bottom:-4px">${i18n().country} ${requiredHint}</label>
             <input  size="20"  type="text"  id="countryEditMode" name="country" value="${countryValue}" />
         </p>
-    
+
         <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>
 
         <p class="submit">
@@ -117,9 +117,9 @@
 <script type="text/javascript">
  $(document).ready(function(){
     mailingAddressUtils.onLoad('${editMode}');
-}); 
+});
 </script>
- 
+
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customFormWithAutocomplete.css" />')}

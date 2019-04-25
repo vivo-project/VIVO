@@ -38,7 +38,7 @@ import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 @WebServlet(name = "InstitutionalInternalClassController", urlPatterns = {"/processInstitutionalInternalClass"} )
 public class InstitutionalInternalClassController extends FreemarkerHttpServlet {
     private static final Log log = LogFactory.getLog(InstitutionalInternalClassController.class);
-   
+
     private static final String EDIT_FORM = "/processInstitutionalInternalClass";
     public final static AuthorizationRequest REQUIRED_ACTIONS = SimplePermission.MANAGE_MENUS.ACTION;
     private static final String DISPLAY_FORM = "/institutionalInternalClassForm.ftl";
@@ -53,10 +53,10 @@ public class InstitutionalInternalClassController extends FreemarkerHttpServlet 
 
     @Override
     protected ResponseValues processRequest(VitroRequest vreq) {
-    	
+
     	//Based on existing of local namespaces and number of local classes present
     	//as well as command parameter, execute command
-    	
+
     	Map<String, Object> data = new HashMap<String,Object>();
     	//Get all local classes and namespace information
     	retrieveLocalClasses(vreq, data);
@@ -77,10 +77,10 @@ public class InstitutionalInternalClassController extends FreemarkerHttpServlet 
     		log.error("Don't recognize the type of request.");
     	}
     	//Retrieve local namespaces
-    	
-    	
+
+
     	//Check if existing local namespaces
-    	
+
     	data.put("formUrl", vreq.getContextPath() + EDIT_FORM);
     	data.put("cancelUrl", vreq.getContextPath() + REDIRECT_PAGE);
 
@@ -92,9 +92,9 @@ public class InstitutionalInternalClassController extends FreemarkerHttpServlet 
     	//
     	if(isSubmission(vreq)){
     		return redirectToSiteAdmin();
-    	} 
+    	}
     	return new TemplateResponseValues(DISPLAY_FORM, data);
-    	
+
     }
 
 	private boolean isSubmission(VitroRequest vreq) {
@@ -104,17 +104,17 @@ public class InstitutionalInternalClassController extends FreemarkerHttpServlet 
 
 	private void processCreateOntologies(VitroRequest vreq, Map<String, Object> data) {
 		data.put("submitAction", "");
-		
+
 	}
 
 	private boolean isCreateOntologies(VitroRequest vreq) {
 		//no local namespaces
 		return (localNamespaces.size() == 0);
-		
+
 	}
 
 	private void processCreateNewClass(VitroRequest vreq, Map<String, Object> data) {
-		//this may need to be changed on the basis of how new classes interact with new ontologies 
+		//this may need to be changed on the basis of how new classes interact with new ontologies
 		data.put("submitAction", "Create Class");
 		data.put("createNewClass", true);
 	}
@@ -139,7 +139,7 @@ public class InstitutionalInternalClassController extends FreemarkerHttpServlet 
 		return (localNamespaces.size() > 0 && localNamespaceClasses.size() > 0);
 	}
 
-	
+
 
 	private void retrieveLocalClasses(VitroRequest vreq, Map<String, Object> data) {
 		localNamespaces = LocalNamespaceClassUtils.getLocalOntologyNamespaces(vreq);
@@ -168,7 +168,7 @@ public class InstitutionalInternalClassController extends FreemarkerHttpServlet 
     	data.put("defaultNamespace", defaultNamespace);
 	}
 
-    
+
     //Process submission on submitting form
 	private void processSubmission(VitroRequest vreq, Map<String, Object> data) {
 		//If new class, need to generate new class
@@ -180,7 +180,7 @@ public class InstitutionalInternalClassController extends FreemarkerHttpServlet 
 				vreq.getWebappDaoFactory().getVClassDao().insertNewVClass(v);
 			} catch(Exception ex) {
 				log.error("Insertion of new class " + vreq.getParameter("name") + " resulted in error ", ex);
-			} 
+			}
 		} else {
 			//Existing class so get URI from that
 			classUri = getExistingClassUri(vreq);
@@ -191,15 +191,15 @@ public class InstitutionalInternalClassController extends FreemarkerHttpServlet 
 			writeModel.enterCriticalSection(Lock.WRITE);
 			writeModel.notifyEvent(new EditEvent(null,true));
 			try {
-				log.debug("Should be removing these statements " + writeModel.listStatements(null, 
-						ResourceFactory.createProperty(VitroVocabulary.IS_INTERNAL_CLASSANNOT), 
+				log.debug("Should be removing these statements " + writeModel.listStatements(null,
+						ResourceFactory.createProperty(VitroVocabulary.IS_INTERNAL_CLASSANNOT),
 						(RDFNode) null).toList().toString());
 				//remove existing internal classes if there are any as assuming only one
-				writeModel.removeAll(null, 
-								ResourceFactory.createProperty(VitroVocabulary.IS_INTERNAL_CLASSANNOT), 
+				writeModel.removeAll(null,
+								ResourceFactory.createProperty(VitroVocabulary.IS_INTERNAL_CLASSANNOT),
 								(RDFNode) null);
-				log.debug("Are there any statements left for internal class annotation:  " + writeModel.listStatements(null, 
-						ResourceFactory.createProperty(VitroVocabulary.IS_INTERNAL_CLASSANNOT), 
+				log.debug("Are there any statements left for internal class annotation:  " + writeModel.listStatements(null,
+						ResourceFactory.createProperty(VitroVocabulary.IS_INTERNAL_CLASSANNOT),
 						(RDFNode) null).toList().toString());
 				writeModel.add(
 						writeModel.createStatement(
@@ -214,7 +214,7 @@ public class InstitutionalInternalClassController extends FreemarkerHttpServlet 
 			}
 		}
 	}
-    
+
 	private VClass generateNewVClass(String newClassName, String namespace) {
 		VClass newClass = new VClass();
 		newClass.setName(newClassName);
@@ -224,27 +224,27 @@ public class InstitutionalInternalClassController extends FreemarkerHttpServlet 
 		//How to g
 		return newClass;
 	}
-    
+
 	private boolean isNewClassSubmission(VitroRequest vreq) {
 		String localName = vreq.getParameter("localClassName");
 		return (localName != null && !localName.isEmpty());
 	}
-	
+
 	private String getExistingClassUri(VitroRequest vreq) {
 		return vreq.getParameter("existingLocalClasses");
-		
+
 	}
-	
+
 	private RedirectResponseValues redirectToSiteAdmin() {
 		return new RedirectResponseValues(REDIRECT_PAGE, HttpServletResponse.SC_SEE_OTHER);
 	}
-	
+
 	//Get current internal class
 	private String retrieveCurrentInternalClass() {
 		String internalClassUri = "";
 		Model mainModel = ModelAccess.on(getServletContext()).getOntModel(TBOX_ASSERTIONS);
-		StmtIterator internalIt = mainModel.listStatements(null, 
-				ResourceFactory.createProperty(VitroVocabulary.IS_INTERNAL_CLASSANNOT), 
+		StmtIterator internalIt = mainModel.listStatements(null,
+				ResourceFactory.createProperty(VitroVocabulary.IS_INTERNAL_CLASSANNOT),
 				(RDFNode) null);
 		while(internalIt.hasNext()){
 			Statement s = internalIt.nextStatement();
@@ -254,5 +254,5 @@ public class InstitutionalInternalClassController extends FreemarkerHttpServlet 
 		}
 		return internalClassUri;
 	}
-	
+
 }

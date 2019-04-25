@@ -1,5 +1,5 @@
-PREFIX vivo: <http://vivoweb.org/ontology/core#> 
-PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX vivo: <http://vivoweb.org/ontology/core#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 CONSTRUCT {
@@ -13,8 +13,8 @@ CONSTRUCT {
 } WHERE {
     { ?agent vivo:administers ?grant }
       UNION
-    { ?grant vivo:administeredBy ?agent 
-      FILTER NOT EXISTS { ?agent vivo:administers ?grant } 
+    { ?grant vivo:administeredBy ?agent
+      FILTER NOT EXISTS { ?agent vivo:administers ?grant }
     }
     FILTER NOT EXISTS {
         ?agent <http://purl.obolibrary.org/obo/RO_0000053> ?adminRoleNode .

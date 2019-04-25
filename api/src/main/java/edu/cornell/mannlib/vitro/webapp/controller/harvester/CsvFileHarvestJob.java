@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in LICENSE$ */
 
-package edu.cornell.mannlib.vitro.webapp.controller.harvester; 
+package edu.cornell.mannlib.vitro.webapp.controller.harvester;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -69,7 +69,7 @@ class CsvFileHarvestJob implements FileHarvestJob {
             }
             return returnValue;
         }
-        
+
         private JobType(String httpParameterName, String templateFileName, String scriptFileName, String xsltFileName, String friendlyName, String linkHeader, String noNewDataMessage, String[] rdfTypesForLinks) {
             this.httpParameterName = httpParameterName;
             this.templateFileName = templateFileName;
@@ -80,13 +80,13 @@ class CsvFileHarvestJob implements FileHarvestJob {
             this.noNewDataMessage = noNewDataMessage;
             this.rdfTypesForLinks = Arrays.copyOf(rdfTypesForLinks, rdfTypesForLinks.length);
         }
-        
+
         private CsvFileHarvestJob constructCsvFileHarvestJob(VitroRequest vreq, String namespace) {
             return new CsvFileHarvestJob(vreq, this.templateFileName, this.scriptFileName, this.xsltFileName, namespace, this.friendlyName, this.linkHeader, this.noNewDataMessage, this.rdfTypesForLinks);
         }
     }
 
-    
+
     /**
      * Logger.
      */
@@ -139,17 +139,17 @@ class CsvFileHarvestJob implements FileHarvestJob {
      * An array of rdf:type values which will be used for links.
      */
     private final String[] rdfTypesForLinks;
-    
+
     /**
      * The session ID of this user session.
      */
     private final String sessionId;
 
-    
+
     public static CsvFileHarvestJob createJob(JobType jobType, VitroRequest vreq, String namespace) {
         return jobType.constructCsvFileHarvestJob(vreq, namespace);
     }
-    
+
     /**
      * Constructor.
      * @param templateFileName just the name of the template file.  The directory is assumed to be standard.
@@ -164,7 +164,7 @@ class CsvFileHarvestJob implements FileHarvestJob {
         this.linkHeader = linkHeader;
         this.noNewDataMessage = noNewDataMessage;
         this.rdfTypesForLinks = Arrays.copyOf(rdfTypesForLinks, rdfTypesForLinks.length);
-        
+
         this.sessionId = this.vreq.getSession().getId();
     }
 
@@ -189,27 +189,27 @@ class CsvFileHarvestJob implements FileHarvestJob {
     }
 
 
-    
+
     private boolean[] getLinesEndingInComma(File file) throws IOException {
         ArrayList<Boolean> linesEndingInCommaList = new ArrayList<Boolean>();
-        
+
         BufferedReader reader = new BufferedReader(new FileReader(file));
-        
+
         for(String line = reader.readLine(); line != null; line = reader.readLine()) {
             boolean lineEndsInComma = line.endsWith(",");
             linesEndingInCommaList.add(lineEndsInComma);
         }
         reader.close();
-        
+
         boolean[] linesEndingInComma = new boolean[linesEndingInCommaList.size()];
         for(int i = 0; i < linesEndingInComma.length; i++) {
             linesEndingInComma[i] = linesEndingInCommaList.get(i);
         }
         return linesEndingInComma;
     }
-    
-    
-    
+
+
+
     @Override
     @SuppressWarnings("rawtypes")
     public String validateUpload(File file) {
@@ -256,31 +256,31 @@ class CsvFileHarvestJob implements FileHarvestJob {
         }
     }
 
-/*    
+/*
     private void prepareWorkspaceDirectory() {
         String path = FileHarvestController.getFileHarvestRootPath() + "workspaces/" + this.sessionId;
         File directory = new File(path);
         if(!directory.exists())
             directory.mkdirs();
-        
+
         File scriptTemplate = this.scriptFile;
         String scriptTemplateContents = readFromFile(scriptTemplate);
         String scriptTemplateReplacements = performScriptTemplateReplacements(scriptTemplateContents);
         File outputScriptFile = new File(path + "/" + scriptTemplate.getName());
         writeToFile(outputScriptFile, scriptTemplateReplacements);
-        
+
         File xsltTemplate = this.xsltFile;
         String xsltTemplateContents = readFromFile(xsltTemplate);
         String xsltTemplateReplacements = performXsltTemplateReplacements(xsltTemplateContents);
         File outputXsltFile = new File(path + "/" + xsltTemplate.getName());
         writeToFile(outputXsltFile, xsltTemplateReplacements);
-        
+
     }
-*/    
-    
-    
-    
-    
+*/
+
+
+
+
     @Override
     public String getScript()
     {
@@ -302,7 +302,7 @@ class CsvFileHarvestJob implements FileHarvestJob {
 
         if(harvestedDataPath.endsWith("/"))
             harvestedDataPath = harvestedDataPath.substring(0, harvestedDataPath.length() - 1);
-        
+
         replacements = replacements.replace("${WORKING_DIRECTORY}", workingDirectory);
         replacements = replacements.replace("${UPLOADS_FOLDER}", fileDirectory);
         replacements = replacements.replace("${HARVESTED_DATA_PATH}", harvestedDataPath);
@@ -314,13 +314,13 @@ class CsvFileHarvestJob implements FileHarvestJob {
 /*
     private String performXsltTemplateReplacements(String xsltTemplateContents) {
         String replacements = xsltTemplateContents;
-        
+
         replacements = replacements.replace("", "");
 
         return replacements;
     }
 
-    
+
     private void writeToFile(File file, String contents) {
         PrintWriter writer = null;
         try {
@@ -333,7 +333,7 @@ class CsvFileHarvestJob implements FileHarvestJob {
                 writer.close();
         }
     }
-*/    
+*/
 
     private String readFromFile(File file) {
         String contents = null;
@@ -407,7 +407,7 @@ class CsvFileHarvestJob implements FileHarvestJob {
     public String getNoNewDataMessage() {
         return this.noNewDataMessage;
     }
-    
+
 }
 
 

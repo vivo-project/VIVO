@@ -1,17 +1,17 @@
 /* $This file is distributed under the terms of the license in LICENSE$ */
 
 var adviseeRelUtils = {
-        
+
     onLoad: function(subject,blankSentinel) {
         this.subjName = '';
         if ( subject ) { this.subjName = subject; }
-        
+
         this.sentinel = '';
         if ( blankSentinel ) { this.sentinel = blankSentinel; }
 
-        this.initObjectReferences();                 
+        this.initObjectReferences();
         this.bindEventListeners();
-        
+
         $.extend(this, vitro.customFormUtils);
         $.extend(this, i18nStrings);
 
@@ -21,7 +21,7 @@ var adviseeRelUtils = {
     },
 
     initObjectReferences: function() {
-    
+
     this.form = $('#personHasAdvisingRelationship');
     this.adRelshiplabel = $('#advisingRelLabel');
     this.advisor = $('#advisor');
@@ -33,33 +33,33 @@ var adviseeRelUtils = {
     this.subjAreaUri = $('#subjAreaUri');
     this.saveAdvisorLabel = $('#saveAdvisorLabel');
     this.advisorAcSelection = $('div#advisorAcSelection');
-    
+
 
     // may not need this
     this.firstName.attr('disabled', false);
-    
+
     },
-    
+
     bindEventListeners: function() {
         this.idCache = {};
-        
+
         // we want to use the advisor label in the relationship label.
         // since the former gets cleared on submit in some cases, store
         // the value in a hidden field and map to relationship label
         this.advisor.change( function(objEvent) {
-           window.setTimeout('adviseeRelUtils.mapAdvisorValue()', 180); 
+           window.setTimeout('adviseeRelUtils.mapAdvisorValue()', 180);
         });
         this.advisor.blur( function(objEvent) {
-           window.setTimeout('adviseeRelUtils.mapAdvisorValue()', 180); 
+           window.setTimeout('adviseeRelUtils.mapAdvisorValue()', 180);
         });
-        
-        
+
+
         this.form.submit(function() {
             adviseeRelUtils.resolveAdvisorNames();
             adviseeRelUtils.buildAdvisingRelLabel();
-        });            
+        });
     },
-    
+
     mapAdvisorValue: function() {
        if ( this.advisorAcSelection.attr('class').indexOf('userSelected') != -1 ) {
            this.saveAdvisorLabel.val(this.advisor.val());
@@ -74,11 +74,11 @@ var adviseeRelUtils = {
         if (this.advisorUri.val() == '' || this.advisorUri.val() == this.sentinel ) {
             firstName = this.firstName.val();
             lastName = this.advisor.val();
-            
+
             name = lastName;
             if (firstName) {
                 name += ', ' + firstName;
-            }            
+            }
 
             // we don't want the user to see the label getting built, so hide the acSelector
             // field and display a bogus field that just has the last name in it.
@@ -87,13 +87,13 @@ var adviseeRelUtils = {
             this.fauxLabel.show();
             this.advisor.val(name);
             this.lastName.val(lastName);
-        } 
+        }
         else {
             this.firstName.attr('disabled', 'disabled');
             this.lastName.attr('disabled', 'disabled');
         }
 
-    },    
+    },
 
     buildAdvisingRelLabel: function() {
         if ( this.advisor.val() != "" ) {
@@ -114,5 +114,5 @@ var adviseeRelUtils = {
             this.advisor.val(temp);
         }
     }
-    
-} 
+
+}

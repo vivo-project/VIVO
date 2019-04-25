@@ -67,7 +67,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <#assign yearHint     = "<span class='hint'>(${i18n().year_hint_format})</span>" />
 
 <#if editMode = "error">
- <div>${i18n().unable_to_handle_position_editing}</div>      
+ <div>${i18n().unable_to_handle_position_editing}</div>
 <#else>
 
 <h2>${formHeading} ${editConfiguration.subjectName}</h2>
@@ -102,18 +102,18 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
          <#if lvf.submissionErrorExists(editSubmission, "grantLabel")>
  	        ${i18n().enter_or_select_grant}
         </#if>
-        
+
         </p>
     </section>
 </#if>
 
-<section id="addGrantRoleToPerson" role="region">        
-    
+<section id="addGrantRoleToPerson" role="region">
+
 <@lvf.unsupportedBrowser  urls.base />
 
 
     <form id="addGrantRoleToPerson" class="customForm noIE67" action="${submitUrl}"  role="add/edit grant role">
-        
+
         <p>
             <label for="grant">${i18n().grant_name} ${requiredHint}</label>
             <input class="acSelector" size="50"  type="text" id="grant" acGroupName="grant" name="grantLabel"  value="${grantLabelValue}" />
@@ -124,13 +124,13 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
             <p class="inline">
                 <label>${i18n().selected_grant}:</label>
                 <span class="acSelectionInfo"></span>
-                <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+                <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
                 <a href="#" class="changeSelection" id="changeSelection" title="${i18n().change_selection}">${i18n().change_selection})</a>
             </p>
             <input class="acUriReceiver" type="hidden" id="grantUri" name="existingGrant" value="${existingGrantValue}" ${flagClearLabelForExisting}="true" />
         </div>
 
-        <h4>${i18n().years_of_grant_participation}</h4>							 
+        <h4>${i18n().years_of_grant_participation}</h4>
 			 						<#if htmlForElements?keys?seq_contains("startField")>
 			 							 <label class="dateTime" for="startField">${i18n().start_capitalized}</label>
 			 							${htmlForElements["startField"]} ${yearHint}
@@ -140,7 +140,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 			 							<label class="dateTime" for="endField">${i18n().end_capitalized}</label>
 			 							${htmlForElements["endField"]} ${yearHint}
 					 	</#if>
-					 
+
             <p class="submit">
                 <input type="hidden" name = "editKey" value="${editKey}"/>
                 <input type="submit" id="submit" value="${submitButtonLabel}"/><span class="or"> ${i18n().or} </span><a class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
@@ -153,7 +153,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <#assign acUrl="/autocomplete?tokenize=true" />
 <#assign sparqlQueryUrl ="/ajax/sparqlQuery" />
 
-    
+
 <script type="text/javascript">
 var customFormData  = {
     sparqlForAcFilter: '${sparqlForAcFilter}',

@@ -1,9 +1,9 @@
 <#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
-<#-- Custom object property statement view for http://vivoweb.org/ontology/core#hasAssociatedConcept. 
-    
+<#-- Custom object property statement view for http://vivoweb.org/ontology/core#hasAssociatedConcept.
+
      This template must be self-contained and not rely on other variables set for the individual page, because it
-     is also used to generate the property statement during a deletion.  
+     is also used to generate the property statement during a deletion.
  -->
 <@showConcept statement />
 
@@ -13,6 +13,6 @@
       <#if statement.vocabularySourceName??>
           <a href="${profileUrl(statement.uri("concept"))}" title="${i18n().concept_name}">${statement.conceptLabel!statement.conceptName}</a> (${statement.vocabularySourceName})
       <#else>
-          <a href="${profileUrl(statement.uri("concept"))}" title="${i18n().concept_name}">${statement.conceptLabel!statement.conceptName}</a> 
+          <a href="${profileUrl(statement.uri("concept"))}" title="${i18n().concept_name}">${statement.conceptLabel!statement.conceptName}</a>
       </#if>
 </#macro>

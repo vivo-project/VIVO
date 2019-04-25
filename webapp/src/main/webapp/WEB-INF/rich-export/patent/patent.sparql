@@ -5,7 +5,7 @@ PREFIX bibo: <http://purl.org/ontology/bibo/>
 CONSTRUCT {
      ?patent ?property ?object .
 } WHERE {
-     PERSON_URI core:relatedBy ?authorship . 
+     PERSON_URI core:relatedBy ?authorship .
      ?authorship a core:Authorship .
      ?authorship core:relates ?patent .
      ?patent rdf:type bibo:Patent .

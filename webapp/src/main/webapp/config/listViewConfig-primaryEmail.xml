@@ -4,9 +4,9 @@
 <!-- See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
 
 <list-view-config>
-    <query-select>    
+    <query-select>
         PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
-        
+
         SELECT DISTINCT ?vcard ?email
                         ?emailAddress
         WHERE {
@@ -14,8 +14,8 @@
             ?vcard vcard:hasEmail ?email .
             ?email a vcard:Work .
             ?email vcard:email ?emailAddress .
-            
-        } 
+
+        }
     </query-select>
 
     <template>propStatement-emailAddress.ftl</template>

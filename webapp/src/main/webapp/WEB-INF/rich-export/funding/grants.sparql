@@ -12,10 +12,10 @@ CONSTRUCT {
          union
        { PERSON_URI core:relatedBy ?investigatorRole .
          ?investigatorRole a core:CoPrincipalInvestigatorRole
-       }   
+       }
      }
-     
+
      ?investigatorRole core:relatedBy ?grant .
      ?grant a core:Grant .
-     ?grant ?property ?object 
+     ?grant ?property ?object
 }

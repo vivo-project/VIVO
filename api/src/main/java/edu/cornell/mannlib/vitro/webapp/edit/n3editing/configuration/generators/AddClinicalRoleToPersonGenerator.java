@@ -7,28 +7,28 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ConstantField
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
 
 public class AddClinicalRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
-		
+
 	private static String template = "addClinicalRoleToPerson.ftl";
-	
+
     //Should this be overridden
 	@Override
-	String getTemplate() { 
-	    return template; 
+	String getTemplate() {
+	    return template;
 	}
 
 	@Override
 	String getRoleType() {
 		return "http://vivoweb.org/ontology/core#ClinicalRole";
 	}
-	
+
 	/** Clinical role involves hard-coded options for the "right side" of the role or activity. */
     @Override
-    FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {        
+    FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
 		return new ConstantFieldOptions(
-		        "",  "Select one", 
-		        "http://vivoweb.org/ontology/core#Project", "Project", 
+		        "",  "Select one",
+		        "http://vivoweb.org/ontology/core#Project", "Project",
 		        "http://purl.obolibrary.org/obo/ERO_0000005", "Service"
-		);		
+		);
 	}
 
 	//isShowRoleLabelField remains true for this so doesn't need to be overwritten
@@ -38,7 +38,7 @@ public class AddClinicalRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
 	}
 
 
-       /* 
+       /*
         * Use the methods below to change the date/time precision in the
         * custom form associated with this generator. When not used, the
         * precision will be YEAR. The other precisons are MONTH, DAY, HOUR,
@@ -54,6 +54,6 @@ public class AddClinicalRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
             String precision = VitroVocabulary.Precision.DAY.uri();
     	    return precision;
         }
-    */    
-    
+    */
+
 }

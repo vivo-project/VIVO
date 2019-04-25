@@ -38,7 +38,7 @@ import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
 
 /**
  * On an add/new, this will show a form, on an edit/update this will skip to the
- * profile page of the publication.  
+ * profile page of the publication.
  */
 public class AddPublicationToPersonGenerator extends VivoBaseGenerator implements EditConfigurationGenerator {
 
@@ -61,12 +61,12 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     final static String dateTimeValue = vivoCore + "dateTime";
     final static String dateTimePrecision = vivoCore + "dateTimePrecision";
     final static String relatesPred = vivoCore + "relates";
-   
+
     public AddPublicationToPersonGenerator() {}
-    
+
 	@Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) throws Exception {
-     
+
      if( EditConfigurationUtils.getObjectUri(vreq) == null ){
          return doAddNew(vreq,session);
      }else{
@@ -76,7 +76,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
     private EditConfigurationVTwo doSkipToPublication(VitroRequest vreq) {
         Individual authorshipNode = EditConfigurationUtils.getObjectIndividual(vreq);
-        
+
         //try to get the publication
         String pubQueryStr = "SELECT ?obj \n" +
                              "WHERE { <" + authorshipNode.getURI() + "> <" + relatesPred + "> ?obj . \n" +
@@ -89,8 +89,8 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
                 return doBadAuthorshipNoPub( vreq );
             }else if( rs.size() > 1 ){
                 return doBadAuthorshipMultiplePubs(vreq);
-            }else{ 
-                //skip to publication 
+            }else{
+                //skip to publication
                 RDFNode objNode = rs.next().get("obj");
                 if (!objNode.isResource() || objNode.isAnon()) {
                     return doBadAuthorshipNoPub( vreq );
@@ -154,10 +154,10 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         // TODO Auto-generated method stub
         return null;
     }
-    
+
     private void setVarNames(EditConfigurationVTwo editConfiguration) {
-        editConfiguration.setVarNameForSubject("person");               
-        editConfiguration.setVarNameForPredicate("predicate");      
+        editConfiguration.setVarNameForSubject("person");
+        editConfiguration.setVarNameForPredicate("predicate");
         editConfiguration.setVarNameForObject("authorshipUri");
 
     }
@@ -216,18 +216,18 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     }
 
     private String getAuthorshipN3() {
-        return "@prefix core: <" + vivoCore + "> . " + 
-        "?authorshipUri a core:Authorship ;" + 
-        "core:relates ?person ." +   
+        return "@prefix core: <" + vivoCore + "> . " +
+        "?authorshipUri a core:Authorship ;" +
+        "core:relates ?person ." +
         "?person core:relatedBy ?authorshipUri .";
     }
 
     private String getN3ForNewPub() {
         return "@prefix core: <" + vivoCore + "> ." +
         "?newPublication a ?pubType ." +
-        "?newPublication <" + label + "> ?title ." +  
+        "?newPublication <" + label + "> ?title ." +
         "?authorshipUri core:relates ?newPublication ." +
-        "?newPublication core:relatedBy ?authorshipUri .";   
+        "?newPublication core:relatedBy ?authorshipUri .";
     }
 
     private String getN3ForExistingPub() {
@@ -240,7 +240,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?newPublication vivo:hasPublicationVenue ?newCollection . \n" +
         "?newCollection a <" + collectionClass + "> . \n" +
-        "?newCollection vivo:publicationVenueFor ?newPublication . \n" + 
+        "?newCollection vivo:publicationVenueFor ?newPublication . \n" +
         "?newCollection <" + label + "> ?collection .";
     }
 
@@ -248,7 +248,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?pubUri vivo:hasPublicationVenue ?newCollection . \n" +
         "?newCollection a <" + collectionClass + ">  . \n" +
-        "?newCollection vivo:publicationVenueFor ?pubUri . \n" + 
+        "?newCollection vivo:publicationVenueFor ?pubUri . \n" +
         "?newCollection <" + label + "> ?collection .";
     }
 
@@ -268,7 +268,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?pubUri vivo:hasPublicationVenue ?newBook . \n" +
         "?newBook a <" + bookClass + ">  . \n" +
-        "?newBook vivo:publicationVenueFor ?pubUri . \n " + 
+        "?newBook vivo:publicationVenueFor ?pubUri . \n " +
         "?newBook <" + label + "> ?book .";
     }
 
@@ -282,8 +282,8 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?newPublication vivo:hasPublicationVenue ?newBook . \n" +
         "?newBook a <" + bookClass + ">  . \n" +
-        "?newBook vivo:publicationVenueFor ?newPublication . \n " + 
-        "?newBook <" + label + "> ?book . "; 
+        "?newBook vivo:publicationVenueFor ?newPublication . \n " +
+        "?newBook <" + label + "> ?book . ";
     }
 
     private String getN3ForNewBookVolume() {
@@ -312,7 +312,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         "?editorship a vivo:Editorship . \n" +
         "?editorship vivo:relates ?newEditor . \n" +
         "?newEditor a <" + editorClass + ">  . \n" +
-        "?newEditor vivo:relatedBy ?editorship . \n" + 
+        "?newEditor vivo:relatedBy ?editorship . \n" +
         "?newEditor <" + label + "> ?editor .";
     }
 
@@ -323,13 +323,13 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         "?newBook <" + label + "> ?book . \n " +
         "?editorship a vivo:Editorship . \n" +
         "?editorship vivo:relates ?editorUri . \n" +
-        "?editorUri vivo:relatedBy ?editorship . "; 
+        "?editorUri vivo:relatedBy ?editorship . ";
     }
 
     private String getN3ForNewBookNewPublisher() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?newBook vivo:publisher ?newPublisher . \n " +
-        "?newPublisher vivo:publisherOf ?newBook . \n" + 
+        "?newPublisher vivo:publisherOf ?newBook . \n" +
         "?newPublisher <" + label + "> ?publisher .";
      }
 
@@ -349,7 +349,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?pubUri <" + presentedAtPred + "> ?newConference . \n" +
         "?newConference a <" + conferenceClass + ">  . \n" +
-        "?newConference <http://purl.obolibrary.org/obo/BFO_0000051> ?pubUri . \n" + 
+        "?newConference <http://purl.obolibrary.org/obo/BFO_0000051> ?pubUri . \n" +
         "?newConference <" + label + "> ?conference .";
     }
 
@@ -363,7 +363,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?newPublication <" + presentedAtPred + "> ?newConference . \n" +
         "?newConference a <" + conferenceClass + ">  . \n" +
-        "?newConference <http://purl.obolibrary.org/obo/BFO_0000051> ?newPublication . \n" + 
+        "?newConference <http://purl.obolibrary.org/obo/BFO_0000051> ?newPublication . \n" +
         "?newConference <" + label + "> ?conference .";
     }
 
@@ -377,7 +377,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?pubUri vivo:proceedingsOf ?newEvent . \n" +
         "?newEvent a <" + conferenceClass + ">  . \n" +
-        "?newEvent vivo:hasProceedings ?pubUri . \n" + 
+        "?newEvent vivo:hasProceedings ?pubUri . \n" +
         "?newEvent <" + label + "> ?event .";
     }
 
@@ -391,7 +391,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?newPublication vivo:proceedingsOf ?newEvent . \n" +
         "?newEvent a <" + conferenceClass + ">  . \n" +
-        "?newEvent vivo:hasProceedings ?newPublication . \n" + 
+        "?newEvent vivo:hasProceedings ?newPublication . \n" +
         "?newEvent <" + label + "> ?event .";
     }
 
@@ -408,7 +408,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         "?editorship a vivo:Editorship . \n" +
         "?editorship vivo:relates ?newEditor . \n" +
         "?newEditor a <" + editorClass + ">  . \n" +
-        "?newEditor vivo:relatedBy ?editorship . \n" + 
+        "?newEditor vivo:relatedBy ?editorship . \n" +
         "?newEditor <" + label + "> ?editor .";
     }
 
@@ -418,7 +418,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         "?editorship vivo:relates ?pubUri . \n" +
         "?editorship a vivo:Editorship . \n" +
         "?editorship vivo:relates ?editorUri . \n" +
-        "?editorUri vivo:relatedBy ?editorship . "; 
+        "?editorUri vivo:relatedBy ?editorship . ";
     }
 
     private String getN3ForNewEditorNewPub() {
@@ -429,7 +429,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         "?editorship a vivo:Editorship . \n" +
         "?editorship vivo:relates ?newEditor . \n" +
         "?newEditor a <" + editorClass + ">  . \n" +
-        "?newEditor vivo:relatedBy ?editorship . \n" + 
+        "?newEditor vivo:relatedBy ?editorship . \n" +
         "?newEditor <" + label + "> ?editor .";
     }
 
@@ -440,14 +440,14 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         "?newPublication <" + label + "> ?title ." +
         "?editorship vivo:relates ?editorUri . \n" +
         "?editorship a vivo:Editorship . \n" +
-        "?editorUri vivo:relatedBy ?editorship . "; 
+        "?editorUri vivo:relatedBy ?editorship . ";
     }
 
     private String getN3ForNewPublisher() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?pubUri vivo:publisher ?newPublisher . \n" +
         "?newPublisher a <" + publisherClass + ">  . \n" +
-        "?newPublisher vivo:publisherOf ?pubUri . \n" + 
+        "?newPublisher vivo:publisherOf ?pubUri . \n" +
         "?newPublisher <" + label + "> ?publisher .";
     }
 
@@ -461,7 +461,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?newPublication vivo:publisher ?newPublisher . \n" +
         "?newPublisher a <" + publisherClass + ">  . \n" +
-        "?newPublisher vivo:publisherOf ?newPublication . \n" + 
+        "?newPublisher vivo:publisherOf ?newPublication . \n" +
         "?newPublisher <" + label + "> ?publisher .";
     }
 
@@ -475,9 +475,9 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         return "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
         "?newEditor <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardEditor . \n" +
         "?vcardEditor <http://purl.obolibrary.org/obo/ARG_2000029>  ?newEditor . \n" +
-        "?vcardEditor a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+        "?vcardEditor a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
         "?vcardEditor vcard:hasName  ?vcardName . \n" +
-        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
+        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +
         "?vcardName vcard:givenName ?firstName .";
     }
 
@@ -485,9 +485,9 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         return "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
         "?newEditor <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardEditor . \n" +
         "?vcardEditor <http://purl.obolibrary.org/obo/ARG_2000029>  ?newEditor . \n" +
-        "?vcardEditor a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+        "?vcardEditor a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
         "?vcardEditor vcard:hasName  ?vcardName . \n" +
-        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
+        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +
         "?vcardName vcard:familyName ?lastName .";
     }
 
@@ -535,10 +535,10 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     }
 
     /**  Get new resources	 */
-    private Map<String, String> generateNewResources(VitroRequest vreq) {					
+    private Map<String, String> generateNewResources(VitroRequest vreq) {
         String DEFAULT_NS_TOKEN=null; //null forces the default NS
 
-        HashMap<String, String> newResources = new HashMap<String, String>();			
+        HashMap<String, String> newResources = new HashMap<String, String>();
         newResources.put("authorshipUri", DEFAULT_NS_TOKEN);
         newResources.put("newPublication", DEFAULT_NS_TOKEN);
         newResources.put("newCollection", DEFAULT_NS_TOKEN);
@@ -554,21 +554,21 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         return newResources;
     }
 
-    /** Set URIS and Literals In Scope and on form and supporting methods	 */   
+    /** Set URIS and Literals In Scope and on form and supporting methods	 */
     private void setUrisAndLiteralsInScope(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
         HashMap<String, List<String>> urisInScope = new HashMap<String, List<String>>();
-        urisInScope.put(editConfiguration.getVarNameForSubject(), 
+        urisInScope.put(editConfiguration.getVarNameForSubject(),
                 Arrays.asList(new String[]{editConfiguration.getSubjectUri()}));
-        urisInScope.put(editConfiguration.getVarNameForPredicate(), 
+        urisInScope.put(editConfiguration.getVarNameForPredicate(),
                 Arrays.asList(new String[]{editConfiguration.getPredicateUri()}));
-        editConfiguration.setUrisInScope(urisInScope);    	
+        editConfiguration.setUrisInScope(urisInScope);
         HashMap<String, List<Literal>> literalsInScope = new HashMap<String, List<Literal>>();
-        editConfiguration.setLiteralsInScope(literalsInScope);    	
+        editConfiguration.setLiteralsInScope(literalsInScope);
 
     }
 
     private void setUrisAndLiteralsOnForm(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
-        List<String> urisOnForm = new ArrayList<String>();    	
+        List<String> urisOnForm = new ArrayList<String>();
         //add role activity and roleActivityType to uris on form
         urisOnForm.add("pubType");
         urisOnForm.add("pubUri");
@@ -605,11 +605,11 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         literalsOnForm.add("firstName");
         literalsOnForm.add("lastName");
         editConfiguration.setLiteralsOnForm(literalsOnForm);
-    }   
+    }
 
-    /** Set SPARQL Queries and supporting methods. */        
+    /** Set SPARQL Queries and supporting methods. */
     //In this case no queries for existing
-    private void setSparqlQueries(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {        
+    private void setSparqlQueries(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
         editConfiguration.setSparqlForExistingUris(new HashMap<String, String>());
         editConfiguration.setSparqlForAdditionalLiteralsInScope(new HashMap<String, String>());
         editConfiguration.setSparqlForAdditionalUrisInScope(new HashMap<String, String>());
@@ -617,9 +617,9 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     }
 
     /**
-     * 
+     *
      * Set Fields and supporting methods
-     * @throws Exception 
+     * @throws Exception
      */
 
     private void setFields(EditConfigurationVTwo editConfiguration, VitroRequest vreq) throws Exception {
@@ -668,7 +668,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         editConfiguration.addField(new FieldVTwo().
                 setName("pubType").
                 setValidators( list("nonempty") ).
-                setOptions( new ConstantFieldOptions("pubType", getPublicationTypeLiteralOptions() ))                                
+                setOptions( new ConstantFieldOptions("pubType", getPublicationTypeLiteralOptions() ))
                 );
     }
 
@@ -697,7 +697,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         editConfiguration.addField(new FieldVTwo().
                 setName("collectionUri"));
     }
-    
+
     private void setBookLabelField(EditConfigurationVTwo editConfiguration) {
         String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
@@ -705,7 +705,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
                 setValidators(list("datatype:" + stringDatatypeUri)).
                 setRangeDatatypeUri(stringDatatypeUri));
     }
-    
+
     private void setBookDisplayField(EditConfigurationVTwo editConfiguration) {
         String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
@@ -718,7 +718,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         editConfiguration.addField(new FieldVTwo().
                 setName("bookUri"));
     }
-    
+
     private void setConferenceLabelField(EditConfigurationVTwo editConfiguration) {
         String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
@@ -726,7 +726,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
                 setValidators(list("datatype:" + stringDatatypeUri)).
                 setRangeDatatypeUri(stringDatatypeUri));
     }
-    
+
     private void setConferenceDisplayField(EditConfigurationVTwo editConfiguration) {
         String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
@@ -739,7 +739,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         editConfiguration.addField(new FieldVTwo().
                 setName("conferenceUri"));
     }
-    
+
     private void setEventLabelField(EditConfigurationVTwo editConfiguration) {
         String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
@@ -747,7 +747,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
                 setValidators(list("datatype:" + stringDatatypeUri)).
                 setRangeDatatypeUri(stringDatatypeUri));
     }
-    
+
     private void setEventDisplayField(EditConfigurationVTwo editConfiguration) {
         String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
@@ -756,7 +756,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
                 setRangeDatatypeUri(stringDatatypeUri));
     }
 
-    
+
     private void setFirstNameField(EditConfigurationVTwo editConfiguration) {
         String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
@@ -764,7 +764,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
                 setValidators(list("datatype:" + stringDatatypeUri)).
                 setRangeDatatypeUri(stringDatatypeUri));
     }
-    
+
     private void setLastNameField(EditConfigurationVTwo editConfiguration) {
         String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
@@ -776,7 +776,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         editConfiguration.addField(new FieldVTwo().
                 setName("eventUri"));
     }
-    
+
     private void setEditorLabelField(EditConfigurationVTwo editConfiguration) {
         String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
@@ -784,7 +784,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
                 setValidators(list("datatype:" + stringDatatypeUri)).
                 setRangeDatatypeUri(stringDatatypeUri));
     }
-    
+
     private void setEditorDisplayField(EditConfigurationVTwo editConfiguration) {
         String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
@@ -797,7 +797,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         editConfiguration.addField(new FieldVTwo().
                 setName("editorUri"));
     }
-    
+
     private void setPublisherLabelField(EditConfigurationVTwo editConfiguration) {
         String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
@@ -805,7 +805,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
                 setValidators(list("datatype:" + stringDatatypeUri)).
                 setRangeDatatypeUri(stringDatatypeUri));
     }
-    
+
     private void setPublisherDisplayField(EditConfigurationVTwo editConfiguration) {
         String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
@@ -818,7 +818,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         editConfiguration.addField(new FieldVTwo().
                 setName("publisherUri"));
     }
-    
+
     private void setLocaleField(EditConfigurationVTwo editConfiguration) {
         String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
@@ -879,11 +879,11 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         editConfiguration.addField(new FieldVTwo().
                 setName("dateTime").
                 setEditElement(
-                new DateTimeWithPrecisionVTwo(null, 
+                new DateTimeWithPrecisionVTwo(null,
                         VitroVocabulary.Precision.YEAR.uri(),
                         VitroVocabulary.Precision.NONE.uri())
                         )
-                );			
+                );
     }
 
     private List<List<String>> getPublicationTypeLiteralOptions() {
@@ -930,12 +930,12 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     }
 
     public String getSparqlForAcFilter(VitroRequest vreq) {
-        String subject = EditConfigurationUtils.getSubjectUri(vreq);			
+        String subject = EditConfigurationUtils.getSubjectUri(vreq);
 
-        String query = "PREFIX core:<" + vivoCore + "> " + 
-        "SELECT ?pubUri WHERE { " + 
-        "<" + subject + "> core:relatedBy ?authorshipUri . " + 
-        "?authorshipUri a core:Authorship . " +  
+        String query = "PREFIX core:<" + vivoCore + "> " +
+        "SELECT ?pubUri WHERE { " +
+        "<" + subject + "> core:relatedBy ?authorshipUri . " +
+        "?authorshipUri a core:Authorship . " +
         "?authorshipUri core:relates ?pubUri . }";
         return query;
     }

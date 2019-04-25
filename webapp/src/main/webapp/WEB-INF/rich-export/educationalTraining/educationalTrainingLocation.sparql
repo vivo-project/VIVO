@@ -5,8 +5,8 @@ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 CONSTRUCT {
      ?geographicLocation ?property ?object .
 } WHERE {
-     PERSON_URI obo:RO_0000056 ?educationalTraining . 
-     ?educationalTraining a core:EducationalProcess . 
+     PERSON_URI obo:RO_0000056 ?educationalTraining .
+     ?educationalTraining a core:EducationalProcess .
      ?educationalTraining obo:RO_0000057 ?organization .
      ?organization a foaf:Organization .
      ?organization obo:RO_0001025 ?geographicLocation .

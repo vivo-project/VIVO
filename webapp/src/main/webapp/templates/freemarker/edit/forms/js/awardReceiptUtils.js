@@ -4,7 +4,7 @@
 var awardReceiptUtils = {
 
     onLoad: function(mode, subjectName, href) {
-        this.initObjectReferences();                 
+        this.initObjectReferences();
         this.bindEventListeners();
         this.baseHref = href;
         this.editMode = mode;
@@ -24,7 +24,7 @@ var awardReceiptUtils = {
     },
 
     initObjectReferences: function() {
-    
+
     this.form = $('#personHasAwardOrHonor');
     this.recLabel = $('#awardReceiptLabel');
     this.award = $('#award');
@@ -38,29 +38,29 @@ var awardReceiptUtils = {
     this.changeLink = this.awardAcSelection.children('p').children('#changeSelection');
 
     },
-    
+
     bindEventListeners: function() {
         this.idCache = {};
-        
+
         // the delay ensures that the function is called after the ac selection is completed
         this.award.change( function(objEvent) {
-           window.setTimeout('awardReceiptUtils.hideConferredBy()', 180); 
+           window.setTimeout('awardReceiptUtils.hideConferredBy()', 180);
         });
-        
+
         this.award.blur( function(objEvent) {
-           window.setTimeout('awardReceiptUtils.hideConferredBy()', 180); 
+           window.setTimeout('awardReceiptUtils.hideConferredBy()', 180);
         });
 
         this.form.submit(function() {
             awardReceiptUtils.setYearAwardedValue();
             awardReceiptUtils.buildAwardReceiptLabel();
-        });    
-    
+        });
+
         this.changeLink.click( function() {
-           awardReceiptUtils.showConferredBy(); 
+           awardReceiptUtils.showConferredBy();
         });
     },
-    
+
     hideConferredBy: function() {
         if ( this.awardAcSelection.attr('class').indexOf('userSelected') != -1 ) {
             this.org.parent('p').hide();
@@ -80,7 +80,7 @@ var awardReceiptUtils = {
 
     resetAcSelection: function() {
         var $acSelection = $("div.acSelection[acGroupName='org']");
-        
+
         if ( this.orgUriReceiver.val() != '' ) {
             this.hideFields($acSelection);
             $acSelection.removeClass('userSelected');
@@ -110,5 +110,5 @@ var awardReceiptUtils = {
     setYearAwardedValue: function() {
         this.yearAwarded.val(this.displayedYear.val());
     }
-       
+
 }

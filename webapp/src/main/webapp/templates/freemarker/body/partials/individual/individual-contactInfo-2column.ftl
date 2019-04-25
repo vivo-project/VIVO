@@ -14,17 +14,17 @@
     <div id="contactOuterDiv">
         <div id="contactEmailDiv">
 </#if>
-<#-- Primary Email -->    
+<#-- Primary Email -->
 <@emailLinks "${core}primaryEmail" pEmail />
 
-<#-- Additional Emails --> 
-<@emailLinks "${core}email" email />   
+<#-- Additional Emails -->
+<@emailLinks "${core}email" email />
 <#if !editable>
         </div> <!-- contactEmailDiv -->
         <div id="contactPhoneDiv">
 </#if>
-<#-- Phone --> 
-<@phoneLinks phone /> 
+<#-- Phone -->
+<@phoneLinks phone />
 <#if !editable>
         </div> <!-- contactPhoneDiv -->
     </div> <!-- contactOuterDiv -->
@@ -38,7 +38,7 @@
     <#if phone.statements?has_content> <#-- if there are any statements -->
         <ul id="phone-list" role="list">
             <#list phone.statements as statement>
-                <li role="listitem" <#if editable>style="padding-left:10px;"</#if>>                           
+                <li role="listitem" <#if editable>style="padding-left:10px;"</#if>>
                     <span itemprop="telephone">${statement.number!}</span>
                     <@p.editingLinks "${phone.localName}" "${phone.name}" statement editable phone.rangeUri />
                 </li>
@@ -47,14 +47,14 @@
     </#if>
 </#if>
 </#macro>
-<#macro emailLinks property email>        
+<#macro emailLinks property email>
     <#if property == "${core}primaryEmail">
         <#local listId = "primary-email">
         <#local label = "${i18n().primary_email}">
     <#else>
         <#local listId = "additional-emails">
         <#local label = "${i18n().additional_emails}">
-    </#if>     
+    </#if>
     <#if email?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
         <#if editable>
             <h3 id="contact" class="${listId}">${label}<@p.addLink email editable label/></h3>
@@ -64,7 +64,7 @@
             <ul id="${listId}" role="list">
                 <#list email.statements as statement>
                     <li role="listitem" <#if editable>style="padding-left:10px;"</#if>>
-                        
+
                         <a itemprop="email" class="email" href="mailto:${statement.emailAddress!}" title="${i18n().email}">${statement.emailAddress!}</a>
                         <@p.editingLinks "${email.localName}" "${email.name}" statement editable email.rangeUri />
                     </li>

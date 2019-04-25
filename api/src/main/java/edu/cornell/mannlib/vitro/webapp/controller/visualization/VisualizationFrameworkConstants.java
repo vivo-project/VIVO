@@ -11,15 +11,15 @@ public class VisualizationFrameworkConstants {
 	 * available in that instance. Currently it is stored under
 	 * "productMods/WEB-INF..."
 	 */
-	public static final String RELATIVE_LOCATION_OF_VISUALIZATIONS_BEAN = 
+	public static final String RELATIVE_LOCATION_OF_VISUALIZATIONS_BEAN =
 		"/WEB-INF/visualization/visualizations-beans-injection.xml";
-	
+
 	/*
 	 * Freemarker Version
 	 * */
-	public static final String RELATIVE_LOCATION_OF_FM_VISUALIZATIONS_BEAN = 
+	public static final String RELATIVE_LOCATION_OF_FM_VISUALIZATIONS_BEAN =
 		"/WEB-INF/visualization/visualizations-beans-injection-fm.xml";
-	
+
 	public static final String ERROR_TEMPLATE = "/visualization/visualizationError.ftl";
 
 	/*
@@ -27,23 +27,23 @@ public class VisualizationFrameworkConstants {
 	 */
 	public static final String VISUALIZATION_URL_PREFIX = "/visualization";
 	public static final String SHORT_URL_VISUALIZATION_REQUEST_PREFIX = "/vis";
-	
+
 	public static final String FREEMARKERIZED_VISUALIZATION_URL_PREFIX = "/visualization";
 	public static final String AJAX_VISUALIZATION_SERVICE_URL_PREFIX = "/visualizationAjax";
 	public static final String DATA_VISUALIZATION_SERVICE_URL_PREFIX = "/visualizationData";
-	
+
 	public static final String INDIVIDUAL_URL_PREFIX = "/individual";
-	
-	
+
+
 	public static final Pattern SHORT_URL_REQUEST_PATTERN = Pattern
-										.compile("^" 
-												 + SHORT_URL_VISUALIZATION_REQUEST_PREFIX 
+										.compile("^"
+												 + SHORT_URL_VISUALIZATION_REQUEST_PREFIX
 												 + "/([\\w-]+)/([^/]*)$");
-	
+
 
 	/*
 	 * These represent possible query keys in a URI for visualization purposes.
-	 * Examples, 
+	 * Examples,
 	 * 		1. http://vivo.indiana.edu/visualization?uri=http://vivoweb.org/ontology/core/Person10979&vis=person_level&render_mode=standalone
 	 * 		2. http://vivo.indiana.edu/visualization?uri=http://vivoweb.org/ontology/core/Person72&vis=person_pub_count&render_mode=dynamic&container=vis_container
 	 * */
@@ -79,7 +79,7 @@ public class VisualizationFrameworkConstants {
 	public static final String COAUTHORS_LIST_VIS_MODE = "coauthors";
 	public static final String COAUTHOR_NETWORK_STREAM_VIS_MODE = "coauthor_network_stream";
 	public static final String COAUTHOR_NETWORK_DOWNLOAD_VIS_MODE = "coauthor_network_download";
-	
+
 	/*
 	 * Vis modes for CoPIRequest Handler
 	 * */
@@ -87,16 +87,16 @@ public class VisualizationFrameworkConstants {
 	public static final String COPIS_LIST_VIS_MODE = "copis";
 	public static final String COPI_NETWORK_STREAM_VIS_MODE = "copi_network_stream";
 	public static final String COPI_NETWORK_DOWNLOAD_VIS_MODE = "copi_network_download";
-	
-	
+
+
 	/*
 	 * Vis modes for Map of Science Handler
 	 * */
 	public static final String DISCIPLINE_TO_ACTIVTY_VIS_MODE = "discipline";
 	public static final String SUBDISCIPLINE_TO_ACTIVTY_VIS_MODE = "subdiscipline";
 	public static final String SCIENCE_UNLOCATED_JOURNALS_VIS_MODE = "unlocated_journals";
-	
-	
+
+
 	/*
 	 * These values represent possible utilities vis modes.
 	 * */
@@ -130,11 +130,11 @@ public class VisualizationFrameworkConstants {
 	public static final String MAP_OF_SCIENCE_VIS_SHORT_URL = "map-of-science";
 	public static final String GRANT_TEMPORAL_VIS_SHORT_URL = "grant-graph";
 	public static final String CO_PI_VIS = "coprincipalinvestigator";
-	
-	
+
+
 	/*
-	 * These values represent possible data serialization formats corresponding to 
-	 * output format key. 
+	 * These values represent possible data serialization formats corresponding to
+	 * output format key.
 	 * */
 	public static final String JSON_OUTPUT_FORMAT = "json";
 	public static final String CSV_OUTPUT_FORMAT = "csv";

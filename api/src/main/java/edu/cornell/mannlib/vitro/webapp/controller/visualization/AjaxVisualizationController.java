@@ -40,73 +40,73 @@ public class AjaxVisualizationController extends FreemarkerHttpServlet {
 	public static final String URL_ENCODING_SCHEME = "UTF-8";
 
 	private static final Log log = LogFactory.getLog(AjaxVisualizationController.class.getName());
-	
+
     protected static final Syntax SYNTAX = Syntax.syntaxARQ;
-    
+
     public static ServletContext servletContext;
-    
+
     @Override
     protected AuthorizationRequest requiredActions(VitroRequest vreq) {
-    	
+
     	/*
-    	 * Based on the query parameters passed via URI get the appropriate visualization 
+    	 * Based on the query parameters passed via URI get the appropriate visualization
     	 * request handler.
     	 * */
-    	VisualizationRequestHandler visRequestHandler = 
+    	VisualizationRequestHandler visRequestHandler =
     			getVisualizationRequestHandler(vreq);
-    	
+
     	if (visRequestHandler != null) {
-    		
+
     		AuthorizationRequest requiredPrivileges = visRequestHandler.getRequiredPrivileges();
 			if (requiredPrivileges != null) {
     			return requiredPrivileges;
     		}
     	}
-    	
+
     	return super.requiredActions(vreq);
     }
-   
+
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
     		throws IOException, ServletException {
-    
+
 		VitroRequest vreq = new VitroRequest(request);
-		
+
 		Object ajaxResponse = processAjaxRequest(vreq);
-		
+
 		if (ajaxResponse instanceof TemplateResponseValues) {
-			
+
 			TemplateResponseValues trv = (TemplateResponseValues) ajaxResponse;
 			try {
                 writeTemplate(trv.getTemplateName(), trv.getMap(), vreq, response);
             } catch (TemplateProcessingException e) {
                 log.error(e.getMessage(), e);
             }
-			
+
 		} else {
 			response.getWriter().write(ajaxResponse.toString());
 		}
 	}
-    
+
     private Object processAjaxRequest(VitroRequest vreq) {
     	/*
-    	 * Based on the query parameters passed via URI get the appropriate visualization 
+    	 * Based on the query parameters passed via URI get the appropriate visualization
     	 * request handler.
     	 * */
-    	VisualizationRequestHandler visRequestHandler = 
+    	VisualizationRequestHandler visRequestHandler =
     			getVisualizationRequestHandler(vreq);
-    	
+
     	if (visRequestHandler != null) {
-    	
+
     		/*
-        	 * Pass the query to the selected visualization request handler & render the 
-        	 * visualization. Since the visualization content is directly added to the response 
+        	 * Pass the query to the selected visualization request handler & render the
+        	 * visualization. Since the visualization content is directly added to the response
         	 * object we are side-effecting this method.
         	 * */
             return renderVisualization(vreq, visRequestHandler);
-            
+
     	} else {
-    		
+
     		return UtilityFunctions.handleMalformedParameters(
     									"Visualization Query Error",
     									"Inappropriate query parameters were submitted.",
@@ -117,70 +117,70 @@ public class AjaxVisualizationController extends FreemarkerHttpServlet {
 
 	private Object renderVisualization(VitroRequest vitroRequest,
 									 VisualizationRequestHandler visRequestHandler) {
-		
+
 		Model model = vitroRequest.getJenaOntModel(); // getModel()
         if (model == null) {
-            
-            String errorMessage = "This service is not supporeted by the current " 
-            			+ "webapp configuration. A jena model is required in the " 
+
+            String errorMessage = "This service is not supporeted by the current "
+            			+ "webapp configuration. A jena model is required in the "
             			+ "servlet context.";
 
             log.error(errorMessage);
-            
-            return UtilityFunctions.handleMalformedParameters("Visualization Query Error", 
-            												  errorMessage, 
+
+            return UtilityFunctions.handleMalformedParameters("Visualization Query Error",
+            												  errorMessage,
             												  vitroRequest);
-			
+
         }
-		
+
 		Dataset dataset = setupJENADataSource(vitroRequest);
-        
+
 		if (dataset != null && visRequestHandler != null) {
-        	
+
         	try {
-				return visRequestHandler.generateAjaxVisualization(vitroRequest, 
-														log, 
+				return visRequestHandler.generateAjaxVisualization(vitroRequest,
+														log,
 														dataset);
 			} catch (JsonProcessingException|MalformedQueryParametersException e) {
 				return UtilityFunctions.handleMalformedParameters(
-						"Ajax Visualization Query Error - Individual Publication Count", 
-						e.getMessage(), 
+						"Ajax Visualization Query Error - Individual Publication Count",
+						e.getMessage(),
 						vitroRequest);
-				
+
 			}
-        	
+
         } else {
-        	
-    		String errorMessage = "Data Model Empty &/or Inappropriate " 
+
+    		String errorMessage = "Data Model Empty &/or Inappropriate "
     									+ "query parameters were submitted. ";
-    		
+
     		log.error(errorMessage);
-    		
-    		return UtilityFunctions.handleMalformedParameters("Visualization Query Error", 
-    														  errorMessage, 
+
+    		return UtilityFunctions.handleMalformedParameters("Visualization Query Error",
+    														  errorMessage,
     														  vitroRequest);
-    		
-			
+
+
         }
 	}
 
 	private VisualizationRequestHandler getVisualizationRequestHandler(
 				VitroRequest vitroRequest) {
-		
+
 		String visType = vitroRequest.getParameter(VisualizationFrameworkConstants
 																	.VIS_TYPE_KEY);
     	VisualizationRequestHandler visRequestHandler = null;
-    	
+
     	try {
     		visRequestHandler = VisualizationsDependencyInjector
 										.getVisualizationIDsToClassMap(
 												getServletContext()).get(visType);
-    		
+
     	} catch (NullPointerException nullKeyException) {
 
     		return null;
 		}
-    	
+
 		return visRequestHandler;
 	}
 

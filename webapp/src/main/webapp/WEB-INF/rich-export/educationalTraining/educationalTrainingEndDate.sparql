@@ -5,8 +5,8 @@ CONSTRUCT {
      ?dateTimeInterval core:end ?date .
      ?date ?property ?object .
 } WHERE {
-     PERSON_URI obo:RO_0000056 ?educationalTraining . 
-     ?educationalTraining a core:EducationalProcess . 
+     PERSON_URI obo:RO_0000056 ?educationalTraining .
+     ?educationalTraining a core:EducationalProcess .
      ?educationalTraining core:dateTimeInterval ?dateTimeInterval .
      ?dateTimeInterval core:end ?date .
      ?date ?property ?object .

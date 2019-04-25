@@ -31,7 +31,7 @@ public class ProjectOrServiceChecker extends RelationshipChecker {
 	 * A self-editor is authorized to add, edit, or delete a statement if the
 	 * subject or object refers to a Project or a Service, and if the
 	 * self-editor:
-	 * 
+	 *
 	 * 1) is a Clinical Agent of that Project or Service
 	 */
 	public PolicyDecision isAuthorized(List<String> userUris) {

@@ -38,38 +38,38 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
     final static String dateTimeValueType = vivoCore + "DateTimeValue";
     final static String dateTimeValue = vivoCore + "dateTime";
     final static String dateTimePrecision = vivoCore + "dateTimePrecision";
-    
+
     public PersonHasAwardOrHonorGenerator() {}
-    
+
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
             HttpSession session) throws Exception {
-        
+
         EditConfigurationVTwo conf = new EditConfigurationVTwo();
-        
+
         initBasics(conf, vreq);
         initPropertyParameters(vreq, session, conf);
-        initObjectPropForm(conf, vreq);               
-        
+        initObjectPropForm(conf, vreq);
+
         conf.setTemplate("personHasAwardOrHonor.ftl");
-        
+
         conf.setVarNameForSubject("person");
         conf.setVarNameForPredicate("predicate");
         conf.setVarNameForObject("awardReceipt");
-        
+
         conf.setN3Required( Arrays.asList( n3ForNewAwardReceipt,
                                            awardReceiptLabelAssertion  ) );
-        conf.setN3Optional( Arrays.asList( n3ForNewAwardAssertion, 
-                                           n3ForExistingAwardAssertion, 
-                                           descriptionAssertion, 
+        conf.setN3Optional( Arrays.asList( n3ForNewAwardAssertion,
+                                           n3ForExistingAwardAssertion,
+                                           descriptionAssertion,
                                            n3ForNewOrgNewAwardAssertion,
                                            n3ForExistingOrgNewAwardAssertion,
                                            n3ForNewOrgExistingAwardAssertion,
                                            n3ForExistingOrgExistingAwardAssertion,
-                                           n3ForYearAwarded, 
-                                           n3ForStart, 
+                                           n3ForYearAwarded,
+                                           n3ForStart,
                                            n3ForEnd ) );
-        
+
         conf.addNewResource("award", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("awardReceipt", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("newOrg", DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -77,13 +77,13 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
         conf.addNewResource("intervalNode", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("startNode", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("endNode", DEFAULT_NS_FOR_NEW_RESOURCE);
-        
-        //uris in scope: none   
-        //literals in scope: none 
-        
+
+        //uris in scope: none
+        //literals in scope: none
+
         conf.setUrisOnform(Arrays.asList("existingAward", "existingOrg"));
         conf.setLiteralsOnForm(Arrays.asList("description", "awardReceiptLabel", "awardLabel", "orgLabel", "yearAwardedDisplay", "orgLabelDisplay", "awardLabelDisplay" ));
-        
+
         conf.addSparqlForExistingLiteral("awardReceiptLabel", awardReceiptLabelQuery);
         conf.addSparqlForExistingLiteral("awardLabel", awardLabelQuery);
         conf.addSparqlForExistingLiteral("orgLabel", orgLabelQuery);
@@ -91,9 +91,9 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
         conf.addSparqlForExistingLiteral("yearAwarded-value", existingYearAwardedQuery);
         conf.addSparqlForExistingLiteral("startField-value", existingStartDateQuery);
         conf.addSparqlForExistingLiteral("endField-value", existingEndDateQuery);
-        
+
         conf.addSparqlForExistingUris("existingAward", existingAwardQuery);
-        conf.addSparqlForExistingUris("existingOrg", existingOrgQuery); 
+        conf.addSparqlForExistingUris("existingOrg", existingOrgQuery);
         conf.addSparqlForExistingUris("yearAwardedNode",existingYearAwardedNodeQuery);
         conf.addSparqlForExistingUris("intervalNode",existingIntervalNodeQuery);
         conf.addSparqlForExistingUris("startNode", existingStartNodeQuery);
@@ -101,20 +101,20 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
         conf.addSparqlForExistingUris("yearAwarded-precision", existingYearAwardedPrecisionQuery);
         conf.addSparqlForExistingUris("startField-precision", existingStartPrecisionQuery);
         conf.addSparqlForExistingUris("endField-precision", existingEndPrecisionQuery);
-        
-        conf.addField( new FieldVTwo().                        
+
+        conf.addField( new FieldVTwo().
                 setName("description")
                 .setRangeDatatypeUri( XSD.xstring.toString() ).
                 setValidators( list("datatype:" + XSD.xstring.toString()) )
                 );
 
         conf.addField( new FieldVTwo(). // options will be added in browser by auto complete JS
-                setName("existingOrg")      
+                setName("existingOrg")
         );
 
         conf.addField( new FieldVTwo(). // options will be added in browser by auto complete JS
                 setName("existingAward")
-        );        
+        );
 
         conf.addField( new FieldVTwo().
                 setName("awardReceiptLabel").
@@ -153,24 +153,24 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
                 );
 
         conf.addField( new FieldVTwo().setName("yearAwarded").
-                setEditElement( 
-                        new DateTimeWithPrecisionVTwo(null, 
+                setEditElement(
+                        new DateTimeWithPrecisionVTwo(null,
                                 VitroVocabulary.Precision.YEAR.uri(),
                                 VitroVocabulary.Precision.NONE.uri())
                                 )
                 );
 
         conf.addField( new FieldVTwo().setName("startField").
-                setEditElement( 
-                        new DateTimeWithPrecisionVTwo(null, 
+                setEditElement(
+                        new DateTimeWithPrecisionVTwo(null,
                                 VitroVocabulary.Precision.YEAR.uri(),
                                 VitroVocabulary.Precision.NONE.uri())
                                 )
                 );
 
         conf.addField( new FieldVTwo().setName("endField").
-                setEditElement( 
-                        new DateTimeWithPrecisionVTwo(null, 
+                setEditElement(
+                        new DateTimeWithPrecisionVTwo(null,
                                 VitroVocabulary.Precision.YEAR.uri(),
                                 VitroVocabulary.Precision.NONE.uri())
                                 )
@@ -185,66 +185,66 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
 
     /* N3 assertions  */
 
-    final static String n3ForNewAwardReceipt = 
-        "@prefix vivo: <" + vivoCore + "> . \n\n" +   
+    final static String n3ForNewAwardReceipt =
+        "@prefix vivo: <" + vivoCore + "> . \n\n" +
         "?person <" + awardReceiptPred + ">  ?awardReceipt . \n" +
-        "?awardReceipt a  <" + awardReceiptClass + "> . \n" +              
-        "?awardReceipt <" + awardForPred + "> ?person . " ;    
-    
-    final static String awardReceiptLabelAssertion  =      
+        "?awardReceipt a  <" + awardReceiptClass + "> . \n" +
+        "?awardReceipt <" + awardForPred + "> ?person . " ;
+
+    final static String awardReceiptLabelAssertion  =
         "?awardReceipt <"+ label + "> ?awardReceiptLabel .";
-    
-    final static String n3ForNewAwardAssertion  =      
+
+    final static String n3ForNewAwardAssertion  =
         "?awardReceipt <" + receiptOfPred + "> ?award . \n" +
         "?award a <" + awardClass + ">  . \n" +
          "?award <" + receiptPred + "> ?awardReceipt . \n" +
         "?award <"+ label + "> ?awardLabel .";
-    
-    final static String n3ForExistingAwardAssertion  =      
+
+    final static String n3ForExistingAwardAssertion  =
         "?awardReceipt <" + receiptOfPred + "> ?existingAward . \n" +
         "?existingAward <" + receiptPred + "> ?awardReceipt . " ;
-    
-    final static String descriptionAssertion  =      
+
+    final static String descriptionAssertion  =
         "?awardReceipt <"+ descriptionPred +"> ?description .";
 
-    final static String n3ForExistingOrgNewAwardAssertion  =      
+    final static String n3ForExistingOrgNewAwardAssertion  =
         "?awardReceipt <" + awardConferredByPred +"> ?existingOrg . \n" +
         "?existingOrg <" + awardConferredPred + "> ?awardReceipt . \n" +
-        "?award <"+ label + "> ?awardLabel .";    
+        "?award <"+ label + "> ?awardLabel .";
 
-    final static String n3ForExistingOrgExistingAwardAssertion  =      
+    final static String n3ForExistingOrgExistingAwardAssertion  =
         "?awardReceipt <" + awardConferredByPred +"> ?existingOrg . \n" +
-        "?existingOrg <" + awardConferredPred + "> ?awardReceipt . ";    
+        "?existingOrg <" + awardConferredPred + "> ?awardReceipt . ";
 
-    final static String n3ForNewOrgNewAwardAssertion  =      
+    final static String n3ForNewOrgNewAwardAssertion  =
         "?newOrg a <" + orgClass + "> . \n" +
         "?awardReceipt <" + awardConferredByPred +"> ?newOrg . \n" +
         "?newOrg <" + awardConferredPred + "> ?awardReceipt . \n" +
-        "?award <"+ label + "> ?awardLabel . \n" +   
-        "?newOrg <"+ label + "> ?orgLabel .";    
+        "?award <"+ label + "> ?awardLabel . \n" +
+        "?newOrg <"+ label + "> ?orgLabel .";
 
-    final static String n3ForNewOrgExistingAwardAssertion  =      
+    final static String n3ForNewOrgExistingAwardAssertion  =
         "?newOrg a <" + orgClass + "> . \n" +
         "?awardReceipt <" + awardConferredByPred +"> ?newOrg . \n" +
-        "?newOrg <" + awardConferredPred + "> ?awardReceipt . \n" +    
-        "?newOrg <"+ label + "> ?orgLabel .";    
+        "?newOrg <" + awardConferredPred + "> ?awardReceipt . \n" +
+        "?newOrg <"+ label + "> ?orgLabel .";
 
-	final static String n3ForYearAwarded = 
+	final static String n3ForYearAwarded =
         "?awardReceipt <" + yearAwardedPred + "> ?yearAwardedNode . \n" +
         "?yearAwardedNode a <" + dateTimeValueType + "> . \n" +
         "?yearAwardedNode  <" + dateTimeValue + "> ?yearAwarded-value . \n" +
         "?yearAwardedNode  <" + dateTimePrecision + "> ?yearAwarded-precision .";
-        
+
     final static String n3ForStart =
-        "?awardReceipt <" + awardReceiptToInterval + "> ?intervalNode . \n" +    
+        "?awardReceipt <" + awardReceiptToInterval + "> ?intervalNode . \n" +
         "?intervalNode a <" + intervalType + "> . \n" +
-        "?intervalNode <" + intervalToStart + "> ?startNode . \n" +    
+        "?intervalNode <" + intervalToStart + "> ?startNode . \n" +
         "?startNode a <" + dateTimeValueType + "> . \n" +
         "?startNode  <" + dateTimeValue + "> ?startField-value . \n" +
         "?startNode  <" + dateTimePrecision + "> ?startField-precision . \n";
-    
+
     final static String n3ForEnd =
-        "?awardReceipt <" + awardReceiptToInterval + "> ?intervalNode . \n" +    
+        "?awardReceipt <" + awardReceiptToInterval + "> ?intervalNode . \n" +
         "?intervalNode a <" + intervalType + "> . \n" +
         "?intervalNode <" + intervalToEnd + "> ?endNode . \n" +
         "?endNode a <" + dateTimeValueType + "> . \n" +
@@ -259,7 +259,7 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
         " ?existingAward a <" + awardClass + "> . \n" +
         "}";
 
-    final static String existingOrgQuery  =      
+    final static String existingOrgQuery  =
         "SELECT ?existingOrg WHERE { \n" +
         " ?awardReceipt <" + awardConferredByPred + "> ?existingOrg . \n" +
         " ?existingOrg a <" + orgClass + ">  . \n" +
@@ -277,24 +277,24 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
         " ?existingAward <" + label + "> ?existingAwardLabel . \n" +
         "}";
 
-    final static String orgLabelQuery  =      
+    final static String orgLabelQuery  =
         "SELECT ?existingOrgLabel WHERE { \n" +
         " ?awardReceipt <" + awardConferredByPred + "> ?existingOrg . \n" +
         " ?existingOrg a <" + orgClass + ">  . \n" +
         " ?existingOrg <" + label + "> ?existingOrgLabel . \n" +
         "}";
 
-    final static String descriptionQuery  =  
+    final static String descriptionQuery  =
         "SELECT ?existingDescription WHERE {\n"+
         " ?awardReceipt <"+ descriptionPred +"> ?existingDescription . }";
 
-    final static String existingYearAwardedQuery = 
+    final static String existingYearAwardedQuery =
         "SELECT ?existingYearAwardedValue WHERE { \n" +
         "  ?awardReceipt <" + yearAwardedPred + "> ?yearAwardedNode . \n" +
         "  ?yearAwardedNode a <" + dateTimeValueType + "> . \n" +
         "  ?yearAwardedNode <" + dateTimeValue + "> ?existingYearAwardedValue }";
 
-    final static String existingYearAwardedNodeQuery = 
+    final static String existingYearAwardedNodeQuery =
         "SELECT ?existingYearAwardedNode WHERE { \n" +
         "  ?awardReceipt <" + yearAwardedPred + "> ?existingYearAwardedNode . }";
 
@@ -305,7 +305,7 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
         "  ?intervalNode <" + intervalToStart + "> ?startNode . \n" +
         "  ?startNode a <" + dateTimeValueType +"> . \n" +
         "  ?startNode <" + dateTimeValue + "> ?existingStartDate . }";
-    
+
     final static String existingEndDateQuery =
         "SELECT ?existingEndDate WHERE { \n" +
         "  ?awardReceipt <" + awardReceiptToInterval + "> ?intervalNode . \n" +
@@ -315,44 +315,44 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
         "  ?endNode <" + dateTimeValue + "> ?existingEndDate . }";
 
     final static String existingIntervalNodeQuery =
-        "SELECT ?existingIntervalNode WHERE { \n" + 
+        "SELECT ?existingIntervalNode WHERE { \n" +
         "  ?awardReceipt <" + awardReceiptToInterval + "> ?existingIntervalNode . \n" +
         "  ?existingIntervalNode a <" + intervalType + "> . }";
 
-    final static String existingStartNodeQuery = 
+    final static String existingStartNodeQuery =
         "SELECT ?existingStartNode WHERE { \n" +
         "  ?awardReceipt <" + awardReceiptToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n" +
-        "  ?intervalNode <" + intervalToStart + "> ?existingStartNode . \n" + 
+        "  ?intervalNode <" + intervalToStart + "> ?existingStartNode . \n" +
         "  ?existingStartNode a <" + dateTimeValueType + "> . }   ";
 
-    final static String existingEndNodeQuery = 
+    final static String existingEndNodeQuery =
         "SELECT ?existingEndNode WHERE { \n" +
         "  ?awardReceipt <" + awardReceiptToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n" +
-        "  ?intervalNode <" + intervalToEnd + "> ?existingEndNode . \n" + 
-        "  ?existingEndNode a <" + dateTimeValueType + "> } ";              
+        "  ?intervalNode <" + intervalToEnd + "> ?existingEndNode . \n" +
+        "  ?existingEndNode a <" + dateTimeValueType + "> } ";
 
-    final static String existingYearAwardedPrecisionQuery = 
+    final static String existingYearAwardedPrecisionQuery =
         "SELECT ?existingYearAwardedPrecision WHERE { \n" +
         "  ?awardReceipt <" + yearAwardedPred + "> ?yearAwarded . \n" +
-        "  ?yearAwarded a  <" + dateTimeValueType + "> . \n" +           
+        "  ?yearAwarded a  <" + dateTimeValueType + "> . \n" +
         "  ?yearAwarded <" + dateTimePrecision + "> ?existingYearAwardedPrecision . }";
 
-    final static String existingStartPrecisionQuery = 
+    final static String existingStartPrecisionQuery =
         "SELECT ?existingStartPrecision WHERE { \n" +
         "  ?awardReceipt <" + awardReceiptToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n" +
         "  ?intervalNode <" + intervalToStart + "> ?startNode . \n" +
-        "  ?startNode a  <" + dateTimeValueType + "> . \n" +           
+        "  ?startNode a  <" + dateTimeValueType + "> . \n" +
         "  ?startNode <" + dateTimePrecision + "> ?existingStartPrecision . }";
 
-    final static String existingEndPrecisionQuery = 
+    final static String existingEndPrecisionQuery =
         "SELECT ?existingEndPrecision WHERE { \n" +
         "  ?awardReceipt <" + awardReceiptToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n" +
         "  ?intervalNode <" + intervalToEnd + "> ?endNode . \n" +
-        "  ?endNode a <" + dateTimeValueType + "> . \n" +          
+        "  ?endNode a <" + dateTimeValueType + "> . \n" +
         "  ?endNode <" + dateTimePrecision + "> ?existingEndPrecision . }";
 
 }

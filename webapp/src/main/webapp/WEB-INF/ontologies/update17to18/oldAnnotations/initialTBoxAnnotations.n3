@@ -2901,7 +2901,7 @@ obo:ERO_0000044
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
               <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
-              
+
 obo:ERO_0001261
       rdfs:label "Analysis Service"@en-US ;
       vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGroupactivities> .
@@ -3097,7 +3097,7 @@ obo:ERO_0000045
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
               <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
- 
+
 vivo:Division
       rdfs:label "Division"@en-US ;
       vitro:displayLimitAnnot
@@ -5432,7 +5432,7 @@ obo:ERO_0000482 # deprecated
 #              "true"^^xsd:boolean ;
 #      vitro:inPropertyGroupAnnot
 #              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
-              
+
 vivo:ResearchProposal
       rdfs:label "Research Proposal"@en-US ;
       vitro:displayLimitAnnot
@@ -6134,7 +6134,7 @@ vivo:abbreviation
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
               <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
-      
+
 
 vcard:postalCode
       rdfs:label "postal code"@en-US .
@@ -6242,7 +6242,7 @@ obo:  rdfs:label "OBO Foundry"@en-US ;
 <http://purl.org/spar/cito/>
     vitro:ontologyPrefixAnnot "cito"^^xsd:string ;
     rdfs:label "CiTO (Citation Typing Ontology)"@en-US .
-        
+
 vivo:providesFundingThrough
       rdfs:label "provides funding through"@en-US ;
       vitro:displayLimitAnnot
@@ -7013,7 +7013,7 @@ vivo:Room
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
 vivo:eRACommonsId
-      rdfs:label "eRA Commons ID"@en-US ; 
+      rdfs:label "eRA Commons ID"@en-US ;
       vitro:displayRankAnnot
               "15"^^xsd:int ;
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -7271,7 +7271,7 @@ obo:ERO_0000033
               "true"^^xsd:boolean ;
       vitro:inPropertyGroupAnnot
               <http://vivoweb.org/ontology#vitroPropertyGroupoutreach> .
-              
+
 obo:ERO_0000397
       rdfs:label "performs technique"@en-US ;
       vitro:displayLimitAnnot
@@ -8778,7 +8778,7 @@ obo:ERO_0000919
               "true"^^xsd:boolean ;
       vitro:offerCreateNewOptionAnnot
               "true"^^xsd:boolean .
-              
+
 bibo:status
       rdfs:label "status"@en-US ;
       vitro:displayLimitAnnot
@@ -8867,7 +8867,7 @@ geo:validUntil
       vitro:hiddenFromPublishBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
- 
+
 vivo:hasEquipment
       rdfs:label "has equipment"@en-US ;
       vitro:displayRankAnnot

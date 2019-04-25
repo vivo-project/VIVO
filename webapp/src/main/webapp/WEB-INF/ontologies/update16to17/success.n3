@@ -7,4 +7,4 @@
 <http://vitro.mannlib.cornell.edu/ns/vitro/metadata/migration/v1.6> vitro:updatedOntology <http://vivoweb.org/ontology/core> .
 <http://vitro.mannlib.cornell.edu/ns/vitro/metadata/migration/v1.6> vitro:fromOntologyVersion "1.6" .
 <http://vitro.mannlib.cornell.edu/ns/vitro/metadata/migration/v1.6> vitro:toOntologyVersion "1.7" .
- 
+
