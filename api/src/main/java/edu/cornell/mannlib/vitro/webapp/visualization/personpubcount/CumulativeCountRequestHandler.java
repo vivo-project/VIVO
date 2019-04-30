@@ -6,6 +6,7 @@ import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationReques
 import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
@@ -121,7 +122,14 @@ public class CumulativeCountRequestHandler implements VisualizationRequestHandle
         csv.append("Year,Previous,Other");
         // Add the configured groups to CSV headings
         for (String groupName : pubsGroups) {
-            csv.append(",").append(groupName);
+            // Retrieve a label from the i18n file
+            String label = I18n.text(vitroRequest, "histogram_label_for_" + groupName);
+            if (!StringUtils.isEmpty(label)) {
+                csv.append(",").append(label);
+            } else {
+                // No label, so use the group name
+                csv.append(",").append(groupName);
+            }
         }
         csv.append("\n");
 
@@ -235,7 +243,6 @@ public class CumulativeCountRequestHandler implements VisualizationRequestHandle
 
                         // Get the comma separated list of URIs for this group
                         String typeStr = properties.getProperty("histogram.types.for." + group);
-                        String[] types = null;
                         if (StringUtils.isEmpty(typeStr)) {
                             log.error("Error in type definition for publication count: histogram.types.for." + group);
                             return;

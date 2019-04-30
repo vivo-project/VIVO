@@ -167,9 +167,7 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Collection
 		@Override
 		protected void processQuerySolution(QuerySolution qs) {
 			String documentUri = qs.get("document").asResource().getURI();
-			if (authorDocuments.containsKey(documentUri)) {
-
-			} else {
+			if (!authorDocuments.containsKey(documentUri)) {
 				Activity biboDocument = new Activity(documentUri);
 
 				RDFNode publicationDateNode = qs.get("publicationDate");
