@@ -7,10 +7,10 @@ CONSTRUCT {
      ?organization core:hasGeographicLocation ?geographicLocation .
      ?geographicLocation rdfs:label ?label .
 } WHERE {
-     PERSON_URI core:relatedBy ?position . 
+     PERSON_URI core:relatedBy ?position .
      ?position a core:Position .
      ?position core:relates ?organization .
-     ?organization a foaf:Organization . 
+     ?organization a foaf:Organization .
      ?organization obo:RO_0001025 ?geographicLocation .
      ?geographicLocation rdfs:label ?label .
 }

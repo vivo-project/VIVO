@@ -19,7 +19,7 @@ public class RoleToActivityPredicatePreprocessor extends RoleToPredicatePreproce
     	this.roleToItemPredicate = "roleToActivityPredicate";
     	this.itemToRolePredicate = "activityToRolePredicate";
     }
-    
+
     protected String getItemType(MultiValueEditSubmission submission) {
     	String type = null;
     	Map<String, List<String>> urisFromForm = submission.getUrisFromForm();

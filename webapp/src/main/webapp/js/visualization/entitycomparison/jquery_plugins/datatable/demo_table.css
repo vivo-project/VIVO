@@ -15,7 +15,7 @@
 }
 
 .paginatedtabs {
-/*  border-top: 1px #3D454E solid; 
+/*  border-top: 1px #3D454E solid;
     text-align: center;*/
     margin-bottom: 10px;
     font-size: 0.9em;
@@ -25,7 +25,7 @@
 }
 
 .paginatedtabs span {
-    padding-right: 5px; 
+    padding-right: 5px;
     cursor: pointer;
     color: #2485AE;
 }
@@ -58,9 +58,9 @@
 }
 
 .datatablewrapper th {
-    border-top: 1px #3D454E solid;  
-    background:#F1F2ee; 
-    font-weight:bold; 
+    border-top: 1px #3D454E solid;
+    background:#F1F2ee;
+    font-weight:bold;
     font-size:12px;
     padding-bottom: 3px;
     padding-top: 3px;

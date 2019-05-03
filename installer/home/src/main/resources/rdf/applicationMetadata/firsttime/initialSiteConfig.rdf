@@ -3,7 +3,7 @@
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:j.0="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" >
     <rdf:Description>
         <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Portal"/>
         <rdfs:label xml:lang="en-US">VIVO</rdfs:label>

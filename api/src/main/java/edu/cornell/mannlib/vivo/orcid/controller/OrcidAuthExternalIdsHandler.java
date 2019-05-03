@@ -21,7 +21,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Res
 /**
  * We offered to add external IDs and they decided to go ahead. Get
  * authorization.
- * 
+ *
  * We can't assume that they haven't been here before, so they might already
  * have authorized, or denied authorization.
  */

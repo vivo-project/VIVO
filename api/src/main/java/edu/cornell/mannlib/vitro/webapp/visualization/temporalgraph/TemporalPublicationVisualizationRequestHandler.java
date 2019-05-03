@@ -41,15 +41,15 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequ
 
 public class TemporalPublicationVisualizationRequestHandler implements
 		VisualizationRequestHandler {
-	
+
 	@Override
 	public ResponseValues generateStandardVisualization(VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
-		
+
 		String entityURI = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		return generateStandardVisualizationForPublicationTemporalVis(vitroRequest, log, dataset, entityURI);
 	}
-	
+
 	@Override
 	public ResponseValues generateVisualizationForShortURLRequests(
 			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
@@ -62,16 +62,16 @@ public class TemporalPublicationVisualizationRequestHandler implements
 	private ResponseValues generateStandardVisualizationForPublicationTemporalVis(
 			VitroRequest vitroRequest, Log log, Dataset dataset,
 			String entityURI) throws MalformedQueryParametersException {
-		
+
 		if (StringUtils.isBlank(entityURI)) {
 			entityURI = OrganizationUtilityFunctions
 								.getStaffProvidedOrComputedHighestLevelOrganization(
-											log, 
-											dataset, 
+											log,
+											dataset,
 											vitroRequest);
 		}
-		
-		
+
+
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
 	}
 
@@ -228,7 +228,7 @@ public class TemporalPublicationVisualizationRequestHandler implements
 
 	private Map<String, String> prepareDataErrorResponse() {
 		String outputFileName = "no-organization_publications-per-year.csv";
-		
+
 		Map<String, String> fileData = new HashMap<String, String>();
 		fileData.put(DataVisualizationController.FILE_NAME_KEY, outputFileName);
 		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, "application/octet-stream");
@@ -248,29 +248,29 @@ public class TemporalPublicationVisualizationRequestHandler implements
             throws MalformedQueryParametersException, JsonProcessingException {
 
 		String entityURI = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
-		
+
 		VisConstants.DataVisMode currentDataMode = VisConstants.DataVisMode.CSV;
-		
+
 		/*
-		 * This will provide the data in json format mainly used for standalone tmeporal vis. 
+		 * This will provide the data in json format mainly used for standalone tmeporal vis.
 		 * */
 		if (VisualizationFrameworkConstants.JSON_OUTPUT_FORMAT
 					.equalsIgnoreCase(vitroRequest.getParameter(
 							VisualizationFrameworkConstants.VIS_MODE_KEY))) {
-			
+
 			currentDataMode = VisConstants.DataVisMode.JSON;
-			
+
 			if (StringUtils.isBlank(entityURI)) {
-				
+
 				entityURI = OrganizationUtilityFunctions
 								.getStaffProvidedOrComputedHighestLevelOrganization(
 										log,
 										dataset,
-										vitroRequest);	
-				
-			} 
-			
-		} 
+										vitroRequest);
+
+			}
+
+		}
 
 		try {
 			return getSubjectEntityAndGenerateDataResponse(
@@ -283,8 +283,8 @@ public class TemporalPublicationVisualizationRequestHandler implements
 			VisualizationCaches.buildMissing();
 		}
 	}
-	
-	
+
+
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log, Dataset dataset) throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Entity Pub Count does not provide Ajax Response.");

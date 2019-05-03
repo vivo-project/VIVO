@@ -4,7 +4,7 @@ PREFIX obo: <http://purl.obolibrary.org/obo/>
 CONSTRUCT {
      ?educationalTraining ?property ?object .
 } WHERE {
-     PERSON_URI obo:RO_0000056 ?educationalTraining . 
-     ?educationalTraining a core:EducationalProcess . 
+     PERSON_URI obo:RO_0000056 ?educationalTraining .
+     ?educationalTraining a core:EducationalProcess .
      ?educationalTraining ?property ?object .
 }

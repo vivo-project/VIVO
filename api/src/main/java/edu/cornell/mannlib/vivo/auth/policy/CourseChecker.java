@@ -26,7 +26,7 @@ public class CourseChecker extends RelationshipChecker {
 	/**
 	 * A self-editor is authorized to add, edit, or delete a statement if the
 	 * subject or object refers to a Course, and if the self-editor:
-	 * 
+	 *
 	 * 1) is a Teacher of that Course
 	 */
 	public PolicyDecision isAuthorized(List<String> userUris) {

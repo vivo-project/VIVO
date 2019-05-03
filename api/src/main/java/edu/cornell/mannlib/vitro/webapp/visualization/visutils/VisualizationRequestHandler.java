@@ -16,33 +16,33 @@ import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryP
 /**
  * This interface is being implemented by all the visualization request handlers like
  * PersonLevelRequestHandler, PersonPublicationCountRequestHandler, UtilitiesRequestHandler
- * etc. All the future visualizations <b>must</b> implement this because the ability of 
- * a visualization to be served to the users is dependent on it. We have implemented 
- * dependency injection mechanism & one of the conditions that is used to enable a visualization 
+ * etc. All the future visualizations <b>must</b> implement this because the ability of
+ * a visualization to be served to the users is dependent on it. We have implemented
+ * dependency injection mechanism & one of the conditions that is used to enable a visualization
  * handler is its implementation of VisualizationRequestHandler.
- * 
+ *
  * @author cdtank
  */
 public interface VisualizationRequestHandler {
-	
+
 	AuthorizationRequest getRequiredPrivileges();
 
 	ResponseValues generateStandardVisualization(VitroRequest vitroRequest,
-							   Log log, 
+							   Log log,
 							   Dataset dataSource) throws MalformedQueryParametersException;
-	
+
 	ResponseValues generateVisualizationForShortURLRequests(
 						Map<String, String> parameters,
 						VitroRequest vitroRequest,
 						Log log,
 						Dataset dataSource) throws MalformedQueryParametersException;
-	
+
 	Object generateAjaxVisualization(VitroRequest vitroRequest,
-								     Log log, 
+								     Log log,
 								     Dataset dataSource) throws MalformedQueryParametersException, JsonProcessingException;
-	
+
 	Map<String, String> generateDataVisualization(VitroRequest vitroRequest,
-								   	 Log log, 
+								   	 Log log,
 								   	 Dataset dataset) throws MalformedQueryParametersException, JsonProcessingException;
-	
+
 }

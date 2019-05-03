@@ -3,7 +3,7 @@
 /* <------ INDIVIDUAL INTRO */
 #individual-intro {
     margin-top: 15px;
-    margin-bottom: 0px; 
+    margin-bottom: 0px;
     position: relative;
     overflow: hidden;
 }
@@ -13,7 +13,7 @@
     width: 166px;
     float: left;
     padding-right: 1.5em;
-    margin-right: 12px; 
+    margin-right: 12px;
     margin-bottom: 20px;
 }
 img.individual-photo {
@@ -21,7 +21,7 @@ img.individual-photo {
     margin-left: 0;
     float: left;
     margin-right: 20px;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
 }
 ul#phone-list {
     font-size:0.9em;
@@ -29,14 +29,14 @@ ul#phone-list {
 ul#individual-phone {
     clear: both;
     list-style-type: circle;
-    margin-top:-8px; 
+    margin-top:-8px;
 }
 #primary-email {
-    margin-top: 0; 
+    margin-top: 0;
 }
-#primary-email li:last-child, 
+#primary-email li:last-child,
 #additional-emails li:last-child {
-    margin-bottom: 0; 
+    margin-bottom: 0;
 }
 
 /* <------ INDIVIDUAL INTRO - RIGHT SIDE CONTENT */
@@ -59,8 +59,8 @@ div#titleContainer {
     margin-top:6px;
 }
 #individual-info h2 {
-    padding: 25px 0 10px 0; 
-    clear:both; 
+    padding: 25px 0 10px 0;
+    clear:both;
 }
 #individual-info h2#contactHeading {
     margin-bottom: 8px;
@@ -73,14 +73,14 @@ h3.primary-email {
     margin-top: -8px !important;
 }
 #individual-intro.person {
-    margin-bottom: 0; 
+    margin-bottom: 0;
     position: relative;
     width: 100%;
 }
 #individual-info h1.foaf-person {
     float:left;
     padding-right:8px;
-    height:20px; 
+    height:20px;
     margin:-3px 8px 5px 0;
 }
 div#profileTypeContainer {
@@ -115,32 +115,32 @@ span.iconControlsEditable {
 span.iconControlsNotEditable {
     position:absolute;
     right:0;
-    top:3px; 
+    top:3px;
 }
 #overview {
-    clear: both; 
+    clear: both;
 }
 /* <------ INDIVIDUAL VISUALIZATION */
 #visualization {
-    padding: 0 0 0 0; 
-    background: #fff; 
-    width:174px; 
-    float:none; 
+    padding: 0 0 0 0;
+    background: #fff;
+    width:174px;
+    float:none;
 }
 #visualization h3 {
     padding-top: 10px;
-    margin-bottom: 0; 
+    margin-bottom: 0;
 }
 p#networks {
     margin-bottom:10px;
 }
-.collaboratorship-link-separator { 
+.collaboratorship-link-separator {
     margin-top: 10px;
     border-top: 1px solid #DDE4E3;
     padding-top: 10px;
 }
 .sparkline_text {
-    font-size: .9em; 
+    font-size: .9em;
     text-align: left;
     line-height: 1.5em;
     width: 180px;
@@ -148,7 +148,7 @@ p#networks {
 span.collaboratorship-link a img{
     vertical-align:middle;
 }
-td#totalPubs { 
+td#totalPubs {
     font-size: 1.35em;
     background: url(../../images/individual/pub-total-bkgrnd.png) top left no-repeat;
     text-align:center;
@@ -156,7 +156,7 @@ td#totalPubs {
     width:48px;
     height:48px;
 }
-td#tenYearCount { 
+td#tenYearCount {
     font-size: .85em;
     padding-left:10px;
     vertical-align:middle;
@@ -165,37 +165,37 @@ td#tenYearCount {
     padding-right: 0;
 }
 div#pub_count_short_sparkline_vis {
-    margin-top: 4px; 
-    height: 48px; 
+    margin-top: 4px;
+    height: 48px;
     margin-bottom: 20px;
 }
 /* <------ INDIVIDUAL TEMPORAL GRAPH & MAP O' SCIENCE*/
 #temporal-graph {
-    padding: 0 3px 8px 0; 
+    padding: 0 3px 8px 0;
     background-color: #fff;
-    margin-top: -4px; 
+    margin-top: -4px;
 }
 #temporal-graph h3 img,
 #map-of-science h3 img {
     padding-right: 10px;
-    vertical-align: middle; 
+    vertical-align: middle;
 }
 #map-of-science {
-    padding: 0 3px 24px 0; 
+    padding: 0 3px 24px 0;
     background-color: #fff;
 }
 /* <------ POSITIONS */
 ul#individual-personInPosition {
     list-style-type: circle;
-    padding-left: 10px; 
-    margin: 10px 0 0 0; 
+    padding-left: 10px;
+    margin: 10px 0 0 0;
 }
 ul#individual-personInPosition li {
     line-height: 1em;
-    padding-bottom:10px; 
+    padding-bottom:10px;
 }
 ul#individual-personInPosition li:last-child {
-    padding-bottom: 3px; 
+    padding-bottom: 3px;
 }
 
 /* <------ CONTACTS AND WEBPAGES */
@@ -234,8 +234,8 @@ div#contactPhoneDiv {
 ul#individual-hasResearchArea li {
     float: left;
     padding-right: 10px;
-    margin-right: 10px; 
-    padding-left: 0;  
+    margin-right: 10px;
+    padding-left: 0;
     border-right: 1px solid #5e6363;
 }
 h2#researchAreas  {
@@ -244,12 +244,12 @@ h2#researchAreas  {
 /* <------ QR Code */
 span#qrCodeImage {
     position: absolute;
-    top: 30px; 
-    left: -120px !important; 
-    width:180px; 
+    top: 30px;
+    left: -120px !important;
+    width:180px;
     border: solid 2px #ccc;
-    background: #fff; 
-    text-align:middle; 
+    background: #fff;
+    text-align:middle;
     overflow:visible;
     z-index:1000;
 }
@@ -262,23 +262,23 @@ span#quickViewLink img {
     margin-top:35px;
 }
 /****** FROM WILMA.CSS ******/
-#individual-info h2.mainPropGroup { 
+#individual-info h2.mainPropGroup {
     border-bottom: 1px solid #DDE4E3;
     padding-bottom:1px;
     margin-bottom:8px;
     padding-top:18px;
 }
-#individual-info div#contactContainer h3{ 
-    color:#8aa149; 
+#individual-info div#contactContainer h3{
+    color:#8aa149;
 }
 ul#individual-personInPosition li {
     padding-bottom:12px;
-    margin-left:10px; 
+    margin-left:10px;
     line-height: 1.25em !important;
 }
-ul#individual-personInPosition li:last-child { 
+ul#individual-personInPosition li:last-child {
     padding-bottom: 0;
 }
-td#totalPubs { 
+td#totalPubs {
     color: #2485AE;
 }

@@ -1,15 +1,15 @@
 /* $This file is distributed under the terms of the license in LICENSE$ */
 
 var orgForTrainingUtils = {
-        
+
     onLoad: function(blankSentinel) {
-        
+
         this.sentinel = '';
         if ( blankSentinel ) { this.sentinel = blankSentinel; }
 
-        this.initObjectReferences();                 
+        this.initObjectReferences();
         this.bindEventListeners();
-        
+
         $.extend(this, vitro.customFormUtils);
         $.extend(this, i18nStrings);
 
@@ -19,7 +19,7 @@ var orgForTrainingUtils = {
     },
 
     initObjectReferences: function() {
-    
+
     this.form = $('#organizationForTraining');
     this.person = $('#person');
     this.fauxLabel = $('#maskLabelBuilding');
@@ -27,22 +27,22 @@ var orgForTrainingUtils = {
     this.lastName = $('#lastName');
     this.personUri = $('#personUri');
     this.aDLabel = $('#awardedDegreeLabel');
-    this.degreeSelector = $('#degreeUri');    
+    this.degreeSelector = $('#degreeUri');
 
     // may not need this
     this.firstName.attr('disabled', false);
-    
+
     },
-    
+
     bindEventListeners: function() {
         this.idCache = {};
-        
+
         this.form.submit(function() {
             orgForTrainingUtils.resolveFirstLastNames();
 
-        });            
+        });
     },
-    
+
     resolveFirstLastNames: function() {
         var firstName,
             lastName,
@@ -52,12 +52,12 @@ var orgForTrainingUtils = {
         if (this.personUri.val() == '' || this.personUri.val() == this.sentinel ) {
             firstName = this.firstName.val();
             lastName = this.person.val();
-            
+
             name = lastName;
 
             if (firstName) {
                 name += ', ' + firstName;
-            }            
+            }
 
             // we don't want the user to see the label getting built, so hide the acSelector
             // field and display a bogus field that just has the last name in it.
@@ -66,13 +66,13 @@ var orgForTrainingUtils = {
             this.fauxLabel.show();
             this.person.val(name);
             this.lastName.val(lastName);
-        } 
+        }
         else {
             this.firstName.attr('disabled', 'disabled');
             this.lastName.attr('disabled', 'disabled');
         }
-        orgForTrainingUtils.setAwardedDegreeLabel(this.person.val()); 
-    },    
+        orgForTrainingUtils.setAwardedDegreeLabel(this.person.val());
+    },
 
     resetLastNameLabel: function() {
         var indx = this.person.val().indexOf(", ");
@@ -81,7 +81,7 @@ var orgForTrainingUtils = {
             this.person.val(temp);
         }
     },
-    
+
     setAwardedDegreeLabel: function(name) {
         var degreeLabel = "";
         if ( name == '' || name == null ) {
@@ -91,5 +91,5 @@ var orgForTrainingUtils = {
             degreeLabel = name + ": " + this.degreeSelector.find(":selected").text();
         }
         this.aDLabel.val(degreeLabel);
-    }    
-} 
+    }
+}

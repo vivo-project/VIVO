@@ -47,12 +47,12 @@
 </#if>
 
 <form id="editForm" class="editForm" action="${submitUrl}">
-<#if isPersonType = "true">       
+<#if isPersonType = "true">
     <p>
         <label for="firstName">${i18n().first_name} ${requiredHint}</label>
         <input size="30"  type="text" id="firstName" name="firstName" value="${firstNameValue}" />
     </p>
-    
+
     <p>
         <label for="lastName">${i18n().middle_name} </label>
         <input size="30"  type="text" id="middleName" name="middleName" value="${middleNameValue}" />
@@ -62,21 +62,21 @@
         <label for="lastName">${i18n().last_name} ${requiredHint}</label>
         <input size="30"  type="text" id="lastName" name="lastName" value="${lastNameValue}" />
     </p>
-    
+
     <input type="hidden" id="label" name="label" value="${labelValue}" />
-<#else>       
+<#else>
     <p>
         <label for="name">${i18n().name_capitalized} ${requiredHint}</label>
         <input size="30"  type="text" id="label" name="label" value="${labelValue}" />
     </p>
 </#if>
     <input type="hidden" name="editKey" id="editKey" value="${editKey}" role="input" />
-    
+
     <p class="submit">
         <input type="submit" id="submit" value="${submitLabel}" role="submit" />
         <span class="or"> or </span>
         <a class="cancel" title="${i18n().cancel_title}" href="${editConfiguration.cancelUrl}">${i18n().cancel_link}</a>
-    </p>     
+    </p>
 </form>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}

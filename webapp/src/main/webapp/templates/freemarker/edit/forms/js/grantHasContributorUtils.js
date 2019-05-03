@@ -1,14 +1,14 @@
 /* $This file is distributed under the terms of the license in LICENSE$ */
 
 var grantHasContributorUtils = {
-        
+
     onLoad: function(blankSentinel) {
         this.sentinel = '';
         if ( blankSentinel ) { this.sentinel = blankSentinel; }
 
-        this.initObjectReferences();                 
+        this.initObjectReferences();
         this.bindEventListeners();
-        
+
         $.extend(this, vitro.customFormUtils);
         $.extend(this, i18nStrings);
 
@@ -18,7 +18,7 @@ var grantHasContributorUtils = {
     },
 
     initObjectReferences: function() {
-    
+
     this.form = $('#grantHasContributor');
     this.person = $('#person');
     this.fauxLabel = $('#maskLabelBuilding');
@@ -28,17 +28,17 @@ var grantHasContributorUtils = {
 
     // may not need this
     this.firstName.attr('disabled', false);
-    
+
     },
-    
+
     bindEventListeners: function() {
         this.idCache = {};
-        
+
         this.form.submit(function() {
             grantHasContributorUtils.resolveFirstLastNames();
-        });            
+        });
     },
-    
+
     resolveFirstLastNames: function() {
         var firstName,
             lastName,
@@ -48,12 +48,12 @@ var grantHasContributorUtils = {
         if (this.personUri.val() == '' || this.personUri.val() == this.sentinel ) {
             firstName = this.firstName.val();
             lastName = this.person.val();
-            
+
             name = lastName;
 
             if (firstName) {
                 name += ', ' + firstName;
-            }            
+            }
 
             // we don't want the user to see the label getting built, so hide the acSelector
             // field and display a bogus field that just has the last name in it.
@@ -62,12 +62,12 @@ var grantHasContributorUtils = {
             this.fauxLabel.show();
             this.person.val(name);
             this.lastName.val(lastName);
-        } 
+        }
         else {
             this.firstName.attr('disabled', 'disabled');
             this.lastName.attr('disabled', 'disabled');
         }
-    },    
+    },
 
     resetLastNameLabel: function() {
         var indx = this.person.val().indexOf(", ");
@@ -76,5 +76,5 @@ var grantHasContributorUtils = {
             this.person.val(temp);
         }
     },
-    
-} 
+
+}

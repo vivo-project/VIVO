@@ -25,10 +25,10 @@ import edu.cornell.mannlib.vitro.webapp.startup.StartupStatus;
 
 /**
  * Setup for the ORCID interface.
- * 
+ *
  * Note that the property for CLIENT_SECRET is "orcid.clientPassword". Since it
  * ends in "password", it will not be displayed on the ShowConfiguration page.
- * 
+ *
  * The CALLBACK_PATH is hardcoded. It is relative to the WEBAPP_BASE_URL, so it
  * won't change.
  */

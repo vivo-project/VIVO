@@ -19,7 +19,7 @@
     <p class="inline">
         <label>${labelValue}</label>
         <span class="acSelectionInfo"></span>
-        <a href="${urlsBase}/individual?uri=" class="verifyMatch" title="${i18n().verify_this_match_title}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+        <a href="${urlsBase}/individual?uri=" class="verifyMatch" title="${i18n().verify_this_match_title}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
         <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="${inputId}" name="${inputName}" value="${inputValue}" />
@@ -83,7 +83,7 @@ return - returns empty string if no value found-->
 	<#local returnValue = getEditSubmissionUriValue(submission, varName) />
 	<#if (returnValue?length = 0)>
 		<#local returnValue = getEditSubmissionLiteralValue(submission, varName) />
-	</#if> 
+	</#if>
 	<#return returnValue>
 </#function>
 

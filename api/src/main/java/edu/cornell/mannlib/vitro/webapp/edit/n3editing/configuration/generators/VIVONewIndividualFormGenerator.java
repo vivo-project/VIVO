@@ -24,22 +24,22 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.
 
 /**
  * Generates the edit configuration for a default property form.
- * ModelChangePreprocessor creates the rdfs:label statement. 
+ * ModelChangePreprocessor creates the rdfs:label statement.
  */
 public class VIVONewIndividualFormGenerator extends BaseEditConfigurationGenerator implements EditConfigurationGenerator {
 
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
-        
+
     	EditConfigurationVTwo config = new EditConfigurationVTwo();
-    	
+
     	config.setTemplate( "newIndividualForm.ftl" );
-    	
+
     	config.setN3Required( list(
     	        "?newInd <" + VitroVocabulary.RDF_TYPE  + "> <" + getTypeOfNew(vreq) + "> ."
-    	));    
+    	));
     	//Optional because user may have selected either person or individual of another kind
-    	//Person uses first name and last name whereas individual of other class would use label 
+    	//Person uses first name and last name whereas individual of other class would use label
     	//middle name is also optional
     	config.setN3Optional(list(
     	        N3_PREFIX + "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .\n"
@@ -58,55 +58,55 @@ public class VIVONewIndividualFormGenerator extends BaseEditConfigurationGenerat
     	                  + " ?newVcardName a vcard:Name . \n"
     	                  + " ?newVcardName <http://vivoweb.org/ontology/core#middleName> ?middleName ."
     	));
-    	                    
+
     	config.addNewResource("newInd", vreq.getWebappDaoFactory().getDefaultNamespace());
     	config.addNewResource("newVcardInd", vreq.getWebappDaoFactory().getDefaultNamespace());
     	config.addNewResource("newVcardName", vreq.getWebappDaoFactory().getDefaultNamespace());
-    	    	
+
     	config.setUrisOnform(list ());
-        config.setLiteralsOnForm( list( "label", "firstName", "lastName", "middleName" ));            	
+        config.setLiteralsOnForm( list( "label", "firstName", "lastName", "middleName" ));
     	setUrisAndLiteralsInScope(config);
-    	//No SPARQL queries for existing since this is only used to create new, never for edit    	
-    	    	
+    	//No SPARQL queries for existing since this is only used to create new, never for edit
+
     	config.addField(new FieldVTwo().
     	        setName("firstName").
     	        setRangeDatatypeUri(XSD.xstring.getURI()).
     	        setValidators(getFirstNameValidators(vreq)));
-    	
+
     	config.addField(new FieldVTwo().
     	        setName("middleName").
     	        setRangeDatatypeUri(XSD.xstring.getURI()).
     	        setValidators(getMiddleNameValidators(vreq)));
-    	
+
     	config.addField(new FieldVTwo().
                 setName("lastName").
     	        setRangeDatatypeUri(XSD.xstring.getURI()).
-                setValidators(getLastNameValidators(vreq)));    	
-    
+                setValidators(getLastNameValidators(vreq)));
+
     	config.addField(new FieldVTwo().
                 setName("label").
     	        setRangeDatatypeUri(XSD.xstring.getURI()).
-                setValidators(getLabelValidators(vreq)));    	  
-    	    	
-        addFormSpecificData(config, vreq);        
-        
+                setValidators(getLabelValidators(vreq)));
+
+        addFormSpecificData(config, vreq);
+
         config.addValidator(new AntiXssValidation());
-        
+
         //This combines the first and last name into the rdfs:label
         // currently being done via javascript in the template. May use this again
         // when/if updated to ISF ontology.  tlw72
-//        config.addModelChangePreprocessor(new FoafNameToRdfsLabelPreprocessor());        
+//        config.addModelChangePreprocessor(new FoafNameToRdfsLabelPreprocessor());
 
-        String formUrl = EditConfigurationUtils.getFormUrlWithoutContext(vreq);       
+        String formUrl = EditConfigurationUtils.getFormUrlWithoutContext(vreq);
         config.setFormUrl(formUrl);
-        
+
         //Note, the spaces are important - they were added by ProcessRdfFormController earlier
         //as a means of ensuring the substitution worked correctly - as the regex expects spaces
         config.setEntityToReturnTo(" ?newInd ");
         prepare(vreq, config);
     	return config;
     }
-    
+
     private List<String> getMiddleNameValidators(VitroRequest vreq) {
     	List<String> validators = new ArrayList<String>();
 		return validators;
@@ -144,9 +144,9 @@ public class VIVONewIndividualFormGenerator extends BaseEditConfigurationGenerat
         if( typeUri == null || typeUri.trim().isEmpty() )
             return getFOAFPersonClassURI();
         else
-            return typeUri; 
+            return typeUri;
     }
-    
+
     //Form specific data
 	public void addFormSpecificData(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
 		HashMap<String, Object> formSpecificData = new HashMap<String, Object>();
@@ -167,11 +167,11 @@ public class VIVONewIndividualFormGenerator extends BaseEditConfigurationGenerat
 		VClass type = vreq.getWebappDaoFactory().getVClassDao().getVClassByURI(typeOfNew);
 		return type.getName();
 	}
-	
+
 	public String getFOAFPersonClassURI() {
 		return "http://xmlns.com/foaf/0.1/Person";
 	}
-	
+
 	public boolean isPersonType(VitroRequest vreq) {
 		WebappDaoFactory wdf = vreq.getWebappDaoFactory();
 		Boolean isPersonType = Boolean.FALSE;
@@ -186,22 +186,22 @@ public class VIVONewIndividualFormGenerator extends BaseEditConfigurationGenerat
 	    			isPersonType = Boolean.TRUE;
 	    			break;
 	    		}
-	    	}    	
+	    	}
 	    }
 	    return isPersonType;
 	}
 	 private void setUrisAndLiteralsInScope(EditConfigurationVTwo editConfiguration) {
 	    	HashMap<String, List<String>> urisInScope = new HashMap<String, List<String>>();
 	    	//note that at this point the subject, predicate, and object var parameters have already been processed
-	    	urisInScope.put(editConfiguration.getVarNameForSubject(), 
+	    	urisInScope.put(editConfiguration.getVarNameForSubject(),
 	    			Arrays.asList(new String[]{editConfiguration.getSubjectUri()}));
-	    	urisInScope.put(editConfiguration.getVarNameForPredicate(), 
+	    	urisInScope.put(editConfiguration.getVarNameForPredicate(),
 	    			Arrays.asList(new String[]{editConfiguration.getPredicateUri()}));
 	    	editConfiguration.setUrisInScope(urisInScope);
 	    	//Uris in scope include subject, predicate, and object var
-	    	
+
 	    	editConfiguration.setLiteralsInScope(new HashMap<String, List<Literal>>());
 	    }
-	
+
 	private String N3_PREFIX = "@prefix foaf: <http://xmlns.com/foaf/0.1/> .\n";
 }

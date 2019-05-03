@@ -23,12 +23,12 @@
 	<#assign submissionErrors = editSubmission.validationErrors/>
 </#if>
 
-<#if editMode == "edit">    
-        <#assign titleVerb="${i18n().edit_capitalized}">        
+<#if editMode == "edit">
+        <#assign titleVerb="${i18n().edit_capitalized}">
         <#assign submitButtonText="${i18n().save_changes}">
         <#assign disabledVal="disabled">
 <#else>
-        <#assign titleVerb="${i18n().create_capitalized}">        
+        <#assign titleVerb="${i18n().create_capitalized}">
         <#assign submitButtonText="${titleVerb}" + " ORCID iD">
         <#assign disabledVal=""/>
 </#if>
@@ -45,15 +45,15 @@
             <#--Checking if any required fields are empty-->
             <#if lvf.submissionErrorExists(editSubmission, "orcidId")>
  	            ${i18n().required_fields}: ORCID iD<br />
-            </#if>        
+            </#if>
         </p>
     </section>
 </#if>
 
-<@lvf.unsupportedBrowser urls.base /> 
+<@lvf.unsupportedBrowser urls.base />
 
-<section id="personHasOrcidId" role="region">        
-    
+<section id="personHasOrcidId" role="region">
+
     <form id="personHasOrcidId" class="customForm noIE67" action="${submitUrl}"  role="add/edit orcidId">
 
         <p>
@@ -74,7 +74,7 @@
     </form>
 
 </section>
- 
+
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customFormWithAutocomplete.css" />')}

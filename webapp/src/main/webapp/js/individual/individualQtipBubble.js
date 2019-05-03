@@ -2,14 +2,14 @@
 
 $(document).ready(function(){
     // This function creates and styles the "qTip" tooltip that displays the bubble text when the user hovers
-    // over the research area "group" icon. 
-    
+    // over the research area "group" icon.
+
     $.extend(this, i18nStrings);
 
     $('head').append('<style id="researchAreaCSS">.qtip { font-size: 14px; max-width: none !important; } .researchAreaTip { background: url(' + imagesPath + '/individual/researchAreaBubble.png) no-repeat; } </style>');
 
     $('#researchAreaIcon').each(function()
-    {   
+    {
         $(this).qtip(
         {
             prerender: true,

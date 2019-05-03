@@ -7,7 +7,7 @@
     <head>
         <#include "head.ftl">
     </head>
-    
+
     <body class="${bodyClasses!}" onload="${bodyOnload!}">
         <#include "identity.ftl">
         <#include "search.ftl" >
@@ -17,11 +17,11 @@
 		<#if openSocial??>
 			<#if openSocial.visible>
             	<div id="gadgets-tools" class="gadgets-gadget-parent"></div>
-            </#if>	
-		</#if>	
-        
+            </#if>
+		</#if>
+
         ${body}
-        
+
         <#include "footer.ftl">
     </body>
 </html>

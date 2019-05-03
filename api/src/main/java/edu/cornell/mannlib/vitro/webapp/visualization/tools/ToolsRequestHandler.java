@@ -18,7 +18,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryP
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
 public class ToolsRequestHandler implements VisualizationRequestHandler {
-	
+
 	public static final AuthorizationRequest REQUIRED_ACTIONS = SimplePermission.REFRESH_VISUALIZATION_CACHE.ACTION;
 
 	@Override
@@ -45,7 +45,7 @@ public class ToolsRequestHandler implements VisualizationRequestHandler {
 	public ResponseValues generateVisualizationForShortURLRequests(
 			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
 			Dataset dataSource) throws MalformedQueryParametersException {
-		
+
 		return renderToolsMenu(vitroRequest, log, dataSource);
 	}
 
@@ -53,7 +53,7 @@ public class ToolsRequestHandler implements VisualizationRequestHandler {
 	public AuthorizationRequest getRequiredPrivileges() {
 		return REQUIRED_ACTIONS;
 	}
-	
+
 	private ResponseValues renderToolsMenu(VitroRequest vitroRequest,
 			Log log, Dataset dataSource) {
 
@@ -63,6 +63,6 @@ public class ToolsRequestHandler implements VisualizationRequestHandler {
 		body.put("title", "Visualization Tools");
 
 		return new TemplateResponseValues(standaloneTemplate, body);
-	} 
+	}
 
 }

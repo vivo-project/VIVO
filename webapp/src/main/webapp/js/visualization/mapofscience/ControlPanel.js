@@ -16,7 +16,7 @@ var ControlPanel = Class.extend({
 		if (opt.jQueryDiv == null) {
 			opt.jQueryDiv = $(document.createElement('div'));
 		}
-		
+
 		if (opt.divClass) {
 			opt.jQueryDiv.addClass(opt.divClass);
 		}
@@ -63,10 +63,10 @@ var SliderControlPanel = ControlPanel.extend({
 		    	me._setLabel(ui.value);
 		    }
 		});
-		
+
 		this.sliderDiv = slider;
 		this.labelDiv = label;
-		
+
 		var div = me.getDiv();
 		div.css("margin-right", "10px");
 		div.append(label);
@@ -99,7 +99,7 @@ var SliderControlPanel = ControlPanel.extend({
         this.labelDiv.text(labelText);
 	},
 	setChangeEventHandler: function(handlerFunc) {
-		this.sliderDiv.slider({ 
+		this.sliderDiv.slider({
 			change: handlerFunc
 		});
 	}
@@ -125,11 +125,11 @@ var CheckBoxPanel = ControlPanel.extend({
 				+ '</span></input>'
 			);
 		me.checkBox = checkBox;
-		
+
 		var div = me.getDiv();
 		div.css("margin-right", "10px");
 		div.append(checkBox);
-		
+
 		me.checkBox.prop('checked', me.options.checked);
 		/* Init contents if it is given */
 		var click = me.options.click;
@@ -162,7 +162,7 @@ var CopyrightPanel = ControlPanel.extend({
 			copyright.html(html);
 		}
 		me.copyright = copyright;
-		
+
 		me.getDiv().append(copyright);
 	}
 });

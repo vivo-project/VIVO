@@ -33,7 +33,7 @@
     <#if hasValidVCard()>
         <#local qrData = qrData>
         <#local qrCodeLinkedImage><a title="${i18n().export_qr_codes}" href="${qrData.exportQrCodeUrl}"><@qrCodeVCard qrCodeWidth=width /></a></#local>
-        
+
         <#if (display == "full")>
             <h5 class="qrCode">${i18n().vcard_qr}</h5>
             ${qrCodeLinkedImage}
@@ -43,7 +43,7 @@
         <#else>
             <p class="notice">${i18n().invalid_qr_code_parameter}</p>
         </#if>
-        
+
     </#if>
 </#macro>
 
@@ -66,7 +66,7 @@
     <#local url = individual.uri! >
     <#local photo = individual.thumbUrl! >
     <#local rev = "" >
-    
+
     <#if firstName != "" && lastName != "">
         <#local vCard><#t>
             BEGIN:VCARD<#lt>
@@ -101,8 +101,8 @@
 
     <#local qrCodeUrl = "">
     <#if externalUrl != "">
-    	<#local fullExternalUrl = externalUrl + individual.profileUrl> 
-    	<#local qrCodeContent = fullExternalUrl?url> 
+    	<#local fullExternalUrl = externalUrl + individual.profileUrl>
+    	<#local qrCodeContent = fullExternalUrl?url>
         <#local qrCodeUrl = "https://chart.googleapis.com/chart?cht=qr&amp;chs=${qrCodeWidth}x${qrCodeWidth}&amp;chl=${qrCodeContent}&amp;choe=UTF-8" >
     </#if>
 

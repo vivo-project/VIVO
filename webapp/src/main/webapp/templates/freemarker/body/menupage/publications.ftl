@@ -1,9 +1,9 @@
 <#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <p>${i18n().publications_text_one}  </p>
-   
+
 <p> ${i18n().publications_text_two}</p>
-    
+
 <code>
 display:About <br>
     a display:Page ; <br>
@@ -11,8 +11,8 @@ display:About <br>
     display:title "About" ;<br>
     display:urlMapping "/about" .<br>
     <br>
-</code>    
+</code>
 
 <p>${i18n().publications_text_three}</p>
 
-    
+

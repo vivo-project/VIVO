@@ -11,7 +11,7 @@
     xmlns:j.6="http://www.w3.org/2003/06/sw-vocab-status/ns#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" >
   <rdf:Description rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupaffiliation">
     <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-12-28T09:47:01</vitro:modTime>
     <rdfs:label xml:lang="en-US">affiliation</rdfs:label>

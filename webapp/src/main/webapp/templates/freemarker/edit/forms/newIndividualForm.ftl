@@ -44,16 +44,16 @@
 
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
 
-<section id="newIndividual" role="region">        
-    
+<section id="newIndividual" role="region">
+
     <form id="newIndividual" class="customForm noIE67" action="${submitUrl}"  role="add new individual">
- 
-    <#if isPersonType = "true">       
+
+    <#if isPersonType = "true">
         <p>
             <label for="firstName">${i18n().first_name} ${requiredHint}</label>
             <input size="30"  type="text" id="firstName" name="firstName" value="${firstNameValue}" />
         </p>
-        
+
         <p>
             <label for="lastName">${i18n().middle_name} </label>
             <input size="30"  type="text" id="middleName" name="middleName" value="${middleNameValue}" />
@@ -63,9 +63,9 @@
             <label for="lastName">${i18n().last_name} ${requiredHint}</label>
             <input size="30"  type="text" id="lastName" name="lastName" value="${lastNameValue}" />
         </p>
-        
+
         <input type="hidden" id="label" name="label" value="${labelValue}" />
-    <#else>       
+    <#else>
         <p>
             <label for="name">${i18n().name_capitalized} ${requiredHint}</label>
             <input size="30"  type="text" id="label" name="label" value="${labelValue}" />

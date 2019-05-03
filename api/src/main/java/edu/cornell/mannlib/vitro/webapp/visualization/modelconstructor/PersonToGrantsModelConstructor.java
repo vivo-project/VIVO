@@ -17,29 +17,29 @@ import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryP
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.ModelConstructor;
 
 public class PersonToGrantsModelConstructor implements ModelConstructor {
-	
+
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
-	
+
 	private RDFService rdfService;
-	
-	public static final String MODEL_TYPE = "PERSON_TO_GRANTS"; 
+
+	public static final String MODEL_TYPE = "PERSON_TO_GRANTS";
 	public static final String MODEL_TYPE_HUMAN_READABLE = "Grants for specific person via all roles";
-	
+
 	private String personURI;
-	
+
 	private Log log = LogFactory.getLog(PersonToGrantsModelConstructor.class.getName());
-	
+
 	private long before, after;
-	
+
 	public PersonToGrantsModelConstructor(String personURI, RDFService rdfService) {
 		this.personURI = personURI;
 		this.rdfService = rdfService;
 	}
-	
+
 private Set<String> constructPersonGrantsQueryTemplate(String constructProperty, String roleType) {
-		
+
 		Set<String> differentPerspectiveQueries = new HashSet<String>();
-		
+
 		String justGrantsQuery = ""
 			+ " CONSTRUCT {  "
 			+ "     <" + personURI + "> vivosocnet:lastCachedAt ?now . "
@@ -84,7 +84,7 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 			+ "      "
 			+ "     LET(?now := now()) "
 			+ " } ";
-		
+
 		String justDateTimeOnRolesQuery = ""
 			+ " CONSTRUCT {  "
 			+ "     <" + personURI + "> vivosocnet:lastCachedAt ?now . "
@@ -110,18 +110,18 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 			+ "      "
 			+ "     LET(?now := now()) "
 			+ " } ";
-		
+
 		differentPerspectiveQueries.add(justGrantsQuery);
 		differentPerspectiveQueries.add(justDateTimeOnGrantsQuery);
 		differentPerspectiveQueries.add(justDateTimeOnRolesQuery);
-		
+
 		return differentPerspectiveQueries;
 	}
-	
+
 	private Set<String> constructPersonToGrantsQuery() {
 
 		Set<String> differentInvestigatorTypeQueries = new HashSet<String>();
-		
+
 		Set<String> investigatorRoleQuery = constructPersonGrantsQueryTemplate("hasGrantAsAnInvestigator", "InvestigatorRole");
 		Set<String> piRoleQuery = constructPersonGrantsQueryTemplate("hasGrantAsPI", "PrincipalInvestigatorRole");
 		Set<String> coPIRoleQuery = constructPersonGrantsQueryTemplate("hasGrantAsCoPI", "CoPrincipalInvestigatorRole");
@@ -129,16 +129,16 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 		differentInvestigatorTypeQueries.addAll(investigatorRoleQuery);
 		differentInvestigatorTypeQueries.addAll(piRoleQuery);
 		differentInvestigatorTypeQueries.addAll(coPIRoleQuery);
-		
+
 		return differentInvestigatorTypeQueries;
 	}
-	
+
 	private Model executeQuery(Set<String> constructQueries) {
 		Model constructedModel = ModelFactory.createDefaultModel();
 
 		before = System.currentTimeMillis();
 		log.debug("CONSTRUCT query string : " + constructQueries);
-		
+
 		for (String currentQuery : constructQueries) {
 			try {
 				rdfService.sparqlConstructQuery(QueryConstants.getSparqlPrefixQuery() + currentQuery, constructedModel);
@@ -149,14 +149,14 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 			}
 
 		}
-		
+
 		after = System.currentTimeMillis();
 		log.debug("Time taken to execute the CONSTRUCT queries is in milliseconds: "
 				+ (after - before));
-		
+
 		return constructedModel;
-	}	
-	
+	}
+
 	public Model getConstructedModel() throws MalformedQueryParametersException {
 		return executeQuery(constructPersonToGrantsQuery());
 	}

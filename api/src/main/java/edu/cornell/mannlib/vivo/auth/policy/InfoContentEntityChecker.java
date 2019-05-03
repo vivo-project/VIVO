@@ -29,11 +29,11 @@ public class InfoContentEntityChecker extends RelationshipChecker {
 	 * A self-editor is authorized to add, edit, or delete a statement if the
 	 * subject or object refers to an Info Content Entity, and if the
 	 * self-editor:
-	 * 
+	 *
 	 * 1) is an Author of that Info Content Entity,
-	 * 
+	 *
 	 * 2) is an Editor of that Info Content Entity, or
-	 * 
+	 *
 	 * 3) is Featured in that Info Content Entity.
 	 */
 	public PolicyDecision isAuthorized(List<String> userUris) {
@@ -72,7 +72,7 @@ public class InfoContentEntityChecker extends RelationshipChecker {
 	private List<String> getUrisOfAuthors(String resourceUri) {
 		List<String> allRelatedUris = getObjectsThroughLinkingNode(resourceUri,
 				URI_RELATED_BY, URI_AUTHORSHIP_TYPE, URI_RELATES);
-		// The authorship relates to the authors and to the resource itself. 
+		// The authorship relates to the authors and to the resource itself.
 		allRelatedUris.remove(resourceUri);
 		return allRelatedUris;
 	}

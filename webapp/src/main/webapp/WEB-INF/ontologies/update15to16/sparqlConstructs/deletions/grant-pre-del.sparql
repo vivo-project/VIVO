@@ -1,9 +1,9 @@
-PREFIX vivo: <http://vivoweb.org/ontology/core#> 
-PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX vivo: <http://vivoweb.org/ontology/core#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 CONSTRUCT {
-    ?role vivo:roleContributesTo ?grant . 
+    ?role vivo:roleContributesTo ?grant .
     ?grant vivo:contributingRole ?role .
 } WHERE {
     ?role vivo:roleContributesTo ?grant .

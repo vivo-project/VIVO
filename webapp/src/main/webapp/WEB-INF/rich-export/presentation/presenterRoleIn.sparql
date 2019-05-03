@@ -3,12 +3,12 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 
 CONSTRUCT {
-     ?presentation rdfs:label ?presentationTitle . 
+     ?presentation rdfs:label ?presentationTitle .
      ?presenterRole rdfs:label ?roleLabel .
 } WHERE {
      PERSON_URI obo:RO_0000053 ?presenterRole .
      ?presenterRole a core:PresenterRole .
      ?presenterRole rdfs:label ?roleLAbel .
-     ?presenterRole obo:BFO_0000054 ?presentation .     
+     ?presenterRole obo:BFO_0000054 ?presentation .
      ?presentation rdfs:label ?presentationTitle .
 }

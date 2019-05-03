@@ -1,9 +1,9 @@
 <#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#-- Custom object property statement view for faux property "reviewer of". See the PropertyConfig.n3 file for details.
-    
+
      This template must be self-contained and not rely on other variables set for the individual page, because it
-     is also used to generate the property statement during a deletion.  
+     is also used to generate the property statement during a deletion.
  -->
 
 <#import "lib-sequence.ftl" as s>

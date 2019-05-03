@@ -28,22 +28,22 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequ
 
 
 /**
- * 
+ *
  * This request handler is used to serve the content related to an individual's
  * grants over the years like,
  * 		1. Sparkline representing this
  * 		2. An entire page dedicated to the sparkline vis which will also have links to
  * download the data using which the sparkline was rendered & its tabular representation etc.
  * 		3. Downloadable CSV file containing number of grants over the years.
- * 		4. Downloadable PDf file containing the grant content, among other things. 
- * Currently this is disabled because the feature is half-baked. We plan to activate this in 
- * the next major release.  
- * 
+ * 		4. Downloadable PDf file containing the grant content, among other things.
+ * Currently this is disabled because the feature is half-baked. We plan to activate this in
+ * the next major release.
+ *
  * @author bkoniden
  * Deepak Konidena
  */
 public class PersonGrantCountRequestHandler implements VisualizationRequestHandler {
-	
+
 	@Override
 	public Map<String, String> generateDataVisualization(
 			VitroRequest vitroRequest, Log log, Dataset dataset)
@@ -51,11 +51,11 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 
 		String personURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
-		
+
 		SubEntity person = new SubEntity(
 									personURI,
 									UtilityFunctions.getIndividualLabelFromDAO(vitroRequest, personURI));
-		
+
 		QueryRunner<Set<Activity>> queryManager = new PersonGrantCountQueryRunner(
 				personURI,
 				vitroRequest.getRDFService(),
@@ -69,18 +69,18 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 		 */
 		Map<String, Integer> yearToGrantCount =
 				UtilityFunctions.getYearToActivityCount(authorGrants);
-	
+
     	return prepareDataResponse(person,
 				yearToGrantCount);
 
-	
+
 	}
-	
+
 	@Override
 	public ResponseValues generateVisualizationForShortURLRequests(
 			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
 			Dataset dataSource) throws MalformedQueryParametersException {
-		throw new UnsupportedOperationException("Person Grant Count Visualization does not provide " 
+		throw new UnsupportedOperationException("Person Grant Count Visualization does not provide "
 					+ "Short URL Response.");
 	}
 
@@ -93,7 +93,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 
 		String visMode = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY);
-		
+
 		String visContainer = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.VIS_CONTAINER_KEY);
 
@@ -113,11 +113,11 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 
 
 		boolean shouldVIVOrenderVis = (yearToGrantCount.size() > 0);
-			
+
 			/*
 	    	 * Computations required to generate HTML for the sparkline & related context.
 	    	 * */
-	    	PersonGrantCountVisCodeGenerator visualizationCodeGenerator = 
+	    	PersonGrantCountVisCodeGenerator visualizationCodeGenerator =
 	    		new PersonGrantCountVisCodeGenerator(personURI,
 	    									   visMode,
 	    									   visContainer,
@@ -127,19 +127,19 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 
 	    	SparklineData sparklineData = visualizationCodeGenerator
 			.getValueObjectContainer();
-	    	
-	    	return prepareDynamicResponse(vitroRequest, 
-			   		  sparklineData, 
+
+	    	return prepareDynamicResponse(vitroRequest,
+			   		  sparklineData,
 			   		shouldVIVOrenderVis);
 
-		
+
 	}
-	
+
 	@Override
 	public ResponseValues generateStandardVisualization(
 			VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
-		
+
 		String personURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 
@@ -162,28 +162,28 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 		 */
 		Map<String, Integer> yearToGrantCount =
 				UtilityFunctions.getYearToActivityCount(authorGrants);
-	
+
     	/*
     	 * Computations required to generate HTML for the sparkline & related context.
     	 * */
-    	PersonGrantCountVisCodeGenerator visualizationCodeGenerator = 
+    	PersonGrantCountVisCodeGenerator visualizationCodeGenerator =
     		new PersonGrantCountVisCodeGenerator(personURI,
     									   visMode,
     									   visContainer,
     									   yearToGrantCount,
     									   log);
-    	
+
     	SparklineData sparklineData = visualizationCodeGenerator
 											.getValueObjectContainer();
-    	
-			return prepareStandaloneResponse(vitroRequest, 
+
+			return prepareStandaloneResponse(vitroRequest,
     							  sparklineData);
 	}
-	
+
 	private String getGrantsOverTimeCSVContent(Map<String, Integer> yearToGrantCount) {
-		
+
 		StringBuilder csvFileContent = new StringBuilder();
-		
+
 		csvFileContent.append("Year, Grants\n");
 
 		for (Entry<String, Integer> currentEntry : yearToGrantCount.entrySet()) {
@@ -195,7 +195,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 
 		return csvFileContent.toString();
 	}
-	
+
 	/**
 	 * Provides response when csv file containing the grant count over the years
 	 * is requested.
@@ -205,23 +205,23 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	private Map<String, String> prepareDataResponse(
 						SubEntity investigator,
 						Map<String, Integer> yearToGrantCount) {
-		
+
 		String piName = investigator.getIndividualLabel();
-		
-		String outputFileName = UtilityFunctions.slugify(piName) 
+
+		String outputFileName = UtilityFunctions.slugify(piName)
 										+ "_grants-per-year" + ".csv";
 
 		Map<String, String> fileData = new HashMap<String, String>();
-		fileData.put(DataVisualizationController.FILE_NAME_KEY, 
+		fileData.put(DataVisualizationController.FILE_NAME_KEY,
 					 outputFileName);
-		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
+		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY,
 					 "application/octet-stream");
-		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
+		fileData.put(DataVisualizationController.FILE_CONTENT_KEY,
 					getGrantsOverTimeCSVContent(yearToGrantCount));
 
 		return fileData;
 	}
-	
+
 	/**
 	 * Provides response when an entire page dedicated to grant sparkline is requested.
 	 * @param vreq Vitro Request
@@ -229,7 +229,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	 */
 	private TemplateResponseValues prepareStandaloneResponse(VitroRequest vreq,
 			SparklineData valueObjectContainer) {
-        
+
         String standaloneTemplate = "personGrantCountStandaloneActivator.ftl";
 
         Map<String, Object> body = new HashMap<String, Object>();
@@ -237,11 +237,11 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
         body.put("sparklineVO", valueObjectContainer);
 
         return new TemplateResponseValues(standaloneTemplate, body);
-        
+
 	}
-	
+
 	/**
-	 * Provides response when the grant sparkline has to be rendered in already existing 
+	 * Provides response when the grant sparkline has to be rendered in already existing
 	 * page, e.g. profile page.
 	 * @param vreq Vitro Request
 	 * @param valueObjectContainer Sparkline data
@@ -249,7 +249,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	 */
 	private TemplateResponseValues prepareDynamicResponse(
 			VitroRequest vreq,
-			SparklineData valueObjectContainer, 
+			SparklineData valueObjectContainer,
 			boolean shouldVIVOrenderVis) {
 
         String dynamicTemplate = "personGrantCountDynamicActivator.ftl";
@@ -257,9 +257,9 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
         Map<String, Object> body = new HashMap<String, Object>();
         body.put("sparklineVO", valueObjectContainer);
         body.put("shouldVIVOrenderVis", shouldVIVOrenderVis);
-        
+
         return new TemplateResponseValues(dynamicTemplate, body);
-        
+
 	}
 
 	@Override

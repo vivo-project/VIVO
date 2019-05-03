@@ -26,7 +26,7 @@ public class ProcessInternalClasses extends ProcessIndividualsForClasses {
     private static final Log log = LogFactory.getLog(ProcessInternalClasses.class);
 
    /**Retrieve and populate**/
-    
+
   //Based on institutional internal page and not general individualsForClasses
     @Override
     protected void populateRestrictedClasses(Map<String, Object> pageData, Map<String, Object> templateData) {
@@ -38,7 +38,7 @@ public class ProcessInternalClasses extends ProcessIndividualsForClasses {
 			templateData.put("isInternal", "true");
 		}
     }
-    
+
 	/**Process submission**/
 	//Check and see if we should use this process
 	//Use this if either internal class is selected or all classes have been selected
@@ -49,34 +49,34 @@ public class ProcessInternalClasses extends ProcessIndividualsForClasses {
 		String dataGetterTypeUri = DataGetterUtils.generateDataGetterTypeURI(InternalClassesDataGetter.class.getName());
 		String[] selectedClasses = vreq.getParameterValues("classInClassGroup");
 		Model dgModel = ModelFactory.createDefaultModel();
-		dgModel.add(dgModel.createStatement(dataGetterResource, 
-				RDF.type, 
+		dgModel.add(dgModel.createStatement(dataGetterResource,
+				RDF.type,
 				ResourceFactory.createResource(dataGetterTypeUri)));
 		for(String classUri: selectedClasses) {
 			dgModel.add(dgModel.createStatement(
-					dataGetterResource, 
+					dataGetterResource,
 					ResourceFactory.createProperty(DisplayVocabulary.GETINDIVIDUALS_FOR_CLASS),
 					ResourceFactory.createResource(classUri)));
 		}
-		
+
 		//Also check if internal class checked
 		if(internalClassSelected(vreq)) {
 			dgModel.add(dgModel.createStatement(
-					dataGetterResource, 
+					dataGetterResource,
 					ResourceFactory.createProperty(DisplayVocabulary.RESTRICT_RESULTS_BY_INTERNAL),
 					dgModel.createLiteral("true")));
 		}
 		return dgModel;
 	}
-	
+
 	private  boolean allClassesSelected(VitroRequest vreq) {
 			String allClasses = vreq.getParameter("allSelected");
 			return (allClasses != null && !allClasses.isEmpty());
 	}
-		
+
 	private  boolean internalClassSelected(VitroRequest vreq) {
 	    String internalClass = vreq.getParameter("display-internalClass");
 	    return (internalClass != null && !internalClass.isEmpty());
-	}		
-		
+	}
+
 }

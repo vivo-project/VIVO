@@ -3,7 +3,7 @@
 $.extend(this, i18nStringsPersonLvl);
 
 function getWellFormedURLs(given_uri, type) {
-	
+
 	if (!given_uri || given_uri == "") {
 		return;
 	}
@@ -85,24 +85,24 @@ function getWellFormedURLs(given_uri, type) {
 }
 
 function setProfileImage(imageContainerID, mainImageURL) {
-	
+
 	if (imageContainerID == "") {
 		return;
 	}
-	
+
 	if (!mainImageURL || mainImageURL == "") {
 		$("#" + imageContainerID).empty();
 		return;
 	}
-	
+
 	var rawPath = getWellFormedURLs(mainImageURL, "image");
 
 	var imageLink =  contextPath + rawPath;
 
 	var imageContainer = $("#" + imageContainerID);
-	imageContainer.image(imageLink, 
+	imageContainer.image(imageLink,
 			function(){
-		imageContainer.empty().append(this); 
+		imageContainer.empty().append(this);
 	},
 	function(){
 		// For performing any action on failure to
@@ -110,7 +110,7 @@ function setProfileImage(imageContainerID, mainImageURL) {
 		imageContainer.empty();
 	}
 	);
-	
+
 }
 
 function setProfileMoniker(monikerContainerID, moniker, doEllipsis) {
@@ -118,52 +118,52 @@ function setProfileMoniker(monikerContainerID, moniker, doEllipsis) {
 	if (monikerContainerID == "") {
 		return;
 	}
-	
+
 	if (!moniker) {
 		$("#" + monikerContainerID).empty();
 		return;
 	}
 
 	var finalDisplayMoniker;
-	
+
 	if (moniker.length > 40 && doEllipsis) {
-		
+
 		finalDisplayMoniker = moniker.substr(0,40) + "...";
-		
+
 	} else {
-		
+
 		finalDisplayMoniker = moniker;
-		
+
 	}
-	
+
 	$("#" + monikerContainerID).empty().text(finalDisplayMoniker);
 	$("#" + monikerContainerID).attr('title', moniker);
 
 }
 
 function setProfileName(nameContainerID, name, doNameEllipsis) {
-	
+
 	if (nameContainerID == "") {
 		return;
 	}
-	
+
 	if (!name) {
 		$("#" + nameContainerID).empty();
 		return;
 	}
 
 	var finalDisplayName;
-	
+
 	if (name.length > 40 && doNameEllipsis) {
-		
+
 		finalDisplayName = name.substr(0,40) + "...";
-		
+
 	} else {
-		
+
 		finalDisplayName = name;
-		
+
 	}
-	
+
 	$("#" + nameContainerID).empty().text(finalDisplayName);
 	$("#" + nameContainerID).attr('title', name);
 
@@ -177,7 +177,7 @@ function processProfileInformation(nameContainerID,
 		doNameEllipsis) {
 
 	var name, mainImageURL, moniker;
-	
+
 	if (jQuery.isEmptyObject(profileInfoJSON)) {
 		return;
 	}
@@ -207,59 +207,59 @@ function processProfileInformation(nameContainerID,
 }
 
 function visLoaded(nodes){
-	
+
 	var jsonedNodes = jQuery.parseJSON(nodes);
-	
-	$(document).ready(function() { 
+
+	$(document).ready(function() {
 		 createTable(collaboratorTableMetadata.tableID, collaboratorTableMetadata.tableContainer, jsonedNodes);
 	});
 
 }
 
 function createTable(tableID, tableContainer, tableData) {
-	
+
 	var number_of_works = "";
-	
+
 	var table = $('<table>');
 	table.attr('id', tableID);
-	
-	table.append($('<caption>').html(collaboratorTableMetadata.tableCaption 
-										+ "<a href=\"" + collaboratorTableMetadata.tableCSVFileLink 
-										+ "\">(.CSV " + i18nStringsPersonLvl.fileCapitalized + ")</a>"));  
+
+	table.append($('<caption>').html(collaboratorTableMetadata.tableCaption
+										+ "<a href=\"" + collaboratorTableMetadata.tableCSVFileLink
+										+ "\">(.CSV " + i18nStringsPersonLvl.fileCapitalized + ")</a>"));
 
 	var header = $('<thead>');
-	
-	var row = $('<tr>'); 
 
-	row.append($('<th>').html(collaboratorTableMetadata.tableColumnTitle1)); 
-	row.append($('<th>').html(collaboratorTableMetadata.tableColumnTitle2 + "" + $('#ego_label').text()));  
+	var row = $('<tr>');
+
+	row.append($('<th>').html(collaboratorTableMetadata.tableColumnTitle1));
+	row.append($('<th>').html(collaboratorTableMetadata.tableColumnTitle2 + "" + $('#ego_label').text()));
 
 	header.append(row);
-	
+
 	table.append(header);
 
-	$.each(tableData, function(i, item){ 
-		
+	$.each(tableData, function(i, item){
+
 		/*
 		 * Make sure that we dont append a row that belong to the ego in the "co-investigator/author" table.
 		 * */
 		if (item.url !== unEncodedEgoURI) {
-			
+
 			number_of_works = item[collaboratorTableMetadata.jsonNumberWorksProperty];
-			
-			var row = $('<tr>'); 
-	
+
+			var row = $('<tr>');
+
 			row.append($('<td>').html(item.label));
 			row.append($('<td>').html(number_of_works));
-	
+
 			table.append(row);
 		}
 
-	});	
+	});
 
 	table.prependTo('#' + tableContainer);
 	$('#' + tableContainer + " #loadingData").remove();
-	
+
 }
 
 /*

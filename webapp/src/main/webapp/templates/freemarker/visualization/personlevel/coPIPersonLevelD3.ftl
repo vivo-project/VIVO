@@ -71,13 +71,13 @@ ${stylesheets.add('<link rel="stylesheet" type="text/css" href="${urls.base}/css
 <script language="JavaScript" type="text/javascript">
 
 $(document).ready(function(){
-        
+
     processProfileInformation("ego_label",
                               "ego_moniker",
                               "ego_profile_image",
                               jQuery.parseJSON(getWellFormedURLs("${egoURIParam}", "profile_info")));
-    
-    <#if (numOfCoInvestigations?? && numOfCoInvestigations <= 0) || (numOfInvestigators?? && numOfInvestigators <= 0) >  
+
+    <#if (numOfCoInvestigations?? && numOfCoInvestigations <= 0) || (numOfInvestigators?? && numOfInvestigators <= 0) >
             if ($('#ego_label').text().length > 0) {
                 setProfileName('no_coinvestigations_person', $('#ego_label').text());
             }
@@ -256,15 +256,15 @@ $(document).ready(function(){
 
 <div id="body">
     <div  class="sub_headings"><h2><a href="${egoVivoProfileURL}" title="${i18n().investigator_name}"><span id="ego_label"></span></a><br />${i18n().co_investigator_network_capitalized} </h2></div>
-            
+
     <#if (numOfInvestigators?? && numOfInvestigators > 0) >
-        
-        <#if (numOfCoInvestigations?? && numOfCoInvestigations > 0) || (numOfInvestigators?? && numOfInvestigators > 0) > 
+
+        <#if (numOfCoInvestigations?? && numOfCoInvestigations > 0) || (numOfInvestigators?? && numOfInvestigators > 0) >
                 <div class = "graphml-file-link"><a href="${egoCoInvestigationNetworkDataFileURL}" title="${i18n().co_investigator}">(GraphML ${i18n().file_capitalized})</a></div>
         </#if>
-    
+
     </#if>
-    
+
     <div class = "toggle_visualization">
         <div id="coauthorship_link_container" class="collaboratorship-link-container">
         	<div class="collaboratorship-icon"><a href="${coauthorshipURL}" title="${i18n().co_author}"><img src="${coAuthorIcon}" alt="${i18n().co_author_icon}"/></a></div>
@@ -273,12 +273,12 @@ $(document).ready(function(){
             </div>
         </div>
     </div>
-        
+
     <div style="clear:both;"></div>
-    
-            
+
+
     <#if (numOfCoInvestigations?? && numOfCoInvestigations > 0) || (numOfInvestigators?? && numOfInvestigators > 0) >
-    
+
         <div id="bodyPannel">
             <div id="chord" style="float: right;"></div>
         </div>
@@ -308,19 +308,19 @@ $(document).ready(function(){
 
         <#-- Sparkline -->
         <div id="sparkline-container-full">
-            
+
             <#assign displayTable = false />
-            
+
             <#assign sparklineVO = egoGrantSparklineVO />
             <div id="grant-count-sparkline-include"><#include "personGrantSparklineContent.ftl"></div>
-    
+
             <#assign sparklineVO = uniqueCoInvestigatorsSparklineVO />
             <div id="coinvestigator-count-sparkline-include"><#include "coInvestigationSparklineContent.ftl"></div>
-        </div>  
-    
+        </div>
+
 
         <div class="vis_stats_full">
-        
+
         <div class="sub_headings" id="table_heading"><h3>${i18n().tables_capitalized}</h3></div>
             <p style="float:left;font-size:.9em">${i18n().grant_info_for_all_years}&nbsp;<img class="filterInfoIcon" width="16px" height="16px" id="imageIconThree" src="${urls.images}/iconInfo.png" alt="${i18n().info_icon}" title="${i18n().grant_sparkline_note}" /></p>
 
@@ -335,17 +335,17 @@ $(document).ready(function(){
                 <#assign tableActivityColumnName = "${i18n().grants_capitalized}" />
                 <#assign tableContent = egoGrantSparklineVO.yearToActivityCount />
                 <#assign fileDownloadLink = egoGrantSparklineVO.downloadDataLink />
-                
+
                 <#include "yearToActivityCountTable.ftl">
 
                 </p>
-                
+
             </div>
-            
+
             <#if (numOfCoInvestigations?? && numOfCoInvestigations > 0) >
-        
+
                 <div class="vis-tables">
-                
+
                     <p id="coinve_table_container" class="datatable">
                         <#assign tableID = "coinvestigations_table" />
                         <#assign tableCaption = "${i18n().co_investigator_s_capitalized} " />
@@ -357,14 +357,14 @@ $(document).ready(function(){
                         <#include "collaboratorToActivityCountTable.ftl">
                     </p>
                 </div>
-            
+
             </#if>
-            
+
             <div style="clear:both"></div>
-        
+
         </div>
-        
+
     </#if>
-    
+
 </div>
 <div id="chord-info-div" style="display: none;"></div>

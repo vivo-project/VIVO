@@ -2,7 +2,7 @@
 
 <div class="staticPageBackground">
 
-${error} 
+${error}
 
 </div>
 

@@ -33,50 +33,50 @@ public class PersonHasIssuedCredentialGenerator extends VivoBaseGenerator implem
     final static String dateTimeValueType = vivoCore + "DateTimeValue";
     final static String dateTimeValue = vivoCore + "dateTime";
     final static String dateTimePrecision = vivoCore + "dateTimePrecision";
-    
+
     public PersonHasIssuedCredentialGenerator() {}
-    
+
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
             HttpSession session) throws Exception {
-        
+
         EditConfigurationVTwo conf = new EditConfigurationVTwo();
-        
+
         initBasics(conf, vreq);
         initPropertyParameters(vreq, session, conf);
-        initObjectPropForm(conf, vreq);               
-        
+        initObjectPropForm(conf, vreq);
+
         conf.setTemplate("personHasIssuedCredential.ftl");
-        
+
         conf.setVarNameForSubject("person");
         conf.setVarNameForPredicate("predicate");
         conf.setVarNameForObject("issuedCredential");
-        
+
         conf.setN3Required( Arrays.asList( n3ForNewIssuedCredential, n3ForICTypeAssertion) );
-        conf.setN3Optional( Arrays.asList( n3ForNewCredentialAssertion, 
-                                           n3ForExistingCredentialAssertion, 
-                                           n3ForYearCredentialed, 
-                                           n3ForStart, 
+        conf.setN3Optional( Arrays.asList( n3ForNewCredentialAssertion,
+                                           n3ForExistingCredentialAssertion,
+                                           n3ForYearCredentialed,
+                                           n3ForStart,
                                            n3ForEnd ) );
-        
+
         conf.addNewResource("credential", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("issuedCredential", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("yearCredentialedNode", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("intervalNode", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("startNode", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("endNode", DEFAULT_NS_FOR_NEW_RESOURCE);
-        
-        //uris in scope: none   
-        //literals in scope: none 
-        
+
+        //uris in scope: none
+        //literals in scope: none
+
         conf.setUrisOnform(Arrays.asList("existingCredential", "issuedCredentialType", "credentialType"));
         conf.setLiteralsOnForm(Arrays.asList("yearCredentialedDisplay","credentialLabel", "credentialLabelDisplay" ));
-        
+
         conf.addSparqlForExistingLiteral("credentialLabel", credentialLabelQuery);
         conf.addSparqlForExistingLiteral("yearCredentialed-value", existingYearCredentialedQuery);
         conf.addSparqlForExistingLiteral("startField-value", existingStartDateQuery);
         conf.addSparqlForExistingLiteral("endField-value", existingEndDateQuery);
-        
+
         conf.addSparqlForExistingUris("existingCredential", existingCredentialQuery);
         conf.addSparqlForExistingUris("credentialType", existingCredentialTypeQuery);
         conf.addSparqlForExistingUris("issuedCredentialType", issuedCredentialTypeQuery);
@@ -87,20 +87,20 @@ public class PersonHasIssuedCredentialGenerator extends VivoBaseGenerator implem
         conf.addSparqlForExistingUris("yearCredentialed-precision", existingYearCredentialedPrecisionQuery);
         conf.addSparqlForExistingUris("startField-precision", existingStartPrecisionQuery);
         conf.addSparqlForExistingUris("endField-precision", existingEndPrecisionQuery);
-        
-        conf.addField( new FieldVTwo().                        
+
+        conf.addField( new FieldVTwo().
                 setName("issuedCredentialType").
                 setRangeDatatypeUri(XSD.xstring.toString() ).
                 setValidators( list("datatype:" + XSD.xstring.toString()))
                 );
 
-        conf.addField( new FieldVTwo().                        
+        conf.addField( new FieldVTwo().
                 setName("credentialType").
                 setOptions(getCredentialTypeFieldOptions(vreq)));
 
         conf.addField( new FieldVTwo(). // options will be added in browser by auto complete JS
                 setName("existingCredential")
-        );        
+        );
 
         conf.addField( new FieldVTwo().
                 setName("credentialLabel").
@@ -121,24 +121,24 @@ public class PersonHasIssuedCredentialGenerator extends VivoBaseGenerator implem
                 );
 
         conf.addField( new FieldVTwo().setName("yearCredentialed").
-                setEditElement( 
-                        new DateTimeWithPrecisionVTwo(null, 
+                setEditElement(
+                        new DateTimeWithPrecisionVTwo(null,
                                 VitroVocabulary.Precision.YEAR.uri(),
                                 VitroVocabulary.Precision.NONE.uri())
                                 )
                 );
 
         conf.addField( new FieldVTwo().setName("startField").
-                setEditElement( 
-                        new DateTimeWithPrecisionVTwo(null, 
+                setEditElement(
+                        new DateTimeWithPrecisionVTwo(null,
                                 VitroVocabulary.Precision.YEAR.uri(),
                                 VitroVocabulary.Precision.NONE.uri())
                                 )
                 );
 
         conf.addField( new FieldVTwo().setName("endField").
-                setEditElement( 
-                        new DateTimeWithPrecisionVTwo(null, 
+                setEditElement(
+                        new DateTimeWithPrecisionVTwo(null,
                                 VitroVocabulary.Precision.YEAR.uri(),
                                 VitroVocabulary.Precision.NONE.uri())
                                 )
@@ -147,7 +147,7 @@ public class PersonHasIssuedCredentialGenerator extends VivoBaseGenerator implem
         conf.addValidator(new DateTimeIntervalValidationVTwo("startField","endField"));
         conf.addValidator(new AntiXssValidation());
         conf.addValidator(new AutocompleteRequiredInputValidator("existingCredential", "credentialLabel"));
-        
+
         addFormSpecificData(conf, vreq);
         prepare(vreq, conf);
         return conf;
@@ -155,46 +155,46 @@ public class PersonHasIssuedCredentialGenerator extends VivoBaseGenerator implem
 
     /* N3 assertions  */
 
-    final static String n3ForNewIssuedCredential = 
-        "@prefix vivo: <" + vivoCore + "> . \n\n" +   
+    final static String n3ForNewIssuedCredential =
+        "@prefix vivo: <" + vivoCore + "> . \n\n" +
         "?person vivo:relatedBy  ?issuedCredential . \n" +
-        "?issuedCredential a  <" + issuedCredentialTypeClass + "> . \n" +              
-        "?issuedCredential vivo:relates ?person . " ;    
-    
-    final static String n3ForICTypeAssertion  =      
+        "?issuedCredential a  <" + issuedCredentialTypeClass + "> . \n" +
+        "?issuedCredential vivo:relates ?person . " ;
+
+    final static String n3ForICTypeAssertion  =
         "?issuedCredential a ?issuedCredentialType .";
-    
-    final static String n3ForNewCredentialAssertion  =      
-        "@prefix vivo: <" + vivoCore + "> . \n\n" +   
+
+    final static String n3ForNewCredentialAssertion  =
+        "@prefix vivo: <" + vivoCore + "> . \n\n" +
         "?issuedCredential vivo:relates ?credential . \n" +
         "?credential a <" + credentialTypeClass + ">  . \n" +
         "?credential vivo:relatedBy ?issuedCredential . \n" +
         "?credential a ?credentialType . \n" +
         "?credential <"+ label + "> ?credentialLabel .";
-    
-    final static String n3ForExistingCredentialAssertion  =      
-        "@prefix vivo: <" + vivoCore + "> . \n\n" +   
+
+    final static String n3ForExistingCredentialAssertion  =
+        "@prefix vivo: <" + vivoCore + "> . \n\n" +
         "?issuedCredential vivo:relates ?existingCredential . \n" +
 /*        "?existingCredential a <" + credentialTypeClass + ">  . \n" +
         "?existingCredential a ?credentialType . \n" +  */
         "?existingCredential vivo:relatedBy ?issuedCredential . " ;
-    
-	final static String n3ForYearCredentialed = 
+
+	final static String n3ForYearCredentialed =
         "?issuedCredential <" + yearCredentialedPred + "> ?yearCredentialedNode . \n" +
         "?yearCredentialedNode a <" + dateTimeValueType + "> . \n" +
         "?yearCredentialedNode  <" + dateTimeValue + "> ?yearCredentialed-value . \n" +
         "?yearCredentialedNode  <" + dateTimePrecision + "> ?yearCredentialed-precision .";
-        
+
     final static String n3ForStart =
-        "?issuedCredential <" + issuedCredentialToInterval + "> ?intervalNode . \n" +    
+        "?issuedCredential <" + issuedCredentialToInterval + "> ?intervalNode . \n" +
         "?intervalNode a <" + intervalType + "> . \n" +
-        "?intervalNode <" + intervalToStart + "> ?startNode . \n" +    
+        "?intervalNode <" + intervalToStart + "> ?startNode . \n" +
         "?startNode a <" + dateTimeValueType + "> . \n" +
         "?startNode  <" + dateTimeValue + "> ?startField-value . \n" +
         "?startNode  <" + dateTimePrecision + "> ?startField-precision . \n";
-    
+
     final static String n3ForEnd =
-        "?issuedCredential <" + issuedCredentialToInterval + "> ?intervalNode . \n" +    
+        "?issuedCredential <" + issuedCredentialToInterval + "> ?intervalNode . \n" +
         "?intervalNode a <" + intervalType + "> . \n" +
         "?intervalNode <" + intervalToEnd + "> ?endNode . \n" +
         "?endNode a <" + dateTimeValueType + "> . \n" +
@@ -233,13 +233,13 @@ public class PersonHasIssuedCredentialGenerator extends VivoBaseGenerator implem
         " ?existingCredential <" + label + "> ?existingCredentialLabel . \n" +
         "}";
 
-    final static String existingYearCredentialedQuery = 
+    final static String existingYearCredentialedQuery =
         "SELECT ?existingYearCredentialedValue WHERE { \n" +
         "  ?issuedCredential <" + yearCredentialedPred + "> ?yearCredentialedNode . \n" +
         "  ?yearCredentialedNode a <" + dateTimeValueType + "> . \n" +
         "  ?yearCredentialedNode <" + dateTimeValue + "> ?existingYearCredentialedValue }";
 
-    final static String existingYearCredentialedNodeQuery = 
+    final static String existingYearCredentialedNodeQuery =
         "SELECT ?existingYearCredentialedNode WHERE { \n" +
         "  ?issuedCredential <" + yearCredentialedPred + "> ?existingYearCredentialedNode . }";
 
@@ -250,7 +250,7 @@ public class PersonHasIssuedCredentialGenerator extends VivoBaseGenerator implem
         "  ?intervalNode <" + intervalToStart + "> ?startNode . \n" +
         "  ?startNode a <" + dateTimeValueType +"> . \n" +
         "  ?startNode <" + dateTimeValue + "> ?existingStartDate . }";
-    
+
     final static String existingEndDateQuery =
         "SELECT ?existingEndDate WHERE { \n" +
         "  ?issuedCredential <" + issuedCredentialToInterval + "> ?intervalNode . \n" +
@@ -260,44 +260,44 @@ public class PersonHasIssuedCredentialGenerator extends VivoBaseGenerator implem
         "  ?endNode <" + dateTimeValue + "> ?existingEndDate . }";
 
     final static String existingIntervalNodeQuery =
-        "SELECT ?existingIntervalNode WHERE { \n" + 
+        "SELECT ?existingIntervalNode WHERE { \n" +
         "  ?issuedCredential <" + issuedCredentialToInterval + "> ?existingIntervalNode . \n" +
         "  ?existingIntervalNode a <" + intervalType + "> . }";
 
-    final static String existingStartNodeQuery = 
+    final static String existingStartNodeQuery =
         "SELECT ?existingStartNode WHERE { \n" +
         "  ?issuedCredential <" + issuedCredentialToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n" +
-        "  ?intervalNode <" + intervalToStart + "> ?existingStartNode . \n" + 
+        "  ?intervalNode <" + intervalToStart + "> ?existingStartNode . \n" +
         "  ?existingStartNode a <" + dateTimeValueType + "> . }   ";
 
-    final static String existingEndNodeQuery = 
+    final static String existingEndNodeQuery =
         "SELECT ?existingEndNode WHERE { \n" +
         "  ?issuedCredential <" + issuedCredentialToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n" +
-        "  ?intervalNode <" + intervalToEnd + "> ?existingEndNode . \n" + 
-        "  ?existingEndNode a <" + dateTimeValueType + "> } ";              
+        "  ?intervalNode <" + intervalToEnd + "> ?existingEndNode . \n" +
+        "  ?existingEndNode a <" + dateTimeValueType + "> } ";
 
-    final static String existingYearCredentialedPrecisionQuery = 
+    final static String existingYearCredentialedPrecisionQuery =
         "SELECT ?existingYearCredentialedPrecision WHERE { \n" +
         "  ?issuedCredential <" + yearCredentialedPred + "> ?yearCredentialed . \n" +
-        "  ?yearCredentialed a  <" + dateTimeValueType + "> . \n" +           
+        "  ?yearCredentialed a  <" + dateTimeValueType + "> . \n" +
         "  ?yearCredentialed <" + dateTimePrecision + "> ?existingYearCredentialedPrecision . }";
 
-    final static String existingStartPrecisionQuery = 
+    final static String existingStartPrecisionQuery =
         "SELECT ?existingStartPrecision WHERE { \n" +
         "  ?issuedCredential <" + issuedCredentialToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n" +
         "  ?intervalNode <" + intervalToStart + "> ?startNode . \n" +
-        "  ?startNode a  <" + dateTimeValueType + "> . \n" +           
+        "  ?startNode a  <" + dateTimeValueType + "> . \n" +
         "  ?startNode <" + dateTimePrecision + "> ?existingStartPrecision . }";
 
-    final static String existingEndPrecisionQuery = 
+    final static String existingEndPrecisionQuery =
         "SELECT ?existingEndPrecision WHERE { \n" +
         "  ?issuedCredential <" + issuedCredentialToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n" +
         "  ?intervalNode <" + intervalToEnd + "> ?endNode . \n" +
-        "  ?endNode a <" + dateTimeValueType + "> . \n" +          
+        "  ?endNode a <" + dateTimeValueType + "> . \n" +
         "  ?endNode <" + dateTimePrecision + "> ?existingEndPrecision . }";
 
     //Form specific data
@@ -306,7 +306,7 @@ public class PersonHasIssuedCredentialGenerator extends VivoBaseGenerator implem
         formSpecificData.put("credentialTypeMap", getCredentialTypeMap());
         editConfiguration.setFormSpecificData(formSpecificData);
     }
-    
+
     // Issued Credentials relate a Credential to a person. The class type of a Credential and its subclasses
     // are different than -- but correspond to -- the class type of an Issued Credential and its subclasses.
     // When a user picks a type of credential in the GUI, we need to set the corresponding type for the issued

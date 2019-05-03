@@ -16,18 +16,18 @@
  * specific language governing permissions and limitations
  * under the License.
  */
- 
+
 .gadgets-gadget-chrome {
   float: left;
   margin: 4px 6px 4px 12px; /* changed the left value from 0 tlw72*/
   border: 1px solid #CCC;
   border: 1px solid #dfebe5; /*#7aa5d6;*/
 }
-.col2 .gadgets-gadget-chrome { 
+.col2 .gadgets-gadget-chrome {
   margin-left: 9px;
 }
 
-.gadgets-gadget 
+.gadgets-gadget
 {
   width: 100%;
   border: none;
@@ -55,7 +55,7 @@
 }
 .EditBody .gadgets-gadget-title a {
   color:#3B6394;
-} 
+}
 .EditBody .gadgets-gadget-title a:hover {
   color:#1E416C;
 }
@@ -80,14 +80,14 @@
 
 .gadgets-gadget-title-button img {
   border: 2px solid #4F5CC7;
-  border: none;           
-  float: left; /*right*/                           
+  border: none;
+  float: left; /*right*/
   margin-left: 2px; /*margin-right*/
   margin-top:6px; /*tlw72*/
-} 
+}
 .EditBody .gadgets-gadget-title-button img {
   float: left;
-  margin-right: 8px; 
+  margin-right: 8px;
 }
 
 .gadgets-gadget-content {
@@ -99,7 +99,7 @@
 
 /* Used to style messages produced during rewriting by CajaContentRewriter */
 .gadgets-messages {
-	
+
 }
 
 .gadgets-gadget-status {

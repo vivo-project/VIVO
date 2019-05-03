@@ -1,14 +1,14 @@
 <#-- $This file is distributed under the terms of the license in LICENSE$ -->
 <#--Assign variables from editConfig-->
 <#assign rangeOptions = editConfiguration.pageData.objectVar />
-<#-- 
-<#assign rangeOptionsExist = false /> 
+<#--
+<#assign rangeOptionsExist = false />
 <#if (rangeOptions?keys?size > 0)>
 	<#assign rangeOptionsExist = true/>
 </#if>
  -->
- 
-<#assign rangeOptionsExist = true /> 
+
+<#assign rangeOptionsExist = true />
 
 <#assign objectTypes = editConfiguration.pageData.objectTypes />
 <#assign objectTypesSize = objectTypes?length />
@@ -54,35 +54,35 @@
             <input type="hidden" name="editKey" id="editKey" value="${editKey}" role="input" />
             <#if editConfiguration.propertyPublicDescription?has_content>
                 <p>${editConfiguration.propertyPublicDescription}</p>
-             </#if>     
-             
-            <#---This section should become autocomplete instead--> 
+             </#if>
+
+            <#---This section should become autocomplete instead-->
             <p>
 				<label for="object"> ${propertyNameForDisplay?capitalize} ${i18n().name_capitalized}<span class='requiredHint'> *</span></label>
 				<input class="acSelector" size="50"  type="text" id="object" name="objectLabel" acGroupName="object" value="${objectLabel}" />
 			</p>
-								
-			<div class="acSelection" acGroupName="object" > 
+
+			<div class="acSelection" acGroupName="object" >
 				<p class="inline">
-					<label>${i18n().selected}:</label> 
+					<label>${i18n().selected}:</label>
 					<span class="acSelectionInfo"></span>
-					<a href="" class="verifyMatch"  title="${i18n().verify_this_match}">(${i18n().verify_this_match}</a> ${i18n().or} 
+					<a href="" class="verifyMatch"  title="${i18n().verify_this_match}">(${i18n().verify_this_match}</a> ${i18n().or}
                     <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
                 </p>
                 <input class="acUriReceiver" type="hidden" id="objectVar" name="objectVar" value="${selectedObjectUri}" />
 			</div>
 
             <#--The above section should be autocomplete-->
-            
+
             <p>
                 <input type="submit" id="submit" value="${submitButtonText}" role="button" disabled="disabled"/>
-           
+
                 <span class="or"> or </span>
                 <a title="${i18n().cancel_title}" class="cancel" href="${cancelUrl}">${i18n().cancel_link}</a>
             </p>
         </form>
     <#else>
-        <p> ${i18n().there_are_no_entries_for_selection}  </p>  
+        <p> ${i18n().there_are_no_entries_for_selection}  </p>
     </#if>
 </#if>
 <p>&nbsp;</p>
@@ -105,7 +105,7 @@
 <#--Passing in object types only if there are any types returned, otherwise
 the parameter should not be passed at all to the search.
 Also multiple types parameter set to true only if more than one type returned-->
-    <script type="text/javascript">	
+    <script type="text/javascript">
     var customFormData  = {
         acUrl: '${urls.base}/autocomplete?tokenize=true',
         <#if objectTypesExist = true>
@@ -141,5 +141,5 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/sm
 
  ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',             
+              '<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',
               '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/customFormWithAutocomplete.js"></script>')}

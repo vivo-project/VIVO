@@ -2,6 +2,6 @@
 @prefix vitroDisplay: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
-vitroDisplay:SearchIndex 
-    rdf:type owl:Thing ; 
+vitroDisplay:SearchIndex
+    rdf:type owl:Thing ;
     vitroDisplay:excludeClass <http://xmlns.com/foaf/0.1/Person> .

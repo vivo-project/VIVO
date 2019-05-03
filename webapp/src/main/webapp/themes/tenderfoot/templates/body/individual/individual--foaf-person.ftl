@@ -1,8 +1,8 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#-- 
+<#--
     Individual profile page template for foaf:Person individuals. This is the default template for foaf persons
-    in the Wilma theme and should reside in the themes/wilma/templates directory. 
+    in the Wilma theme and should reside in the themes/wilma/templates directory.
 -->
 
 <#include "individual-setup.ftl">

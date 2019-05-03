@@ -7,7 +7,7 @@
     <query-select>
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        
+
 
         SELECT DISTINCT ?dateTimeInterval ?label
             ?valueStart ?valueStartName

@@ -20,14 +20,14 @@ html,
 body {
     padding: 0;
     height: 100%; /* needed for container min-height */
-    font-family: "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica, sans-serif; 
+    font-family: "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica, sans-serif;
     height: auto !important; /* real browsers */
     height: 100%; /* IE6: treaded as min-height*/;
     min-height: 100%; /* real browsers */
     margin: 0 auto;
 }
 body {
-   background: #f3f3f0 url(../images/header-background.png) center 0 no-repeat; 
+   background: #f3f3f0 url(../images/header-background.png) center 0 no-repeat;
 }
 a {
     color: #2485AE;
@@ -52,35 +52,35 @@ h2 {
     line-height: 1.5em;
 }
 h2 a {
-    color: #2485ae; 
+    color: #2485ae;
 }
-h2 a:link, 
+h2 a:link,
 h2 a:visited {
-    text-decoration: underline; 
+    text-decoration: underline;
 }
 h3 {
     padding: 10px 0 12px 0;
     margin: 0;
     font-size: 1.125em;
-    color: #064d68; 
+    color: #064d68;
 }
 h4 {
     padding: 10px 0 12px 0;
     margin: 0;
     font-size: 1em;
-    color: #064d68; 
+    color: #064d68;
 }
 h5 {
     padding: 10px 0 12px 0;
     margin: 0;
     font-size: .875em;
-    color: #064d68; 
+    color: #064d68;
 }
 /* ------------------------------------------------->  */
 /* EDITING STYLES ---------------------------------->  */
 /* ------------------------------------------------->  */
 input[type="text"],
-select,  
+select,
 input[type="password"] {
     border: 0;
     font-size: 14px;
@@ -108,12 +108,12 @@ label.inline {
 .verbose-toggle:visited,
 #showAddFormButton,
 #showAddFormButton:visited,
-input.submit, 
+input.submit,
 input.submit:visited,
-/* the id selectors are used temporarily due to the custom jsp tags (<v:input>) 
-for editing forms which require an id and do not allow a class. This will be 
+/* the id selectors are used temporarily due to the custom jsp tags (<v:input>)
+for editing forms which require an id and do not allow a class. This will be
 removed once we refactor the editing forms to Freemarker */
-input#submit, 
+input#submit,
 input#submit:visited,
 input.form-button,
 input.form-button:visited {
@@ -122,7 +122,7 @@ input.form-button:visited {
     padding: 5px 18px 7px;
     color: #fff;
     text-decoration: none;
-    border-radius: 4px; 
+    border-radius: 4px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     position: relative;
@@ -156,7 +156,7 @@ input#delete:visited {
     padding: 5px 18px 7px;
     color: #fff;
     text-decoration: none;
-    border-radius: 4px; 
+    border-radius: 4px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     position: relative;
@@ -197,10 +197,10 @@ section.accounts input.delete:active {
     top: 1px;
 }
 form textarea {
-    border: 1px solid #e0dfdf; 
-    border-radius: 4px; 
+    border: 1px solid #e0dfdf;
+    border-radius: 4px;
     -moz-border-radius: 4px;
-    -webkit-border-radius: 4px; 
+    -webkit-border-radius: 4px;
 }
 .maxWidth {
     margin-top: 20px;
@@ -209,7 +209,7 @@ form textarea {
 #itemList a.remove:link,
 #itemList a.remove:visited,
 #showAddForm a.cancel:link,
-form a:link.cancel, 
+form a:link.cancel,
 form a:visited.cancel,
 a.return:link,
 a.return:visited {
@@ -222,7 +222,7 @@ a.return:visited {
 #itemList a.remove:active,
 #showAddForm a.cancel:hover,
 #showAddForm a.cancel:active,
-form a:hover.cancel, 
+form a:hover.cancel,
 form a:active.cancel {
     text-decoration: none;
     color: #f70;
@@ -373,18 +373,18 @@ form select {
    margin-top: .7em;
    margin-right: .5em;
 }
-.notice { 
-    margin-top: 1em; 
+.notice {
+    margin-top: 1em;
     border: 1px dotted #FFD324;
 }
-a.ingestMenu:link, 
+a.ingestMenu:link,
 a.ingestMenu:visited,
 a.account-menu:link,
 a.account-menu:visited {
     text-decoration: none;
     color: #2485AE;
 }
-a.ingestMenu:hover, 
+a.ingestMenu:hover,
 a.ingestMenu:active,
 a.account-menu:hover,
 a.account-menu:active,
@@ -424,7 +424,7 @@ tr.editformcell td textarea.matchingInput {
     width: 95%;
     height:10ex;
     margin-top:0.7em;
-    font-family: "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica, sans-serif; 
+    font-family: "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica, sans-serif;
     font-size:0.95em;
 }
 hr.formDivider {
@@ -433,7 +433,7 @@ hr.formDivider {
     height: 1px;
     margin-bottom: 20px;
     margin-top: 15px;
-    opacity: 0.3;   
+    opacity: 0.3;
 }
 .editingForm table {
     width: 100%;
@@ -605,7 +605,7 @@ ul.individual-urls li a,
 ul.individual-urls-people li a {
     color: #2485ae
 }
-/* LOG IN------>  */          
+/* LOG IN------>  */
 #login {
     float: right;
     width: 314px;
@@ -667,11 +667,11 @@ h3.internal-auth:hover {
     border: 1px solid #e0dfdf;
     border-radius: 5px;
     -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;     
+    -webkit-border-radius: 5px;
 }
 #login-form input.text-field:focus {
-    border: 1px solid rgba(57, 138, 172, .5);  
-    background-color: rgba(57, 138, 172, .1);   
+    border: 1px solid rgba(57, 138, 172, .5);
+    background-color: rgba(57, 138, 172, .1);
 }
 #login-form p.submit {
     width: 100px;
@@ -723,12 +723,12 @@ p.request-account {
 p.password-note {
     font-size: 12px;
     color: #949696;
-    padding-left: 38px;   
+    padding-left: 38px;
 }
 #flash-message {
     border: 1px dotted #E2C822;
     background-color: #FFF9D7;
-    padding: .5em;  
+    padding: .5em;
     margin-bottom: 10px;
 }
 #welcome-message {
@@ -799,7 +799,7 @@ input.search-home-vivo {
     margin-top: 2px;
 }
 
-/* SEARCH HOME------>  */ 
+/* SEARCH HOME------>  */
 
 #search-home-field {
 		background: url(../images/search-field-and-button.gif) 0 0 no-repeat;
@@ -818,7 +818,7 @@ input.search-homepage {
 		background-color: #f9fafa;
 		background-position: right;
 		opacity: .5;
-		text-align:right; 
+		text-align:right;
 }
 
 .filter-default {
@@ -843,7 +843,7 @@ input.search-homepage {
 #stats p,
 p.request-account a,
 ul#header-nav a {
-   color: #fff; 
+   color: #fff;
 }
 #filter-search-nav a {
 		border-bottom: 1px dotted #4f5656;
@@ -912,16 +912,16 @@ a.view-all-style {
 		opacity: .5;
 }
 #home-research  {
-	width: 297px; 
+	width: 297px;
 	float: left;
 	clear: both;
 }
 #home-research ul {
-	padding: 0.7em 0 0.6em 0.75em; 
+	padding: 0.7em 0 0.6em 0.75em;
 }
 #home-research li {
 	line-height: 1.25em;
-	margin-top: 0.7em; 
+	margin-top: 0.7em;
 	font-size: 0.9em;
 }
 #home-research li:last-child {
@@ -939,7 +939,7 @@ a.view-all-style {
 	text-align: center;
 }
 #home-academic-depts  {
-	width: 297px; 
+	width: 297px;
 	margin-left: 15px;
 	float: left;
 }
@@ -951,8 +951,8 @@ a.view-all-style {
     padding: 3px 10px;
 }
 #home-academic-depts ul {
-    list-style: disc outside url(../../../images/arrowIcon.gif); 
-	padding: 0.4em 0 0.6em 1.8em; 
+    list-style: disc outside url(../../../images/arrowIcon.gif);
+	padding: 0.4em 0 0.6em 1.8em;
 }
 #home-academic-depts li {
 	line-height: 1.25em;
@@ -961,7 +961,7 @@ a.view-all-style {
 	font-size: 0.9em;
 }
 #home-faculty-mbrs  {
-	width: 297px; 
+	width: 297px;
 	margin: 0 0 20px 15px;
 	float: left;
 }
@@ -985,9 +985,9 @@ div#research-faculty-mbrs li h1 {
     padding: 6px 0 2px 0;
 }
 div#research-faculty-mbrs li img {
-    width: 60px;  
+    width: 60px;
     float: left;
-    padding: 0px 8px 10px 10px; 
+    padding: 0px 8px 10px 10px;
 }
 div#research-faculty-mbrs li span.title {
     display: block;
@@ -1011,7 +1011,7 @@ div#adjImgHeight {
 }
 #home-geo-focus  {
 	clear: both;
-	display: inline-block; 
+	display: inline-block;
     margin-top: 30px;
     height: 632px;
     width: 921px;
@@ -1112,7 +1112,7 @@ ul#individual-tools-people li a {
 .button:visited {
     font-size: 16px;
     font-weight: normal;
-    line-height: 1; 
+    line-height: 1;
 }
 .green.button,
 .green.button:visited {
@@ -1143,15 +1143,15 @@ ul#individual-tools-people li a {
 .individualList ul.individualData li {
     border-right: solid 1px #a0a0a0;
 }
-.individualList ul { 
-    margin-left: 0; 
+.individualList ul {
+    margin-left: 0;
 }
 .individualList li,
-.individualList li span { 
+.individualList li span {
   color: #9c9c9c;
  }
-.individualList li a { 
-    font-weight: normal; 
+.individualList li a {
+    font-weight: normal;
     color: #2485AE;
 }
 
@@ -1230,7 +1230,7 @@ ul#find-filters a.selected {
 #profile-photo-display {
     width: 600px;
 }
-#profile-photo-display img {    
+#profile-photo-display img {
     border: 1px solid #dde4e3;
 }
 #nav-display p {
@@ -1265,8 +1265,8 @@ ul#browse-classes a.selected {
     background: url(../images/arrow.gif) 4px 5px no-repeat;
     color: #2ea0cf;
 }
-ul#browse-classes .count-classes {    
-    font-size: 12px; 
+ul#browse-classes .count-classes {
+    font-size: 12px;
 }
 /* ALPHA BROWSE------>  */
 ul#alpha-browse-individuals {
@@ -1284,7 +1284,7 @@ ul#vgraph-classes .count-classes {
 .alphaIndex,
 .pagination.menupage,
 tr.editformcell td select,
-ul#alpha-browse-individuals li {    
+ul#alpha-browse-individuals li {
     font-size: .8em;
 }
 nav#alpha-browse-container {
@@ -1368,8 +1368,8 @@ article.property ul.property-list {
     padding-top: .2em;
 }
 #individual-intro h1 {
-    font-size: 1.375em; 
-    color: #2485ae; 
+    font-size: 1.375em;
+    color: #2485ae;
 }
 #individual-intro span.display-title,
 h1.fn .display-title {
@@ -1416,7 +1416,7 @@ ul.individual-urls-people {
 #property-group-menu a,
 .grey,
 .pagination.menupage li.selected,
-h2#mainImage, 
+h2#mainImage,
 #share-contact h2,
 h3.internal-auth {
     color: #5e6363;
@@ -1678,12 +1678,12 @@ input.add-account:hover {
 /* ASSOCIATE PROFILE ------------------------------->  */
 /* ------------------------------------------------->  */
 #associateProfileBackgroundThree {
-    padding:7px 94px 26px 12px; 
-    margin-top:-136px; 
+    padding:7px 94px 26px 12px;
+    margin-top:-136px;
 }
 #associateProfileBackgroundTwo {
     padding:7px 94px 40px 0;
-    margin-top:-136px; 
+    margin-top:-136px;
 }
 #associateProfileBackgroundFour {
     margin-top:-12px;

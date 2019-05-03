@@ -27,7 +27,7 @@ public class VIVOListedIndividual extends ListedIndividual {
             + "} "  ;
 
     private final String title;
-    
+
     VIVOListedIndividual(Individual individual, VitroRequest vreq) {
         super(individual, vreq);
         title = findPreferredTitle();
@@ -53,9 +53,9 @@ public class VIVOListedIndividual extends ListedIndividual {
     }
 
     /* Template properties */
-    
+
     public String getPreferredTitle() {
         return title;
     }
-    
+
 }

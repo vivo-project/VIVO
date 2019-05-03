@@ -1,10 +1,10 @@
 <#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
-<#-- 
+<#--
     If authorized to confirm ORCID IDs, add the function that will replace the add link.
     The OrcidIdDataGetter is attached to this template; it sets the orcidInfo structure,
     which looks like this:
-    
+
     orcidInfo = map {
         authorizedToConfirm: boolean
         orcidUrl: link to the orcid controller
@@ -14,15 +14,15 @@
         ]
     }
 -->
-<#assign confirmThis = "" /> 
+<#assign confirmThis = "" />
 <#if orcidInfo??>
-    
+
     <#list orcidInfo.orcids?keys as key>
         <#if "no" == orcidInfo.orcids[key]?string("yes","no") >
             <#assign confirmThis = "Confirm the ID" />
             </#if>
     </#list>
-        
+
     <#if orcidInfo.authorizedToConfirm>
         <script>
             $(document).ready(function(){
@@ -31,4 +31,4 @@
         </script>
     </#if>
 </#if>
- 
+

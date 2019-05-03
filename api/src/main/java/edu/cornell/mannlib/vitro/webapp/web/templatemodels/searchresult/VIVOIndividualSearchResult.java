@@ -31,16 +31,16 @@ public class VIVOIndividualSearchResult extends IndividualSearchResult {
             + "               ?vTitle vcard:title ?title . \n"
             + "    } \n"
             + "} "  ;
-    
+
     private String email = "";
     private String title = "";
-       
+
     public VIVOIndividualSearchResult(Individual individual, VitroRequest vreq) {
     	super(individual, vreq);
     	log.debug("Called Individual Search Result");
     	findVcardInfo();
     }
-    
+
     private void findVcardInfo() {
         String queryStr = QueryUtils.subUriForQueryVar(VCARD_DATA_QUERY, "subject", individual.getURI());
         log.debug("queryStr = " + queryStr);
@@ -64,11 +64,11 @@ public class VIVOIndividualSearchResult extends IndividualSearchResult {
 
 
     /* Access methods for templates */
-    
+
     public String getPreferredTitle() {
     	return title;
     }
-    
+
     public String getEmail() {
     	return email;
     }

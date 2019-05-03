@@ -23,7 +23,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.YearToEntityC
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 
 /**
- * This class contains code for rendering sparklines and displaying tables for 
+ * This class contains code for rendering sparklines and displaying tables for
  * Co-PI visualization.
  * @author bkoniden
  * Deepak Konidena
@@ -34,14 +34,14 @@ public class CoPIVisCodeGenerator {
 	 * There are 2 modes of sparkline that are available via this visualization.
 	 * 		1. Short Sparkline - This sparkline will render all the data points (or sparks),
 	 * 			which in this case are the copi(s) over the years, from the last 10 years.
-	 * 
-	 * 		2. Full Sparkline - This sparkline will render all the data points (or sparks) 
+	 *
+	 * 		2. Full Sparkline - This sparkline will render all the data points (or sparks)
 	 * 			spanning the career of the person & last 10 years at the minimum, in case if
 	 * 			the person started his career in the last 10 years.
 	 * */
-	private static final String DEFAULT_VISCONTAINER_DIV_ID = 
+	private static final String DEFAULT_VISCONTAINER_DIV_ID =
 								"unique_coinvestigators_vis_container";
-	
+
 	private Map<String, Set<Collaborator>> yearToUniqueCoPIs;
 
 	private Log log;
@@ -50,20 +50,20 @@ public class CoPIVisCodeGenerator {
 
 	private String individualURI;
 
-	public CoPIVisCodeGenerator(String individualURI, 
-			  String visMode, 
-			  String visContainer, 
-			  Map<String, Set<Collaborator>> yearToUniqueCoPIs, 
+	public CoPIVisCodeGenerator(String individualURI,
+			  String visMode,
+			  String visContainer,
+			  Map<String, Set<Collaborator>> yearToUniqueCoPIs,
 			  Log log){
-		
+
 		this.individualURI = individualURI;
-		
+
 		this.yearToUniqueCoPIs = yearToUniqueCoPIs;
 
 		this.log = log;
-		
+
 		this.sparklineParameterVO = setupSparklineParameters(visMode, visContainer);
-		
+
 	}
 
 	/**
@@ -78,11 +78,11 @@ public class CoPIVisCodeGenerator {
 		SparklineData sparklineData = new SparklineData();
 
 		int numOfYearsToBeRendered = 0;
-		
+
 		/*
-		 * It was decided that to prevent downward curve that happens if there are no publications 
+		 * It was decided that to prevent downward curve that happens if there are no publications
 		 * in the current year seems a bit harsh, so we consider only publications from the last 10
-		 * complete years. 
+		 * complete years.
 		 * */
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR) - 1;
 		int shortSparkMinYear = currentYear
@@ -133,12 +133,12 @@ public class CoPIVisCodeGenerator {
 		}
 
 		numOfYearsToBeRendered = currentYear - minGrantYearConsidered + 1;
-		
+
 		sparklineData.setNumOfYearsToBeRendered(numOfYearsToBeRendered);
-		
+
 		int uniqueCoPICounter = 0;
 		Set<Collaborator> allCoPIsWithKnownGrantShipYears = new HashSet<Collaborator>();
-		List<YearToEntityCountDataElement> yearToUniqueInvestigatorsCountDataTable = 
+		List<YearToEntityCountDataElement> yearToUniqueInvestigatorsCountDataTable =
 					new ArrayList<YearToEntityCountDataElement>();
 
 		for (int grantYear = minGrantYearConsidered; grantYear <= currentYear; grantYear++) {
@@ -157,13 +157,13 @@ public class CoPIVisCodeGenerator {
 			}
 
 			yearToUniqueInvestigatorsCountDataTable.add(new YearToEntityCountDataElement(
-					uniqueCoPICounter, 
-					grantYearAsString, 
+					uniqueCoPICounter,
+					grantYearAsString,
 					currentUniqueCoPIs));
-			
+
 			uniqueCoPICounter++;
 		}
-		
+
 		/*
 		 * For the purpose of this visualization I have come up with a term
 		 * "Sparks" which essentially means data points. Sparks that will be
@@ -171,18 +171,18 @@ public class CoPIVisCodeGenerator {
 		 * associated with it. Hence.
 		 */
 		sparklineData.setRenderedSparks(allCoPIsWithKnownGrantShipYears.size());
-		
+
 		sparklineData.setYearToEntityCountDataTable(yearToUniqueInvestigatorsCountDataTable);
 
 		/*
-		 * This is required only for the sparklines which convey collaborationships like 
-		 * coinvestigatorships and coauthorship. There are edge cases where a collaborator can be 
-		 * present for in a collaboration with known & unknown year. We do not want to repeat the 
-		 * count for this collaborator when we present it in the front-end. 
+		 * This is required only for the sparklines which convey collaborationships like
+		 * coinvestigatorships and coauthorship. There are edge cases where a collaborator can be
+		 * present for in a collaboration with known & unknown year. We do not want to repeat the
+		 * count for this collaborator when we present it in the front-end.
 		 * */
-		Set<Collaborator> totalUniqueCoInvestigators = 
+		Set<Collaborator> totalUniqueCoInvestigators =
 					new HashSet<Collaborator>(allCoPIsWithKnownGrantShipYears);
-		
+
 		/*
 		 * Total grants will also consider grants that have no year
 		 * associated with them. Hence.
@@ -194,9 +194,9 @@ public class CoPIVisCodeGenerator {
 			totalUniqueCoInvestigators.addAll(
 					yearToUniqueCoPIs.get(VOConstants.DEFAULT_GRANT_YEAR));
 		}
-		
+
 		sparklineData.setTotalCollaborationshipCount(totalUniqueCoInvestigators.size());
-		
+
 		sparklineData.setUnknownYearGrants(unknownYearGrants);
 
 		if (providedVisContainerID != null) {
@@ -206,7 +206,7 @@ public class CoPIVisCodeGenerator {
 		}
 
 		sparklineData.setVisContainerDivID(visContainerID);
-		
+
 		/*
 		 * By default these represents the range of the rendered sparks. Only in
 		 * case of "short" sparkline mode we will set the Earliest
@@ -226,35 +226,35 @@ public class CoPIVisCodeGenerator {
 
 			sparklineData.setEarliestRenderedGrantYear(shortSparkMinYear);
 			sparklineData.setShortVisMode(true);
-			
+
 		} else {
 			sparklineData.setShortVisMode(false);
 		}
-		
+
 		if (yearToUniqueCoPIs.size() > 0) {
-			
+
 			sparklineData.setFullTimelineNetworkLink(
 					UtilityFunctions.getCollaboratorshipNetworkLink(
 							individualURI,
 							VisualizationFrameworkConstants.PERSON_LEVEL_VIS,
 							VisualizationFrameworkConstants.COPI_VIS_MODE));
-			
+
 			sparklineData.setDownloadDataLink(
 					UtilityFunctions.getCSVDownloadURL(
 							individualURI,
 							VisualizationFrameworkConstants.CO_PI_VIS,
 							VisualizationFrameworkConstants.COPIS_COUNT_PER_YEAR_VIS_MODE));
-			
+
 			Map<String, Integer> yearToUniqueCoPIsCount = new HashMap<String, Integer>();
-			for (Map.Entry<String, Set<Collaborator>> currentYearToUniqueCoPIsCount 
+			for (Map.Entry<String, Set<Collaborator>> currentYearToUniqueCoPIsCount
 					: yearToUniqueCoPIs.entrySet()) {
-				
-				yearToUniqueCoPIsCount.put(currentYearToUniqueCoPIsCount.getKey(), 
+
+				yearToUniqueCoPIsCount.put(currentYearToUniqueCoPIsCount.getKey(),
 											   currentYearToUniqueCoPIsCount.getValue().size());
 			}
 
 			sparklineData.setYearToActivityCount(yearToUniqueCoPIsCount);
-			
+
 		}
 
 		return sparklineData;

@@ -111,9 +111,9 @@ var CirclePolygon = Polygon.extend({
 			var projection = map.getProjection();
 			var centerPoint = projection.fromLatLngToPoint(me.options.center);
 			var radius = me.options.radius;
-			
+
 			var incrementDegreeBy = (radius > 2) ? 1 : 10;
-			
+
 			// Create polygon points (extra point to close polygon)
 			for (var degree = 0; degree < 360; degree+=incrementDegreeBy) {
 				var radian = degreeToRadians(degree);
@@ -137,14 +137,14 @@ var CirclePolygon = Polygon.extend({
 		var me = this;
 		var polygon = me.polygon;
 		this.registerEvent(addMapProjectionChangedListener(me.options.map, function() {
-			me.initCirclePoints(); 
+			me.initCirclePoints();
 		}));
-		
+
 		this.registerEvent(addMouseOverListener(polygon, function() {
 			TOOLTIP.setHtml("<b>" + this.label + "</b>");
 			TOOLTIP.show();
 		}));
-		
+
 		this.registerEvent(addMouseOutListener(polygon, function() {
 			TOOLTIP.hide();
 		}));

@@ -5,11 +5,11 @@ package edu.cornell.mannlib.vitro.webapp.visualization.exceptions;
 public class IllegalConstructedModelIdentifierException extends Exception {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	public IllegalConstructedModelIdentifierException(String message) {
 		super(message);
 	}
-	
+
 	public IllegalConstructedModelIdentifierException(Exception cause) {
 		super(createMessage(cause), cause);
 	}

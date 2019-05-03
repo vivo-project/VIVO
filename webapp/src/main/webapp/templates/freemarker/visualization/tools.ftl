@@ -5,7 +5,7 @@
 
 <h2>${i18n().visualization_tools}</h2>
 
-<a href="${refreshCacheURL}">${i18n().refresh_cached_vis_models}</a> 
+<a href="${refreshCacheURL}">${i18n().refresh_cached_vis_models}</a>
 <section class="visualizationTools">
 <h3>${i18n().why_needed}</h3>
 <p>${i18n().vis_tools_note_one}</p>

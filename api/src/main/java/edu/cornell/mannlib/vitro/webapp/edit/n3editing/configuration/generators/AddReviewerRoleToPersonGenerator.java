@@ -6,36 +6,36 @@ import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ConstantFieldOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
 
-public class AddReviewerRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {		
-	
+public class AddReviewerRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
+
     private static String OBJECT_VCLASS_URI = "http://purl.org/ontology/bibo/Document";
-    
+
 	@Override
 	String getTemplate() { return "addReviewerRoleToPerson.ftl"; }
 
-    //The default activityToRolePredicate and roleToActivityPredicates are 
+    //The default activityToRolePredicate and roleToActivityPredicates are
 	//correct for this subclass so they don't need to be overwritten
 
 /*	@Override
 	public String getRoleToActivityPredicate(VitroRequest vreq) {
 		return "<http://purl.obolibrary.org/obo/BFO_0000054>";
 	}
-*/	
+*/
 	//role type will always be set based on particular form
 	@Override
 	public String getRoleType() {
 		//TODO: Get dynamic way of including vivoweb ontology
 		return "http://vivoweb.org/ontology/core#ReviewerRole";
-	}		
-	
+	}
+
 	/**
 	 *  Each subclass generator will return its own type of option here:
-	 *   whether literal hardcoded, based on class group, or subclasses of a specific class   
+	 *   whether literal hardcoded, based on class group, or subclasses of a specific class
 	 */
     @Override
     FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
 		return new ConstantFieldOptions(
-		        "",  "Select type", 
+		        "",  "Select type",
 		        "http://purl.org/ontology/bibo/AcademicArticle", "Academic Article",
                 "http://purl.org/ontology/bibo/Article", "Article",
                 "http://purl.org/ontology/bibo/AudioDocument", "Audio Document",
@@ -106,13 +106,13 @@ public class AddReviewerRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
                 "http://vivoweb.org/ontology/core#WorkingPaper", "Working Paper"
         );
     }
-    
+
 	//isShowRoleLabelField remains true for this so doesn't need to be overwritten
 	public boolean isShowRoleLabelField() {
 		return false;
 	}
 
-       /* 
+       /*
         * Use the methods below to change the date/time precision in the
         * custom form associated with this generator. When not used, the
         * precision will be YEAR. The other precisons are MONTH, DAY, HOUR,
@@ -128,6 +128,6 @@ public class AddReviewerRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
             String precision = VitroVocabulary.Precision.DAY.uri();
     	    return precision;
         }
-    */    
-    
+    */
+
 }

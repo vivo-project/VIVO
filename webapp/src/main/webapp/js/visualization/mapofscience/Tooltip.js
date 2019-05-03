@@ -1,8 +1,8 @@
 /* $This file is distributed under the terms of the license in LICENSE$ */
-/** 
- * This tooltip source is modified based on the example of Google map V3. The demo html 
+/**
+ * This tooltip source is modified based on the example of Google map V3. The demo html
  * is at http://philmap.000space.com/gmap-api/poly-hov.html
- * 
+ *
  * Modification:
  * 1. Init container at constructor class
  * 2. Add feature functions: setHtml, setWidth, setPosition
@@ -38,11 +38,11 @@ var Tooltip = function(o) {
 	document.body.appendChild(tt);
 	tt.style.opacity = 0;
 	tt.style.filter = 'alpha(opacity=0)';
-	
+
 	return {
 		show: function(){
 				document.onmousemove = this.pos;
-			
+
 			var w = preferredWidth;
 			tt.style.display = 'block';
 			tt.style.width = w ? w + 'px' : 'auto';

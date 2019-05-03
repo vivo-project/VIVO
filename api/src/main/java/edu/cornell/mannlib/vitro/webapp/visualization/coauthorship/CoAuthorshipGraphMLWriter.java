@@ -31,11 +31,11 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 public class CoAuthorshipGraphMLWriter {
-	
+
 	private StringBuilder coAuthorshipGraphMLContent;
 
 	private final String GRAPHML_NS = "http://graphml.graphdrawing.org/xmlns";
-	
+
 	public CoAuthorshipGraphMLWriter(CollaborationData visVOContainer) {
 		coAuthorshipGraphMLContent = createCoAuthorshipGraphMLContent(visVOContainer);
 	}
@@ -85,7 +85,7 @@ public class CoAuthorshipGraphMLWriter {
 
         return graphMLContent;
 	}
-	
+
 	public StringBuilder getCoAuthorshipGraphMLContent() {
 		return coAuthorshipGraphMLContent;
 	}
@@ -100,7 +100,7 @@ public class CoAuthorshipGraphMLWriter {
 		if (coAuthorshipData.getCollaborators() != null && coAuthorshipData.getCollaborators().size() > 0) {
 			generateNodeSectionContent(coAuthorshipData, graph);
 		}
-		
+
 		if (coAuthorshipData.getCollaborations() != null && coAuthorshipData.getCollaborations().size() > 0) {
 			generateEdgeSectionContent(coAuthorshipData, graph);
 		}
@@ -117,8 +117,8 @@ public class CoAuthorshipGraphMLWriter {
 
 		for (Collaboration currentEdge : orderedEdges) {
 			/*
-			 * This method actually creates the XML code for a single Collaboration. 
-			 * "graphMLContent" is being side-effected. 
+			 * This method actually creates the XML code for a single Collaboration.
+			 * "graphMLContent" is being side-effected.
 			 * */
 			getEdgeContent(graphElement, currentEdge);
 		}
@@ -166,7 +166,7 @@ public class CoAuthorshipGraphMLWriter {
 				edge.appendChild(earliestCount);
 			}
 		}
-		
+
 		if (currentEdge.getLatestCollaborationYearCount() != null) {
 			for (Map.Entry<String, Integer> publicationInfo : currentEdge.getLatestCollaborationYearCount().entrySet()) {
 				Element latest = doc.createElementNS(GRAPHML_NS, "data");
@@ -180,7 +180,7 @@ public class CoAuthorshipGraphMLWriter {
 				edge.appendChild(latestCount);
 			}
 		}
-		
+
 		if (currentEdge.getUnknownCollaborationYearCount() != null) {
 			Element unknown = doc.createElementNS(GRAPHML_NS, "data");
 			unknown.setAttribute("key", "num_unknown_collaboration");
@@ -196,20 +196,20 @@ public class CoAuthorshipGraphMLWriter {
 
 		Collaborator egoNode = coAuthorshipData.getEgoCollaborator();
 		Set<Collaborator> authorNodes = coAuthorshipData.getCollaborators();
-		
+
 		/*
 		 * This method actually creates the XML code for a single Collaborator. "graphMLContent"
 		 * is being side-effected. The egoNode is added first because this is the "requirement"
 		 * of the co-author vis. Ego should always come first.
-		 * 
+		 *
 		 * */
 		getNodeContent(graphElement, egoNode);
-		
+
 		List<Collaborator> orderedAuthorNodes = new ArrayList<Collaborator>(authorNodes);
 		orderedAuthorNodes.remove(egoNode);
-		
+
 		orderedAuthorNodes.sort(new CollaboratorComparator());
-		
+
 		for (Collaborator currNode : orderedAuthorNodes) {
 			/*
 			 * We have already printed the Ego Collaborator info.
@@ -218,13 +218,13 @@ public class CoAuthorshipGraphMLWriter {
 				getNodeContent(graphElement, currNode);
 			}
 		}
-		
+
 	}
 
 	private void getNodeContent(Element graphElement, Collaborator collaborator) {
 		Document doc = graphElement.getOwnerDocument();
 
-		ParamMap individualProfileURLParams = 
+		ParamMap individualProfileURLParams =
 					new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY, collaborator.getCollaboratorURI());
 
 		String profileURL = UrlBuilder.getUrl(VisualizationFrameworkConstants.INDIVIDUAL_URL_PREFIX, individualProfileURLParams);
@@ -249,7 +249,7 @@ public class CoAuthorshipGraphMLWriter {
 			profile.setTextContent(profileURL);
 			node.appendChild(profile);
 		}
-		
+
 		Element works = doc.createElementNS(GRAPHML_NS, "data");
 		works.setAttribute("key", "number_of_authored_works");
 		works.setTextContent(String.valueOf(collaborator.getNumOfActivities()));
@@ -259,7 +259,7 @@ public class CoAuthorshipGraphMLWriter {
 			/*
 			 * There is no clean way of getting the map contents in java even though
 			 * we are sure to have only one entry on the map. So using the for loop.
-			 * I am feeling dirty just about now. 
+			 * I am feeling dirty just about now.
 			 * */
 			for (Map.Entry<String, Integer> publicationInfo : collaborator.getEarliestActivityYearCount().entrySet()) {
 				Element earliest = doc.createElementNS(GRAPHML_NS, "data");
@@ -273,7 +273,7 @@ public class CoAuthorshipGraphMLWriter {
 				node.appendChild(earliestCount);
 			}
 		}
-		
+
 		if (collaborator.getLatestActivityYearCount() != null) {
 			for (Map.Entry<String, Integer> publicationInfo : collaborator.getLatestActivityYearCount().entrySet()) {
 				Element latest = doc.createElementNS(GRAPHML_NS, "data");
@@ -287,7 +287,7 @@ public class CoAuthorshipGraphMLWriter {
 				node.appendChild(latestCount);
 			}
 		}
-		
+
 		if (collaborator.getUnknownActivityYearCount() != null) {
 			Element unknown = doc.createElementNS(GRAPHML_NS, "data");
 			unknown.setAttribute("key", "num_unknown_publication");
@@ -298,16 +298,16 @@ public class CoAuthorshipGraphMLWriter {
 
 	private void generateKeyDefinitionContent(CollaborationData visVOContainer, Element rootElement) {
 		/*
-		 * Generate the key definition content for node. 
+		 * Generate the key definition content for node.
 		 * */
 		getKeyDefinitionFromSchema(visVOContainer.getNodeSchema(), rootElement);
-		
+
 		/*
-		 * Generate the key definition content for edge. 
+		 * Generate the key definition content for edge.
 		 * */
 		getKeyDefinitionFromSchema(visVOContainer.getEdgeSchema(), rootElement);
-		
-		
+
+
 	}
 
 	private void getKeyDefinitionFromSchema(Set<Map<String, String>> schema, Element rootElement) {
@@ -319,7 +319,7 @@ public class CoAuthorshipGraphMLWriter {
 			for (Map.Entry<String, String> currentAttributeKey : currentNodeSchemaAttribute.entrySet()) {
 				key.setAttribute(currentAttributeKey.getKey(), currentAttributeKey.getValue());
 			}
-			
+
 			if (currentNodeSchemaAttribute.containsKey("default")) {
 				Element def = doc.createElementNS(GRAPHML_NS, "default");
 				def.setTextContent(currentNodeSchemaAttribute.get("default"));

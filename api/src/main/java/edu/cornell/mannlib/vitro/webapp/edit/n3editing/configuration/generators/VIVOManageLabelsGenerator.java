@@ -15,7 +15,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUti
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 
 /**
- *This generator selects the actual generator to be employed based on whether the individual is a Person 
+ *This generator selects the actual generator to be employed based on whether the individual is a Person
  *or another individual.  Adding a label for a person relies on first/name last name information i.e. object properties.
  */
 public class VIVOManageLabelsGenerator extends BaseEditConfigurationGenerator implements EditConfigurationGenerator {
@@ -30,14 +30,14 @@ public class VIVOManageLabelsGenerator extends BaseEditConfigurationGenerator im
     	} else {
     		//Non-Person individuals
     		e = new ManageLabelsForIndividualGenerator().getEditConfiguration(vreq, session);
-        	
+
     	}
-    	
+
     	return e;
-    	
+
     }
-    
-    
+
+
     public boolean isPersonType(String subjectUri, VitroRequest vreq) {
 		Boolean isPersonType = Boolean.FALSE;
 		String foafPersonType = getFOAFPersonClassURI();
@@ -49,17 +49,17 @@ public class VIVOManageLabelsGenerator extends BaseEditConfigurationGenerator im
 	    			isPersonType = Boolean.TRUE;
 	    			break;
 	    		}
-	    	}    	
+	    	}
 	    }
 	    return isPersonType;
 	}
-    
+
   //Copied from NewIndividualFormGenerator
   	//TODO: Refactor so common code can be used by both generators
   	public String getFOAFPersonClassURI() {
   		return "http://xmlns.com/foaf/0.1/Person";
   	}
-  	
+
   //how to get the type of the individual in question
   	public List<VClass> getVClasses(String subjectUri, VitroRequest vreq) {
   		Individual subject = EditConfigurationUtils.getIndividual(vreq, subjectUri);

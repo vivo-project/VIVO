@@ -43,12 +43,12 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 	<#assign submissionErrors = editSubmission.validationErrors/>
 </#if>
 
-<#if editMode == "edit">    
-        <#assign titleVerb="${i18n().edit_capitalized}">        
+<#if editMode == "edit">
+        <#assign titleVerb="${i18n().edit_capitalized}">
         <#assign submitButtonText="${i18n().save_changes}">
         <#assign disabledVal="disabled">
 <#else>
-<#assign titleVerb="${i18n().create_capitalized}">        
+<#assign titleVerb="${i18n().create_capitalized}">
 <#assign submitButtonText="${i18n().create_entry}">
         <#assign disabledVal=""/>
 </#if>
@@ -66,14 +66,14 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <#if awardLabelDisplayValue?has_content >
         <#assign awardLabelValue = awardLabelDisplayValue />
     </#if>
-        
+
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alt="${i18n().error_alert_icon}" />
         <p>
         <#--Checking if any required fields are empty-->
         <#if lvf.submissionErrorExists(editSubmission, "awardLabel")>
  	        ${i18n().select_Award_or_enter_name}
-        </#if> 
+        </#if>
         <#list submissionErrors?keys as errorFieldName>
         	<#if errorFieldName == "startField">
         	    <#if submissionErrors[errorFieldName]?contains("before")>
@@ -81,7 +81,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         	    <#else>
         	        ${submissionErrors[errorFieldName]}
         	    </#if>
-        	    
+
         	<#elseif errorFieldName == "endField">
     	        <#if submissionErrors[errorFieldName]?contains("after")>
     	            ${i18n().end_year_must_be_later}
@@ -94,10 +94,10 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     </section>
 </#if>
 
-<@lvf.unsupportedBrowser urls.base /> 
+<@lvf.unsupportedBrowser urls.base />
 
-<section id="personHasAwardOrHonor" role="region">        
-    
+<section id="personHasAwardOrHonor" role="region">
+
     <form id="personHasAwardOrHonor" class="customForm noIE67" action="${submitUrl}"  role="add/edit AwardOrHonor">
     <p>
         <label for="relatedIndLabel">${i18n().award_honor_name} ${requiredHint}</label>
@@ -109,7 +109,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <p class="inline">
             <label>${i18n().selected_award}:</label>
             <span class="acSelectionInfo"></span>
-            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
             <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="awardUri" name="existingAward" value="${awardValue}" ${flagClearLabelForExisting}="true" />
@@ -119,12 +119,12 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
       <input  class="acSelector" size="50" acGroupName="org" type="text" id="org" name="orgLabel" value="${orgLabelValue}" />
       <input  class="display" type="hidden" id="orgDisplay" acGroupName="org" name="orgLabelDisplay" value="${orgLabelDisplayValue}" />
   </p>
-  
+
   <div class="acSelection" acGroupName="org" id="orgAcSelection">
       <p class="inline">
           <label>${i18n().selected_conferred}:</label>
           <span class="acSelectionInfo"></span>
-          <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+          <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
           <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
       </p>
       <input class="acUriReceiver" type="hidden" id="orgUri" name="existingOrg" value="${orgValue}" ${flagClearLabelForExisting}="true"/>
@@ -174,7 +174,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <#-- hide the html that gets written, and use java script to pass the value between the two -->
     <div class="hidden">
         <#if htmlForElements?keys?seq_contains("yearAwarded")>
-		    ${htmlForElements["yearAwarded"]} 
+		    ${htmlForElements["yearAwarded"]}
         </#if>
     </div>
 
@@ -203,11 +203,11 @@ var i18nStrings = {
 
 </script>
 
- 
+
 <script type="text/javascript">
  $(document).ready(function(){
     awardReceiptUtils.onLoad('${editMode}', '${editConfiguration.subjectName}', '${urls.base}/individual?uri=');
-}); 
+});
 </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />')}

@@ -4,13 +4,13 @@
 <!-- See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
 
 <list-view-config>
-    <query-select>     
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+    <query-select>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        
-        
-        SELECT DISTINCT ?dateTimeValue 
-                        (REPLACE(STR(?dateTimePrecision),"^.*(#)(.*)$", "$2") AS ?precision) 
+
+
+        SELECT DISTINCT ?dateTimeValue
+                        (REPLACE(STR(?dateTimePrecision),"^.*(#)(.*)$", "$2") AS ?precision)
                         ?dateTime
         WHERE {
             ?subject ?property ?dateTimeValue .
@@ -25,7 +25,7 @@
             <critical-data-required>
             FILTER ( bound(?dateTime) )
             </critical-data-required>
-        }  
+        }
     </query-select>
 
     <template>propStatement-dateTimeValue.ftl</template>

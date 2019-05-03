@@ -6,7 +6,7 @@ PREFIX obo: <http://purl.obolibrary.org/obo/>
 CONSTRUCT {
      ?location rdfs:label ?locationName .
 } WHERE {
-     PERSON_URI core:relatedBy ?authorship . 
+     PERSON_URI core:relatedBy ?authorship .
      ?authorship a core:Authorship .
      ?authorship core:relates ?publication .
      ?publication a obo:IAO_0000030 .

@@ -28,39 +28,39 @@ import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 public class ConceptSemanticTypesPreprocessor implements ModelChangePreprocessor {
 
 	private static String VIVOCore = "http://vivoweb.org/ontology/core#";
-	private static String SKOSConceptType = "http://www.w3.org/2004/02/skos/core#Concept";	
+	private static String SKOSConceptType = "http://www.w3.org/2004/02/skos/core#Concept";
 	private Log log = LogFactory.getLog(ConceptSemanticTypesPreprocessor.class);
 
-	
+
 	//Custom constructor
 	public ConceptSemanticTypesPreprocessor() {
 	}
-	
+
 	@Override
 	public void preprocess(Model retractionsModel, Model additionsModel,
 			HttpServletRequest request) {
 		VitroRequest vreq = new VitroRequest(request);
 		//Run a construct query against the additions model
-		String prefixes = "PREFIX rdfs:<" + RDFS.getURI() + "> " + 
-		"PREFIX owl:<http://www.w3.org/2002/07/owl#> " + 
-		"PREFIX rdf:<" + RDF.getURI() + ">" + 
-		"PREFIX skos:<http://www.w3.org/2004/02/skos/core#>";		
-		String constructQuery = prefixes + " CONSTRUCT { " + 
-				"?semanticType rdf:type owl:Class.  " + 
-				"?semanticType rdfs:subClassOf skos:Concept .  " + 
-				"?semanticType rdfs:label ?label.  " + 
-			"} WHERE { " + 
-				"?concept rdf:type ?semanticType.  " + 
-				"?semanticType rdfs:label ?label . " + 
-				"?semanticType rdfs:subClassOf skos:Concept . " + 
+		String prefixes = "PREFIX rdfs:<" + RDFS.getURI() + "> " +
+		"PREFIX owl:<http://www.w3.org/2002/07/owl#> " +
+		"PREFIX rdf:<" + RDF.getURI() + ">" +
+		"PREFIX skos:<http://www.w3.org/2004/02/skos/core#>";
+		String constructQuery = prefixes + " CONSTRUCT { " +
+				"?semanticType rdf:type owl:Class.  " +
+				"?semanticType rdfs:subClassOf skos:Concept .  " +
+				"?semanticType rdfs:label ?label.  " +
+			"} WHERE { " +
+				"?concept rdf:type ?semanticType.  " +
+				"?semanticType rdfs:label ?label . " +
+				"?semanticType rdfs:subClassOf skos:Concept . " +
 			"}";
-		
-		//Execute construct query 
+
+		//Execute construct query
 		 Model constructedModel = ModelFactory.createDefaultModel();
-	        
-	       
+
+
         log.debug("CONSTRUCT query string " + constructQuery);
-        
+
         Query query = null;
         try {
             query = QueryFactory.create(constructQuery, Syntax.syntaxARQ);
@@ -69,13 +69,13 @@ public class ConceptSemanticTypesPreprocessor implements ModelChangePreprocessor
                       "string. " + th.getMessage());
             log.error(constructQuery);
             return;
-        } 
-	        
-	           
-	        
+        }
+
+
+
         additionsModel.getLock().enterCriticalSection(Lock.READ);
         QueryExecution qe = null;
-        try {                           
+        try {
             qe = QueryExecutionFactory.create(
                     query, additionsModel);
             qe.execConstruct(constructedModel);
@@ -87,7 +87,7 @@ public class ConceptSemanticTypesPreprocessor implements ModelChangePreprocessor
             }
             additionsModel.getLock().leaveCriticalSection();
         }
-        
+
         //Add constructed model to the designated update model
         OntModel toUpdateModel = ModelAccess.on(vreq).getOntModelSelector().getTBoxModel();
         toUpdateModel.enterCriticalSection(Lock.WRITE);
@@ -98,7 +98,7 @@ public class ConceptSemanticTypesPreprocessor implements ModelChangePreprocessor
         } finally {
         	toUpdateModel.leaveCriticalSection();
         }
-        
+
         //Take this constructed model and remove from the additions model
         additionsModel.enterCriticalSection(Lock.WRITE);
         try {
@@ -108,9 +108,9 @@ public class ConceptSemanticTypesPreprocessor implements ModelChangePreprocessor
         } finally {
             additionsModel.leaveCriticalSection();
         }
-        
+
     }
-		
+
 
 
 }

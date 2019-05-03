@@ -8,12 +8,12 @@
 @prefix vivo:    <http://vivoweb.org/ontology/core#> .
 
 <http://vivo.mydomain.edu/individual/MultiLabelFaculty>
-      a       foaf:Person , 
-              vivo:FacultyMember , 
-              foaf:Agent , 
-              owl:Thing , 
-              obo:BFO_0000002 , 
-              obo:BFO_0000001 , 
+      a       foaf:Person ,
+              vivo:FacultyMember ,
+              foaf:Agent ,
+              owl:Thing ,
+              obo:BFO_0000002 ,
+              obo:BFO_0000001 ,
               obo:BFO_0000004 ;
       rdfs:label "Furter, Frank "^^xsd:string ;
       rdfs:label "Test Label 1 "^^xsd:string ;
@@ -22,30 +22,30 @@
       vitro:mostSpecificType vivo:FacultyMember .
 
 <http://vivo.mydomain.edu/individual/MultiLabelVCard>
-      a       obo:BFO_0000031 , 
-              vcard:Kind , 
-              obo:ARG_2000379 , 
-              owl:Thing , 
-              obo:IAO_0000030 , 
-              obo:BFO_0000002 , 
-              obo:BFO_0000001 , 
+      a       obo:BFO_0000031 ,
+              vcard:Kind ,
+              obo:ARG_2000379 ,
+              owl:Thing ,
+              obo:IAO_0000030 ,
+              obo:BFO_0000002 ,
+              obo:BFO_0000001 ,
               vcard:Individual ;
       obo:ARG_2000029 <http://vivo.mydomain.edu/individual/MultiLabelFaculty> ;
       vitro:mostSpecificType vcard:Individual ;
       vcard:hasName <http://vivo.mydomain.edu/individual/MultiLabelName> .
 
 <http://vivo.mydomain.edu/individual/MultiLabelName>
-      a       vcard:Name , 
-              vcard:Geographical , 
-              vcard:TimeZone , 
-              owl:Thing , 
-              vcard:Organizational , 
-              vcard:Geo , 
-              vcard:Communication , 
-              vcard:Explanatory , 
-              vcard:Identification , 
-              vcard:Security , 
-              vcard:Addressing , 
+      a       vcard:Name ,
+              vcard:Geographical ,
+              vcard:TimeZone ,
+              owl:Thing ,
+              vcard:Organizational ,
+              vcard:Geo ,
+              vcard:Communication ,
+              vcard:Explanatory ,
+              vcard:Identification ,
+              vcard:Security ,
+              vcard:Addressing ,
               vcard:Calendar ;
       vitro:mostSpecificType vcard:Name ;
       vcard:familyName "Furter"^^xsd:string ;

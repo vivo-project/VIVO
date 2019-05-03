@@ -1,7 +1,7 @@
-PREFIX arg: <http://purl.obolibrary.org/obo/> 
-PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
-PREFIX v:   <http://www.w3.org/2006/vcard/ns#> 
-PREFIX vivo: <http://vivoweb.org/ontology/core#> 
+PREFIX arg: <http://purl.obolibrary.org/obo/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX v:   <http://www.w3.org/2006/vcard/ns#>
+PREFIX vivo: <http://vivoweb.org/ontology/core#>
 PREFIX bibo: <http://purl.org/ontology/bibo/>
 
 CONSTRUCT {
@@ -10,18 +10,18 @@ CONSTRUCT {
     _:vcard a v:Individual .
 } WHERE {
     ?s a foaf:Person
-    FILTER ( 
+    FILTER (
         EXISTS { ?s foaf:firstName ?firstName } ||
         EXISTS { ?s foaf:lastName ?lastName } ||
         EXISTS { ?s vivo:middleName ?middleName } ||
-        EXISTS { ?s vivo:email ?email } || 
+        EXISTS { ?s vivo:email ?email } ||
         EXISTS { ?s vivo:primaryEmail ?primaryEmail } ||
         EXISTS { ?s vivo:phoneNumber ?phoneNumber } ||
         EXISTS { ?s vivo:primaryPhoneNumber ?primaryPhoneNumber } ||
         EXISTS { ?s vivo:faxNumber ?faxNumber } ||
         EXISTS { ?s vivo:mailingAddress ?address } ||
         EXISTS { ?s vivo:webpage ?webpage } ||
-        EXISTS { ?s vivo:preferredTitle ?preferredTitle } ||  
+        EXISTS { ?s vivo:preferredTitle ?preferredTitle } ||
         EXISTS { ?s bibo:prefixName ?prefixName } ||
         EXISTS { ?s bibo:suffixName ?suffixName }
     )

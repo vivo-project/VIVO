@@ -57,19 +57,19 @@ public class AgrovocService implements ExternalConceptService {
 	private final String searchMode = "starts with";//Used to be Exact Match, or exact word or starts with
 	protected final String dbpedia_endpoint = " http://dbpedia.org/sparql";
 	// URL to get all the information for a concept
-	
+
 	protected final String conceptSkosMosBase = "http://agrovoc.uniroma2.it/agrovoc/rest/v1/";
 	protected final String conceptsSkosMosSearch = conceptSkosMosBase + "search?";
 	protected final String conceptSkosMosURL = conceptSkosMosBase + "data?";
 	@Override
 	public List<Concept> getConcepts(String term) throws Exception {
 		List<Concept> conceptList = new ArrayList<>();
-		
+
 		//For the RDF webservices mechanism, utilize the following
 		/*
 		String result = getTermExpansion(this.ontologyName, term,
 				this.searchMode, this.format, this.lang);
-		
+
 		// return empty conceptList if conceptUri is empty
 		if (StringUtils.isEmpty(result)) {
 			return conceptList;
@@ -78,16 +78,16 @@ public class AgrovocService implements ExternalConceptService {
 		// Get the list of the concept URIs in the RDF
 		List<String> conceptUris = getConceptURIsListFromRDF(result);
 		*/
-		
+
 		//For the SKOSMos search mechanism, utilize this instead
 		String result = getSKOSMosSearchResults(term, this.lang);
 		List<String> conceptUris = getConceptURIsListFromSkosMosResult(result);
 		if (conceptUris.size() == 0)
 			return conceptList;
 		int conceptCounter = 0;
-		
+
 		HashSet<String> encounteredURI = new HashSet<>();
-		
+
 		// Loop through each of these URIs and load using the SKOSManager
 		for (String conceptUri : conceptUris) {
 			conceptCounter++;
@@ -241,7 +241,7 @@ public class AgrovocService implements ExternalConceptService {
 					conceptUris.add(conceptUri);
 				}
 
-			
+
 		} catch (IOException | ParserConfigurationException | SAXException e) {
 			e.printStackTrace();
 			System.err.println("rdf: " + rdf);
@@ -335,7 +335,7 @@ public class AgrovocService implements ExternalConceptService {
 	 */
 	//Get search results for a particular term and language code
 		private String getSKOSMosSearchResults(String term, String lang) {
-			String urlEncodedTerm = URLEncoder.encode(term); 
+			String urlEncodedTerm = URLEncoder.encode(term);
 			//Utilize 'starts with' using the * operator at the end
 			String searchUrlString = this.conceptsSkosMosSearch + "query=" + urlEncodedTerm + "*" + "&lang=" + lang;
 			URL searchURL = null;
@@ -347,7 +347,7 @@ public class AgrovocService implements ExternalConceptService {
 				// If the url is having trouble, just return null for the concept
 				return null;
 			}
-			
+
 			String results = null;
 			try {
 
@@ -369,9 +369,9 @@ public class AgrovocService implements ExternalConceptService {
 				return null;
 			}
 			return results;
-			
+
 		}
-		
+
 		//JSON-LD array
 		private List<String> getConceptURIsListFromSkosMosResult(String results) {
 			List<String> conceptURIs = new ArrayList<>();
@@ -391,7 +391,7 @@ public class AgrovocService implements ExternalConceptService {
 			return conceptURIs;
 		}
 
-		
-		
+
+
 
 }

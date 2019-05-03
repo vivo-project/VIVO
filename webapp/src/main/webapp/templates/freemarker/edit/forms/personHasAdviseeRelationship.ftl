@@ -43,12 +43,12 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 	<#assign submissionErrors = editSubmission.validationErrors/>
 </#if>
 
-<#if editMode == "edit">    
-        <#assign titleVerb="${i18n().edit_capitalized}">        
+<#if editMode == "edit">
+        <#assign titleVerb="${i18n().edit_capitalized}">
         <#assign submitButtonText="${i18n().save_changes}">
         <#assign disabledVal="disabled">
 <#else>
-        <#assign titleVerb="${i18n().create_capitalized}">        
+        <#assign titleVerb="${i18n().create_capitalized}">
         <#assign submitButtonText="${i18n().create_entry}">
         <#assign disabledVal=""/>
 </#if>
@@ -66,14 +66,14 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <#if subjAreaLabelDisplayValue?has_content >
         <#assign subjAreaLabelValue = subjAreaLabelDisplayValue />
     </#if>
-    
+
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alt="${i18n().error_alert_icon}" />
         <p>
         <#--Checking if any required fields are empty-->
         <#if lvf.submissionErrorExists(editSubmission, "advisingRelType")>
  	        ${i18n().select_advising_relationship_type}<br />
-        </#if> 
+        </#if>
         <#list submissionErrors?keys as errorFieldName>
         	<#if errorFieldName == "startField">
         	    <#if submissionErrors[errorFieldName]?contains("before")>
@@ -81,7 +81,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         	    <#else>
         	        ${submissionErrors[errorFieldName]}
         	    </#if>
-        	    
+
         	<#elseif errorFieldName == "endField">
     	        <#if submissionErrors[errorFieldName]?contains("after")>
     	            ${i18n().end_year_must_be_later}
@@ -97,16 +97,16 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     </section>
 </#if>
 
-<@lvf.unsupportedBrowser urls.base /> 
+<@lvf.unsupportedBrowser urls.base />
 
-<section id="personHasAdvisingRelationship" role="region">        
-    
+<section id="personHasAdvisingRelationship" role="region">
+
     <form id="personHasAdvisingRelationship" class="customForm noIE67" action="${submitUrl}"  role="add/edit AdvisingRelationship">
-    <p class="inline">    
+    <p class="inline">
       <label for="orgType">${i18n().advising_relationship_type}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
       <#assign advisingRelTypeOpts = editConfiguration.pageData.advisingRelType />
       <#if editMode == "edit">
-        <#list advisingRelTypeOpts?keys as key>             
+        <#list advisingRelTypeOpts?keys as key>
             <#if advisingRelTypeValue = key >
                 <span class="readOnly">${advisingRelTypeOpts[key]}</span>
                 <input type="hidden" id="typeSelectorInput" name="advisingRelType"  value="${advisingRelTypeValue}" >
@@ -114,9 +114,9 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         </#list>
       <#else>
         <select id="selector" name="advisingRelType"  ${disabledVal} >
-            <option value="" selected="selected">${i18n().select_one}</option>                
-            <#list advisingRelTypeOpts?keys as key>             
-                <option value="${key}"  <#if advisingRelTypeValue = key>selected</#if>>${advisingRelTypeOpts[key]}</option>            
+            <option value="" selected="selected">${i18n().select_one}</option>
+            <#list advisingRelTypeOpts?keys as key>
+                <option value="${key}"  <#if advisingRelTypeValue = key>selected</#if>>${advisingRelTypeOpts[key]}</option>
             </#list>
         </select>
       </#if>
@@ -134,7 +134,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <p class="inline">
             <label>${i18n().selected_advisor}
             <span class="acSelectionInfo"></span>
-            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
             <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="advisorUri" name="existingAdvisor" value="${advisorValue}" ${flagClearLabelForExisting}="true"/>
@@ -149,7 +149,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
           <p class="inline">
               <label>${i18n().selected_subject_area}:</label>
               <span class="acSelectionInfo"></span>
-              <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+              <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
               <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
           </p>
           <#--When no autocomplete value is selected, the value of this field will be set to the 'blank sentinel'.
@@ -158,15 +158,15 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
       </div>
 
     <p>
-    <label for="degreeUri">${i18n().degree_candidacy}</label>      
-  
-    <#assign degreeOpts = editConfiguration.pageData.degree />  
+    <label for="degreeUri">${i18n().degree_candidacy}</label>
+
+    <#assign degreeOpts = editConfiguration.pageData.degree />
     <select name="degree" id="degreeUri" >
-      <option value="${blankSentinel}" <#if degreeValue = "">selected</#if>>${i18n().select_one}</option>        
-             <#list degreeOpts?keys as key>                 
-      <option value="${key}" <#if degreeValue = key>selected</#if>>${degreeOpts[key]}</option>                    
-      </#list>                                
-    </select>    
+      <option value="${blankSentinel}" <#if degreeValue = "">selected</#if>>${i18n().select_one}</option>
+             <#list degreeOpts?keys as key>
+      <option value="${key}" <#if degreeValue = key>selected</#if>>${degreeOpts[key]}</option>
+      </#list>
+    </select>
     </p>
 
     <p>
@@ -229,8 +229,8 @@ var i18nStrings = {
 $(document).ready(function(){
     adviseeRelUtils.onLoad('${editConfiguration.subjectName}', '${blankSentinel}');
 });
-</script> 
- 
+</script>
+
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customFormWithAutocomplete.css" />')}

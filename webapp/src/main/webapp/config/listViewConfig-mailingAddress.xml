@@ -4,16 +4,16 @@
 <!-- See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
 
 <list-view-config>
-    <query-select>    
+    <query-select>
         PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
-        
+
         SELECT DISTINCT ?vcard ?address
                         ?street
-                        ?locality 
+                        ?locality
                         ?region
                         ?postalCode
-                        ?country   
-                        
+                        ?country
+
         WHERE {
             ?subject ?property ?vcard .
             ?vcard vcard:hasAddress ?address .
@@ -42,7 +42,7 @@
                 ?vcard vcard:hasAddress ?address .</precise-subquery>
                 ?address vcard:country ?country .
             }
-            
+
         } ORDER BY ?country ?region ?street
     </query-select>
 

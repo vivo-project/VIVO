@@ -13,7 +13,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <h2>${i18n().create_own_concept_all_caps}</h2>
 
-<@lvf.unsupportedBrowser urls.base /> 
+<@lvf.unsupportedBrowser urls.base />
 
 <form id="addUserDefinedConceptForm" class="customForm noIE67" action = "${submitUrl}" method="post">
     <input type="hidden" name="editKey" id="editKey" value="${editKey}" role="input" />
@@ -22,28 +22,28 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 		            <label for="relatedIndLabel">${i18n().concept_capitalized} <span class='requiredHint'> *</span></label>
 		            <input class="acSelector" size="50"  type="text" id="relatedIndLabel" acGroupName="concept" name="conceptLabel" value="" />
 		        </p>
-		
+
 		        <div class="acSelection" acGroupName="concept">
 		            <p class="inline">
 		                <label>${i18n().selected_concept}:</label>
 		                <span class="acSelectionInfo"></span>
-                        <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+                        <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
                         <a href="#" class="changeSelection" id="changeSelection" title="${i18n().change_selection}">${i18n().change_selection})</a>
 		            </p>
 		            <input class="acUriReceiver" type="hidden" id="conceptNode" name="conceptNode" value="" ${flagClearLabelForExisting}="true"/>
         </div>
 
     <br />
-    
-    
-    
+
+
+
 		<p class="submit">
 				<input type="hidden" name = "editKey" value="${editKey}"/>
 				<input type="submit" id="submit" value="${i18n().create_concept}"/><span class="or"> ${i18n().or} </span><a class="cancel" href="${cancelUrl}">${i18n().return_to_manage_concepts}</a>
 		</p>
-		
+
 		<p id="requiredLegend" class="requiredHint">* ${i18n().required_fields}</p>
-    
+
 </form>
 
 <#assign sparqlQueryUrl = "${urls.base}/ajax/sparqlQuery" >
@@ -75,5 +75,5 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/sm
 
  ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',             
+              '<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',
               '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/customFormWithAutocomplete.js"></script>')}

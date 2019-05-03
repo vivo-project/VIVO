@@ -1,9 +1,9 @@
 <#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#-- Custom object property statement view for faux property "presentations". See the PropertyConfig.n3 file for details.
-    
+
      This template must be self-contained and not rely on other variables set for the individual page, because it
-     is also used to generate the property statement during a deletion.  
+     is also used to generate the property statement during a deletion.
  -->
 
 <#import "lib-sequence.ftl" as s>
@@ -22,11 +22,11 @@
             <a href="${profileUrl(statement.uri("role"))}" title="${i18n().missing_presentation}">${i18n().missing_presentation}</a>
         </#if>
     </#local>
-    
+
     <#local dateTime>
-        <@dt.yearSpan statement.dateTime! /> 
+        <@dt.yearSpan statement.dateTime! />
     </#local>
-    
+
     <#local conference>
         <#if statement.conference?has_content && statement.conferenceLabel?has_content>
             <a href="${profileUrl(statement.uri("conference"))}" title="${i18n().conference}">${statement.conferenceLabel}</a>

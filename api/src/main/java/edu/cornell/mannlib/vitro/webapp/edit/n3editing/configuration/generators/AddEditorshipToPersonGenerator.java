@@ -32,12 +32,12 @@ import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
 
 public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
         EditConfigurationGenerator {
-    
+
     public AddEditorshipToPersonGenerator() {}
-    
+
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) throws Exception {
-     
+
      if( EditConfigurationUtils.getObjectUri(vreq) == null ){
          return doAddNew(vreq,session);
      }else{
@@ -47,7 +47,7 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
 
     private EditConfigurationVTwo doSkipToDocument(VitroRequest vreq) {
         Individual editorshipNode = EditConfigurationUtils.getObjectIndividual(vreq);
-        
+
         //try to get the document
         String documentQueryStr = "SELECT ?obj \n" +
                              "WHERE { <" + editorshipNode.getURI() + "> <http://vivoweb.org/ontology/core#relates> ?obj . \n" +
@@ -60,8 +60,8 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
                 return doBadEditorshipNoPub( vreq );
             }else if( rs.size() > 1 ){
                 return doBadEditorshipMultiplePubs(vreq);
-            }else{ 
-                //skip to document 
+            }else{
+                //skip to document
                 RDFNode objNode = rs.next().get("obj");
                 if (!objNode.isResource() || objNode.isAnon()) {
                     return doBadEditorshipNoPub( vreq );
@@ -77,38 +77,38 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
 
     protected EditConfigurationVTwo doAddNew(VitroRequest vreq,
             HttpSession session) throws Exception {
-        
+
         EditConfigurationVTwo conf = new EditConfigurationVTwo();
-        
+
         initBasics(conf, vreq);
         initPropertyParameters(vreq, session, conf);
-        initObjectPropForm(conf, vreq);               
-        
+        initObjectPropForm(conf, vreq);
+
         conf.setTemplate("addEditorshipToPerson.ftl");
-        
+
         conf.setVarNameForSubject("person");
         conf.setVarNameForPredicate("predicate");
         conf.setVarNameForObject("editorship");
-        
+
         conf.setN3Required( Arrays.asList( n3ForNewEditorship ) );
         conf.setN3Optional( Arrays.asList( n3ForNewDocumentAssertion,
                                            n3ForExistingDocumentAssertion ) );
-        
+
         conf.addNewResource("editorship", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("newDocument", DEFAULT_NS_FOR_NEW_RESOURCE);
-        
+
         conf.setUrisOnform(Arrays.asList("existingDocument", "documentType"));
         conf.setLiteralsOnForm(Arrays.asList("documentLabel", "documentLabelDisplay" ));
-        
+
         conf.addSparqlForExistingLiteral("documentLabel", documentLabelQuery);
-        
+
         conf.addSparqlForExistingUris("documentType", documentTypeQuery);
         conf.addSparqlForExistingUris("existingDocument", existingDocumentQuery);
-        
-        conf.addField( new FieldVTwo().                        
+
+        conf.addField( new FieldVTwo().
                 setName("documentType").
                 setValidators( list("nonempty") ).
-                setOptions( new ConstantFieldOptions("documentType", getDocumentTypeLiteralOptions() ))                                
+                setOptions( new ConstantFieldOptions("documentType", getDocumentTypeLiteralOptions() ))
                 );
 
         conf.addField( new FieldVTwo().
@@ -123,61 +123,61 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
 
         conf.addValidator(new AntiXssValidation());
         addFormSpecificData(conf, vreq);
-        
+
         prepare(vreq, conf);
         return conf;
     }
 
     /* N3 assertions  */
 
-    final static String n3ForNewEditorship = 
-        "@prefix vivo: <" + vivoCore + "> . \n" +   
+    final static String n3ForNewEditorship =
+        "@prefix vivo: <" + vivoCore + "> . \n" +
         "?person ?predicate ?editorship . \n" +
-        "?editorship a  vivo:Editorship . \n" +              
+        "?editorship a  vivo:Editorship . \n" +
         "?editorship vivo:relates ?person . " ;
-    
-    final static String n3ForNewDocumentAssertion  =      
-        "@prefix vivo: <" + vivoCore + "> . \n" +   
-        "?editorship vivo:relates ?newDocument . \n" +              
-        "?newDocument vivo:editedBy ?editorship . \n" +              
-        "?newDocument a ?documentType . \n" +              
+
+    final static String n3ForNewDocumentAssertion  =
+        "@prefix vivo: <" + vivoCore + "> . \n" +
+        "?editorship vivo:relates ?newDocument . \n" +
+        "?newDocument vivo:editedBy ?editorship . \n" +
+        "?newDocument a ?documentType . \n" +
         "?newDocument <" + label + "> ?documentLabel. " ;
-    
-    final static String n3ForExistingDocumentAssertion  =      
-        "@prefix vivo: <" + vivoCore + "> . \n" +   
-        "?editorship vivo:relates ?existingDocument . \n" +              
-        "?existingDocument vivo:editedBy ?editorship . \n" +              
+
+    final static String n3ForExistingDocumentAssertion  =
+        "@prefix vivo: <" + vivoCore + "> . \n" +
+        "?editorship vivo:relates ?existingDocument . \n" +
+        "?existingDocument vivo:editedBy ?editorship . \n" +
         "?existingDocument a ?documentType . " ;
 
     /* Queries for editing an existing entry */
 
     final static String documentTypeQuery =
     	"PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
-        "PREFIX vivo: <" + vivoCore + "> . \n" +   
-        "PREFIX bibo: <http://purl.org/ontology/bibo/> . \n" +   
-        "SELECT ?documentType WHERE { \n" + 
-        "  ?editorship vivo:relates ?existingDocument . \n" + 
-        "  ?existingDocument a <http://purl.obolibrary.org/obo/IAO_0000030> . \n" + 
-        "  ?existingDocument vitro:mostSpecificType ?documentType . \n" + 
+        "PREFIX vivo: <" + vivoCore + "> . \n" +
+        "PREFIX bibo: <http://purl.org/ontology/bibo/> . \n" +
+        "SELECT ?documentType WHERE { \n" +
+        "  ?editorship vivo:relates ?existingDocument . \n" +
+        "  ?existingDocument a <http://purl.obolibrary.org/obo/IAO_0000030> . \n" +
+        "  ?existingDocument vitro:mostSpecificType ?documentType . \n" +
         "}";
 
-    final static String documentLabelQuery  =      
+    final static String documentLabelQuery  =
     	"PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
-        "PREFIX vivo: <" + vivoCore + "> . \n" +   
-        "PREFIX bibo: <http://purl.org/ontology/bibo/> . \n" +   
-        "SELECT ?documentLabel WHERE { \n" + 
-        "  ?editorship vivo:relates ?existingDocument . \n" + 
-        "  ?existingDocument a <http://purl.obolibrary.org/obo/IAO_0000030> . \n" + 
-        "  ?existingDocument <" + label + "> ?documentLabel . \n" + 
+        "PREFIX vivo: <" + vivoCore + "> . \n" +
+        "PREFIX bibo: <http://purl.org/ontology/bibo/> . \n" +
+        "SELECT ?documentLabel WHERE { \n" +
+        "  ?editorship vivo:relates ?existingDocument . \n" +
+        "  ?existingDocument a <http://purl.obolibrary.org/obo/IAO_0000030> . \n" +
+        "  ?existingDocument <" + label + "> ?documentLabel . \n" +
         "}";
 
-    final static String existingDocumentQuery  =      
+    final static String existingDocumentQuery  =
     	"PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
-        "PREFIX vivo: <" + vivoCore + "> . \n" +   
-        "PREFIX bibo: <http://purl.org/ontology/bibo/> . \n" +   
-        "SELECT existingDocument WHERE { \n" + 
-        "  ?editorship vivo:relates ?existingDocument . \n" + 
-        "  ?existingDocument a <http://purl.obolibrary.org/obo/IAO_0000030> . \n" + 
+        "PREFIX vivo: <" + vivoCore + "> . \n" +
+        "PREFIX bibo: <http://purl.org/ontology/bibo/> . \n" +
+        "SELECT existingDocument WHERE { \n" +
+        "  ?editorship vivo:relates ?existingDocument . \n" +
+        "  ?existingDocument a <http://purl.obolibrary.org/obo/IAO_0000030> . \n" +
         "}";
 
     //Adding form specific data such as edit mode
@@ -202,7 +202,7 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
         // TODO Auto-generated method stub
         return null;
     }
-    
+
     private List<List<String>> getDocumentTypeLiteralOptions() {
         List<List<String>> literalOptions = new ArrayList<List<String>>();
         literalOptions.add(list("http://purl.org/ontology/bibo/Book", "Book"));

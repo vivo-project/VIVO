@@ -45,8 +45,8 @@ en la tabla de la izquierda para ver lo que los círculos corresponde a en el ma
 mapa, sobre el derecho a reducir el número de subdisciplinas demostrado mejorar la legibilidad.</p>
 
 <h3>Enlaces</h3>
-<p>Para obtener más información sobre el mapa UCSD de la ciencia y el sistema de clasificación, véase 
-<a href="http://sci.cns.iu.edu/ucsdmap" target="_blank">http://sci.cns.iu.edu/ucsdmap</a>. 
+<p>Para obtener más información sobre el mapa UCSD de la ciencia y el sistema de clasificación, véase
+<a href="http://sci.cns.iu.edu/ucsdmap" target="_blank">http://sci.cns.iu.edu/ucsdmap</a>.
 Para otros mapas de la ciencia, ver
 <a href="http://scimaps.org" target="_blank">http://scimaps.org</a> y
 <a href="http://mapofscience.com" target="_blank">http://mapofscience.com</a>.</p>

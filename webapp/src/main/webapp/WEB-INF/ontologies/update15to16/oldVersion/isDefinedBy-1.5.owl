@@ -18,7 +18,7 @@
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:dcterms="http://purl.org/dc/terms/"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" >
   <rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#isDefinedBy">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </rdf:Description>

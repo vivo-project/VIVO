@@ -1,7 +1,7 @@
 #
 # ServletContextListeners for VIVO, to be instantiated and run by the StartupManager.
-# 
-# For more information, 
+#
+# For more information,
 #     https://sourceforge.net/apps/mediawiki/vivo/index.php?title=The_StartupManager
 #
 
@@ -70,7 +70,7 @@ edu.ucsf.vitro.opensocial.OpenSocialSmokeTests
 # For multiple language support
 edu.cornell.mannlib.vitro.webapp.i18n.selection.LocaleSelectionSetup
 
-# The search indexer uses a "public" permission, so the PropertyRestrictionPolicyHelper 
+# The search indexer uses a "public" permission, so the PropertyRestrictionPolicyHelper
 #   and the PermissionRegistry must already be set up.
 edu.cornell.mannlib.vitro.webapp.searchindex.SearchIndexerSetup
 
@@ -80,7 +80,7 @@ edu.cornell.mannlib.vitro.webapp.freemarker.config.FreemarkerConfiguration$Setup
 # On shutdown, this will kill the background thread started by Apache Commons File Upload
 org.apache.commons.fileupload.servlet.FileCleanerCleanup
 
-# The VClassGroupCache index uses a "public" permission, so the PropertyRestrictionPolicyHelper 
+# The VClassGroupCache index uses a "public" permission, so the PropertyRestrictionPolicyHelper
 #   and the PermissionRegistry must already be set up.
 edu.cornell.mannlib.vitro.webapp.dao.jena.VClassGroupCache$Setup
 

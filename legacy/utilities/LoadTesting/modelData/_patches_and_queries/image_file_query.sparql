@@ -2,7 +2,7 @@
 # Run this sparql query and format the output as CSV to find a list of
 # everywhere that VIVO expects to find an image file.
 #
-# Process the result file with ????? to insert dummy images in all of 
+# Process the result file with ????? to insert dummy images in all of
 # those locations.
 #
 

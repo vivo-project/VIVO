@@ -43,7 +43,7 @@ import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 
 /**
  * Check the relationships in the SelfEditorRelationshipPolicy.
- * 
+ *
  * This only checks the relationships that deal with InfoContentEntitys. Testing
  * the others seems too redundant. If we generalize this to use configurable
  * relationships, then we'll be able to make more general tests as well.

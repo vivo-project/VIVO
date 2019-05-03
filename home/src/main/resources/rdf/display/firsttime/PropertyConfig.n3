@@ -8,7 +8,7 @@
 @prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
 @prefix role:  <http://vitro.mannlib.cornell.edu/ns/vitro/role#> .
 @prefix local: <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/> .
-@prefix vivo: <http://vivoweb.org/ontology/core#> . 
+@prefix vivo: <http://vivoweb.org/ontology/core#> .
 @prefix obo: <http://purl.obolibrary.org/obo/> .
 
 @base <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration> .
@@ -67,7 +67,7 @@ local:authorInAuthorshipConfig a :ObjectPropertyDisplayConfig ;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddPublicationToPersonGenerator"^^xsd:string ;
-    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> . 
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> .
 
 local:orgInAuthorshipContext a :ConfigContext ;
     :hasConfiguration local:orgInAuthorshipConfig ;
@@ -85,7 +85,7 @@ local:orgInAuthorshipConfig a :ObjectPropertyDisplayConfig ;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddPublicationToPersonGenerator"^^xsd:string ;
-    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> . 
+    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> .
 
 #### role contexts and configurations ###
 
@@ -94,7 +94,7 @@ local:hasServiceProviderRoleContext a :ConfigContext ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
     :qualifiedByDomain   <http://xmlns.com/foaf/0.1/Person> ;
     :qualifiedBy      <http://purl.obolibrary.org/obo/ERO_0000012> .
-    
+
 local:hasServiceProviderRoleConfig a :ObjectPropertyDisplayConfig ;
    :listViewConfigFile "listViewConfig-roleContributesTo.xml"^^xsd:string ;
    rdfs:label "hasServiceProviderRole"@en-US;
@@ -105,7 +105,7 @@ local:hasServiceProviderRoleConfig a :ObjectPropertyDisplayConfig ;
    vitro:stubObjectPropertyAnnot "true"^^xsd:boolean ;
    vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddServiceProviderRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoutreach> .
-  
+
 local:hasClinicalRoleContext a :ConfigContext ;
     :hasConfiguration local:hasClinicalRoleConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0000053> ;
@@ -478,7 +478,7 @@ local:orgHasPresenterRoleConfig a :ObjectPropertyDisplayConfig ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddPresenterRoleToPersonGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> .
-    
+
 ### awards and educational training ###
 
 local:awardOrHonorContext a :ConfigContext ;
@@ -744,11 +744,11 @@ local:orgAdministersGrantConfig a :ObjectPropertyDisplayConfig ;
     vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.OrganizationAdministersGrantGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupresearch> .
-    
+
 ### collaborator properties ###
 
 # formerly defined in common for all Agents in initialTBoxAnnotations.n3 where allows cross-linking people and orgs
-    
+
 local:hasCollaboratorContext a :ConfigContext ; # persons
     :hasConfiguration local:hasCollaboratorConfig ;
     :configContextFor <http://vivoweb.org/ontology/core#hasCollaborator> ;
@@ -775,7 +775,7 @@ local:hasCollaboratorConfig a :ObjectPropertyDisplayConfig ;
      vitro:publicDescriptionAnnot
          "Use for a simple assertion that another person is an ongoing collaborator; to describe the relationship in more detail enter a role for each collaborator in some common endeavor."^^xsd:string ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
-    
+
 local:orgHasCollaboratorContext a :ConfigContext ;
     :hasConfiguration local:orgHasCollaboratorConfig ;
     :configContextFor <http://vivoweb.org/ontology/core#hasCollaborator> ;
@@ -1013,7 +1013,7 @@ local:webpageInfoConfig a :ObjectPropertyDisplayConfig ;
 local:webpageSoftwareContext a :ConfigContext ;
     :hasConfiguration local:webpageSoftwareConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
-    :qualifiedByDomain      <http://purl.obolibrary.org/obo/ERO_0000071> ; 
+    :qualifiedByDomain      <http://purl.obolibrary.org/obo/ERO_0000071> ;
     :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
     :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
 
@@ -1029,7 +1029,7 @@ local:webpageSoftwareConfig a :ObjectPropertyDisplayConfig ;
 local:webpageFacilityContext a :ConfigContext ;
     :hasConfiguration local:webpageFacilityConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
-    :qualifiedByDomain      <http://vivoweb.org/ontology/core#Facility> ; 
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#Facility> ;
     :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
     :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
 
@@ -1045,7 +1045,7 @@ local:webpageFacilityConfig a :ObjectPropertyDisplayConfig ;
 local:webpageProjectContext a :ConfigContext ;
     :hasConfiguration local:webpageProjectConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/ARG_2000028> ;
-    :qualifiedByDomain      <http://vivoweb.org/ontology/core#Project> ; 
+    :qualifiedByDomain      <http://vivoweb.org/ontology/core#Project> ;
     :qualifiedByRoot <http://www.w3.org/2006/vcard/ns#Kind> ;
     :qualifiedBy      <http://www.w3.org/2006/vcard/ns#URL> .
 
@@ -1143,7 +1143,7 @@ local:outputOfConfig a :ObjectPropertyDisplayConfig ;
     vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
-    
+
 local:hasOutputContext a :ConfigContext ;
     :hasConfiguration local:hasOutputConfig ;
     :configContextFor obo:RO_0002234 ;
@@ -1210,7 +1210,7 @@ local:documentPartOfConfig a :ObjectPropertyDisplayConfig ;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
-    
+
 local:geographicLocationContainsLocationContext a :ConfigContext ;
     :hasConfiguration local:geographicLocationContainsLocationConfig ;
     :configContextFor  <http://purl.obolibrary.org/obo/BFO_0000051> ;
@@ -1227,13 +1227,13 @@ local:geographicLocationContainsLocationConfig a :ObjectPropertyDisplayConfig ;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
-        
+
 local:geographicLocationWithinLocationContext a :ConfigContext ;
     :hasConfiguration local:geographicLocationWithinLocationConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
     :qualifiedByDomain vivo:GeographicLocation ;
     :qualifiedBy       vivo:GeographicLocation .
-            
+
 local:geographicLocationWithinLocationConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     rdfs:label "geographicLocationWithinLocation"@en-US;
@@ -1329,13 +1329,13 @@ local:inEventSeriesConfig a :ObjectPropertyDisplayConfig ;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
     vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:public ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
-    
+
 local:eventsForSeriesContext a :ConfigContext ;
     :hasConfiguration  local:eventsForSeriesConfig ;
     :configContextFor  <http://purl.obolibrary.org/obo/BFO_0000051> ;
     :qualifiedByDomain <http://vivoweb.org/ontology/core#EventSeries> ;
     :qualifiedBy       <http://purl.org/NET/c4dm/event.owl#Event> .
- 
+
 local:eventsForSeriesConfig a :ObjectPropertyDisplayConfig ;
     :listViewConfigFile "listViewConfig-fauxPropertyDefault.xml"^^xsd:string ;
     rdfs:label "eventsForSeries"@en-US;
@@ -1363,7 +1363,7 @@ local:eventLocationConfig a :ObjectPropertyDisplayConfig ;
     vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
-    
+
 local:eventInFacilityContext a :ConfigContext ;
     :hasConfiguration local:eventInFacilityConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0001025> ; ## located in
@@ -1448,7 +1448,7 @@ local:hasRoomConfig a :ObjectPropertyDisplayConfig ;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
-    
+
 local:roomWithinBuildingContext a :ConfigContext ;
     :hasConfiguration local:roomWithinBuildingConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/BFO_0000050> ;
@@ -1517,7 +1517,7 @@ local:facilitySiteOfEventConfig a :ObjectPropertyDisplayConfig ;
     vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
-    
+
 local:facilitySiteOfAgentContext a :ConfigContext ;
     :hasConfiguration local:facilitySiteOfAgentConfig ;
     :configContextFor <http://purl.obolibrary.org/obo/RO_0001015> ; ## location of
@@ -1535,10 +1535,10 @@ local:facilitySiteOfAgentConfig a :ObjectPropertyDisplayConfig ;
     vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
 
-# uses and used by need work -- apply to continuants and occurrents, and material entities as well as information content entities   
+# uses and used by need work -- apply to continuants and occurrents, and material entities as well as information content entities
 #local:projectUsesMaterialEntityContext a :ConfigContext ;
 #    :hasConfiguration local:projectUsesMaterialEntityConfig ;
-#    :configContextFor  <http://purl.obolibrary.org/obo/ERO_0000031> ; 
+#    :configContextFor  <http://purl.obolibrary.org/obo/ERO_0000031> ;
 #    :qualifiedByDomain vivo:Project  ;
 #    :qualifiedBy       <http://purl.obolibrary.org/obo/BFO_0000040> . ## Material Entity
 
@@ -1552,10 +1552,10 @@ local:facilitySiteOfAgentConfig a :ObjectPropertyDisplayConfig ;
 #    vitro:offerCreateNewOptionAnnot "true"^^xsd:boolean ;
 #    vitro:selectFromExistingAnnot   "true"^^xsd:boolean ;
 #    :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
-    
+
 #local:materialEntityUsedByProjectContext a :ConfigContext ;
 #    :hasConfiguration local:MaterialEntityUsedByProjectConfig ;
-#    :configContextFor  <http://purl.obolibrary.org/obo/ERO_0000070> ; 
+#    :configContextFor  <http://purl.obolibrary.org/obo/ERO_0000070> ;
 #    :qualifiedByDomain <http://purl.obolibrary.org/obo/BFO_0000040> ; ## Material Entity
 #    :qualifiedBy       vivo:Project .
 

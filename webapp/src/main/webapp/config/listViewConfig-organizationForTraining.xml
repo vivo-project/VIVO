@@ -4,20 +4,20 @@
 <!-- See guidelines at https://wiki.duraspace.org/x/eYXVAw  -->
 
 <list-view-config>
-    <query-select>    
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
+    <query-select>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
-        
-        SELECT DISTINCT ?subclass  
-                        ?edTraining 
-                        ?person ?personName 
+
+        SELECT DISTINCT ?subclass
+                        ?edTraining
+                        ?person ?personName
                         ?awardedDegree
                         ?degree
-                        ?degreeName ?degreeAbbr 
-                        ?majorField ?info 
-                        ?dateTimeStart ?dateTimeEnd 
+                        ?degreeName ?degreeAbbr
+                        ?majorField ?info
+                        ?dateTimeStart ?dateTimeEnd
         WHERE {
             ?subject ?property ?edTraining .
             ?edTraining a core:EducationalProcess .

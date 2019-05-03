@@ -26,9 +26,9 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Res
 
 /**
  * New workflow:
- * 
+ *
  * <pre>
- *    Default: clear status for both readProfile and addExternalIDs 
+ *    Default: clear status for both readProfile and addExternalIDs
  *      show intro screen orcidOffer.ftl
  *    	The click "do it", goes to /getProfileAuth
  *      Or "return to profile"
@@ -36,7 +36,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Res
  *      Else, do the dance, ending with /readProfile callback
  *      Denied? show orcidDenied.ftl
  *      Failed? show orcidFailed.ftl
- *    /readProfile: read the profile, store in status 
+ *    /readProfile: read the profile, store in status
  *    	figure external ID options, show orcidOfferIds.ftl
  *      If they click "do it", goes /authExternalIds
  *      If they click "nah", return to profile

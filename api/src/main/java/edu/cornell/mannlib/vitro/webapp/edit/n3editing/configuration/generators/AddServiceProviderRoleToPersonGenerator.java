@@ -6,19 +6,19 @@ import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ConstantFieldOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
 
-public class AddServiceProviderRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {	
-    
+public class AddServiceProviderRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
+
 	private static String OPTION_CLASS_URI = "http://xmlns.com/foaf/0.1/Organization";
 
 	@Override
 	String getTemplate() { return "addServiceProviderRoleToPerson.ftl"; }
 
 	@Override
-	String getRoleType() {	
+	String getRoleType() {
 		return "http://purl.obolibrary.org/obo/ERO_0000012";
-	}	
+	}
 
-	/** Service Provider role involves hard-coded options for the 
+	/** Service Provider role involves hard-coded options for the
 	 * "right side" of the role or activity.	 */
 	@Override
 FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
@@ -74,11 +74,11 @@ FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
         "http://purl.org/ontology/bibo/Workshop", "Workshop",
         "http://vivoweb.org/ontology/core#WorkshopSeries", "Workshop Series");
 }
-	
+
 	@Override
 	boolean isShowRoleLabelField(){return true;}
 
-   /* 
+   /*
     * Use the methods below to change the date/time precision in the
     * custom form associated with this generator. When not used, the
     * precision will be YEAR. The other precisons are MONTH, DAY, HOUR,
@@ -94,5 +94,5 @@ FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
         String precision = VitroVocabulary.Precision.DAY.uri();
 	    return precision;
     }
-*/    
+*/
 }

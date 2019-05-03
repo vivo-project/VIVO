@@ -31,13 +31,13 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTw
  * This is an odd controller that is just drawing a page with links on it.
  * It is not an example of the normal use of the RDF editing system and
  * was just migrated over from an odd use of the JSP RDF editing system
- * during the 1.4 release. 
- * 
+ * during the 1.4 release.
+ *
  * This mainly sets up pageData for the template to use.
  */
 public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationGenerator implements EditConfigurationGenerator {
     public static Log log = LogFactory.getLog(ManageWebpagesForIndividualGenerator.class);
-    
+
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
 
@@ -55,8 +55,8 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         config.addFormSpecificData("webpages",webpages);
 
         config.addFormSpecificData("rankPredicate", "http://vivoweb.org/ontology/core#rank" );
-        config.addFormSpecificData("reorderUrl", "/edit/reorder" );       
-        config.addFormSpecificData("deleteWebpageUrl", "/edit/primitiveDelete");              
+        config.addFormSpecificData("reorderUrl", "/edit/reorder" );
+        config.addFormSpecificData("deleteWebpageUrl", "/edit/primitiveDelete");
 
         ParamMap paramMap = new ParamMap();
         paramMap.put("subjectUri", config.getSubjectUri());
@@ -64,7 +64,7 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         paramMap.put("view", "form");
         String path = UrlBuilder.getUrl( UrlBuilder.Route.EDIT_REQUEST_DISPATCH ,paramMap);
 
-        config.addFormSpecificData("baseEditWebpageUrl", path);                 
+        config.addFormSpecificData("baseEditWebpageUrl", path);
 
         //Also add domainUri and rangeUri if they exist, adding here instead of template
         String domainUri = (String) vreq.getParameter("domainUri");
@@ -82,7 +82,7 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         }
         path = UrlBuilder.getUrl( UrlBuilder.Route.EDIT_REQUEST_DISPATCH ,paramMap);
 
-        config.addFormSpecificData("showAddFormUrl", path);          
+        config.addFormSpecificData("showAddFormUrl", path);
 
         Individual subject = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(config.getSubjectUri());
         if( subject != null && subject.getName() != null ){
@@ -162,10 +162,10 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         + "    OPTIONAL { ?link core:rank ?rank } \n"
         + "    OPTIONAL { ?link vitro:mostSpecificType ?type } \n"
         + "    OPTIONAL { ?type rdfs:label ?typeLabel } \n"
-        + "} GROUP BY ?rank ?vcard ?link ?url ?typeLabel \n" 
+        + "} GROUP BY ?rank ?vcard ?link ?url ?typeLabel \n"
     	+ "  ORDER BY ?rank";
-    
-       
+
+
     private List<Map<String, String>> getWebpages(String subjectUri, VitroRequest vreq) {
         RDFService rdfService = vreq.getRDFService();
 
@@ -195,20 +195,20 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
             }
         } catch (Exception e) {
             log.error(e, e);
-        }    
+        }
         log.debug("webpages = " + webpages);
         return webpages;
     }
-    
+
     //Putting this into a method allows overriding it in subclasses
     protected String getEditForm() {
     	return AddEditWebpageFormGenerator.class.getName();
     }
-    
+
     protected String getQuery() {
     	return WEBPAGE_QUERY;
     }
-    
+
     protected String getTemplate() {
     	return "manageWebpagesForIndividual.ftl";
     }

@@ -16,8 +16,8 @@ ${i18n().check_grants_to_exclude}
     var itemData = [];
 </script>
 </p>
-<@lvf.unsupportedBrowser urls.base /> 
-       
+<@lvf.unsupportedBrowser urls.base />
+
     <#list allSubclasses as sub>
     <h4>${sub}</h4>
         <section id="pubsContainer" role="container">
@@ -29,16 +29,16 @@ ${i18n().check_grants_to_exclude}
             </li>
             <script type="text/javascript">
                 itemData.push({
-                    "relatedUri": "${grant.role!}"              
+                    "relatedUri": "${grant.role!}"
                 });
-            </script>      
-            
+            </script>
+
             </#list>
         </ul>
         </section>
     </#list>
 
-<br />    
+<br />
 <p>
     <a href="${urls.referringPage}#research" title="${i18n().return_to_profile}">${i18n().return_to_profile}</a>
 </p>
@@ -60,4 +60,4 @@ ${scripts.add('<script type="text/javascript" src="${urls.base}/js/utils.js"></s
               '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
                 '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/manageHideShowStatus.js"></script>')}
-              
+

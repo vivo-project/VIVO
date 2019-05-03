@@ -3,13 +3,13 @@
 var newIndividualFormUtils = {
 
     onLoad: function(mode,country) {
-        this.initObjectReferences();                 
+        this.initObjectReferences();
         this.bindEventListeners();
     },
 
     initObjectReferences: function() {
     this.form = $('#newIndividual');
-    
+
     // The external auth ID field and messages
     this.fName = $('#firstName');
     this.lName = $('#lastName');
@@ -17,15 +17,15 @@ var newIndividualFormUtils = {
     this.rdfsLabel = $('#label');
     this.submitButton = $('#submit');
     },
-    
+
     bindEventListeners: function() {
         this.idCache = {};
-        
+
         this.form.submit(function() {
             newIndividualFormUtils.buildRDFSLabel();
             newIndividualFormUtils.submitButton.attr("disabled",true);
-        });    
-    
+        });
+
     },
 
     buildRDFSLabel: function() {
@@ -39,6 +39,6 @@ var newIndividualFormUtils = {
     },
 }
 
-$(document).ready(function() {   
+$(document).ready(function() {
     newIndividualFormUtils.onLoad();
-}); 
+});

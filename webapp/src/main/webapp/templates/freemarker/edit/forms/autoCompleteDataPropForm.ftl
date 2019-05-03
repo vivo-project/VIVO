@@ -15,11 +15,11 @@
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="${i18n().error_alert_icon}" />
         <p>
-        
+
         <#list submissionErrors?keys as errorFieldName>
             ${submissionErrors[errorFieldName]}
         </#list>
-                        
+
         </p>
     </section>
 </#if>
@@ -30,18 +30,18 @@
     <input type="hidden" name="editKey" id="editKey" value="${editKey}" role="input" />
     <#if editConfiguration.dataPredicatePublicDescription?has_content>
        <label for="${editConfiguration.dataLiteral}"><p class="propEntryHelpText">${editConfiguration.dataPredicatePublicDescription}</p></label>
-    </#if>   
-	
+    </#if>
+
     <p>
 		<input class="acSelector" size="50"  type="text" id="literal" name="literal" value="${literalValues}" />
 	</p>
-								
-	<div class="acSelection"> 
+
+	<div class="acSelection">
 	<p class="inline">
-	<label>${i18n().selected}:</label> 
-	<span class="acSelectionInfo"></span> 
-	
-	<a href="#" class="cancel">(${i18n().change_selection})</a> 
+	<label>${i18n().selected}:</label>
+	<span class="acSelectionInfo"></span>
+
+	<a href="#" class="cancel">(${i18n().change_selection})</a>
 	</p>
 	</div>
     <br />
@@ -60,7 +60,7 @@
 <#--Passing in object types only if there are any types returned, otherwise
 the parameter should not be passed at all to the search.
 Also multiple types parameter set to true only if more than one type returned-->
-    <script type="text/javascript">	
+    <script type="text/javascript">
     var customFormData  = {
         acUrl: '${urls.base}/dataautocomplete?',
       	property: '${editConfiguration.predicateUri}',
@@ -83,5 +83,5 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/sm
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',             
+              '<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',
               '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/customFormWithDataAutocomplete.js"></script>')}

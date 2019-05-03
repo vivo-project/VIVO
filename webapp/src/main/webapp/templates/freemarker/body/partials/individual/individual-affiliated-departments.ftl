@@ -4,7 +4,7 @@
     <#assign urlForDetailsPage = "affiliatedDepartments" />
     <#assign headingText = "${i18n().affiliated_departments}" />
         <h2 id="facultyResearchAreas" class="mainPropGroup">
-            ${headingText} 
+            ${headingText}
         </h2>
         <ul id="individual-hasResearchArea" role="list">
             <#assign moreDisplayed = false>
@@ -15,7 +15,7 @@
 		            </a>
 		        </li>
             </#list>
-        </ul>    
+        </ul>
 </#if>
 <script>
 $('a#raMore').click(function() {

@@ -7,5 +7,5 @@
     <h2 id="${localName}" class="mainPropGroup" title="${positions.publicDescription!}">${positions.name?capitalize} <@p.addLink positions editable /> <@p.verboseDisplay positions /></h2>
     <ul id="individual-personInPosition" role="list">
         <@p.objectProperty positions editable />
-    </ul> 
-</#if> 
+    </ul>
+</#if>

@@ -4,8 +4,8 @@ PREFIX obo: <http://purl.obolibrary.org/obo/>
 CONSTRUCT {
      ?degree ?property ?object .
 } WHERE {
-     PERSON_URI obo:RO_0000056 ?educationalTraining . 
-     ?educationalTraining a core:EducationalProcess . 
+     PERSON_URI obo:RO_0000056 ?educationalTraining .
+     ?educationalTraining a core:EducationalProcess .
      ?educationalTraining obo:RO_0002234 ?awardedDegree .
      ?awardedDegree a core:AwardedDegree .
      ?awardedDegree core:relates ?degree .

@@ -47,7 +47,7 @@ section#label-title {
     margin-left:0 !important;
     font-size:1em !important;
     border:none !important;
-    display:inline-block; 
+    display:inline-block;
 }
 div#titleContainer {
     display:inline-block;
@@ -70,12 +70,12 @@ section#label-title h2 {
 /* <------ QR Code */
 span#qrCodeImage {
     position: absolute;
-    top: 30px; 
-    left: 76% !important; 
-    width:180px; 
+    top: 30px;
+    left: 76% !important;
+    width:180px;
     border: solid 2px #ccc;
-    background: #fff; 
-    text-align:middle; 
+    background: #fff;
+    text-align:middle;
     overflow:visible;
 }
 /* <----- WEBPAGE CONTENT LEFT SIDE -----> */
@@ -93,8 +93,8 @@ span#qrCodeImage {
 }
 div#webpage-wrapper {
     background-color: #e4e8e7;
-    margin:-7px 0 -16px 0; 
-    padding-bottom:9px; 
+    margin:-7px 0 -16px 0;
+    padding-bottom:9px;
     padding-top:3px;
     display:inline-block;
     width: 456px;
@@ -113,7 +113,7 @@ ul.individual-webpage {
     padding:18px 0 0 25px ;
 }
 ul.individual-webpage li:first-child {
-    padding: 0 0 0 0;    
+    padding: 0 0 0 0;
 }
 ul.individual-webpage li {
     padding: 5px 5px 0 0;
@@ -138,7 +138,7 @@ section#individual-intro {
 }
 #individual-intro h1.fn {
     padding-right:8px;
-    height:20px; 
+    height:20px;
     margin:-1px 8px 5px 0;
 }
 section.qv-individual-info {
@@ -190,14 +190,14 @@ div#profileTypeContainer h2 {
 /* <------ POSITIONS ------> */
 ul#individual-personInPosition {
     list-style-type: circle;
-    padding-left: 10px; 
-    margin: 10px 0 0 0; 
+    padding-left: 10px;
+    margin: 10px 0 0 0;
 }
 ul#individual-hasResearchArea li {
-    float: left; 
+    float: left;
     padding-right: 10px;
-    margin-right: 10px; 
-    padding-left: 0;  
+    margin-right: 10px;
+    padding-left: 0;
     border-right: 1px solid #5e6363 ;
     white-space:nowrap !important;
 }
@@ -226,20 +226,20 @@ span#fullViewLink {
     padding-left:47%;
 }
 /****** FROM WILMA.CSS ******/
-#individual-info h2.mainPropGroup { 
+#individual-info h2.mainPropGroup {
     border-bottom: 1px solid #DDE4E3;
     padding-bottom:1px;
     margin-bottom:8px;
 }
 ul#individual-personInPosition li {
     padding-bottom:12px;
-    margin-left:10px; 
+    margin-left:10px;
     line-height: 1.25em !important;
 }
-ul#individual-personInPosition li:last-child { 
+ul#individual-personInPosition li:last-child {
     padding-bottom: 0;
 }
 #individual-info h2 {
-    padding: 25px 0 10px 0; 
-    clear:both; 
+    padding: 25px 0 10px 0;
+    clear:both;
 }

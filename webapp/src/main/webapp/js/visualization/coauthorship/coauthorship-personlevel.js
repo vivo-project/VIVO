@@ -8,23 +8,23 @@ var collaboratorTableMetadata = {
 	tableColumnTitle1: i18nStringsCoauthorship.authorString,
 	tableColumnTitle2: i18nStringsCoauthorship.publicationsWith + " <br />",
 	tableCSVFileLink: egoCoAuthorsListDataFileURL,
-	jsonNumberWorksProperty: "number_of_authored_works" 
+	jsonNumberWorksProperty: "number_of_authored_works"
 };
 
-var visType = "coauthorship"; 
+var visType = "coauthorship";
 var visKeyForFlash = "CoAuthor";
 
 function renderStatsOnNodeClicked(json){
-	
+
 	var obj = jQuery.parseJSON(json);
-	
+
 	var works = "";
 	var persons = "";
 	var relation = "";
 	var earliest_work = "";
 	var latest_work = "";
 	var number_of_works = "";
-	
+
 	works = i18nStringsCoauthorship.publicationsString;
 	persons = i18nStringsCoauthorship.coauthorsString;
 	relation = "coauthorship"
@@ -39,17 +39,17 @@ function renderStatsOnNodeClicked(json){
 	 * Here obj.url points to the uri of that individual
 	 */
 	if(obj.url){
-		
+
 		if (obj.url === unEncodedEgoURI) {
-			
+
 			$("#authorName").addClass('author_name').removeClass('neutral_author_name');
 			$('#num_works > .author_stats_text').text(works);
 			$('#num_authors > .author_stats_text').text(persons);
-			
+
 			var vivoProfileURL = $("a#profileUrl").detach();
-			
+
 			$("#profile-links").empty().append(vivoProfileURL);
-			
+
 		} else {
 
 			$("#authorName").addClass('neutral_author_name').removeClass('author_name');
@@ -57,36 +57,36 @@ function renderStatsOnNodeClicked(json){
 			$('#num_authors > .author_stats_text').text('Joint ' + persons);
 
 			if ($("#coAuthorshipVisUrl").length > 0) {
-				
+
 				$("#coAuthorshipVisUrl").attr("href", getWellFormedURLs(obj.url, relation));
-				
+
 			} else {
-				
+
 				$("#profile-links")
 				.append(" | ")
-				.append('<a href="' + getWellFormedURLs(obj.url, relation) 
-							+ '" id="coAuthorshipVisUrl">Co-author network</a>');	
-			} 
+				.append('<a href="' + getWellFormedURLs(obj.url, relation)
+							+ '" id="coAuthorshipVisUrl">Co-author network</a>');
+			}
 		}
-		
+
 		$("#profileUrl").attr("href", getWellFormedURLs(obj.url, "profile"));
-		
-		processProfileInformation("authorName", 
+
+		processProfileInformation("authorName",
 				"profileMoniker",
 				"profileImage",
 				jQuery.parseJSON(getWellFormedURLs(obj.url, "profile_info")),
 				true,
 				true);
-		
-		
+
+
 
 	} else {
 		$("#profileUrl").attr("href","#");
 		$("#coAuthorshipVisUrl").attr("href","#");
 	}
 
-	$("#coAuthors").empty().append(obj.noOfCorelations);	
-	
+	$("#coAuthors").empty().append(obj.noOfCorelations);
+
 	$("#firstPublication").empty().append(earliest_work);
 	(earliest_work)?$("#fPub").attr("style","visibility:visible"):$("#fPub").attr("style","visibility:hidden");
 	$("#lastPublication").empty().append(latest_work);

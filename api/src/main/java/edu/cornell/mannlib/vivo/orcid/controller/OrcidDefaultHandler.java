@@ -67,10 +67,10 @@ public class OrcidDefaultHandler extends OrcidAbstractHandler {
 			throw new IllegalStateException(
 					"No 'individualUri' parameter on request.");
 		}
-	
+
 		String profilePage = UrlBuilder.getIndividualProfileUrl(uri, vreq);
 		state.reset(uri, profilePage);
-		
+
 		individual = findIndividual();
 		locateExistingOrcids();
 		state.setExistingOrcids(existingOrcids);
@@ -90,7 +90,7 @@ public class OrcidDefaultHandler extends OrcidAbstractHandler {
 		for (ObjectPropertyStatement ops : opss) {
 			existingOrcids.add(ops.getObjectURI());
 		}
-		
+
 	}
 
 	private void initializeAuthorizationCache() {

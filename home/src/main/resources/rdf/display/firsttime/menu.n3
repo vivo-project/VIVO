@@ -1,4 +1,4 @@
-# $This file is distributed under the terms of the license in LICENSE$ 
+# $This file is distributed under the terms of the license in LICENSE$
 
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
@@ -12,7 +12,7 @@
 
 #### Default Menu ####
 
-display:DefaultMenu 
+display:DefaultMenu
     a  display:MainMenu ;
     rdfs:label "Default Menu" ;
     display:hasElement display:EventsMenuItem ;
@@ -24,36 +24,36 @@ display:DefaultMenu
 
 #### Menu Items for Default Menu ####
 
-display:HomeMenuItem 
+display:HomeMenuItem
     a display:NavigationElement ;
     display:menuPosition 1;
     display:linkText "Home";
     display:toPage display:Home .
 
-display:PeopleMenuItem 
+display:PeopleMenuItem
     a display:NavigationElement ;
     display:menuPosition 2;
     display:linkText "People";
     display:toPage display:People .
 
-display:OrganizationsMenuItem 
+display:OrganizationsMenuItem
     a display:NavigationElement ;
     display:menuPosition 3;
     display:linkText "Organizations";
     display:toPage display:Organizations .
 
-display:ResearchMenuItem     
+display:ResearchMenuItem
     a display:NavigationElement ;
     display:menuPosition 4;
     display:linkText "Research";
     display:toPage display:Research .
 
-display:EventsMenuItem 
+display:EventsMenuItem
     a display:NavigationElement ;
     display:menuPosition 5;
     display:linkText "Events";
-    display:toPage display:Events .        
-    
+    display:toPage display:Events .
+
 display:CapabilityMapMenuItem
     a display:NavigationElement ;
     display:menuPosition 6;
@@ -61,22 +61,22 @@ display:CapabilityMapMenuItem
     display:toPage display:CapabilityMap .
 
 display:Home
-    a display:HomePage ;    
+    a display:HomePage ;
     a display:Page ;
-    display:title "Home" ;    
+    display:title "Home" ;
     display:urlMapping "/" ;
     display:hasDataGetter display:homeDataGetter;
     display:cannotDeletePage "true" .
 
-display:Events 
-    a display:Page ;    
+display:Events
+    a display:Page ;
     a display:ClassGroupPage;
     display:forClassGroup vivoweb:vitroClassGroupevents ;
     display:title "Events" ;
-    display:urlMapping "/events" ; 
+    display:urlMapping "/events" ;
     display:hasDataGetter display:eventsDataGetter .
 
-display:Organizations 
+display:Organizations
     a display:Page ;
     a display:ClassGroupPage;
     display:forClassGroup vivoweb:vitroClassGrouporganizations ;
@@ -84,16 +84,16 @@ display:Organizations
     display:urlMapping "/organizations";
     display:hasDataGetter display:organizationsDataGetter .
 
-display:People 
-    a display:Page ;    
+display:People
+    a display:Page ;
     a display:ClassGroupPage;
     display:forClassGroup vivoweb:vitroClassGrouppeople ;
     display:title "People" ;
     display:urlMapping "/people" ;
    	display:hasDataGetter display:peopleDataGetter .
 
-display:Research 
-    a display:Page ;        
+display:Research
+    a display:Page ;
     a display:ClassGroupPage;
     display:forClassGroup vivoweb:vitroClassGrouppublications ;
     display:title "Research" ;
@@ -121,12 +121,12 @@ display:organizationsDataGetter
       a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData>;
       display:forClassGroup
               vivoweb:vitroClassGrouporganizations .
-                            
+
 display:eventsDataGetter
       a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData>;
       display:forClassGroup
               vivoweb:vitroClassGroupevents .
-              
+
 display:homeDataGetter
       a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.BrowseDataGetter> .
 

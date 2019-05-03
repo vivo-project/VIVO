@@ -1,10 +1,10 @@
 @prefix : <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> . 
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix searchIndex: <java:edu.cornell.mannlib.vitro.webapp.searchindex#> .
 
 
 #
-# Specify the SearchIndexExcluders, DocumentModifiers and IndexingUriFinders for VIVO. 
+# Specify the SearchIndexExcluders, DocumentModifiers and IndexingUriFinders for VIVO.
 # These are in addition to the ones specified for VIVO.
 #
 
@@ -28,7 +28,7 @@
     :hasOutgoingProperty "http://vivoweb.org/ontology/core#relates" .
 
 # Some roles look like this:  bearerOf ==> role ==> roleContributesTo
-#                            inheresIn <== role <== contributingRole        
+#                            inheresIn <== role <== contributingRole
 :extension_forContextNodes_role_contributes_1
     a   searchIndex:indexing.IndexingUriFinder ,
         searchIndex:documentBuilding.DocumentModifier ,
@@ -36,7 +36,7 @@
     rdfs:label "Labels across bearerOf/contributesTo" ;
     :hasIncomingProperty "http://purl.obolibrary.org/obo/RO_0000053" ;
     :hasOutgoingProperty "http://vivoweb.org/ontology/core#roleContributesTo" .
-        
+
 :extension_forContextNodes_role_contributes_2
     a   searchIndex:indexing.IndexingUriFinder ,
         searchIndex:documentBuilding.DocumentModifier ,
@@ -44,9 +44,9 @@
     rdfs:label "Labels across contributor/inheresIn" ;
     :hasIncomingProperty "http://vivoweb.org/ontology/core#contributingRole" ;
     :hasOutgoingProperty "http://purl.obolibrary.org/obo/RO_0000052" .
-        
+
 # Other roles look like this:  bearerOf ==> role ==> realizedIn
-#                             inheresIn <== role <== realizes        
+#                             inheresIn <== role <== realizes
 :extension_forContextNodes_role_realizedIn_1
     a   searchIndex:indexing.IndexingUriFinder ,
         searchIndex:documentBuilding.DocumentModifier ,
@@ -54,7 +54,7 @@
     rdfs:label "Labels across bearerOf/realizedIn" ;
     :hasIncomingProperty "http://purl.obolibrary.org/obo/RO_0000053" ;
     :hasOutgoingProperty "http://purl.obolibrary.org/obo/BFO_0000054" .
-        
+
 :extension_forContextNodes_role_realizedIn_2
     a   searchIndex:indexing.IndexingUriFinder ,
         searchIndex:documentBuilding.DocumentModifier ,
@@ -62,7 +62,7 @@
     rdfs:label "Labels across realizes/inheresIn" ;
     :hasIncomingProperty "http://purl.obolibrary.org/obo/BFO_0000055" ;
     :hasOutgoingProperty "http://purl.obolibrary.org/obo/RO_0000052" .
-        
+
 # Roles on grants look like this:  bearerOf ==> role ==> relatedBy
 #                                 inheresIn <== role <== relates
 :extension_forContextNodes_roles_on_grants_1
@@ -72,7 +72,7 @@
     rdfs:label "Labels across bearerOf/relates" ;
     :hasIncomingProperty "http://purl.obolibrary.org/obo/RO_0000053" ;
     :hasOutgoingProperty "http://vivoweb.org/ontology/core#relatedBy" .
-        
+
 :extension_forContextNodes_roles_on_grants_2
     a   searchIndex:indexing.IndexingUriFinder ,
         searchIndex:documentBuilding.DocumentModifier ,
@@ -80,7 +80,7 @@
     rdfs:label "Labels across contributor/relatedBy" ;
     :hasIncomingProperty "http://vivoweb.org/ontology/core#relates" ;
     :hasOutgoingProperty "http://purl.obolibrary.org/obo/RO_0000052" .
-        
+
 
 # ------------------------------------
 
@@ -127,7 +127,7 @@
     :hasSelectQuery """
         PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
         PREFIX obo: <http://purl.obolibrary.org/obo/>
-		SELECT ?title 
+		SELECT ?title
 		WHERE {
 			?uri obo:ARG_2000028 ?card .
 			?card a vcard:Individual .
@@ -135,7 +135,7 @@
 			?titleHolder vcard:title ?title .
 		}
         """ .
-    
+
 :vivodocumentModifier_EmailAddress
     a   searchIndex:documentBuilding.SelectQueryDocumentModifier ,
         searchIndex:documentBuilding.DocumentModifier ;
@@ -143,7 +143,7 @@
     :hasSelectQuery """
         PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
         PREFIX obo: <http://purl.obolibrary.org/obo/>
-		SELECT ?email 
+		SELECT ?email
 		WHERE {
 			?uri obo:ARG_2000028 ?card .
 			?card a vcard:Individual .

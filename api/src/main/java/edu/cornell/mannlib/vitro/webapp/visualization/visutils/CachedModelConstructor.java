@@ -9,7 +9,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryP
 public interface CachedModelConstructor {
 
 	Model getConstructedModel() throws MalformedQueryParametersException;
-	
-	String getModelType(); 
-	
+
+	String getModelType();
+
 }

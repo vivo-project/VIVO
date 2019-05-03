@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!-- $This file is distributed under the terms of the license in LICENSE$ -->
 
-<!-- VIVO-specific default list view config file for object properties 
-    
+<!-- VIVO-specific default list view config file for object properties
+
      See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
 
 <list-view-config>
-    <query-select>    
-          
+    <query-select>
+
         SELECT ?value
         WHERE {
             ?subject ?property ?value .

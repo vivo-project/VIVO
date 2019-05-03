@@ -5,11 +5,11 @@ package edu.cornell.mannlib.vitro.webapp.visualization.exceptions;
 public class DocumentFieldNotFoundException extends Exception {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	public DocumentFieldNotFoundException(String message) {
 		super(message);
 	}
-	
+
 	public DocumentFieldNotFoundException(Exception cause) {
 		super(createMessage(cause), cause);
 	}

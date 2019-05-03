@@ -1,7 +1,7 @@
 /* $This file is distributed under the terms of the license in LICENSE$ */
 /**
- * The MarkerManager is more like a composite class of Marker. It manages 
- * markers by grouping the markers by keys. 
+ * The MarkerManager is more like a composite class of Marker. It manages
+ * markers by grouping the markers by keys.
  */
 
 $.extend(this, i18nStrings);
@@ -58,7 +58,7 @@ var MarkerManager = Class.extend({
 });
 
 /**
- * Customized Discipline labels MarkerManager for Science map purpose. It is an abstract class 
+ * Customized Discipline labels MarkerManager for Science map purpose. It is an abstract class
  */
 var DisciplineLabelsMarkerManager = MarkerManager.extend({
 	init: function(map, getLabelURL) {
@@ -88,7 +88,7 @@ var DisciplineLabelsMarkerManager = MarkerManager.extend({
 });
 
 /**
- * Customized MarkerManager for Science map purpose. It is an abstract class 
+ * Customized MarkerManager for Science map purpose. It is an abstract class
  */
 var ScimapMarkerManager = MarkerManager.extend({
 	init: function(map, colorStrategy, sizeCoder) {
@@ -134,7 +134,7 @@ var ScimapMarkerManager = MarkerManager.extend({
 		if (!markerArray || !markerArray.length) {
 			markerArray = this.getMarkerArray();
 		}
-		
+
 		$.each(markerArray, function() {
 			if (numberOfMarkers >  0) {
 				this.show();
@@ -183,8 +183,8 @@ var DisciplineMarkerManager = ScimapMarkerManager.extend({
 		var me = this;
 		var marker = this._super(key, density);
 		var poly = marker.polygon;
-		
-		marker.setContent( 
+
+		marker.setContent(
 				'<div style="font-size: 80%; padding: 5px; text-align: left;"><b>'
 				+ poly.label +'</b><br />'
 				+ addCommasToNumber(poly.value.toFixed(2)) + ' ' + i18nStrings.publicationsPubs + '<br />'
@@ -207,11 +207,11 @@ var SubdisciplineMarkerManager = ScimapMarkerManager.extend({
 		/* Override the getContent for Subdiscipline */
 		marker.setContent(
 			'<div style="font-size: 80%; padding: 5px; text-align: left;"><b>'
-			+ poly.label + '</b> in ' + disciplineLabel +'<br />' 
+			+ poly.label + '</b> in ' + disciplineLabel +'<br />'
 			+ addCommasToNumber(poly.value.toFixed(2)) + ' ' + i18nStrings.publicationsPubs + '<br />'
 			+ (poly.value * 100 / this.maxValue).toFixed(2) + i18nStrings.percentActivity
 		);
-		
+
 		return marker;
 	}
 });
@@ -239,8 +239,8 @@ var CompositeMarkerManager = Class.extend({
 	},
 	getManagerArray: function() {
 		var array = [];
-		$.each(this.keyToManager, function(i, e){ 
-			array.push(e); 
+		$.each(this.keyToManager, function(i, e){
+			array.push(e);
 		});
 		return array;
 	},

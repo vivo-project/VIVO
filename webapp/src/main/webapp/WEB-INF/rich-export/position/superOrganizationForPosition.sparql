@@ -5,10 +5,10 @@ PREFIX obo: <http://purl.obolibrary.org/obo/>
 CONSTRUCT {
      ?superOrganization ?property ?object .
 } WHERE {
-     PERSON_URI core:relatedBy ?position . 
+     PERSON_URI core:relatedBy ?position .
      ?position a core:Position .
      ?position core:relates ?organization .
-     ?organization a foaf:Organization . 
+     ?organization a foaf:Organization .
      ?organization obo:BFO_0000051 ?superOrganization .
      ?superOrganization ?property ?object .
 }

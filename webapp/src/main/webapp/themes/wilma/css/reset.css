@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in LICENSE$ */
 
-/* CSS Document 
+/* CSS Document
 CSS reste by Eric Meyer:
 The goal of a reset stylesheet is to reduce browser inconsistencies in things like default line heights, margins and font sizes of headings, and so on...  http://meyerweb.com/eric/tools/css/reset/
 */
@@ -59,7 +59,7 @@ td {
     color: #595b5b;
     font-weight: normal;
 }
-body {    
+body {
     line-height: 1.5em;
 }
 ol,
@@ -68,8 +68,8 @@ ul {
     font-weight: normal;
 }
 blockquote,
-q {    
-    quotes: none; 
+q {
+    quotes: none;
 }
 blockquote:before,
 blockquote:after,
@@ -79,11 +79,11 @@ q:after {
     content: none;
 }
 /* remember to highlight inserts somehow! */
-ins {    
-    text-decoration: none; 
+ins {
+    text-decoration: none;
 }
-del {    
-    text-decoration: line-through; 
+del {
+    text-decoration: line-through;
 }
 /* tables still need 'cellspacing="0"' in the markup */
 table {
@@ -91,12 +91,12 @@ table {
     border-spacing: 0;
 }
 /* New ones added to the default list */
-a {    
-    text-decoration: none; 
+a {
+    text-decoration: none;
 }
-fieldset {    
-    border-style: none; 
+fieldset {
+    border-style: none;
 }
-legend {    
-    display: none; 
+legend {
+    display: none;
 }

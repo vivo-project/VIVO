@@ -44,7 +44,7 @@ La cobertura de la publicación de esta visualización se puede mejorar mediante
 Las organizaciones mencionadas son hijos del nodo de ${entityLabel} en la jerarquía organizacional. Es posible que 'profundizar' para ver las organizaciones por debajo de un determinado sub-organización, seleccione el icono de gráfico junto al nombre de un sub-organización seleccionada por debajo de la gráfica de la derecha.
 <br /><br />
 
-El número de publicaciones columna muestra la cantidad de las publicaciones fueron asignadas a cada especialidad. Esta cuenta puede ser fraccionario ya que algunos lugares de publicación están asociados con más de una especialidad. Cada publicación de tal lugar contribuye fraccionadamente a todas las subdisciplinas asociados de acuerdo con un esquema de ponderación. 
+El número de publicaciones columna muestra la cantidad de las publicaciones fueron asignadas a cada especialidad. Esta cuenta puede ser fraccionario ya que algunos lugares de publicación están asociados con más de una especialidad. Cada publicación de tal lugar contribuye fraccionadamente a todas las subdisciplinas asociados de acuerdo con un esquema de ponderación.
 <br /><br />
 
 El porcentaje de la columna de actividad muestra qué proporción de las publicaciones que se asigna a cada especialidad.
