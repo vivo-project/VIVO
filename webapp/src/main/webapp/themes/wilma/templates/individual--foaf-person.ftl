@@ -79,7 +79,6 @@
                 </#if>
             </#if>
         </#if>
-        <#include "individual-visualizationFoafPerson.ftl">
         </section>
         <#include "individual-adminPanel.ftl">
 
