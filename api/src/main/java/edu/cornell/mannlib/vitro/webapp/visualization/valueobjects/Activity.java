@@ -9,28 +9,28 @@ import java.util.Set;
 
 /**
  * This interface will make sure that VOs conveying any person's academic output like publications,
- * grants etc implement certain methods which will be used to generalize methods which are just 
- * interested in certain common properties like what was the year in which the activity was 
- * published (or started). 
+ * grants etc implement certain methods which will be used to generalize methods which are just
+ * interested in certain common properties like what was the year in which the activity was
+ * published (or started).
  * @author cdtank
  */
 public class Activity extends Individual {
-	
+
 	private String activityDate;
 	private Set<String> activityTypes = new HashSet<String>();
 
 	public Activity(String activityURI) {
 		super(activityURI);
 	}
-	
+
 	public String getActivityURI() {
 		return this.getIndividualURI();
 	}
-	
+
 	public String getActivityLabel() {
 		return this.getIndividualLabel();
 	}
-	
+
 	public void setActivityLabel(String activityLabel) {
 		this.setIndividualLabel(activityLabel);
 	}
@@ -38,21 +38,21 @@ public class Activity extends Individual {
 	public Set<String> getActivityTypes() { return this.activityTypes; }
 
 	public void addActivityType(String activityType) { this.activityTypes.add(activityType); }
-	
+
 	/**
-	 * This method will be called to get the final/inferred year for the publication. 
+	 * This method will be called to get the final/inferred year for the publication.
 	 * The 2 choices, in order, are,
-	 * 		1. parsed year from xs:DateTime object saved in core:dateTimeValue 
-	 * 		2. Default Publication Year 
+	 * 		1. parsed year from xs:DateTime object saved in core:dateTimeValue
+	 * 		2. Default Publication Year
 	 */
 	public String getParsedActivityYear() {
-		
+
 		return UtilityFunctions.getValidYearFromCoreDateTimeString(activityDate,
 				VOConstants.DEFAULT_ACTIVITY_YEAR);
 	}
-	
+
 	/**
-	 * This method should be used to get the raw date & not the parsed publication year. 
+	 * This method should be used to get the raw date & not the parsed publication year.
 	 * For the later use getParsedPublicationYear.
 	 */
 	public String getActivityDate() {
