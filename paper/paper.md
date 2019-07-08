@@ -149,8 +149,8 @@ The authors wish to acknowledge the foundational work done on VIVO, and VIVO con
 the team at the Mann Agricultural Library, Cornell University, led by Jon Corson-Rikert.  
 The authors also wish to acknowledge NIH grant 1U24RR029822-01 to the first author, which 
 funded the work of more than 120 co-investigators in the further development of the 
-VIVO software, and NIH grant xxxxxxx to Dr. Melissa Haendel of Oregon Health Science 
-University which funded significant advances in the VIVO Integrated Semantic Framework, 
+VIVO software, and to Dr. Melissa Haendel of Oregon Health Science 
+University for her significant advances in the VIVO Integrated Semantic Framework, 
 which VIVO uses to represent scholarship.  Finally, the authors wish to acknowledge the 
 many hundreds of members of the VIVO community around the world, who volunteer their 
 time and effort to advance the art of representing scholarship as linked open data. The 
