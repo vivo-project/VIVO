@@ -47,6 +47,8 @@
                             height = (chartHeight - margin.top - margin.bottom),
                             g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+                    svg.attr("width", chartWidth).attr("height",chartHeight)
+
                     var x = d3.scaleBand()
                             .rangeRound([0, width])
                             .paddingInner(0.05)
