@@ -78,8 +78,10 @@ authors:
    Orcid: 0000-0001-5059-4132
    affiliation: 17
  - name: Stefan Wolff
+   Orcid: 0000-0003-0015-9671
    affiliation: 18
  - name: Rebecca Younes
+   Orcid: 0000-0002-5105-1401
    affiliation: 4
 affiliations:
  - name: University of Florida, Gainesville, Florida, US
