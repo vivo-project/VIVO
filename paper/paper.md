@@ -78,8 +78,10 @@ authors:
    Orcid: 0000-0001-5059-4132
    affiliation: 17
  - name: Stefan Wolff
+   Orcid: 0000-0003-0015-9671
    affiliation: 18
  - name: Rebecca Younes
+   Orcid: 0000-0002-5105-1401
    affiliation: 4
 affiliations:
  - name: University of Florida, Gainesville, Florida, US
@@ -125,20 +127,20 @@ bibliography: paper.bib
 # Summary
 
 VIVO [Pronunciation: vee-voh] is member-supported, enterprise open source 
-software and an ontology for representing scholarship.  VIVO supports recording, editing, 
+software and an ontology for representing scholarship. VIVO supports recording, editing, 
 searching, browsing and visualizing scholarly activity. VIVO encourages research 
-discovery, expert finding, network analysis and assessment of research impact.  
-VIVO is easily extended to support additional domains of scholarly activity.
+discovery, expert finding, network analysis and assessment of research impact. 
+VIVO is easily extended to support additional domains of scholarly activity [@borner_vivo:_2012].
 
 VIVO uses an ontology to represent people, papers, grants, projects, datasets, resources,
-and other elements of research and scholarship as linked open data.  The ontology can
-be used to create RDF that can be loaded into VIVO.  VIVO RDF data is easily exported for
+and other elements of research and scholarship as linked open data. The ontology can
+be used to create RDF that can be loaded into VIVO. VIVO RDF data is easily exported for
 use in other applications.
 
-VIVO includes Vitro, a domain-free engine for managing linked open data, the JFact 
-reasoner, SolR for search, SPARQL query, Jena as a triple store, supporting both TDB 
-and SDB on MySQL, uses D3 for visualizations, and provides multiple APIs, including
-Triple Pattern Fragments for rapid remote access to specified data.
+VIVO includes Vitro [@about_vitro:2018], a domain-free engine for managing linked open data, the JFact 
+reasoner [@jfact_2018], SolR [@solr_2018] for search, SPARQL query [@sparql_2018], Jena as a triple store [@jena_2018], supporting both TDB [@jena_tdb_2018] 
+and SDB [@jena_sdb_2018] on MySQL [@mysql_2018], uses D3 [@bostock_d3_2018] for visualizations, and provides multiple APIs, including
+Triple Pattern Fragments [@verborgh_triple_2016] for rapid remote access to specified data.
 
 Using VIVO, organizations can represent the activities and accomplishments of their 
 scholars as linked open data, and share that data with others.
@@ -146,12 +148,12 @@ scholars as linked open data, and share that data with others.
 # Acknowledgements
 
 The authors wish to acknowledge the foundational work done on VIVO, and VIVO concepts by 
-the team at the Mann Agricultural Library, Cornell University, led by Jon Corson-Rikert.  
+the team at the Mann Agricultural Library, Cornell University, led by Jon Corson-Rikert. 
 The authors also wish to acknowledge NIH grant 1U24RR029822-01 to the first author, which 
 funded the work of more than 120 co-investigators in the further development of the 
-VIVO software, and NIH grant xxxxxxx to Dr. Melissa Haendel of Oregon Health Science 
-University which funded significant advances in the VIVO Integrated Semantic Framework, 
-which VIVO uses to represent scholarship.  Finally, the authors wish to acknowledge the 
+VIVO software, and to Dr. Melissa Haendel of Oregon Health Science 
+University for her significant advances in the VIVO Integrated Semantic Framework [@vivo-isf-ontology:_2018], 
+which VIVO uses to represent scholarship. Finally, the authors wish to acknowledge the 
 many hundreds of members of the VIVO community around the world, who volunteer their 
 time and effort to advance the art of representing scholarship as linked open data. The 
 work described here builds on the work of many others.

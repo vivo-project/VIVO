@@ -89,7 +89,7 @@ edu.cornell.mannlib.vivo.orcid.OrcidContextSetup
 # Register the extensions to the IndividualResponseBuilder (e.g. alt metric, plum analytics)
 edu.cornell.mannlib.vitro.webapp.controller.individual.VIVOIndividualResponseBuilderExtension$Setup
 
-# This should be near the end, because it will issue a warning if the connection to Solr times out.
-edu.cornell.mannlib.vitro.webapp.servlet.setup.SolrSmokeTest
+# This should be near the end, because it will issue a warning if the connection to the SearchEngine times out.
+edu.cornell.mannlib.vitro.webapp.servlet.setup.SearchEngineSmokeTest
 
 org.vivoweb.webapp.startup.i18nSetup
