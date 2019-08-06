@@ -5949,7 +5949,7 @@
     <vitro:fullPropertyNameAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >nearestGeographicLocation</vitro:fullPropertyNameAnnot>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >This relates something to its geographic location, for example, an organization to its geographic location. 
+    >This relates something to its geographic location, for example, an organization to its geographic location.
 </vitro:publicDescriptionAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#dateFiled">

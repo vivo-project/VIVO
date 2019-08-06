@@ -4,7 +4,7 @@
 var publicationToPersonUtils = {
 
     onLoad: function(href, blankSentinel) {
-        this.initObjectReferences();                 
+        this.initObjectReferences();
         this.bindEventListeners();
         this.autoDateLabel.hide();
         this.baseHref = href;
@@ -16,11 +16,11 @@ var publicationToPersonUtils = {
         if ( this.findValidationErrors() ) {
             this.resetLastNameLabel();
         }
-        
+
     },
 
     initObjectReferences: function() {
-    
+
         this.form = $('#addpublicationToPerson');
         this.pubTitle = $('input#title');
         this.collection = $('#collection');
@@ -49,7 +49,7 @@ var publicationToPersonUtils = {
         this.cancel = $('.cancel');
         this.fullViewOnly = $('.fullViewOnly');
         this.autoDateLabel = null;
-        
+
         this.form.find('label').each(function() {
             if ( $(this).attr('for') == "dateTime-year") {
                 publicationToPersonUtils.autoDateLabel = $(this);
@@ -59,55 +59,55 @@ var publicationToPersonUtils = {
         this.pubAcSelection = $('div#pubAcSelection');
         this.fieldsForNewPub = $('#fieldsForNewPub');
         this.changeLink = this.pubAcSelection.children('p').children('#changeSelection');
-        
+
         // may not need this
         this.firstName.attr('disabled', false);
-        
+
     },
-    
+
     bindEventListeners: function() {
         this.idCache = {};
-        
+
         this.typeSelector.change(function() {
-            // controls the fieldsForNewPub div. If the user selects an existing pub/title, 
-            // this div gets hidden. 
-            publicationToPersonUtils.showFieldsForPub(); 
+            // controls the fieldsForNewPub div. If the user selects an existing pub/title,
+            // this div gets hidden.
+            publicationToPersonUtils.showFieldsForPub();
             // after a cancel, the first reset of the type selector resulted in all fields being displayed.
-            // by delaying this function just slightly, the timing issue between this js and the 
-            // customFormWithAutocomplete js is resolved 
+            // by delaying this function just slightly, the timing issue between this js and the
+            // customFormWithAutocomplete js is resolved
             window.setTimeout('publicationToPersonUtils.displayFieldsForType()', 60);
         });
-        
+
         // we need the delay in the next two functions to ensure the correct timing after the user
         // selects the ac item. The .change handles a mouse click; .blur an arrow key and tab selection
         this.pubTitle.change( function(objEvent) {
-           window.setTimeout('publicationToPersonUtils.hideFieldsForPub()', 180); 
+           window.setTimeout('publicationToPersonUtils.hideFieldsForPub()', 180);
         });
-        
+
         this.pubTitle.blur( function(objEvent) {
-           window.setTimeout('publicationToPersonUtils.hideFieldsForPub()', 180); 
+           window.setTimeout('publicationToPersonUtils.hideFieldsForPub()', 180);
         });
-        
+
         this.changeLink.click( function() {
-           publicationToPersonUtils.showFieldsForPub(); 
+           publicationToPersonUtils.showFieldsForPub();
         });
-        
+
         this.form.submit(function() {
             publicationToPersonUtils.resolveEditorNames();
-        });            
-                
+        });
+
     },
-    
+
     hideFieldsForPub: function() {
        if ( this.pubAcSelection.attr('class').indexOf('userSelected') != -1 ) {
            this.fieldsForNewPub.slideUp(250);
        }
     },
-    
+
     showFieldsForPub: function() {
         this.fieldsForNewPub.show();
     },
-    
+
     resetAcSelection: function(groupName) {
         var $acSelection = this.form.find("div.acSelection[acGroupName='" + groupName + "']");
         this.hideFields($acSelection);
@@ -116,7 +116,7 @@ var publicationToPersonUtils = {
         $acSelection.find("span").text('');
         $acSelection.find("a.verifyMatch").attr('href', this.baseHref);
     },
-    
+
     getAcUriReceiverVal: function(groupName) {
         var $collectionDiv = this.form.find("div.acSelection[acGroupName='" + groupName + "']");
         return $collectionDiv.find('input#'+ groupName + 'Uri').val();
@@ -149,7 +149,7 @@ var publicationToPersonUtils = {
         var selectedType = this.typeSelector.find(':selected').text();
 
         if ( selectedType == 'Academic Article' ) {
-            // if the user has changed type, keep any relevant values and display the 
+            // if the user has changed type, keep any relevant values and display the
             // acSelection as appropriate
             var ckForVal = this.getAcUriReceiverVal('collection');
             if ( ckForVal == '' || ckForVal == this.sentinel ) {
@@ -161,7 +161,7 @@ var publicationToPersonUtils = {
             this.issueLabel.show();
             this.startPage.parent('p').show();
             this.sPLabel.parent('p').show();
-            
+
             // if the user has changed type, ensure that irrelevant fields are cleared
             // and reset an acSelection divs
             if ( this.book.val() != '' && this.book.val().substring(0, 18) != publicationToPersonUtils.selectAnExisting ) {
@@ -184,13 +184,13 @@ var publicationToPersonUtils = {
                 this.proceedingsOf.val('');
                 this.resetAcSelection('event');
             }
-                        
+
             this.locale.val('');
             this.number.val('');
             this.chapterNbr.val('');
         }
         else if ( selectedType == 'Chapter' ) {
-            // if the user has changed type, keep any relevant values and display the 
+            // if the user has changed type, keep any relevant values and display the
             // acSelection as appropriate
             var ckForVal = this.getAcUriReceiverVal('book');
             if ( ckForVal == '' || ckForVal == this.sentinel ) {
@@ -204,20 +204,20 @@ var publicationToPersonUtils = {
             if ( ckForVal == '' || ckForVal == this.sentinel ) {
                 this.publisher.parent('p').show();
             }
-            
-            this.locale.parent('p').show();            
+
+            this.locale.parent('p').show();
             this.volume.show();
             this.volLabel.show();
             this.chapterNbr.show();
             this.chapterNbrLabel.show();
             this.startPage.parent('p').show();
             this.sPLabel.parent('p').show();
-            
+
             // if the user is changing type, ensure that irrelevant fields are cleared
             // and reset an acSelection divs
             if ( this.collection.val() != ''  && this.collection.val().substring(0, 18) != publicationToPersonUtils.selectAnExisting ) {
                 this.collection.val('');
-                this.resetAcSelection('collection');                
+                this.resetAcSelection('collection');
             }
             if ( this.presentedAt.val() != ''  && this.presentedAt.val().substring(0, 18) != publicationToPersonUtils.selectAnExisting ) {
                 this.presentedAt.val('');
@@ -227,14 +227,14 @@ var publicationToPersonUtils = {
                 this.proceedingsOf.val('');
                 this.resetAcSelection('event');
             }
-                                    
+
             this.number.val('');
             this.issue.val('');
             this.startPage.val('');
             this.endPage.val('');
         }
         else if ( selectedType == 'Book' || selectedType == 'Edited Book' ) {
-            // if the user has changed type, keep any relevant values and display the 
+            // if the user has changed type, keep any relevant values and display the
             // acSelection as appropriate
             var ckForVal = this.getAcUriReceiverVal('editor');
             if ( ckForVal == '' || ckForVal == this.sentinel ) {
@@ -244,8 +244,8 @@ var publicationToPersonUtils = {
             if ( ckForVal == '' || ckForVal == this.sentinel ) {
                 this.publisher.parent('p').show();
             }
-            
-            this.locale.parent('p').show();            
+
+            this.locale.parent('p').show();
             this.volume.show();
             this.volLabel.show();
 
@@ -253,7 +253,7 @@ var publicationToPersonUtils = {
             // and reset an acSelection divs
             if ( this.collection.val() != ''  && this.collection.val().substring(0, 18) != publicationToPersonUtils.selectAnExisting ) {
                 this.collection.val('');
-                this.resetAcSelection('collection');                
+                this.resetAcSelection('collection');
             }
             if ( this.presentedAt.val() != ''  && this.presentedAt.val().substring(0, 18) != publicationToPersonUtils.selectAnExisting ) {
                 this.presentedAt.val('');
@@ -263,7 +263,7 @@ var publicationToPersonUtils = {
                 this.proceedingsOf.val('');
                 this.resetAcSelection('event');
             }
-                        
+
             this.number.val('');
             this.issue.val('');
             this.startPage.val('');
@@ -271,13 +271,13 @@ var publicationToPersonUtils = {
             this.chapterNbr.val('');
         }
         else if ( selectedType == 'Conference Paper' ) {
-            // if the user has changed type, keep any relevant values and display the 
+            // if the user has changed type, keep any relevant values and display the
             // acSelection as appropriate
             ckForVal = this.getAcUriReceiverVal('conference');
             if ( ckForVal == '' || ckForVal == this.sentinel ) {
                 this.presentedAt.parent('p').show();
             }
-            
+
             this.startPage.parent('p').show();
             this.sPLabel.parent('p').show();
 
@@ -285,7 +285,7 @@ var publicationToPersonUtils = {
             // and reset an acSelection divs
             if ( this.collection.val() != ''  && this.collection.val().substring(0, 18) != publicationToPersonUtils.selectAnExisting ) {
                 this.collection.val('');
-                this.resetAcSelection('collection');                
+                this.resetAcSelection('collection');
             }
             if ( this.book.val() != '' && this.book.val().substring(0, 18) != publicationToPersonUtils.selectAnExisting ) {
                 this.book.val('');
@@ -311,7 +311,7 @@ var publicationToPersonUtils = {
             this.chapterNbr.val('');
         }
         else if ( selectedType == 'Conference Poster' || selectedType == 'Speech') {
-            // if the user has changed type, keep any relevant values and display the 
+            // if the user has changed type, keep any relevant values and display the
             // acSelection as appropriate
             var ckForVal = this.getAcUriReceiverVal('conference');
             if ( ckForVal == '' || ckForVal == this.sentinel ) {
@@ -322,7 +322,7 @@ var publicationToPersonUtils = {
             // and reset an acSelection divs
             if ( this.collection.val() != '' && this.collection.val().substring(0, 18) != publicationToPersonUtils.selectAnExisting ) {
                 this.collection.val('');
-                this.resetAcSelection('collection');                
+                this.resetAcSelection('collection');
             }
             if ( this.book.val() != '' && this.book.val().substring(0, 18) != publicationToPersonUtils.selectAnExisting ) {
                 this.book.val('');
@@ -353,7 +353,7 @@ var publicationToPersonUtils = {
             // and reset an acSelection divs
             if ( this.collection.val() != '' && this.collection.val().substring(0, 18) != publicationToPersonUtils.selectAnExisting ) {
                 this.collection.val('');
-                this.resetAcSelection('collection');                
+                this.resetAcSelection('collection');
             }
             if ( this.book.val() != '' && this.book.val().substring(0, 18) != publicationToPersonUtils.selectAnExisting ) {
                 this.book.val('');
@@ -381,9 +381,9 @@ var publicationToPersonUtils = {
             this.issue.val('');
             this.startPage.val('');
             this.endPage.val('');
-            this.chapterNbr.val('');     
+            this.chapterNbr.val('');
         }
-        
+
      },
 
      resolveEditorNames: function() {
@@ -403,10 +403,10 @@ var publicationToPersonUtils = {
                  name = lastName;
                  if (firstName) {
                      name += ', ' + firstName;
-                 }            
+                 }
                  this.editor.val(name);
                  this.lastName.val(lastName);
-             } 
+             }
              else {
                  this.disableNameFields();
              }
@@ -414,9 +414,9 @@ var publicationToPersonUtils = {
         else {
             this.disableNameFields();
         }
-        
+
      },
-     
+
      disableNameFields: function() {
          this.firstName.attr('disabled', 'disabled');
          this.lastName.attr('disabled', 'disabled');
@@ -429,5 +429,5 @@ var publicationToPersonUtils = {
              this.editor.val(temp);
          }
      }
-     
+
 }

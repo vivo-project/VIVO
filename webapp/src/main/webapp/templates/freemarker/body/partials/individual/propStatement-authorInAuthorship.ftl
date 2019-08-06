@@ -1,11 +1,11 @@
 <#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#-- Custom object property statement view for faux property "selected publications". See the PropertyConfig.n3 file for details.
-    
+
      This template must be self-contained and not rely on other variables set for the individual page, because it
-     is also used to generate the property statement during a deletion.  
+     is also used to generate the property statement during a deletion.
  -->
- 
+
 <#import "lib-sequence.ftl" as s>
 <#import "lib-datetime.ftl" as dt>
 
@@ -137,8 +137,10 @@
                 <#assign plumIdParam = "isbn=${statement.isbn13}">
             <#elseif statement.oclc??>
                 <#assign plumIdParam = "oclc=${statement.oclc}">
+            <#else>
+                <#assign plumIdParam = "">
             </#if>
-            <#if plumIdParam??>
+            <#if plumIdParam?has_content>
                 <div class="plum-print-wrapper" style="display: inline-block; vertical-align: top">
                     <a class="plumx-plum-print-popup"
                        href="https://plu.mx/plum/a/?${plumIdParam}"

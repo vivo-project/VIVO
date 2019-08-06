@@ -32,7 +32,7 @@ public class ManagePublicationsForIndividualController extends FreemarkerHttpSer
 
     private static final Log log = LogFactory.getLog(ManagePublicationsForIndividualController.class.getName());
     private static final String TEMPLATE_NAME = "managePublicationsForIndividual.ftl";
-    
+
     @Override
 	protected AuthorizationRequest requiredActions(VitroRequest vreq) {
 		return SimplePermission.DO_FRONT_END_EDITING.ACTION;
@@ -54,22 +54,21 @@ public class ManagePublicationsForIndividualController extends FreemarkerHttpSer
 
         List<String> allSubclasses = getAllSubclasses(publications);
         body.put("allSubclasses", allSubclasses);
-        
+
         Individual subject = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subjectUri);
         if( subject != null && subject.getName() != null ){
              body.put("subjectName", subject.getName());
         }else{
              body.put("subjectName", null);
         }
-        
+
         return new TemplateResponseValues(TEMPLATE_NAME, body);
     }
-  
+
     private static String PUBLICATION_QUERY = ""
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
         + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
         + "PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> \n"
-        + "PREFIX afn: <http://jena.apache.org/ARQ/function#> \n"
         + "SELECT DISTINCT ?subclass ?authorship (str(?label) as ?title) ?pub ?hideThis WHERE { \n"
         + "    ?subject core:relatedBy ?authorship . \n"
         + "    ?authorship a core:Authorship  . \n"
@@ -86,10 +85,10 @@ public class ManagePublicationsForIndividualController extends FreemarkerHttpSer
         + "            ?pub a <http://purl.org/ontology/bibo/Document> . \n"
         + "            ?pub vitro:mostSpecificType ?subclass . \n"
         + "        } \n"
-        + "    } \n" 
+        + "    } \n"
         + "    OPTIONAL { ?authorship core:hideFromDisplay ?hideThis } \n"
         + "} ORDER BY ?subclass ?title";
-    
+
     HashMap<String, List<Map<String,String>>>  getPublications(String subjectUri, VitroRequest vreq) {
 
         VClassDao vcDao = vreq.getUnfilteredAssertionsWebappDaoFactory().getVClassDao();
@@ -119,8 +118,8 @@ public class ManagePublicationsForIndividualController extends FreemarkerHttpSer
             }
         } catch (Exception e) {
             log.error(e, e);
-        }    
-       
+        }
+
         return subclassToPublications;
     }
 

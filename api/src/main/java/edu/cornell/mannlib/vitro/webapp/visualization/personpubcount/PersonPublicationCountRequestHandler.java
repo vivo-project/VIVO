@@ -27,7 +27,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
 /**
- * 
+ *
  * This request handler is used to serve the content related to an individual's
  * publications over the years like, 1. Sprakline representing this 2. An entire
  * page dedicated to the sparkline vis which will also have links to download
@@ -36,7 +36,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequ
  * years. 4. Downloadable PDf file containing the publications content, among
  * other things. Currently this is disabled because the feature is half-baked.
  * We plan to activate this in the next major release.
- * 
+ *
  * @author cdtank
  */
 public class PersonPublicationCountRequestHandler implements
@@ -63,7 +63,7 @@ VisualizationRequestHandler {
         /* personPublicationCountDynamicActivator.ftl template needs to know which is the requesting template. */
         String requestingTemplate = vitroRequest
             					.getParameter(
-										VisualizationFrameworkConstants.REQUESTING_TEMPLATE_KEY);  
+										VisualizationFrameworkConstants.REQUESTING_TEMPLATE_KEY);
 
 		QueryRunner<Set<Activity>> queryManager = new PersonPublicationCountQueryRunner(
 															personURI,
@@ -76,7 +76,7 @@ VisualizationRequestHandler {
 		 * Create a map from the year to number of publications. Use the
 		 * BiboDocument's parsedPublicationYear to populate the data.
 		 */
-		Map<String, Integer> yearToPublicationCount = 
+		Map<String, Integer> yearToPublicationCount =
 				UtilityFunctions.getYearToActivityCount(authorDocuments);
 
 		boolean shouldVIVOrenderVis = false;
@@ -95,11 +95,11 @@ VisualizationRequestHandler {
 		 * Computations required to generate HTML for the sparkline & related
 		 * context.
 		 */
-		PersonPublicationCountVisCodeGenerator visualizationCodeGenerator = 
+		PersonPublicationCountVisCodeGenerator visualizationCodeGenerator =
 				new PersonPublicationCountVisCodeGenerator(
-						personURI, 
-						visMode, 
-						visContainer, 
+						personURI,
+						visMode,
+						visContainer,
 						yearToPublicationCount,
 						log);
 
@@ -109,12 +109,12 @@ VisualizationRequestHandler {
 				shouldVIVOrenderVis, requestingTemplate);
 
 	}
-	
+
 	@Override
 	public ResponseValues generateVisualizationForShortURLRequests(
 			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
 			Dataset dataSource) throws MalformedQueryParametersException {
-		throw new UnsupportedOperationException("Person Publication Count Visualization does not provide " 
+		throw new UnsupportedOperationException("Person Publication Count Visualization does not provide "
 					+ "Short URL Response.");
 	}
 
@@ -136,7 +136,7 @@ VisualizationRequestHandler {
 		 * Create a map from the year to number of publications. Use the
 		 * BiboDocument's parsedPublicationYear to populate the data.
 		 */
-		Map<String, Integer> yearToPublicationCount = 
+		Map<String, Integer> yearToPublicationCount =
 				UtilityFunctions.getYearToActivityCount(authorDocuments);
 
 		String authorName = ((PersonPublicationCountQueryRunner) queryManager).getAuthorName();
@@ -172,22 +172,22 @@ VisualizationRequestHandler {
 		 * Create a map from the year to number of publications. Use the
 		 * BiboDocument's parsedPublicationYear to populate the data.
 		 */
-		Map<String, Integer> yearToPublicationCount = 
+		Map<String, Integer> yearToPublicationCount =
 				UtilityFunctions.getYearToActivityCount(authorDocuments);
 
 		/*
 		 * Computations required to generate HTML for the sparkline & related
 		 * context.
 		 */
-		PersonPublicationCountVisCodeGenerator visualizationCodeGenerator = 
+		PersonPublicationCountVisCodeGenerator visualizationCodeGenerator =
 				new PersonPublicationCountVisCodeGenerator(
-						personURI, 
-						visMode, 
-						visContainer, 
+						personURI,
+						visMode,
+						visContainer,
 						yearToPublicationCount,
 						log);
 
-		SparklineData sparklineData = 
+		SparklineData sparklineData =
 				visualizationCodeGenerator.getValueObjectContainer();
 
 		return prepareStandaloneResponse(vitroRequest, sparklineData);
@@ -215,7 +215,7 @@ VisualizationRequestHandler {
 	/**
 	 * Provides response when csv file containing the publication count over the
 	 * years is requested.
-	 * 
+	 *
 	 * @param authorName Name of author
 	 * @param yearToPublicationCount Year / publication counts
 	 */
@@ -234,11 +234,11 @@ VisualizationRequestHandler {
 									+ "_publications-per-year" + ".csv";
 
 		Map<String, String> fileData = new HashMap<String, String>();
-		fileData.put(DataVisualizationController.FILE_NAME_KEY, 
+		fileData.put(DataVisualizationController.FILE_NAME_KEY,
 					 outputFileName);
-		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
+		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY,
 					 "application/octet-stream");
-		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
+		fileData.put(DataVisualizationController.FILE_CONTENT_KEY,
 					 getPublicationsOverTimeCSVContent(yearToPublicationCount));
 
 		return fileData;
@@ -247,7 +247,7 @@ VisualizationRequestHandler {
 	/**
 	 * Provides response when an entire page dedicated to publication sparkline
 	 * is requested.
-	 * 
+	 *
 	 * @param vreq Vitro Request
 	 * @param valueObjectContainer Sparkline Data
 	 */
@@ -267,7 +267,7 @@ VisualizationRequestHandler {
 	/**
 	 * Provides response when the publication sparkline has to be rendered in
 	 * already existing page, e.g. profile page.
-	 * 
+	 *
 	 * @param vreq Vitro Request
 	 * @param valueObjectContainer Sparkline data
 	 * @param shouldVIVOrenderVis Flag to render visualization

@@ -37,25 +37,25 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
     final static String dateTimeValueType = vivoCore + "DateTimeValue";
     final static String dateTimeValue = vivoCore + "dateTime";
     final static String dateTimePrecision = vivoCore + "dateTimePrecision";
-    
+
     public PersonHasAdvisorRelationshipGenerator() {}
-    
+
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
             HttpSession session) throws Exception {
-        
+
         EditConfigurationVTwo conf = new EditConfigurationVTwo();
-        
+
         initBasics(conf, vreq);
         initPropertyParameters(vreq, session, conf);
-        initObjectPropForm(conf, vreq);               
-        
+        initObjectPropForm(conf, vreq);
+
         conf.setTemplate("personHasAdvisorRelationship.ftl");
-        
+
         conf.setVarNameForSubject("person");
         conf.setVarNameForPredicate("predicate");
         conf.setVarNameForObject("advisorRole");
-        
+
         conf.setN3Required( Arrays.asList( n3ForNewAdvisingRelationship,
                                            advisingRelLabelAssertion,
                                            advisingRelTypeAssertion ) );
@@ -66,9 +66,9 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
                                            lastNameAssertion,
                                            n3ForExistingSubjAreaAssertion, //relationship to existing subject area
                                            n3ForNewSubjAreaAssertion, //this will include all the new information that needs to be captured
-                                           n3ForStart, 
+                                           n3ForStart,
                                            n3ForEnd ) );
-        
+
         conf.addNewResource("advisingRelationship", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("newAdvisee", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("vcardAdvisee", DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -79,19 +79,19 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
         conf.addNewResource("intervalNode", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("startNode", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("endNode", DEFAULT_NS_FOR_NEW_RESOURCE);
-        
-        //uris in scope: none   
+
+        //uris in scope: none
         //literals in scope: none
-        
+
         conf.setUrisOnform(Arrays.asList("advisingRelType", "existingSubjArea", "degree", "existingAdvisee"));
         conf.setLiteralsOnForm(Arrays.asList("advisingRelLabel", "subjAreaLabel", "adviseeLabel", "firstName", "lastName", "subjAreaLabelDisplay", "adviseeLabelDisplay" ));
-        
+
         conf.addSparqlForExistingLiteral("advisingRelLabel", advisingRelLabelQuery);
         conf.addSparqlForExistingLiteral("adviseeLabel", adviseeLabelQuery);
         conf.addSparqlForExistingLiteral("subjAreaLabel", subjAreaLabelQuery);
         conf.addSparqlForExistingLiteral("startField-value", existingStartDateQuery);
         conf.addSparqlForExistingLiteral("endField-value", existingEndDateQuery);
-        
+
         conf.addSparqlForExistingUris("advisingRelType", advisingRelTypeQuery);
         conf.addSparqlForExistingUris("advisingRelationship", existingAdvisingRelQuery);
         conf.addSparqlForExistingUris("adviseeRole", existingAdviseeRoleQuery);
@@ -103,8 +103,8 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
         conf.addSparqlForExistingUris("endNode", existingEndNodeQuery);
         conf.addSparqlForExistingUris("startField-precision", existingStartPrecisionQuery);
         conf.addSparqlForExistingUris("endField-precision", existingEndPrecisionQuery);
-        
-        conf.addField( new FieldVTwo().                        
+
+        conf.addField( new FieldVTwo().
                 setName("advisingRelType").
                 setValidators( list("nonempty") ).
                 setOptions( new ChildVClassesWithParent(advisingRelClass))
@@ -129,8 +129,8 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
                 );
 
         conf.addField( new FieldVTwo(). // options set by auto complete JS
-                setName("existingSubjArea") 
-                );             
+                setName("existingSubjArea")
+                );
 
         conf.addField( new FieldVTwo().
                 setName("subjAreaLabel").
@@ -140,13 +140,13 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
 
         conf.addField( new FieldVTwo().
                 setName("degree").
-                setOptions( 
+                setOptions(
                     new IndividualsViaVClassOptions(degreeClass))
                 );
 
         conf.addField( new FieldVTwo(). // options set by auto complete JS
-                setName("existingAdvisee")                
-        );                
+                setName("existingAdvisee")
+        );
 
         conf.addField( new FieldVTwo().
                 setName("adviseeLabel").
@@ -167,16 +167,16 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
                 );
 
         conf.addField( new FieldVTwo().setName("startField").
-                setEditElement( 
-                        new DateTimeWithPrecisionVTwo(null, 
+                setEditElement(
+                        new DateTimeWithPrecisionVTwo(null,
                                 VitroVocabulary.Precision.YEAR.uri(),
                                 VitroVocabulary.Precision.NONE.uri())
                                 )
                 );
 
         conf.addField( new FieldVTwo().setName("endField").
-                setEditElement( 
-                        new DateTimeWithPrecisionVTwo(null, 
+                setEditElement(
+                        new DateTimeWithPrecisionVTwo(null,
                                 VitroVocabulary.Precision.YEAR.uri(),
                                 VitroVocabulary.Precision.NONE.uri())
                                 )
@@ -186,98 +186,98 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
         conf.addValidator(new AntiXssValidation());
         conf.addValidator(new FirstAndLastNameValidator("existingAdvisee"));
         addFormSpecificData(conf, vreq);
-        
+
         prepare(vreq, conf);
         return conf;
     }
 
     /* N3 assertions  */
 
-    final static String n3ForNewAdvisingRelationship = 
-        "@prefix vivo: <" + vivoCore + "> . \n\n" +   
+    final static String n3ForNewAdvisingRelationship =
+        "@prefix vivo: <" + vivoCore + "> . \n\n" +
         "?person <http://vivoweb.org/ontology/core#relatedBy>  ?advisingRelationship . \n" +
-        "?advisingRelationship a  <" + advisingRelClass + "> . \n" +              
+        "?advisingRelationship a  <" + advisingRelClass + "> . \n" +
         "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?person . \n" +
         "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
-        "?advisorRole a  <" + advisorRoleClass + "> . \n" +              
+        "?advisorRole a  <" + advisorRoleClass + "> . \n" +
         "?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         "?person <http://purl.obolibrary.org/obo/RO_0000053>  ?advisorRole . \n" +
         "?advisorRole <http://purl.obolibrary.org/obo/RO_0000052>  ?person . ";
-    
-    final static String advisingRelLabelAssertion  =      
+
+    final static String advisingRelLabelAssertion  =
         "?advisingRelationship <"+ label + "> ?advisingRelLabel .";
-    
-    final static String advisingRelTypeAssertion  =      
+
+    final static String advisingRelTypeAssertion  =
         "?advisingRelationship a ?advisingRelType .";
 
-    final static String n3ForNewAdviseeAssertion  =      
+    final static String n3ForNewAdviseeAssertion  =
         "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?newAdvisee . \n" +
         "?newAdvisee <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         "?newAdvisee <" + label + "> ?adviseeLabel . \n" +
         "?newAdvisee a <" + adviseeClass + ">  . \n" +
         "?newAdvisee <http://purl.obolibrary.org/obo/RO_0000053>  ?adviseeRole . \n" +
         "?adviseeRole <http://purl.obolibrary.org/obo/RO_0000052>  ?newAdvisee . \n" +
-        "?adviseeRole a  <" + adviseeRoleClass + "> . \n" +              
+        "?adviseeRole a  <" + adviseeRoleClass + "> . \n" +
         "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?adviseeRole . \n" +
         "?adviseeRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . ";
-    
-    final static String n3ForExistingAdviseeAssertion  =      
+
+    final static String n3ForExistingAdviseeAssertion  =
         "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingAdvisee . \n" +
         "?existingAdvisee <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         "?existingAdvisee <http://purl.obolibrary.org/obo/RO_0000053>  ?adviseeRole . \n" +
         "?adviseeRole <http://purl.obolibrary.org/obo/RO_0000052>  ?existingAdvisee . \n" +
-        "?adviseeRole a  <" + adviseeRoleClass + "> . \n" +              
+        "?adviseeRole a  <" + adviseeRoleClass + "> . \n" +
         "?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?adviseeRole . \n" +
         "?adviseeRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . ";
-    
-    final static String firstNameAssertion  =      
+
+    final static String firstNameAssertion  =
         "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
         "?newAdvisee <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardAdvisee . \n" +
         "?vcardAdvisee <http://purl.obolibrary.org/obo/ARG_2000029>  ?newAdvisee . \n" +
-        "?vcardAdvisee a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+        "?vcardAdvisee a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
         "?vcardAdvisee vcard:hasName  ?vcardName . \n" +
-        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
+        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +
         "?vcardName vcard:givenName ?firstName .";
-    
-    final static String lastNameAssertion  =      
+
+    final static String lastNameAssertion  =
         "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
         "?newAdvisee <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardAdvisee . \n" +
         "?vcardAdvisee <http://purl.obolibrary.org/obo/ARG_2000029>  ?newAdvisee . \n" +
-        "?vcardAdvisee a <http://www.w3.org/2006/vcard/ns#Individual> . \n" + 
+        "?vcardAdvisee a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
         "?vcardAdvisee vcard:hasName  ?vcardName . \n" +
-        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +   
+        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +
         "?vcardName vcard:familyName ?lastName .";
-    
-    final static String degreeAssertion  =      
+
+    final static String degreeAssertion  =
         "?advisingRelationship <http://vivoweb.org/ontology/core#degreeCandidacy> ?degree . \n" +
         " ";
 
     //This is for an existing subject area
     //Where we only need the existing subject area label
-    final static String n3ForExistingSubjAreaAssertion  =      
+    final static String n3ForExistingSubjAreaAssertion  =
         "?advisingRelationship <http://vivoweb.org/ontology/core#hasSubjectArea> ?existingSubjArea . \n" +
-        "?existingSubjArea <http://vivoweb.org/ontology/core#subjectAreaOf> ?advisingRelationship";   
+        "?existingSubjArea <http://vivoweb.org/ontology/core#subjectAreaOf> ?advisingRelationship";
     //For new subject area, we include all new information
     //new subject area should always be a new resource
-    //and the following should only get evaluated 
+    //and the following should only get evaluated
     //when there is something in the label
-    
-    final static String n3ForNewSubjAreaAssertion  =   
-    	"?advisingRelationship <http://vivoweb.org/ontology/core#hasSubjectArea> ?newSubjArea . \n" + 
-	    "?newSubjArea <http://vivoweb.org/ontology/core#subjectAreaOf> ?advisingRelationship . \n" + 
-        "?newSubjArea <"+ label + "> ?subjAreaLabel . \n" + 
-        "?newSubjArea a <" + subjAreaClass + "> . ";    
+
+    final static String n3ForNewSubjAreaAssertion  =
+    	"?advisingRelationship <http://vivoweb.org/ontology/core#hasSubjectArea> ?newSubjArea . \n" +
+	    "?newSubjArea <http://vivoweb.org/ontology/core#subjectAreaOf> ?advisingRelationship . \n" +
+        "?newSubjArea <"+ label + "> ?subjAreaLabel . \n" +
+        "?newSubjArea a <" + subjAreaClass + "> . ";
 
     final static String n3ForStart =
-        "?advisingRelationship <" + advisingRelToInterval + "> ?intervalNode . \n" +    
+        "?advisingRelationship <" + advisingRelToInterval + "> ?intervalNode . \n" +
         "?intervalNode a <" + intervalType + "> . \n" +
-        "?intervalNode <" + intervalToStart + "> ?startNode . \n" +    
+        "?intervalNode <" + intervalToStart + "> ?startNode . \n" +
         "?startNode a <" + dateTimeValueType + "> . \n" +
         "?startNode  <" + dateTimeValue + "> ?startField-value . \n" +
         "?startNode  <" + dateTimePrecision + "> ?startField-precision . \n";
-    
+
     final static String n3ForEnd =
-        "?advisingRelationship <" + advisingRelToInterval + "> ?intervalNode . \n" +    
+        "?advisingRelationship <" + advisingRelToInterval + "> ?intervalNode . \n" +
         "?intervalNode a <" + intervalType + "> . \n" +
         "?intervalNode <" + intervalToEnd + "> ?endNode . \n" +
         "?endNode a <" + dateTimeValueType + "> . \n" +
@@ -286,7 +286,7 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
 
     /* Queries for editing an existing entry */
 
-    final static String existingAdvisingRelQuery  =      
+    final static String existingAdvisingRelQuery  =
         "SELECT ?advisingRelationship WHERE { \n" +
         " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
@@ -294,10 +294,10 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
 
     final static String advisingRelTypeQuery =
     	"PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
-        "SELECT ?advisingRelType WHERE { \n" + 
+        "SELECT ?advisingRelType WHERE { \n" +
         " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
-        " ?advisingRelationship vitro:mostSpecificType ?advisingRelType . \n" + 
+        " ?advisingRelationship vitro:mostSpecificType ?advisingRelType . \n" +
         "}";
 
     final static String advisingRelLabelQuery =
@@ -307,7 +307,7 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
         " ?advisingRelationship <"  + label + "> ?existingAdvisingRelLabel . \n" +
         "}";
 
-    final static String adviseeQuery  =      
+    final static String adviseeQuery  =
         "SELECT ?existingAdvisee WHERE { \n" +
         " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
@@ -332,13 +332,13 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
         " ?existingAdviseeRole a <" + adviseeRoleClass + ">  . \n" +
         "}";
 
-    final static String existingAdviseeRoleQuery  =      
+    final static String existingAdviseeRoleQuery  =
         "SELECT ?existingAdviseeRole WHERE { \n" +
         " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
         " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?existingAdviseeRole . \n" +
         " ?existingAdviseeRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
-        " ?existingAdviseeRole a  <" + adviseeRoleClass + "> . \n" +              
+        " ?existingAdviseeRole a  <" + adviseeRoleClass + "> . \n" +
         "}";
 
     final static String subjAreaQuery =
@@ -350,7 +350,7 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
         " ?existingSubjArea <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type \n" +
         "}";
 
-    final static String subjAreaLabelQuery  =      
+    final static String subjAreaLabelQuery  =
         "SELECT ?existingSubjAreaLabel WHERE { \n" +
         " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
@@ -360,14 +360,14 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
         " ?existingSubjArea <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type \n" +
         "}";
 
-    final static String degreeQuery  =  
+    final static String degreeQuery  =
         "SELECT ?existingDegree WHERE {\n"+
         " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
         " ?advisingRelationship <http://vivoweb.org/ontology/core#degreeCandidacy> ?existingDegree . \n" +
         " ?existingDegree a  <" + degreeClass + "> . \n" +
         "}";
-        
+
     final static String existingStartDateQuery =
         "SELECT ?existingDateStart WHERE { \n" +
         " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
@@ -377,7 +377,7 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
         "  ?intervalNode <" + intervalToStart + "> ?startNode . \n" +
         "  ?startNode a <" + dateTimeValueType +"> . \n" +
         "  ?startNode <" + dateTimeValue + "> ?existingDateStart . }";
-    
+
     final static String existingEndDateQuery =
         "SELECT ?existingEndDate WHERE { \n" +
         " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
@@ -389,48 +389,48 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
         "  ?endNode <" + dateTimeValue + "> ?existingEndDate . }";
 
     final static String existingIntervalNodeQuery =
-        "SELECT ?existingIntervalNode WHERE { \n" + 
+        "SELECT ?existingIntervalNode WHERE { \n" +
         " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
         "  ?advisingRelationship <" + advisingRelToInterval + "> ?existingIntervalNode . \n" +
         "  ?existingIntervalNode a <" + intervalType + "> . }";
 
-    final static String existingStartNodeQuery = 
+    final static String existingStartNodeQuery =
         "SELECT ?existingStartNode WHERE { \n" +
         " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
         "  ?advisingRelationship <" + advisingRelToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n" +
-        "  ?intervalNode <" + intervalToStart + "> ?existingStartNode . \n" + 
+        "  ?intervalNode <" + intervalToStart + "> ?existingStartNode . \n" +
         "  ?existingStartNode a <" + dateTimeValueType + "> .}   ";
 
-    final static String existingEndNodeQuery = 
+    final static String existingEndNodeQuery =
         "SELECT ?existingEndNode WHERE { \n" +
         " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
         "  ?advisingRelationship <" + advisingRelToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n" +
-        "  ?intervalNode <" + intervalToEnd + "> ?existingEndNode . \n" + 
-        "  ?existingEndNode a <" + dateTimeValueType + "> } ";              
+        "  ?intervalNode <" + intervalToEnd + "> ?existingEndNode . \n" +
+        "  ?existingEndNode a <" + dateTimeValueType + "> } ";
 
-    final static String existingStartPrecisionQuery = 
+    final static String existingStartPrecisionQuery =
         "SELECT ?existingStartPrecision WHERE { \n" +
         " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
         "  ?advisingRelationship <" + advisingRelToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n" +
         "  ?intervalNode <" + intervalToStart + "> ?startNode . \n" +
-        "  ?startNode a  <" + dateTimeValueType + "> . \n" +           
+        "  ?startNode a  <" + dateTimeValueType + "> . \n" +
         "  ?startNode <" + dateTimePrecision + "> ?existingStartPrecision . }";
 
-    final static String existingEndPrecisionQuery = 
+    final static String existingEndPrecisionQuery =
         "SELECT ?existingEndPrecision WHERE { \n" +
         " ?advisorRole <http://vivoweb.org/ontology/core#relatedBy> ?advisingRelationship . \n" +
         " ?advisingRelationship <http://vivoweb.org/ontology/core#relates> ?advisorRole . \n" +
         "  ?advisingRelationship <" + advisingRelToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n" +
         "  ?intervalNode <" + intervalToEnd + "> ?endNode . \n" +
-        "  ?endNode a <" + dateTimeValueType + "> . \n" +          
+        "  ?endNode a <" + dateTimeValueType + "> . \n" +
         "  ?endNode <" + dateTimePrecision + "> ?existingEndPrecision . }";
 
 	public void addFormSpecificData(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
@@ -440,10 +440,10 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
 	}
 
 	public String getSparqlForAcFilter(VitroRequest vreq) {
-		String subject = EditConfigurationUtils.getSubjectUri(vreq);			
+		String subject = EditConfigurationUtils.getSubjectUri(vreq);
 		String predicate = EditConfigurationUtils.getPredicateUri(vreq);
 		//Get all objects for existing predicate, filters out results from addition and edit
-		String query =  "SELECT ?objectVar WHERE { " + 
+		String query =  "SELECT ?objectVar WHERE { " +
 			"<" + subject + "> <" + predicate + "> ?objectVar .} ";
 		return query;
 	}

@@ -24,19 +24,19 @@ import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AbstractPr
 /**
  * Permit self-editors to edit the properties of classes with which they share a
  * special relationship. So for example:
- * 
+ *
  * A self-editor may edit properties of an InformationResource for which he is
  * an author, an editor, or in which he is featured.
- * 
+ *
  * A self-editor may edit properties of a Project in which he plays a clinical
  * role.
- * 
+ *
  * Etc.
- * 
+ *
  * NOTE: properties or resources which are restricted by namespace or by access
  * setting will still not be editable, even if this special relationship
  * applies.
- * 
+ *
  * NOTE: This could be further generalized by building a list of authorizing
  * relationships, where each relationship may specify a type of object, a
  * relating property (or chain of properties), and a text message describing the
@@ -124,7 +124,7 @@ public class SelfEditorRelationshipPolicy extends AbstractRelationshipPolicy
 	/**
 	 * When the system starts up, install the policy. This class must be a
 	 * listener in web.xml
-	 * 
+	 *
 	 * The CommonIdentifierBundleFactory already creates the IDs we need.
 	 */
 	public static class Setup implements ServletContextListener {

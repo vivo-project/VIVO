@@ -19,12 +19,12 @@ public class SubjectEntityJSON {
 
 	@JsonProperty
 	private Map<String, String> parentURIToLabel = new HashMap<String, String>();
-	
+
 	public SubjectEntityJSON(String subjectEntityURI, String label,
 			Set<Individual> parentOrganizations) {
 		this.subjectEntityURI = subjectEntityURI;
 		this.subjectEntityLabel = label;
-		
+
 		this.setParentURIToLabel(parentOrganizations);
 	}
 

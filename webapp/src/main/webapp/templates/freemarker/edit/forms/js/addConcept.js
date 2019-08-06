@@ -3,20 +3,20 @@
 var addConceptForm = {
 
     /* *** Initial page setup *** */
-   
+
     onLoad: function() {
-        
+
         if (this.disableFormInUnsupportedBrowsers()) {
             return;
-        }        
+        }
         this.mixIn();
-        this.initObjects();    
+        this.initObjects();
         this.initPage();
     },
 
-    disableFormInUnsupportedBrowsers: function() {       
+    disableFormInUnsupportedBrowsers: function() {
         var disableWrapper = $('#ie67DisableWrapper');
-        
+
         // Check for unsupported browsers only if the element exists on the page
         if (disableWrapper.length) {
             if (vitro.browserUtils.isIELessThan8()) {
@@ -24,8 +24,8 @@ var addConceptForm = {
                 $('.noIE67').hide();
                 return true;
             }
-        }            
-        return false;      
+        }
+        return false;
     },
 
     mixIn: function() {
@@ -38,11 +38,11 @@ var addConceptForm = {
     },
     // On page load, create references for easy access to form elements.
     initObjects: function() {
-        
+
         this.form = $('#addConceptForm');
         this.showFormButtonWrapper = $('#showAddForm');
         this.submit = this.form.find(':submit');
-        this.cancel = this.form.find('.cancel'); 
+        this.cancel = this.form.find('.cancel');
         //Add term
         this.addConceptButton = $('#showAddFormButton');
         //section where results should be displayed
@@ -69,11 +69,11 @@ var addConceptForm = {
         this.maxNumberAlternateLabels = 4;
         this.numberOfMaxInitialSearchResults = 7;
     },
-    
+
     initPage: function() {
     	this.initConceptData();
         this.bindEventListeners();
-              
+
     },
     bindEventListeners: function() {
     	this.searchSubmit.click(function() {
@@ -81,14 +81,14 @@ var addConceptForm = {
             addConceptForm.submitSearchTerm();
             return false;
          });
-    	
+
     	this.form.submit(function() {
-			return addConceptForm.prepareSubmit(); 
-        });     
-    	
+			return addConceptForm.prepareSubmit();
+        });
+
     	this.addConceptButton.click(function() {
     		addConceptForm.initForm();
-    		
+
     	});
     	 this.removeConceptLinks.click(function() {
              addConceptForm.removeExistingConcept(this);
@@ -101,7 +101,7 @@ var addConceptForm = {
     },
     initForm: function() {
         // Hide the button that shows the form
-        this.showFormButtonWrapper.hide(); 
+        this.showFormButtonWrapper.hide();
         this.clearSearchResults();
         // Hide the create own link, add selected button and "or"" span
         this.orSpan.hide();
@@ -114,15 +114,15 @@ var addConceptForm = {
         this.loadingIndicator.addClass("hidden");
         this.showHideSearchResults.hide();
         // Show the form
-        this.form.show();                 
-    },   
+        this.form.show();
+    },
  // On page load, associate data with each existing term  element. Then we don't
     // have to keep retrieving data from or modifying the DOM as we manipulate the
     // authorships.
     initConceptData: function() {
         $('.existingConcept').each(function(index) {
-            $(this).data(existingConceptsData[index]);    
-            $(this).data('position', index+1);      
+            $(this).data(existingConceptsData[index]);
+            $(this).data('position', index+1);
         });
     },
     clearSearchResults:function() {
@@ -221,7 +221,7 @@ var addConceptForm = {
                 } else {
                 	htmlAdd+= "<p>" + addConceptForm.noResultsFound + "</p>";
                 }
-            	
+
             }
             if(htmlAdd.length) {
             	//hide the loading icon again
@@ -303,7 +303,7 @@ var addConceptForm = {
     	var conceptSemanticTypes = [];
     	var conceptBroaderUris = []; //each array element can be a string which is comma delimited for multiple uris
     	var conceptNarrowerUris = [];//same as above
-    	
+
     	checkedElements.each(function() {
     		checkedConceptElement = $(this);
     		checkedConcept = checkedConceptElement.val();
@@ -328,25 +328,25 @@ var addConceptForm = {
     	//would belong to which concept
     	this.externalConceptBroaderUris.val(JSON.stringify(conceptBroaderUris));
     	this.externalConceptNarrowerUris.val(JSON.stringify(conceptNarrowerUris));
-    	
+
     	return true;
-    }, 
+    },
     generateIndividualConceptDisplay: function(cuiURI, label, altLabels, definition, type, definedBy, isBestMatch, broaderUris, narrowerUris) {
-    	var htmlAdd = "<li class='concepts'>" + 
+    	var htmlAdd = "<li class='concepts'>" +
     	"<div class='row'>" +
         "<div class='col-12'>" +
     	"<div class='column conceptLabel'>" +
-    	addConceptForm.generateIndividualCUIInput(cuiURI, label, type, definedBy, broaderUris, narrowerUris) +  
-    	addConceptForm.generateIndividualLabelsDisplay(label, altLabels) + addConceptForm.generateIndividualTypeDisplay(type) + "</div>" + 
-    	addConceptForm.generateIndividualDefinitionDisplay(definition) + 
+    	addConceptForm.generateIndividualCUIInput(cuiURI, label, type, definedBy, broaderUris, narrowerUris) +
+    	addConceptForm.generateIndividualLabelsDisplay(label, altLabels) + addConceptForm.generateIndividualTypeDisplay(type) + "</div>" +
+    	addConceptForm.generateIndividualDefinitionDisplay(definition) +
     	addConceptForm.generateBestOrAlternate(isBestMatch) +
     	"</div>" +
         "</div>" +
         "</li>";
     	return htmlAdd;
-    }, 
+    },
     generateIndividualCUIInput:function(cuiURI, label, type, definedBy, broaderUris, narrowerUris) {
-    	return 	"<input type='checkbox'  name='CUI' value='" + cuiURI + "' label='" + 
+    	return 	"<input type='checkbox'  name='CUI' value='" + cuiURI + "' label='" +
     		label + "' conceptType='" + type + "' conceptDefinedBy='" + definedBy + "' " +
     		"broaderUris='" + broaderUris + "' narrowerUris='" + narrowerUris + "'/>";
     },
@@ -355,7 +355,7 @@ var addConceptForm = {
     	var labelDisplay = label;
     	var displayAltLabels = altLabels;
     	if(altLabels != null && altLabels.length > 0) {
-    		//Certain vocabulary services might return a long list of alternate labels, in which case we will show fewer 
+    		//Certain vocabulary services might return a long list of alternate labels, in which case we will show fewer
     		//display only upto a certain number of alternate labels and use an ellipsis to signify there
     		//are additional terms
     		if(altLabels.length > addConceptForm.maxNumberAlternateLabels) {
@@ -373,7 +373,7 @@ var addConceptForm = {
     },
     generateIndividualDefinitionDisplay:function(definition) {
     	//The definition in some cases may be an empty string, so to prevent the div
-    	//from not appearing, we are replacing with 
+    	//from not appearing, we are replacing with
     	if(definition == null || definition.length == 0) {
     		//definition = "&nbsp;";
     		definition = "No definition provided.";
@@ -386,7 +386,7 @@ var addConceptForm = {
     	if(isBestMatch) {
     		className = "bestMatchFlag";
     	}
-    	return "<div class='column'><div class='" + className + "'>&nbsp;</div></div>";	
+    	return "<div class='column'><div class='" + className + "'>&nbsp;</div></div>";
     },
     //Certain vocabulary services return a great number of results, we would like the ability to show more or less of those results
     displayUptoMaxResults:function() {
@@ -398,7 +398,7 @@ var addConceptForm = {
             addConceptForm.showHideSearchResults.find("a#showHideLink").html(addConceptForm.displayMoreEllipsis);
             addConceptForm.showHideSearchResults.find("a#showHideLink").addClass("showmore");
     	}
-    	
+
     },
     validateConceptSelection:function(checkedElements) {
     	var numberElements = checkedElements.length;
@@ -407,27 +407,27 @@ var addConceptForm = {
     		return false;
     	}
     	return true;
-    }, 
+    },
     showUncheckedSourceError:function() {
 		addConceptForm.errors.html("<p class='validationError'>" + addConceptForm.selectVocSource + "</p>");
     },
     removeExistingConcept: function(link) {
         var removeLast = false,
             message = addConceptForm.confirmTermDelete;
-            
+
         if (!confirm(message)) {
             return false;
         }
-        
+
         if ($(link)[0] === $('.remove:last')[0]) {
             removeLast = true;
-        } 
+        }
         //Using primitive rdf edit which expects an n3 string for deletion
         $.ajax({
             url: $(link).attr('href'),
-            type: 'POST', 
+            type: 'POST',
             data: {
-        		additions: '', 
+        		additions: '',
                 retractions: addConceptForm.generateDeletionN3($(link).parents('.existingConcept').data('conceptNodeUri'))
             },
             dataType: 'json',
@@ -435,24 +435,24 @@ var addConceptForm = {
             complete: function(request, status) {
                 var existingConcept,
                     conceptNodeUri;
-            
+
                 if (status === 'success') {
-                    
+
                     existingConcept = $(this).parents('.existingConcept');
                     existingConcept.fadeOut(400, function() {
                         var numConcepts;
                         // For undo link: add to a deletedAuthorships array
-                        // Remove from the DOM                       
+                        // Remove from the DOM
                         $(this).remove();
                         // Actions that depend on the author having been removed from the DOM:
-                        numConcepts = $('.existingConcept').length; // retrieve the length after removing authorship from the DOM        
+                        numConcepts = $('.existingConcept').length; // retrieve the length after removing authorship from the DOM
                     });
 
                 } else {
                     alert(addConceptForm.errorTernNotRemoved);
                 }
             }
-        });        
+        });
     },
     generateDeletionN3: function(conceptNodeUri) {
     	var n3String = "<" + addConceptForm.subjectUri + "> <" + addConceptForm.predicateUri + "> <" + conceptNodeUri + "> .";
@@ -464,6 +464,6 @@ var addConceptForm = {
     }
 };
 
-$(document).ready(function() {   
+$(document).ready(function() {
     addConceptForm.onLoad();
-}); 
+});

@@ -42,9 +42,9 @@
 
   <!-- Listeners ****************************************************** -->
 
-  <!-- 
-      StartupManager instantiates and runs the listeners from startup_listeners.txt 
-      All ServletContextListeners should be listed there, not here.           
+  <!--
+      StartupManager instantiates and runs the listeners from startup_listeners.txt
+      All ServletContextListeners should be listed there, not here.
   -->
   <listener>
     <listener-class>edu.cornell.mannlib.vitro.webapp.startup.StartupManager</listener-class>
@@ -159,7 +159,7 @@
 -->
 
   <!-- ==================== mime types ============================== -->
-  
+
   <mime-mapping>
     <extension>css</extension>
     <mime-type>text/css</mime-type>
@@ -212,7 +212,7 @@
     <extension>xml</extension>
     <mime-type>application/xml</mime-type>
   </mime-mapping>
-    
+
   <!-- ==================== tag libraries ============================== -->
   <jsp-config>
     <taglib>

@@ -1,4 +1,4 @@
-# $This file is distributed under the terms of the license in LICENSE$ 
+# $This file is distributed under the terms of the license in LICENSE$
 
 #
 # Short View configuration
@@ -8,7 +8,7 @@
 # implementation, and should be replaced when the work on the Application and Display
 # Ontology is complete.
 #
-# Find out how to use this file at 
+# Find out how to use this file at
 # https://sourceforge.net/apps/mediawiki/vivo/index.php?title=Using_Short_Views_in_Release_1.5
 #
 
@@ -18,34 +18,34 @@
 @prefix mydomain: <http://vivo.mydomain.edu/individual/> .
 
 #
-# In all views, Facult Members should show the name of the 
+# In all views, Facult Members should show the name of the
 # department they belong to.
 #
 
-vivo:FacultyMember 
+vivo:FacultyMember
 	display:hasCustomView mydomain:facultySearchView ;
 	display:hasCustomView mydomain:facultyIndexView ;
 	display:hasCustomView mydomain:facultyBrowseView .
-	
+
 mydomain:facultySearchView
 	a display:customViewForIndividual ;
 	display:appliesToContext "SEARCH" ;
 	display:hasTemplate "view-search-faculty.ftl" ;
 	display:hasDataGetter mydomain:facultyDepartmentDG .
-	
+
 mydomain:facultyIndexView
 	a display:customViewForIndividual ;
 	display:appliesToContext "INDEX" ;
 	display:hasTemplate "view-index-faculty.ftl" ;
 	display:hasDataGetter mydomain:facultyDepartmentDG .
-	
+
 mydomain:facultyBrowseView
 	a display:customViewForIndividual ;
 	display:appliesToContext "BROWSE" ;
 	display:hasTemplate "view-browse-faculty.ftl" ;
 	display:hasDataGetter mydomain:facultyDepartmentDG ;
 	display:hasDataGetter mydomain:facultyPreferredTitleDG .
-	
+
 mydomain:facultyDepartmentDG
 	a datagetters:SparqlQueryDataGetter ;
 	display:saveToVar "details" ;
@@ -57,11 +57,11 @@ SELECT ?deptName
 WHERE {
 ?individualUri obo:RO_0000053 ?membership .
 ?membership vivo:roleContributesTo ?deptUri .
-?deptUri 
+?deptUri
 	a vivo:AcademicDepartment ;
 	rdfs:label ?deptName .
 }
-LIMIT 20 
+LIMIT 20
 	""" .
 
 mydomain:facultyPreferredTitleDG
@@ -80,7 +80,7 @@ LIMIT 1
 	""" .
 
 #
-# In the INDEX view, Academic departments should show locations 
+# In the INDEX view, Academic departments should show locations
 # and department head.
 #
 

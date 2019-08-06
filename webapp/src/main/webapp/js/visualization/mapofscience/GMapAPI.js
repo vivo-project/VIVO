@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in LICENSE$ */
 /**
- * This is the Google MAP API utilities file to make sure all calls to 
+ * This is the Google MAP API utilities file to make sure all calls to
  * Google API is correct. Please add all common utilities at here.
  */
 var GMAPS = google.maps;
@@ -34,7 +34,7 @@ function createGoogleMarker(options) {
 }
 
 function createInfoWindow(content, maxWidth) {
-	return new GMAPS.InfoWindow({ 
+	return new GMAPS.InfoWindow({
 		content: content,
 		maxWidth: maxWidth
 		});

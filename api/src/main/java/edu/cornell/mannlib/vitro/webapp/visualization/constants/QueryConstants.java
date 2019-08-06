@@ -7,9 +7,9 @@ import java.util.Map;
 
 @SuppressWarnings("serial")
 public class QueryConstants {
-	
+
 	public static final Map<String, String> PREFIX_TO_NAMESPACE = new HashMap<String, String>() { {
-		
+
 			put("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
 			put("rdfs", "http://www.w3.org/2000/01/rdf-schema#");
 			put("xsd", "http://www.w3.org/2001/XMLSchema#");
@@ -41,16 +41,15 @@ public class QueryConstants {
 			put("vivo", "http://vivo.library.cornell.edu/ns/0.1#");
 			put("geo", "http://aims.fao.org/aos/geopolitical.owl#");
 			put("public", "http://vitro.mannlib.cornell.edu/ns/vitro/public#");
-			put("afn", "http://jena.apache.org/ARQ/function#");
 			put("vivosocnet", "http://vivo.cns.iu.edu/ns/#");
 			put("obo", "http://purl.obolibrary.org/obo/");
 			put("vcard", "http://www.w3.org/2006/vcard/ns#");
 	} };
-	
+
 	public static String getSparqlPrefixQuery() {
-		
-		StringBuilder prefixSection = new StringBuilder(); 
-		
+
+		StringBuilder prefixSection = new StringBuilder();
+
 		for (Map.Entry<String, String> prefixEntry : PREFIX_TO_NAMESPACE.entrySet()) {
 			prefixSection.append("PREFIX ").append(prefixEntry.getKey()).append(": <").append(prefixEntry.getValue()).append(">\n");
 		}

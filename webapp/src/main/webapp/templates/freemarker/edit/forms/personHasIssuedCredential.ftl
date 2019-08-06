@@ -40,12 +40,12 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 	<#assign submissionErrors = editSubmission.validationErrors/>
 </#if>
 
-<#if editMode == "edit">    
-        <#assign titleVerb="${i18n().edit_capitalized}">        
+<#if editMode == "edit">
+        <#assign titleVerb="${i18n().edit_capitalized}">
         <#assign submitButtonText="${i18n().save_changes}">
         <#assign disabledVal="disabled">
 <#else>
-<#assign titleVerb="${i18n().create_capitalized}">        
+<#assign titleVerb="${i18n().create_capitalized}">
 <#assign submitButtonText="${i18n().create_entry}">
         <#assign disabledVal=""/>
 </#if>
@@ -60,14 +60,14 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <#if credentialLabelDisplayValue?has_content >
         <#assign credentialLabelValue = credentialLabelDisplayValue />
     </#if>
-        
+
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alt="${i18n().error_alert_icon}" />
         <p>
         <#--Checking if any required fields are empty-->
         <#if lvf.submissionErrorExists(editSubmission, "credentialLabel")>
  	        ${i18n().select_credential_or_enter_name}
-        </#if> 
+        </#if>
         <#list submissionErrors?keys as errorFieldName>
         	<#if errorFieldName == "startField">
         	    <#if submissionErrors[errorFieldName]?contains("before")>
@@ -75,7 +75,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         	    <#else>
         	        ${submissionErrors[errorFieldName]}
         	    </#if>
-        	    
+
         	<#elseif errorFieldName == "endField">
     	        <#if submissionErrors[errorFieldName]?contains("after")>
     	            ${i18n().end_year_must_be_later}
@@ -88,12 +88,12 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     </section>
 </#if>
 
-<@lvf.unsupportedBrowser urls.base /> 
+<@lvf.unsupportedBrowser urls.base />
 
-<section id="personHasIssuedCredential" role="region">        
-    
+<section id="personHasIssuedCredential" role="region">
+
     <form id="personHasIssuedCredential" class="customForm noIE67" action="${submitUrl}"  role="add/edit IssuedCredential">
-    <p class="inline">    
+    <p class="inline">
         <label for="credentialType">${i18n().type_of_credential} ${requiredHint}</label>
         <#assign credentialTypeOpts = editConfiguration.pageData.credentialType />
 
@@ -101,28 +101,28 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <#if editMode == "add" >
 
         <select id="typeSelector" name="credentialType" acGroupName="credential">
-            <option value="" selected="selected">${i18n().select_one}</option>                
-            <#list credentialTypeOpts?keys as key>             
+            <option value="" selected="selected">${i18n().select_one}</option>
+            <#list credentialTypeOpts?keys as key>
                 <#if credentialTypeValue = key>
-                    <option value="${key}"  selected >${credentialTypeOpts[key]}</option>     
+                    <option value="${key}"  selected >${credentialTypeOpts[key]}</option>
                 <#else>
                     <option value="${key}">${credentialTypeOpts[key]}</option>
                 </#if>
             </#list>
         </select>
-        
+
         <#else>
-        <#list credentialTypeOpts?keys as key>             
+        <#list credentialTypeOpts?keys as key>
             <#if credentialTypeValue = key >
-              <span class="readOnly" id="typeSelectorSpan">${credentialTypeOpts[key]}</span> 
+              <span class="readOnly" id="typeSelectorSpan">${credentialTypeOpts[key]}</span>
               <input type="hidden" id="typeSelectorInput" name="credentialType" acGroupName="credential" value="${credentialTypeValue}" >
-            </#if>           
+            </#if>
         </#list>
-        
+
         </#if>
-        
-        
-    </p>     
+
+
+    </p>
     <p>
         <label for="relatedIndLabel">${i18n().credential_name} ${requiredHint}</label>
             <input class="acSelector" size="50"  type="text" id="credential" acGroupName="credential" name="credentialLabel" value="${credentialLabelValue}">
@@ -133,7 +133,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <p class="inline">
             <label>${i18n().selected_credential}:</label>
             <span class="acSelectionInfo"></span>
-            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
             <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="credentialUri" name="existingCredential" value="${credentialValue}" ${flagClearLabelForExisting}="true" />
@@ -141,9 +141,9 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
 
 
-    <p>    
+    <p>
         <input type="hidden" id="issuedCredentialType" name="issuedCredentialType" acGroupName="credential" value="${issuedCredentialTypeValue}">
-    </p>     
+    </p>
 
     <p>
         <label for="yearCredentialedDisplay" id="yearCredentialed">${i18n().year_issued}</label>
@@ -176,7 +176,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <#-- hide the html that gets written, and use java script to pass the value between the two -->
     <div class="hidden">
         <#if htmlForElements?keys?seq_contains("yearCredentialed")>
-		    ${htmlForElements["yearCredentialed"]} 
+		    ${htmlForElements["yearCredentialed"]}
         </#if>
     </div>
 
@@ -206,11 +206,11 @@ var i18nStrings = {
 
 </script>
 
- 
+
 <script type="text/javascript">
  $(document).ready(function(){
     issuedCredentialUtils.onLoad();
-}); 
+});
 </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />')}

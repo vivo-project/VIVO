@@ -15,7 +15,7 @@ typeSelectorLabel
 numDateFields
 roleExamples
 
-Optional values set in JAVA include 
+Optional values set in JAVA include
 ShowRoleLabelField
 ActivityToRolePredicate
 RoleToActivityPredicate

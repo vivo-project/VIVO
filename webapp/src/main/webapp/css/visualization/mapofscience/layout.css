@@ -24,18 +24,18 @@
 }
 
 #map_area {
-	width: 640px; 
+	width: 640px;
 	height: 480px;
 }
 
 #subEntityTableArea {
 	clear: both;
-	width: 100%; 
-	padding-top:5px; 
+	width: 100%;
+	padding-top:5px;
 }
 
 .subEntityTable {
-	width: 32%; 
+	width: 32%;
 	padding-top:5px;
 	padding-right: 8px;
 	float: left;
@@ -73,33 +73,33 @@ a.clear-selected-entities {
 
 /* tooltip */
 #tt {
-	font:11px/1.5 Verdana, Arial, Helvetica, sans-serif; 
-	position:absolute; 
-	display:block; 
+	font:11px/1.5 Verdana, Arial, Helvetica, sans-serif;
+	position:absolute;
+	display:block;
 	background:url(../../../images/visualization/mapofscience/tooltip/tt_left.gif) top left no-repeat
 }
 
 #tttop {
-	display:block; 
-	height:5px; 
-	margin-left:5px; 
-	background:url(../../../images/visualization/mapofscience/tooltip/tt_top.gif) top right no-repeat; 
+	display:block;
+	height:5px;
+	margin-left:5px;
+	background:url(../../../images/visualization/mapofscience/tooltip/tt_top.gif) top right no-repeat;
 	overflow:hidden
 }
 
 #ttcont {
-	display:block; 
-	padding:2px 12px 3px 7px; 
-	margin-left:5px; 
-	background:#666; 
+	display:block;
+	padding:2px 12px 3px 7px;
+	margin-left:5px;
+	background:#666;
 	color:#FFF
 }
 
 #ttbot {
-	display:block; 
-	height:5px; 
-	margin-left:5px; 
-	background:url(../../../images/visualization/mapofscience/tooltip/tt_bottom.gif) top right no-repeat; 
+	display:block;
+	height:5px;
+	margin-left:5px;
+	background:url(../../../images/visualization/mapofscience/tooltip/tt_bottom.gif) top right no-repeat;
 	overflow:hidden
 }
 
@@ -142,7 +142,7 @@ a.clear-selected-entities {
 }
 
 .suborganization-title {
-	vertical-align: middle; 
+	vertical-align: middle;
 	font-weight: bold;
 }
 
@@ -200,7 +200,7 @@ hr.subtle-hr {
 	border: 0;
 }
 
-#main-science-areas-table-container table tr { 
+#main-science-areas-table-container table tr {
 	min-height: 30px;
 	max-height: 30px;
 	height: 30px;
@@ -253,7 +253,7 @@ a.map-of-science-links {
     margin-top: 0;
 }
 
-.filterInfo, 
+.filterInfo,
 .paginatedtabs {
 	font-size: 0.81em;
 }
@@ -266,7 +266,7 @@ a.map-of-science-links {
 }
 
 .subpaginatedtabs span {
-    padding-right: 5px; 
+    padding-right: 5px;
     cursor: pointer;
     color: #2485AE;
 }

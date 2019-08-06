@@ -7,29 +7,29 @@ import java.util.Set;
 
 /**
  * original @author bkoniden (Deepak Konidena)
- * modified by @author cdtank (Chintan Tank) 
+ * modified by @author cdtank (Chintan Tank)
  */
 public class Entity extends Individual {
-	
+
 	private Set<Individual> parents = new LinkedHashSet<Individual>();
 	private Set<SubEntity> children = new LinkedHashSet<SubEntity>();
-	
+
 	public Entity(String entityURI, String entityLabel) {
 		super(entityURI, entityLabel);
 	}
-	
+
 	public Entity(String entityURI) {
 		super(entityURI);
 	}
-	
+
 	public String getEntityURI() {
 		return this.getIndividualURI();
 	}
-	
+
 	public String getEntityLabel() {
 		return this.getIndividualLabel();
 	}
-	
+
 	public void setEntityLabel(String label) {
 		this.setIndividualLabel(label);
 	}
@@ -37,7 +37,7 @@ public class Entity extends Individual {
 	public Set<SubEntity> getSubEntities() {
 		return children;
 	}
-	
+
 	public Set<Individual> getParents() {
 		return parents;
 	}
@@ -45,13 +45,13 @@ public class Entity extends Individual {
 	public void addSubEntity(SubEntity subEntity) {
 		this.children.add(subEntity);
 	}
-	
+
 	public void addSubEntitities(Collection<SubEntity> subEntities) {
 		this.children.addAll(subEntities);
 	}
-	
+
 	public void addParents(Collection<Individual> parents) {
 		this.parents.addAll(parents);
 	}
-	
+
 }

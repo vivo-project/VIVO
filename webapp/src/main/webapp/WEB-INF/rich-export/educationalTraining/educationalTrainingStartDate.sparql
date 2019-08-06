@@ -4,8 +4,8 @@ PREFIX obo: <http://purl.obolibrary.org/obo/>
 CONSTRUCT {
      ?date ?property ?object .
 } WHERE {
-     PERSON_URI obo:RO_0000056 ?educationalTraining . 
-     ?educationalTraining a core:EducationalProcess . 
+     PERSON_URI obo:RO_0000056 ?educationalTraining .
+     ?educationalTraining a core:EducationalProcess .
      ?educationalTraining core:dateTimeInterval ?dateTimeInterval .
      ?dateTimeInterval core:start ?date .
      ?date ?property ?object .

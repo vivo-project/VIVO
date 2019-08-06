@@ -22,7 +22,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
  *
  */
 public class VIVODefaultAddMissingIndividualFormGenerator extends DefaultAddMissingIndividualFormGenerator {
-	
+
 	private Log log = LogFactory.getLog(VIVODefaultAddMissingIndividualFormGenerator.class);
 
     protected Map<String, String> generateNewResources(VitroRequest vreq) {
@@ -37,11 +37,11 @@ public class VIVODefaultAddMissingIndividualFormGenerator extends DefaultAddMiss
     	prefixStrings.add("@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .");
     	return prefixStrings;
     }
-    
+
     protected String getN3ForName() {
     	return "?" + objectVarName + " rdfs:label ?label .";
     }
-    
+
     protected List<String> generateN3Optional(VitroRequest vreq) {
     	List<String> n3Optional = super.generateN3Optional(vreq);
     	n3Optional.add(getN3PrefixesAsString()
@@ -52,7 +52,7 @@ public class VIVODefaultAddMissingIndividualFormGenerator extends DefaultAddMiss
             + " ?newVcardName a vcard:Name . \n"
             + " ?newVcardName vcard:givenName ?firstName . \n"
             + " ?newVcardName vcard:familyName ?lastName . \n");
-    	n3Optional.add(getN3PrefixesAsString() 
+    	n3Optional.add(getN3PrefixesAsString()
     	    + "?" + objectVarName +  "<http://purl.obolibrary.org/obo/ARG_2000028> ?newVcardInd . \n"
             + " ?newVcardInd a vcard:Individual . \n"
             + " ?newVcardInd vcard:hasName  ?newVcardName . \n"
@@ -75,39 +75,39 @@ public class VIVODefaultAddMissingIndividualFormGenerator extends DefaultAddMiss
     protected void setFields(EditConfigurationVTwo editConfiguration, VitroRequest vreq, String predicateUri) {
     	Map<String, FieldVTwo> fields = new HashMap<String, FieldVTwo>();
     	if(EditConfigurationUtils.isObjectProperty(EditConfigurationUtils.getPredicateUri(vreq), vreq)) {
-    		    			      
+
     	    //make name field
     	    FieldVTwo labelField = new FieldVTwo();
-	        labelField.setName("label");      	        
-	        
+	        labelField.setName("label");
+
     	    FieldVTwo firstNameField = new FieldVTwo();
-	        firstNameField.setName("firstName");      	        
-	        
+	        firstNameField.setName("firstName");
+
     	    FieldVTwo middleNameField = new FieldVTwo();
-	        middleNameField.setName("middleName");      	        
-	        
+	        middleNameField.setName("middleName");
+
     	    FieldVTwo lastNameField = new FieldVTwo();
-	        lastNameField.setName("lastName");      	        
-	        
+	        lastNameField.setName("lastName");
+
 	        List<String> validators = new ArrayList<String>();
 	        validators.add("nonempty");
-	        if(!isPersonType(vreq)) { 
-	            labelField.setValidators(validators); 
+	        if(!isPersonType(vreq)) {
+	            labelField.setValidators(validators);
 	        }
-	        if(isPersonType(vreq)) {  
-	            firstNameField.setValidators(validators);   
-	            lastNameField.setValidators(validators);   
+	        if(isPersonType(vreq)) {
+	            firstNameField.setValidators(validators);
+	            lastNameField.setValidators(validators);
 	        }
-	                            
+
 	        fields.put(labelField.getName(), labelField);
 	        fields.put(firstNameField.getName(), firstNameField);
 	        fields.put(middleNameField.getName(), middleNameField);
 	        fields.put(lastNameField.getName(), lastNameField);
-    	        
+
     	} else {
     		log.error("Is not object property so fields not set");
     	}
-    	
+
     	editConfiguration.setFields(fields);
     }
 
@@ -131,11 +131,11 @@ public class VIVODefaultAddMissingIndividualFormGenerator extends DefaultAddMiss
 		VClass type = vreq.getWebappDaoFactory().getVClassDao().getVClassByURI(typeOfNew);
 		return type.getName();
 	}
-	
+
 	public String getFOAFPersonClassURI() {
 		return "http://xmlns.com/foaf/0.1/Person";
 	}
-	
+
 	public boolean isPersonType(VitroRequest vreq) {
 		WebappDaoFactory wdf = vreq.getWebappDaoFactory();
 		Boolean isPersonType = Boolean.FALSE;
@@ -150,7 +150,7 @@ public class VIVODefaultAddMissingIndividualFormGenerator extends DefaultAddMiss
 	    			isPersonType = Boolean.TRUE;
 	    			break;
 	    		}
-	    	}    	
+	    	}
 	    }
 	    return isPersonType;
 	}

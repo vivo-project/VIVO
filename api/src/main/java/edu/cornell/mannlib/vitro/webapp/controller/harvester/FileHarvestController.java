@@ -54,7 +54,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
     private static final String TEMPLATE_DEFAULT = "fileharvest.ftl";
 
     private static final String NORMAL_TERMINATION_LAST_OUTPUT = "File Harvest completed successfully";
-    
+
     private static final String PARAMETER_FIRST_UPLOAD = "firstUpload";
     private static final String PARAMETER_UPLOADED_FILE = "uploadedFile";
     private static final String PARAMETER_MODE = "mode";
@@ -191,7 +191,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
      */
     public static String getHarvesterPath(HttpServletRequest req)
     {
-    	String pathToHarvester = ConfigurationProperties.getBean(req).getProperty("harvester.location"); 
+    	String pathToHarvester = ConfigurationProperties.getBean(req).getProperty("harvester.location");
     	if (pathToHarvester == null) {
     		log.error("The runtime.properties file does not contain a value for 'harvester.location'");
     		return "";
@@ -217,7 +217,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
      */
     private static String getUploadPathBase(ServletContext context) throws Exception
     {
-        String vitroHomeDirectoryName = ApplicationUtils.instance().getHomeDirectory().getPath().toString(); 
+        String vitroHomeDirectoryName = ApplicationUtils.instance().getHomeDirectory().getPath().toString();
         return vitroHomeDirectoryName + "/" + FileStorageImplWrapper.FILE_STORAGE_SUBDIRECTORY + "/" + PATH_TO_UPLOADS;
     }
 
@@ -419,7 +419,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
         	json = generateJson(true);
             log.error(e, e);
         }
-        
+
         try {
         	response.getWriter().write(json.toString());
         } catch(IOException e) {
@@ -477,8 +477,8 @@ public class FileHarvestController extends FreemarkerHttpServlet {
 
                     //remove all entries in "sessionIdTo..." mappings for this session ID
                     clearSessionInfo(sessionId);
-                    
-                    if(sessionInfo.getAbnormalTermination()) 
+
+                    if(sessionInfo.getAbnormalTermination())
                     	abnormalTermination = true;
                 }
 
@@ -500,7 +500,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
         	json = generateJson(true);
             log.error(e, e);
         }
-        
+
         try {
         	response.getWriter().write(json.toString());
         } catch(IOException e) {
@@ -543,9 +543,9 @@ public class FileHarvestController extends FreemarkerHttpServlet {
     private static String getScriptFileLocation(HttpServletRequest req) {
         return getHarvesterPath(req) + PATH_TO_HARVESTER_SCRIPTS + "temp/";
     }
-    
-    
-    
+
+
+
     private File createScriptFile(String scriptFileLocation, String script) throws IOException {
         File scriptDirectory = new File(scriptFileLocation);
         if(!scriptDirectory.exists()) {
@@ -631,7 +631,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
                 Node node = descriptionNodes.item(i);
 
                 ArrayList<String> types = getRdfTypes(node);
-                
+
                 boolean match = false;
                 String[] validRdfTypesForJob = job.getRdfTypesForLinks();
                 for(String rdfType : validRdfTypesForJob) {
@@ -640,7 +640,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
                         break;
                     }
                 }
-                
+
                 if(match) {
 
                     NamedNodeMap attributes = node.getAttributes();
@@ -795,7 +795,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
         public boolean getAbnormalTermination() {
         	return abnormalTermination;
         }
-        
+
         public void finish() {
             finished = true;
         }
@@ -833,7 +833,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
             this.sessionId = sessionId;
             this.script = script;
             this.additionsFilePath = additionsFilePath;
-            this.scriptFileLocation = scriptFileLocation; 
+            this.scriptFileLocation = scriptFileLocation;
             this.job = job;
         }
 
@@ -863,7 +863,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
                     for(String line = processOutputReader.readLine(); line != null; line = processOutputReader.readLine()) {
 
                     	normalTerminationLineFound = line.endsWith(NORMAL_TERMINATION_LAST_OUTPUT); //set every read to ensure it's the last line
-                    	
+
                         //don't add stuff to this list if the main thread is running a "transaction" of copying out the data to send to client and then clearing the list
                         synchronized(unsentLogLines) {
                             unsentLogLines.add(line);

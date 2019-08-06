@@ -9,7 +9,7 @@
   $.fn.truncate = function(options) {
 
     var opts = $.extend({}, $.fn.truncate.defaults, options);
-    
+
     $(this).each(function() {
 
       var content_length = $.trim(squeeze($(this).text())).length;
@@ -21,10 +21,10 @@
       var full_node = $(this).hide();
 
       truncated_node.insertAfter(full_node);
-      
+
       findNodeForMore(truncated_node).append(' (... <a href="#show more content">'+opts.more+'</a>)');
       findNodeForLess(full_node).append(' (<a href="#show less content">'+opts.less+'</a>)');
-      
+
       truncated_node.find('a:last').click(function() {
         truncated_node.hide(); full_node.show(); return false;
       });
@@ -76,7 +76,7 @@
   function squeeze(string) {
     return string.replace(/\s+/g, ' ');
   }
-  
+
   // Finds the last, innermost block-level element
   function findNodeForMore(node) {
     var $node = $(node);

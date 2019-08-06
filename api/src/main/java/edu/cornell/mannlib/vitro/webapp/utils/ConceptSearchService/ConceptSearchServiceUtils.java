@@ -14,7 +14,7 @@ import edu.cornell.mannlib.semservices.bo.Concept;
 import edu.cornell.mannlib.semservices.service.ExternalConceptService;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 /**
- * Utilities for search    
+ * Utilities for search
  */
 public class ConceptSearchServiceUtils {
     private static final Log log = LogFactory.getLog(ConceptSearchServiceUtils.class);
@@ -33,7 +33,7 @@ public class ConceptSearchServiceUtils {
 		}
 		return null;
 	}
-	
+
 	//Get the URLS for the different services
 	//URL to label
 	public static HashMap<String, VocabSourceDescription> getVocabSources() {
@@ -46,10 +46,10 @@ public class ConceptSearchServiceUtils {
 
     	return map;
 	}
-	
+
 	//Get additional vocab source info
-	
-    
+
+
     //Get the hashmap mapping service name to Service class
     private static HashMap<String, String> getMapping() {
     	HashMap<String, String> map = new HashMap<String, String>();
@@ -60,13 +60,13 @@ public class ConceptSearchServiceUtils {
 
     	return map;
     }
-    
+
     public static List<Concept> getSearchResults(ServletContext context, VitroRequest vreq) throws Exception {
     	String searchServiceName = getSearchServiceUri(vreq);
     	String searchServiceClassName = getConceptSearchServiceClassName(searchServiceName);
-    
+
     	ExternalConceptService conceptServiceClass = null;
-	
+
 	    Object object = null;
 	    try {
 	        Class classDefinition = Class.forName(searchServiceClassName);
@@ -79,8 +79,8 @@ public class ConceptSearchServiceUtils {
         if(conceptServiceClass == null){
 	    	log.error("could not find Concept Search Class for " + searchServiceName);
 	    	return null;
-	    } 
-	    
+	    }
+
 	    //Get search
 	    String searchTerm = getSearchTerm(vreq);
 	    List<Concept> conceptResults =  conceptServiceClass.getConcepts(searchTerm);
@@ -95,7 +95,7 @@ public class ConceptSearchServiceUtils {
 	private static String getSearchTerm(VitroRequest vreq) {
 		return vreq.getParameter("searchTerm");
 	}
-	
+
 
 }
 

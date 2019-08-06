@@ -43,7 +43,7 @@ public class OrganizationUtilityFunctions {
 
 	public static String getHighestLevelOrganizationURI(Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
-		
+
 		Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
 		fieldLabelToOutputFieldLabel.put("organization",
 				QueryFieldLabels.ORGANIZATION_URL);
@@ -52,7 +52,7 @@ public class OrganizationUtilityFunctions {
 
 		String aggregationRules = "(count(?organization) AS ?numOfChildren)";
 
-		String whereClause = "?organization rdf:type foaf:Organization ;" 
+		String whereClause = "?organization rdf:type foaf:Organization ;"
 						+ " rdfs:label ?organizationLabel . \n"
 				+ "OPTIONAL { ?organization <http://purl.obolibrary.org/obo/BFO_0000051> ?subOrg . \n"
 			    + "           ?subOrg rdf:type foaf:Organization } . \n"
@@ -73,79 +73,79 @@ public class OrganizationUtilityFunctions {
 						fieldLabelToOutputFieldLabel);
 		return highestLevelOrgURI;
 	}
-	
+
 	public static String getEntityLabelFromDAO(VitroRequest vitroRequest,
 			String entityURI) {
-		
+
 		IndividualDao iDao = vitroRequest.getWebappDaoFactory().getIndividualDao();
         Individual ind = iDao.getIndividualByURI(entityURI);
-        
-        String organizationLabel = "Unknown Organization"; 
-        
+
+        String organizationLabel = "Unknown Organization";
+
         if (ind != null) {
         	organizationLabel = ind.getName();
         }
 		return organizationLabel;
 	}
-	
+
 	public static String getStaffProvidedOrComputedHighestLevelOrganization(Log log,
 			Dataset dataset, VitroRequest vitroRequest)
 			throws MalformedQueryParametersException {
-		
+
 		String staffProvidedHighestLevelOrganization = ConfigurationProperties.getBean(vitroRequest)
 					.getProperty("visualization.topLevelOrg");
-		
+
 		/*
 		 * First checking if the staff has provided highest level organization in runtime.properties
 		 * if so use to temporal graph vis.
 		 */
 		if (StringUtils.isNotBlank(staffProvidedHighestLevelOrganization)) {
-			
+
 			/*
 			 * To test for the validity of the URI submitted.
 			 */
 			IRIFactory iRIFactory = IRIFactory.jenaImplementation();
 			IRI iri = iRIFactory.create(staffProvidedHighestLevelOrganization);
-		    
-			
+
+
 			if (!iri.hasViolation(false)) {
 		    	return staffProvidedHighestLevelOrganization;
 		    }
-		} 
-		
+		}
+
 		/*
 		 * If the provided value was not proper compute it yourself.
 		 * */
 		return OrganizationUtilityFunctions.getHighestLevelOrganizationURI(log, dataset);
 	}
-	
+
 	public static Entity mergeEntityIfShareSameURI(Entity entityA, Entity entityB) {
-		
+
 		if (StringUtils.equalsIgnoreCase(entityA.getEntityURI(), entityB.getEntityURI())) {
-			
+
 			Entity mergedEntity = new Entity(entityA.getEntityURI());
-			
+
 			if (StringUtils.isNotBlank(entityA.getEntityLabel())) {
-				
+
 				mergedEntity.setEntityLabel(entityA.getEntityLabel());
-				
+
 			} else if (StringUtils.isNotBlank(entityB.getEntityLabel())) {
-				
+
 				mergedEntity.setEntityLabel(entityB.getEntityLabel());
 			}
-			
+
 			mergedEntity.addSubEntitities(entityA.getSubEntities());
 			mergedEntity.addSubEntitities(entityB.getSubEntities());
-			
+
 			mergedEntity.addParents(entityA.getParents());
 			mergedEntity.addParents(entityB.getParents());
-			
+
 			return mergedEntity;
-			
+
 		} else {
 			return null;
 		}
-		
+
 	}
-	
+
 }

@@ -20,7 +20,7 @@ import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 
 /*
- * This class includes methods that help in selecting a data getter based on 
+ * This class includes methods that help in selecting a data getter based on
  * parameters, and VIVO will have its own version or extend this
  */
 public class VIVOMenuManagementDataUtils implements MenuManagementDataUtils.IMenuManagementDataUtils {
@@ -31,30 +31,30 @@ public class VIVOMenuManagementDataUtils implements MenuManagementDataUtils.IMen
     public void includeRequiredSystemData(ServletContext context, Map<String, Object> templateData) {
     	checkInstitutionalInternalClass(context, templateData);
     }
-    
+
 	//Check whether any classes exist with internal class restrictions
 	private void checkInstitutionalInternalClass(ServletContext context, Map<String, Object> templateData) {
 		//TODO: replace with more generic ModelContext retrieval method
 		String internalClass = retrieveInternalClass(context);
-		if(internalClass != null) {			
+		if(internalClass != null) {
 			templateData.put("internalClass", internalClass);
 			templateData.put("internalClassUri", internalClass);
 		} else {
 			//need to initialize to empty string anyway
 			templateData.put("internalClassUri", "");
 		}
-		
+
 	}
-	
+
 	private String retrieveInternalClass(ServletContext context) {
 		OntModel mainModel = ModelAccess.on(context).getOntModel(TBOX_ASSERTIONS);
  		StmtIterator internalIt = mainModel.listStatements(null, ResourceFactory.createProperty(VitroVocabulary.IS_INTERNAL_CLASSANNOT), (RDFNode) null);
-		if(internalIt.hasNext()) {			
+		if(internalIt.hasNext()) {
 			String internalClass = internalIt.nextStatement().getSubject().getURI();
 			return internalClass;
 		}
 		return null;
 	}
 
-    
+
 }

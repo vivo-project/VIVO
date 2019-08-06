@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in LICENSE$ */
 
-package edu.cornell.mannlib.vitro.webapp.controller.harvester; 
+package edu.cornell.mannlib.vitro.webapp.controller.harvester;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,7 +47,7 @@ import org.vivoweb.harvester.util.XPathTool;
  * but that was troublesome for a few reasons, the most important being related to the simple fact that the
  * Harvester was designed to be used as a collection of command-line tools, and thus we have, for example, the
  * versatility of Score which would be very difficult to replicate without essentially allowing the user to
- * pass in a string to be parsed, which would defeat the purpose.   
+ * pass in a string to be parsed, which would defeat the purpose.
  *
  * @author mbarbieri
  *
@@ -81,7 +81,7 @@ class Harvester {
     public static void runPubmedHTTPFetch(Object ... args) {
         PubmedHTTPFetch.main(stringsToArray(args));
     }
-    
+
     // qualify
     public static void runChangeNamespace(Object ... args) {
         ChangeNamespace.main(stringsToArray(args));
@@ -101,7 +101,7 @@ class Harvester {
     public static void runSplitProperty(Object ... args) {
         SplitProperty.main(stringsToArray(args));
     }
-    
+
     // score
     public static void runMatch(Object ... args) {
         Match.main(stringsToArray(args));
@@ -112,12 +112,12 @@ class Harvester {
     public static void runScore(Object ... args) {
         Score.main(stringsToArray(args));
     }
-    
+
     // transfer
     public static void runTransfer(Object ... args) {
         Transfer.main(stringsToArray(args));
     }
-    
+
     // translate
     public static void runGlozeTranslator(Object ... args) {
         GlozeTranslator.main(stringsToArray(args));
@@ -153,21 +153,21 @@ class Harvester {
     /**
      * Convenience method to expand the ability to use Java's "..." arg list.  Harvester scripts frequently declare sub-macros,
      * so for example you might have:
-     * 
+     *
      * SCOREINPUT="-i $H2MODEL -ImodelName=$MODELNAME -IdbUrl=$MODELDBURL -IcheckEmpty=$CHECKEMPTY"
      * SCOREDATA="-s $H2MODEL -SmodelName=$SCOREDATANAME -SdbUrl=$SCOREDATADBURL -ScheckEmpty=$CHECKEMPTY"
      * SCOREMODELS="$SCOREINPUT -v $VIVOCONFIG -VcheckEmpty=$CHECKEMPTY $SCOREDATA -t $TEMPCOPYDIR -b $SCOREBATCHSIZE"
      * $Score $SCOREMODELS -AGrantNumber=$EQTEST -WGrantNumber=1.0 -FGrantNumber=$GRANTIDNUM -PGrantNumber=$GRANTIDNUM -n ${BASEURI}grant/
-     * 
+     *
      * In order to mimic this functionality for easy use in Java, this method has been created.  It takes a "..." arg list of Object
      * objects, and returns an array of Strings.  For each object, if it's an array of Strings, each String is added to the output
      * array.  Otherwise, its toString() method is called and that value is added to the output array.
-     * 
-     * It is intended to be used with a combination of String and String[] values, in any arbitrary order.  
-     * 
+     *
+     * It is intended to be used with a combination of String and String[] values, in any arbitrary order.
+     *
      * All static Harvester methods in this class take an Object arg list rather than a String arg list, and automatically call
      * this method.
-     * 
+     *
      * @param args an array of objects, which ought to be a combination of String and String[] values, in any arbitrary order
      * @return all the strings put together as one array
      */

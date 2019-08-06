@@ -2,13 +2,13 @@
 
 <@widget name="login" include="assets" />
 
-<#-- 
-        With release 1.6, the home page no longer uses the "browse by" class group/classes display. 
+<#--
+        With release 1.6, the home page no longer uses the "browse by" class group/classes display.
         If you prefer to use the "browse by" display, replace the import statement below with the
         following include statement:
-        
+
             <#include "browse-classgroups.ftl">
-            
+
         Also ensure that the homePage.geoFocusMaps flag in the runtime.properties file is commented
         out.
 -->
@@ -23,7 +23,7 @@
         </#if>
         <script async type="text/javascript" src="${urls.base}/js/homePageUtils.js?version=x"></script>
     </head>
-    
+
     <body class="${bodyClasses!}" onload="${bodyOnload!}">
         <#-- supplies the faculty count to the js function that generates a random row number for the search query -->
         <@lh.facultyMemberCount  vClassGroups! />
@@ -120,7 +120,7 @@
         <#include "footer.ftl">
         <#-- builds a json object that is used by js to render the academic departments section -->
         <@lh.listAcademicDepartments />
-    <script>       
+    <script>
         var i18nStrings = {
             researcherString: '${i18n().researcher}',
             researchersString: '${i18n().researchers}',
@@ -141,9 +141,9 @@
             noDepartmentsFound: '${i18n().no_departments_found}'
         };
         // set the 'limmit search' text and alignment
-        if  ( $('input.search-homepage').css('text-align') == "right" ) {       
+        if  ( $('input.search-homepage').css('text-align') == "right" ) {
              $('input.search-homepage').attr("value","${i18n().limit_search} \u2192");
-        }  
+        }
     </script>
     </body>
 </html>

@@ -7,10 +7,10 @@ CONSTRUCT {
      ?organization core:hasSubOrganization ?subOrganization .
      ?subOrganization rdfs:label ?label .
 } WHERE {
-     PERSON_URI core:relatedBy ?position . 
+     PERSON_URI core:relatedBy ?position .
      ?position a core:Position .
      ?position core:relates ?organization .
-     ?organization a foaf:Organization . 
+     ?organization a foaf:Organization .
      ?organization obo:BFO_0000050 ?subOrganization .
      ?subOrganization rdfs:label ?label .
 }

@@ -20,7 +20,7 @@
     xmlns:dcterms="http://purl.org/dc/terms/"
     xmlns:scires="http://vivoweb.org/ontology/scientific-research#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" >
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasCoordinate">
     <rdfs:label xml:lang="en-US">hasCoordinate</rdfs:label>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>

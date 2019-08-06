@@ -4,16 +4,16 @@
 <!-- See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
 
 <list-view-config>
-    <query-select>    
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+    <query-select>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX rdf:  &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
-        PREFIX afn:  &lt;http://jena.apache.org/ARQ/function#&gt;
-        
+
+
         SELECT ?concept ?conceptLabel ?conceptName ?vocabularySource ?vocabularySourceName
         WHERE {
          	?subject ?property ?concept .
-         	LET (?conceptName := afn:localname(?concept)) 
+         	LET (?conceptName := REPLACE(STR(?concept),"^.*(#)(.*)$", "$2"))
          	OPTIONAL {
                 <precise-subquery>?subject ?property ?concept .</precise-subquery>
                 ?concept rdfs:label ?conceptLabel .
@@ -27,7 +27,7 @@
                     ?vocabularySource rdfs:label ?vocabularySourceName .
                 }
             }
-        } ORDER BY ?conceptLabel ?conceptName 
+        } ORDER BY ?conceptLabel ?conceptName
     </query-select>
 
     <template>propStatement-hasAssociatedConcept.ftl</template>

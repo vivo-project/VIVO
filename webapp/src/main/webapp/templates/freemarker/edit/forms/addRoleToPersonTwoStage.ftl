@@ -119,15 +119,15 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <#if lvf.submissionErrorExists(editSubmission, "roleLabel")>
     	    ${i18n().specify_role_for_activity}
         </#if>
-        
+
         </p>
     </section>
 </#if>
 
-<@lvf.unsupportedBrowser urls.base /> 
+<@lvf.unsupportedBrowser urls.base />
 
-<section id="add${roleDescriptor?capitalize}RoleToPersonTwoStage" role="region">        
-    
+<section id="add${roleDescriptor?capitalize}RoleToPersonTwoStage" role="region">
+
     <form id="add${roleDescriptor?capitalize}RoleToPersonTwoStage" class="customForm noIE67" action="${submitUrl}"  role="add/edit grant role">
 
        <p class="inline">
@@ -148,23 +148,23 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
                 </#list>
             </select>
         <#else>
-           <#list roleActivityTypeKeys as key>             
+           <#list roleActivityTypeKeys as key>
                <#if selectedActivityType = key >
-                 <span class="readOnly" id="typeSelectorSpan">${roleActivityTypeSelect[key]}</span> 
+                 <span class="readOnly" id="typeSelectorSpan">${roleActivityTypeSelect[key]}</span>
                  <input type="hidden" id="typeSelectorInput" name="roleActivityType" acGroupName="activity" value="${activityTypeValue}" >
-               </#if>           
+               </#if>
            </#list>
         </#if>
        </p>
-       
-       
+
+
 <#--   <div class="fullViewOnly"> -->
             <p>
                 <label for="activity">${genericLabel?capitalize} ${i18n().name_capitalized} ${requiredHint}</label>
                 <input class="acSelector" size="50"  type="text" id="activity" name="activityLabel"  acGroupName="activity" value="${activityLabelValue}" />
                 <input class="display" type="hidden" id="activityDisplay" acGroupName="activity" name="activityLabelDisplay" value="${activityLabelDisplayValue}">
             </p>
-            
+
             <input type="hidden" id="roleToActivityPredicate" name="roleToActivityPredicate" value="" />
             <!--Populated or modified by JavaScript based on type of activity, type returned from AJAX request-->
 
@@ -172,7 +172,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
                 <p class="inline">
                     <label></label>
                     <span class="acSelectionInfo"></span>
-                    <a href="/vivo/individual?uri=" class="verifyMatch" title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+                    <a href="/vivo/individual?uri=" class="verifyMatch" title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
                     <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
 
                     </p>
@@ -185,7 +185,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
                 <input  size="50"  type="text" id="roleLabel" name="roleLabel" value="${roleLabel}" />
             </p>
         	</#if>
-        	
+
             <#if numDateFields == 1 >
                <#--Generated html is a map with key name mapping to html string-->
                <#if htmlForElements?keys?seq_contains("startField")>
@@ -213,8 +213,8 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <p id="requiredLegend" class="requiredHint">* ${i18n().required_fields}</p>
     </form>
 
-<#--Specifying form-specific script and adding stylesheets and scripts-->    
-    
+<#--Specifying form-specific script and adding stylesheets and scripts-->
+
  <script type="text/javascript">
 	var customFormData  = {
 	    acUrl: '${urls.base}/autocomplete?tokenize=true',
@@ -222,7 +222,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 	    acTypes: ${acTypes!},
 	    <#if acMultipleTypes??>acMultipleTypes: ${acMultipleTypes!},</#if>
 	    // used in repair mode: button text and org name label
-	    defaultTypeName: <#if genericLabel??>'${genericLabel}'<#else>'activity'</#if>, 
+	    defaultTypeName: <#if genericLabel??>'${genericLabel}'<#else>'activity'</#if>,
 	    baseHref: '${urls.base}/individual?uri=',
         blankSentinel: '${blankSentinel}',
         flagClearLabelForExisting: '${flagClearLabelForExisting}'
@@ -243,4 +243,4 @@ ${scripts.add('<script type="text/javascript" src="${urls.base}/js/browserUtils.
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/customFormWithAutocomplete.js"></script>')}
 
-</section>   
+</section>

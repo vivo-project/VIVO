@@ -3,24 +3,24 @@
 
 <#if (currentModels?size > 0)>
 
-	
+
 	${i18n().cached_models_regenerated}<hr />
 
 	<ul>
 	<#list currentModels as model>
 		<li>
-		
+
 		<#if model.uri == "">
-			
+
 			${i18n().uri_independent_model}
-		
+
 		<#else>
-		
+
 			<a href="${urls.base}/individual?uri=${model.uri?url}" title="${i18n().label}">${model.individualLabel}</a>
-			
+
 		</#if>
-		<span class="display-title">${model.humanReadableType}</span> 
-		
+		<span class="display-title">${model.humanReadableType}</span>
+
 		</li>
 	</#list>
 	</ul>

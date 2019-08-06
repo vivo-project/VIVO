@@ -36,7 +36,7 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 	private Log log = LogFactory
 			.getLog(CoPIGrantCountConstructQueryRunner.class.getName());
 
-	private static final String SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING = 
+	private static final String SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING =
 			"?Role core:relatedBy ?Grant . "
 			+ "?Grant rdf:type core:Grant ."
 			+ "?Grant core:relates ?RelatedRole . ";
@@ -67,14 +67,14 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 				+ "?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?coInvestigator ."
 			    + "?coInvestigator rdf:type foaf:Person  ."
 				+ "?coInvestigator rdfs:label ?coInvestigatorLabel . " + "}"
-				+ "WHERE { " + "<" + queryURI + ">" + preboundProperty + " ?Role . "  
+				+ "WHERE { " + "<" + queryURI + ">" + preboundProperty + " ?Role . "
 				+ "?Role rdf:type " + preboundRoleType + " . "
 				+ SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING
 				+ "?RelatedRole rdf:type core:InvestigatorRole ."
 				+ "?RelatedRole vitro:mostSpecificType ?subclass ."
 				+ "?RelatedRole <http://purl.obolibrary.org/obo/RO_0000052> ?coInvestigator ."
 		        + "?coInvestigator rdf:type foaf:Person  ."
-				+ "?coInvestigator rdfs:label ?coInvestigatorLabel . " 
+				+ "?coInvestigator rdfs:label ?coInvestigatorLabel . "
 				+ "FILTER (?subclass != core:PrincipalInvestigatorRole && ?subclass != core:CoPrincipalInvestigatorRole)}";
 
 		return sparqlQuery;
@@ -154,7 +154,7 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 				+ "?dateTimeIntervalValue core:start ?startDate . "
 				+ "?startDate core:dateTime ?startDateTimeValue . "
 //				+ "?dateTimeIntervalValue core:end ?endDate . "
-//				+ "?endDate core:dateTime ?endDateTimeValue . " 
+//				+ "?endDate core:dateTime ?endDateTimeValue . "
 				+ "}"
 				+ "WHERE { " + "{" + "<" + queryURI + ">" + preboundProperty
 				+ " ?Role . "
@@ -166,7 +166,7 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 //				+ " ?Role . "
 //				+ "?Role core:dateTimeInterval ?dateTimeIntervalValue . "
 //				+ "?dateTimeIntervalValue core:end ?endDate . "
-//				+ "?endDate core:dateTime ?endDateTimeValue . " 
+//				+ "?endDate core:dateTime ?endDateTimeValue . "
 				+ "}" + "}";
 
 		return sparqlQuery;

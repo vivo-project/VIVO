@@ -3,7 +3,7 @@ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 CONSTRUCT {
-     ?awardingOrganization rdfs:label ?label 
+     ?awardingOrganization rdfs:label ?label
 } WHERE {
     {
       {PERSON_URI core:relatedBy ?investigatorRole .
@@ -12,12 +12,12 @@ CONSTRUCT {
         union
       {PERSON_URI core:relatedBy ?investigatorRole .
        ?investigatorRole a core:CoPrincipalInvestigatorRole
-      }   
+      }
      }
-     
+
      ?investigatorRole core:relatedBy ?grant .
      ?grant a core:Grant .
      ?grant core:assignedBy ?awardingOrganization .
      ?awardingOrganization a foaf:Organization .
-     ?awardingOrganization rdfs:label ?label 
+     ?awardingOrganization rdfs:label ?label
 }

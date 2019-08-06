@@ -4127,7 +4127,7 @@
     <core:inScheme rdf:resource="#V"/>
     <core:prefLabel xml:lang="en">vineyards</core:prefLabel>
   </ontology:Code>
-  
+
   <core:Concept rdf:about="http://www.eionet.europa.eu/gemet/concept/1001">
     <owl:sameAs rdf:resource="#S.BDG"/>
   </core:Concept>

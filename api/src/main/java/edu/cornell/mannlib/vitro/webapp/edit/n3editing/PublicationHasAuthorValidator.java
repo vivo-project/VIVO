@@ -19,19 +19,19 @@ public class PublicationHasAuthorValidator implements N3ValidatorVTwo {
     private static String MISSING_FIRST_NAME_ERROR = "Must specify the author's first name.";
     private static String MISSING_LAST_NAME_ERROR = "Must specify the author's last name.";
     private static String MALFORMED_LAST_NAME_ERROR = "Last name may not contain a comma. Please enter first name in first name field.";
-;    
+;
     @Override
     public Map<String, String> validate(EditConfigurationVTwo editConfig,
             MultiValueEditSubmission editSub) {
         Map<String,List<String>> urisFromForm = editSub.getUrisFromForm();
         Map<String,List<Literal>> literalsFromForm = editSub.getLiteralsFromForm();
 
-        Map<String,String> errors = new HashMap<String,String>();   
-        
+        Map<String,String> errors = new HashMap<String,String>();
+
         List<String> personUri = urisFromForm.get("personUri");
         List<String> orgUri = urisFromForm.get("orgUri");
         List<Literal> orgNameList = literalsFromForm.get("orgName");
-        
+
         if (allListElementsEmpty(personUri)) {
             personUri = null;
         }
@@ -47,7 +47,7 @@ public class PublicationHasAuthorValidator implements N3ValidatorVTwo {
         if (personUri != null || orgUri != null || orgName != null ) {
             return null;
         }
-        
+
         //Expecting only one first name in this case
         //To Do: update logic if multiple first names considered
         Literal firstName = null;
@@ -55,8 +55,8 @@ public class PublicationHasAuthorValidator implements N3ValidatorVTwo {
         if(firstNameList != null && firstNameList.size() > 0) {
         	firstName = firstNameList.get(0);
         }
-        if( firstName != null && 
-        		firstName.getLexicalForm() != null && 
+        if( firstName != null &&
+        		firstName.getLexicalForm() != null &&
         		"".equals(firstName.getLexicalForm()) )
             firstName = null;
 
@@ -77,17 +77,17 @@ public class PublicationHasAuthorValidator implements N3ValidatorVTwo {
         if (lastName == null) {
             errors.put("lastName", MISSING_LAST_NAME_ERROR);
         // Don't reject space in the last name: de Vries, etc.
-        } else if (lastNameValue.contains(",")) {            
+        } else if (lastNameValue.contains(",")) {
             errors.put("lastName", MALFORMED_LAST_NAME_ERROR);
         }
-        
+
         if (firstName == null) {
             errors.put("firstName", MISSING_FIRST_NAME_ERROR);
-        }       
-        
+        }
+
         return errors.size() != 0 ? errors : null;
     }
-    
+
     private boolean allListElementsEmpty(List<String> checkList) {
     	if(checkList == null)
     		return true;

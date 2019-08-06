@@ -1,4 +1,4 @@
-# $This file is distributed under the terms of the license in LICENSE$ 
+# $This file is distributed under the terms of the license in LICENSE$
 
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -76,7 +76,7 @@ mydomain:authorshipBozo
 	.
 
 #
-# info content entity with Bozo as editor 
+# info content entity with Bozo as editor
 #
 mydomain:bozoEditedIt
 	a core:BlogPosting ;
@@ -97,7 +97,7 @@ mydomain:editorshipBozo
 	.
 
 #
-# info content entity with Bozo featured 
+# info content entity with Bozo featured
 #
 mydomain:bozoFeaturedInIt
 	a core:BlogPosting ;
@@ -131,7 +131,7 @@ mydomain:authorshipJoe
 	.
 
 #
-# info content entity with Joe as editor 
+# info content entity with Joe as editor
 #
 mydomain:joeEditedIt
 	a core:BlogPosting ;
@@ -152,7 +152,7 @@ mydomain:editorshipJoe
 	.
 
 #
-# info content entity with Joe featured 
+# info content entity with Joe featured
 #
 mydomain:joeFeaturedInIt
 	a core:BlogPosting ;

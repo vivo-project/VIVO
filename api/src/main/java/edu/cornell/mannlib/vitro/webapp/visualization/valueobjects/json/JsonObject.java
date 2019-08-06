@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * JsonObject is used for creating data in JSON format, 
+ * JsonObject is used for creating data in JSON format,
  * by just using the fields that are required to be included.
  * @author bkoniden
  * Deepak Konidena
@@ -33,7 +33,7 @@ public class JsonObject {
 
 	@JsonProperty
 	private List<String> organizationType = new ArrayList<String>();
-	
+
 	public List<String> getOrganizationTypes() {
 		return organizationType;
 	}
@@ -41,7 +41,7 @@ public class JsonObject {
 	public void setOrganizationTypes(List<String> organizationType) {
 		this.organizationType = organizationType;
 	}
-	
+
 	public void setOrganizationTypes(Set<String> givenOrganizationType) {
 		this.organizationType.addAll(givenOrganizationType);
 	}
@@ -77,7 +77,7 @@ public class JsonObject {
 	public JsonObject(String label) {
 		this.label = label;
 	}
-	
+
 	public void setYearToActivityCount(List<List<Integer>> yearToPublicationCount) {
 		this.data = yearToPublicationCount;
 	}

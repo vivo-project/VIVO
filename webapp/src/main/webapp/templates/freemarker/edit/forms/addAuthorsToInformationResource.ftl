@@ -44,7 +44,7 @@
         <#list submissionErrors?keys as errorFieldName>
         		  ${submissionErrors[errorFieldName]} <br/>
         </#list>
-        
+
         </p>
     </section>
 </#if>
@@ -66,14 +66,14 @@
 
 	<li class="authorship">
 			<#-- span.author will be used in the next phase, when we display a message that the author has been
-			removed. That text will replace the a.authorName, which will be removed. -->    
+			removed. That text will replace the a.authorName, which will be removed. -->
 			<span class="authorship">
 					<#-- This span is here to assign a width to. We can't assign directly to the a.authorName,
 					for the case when it's followed by an em tag - we want the width to apply to the whole thing. -->
 					<span class="itemName">
 							<#if (authorUri?length > 0)>
 									<span class="authorName">${authorName}</span>
-								<#else>      
+								<#else>
 									<span class="authorName">${authorship.authorshipName}</span><em> (${i18n().no_linked_author})</em>
 							</#if>
 					</span>
@@ -86,12 +86,12 @@
 			authorshipData.push({
 					"authorshipUri": "${authorship.authorshipUri}",
 					"authorUri": "${authorUri}",
-					"authorName": "${authorName}"                
+					"authorName": "${authorName}"
 			});
 	</script>
 </#list>
 
-   
+
 
 </ul>
 
@@ -102,7 +102,7 @@
     <span class="or"> ${i18n().or} </span>
     <a id="returnLink" class="cancel" href="${cancelUrl}&url=/individual" title="${i18n().cancel_title}">${i18n().return_to_publication}</a>
     <img id="indicatorOne" class="indicator hidden" alt="${i18n().processing_indicator}" src="${urls.base}/images/indicatorWhite.gif" />
-</section> 
+</section>
 
 <form id="addAuthorForm" action ="${submitUrl}" class="customForm noIE67">
     <h3>${i18n().add_an_author}</h3>
@@ -121,17 +121,17 @@
         <label for="lastName">${i18n().last_name} <span class='requiredHint'> *</span></label>
         <input class="acSelector" size="35"  type="text" id="lastName" name="lastName" value="${lastNameValue}" role="input" />
         </p>
-				
+
 				<p class="inline">
         <label for="firstName">${i18n().first_name} ${requiredHint} ${initialHint}</label>
         <input  size="20"  type="text" id="firstName" name="firstName" value="${firstNameValue}"  role="input" />
         </p>
-        
+
 				<p class="inline">
 				<label for="middleName">${i18n().middle_name} <span class='hint'>(${i18n().initial_okay})</span></label>
         <input  size="20"  type="text" id="middleName" name="middleName" value="${middleNameValue}"  role="input" />
         </p>
-      
+
         <div id="selectedAuthor" class="acSelection">
             <p class="inline">
                 <label>${i18n().selected_author}:&nbsp;</label>
@@ -146,7 +146,7 @@
         <label for="orgName">${i18n().organization_name_capitalized} <span class='requiredHint'> *</span></label>
         <input size="38"  type="text" id="orgName" name="orgName" value="${orgNameValue}" role="input" />
         </p>
-				      
+
         <div id="selectedOrg" class="acSelection">
             <p class="inline">
                 <label>${i18n().selected_organization}:&nbsp;</label>
@@ -161,13 +161,13 @@
 
 
         <input type="hidden" name="rank" id="rank" value="${newRank}" role="input" />
-    
+
         <p class="submit">
             <input type="hidden" name = "editKey" value="${editKey}" role="input" />
             <input type="submit" id="submit" value="${i18n().add_author}" role="button" role="input" />
-            
+
             <span class="or"> ${i18n().or} </span>
-            
+
             <a id="returnLink" class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
             <img id="indicatorTwo" alt="${i18n().processing_indicator}" class="indicator hidden" src="${urls.base}/images/indicatorWhite.gif" />
         </p>

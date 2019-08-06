@@ -37,12 +37,12 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 	<#assign submissionErrors = editSubmission.validationErrors/>
 </#if>
 
-<#if editMode == "edit">    
-        <#assign titleVerb="${i18n().edit_capitalized}">        
+<#if editMode == "edit">
+        <#assign titleVerb="${i18n().edit_capitalized}">
         <#assign submitButtonText="${i18n().save_changes}">
         <#assign disabledVal="disabled">
 <#else>
-<#assign titleVerb="${i18n().create_capitalized}">        
+<#assign titleVerb="${i18n().create_capitalized}">
 <#assign submitButtonText="${i18n().create_entry}">
         <#assign disabledVal=""/>
 </#if>
@@ -56,22 +56,22 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <#if orgLabelDisplayValue?has_content >
         <#assign orgLabelValue = orgLabelDisplayValue />
     </#if>
-        
+
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alt="${i18n().error_alert_icon}" />
         <p>
         <#--Checking if any required fields are empty-->
         <#if lvf.submissionErrorExists(editSubmission, "orgLabel")>
  	        ${i18n().select_or_create_organization}
-        </#if> 
+        </#if>
         </p>
     </section>
 </#if>
 
-<@lvf.unsupportedBrowser urls.base /> 
+<@lvf.unsupportedBrowser urls.base />
 
-<section id="grantAdministeredBy" role="region">        
-    
+<section id="grantAdministeredBy" role="region">
+
     <form id="grantAdministeredBy" class="customForm noIE67" action="${submitUrl}"  role="add/edit AdministeredGrant">
     <p>
         <label for="relatedIndLabel">${i18n().organization_capitalized} ${requiredHint}</label>
@@ -83,7 +83,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <p class="inline">
             <label>${i18n().selected_organization}:</label>
             <span class="acSelectionInfo"></span>
-            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
             <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="orgUri" name="existingOrganization" value="${existingOrgValue}" ${flagClearLabelForExisting}="true" />

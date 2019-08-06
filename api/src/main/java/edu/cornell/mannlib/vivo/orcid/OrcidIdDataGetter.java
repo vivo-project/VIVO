@@ -31,13 +31,13 @@ import edu.cornell.mannlib.vivo.orcid.controller.OrcidIntegrationController;
 /**
  * This data getter should be assigned to the template that renders the list
  * view for ORCID IDs.
- * 
+ *
  * Find out whether the user is authorized to confirm the ORCID IDs on this
  * page. Find the list of ORCID IDs, and whether each has already been
  * confirmed.
- * 
+ *
  * The information is stored in the values map like this:
- * 
+ *
  * <pre>
  *    orcidInfo = map {
  *        authorizedToConfirm: boolean

@@ -46,8 +46,8 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UniqueIDGenerator
 /**
  * This query runner is used to execute a sparql query to get all the publications
  * for a particular individual. It will also fetch all the authors that worked
- * on that particular publication. 
- * 
+ * on that particular publication.
+ *
  * @author cdtank
  */
 public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
@@ -63,7 +63,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 	private RDFService rdfService;
 
 	private VitroRequest vitroRequest;
-	
+
 	private Log log;
 
 	public CoAuthorshipQueryRunner(String egoURI, VitroRequest vreq, Log log) {
@@ -77,12 +77,12 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 
 	private static class QueryResultConsumer extends ResultSetConsumer {
 		Set<Collaborator> nodes = new HashSet<Collaborator>();
-		
+
 		Map<String, Activity> biboDocumentURLToVO = new HashMap<String, Activity>();
 		Map<String, Set<Collaborator>> biboDocumentURLToCoAuthors = new HashMap<String, Set<Collaborator>>();
 		Map<String, Collaborator> nodeURLToVO = new HashMap<String, Collaborator>();
 		Map<String, Collaboration> edgeUniqueIdentifierToVO = new HashMap<String, Collaboration>();
-		
+
 		Collaborator egoNode = null;
 
 		Set<Collaboration> edges = new HashSet<Collaboration>();

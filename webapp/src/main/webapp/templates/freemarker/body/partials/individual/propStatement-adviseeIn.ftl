@@ -1,9 +1,9 @@
 <#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <#-- Custom object property statement view for faux property "advisee of". See the PropertyConfig.n3 file for details.
-    
+
      This template must be self-contained and not rely on other variables set for the individual page, because it
-     is also used to generate the property statement during a deletion.  
+     is also used to generate the property statement during a deletion.
  -->
 <#import "lib-datetime.ftl" as dt>
 <@showAdviseeIn statement />
@@ -21,7 +21,7 @@
                 <a href="${profileUrl(statement.uri("advisor"))}" title="${i18n().advisor_label}">${statement.advisorLabel!}</a>
             </#if>
             <#if statement.degreeLabel??>
-                ${statement.degreeAbbr!statement.degreeLabel!} 
+                ${statement.degreeAbbr!statement.degreeLabel!}
                 <#if statement.dateTimeStart?? || statement.dateTimeEnd?? >&nbsp;${i18n().candidacy},<#else>&nbsp;${i18n().candidacy}</#if>
             </#if>
         <#elseif statement.advisingRelLabel??>
@@ -29,5 +29,5 @@
         </#if>
     </#local>
 
-    ${linkedIndividual}    <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" /> 
+    ${linkedIndividual}    <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
  </#macro>

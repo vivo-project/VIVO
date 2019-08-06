@@ -7,7 +7,7 @@
     <query-select>
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX afn:  &lt;http://jena.apache.org/ARQ/function#&gt;
+
 
         SELECT DISTINCT ?dateTimeInterval ?label
             ?valueStart ?valueStartName
@@ -24,7 +24,7 @@
             OPTIONAL {
                 <precise-subquery>?subject ?property ?dateTimeInterval .</precise-subquery>
                 ?dateTimeInterval core:start ?valueStart .
-                LET (?valueStartName := afn:localname(?valueStart))
+                LET (?valueStartName := REPLACE(STR(?valueStart),"^.*(#)(.*)$", "$2"))
 
                 OPTIONAL {
                     <precise-subquery>?subject ?property ?dateTimeInterval .
@@ -35,13 +35,13 @@
                     <precise-subquery>?subject ?property ?dateTimeInterval .
                     ?dateTimeInterval core:start ?valueStart .</precise-subquery>
                     ?valueStart core:dateTimePrecision ?dateTimePrecisionStart .
-                    LET (?precisionStart := afn:localname(?dateTimePrecisionStart))
+                    LET (?precisionStart := REPLACE(STR(?dateTimePrecisionStart),"^.*(#)(.*)$", "$2"))
                 }
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?dateTimeInterval .</precise-subquery>
                 ?dateTimeInterval core:end ?valueEnd .
-                LET (?valueEndName := afn:localname(?valueEnd))
+                LET (?valueEndName := REPLACE(STR(?valueEnd),"^.*(#)(.*)$", "$2"))
                 OPTIONAL {
                     <precise-subquery>?subject ?property ?dateTimeInterval .
                     ?dateTimeInterval core:end ?valueEnd .</precise-subquery>
@@ -51,7 +51,7 @@
                     <precise-subquery>?subject ?property ?dateTimeInterval .
                     ?dateTimeInterval core:end ?valueEnd .</precise-subquery>
                     ?valueEnd core:dateTimePrecision ?dateTimePrecisionEnd .
-                    LET (?precisionEnd := afn:localname(?dateTimePrecisionEnd))
+                    LET (?precisionEnd := REPLACE(STR(?dateTimePrecisionEnd),"^.*(#)(.*)$", "$2"))
                 }
             }
             OPTIONAL {

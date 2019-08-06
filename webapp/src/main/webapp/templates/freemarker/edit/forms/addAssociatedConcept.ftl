@@ -13,7 +13,7 @@
 
 
 <h2>${i18n().manage_concepts}</h2>
-    
+
 
 <#if submissionErrors?has_content>
     <section id="error-alert" role="alert">
@@ -23,8 +23,8 @@
         <#list submissionErrors?keys as errorFieldName>
         	${errorFieldName} :  ${submissionErrors[errorFieldName]}
         </#list>
-       
-        
+
+
         </p>
     </section>
 </#if>
@@ -33,10 +33,10 @@
 
 <div class="noIE67">
 
-    
-    
+
+
 <ul id="existingConcepts">
-      
+
     <script type="text/javascript">
         var existingConceptsData = [];
     </script>
@@ -58,7 +58,7 @@
              </div>
     	 </li>
     </#if>
-    
+
     <#list existingConcepts as existingConcept>
         <li class="existingConcept conceptsListContainer">
             <div class="container">
@@ -84,31 +84,31 @@
                     </div>
                 </div>
             </div>
-        </li>    
-        
+        </li>
+
         <script type="text/javascript">
             existingConceptsData.push({
                 "conceptNodeUri": "${existingConcept.conceptURI}",
-                "conceptLabel": "${existingConcept.conceptLabel}"      
+                "conceptLabel": "${existingConcept.conceptLabel}"
             });
-        </script>         
+        </script>
 
-      </#list>    
+      </#list>
 
 </ul>
-       
 
-<#if (existingConcepts?size = 0) >   
+
+<#if (existingConcepts?size = 0) >
         <p>${i18n().no_concepts_specified}</p>
 <#else>
         &nbsp;
 </#if>
 
 <div id="showAddForm">
-    
-    <input type="submit" value="${i18n().add_concept}" id="showAddFormButton" name="showAddFormButton">  ${i18n().or} 
+
+    <input type="submit" value="${i18n().add_concept}" id="showAddFormButton" name="showAddFormButton">  ${i18n().or}
     <a class="cancel" href="${cancelUrl}&url=/individual" title="${i18n().return_to_profile}">${i18n().return_to_profile}</a>
-</div> 
+</div>
     <form id="addConceptForm" class="customForm" action="${submitUrl}">
 		<#assign checkedSource = false />
 	<h4 class="services">${i18n().external_vocabulary_services}</h4>
@@ -133,9 +133,9 @@
     </div>
     <div id="selectedConcept" name="selectedConcept" class="acSelection">
         <p class="inline">
-         
+
         </p>
-        
+
         <!-- Search results populated by JavaScript -->
     </div>
     <div id="showHideResults" name="showHideResults">
@@ -143,16 +143,16 @@
     	&nbsp;</a>
     </div>
     <div id="errors" name="errors"></div>
-    
+
     <input type="hidden" name="editKey" id="editKey" value="${editKey}"/>
     <p class="submit">
         <input type="submit" id="submit" name="submit" value="${i18n().add_selected_concept}" />
-        
+
     </p>
     <div id="createOwnTwo"><br />
         <a href="${userDefinedConceptUrl}" > ${i18n().cannot_find_concept}</a>
-        
-    </div>	
+
+    </div>
         <p>
             <span class="or"> ${i18n().or} </span><a class="cancel" href="${cancelUrl}&url=/individual" title="${i18n().return_to_profile}">${i18n().return_to_profile}</a>
         </p>

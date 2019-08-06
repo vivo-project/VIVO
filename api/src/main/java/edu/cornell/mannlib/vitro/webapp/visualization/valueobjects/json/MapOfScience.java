@@ -41,7 +41,7 @@ public class MapOfScience {
 	public MapOfScience(String uri) {
 		this.uri = uri;
 	}
-	
+
 	public void setType(String type) {
 		this.type = type;
 	}
@@ -117,7 +117,7 @@ public class MapOfScience {
 
 		@JsonProperty
 		private int pubs;
-		
+
 		public SubEntityInfo(String uri, String label, String type, int pubs) {
 			this.uri = uri;
 			this.label = label;

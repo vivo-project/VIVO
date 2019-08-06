@@ -32,7 +32,7 @@
 <http://www.w3.org/2004/02/skos/core>
       rdfs:label "SKOS (Simple Knowledge Organization System)"@en-US ;
       vitro:ontologyPrefixAnnot "skos" .
-      
+
 <http://vivoweb.org/ontology/core>
       rdfs:label "VIVO Core Ontology"@en-US ;
       vitro:ontologyPrefixAnnot "vivo" .
@@ -40,35 +40,35 @@
 <http://purl.org/net/OCRe/research.owl>
       rdfs:label "OCRe Research"@en-US ;
       vitro:ontologyPrefixAnnot "ocrer" .
-      
+
 <http://purl.org/net/OCRe/study_design.owl>
       rdfs:label "OCRe Study Design"@en-US ;
       vitro:ontologyPrefixAnnot "ocresd" .
-      
+
 <http://purl.org/net/OCRe/study_protocol.owl>
       rdfs:label "OCRe Study Protocol"@en-US ;
       vitro:ontologyPrefixAnnot "ocresp" .
-      
+
 <http://purl.org/net/OCRe/statistics.owl>
       rdfs:label "OCRe Statistics"@en-US ;
       vitro:ontologyPrefixAnnot "ocresst" .
-      
+
 <http://aims.fao.org/aos/geopolitical.owl>
       rdfs:label "Geopolitical Ontology"@en-US ;
       vitro:ontologyPrefixAnnot "geo" .
-      
+
 <http://purl.org/NET/c4dm/event.owl>
       rdfs:label "Event Ontology"@en-US ;
       vitro:ontologyPrefixAnnot "event" .
 
-<http://purl.obolibrary.org/obo/>  
+<http://purl.obolibrary.org/obo/>
       rdfs:label "OBO Foundry"@en-US ;
       vitro:ontologyPrefixAnnot "obo" .
-              
+
 <http://www.w3.org/2006/vcard/ns>
       rdfs:label "VCard"@en-US ;
       vitro:ontologyPrefixAnnot "vcard" .
-              
+
 <http://xmlns.com/foaf/0.1/>
       rdfs:label "FOAF (Friend of a Friend)"@en-US ;
       vitro:ontologyPrefixAnnot "foaf" .
@@ -88,22 +88,22 @@
 <http://purl.org/spar/cito/>
       rdfs:label "CiTO (Citation Typing Ontology)"@en-US ;
       vitro:ontologyPrefixAnnot "cito" .
-    
+
 <http://purl.org/dc/terms/>
       rdfs:label "Dublin Core Terms"@en-US ;
-      vitro:ontologyPrefixAnnot "dcterms" .  
-    
+      vitro:ontologyPrefixAnnot "dcterms" .
+
 <http://purl.org/vocab/vann/>
       rdfs:label "Vocabulary for Annotating Vocabulary Descriptions"@en-US ;
       vitro:ontologyPrefixAnnot "vann" .
-      
+
 <http://purl.obolibrary.org/obo/ro.owl>
       rdfs:label "Relations Ontology"@en-US ;
-      vitro:ontologyPrefixAnnot "ro" .    
-      
+      vitro:ontologyPrefixAnnot "ro" .
+
 <http://www.ebi.ac.uk/efo/swo/>
       rdfs:label "Software Ontology"@en-US ;
-      vitro:ontologyPrefixAnnot "swo" . 
+      vitro:ontologyPrefixAnnot "swo" .
 
 vivo:pmcid
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -1730,7 +1730,9 @@ vivo:outreachOverview
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
-              "Please enter a single summary narrative of your outreach goals and/or contributions"^^xsd:string .
+              "Please enter a single summary narrative of your outreach goals and/or contributions"^^xsd:string ;
+      vitro:editing
+              "HTML"^^xsd:string .
 
 obo:ERO_0000031
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -1912,7 +1914,9 @@ bibo:abstract
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
-              "A summary of the resource."^^xsd:string .
+              "A summary of the resource."^^xsd:string ;
+      vitro:editing
+              "HTML"^^xsd:string .
 
 vivo:PrincipalInvestigatorRole
       vitro:displayLimitAnnot
@@ -2141,7 +2145,9 @@ vivo:teachingOverview
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
-              "Please enter a single narrative summary description of your teaching activities, goals, and/or experience"^^xsd:string .
+              "Please enter a single narrative summary description of your teaching activities, goals, and/or experience"^^xsd:string ;
+      vitro:editing
+              "HTML"^^xsd:string .
 
 vivo:rank
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
@@ -2268,7 +2274,9 @@ vivo:overview
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
-              "A short narrative summary to be used as a single descriptive overview statement."^^xsd:string .
+              "A short narrative summary to be used as a single descriptive overview statement."^^xsd:string ;
+      vitro:editing
+              "HTML"^^xsd:string .
 
 vivo:description
       vitro:displayLimitAnnot
@@ -2504,7 +2512,7 @@ obo:ERO_0000044
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
               <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
-              
+
 obo:ERO_0001261
       vitro:inClassGroup <http://vivoweb.org/ontology#vitroClassGroupactivities> .
 
@@ -2662,7 +2670,7 @@ obo:ERO_0000045
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:inPropertyGroupAnnot
               <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
- 
+
 vivo:Division
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
@@ -4634,7 +4642,7 @@ obo:ERO_0000482 # deprecated
 #              "true"^^xsd:boolean ;
 #      vitro:inPropertyGroupAnnot
 #              <http://vivoweb.org/ontology#vitroPropertyGroupoverview> .
-              
+
 vivo:ResearchProposal
       vitro:displayLimitAnnot
               "-1"^^xsd:int ;
@@ -5315,7 +5323,7 @@ geo:agriculturalAreaYear
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
-        
+
 vivo:providesFundingThrough
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
@@ -5405,7 +5413,9 @@ vivo:researchOverview
       vitro:inPropertyGroupAnnot
               <http://vivoweb.org/ontology#vitroPropertyGroupresearch> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
+      vitro:editing
+              "HTML"^^xsd:string .
 
 obo:ERO_0000390
       vitro:displayLimitAnnot
@@ -6178,7 +6188,7 @@ obo:ERO_0000033
               "true"^^xsd:boolean ;
       vitro:inPropertyGroupAnnot
               <http://vivoweb.org/ontology#vitroPropertyGroupoutreach> .
-              
+
 obo:ERO_0000397
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
@@ -7366,7 +7376,7 @@ obo:ERO_0000919
               "true"^^xsd:boolean ;
       vitro:offerCreateNewOptionAnnot
               "true"^^xsd:boolean .
-              
+
 bibo:status
       vitro:displayLimitAnnot
               "5"^^xsd:int ;
@@ -7450,7 +7460,7 @@ geo:validUntil
       vitro:hiddenFromPublishBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> .
 
- 
+
 vivo:hasEquipment
       vitro:displayRankAnnot
               "80"^^xsd:int ;
@@ -7508,37 +7518,37 @@ vivo:hasEquipment
       vitro:displayRankAnnot
               "1"^^xsd:int .
 
-<http://purl.obolibrary.org/obo/RO_0000053> 
-      vitro:hiddenFromDisplayBelowRoleLevelAnnot 
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
-      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
-
-<http://purl.obolibrary.org/obo/ARG_2000028> 
-      vitro:hiddenFromDisplayBelowRoleLevelAnnot
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
-      vitro:prohibitedFromUpdateBelowRoleLevelAnnot 
-              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
-  
-vivo:relates 
+<http://purl.obolibrary.org/obo/RO_0000053>
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
-vivo:relatedBy 
+<http://purl.obolibrary.org/obo/ARG_2000028>
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
-vivo:assigns 
+vivo:relates
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
-      vitro:prohibitedFromUpdateBelowRoleLevelAnnot 
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
 
-vivo:assignedBy 
+vivo:relatedBy
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
+
+vivo:assigns
+      vitro:hiddenFromDisplayBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
+      vitro:prohibitedFromUpdateBelowRoleLevelAnnot
+              <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
+
+vivo:assignedBy
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot

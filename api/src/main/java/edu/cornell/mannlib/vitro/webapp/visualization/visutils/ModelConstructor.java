@@ -8,6 +8,6 @@ import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryP
 
 public interface ModelConstructor {
 
-	Model getConstructedModel() throws MalformedQueryParametersException; 
-	
+	Model getConstructedModel() throws MalformedQueryParametersException;
+
 }

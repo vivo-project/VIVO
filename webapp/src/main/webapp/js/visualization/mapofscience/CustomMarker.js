@@ -27,18 +27,18 @@ var ScinodePolygon = CirclePolygon.extend({
 		var me = this;
 		var polygon = me.polygon;
 		me._super();
-		
+
 		me.registerEvent(addClickListener(polygon, function() {
 			INFO_WINDOW.setPosition(this.center);
 			var content = this.content;
 			INFO_WINDOW.setContent(content);
 			INFO_WINDOW.open(this.map);
 		}));
-		
+
 		me.registerEvent(addMouseOverListener(polygon, function() {
 			me.focus();
 		}));
-		
+
 		me.registerEvent(addMouseOutListener(polygon, function() {
 			me.unfocus();
 		}));
@@ -59,7 +59,7 @@ function createScinodeMarker(map, label, value, radius, color, latlng) {
 		zIndex: -radius,
 		radius: radius // min: 10000, max: 2500000
 	};
-	
+
 	return new ScinodePolygon(circleOptions);
 }
 

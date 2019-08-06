@@ -3,20 +3,20 @@
 var addAuthorForm = {
 
     /* *** Initial page setup *** */
-   
+
     onLoad: function() {
-        
+
         if (this.disableFormInUnsupportedBrowsers()) {
             return;
-        }        
+        }
         this.mixIn();
-        this.initObjects();                 
-        this.initPage();       
+        this.initObjects();
+        this.initPage();
     },
 
-    disableFormInUnsupportedBrowsers: function() {       
+    disableFormInUnsupportedBrowsers: function() {
         var disableWrapper = $('#ie67DisableWrapper');
-        
+
         // Check for unsupported browsers only if the element exists on the page
         if (disableWrapper.length) {
             if (vitro.browserUtils.isIELessThan8()) {
@@ -24,32 +24,32 @@ var addAuthorForm = {
                 $('.noIE67').hide();
                 return true;
             }
-        }            
-        return false;      
+        }
+        return false;
     },
-        
+
     mixIn: function() {
         // Mix in the custom form utility methods
         $.extend(this, vitro.customFormUtils);
-        
+
         // Get the custom form data from the page
         $.extend(this, customFormData);
 
         // Get the i18n variables from the page
         $.extend(this, i18nStrings);
     },
-    
+
     // On page load, create references for easy access to form elements.
     // NB These must be assigned after the elements have been loaded onto the page.
     initObjects: function() {
-        
+
         this.form = $('#addAuthorForm');
         this.showFormButtonWrapper = $('#showAddForm');
         this.showFormButton = $('#showAddFormButton');
         this.removeAuthorshipLinks = $('a.remove');
         //this.undoLinks = $('a.undo');
         this.submit = this.form.find(':submit');
-        this.cancel = this.form.find('.cancel'); 
+        this.cancel = this.form.find('.cancel');
         this.acSelector = this.form.find('.acSelector');
         this.labelField = $('#label');
         this.firstNameField = $('#firstName');
@@ -63,11 +63,11 @@ var addAuthorForm = {
         this.selectedAuthor = $('#selectedAuthor');
         this.selectedAuthorName = $('#selectedAuthorName');
         this.acHelpTextClass = 'acSelectorWithHelpText';
-        this.verifyMatch = this.form.find('.verifyMatch');  
-        this.personRadio = $('input.person-radio');  
+        this.verifyMatch = this.form.find('.verifyMatch');
+        this.personRadio = $('input.person-radio');
         this.orgRadio = $('input.org-radio');
-        this.personSection = $('section#personFields');  
-        this.orgSection = $('section#organizationFields');  
+        this.personSection = $('section#personFields');
+        this.orgSection = $('section#organizationFields');
         this.orgName = $('input#orgName');
         this.orgNameWrapper = this.orgName.parent();
         this.orgUriField = $('input#orgUri');
@@ -76,52 +76,52 @@ var addAuthorForm = {
         this.orgLink = $('a#orgLink');
         this.personLink = $('a#personLink');
         this.returnLink = $('a#returnLink');
-        
+
         this.orgSection.hide();
     },
-    
+
     // Initial page setup. Called only at page load.
     initPage: function() {
 
         this.initAuthorshipData();
-            
+
         // Show elements hidden by CSS for the non-JavaScript-enabled version.
         // NB The non-JavaScript version of this form is currently not functional.
         this.removeAuthorshipLinks.show();
-        
+
         //this.undoLinks.hide();
-        
+
         this.bindEventListeners();
-        
+
         this.initAutocomplete();
-        
+
         this.initElementData();
 
         this.initAuthorDD();
-        
+
         if (this.findValidationErrors()) {
             this.initFormAfterInvalidSubmission();
         } else {
             this.initAuthorListOnlyView();
         }
     },
-    
-    
+
+
     /* *** Set up the various page views *** */
-   
-   // This initialization is done only on page load, not when returning to author list only view 
+
+   // This initialization is done only on page load, not when returning to author list only view
    // after hitting 'cancel.'
    initAuthorListOnlyView: function() {
-       
+
         if ($('li.authorship').length) {  // make sure we have at least one author
             // Reorder authors on page load so that previously unranked authors get a rank. Otherwise,
             // when we add a new author, it will get put ahead of any previously unranked authors, instead
-            // of at the end of the list. (It is also helpful to normalize the data before we get started.)            
+            // of at the end of the list. (It is also helpful to normalize the data before we get started.)
             this.reorderAuthors();
-        }        
-        this.showAuthorListOnlyView();       
+        }
+        this.showAuthorListOnlyView();
    },
-    
+
     // This view shows the list of existing authors and hides the form.
     // There is a button to show the form. We do this on page load, and after
     // hitting 'cancel' from full view.
@@ -141,9 +141,9 @@ var addAuthorForm = {
     // Initial view of add author form. We get here by clicking the show form button,
     // or by cancelling out of an autocomplete selection.
     initFormView: function() {
-        
+
         this.initForm();
-        
+
         // There's a conflict bewteen the last name fields .blur event and the cancel
         // button's click. So display the middle and first names along with the last name tlw72
         //this.hideFieldsForNewPerson();
@@ -152,20 +152,20 @@ var addAuthorForm = {
         // from showSelectedAuthor should do it. However, it doesn't work from there,
         // or in the cancel action, or if referring to this.lastNameField. None of those work,
         // however.
-        $('#lastName').val(''); 
+        $('#lastName').val('');
         // Set the initial autocomplete help text in the acSelector field.
         this.addAcHelpText(this.acSelector);
-        
-        return false; 
-        
+
+        return false;
+
     },
-    
+
     // Form initialization common to both a 'clean' form view and when
     // returning from an invalid submission.
     initForm: function() {
-        
+
         // Hide the button that shows the form
-        this.showFormButtonWrapper.hide(); 
+        this.showFormButtonWrapper.hide();
 
         this.hideSelectedPerson();
         this.hideSelectedOrg();
@@ -176,17 +176,17 @@ var addAuthorForm = {
             addAuthorForm.setAuthorType("person");
             return false;
         });
-        
+
         // Reset the last name field. It had been hidden if we selected an author from
         // the autocomplete field.
-        this.lastNameWrapper.show(); 
-        this.showFieldsForNewPerson();        
+        this.lastNameWrapper.show();
+        this.showFieldsForNewPerson();
 
         // Show the form
-        this.form.show();                 
+        this.form.show();
         //this.lastNameField.focus();
-    },   
-    
+    },
+
     hideSelectedPerson: function() {
         this.selectedAuthor.hide();
         this.selectedAuthorName.html('');
@@ -199,29 +199,29 @@ var addAuthorForm = {
         this.orgUriField.val('');
     },
 
-    showFieldsForNewPerson: function() {    
+    showFieldsForNewPerson: function() {
         this.firstNameWrapper.show();
         this.middleNameWrapper.show();
     },
 
-    hideFieldsForNewPerson: function() {   
-        this.hideFields(this.firstNameWrapper); 
-        this.hideFields(this.middleNameWrapper); 
+    hideFieldsForNewPerson: function() {
+        this.hideFields(this.firstNameWrapper);
+        this.hideFields(this.middleNameWrapper);
     },
-        
+
     /* *** Ajax initializations *** */
 
     /* Autocomplete */
     initAutocomplete: function() {
 
-        // Make cache a property of this so we can access it after removing 
+        // Make cache a property of this so we can access it after removing
         // an author.
-        this.acCache = {};  
+        this.acCache = {};
         this.setAcFilter();
         var $acField;
         var urlString;
         var authType;
-        
+
         if  ( this.personRadio.prop("checked") ) {
             $acField = this.lastNameField;
             urlString = addAuthorForm.acUrl + addAuthorForm.personUrl + addAuthorForm.tokenize;
@@ -231,7 +231,7 @@ var addAuthorForm = {
             $acField = this.orgName;
             urlString = addAuthorForm.acUrl + addAuthorForm.orgUrl + addAuthorForm.tokenize;
             authType = "org";
-        }  
+        }
         $acField.autocomplete({
             minLength: 2,
             source: function(request, response) {
@@ -241,7 +241,7 @@ var addAuthorForm = {
                     return;
                 }
                 // console.log('not getting term from cache');
-                
+
                 // If the url query params are too long, we could do a post
                 // here instead of a get. Add the exclude uris to the data
                 // rather than to the url.
@@ -250,13 +250,13 @@ var addAuthorForm = {
                     dataType: 'json',
                     data: {
                         term: request.term
-                    }, 
+                    },
                     complete: function(xhr, status) {
                         // Not sure why, but we need an explicit json parse here. jQuery
                         // should parse the response text and return a json object.
                         var results = jQuery.parseJSON(xhr.responseText),
                             filteredResults = addAuthorForm.filterAcResults(results);
-                        addAuthorForm.acCache[request.term] = filteredResults;  
+                        addAuthorForm.acCache[request.term] = filteredResults;
                         response(filteredResults);
                     }
 
@@ -269,32 +269,32 @@ var addAuthorForm = {
             // select event has been triggered. To trigger a select, the user must hit enter
             // or click on the selection with the mouse. This appears to confuse some users.
             select: function(event, ui) {
-                addAuthorForm.showSelectedAuthor(ui,authType); 
+                addAuthorForm.showSelectedAuthor(ui,authType);
             }
         });
 
     },
 
-    initElementData: function() {   
+    initElementData: function() {
         this.verifyMatch.data('baseHref', this.verifyMatch.attr('href'));
     },
 
     setAcFilter: function() {
         this.acFilter = [];
-        
+
         $('li.authorship').each(function() {
             var uri = $(this).data('authorUri');
             addAuthorForm.acFilter.push(uri);
          });
     },
-    
+
     removeAuthorFromAcFilter: function(author) {
         var index = $.inArray(author, this.acFilter);
         if (index > -1) { // this should always be true
             this.acFilter.splice(index, 1);
-        }   
+        }
     },
-    
+
     filterAcResults: function(results) {
         var filteredResults = [];
         if (!this.acFilter.length) {
@@ -311,9 +311,9 @@ var addAuthorForm = {
         });
         return filteredResults;
     },
-    
+
     // After removing an authorship, selectively clear matching autocomplete
-    // cache entries, else the associated author will not be included in 
+    // cache entries, else the associated author will not be included in
     // subsequent autocomplete suggestions.
     clearAcCacheEntries: function(name) {
         name = name.toLowerCase();
@@ -323,7 +323,7 @@ var addAuthorForm = {
             }
         });
     },
-    
+
     // Action taken after selecting an author from the autocomplete list
     showSelectedAuthor: function(ui,authType) {
 
@@ -340,17 +340,17 @@ var addAuthorForm = {
             // These get displayed if the selection was made through an enter keystroke,
             // since the keydown event on the last name field is also triggered (and
             // executes first). So re-hide them here.
-            this.hideFieldsForNewPerson(); 
+            this.hideFieldsForNewPerson();
             this.personLink.attr('href', this.verifyMatch.data('baseHref') + ui.item.uri);
         }
         else {
             // do the same as above but for the organization fields
-            this.orgUriField.val(ui.item.uri); 
+            this.orgUriField.val(ui.item.uri);
             this.selectedOrg.show();
 
             this.selectedOrgName.html(ui.item.label);
 
-            this.hideFields(this.orgNameWrapper); 
+            this.hideFields(this.orgNameWrapper);
 
             this.orgLink.attr('href', this.verifyMatch.data('baseHref') + ui.item.uri);
         }
@@ -363,29 +363,29 @@ var addAuthorForm = {
             return false;
         });
     },
-        
+
     /* Drag-and-drop */
     initAuthorDD: function() {
-        
+
         var authorshipList = $('#dragDropList'),
             authorships = authorshipList.children('li');
-        
+
         if (authorships.length < 2) {
             return;
         }
-        
+
         $('.authorNameWrapper').each(function() {
             $(this).attr('title', addAuthorForm.authorNameWrapperTitle);
         });
-        
+
         authorshipList.sortable({
             cursor: 'move',
             update: function(event, ui) {
                 addAuthorForm.reorderAuthors(event, ui);
             }
-        });     
+        });
     },
-    
+
     // Reorder authors. Called on page load and after author drag-and-drop and remove.
     // Event and ui parameters are defined only in the case of drag-and-drop.
     reorderAuthors: function(event, ui) {
@@ -406,83 +406,83 @@ var addAuthorForm = {
                 var pos;
                 $('li.authorship').each(function(index){
                     pos = index + 1;
-                    // Set the new position for this element. The only function of this value 
+                    // Set the new position for this element. The only function of this value
                     // is so we can reset an element to its original position in case reordering fails.
-                    addAuthorForm.setPosition(this, pos);                
+                    addAuthorForm.setPosition(this, pos);
                 });
                 // Set the form rank field value.
-                $('#rank').val(pos + 1);        
+                $('#rank').val(pos + 1);
             },
             error: function(request, status, error) {
                 // ui is undefined on page load and after an authorship removal.
                 if (ui) {
                     // Put the moved item back to its original position.
                     // Seems we need to do this by hand. Can't see any way to do it with jQuery UI. ??
-                    var pos = addAuthorForm.getPosition(ui.item),                       
-                        nextpos = pos + 1, 
-                        authorships = $('#dragDropList'), 
+                    var pos = addAuthorForm.getPosition(ui.item),
+                        nextpos = pos + 1,
+                        authorships = $('#dragDropList'),
                         next = addAuthorForm.findAuthorship('position', nextpos);
-                    
+
                     if (next.length) {
                         ui.item.insertBefore(next);
                     }
                     else {
                         ui.item.appendTo(authorships);
                     }
-                    
-                    alert(addAuthorForm.reorderAuthorsAlert);                                 
-                }      
+
+                    alert(addAuthorForm.reorderAuthorsAlert);
+                }
             }
-        });           
+        });
     },
-    
+
     // On page load, associate data with each authorship element. Then we don't
     // have to keep retrieving data from or modifying the DOM as we manipulate the
     // authorships.
     initAuthorshipData: function() {
         $('li.authorship').each(function(index) {
-            $(this).data(authorshipData[index]);    
-            
+            $(this).data(authorshipData[index]);
+
             // RY We might still need position to put back an element after reordering
             // failure. Rank might already have been reset? Check.
             // We also may need position to implement undo links: we want the removed authorship
             // to show up in the list, but it has no rank.
-            $(this).data('position', index+1);      
+            $(this).data('position', index+1);
         });
     },
 
     getPosition: function(authorship) {
         return $(authorship).data('position');
     },
-    
+
     setPosition: function(authorship, pos) {
         $(authorship).data('position', pos);
     },
-    
+
     findAuthorship: function(key, value) {
         var matchingAuthorship = $(); // if we don't find one, return an empty jQuery set
-        
+
         $('li.authorship').each(function() {
             var authorship = $(this);
             if ( authorship.data(key) === value ) {
-                matchingAuthorship = authorship; 
+                matchingAuthorship = authorship;
                 return false; // stop the loop
             }
         });
-         
-        return matchingAuthorship;       
+
+        return matchingAuthorship;
     },
-    
-               
-    /* *** Event listeners *** */ 
-   
+
+
+    /* *** Event listeners *** */
+
     bindEventListeners: function() {
-        
+
         this.showFormButton.click(function() {
             addAuthorForm.initFormView();
             return false;
         });
-        
+
         this.orgRadio.click(function() {
             addAuthorForm.setAuthorType("org");
         });
@@ -492,13 +492,13 @@ var addAuthorForm = {
         });
 
         this.form.submit(function() {
-            // NB Important JavaScript scope issue: if we call it this way, this = addAuthorForm 
+            // NB Important JavaScript scope issue: if we call it this way, this = addAuthorForm
             // in prepareSubmit. If we do this.form.submit(this.prepareSubmit); then
             // this != addAuthorForm in prepareSubmit.
             $selectedObj = addAuthorForm.form.find('input.acSelector');
             addAuthorForm.deleteAcHelpText($selectedObj);
-			addAuthorForm.prepareSubmit(); 
-        });     
+			addAuthorForm.prepareSubmit();
+        });
 
         this.lastNameField.blur(function() {
             // Cases where this event should be ignored:
@@ -514,29 +514,29 @@ var addAuthorForm = {
         this.personLink.click(function() {
             window.open($(this).attr('href'), 'verifyMatchWindow', 'width=640,height=640,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,location=no');
             return false;
-        });   
+        });
 
         this.orgLink.click(function() {
             window.open($(this).attr('href'), 'verifyMatchWindow', 'width=640,height=640,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,location=no');
             return false;
-        });   
+        });
 
     	this.acSelector.focus(function() {
         	addAuthorForm.deleteAcHelpText(this);
-    	});   
+    	});
 
     	this.acSelector.blur(function() {
         	addAuthorForm.addAcHelpText(this);
-    	}); 
-                
+    	});
+
     	this.orgName.focus(function() {
         	addAuthorForm.deleteAcHelpText(this);
-    	});   
+    	});
 
     	this.orgName.blur(function() {
         	addAuthorForm.addAcHelpText(this);
-    	}); 
-                
+    	});
+
         // When hitting enter in last name field, show first and middle name fields.
         // NB This event fires when selecting an autocomplete suggestion with the enter
         // key. Since it fires first, we undo its effects in the ac select event listener.
@@ -546,12 +546,12 @@ var addAuthorForm = {
                 return false; // don't submit form
             }
         });
-        
+
         this.removeAuthorshipLinks.click(function() {
             addAuthorForm.removeAuthorship(this);
             return false;
         });
-        
+
     },
 
     prepareSubmit: function() {
@@ -559,18 +559,18 @@ var addAuthorForm = {
             middleName,
             lastName,
             name;
-        
+
         // If selecting an existing person, don't submit name fields
         if (this.personUriField.val() != '' || this.orgUriField.val() != '' || this.orgName.val() != '' ) {
             this.firstNameField.attr('disabled', 'disabled');
             this.middleNameField.attr('disabled', 'disabled');
             this.lastNameField.attr('disabled', 'disabled');
-        } 
+        }
         else {
             firstName = this.firstNameField.val();
             middleName = this.middleNameField.val();
             lastName = this.lastNameField.val();
-            
+
             name = lastName;
             if (firstName) {
                 name += ', ' + firstName;
@@ -578,7 +578,7 @@ var addAuthorForm = {
             if (middleName) {
                 name += ' ' + middleName;
             }
-            
+
             this.labelField.val(name);
         }
 		// If user selected org via autocomplete, clear the org name field
@@ -586,32 +586,32 @@ var addAuthorForm = {
 			this.orgName.val("");
 		}
 
-    },    
-    
+    },
+
     onLastNameChange: function() {
         this.showFieldsForNewPerson();
         this.firstNameField.focus();
         // this.fixNames();
     },
-    
+
     // User may have typed first name as well as last name into last name field.
     // If so, when showing first and middle name fields, move anything after a comma
     // or space into the first name field.
     // RY Space is problematic because they may be entering "<firstname> <lastname>", but
-    // comma is a clear case. 
+    // comma is a clear case.
 //    fixNames: function() {
 //        var lastNameInput = this.lastNameField.val(),
-//            names = lastNameInput.split(/[, ]+/), 
+//            names = lastNameInput.split(/[, ]+/),
 //            lastName = names[0];
-// 
+//
 //        this.lastNameField.val(lastName);
-//        
+//
 //        if (names.length > 1) {
 //            //firstName = names[1].replace(/^[, ]+/, '');
 //            this.firstNameField.val(names[1]);
-//        } 
+//        }
 //    },
-     
+
     removeAuthorship: function(link) {
         // RY Upgrade this to a modal window
 
@@ -631,18 +631,18 @@ var addAuthorForm = {
         }
         else {
             addAuthorForm.cancel.hide();
-            $('img#indicatorTwo').removeClass('hidden');            
+            $('img#indicatorTwo').removeClass('hidden');
             addAuthorForm.submit.addClass('disabledSubmit');
             addAuthorForm.submit.attr('disabled','disabled');
         }
-              
+
         if ($(link)[0] === $('.remove:last')[0]) {
             removeLast = true;
-        } 
-        
+        }
+
         $.ajax({
             url: $(link).attr('href'),
-            type: 'POST', 
+            type: 'POST',
             data: {
                 deletion: $(link).parents('li.authorship').data('authorshipUri')
             },
@@ -651,39 +651,39 @@ var addAuthorForm = {
             complete: function(request, status) {
                 var authorship,
                     authorUri;
-            
+
                 if (status === 'success') {
-                    
+
                     authorship = $(this).parents('li.authorship');
-                
+
                     // Clear autocomplete cache entries matching this author's name, else
                     // autocomplete will be retrieved from the cache, which excludes the removed author.
                     addAuthorForm.clearAcCacheEntries(authorship.data('authorName'));
-                    
+
                     // Remove this author from the acFilter so it is included in autocomplete
                     // results again.
                     addAuthorForm.removeAuthorFromAcFilter(authorship.data('authorUri'));
-                    
+
                     authorship.fadeOut(400, function() {
                         var numAuthors;
- 
+
                         // For undo link: add to a deletedAuthorships array
-                        
-                        // Remove from the DOM                       
+
+                        // Remove from the DOM
                         $(this).remove();
-                        
+
                         // Actions that depend on the author having been removed from the DOM:
                         numAuthors = $('li.authorship').length; // retrieve the length after removing authorship from the DOM
-                        
+
                         // If removed item not last, reorder to remove any gaps
                         if (numAuthors > 0 && ! removeLast) {
                             addAuthorForm.reorderAuthors();
                         }
-                            
+
                         // If fewer than two authors remaining, disable drag-drop
                         if (numAuthors < 2) {
                             addAuthorForm.disableAuthorDD();
-                        }                           
+                        }
 
                         if ( $('img#indicatorOne').is(':visible') ) {
                             $('img#indicatorOne').fadeOut(100, function() {
@@ -711,25 +711,25 @@ var addAuthorForm = {
 
                 } else {
                     alert(addAuthorForm.removeAuthorshipAlert);
-                    
+
                 }
             }
-        });        
+        });
     },
-    
+
     // Disable DD and associated cues if only one author remains
     disableAuthorDD: function() {
         var authorships = $('#dragDropList'),
             authorNameWrapper = $('.authorNameWrapper');
-            
+
         authorships.sortable({ disable: true } );
-        
+
         // Use class dd rather than jQuery UI's class ui-sortable, so that we can remove
         // the class if there's fewer than one author. We don't want to remove the ui-sortable
         // class, in case we want to re-enable DD without a page reload (e.g., if implementing
-        // adding an author via Ajax request). 
+        // adding an author via Ajax request).
         authorships.removeClass('dd');
-              
+
         authorNameWrapper.removeAttr('title');
     },
 
@@ -748,13 +748,13 @@ var addAuthorForm = {
         else {
             typeText = addAuthorForm.organizationTypeText;
         }
-        
+
         if (!$(selectedObj).val()) {
 			$(selectedObj).val(addAuthorForm.helpTextSelect + " " + typeText + " " + addAuthorForm.helpTextAdd)
 						   .addClass(this.acHelpTextClass);
 		}
 	},
-	
+
 	deleteAcHelpText: function(selectedObj) {
 	    if ($(selectedObj).hasClass(this.acHelpTextClass)) {
 	            $(selectedObj).val('')
@@ -826,11 +826,11 @@ var addAuthorForm = {
 	        addAuthorForm.addAcHelpText(this.acSelector);
 	        addAuthorForm.initAutocomplete();
 	        addAuthorForm.hideSelectedOrg();
-	        
+
 	    }
     }
 };
 
-$(document).ready(function() {   
+$(document).ready(function() {
     addAuthorForm.onLoad();
-}); 
+});

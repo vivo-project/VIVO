@@ -4,12 +4,12 @@
 The body map contains the orcidInfo structure, which is set up like this:
 
 orcidInfo
-    progress       - a string set to one of these values: START, DENIED_AUTHENTICATE, 
-                     FAILED_AUTHENTICATE, GOT_PROFILE, ID_ALREADY_PRESENT, DENIED_ID, 
+    progress       - a string set to one of these values: START, DENIED_AUTHENTICATE,
+                     FAILED_AUTHENTICATE, GOT_PROFILE, ID_ALREADY_PRESENT, DENIED_ID,
                      FAILED_ID, ADDED_ID
     individualUri  - the URI of the person
     profilePage    - the URL of the individual's profile page
-    orcid          - the confirmed ORCID (just xxxx-xxxx-xxxx-xxxx), 
+    orcid          - the confirmed ORCID (just xxxx-xxxx-xxxx-xxxx),
                      or the empty string.
     orcidUri       - the confirmed ORCID (full URI), or the empty string.
     externalIds    - empty if we haven't read their profile. Otherwise, a sequence
@@ -18,11 +18,11 @@ orcidInfo
                      commonName - e.g., "VIVO Cornell"
                      reference  - e.g., their VIVO localname
                      uri        - e.g., their VIVO URI
-    hasVivoId      - true, if we have read the profile and they already have 
+    hasVivoId      - true, if we have read the profile and they already have
                      their VIVO URI as an external ID. False otherwise.
-    existingOrcids - A sequence of the ORCIDs (full URI) that we already associate 
+    existingOrcids - A sequence of the ORCIDs (full URI) that we already associate
                      with this individual.
-    progressUrl    - The URL to go to, that will continue this process. If the 
+    progressUrl    - The URL to go to, that will continue this process. If the
                      process is complete or has failed, this is empty.
 
 -->
@@ -34,7 +34,7 @@ orcidInfo
     border-radius: 10px;
     padding: 0 1em 1em;
     margin: 12px
-} 
+}
 
 #orcid-offer .links {
 	text-align: left;
@@ -78,7 +78,7 @@ span.completed {
 
 <section id="orcid-offer" role="region">
     <h2>Do you want to ${orcidTextOne} ORCID iD?</h2>
-   
+
     <div class="step">
       <#if "START" == orcidInfo.progress>
         <h2>Step 1: ${orcidTextTwo} your ORCID iD</h2>
@@ -105,7 +105,7 @@ span.completed {
         <p><a href="${orcidInfo.orcidUri}" target="_blank">View your ORCID record.</a></p>
       </#if>
     </div>
-    
+
     <div class="step ${step2dimmed}">
       <#if "ID_ALREADY_PRESENT" == orcidInfo.progress>
         <h2>Step 2 (recommended): Linking your ORCID record to VIVO <span class="completed">(step completed)</span></h2>
@@ -131,13 +131,13 @@ span.completed {
         </ul>
       </#if>
     </div>
-    
+
     <div class=links>
       <form method="GET" action="${orcidInfo.progressUrl}">
         <p>
           <#if continueAppears>
             <input type="submit" name="submit" value="Continue <#if "START" == orcidInfo.progress>Step 1<#else>Step 2</#if>" class="submit"/>
-            or 
+            or
           </#if>
           <a class="cancel" href="${orcidInfo.profilePage}">Return to your VIVO profile page</a>
         </p>

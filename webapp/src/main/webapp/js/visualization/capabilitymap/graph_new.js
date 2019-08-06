@@ -106,7 +106,7 @@ Group.prototype.merge = function(capability, people) {
 /**
  * Removes a person from the group. Will destroy the group if the last person is removed.
  */
-Group.prototype.removePerson = function(person) { 
+Group.prototype.removePerson = function(person) {
     this.people = this.people.filter(function(a) {
         return (a != person && a.id != person.id);
     });
@@ -169,7 +169,7 @@ Graph.prototype.removeCapability = function(term) {
             var cs = {};
             var shifted = false;
             $.each(g.groups[i].capabilities, function(key, c) {
-                cs[c.term] = c;                
+                cs[c.term] = c;
             });
             consideringGroups: for (var j = 0; j < g.groups.length; j++) {
                 if (j == i) continue;
@@ -368,7 +368,7 @@ FullResultQueryUnit.prototype.fetch = function() {
     request.buildScriptTag();
     request.addScriptTag();
 */
-} 
+}
 
 var showPanel = function(name) {
     $(".titles li").removeClass("activeTab");
@@ -380,14 +380,14 @@ var showPanel = function(name) {
  * The DetailsPanel prototype controls the display of information in the sidebar.
  */
 var DetailsPanel = function(element) {
-    this.panel = element;   
+    this.panel = element;
 }
 DetailsPanel.prototype.clearDetails = function() {
     $(this.panel).empty();
 }
 DetailsPanel.prototype.showDetails = function(mode, id) {
     showPanel("logg");
-    
+
     var that = this;
     var departments = {};
     var deptNames = [];
@@ -436,7 +436,7 @@ DetailsPanel.prototype.showDetails = function(mode, id) {
             );
             title.after(DetailsPanel.makebarchart(deptNames, departments));
     } else $(this.panel).empty().append(this.groupInfo(id, g.groups[id], mode, id));
-} 
+}
 DetailsPanel.prototype.groupInfo = function(i, group, mode, id) {
     var that = this;
     var departments = {};
@@ -504,10 +504,10 @@ DetailsPanel.prototype.groupInfo = function(i, group, mode, id) {
                         .append(DetailsPanel.makeslidedown(p.queryText(group.capabilities), p.fullInfo["md_8"], "grants"))
                         .append(DetailsPanel.makeslidedown(p.queryText(group.capabilities), p.fullInfo["md_U"], "publications"))
 
-                        
-                        
+
+
                     )
-                
+
             }, $("<div/>"))
         );
 }
@@ -529,7 +529,7 @@ DetailsPanel.makeslidedown = function(q, l, name) {
                 return list.append($("<li>" + grant + "</li>"));
             }, $("<ul/>")
                 .addClass("publist").css("display", "none"))
-                .append(l.length > 5 
+                .append(l.length > 5
                     ? $("<li/>")
                     /*.append(
                         $("<a>(view more)</a>")
@@ -561,12 +561,12 @@ DetailsPanel.makebarchart = function(deptNames, departments) {
     });
     return div;
 };
-            
+
 var loadCapability = function() {
     if (hidden) unhide();
     if (!queryQueue.length) finish();
     else {
-        disableSubButton(); 
+        disableSubButton();
         var query = queryQueue.pop();
         var jsonurl = contextPath + "/visualizationAjax?vis=capabilitymap&query=" + encodeURIComponent(query) + "&callback=ipretResults"
         var request = new JSONscriptRequest(jsonurl);
@@ -633,17 +633,17 @@ var getLinkColor = function() {
 var render = function() {
     if (!force) $("#infovis").empty();
     //if (!g.groups.length) return;
-    
+
     if (force) force.stop();
-    
+
     var d3_graph = g.tod3();
     var nodes = d3_graph.nodes;
     var labelAnchors = d3_graph.labelAnchors;
     var labelAnchorLinks = d3_graph.labelAnchorLinks;
     var links = d3_graph.links;
     var delta = !!force;
-    
-    
+
+
     var w = $("#infovis").width(), h = 600;
     if (schemes[$("#colorScheme").val()] !== undefined && scheme != schemes[$("#colorScheme").val()]) {
         scheme = schemes[$("#colorScheme").val()];
@@ -664,7 +664,7 @@ var render = function() {
             .attr('width', w).attr('height', h).attr('fill', scheme["backgroundcolor"])
             .on("click", unhighlight)
             .on("touchstart", unhighlight);
-        
+
         edge_layer = vis.append("svg:g");
         node_layer = vis.append("svg:g");//.attr('width', w).attr('height', h).attr("fill", "transparent");
         label_layer = vis.append("svg:g");
@@ -685,7 +685,7 @@ var render = function() {
                 .linkStrength(function(x) {
                     return x.weight * 10
                 });
-        
+
         force2 = d3.layout
             .force().gravity(0)
             .linkDistance(0).linkStrength(8).charge(-100).size([w, h]);
@@ -695,14 +695,14 @@ var render = function() {
     transformto(force.links(), links);
     transformto(force2.nodes(), labelAnchors);
     transformto(force2.links(), labelAnchorLinks);
-    
+
     if (delta) {
         force.alpha(0.05);
         force2.alpha(0.05);
     }
     force.start();
     force2.start();
-    
+
     link_data = edge_layer.selectAll("line.link").data(links, function(d) { return d.uid; });
     link_data.enter().append("svg:line")
         .attr("class", "link")
@@ -713,7 +713,7 @@ var render = function() {
         });
     link_data.exit().remove();
     link = edge_layer.selectAll("line.link");
-    
+
     var node_data = node_layer.selectAll("g.node").data(force.nodes(), function(d) { return d.uid; });
     var node = node_data.enter().append("svg:g");
     console.log("nodes:");
@@ -728,7 +728,7 @@ var render = function() {
         })
         .on("touchstart", function(d) {
             highlight(d.identifier);
-            detailsPane.showDetails(d.nodetype, d.identifier);        
+            detailsPane.showDetails(d.nodetype, d.identifier);
         })
         .style("stroke", scheme["nodestroke"])
         .style("stroke-width", 2)
@@ -758,10 +758,10 @@ var render = function() {
         .call(force.drag);
     node_data.exit().remove();
     node = d3.selectAll("g.node");
-    
+
     var anchorLink = label_layer.selectAll("line.anchorLink").data(labelAnchorLinks, function(d) { return d.uid; });
     anchorLink.exit().remove();
-    
+
     var anchor_data = label_layer.selectAll("g.anchorNode").data(force2.nodes(), function(d) { return d.uid; });
     var anchorNode = anchor_data.enter().append("svg:g").attr("class", "anchorNode");
     anchorNode.append("svg:circle").attr("r", 0).style("fill", "#FFF");
@@ -775,7 +775,7 @@ var render = function() {
         .style("text-shadow", function(d) {
             return d.node.nodetype == "group" ? "none" :
                 "2px 0px " + scheme["nodestroke"] +
-                ", -2px 0px " + scheme["nodestroke"] + 
+                ", -2px 0px " + scheme["nodestroke"] +
                 ", 0px 2px " + scheme["nodestroke"] +
                 ", 0px -2px " + scheme["nodestroke"];
         }).on("click", function(d) {
@@ -787,7 +787,7 @@ var render = function() {
     });
     anchor_data.exit().remove();
     anchorNode = label_layer.selectAll("g.anchorNode");
-    
+
     var updateLink = function() {
     	this.attr("x1", function(d) {
     		return d.source.x;
@@ -798,13 +798,13 @@ var render = function() {
     	}).attr("y2", function(d) {
     		return d.target.y;
     	});
-    
+
     }
     var updateNode = function() {
     	this.attr("transform", function(d) {
     		return "translate(" + d.x + "," + d.y + ")";
     	});
-    
+
     }
     force.on("tick", function() {
         $("#log button:first-child").html("pause");
@@ -828,9 +828,9 @@ var render = function() {
     	anchorNode.call(updateNode);
     	link.call(updateLink);
     	anchorLink.call(updateLink);
-    
+
     });
-    
+
     // refresh UI
     $("#log").empty().append($("<button>pause</button>")
         .bind("click", function() {
@@ -873,7 +873,7 @@ var render = function() {
                     .css("cursor", "pointer")
                 )
                 .prepend($("<input/>").attr("type", "checkbox")
-                    .attr("name", c.term)                   
+                    .attr("name", c.term)
                 )
             );
     });
@@ -920,8 +920,8 @@ var generateGraphPersonList = function() {
 }
 var generateGraphSVG = function() {
     download(
-        "<?xml version=\"1.0\" standalone=\"no\"?>\n" + 
-        "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" " +  
+        "<?xml version=\"1.0\" standalone=\"no\"?>\n" +
+        "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" " +
         "\"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n" +
         $("#infovis").html().replace("<svg", "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\"")
     , "svg");
@@ -942,7 +942,7 @@ var showhideadvanced = function(button) {
         $(button).html("Hide advanced");
     } else {
         $("#advanced_options").slideUp();
-        $("#advanced_options").data("shown", false);        
+        $("#advanced_options").data("shown", false);
         $(button).html("Show advanced");
     }
 }
@@ -988,7 +988,7 @@ var reset = function() {
         force = undefined;
         $("#infovis").html("");
         window.location.hash = "";
-        
+
         $("#log_printout").empty();
         detailsPane.clearDetails();
         $("#graphDetails").attr("value", "");
@@ -1002,7 +1002,7 @@ var reset = function() {
         $("#helptext").fadeIn();
     }
     render();
-    
+
 }
 var unhide = function() {
     hidden = false;
@@ -1018,10 +1018,10 @@ var unhide = function() {
     $("#helptext").fadeOut();
     $("#center-container").fadeIn();
 }
-   
+
 function run_demo(demoValues) {
     demoValues.forEach(function(query) {
-        queryQueue.push(query); 
+        queryQueue.push(query);
     });
     progressBar.reset(demoValues.length, 1);
     addKwd(false);
@@ -1045,12 +1045,12 @@ $(document).ready(function() {
     queryCutoffElem = document.getElementById('queryCutoff');
     detailsPane = new DetailsPanel('#inner-details');
     g = new Graph();
-    
+
     // results section text backup
     $(".result_section").each(function() {
         $(this).data("original", $(this).html());
     });
-    
+
     // querycutoffelem hadling
     $(queryCutoffElem).bind("keyup", function() {
         var that = this;
@@ -1080,7 +1080,7 @@ $(document).ready(function() {
         $(this).data("prev", $(this).val());
     });
     $(queryCutoffElem).data("prev", $(queryCutoffElem).val());
-    
+
     // URL hash reading
     if (window.location.hash != "") {
         var preset = decodeURI(window.location.hash).slice(1).split("|");
@@ -1089,7 +1089,7 @@ $(document).ready(function() {
         if (preset[2] == "1") expandLastQuery = 1;
         addKwd();
     }
-    
+
     // queryfield
     $("#query").bind("focus", function() {
         $(this).data("previous", $(this).val());
@@ -1101,7 +1101,7 @@ $(document).ready(function() {
     });
     $("#query").focus();
     enableSubButton();
-    
+
     // tabs
     $(".tabs div ul li + li + li + li + li").parent().children(":last-child").find("a").trigger("click");
     $(".tabs ul.titles li[class!=\"full\"]").bind("click", function(e) {
@@ -1123,6 +1123,6 @@ var transformto = function(a, b) { // a = b
         if (b.indexOf(a[i]) == -1) a.splice(i, 1);
         else i++;
     }
-    
+
 }
-            
+

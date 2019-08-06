@@ -28,14 +28,14 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class PDFDocument {
 	public PDFDocument(String authorName,
-					   Map<String, Integer> yearToPublicationCount, 
+					   Map<String, Integer> yearToPublicationCount,
 					   Document document,
 					   PdfWriter pdfWriter) {
-		
+
 //        setPreferredSize(new Dimension(600,400));
-		
+
 		try {
-			
+
 		document.addTitle("PDF Pipeline iText Prototype");
 		document.addAuthor(authorName);
 		document.addSubject("This example tests text, color, image, transparency & table functionality.");
@@ -43,55 +43,55 @@ public class PDFDocument {
 		document.addCreator("Standalone PDF Renderer using iText");
 
 		Paragraph header = new Paragraph();
-		
+
 		Font pageHeaderStyle = FontFactory.getFont(FontFactory.TIMES_ROMAN, 15, Font.BOLDITALIC | Font.UNDERLINE);
 		Font featureHeaderStyle = FontFactory.getFont(FontFactory.TIMES_ROMAN, 10, BaseColor.RED);
-		
-		header.add(new Chunk("PDF Pipeline Prototype v2 using iText\n", 
+
+		header.add(new Chunk("PDF Pipeline Prototype v2 using iText\n",
 							 pageHeaderStyle));
-		
+
 		header.setSpacingAfter(15f);
-		
-		
+
+
 			document.add(header);
-		
-		
+
+
 		Paragraph content = new Paragraph();
-		
-		content.add(new Chunk("Publication Count - Author Name - " + authorName, 
+
+		content.add(new Chunk("Publication Count - Author Name - " + authorName,
 							 featureHeaderStyle));
-		
+
 		content.setSpacingAfter(15f);
-		
+
 		document.add(content);
 		// step4
-		
+
 		PdfPTable publicationCount = createTable(yearToPublicationCount);
-		
+
 		document.add(publicationCount);
-		
+
 		content = new Paragraph();
-		
-		content.add(new Chunk("Transparency of Shapes", 
+
+		content.add(new Chunk("Transparency of Shapes",
 				 featureHeaderStyle));
 
 		content.setSpacingAfter(15f);
-		
+
 		document.add(content);
-		
+
 		createTransparencyShapes(document, pdfWriter);
-		
-		
+
+
         createImage(document, pdfWriter, featureHeaderStyle);
-		
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-						
+
     }
-	
-	
+
+
 	private void createImage(Document document, PdfWriter writer,
 			Font featureHeaderStyle) throws BadElementException,
 			MalformedURLException, IOException, DocumentException {
@@ -103,17 +103,17 @@ public class PDFDocument {
 		imageSprite.setAlignment(Image.UNDERLYING);
 
 		document.add(imageSprite);
-		
+
 		PdfContentByte cb = writer.getDirectContent();
 		ColumnText ct = new ColumnText(cb);
 		Chunk imageHeader = new Chunk("Images",
 									  featureHeaderStyle);
 		ct.addText(imageHeader);
 		ct.setAlignment(Element.ALIGN_LEFT);
-		ct.setSimpleColumn(imageSpriteX, imageSpriteY - imageSprite.getScaledHeight(), 
+		ct.setSimpleColumn(imageSpriteX, imageSpriteY - imageSprite.getScaledHeight(),
 				   imageSpriteX + imageSprite.getScaledWidth(), imageSpriteY + imageSprite.getScaledHeight() + 20);
 		ct.go();
-		
+
 		ct = new ColumnText(cb);
 		Chunk imageFooter = new Chunk("Footer to be set for a figure. Similar to 'image cpation'.",
 									  FontFactory.getFont(FontFactory.TIMES_ROMAN, 8));
@@ -126,7 +126,7 @@ public class PDFDocument {
 	private void createTransparencyShapes(Document document,
 			PdfWriter writer) throws Exception {
 		PdfContentByte cb = writer.getDirectContent();
-		
+
 		pictureBackdrop(document.leftMargin(), 350, cb);
 		cb.saveState();
 		PdfGState gs1 = new PdfGState();
@@ -134,10 +134,10 @@ public class PDFDocument {
 		cb.setGState(gs1);
 		pictureCircles(document.leftMargin(), 350, cb);
 		cb.restoreState();
-		
+
         cb.resetRGBColorFill();
 	}
-	
+
     /**
      * Prints a square and fills half of it with a gray rectangle.
      * @param x X coordinate
@@ -163,7 +163,7 @@ public class PDFDocument {
      * @throws Exception
      */
     public void pictureCircles(float x, float y, PdfContentByte cb) throws Exception {
-    	
+
 		cb.saveState();
 		PdfGState gs1 = new PdfGState();
 		gs1.setFillOpacity(1.0f);
@@ -182,58 +182,58 @@ public class PDFDocument {
     }
 
 	private PdfPTable createTable(Map<String, Integer> yearToPublicationCount) {
-		
+
 		Font normalContentStyle = FontFactory.getFont(FontFactory.TIMES_ROMAN, 11);
 		Font summaryContentStyle = FontFactory.getFont(FontFactory.TIMES_ROMAN, 11, Font.BOLDITALIC);
 		BaseColor summaryBackgroundColor = new BaseColor(0xEE, 0xEE, 0xEE);
 		BaseColor headerBackgroundColor = new BaseColor(0xC3, 0xD9, 0xFF);
 		BaseColor bodyBackgroundColor = BaseColor.WHITE;
-		
+
 		PdfPTable table = new PdfPTable(2);
 		table.setWidthPercentage(36.0f);
-		
+
 		table.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.getDefaultCell().setBorderWidth(0.0f);
 		table.setHeaderRows(2);
-		
+
 		PdfPCell cell;
 		cell = new PdfPCell(new Phrase("Publications per year", normalContentStyle));
 		setTableCaptionStyle(summaryBackgroundColor, cell);
 		table.addCell(cell);
-		
+
 		cell = new PdfPCell(new Phrase("Year", normalContentStyle));
 		setTableHeaderStyle(headerBackgroundColor, cell);
 		table.addCell(cell);
-		
+
 		cell.setPhrase(new Phrase("Publications", normalContentStyle));
 		table.addCell(cell);
-		
-		
-		
+
+
+
 		setTableBodyStyle(bodyBackgroundColor, cell);
 		int totalPublications = 0;
-		
+
 		for (Entry<String, Integer> currentEntry : yearToPublicationCount.entrySet()) {
-			
+
 			cell.setPhrase(new Phrase(currentEntry.getKey(), normalContentStyle));
 			table.addCell(cell);
-			
+
 			cell.setPhrase(new Phrase(currentEntry.getValue().toString(), normalContentStyle));
 			table.addCell(cell);
-			
+
 			totalPublications += currentEntry.getValue();
 		}
-		
+
 		setTableFooterStyle(summaryBackgroundColor, cell);
 		cell.setPhrase(new Phrase("Total", summaryContentStyle));
 		table.addCell(cell);
-		
+
 		cell.setPhrase(new Phrase(String.valueOf(totalPublications), summaryContentStyle));
 		table.addCell(cell);
-		
+
 		return table;
 	}
-	
+
 	private void setTableFooterStyle(BaseColor footerBackgroundColor,
 			  PdfPCell cell) {
 		cell.setBorderWidth(0.0f);
@@ -266,7 +266,7 @@ public class PDFDocument {
 		cell.setPaddingBottom(5f);
 		cell.setPaddingLeft(10f);
 	}
-	
+
 	private void setTableCaptionStyle(BaseColor summaryBackgroundColor,
 			PdfPCell cell) {
 		cell.setBorderWidth(0.0f);

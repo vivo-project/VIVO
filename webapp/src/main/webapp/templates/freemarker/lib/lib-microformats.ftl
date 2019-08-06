@@ -16,7 +16,7 @@
 			<#assign mst = type />
 			<#break>
 		</#list>
-    	<@getItemType mst "infoContentEntity"/> 
+    	<@getItemType mst "infoContentEntity"/>
     <#else>
         itemscope itemtype="http://schema.org/Thing"
     </#if>

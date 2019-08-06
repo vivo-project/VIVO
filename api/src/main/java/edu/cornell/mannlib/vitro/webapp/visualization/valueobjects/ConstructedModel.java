@@ -5,7 +5,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.ModelCons
 
 @SuppressWarnings("deprecation")
 public class ConstructedModel {
-	
+
 	private String uri;
 	private String individualLabel;
 	private String type;
@@ -16,7 +16,7 @@ public class ConstructedModel {
 		this.humanReadableType = ModelConstructorUtilities.modelTypeToHumanReadableName.get(type);
 		this.uri = uri == null ? "" : uri;
 	}
-	
+
 	public String getUri() {
 		return uri;
 	}

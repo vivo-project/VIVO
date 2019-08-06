@@ -6,9 +6,9 @@ CONSTRUCT {
      ?position core:positionInOrganization ?organization .
      ?organization rdfs:label ?label .
 } WHERE {
-     PERSON_URI core:relatedBy ?position . 
+     PERSON_URI core:relatedBy ?position .
      ?position a core:Position .
      ?position core:relates ?organization .
-     ?organization a foaf:Organization . 
+     ?organization a foaf:Organization .
      ?organization rdfs:label ?label .
 }

@@ -24,9 +24,9 @@ import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.GenericQueryM
 
 
 /**
- * This query runner is used to execute a sparql query that will fetch all the 
+ * This query runner is used to execute a sparql query that will fetch all the
  * properties  available for the provided individual URI.
- * 
+ *
  * @author cdtank
  */
 public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
@@ -47,22 +47,22 @@ public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
 		this.filterRule = filterRule;
 		this.rdfService = rdfService;
 		this.log = log;
-		
+
 	}
 
 	private String generateGenericSparqlQuery(String queryURI, String filterRule) {
 //		Resource uri1 = ResourceFactory.createResource(queryURI);
 		String filterClause;
-		
+
 		if (StringUtils.isNotBlank(filterRule)) {
 			filterClause = "FILTER ( " + filterRule + " ) . ";
 		} else {
-			filterClause = "";			
+			filterClause = "";
 		}
 
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
 							+ "SELECT "
-							+ "		(str(?predicate) as ?" + QueryFieldLabels.PREDICATE + ") " 
+							+ "		(str(?predicate) as ?" + QueryFieldLabels.PREDICATE + ") "
 							+ "		(str(?object) as ?" + QueryFieldLabels.OBJECT + ") "
 							+ "WHERE { {"
 							+ "<" + queryURI + "> ?predicate ?object.  }"
@@ -71,12 +71,12 @@ public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
 							+ "?vTitle ?predicate ?object . }"
 							+ filterClause
 							+ "}";
-            	
+
         log.debug("sparqlQuery = " + sparqlQuery);
-        
+
 		return sparqlQuery;
 	}
-	
+
 	public GenericQueryMap getQueryResult()
 			throws MalformedQueryParametersException {
 		if (StringUtils.isNotBlank(this.individualURI)) {
@@ -91,7 +91,7 @@ public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
                 throw new MalformedQueryParametersException(
                 			"URI provided for an individual is malformed.");
             }
-            
+
         } else {
             throw new MalformedQueryParametersException("URI parameter is either null or empty.");
         }

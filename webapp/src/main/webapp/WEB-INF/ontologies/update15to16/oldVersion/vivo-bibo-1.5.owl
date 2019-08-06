@@ -1214,7 +1214,7 @@ The Uniform Code Council (UCC) was the Numbering Organization in the USA to admi
   <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/oclcnum">
     <swvs:term_status>stable</swvs:term_status>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >http://info-uri.info/registry/OAIHandler?verb=GetRecord&amp;metadataPrefix=reg&amp;identifier=info:oclcnum/. 
+    >http://info-uri.info/registry/OAIHandler?verb=GetRecord&amp;metadataPrefix=reg&amp;identifier=info:oclcnum/.
 
 
 bibo has the domain of this property set to the union of Collection and Document.</vitro:descriptionAnnot>

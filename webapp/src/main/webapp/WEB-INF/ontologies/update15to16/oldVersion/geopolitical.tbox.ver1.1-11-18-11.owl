@@ -13,7 +13,7 @@
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >FAO DISCLAIMER:  Information on the FAO Country Profiles portal is provided as and when available. The designations employed and the presentation of information do not imply the expression of any opinion whatsoever on the part of the Food and Agriculture Organization of the United Nations (FAO) concerning the legal status of any country, territory, city or area, or of its authorities, or concerning the delimitation of its frontiers or boundaries. FAO makes every effort to ensure, but does not guarantee, the accuracy or completeness of and declines responsibility for any loss, damage, liability or expense suffered which is claimed to result from its use. </rdfs:comment>
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Version 1.1 of the ontology includes a structured description of sources (source creator, source identifier by language, and last updated date on source) . 
+    >Version 1.1 of the ontology includes a structured description of sources (source creator, source identifier by language, and last updated date on source) .
    </rdfs:comment>
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >FAO's geopolitical ontology version 1.1 was populated with FAO, UN and internationally recognized data sources.    </rdfs:comment>

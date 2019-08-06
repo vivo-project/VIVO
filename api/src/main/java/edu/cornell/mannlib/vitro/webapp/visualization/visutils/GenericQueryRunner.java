@@ -24,9 +24,9 @@ import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryP
 
 
 /**
- * This query runner is used to run a generic sparql query based on the "select", 
- * "where" & "filter" rules provided to it.  
- * 
+ * This query runner is used to run a generic sparql query based on the "select",
+ * "where" & "filter" rules provided to it.
+ *
  * @author cdtank
  */
 public class GenericQueryRunner implements QueryRunner<ResultSet> {
@@ -37,7 +37,7 @@ public class GenericQueryRunner implements QueryRunner<ResultSet> {
 	private Dataset dataset;
 
 	private Map<String, String> fieldLabelToOutputFieldLabel;
-	
+
 	private Log log = LogFactory.getLog(GenericQueryRunner.class.getName());
 
 	private String groupOrderClause;
@@ -45,9 +45,9 @@ public class GenericQueryRunner implements QueryRunner<ResultSet> {
 	private String aggregationRules;
 
 	public GenericQueryRunner(Map<String, String> fieldLabelToOutputFieldLabel,
-							   String aggregationRules, 
+							   String aggregationRules,
 							   String whereClause,
-							   String groupOrderClause, 
+							   String groupOrderClause,
 							   Dataset dataset) {
 
 		this.fieldLabelToOutputFieldLabel = fieldLabelToOutputFieldLabel;
@@ -70,31 +70,31 @@ public class GenericQueryRunner implements QueryRunner<ResultSet> {
 
 		StringBuilder sparqlQuery = new StringBuilder();
 		sparqlQuery.append(QueryConstants.getSparqlPrefixQuery());
-		
+
 		sparqlQuery.append("SELECT\n");
-		
-		for (Map.Entry<String, String> currentfieldLabelToOutputFieldLabel 
+
+		for (Map.Entry<String, String> currentfieldLabelToOutputFieldLabel
 				: this.fieldLabelToOutputFieldLabel.entrySet()) {
-			
+
 			sparqlQuery.append("\t(str(?").append(currentfieldLabelToOutputFieldLabel.getKey()).append(") as ?").append(currentfieldLabelToOutputFieldLabel.getValue()).append(")\n");
-			
+
 		}
-		
+
 		sparqlQuery.append("\n").append(this.aggregationRules).append("\n");
-		
+
 		sparqlQuery.append("WHERE {\n");
-		
+
 		sparqlQuery.append(this.whereClause);
-		
+
 		sparqlQuery.append("}\n");
-		
+
 		sparqlQuery.append(this.groupOrderClause);
-		
+
 		log.debug("sparqlQuery = " + sparqlQuery.toString());
-		
+
 		return sparqlQuery.toString();
 	}
-	
+
 	public ResultSet getQueryResult()
 			throws MalformedQueryParametersException {
 

@@ -6,21 +6,21 @@
 	<ul>
 		<li>
 			<#switch vocabularyService[0]['vocabService']>
-				<#case "AGROVOC"> 
+				<#case "AGROVOC">
 					AGROVOC (Agricultural Vocabulary)
 					<#break>
 				<#case "GEMET">
-					GEMET  (GEneral Multilingual Environmental Thesaurus) 
+					GEMET  (GEneral Multilingual Environmental Thesaurus)
 					<#break>
 				<#case "LCSH">
-					LCSH  (Library of Congress Subject Headings) 
+					LCSH  (Library of Congress Subject Headings)
 					<#break>
 				<#case "UMLS">
-					UMLS  (Unified Medical Language System) 
+					UMLS  (Unified Medical Language System)
 					<#break>
 				<#default>
 					${vocabularyService[0]['vocabService']!}
-			</#switch> 
+			</#switch>
 		</li>
 	</ul>
 </#if>

@@ -1,8 +1,8 @@
 <#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
-<#-- 
-Institutional Internal Class Form 
-To be associated later (upon completion of N3 Refactoring) with 
+<#--
+Institutional Internal Class Form
+To be associated later (upon completion of N3 Refactoring) with
 edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.InstitutionalInternalClassForm.
 -->
 
@@ -16,7 +16,7 @@ edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.Institu
 <section role="region">
     <form method="POST" action="${formUrl}" class="customForm">
         <input type="hidden" name="submitForm" id="submitForm" value="true" />
-        
+
         <#--If no local ontologies, display message for user to create a local ontology-->
         <#if ontologiesExist = false>
         <section id="noLocalOntologyExists" role="region">
@@ -28,23 +28,23 @@ edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.Institu
             </#if>
             <p>${i18n().please_create} <a href='${urls.base}/editForm?controller=Ontology' title="${i18n().new_local_ontology}">${i18n().new_local_oncology}</a> ${i18n().return_here_to_define_class}</p>
         </section>
-        
+
         <#--else if local ontologies exist and local classes exist, show drop-down of local classes-->
-        <#elseif useExistingLocalClass?has_content> 
+        <#elseif useExistingLocalClass?has_content>
         <section id="existingLocalClass" role="region">
             <#--Populated based on class list returned-->
             <label for="existingLocalClasses">${i18n().select_existing_local_class}</label>
-       
+
             <select id="existingLocalClasses" name="existingLocalClasses" role="combobox"<strong></strong>>
                 <#assign classUris = existingLocalClasses?keys />
-                
+
                 <#--If internal class exists, check against value in drop-down and select option-->
                 <#--<option value="" role="option">${i18n().select_one}</option>-->
                 <#list classUris as localClassUri>
                     <option value="${localClassUri}" role="option" <#if existingInternalClass = localClassUri>selected</#if> >${existingLocalClasses[localClassUri]}</option>
                 </#list>
             </select>
-            
+
             <p>${i18n().cannot_find_class} <a href="${formUrl}?cmd=createClass" title="${i18n().create_new_class}">${i18n().create_new_one}</a>.</p>
         </section>
 
@@ -52,17 +52,17 @@ edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.Institu
         <#elseif createNewClass?has_content>
         <section id="createNewLocalClass" role="region">
             <h3>${i18n().create_new_class}</h3>
-        
+
             <label for="localClassName">${i18n().name_capitalized}<span class="requiredHint"> *</span></label>
             <input type="text" id="localClassName" name="localClassName" value="" role="input" />
             <p class="note">${i18n().use_capitals_each_word}</p>
-    
+
             <#--If more than one local namespace, generate select-->
             <#if multipleLocalNamespaces = true>
                 <label for="existingLocalNamespace">${i18n().local_namespace}<span class="requiredHint"> *</span></label>
-                
+
                 <select id="existingLocalNamespaces" name="existingLocalNamespaces" role="combobox">
-                    <#assign namespaceUris = existingLocalNamespaces?keys /> 
+                    <#assign namespaceUris = existingLocalNamespaces?keys />
                     <#list namespaceUris as existingNamespace>
                         <option value="${existingNamespace}" role="option">${existingLocalNamespaces[existingNamespace]}</option>
                     </#list>
@@ -71,7 +71,7 @@ edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.Institu
             <input type="hidden" id="existingLocalNamespaces" name="existingLocalNamespaces" value="${existingLocalNamespace}" />
             </#if>
         </section>
-    
+
         <#--this case is an error case-->
         <#else>
             <p>${i18n().problematic_section_error}</p>

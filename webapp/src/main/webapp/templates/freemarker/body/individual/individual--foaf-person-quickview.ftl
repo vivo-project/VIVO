@@ -20,17 +20,17 @@
 <#--Number of distinct languages represented, with no language tag counting as a language, across labels-->
 <#if !languageCount??>
 	<#assign languageCount = 1>
-</#if>	
+</#if>
 <#assign qrCodeIcon = "qr-code-icon.png">
 <#assign individualImage>
-    <@p.image individual=individual 
-              propertyGroups=propertyGroups 
-              namespaces=namespaces 
-              editable=editable 
+    <@p.image individual=individual
+              propertyGroups=propertyGroups
+              namespaces=namespaces
+              editable=editable
               showPlaceholder="always"/>
 </#assign>
 
-<#-- 
+<#--
      the display in this template is driven by whether the individual has a web page,
      so set this variable now
 -->
@@ -57,10 +57,10 @@
             <#if relatedSubject??>
                 <h2>${relatedSubject.relatingPredicateDomainPublic} ${i18n().for} ${relatedSubject.name}</h2>
                 <p><a href="${relatedSubject.url}" title="${i18n().return_to(relatedSubject.name)}">&larr; ${i18n().return_to(relatedSubject.name)}</a></p>
-            <#else> 
+            <#else>
                 <#-- Image  -->
                 <div id="photo-wrapper">${individualImage}</div>
-                <h1 itemprop="name" class="vcard foaf-person fn" <#if !editable>style="float:left;border-right:1px solid #A6B1B0;"</#if>> 
+                <h1 itemprop="name" class="vcard foaf-person fn" <#if !editable>style="float:left;border-right:1px solid #A6B1B0;"</#if>>
                     <#-- Label -->
                     <@p.label individual editable labelCount localesCount/>
                 </h1>
@@ -84,9 +84,9 @@
                 </#if>
                 <#-- If preferredTitle is unpopulated, display mostSpecificTypes -->
                 <#if ! (title.statements)?has_content>
-                    <@p.mostSpecificTypesPerson individual editable /> 
+                    <@p.mostSpecificTypesPerson individual editable />
                 </#if>
-            </#if>       
+            </#if>
         </header>
     </section> <!-- end label-title  -->
     <#include "individual-adminPanel.ftl">
@@ -104,16 +104,16 @@
         </div>
     </#if>
 
-    <#-- 
+    <#--
         If this individual has a web page or pages, then we highlight them on the left-hand side
         of the profile page against a shaded background. If not, all the right-hand content shifts
         left and displays across the full width of the page.
     -->
     <#if hasWebpage >
-        <section id="qv-share-contact" class="share-contact" role="region" <#if !editable>style="padding-top:12px"</#if>> 
+        <section id="qv-share-contact" class="share-contact" role="region" <#if !editable>style="padding-top:12px"</#if>>
             <img id="webpage-popout-top" src="${urls.images}/individual/webpage-popout-top.png"  alt="${i18n().background_top_image}"/>
             <div id="webpage-wrapper" >
-                <#assign webpage = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#URL")!>            
+                <#assign webpage = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#URL")!>
                 <#if webpage?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
                     <#if editable>
                         <h2 class="websites" >${i18n().websites} <@p.addLink webpage editable ""/></h2>
@@ -128,7 +128,7 @@
             <img id="webpage-popout-bottom" src="${urls.images}/individual/webpage-popout-bottom.png"  alt="${i18n().background_top_image}"  />
         </section> <!-- end share-contact -->
     </#if>
-    <section id="individual-info" class="qv-individual-info" role="region" style=" <#if !editable>padding-top:12px;</#if><#if hasWebpage>width:53%<#else>width:100%;clear:left</#if>;">       
+    <section id="individual-info" class="qv-individual-info" role="region" style=" <#if !editable>padding-top:12px;</#if><#if hasWebpage>width:53%<#else>width:100%;clear:left</#if>;">
         <!-- Positions -->
         <#include "individual-positions.ftl">
 
@@ -136,7 +136,7 @@
         <#include "individual-researchAreas.ftl">
 
         <!-- Geographic Focus -->
-        <#assign geographicFocus = propertyGroups.pullProperty("${core}geographicFocus")!> 
+        <#assign geographicFocus = propertyGroups.pullProperty("${core}geographicFocus")!>
         <#if geographicFocus?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
             <h2 id="geoFocus" class="mainPropGroup">${i18n().geographic_focus} <@p.addLink geographicFocus editable ""/></h2>
             <@p.verboseDisplay geographicFocus />
@@ -155,12 +155,12 @@
                     <@p.objectProperty geographicFocus editable />
                 </ul>
             </#if>
-        </#if>   
+        </#if>
 
         <#-- If the individual does not have webpages and we're in edit mode, provide the opportunity to add webpages -->
         <#if editable && !hasWebpage >
             <!-- Webpages -->
-            <#assign webpage = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#URL")!>            
+            <#assign webpage = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#URL")!>
             <#if webpage?has_content>
                 <h2 id="webpage" class="mainPropGroup">${i18n().websites} <@p.addLink webpage editable ""/></h2>
                 <@p.verboseDisplay webpage />

@@ -17,7 +17,7 @@ var VisModeController = Class.extend({
 		return this.isUnloaded;
 	},
 	loadData: function(url, sync) {
-		
+
 		// Download data from server and add to markerManager if not gotten already
 		var me = this;
 		if (me.isUnloaded) {
@@ -40,17 +40,17 @@ var VisModeController = Class.extend({
 		} // end if
 	},
 	loadJsonData: function(me, data) {
-		
+
 		$("#" + responseContainerID).unblock();
-		
+
 		if (ERROR_DISPLAY_WIDGET.isErrorConditionTriggered(data)) {
 			$("#map-of-science-response").hide();
 			ERROR_DISPLAY_WIDGET.show(ENTITY_TYPE, data);
 			return;
 		}
-		
+
 		data = data[0];
-		
+
 		$.each(me.widgets, function(i, widget) {
 			widget.loadJsonData(data);
 		});
@@ -80,7 +80,7 @@ var VisModeController = Class.extend({
 	},
 	changeFilter: function(value) {
 		var type = this.getFilterType(value);
-		
+
 		$.each(this.widgets, function(i, widget) {
 			widget.changeFilter(type);
 		});
@@ -102,7 +102,7 @@ var EntityVisModeController = VisModeController.extend({
 		var widgets = {};
 		widgets['scimap'] = new ScimapWidget(map);
 		widgets['sci_area_table'] = new DataTableWidget(widgets['scimap']);
-		
+
 		this.widgets = widgets;
 	}
 });
@@ -123,7 +123,7 @@ var ComparisonVisModeController = VisModeController.extend({
 		widgets['scimap'] = new ComparisonScimapWidget(map);
 		widgets['entity_area_table'] = new EntityTablesWidget(widgets['scimap']);
 		widgets['sci_area_table'] = new ComparisonDataTableWidget(widgets['scimap'], widgets['entity_area_table']);
-		
+
 		this.widgets = widgets;
 	}
 });

@@ -17,16 +17,16 @@
 
 	<bean id="person_pub_count"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.PersonPublicationCountRequestHandler" />
-	
+
 	<bean id="utilities"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.utilities.UtilitiesRequestHandler" />
-	
+
 	<bean id="coauthorship"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.CoAuthorshipRequestHandler" />
-		
+
 	<bean id="person_grant_count"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.persongrantcount.PersonGrantCountRequestHandler" />
-	
+
 	<bean id="person_level"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.personlevel.PersonLevelRequestHandler" />
 
@@ -34,20 +34,20 @@
 		class="edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator.CoPIGrantCountRequestHandler" />
 
     <bean id="pub_temporal"
-        class="edu.cornell.mannlib.vitro.webapp.visualization.temporalgraph.TemporalPublicationVisualizationRequestHandler" />		
+        class="edu.cornell.mannlib.vitro.webapp.visualization.temporalgraph.TemporalPublicationVisualizationRequestHandler" />
 
     <bean id="grant_temporal"
-        class="edu.cornell.mannlib.vitro.webapp.visualization.temporalgraph.TemporalGrantVisualizationRequestHandler" />	
-	
+        class="edu.cornell.mannlib.vitro.webapp.visualization.temporalgraph.TemporalGrantVisualizationRequestHandler" />
+
     <bean id="map_of_science"
         class="edu.cornell.mannlib.vitro.webapp.visualization.mapofscience.MapOfScienceVisualizationRequestHandler" />
-	
+
 	<bean id="regenerate_vis_models"
         class="edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.ModelConstructorRequestHandler" />
-        
+
 	<bean id="tools"
         class="edu.cornell.mannlib.vitro.webapp.visualization.tools.ToolsRequestHandler" />
-        
+
 	<bean id="visualizationInjector"
 		class="edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationInjector">
 		<property name="visualizations">
@@ -63,45 +63,45 @@
 				<entry key="person_pub_count">
 					<ref bean="person_pub_count"></ref>
 				</entry>
-				
+
 				<entry key="utilities">
 					<ref bean="utilities"></ref>
 				</entry>
-				
+
 				<entry key="coauthorship">
 					<ref bean="coauthorship"></ref>
 				</entry>
-				
+
 				<entry key="person_grant_count">
 					<ref bean="person_grant_count"></ref>
 				</entry>
-				
+
 				<entry key="person_level">
 					<ref bean="person_level"></ref>
 				</entry>
-				
+
 				<entry key="author-network">
 					<ref bean="person_level"></ref>
 				</entry>
-				
+
 				<entry key="investigator-network">
 					<ref bean="person_level"></ref>
 				</entry>
-                
-                <!-- 
+
+                <!--
                 <entry key="entity_comparison">
                     <ref bean="entity_comparison"></ref>
                 </entry>
                 -->
-                
+
                 <entry key="entity_comparison">
                     <ref bean="pub_temporal"></ref>
                 </entry>
-                                
+
                 <entry key="pub_temporal">
                     <ref bean="pub_temporal"></ref>
                 </entry>
-                
+
                 <entry key="publication-graph">
                     <ref bean="pub_temporal"></ref>
                 </entry>
@@ -109,31 +109,31 @@
 				<entry key="coprincipalinvestigator">
 					<ref bean="coprincipalinvestigator"></ref>
 				</entry>
-				
+
 				<entry key="entity_grant_count">
 					<ref bean="grant_temporal"></ref>
-				</entry>	
-				                                
+				</entry>
+
                 <entry key="grant_temporal">
                     <ref bean="grant_temporal"></ref>
                 </entry>
-                
+
                 <entry key="grant-graph">
                     <ref bean="grant_temporal"></ref>
-                </entry>                			
-				 
+                </entry>
+
                 <entry key="map-of-science">
                     <ref bean="map_of_science"></ref>
-                </entry>    
-                
+                </entry>
+
 				<entry key="refresh-cache">
                     <ref bean="regenerate_vis_models"></ref>
                 </entry>
-                
+
                 <entry key="tools">
                     <ref bean="tools"></ref>
-                </entry>    				 
-				 
+                </entry>
+
 			</map>
 		</property>
 

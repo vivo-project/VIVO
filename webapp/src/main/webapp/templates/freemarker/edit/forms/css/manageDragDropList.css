@@ -7,13 +7,13 @@
     list-style: none;
     margin-bottom: .75em;
 }
-/* Use class dd rather than jQuery UI's class ui-sortable, so that we can remove 
+/* Use class dd rather than jQuery UI's class ui-sortable, so that we can remove
 the class if there's fewer than one author. We don't want to remove the ui-sortable
 class, in case we want to re-enable DD without a page reload. */
 #dragDropList.dd li {
     padding-left: 1em;
-    background: url("../images/sortable_icon.png") no-repeat left center;  
-    cursor: move;  
+    background: url("../images/sortable_icon.png") no-repeat left center;
+    cursor: move;
 }
 #dragDropList .itemName {
     display: inline-block;

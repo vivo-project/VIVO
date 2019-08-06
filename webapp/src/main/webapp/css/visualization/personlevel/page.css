@@ -63,7 +63,7 @@ p.datatable {
 }
 #body h1 {
     margin: 0;
-} 
+}
 #ego_profile h1 a {
   text-decoration: none;
 }
@@ -88,7 +88,7 @@ p.datatable {
     float: left;
     margin-right: 10px;
 }
-.toggle_visualization { 
+.toggle_visualization {
     max-width: 230px;
     float: right;
     display: none;
@@ -148,7 +148,7 @@ table.sparkline_wrapper_table td, th {
     width: 50%;
 }
 #visPanel {
-    float: right; 
+    float: right;
     width: 600px;
 }
 .vis-tables table caption {
@@ -164,46 +164,46 @@ table.sparkline_wrapper_table td, th {
 .vis-tables table thead {
     text-align: left;
 }
-.vis-tables table thead tr th { 
-    background-color: #eaeaea; 
-    font-size: 14px; 
-    padding: 5px; 
-    vertical-align: top; 
-    text-align: left;  
+.vis-tables table thead tr th {
+    background-color: #eaeaea;
+    font-size: 14px;
+    padding: 5px;
+    vertical-align: top;
+    text-align: left;
 }
-.vis-tables table tbody { 
-    font-size: 12px;  
+.vis-tables table tbody {
+    font-size: 12px;
 }
-.vis-tables table tbody td { 
-    text-align: left; 
-    padding: 5px;  
+.vis-tables table tbody td {
+    text-align: left;
+    padding: 5px;
 }
 .moniker {
     margin-top: 0;
 }
 .spacer {
-    font-size: 0; 
-    line-height: 0; 
+    font-size: 0;
+    line-height: 0;
     clear: both;
 }
 /* <------ BODY START*/
 #body {
     max-width: 900px;
-    min-width: 800px; 
-    margin: 0 auto; 
+    min-width: 800px;
+    margin: 0 auto;
     position: relative;
     background: white;
 }
 #bodyPannel {
-    background: #FFFFFF;    
+    background: #FFFFFF;
     height: 840px;
     width: 100%;
     clear: both;
 }
-#dataPanel { 
+#dataPanel {
     border: 1px solid #e9e9e9;
     background: #F7F9F9;
-    width: 250px; 
+    width: 250px;
     height: 615px;
     float: left;
 }
@@ -234,7 +234,7 @@ table.sparkline_wrapper_table td, th {
 }
 /* <------ CONTAINER OVERRIDE FROM LIQUID.CSS*/
 .container {
-    width: inherit; 
+    width: inherit;
 }
 #incomplete-data {
     line-height: 150%;
@@ -257,5 +257,5 @@ table.sparkline_wrapper_table td, th {
     width: 54px;
 }
 #table_heading {
-    width: 80%; 
+    width: 80%;
 }

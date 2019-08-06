@@ -88,7 +88,7 @@ public class CoPIGraphMLWriter {
 
         return graphMLContent;
 	}
-	
+
 	public StringBuilder getCoPIGraphMLContent(){
 		return coPIGraphMLContent;
 	}
@@ -103,7 +103,7 @@ public class CoPIGraphMLWriter {
 		if (coPIData.getCollaborators() != null & coPIData.getCollaborators().size() > 0) {
 			generateNodeSectionContent(coPIData, graph);
 		}
-		
+
 		if (coPIData.getCollaborations() != null & coPIData.getCollaborations().size() > 0) {
 			generateEdgeSectionContent(coPIData, graph);
 		}
@@ -113,7 +113,7 @@ public class CoPIGraphMLWriter {
 		Document doc = graphElement.getOwnerDocument();
 
 		graphElement.appendChild(doc.createComment("edges"));
-		
+
 		Set<Collaboration> edges = coPIData.getCollaborations();
 		List<Collaboration> orderedEdges = new ArrayList<Collaboration>(edges);
 		orderedEdges.sort(new CollaborationComparator());
@@ -121,12 +121,12 @@ public class CoPIGraphMLWriter {
 		for (Collaboration currentEdge : orderedEdges) {
 			/*
 			 * This method actually creates the XML code for a single edge. "graphMLContent"
-			 * is being side-effected. 
+			 * is being side-effected.
 			 * */
 			getEdgeContent(graphElement, currentEdge);
 		}
 	}
-	
+
 	private void getEdgeContent(Element graphElement, Collaboration currentEdge) {
 		Document doc = graphElement.getOwnerDocument();
 
@@ -168,9 +168,9 @@ public class CoPIGraphMLWriter {
 				earliestCount.setTextContent(publicationInfo.getValue().toString());
 				edge.appendChild(earliestCount);
 			}
-			
+
 		}
-		
+
 		if (currentEdge.getLatestCollaborationYearCount() != null) {
 			for (Map.Entry<String, Integer> publicationInfo : currentEdge.getLatestCollaborationYearCount().entrySet()) {
 				Element latest = doc.createElementNS(GRAPHML_NS, "data");
@@ -183,9 +183,9 @@ public class CoPIGraphMLWriter {
 				latestCount.setTextContent(publicationInfo.getValue().toString());
 				edge.appendChild(latestCount);
 			}
-			
+
 		}
-		
+
 		if (currentEdge.getUnknownCollaborationYearCount() != null) {
 			Element unknown = doc.createElementNS(GRAPHML_NS, "data");
 			unknown.setAttribute("key", "num_unknown_collaboration");
@@ -201,21 +201,21 @@ public class CoPIGraphMLWriter {
 
 		Collaborator egoNode = coPIData.getEgoCollaborator();
 		Set<Collaborator> piNodes = coPIData.getCollaborators();
-		
+
 		/*
 		 * This method actually creates the XML code for a single node. "graphMLContent"
 		 * is being side-effected. The egoNode is added first because this is the "requirement"
 		 * of the co-pi vis. Ego should always come first.
-		 * 
+		 *
 		 * */
 		getNodeContent(graphElement, egoNode);
-		
+
 		List<Collaborator> orderedPINodes = new ArrayList<Collaborator>(piNodes);
 		orderedPINodes.remove(egoNode);
-		
+
 		orderedPINodes.sort(new CollaboratorComparator());
-		
-		
+
+
 		for (Collaborator currNode : orderedPINodes) {
 			/*
 			 * We have already printed the Ego Node info.
@@ -247,7 +247,7 @@ public class CoPIGraphMLWriter {
 		label.setAttribute("key", "label");
 		label.setTextContent(collaborator.getCollaboratorName());
 		node.appendChild(label);
-		
+
 		if (profileURL != null) {
 			Element profile = doc.createElementNS(GRAPHML_NS, "data");
 			profile.setAttribute("key", "profile_url");
@@ -264,7 +264,7 @@ public class CoPIGraphMLWriter {
 			/*
 			 * There is no clean way of getting the map contents in java even though
 			 * we are sure to have only one entry on the map. So using the for loop.
-			 * I am feeling dirty just about now. 
+			 * I am feeling dirty just about now.
 			 * */
 			for (Map.Entry<String, Integer> publicationInfo : collaborator.getEarliestActivityYearCount().entrySet()) {
 				Element earliest = doc.createElementNS(GRAPHML_NS, "data");
@@ -278,7 +278,7 @@ public class CoPIGraphMLWriter {
 				node.appendChild(earliestCount);
 			}
 		}
-		
+
 		if (collaborator.getLatestActivityYearCount() != null) {
 			for (Map.Entry<String, Integer> publicationInfo : collaborator.getLatestActivityYearCount().entrySet()) {
 				Element latest = doc.createElementNS(GRAPHML_NS, "data");
@@ -292,7 +292,7 @@ public class CoPIGraphMLWriter {
 				node.appendChild(latestCount);
 			}
 		}
-		
+
 		if (collaborator.getUnknownActivityYearCount() != null) {
 			Element unknown = doc.createElementNS(GRAPHML_NS, "data");
 			unknown.setAttribute("key", "num_unknown_grant");
@@ -303,16 +303,16 @@ public class CoPIGraphMLWriter {
 
 	private void generateKeyDefinitionContent(CollaborationData coPIData, Element rootElement) {
 		/*
-		 * Generate the key definition content for node. 
+		 * Generate the key definition content for node.
 		 * */
 		getKeyDefinitionFromSchema(coPIData.getNodeSchema(), rootElement);
-		
+
 		/*
-		 * Generate the key definition content for edge. 
+		 * Generate the key definition content for edge.
 		 * */
 		getKeyDefinitionFromSchema(coPIData.getEdgeSchema(), rootElement);
 	}
-	
+
 	private void getKeyDefinitionFromSchema(Set<Map<String, String>> schema, Element rootElement) {
 		Document doc = rootElement.getOwnerDocument();
 
@@ -322,7 +322,7 @@ public class CoPIGraphMLWriter {
 			for (Map.Entry<String, String> currentAttributeKey : currentNodeSchemaAttribute.entrySet()) {
 				key.setAttribute(currentAttributeKey.getKey(), currentAttributeKey.getValue());
 			}
-			
+
 			if (currentNodeSchemaAttribute.containsKey("default")) {
 				Element def = doc.createElementNS(GRAPHML_NS, "default");
 				def.setTextContent(currentNodeSchemaAttribute.get("default"));

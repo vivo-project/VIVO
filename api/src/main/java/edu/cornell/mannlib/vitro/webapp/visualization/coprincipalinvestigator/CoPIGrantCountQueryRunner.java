@@ -44,13 +44,13 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UniqueIDGenerator
  * Deepak Konidena
  */
 public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData> {
-	
+
 	private static final int MAX_PI_PER_GRANT_ALLOWED = 100;
-	
+
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
-	
+
 	private String egoURI;
-	
+
 	private RDFService rdfService;
 	private VitroRequest vitroRequest;
 
@@ -59,28 +59,28 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 	private long before, after;
 
 	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME = ""
-		+ 		"OPTIONAL {"		
+		+ 		"OPTIONAL {"
 		+ "			?Role core:dateTimeInterval ?dateTimeIntervalValue . "
-		+			"?dateTimeIntervalValue core:start ?startDate . "		
-		+			"?startDate core:dateTime ?startDateTimeValue . " 	
-//		+			"OPTIONAL {"	
-//		+				"?dateTimeIntervalValue core:end ?endDate . "	
-//		+				"?endDate core:dateTime ?endDateTimeValue . " 			
+		+			"?dateTimeIntervalValue core:start ?startDate . "
+		+			"?startDate core:dateTime ?startDateTimeValue . "
+//		+			"OPTIONAL {"
+//		+				"?dateTimeIntervalValue core:end ?endDate . "
+//		+				"?endDate core:dateTime ?endDateTimeValue . "
 //		+			"}"
-		+ 		"} . ";	
-	
+		+ 		"} . ";
+
 	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME = ""
-		+ 		"OPTIONAL {"	
+		+ 		"OPTIONAL {"
 		+ "			?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant . "
-		+			"?dateTimeIntervalValueForGrant core:start ?startDateForGrant . "		
-		+			"?startDateForGrant core:dateTime ?startDateTimeValueForGrant . " 	
-//		+			"OPTIONAL {"	
-//		+				"?dateTimeIntervalValueForGrant core:end ?endDateForGrant . "	
-//		+				"?endDateForGrant core:dateTime ?endDateTimeValueForGrant . " 			
+		+			"?dateTimeIntervalValueForGrant core:start ?startDateForGrant . "
+		+			"?startDateForGrant core:dateTime ?startDateTimeValueForGrant . "
+//		+			"OPTIONAL {"
+//		+				"?dateTimeIntervalValueForGrant core:end ?endDateForGrant . "
+//		+				"?endDateForGrant core:dateTime ?endDateTimeValueForGrant . "
 //		+			"}"
-		+ 		"}";	
-	
-	
+		+ 		"}";
+
+
 	public CoPIGrantCountQueryRunner(String egoURI, VitroRequest vreq, Log log) {
 
 		this.egoURI = egoURI;
@@ -88,24 +88,24 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 		this.vitroRequest = vreq;
 	//	this.log = log;
 	}
-	
+
 	private String generateEgoCoPIquery(String queryURI) {
 
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
 			+ "SELECT "
-			+ "		(str(<" + queryURI + ">) as ?" + QueryFieldLabels.PI_URL + ") " 
-			+ "		(str(?PILabel) as ?" + QueryFieldLabels.PI_LABEL + ") " 
-			+ "		(str(?Grant) as ?"	+ QueryFieldLabels.GRANT_URL + ") "	
-//			+ "		(str(?GrantLabel) as ?" + QueryFieldLabels.GRANT_LABEL + ") " 
+			+ "		(str(<" + queryURI + ">) as ?" + QueryFieldLabels.PI_URL + ") "
+			+ "		(str(?PILabel) as ?" + QueryFieldLabels.PI_LABEL + ") "
+			+ "		(str(?Grant) as ?"	+ QueryFieldLabels.GRANT_URL + ") "
+//			+ "		(str(?GrantLabel) as ?" + QueryFieldLabels.GRANT_LABEL + ") "
 			+ " 	(str(?startDateTimeValue) as ?grantStartDateLit) "
 //			+ "		(str(?endDateTimeValue) as ?grantEndDateLit)  "
 			+ " 	(str(?startDateTimeValueForGrant) as ?grantStartDateForGrantLit) "
-//			+ "		(str(?endDateTimeValueForGrant) as ?grantEndDateForGrantLit)  "			
+//			+ "		(str(?endDateTimeValueForGrant) as ?grantEndDateForGrantLit)  "
 			+ "		(str(?CoPI) as ?" + QueryFieldLabels.CO_PI_URL + ") "
 			+ "		(str(?CoPILabel) as ?" + QueryFieldLabels.CO_PI_LABEL + ") "
 			+ "WHERE "
-			+ "{ "  	
-			+ 		"<" + queryURI + "> rdfs:label ?PILabel . "  	
+			+ "{ "
+			+ 		"<" + queryURI + "> rdfs:label ?PILabel . "
 			+  		"{ "
 			+			"<" + queryURI + "> <http://purl.obolibrary.org/obo/RO_0000053> ?Role . "
 		    +			"?Role rdf:type core:CoPrincipalInvestigatorRole . "
@@ -351,12 +351,12 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 
 	private static class QueryResultConsumer extends ResultSetConsumer {
 		Set<Collaborator> nodes = new HashSet<Collaborator>();
-		
+
 		Map<String, Activity> grantURLToVO = new HashMap<String, Activity>();
 		Map<String, Set<Collaborator>> grantURLToCoPIs = new HashMap<String, Set<Collaborator>>();
 		Map<String, Collaborator> nodeURLToVO = new HashMap<String, Collaborator>();
 		Map<String, Collaboration> edgeUniqueIdentifierToVO = new HashMap<String, Collaboration>();
-		
+
 		Collaborator egoNode = null;
 
 		Set<Collaboration> edges = new HashSet<Collaboration>();

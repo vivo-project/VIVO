@@ -7,9 +7,9 @@
 // first an inline dependency, jquery.colorhelpers.js, we inline it here
 // for convenience
 /* Plugin for jQuery for working with colors.
- * 
+ *
  * Version 1.0.
- * 
+ *
  * Inspiration from jQuery color animation plugin by John Resig.
  *
  * Released under the MIT license by Ole Laursen, October 2009.

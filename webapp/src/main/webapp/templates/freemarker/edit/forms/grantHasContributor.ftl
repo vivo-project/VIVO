@@ -39,12 +39,12 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 	<#assign submissionErrors = editSubmission.validationErrors/>
 </#if>
 
-<#if editMode == "edit" || editMode == "repair">    
-        <#assign titleVerb="${i18n().edit_capitalized}">        
+<#if editMode == "edit" || editMode == "repair">
+        <#assign titleVerb="${i18n().edit_capitalized}">
         <#assign submitButtonText="${i18n().save_changes}">
         <#assign disabledVal="disabled">
 <#else>
-        <#assign titleVerb="${i18n().add_capitalized}">        
+        <#assign titleVerb="${i18n().add_capitalized}">
         <#assign submitButtonText="${i18n().create_entry}">
         <#assign disabledVal=""/>
 </#if>
@@ -94,16 +94,16 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
          <#if lvf.submissionErrorExists(editSubmission, "roleType")>
  	        ${i18n().select_educational_training_value}<br />
         </#if>
-        
-        
+
+
         </p>
     </section>
 </#if>
 
-<@lvf.unsupportedBrowser urls.base /> 
+<@lvf.unsupportedBrowser urls.base />
 
-<section id="grantHasContributorSection" role="region">        
-    
+<section id="grantHasContributorSection" role="region">
+
     <form id="grantHasContributor" class="customForm noIE67" action="${submitUrl}"  role="add/edit organizational training">
     <p >
         <label for="person">${i18n().person_capitalized}: ${i18n().last_name}  ${requiredHint}<span style="padding-left:322px">${i18n().first_name}  ${requiredHint}</span></label>
@@ -113,26 +113,26 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
             <input type="hidden" id="lastName" name="lastName" value="">
             <input class="display" type="hidden" acGroupName="person" id="personDisplay" name="personLabelDisplay" value="${personLabelDisplayValue}" >
     </p>
-        
+
     <div class="acSelection" acGroupName="person">
         <p class="inline">
             <label>${i18n().selected_person}:</label>
             <span class="acSelectionInfo"></span>
-            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
             <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="personUri" name="existingPerson" value="${existingPersonValue}" ${flagClearLabelForExisting}="true" />
     </div>
-                                    
+
     <label for="roleType">${i18n().role_type} ${requiredHint}</label>
     <#assign roleTypeOpts = editConfiguration.pageData.roleType />
     <select name="roleType" style="margin-top:-2px" >
-        <option value="" <#if roleTypeValue == "">selected</#if>>${i18n().select_one}</option>                
-        <#list roleTypeOpts?keys as key>             
-            <option value="${key}"  <#if roleTypeValue == key>selected</#if>><#if roleTypeOpts[key] == "Other">${i18n().researcher_role}<#else>${roleTypeOpts[key]}</#if></option>         
+        <option value="" <#if roleTypeValue == "">selected</#if>>${i18n().select_one}</option>
+        <#list roleTypeOpts?keys as key>
+            <option value="${key}"  <#if roleTypeValue == key>selected</#if>><#if roleTypeOpts[key] == "Other">${i18n().researcher_role}<#else>${roleTypeOpts[key]}</#if></option>
         </#list>
     </select>
-    
+
   	<#--End draw elements-->
     <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>
     <p class="submit">
@@ -168,7 +168,7 @@ $(document).ready(function() {
 </script>
 
 </section>
- 
+
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customFormWithAutocomplete.css" />')}

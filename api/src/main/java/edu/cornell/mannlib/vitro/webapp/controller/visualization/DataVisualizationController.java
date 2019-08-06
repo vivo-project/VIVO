@@ -38,55 +38,55 @@ public class DataVisualizationController extends VitroHttpServlet {
 	public static final String URL_ENCODING_SCHEME = "UTF-8";
 
 	private static final Log log = LogFactory.getLog(DataVisualizationController.class.getName());
-	
+
     protected static final Syntax SYNTAX = Syntax.syntaxARQ;
-    
+
     public static final String FILE_CONTENT_TYPE_KEY = "fileContentType";
     public static final String FILE_CONTENT_KEY = "fileContent";
     public static final String FILE_NAME_KEY = "fileName";
-   
+
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws IOException, ServletException {
-    	
+
 		VitroRequest vreq = new VitroRequest(request);
-	    	
+
     	/*
-    	 * Based on the query parameters passed via URI get the appropriate visualization 
+    	 * Based on the query parameters passed via URI get the appropriate visualization
     	 * request handler.
     	 * */
-    	VisualizationRequestHandler visRequestHandler = 
+    	VisualizationRequestHandler visRequestHandler =
     			getVisualizationRequestHandler(vreq);
-    	
-    	
+
+
     	if (visRequestHandler != null) {
-    		
+
     		if (visRequestHandler.getRequiredPrivileges() != null) {
     			if (!isAuthorizedToDisplayPage(request, response, visRequestHandler.getRequiredPrivileges())) {
                 	return;
                 }
     		}
-    		
+
     		/*
         	 * Pass the query to the selected visualization request handler & render the vis.
         	 * Since the visualization content is directly added to the response object we are side-
         	 * effecting this method.
         	 * */
             try {
-            	
+
             	Map<String, String> dataResponse = renderVisualization(vreq, visRequestHandler);
-            	
+
                 response.setContentType(dataResponse.get(FILE_CONTENT_TYPE_KEY));
-                
+
                 if (dataResponse.containsKey(FILE_NAME_KEY)) {
-                	response.setHeader("Content-Disposition", 
+                	response.setHeader("Content-Disposition",
                 					   "attachment;filename=" + dataResponse.get(FILE_NAME_KEY));
                 }
-                
+
         		response.getWriter().write(dataResponse.get(FILE_CONTENT_KEY));
-        		
+
 				return;
-				
+
 			} catch (MalformedQueryParametersException e) {
 
 	    		UtilityFunctions.handleMalformedParameters(e.getMessage(),
@@ -95,37 +95,37 @@ public class DataVisualizationController extends VitroHttpServlet {
 			}
 
         } else {
-    		
+
     		UtilityFunctions.handleMalformedParameters(
     								"Inappropriate query parameters were submitted.",
     								response,
     								log);
-    		
+
     	}
-    	
-        
+
+
     }
 
 
 	private Map<String, String> renderVisualization(
 			VitroRequest vitroRequest,
-			VisualizationRequestHandler visRequestHandler) 
+			VisualizationRequestHandler visRequestHandler)
 			throws MalformedQueryParametersException {
-		
+
 		Model model = vitroRequest.getJenaOntModel(); // getModel()
         if (model == null) {
-            
-            String errorMessage = "This service is not supporeted by the current " 
-            			+ "webapp configuration. A jena model is required in the " 
+
+            String errorMessage = "This service is not supporeted by the current "
+            			+ "webapp configuration. A jena model is required in the "
             			+ "servlet context.";
 
             log.error(errorMessage);
-            
+
             throw new MalformedQueryParametersException(errorMessage);
         }
-		
+
 		Dataset dataset = setupJENADataSource(vitroRequest);
-        
+
 		if (dataset != null && visRequestHandler != null) {
 			try {
 				return visRequestHandler.generateDataVisualization(vitroRequest,
@@ -134,7 +134,7 @@ public class DataVisualizationController extends VitroHttpServlet {
 			} catch (JsonProcessingException e) {
 			}
         }
-        	
+
 		String errorMessage = "Data Model Empty &/or Inappropriate "
 									+ "query parameters were submitted. ";
 
@@ -143,21 +143,21 @@ public class DataVisualizationController extends VitroHttpServlet {
 
 	private VisualizationRequestHandler getVisualizationRequestHandler(
 				VitroRequest vitroRequest) {
-		
+
 		String visType = vitroRequest.getParameter(VisualizationFrameworkConstants
 																	.VIS_TYPE_KEY);
     	VisualizationRequestHandler visRequestHandler = null;
-    	
+
     	try {
-    		
+
     		visRequestHandler = VisualizationsDependencyInjector
 									.getVisualizationIDsToClassMap(getServletContext())
 											.get(visType);
-    		
+
     	} catch (NullPointerException nullKeyException) {
     		return null;
 		}
-    	
+
 		return visRequestHandler;
 	}
 

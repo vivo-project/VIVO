@@ -18,19 +18,19 @@
 <#--Number of distinct languages represented, with no language tag counting as a language, across labels-->
 <#if !languageCount??>
 	<#assign languageCount = 1>
-</#if>	
+</#if>
 <#assign qrCodeIcon = "qr-code-icon.png">
 <#assign visRequestingTemplate = "foaf-person-2column">
 <#--add the VIVO-ORCID interface -->
-<#include "individual-orcidInterface.ftl">  
+<#include "individual-orcidInterface.ftl">
 <section id="individual-intro" class="vcard person" role="region"><span itemscope itemtype="http://schema.org/Person">
-    <section id="share-contact" role="region"> 
-        <#-- Image -->           
+    <section id="share-contact" role="region">
+        <#-- Image -->
         <#assign individualImage>
-            <@p.image individual=individual 
-                      propertyGroups=propertyGroups 
-                      namespaces=namespaces 
-                      editable=editable 
+            <@p.image individual=individual
+                      propertyGroups=propertyGroups
+                      namespaces=namespaces
+                      editable=editable
                       showPlaceholder="always" />
         </#assign>
 
@@ -39,7 +39,7 @@
         </#if>
 
         <div id="photo-wrapper" >${individualImage}</div>
-        
+
         <#include "individual-visualizationFoafPerson.ftl">
     </section> <!-- end share-contact -->
     <section id="individual-info" ${infoClass!} role="region">
@@ -48,8 +48,8 @@
             <#if relatedSubject??>
                 <h2>${relatedSubject.relatingPredicateDomainPublic} ${i18n().for} ${relatedSubject.name}</h2>
                 <p><a href="${relatedSubject.url}" title="${i18n().return_to(relatedSubject.name)}">&larr; ${i18n().return_to(relatedSubject.name)}</a></p>
-            <#else>  
-                <h1 itemprop="name" class="vcard foaf-person fn" <#if !editable>style="float:left;border-right:1px solid #A6B1B0;"</#if>> 
+            <#else>
+                <h1 itemprop="name" class="vcard foaf-person fn" <#if !editable>style="float:left;border-right:1px solid #A6B1B0;"</#if>>
                     <#-- Label -->
                     <@p.label individual editable labelCount localesCount/>
                 </h1>
@@ -57,7 +57,7 @@
                 <#assign title = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Title")!>
                 <#if title?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
                     <#if (title.statements?size < 1) >
-                        <@p.addLinkWithLabel title editable /> 
+                        <@p.addLinkWithLabel title editable />
                     <#elseif editable>
                         <h2>${title.name?capitalize!}</h2>
                         <@p.verboseDisplay title />
@@ -75,23 +75,23 @@
                 <#if ! (title.statements)?has_content>
                     <@p.mostSpecificTypesPerson individual editable/>
                 </#if>
-            </#if>        
+            </#if>
             <span id="iconControlsRightSide" class="<#if editable>iconControlsEditable<#else>iconControlsNotEditable</#if>" <#if !user.hasSiteAdminAccess>style="top:5px"</#if>>
                 <#include "individual-iconControls.ftl">
             </span>
             <#if editable && profilePageTypesEnabled >
                 <#include "individual-profilePageTypes.ftl">
             </#if>
-        </header>     
+        </header>
         <!-- Positions -->
         <#include "individual-positions.ftl">
-        
+
         <!-- Overview -->
         <#if !editable>
             <p></p>
         </#if>
         <#include "individual-overview.ftl">
-        
+
         <!-- Research Areas -->
         <#include "individual-researchAreas.ftl">
 
@@ -122,8 +122,8 @@
 <#assign nameForOtherGroup = "${i18n().other}">
 <#if !editable>
 	<#-- We don't want to see the first name and last name unless we might edit them. -->
-	<#assign skipThis = propertyGroups.pullProperty("http://xmlns.com/foaf/0.1/firstName")!> 
-	<#assign skipThis = propertyGroups.pullProperty("http://xmlns.com/foaf/0.1/lastName")!> 
+	<#assign skipThis = propertyGroups.pullProperty("http://xmlns.com/foaf/0.1/firstName")!>
+	<#assign skipThis = propertyGroups.pullProperty("http://xmlns.com/foaf/0.1/lastName")!>
 </#if>
 
 <#include "individual-property-group-tabs.ftl">

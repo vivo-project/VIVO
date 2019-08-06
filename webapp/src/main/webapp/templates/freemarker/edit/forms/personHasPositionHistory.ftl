@@ -31,17 +31,17 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 </#if>
 
 <#assign disabledVal = ""/>
-<#if editMode == "edit">        
-        <#assign formAction="${i18n().edit_capitalized}">        
+<#if editMode == "edit">
+        <#assign formAction="${i18n().edit_capitalized}">
         <#assign submitButtonText="${i18n().save_changes}">
         <#assign disabledVal="disabled">
 <#else>
-        <#assign formAction="${i18n().create_capitalized}">        
+        <#assign formAction="${i18n().create_capitalized}">
         <#assign submitButtonText="${i18n().create_entry}">
         <#assign disabledVal="">
 </#if>
 
-<#assign requiredHint="<span class='requiredHint'> *</span>"/> 
+<#assign requiredHint="<span class='requiredHint'> *</span>"/>
 <#assign yearHint     = "<span class='hint'>(${i18n().year_hint_format})</span>" />
 
 <h2>${formAction} ${i18n().posn_entry_for} ${editConfiguration.subjectName}</h2>
@@ -87,32 +87,32 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
          <#if lvf.submissionErrorExists(editSubmission, "positionType")>
  	        ${i18n().enter_posn_type_value}<br />
         </#if>
-        
+
         </p>
     </section>
 </#if>
 
-<@lvf.unsupportedBrowser urls.base /> 
+<@lvf.unsupportedBrowser urls.base />
 
 <form class="customForm" action ="${submitUrl}" class="customForm noIE67" role="${formAction} position entry">
-  <p class="inline">    
+  <p class="inline">
     <label for="orgType">${i18n().org_type_capitalized}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
     <#assign orgTypeOpts = editConfiguration.pageData.orgType />
 <#--
     <#if editMode == "edit">
-      <#list orgTypeOpts?keys as key>             
+      <#list orgTypeOpts?keys as key>
           <#if orgTypeValue = key >
-            <span class="readOnly" id="typeSelectorSpan">${orgTypeOpts[key]}</span> 
+            <span class="readOnly" id="typeSelectorSpan">${orgTypeOpts[key]}</span>
             <input type="hidden" id="typeSelectorInput" name="orgType" acGroupName="organization" value="${orgTypeValue}" >
-          </#if>           
+          </#if>
       </#list>
     <#else>
     </#if>
 -->
 <select id="typeSelector" name="orgType" acGroupName="organization">
-    <option value="" selected="selected">${i18n().select_one}</option>                
-    <#list orgTypeOpts?keys as key>             
-        <option value="${key}"  <#if orgTypeValue = key>selected</#if>>${orgTypeOpts[key]}</option>            
+    <option value="" selected="selected">${i18n().select_one}</option>
+    <#list orgTypeOpts?keys as key>
+        <option value="${key}"  <#if orgTypeValue = key>selected</#if>>${orgTypeOpts[key]}</option>
     </#list>
 </select>
   </p>
@@ -126,21 +126,21 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <p class="inline">
             <label>${i18n().selected_organization}:</label>
             <span class="acSelectionInfo"></span>
-            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
             <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="orgUri" name="existingOrg" value="${existingOrgValue}" ${flagClearLabelForExisting}="true" />
     </div>
-    
+
     <label for="positionTitle">${i18n().position_title} ${requiredHint}</label>
     <input  size="30"  type="text" id="positionTitle" name="positionTitle" value="${positionTitleValue}" role="input" />
 
       <label for="positionType">${i18n().position_type} ${requiredHint}</label>
       <#assign posnTypeOpts = editConfiguration.pageData.positionType />
       <select name="positionType" style="margin-top:-2px" >
-          <option value="" <#if positionTypeValue == "">selected</#if>>${i18n().select_one}</option>                
-          <#list posnTypeOpts?keys as key>             
-              <option value="${key}"  <#if positionTypeValue == key>selected</#if>>${posnTypeOpts[key]}</option>         
+          <option value="" <#if positionTypeValue == "">selected</#if>>${i18n().select_one}</option>
+          <#list posnTypeOpts?keys as key>
+              <option value="${key}"  <#if positionTypeValue == key>selected</#if>>${posnTypeOpts[key]}</option>
           </#list>
       </select>
       <p></p>
@@ -156,20 +156,20 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
        </#if>
 
     	<#--End draw elements-->
-    	
+
       <input type="hidden" name = "editKey" value="${editKey}" role="input"/>
 
       <p class="submit">
-        <#if editMode == "edit">  
-            <input type="submit" id="submit" name="submit-${formAction}" value="${submitButtonText}" class="submit" /> 
+        <#if editMode == "edit">
+            <input type="submit" id="submit" name="submit-${formAction}" value="${submitButtonText}" class="submit" />
         <#else>
-            <input type="submit" id="submit" name="submit-${formAction}" value="${submitButtonText}" class="submit" /> 
+            <input type="submit" id="submit" name="submit-${formAction}" value="${submitButtonText}" class="submit" />
         </#if>
 
         <span class="or"> ${i18n().or} </span><a class="cancel" href="${editConfiguration.cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
       </p>
       <p class="requiredHint"  id="requiredLegend" >* ${i18n().required_fields}</p>
-      
+
 </form>
 
 <script type="text/javascript">

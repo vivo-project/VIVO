@@ -2,10 +2,10 @@
 
 /**
  * For rendering images dynamically.
- * 
+ *
  */
 $.fn.image = function(src, successFunc, failureFunc){
-	return this.each(function(){ 
+	return this.each(function(){
 		var profileImage = new Image();
 		profileImage.onerror = failureFunc;
 		profileImage.onload = successFunc;
@@ -17,7 +17,7 @@ $.fn.image = function(src, successFunc, failureFunc){
 
 
 /**
- * Function by Google Charts API Team to do "extended encode" of data. 
+ * Function by Google Charts API Team to do "extended encode" of data.
 */
 function extendedEncodeDataForChartURL(arrVals, maxVal) {
 
@@ -49,10 +49,10 @@ function extendedEncodeDataForChartURL(arrVals, maxVal) {
 /**
  * This will be used for getting images directly from the secure https://charts.googleapis.com
  * instead of http://charts.apis.google.com which currently throws security warnings.
- * 
+ *
  * see http://code.google.com/apis/chart/docs/chart_params.html FOR chart parameters
  * see http://code.google.com/apis/chart/docs/data_formats.html FOR how to encode data
- * 
+ *
  * sample constructed URL - https://chart.googleapis.com/chart?cht=ls&chs=148x58&chdlp=r&chco=3399CC&chd=e%3AW2ttpJbb..ttgAbbNtAA
  */
 function constructVisualizationURLForSparkline(dataString, visualizationOptions) {
@@ -67,8 +67,8 @@ function constructVisualizationURLForSparkline(dataString, visualizationOptions)
     var rootGoogleChartAPI_URL = "https://chart.googleapis.com/chart?";
 
     /*
-     * cht=ls indicates chart of type "line chart sparklines". 
-     * see http://code.google.com/apis/chart/docs/gallery/chart_gall.html 
+     * cht=ls indicates chart of type "line chart sparklines".
+     * see http://code.google.com/apis/chart/docs/gallery/chart_gall.html
 	*/
     var chartType = "cht=" + visualizationOptions.chartType;
 
@@ -89,10 +89,10 @@ function constructVisualizationURLForSparkline(dataString, visualizationOptions)
 	*/
     var chartColor = "chco=" + visualizationOptions.color;
 
-    return rootGoogleChartAPI_URL + chartType + parameterDifferentiator 
-    			+ chartSize + parameterDifferentiator 
-    			+ chartLabelPosition + parameterDifferentiator 
-    			+ chartColor + parameterDifferentiator 
+    return rootGoogleChartAPI_URL + chartType + parameterDifferentiator
+    			+ chartSize + parameterDifferentiator
+    			+ chartLabelPosition + parameterDifferentiator
+    			+ chartColor + parameterDifferentiator
     			+ "chd=" + dataString
 }
 

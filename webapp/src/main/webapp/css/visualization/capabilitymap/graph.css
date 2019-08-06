@@ -50,8 +50,8 @@ body {
     margin-top:15px;
 }
 
-#left-container, 
-#right-container, 
+#left-container,
+#right-container,
 #center-container {
     height:600px;
     position:absolute;

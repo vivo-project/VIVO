@@ -39,7 +39,7 @@ public abstract class RoleToPredicatePreprocessor extends BaseEditSubmissionPrep
     	//Query for all statements using the original roleIn predicate replace
     	//with the appropriate roleRealizedIn or roleContributesTo
     	//In addition, need to ensure the inverse predicate is also set correctly
-	
+
     	try {
     		//Get the uris from form
     		String type = getItemType(submission);
@@ -57,24 +57,24 @@ public abstract class RoleToPredicatePreprocessor extends BaseEditSubmissionPrep
     			if(urisFromForm.containsKey(roleToItemPredicate)) {
     				urisFromForm.remove(roleToItemPredicate);
     			}
-    			
+
     			urisFromForm.put(roleToItemPredicate, predicates);
-    			
+
     			if(urisFromForm.containsKey(itemToRolePredicate)) {
     				urisFromForm.remove(itemToRolePredicate);
     			}
     			urisFromForm.put(itemToRolePredicate, inversePredicates);
 
     		}
-    		
+
         } catch (Exception e) {
             log.error("Error retrieving name values from edit submission.");
         }
-        
+
     }
-	
+
 	abstract protected String getItemType(MultiValueEditSubmission submission);
-    
+
 	private ObjectProperty getCorrectProperty(String uri, WebappDaoFactory wadf) {
     	ObjectProperty correctProperty = 	ModelUtils.getPropertyForRoleInClass(uri, wadf);
 		return correctProperty;

@@ -2,20 +2,20 @@
 <!-- $This file is distributed under the terms of the license in LICENSE$ -->
 
 <!-- Custom list view config file for core:webpage
-    
-     See guidelines at https://wiki.duraspace.org/x/eYXVAw --> 
+
+     See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
 
 <list-view-config>
-    <query-select>            
-        PREFIX afn:  &lt;http://jena.apache.org/ARQ/function#&gt;
+    <query-select>
+
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
 
-        SELECT ?vcard ?link 
-               (afn:localname(?link) AS ?linkName) 
+        SELECT ?vcard ?link
+               (REPLACE(STR(?link),"^.*(#)(.*)$", "$2") AS ?linkName)
                (group_concat(distinct ?linkLabel;separator="/") as ?label)
-               ?url 
+               ?url
                ?rank
         WHERE {
             ?subject ?property ?vcard .
@@ -36,8 +36,8 @@
                 ?link core:rank ?rank .
             }
         <critical-data-required>
-        FILTER ( bound(?link) )    
-        </critical-data-required>  
+        FILTER ( bound(?link) )
+        </critical-data-required>
         } GROUP BY ?vcard ?link ?url ?rank
           ORDER BY ?rank ?linkLabel
     </query-select>

@@ -23,7 +23,7 @@ public class AutocompleteDataPropertyFormGenerator extends DefaultDataPropertyFo
 	//The only thing that changes here are the templates
 	private Log log = LogFactory.getLog(AutocompleteObjectPropertyFormGenerator.class);
 	private String dataPropertyTemplate = "autoCompleteDataPropForm.ftl";
-	
+
 
 	@Override
 	public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
@@ -31,7 +31,7 @@ public class AutocompleteDataPropertyFormGenerator extends DefaultDataPropertyFo
 		this.addFormSpecificData(ec, vreq);
 		return ec;
 	}
-	
+
 	public void addFormSpecificData(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
 		HashMap<String, Object> formSpecificData = new HashMap<String, Object>();
 		//Filter setting - i.e. sparql query for filtering out results from autocomplete
@@ -41,27 +41,27 @@ public class AutocompleteDataPropertyFormGenerator extends DefaultDataPropertyFo
 		formSpecificData.put("editMode", getEditMode(vreq));
 		editConfiguration.setFormSpecificData(formSpecificData);
 	}
-	
+
 	public String getSparqlForAcFilter(VitroRequest vreq) {
-		String subject = EditConfigurationUtils.getSubjectUri(vreq);			
+		String subject = EditConfigurationUtils.getSubjectUri(vreq);
 		String predicate = EditConfigurationUtils.getPredicateUri(vreq);
 		//Get all objects for existing predicate, filters out results from addition and edit
-		String query =  "SELECT ?dataLiteral WHERE { " + 
+		String query =  "SELECT ?dataLiteral WHERE { " +
 			"<" + subject + "> <" + predicate + "> ?dataLiteral .} ";
 		return query;
 	}
-	
+
 	//Get edit mode
 	public String getEditMode(VitroRequest vreq) {
-       if(isUpdate(vreq)) 
+       if(isUpdate(vreq))
     	   return "edit";
         else
     	   return "add";
 	}
-	
+
 	private boolean isUpdate(VitroRequest vreq) {
 		Integer dataHash = EditConfigurationUtils.getDataHash(vreq);
 		return ( dataHash != null );
 	}
-	
+
 }

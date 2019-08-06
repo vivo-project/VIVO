@@ -12,18 +12,18 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
 public class VisualizationsDependencyInjector {
-	
+
 	private static Map<String, VisualizationRequestHandler> visualizationIDsToClass;
-	
+
 	/**
-	 * This method is used to inject vis dependencies i.e. the vis algorithms that are 
-     * being implemented into the vis controller. Modified Dependency Injection pattern is 
-     * used here. XML file containing the location of all the vis is saved in accessible folder. 
+	 * This method is used to inject vis dependencies i.e. the vis algorithms that are
+     * being implemented into the vis controller. Modified Dependency Injection pattern is
+     * used here. XML file containing the location of all the vis is saved in accessible folder.
 	 * @param servletContext Servlet context
 	 */
 	private synchronized static Map<String, VisualizationRequestHandler> initVisualizations(
 			ServletContext servletContext) {
-		
+
 		/*
 		 * A visualization request has already been made causing the visualizationIDsToClass to be
 		 * initiated & populated with visualization ids to its request handlers.
@@ -31,26 +31,26 @@ public class VisualizationsDependencyInjector {
 		if (visualizationIDsToClass != null) {
 			return visualizationIDsToClass;
 		}
-		
-		String resourcePath = 
+
+		String resourcePath =
 			servletContext
 				.getRealPath(VisualizationFrameworkConstants
 						.RELATIVE_LOCATION_OF_FM_VISUALIZATIONS_BEAN);
-		
+
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 											"file:" + resourcePath);
 
 		BeanFactory factory = context;
-		
-		VisualizationInjector visualizationInjector = 
+
+		VisualizationInjector visualizationInjector =
 				(VisualizationInjector) factory.getBean("visualizationInjector");
-		
+
 		visualizationIDsToClass = visualizationInjector.getVisualizationIDToClass();
-		
-		
+
+
 		return visualizationIDsToClass;
 	}
-	
+
 	public static Map<String, VisualizationRequestHandler> getVisualizationIDsToClassMap(
 			ServletContext servletContext) {
 		if (visualizationIDsToClass != null) {

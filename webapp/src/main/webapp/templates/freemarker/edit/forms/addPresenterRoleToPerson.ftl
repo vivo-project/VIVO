@@ -40,12 +40,12 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 	<#assign submissionErrors = editSubmission.validationErrors/>
 </#if>
 
-<#if editMode == "edit">    
-        <#assign titleVerb="${i18n().edit_capitalized}">        
+<#if editMode == "edit">
+        <#assign titleVerb="${i18n().edit_capitalized}">
         <#assign submitButtonText="${i18n().save_changes}">
         <#assign disabledVal="disabled">
 <#else>
-        <#assign titleVerb="${i18n().create_capitalized}">        
+        <#assign titleVerb="${i18n().create_capitalized}">
         <#assign submitButtonText="${i18n().create_entry}">
         <#assign disabledVal=""/>
 </#if>
@@ -69,10 +69,10 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <#--Checking if any required fields are empty-->
         <#if lvf.submissionErrorExists(editSubmission, "presentationType")>
  	        Please select a presentation type.
-        </#if> 
+        </#if>
         <#if lvf.submissionErrorExists(editSubmission, "presentationLabel")>
  	        ${i18n().select_or_enter_name}
-        </#if> 
+        </#if>
         <#list submissionErrors?keys as errorFieldName>
         	<#if errorFieldName == "startField">
         	    <#if submissionErrors[errorFieldName]?contains("before")>
@@ -80,7 +80,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         	    <#else>
         	        ${submissionErrors[errorFieldName]}
         	    </#if>
-        	    
+
         	<#elseif errorFieldName == "endField">
     	        <#if submissionErrors[errorFieldName]?contains("after")>
     	            ${i18n().end_year_must_be_later}
@@ -93,18 +93,18 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     </section>
 </#if>
 
-<@lvf.unsupportedBrowser urls.base /> 
+<@lvf.unsupportedBrowser urls.base />
 
-<section id="addPresenterRoleToPerson" role="region">        
-    
+<section id="addPresenterRoleToPerson" role="region">
+
     <form id="addPresenterRoleToPerson" class="customForm noIE67" action="${submitUrl}"  role="add/edit Presentation">
-    <p class="inline">    
+    <p class="inline">
       <label for="presentationType">${i18n().presentation_type}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
       <#assign presentationTypeOpts = editConfiguration.pageData.presentationType />
       <select id="typeSelector" name="presentationType" acGroupName="presentation">
-        <option value="" selected="selected">${i18n().select_one}</option>                
-        <#list presentationTypeOpts?keys as key>             
-            <option value="${key}" <#if presentationTypeValue = key>selected</#if>><#if presentationTypeOpts[key] == "Other">${i18n().presentation_capitalized}<#else>${presentationTypeOpts[key]}</#if></option>            
+        <option value="" selected="selected">${i18n().select_one}</option>
+        <#list presentationTypeOpts?keys as key>
+            <option value="${key}" <#if presentationTypeValue = key>selected</#if>><#if presentationTypeOpts[key] == "Other">${i18n().presentation_capitalized}<#else>${presentationTypeOpts[key]}</#if></option>
         </#list>
     </select>
     </p>
@@ -119,12 +119,12 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <p class="inline">
             <label>${i18n().selected_presentation}:</label>
             <span class="acSelectionInfo"></span>
-            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+            <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
             <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="presentationUri" name="existingPresentation" value="${existingPresentationValue}" ${flagClearLabelForExisting}="true" />
     </div>
-     
+
     <p><label for="roleLabel">${i18n().role_in_presentation_capitalized} <span class="hint">(${i18n().presentation_hint})</span></label>
         <input  size="50"  type="text" id="roleLabel" name="roleLabel" value="${roleLabelValue}" />
     </p>
@@ -137,7 +137,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
       <p class="inline">
           <label>${i18n().selected_conference}:</label>
           <span class="acSelectionInfo"></span>
-          <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or} 
+          <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
           <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
       </p>
       <input class="acUriReceiver" type="hidden" id="conferenceUri" name="existingConference" value="${conferenceValue}" ${flagClearLabelForExisting}="true" />
@@ -190,7 +190,7 @@ var i18nStrings = {
 };
 </script>
 
- 
+
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customFormWithAutocomplete.css" />')}

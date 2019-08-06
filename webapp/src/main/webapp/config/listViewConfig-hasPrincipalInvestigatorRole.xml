@@ -5,7 +5,7 @@
 
 <list-view-config>
     <query-select>
-        PREFIX afn:   &lt;http://jena.apache.org/ARQ/function#&gt;
+
         PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
         PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
@@ -34,7 +34,7 @@
                 ?role core:relatedBy ?activity .
                 ?activity a core:Contract .
                 ?activity rdfs:label ?activityLabel .
-                LET (?activityName := afn:localname(?activity)) .
+                LET (?activityName := REPLACE(STR(?activity),"^.*(#)(.*)$", "$2")) .
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .
@@ -59,7 +59,7 @@
                 ?role core:relatedBy ?activity .
                 ?activity a core:Grant .
                 ?activity rdfs:label ?activityLabel .
-                LET (?activityName := afn:localname(?activity)) .
+                LET (?activityName := REPLACE(STR(?activity),"^.*(#)(.*)$", "$2")) .
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?role .

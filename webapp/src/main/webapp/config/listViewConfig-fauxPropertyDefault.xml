@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!-- $This file is distributed under the terms of the license in LICENSE$ -->
 
-<!-- VIVO-specific default list view config file for object properties 
-    
+<!-- VIVO-specific default list view config file for object properties
+
      See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
 
 <list-view-config>
     <query-select>
-        PREFIX afn:  &lt;http://jena.apache.org/ARQ/function#&gt;
+
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
@@ -26,7 +26,7 @@
         {
             ?subject ?property ?object .
             ?object a ?objectType .
-            LET (?localName := afn:localname(?object))
+            LET (?localName := REPLACE(STR(?object),"^.*(#)(.*)$", "$2"))
 
             OPTIONAL {
                 <precise-subquery>?subject ?property ?object .
@@ -63,7 +63,7 @@
                 ?object a ?objectType .</precise-subquery>
                 ?object a ?subclass .
             }
-            FILTER ( afn:namespace(?subclass) != "http://vitro.mannlib.cornell.edu/ns/vitro/0.7#" )
+            FILTER ( REPLACE(STR(?subclass),"^(.*)(#)(.*)$", "$1$2") != "http://vitro.mannlib.cornell.edu/ns/vitro/0.7#" )
         </collated>
 
         # Order by ?type is important, because if the object has more than one mostSpecificType,

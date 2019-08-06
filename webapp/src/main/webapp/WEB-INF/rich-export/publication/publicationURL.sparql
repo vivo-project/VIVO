@@ -5,7 +5,7 @@ PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
 CONSTRUCT {
      ?urllink ?property ?object .
 } WHERE {
-     PERSON_URI core:relatedBy ?authorship . 
+     PERSON_URI core:relatedBy ?authorship .
      ?authorship a core:Authorship .
      ?authorship core:relates ?publication .
      ?publication a obo:IAO_0000030 .

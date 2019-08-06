@@ -18,14 +18,14 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.MultiValueEditSubmis
 
 public class ManageLabelsForPersonPreprocessor extends ManageLabelsForIndividualPreprocessor {
 
-	
 
-	
+
+
 	public ManageLabelsForPersonPreprocessor(EditConfigurationVTwo editConfig) {
 		super(editConfig);
-		
+
 	}
-	
+
 	@Override
 	public void preprocess(MultiValueEditSubmission inputSubmission, VitroRequest vreq) {
 		//Use the ManageLabelsForIndividualPreprocessor in addition to this code specific for person
@@ -42,27 +42,27 @@ public class ManageLabelsForPersonPreprocessor extends ManageLabelsForIndividual
 			if(inputSubmission.hasLiteralValue("middleName")) {
 				middleNames = literalsFromForm.get("middleName");
 			}
-			
-			
+
+
 			//Expecting only one language
 			if(firstNames.size() > 0 && lastNames.size() > 0 && newLabelLanguages.size() > 0) {
 				Literal newLabelLanguage = newLabelLanguages.get(0);
 				Literal firstNameLiteral = firstNames.get(0);
 				Literal lastNameLiteral = lastNames.get(0);
-				
+
 				//Get the string
 				String lang = this.getLanguage(newLabelLanguage.getString());
 				String firstNameValue = firstNameLiteral.getString();
 				String lastNameValue = lastNameLiteral.getString();
-				
+
 				//Now add the language category to the literal
-				Literal firstNameWithLanguage = inputSubmission.createLiteral(firstNameValue, 
-						null, 
+				Literal firstNameWithLanguage = inputSubmission.createLiteral(firstNameValue,
+						null,
 						lang);
-				Literal lastNameWithLanguage = inputSubmission.createLiteral(lastNameValue, 
-						null, 
+				Literal lastNameWithLanguage = inputSubmission.createLiteral(lastNameValue,
+						null,
 						lang);
-				
+
 				firstNames = new ArrayList<Literal>();
 				lastNames = new ArrayList<Literal>();
 				firstNames.add(firstNameWithLanguage);
@@ -70,25 +70,25 @@ public class ManageLabelsForPersonPreprocessor extends ManageLabelsForIndividual
 				//replace the label with one with language, again assuming only one label being returned
 				literalsFromForm.put("firstName", firstNames);
 				literalsFromForm.put("lastName", lastNames);
-				
+
 				//Middle name handling
 				if(middleNames.size() > 0) {
 					Literal middleNameLiteral = middleNames.get(0);
 					String middleNameValue = middleNameLiteral.getString();
-					Literal middleNameWithLanguage = inputSubmission.createLiteral(middleNameValue, 
-							null, 
+					Literal middleNameWithLanguage = inputSubmission.createLiteral(middleNameValue,
+							null,
 							lang);
 					middleNames = new ArrayList<Literal>();
 					middleNames.add(middleNameWithLanguage);
 					literalsFromForm.put("middleName", middleNames);
 				}
-				
+
 				//Set literals
 				inputSubmission.setLiteralsFromForm(literalsFromForm);
 			}
 		}
-		
+
 	}
-	
+
 
 }

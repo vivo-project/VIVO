@@ -9,7 +9,7 @@
         <#assign headingText = "${i18n().faculty_research_areas}" />
     </#if>
         <h2 id="facultyResearchAreas" class="mainPropGroup">
-            ${headingText} 
+            ${headingText}
         </h2>
         <#assign numberRows = researchAreaResults?size/>
         <ul id="individual-hasResearchArea" role="list">
@@ -24,7 +24,7 @@
 		            <li class="raLinkMore" style="display:none">
 		        <#else>
 		            <li class="raLink">
-		        </#if> 
+		        </#if>
 		            <a class="raLink" href="${urls.base}/deptResearchAreas?orgURI=${individual.uri?replace("#","%23")}&raURI=${resultRow["ra"]}">
 		                ${resultRow["raLabel"]}
 		            </a>
@@ -32,7 +32,7 @@
 		        <#assign totalLength = totalLength + resultRow["raLabel"]?length >
             </#list>
             <#if ( totalLength > 380 ) ><li id="raLessContainer" style="display:none">(<a id="raLess" href="javascript:">less</a>)</li></#if>
-        </ul>    
+        </ul>
 </#if>
 <script>
 $('a#raMore').click(function() {

@@ -18,19 +18,19 @@ public class FirstAndLastNameValidator implements N3ValidatorVTwo {
     private static String MISSING_LAST_NAME_ERROR = "You must enter a value in the Last Name field.";
     private static String MALFORMED_LAST_NAME_ERROR = "The last name field may not contain a comma. Please enter first name in First Name field.";
     private String uriReceiver;
-    
+
     public FirstAndLastNameValidator(String uriReceiver) {
         this.uriReceiver = uriReceiver;
     }
-    
+
     @Override
     public Map<String, String> validate(EditConfigurationVTwo editConfig,
             MultiValueEditSubmission editSub) {
         Map<String,List<String>> urisFromForm = editSub.getUrisFromForm();
         Map<String,List<Literal>> literalsFromForm = editSub.getLiteralsFromForm();
 
-        Map<String,String> errors = new HashMap<String,String>();   
-        
+        Map<String,String> errors = new HashMap<String,String>();
+
         List<String> personUri = urisFromForm.get(uriReceiver);
         if (allListElementsEmpty(personUri) || personUri.contains(">SUBMITTED VALUE WAS BLANK<")) {
             personUri = null;
@@ -40,7 +40,7 @@ public class FirstAndLastNameValidator implements N3ValidatorVTwo {
         if (personUri != null) {
             return null;
         }
-        
+
         //Expecting only one first name in this case
         //To Do: update logic if multiple first names considered
         Literal firstName = null;
@@ -48,8 +48,8 @@ public class FirstAndLastNameValidator implements N3ValidatorVTwo {
         if(firstNameList != null && firstNameList.size() > 0) {
         	firstName = firstNameList.get(0);
         }
-        if( firstName != null && 
-        		firstName.getLexicalForm() != null && 
+        if( firstName != null &&
+        		firstName.getLexicalForm() != null &&
         		"".equals(firstName.getLexicalForm()) )
             firstName = null;
 
@@ -70,17 +70,17 @@ public class FirstAndLastNameValidator implements N3ValidatorVTwo {
         if (lastName == null) {
             errors.put("lastName", MISSING_LAST_NAME_ERROR);
         // Don't reject space in the last name: de Vries, etc.
-        } else if (lastNameValue.contains(",")) {            
+        } else if (lastNameValue.contains(",")) {
             errors.put("lastName", MALFORMED_LAST_NAME_ERROR);
         }
-        
+
         if (firstName == null) {
             errors.put("firstName", MISSING_FIRST_NAME_ERROR);
-        }       
-        
+        }
+
         return errors.size() != 0 ? errors : null;
     }
-    
+
     private boolean allListElementsEmpty(List<String> checkList) {
     	if(checkList == null)
     		return true;

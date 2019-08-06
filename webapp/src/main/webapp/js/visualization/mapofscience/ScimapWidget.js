@@ -8,7 +8,7 @@ var ScimapWidget = Class.extend({
 		me.activeManager = null;
 		me.isUnloaded = true;
 		me.map = map;
-		
+
 		me.initView();
 	},
 	initView: function(){
@@ -27,15 +27,15 @@ var ScimapWidget = Class.extend({
 	},
 	initControlPanels: function() {
 		var me = this;
-		
+
 		/* Create slider control panel */
 		if (me.sliderControl == null) {
-			me.sliderControl = new SliderControlPanel({ 
-				map:me.map, 
+			me.sliderControl = new SliderControlPanel({
+				map:me.map,
 				controlPositions: google.maps.ControlPosition.RIGHT_BOTTOM
 			});
 		}
-		
+
 		/* Register event */
 		me.sliderControl.addToMap();
 		me.sliderControl.setChangeEventHandler(function(event, ui) {
@@ -43,11 +43,11 @@ var ScimapWidget = Class.extend({
 				me.updateDisplayedMarkers();
 			}
 		});
-		
+
 		/* create */
 		if (me.disciplineLabelsControl == null) {
 			me.labelsMarkerManager = new DisciplineLabelsMarkerManager(map);
-			me.disciplineLabelsControl = new CheckBoxPanel({ 
+			me.disciplineLabelsControl = new CheckBoxPanel({
 				map: map,
 				checked: true,
 				text: i18nStrings.showDisciplineLabels,
@@ -60,7 +60,7 @@ var ScimapWidget = Class.extend({
 				}
 			});
 		}
-		
+
 		/* Display labels if checked */
 		me.disciplineLabelsControl.addToMap();
 		me.labelsMarkerManager.addMarkersToMap();
@@ -71,18 +71,18 @@ var ScimapWidget = Class.extend({
 	initMarkerManagers: function() {
 		if (this.keyToMarkerManagers == null) {
 			var managers = {};
-			
+
 			// Create discipline Marker Manager
 			managers[SCIMAP_TYPE.DISCIPLINE] = new DisciplineMarkerManager(
-				this.map, 
-				new DisciplineColorStrategy(), 
+				this.map,
+				new DisciplineColorStrategy(),
 				null
 			);
-			
+
 			// Create subdiscipline Marker Manager
 			managers[SCIMAP_TYPE.SUBDISCIPLINE] = new SubdisciplineMarkerManager(
 				this.map,
-				new SubdisciplineColorStrategy(), 
+				new SubdisciplineColorStrategy(),
 				null
 			);
 			this.keyToMarkerManagers = managers;
@@ -99,48 +99,48 @@ var ScimapWidget = Class.extend({
 		me.pubsWithNoJournals = data.pubsWithNoJournals;
 		me.pubsWithInvalidJournals = data.pubsWithInvalidJournals;
 		me.pubsMapped = data.pubsMapped;
-		
+
 		var scienceActivities = {};
 		scienceActivities[SCIMAP_TYPE.DISCIPLINE] = me._collateDisciplineActivity(data.subdisciplineActivity);
 		scienceActivities[SCIMAP_TYPE.SUBDISCIPLINE] = data.subdisciplineActivity;
-		
+
 		this.isUnloaded = false;
-		
+
 		$.each(this.keyToMarkerManagers, function(key, manager) {
-			
+
 			// Need to create the AreaSizeCoding function
-			manager.setSizeCoder(new CircleSizeCoder({ 
-				scaler: new Scaler({ maxValue: me.pubsMapped }) 
+			manager.setSizeCoder(new CircleSizeCoder({
+				scaler: new Scaler({ maxValue: me.pubsMapped })
 			}));
-			
+
 			$.each(scienceActivities[key], function(science, density) {
-		
+
 				// Create marker and add it to manager
 				var marker = manager.createMarker(science, density);
-				
+
 			}); // end each scienceActivity
-			
+
 			manager.sort();
 		}); // end each markerManagers
 		me.updateMap();
 	},
-	
+
 	_collateDisciplineActivity: function(subdiscipline) {
-		
+
 		var disciplineToActivity = {};
-		
+
 		$.each(DISCIPLINES, function(id, discipline) {
 			disciplineToActivity[id] = 0.0;
 		});
-		
+
 		$.each(subdiscipline, function(key, activity) {
 			var currentSubdisciplinesDiscipline = SUBDISCIPLINES[key].discipline;
-			disciplineToActivity[currentSubdisciplinesDiscipline] += activity; 
+			disciplineToActivity[currentSubdisciplinesDiscipline] += activity;
 		});
-		
+
 		return disciplineToActivity;
 	},
-	
+
 	mouseIn: function(key, childKey) {
 		var manager = this.getMarkerManager(key);
 		// Focus if only it is an active manager

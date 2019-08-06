@@ -4,10 +4,10 @@
 
 var visualization = {
 	renderCoAuthor: function(url) {
-	
+
 		var containerIdCoAuthor = 'vis_container_coauthor',
 		containerCoAuthor = $('#' + containerIdCoAuthor);
-			
+
         $.ajax({
             url: url,
 			data: {
@@ -21,10 +21,10 @@ var visualization = {
             	if ($.trim(data) != "") {
             		containerCoAuthor.html(data);
     				containerCoAuthor.children("#pub_count_short_sparkline_vis");
-            	} 
-				
+            	}
+
             }
-        });		
+        });
 	}
 };
 

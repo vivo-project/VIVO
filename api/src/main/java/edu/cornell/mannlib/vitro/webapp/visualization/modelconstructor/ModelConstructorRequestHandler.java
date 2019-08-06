@@ -33,7 +33,7 @@ public class ModelConstructorRequestHandler implements
 		VisualizationRequestHandler {
 
     public static final AuthorizationRequest REQUIRED_ACTIONS = SimplePermission.REFRESH_VISUALIZATION_CACHE.ACTION;
-    
+
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
 			Dataset dataSource) throws MalformedQueryParametersException, JsonProcessingException {
@@ -82,7 +82,7 @@ public class ModelConstructorRequestHandler implements
 		return new TemplateResponseValues(standaloneTemplate, body);
 	}
 
-	private Map<String, String> regenerateConstructedModels(VitroRequest vitroRequest, 
+	private Map<String, String> regenerateConstructedModels(VitroRequest vitroRequest,
 															Dataset dataSource) throws JsonProcessingException {
 
 		VisualizationCaches.rebuildAll(vitroRequest.getRDFService());
@@ -90,17 +90,17 @@ public class ModelConstructorRequestHandler implements
 		List<ConstructedModel> refreshedModels = new ArrayList<ConstructedModel>();
 
 		Set<String> currentModelIdentifiers = new HashSet<String>(ConstructedModelTracker.getAllModels().keySet());
-		
+
 		for (String currentIdentifier : currentModelIdentifiers) {
 			try {
 
 				ConstructedModel parseModelIdentifier = ConstructedModelTracker
 																.parseModelIdentifier(currentIdentifier);
 
-				ConstructedModelTracker.removeModel(parseModelIdentifier.getUri(), 
+				ConstructedModelTracker.removeModel(parseModelIdentifier.getUri(),
 													parseModelIdentifier.getType());
 
-				ModelConstructorUtilities.getOrConstructModel(parseModelIdentifier.getUri(), 
+				ModelConstructorUtilities.getOrConstructModel(parseModelIdentifier.getUri(),
 															  parseModelIdentifier.getType(), vitroRequest.getRDFService());
 				refreshedModels.add(parseModelIdentifier);
 

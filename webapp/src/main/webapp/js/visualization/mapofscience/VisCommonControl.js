@@ -4,11 +4,11 @@ function switchMarkerManager(id) {
 	markerManager = getMarkerManager(id);
 	if(isActiveMarkerManager(markerManager)) {
 		markerManager.addAllToMap();
-		
+
 		if(activeMarkerManager) {
 			activeMarkerManager.removeAllFromMap();
 		}
-		
+
 		/* switch to target marker manager */
 		activeMarkerManager = markerManager;
 	}
@@ -19,7 +19,7 @@ function createVisModeController(visMode) {
 		var controller = new EntityVisModeController(map);
 		visModeControllers[controller.visMode] = controller;
 	}
-	
+
 	if (visMode === COMPARISON_VIS_MODE) {
 		var controller = new ComparisonVisModeController(map);
 		visModeControllers[controller.visMode] = controller;
@@ -58,16 +58,16 @@ function initFilter(dom) {
 			if (checked === dom.secondFilterID) {
 				$("#" + dom.firstFilterID).removeClass(dom.activeFilterClass);
 				currentController.changeFilter(2);
-				
+
 			} else if (checked === dom.firstFilterID) {
 				$("#" + dom.secondFilterID).removeClass(dom.activeFilterClass);
 				currentController.changeFilter(1);
 			}
-				
-			obj.addClass(dom.activeFilterClass);	
+
+			obj.addClass(dom.activeFilterClass);
 		}
 	});
-	
+
 	$("#" + dom.firstFilterID).trigger('click');
 }
 
@@ -78,7 +78,7 @@ function initVisModeTypeButton() {
 		var visMode = $(viewTypeRadio+ ":checked").val();
 		switchVisMode(visMode);
 	});
-	
+
 	/* Init default filter */
 	$(viewTypeRadio+ ":eq(0)").click();
 }

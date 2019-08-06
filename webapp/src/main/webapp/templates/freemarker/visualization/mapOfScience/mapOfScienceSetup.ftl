@@ -16,9 +16,9 @@
 
 
 <#if entityLocalName?has_content >
-    
+
     <#assign entityMapOfScienceURL = "${urls.base}${shortVisualizationURLRoot}/${mapOfScienceVisParam}/${entityLocalName}">
-    
+
 <#else>
 
     <#assign entityMapOfScienceURL = '${urls.base}${shortVisualizationURLRoot}/${mapOfScienceVisParam}/?uri=${entityURI}'>
@@ -49,7 +49,7 @@ var disciplineBlackLabelImageUrlPrefix = disciplineLabelImageUrlPrefix + "black/
 
 var infoIconUrl = "${urls.images}/iconInfo.png";
 var drillDownIconUrl = "${urls.images}/visualization/drill_down_icon.png";
-											
+
 var entityLabel = '${entityLabel}';
 
 var ENTITY_TYPE = '${entityType}';
@@ -61,11 +61,11 @@ var ENTITY_TYPE = '${entityType}';
 
 var loadingImageLink = contextPath + "/images/visualization/ajax-loader-indicator.gif";
 var refreshPageImageLink = contextPath + "/images/visualization/refresh-green.png";
-											
+
 var comparisonScienceMapCsvDataUrlPrefix = "${urls.base}${dataVisualizationURLRoot}?labelField=label&vis=entity_comparison&uri=";
 var entityMapOfScienceSubDisciplineCSVURLPrefix = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&output=csv&vis_mode=subdiscipline&&uri="
 var entityMapOfScienceDisciplineCSVURL = "${entityMapOfScienceDisciplineCSVURL}";
-var entityMapOfScienceSubDisciplineCSVURL = "${entityMapOfScienceSubDisciplineCSVURL}";											
+var entityMapOfScienceSubDisciplineCSVURL = "${entityMapOfScienceSubDisciplineCSVURL}";
 var i18nStrings = {
     firstString: '${i18n().vis_first_link}',
     lastString: '${i18n().vis_last_link}',
@@ -110,12 +110,12 @@ var i18nStrings = {
 <#if googleMapsKey??>
     ${scripts.add('<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=${googleMapsKey}"></script>')}
 <#else>
-    ${scripts.add('<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>')}
+    ${scripts.add('<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>')}
 </#if>
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.blockUI.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/datatable/1.10.12/jquery.dataTables.min.js"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/visualization/dataTables.helper.js"></script>', 
+			  '<script type="text/javascript" src="${urls.base}/js/visualization/dataTables.helper.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/visualization-helper-functions.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.notify.min.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/ClassExtendUtils.js"></script>',

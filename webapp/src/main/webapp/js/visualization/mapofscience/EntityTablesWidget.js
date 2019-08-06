@@ -39,7 +39,7 @@ var EntityTablesWidget = Class.extend({
 	},
 	_createDataTable: function(key, data, color) {
 		dataTable = new SimpleDataTableWidget({
-			sciMapWidget: this.sciMapWidget, 
+			sciMapWidget: this.sciMapWidget,
 			container: this.container
 			});
 		data.color = color;
