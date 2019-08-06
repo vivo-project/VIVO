@@ -5954,7 +5954,6 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ARG_2000376">
         <rdfs:label xml:lang="en">Contact Qualifier</rdfs:label>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000019"/>
         <obo:IAO_0000112 xml:lang="en">Examples are business address, shipping address.</obo:IAO_0000112>
         <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000120"/>
         <obo:IAO_0000115 xml:lang="en">The purpose of contact information.</obo:IAO_0000115>
@@ -8598,7 +8597,6 @@ has super-classes</obo:IAO_0000115>
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#AcademicDegree">
         <rdfs:label xml:lang="en">Academic Degree</rdfs:label>
-        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#EducationalProcess"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#abbreviation"/>
@@ -8803,7 +8801,6 @@ This class allows for linking an author to a publication while indicating inform
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Award">
         <rdfs:label xml:lang="en">Award or Honor</rdfs:label>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
         <obo:IAO_0000112 xml:lang="en">The Wiley Prize in Biomedicine is awarded each year to a researcher for outstanding
         contributions to biomedicine.</obo:IAO_0000112>
         <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000120"/>  <!-- check this -->
@@ -9267,7 +9264,6 @@ This class allows for linking an author to a publication while indicating inform
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Credential">
         <rdfs:label xml:lang="en">Credential</rdfs:label>
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
         <obo:IAO_0000112 xml:lang="en">A driver's license is the result of a credentialing process</obo:IAO_0000112>
         <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000120"/>  <!-- check this -->
         <obo:IAO_0000115 xml:lang="en">An attestation of qualification, competence, or authority issued to an individual by a third 
