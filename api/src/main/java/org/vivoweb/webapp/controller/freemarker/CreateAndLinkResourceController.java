@@ -529,7 +529,7 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
                 @Override
                 protected void processQuerySolution(QuerySolution qs) {
                     // Get the name(s) from the result set
-                    Literal familyName = qs.contains("famileName") ? qs.getLiteral("familyName") : null;
+                    Literal familyName = qs.contains("familyName") ? qs.getLiteral("familyName") : null;
                     Literal givenName  = qs.contains("givenName") ? qs.getLiteral("givenName") : null;
 
                     if (StringUtils.isEmpty(name.name)) {
@@ -562,7 +562,7 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
                     @Override
                     protected void processQuerySolution(QuerySolution qs) {
                         // Get the name(s) from the result set
-                        Literal familyName = qs.contains("famileName") ? qs.getLiteral("familyName") : null;
+                        Literal familyName = qs.contains("familyName") ? qs.getLiteral("familyName") : null;
                         Literal givenName  = qs.contains("givenName") ? qs.getLiteral("givenName") : null;
 
                         if (StringUtils.isEmpty(name.name)) {
