@@ -1638,8 +1638,12 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
                                             if (personResource.hasProperty(model.getProperty(VCARD_HAS_NAME))) {
                                                 Resource vcardName = personResource.getPropertyResourceValue(model.getProperty(VCARD_HAS_NAME));
                                                 if (vcardName != null) {
-                                                    givenName = vcardName.getProperty(model.getProperty(VCARD_GIVENNAME));
-                                                    familyName = vcardName.getProperty(model.getProperty(VCARD_FAMILYNAME));
+                                                    if (vcardName.hasProperty(model.getProperty(VCARD_GIVENNAME))) {
+                                                        givenName = vcardName.getProperty(model.getProperty(VCARD_GIVENNAME));
+                                                    }
+                                                    if (vcardName.hasProperty(model.getProperty(VCARD_FAMILYNAME))) {
+                                                        familyName = vcardName.getProperty(model.getProperty(VCARD_FAMILYNAME));
+                                                    }
                                                 }
                                             }
                                         } else if (personResource.hasProperty(model.getProperty(OBO_HAS_CONTACT_INFO))) {
@@ -1647,8 +1651,12 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
                                             if (vCard.hasProperty(model.getProperty(VCARD_HAS_NAME))) {
                                                 Resource vcardName = vCard.getPropertyResourceValue(model.getProperty(VCARD_HAS_NAME));
                                                 if (vcardName != null) {
-                                                    givenName = vcardName.getProperty(model.getProperty(VCARD_GIVENNAME));
-                                                    familyName = vcardName.getProperty(model.getProperty(VCARD_FAMILYNAME));
+                                                    if (vcardName.hasProperty(model.getProperty(VCARD_GIVENNAME))) {
+                                                        givenName = vcardName.getProperty(model.getProperty(VCARD_GIVENNAME));
+                                                    }
+                                                    if (vcardName.hasProperty(model.getProperty(VCARD_FAMILYNAME))) {
+                                                        familyName = vcardName.getProperty(model.getProperty(VCARD_FAMILYNAME));
+                                                    }
                                                 }
                                                 linked = true;
                                             }
@@ -1656,8 +1664,12 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
 
                                         if (givenName == null) {
                                             // It's a foaf person, which means it is already linked to a full profile in VIVO
-                                            givenName = personResource.getProperty(model.getProperty(FOAF_FIRSTNAME));
-                                            familyName = personResource.getProperty(model.getProperty(FOAF_LASTNAME));
+                                            if (personResource.hasProperty(model.getProperty(FOAF_FIRSTNAME))) {
+                                                givenName = personResource.getProperty(model.getProperty(FOAF_FIRSTNAME));
+                                            }
+                                            if (personResource.hasProperty(model.getProperty(FOAF_LASTNAME))) {
+                                                familyName = personResource.getProperty(model.getProperty(FOAF_LASTNAME));
+                                            }
                                             linked = true;
                                         }
 
