@@ -1636,16 +1636,16 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
                                         Statement givenName = null;
                                         if (isResourceOfType(personResource, VCARD_INDIVIDUAL)) {
                                             if (personResource.hasProperty(model.getProperty(VCARD_HAS_NAME))) {
-                                                Statement vcardName = personResource.getProperty(model.getProperty(VCARD_HAS_NAME));
+                                                Resource vcardName = personResource.getPropertyResourceValue(model.getProperty(VCARD_HAS_NAME));
                                                 if (vcardName != null) {
                                                     givenName = vcardName.getProperty(model.getProperty(VCARD_GIVENNAME));
                                                     familyName = vcardName.getProperty(model.getProperty(VCARD_FAMILYNAME));
                                                 }
                                             }
                                         } else if (personResource.hasProperty(model.getProperty(OBO_HAS_CONTACT_INFO))) {
-                                            Resource vCard = personResource.getProperty(model.getProperty(OBO_HAS_CONTACT_INFO)).getResource();
+                                            Resource vCard = personResource.getPropertyResourceValue(model.getProperty(OBO_HAS_CONTACT_INFO));
                                             if (vCard.hasProperty(model.getProperty(VCARD_HAS_NAME))) {
-                                                Statement vcardName = vCard.getProperty(model.getProperty(VCARD_HAS_NAME));
+                                                Resource vcardName = vCard.getPropertyResourceValue(model.getProperty(VCARD_HAS_NAME));
                                                 if (vcardName != null) {
                                                     givenName = vcardName.getProperty(model.getProperty(VCARD_GIVENNAME));
                                                     familyName = vcardName.getProperty(model.getProperty(VCARD_FAMILYNAME));
