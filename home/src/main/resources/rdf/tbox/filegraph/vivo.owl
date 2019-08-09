@@ -5954,7 +5954,12 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/ARG_2000376">
         <rdfs:label xml:lang="en">Contact Qualifier</rdfs:label>
-        <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <obo:IAO_0000112 xml:lang="en">Examples are business address, shipping address.</obo:IAO_0000112>
+        <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000120"/>
+        <obo:IAO_0000115 xml:lang="en">The purpose of contact information.</obo:IAO_0000115>
+        <obo:IAO_0000116 xml:lang="en">Contact qualifiers are represented as individuals of this class.  We do
+        not have an authoritative controlled vocabulary for contact qualifiers.</obo:IAO_0000116>
+        <obo:IAO_0000117 xml:lang="en">PERSON: Michael Conlon</obo:IAO_0000117>
     </owl:Class>
 
 
@@ -8592,7 +8597,6 @@ has super-classes</obo:IAO_0000115>
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#AcademicDegree">
         <rdfs:label xml:lang="en">Academic Degree</rdfs:label>
-        <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#abbreviation"/>
@@ -8606,9 +8610,19 @@ has super-classes</obo:IAO_0000115>
                 <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An academic degree at any level, both as reported by individuals for employment and as offered by academic degree programs.</obo:IAO_0000115>
-        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">B.A. Bachelor of Arts</obo:IAO_0000112>
-        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This list may have multiple abbreviations for some degrees.</obo:IAO_0000112>
+        <obo:IAO_0000112 xml:lang="en">B.A. Bachelor of Arts</obo:IAO_0000112>
+        <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000120"/>  <!-- check this -->
+        <obo:IAO_0000115 xml:lang="en">An academic degree at any level, both as 
+        reported by individuals for employment and as offered by academic degree programs.</obo:IAO_0000115>
+        <obo:IAO_0000116 xml:lang="en">The ObjectProperty relates is used to associate an AcademicDegree with an AwardedDegree.  A preferred
+        approach would be to recognize the AwardedDegree as an information artifact which is the output of an AcademicDegree process.
+        This would eliminate the use of relates and relatedBy in the
+        representation of Academic Degrees and Awarded Degrees, provide correct subsumption, and avoid the use of vivo:Relationship. Further, we could
+        rename AwardedDegree AcademicDegree (!) and rename AcademicDegree to AcademicDegreeProcess and eliminate the need for
+        the EducationalProcess currently in the model.
+        </obo:IAO_0000116>
+        <obo:IAO_0000117 xml:lang="en">PERSON: Michael Conlon</obo:IAO_0000117>
+        <obo:IAO_0000119 xml:lang="en">Merriam Webster (https://www.merriam-webster.com/dictionary/degree)</obo:IAO_0000119>
     </owl:Class>
 
 
@@ -8787,10 +8801,19 @@ This class allows for linking an author to a publication while indicating inform
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Award">
         <rdfs:label xml:lang="en">Award or Honor</rdfs:label>
-        <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An Award or Honor</obo:IAO_0000115>
-        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An Award or Honor</obo:IAO_0000112>
-        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wiley Prize in Biomedical Sciences</obo:IAO_0000112>
+        <obo:IAO_0000112 xml:lang="en">The Wiley Prize in Biomedicine is awarded each year to a researcher for outstanding
+        contributions to biomedicine.</obo:IAO_0000112>
+        <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000120"/>  <!-- check this -->
+        <obo:IAO_0000115 xml:lang="en">A recognition of outstanding work or action.</obo:IAO_0000115>
+        <obo:IAO_0000116 xml:lang="en">The ObjectProperty relates is used to associate an Award with an AwardReceipt.  A preferred
+        approach would be to recognize the AwardReceipt as an information artifact which is the output of the Award process.
+        The award receipt is about the recipient of the award.  This would eliminate the use of relates and relatedBy in the
+        representation of Awards and AwardReceipts, provide correct subsumption, and avoid the use of vivo:Relationship.  We
+        could then rename AwardReceipt to Award (!) and Award to AwardProcess to reflect their natures (this is why ontologies use numbered 
+        class names -- to avoid renaming)
+        </obo:IAO_0000116>
+        <obo:IAO_0000117 xml:lang="en">PERSON: Michael Conlon</obo:IAO_0000117>
+        <obo:IAO_0000119 xml:lang="en">Merriam Webster (https://www.merriam-webster.com/dictionary/award)</obo:IAO_0000119>
     </owl:Class>
 
 
@@ -9241,7 +9264,19 @@ This class allows for linking an author to a publication while indicating inform
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#Credential">
         <rdfs:label xml:lang="en">Credential</rdfs:label>
-        <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <obo:IAO_0000112 xml:lang="en">A driver's license is the result of a credentialing process</obo:IAO_0000112>
+        <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000120"/>  <!-- check this -->
+        <obo:IAO_0000115 xml:lang="en">An attestation of qualification, competence, or authority issued to an individual by a third 
+        party with a relevant or  de facto authority or assumed competence to do so.</obo:IAO_0000115>
+        <obo:IAO_0000116 xml:lang="en">The ObjectProperty relates is used to associate a Credential with an IssuedCredential.  A preferred
+        approach would be to recognize the IssuedCredential as an information artifact which is the output of the Credential process.
+        The IssuedCredential is about the recipient of the issued credential.  This would eliminate the use of relates and relatedBy in the
+        representation of Credentials and IssuedCredentials, provide correct subsumption, and avoid the use of vivo:Relationship.  We could
+        then rename IssuedCredential to Credential (!) and Credential to CredentialingProcess which would reflect their true nature.  Other
+        ontologies used numbered class names to avoid the need to rename in such cases.
+        </obo:IAO_0000116>
+        <obo:IAO_0000117 xml:lang="en">PERSON: Michael Conlon</obo:IAO_0000117>
+        <obo:IAO_0000119 xml:lang="en">Merriam Webster (https://www.merriam-webster.com/dictionary/credential)</obo:IAO_0000119>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#hasGoverningAuthority"/>
@@ -9260,8 +9295,6 @@ This class allows for linking an author to a publication while indicating inform
                 <owl:allValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An attestation of qualification, competence, or authority issued to an individual by a third party with a relevant or  de facto authority or assumed competence to do so.</obo:IAO_0000112>
-        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An attestation of qualification, competence, or authority issued to an individual by a third party with a relevant or  de facto authority or assumed competence to do so.</obo:IAO_0000115>
     </owl:Class>
 
 
@@ -9324,9 +9357,13 @@ This class allows for linking an author to a publication while indicating inform
     <!-- http://vivoweb.org/ontology/core#DateTimeValuePrecision -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#DateTimeValuePrecision">
-        <rdfs:label xml:lang="en">Date/Time Value Precision</rdfs:label>
-        <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Indicates the precision of the value of a DateTimeValue instance.</obo:IAO_0000115>
+        <rdfs:label xml:lang="en">DateTime Value Precision</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000019"/> <!-- quality -->
+        <obo:IAO_0000112 xml:lang="en">A dateTimeValue may have yearDateTimePrecision indicating that only the year is known.</obo:IAO_0000112>
+        <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000120"/>  <!-- check this -->
+        <obo:IAO_0000115 xml:lang="en">The precision of a DateTimeValue</obo:IAO_0000115>
+        <obo:IAO_0000116 xml:lang="en">DateTimeValuePrecisions are represented as individuals of this class.</obo:IAO_0000116>
+        <obo:IAO_0000117 xml:lang="en">PERSON: Michael Conlon</obo:IAO_0000117>
     </owl:Class>
 
 
