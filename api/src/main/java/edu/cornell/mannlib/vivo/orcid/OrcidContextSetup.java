@@ -13,6 +13,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import edu.cornell.mannlib.vivo.orcid.controller.OrcidAbstractHandler;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -54,6 +55,10 @@ public class OrcidContextSetup implements ServletContextListener {
 	private void initializeOrcidClientContext(ConfigurationProperties props,
 			StartupStatus ss) {
 		try {
+			if (!"member".equalsIgnoreCase(props.getProperty("orcid.apiLevel", "member"))) {
+				OrcidAbstractHandler.setAPiLevelPublic();
+			}
+
 			Map<Setting, String> settings = new EnumMap<>(Setting.class);
 			settings.put(CLIENT_ID, props.getProperty("orcid.clientId"));
 			settings.put(CLIENT_SECRET,
