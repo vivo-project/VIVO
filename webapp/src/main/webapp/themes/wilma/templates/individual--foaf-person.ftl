@@ -62,6 +62,23 @@
     <section id="individual-info" ${infoClass!} role="region">
     <section id="right-hand-column" role="region">
         <#include "individual-visualizationFoafPerson.ftl">
+        <#if editable>
+            <#if claimSources?size &gt; 0>
+                <br />${i18n().claim_publications_by}<br />
+                <#if claimSources?seq_contains("doi")>
+                    <form action="${urls.base}/createAndLink/doi" method="get" style="float: left;">
+                        <input type="hidden" name="profileUri" value="${individual.uri}" />
+                        <input type="submit" class="submit" value="${i18n().claim_publications_by_doi}" />
+                    </form>
+                </#if>
+                <#if claimSources?seq_contains("pmid")>
+                    <form action="${urls.base}/createAndLink/pmid" method="get" style="float: right;">
+                        <input type="hidden" name="profileUri" value="${individual.uri}" />
+                        <input type="submit" class="submit" value="${i18n().claim_publications_by_pmid}" />
+                    </form>
+                </#if>
+            </#if>
+        </#if>
         </section>
         <#include "individual-adminPanel.ftl">
 
