@@ -3,44 +3,24 @@ VIVO-languages
 
 Files that enable VIVO (supported by Vitro) to operate in languages beyond American English.
 
-The repository is structured this way
-* Each top-level directory represents a different release of VIVO.
-* Within these, each Second-level directory contains files for a specific language, for that release. 
-These directories are named for the "locale" of the language and region that they represent.
-
-For example, a directory of files for the French language (fr), as used in Belgium (BE), for VIVO release 1.6:
-
-    /vivo-1.6/fr_BE/
-
 Available language files
 ------------------------
 
-All members of the core development team speak only American English, 
-so we have produced an example language set that holds the English-language strings
-in VIVO:
-
-    /vivo-1.6/en_US
-
-This set of files is provided as an example, so those who wish to produce a translation
-may have a template to copy.
-
-Our first translation is in Spanish, contributed by Federico Sancho, of IICA (http://iica.int),
-as part of a project with eScire (http://escire.mx/). We are very grateful to them for contributing 
-this translation to the VIVO community.
-
-    /vivo-1.6/es
+At present, VIVO has been translated into German, Spanish, and Portuguese. You may find the relevant files for each language by searching for files containing _de_DE, _es, and _pt_BR respectively. English uses the prefix _en_US.
 
 Using the language files
 ------------------------
 
-If the files you want already exist here, you can add them to your VIVO instance by
-following the instructions in the VIVO wiki for [Adding a language to VIVO][1].
+If the files you want already exist here and in the companion [Vitro-languages repository][1], you can add them to your VIVO instance by
+following the instructions in the VIVO wiki for [Adding a language to VIVO][2].
 
-If the files for your desired language do not exist, then you may use this example as a 
-starting point for doing the translations yourself. Please send a note to [the VIVO Tech group][2], 
+If the files for your desired language do not exist then you may use the files in this repository as a 
+starting point for doing the translations yourself. Search for the required files for any of the language prefixes above (e.g. _en_US), copy the files, and rename your new files using the appropriate language code [prefix][3]. Please send a note to [the VIVO Tech group][4] 
 to find out if someone else is already working on a translation.
 
 If you create a translation, please consider contributing your language files to the VIVO community.
 
-[1]: https://wiki.duraspace.org/display/VIVODOC110x/Internationalization#Internationalization-AddinganexistinglanguagetoyourVIVOsite
-[2]: mailto:vivo-tech@googlegroups.com
+[1]: https://github.com/vivo-project/Vitro-languages
+[2]: https://wiki.duraspace.org/display/VIVODOC110x/Internationalization#Internationalization-AddinganexistinglanguagetoyourVIVOsite
+[3]: https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+[4]: mailto:vivo-tech@googlegroups.com
