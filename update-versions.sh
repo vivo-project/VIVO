@@ -2,7 +2,7 @@
 
 if  [ -z "$1" ]
   then
-    echo 'New version number required eg. 1.9.0-rc1'
+    echo 'New version number required eg. 1.11.0-RC-1'
     exit 1
 fi
 
