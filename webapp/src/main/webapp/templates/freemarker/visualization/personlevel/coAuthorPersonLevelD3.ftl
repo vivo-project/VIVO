@@ -201,12 +201,14 @@ $(document).ready(function(){
             if (opacity > .5) {
                 var chordInfoDiv = d3.select('#chord-info-div');
                 chordInfoDiv.style('display', 'none');
+                $('#chord').css('cursor', 'default');
             } else {
                 var hoverEvent = d3.event;
                 var topPos = hoverEvent.pageY - 60;
                 var leftPos = hoverEvent.pageX + 10;
 
                 var chord = d3.select('#chord').node();
+                $('#chord').css('cursor', 'pointer');
                 var chordInfoDiv = d3.select('#chord-info-div');
                 var hoverMsg = labels[i] + "<br/>";
                 if (i > 0) {
@@ -241,7 +243,7 @@ $(document).ready(function(){
 
     function chord_click() {
         return function (g, i) {
-            if (i > 0) {
+            if (i >= 0) {
                 window.location.href = getWellFormedURLs(uris[i], "profile");
             }
         };
