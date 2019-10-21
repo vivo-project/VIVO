@@ -7,13 +7,13 @@
 
     <groupId>org.vivoweb</groupId>
     <artifactId>vivo-installer-vivo</artifactId>
-    <version>1.11.0</version>
+    <version>1.11.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <parent>
         <groupId>org.vivoweb</groupId>
         <artifactId>vivo-installer</artifactId>
-        <version>1.11.0</version>
+        <version>1.11.1-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
 
