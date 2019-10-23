@@ -20,7 +20,7 @@
 <http://purl.org/ontology/bibo/EditedBook> <http://www.w3.org/2000/01/rdf-schema#label> "Herausgeberwerk"@de-DE .
 <http://purl.org/ontology/bibo/Excerpt> <http://www.w3.org/2000/01/rdf-schema#label> "Exzerpt"@de-DE .
 <http://vivoweb.org/ontology/core#entryTerm> <http://www.w3.org/2000/01/rdf-schema#label> "Antrittsbeginn"@de-DE .
-<http://vivoweb.org/ontology/core#DateTimeInterval> <http://www.w3.org/2000/01/rdf-schema#label> "Datum/Uhrzeit-Intervall"@de-DE .
+<http://vivoweb.org/ontology/core#DateTimeInterval> <http://www.w3.org/2000/01/rdf-schema#label> "Zeitraum"@de-DE .
 <http://vivoweb.org/ontology/core#Screenplay> <http://www.w3.org/2000/01/rdf-schema#label> "Schauspiel/Bühnenstück"@de-DE .
 <http://purl.org/ontology/bibo/performer> <http://www.w3.org/2000/01/rdf-schema#label> "Ausführende"@de-DE .
 <http://vivoweb.org/ontology/core#Exhibit> <http://www.w3.org/2000/01/rdf-schema#label> "Ausstellung"@de-DE .
@@ -33,7 +33,7 @@
 <http://purl.org/ontology/bibo/PersonalCommunicationDocument> <http://www.w3.org/2000/01/rdf-schema#label> "Personal Communication Document"@de-DE .
 <http://purl.org/ontology/bibo/Map> <http://www.w3.org/2000/01/rdf-schema#label> "Karte"@de-DE .
 <http://vivoweb.org/ontology/core#nihmsid> <http://www.w3.org/2000/01/rdf-schema#label> "NIH Manuscript Submission System ID"@de-DE .
-<http://vivoweb.org/ontology/core#geographicFocusOf> <http://www.w3.org/2000/01/rdf-schema#label> "Ort von"@de-DE .
+<http://vivoweb.org/ontology/core#geographicFocusOf> <http://www.w3.org/2000/01/rdf-schema#label> "geographischer Fokus"@de-DE .
 <http://vivoweb.org/ontology/core#licenseNumber> <http://www.w3.org/2000/01/rdf-schema#label> "Lizenznummer"@de-DE .
 <http://purl.org/ontology/bibo/citedBy> <http://www.w3.org/2000/01/rdf-schema#label> "zitiert von"@de-DE .
 <http://vivoweb.org/ontology/core#CoPrincipalInvestigatorRole> <http://www.w3.org/2000/01/rdf-schema#label> "Ko-Projektleitung für"@de-DE .
@@ -100,7 +100,7 @@
 <http://purl.org/ontology/bibo/cites> <http://www.w3.org/2000/01/rdf-schema#label> "zitiert"@de-DE .
 <http://purl.org/ontology/bibo/pageEnd> <http://www.w3.org/2000/01/rdf-schema#label> "letzte Seite"@de-DE .
 <http://vivoweb.org/ontology/core#hasEquipment> <http://www.w3.org/2000/01/rdf-schema#label> "hat Equipment"@de-DE .
-<http://vivoweb.org/ontology/core#localAwardId> <http://www.w3.org/2000/01/rdf-schema#label> "ID für die Auszeichnung"@de-DE .
+<http://vivoweb.org/ontology/core#localAwardId> <http://www.w3.org/2000/01/rdf-schema#label> "internes Förderkennzeichen"@de-DE .
 <http://vivoweb.org/ontology/core#Room> <http://www.w3.org/2000/01/rdf-schema#label> "Raum"@de-DE .
 <http://purl.org/ontology/bibo/draft> <http://www.w3.org/2000/01/rdf-schema#label> "Entwurf"@de-DE .
 <http://purl.org/ontology/bibo/CourtReporter> <http://www.w3.org/2000/01/rdf-schema#label> "Court Reporter"@de-DE .
@@ -122,7 +122,7 @@
 <http://purl.org/ontology/bibo/uri> <http://www.w3.org/2000/01/rdf-schema#label> "URI"@de-DE .
 <http://vivoweb.org/ontology/core#Foundation> <http://www.w3.org/2000/01/rdf-schema#label> "Stiftung"@de-DE .
 <http://vivoweb.org/ontology/core#MedicalResidency> <http://www.w3.org/2000/01/rdf-schema#label> "Medizinische Facharztausbildung"@de-DE .
-<http://vivoweb.org/ontology/core#totalAwardAmount> <http://www.w3.org/2000/01/rdf-schema#label> "Gesamtzahl an Auszeichnungen"@de-DE .
+<http://vivoweb.org/ontology/core#totalAwardAmount> <http://www.w3.org/2000/01/rdf-schema#label> "Bewilligungssumme"@de-DE .
 <http://purl.org/ontology/bibo/Interview> <http://www.w3.org/2000/01/rdf-schema#label> "Interview"@de-DE .
 <http://vivoweb.org/ontology/core#GraduateAdvisingRelationship> <http://www.w3.org/2000/01/rdf-schema#label> "Art der Graduiertenbetreuung"@de-DE .
 <http://purl.org/ontology/bibo/Code> <http://www.w3.org/2000/01/rdf-schema#label> "Code"@de-DE .
@@ -261,6 +261,7 @@
 <http://vivoweb.org/ontology/core#distributes> <http://www.w3.org/2000/01/rdf-schema#label> "verteilt"@de-DE .
 <http://vivoweb.org/ontology/core#hasSubjectArea> <http://www.w3.org/2000/01/rdf-schema#label> "hat Fachgebiet"@de-DE .
 <http://vivoweb.org/ontology/core#termLabel> <http://www.w3.org/2000/01/rdf-schema#label> "Begriffslabel"@de-DE .
+<http://www.w3.org/2004/02/skos/core#related> <http://www.w3.org/2000/01/rdf-schema#label> "Verwandtes Konzept"@de-DE .
 <http://purl.org/ontology/bibo/Performance> <http://www.w3.org/2000/01/rdf-schema#label> "Aufführung"@de-DE .
 <http://vivoweb.org/ontology/core#PopulatedPlace> <http://www.w3.org/2000/01/rdf-schema#label> "Ort"@de-DE .
 <http://vivoweb.org/ontology/core#rank> <http://www.w3.org/2000/01/rdf-schema#label> "Stellung"@de-DE .
@@ -313,7 +314,7 @@
 <http://vivoweb.org/ontology/core#LeaderRole> <http://www.w3.org/2000/01/rdf-schema#label> "Rolle als Leitung"@de-DE .
 <http://purl.org/ontology/bibo/shortDescription> <http://www.w3.org/2000/01/rdf-schema#label> "Kurzbeschreibung"@de-DE .
 <http://purl.org/ontology/bibo/edition> <http://www.w3.org/2000/01/rdf-schema#label> "Ausgabe"@de-DE .
-<http://vivoweb.org/ontology/core#sponsorAwardId> <http://www.w3.org/2000/01/rdf-schema#label> "ID für den Sponsor der Auszeichnung"@de-DE .
+<http://vivoweb.org/ontology/core#sponsorAwardId> <http://www.w3.org/2000/01/rdf-schema#label> "Förderkennzeichen"@de-DE .
 <http://vivoweb.org/ontology/core#AdvisingRelationship> <http://www.w3.org/2000/01/rdf-schema#label> "Betreuungsverhältnis"@de-DE .
 <http://purl.org/ontology/bibo/DocumentPart> <http://www.w3.org/2000/01/rdf-schema#label> "Teil des Dokumentes"@de-DE .
 <http://vivoweb.org/ontology/core#PrincipalInvestigatorRole> <http://www.w3.org/2000/01/rdf-schema#label> "Projektleitung für"@de-DE .
@@ -401,7 +402,6 @@
 <http://purl.obolibrary.org/obo/ERO_0000595> <http://www.w3.org/2000/01/rdf-schema#label> "Forschungsmöglichkeit"@de-DE .
 <http://purl.obolibrary.org/obo/ERO_0000071> <http://www.w3.org/2000/01/rdf-schema#label> "Software"@de-DE .
 <http://purl.obolibrary.org/obo/ERO_0000007> <http://www.w3.org/2000/01/rdf-schema#label> "Technik"@de-DE .
-<http://vivoweb.org/ontology/core#Librarian> <http://www.w3.org/2000/01/rdf-schema#label> "emeritierte/r BibliothekarIn"@de-DE .
 <http://vivoweb.org/ontology/core#Consortium> <http://www.w3.org/2000/01/rdf-schema#label> "Konsortium"@de-DE .
 <http://purl.obolibrary.org/obo/ERO_0000391> <http://www.w3.org/2000/01/rdf-schema#label> "Zugangsservice"@de-DE .
 <http://purl.obolibrary.org/obo/ERO_0001261> <http://www.w3.org/2000/01/rdf-schema#label> "Analyse-Service"@de-DE .
@@ -427,6 +427,7 @@
 <http://aims.fao.org/aos/geopolitical.owl#GDPTotalInCurrentPrices> <http://www.w3.org/2000/01/rdf-schema#label> "BIP in laufenden Preisen"@de-DE .
 <http://www.w3.org/2006/vcard/ns#hasOrganizationalUnitName> <http://www.w3.org/2000/01/rdf-schema#label> "hat Name der Organisationseinheit"@de-DE .
 <http://aims.fao.org/aos/geopolitical.owl#other> <http://www.w3.org/2000/01/rdf-schema#label> "Andere"@de-DE .
+<http://www.w3.org/2004/02/skos/core#broader> <http://www.w3.org/2000/01/rdf-schema#label> "Breiteres Konzept"@de-DE .
 <http://www.w3.org/2004/02/skos/core#narrower> <http://www.w3.org/2000/01/rdf-schema#label> "Unterbegriff"@de-DE .
 <http://purl.obolibrary.org/obo/OBI_0000643> <http://www.w3.org/2000/01/rdf-schema#label> "hat Körnung"@de-DE .
 <http://www.w3.org/2006/vcard/ns#Identification> <http://www.w3.org/2000/01/rdf-schema#label> "Identifikation"@de-DE .
@@ -518,7 +519,7 @@
 <http://www.w3.org/2006/vcard/ns#Type> <http://www.w3.org/2000/01/rdf-schema#label> "Typ"@de-DE .
 <http://aims.fao.org/aos/geopolitical.owl#codeFAOTERM> <http://www.w3.org/2000/01/rdf-schema#label> "codeFAOTERM"@de-DE .
 <http://www.w3.org/2006/vcard/ns#note> <http://www.w3.org/2000/01/rdf-schema#label> "Kommentar"@de-DE .
-<http://purl.obolibrary.org/obo/ERO_0000779> <http://www.w3.org/2000/01/rdf-schema#label> "Rolle des/der Gesandten"@de-DE .
+<http://purl.obolibrary.org/obo/ERO_0000779> <http://www.w3.org/2000/01/rdf-schema#label> "Rolle des/der dauerhaften Einwohners/in"@de-DE .
 <http://purl.obolibrary.org/obo/ARG_2000069> <http://www.w3.org/2000/01/rdf-schema#label> "American Board of Emergency Medicine"@de-DE .
 <http://purl.obolibrary.org/obo/RO_0001025> <http://www.w3.org/2000/01/rdf-schema#label> "gelegen in"@de-DE .
 <http://aims.fao.org/aos/geopolitical.owl#hasStatistics> <http://www.w3.org/2000/01/rdf-schema#label> "hat Statistiken"@de-DE .
@@ -543,7 +544,7 @@
 <http://purl.obolibrary.org/obo/ERO_0000398> <http://www.w3.org/2000/01/rdf-schema#label> "durchgeführt von"@de-DE .
 <http://www.w3.org/2006/vcard/ns#hasCalenderBusy> <http://www.w3.org/2000/01/rdf-schema#label> "hat belegte Zeit"@de-DE .
 <http://www.w3.org/2006/vcard/ns#hasCategory> <http://www.w3.org/2000/01/rdf-schema#label> "hat Kategorie"@de-DE .
-<http://purl.obolibrary.org/obo/BFO_0000004> <http://www.w3.org/2000/01/rdf-schema#label> "Unabhängiger Charakter"@de-DE .
+<http://purl.obolibrary.org/obo/BFO_0000004> <http://www.w3.org/2000/01/rdf-schema#label> "Unabhängiger Kontinuant"@de-DE .
 <http://purl.obolibrary.org/obo/ARG_2000086> <http://www.w3.org/2000/01/rdf-schema#label> "American Board of Radiology"@de-DE .
 <http://purl.obolibrary.org/obo/ARG_2000399> <http://www.w3.org/2000/01/rdf-schema#label> "hat Kontaktperson"@de-DE .
 <http://purl.obolibrary.org/obo/ERO_0000044> <http://www.w3.org/2000/01/rdf-schema#label> "Inventarnummer"@de-DE .
@@ -551,7 +552,7 @@
 <http://purl.obolibrary.org/obo/ERO_0000775> <http://www.w3.org/2000/01/rdf-schema#label> "hat Wohnsitzerfordernis"@de-DE .
 <http://purl.obolibrary.org/obo/ERO_0001263> <http://www.w3.org/2000/01/rdf-schema#label> "Dienstleistung für Materialmodifikation"@de-DE .
 <http://aims.fao.org/aos/geopolitical.owl#landAreaYear> <http://www.w3.org/2000/01/rdf-schema#label> "Jahr"@de-DE .
-<http://purl.obolibrary.org/obo/BFO_0000003> <http://www.w3.org/2000/01/rdf-schema#label> "tatsächlich auftretende Sache"@de-DE .
+<http://purl.obolibrary.org/obo/BFO_0000003> <http://www.w3.org/2000/01/rdf-schema#label> "Okkurent"@de-DE .
 <http://aims.fao.org/aos/geopolitical.owl#nationalityIT> <http://www.w3.org/2000/01/rdf-schema#label> "Nationalität in Italienisch"@de-DE .
 <http://purl.obolibrary.org/obo/ERO_0000776> <http://www.w3.org/2000/01/rdf-schema#label> "Rolle des US-Einwohners"@de-DE .
 <http://purl.obolibrary.org/obo/ARG_2000066> <http://www.w3.org/2000/01/rdf-schema#label> "American Board of Anesthesiology"@de-DE .
@@ -563,7 +564,7 @@
 <http://www.w3.org/2006/vcard/ns#hasKey> <http://www.w3.org/2000/01/rdf-schema#label> "hat Schlüssel"@de-DE .
 <http://purl.obolibrary.org/obo/ERO_0000396> <http://www.w3.org/2000/01/rdf-schema#label> "Dienstleistung für Materialproduktion"@de-DE .
 <http://www.w3.org/2006/vcard/ns#TimeZone> <http://www.w3.org/2000/01/rdf-schema#label> "Zeitzone"@de-DE .
-<http://purl.obolibrary.org/obo/BFO_0000002> <http://www.w3.org/2000/01/rdf-schema#label> "Charakter"@de-DE .
+<http://purl.obolibrary.org/obo/BFO_0000002> <http://www.w3.org/2000/01/rdf-schema#label> "Kontinuant"@de-DE .
 <http://aims.fao.org/aos/geopolitical.owl#countryArea> <http://www.w3.org/2000/01/rdf-schema#label> "Landfläche"@de-DE .
 <http://purl.obolibrary.org/obo/RO_0000052> <http://www.w3.org/2000/01/rdf-schema#label> "anhaftend an"@de-DE .
 <http://purl.obolibrary.org/obo/OBI_0000299> <http://www.w3.org/2000/01/rdf-schema#label> "hat spezifiziertes Ergebnis"@de-DE .
@@ -581,7 +582,7 @@
 <http://purl.obolibrary.org/obo/IAO_0000221> <http://www.w3.org/2000/01/rdf-schema#label> "ist Qualitätsmaßstab für"@de-DE .
 <http://www.w3.org/2006/vcard/ns#Calendar> <http://www.w3.org/2000/01/rdf-schema#label> "Kalender"@de-DE .
 <http://purl.obolibrary.org/obo/RO_0002234> <http://www.w3.org/2000/01/rdf-schema#label> "hat Ergebnis"@de-DE .
-<http://purl.obolibrary.org/obo/BFO_0000020> <http://www.w3.org/2000/01/rdf-schema#label> "Spezifisch Bedingter Charakter"@de-DE .
+<http://purl.obolibrary.org/obo/BFO_0000020> <http://www.w3.org/2000/01/rdf-schema#label> "Spezifisch Bedingter Kontinuant"@de-DE .
 <http://purl.obolibrary.org/obo/ERO_0001520> <http://www.w3.org/2000/01/rdf-schema#label> "führt Studie am Menschen durch"@de-DE .
 <http://purl.obolibrary.org/obo/IAO_0000032> <http://www.w3.org/2000/01/rdf-schema#label> "skalares Messdatum"@de-DE .
 <http://purl.obolibrary.org/obo/ARG_2000089> <http://www.w3.org/2000/01/rdf-schema#label> "American Board of Urology"@de-DE .
@@ -708,7 +709,7 @@
 <http://www.w3.org/2006/vcard/ns#Crush> <http://www.w3.org/2000/01/rdf-schema#label> "Schwarm"@de-DE .
 <http://www.w3.org/2006/vcard/ns#Work> <http://www.w3.org/2000/01/rdf-schema#label> "Beruflich"@de-DE .
 <http://purl.obolibrary.org/obo/ARG_2000012> <http://www.w3.org/2000/01/rdf-schema#label> "Bezeichnung der Messung"@de-DE .
-<http://purl.obolibrary.org/obo/ERO_0000780> <http://www.w3.org/2000/01/rdf-schema#label> "Rolle des/der nicht dauerhaft Gesandten"@de-DE .
+<http://purl.obolibrary.org/obo/ERO_0000780> <http://www.w3.org/2000/01/rdf-schema#label> "Rolle des/der nicht dauerhaften Einwohners/in"@de-DE .
 <http://aims.fao.org/aos/geopolitical.owl#special_group> <http://www.w3.org/2000/01/rdf-schema#label> "spezielle Gruppierung"@de-DE .
 <http://aims.fao.org/aos/geopolitical.owl#countryAreaUnit> <http://www.w3.org/2000/01/rdf-schema#label> "Flächeneinheit"@de-DE .
 <http://www.w3.org/2006/vcard/ns#geo> <http://www.w3.org/2000/01/rdf-schema#label> "Koordinaten"@de-DE .
@@ -774,7 +775,7 @@
 <http://purl.obolibrary.org/obo/BFO_0000051> <http://www.w3.org/2000/01/rdf-schema#label> "besteht aus"@de-DE .
 <http://purl.obolibrary.org/obo/ARG_2000008> <http://www.w3.org/2000/01/rdf-schema#label> "Messung von Themenschwerpunkten"@de-DE .
 <http://www.w3.org/2006/vcard/ns#logo> <http://www.w3.org/2000/01/rdf-schema#label> "Logo"@de-DE .
-<http://purl.obolibrary.org/obo/BFO_0000031> <http://www.w3.org/2000/01/rdf-schema#label> "Bedingter Charakter"@de-DE .
+<http://purl.obolibrary.org/obo/BFO_0000031> <http://www.w3.org/2000/01/rdf-schema#label> "Bedingter Kontinuant"@de-DE .
 <http://purl.obolibrary.org/obo/ARG_2000077> <http://www.w3.org/2000/01/rdf-schema#label> "American Board of Orthopaedic Surgery"@de-DE .
 <http://purl.obolibrary.org/obo/ERO_0000787> <http://www.w3.org/2000/01/rdf-schema#label> "Rolle des/der MitarbeiterIn"@de-DE .
 <http://purl.org/net/OCRe/study_design.owl#Phase_0> <http://www.w3.org/2000/01/rdf-schema#label> "Phase 0"@de-DE .
