@@ -9470,19 +9470,6 @@ This class allows for linking an author to a publication while indicating inform
 		<obo:IAO_0000117 xml:lang="en">Person: Michael Conlon</obo:IAO_0000117><!-- name of editor -->
 		<obo:IAO_0000119 xml:lang="en"></obo:IAO_0000119><!-- citation -->
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Process resulting in a collection</vitro:descriptionAnnot><!-- Displayed by VIVO/Vitro in ontology editor -->
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0002234"/><!-- has output -->
-                <owl:allValuesFrom>
-                	<owl:Class>
-                		<owl:unionOf rdf:parseType="Collection">
-                    		<rdf:Description rdf:about="http://purl.obolibrary.org/obo/BFO_0000040"/> <!-- Material Entity -->
-                    		<rdf:Description rdf:about="http://purl.obolibrary.org/obo/IAO_0000030"/> <!-- Information Content Entity -->
-                		</owl:unionOf>
-            		</owl:Class>
-                </owl:allValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:label xml:lang="en">Collection Process</rdfs:label>
     </owl:Class>
   
@@ -9499,19 +9486,6 @@ This class allows for linking an author to a publication while indicating inform
 		<obo:IAO_0000117 xml:lang="en">PERSON: Michael Conlon</obo:IAO_0000117><!-- name of editor -->
 		<obo:IAO_0000119 xml:lang="en"></obo:IAO_0000119><!-- citation -->
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The curation of a collection</vitro:descriptionAnnot><!-- Displayed by VIVO/Vitro in ontology editor -->
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/RO_0002233"/><!-- has input -->
-                <owl:allValuesFrom>
-                	<owl:Class>
-                		<owl:unionOf rdf:parseType="Collection">
-                    		<rdf:Description rdf:about="http://purl.obolibrary.org/obo/BFO_0000040"/> <!-- Material Entity -->
-                    		<rdf:Description rdf:about="http://purl.obolibrary.org/obo/IAO_0000030"/> <!-- Information Content Entity -->
-                		</owl:unionOf>
-            		</owl:Class>
-                </owl:allValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:label xml:lang="en">Curation Process</rdfs:label>
     </owl:Class>
 
