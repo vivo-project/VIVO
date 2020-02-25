@@ -26,7 +26,7 @@
     :hasSearchIndexer             :basicSearchIndexer ;
     :hasImageProcessor            :iioImageProcessor ;
     :hasFileStorage               :ptiFileStorage ;
-    :hasContentTripleSource       :sdbContentTripleSource ;
+    :hasContentTripleSource       :tdbContentTripleSource ;
     :hasConfigurationTripleSource :tdbConfigurationTripleSource ;
     :hasTBoxReasonerModule        :jfactTBoxReasonerModule .
 
@@ -89,15 +89,15 @@
 #    endpoint, or a Virtuoso endpoint, with parameters as shown.
 #
 
-:sdbContentTripleSource
-    a   vitroWebapp:triplesource.impl.sdb.ContentTripleSourceSDB ,
-        vitroWebapp:modules.tripleSource.ContentTripleSource .
+#:sdbContentTripleSource
+#    a   vitroWebapp:triplesource.impl.sdb.ContentTripleSourceSDB ,
+#        vitroWebapp:modules.tripleSource.ContentTripleSource .
 
-#:tdbContentTripleSource
-#    a   vitroWebapp:triplesource.impl.tdb.ContentTripleSourceTDB ,
-#        vitroWebapp:modules.tripleSource.ContentTripleSource ;
-#    # May be an absolute path, or relative to the Vitro home directory.
-#    :hasTdbDirectory "tdbContentModels" .
+:tdbContentTripleSource
+    a   vitroWebapp:triplesource.impl.tdb.ContentTripleSourceTDB ,
+        vitroWebapp:modules.tripleSource.ContentTripleSource ;
+    # May be an absolute path, or relative to the Vitro home directory.
+    :hasTdbDirectory "tdbContentModels" .
 
 #:sparqlContentTripleSource
 #    a   vitroWebapp:triplesource.impl.sparql.ContentTripleSourceSPARQL ,
