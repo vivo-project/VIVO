@@ -319,7 +319,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.1.1</version>
                 <executions>
                     <execution>
                         <id>verify-style</id>
@@ -348,12 +348,12 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>8.18</version>
+                        <version>8.29</version>
                     </dependency>
                     <dependency>
                         <groupId>org.duraspace</groupId>
                         <artifactId>codestyle</artifactId>
-                        <version>1.0.0</version>
+                        <version>1.1.0</version>
                     </dependency>
                     <dependency>
                         <groupId>org.vivoweb</groupId>
