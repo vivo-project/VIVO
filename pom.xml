@@ -4,7 +4,7 @@
 
     <groupId>org.vivoweb</groupId>
     <artifactId>vivo-languages</artifactId>
-    <version>1.11.1</version>
+    <version>1.11.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>VIVO Lanugages</name>
@@ -49,7 +49,7 @@
         <connection>scm:git:git@github.com:vivo-project/VIVO-languages.git</connection>
         <developerConnection>scm:git:git@github.com:vivo-project/VIVO-languages.git</developerConnection>
         <url>git@github.com:vivo-project/VIVO-languages.git</url>
-        <tag>vivo-languages-1.11.1</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
