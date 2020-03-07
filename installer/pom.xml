@@ -7,7 +7,7 @@
 
     <groupId>org.vivoweb</groupId>
     <artifactId>vivo-installer</artifactId>
-    <version>1.11.1</version>
+    <version>1.11.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>VIVO Installer</name>
