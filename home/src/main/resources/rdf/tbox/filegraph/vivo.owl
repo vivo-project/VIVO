@@ -9456,7 +9456,38 @@ This class allows for linking an author to a publication while indicating inform
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Represents educational training that has been received.</obo:IAO_0000115>
         <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This connects person to their academic degree through this educational training, but can also be used when the training does not result in a degree.</vitro:descriptionAnnot>
     </owl:Class>
+    
+    
+    
+    <!-- http://vivoweb.org/ontology/core#CollectionProcess -->
 
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#CollectionProcess">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
+		<obo:IAO_0000112 xml:lang="en">Jane is collector of Collection c. Jane is a person.  Jane bearer_of collectorRole r.  r realized_in CollectionProcess p.  p has_output c.</obo:IAO_0000112><!-- example of usage -->
+		<obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000123"/><!-- curation status = being worked on -->
+		<obo:IAO_0000115 xml:lang="en">A process which has as its output, a collection of material entities and/or information content entities</obo:IAO_0000115><!-- definition -->
+		<obo:IAO_0000116 xml:lang="en">Under development.  The restriction applies to has output assertions.  Collections of material entities are material entities.  Collections of information content entities are information content entities.</obo:IAO_0000116><!-- editor's administrative note -->
+		<obo:IAO_0000117 xml:lang="en">Person: Michael Conlon</obo:IAO_0000117><!-- name of editor -->
+		<obo:IAO_0000119 xml:lang="en"></obo:IAO_0000119><!-- citation -->
+        <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Process resulting in a collection</vitro:descriptionAnnot><!-- Displayed by VIVO/Vitro in ontology editor -->
+        <rdfs:label xml:lang="en">Collection Process</rdfs:label>
+    </owl:Class>
+  
+    
+    
+    <!-- http://vivoweb.org/ontology/core#CurationProcess -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#CurationProcess">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/BFO_0000015"/>
+		<obo:IAO_0000112 xml:lang="en">Jane is curator of Collection c. Jane is a person.  Jane bearer_of curatorRole r.  r realized_in CurationProcess p.  p has_input c.</obo:IAO_0000112><!-- example of usage -->
+		<obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000123"/><!-- curation status = being worked on -->
+		<obo:IAO_0000115 xml:lang="en">A process which has as its input, a collection of material entities and/or information content entities</obo:IAO_0000115><!-- definition -->
+		<obo:IAO_0000116 xml:lang="en">Under development.  The restriction applies to has input assertions.  Collections of material entities are material entities.  Collection of information content entities are information content entities.</obo:IAO_0000116><!-- editor's administrative note -->
+		<obo:IAO_0000117 xml:lang="en">PERSON: Michael Conlon</obo:IAO_0000117><!-- name of editor -->
+		<obo:IAO_0000119 xml:lang="en"></obo:IAO_0000119><!-- citation -->
+        <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The curation of a collection</vitro:descriptionAnnot><!-- Displayed by VIVO/Vitro in ontology editor -->
+        <rdfs:label xml:lang="en">Curation Process</rdfs:label>
+    </owl:Class>
 
 
     <!-- http://vivoweb.org/ontology/core#EmeritusFaculty -->
