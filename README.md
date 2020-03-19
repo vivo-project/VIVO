@@ -47,3 +47,22 @@ If you would like to contribute code to the VIVO project, please open a ticket
 in our [JIRA](https://jira.duraspace.org/projects/VIVO), and prepare a 
 pull request that references your ticket.  Contributors welcome!
 
+## Citing VIVO
+If you are using VIVO in your publications or projects, please cite the software paper in the Journal of Open Source Software:
+
+* Conlon et al., (2019). VIVO: a system for research discovery. Journal of Open Source Software, 4(39), 1182, https://doi.org/10.21105/joss.01182
+
+### BibTeX
+```tex
+@article{Conlon2019,
+  doi = {10.21105/joss.01182},
+  url = {https://doi.org/10.21105/joss.01182},
+  year = {2019},
+  publisher = {The Open Journal},
+  volume = {4},
+  number = {39},
+  pages = {1182},
+  author = {Michael Conlon and Andrew Woods and Graham Triggs and Ralph O'Flinn and Muhammad Javed and Jim Blake and Benjamin Gross and Qazi Asim Ijaz Ahmad and Sabih Ali and Martin Barber and Don Elsborg and Kitio Fofack and Christian Hauschke and Violeta Ilik and Huda Khan and Ted Lawless and Jacob Levernier and Brian Lowe and Jose Martin and Steve McKay and Simon Porter and Tatiana Walther and Marijane White and Stefan Wolff and Rebecca Younes},
+  title = {VIVO: a system for research discovery},
+  journal = {Journal of Open Source Software}
+}
