@@ -63,6 +63,6 @@ If you are using VIVO in your publications or projects, please cite the software
   number = {39},
   pages = {1182},
   author = {Michael Conlon and Andrew Woods and Graham Triggs and Ralph O'Flinn and Muhammad Javed and Jim Blake and Benjamin Gross and Qazi Asim Ijaz Ahmad and Sabih Ali and Martin Barber and Don Elsborg and Kitio Fofack and Christian Hauschke and Violeta Ilik and Huda Khan and Ted Lawless and Jacob Levernier and Brian Lowe and Jose Martin and Steve McKay and Simon Porter and Tatiana Walther and Marijane White and Stefan Wolff and Rebecca Younes},
-  title = {VIVO: a system for research discovery},
+  title = {{VIVO}: a system for research discovery},
   journal = {Journal of Open Source Software}
 }
