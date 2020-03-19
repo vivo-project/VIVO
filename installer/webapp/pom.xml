@@ -26,7 +26,7 @@
                 <property><name>app-name</name></property>
             </activation>
             <build>
-                <finalName>${app-name}</finalName>
+                <finalName>${app-name}-${project.version}</finalName>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -60,6 +60,10 @@
                                 <resource>
                                     <directory>src/main/webResources</directory>
                                     <filtering>true</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>${project.build.directory}/home-files/</directory>
+                                    <targetPath>WEB-INF/resources/home-files/</targetPath>
                                 </resource>
                             </webResources>
                         </configuration>
@@ -109,7 +113,26 @@
                                             <version>${project.version}</version>
                                             <type>war</type>
                                             <overWrite>true</overWrite>
-                                            <outputDirectory>${tomcat-dir}/webapps/${project.build.finalName}</outputDirectory>
+                                            <outputDirectory>${tomcat-dir}/webapps/${app-name}</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>include-home</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>org.vivoweb</groupId>
+                                            <artifactId>vivo-installer-home</artifactId>
+                                            <version>${project.version}</version>
+                                            <type>tar</type>
+                                            <destFileName>vivo-home.tar</destFileName>
+                                            <outputDirectory>${project.build.directory}/home-files</outputDirectory>
                                         </artifactItem>
                                     </artifactItems>
                                 </configuration>
@@ -123,12 +146,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <artifactId>maven-install-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <configuration>
