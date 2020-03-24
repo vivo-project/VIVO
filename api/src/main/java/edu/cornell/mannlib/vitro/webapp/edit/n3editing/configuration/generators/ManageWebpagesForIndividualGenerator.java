@@ -3,6 +3,7 @@ package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -26,6 +27,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMa
 import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
+import edu.cornell.mannlib.vitro.webapp.i18n.selection.SelectedLocale;
 
 /**
  * This is an odd controller that is just drawing a page with links on it.
@@ -161,7 +163,9 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         + "    OPTIONAL { ?link rdfs:label ?linkLabel } \n"
         + "    OPTIONAL { ?link core:rank ?rank } \n"
         + "    OPTIONAL { ?link vitro:mostSpecificType ?type } \n"
-        + "    OPTIONAL { ?type rdfs:label ?typeLabel } \n"
+        + "    OPTIONAL { ?type rdfs:label ?typeLabel . \n"
+     // UQAM Add linguistic control on label
+        + "                FILTER (lang(?typeLabel) = 'LANGUAGE' ) } \n"
         + "} GROUP BY ?rank ?vcard ?link ?url ?typeLabel \n"
     	+ "  ORDER BY ?rank";
 
@@ -175,8 +179,10 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
 
             Model constructedModel = ModelFactory.createDefaultModel();
             rdfService.sparqlConstructQuery(constructStr, constructedModel);
-
-            String queryStr = QueryUtils.subUriForQueryVar(this.getQuery(), "subject", subjectUri);
+            /*
+             * UQAM Adjust the getQuery signature for managing the linguistic context
+             */
+            String queryStr = QueryUtils.subUriForQueryVar(this.getQuery(vreq), "subject", subjectUri);
             log.debug("Query string is: " + queryStr);
 
             QueryExecution qe = QueryExecutionFactory.create(queryStr, constructedModel);
@@ -205,8 +211,12 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
     	return AddEditWebpageFormGenerator.class.getName();
     }
 
-    protected String getQuery() {
-    	return WEBPAGE_QUERY;
+    protected String getQuery(VitroRequest vreq) {
+        /*
+         * UQAM Adjust the query to the liguistic context
+         */
+        Locale lang = SelectedLocale.getCurrentLocale(vreq);
+    	return WEBPAGE_QUERY.replaceAll("LANGUAGE", lang.toString());
     }
 
     protected String getTemplate() {

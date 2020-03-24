@@ -2,8 +2,10 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.utilities;
 
+import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.utils.threads.VitroBackgroundThread;
+import edu.cornell.mannlib.vitro.webapp.visualization.model.ConceptLabelMap;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -85,11 +87,74 @@ public class CachingRDFServiceExecutor<T> {
         if (backgroundTask != null && backgroundTask.isDone()) {
             completeBackgroundTask();
         }
-
         // If we have cached results
         if (cachedResults != null) {
             // If the background service exists, and the cache is considered invalid
-            if (backgroundRDFService != null && resultBuilder.invalidateCache(System.currentTimeMillis() - lastCacheTime)) {
+
+        	if (backgroundRDFService != null && resultBuilder.invalidateCache(System.currentTimeMillis() - lastCacheTime)) {
+                // In most cases, only wait for half a second
+                long waitFor = 500;
+
+                if (backgroundTask == null) {
+                    // Start the background task to refresh the cache
+                    startBackgroundTask(backgroundRDFService);
+
+                    // As we've just started the background task, allow a wait time of 1 second
+                    waitFor = 1000;
+                }
+
+                // See if we expect it to complete in time, and if so, wait for it
+                if (allowWaits && isExpectedToCompleteIn(waitFor)) {
+                    completeBackgroundTask(waitFor);
+                }
+
+        	} 
+        } else {
+            // No cached results, so fetch the results using any available RDF service
+            if (rdfService != null) {
+                startBackgroundTask(rdfService);
+            } else if (backgroundRDFService != null) {
+                startBackgroundTask(backgroundRDFService);
+            } else {
+                throw new RuntimeException("Can't execute without an RDF Service");
+            }
+
+            // As there are no cached results, wait for an answer regardless of the RDF service used
+            completeBackgroundTask();
+        }
+        return cachedResults;
+    }
+    
+    public synchronized T get(RDFService rdfService, boolean allowWaits, boolean force) {
+    	/*
+    	 * UQAM
+    	 * Force la regénération  du résultat
+    	 */
+    	if (force) {
+    		try {
+        		String backLang = backgroundRDFService.getVitroRequest().getLocale().getLanguage();
+        		String srvLang = rdfService.getVitroRequest().getLocale().getLanguage();
+        		if (!backLang.equals(srvLang)) {
+        			backgroundRDFService.setVitroRequest(rdfService.getVitroRequest());
+            		startBackgroundTask(rdfService);
+            		completeBackgroundTask();
+        		}
+			} catch (Exception e) {
+    			backgroundRDFService.setVitroRequest(rdfService.getVitroRequest());
+	    		startBackgroundTask(rdfService);
+	    		completeBackgroundTask();
+			}
+    		return cachedResults;
+    	}
+        // First, check if there are results from the previous background task, and update the cache
+        if (backgroundTask != null && backgroundTask.isDone()) {
+            completeBackgroundTask();
+        }
+        // If we have cached results
+        if (cachedResults != null) {
+            // If the background service exists, and the cache is considered invalid
+
+        	if (backgroundRDFService != null && resultBuilder.invalidateCache(System.currentTimeMillis() - lastCacheTime)) {
                 // In most cases, only wait for half a second
                 long waitFor = 500;
 
@@ -122,7 +187,6 @@ public class CachingRDFServiceExecutor<T> {
 
         return cachedResults;
     }
-
     /**
      * (Re)build the current cache
      *

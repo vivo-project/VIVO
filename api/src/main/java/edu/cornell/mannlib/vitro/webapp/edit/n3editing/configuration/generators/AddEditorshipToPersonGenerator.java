@@ -108,7 +108,8 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
         conf.addField( new FieldVTwo().
                 setName("documentType").
                 setValidators( list("nonempty") ).
-                setOptions( new ConstantFieldOptions("documentType", getDocumentTypeLiteralOptions() ))
+                // UQAM vreq for linguistic context
+                setOptions( new ConstantFieldOptions("documentType", getDocumentTypeLiteralOptions(vreq) ))
                 );
 
         conf.addField( new FieldVTwo().
@@ -203,21 +204,42 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
         return null;
     }
 
-    private List<List<String>> getDocumentTypeLiteralOptions() {
-        List<List<String>> literalOptions = new ArrayList<List<String>>();
-        literalOptions.add(list("http://purl.org/ontology/bibo/Book", "Book"));
-        literalOptions.add(list("http://purl.org/ontology/bibo/Chapter", "Chapter"));
-        literalOptions.add(list("http://purl.org/ontology/bibo/EditedBook", "Edited Book"));
-        literalOptions.add(list("http://purl.org/ontology/bibo/Film", "Film"));
-        literalOptions.add(list("http://purl.org/ontology/bibo/Magazine", "Magazine"));
-        literalOptions.add(list("http://vivoweb.org/ontology/core#Newsletter", "Newsletter"));
-        literalOptions.add(list("http://purl.org/ontology/bibo/Newspaper", "Newspaper"));
-        literalOptions.add(list("http://vivoweb.org/ontology/core#NewsRelease", "News Release"));
-        literalOptions.add(list("http://purl.org/ontology/bibo/Report", "Report"));
-        literalOptions.add(list("http://vivoweb.org/ontology/core#Video", "Video"));
-        literalOptions.add(list("http://purl.org/ontology/bibo/Webpage", "Webpage"));
-        literalOptions.add(list("http://purl.org/ontology/bibo/Website", "Website"));
-        return literalOptions;
+    private List<List<String>> getDocumentTypeLiteralOptions(VitroRequest vreq) throws Exception {
+		//UQAM Replacing hard coding assigment by a dynamic assigment that takes into account the linguistic context
+		List<List<String>> value =  GeneratorUtil.builFieldOptionsList(vreq, DESCRIBE_QUERY);
+		return value;
+
+//        List<List<String>> literalOptions = new ArrayList<List<String>>();
+//        literalOptions.add(list("http://purl.org/ontology/bibo/Book", "Book"));
+//        literalOptions.add(list("http://purl.org/ontology/bibo/Chapter", "Chapter"));
+//        literalOptions.add(list("http://purl.org/ontology/bibo/EditedBook", "Edited Book"));
+//        literalOptions.add(list("http://purl.org/ontology/bibo/Film", "Film"));
+//        literalOptions.add(list("http://purl.org/ontology/bibo/Magazine", "Magazine"));
+//        literalOptions.add(list("http://vivoweb.org/ontology/core#Newsletter", "Newsletter"));
+//        literalOptions.add(list("http://purl.org/ontology/bibo/Newspaper", "Newspaper"));
+//        literalOptions.add(list("http://vivoweb.org/ontology/core#NewsRelease", "News Release"));
+//        literalOptions.add(list("http://purl.org/ontology/bibo/Report", "Report"));
+//        literalOptions.add(list("http://vivoweb.org/ontology/core#Video", "Video"));
+//        literalOptions.add(list("http://purl.org/ontology/bibo/Webpage", "Webpage"));
+//        literalOptions.add(list("http://purl.org/ontology/bibo/Website", "Website"));
+//        return literalOptions;
     }
+	/*
+	 * UQAM get attributes for this specific subject
+	 */
+	private static String DESCRIBE_QUERY = " describe "+
+	        "<http://purl.org/ontology/bibo/Book> " +
+	        "<http://purl.org/ontology/bibo/Chapter> " +
+	        "<http://purl.org/ontology/bibo/EditedBook> " +
+	        "<http://purl.org/ontology/bibo/Film> " +
+	        "<http://purl.org/ontology/bibo/Magazine> " +
+	        "<http://vivoweb.org/ontology/core#Newsletter> " +
+	        "<http://purl.org/ontology/bibo/Newspaper> " +
+	        "<http://vivoweb.org/ontology/core#NewsRelease> " +
+	        "<http://purl.org/ontology/bibo/Report> " +
+	        "<http://vivoweb.org/ontology/core#Video> " +
+	        "<http://purl.org/ontology/bibo/Webpage> " +
+	        "<http://purl.org/ontology/bibo/Website> ";
+
 
 }
