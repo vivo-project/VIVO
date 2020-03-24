@@ -1,0 +1,49 @@
+# baseURI: file:/C:/VIVO-Trad-ecosysteme/GIT/DATA_CONNECT/vivo-uqam-i18n/vivo-project-i18n/vivo-languages_i18n/home/src/main/resources/rdf/display/firsttime/menu_fr_CA.nt
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#CapabilityMap>
+  <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Expertises"@fr-CA ;
+.
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#CapabilityMapMenuItem>
+  <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Expertises"@fr-CA ;
+.
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#DefaultMenu>
+  rdfs:label "Menu par défaut"@fr-CA ;
+.
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Events>
+  <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Événements"@fr-CA ;
+.
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#EventsMenuItem>
+  <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Événements"@fr-CA ;
+.
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Home>
+  <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Accueil"@fr-CA ;
+.
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#HomeMenuItem>
+  <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Accueil"@fr-CA ;
+.
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Organizations>
+  <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Organisations"@fr-CA ;
+.
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#OrganizationsMenuItem>
+  <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Organisations"@fr-CA ;
+.
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#People>
+  <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Personnes"@fr-CA ;
+.
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#PeopleMenuItem>
+  <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Personnes"@fr-CA ;
+.
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Research>
+  <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Recherche"@fr-CA ;
+.
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#ResearchMenuItem>
+  <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Recherche"@fr-CA ;
+.
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#capabilityMapDataGetter>
+  <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#htmlValue> "Expertises"@fr-CA ;
+.

@@ -1,0 +1,2659 @@
+# baseURI: http://vivoweb.org/ontology/core_fr_CA
+# prefix: core_fr_CA
+
+@prefix : <http://vivoweb.org/ontology/core_fr_CA#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix core: <http://vivoweb.org/ontology/core#> .
+@prefix core_fr_CA: <http://vivoweb.org/ontology/core_fr_CA#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://aims.fao.org/aos/geopolitical.owl#> .
+@prefix ns: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skos2: <http://www.w3.org/2008/05/skos#> .
+@prefix statistics: <http://purl.org/net/OCRe/statistics.owl#> .
+@prefix study_protocol: <http://purl.org/net/OCRe/study_protocol.owl#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix vivo-rech: <http://vivoweb.org/ontology/scientific-research#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://aims.fao.org/aos/geopolitical.owl>
+  rdfs:label "Ontologie géopolitique"@fr-CA ;
+.
+geo:GDP
+  rdfs:label "PIB"@fr-CA ;
+.
+geo:GDPNotes
+  rdfs:label "Notes PIB"@fr-CA ;
+.
+geo:GDPTotalInCurrentPrices
+  rdfs:label "Total du PIB en prix courants"@fr-CA ;
+.
+geo:GDPUnit
+  rdfs:label "Unité de PIB"@fr-CA ;
+.
+geo:GDPYear
+  rdfs:label "GDPYear"@fr-CA ;
+.
+geo:agriculturalArea
+  rdfs:label "secteur agricole"@fr-CA ;
+.
+geo:agriculturalAreaNotes
+  rdfs:label "notes sur les territoires agricoles"@fr-CA ;
+.
+geo:agriculturalAreaTotal
+  rdfs:label "agriculturalAreaTotal"@fr-CA ;
+.
+geo:agriculturalAreaUnit
+  rdfs:label "unité territoriale agricole"@fr-CA ;
+.
+geo:agriculturalAreaYear
+  rdfs:label "territoireAgricoleAnnée"@fr-CA ;
+.
+geo:area
+  rdfs:label "Région"@fr-CA ;
+.
+geo:codeAGROVOC
+  rdfs:label "codeAGROVOC"@fr-CA ;
+.
+geo:codeCurrency
+  rdfs:label "codeMonnaie"@fr-CA ;
+.
+geo:codeDBPediaID
+  rdfs:label "codeDBPediaID"@fr-CA ;
+.
+geo:codeFAOSTAT
+  rdfs:label "codeFAOSTAT"@fr-CA ;
+.
+geo:codeFAOTERM
+  rdfs:label "codeFAOTERM"@fr-CA ;
+.
+geo:codeGAUL
+  rdfs:label "codeGAUL"@fr-CA ;
+.
+geo:codeISO2
+  rdfs:label "codeISO2"@fr-CA ;
+.
+geo:codeISO3
+  rdfs:label "codeISO3"@fr-CA ;
+.
+geo:codeUN
+  rdfs:label "codeUN"@fr-CA ;
+.
+geo:codeUNDP
+  rdfs:label "codeUNDP"@fr-CA ;
+.
+geo:countryArea
+  rdfs:label "paysRégion"@fr-CA ;
+.
+geo:countryAreaNotes
+  rdfs:label "note de pays et régions"@fr-CA ;
+.
+geo:countryAreaTotal
+  rdfs:label "total pays "@fr-CA ;
+.
+geo:countryAreaUnit
+  rdfs:label "Unité de pays"@fr-CA ;
+.
+geo:countryAreaYear
+  rdfs:label "paysRégionAnnée"@fr-CA ;
+.
+geo:disputed
+  rdfs:label "Contesté"@fr-CA ;
+.
+geo:economic_region
+  rdfs:label "Région économique"@fr-CA ;
+.
+geo:geographical_region
+  rdfs:label "Région transnationale"@fr-CA ;
+.
+geo:group
+  rdfs:label "Groupe"@fr-CA ;
+.
+geo:hasBorderWith
+  rdfs:label "frontière avec"@fr-CA ;
+.
+geo:hasCode
+  rdfs:label "code"@fr-CA ;
+.
+geo:hasCoordinate
+  rdfs:label "coordonnées"@fr-CA ;
+.
+geo:hasCurrency
+  rdfs:label "devise"@fr-CA ;
+.
+geo:hasListName
+  rdfs:label "has list name "@fr-CA ;
+.
+geo:hasMaxLatitude
+  rdfs:label "latitude maximale"@fr-CA ;
+.
+geo:hasMaxLongitude
+  rdfs:label "longitude maximale"@fr-CA ;
+.
+geo:hasMember
+  rdfs:label "pays ou territoire membre"@fr-CA ;
+.
+geo:hasMinLatitude
+  rdfs:label "latitude minimale"@fr-CA ;
+.
+geo:hasMinLongitude
+  rdfs:label "longitude minimale"@fr-CA ;
+.
+geo:hasNationality
+  rdfs:label "nationalité"@fr-CA ;
+.
+geo:hasOfficialName
+  rdfs:label "nom officiel"@fr-CA ;
+.
+geo:hasShortName
+  rdfs:label "nom court"@fr-CA ;
+.
+geo:hasStatistics
+  rdfs:label "statistiques"@fr-CA ;
+.
+geo:isAdministeredBy
+  rdfs:label "est administré par"@fr-CA ;
+.
+geo:isInGroup
+  rdfs:label "regroupement géographique"@fr-CA ;
+.
+geo:isPredecessorOf
+  rdfs:label "précède"@fr-CA ;
+.
+geo:isSuccessorOf
+  rdfs:label "est le successeur de"@fr-CA ;
+.
+geo:landArea
+  rdfs:label "zone terrestre"@fr-CA ;
+.
+geo:landAreaNotes
+  rdfs:label "notes territoriales"@fr-CA ;
+.
+geo:landAreaTotal
+  rdfs:label "superficie totale"@fr-CA ;
+.
+geo:landAreaUnit
+  rdfs:label "unité de surface"@fr-CA ;
+.
+geo:landAreaYear
+  rdfs:label "territoireAnnée"@fr-CA ;
+.
+geo:nameCurrencyAR
+  rdfs:label "nameCurrencyAR"@fr-CA ;
+.
+geo:nameCurrencyEN
+  rdfs:label "nameCurrencyEN"@fr-CA ;
+.
+geo:nameCurrencyES
+  rdfs:label "nameCurrencyES"@fr-CA ;
+.
+geo:nameCurrencyFR
+  rdfs:label "nameCurrencyFR"@fr-CA ;
+.
+geo:nameCurrencyIT
+  rdfs:label "nameCurrencyIT"@fr-CA ;
+.
+geo:nameCurrencyRU
+  rdfs:label "nameCurrencyRU"@fr-CA ;
+.
+geo:nameCurrencyZH
+  rdfs:label "nameCurrencyZH"@fr-CA ;
+.
+geo:nameListAR
+  rdfs:label "nameListAR"@fr-CA ;
+.
+geo:nameListEN
+  rdfs:label "nameListEN"@fr-CA ;
+.
+geo:nameListES
+  rdfs:label "nameListES"@fr-CA ;
+.
+geo:nameListFR
+  rdfs:label "nameListFR"@fr-CA ;
+.
+geo:nameListIT
+  rdfs:label "nameListIT"@fr-CA ;
+.
+geo:nameListRU
+  rdfs:label "nameListRU"@fr-CA ;
+.
+geo:nameListZH
+  rdfs:label "nameListZH"@fr-CA ;
+.
+geo:nameOfficialAR
+  rdfs:label "nameOfficialAR"@fr-CA ;
+.
+geo:nameOfficialEN
+  rdfs:label "nameOfficialEN"@fr-CA ;
+.
+geo:nameOfficialES
+  rdfs:label "nameOfficialES"@fr-CA ;
+.
+geo:nameOfficialFR
+  rdfs:label "nameOfficialFR"@fr-CA ;
+.
+geo:nameOfficialIT
+  rdfs:label "nomOfficielTI"@fr-CA ;
+.
+geo:nameOfficialRU
+  rdfs:label "nameOfficialRU"@fr-CA ;
+.
+geo:nameOfficialZH
+  rdfs:label "nameOfficialZH"@fr-CA ;
+.
+geo:nameShortAR
+  rdfs:label "nameShortAR"@fr-CA ;
+.
+geo:nameShortEN
+  rdfs:label "nameShortEN"@fr-CA ;
+.
+geo:nameShortES
+  rdfs:label "nameShortES"@fr-CA ;
+.
+geo:nameShortFR
+  rdfs:label "nameShortFR"@fr-CA ;
+.
+geo:nameShortIT
+  rdfs:label "nameShortIT"@fr-CA ;
+.
+geo:nameShortRU
+  rdfs:label "nomRaccourciRU "@fr-CA ;
+.
+geo:nameShortZH
+  rdfs:label "nameShortZH"@fr-CA ;
+.
+geo:nationalityAR
+  rdfs:label "nationalityAR"@fr-CA ;
+.
+geo:nationalityEN
+  rdfs:label "nationalityEN"@fr-CA ;
+.
+geo:nationalityES
+  rdfs:label "nationalityES"@fr-CA ;
+.
+geo:nationalityFR
+  rdfs:label "nationalitéFR "@fr-CA ;
+.
+geo:nationalityIT
+  rdfs:label "nationalityIT"@fr-CA ;
+.
+geo:nationalityRU
+  rdfs:label "nationalityRU"@fr-CA ;
+.
+geo:nationalityZH
+  rdfs:label "nationalityZH"@fr-CA ;
+.
+geo:non_self_governing
+  rdfs:label "Non autonome"@fr-CA ;
+.
+geo:organization
+  rdfs:label "Organiaation"@fr-CA ;
+.
+geo:other
+  rdfs:label "Autre"@fr-CA ;
+.
+geo:population
+  rdfs:label "population"@fr-CA ;
+.
+geo:populationNotes
+  rdfs:label "notes démographiques"@fr-CA ;
+.
+geo:populationTotal
+  rdfs:label "population totale"@fr-CA ;
+.
+geo:populationUnit
+  rdfs:label "unité de population"@fr-CA ;
+.
+geo:populationYear
+  rdfs:label "populationAnnée"@fr-CA ;
+.
+geo:self_governing
+  rdfs:label "Autogestion"@fr-CA ;
+.
+geo:special_group
+  rdfs:label "Groupe spécial"@fr-CA ;
+.
+geo:territory
+  rdfs:label "Territoire"@fr-CA ;
+.
+geo:validSince
+  rdfs:label "valide depuis"@fr-CA ;
+.
+geo:validUntil
+  rdfs:label "valide jusqu'à"@fr-CA ;
+.
+obo:
+  rdfs:label "OBO Foundry"@fr-CA ;
+.
+obo:ARG_0000001
+  rdfs:label "gabarit"@fr-CA ;
+.
+obo:ARG_0000015
+  rdfs:label "étiquette définie par l'utilisateur"@fr-CA ;
+.
+obo:ARG_0000172
+  rdfs:label "ID de patient"@fr-CA ;
+.
+obo:ARG_0000197
+  rdfs:label "ID de service de santé"@fr-CA ;
+.
+obo:ARG_2000008
+  rdfs:label "Sujet mesure de poids"@fr-CA ;
+.
+obo:ARG_2000009
+  rdfs:label "Mesure d'expertise"@fr-CA ;
+.
+obo:ARG_2000010
+  rdfs:label "Processus de mesure du poids du sujet "@fr-CA ;
+.
+obo:ARG_2000011
+  rdfs:label "Processus de mesure de l'expertise"@fr-CA ;
+.
+obo:ARG_2000012
+  rdfs:label "Étiquette de mesure"@fr-CA ;
+.
+obo:ARG_2000021
+  rdfs:label "Expérience"@fr-CA ;
+.
+obo:ARG_2000022
+  rdfs:label "spécialisation"@fr-CA ;
+.
+obo:ARG_2000028
+  rdfs:label "information du contact"@fr-CA ;
+.
+obo:ARG_2000029
+  rdfs:label "Coordonnées pour"@fr-CA ;
+.
+obo:ARG_2000065
+  rdfs:label "American Board of Allergy and Immunology"@fr-CA ;
+.
+obo:ARG_2000066
+  rdfs:label "American Board of Anesthesiology"@fr-CA ;
+.
+obo:ARG_2000067
+  rdfs:label "American Board of Colon and Rectal Surgery"@fr-CA ;
+.
+obo:ARG_2000068
+  rdfs:label "American Board of Dermatology"@fr-CA ;
+.
+obo:ARG_2000069
+  rdfs:label "American Board of Emergency Medicine"@fr-CA ;
+.
+obo:ARG_2000070
+  rdfs:label "American Board of Family Medicine"@fr-CA ;
+.
+obo:ARG_2000071
+  rdfs:label "American Board of Internal Medicine"@fr-CA ;
+.
+obo:ARG_2000072
+  rdfs:label "American Board of Medical Genetics"@fr-CA ;
+.
+obo:ARG_2000073
+  rdfs:label "American Board of Neurological Surgery"@fr-CA ;
+.
+obo:ARG_2000074
+  rdfs:label "American Board of Nuclear Medicine"@fr-CA ;
+.
+obo:ARG_2000075
+  rdfs:label "American Board of Obstetrics and Gynecology"@fr-CA ;
+.
+obo:ARG_2000076
+  rdfs:label "American Board of Ophthalmology"@fr-CA ;
+.
+obo:ARG_2000077
+  rdfs:label "American Board of Orthopaedic Surgery"@fr-CA ;
+.
+obo:ARG_2000078
+  rdfs:label "American Board of Otolaryngology"@fr-CA ;
+.
+obo:ARG_2000079
+  rdfs:label "American Board of Pathology"@fr-CA ;
+.
+obo:ARG_2000080
+  rdfs:label "American Board of Pediatrics"@fr-CA ;
+.
+obo:ARG_2000081
+  rdfs:label "American Board of Physical Medicine and Rehabilitation"@fr-CA ;
+.
+obo:ARG_2000083
+  rdfs:label "American Board of Plastic Surgery"@fr-CA ;
+.
+obo:ARG_2000084
+  rdfs:label "American Board of Preventive Medicine"@fr-CA ;
+.
+obo:ARG_2000085
+  rdfs:label "American Board of Psychiatry and Neurology"@fr-CA ;
+.
+obo:ARG_2000086
+  rdfs:label "American Board of Radiology"@fr-CA ;
+.
+obo:ARG_2000087
+  rdfs:label "American Board of Surgery"@fr-CA ;
+.
+obo:ARG_2000088
+  rdfs:label "American Board of Thoracic Surgery"@fr-CA ;
+.
+obo:ARG_2000089
+  rdfs:label "American Board of Urology"@fr-CA ;
+.
+obo:ARG_2000376
+  rdfs:label "Qualificatif du contact"@fr-CA ;
+.
+obo:ARG_2000377
+  rdfs:label "Profil FOAF"@fr-CA ;
+.
+obo:ARG_2000379
+  rdfs:label "Contact"@fr-CA ;
+.
+obo:ARG_2000390
+  rdfs:label "contexte de"@fr-CA ;
+.
+obo:ARG_2000391
+  rdfs:label "contexte"@fr-CA ;
+.
+obo:ARG_2000399
+  rdfs:label "agent de liaison"@fr-CA ;
+.
+obo:ARG_2000400
+  rdfs:label "nombre par année"@fr-CA ;
+.
+obo:BFO_0000001
+  rdfs:label "Entité"@fr-CA ;
+.
+obo:BFO_0000002
+  rdfs:label "Continuant"@fr-CA ;
+.
+obo:BFO_0000003
+  rdfs:label "occurence"@fr-CA ;
+.
+obo:BFO_0000004
+  rdfs:label "Entité continuante indépendante "@fr-CA ;
+.
+obo:BFO_0000006
+  rdfs:label "Région spatiale"@fr-CA ;
+.
+obo:BFO_0000008
+  rdfs:label "Région temporelle"@fr-CA ;
+.
+obo:BFO_0000015
+  rdfs:label "Processus"@fr-CA ;
+.
+obo:BFO_0000016
+  rdfs:label "Disposition"@fr-CA ;
+.
+obo:BFO_0000017
+  rdfs:label "Entité réalisable"@fr-CA ;
+.
+obo:BFO_0000019
+  rdfs:label "Qualité"@fr-CA ;
+.
+obo:BFO_0000020
+  rdfs:label "Continuant dépendant spécifiquement"@fr-CA ;
+.
+obo:BFO_0000023
+  rdfs:label "Rôle"@fr-CA ;
+.
+obo:BFO_0000029
+  rdfs:label "Site"@fr-CA ;
+.
+obo:BFO_0000031
+  rdfs:label "Continuant génériquement dépendant"@fr-CA ;
+.
+obo:BFO_0000034
+  rdfs:label "Fonction"@fr-CA ;
+.
+obo:BFO_0000038
+  rdfs:label "Région temporelle unidimensionnelle"@fr-CA ;
+.
+obo:BFO_0000040
+  rdfs:label "Entité matérielle"@fr-CA ;
+.
+obo:BFO_0000050
+  rdfs:label "partie de"@fr-CA ;
+.
+obo:BFO_0000051
+  rdfs:label "partie"@fr-CA ;
+.
+obo:BFO_0000054
+  rdfs:label "réalisé dans"@fr-CA ;
+.
+obo:BFO_0000055
+  rdfs:label "réalise"@fr-CA ;
+.
+obo:BFO_0000141
+  rdfs:label "Entité immatérielle"@fr-CA ;
+.
+obo:BFO_0000148
+  rdfs:label "Région temporelle à dimension zéro"@fr-CA ;
+.
+obo:ERO_0000004
+  rdfs:label "Instrument"@fr-CA ;
+.
+obo:ERO_0000005
+  rdfs:label "Service"@fr-CA ;
+.
+obo:ERO_0000006
+  rdfs:label "Réactif"@fr-CA ;
+.
+obo:ERO_0000007
+  rdfs:label "Technique"@fr-CA ;
+.
+obo:ERO_0000012
+  rdfs:label "Rôle de fournisseur de service"@fr-CA ;
+.
+obo:ERO_0000014
+  rdfs:label "Projet de recherche"@fr-CA ;
+.
+obo:ERO_0000015
+  rdfs:label "Étude sur des sujets humains"@fr-CA ;
+.
+obo:ERO_0000016
+  rdfs:label "Essai clinique"@fr-CA ;
+.
+obo:ERO_0000020
+  rdfs:label "Spécimen biologique"@fr-CA ;
+.
+obo:ERO_0000029
+  rdfs:label "fournit l'accès à"@fr-CA ;
+.
+obo:ERO_0000031
+  rdfs:label "utilise"@fr-CA ;
+.
+obo:ERO_0000033
+  rdfs:label "expertise technique"@fr-CA ;
+.
+obo:ERO_0000034
+  rdfs:label "manufacturier"@fr-CA ;
+.
+obo:ERO_0000037
+  rdfs:label "contact ou fournisseur de service"@fr-CA ;
+.
+obo:ERO_0000038
+  rdfs:label "spécifie l'usage de"@fr-CA ;
+.
+obo:ERO_0000044
+  rdfs:label "numéro d'inventaire"@fr-CA ;
+.
+obo:ERO_0000045
+  rdfs:label "restrictions"@fr-CA ;
+.
+obo:ERO_0000046
+  rdfs:label "restriction géographique"@fr-CA ;
+.
+obo:ERO_0000050
+  rdfs:label "numéro de modèle"@fr-CA ;
+.
+obo:ERO_0000054
+  rdfs:label "format de données de labo"@fr-CA ;
+.
+obo:ERO_0000070
+  rdfs:label "utilisé par"@fr-CA ;
+.
+obo:ERO_0000071
+  rdfs:label "Software"@fr-CA ;
+.
+obo:ERO_0000072
+  rdfs:label "version"@fr-CA ;
+.
+obo:ERO_0000224
+  rdfs:label "Rôle de financement"@fr-CA ;
+.
+obo:ERO_0000225
+  rdfs:label "Rôle d'enseignant"@fr-CA ;
+.
+obo:ERO_0000390
+  rdfs:label "service fourni par"@fr-CA ;
+.
+obo:ERO_0000391
+  rdfs:label "Service d'accès"@fr-CA ;
+.
+obo:ERO_0000392
+  rdfs:label "Service de stockage"@fr-CA ;
+.
+obo:ERO_0000393
+  rdfs:label "Service de formation"@fr-CA ;
+.
+obo:ERO_0000394
+  rdfs:label "Service de traitement matériel"@fr-CA ;
+.
+obo:ERO_0000395
+  rdfs:label "Service d'analyse matérielle"@fr-CA ;
+.
+obo:ERO_0000396
+  rdfs:label "Service de production de matières"@fr-CA ;
+.
+obo:ERO_0000397
+  rdfs:label "réalise la technique"@fr-CA ;
+.
+obo:ERO_0000398
+  rdfs:label "effectué par"@fr-CA ;
+.
+obo:ERO_0000424
+  rdfs:label "étude démographique"@fr-CA ;
+.
+obo:ERO_0000460
+  rdfs:label "documentation"@fr-CA ;
+.
+obo:ERO_0000481
+  rdfs:label "réalise le protocole"@fr-CA ;
+.
+obo:ERO_0000482
+  rdfs:label "logiciel"@fr-CA ;
+.
+obo:ERO_0000543
+  rdfs:label "technique associée"@fr-CA ;
+.
+obo:ERO_0000565
+  rdfs:label "Bureau du transfert technologique"@fr-CA ;
+.
+obo:ERO_0000572
+  rdfs:label "étude sur"@fr-CA ;
+.
+obo:ERO_0000595
+  rdfs:label "Opportunité de recherche"@fr-CA ;
+.
+obo:ERO_0000774
+  rdfs:label "critères d'éligibilité"@fr-CA ;
+.
+obo:ERO_0000775
+  rdfs:label "conditions de résidence"@fr-CA ;
+.
+obo:ERO_0000776
+  rdfs:label "Rôle de résident (USA)"@fr-CA ;
+.
+obo:ERO_0000777
+  rdfs:label "Rôle de citoyen (US)"@en ;
+.
+obo:ERO_0000778
+  rdfs:label "citoyen non américain"@fr-CA ;
+.
+obo:ERO_0000779
+  rdfs:label "Rôle de résident permanent"@fr-CA ;
+.
+obo:ERO_0000780
+  rdfs:label "Rôle de résident non-permanent"@fr-CA ;
+.
+obo:ERO_0000783
+  rdfs:label "Rôle d'étudiant"@fr-CA ;
+.
+obo:ERO_0000784
+  rdfs:label "Rôle d'étudiant de premier cycle"@fr-CA ;
+.
+obo:ERO_0000785
+  rdfs:label "Rôle d'étudiant diplômé"@fr-CA ;
+.
+obo:ERO_0000786
+  rdfs:label "Rôle d'élève du secondaire"@fr-CA ;
+.
+obo:ERO_0000787
+  rdfs:label "Rôle d'employé"@fr-CA ;
+.
+obo:ERO_0000788
+  rdfs:label "Rôle de professeur"@fr-CA ;
+.
+obo:ERO_0000789
+  rdfs:label "Rôle d'employé"@fr-CA ;
+.
+obo:ERO_0000790
+  rdfs:label "Stagiaire post-baccalauréat"@fr-CA ;
+.
+obo:ERO_0000914
+  rdfs:label "Rôle de l'étudiant stagiaire de cycle supérieur"@fr-CA ;
+.
+obo:ERO_0000918
+  rdfs:label "projet de recherche associé"@fr-CA ;
+.
+obo:ERO_0000919
+  rdfs:label "spécimen biologique associé"@fr-CA ;
+.
+obo:ERO_0001245
+  rdfs:label "Licences d'utilisation"@fr-CA ;
+.
+obo:ERO_0001254
+  rdfs:label "Service de transport"@fr-CA ;
+.
+obo:ERO_0001255
+  rdfs:label "Service de support"@fr-CA ;
+.
+obo:ERO_0001256
+  rdfs:label "Service d'entreposage matériel"@fr-CA ;
+.
+obo:ERO_0001257
+  rdfs:label "Service de stockage de données"@fr-CA ;
+.
+obo:ERO_0001258
+  rdfs:label "Service d'entretien"@fr-CA ;
+.
+obo:ERO_0001259
+  rdfs:label "Service d'entretien matériel"@fr-CA ;
+.
+obo:ERO_0001260
+  rdfs:label "Service d'entretien de données"@fr-CA ;
+.
+obo:ERO_0001261
+  rdfs:label "Service d'analyse"@fr-CA ;
+.
+obo:ERO_0001262
+  rdfs:label "Service d'analyse de données"@fr-CA ;
+.
+obo:ERO_0001263
+  rdfs:label "Service de modification matérielle"@fr-CA ;
+.
+obo:ERO_0001518
+  rdfs:label "phase"@fr-CA ;
+.
+obo:ERO_0001520
+  rdfs:label "effectue des études sur les humains"@fr-CA ;
+.
+obo:ERO_0001521
+  rdfs:label "réalisé par l'organisation"@fr-CA ;
+.
+obo:ERO_0001716
+  rdfs:label "Base de données"@fr-CA ;
+.
+obo:IAO_0000003
+  rdfs:label "Étiquette d'unité de mesure"@fr-CA ;
+.
+obo:IAO_0000005
+  rdfs:label "Spécification des objectifs"@fr-CA ;
+.
+obo:IAO_0000007
+  rdfs:label "Spécification des actions"@fr-CA ;
+.
+obo:IAO_0000009
+  rdfs:label "Étiquette de référence"@fr-CA ;
+.
+obo:IAO_0000013
+  rdfs:label "Article"@fr-CA ;
+.
+obo:IAO_0000027
+  rdfs:label "Élément de données"@fr-CA ;
+.
+obo:IAO_0000030
+  rdfs:label "ressource"@fr-CA ;
+.
+obo:IAO_0000032
+  rdfs:label "Point de référence de la mesure scalaire"@fr-CA ;
+.
+obo:IAO_0000033
+  rdfs:label "Entité de directives "@fr-CA ;
+.
+obo:IAO_0000039
+  rdfs:label "étiquette d'unité de masure"@fr-CA ;
+.
+obo:IAO_0000102
+  rdfs:label "Données sur une partie de l'ontologie"@fr-CA ;
+.
+obo:IAO_0000104
+  rdfs:label "Spécification du plan"@fr-CA ;
+.
+obo:IAO_0000109
+  rdfs:label "Référence de mesure"@fr-CA ;
+.
+obo:IAO_0000124
+  rdfs:label "non préservé "@fr-CA ;
+.
+obo:IAO_0000136
+  rdfs:label "traite de"@fr-CA ;
+.
+obo:IAO_0000142
+  rdfs:label "mentions"@fr-CA ;
+.
+obo:IAO_0000144
+  rdfs:label "Conclusion (texte)"@fr-CA ;
+.
+obo:IAO_0000221
+  rdfs:label "mesure de qualité de"@fr-CA ;
+.
+obo:IAO_0000227
+  rdfs:label "termes fusionnés"@fr-CA ;
+.
+obo:IAO_0000300
+  rdfs:label "Entité textuelle"@fr-CA ;
+.
+obo:IAO_0000417
+  rdfs:label "fait l'objet d'une évaluation qualitative "@fr-CA ;
+.
+obo:OBI_0000011
+  rdfs:label "Processus planifié"@fr-CA ;
+.
+obo:OBI_0000017
+  rdfs:label "Role réglementaire"@fr-CA ;
+.
+obo:OBI_0000272
+  rdfs:label "Protocole"@fr-CA ;
+.
+obo:OBI_0000293
+  rdfs:label "intrant spécifique"@fr-CA ;
+.
+obo:OBI_0000299
+  rdfs:label "résultat défini"@fr-CA ;
+.
+obo:OBI_0000304
+  rdfs:label "manufacturé par"@fr-CA ;
+.
+obo:OBI_0000312
+  rdfs:label "résultat spécifique de"@fr-CA ;
+.
+obo:OBI_0000417
+  rdfs:label "atteint l'objectif fixé"@fr-CA ;
+.
+obo:OBI_0000643
+  rdfs:label "grain "@fr-CA ;
+.
+obo:OBI_0000833
+  rdfs:label "objectif atteint par"@fr-CA ;
+.
+obo:OBI_0000835
+  rdfs:label "Manufacturier"@fr-CA ;
+.
+obo:OBI_0001554
+  rdfs:label "Référence de mesure du taux"@fr-CA ;
+.
+obo:OBI_0100026
+  rdfs:label "Organisme"@fr-CA ;
+.
+obo:OBI_0500000
+  rdfs:label "Plan d'étude"@fr-CA ;
+.
+obo:RO_0000052
+  rdfs:label "inhérent à"@fr-CA ;
+.
+obo:RO_0000053
+  rdfs:label "détenteur de"@fr-CA ;
+.
+obo:RO_0000056
+  rdfs:label "participe à"@fr-CA ;
+.
+obo:RO_0000057
+  rdfs:label "participants"@fr-CA ;
+.
+obo:RO_0001000
+  rdfs:label "dérivé de"@fr-CA ;
+.
+obo:RO_0001015
+  rdfs:label "lieu de"@fr-CA ;
+.
+obo:RO_0001018
+  rdfs:label "contenu dans"@fr-CA ;
+.
+obo:RO_0001019
+  rdfs:label "contient"@fr-CA ;
+.
+obo:RO_0001025
+  rdfs:label "situé en"@fr-CA ;
+.
+obo:RO_0002220
+  rdfs:label "adjacent à"@fr-CA ;
+.
+obo:RO_0002233
+  rdfs:label "intrant"@fr-CA ;
+.
+obo:RO_0002234
+  rdfs:label "résultat"@fr-CA ;
+.
+obo:RO_0002350
+  rdfs:label "membre de"@fr-CA ;
+.
+obo:RO_0002351
+  rdfs:label "membre"@fr-CA ;
+.
+obo:RO_0002353
+  rdfs:label "résultat de"@fr-CA ;
+.
+obo:RO_0003000
+  rdfs:label "produit"@fr-CA ;
+.
+obo:RO_0003001
+  rdfs:label "produit par"@fr-CA ;
+.
+obo:UO_0000280
+  rdfs:label "Unité tarifaire"@fr-CA ;
+.
+<http://purl.org/NET/c4dm/event.owl>
+  rdfs:label "Événement ontologique"@fr-CA ;
+.
+<http://purl.org/NET/c4dm/event.owl#Event>
+  rdfs:label "Événement"@fr-CA ;
+.
+terms:contributor
+  rdfs:label "contributeur"@fr-CA ;
+.
+terms:relation
+  rdfs:label "relation"@fr-CA ;
+.
+<http://purl.org/net/OCRe/research.owl>
+  rdfs:label "Recherche OCRe"@fr-CA ;
+.
+<http://purl.org/net/OCRe/study_design.owl>
+  rdfs:label " planification des recherches (OCRe)"@fr-CA ;
+.
+<http://purl.org/net/OCRe/study_design.owl#OCRE100038>
+  rdfs:label "Phase"@fr-CA ;
+.
+<http://purl.org/net/OCRe/study_design.owl#Phase_0>
+  rdfs:label "Phase 0"@fr-CA ;
+.
+<http://purl.org/net/OCRe/study_design.owl#Phase_1>
+  rdfs:label "Phase 1"@fr-CA ;
+.
+<http://purl.org/net/OCRe/study_design.owl#Phase_2>
+  rdfs:label "Phase 2"@fr-CA ;
+.
+<http://purl.org/net/OCRe/study_design.owl#Phase_3>
+  rdfs:label "Phase 3"@fr-CA ;
+.
+<http://purl.org/net/OCRe/study_design.owl#Phase_4>
+  rdfs:label "Phase 4"@fr-CA ;
+.
+<http://purl.org/net/OCRe/study_design.owl#Single_group_study>
+  rdfs:label "Étude d'un seul groupe"@fr-CA ;
+.
+bibo:
+  rdfs:label "Ontologie Bibo"@fr-CA ;
+.
+bibo:AcademicArticle
+  rdfs:label "Article de recherche"@fr-CA ;
+.
+bibo:Article
+  rdfs:label "Article"@fr-CA ;
+.
+bibo:AudioDocument
+  rdfs:label "Document audio"@fr-CA ;
+.
+bibo:AudioVisualDocument
+  rdfs:label "Document audio-visuel"@fr-CA ;
+.
+bibo:Bill
+  rdfs:label "Loi"@fr-CA ;
+.
+bibo:Book
+  rdfs:label "Livre"@fr-CA ;
+.
+bibo:BookSection
+  rdfs:label "Section d'un livre"@fr-CA ;
+.
+bibo:Brief
+  rdfs:label "Dossier "@fr-CA ;
+.
+bibo:Chapter
+  rdfs:label "Chapitre"@fr-CA ;
+.
+bibo:Code
+  rdfs:label "Code"@fr-CA ;
+.
+bibo:CollectedDocument
+  rdfs:label "Documents recueillis"@fr-CA ;
+.
+bibo:Collection
+  rdfs:label "Collection"@fr-CA ;
+.
+bibo:Conference
+  rdfs:label "Conference"@fr-CA ;
+.
+bibo:CourtReporter
+  rdfs:label "Greffier"@fr-CA ;
+.
+bibo:Document
+  rdfs:label "Document"@fr-CA ;
+.
+bibo:DocumentPart
+  rdfs:label "Partie du document"@fr-CA ;
+.
+bibo:DocumentStatus
+  rdfs:label "Statut du document"@fr-CA ;
+.
+bibo:EditedBook
+  rdfs:label "Livre édité"@fr-CA ;
+.
+bibo:Excerpt
+  rdfs:label "Extrait"@fr-CA ;
+.
+bibo:Film
+  rdfs:label "Film"@fr-CA ;
+.
+bibo:Hearing
+  rdfs:label "Audience"@fr-CA ;
+.
+bibo:Image
+  rdfs:label "Image"@fr-CA ;
+.
+bibo:Interview
+  rdfs:label "Interview"@fr-CA ;
+.
+bibo:Issue
+  rdfs:label "numéro"@fr-CA ;
+.
+bibo:Journal
+  rdfs:label "Revue"@fr-CA ;
+.
+bibo:LegalCaseDocument
+  rdfs:label "Document de cas juridique"@fr-CA ;
+.
+bibo:LegalDecision
+  rdfs:label "Décision"@fr-CA ;
+.
+bibo:LegalDocument
+  rdfs:label "Document légal"@fr-CA ;
+.
+bibo:Legislation
+  rdfs:label "Législation"@fr-CA ;
+.
+bibo:Letter
+  rdfs:label "Lettre"@fr-CA ;
+.
+bibo:Magazine
+  rdfs:label "Revue"@fr-CA ;
+.
+bibo:Manual
+  rdfs:label "Manuel"@fr-CA ;
+.
+bibo:Manuscript
+  rdfs:label "manuscrit"@fr-CA ;
+.
+bibo:Map
+  rdfs:label "Carte"@fr-CA ;
+.
+bibo:Newspaper
+  rdfs:label "Journal"@fr-CA ;
+.
+bibo:Note
+  rdfs:label "Note"@fr-CA ;
+.
+bibo:Patent
+  rdfs:label "Brevet"@fr-CA ;
+.
+bibo:Performance
+  rdfs:label "Performance"@fr-CA ;
+.
+bibo:Periodical
+  rdfs:label "Périodique"@fr-CA ;
+.
+bibo:PersonalCommunicationDocument
+  rdfs:label "Document de communication personnel"@fr-CA ;
+.
+bibo:Proceedings
+  rdfs:label "Actes"@fr-CA ;
+.
+bibo:Quote
+  rdfs:label "Citation"@fr-CA ;
+.
+bibo:ReferenceSource
+  rdfs:label "Source de référence"@fr-CA ;
+.
+bibo:Report
+  rdfs:label "Rapport"@fr-CA ;
+.
+bibo:Series
+  rdfs:label "Collection"@fr-CA ;
+.
+bibo:Slide
+  rdfs:label "Diapositive"@fr-CA ;
+.
+bibo:Slideshow
+  rdfs:label "Diaporama"@fr-CA ;
+.
+bibo:Standard
+  rdfs:label "Standard"@fr-CA ;
+.
+bibo:Statute
+  rdfs:label "Statut"@fr-CA ;
+.
+bibo:Thesis
+  rdfs:label "Thèse"@fr-CA ;
+.
+bibo:ThesisDegree
+  rdfs:label "Diplôme de thèse"@fr-CA ;
+.
+bibo:Webpage
+  rdfs:label "Page web"@fr-CA ;
+.
+bibo:Website
+  rdfs:label "Site web"@fr-CA ;
+.
+bibo:Workshop
+  rdfs:label "Atelier"@fr-CA ;
+.
+bibo:abstract
+  rdfs:label "résumé"@fr-CA ;
+.
+bibo:accepted
+  rdfs:label "accepté"@fr-CA ;
+.
+bibo:affirmedBy
+  rdfs:label "affirmé par"@fr-CA ;
+.
+bibo:annotates
+  rdfs:label "annotate"@fr-CA ;
+.
+bibo:asin
+  rdfs:label "Amazon Standard Identification Number (ASIN)"@fr-CA ;
+.
+bibo:chapter
+  rdfs:label "numéro de chapitre"@fr-CA ;
+.
+bibo:citedBy
+  rdfs:label "cité par"@fr-CA ;
+.
+bibo:cites
+  rdfs:label "cites"@fr-CA ;
+.
+bibo:coden
+  rdfs:label "coden"@fr-CA ;
+.
+bibo:court
+  rdfs:label "Tribunal "@fr-CA ;
+.
+bibo:degree
+  rdfs:label "diplôme associé"@fr-CA ;
+.
+bibo:director
+  rdfs:label "directeur"@fr-CA ;
+.
+bibo:distributor
+  rdfs:label "distributeur"@fr-CA ;
+.
+bibo:doi
+  rdfs:label "Digital Object Identifier (DOI)"@fr-CA ;
+.
+bibo:draft
+  rdfs:label "brouillon"@fr-CA ;
+.
+bibo:eanucc13
+  rdfs:label "EAN International-Uniform Code Council (EAN-UCC) 13"@fr-CA ;
+.
+bibo:edition
+  rdfs:label "édition"@fr-CA ;
+.
+bibo:eissn
+  rdfs:label "Electronic International Standard Serial Number (EISSN)"@fr-CA ;
+.
+bibo:gtin14
+  rdfs:label "Global Trade Item Number (GTIN-14)"@fr-CA ;
+.
+bibo:identifier
+  rdfs:label "identifiant"@fr-CA ;
+.
+bibo:interviewee
+  rdfs:label "personne interviewée"@fr-CA ;
+.
+bibo:interviewer
+  rdfs:label "interviewer"@fr-CA ;
+.
+bibo:isbn10
+  rdfs:label "International Standard Book Number (ISBN) 10"@fr-CA ;
+.
+bibo:isbn13
+  rdfs:label "International Standard Book Number (ISBN) 13"@fr-CA ;
+.
+bibo:issn
+  rdfs:label "International Standard Serial Number (ISSN)"@fr-CA ;
+.
+bibo:issue
+  rdfs:label "numéro"@fr-CA ;
+.
+bibo:issuer
+  rdfs:label "émetteur"@fr-CA ;
+.
+bibo:lccn
+  rdfs:label " numéro de contrôle de Library of Congress  (LCCN)"@fr-CA ;
+.
+bibo:locator
+  rdfs:label "localisateur"@fr-CA ;
+.
+bibo:numPages
+  rdfs:label "nombre de pages"@fr-CA ;
+.
+bibo:number
+  rdfs:label "numéro"@fr-CA ;
+.
+bibo:oclcnum
+  rdfs:label " numéro de Online Computer Library Center (OCLC)"@fr-CA ;
+.
+bibo:pageEnd
+  rdfs:label "page de fin"@fr-CA ;
+.
+bibo:pageStart
+  rdfs:label "Page de début"@fr-CA ;
+.
+bibo:peerReviewed
+  rdfs:label "revu par les pairs"@fr-CA ;
+.
+bibo:performer
+  rdfs:label "interprète"@fr-CA ;
+.
+bibo:pmid
+  rdfs:label "ID PubMed"@fr-CA ;
+.
+bibo:prefixName
+  rdfs:label "préfixe de nom"@fr-CA ;
+.
+bibo:presentedAt
+  rdfs:label "presenté à l'événement"@fr-CA ;
+.
+bibo:presents
+  rdfs:label "documents associés"@fr-CA ;
+.
+bibo:published
+  rdfs:label "publié"@fr-CA ;
+.
+bibo:recipient
+  rdfs:label "destinataire"@fr-CA ;
+.
+bibo:rejected
+  rdfs:label "rejeté"@fr-CA ;
+.
+bibo:reproducedIn
+  rdfs:label "reproduit dans"@fr-CA ;
+.
+bibo:reversedBy
+  rdfs:label "inversé par"@fr-CA ;
+.
+bibo:reviewOf
+  rdfs:label "critique de"@fr-CA ;
+.
+bibo:section
+  rdfs:label "section"@fr-CA ;
+.
+bibo:shortDescription
+  rdfs:label "courte description"@fr-CA ;
+.
+bibo:sici
+  rdfs:label "Serial Item and Contribution Identifier (SICI)"@fr-CA ;
+.
+bibo:status
+  rdfs:label "statut"@fr-CA ;
+.
+bibo:subsequentLegalDecision
+  rdfs:label "décision légale subséquente"@fr-CA ;
+.
+bibo:transcriptOf
+  rdfs:label "transcription de"@fr-CA ;
+.
+bibo:translationOf
+  rdfs:label "traduction de"@fr-CA ;
+.
+bibo:translator
+  rdfs:label "traducteur"@fr-CA ;
+.
+bibo:unpublished
+  rdfs:label "non publié"@fr-CA ;
+.
+bibo:upc
+  rdfs:label "Code universel de produit (UPC)"@fr-CA ;
+.
+bibo:uri
+  rdfs:label "URI"@fr-CA ;
+.
+bibo:volume
+  rdfs:label "volume"@fr-CA ;
+.
+<http://purl.org/spar/c4o/>
+  rdfs:label "Citation Counting and Context Characterization Ontology"@fr-CA ;
+.
+<http://purl.org/spar/c4o/BibliographicInformationSource>
+  rdfs:label "Source de données bibliographiques"@fr-CA ;
+.
+<http://purl.org/spar/c4o/GlobalCitationCount>
+  rdfs:label "Nombre total de citations"@fr-CA ;
+.
+<http://purl.org/spar/c4o/hasGlobalCitationFrequency>
+  rdfs:label "fréquence globale de citation"@fr-CA ;
+.
+<http://purl.org/spar/c4o/hasGlobalCountDate>
+  rdfs:label "Date du compteur global des citations"@fr-CA ;
+.
+<http://purl.org/spar/c4o/hasGlobalCountSource>
+  rdfs:label "source de compte global"@fr-CA ;
+.
+<http://purl.org/spar/c4o/hasGlobalCountValue>
+  rdfs:label "compteur global"@fr-CA ;
+.
+<http://purl.org/spar/cito/>
+  rdfs:label "CiTO (Citation Typing Ontology)"@fr-CA ;
+.
+<http://purl.org/spar/cito/citesAsDataSource>
+  rdfs:label "cite comme source de données"@fr-CA ;
+.
+<http://purl.org/spar/cito/isCitedAsDataSourceBy>
+  rdfs:label "est cité comme source par"@fr-CA ;
+.
+<http://purl.org/spar/fabio/>
+  rdfs:label "FaBiO (FRBR-Aligned Bibliographic Ontology)"@fr-CA ;
+.
+<http://purl.org/spar/fabio/ClinicalGuideline>
+  rdfs:label "Recommandation clinique"@fr-CA ;
+.
+<http://purl.org/spar/fabio/Comment>
+  rdfs:label "Commentaire"@fr-CA ;
+.
+<http://purl.org/spar/fabio/Erratum>
+  rdfs:label "Erratum"@fr-CA ;
+.
+<http://purl.org/vocab/vann/preferredNamespaceUri>
+  rdfs:label "espace de nommage URI préféré"@fr-CA ;
+.
+<http://vitro.mannlib.cornell.edu/ns/vitro/0.7>
+  rdfs:label "interne à Vitro"@fr-CA ;
+.
+vitro:moniker
+  rdfs:label "moniker (deprecated) "@fr-CA ;
+.
+<http://vitro.mannlib.cornell.edu/ns/vitro/public>
+  rdfs:label "Vitro Public Ontology"@fr-CA ;
+.
+<http://vitro.mannlib.cornell.edu/ns/vitro/public#File>
+  rdfs:label "Dossier"@fr-CA ;
+.
+<http://vitro.mannlib.cornell.edu/ns/vitro/public#FileByteStream>
+  rdfs:label "FichierOctetFlux"@fr-CA ;
+.
+<http://vivoweb.org/ontology/core>
+  rdfs:label "VIVO Core"@fr-CA ;
+.
+core:Abstract
+  rdfs:label "Résumé"@fr-CA ;
+.
+core:AcademicDegree
+  rdfs:label "Diplôme universitaire"@fr-CA ;
+.
+core:AcademicDepartment
+  rdfs:label "Département (académique)"@fr-CA ;
+.
+core:AcademicTerm
+  rdfs:label "Période académique"@fr-CA ;
+.
+core:AcademicYear
+  rdfs:label "Année académique"@fr-CA ;
+.
+core:AdministratorRole
+  rdfs:label "Rôle d'administrateur"@fr-CA ;
+.
+core:AdviseeRole
+  rdfs:label "Rôle de personne conseillée"@fr-CA ;
+.
+core:AdvisingProcess
+  rdfs:label "Processus de consultation"@fr-CA ;
+.
+core:AdvisingRelationship
+  rdfs:label "Relation de conseil"@fr-CA ;
+.
+core:AdvisorRole
+  rdfs:label "Rôle de conseiller"@fr-CA ;
+.
+core:Association
+  rdfs:label "Association"@fr-CA ;
+.
+core:AttendeeRole
+  rdfs:label "Rôle de participant"@fr-CA ;
+.
+core:AttendingProcess
+  rdfs:label "Processus de participation"@fr-CA ;
+.
+core:Authorship
+  rdfs:label "Paternité"@fr-CA ;
+.
+core:Award
+  rdfs:label "Prix et Distinction"@fr-CA ;
+.
+core:AwardReceipt
+  rdfs:label "Prix ou distinction reçu"@fr-CA ;
+.
+core:AwardedDegree
+  rdfs:label "Diplôme accordé"@fr-CA ;
+.
+core:Blog
+  rdfs:label "Blog"@fr-CA ;
+.
+core:BlogPosting
+  rdfs:label "Publication de Blog"@fr-CA ;
+.
+core:Building
+  rdfs:label "Édifice"@fr-CA ;
+.
+core:Campus
+  rdfs:label "Campus"@fr-CA ;
+.
+core:CaseStudy
+  rdfs:label "Étude de cas"@fr-CA ;
+.
+core:Catalog
+  rdfs:label "Catalogue"@fr-CA ;
+.
+core:Center
+  rdfs:label "Centre"@fr-CA ;
+.
+core:Certificate
+  rdfs:label "Certificat"@fr-CA ;
+.
+core:Certification
+  rdfs:label "Certification"@fr-CA ;
+.
+core:ClinicalOrganization
+  rdfs:label "Organisation clinique"@fr-CA ;
+.
+core:ClinicalRole
+  rdfs:label "Rôle clinique"@fr-CA ;
+.
+core:CoPrincipalInvestigatorRole
+  rdfs:label "Rôle de co-chercheur principal"@fr-CA ;
+.
+core:College
+  rdfs:label "Collège"@fr-CA ;
+.
+core:Committee
+  rdfs:label "Comité"@fr-CA ;
+.
+core:Company
+  rdfs:label "Compagnie"@fr-CA ;
+.
+core:Competition
+  rdfs:label "Compétition"@fr-CA ;
+.
+core:ConferencePaper
+  rdfs:label "Article de conférence"@fr-CA ;
+.
+core:ConferencePoster
+  rdfs:label "Affiche de conférence"@fr-CA ;
+.
+core:ConferenceSeries
+  rdfs:label "Série de conférences"@fr-CA ;
+.
+core:Consortium
+  rdfs:label "Consortium"@fr-CA ;
+.
+core:Continent
+  rdfs:label "Continent"@fr-CA ;
+.
+core:Contract
+  rdfs:label "Contrat"@fr-CA ;
+.
+core:CoreLaboratory
+  rdfs:label "Laboratoire principal"@fr-CA ;
+.
+core:Country
+  rdfs:label "Pays"@fr-CA ;
+.
+core:County
+  rdfs:label "Comté"@fr-CA ;
+.
+core:Course
+  rdfs:label "Cours"@fr-CA ;
+.
+core:Credential
+  rdfs:label "certification"@fr-CA ;
+.
+core:Database
+  rdfs:label "Base de données"@fr-CA ;
+.
+core:Dataset
+  rdfs:label "Jeu de données"@fr-CA ;
+.
+core:DateTimeInterval
+  rdfs:label "intervalle date/heure"@fr-CA ;
+.
+core:DateTimeValue
+  rdfs:label "Date/Temps"@fr-CA ;
+.
+core:DateTimeValuePrecision
+  rdfs:label "Précision Date/heure"@fr-CA ;
+.
+core:Department
+  rdfs:label "Département"@fr-CA ;
+.
+core:Division
+  rdfs:label "Division"@fr-CA ;
+.
+core:EditorRole
+  rdfs:label "Rôle d'éditeur"@fr-CA ;
+.
+core:EditorialArticle
+  rdfs:label "Article éditorial"@fr-CA ;
+.
+core:Editorship
+  rdfs:label "Rédaction"@fr-CA ;
+.
+core:EducationalProcess
+  rdfs:label "Processus éducationnel"@fr-CA ;
+.
+core:EmeritusFaculty
+  rdfs:label "Professeur émérite"@fr-CA ;
+.
+core:EmeritusLibrarian
+  rdfs:label "Bibliothécaire émérite"@fr-CA ;
+.
+core:EmeritusProfessor
+  rdfs:label "Professeur émérite"@fr-CA ;
+.
+core:Equipment
+  rdfs:label "Équipement"@fr-CA ;
+.
+core:EventSeries
+  rdfs:label "Série d'événements"@fr-CA ;
+.
+core:Exhibit
+  rdfs:label "Exposition"@fr-CA ;
+.
+core:ExtensionUnit
+  rdfs:label "Service de vulgarisation"@fr-CA ;
+.
+core:F1000Link
+  rdfs:label "Lien F1000"@fr-CA ;
+.
+core:Facility
+  rdfs:label "Installation"@fr-CA ;
+.
+core:FacultyAdministrativePosition
+  rdfs:label "Poste administratif de professeur"@fr-CA ;
+.
+core:FacultyMember
+  rdfs:label "Professeur"@fr-CA ;
+.
+core:FacultyMentoringRelationship
+  rdfs:label "Relation de mentorat entre les professeurs"@fr-CA ;
+.
+core:FacultyPosition
+  rdfs:label "Poste de professeur"@fr-CA ;
+.
+core:Foundation
+  rdfs:label "Fondation"@fr-CA ;
+.
+core:FundingOrganization
+  rdfs:label "Organisme de financement"@fr-CA ;
+.
+core:GeographicLocation
+  rdfs:label "Lieu géographique"@fr-CA ;
+.
+core:GeographicRegion
+  rdfs:label "Région géographique"@fr-CA ;
+.
+core:GeopoliticalEntity
+  rdfs:label "Entité géopolitique"@fr-CA ;
+.
+core:GovernmentAgency
+  rdfs:label "Agence gouvernementale"@fr-CA ;
+.
+core:GraduateAdvisingRelationship
+  rdfs:label "Relation de conseil aux diplômés"@fr-CA ;
+.
+core:GraduateStudent
+  rdfs:label "Diplômé"@fr-CA ;
+.
+core:Grant
+  rdfs:label "Subvention"@fr-CA ;
+.
+core:Hospital
+  rdfs:label "Hôpital"@fr-CA ;
+.
+core:Institute
+  rdfs:label "Institut"@fr-CA ;
+.
+core:Internship
+  rdfs:label "Stage"@fr-CA ;
+.
+core:InvestigatorRole
+  rdfs:label "Rôle de chercheur"@fr-CA ;
+.
+core:InvitedTalk
+  rdfs:label "Conférence sur invitation"@fr-CA ;
+.
+core:IssuedCredential
+  rdfs:label "Diplôme émis"@fr-CA ;
+.
+core:Laboratory
+  rdfs:label "Laboratoire"@fr-CA ;
+.
+core:LeaderRole
+  rdfs:label "Rôle de leader"@fr-CA ;
+.
+core:Librarian
+  rdfs:label "Bibliothécaire"@fr-CA ;
+.
+core:LibrarianPosition
+  rdfs:label "Poste de bibliothécaire"@fr-CA ;
+.
+core:Library
+  rdfs:label "Bibliothèque"@fr-CA ;
+.
+core:License
+  rdfs:label "Permis"@fr-CA ;
+.
+core:Licensure
+  rdfs:label "Permis d'exercer"@fr-CA ;
+.
+core:Location
+  rdfs:label "Lieu"@fr-CA ;
+.
+core:MedicalResidency
+  rdfs:label "Résidence médicale"@fr-CA ;
+.
+core:Meeting
+  rdfs:label "Réunion"@fr-CA ;
+.
+core:MemberRole
+  rdfs:label "Rôle de membre"@fr-CA ;
+.
+core:Museum
+  rdfs:label "Musée"@fr-CA ;
+.
+core:NewsRelease
+  rdfs:label "Communiqué de presse"@fr-CA ;
+.
+core:Newsletter
+  rdfs:label "Bulletin d'information"@fr-CA ;
+.
+core:NonAcademic
+  rdfs:label "Non-académique"@fr-CA ;
+.
+core:NonAcademicPosition
+  rdfs:label "Poste non-académique"@fr-CA ;
+.
+core:NonFacultyAcademic
+  rdfs:label "Enseignant"@fr-CA ;
+.
+core:NonFacultyAcademicPosition
+  rdfs:label "Poste académique non professoral"@fr-CA ;
+.
+core:OrganizerRole
+  rdfs:label "Rôle d'organisateur"@fr-CA ;
+.
+core:OrganizingProcess
+  rdfs:label "Processus organisationnel"@fr-CA ;
+.
+core:OutreachProviderRole
+  rdfs:label "Rôle de responsable de la mobilisation des connaissances "@fr-CA ;
+.
+core:PeerReviewerRole
+  rdfs:label "Rôle de pair évaluateur"@fr-CA ;
+.
+core:PopulatedPlace
+  rdfs:label "Lieu habité"@fr-CA ;
+.
+core:Position
+  rdfs:label "Poste "@fr-CA ;
+.
+core:Postdoc
+  rdfs:label "Post-doctorat"@fr-CA ;
+.
+core:PostdocOrFellowAdvisingRelationship
+  rdfs:label "Relation conseil avec les étudiants post-doctoraux ou fellow "@fr-CA ;
+.
+core:PostdocPosition
+  rdfs:label "Poste postdoctoral"@fr-CA ;
+.
+core:PostdoctoralTraining
+  rdfs:label "Formation postedoctorale"@fr-CA ;
+.
+core:Presentation
+  rdfs:label "Présentation"@fr-CA ;
+.
+core:PresenterRole
+  rdfs:label "Rôle de présentateur"@fr-CA ;
+.
+core:PresentingProcess
+  rdfs:label "Processus de présentation"@fr-CA ;
+.
+core:PrimaryPosition
+  rdfs:label "Poste principal"@fr-CA ;
+.
+core:PrincipalInvestigatorRole
+  rdfs:label "Rôle de chercheur principal"@fr-CA ;
+.
+core:PrivateCompany
+  rdfs:label "Compagnie privée"@fr-CA ;
+.
+core:Program
+  rdfs:label "Programme"@fr-CA ;
+.
+core:Project
+  rdfs:label "Projet"@fr-CA ;
+.
+core:Publisher
+  rdfs:label "Éditeur"@fr-CA ;
+.
+core:Relationship
+  rdfs:label "Relattion"@fr-CA ;
+.
+core:ResearchOrganization
+  rdfs:label "Organisation de recherche"@fr-CA ;
+.
+core:ResearchProposal
+  rdfs:label "Proposition de recherche"@fr-CA ;
+.
+core:ResearcherRole
+  rdfs:label "Rôle de chercheur"@fr-CA ;
+.
+core:Review
+  rdfs:label "Critique"@fr-CA ;
+.
+core:ReviewerRole
+  rdfs:label "Rôle de réviseur"@fr-CA ;
+.
+core:Room
+  rdfs:label "Chambre"@fr-CA ;
+.
+core:School
+  rdfs:label "École"@fr-CA ;
+.
+core:Score
+  rdfs:label "Pointage"@fr-CA ;
+.
+core:Screenplay
+  rdfs:label "Scénario"@fr-CA ;
+.
+core:SeminarSeries
+  rdfs:label "Collections de séminaires"@fr-CA ;
+.
+core:ServiceProvidingLaboratory
+  rdfs:label "Service de laboratoire"@fr-CA ;
+.
+core:Speech
+  rdfs:label "Discours"@fr-CA ;
+.
+core:StateOrProvince
+  rdfs:label "État ou Province"@fr-CA ;
+.
+core:Student
+  rdfs:label "Étudiant"@fr-CA ;
+.
+core:StudentOrganization
+  rdfs:label "Organisation étudiante"@fr-CA ;
+.
+core:SubnationalRegion
+  rdfs:label "Région infranationale"@fr-CA ;
+.
+core:TeacherRole
+  rdfs:label "Rôle de professeur"@fr-CA ;
+.
+core:Team
+  rdfs:label "Équipe"@fr-CA ;
+.
+core:Translation
+  rdfs:label "Tranduction"@fr-CA ;
+.
+core:UndergraduateAdvisingRelationship
+  rdfs:label "Relation conseil de premier cycle"@fr-CA ;
+.
+core:UndergraduateStudent
+  rdfs:label "Étudiant de premier cycle"@fr-CA ;
+.
+core:University
+  rdfs:label "Université"@fr-CA ;
+.
+core:Video
+  rdfs:label "Vidéo"@fr-CA ;
+.
+core:WorkingPaper
+  rdfs:label "Document de travail"@fr-CA ;
+.
+core:WorkshopSeries
+  rdfs:label "Séries d'ateliers"@fr-CA ;
+.
+core:abbreviation
+  rdfs:label "abbréviation"@fr-CA ;
+.
+core:affiliatedOrganization
+  rdfs:label "Affiliation organisationnelle"@fr-CA ;
+.
+core:assignedBy
+  rdfs:label "assigné par"@fr-CA ;
+.
+core:assignee
+  rdfs:label "mandataire "@fr-CA ;
+.
+core:assigneeFor
+  rdfs:label "Brevets"@fr-CA ;
+.
+core:assigns
+  rdfs:label "assigne"@fr-CA ;
+.
+core:cclCode
+  rdfs:label "published US Classification Class/subclass (CCL) code"@fr-CA ;
+.
+core:conceptAssociatedWith
+  rdfs:label "concept de"@fr-CA ;
+.
+core:contactInformation
+  rdfs:label "contact"@fr-CA ;
+.
+core:contributingRole
+  rdfs:label "contributeur"@fr-CA ;
+.
+core:courseCredits
+  rdfs:label "crédits"@fr-CA ;
+.
+core:dateFiled
+  rdfs:label "date saisie"@fr-CA ;
+.
+core:dateIssued
+  rdfs:label "date de parution"@fr-CA ;
+.
+core:dateTime
+  rdfs:label "date/heure"@fr-CA ;
+.
+core:dateTimeInterval
+  rdfs:label "intervalle date/heure"@fr-CA ;
+.
+core:dateTimePrecision
+  rdfs:label "précision date/heure"@fr-CA ;
+.
+core:dateTimeValue
+  rdfs:label "Date/heure"@fr-CA ;
+.
+core:degreeCandidacy
+  rdfs:label "candidature au diplôme"@fr-CA ;
+.
+core:departmentOrSchool
+  rdfs:label "nom du département ou de l'école  au sein de l'institution"@fr-CA ;
+.
+core:description
+  rdfs:label "description"@fr-CA ;
+.
+core:distributes
+  rdfs:label "distribue"@fr-CA ;
+.
+core:distributesFundingFrom
+  rdfs:label "distribue le financement provenant de"@fr-CA ;
+.
+core:eRACommonsId
+  rdfs:label "eRA Commons ID"@fr-CA ;
+.
+core:eligibleFor
+  rdfs:label "admissibilité au diplôme atteinte"@fr-CA ;
+.
+core:end
+  rdfs:label "fin"@fr-CA ;
+.
+core:entryTerm
+  rdfs:label "terme saisis "@fr-CA ;
+.
+core:equipmentFor
+  rdfs:label "équipement destiné à"@fr-CA ;
+.
+core:expirationDate
+  rdfs:label "date d'expiration"@fr-CA ;
+.
+core:featuredIn
+  rdfs:label "Mentionné dans"@fr-CA ;
+.
+core:features
+  rdfs:label "caractéristiques"@fr-CA ;
+.
+core:freetextKeyword
+  rdfs:label "mots clés"@fr-CA ;
+.
+core:fundingVehicleFor
+  rdfs:label "fournit du financement pour"@fr-CA ;
+.
+core:geographicFocus
+  rdfs:label "Perspective géographique"@fr-CA ;
+.
+core:geographicFocusOf
+  rdfs:label "Perspective géographique"@fr-CA ;
+.
+core:governingAuthorityFor
+  rdfs:label "autorité dirigeante de"@fr-CA ;
+.
+core:grantDirectCosts
+  rdfs:label "coûts directs"@fr-CA ;
+.
+core:grantSubcontractedThrough
+  rdfs:label "sous-contracté par"@fr-CA ;
+.
+core:hasAssociatedConcept
+  rdfs:label "concept associé"@fr-CA ;
+.
+core:hasCollaborator
+  rdfs:label "collaborateurs"@fr-CA ;
+.
+core:hasEquipment
+  rdfs:label "équipment"@fr-CA ;
+.
+core:hasFacility
+  rdfs:label "installation"@fr-CA ;
+.
+core:hasFundingVehicle
+  rdfs:label "financement fourni par"@fr-CA ;
+.
+core:hasGoverningAuthority
+  rdfs:label "autorité dirigeante"@fr-CA ;
+.
+core:hasMonetaryAmount
+  rdfs:label "Valeur monétaire"@fr-CA ;
+.
+core:hasPredecessorOrganization
+  rdfs:label "organisation précédente"@fr-CA ;
+.
+core:hasPrerequisite
+  rdfs:label "prérequis"@fr-CA ;
+.
+core:hasProceedings
+  rdfs:label "actes"@fr-CA ;
+.
+core:hasPublicationVenue
+  rdfs:label "publié dans"@fr-CA ;
+.
+core:hasResearchArea
+  rdfs:label "Domaine de recherche"@fr-CA ;
+.
+core:hasSubjectArea
+  rdfs:label "domaine"@fr-CA ;
+.
+core:hasSuccessorOrganization
+  rdfs:label "organisation remplaçante"@fr-CA ;
+.
+core:hasTranslation
+  rdfs:label "traduction"@fr-CA ;
+.
+core:hasValue
+  rdfs:label "valeur"@fr-CA ;
+.
+core:hideFromDisplay
+  rdfs:label "masquer à l'affichage"@fr-CA ;
+.
+core:hrJobTitle
+  rdfs:label "titre d'emploi de RH "@fr-CA ;
+.
+core:iclCode
+  rdfs:label "code de classification Internationale (ICL) code"@fr-CA ;
+.
+core:identifier
+  rdfs:label "identifiant"@fr-CA ;
+.
+core:inPress
+  rdfs:label "sous presse"@fr-CA ;
+.
+core:informationResourceSupportedBy
+  rdfs:label "supporté par"@fr-CA ;
+.
+core:invited
+  rdfs:label "invité"@fr-CA ;
+.
+core:isCorrespondingAuthor
+  rdfs:label "Est-ce que cet personne est l'auteur recherché?"@fr-CA ;
+.
+core:licenseNumber
+  rdfs:label "numéro de permis"@fr-CA ;
+.
+core:localAwardId
+  rdfs:label "ID de distinction locale"@fr-CA ;
+.
+core:majorField
+  rdfs:label "domaine d'étude principal"@fr-CA ;
+.
+core:middleName
+  rdfs:label "deuxième prénom ou initiale"@fr-CA ;
+.
+core:nihmsid
+  rdfs:label "ID du système de soumission de manuscrit NIH"@fr-CA ;
+.
+core:offeredBy
+  rdfs:label "offert par"@fr-CA ;
+.
+core:offers
+  rdfs:label "offre"@fr-CA ;
+.
+core:orcidId
+  rdfs:label "ID ORCID"@fr-CA ;
+.
+core:outreachOverview
+  rdfs:label "aperçu des activités"@fr-CA ;
+.
+core:overview
+  rdfs:label "aperçu"@fr-CA ;
+.
+core:patentNumber
+  rdfs:label "numéro de brevet"@fr-CA ;
+.
+core:placeOfPublition
+  rdfs:label "lieu de publication"@fr-CA ;
+.
+core:pmcid
+  rdfs:label "ID PubMed Central"@fr-CA ;
+.
+core:preferredDisplayOrder
+  rdfs:label "ordre de présentation préféré"@fr-CA ;
+.
+core:prerequisiteFor
+  rdfs:label "prérequis pour"@fr-CA ;
+.
+core:proceedingsOf
+  rdfs:label "actes de"@fr-CA ;
+.
+core:providesFundingThrough
+  rdfs:label "fournit du financement par l'entremise de"@fr-CA ;
+.
+core:publicationVenueFor
+  rdfs:label "lieu de publication pour"@fr-CA ;
+.
+core:publisher
+  rdfs:label "éditeur"@fr-CA ;
+.
+core:publisherOf
+  rdfs:label "éditeur de"@fr-CA ;
+.
+core:rank
+  rdfs:label "rang"@fr-CA ;
+.
+core:relatedBy
+  rdfs:label "relié par"@fr-CA ;
+.
+core:relates
+  rdfs:label "relié à "@fr-CA ;
+.
+core:reportId
+  rdfs:label "identifiant du rapport"@fr-CA ;
+.
+core:reproduces
+  rdfs:label "reproduit"@fr-CA ;
+.
+core:researchAreaOf
+  rdfs:label "Domaine de recherche de "@fr-CA ;
+.
+core:researchOverview
+  rdfs:label "Aperçu de la recherche"@fr-CA ;
+.
+core:researcherId
+  rdfs:label "ID de chercheur ISI"@fr-CA ;
+.
+core:reviewedIn
+  rdfs:label "analysé dans"@fr-CA ;
+.
+core:roleContributesTo
+  rdfs:label "contribue à"@fr-CA ;
+.
+core:scopusId
+  rdfs:label "ID Scopus"@fr-CA ;
+.
+core:seatingCapacity
+  rdfs:label "capacité de la salle"@fr-CA ;
+.
+core:sponsorAwardId
+  rdfs:label "ID du prix du commanditaire"@fr-CA ;
+.
+core:sponsoredBy
+  rdfs:label "prix commandité par"@fr-CA ;
+.
+core:sponsors
+  rdfs:label "prix ou distinctions des commanditaires"@fr-CA ;
+.
+core:start
+  rdfs:label "début"@fr-CA ;
+.
+core:subcontractsGrant
+  rdfs:label "subvention en sous-traitance"@fr-CA ;
+.
+core:subjectAreaOf
+  rdfs:label "sujet de recherche de"@fr-CA ;
+.
+core:submitted
+  rdfs:label "soumis"@fr-CA ;
+.
+core:supplementalInformation
+  rdfs:label "information supplémentaire"@fr-CA ;
+.
+core:supportedBy
+  rdfs:label "supporté par"@fr-CA ;
+.
+core:supportedInformationResource
+  rdfs:label "publications financées et autres travaux"@fr-CA ;
+.
+core:supports
+  rdfs:label "supporte"@fr-CA ;
+.
+core:teachingOverview
+  rdfs:label "aperçu de l'enseignement"@fr-CA ;
+.
+core:termLabel
+  rdfs:label "étiquette du terme"@fr-CA ;
+.
+core:termType
+  rdfs:label "type de terme"@fr-CA ;
+.
+core:totalAwardAmount
+  rdfs:label "Montant total des prix "@fr-CA ;
+.
+core:translatorOf
+  rdfs:label "Traducteur de"@fr-CA ;
+  rdfs:label "tranducteur de"@fr-CA ;
+.
+core:validIn
+  rdfs:label "valide en"@fr-CA ;
+.
+core:yearMonthDayPrecision
+  rdfs:label "année-mois-jour value"@fr-CA ;
+.
+core:yearMonthDayTimePrecision
+  rdfs:label "Année-mois-jour-heure"@fr-CA ;
+.
+core:yearMonthPrecision
+  rdfs:label "valeur année-mois"@fr-CA ;
+.
+core:yearPrecision
+  rdfs:label "Année"@fr-CA ;
+.
+<http://vivoweb.org/ontology/core_fr_CA>
+  a owl:Ontology ;
+.
+<http://vivoweb.org/ontology/scientific-research>
+  rdfs:label "VIVO Scientific Research Ontology"@fr-CA ;
+.
+vivo-rech:Phase0ClinicalTrial
+  rdfs:label "Essai clinique de phase 0"@fr-CA ;
+.
+vivo-rech:Phase1ClinicalTrial
+  rdfs:label "Essais clinique de phase 1"@fr-CA ;
+.
+vivo-rech:Phase2ClinicalTrial
+  rdfs:label "Essai clinique de Phase 2"@fr-CA ;
+.
+vivo-rech:Phase3ClinicalTrial
+  rdfs:label "Essai clinique de Phase 3"@fr-CA ;
+.
+vivo-rech:Phase4ClinicalTrial
+  rdfs:label "Essai clinique de phase 4"@fr-CA ;
+.
+vivo-rech:accessProvidedBy
+  rdfs:label "accès fourni par"@fr-CA ;
+.
+vivo-rech:documentationFor
+  rdfs:label "documentation ou ressource du projet"@fr-CA ;
+.
+vivo-rech:irbNumber
+  rdfs:label "numéro Institutional Review Board (IRB)"@fr-CA ;
+.
+vivo-rech:nctId
+  rdfs:label "Numéro du National Clinical Trials (NCT)"@fr-CA ;
+.
+vivo-rech:protocolRealizedBy
+  rdfs:label "protocole réalisé par"@fr-CA ;
+.
+vivo-rech:studyPopulationCount
+  rdfs:label "dénombrement des populations étudiées"@fr-CA ;
+.
+<http://www.ebi.ac.uk/efo/swo/SWO_0000740>
+  rdfs:label "équipements "@fr-CA ;
+.
+<http://www.ebi.ac.uk/efo/swo/SWO_0000741>
+  rdfs:label "est encodé dans"@fr-CA ;
+.
+<http://www.obofoundry.org/ro/ro.owl#has_agent>
+  rdfs:label "agent"@fr-CA ;
+.
+rdfs:isDefinedBy
+  rdfs:label "est défini par"@fr-CA ;
+.
+owl:DeprecatedProperty
+  rdfs:label "propriété obsolète"@fr-CA ;
+.
+owl:sameAs
+  rdfs:label "même que"@fr-CA ;
+.
+<http://www.w3.org/2004/02/skos/core>
+  rdfs:label "SKOS (Simple Knowledge Organization System)"@fr-CA ;
+.
+skos:Concept
+  rdfs:label "Concept"@fr-CA ;
+.
+skos:broader
+  rdfs:label "concept plus général"@fr-CA ;
+.
+skos:narrower
+  rdfs:label "concept plus précis"@fr-CA ;
+.
+skos:related
+  rdfs:label "concept associé"@fr-CA ;
+.
+<http://www.w3.org/2006/vcard/ns>
+  rdfs:label "VCard"@fr-CA ;
+.
+vcard:Acquaintance
+  rdfs:label "Connaissance"@fr-CA ;
+.
+vcard:Address
+  rdfs:label "Adresse"@fr-CA ;
+.
+vcard:Addressing
+  rdfs:label "Addresse "@fr-CA ;
+.
+vcard:Agent
+  rdfs:label "Agent"@fr-CA ;
+.
+vcard:Calendar
+  rdfs:label "Calendrier"@fr-CA ;
+.
+vcard:CalendarBusy
+  rdfs:label "Calendrier occupé"@fr-CA ;
+.
+vcard:CalendarLink
+  rdfs:label "Lien calendrier"@fr-CA ;
+.
+vcard:CalendarRequest
+  rdfs:label "Requête calendrier"@fr-CA ;
+.
+vcard:Category
+  rdfs:label "Catégorie"@fr-CA ;
+.
+vcard:Cell
+  rdfs:label "Cellulaire"@fr-CA ;
+.
+vcard:Child
+  rdfs:label "Enfant"@fr-CA ;
+.
+vcard:Code
+  rdfs:label "Code"@fr-CA ;
+.
+vcard:Colleague
+  rdfs:label "Collègue"@fr-CA ;
+.
+vcard:Communication
+  rdfs:label "Communication"@fr-CA ;
+.
+vcard:Contact
+  rdfs:label "Contact"@fr-CA ;
+.
+vcard:Coresident
+  rdfs:label "Co-résident"@fr-CA ;
+.
+vcard:Coworker
+  rdfs:label "Collaborateur"@fr-CA ;
+.
+vcard:Crush
+  rdfs:label "Béguin"@fr-CA ;
+.
+vcard:Date
+  rdfs:label "Date"@fr-CA ;
+.
+vcard:Email
+  rdfs:label "Courriel"@fr-CA ;
+.
+vcard:Emergency
+  rdfs:label "Urgence"@fr-CA ;
+.
+vcard:Explanatory
+  rdfs:label "Explicatif"@fr-CA ;
+.
+vcard:Fax
+  rdfs:label "Télécopieur"@fr-CA ;
+.
+vcard:Female
+  rdfs:label "Femme"@fr-CA ;
+.
+vcard:FormattedName
+  rdfs:label "Nom formaté"@fr-CA ;
+.
+vcard:Friend
+  rdfs:label "Ami"@fr-CA ;
+.
+vcard:Gender
+  rdfs:label "Genre"@fr-CA ;
+.
+vcard:Geo
+  rdfs:label "Géo"@fr-CA ;
+.
+vcard:Geographical
+  rdfs:label "Geographique"@fr-CA ;
+.
+vcard:Group
+  rdfs:label "Groupe"@fr-CA ;
+.
+vcard:Home
+  rdfs:label "Accueil"@fr-CA ;
+.
+vcard:Identification
+  rdfs:label "Identification"@fr-CA ;
+.
+vcard:Individual
+  rdfs:label "Individu"@fr-CA ;
+.
+vcard:InstantMessage
+  rdfs:label "Messagerie"@fr-CA ;
+.
+vcard:Key
+  rdfs:label "Clé"@fr-CA ;
+.
+vcard:Kin
+  rdfs:label "Proche"@fr-CA ;
+.
+vcard:Kind
+  rdfs:label "Type VCard"@fr-CA ;
+.
+vcard:Language
+  rdfs:label "Langue"@fr-CA ;
+.
+vcard:Location
+  rdfs:label "Lieu"@fr-CA ;
+.
+vcard:Logo
+  rdfs:label "Logo"@fr-CA ;
+.
+vcard:Male
+  rdfs:label "Mâle"@fr-CA ;
+.
+vcard:Me
+  rdfs:label "Moi"@fr-CA ;
+.
+vcard:Met
+  rdfs:label "Rencontré"@fr-CA ;
+.
+vcard:Muse
+  rdfs:label "Muse"@fr-CA ;
+.
+vcard:Name
+  rdfs:label "Nom"@fr-CA ;
+.
+vcard:Neighbor
+  rdfs:label "Voisin"@fr-CA ;
+.
+vcard:Nickname
+  rdfs:label "Surnom"@fr-CA ;
+.
+vcard:None
+  rdfs:label "Aucun"@fr-CA ;
+.
+vcard:Note
+  rdfs:label "Note"@fr-CA ;
+.
+vcard:Organization
+  rdfs:label "Organisation"@fr-CA ;
+.
+vcard:OrganizationName
+  rdfs:label "Nom de l'organisation"@fr-CA ;
+.
+vcard:OrganizationUnitName
+  rdfs:label "ONom de l'unité organisationnelle"@fr-CA ;
+.
+vcard:Organizational
+  rdfs:label "Organisationnel"@fr-CA ;
+.
+vcard:Other
+  rdfs:label "Autre"@fr-CA ;
+.
+vcard:Pager
+  rdfs:label "Téléavertisseur"@fr-CA ;
+.
+vcard:Parent
+  rdfs:label "Parent"@fr-CA ;
+.
+vcard:Photo
+  rdfs:label "Photo"@fr-CA ;
+.
+vcard:Related
+  rdfs:label "Relié"@fr-CA ;
+.
+vcard:RelatedType
+  rdfs:label "Type de relation"@fr-CA ;
+.
+vcard:Security
+  rdfs:label "Securité"@fr-CA ;
+.
+vcard:Sibling
+  rdfs:label "Frère/Soeur "@fr-CA ;
+.
+vcard:Sound
+  rdfs:label "Son"@fr-CA ;
+.
+vcard:Spouse
+  rdfs:label "Épouse"@fr-CA ;
+.
+vcard:Sweetheart
+  rdfs:label "Chérie"@fr-CA ;
+.
+vcard:Telephone
+  rdfs:label "Téléphone"@fr-CA ;
+.
+vcard:TelephoneType
+  rdfs:label "Type de téléphone"@fr-CA ;
+.
+vcard:Text
+  rdfs:label "Texte"@fr-CA ;
+.
+vcard:TextPhone
+  rdfs:label "Téléphone texto "@fr-CA ;
+.
+vcard:TimeZone
+  rdfs:label "Fuseau horaire"@fr-CA ;
+.
+vcard:Title
+  rdfs:label "Titre"@fr-CA ;
+.
+vcard:Type
+  rdfs:label "Type"@fr-CA ;
+.
+vcard:URL
+  rdfs:label "URL"@fr-CA ;
+.
+vcard:Unknown
+  rdfs:label "Inconnu"@fr-CA ;
+.
+vcard:Video
+  rdfs:label "Vidéo"@fr-CA ;
+.
+vcard:Voice
+  rdfs:label "Téléphone"@fr-CA ;
+.
+vcard:Work
+  rdfs:label "Travail"@fr-CA ;
+.
+vcard:additionalName
+  rdfs:label "nom complémentaire"@fr-CA ;
+.
+vcard:anniversary
+  rdfs:label "anniversaire"@fr-CA ;
+.
+vcard:birthdate
+  rdfs:label "date de naissance"@fr-CA ;
+.
+vcard:calendarBusy
+  rdfs:label "calendrier occupé"@fr-CA ;
+.
+vcard:calendarLink
+  rdfs:label "lien calendrier"@fr-CA ;
+.
+vcard:calendarRequest
+  rdfs:label "exigence de calendrier"@fr-CA ;
+.
+vcard:category
+  rdfs:label "catégorie"@fr-CA ;
+.
+vcard:country
+  rdfs:label "pays"@fr-CA ;
+.
+vcard:email
+  rdfs:label "courriel"@fr-CA ;
+.
+vcard:familyName
+  rdfs:label "nom de famille"@fr-CA ;
+.
+vcard:formattedName
+  rdfs:label "nom standardisé"@fr-CA ;
+.
+vcard:gender
+  rdfs:label "genre"@fr-CA ;
+.
+vcard:geo
+  rdfs:label "géo"@fr-CA ;
+.
+vcard:givenName
+  rdfs:label "prénom"@fr-CA ;
+.
+vcard:hasAddress
+  rdfs:label "adresse"@fr-CA ;
+.
+vcard:hasCalendarLink
+  rdfs:label "lien calendrier"@fr-CA ;
+.
+vcard:hasCalendarRequest
+  rdfs:label "exigence de calendrier"@fr-CA ;
+.
+vcard:hasCalenderBusy
+  rdfs:label "calendrier chargé"@fr-CA ;
+.
+vcard:hasCategory
+  rdfs:label "catégorie"@fr-CA ;
+.
+vcard:hasEmail
+  rdfs:label "courriel"@fr-CA ;
+.
+vcard:hasFormattedName
+  rdfs:label "nom standardisé "@fr-CA ;
+.
+vcard:hasGeo
+  rdfs:label "données géographiques "@fr-CA ;
+.
+vcard:hasInstantMessage
+  rdfs:label "messagerie"@fr-CA ;
+.
+vcard:hasKey
+  rdfs:label "clé"@fr-CA ;
+.
+vcard:hasLanguage
+  rdfs:label "langue"@fr-CA ;
+.
+vcard:hasLogo
+  rdfs:label "logo"@fr-CA ;
+.
+vcard:hasMember
+  rdfs:label "membre"@fr-CA ;
+.
+vcard:hasName
+  rdfs:label "nom"@fr-CA ;
+.
+vcard:hasNickname
+  rdfs:label "surnom"@fr-CA ;
+.
+vcard:hasNote
+  rdfs:label "note"@fr-CA ;
+.
+vcard:hasOrganizationName
+  rdfs:label "nom de l'organisation"@fr-CA ;
+.
+vcard:hasOrganizationalUnitName
+  rdfs:label "a un nom d'organisation"@fr-CA ;
+.
+vcard:hasPhoto
+  rdfs:label "photo"@fr-CA ;
+.
+vcard:hasRelated
+  rdfs:label "relié"@fr-CA ;
+.
+vcard:hasRole
+  rdfs:label "rôle"@fr-CA ;
+.
+vcard:hasSound
+  rdfs:label "son"@fr-CA ;
+.
+vcard:hasTelephone
+  rdfs:label "téléphone"@fr-CA ;
+.
+vcard:hasTimeZone
+  rdfs:label "fuseau horaire"@fr-CA ;
+.
+vcard:hasTitle
+  rdfs:label "titre"@fr-CA ;
+.
+vcard:hasURL
+  rdfs:label "URL"@fr-CA ;
+.
+vcard:honorificPrefix
+  rdfs:label "préfixe honorifique"@fr-CA ;
+.
+vcard:honorificSuffix
+  rdfs:label "suffixe honorifique"@fr-CA ;
+.
+vcard:instantMessage
+  rdfs:label "message instantané"@fr-CA ;
+.
+vcard:key
+  rdfs:label "Clé de chiffrement"@fr-CA ;
+.
+vcard:language
+  rdfs:label "a une langue"@fr-CA ;
+.
+vcard:locality
+  rdfs:label "localité"@fr-CA ;
+.
+vcard:logo
+  rdfs:label "logo"@fr-CA ;
+.
+vcard:nickName
+  rdfs:label "surnom"@fr-CA ;
+.
+vcard:note
+  rdfs:label "note"@fr-CA ;
+.
+vcard:organizationName
+  rdfs:label "nom de l'organisation"@fr-CA ;
+.
+vcard:organizationalUnitName
+  rdfs:label "nom de l'unité organisationnelle"@fr-CA ;
+.
+vcard:photo
+  rdfs:label "photo"@fr-CA ;
+.
+vcard:postalCode
+  rdfs:label "code postal"@fr-CA ;
+.
+vcard:productId
+  rdfs:label "ID de produit"@fr-CA ;
+.
+vcard:region
+  rdfs:label "région"@fr-CA ;
+.
+vcard:related
+  rdfs:label "relié à"@fr-CA ;
+.
+vcard:revision
+  rdfs:label "révision"@fr-CA ;
+.
+vcard:role
+  rdfs:label "rôle"@fr-CA ;
+.
+vcard:sortAs
+  rdfs:label "tri sur"@fr-CA ;
+.
+vcard:sound
+  rdfs:label "son"@fr-CA ;
+.
+vcard:source
+  rdfs:label "source"@fr-CA ;
+.
+vcard:streetAddress
+  rdfs:label "adresse postale"@fr-CA ;
+.
+vcard:telephone
+  rdfs:label "Telephone"@fr-CA ;
+.
+vcard:timeZone
+  rdfs:label "fuseau horaire"@fr-CA ;
+.
+vcard:title
+  rdfs:label "titre"@fr-CA ;
+.
+vcard:uid
+  rdfs:label "uid"@fr-CA ;
+.
+vcard:url
+  rdfs:label "URL"@fr-CA ;
+.
+foaf:
+  rdfs:label "FOAF (Friend of a Friend)"@fr-CA ;
+.
+foaf:Agent
+  rdfs:label "Agent"@fr-CA ;
+.
+foaf:Group
+  rdfs:label "Groupe"@fr-CA ;
+.
+foaf:Organization
+  rdfs:label "Organisation"@fr-CA ;
+.
+foaf:Person
+  rdfs:label "Personne"@fr-CA ;
+.
