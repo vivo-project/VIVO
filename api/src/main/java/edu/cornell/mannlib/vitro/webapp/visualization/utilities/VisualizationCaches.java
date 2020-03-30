@@ -38,7 +38,6 @@ final public class VisualizationCaches {
     // Affinity object to ensure that only one background thread can be running at once when updating the caches
     private static final CachingRDFServiceExecutor.Affinity visualizationAffinity = new CachingRDFServiceExecutor.Affinity();
 
-
     /**
      * Rebuild all the caches
      */
@@ -393,13 +392,13 @@ final public class VisualizationCaches {
                     new CachingRDFServiceExecutor.RDFServiceCallable<ConceptLabelMap>() {
                         @Override
                         protected ConceptLabelMap callWithService(RDFService rdfService) throws Exception {
-                        	VitroRequest vreq = rdfService.getVitroRequest();
+                            VitroRequest vreq = rdfService.getVitroRequest();
                             String langCtx = "en-US";
-							// UQAM Adjust to linguistic context
-                        	try {
-                        		 langCtx  = vreq.getLocale().getLanguage() + "-"+vreq.getLocale().getCountry();
-							} catch (Exception e) {
-							}
+                            // UQAM Adjust to linguistic context
+                            try {
+                                langCtx  = vreq.getLocale().getLanguage() + "-"+vreq.getLocale().getCountry();
+                            } catch (Exception e) {
+                            }
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?concept ?label\n" +
                                     "WHERE\n" +
@@ -408,20 +407,17 @@ final public class VisualizationCaches {
                                     "    ?person core:hasResearchArea ?concept .\n" +
                                     "    ?concept a skos:Concept .\n" +
                                     "    ?concept rdfs:label ?label .\n" +
-                    				"    FILTER (lang(?label) = '" + langCtx+"' )  \n" +
+                                    "    FILTER (lang(?label) = '" + langCtx+"' )  \n" +
                                     "}\n";
 
 //                            final Map<String, String> map = new HashMap<>();
-
                             final ConceptLabelMap map = new ConceptLabelMap();
+                            
                             rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
-
-                                @Override
                                 protected void processQuerySolution(QuerySolution qs) {
                                     String conceptURI = qs.getResource("concept").getURI().intern();
                                     String label  = qs.getLiteral("label").getString().intern();
                                     String labelLower = label.toLowerCase().intern();
-
 
                                     map.conceptToLabel.put(conceptURI, label);
 
