@@ -153,8 +153,7 @@ public class CachingRDFServiceExecutor<T> {
         // If we have cached results
         if (cachedResults != null) {
             // If the background service exists, and the cache is considered invalid
-
-        	if (backgroundRDFService != null && resultBuilder.invalidateCache(System.currentTimeMillis() - lastCacheTime)) {
+            if (backgroundRDFService != null && resultBuilder.invalidateCache(System.currentTimeMillis() - lastCacheTime)) {
                 // In most cases, only wait for half a second
                 long waitFor = 500;
 
@@ -187,6 +186,7 @@ public class CachingRDFServiceExecutor<T> {
 
         return cachedResults;
     }
+
     /**
      * (Re)build the current cache
      *
