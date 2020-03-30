@@ -88,3 +88,4 @@ public class AddAttendeeRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
         }
     */
 }
+
