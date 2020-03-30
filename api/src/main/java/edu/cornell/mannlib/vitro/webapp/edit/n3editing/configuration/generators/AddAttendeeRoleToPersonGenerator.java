@@ -84,7 +84,7 @@ public class AddAttendeeRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
 
         public String getEndDatePrecision() {
             String precision = VitroVocabulary.Precision.DAY.uri();
-            return precision;
+    	    return precision;
         }
     */
 }
