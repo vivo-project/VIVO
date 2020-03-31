@@ -40,7 +40,7 @@ public class AddMemberRoleToPersonGenerator extends AddRoleToPersonTwoStageGener
 	}
 
 
-    FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
+	FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
 
 
 /*
@@ -84,7 +84,7 @@ public class AddMemberRoleToPersonGenerator extends AddRoleToPersonTwoStageGener
 			//UQAM Replacing the above hard coding assigment by a dynamic assigment that takes into account the linguistic context
 	       ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
 	       return filedOptions;
-    }
+	}
 	/*
 	 * UQAM get attributes for this specific subject
 	 */
