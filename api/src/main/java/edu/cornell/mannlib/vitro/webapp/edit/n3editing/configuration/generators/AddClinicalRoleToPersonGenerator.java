@@ -10,10 +10,10 @@ public class AddClinicalRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
 
 	private static String template = "addClinicalRoleToPerson.ftl";
 
-	//Should this be overridden
+    //Should this be overridden
 	@Override
 	String getTemplate() {
-		return template;
+	    return template;
 	}
 
 	@Override
@@ -22,8 +22,8 @@ public class AddClinicalRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
 	}
 
 	/** Clinical role involves hard-coded options for the "right side" of the role or activity. */
-	@Override
-	FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
+    @Override
+    FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
 		//		return new ConstantFieldOptions(
 		//		        "",  "Select one",
 		//		        "http://vivoweb.org/ontology/core#Project", "Project",
@@ -43,17 +43,17 @@ public class AddClinicalRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
 	//isShowRoleLabelField remains true for this so doesn't need to be overwritten
 	@Override
 	boolean isShowRoleLabelField(){
-		return true;
+	    return true;
 	}
 
 
-	/*
-	 * Use the methods below to change the date/time precision in the
-	 * custom form associated with this generator. When not used, the
-	 * precision will be YEAR. The other precisons are MONTH, DAY, HOUR,
-	 * MINUTE, TIME and NONE.
-	 */
-	/*
+       /*
+        * Use the methods below to change the date/time precision in the
+        * custom form associated with this generator. When not used, the
+        * precision will be YEAR. The other precisons are MONTH, DAY, HOUR,
+        * MINUTE, TIME and NONE.
+        */
+    /*
         public String getStartDatePrecision() {
             String precision = VitroVocabulary.Precision.MONTH.uri();
     	    return precision;
@@ -63,6 +63,6 @@ public class AddClinicalRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
             String precision = VitroVocabulary.Precision.DAY.uri();
     	    return precision;
         }
-	 */
+    */
 
 }
