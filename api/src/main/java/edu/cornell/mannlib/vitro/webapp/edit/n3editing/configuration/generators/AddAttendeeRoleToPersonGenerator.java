@@ -21,7 +21,6 @@ public class AddAttendeeRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
     /** Editor role involves hard-coded options for the "right side" of the role or activity. */
     @Override
     FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
-        return new ConstantFieldOptions(
         //        return new ConstantFieldOptions(
         //        "", "Select type",
         //        "http://purl.org/NET/c4dm/event.owl#Event", "Event",
