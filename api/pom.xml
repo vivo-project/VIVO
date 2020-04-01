@@ -86,12 +86,7 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.vivoweb</groupId>
-            <artifactId>vitro-api</artifactId>
-            <type>test-jar</type>
-            <scope>test</scope>
-        </dependency>
+
     </dependencies>
 
     <build>
