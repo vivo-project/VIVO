@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.vivoweb</groupId>
-    <artifactId>vivo-languages</artifactId>
+    <artifactId>vivo-languages_de_DE</artifactId>
     <version>1.11.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>VIVO Lanugages</name>
+    <name>VIVO Languages de_DE</name>
     <description>VIVO Languages</description>
     <url>http://vivoweb.org/</url>
 
@@ -62,6 +62,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <modules>
+        <module>home</module>
+        <module>webapp</module>
+    </modules>
 
     <profiles>
         <profile>
@@ -221,12 +225,9 @@
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
-    <modules>
-    	<module>core</module>
-    	<module>en_US</module>
-    	<module>es</module>
-    	<module>fr_CA</module>
-    	<module>de_DE</module>
-    	<module>pt_BR</module>
-    </modules>
+    <parent>
+    	<groupId>org.vivoweb</groupId>
+    	<artifactId>vivo-languages</artifactId>
+    	<version>1.11.2-SNAPSHOT</version>
+    </parent>
 </project>
