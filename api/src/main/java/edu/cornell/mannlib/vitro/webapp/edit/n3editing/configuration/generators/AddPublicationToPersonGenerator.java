@@ -624,7 +624,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
     private void setFields(EditConfigurationVTwo editConfiguration, VitroRequest vreq) throws Exception {
         setTitleField(editConfiguration);
-		//UQAM needs for getting appropriated value in the linguistic context
+		//UQAM-Linguistic-Management needs for getting appropriated value in the linguistic context
 		setPubTypeField(editConfiguration, vreq);
         setPubUriField(editConfiguration);
         setCollectionLabelField(editConfiguration);
@@ -665,7 +665,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
                 setRangeDatatypeUri(stringDatatypeUri));
     }
 
-	//UQAM add vreq to get linguistic context
+	//UQAM-Linguistic-Management add vreq to get linguistic context
 	private void setPubTypeField(EditConfigurationVTwo editConfiguration, VitroRequest vreq) throws Exception {
 		editConfiguration.addField(new FieldVTwo().
 				setName("pubType").
@@ -889,7 +889,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     }
 
 	private List<List<String>> getPublicationTypeLiteralOptions(VitroRequest vreq) throws Exception {
-		//UQAM Replacing hard coding assigment by a dynamic assigment that takes into account the linguistic context
+		//UQAM-Linguistic-Management Replacing hard coding assigment by a dynamic assigment that takes into account the linguistic context
 		List<List<String>> value =  GeneratorUtil.builFieldOptionsList(vreq, DESCRIBE_QUERY);
 		return value;
 		//UQAM in replacement of this
@@ -929,7 +929,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
 
 	/*
-	 * UQAM get attributes for this specific subject
+	 * UQAM-Linguistic-Management get attributes for this specific subject
 	 */
 	private static String DESCRIBE_QUERY = " describe "+
 			"<http://vivoweb.org/ontology/core#Abstract> "+

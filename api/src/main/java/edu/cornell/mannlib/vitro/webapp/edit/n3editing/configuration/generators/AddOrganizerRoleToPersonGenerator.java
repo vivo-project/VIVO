@@ -20,7 +20,7 @@ public class AddOrganizerRoleToPersonGenerator extends AddRoleToPersonTwoStageGe
 	String getRoleType() {
 		return "http://vivoweb.org/ontology/core#OrganizerRole";
 	}
-	// UQAM Added for buildConstantFieldOptions() call
+	// UQAM-Linguistic-Management Added for buildConstantFieldOptions() call
 	private static String DESCRIBE_QUERY = " describe "+
 			"<http://vivoweb.org/ontology/core#Competition> "+
 			"<http://purl.org/ontology/bibo/Conference> "+
@@ -42,7 +42,7 @@ public class AddOrganizerRoleToPersonGenerator extends AddRoleToPersonTwoStageGe
 	//Organizer role involves hard-coded options for the "right side" of the role or activity
 	FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
 
-		// UQAM Replacing the above hard coding assignment by a dynamic assignment that takes into account the linguistic context
+		// UQAM-Linguistic-Management Replacing the above hard coding assignment by a dynamic assignment that takes into account the linguistic context
 		ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
 		return filedOptions;
 

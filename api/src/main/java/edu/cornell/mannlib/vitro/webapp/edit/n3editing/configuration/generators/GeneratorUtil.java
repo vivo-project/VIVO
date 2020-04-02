@@ -32,7 +32,7 @@ public class GeneratorUtil {
 			+ "        ORDER BY ?label \n"
 			;
 	/*
-	 * UQAM Help to generate the labels of scrollDowm list in proper language
+	 * UQAM-Linguistic-Management Help to generate the labels of scrollDowm list in proper language
 	 */
 	static public ConstantFieldOptions buildConstantFieldOptions(VitroRequest vreq, String DESCRIBE_QUERY) throws Exception {
 
@@ -41,7 +41,7 @@ public class GeneratorUtil {
 		return filedOptions;
 	}
 	/*
-	 * UQAM Help to generate the labels of scrollDowm list in proper language
+	 * UQAM-Linguistic-Management Help to generate the labels of scrollDowm list in proper language
 	 */
 	static public List<List<String>> builFieldOptionsList(VitroRequest vreq, String DESCRIBE_QUERY) throws Exception {
 

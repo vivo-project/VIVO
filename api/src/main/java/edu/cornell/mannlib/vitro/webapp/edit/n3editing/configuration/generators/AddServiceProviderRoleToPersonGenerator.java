@@ -72,7 +72,7 @@ public class AddServiceProviderRoleToPersonGenerator extends AddRoleToPersonTwoS
 	@Override
 	FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
 
-		// UQAM Replacing the above hard coding assignment by a dynamic assignment that takes into account the linguistic context
+		// UQAM-Linguistic-Management Replacing the above hard coding assignment by a dynamic assignment that takes into account the linguistic context
 		ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
 		return filedOptions;
 

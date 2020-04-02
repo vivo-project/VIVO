@@ -30,12 +30,12 @@ public class AddClinicalRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
 		//		        "http://purl.obolibrary.org/obo/ERO_0000005", "Service"
 		//		);
 
-		//UQAM Replacing the above hard coding assigment by a dynamic assigment that takes into account the linguistic context
+		//UQAM-Linguistic-Management Replacing the above hard coding assigment by a dynamic assigment that takes into account the linguistic context
 		ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
 		return filedOptions;
 	}
 	/*
-	 * UQAM get attributes for this specific subject
+	 * UQAM-Linguistic-Management get attributes for this specific subject
 	 */
 	private static String DESCRIBE_QUERY = " describe "+
 			"<http://vivoweb.org/ontology/core#Project> "+
