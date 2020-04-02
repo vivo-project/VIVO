@@ -127,8 +127,8 @@ public class CachingRDFServiceExecutor<T> {
 
     public synchronized T get(RDFService rdfService, boolean allowWaits, boolean force) {
     	/*
-    	 * UQAM
-    	 * Force la regénération  du résultat
+    	 * UQAM-Bug-Correction
+    	 * Forces the regeneration of the result
     	 */
     	if (force) {
     		try {

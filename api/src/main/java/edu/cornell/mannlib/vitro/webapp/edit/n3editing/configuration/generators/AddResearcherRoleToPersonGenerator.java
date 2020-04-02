@@ -23,7 +23,7 @@ public class AddResearcherRoleToPersonGenerator extends AddRoleToPersonTwoStageG
 	/** Researcher role involves hard-coded options for the "right side" of the role or activity. */
 	@Override
 	FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
-		//UQAM Replacing the above hard coding assigment by a dynamic assigment that takes into account the linguistic context
+		//UQAM-Linguistic-Management Replacing the above hard coding assigment by a dynamic assigment that takes into account the linguistic context
 		ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
 		return filedOptions;
 //		return new ConstantFieldOptions(
@@ -34,7 +34,7 @@ public class AddResearcherRoleToPersonGenerator extends AddRoleToPersonTwoStageG
 //	        "http://purl.obolibrary.org/obo/ERO_0000014", "Research Project");
 	}
 	/*
-	 * UQAM get attributes for this specific subject
+	 * UQAM-Linguistic-Management get attributes for this specific subject
 	 */
 	private static String DESCRIBE_QUERY = " describe "+
 	    "<http://vivoweb.org/ontology/core#Grant> " +

@@ -394,7 +394,7 @@ final public class VisualizationCaches {
                         protected ConceptLabelMap callWithService(RDFService rdfService) throws Exception {
                             VitroRequest vreq = rdfService.getVitroRequest();
                             String langCtx = "en-US";
-                            // UQAM Adjust to linguistic context
+                            // UQAM-Optimization Adjust to linguistic context
                             try {
                                 langCtx  = vreq.getLocale().getLanguage() + "-"+vreq.getLocale().getCountry();
                             } catch (Exception e) {
