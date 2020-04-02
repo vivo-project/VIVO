@@ -40,13 +40,12 @@ public class AddAttendeeRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
         //        "http://vivoweb.org/ontology/core#SeminarSeries", "Seminar Series",
         //        "http://vivoweb.org/ontology/core#WorkshopSeries", "Workshop Series"
         //        );
-
-        // UQAM Replacing the above hard coding assignment by a dynamic assignment that takes into account the linguistic context
+        // UQAM-Linguistic-Management Replacing the above hard coding assignment by a dynamic assignment that takes into account the linguistic context
         ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
         return filedOptions;
     }
     /*
-     * UQAM get attributes for this specific subject
+     * UQAM-Linguistic-Management get attributes for this specific subject
      */
     private static String DESCRIBE_QUERY = " describe "+
             "<http://purl.org/NET/c4dm/event.owl#Event> "+

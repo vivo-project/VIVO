@@ -164,7 +164,7 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         + "    OPTIONAL { ?link core:rank ?rank } \n"
         + "    OPTIONAL { ?link vitro:mostSpecificType ?type } \n"
         + "    OPTIONAL { ?type rdfs:label ?typeLabel . \n"
-     // UQAM Add linguistic control on label
+     // UQAM-Linguistic-Management Add linguistic control on label
         + "                FILTER (lang(?typeLabel) = 'LANGUAGE' ) } \n"
         + "} GROUP BY ?rank ?vcard ?link ?url ?typeLabel \n"
     	+ "  ORDER BY ?rank";
@@ -180,7 +180,7 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
             Model constructedModel = ModelFactory.createDefaultModel();
             rdfService.sparqlConstructQuery(constructStr, constructedModel);
             /*
-             * UQAM Adjust the getQuery signature for managing the linguistic context
+             * UQAM-Linguistic-Management Adjust the getQuery signature for managing the linguistic context
              */
             String queryStr = QueryUtils.subUriForQueryVar(this.getQuery(vreq), "subject", subjectUri);
             log.debug("Query string is: " + queryStr);
@@ -213,7 +213,7 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
 
     protected String getQuery(VitroRequest vreq) {
         /*
-         * UQAM Adjust the query to the liguistic context
+         * UQAM-Linguistic-Management Adjust the query to the liguistic context
          */
         Locale lang = SelectedLocale.getCurrentLocale(vreq);
     	return WEBPAGE_QUERY.replaceAll("LANGUAGE", lang.toString());

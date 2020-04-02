@@ -27,7 +27,7 @@ public class AddHeadOfRoleToPersonGenerator extends AddRoleToPersonTwoStageGener
 	/** Head Of role involves hard-coded options for the "right side" of the role or activity */
     @Override
     FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
-    	// UQAM Taking into account the linguistic context
+    	// UQAM-Linguistic-Management Taking into account the linguistic context
 		I18nBundle i18n = I18n.bundle(vreq);
 		String i18nSelectType = i18n.text("select_type");
 		String selectType = (i18nSelectType == null || i18nSelectType.isEmpty()) ? "Select type" : i18nSelectType ;

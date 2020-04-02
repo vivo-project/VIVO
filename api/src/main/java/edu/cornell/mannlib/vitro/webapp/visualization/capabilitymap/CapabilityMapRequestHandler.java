@@ -59,7 +59,7 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
  //   	VisualizationCaches.rebuildAll(rdfService);
  //   	VisualizationCaches.conceptToLabel.build(rdfService);
 //        ConceptLabelMap       conceptLabelMap = VisualizationCaches.conceptToLabel.getNoWait(rdfService);
-    	// UQAM Refresh all memory models with appropriate liguistic labels
+    	// UQAM-Bug-Correction Refresh all memory models with appropriate liguistic labels
         ConceptLabelMap       conceptLabelMap = VisualizationCaches.conceptToLabel.get(rdfService, true, true);
         ConceptPeopleMap      conceptPeopleMap = VisualizationCaches.conceptToPeopleMap.getNoWait(rdfService);
         OrganizationPeopleMap organizationPeopleMap = VisualizationCaches.organisationToPeopleMap.getNoWait(rdfService);

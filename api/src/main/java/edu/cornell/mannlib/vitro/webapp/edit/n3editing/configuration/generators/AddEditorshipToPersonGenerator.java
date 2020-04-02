@@ -108,7 +108,7 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
         conf.addField( new FieldVTwo().
                 setName("documentType").
                 setValidators( list("nonempty") ).
-                // UQAM vreq for linguistic context
+                // UQAM-Linguistic-Management vreq for linguistic context
                 setOptions( new ConstantFieldOptions("documentType", getDocumentTypeLiteralOptions(vreq) ))
                 );
 
@@ -205,7 +205,7 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
     }
 
     private List<List<String>> getDocumentTypeLiteralOptions(VitroRequest vreq) throws Exception {
-		//UQAM Replacing hard coding assigment by a dynamic assigment that takes into account the linguistic context
+		//UQAM-Linguistic-Management Replacing hard coding assigment by a dynamic assigment that takes into account the linguistic context
 		List<List<String>> value =  GeneratorUtil.builFieldOptionsList(vreq, DESCRIBE_QUERY);
 		return value;
 
@@ -225,7 +225,7 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
 //        return literalOptions;
     }
 	/*
-	 * UQAM get attributes for this specific subject
+	 * UQAM-Linguistic-Management get attributes for this specific subject
 	 */
 	private static String DESCRIBE_QUERY = " describe "+
 	        "<http://purl.org/ontology/bibo/Book> " +

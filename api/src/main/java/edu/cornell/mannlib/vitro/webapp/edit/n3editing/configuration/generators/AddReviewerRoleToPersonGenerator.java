@@ -28,7 +28,7 @@ public class AddReviewerRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
 		return "http://vivoweb.org/ontology/core#ReviewerRole";
 	}
 
-	// UQAM Added for buildConstantFieldOptions() call
+	// UQAM-Linguistic-Management Added for buildConstantFieldOptions() call
 	private static String DESCRIBE_QUERY = " describe "+
 			"<http://purl.org/ontology/bibo/AcademicArticle> " +
 			"<http://purl.org/ontology/bibo/Article> " +
@@ -105,7 +105,7 @@ public class AddReviewerRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
 	 */
 	@Override
 	FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
-		// UQAM Replacing the above hard coding assignment by a dynamic assignment that takes into account the linguistic context
+		// UQAM-Linguistic-Management Replacing the above hard coding assignment by a dynamic assignment that takes into account the linguistic context
 		ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
 		return filedOptions;
 
