@@ -9,6 +9,7 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
  
 # academic departments datagetter 
+
 # UQAM-Linguistic-Management Manage language, just extract appropriated to ?country
 
 <freemarker:lib-home-page.ftl> display:hasDataGetter display:academicDeptsDataGetter .
