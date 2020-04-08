@@ -1,4 +1,4 @@
-# $This file is distributed under the terms of the license in LICENSE$
+# $This file is distributed under the terms of the license in LICENSE$ 
 
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
@@ -7,8 +7,9 @@
 @prefix core: <http://vivoweb.org/ontology/core#> .
 @prefix vivoweb: <http://vivoweb.org/ontology#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-
-# academic departments datagetter
+ 
+# academic departments datagetter 
+# UQAM-Linguistic-Management Manage language, just extract appropriated to ?country
 
 <freemarker:lib-home-page.ftl> display:hasDataGetter display:academicDeptsDataGetter .
 
@@ -19,12 +20,12 @@ display:academicDeptsDataGetter
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX vivo: <http://vivoweb.org/ontology/core#>
 
-    SELECT DISTINCT ?theURI (str(?label) as ?name)
+    SELECT DISTINCT ?theURI (str(?label) as ?name) 
     WHERE
     {
           ?theURI a vivo:AcademicDepartment .
-          ?theURI rdfs:label ?label
+          ?theURI rdfs:label ?label .
+          FILTER (lang(?label) = '?country' ) .
     }
-
+    
     """ .
-
