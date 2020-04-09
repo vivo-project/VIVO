@@ -1400,7 +1400,7 @@ core:Authorship
   rdfs:label "Paternité"@fr-CA ;
 .
 core:Award
-  rdfs:label "Prix et Distinction"@fr-CA ;
+  rdfs:label "Prix et distinctions"@fr-CA ;
 .
 core:AwardReceipt
   rdfs:label "Prix ou distinction reçu"@fr-CA ;
