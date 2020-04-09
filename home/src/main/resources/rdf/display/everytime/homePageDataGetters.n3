@@ -10,6 +10,8 @@
 
 # academic departments datagetter
 
+# UQAM-Linguistic-Management Manage language, just extract appropriated to ?country
+
 <freemarker:lib-home-page.ftl> display:hasDataGetter display:academicDeptsDataGetter .
 
 display:academicDeptsDataGetter
@@ -23,7 +25,8 @@ display:academicDeptsDataGetter
     WHERE
     {
           ?theURI a vivo:AcademicDepartment .
-          ?theURI rdfs:label ?label
+          ?theURI rdfs:label ?label .
+          FILTER (lang(?label) = '?country' ) .
     }
 
     """ .
