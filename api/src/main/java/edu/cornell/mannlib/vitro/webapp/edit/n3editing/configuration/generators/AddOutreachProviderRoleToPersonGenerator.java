@@ -3,7 +3,6 @@
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ConstantFieldOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
 
 public class AddOutreachProviderRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
@@ -20,7 +19,7 @@ public class AddOutreachProviderRoleToPersonGenerator extends AddRoleToPersonTwo
 	String getRoleType() {
 		return "http://vivoweb.org/ontology/core#OutreachProviderRole";
 	}
-	private static String DESCRIBE_QUERY = " describe "+
+	private static String describeQuery = " describe "+
 			"<http://vivoweb.org/ontology/core#AcademicDepartment> " +
 			"<http://vivoweb.org/ontology/core#Association> " +
 			"<http://vivoweb.org/ontology/core#Center> " +
@@ -69,14 +68,13 @@ public class AddOutreachProviderRoleToPersonGenerator extends AddRoleToPersonTwo
 			"<http://purl.obolibrary.org/obo/ERO_0000565> " +
 			"<http://vivoweb.org/ontology/core#University> " +
 			"<http://purl.org/ontology/bibo/Workshop> " +
-			"<http://vivoweb.org/ontology/core#WorkshopSeries";
+			"<http://vivoweb.org/ontology/core#WorkshopSeries>";
 
 
 	//Outreach Provider role involves hard-coded options for the "right side" of the role or activity
 	@Override
 	FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
-		ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
-		return filedOptions;
+		return GeneratorUtil.buildConstantFieldOptions(vreq, describeQuery);
 
 		//                    return new ConstantFieldOptions(
 		//            "","Select type",
