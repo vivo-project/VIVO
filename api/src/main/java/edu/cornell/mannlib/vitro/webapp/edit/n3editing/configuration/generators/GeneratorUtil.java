@@ -34,16 +34,16 @@ public class GeneratorUtil {
 	/*
 	 * UQAM-Linguistic-Management Help to generate the labels of scrollDowm list in proper language
 	 */
-	static public ConstantFieldOptions buildConstantFieldOptions(VitroRequest vreq, String DESCRIBE_QUERY) throws Exception {
+	static public ConstantFieldOptions buildConstantFieldOptions(VitroRequest vreq, String describeQuery) throws Exception {
 
-		List<List<String>> options = builFieldOptionsList(vreq, DESCRIBE_QUERY);
+		List<List<String>> options = builFieldOptionsList(vreq, describeQuery);
 		ConstantFieldOptions filedOptions = new  ConstantFieldOptions("" , options);
 		return filedOptions;
 	}
 	/*
 	 * UQAM-Linguistic-Management Help to generate the labels of scrollDowm list in proper language
 	 */
-	static public List<List<String>> builFieldOptionsList(VitroRequest vreq, String DESCRIBE_QUERY) throws Exception {
+	static public List<List<String>> builFieldOptionsList(VitroRequest vreq, String describeQuery) throws Exception {
 
 		I18nBundle i18n = I18n.bundle(vreq);
 		String i18nSelectType = i18n.text("select_type");
@@ -57,7 +57,7 @@ public class GeneratorUtil {
 		RDFService rdfService = vreq.getRDFService();
 
 		Model constructedModel = RDFServiceUtils.parseModel(
-				rdfService.sparqlDescribeQuery(DESCRIBE_QUERY, RDFService.ModelSerializationFormat.N3),
+				rdfService.sparqlDescribeQuery(describeQuery, RDFService.ModelSerializationFormat.N3),
 				RDFService.ModelSerializationFormat.N3);
 
 		Query query = QueryFactory.create(GET_LABEL_QUERY.replaceAll("LANGUAGE", lang.toString())) ;

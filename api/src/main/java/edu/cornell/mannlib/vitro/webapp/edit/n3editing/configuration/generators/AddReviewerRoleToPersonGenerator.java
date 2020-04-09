@@ -97,7 +97,7 @@ public class AddReviewerRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
 			"<http://vivoweb.org/ontology/core#Video> " +
 			"<http://purl.org/ontology/bibo/Webpage> " +
 			"<http://purl.org/ontology/bibo/Website> " +
-			"<http://vivoweb.org/ontology/core#WorkingPaper";
+			"<http://vivoweb.org/ontology/core#WorkingPaper>";
 
 	/**
 	 *  Each subclass generator will return its own type of option here:
@@ -106,8 +106,7 @@ public class AddReviewerRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
 	@Override
 	FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
 		// UQAM-Linguistic-Management Replacing the above hard coding assignment by a dynamic assignment that takes into account the linguistic context
-		ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
-		return filedOptions;
+		return GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
 
 		//    	return new ConstantFieldOptions(
 		//		        "",  "Select type",
