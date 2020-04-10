@@ -1688,7 +1688,7 @@ core:PostdocPosition
   rdfs:label "Poste postdoctoral"@fr-CA ;
 .
 core:PostdoctoralTraining
-  rdfs:label "Formation postedoctorale"@fr-CA ;
+  rdfs:label "Formation postdoctorale"@fr-CA ;
 .
 core:Presentation
   rdfs:label "Présentation"@fr-CA ;
