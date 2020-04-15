@@ -206,7 +206,7 @@
 <http://vivoweb.org/ontology/core#Campus> <http://www.w3.org/2000/01/rdf-schema#label> "Campus"@de-DE .
 <http://vivoweb.org/ontology/core#Center> <http://www.w3.org/2000/01/rdf-schema#label> "Zentrum"@de-DE .
 <http://vivoweb.org/ontology/core#Abstract> <http://www.w3.org/2000/01/rdf-schema#label> "Abstract"@de-DE .
-<http://vivoweb.org/ontology/core#affiliatedOrganization> <http://www.w3.org/2000/01/rdf-schema#label> "Mitgliedsorganisation"@de-DE .
+<http://vivoweb.org/ontology/core#affiliatedOrganization> <http://www.w3.org/2000/01/rdf-schema#label> "zugehörige Organisation"@de-DE .
 <http://purl.org/ontology/bibo/distributor> <http://www.w3.org/2000/01/rdf-schema#label> "DistributorIn"@de-DE .
 <http://vivoweb.org/ontology/core#SubnationalRegion> <http://www.w3.org/2000/01/rdf-schema#label> "Innerstaatliche Gebietskörperschaft"@de-DE .
 <http://vivoweb.org/ontology/core#Association> <http://www.w3.org/2000/01/rdf-schema#label> "Gesellschaft"@de-DE .
@@ -251,7 +251,7 @@
 <http://vivoweb.org/ontology/core#Course> <http://www.w3.org/2000/01/rdf-schema#label> "Lehrveranstaltung"@de-DE .
 <http://purl.org/ontology/bibo/CollectedDocument> <http://www.w3.org/2000/01/rdf-schema#label> "Erfasstes Dokument"@de-DE .
 <http://vivoweb.org/ontology/core#Newsletter> <http://www.w3.org/2000/01/rdf-schema#label> "Newsletter"@de-DE .
-<http://vivoweb.org/ontology/core#AdviseeRole> <http://www.w3.org/2000/01/rdf-schema#label> "Rolle als BetreuerIn"@de-DE .
+<http://vivoweb.org/ontology/core#AdviseeRole> <http://www.w3.org/2000/01/rdf-schema#label> "Rolle als betreute Person"@de-DE .
 <http://vivoweb.org/ontology/core#proceedingsOf> <http://www.w3.org/2000/01/rdf-schema#label> "Tagungsband von"@de-DE .
 <http://vivoweb.org/ontology/core#researchOverview> <http://www.w3.org/2000/01/rdf-schema#label> "Übersicht zur Forschung"@de-DE .
 <http://vivoweb.org/ontology/core#supplementalInformation> <http://www.w3.org/2000/01/rdf-schema#label> "Ergänzende Informationen"@de-DE .
