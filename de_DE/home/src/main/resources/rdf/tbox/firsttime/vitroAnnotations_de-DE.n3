@@ -179,7 +179,7 @@ vivo:isCorrespondingAuthor
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
               "Indicates whether the author handles correspondence about the work and is in effect the guarantor of the published work.  The response is either 'true' or 'false' (without the quotes)."@en-US ,
-	          "Gibt an, ob der Autor die Korrespondenz über das Werk führt und tatsächlich für das veröffentlichte Werk verantwortlich ist.  Die Antwort ist entweder "wahr" oder "falsch" (ohne die Anführungszeichen)."@de-DE .		
+	          "Gibt an, ob der Autor die Korrespondenz über das Werk führt und tatsächlich für das veröffentlichte Werk verantwortlich ist.  Die Antwort ist entweder \"wahr\" oder \"falsch\" (ohne die Anführungszeichen)."@de-DE .		
 
 vivo:SeminarSeries
       vitro:displayLimitAnnot
@@ -549,7 +549,7 @@ owl:sameAs
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
               "This is the OWL property to link two indivdiuals with the same 'identity'. see http://www.w3.org/TR/owl-ref/#sameAs-def"@en-US ,
-              "Dies ist die OWL-Beziehung, um zwei Individuen mit der gleichen "Identität" zu verbinden. siehe http://www.w3.org/TR/owl-ref/#sameAs-def"@de-DE ;		  
+              "Dies ist die OWL-Beziehung, um zwei Individuen mit der gleichen \"Identität\" zu verbinden. siehe http://www.w3.org/TR/owl-ref/#sameAs-def"@de-DE ;		  
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean ;
       vitro:stubObjectPropertyAnnot
@@ -5066,7 +5066,7 @@ bibo:court
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
               "Relates a legal document with an organization.  Bibo definition is: \"A court associated with a legal document; for example, that which issues a decision.\""@en-US ,
-	          "Verknüpft ein juristisches Dokument mit einer Organisation.  Bibo-Definition ist: "\Ein Gericht, das mit einem juristischen Dokument verbunden ist, zum Beispiel dem, das eine Entscheidung trifft.\""@de-DE ;		  
+	          "Verknüpft ein juristisches Dokument mit einer Organisation.  Bibo-Definition ist: \"Ein Gericht, das mit einem juristischen Dokument verbunden ist, zum Beispiel dem, das eine Entscheidung trifft.\""@de-DE ;		  
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean .
 
@@ -7400,7 +7400,6 @@ vivo:hasProceedings
       vitro:publicDescriptionAnnot
               "This relates a conference proceeding to the conference that produced the proceeding."@en-US ,
 			  "Verbindet einen Tagungsband mit der Konferenz."@de-DE ;
-      vitro:selectFromExistingAnnot
       vitro:selectFromExistingAnnot
               "true"^^xsd:boolean .
 
