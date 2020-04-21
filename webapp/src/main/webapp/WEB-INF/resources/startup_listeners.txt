@@ -21,6 +21,9 @@ edu.cornell.mannlib.vitro.webapp.config.RevisionInfoSetup
 
 edu.cornell.mannlib.vitro.webapp.email.FreemarkerEmailFactory$Setup
 
+# For multiple language support
+edu.cornell.mannlib.vitro.webapp.i18n.selection.LocaleSelectionSetup
+
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ConfigurationModelsSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ContentModelSetup
 
@@ -66,9 +69,6 @@ org.vivoweb.webapp.startup.TemplateModelSetup
 org.vivoweb.webapp.startup.SearchResultTemplateModelSetup
 
 edu.ucsf.vitro.opensocial.OpenSocialSmokeTests
-
-# For multiple language support
-edu.cornell.mannlib.vitro.webapp.i18n.selection.LocaleSelectionSetup
 
 # The search indexer uses a "public" permission, so the PropertyRestrictionPolicyHelper
 #   and the PermissionRegistry must already be set up.
