@@ -1,68 +1,19 @@
-# $This file is distributed under the terms of the license in LICENSE$
+# baseURI: http://vitro.mannlib.cornell.edu/ontologies/vivoOrganizationDataGetters
 
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <http://vitro.mannlib.cornell.edu/ontologies/vivoOrganizationDataGetters#> .
+@prefix core: <http://vivoweb.org/ontology/core#> .
+@prefix datagetter: <http://vitro.mannlib.cornell.edu/ns/default/datagetter#> .
 @prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix page: <http://vitro.mannlib.cornell.edu/ns/default/page#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix core: <http://vivoweb.org/ontology/core#> .
 @prefix vivoweb: <http://vivoweb.org/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-
-#### n3 for research areas ####
-
-## associate the classes with the datagetter ##
-
-<http://vivoweb.org/ontology/core#Department> display:hasDataGetter display:getResearchAreaDataGetter .
-<http://vivoweb.org/ontology/core#Center> display:hasDataGetter display:getResearchAreaDataGetter .
-<http://vivoweb.org/ontology/core#ClinicalOrganization> display:hasDataGetter display:getResearchAreaDataGetter .
-<http://vivoweb.org/ontology/core#Institute> display:hasDataGetter display:getResearchAreaDataGetter .
-<http://vivoweb.org/ontology/core#Laboratory> display:hasDataGetter display:getResearchAreaDataGetter .
-<http://vivoweb.org/ontology/core#Library> display:hasDataGetter display:getResearchAreaDataGetter .
-<http://vivoweb.org/ontology/core#ResearchOrganization> display:hasDataGetter display:getResearchAreaDataGetter .
-
-
-## define the datagetter ##
-
-display:getResearchAreaDataGetter
-    a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter>;
-    display:saveToVar "researchAreaResults";
-    display:query
-        """
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX vivo: <http://vivoweb.org/ontology/core#>
-        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-        SELECT DISTINCT (str(?researchAreaLabel) AS ?raLabel) ?ra
-        WHERE {
-            ?individualURI vivo:relatedBy ?posn .
-            ?posn a vivo:Position .
-            ?posn  vivo:relates ?person .
-            ?person a foaf:Person .
-            ?person vivo:hasResearchArea ?ra .
-            ?ra rdfs:label ?researchAreaLabel
-            OPTIONAL { ?posn vivo:dateTimeInterval ?dti
-                     OPTIONAL { ?dti vivo:end ?end .
-                                ?end vivo:dateTime ?endDate
-                     }
-            }
-            FILTER ( !bound(?endDate) ||
-                      substr(str(?endDate), 1, 4) >= substr(str(now()), 1, 4) )
-        }
-        ORDER BY ?raLabel
-        """ .
-
-## detail page for non-academic department research areas ##
-
-<http://vitro.mannlib.cornell.edu/ns/default/page#AffiliatedResearchAreas>
-    a    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Page> ;
-    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#hasDataGetter> <http://vitro.mannlib.cornell.edu/ns/default/datagetter#AffiliatedResearchAreasDG> ;
-    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#requiresBodyTemplate>  "individual-affiliated-res-area-details.ftl" ;
-    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Affiliated Research Areas" ;
-    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#urlMapping> "/affiliatedResearchAreas" .
-
-<http://vitro.mannlib.cornell.edu/ns/default/datagetter#AffiliatedResearchAreasDG>
-    a   <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> ;
-    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#query>
-        """
+datagetter:AffiliatedResearchAreasDG
+  a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> ;
+  display:query """
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX vivo: <http://vivoweb.org/ontology/core#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
@@ -86,94 +37,11 @@ display:getResearchAreaDataGetter
         }
         ORDER BY ?personLabel
         """ ;
-    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#saveToVar> "affiliatedResearchAreas" .
-
-## detail page for academic department research areas ##
-
-<http://vitro.mannlib.cornell.edu/ns/default/page#DepartmentalResearchAreas>
-    a   <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Page> ;
-    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#hasDataGetter> <http://vitro.mannlib.cornell.edu/ns/default/datagetter#DepartmentalResearchAreasDG> ;
-    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#requiresBodyTemplate> "individual-dept-res-area-details.ftl" ;
-    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Departmental Research Areas" ;
-    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#urlMapping> "/deptResearchAreas" .
-
-<http://vitro.mannlib.cornell.edu/ns/default/datagetter#DepartmentalResearchAreasDG>
-    a   <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> ;
-    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#query>
-        """
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX vivo: <http://vivoweb.org/ontology/core#>
-        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-        SELECT DISTINCT (str (?prsnLabel) AS ?personLabel)
-                        ?person
-                        (Str(?researchAreaLabel) AS ?raLabel)
-                        (str(?organizationLabel) AS ?orgLabel)
-                        ?ra
-        WHERE {
-            ?orgURI vivo:relatedBy ?posn .
-            ?posn a vivo:Position .
-            ?orgURI rdfs:label ?organizationLabel .
-            ?posn  vivo:relates ?person .
-            ?person a foaf:Person .
-            ?person rdfs:label ?prsnLabel .
-            ?person vivo:hasResearchArea ?raURI .
-            ?raURI rdfs:label ?researchAreaLabel
-            BIND(?raURI AS ?ra)
-
-        }
-        ORDER BY ?personLabel
-        """ ;
-          <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#saveToVar>
-                  "deptResearchAreas" .
-
-
-#### n3 for grants ####
-
-## associate the classes with the datagetter ##
-
-<http://vivoweb.org/ontology/core#AcademicDepartment> display:hasDataGetter display:getGrantsDataGetter .
-
-## data getter to see if the department has any grants ##
-
-display:getGrantsDataGetter
-    a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter>;
-    display:saveToVar "getGrantResults";
-    display:query
-        """
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX vivo: <http://vivoweb.org/ontology/core#>
-        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-        SELECT DISTINCT ?grant
-        WHERE {
-            ?individualURI vivo:relatedBy ?posn .
-            ?posn a vivo:Position .
-            ?posn  vivo:relates ?person .
-            ?person a foaf:Person .
-            ?person <http://purl.obolibrary.org/obo/RO_0000053> ?role .
-            ?role a vivo:ResearcherRole .
-            ?role vivo:relatedBy ?grant .
-            ?grant a vivo:Grant .
-            ?grant vivo:dateTimeInterval ?dti .
-            ?dti vivo:end ?end.
-            ?end vivo:dateTime ?dt
-            FILTER (?dt > now())
-        }
-        LIMIT 1
-        """ .
-
-## data getter for the grants detail page ##
-
-<http://vitro.mannlib.cornell.edu/ns/default/page#DepartmentalGrants>
-    a <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Page> ;
-    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#hasDataGetter> <http://vitro.mannlib.cornell.edu/ns/default/datagetter#DepartmentalGrantsDG> ;
-    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#requiresBodyTemplate> "individual-dept-active-grants.ftl" ;
-    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Departmental Grants" ;
-    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#urlMapping> "/deptGrants" .
-
-<http://vitro.mannlib.cornell.edu/ns/default/datagetter#DepartmentalGrantsDG>
-    a   <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> ;
-    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#query>
-        """
+  display:saveToVar "affiliatedResearchAreas" ;
+.
+datagetter:DepartmentalGrantsDG
+  a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> ;
+  display:query """
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX vivo: <http://vivoweb.org/ontology/core#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
@@ -196,5 +64,128 @@ display:getGrantsDataGetter
         }
         ORDER BY ?gLabel
         """ ;
-    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#saveToVar> "deptGrants" .
+  display:saveToVar "deptGrants" ;
+.
+datagetter:DepartmentalResearchAreasDG
+  a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> ;
+  display:query """
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX vivo: <http://vivoweb.org/ontology/core#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        SELECT DISTINCT (str (?prsnLabel) AS ?personLabel)
+                        ?person
+                        (Str(?researchAreaLabel) AS ?raLabel)
+                        (str(?organizationLabel) AS ?orgLabel)
+                        ?ra
+        WHERE {
+            ?orgURI vivo:relatedBy ?posn .
+            ?posn a vivo:Position .
+            ?orgURI rdfs:label ?organizationLabel .
+            ?posn  vivo:relates ?person .
+            ?person a foaf:Person .
+            ?person rdfs:label ?prsnLabel .
+            ?person vivo:hasResearchArea ?raURI .
+            ?raURI rdfs:label ?researchAreaLabel
+            BIND(?raURI AS ?ra)
 
+        }
+        ORDER BY ?personLabel
+        """ ;
+  display:saveToVar "deptResearchAreas" ;
+.
+page:AffiliatedResearchAreas
+  a display:Page ;
+  display:hasDataGetter datagetter:AffiliatedResearchAreasDG ;
+  display:requiresBodyTemplate "individual-affiliated-res-area-details.ftl" ;
+  display:title "Affiliated Research Areas" ;
+  display:urlMapping "/affiliatedResearchAreas" ;
+.
+page:DepartmentalGrants
+  a display:Page ;
+  display:hasDataGetter datagetter:DepartmentalGrantsDG ;
+  display:requiresBodyTemplate "individual-dept-active-grants.ftl" ;
+  display:title "Departmental Grants" ;
+  display:urlMapping "/deptGrants" ;
+.
+page:DepartmentalResearchAreas
+  a display:Page ;
+  display:hasDataGetter datagetter:DepartmentalResearchAreasDG ;
+  display:requiresBodyTemplate "individual-dept-res-area-details.ftl" ;
+  display:title "Departmental Research Areas" ;
+  display:urlMapping "/deptResearchAreas" ;
+.
+display:getGrantsDataGetter
+  a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> ;
+  display:query """
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX vivo: <http://vivoweb.org/ontology/core#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        SELECT DISTINCT ?grant
+        WHERE {
+            ?individualURI vivo:relatedBy ?posn .
+            ?posn a vivo:Position .
+            ?posn  vivo:relates ?person .
+            ?person a foaf:Person .
+            ?person <http://purl.obolibrary.org/obo/RO_0000053> ?role .
+            ?role a vivo:ResearcherRole .
+            ?role vivo:relatedBy ?grant .
+            ?grant a vivo:Grant .
+            ?grant vivo:dateTimeInterval ?dti .
+            ?dti vivo:end ?end.
+            ?end vivo:dateTime ?dt
+            FILTER (?dt > now())
+        }
+        LIMIT 1
+        """ ;
+  display:saveToVar "getGrantResults" ;
+.
+display:getResearchAreaDataGetter
+  a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> ;
+  display:query """
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX vivo: <http://vivoweb.org/ontology/core#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        SELECT DISTINCT (str(?researchAreaLabel) AS ?raLabel) ?ra
+        WHERE {
+            ?individualURI vivo:relatedBy ?posn .
+            ?posn a vivo:Position .
+            ?posn  vivo:relates ?person .
+            ?person a foaf:Person .
+            ?person vivo:hasResearchArea ?ra .
+            ?ra rdfs:label ?researchAreaLabel
+            OPTIONAL { ?posn vivo:dateTimeInterval ?dti
+                     OPTIONAL { ?dti vivo:end ?end .
+                                ?end vivo:dateTime ?endDate
+                     }
+            }
+            FILTER ( !bound(?endDate) ||
+                      substr(str(?endDate), 1, 4) >= substr(str(now()), 1, 4) )
+        }
+        ORDER BY ?raLabel
+        """ ;
+  display:saveToVar "researchAreaResults" ;
+.
+core:AcademicDepartment
+  display:hasDataGetter display:getGrantsDataGetter ;
+.
+core:Center
+  display:hasDataGetter display:getResearchAreaDataGetter ;
+.
+core:ClinicalOrganization
+  display:hasDataGetter display:getResearchAreaDataGetter ;
+.
+core:Department
+  display:hasDataGetter display:getResearchAreaDataGetter ;
+.
+core:Institute
+  display:hasDataGetter display:getResearchAreaDataGetter ;
+.
+core:Laboratory
+  display:hasDataGetter display:getResearchAreaDataGetter ;
+.
+core:Library
+  display:hasDataGetter display:getResearchAreaDataGetter ;
+.
+core:ResearchOrganization
+  display:hasDataGetter display:getResearchAreaDataGetter ;
+.

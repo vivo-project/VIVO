@@ -1,0 +1,75 @@
+# baseURI: http://purl.obolibrary.org/obo/arg/role
+
+@prefix : <http://purl.obolibrary.org/obo/arg/role#> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://aims.fao.org/aos/geopolitical.owl>
+  a owl:Ontology ;
+.
+obo:
+  a owl:Ontology ;
+.
+<http://purl.obolibrary.org/obo/arg/role.owl>
+  rdfs:label "toto" ;
+.
+<http://purl.obolibrary.org/obo/ro.owl>
+  a owl:Ontology ;
+.
+<http://purl.org/NET/c4dm/event.owl>
+  a owl:Ontology ;
+.
+<http://purl.org/dc/terms/>
+  a owl:Ontology ;
+.
+<http://purl.org/net/OCRe/research.owl>
+  a owl:Ontology ;
+.
+<http://purl.org/net/OCRe/statistics.owl>
+  a owl:Ontology ;
+.
+<http://purl.org/net/OCRe/study_design.owl>
+  a owl:Ontology ;
+.
+<http://purl.org/net/OCRe/study_protocol.owl>
+  a owl:Ontology ;
+.
+<http://purl.org/ontology/bibo/>
+  a owl:Ontology ;
+.
+<http://purl.org/spar/c4o/>
+  a owl:Ontology ;
+.
+<http://purl.org/spar/cito/>
+  a owl:Ontology ;
+.
+<http://purl.org/spar/fabio/>
+  a owl:Ontology ;
+.
+<http://purl.org/vocab/vann/>
+  a owl:Ontology ;
+.
+<http://vitro.mannlib.cornell.edu/ns/vitro/public>
+  a owl:Ontology ;
+.
+<http://vivoweb.org/ontology/core>
+  a owl:Ontology ;
+.
+<http://vivoweb.org/ontology/scientific-research>
+  a owl:Ontology ;
+.
+<http://www.ebi.ac.uk/efo/swo/>
+  a owl:Ontology ;
+.
+<http://www.w3.org/2004/02/skos/core>
+  a owl:Ontology ;
+.
+<http://www.w3.org/2006/vcard/ns>
+  a owl:Ontology ;
+.
+<http://xmlns.com/foaf/0.1/>
+  a owl:Ontology ;
+.

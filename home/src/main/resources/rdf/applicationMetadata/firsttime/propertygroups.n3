@@ -1,0 +1,141 @@
+# baseURI: http://vivoweb.org/ontology/propertygroups
+
+@prefix : <http://vivoweb.org/ontology/propertygroups#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix j.0: <http://aims.fao.org/aos/geopolitical.owl#> .
+@prefix j.1: <http://www.w3.org/2006/12/owl2-xml#> .
+@prefix j.2: <http://vivoweb.org/ontology/core#> .
+@prefix j.3: <http://purl.org/vocab/vann/> .
+@prefix j.4: <http://www.w3.org/2008/05/skos#> .
+@prefix j.5: <http://purl.org/ontology/bibo/> .
+@prefix j.6: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://vivoweb.org/ontology#vitroPropertyGroupaddress>
+  a vitro:PropertyGroup ;
+  a owl:Thing ;
+  vitro:displayRank "120"^^xsd:int ;
+  vitro:modTime "2009-12-28T09:15:07"^^xsd:dateTime ;
+  vitro:publicDescriptionAnnot "properties related to postal and email addresses" ;
+  rdfs:label "contact"@en-US ;
+.
+<http://vivoweb.org/ontology#vitroPropertyGroupaffiliation>
+  a vitro:PropertyGroup ;
+  a owl:Thing ;
+  vitro:displayRank "30"^^xsd:int ;
+  vitro:modTime "2009-12-28T09:47:01"^^xsd:dateTime ;
+  vitro:publicDescriptionAnnot "Affiliations and other informal associations between people and organizations" ;
+  rdfs:label "affiliation"@en-US ;
+.
+<http://vivoweb.org/ontology#vitroPropertyGroupbibliographic>
+  a vitro:PropertyGroup ;
+  a owl:Thing ;
+  vitro:displayRank "40"^^xsd:int ;
+  vitro:modTime "2009-12-28T09:12:36"^^xsd:dateTime ;
+  vitro:publicDescriptionAnnot "primary bibliographic properties of publications to prioritize in display" ;
+  rdfs:label "publications"@en-US ;
+.
+<http://vivoweb.org/ontology#vitroPropertyGroupbibliographiconline>
+  a vitro:PropertyGroup ;
+  a owl:Thing ;
+  vitro:displayRank "190"^^xsd:int ;
+  vitro:modTime "2010-01-10T16:50:29"^^xsd:dateTime ;
+  vitro:publicDescriptionAnnot "reference information to online content, translations, etc." ;
+  rdfs:label "related documents"@en-US ;
+.
+<http://vivoweb.org/ontology#vitroPropertyGroupbibmapping>
+  a vitro:PropertyGroup ;
+  a owl:Thing ;
+  vitro:displayRank "2033"^^xsd:int ;
+  vitro:modTime "2010-01-10T21:12:31"^^xsd:dateTime ;
+  vitro:publicDescriptionAnnot "Bibliographic properties in other namespaces mapped within VIVO core" ;
+  rdfs:label "bib mapping"@en-US ;
+.
+<http://vivoweb.org/ontology#vitroPropertyGroupbibobscure>
+  a vitro:PropertyGroup ;
+  a owl:Thing ;
+  vitro:displayRank "2032"^^xsd:int ;
+  vitro:modTime "2010-01-10T16:55:11"^^xsd:dateTime ;
+  vitro:publicDescriptionAnnot "obscure bibontology properties not likely to be used in VIVO" ;
+  rdfs:label "additional document info"@en-US ;
+.
+<http://vivoweb.org/ontology#vitroPropertyGroupbiography>
+  a vitro:PropertyGroup ;
+  a owl:Thing ;
+  vitro:displayRank "80"^^xsd:int ;
+  vitro:modTime "2010-01-10T12:36:28"^^xsd:dateTime ;
+  vitro:publicDescriptionAnnot "biographical information about a person, past or present" ;
+  rdfs:label "background"@en-US ;
+.
+<http://vivoweb.org/ontology#vitroPropertyGroupidentifiers>
+  a vitro:PropertyGroup ;
+  a owl:Thing ;
+  vitro:displayRank "200"^^xsd:int ;
+  vitro:modTime "2009-12-28T09:16:01"^^xsd:dateTime ;
+  vitro:publicDescriptionAnnot "properties holding unique and non-unique identifiers, names, and other identification information" ;
+  rdfs:label "identity"@en-US ;
+.
+<http://vivoweb.org/ontology#vitroPropertyGrouplinks>
+  a vitro:PropertyGroup ;
+  a owl:Thing ;
+  vitro:displayRank "99"^^xsd:int ;
+  vitro:modTime "2009-12-28T14:00:43"^^xsd:dateTime ;
+  vitro:publicDescriptionAnnot "link relationships" ;
+  rdfs:label "links"@en-US ;
+.
+<http://vivoweb.org/ontology#vitroPropertyGrouplocation>
+  a vitro:PropertyGroup ;
+  a owl:Thing ;
+  vitro:displayRank "96"^^xsd:int ;
+  vitro:modTime "2009-12-28T13:05:00"^^xsd:dateTime ;
+  vitro:publicDescriptionAnnot "Relationships of place" ;
+  rdfs:label "location"@en-US ;
+.
+<http://vivoweb.org/ontology#vitroPropertyGroupmapping>
+  a vitro:PropertyGroup ;
+  a owl:Thing ;
+  vitro:displayRank "2034"^^xsd:int ;
+  vitro:modTime "2010-01-10T21:31:36"^^xsd:dateTime ;
+  vitro:publicDescriptionAnnot "Properties included in VIVO core to support mappings to other ontologies" ;
+  rdfs:label "mapping"@en-US ;
+.
+<http://vivoweb.org/ontology#vitroPropertyGroupoutreach>
+  a vitro:PropertyGroup ;
+  a owl:Thing ;
+  vitro:displayRank "70"^^xsd:int ;
+  vitro:modTime "2010-01-10T15:38:51"^^xsd:dateTime ;
+  rdfs:label "service"@en-US ;
+.
+<http://vivoweb.org/ontology#vitroPropertyGroupoverview>
+  a vitro:PropertyGroup ;
+  a owl:Thing ;
+  vitro:displayRank "10"^^xsd:int ;
+  vitro:modTime "2010-01-12T07:11:40"^^xsd:dateTime ;
+  rdfs:label "overview"@en-US ;
+.
+<http://vivoweb.org/ontology#vitroPropertyGroupresearch>
+  a vitro:PropertyGroup ;
+  a owl:Thing ;
+  vitro:displayRank "50"^^xsd:int ;
+  vitro:modTime "2010-01-10T15:30:25"^^xsd:dateTime ;
+  rdfs:label "research"@en-US ;
+.
+<http://vivoweb.org/ontology#vitroPropertyGroupteaching>
+  a vitro:PropertyGroup ;
+  a owl:Thing ;
+  vitro:displayRank "60"^^xsd:int ;
+  vitro:modTime "2010-01-10T15:37:48"^^xsd:dateTime ;
+  rdfs:label "teaching"@en-US ;
+.
+<http://vivoweb.org/ontology#vitroPropertyGrouptime>
+  a vitro:PropertyGroup ;
+  a owl:Thing ;
+  vitro:displayRank "195"^^xsd:int ;
+  vitro:modTime "2009-12-28T13:54:45"^^xsd:dateTime ;
+  vitro:publicDescriptionAnnot "Dates and times for events, employment, etc." ;
+  rdfs:label "time"@en-US ;
+.
