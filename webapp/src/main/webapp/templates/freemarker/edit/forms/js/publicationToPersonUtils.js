@@ -146,9 +146,10 @@ var publicationToPersonUtils = {
         // hide everything, then show what's needed based on type
         // simpler in the event the user changes the type
         this.hideAllFields();
-        var selectedType = this.typeSelector.find(':selected').text();
+        var selectedType = this.typeSelector.find(':selected').val();
+		alert(selectedType);
 
-        if ( selectedType == 'Academic Article' ) {
+        if ( selectedType == 'http://purl.org/ontology/bibo/AcademicArticle' ) {
             // if the user has changed type, keep any relevant values and display the
             // acSelection as appropriate
             var ckForVal = this.getAcUriReceiverVal('collection');
@@ -189,7 +190,7 @@ var publicationToPersonUtils = {
             this.number.val('');
             this.chapterNbr.val('');
         }
-        else if ( selectedType == 'Chapter' ) {
+        else if ( selectedType == 'http://purl.org/ontology/bibo/Chapter' ) {
             // if the user has changed type, keep any relevant values and display the
             // acSelection as appropriate
             var ckForVal = this.getAcUriReceiverVal('book');
@@ -233,7 +234,7 @@ var publicationToPersonUtils = {
             this.startPage.val('');
             this.endPage.val('');
         }
-        else if ( selectedType == 'Book' || selectedType == 'Edited Book' ) {
+        else if ( selectedType == 'http://purl.org/ontology/bibo/Book' || selectedType == 'http://purl.org/ontology/bibo/EditedBook' ) {
             // if the user has changed type, keep any relevant values and display the
             // acSelection as appropriate
             var ckForVal = this.getAcUriReceiverVal('editor');
@@ -270,7 +271,7 @@ var publicationToPersonUtils = {
             this.endPage.val('');
             this.chapterNbr.val('');
         }
-        else if ( selectedType == 'Conference Paper' ) {
+        else if ( selectedType == 'http://vivoweb.org/ontology/core#ConferencePaper' ) {
             // if the user has changed type, keep any relevant values and display the
             // acSelection as appropriate
             ckForVal = this.getAcUriReceiverVal('conference');
@@ -310,7 +311,7 @@ var publicationToPersonUtils = {
             this.endPage.val('');
             this.chapterNbr.val('');
         }
-        else if ( selectedType == 'Conference Poster' || selectedType == 'Speech') {
+        else if ( selectedType == 'http://vivoweb.org/ontology/core#ConferencePoster' || selectedType == 'http://vivoweb.org/ontology/core#Speech') {
             // if the user has changed type, keep any relevant values and display the
             // acSelection as appropriate
             var ckForVal = this.getAcUriReceiverVal('conference');
