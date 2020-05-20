@@ -147,7 +147,6 @@ var publicationToPersonUtils = {
         // simpler in the event the user changes the type
         this.hideAllFields();
         var selectedType = this.typeSelector.find(':selected').val();
-		alert(selectedType);
 
         if ( selectedType == 'http://purl.org/ontology/bibo/AcademicArticle' ) {
             // if the user has changed type, keep any relevant values and display the
