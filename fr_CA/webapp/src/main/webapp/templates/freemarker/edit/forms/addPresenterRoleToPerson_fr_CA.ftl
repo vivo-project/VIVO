@@ -117,7 +117,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
     <div class="acSelection" acGroupName="presentation">
         <p class="inline">
-            <label>${i18n().selected_presentation}:</label>
+            <label>${i18n().selected}:</label>
             <span class="acSelectionInfo"></span>
             <a href="" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
             <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
