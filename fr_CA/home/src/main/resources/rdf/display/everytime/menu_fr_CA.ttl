@@ -64,6 +64,6 @@ vivo-display:capabilityMapDataGetter
 .
 <http://vivoweb.org/ontology/menu_fr_CA>
   a owl:Ontology ;
-  owl:versionInfo "Adapted by Michel Héon, 2020, for Université de Québec à Montréal, http://uqam.ca" ;
-  owl:versionInfo "Translated by Pierre Roberge, 2020,  for Université de Québec à Montréal, http://uqam.ca" ;
+  owl:versionInfo "Adapted by Michel Héon, 2020, for Université du Québec à Montréal, http://uqam.ca" ;
+  owl:versionInfo "Translated by Pierre Roberge, 2020,  for Université du Québec à Montréal, http://uqam.ca" ;
 .

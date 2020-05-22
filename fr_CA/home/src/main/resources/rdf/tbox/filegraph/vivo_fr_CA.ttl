@@ -95,7 +95,7 @@ geo:countryAreaNotes
   rdfs:label "note de pays et régions"@fr-CA ;
 .
 geo:countryAreaTotal
-  rdfs:label "total pays "@fr-CA ;
+  rdfs:label "total pays"@fr-CA ;
 .
 geo:countryAreaUnit
   rdfs:label "Unité de pays"@fr-CA ;
@@ -293,7 +293,7 @@ geo:non_self_governing
   rdfs:label "Non autonome"@fr-CA ;
 .
 geo:organization
-  rdfs:label "Organiaation"@fr-CA ;
+  rdfs:label "Organisation"@fr-CA ;
 .
 geo:other
   rdfs:label "Autre"@fr-CA ;
@@ -314,7 +314,7 @@ geo:populationYear
   rdfs:label "populationAnnée"@fr-CA ;
 .
 geo:self_governing
-  rdfs:label "Autogestion"@fr-CA ;
+  rdfs:label "Autonome"@fr-CA ;
 .
 geo:special_group
   rdfs:label "Groupe spécial"@fr-CA ;
@@ -470,7 +470,7 @@ obo:BFO_0000002
   rdfs:label "Continuant"@fr-CA ;
 .
 obo:BFO_0000003
-  rdfs:label "occurence"@fr-CA ;
+  rdfs:label "occurrence"@fr-CA ;
 .
 obo:BFO_0000004
   rdfs:label "Entité continuante indépendante "@fr-CA ;
@@ -665,10 +665,10 @@ obo:ERO_0000775
   rdfs:label "conditions de résidence"@fr-CA ;
 .
 obo:ERO_0000776
-  rdfs:label "Rôle de résident (USA)"@fr-CA ;
+  rdfs:label "Rôle de résident (É.-U.)"@fr-CA ;
 .
 obo:ERO_0000777
-  rdfs:label "Rôle de citoyen (US)"@en ;
+  rdfs:label "Rôle de citoyen (É.-U.)"@en ;
 .
 obo:ERO_0000778
   rdfs:label "citoyen non américain"@fr-CA ;
@@ -782,10 +782,10 @@ obo:IAO_0000032
   rdfs:label "Point de référence de la mesure scalaire"@fr-CA ;
 .
 obo:IAO_0000033
-  rdfs:label "Entité de directives "@fr-CA ;
+  rdfs:label "Entité de directives"@fr-CA ;
 .
 obo:IAO_0000039
-  rdfs:label "étiquette d'unité de masure"@fr-CA ;
+  rdfs:label "étiquette d'unité de mesure"@fr-CA ;
 .
 obo:IAO_0000102
   rdfs:label "Données sur une partie de l'ontologie"@fr-CA ;
@@ -824,7 +824,7 @@ obo:OBI_0000011
   rdfs:label "Processus planifié"@fr-CA ;
 .
 obo:OBI_0000017
-  rdfs:label "Role réglementaire"@fr-CA ;
+  rdfs:label "Rôle réglementaire"@fr-CA ;
 .
 obo:OBI_0000272
   rdfs:label "Protocole"@fr-CA ;
@@ -932,7 +932,7 @@ terms:relation
   rdfs:label "Recherche OCRe"@fr-CA ;
 .
 <http://purl.org/net/OCRe/study_design.owl>
-  rdfs:label " planification des recherches (OCRe)"@fr-CA ;
+  rdfs:label "planification des recherches (OCRe)"@fr-CA ;
 .
 <http://purl.org/net/OCRe/study_design.owl#OCRE100038>
   rdfs:label "Phase"@fr-CA ;
@@ -968,7 +968,7 @@ bibo:AudioDocument
   rdfs:label "Document audio"@fr-CA ;
 .
 bibo:AudioVisualDocument
-  rdfs:label "Document audio-visuel"@fr-CA ;
+  rdfs:label "Document audiovisuel"@fr-CA ;
 .
 bibo:Bill
   rdfs:label "Loi"@fr-CA ;
@@ -980,7 +980,7 @@ bibo:BookSection
   rdfs:label "Section d'un livre"@fr-CA ;
 .
 bibo:Brief
-  rdfs:label "Dossier "@fr-CA ;
+  rdfs:label "Dossier"@fr-CA ;
 .
 bibo:Chapter
   rdfs:label "Chapitre"@fr-CA ;
@@ -995,7 +995,7 @@ bibo:Collection
   rdfs:label "Collection"@fr-CA ;
 .
 bibo:Conference
-  rdfs:label "Conference"@fr-CA ;
+  rdfs:label "Conférence"@fr-CA ;
 .
 bibo:CourtReporter
   rdfs:label "Greffier"@fr-CA ;
@@ -1130,7 +1130,7 @@ bibo:affirmedBy
   rdfs:label "affirmé par"@fr-CA ;
 .
 bibo:annotates
-  rdfs:label "annotate"@fr-CA ;
+  rdfs:label "annote"@fr-CA ;
 .
 bibo:asin
   rdfs:label "Amazon Standard Identification Number (ASIN)"@fr-CA ;
@@ -1142,7 +1142,7 @@ bibo:citedBy
   rdfs:label "cité par"@fr-CA ;
 .
 bibo:cites
-  rdfs:label "cites"@fr-CA ;
+  rdfs:label "cite"@fr-CA ;
 .
 bibo:coden
   rdfs:label "coden"@fr-CA ;
@@ -1184,7 +1184,7 @@ bibo:interviewee
   rdfs:label "personne interviewée"@fr-CA ;
 .
 bibo:interviewer
-  rdfs:label "interviewer"@fr-CA ;
+  rdfs:label "intervieweur"@fr-CA ;
 .
 bibo:isbn10
   rdfs:label "International Standard Book Number (ISBN) 10"@fr-CA ;
@@ -1235,7 +1235,7 @@ bibo:prefixName
   rdfs:label "préfixe de nom"@fr-CA ;
 .
 bibo:presentedAt
-  rdfs:label "presenté à l'événement"@fr-CA ;
+  rdfs:label "présenté à l'événement"@fr-CA ;
 .
 bibo:presents
   rdfs:label "documents associés"@fr-CA ;
@@ -1409,10 +1409,10 @@ core:AwardedDegree
   rdfs:label "Diplôme accordé"@fr-CA ;
 .
 core:Blog
-  rdfs:label "Blog"@fr-CA ;
+  rdfs:label "Blogue"@fr-CA ;
 .
 core:BlogPosting
-  rdfs:label "Publication de Blog"@fr-CA ;
+  rdfs:label "Publication de blogue"@fr-CA ;
 .
 core:Building
   rdfs:label "Édifice"@fr-CA ;
@@ -1502,7 +1502,7 @@ core:DateTimeValue
   rdfs:label "Date/Temps"@fr-CA ;
 .
 core:DateTimeValuePrecision
-  rdfs:label "Précision Date/heure"@fr-CA ;
+  rdfs:label "Précision date/heure"@fr-CA ;
 .
 core:Department
   rdfs:label "Département"@fr-CA ;
@@ -1676,7 +1676,7 @@ core:PopulatedPlace
   rdfs:label "Lieu habité"@fr-CA ;
 .
 core:Position
-  rdfs:label "Poste "@fr-CA ;
+  rdfs:label "Poste"@fr-CA ;
 .
 core:Postdoc
   rdfs:label "Post-doctorat"@fr-CA ;
@@ -1718,7 +1718,7 @@ core:Publisher
   rdfs:label "Éditeur"@fr-CA ;
 .
 core:Relationship
-  rdfs:label "Relattion"@fr-CA ;
+  rdfs:label "Relation"@fr-CA ;
 .
 core:ResearchOrganization
   rdfs:label "Organisation de recherche"@fr-CA ;
@@ -1748,7 +1748,7 @@ core:Screenplay
   rdfs:label "Scénario"@fr-CA ;
 .
 core:SeminarSeries
-  rdfs:label "Collections de séminaires"@fr-CA ;
+  rdfs:label "Collection de séminaires"@fr-CA ;
 .
 core:ServiceProvidingLaboratory
   rdfs:label "Service de laboratoire"@fr-CA ;
@@ -1775,7 +1775,7 @@ core:Team
   rdfs:label "Équipe"@fr-CA ;
 .
 core:Translation
-  rdfs:label "Tranduction"@fr-CA ;
+  rdfs:label "Traduction"@fr-CA ;
 .
 core:UndergraduateAdvisingRelationship
   rdfs:label "Relation conseil de premier cycle"@fr-CA ;
@@ -1850,7 +1850,7 @@ core:degreeCandidacy
   rdfs:label "candidature au diplôme"@fr-CA ;
 .
 core:departmentOrSchool
-  rdfs:label "nom du département ou de l'école  au sein de l'institution"@fr-CA ;
+  rdfs:label "nom du département ou de l'école au sein de l'institution"@fr-CA ;
 .
 core:description
   rdfs:label "description"@fr-CA ;
@@ -1871,7 +1871,7 @@ core:end
   rdfs:label "fin"@fr-CA ;
 .
 core:entryTerm
-  rdfs:label "terme saisis "@fr-CA ;
+  rdfs:label "terme saisi"@fr-CA ;
 .
 core:equipmentFor
   rdfs:label "équipement destiné à"@fr-CA ;
@@ -1913,7 +1913,7 @@ core:hasCollaborator
   rdfs:label "collaborateurs"@fr-CA ;
 .
 core:hasEquipment
-  rdfs:label "équipment"@fr-CA ;
+  rdfs:label "équipement"@fr-CA ;
 .
 core:hasFacility
   rdfs:label "installation"@fr-CA ;
@@ -1958,10 +1958,10 @@ core:hideFromDisplay
   rdfs:label "masquer à l'affichage"@fr-CA ;
 .
 core:hrJobTitle
-  rdfs:label "titre d'emploi de RH "@fr-CA ;
+  rdfs:label "titre d'emploi de RH"@fr-CA ;
 .
 core:iclCode
-  rdfs:label "code de classification Internationale (ICL) code"@fr-CA ;
+  rdfs:label "code de classification internationale (ICL)"@fr-CA ;
 .
 core:identifier
   rdfs:label "identifiant"@fr-CA ;
@@ -1976,7 +1976,7 @@ core:invited
   rdfs:label "invité"@fr-CA ;
 .
 core:isCorrespondingAuthor
-  rdfs:label "Est-ce que cet personne est l'auteur recherché?"@fr-CA ;
+  rdfs:label "Est-ce que cette personne est l'auteur recherché?"@fr-CA ;
 .
 core:licenseNumber
   rdfs:label "numéro de permis"@fr-CA ;
@@ -2045,7 +2045,7 @@ core:relatedBy
   rdfs:label "relié par"@fr-CA ;
 .
 core:relates
-  rdfs:label "relié à "@fr-CA ;
+  rdfs:label "relié à"@fr-CA ;
 .
 core:reportId
   rdfs:label "identifiant du rapport"@fr-CA ;
@@ -2054,7 +2054,7 @@ core:reproduces
   rdfs:label "reproduit"@fr-CA ;
 .
 core:researchAreaOf
-  rdfs:label "Domaine de recherche de "@fr-CA ;
+  rdfs:label "Domaine de recherche de"@fr-CA ;
 .
 core:researchOverview
   rdfs:label "Aperçu de la recherche"@fr-CA ;
@@ -2121,7 +2121,7 @@ core:totalAwardAmount
 .
 core:translatorOf
   rdfs:label "Traducteur de"@fr-CA ;
-  rdfs:label "tranducteur de"@fr-CA ;
+  rdfs:label "traducteur de"@fr-CA ;
 .
 core:validIn
   rdfs:label "valide en"@fr-CA ;
@@ -2148,7 +2148,7 @@ vivo-rech:Phase0ClinicalTrial
   rdfs:label "Essai clinique de phase 0"@fr-CA ;
 .
 vivo-rech:Phase1ClinicalTrial
-  rdfs:label "Essais clinique de phase 1"@fr-CA ;
+  rdfs:label "Essai clinique de phase 1"@fr-CA ;
 .
 vivo-rech:Phase2ClinicalTrial
   rdfs:label "Essai clinique de Phase 2"@fr-CA ;
@@ -2178,7 +2178,7 @@ vivo-rech:studyPopulationCount
   rdfs:label "dénombrement des populations étudiées"@fr-CA ;
 .
 <http://www.ebi.ac.uk/efo/swo/SWO_0000740>
-  rdfs:label "équipements "@fr-CA ;
+  rdfs:label "équipements"@fr-CA ;
 .
 <http://www.ebi.ac.uk/efo/swo/SWO_0000741>
   rdfs:label "est encodé dans"@fr-CA ;
@@ -2220,7 +2220,7 @@ vcard:Address
   rdfs:label "Adresse"@fr-CA ;
 .
 vcard:Addressing
-  rdfs:label "Addresse "@fr-CA ;
+  rdfs:label "Adresse"@fr-CA ;
 .
 vcard:Agent
   rdfs:label "Agent"@fr-CA ;
@@ -2298,7 +2298,7 @@ vcard:Geo
   rdfs:label "Géo"@fr-CA ;
 .
 vcard:Geographical
-  rdfs:label "Geographique"@fr-CA ;
+  rdfs:label "Géographique"@fr-CA ;
 .
 vcard:Group
   rdfs:label "Groupe"@fr-CA ;
@@ -2367,7 +2367,7 @@ vcard:OrganizationName
   rdfs:label "Nom de l'organisation"@fr-CA ;
 .
 vcard:OrganizationUnitName
-  rdfs:label "ONom de l'unité organisationnelle"@fr-CA ;
+  rdfs:label "Nom de l'unité organisationnelle"@fr-CA ;
 .
 vcard:Organizational
   rdfs:label "Organisationnel"@fr-CA ;
@@ -2391,10 +2391,10 @@ vcard:RelatedType
   rdfs:label "Type de relation"@fr-CA ;
 .
 vcard:Security
-  rdfs:label "Securité"@fr-CA ;
+  rdfs:label "Sécurité"@fr-CA ;
 .
 vcard:Sibling
-  rdfs:label "Frère/Soeur "@fr-CA ;
+  rdfs:label "Frère/soeur "@fr-CA ;
 .
 vcard:Sound
   rdfs:label "Son"@fr-CA ;
@@ -2502,10 +2502,10 @@ vcard:hasEmail
   rdfs:label "courriel"@fr-CA ;
 .
 vcard:hasFormattedName
-  rdfs:label "nom standardisé "@fr-CA ;
+  rdfs:label "nom standardisé"@fr-CA ;
 .
 vcard:hasGeo
-  rdfs:label "données géographiques "@fr-CA ;
+  rdfs:label "données géographiques"@fr-CA ;
 .
 vcard:hasInstantMessage
   rdfs:label "messagerie"@fr-CA ;
@@ -2628,7 +2628,7 @@ vcard:streetAddress
   rdfs:label "adresse postale"@fr-CA ;
 .
 vcard:telephone
-  rdfs:label "Telephone"@fr-CA ;
+  rdfs:label "Téléphone"@fr-CA ;
 .
 vcard:timeZone
   rdfs:label "fuseau horaire"@fr-CA ;

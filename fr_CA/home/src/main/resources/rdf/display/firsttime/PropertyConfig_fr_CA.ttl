@@ -218,7 +218,7 @@ vitro-config:hasResearcherRoleConfig
   vitro-appconf:displayName "Autres activités de recherche"@fr-CA ;
 .
 vitro-config:hasReviewerRoleConfig
-  vitro-appconf:displayName "Évaluateur(-trice))"@fr-CA ;
+  vitro-appconf:displayName "Évaluateur(-trice)"@fr-CA ;
 .
 vitro-config:hasRoomConfig
   vitro-appconf:displayName "salles"@fr-CA ;
@@ -233,7 +233,7 @@ vitro-config:hasTeacherRoleConfig
   vitro-appconf:displayName "Activités d'enseignement"@fr-CA ;
 .
 vitro-config:inEventSeriesConfig
-  vitro-appconf:displayName "dans une collection d'évémenents"@fr-CA ;
+  vitro-appconf:displayName "dans une collection d'événements"@fr-CA ;
 .
 vitro-config:includesEventConfig
   vitro-appconf:displayName "Événements inclus"@fr-CA ;
@@ -338,7 +338,7 @@ vitro-config:roomWithinBuildingConfig
   vitro-appconf:displayName "dans l'édifice"@fr-CA ;
 .
 vitro-config:siteGeographicallyWithinGeoLocationConfig
-  vitro-appconf:displayName "géographiquement situé au seinn de"@fr-CA ;
+  vitro-appconf:displayName "géographiquement situé au sein de"@fr-CA ;
 .
 vitro-config:subOrganizationWithinConfig
   vitro-appconf:displayName "organisation interne à"@fr-CA ;
@@ -375,6 +375,6 @@ vitro-config:yearAwardedConfig
 .
 <http://vivoweb.org/ontology/vitroAnnotation_fr_CA>
   a owl:Ontology ;
-  owl:versionInfo "Adapted by Michel Héon, 2020, for Université de Québec à Montréal, http://uqam.ca" ;
-  owl:versionInfo "Translated by Pierre Roberge, 2020,  for Université de Québec à Montréal, http://uqam.ca" ;
+  owl:versionInfo "Adapted by Michel Héon, 2020, for Université du Québec à Montréal, http://uqam.ca" ;
+  owl:versionInfo "Translated by Pierre Roberge, 2020,  for Université du Québec à Montréal, http://uqam.ca" ;
 .
