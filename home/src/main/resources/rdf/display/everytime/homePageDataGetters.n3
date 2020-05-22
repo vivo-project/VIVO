@@ -1,23 +1,21 @@
-# $This file is distributed under the terms of the license in LICENSE$
+# baseURI: http://vivoweb.org/ontology/homePageDataGetters
 
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <http://vivoweb.org/ontology/homePageDataGetters#> .
+@prefix core: <http://vivoweb.org/ontology/core#> .
 @prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix core: <http://vivoweb.org/ontology/core#> .
 @prefix vivoweb: <http://vivoweb.org/ontology#> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-# academic departments datagetter
-
-# UQAM-Linguistic-Management Manage language, just extract appropriated to ?country
-
-<freemarker:lib-home-page.ftl> display:hasDataGetter display:academicDeptsDataGetter .
-
+<freemarker:lib-home-page.ftl>
+  display:hasDataGetter display:academicDeptsDataGetter ;
+.
 display:academicDeptsDataGetter
-    a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> ;
-    display:saveToVar "academicDeptDG" ;
-    display:query """
+  a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> ;
+  display:query """
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX vivo: <http://vivoweb.org/ontology/core#>
 
@@ -29,5 +27,6 @@ display:academicDeptsDataGetter
           FILTER (lang(?label) = '?country' ) .
     }
 
-    """ .
-
+    """ ;
+  display:saveToVar "academicDeptDG" ;
+.

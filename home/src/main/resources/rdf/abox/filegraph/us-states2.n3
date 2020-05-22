@@ -1,0 +1,355 @@
+# baseURI: http://vivoweb.org/ontology/us-states
+
+@prefix : <http://vivoweb.org/ontology/us-states#> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vivo: <http://vivoweb.org/ontology/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://aims.fao.org/aos/geopolitical.owl#United_States_of_America>
+  obo:BFO_0000051 dbpedia:Alabama ;
+  obo:BFO_0000051 dbpedia:Alaska ;
+  obo:BFO_0000051 dbpedia:American_Samoa ;
+  obo:BFO_0000051 dbpedia:Arizona ;
+  obo:BFO_0000051 dbpedia:Arkansas ;
+  obo:BFO_0000051 dbpedia:California ;
+  obo:BFO_0000051 dbpedia:Colorado ;
+  obo:BFO_0000051 dbpedia:Connecticut ;
+  obo:BFO_0000051 dbpedia:Delaware ;
+  obo:BFO_0000051 dbpedia:Florida ;
+  obo:BFO_0000051 dbpedia:Georgia ;
+  obo:BFO_0000051 dbpedia:Guam ;
+  obo:BFO_0000051 dbpedia:Hawaii ;
+  obo:BFO_0000051 dbpedia:Idaho ;
+  obo:BFO_0000051 dbpedia:Illinois ;
+  obo:BFO_0000051 dbpedia:Indiana ;
+  obo:BFO_0000051 dbpedia:Iowa ;
+  obo:BFO_0000051 dbpedia:Kansas ;
+  obo:BFO_0000051 dbpedia:Kentucky ;
+  obo:BFO_0000051 dbpedia:Louisiana ;
+  obo:BFO_0000051 dbpedia:Maine ;
+  obo:BFO_0000051 dbpedia:Maryland ;
+  obo:BFO_0000051 dbpedia:Massachusetts ;
+  obo:BFO_0000051 dbpedia:Michigan ;
+  obo:BFO_0000051 dbpedia:Minnesota ;
+  obo:BFO_0000051 dbpedia:Mississipi ;
+  obo:BFO_0000051 dbpedia:Missouri ;
+  obo:BFO_0000051 dbpedia:Montana ;
+  obo:BFO_0000051 dbpedia:Nebraska ;
+  obo:BFO_0000051 dbpedia:Nevada ;
+  obo:BFO_0000051 dbpedia:New_Hampshire ;
+  obo:BFO_0000051 dbpedia:New_Jersey ;
+  obo:BFO_0000051 dbpedia:New_Mexico ;
+  obo:BFO_0000051 dbpedia:New_York ;
+  obo:BFO_0000051 dbpedia:North_Carolina ;
+  obo:BFO_0000051 dbpedia:North_Dakota ;
+  obo:BFO_0000051 dbpedia:Northern_Mariana_Islands ;
+  obo:BFO_0000051 dbpedia:Ohio ;
+  obo:BFO_0000051 dbpedia:Oklahoma ;
+  obo:BFO_0000051 dbpedia:Oregon ;
+  obo:BFO_0000051 dbpedia:Pennsylvania ;
+  obo:BFO_0000051 dbpedia:Puerto_Rico ;
+  obo:BFO_0000051 dbpedia:Rhode_Island ;
+  obo:BFO_0000051 dbpedia:South_Carolina ;
+  obo:BFO_0000051 dbpedia:South_Dakota ;
+  obo:BFO_0000051 dbpedia:Tennessee ;
+  obo:BFO_0000051 dbpedia:Texas ;
+  obo:BFO_0000051 dbpedia:United_States_Virgin_Islands ;
+  obo:BFO_0000051 dbpedia:Utah ;
+  obo:BFO_0000051 dbpedia:Vermont ;
+  obo:BFO_0000051 dbpedia:Virginia ;
+  obo:BFO_0000051 dbpedia:Wake_Island ;
+  obo:BFO_0000051 dbpedia:Washington ;
+  obo:BFO_0000051 <http://dbpedia.org/resource/Washington,_D.C.> ;
+  obo:BFO_0000051 dbpedia:West_Virginia ;
+  obo:BFO_0000051 dbpedia:Wisconsin ;
+  obo:BFO_0000051 dbpedia:Wyoming ;
+.
+dbpedia:Alabama
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Alabama"@en ;
+.
+dbpedia:Alaska
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Alaska"@en ;
+.
+dbpedia:American_Samoa
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "American Samoa"@en ;
+.
+dbpedia:Arizona
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Arizona"@en ;
+.
+dbpedia:Arkansas
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Arkansas"@en ;
+.
+dbpedia:California
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "California"@en ;
+.
+dbpedia:Colorado
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Colorado"@en ;
+.
+dbpedia:Connecticut
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Connecticut"@en ;
+.
+dbpedia:Delaware
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Delaware"@en ;
+.
+dbpedia:Florida
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Florida"@en ;
+.
+dbpedia:Georgia
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Georgia"@en ;
+.
+dbpedia:Guam
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Guam"@en ;
+.
+dbpedia:Hawaii
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Hawaii"@en ;
+.
+dbpedia:Idaho
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Idaho"@en ;
+.
+dbpedia:Illinois
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Illinois"@en ;
+.
+dbpedia:Indiana
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Indiana"@en ;
+.
+dbpedia:Iowa
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Iowa"@en ;
+.
+dbpedia:Kansas
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Kansas"@en ;
+.
+dbpedia:Kentucky
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Kentucky"@en ;
+.
+dbpedia:Louisiana
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Louisiana"@en ;
+.
+dbpedia:Maine
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Maine"@en ;
+.
+dbpedia:Maryland
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Maryland"@en ;
+.
+dbpedia:Massachusetts
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Massachusetts"@en ;
+.
+dbpedia:Michigan
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Michigan"@en ;
+.
+dbpedia:Minnesota
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Minnesota"@en ;
+.
+dbpedia:Mississipi
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Mississippi"@en ;
+.
+dbpedia:Missouri
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Missouri"@en ;
+.
+dbpedia:Montana
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Montana"@en ;
+.
+dbpedia:Nebraska
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Nebraska"@en ;
+.
+dbpedia:Nevada
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Nevada"@en ;
+.
+dbpedia:New_Hampshire
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "New Hampshire"@en ;
+.
+dbpedia:New_Jersey
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "New Jersey"@en ;
+.
+dbpedia:New_Mexico
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "New Mexico"@en ;
+.
+dbpedia:New_York
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "New York"@en ;
+.
+dbpedia:North_Carolina
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "North Carolina"@en ;
+.
+dbpedia:North_Dakota
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "North Dakota"@en ;
+.
+dbpedia:Northern_Mariana_Islands
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Northern Mariana Islands"@en ;
+.
+dbpedia:Ohio
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Ohio"@en ;
+.
+dbpedia:Oklahoma
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Oklahoma"@en ;
+.
+dbpedia:Oregon
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Oregon"@en ;
+.
+dbpedia:Pennsylvania
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Pennsylvania"@en ;
+.
+dbpedia:Puerto_Rico
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Puerto Rico"@en ;
+.
+dbpedia:Rhode_Island
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Rhode Island"@en ;
+.
+dbpedia:South_Carolina
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "South Carolina"@en ;
+.
+dbpedia:South_Dakota
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "South Dakota"@en ;
+.
+dbpedia:Tennessee
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Tennessee"@en ;
+.
+dbpedia:Texas
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Texas"@en ;
+.
+dbpedia:United_States_Virgin_Islands
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "US Virgin Islands"@en ;
+.
+dbpedia:Utah
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Utah"@en ;
+.
+dbpedia:Vermont
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Vermont"@en ;
+.
+dbpedia:Virginia
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Virginia"@en ;
+.
+dbpedia:Wake_Island
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Wake Island"@en ;
+.
+dbpedia:Washington
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Washington"@en ;
+.
+<http://dbpedia.org/resource/Washington,_D.C.>
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "District of Columbia"@en ;
+.
+dbpedia:West_Virginia
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "West Virginia"@en ;
+.
+dbpedia:Wisconsin
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Wisconsin"@en ;
+.
+dbpedia:Wyoming
+  a vivo:StateOrProvince ;
+  obo:BFO_0000050 <http://aims.fao.org/aos/geopolitical.owl#United_States_of_America> ;
+  rdfs:label "Wyoming"@en ;
+.

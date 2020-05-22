@@ -1,14 +1,16 @@
-# $This file is distributed under the terms of the license in LICENSE$
+# baseURI: http://vivoweb.org/ontology/orcidInterfaceDataGetters
 
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix : <http://vivoweb.org/ontology/orcidInterfaceDataGetters#> .
 @prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-#
-# datagetter to fetch ORCID info for the person.
-#
-
-<freemarker:individual-orcidInterface.ftl> display:hasDataGetter display:orcidIdDataGetter .
-
+<freemarker:individual-orcidInterface.ftl>
+  display:hasDataGetter display:orcidIdDataGetter ;
+.
 display:orcidIdDataGetter
-    a <java:edu.cornell.mannlib.vivo.orcid.OrcidIdDataGetter> .
-
+  a <java:edu.cornell.mannlib.vivo.orcid.OrcidIdDataGetter> ;
+.
