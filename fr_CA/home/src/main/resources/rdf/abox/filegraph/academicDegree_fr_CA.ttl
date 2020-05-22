@@ -1,3 +1,6 @@
+# baseURI: http://vivoweb.org/ontology/academicDegree_fr_CA
+
+@prefix : <http://vivoweb.org/ontology/academicDegree_fr_CA#> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix core: <http://vivoweb.org/ontology/core#> .
 @prefix dcelem: <http://purl.org/dc/elements/1.1/> .
@@ -16,6 +19,9 @@
 @prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<http://vivoweb.org/ontology/academicDegree_fr_CA>
+  a owl:Ontology ;
+.
 <http://vivoweb.org/ontology/degree/academicDegree1>
   a core:AcademicDegree ;
   core:abbreviation "B.A."@fr-CA ;
