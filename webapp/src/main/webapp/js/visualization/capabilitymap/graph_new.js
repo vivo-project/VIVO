@@ -26,6 +26,13 @@ var demos = [[
 if (!console) var console = {
     log : function() {}
 };
+if (typeof i18nStringsCap == 'undefined')
+{
+    var i18nStringsCap = {
+        term: 'Term',
+        group: 'Group'
+    }
+};
 var schemes = {
     "white" : {
         "backgroundcolor" : "#FFFFFF",
@@ -395,7 +402,7 @@ DetailsPanel.prototype.showDetails = function(mode, id) {
     if (mode != "group") {
         $(this.panel)
             .empty()
-            .append(title = $("<h2>Term: " + decodeURIComponent(id) + "</h2>")
+            .append(title = $("<h2>" + i18nStringsCap.term + ": " + decodeURIComponent(id) + "</h2>")
                 .bind("click", function() {
                     highlight(id);
                     detailsPane.showDetails(mode, id);
@@ -454,7 +461,7 @@ DetailsPanel.prototype.groupInfo = function(i, group, mode, id) {
     });
     return $("<div/>")
         .append(
-            $("<h2>" + "Group: " + group.capabilities.map(function(c) {
+            $("<h2>" + i18nStringsCap.group + ": " + group.capabilities.map(function(c) {
                 return decodeURIComponent(c.term);
             }).join(", ") + "</h2>")
                 .bind("click", function() {

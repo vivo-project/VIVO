@@ -15,6 +15,10 @@ ${stylesheets.add(
 )}
 
 <script language="JavaScript" type="text/javascript">
+    var i18nStringsCap = {
+        term: '${i18n().group_capitalized}',
+        group: '${i18n().term_capitalized}'
+    };
     var contextPath = "${urls.base}";
     $(document).ready(function() {
         var loadedConcepts = $.ajax({
