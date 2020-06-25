@@ -16,11 +16,12 @@ ${stylesheets.add(
 
 <script language="JavaScript" type="text/javascript">
     var i18nStringsCap = {
-        term: '${i18n().group_capitalized}',
-        group: '${i18n().term_capitalized}'
+        term: '${i18n().term_capitalized}',
+        group: '${i18n().group_capitalized}'
     };
     var contextPath = "${urls.base}";
     $(document).ready(function() {
+        document.title = "${i18n().capability_map}";
         var loadedConcepts = $.ajax({
             url: contextPath + "/visualizationAjax?vis=capabilitymap&data=concepts",
             type: "GET",
