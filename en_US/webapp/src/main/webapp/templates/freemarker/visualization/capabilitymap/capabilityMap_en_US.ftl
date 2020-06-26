@@ -18,7 +18,15 @@ ${stylesheets.add(
 <script language="JavaScript" type="text/javascript">
     var i18nStringsCap = {
         term: '${i18n().term_capitalized}',
-        group: '${i18n().group_capitalized}'
+        group: '${i18n().group_capitalized}',
+        pause: '${i18n().pause}',
+        resume: '${i18n().resume}',
+        show_group_labels: '${i18n().show_group_labels}',
+        hide_group_labels: '${i18n().hide_group_labels}',
+        delete_selected: '${i18n().delete_selected}',
+        remove_capability: '${i18n().remove_capability}',
+        remove_group: '${i18n().remove_group}',
+        expand: '${i18n().expand}'
     };
     var contextPath = "${urls.base}";
     $(document).ready(function() {
