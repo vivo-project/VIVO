@@ -30,7 +30,15 @@ if (typeof i18nStringsCap == 'undefined')
 {
     var i18nStringsCap = {
         term: 'Term',
-        group: 'Group'
+        group: 'Group',
+        pause: 'pause',
+        resume: 'resume',
+        show_group_labels: 'show group labels',
+        hide_group_labels: 'hide group labels',
+        delete_selected: 'delete selected',
+        remove_capability: 'Remove capability',
+        remove_group: 'Remove group',
+        expand: 'Expand'
     }
 };
 var schemes = {
@@ -410,7 +418,7 @@ DetailsPanel.prototype.showDetails = function(mode, id) {
                 .css("cursor", "pointer")
                 .prepend($("<span/>").addClass("orange-square"))
             )
-            .append($("<button>Remove capability</button>")
+            .append($("<button>" + i18nStringsCap.remove_capability + "</button>")
                 .bind("click", function() {
                     g.removeCapability(id);
                     that.clearDetails();
@@ -418,7 +426,7 @@ DetailsPanel.prototype.showDetails = function(mode, id) {
                 })
             )
             .append($("<span> </span>"))
-            .append($("<button>Expand</button>")
+            .append($("<button>" + i18nStringsCap.expand + "</button>")
                 .bind("click", function() {
                     expandLastQuery = 1;
                     addKwd(decodeURIComponent(id));
@@ -471,7 +479,7 @@ DetailsPanel.prototype.groupInfo = function(i, group, mode, id) {
                 .css("cursor", "pointer")
                 .prepend($("<span/>").addClass("blue-circle"))
         )
-        .append($("<button>Remove group</button>")
+        .append($("<button>" + i18nStringsCap.remove_group + "</button>")
             .bind("click", function() {
                 g.removeGroup(group);
                 that.clearDetails();
@@ -814,7 +822,7 @@ var render = function() {
 
     }
     force.on("tick", function() {
-        $("#log button:first-child").html("pause");
+        $("#log button:first-child").html(i18nStringsCap.pause);
     	force2.start();
     	node.call(updateNode);
     	anchorNode.each(function(d, i) {
@@ -839,30 +847,30 @@ var render = function() {
     });
 
     // refresh UI
-    $("#log").empty().append($("<button>pause</button>")
+    $("#log").empty().append($("<button>" + i18nStringsCap.pause + "</button>")
         .bind("click", function() {
-            if ($(this).html() != "resume") {
-                $(this).html("resume");
+            if ($(this).html() != i18nStringsCap.resume) {
+                $(this).html(i18nStringsCap.resume);
                 force.stop();
                 force2.stop();
             } else {
-                $(this).html("pause");
+                $(this).html(i18nStringsCap.pause);
                 force.resume();
                 force2.resume();
             }
         })
-    ).append(" ").append($("<button>hide group labels</button>")
+    ).append(" ").append($("<button>" + i18nStringsCap.hide_group_labels + "</button>")
         .bind("click", function() {
-            if ($(this).html() != "show group labels") {
-                $(this).html("show group labels");
+            if ($(this).html() != i18nStringsCap.show_group_labels) {
+                $(this).html(i18nStringsCap.show_group_labels);
                 $(".label-group").css("visibility", "hidden");
             } else {
-                $(this).html("hide group labels");
+                $(this).html(i18nStringsCap.hide_group_labels);
                 $(".label-group").css("visibility", "visible");
             }
         })
     );
-    $("#log_printout").empty().append($("<button>Delete selected</button>").bind("click", function() {
+    $("#log_printout").empty().append($("<button>" + i18nStringsCap.delete_selected + "</button>").bind("click", function() {
         $("input[type=checkbox]:checked").each(function() {
             g.removeCapability($(this).attr("name"));
             $(this).parent().remove();
