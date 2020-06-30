@@ -71,9 +71,9 @@ Also multiple types parameter set to true only if more than one type returned-->
         defaultTypeName: '${propertyPublicName}'
     };
     var i18nStrings = {
-        selectExisting: '${i18n().select_an_existing}',
-        orCreateNewOne: '${i18n().or_create_new_one}',
-        selectedString: '${i18n().selected}'
+        selectExisting: "${i18n().select_an_existing}",
+        orCreateNewOne: "${i18n().or_create_new_one}",
+        selectedString: "${i18n().selected}"
     };
     </script>
 

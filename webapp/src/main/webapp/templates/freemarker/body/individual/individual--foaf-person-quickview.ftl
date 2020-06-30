@@ -220,19 +220,19 @@ var profileTypeData = {
     defaultProfileType: '${profileType!}'
 };
 var i18nStrings = {
-    errorProcessingTypeChange: '${i18n().error_processing_type_change}',
-    displayLess: '${i18n().display_less}',
-    displayMoreEllipsis: '${i18n().display_more_ellipsis}',
-    showMoreContent: '${i18n().show_more_content}',
-    verboseTurnOff: '${i18n().verbose_turn_off}',
-    quickviewTooltip: '${i18n().quickview_tooltip}',
-    researchAreaTooltipOne: '${i18n().research_area_tooltip_one}',
-    researchAreaTooltipTwo: '${i18n().research_area_tooltip_two}'
+    errorProcessingTypeChange: "${i18n().error_processing_type_change}",
+    displayLess: "${i18n().display_less}",
+    displayMoreEllipsis: "${i18n().display_more_ellipsis}",
+    showMoreContent: "${i18n().show_more_content}",
+    verboseTurnOff: "${i18n().verbose_turn_off}",
+    quickviewTooltip: "${i18n().quickview_tooltip}",
+    researchAreaTooltipOne: "${i18n().research_area_tooltip_one}",
+    researchAreaTooltipTwo: "${i18n().research_area_tooltip_two}"
 };
 var i18nStringsUriRdf = {
-    shareProfileUri: '${i18n().share_profile_uri}',
-    viewRDFProfile: '${i18n().view_profile_in_rdf}',
-    closeString: '${i18n().close}'
+    shareProfileUri: "${i18n().share_profile_uri}",
+    viewRDFProfile: "${i18n().view_profile_in_rdf}",
+    closeString: "${i18n().close}"
 };
 </script>
 <#if editable>

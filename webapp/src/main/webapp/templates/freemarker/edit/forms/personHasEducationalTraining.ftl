@@ -224,9 +224,9 @@ var customFormData  = {
     subjectName: '${editConfiguration.subjectName}'
 };
 var i18nStrings = {
-    selectAnExisting: '${i18n().select_an_existing}',
-    orCreateNewOne: '${i18n().or_create_new_one}',
-    selectedString: '${i18n().selected}'
+    selectAnExisting: "${i18n().select_an_existing}",
+    orCreateNewOne: "${i18n().or_create_new_one}",
+    selectedString: "${i18n().selected}"
 };
 
 $(document).ready(function() {

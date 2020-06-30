@@ -228,9 +228,9 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         flagClearLabelForExisting: '${flagClearLabelForExisting}'
 	};
 	var i18nStrings = {
-        selectAnExisting: '${i18n().select_an_existing}',
-        orCreateNewOne: '${i18n().or_create_new_one}',
-        selectedString: '${i18n().selected}'
+        selectAnExisting: "${i18n().select_an_existing}",
+        orCreateNewOne: "${i18n().or_create_new_one}",
+        selectedString: "${i18n().selected}"
     };
     </script>
 

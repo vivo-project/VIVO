@@ -156,13 +156,13 @@ var customFormData = {
     reorderUrl: '${urls.base}/edit/reorder'
 };
 var i18nStrings = {
-    editorNameWrapperTitle: '${i18n().drag_drop_reorder_editors}',
-    reorderEditorsAlert: '${i18n().reordering_editors_failed}',
-    removeEditorshipMessage: '${i18n().confirm_editor_removal}',
-    removeEditorshipAlert: '${i18n().error_processing_editor_request}',
-    editorTypeText: '${i18n().editor_capitalized}',
-    helpTextSelect: '${i18n().select_an_existing}',
-    helpTextAdd: '${i18n().or_add_new_one}'
+    editorNameWrapperTitle: "${i18n().drag_drop_reorder_editors}",
+    reorderEditorsAlert: "${i18n().reordering_editors_failed}",
+    removeEditorshipMessage: "${i18n().confirm_editor_removal}",
+    removeEditorshipAlert: "${i18n().error_processing_editor_request}",
+    editorTypeText: "${i18n().editor_capitalized}",
+    helpTextSelect: "${i18n().select_an_existing}",
+    helpTextAdd: "${i18n().or_add_new_one}"
 };
 </script>
 

@@ -124,9 +124,9 @@ Also multiple types parameter set to true only if more than one type returned-->
         baseHref: '${urls.base}/individual?uri='
     };
     var i18nStrings = {
-        selectAnExisting: '${i18n().select_an_existing}',
-        orCreateNewOne: '${i18n().or_create_new_one}',
-        selectedString: '${i18n().selected}'
+        selectAnExisting: "${i18n().select_an_existing}",
+        orCreateNewOne: "${i18n().or_create_new_one}",
+        selectedString: "${i18n().selected}"
     };
     </script>
 <#--

@@ -42,16 +42,16 @@ var visualizationDataRoot = "${dataVisualizationURLRoot}";
 
 // -->
 var i18nStringsCoPi = {
-    coInvestigatorString: '${i18n().co_investigators_capitalized}',
-    investigatorString: '${i18n().investigator_capitalized}',
-    grantsWithString: '${i18n().grants_with}',
-    grantsCapitalized: '${i18n().grant_s_capitalized}',
-    coInvestigatorCapitalized: '${i18n().co_investigator_s_capitalized}'
+    coInvestigatorString: "${i18n().co_investigators_capitalized}",
+    investigatorString: "${i18n().investigator_capitalized}",
+    grantsWithString: "${i18n().grants_with}",
+    grantsCapitalized: "${i18n().grant_s_capitalized}",
+    coInvestigatorCapitalized: "${i18n().co_investigator_s_capitalized}"
 };
 var i18nStringsPersonLvl = {
-    fileCapitalized: '${i18n().file_capitalized}',
-    contentRequiresFlash: '${i18n().content_requires_flash}',
-    getFlashString: '${i18n().get_flash}'
+    fileCapitalized: "${i18n().file_capitalized}",
+    contentRequiresFlash: "${i18n().content_requires_flash}",
+    getFlashString: "${i18n().get_flash}"
 };
 </script>
 

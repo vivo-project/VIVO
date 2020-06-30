@@ -217,11 +217,11 @@ var customFormData  = {
 <#--Removing this line for now from above : newUriSentinel : '${newUriSentinel}',-->
 <#--Also removed this: ,doNotRemoveOriginalObject: '${doNotRemoveOriginalObject}'-->
 var i18nStrings = {
-    selectAnExisting: '${i18n().select_an_existing}',
-    orCreateNewOne: '${i18n().or_create_new_one}',
-    selectedString: '${i18n().selected}',
-    advisingString: '${i18n().advising}',
-    advisingRelationshipString: '${i18n().advising_relationship}'
+    selectAnExisting: "${i18n().select_an_existing}",
+    orCreateNewOne: "${i18n().or_create_new_one}",
+    selectedString: "${i18n().selected}",
+    advisingString: "${i18n().advising}",
+    advisingRelationshipString: "${i18n().advising_relationship}"
 };
 </script>
 

@@ -195,10 +195,10 @@ var customFormData  = {
     flagClearLabelForExisting: '${flagClearLabelForExisting}'
 };
 var i18nStrings = {
-    selectAnOrganization: '${i18n().select_or_create_organization}',
-    selectAnExisting: '${i18n().select_an_existing}',
-    orCreateNewOne: '${i18n().or_create_new_one}',
-    selectedString: '${i18n().selected}',
+    selectAnOrganization: "${i18n().select_or_create_organization}",
+    selectAnExisting: "${i18n().select_an_existing}",
+    orCreateNewOne: "${i18n().or_create_new_one}",
+    selectedString: "${i18n().selected}",
 };
 
 </script>
