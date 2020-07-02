@@ -33,6 +33,7 @@ if (typeof i18nStringsCap == 'undefined')
         group: 'Group',
         pause: 'pause',
         resume: 'resume',
+        reset: 'Reset',
         show_group_labels: 'show group labels',
         hide_group_labels: 'hide group labels',
         delete_selected: 'delete selected',
@@ -630,12 +631,12 @@ var ipretResults = function(results) {
 var disableSubButton = function() {
     subButton.disabled = true;
     $("#sExpand").attr("disabled", true);
-    $("#resetButton").val("Stop");
+    $("#resetButton").val(i18nStringsCap.pause);
 }
 var enableSubButton = function() {
     subButton.disabled = false;
     $("#sExpand").attr("disabled", false);
-    $("#resetButton").val("Reset");
+    $("#resetButton").val(i18nStringsCap.reset);
 }
 var getLinkColor = function() {
     var linkColor = $("#linkColor").val();
