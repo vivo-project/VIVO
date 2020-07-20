@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://purl.obolibrary.org/obo/arg/role.owl#"
+     xml:base="http://purl.obolibrary.org/obo/arg/role.owl"
+     xmlns:obo="http://purl.obolibrary.org/obo/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://xmlns.com/foaf/0.1/"/>
+    <owl:Ontology rdf:about="http://purl.org/NET/c4dm/event.owl"/>
+    <owl:Ontology rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/public"/>
+    <owl:Ontology rdf:about="http://purl.org/ontology/bibo/"/>
+    <owl:Ontology rdf:about="http://vivoweb.org/ontology/core"/>
+    <owl:Ontology rdf:about="http://purl.obolibrary.org/obo/"/>
+    <owl:Ontology rdf:about="http://www.w3.org/2006/vcard/ns"/>
+    <owl:Ontology rdf:about="http://aims.fao.org/aos/geopolitical.owl"/>
+    <owl:Ontology rdf:about="http://purl.org/net/OCRe/research.owl"/>
+    <owl:Ontology rdf:about="http://purl.org/net/OCRe/study_design.owl"/>
+    <owl:Ontology rdf:about="http://purl.org/net/OCRe/statistics.owl"/>
+    <owl:Ontology rdf:about="http://purl.org/net/OCRe/study_protocol.owl"/>
+    <owl:Ontology rdf:about="http://www.w3.org/2004/02/skos/core"/>
+    <owl:Ontology rdf:about="http://vivoweb.org/ontology/scientific-research"/>
+    <owl:Ontology rdf:about="http://purl.org/spar/fabio/"/>
+    <owl:Ontology rdf:about="http://purl.org/spar/c4o/"/>
+    <owl:Ontology rdf:about="http://purl.org/spar/cito/"/>
+    <owl:Ontology rdf:about="http://purl.org/dc/terms/"/>
+    <owl:Ontology rdf:about="http://purl.org/vocab/vann/"/>
+    <owl:Ontology rdf:about="http://purl.obolibrary.org/obo/ro.owl"/>
+    <owl:Ontology rdf:about="http://www.ebi.ac.uk/efo/swo/"/>
+
+</rdf:RDF>

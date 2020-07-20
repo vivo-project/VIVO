@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+<!ENTITY display "http://vitro.mannlib.cornell.edu/ontologies/display/1.1#">
+<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+<!ENTITY vitro "http://vitro.mannlib.cornell.edu/ns/vitro/0.7#">
+]>
+
+<rdf:RDF xml:base="http://vitro.mannlib.cornell.edu/ontologies/display/1.1/"
+    xmlns:display="&display;"
+    xmlns:owl="&owl;"
+    xmlns:rdf="&rdf;"
+    xmlns:rdfs="&rdfs;"
+    xmlns:vitro="&vitro;">
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#researchAreaOf">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-researchAreaOf.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/BFO_0000055">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-relatedRole.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#contributingRole">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-relatedRole.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#dateTimeInterval">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-dateTimeInterval.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#dateTimeValue">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-dateTimeValue.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#dateFiled">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-dateTimeValue.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#dateIssued">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-dateTimeValue.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#expirationDate">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-dateTimeValue.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#start">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-dateTimeValue.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#end">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-dateTimeValue.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#webpage">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-webpage.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasAssociatedConcept">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasAssociatedConcept.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasSubjectArea">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasAssociatedConcept.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasResearchArea">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasAssociatedConcept.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#publisherOf">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-publisherOf.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#publicationVenueFor">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-publicationVenueFor.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#orcidId">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-orcidId.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+    <!--
+     ***********************************************************************
+     these properties have a range that is the union of 1 or more classes
+     ***********************************************************************
+    -->
+
+    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000029">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-rangeUnion.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000031">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-rangeUnion.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000038">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-rangeUnion.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000390">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-rangeUnion.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000398">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-rangeUnion.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#translatorOf">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-rangeUnion.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#documentationFor">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-rangeUnion.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#protocolRealizedBy">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-rangeUnion.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.w3.org/2006/vcard/ns#hasMember">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-rangeUnion.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+    <!--
+     ******************************************************************
+     data property custom list views
+     ******************************************************************
+    -->
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#scopusId">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-scopusId.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://purl.org/ontology/bibo/doi">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-doi.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+</rdf:RDF>
