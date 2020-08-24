@@ -1,0 +1,1258 @@
+<rdf:RDF
+    xmlns:geo="http://aims.fao.org/aos/geopolitical.owl#"
+    xmlns:vitro-public="http://vitro.mannlib.cornell.edu/ns/vitro/public#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:ero="http://purl.obolibrary.org/obo/"
+    xmlns:event="http://purl.org/NET/c4dm/event.owl#"
+    xmlns:pvs="http://vivoweb.org/ontology/provenance-support#"
+    xmlns:dcelem="http://purl.org/dc/elements/1.1/"
+    xmlns:j.0="http://www.w3.org/2006/12/owl2-xml#"
+    xmlns:vivo="http://vivoweb.org/ontology/core#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:j.1="http://purl.org/vocab/vann/"
+    xmlns:vitro="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.2="http://www.w3.org/2008/05/skos#"
+    xmlns:afn="http://jena.apache.org/ARQ/function#"
+    xmlns:bibo="http://purl.org/ontology/bibo/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:j.3="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:scires="http://vivoweb.org/ontology/scientific-research#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Cuba">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Cuba</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#United_Republic_of_Tanzania__the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United Republic of Tanzania</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Uzbekistan">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Uzbekistan</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Philippines__the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Philippines</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Tuvalu">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Tuvalu</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Belarus">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Belarus</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#PIF_1985">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Pacific Islands Forum </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#United_States_of_America">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United States of America</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#American_Samoa">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >American Samoa</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Democratic_Yemen">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Yemen, Democratic</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Socialist_Federal_Republic_of_Yugoslavia_the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Yugoslavia, Socialist Federal Republic of</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Lithuania">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Lithuania</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Australia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Australia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#CARIFORUM">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Caribbean Forum of African, Caribbean and Pacific States </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Angola">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Angola</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Belgium">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Belgium</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Equatorial_Guinea">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Equatorial Guinea</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Romania">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Romania</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Spain">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Spain</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Chile">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Chile</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Benin">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Benin</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Senegal">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Senegal</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Finland">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Finland</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Bolivia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Bolivia (Plurinational State of)</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#South_America">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >South America</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Nepal">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Nepal</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#SAARC">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >South Asian Association for Regional Cooperation </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Mauritania">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Mauritania</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Burundi">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Burundi</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Albania">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Albania</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Maldives">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Maldives</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Polynesia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Polynesia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Netherlands_Antilles">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Netherlands Antilles</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Malawi">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Malawi</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Mali">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Mali</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Belize">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Belize</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#EU">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    > European Union</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#China">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >China</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Niger_the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Niger</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Somalia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Somalia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Cyprus">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Cyprus</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#southern_Europe">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >southern Europe</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Guinea-Bissau">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Guinea-Bissau</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#western_Asia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >western Asia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Saint_Kitts_and_Nevis">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Saint Kitts and Nevis</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Ethiopia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Ethiopia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Ethiopia_1993">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Ethiopia_1993</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Lao_People_s_Democratic_Republic__the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Lao People's Democratic Republic</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Antigua_and_Barbuda">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Antigua and Barbuda</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Mongolia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Mongolia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Swaziland">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Swaziland</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#CAC">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Central American Council of Agriculture  </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Falkland_Is">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Falkland Islands</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Iran_Islamic_Rep_of_">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Iran (Islamic Republic of)</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Samoa">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Samoa</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Pakistan">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Pakistan</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Portugal">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Portugal</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Turks_and_Caicos_Islands">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Turks and Caicos Islands</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Burkina_Faso">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Burkina Faso</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Czech_Republic_the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Czech Republic</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Netherlands_the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Netherlands</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Guatemala">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Guatemala</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Slovenia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Slovenia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Monaco">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Monaco</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Andorra">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Andorra</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Wallis_and_Futuna_Is">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Wallis and Futuna Islands</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Saint_Helena">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Saint Helena, Ascension and Tristan da Cunha </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#The_former_Yugoslav_Republic_of_Macedonia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Yugoslav, former Yugoslav Republic of Macedonia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Canada">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Canada</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Lebanon">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Lebanon</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Sweden">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Sweden</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#LDC">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >least developed countries </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Iceland">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Iceland</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#LIFDC_2009">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >low income and food deficit countries</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Montserrat">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Montserrat</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Republic_of_Korea__the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >South Korea</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Mozambique">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Mozambique</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Yugoslavia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Yugoslavia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Cook_Islands_the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Cook Islands</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Aruba">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Aruba</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#IGADD">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Intergovernmental Authority on Development </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Martinique">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Martinique</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Argentina">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Argentina</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Honduras">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Honduras</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#central_America">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >central America</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#British_Virgin_Islands">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >British Virgin Islands</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Cote_d_Ivoire">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Côte d'Ivoire</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Union_of_Soviet_Socialist_Republic_the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Union of Soviet Socialist Republic</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Denmark">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Denmark</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#LIFDC_2008">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >low income and food deficit countries</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Palau">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Palau</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#UEMOA">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >West African Economic and Monetary Union </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Malta">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Malta</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Austria">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Austria</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Liechtenstein">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Liechtenstein</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Kyrgyzstan">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Kyrgyzstan</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Kenya">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Kenya</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Malaysia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Malaysia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Mauritius">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Mauritius</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Ghana">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Ghana</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Liberia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Liberia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#PIF">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Pacific Islands Forum </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Namibia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Namibia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Saint_Pierre_and_Miquelon">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Saint Pierre and Miquelon</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#LIFDC">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >low income and food deficit countries</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Trinidad_and_Tobago">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Trinidad and Tobago</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#CARICOM_1985">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Caribbean Community and Common Market </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Egypt">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Egypt</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Bahamas_the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Bahamas</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Cambodia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Cambodia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#SADC">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Southern African Development Community </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#South_Sudan">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >South Sudan </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#LIFDC_2005">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >low income and food deficit countries</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Anguilla">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Anguilla</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Kiribati">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Kiribati</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#FAO_2006">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >FAO_2006</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Poland">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Poland</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#French_Guiana">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >French Guiana</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Federal_Republic_of_Germany_the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Germany, Federal Republic of</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Qatar">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Qatar</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#El_Salvador">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >El Salvador</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Madagascar">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Madagascar</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Iraq">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Iraq</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Lesotho">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Lesotho</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#NFIDC">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >NFIDC</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Suriname">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Suriname</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Saint_Lucia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Saint Lucia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Ukraine">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Ukraine</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Estonia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Estonia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#CEN_SAD_1998">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Community of Sahel-Saharan States</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Thailand">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Thailand</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Azerbaijan">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Azerbaijan</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#FAO">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Food and Agriculture Organization of the United Nations </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Cape_Verde">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Cape Verde</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#FAO_2007">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Food and Agriculture Organization of the United Nations </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Gabon">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Gabon</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Sri_Lanka">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Sri Lanka</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#western_Europe">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >western Europe</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Timor-Leste">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Timor-Leste</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Serbia_and_Montenegro">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Serbia and Montenegro</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Costa_Rica">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Costa Rica</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Jordan">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Jordan</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Kazakhstan">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Kazakhstan</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Melanesia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Melanesia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Sudan_the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Sudan</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Singapore">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Singapore</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Tajikistan">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Tajikistan</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Saint_Vincent_and_the_Grenadines">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Saint Vincent and the Grenadines</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Switzerland">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Switzerland</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Bhutan">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Bhutan</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Curacao">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Curaçao </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Reunion">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Réunion</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#CEEAC">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Economic Community of Central African States </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Myanmar">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Myanmar</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Indonesia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Indonesia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#LLDC">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >land-locked developing country</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Panama">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Panama</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#PTA">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Preferential Trade Area for Eastern and Southern African States </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Dominican_Republic_the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Dominican Republic</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Turkey">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Turkey</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Papua_New_Guinea">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Papua New Guinea</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Brunei_Darussalam">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Brunei Darussalam</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#SIDS">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Small Island Developing States </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Eritrea">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Eritrea</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#LDC_1993">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >least developed countries </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Dominica">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Dominica</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Democratic_Republic_of_the_Congo">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Democratic Republic of the Congo</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Turkmenistan">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Turkmenistan</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Democratic_People_s_Republic_of_Korea_the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >North Korea</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Solomon_Islands">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Solomon Islands</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Morocco">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Morocco</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#northern_Europe">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >northern Europe</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#eastern_Asia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >eastern Asia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Uganda">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Uganda</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#United_States_Virgin_Islands">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United States Virgin Islands</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Faroe_Islands">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Faroe Islands</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Australia_and_New_Zealand">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Australia and New Zealand</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#South_Africa">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >South Africa</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#CAN">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Andean Community </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Afghanistan">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Afghanistan</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Armenia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Armenia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Rwanda">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Rwanda</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#German_Democratic_Republic_the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >German Democratic Republic</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Djibouti">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Djibouti</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#San_Marino">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >San Marino</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#central_Asia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Central Asia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Sao_Tome_and_Principe">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Sao Tome and Principe</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Luxembourg">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Luxembourg</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Nauru">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Nauru</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Algeria">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Algeria</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Micronesia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Micronesia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#CCASG">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Cooperation Council for the Arab States of the Gulf </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Yemen_1990">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Yemen_1990</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Nicaragua">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Nicaragua</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#IGAD">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Intergovernmental Authority on Development</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#northern_Africa">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >northern Africa</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Libyan_Arab_Jamahiriya__the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Libyan Arab Jamahiriya</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Marshall_Islands__the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Marshall Islands</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Oman">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Oman</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Sudan_the_1956">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Sudan</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#western_Africa">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >western Africa</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Italy">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Italy</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Chad">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Chad</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Tunisia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Tunisia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Gambia__the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Gambia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Serbia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Serbia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#New_Zealand">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >New Zealand</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Tonga">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Tonga</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Russian_Federation__the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Russian Federation</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Uruguay">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Uruguay</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Czechoslovakia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Czechoslovakia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#CEMAC">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Central African Economic and Monetary Community </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Montenegro">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Montenegro</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Saint-Martin">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Saint-Martin (French Part)   </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Bermuda">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Bermuda</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Sierra_Leone">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Sierra Leone</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Republic_of_Moldova">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Republic of Moldova</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Georgia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Georgia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Micronesia__Fed_States_of_">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Micronesia (Federated States of)</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#COMESA">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Common Market for Eastern and Southern Africa </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Guyana">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Guyana</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#south-eastern_Asia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >south-eastern Asia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Oceania">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Oceania</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#United_Arab_Emirates__the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United Arab Emirates</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Bonaire_Sint_Eustatius_and_Saba">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Bonaire, Sint Eustatius and Saba  </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#World">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >World</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Israel">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Israel</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Guinea">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Guinea</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Europe">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Europe</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#COMESA_1994">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Common Market for Eastern and Southern Africa </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Brazil">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Brazil</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#ECOWAS_1985">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Economic Community of West African States</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Ireland">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Ireland</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Americas">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Americas</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#MERCOSUR_1991">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Southern Common Market </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Syrian_Arab_Republic_the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Syrian Arab Republic</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Hungary">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Hungary</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#United_Kingdom_of_Great_Britain_and_Northern_Ireland__the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >United Kingdom</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Colombia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Colombia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Asia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Asia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Latvia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Latvia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Haiti">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Haiti</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Greece">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Greece</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#AMU">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Arab Maghreb Union </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Saint_Barthelemy">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Saint Barthélemy   </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#French_Polynesia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >French Polynesia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Botswana">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Botswana</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Fiji">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Fiji</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Peru">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Peru</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#CEN_SAD">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Community of Sahel-Saharan States</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Viet_Nam">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Viet Nam</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#CARICOM">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Caribbean Community and Common Market </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Paraguay">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Paraguay</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Grenada">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Grenada</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Bulgaria">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Bulgaria</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Norway">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Norway</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Central_African_Republic_the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Central African Republic</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Sint_Maarten">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Sint Maarten (Dutch Part)  </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Ecuador">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Ecuador</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#eastern_Africa">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >eastern Africa</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Venezuela">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Venezuela (Bolivarian Republic of)</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#France">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >France</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Caribbean">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Caribbean</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Nigeria">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Nigeria</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Guadeloupe">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Guadeloupe</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#southern_Africa">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >southern Africa</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Mexico">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Mexico</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#SAARC_1985">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >South Asian Association for Regional Cooperation </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#MERCOSUR">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Southern Common Market </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Congo_the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Congo</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Comoros_the">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Comoros</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Niue">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Niue</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Tokelau">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Tokelau</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#New_Caledonia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >New Caledonia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Bosnia_and_Herzegovina">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Bosnia and Herzegovina</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Antarctica">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Antarctica</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Togo">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Togo</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Barbados">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Barbados</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Zambia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Zambia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Japan">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Japan</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Kuwait">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Kuwait</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#eastern_Europe">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >eastern Europe</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Bahrain">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Bahrain</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Holy_See">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Holy See</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#India">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >India</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Cameroon">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Cameroon</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Seychelles">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Seychelles</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Zimbabwe">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Zimbabwe</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#CAEU">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Council of Arab Economic Unity </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#ECO">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Economic Cooperation Organization </rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#southern_Asia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >southern Asia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Cayman_Islands">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Cayman Islands</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Zaire">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Zaire</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#ECOWAS">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Economic Community of West African States</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Bangladesh">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Bangladesh</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Jamaica">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Jamaica</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Africa">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Africa</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Croatia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Croatia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Yemen">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Yemen</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#northern_America">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >North America</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Slovakia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Slovakia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Germany">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Germany</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Vanuatu">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Vanuatu</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Puerto_Rico">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Puerto Rico</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Guam">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Guam</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Saudi_Arabia">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Saudi Arabia</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Gibraltar">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Gibraltar</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#middle_Africa">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >middle Africa</rdfs:label>
+  </rdf:Description>
+</rdf:RDF>

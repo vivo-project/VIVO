@@ -1,31 +1,11 @@
-# baseURI: http://vivoweb.org/ontology/continents
-
-@prefix : <http://vivoweb.org/ontology/continents#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix core: <http://vivoweb.org/ontology/core#> .
 @prefix geo: <http://aims.fao.org/aos/geopolitical.owl#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-geo:Africa
-  a core:Continent ;
-.
-geo:Antarctica
-  a core:Continent ;
-.
-geo:Asia
-  a core:Continent ;
-.
-geo:Australia_and_New_Zealand
-  a core:Continent ;
-.
-geo:Europe
-  a core:Continent ;
-.
-geo:South_America
-  a core:Continent ;
-.
-geo:northern_America
-  a core:Continent ;
-.
+geo:Africa rdf:type core:Continent .
+geo:Asia rdf:type core:Continent .
+geo:Australia_and_New_Zealand rdf:type core:Continent .
+geo:Europe rdf:type core:Continent .
+geo:South_America rdf:type core:Continent .
+geo:northern_America rdf:type core:Continent .
+geo:Antarctica rdf:type core:Continent .
