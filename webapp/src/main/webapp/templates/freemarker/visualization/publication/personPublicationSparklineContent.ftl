@@ -158,9 +158,9 @@
                                     var sparksText = "";
                                     if ( !onlyUnknownYearPublications ) {
 
-                                        $('#${sparklineContainerID} td.sparkline_number').text(totalPubs + " ${i18n().last_ten_full}").attr("class", "grey-text");
+                                        $('#${sparklineContainerID} td.sparkline_number').text(totalPubs + " ${i18n().last_ten_full?js_string}").attr("class", "grey-text");
 
-                                        sparksText += "${i18n().years}";
+                                        sparksText += "${i18n().years?js_string}";
 
                                         if (totalPubs !== totalPublicationCount) {
                                         //sparksText += ' (' + totalPublicationCount + ' ${i18n().total})' ;
@@ -190,18 +190,18 @@
                     var totalPubs = onlyUnknownYearPublications ? unknownYearPublicationCounts : renderedSparks;
 
                     if ( totalPubs == 1 ) {
-                        var pubDisplay = "${i18n().publication}";
+                        var pubDisplay = "${i18n().publication?js_string}";
                     } else {
-                        var pubDisplay = "${i18n().publications}";
+                        var pubDisplay = "${i18n().publications?js_string}";
                     }
 
                     $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).attr("class", "grey-text").append("<span style='color: #2485AE;'> "+ pubDisplay +"<br/></span>");
 
-                    var sparksText = '  ${i18n().from} <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}'
+                    var sparksText = '  ${i18n().from?js_string} <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}'
                                         + ' - ${sparklineVO.latestRenderedPublicationYear?c}</span>';
 
                     if (totalPubs !== totalPublicationCount) {
-                        sparksText += ' (' + totalPublicationCount + ' ${i18n().total})';
+                        sparksText += ' (' + totalPublicationCount + ' ${i18n().total?js_string})';
                     }
 
                     if (totalPublicationCount) {

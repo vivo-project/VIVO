@@ -25,7 +25,7 @@
 
                 function doHarvest() {
                     document.getElementById("harvestButton").disabled = true;
-                    document.getElementById("harvestButtonHelpText").innerHTML = "${i18n().data_being_harvested}";
+                    document.getElementById("harvestButtonHelpText").innerHTML = "${i18n().data_being_harvested?js_string}";
 
                     var request = createRequest();
                     request.onreadystatechange=function() {
@@ -92,7 +92,7 @@
                             importedItems.appendChild(newLi);
                         }
 
-                        document.getElementById("harvestButtonHelpText").innerHTML = "${i18n().harvest_complete}";
+                        document.getElementById("harvestButtonHelpText").innerHTML = "${i18n().harvest_complete?js_string}";
                     }
                 }
 

@@ -63,7 +63,7 @@
 
                 if ( !onlyUnknownYearPublications ) {
                     if ( td1Text == tenYearCount ) {
-                        td2Text += "${i18n().last_ten_full_years} " ;
+                        td2Text += "${i18n().last_ten_full_years?js_string} " ;
                     }
                     else {
                         td2Text += "<strong>" + tenYearCount + "</strong> ${i18n().last_ten_full_years} " ;
