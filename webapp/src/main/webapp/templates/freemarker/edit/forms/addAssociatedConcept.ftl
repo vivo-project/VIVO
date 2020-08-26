@@ -46,10 +46,10 @@
                  <div class="row">
                      <div class="col-12">
                          <div class="column conceptLabelInfo">
-                            <h4>Concept (Type)</h4>
+                            <h4>${i18n().concept_type}</h4>
                          </div>
                          <div class="column conceptVocabSource">
-                            <h4>Vocabulary Source</h4>
+                            <h4>${i18n().vocabulary_source}</h4>
                          </div>
                          <div class="column conceptRemoval">&nbsp;
                          </div>
