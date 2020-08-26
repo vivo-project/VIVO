@@ -396,7 +396,10 @@ final public class VisualizationCaches {
                             String langCtx = "en-US";
                             // UQAM-Optimization Adjust to linguistic context
                             try {
-                                langCtx  = vreq.getLocale().getLanguage() + "-"+vreq.getLocale().getCountry();
+                                langCtx  = vreq.getLocale().getLanguage();
+                                if (!vreq.getLocale().getCountry().isEmpty()) {
+                                    langCtx += "-" + vreq.getLocale().getCountry();
+                                }
                             } catch (Exception e) {
                             }
                             String query = QueryConstants.getSparqlPrefixQuery() +
