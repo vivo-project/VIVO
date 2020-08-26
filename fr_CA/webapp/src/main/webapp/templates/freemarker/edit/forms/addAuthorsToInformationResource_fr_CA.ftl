@@ -185,14 +185,14 @@ var customFormData = {
     reorderUrl: '${urls.base}/edit/reorder'
 };
 var i18nStrings = {
-    authorNameWrapperTitle: "${i18n().drag_drop_reorder_authors}",
-    reorderAuthorsAlert: "${i18n().reordering_authors_failed}",
-    removeAuthorshipMessage: "${i18n().confirm_author_removal}",
-    removeAuthorshipAlert: "${i18n().error_processing_author_request}",
-    authorTypeText: "${i18n().author_capitalized}",
-    organizationTypeText: "${i18n().organization_capitalized}",
-    helpTextSelect: "${i18n().select_an_existing}",
-    helpTextAdd: "${i18n().or_add_new_one}"
+    authorNameWrapperTitle: "${i18n().drag_drop_reorder_authors?js_string}",
+    reorderAuthorsAlert: "${i18n().reordering_authors_failed?js_string}",
+    removeAuthorshipMessage: "${i18n().confirm_author_removal?js_string}",
+    removeAuthorshipAlert: "${i18n().error_processing_author_request?js_string}",
+    authorTypeText: "${i18n().author_capitalized?js_string}",
+    organizationTypeText: "${i18n().organization_capitalized?js_string}",
+    helpTextSelect: "${i18n().select_an_existing?js_string}",
+    helpTextAdd: "${i18n().or_add_new_one?js_string}"
 };
 </script>
 

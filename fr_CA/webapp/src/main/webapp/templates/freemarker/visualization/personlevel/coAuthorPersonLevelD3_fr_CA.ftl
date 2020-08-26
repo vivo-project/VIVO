@@ -39,16 +39,16 @@ var visualizationDataRoot = "${dataVisualizationURLRoot}";
 // -->
 
 var i18nStringsCoauthorship = {
-    coAuthorsString: "${i18n().co_authors_capitalized}",
-    authorString: "${i18n().author_capitalized}",
-    publicationsWith: "${i18n().publications_with}",
-    publicationsString: "${i18n().through_today}",
-    coauthorsString: "${i18n().co_author_s_capitalized}"
+    coAuthorsString: "${i18n().co_authors_capitalized?js_string}",
+    authorString: "${i18n().author_capitalized?js_string}",
+    publicationsWith: "${i18n().publications_with?js_string}",
+    publicationsString: "${i18n().through_today?js_string}",
+    coauthorsString: "${i18n().co_author_s_capitalized?js_string}"
 };
 var i18nStringsPersonLvl = {
-    fileCapitalized: "${i18n().file_capitalized}",
-    contentRequiresFlash: "${i18n().content_requires_flash}",
-    getFlashString: "${i18n().get_flash}"
+    fileCapitalized: "${i18n().file_capitalized?js_string}",
+    contentRequiresFlash: "${i18n().content_requires_flash?js_string}",
+    getFlashString: "${i18n().get_flash?js_string}"
 };
 </script>
 

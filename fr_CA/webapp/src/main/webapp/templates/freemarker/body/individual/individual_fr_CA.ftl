@@ -33,10 +33,10 @@
 <#include "individual-vitro.ftl">
 <script>
 var i18nStrings = {
-    displayLess: "${i18n().display_less}",
-    displayMoreEllipsis: "${i18n().display_more_ellipsis}",
-    showMoreContent: "${i18n().show_more_content}",
-    verboseTurnOff: "${i18n().verbose_turn_off}",
+    displayLess: "${i18n().display_less?js_string}",
+    displayMoreEllipsis: "${i18n().display_more_ellipsis?js_string}",
+    showMoreContent: "${i18n().show_more_content?js_string}",
+    verboseTurnOff: "${i18n().verbose_turn_off?js_string}",
 };
 </script>
 

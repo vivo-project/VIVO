@@ -167,17 +167,17 @@
     --> 
 
     var i18nStrings = {
-        displayLess: "${i18n().display_less}",
-        displayMoreEllipsis: "${i18n().display_more_ellipsis}",
-        showMoreContent: "${i18n().show_more_content}",
-        verboseTurnOff: "${i18n().verbose_turn_off}",
-        researchAreaTooltipOne: "${i18n().research_area_tooltip_one}",
-        researchAreaTooltipTwo: "${i18n().research_area_tooltip_two}"
+        displayLess: "${i18n().display_less?js_string}",
+        displayMoreEllipsis: "${i18n().display_more_ellipsis?js_string}",
+        showMoreContent: "${i18n().show_more_content?js_string}",
+        verboseTurnOff: "${i18n().verbose_turn_off?js_string}",
+        researchAreaTooltipOne: "${i18n().research_area_tooltip_one?js_string}",
+        researchAreaTooltipTwo: "${i18n().research_area_tooltip_two?js_string}"
     };
     var i18nStringsUriRdf = {
-        shareProfileUri: "${i18n().share_profile_uri}",
-        viewRDFProfile: "${i18n().view_profile_in_rdf}",
-        closeString: "${i18n().close}"
+        shareProfileUri: "${i18n().share_profile_uri?js_string}",
+        viewRDFProfile: "${i18n().view_profile_in_rdf?js_string}",
+        closeString: "${i18n().close?js_string}"
     };
 </script>
 

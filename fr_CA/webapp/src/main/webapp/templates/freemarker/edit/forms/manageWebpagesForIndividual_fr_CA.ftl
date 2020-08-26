@@ -70,10 +70,10 @@ var customFormData = {
     reorderUrl: '${urls.base}/edit/reorder'
 };
 var i18nStrings = {
-    dragDropToReorderWebpages: "${i18n().drag_drop_to_reorder_webpages}",
-    webpageReorderingFailed: "${i18n().webpage_reordering_failed}",
-    confirmWebpageDeletion: "${i18n().confirm_webpage_deletion}",
-    errorRemovingWebpage: "${i18n().error_removing_webpage}"
+    dragDropToReorderWebpages: "${i18n().drag_drop_to_reorder_webpages?js_string}",
+    webpageReorderingFailed: "${i18n().webpage_reordering_failed?js_string}",
+    confirmWebpageDeletion: "${i18n().confirm_webpage_deletion?js_string}",
+    errorRemovingWebpage: "${i18n().error_removing_webpage?js_string}"
 };
 </script>
 
