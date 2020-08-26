@@ -87,23 +87,23 @@
         <@lh.listAcademicDepartments />
     <script>
         var i18nStrings = {
-            researcherString: '${i18n().researcher}',
-            researchersString: '${i18n().researchers}',
-            currentlyNoResearchers: '${i18n().currently_no_researchers}',
-            countriesAndRegions: '${i18n().countries_and_regions}',
-            countriesString: '${i18n().countries}',
-            regionsString: '${i18n().regions}',
-            statesString: '${i18n().map_states_string}',
-            stateString: '${i18n().map_state_string}',
-            statewideLocations: '${i18n().statewide_locations}',
-            researchersInString: '${i18n().researchers_in}',
-            inString: '${i18n().in}',
-            noFacultyFound: '${i18n().no_faculty_found}',
-            placeholderImage: '${i18n().placeholder_image}',
-            viewAllFaculty: '${i18n().view_all_faculty}',
-            viewAllString: '${i18n().view_all}',
-            viewAllDepartments: '${i18n().view_all_departments}',
-            noDepartmentsFound: '${i18n().no_departments_found}'
+            researcherString: '${i18n().researcher?js_string}',
+            researchersString: '${i18n().researchers?js_string}',
+            currentlyNoResearchers: '${i18n().currently_no_researchers?js_string}',
+            countriesAndRegions: '${i18n().countries_and_regions?js_string}',
+            countriesString: '${i18n().countries?js_string}',
+            regionsString: '${i18n().regions?js_string}',
+            statesString: '${i18n().map_states_string?js_string}',
+            stateString: '${i18n().map_state_string?js_string}',
+            statewideLocations: '${i18n().statewide_locations?js_string}',
+            researchersInString: '${i18n().researchers_in?js_string}',
+            inString: '${i18n().in?js_string}',
+            noFacultyFound: '${i18n().no_faculty_found?js_string}',
+            placeholderImage: '${i18n().placeholder_image?js_string}',
+            viewAllFaculty: '${i18n().view_all_faculty?js_string}',
+            viewAllString: '${i18n().view_all?js_string}',
+            viewAllDepartments: '${i18n().view_all_departments?js_string}',
+            noDepartmentsFound: '${i18n().no_departments_found?js_string}'
         };
         // set the 'limmit search' text and alignment
         if  ( $('input.search-homepage').css('text-align') == "right" ) {

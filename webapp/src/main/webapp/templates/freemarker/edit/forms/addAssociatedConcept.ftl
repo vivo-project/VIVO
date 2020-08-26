@@ -173,19 +173,19 @@ var vocabSpecificDisplay = {};
 vocabSpecificDisplay["${vocab}"] = "${vocabSpecificDisplay[vocab]}";
 </#list>
 var i18nStrings = {
-    vocServiceUnavailable: '${i18n().vocabulary_service_unavailable}',
-    noResultsFound: '${i18n().no_serch_results_found}',
-    defaultLabelTypeString: '${i18n().label_type}',
-    definitionString: '${i18n().definition_capitalized}',
-    bestMatchString: '${i18n().best_match}',
-    selectTermFromResults: '${i18n().select_term_from_results}',
-    selectVocSource: '${i18n().select_vocabulary_source_to_search}',
-    confirmTermDelete: '${i18n().confirm_term_deletion}',
-    errorTernNotRemoved: '${i18n().error_term_not_deleted}',
+    vocServiceUnavailable: '${i18n().vocabulary_service_unavailable?js_string}',
+    noResultsFound: '${i18n().no_serch_results_found?js_string}',
+    defaultLabelTypeString: '${i18n().label_type?js_string}',
+    definitionString: '${i18n().definition_capitalized?js_string}',
+    bestMatchString: '${i18n().best_match?js_string}',
+    selectTermFromResults: '${i18n().select_term_from_results?js_string}',
+    selectVocSource: '${i18n().select_vocabulary_source_to_search?js_string}',
+    confirmTermDelete: '${i18n().confirm_term_deletion?js_string}',
+    errorTernNotRemoved: '${i18n().error_term_not_deleted?js_string}',
     vocabSpecificLabels: vocabSpecificDisplay,
-    displayMoreEllipsis: '${i18n().display_more_ellipsis}',
-    displayLess: '${i18n().display_less}',
-    showMoreContent: '${i18n().show_more_content}'
+    displayMoreEllipsis: '${i18n().display_more_ellipsis?js_string}',
+    displayLess: '${i18n().display_less?js_string}',
+    showMoreContent: '${i18n().show_more_content?js_string}'
 };
 </script>
 

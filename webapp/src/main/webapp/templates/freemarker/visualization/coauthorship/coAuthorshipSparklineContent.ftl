@@ -159,17 +159,17 @@
                     var totalPubs = onlyUnknownYearPublications ? unknownYearPublicationCounts : renderedShortSparks;
 
                     if (totalPubs === 1) {
-                        var pubDisplay = "${i18n().co_author}";
+                        var pubDisplay = "${i18n().co_author?js_string}";
                     } else {
-                        var pubDisplay = "${i18n().co_authors}";
+                        var pubDisplay = "${i18n().co_authors?js_string}";
                     }
 
                     $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + pubDisplay + " <br/></span>");
 
-                    var sparksText = '  ${i18n().within_last_10_years}';
+                    var sparksText = '  ${i18n().within_last_10_years?js_string}';
 
                     if (totalPubs !== totalPublicationCount) {
-                        sparksText += ' (' + totalPublicationCount + ' ${i18n().total})';
+                        sparksText += ' (' + totalPublicationCount + ' ${i18n().total?js_string})';
                     }
 
                  <#else>
@@ -188,22 +188,22 @@
                     var totalPubs = onlyUnknownYearPublications ? unknownYearPublicationCounts : renderedSparks;
 
                     if ( totalPubs == 1 ) {
-                        var pubDisplay = "${i18n().co_author}";
+                        var pubDisplay = "${i18n().co_author?js_string}";
                     } else {
-                        var pubDisplay = "${i18n().co_authors}";
+                        var pubDisplay = "${i18n().co_authors?js_string}";
                     }
 
                     $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + pubDisplay + " <br/></span>");
 
-                    var sparksText = '  ${i18n().from} <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}'
+                    var sparksText = '  ${i18n().from?js_string} <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}'
                                         + ' - ${sparklineVO.latestRenderedPublicationYear?c}</span>';
 
                     if (totalPubs !== totalPublicationCount) {
-                        sparksText += ' (' + totalPublicationCount + ' ${i18n().total})';
+                        sparksText += ' (' + totalPublicationCount + ' ${i18n().total?js_string})';
                     }
 
                     if (totalPublicationCount) {
-                        sparksText += ' <br /><a href="${sparklineVO.downloadDataLink}" title="csv ${i18n().file_capitalized}">(.CSV ${i18n().file_capitalized})</a> ';
+                        sparksText += ' <br /><a href="${sparklineVO.downloadDataLink}" title="csv ${i18n().file_capitalized?js_string}">(.CSV ${i18n().file_capitalized})</a> ';
                     }
 
                  </#if>

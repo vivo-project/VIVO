@@ -16,21 +16,21 @@ ${stylesheets.add(
 
 <script language="JavaScript" type="text/javascript">
     var i18nStringsCap = {
-        term: '${i18n().term_capitalized}',
-        group: '${i18n().group_capitalized}',
-        pause: '${i18n().pause}',
-        resume: '${i18n().resume}',
-        reset: '${i18n().cap_map_reset}',
-        show_group_labels: '${i18n().show_group_labels}',
-        hide_group_labels: '${i18n().hide_group_labels}',
-        delete_selected: '${i18n().delete_selected}',
-        remove_capability: '${i18n().remove_capability}',
-        remove_group: '${i18n().remove_group}',
-        expand: '${i18n().expand}'
+        term: '${i18n().term_capitalized?js_string}',
+        group: '${i18n().group_capitalized?js_string}',
+        pause: '${i18n().pause?js_string}',
+        resume: '${i18n().resume?js_string}',
+        reset: '${i18n().cap_map_reset?js_string}',
+        show_group_labels: '${i18n().show_group_labels?js_string}',
+        hide_group_labels: '${i18n().hide_group_labels?js_string}',
+        delete_selected: '${i18n().delete_selected?js_string}',
+        remove_capability: '${i18n().remove_capability?js_string}',
+        remove_group: '${i18n().remove_group?js_string}',
+        expand: '${i18n().expand?js_string}'
     };
     var contextPath = "${urls.base}";
     $(document).ready(function() {
-        document.title = "${i18n().capability_map}";
+        document.title = "${i18n().capability_map?js_string}";
         var loadedConcepts = $.ajax({
             url: contextPath + "/visualizationAjax?vis=capabilitymap&data=concepts",
             type: "GET",
