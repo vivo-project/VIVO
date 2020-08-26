@@ -42,7 +42,7 @@ var i18nStringsCoauthorship = {
     coAuthorsString: '${i18n().co_authors_capitalized?js_string}',
     authorString: '${i18n().author_capitalized?js_string}',
     publicationsWith: '${i18n().publications_with?js_string}',
-    publicationsString: '${i18n().through_today?js_string?js_string}',
+    publicationsString: '${i18n().through_today?js_string}',
     coauthorsString: '${i18n().co_author_s_capitalized?js_string}'
 };
 var i18nStringsPersonLvl = {
