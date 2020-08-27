@@ -5,6 +5,7 @@ package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ConstantFieldOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 
 public class AddClinicalRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
 
@@ -22,30 +23,20 @@ public class AddClinicalRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
 	}
 
 	/** Clinical role involves hard-coded options for the "right side" of the role or activity. */
-    @Override
-    FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
-		//		return new ConstantFieldOptions(
-		//		        "",  "Select one",
-		//		        "http://vivoweb.org/ontology/core#Project", "Project",
-		//		        "http://purl.obolibrary.org/obo/ERO_0000005", "Service"
-		//		);
-
-		//UQAM-Linguistic-Management Replacing the above hard coding assigment by a dynamic assigment that takes into account the linguistic context
-		ConstantFieldOptions filedOptions = GeneratorUtil.buildConstantFieldOptions(vreq, DESCRIBE_QUERY);
-		return filedOptions;
-	}
-	/*
-	 * UQAM-Linguistic-Management get attributes for this specific subject
-	 */
-	private static String DESCRIBE_QUERY = " describe "+
-			"<http://vivoweb.org/ontology/core#Project> "+
-			"<http://purl.obolibrary.org/obo/ERO_0000005>";
-	//isShowRoleLabelField remains true for this so doesn't need to be overwritten
 	@Override
-	boolean isShowRoleLabelField(){
+	FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
+	    return GeneratorUtil.buildResourceAndLabelFieldOptions(
+	            vreq.getRDFService(), vreq.getWebappDaoFactory(), "", 
+	            I18n.bundle(vreq).text("select_type"),
+	            "http://vivoweb.org/ontology/core#Project",
+	            "http://purl.obolibrary.org/obo/ERO_0000005" /* Service */
+	            );
+	}
+
+	@Override
+    boolean isShowRoleLabelField(){
 	    return true;
 	}
-
 
        /*
         * Use the methods below to change the date/time precision in the

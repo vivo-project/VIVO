@@ -8,16 +8,15 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.jena.query.QueryExecution;
-import org.apache.jena.query.QueryExecutionFactory;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
+import org.apache.jena.query.ParameterizedSparqlString;
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
@@ -28,6 +27,7 @@ import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.i18n.selection.SelectedLocale;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 
 /**
  * This is an odd controller that is just drawing a page with links on it.
@@ -163,9 +163,14 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         + "    OPTIONAL { ?link rdfs:label ?linkLabel } \n"
         + "    OPTIONAL { ?link core:rank ?rank } \n"
         + "    OPTIONAL { ?link vitro:mostSpecificType ?type } \n"
-        + "    OPTIONAL { ?type rdfs:label ?typeLabel . \n"
-     // UQAM-Linguistic-Management Add linguistic control on label
-        + "                FILTER (lang(?typeLabel) = 'LANGUAGE' ) } \n"
+        // UQAM-Linguistic-Management Add linguistic control on label
+        + "    OPTIONAL { ?type rdfs:label ?typeLabelMain . \n"
+        + "               FILTER (lang(?typeLabel) = ?language) \n"
+        + "    } \n"
+        + "    OPTIONAL { ?type rdfs:label ?typeLabelFallback . \n"
+        + "               FILTER (lang(?typeLabel) != ?language) \n"
+        + "    } \n"
+        + "    BIND(COALESCE(?typeLabelMain, ?typeLabelFallback) AS ?typeLabel)"
         + "} GROUP BY ?rank ?vcard ?link ?url ?typeLabel \n"
     	+ "  ORDER BY ?rank";
 
@@ -216,7 +221,10 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
          * UQAM-Linguistic-Management Adjust the query to the liguistic context
          */
         Locale lang = SelectedLocale.getCurrentLocale(vreq);
-    	return WEBPAGE_QUERY.replaceAll("LANGUAGE", lang.toString());
+        ParameterizedSparqlString queryPstr = new ParameterizedSparqlString(
+                WEBPAGE_QUERY);
+        queryPstr.setLiteral("language", lang.toString());
+    	return queryPstr.toString();
     }
 
     protected String getTemplate() {
