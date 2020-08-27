@@ -1,0 +1,32 @@
+.capability, .edge, .group, .links2, .links3, .links4 {
+  text-indent: 28px;
+	font-size: 9px;
+	width: 98%;
+	background-repeat: no-repeat;
+	background-image: url("../../../images/visualization/capabilitymap/key-sprite.png")
+}
+
+.capability {
+	background-position: 0px 0px;
+	height: 22px;
+}
+
+.edge {
+	background-position: 0px -22px;
+}
+
+.group {
+	background-position: 0px -48px;
+}
+
+.links2 {
+	background-position: 0px -73px;
+}
+
+.links3 {
+	background-position: 0px -95px;
+}
+
+.links4 {
+	background-position: 0px -121px;
+}

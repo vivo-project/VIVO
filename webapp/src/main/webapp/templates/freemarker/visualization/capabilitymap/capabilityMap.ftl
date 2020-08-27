@@ -11,7 +11,8 @@ ${stylesheets.add(
     '<link rel="stylesheet" type="text/css" href="${urls.base}/templates/freemarker/edit/forms/css/autocomplete.css" />',
     '<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/personlevel/page.css" />',
     '<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/visualization.css" />',
-    '<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/capabilitymap/graph.css" />'
+    '<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/capabilitymap/graph.css" />',
+    '<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/capabilitymap/key.css" />'
 )}
 
 <script language="JavaScript" type="text/javascript">
@@ -117,7 +118,12 @@ ${stylesheets.add(
                             </li>
                         </ul>
                         <p style="position:absolute; bottom:10px">
-                            <img src="${urls.base}/images/visualization/capabilitymap/key.png" alt="Key">
+                        <div class="capability">${i18n().cap_map_key1}</div>
+                        <div class="edge">${i18n().cap_map_key2}</div>
+                        <div class="group">${i18n().cap_map_key3}</div>
+                        <div class="links2">${i18n().cap_map_key4}</div>
+                        <div class="links3">${i18n().cap_map_key5}</div>
+                        <div class="links4">${i18n().cap_map_key6}</div>
                         </p>
                     </div>
                     <div class="result_section" id="logg">
@@ -148,4 +154,3 @@ ${stylesheets.add(
         </div>
     </div>
 </div>
-
