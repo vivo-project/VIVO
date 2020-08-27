@@ -22,33 +22,34 @@ public class GeneratorUtil {
     
     private static final Log log = LogFactory.getLog(GeneratorUtil.class);
 	
-	/**
-	 * Build a field options list of resource URIs paired with their labels
-	 * as retrieved from the supplied RDFService.
-	 * 
-	 * @param rdfService from which to retrieve labels: this should typically
-	 * be a LanguageFilteringRDFService.
-	 *  
-	 * @param webappDaoFactory may be null.  If non-null, labels for classes
-	 * will be returned from here first before consulting rdfService.
-	 * 
-	 * @param headerValue optional value for first value/label pair
-	 * in the options list before appending the URIs with their labels. 
-	 * May be null.
-	 * 
-	 * @param headerLabel optional label for first value/label pair
-     * in the options list before appending the URIs with their labels. 
-     * May be null.
-	 * 
-	 * @param resourceURIs variable list of resource URI strings
-	 * 
-	 * @return empty ConstantFieldOptions list if resourceURIs is null or empty 
-	 * or if rdfService is null
-	 * @throws RDFServiceException from the supplied rdfService
-	 * @throws Exception from ConstantFieldOptions constructor
-	 */
+    /**
+     * Build a field options list of resource URIs paired with their labels as
+     * retrieved from the supplied RDFService.
+     * 
+     * @param rdfService       from which to retrieve labels: this should typically
+     *                         be a LanguageFilteringRDFService.
+     * 
+     * @param webappDaoFactory may be null. If non-null, labels for classes will be
+     *                         returned from here first before consulting
+     *                         rdfService.
+     * 
+     * @param headerValue      optional value for first value/label pair in the
+     *                         options list before appending the URIs with their
+     *                         labels. May be null.
+     * 
+     * @param headerLabel      optional label for first value/label pair in the
+     *                         options list before appending the URIs with their
+     *                         labels. May be null.
+     * 
+     * @param resourceURIs     variable list of resource URI strings
+     * 
+     * @return empty ConstantFieldOptions list if resourceURIs is null or empty or
+     *         if rdfService is null
+     * @throws RDFServiceException from the supplied rdfService
+     * @throws Exception           from ConstantFieldOptions constructor
+     */
 	public static ConstantFieldOptions buildResourceAndLabelFieldOptions(
-	        RDFService rdfService, WebappDaoFactory wadf, String headerValue, 
+	        RDFService rdfService, WebappDaoFactory webappDaoFactory, String headerValue, 
 	        String headerLabel, String ... resourceURIs) throws Exception {	   
 	   if(resourceURIs == null || resourceURIs.length == 0 || rdfService == null) {
 	       return new ConstantFieldOptions();
@@ -65,7 +66,7 @@ public class GeneratorUtil {
 	           log.debug("Not adding invalid URI " + resourceURI 
 	                   + " to field options list");
 	       } else {
-	           String label = getLabel(iri, rdfService, wadf);
+	           String label = getLabel(iri, rdfService, webappDaoFactory);
 	           if(!StringUtils.isEmpty(label)) {
 	               options.add(iri.toString());
 	               options.add(label);
@@ -77,16 +78,19 @@ public class GeneratorUtil {
 	}
 	
 	/**
-	 * Retrieve lowest-sorting rdfs:label for iri from rdfService  
+	 * Retrieve label for iri from webappDaoFactory if available and iri is
+	 * for a VClass, otherwise retrieve lowest-sorting rdfs:label for iri from 
+	 * rdfService  
 	 * @param iri may not be null
 	 * @param rdfService may not be null
 	 */
-	private static String getLabel(IRI iri, RDFService rdfService, WebappDaoFactory wadf) 
-	        throws RDFServiceException {
+	private static String getLabel(IRI iri, RDFService rdfService, 
+	        WebappDaoFactory webappDaoFactory) throws RDFServiceException {
 	    // Try the WebappDaoFactory for class labels that exist only in
 	    // "everytime" and do not show up in the RDFService.
-	    if(wadf != null) {
-	        VClass vclass = wadf.getVClassDao().getVClassByURI(iri.toString());
+	    if(webappDaoFactory != null) {
+	        VClass vclass = webappDaoFactory.getVClassDao().getVClassByURI(
+	                iri.toString());
 	        if(vclass != null) {
 	            return vclass.getLabel();
 	        }
@@ -94,7 +98,7 @@ public class GeneratorUtil {
 	    StringBuilder select = new StringBuilder("SELECT ?label WHERE { \n");
 	    select.append("  <" + iri + "> <" + RDFS.label.getURI() + "> ?label \n");
 	    select.append("} ORDER BY ?label");
-	    LabelConsumer labelConsumer = new LabelConsumer();
+        LabelConsumer labelConsumer = new LabelConsumer();
         rdfService.sparqlSelectQuery(select.toString(), labelConsumer); 
 	    return labelConsumer.getLabel();
 	}
