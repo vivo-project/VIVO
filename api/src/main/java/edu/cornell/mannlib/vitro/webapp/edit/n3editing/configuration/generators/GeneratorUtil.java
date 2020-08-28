@@ -35,11 +35,11 @@ public class GeneratorUtil {
      * 
      * @param headerValue      optional value for first value/label pair in the
      *                         options list before appending the URIs with their
-     *                         labels. May be null.
+     *                         labels. May be null. Example: empty string
      * 
      * @param headerLabel      optional label for first value/label pair in the
      *                         options list before appending the URIs with their
-     *                         labels. May be null.
+     *                         labels. May be null. Example: "Select type"
      * 
      * @param resourceURIs     variable list of resource URI strings
      * 
