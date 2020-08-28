@@ -236,8 +236,8 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         Locale locale = SelectedLocale.getCurrentLocale(vreq);
         ParameterizedSparqlString queryPstr = new ParameterizedSparqlString(
                 WEBPAGE_QUERY);
-        queryPstr.setLiteral("locale", locale.toString().replace("_", "-"));
-        queryPstr.setLiteral("language", locale.getLanguage().toString());
+        queryPstr.setLiteral("locale", locale.replace("_", "-"));
+        queryPstr.setLiteral("language", locale.getLanguage());
     	return queryPstr.toString();
     }
 

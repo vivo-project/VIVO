@@ -63,7 +63,7 @@ public class GeneratorUtil {
 	   for(String resourceURI : resourceURIs) {	       
 	       IRI iri = iriFactory.create(resourceURI);
 	       if(iri.hasViolation(false)) {
-	           log.debug("Not adding invalid URI " + resourceURI 
+	           log.warn("Not adding invalid URI " + resourceURI 
 	                   + " to field options list");
 	       } else {
 	           String label = getLabel(iri, rdfService, webappDaoFactory);

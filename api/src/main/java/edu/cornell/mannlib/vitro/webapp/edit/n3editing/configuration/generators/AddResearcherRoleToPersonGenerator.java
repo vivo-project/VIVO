@@ -29,7 +29,7 @@ public class AddResearcherRoleToPersonGenerator extends AddRoleToPersonTwoStageG
                 I18n.bundle(vreq).text("select_type"),
                 "http://vivoweb.org/ontology/core#Grant",
                 "http://purl.obolibrary.org/obo/ERO_0000015" /* Human Study" */,
-                "http://vivoweb.org/ontology/core#Project", "Project",
+                "http://vivoweb.org/ontology/core#Project",
 	            "http://purl.obolibrary.org/obo/ERO_0000014" /* Research Project */);
 	}
 
