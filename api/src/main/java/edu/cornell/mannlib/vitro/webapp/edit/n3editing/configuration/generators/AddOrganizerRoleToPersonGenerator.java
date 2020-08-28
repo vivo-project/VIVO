@@ -11,7 +11,6 @@ import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 
 public class AddOrganizerRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
 
-    private static final Log log = LogFactory.getLog(AddOrganizerRoleToPersonGenerator.class);
 	private static String template = "addOrganizerRoleToPerson.ftl";
 
 
