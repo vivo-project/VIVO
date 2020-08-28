@@ -155,23 +155,36 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         + "PREFIX vcard: <http://www.w3.org/2006/vcard/ns#> \n"
         + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
         + "PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> \n"
-        + "SELECT DISTINCT ?vcard ?link ?url ?rank ?typeLabel (group_concat(distinct ?linkLabel;separator=\"/\") as ?label) WHERE { \n"
+        + "SELECT DISTINCT ?vcard ?link ?url (MIN(?rank_) AS ?rank) \n"
+        + "(MIN(?typeLabel_) AS ?typeLabel) \n"
+        + "(group_concat(distinct ?linkLabel;separator=\"/\") as ?label) WHERE { \n"
         + "    ?subject <http://purl.obolibrary.org/obo/ARG_2000028> ?vcard . \n"
         + "    ?vcard vcard:hasURL ?link . \n"
         + "    ?link a vcard:URL \n"
         + "    OPTIONAL { ?link vcard:url ?url } \n"
         + "    OPTIONAL { ?link rdfs:label ?linkLabel } \n"
-        + "    OPTIONAL { ?link core:rank ?rank } \n"
+        + "    OPTIONAL { ?link core:rank ?rank_ } \n"
         + "    OPTIONAL { ?link vitro:mostSpecificType ?type } \n"
         // UQAM-Linguistic-Management Add linguistic control on label
-        + "    OPTIONAL { ?type rdfs:label ?typeLabelMain . \n"
-        + "               FILTER (lang(?typeLabel) = ?language) \n"
+        // Try full locale 
+        + "    OPTIONAL { ?type rdfs:label ?typeLabelPrimary . \n"
+        + "               FILTER (LANG(?typeLabelPrimary) = ?locale) \n"
         + "    } \n"
+        // Try language only
+        + "    OPTIONAL { ?type rdfs:label ?typeLabelSecondary . \n"
+        + "               FILTER (LANG(?typeLabelSecondary) = ?language) \n"
+        + "    } \n"
+        // Try the same language in another other locale
+        + "    OPTIONAL { ?type rdfs:label ?typeLabelTertiary . \n"
+        + "               FILTER (STRBEFORE(STR(LANG(?typeLabelTertiary)), \"-\") = ?language) \n"
+        + "    } \n"
+        // Try any other available label
         + "    OPTIONAL { ?type rdfs:label ?typeLabelFallback . \n"
-        + "               FILTER (lang(?typeLabel) != ?language) \n"
+        + "               FILTER (LANG(?typeLabelFallback) != ?locale \n"
+        + "                        && LANG(?typeLabelFallback) != ?language) \n"
         + "    } \n"
-        + "    BIND(COALESCE(?typeLabelMain, ?typeLabelFallback) AS ?typeLabel)"
-        + "} GROUP BY ?rank ?vcard ?link ?url ?typeLabel \n"
+        + "    BIND(COALESCE(?typeLabelPrimary, ?typeLabelSecondary, ?typeLabelTertiary, ?typeLabelFallback) AS ?typeLabel_) \n"
+        + "} GROUP BY ?vcard ?link ?url \n"
     	+ "  ORDER BY ?rank";
 
 
@@ -218,12 +231,13 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
 
     protected String getQuery(VitroRequest vreq) {
         /*
-         * UQAM-Linguistic-Management Adjust the query to the liguistic context
+         * UQAM-Linguistic-Management Adjust the query to the linguistic context
          */
-        Locale lang = SelectedLocale.getCurrentLocale(vreq);
+        Locale locale = SelectedLocale.getCurrentLocale(vreq);
         ParameterizedSparqlString queryPstr = new ParameterizedSparqlString(
                 WEBPAGE_QUERY);
-        queryPstr.setLiteral("language", lang.toString());
+        queryPstr.setLiteral("locale", locale.toString().replace("_", "-"));
+        queryPstr.setLiteral("language", locale.getLanguage().toString());
     	return queryPstr.toString();
     }
 
