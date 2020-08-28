@@ -29,8 +29,10 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisio
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ConstantFieldOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
@@ -670,7 +672,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 		editConfiguration.addField(new FieldVTwo().
 				setName("pubType").
 				setValidators( list("nonempty") ).
-				setOptions( new ConstantFieldOptions("pubType", getPublicationTypeLiteralOptions(vreq) ))
+				setOptions( getPublicationTypeLiteralOptions(vreq) )
 				);
 	}
 
@@ -888,80 +890,41 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
                 );
     }
 
-	private List<List<String>> getPublicationTypeLiteralOptions(VitroRequest vreq) throws Exception {
-		//UQAM-Linguistic-Management Replacing hard coding assigment by a dynamic assigment that takes into account the linguistic context
-		List<List<String>> value =  GeneratorUtil.builFieldOptionsList(vreq, DESCRIBE_QUERY);
-		return value;
-		//UQAM in replacement of this
-		//        List<List<String>> literalOptions = new ArrayList<List<String>>();
-		//        literalOptions.add(list("http://vivoweb.org/ontology/core#Abstract", "Abstract"));
-		//        literalOptions.add(list("http://purl.org/ontology/bibo/AcademicArticle", "Academic Article"));
-		//        literalOptions.add(list("http://purl.org/ontology/bibo/Article", "Article"));
-		//        literalOptions.add(list("http://purl.org/ontology/bibo/AudioDocument", "Audio Document"));
-		//        literalOptions.add(list("http://vivoweb.org/ontology/core#BlogPosting", "Blog Posting"));
-		//        literalOptions.add(list("http://purl.org/ontology/bibo/Book", "Book"));
-		//        literalOptions.add(list("http://vivoweb.org/ontology/core#CaseStudy", "Case Study"));
-		//        literalOptions.add(list("http://vivoweb.org/ontology/core#Catalog", "Catalog"));
-		//        literalOptions.add(list("http://purl.org/ontology/bibo/Chapter", "Chapter"));
-		//        literalOptions.add(list("http://vivoweb.org/ontology/core#ConferencePaper", "Conference Paper"));
-		//        literalOptions.add(list("http://vivoweb.org/ontology/core#ConferencePoster", "Conference Poster"));
-		//        literalOptions.add(list("http://vivoweb.org/ontology/core#Database", "Database"));
-		//        literalOptions.add(list("http://vivoweb.org/ontology/core#Dataset", "Dataset"));
-		//        literalOptions.add(list("http://purl.org/ontology/bibo/EditedBook", "Edited Book"));
-		//        literalOptions.add(list("http://vivoweb.org/ontology/core#EditorialArticle", "Editorial Article"));
-		//        literalOptions.add(list("http://purl.org/ontology/bibo/Film", "Film"));
-		//        literalOptions.add(list("http://vivoweb.org/ontology/core#Newsletter", "Newsletter"));
-		//        literalOptions.add(list("http://vivoweb.org/ontology/core#NewsRelease", "News Release"));
-		//        literalOptions.add(list("http://purl.org/ontology/bibo/Patent", "Patent"));
-		//        literalOptions.add(list("http://purl.obolibrary.org/obo/OBI_0000272", "Protocol"));
-		//        literalOptions.add(list("http://purl.org/ontology/bibo/Report", "Report"));
-		//        literalOptions.add(list("http://vivoweb.org/ontology/core#ResearchProposal", "Research Proposal"));
-		//        literalOptions.add(list("http://vivoweb.org/ontology/core#Review", "Review"));
-		//        literalOptions.add(list("http://purl.obolibrary.org/obo/ERO_0000071 ", "Software"));
-		//        literalOptions.add(list("http://vivoweb.org/ontology/core#Speech", "Speech"));
-		//        literalOptions.add(list("http://purl.org/ontology/bibo/Thesis", "Thesis"));
-		//        literalOptions.add(list("http://vivoweb.org/ontology/core#Video", "Video"));
-		//        literalOptions.add(list("http://purl.org/ontology/bibo/Webpage", "Webpage"));
-		//        literalOptions.add(list("http://purl.org/ontology/bibo/Website", "Website"));
-		//        literalOptions.add(list("http://vivoweb.org/ontology/core#WorkingPaper", "Working Paper"));
-		//        return literalOptions;
-	}
-
-
-	/*
-	 * UQAM-Linguistic-Management get attributes for this specific subject
-	 */
-	private static String DESCRIBE_QUERY = " describe "+
-			"<http://vivoweb.org/ontology/core#Abstract> "+
-			"<http://purl.org/ontology/bibo/AcademicArticle> "+
-			"<http://purl.org/ontology/bibo/Article> "+
-			"<http://purl.org/ontology/bibo/AudioDocument> "+
-			"<http://vivoweb.org/ontology/core#BlogPosting> "+
-			"<http://purl.org/ontology/bibo/Book> "+
-			"<http://vivoweb.org/ontology/core#CaseStudy> "+
-			"<http://vivoweb.org/ontology/core#Catalog> "+
-			"<http://purl.org/ontology/bibo/Chapter> "+
-			"<http://vivoweb.org/ontology/core#ConferencePaper> "+
-			"<http://vivoweb.org/ontology/core#ConferencePoster> "+
-			"<http://vivoweb.org/ontology/core#Database> "+
-			"<http://vivoweb.org/ontology/core#Dataset> "+
-			"<http://purl.org/ontology/bibo/EditedBook> "+
-			"<http://vivoweb.org/ontology/core#EditorialArticle> "+
-			"<http://purl.org/ontology/bibo/Film> "+
-			"<http://vivoweb.org/ontology/core#Newsletter> "+
-			"<http://vivoweb.org/ontology/core#NewsRelease> "+
-			"<http://purl.org/ontology/bibo/Patent> "+
-			"<http://purl.obolibrary.org/obo/OBI_0000272> "+
-			"<http://purl.org/ontology/bibo/Report> "+
-			"<http://vivoweb.org/ontology/core#ResearchProposal> "+
-			"<http://vivoweb.org/ontology/core#Review> "+
-			"<http://purl.obolibrary.org/obo/ERO_0000071> "+
-			"<http://vivoweb.org/ontology/core#Speech> "+
-			"<http://purl.org/ontology/bibo/Thesis> "+
-			"<http://vivoweb.org/ontology/core#Video> "+
-			"<http://purl.org/ontology/bibo/Webpage> "+
-			"<http://purl.org/ontology/bibo/Website> "+
-			"<http://vivoweb.org/ontology/core#WorkingPaper> ";
+    private FieldOptions getPublicationTypeLiteralOptions(VitroRequest vreq) throws Exception {
+        return GeneratorUtil.buildResourceAndLabelFieldOptions(
+                vreq.getRDFService(), vreq.getWebappDaoFactory(), "", 
+                I18n.bundle(vreq).text("select_type"),		
+                "http://vivoweb.org/ontology/core#Abstract",
+                "http://purl.org/ontology/bibo/AcademicArticle",
+                "http://purl.org/ontology/bibo/Article",
+                "http://purl.org/ontology/bibo/AudioDocument",
+                "http://vivoweb.org/ontology/core#BlogPosting",
+                "http://purl.org/ontology/bibo/Book",
+                "http://vivoweb.org/ontology/core#CaseStudy",
+                "http://vivoweb.org/ontology/core#Catalog",
+                "http://purl.org/ontology/bibo/Chapter",
+                "http://vivoweb.org/ontology/core#ConferencePaper",
+                "http://vivoweb.org/ontology/core#ConferencePoster",
+                "http://vivoweb.org/ontology/core#Database",
+                "http://vivoweb.org/ontology/core#Dataset",
+                "http://purl.org/ontology/bibo/EditedBook",
+                "http://vivoweb.org/ontology/core#EditorialArticle",
+                "http://purl.org/ontology/bibo/Film",
+                "http://vivoweb.org/ontology/core#Newsletter",
+                "http://vivoweb.org/ontology/core#NewsRelease",
+                "http://purl.org/ontology/bibo/Patent",
+                "http://purl.obolibrary.org/obo/OBI_0000272",
+                "http://purl.org/ontology/bibo/Report",
+                "http://vivoweb.org/ontology/core#ResearchProposal",
+                "http://vivoweb.org/ontology/core#Review",
+                "http://purl.obolibrary.org/obo/ERO_0000071 ",
+                "http://vivoweb.org/ontology/core#Speech",
+                "http://purl.org/ontology/bibo/Thesis",
+                "http://vivoweb.org/ontology/core#Video",
+                "http://purl.org/ontology/bibo/Webpage",
+                "http://purl.org/ontology/bibo/Website",
+                "http://vivoweb.org/ontology/core#WorkingPaper");
+    }
 
     //Form specific data
     public void addFormSpecificData(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
