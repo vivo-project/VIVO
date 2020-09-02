@@ -1,0 +1,136 @@
+# $This file is distributed under the terms of the license in LICENSE$
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix core: <http://vivoweb.org/ontology/core#> .
+@prefix vivoweb: <http://vivoweb.org/ontology#> .
+
+### This file defines the default menu for vivo. ###
+### It overrides the menu.n3 from vitro.
+
+#### Default Menu ####
+
+display:DefaultMenu
+    a  display:MainMenu ;
+    rdfs:label "Default Menu" ;
+    display:hasElement display:EventsMenuItem ;
+    display:hasElement display:HomeMenuItem ;
+    display:hasElement display:OrganizationsMenuItem ;
+    display:hasElement display:PeopleMenuItem ;
+    display:hasElement display:ResearchMenuItem ;
+    display:hasElement display:CapabilityMapMenuItem .
+
+#### Menu Items for Default Menu ####
+
+display:HomeMenuItem
+    a display:NavigationElement ;
+    display:menuPosition 1;
+    display:linkText "Home";
+    display:toPage display:Home .
+
+display:PeopleMenuItem
+    a display:NavigationElement ;
+    display:menuPosition 2;
+    display:linkText "People";
+    display:toPage display:People .
+
+display:OrganizationsMenuItem
+    a display:NavigationElement ;
+    display:menuPosition 3;
+    display:linkText "Organizations";
+    display:toPage display:Organizations .
+
+display:ResearchMenuItem
+    a display:NavigationElement ;
+    display:menuPosition 4;
+    display:linkText "Research";
+    display:toPage display:Research .
+
+display:EventsMenuItem
+    a display:NavigationElement ;
+    display:menuPosition 5;
+    display:linkText "Events";
+    display:toPage display:Events .
+
+display:CapabilityMapMenuItem
+    a display:NavigationElement ;
+    display:menuPosition 6;
+    display:linkText "Capability Map";
+    display:toPage display:CapabilityMap .
+
+display:Home
+    a display:HomePage ;
+    a display:Page ;
+    display:title "Home" ;
+    display:urlMapping "/" ;
+    display:hasDataGetter display:homeDataGetter;
+    display:cannotDeletePage "true" .
+
+display:Events
+    a display:Page ;
+    a display:ClassGroupPage;
+    display:forClassGroup vivoweb:vitroClassGroupevents ;
+    display:title "Events" ;
+    display:urlMapping "/events" ;
+    display:hasDataGetter display:eventsDataGetter .
+
+display:Organizations
+    a display:Page ;
+    a display:ClassGroupPage;
+    display:forClassGroup vivoweb:vitroClassGrouporganizations ;
+    display:title "Organizations" ;
+    display:urlMapping "/organizations";
+    display:hasDataGetter display:organizationsDataGetter .
+
+display:People
+    a display:Page ;
+    a display:ClassGroupPage;
+    display:forClassGroup vivoweb:vitroClassGrouppeople ;
+    display:title "People" ;
+    display:urlMapping "/people" ;
+   	display:hasDataGetter display:peopleDataGetter .
+
+display:Research
+    a display:Page ;
+    a display:ClassGroupPage;
+    display:forClassGroup vivoweb:vitroClassGrouppublications ;
+    display:title "Research" ;
+    display:urlMapping "/research" ;
+    display:hasDataGetter display:researchDataGetter .
+
+display:CapabilityMap
+    a display:Page ;
+    display:title "Capability Map" ;
+    display:urlMapping "/vis/capabilitymap" ;
+    display:hasDataGetter display:capabilityMapDataGetter .
+
+#The data getter objects used above
+display:peopleDataGetter
+      a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData>;
+      display:forClassGroup
+              vivoweb:vitroClassGrouppeople .
+
+display:researchDataGetter
+      a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData>;
+      display:forClassGroup
+              vivoweb:vitroClassGrouppublications .
+
+display:organizationsDataGetter
+      a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData>;
+      display:forClassGroup
+              vivoweb:vitroClassGrouporganizations .
+
+display:eventsDataGetter
+      a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData>;
+      display:forClassGroup
+              vivoweb:vitroClassGroupevents .
+
+display:homeDataGetter
+      a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.BrowseDataGetter> .
+
+display:capabilityMapDataGetter
+      a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.FixedHTMLDataGetter>;
+      display:htmlValue """Capability Map"""@en ;
+      display:saveToVar "capabilityMap" .
