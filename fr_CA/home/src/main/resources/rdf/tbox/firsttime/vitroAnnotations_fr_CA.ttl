@@ -4315,7 +4315,7 @@ owl:sameAs
   vitro:inPropertyGroupAnnot <http://vivoweb.org/ontology#vitroPropertyGroupidentifiers> ;
   vitro:offerCreateNewOptionAnnot true ;
   vitro:prohibitedFromUpdateBelowRoleLevelAnnot <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
-  vitro:publicDescriptionAnnot "C'est la propriété d'OWL de relier deux personnes ayant la même 'identité'. Voir http://www.w3.org/TR/owl-ref/#sameAs-def"@en-US ;
+  vitro:publicDescriptionAnnot "C'est la propriété d'OWL de relier deux personnes ayant la même 'identité'. Voir http://www.w3.org/TR/owl-ref/#sameAs-def"@fr-CA ;
   vitro:selectFromExistingAnnot true ;
   vitro:stubObjectPropertyAnnot false ;
   rdfs:domain owl:Thing ;
