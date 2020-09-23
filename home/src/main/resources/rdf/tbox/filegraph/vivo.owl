@@ -5981,6 +5981,32 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
 
 
 
+    <!-- http://purl.obolibrary.org/obo/BCO_0000003 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/BCO_0000003">
+        <rdfs:label xml:lang="en">Data Collection Process</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#CollectionProcess"/>
+        <obo:IAO_0000112 xml:lang="en">Observing and recording the presence or absence of butterflies during a transect walk.; A trip camera capture of an image of a jaguar is an observation, because it is &quot;selected&quot; by the camera as worthy of obsevation simply by virtue of moving in front of the camera.; Seeing three pelicans flying overhead on Christmas day and report them as part of the Christmas Bird Count.</obo:IAO_0000112>
+        <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000125"/>
+        <obo:IAO_0000115 xml:lang="en">A process in which a person or machine sees or detects a material entity and selects it as worthy of observation, and which has as output an information content entity about the selected material entity.</obo:IAO_0000115>
+        <obo:IAO_0000116 xml:lang="en">Under development</obo:IAO_0000116>
+        <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A collection process in which an information content entity is collected for research or scholarly purposes. The immediate use case is recording observations of taxa (presence/absence). Need to figure out how this relates to OBI assay OBI:0000070. maybe has broader synonym OBI:0000070</vitro:descriptionAnnot>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/BCO_0000042 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/BCO_0000042">
+        <rdfs:label xml:lang="en">Taxonomic Identification Process</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#IdentificationProcess"/>
+        <obo:IAO_0000112 xml:lang="en">Using a key to identify a plant in the field.; Using DNA barcoding to identify a plant species.; Associating a museum specimen with a specific taxonomic concept based on its characters.; Using BLAST to identify the taxa present in an environmental (metagenomic) sample.</obo:IAO_0000112>
+        <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000125"/>
+        <obo:IAO_0000115 xml:lang="en">A curation process in which a taxonomic name is appied to a biological entity to denote membership in a taxon.</obo:IAO_0000115>
+    </owl:Class>
+
+
+
     <!-- http://purl.obolibrary.org/obo/BFO_0000001 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/BFO_0000001">
@@ -9753,6 +9779,20 @@ This class allows for linking an author to a publication while indicating inform
 
 
 
+    <!-- http://vivoweb.org/ontology/core#GeoreferencingProcess -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#GeoreferencingProcess">
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#CurationProcess"/>
+        <obo:IAO_0000111>Georeferenced</obo:IAO_0000111>
+        <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000123"/>
+        <obo:IAO_0000115 xml:lang="en">A curation process in which a material entity is annotated with geo-coordinates to indicate the location of a collection</obo:IAO_0000115>
+        <obo:IAO_0000116 xml:lang="en">Under development</obo:IAO_0000116>
+        <obo:IAO_0000117 xml:lang="en">PERSON: Anne Thessen</obo:IAO_0000117>
+        <rdfs:label xml:lang="en">Georeferencing Process</rdfs:label>
+    </owl:Class>
+
+
+
     <!-- http://vivoweb.org/ontology/core#GovernmentAgency -->
 
     <owl:Class rdf:about="http://vivoweb.org/ontology/core#GovernmentAgency">
@@ -9841,6 +9881,21 @@ This class allows for linking an author to a publication while indicating inform
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An institution that provides medical, surgical, psychiatric or nursing care.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definition take from: http://dictionary.reference.com/browse/hospital.</obo:IAO_0000112>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Shands at the University of Florida</obo:IAO_0000112>
+    </owl:Class>
+
+
+
+    <!-- http://vivoweb.org/ontology/core#IdentificationProcess -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#IdentificationProcess">
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#CurationProcess"/>
+        <obo:IAO_0000111>Identified</obo:IAO_0000111>
+        <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000123"/>
+        <obo:IAO_0000115 xml:lang="en">A curation process in which a term is appied to a material entity to denote its type or kind</obo:IAO_0000115>
+        <obo:IAO_0000116 xml:lang="en">Under development</obo:IAO_0000116>
+        <obo:IAO_0000117 xml:lang="en">PERSON: Anne Thessen</obo:IAO_0000117>
+        <vitro:descriptionAnnot>This is intended to apply to a wide variety of material entities, not just biological specimens.</vitro:descriptionAnnot>
+        <rdfs:label xml:lang="en">Identification Process</rdfs:label>
     </owl:Class>
 
 
@@ -10023,6 +10078,21 @@ This class allows for linking an author to a publication while indicating inform
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">It&apos;s anticipated that the subclasses will be used when classifying items. And, all locations can be viewable via this class.</obo:IAO_0000112>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Top level of all location classes.</obo:IAO_0000115>
         <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Use subclasses of core:Location when classsifying items.</obo:IAO_0000112>
+    </owl:Class>
+
+
+
+    <!-- http://vivoweb.org/ontology/core#MeasurementProcess -->
+
+    <owl:Class rdf:about="http://vivoweb.org/ontology/core#MeasurementProcess">
+        <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#CurationProcess"/>
+        <obo:IAO_0000111>Measured</obo:IAO_0000111>
+        <obo:IAO_0000114 rdf:resource="http://purl.obolibrary.org/obo/IAO_0000123"/>
+        <obo:IAO_0000115 xml:lang="en">A curation process in which data are collected about a specimen in a collection</obo:IAO_0000115>
+        <obo:IAO_0000116 xml:lang="en">Under development</obo:IAO_0000116>
+        <obo:IAO_0000117 xml:lang="en">PERSON: Anne Thessen</obo:IAO_0000117>
+        <vitro:descriptionAnnot>possibly has broader synonym OBI assay OBI:0000070 because all measurement processes will be assays, but not all assays will be performed on a material entity in a collection</vitro:descriptionAnnot>
+        <rdfs:label xml:lang="en">Measurement Process</rdfs:label>
     </owl:Class>
 
 
