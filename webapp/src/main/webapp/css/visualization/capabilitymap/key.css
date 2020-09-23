@@ -13,20 +13,25 @@
 
 .edge {
 	background-position: 0px -22px;
+	height: 24px;
 }
 
 .group {
 	background-position: 0px -48px;
+	height: 20px;
 }
 
 .links2 {
 	background-position: 0px -73px;
+	height: 20px;
 }
 
 .links3 {
-	background-position: 0px -95px;
+	background-position: 0px -96px;
+	height: 20px;
 }
 
 .links4 {
 	background-position: 0px -121px;
+	height: 20px;
 }
