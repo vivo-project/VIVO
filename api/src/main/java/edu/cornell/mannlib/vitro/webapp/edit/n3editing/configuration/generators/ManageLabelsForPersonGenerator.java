@@ -267,6 +267,19 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
 		 config.addFormSpecificData("selectLocale",availableLocalesForAdd);
 		 config.addFormSpecificData("displayRemoveLink", (numberExistingLabels > 1));
 
+		// get current selected locale
+		String rangeLang = vreq.getLocale().getLanguage();
+		if (!vreq.getLocale().getCountry().isEmpty()) {
+			rangeLang += "-" + vreq.getLocale().getCountry();
+		}
+
+		// check if locale already has an entry (label)
+		boolean localeEntryExisting = true;
+		for (HashMap<String, String> tmp : availableLocalesForAdd) {
+			if (tmp.get("code").equals(rangeLang)) localeEntryExisting = false;
+		}
+		config.addFormSpecificData("localeEntryExisting", localeEntryExisting);
+		config.addFormSpecificData("currentSelectedLocale", rangeLang);
 
         //How do we edit? Will need to see
         config.addFormSpecificData("deleteWebpageUrl", "/edit/primitiveDelete");
