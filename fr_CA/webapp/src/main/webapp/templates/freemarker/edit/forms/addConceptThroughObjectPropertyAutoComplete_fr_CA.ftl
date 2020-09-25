@@ -77,7 +77,7 @@
             <p>
                 <input type="submit" id="submit" value="${submitButtonText}" role="button" disabled="disabled"/>
 
-                <span class="or"> or </span>
+                <span class="or"> ${i18n().or} </span>
                 <a title="${i18n().cancel_title}" class="cancel" href="${cancelUrl}">${i18n().cancel_link}</a>
             </p>
         </form>
