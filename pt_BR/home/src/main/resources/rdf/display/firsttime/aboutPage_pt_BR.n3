@@ -11,4 +11,4 @@ about:ABOUTDG
         <P> A Vivo é web semântica aplicação open source, originalmente desenvolvida e implementadas em Cornell. Quando instalado e preenchido com conteudo a qual uma instituição é possivel de realizar buscas de pesquisa e bolsas estudo entre disciplinas da instituição. VIVO oferece suporte à navegação e uma função de pesquisa que retorna resultados facetados para recuperação rápida de informação desejada. Contendo qualquer instalação local do VIVO, pode ser mantida manualmente ou trazidos para o banco de dados de forma automatizada num sistemas locais, tais como recursos humanos, bolsas, subsídios, é claro, e bancos de dados das atividade do corpo docente.</p>
 
         <p>Veja mais informações sobre o <a href=\"http://vivoweb.org\">projeto VIVO</a>.</p></div>
-        ""@pt-BR .
+        """@pt-BR .
