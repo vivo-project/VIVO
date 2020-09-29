@@ -234,13 +234,37 @@ final public class VisualizationCaches {
                     new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>(visualizationAffinity) {
                         @Override
                         protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
+                            // get current selected language tag
+                            VitroRequest vreq = rdfService.getVitroRequest();
+                            String langCtx = "en-US"; // set default
+                            String language = "en"; // set fallback language
+                            try {
+                                langCtx = language = vreq.getLocale().getLanguage();
+                                if (!vreq.getLocale().getCountry().isEmpty()) {
+                                    langCtx += "-" + vreq.getLocale().getCountry();
+                                }
+                            } catch (Exception e) { }
+
                             String query = QueryConstants.getSparqlPrefixQuery() +
-                                    "SELECT ?org ?orgLabel\n" +
+                                    "SELECT ?org (Min(?orgLabel_) AS ?orgLabel) \n" +
                                     "WHERE\n" +
                                     "{\n" +
-                                    "  ?org a foaf:Organization .\n" +
-                                    "  ?org rdfs:label ?orgLabel .\n" +
-                                    "}\n";
+                                    "  ?org a foaf:Organization \n" +
+                                    "  OPTIONAL { ?org rdfs:label ?orgLabelPrimary . \n" +
+                                    "       FILTER (LANG(?orgLabelPrimary) = '" + langCtx + "') \n" +
+                                    "} \n" +
+                                    "  OPTIONAL { ?org rdfs:label ?orgLabelSecondary . \n" +
+                                    "       FILTER (LANG(?orgLabelSecondary) = '" + language + "') \n" +
+                                    "} \n" +
+                                    "  OPTIONAL { ?org rdfs:label ?orgLabelTertiary .\n" +
+                                    "       FILTER (STRBEFORE(STR(LANG(?orgLabelTertiary)), '-') = '" + language + "') \n" +
+                                    "} \n" +
+                                    "  OPTIONAL { ?org rdfs:label ?orgLabelFallback .\n" +
+                                    "       FILTER (LANG(?orgLabelFallback) != '" + langCtx + "' \n" + 
+                                    "           && LANG(?orgLabelFallback) != '" + language + "' ) \n" +
+                                    "} \n" +
+                                    "BIND(COALESCE(?orgLabelPrimary, ?orgLabelSecondary, ?orgLabelTertiary, ?orgLabelFallback) AS ?orgLabel_) \n" +
+                                    "} GROUP BY ?org \n";
 
                             final Map<String, String> map = new HashMap<>();
 
