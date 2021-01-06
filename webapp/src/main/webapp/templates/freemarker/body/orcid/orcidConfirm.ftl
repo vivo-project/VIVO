@@ -125,7 +125,7 @@ span.completed {
       <form method="GET" action="${orcidInfo.progressUrl}">
         <p>
           <#if continueAppears>
-            <input type="submit" name="submit" value="<#if "START" == orcidInfo.progress>${i18n().orcid_button_step1}<#else>${i18n().orcid_button_step1}</#if>" class="submit"/>
+            <input type="submit" name="submit" value="<#if "START" == orcidInfo.progress>${i18n().orcid_button_step1}<#else>${i18n().orcid_button_step2}</#if>" class="submit"/>
             or 
           </#if>
           <a class="cancel" href="${orcidInfo.profilePage}">${i18n().orcid_return_to_vivo}</a>
