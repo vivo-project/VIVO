@@ -1345,7 +1345,7 @@
 
 <http://vivoweb.org/ontology/core#researchOverview> rdfs:label "Übersicht zur Forschung"@de-DE .
 
-<http://vivoweb.org/ontology/core#researcherId> rdfs:label "ISI Researcher ID"@de-DE .
+<http://vivoweb.org/ontology/core#researcherId> rdfs:label "ResearcherID"@de-DE .
 
 <http://vivoweb.org/ontology/core#reviewedIn> rdfs:label "rezensiert in"@de-DE .
 

@@ -376,7 +376,7 @@
 <http://purl.org/ontology/bibo/Bill> <http://www.w3.org/2000/01/rdf-schema#label> "Gesetzesentwurf"@de-DE .
 <http://vivoweb.org/ontology/core#dateTimeInterval> <http://www.w3.org/2000/01/rdf-schema#label> "Datum/Uhrzeit-Intervall"@de-DE .
 <http://vivoweb.org/ontology/core#end> <http://www.w3.org/2000/01/rdf-schema#label> "Ende"@de-DE .
-<http://vivoweb.org/ontology/core#researcherId> <http://www.w3.org/2000/01/rdf-schema#label> "ISI Researcher ID"@de-DE .
+<http://vivoweb.org/ontology/core#researcherId> <http://www.w3.org/2000/01/rdf-schema#label> "ResearcherID"@de-DE .
 <http://vivoweb.org/ontology/core#sponsors> <http://www.w3.org/2000/01/rdf-schema#label> "Auszeichnung oder Preis der Sponsoren"@de-DE .
 <http://purl.org/ontology/bibo/upc> <http://www.w3.org/2000/01/rdf-schema#label> "Universal Product Code (UPC)"@de-DE .
 <http://vivoweb.org/ontology/core#Licensure> <http://www.w3.org/2000/01/rdf-schema#label> "Approbation"@de-DE .

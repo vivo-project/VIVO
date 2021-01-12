@@ -4011,7 +4011,7 @@ vivo:researcherId
   vitro:hiddenFromPublishBelowRoleLevelAnnot <http://vitro.mannlib.cornell.edu/ns/vitro/role#selfEditor> ;
   vitro:inPropertyGroupAnnot <http://vivoweb.org/ontology#vitroPropertyGroupidentifiers> ;
   vitro:prohibitedFromUpdateBelowRoleLevelAnnot <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
-  vitro:publicDescriptionAnnot "Le numéro d'identification donné au profil créé par un chercheur dans ResearcherID (http://isiwebofknowledge.com/researcherid/)."@fr-CA ;
+  vitro:publicDescriptionAnnot "Le numéro d'identification donné au profil créé par un chercheur dans ResearcherID (https://researcherid.com/)."@fr-CA ;
 .
 vivo:reviewedIn
   vitro:displayLimitAnnot "5"^^xsd:int ;

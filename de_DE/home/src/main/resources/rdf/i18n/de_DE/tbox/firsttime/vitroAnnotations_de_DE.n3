@@ -4390,7 +4390,7 @@ vivo:researcherId
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#public> ;
       vitro:publicDescriptionAnnot
-              "Die Identifikationsnummer des Profils in ResearcherID (http://isiwebofknowledge.com/researcherid/)."@de-DE .		  
+              "Die Identifikationsnummer des Profils in ResearcherID (https://researcherid.com/)."@de-DE
 
 vivo:hasPublicationVenue
       vitro:displayLimitAnnot
@@ -7555,6 +7555,4 @@ vivo:assignedBy
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> ;
       vitro:prohibitedFromUpdateBelowRoleLevelAnnot
               <http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody> .
-
-
 

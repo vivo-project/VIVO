@@ -497,7 +497,7 @@
 <http://www.obofoundry.org/ro/ro.owl#has_agent> <http://www.w3.org/2000/01/rdf-schema#label> "agent"@fr-CA .
 <http://purl.org/ontology/bibo/published> <http://www.w3.org/2000/01/rdf-schema#label> "publié"@fr-CA .
 <http://vivoweb.org/ontology/core#AcademicDepartment> <http://www.w3.org/2000/01/rdf-schema#label> "Département"@fr-CA .
-<http://vivoweb.org/ontology/core#researcherId> <http://www.w3.org/2000/01/rdf-schema#label> "ID de chercheur ISI"@fr-CA .
+<http://vivoweb.org/ontology/core#researcherId> <http://www.w3.org/2000/01/rdf-schema#label> "ResearcherID"@fr-CA .
 <http://vivoweb.org/ontology/core#hasPublicationVenue> <http://www.w3.org/2000/01/rdf-schema#label> "publié dans"@fr-CA .
 <http://purl.org/ontology/bibo/Excerpt> <http://www.w3.org/2000/01/rdf-schema#label> "Extrait"@fr-CA .
 <http://vivoweb.org/ontology/core#NonFacultyAcademic> <http://www.w3.org/2000/01/rdf-schema#label> "Enseignant"@fr-CA .

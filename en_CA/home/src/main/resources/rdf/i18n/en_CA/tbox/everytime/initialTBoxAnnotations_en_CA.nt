@@ -875,5 +875,5 @@
 <http://purl.obolibrary.org/obo/ARG_2000078> <http://www.w3.org/2000/01/rdf-schema#label> "American Board of Otolaryngology"@en-CA .
 <http://www.w3.org/2006/vcard/ns#Key> <http://www.w3.org/2000/01/rdf-schema#label> "Key"@en-CA .
 <http://vivoweb.org/ontology/core#hasMonetaryAmount> <http://www.w3.org/2000/01/rdf-schema#label> "has monetary amount"@en-CA .
-<http://vivoweb.org/ontology/core#researcherId> <http://www.w3.org/2000/01/rdf-schema#label> "ISI Researcher ID"@en-CA .
+<http://vivoweb.org/ontology/core#researcherId> <http://www.w3.org/2000/01/rdf-schema#label> "ResearcherID"@en-CA .
 <http://vivoweb.org/ontology/core#ExtensionUnit> <http://www.w3.org/2000/01/rdf-schema#label> "Extension Unit"@en-CA .

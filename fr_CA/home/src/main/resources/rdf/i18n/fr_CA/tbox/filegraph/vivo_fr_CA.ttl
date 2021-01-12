@@ -2060,7 +2060,7 @@ core:researchOverview
   rdfs:label "Aperçu de la recherche"@fr-CA ;
 .
 core:researcherId
-  rdfs:label "ID de chercheur ISI"@fr-CA ;
+  rdfs:label "ResearcherID"@fr-CA ;
 .
 core:reviewedIn
   rdfs:label "analysé dans"@fr-CA ;
