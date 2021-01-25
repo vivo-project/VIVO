@@ -130,8 +130,16 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
     <form id="add${roleDescriptor?cap_first}RoleToPersonTwoStage" class="customForm noIE67" action="${submitUrl}"  role="add/edit grant role">
 
-       <p class="inline">
-        <label for="typeSelector">${typeSelectorLabel?cap_first}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
+            <#if showRoleLabelField = true>
+            <p><label for="roleLabel" class="inline">${i18n().user_role} ${roleExamples}</label>
+                <input  size="50"  type="text" id="roleLabel" name="roleLabel" value="${roleLabel}" />
+            </p>
+            </#if>
+
+      <h3>${genericLabel?cap_first}</h3>
+
+       <p>
+        <label for="typeSelector" class="inline">${i18n().type_capitalized?cap_first}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
         <#--Code below allows for selection of first 'select one' option if no activity type selected-->
         <#if activityTypeValue?has_content>
         	<#assign selectedActivityType = activityTypeValue />
@@ -163,7 +171,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 		Adaptation of structure for french 
  -->
             <p>
-                <label for="activity">${i18n().name_of?cap_first} l'${genericLabel?lower_case}  ${requiredHint}</label>
+                <label for="activity" class="inline">${i18n().name?cap_first} ${requiredHint}</label>
                 <input class="acSelector" size="50"  type="text" id="activity" name="activityLabel"  acGroupName="activity" value="${activityLabelValue}" />
                 <input class="display" type="hidden" id="activityDisplay" acGroupName="activity" name="activityLabelDisplay" value="${activityLabelDisplayValue}">
             </p>
@@ -183,12 +191,6 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
                     <!-- Field value populated by JavaScript -->
             </div>
 
-            <#if showRoleLabelField = true>
-            <p><label for="roleLabel">${i18n().role_in} l'${genericLabel?lower_case} ${roleExamples}</label>
-                <input  size="50"  type="text" id="roleLabel" name="roleLabel" value="${roleLabel}" />
-            </p>
-        	</#if>
-
             <#if numDateFields == 1 >
                <#--Generated html is a map with key name mapping to html string-->
                <#if htmlForElements?keys?seq_contains("startField")>
@@ -196,7 +198,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
                		${htmlForElements["startField"]} ${yearHint}
                </#if>
             <#else>
-                <h4 class="label">${i18n().years_participating} </h4>
+                <h3 class="label">${i18n().years_participating} </h3>
                 <#if htmlForElements?keys?seq_contains("startField")>
                 	    <label class="dateTime" for="startField">${i18n().start_year}</label>
                		    ${htmlForElements["startField"]} ${yearHint}
