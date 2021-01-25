@@ -90,7 +90,8 @@ $(document).ready(function(){
     function checkLocationHash() {
         var currentTab = $('li.selectedGroupTab').attr('groupName')
 
-        if ( location.hash ) {
+        // workaround - VIVO-1816 - ignore location.hash if the predicateURI isn't localized by the DeletePropertyController (contains no part following '#')
+        if (( location.hash ) && ( !location.hash.startsWith('#http') )) {
             // remove the trailing white space
             location.hash = location.hash.replace(/\s+/g, '');
             var tabExists = $("[groupname=" + location.hash.replace('#', '') + "]")
