@@ -1280,7 +1280,7 @@ bibo:translationOf
   rdfs:label "traduction de"@fr-CA ;
 .
 bibo:translator
-  rdfs:label "traducteur"@fr-CA ;
+  rdfs:label "traducteur(-trice)s"@fr-CA ;
 .
 bibo:unpublished
   rdfs:label "non publié"@fr-CA ;
@@ -1775,7 +1775,7 @@ core:Team
   rdfs:label "Équipe"@fr-CA ;
 .
 core:Translation
-  rdfs:label "Traduction"@fr-CA ;
+  rdfs:label "Traductions"@fr-CA ;
 .
 core:UndergraduateAdvisingRelationship
   rdfs:label "Relation conseil de premier cycle"@fr-CA ;
@@ -1949,7 +1949,7 @@ core:hasSuccessorOrganization
   rdfs:label "organisation remplaçante"@fr-CA ;
 .
 core:hasTranslation
-  rdfs:label "traduction"@fr-CA ;
+  rdfs:label "traductions"@fr-CA ;
 .
 core:hasValue
   rdfs:label "valeur"@fr-CA ;

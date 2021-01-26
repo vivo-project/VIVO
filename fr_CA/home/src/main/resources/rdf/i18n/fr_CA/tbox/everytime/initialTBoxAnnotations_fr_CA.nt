@@ -375,7 +375,7 @@
 <http://www.w3.org/2006/vcard/ns#honorificSuffix> <http://www.w3.org/2000/01/rdf-schema#label> "suffixe honorifique"@fr-CA .
 <http://purl.org/spar/c4o/hasGlobalCitationFrequency> <http://www.w3.org/2000/01/rdf-schema#label> "fréquence globale de citation"@fr-CA .
 <http://aims.fao.org/aos/geopolitical.owl#nameListIT> <http://www.w3.org/2000/01/rdf-schema#label> "nameListIT"@fr-CA .
-<http://purl.org/ontology/bibo/cites> <http://www.w3.org/2000/01/rdf-schema#label> "cites"@fr-CA .
+<http://purl.org/ontology/bibo/cites> <http://www.w3.org/2000/01/rdf-schema#label> "cite"@fr-CA .
 <http://www.w3.org/2006/vcard/ns#Explanatory> <http://www.w3.org/2000/01/rdf-schema#label> "Explicatif"@fr-CA .
 <http://www.w3.org/2006/vcard/ns#Parent> <http://www.w3.org/2000/01/rdf-schema#label> "Parent"@fr-CA .
 <http://purl.org/ontology/bibo/AudioVisualDocument> <http://www.w3.org/2000/01/rdf-schema#label> "Document audio-visuel"@fr-CA .
@@ -571,7 +571,7 @@
 <http://purl.obolibrary.org/obo/ERO_0000784> <http://www.w3.org/2000/01/rdf-schema#label> "Rôle d'étudiant de premier cycle"@fr-CA .
 <http://aims.fao.org/aos/geopolitical.owl#nameCurrencyEN> <http://www.w3.org/2000/01/rdf-schema#label> "nameCurrencyEN"@fr-CA .
 <http://vivoweb.org/ontology/core#offers> <http://www.w3.org/2000/01/rdf-schema#label> "offre"@fr-CA .
-<http://purl.org/ontology/bibo/translator> <http://www.w3.org/2000/01/rdf-schema#label> "traducteur"@fr-CA .
+<http://purl.org/ontology/bibo/translator> <http://www.w3.org/2000/01/rdf-schema#label> "traducteur(-trice)s"@fr-CA .
 <http://purl.obolibrary.org/obo/ERO_0000015> <http://www.w3.org/2000/01/rdf-schema#label> "Étude sur des sujets humains"@fr-CA .
 <http://vivoweb.org/ontology/core#distributesFundingFrom> <http://www.w3.org/2000/01/rdf-schema#label> "distribue le financement provenant de"@fr-CA .
 <http://purl.org/ontology/bibo/citedBy> <http://www.w3.org/2000/01/rdf-schema#label> "cité par"@fr-CA .
@@ -675,7 +675,7 @@
 <http://www.w3.org/2006/vcard/ns#productId> <http://www.w3.org/2000/01/rdf-schema#label> "ID de produit"@fr-CA .
 <http://purl.org/net/OCRe/study_design.owl#Phase_2> <http://www.w3.org/2000/01/rdf-schema#label> "Phase 2"@fr-CA .
 <http://aims.fao.org/aos/geopolitical.owl#codeCurrency> <http://www.w3.org/2000/01/rdf-schema#label> "codeMonnaie"@fr-CA .
-<http://vivoweb.org/ontology/core#hasTranslation> <http://www.w3.org/2000/01/rdf-schema#label> "traduction"@fr-CA .
+<http://vivoweb.org/ontology/core#hasTranslation> <http://www.w3.org/2000/01/rdf-schema#label> "traductions"@fr-CA .
 <http://www.w3.org/2006/vcard/ns#Coresident> <http://www.w3.org/2000/01/rdf-schema#label> "Corésident"@fr-CA .
 <http://purl.obolibrary.org/obo/BFO_0000054> <http://www.w3.org/2000/01/rdf-schema#label> "réalisé dans"@fr-CA .
 <http://vivoweb.org/ontology/core#College> <http://www.w3.org/2000/01/rdf-schema#label> "Collège"@fr-CA .
