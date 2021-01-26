@@ -1,5 +1,5 @@
 <http://vivoweb.org/ontology/core#pmcid> <http://www.w3.org/2000/01/rdf-schema#label> "ID PubMed Central"@fr-CA .
-<http://purl.obolibrary.org/obo/ERO_0000071> <http://www.w3.org/2000/01/rdf-schema#label> "Software"@fr-CA .
+<http://purl.obolibrary.org/obo/ERO_0000071> <http://www.w3.org/2000/01/rdf-schema#label> "Logiciel"@fr-CA .
 <http://purl.org/ontology/bibo/Note> <http://www.w3.org/2000/01/rdf-schema#label> "Note"@fr-CA .
 <http://www.w3.org/2006/vcard/ns#language> <http://www.w3.org/2000/01/rdf-schema#label> "a une langue"@fr-CA .
 <http://vivoweb.org/ontology/core#offeredBy> <http://www.w3.org/2000/01/rdf-schema#label> "offert par"@fr-CA .

@@ -596,7 +596,7 @@ obo:ERO_0000070
   rdfs:label "utilisé par"@fr-CA ;
 .
 obo:ERO_0000071
-  rdfs:label "Software"@fr-CA ;
+  rdfs:label "Logiciel"@fr-CA ;
 .
 obo:ERO_0000072
   rdfs:label "version"@fr-CA ;
