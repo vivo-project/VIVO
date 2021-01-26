@@ -5,10 +5,8 @@
 #     https://sourceforge.net/apps/mediawiki/vivo/index.php?title=The_StartupManager
 #
 
-# Configures VIVO to look for i18n properties files prefixed with 'vivo_'.
-# This listener (i18nSetup) must be run before any other code that uses resource bundles.
-# As this listener does not depend on any others, it should be run at or near
-# the top of the list in startup_listeners.txt.
+# This listener must be run before any other code that uses resource bundles, 
+# otherwise there will be problems with i18n-support.
 org.vivoweb.webapp.startup.i18nSetup
 
 edu.cornell.mannlib.vitro.webapp.servlet.setup.JvmSmokeTests
