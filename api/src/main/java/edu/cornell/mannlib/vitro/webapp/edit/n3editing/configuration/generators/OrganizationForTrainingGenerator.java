@@ -22,6 +22,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsVi
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 
 public class OrganizationForTrainingGenerator  extends VivoBaseGenerator implements EditConfigurationGenerator{
 
@@ -166,7 +167,7 @@ public class OrganizationForTrainingGenerator  extends VivoBaseGenerator impleme
         //Add validator
         conf.addValidator(new DateTimeIntervalValidationVTwo("startField","endField"));
         conf.addValidator(new AntiXssValidation());
-        conf.addValidator(new FirstAndLastNameValidator("existingPerson"));
+        conf.addValidator(new FirstAndLastNameValidator("existingPerson", I18n.bundle(vreq)));
 
         //Adding additional data, specifically edit mode
         addFormSpecificData(conf, vreq);

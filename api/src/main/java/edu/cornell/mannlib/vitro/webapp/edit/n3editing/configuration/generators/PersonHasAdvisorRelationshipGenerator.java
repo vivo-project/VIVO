@@ -20,6 +20,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClasses
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaVClassOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 
 public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator implements
         EditConfigurationGenerator {
@@ -184,7 +185,7 @@ public class PersonHasAdvisorRelationshipGenerator extends VivoBaseGenerator imp
 
         conf.addValidator(new DateTimeIntervalValidationVTwo("startField","endField"));
         conf.addValidator(new AntiXssValidation());
-        conf.addValidator(new FirstAndLastNameValidator("existingAdvisee"));
+        conf.addValidator(new FirstAndLastNameValidator("existingAdvisee", I18n.bundle(vreq)));
         addFormSpecificData(conf, vreq);
 
         prepare(vreq, conf);
