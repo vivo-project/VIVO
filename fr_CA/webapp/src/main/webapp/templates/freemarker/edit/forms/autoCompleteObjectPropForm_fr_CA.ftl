@@ -58,7 +58,7 @@
 
             <#---This section should become autocomplete instead-->
             <p>
-				<label for="object">  ${i18n().name_capitalized?cap_first} de la ${propertyNameForDisplay?lower_case} <span class='requiredHint'> *</span></label>
+				<label for="object">  ${i18n().name_capitalized?cap_first} <span class='requiredHint'> *</span></label>
 				<input class="acSelector" size="50"  type="text" id="object" name="objectLabel" acGroupName="object" value="${objectLabel}" />
 			</p>
 
