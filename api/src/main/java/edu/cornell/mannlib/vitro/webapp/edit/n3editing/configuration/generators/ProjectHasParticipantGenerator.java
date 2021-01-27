@@ -18,7 +18,6 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
 import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
-import edu.cornell.mannlib.vitro.webapp.i18n.I18nBundle;
 
 public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implements EditConfigurationGenerator{
 
