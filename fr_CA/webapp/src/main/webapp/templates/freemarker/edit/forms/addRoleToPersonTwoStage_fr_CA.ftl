@@ -227,7 +227,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 	    acTypes: ${acTypes!},
 	    <#if acMultipleTypes??>acMultipleTypes: ${acMultipleTypes!},</#if>
 	    // used in repair mode: button text and org name label
-	    defaultTypeName: <#if genericLabel??>'${genericLabel}'<#else>'activity'</#if>,
+	    defaultTypeName: <#if genericLabel??>'${genericLabel?js_string}'<#else>'activity'</#if>,
 	    baseHref: '${urls.base}/individual?uri=',
         blankSentinel: '${blankSentinel}',
         flagClearLabelForExisting: '${flagClearLabelForExisting}'
