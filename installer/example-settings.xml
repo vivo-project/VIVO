@@ -5,10 +5,10 @@
         <profile>
             <id>defaults</id>
             <properties>
-                <app-name>i18n</app-name>
+                <app-name>vivo</app-name>
 
-                <vivo-dir>/i18n/app/vivo/data/home</vivo-dir>
-                <tomcat-dir>/Program Files/Apache Software Foundation/Tomcat 9.0</tomcat-dir>
+                <vivo-dir>/usr/local/vivo/home</vivo-dir>
+                <tomcat-dir>/usr/local/tomcat</tomcat-dir>
 
                 <default-theme>wilma</default-theme>
             </properties>
