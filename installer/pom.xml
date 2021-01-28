@@ -13,6 +13,7 @@
     <name>VIVO Installer</name>
 
     <properties>
+        <app-name>vivo</app-name>
         <vitro-version>${project.version}</vitro-version>
         <maven-site-plugin.skip>true</maven-site-plugin.skip>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

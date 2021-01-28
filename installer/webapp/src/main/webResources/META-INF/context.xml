@@ -19,7 +19,7 @@
    <Environment
            type="java.lang.String"
            name="vitro/appName"
-           value="vivo" override="true"/>
+           value="${app-name}" override="true"/>
 
    <!--
      # The email address of the root user for the VIVO application. The password
