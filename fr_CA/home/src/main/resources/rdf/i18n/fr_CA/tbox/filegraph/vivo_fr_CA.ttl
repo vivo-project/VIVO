@@ -959,22 +959,22 @@ bibo:
   rdfs:label "Ontologie Bibo"@fr-CA ;
 .
 bibo:AcademicArticle
-  rdfs:label "Article de recherche"@fr-CA ;
+  rdfs:label "Articles de recherche"@fr-CA ;
 .
 bibo:Article
-  rdfs:label "Article"@fr-CA ;
+  rdfs:label "Autres articles"@fr-CA ;
 .
 bibo:AudioDocument
-  rdfs:label "Document audio"@fr-CA ;
+  rdfs:label "Documents audio"@fr-CA ;
 .
 bibo:AudioVisualDocument
-  rdfs:label "Document audiovisuel"@fr-CA ;
+  rdfs:label "Documents audiovisuel"@fr-CA ;
 .
 bibo:Bill
   rdfs:label "Loi"@fr-CA ;
 .
 bibo:Book
-  rdfs:label "Livre"@fr-CA ;
+  rdfs:label "Livres"@fr-CA ;
 .
 bibo:BookSection
   rdfs:label "Section d'un livre"@fr-CA ;
@@ -983,7 +983,7 @@ bibo:Brief
   rdfs:label "Dossier"@fr-CA ;
 .
 bibo:Chapter
-  rdfs:label "Chapitre"@fr-CA ;
+  rdfs:label "Chapitres"@fr-CA ;
 .
 bibo:Code
   rdfs:label "Code"@fr-CA ;
@@ -1031,7 +1031,7 @@ bibo:Issue
   rdfs:label "numéro"@fr-CA ;
 .
 bibo:Journal
-  rdfs:label "Revue"@fr-CA ;
+  rdfs:label "Revues"@fr-CA ;
 .
 bibo:LegalCaseDocument
   rdfs:label "Document de cas juridique"@fr-CA ;
@@ -1586,7 +1586,7 @@ core:GraduateStudent
   rdfs:label "Diplômé"@fr-CA ;
 .
 core:Grant
-  rdfs:label "Subvention"@fr-CA ;
+  rdfs:label "Subventions"@fr-CA ;
 .
 core:Hospital
   rdfs:label "Hôpital"@fr-CA ;
@@ -2199,7 +2199,7 @@ owl:sameAs
   rdfs:label "SKOS (Simple Knowledge Organization System)"@fr-CA ;
 .
 skos:Concept
-  rdfs:label "Concept"@fr-CA ;
+  rdfs:label "Expertises"@fr-CA ;
 .
 skos:broader
   rdfs:label "concept plus général"@fr-CA ;
