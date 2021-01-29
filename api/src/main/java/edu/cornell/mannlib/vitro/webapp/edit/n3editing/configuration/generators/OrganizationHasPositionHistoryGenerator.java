@@ -17,6 +17,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisio
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesWithParent;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 
 public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 		implements EditConfigurationGenerator {
@@ -256,7 +257,7 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 		conf.addField(endField.setEditElement(new DateTimeWithPrecisionVTwo(
 				endField, URI_PRECISION_YEAR, URI_PRECISION_NONE)));
 
-        conf.addValidator(new FirstAndLastNameValidator("existingPerson"));
+        conf.addValidator(new FirstAndLastNameValidator("existingPerson", I18n.bundle(vreq)));
 		conf.addValidator(new AntiXssValidation());
 		conf.addValidator(new DateTimeIntervalValidationVTwo("startField",
 				"endField"));

@@ -11,15 +11,18 @@ import org.apache.jena.rdf.model.Literal;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.N3ValidatorVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.MultiValueEditSubmission;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18nBundle;
 
 public class FirstAndLastNameValidator implements N3ValidatorVTwo {
 
-    private static String MISSING_FIRST_NAME_ERROR = "You must enter a value in the First Name field.";
-    private static String MISSING_LAST_NAME_ERROR = "You must enter a value in the Last Name field.";
-    private static String MALFORMED_LAST_NAME_ERROR = "The last name field may not contain a comma. Please enter first name in First Name field.";
+    private static String MISSING_FIRST_NAME_ERROR = "first_name_empty_msg";
+    private static String MISSING_LAST_NAME_ERROR = "last_name_empty_msg";
+    private static String MALFORMED_LAST_NAME_ERROR = "malformed_last_name_msg";
+    private I18nBundle i18n;
     private String uriReceiver;
 
-    public FirstAndLastNameValidator(String uriReceiver) {
+    public FirstAndLastNameValidator(String uriReceiver, I18nBundle i18n) {
+        this.i18n = i18n;
         this.uriReceiver = uriReceiver;
     }
 
@@ -68,14 +71,14 @@ public class FirstAndLastNameValidator implements N3ValidatorVTwo {
         }
 
         if (lastName == null) {
-            errors.put("lastName", MISSING_LAST_NAME_ERROR);
+            errors.put("lastName", i18n.text(MISSING_LAST_NAME_ERROR));
         // Don't reject space in the last name: de Vries, etc.
         } else if (lastNameValue.contains(",")) {
-            errors.put("lastName", MALFORMED_LAST_NAME_ERROR);
+            errors.put("lastName", i18n.text(MALFORMED_LAST_NAME_ERROR));
         }
 
         if (firstName == null) {
-            errors.put("firstName", MISSING_FIRST_NAME_ERROR);
+            errors.put("firstName", i18n.text(MISSING_FIRST_NAME_ERROR));
         }
 
         return errors.size() != 0 ? errors : null;
