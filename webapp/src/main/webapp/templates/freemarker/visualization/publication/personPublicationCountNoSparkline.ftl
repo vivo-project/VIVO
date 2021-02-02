@@ -59,7 +59,7 @@
 
                 var td1Text = totalPublicationCount;
                 var td2Text = "";
-                var infoImgText = "<img class='infoIcon' src='" + infoIconSrc + "' height='14px' width='14px' alt='${i18n().info_icon}' title='${i18n().numbers_based_on_publications_in_vivo}' />";
+                var infoImgText = "<img class='infoIcon' src='" + infoIconSrc + "' height='14px' width='14px' alt='${i18n().info_icon?replace("'","&#39;")}' title='${i18n().numbers_based_on_publications_in_vivo?replace("'","&#39;")}' />";
 
                 if ( !onlyUnknownYearPublications ) {
                     if ( td1Text == tenYearCount ) {
@@ -74,7 +74,7 @@
                     }
                 }
                 else {
-                    td2Text += "total <img class='infoIcon' src='" + infoIconSrc + "' height='14px' width='14px' alt='${i18n().info_icon}' title='${i18n().numbers_based_on_publications_in_vivo}' />";
+                    td2Text += "total <img class='infoIcon' src='" + infoIconSrc + "' height='14px' width='14px' alt='${i18n().info_icon?replace("'","&#39;")}' title='${i18n().numbers_based_on_publications_in_vivo?replace("'","&#39;")}' />";
                 }
 
                 $('#${sparklineContainerID} td#totalPubs').html(td1Text);

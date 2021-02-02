@@ -165,13 +165,13 @@
                                         if (totalPubs !== totalPublicationCount) {
                                         //sparksText += ' (' + totalPublicationCount + ' ${i18n().total})' ;
                                         }
-                                        sparksText += "&nbsp;<img class='infoIcon' src='" + infoIconSrc + "' height='16px' width='16px' alt='${i18n().info_icon}' title='${i18n().numbers_based_on_publications_in_vivo}' />" ;
+                                        sparksText += "&nbsp;<img class='infoIcon' src='" + infoIconSrc + "' height='16px' width='16px' alt='${i18n().info_icon?replace("'","&#39;")}' title='${i18n().numbers_based_on_publications_in_vivo?replace("'","&#39;")}' />" ;
 
                                     }
                                     else {
                                     var totalPubs = onlyUnknownYearPublications ? unknownYearPublicationCounts : renderedSparks;
 
-                                    $('#${sparklineContainerID} td.sparkline_number').html(totalPubs + "  total <img class='infoIcon' src='" + infoIconSrc + "' height='16px' width='16px' alt='${i18n().info_icon}' title='${i18n().numbers_based_on_publications_in_vivo}' />").attr("class", "grey-text");
+                                    $('#${sparklineContainerID} td.sparkline_number').html(totalPubs + "  total <img class='infoIcon' src='" + infoIconSrc + "' height='16px' width='16px' alt='${i18n().info_icon?replace("'","&#39;")}' title='${i18n().numbers_based_on_publications_in_vivo?replace("'","&#39;")}' />").attr("class", "grey-text");
                                    }
 
                                  <#else>
