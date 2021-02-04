@@ -13,6 +13,7 @@
     <name>VIVO Installer</name>
 
     <properties>
+        <app-name>vivo</app-name>
         <vitro-version>${project.version}</vitro-version>
         <maven-site-plugin.skip>true</maven-site-plugin.skip>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,12 +27,6 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-install-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
                 </configuration>
             </plugin>
             <plugin>
@@ -158,12 +153,6 @@
                         </executions>
                     </plugin>
                     <plugin>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
-                    </plugin>
-                    <plugin>
                         <artifactId>maven-resources-plugin</artifactId>
                         <version>2.6</version>
                         <executions>
@@ -183,45 +172,6 @@
                             <execution>
                                 <id>test</id>
                                 <phase/>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>default-war</id>
-                                <phase/>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>install</id>
-            <activation>
-                <property><name>vivo-dir</name></property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-enforcer-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>enforce-properties</id>
-                                <phase>validate</phase>
-                                <goals>
-                                    <goal>enforce</goal>
-                                </goals>
-                                <configuration>
-                                    <rules>
-                                        <requireProperty>
-                                            <property>app-name</property>
-                                            <message>You must provide an application name (app-name)</message>
-                                        </requireProperty>
-                                    </rules>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
