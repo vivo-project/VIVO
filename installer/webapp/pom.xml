@@ -122,13 +122,8 @@
     </profiles>
 
     <build>
+        <finalName>${app-name}</finalName>
         <plugins>
-            <plugin>
-                <artifactId>maven-install-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <configuration>
@@ -137,6 +132,75 @@
                             <directory>overlays</directory>
                         </fileset>
                     </filesets>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+
+                <configuration>
+                    <skip>false</skip>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>include-home</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.vivoweb</groupId>
+                                    <artifactId>vivo-installer-home</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>tar</type>
+                                    <destFileName>vivo-home.tar</destFileName>
+                                    <outputDirectory>${project.build.directory}/home-files</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
+                    <archiveClasses>false</archiveClasses>
+                    <overlays>
+                        <overlay>
+                            <groupId>org.vivoweb</groupId>
+                            <artifactId>vivo-webapp</artifactId>
+                            <type>war</type>
+                        </overlay>
+                        <!-- Overlays for multilingual support -->
+                        <!-- overlay>
+                            <groupId>org.vivoweb</groupId>
+                            <artifactId>vitro-languages-webapp</artifactId>
+                            <type>war</type>
+                        </overlay>
+                        <overlay>
+                            <groupId>org.vivoweb</groupId>
+                            <artifactId>vivo-languages-webapp</artifactId>
+                            <type>war</type>
+                        </overlay -->
+                    </overlays>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/webResources</directory>
+                            <filtering>true</filtering>
+                        </resource>
+                        <resource>
+                            <directory>${project.build.directory}/home-files/</directory>
+                            <targetPath>WEB-INF/resources/home-files/</targetPath>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
         </plugins>
