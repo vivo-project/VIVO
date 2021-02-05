@@ -1,0 +1,380 @@
+# baseURI: http://vivoweb.org/ontology/vitroAnnotation_fr_CA
+
+@prefix : <http://vivoweb.org/ontology/vitroAnnotation_fr_CA#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix c4o: <http://purl.org/spar/c4o/> .
+@prefix cito: <http://purl.org/spar/cito/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix fabio: <http://purl.org/spar/fabio/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://aims.fao.org/aos/geopolitical.owl#> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix ocrer: <http://purl.org/net/OCRe/research.owl#> .
+@prefix ocresd: <http://purl.org/net/OCRe/study_design.owl#> .
+@prefix ocresp: <http://purl.org/net/OCRe/study_protocol.owl#> .
+@prefix ocrest: <http://purl.org/net/OCRe/statistics.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ro: <http://purl.obolibrary.org/obo/ro.owl#> .
+@prefix scires: <http://vivoweb.org/ontology/scientific-research#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix swo: <http://www.ebi.ac.uk/efo/swo/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix vitro-appconf: <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationConfiguration#> .
+@prefix vitro-config: <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/> .
+@prefix vitro-public: <http://vitro.mannlib.cornell.edu/ns/vitro/public#> .
+@prefix vivo: <http://vivoweb.org/ontology/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+vitro-config:additionalEmailConfig
+  vitro-appconf:displayName "courriels additionnels"@fr-CA ;
+.
+vitro-config:addressLocationConfig
+  vitro-appconf:displayName "lieu"@fr-CA ;
+.
+vitro-config:adviseeRoleConfig
+  vitro-appconf:displayName "mentoré(e) par"@fr-CA ;
+.
+vitro-config:advisorRoleConfig
+  vitro-appconf:displayName "Direction et mentorat"@fr-CA ;
+.
+vitro-config:agentInFacilityConfig
+  vitro-appconf:displayName "situé dans l'établissement"@fr-CA ;
+.
+vitro-config:agentInGeoLocationConfig
+  vitro-appconf:displayName "lieu"@fr-CA ;
+.
+vitro-config:authorInAuthorshipConfig
+  vitro-appconf:displayName "publications choisies"@fr-CA ;
+.
+vitro-config:awardConferredByConfig
+  vitro-appconf:displayName "prix conféré par"@fr-CA ;
+.
+vitro-config:awardOrHonorConfig
+  vitro-appconf:displayName "prix et distinctions"@fr-CA ;
+.
+vitro-config:awardOrHonorGivenConfig
+  vitro-appconf:displayName "prix et distinctions attribués"@fr-CA ;
+.
+vitro-config:awardOrHonorReceiptsConfig
+  vitro-appconf:displayName "prix reçus"@fr-CA ;
+.
+vitro-config:awardReceiptsAwardForConfig
+  vitro-appconf:displayName "prix et distinctions reçus"@fr-CA ;
+.
+vitro-config:awardReceiptsConfig
+  vitro-appconf:displayName "prix reçus"@fr-CA ;
+.
+vitro-config:bfo_0000055Config
+  vitro-appconf:displayName "participant"@fr-CA ;
+.
+vitro-config:collegeOffersDegreeConfig
+  vitro-appconf:displayName "diplômes offerts"@fr-CA ;
+.
+vitro-config:contractAdministeredByConfig
+  vitro-appconf:displayName "administré par"@fr-CA ;
+.
+vitro-config:contractAwardedByConfig
+  vitro-appconf:displayName "prix offert par"@fr-CA ;
+.
+vitro-config:contractRelatesConfig
+  vitro-appconf:displayName "contributeur"@fr-CA ;
+.
+vitro-config:courseOfferedByConfig
+  vitro-appconf:displayName "offert par"@fr-CA ;
+.
+vitro-config:credentialOfConfig
+  vitro-appconf:displayName "diplômes de"@fr-CA ;
+.
+vitro-config:deptOffersDegreeConfig
+  vitro-appconf:displayName "diplômes offerts"@fr-CA ;
+.
+vitro-config:documentHasPartConfig
+  vitro-appconf:displayName "document constitué de parties"@fr-CA ;
+.
+vitro-config:documentPartOfConfig
+  vitro-appconf:displayName "parties d'autres documents"@fr-CA ;
+.
+vitro-config:editorOfConfig
+  vitro-appconf:displayName "Éditeur"@fr-CA ;
+.
+vitro-config:educationalProcessDegreeConfig
+  vitro-appconf:displayName "diplôme obtenu"@fr-CA ;
+.
+vitro-config:educationalProcessOrgConfig
+  vitro-appconf:displayName "organisation d'enseignement"@fr-CA ;
+.
+vitro-config:educationalProcessPersonConfig
+  vitro-appconf:displayName "enseignement et formation"@fr-CA ;
+.
+vitro-config:educationalTrainingConfig
+  vitro-appconf:displayName "enseignement et formation"@fr-CA ;
+.
+vitro-config:eventInFacilityConfig
+  vitro-appconf:displayName "tenu dans les installations"@fr-CA ;
+.
+vitro-config:eventLocationConfig
+  vitro-appconf:displayName "tenu à"@fr-CA ;
+.
+vitro-config:eventWithinConfig
+  vitro-appconf:displayName "se produit dans l'événement"@fr-CA ;
+.
+vitro-config:eventsForSeriesConfig
+  vitro-appconf:displayName "événements dans cette collection"@fr-CA ;
+.
+vitro-config:facilityLocationOfEquipmentConfig
+  vitro-appconf:displayName "location d'équipements ou d'instruments"@fr-CA ;
+.
+vitro-config:facilityLocationOfServiceConfig
+  vitro-appconf:displayName "installations pour service"@fr-CA ;
+.
+vitro-config:facilitySiteOfAgentConfig
+  vitro-appconf:displayName "installations destinées aux personnes, groupes ou organisations"@fr-CA ;
+.
+vitro-config:facilitySiteOfEventConfig
+  vitro-appconf:displayName "localisation des installations"@fr-CA ;
+.
+vitro-config:fullNameConfig
+  vitro-appconf:displayName "nom complet"@fr-CA ;
+.
+vitro-config:geographicLocationContainsBuildingConfig
+  vitro-appconf:displayName "localisation des installations"@fr-CA ;
+.
+vitro-config:geographicLocationContainsLocationConfig
+  vitro-appconf:displayName "partie"@fr-CA ;
+.
+vitro-config:geographicLocationWithinLocationConfig
+  vitro-appconf:displayName "partie de"@fr-CA ;
+.
+vitro-config:grantAdministeredByConfig
+  vitro-appconf:displayName "administré par"@fr-CA ;
+.
+vitro-config:grantAwardedByConfig
+  vitro-appconf:displayName "subvention offerte par"@fr-CA ;
+.
+vitro-config:grantGeographicFocusConfig
+  vitro-appconf:displayName "aspect géographique"@fr-CA ;
+.
+vitro-config:grantHasSubgrantConfig
+  vitro-appconf:displayName "sous-subventions incluses "@fr-CA ;
+.
+vitro-config:grantIsSubgrantOfConfig
+  vitro-appconf:displayName "sous-subvention de"@fr-CA ;
+.
+vitro-config:grantRelatesConfig
+  vitro-appconf:displayName "contributeur"@fr-CA ;
+.
+vitro-config:grantSubjectAreaConfig
+  vitro-appconf:displayName "domaine de recherche"@fr-CA ;
+.
+vitro-config:groupHasEditorRoleConfig
+  vitro-appconf:displayName "Éditeur(-trice) collectif(-ive) de collection"@fr-CA ;
+.
+vitro-config:hasAttendeeRoleConfig
+  vitro-appconf:displayName "Événements"@fr-CA ;
+.
+vitro-config:hasClinicalRoleConfig
+  vitro-appconf:displayName "Activités cliniques"@fr-CA ;
+.
+vitro-config:hasCo-PrincipalInvestigatorRoleConfig
+  vitro-appconf:displayName "Co-chercheur(-euse) principal(e)"@fr-CA ;
+.
+vitro-config:hasCollaboratorConfig
+  vitro:publicDescriptionAnnot "Utilisez pour une simple affirmation qu'une autre personne est un collaborateur permanent ou pour décrire la relation plus en détail. Entrez un rôle pour chaque collaborateur dans une activité conjointe."@fr-CA ;
+  vitro-appconf:displayName "Collaborateur(-trice)"@fr-CA ;
+.
+vitro-config:hasEditorRoleConfig
+  vitro-appconf:displayName "Responsable de collection"@fr-CA ;
+.
+vitro-config:hasInvestigatorRoleConfig
+  vitro-appconf:displayName "Chercheur(-euse)"@fr-CA ;
+.
+vitro-config:hasLeaderRoleConfig
+  vitro-appconf:displayName "Direction de"@fr-CA ;
+.
+vitro-config:hasMemberRoleConfig
+  vitro-appconf:displayName "Membre de"@fr-CA ;
+.
+vitro-config:hasOrganizerRoleConfig
+  vitro-appconf:displayName "Organisateur d'événement"@fr-CA ;
+.
+vitro-config:hasOutputConfig
+  vitro-appconf:displayName "publications ou autres résultats"@fr-CA ;
+.
+vitro-config:hasOutreachProviderRoleConfig
+  vitro-appconf:displayName "Mobilisation des connaissances"@fr-CA ;
+.
+vitro-config:hasPresenterRoleConfig
+  vitro-appconf:displayName "Présentations"@fr-CA ;
+.
+vitro-config:hasPrincipalInvestigatorRoleConfig
+  vitro-appconf:displayName "Chercheur(-euse) principal(e)"@fr-CA ;
+.
+vitro-config:hasResearcherRoleConfig
+  vitro-appconf:displayName "Autres activités de recherche"@fr-CA ;
+.
+vitro-config:hasReviewerRoleConfig
+  vitro-appconf:displayName "Évaluateur(-trice)"@fr-CA ;
+.
+vitro-config:hasRoomConfig
+  vitro-appconf:displayName "salles"@fr-CA ;
+.
+vitro-config:hasServiceProviderRoleConfig
+  vitro-appconf:displayName "activités professionnelles"@fr-CA ;
+.
+vitro-config:hasSubOrganizationConfig
+  vitro-appconf:displayName "sous-organisation"@fr-CA ;
+.
+vitro-config:hasTeacherRoleConfig
+  vitro-appconf:displayName "Activités d'enseignement"@fr-CA ;
+.
+vitro-config:inEventSeriesConfig
+  vitro-appconf:displayName "dans une collection d'événements"@fr-CA ;
+.
+vitro-config:includesEventConfig
+  vitro-appconf:displayName "Événements inclus"@fr-CA ;
+.
+vitro-config:informationResourceInAuthorshipConfig
+  vitro-appconf:displayName "auteur(e)s"@fr-CA ;
+.
+vitro-config:informationResourceInEditorshipConfig
+  vitro-appconf:displayName "éditeur(-trice)s"@fr-CA ;
+.
+vitro-config:issuedCredentialConfig
+  vitro-appconf:displayName "diplômes"@fr-CA ;
+.
+vitro-config:labOffersServiceConfig
+  vitro-appconf:displayName "services offerts"@fr-CA ;
+.
+vitro-config:mailingAddressConfig
+  vitro-appconf:displayName "adresse postale"@fr-CA ;
+.
+vitro-config:mailingAddressOrgConfig
+  vitro-appconf:displayName "adresse postale"@fr-CA ;
+.
+vitro-config:materialEntityInFacilityConfig
+  vitro-appconf:displayName "hébergé dans les installations"@fr-CA ;
+.
+vitro-config:orgAdministersGrantConfig
+  vitro-appconf:displayName "administre les subventions"@fr-CA ;
+.
+vitro-config:orgAwardsGrantConfig
+  vitro-appconf:displayName "subventions accordées"@fr-CA ;
+.
+vitro-config:orgFaxConfig
+  vitro-appconf:displayName "télécopieur"@fr-CA ;
+.
+vitro-config:orgHasAttendeeRoleConfig
+  vitro-appconf:displayName "Organisation participante à l'événement"@fr-CA ;
+.
+vitro-config:orgHasAwardOrHonorConfig
+  vitro-appconf:displayName "prix et distinctions reçus"@fr-CA ;
+.
+vitro-config:orgHasClinicalRoleConfig
+  vitro-appconf:displayName "Activités cliniques"@fr-CA ;
+.
+vitro-config:orgHasCollaboratorConfig
+  vitro-appconf:displayName "organisation ou groupe collaborateur"@fr-CA ;
+.
+vitro-config:orgHasLeaderRoleConfig
+  vitro-appconf:displayName "Organisation directrice de"@fr-CA ;
+.
+vitro-config:orgHasMemberRoleConfig
+  vitro-appconf:displayName "Membre de"@fr-CA ;
+.
+vitro-config:orgHasOrganizerRoleConfig
+  vitro-appconf:displayName "Organisation organisatrice de"@fr-CA ;
+.
+vitro-config:orgHasOutreachProviderRoleConfig
+  vitro-appconf:displayName "Mobilisation des connaissances"@fr-CA ;
+.
+vitro-config:orgHasPresenterRoleConfig
+  vitro-appconf:displayName "Présentations"@fr-CA ;
+.
+vitro-config:orgInAuthorshipConfig
+  vitro-appconf:displayName "publications choisies"@fr-CA ;
+.
+vitro-config:orgOffersCourseConfig
+  vitro-appconf:displayName "offre des cours"@fr-CA ;
+.
+vitro-config:orgTelephoneConfig
+  vitro-appconf:displayName "téléphone"@fr-CA ;
+.
+vitro-config:organizationEmailConfig
+  vitro-appconf:displayName "courriel"@fr-CA ;
+.
+vitro-config:organizationForPositionConfig
+  vitro-appconf:displayName "personnes"@fr-CA ;
+.
+vitro-config:organizationForTrainingConfig
+  vitro-appconf:displayName "organisation de formation"@fr-CA ;
+.
+vitro-config:outputOfConfig
+  vitro-appconf:displayName "résultat du processus ou de l'événement"@fr-CA ;
+.
+vitro-config:personFaxConfig
+  vitro-appconf:displayName "télécopieur"@fr-CA ;
+.
+vitro-config:personInPositionConfig
+  vitro-appconf:displayName "Poste"@fr-CA ;
+.
+vitro-config:personTelephoneConfig
+  vitro-appconf:displayName "téléphone"@fr-CA ;
+.
+vitro-config:preferredTitleConfig
+  vitro-appconf:displayName "Titre préféré"@fr-CA ;
+.
+vitro-config:primaryEmailConfig
+  vitro-appconf:displayName "courriel principal"@fr-CA ;
+.
+vitro-config:publicationDateConfig
+  vitro-appconf:displayName "date de publication"@fr-CA ;
+.
+vitro-config:roomWithinBuildingConfig
+  vitro-appconf:displayName "dans l'édifice"@fr-CA ;
+.
+vitro-config:siteGeographicallyWithinGeoLocationConfig
+  vitro-appconf:displayName "géographiquement situé au sein de"@fr-CA ;
+.
+vitro-config:subOrganizationWithinConfig
+  vitro-appconf:displayName "organisation interne à"@fr-CA ;
+.
+vitro-config:uniOffersDegreeConfig
+  vitro-appconf:displayName "diplômes offerts"@fr-CA ;
+.
+vitro-config:webpageEventConfig
+  vitro-appconf:displayName "page web"@fr-CA ;
+.
+vitro-config:webpageEventSeriesConfig
+  vitro-appconf:displayName "page web"@fr-CA ;
+.
+vitro-config:webpageFacilityConfig
+  vitro-appconf:displayName "page web"@fr-CA ;
+.
+vitro-config:webpageInfoConfig
+  vitro-appconf:displayName "page web"@fr-CA ;
+.
+vitro-config:webpageOrgConfig
+  vitro-appconf:displayName "page web"@fr-CA ;
+.
+vitro-config:webpagePersonConfig
+  vitro-appconf:displayName "page web"@fr-CA ;
+.
+vitro-config:webpageProjectConfig
+  vitro-appconf:displayName "page web"@fr-CA ;
+.
+vitro-config:webpageSoftwareConfig
+  vitro-appconf:displayName "page web"@fr-CA ;
+.
+vitro-config:yearAwardedConfig
+  vitro-appconf:displayName "année primée"@fr-CA ;
+.
+<http://vivoweb.org/ontology/vitroAnnotation_fr_CA>
+  a owl:Ontology ;
+  owl:versionInfo "Adapted by Michel Héon, 2020, for Université du Québec à Montréal, http://uqam.ca" ;
+  owl:versionInfo "Translated by Pierre Roberge, 2020,  for Université du Québec à Montréal, http://uqam.ca" ;
+.

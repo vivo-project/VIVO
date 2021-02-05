@@ -1,0 +1,16 @@
+# baseURI: http://vivoweb.org/ontology/menu_en_CA
+
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#OrganizationsMenuItem> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Organizations"@en-CA .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Events> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Events"@en-CA .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#capabilityMapDataGetter> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#htmlValue> "Capability Map"@en-CA .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#People> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "People"@en-CA .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#DefaultMenu> <http://www.w3.org/2000/01/rdf-schema#label> "Default Menu"@en-CA .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Home> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Home"@en-CA .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#CapabilityMapMenuItem> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Capability Map"@en-CA .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Research> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Research"@en-CA .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#ResearchMenuItem> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Research"@en-CA .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Organizations> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Organizations"@en-CA .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#HomeMenuItem> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Home"@en-CA .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#EventsMenuItem> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Events"@en-CA .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#PeopleMenuItem> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "People"@en-CA .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#CapabilityMap> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Capability Map"@en-CA .

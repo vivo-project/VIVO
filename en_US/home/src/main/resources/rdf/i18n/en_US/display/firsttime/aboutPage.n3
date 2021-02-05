@@ -1,0 +1,24 @@
+# $This file is distributed under the terms of the license in LICENSE$
+
+@prefix about: <http://vitro.mannlib.cornell.edu/ns/default/about#> .
+
+about:ABOUTDG
+    a   <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.FixedHTMLDataGetter> ;
+    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#htmlValue>
+        """<h2>About VIVO</h2>
+        <div class=\"pageGroupBody\" id=\"aboutText\"><p>The VIVO application enables the discovery of researchers across institutions. Participants in the network include institutions with local installations of VIVO or those with research discovery and profiling applications that can provide semantic web-compliant data. The information accessible through VIVO's search and browse capability will therefore reside and be controlled locally, within institutional VIVOs or other semantic web-compliant applications.</p>
+
+        <p>VIVO is an open source semantic web application originally developed and implemented at Cornell. When installed and populated with content at an institution, it enables the discovery of research and scholarship across disciplines at that institution. VIVO supports browsing and a search function which returns faceted results for rapid retrieval of desired information. Content in any local VIVO installation may be maintained manually or brought into the database in automated ways from local systems of record, such as human resources, scholarships, grants, course, and faculty activity databases.</p>
+
+        <p>See more information on the <a href=\"http://vivoweb.org\">VIVO Project</a>.</p></div>
+        """@en ;
+        <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#saveToVar>
+                "aboutPage" .
+about:ABOUTPAGE
+    a   <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Page> ;
+    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#hasDataGetter>
+        about:ABOUTDG ;
+    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title>
+        "About Page" ;
+    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#urlMapping>
+        "/about" .
