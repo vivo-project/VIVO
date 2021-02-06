@@ -19,108 +19,6 @@
 
     <name>VIVO Install Web App</name>
 
-    <profiles>
-        <profile>
-            <id>package</id>
-            <activation>
-                <property><name>app-name</name></property>
-            </activation>
-            <build>
-                <finalName>${app-name}</finalName>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <configuration>
-                            <archive>
-                                <manifest>
-                                    <addClasspath>true</addClasspath>
-                                </manifest>
-                            </archive>
-                            <archiveClasses>false</archiveClasses>
-                            <overlays>
-                                <overlay>
-                                    <groupId>org.vivoweb</groupId>
-                                    <artifactId>vivo-webapp</artifactId>
-                                    <type>war</type>
-                                </overlay>
-                                <!-- Overlays for multilingual support -->
-                                <overlay>
-                                    <groupId>org.vivoweb</groupId>
-                                    <artifactId>vitro-languages-webapp-core</artifactId>
-                                    <type>war</type>
-                                </overlay>
-                                <overlay>
-                                    <groupId>org.vivoweb</groupId>
-                                    <artifactId>vivo-languages-webapp-core</artifactId>
-                                    <type>war</type>
-                                </overlay>
-                            </overlays>
-                            <webResources>
-                                <resource>
-                                    <directory>src/main/webResources</directory>
-                                    <filtering>true</filtering>
-                                </resource>
-                            </webResources>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>install</id>
-            <activation>
-                <property><name>tomcat-dir</name></property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>remove-webapp</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <target>
-                                        <delete dir="${tomcat-dir}/webapps/${project.build.finalName}" />
-                                    </target>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install</id>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>unpack</goal>
-                                </goals>
-                                <configuration>
-                                    <artifactItems>
-                                        <artifactItem>
-                                            <groupId>${project.groupId}</groupId>
-                                            <artifactId>${project.artifactId}</artifactId>
-                                            <version>${project.version}</version>
-                                            <type>war</type>
-                                            <overWrite>true</overWrite>
-                                            <outputDirectory>${tomcat-dir}/webapps/${project.build.finalName}</outputDirectory>
-                                        </artifactItem>
-                                    </artifactItems>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
     <build>
         <finalName>${app-name}</finalName>
         <plugins>
@@ -180,16 +78,16 @@
                             <type>war</type>
                         </overlay>
                         <!-- Overlays for multilingual support -->
-                        <!-- overlay>
+                        <overlay>
                             <groupId>org.vivoweb</groupId>
-                            <artifactId>vitro-languages-webapp</artifactId>
+                            <artifactId>vitro-languages-webapp-core</artifactId>
                             <type>war</type>
                         </overlay>
                         <overlay>
                             <groupId>org.vivoweb</groupId>
-                            <artifactId>vivo-languages-webapp</artifactId>
+                            <artifactId>vivo-languages-webapp-core</artifactId>
                             <type>war</type>
-                        </overlay -->
+                        </overlay>
                     </overlays>
                     <webResources>
                         <resource>
