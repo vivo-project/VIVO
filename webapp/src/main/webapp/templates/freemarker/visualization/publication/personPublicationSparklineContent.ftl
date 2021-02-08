@@ -272,7 +272,12 @@
 
                 }
 
-                drawPubCountVisualization(sparklineImgTD);
+                google.charts.load('current', {
+                    callback: function() {
+                        drawPubCountVisualization(sparklineImgTD)
+                    },
+                    packages: ['bar', 'corechart', 'table', 'imagesparkline']
+                });
             });
         </script>
 

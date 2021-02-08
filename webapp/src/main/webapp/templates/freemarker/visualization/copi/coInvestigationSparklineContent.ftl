@@ -273,8 +273,12 @@
                     table.prependTo('#${sparklineContainerID}');
 
                 }
-
-                drawCoInvestigatorsSparklineVisualization(sparklineImgTD);
+                google.charts.load('current', {
+                    callback: function() {
+                        drawCoInvestigatorsSparklineVisualization(sparklineImgTD)
+                    },
+                    packages: ['bar', 'corechart', 'table', 'imagesparkline']
+                });
             });
         </script>
 
