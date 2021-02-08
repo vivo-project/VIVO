@@ -21,7 +21,7 @@
 
 <#assign coAuthorIcon = '${urls.images}/visualization/coauthorship/co_author_icon.png'>
 
-<#assign googleVisualizationAPI = 'https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22areachart%22%2C%22imagesparkline%22%5D%7D%5D%7D'>
+<#assign googleVisualizationAPI = 'https://www.gstatic.com/charts/loader.js'>
 <#assign coInvestigatorPersonLevelJavaScript = '${urls.base}/js/visualization/coPIship/coPIship-person-level.js'>
 <#assign commonPersonLevelJavaScript = '${urls.base}/js/visualization/personlevel/person-level.js'>
 

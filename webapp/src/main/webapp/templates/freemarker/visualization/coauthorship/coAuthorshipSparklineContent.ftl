@@ -271,7 +271,13 @@
 
                 }
 
-                drawCoauthorsSparklineVisualization(sparklineImgTD);
+                google.charts.load('current', {
+                    callback: function() {
+                        drawCoauthorsSparklineVisualization(sparklineImgTD)
+                    },
+                    packages: ['bar', 'corechart', 'table', 'imagesparkline']
+                });
+
             });
         </script>
 
