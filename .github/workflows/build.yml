@@ -1,0 +1,31 @@
+name: Build
+
+on: [ push, pull_request, workflow_dispatch ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      MAVEN_OPTS: -Xmx1024M
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Clone Vitro
+        run: git clone https://github.com/vivo-project/Vitro.git ../Vitro
+
+      - name: Maven Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-cache-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-cache-m2-
+
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Maven Build
+        run: mvn clean package -Dmaven.test.skip=false
