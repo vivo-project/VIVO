@@ -1,4 +1,4 @@
-name: Deploy
+name: Docker
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  docker:
     runs-on: ubuntu-latest
 
     env:
@@ -30,12 +30,15 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-          server-id: ossrh
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
 
-      - name: Maven Deploy
-        run: mvn --batch-mode deploy
-        env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+      - name: Maven Build
+        run: mvn clean install
+
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: vivoweb/vivo
+          tag_with_ref: true
+
