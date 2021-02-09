@@ -1,6 +1,10 @@
-name: Build
+name: Deploy
 
-on: [ push, pull_request, workflow_dispatch ]
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   build:
@@ -26,6 +30,12 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
 
-      - name: Maven Build
-        run: mvn clean install
+      - name: Maven Deploy
+        run: mvn --batch-mode deploy
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
