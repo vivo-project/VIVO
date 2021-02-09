@@ -15,13 +15,6 @@ jobs:
       - name: Clone Vitro
         run: git clone https://github.com/vivo-project/Vitro.git ../Vitro
 
-      - name: Vitro Cache
-        uses: actions/cache@v2
-        with:
-          path: ../Vitro
-          key: ${{ runner.os }}-cache-vitro-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-cache-vitro-
-
       - name: Maven Cache
         uses: actions/cache@v2
         with:
