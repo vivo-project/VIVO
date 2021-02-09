@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - VIVO-1960
+      - main
   workflow_dispatch:
 
 jobs:
