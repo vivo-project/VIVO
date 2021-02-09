@@ -1,0 +1,41 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - VIVO-1960
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      MAVEN_OPTS: -Xmx1024M
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Clone Vitro
+        run: git clone https://github.com/vivo-project/Vitro.git ../Vitro
+
+      - name: Maven Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-cache-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-cache-m2-
+
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+
+      - name: Maven Deploy
+        run: mvn --batch-mode deploy
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
