@@ -3,7 +3,7 @@ name: Docker
 on:
   push:
     branches:
-      - VIVO-1961
+      - main
   workflow_dispatch:
 
 jobs:
