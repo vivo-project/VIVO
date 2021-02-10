@@ -32,6 +32,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUti
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 
 /**
  * This is a slightly unusual generator that is used by Manage Editors on
@@ -83,7 +84,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
         //template file
         editConfiguration.setTemplate("addEditorsToInformationResource.ftl");
         //add validators
-        editConfiguration.addValidator(new FirstAndLastNameValidator("personUri"));
+        editConfiguration.addValidator(new FirstAndLastNameValidator("personUri", I18n.bundle(vreq)));
 
         //Adding additional data, specifically edit mode
         addFormSpecificData(editConfiguration, vreq);

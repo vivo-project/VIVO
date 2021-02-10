@@ -3,8 +3,8 @@
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ConstantFieldOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 
 public class AddOrganizerRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
 
@@ -22,26 +22,27 @@ public class AddOrganizerRoleToPersonGenerator extends AddRoleToPersonTwoStageGe
 	}
 
 	//Organizer role involves hard-coded options for the "right side" of the role or activity
-    @Override
-    FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
-		return new ConstantFieldOptions(
-        "","Select type",
-        "http://vivoweb.org/ontology/core#Competition", "Competition",
-        "http://purl.org/ontology/bibo/Conference", "Conference",
-        "http://vivoweb.org/ontology/core#Course", "Course",
-        "http://purl.org/NET/c4dm/event.owl#Event", "Event",
-        "http://vivoweb.org/ontology/core#Exhibit", "Exhibit",
-        "http://purl.org/ontology/bibo/Hearing", "Hearing",
-        "http://purl.org/ontology/bibo/Interview", "Interview",
-        "http://vivoweb.org/ontology/core#InvitedTalk", "Invited Talk",
-        "http://vivoweb.org/ontology/core#Meeting", "Meeting",
-        "http://purl.org/ontology/bibo/Performance", "Performance",
-        "http://vivoweb.org/ontology/core#Presentation", "Presentation",
-        "http://purl.org/ontology/bibo/Workshop", "Workshop",
-        "http://vivoweb.org/ontology/core#ConferenceSeries", "Conference Series",
-        "http://vivoweb.org/ontology/core#EventSeries", "Event Series",
-        "http://vivoweb.org/ontology/core#SeminarSeries", "Seminar Series",
-        "http://vivoweb.org/ontology/core#WorkshopSeries", "Workshop Series");
+	FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
+
+	    return GeneratorUtil.buildResourceAndLabelFieldOptions(
+	            vreq.getRDFService(), vreq.getWebappDaoFactory(),
+	            "", I18n.bundle(vreq).text("select_type"),
+	            "http://vivoweb.org/ontology/core#Competition",
+	            "http://purl.org/ontology/bibo/Conference",
+	            "http://vivoweb.org/ontology/core#Course",
+	            "http://purl.org/NET/c4dm/event.owl#Event",
+	            "http://vivoweb.org/ontology/core#Exhibit",
+	            "http://purl.org/ontology/bibo/Hearing",
+	            "http://purl.org/ontology/bibo/Interview",
+	            "http://vivoweb.org/ontology/core#InvitedTalk",
+	            "http://vivoweb.org/ontology/core#Meeting",
+	            "http://purl.org/ontology/bibo/Performance",
+	            "http://vivoweb.org/ontology/core#Presentation",
+	            "http://purl.org/ontology/bibo/Workshop",
+	            "http://vivoweb.org/ontology/core#ConferenceSeries",
+	            "http://vivoweb.org/ontology/core#EventSeries",
+	            "http://vivoweb.org/ontology/core#SeminarSeries",
+	            "http://vivoweb.org/ontology/core#WorkshopSeries");
 	}
 
 	@Override

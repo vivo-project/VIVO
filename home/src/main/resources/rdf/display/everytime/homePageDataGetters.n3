@@ -23,7 +23,8 @@ display:academicDeptsDataGetter
     WHERE
     {
           ?theURI a vivo:AcademicDepartment .
-          ?theURI rdfs:label ?label
+          ?theURI rdfs:label ?label .
+          FILTER (lang(?label) = '?country' ) .
     }
 
     """ .

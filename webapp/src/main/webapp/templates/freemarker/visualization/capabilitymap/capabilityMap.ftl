@@ -11,12 +11,27 @@ ${stylesheets.add(
     '<link rel="stylesheet" type="text/css" href="${urls.base}/templates/freemarker/edit/forms/css/autocomplete.css" />',
     '<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/personlevel/page.css" />',
     '<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/visualization.css" />',
-    '<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/capabilitymap/graph.css" />'
+    '<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/capabilitymap/graph.css" />',
+    '<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/capabilitymap/key.css" />'
 )}
 
 <script language="JavaScript" type="text/javascript">
+    var i18nStringsCap = {
+        term: '${i18n().term_capitalized?js_string}',
+        group: '${i18n().group_capitalized?js_string}',
+        pause: '${i18n().pause?js_string}',
+        resume: '${i18n().resume?js_string}',
+        reset: '${i18n().cap_map_reset?js_string}',
+        show_group_labels: '${i18n().show_group_labels?js_string}',
+        hide_group_labels: '${i18n().hide_group_labels?js_string}',
+        delete_selected: '${i18n().delete_selected?js_string}',
+        remove_capability: '${i18n().remove_capability?js_string}',
+        remove_group: '${i18n().remove_group?js_string}',
+        expand: '${i18n().expand?js_string}'
+    };
     var contextPath = "${urls.base}";
     $(document).ready(function() {
+        document.title = "${i18n().capability_map?js_string}";
         var loadedConcepts = $.ajax({
             url: contextPath + "/visualizationAjax?vis=capabilitymap&data=concepts",
             type: "GET",
@@ -33,8 +48,8 @@ ${stylesheets.add(
 </script>
 <div class="main" id="main-content" role="main">
     <div class="col-8">
-        <h2>Capability Map</h2>
-        <p>Build a &lsquo;first pass&rsquo; capability map by typing in a<!-- set of--> search term<!--s--> that could be said to represent a broad research capability.</p>
+        <h2>${i18n().capability_map}</h2>
+        <p>${i18n().cap_map_intro}</p>
     </div>
 
     <div id="queryform">
@@ -43,9 +58,9 @@ ${stylesheets.add(
                 <input name="query" id="query" size="34" value="" onfocus="" accesskey="q" onblur="" type="text" onkeydown="queryKeyDown(event);">
                 <label id="cutofflabel" for="queryCutoff">Cutoff:</label>
                 <input id="queryCutoff" name="queryCutoff" type="text" title="Cutoff" size="4" value="10">
-                <input type="submit" value="Search" id="add" type="button" onclick="addKwd();">
-                <input value="Search and Expand" type="submit" id="sExpand" onclick="expandLastQuery = 1; addKwd();">
-                <input value="Reset" id="resetButton" type="submit" onclick="reset()" disabled>
+                <input value="${i18n().cap_map_search}" type="submit" id="add" type="button" onclick="addKwd();">
+                <input value="${i18n().cap_map_search_expand}" type="submit" id="sExpand" onclick="expandLastQuery = 1; addKwd();">
+                <input value="${i18n().cap_map_reset}" id="resetButton" type="submit" onclick="reset()" disabled>
                 <!-- a style="display:inline-block; float:right; line-height:32px; height:32px; cursor:pointer" onclick="showhideadvanced(this)">Show advanced</a -->
             </span>
         </p>
@@ -56,56 +71,27 @@ ${stylesheets.add(
     <div id="container">
         <div id="helptext">
             <p>
-                Welcome to the Capability Mapping tool.
-                This tool visualises how researchers relate to other
-                researchers via search terms.
+                ${i18n().cap_map_text_intro}
             </p>
-            <h3>Getting Started</h3>
+            <h3>${i18n().cap_map_text_headline1}</h3>
             <p>
-                Enter a research area into the search field above and press 'Search'.
-                The resulting diagram displays the search term, rendered in orange,
-                connected to the blue group of researchers that are active in that area.
-                Enter another search term to see how researchers from both searches relate.
-                Keep adding search terms to build a capability map.
+                ${i18n().cap_map_text1}
             </p>
             <p>
-                Tip: you can expand a broad search term into smaller concepts
-                by clicking &lsquo;search and expand&rsquo;.
+                ${i18n().cap_map_text2}
             </p>
-            <h3>Interacting with the visualisation</h3>
+            <h3>${i18n().cap_map_text_headline2}</h3>
             <p>
-                By clicking on any node in the visualisation,
-                additional information can be viewed in the
-                'Info' tab on the right-hand side.
-                For groups of people, the participants in the group
-                and their information can be viewed,
-                and individual researchers can be removed from the graph.
-                Selecting a search term will display all attached groups.
-                Under each group full information for each person is retrieved,
-                and the number of matching grants and publications
-                for each researcher within the mapped capabilities is shown.
-                Clicking on a researcher's name will lead to the original search
-                results.
+                ${i18n().cap_map_text3}
             </p>
-            <h4>Visual cues</h4>
+            <h4>${i18n().cap_map_text_headline3}</h4>
             <p>
-                To make the visualisation easier to read,
-                search terms and groups are scaled according
-                to the number of results returned.
-                Groups are also given different shades
-                according to the number of connected search terms.
-                The darker the shade, the more search terms a group is connected to.
+                ${i18n().cap_map_text4}
             </p>
-            <h3>Advanced features</h3>
-            <h4>Changing the cutoff value</h4>
+            <h3>${i18n().cap_map_text_headline4}</h3>
+            <h4>${i18n().cap_map_text_headline5}</h4>
             <p>
-                The amount of researchers retrieved for each search term
-                for is limited by the cutoff value in the search form
-                (10 by default).
-                Increasing this cutoff will increase the likelihood
-                of an intersection between different search terms.
-                This will also increase the complexity of the graph,
-                however, and may make it difficult to identify patterns.
+                ${i18n().cap_map_text5}
             </p>
         </div>
 
@@ -118,28 +104,32 @@ ${stylesheets.add(
         <div id="right-container">
             <div class="tabs">
                 <ul  class="titles">
-                    <li><a href="#demo">Search terms</a></li>
-                    <li><a href="#logg">Info</a></li>
+                    <li><a href="#demo">${i18n().cap_map_search_terms}</a></li>
+                    <li><a href="#logg">${i18n().cap_map_info}</a></li>
                     <!-- li><a href="#extractData">Data</a></li -->
                 </ul>
 
                 <div class="result_body">
                     <div class="result_section" id="demo">
-                        <h2>Current search terms</h2>
+                        <h2>${i18n().cap_map_cur_search_terms}</h2>
                         <ul id="log_printout">
-                            <li>This panel displays a list of the search terms currently
-                                on the graph. Search for something to begin.</li>
+                            <li>
+                                ${i18n().cap_map_text6}
+                            </li>
                         </ul>
                         <p style="position:absolute; bottom:10px">
-                            <img src="${urls.base}/images/visualization/capabilitymap/key.png" alt="Key">
+                        <div class="capability">${i18n().cap_map_key1}</div>
+                        <div class="edge">${i18n().cap_map_key2}</div>
+                        <div class="group">${i18n().cap_map_key3}</div>
+                        <div class="links2">${i18n().cap_map_key4}</div>
+                        <div class="links3">${i18n().cap_map_key5}</div>
+                        <div class="links4">${i18n().cap_map_key6}</div>
                         </p>
                     </div>
                     <div class="result_section" id="logg">
                         <div id="inner-details">
                             <p>
-                                This panel displays information about individual
-                                search terms and groups. Click on a group to display
-                                its information.
+                                ${i18n().cap_map_text7}
                             </p>
                         </div>
                     </div>
@@ -164,4 +154,3 @@ ${stylesheets.add(
         </div>
     </div>
 </div>
-

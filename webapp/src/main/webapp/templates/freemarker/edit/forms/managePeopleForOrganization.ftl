@@ -44,8 +44,8 @@ var customFormData = {
     processingUrl: '${urls.base}/edit/primitiveRdfEdit'
 };
 var i18nStrings = {
-    itemSuccessfullyExcluded: '${i18n().person_successfully_excluded}',
-    errorExcludingItem: '${i18n().error_excluding_person}'
+    itemSuccessfullyExcluded: '${i18n().person_successfully_excluded?js_string}',
+    errorExcludingItem: '${i18n().error_excluding_person?js_string}'
 };
 </script>
 

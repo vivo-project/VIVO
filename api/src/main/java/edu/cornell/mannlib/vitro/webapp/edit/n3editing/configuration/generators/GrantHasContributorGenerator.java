@@ -19,6 +19,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 
 public class GrantHasContributorGenerator  extends VivoBaseGenerator implements EditConfigurationGenerator{
 
@@ -92,7 +93,7 @@ public class GrantHasContributorGenerator  extends VivoBaseGenerator implements 
 
         //Add validator
         conf.addValidator(new AntiXssValidation());
-        conf.addValidator(new FirstAndLastNameValidator("existingPerson"));
+        conf.addValidator(new FirstAndLastNameValidator("existingPerson", I18n.bundle(vreq)));
 
         //Adding additional data, specifically edit mode
         addFormSpecificData(conf, vreq);

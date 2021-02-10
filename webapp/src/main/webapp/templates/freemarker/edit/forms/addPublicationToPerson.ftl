@@ -132,7 +132,6 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <#--TODO: Check if possible to have existing publication options here in order to select-->
     <p class="inline"><label for="typeSelector">${i18n().publication_type}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
         <select id="typeSelector" name="pubType" acGroupName="publication" >
-             <option value="" <#if (publicationTypeValue?length = 0)>selected="selected"</#if>>${i18n().select_one}</option>
              <#list pubTypeLiteralOptions?keys as key>
                  <option value="${key}" <#if (publicationTypeValue = key)>selected="selected"</#if>>${pubTypeLiteralOptions[key]}</option>
              </#list>
@@ -325,9 +324,9 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         flagClearLabelForExisting: '${flagClearLabelForExisting}'
     };
     var i18nStrings = {
-        selectAnExisting: '${i18n().select_an_existing}',
-        orCreateNewOne: '${i18n().or_create_new_one}',
-        selectedString: '${i18n().selected}'
+        selectAnExisting: '${i18n().select_an_existing?js_string}',
+        orCreateNewOne: '${i18n().or_create_new_one?js_string}',
+        selectedString: '${i18n().selected?js_string}'
     };
     </script>
 

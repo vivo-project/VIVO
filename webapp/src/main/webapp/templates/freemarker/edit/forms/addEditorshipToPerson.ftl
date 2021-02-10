@@ -84,7 +84,6 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <label for="orgType">${i18n().document_type_capitalized} ${requiredHint}</label>
         <#assign docTypeOpts = editConfiguration.pageData.documentType />
         <select id="typeSelector" name="documentType" acGroupName="document">
-            <option value="" selected="selected">${i18n().select_one}</option>
             <#list docTypeOpts?keys as key>
                 <#if documentTypeValue = key>
                     <option value="${key}"  selected >${docTypeOpts[key]}</option>
@@ -136,9 +135,9 @@ var customFormData  = {
     subjectName: '${editConfiguration.subjectName}'
 };
 var i18nStrings = {
-    selectAnExisting: '${i18n().select_an_existing}',
-    orCreateNewOne: '${i18n().or_create_new_one}',
-    selectedString: '${i18n().selected}'
+    selectAnExisting: '${i18n().select_an_existing?js_string}',
+    orCreateNewOne: '${i18n().or_create_new_one?js_string}',
+    selectedString: '${i18n().selected?js_string}'
 };
 
 </script>

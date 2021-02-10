@@ -9,6 +9,8 @@ import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
+
+import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
@@ -232,13 +234,37 @@ final public class VisualizationCaches {
                     new CachingRDFServiceExecutor.RDFServiceCallable<Map<String, String>>(visualizationAffinity) {
                         @Override
                         protected Map<String, String> callWithService(RDFService rdfService) throws Exception {
+                            // get current selected language tag
+                            VitroRequest vreq = rdfService.getVitroRequest();
+                            String langCtx = "en-US"; // set default
+                            String language = "en"; // set fallback language
+                            try {
+                                langCtx = language = vreq.getLocale().getLanguage();
+                                if (!vreq.getLocale().getCountry().isEmpty()) {
+                                    langCtx += "-" + vreq.getLocale().getCountry();
+                                }
+                            } catch (Exception e) { }
+
                             String query = QueryConstants.getSparqlPrefixQuery() +
-                                    "SELECT ?org ?orgLabel\n" +
+                                    "SELECT ?org (Min(?orgLabel_) AS ?orgLabel) \n" +
                                     "WHERE\n" +
                                     "{\n" +
-                                    "  ?org a foaf:Organization .\n" +
-                                    "  ?org rdfs:label ?orgLabel .\n" +
-                                    "}\n";
+                                    "  ?org a foaf:Organization \n" +
+                                    "  OPTIONAL { ?org rdfs:label ?orgLabelPrimary . \n" +
+                                    "       FILTER (LANG(?orgLabelPrimary) = '" + langCtx + "') \n" +
+                                    "} \n" +
+                                    "  OPTIONAL { ?org rdfs:label ?orgLabelSecondary . \n" +
+                                    "       FILTER (LANG(?orgLabelSecondary) = '" + language + "') \n" +
+                                    "} \n" +
+                                    "  OPTIONAL { ?org rdfs:label ?orgLabelTertiary .\n" +
+                                    "       FILTER (STRBEFORE(STR(LANG(?orgLabelTertiary)), '-') = '" + language + "') \n" +
+                                    "} \n" +
+                                    "  OPTIONAL { ?org rdfs:label ?orgLabelFallback .\n" +
+                                    "       FILTER (LANG(?orgLabelFallback) != '" + langCtx + "' \n" + 
+                                    "           && LANG(?orgLabelFallback) != '" + language + "' ) \n" +
+                                    "} \n" +
+                                    "BIND(COALESCE(?orgLabelPrimary, ?orgLabelSecondary, ?orgLabelTertiary, ?orgLabelFallback) AS ?orgLabel_) \n" +
+                                    "} GROUP BY ?org \n";
 
                             final Map<String, String> map = new HashMap<>();
 
@@ -390,6 +416,16 @@ final public class VisualizationCaches {
                     new CachingRDFServiceExecutor.RDFServiceCallable<ConceptLabelMap>() {
                         @Override
                         protected ConceptLabelMap callWithService(RDFService rdfService) throws Exception {
+                            VitroRequest vreq = rdfService.getVitroRequest();
+                            String langCtx = "en-US";
+                            // UQAM-Optimization Adjust to linguistic context
+                            try {
+                                langCtx  = vreq.getLocale().getLanguage();
+                                if (!vreq.getLocale().getCountry().isEmpty()) {
+                                    langCtx += "-" + vreq.getLocale().getCountry();
+                                }
+                            } catch (Exception e) {
+                            }
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?concept ?label\n" +
                                     "WHERE\n" +
@@ -398,13 +434,13 @@ final public class VisualizationCaches {
                                     "    ?person core:hasResearchArea ?concept .\n" +
                                     "    ?concept a skos:Concept .\n" +
                                     "    ?concept rdfs:label ?label .\n" +
+                                    "    FILTER (lang(?label) = '" + langCtx+"' )  \n" +
                                     "}\n";
 
 //                            final Map<String, String> map = new HashMap<>();
                             final ConceptLabelMap map = new ConceptLabelMap();
-
+                            
                             rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
-                                @Override
                                 protected void processQuerySolution(QuerySolution qs) {
                                     String conceptURI = qs.getResource("concept").getURI().intern();
                                     String label  = qs.getLiteral("label").getString().intern();

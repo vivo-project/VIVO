@@ -28,16 +28,6 @@
 	            <input size="30"  type="text" id="label" name="label" value="${labelValue}" />
 	        </p>
 	    </#if>
-           <label for="newLabelLanguage">${i18n().add_label_for_language}</label>
-			<select  name="newLabelLanguage" id="newLabelLanguage"  >
-			<option value=""<#if !newLabelLanguageValue?has_content> selected="selected"</#if>>${i18n().select_locale}</option>
-			<#if editConfiguration.pageData.selectLocale?has_content>
-				<#assign selectLocale = editConfiguration.pageData.selectLocale />
-				<#list selectLocale as locale>
-			 	<option value="${locale.code}"<#if newLabelLanguageValue?has_content && locale.code == newLabelLanguageValue> selected="selected"</#if>>${locale.label}</option>
-    			</#list>
-			</#if>
-			</select>
 
  			<input type="hidden" name="editKey" id="editKey" value="${editKey}"/>
 

@@ -415,7 +415,7 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 
         //make list of type URIs from options, this can be called with null since
 	    //ConstantFieldOptions doesn't use any of the arguments.
-	    Map<String,String> options = fieldOptions.getOptions(null, null, null) ;
+	    Map<String,String> options = fieldOptions.getOptions(null, null, null, null) ;
 
         if (options != null && options.size() > 0) {
             List<String> typeUris = new ArrayList<String>();

@@ -156,17 +156,17 @@
                     var totalGrants = onlyUnknownYearGrants ? unknownYearGrantCounts : renderedShortSparks;
 
                     if (totalGrants === 1) {
-                        var grantDisplay = "${i18n().grant}";
+                        var grantDisplay = "${i18n().grant?js_string}";
                     } else {
-                        var grantDisplay = "${i18n().grants}";
+                        var grantDisplay = "${i18n().grants?js_string}";
                     }
 
                     $('#${sparklineContainerID} td.sparkline_number').text(totalGrants).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + grantDisplay + " <br/></span>");
 
-                    var sparksText = '  ${i18n().within_last_10_years}';
+                    var sparksText = '  ${i18n().within_last_10_years?js_string}';
 
                     if (totalGrants !== totalGrantCount) {
-                        sparksText += ' (' + totalGrantCount + ' ${i18n().total})';
+                        sparksText += ' (' + totalGrantCount + ' ${i18n().total?js_string})';
                     }
 
                  <#else>
@@ -185,9 +185,9 @@
                     var totalGrants = onlyUnknownYearGrants ? unknownYearGrantCounts : renderedSparks;
 
                     if (totalGrants === 1) {
-                        var grantDisplay = "${i18n().grant}";
+                        var grantDisplay = "${i18n().grant?js_string}";
                     } else {
-                        var grantDisplay = "${i18n().grants}";
+                        var grantDisplay = "${i18n().grants?js_string}";
                     }
 
                     $('#${sparklineContainerID} td.sparkline_number').text(totalGrants).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + grantDisplay + " <br/></span>");
@@ -196,7 +196,7 @@
                                         + ' through ${sparklineVO.latestRenderedGrantYear?c}</span>';
 
                     if (totalGrants !== totalGrantCount) {
-                        sparksText += ' (' + totalGrantCount + ' ${i18n().total})';
+                        sparksText += ' (' + totalGrantCount + ' ${i18n().total?js_string})';
                     }
 
                     if (totalGrantCount) {

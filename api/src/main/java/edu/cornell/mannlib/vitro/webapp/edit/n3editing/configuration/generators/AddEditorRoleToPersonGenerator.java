@@ -5,6 +5,8 @@ package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18nBundle;
 /**
  * Generates the edit configuration for adding a Role to a Person.
 
@@ -46,8 +48,13 @@ public class AddEditorRoleToPersonGenerator extends AddRoleToPersonTwoStageGener
 
     @Override
     FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
+    	// UQAM-Linguistic-Management Managing linguistic context
+		I18nBundle i18n = I18n.bundle(vreq);
+		String i18nSelectType = i18n.text("select_type");
+		String selectType = (i18nSelectType == null || i18nSelectType.isEmpty()) ? "Select type" : i18nSelectType ;
+
         return new ChildVClassesOptions(OPTION_CLASS_URI)
-            .setDefaultOptionLabel("Select type");
+            .setDefaultOptionLabel(selectType);
     }
 
 	/** Do not show the role label field for the AddEditorRoleToPerson form */

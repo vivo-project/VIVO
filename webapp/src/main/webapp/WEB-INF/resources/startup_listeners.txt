@@ -5,6 +5,10 @@
 #     https://sourceforge.net/apps/mediawiki/vivo/index.php?title=The_StartupManager
 #
 
+# This listener must be run before any other code that uses resource bundles, 
+# otherwise there will be problems with i18n-support.
+org.vivoweb.webapp.startup.i18nSetup
+
 edu.cornell.mannlib.vitro.webapp.servlet.setup.JvmSmokeTests
 
 edu.cornell.mannlib.vitro.webapp.application.ApplicationSetup
@@ -20,6 +24,9 @@ edu.cornell.mannlib.vitro.webapp.application.ApplicationImpl$ComponentsSetup
 edu.cornell.mannlib.vitro.webapp.config.RevisionInfoSetup
 
 edu.cornell.mannlib.vitro.webapp.email.FreemarkerEmailFactory$Setup
+
+# For multiple language support
+edu.cornell.mannlib.vitro.webapp.i18n.selection.LocaleSelectionSetup
 
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ConfigurationModelsSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ContentModelSetup
@@ -67,9 +74,6 @@ org.vivoweb.webapp.startup.SearchResultTemplateModelSetup
 
 edu.ucsf.vitro.opensocial.OpenSocialSmokeTests
 
-# For multiple language support
-edu.cornell.mannlib.vitro.webapp.i18n.selection.LocaleSelectionSetup
-
 # The search indexer uses a "public" permission, so the PropertyRestrictionPolicyHelper
 #   and the PermissionRegistry must already be set up.
 edu.cornell.mannlib.vitro.webapp.searchindex.SearchIndexerSetup
@@ -91,5 +95,3 @@ edu.cornell.mannlib.vitro.webapp.controller.individual.VIVOIndividualResponseBui
 
 # This should be near the end, because it will issue a warning if the connection to the SearchEngine times out.
 edu.cornell.mannlib.vitro.webapp.servlet.setup.SearchEngineSmokeTest
-
-org.vivoweb.webapp.startup.i18nSetup

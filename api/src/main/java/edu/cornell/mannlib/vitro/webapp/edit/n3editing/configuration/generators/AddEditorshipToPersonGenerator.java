@@ -23,9 +23,10 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ConstantFieldOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
@@ -108,8 +109,8 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
         conf.addField( new FieldVTwo().
                 setName("documentType").
                 setValidators( list("nonempty") ).
-                setOptions( new ConstantFieldOptions("documentType", getDocumentTypeLiteralOptions() ))
-                );
+                // UQAM-Linguistic-Management vreq for linguistic context
+                setOptions( getDocumentTypeLiteralOptions(vreq) ) );
 
         conf.addField( new FieldVTwo().
                 setName("documentLabel").
@@ -203,21 +204,22 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
         return null;
     }
 
-    private List<List<String>> getDocumentTypeLiteralOptions() {
-        List<List<String>> literalOptions = new ArrayList<List<String>>();
-        literalOptions.add(list("http://purl.org/ontology/bibo/Book", "Book"));
-        literalOptions.add(list("http://purl.org/ontology/bibo/Chapter", "Chapter"));
-        literalOptions.add(list("http://purl.org/ontology/bibo/EditedBook", "Edited Book"));
-        literalOptions.add(list("http://purl.org/ontology/bibo/Film", "Film"));
-        literalOptions.add(list("http://purl.org/ontology/bibo/Magazine", "Magazine"));
-        literalOptions.add(list("http://vivoweb.org/ontology/core#Newsletter", "Newsletter"));
-        literalOptions.add(list("http://purl.org/ontology/bibo/Newspaper", "Newspaper"));
-        literalOptions.add(list("http://vivoweb.org/ontology/core#NewsRelease", "News Release"));
-        literalOptions.add(list("http://purl.org/ontology/bibo/Report", "Report"));
-        literalOptions.add(list("http://vivoweb.org/ontology/core#Video", "Video"));
-        literalOptions.add(list("http://purl.org/ontology/bibo/Webpage", "Webpage"));
-        literalOptions.add(list("http://purl.org/ontology/bibo/Website", "Website"));
-        return literalOptions;
+    private FieldOptions getDocumentTypeLiteralOptions(VitroRequest vreq) throws Exception {
+        return GeneratorUtil.buildResourceAndLabelFieldOptions(
+                vreq.getRDFService(), vreq.getWebappDaoFactory(), "", 
+                I18n.bundle(vreq).text("select_type"),
+                "http://purl.org/ontology/bibo/Book",
+                "http://purl.org/ontology/bibo/Chapter",
+                "http://purl.org/ontology/bibo/EditedBook",
+                "http://purl.org/ontology/bibo/Film",
+                "http://purl.org/ontology/bibo/Magazine",
+                "http://vivoweb.org/ontology/core#Newsletter",
+                "http://purl.org/ontology/bibo/Newspaper",
+                "http://vivoweb.org/ontology/core#NewsRelease",
+                "http://purl.org/ontology/bibo/Report",
+                "http://vivoweb.org/ontology/core#Video",
+                "http://purl.org/ontology/bibo/Webpage",
+                "http://purl.org/ontology/bibo/Website");
     }
 
 }

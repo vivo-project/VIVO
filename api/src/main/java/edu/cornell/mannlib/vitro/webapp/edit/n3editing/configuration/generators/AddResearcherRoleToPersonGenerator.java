@@ -5,6 +5,7 @@ package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ConstantFieldOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 
 public class AddResearcherRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
 
@@ -23,12 +24,13 @@ public class AddResearcherRoleToPersonGenerator extends AddRoleToPersonTwoStageG
 	/** Researcher role involves hard-coded options for the "right side" of the role or activity. */
 	@Override
 	FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
-		return new ConstantFieldOptions(
-		        "", "Select one",
-		        "http://vivoweb.org/ontology/core#Grant", "Grant",
-	        "http://purl.obolibrary.org/obo/ERO_0000015", "Human Study",
-	        "http://vivoweb.org/ontology/core#Project", "Project",
-	        "http://purl.obolibrary.org/obo/ERO_0000014", "Research Project");
+	    return GeneratorUtil.buildResourceAndLabelFieldOptions(
+                vreq.getRDFService(), vreq.getWebappDaoFactory(), "", 
+                I18n.bundle(vreq).text("select_type"),
+                "http://vivoweb.org/ontology/core#Grant",
+                "http://purl.obolibrary.org/obo/ERO_0000015" /* Human Study" */,
+                "http://vivoweb.org/ontology/core#Project",
+	            "http://purl.obolibrary.org/obo/ERO_0000014" /* Research Project */);
 	}
 
 	@Override
