@@ -267,7 +267,12 @@
                     table.prependTo('#${sparklineContainerID}');
                 }
 
-                drawGrantCountVisualization(sparklineImgTD);
+                google.charts.load('current', {
+                    callback: function() {
+                        drawGrantCountVisualization(sparklineImgTD)
+                    },
+                    packages: ['bar', 'corechart', 'table', 'imagesparkline']
+                });   
             });
         </script>
 

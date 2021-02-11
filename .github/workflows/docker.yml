@@ -1,0 +1,59 @@
+name: Docker
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    env:
+      MAVEN_OPTS: -Xmx1024M
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Clone Vitro
+        run: git clone https://github.com/vivo-project/Vitro.git ../Vitro
+
+      - name: Maven Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-cache-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-cache-m2-
+
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Maven Build
+        run: mvn clean install
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: vivoweb/vivo:latest
+
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}

@@ -35,7 +35,7 @@ public class LCSHService implements ExternalConceptService {
 
 	protected final Log log = LogFactory.getLog(getClass());
 	private final String skosSuffix = ".skos.rdf";
-	private final String hostUri = "http://id.loc.gov";
+	private final String hostUri = "https://id.loc.gov";
 	private final String schemeUri = hostUri + "/authorities/subjects";
 	private final String baseUri = hostUri + "/search/";
 
@@ -94,7 +94,7 @@ public class LCSHService implements ExternalConceptService {
 				bestMatch = "false";
 			}
 			log.debug("-" + uri + "-");
-			//This is the URL for retrieving the concept - the pattern is http://id.loc.gov/authorities/subjects/sh85014203.skos.rdf
+			//This is the URL for retrieving the concept - the pattern is https://id.loc.gov/authorities/subjects/sh85014203.skos.rdf
 			//This is not the URI itself which would be http://id.loc.gov/authorities/subjects/sh85014203
 			String conceptURLString = getSKOSURL(uri);
 			String baseConceptURI = uri;
@@ -152,7 +152,7 @@ public class LCSHService implements ExternalConceptService {
 
 
 	private String getSKOSURL(String uri) {
-		String skosURI = uri + skosSuffix;
+		String skosURI = uri.replaceFirst("http://", "https://") + skosSuffix;
 
 		return skosURI;
 	}

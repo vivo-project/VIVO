@@ -1,8 +1,51 @@
 <Context> <!-- useHttpOnly="false" -->
+
+   <!--
+     # The 'home' property specifies the location of VIVO HOME.
+     # The system user used to run the VIVO web application must have write access
+     # to the parent directory of the directory defined in this property, if VIVO HOME
+     # does not already exist.
+     # If this directory already exists, the system user used to run the VIVO web application
+     # must have write access to this directory.
+   -->
    <Environment
         type="java.lang.String" 
         name="vitro/home"
         value="${vivo-dir}" override="true"/>
+
+   <!--
+     # The name of the application (possibly not used).
+   -->
+   <Environment
+           type="java.lang.String"
+           name="vitro/appName"
+           value="${app-name}" override="true"/>
+
+   <!--
+     # The email address of the root user for the VIVO application. The password
+     # for this user is initially set to "rootPassword", but you will be asked to
+     # change the password the first time you log in.
+   -->
+   <Environment
+           type="java.lang.String"
+           name="vitro/rootUserAddress"
+           value="vivo_root@mydomain.edu" override="true"/>
+
+   <!--
+     # This namespace will be used when generating URIs for objects created in the
+     # editor. In order to serve linked data, the default namespace must be composed
+     # as follows (optional elements in parentheses):
+     #
+     # scheme + server_name (+ port) (+ servlet_context) + "/individual/"
+     #
+     # For example, Cornell's default namespace is:
+     #
+     # http://vivo.cornell.edu/individual/
+   -->
+   <Environment
+           type="java.lang.String"
+           name="vitro/defaultNamespace"
+           value="http://vivo.mydomain.edu/individual/" override="true"/>
 
    <!-- Disable persist sessions on shut down.-->
    <Manager pathname="" />
