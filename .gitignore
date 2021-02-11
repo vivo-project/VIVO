@@ -20,3 +20,5 @@ utilities/rdbmigration/.work
 **/.classpath
 **/.project
 **/bin/
+
+vivo-home/

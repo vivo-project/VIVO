@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+
+  solr:
+    container_name: vivo-solr
+    hostname: solr
+    build:
+      context: ./solr
+      dockerfile: Dockerfile
+    ports:
+      - 8983:8983
+    networks:
+      - vivo
+
+  vivo:
+    container_name: vivo
+    hostname: app
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ${LOCAL_VIVO_HOME}:/opt/vivo/home
+    networks:
+      - vivo
+
+networks:
+  vivo:
