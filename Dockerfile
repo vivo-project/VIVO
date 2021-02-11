@@ -1,6 +1,6 @@
 FROM tomcat:9-jdk11-openjdk
 
-ENV JAVA_OPTS="${JAVA_OPTS} -Dvivo-dir=/opt/vivo/home/"
+ENV JAVA_OPTS="${JAVA_OPTS} -Dvivo-dir=/opt/vivo/home/ -Dtdb:fileMode=direct"
 
 RUN mkdir /opt/vivo
 RUN mkdir /opt/vivo/home
