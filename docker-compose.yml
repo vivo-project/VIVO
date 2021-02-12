@@ -1,9 +1,9 @@
-version: '3'
+version: '3.2'
 
 services:
 
   solr:
-    container_name: vivo-solr
+    container_name: solr
     hostname: solr
     build:
       context: ./solr
@@ -13,12 +13,16 @@ services:
     networks:
       - vivo
 
-  vivo:
+  tomcat:
     container_name: vivo
-    hostname: app
+    hostname: vivo
     build:
       context: ./
       dockerfile: Dockerfile
+      args:
+        - VIVO_DIR=/opt/vivo/home
+        - TDB_FILE_MODE=direct
+        - SOLR_URL=http://solr:8983/solr/vivocore
     ports:
       - 8080:8080
     volumes:

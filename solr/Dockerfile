@@ -10,6 +10,7 @@ RUN chmod -R ugo+w /opt/solr/server/solr/
 RUN chmod -R ugo+w /opt/solr/server/logs/
 
 COPY --from=config /vivo-solr/vivocore/conf /opt/solr/server/solr/configsets/vivocore/conf
+
 COPY setup.sh /setup.sh
 
 USER root
@@ -19,4 +20,4 @@ RUN chmod -R 755 /opt/solr/server/solr/configsets/vivocore
 
 USER solr
 
-CMD ["/bin/bash", "/setup.sh"]
+CMD /setup.sh
