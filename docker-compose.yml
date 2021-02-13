@@ -3,11 +3,7 @@ version: '3.2'
 services:
 
   solr:
-    container_name: solr
-    hostname: solr
-    build:
-      context: ./solr
-      dockerfile: Dockerfile
+    image: vivoweb/vivo-solr:latest
     ports:
       - 8983:8983
     networks:
