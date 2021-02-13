@@ -13,9 +13,9 @@ if [[ "$RESET_HOME" = "true" ]]; then
   rm -rf /opt/vivo/home/*
 fi
 
-echo "Solr URL: $1"
+echo "Solr URL: $SOLR_URL"
 
-sed -i "s,http://localhost:8983/solr/vivocore,$1,g" /runtime.properties
+sed -i "s,http://localhost:8983/solr/vivocore,$SOLR_URL,g" /runtime.properties
 
 mkdir -p /opt/vivo/home/config
 

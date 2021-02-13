@@ -19,4 +19,4 @@ COPY start.sh /start.sh
 
 EXPOSE 8080
 
-CMD /start.sh $SOLR_URL
+CMD ["/bin/bash", "/start.sh"]
