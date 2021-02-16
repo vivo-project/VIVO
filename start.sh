@@ -16,10 +16,15 @@ fi
 # ensure home config directory exists
 mkdir -p /opt/vivo/home/config
 
-# only move runtime.properties first time and if it does not already exist in target home directory
-if [ -f /runtime.properties ]
-then
+# generate digest.md5 for existing VIVO home if not already exist
+if [ ! -f /opt/vivo/home/digest.md5 ]; then
+  find /opt/vivo/home -type f | grep -E '^/opt/vivo/home/bin/|^/opt/vivo/home/config/|^/opt/vivo/home/rdf/' | xargs md5sum > /opt/vivo/home/digest.md5
+  echo "Generated digest.md5 for VIVO home"
+  cat /opt/vivo/home/digest.md5
+fi
 
+# only move runtime.properties first time and if it does not already exist in target home directory
+if [ -f /runtime.properties ]; then
   # template runtime.properties vitro.local.solr.url value to $SOLR_URL value
   echo "Templating runtime.properties vitro.local.solr.url = $SOLR_URL"
   sed -i "s,http://localhost:8983/solr/vivocore,$SOLR_URL,g" /runtime.properties
@@ -34,8 +39,7 @@ then
 fi
 
 # only move applicationSetup.n3 first time and if it does not already exist in target home directory
-if [ -f /applicationSetup.n3 ]
-then
+if [ -f /applicationSetup.n3 ]; then
   if [ ! -f /opt/vivo/home/config/applicationSetup.n3 ]
   then
     echo "First time: moving /applicationSetup.n3 to /opt/vivo/home/config/applicationSetup.n3"
