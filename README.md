@@ -25,15 +25,15 @@ https://wiki.duraspace.org/display/VIVODOC110x/Installing+VIVO
 
 Published VIVO docker container is available [vivoweb/vivo](https://hub.docker.com/repository/docker/vivoweb/vivo) and accompanying [vivoweb/vivo-solr](https://hub.docker.com/repository/docker/vivoweb/vivo-solr). These can be used independently or with docker-compose.
 
-#### Docker Compose
+### Docker Compose
 
 Docker Compose environment variables.
 
-- `LOCAL_VIVO_HOME` VIVO home directory on your host machine which will mount to volume in docker container.
-- `RESET_HOME` convinience to reset VIVO home when starting container. ***Caution*** will delete local configuration, content, and configuration model.
-- `RESET_CORE` convinience to reset VIVO Solr core when starting container. ***Caution*** will require complete reindex.
+- `LOCAL_VIVO_HOME`: VIVO home directory on your host machine which will mount to volume in docker container.
+- `RESET_HOME`: Convinience to reset VIVO home when starting container. **Caution** will delete local configuration, content, and configuration model.
+- `RESET_CORE`: Convinience to reset VIVO Solr core when starting container. **Caution** will require complete reindex.
 
-.env
+.env defaults
 ```
 LOCAL_VIVO_HOME=./vivo-home
 RESET_HOME=false
@@ -47,7 +47,7 @@ mvn clean install
 docker-compose up
 ```
 
-#### Docker Image
+### Docker Image
 
 To build and run local Docker image.
 
