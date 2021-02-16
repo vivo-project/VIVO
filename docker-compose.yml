@@ -4,6 +4,9 @@ services:
 
   solr:
     image: vivoweb/vivo-solr:latest
+    environment:
+      - RESET_CORE=${RESET_CORE}
+      - VERBOSE=${VERBOSE}
     ports:
       - 8983:8983
     networks:
@@ -19,6 +22,9 @@ services:
         - VIVO_DIR=/opt/vivo/home
         - TDB_FILE_MODE=direct
         - SOLR_URL=http://solr:8983/solr/vivocore
+    environment:
+      - RESET_HOME=${RESET_HOME}
+      - VERBOSE=${VERBOSE}
     ports:
       - 8080:8080
     volumes:
