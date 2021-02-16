@@ -21,6 +21,41 @@ https://wiki.duraspace.org/display/VIVO/
 Installation instructions for the latest release can be found at this location on the wiki:  
 https://wiki.duraspace.org/display/VIVODOC110x/Installing+VIVO
 
+### Docker
+
+Published VIVO docker container is available [vivoweb/vivo](https://hub.docker.com/repository/docker/vivoweb/vivo) and accompanying [vivoweb/vivo-solr](https://hub.docker.com/repository/docker/vivoweb/vivo-solr). These can be used independently or with docker-compose.
+
+#### Docker Compose
+
+Docker Compose environment variables.
+
+- `LOCAL_VIVO_HOME` VIVO home directory on your host machine which will mount to volume in docker container.
+- `RESET_HOME` convinience to reset VIVO home when starting container. ***Caution*** will delete local configuration, content, and configuration model.
+- `RESET_CORE` convinience to reset VIVO Solr core when starting container. ***Caution*** will require complete reindex.
+
+.env
+```
+LOCAL_VIVO_HOME=./vivo-home
+RESET_HOME=false
+RESET_CORE=false
+```
+
+Build and start VIVO.
+
+```
+mvn clean install
+docker-compose up
+```
+
+#### Docker Image
+
+To build and run local Docker image.
+
+```
+docker build -t vivoweb/vivo:development .
+docker run -p 8080:8080 vivoweb/vivo:development
+```
+
 ## Contact us
 There are several ways to contact the VIVO community. 
 Whatever your interest, we would be pleased to hear from you.
