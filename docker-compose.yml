@@ -1,0 +1,36 @@
+version: '3.2'
+
+services:
+
+  solr:
+    image: vivoweb/vivo-solr:latest
+    environment:
+      - RESET_CORE=${RESET_CORE}
+      - VERBOSE=${VERBOSE}
+    ports:
+      - 8983:8983
+    networks:
+      - vivo
+
+  tomcat:
+    container_name: vivo
+    hostname: vivo
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        - VIVO_DIR=/opt/vivo/home
+        - TDB_FILE_MODE=direct
+        - SOLR_URL=http://solr:8983/solr/vivocore
+    environment:
+      - RESET_HOME=${RESET_HOME}
+      - VERBOSE=${VERBOSE}
+    ports:
+      - 8080:8080
+    volumes:
+      - ${LOCAL_VIVO_HOME}:/opt/vivo/home
+    networks:
+      - vivo
+
+networks:
+  vivo:
