@@ -126,15 +126,6 @@
     :hasPredicateRestriction "http://www.w3.org/2006/vcard/ns#hasTitle" ;
     :hasPredicateRestriction "http://www.w3.org/2006/vcard/ns#hasEmail" ;
     :hasSelectQuery """
-        PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
-        PREFIX obo: <http://purl.obolibrary.org/obo/>
-        SELECT ?uri
-        WHERE {
-            ?uri obo:ARG_2000028 ?subject .
-        }
-        """ ;
-    :hasSelectQuery """
-        PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
         PREFIX obo: <http://purl.obolibrary.org/obo/>
         SELECT ?uri
         WHERE {
