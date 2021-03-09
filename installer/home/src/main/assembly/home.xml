@@ -4,7 +4,6 @@
     <id>home</id>
     <formats>
         <format>dir</format>
-        <format>tar</format>
     </formats>
     <includeBaseDirectory>false</includeBaseDirectory>
     <dependencySets>

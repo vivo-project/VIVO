@@ -28,4 +28,4 @@ jobs:
           java-version: 11
 
       - name: Maven Build
-        run: mvn clean install
+        run: mvn clean test
