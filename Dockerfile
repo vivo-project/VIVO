@@ -10,10 +10,8 @@ ENV JAVA_OPTS="${JAVA_OPTS} -Dtdb:fileMode=$TDB_FILE_MODE"
 RUN mkdir /usr/local/vivo
 RUN mkdir /usr/local/vivo/home
 
+COPY ./installer/home/target/vivo /vivo-home
 COPY ./installer/webapp/target/vivo.war /usr/local/tomcat/webapps/ROOT.war
-
-COPY ./home/src/main/resources/config/example.applicationSetup.n3 /applicationSetup.n3
-COPY ./home/src/main/resources/config/example.runtime.properties /runtime.properties
 
 COPY start.sh /start.sh
 
