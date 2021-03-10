@@ -220,7 +220,7 @@
             </build>
         </profile>
         <profile>
-            <id>deploy</id>
+            <id>skip</id>
             <build>
                 <plugins>
                     <plugin>
