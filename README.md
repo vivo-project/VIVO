@@ -36,9 +36,9 @@ RESET_CORE=false
 ```
 
 - `LOCAL_VIVO_HOME`: VIVO home directory on your host machine which will mount to volume in docker container.
-- `RESET_CORE`: Convinience to reset VIVO Solr core when starting container. **Caution** will require complete reindex.
+- `RESET_CORE`: Convinience to reset VIVO Solr core when starting container. **Caution**, will require complete reindex.
 
-Build and start VIVO. **Disclaimer** will create home directory at `/usr/local/vivo/home` and explode war file at `/usr/local/tomcat/webapps`.
+Build and start VIVO. **Disclaimer**, will create unused home directory at `/usr/local/vivo/home` and explode war file at `/usr/local/tomcat/webapps`.
 
 ```
 mvn clean install -s installer/example-settings.xml
