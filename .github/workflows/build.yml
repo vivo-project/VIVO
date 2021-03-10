@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Clone Vitro
-        run: git clone https://github.com/vivo-project/Vitro.git ../Vitro
+        run: git clone --single-branch --branch revert-deployment-strategy https://github.com/vivo-project/Vitro.git ../Vitro
 
       - name: Maven Cache
         uses: actions/cache@v2
