@@ -37,13 +37,13 @@ RESET_CORE=false
 ```
 
 - `LOCAL_VIVO_HOME`: VIVO home directory on your host machine which will mount to volume in docker container.
-- `RESET_HOME`: Convinience to reset VIVO home when starting container. **Caution** will delete local configuration, content, and configuration model.
-- `RESET_CORE`: Convinience to reset VIVO Solr core when starting container. **Caution** will require complete reindex.
+- `RESET_HOME`: Convinience to reset VIVO home when starting container. **Caution**, will delete local configuration, content, and configuration model.
+- `RESET_CORE`: Convinience to reset VIVO Solr core when starting container. **Caution**, will require complete reindex.
 
 Build and start VIVO.
 
 ```
-mvn clean install
+mvn clean package -s installer/example-settings.xml
 docker-compose up
 ```
 
