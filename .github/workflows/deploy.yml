@@ -35,7 +35,7 @@ jobs:
           server-password: MAVEN_PASSWORD
 
       - name: Maven Deploy
-        run: mvn --batch-mode deploy -Pskip
+        run: mvn --batch-mode deploy
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
