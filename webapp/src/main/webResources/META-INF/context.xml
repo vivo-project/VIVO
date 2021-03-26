@@ -1,0 +1,9 @@
+<Context> <!-- useHttpOnly="false" -->
+   <Environment
+        type="java.lang.String" 
+        name="vitro/home"
+        value="${vivo-dir}" override="true"/>
+
+   <!-- Disable persist sessions on shut down.-->
+   <Manager pathname="" />
+</Context>
