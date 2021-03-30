@@ -875,3 +875,11 @@
 <http://purl.org/spar/cito/isCitedAsDataSourceBy> <http://www.w3.org/2000/01/rdf-schema#label> "is cited as data source by"@en-US .
 <http://purl.org/spar/cito/citesAsDataSource> <http://www.w3.org/2000/01/rdf-schema#label> "cites as data source"@en-US .
 <http://purl.obolibrary.org/obo/OBI_0100026> <http://www.w3.org/2000/01/rdf-schema#label> "Organism"@en-US .
+<http://purl.org/ontology/bibo/> <http://www.w3.org/2000/01/rdf-schema#label> "Bibliographic Ontology"@en-US .
+<http://vivoweb.org/ontology/core> <http://www.w3.org/2000/01/rdf-schema#label> "VIVO Core Ontology"@en-US .
+<http://purl.org/net/OCRe/study_protocol.owl> <http://www.w3.org/2000/01/rdf-schema#label> "OCRe Study Protocol"@en-US .
+<http://purl.org/net/OCRe/statistics.owl> <http://www.w3.org/2000/01/rdf-schema#label> "OCRe Statistics"@en-US .
+<http://purl.org/dc/terms/> <http://www.w3.org/2000/01/rdf-schema#label> "Dublin Core Terms"@en-US .
+<http://purl.org/vocab/vann/> <http://www.w3.org/2000/01/rdf-schema#label> "Vocabulary for Annotating Vocabulary Descriptions"@en-US . 
+<http://purl.obolibrary.org/obo/ro.owl> <http://www.w3.org/2000/01/rdf-schema#label> "Relations Ontology"@en-US .
+<http://www.ebi.ac.uk/efo/swo/> <http://www.w3.org/2000/01/rdf-schema#label> "Software Ontology"@en-US .
