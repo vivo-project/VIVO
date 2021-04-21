@@ -117,6 +117,22 @@
         }
         """ .
 
+# URI finder that will find the relevant person to update when the 
+# property linking to the email or preferred title resource is removed
+:vivoUriFinder_VCard_2
+    a   searchIndex:indexing.IndexingUriFinder ,
+        searchIndex:indexing.SelectQueryUriFinder ;
+    rdfs:label "Preferred title / email person URI finder #2" ;
+    :hasPredicateRestriction "http://www.w3.org/2006/vcard/ns#hasTitle" ;
+    :hasPredicateRestriction "http://www.w3.org/2006/vcard/ns#hasEmail" ;
+    :hasSelectQuery """
+        PREFIX obo: <http://purl.obolibrary.org/obo/>
+        SELECT ?uri
+        WHERE {
+            ?uri obo:ARG_2000028 ?subject .
+        }
+        """ .
+
 :vivodocumentModifier_PreferredTitle
     a   searchIndex:documentBuilding.SelectQueryDocumentModifier ,
         searchIndex:documentBuilding.DocumentModifier ;
