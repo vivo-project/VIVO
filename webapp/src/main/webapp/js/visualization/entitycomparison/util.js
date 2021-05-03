@@ -1069,7 +1069,7 @@ function prepareTableForDataTablePagination(jsonData, dataTableParams){
 
 //	console.log(processJSONData.currentEntityLevel);
 
-	if (processJSONData.currentEntityLevel.toUpperCase() === "ORGANIZATIONS AND PEOPLE") {
+	if (processJSONData.currentEntityLevel === i18nStringsGuiEvents.organizationsAndPeople) {
 		$.fn.dataTableExt.afnFiltering.push(DatatableCustomFilters.peopleOrOrganizations);
 	}
 
@@ -1193,7 +1193,7 @@ function prepareTableForDataTablePagination(jsonData, dataTableParams){
  */
 function reloadDataTablePagination(preselectedEntityURIs, jsonData){
 
-	if (processJSONData.currentEntityLevel.toUpperCase() === "ORGANIZATIONS AND PEOPLE") {
+	if (processJSONData.currentEntityLevel === i18nStringsGuiEvents.organizationsAndPeople) {
 
 		/*
 		 * This will make sure that duplicate filters are not added.

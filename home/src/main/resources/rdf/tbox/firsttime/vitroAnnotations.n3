@@ -5071,7 +5071,9 @@ vivo:governingAuthorityFor
       vitro:displayRankAnnot
               "70"^^xsd:int ;
       vitro:inPropertyGroupAnnot
-              <http://vivoweb.org/ontology#vitroPropertyGroupaddress> .
+              <http://vivoweb.org/ontology#vitroPropertyGroupaddress> ;
+      vitro:offerCreateNewOptionAnnot
+              "true"^^xsd:boolean .
 
 geo:agriculturalAreaYear
       vitro:hiddenFromDisplayBelowRoleLevelAnnot
