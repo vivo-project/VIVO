@@ -19,7 +19,7 @@ https://wiki.duraspace.org/display/VIVO/
 ### Installation Instructions
 
 Installation instructions for the latest release can be found at this location on the wiki:  
-https://wiki.duraspace.org/display/VIVODOC110x/Installing+VIVO
+https://wiki.duraspace.org/display/VIVODOC112x/Installing+VIVO
 
 ### Docker
 
@@ -27,7 +27,7 @@ VIVO docker container is available at [vivoweb/vivo](https://hub.docker.com/repo
 
 ### Docker Compose
 
-Docker Compose environment variables.
+Docker Compose environment variables:
 
 .env defaults
 ```
@@ -36,12 +36,25 @@ RESET_HOME=false
 RESET_CORE=false
 ```
 
-- `LOCAL_VIVO_HOME`: VIVO home directory on your host machine which will mount to volume in docker container.
-- `RESET_HOME`: Convinience to reset VIVO home when starting container. **Caution**, will delete local configuration, content, and configuration model.
-- `RESET_CORE`: Convinience to reset VIVO Solr core when starting container. **Caution**, will require complete reindex.
+- `LOCAL_VIVO_HOME`: VIVO home directory on your host machine which will mount to volume in docker container. Set this environment variable to persist your VIVO data on your host machine.
+- `RESET_HOME`: Convenience to reset VIVO home when starting container. **Caution**, will delete local configuration, content, and configuration model.
+- `RESET_CORE`: Convenience to reset VIVO Solr core when starting container. **Caution**, will require complete reindex.
+
+Before building VIVO, you will also need to clone (and switch to the same branch, if other than main) of [Vitro](https://github.com/vivo-project/Vitro). The Vitro project must be cloned to a sibling directory next to VIVO so that it can be found during the build. You will also need to clone (and switch to the appropriate branch) of [Vitro-languages](https://github.com/vivo-project/Vitro-languages) and [VIVO-languages](https://github.com/vivo-project/VIVO-languages).
 
 Build and start VIVO.
 
+1. In Vitro-languages, run:
+```
+mvn install
+```
+
+2. In VIVO-languages, run:
+```
+mvn install
+```
+
+3. In VIVO (with Vitro cloned alongside it), run:
 ```
 mvn clean package -s installer/example-settings.xml
 docker-compose up
