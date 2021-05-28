@@ -432,28 +432,27 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
 	        + "    ?subject rdfs:label ?label \n"
 	        + "} ORDER BY ?label";
 
-
+	
     private ArrayList<Literal>  getExistingLabels(String subjectUri, VitroRequest vreq) {
         String queryStr = QueryUtils.subUriForQueryVar(LABEL_QUERY, "subject", subjectUri);
         log.debug("queryStr = " + queryStr);
 
         ArrayList<Literal>  labels = new ArrayList<Literal>();
         try {
-        	//We want to get the labels for all the languages, not just the display language
-            ResultSet results = QueryUtils.getLanguageNeutralQueryResults(queryStr, vreq);
+            // No longer retrieving language-neutral results here, so that
+            // language editing is consistent with other editing forms.
+            // Editable values depend on the interface's locale selector.
+            ResultSet results = QueryUtils.getQueryResults(queryStr, vreq);
             while (results.hasNext()) {
                 QuerySolution soln = results.nextSolution();
                 Literal nodeLiteral = soln.get("label").asLiteral();
                 labels.add(nodeLiteral);
-
-
             }
         } catch (Exception e) {
             log.error(e, e);
         }
        return labels;
-}
-
+    }
 
 
     //Putting this into a method allows overriding it in subclasses
