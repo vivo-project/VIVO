@@ -1,6 +1,4 @@
-<project
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
@@ -43,11 +41,9 @@
         </developer>
     </developers>
 
-    <!--
-       The SCM repository location is used by Continuum to update against
-       when changes have occurred.  This spawns a new build cycle and releases
-       snapshots into the snapshot repository below.
-    -->
+    <!-- The SCM repository location is used by Continuum to update against 
+        when changes have occurred. This spawns a new build cycle and releases snapshots 
+        into the snapshot repository below. -->
     <scm>
         <connection>scm:git:git@github.com:vivo-project/VIVO.git</connection>
         <developerConnection>scm:git:git@github.com:vivo-project/VIVO.git</developerConnection>
@@ -73,6 +69,16 @@
 
     <profiles>
         <profile>
+            <id>i18n</id>
+            <modules>
+                <module>../Vitro-languages</module>
+                <module>../VIVO-languages</module>
+                <module>api</module>
+                <module>webapp</module>
+                <module>home</module>
+            </modules>
+        </profile>
+       <profile>
             <id>vitro</id>
             <activation>
                 <file>
@@ -335,7 +341,8 @@
                 </configuration>
             </plugin>
 
-            <!-- Used to validate all code style rules in source code using Checkstyle -->
+            <!-- Used to validate all code style rules in source code using 
+                Checkstyle -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -343,7 +350,8 @@
                 <executions>
                     <execution>
                         <id>verify-style</id>
-                        <!-- Bind to verify so it runs after package & unit tests, but before install -->
+                        <!-- Bind to verify so it runs after package & unit 
+                            tests, but before install -->
                         <phase>verify</phase>
                         <goals>
                             <goal>check</goal>
@@ -352,10 +360,10 @@
                 </executions>
                 <configuration>
                     <configLocation>
-                      duraspace-checkstyle/checkstyle.xml
+                        duraspace-checkstyle/checkstyle.xml
                     </configLocation>
                     <suppressionsLocation>
-                      vitro-checkstyle/checkstyle-suppressions.xml
+                        vitro-checkstyle/checkstyle-suppressions.xml
                     </suppressionsLocation>
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
@@ -475,9 +483,11 @@
                             <report>test-javadoc</report>
                         </reports>
                     </reportSet>
-                    <reportSet><!-- aggregate reportSet, to define in poms having modules -->
+                    <reportSet><!-- aggregate reportSet, to define in poms 
+                            having modules -->
                         <id>aggregate</id>
-                        <inherited>false</inherited><!-- don't run aggregate in child modules -->
+                        <inherited>false</inherited><!-- don't run aggregate 
+                            in child modules -->
                         <reports>
                             <report>aggregate</report>
                         </reports>
@@ -501,10 +511,9 @@
         </plugins>
     </reporting>
 
-    <!--
-        Add a custom repository, which is actually just a simple GitHub project
-        in order to distribute some dependencies that aren't part of Maven central
-    -->
+    <!-- Add a custom repository, which is actually just a simple GitHub 
+        project in order to distribute some dependencies that aren't part of Maven 
+        central -->
     <repositories>
         <repository>
             <id>vivo-dependencies</id>

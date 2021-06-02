@@ -1,5 +1,6 @@
-<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
+<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
 
     <profiles>
         <profile>
@@ -17,5 +18,10 @@
 
     <activeProfiles>
         <activeProfile>defaults</activeProfile>
+        <!-- <activeProfile>i18n</activeProfile> -->
+        <!-- Replace the "defaults" activeProfile with "i18n" to include 
+            the Vitro-languages and VIVO-Languages repos in the Maven compilation and 
+            installation process -->
+
     </activeProfiles>
 </settings>
