@@ -12,6 +12,7 @@ import org.apache.commons.logging.LogFactory;
 
 import edu.cornell.mannlib.semservices.bo.Concept;
 import edu.cornell.mannlib.semservices.service.ExternalConceptService;
+import edu.cornell.mannlib.semservices.service.impl.UMLSService;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 /**
  * Utilities for search
@@ -38,7 +39,9 @@ public class ConceptSearchServiceUtils {
 	//URL to label
 	public static HashMap<String, VocabSourceDescription> getVocabSources() {
 		HashMap<String, VocabSourceDescription> map = new HashMap<String, VocabSourceDescription>();
-    	map.put(UMLSVocabSource, new VocabSourceDescription("UMLS", UMLSVocabSource, "http://www.nlm.nih.gov/research/umls/", "Unified Medical Language System"));
+        if(UMLSService.configurationFileExists()) {
+    	    map.put(UMLSVocabSource, new VocabSourceDescription("UMLS", UMLSVocabSource, "http://www.nlm.nih.gov/research/umls/", "Unified Medical Language System"));
+        }
     	//Commenting out agrovoc for now until implementation is updated
     	map.put(AgrovocVocabSource, new VocabSourceDescription("AGROVOC", AgrovocVocabSource, "http://www.fao.org/agrovoc/", "Agricultural Vocabulary"));
     	map.put(GemetVocabSource, new VocabSourceDescription("GEMET", GemetVocabSource, "http://www.eionet.europa.eu/gemet", "GEneral Multilingual Environmental Thesaurus"));
@@ -53,6 +56,7 @@ public class ConceptSearchServiceUtils {
     //Get the hashmap mapping service name to Service class
     private static HashMap<String, String> getMapping() {
     	HashMap<String, String> map = new HashMap<String, String>();
+
     	map.put(UMLSVocabSource, "edu.cornell.mannlib.semservices.service.impl.UMLSService");
     	map.put(AgrovocVocabSource, "edu.cornell.mannlib.semservices.service.impl.AgrovocService");
     	map.put(GemetVocabSource, "edu.cornell.mannlib.semservices.service.impl.GemetService");
