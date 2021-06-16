@@ -249,7 +249,7 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
 	private void addFormSpecificData(EditConfigurationVTwo config,
 			VitroRequest vreq) {
 	    ArrayList<Literal> existingLabels = this.getExistingLabels(config.getSubjectUri(), vreq);
-		//Get all language codes/labels in the system, and this list is sorted by language name
+		//Get language codes/labels for existing labels, and this list is sorted by language name
         List<HashMap<String, String>> locales = this.getLocales(vreq, existingLabels);
         //Get code to label hashmap - we use this to get the language name for the language code returned in the rdf literal
         HashMap<String, String> localeCodeToNameMap = this.getFullCodeToLanguageNameMap(locales);
