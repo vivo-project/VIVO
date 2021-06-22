@@ -68,16 +68,28 @@
     </modules>
 
     <profiles>
-        <profile>
-            <id>i18n</id>
+       <profile>
+            <id>Vitro-languages</id>
+            <activation>
+                <file>
+                    <exists>../Vitro-languages/pom.xml</exists>
+                </file>
+            </activation>
             <modules>
                 <module>../Vitro-languages</module>
-                <module>../VIVO-languages</module>
-                <module>api</module>
-                <module>webapp</module>
-                <module>home</module>
             </modules>
-        </profile>
+       </profile>
+       <profile>
+            <id>VIVO-languages</id>
+            <activation>
+                <file>
+                    <exists>../VIVO-languages/pom.xml</exists>
+                </file>
+            </activation>
+            <modules>
+                <module>../VIVO-languages</module>
+            </modules>
+       </profile>
        <profile>
             <id>vitro</id>
             <activation>
