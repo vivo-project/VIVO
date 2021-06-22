@@ -89,7 +89,7 @@
             <modules>
                 <module>../VIVO-languages</module>
             </modules>
-       </profile> 
+       </profile>
        <profile>
             <id>vitro</id>
             <activation>
