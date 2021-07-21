@@ -62,7 +62,7 @@
                 <div id="photo-wrapper">${individualImage}</div>
                 <h1 itemprop="name" class="vcard foaf-person fn" <#if !editable>style="float:left;border-right:1px solid #A6B1B0;"</#if>>
                     <#-- Label -->
-                    <@p.label individual editable labelCount localesCount/>
+                    <@p.label individual editable labelCount localesCount languageCount />
                 </h1>
                 <#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->
                 <#assign title = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Title")!>

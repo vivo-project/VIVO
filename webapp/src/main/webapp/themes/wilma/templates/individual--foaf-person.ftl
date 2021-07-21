@@ -89,7 +89,7 @@
             <#else>
                 <h1 class="foaf-person">
                     <#-- Label -->
-                    <span itemprop="name" class="fn"><@p.label individual editable labelCount localesCount/></span>
+                    <span itemprop="name" class="fn"><@p.label individual editable labelCount localesCount languageCount /></span>
                 </h1>
                 <section id="preferredTitle">
                     <#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->

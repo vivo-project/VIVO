@@ -4,12 +4,18 @@ package edu.cornell.mannlib.semservices.service.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpVersion;
+import org.apache.http.client.fluent.Form;
+import org.apache.http.client.fluent.Request;
+import org.apache.http.client.utils.URIBuilder;
+import org.springframework.util.StringUtils;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -18,11 +24,6 @@ import edu.cornell.mannlib.semservices.bo.Concept;
 import edu.cornell.mannlib.semservices.exceptions.ConceptsNotFoundException;
 import edu.cornell.mannlib.semservices.service.ExternalConceptService;
 import edu.cornell.mannlib.vitro.webapp.utils.json.JacksonUtils;
-import org.apache.http.HttpVersion;
-import org.apache.http.client.fluent.Form;
-import org.apache.http.client.fluent.Request;
-import org.apache.http.client.utils.URIBuilder;
-import org.springframework.util.StringUtils;
 
 /**
  * @author jaf30
@@ -54,11 +55,13 @@ public class UMLSService implements ExternalConceptService {
     private static String UMLS_AUTH_USER_URL = "https://utslogin.nlm.nih.gov/cas/v1/tickets";
     private static String UMLS_AUTH_KEY_URL = "https://utslogin.nlm.nih.gov/cas/v1/api-key";
     private static String UTS_SERVICE_URL   = "http://umlsks.nlm.nih.gov";
+    private static final String UMLS_PROPERTIES =  "/umls.properties";
+    private static final Log log = LogFactory.getLog(UMLSService.class);
 
     {
         if (username == null || apikey == null) {
             final Properties properties = new Properties();
-            try (InputStream stream = getClass().getResourceAsStream("/umls.properties")) {
+            try (InputStream stream = getClass().getResourceAsStream(UMLS_PROPERTIES)) {
                 properties.load(stream);
                 username = properties.getProperty("username");
                 password = properties.getProperty("password");
@@ -73,10 +76,17 @@ public class UMLSService implements ExternalConceptService {
                         }
                     }
                 } catch (Exception e) {
+                    log.error(e, e);
                 }
             } catch (IOException e) {
+                log.error(e, e);
             }
         }
+    }
+    
+    public static boolean configurationFileExists() {
+        URL config = UMLSService.class.getResource(UMLS_PROPERTIES);
+        return (config != null);        
     }
 
     public boolean isConfigured() {

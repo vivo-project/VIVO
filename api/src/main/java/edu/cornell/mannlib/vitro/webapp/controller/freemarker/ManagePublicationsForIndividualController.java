@@ -69,7 +69,7 @@ public class ManagePublicationsForIndividualController extends FreemarkerHttpSer
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
         + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
         + "PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> \n"
-        + "SELECT DISTINCT ?subclass ?authorship (str(?label) as ?title) ?pub ?hideThis WHERE { \n"
+        + "SELECT DISTINCT ?subclass ?authorship (?label as ?title) ?pub ?hideThis WHERE { \n"
         + "    ?subject core:relatedBy ?authorship . \n"
         + "    ?authorship a core:Authorship  . \n"
         + "    OPTIONAL { \n "

@@ -9,43 +9,51 @@ fi
 
 # allow easier reset home with `docker run -e RESET_HOME=true`
 if [[ "$RESET_HOME" = "true" ]]; then
-  echo 'Clearing VIVO HOME /opt/vivo/home'
-  rm -rf /opt/vivo/home/*
+  echo 'Clearing VIVO HOME /usr/local/vivo/home'
+  rm -rf /usr/local/vivo/home/*
 fi
 
-# ensure home config directory exists
-mkdir -p /opt/vivo/home/config
-
-# generate digest.md5 for existing VIVO home if not already exist
-if [ ! -f /opt/vivo/home/digest.md5 ]; then
-  find /opt/vivo/home -type f | grep -E '^/opt/vivo/home/bin/|^/opt/vivo/home/config/|^/opt/vivo/home/rdf/' | xargs md5sum > /opt/vivo/home/digest.md5
-  echo "Generated digest.md5 for VIVO home"
-  cat /opt/vivo/home/digest.md5
+# copy home bin if not exists
+if [ ! -d /usr/local/vivo/home/bin ]; then
+  echo "Copying home bin directory to /usr/local/vivo/home/bin"
+  cp -r /vivo-home/bin /usr/local/vivo/home/bin
 fi
 
-# only move runtime.properties first time and if it does not already exist in target home directory
-if [ -f /runtime.properties ]; then
-  # template runtime.properties vitro.local.solr.url value to $SOLR_URL value
-  echo "Templating runtime.properties vitro.local.solr.url = $SOLR_URL"
-  sed -i "s,http://localhost:8983/solr/vivocore,$SOLR_URL,g" /runtime.properties
+# copy home config if not exists
+if [ ! -d /usr/local/vivo/home/config ]; then
+  echo "Copying home config directory to /usr/local/vivo/home/config"
+  cp -r /vivo-home/config /usr/local/vivo/home/config
+fi
 
-  if [ ! -f /opt/vivo/home/config/runtime.properties ]
+# copy home rdf if not exists
+if [ ! -d /usr/local/vivo/home/rdf ]; then
+  echo "Copying home rdf directory to /usr/local/vivo/home/rdf"
+  cp -r /vivo-home/rdf /usr/local/vivo/home/rdf
+fi
+
+# copy runtime.properties if it does not already exist in target home directory
+if [ -f /usr/local/vivo/home/config/example.runtime.properties ]; then
+  if [ ! -f /usr/local/vivo/home/config/runtime.properties ]
   then
-    echo "First time: moving /runtime.properties to /opt/vivo/home/config/runtime.properties"
-    mv -n /runtime.properties /opt/vivo/home/config/runtime.properties
+    echo "Copying example.runtime.properties to /usr/local/vivo/home/config/runtime.properties"
+    cp /usr/local/vivo/home/config/example.runtime.properties /usr/local/vivo/home/config/runtime.properties
+
+    # template runtime.properties vitro.local.solr.url value to $SOLR_URL value
+    echo "Templating runtime.properties vitro.local.solr.url = $SOLR_URL"
+    sed -i "s,http://localhost:8983/solr/vivocore,$SOLR_URL,g" /usr/local/vivo/home/config/runtime.properties
   else
-    echo "Using existing /opt/vivo/home/config/runtime.properties"
+    echo "Using existing /usr/local/vivo/home/config/runtime.properties"
   fi
 fi
 
-# only move applicationSetup.n3 first time and if it does not already exist in target home directory
-if [ -f /applicationSetup.n3 ]; then
-  if [ ! -f /opt/vivo/home/config/applicationSetup.n3 ]
+# copy applicationSetup.n3 if it does not already exist in target home directory
+if [ -f /usr/local/vivo/home/config/example.applicationSetup.n3 ]; then
+  if [ ! -f /usr/local/vivo/home/config/applicationSetup.n3 ]
   then
-    echo "First time: moving /applicationSetup.n3 to /opt/vivo/home/config/applicationSetup.n3"
-    mv -n /applicationSetup.n3 /opt/vivo/home/config/applicationSetup.n3
+    echo "Copying example.applicationSetup.n3 to /usr/local/vivo/home/config/applicationSetup.n3"
+    cp /usr/local/vivo/home/config/example.applicationSetup.n3 /usr/local/vivo/home/config/applicationSetup.n3
   else
-    echo "Using existing /opt/vivo/home/config/applicationSetup.n3"
+    echo "Using existing /usr/local/vivo/home/config/applicationSetup.n3"
   fi
 fi
 

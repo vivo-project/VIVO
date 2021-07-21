@@ -3,7 +3,7 @@
 <#import "lib-list.ftl" as l>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${country}">
     <head>
         <#include "head.ftl">
     </head>
