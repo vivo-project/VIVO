@@ -61,6 +61,4 @@ identifiers:
     value: 'urn:issn:2475-9066'
 title: 'VIVO: a system for research discovery'
 journal: 'Journal of Open Source Software'
-volume: '4'
-issue: '39'
 url: 'http://dx.doi.org/10.21105/joss.01182'
