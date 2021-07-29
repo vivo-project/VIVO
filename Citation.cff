@@ -1,25 +1,9 @@
-cff-version: 1.1.0
-message: Please cite the following works when using this software.
+cff-version: 1.2.0
+message: "If you use this software, please our paper as below."
 authors:
-  - family-names: Weber
-    given-names: Dieter
-  - family-names: Frantz
-    given-names: Alain C.
-  - family-names: Hippa
-    given-names: Heikki
-  - family-names: Vilkamaa
-    given-names: Pekka
-  - family-names: Rulik
-    given-names: Bjorn
-  - family-names: Heller
-    given-names: Kai
-doi: 10.5883/DS-CAMPLUX
-identifiers:
-  - type: doi
-    value: 10.5883/DS-CAMPLUX
-  - type: url
-    value: http://www.boldsystems.org/index.php/Public_SearchTerms?query=DS-CAMPLUX
-title: >-
-  Camptochaeta luxemburgensis Heller, Hippa and Vilkamaa spec. nov. (Diptera:
-  Sciaridae), a new cavernicolous species from Luxembourg
-url: http://www.boldsystems.org/index.php/Public_SearchTerms?query=DS-CAMPLUX
+- family-names: "M. Conlon et al"
+  given-names: " "
+title: "VIVO: a system for research discovery"
+version: 1.0.0
+doi: 10.21105/joss.01182
+date-released: 2021-07-29
