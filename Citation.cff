@@ -5,52 +5,6 @@ authors:
     given-names: Michael
   - family-names: Woods
     given-names: Andrew
-  - family-names: Triggs
-    given-names: Graham
-  - family-names: OFlinn
-    given-names: Ralph
-  - family-names: Javed
-    given-names: Muhammad
-  - family-names: Blake
-    given-names: Jim
-  - family-names: Gross
-    given-names: Benjamin
-  - family-names: Ahmad
-    given-names: Qazi
-  - family-names: Ali
-    given-names: Sabih
-  - family-names: Barber
-    given-names: Martin
-  - family-names: Elsborg
-    given-names: Don
-  - family-names: Fofack
-    given-names: Kitio
-  - family-names: Hauschke
-    given-names: Christian
-  - family-names: Ilik
-    given-names: Violeta
-  - family-names: Khan
-    given-names: Huda
-  - family-names: Lawless
-    given-names: Ted
-  - family-names: Levernier
-    given-names: Jacob
-  - family-names: Lowe
-    given-names: Brian
-  - family-names: Martin
-    given-names: Jose
-  - family-names: McKay
-    given-names: Steve
-  - family-names: Porter
-    given-names: Simon
-  - family-names: Walther
-    given-names: Tatiana
-  - family-names: White
-    given-names: Marijane
-  - family-names: Wolff
-    given-names: Stefan
-  - family-names: Younes
-    given-names: Rebecca
 doi: "10.21105/joss.01182"
 title: "VIVO: a system for research discovery"
 url: "http://dx.doi.org/10.21105/joss.01182"
