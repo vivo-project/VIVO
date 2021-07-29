@@ -1,9 +1,12 @@
 cff-version: 1.2.0
 message: "If you use this software, please our paper as below."
 authors:
-- family-names: "M. Conlon et al"
+- family-names: "Conlon et al"
   given-names: " "
 title: "VIVO: a system for research discovery"
+journal: "Journal of Open Source Software"
+volume: "4"
+issue: "39"
 version: 1.0.0
 doi: 10.21105/joss.01182
 date-released: 2021-07-29
