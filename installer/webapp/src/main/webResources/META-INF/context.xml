@@ -29,7 +29,7 @@
    <Environment
            type="java.lang.String"
            name="vitro/rootUserAddress"
-           value="vivo_root@mydomain.edu" override="true"/>
+           value="chenejac@uns.ac.rs" override="true"/>
 
    <!--
      # This namespace will be used when generating URIs for objects created in the
@@ -45,7 +45,7 @@
    <Environment
            type="java.lang.String"
            name="vitro/defaultNamespace"
-           value="http://vivo.mydomain.edu/individual/" override="true"/>
+           value="http://vivo.uns.ac.rs/individual/" override="true"/>
 
    <!-- Disable persist sessions on shut down.-->
    <Manager pathname="" />

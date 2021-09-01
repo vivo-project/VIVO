@@ -12,7 +12,7 @@ If a file contains any syntax errors, it will not be able to be parsed and its c
 
 The following file formats are supported:
 
-RDF/XML   (.rdf or .owl)
-N3        (.n3)
-Turtle    (.ttl)
-N-triples (.nt)
+* RDF/XML   (.rdf or .owl)
+* N3        (.n3)
+* Turtle    (.ttl)
+* N-triples (.nt)
