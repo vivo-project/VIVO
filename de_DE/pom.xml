@@ -4,7 +4,7 @@
 
     <groupId>org.vivoweb</groupId>
     <artifactId>vivo-languages_de_DE</artifactId>
-    <version>1.12.0-SNAPSHOT</version>
+    <version>1.12.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>VIVO Languages de_DE</name>
@@ -228,6 +228,6 @@
     <parent>
     	<groupId>org.vivoweb</groupId>
     	<artifactId>vivo-languages</artifactId>
-    	<version>1.12.0-SNAPSHOT</version>
+    	<version>1.12.1-SNAPSHOT</version>
     </parent>
 </project>
