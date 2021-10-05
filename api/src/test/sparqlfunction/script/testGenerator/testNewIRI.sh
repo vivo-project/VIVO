@@ -42,7 +42,7 @@ WHERE {
     }
 } 
 EOF
-# Check 10 times
+# Check 10 times but you can say more
 for i in {1..10}
 do
     curl -i -d "email=$USERNAME" -d "password=$PASSWD" -d '@newIRI.rq'  -H 'Accept: text/plain' 'http://localhost:8080/vivo/api/sparqlQuery'

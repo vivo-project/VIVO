@@ -4,8 +4,9 @@ This directory contains a set of scripts allowing to test the gereration of IRI 
 # To Run
 1. `cp env.sh.sample env.sh`
 2. Setup variables with appropriate value in `env.sh`
-3. Build a set of triples with unique IRIs in the VIVO triplestore with `construct_person.sh`. it generate `newUser.ttl` file
-3. run the script `populate_vivo.sh`. The script generates the file  `userToInsert.rq` which is used bu the SPARQLUpdate
+3. Build a set of triples with unique IRIs in the VIVO triplestore with `construct_person.sh`. 
+4. run the script `insert_facutyMember.sh`.
+5. look new user in VIVO  
 
 # Dummy User Site Scenario
 **in the testGenerator directoy**
