@@ -26,12 +26,13 @@ This function allows you to validate the existence of an IRI in the tripleStore.
 
 In a statement, the function is positioned in place of the predicate. The subject indicates the IRI to be searched by the function and the object contains the result of the function which is a boolean indicating the existence of the IRI
 
-<code>PREFIX sfnc: <http://vivoweb.org/sparql/function#>
+```PREFIX sfnc: <http://vivoweb.org/sparql/function#>
  SELECT * 
  WHERE {
    BIND (IRI("http://localhost:8080/vivo/individual/n1046") as ?IRI) .
    ?IRI sfnc:isIriExist ?isExist .
-} </code>
+}
+```
 
 
 ## sfnc:hasNewIRI Sparql Function
@@ -46,20 +47,22 @@ In a statement, the function is placed in place of the predicate. The subject in
 
 usage in a simple case
 
-<code>PREFIX sfnc: <http://vivoweb.org/sparql/function#>
+```PREFIX sfnc: <http://vivoweb.org/sparql/function#>
  CONSTRUCT {
     ?newIRI a vivo:FacultyMember .
  } 
  WHERE {
    "http://localhost:8080/vivo/individual/n" sfnc:hasNewIRI ?newIRI .
-} </code>
+}
+```
+
 
 #### example 2 
 
 usage for the creation in French context of a new valid faculty member individual in VIVO
 
 **file `construct_person.sh`**
-<code>cat << EOF | curl -d "email=$USERNAME" -d "password=$PASSWD" -d @-  -H 'Accept: text/n3' 'http://localhost:8080/vivo/api/sparqlQuery'
+```cat << EOF | curl -d "email=$USERNAME" -d "password=$PASSWD" -d @-  -H 'Accept: text/n3' 'http://localhost:8080/vivo/api/sparqlQuery'
 query=
 PREFIX vcard: <http://www.w3.org/2006/vcard/ns#> 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
@@ -89,8 +92,8 @@ CONSTRUCT  {
         sfnc:hasNewIRI ?vcardHasName ; 
         sfnc:hasNewIRI ?vcardHasTitle .   
 } 
-
-EOF </code>
+EOF
+```
 
 The 'construct' request is encapsulated by the 'cat' command and submitted to VIVO for evaluation via the 'curl' command
 
@@ -100,7 +103,8 @@ This individual is insert in VIVO by the following SPARQL update commands
 
 **the update request `insert_facutyMember.sh`**
 
-<code>givenName="Michel 3"
+```
+givenName="Michel"
 familyName="Héon"
 title="Chercheur"
 
@@ -138,7 +142,7 @@ INSERT {
 } 
 
 EOF
-</code>
+```
 
 In this context, the use of SPARQL function `sfnc:hasNewIRI` is useful to insert a new user in VIVO with unique identifiers to the data graph already contained in VIVO
 
