@@ -8,7 +8,6 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.jena.sparql.pfunction.PropertyFunctionRegistry;
 
 import edu.cornell.mannlib.vitro.webapp.sparql.function.hasNewIRI;
-import edu.cornell.mannlib.vitro.webapp.sparql.function.hasNewIRIWithType;
 import edu.cornell.mannlib.vitro.webapp.sparql.function.isIriExist;
 
 /**
@@ -29,7 +28,6 @@ public class SparqlFunctionRegister  implements ServletContextListener{
 	public void contextInitialized(ServletContextEvent arg0) {
 		PropertyFunctionRegistry.get().put("http://vivoweb.org/sparql/function#hasNewIRI", hasNewIRI.class) ;
 		PropertyFunctionRegistry.get().put("http://vivoweb.org/sparql/function#isIriExist", isIriExist.class) ;
-		PropertyFunctionRegistry.get().put("http://vivoweb.org/sparql/function#hasNewIRIWithType", hasNewIRIWithType.class) ;
 		log.debug("SPARQL Function: hasNewIRI is registered");
 	}
 
