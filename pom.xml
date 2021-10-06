@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -68,7 +67,7 @@
     </modules>
 
     <profiles>
-       <profile>
+        <profile>
             <id>Vitro-languages</id>
             <activation>
                 <file>
@@ -78,8 +77,8 @@
             <modules>
                 <module>../Vitro-languages</module>
             </modules>
-       </profile>
-       <profile>
+        </profile>
+        <profile>
             <id>VIVO-languages</id>
             <activation>
                 <file>
@@ -89,8 +88,8 @@
             <modules>
                 <module>../VIVO-languages</module>
             </modules>
-       </profile>
-       <profile>
+        </profile>
+        <profile>
             <id>vitro</id>
             <activation>
                 <file>
@@ -489,16 +488,19 @@
                     <failOnError>false</failOnError>
                 </configuration>
                 <reportSets>
-                    <reportSet><!-- by default, id = "default" -->
-                        <reports><!-- select non-aggregate reports -->
+                    <reportSet>
+                        <!-- by default, id = "default" -->
+                        <reports>
+                            <!-- select non-aggregate reports -->
                             <report>javadoc</report>
                             <report>test-javadoc</report>
                         </reports>
                     </reportSet>
-                    <reportSet><!-- aggregate reportSet, to define in poms 
+                    <reportSet>
+                        <!-- aggregate reportSet, to define in poms 
                             having modules -->
                         <id>aggregate</id>
-                        <inherited>false</inherited><!-- don't run aggregate 
+                        <inherited>false</inherited> <!-- don't run aggregate 
                             in child modules -->
                         <reports>
                             <report>aggregate</report>
@@ -530,7 +532,7 @@
         <repository>
             <id>vivo-dependencies</id>
             <name>VIVO Dependencies</name>
-            <url>https://raw.github.com/vivo-project/dependencies/master/</url>
+            <url>https://raw.github.com/vivo-project/dependencies/main/</url>
         </repository>
 
         <repository>

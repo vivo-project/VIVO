@@ -14,12 +14,12 @@ desired information across disciplines.
 http://vivoweb.org/
 
 ### VIVO Project Wiki
-https://wiki.duraspace.org/display/VIVO/
+https://wiki.lyrasis.org/display/VIVO/
 
 ### Installation Instructions
 
 Installation instructions for the latest release can be found at this location on the wiki:  
-https://wiki.duraspace.org/display/VIVODOC112x/Installing+VIVO
+https://wiki.lyrasis.org/display/VIVODOC112x/Installing+VIVO
 
 ### Docker
 
@@ -92,7 +92,7 @@ development, implementation, and testing.
 
 ## Contributing Code
 If you would like to contribute code to the VIVO project, please open a ticket 
-in our [JIRA](https://jira.duraspace.org/projects/VIVO), and prepare a 
+in our [JIRA](https://jira.lyrasis.org/projects/VIVO), and prepare a 
 pull request that references your ticket.  Contributors welcome!
 
 ## Citing VIVO
