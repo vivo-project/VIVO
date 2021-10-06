@@ -3,7 +3,7 @@
 
 <!-- VIVO-specific default list view config file for object properties
 
-     See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
+     See guidelines at https://wiki.lyrasis.org/display/VIVODOC112x/Custom+List+View+Configurations -->
 
 <list-view-config>
     <query-select>
