@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!-- $This file is distributed under the terms of the license in LICENSE$ -->
 
-<!-- See guidelines at https://wiki.duraspace.org/x/eYXVAw
+<!-- See guidelines at https://wiki.lyrasis.org/display/VIVODOC112x/Custom+List+View+Configurations
      This list view used for both roleContributesTo and BFO_0000054, which
      is for events.
 -->
