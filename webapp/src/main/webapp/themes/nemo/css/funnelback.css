@@ -1,0 +1,55 @@
+#nav-browse {
+  margin: 8px auto;
+}
+.navbar-right.funnelsearch {
+  margin: 14px 18px;
+}
+@media (max-width: 768px) {
+  .navbar-right.funnelsearch {
+    margin: 14px auto;
+    font-size: 1.3em;
+    text-align: center;
+  }
+}
+.navbar-right.funnelsearch span {
+  vertical-align: middle;
+  color: white;
+}
+.navbar-right.funnelsearch .nav .open > a,
+.navbar-right.funnelsearch .nav .open > a:focus,
+.navbar-right.funnelsearch .nav .open > a:hover {
+  background: transparent;
+}
+.funnelsearch .nav-button {
+  float: left;
+  margin: auto 0.65em auto auto;
+}
+@media (max-width: 768px) {
+  .funnelsearch .nav-button {
+    float: none;
+    display: inline-block;
+    margin: auto 0.8em auto auto;
+  }
+}
+#search-contextual-navigation .search-contextual-navigation-type ul,
+#search-contextual-navigation .search-contextual-navigation-topic ul {
+  font-size: 14px;
+}
+#search-contextual-navigation .capability-map-container img {
+  width: 100%;
+}
+#search-contextual-navigation .capability-map-container p {
+  font-size: 14px;
+}
+/* This is for the funnelback search results page */
+.expert-results .share-contact span.glyphicon-envelope,
+.expert-results .share-contact span.glyphicon-phone-alt {
+  font-size: 0.8em;
+}
+.cart-button-container {
+  text-align: right;
+  font-size: 1.2em;
+}
+.cart-button-container span.glyphicon {
+  color: #585858;
+}

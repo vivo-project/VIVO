@@ -1,0 +1,212 @@
+/*=============================================================================================
+ If you are using LESS, you can change the colours used in the bootstrap theme here so that you don't need to edit the CSS templates.
+ ============================================================================================ */
+/* The colour of the header and footer */
+/* Complimentary to the base, used in section backgrounds on the homepage */
+/*======================================= 
+Homepage colours 
+=========================================*/
+/* The colours of the large icons beneath the search on the homepage */
+/* About our data section */
+.person-content {
+  margin-top: 1.5em;
+}
+.person-content .user-nav {
+  margin: 20px 0 17px 0;
+  color: #337ab7;
+  /* Hide the contact button for demo purposes */
+}
+.person-content .user-nav > li + li {
+  margin-left: 8px;
+}
+.person-content .user-nav li#contactTab {
+  display: none;
+}
+.person-content .user-nav li#identityTab {
+  display: none;
+}
+#BlazerID {
+  display: none;
+}
+#BlazerID-noRangeClass-List {
+  display: none;
+}
+#photo-wrapper {
+  margin-bottom: 20px;
+  text-align: center;
+}
+/*################################################################################
+Styling for the left hand side contact info column on the individual person page 
+################################################################################*/
+.share-contact {
+  background: #ececec;
+  padding: 0.8em;
+  text-align: center;
+  border: 1px solid #d3d3d3;
+  border-radius: 3px;
+}
+.share-contact .img circle {
+  box-shadow: 0 2px 5px #afafaf;
+}
+.share-contact ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+.share-contact span.glyphicon {
+  color: #064d68;
+  /*vertical-align: top;*/
+}
+/*.share-contact h5 {
+  font-size: 18px;
+  margin: 2em 0 1em 0;
+}*/
+.share-contact h5 {
+  font-size: 16px;
+}
+.share-contact .emails-container {
+  margin: 1em 0;
+}
+.share-contact a.email {
+  word-break: break-word;
+  color: #222222;
+  font-size: 15px;
+}
+.share-contact .individual-urls .list-group-item {
+  border: none;
+  background: #ececec;
+}
+.share-contact #individual-hasResearchArea .list-group-item {
+  background: none;
+  border: none;
+  padding: 5px 0;
+  display: block;
+}
+.share-contact #coauthorship_link_container,
+.share-contact #mapofscience_link_container,
+.share-contact #coinvestigator_link_container {
+  margin: 12px 0 8px 0;
+}
+.share-contact #coauthorship_link_container .collaboratorship-link a,
+.share-contact #mapofscience_link_container .collaboratorship-link a,
+.share-contact #coinvestigator_link_container .collaboratorship-link a {
+  min-width: 165px;
+  background-image: none;
+  background-color: #064d68;
+  color: white;
+  text-shadow: none;
+}
+#individual-info h3 {
+  font-size: 21px;
+  margin: 1em auto auto auto;
+}
+#individual-info a#relatedBy {
+  cursor: pointer;
+}
+#individual-info a#relatedBy:hover {
+  text-decoration: none;
+}
+#individual-info #individual-hasResearchArea a.label {
+  font-size: 13px;
+  background: transparent;
+  border: 1px solid #337ab7;
+  color: #337ab7;
+  font-weight: 400;
+  transition: all 0.5s;
+}
+#individual-info #individual-hasResearchArea a.label:hover {
+  background: #337ab7;
+  color: #fff;
+}
+/* Remove borders from all items in nav tab content panes */
+li.list-group-item {
+  border: none;
+}
+#individualNavTabsContent {
+  display: table;
+  width: 100%;
+}
+#individualNavTabsContent #relatedBy-Authorship-List.property-list {
+  margin: 0;
+  padding: 0;
+}
+#individualNavTabsContent #relatedBy-Authorship-List.property-list .list-group-item {
+  border: none;
+  padding: 1em 0;
+}
+#individualNavTabsContent #relatedBy-Authorship-List.property-list h4 {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0 10px 0;
+}
+#individualNavTabsContent #relatedBy-Authorship-List.property-list button.btn {
+  margin: 0 0 10px 10px;
+}
+@media (min-width: 992px) {
+  #individualNavTabsContent #relatedBy-Authorship-List.property-list .table.table-hover tr.publicationTableRow td.citation-data {
+    min-width: 645px;
+  }
+}
+@media (max-width: 420px) {
+  #individualNavTabsContent #relatedBy-Authorship-List.property-list .table.table-hover tr.publicationTableRow td {
+    font-size: 12px;
+  }
+}
+#individual-personInPosition {
+  padding-left: 0;
+  font-size: 14px;
+}
+#individual-personInPosition .list-group-item {
+  padding: 7px 0;
+  border: none;
+}
+#individual-hasResearchArea {
+  padding-left: 0;
+  font-size: 14px;
+  margin: 8px auto;
+}
+#individual-hasResearchArea .list-group-item {
+  padding: 7px 10px 0 0;
+  border: none;
+  display: inline-block;
+  background: transparent;
+}
+/*###########################################################################
+This is styling for the individual object pages i.e. Publications, grants etc
+############################################################################*/
+/*top part of the object page*/
+#individual-intro {
+  margin: auto auto 20px auto;
+}
+#individual-intro .individual-objectHeader span.label-info {
+  font-size: 0.95em;
+}
+#individual-intro #individual-ARG_2000028 {
+  margin: 16px 0;
+  padding-left: 0;
+  display: inline-block;
+  border: 1px solid #c9c9c9;
+  border-radius: 4px;
+  font-size: 14px;
+}
+/* The tab content of objects */
+.individual-objects ul.nav-tabs {
+  margin: auto auto 20px auto;
+}
+/*.individual-objects .tab-content .property-list .list-group-item {
+  float: left;
+  margin-right: 10px;
+}*/
+.individual-objects .tab-content .property-list {
+  float: left;
+  margin-right: 10px;
+}
+.list-group-item {
+  margin-right: 10px;
+  background: transparent;
+}
+
+/* MISCELLANEOUS ------>  */
+p.address-line {
+    margin-bottom: 0.3em;
+}
