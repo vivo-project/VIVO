@@ -28,7 +28,7 @@
 <http://purl.org/ontology/bibo/sici> <http://www.w3.org/2000/01/rdf-schema#label> "Serial Item and Contribution Identifier (SICI)"@fr-CA .
 <http://vivoweb.org/ontology/core#Licensure> <http://www.w3.org/2000/01/rdf-schema#label> "Permis d'exercer"@fr-CA .
 <http://vivoweb.org/ontology/core#inPress> <http://www.w3.org/2000/01/rdf-schema#label> "sous presse"@fr-CA .
-<http://vivoweb.org/ontology/core#placeOfPublition> <http://www.w3.org/2000/01/rdf-schema#label> "lieu de publication"@fr-CA .
+<http://vivoweb.org/ontology/core#placeOfPublication> <http://www.w3.org/2000/01/rdf-schema#label> "lieu de publication"@fr-CA .
 <http://vivoweb.org/ontology/core#hasCollaborator> <http://www.w3.org/2000/01/rdf-schema#label> "collaborateurs"@fr-CA .
 <http://vivoweb.org/ontology/core#GovernmentAgency> <http://www.w3.org/2000/01/rdf-schema#label> "Agence gouvernementale"@fr-CA .
 <http://www.w3.org/2004/02/skos/core#narrower> <http://www.w3.org/2000/01/rdf-schema#label> "concept plus précis"@fr-CA .
