@@ -2,14 +2,11 @@
     xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>org.vivoweb</groupId>
     <artifactId>vivo-installer</artifactId>
-    <version>1.12.1-SNAPSHOT</version>
+    <version>1.12.1</version>
     <packaging>pom</packaging>
-
     <name>VIVO Installer</name>
 
     <properties>
@@ -17,7 +14,6 @@
         <maven-site-plugin.skip>true</maven-site-plugin.skip>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <build>
         <plugins>
             <plugin>
@@ -102,12 +98,10 @@
             </plugins>
         </pluginManagement>
     </build>
-
     <modules>
         <module>home</module>
         <module>webapp</module>
     </modules>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -129,7 +123,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <profiles>
         <profile>
             <id>skip-install</id>
@@ -229,22 +222,12 @@
             </build>
         </profile>
     </profiles>
-
     <distributionManagement>
         <site>
             <id>vivo-installer</id>
             <url>http://vivo-project.github.io/</url>
         </site>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
     </distributionManagement>
-
     <reporting>
         <plugins>
             <plugin>
@@ -257,7 +240,6 @@
             </plugin>
         </plugins>
     </reporting>
-
     <!--
         Add a custom repository, which is actually just a simple GitHub project
         in order to distribute some dependencies that aren't part of Maven central
@@ -266,9 +248,8 @@
         <repository>
             <id>vivo-dependencies</id>
             <name>VIVO Dependencies</name>
-            <url>https://raw.github.com/vivo-project/dependencies/main/</url>
+            <url>https://raw.github.com/vivo-project/dependencies/master/</url>
         </repository>
-
         <repository>
             <id>sonatype-nexus-snapshots</id>
             <name>Sonatype Nexus Snapshots</name>

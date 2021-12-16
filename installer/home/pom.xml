@@ -2,23 +2,18 @@
     xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>org.vivoweb</groupId>
     <artifactId>vivo-installer-home</artifactId>
-    <version>1.12.1-SNAPSHOT</version>
+    <version>1.12.1</version>
     <packaging>pom</packaging>
-
     <parent>
         <groupId>org.vivoweb</groupId>
         <artifactId>vivo-installer</artifactId>
-        <version>1.12.1-SNAPSHOT</version>
+        <version>1.12.1</version>
         <relativePath>..</relativePath>
     </parent>
-
     <name>VIVO Install Home</name>
-
     <properties>
         <default-theme>wilma</default-theme>
     </properties>
@@ -108,11 +103,11 @@
             <type>tar.gz</type>
         </dependency>
         <!-- Dependency for multilingual support -->
-        <dependency>
+        <!-- <dependency>
             <groupId>org.vivoweb</groupId>
             <artifactId>vivo-languages-home-core</artifactId>
             <version>${project.version}</version>
-            <type>tar.gz</type>
-        </dependency>
+            <type>pom</type>
+        </dependency> -->
     </dependencies>
 </project>
