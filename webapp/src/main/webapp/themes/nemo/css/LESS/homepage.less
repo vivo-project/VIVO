@@ -1,0 +1,370 @@
+@import "vars.less";
+
+/*---------------------------------------------
+Add a custom homepage background to hero class here
+----------------------------------------------*/
+
+.hero 
+{
+	background-size: cover;
+	background-image: url('../images/campus_hero.jpg');
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+}
+
+.theme-showcase 
+{
+	width: 100%;
+	height: 100%;
+	padding: 5% 0 10% 0;
+	background-color: rgba(0, 0, 0, 0.4);
+	display: table;
+
+	& > p > .btn
+		{
+			margin: 5px 0;
+		}
+
+	.navbar 
+	{
+		.container 
+		{
+			width: auto;
+		}
+	}
+}
+
+.jumbotron
+{
+	background-color: transparent;
+	color: @home-hero-text;
+	text-align: center;
+	text-shadow: 1px 1px 4px #000;
+}
+
+#search-homepage
+{
+	input.form-control 
+	{
+		opacity: 0.9;
+		border-radius: 5px;
+	}
+
+	.sympl-search
+	{
+		margin-left: 5px;
+		border-radius: 5px;
+	}
+}
+
+/*---------------------------------------------
+Create large linked icon sections below hero search
+----------------------------------------------*/
+
+.icons-home
+{
+	text-align: center;
+
+	.col-md-4 
+	{
+		padding: 0;
+	}
+
+	a
+	{
+		padding: 30px 0 45px 0;
+		display: block;
+		color: #fff;
+		text-decoration: none;
+		transition: background 0.65s, color 0.45s;
+
+		&:hover 
+		{
+			text-decoration: none;
+			box-shadow: inset 0px -3px;
+		}
+
+		&#icon1
+		{
+			background: @home-color-1;
+
+			&:hover
+			{
+				background: transparent;
+				color: @home-color-1;
+			}
+		}
+
+		&#icon2
+		{
+			background: @home-color-2;
+
+			&:hover
+			{
+				background: transparent;
+				color: @home-color-2;
+			}
+		}
+
+		&#icon3
+		{
+			background: @home-color-3;
+
+			&:hover
+			{
+				background: transparent;
+				color: @home-color-3;
+			}
+		}
+	}
+
+	.glyphicon
+	{
+		font-size: 75px;
+		width: 100%;
+		height: 100%;
+		line-height: 2em;
+	}
+}
+
+.explore
+{
+	padding: 60px;
+	margin-top: 15px;
+	
+	.btn-default
+	{
+		margin-top: 8px;
+	}
+}
+
+/*---------------------------------------------
+Homepage explore rectangular links with images for background
+----------------------------------------------*/
+
+.explore-panel 
+{
+	display: block;
+	padding: 60px 0;
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+	margin-top: 20px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-color: @light-grey;
+	background-size: cover;
+	border: 1px solid @medium-grey;
+	border-radius: 3px;
+	transition: background-position 0.65s ease;
+	
+	span
+	{
+		color: #000;
+		font-size: 1.5em;
+		vertical-align: middle;
+		font-weight: bold;
+		text-shadow: 0px 0px 5px #fff;
+	}
+
+	&#ph1
+	{
+		background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/34/LOD_Cloud_Diagram_as_of_September_2011.png);
+	}
+	
+	&#ph2
+	{
+		background-image: url(https://upload.wikimedia.org/wikipedia/commons/0/00/Insect_Safari_-_beetle_36.jpg);
+	}
+
+	&#ph3
+	{
+		background-image: url(https://c1.staticflickr.com/3/2744/4288406572_a44ca9e1e4_b.jpg);
+	}
+
+	&#ph4
+	{
+		background-image: url(https://upload.wikimedia.org/wikipedia/commons/1/1a/Wikidata-wikiproject-ontology.png);
+	}
+
+	&:hover
+	{
+		background-position: 50% 85%;
+	}
+}
+
+/*---------------------------------------------
+Customise the meet faculty/expert section
+----------------------------------------------*/
+
+.faculty-home
+{
+	text-align: center;
+	padding: 45px 0;
+	background: @light-grey;
+	border: 1px solid @medium-grey;
+	border-width: 1px 0 1px 0;
+}
+
+#faculty-carousel
+{
+	margin: 40px 0;
+	
+	.carousel-inner
+	{
+		&> .item 
+		{
+			text-align: center;
+
+			& > img,
+			& > a > img
+			{
+				margin: auto;
+				text-align: center;
+			} 
+		}
+	}
+
+	.carousel-control.left 
+	{
+		background: transparent;
+		color: @dark-grey;
+	}
+
+	.carousel-control.right 
+	{
+		background: transparent;
+		color: @dark-grey;
+	}
+
+	p.biog
+	{
+		font-size: 14px;
+		padding: 0 60px;
+	}
+}
+
+.faculty-mbrs 
+{
+	color: @dark-grey;
+
+	&:hover
+	{
+		text-decoration: none;
+		color: #000;
+	}
+}
+
+/*---------------------------------------------
+Customise the about our research section
+----------------------------------------------*/
+
+.research-count
+{
+	background-color: @secondary-color;
+	padding: 60px;
+	color: #fff;
+	border: 1px solid #0DAF0D;
+	border-width: 1px 0 1px 0;
+}
+
+#home-sections-list 
+{
+	list-style: none;
+	padding: 0;
+	box-shadow: none;
+
+	li 
+	{
+		margin: 0 0 5px 0;
+	}
+
+	a
+	{
+		&:last-child 
+		{
+			color: #ffffff;
+		}
+
+		&.list-group-item
+		{
+			color: @list-count-color;
+			margin: 6px 0;
+			border-radius: 4px;
+		}
+	}
+
+	button
+	{
+		&.list-group-item
+		{
+			color: @list-count-color;
+			margin: 6px 0;
+			border-radius: 4px;
+		}
+	}
+
+	span.badge
+	{
+		font-size: 15px;
+		vertical-align: middle;
+	}
+}
+
+#home-sections-list a.list-group-item, button.list-group-item {
+	color: @list-count-color;
+	margin: 6px 0;
+	border-radius: 4px;
+}
+
+/*---------------------------------------------
+Customise the maps section
+----------------------------------------------*/
+
+.geo-home
+{
+	background: @light-grey;
+	padding: 45px 0 80px 0;
+
+	#home-geo-focus
+	{
+		text-align: center;
+	}
+}
+
+/*---------------------------------------------
+Customise the statistics section - NO LONGER ON HOMEPAGE
+----------------------------------------------*/
+
+#property-stats
+{
+	li
+	{
+		margin: 7px 20px;
+		padding: 9px 0 0 0;
+		font-size: 1.4em;
+		float: left;
+		list-style: none;
+		text-align: center;
+	}
+
+	p
+	{
+		&.stats-count
+		{
+			font-size: 2em;
+			font-weight: lighter;
+		}
+
+		&.stats-type
+		{
+			padding: 5px 10px;
+			font-size: 0.8em;
+			margin: 7px 0 0 0;
+			font-weight: bold;
+			background-color: @base-color;
+			color: white;
+			border-radius: 3px;
+		}
+	}
+}

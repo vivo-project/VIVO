@@ -1,0 +1,300 @@
+/*=============================================================================================
+ If you are using LESS, you can change the colours used in the bootstrap theme here so that you don't need to edit the CSS templates.
+ ============================================================================================ */
+/* The colour of the header and footer */
+/* Complimentary to the base, used in section backgrounds on the homepage */
+/*======================================= 
+Homepage colours 
+=========================================*/
+/* The colours of the large icons beneath the search on the homepage */
+/* About our data section */
+/*---------------------------------------------
+Add a custom homepage background to hero class here
+----------------------------------------------*/
+.hero {
+  background-size: cover;
+  background-image: url('../images/campus_hero.jpg');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+.theme-showcase {
+  width: 100%;
+  height: 100%;
+  padding: 5% 0 10% 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: table;
+}
+.theme-showcase > p > .btn {
+  margin: 5px 0;
+}
+.theme-showcase .navbar .container {
+  width: auto;
+}
+.jumbotron {
+  background-color: transparent;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 1px 1px 4px #000;
+}
+#search-homepage input.form-control {
+  opacity: 0.9;
+  border-radius: 5px;
+}
+#search-homepage .sympl-search {
+  margin-left: 5px;
+  border-radius: 5px;
+}
+/*---------------------------------------------
+Create large linked icon sections below hero search
+----------------------------------------------*/
+.icons-home {
+  text-align: center;
+}
+.icons-home .col-md-4 {
+  padding: 0;
+}
+.icons-home a {
+  padding: 30px 0 45px 0;
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.65s, color 0.45s;
+}
+.icons-home a:hover {
+  text-decoration: none;
+  box-shadow: inset 0px -3px;
+}
+.icons-home a#icon1 {
+  background: #5cb85c;
+}
+.icons-home a#icon1:hover {
+  background: transparent;
+  color: #5cb85c;
+}
+.icons-home a#icon2 {
+  background: #1b998b;
+}
+.icons-home a#icon2:hover {
+  background: transparent;
+  color: #1b998b;
+}
+.icons-home a#icon3 {
+  background: #dd3333;
+}
+.icons-home a#icon3:hover {
+  background: transparent;
+  color: #dd3333;
+}
+.icons-home .glyphicon {
+  font-size: 75px;
+  width: 100%;
+  height: 100%;
+  line-height: 2em;
+}
+.explore {
+  padding: 60px;
+  margin-top: 15px;
+}
+.explore .btn-default {
+  margin-top: 8px;
+}
+/*---------------------------------------------
+Homepage explore rectangular links with images for background
+----------------------------------------------*/
+.explore-panel {
+  display: block;
+  padding: 60px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin-top: 20px;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-color: #ececec;
+  background-size: cover;
+  border: 1px solid #c9c9c9;
+  border-radius: 3px;
+  transition: background-position 0.65s ease;
+}
+.explore-panel span {
+  color: #000;
+  font-size: 1.5em;
+  vertical-align: middle;
+  font-weight: bold;
+  text-shadow: 0px 0px 5px #fff;
+}
+.explore-panel#ph1 {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/34/LOD_Cloud_Diagram_as_of_September_2011.png);
+}
+.explore-panel#ph2 {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/0/00/Insect_Safari_-_beetle_36.jpg);
+}
+.explore-panel#ph3 {
+  background-image: url(https://c1.staticflickr.com/3/2744/4288406572_a44ca9e1e4_b.jpg);
+}
+.explore-panel#ph4 {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/1/1a/Wikidata-wikiproject-ontology.png);
+}
+.explore-panel:hover {
+  background-position: 50% 85%;
+}
+/*---------------------------------------------
+Customise the meet faculty/expert section
+----------------------------------------------*/
+.faculty-home {
+  text-align: center;
+  padding: 45px 0;
+  background: #ececec;
+  border: 1px solid #c9c9c9;
+  border-width: 1px 0 1px 0;
+}
+#faculty-carousel {
+  margin: 40px 0;
+}
+#faculty-carousel .carousel-inner > .item {
+  text-align: center;
+}
+#faculty-carousel .carousel-inner > .item > img,
+#faculty-carousel .carousel-inner > .item > a > img {
+  margin: auto;
+  text-align: center;
+}
+#faculty-carousel .carousel-control.left {
+  background: transparent;
+  color: #222222;
+}
+#faculty-carousel .carousel-control.right {
+  background: transparent;
+  color: #222222;
+}
+#faculty-carousel p.biog {
+  font-size: 14px;
+  padding: 0 60px;
+}
+.faculty-mbrs {
+  color: #222222;
+}
+.faculty-mbrs:hover {
+  text-decoration: none;
+  color: #000;
+}
+/*---------------------------------------------
+Customise the about our research section
+----------------------------------------------*/
+.research-count {
+  background-color: #064d68;
+  padding: 60px;
+  color: #fff;
+  border: 1px solid #023447;
+  border-width: 1px 0 1px 0;
+}
+#home-sections-list {
+  list-style: none;
+  padding: 0;
+  box-shadow: none;
+}
+#home-sections-list li {
+  margin: 0 0 5px 0;
+}
+#home-sections-list a:last-child {
+  color: #ffffff;
+}
+#home-sections-list a.list-group-item {
+  color: #555555;
+  margin: 6px 0;
+  border-radius: 4px;
+}
+#home-sections-list button.list-group-item {
+  color: #555555;
+  margin: 6px 0;
+  border-radius: 4px;
+}
+#home-sections-list span.badge {
+  font-size: 15px;
+  vertical-align: middle;
+}
+#home-sections-list a.list-group-item,
+button.list-group-item {
+  color: #555555;
+  margin: 6px 0;
+  border-radius: 4px;
+  background-color: white;
+}
+
+/*---------------------------------------------
+Customise the about our departments section
+----------------------------------------------*/
+.department-count {
+  background-color: #ececec;
+  padding: 60px;
+  color: #222222;
+  border: 1px solid #c9c9c9;
+  border-width: 1px 0 1px 0;
+}
+#home-department-sections-list {
+  list-style: none;
+  padding: 0;
+  box-shadow: none;
+}
+#home-department-sections-list li {
+  margin: 0 0 5px 0;
+}
+#home-department-sections-list a:last-child {
+  color: #222222;
+}
+#home-department-sections-list a.list-group-item {
+  color: #555555;
+  margin: 6px 0;
+  border-radius: 4px;
+}
+#home-department-sections-list button.list-group-item {
+  color: #555555;
+  margin: 6px 0;
+  border-radius: 4px;
+}
+#home-department-sections-list span.badge {
+  font-size: 15px;
+  vertical-align: middle;
+}
+#home-department-sections-list a.list-group-item,
+button.list-group-item {
+  color: #555555;
+  margin: 6px 0;
+  border-radius: 4px;
+  background-color: white;
+}
+
+/*---------------------------------------------
+Customise the maps section
+----------------------------------------------*/
+.geo-home {
+  background: #ececec;
+  padding: 45px 0 80px 0;
+}
+.geo-home #home-geo-focus {
+  text-align: center;
+}
+/*---------------------------------------------
+Customise the statistics section - NO LONGER ON HOMEPAGE
+----------------------------------------------*/
+#property-stats li {
+  margin: 7px 20px;
+  padding: 9px 0 0 0;
+  font-size: 1.4em;
+  float: left;
+  list-style: none;
+  text-align: center;
+}
+#property-stats p.stats-count {
+  font-size: 2em;
+  font-weight: lighter;
+}
+#property-stats p.stats-type {
+  padding: 5px 10px;
+  font-size: 0.8em;
+  margin: 7px 0 0 0;
+  font-weight: bold;
+  background-color: #337ab7;
+  color: white;
+  border-radius: 3px;
+}
