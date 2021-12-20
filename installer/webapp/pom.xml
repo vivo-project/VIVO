@@ -42,16 +42,16 @@
                                     <type>war</type>
                                 </overlay>
                                 <!-- Overlays for multilingual support -->
-                                <!-- overlay>
+                                <overlay>
                                     <groupId>org.vivoweb</groupId>
-                                    <artifactId>vitro-languages-webapp</artifactId>
+                                    <artifactId>vitro-languages-webapp-core</artifactId>
                                     <type>war</type>
                                 </overlay>
                                 <overlay>
                                     <groupId>org.vivoweb</groupId>
-                                    <artifactId>vivo-languages-webapp</artifactId>
+                                    <artifactId>vivo-languages-webapp-core</artifactId>
                                     <type>war</type>
-                                </overlay -->
+                                </overlay>
                             </overlays>
                             <webResources>
                                 <resource>
@@ -150,18 +150,18 @@
             <type>war</type>
         </dependency>
         <!-- Dependencies for multilingual support -->
-        <!-- dependency>
+        <dependency>
             <groupId>org.vivoweb</groupId>
-            <artifactId>vitro-languages-webapp</artifactId>
-            <version>[2.0.0,2.1.0)</version>
+            <artifactId>vitro-languages-webapp-core</artifactId>
+            <version>${project.version}</version>
             <type>war</type>
         </dependency>
         <dependency>
             <groupId>org.vivoweb</groupId>
-            <artifactId>vivo-languages-webapp</artifactId>
-            <version>[2.0.0,2.1.0)</version>
+            <artifactId>vivo-languages-webapp-core</artifactId>
+            <version>${project.version}</version>
             <type>war</type>
-        </dependency -->
+        </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>

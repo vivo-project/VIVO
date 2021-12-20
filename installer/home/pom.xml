@@ -103,11 +103,11 @@
             <type>tar.gz</type>
         </dependency>
         <!-- Dependency for multilingual support -->
-        <!-- <dependency>
+        <dependency>
             <groupId>org.vivoweb</groupId>
             <artifactId>vivo-languages-home-core</artifactId>
             <version>${project.version}</version>
             <type>pom</type>
-        </dependency> -->
+        </dependency>
     </dependencies>
 </project>
