@@ -11,12 +11,11 @@
     <#elseif individual.event()>
         itemscope itemtype="http://schema.org/Event"
 	<#elseif individual.infoContentEntity()>
-	   <#assign mst = "Document" />
 		<#list individual.mostSpecificTypes as type >
 			<#assign mst = type />
 			<#break>
 		</#list>
-       <@getItemType mst!"" "infoContentEntity"/>
+       <@getItemType mst!"Document" "infoContentEntity"/>
     <#else>
         itemscope itemtype="http://schema.org/Thing"
     </#if>
