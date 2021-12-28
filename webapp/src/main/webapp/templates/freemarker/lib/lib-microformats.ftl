@@ -7,7 +7,7 @@
 			<#assign mst = type />
 			<#break>
 		</#list>
-        <@getItemType mst "organization"/>
+        <@getItemType mst!"" "organization"/>
     <#elseif individual.event()>
         itemscope itemtype="http://schema.org/Event"
 	<#elseif individual.infoContentEntity()>
@@ -16,7 +16,7 @@
 			<#assign mst = type />
 			<#break>
 		</#list>
-    	<@getItemType mst "infoContentEntity"/>
+       <@getItemType mst!"" "infoContentEntity"/>
     <#else>
         itemscope itemtype="http://schema.org/Thing"
     </#if>
