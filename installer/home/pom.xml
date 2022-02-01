@@ -25,6 +25,7 @@
                 <property><name>vivo-dir</name></property>
             </activation>
             <build>
+                <finalName>${app-name}</finalName>
                 <plugins>
                     <plugin>
                         <artifactId>maven-assembly-plugin</artifactId>
