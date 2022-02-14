@@ -25,6 +25,7 @@
                 <property><name>vivo-dir</name></property>
             </activation>
             <build>
+                <finalName>${app-name}</finalName>
                 <plugins>
                     <plugin>
                         <artifactId>maven-assembly-plugin</artifactId>
@@ -103,11 +104,11 @@
             <type>tar.gz</type>
         </dependency>
         <!-- Dependency for multilingual support -->
-        <!-- <dependency>
+        <dependency>
             <groupId>org.vivoweb</groupId>
             <artifactId>vivo-languages-home-core</artifactId>
             <version>${project.version}</version>
             <type>pom</type>
-        </dependency> -->
+        </dependency>
     </dependencies>
 </project>
