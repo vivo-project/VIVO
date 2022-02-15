@@ -4,13 +4,13 @@
 
     <groupId>org.vivoweb</groupId>
     <artifactId>vivo-languages-webapp-de_DE</artifactId>
-    <version>1.12.2-SNAPSHOT</version>
+    <version>1.12.2</version>
     <packaging>war</packaging>
 
     <parent>
         <groupId>org.vivoweb</groupId>
         <artifactId>vivo-languages_de_DE</artifactId>
-        <version>1.12.2-SNAPSHOT</version>
+        <version>1.12.2</version>
         <relativePath>..</relativePath>
     </parent>
 
