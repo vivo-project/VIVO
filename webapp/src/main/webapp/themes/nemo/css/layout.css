@@ -1,0 +1,302 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+#map-of-science-response {
+    background-color: #FFFFFF;
+    font: 0.9em Helvetica;
+    margin: auto;
+    min-height: 600px;
+    overflow: hidden;
+    width: 100%;
+}
+
+#map-of-science-info {
+	margin-bottom: 6px;
+	margin-top: 6px;
+}
+#left-column {
+	float: left;
+	width: 260px;
+}
+
+#right-column {
+	float: right;
+	width: 640px;
+}
+
+#map_area {
+	width: 640px; 
+	height: 480px;
+}
+
+#subEntityTableArea {
+	clear: both;
+	width: 100%; 
+	padding-top:5px; 
+}
+
+#datatable_wrapper { display : none;}
+
+.subEntityTable {
+	width: 32%; 
+	padding-top:5px;
+	padding-right: 8px;
+	float: left;
+}
+
+#percent-mapped-info {
+	float:right;
+	display: none;
+	margin-top: 5px;
+}
+
+#header-entity-label {
+font-family: "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica, sans-serif;
+    font-size: 1.5275em;
+    color: #2485ae;
+    line-height: 1.3em;
+    padding-top:15px;
+    padding-bottom:10px;
+}
+
+a.clear-selected-entities {
+    background-color: #878787;
+}
+
+.small-arrows {
+    font-size: 0.9em;
+    padding: 0 !important;
+    text-decoration: none;
+    vertical-align: top;
+}
+
+.blockElement {
+    top: 10px !important;
+}
+
+/* tooltip */
+#tt {
+	font:11px/1.5 Verdana, Arial, Helvetica, sans-serif; 
+	position:absolute; 
+	display:block; 
+	background:url(../../../images/visualization/mapofscience/tooltip/tt_left.gif) top left no-repeat
+}
+
+#tttop {
+	display:block; 
+	height:5px; 
+	margin-left:5px; 
+	background:url(../../../images/visualization/mapofscience/tooltip/tt_top.gif) top right no-repeat; 
+	overflow:hidden
+}
+
+#ttcont {
+	display:block; 
+	padding:2px 12px 3px 7px; 
+	margin-left:5px; 
+	background:#666; 
+	color:#FFF
+}
+
+#ttbot {
+	display:block; 
+	height:5px; 
+	margin-left:5px; 
+	background:url(../../../images/visualization/mapofscience/tooltip/tt_bottom.gif) top right no-repeat; 
+	overflow:hidden
+}
+
+/* DataTable related css */
+
+/* filter */
+
+.filter-option, .comparison-filter-option {
+	color: #2485AE;
+	cursor: pointer;
+	/*padding-right: 5px;*/
+	text-decoration: underline;
+}
+
+.active-filter, .comparison-active-filter {
+	color: #595B5B;
+	text-decoration: none;
+}
+
+.filterInfoIcon, .comparisonFilterInfoIcon {
+	/*vertical-align:top;*/
+	width:15px;
+	margin-left: 9px;
+}
+
+.drillDownIcon {
+	width:25px;
+	margin-left: 9px;
+	float: right;
+}
+
+
+.science-areas-filter {
+	margin-bottom: 10px;
+}
+
+.organization-header {
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+.suborganization-title {
+	vertical-align: middle; 
+	font-weight: bold;
+}
+
+.mapped-result {
+	font-size: 0.9em;
+	font-weight: bold;
+	float: right;
+	padding-top: 4px;
+}
+
+/* search in table */
+
+.sDomSearchBar, .sDomComparisonSearchBar {
+    margin-bottom: -10px;
+    margin-left: 41%;
+}
+
+#reset-search, #comparison-reset-search {
+    color: #2485AE;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+/* table */
+
+.science-area-tab {
+
+}
+
+th#activity-count-column,
+th#percentage-activity-column {
+}
+
+.corner-triangle {
+    border-left: 10px solid #F6F6F6;
+    border-top: 10px solid #2485AE;
+    float: right;
+    font-size: 0;
+    line-height: 0;
+    margin-right: 3px;
+    width: 0;
+}
+
+hr.subtle-hr {
+    background-color: #BDBDBD;
+    border: 0 none;
+    height: 1px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+#main-science-areas-table-container table {
+	cellpadding: 0;
+	cellspacing: 0;
+	border: 0;
+}
+
+#main-science-areas-table-container table tr { 
+	min-height: 30px;
+	max-height: 30px;
+	height: 30px;
+}
+
+.datatable-table,
+.entity-datatable-table {
+	font-size: 0.9em;
+	width: 100%;
+}
+
+table.datatable-table tbody tr {
+	border-top: 3px solid;
+}
+
+a.map-of-science-links {
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#main-science-areas-table-footer {
+    margin-top: 10px;
+    text-align: center;
+    height: 25px;
+    max-width: 260px;
+    background-color: #2485AE;
+    height: 20px;
+    padding: 4px 5px 3px;
+}
+
+#download-unlocated-journal-info {
+    background-color: #2485AE;
+    height: 20px;
+    margin-top: 10px;
+    max-width: 260px;
+    padding: 4px 5px 3px;
+    text-align: center;
+}
+
+#download-unlocated-journal-info a {
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#main-science-areas-table-container {
+    margin-top: 0;
+}
+
+.filterInfo, 
+.paginatedtabs {
+	font-size: 0.81em;
+}
+
+.subpaginatedtabs {
+    margin-bottom: 10px;
+    font-size: 0.81em;
+    float:right;
+    margin-top: 15px;
+}
+
+.subpaginatedtabs span {
+    padding-right: 5px; 
+    cursor: pointer;
+    color: #2485AE;
+}
+
+/* -------------------------------------------------------------->  */
+/* SPECIAL STYLES FOR THE error  */
+/* -------------------------------------------------------------->  */
+#error-container,
+.hide-dom-on-init {
+    display: none;
+}
+
+#noPublications-header {
+    font-size: 1.375em;
+    color: #2485ae;
+    line-height: 1.3em;
+    padding-top:15px;
+    padding-bottom:10px;
+}
+#noPublications-span  {
+    font-size:22px;
+}
+#noPublications-span a {
+    color: #84a655;
+    font-size:16px;
+}
+
+ul.error-list li {
+    font-size: 0.81em;
+    list-style: disc inside none;
+}

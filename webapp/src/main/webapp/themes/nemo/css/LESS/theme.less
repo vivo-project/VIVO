@@ -1,0 +1,357 @@
+/*============================================================
+ This CSS is for any styles that are across the entire theme. 
+==============================================================*/
+
+@import "vars.less";
+
+body
+{
+	width: 100%;
+	height: 100%;
+	font-size: 16px;
+	-webkit-font-smoothing: antialiased;
+}
+
+a:hover, a:focus
+{
+	text-decoration: none;
+	color: @link-color;
+}
+/*---------------------------------------------
+Styling identity.ftl header
+----------------------------------------------*/
+.header
+{
+	background: @base-color;
+	padding: 20px 0;
+	border-bottom: 1px solid darken(@base-color, 10%);
+
+	img
+	{
+		width: 100%;
+		max-width: 150px;
+	}
+
+	h1
+	{
+		margin: 0;
+
+		a
+		{
+			color: @header-text;
+			vertical-align: middle;
+			text-decoration: none;
+			font-size: 28px;
+		}
+	}
+
+	.visible-xs-block
+	{
+		text-align: center;
+
+		h1
+		{
+			margin: 0 0 15px 0;
+		}
+	}
+
+	.logo-sm
+	{
+		text-align: right;
+	}
+}
+
+#sticky-nav
+{
+	.navbar-header
+	{
+		display: none;
+	}
+
+	.form-control
+	{
+		height: 36px;
+	}
+
+	@media (min-width: 768px)
+	{
+		.navbar-form
+		{
+			padding-left: 0;
+		}
+	}
+}
+
+button.btn.sympl-search
+{
+	background: @home-color-1;
+	text-shadow: 0 0 0 transparent;
+	color: #fff;
+	border: 2px solid #c9c9c9;
+}
+
+.theme-dropdown .dropdown-menu
+{
+	position: static;
+	display: block;
+	margin-bottom: 20px;
+}
+
+/******************************************
+Browse page styling across all categories
+******************************************/
+section#browse-by
+{
+	margin: 2em auto auto auto;
+
+	nav#side-filters
+	{
+		margin-bottom: 1.2em;
+	}
+
+	ul#browse-classes
+	{
+		list-style: none;
+		padding: 0;
+	}
+	
+	nav#alpha-browse-container.panel
+	{
+		margin-bottom: 0;
+		border-radius: 3px 3px 0 0;
+		border-bottom: 0;
+		
+		h3.selected-class
+		{
+			margin: 0;
+			padding: 1em 0;
+		}
+
+		ul#alpha-browse-individuals
+		{
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			font-weight: bold;
+			font-size: 18px;
+
+			li
+			{
+				display: inline-block;
+				margin: auto 0.35em auto auto;
+
+				a.selected
+				{
+					background: @medium-grey;
+					padding: 2px;
+					border-radius: 4px;
+				}
+			}
+		}
+	}
+
+	section#individuals-in-class
+	{
+		border: 1px solid @light-grey;
+		border-width: 0 1px 1px 1px;
+		margin-bottom: 1em;
+
+		.pagination
+		{
+			padding: 0.8em 1em;
+			border-bottom: 1px solid @medium-grey;
+			/* These two are just to normalize bootstrap css */
+			border-radius: 0;
+			margin: 0;
+			width: 100%;
+
+			h3
+			{
+				display: inline-block;
+				margin: 0 5px 0 0;
+				font-size: 16px;
+			}
+
+			ul
+			{
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				display: inline-block;
+
+				li.round
+				{
+					display: inline-block;
+					padding: 0 0.35em;
+					margin: 0;
+
+					&.selected
+					{
+						background: @medium-grey;
+						border-radius: 4px;
+					}
+				}
+			}
+		}
+
+		ul
+		{
+			padding: 1em 0;
+			list-style: none;
+
+			li.individual 
+			{
+				margin: 1.2em;
+
+				h2
+				{
+
+					a 
+					{
+						font-size: 18px;
+					}
+				}
+			}
+		}
+	}
+}
+
+/********************************************************
+Styling for the RDF pages of data categories
+*********************************************************/
+section.individualList
+{
+	ul.pagination
+	{
+		li, li.selectedNavPage
+		{
+			display: inline-block;
+			vertical-align: middle;
+
+			a
+			{
+				border-radius: 4px;
+			}
+		}
+
+		li.selectedNavPage
+		{
+			padding: 6px 12px;
+			background: @light-grey;
+			border: 1px solid darken(@light-grey, 15%);
+			border-radius: 4px;
+		}
+	}
+
+	ul
+	{
+		list-style: none;
+		padding: 0;
+
+		li 
+		{
+			padding: 3px 0;
+		}
+	}
+}
+
+
+/********************************************************
+These are helper classes to add margin gaps where needed
+*********************************************************/
+
+.gap
+{
+	&20
+	{
+		margin-top: 20px
+	}
+
+	&30
+	{
+		margin-top: 30px
+	}
+
+	&40
+	{
+		margin-top: 40px
+	}
+	&50
+	{
+		margin-top: 50px
+	}
+}
+
+/***********************************
+// Beginning of footer styling //
+***********************************/
+
+.footer
+{
+	padding: 35px 30px 36px;
+	border-top: 1px solid darken(@footer-color, 15%);
+	background-color: @footer-color;
+	text-align: center;
+
+	#footer-nav
+	{
+		display: inline-block;
+		margin: auto auto 25px  auto;
+		list-style: none;
+
+		li
+		{
+			display: inline-block;
+			margin-right: 2em;
+
+			a
+			{
+				color: @light-grey;
+				transition: all 0.7s;
+
+				&:hover
+				{
+					text-decoration: underline;
+				}
+
+				&.symplectic-contact:hover
+				{
+					color: white;
+					box-shadow: 0px 0px 10px 10px @home-color-3;
+					border-radius: 3px;
+					background: @home-color-3;
+					transition: all 0.7s ease;
+					text-decoration: none;
+				}
+			}
+		}
+	}
+
+	#social-block
+	{
+		margin: auto auto 25px auto;
+
+		a
+		{
+			margin: auto 10px auto auto;
+		}
+	}
+
+	p.copyright
+	{
+		color: @dark-grey;
+		font-size: 0.9em;
+		margin: 1em auto auto auto;
+	}
+}
+
+.footer-logo
+{
+	margin-bottom: 10px;
+}
+/* Fix for submit buttons not showing - https://github.com/Symplectic/Bootstrapped-VIVO/issues/2?_pjax=%23js-repo-pjax-container */
+
+.fullViewOnly, #submit, .or, #requiredLegend
+{
+	display: inline-block!important;
+}

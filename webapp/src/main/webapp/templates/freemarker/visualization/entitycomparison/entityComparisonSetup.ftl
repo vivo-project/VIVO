@@ -34,7 +34,7 @@
 
 <#assign temporalGraphDownloadCSVCommonURL = '${urls.base}${dataVisualizationURLRoot}?uri=${organizationURI}&labelField=label'>
 
-<#assign publicationParameter = {   "name": "${i18n().publication?js_string}",
+<#assign publicationParameter = {   "name": "publication",
                                     "pluralName": "${i18n().publications?js_string}",
                                     "verbName": "${i18n().published?js_string}",
                                     "dropDownText": "${i18n().by_publications?js_string}",
@@ -44,7 +44,7 @@
                                     "csvLink": "${temporalGraphDownloadCSVCommonURL}&vis=entity_comparison",
                                     "value": "${i18n().publications?js_string}" }>
 
-<#assign grantParameter = {   "name": "${i18n().grant?js_string}",
+<#assign grantParameter = {   "name": "grant",
                               "pluralName": "${i18n().grants?js_string}",
                               "verbName": "${i18n().granted?js_string}",
                               "dropDownText": "${i18n().by_grants?js_string}",
@@ -74,7 +74,7 @@ var activitiesLabel = {
     plural: '${i18n().activities?js_string}'
 };
 var i18nStringsGuiEvents = {
-    temporalGraphCapped: '${i18n().temporal_graph_capitalized?js_string?js_string},
+    temporalGraphCapped: '${i18n().temporal_graph_capitalized?js_string?js_string}',
     temporalGraphLower: '${i18n().temporal_graph?js_string?js_string}',
     viewString: '${i18n().view?js_string}',
     entityMaxNote: '${i18n().max_entity_note?js_string}',

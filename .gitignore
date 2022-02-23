@@ -22,3 +22,8 @@ utilities/rdbmigration/.work
 **/bin/
 
 vivo-home/
+
+.fake
+.ionide
+
+.vscode

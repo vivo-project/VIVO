@@ -1,7 +1,7 @@
 **Thank you for submitting a pull request! Title this pull request with a brief description of what the pull request fixes/improves/changes. Please describe the pull request in detail using the template below.**
 * * *
 
-**[JIRA Issue](https://jira.duraspace.org/projects/VIVO)**: (please link to issue)
+**[VIVO GitHub issue](https://github.com/vivo-project/VIVO/issues)**: (please link to issue)
 
 * Other Relevant Links (Mailing list discussion, related pull requests, etc.)
 
@@ -29,6 +29,7 @@ Example:
 * Does this change add any new dependencies? 
 * Does this change require any other modifications to be made to the repository? 
 * Could this change impact execution of existing code?
+* Large pull requests should be avoided. If this PR is large (more than 1,000 lines of codes), please provide short explanation why your contribution can't be decoupled in smaller PRs. 
 
 # Interested parties
 Tag (@ mention) interested parties or, if unsure, @VIVO-project/vivo-committers
