@@ -114,7 +114,7 @@
             <groupId>org.vivoweb</groupId>
             <artifactId>vitro-languages-home-core</artifactId>
             <version>${project.version}</version>
-            <type>tar.gz</type>
+            <type>pom</type>
         </dependency>
     </dependencies>
 </project>
