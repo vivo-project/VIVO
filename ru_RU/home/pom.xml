@@ -3,63 +3,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.vivoweb</groupId>
-    <artifactId>vivo-languages-home-core</artifactId>
+    <artifactId>vivo-languages-home-ru_RU</artifactId>
     <version>1.12.3-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
         <groupId>org.vivoweb</groupId>
-        <artifactId>vivo-languages-core</artifactId>
+        <artifactId>vivo-languages-ru_RU</artifactId>
         <version>1.12.3-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
 
-    <name>VIVO Languages for Home CORE</name>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.vivoweb</groupId>
-            <artifactId>vivo-languages-home-en_US</artifactId>
-            <version>${project.version}</version>
-            <type>tar.gz</type>
-        </dependency>
-        <dependency>
-            <groupId>org.vivoweb</groupId>
-            <artifactId>vivo-languages-home-de_DE</artifactId>
-            <version>${project.version}</version>
-            <type>tar.gz</type>
-        </dependency>
-        <dependency>
-            <groupId>org.vivoweb</groupId>
-            <artifactId>vivo-languages-home-es</artifactId>
-            <version>${project.version}</version>
-            <type>tar.gz</type>
-        </dependency>
-        <dependency>
-            <groupId>org.vivoweb</groupId>
-            <artifactId>vivo-languages-home-fr_CA</artifactId>
-            <version>${project.version}</version>
-            <type>tar.gz</type>
-        </dependency>
-        <dependency>
-            <groupId>org.vivoweb</groupId>
-            <artifactId>vivo-languages-home-pt_BR</artifactId>
-            <version>${project.version}</version>
-            <type>tar.gz</type>
-        </dependency>
-        <dependency>
-            <groupId>org.vivoweb</groupId>
-            <artifactId>vivo-languages-home-en_CA</artifactId>
-            <version>${project.version}</version>
-            <type>tar.gz</type>
-        </dependency>
-        <dependency>
-            <groupId>org.vivoweb</groupId>
-            <artifactId>vivo-languages-home-ru_RU</artifactId>
-            <version>${project.version}</version>
-            <type>tar.gz</type>
-        </dependency>
-    </dependencies>
+    <name>VIVO Languages for Home ru_RU</name>
 
     <build>
         <plugins>

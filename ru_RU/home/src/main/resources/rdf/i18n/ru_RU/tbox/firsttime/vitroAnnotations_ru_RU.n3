@@ -1,0 +1,565 @@
+@prefix bibo:    <http://purl.org/ontology/bibo/> .
+@prefix cito:    <http://purl.org/spar/cito/> .
+@prefix c4o:     <http://purl.org/spar/c4o/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix event:   <http://purl.org/NET/c4dm/event.owl#> .
+@prefix fabio:   <http://purl.org/spar/fabio/> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix geo:     <http://aims.fao.org/aos/geopolitical.owl#> .
+@prefix obo:     <http://purl.obolibrary.org/obo/> .
+@prefix ocrer:   <http://purl.org/net/OCRe/research.owl#> .
+@prefix ocresd:  <http://purl.org/net/OCRe/study_design.owl#> .
+@prefix ocresp:  <http://purl.org/net/OCRe/study_protocol.owl#> .
+@prefix ocrest:  <http://purl.org/net/OCRe/statistics.owl#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ro:      <http://purl.obolibrary.org/obo/ro.owl#> .
+@prefix scires:  <http://vivoweb.org/ontology/scientific-research#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix swo:     <http://www.ebi.ac.uk/efo/swo/> .
+@prefix vann:    <http://purl.org/vocab/vann/> .
+@prefix vcard:   <http://www.w3.org/2006/vcard/ns#> .
+@prefix vitro:   <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix vitro-public:  <http://vitro.mannlib.cornell.edu/ns/vitro/public#> .
+@prefix vivo:    <http://vivoweb.org/ontology/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+vivo:isCorrespondingAuthor
+      vitro:publicDescriptionAnnot
+              "Указывает, ведет ли автор переписку по поводу произведения и является ли он фактически гарантом опубликованного произведения.  Ответ: «true» или «false» (без кавычек)."@ru-RU .
+
+vivo:supplementalInformation
+      vitro:publicDescriptionAnnot
+              "Позволяет ввести дополнительную информацию, например, дополнительные сведения об образовании."@ru-RU .
+
+bibo:chapter
+      vitro:publicDescriptionAnnot
+              "Номер главы. НЕ используется для названия главы, которое должно быть введено в поле „название“ (поле, выделенное жирным шрифтом в верхней части страницы)."@ru-RU .
+
+bibo:sici
+      vitro:publicDescriptionAnnot
+              "Идентификатор серийных статей и материалов (SICI) - это код (стандарт ANSI/NISO Z39.56), используемый для уникальной идентификации конкретных томов, статей или других идентифицируемых частей периодического издания."@ru-RU .
+
+vivo:placeOfPublication
+      vitro:publicDescriptionAnnot
+              "Город, в котором была осуществлена публикация."@ru-RU .
+
+skos:narrower
+      vitro:fullPropertyNameAnnot
+              "более узкое понятие"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Это соотносит термин, более узкий по значению (т.е. более конкретный), с другим термином, более широким по значению, когда объем (значение) более узкого термина полностью входит в объем более широкого термина."@ru-RU .
+
+bibo:pageStart
+      vitro:publicDescriptionAnnot
+              "Номер начальной страницы в непрерывном диапазоне страниц."@ru-RU .
+
+
+vivo:reportId
+      vitro:publicDescriptionAnnot
+              "Уникальный идентификатор для отчета (тип информационного ресурса)."@ru-RU .
+
+owl:sameAs
+      vitro:fullPropertyNameAnnot
+              "то же, что и"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Это свойство OWL для связи двух индивидов с одинаковой „идентичностью“. см. http://www.w3.org/TR/owl-ref/#sameAs-def"@ru-RU .
+
+vitro:moniker
+      vitro:descriptionAnnot
+              "Данное свойство устарело."@ru-RU .
+
+bibo:pmid
+      vitro:publicDescriptionAnnot
+              "PMID (PubMed Identifier или PubMed Unique Identifier) - это уникальный номер, присваиваемый каждому цитированию в PubMed статей из научных журналов по наукам о жизни и биомедицине."@ru-RU .
+
+vivo:grantDirectCosts
+      vitro:publicDescriptionAnnot
+              "Это затраты, связанные с деятельностью по гранту, и они не должны включать косвенные затраты, связанные с администрированием гранта."@ru-RU .
+
+vivo:features
+      vitro:fullPropertyNameAnnot
+              "описывает"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Это связывает информационный ресурс с человеком, о котором он рассказывает."@ru-RU .
+
+vivo:featuredIn
+      vitro:fullPropertyNameAnnot
+              "представленный в"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Это соотносит человека с информационным ресурсом, который содержит тематическую статью о нём."@ru-RU .
+
+bibo:distributor
+      vitro:fullPropertyNameAnnot
+              "распространитель"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "В спецификации FOAF определение этого термина — Распространитель документа или набора документов. Однако, в VIVO это может относиться к кому угодно как распространителю чего-либо."@ru-RU .
+
+vivo:eligibleFor
+      vitro:publicDescriptionAnnot
+              "Используется в ситуации, когда для получения диплома требуется предварительная подготовка или степень, как, например, для получения допуска к экзаменам в какой-либо области медицины."@ru-RU .
+
+
+bibo:affirmedBy
+      vitro:fullPropertyNameAnnot
+              "подтверждено"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Юридическое решение, подтверждающее постановление."@ru-RU .
+
+vivo:assignee
+      vitro:publicDescriptionAnnot
+              "физическое или юридическое лицо, за которым было закреплено право собственности на опубликованную заявку в момент публикации"@ru-RU .
+
+bibo:presents
+      vitro:displayRankAnnot
+              "200"^^xsd:int ;
+      vitro:fullPropertyNameAnnot
+              "выступления"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Соотносит событие с сопутствующими документами; например, конференцию с докладом."@ru-RU .
+
+bibo:locator
+      vitro:publicDescriptionAnnot
+              "Описание (часто числовое), которое определяет местоположение элемента в содержащем его документе или коллекции."@ru-RU .
+
+bibo:degree
+      vitro:fullPropertyNameAnnot
+              "степень"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Диссертационная степень."@ru-RU .
+
+vivo:localAwardId
+      vitro:publicDescriptionAnnot
+              "Локальный для данного учреждения идентификатор, присвоенный выданному гранту."@ru-RU .
+
+vivo:iclCode
+      vitro:publicDescriptionAnnot
+              "Международная классификация (классификации), к которой была отнесена опубликованная заявка."@ru-RU .
+
+bibo:presentedAt
+      vitro:fullPropertyNameAnnot
+              "представлено на"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Относит документ к событию, например, доклад к конференции."@ru-RU .
+
+vivo:publisherOf
+      vitro:fullPropertyNameAnnot
+              "издатель"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Относит организацию, занимающуюся публикацией печатных или онлайновых материалов, к самому материалу."@ru-RU .
+
+bibo:asin
+      vitro:publicDescriptionAnnot
+              "Стандартный идентификационный номер Amazon (ASIN) - это уникальный идентификационный номер, присваиваемый Amazon.com и его партнерами для идентификации продукции в системе Amazon.com."@ru-RU .
+
+vivo:outreachOverview
+      vitro:publicDescriptionAnnot
+              "Пожалуйста, дайте краткое связное описание ваших целей и/или вклада в информационно-просветительскую деятельность"@ru-RU .
+
+bibo:doi
+      vitro:fullPropertyNameAnnot
+              "doi"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Система идентификаторов цифровых объектов (DOI) обеспечивает постоянную идентификацию объектов контента в цифровой среде. „Имена DOI присваиваются любому объекту для использования в цифровых сетях. Они используются для предоставления текущей информации, в том числе о том, где их (или информацию о них) можно найти в Интернете. Информация о цифровом объекте может меняться с течением времени, включая то, где его можно найти, но его DOI не изменится.“"@ru-RU .
+
+bibo:shortDescription
+      vitro:publicDescriptionAnnot
+              "Рассказ о ресурсе."@ru-RU .
+
+bibo:volume
+      vitro:publicDescriptionAnnot
+              "Номер тома."@ru-RU .
+
+bibo:abstract
+      vitro:publicDescriptionAnnot
+              "Краткое описание ресурса."@ru-RU .
+
+vivo:courseCredits
+      vitro:publicDescriptionAnnot
+              "Количество зачётов по курсу, назначенных учебным заведением."@ru-RU .
+
+bibo:number
+      vitro:publicDescriptionAnnot
+              "Общий номер предмета или документа. Не путать с номером выпуска. Возможно, штрих-код?"@ru-RU .
+
+vivo:teachingOverview
+      vitro:publicDescriptionAnnot
+              "Пожалуйста, дайте краткое связное описание Вашей преподавательской деятельности, целей и/или опыта."@ru-RU .
+
+vivo:rank
+      vitro:publicDescriptionAnnot
+              "введите позицию в списке, в которой вы хотите, чтобы отображался данный элемент"@ru-RU .
+
+bibo:issn
+      vitro:publicDescriptionAnnot
+              "Международный стандартный серийный номер (ISSN) — это уникальный восьмизначный номер, используемый для идентификации периодического издания."@ru-RU .
+
+vivo:patentNumber
+      vitro:publicDescriptionAnnot
+              "Уникальный номер, присваиваемый патентной заявке при выдаче патента Ведомством по патентам и товарным знакам США."@ru-RU .
+
+vivo:contactInformation
+      vitro:publicDescriptionAnnot
+              "Контактная информация для конкретного мероприятия. Это может быть имя, электронная почта, номер телефона или способ(ы) связаться с кем-либо для получения информации о мероприятии."@ru-RU .
+
+vivo:overview
+      vitro:publicDescriptionAnnot
+              "Краткое резюме для использования в качестве единого пояснительного описания."@ru-RU .
+
+vivo:description
+      vitro:publicDescriptionAnnot
+              "Сведения о ресурсе."@ru-RU .
+
+vivo:grantSubcontractedThrough
+      vitro:fullPropertyNameAnnot
+              "Субподрядчик по гранту"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Это связывает грант с организацией, предоставляющей субконтракт по гранту."@ru-RU .
+
+bibo:recipient
+      vitro:fullPropertyNameAnnot
+              "адресат"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Это связывает документ коммуникационного характера с агентом, которому он направляется."@ru-RU .
+
+vivo:freetextKeyword
+      vitro:publicDescriptionAnnot
+              "Предназначен для ввода отдельного слова или короткой фразы, исключительно в ситуации, когда ни одного слова из контролируемого лексического состава не обнаруживается. Может также использоваться для выделения тонких различий в работе."@ru-RU .
+
+bibo:identifier
+      vitro:publicDescriptionAnnot
+              "Уникальный идентификатор документа или коллекции. Это свойство данных никто не видит и не меняет."@ru-RU .
+
+bibo:reviewOf
+      vitro:fullPropertyNameAnnot
+              "обзор"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Относит документ-обзор к рассматриваемому объекту (ресурсу, предмету и т.д.)."@ru-RU .
+
+vivo:reviewedIn
+      vitro:fullPropertyNameAnnot
+              "рассмотрено в"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Соотносит что-либо с обзором этого предмета."@ru-RU .
+
+vivo:proceedingsOf
+      vitro:fullPropertyNameAnnot
+              "труды"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Это связывает материалы с конференцией, на которой они были представлены."@ru-RU .
+
+vivo:hasPrerequisite
+      vitro:fullPropertyNameAnnot
+              "hasPrerequisite"@ru-RU .
+
+bibo:pageEnd
+      vitro:publicDescriptionAnnot
+              "Номер конечной страницы в непрерывном диапазоне страниц."@ru-RU .
+
+<http://purl.org/spar/c4o/hasGlobalCitationFrequency>
+      vitro:publicDescriptionAnnot
+              "„Общая частота цитирования“ — это объект, ссылающийся на отдельный источник, дату и значение; для ясности включите значение, источник и дату в метку."@ru-RU .
+
+bibo:translationOf
+      vitro:fullPropertyNameAnnot
+              "перевод"^^xsd:string ;
+      vitro:publicDescriptionAnnot
+              "Относит переведенный документ к оригиналу."@ru-RU .
+
+bibo:performer
+      vitro:fullPropertyNameAnnot
+              "исполнитель"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Это связывает представление с человеком или организацией, которые его осуществляют."@ru-RU .
+
+# note that this applies to grants only; see hasOutputContext for obo:RO_0002234 in /rdf/display/everytime/propertyConfig.n3
+vivo:supportedInformationResource
+      vitro:publicDescriptionAnnot
+              "задайте публикацию или документ, поддержанный данным грантом"@ru-RU .
+
+bibo:eissn
+      vitro:publicDescriptionAnnot
+              "Международный стандартный серийный номер (ISSN) — это уникальный восьмизначный номер, используемый для идентификации периодического издания. EISSN — это ISSN для электронных периодических изданий."@ru-RU .
+
+vivo:publisher
+      vitro:fullPropertyNameAnnot
+              "издатель"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Относит опубликованные материалы к организации, занимающейся издательской деятельностью."@ru-RU .
+
+vivo:seatingCapacity
+      vitro:publicDescriptionAnnot
+              "Количество людей, которые могут быть размещены в конкретном помещении, в силу физической доступности пространства или ограничений, установленных законом."@ru-RU .
+
+vivo:middleName
+      vitro:publicDescriptionAnnot
+              "Отчество или инициал, которые вы обычно используете, обозначая себя. Можно указать только что-то одно."@ru-RU .
+
+vivo:licenseNumber
+      vitro:publicDescriptionAnnot
+              "номер лицензии"@ru-RU .
+
+bibo:gtin14
+      vitro:publicDescriptionAnnot
+              "Глобальный номер товара (GTIN) — это идентификатор для рыночных товаров, разработанный GS1 (в состав которого входят бывшие EAN International и Uniform Code Council). GTIN — это „зонтичный“ термин, используемый для описания всего семейства структур данных GS1 для идентификации представленных на рынке товаров (продуктов и услуг). GTIN может состоять из 8, 12, 13 или 14 цифр."@ru-RU .
+
+bibo:section
+      vitro:publicDescriptionAnnot
+              "Номер раздела"@ru-RU .
+
+bibo:interviewer
+      vitro:fullPropertyNameAnnot
+              "интервьюер"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Агент, который берет интервью у другого агента."@ru-RU .
+
+vivo:orcidId
+      vitro:publicDescriptionAnnot
+              "ORCID (Open Researcher and Contributor ID) — это предлагаемый непатентованный буквенно-цифровой код, который должен однозначно идентифицировать авторов научных и иных академических работ."@ru-RU .
+
+vivo:hasFacility
+      vitro:fullPropertyNameAnnot
+              "располагает объектом"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Это связывает организацию с объектом, которым она владеет или управляет."@ru-RU .
+
+<http://vivoweb.org/ontology/scientific-research#nctId>
+      vitro:publicDescriptionAnnot
+              "Регистрационный номер ClinicalTrials.gov"@ru-RU .
+
+vivo:equipmentFor
+      vitro:fullPropertyNameAnnot
+              "оборудование для"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Это связывает оборудование с организацией, которой оно принадлежит."@ru-RU .
+
+bibo:prefixName
+      vitro:publicDescriptionAnnot
+              "Титул, указываемый перед именем человека"@ru-RU .
+
+vivo:researcherId
+      vitro:publicDescriptionAnnot
+              "Идентификационный номер, присвоенный профилю, созданному исследователем в ResearcherID (https://researcherid.com/)."@ru-RU .
+bibo:annotates
+      vitro:fullPropertyNameAnnot
+              "отмечает"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Существенное или разъясняющее примечание к документу."@ru-RU .
+
+bibo:reversedBy
+      vitro:fullPropertyNameAnnot
+              "reversedBy"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Юридическое решение, отменяющее ранее действовавшее постановление.  Это соотносит правовое решение с другим правовым решением, отменяющим первое."@ru-RU .
+
+vivo:majorField
+      vitro:publicDescriptionAnnot
+              "Основная предметная направленность степени, описываемая в документе об образовании."@ru-RU .
+
+bibo:upc
+      vitro:publicDescriptionAnnot
+              "Универсальный код товара (UPC) — это симбология штрих-кода (т.е. определенный тип штрих-кода), который широко используется в Канаде и США для отслеживания товаров, продаваемых в магазинах."@ru-RU .
+
+<http://vivoweb.org/ontology/scientific-research#irbNumber>
+      vitro:publicDescriptionAnnot
+              "Номер, присвоенный клиническому испытанию, Советом по институциональному надзору (IRB)."@ru-RU .
+
+bibo:director
+      vitro:fullPropertyNameAnnot
+              "режиссёр"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Это связывает объект с кинорежиссером."@ru-RU .
+
+bibo:lccn
+      vitro:publicDescriptionAnnot
+              "Контрольный номер Библиотеки Конгресса США или LCCN - это система нумерации каталожных записей в Библиотеке Конгресса США."@ru-RU .
+
+<http://purl.org/dc/terms/relation>
+      vitro:fullPropertyNameAnnot
+              "relation"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Связанный ресурс. Рекомендуемый подход состоит в обозначении связанного ресурса при помощью строки, которая должна соответствовать формальной системе идентификации. "@ru-RU .
+
+skos:broader
+      vitro:fullPropertyNameAnnot
+              "более широкое понятие"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Это соотносит термин, более широкий по значению (т.е. более общий), с другим термином, более узким по значению, когда объем (значение) более узкого термина полностью входит в объем более широкого термина."@ru-RU .
+
+vivo:departmentOrSchool
+      vitro:publicDescriptionAnnot
+              "Название факультета или название учебного заведения, используемое при описании образования персоны."@ru-RU .
+
+bibo:court
+      vitro:fullPropertyNameAnnot
+              "суд"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Соотносит юридический документ с организацией. Bibo (библиографическая онтология) даёт такое определение:  „Суд, связанный с юридическим документом; например, тот, который выносит решение.“"@ru-RU .
+
+bibo:translator
+      vitro:fullPropertyNameAnnot
+              "переводчик"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Это связывает информационный ресурс с переводчиком письменного документа с одного языка на другой."@ru-RU .
+
+vivo:distributesFundingFrom
+      vitro:fullPropertyNameAnnot
+              "распределяет средства из"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Указывает организацию, которая распределяет финансирование от другой организации. Например, указывает источник сквозного финансирования."@ru-RU .
+
+skos:related
+      vitro:fullPropertyNameAnnot
+              "связанный"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Это указание на то, что термин связан с другим термином в том же словаре."@ru-RU .
+
+vivo:providesFundingThrough
+      vitro:fullPropertyNameAnnot
+              "обеспечивает финансирование через"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Относит финансирующую организацию к другой финансирующей организации, через которую она предоставляет финансирование. Обратите внимание, что организации могут быть отнесены к более чем одному типу."@ru-RU .
+
+bibo:interviewee
+      vitro:fullPropertyNameAnnot
+              "интервьюируемый"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Агент, которого интервьюирует другой агент."@ru-RU .
+
+bibo:transcriptOf
+      vitro:fullPropertyNameAnnot
+              "расшифровка из"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Относит документ к некоторому расшифрованному оригиналу."@ru-RU .
+
+bibo:issuer
+      vitro:fullPropertyNameAnnot
+              "публикатор"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Организация, ответственная за выпуск часто неофициально публикуемых документов, таких как пресс-релизы, отчеты и т.д."@ru-RU .
+
+vivo:start
+      vitro:publicDescriptionAnnot
+              "начало временного промежутка."@ru-RU .
+
+bibo:oclcnum
+      vitro:publicDescriptionAnnot
+              "oclcnum - это последовательный номер включения, присваиваемый OCLC при вводе библиографических записей в OCLC WorldCat (онлайновый объединенный каталог OCLC)."@ru-RU .
+
+bibo:isbn10
+      vitro:publicDescriptionAnnot
+              "Международный стандартный номер книги (ISBN) — это уникальный[1][2] цифровой идентификатор коммерческой книги, основанный на 9-значном коде стандартной нумерации книг (SBN), созданном Гордоном Фостером. 10-значный формат ISBN был разработан Международной организацией по стандартизации и опубликован в 1970 году в качестве международного стандарта ISO 2108."@ru-RU .
+
+vivo:prerequisiteFor
+      vitro:fullPropertyNameAnnot
+              "предварительное условие для"@ru-RU .
+
+bibo:isbn13
+      vitro:publicDescriptionAnnot
+              "Международный стандартный номер книги (ISBN) — это уникальный[1][2] цифровой идентификатор коммерческой книги, основанный на 9-значном коде стандартной нумерации книг (SBN), созданном Гордоном Фостером. С 1 января 2007 года ISBN содержит 13 цифр — формат, совместимый с книжным кодом EAN-13."@ru-RU .
+
+vivo:cclCode
+      vitro:publicDescriptionAnnot
+              "Оригинальная и перекрестные ссылки на классификацию (классификации) США, к которой была отнесена опубликованная заявка на момент публикации — включает информацию как о первичном, так и о вторичном классе."@ru-RU .
+
+bibo:uri
+      vitro:publicDescriptionAnnot
+              "Универсальный идентификатор ресурса (URI) документа."@ru-RU .
+
+vivo:translatorOf
+      vitro:fullPropertyNameAnnot
+              "переводчик"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Это отcылка к переводчику информационного ресурса."@ru-RU .
+
+bibo:eanucc13
+      vitro:publicDescriptionAnnot
+              "EAN International-Uniform Code Council (EAN-UCC) - это семейство стандартов цепочки поставок, формально называвшееся EAN.UCC System и включавшее штрих-коды товаров, которые печатаются на подавляющем большинстве продуктов, продающихся в магазинах по всему миру, а также стандарты электронной коммерции."@ru-RU .
+
+vivo:hasTranslation
+      vitro:fullPropertyNameAnnot
+              "имеется перевод"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Соотносит оригинальный документ с переводом этого документа."@ru-RU .
+
+vivo:dateIssued
+      vitro:publicDescriptionAnnot
+              "Дата выдачи патента."@ru-RU .
+
+vivo:identifier
+      vitro:publicDescriptionAnnot
+              "Родительское свойство для институциональных и других идентификаторов. Это свойство данных никто не видит и не меняет."@ru-RU .
+
+vivo:totalAwardAmount
+      vitro:publicDescriptionAnnot
+              "Сюда входят прямые затраты, используемые для деятельности по гранту, плюс косвенные затраты, связанные с администрированием гранта."@ru-RU .
+
+vivo:distributes
+      vitro:fullPropertyNameAnnot
+              "распространяет"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Это отношение какой-либо сущности к тому, что она распространяет. Обратным к этому отношением является distributor, в спецификации FOAF определяемое как — Распространитель документа или набора документов."@ru-RU .
+
+<http://purl.org/dc/terms/contributor>
+      vitro:fullPropertyNameAnnot
+              "соавтор"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Субъект, принявший участие в создании ресурса. В роли такого соавтора могут выступать персона, организация или служба. Как правило, для указания на такой субъект используется имя соавтора."@ru-RU .
+
+vivo:hrJobTitle
+      vitro:publicDescriptionAnnot
+              "Конкретное обозначение должности в кадровой номенклатуре, обычно связанное с описанием должности, в котором подробно перечисляются задачи и обязанности, связанные с ней."@ru-RU .
+
+<http://purl.org/vocab/vann/preferredNamespaceUri>
+      vitro:publicDescriptionAnnot
+              "Полный URI пространства имен."@ru-RU .
+
+vivo:subcontractsGrant
+      vitro:fullPropertyNameAnnot
+              "субподряды по гранту"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Это связывает агентство, организацию или физическое лицо, предоставляющее субконтракт на грант, с самим грантом."@ru-RU .
+
+vivo:dateFiled
+      vitro:publicDescriptionAnnot
+              "Дата подачи заявки на патент."@ru-RU .
+
+bibo:subsequentLegalDecision
+      vitro:fullPropertyNameAnnot
+              "последующее правовое решениеы"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Юридическое решение по апелляции, которое принимает меры по делу (подтверждает его, отменяет и т.д.)."@ru-RU .
+
+bibo:coden
+      vitro:publicDescriptionAnnot
+              "CODEN - согласно стандарту ASTM E250 - это шестизначный буквенно-цифровой библиографический код, который обеспечивает краткую, уникальную и однозначную идентификацию названий серийных и несерийных публикаций из всех предметных областей."@ru-RU .
+
+vivo:scopusId
+      vitro:publicDescriptionAnnot
+              "Цифровой код, присваиваемый автору в Scopus.  В Scopus это называется „Идентификатор автора“."@ru-RU .
+
+vivo:sponsorAwardId
+      vitro:publicDescriptionAnnot
+              "Идентификатор организации, учредившей премию."@ru-RU .
+      
+vivo:degreeCandidacy
+      vitro:fullPropertyNameAnnot
+              "Кандидатская степень"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Это соотносит консультативные отношения с академической степенью."@ru-RU .
+
+vivo:hasProceedings
+      vitro:fullPropertyNameAnnot
+              "hasProceedings"@ru-RU ;
+      vitro:publicDescriptionAnnot
+              "Это связывает материалы конференции с конференцией, на которой они были представлены."@ru-RU .
+
+bibo:edition
+      vitro:publicDescriptionAnnot
+              "Название, определяющее специальное издание документа. Обычно это символьный код, составленный из номера версии и названия."@ru-RU .
+
+vivo:dateTime
+      vitro:publicDescriptionAnnot
+              "Используйте, когда уместна единственная отметка даты и времени, а не указание моментов начала и окончания процесса, или когда необходимо указать несколько меток даты и времени."@ru-RU .
+
