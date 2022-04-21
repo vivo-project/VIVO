@@ -53,6 +53,12 @@
             <version>${project.version}</version>
             <type>war</type>
         </dependency>
+         <dependency>
+            <groupId>org.vivoweb</groupId>
+            <artifactId>vivo-languages-webapp-sr_Latn_RS</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
         <dependency>
             <groupId>org.vivoweb</groupId>
             <artifactId>vivo-languages-webapp-ru_RU</artifactId>
