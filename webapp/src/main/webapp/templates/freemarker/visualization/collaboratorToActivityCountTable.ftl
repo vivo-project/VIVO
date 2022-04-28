@@ -16,8 +16,17 @@
     </thead>
     <tbody>
 
+    <#assign addLine = true />
     <#list tableContent.collaborators as collaborator>
         <#if collaborator_index gt 0>
+            <#if addLine && collaborator.isVCard>
+                <#assign addLine = false />
+                <tr>
+                    <td colspan="2">
+                        <hr />
+                    </td>
+                </tr>
+            </#if>
             <tr>
                 <td>
                 ${collaborator.collaboratorName}
