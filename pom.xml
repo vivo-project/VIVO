@@ -4,7 +4,7 @@
 
     <groupId>org.vivoweb</groupId>
     <artifactId>vivo-project</artifactId>
-    <version>1.12.3-SNAPSHOT</version>
+    <version>1.13.0</version>
     <packaging>pom</packaging>
 
     <name>VIVO</name>
