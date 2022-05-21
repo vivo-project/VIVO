@@ -108,13 +108,13 @@
             <groupId>org.vivoweb</groupId>
             <artifactId>vivo-languages-home-core</artifactId>
             <version>${project.version}</version>
-            <type>pom</type>
+            <type>tar.gz</type>
         </dependency>
         <dependency>
             <groupId>org.vivoweb</groupId>
             <artifactId>vitro-languages-home-core</artifactId>
             <version>${project.version}</version>
-            <type>pom</type>
+            <type>tar.gz</type>
         </dependency>
     </dependencies>
 </project>
