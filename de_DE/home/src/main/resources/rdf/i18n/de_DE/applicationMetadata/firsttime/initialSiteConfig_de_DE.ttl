@@ -15,7 +15,5 @@
         Systemen in die Datenbasis gebracht werden, wie z. B. Förderprojekte, Kurse oder anderen lokal vorhandenen Datenbeständen.
         </p><p>Für mehr Informationen folgen Sie diesem Link: <a href=\"http://vivoweb.org\">VIVO Project</a>
         .</p>"""@de-DE ;
-  vitro:shortHand "connect * share * discover" ;
-  vitro:themeDir "themes/wilma/" ;
   rdfs:label "VIVO"@de-DE ;
 ].
