@@ -4,13 +4,13 @@
 
     <groupId>org.vivoweb</groupId>
     <artifactId>vivo-languages-home-en_US</artifactId>
-    <version>1.12.3-SNAPSHOT</version>
+    <version>1.13.0</version>
     <packaging>pom</packaging>
 
     <parent>
         <groupId>org.vivoweb</groupId>
         <artifactId>vivo-languages-en_US</artifactId>
-        <version>1.12.3-SNAPSHOT</version>
+        <version>1.13.0</version>
         <relativePath>..</relativePath>
     </parent>
 
