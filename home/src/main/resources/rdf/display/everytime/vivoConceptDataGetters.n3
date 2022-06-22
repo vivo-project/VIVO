@@ -25,14 +25,14 @@ display:getDepartmentDataGetter
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX vivo: <http://vivoweb.org/ontology/core#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-        SELECT DISTINCT (str(?departmentLabel) AS ?deptLabel) ?dept
+        SELECT DISTINCT ?deptLabel ?dept
         WHERE {
             ?individualURI vivo:researchAreaOf ?person .
 			?person vivo:relatedBy ?posn .
 			?posn a vivo:Position .
             ?posn  vivo:relates ?dept .
             ?dept a foaf:Organization .
-            ?dept rdfs:label ?departmentLabel
+            ?dept rdfs:label ?deptLabel
             OPTIONAL { ?posn vivo:dateTimeInterval ?dti
                      OPTIONAL { ?dti vivo:end ?end .
                                 ?end vivo:dateTime ?endDate
@@ -51,10 +51,10 @@ display:getDepartmentDataGetter
 		        """
 		        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 		        PREFIX vivo: <http://vivoweb.org/ontology/core#>
-		        SELECT DISTINCT (str(?vocabularySourceName) AS ?vocabService)
+		        SELECT DISTINCT ?vocabService
 		        WHERE {
 		            ?individualURI rdfs:isDefinedBy ?vocabularySource .
-		            ?vocabularySource rdfs:label ?vocabularySourceName .
+		            ?vocabularySource rdfs:label ?vocabService .
 		        }
 		        """ .
 
@@ -71,27 +71,24 @@ display:getDepartmentDataGetter
     a   <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> ;
     <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#query>
         """
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX vivo: <http://vivoweb.org/ontology/core#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-        SELECT DISTINCT (str (?prsnLabel) AS ?personLabel)
+        SELECT DISTINCT ?personLabel
                         ?person
-                        (Str(?researchAreaLabel) AS ?raLabel)
-                        (str(?departmentLabel) AS ?orgLabel)
+                        ?raLabel
+                        ?orgLabel
                         ?ra
-                        ?org
         WHERE {
             ?orgURI vivo:relatedBy ?posn .
             ?posn a vivo:Position .
-            ?orgURI rdfs:label ?departmentLabel .
+            ?orgURI rdfs:label ?orgLabel .
             ?posn  vivo:relates ?person .
             ?person a foaf:Person .
-            ?person rdfs:label ?prsnLabel .
+            ?person rdfs:label ?personLabel .
             ?person vivo:hasResearchArea ?raURI .
-            ?raURI rdfs:label ?researchAreaLabel
+            ?raURI rdfs:label ?raLabel .
             BIND(?raURI AS ?ra)
-            BIND(?orgURI AS ?org)
-
         }
         ORDER BY ?personLabel
         """ ;

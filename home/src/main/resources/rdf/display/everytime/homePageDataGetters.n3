@@ -19,12 +19,11 @@ display:academicDeptsDataGetter
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX vivo: <http://vivoweb.org/ontology/core#>
 
-    SELECT DISTINCT ?theURI (str(?label) as ?name)
+    SELECT DISTINCT ?theURI ?name
     WHERE
     {
           ?theURI a vivo:AcademicDepartment .
-          ?theURI rdfs:label ?label .
-          FILTER (lang(?label) = '?country' ) .
+          ?theURI rdfs:label ?name .
     }
 
     """ .

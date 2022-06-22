@@ -31,14 +31,14 @@ display:getResearchAreaDataGetter
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX vivo: <http://vivoweb.org/ontology/core#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-        SELECT DISTINCT (str(?researchAreaLabel) AS ?raLabel) ?ra
+        SELECT DISTINCT ?raLabel ?ra
         WHERE {
             ?individualURI vivo:relatedBy ?posn .
             ?posn a vivo:Position .
             ?posn  vivo:relates ?person .
             ?person a foaf:Person .
             ?person vivo:hasResearchArea ?ra .
-            ?ra rdfs:label ?researchAreaLabel
+            ?ra rdfs:label ?raLabel
             OPTIONAL { ?posn vivo:dateTimeInterval ?dti
                      OPTIONAL { ?dti vivo:end ?end .
                                 ?end vivo:dateTime ?endDate
@@ -66,21 +66,21 @@ display:getResearchAreaDataGetter
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX vivo: <http://vivoweb.org/ontology/core#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-        SELECT DISTINCT (str (?prsnLabel) AS ?personLabel)
+        SELECT DISTINCT ?personLabel
                         ?person
-                        (str(?researchAreaLabel) AS ?raLabel)
-                        (str(?organizationLabel) AS ?orgLabel)
+                        ?raLabel
+                        ?orgLabel
                         ?ra
                         ?org
         WHERE {
              ?orgURI vivo:relatedBy ?posn .
              ?posn a vivo:Position .
-             ?orgURI rdfs:label ?organizationLabel .
+             ?orgURI rdfs:label ?orgLabel .
              ?posn  vivo:relates ?person .
              ?person a foaf:Person .
-             ?person rdfs:label ?prsnLabel .
+             ?person rdfs:label ?personLabel .
              ?person vivo:hasResearchArea ?raURI .
-             ?raURI rdfs:label ?researchAreaLabel
+             ?raURI rdfs:label ?raLabel
              BIND(?raURI AS ?ra)
              BIND(?orgURI AS ?org)
         }
@@ -104,20 +104,20 @@ display:getResearchAreaDataGetter
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX vivo: <http://vivoweb.org/ontology/core#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-        SELECT DISTINCT (str (?prsnLabel) AS ?personLabel)
+        SELECT DISTINCT ?personLabel
                         ?person
-                        (Str(?researchAreaLabel) AS ?raLabel)
-                        (str(?organizationLabel) AS ?orgLabel)
+                        ?raLabel
+                        ?orgLabel
                         ?ra
         WHERE {
             ?orgURI vivo:relatedBy ?posn .
             ?posn a vivo:Position .
-            ?orgURI rdfs:label ?organizationLabel .
+            ?orgURI rdfs:label ?orgLabel .
             ?posn  vivo:relates ?person .
             ?person a foaf:Person .
-            ?person rdfs:label ?prsnLabel .
+            ?person rdfs:label ?personLabel .
             ?person vivo:hasResearchArea ?raURI .
-            ?raURI rdfs:label ?researchAreaLabel
+            ?raURI rdfs:label ?raLabel
             BIND(?raURI AS ?ra)
 
         }
@@ -177,24 +177,24 @@ display:getGrantsDataGetter
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX vivo: <http://vivoweb.org/ontology/core#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-        SELECT DISTINCT (str (?gLabel) AS ?grantLabel) ?dt (str(?departmentLabel) AS ?deptLabel) ?grant
+        SELECT DISTINCT ?grantLabel ?dt ?deptLabel ?grant
         WHERE {
              ?individualURI vivo:relatedBy ?posn .
              ?posn a vivo:Position .
-             ?individualURI rdfs:label ?departmentLabel .
+             ?individualURI rdfs:label ?deptLabel .
              ?posn  vivo:relates ?person .
              ?person a foaf:Person .
              ?person <http://purl.obolibrary.org/obo/RO_0000053> ?role .
              ?role a vivo:ResearcherRole .
              ?role vivo:relatedBy ?grant .
              ?grant a vivo:Grant .
-             ?grant rdfs:label ?gLabel .
+             ?grant rdfs:label ?grantLabel .
              ?grant vivo:dateTimeInterval ?dti .
              ?dti vivo:end ?end.
              ?end vivo:dateTime ?dt
              FILTER (?dt > now())
         }
-        ORDER BY ?gLabel
+        ORDER BY ?grantLabel
         """ ;
     <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#saveToVar> "deptGrants" .
 
