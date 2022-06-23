@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.RDFS;
-import org.apache.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.beans.VClass;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -71,17 +70,17 @@ public class VIVONewIndividualFormGenerator extends BaseEditConfigurationGenerat
 
     	config.addField(new FieldVTwo().
     	        setName("firstName").
-    	        setRangeDatatypeUri(XSD.xstring.getURI()).
+    	        setRangeDatatypeUri(RDF.dtLangString.getURI()).
     	        setValidators(getFirstNameValidators(vreq)));
 
     	config.addField(new FieldVTwo().
     	        setName("middleName").
-    	        setRangeDatatypeUri(XSD.xstring.getURI()).
+    	        setRangeDatatypeUri(RDF.dtLangString.getURI()).
     	        setValidators(getMiddleNameValidators(vreq)));
 
     	config.addField(new FieldVTwo().
                 setName("lastName").
-    	        setRangeDatatypeUri(XSD.xstring.getURI()).
+    	        setRangeDatatypeUri(RDF.dtLangString.getURI()).
                 setValidators(getLastNameValidators(vreq)));
 
     	config.addField(new FieldVTwo().

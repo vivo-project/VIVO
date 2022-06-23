@@ -90,8 +90,8 @@ public class OrganizationForTrainingGenerator  extends VivoBaseGenerator impleme
 
         conf.addField( new FieldVTwo().
                 setName("majorField").
-                setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators(list("datatype:" + XSD.xstring.toString())));
+                setRangeDatatypeUri( RDF.dtLangString.getURI() ).
+                setValidators(list("datatype:" + RDF.dtLangString.getURI())));
 
         conf.addField( new FieldVTwo().
                 setName("existingPerson")
@@ -124,14 +124,14 @@ public class OrganizationForTrainingGenerator  extends VivoBaseGenerator impleme
 
         conf.addField( new FieldVTwo().
                 setName("firstName").
-                setRangeDatatypeUri(XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString()) )
+                setRangeDatatypeUri(RDF.dtLangString.getURI() ).
+                setValidators( list("datatype:" + RDF.dtLangString.getURI()) )
                 );
 
         conf.addField( new FieldVTwo().
                 setName("lastName").
-                setRangeDatatypeUri(XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString()) )
+                setRangeDatatypeUri(RDF.dtLangString.getURI() ).
+                setValidators( list("datatype:" + RDF.dtLangString.getURI()) )
                 );
 
         conf.addField( new FieldVTwo().
@@ -142,13 +142,13 @@ public class OrganizationForTrainingGenerator  extends VivoBaseGenerator impleme
 
         conf.addField( new FieldVTwo().
                 setName("dept").
-                setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators(list("datatype:" + XSD.xstring.toString())));
+                setRangeDatatypeUri( RDF.dtLangString.getURI() ).
+                setValidators(list("datatype:" + RDF.dtLangString.getURI())));
 
         conf.addField( new FieldVTwo().
                 setName("info").
-                setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators(list("datatype:" + XSD.xstring.toString())));
+                setRangeDatatypeUri( RDF.dtLangString.getURI() ).
+                setValidators(list("datatype:" + RDF.dtLangString.getURI())));
 
         FieldVTwo startField = new FieldVTwo().
         						setName("startField");

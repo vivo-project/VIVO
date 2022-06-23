@@ -261,8 +261,8 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 	private void setFirstNameField(EditConfigurationVTwo editConfiguration) {
 		editConfiguration.addField(new FieldVTwo().
 				setName("firstName").
-				setValidators(list("datatype:" + XSD.xstring.toString())).
-				setRangeDatatypeUri(XSD.xstring.toString())
+				setValidators(list("datatype:" + RDF.dtLangString.getURI())).
+				setRangeDatatypeUri(RDF.dtLangString.getURI())
 				);
 	}
 
@@ -270,16 +270,16 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 	private void setMiddleNameField(EditConfigurationVTwo editConfiguration) {
 		editConfiguration.addField(new FieldVTwo().
 				setName("middleName").
-				setValidators(list("datatype:" + XSD.xstring.toString())).
-				setRangeDatatypeUri(XSD.xstring.toString())
+				setValidators(list("datatype:" + RDF.dtLangString.getURI())).
+				setRangeDatatypeUri(RDF.dtLangString.getURI())
 				);
 	}
 
 	private void setLastNameField(EditConfigurationVTwo editConfiguration) {
 		editConfiguration.addField(new FieldVTwo().
 				setName("lastName").
-				setValidators(list("datatype:" + XSD.xstring.toString())).
-				setRangeDatatypeUri(XSD.xstring.toString())
+				setValidators(list("datatype:" + RDF.dtLangString.getURI())).
+				setRangeDatatypeUri(RDF.dtLangString.getURI())
 				);
 	}
 

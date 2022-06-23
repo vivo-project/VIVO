@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
+import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -62,25 +62,25 @@ public class AddFullNameToPersonGenerator extends VivoBaseGenerator implements
 
         conf.addField( new FieldVTwo().
                 setName("firstName")
-                .setRangeDatatypeUri( XSD.xstring.toString() ).
+                .setRangeDatatypeUri( RDF.dtLangString.getURI() ).
                 setValidators( list("nonempty") ));
 
         conf.addField( new FieldVTwo().
                 setName("middleName")
-                .setRangeDatatypeUri( XSD.xstring.toString()) );
+                .setRangeDatatypeUri( RDF.dtLangString.getURI()) );
 
         conf.addField( new FieldVTwo().
                 setName("lastName")
-                .setRangeDatatypeUri( XSD.xstring.toString() ).
+                .setRangeDatatypeUri( RDF.dtLangString.getURI() ).
                 setValidators( list("nonempty") ));
 
         conf.addField( new FieldVTwo().
                 setName("suffix")
-                .setRangeDatatypeUri( XSD.xstring.toString()) );
+                .setRangeDatatypeUri( RDF.dtLangString.getURI()) );
 
             conf.addField( new FieldVTwo().
                 setName("prefix")
-                .setRangeDatatypeUri( XSD.xstring.toString()) );
+                .setRangeDatatypeUri( RDF.dtLangString.getURI()) );
 
         conf.addValidator(new AntiXssValidation());
 

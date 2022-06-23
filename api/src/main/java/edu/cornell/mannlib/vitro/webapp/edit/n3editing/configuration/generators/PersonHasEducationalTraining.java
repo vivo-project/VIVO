@@ -114,8 +114,8 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
 
         conf.addField( new FieldVTwo().
                 setName("majorField").
-                setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators(list("datatype:" + XSD.xstring.toString())));
+                setRangeDatatypeUri( RDF.dtLangString.getURI() ).
+                setValidators(list("datatype:" + RDF.dtLangString.getURI())));
 
         conf.addField( new FieldVTwo().
                 setName("existingOrg")
@@ -160,13 +160,13 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
 
         conf.addField( new FieldVTwo().
                 setName("dept").
-                setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators(list("datatype:" + XSD.xstring.toString())));
+                setRangeDatatypeUri( RDF.dtLangString.getURI() ).
+                setValidators(list("datatype:" + RDF.dtLangString.getURI())));
 
         conf.addField( new FieldVTwo().
                 setName("info").
-                setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators(list("datatype:" + XSD.xstring.toString())));
+                setRangeDatatypeUri( RDF.dtLangString.getURI() ).
+                setValidators(list("datatype:" + RDF.dtLangString.getURI())));
 
         FieldVTwo startField = new FieldVTwo().
         						setName("startField");

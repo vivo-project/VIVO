@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
+import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -58,7 +58,7 @@ public class PersonHasPreferredTitleGenerator extends VivoBaseGenerator implemen
 
         conf.addField( new FieldVTwo().
                 setName("preferredTitle")
-                .setRangeDatatypeUri( XSD.xstring.toString() ).
+                .setRangeDatatypeUri( RDF.dtLangString.getURI() ).
                 setValidators( list("nonempty") ));
 
         conf.addValidator(new AntiXssValidation());

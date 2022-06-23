@@ -759,19 +759,17 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
 
     private void setFirstNameField(EditConfigurationVTwo editConfiguration) {
-        String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
                 setName("firstName").
-                setValidators(list("datatype:" + stringDatatypeUri)).
-                setRangeDatatypeUri(stringDatatypeUri));
+                setValidators(list("datatype:" + langStringDatatypeUri)).
+                setRangeDatatypeUri(langStringDatatypeUri));
     }
 
     private void setLastNameField(EditConfigurationVTwo editConfiguration) {
-        String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
                 setName("lastName").
-                setValidators(list("datatype:" + stringDatatypeUri)).
-                setRangeDatatypeUri(stringDatatypeUri));
+                setValidators(list("datatype:" + langStringDatatypeUri)).
+                setRangeDatatypeUri(langStringDatatypeUri));
     }
     private void setEventUriField(EditConfigurationVTwo editConfiguration) {
         editConfiguration.addField(new FieldVTwo().
@@ -819,59 +817,52 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     }
 
     private void setLocaleField(EditConfigurationVTwo editConfiguration) {
-        String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
                 setName("locale").
-                setValidators(list("datatype:" + stringDatatypeUri)).
-                setRangeDatatypeUri(stringDatatypeUri));
+                setValidators(list("datatype:" + langStringDatatypeUri)).
+                setRangeDatatypeUri(langStringDatatypeUri));
     }
 
     private void setVolumeField(EditConfigurationVTwo editConfiguration) {
-        String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
                 setName("volume").
-                setValidators(list("datatype:" + stringDatatypeUri)).
-                setRangeDatatypeUri(stringDatatypeUri));
+                setValidators(list("datatype:" + langStringDatatypeUri)).
+                setRangeDatatypeUri(langStringDatatypeUri));
     }
 
     private void setNumberField(EditConfigurationVTwo editConfiguration) {
-        String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
                 setName("number").
-                setValidators(list("datatype:" + stringDatatypeUri)).
-                setRangeDatatypeUri(stringDatatypeUri));
+                setValidators(list("datatype:" + langStringDatatypeUri)).
+                setRangeDatatypeUri(langStringDatatypeUri));
     }
 
     private void setIssueField(EditConfigurationVTwo editConfiguration) {
-        String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
                 setName("issue").
-                setValidators(list("datatype:" + stringDatatypeUri)).
-                setRangeDatatypeUri(stringDatatypeUri));
+                setValidators(list("datatype:" + langStringDatatypeUri)).
+                setRangeDatatypeUri(langStringDatatypeUri));
     }
 
     private void setChapterNbrField(EditConfigurationVTwo editConfiguration) {
-        String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
                 setName("chapterNbr").
-                setValidators(list("datatype:" + stringDatatypeUri)).
-                setRangeDatatypeUri(stringDatatypeUri));
+                setValidators(list("datatype:" + langStringDatatypeUri)).
+                setRangeDatatypeUri(langStringDatatypeUri));
     }
 
     private void setStartPageField(EditConfigurationVTwo editConfiguration) {
-        String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
                 setName("startPage").
-                setValidators(list("datatype:" + stringDatatypeUri)).
-                setRangeDatatypeUri(stringDatatypeUri));
+                setValidators(list("datatype:" + langStringDatatypeUri)).
+                setRangeDatatypeUri(langStringDatatypeUri));
     }
 
     private void setEndPageField(EditConfigurationVTwo editConfiguration) {
-        String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
                 setName("endPage").
-                setValidators(list("datatype:" + stringDatatypeUri)).
-                setRangeDatatypeUri(stringDatatypeUri));
+                setValidators(list("datatype:" + langStringDatatypeUri)).
+                setRangeDatatypeUri(langStringDatatypeUri));
     }
 
     private void setDateTimeField(EditConfigurationVTwo editConfiguration) {
