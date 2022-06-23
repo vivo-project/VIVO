@@ -15,6 +15,7 @@ import org.apache.jena.query.QueryFactory;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.sparql.resultset.ResultSetMem;
+import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
@@ -114,8 +115,8 @@ public class AddEditorshipToPersonGenerator extends VivoBaseGenerator implements
 
         conf.addField( new FieldVTwo().
                 setName("documentLabel").
-                setRangeDatatypeUri(XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString()) )
+                setRangeDatatypeUri(RDF.dtLangString.getURI()).
+                setValidators( list("datatype:" + RDF.dtLangString.getURI()) )
                 );
 
         conf.addField( new FieldVTwo().

@@ -22,6 +22,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.RDFS;
 import org.apache.jena.vocabulary.XSD;
 
@@ -251,8 +252,8 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 	private void setLabelField(EditConfigurationVTwo editConfiguration) {
 		editConfiguration.addField(new FieldVTwo().
 				setName("label").
-				setValidators(list("datatype:" + XSD.xstring.toString())).
-				setRangeDatatypeUri(XSD.xstring.toString())
+				setValidators(list("datatype:" + RDF.dtLangString.getURI())).
+				setRangeDatatypeUri(RDF.dtLangString.getURI())
 				);
 	}
 

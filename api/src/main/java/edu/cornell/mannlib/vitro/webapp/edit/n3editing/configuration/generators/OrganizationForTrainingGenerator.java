@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -104,18 +105,18 @@ public class OrganizationForTrainingGenerator  extends VivoBaseGenerator impleme
 
         conf.addField( new FieldVTwo().
                 setName("personLabel").
-                setRangeDatatypeUri(XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString())));
+                setRangeDatatypeUri(RDF.dtLangString.getURI() ).
+                setValidators( list("datatype:" + RDF.dtLangString.getURI())));
 
         conf.addField( new FieldVTwo().
                 setName("awardedDegreeLabel").
-                setRangeDatatypeUri(XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString())));
+                setRangeDatatypeUri(RDF.dtLangString.getURI() ).
+                setValidators( list("datatype:" + RDF.dtLangString.getURI())));
 
         conf.addField( new FieldVTwo().
                 setName("existingAwardedDegreeLabel").
-                setRangeDatatypeUri(XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString())));
+                setRangeDatatypeUri(RDF.dtLangString.getURI() ).
+                setValidators( list("datatype:" + RDF.dtLangString.getURI())));
 
         conf.addField( new FieldVTwo().
                 setName("personLabelDisplay").

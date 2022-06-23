@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.apache.jena.rdf.model.Literal;
+import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.RDFS;
 import org.apache.jena.vocabulary.XSD;
 
@@ -85,7 +86,7 @@ public class VIVONewIndividualFormGenerator extends BaseEditConfigurationGenerat
 
     	config.addField(new FieldVTwo().
                 setName("label").
-    	        setRangeDatatypeUri(XSD.xstring.getURI()).
+    	        setRangeDatatypeUri(RDF.dtLangString.getURI()).
                 setValidators(getLabelValidators(vreq)));
 
         addFormSpecificData(config, vreq);

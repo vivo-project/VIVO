@@ -14,6 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.apache.jena.rdf.model.Literal;
+import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement;
@@ -259,8 +260,8 @@ public class AddUserDefinedConceptGenerator  extends VivoBaseGenerator implement
 			VitroRequest vreq) {
 		editConfiguration.addField(new FieldVTwo().
 				setName("conceptLabel").
-				setValidators(list("datatype:" + XSD.xstring.toString())).
-				setRangeDatatypeUri(XSD.xstring.toString())
+				setValidators(list("datatype:" + RDF.dtLangString.getURI())).
+				setRangeDatatypeUri(RDF.dtLangString.getURI())
 				);
 	}
 

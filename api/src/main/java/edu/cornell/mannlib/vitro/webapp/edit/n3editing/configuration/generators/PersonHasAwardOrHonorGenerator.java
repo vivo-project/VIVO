@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -118,20 +119,20 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
 
         conf.addField( new FieldVTwo().
                 setName("awardReceiptLabel").
-                setRangeDatatypeUri(XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString()) )
+                setRangeDatatypeUri(RDF.dtLangString.getURI() ).
+                setValidators( list("datatype:" + RDF.dtLangString.getURI()) )
                 );
 
         conf.addField( new FieldVTwo().
                 setName("orgLabel").
-                setRangeDatatypeUri(XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString()) )
+                setRangeDatatypeUri(RDF.dtLangString.getURI() ).
+                setValidators( list("datatype:" + RDF.dtLangString.getURI()) )
                 );
 
         conf.addField( new FieldVTwo().
                 setName("awardLabel").
-                setRangeDatatypeUri(XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString()))
+                setRangeDatatypeUri(RDF.dtLangString.getURI() ).
+                setValidators( list("datatype:" + RDF.dtLangString.getURI()))
                 );
 
         conf.addField( new FieldVTwo().
