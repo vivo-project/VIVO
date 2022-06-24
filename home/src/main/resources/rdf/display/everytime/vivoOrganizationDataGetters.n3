@@ -76,6 +76,7 @@ display:getResearchAreaDataGetter
              ?orgURI vivo:relatedBy ?posn .
              ?posn a vivo:Position .
              ?orgURI rdfs:label ?orgLabel .
+             ?orgURI a foaf:Organization .
              ?posn  vivo:relates ?person .
              ?person a foaf:Person .
              ?person rdfs:label ?personLabel .
@@ -113,6 +114,7 @@ display:getResearchAreaDataGetter
             ?orgURI vivo:relatedBy ?posn .
             ?posn a vivo:Position .
             ?orgURI rdfs:label ?orgLabel .
+            ?orgURI a foaf:Organization .
             ?posn  vivo:relates ?person .
             ?person a foaf:Person .
             ?person rdfs:label ?personLabel .
