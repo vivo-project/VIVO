@@ -12,9 +12,12 @@
     <section id="deptResearchAreas">
         <ul role="list" class="deptDetailsList">
             <#list deptResearchAreas as resultRow>
-		        <li class="deptDetailsListItem">
-		                <a href="${profileUrl(resultRow["person"])}" title="${i18n().person_name}">${resultRow["personLabel"]}</a>
-		        </li>
+               	<#if !personUri?has_content || personUri != resultRow["person"]>
+			        <li class="deptDetailsListItem">
+			                <a href="${profileUrl(resultRow["person"])}" title="${i18n().person_name}">${resultRow["personLabel"]}</a>
+			        </li>
+			    </#if>
+		        <#assign personUri = resultRow["person"] />
             </#list>
         </ul>
 
