@@ -4974,7 +4974,6 @@ See also core:localAwardId.
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#country">
         <rdfs:label xml:lang="en">country</rdfs:label>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Address"/>
     </owl:DatatypeProperty>
 
@@ -4995,7 +4994,6 @@ See also core:localAwardId.
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#familyName">
         <rdfs:label xml:lang="en">has last name</rdfs:label>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Called Family Name in vCard</rdfs:comment>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Name"/>
     </owl:DatatypeProperty>
 
@@ -5039,7 +5037,6 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#givenName">
         <rdfs:label xml:lang="en">first name</rdfs:label>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">called Given Name invCard</rdfs:comment>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Name"/>
     </owl:DatatypeProperty>
 
@@ -5050,7 +5047,6 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#honorificPrefix">
         <rdfs:label xml:lang="en">honorific prefix</rdfs:label>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Called Honorific Prefix in vCard</rdfs:comment>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Name"/>
     </owl:DatatypeProperty>
 
@@ -5060,7 +5056,6 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#honorificSuffix">
         <rdfs:label xml:lang="en">honorific suffix</rdfs:label>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Name"/>
     </owl:DatatypeProperty>
 
@@ -5100,7 +5095,6 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#locality">
         <rdfs:label xml:lang="en">locality</rdfs:label>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Address"/>
     </owl:DatatypeProperty>
 
@@ -5189,7 +5183,6 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#region">
         <rdfs:label xml:lang="en">region</rdfs:label>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Address"/>
     </owl:DatatypeProperty>
 
@@ -5256,7 +5249,6 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#streetAddress">
         <rdfs:label xml:lang="en">street address</rdfs:label>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Address"/>
     </owl:DatatypeProperty>
 
@@ -5285,7 +5277,6 @@ To enable other Gender/Sex codes to be used, this dataproperty has range URI. Th
 
     <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#title">
         <rdfs:label xml:lang="en">title</rdfs:label>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://www.w3.org/2006/vcard/ns#Title"/>
     </owl:DatatypeProperty>
 
@@ -9468,7 +9459,7 @@ This class allows for linking an author to a publication while indicating inform
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#supplementalInformation"/>
-                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -10857,30 +10848,14 @@ Contents
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#country"/>
-                                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-                            </owl:Restriction>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#country"/>
-                                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
-                            </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#locality"/>
-                                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-                            </owl:Restriction>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#locality"/>
-                                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
-                            </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
+                   <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#country"/>
+                        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#locality"/>
+                        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+                    </owl:Restriction>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
                             <owl:Restriction>
@@ -10893,30 +10868,14 @@ Contents
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#region"/>
-                                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-                            </owl:Restriction>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#region"/>
-                                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
-                            </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#streetAddress"/>
-                                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-                            </owl:Restriction>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#streetAddress"/>
-                                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
-                            </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#region"/>
+                        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#streetAddress"/>
+                        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+                    </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
@@ -11914,54 +11873,22 @@ Was called IMPP in vCard.</rdfs:comment>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#familyName"/>
-                                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-                            </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#familyName"/>
                                 <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
-                            </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#givenName"/>
-                                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#givenName"/>
                                 <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
                             </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#honorificPrefix"/>
-                                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-                            </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#honorificPrefix"/>
                                 <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
-                            </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#honorificSuffix"/>
-                                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#honorificSuffix"/>
                                 <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
                             </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
