@@ -10,8 +10,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.vivoweb.webapp.util.ModelUtils;
 
 import org.apache.jena.ontology.OntModel;
@@ -42,7 +40,6 @@ import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
  */
 public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator {
 
-	private Log log = LogFactory.getLog(AddGrantRoleToPersonGenerator.class);
 	private String subjectUri = null;
 	private String predicateUri = null;
 	private String objectUri = null;

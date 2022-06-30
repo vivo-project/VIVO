@@ -8,8 +8,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.XSD;
 
@@ -20,7 +18,6 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.
 
 public class SubjectHasMailingAddressGenerator extends VivoBaseGenerator implements
         EditConfigurationGenerator {
-    private Log log = LogFactory.getLog(SubjectHasMailingAddressGenerator.class);
 
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
