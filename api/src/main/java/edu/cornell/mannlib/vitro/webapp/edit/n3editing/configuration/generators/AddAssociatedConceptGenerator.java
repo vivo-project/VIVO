@@ -333,7 +333,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 			VitroRequest vreq) {
 		editConfiguration.addField(new FieldVTwo().
 				setName("conceptLabel").
-				setRangeDatatypeUri(XSD.xstring.toString())
+				setRangeDatatypeUri(RDF.dtLangString.getURI())
 				);
 	}
 
@@ -349,7 +349,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 			VitroRequest vreq) {
 		editConfiguration.addField(new FieldVTwo().
 				setName("conceptSemanticTypeLabel").
-				setRangeDatatypeUri(XSD.xstring.toString())
+				setRangeDatatypeUri(RDF.dtLangString.getURI())
 				);
 	}
 

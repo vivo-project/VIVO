@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -111,8 +112,8 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
 
         conf.addField( new FieldVTwo().
                 setName("presentationLabel")
-                .setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString()) )
+                .setRangeDatatypeUri( RDF.dtLangString.getURI() ).
+                setValidators( list("datatype:" + RDF.dtLangString.getURI()) )
                 );
 
         conf.addField( new FieldVTwo().
@@ -124,8 +125,8 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
 
         conf.addField( new FieldVTwo().
                 setName("roleLabel").
-                setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators(list("datatype:" + XSD.xstring.toString())));
+                setRangeDatatypeUri( RDF.dtLangString.getURI() ).
+                setValidators(list("datatype:" + RDF.dtLangString.getURI())));
 
         conf.addField( new FieldVTwo(). // an autocomplete field
                 setName("existingConference")
@@ -133,7 +134,7 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
 
         conf.addField( new FieldVTwo().
                 setName("conferenceLabel").
-                setRangeDatatypeUri(XSD.xstring.toString() )
+                setRangeDatatypeUri(RDF.dtLangString.getURI() )
                 );
 
         conf.addField( new FieldVTwo().

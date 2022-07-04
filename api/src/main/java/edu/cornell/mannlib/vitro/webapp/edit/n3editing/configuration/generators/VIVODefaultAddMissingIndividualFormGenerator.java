@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.jena.vocabulary.RDF;
 
 import edu.cornell.mannlib.vitro.webapp.beans.VClass;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -79,6 +80,7 @@ public class VIVODefaultAddMissingIndividualFormGenerator extends DefaultAddMiss
     	    //make name field
     	    FieldVTwo labelField = new FieldVTwo();
 	        labelField.setName("label");
+	        labelField.setRangeDatatypeUri( RDF.dtLangString.getURI() );
 
     	    FieldVTwo firstNameField = new FieldVTwo();
 	        firstNameField.setName("firstName");
