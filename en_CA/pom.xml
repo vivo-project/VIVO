@@ -4,12 +4,12 @@
 
     <groupId>org.vivoweb</groupId>
     <artifactId>vivo-languages-en_CA</artifactId>
-    <version>1.13.1-SNAPSHOT</version>
+    <version>1.13.0</version>
     <packaging>pom</packaging>
     <parent>
         <groupId>org.vivoweb</groupId>
         <artifactId>vivo-languages</artifactId>
-        <version>1.13.1-SNAPSHOT</version>
+        <version>1.13.0</version>
         <relativePath>..</relativePath>
     </parent>
     <name>VIVO Languages en_CA</name>
@@ -54,7 +54,7 @@
         <connection>scm:git:git@github.com:vivo-project/VIVO-languages.git</connection>
         <developerConnection>scm:git:git@github.com:vivo-project/VIVO-languages.git</developerConnection>
         <url>git@github.com:vivo-project/VIVO-languages.git</url>
-        <tag>HEAD</tag>
+        <tag>vivo-languages-1.13.0</tag>
     </scm>
 
     <properties>
