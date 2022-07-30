@@ -8,9 +8,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
+import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -20,7 +18,6 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.
 
 public class SubjectHasMailingAddressGenerator extends VivoBaseGenerator implements
         EditConfigurationGenerator {
-    private Log log = LogFactory.getLog(SubjectHasMailingAddressGenerator.class);
 
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
@@ -68,12 +65,12 @@ public class SubjectHasMailingAddressGenerator extends VivoBaseGenerator impleme
 
         conf.addField( new FieldVTwo().
                 setName("streetAddress")
-                .setRangeDatatypeUri( XSD.xstring.toString() ).
+                .setRangeDatatypeUri( RDF.dtLangString.getURI() ).
                 setValidators( list("nonempty") ));
 
         conf.addField( new FieldVTwo().
                 setName("country")
-                .setRangeDatatypeUri( XSD.xstring.toString() ).
+                .setRangeDatatypeUri( RDF.dtLangString.getURI() ).
                 setValidators( list("nonempty") ));
 
         conf.addField( new FieldVTwo().
@@ -83,13 +80,13 @@ public class SubjectHasMailingAddressGenerator extends VivoBaseGenerator impleme
 
         conf.addField( new FieldVTwo().
                 setName("locality")
-                .setRangeDatatypeUri( XSD.xstring.toString() ).
+                .setRangeDatatypeUri( RDF.dtLangString.getURI() ).
                 setValidators( list("nonempty") ) );
 
         conf.addField( new FieldVTwo().
                 setName("region")
-                .setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString()) ) );
+                .setRangeDatatypeUri( RDF.dtLangString.getURI() ).
+                setValidators( list("datatype:" + RDF.dtLangString.getURI()) ) );
 
         conf.addValidator(new AntiXssValidation());
 

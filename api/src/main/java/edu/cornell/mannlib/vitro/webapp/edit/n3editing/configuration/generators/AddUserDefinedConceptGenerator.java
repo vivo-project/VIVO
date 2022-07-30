@@ -10,13 +10,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.apache.jena.rdf.model.Literal;
-import org.apache.jena.vocabulary.XSD;
+import org.apache.jena.vocabulary.RDF;
 
-import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
@@ -32,17 +29,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.
  */
 public class AddUserDefinedConceptGenerator  extends VivoBaseGenerator implements EditConfigurationGenerator {
 
-	private Log log = LogFactory.getLog(AddUserDefinedConceptGenerator.class);
-	private boolean isObjectPropForm = false;
-	private String subjectUri = null;
-	private String predicateUri = null;
-	private String objectUri = null;
-	private String datapropKeyStr= null;
-	private int dataHash = 0;
-	private DataPropertyStatement dps = null;
-	private String dataLiteral = null;
 	private String template = "addUserDefinedConcept.ftl";
-	private static HashMap<String,String> defaultsForXSDtypes ;
 	private static String SKOSConceptType = "http://www.w3.org/2004/02/skos/core#Concept";
 
     @Override
@@ -231,7 +218,6 @@ public class AddUserDefinedConceptGenerator  extends VivoBaseGenerator implement
     private void setSparqlQueries(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
     	//Sparql queries defining retrieval of literals etc.
     	editConfiguration.setSparqlForAdditionalLiteralsInScope(new HashMap<String, String>());
-    	Map<String, String> urisInScope = new HashMap<String, String>();
     	editConfiguration.setSparqlForAdditionalUrisInScope(new HashMap<String, String>());
     	editConfiguration.setSparqlForExistingLiterals(new HashMap<String, String>());
     	editConfiguration.setSparqlForExistingUris(new HashMap<String, String>());
@@ -259,8 +245,8 @@ public class AddUserDefinedConceptGenerator  extends VivoBaseGenerator implement
 			VitroRequest vreq) {
 		editConfiguration.addField(new FieldVTwo().
 				setName("conceptLabel").
-				setValidators(list("datatype:" + XSD.xstring.toString())).
-				setRangeDatatypeUri(XSD.xstring.toString())
+				setValidators(list("datatype:" + RDF.dtLangString.getURI())).
+				setRangeDatatypeUri(RDF.dtLangString.getURI())
 				);
 	}
 

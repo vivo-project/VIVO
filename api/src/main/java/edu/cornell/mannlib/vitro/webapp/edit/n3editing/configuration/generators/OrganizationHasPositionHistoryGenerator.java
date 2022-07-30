@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -227,23 +228,23 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 				);
 
 		conf.addField(new FieldVTwo().setName("positionTitle")
-				.setRangeDatatypeUri(XSD.xstring.toString())
+				.setRangeDatatypeUri(RDF.dtLangString.getURI())
 				.setValidators(list("nonempty")));
 
 		//options for existingPerson will be added in browser by auto complete JS
 		conf.addField(new FieldVTwo().setName("existingPerson"));
 
 		conf.addField(new FieldVTwo().setName("personLabel")
-				.setRangeDatatypeUri(XSD.xstring.toString())
-				.setValidators( list("datatype:" + XSD.xstring.toString()) ));
+				.setRangeDatatypeUri(RDF.dtLangString.getURI())
+				.setValidators( list("datatype:" + RDF.dtLangString.getURI()) ));
 
     	conf.addField(new FieldVTwo().setName("firstName")
-    			.setRangeDatatypeUri(XSD.xstring.toString())
-				.setValidators( list("datatype:" + XSD.xstring.toString()) ));
+    			.setRangeDatatypeUri(RDF.dtLangString.getURI())
+				.setValidators( list("datatype:" + RDF.dtLangString.getURI()) ));
 
     	conf.addField(new FieldVTwo().setName("lastName")
-    			.setRangeDatatypeUri(XSD.xstring.toString())
-				.setValidators( list("datatype:" + XSD.xstring.toString()) ));
+    			.setRangeDatatypeUri(RDF.dtLangString.getURI())
+				.setValidators( list("datatype:" + RDF.dtLangString.getURI()) ));
 
     	conf.addField(new FieldVTwo().setName("personLabelDisplay")
     			.setRangeDatatypeUri(XSD.xstring.toString())

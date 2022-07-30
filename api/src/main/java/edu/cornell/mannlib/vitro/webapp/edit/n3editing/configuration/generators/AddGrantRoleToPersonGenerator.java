@@ -10,8 +10,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.vivoweb.webapp.util.ModelUtils;
 
 import org.apache.jena.ontology.OntModel;
@@ -42,7 +40,6 @@ import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
  */
 public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator {
 
-	private Log log = LogFactory.getLog(AddGrantRoleToPersonGenerator.class);
 	private String subjectUri = null;
 	private String predicateUri = null;
 	private String objectUri = null;
@@ -475,7 +472,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 			VitroRequest vreq, Map<String, FieldVTwo> fields) {
 		String fieldName = "grantLabel";
 		//get range data type uri and range language
-		String stringDatatypeUri = XSD.xstring.toString();
+		String langStringDatatypeUri = RDF.dtLangString.getURI();
 
 		FieldVTwo field = new FieldVTwo();
     	field.setName(fieldName);
@@ -483,7 +480,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 
     	//Not really interested in validators here
     	List<String> validators = new ArrayList<String>();
-    	validators.add("datatype:" + stringDatatypeUri);
+    	validators.add("datatype:" + langStringDatatypeUri);
     	field.setValidators(validators);
 
     	fields.put(field.getName(), field);
