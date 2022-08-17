@@ -1936,7 +1936,7 @@ local:grantRelatesConfig a :ObjectPropertyDisplayConfig ;
     :displayName "contributor" ;
     vitro:displayRankAnnot 55;
     vitro:hiddenFromDisplayBelowRoleLevelAnnot role:public ;
-    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:nobody ;
+    vitro:prohibitedFromUpdateBelowRoleLevelAnnot role:editor ;
     vitro:customEntryFormAnnot "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.GrantHasContributorGenerator"^^<http://www.w3.org/2001/XMLSchema#string> ;
     :propertyGroup <http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> .
 
