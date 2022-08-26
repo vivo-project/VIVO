@@ -4,12 +4,12 @@
 
     <groupId>org.vivoweb</groupId>
     <artifactId>vivo-languages-core</artifactId>
-    <version>1.13.1-SNAPSHOT</version>
+    <version>1.13.0</version>
     <packaging>pom</packaging>
     <parent>
         <groupId>org.vivoweb</groupId>
         <artifactId>vivo-languages</artifactId>
-        <version>1.13.1-SNAPSHOT</version>
+        <version>1.13.0</version>
         <relativePath>..</relativePath>
     </parent>
     <name>VIVO Languages CORE</name>
