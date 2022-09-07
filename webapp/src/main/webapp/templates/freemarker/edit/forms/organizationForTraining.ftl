@@ -134,7 +134,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <select name="trainingType" style="margin-top:-2px" >
         <option value="" <#if trainingTypeValue == "">selected</#if>>${i18n().select_one}</option>
         <#list trainingTypeOpts?keys as key>
-            <option value="${key}"  <#if trainingTypeValue == key>selected</#if>><#if trainingTypeOpts[key] == "Other">${i18n().academic_studies_or_other}<#else>${trainingTypeOpts[key]}</#if></option>
+            <option value="${key}"  <#if trainingTypeValue == key>selected</#if>>${trainingTypeOpts[key]}</option>
         </#list>
     </select>
     <p>

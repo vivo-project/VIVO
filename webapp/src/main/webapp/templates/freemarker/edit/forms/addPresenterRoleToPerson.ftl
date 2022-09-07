@@ -104,7 +104,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
       <select id="typeSelector" name="presentationType" acGroupName="presentation">
         <option value="" selected="selected">${i18n().select_one}</option>
         <#list presentationTypeOpts?keys as key>
-            <option value="${key}" <#if presentationTypeValue = key>selected</#if>><#if presentationTypeOpts[key] == "Other">${i18n().presentation_capitalized}<#else>${presentationTypeOpts[key]}</#if></option>
+            <option value="${key}" <#if presentationTypeValue = key>selected</#if>>${presentationTypeOpts[key]}</option>
         </#list>
     </select>
     </p>
