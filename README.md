@@ -74,7 +74,7 @@ There are several ways to contact the VIVO community.
 Whatever your interest, we would be pleased to hear from you.
 
 ### Contact form 
-http://vivoweb.org/support/user-feedback
+https://vivo.lyrasis.org/contact/
 
 ### Mailing lists
 
