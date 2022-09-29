@@ -1,0 +1,57 @@
+# baseURI: http://vivoweb.org/ontology/propertygroups_fr_CA
+
+@prefix : <http://vivoweb.org/ontology/propertygroups_fr_CA#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vivo: <http://vivoweb.org/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+vivo:vitroPropertyGroupaddress
+  rdfs:label "Coordonnées"@fr-CA ;
+.
+vivo:vitroPropertyGroupaffiliation
+  rdfs:label "Affiliations"@fr-CA ;
+.
+vivo:vitroPropertyGroupbibliographic
+  rdfs:label "Publications"@fr-CA ;
+.
+vivo:vitroPropertyGroupbibliographiconline
+  rdfs:label "Documents associés"@fr-CA ;
+.
+vivo:vitroPropertyGroupbibmapping
+  rdfs:label "Mappage bibliographique"@fr-CA ;
+.
+vivo:vitroPropertyGroupbibobscure
+  rdfs:label "Infos supplémentaires sur le document"@fr-CA ;
+.
+vivo:vitroPropertyGroupbiography
+  rdfs:label "Expérience"@fr-CA ;
+.
+vivo:vitroPropertyGroupidentifiers
+  rdfs:label "Identifiants"@fr-CA ;
+.
+vivo:vitroPropertyGrouplinks
+  rdfs:label "Liens"@fr-CA ;
+.
+vivo:vitroPropertyGrouplocation
+  rdfs:label "Lieu"@fr-CA ;
+.
+vivo:vitroPropertyGroupmapping
+  rdfs:label "Mappage"@fr-CA ;
+.
+vivo:vitroPropertyGroupoutreach
+  rdfs:label "Services"@fr-CA ;
+.
+vivo:vitroPropertyGroupoverview
+  rdfs:label "Aperçu"@fr-CA ;
+.
+vivo:vitroPropertyGroupresearch
+  rdfs:label "Recherche"@fr-CA ;
+.
+vivo:vitroPropertyGroupteaching
+  rdfs:label "Enseignement"@fr-CA ;
+.
+vivo:vitroPropertyGrouptime
+  rdfs:label "Temps"@fr-CA ;
+.

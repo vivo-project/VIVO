@@ -1,0 +1,10 @@
+# baseURI: http://vivoweb.org/ontology/classgroups_labels_en_CA
+
+<http://vivoweb.org/ontology#vitroClassGrouplocations> <http://www.w3.org/2000/01/rdf-schema#label> "locations"@en-CA .
+<http://vivoweb.org/ontology#vitroClassGroupevents> <http://www.w3.org/2000/01/rdf-schema#label> "events"@en-CA .
+<http://vivoweb.org/ontology#vitroClassGrouppeople> <http://www.w3.org/2000/01/rdf-schema#label> "people"@en-CA .
+<http://vivoweb.org/ontology#vitroClassGroupcourses> <http://www.w3.org/2000/01/rdf-schema#label> "courses"@en-CA .
+<http://vivoweb.org/ontology#vitroClassGroupactivities> <http://www.w3.org/2000/01/rdf-schema#label> "activities"@en-CA .
+<http://vivoweb.org/ontology#vitroClassGrouppublications> <http://www.w3.org/2000/01/rdf-schema#label> "research"@en-CA .
+<http://vivoweb.org/ontology#vitroClassGrouporganizations> <http://www.w3.org/2000/01/rdf-schema#label> "organizations"@en-CA .
+<http://vivoweb.org/ontology#vitroClassGroupequipment> <http://www.w3.org/2000/01/rdf-schema#label> "equipment"@en-CA .

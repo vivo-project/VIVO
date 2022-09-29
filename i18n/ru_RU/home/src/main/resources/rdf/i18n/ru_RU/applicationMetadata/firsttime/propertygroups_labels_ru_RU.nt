@@ -1,0 +1,16 @@
+<http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> <http://www.w3.org/2000/01/rdf-schema#label> "аффилиация"@ru-RU .
+<http://vivoweb.org/ontology#vitroPropertyGroupidentifiers> <http://www.w3.org/2000/01/rdf-schema#label> "идентификаторы"@ru-RU .
+<http://vivoweb.org/ontology#vitroPropertyGroupaddress> <http://www.w3.org/2000/01/rdf-schema#label> "адрес"@ru-RU .
+<http://vivoweb.org/ontology#vitroPropertyGrouplinks> <http://www.w3.org/2000/01/rdf-schema#label> "связи"@ru-RU .
+<http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> <http://www.w3.org/2000/01/rdf-schema#label> "публикации"@ru-RU .
+<http://vivoweb.org/ontology#vitroPropertyGroupteaching> <http://www.w3.org/2000/01/rdf-schema#label> "преподавание"@ru-RU .
+<http://vivoweb.org/ontology#vitroPropertyGroupresearch> <http://www.w3.org/2000/01/rdf-schema#label> "исследования"@ru-RU .
+<http://vivoweb.org/ontology#vitroPropertyGroupoutreach> <http://www.w3.org/2000/01/rdf-schema#label> "информационно-просветительская работа"@ru-RU .
+<http://vivoweb.org/ontology#vitroPropertyGroupoverview> <http://www.w3.org/2000/01/rdf-schema#label> "описание"@ru-RU .
+<http://vivoweb.org/ontology#vitroPropertyGroupbibliographiconline> <http://www.w3.org/2000/01/rdf-schema#label> "связанные документы"@ru-RU .
+<http://vivoweb.org/ontology#vitroPropertyGroupbiography> <http://www.w3.org/2000/01/rdf-schema#label> "задел"@ru-RU .
+<http://vivoweb.org/ontology#vitroPropertyGroupbibmapping> <http://www.w3.org/2000/01/rdf-schema#label> "библиографическое картирование"@ru-RU .
+<http://vivoweb.org/ontology#vitroPropertyGroupmapping> <http://www.w3.org/2000/01/rdf-schema#label> "картирование"@ru-RU .
+<http://vivoweb.org/ontology#vitroPropertyGrouptime> <http://www.w3.org/2000/01/rdf-schema#label> "время"@ru-RU .
+<http://vivoweb.org/ontology#vitroPropertyGroupbibobscure> <http://www.w3.org/2000/01/rdf-schema#label> "дополнительная информация о документе"@ru-RU .
+<http://vivoweb.org/ontology#vitroPropertyGrouplocation> <http://www.w3.org/2000/01/rdf-schema#label>  "местоположение"@ru-RU .

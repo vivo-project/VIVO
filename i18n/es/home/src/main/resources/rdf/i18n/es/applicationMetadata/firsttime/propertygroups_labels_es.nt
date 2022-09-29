@@ -1,0 +1,16 @@
+<http://vivoweb.org/ontology#vitroPropertyGroupidentifiers> <http://www.w3.org/2000/01/rdf-schema#label> "identidad"@es .
+<http://vivoweb.org/ontology#vitroPropertyGroupbibliographiconline> <http://www.w3.org/2000/01/rdf-schema#label> "documentos relacionados"@es .
+<http://vivoweb.org/ontology#vitroPropertyGroupbiography> <http://www.w3.org/2000/01/rdf-schema#label> "antecedentes"@es .
+<http://vivoweb.org/ontology#vitroPropertyGroupoutreach> <http://www.w3.org/2000/01/rdf-schema#label> "servicio"@es .
+<http://vivoweb.org/ontology#vitroPropertyGroupbibobscure> <http://www.w3.org/2000/01/rdf-schema#label> "Informaci\u00F3n adicional de documento"@es .
+<http://vivoweb.org/ontology#vitroPropertyGrouplinks> <http://www.w3.org/2000/01/rdf-schema#label> "enlaces"@es .
+<http://vivoweb.org/ontology#vitroPropertyGrouplocation> <http://www.w3.org/2000/01/rdf-schema#label> "ubicaci\u00F3n"@es .
+<http://vivoweb.org/ontology#vitroPropertyGroupbibmapping> <http://www.w3.org/2000/01/rdf-schema#label> "asignaci\u00F3n bib"@es .
+<http://vivoweb.org/ontology#vitroPropertyGroupoverview> <http://www.w3.org/2000/01/rdf-schema#label> "visi\u00F3n general"@es .
+<http://vivoweb.org/ontology#vitroPropertyGroupteaching> <http://www.w3.org/2000/01/rdf-schema#label> "ense\u00F1anza"@es .
+<http://vivoweb.org/ontology#vitroPropertyGroupaffiliation> <http://www.w3.org/2000/01/rdf-schema#label> "afiliaci\u00F3n"@es .
+<http://vivoweb.org/ontology#vitroPropertyGrouptime> <http://www.w3.org/2000/01/rdf-schema#label> "tiempo"@es .
+<http://vivoweb.org/ontology#vitroPropertyGroupbibliographic> <http://www.w3.org/2000/01/rdf-schema#label> "publicaciones"@es .
+<http://vivoweb.org/ontology#vitroPropertyGroupresearch> <http://www.w3.org/2000/01/rdf-schema#label> "investigaci\u00F3n"@es .
+<http://vivoweb.org/ontology#vitroPropertyGroupaddress> <http://www.w3.org/2000/01/rdf-schema#label> "contacto"@es .
+<http://vivoweb.org/ontology#vitroPropertyGroupmapping> <http://www.w3.org/2000/01/rdf-schema#label> "asignaci\u00F3n"@es .

@@ -1,0 +1,220 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.vivoweb</groupId>
+    <artifactId>vivo-languages-en_CA</artifactId>
+    <version>1.13.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <parent>
+        <groupId>org.vivoweb</groupId>
+        <artifactId>vivo-languages</artifactId>
+        <version>1.13.1-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+    </parent>
+    <name>VIVO Languages en_CA</name>
+    <description>VIVO Languages</description>
+    <url>http://vivoweb.org/</url>
+
+    <licenses>
+        <license>
+            <name>BSD 3-Clause License</name>
+            <url>https://raw.github.com/vivo-project/VIVO/develop/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Graham Triggs</name>
+            <email>gtriggs@duraspace.org</email>
+            <organization>DuraSpace</organization>
+            <organizationUrl>http://vivoweb.org/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Jim Blake</name>
+            <email>jeb228@cornell.edu</email>
+            <organization>Cornell University Library</organization>
+            <organizationUrl>https://github.com/j2blake</organizationUrl>
+        </developer>
+        <developer>
+            <name>John Fereira</name>
+            <email>jaf30@cornell.edu</email>
+            <organization>Cornell University</organization>
+            <organizationUrl>https://github.com/fereira</organizationUrl>
+        </developer>
+    </developers>
+
+    <!--
+       The SCM repository location is used by Continuum to update against
+       when changes have occurred.  This spawns a new build cycle and releases
+       snapshots into the snapshot repository below.
+    -->
+    <scm>
+        <connection>scm:git:git@github.com:vivo-project/VIVO-languages.git</connection>
+        <developerConnection>scm:git:git@github.com:vivo-project/VIVO-languages.git</developerConnection>
+        <url>git@github.com:vivo-project/VIVO-languages.git</url>
+        <tag>vivo-languages-1.13.0</tag>
+    </scm>
+
+    <properties>
+        <vitro-version>${project.version}</vitro-version>
+        <vivo-dir>${basedir}</vivo-dir>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+        <build.timestamp>${maven.build.timestamp}</build.timestamp>
+        <maven-site-plugin.skip>false</maven-site-plugin.skip>
+        <stagingBase>/</stagingBase>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <modules>
+        <module>home</module>
+        <module>webapp</module>
+    </modules>
+
+    <profiles>
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <quiet>true</quiet>
+                            <additionalparam>${javadoc.opts}</additionalparam>
+                        </configuration>
+                    </plugin -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>buildnumber-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>create</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <doCheck>false</doCheck>
+                            <doUpdate>false</doUpdate>
+                            <shortRevisionLength>7</shortRevisionLength>
+                            <revisionOnScmFailure>Detached</revisionOnScmFailure>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile> 
+    </profiles>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>3.1.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.1.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.6</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.2.3</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>buildnumber-maven-plugin</artifactId>
+                    <version>1.4</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>1.6.8</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <distributionManagement>
+        <site>
+            <id>vivo-project</id>
+            <url>https://vivo-project.github.io/</url>
+        </site>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>
