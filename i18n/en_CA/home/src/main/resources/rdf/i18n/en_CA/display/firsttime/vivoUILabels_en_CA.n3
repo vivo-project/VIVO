@@ -7,60 +7,18 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-:research_capitalized
-:key "research_capitalized";
-a :PropertyKey ;
-  a owl:NamedIndividual ;
-  rdfs:label "Forschung"@de-DE ;
-  rdfs:label "Investigación"@es ;
-  rdfs:label "Istraživački radovi"@sr-Latn-RS ;
-  rdfs:label "Pesquisa"@pt-BR ;
-  rdfs:label "Recherche"@fr-CA ;
-  rdfs:label "Research"@en-CA ;
-  rdfs:label "Research"@en-US ;
-  rdfs:label "Исследования"@ru-RU .
-
 :research_capitalized.VIVO
 :key "research_capitalized";
 a :PropertyKey ;
   a owl:NamedIndividual ;
-  rdfs:label "Forschung"@de-DE ;
-  rdfs:label "Investigación"@es ;
-  rdfs:label "Istraživački radovi"@sr-Latn-RS ;
-  rdfs:label "Pesquisa"@pt-BR ;
-  rdfs:label "Recherche (VIVO)"@fr-CA ;
-  rdfs:label "Recherche (VIVO local - UQAM)"@fr-CA-x-uqam ;
   rdfs:label "Research"@en-CA ;
-  rdfs:label "Research"@en-US ;
-  rdfs:label "Исследования"@ru-RU  ;
   :application "vivo" .
-
-:research_capitalized.Vitro
-:key "research_capitalized";
-a :PropertyKey ;
-  a owl:NamedIndividual ;
-  rdfs:label "Forschung"@de-DE ;
-  rdfs:label "Investigación"@es ;
-  rdfs:label "Istraživački radovi"@sr-Latn-RS ;
-  rdfs:label "Pesquisa"@pt-BR ;
-  rdfs:label "Recherche"@fr-CA ;
-  rdfs:label "Research (Vitro)"@en-CA ;
-  rdfs:label "Research"@en-US ;
-  rdfs:label "Исследования"@ru-RU ;
-  :application "vitro" .
 
 :research_capitalized.wilma
  :key "research_capitalized";
  a :PropertyKey ;
    a owl:NamedIndividual ;
-   rdfs:label "Forschung"@de-DE ;
-   rdfs:label "Investigación"@es ;
-   rdfs:label "Istraživački radovi"@sr-Latn-RS ;
-   rdfs:label "Pesquisa"@pt-BR ;
-   rdfs:label "Recherche (wilma)"@fr-CA ;
-   rdfs:label "Recherche (wilma local - UQAM)"@fr-CA-x-uqam ;
    rdfs:label "Research"@en-CA ;
-   rdfs:label "Research"@en-US ;
-   rdfs:label "Исследования"@ru-RU ;
+   :application "vivo" ;
    :theme "wilma" .
 

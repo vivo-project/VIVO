@@ -7,12 +7,9 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-:research_capitalized.wilma
+:research_capitalized.VIVO
  :key "research_capitalized";
  a :PropertyKey ;
    a owl:NamedIndividual ;
-   rdfs:label "Recherche (wilma)"@fr-CA ;
-   rdfs:label "Recherche (wilma local - UQAM)"@fr-CA-x-uqam ;
-   :application "vivo" ;
-   :theme "wilma" .
-
+   rdfs:label "Recherche"@fr-CA-x-uqam ;
+   :application "vivo" .

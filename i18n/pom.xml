@@ -7,50 +7,17 @@
     <version>1.13.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <parent>
+        <groupId>org.vivoweb</groupId>
+        <artifactId>vivo-project</artifactId>
+        <version>1.13.1-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+    </parent>
+
     <name>VIVO Languages</name>
     <description>VIVO Languages</description>
     <url>http://vivoweb.org/</url>
 
-    <licenses>
-        <license>
-            <name>BSD 3-Clause License</name>
-            <url>https://raw.github.com/vivo-project/VIVO/develop/LICENSE</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <name>Graham Triggs</name>
-            <email>gtriggs@duraspace.org</email>
-            <organization>DuraSpace</organization>
-            <organizationUrl>http://vivoweb.org/</organizationUrl>
-        </developer>
-        <developer>
-            <name>Jim Blake</name>
-            <email>jeb228@cornell.edu</email>
-            <organization>Cornell University Library</organization>
-            <organizationUrl>https://github.com/j2blake</organizationUrl>
-        </developer>
-        <developer>
-            <name>John Fereira</name>
-            <email>jaf30@cornell.edu</email>
-            <organization>Cornell University</organization>
-            <organizationUrl>https://github.com/fereira</organizationUrl>
-        </developer>
-    </developers>
-
-    <!--
-       The SCM repository location is used by Continuum to update against
-       when changes have occurred.  This spawns a new build cycle and releases
-       snapshots into the snapshot repository below.
-    -->
-    <scm>
-        <connection>scm:git:git@github.com:vivo-project/VIVO-languages.git</connection>
-        <developerConnection>scm:git:git@github.com:vivo-project/VIVO-languages.git</developerConnection>
-        <url>git@github.com:vivo-project/VIVO-languages.git</url>
-        <tag>vivo-languages-1.13.0</tag>
-    </scm>
 
     <properties>
         <vitro-version>${project.version}</vitro-version>
@@ -61,92 +28,6 @@
         <stagingBase>/</stagingBase>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-
-    <profiles>
-        <profile>
-            <id>release-sign-artifacts</id>
-            <activation>
-                <property>
-                    <name>performRelease</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <!-- plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <quiet>true</quiet>
-                            <additionalparam>${javadoc.opts}</additionalparam>
-                        </configuration>
-                    </plugin -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>ossrh</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>buildnumber-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <phase>validate</phase>
-                                <goals>
-                                    <goal>create</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <doCheck>false</doCheck>
-                            <doUpdate>false</doUpdate>
-                            <shortRevisionLength>7</shortRevisionLength>
-                            <revisionOnScmFailure>Detached</revisionOnScmFailure>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile> 
-    </profiles>
 
     <build>
         <pluginManagement>
@@ -175,7 +56,7 @@
                     <version>3.1.0</version>
                 </plugin>
                 <plugin>
-					<groupId>org.apache.maven.plugins</groupId>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
                     <version>3.2.3</version>
                 </plugin>
@@ -189,34 +70,19 @@
                     <artifactId>buildnumber-maven-plugin</artifactId>
                     <version>1.4</version>
                 </plugin>
-                <plugin>
-                    <groupId>org.sonatype.plugins</groupId>
-                    <artifactId>nexus-staging-maven-plugin</artifactId>
-                    <version>1.6.8</version>
-                </plugin>
             </plugins>
         </pluginManagement>
     </build>
 
-    <distributionManagement>
-        <site>
-            <id>vivo-project</id>
-            <url>https://vivo-project.github.io/</url>
-        </site>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
     <modules>
-    	<module>core</module>
-    	<module>en_CA</module>
-    	<module>en_US</module>
-    	<module>es</module>
-    	<module>fr_CA</module>
-    	<module>de_DE</module>
-    	<module>pt_BR</module>
-    	<module>sr_Latn_RS</module>
-    	<module>ru_RU</module>
+        <module>core</module>
+        <module>en_CA</module>
+        <module>en_US</module>
+        <module>es</module>
+        <module>fr_CA</module>
+        <module>de_DE</module>
+        <module>pt_BR</module>
+        <module>sr_Latn_RS</module>
+        <module>ru_RU</module>
     </modules>
 </project>
