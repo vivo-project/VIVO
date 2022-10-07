@@ -3,21 +3,21 @@
 <#-- START TOOLTIP TEXT -->
 
 <div id="toolTipOne" style="display:none;">
-	${i18n().map_of_science_visualization_tool_tip_one(entityLabel)}<br /><br />
+	${i18n().map_of_science_visualization_tool_tip_one(entityLabel)} <br /><br />
 
 	<a href='${subEntityMapOfScienceCommonURL}about'>${i18n().map_of_science_visualization_learn_more}</a>
 </div>
 
 <div id="toolTipTwo" style="display:none;">
-	${i18n().map_of_science_visualization_tool_tip_two_the_first_part}<br /><br />
+	${i18n().map_of_science_visualization_tool_tip_two_the_first_part} <br /><br />
 
-	${i18n().map_of_science_visualization_tool_tip_two_the_second_part}<br /><br />
+	${i18n().map_of_science_visualization_tool_tip_two_the_second_part} <br /><br />
 
 	${i18n().map_of_science_visualization_tool_tip_two_the_third_part}
 </div>
 
 <div id="toolTipThree" style="display:none;">
-	${i18n().map_of_science_visualization_tool_tip_three_the_first_part(entityLabel)}<br /><br />
+	${i18n().map_of_science_visualization_tool_tip_three_the_first_part(entityLabel)} <br /><br />
 
 	${i18n().map_of_science_visualization_tool_tip_three_the_second_part}
 </div>
