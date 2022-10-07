@@ -21,5 +21,5 @@
 
 <h3>${i18n().aboutQrCodes_ftl_what_can_i_do_with_qr_heading}</h3>
 
-<p>${i18n().aboutQrCodes_ftl_what_can_i_do_with_qr_para</p>
+<p>${i18n().aboutQrCodes_ftl_what_can_i_do_with_qr_para}</p>
 
