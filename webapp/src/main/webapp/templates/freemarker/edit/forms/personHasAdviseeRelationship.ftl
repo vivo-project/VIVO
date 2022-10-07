@@ -205,7 +205,7 @@ var customFormData  = {
     acUrl: '${urls.base}/autocomplete?tokenize=true&stem=true',
     acTypes: {advisor: 'http://xmlns.com/foaf/0.1/Person', SubjectArea: 'http://www.w3.org/2004/02/skos/core#Concept'},
     editMode: '${editMode}',
-    defaultTypeName: 'advisor',
+    defaultTypeName: '${i18n().advisor?js_string}',
     multipleTypeNames: {advisor: '${i18n().advisor?js_string}', SubjectArea: '${i18n().subject_Area?js_string}'},
     sparqlForAcFilter: '${sparqlForAcFilter}',
     sparqlQueryUrl: '${sparqlQueryUrl}',
