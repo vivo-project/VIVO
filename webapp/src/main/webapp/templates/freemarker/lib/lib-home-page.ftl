@@ -77,10 +77,10 @@
                                     <p  class="stats-count">
                                         <#if (group.individualCount > 10000) >
                                             <#assign overTen = group.individualCount/1000>
-                                            ${overTen?round}<span>k</span>
+                                            ${overTen?round}<span>${i18n().thousands_short}</span>
                                         <#elseif (group.individualCount > 1000)>
                                             <#assign underTen = group.individualCount/1000>
-                                            ${underTen?string("0.#")}<span>k</span>
+                                            ${underTen?string("0.#")}<span>${i18n().thousands_short}</span>
                                         <#else>
                                             ${group.individualCount}<span>&nbsp;</span>
                                         </#if>
@@ -126,14 +126,10 @@
                 <#list group.classes as class>
                     <#if (class.individualCount > 0) && (class.uri?contains("AcademicArticle") || class.uri?contains("Book") || class.uri?contains("Chapter") ||class.uri?contains("ConferencePaper") || class.uri?contains("Grant") || class.uri?contains("Report")) >
                         <li role="listitem">
-                            <span>${class.individualCount!}</span>&nbsp;
                             <a href='${urls.base}/individuallist?vclassId=${class.uri?replace("#","%23")!}'>
-                                <#if class.name?substring(class.name?length-1) == "s">
-                                    ${class.name}
-                                <#else>
-                                    ${class.name}s
-                                </#if>
-                            </a>
+                               ${i18n().items_of_type} &quot;${class.name}&quot;
+                            </a>&nbsp;
+                            <span>${class.individualCount!}</span>
                         </li>
                     </#if>
                 </#list>

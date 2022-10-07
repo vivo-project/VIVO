@@ -118,10 +118,10 @@
 	                        	class="list-group-item">${group.displayName?capitalize}<span class="badge">
                                     <#if (group.individualCount > 10000) >
                                         <#assign overTen = group.individualCount/1000>
-                                        ${overTen?round}k
+                                        ${overTen?round}${i18n().thousands_short}
                                     <#elseif (group.individualCount > 1000)>
                                         <#assign underTen = group.individualCount/1000>
-                                        ${underTen?string("0.#")}k
+                                        ${underTen?string("0.#")}${i18n().thousands_short}
                                     <#else>
                                         ${group.individualCount}
                                     </#if>                        
@@ -171,11 +171,7 @@
                 <#list group.classes as class>
                     <#if (class.individualCount > 0) && (class.uri?contains("AcademicArticle") || class.uri?contains("Book") || class.uri?contains("Chapter") ||class.uri?contains("ConferencePaper") || class.uri?contains("Grant") || class.uri?contains("Report")) >
                             <a class="list-group-item" href='${urls.base}/individuallist?vclassId=${class.uri?replace("#","%23")!}'>
-                                <#if class.name?substring(class.name?length-1) == "s">
-                                    ${class.name}
-                                <#else>
-                                    ${class.name}s 
-                                </#if>
+                               ${i18n().items_of_type} &quot;${class.name}&quot;
                                 <#-- Add bootstrap badge class to individual counts -->
                                 &nbsp;
                                 <span class="badge">${class.individualCount!}</span>
