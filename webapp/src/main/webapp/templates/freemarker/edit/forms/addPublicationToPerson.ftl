@@ -317,8 +317,8 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         acUrl: '${urls.base}/autocomplete?tokenize=true',
         acTypes: {publication: 'http://purl.org/ontology/bibo/Document', collection: 'http://purl.org/ontology/bibo/Periodical', book: 'http://purl.org/ontology/bibo/Book', conference: 'http://purl.org/NET/c4dm/event.owl#Event', event: 'http://purl.org/NET/c4dm/event.owl#Event', editor: 'http://xmlns.com/foaf/0.1/Person', publisher: 'http://xmlns.com/foaf/0.1/Organization'},
         editMode: '${editMode}',
-        defaultTypeName: 'publication', // used in repair mode to generate button text
-        multipleTypeNames: {collection: 'publication', book: 'book', conference: 'conference', event: 'event', editor: 'editor', publisher: 'publisher'},
+        defaultTypeName: '${i18n().publication?js_string}', // used in repair mode to generate button text
+        multipleTypeNames: {collection: '${i18n().publication?js_string}', book: '${i18n().book?js_string}', conference: '${i18n().conference?js_string}', event: '${i18n().event?js_string}', editor: '${i18n().editor?js_string}', publisher: '${i18n().publisher?js_string}'},
         baseHref: '${urls.base}/individual?uri=',
         blankSentinel: '${blankSentinel}',
         flagClearLabelForExisting: '${flagClearLabelForExisting}'
