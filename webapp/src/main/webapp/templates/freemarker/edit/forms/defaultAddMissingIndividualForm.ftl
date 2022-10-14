@@ -3,7 +3,7 @@
 <#import "lib-vivo-form.ftl" as lvf>
 
 <#assign formTitle>
- "${editConfiguration.propertyPublicDomainTitle}" entry for ${editConfiguration.subjectName}
+${i18n.new_entry_for(editConfiguration.propertyPublicDomainTitle, editConfiguration.subjectName)}
 </#assign>
 <#if editConfiguration.objectUri?has_content>
     <#assign formTitle>${i18n().edit_capitalized} ${formTitle} </#assign>
