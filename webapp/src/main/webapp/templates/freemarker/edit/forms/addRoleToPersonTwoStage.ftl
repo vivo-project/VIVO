@@ -190,18 +190,18 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
                <#--Generated html is a map with key name mapping to html string-->
                <#if htmlForElements?keys?seq_contains("startField")>
                 	<label class="dateTimeLabel" for="startField">${i18n().start_year}</label>
-               		${htmlForElements["startField"]} ${yearHint}
+               		<@lvf.printYearField "startField" /> ${yearHint}
                </#if>
             <#else>
                 <h4 class="label">${i18n().years_participating} </h4>
                 <#if htmlForElements?keys?seq_contains("startField")>
-                	    <label class="dateTime" for="startField">${i18n().start_year}</label>
-               		    ${htmlForElements["startField"]} ${yearHint}
+                	<label class="dateTime" for="startField">${i18n().start_year}</label>
+               		<@lvf.printYearField "startField" /> ${yearHint}
                </#if>
                <p></p>
                <#if htmlForElements?keys?seq_contains("endField")>
-               		    <label class="dateTime" for="endField">${i18n().end_year}</label>
-               		    ${htmlForElements["endField"]} ${yearHint}
+                    <label class="dateTime" for="endField">${i18n().end_year}</label>
+               		<@lvf.printYearField "endField" /> ${yearHint}
                </#if>
             </#if>
 <#--        </div> -->
