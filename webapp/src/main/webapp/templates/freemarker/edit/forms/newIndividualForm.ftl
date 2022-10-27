@@ -21,7 +21,8 @@
 </#if>
 
 
-<h2>${i18n().create_new} ${typeName}</h2>
+<h2>${i18n().create_new_individual_of_the_following_type}</h2>
+<h2>"${typeName}"</h2>
 
 
 <#if submissionErrors?has_content >
@@ -74,7 +75,7 @@
 
     <p class="submit">
         <input type="hidden" name = "editKey" value="${editKey}"/>
-        <input type="submit" id="submit" value="${i18n().create_capitalized} ${typeName}"/>
+        <input type="submit" id="submit" value="${i18n().create_capitalized}"/>
         <span class="or"> ${i18n().or} </span><a class="cancel" href="${urls.base}/siteAdmin" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
     </p>
 
