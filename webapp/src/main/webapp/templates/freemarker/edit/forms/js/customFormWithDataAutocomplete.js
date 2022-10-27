@@ -421,7 +421,7 @@ var customForm = {
 
         // First case applies on page load; second case applies when the type gets changed.
         if (!this.acSelector.val() || this.acSelector.hasClass(this.acHelpTextClass)) {
-        	var helpText = customForm.selectExisting + " " + typeText + " " + customForm.orCreateNewOne;
+        	var helpText = customForm.selectAnExistingOrCreateNewOne ;
         	//Different for object property autocomplete
 			this.acSelector.val(helpText)
 		               	   .addClass(this.acHelpTextClass);

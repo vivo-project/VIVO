@@ -218,8 +218,8 @@ var customFormData  = {
 <#--Also removed this: ,doNotRemoveOriginalObject: '${doNotRemoveOriginalObject}'-->
 var i18nStrings = {
     selectAnExisting: '${i18n().select_an_existing?js_string}',
-    orCreateNewOne: '${i18n().or_create_new_one?js_string}',
     selectedString: '${i18n().selected?js_string}',
+    selectAnExistingOrCreateNewOne: '${i18n().select_an_existing_or_create_a_new_one?js_string}',
     advisingString: '${i18n().advising?js_string}',
     advisingRelationshipString: '${i18n().advising_relationship?js_string}'
 };
