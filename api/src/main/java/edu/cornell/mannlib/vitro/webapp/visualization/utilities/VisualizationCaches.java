@@ -272,7 +272,11 @@ final public class VisualizationCaches {
                                 @Override
                                 protected void processQuerySolution(QuerySolution qs) {
                                     String org      = qs.getResource("org").getURI();
-                                    String orgLabel = qs.getLiteral("orgLabel").getString();
+                                    Literal labelLiteral = qs.getLiteral("orgLabel");
+                                    if (labelLiteral == null) {
+                                    	return;
+                                    }
+                                    String orgLabel = labelLiteral.getString();
 
                                     map.put(org.intern(), orgLabel.intern());
                                 }
@@ -346,7 +350,11 @@ final public class VisualizationCaches {
                                 @Override
                                 protected void processQuerySolution(QuerySolution qs) {
                                     String org = qs.getResource("org").getURI();
-                                    String typeLabel  = qs.getLiteral("typeLabel").getString();
+                                    Literal labelLiteral = qs.getLiteral("typeLabel");
+                                    if (labelLiteral == null) {
+                                    	return;
+                                    }
+                                    String typeLabel  = labelLiteral.getString();
                                     map.put(org.intern(), typeLabel.intern());
                                 }
                             });
@@ -443,7 +451,11 @@ final public class VisualizationCaches {
                             rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
                                 protected void processQuerySolution(QuerySolution qs) {
                                     String conceptURI = qs.getResource("concept").getURI().intern();
-                                    String label  = qs.getLiteral("label").getString().intern();
+                                    Literal labelLiteral = qs.getLiteral("label");
+                                    if (labelLiteral == null) {
+                                    	return;
+                                    }
+                                    String label  = labelLiteral.getString().intern();
                                     String labelLower = label.toLowerCase().intern();
 
                                     map.conceptToLabel.put(conceptURI, label);
@@ -537,8 +549,11 @@ final public class VisualizationCaches {
                                 @Override
                                 protected void processQuerySolution(QuerySolution qs) {
                                     String person      = qs.getResource("person").getURI();
-                                    String personLabel = qs.getLiteral("personLabel").getString();
-
+                                    Literal labelLiteral = qs.getLiteral("personLabel");
+                                    if (labelLiteral == null) {
+                                    	return;
+                                    }
+                                    String personLabel  = labelLiteral.getString();
                                     map.put(person.intern(), personLabel.intern());
                                 }
                             });
@@ -571,7 +586,11 @@ final public class VisualizationCaches {
                                 @Override
                                 protected void processQuerySolution(QuerySolution qs) {
                                     String person = qs.getResource("person").getURI();
-                                    String typeLabel  = qs.getLiteral("typeLabel").getString();
+                                    Literal labelLiteral = qs.getLiteral("typeLabel");
+                                    if (labelLiteral == null) {
+                                    	return;
+                                    }
+                                    String typeLabel  = labelLiteral.getString();
                                     map.put(person.intern(), String.valueOf(typeLabel).intern());
                                 }
                             });
@@ -645,8 +664,11 @@ final public class VisualizationCaches {
                                 @Override
                                 protected void processQuerySolution(QuerySolution qs) {
                                     String document      = qs.getResource("document").getURI();
-                                    String journalLabel = qs.getLiteral("journalLabel").getString();
-
+                                    Literal labelLiteral = qs.getLiteral("journalLabel");
+                                    if (labelLiteral == null) {
+                                    	return;
+                                    }
+                                    String journalLabel  = labelLiteral.getString();
                                     map.put(document.intern(), journalLabel.intern());
                                 }
                             });
