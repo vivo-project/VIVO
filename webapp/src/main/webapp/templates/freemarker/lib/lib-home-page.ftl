@@ -80,7 +80,7 @@
                                             ${overTen?round}<span>k</span>
                                         <#elseif (group.individualCount > 1000)>
                                             <#assign underTen = group.individualCount/1000>
-                                            ${underTen?string("0.#")}<span>k</span>
+                                            ${underTen?string("0.#")}<span>${i18n().thousands_short}</span>
                                         <#else>
                                             ${group.individualCount}<span>&nbsp;</span>
                                         </#if>
