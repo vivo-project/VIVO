@@ -171,7 +171,7 @@
                 <#list group.classes as class>
                     <#if (class.individualCount > 0) && (class.uri?contains("AcademicArticle") || class.uri?contains("Book") || class.uri?contains("Chapter") ||class.uri?contains("ConferencePaper") || class.uri?contains("Grant") || class.uri?contains("Report")) >
                             <a class="list-group-item" href='${urls.base}/individuallist?vclassId=${class.uri?replace("#","%23")!}'>
-                               ${i18n().items_of_type} &quot;${class.name}&quot;
+                               ${class.name}
                                 <#-- Add bootstrap badge class to individual counts -->
                                 &nbsp;
                                 <span class="badge">${class.individualCount!}</span>
