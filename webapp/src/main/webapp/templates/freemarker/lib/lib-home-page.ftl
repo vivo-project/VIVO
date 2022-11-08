@@ -123,7 +123,6 @@
         <#else>
             <p><li style="padding-left:1.2em">${i18n().no_research_content_found}</li></p>
         </#if>
-    </ul>
 </section>
 </#macro>
 
