@@ -39,7 +39,7 @@
                 <#if (class.uri?contains("FacultyMember")) >
                     <#assign foundClassGroup = true />
                     <#if (class.individualCount > 0) >
-                        <script>var facultyMemberCount = ${class.individualCount?string?replace(",","")?replace(".","")};</script>
+                        <script>var facultyMemberCount = ${class.individualCount?string?replace("[^\\d]", "", "r")};</script>
                     <#else>
                         <script>var facultyMemberCount = 0;</script>
                     </#if>
@@ -77,10 +77,10 @@
                                     <p  class="stats-count">
                                         <#if (group.individualCount > 10000) >
                                             <#assign overTen = group.individualCount/1000>
-                                            ${overTen?round}<span>k</span>
+                                            ${overTen?round}<span>${i18n().thousands_short}</span>
                                         <#elseif (group.individualCount > 1000)>
                                             <#assign underTen = group.individualCount/1000>
-                                            ${underTen?string("0.#")}<span>k</span>
+                                            ${underTen?string("0.#")}<span>${i18n().thousands_short}</span>
                                         <#else>
                                             ${group.individualCount}<span>&nbsp;</span>
                                         </#if>
@@ -116,36 +116,58 @@
 <#-- Renders the html for the research section on the home page. -->
 <#-- Works in conjunction with the homePageUtils.js file -->
 <#macro researchClasses classGroups=vClassGroups>
-<#assign foundClassGroup = false />
 <section id="home-research" class="home-sections">
     <h4>${i18n().research_capitalized}</h4>
-    <ul>
-        <#list classGroups as group>
-            <#if (group.individualCount > 0) && group.uri?contains("publications") >
-                <#assign foundClassGroup = true />
-                <#list group.classes as class>
-                    <#if (class.individualCount > 0) && (class.uri?contains("AcademicArticle") || class.uri?contains("Book") || class.uri?contains("Chapter") ||class.uri?contains("ConferencePaper") || class.uri?contains("Grant") || class.uri?contains("Report")) >
-                        <li role="listitem">
-                            <span>${class.individualCount!}</span>&nbsp;
-                            <a href='${urls.base}/individuallist?vclassId=${class.uri?replace("#","%23")!}'>
-                                <#if class.name?substring(class.name?length-1) == "s">
-                                    ${class.name}
-                                <#else>
-                                    ${class.name}s
-                                </#if>
-                            </a>
-                        </li>
-                    </#if>
-                </#list>
-                <li><a href="${urls.base}/research" alt="${i18n().view_all_research}">${i18n().view_all}</a></li>
-            </#if>
-        </#list>
-        <#if !foundClassGroup>
+        <#if isResearchContentFound(classGroups) >
+        	<@printResearchTable classGroups />
+        <#else>
             <p><li style="padding-left:1.2em">${i18n().no_research_content_found}</li></p>
         </#if>
-    </ul>
 </section>
 </#macro>
+
+
+<#function isResearchContentFound classGroups>
+	<#list classGroups as group>
+        <#if (group.individualCount > 0) && group.uri?contains("publications") >
+            <#list group.classes as class>
+                <#if (class.individualCount > 0) && (class.uri?contains("AcademicArticle") || class.uri?contains("Book") || class.uri?contains("Chapter") ||class.uri?contains("ConferencePaper") || class.uri?contains("Grant") || class.uri?contains("Report")) >
+                    <#return true>
+                </#if>
+            </#list>
+        </#if>
+    </#list>
+    <#return false>
+</#function>
+
+<#macro printResearchTable classGroups>
+     <table>
+	  <tr>
+	    <th>${i18n().type_capitalized}</th>
+	    <th>${i18n().count_capitalized}</th>
+	  </tr>
+	  <#list classGroups as group>
+            <#if (group.individualCount > 0) && group.uri?contains("publications") >
+                <#list group.classes as class>
+                    <#if (class.individualCount > 0) && (class.uri?contains("AcademicArticle") || class.uri?contains("Book") || class.uri?contains("Chapter") ||class.uri?contains("ConferencePaper") || class.uri?contains("Grant") || class.uri?contains("Report")) >
+                        <tr>
+                            <td>
+                            	<a href='${urls.base}/individuallist?vclassId=${class.uri?replace("#","%23")!}'>${class.name}</a>
+                            </td>
+                            <td>
+	  							<span>${class.individualCount!}</span>
+	  						</td>
+	  					</tr>
+                    </#if>
+                </#list>
+            </#if>
+        </#list>
+	</table>
+	<ul>
+		<li><a href="${urls.base}/research" alt="${i18n().view_all_research}">${i18n().view_all}</a></li>
+	</ul>
+</#macro>
+
 
 <#-- Renders the html for the academic departments section on the home page. -->
 <#-- Works in conjunction with the homePageUtils.js file -->
