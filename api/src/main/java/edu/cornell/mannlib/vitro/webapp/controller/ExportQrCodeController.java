@@ -135,7 +135,7 @@ public class ExportQrCodeController extends FreemarkerHttpServlet {
             String contextPath = vreq.getContextPath();
             qrData.put("exportQrCodeUrl", contextPath + "/qrcode?uri=" + UrlBuilder.urlEncode(individualUri));
 
-            qrData.put("aboutQrCodesUrl", contextPath + "/qrcode/about");
+            qrData.put("aboutQrCodesUrl", contextPath + "/about_qrcode");
             return qrData;
 		} catch (Exception e) {
 			log.error("Failed getting QR code data", e);
