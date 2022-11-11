@@ -131,6 +131,8 @@ var i18nStringsUtil = {
     clerSearchQuery: '${i18n().clear_search_query?js_string}',
     shortMaxEntityNote: '${i18n().short_max_entity_note?js_string}',
     informationString: '${i18n().information_capitalized?js_string}',
+    recordsStartEndOfTotal: '${i18n().vis_records_start_end_of_total?js_string}',
+    searchButton: '${i18n().search_button?js_string}',
     entityTypeString: '${i18n().entity_type?js_string}'
 };
 </script>
