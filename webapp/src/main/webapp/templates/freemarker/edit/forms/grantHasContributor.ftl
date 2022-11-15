@@ -129,7 +129,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <select name="roleType" style="margin-top:-2px" >
         <option value="" <#if roleTypeValue == "">selected</#if>>${i18n().select_one}</option>
         <#list roleTypeOpts?keys as key>
-            <option value="${key}"  <#if roleTypeValue == key>selected</#if>><#if roleTypeOpts[key] == "Other">${i18n().researcher_role}<#else>${roleTypeOpts[key]}</#if></option>
+            <option value="${key}"  <#if roleTypeValue == key>selected</#if>>${roleTypeOpts[key]}</option>
         </#list>
     </select>
 
