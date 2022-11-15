@@ -126,12 +126,12 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <@lvf.unsupportedBrowser urls.base />
 
-<section id="add${roleDescriptor?capitalize}RoleToPersonTwoStage" role="region">
+<section id="add${roleDescriptor?cap_first}RoleToPersonTwoStage" role="region">
 
-    <form id="add${roleDescriptor?capitalize}RoleToPersonTwoStage" class="customForm noIE67" action="${submitUrl}"  role="add/edit grant role">
+    <form id="add${roleDescriptor?cap_first}RoleToPersonTwoStage" class="customForm noIE67" action="${submitUrl}"  role="add/edit grant role">
 
        <p class="inline">
-        <label for="typeSelector">${typeSelectorLabel?capitalize}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
+        <label for="typeSelector">${typeSelectorLabel?cap_first}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
         <#--Code below allows for selection of first 'select one' option if no activity type selected-->
         <#if activityTypeValue?has_content>
         	<#assign selectedActivityType = activityTypeValue />
@@ -160,7 +160,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <#--   <div class="fullViewOnly"> -->
             <p>
-                <label for="activity">${genericLabel?capitalize} ${i18n().name_capitalized} ${requiredHint}</label>
+                <label for="activity">${genericLabel?cap_first} ${i18n().name_capitalized} ${requiredHint}</label>
                 <input class="acSelector" size="50"  type="text" id="activity" name="activityLabel"  acGroupName="activity" value="${activityLabelValue}" />
                 <input class="display" type="hidden" id="activityDisplay" acGroupName="activity" name="activityLabelDisplay" value="${activityLabelDisplayValue}">
             </p>
@@ -170,7 +170,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
             <div class="acSelection" acGroupName="activity">
                 <p class="inline">
-                    <label></label>
+                    <label>${i18n().selected}</label>
                     <span class="acSelectionInfo"></span>
                     <a href="/vivo/individual?uri=" class="verifyMatch" title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized}</a> ${i18n().or}
                     <a href="#" class="changeSelection" id="changeSelection">${i18n().change_selection})</a>
@@ -181,7 +181,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
             </div>
 
             <#if showRoleLabelField = true>
-            <p><label for="roleLabel">${i18n().role_in} ${genericLabel?capitalize} ${roleExamples}</label>
+            <p><label for="roleLabel">${i18n().role_in} ${genericLabel?cap_first} ${roleExamples}</label>
                 <input  size="50"  type="text" id="roleLabel" name="roleLabel" value="${roleLabel}" />
             </p>
         	</#if>
@@ -190,18 +190,18 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
                <#--Generated html is a map with key name mapping to html string-->
                <#if htmlForElements?keys?seq_contains("startField")>
                 	<label class="dateTimeLabel" for="startField">${i18n().start_year}</label>
-               		${htmlForElements["startField"]} ${yearHint}
+               		<@lvf.printYearField "startField" /> ${yearHint}
                </#if>
             <#else>
                 <h4 class="label">${i18n().years_participating} </h4>
                 <#if htmlForElements?keys?seq_contains("startField")>
-                	    <label class="dateTime" for="startField">${i18n().start_capitalized}</label>
-               		    ${htmlForElements["startField"]} ${yearHint}
+                	<label class="dateTime" for="startField">${i18n().start_year}</label>
+               		<@lvf.printYearField "startField" /> ${yearHint}
                </#if>
                <p></p>
                <#if htmlForElements?keys?seq_contains("endField")>
-               		    <label class="dateTime" for="endField">${i18n().end_capitalized}</label>
-               		    ${htmlForElements["endField"]} ${yearHint}
+                    <label class="dateTime" for="endField">${i18n().end_year}</label>
+               		<@lvf.printYearField "endField" /> ${yearHint}
                </#if>
             </#if>
 <#--        </div> -->
@@ -222,7 +222,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 	    acTypes: ${acTypes!},
 	    <#if acMultipleTypes??>acMultipleTypes: ${acMultipleTypes!},</#if>
 	    // used in repair mode: button text and org name label
-	    defaultTypeName: <#if genericLabel??>'${genericLabel}'<#else>'activity'</#if>,
+	    defaultTypeName: <#if genericLabel??>'${genericLabel?js_string}'<#else>'activity'</#if>,
 	    baseHref: '${urls.base}/individual?uri=',
         blankSentinel: '${blankSentinel}',
         flagClearLabelForExisting: '${flagClearLabelForExisting}'

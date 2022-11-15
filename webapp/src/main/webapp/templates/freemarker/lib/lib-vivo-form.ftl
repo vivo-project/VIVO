@@ -107,3 +107,10 @@ return - returns empty string if no value found-->
 	</#if>
 	<#return false>
 </#function>
+
+<#macro printYearField fieldName required=false>
+    <fieldset class="dateTime">
+        <input class="text-field" name="${fieldName}-year" id="${fieldName}-year" type="text" value="${year!}" size="4" maxlength="4" <#if required>required </#if> />
+    </fieldset>
+</#macro>
+
