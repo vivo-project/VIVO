@@ -1,0 +1,566 @@
+@prefix bibo:    <http://purl.org/ontology/bibo/> .
+@prefix cito:    <http://purl.org/spar/cito/> .
+@prefix c4o:     <http://purl.org/spar/c4o/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix event:   <http://purl.org/NET/c4dm/event.owl#> .
+@prefix fabio:   <http://purl.org/spar/fabio/> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix geo:     <http://aims.fao.org/aos/geopolitical.owl#> .
+@prefix obo:     <http://purl.obolibrary.org/obo/> .
+@prefix ocrer:   <http://purl.org/net/OCRe/research.owl#> .
+@prefix ocresd:  <http://purl.org/net/OCRe/study_design.owl#> .
+@prefix ocresp:  <http://purl.org/net/OCRe/study_protocol.owl#> .
+@prefix ocrest:  <http://purl.org/net/OCRe/statistics.owl#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ro:      <http://purl.obolibrary.org/obo/ro.owl#> .
+@prefix scires:  <http://vivoweb.org/ontology/scientific-research#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix swo:     <http://www.ebi.ac.uk/efo/swo/> .
+@prefix vann:    <http://purl.org/vocab/vann/> .
+@prefix vcard:   <http://www.w3.org/2006/vcard/ns#> .
+@prefix vitro:   <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix vitro-public:  <http://vitro.mannlib.cornell.edu/ns/vitro/public#> .
+@prefix vivo:    <http://vivoweb.org/ontology/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+vivo:isCorrespondingAuthor
+      vitro:publicDescriptionAnnot
+              "Ukazuje da li je autor odgovoran za prepiske vezane za rad, i da li garantuje objavljivanje rada. Odgovor može biti 'true' ili 'false' (bez navodnika)."@sr-Latn-RS .
+
+vivo:supplementalInformation
+      vitro:publicDescriptionAnnot
+              "Omogućuje unos dodatnih informacija, kao što su informacije o akademskoj pozadini i školovanju."@sr-Latn-RS .
+
+bibo:chapter
+      vitro:publicDescriptionAnnot
+              "Broj poglavlja. NE služi za naslov poglavlja, koje treba upisati u \"naziv\" polje (boldovano polje na vrhu stranice)"@sr-Latn-RS .
+
+bibo:sici
+      vitro:publicDescriptionAnnot
+              "\"The Serial Item and Contribution Identifier (SICI)\" je kod (ANSI/NISO standard Z39.56) koji se koristi da se jedinstveno identifikuju specifični tom-ovi, članci ili drug delovi časopisa."@sr-Latn-RS .
+
+vivo:placeOfPublication
+      vitro:publicDescriptionAnnot
+              "Grad u kom je napisan objavljeni rad."@sr-Latn-RS .
+
+skos:narrower
+      vitro:fullPropertyNameAnnot
+              "uži pojam"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Ovo se odnosi na pojam koji je preciznije definisan u odnosu na neki drugi pojam koji ima šire značenje, gde je uži pojam podskup šire definisanog pojma."@sr-Latn-RS .
+
+bibo:pageStart
+      vitro:publicDescriptionAnnot
+              "Broj početne stranice unutar kontinualnog niza stranica."@sr-Latn-RS .
+
+
+vivo:reportId
+      vitro:publicDescriptionAnnot
+              " Jedinstveni identifikator za Izveštaj (tip informacionog resursa)."@sr-Latn-RS .
+
+owl:sameAs
+      vitro:fullPropertyNameAnnot
+              "istoKao"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Ovo je OWL svojstvo koje vezuje dve osobe sa istim 'identitetom'. pogledati http://www.w3.org/TR/owl-ref/#sameAs-def"@sr-Latn-RS .
+
+vitro:moniker
+      vitro:descriptionAnnot
+              "Ovo svojstvo je zastarelo."@sr-Latn-RS .
+
+bibo:pmid
+      vitro:publicDescriptionAnnot
+              "\"A PMID (PubMed Identifier or PubMed Unique Identifier)\" je jedinstveni broj dodeljen svakom PubMed citatu članaka iz 'life sciences' i 'biomedical scientific' časopisa."@sr-Latn-RS .
+
+vivo:grantDirectCosts
+      vitro:publicDescriptionAnnot
+              "Ovo su troškovi vezani za aktivnosti oko grant-a, i ne bi trebalo da sadrže nikakve indirektne troškove vezane za administraciju."@sr-Latn-RS .
+
+vivo:features
+      vitro:fullPropertyNameAnnot
+              "pominje"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Ovo povezuje informacioni resurs sa osobom koju pominje."@sr-Latn-RS .
+
+vivo:featuredIn
+      vitro:fullPropertyNameAnnot
+              "pominjeSeU"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje osobu sa informacionim resursom koji sadrži članak o datoj osobi."@sr-Latn-RS .
+
+bibo:distributor
+      vitro:fullPropertyNameAnnot
+              "distributor"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "foaf definicija je sledeća - Distributor dokumenta ili kolekcije dokumenata. Međutim, u VIVO-u, može da se poveže bilo šta kao distributor bilo čega."@sr-Latn-RS .
+
+vivo:eligibleFor
+      vitro:publicDescriptionAnnot
+              "Koristi se za situacije kada kredencijali zahtevaju određene preduslove ili diplomu, kao što je pozicija člana odbora u medicini"@sr-Latn-RS .
+
+
+bibo:affirmedBy
+      vitro:fullPropertyNameAnnot
+              "potvrđenoOdStrane"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Pravosudska odluga koja potvrđuje presudu."@sr-Latn-RS .
+
+vivo:assignee
+      vitro:publicDescriptionAnnot
+              "osoba ili entitet kome je dodeljeno vlasništvo nad objavljenom prijavom u trenutku objavljivanja."@sr-Latn-RS .
+
+bibo:presents
+      vitro:displayRankAnnot
+              "200"^^xsd:int ;
+      vitro:fullPropertyNameAnnot
+              "prezentacije"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Spaja događaj sa povezanim dokumentima; na primer, konferenciju sa određenim papirom."@sr-Latn-RS .
+
+bibo:locator
+      vitro:publicDescriptionAnnot
+              "Opis (često numerički) koji locira određenu stavku unutar dokumenta ili kolekcije."@sr-Latn-RS .
+
+bibo:degree
+      vitro:fullPropertyNameAnnot
+              "diploma"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Rad za diplomu"@sr-Latn-RS .
+
+vivo:localAwardId
+      vitro:publicDescriptionAnnot
+              "Lokalni identifikator unutar institucije koji se dodeljuje grant-u."@sr-Latn-RS .
+
+vivo:iclCode
+      vitro:publicDescriptionAnnot
+              "Internacionalna klasifikacija(e) kojima je dodeljena objavljena prijava."@sr-Latn-RS .
+
+bibo:presentedAt
+      vitro:fullPropertyNameAnnot
+              "predstavljenoNa"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje dokument sa događajem; na primer, rad sa konferencijom."@sr-Latn-RS .
+
+vivo:publisherOf
+      vitro:fullPropertyNameAnnot
+              "objavljuje"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje entitet koji se bavi objavljivanjem štampanih ili elektronskih materijala sa samim materijalima koje objavljuje."@sr-Latn-RS .
+
+bibo:asin
+      vitro:publicDescriptionAnnot
+              "\"The Amazon Standard Identification Number (ASIN)\" je jedinstveni identifikacioni broj koji koristi Amazon.com i partneri za identifikaciju proizvoda unutar Amazon.com organizacije."@sr-Latn-RS .
+
+vivo:outreachOverview
+      vitro:publicDescriptionAnnot
+              "Molimo vas unesite jedan sažetak vaših ciljeva i/ili doprinosa"@sr-Latn-RS .
+
+bibo:doi
+      vitro:fullPropertyNameAnnot
+              "doi"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "\"The Digital Object Identifier (DOI)\" Sistem omogućuje dugotrajnu identifikaciju objekata u digitalnim okruženjima. \"DOI imena su dodeljena bilo kom entitetu koji se koristi unutar digitalne mreže. Koriste se da obezbede trenutne informacije, uključujući i gde se ti objekti (ili informacije o njima) mogu naći na Internetu. Informacije o digitalnim objektima su podložne promenama u toku vremena, uključujući i gde se mogu pronaći, ali njihovo DOI ime se neće menjati.\""@sr-Latn-RS .
+
+bibo:shortDescription
+      vitro:publicDescriptionAnnot
+              "Nalog za resurs."@sr-Latn-RS .
+
+bibo:volume
+      vitro:publicDescriptionAnnot
+              "Broj tom-a"@sr-Latn-RS .
+
+bibo:abstract
+      vitro:publicDescriptionAnnot
+              "Sažetak resursa"@sr-Latn-RS .
+
+vivo:courseCredits
+      vitro:publicDescriptionAnnot
+              "Broj bodova dodeljen kursu od strane instituta za učenje."@sr-Latn-RS .
+
+bibo:number
+      vitro:publicDescriptionAnnot
+              "Generični broj dokumenta ili stavke. Ne treba mešati sa brojem izdanja. Barkod, možda?"@sr-Latn-RS .
+
+vivo:teachingOverview
+      vitro:publicDescriptionAnnot
+              "Molimo Vas unesite jedan sažetak koji opisuje vaše nastavničke aktivnosti, ciljeve i/ili iskustva"@sr-Latn-RS .
+
+vivo:rank
+      vitro:publicDescriptionAnnot
+              "unesite poziciju unutar liste koju bi ste želeli da prikaže ova stavka"@sr-Latn-RS .
+
+bibo:issn
+      vitro:publicDescriptionAnnot
+              "\"An International Standard Serial Number (ISSN)\" je jedinstveni osmocifren broj koji se koristi za identifikaciju publikacija unutar časopisa."@sr-Latn-RS .
+
+vivo:patentNumber
+      vitro:publicDescriptionAnnot
+              "Jedinstveni broj dodeljen prijavi za patent u trenutku kada je \"United States Patent and Trademark Office\" izdala patent."@sr-Latn-RS .
+
+vivo:contactInformation
+      vitro:publicDescriptionAnnot
+              "Kontakt informacije za određen događaj. Ovo može biti ime, email, broj telefona ili bilo koji drugi način za kontaktiranje osobe od koje se može dobiti više informacija o događaju."@sr-Latn-RS .
+
+vivo:overview
+      vitro:publicDescriptionAnnot
+              "Kratak sažetak koji će se koristiti kao opisna izjava."@sr-Latn-RS .
+
+vivo:description
+      vitro:publicDescriptionAnnot
+              "Nalog za resurs"@sr-Latn-RS .
+
+vivo:grantSubcontractedThrough
+      vitro:fullPropertyNameAnnot
+#TODO not sure about this one
+              "grantPodugovorenKroz"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Ovo povezuje grant sa organizacijom koja dodeljuje pod-ugovore za grant."@sr-Latn-RS .
+
+bibo:recipient
+      vitro:fullPropertyNameAnnot
+              "primalac"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje komunikacioni dokument sa agentom koji prima komunikacioni dokument."@sr-Latn-RS .
+
+vivo:freetextKeyword
+      vitro:publicDescriptionAnnot
+              "Namenjeno za reč ili kratku frazu samo kada nije moguće identifikovati instancu rečnika. Takođe se može koristiti da pomogne pri naglašavanju suptilnih razlika u radu."@sr-Latn-RS .
+
+bibo:identifier
+      vitro:publicDescriptionAnnot
+              "Jedinstveni identifikator dokumenta ili kolekcije. Ovo podatak-svojstvo (data property) niko ne vidi niti ažurira."@sr-Latn-RS .
+
+bibo:reviewOf
+      vitro:fullPropertyNameAnnot
+              "recenzija"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje dokument koji sadrži recenziju sa onim šta recenzuje (resurs, stavka, itd.)."@sr-Latn-RS .
+
+vivo:reviewedIn
+      vitro:fullPropertyNameAnnot
+              "recenzovanoU"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje nešto sa recenzijom te stvari."@sr-Latn-RS .
+
+vivo:proceedingsOf
+      vitro:fullPropertyNameAnnot
+              "zapisnikZa"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje zapisnik sa konferencijom na kojoj je nastao taj zapisnik."@sr-Latn-RS .
+
+vivo:hasPrerequisite
+      vitro:fullPropertyNameAnnot
+              "imaPreduslove"@sr-Latn-RS .
+
+bibo:pageEnd
+      vitro:publicDescriptionAnnot
+              "Broj završne stranice u okviru kontinualnog niza stranica."@sr-Latn-RS .
+
+<http://purl.org/spar/c4o/hasGlobalCitationFrequency>
+      vitro:publicDescriptionAnnot
+              "A 'global citation frequency' je entitet koji referencira specifičan izvor, datum i vrednost; uključite vrednost, izvor, i datum unutar labele radi jasnoće."@sr-Latn-RS .
+
+bibo:translationOf
+      vitro:fullPropertyNameAnnot
+              "prevod"^^xsd:string ;
+      vitro:publicDescriptionAnnot
+              "Povezuje prevedeni dokument sa originalnim dokumentom."@sr-Latn-RS .
+
+bibo:performer
+      vitro:fullPropertyNameAnnot
+              "izvođač"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje nastup sa osobom ili organizacijom koja je održala nastup."@sr-Latn-RS .
+
+# note that this applies to grants only; see hasOutputContext for obo:RO_0002234 in /rdf/display/everytime/propertyConfig.n3
+vivo:supportedInformationResource
+      vitro:publicDescriptionAnnot
+              "unesite publikaciju ili dokument koji je podržan od strane ovog grant-a"@sr-Latn-RS .
+
+bibo:eissn
+      vitro:publicDescriptionAnnot
+              "\"An International Standard Serial Number (ISSN)\" je jedinstveni osmocifarn broj koji se koristi za identifikaciju publikacija u okviru časopisa. eissn je issn za digitalne časopise."@sr-Latn-RS .
+
+vivo:publisher
+      vitro:fullPropertyNameAnnot
+              "izdavač"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje izdat materijal sa izdavačem tog materijala."@sr-Latn-RS .
+
+vivo:seatingCapacity
+      vitro:publicDescriptionAnnot
+              "Broj ljudi koji može biti smešten unutar određene sobe, ograničen sa fizičkim prostorom ili zakonom."@sr-Latn-RS .
+
+vivo:middleName
+      vitro:publicDescriptionAnnot
+              "Srednje ime ili inicijali koje koristite. Samo jedna stavka može biti upisana."@sr-Latn-RS .
+
+vivo:licenseNumber
+      vitro:publicDescriptionAnnot
+              "broj licence"@sr-Latn-RS .
+
+bibo:gtin14
+      vitro:publicDescriptionAnnot
+              "\"Global Trade Item Number (GTIN)\" je identifikator stvari kojima se trguje razvijen od strane GS1 (sastoji se od prethodnog \"EAN International and Uniform Code Council-a\"). GTIN je \"sveobuhvatajući\" izraz koji se koristi za opisivanje čitave porodice GS1 struktura podataka za identifikaciju stavki kojima se trguje (proizvodi i usluge). GTINs može da ima 8, 12, 13 ili 14 cifara."@sr-Latn-RS .
+
+bibo:section
+      vitro:publicDescriptionAnnot
+              "Broj sekcije"@sr-Latn-RS .
+
+bibo:interviewer
+      vitro:fullPropertyNameAnnot
+              "intervjuer"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Agent koji intervjuiše drugog agenta."@sr-Latn-RS .
+
+vivo:orcidId
+      vitro:publicDescriptionAnnot
+              "\"ORCID (Open Researcher and Contributor ID)\" je predložen alfanumerički kod (bez vlasnika) koji treba da jedinstveno identifikuje naučne i druge akademske autore."@sr-Latn-RS .
+
+vivo:hasFacility
+      vitro:fullPropertyNameAnnot
+              "ima objekat"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje organizaciju sa objektom koji poseduje ili koristi."@sr-Latn-RS .
+
+<http://vivoweb.org/ontology/scientific-research#nctId>
+      vitro:publicDescriptionAnnot
+              "Registarski broj \"ClinicalTrials.gov-a\""@sr-Latn-RS .
+
+vivo:equipmentFor
+      vitro:fullPropertyNameAnnot
+              "oprema za"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje opremu sa organizacijom koja ima vlasništvo nad tom opremom."@sr-Latn-RS .
+
+bibo:prefixName
+      vitro:publicDescriptionAnnot
+              "Titula koja se nalazi ispred imena neke osobe."@sr-Latn-RS .
+
+vivo:researcherId
+      vitro:publicDescriptionAnnot
+              "Identifikacioni broj dodeljen profilu kreiranom od strane istraživača na \"ResearcherID-u\" (https://researcherid.com/)."@sr-Latn-RS .
+bibo:annotates
+      vitro:fullPropertyNameAnnot
+              "beleži"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Kritička beleška ili beleška sa dodatnim pojašnjenjima za određeni dokument."@sr-Latn-RS .
+
+bibo:reversedBy
+      vitro:fullPropertyNameAnnot
+              "opovrgnutoOd"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Pravosudska odluka koja poništava presudu. Ovo povezuje sudsku odluku sa sudskom odlukom koja ju je poništila."@sr-Latn-RS .
+
+vivo:majorField
+      vitro:publicDescriptionAnnot
+              "Glavna oblast kojom se bave studije koje opisujete u okviru akademske pozadine."@sr-Latn-RS .
+
+bibo:upc
+      vitro:publicDescriptionAnnot
+              "The Universal Product Code (UPC) je barkod simbol (specifičan tip barkod-a), koji se koristi u Kanadi i SAD-u za praćenje stvari u prodavnicama."@sr-Latn-RS .
+
+<http://vivoweb.org/ontology/scientific-research#irbNumber>
+      vitro:publicDescriptionAnnot
+              "Institutional Review Board (IRB) broj za kliničko istraživanje"@sr-Latn-RS .
+
+bibo:director
+      vitro:fullPropertyNameAnnot
+              "režiser"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje entitet sa filmskim režiserom."@sr-Latn-RS .
+
+bibo:lccn
+      vitro:publicDescriptionAnnot
+              "\"The Library of Congress Control Number (LCCN)\" je sistem zasnovan na serijskom pobrojavanju zapisa unutar biblioteke kongresa u SAD-u."@sr-Latn-RS .
+
+<http://purl.org/dc/terms/relation>
+      vitro:fullPropertyNameAnnot
+              "veza"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezani resurs. Preporuka je da se resursi identifikuju pomoću string-a koji se pridržava formalnog sistema identifikacija. "@sr-Latn-RS .
+
+skos:broader
+      vitro:fullPropertyNameAnnot
+              "širi pojam"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje širi pojam sa drugim pojmom koji ima užu/precizniju definiciju. Značenje užeg pojma mora da bude podgrupa šireg pojma."@sr-Latn-RS .
+
+vivo:departmentOrSchool
+      vitro:publicDescriptionAnnot
+              "Naziv departmana ili škole koji se koristili za opis akademske istorije."@sr-Latn-RS .
+
+bibo:court
+      vitro:fullPropertyNameAnnot
+              "sud"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje pravni dokument sa organizacijom. Bibo definicija je: \"Sud povezan sa pravnim dokumentom; na primer, entitet koji donosi odluku.\""@sr-Latn-RS .
+
+bibo:translator
+      vitro:fullPropertyNameAnnot
+              "prevodilac"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje informacioni resurs sa prevodiocem pisanog dokumenta iz jednog jezika u drugi."@sr-Latn-RS .
+
+vivo:distributesFundingFrom
+      vitro:fullPropertyNameAnnot
+              "distribuira finansije od"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Naznačava organizaciju koja distribuira finansije druge organizacije. Na primer, navodi izvor \"protočnog\" finansiranja."@sr-Latn-RS .
+
+skos:related
+      vitro:fullPropertyNameAnnot
+              "povezan"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Naznačava kada je pojam povezan sa drugim pojmom iz istog rečnika."@sr-Latn-RS .
+
+vivo:providesFundingThrough
+      vitro:fullPropertyNameAnnot
+              "obezbeđuje finsansiranje kroz"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje organizaciju koja finansira sa drugom organizacijom kroz koju prolaze spomenute finansije. Organizacija ne mora da pripada samo jednom tipu organizacije."@sr-Latn-RS .
+
+bibo:interviewee
+      vitro:fullPropertyNameAnnot
+              "intervjuisan"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Agent koji je intervjuisan od strane drugog agenta."@sr-Latn-RS .
+
+bibo:transcriptOf
+      vitro:fullPropertyNameAnnot
+              "transkriptOd"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje dokument sa transkriptovanim originalom."@sr-Latn-RS .
+
+bibo:issuer
+      vitro:fullPropertyNameAnnot
+              "izdavač"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Entitet odgovoran za izdavanje neformalnih objavljenih dokumenata, kao što su saopštenja, izveštaji, itd."@sr-Latn-RS .
+
+vivo:start
+      vitro:publicDescriptionAnnot
+              "početak vremenskog intervala"@sr-Latn-RS .
+
+bibo:oclcnum
+      vitro:publicDescriptionAnnot
+              "\"oclcnum\" je sekvencijalni broj za pristupanje dodeljen od strane \"OCLC-a\" u trenutku kada se bibliografski zapisi upisuju u \"OCLC WorldCat (OCLC Online Union Catalog)\"."@sr-Latn-RS .
+
+bibo:isbn10
+      vitro:publicDescriptionAnnot
+              "Internacionalni Standardni Broj Knjige (ISBN) je jedinstven[1][2] numerički identifikator za komercijalne knjige zasnovan na devetocifrenom \"Standard Book Numbering\" (SBN) kodu kreiranom od strane Gordona Fostera. Desetocifren ISBN format je kreiran 1970. od strane Internacionalne Organizacije za Standardizaciju i objavljen je kao internacionalni standard  ISO 2108."@sr-Latn-RS .
+
+vivo:prerequisiteFor
+      vitro:fullPropertyNameAnnot
+              "preduslov za"@sr-Latn-RS .
+
+bibo:isbn13
+      vitro:publicDescriptionAnnot
+              "Internacionalni Standardni Broj Knjige (ISBN) je jedinstven[1][2] numerički identifikator za komercijalne knjige zasnovan na devetocifrenom \"Standard Book Numbering\" (SBN) kodu kreiranom od strane Gordona Fostera. Od 1. Januara 2007, ISBN brojevi sadrže 13 cifara, format koji je kompatabilan sa \"Bookland EAN-13s\"."@sr-Latn-RS .
+
+vivo:cclCode
+      vitro:publicDescriptionAnnot
+              "Originalna klasifikacija i referencirajuća SAD klasifikacija(e) kojima je prijava za publikaciju bila dodeljena u trenutku publikacije -- sadrži informacije i o  primarnoj i o sekundarnoj klasi."@sr-Latn-RS .
+
+bibo:uri
+      vitro:publicDescriptionAnnot
+              "Univerzalni Identifikator Resursa za dokument."@sr-Latn-RS .
+
+vivo:translatorOf
+      vitro:fullPropertyNameAnnot
+              "prevodilac"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Označava entitet kao prevodilac informacionog dokumenta."@sr-Latn-RS .
+
+bibo:eanucc13
+      vitro:publicDescriptionAnnot
+              "\"EAN International-Uniform Code Council (EAN-UCC)\" je naziv porodice standarda vezanih za lanac nabavke, formalno poznat kao \"EAN.UCC\" Sistem, koji sadrži barkodove proizvoda koji su otšampani na većini proizvoda dostupnih u prodavnicama širom sveta, i standarde za elektronske prodavnice."@sr-Latn-RS .
+
+vivo:hasTranslation
+      vitro:fullPropertyNameAnnot
+              "ima prevod"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje originalni dokument sa prevodom tog dokumenta."@sr-Latn-RS .
+
+vivo:dateIssued
+      vitro:publicDescriptionAnnot
+              "Datum kada je patent izdat"@sr-Latn-RS .
+
+vivo:identifier
+      vitro:publicDescriptionAnnot
+              "Nad-svojstvo (parent property) za institucione i druge indetifikatore. Ovo podatak-svojstvo (data property) nije vidljivo niti se ažurira od strane bilo koga."@sr-Latn-RS .
+
+vivo:totalAwardAmount
+      vitro:publicDescriptionAnnot
+              "Ovo sadrži direktne troškove koji se koriste za aktivnosti grant-a plus indirektne troškove administracije grant-a."@sr-Latn-RS .
+
+vivo:distributes
+      vitro:fullPropertyNameAnnot
+              "distribuira"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Ovo može da poveže bilo šta sa bilo kojom stvari koju dati entitet distribuira. Suprotno svojstvo ovom je distributor, a foaf definicija za distributora je - Distributor dokumenta ili kolekcije dokumenata. "@sr-Latn-RS .
+
+<http://purl.org/dc/terms/contributor>
+      vitro:fullPropertyNameAnnot
+              "saradnik"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Entitet zadužen za doprinošenje određenom resursu. Primer saradnika mogu biti osoba, organizacija ili usluga (servis). Tipično se ime saradnika koristi da bi se ukazalo na dati entitet."@sr-Latn-RS .
+
+vivo:hrJobTitle
+      vitro:publicDescriptionAnnot
+              "Specifična oznaka radnog mesta unutar organizacije ljudskih resursa, uglavnom povezana sa opisom posla koji navodi zadatke i odgovornosti koje nosi."@sr-Latn-RS .
+
+<http://purl.org/vocab/vann/preferredNamespaceUri>
+      vitro:publicDescriptionAnnot
+              "Ceo URI određenog imenskog prostora (namespace)."@sr-Latn-RS .
+
+vivo:subcontractsGrant
+      vitro:fullPropertyNameAnnot
+              "podugovaraGrant"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Ovo povezuje agenciju, osobu ili entitet koji dodeljuje pod-ugovore za grant sa grant-om koji dodeljuje."@sr-Latn-RS .
+
+vivo:dateFiled
+      vitro:publicDescriptionAnnot
+              "Datum kada je popunjen patent"@sr-Latn-RS .
+
+bibo:subsequentLegalDecision
+      vitro:fullPropertyNameAnnot
+              "naknadnaSudskaOdluka"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Sudska odluka nakon žalbe koja preduzima akciju za određen sudski slučaj (potvrđuje ga, ukida ga, itd.)."@sr-Latn-RS .
+
+bibo:coden
+      vitro:publicDescriptionAnnot
+              "\"CODEN\" je po ASTM standardu E250 bibliografski kod sa 6 karaktera, koji pruža sažet, jedinstven i jednoznačan identifikator serijskih i ne-serijskih publikacija iz svih oblasti."@sr-Latn-RS .
+
+vivo:scopusId
+      vitro:publicDescriptionAnnot
+              "Numerička cifra dodeljena autoru unutar \"Scopus-a\". U \"Scopus-\" se to naziva \"Identifikacija Autora\"."@sr-Latn-RS .
+
+vivo:sponsorAwardId
+      vitro:publicDescriptionAnnot
+              "Identifikator organizacije koja sponzoriše nagradu."@sr-Latn-RS .
+      
+vivo:degreeCandidacy
+      vitro:fullPropertyNameAnnot
+              "kandidaturaZaDiplomu"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje mentorstvo sa akademskom diplomom."@sr-Latn-RS .
+
+vivo:hasProceedings
+      vitro:fullPropertyNameAnnot
+              "imaZapisnik"@sr-Latn-RS ;
+      vitro:publicDescriptionAnnot
+              "Povezuje zapisnik sa konferencijom na kojoj je taj zapisnik nastao."@sr-Latn-RS .
+
+bibo:edition
+      vitro:publicDescriptionAnnot
+              "Naziv koji definiše specijalno izdanje dokumenta. Uglavnom je literal koji se sastoji od broja verzije i reči."@sr-Latn-RS .
+
+vivo:dateTime
+      vitro:publicDescriptionAnnot
+              "Koristiti kada su jedan datum i vreme dovolji, i nema potrebe za početnim i završnim datumom i vremenom, ili za više datuma."@sr-Latn-RS .
+

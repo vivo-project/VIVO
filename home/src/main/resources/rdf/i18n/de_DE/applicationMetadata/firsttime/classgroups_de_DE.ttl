@@ -1,0 +1,21 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://vivoweb.org/ontology#vitroClassGroupactivities> rdfs:label "Aktivitäten"@de-DE .
+
+<http://vivoweb.org/ontology#vitroClassGroupcourses> rdfs:label "Lehrveranstaltungen"@de-DE .
+
+<http://vivoweb.org/ontology#vitroClassGroupequipment> rdfs:label "Equipment"@de-DE .
+
+<http://vivoweb.org/ontology#vitroClassGroupevents> rdfs:label "Events"@de-DE .
+
+<http://vivoweb.org/ontology#vitroClassGrouplocations> rdfs:label "Orte"@de-DE .
+
+<http://vivoweb.org/ontology#vitroClassGrouporganizations> rdfs:label "Organisationen"@de-DE .
+
+<http://vivoweb.org/ontology#vitroClassGrouppeople> rdfs:label "Personen"@de-DE .
+
+<http://vivoweb.org/ontology#vitroClassGrouppublications> rdfs:label "Forschung"@de-DE .
+
