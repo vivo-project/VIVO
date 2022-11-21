@@ -1,0 +1,38 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vivo: <http://vivoweb.org/ontology#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+vivo:vitroPropertyGroupaddress rdfs:label "Kontakt"@de-DE .
+
+vivo:vitroPropertyGroupaffiliation rdfs:label "Zugehörigkeit"@de-DE .
+
+vivo:vitroPropertyGroupbibliographic rdfs:label "Publikationen"@de-DE .
+
+vivo:vitroPropertyGroupbibliographiconline rdfs:label "verwandte Dokumente"@de-DE .
+
+vivo:vitroPropertyGroupbibmapping rdfs:label "Bib Mapping"@de-DE .
+
+vivo:vitroPropertyGroupbibobscure rdfs:label "weitere Informationen zum Dokument"@de-DE .
+
+vivo:vitroPropertyGroupbiography rdfs:label "Hintergrund"@de-DE .
+
+vivo:vitroPropertyGroupidentifiers rdfs:label "Identität"@de-DE .
+
+vivo:vitroPropertyGrouplinks rdfs:label "Links"@de-DE .
+
+vivo:vitroPropertyGrouplocation rdfs:label "Ort"@de-DE .
+
+vivo:vitroPropertyGroupmapping rdfs:label "Mapping"@de-DE .
+
+vivo:vitroPropertyGroupoutreach rdfs:label "Dienstleistung"@de-DE .
+
+vivo:vitroPropertyGroupoverview rdfs:label "Überblick"@de-DE .
+
+vivo:vitroPropertyGroupresearch rdfs:label "Forschung"@de-DE .
+
+vivo:vitroPropertyGroupteaching rdfs:label "Lehre"@de-DE .
+
+vivo:vitroPropertyGrouptime rdfs:label "Zeit"@de-DE .
+

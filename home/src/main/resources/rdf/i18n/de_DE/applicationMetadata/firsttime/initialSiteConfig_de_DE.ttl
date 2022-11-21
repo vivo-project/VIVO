@@ -1,0 +1,19 @@
+# baseURI: file:///vivo-languages_i18n/applicationMetadata/firsttime/initialSiteConfig_fr_CA.rdf
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+[
+  a vitro:Portal ;
+  vitro:aboutText """<p>VIVO ist eine Open Source Anwendung für das semantische Web, die ursprünglich an der Cornell University entwickelt und eingesetzt wurde.
+        Nach Installation an einer Einrichtung und Hinzufügen von Inhalten ermöglicht VIVO es, Forschungs- und Lehraktivitäten innerhalb der Einrichtung
+        interdisziplinär zu entdecken. VIVO unterstützt, über die Informationen zu browsen und bietet eine Suchfunktion an, die schnell spezifische Resultate über
+        die gewünschten Informationen liefert. Der Inhalt einer lokalen VIVO Installation kann manuell hinzugefügt werden oder auch automatisiert aus anderen
+        Systemen in die Datenbasis gebracht werden, wie z. B. Förderprojekte, Kurse oder anderen lokal vorhandenen Datenbeständen.
+        </p><p>Für mehr Informationen folgen Sie diesem Link: <a href=\"http://vivoweb.org\">VIVO Project</a>
+        .</p>"""@de-DE ;
+  rdfs:label "VIVO"@de-DE ;
+].
