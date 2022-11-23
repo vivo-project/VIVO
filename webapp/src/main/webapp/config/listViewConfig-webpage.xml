@@ -14,7 +14,7 @@
 
         SELECT ?vcard ?link
                (REPLACE(STR(?link),"^.*(#)(.*)$", "$2") AS ?linkName)
-               (group_concat(distinct ?linkLabel;separator="/") as ?label)
+               ?label
                ?url
                ?rank
         WHERE {
@@ -23,7 +23,7 @@
             OPTIONAL {
                 <precise-subquery>?subject ?property ?vcard .
                 ?vcard vcard:hasURL ?link .</precise-subquery>
-                ?link rdfs:label ?linkLabel .
+                ?link rdfs:label ?label .
             }
             OPTIONAL {
                 <precise-subquery>?subject ?property ?vcard .
@@ -38,8 +38,7 @@
         <critical-data-required>
         FILTER ( bound(?link) )
         </critical-data-required>
-        } GROUP BY ?vcard ?link ?url ?rank
-          ORDER BY ?rank ?linkLabel
+        } ORDER BY ?rank ?label
     </query-select>
 
     <template>propStatement-webpage.ftl</template>
