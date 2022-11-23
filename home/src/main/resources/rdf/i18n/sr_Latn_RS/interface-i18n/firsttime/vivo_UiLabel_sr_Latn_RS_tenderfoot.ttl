@@ -1,0 +1,869 @@
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix prop-data: <http://vivoweb.org/ontology/core/properties/individual#> .
+@prefix prop:  <http://vivoweb.org/ontology/core/properties/vocabulary#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+prop-data:collapsed_menu_name.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Meni"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "collapsed_menu_name" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:create_capitalized.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Kreirajte"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "create_capitalized" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_termuse.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Uslovi korišćenja"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_termuse" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:unable_to_handle_position_editing.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Nije moguće modifikovati ovu poziciju jer je povezana sa više osoba."@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "unable_to_handle_position_editing" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:collection_or_series.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "collection_or_series" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:last_name.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Prezime"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "last_name" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:first_name.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Ime"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "first_name" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:grant_type.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Tip grant-a"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grant_type" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:view_all_members_of_org.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Prikažite sve članove ove organizacije."@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "view_all_members_of_org" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:display_more.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "više"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "display_more" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:edit_mailing_address.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Izmenite poštansku adresu"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "edit_mailing_address" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:first_publication.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Prva publikacija"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "first_publication" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:no_faculty_found.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Nije pronađen ni jedan član fakulteta."@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "no_faculty_found" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:identity_myprofile.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Moj profil"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_myprofile" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_powered.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Omogućili: "@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_powered" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:grants_text_one.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Ovo telo je iz template fajla vivo/productMods/templates/freemarker/body/menupage/grants.ftl.  Unutar modela za prikaz, stranica sa grant-ovima ima display:requiresBodyTemplate svojstvo koje definiše da stranica sa grantovima override-uje pretpostavljen template. Pretpostavljen template za ove stranice se nalazi na /vitro/webapp/web/templates/freemarker/body/menupage/menupage.ftl"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grants_text_one" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:identity_title.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "VIVO | povežite se delite otkrijte"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_title" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:researchers.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "istraživač"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "researchers" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:indiv_foafperson_for.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "za"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "indiv_foafperson_for" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:identity_index.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Indeks"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_index" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:vivo_profile.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "VIVO profil"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "vivo_profile" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_logout.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Izlogujte se"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_logout" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:create_entry.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Kreirajte Entitet"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "create_entry" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:placeholder_image.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "predodređena slika"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "placeholder_image" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:first_grant.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Prvi Grant"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "first_grant" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:attendee_capitalized.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Polaznik"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "attendee_capitalized" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:map_state_string.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "stanje."@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "map_state_string" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_about.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "O"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_about" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:grants_two.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Ova tehnika se može koristiti za definisanje stranica bez menija, koje dobavljaju svoj sadržaj iz freemarker template-a. Primer bi bio about stranica."@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grants_two" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:service_provider_role.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Uloga Service Provider-a"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "service_provider_role" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:profile_capitalized.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Profil"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "profile_capitalized" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:email_address.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Email Adresa"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "email_address" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:statewide_locations.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "lokacije na nivou države."@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "statewide_locations" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:limit_search.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "ograničite pretragu"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "limit_search" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:province_or_region.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Provincija ili Regija"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "province_or_region" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_copyright.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "autorska prava"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_copyright" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:place_of_grant.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Mesto grant-a"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "place_of_grant" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:to.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "do"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "to" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:countries.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "države"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "countries" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:identity_edit.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Modifikujte stranicu"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_edit" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:enter_new_role_value.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Unesite novu vrednost u polje za uloga."@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "enter_new_role_value" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_version.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Verzija"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_version" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:last_grant.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Poslednji Grant"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "last_grant" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:no_grants_for.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Trenutno nema grant-ova za"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "no_grants_for" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:address_street_one.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "ulica prve adrese"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "address_street_one" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:map_states_string.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "države."@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "map_states_string" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:loading_website_image.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Učitavanje slike za vebsajt"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "loading_website_image" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:intro_filtersearch.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Filtrirajte pretragu"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "intro_filtersearch" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:identity_user.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "korisnik"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_user" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:unable_to_handle_grant_editing.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Nije moguće modifikovati ovaj itip grant-a, jer je povezan sa više različitih grant-ova."@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "unable_to_handle_grant_editing" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:currently_no_researchers.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Trenutno nema istraživača unutar definisane geografske lokacije."@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "currently_no_researchers" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:view_all_departments.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "pogledajte sve akademske departmane"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "view_all_departments" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:view.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "pregled"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "view" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:regions.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "regije"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "regions" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:organizer_role.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Uloga Organizatora"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "organizer_role" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:identity_admin.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Admin Sajta"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_admin" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_support.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Podrška"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_support" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:researchers_in.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "istraživači u"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "researchers_in" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:faculty_memberships.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Članstvo na fakultetu"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "faculty_memberships" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:last_publication.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Poslednja publikacija"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "last_publication" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_item.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "stavka menija"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_item" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_loginfull.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Ulogujte se kako bi ste upravljali sajtom."@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_loginfull" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:countries_and_regions.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "države i regije."@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "countries_and_regions" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:reviewer_role.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Uloga Recenzenta"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "reviewer_role" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:no_departments_found.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Ni jedan akademski departman nije pronađen."@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "no_departments_found" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:return_to_grant.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Povratak na grant"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "return_to_grant" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:grant_entry_for.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Grant entitet za"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grant_entry_for" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:intro_searchvivo.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Pretražite VIVO"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "intro_searchvivo" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:address_street_three.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "ulica treće adrese"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "address_street_three" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:address_label.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "labela za adresu"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "address_label" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:change_selection.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "promenite odabir"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "change_selection" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:faculty_who_are_members_of_org.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Ovo su zaposleni na {0} departmanu koji su članovi organizacije."@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "faculty_who_are_members_of_org" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:grants_in_vivo.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "grant-ovi u VIVO-u"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grants_in_vivo" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:leadership_role.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Uloga Lidera"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "leadership_role" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:currently_no_papers_for.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Trenutno nema {0} radova za"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "currently_no_papers_for" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_welcomestart.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Dobrodošli"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_welcomestart" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:add_capitalized.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Dodajte"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "add_capitalized" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:intro_title.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Dobrodošli na VIVO"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "intro_title" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:grants_text_three.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Ovo bi kreiralo stranicu koja bi koristila about.ftl za svoje telo. Stranici bi se pristupalo preko /about putanje i override-ovala bi sva servlet mapiranja u okviru web.xml-a."@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grants_text_three" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:research_area.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "osobe unutar departmana sa datom oblasti istraživanja"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "research_area" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_contactus.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Kontaktirajte nas"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_contactus" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:password.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "lozinka"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "password" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:intro_para1.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "VIVO je alat za pretragu i istraživanje koji se fokusira na oblast akademije i istraživača i omogućuje kolaboraciju naučnika iz različitih disciplina."@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "intro_para1" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:collection_capitalized.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Kolekcija"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "collection_capitalized" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:address_street_two.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "ulica druge adrese"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "address_street_two" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:select_award.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Odabrane Nagrade"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "select_award" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:manage_publications_link.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "manage_publications_link" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:loading_data.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "učitavanje podataka"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "loading_data" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:indiv_foafperson_return.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "vratite se na"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "indiv_foafperson_return" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_login.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "ulogujte se"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_login" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:grant_date.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Datum grant-a"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grant_date" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:intro_para2.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Pretražite informacije o osobama, departmanima, kursevima, grant-ovima, i publikacijama."@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "intro_para2" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:identity_myaccount.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Moj nalog"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_myaccount" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:full_name.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Puno ime"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "full_name" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:years_participation_in.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Godina učestvovanja u "@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "years_participation_in" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:view_all_faculty.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "pogledajte svo osoblje"@sr-Latn-RS ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "view_all_faculty" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .

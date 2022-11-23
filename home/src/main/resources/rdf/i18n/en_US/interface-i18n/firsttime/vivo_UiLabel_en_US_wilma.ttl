@@ -1,0 +1,851 @@
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix prop-data: <http://vivoweb.org/ontology/core/properties/individual#> .
+@prefix prop:  <http://vivoweb.org/ontology/core/properties/vocabulary#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+prop-data:intro_filtersearch.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Filter search"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "intro_filtersearch" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:leadership_role.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Leadership Role"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "leadership_role" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:view.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "view"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "view" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:place_of_grant.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Place of grant"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "place_of_grant" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:select_award.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Selected Award"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "select_award" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:service_provider_role.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Service Provider Role"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "service_provider_role" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:first_name.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "First name"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "first_name" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:menu_contactus.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Contact Us"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_contactus" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:address_street_three.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "address street three"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "address_street_three" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:reviewer_role.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Reviewer Role"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "reviewer_role" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:menu_termuse.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Terms of Use"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_termuse" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:unable_to_handle_position_editing.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "This form is unable to handle the editing of this position because it is associated with multiple Position individuals."@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "unable_to_handle_position_editing" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:attendee_capitalized.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Attendee"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "attendee_capitalized" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:placeholder_image.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "placeholder image"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "placeholder_image" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:identity_user.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "user"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_user" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:last_publication.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Last publication"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "last_publication" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:password.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "password"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "password" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:unable_to_handle_grant_editing.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "This form is unable to handle the editing of this grant because it is associated with multiple grant individuals."@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "unable_to_handle_grant_editing" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:countries_and_regions.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "countries and regions."@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "countries_and_regions" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:menu_logout.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Log out"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_logout" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:identity_edit.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Edit Page"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_edit" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:to.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "to"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "to" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:grant_type.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "grant Type"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grant_type" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:identity_myaccount.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "My account"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_myaccount" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:no_faculty_found.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "No faculty members found."@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "no_faculty_found" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:statewide_locations.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "state-wide locations."@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "statewide_locations" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:province_or_region.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Province or Region"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "province_or_region" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:menu_support.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Support"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_support" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:researchers_in.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "researchers in"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "researchers_in" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:last_name.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Last name"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "last_name" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:add_capitalized.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Add"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "add_capitalized" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:indiv_foafperson_for.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "for"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "indiv_foafperson_for" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:intro_para2.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Browse or search information on people, departments, courses, grants, and publications."@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "intro_para2" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:grant_entry_for.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "grant entry for"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grant_entry_for" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:identity_title.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "VIVO | connect share discover"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_title" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:profile_capitalized.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Profile"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "profile_capitalized" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:change_selection.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "change selection"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "change_selection" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:faculty_memberships.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Faculty Memberships"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "faculty_memberships" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:create_capitalized.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Create"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "create_capitalized" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:identity_admin.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Site Admin"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_admin" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:collection_capitalized.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Collection"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "collection_capitalized" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:countries.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "countries"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "countries" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:menu_loginfull.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Log in to manage this site"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_loginfull" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:view_all_departments.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "view all academic departments"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "view_all_departments" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:identity_myprofile.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "My profile"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_myprofile" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:map_state_string.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "state."@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "map_state_string" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:grants_text_three.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "This would create a page that would use about.ftl as the body.  The page would be accessed via /about and would override all servlet mappings in web.xml."@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grants_text_three" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:menu_powered.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Powered by"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_powered" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:view_all_members_of_org.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "View all the members of this organization."@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "view_all_members_of_org" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:email_address.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Email Address"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "email_address" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:view_all_faculty.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "view all faculty"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "view_all_faculty" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:enter_new_role_value.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Please enter a new value in the Role field."@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "enter_new_role_value" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:indiv_foafperson_return.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "return to"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "indiv_foafperson_return" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:edit_mailing_address.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Edit Mailing Address"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "edit_mailing_address" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:collection_or_series.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "collection_or_series" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:years_participation_in.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Years of Participation in"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "years_participation_in" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:manage_publications_link.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "manage_publications_link" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:menu_welcomestart.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Welcome"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_welcomestart" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:grant_date.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "grant Date"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grant_date" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:address_label.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "address label"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "address_label" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:first_publication.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "First publication"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "first_publication" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:faculty_who_are_members_of_org.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Here are the faculty in the {0} department who are members of this organization."@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "faculty_who_are_members_of_org" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:limit_search.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "limit search"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "limit_search" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:full_name.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Full name"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "full_name" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:menu_version.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Version"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_version" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:identity_index.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Index"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_index" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:currently_no_researchers.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "There are currently no researchers with a defined geographic focus."@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "currently_no_researchers" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:intro_searchvivo.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Search VIVO"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "intro_searchvivo" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:menu_copyright.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "copyright"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_copyright" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:no_departments_found.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "No academic departments found."@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "no_departments_found" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:loading_website_image.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Loading website image"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "loading_website_image" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:last_grant.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Last Grant"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "last_grant" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:grants_text_one.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "This body is from the the template file vivo/productMods/templates/freemarker/body/menupage/grants.ftl.  In the display model, the grants page has a display:requiresBodyTemplate property that defines that the grants page overrides the default template. The default template for these pages is at /vitro/webapp/web/templates/freemarker/body/menupage/menupage.ftl"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grants_text_one" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:no_grants_for.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Currently there are no grants for "@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "no_grants_for" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:map_states_string.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "states."@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "map_states_string" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:first_grant.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "First Grant"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "first_grant" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:grants_in_vivo.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "grants in VIVO"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grants_in_vivo" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:regions.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "regions"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "regions" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:display_more.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "more"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "display_more" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:loading_data.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "loading data"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "loading_data" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:grants_two.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "This technique could be used to define pages without menu items, that get their content from a freemarker template.  An example would be the about page."@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grants_two" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:create_entry.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Create Entry"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "create_entry" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:organizer_role.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Organizer Role"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "organizer_role" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:address_street_one.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "address street one"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "address_street_one" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:intro_para1.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "VIVO is a research-focused discovery tool that enables collaboration among scientists across all disciplines."@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "intro_para1" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:menu_about.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "About"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_about" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:address_street_two.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "address street two"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "address_street_two" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:vivo_profile.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "VIVO profile"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "vivo_profile" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:research_area.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "individuals in the department with this research area"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "research_area" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:currently_no_papers_for.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Currently there are no {0} papers for"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "currently_no_papers_for" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:researchers.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "researchers"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "researchers" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:menu_login.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Log in"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_login" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:intro_title.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Welcome to VIVO"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "intro_title" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
+
+prop-data:return_to_grant.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Return to grant"@en-US ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "return_to_grant" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "wilma" .
