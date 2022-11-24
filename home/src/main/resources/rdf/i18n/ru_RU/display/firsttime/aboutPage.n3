@@ -1,0 +1,24 @@
+# $This file is distributed under the terms of the license in LICENSE$
+
+@prefix about: <http://vitro.mannlib.cornell.edu/ns/default/about#> .
+
+about:ABOUTDG
+    a   <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.FixedHTMLDataGetter> ;
+    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#htmlValue>
+        """<h2>О системе VIVO</h2>
+        <div class=\"pageGroupBody\" id=\"aboutText\"><p>Приложение VIVO позволяет находить исследователей в разных учреждениях. Участниками сети являются учреждения с локально установленными системами VIVO или с иными приложениями для поиска и профилирования исследователей, которые могут предоставлять данные, совместимые с семантической паутиной. Таким образом, информация, доступная при помощи средств поиска и просмотра в VIVO, будет находиться и контролироваться локально, в рамках институциональных систем VIVO или других приложений, совместимых с семантической паутиной.</p>
+
+        <p>VIVO - это семантическое веб-приложение с открытым исходным кодом, первоначально разработанное и внедренное в Корнельском университете. После установки в научном учреждении и наполнения содержательной информацией оно позволяет искать исследования и научные работы по всем дисциплинам в этом учреждении. VIVO включает в себя функции просмотра и поиска, которые возвращают фасетно организованные результаты,  позволяющие быстро находить нужную информацию. Содержимое в любой локальной установке VIVO может поддерживаться вручную или вноситься в базу данных автоматизированным способом из местных систем учета, таких как базы данных человеческих ресурсов, стипендий, грантов, курсов и деятельности преподавателей.</p>
+
+        <p>Более подробную информацию можно найти на <a href=\"http://vivoweb.org\">VIVO Project</a>.</p></div>
+        """@en ;
+        <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#saveToVar>
+                "aboutPage" .
+about:ABOUTPAGE
+    a   <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Page> ;
+    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#hasDataGetter>
+        about:ABOUTDG ;
+    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title>
+        "About Page" ;
+    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#urlMapping>
+        "/about" .

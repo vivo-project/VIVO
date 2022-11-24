@@ -1,0 +1,16 @@
+@prefix about: <http://vitro.mannlib.cornell.edu/ns/default/about#> .
+@prefix ns1: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+about:ABOUTDG a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.FixedHTMLDataGetter> ;
+    ns1:htmlValue """<h2>Über VIVO</h2>
+        <div class="pageGroupBody" id="aboutText"><p>Die Software VIVO ermöglicht das Vernetzen und Entdecken von Forschenden über Institutionsgrenzen hinaus. Am Netzwerk teilnehmen können Institutionen mit lokalen VIVO-Installationen, aber auch mit anderen Forschungsinformationssystemen, die Semantic-Web-konforme Daten bereitstellen können. Die über  VIVO für die Suche und das Browsing zugänglichen Informationen verbleiben daher unter Kontrolle und Datenhoheit der jeweiligen Institute und Forschenden.</p>
+
+        <p>Die Open-Source-/Semantic-Web-Software VIVO wurde ursprünglich an der Cornell University entwickelt und implementiert. Installiert und mit Daten einer Institution befüllt, ermöglicht sie die Erkundung des Forschungsoutputs an dieser Institution über die Grenzen  von Institutionen und Disziplinen hinweg. VIVO bietet Browsing und facettierte Suche für gezielte Recherchen. Die Inhalte in einer lokalen VIVO-Installation können manuell gepflegt oder automatisiert von lokalen Datensystemen wie Personal-, Stipendien-, Forschungsdatenbanken oder Lernmanagementsystemen ins VIVO-System eingebracht werden.</p>
+
+        <p>Erfahren Sie mehr über das <a href="http://vivoweb.org">VIVO-Projekt</a>.</p></div>
+        """@de .
+

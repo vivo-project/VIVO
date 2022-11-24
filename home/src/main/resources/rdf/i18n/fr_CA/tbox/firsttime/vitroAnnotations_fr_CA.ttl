@@ -1,0 +1,361 @@
+# baseURI: http://vivoweb.org/ontology/vitroAnnotfr_CA
+
+@prefix : <http://vivoweb.org/ontology/vitroAnnotfr_CA#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix c4o: <http://purl.org/spar/c4o/> .
+@prefix cito: <http://purl.org/spar/cito/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix fabio: <http://purl.org/spar/fabio/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://aims.fao.org/aos/geopolitical.owl#> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix ocrer: <http://purl.org/net/OCRe/research.owl#> .
+@prefix ocresd: <http://purl.org/net/OCRe/study_design.owl#> .
+@prefix ocresp: <http://purl.org/net/OCRe/study_protocol.owl#> .
+@prefix ocrest: <http://purl.org/net/OCRe/statistics.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ro: <http://purl.obolibrary.org/obo/ro.owl#> .
+@prefix scires: <http://vivoweb.org/ontology/scientific-research#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix swo: <http://www.ebi.ac.uk/efo/swo/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix vitro-public: <http://vitro.mannlib.cornell.edu/ns/vitro/public#> .
+@prefix vivo: <http://vivoweb.org/ontology/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+dcterms:contributor
+  vitro:publicDescriptionAnnot "Entité chargée de verser des contributions à la ressource.  Les exemples de contributeurs comprennent une personne, un organisme ou un service. Habituellement, le nom d'un contributeur devrait être utilisé pour indiquer l'entité."@fr-CA .
+
+dcterms:relation
+  vitro:publicDescriptionAnnot "Une ressource connexe. La pratique recommandée consiste à identifier la ressource connexe au moyen d'une chaîne de caractères conforme à un système d'identification formel. "@fr-CA .
+
+bibo:abstract
+  vitro:publicDescriptionAnnot "Un résumé de la ressource."@fr-CA .
+
+bibo:affirmedBy
+  vitro:publicDescriptionAnnot "Une décision juridique qui confirme un jugement."@fr-CA .
+
+bibo:annotates
+  vitro:publicDescriptionAnnot "Note critique ou explicative d'un document."@fr-CA .
+
+bibo:asin
+  vitro:publicDescriptionAnnot "Le numéro d'identification standard Amazon (ASIN) est un numéro d'identification unique attribué par Amazon.com et ses partenaires pour l'identification des produits au sein de l'organisation Amazon.com."@fr-CA .
+
+bibo:chapter
+  vitro:publicDescriptionAnnot "Un numéro de chapitre. A NE PAS utiliser pour le titre du chapitre, qui doit être saisi dans le champ \"nom\" (le champ en gras en haut de la page)"@fr-CA .
+
+bibo:coden
+  vitro:publicDescriptionAnnot "Le CODEN - selon la norme ASTM E250 - est un code bibliographique alphanumérique à six caractères, qui permet une identification concise, unique et sans ambiguïté des titres de publications en série et hors série de tous les domaines."@fr-CA .
+
+bibo:court
+  vitro:publicDescriptionAnnot "Relie un document juridique à une organisation.  La définition de Bibo est : \"Un tribunal associé à un document légal ; par exemple, celui qui rend une décision. \""@fr-CA .
+
+bibo:degree
+  vitro:publicDescriptionAnnot "Diplôme."@fr-CA .
+
+bibo:director
+  vitro:publicDescriptionAnnot "Lien entre une entité et un réalisateur de film."@fr-CA .
+
+bibo:distributor
+  vitro:publicDescriptionAnnot "La définition de foaf est la suivante - Distributeur d'un document ou d'une collection de documents. Cependant, dans VIVO, cela peut relier n'importe quoi en tant que distributeur à n'importe quoi d'autre."@fr-CA .
+
+bibo:doi
+  vitro:publicDescriptionAnnot "Le système DOI (Digital Object Identifier) permet l'identification permanente des objets de contenu dans l'environnement numérique. \"Les noms DOI sont attribués à toute entité pour utilisation sur les réseaux numériques. Ils sont utilisés pour fournir des informations actuelles, y compris l'endroit où ils (ou des informations à leur sujet) peuvent être trouvés sur Internet. L'information sur un objet numérique peut changer au fil du temps, y compris l'endroit où le trouver, mais son nom DOI ne changera pas.\""@fr-CA .
+
+bibo:eanucc13
+  vitro:publicDescriptionAnnot "EAN International-Uniform Code Council (EAN-UCC) était une famille de normes de la chaîne d'approvisionnement, anciennement le système EAN.UCC, qui comprenait les codes à barres des produits qui sont imprimés sur la grande majorité des produits disponibles dans les magasins du monde entier et les normes du commerce électronique."@fr-CA .
+
+bibo:edition
+  vitro:publicDescriptionAnnot "Le nom définissant une édition spéciale d'un document. Normalement, c'est une valeur littérale composée d'un numéro de version et de mots."@fr-CA .
+
+bibo:eissn
+  vitro:publicDescriptionAnnot "Un numéro international normalisé des publications en série (ISSN) est un numéro unique à huit chiffres utilisé pour identifier une publication périodique. L'EISSN est un issn pour les périodiques électroniques."@fr-CA .
+
+bibo:gtin14
+  vitro:publicDescriptionAnnot "Le Global Trade Item Number (GTIN) est un identifiant pour les articles commerciaux développé par le GS1 (comprenant l'ancien EAN International and Uniform Code Council). Le GTIN est un terme général utilisé pour décrire toute la famille des structures de données de GS1 pour l'identification des articles commerciaux (produits et services). Les GTIN peuvent comporter 8, 12, 13 ou 14 chiffres."@fr-CA .
+
+bibo:identifier
+  vitro:publicDescriptionAnnot "Identificateur unique d'un document ou d'une collection. Cette propriété de données n'est pas vue ou mise à jour par quiconque."@fr-CA .
+
+bibo:interviewee
+  vitro:publicDescriptionAnnot "Un agent qui est interviewé par un autre agent."@fr-CA .
+
+bibo:interviewer
+  vitro:publicDescriptionAnnot "Un agent qui interviewe un autre agent."@fr-CA .
+
+bibo:isbn10
+  vitro:publicDescriptionAnnot "Le numéro international normalisé du livre (ISBN) est un identificateur numérique unique[1][2] du livre commercial basé sur le code à 9 chiffres de la numérotation normalisée du livre (SBN) créé par Gordon Foster. Le format ISBN à 10 chiffres a été développé par l'Organisation internationale de normalisation et a été publié en 1970 en tant que norme internationale ISO 2108."@fr-CA .
+
+bibo:isbn13
+  vitro:publicDescriptionAnnot "Le numéro international normalisé du livre (ISBN) est un identificateur numérique unique[1][2] de livre commercial basé sur le code à 9 chiffres du Standard Book Numbering (SBN) créé par Gordon Foster. Depuis le 1er janvier 2007, les ISBN contiennent 13 chiffres, un format qui est compatible avec les EAN-13 de Bookland."@fr-CA .
+
+bibo:issn
+  vitro:publicDescriptionAnnot "Un numéro international normalisé des publications en série (ISSN) est un numéro unique à huit chiffres utilisé pour identifier une publication périodique."@fr-CA .
+
+bibo:issuer
+  vitro:publicDescriptionAnnot "Une entité responsable de la publication de documents souvent publiés de manière informelle tels que des communiqués de presse, des rapports, etc."@fr-CA .
+
+bibo:lccn
+  vitro:publicDescriptionAnnot "Le Library of Congress Control Number ou LCCN est un système de numérotation en série des notices de catalogage de la Library of Congress aux États-Unis."@fr-CA .
+
+bibo:locator
+  vitro:publicDescriptionAnnot "Une description (souvent numérique) qui permet de localiser un élément dans un document ou une collection."@fr-CA .
+
+bibo:number
+  vitro:publicDescriptionAnnot "Un numéro de document générique. À ne pas confondre avec la numéro de la publication. Un code à barres, peut-être ?"@fr-CA .
+
+bibo:oclcnum
+  vitro:publicDescriptionAnnot "Un oclcnum est un numéro d'accès séquentiel attribué par OCLC au fur et à mesure que les notices bibliographiques sont entrées dans OCLC WorldCat (le catalogue collectif en ligne d'OCLC)."@fr-CA .
+
+bibo:pageEnd
+  vitro:publicDescriptionAnnot "Numéro de fin de page dans une plage de pages continue."@fr-CA .
+
+bibo:pageStart
+  vitro:publicDescriptionAnnot "Numéro de la page de départ dans une plage de pages continue."@fr-CA .
+
+bibo:performer
+  vitro:publicDescriptionAnnot "Relie une performance à la personne ou à l'organisation qui l'exécute."@fr-CA .
+
+bibo:pmid
+  vitro:publicDescriptionAnnot "Un PMID (PubMed Identifier ou PubMed Unique Identifier) est un numéro unique attribué à chaque citation PubMed d'articles de revues scientifiques en sciences de la vie et biomédicales."@fr-CA .
+
+bibo:prefixName
+  vitro:publicDescriptionAnnot "Un titre placé devant le nom d'une personne."@fr-CA .
+
+bibo:presentedAt
+  vitro:publicDescriptionAnnot "Relie un document à un événement ; par exemple, un article à une conférence."@fr-CA .
+
+bibo:presents
+  vitro:publicDescriptionAnnot "Relie un événement à des documents associés ; par exemple, une conférence à un document."@fr-CA .
+
+bibo:recipient
+  vitro:publicDescriptionAnnot "Cette fonction permet de relier un document de communication à l'agent qui reçoit ce document de communication."@fr-CA .
+
+bibo:reversedBy
+  vitro:publicDescriptionAnnot "Une décision juridique qui renverse un jugement.  Il s'agit de relier la décision de justice à la décision de justice qui l'a renversée."@fr-CA .
+
+bibo:reviewOf
+  vitro:publicDescriptionAnnot "Relie un document d'analyse à un élément analysé (ressource, article, etc.)."@fr-CA .
+
+bibo:section
+  vitro:publicDescriptionAnnot "Un numéro de section"@fr-CA .
+
+bibo:shortDescription
+  vitro:publicDescriptionAnnot "Un compte rendu de la ressouce."@fr-CA .
+
+bibo:sici
+  vitro:publicDescriptionAnnot "Le Serial Item and Contribution Identifier (SICI) est un code (norme ANSI/NISO Z39.56) utilisé pour identifier de façon unique des volumes, des articles ou d'autres parties identifiables d'un périodique."@fr-CA .
+
+bibo:subsequentLegalDecision
+  vitro:publicDescriptionAnnot "Une décision juridique en appel qui donne suite à une affaire (la confirme, la renverse, etc.)."@fr-CA .
+
+bibo:transcriptOf
+  vitro:publicDescriptionAnnot "Relie un document à un original transcrit."@fr-CA .
+
+bibo:translationOf
+  vitro:publicDescriptionAnnot "Relie un document traduit au document d'origine."@fr-CA .
+
+bibo:translator
+  vitro:publicDescriptionAnnot "Relie une ressource traduite au traducteur."@fr-CA .
+
+bibo:upc
+  vitro:publicDescriptionAnnot "Le Code universel des produits (CUP/UPC) est une symbologie de code à barres (c.-à-d. un type particulier de code à barres), qui est largement utilisée au Canada et aux États-Unis pour le suivi des articles commerciaux en magasin."@fr-CA .
+
+bibo:uri
+  vitro:publicDescriptionAnnot "Identifiant universel de ressource (URI)."@fr-CA .
+
+bibo:volume
+  vitro:publicDescriptionAnnot "Un numéro de volume."@fr-CA .
+
+c4o:hasGlobalCitationFrequency
+  vitro:publicDescriptionAnnot "Une 'fréquence de citation globale' est une entité qui fait référence à une source, une date et une valeur distinctes ; pour plus de clarté, inclure la valeur, la source et la date dans l'étiquette."@fr-CA .
+
+vann:preferredNamespaceUri
+  vitro:publicDescriptionAnnot "L'URI complète de l'espace de nom."@fr-CA .
+
+vivo:assignee
+  vitro:publicDescriptionAnnot "la personne ou l'entité à qui la propriété de l'application publiée a été attribuée au moment de la publication."@fr-CA .
+
+vivo:cclCode
+  vitro:publicDescriptionAnnot "La classification originale et les références croisées des États-Unis auxquelles la demande publiée a été attribuée au moment de la publication -- comprennent les renseignements sur la classe primaire et secondaire."@fr-CA .
+
+vivo:contactInformation
+  vitro:publicDescriptionAnnot "Les coordonnées d'un événement particulier. Il peut s'agir d'un nom, d'un courriel, d'un numéro de téléphone ou d'une ou plusieurs méthodes pour communiquer avec quelqu'un afin d'obtenir des renseignements sur l'événement."@fr-CA .
+
+vivo:courseCredits
+  vitro:publicDescriptionAnnot "Nombre de crédits attribués à un cours par un établissement d'enseignement."@fr-CA .
+
+vivo:dateFiled
+  vitro:publicDescriptionAnnot "Tla date à laquelle le brevet a été déposé."@fr-CA .
+
+vivo:dateIssued
+  vitro:publicDescriptionAnnot "La date de l'émission du brevet."@fr-CA .
+
+vivo:dateTime
+  vitro:publicDescriptionAnnot "À utiliser lorsqu'une date et une heure uniques sont appropriées par rapport à une date et une heure de début et une date et une heure de fin, ou lorsque plusieurs dates et heures sont pertinentes."@fr-CA .
+
+vivo:degreeCandidacy
+  vitro:publicDescriptionAnnot "Il s'agit d'une relation de conseil liée à un diplôme universitaire.  "@fr-CA .
+
+vivo:departmentOrSchool
+  vitro:publicDescriptionAnnot "Nom du département ou de l'institution utilisé pour décrire le niveau d'études."@fr-CA .
+
+vivo:description
+  vitro:publicDescriptionAnnot "Un compte rendu de la ressource."@fr-CA .
+
+vivo:distributes
+  vitro:publicDescriptionAnnot "Cela relier n'importe quoi à la chose qu'il distribue. La relation inverse est le distributeur et la définition 'foaf' du terme distributeur est la suivante : Distributeur d'un document ou d'une collection de documents. "@fr-CA .
+
+vivo:distributesFundingFrom
+  vitro:publicDescriptionAnnot "Réfère à l'organisme qui distribue le financement d'un autre organisme. Par exemple, indique la source de financement en transit."@fr-CA .
+
+vivo:eligibleFor
+  vitro:publicDescriptionAnnot "Utilisé dans le cas où un titre de compétence comporte une formation préalable ou un diplôme, par exemple pour devenir admissible à un conseil d'administration dans un domaine de la médecine."@fr-CA .
+
+vivo:equipmentFor
+  vitro:publicDescriptionAnnot "Lie un équipement à l'organisme qui en est propriétaire."@fr-CA .
+
+vivo:featuredIn
+  vitro:publicDescriptionAnnot "Il s'agit de relier une personne à une ressource qui contient un article portant sur cette personne."@fr-CA .
+
+vivo:features
+  vitro:publicDescriptionAnnot "Il s'agit de relier une ressource à une personne."@fr-CA .
+
+vivo:freetextKeyword
+  vitro:publicDescriptionAnnot "S'applique à un mot ou à une courte phrase seulement lorsqu'il est impossible d'identifier un vocabulaire contrôlé. Peut aussi être utilisé pour aider à mettre en évidence une différence subtile dans le travail."@fr-CA .
+
+vivo:grantDirectCosts
+  vitro:publicDescriptionAnnot "Il s'agit du coût associé à l'activité subventionnée, et ne devrait pas inclure les coûts indirects associés à l'administration de la subvention."@fr-CA .
+
+vivo:grantSubcontractedThrough
+  vitro:publicDescriptionAnnot "Il s'agit d'une subvention à l'organisme qui accorde le contrat de sous-traitance pour la subvention."@fr-CA .
+vivo:hasFacility
+  vitro:publicDescriptionAnnot "Il s'agit d'un lien entre une organisation et une installation qu'elle possède ou exploite."@fr-CA .
+
+vivo:hasProceedings
+  vitro:publicDescriptionAnnot "Lien entre une instance de conférence et la conférence qui a produit l'instance."@fr-CA .
+
+vivo:hasTranslation
+  vitro:publicDescriptionAnnot "Relie un document original à une traduction de ce document."@fr-CA .
+
+vivo:hrJobTitle
+  vitro:publicDescriptionAnnot "Une désignation spécifique d'un poste au sein d'une organisation de ressources humaines, normalement associée à une description de poste qui détaille les tâches et les responsabilités qui s'y rattachent."@fr-CA .
+
+vivo:iclCode
+  vitro:publicDescriptionAnnot "La ou les classifications internationales auxquelles l'application publiée a été associée."@fr-CA .
+
+vivo:identifier
+  vitro:publicDescriptionAnnot "Une propriété mère pour les identificateurs institutionnels et autres. Cette propriété de données n'est pas vue ni mise à jour par quiconque."@fr-CA .
+
+vivo:isCorrespondingAuthor
+  vitro:publicDescriptionAnnot "Indique si l'auteur s'occupe de la correspondance concernant l'œuvre et est en fait le garant de l'œuvre publiée.  La réponse est soit \"vrai\" ou \"faux\" (sans les citations)."@fr-CA .
+
+vivo:licenseNumber
+  vitro:publicDescriptionAnnot "numéro de licence"@fr-CA .
+
+vivo:localAwardId
+  vitro:publicDescriptionAnnot "L'identificateur local d'un établissement affecté à une subvention accordée."@fr-CA .
+
+vivo:majorField
+  vitro:publicDescriptionAnnot "La matière principale du diplôme est décrite dans un contexte éducatif."@fr-CA .
+
+vivo:middleName
+  vitro:publicDescriptionAnnot "Le deuxième prénom ou l'initiale avec laquelle vous vous identifiez normalement.  Un seul peut être saisi."@fr-CA .
+
+vivo:orcidId
+  vitro:publicDescriptionAnnot "ORCID (Open Researcher and Contributor ID) est un code alphanumérique non exclusif qui permet d'identifier de façon unique les auteurs scientifiques et autres auteurs universitaires."@fr-CA .
+
+vivo:outreachOverview
+  vitro:publicDescriptionAnnot "Veuillez entrer un seul résumé narratif décrivant vos objectifs de diffusion et/ou de contribution"@fr-CA .
+
+vivo:overview
+  vitro:publicDescriptionAnnot "Un court résumé narratif à utiliser comme un seul énoncé descriptif d'ensemble."@fr-CA .
+
+vivo:patentNumber
+  vitro:publicDescriptionAnnot "Numéro unique attribué à une demande de brevet lorsque le United States Patent and Trademark Office délivre un brevet."@fr-CA .
+
+vivo:placeOfPublication
+  vitro:publicDescriptionAnnot "Ville dans laquelle la publication a été faite."@fr-CA .
+
+vivo:proceedingsOf
+  vitro:publicDescriptionAnnot "Cela permet de relier les actes à la conférence qui a produit les actes."@fr-CA .
+
+vivo:providesFundingThrough
+  vitro:publicDescriptionAnnot "Relie un organisme de financement à un autre organisme de financement par l'entremise duquel il fournit son financement. Il est à noter qu'on peut affirmer que les organismes sont de plus d'un type."@fr-CA .
+
+vivo:publisher
+  vitro:publicDescriptionAnnot "Relie les documents publiés à une entité qui est impliquée dans l'édition."@fr-CA .
+
+vivo:publisherOf
+  vitro:publicDescriptionAnnot "Relie une entité qui est engagée dans la publication de matériel imprimé ou en ligne au matériel lui-même."@fr-CA .
+
+vivo:rank
+  vitro:publicDescriptionAnnot "saisissez dans la liste le poste que vous souhaitez voir affiché"@fr-CA .
+
+vivo:reportId
+  vitro:publicDescriptionAnnot "Identificateur unique pour un état (un type de ressource)."@fr-CA .
+
+vivo:researcherId
+  vitro:publicDescriptionAnnot "Le numéro d'identification donné au profil créé par un chercheur dans ResearcherID (https://researcherid.com/)."@fr-CA .
+
+vivo:reviewedIn
+  vitro:publicDescriptionAnnot "Relie un élémwnt à la critique de cet élément."@fr-CA .
+
+vivo:scopusId
+  vitro:publicDescriptionAnnot "Le chiffre numérique attribué à un auteur dans Scopus.  Dans Scopus, on l'appelle \"Author Identifier\"."@fr-CA .
+
+vivo:seatingCapacity
+  vitro:publicDescriptionAnnot "Nombre de personnes qui peuvent être assises dans une salle spécifique, selon l'espace physique disponible ou les limites fixées par la loi. "@fr-CA .
+
+vivo:sponsorAwardId
+  vitro:publicDescriptionAnnot "Identifiant de l'organisation qui a parrainé le prix."@fr-CA .
+
+vivo:start
+  vitro:publicDescriptionAnnot "le début d'une intervalle de temps."@fr-CA .
+
+vivo:subcontractsGrant
+  vitro:publicDescriptionAnnot "Il s'agit du lien entre l'organisme, l'entité ou le particulier qui attribue le contrat de sous-traitance pour une subvention et la subvention elle-même."@fr-CA .
+
+vivo:supplementalInformation
+  vitro:publicDescriptionAnnot "Permet d'entrer des informations supplémentaires, par exemple des informations complémentaires décrivant les antécédents académiques."@fr-CA .
+
+vivo:supportedInformationResource
+  vitro:publicDescriptionAnnot "entrer une publication ou un document soutenu par cette subvention"@fr-CA .
+
+vivo:teachingOverview
+  vitro:publicDescriptionAnnot "Veuillez entrer une seule description narrative sommaire de vos activités d'enseignement, de vos objectifs et/ou de votre expérience"@fr-CA .
+
+vivo:totalAwardAmount
+  vitro:publicDescriptionAnnot "Cela comprend les coûts directs utilisés pour l'activité subventionnée plus les coûts indirects associés à l'administration de la subvention."@fr-CA .
+
+vivo:translatorOf
+  vitro:publicDescriptionAnnot "Cela se rapporte à quelque chose comme le traducteur d'une ressource d'information."@fr-CA .
+
+scires:irbNumber
+  vitro:publicDescriptionAnnot "Numéro du conseil d'examen de l'établissement (CEE) / Institutional Review Board (IRB) pour un essai clinique"@fr-CA .
+
+scires:nctId
+  vitro:publicDescriptionAnnot "numéro de contrôle ClinicalTrials.gov"@fr-CA .
+
+<http://vivoweb.org/ontology/vitroAnnotfr_CA>
+  a owl:Ontology ;
+  owl:versionInfo "Adapted by Michel Héon, 2020, for Université de Québec à Montréal, http://uqam.ca" ;
+  owl:versionInfo "Translated by Pierre Roberge, 2020,  for Université de Québec à Montréal, http://uqam.ca" .
+
+owl:sameAs
+  vitro:publicDescriptionAnnot "C'est la propriété d'OWL de relier deux personnes ayant la même 'identité'. Voir http://www.w3.org/TR/owl-ref/#sameAs-def"@fr-CA .
+
+skos:broader
+  vitro:publicDescriptionAnnot "Lien entre un terme au sens large (c'est-à-dire plus général) et un autre terme au sens plus restreint, où la portée (le sens) du terme plus restreint s'inscrit complètement dans la portée du terme plus large."@fr-CA .
+
+skos:narrower
+  vitro:publicDescriptionAnnot "Il s'agit de relier un terme au sens étroit (c.-à-d. plus spécifique) à un autre terme au sens large, lorsque la portée (le sens) du terme étroit s'inscrit complètement dans la portée du terme plus large."@fr-CA .
+
+skos:related
+  vitro:publicDescriptionAnnot "Ceci indique quand un terme est lié à un autre terme du même vocabulaire."@fr-CA .
+

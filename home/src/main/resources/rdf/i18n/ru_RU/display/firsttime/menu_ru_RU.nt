@@ -1,0 +1,16 @@
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#DefaultMenu> <http://www.w3.org/2000/01/rdf-schema#label> "стандартное меню"@ru-RU .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#HomeMenuItem> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Главная страница"@ru-RU .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#PeopleMenuItem> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Персоны"@ru-RU .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#OrganizationsMenuItem> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Организации"@ru-RU .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#ResearchMenuItem> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Исследования"@ru-RU .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#EventsMenuItem> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Мероприятия"@ru-RU .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#CapabilityMapMenuItem> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText> "Карта возможностей"@ru-RU .
+
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Home> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Главная страница"@ru-RU .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Events> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Мероприятия"@ru-RU .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Organizations> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Организации"@ru-RU .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#People> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Персоны"@ru-RU .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Research> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Исследования"@ru-RU .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#CapabilityMap> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title> "Карта возможностей"@ru-RU .
+
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#capabilityMapDataGetter> <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#htmlValue> "Карта возможностей"@ru-RU .

@@ -1,0 +1,69 @@
+# baseURI: http://vivoweb.org/ontology/menu_fr_CA
+
+@prefix : <http://vivoweb.org/ontology/menu_fr_CA#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix core: <http://vivoweb.org/ontology/core#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://aims.fao.org/aos/geopolitical.owl#> .
+@prefix ns: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skos2: <http://www.w3.org/2008/05/skos#> .
+@prefix statistics: <http://purl.org/net/OCRe/statistics.owl#> .
+@prefix study_protocol: <http://purl.org/net/OCRe/study_protocol.owl#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix vivo-display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+@prefix vivo-rech: <http://vivoweb.org/ontology/scientific-research#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+vivo-display:CapabilityMap
+  vivo-display:title "Expertises"@fr-CA ;
+.
+vivo-display:CapabilityMapMenuItem
+  vivo-display:linkText "Expertises"@fr-CA ;
+.
+vivo-display:DefaultMenu
+  rdfs:label "Menu par défaut"@fr-CA ;
+.
+vivo-display:Events
+  vivo-display:title "Événements"@fr-CA ;
+.
+vivo-display:EventsMenuItem
+  vivo-display:linkText "Événements"@fr-CA ;
+.
+vivo-display:Home
+  vivo-display:title "Accueil"@fr-CA ;
+.
+vivo-display:HomeMenuItem
+  vivo-display:linkText "Accueil"@fr-CA ;
+.
+vivo-display:Organizations
+  vivo-display:title "Organisations"@fr-CA ;
+.
+vivo-display:OrganizationsMenuItem
+  vivo-display:linkText "Organisations"@fr-CA ;
+.
+vivo-display:People
+  vivo-display:title "Personnes"@fr-CA ;
+.
+vivo-display:PeopleMenuItem
+  vivo-display:linkText "Personnes"@fr-CA ;
+.
+vivo-display:Research
+  vivo-display:title "Recherche"@fr-CA ;
+.
+vivo-display:ResearchMenuItem
+  vivo-display:linkText "Recherche"@fr-CA ;
+.
+vivo-display:capabilityMapDataGetter
+  vivo-display:htmlValue "Expertises"@fr-CA ;
+.
+<http://vivoweb.org/ontology/menu_fr_CA>
+  a owl:Ontology ;
+  owl:versionInfo "Adapted by Michel Héon, 2020, for Université du Québec à Montréal, http://uqam.ca" ;
+  owl:versionInfo "Translated by Pierre Roberge, 2020,  for Université du Québec à Montréal, http://uqam.ca" ;
+.

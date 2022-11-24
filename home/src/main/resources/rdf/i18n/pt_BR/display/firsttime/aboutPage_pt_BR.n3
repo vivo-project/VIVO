@@ -1,0 +1,14 @@
+# $This file is distributed under the terms of the license in /doc/license.txt$
+
+@prefix about: <http://vitro.mannlib.cornell.edu/ns/default/about#> .
+
+about:ABOUTDG
+    a   <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.FixedHTMLDataGetter> ;
+    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#htmlValue>
+        """<h2>Sobre VIVO</h2>
+        <div class=\"pageGroupBody\" id=\"aboutText\"><p> A aplicação VIVO possibilita a descoberta dos pesquisadores entre todas as instituições. Os participantes presente nesta rede, incluem instituições com instalações locais do VIVO ou  aplicações capazes de buscar e fornecer dados semânticos web-compliant. A informação acessada através da pesquisa do VIVO, residir e é controlada localmente, dentro da instituição VIVO ou outras aplicações semânticas web-compliant.</p>
+
+        <P> A Vivo é web semântica aplicação open source, originalmente desenvolvida e implementadas em Cornell. Quando instalado e preenchido com conteudo a qual uma instituição é possivel de realizar buscas de pesquisa e bolsas estudo entre disciplinas da instituição. VIVO oferece suporte à navegação e uma função de pesquisa que retorna resultados facetados para recuperação rápida de informação desejada. Contendo qualquer instalação local do VIVO, pode ser mantida manualmente ou trazidos para o banco de dados de forma automatizada num sistemas locais, tais como recursos humanos, bolsas, subsídios, é claro, e bancos de dados das atividade do corpo docente.</p>
+
+        <p>Veja mais informações sobre o <a href=\"http://vivoweb.org\">projeto VIVO</a>.</p></div>
+        """@pt-BR .

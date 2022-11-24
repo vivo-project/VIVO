@@ -1,0 +1,24 @@
+# $This file is distributed under the terms of the license in LICENSE$
+
+@prefix about: <http://vitro.mannlib.cornell.edu/ns/default/about#> .
+
+about:ABOUTDG
+    a   <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.FixedHTMLDataGetter> ;
+    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#htmlValue>
+        """<h2>O VIVO-u</h2>
+        <div class=\"pageGroupBody\" id=\"aboutText\"><p>VIVO je aplikacija koja omogućuje otkrivanje istraživačkih radova širom različitih institucija. Učesnici mreže jesu institucija sa lokalnim instalacijama VIVO-a ili one istitucije koje koriste alata koji omogućavaju izvoz podataka u skladu sa semantičkim web-om. Informacije dostupne kroz VIVO pretragu obezbeđuju, skladište i kontrališu institucije lokalno, koristeći VIVO ili neke druge aplikacije semantičkog veb-a.</p>
+
+        <p>VIVO je open source aplikacija u skladu sa specifikacijama semantičkog veba koja je prvobitno razvijena na Cornell univerzitetu. Kada se instalira u okviru institucije i popuni sa sadržajem, omogućuje otkrivanje i pretraživanje naučnih radova kroz različite discipline u okviru te institucije. VIVO podržava pregledanje i pretragu koje omogućavaju brzo dobavljanje traženih informacija. Sadržaj bilo koje lokalne VIVO instalacije se može ručno održavati ili uneti u bazu podataka uz pomoć automatizovanih alata iz već postojećih zapisa unutar institucije.</p>
+
+        <p>Pogledajte više informacija na stranici <a href=\"http://vivoweb.org\">VIVO Projekta</a>.</p></div>
+        """@en ;
+        <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#saveToVar>
+                "aboutPage" .
+about:ABOUTPAGE
+    a   <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Page> ;
+    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#hasDataGetter>
+        about:ABOUTDG ;
+    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title>
+        "About Page" ;
+    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#urlMapping>
+        "/about" .
