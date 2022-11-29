@@ -8,8 +8,8 @@
             <properties>
                 <app-name>vivo</app-name>
 
-                <vivo-dir>d:/Projekti/VIVO/home</vivo-dir>
-                <tomcat-dir>e:/cris/apache-tomcat-9.0.52</tomcat-dir>
+                <vivo-dir>/usr/local/vivo/home</vivo-dir>
+                <tomcat-dir>/usr/local/tomcat</tomcat-dir>
 
                 <default-theme>wilma</default-theme>
             </properties>
