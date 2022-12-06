@@ -701,15 +701,19 @@ final public class VisualizationCaches {
                                 @Override
                                 protected void processQuerySolution(QuerySolution qs) {
                                     String document = qs.getResource("document").getURI();
-                                    String pubDate  = qs.getLiteral("publicationDate").getString();
-                                    if (pubDate != null) {
-                                        DateTime validParsedDateTimeObject = UtilityFunctions
-                                                .getValidParsedDateTimeObject(pubDate);
-
-                                        if (validParsedDateTimeObject != null) {
-                                            map.put(document.intern(), String.valueOf(validParsedDateTimeObject.getYear()).intern());
-                                        }
+                                    Literal dateLiteral = qs.getLiteral("publicationDate");
+                                    if (dateLiteral == null) {
+                                    	return;
                                     }
+                                    String pubDate = dateLiteral.getString();
+                                    if (pubDate == null) {
+                                    	return;
+                                    }
+                                    DateTime validParsedDateTimeObject = UtilityFunctions.getValidParsedDateTimeObject(pubDate);
+                                    if (validParsedDateTimeObject == null) {
+                                    	return;
+                                    }
+                                    map.put(document.intern(), String.valueOf(validParsedDateTimeObject.getYear()).intern());
                                 }
                             });
 
@@ -789,15 +793,19 @@ final public class VisualizationCaches {
                                 @Override
                                 protected void processQuerySolution(QuerySolution qs) {
                                     String grant = qs.getResource("grant").getURI();
-                                    String startDate  = qs.getLiteral("startDateTimeValue").getString();
-                                    if (startDate != null) {
-                                        DateTime validParsedDateTimeObject = UtilityFunctions
-                                                .getValidParsedDateTimeObject(startDate);
-
-                                        if (validParsedDateTimeObject != null) {
-                                            map.put(grant.intern(), String.valueOf(validParsedDateTimeObject.getYear()).intern());
-                                        }
+                                    Literal dateLiteral = qs.getLiteral("startDateTimeValue");
+                                    if (dateLiteral == null) {
+                                        return;
                                     }
+                                    String startDate = dateLiteral.getString();
+                                    if (startDate == null) {
+                                    	return;
+                                    }
+                                    DateTime validParsedDateTimeObject = UtilityFunctions.getValidParsedDateTimeObject(startDate);
+                                    if (validParsedDateTimeObject == null) {
+                                    	return;
+                                    }
+                                    map.put(grant.intern(), String.valueOf(validParsedDateTimeObject.getYear()).intern());
                                 }
                             });
 
@@ -831,15 +839,19 @@ final public class VisualizationCaches {
                                 @Override
                                 protected void processQuerySolution(QuerySolution qs) {
                                     String grant = qs.getResource("grant").getURI();
-                                    String startDate  = qs.getLiteral("startDateTimeValue").getString();
-                                    if (startDate != null) {
-                                        DateTime validParsedDateTimeObject = UtilityFunctions
-                                                .getValidParsedDateTimeObject(startDate);
-
-                                        if (validParsedDateTimeObject != null) {
-                                            map.put(grant.intern(), String.valueOf(validParsedDateTimeObject.getYear()).intern());
-                                        }
+                                    Literal dateLiteral = qs.getLiteral("startDateTimeValue");
+                                    if (dateLiteral == null) {
+                                    	return;
                                     }
+                                    String startDate  = dateLiteral.getString();
+                                    if (startDate == null) {
+                                    	return;
+                                    }
+                                    DateTime validParsedDateTimeObject = UtilityFunctions.getValidParsedDateTimeObject(startDate);
+                                    if (validParsedDateTimeObject == null) {
+                                    	return;
+                                    }
+                                    map.put(grant.intern(), String.valueOf(validParsedDateTimeObject.getYear()).intern());
                                 }
                             });
 
