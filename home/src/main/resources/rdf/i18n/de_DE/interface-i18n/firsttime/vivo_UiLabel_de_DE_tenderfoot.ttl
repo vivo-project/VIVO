@@ -1,0 +1,869 @@
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix prop-data: <http://vivoweb.org/ontology/core/properties/individual#> .
+@prefix prop:  <http://vivoweb.org/ontology/core/properties/vocabulary#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+prop-data:collapsed_menu_name.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Menü"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "collapsed_menu_name" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:create_capitalized.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Erstellen"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "create_capitalized" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_termuse.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Nutzungsbedingungen"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_termuse" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:unable_to_handle_position_editing.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Dieses Formular kann die Bearbeitung dieser Position nicht ausführen, da es mit mehreren Einzelpositionen verbunden ist."@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "unable_to_handle_position_editing" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:collection_or_series.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "collection_or_series" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:last_name.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Nachname"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "last_name" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:first_name.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Vorname"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "first_name" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:grant_type.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Art des Forschungsprojektes"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grant_type" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:view_all_members_of_org.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Alle Mitglieder dieser Organisation anzeigen."@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "view_all_members_of_org" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:display_more.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "weitere Ergebnisse"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "display_more" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:edit_mailing_address.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Postanschrift bearbeiten"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "edit_mailing_address" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:first_publication.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "erste Publikation"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "first_publication" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:no_faculty_found.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Keine ProfessorInnen gefunden."@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "no_faculty_found" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:identity_myprofile.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Mein Profil"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_myprofile" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_powered.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Powered by"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_powered" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:grants_text_one.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Dieser Teil stammt aus der Template-Datei vivo/productMods/templates/freemarker/body/menupage/grants.ftl. In der Bildschirmanzeige hat die Seite Forschungsprojekte eine display:requiresBodyTemplate Eigenschaft, die definiert, dass die Seite Forschungsprojekte das Standard-Template aufhebt. Das Standard-Template für diese Seiten findet sich auf /vitro/webapp/web/templates/freemarker/body/menupage/menupage.ftl"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grants_text_one" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:identity_title.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "VIVO | verbinden teilen entdecken"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_title" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:researchers.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "ForscherInnen"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "researchers" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:indiv_foafperson_for.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "für"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "indiv_foafperson_for" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:identity_index.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Index"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_index" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:vivo_profile.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "VIVO-Profil"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "vivo_profile" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_logout.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Abmelden"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_logout" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:create_entry.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Eintrag erstellen"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "create_entry" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:placeholder_image.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Platzhalter-Bild"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "placeholder_image" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:first_grant.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "erstes Forschungsprojekt"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "first_grant" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:attendee_capitalized.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "TeilnehmerIn"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "attendee_capitalized" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:map_state_string.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Land."@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "map_state_string" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_about.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Impressum"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_about" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:grants_two.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Diese Technik könnte dazu benutzt werden, Seiten ohne Menüpunkte mit Inhalten aus einem Freemarker-Template zu definieren. Ein Beispiel hierfür wäre die Impressum-Seite."@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grants_two" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:service_provider_role.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Rolle des Dienstleistungsanbieters"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "service_provider_role" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:profile_capitalized.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Profil"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "profile_capitalized" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:email_address.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "E-Mail-Adresse"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "email_address" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:statewide_locations.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "landesweite Standorte."@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "statewide_locations" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:limit_search.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Suche einschränken"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "limit_search" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:province_or_region.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Bundesland oder Bezirk "@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "province_or_region" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_copyright.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Copyright"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_copyright" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:place_of_grant.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Ort des Forschungsprojektes"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "place_of_grant" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:to.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "bis"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "to" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:countries.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Länder"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "countries" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:identity_edit.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Seite bearbeiten"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_edit" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:enter_new_role_value.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Bitte im Feld Rolle einen neuen Wert eintragen"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "enter_new_role_value" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_version.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Version"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_version" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:last_grant.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "letztes Forschungsprojekt"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "last_grant" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:no_grants_for.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Zurzeit gibt es keine Forschungsprojekte für"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "no_grants_for" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:address_street_one.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Straße und Hausnummer"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "address_street_one" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:map_states_string.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Länder."@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "map_states_string" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:loading_website_image.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Bild wird geladen"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "loading_website_image" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:intro_filtersearch.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Suche filtern"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "intro_filtersearch" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:identity_user.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "BenutzerIn"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_user" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:unable_to_handle_grant_editing.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Dieses Formular kann die Bearbeitung dieses Forschungsprojektes nicht ausführen, da es mit mehreren einzelnen Forschungsprojekten verbunden ist."@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "unable_to_handle_grant_editing" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:currently_no_researchers.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Zur Zeit gibt es keine ForscherInnen mit einem bestimmten Ort."@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "currently_no_researchers" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:view_all_departments.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Alle Abteilungen anzeigen."@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "view_all_departments" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:view.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Ansicht"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "view" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:regions.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Bezirke"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "regions" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:organizer_role.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Rolle des Organisators/ der Organisatorin"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "organizer_role" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:identity_admin.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Seitenverwaltung"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_admin" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_support.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Hilfe"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_support" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:researchers_in.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "ForscherInnen in"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "researchers_in" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:faculty_memberships.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "ProfessorInnen"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "faculty_memberships" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:last_publication.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "letzte Publikation"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "last_publication" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_item.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Menüpunkt"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_item" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_loginfull.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Administrationszugang - Anmeldung"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_loginfull" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:countries_and_regions.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Länder und Bezirke"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "countries_and_regions" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:reviewer_role.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Rolle der GutachterIn/ des Gutachters"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "reviewer_role" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:no_departments_found.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Keine Abteilungen gefunden."@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "no_departments_found" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:return_to_grant.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Zurück zum Forschungsprojekt"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "return_to_grant" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:grant_entry_for.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Eintrag eines Forschungsprojektes für"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grant_entry_for" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:intro_searchvivo.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "VIVO durchsuchen"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "intro_searchvivo" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:address_street_three.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Adresszusatz 2"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "address_street_three" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:address_label.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Adressbezeichnung"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "address_label" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:change_selection.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Auswahl ändern"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "change_selection" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:faculty_who_are_members_of_org.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "ProfessorInnen des {0} Fachbereichs, die Mitglieder dieser Organisation sind."@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "faculty_who_are_members_of_org" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:grants_in_vivo.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Forschungsprojekte in VIVO"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grants_in_vivo" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:leadership_role.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Führungsposition"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "leadership_role" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:currently_no_papers_for.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Zurzeit gibt es keine {0} Artikel"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "currently_no_papers_for" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_welcomestart.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Willkommen"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_welcomestart" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:add_capitalized.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Hinzufügen"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "add_capitalized" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:intro_title.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Willkommen bei VIVO"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "intro_title" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:grants_text_three.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Dadurch würde eine Seite entstehen, die about.ftl als Hauptteil benutzt. Die Seite wäre zugänglich über /about und würde alle servlet mappings in web.xml außer Kraft setzen."@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grants_text_three" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:research_area.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Personen in dem Fachbereich mit diesem Forschungsgebiet"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "research_area" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_contactus.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Kontakt"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_contactus" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:password.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Passwort"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "password" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:intro_para1.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "VIVO ist ein forschungsorientiertes Recherchewerkzeug, das die Zusammenarbeit zwischen Wissenschaftlern quer durch alle Fachbereiche ermöglicht."@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "intro_para1" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:collection_capitalized.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Sammlung"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "collection_capitalized" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:address_street_two.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Adresszusatz 1"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "address_street_two" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:select_award.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "ausgewählte Auszeichnung"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "select_award" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:manage_publications_link.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "manage_publications_link" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:loading_data.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Daten werden geladen"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "loading_data" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:indiv_foafperson_return.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Zurück"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "indiv_foafperson_return" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:menu_login.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Anmelden"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "menu_login" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:grant_date.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Startdatum des Forschungsprojektes"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "grant_date" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:intro_para2.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Durchstöbern Sie die Kategorien oder suchen Sie gezielt Informationen zu Personen, Fachbereichen, Seminaren, Forschungsprojekten und Veranstaltungen."@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "intro_para2" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:identity_myaccount.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Mein Account"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "identity_myaccount" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:full_name.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "vollständiger Name"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "full_name" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:years_participation_in.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "Jahre der Mitarbeit in"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "years_participation_in" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .
+
+prop-data:view_all_faculty.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         prop:PropertyKey ;
+        rdfs:label       "gesamten Fachbereich anzeigen"@de-DE ;
+        prop:hasApp      "VIVO" ;
+        prop:hasKey      "view_all_faculty" ;
+        prop:hasPackage  "VIVO-languages" ;
+        prop:hasTheme    "tenderfoot" .

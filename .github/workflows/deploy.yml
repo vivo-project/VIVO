@@ -18,13 +18,6 @@ jobs:
 
       - name: Clone Vitro
         run: git clone https://github.com/vivo-project/Vitro.git ../Vitro
-        
-      - name: Clone Vitro-languages
-        run: git clone https://github.com/vivo-project/Vitro-languages.git ../Vitro-languages
-
-      - name: Clone VIVO-languages
-        run: git clone https://github.com/vivo-project/VIVO-languages.git ../VIVO-languages
-
 
       - name: Maven Cache
         uses: actions/cache@v2
@@ -43,10 +36,6 @@ jobs:
 
       - name: Maven Deploy
         run: |
-          cd ../Vitro-languages
-          mvn clean install
-          cd ../VIVO-languages
-          mvn clean install
           cd ../VIVO
           mvn --batch-mode deploy -Pskip
         env:
