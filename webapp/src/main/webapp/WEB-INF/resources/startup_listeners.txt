@@ -71,6 +71,7 @@ org.vivoweb.webapp.startup.MenuManagementSetup
 org.vivoweb.webapp.startup.SiteAdminSetup
 org.vivoweb.webapp.startup.TemplateModelSetup
 org.vivoweb.webapp.startup.SearchResultTemplateModelSetup
+org.vivoweb.webapp.startup.SparqlFunctionRegister
 
 edu.ucsf.vitro.opensocial.OpenSocialSmokeTests
 
