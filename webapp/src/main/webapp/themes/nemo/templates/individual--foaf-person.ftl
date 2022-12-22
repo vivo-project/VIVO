@@ -192,6 +192,7 @@ Add divs and wrapper to create funnelback basket controls. MUST BE REMOVED BEFOR
 		displayMoreEllipsis: '${i18n().display_more_ellipsis}',
 		showMoreContent: '${i18n().show_more_content}',
 		verboseTurnOff: '${i18n().verbose_turn_off}',
+                exportQrCodes: '${i18n().export_qr_codes?js_string}',
 		researchAreaTooltipOne: '${i18n().research_area_tooltip_one}',
 		researchAreaTooltipTwo: '${i18n().research_area_tooltip_two}'
 		};

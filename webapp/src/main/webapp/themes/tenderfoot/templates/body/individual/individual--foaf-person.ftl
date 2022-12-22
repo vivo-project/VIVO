@@ -166,6 +166,7 @@
         displayMoreEllipsis: '${i18n().display_more_ellipsis?js_string}',
         showMoreContent: '${i18n().show_more_content?js_string}',
         verboseTurnOff: '${i18n().verbose_turn_off?js_string}',
+        exportQrCodes: '${i18n().export_qr_codes?js_string}',
         researchAreaTooltipOne: '${i18n().research_area_tooltip_one?js_string}',
         researchAreaTooltipTwo: '${i18n().research_area_tooltip_two?js_string}'
     };
