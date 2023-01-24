@@ -441,8 +441,23 @@ final public class VisualizationCaches {
                                     "    ?person a foaf:Person .\n" +
                                     "    ?person core:hasResearchArea ?concept .\n" +
                                     "    ?concept a skos:Concept .\n" +
-                                    "    ?concept rdfs:label ?label .\n" +
-                                    "    FILTER (lang(?label) = '" + langCtx+"' )  \n" +
+                                    "  OPTIONAL {  "  +
+                                    "       ?concept rdfs:label ?labelPrimary . \n" +
+                                    "       FILTER (LANG(?labelPrimary) = '" + langCtx + "') \n" +
+                                    "  } \n" +
+                                    "  OPTIONAL {  "  +
+                                    "       ?concept rdfs:label ?labelFallback1 . \n" +
+                                    "       FILTER (LANG(?labelFallback1) = 'en-US') \n" +
+                                    "  } \n" +
+                                    "  OPTIONAL {  "  +
+                                    "       ?concept rdfs:label ?labelFallback2 . \n" +
+                                    "       FILTER (LANG(?labelFallback2) = 'en') \n" +
+                                    "  } \n" +
+                                    "  OPTIONAL {  "  +
+                                    "       ?concept rdfs:label ?labelFallback3 . \n" +
+                                    "       FILTER (LANG(?labelFallback3) = '') \n" +
+                                    "  } \n" +
+                                    "BIND(COALESCE(?labelPrimary, ?labelFallback1, ?labelFallback2, ?labelFallback3) AS ?label) \n" +
                                     "}\n";
 
 //                            final Map<String, String> map = new HashMap<>();
