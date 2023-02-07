@@ -934,7 +934,7 @@ a.view-all-style {
 }
 #home-research li:last-child {
 	text-align:right;
-	padding: 4px 16px 0 0;
+	padding: 4px 16px 8px 0;
 }
 #home-research td span {
 	color: #fff;
@@ -1543,6 +1543,9 @@ a {
 }
 input[type="submit"] {
     cursor: pointer;
+}
+input[type="search" i] {
+    margin: 2px;
 }
 .checkboxSpacer {
     margin-left:80px;
