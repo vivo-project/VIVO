@@ -171,7 +171,7 @@ var subOrganizationPublicationTemporalGraphCommonURL = "${subOrganizationPublica
 
 var jsonString = '${jsonContent!}';
 var vivoDefaultNamespace = '${vivoDefaultNamespace!}';
-var organizationLabel = '${organizationLabel}';
+var organizationLabel = '${organizationLabel?js_string}';
 var organizationVIVOProfileURL = "${organizationVivoProfileURL}";
 
 var loadingImageLink = contextPath + "/images/visualization/ajax-loader-indicator.gif";
