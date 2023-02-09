@@ -251,17 +251,17 @@ final public class VisualizationCaches {
                                     "{\n" +
                                     "  ?org a foaf:Organization \n" +
                                     "  OPTIONAL { ?org rdfs:label ?orgLabelPrimary . \n" +
-                                    "       FILTER (langMatches(LANG(?orgLabelPrimary), '" + langCtx + "' ) ) \n" +
+                                    "       FILTER (langMatches(LANG(?orgLabelPrimary), '" + langCtx + "')) \n" +
                                     "} \n" +
                                     "  OPTIONAL { ?org rdfs:label ?orgLabelSecondary . \n" +
-                                    "       FILTER (langMatches(LANG(?orgLabelSecondary), '" + language + "' ) ) \n" +
+                                    "       FILTER (langMatches(LANG(?orgLabelSecondary), '" + language + "')) \n" +
                                     "} \n" +
                                     "  OPTIONAL { ?org rdfs:label ?orgLabelTertiary .\n" +
                                     "       FILTER (STRBEFORE(lcase(STR(LANG(?orgLabelTertiary))), '-') = '" + language.toLowerCase() + "') \n" +
                                     "} \n" +
                                     "  OPTIONAL { ?org rdfs:label ?orgLabelFallback .\n" +
                                     "       FILTER (lcase(STR(LANG(?orgLabelFallback))) != '" + langCtx.toLowerCase() + "' \n" + 
-                                    "           && lcase(STR(LANG(?orgLabelFallback))) != '" + language.toLowerCase() + "' ) \n" +
+                                    "           && lcase(STR(LANG(?orgLabelFallback))) != '" + language.toLowerCase() + "') \n" +
                                     "} \n" +
                                     "BIND(COALESCE(?orgLabelPrimary, ?orgLabelSecondary, ?orgLabelTertiary, ?orgLabelFallback) AS ?orgLabel_) \n" +
                                     "} GROUP BY ?org \n";
