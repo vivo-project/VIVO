@@ -61,7 +61,7 @@ final public class VisualizationCaches {
         publicationToYear.build(rdfService);
         personToGrant.build(rdfService);
         grantToYear.build(rdfService);
-        //        people.build(rdfService);
+//        people.build(rdfService);
     }
 
     public static void buildMissing() {
@@ -78,7 +78,7 @@ final public class VisualizationCaches {
         if (!publicationToYear.isCached())               { publicationToYear.build(null); }
         if (!personToGrant.isCached())                   { personToGrant.build(null); }
         if (!grantToYear.isCached())                     { grantToYear.build(null); }
-        //        if (!people.isCached())                          { people.build(null); }
+//        if (!people.isCached())                          { people.build(null); }
     }
 
     /**
@@ -224,7 +224,7 @@ final public class VisualizationCaches {
                             return map;
                         }
                     }
-                    );
+            );
 
     /**
      * Cache of organization labels (uri -> label)
@@ -244,27 +244,22 @@ final public class VisualizationCaches {
                                     langCtx += "-" + vreq.getLocale().getCountry();
                                 }
                             } catch (Exception e) { }
-                            // UQAM - In the filter, Case-insensitive language processing
+
                             String query = QueryConstants.getSparqlPrefixQuery() +
                                     "SELECT ?org (Min(?orgLabel_) AS ?orgLabel) \n" +
                                     "WHERE\n" +
                                     "{\n" +
                                     "  ?org a foaf:Organization \n" +
                                     "  OPTIONAL { ?org rdfs:label ?orgLabelPrimary . \n" +
-                                    //"       FILTER (LANG(?orgLabelPrimary) = '" + langCtx + "') \n" +
-                                    "       FILTER (langMatches(lang(?orgLabelPrimary), '" + langCtx+"' ) ) \n" +
+                                    "       FILTER (langMatches(LANG(?orgLabelPrimary), '" + langCtx + "' ) ) \n" +
                                     "} \n" +
                                     "  OPTIONAL { ?org rdfs:label ?orgLabelSecondary . \n" +
-                                    //"       FILTER (LANG(?orgLabelSecondary) = '" + language + "') \n" +
-                                    "       FILTER (langMatches(lang(?orgLabelSecondary), '" + language+"' ) ) \n" +
+                                    "       FILTER (langMatches(LANG(?orgLabelSecondary), '" + language + "' ) ) \n" +
                                     "} \n" +
                                     "  OPTIONAL { ?org rdfs:label ?orgLabelTertiary .\n" +
-                                    //"       FILTER (STRBEFORE(STR(LANG(?orgLabelTertiary)), '-') = '" + language + "') \n" +
                                     "       FILTER (STRBEFORE(lcase(STR(LANG(?orgLabelTertiary))), '-') = '" + language.toLowerCase() + "') \n" +
                                     "} \n" +
                                     "  OPTIONAL { ?org rdfs:label ?orgLabelFallback .\n" +
-                                    //"       FILTER (LANG(?orgLabelFallback) != '" + langCtx + "' \n" + 
-                                    //"           && LANG(?orgLabelFallback) != '" + language + "' ) \n" +
                                     "       FILTER (lcase(STR(LANG(?orgLabelFallback))) != '" + langCtx.toLowerCase() + "' \n" + 
                                     "           && lcase(STR(LANG(?orgLabelFallback))) != '" + language.toLowerCase() + "' ) \n" +
                                     "} \n" +
@@ -286,7 +281,7 @@ final public class VisualizationCaches {
                             return map;
                         }
                     }
-                    );
+            );
 
     /**
      * Cache of organization to sub organizations (uri -> list of uris)
@@ -326,7 +321,7 @@ final public class VisualizationCaches {
                             return map;
                         }
                     }
-                    );
+            );
 
     /**
      * Organization most specific type label (uri -> string)
@@ -359,7 +354,7 @@ final public class VisualizationCaches {
                             return map;
                         }
                     }
-                    );
+            );
 
     /**
      * Map of people within an organisation (org uri -> list of person uri)
@@ -411,7 +406,7 @@ final public class VisualizationCaches {
                             return orgToPeopleMap;
                         }
                     }
-                    );
+            );
 
     /**
      * Concept to label
@@ -439,10 +434,12 @@ final public class VisualizationCaches {
                                     "    ?person core:hasResearchArea ?concept .\n" +
                                     "    ?concept a skos:Concept .\n" +
                                     "    ?concept rdfs:label ?label .\n" +
-                                    "    FILTER (langMatches(lang(?label), '" + langCtx+"' ) ) \n" +
+                                    "    FILTER (langMatches(LANG(?label), '" + langCtx + "'))  \n" +
                                     "}\n";
-                            final ConceptLabelMap map = new ConceptLabelMap();
 
+//                            final Map<String, String> map = new HashMap<>();
+                            final ConceptLabelMap map = new ConceptLabelMap();
+                            
                             rdfService.sparqlSelectQuery(query, new ResultSetConsumer() {
                                 protected void processQuerySolution(QuerySolution qs) {
                                     String conceptURI = qs.getResource("concept").getURI().intern();
@@ -466,7 +463,7 @@ final public class VisualizationCaches {
                             return map;
                         }
                     }
-                    );
+            );
 
     /**
      * Map of people associated with a concept
@@ -516,7 +513,7 @@ final public class VisualizationCaches {
                             return conceptPeopleMap;
                         }
                     }
-                    );
+            );
 
     /**
      * Display labels for people (uri -> label)
@@ -549,7 +546,7 @@ final public class VisualizationCaches {
                             return map;
                         }
                     }
-                    );
+            );
 
     /**
      * Most specific type for person (uri -> label)
@@ -582,7 +579,7 @@ final public class VisualizationCaches {
                             return map;
                         }
                     }
-                    );
+            );
 
     /**
      * Person to publication Map (person uri -> list of publication uri)
@@ -623,7 +620,7 @@ final public class VisualizationCaches {
                             return map;
                         }
                     }
-                    );
+            );
 
     /**
      * Publication to journal (publication uri -> journal label)
@@ -657,7 +654,7 @@ final public class VisualizationCaches {
                             return map;
                         }
                     }
-                    );
+            );
 
     /**
      * Publication to year (publication uri -> year)
@@ -697,7 +694,7 @@ final public class VisualizationCaches {
                             return map;
                         }
                     }
-                    );
+            );
 
     /**
      * Person to grant (person uri -> grant uri)
@@ -744,7 +741,7 @@ final public class VisualizationCaches {
                             return map;
                         }
                     }
-                    );
+            );
 
     /**
      * Grant to year (grant uri -> year)
@@ -785,7 +782,7 @@ final public class VisualizationCaches {
                             return map;
                         }
                     }
-                    );
+            );
 
     /**
      * Grant to year of start in role (grant uri -> year)
@@ -827,5 +824,5 @@ final public class VisualizationCaches {
                             return map;
                         }
                     }
-                    );
+            );
 }
