@@ -916,8 +916,16 @@ a.view-all-style {
 	float: left;
 	clear: both;
 }
-#home-research ul {
-	padding: 0.7em 0 0.6em 0.75em;
+#home-research table {
+	margin: 0.7em 0 0.6em 35px;
+    width: calc(100% - 35px);
+}
+#home-research th:nth-child(1) {
+    text-align: left;
+}
+#home-research td:nth-child(2) {
+    text-align: center;
+    padding-top: 0.6em;
 }
 #home-research li {
 	line-height: 1.25em;
@@ -926,15 +934,15 @@ a.view-all-style {
 }
 #home-research li:last-child {
 	text-align:right;
-	padding: 4px 16px 0 0;
+	padding: 4px 16px 8px 0;
 }
-#home-research li span {
+#home-research td span {
 	color: #fff;
 	background: url(../../../images/count-background.png) no-repeat;
 	width: 65px;
 	height: 27px;
 	display: inline-block;
-	padding: 6px 8px 0 0;
+	padding: 4px 8px 0 0;
 	margin-left: 4px;
 	text-align: center;
 }
@@ -1042,7 +1050,6 @@ footer p.copyright small {
 ul#footer-nav {
     float: right;
     list-style: none;
-    width: 200px;
     height: 20px;
     margin: 0;
     padding: 0;
@@ -1535,6 +1542,9 @@ a {
 }
 input[type="submit"] {
     cursor: pointer;
+}
+input[type="search" i] {
+    margin: 2px;
 }
 .checkboxSpacer {
     margin-left:80px;

@@ -528,7 +528,7 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
 			Locale currentLocale) throws FileNotFoundException {
 		HashMap<String, String> map = new HashMap<String, String>();
 		//Replacing the underscore with a hyphen because that is what is represented in the actual literals
-		map.put("code", locale.toString().replace("_", "-"));
+		map.put("code", locale.toLanguageTag().replace("_", "-"));
 		map.put("label", locale.getDisplayName(currentLocale));
 		return map;
 	}

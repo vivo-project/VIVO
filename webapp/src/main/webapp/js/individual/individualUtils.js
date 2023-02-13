@@ -64,7 +64,7 @@ $(document).ready(function(){
 							}
 							vcard += "END:VCARD";
 
-							spanStr = "<a title='${i18n().export_qr_codes?js_string}' href='"
+							spanStr = "<a title='" + i18nStrings.exportQrCodes + "' href='"
 							          + exportQrCodeUrl + "'>"
 							          + "<img id='codeImage' src='https://chart.googleapis.com/chart?cht=qr&amp;chs=125x125&amp;chl="
 									  + vcard

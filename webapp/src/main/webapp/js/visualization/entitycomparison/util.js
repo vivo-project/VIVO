@@ -1157,7 +1157,8 @@ function prepareTableForDataTablePagination(jsonData, dataTableParams){
 	    "iDisplayLength": 10,
 	    "bInfo": true,
 	    "oLanguage": {
-			"sInfo": "Records _START_ - _END_ of _TOTAL_",
+			"sInfo": i18nStringsUtil.recordsStartEndOfTotal,
+			"sSearch": i18nStringsUtil.searchButton,
 			"sInfoEmpty": i18nStringsUtil.noMatchingEntities,
 			"sInfoFiltered": ""
 		},

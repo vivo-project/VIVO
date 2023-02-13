@@ -1,0 +1,25 @@
+# $This file is distributed under the terms of the license in LICENSE$
+
+@prefix about: <http://vitro.mannlib.cornell.edu/ns/default/about#> .
+
+about:ABOUTDG
+    a   <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.FixedHTMLDataGetter> ;
+    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#htmlValue>
+        """<h2>À propos de VIVO</h2>
+        <div class=\"pageGroupBody\" id=\"aboutText\"><p>VIVO est une application qui permet de découvrir des chercheurs et chercheuses appartenant à différentes institutions qui opèrent leurs propres instances de VIVO ou de répertoires compatibles avec les technologies du Web sémantique. L’information globalement accessible grâce à VIVO est donc hébergée et gérée localement, au sein des différentes instances de VIVO ou de ces autres répertoires.</p>
+
+        <p>VIVO est un logiciel libre originalement développé et implanté à l’Université de Cornell. Lorsqu’installé et peuplé avec les données d’une institution, VIVO rend possible la découverte d’activités de recherche parmi les différentes disciplines de cette institution. VIVO permet d’interroger et d’explorer les données, et propose des résultats de recherche facettés qui facilitent le repérage des informations souhaitées. Le contenu d’une instance VIVO peut être édité manuellement ou intégré automatiquement depuis diverses bases de données: ressources humaines, bourses, subventions, cours et activités facultaires.</p>
+
+        <p>Pour plus d’informations, veuillez consulter la <a href=\"http://vivoweb.org\">page du projet VIVO</a>.</p></div>
+        """@fr-CA ;
+        <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#saveToVar>
+                "aboutPage" .
+about:ABOUTPAGE
+    a   <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Page> ;
+    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#hasDataGetter>
+        about:ABOUTDG ;
+    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title>
+        "About Page" ;
+    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#urlMapping>
+        "/about" .
+

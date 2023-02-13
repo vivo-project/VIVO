@@ -18,9 +18,11 @@ roleExamples-->
 
 
 <#--Variable assignments for Add Clinical Role To Person-->
+<#setting url_escaping_charset="UTF-8">
+<#setting output_encoding="UTF-8">
 <#assign roleDescriptor = "${i18n().collection_series_editor_role}" />
 <#assign typeSelectorLabel = "${i18n().editor_role_in}" />
-<#assign genericLabel = "Collection or Series" />
+<#assign genericLabel = "${i18n().collection_or_series}" />
 
 <#assign acTypes = "{activity: 'http://purl.org/ontology/bibo/Collection'}" />
 

@@ -89,7 +89,7 @@ $(document).ready(function(){
                                 + urlsBase
                                 + "/people#http://vivoweb.org/ontology/core#FacultyMember' alt='"
                                 + i18nStrings.viewAllFaculty + "'>"
-                                + i18nStrings.viewAllString + "</a></li?</ul>";
+                                + i18nStrings.viewAllString + "</a></li></ul>";
                     $('div#research-faculty-mbrs').append(viewMore);
                 }
             });

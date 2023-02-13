@@ -115,7 +115,7 @@ var customFormData  = {
 };
 var i18nStrings = {
     selectAnExisting: '${i18n().select_an_existing?js_string}',
-    orCreateNewOne: '${i18n().or_create_new_one?js_string}',
+    selectAnExistingOrCreateNewOne: '${i18n().select_an_existing_or_create_a_new_one?js_string}',
     selectedString: '${i18n().selected?js_string}',
 };
 </script>

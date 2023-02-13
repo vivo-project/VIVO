@@ -41,17 +41,6 @@
                                     <artifactId>vivo-webapp</artifactId>
                                     <type>war</type>
                                 </overlay>
-                                <!-- Overlays for multilingual support -->
-                                <overlay>
-                                    <groupId>org.vivoweb</groupId>
-                                    <artifactId>vitro-languages-webapp-core</artifactId>
-                                    <type>war</type>
-                                </overlay>
-                                <overlay>
-                                    <groupId>org.vivoweb</groupId>
-                                    <artifactId>vivo-languages-webapp-core</artifactId>
-                                    <type>war</type>
-                                </overlay>
                             </overlays>
                             <webResources>
                                 <resource>
@@ -147,19 +136,6 @@
         <dependency>
             <groupId>org.vivoweb</groupId>
             <artifactId>vivo-webapp</artifactId>
-            <type>war</type>
-        </dependency>
-        <!-- Dependencies for multilingual support -->
-        <dependency>
-            <groupId>org.vivoweb</groupId>
-            <artifactId>vitro-languages-webapp-core</artifactId>
-            <version>${project.version}</version>
-            <type>war</type>
-        </dependency>
-        <dependency>
-            <groupId>org.vivoweb</groupId>
-            <artifactId>vivo-languages-webapp-core</artifactId>
-            <version>${project.version}</version>
             <type>war</type>
         </dependency>
         <dependency>

@@ -129,7 +129,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <select name="roleType" style="margin-top:-2px" >
         <option value="" <#if roleTypeValue == "">selected</#if>>${i18n().select_one}</option>
         <#list roleTypeOpts?keys as key>
-            <option value="${key}"  <#if roleTypeValue == key>selected</#if>><#if roleTypeOpts[key] == "Other">${i18n().researcher_role}<#else>${roleTypeOpts[key]}</#if></option>
+            <option value="${key}"  <#if roleTypeValue == key>selected</#if>>${roleTypeOpts[key]}</option>
         </#list>
     </select>
 
@@ -158,7 +158,7 @@ var customFormData  = {
 };
 var i18nStrings = {
     selectAnExisting: '${i18n().select_an_existing?js_string}',
-    orCreateNewOne: '${i18n().or_create_new_one?js_string}',
+    selectAnExistingOrCreateNewOne: '${i18n().select_an_existing_or_create_a_new_one?js_string}',
     selectedString: '${i18n().selected?js_string}'
 };
 

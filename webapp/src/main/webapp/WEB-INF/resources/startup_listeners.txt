@@ -31,6 +31,8 @@ edu.cornell.mannlib.vitro.webapp.i18n.selection.LocaleSelectionSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ConfigurationModelsSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ContentModelSetup
 
+edu.cornell.mannlib.vitro.webapp.i18n.I18nContextListener
+
 edu.cornell.mannlib.vitro.webapp.web.images.PlaceholderUtil$Setup
 
 edu.cornell.mannlib.vitro.webapp.servlet.setup.FileGraphSetup

@@ -70,7 +70,7 @@
                     <#if (title.statements?size < 1) >
                         <@p.addLinkWithLabel title editable />
                     <#elseif editable>
-                        <h2 id="preferredTitle">${title.name?capitalize!}</h2>
+                        <h2 id="preferredTitle">${title.name}</h2>
                         <@p.verboseDisplay title />
                     </#if>
                     <#list title.statements as statement>

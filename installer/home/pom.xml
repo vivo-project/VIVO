@@ -55,7 +55,12 @@
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <delete dir="${vivo-dir}/rdf" />
+                                        <delete includeemptydirs="true">
+                                            <fileset dir="${vivo-dir}/rdf">
+                                                <include name="**/*"/>
+                                                <exclude name="**/i18n/*_x_*/**"/>
+                                            </fileset>
+                                        </delete>
                                     </target>
                                 </configuration>
                             </execution>
@@ -101,19 +106,6 @@
         <dependency>
             <groupId>org.vivoweb</groupId>
             <artifactId>vivo-home</artifactId>
-            <type>tar.gz</type>
-        </dependency>
-        <!-- Dependency for multilingual support -->
-        <dependency>
-            <groupId>org.vivoweb</groupId>
-            <artifactId>vivo-languages-home-core</artifactId>
-            <version>${project.version}</version>
-            <type>tar.gz</type>
-        </dependency>
-        <dependency>
-            <groupId>org.vivoweb</groupId>
-            <artifactId>vitro-languages-home-core</artifactId>
-            <version>${project.version}</version>
             <type>tar.gz</type>
         </dependency>
     </dependencies>

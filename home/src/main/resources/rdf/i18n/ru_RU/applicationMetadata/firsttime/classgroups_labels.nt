@@ -1,0 +1,8 @@
+<http://vivoweb.org/ontology#vitroClassGrouppublications> <http://www.w3.org/2000/01/rdf-schema#label> "исследования"@ru-RU .
+<http://vivoweb.org/ontology#vitroClassGroupactivities> <http://www.w3.org/2000/01/rdf-schema#label> "виды деятельности"@ru-RU .
+<http://vivoweb.org/ontology#vitroClassGrouporganizations> <http://www.w3.org/2000/01/rdf-schema#label> "организации"@ru-RU .
+<http://vivoweb.org/ontology#vitroClassGroupcourses> <http://www.w3.org/2000/01/rdf-schema#label> "учебные курсы"@ru-RU .
+<http://vivoweb.org/ontology#vitroClassGroupequipment> <http://www.w3.org/2000/01/rdf-schema#label> "инвентарь"@ru-RU .
+<http://vivoweb.org/ontology#vitroClassGroupevents> <http://www.w3.org/2000/01/rdf-schema#label> "мероприятия"@ru-RU .
+<http://vivoweb.org/ontology#vitroClassGrouplocations> <http://www.w3.org/2000/01/rdf-schema#label> "местоположения"@ru-RU .
+<http://vivoweb.org/ontology#vitroClassGrouppeople> <http://www.w3.org/2000/01/rdf-schema#label> "персоны"@ru-RU .
