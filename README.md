@@ -18,8 +18,10 @@ https://wiki.lyrasis.org/display/VIVO/
 
 ### Installation Instructions
 
-Installation instructions for the latest release can be found at this location on the wiki:  
-https://wiki.lyrasis.org/display/VIVODOC112x/Installing+VIVO
+Installation instructions for all releases can be found at this location on the wiki:  
+https://wiki.lyrasis.org/display/VIVODOC/All+Documentation
+
+When you select the wiki pages for technical documentation for the release you would like to install at https://wiki.lyrasis.org/display/VIVODOC/All+Documentation, please open the Installing VIVO section and follow the instructions. 
 
 ### Docker
 
