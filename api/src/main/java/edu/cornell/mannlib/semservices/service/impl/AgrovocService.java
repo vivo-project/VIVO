@@ -260,7 +260,7 @@ public class AgrovocService implements ExternalConceptService {
 				+ "PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>\n"
 				+ "SELECT DISTINCT ?description WHERE { \n" + "<" + uri
 				+ "> rdfs:comment ?description . \n"
-				+ "FILTER (LANG(?description)='en' ) \n" + "}";
+				+ "FILTER (langMatches(LANG(?description), 'en')) \n" + "}";
 		// System.out.println(qs);
 		List<HashMap> resultList = new ArrayList<>();
 		QueryExecution qexec = null;

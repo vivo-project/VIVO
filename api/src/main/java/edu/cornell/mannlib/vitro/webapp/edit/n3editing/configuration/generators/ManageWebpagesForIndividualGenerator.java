@@ -168,20 +168,20 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         // UQAM-Linguistic-Management Add linguistic control on label
         // Try full locale 
         + "    OPTIONAL { ?type rdfs:label ?typeLabelPrimary . \n"
-        + "               FILTER (LANG(?typeLabelPrimary) = ?locale) \n"
+        + "               FILTER (langMatches(LANG(?typeLabelPrimary), ?locale)) \n"
         + "    } \n"
         // Try language only
         + "    OPTIONAL { ?type rdfs:label ?typeLabelSecondary . \n"
-        + "               FILTER (LANG(?typeLabelSecondary) = ?language) \n"
+        + "               FILTER (langMatches(LANG(?typeLabelSecondary), ?language)) \n"
         + "    } \n"
         // Try the same language in another other locale
         + "    OPTIONAL { ?type rdfs:label ?typeLabelTertiary . \n"
-        + "               FILTER (STRBEFORE(STR(LANG(?typeLabelTertiary)), \"-\") = ?language) \n"
+        + "               FILTER (langMatches(STRBEFORE(STR(LANG(?typeLabelTertiary)), \"-\"), ?language)) \n"
         + "    } \n"
         // Try any other available label
         + "    OPTIONAL { ?type rdfs:label ?typeLabelFallback . \n"
-        + "               FILTER (LANG(?typeLabelFallback) != ?locale \n"
-        + "                        && LANG(?typeLabelFallback) != ?language) \n"
+        + "               FILTER (lcase(LANG(?typeLabelFallback)) != lcase(?locale) \n"
+        + "                        && lcase(LANG(?typeLabelFallback)) != lcase(?language)) \n"
         + "    } \n"
         + "    BIND(COALESCE(?typeLabelPrimary, ?typeLabelSecondary, ?typeLabelTertiary, ?typeLabelFallback) AS ?typeLabel_) \n"
         + "} GROUP BY ?vcard ?link ?url \n"

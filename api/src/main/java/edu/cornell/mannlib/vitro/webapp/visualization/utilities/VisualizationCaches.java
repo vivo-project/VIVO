@@ -251,17 +251,17 @@ final public class VisualizationCaches {
                                     "{\n" +
                                     "  ?org a foaf:Organization \n" +
                                     "  OPTIONAL { ?org rdfs:label ?orgLabelPrimary . \n" +
-                                    "       FILTER (LANG(?orgLabelPrimary) = '" + langCtx + "') \n" +
+                                    "       FILTER (langMatches(LANG(?orgLabelPrimary), '" + langCtx + "')) \n" +
                                     "} \n" +
                                     "  OPTIONAL { ?org rdfs:label ?orgLabelSecondary . \n" +
-                                    "       FILTER (LANG(?orgLabelSecondary) = '" + language + "') \n" +
+                                    "       FILTER (langMatches(LANG(?orgLabelSecondary), '" + language + "')) \n" +
                                     "} \n" +
                                     "  OPTIONAL { ?org rdfs:label ?orgLabelTertiary .\n" +
-                                    "       FILTER (STRBEFORE(STR(LANG(?orgLabelTertiary)), '-') = '" + language + "') \n" +
+                                    "       FILTER (STRBEFORE(lcase(STR(LANG(?orgLabelTertiary))), '-') = '" + language.toLowerCase() + "') \n" +
                                     "} \n" +
                                     "  OPTIONAL { ?org rdfs:label ?orgLabelFallback .\n" +
-                                    "       FILTER (LANG(?orgLabelFallback) != '" + langCtx + "' \n" + 
-                                    "           && LANG(?orgLabelFallback) != '" + language + "' ) \n" +
+                                    "       FILTER (lcase(STR(LANG(?orgLabelFallback))) != '" + langCtx.toLowerCase() + "' \n" + 
+                                    "           && lcase(STR(LANG(?orgLabelFallback))) != '" + language.toLowerCase() + "') \n" +
                                     "} \n" +
                                     "BIND(COALESCE(?orgLabelPrimary, ?orgLabelSecondary, ?orgLabelTertiary, ?orgLabelFallback) AS ?orgLabel_) \n" +
                                     "} GROUP BY ?org \n";
@@ -443,19 +443,19 @@ final public class VisualizationCaches {
                                     "    ?concept a skos:Concept .\n" +
                                     "  OPTIONAL {  "  +
                                     "       ?concept rdfs:label ?labelPrimary . \n" +
-                                    "       FILTER (LANG(?labelPrimary) = '" + langCtx + "') \n" +
+                                    "       FILTER (langMatches(LANG(?labelPrimary), '" + langCtx + "')) \n" +
                                     "  } \n" +
                                     "  OPTIONAL {  "  +
                                     "       ?concept rdfs:label ?labelFallback1 . \n" +
-                                    "       FILTER (LANG(?labelFallback1) = 'en-US') \n" +
+                                    "       FILTER (langMatches(LANG(?labelFallback1), 'en-US')) \n" +
                                     "  } \n" +
                                     "  OPTIONAL {  "  +
                                     "       ?concept rdfs:label ?labelFallback2 . \n" +
-                                    "       FILTER (LANG(?labelFallback2) = 'en') \n" +
+                                    "       FILTER (langMatches(LANG(?labelFallback2), 'en')) \n" +
                                     "  } \n" +
                                     "  OPTIONAL {  "  +
                                     "       ?concept rdfs:label ?labelFallback3 . \n" +
-                                    "       FILTER (LANG(?labelFallback3) = '') \n" +
+                                    "       FILTER (langMatches(LANG(?labelFallback3), '')) \n" +
                                     "  } \n" +
                                     "BIND(COALESCE(?labelPrimary, ?labelFallback1, ?labelFallback2, ?labelFallback3) AS ?label) \n" +
                                     "}\n";
