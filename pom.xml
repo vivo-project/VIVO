@@ -58,6 +58,7 @@
         <maven-site-plugin.skip>false</maven-site-plugin.skip>
         <stagingBase>/</stagingBase>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>11</maven.compiler.release>
     </properties>
 
     <modules>
@@ -297,8 +298,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
                     <encoding>UTF-8</encoding>
                     <compilerArgs>
                         <arg>-XDcompilePolicy=simple</arg>
@@ -334,6 +333,7 @@
                                 <echo message="[java.vendor.version]        ${java.vendor.version}" />
                                 <echo message="[java.version]               ${java.version}" />
                                 <echo message="[java.specification.version] ${java.specification.version}" />
+                                <echo message="[maven.compiler.release]     ${maven.compiler.release}" />
                                 <echo message="###################################################################" />
                                 <echo message="###################################################################" />
                             </target>
