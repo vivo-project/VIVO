@@ -51,6 +51,7 @@
     </scm>
 
     <properties>
+        <app-name>vivo</app-name>
         <vitro-version>${project.version}</vitro-version>
         <vivo-dir>${basedir}</vivo-dir>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>

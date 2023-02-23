@@ -19,7 +19,7 @@ services:
       context: ./
       dockerfile: Dockerfile
       args:
-        - VIVO_DIR=/usr/local/vivo/home
+        - VIVO_DIR=/opt/vivo/home
         - TDB_FILE_MODE=direct
         - SOLR_URL=http://solr:8983/solr/vivocore
     environment:
@@ -28,9 +28,11 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ${LOCAL_VIVO_HOME}:/usr/local/vivo/home
+      - ${LOCAL_VIVO_HOME}:/opt/vivo/home
     networks:
       - vivo
+    depends_on:
+      - solr
 
 networks:
   vivo:

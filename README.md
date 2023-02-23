@@ -40,13 +40,12 @@ RESET_CORE=false
 - `RESET_HOME`: Convenience to reset VIVO home when starting container. **Caution**, will delete local configuration, content, and configuration model.
 - `RESET_CORE`: Convenience to reset VIVO Solr core when starting container. **Caution**, will require complete reindex.
 
-Before building VIVO, you will also need to clone (and switch to the same branch, if other than main) of [Vitro](https://github.com/vivo-project/Vitro). The Vitro project must be cloned to a sibling directory next to VIVO so that it can be found during the build. 
+Before building VIVO, you will also need to clone (and switch to the same branch, if other than main) of [Vitro](https://github.com/vivo-project/Vitro). The Vitro project must be cloned to a sibling directory next to VIVO so that it can be found during the build.
 
 Build and start VIVO.
 
-1. In VIVO (with Vitro cloned alongside it), run:
 ```
-mvn clean package -s installer/example-settings.xml
+mvn clean install
 docker-compose up
 ```
 
