@@ -49,4 +49,8 @@ if [ -f /applicationSetup.n3 ]; then
   fi
 fi
 
+echo "Giving time for Solr to startup..."
+sleep 15
+echo "Starting Tomcat"
+
 catalina.sh run
