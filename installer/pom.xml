@@ -70,8 +70,8 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>1.4.1</version>
-                </plugin>
+                    <version>3.2.1</version>
+                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
@@ -125,7 +125,9 @@
         <profile>
             <id>skip-install</id>
             <activation>
-                <property><name>!vivo-dir</name></property>
+                <property>
+                    <name>!vivo-dir</name>
+                </property>
             </activation>
             <build>
                 <plugins>
@@ -173,7 +175,7 @@
                         <executions>
                             <execution>
                                 <id>test</id>
-                                <phase/>
+                                <phase />
                             </execution>
                         </executions>
                     </plugin>
@@ -182,7 +184,7 @@
                         <executions>
                             <execution>
                                 <id>default-war</id>
-                                <phase/>
+                                <phase />
                             </execution>
                         </executions>
                     </plugin>
@@ -192,7 +194,9 @@
         <profile>
             <id>install</id>
             <activation>
-                <property><name>vivo-dir</name></property>
+                <property>
+                    <name>vivo-dir</name>
+                </property>
             </activation>
             <build>
                 <plugins>
@@ -211,6 +215,14 @@
                                             <property>app-name</property>
                                             <message>You must provide an application name (app-name)</message>
                                         </requireProperty>
+                                        <requireMavenVersion>
+                                            <version>3.6.3</version>
+                                            <message>Invalid Maven version. It should, at least, be 3.0</message>
+                                        </requireMavenVersion>
+                                        <requireJavaVersion>
+                                            <version>11</version>
+                                            <message>Invalid Java version. It should, at least, be 11</message>
+                                        </requireJavaVersion>
                                     </rules>
                                 </configuration>
                             </execution>
