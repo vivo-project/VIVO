@@ -22,6 +22,7 @@ utilities/rdbmigration/.work
 **/bin/
 
 vivo-home/
+vivo-solr/
 
 .fake
 .ionide

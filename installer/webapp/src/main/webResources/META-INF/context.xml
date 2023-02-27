@@ -1,6 +1,14 @@
 <Context> <!-- useHttpOnly="false" -->
 
    <!--
+     # The name of the application (possibly not used).
+   -->
+   <Environment
+           type="java.lang.String"
+           name="vitro/appName"
+           value="${app-name}" override="true"/>
+
+   <!--
      # The 'home' property specifies the location of VIVO HOME.
      # The system user used to run the VIVO web application must have write access
      # to the parent directory of the directory defined in this property, if VIVO HOME
@@ -14,14 +22,6 @@
         value="${vivo-dir}" override="true"/>
 
    <!--
-     # The name of the application (possibly not used).
-   -->
-   <Environment
-           type="java.lang.String"
-           name="vitro/appName"
-           value="${app-name}" override="true"/>
-
-   <!--
      # The email address of the root user for the VIVO application. The password
      # for this user is initially set to "rootPassword", but you will be asked to
      # change the password the first time you log in.
@@ -29,7 +29,7 @@
    <Environment
            type="java.lang.String"
            name="vitro/rootUserAddress"
-           value="vivo_root@mydomain.edu" override="true"/>
+           value="${root-user-address}" override="true"/>
 
    <!--
      # This namespace will be used when generating URIs for objects created in the
@@ -45,7 +45,7 @@
    <Environment
            type="java.lang.String"
            name="vitro/defaultNamespace"
-           value="http://vivo.mydomain.edu/individual/" override="true"/>
+           value="${default-namespace}" override="true"/>
 
    <!-- Disable persist sessions on shut down.-->
    <Manager pathname="" />

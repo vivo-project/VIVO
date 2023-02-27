@@ -1,16 +1,22 @@
 version: '3.2'
 
+networks:
+  net:
+
 services:
 
   solr:
     image: vivoweb/vivo-solr:latest
+    hostname: solr
     environment:
       - RESET_CORE=${RESET_CORE}
       - VERBOSE=${VERBOSE}
     ports:
       - 8983:8983
+    volumes:
+      - ${LOCAL_SOLR_DATA}:/opt/solr/server/solr/mycores
     networks:
-      - vivo
+      - net
 
   tomcat:
     container_name: vivo
@@ -19,20 +25,24 @@ services:
       context: ./
       dockerfile: Dockerfile
       args:
-        - VIVO_DIR=/opt/vivo/home
+        - VIVO_HOME_DIR=/opt/vivo/home
         - TDB_FILE_MODE=direct
         - SOLR_URL=http://solr:8983/solr/vivocore
+        - TOMCAT_CONTEXT_PATH=ROOT
+        - LOAD_SAMPLE_DATA=true
+        - SAMPLE_DATA_REPO_URL=https://github.com/chenejac/sample-data.git
+        - SAMPLE_DATA_BRANCH=reorganization
+        - SAMPLE_DATA_DIRECTORY=i18n
     environment:
       - RESET_HOME=${RESET_HOME}
       - VERBOSE=${VERBOSE}
+      - SELECTABLE_LOCALES=en_US,de_DE,sr_Latn_RS,ru_RU,fr_CA,en_CA,es,pt_BR
+      - LANGUAGE_FILTER_ENABLED=true
     ports:
       - 8080:8080
     volumes:
       - ${LOCAL_VIVO_HOME}:/opt/vivo/home
-    networks:
-      - vivo
     depends_on:
       - solr
-
-networks:
-  vivo:
+    networks:
+      - net

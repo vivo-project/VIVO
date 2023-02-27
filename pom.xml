@@ -52,8 +52,10 @@
 
     <properties>
         <app-name>vivo</app-name>
-        <vitro-version>${project.version}</vitro-version>
         <vivo-dir>${basedir}</vivo-dir>
+        <root-user-address>vivo_root@mydomain.edu</root-user-address>
+        <default-namespace>http://vivo.mydomain.edu/individual/</default-namespace>
+        <vitro-version>${project.version}</vitro-version>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
         <build.timestamp>${maven.build.timestamp}</build.timestamp>
         <maven-site-plugin.skip>false</maven-site-plugin.skip>
