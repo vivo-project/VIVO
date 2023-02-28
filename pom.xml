@@ -350,7 +350,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <skip>true</skip>
                     <configLocation>
                         ../Vitro/checkstyle.xml
                     </configLocation>
