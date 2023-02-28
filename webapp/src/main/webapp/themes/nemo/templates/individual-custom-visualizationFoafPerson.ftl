@@ -20,10 +20,13 @@
         <h5><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> <strong>Visualizations</strong></h5>
         <#if isAuthor>
             <#assign coAuthorIcon = "${urls.images}/visualization/coauthorship/co_author_icon.png">
-            <#assign mapOfScienceIcon = "${urls.images}/visualization/mapofscience/scimap_icon.png">
             <#assign coAuthorVisUrl = individual.coAuthorVisUrl()>
-            <#assign mapOfScienceVisUrl = individual.mapOfScienceUrl()>
-            
+
+            <#if mapOfScienceVisualizationEnabled>
+                <#assign mapOfScienceIcon = "${urls.images}/visualization/mapofscience/scimap_icon.png">
+                <#assign mapOfScienceVisUrl = individual.mapOfScienceUrl()>
+            </#if>
+
             <#assign googleJSAPI = "https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22imagesparkline%22%5D%7D%5D%7D"> 
             
             <#-- <h5 id="sparklineHeading">${i18n().publications_in_vivo}</h5> -->
@@ -44,15 +47,17 @@
             <#-- Another useless div -->
             <#-- <div class="collaboratorship-link-separator"></div> -->
             
-  	      	<div id="mapofscience_link_container" class="collaboratorship-link-container">
-            	<#-- Replaced map of science icon with glyphicon -->
-                <div class="collaboratorship-link">
-                    <a href="${mapOfScienceVisUrl}" title="${i18n().map_of_science}" class="btn btn-default btn-block">
-                        <#-- <span class="glyphicon glyphicon-globe" aria-hidden="true"></span> -->
-                        ${i18n().map_of_science_capitalized}
-                    </a>
+            <#if mapOfScienceVisualizationEnabled>
+                <div id="mapofscience_link_container" class="collaboratorship-link-container">
+                    <#-- Replaced map of science icon with glyphicon -->
+                    <div class="collaboratorship-link">
+                        <a href="${mapOfScienceVisUrl}" title="${i18n().map_of_science}" class="btn btn-default btn-block">
+                            <#-- <span class="glyphicon glyphicon-globe" aria-hidden="true"></span> -->
+                            ${i18n().map_of_science_capitalized}
+                        </a>
+                    </div>
                 </div>
-            </div>
+            </#if>
             
             ${scripts.add('<script type="text/javascript" src="${googleJSAPI}"></script>',
                           '<script type="text/javascript" src="${urls.base}/js/visualization/visualization-helper-functions.js"></script>',
