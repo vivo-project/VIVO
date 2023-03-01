@@ -215,10 +215,6 @@
                                             <property>app-name</property>
                                             <message>You must provide an application name (app-name)</message>
                                         </requireProperty>
-                                        <requireMavenVersion>
-                                            <version>3.6.3</version>
-                                            <message>Invalid Maven version. It should, at least, be 3.0</message>
-                                        </requireMavenVersion>
                                         <requireJavaVersion>
                                             <version>11</version>
                                             <message>Invalid Java version. It should, at least, be 11</message>
