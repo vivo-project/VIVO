@@ -24,10 +24,6 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-      args:
-        - VIVO_HOME_DIR=/opt/vivo/home
-        - TDB_FILE_MODE=direct
-        - TOMCAT_CONTEXT_PATH=ROOT
     environment:
       - RESET_HOME=${RESET_HOME}
       - VERBOSE=${VERBOSE}

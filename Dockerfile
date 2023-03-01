@@ -9,14 +9,10 @@ ARG USER_ID
 ARG USER_NAME
 ARG USER_HOME_DIR
 
-ARG VIVO_HOME_DIR=/opt/vivo/home
-ARG TDB_FILE_MODE=direct
-ARG ROOT_USER_ADDRESS=vivo_root@mydomain.edu
-ARG DEFAULT_NAMESPACE=http://vivo.mydomain.edu/individual/
-
-ENV JAVA_OPTS="${JAVA_OPTS} -Dvivo-dir=$VIVO_HOME_DIR -Droot-user-address=$ROOT_USER_ADDRESS -Ddefault-namespace=$DEFAULT_NAMESPACE -Dtdb:fileMode=$TDB_FILE_MODE"
-
-ENV VIVO_HOME_DIR=${VIVO_HOME_DIR}
+ENV VIVO_HOME_DIR=/opt/vivo/home
+ENV TDB_FILE_MODE=direct
+ENV ROOT_USER_ADDRESS=vivo_root@mydomain.edu
+ENV DEFAULT_NAMESPACE=http://vivo.mydomain.edu/individual/
 
 ENV SOLR_URL=http://localhost:8983/solr/vivocore
 ENV SELF_ID_MATCHING_PROPERTY=http://vivo.mydomain.edu/ns

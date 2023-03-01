@@ -27,7 +27,7 @@ VIVO docker container is available at [vivoweb/vivo](https://hub.docker.com/r/vi
 
 #### Build Args
 
-Build args are used at time of building the Docker image. Some of the build args are passed to environment variables to be available to the running container.
+Build args are used at time of building the Docker image.
 
 | Variable                      | Description                  | Default                              |
 | ----------------------------- | -----------------------------| ------------------------------------ |
@@ -35,16 +35,15 @@ Build args are used at time of building the Docker image. Some of the build args
 | USER_ID                       | User id                      | 3001                                 |
 | USER_NAME                     | User name                    | vivo                                 |
 | USER_HOME_DIR                 | User home directory          | /home/vivo                           |
-| VIVO_HOME_DIR                 | VIVO home directory          | /opt/vivo/home                       |
-| TDB_FILE_MODE                 | TDB file mode                | direct                               |
-| ROOT_USER_ADDRESS             | Root user email address      | vivo_root@mydomain.edu               |
-| DEFAULT_NAMESPACE             | Default namespace            | http://vivo.mydomain.edu/individual/ |
 
 #### Environment
 
 | Variable                      | Description                                                      | Default                                         |
 | ----------------------------- | ---------------------------------------------------------------- | ----------------------------------------------- |
-| VIVO_HOME_DIR                 | VIVO Home directory in container                                 | /opt/vivo/home                                  |
+| VIVO_HOME_DIR                 | VIVO home directory in container                                 | /opt/vivo/home                                  |
+| TDB_FILE_MODE                 | TDB file mode                                                    | direct                                          |
+| ROOT_USER_ADDRESS             | Root user email address                                          | vivo_root@mydomain.edu                          |
+| DEFAULT_NAMESPACE             | Default namespace                                                | http://vivo.mydomain.edu/individual/            |
 | SOLR_URL                      | VIVO Solr URL                                                    | http://localhost:8983/solr/vivocore             |
 | SELF_ID_MATCHING_PROPERTY     | Individual property associated with user account                 | http://vivo.mydomain.edu/ns#networkId           |
 | EMAIL_SMTP_HOST               | Email SMTP host                                                  | not defined                                     |
