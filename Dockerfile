@@ -14,25 +14,17 @@ ARG TDB_FILE_MODE=direct
 ARG ROOT_USER_ADDRESS=vivo_root@mydomain.edu
 ARG DEFAULT_NAMESPACE=http://vivo.mydomain.edu/individual/
 
-ARG SOLR_URL=http://localhost:8983/solr/vivocore
-ARG SELF_ID_MATCHING_PROPERTY=http://vivo.mydomain.edu/ns
-
-ARG LOAD_SAMPLE_DATA=false
-ARG SAMPLE_DATA_REPO_URL=https://github.com/vivo-project/sample-data.git
-ARG SAMPLE_DATA_BRANCH=main
-ARG SAMPLE_DATA_DIRECTORY=openvivo
-
 ENV JAVA_OPTS="${JAVA_OPTS} -Dvivo-dir=$VIVO_HOME_DIR -Droot-user-address=$ROOT_USER_ADDRESS -Ddefault-namespace=$DEFAULT_NAMESPACE -Dtdb:fileMode=$TDB_FILE_MODE"
 
 ENV VIVO_HOME_DIR=${VIVO_HOME_DIR}
 
-ENV SOLR_URL=${SOLR_URL}
-ENV SELF_ID_MATCHING_PROPERTY=${SELF_ID_MATCHING_PROPERTY}
+ENV SOLR_URL=http://localhost:8983/solr/vivocore
+ENV SELF_ID_MATCHING_PROPERTY=http://vivo.mydomain.edu/ns
 
-ENV LOAD_SAMPLE_DATA=${LOAD_SAMPLE_DATA}
-ENV SAMPLE_DATA_REPO_URL=${SAMPLE_DATA_REPO_URL}
-ENV SAMPLE_DATA_BRANCH=${SAMPLE_DATA_BRANCH}
-ENV SAMPLE_DATA_DIRECTORY=${SAMPLE_DATA_DIRECTORY}
+ENV LOAD_SAMPLE_DATA=false
+ENV SAMPLE_DATA_REPO_URL=https://github.com/vivo-project/sample-data.git
+ENV SAMPLE_DATA_BRANCH=main
+ENV SAMPLE_DATA_DIRECTORY=openvivo
 
 RUN \
   apt-get update -y && \

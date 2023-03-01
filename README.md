@@ -23,7 +23,59 @@ https://wiki.lyrasis.org/display/VIVODOC112x/Installing+VIVO
 
 ### Docker
 
-VIVO docker container is available at [vivoweb/vivo](https://hub.docker.com/repository/docker/vivoweb/vivo) with accompanying [vivoweb/vivo-solr](https://hub.docker.com/repository/docker/vivoweb/vivo-solr). These can be used independently or with docker-compose.
+VIVO docker container is available at [vivoweb/vivo](https://hub.docker.com/r/vivoweb/vivo) with accompanying [vivoweb/vivo-solr](https://hub.docker.com/r/vivoweb/vivo-solr). These can be used independently or with docker-compose.
+
+#### Build Args
+
+Build args are used at time of building the Docker image. Some of the build args are passed to environment variables to be available to the running container.
+
+| Variable                      | Description                  | Default                              |
+| ----------------------------- | -----------------------------| ------------------------------------ |
+| TOMCAT_CONTEXT_PATH           | Tomcat webapp context path   | ROOT                                 |
+| USER_ID                       | User id                      | 3001                                 |
+| USER_NAME                     | User name                    | vivo                                 |
+| USER_HOME_DIR                 | User home directory          | /home/vivo                           |
+| VIVO_HOME_DIR                 | VIVO home directory          | /opt/vivo/home                       |
+| TDB_FILE_MODE                 | TDB file mode                | direct                               |
+| ROOT_USER_ADDRESS             | Root user email address      | vivo_root@mydomain.edu               |
+| DEFAULT_NAMESPACE             | Default namespace            | http://vivo.mydomain.edu/individual/ |
+
+#### Environment
+
+| Variable                      | Description                                                      | Default                                         |
+| ----------------------------- | ---------------------------------------------------------------- | ----------------------------------------------- |
+| VIVO_HOME_DIR                 | VIVO Home directory in container                                 | /opt/vivo/home                                  |
+| SOLR_URL                      | VIVO Solr URL                                                    | http://localhost:8983/solr/vivocore             |
+| SELF_ID_MATCHING_PROPERTY     | Individual property associated with user account                 | http://vivo.mydomain.edu/ns#networkId           |
+| EMAIL_SMTP_HOST               | Email SMTP host                                                  | not defined                                     |
+| EMAIL_PORT                    | Email server port                                                | not defined                                     |
+| EMAIL_USERNAME                | Email server username                                            | not defined                                     |
+| EMAIL_PASSWORD                | Email server password                                            | not defined                                     |
+| EMAIL_REPLY_TO                | Reply to email address                                           | not defined                                     |
+| LANGUAGE_FILTER_ENABLED       | Enable language filter to respect browser Accept-Language header | not defined                                     |
+| FORCE_LOCALE                  | Ignore browser Accept-Language header                            | not defined                                     |
+| SELECTABLE_LOCALES            | Selectable locales                                               | not defined                                     |
+| LOAD_SAMPLE_DATA              | Load sample data                                                 | false                                           |
+| SAMPLE_DATA_REPO_URL          | Sample data GitHub repository                                    | https://github.com/vivo-project/sample-data.git |
+| SAMPLE_DATA_BRANCH            | Sample data GitHub repository branch                             | main                                            |
+| SAMPLE_DATA_DIRECTORY         | Sample data direcotyr                                            | openvivo                                        |
+
+#### Running VIVO from published Docker images.
+
+Create a docker [network](https://docs.docker.com/engine/reference/commandline/network_create/).
+```
+docker network create vivo_net
+```
+
+Run vivo-solr [detached](https://docs.docker.com/engine/reference/run/#detached-vs-foreground) with [port forwarding](https://docs.docker.com/engine/reference/run/#expose-incoming-ports) and on a above [network](https://docs.docker.com/engine/reference/run/#network-settings).
+```
+docker run -d -p 8983:8983 --hostname solr --network vivo_net vivoweb/vivo-solr
+```
+
+Run vivo with [port forwarding](https://docs.docker.com/engine/reference/run/#expose-incoming-ports), on a above [network](https://docs.docker.com/engine/reference/run/#network-settings), defining Solr URL [environment variable](https://docs.docker.com/engine/reference/run/#env-environment-variables), and local [volume](https://docs.docker.com/engine/reference/run/#volume-shared-filesystems) mounted to VIVO home directory.
+```
+docker run -p 8080:8080 --network vivo_net -e "SOLR_URL=http://solr:8983/solr/vivocore" -v "./vivo-home:/opt/vivo/home" vivoweb/vivo
+```
 
 ### Docker Compose
 
@@ -31,14 +83,22 @@ Docker Compose environment variables:
 
 .env defaults
 ```
+LOCAL_SOLR_DATA=./vivo-solr
+RESET_CORE=false
+
 LOCAL_VIVO_HOME=./vivo-home
 RESET_HOME=false
-RESET_CORE=false
+
+VERBOSE=no
 ```
+
+- `LOCAL_VIVO_HOME`: VIVO Solr data directory on your host machine which will mount to volume in Solr docker container. Set this environment variable to persist your VIVO Solr data on your host machine.
+- `RESET_CORE`: Convenience to reset VIVO Solr core when starting container. **Caution**, will require complete reindex.
 
 - `LOCAL_VIVO_HOME`: VIVO home directory on your host machine which will mount to volume in docker container. Set this environment variable to persist your VIVO data on your host machine.
 - `RESET_HOME`: Convenience to reset VIVO home when starting container. **Caution**, will delete local configuration, content, and configuration model.
-- `RESET_CORE`: Convenience to reset VIVO Solr core when starting container. **Caution**, will require complete reindex.
+
+Build and start VIVO using Docker Compose.
 
 Before building VIVO, you will also need to clone (and switch to the same branch, if other than main) of [Vitro](https://github.com/vivo-project/Vitro). The Vitro project must be cloned to a sibling directory next to VIVO so that it can be found during the build.
 

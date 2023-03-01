@@ -27,17 +27,11 @@ services:
       args:
         - VIVO_HOME_DIR=/opt/vivo/home
         - TDB_FILE_MODE=direct
-        - SOLR_URL=http://solr:8983/solr/vivocore
         - TOMCAT_CONTEXT_PATH=ROOT
-        - LOAD_SAMPLE_DATA=true
-        - SAMPLE_DATA_REPO_URL=https://github.com/chenejac/sample-data.git
-        - SAMPLE_DATA_BRANCH=reorganization
-        - SAMPLE_DATA_DIRECTORY=i18n
     environment:
       - RESET_HOME=${RESET_HOME}
       - VERBOSE=${VERBOSE}
-      - SELECTABLE_LOCALES=en_US,de_DE,sr_Latn_RS,ru_RU,fr_CA,en_CA,es,pt_BR
-      - LANGUAGE_FILTER_ENABLED=true
+      - SOLR_URL=http://solr:8983/solr/vivocore
     ports:
       - 8080:8080
     volumes:
