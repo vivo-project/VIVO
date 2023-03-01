@@ -4,11 +4,15 @@
 
 <#-- Do not show the link for temporal visualization unless it's enabled -->
 
-<#if temporalVisualizationEnabled>
+<#if temporalVisualizationEnabled || mapOfScienceVisualizationEnabled>
     <#assign classSpecificExtension>
         <section id="right-hand-column" role="region">
-            <#include "individual-visualizationTemporalGraph.ftl">
-            <#include "individual-visualizationMapOfScience.ftl">
+            <#if temporalVisualizationEnabled>
+                <#include "individual-visualizationTemporalGraph.ftl">
+            </#if>
+            <#if mapOfScienceVisualizationEnabled>
+                <#include "individual-visualizationMapOfScience.ftl">
+            </#if>
         </section> <!-- #right-hand-column -->
     </#assign>
 </#if>
