@@ -45,7 +45,7 @@ Before building VIVO, you will also need to clone (and switch to the same branch
 Build and start VIVO.
 
 ```
-mvn clean install
+mvn clean package
 docker-compose up
 ```
 
