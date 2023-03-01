@@ -198,7 +198,7 @@
         <repository>
             <id>vivo-dependencies</id>
             <name>VIVO Dependencies</name>
-            <url>https://raw.github.com/vivo-project/dependencies/master/</url>
+            <url>https://raw.github.com/vivo-project/dependencies/main/</url>
         </repository>
         <repository>
             <id>sonatype-nexus-snapshots</id>
