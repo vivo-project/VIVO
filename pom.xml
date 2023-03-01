@@ -351,10 +351,10 @@
                 </executions>
                 <configuration>
                     <configLocation>
-                        ../Vitro/checkstyle.xml
+                        checkstyle.xml
                     </configLocation>
                     <suppressionsLocation>
-                        ../Vitro/checkstyle-suppressions.xml
+                        checkstyle-suppressions.xml
                     </suppressionsLocation>
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
