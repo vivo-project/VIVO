@@ -28,6 +28,12 @@ services:
       - RESET_HOME=${RESET_HOME}
       - VERBOSE=${VERBOSE}
       - SOLR_URL=http://solr:8983/solr/vivocore
+      - LANGUAGE_FILTER_ENABLED=true
+      - SELECTABLE_LOCALES=en_US,de_DE,sr_Latn_RS,ru_RU,fr_CA,en_CA,es,pt_BR
+      - LOAD_SAMPLE_DATA=true
+      - SAMPLE_DATA_REPO_URL=https://github.com/chenejac/sample-data.git
+      - SAMPLE_DATA_BRANCH=reorganization
+      - SAMPLE_DATA_DIRECTORY=i18n
     ports:
       - 8080:8080
     volumes:

@@ -22,6 +22,8 @@ ENV SAMPLE_DATA_REPO_URL=https://github.com/vivo-project/sample-data.git
 ENV SAMPLE_DATA_BRANCH=main
 ENV SAMPLE_DATA_DIRECTORY=openvivo
 
+ENV RECONFIGURE=false
+
 RUN \
   apt-get update -y && \
   apt-get upgrade -y && \

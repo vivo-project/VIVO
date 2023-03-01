@@ -57,7 +57,8 @@ Build args are used at time of building the Docker image.
 | LOAD_SAMPLE_DATA              | Load sample data                                                 | false                                           |
 | SAMPLE_DATA_REPO_URL          | Sample data GitHub repository                                    | https://github.com/vivo-project/sample-data.git |
 | SAMPLE_DATA_BRANCH            | Sample data GitHub repository branch                             | main                                            |
-| SAMPLE_DATA_DIRECTORY         | Sample data direcotyr                                            | openvivo                                        |
+| SAMPLE_DATA_DIRECTORY         | Sample data directory                                            | openvivo                                        |
+| RECONFIGURE                   | Whether to update runtime properties and application setup       | false                                           |
 
 #### Running VIVO from published Docker images.
 
