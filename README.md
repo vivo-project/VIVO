@@ -40,7 +40,7 @@ Build args are used at time of building the Docker image.
 
 | Variable                      | Description                                                      | Default                                         |
 | ----------------------------- | ---------------------------------------------------------------- | ----------------------------------------------- |
-| VIVO_HOME_DIR                 | VIVO home directory in container                                 | /opt/vivo/home                                  |
+| VIVO_HOME_DIR                 | VIVO home directory in container                                 | /usr/local/vivo/home                            |
 | TDB_FILE_MODE                 | TDB file mode                                                    | direct                                          |
 | ROOT_USER_ADDRESS             | Root user email address                                          | vivo_root@mydomain.edu                          |
 | DEFAULT_NAMESPACE             | Default namespace                                                | http://vivo.mydomain.edu/individual/            |

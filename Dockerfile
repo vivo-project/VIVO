@@ -9,7 +9,7 @@ ARG USER_ID
 ARG USER_NAME
 ARG USER_HOME_DIR
 
-ENV VIVO_HOME_DIR=/opt/vivo/home
+ENV VIVO_HOME_DIR=/usr/local/vivo/home
 ENV TDB_FILE_MODE=direct
 ENV ROOT_USER_ADDRESS=vivo_root@mydomain.edu
 ENV DEFAULT_NAMESPACE=http://vivo.mydomain.edu/individual/
@@ -40,8 +40,8 @@ COPY ./installer/webapp/target/vivo.war /usr/local/tomcat/webapps/$TOMCAT_CONTEX
 COPY ./home/src/main/resources/config/default.applicationSetup.n3 /tmp/applicationSetup.n3
 COPY ./home/src/main/resources/config/default.runtime.properties /tmp/runtime.properties
 
-COPY start.sh /opt/vivo/start.sh
+COPY start.sh /usr/local/vivo/start.sh
 
 EXPOSE 8080
 
-CMD ["/bin/bash", "/opt/vivo/start.sh"]
+CMD ["/bin/bash", "/usr/local/vivo/start.sh"]

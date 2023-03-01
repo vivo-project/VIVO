@@ -37,7 +37,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ${LOCAL_VIVO_HOME}:/opt/vivo/home
+      - ${LOCAL_VIVO_HOME}:/usr/local/vivo/home
     depends_on:
       - solr
     networks:
