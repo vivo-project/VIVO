@@ -1,14 +1,9 @@
-ARG TOMCAT_CONTEXT_PATH=ROOT
+FROM tomcat:9-jdk11-openjdk
 ARG USER_ID=3001
 ARG USER_NAME=vivo
 ARG USER_HOME_DIR=/home/$USER_NAME
 
-FROM tomcat:9-jdk11-openjdk
-ARG TOMCAT_CONTEXT_PATH
-ARG USER_ID
-ARG USER_NAME
-ARG USER_HOME_DIR
-
+ENV TOMCAT_CONTEXT_PATH=ROOT
 ENV VIVO_HOME_DIR=/usr/local/vivo/home
 ENV TDB_FILE_MODE=direct
 ENV ROOT_USER_ADDRESS=vivo_root@mydomain.edu
@@ -35,7 +30,7 @@ RUN \
 
 RUN mkdir -p $VIVO_HOME_DIR
 
-COPY ./installer/webapp/target/vivo.war /usr/local/tomcat/webapps/$TOMCAT_CONTEXT_PATH.war
+COPY ./installer/webapp/target/vivo.war /tmp/vivo.war
 
 COPY ./home/src/main/resources/config/default.applicationSetup.n3 /tmp/applicationSetup.n3
 COPY ./home/src/main/resources/config/default.runtime.properties /tmp/runtime.properties

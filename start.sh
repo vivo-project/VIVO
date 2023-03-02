@@ -90,6 +90,8 @@ else
   echo "Using existing $VIVO_HOME_DIR/config/applicationSetup.n3"
 fi
 
+cp -r /tmp/vivo.war /usr/local/tomcat/webapps/$TOMCAT_CONTEXT_PATH.war
+
 export JAVA_OPTS="${JAVA_OPTS} -Dvivo-dir=$VIVO_HOME_DIR -Droot-user-address=$ROOT_USER_ADDRESS -Ddefault-namespace=$DEFAULT_NAMESPACE -Dtdb:fileMode=$TDB_FILE_MODE"
 
 echo "Giving time for Solr to startup..."

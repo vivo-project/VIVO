@@ -31,7 +31,6 @@ Build args are used at time of building the Docker image.
 
 | Variable                      | Description                  | Default                              |
 | ----------------------------- | -----------------------------| ------------------------------------ |
-| TOMCAT_CONTEXT_PATH           | Tomcat webapp context path   | ROOT                                 |
 | USER_ID                       | User id                      | 3001                                 |
 | USER_NAME                     | User name                    | vivo                                 |
 | USER_HOME_DIR                 | User home directory          | /home/vivo                           |
@@ -40,6 +39,7 @@ Build args are used at time of building the Docker image.
 
 | Variable                      | Description                                                      | Default                                         |
 | ----------------------------- | ---------------------------------------------------------------- | ----------------------------------------------- |
+| TOMCAT_CONTEXT_PATH           | Tomcat webapp context path                                       | ROOT                                            |
 | VIVO_HOME_DIR                 | VIVO home directory in container                                 | /usr/local/vivo/home                            |
 | TDB_FILE_MODE                 | TDB file mode                                                    | direct                                          |
 | ROOT_USER_ADDRESS             | Root user email address                                          | vivo_root@mydomain.edu                          |
