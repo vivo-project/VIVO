@@ -18,6 +18,13 @@ fi
 # ensure home config directory exists 
 mkdir -p $VIVO_HOME_DIR/config
 
+# generate digest.md5 for existing VIVO home if not already exist
+if [ ! -f $VIVO_HOME_DIR/digest.md5 ]; then
+  find $VIVO_HOME_DIR -type f | grep -E "^$VIVO_HOME_DIR/bin/|^$VIVO_HOME_DIR/config/|^$VIVO_HOME_DIR/rdf/" | xargs md5sum > $VIVO_HOME_DIR/digest.md5
+  echo "Generated digest.md5 for VIVO home"
+  cat $VIVO_HOME_DIR/digest.md5
+fi
+
 # load sample data
 if [[ "$RESET_HOME" = "true" ]] && [[ "$LOAD_SAMPLE_DATA" = "true" ]]; then
   echo "Cloning sample-data branch $SAMPLE_DATA_BRANCH from $SAMPLE_DATA_REPO_URL"
