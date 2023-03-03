@@ -9,8 +9,8 @@ services:
     image: vivoweb/vivo-solr:latest
     hostname: solr
     environment:
-      - RESET_CORE=${RESET_CORE}
       - VERBOSE=${VERBOSE}
+      - RESET_CORE=true
     ports:
       - 8983:8983
     volumes:
@@ -25,8 +25,8 @@ services:
       context: ./
       dockerfile: Dockerfile
     environment:
-      - RESET_HOME=${RESET_HOME}
       - VERBOSE=${VERBOSE}
+      - RESET_HOME=true
       - SOLR_URL=http://solr:8983/solr/vivocore
       - LANGUAGE_FILTER_ENABLED=true
       - SELECTABLE_LOCALES=en_US,de_DE,sr_Latn_RS,ru_RU,fr_CA,en_CA,es,pt_BR
