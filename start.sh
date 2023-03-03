@@ -9,18 +9,18 @@ fi
 
 # allow easier reset home with `docker run -e RESET_HOME=true`
 if [[ "$RESET_HOME" = "true" ]]; then
-  echo 'Clearing VIVO HOME /opt/vivo/home'
-  rm -rf /opt/vivo/home/*
+  echo 'Clearing VIVO HOME $VIVO_DIR'
+  rm -rf $VIVO_DIR/*
 fi
 
 # ensure home config directory exists
-mkdir -p /opt/vivo/home/config
+mkdir -p $VIVO_DIR/config
 
 # generate digest.md5 for existing VIVO home if not already exist
-if [ ! -f /opt/vivo/home/digest.md5 ]; then
-  find /opt/vivo/home -type f | grep -E '^/opt/vivo/home/bin/|^/opt/vivo/home/config/|^/opt/vivo/home/rdf/' | xargs md5sum > /opt/vivo/home/digest.md5
+if [ ! -f $VIVO_DIR/digest.md5 ]; then
+  find $VIVO_DIR -type f | grep -E "^$VIVO_DIR/bin/|^$VIVO_DIR/config/|^$VIVO_DIR/rdf/" | xargs md5sum > $VIVO_DIR/digest.md5
   echo "Generated digest.md5 for VIVO home"
-  cat /opt/vivo/home/digest.md5
+  cat $VIVO_DIR/digest.md5
 fi
 
 # only move runtime.properties first time and if it does not already exist in target home directory
@@ -29,23 +29,23 @@ if [ -f /runtime.properties ]; then
   echo "Templating runtime.properties vitro.local.solr.url = $SOLR_URL"
   sed -i "s,http://localhost:8983/solr/vivocore,$SOLR_URL,g" /runtime.properties
 
-  if [ ! -f /opt/vivo/home/config/runtime.properties ]
+  if [ ! -f $VIVO_DIR/config/runtime.properties ]
   then
-    echo "First time: moving /runtime.properties to /opt/vivo/home/config/runtime.properties"
-    mv -n /runtime.properties /opt/vivo/home/config/runtime.properties
+    echo "First time: moving /runtime.properties to $VIVO_DIR/config/runtime.properties"
+    mv -n /runtime.properties $VIVO_DIR/config/runtime.properties
   else
-    echo "Using existing /opt/vivo/home/config/runtime.properties"
+    echo "Using existing $VIVO_DIR/config/runtime.properties"
   fi
 fi
 
 # only move applicationSetup.n3 first time and if it does not already exist in target home directory
 if [ -f /applicationSetup.n3 ]; then
-  if [ ! -f /opt/vivo/home/config/applicationSetup.n3 ]
+  if [ ! -f $VIVO_DIR/config/applicationSetup.n3 ]
   then
-    echo "First time: moving /applicationSetup.n3 to /opt/vivo/home/config/applicationSetup.n3"
-    mv -n /applicationSetup.n3 /opt/vivo/home/config/applicationSetup.n3
+    echo "First time: moving /applicationSetup.n3 to $VIVO_DIR/config/applicationSetup.n3"
+    mv -n /applicationSetup.n3 $VIVO_DIR/config/applicationSetup.n3
   else
-    echo "Using existing /opt/vivo/home/config/applicationSetup.n3"
+    echo "Using existing $VIVO_DIR/config/applicationSetup.n3"
   fi
 fi
 
