@@ -54,11 +54,15 @@ Build args are used at time of building the Docker image.
 | LANGUAGE_FILTER_ENABLED       | Enable language filter to respect browser Accept-Language header | not defined                                     |
 | FORCE_LOCALE                  | Ignore browser Accept-Language header                            | not defined                                     |
 | SELECTABLE_LOCALES            | Selectable locales                                               | not defined                                     |
+| RESET_CORE                    | Reset VIVO Solr core                                             | false                                           |
+| RESET_HOME                    | Reset VIVO home directory                                        | false                                           |
 | LOAD_SAMPLE_DATA              | Load sample data                                                 | false                                           |
 | SAMPLE_DATA_REPO_URL          | Sample data GitHub repository                                    | https://github.com/vivo-project/sample-data.git |
 | SAMPLE_DATA_BRANCH            | Sample data GitHub repository branch                             | main                                            |
 | SAMPLE_DATA_DIRECTORY         | Sample data directory                                            | openvivo                                        |
 | RECONFIGURE                   | Whether to update runtime properties and application setup       | false                                           |
+
+> Both RESET_HOME and LOAD_SAMPLE_DATA must be true in order to load sample data.
 
 #### Running VIVO from published Docker images.
 
