@@ -33,6 +33,13 @@ services:
       - vivo
     depends_on:
       - solr
+    entrypoint:
+      - /bin/bash
+      - '-c'
+      - |
+        while (!</dev/tcp/solr/8983) > /dev/null 2>&1; do sleep 1; done;
+        sleep 5
+        /start.sh
 
 networks:
   vivo:
