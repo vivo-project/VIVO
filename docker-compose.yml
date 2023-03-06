@@ -48,4 +48,4 @@ services:
       - |
         while (!</dev/tcp/solr/8983) > /dev/null 2>&1; do sleep 1; done;
         sleep 5
-        /start.sh
+        /usr/local/vivo/start.sh
