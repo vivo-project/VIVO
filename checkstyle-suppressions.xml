@@ -3,5 +3,6 @@
         "-//Puppy Crawl//DTD Suppressions 1.2//EN"
         "http://checkstyle.sourceforge.net/dtds/suppressions_1_2.dtd">
 <suppressions>
-
+    <suppress files="[\\/]edu[\\/]" checks="."/>
+    <suppress files="[\\/]org[\\/]" checks="."/>
 </suppressions>

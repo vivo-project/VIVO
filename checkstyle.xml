@@ -22,88 +22,88 @@ For more information on CheckStyle configurations below, see: http://checkstyle.
     <!-- Configure checker to run on files with these extensions -->
     <property name="fileExtensions" value="java, properties, cfg, xml, js, ftl, ttl, n3"/>
 
-<!--    &lt;!&ndash; Suppression configurations in checkstyle-suppressions.xml in same directory &ndash;&gt;-->
-<!--    <module name="SuppressionFilter">-->
-<!--        <property name="file" value="${checkstyle.suppressions.file}" default="checkstyle-suppressions.xml"/>-->
-<!--    </module>-->
+    <!-- Suppression configurations in checkstyle-suppressions.xml in same directory -->
+    <module name="SuppressionFilter">
+        <property name="file" value="${checkstyle.suppressions.file}" default="checkstyle-suppressions.xml"/>
+    </module>
 
-<!--    &lt;!&ndash; No tab characters ('\t') allowed in the source code &ndash;&gt;-->
-<!--    <module name="FileTabCharacter">-->
-<!--        <property name="eachLine" value="true"/>-->
-<!--        <property name="fileExtensions" value="java, properties, cfg, xml, js, ftl, ttl, n3"/>-->
-<!--    </module>-->
+    <!-- No tab characters ('\t') allowed in the source code -->
+    <module name="FileTabCharacter">
+        <property name="eachLine" value="true"/>
+        <property name="fileExtensions" value="java, properties, cfg, xml, js, ftl, ttl, n3"/>
+    </module>
 
-<!--    &lt;!&ndash; No Trailing Whitespace, except on lines that only have an asterisk (e.g. comments) &ndash;&gt;-->
-<!--    <module name="RegexpSingleline">-->
-<!--        <property name="format" value="(?&lt;!\*)\s+$|\*\s\s+$"/>-->
-<!--        <property name="message" value="Line has trailing whitespace"/>-->
-<!--        <property name="fileExtensions" value="java, properties, cfg, css, js, xml"/>-->
-<!--    </module>-->
+    <!-- No Trailing Whitespace, except on lines that only have an asterisk (e.g. comments) -->
+    <module name="RegexpSingleline">
+        <property name="format" value="(?&lt;!\*)\s+$|\*\s\s+$"/>
+        <property name="message" value="Line has trailing whitespace"/>
+        <property name="fileExtensions" value="java, properties, cfg, css, js, xml"/>
+    </module>
 
-<!--    &lt;!&ndash; Allow individual lines of code to be excluded from these rules, if they are annotated-->
-<!--         with @SuppressWarnings. See also SuppressWarningsHolder below &ndash;&gt;-->
-<!--    <module name="SuppressWarningsFilter" />-->
+    <!-- Allow individual lines of code to be excluded from these rules, if they are annotated
+         with @SuppressWarnings. See also SuppressWarningsHolder below -->
+    <module name="SuppressWarningsFilter" />
 
-<!--    &lt;!&ndash; Maximum line length is 100 characters &ndash;&gt;-->
-<!--    <module name="LineLength">-->
-<!--        <property name="fileExtensions" value="java"/>-->
-<!--        <property name="max" value="100"/>-->
-<!--        &lt;!&ndash; Only exceptions for packages, imports, URLs, and JavaDoc {@link} tags &ndash;&gt;-->
-<!--        <property name="ignorePattern" value="^package.*|^import.*|http://|https://|@link"/>-->
-<!--    </module>-->
+    <!-- Maximum line length is 100 characters -->
+    <module name="LineLength">
+        <property name="fileExtensions" value="java"/>
+        <property name="max" value="100"/>
+        <!-- Only exceptions for packages, imports, URLs, and JavaDoc {@link} tags -->
+        <property name="ignorePattern" value="^package.*|^import.*|http://|https://|@link"/>
+    </module>
 
-<!--    &lt;!&ndash; Check individual Java source files for specific rules &ndash;&gt;-->
-<!--    <module name="TreeWalker">-->
-<!--        &lt;!&ndash; Highlight any TODO or FIXME comments in info messages &ndash;&gt;-->
-<!--        <module name="TodoComment">-->
-<!--            <property name="severity" value="info"/>-->
-<!--            <property name="format" value="(TODO)|(FIXME)"/>-->
-<!--        </module>-->
+    <!-- Check individual Java source files for specific rules -->
+    <module name="TreeWalker">
+        <!-- Highlight any TODO or FIXME comments in info messages -->
+        <module name="TodoComment">
+            <property name="severity" value="info"/>
+            <property name="format" value="(TODO)|(FIXME)"/>
+        </module>
 
-<!--        &lt;!&ndash; Do not report errors on any lines annotated with @SuppressWarnings &ndash;&gt;-->
-<!--        <module name="SuppressWarningsHolder"/>-->
+        <!-- Do not report errors on any lines annotated with @SuppressWarnings -->
+        <module name="SuppressWarningsHolder"/>
 
-<!--        &lt;!&ndash; ##### Import statement requirements ##### &ndash;&gt;-->
-<!--        &lt;!&ndash; Star imports (e.g. import java.util.*) are NOT ALLOWED &ndash;&gt;-->
-<!--        <module name="AvoidStarImport"/>-->
-<!--        &lt;!&ndash; Redundant import statements are NOT ALLOWED &ndash;&gt;-->
-<!--        <module name="RedundantImport"/>-->
-<!--        &lt;!&ndash; Unused import statements are NOT ALLOWED &ndash;&gt;-->
-<!--        <module name="UnusedImports"/>-->
-<!--        &lt;!&ndash; Ensure imports appear alphabetically and grouped &ndash;&gt;-->
-<!--        <module name="CustomImportOrder">-->
-<!--            <property name="sortImportsInGroupAlphabetically" value="true"/>-->
-<!--            <property name="separateLineBetweenGroups" value="true"/>-->
-<!--            <property name="customImportOrderRules" value="STATIC###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE"/>-->
-<!--        </module>-->
+        <!-- ##### Import statement requirements ##### -->
+        <!-- Star imports (e.g. import java.util.*) are NOT ALLOWED -->
+        <module name="AvoidStarImport"/>
+        <!-- Redundant import statements are NOT ALLOWED -->
+        <module name="RedundantImport"/>
+        <!-- Unused import statements are NOT ALLOWED -->
+        <module name="UnusedImports"/>
+        <!-- Ensure imports appear alphabetically and grouped -->
+        <module name="CustomImportOrder">
+            <property name="sortImportsInGroupAlphabetically" value="true"/>
+            <property name="separateLineBetweenGroups" value="true"/>
+            <property name="customImportOrderRules" value="STATIC###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE"/>
+        </module>
 
-<!--        &lt;!&ndash; ##### Requirements for K&R Style braces ##### &ndash;&gt;-->
-<!--        &lt;!&ndash; Code blocks MUST HAVE braces, even single line statements (if, while, etc) &ndash;&gt;-->
-<!--        <module name="NeedBraces"/>-->
-<!--        &lt;!&ndash; Left braces should be at the end of current line (default value)&ndash;&gt;-->
-<!--        <module name="LeftCurly"/>-->
-<!--        &lt;!&ndash; Right braces should be on start of a new line (default value) &ndash;&gt;-->
-<!--        <module name="RightCurly"/>-->
+        <!-- ##### Requirements for K&R Style braces ##### -->
+        <!-- Code blocks MUST HAVE braces, even single line statements (if, while, etc) -->
+        <module name="NeedBraces"/>
+        <!-- Left braces should be at the end of current line (default value)-->
+        <module name="LeftCurly"/>
+        <!-- Right braces should be on start of a new line (default value) -->
+        <module name="RightCurly"/>
 
-<!--        &lt;!&ndash; ##### Indentation / Whitespace requirements ##### &ndash;&gt;-->
-<!--        &lt;!&ndash; Require 4-space indentation (default value) &ndash;&gt;-->
-<!--        <module name="Indentation"/>-->
-<!--        &lt;!&ndash; Whitespace should exist around all major tokens &ndash;&gt;-->
-<!--        <module name="WhitespaceAround">-->
-<!--            &lt;!&ndash; However, make an exception for empty constructors, methods, types, etc. &ndash;&gt;-->
-<!--            <property name="allowEmptyConstructors" value="true"/>-->
-<!--            <property name="allowEmptyMethods" value="true"/>-->
-<!--            <property name="allowEmptyTypes" value="true"/>-->
-<!--            <property name="allowEmptyLoops" value="true"/>-->
-<!--        </module>-->
-<!--        &lt;!&ndash; Validate whitespace around Generics (angle brackets) per typical conventions-->
-<!--             http://checkstyle.sourceforge.net/config_whitespace.html#GenericWhitespace &ndash;&gt;-->
-<!--        <module name="GenericWhitespace"/>-->
+        <!-- ##### Indentation / Whitespace requirements ##### -->
+        <!-- Require 4-space indentation (default value) -->
+        <module name="Indentation"/>
+        <!-- Whitespace should exist around all major tokens -->
+        <module name="WhitespaceAround">
+            <!-- However, make an exception for empty constructors, methods, types, etc. -->
+            <property name="allowEmptyConstructors" value="true"/>
+            <property name="allowEmptyMethods" value="true"/>
+            <property name="allowEmptyTypes" value="true"/>
+            <property name="allowEmptyLoops" value="true"/>
+        </module>
+        <!-- Validate whitespace around Generics (angle brackets) per typical conventions
+             http://checkstyle.sourceforge.net/config_whitespace.html#GenericWhitespace -->
+        <module name="GenericWhitespace"/>
 
-<!--        &lt;!&ndash; ##### Other / Miscellaneous requirements ##### &ndash;&gt;-->
-<!--        &lt;!&ndash; Require each variable declaration is its own statement on its own line &ndash;&gt;-->
-<!--        <module name="MultipleVariableDeclarations"/>-->
-<!--        &lt;!&ndash; Each line of code can only include one statement &ndash;&gt;-->
-<!--        <module name="OneStatementPerLine"/>-->
-<!--    </module>-->
+        <!-- ##### Other / Miscellaneous requirements ##### -->
+        <!-- Require each variable declaration is its own statement on its own line -->
+        <module name="MultipleVariableDeclarations"/>
+        <!-- Each line of code can only include one statement -->
+        <module name="OneStatementPerLine"/>
+    </module>
 </module>
