@@ -85,13 +85,9 @@
 #    The TDB-based implementation is the default option. It reads its parameters
 #    from the runtime.properties file, for backward compatibility.
 #
-#    Other implementations are based on an SDB instance, a "standard" SPARQL
-#    endpoint, or a Virtuoso endpoint, with parameters as shown.
+#    Other implementations are a "standard" SPARQL endpoint or a Virtuoso
+#    endpoint, with parameters as shown.
 #
-
-#:sdbContentTripleSource
-#    a   vitroWebapp:triplesource.impl.sdb.ContentTripleSourceSDB ,
-#        vitroWebapp:modules.tripleSource.ContentTripleSource .
 
 :tdbContentTripleSource
     a   vitroWebapp:triplesource.impl.tdb.ContentTripleSourceTDB ,
