@@ -160,7 +160,7 @@
                             ${i18n().map_of_science_capitalized}
                         </a>
                     </div>
-                <#/if>
+                </#if>
 
                 <#if isInvestigator>
                     <#assign coInvestigatorVisUrl = individual.coInvestigatorVisUrl()>
