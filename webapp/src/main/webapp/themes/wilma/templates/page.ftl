@@ -10,7 +10,11 @@
 
     <body class="${bodyClasses!}" onload="${bodyOnload!}">
         <#include "identity.ftl">
-        <#include "search.ftl" >
+        <#if currentServlet != "extendedsearch">
+            <#include "search.ftl">
+        <#else>
+            <#include "remote-search.ftl">
+        </#if>
         <#include "menu.ftl">
 
 		<#-- VIVO OpenSocial Extension by UCSF -->

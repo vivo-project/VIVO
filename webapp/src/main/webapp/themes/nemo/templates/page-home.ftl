@@ -41,7 +41,7 @@
 								<h1>${i18n().intro_title}</h1>
 							</div>
 							<form id="search-homepage" 
-								action="${urls.search}" 
+								action="${urls.base}/extendedsearch" 
 								name="search-home" 
 								role="search" 
 								method="post" 
