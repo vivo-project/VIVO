@@ -55,12 +55,7 @@
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <delete includeemptydirs="true">
-                                            <fileset dir="${vivo-dir}/rdf">
-                                                <include name="**/*"/>
-                                                <exclude name="**/i18n/*_x_*/**"/>
-                                            </fileset>
-                                        </delete>
+                                        <delete dir="${vivo-dir}/rdf" />
                                     </target>
                                 </configuration>
                             </execution>
