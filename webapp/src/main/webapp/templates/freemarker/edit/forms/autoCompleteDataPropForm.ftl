@@ -33,7 +33,7 @@
     </#if>
 
     <p>
-		<input class="acSelector" size="50"  type="text" id="literal" name="literal" value="${literalValues}" />
+		<input class="acSelector" size="50"  type="text" id="literal" name="literal" value="${literalValues!?html}" />
 	</p>
 
 	<div class="acSelection">
