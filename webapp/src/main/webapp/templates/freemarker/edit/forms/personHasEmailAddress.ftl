@@ -58,7 +58,7 @@
 
         <p>
             <label for="additionalEmail">${i18n().email_address} ${requiredHint}</label>
-            <input  size="35"  type="text" id="emailAddress" name="emailAddress" value="${emailAddressValue}" />
+            <input  size="35"  type="text" id="emailAddress" name="emailAddress" value="${emailAddressValue!?html}" />
         </p>
 
         <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>

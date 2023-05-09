@@ -46,7 +46,7 @@
             <ul id="${listId}" class="individual-emails" role="list" <#if editable>style="list-style:none;margin-left:0;"</#if>>
                 <#list email.statements as statement>
                     <li role="listitem">
-                        <a itemprop="email" class="email" href="mailto:${statement.emailAddress!}" title="${i18n().email}">${statement.emailAddress!}</a>
+                        <a itemprop="email" class="email" href="mailto:${statement.emailAddress!?html}" title="${i18n().email}">${statement.emailAddress!?html}</a>
                         <@p.editingLinks "${email.localName}" "${email.name}" statement editable email.rangeUri />
                     </li>
                 </#list>
