@@ -1,0 +1,373 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+
+###############################################
+### CREATE
+###############################################
+
+<https://vivoweb.org/procedure/create_person>
+        a                        		dynapi:Procedure ;
+        rdfs:label               		"Create a person"@en-US ;
+        dynapi:hasFirstStep 			<https://vivoweb.org/procedure/create_person/execute_template/step> ;
+        dynapi:providesParameter                <https://vivoweb.org/procedure/person/parameter/person_uri>  .
+
+<https://vivoweb.org/procedure/create_person/execute_template/step>
+        a                        	        dynapi:OperationalStep ;
+        rdfs:label               		"Creation of a person by using N3 operation"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/create_person/execute_template/n3_template> .
+
+<https://vivoweb.org/procedure/create_person/execute_template/n3_template>
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"Create person N3 Template"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/persons> ;
+        dynapi:requiresParameter 	        <https://vivoweb.org/procedure/person/parameter/person_uri>;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_given_name> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_middle_name> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_last_name> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_type> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_positions> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_internal_id> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_orcid> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_scopus_author_id> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_researcher_id> ;
+        dynapi:N3TextAdditions
+        """
+        ?person_uri
+            <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> ;
+            <http://www.w3.org/2006/vcard/ns#givenName> ?person_given_name ;
+            <http://vivoweb.org/ontology/core#middleName> ?person_middle_name ;
+            <http://www.w3.org/2006/vcard/ns#familyName> ?person_last_name ;
+            <http://xmlns.com/foaf/0.1/Person> ?person_type ;
+            <http://vivoweb.org/ontology/core#identifier> ?person_internal_id ;
+            <http://vivoweb.org/ontology/core#orcidId> ?person_orcid ;
+            <http://vivoweb.org/ontology/core#scopusId> ?person_scopus_author_id;
+            <http://vivoweb.org/ontology/core#researcherId> ?person_researcher_id .
+        """ .
+
+###############################################
+### READ (all)
+###############################################
+
+<https://vivoweb.org/procedure/read_persons>
+        a                                       dynapi:Procedure ;
+        rdfs:label                              "Fetching persons"@en-US ;
+        dynapi:providesParameter                <https://vivoweb.org/ontology/person/parameter/persons> ;
+        dynapi:providesParameter 		<https://vivoweb.org/ontology/person/parameter/count>;
+        dynapi:hasFirstStep 			<https://vivoweb.org/procedure/read_persons/fetching_properties/step> .
+
+<https://vivoweb.org/procedure/read_persons/fetching_properties/step>
+        a                                       dynapi:OperationalStep ;
+        rdfs:label                              "fetch persons step"@en-US ;
+        dynapi:hasOperation 		        <https://vivoweb.org/procedure/read_persons/fetching_properties/sparql_select_query> ;
+	dynapi:hasNextStep			<https://vivoweb.org/ontology/read_persons/statistics/step> .
+
+<https://vivoweb.org/procedure/read_persons/fetching_properties/sparql_select_query>
+        a                                       dynapi:SparqlSelectQuery ;
+        rdfs:label                              "read persons sparql query"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> ;
+        dynapi:providesParameter 		<https://vivoweb.org/ontology/person/parameter/persons> ;
+        dynapi:requiresParameter 	        <https://vivoweb.org/ontology/person/parameter/limit> ;
+        dynapi:requiresParameter                <https://vivoweb.org/ontology/person/parameter/offset> ;
+        dynapi:requiresPlainParameter           <https://vivoweb.org/ontology/person/parameter/sortBy> ;
+        dynapi:requiresPlainParameter           <https://vivoweb.org/ontology/person/parameter/order> ;
+        dynapi:sparqlQueryText
+        """
+        SELECT ?uri ?person_given_name ?person_middle_name ?person_last_name ?person_type ?person_internal_id ?person_orcid ?person_scopus_author_id ?person_researcher_id
+            WHERE
+                {
+                      ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person>
+                      OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#givenName> ?person_given_name }
+                      OPTIONAL { ?uri <http://vivoweb.org/ontology/core#middleName> ?person_middle_name }
+                      OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#familyName> ?person_last_name }
+                      OPTIONAL { ?uri <http://xmlns.com/foaf/0.1/Person> ?person_type }
+                      OPTIONAL { ?uri <http://vivoweb.org/ontology/core#identifier> ?person_internal_id }
+                      OPTIONAL { ?uri <http://vivoweb.org/ontology/core#orcidId> ?person_orcid }
+                      OPTIONAL { ?uri <http://vivoweb.org/ontology/core#scopusId> ?person_scopus_author_id }
+                      OPTIONAL { ?uri <http://vivoweb.org/ontology/core#researcherId> ?person_researcher_id }
+                }
+            ORDER BY ?order(??sortBy)
+            LIMIT ?limit OFFSET ?offset
+        """ .
+
+<https://vivoweb.org/ontology/read_persons/statistics/step>
+        a                               dynapi:OperationalStep ;
+        rdfs:label                      "number of persons step "@en-US ;
+        dynapi:hasOperation 		<https://vivoweb.org/ontology/read_persons/statistics/sparql_query> .
+
+<https://vivoweb.org/ontology/read_persons/statistics/sparql_query>
+        a                               dynapi:SparqlSelectQuery ;
+        rdfs:label                      "number of persons sparql query 1"@en-US ;
+        dynapi:hasModel 		<https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> ;
+        dynapi:providesParameter 	<https://vivoweb.org/ontology/person/parameter/count> ;
+        dynapi:sparqlQueryText
+        """
+        SELECT (count(distinct ?uri) as ?total)
+            WHERE
+                {
+                    ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person>
+                }
+        """ .
+
+###############################################
+### READ (one)
+###############################################
+
+<https://vivoweb.org/ontology/read_person>
+        a                               dynapi:Procedure ;
+        rdfs:label                      "Fetching a person"@en-US ;
+        dynapi:providesParameter 	<https://vivoweb.org/ontology/person/parameter/persons> ;
+        dynapi:hasFirstStep 		<https://vivoweb.org/procedure/read_person/fetching_properties/step> .
+
+<https://vivoweb.org/procedure/read_person/fetching_properties/step>
+        a                        	dynapi:OperationalStep ;
+        rdfs:label               	"reading of a person"@en-US ;
+        dynapi:hasOperation 		<https://vivoweb.org/procedure/read_person/fetching_properties/sparql_query> .
+
+<https://vivoweb.org/procedure/read_person/fetching_properties/sparql_query>
+        a                               dynapi:SparqlSelectQuery ;
+        rdfs:label                      "read persons sparql query 1"@en-US ;
+        dynapi:hasModel 		<https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> ;
+        dynapi:requiresParameter 	<https://vivoweb.org/ontology/person/parameter/resourceId> ;
+        dynapi:providesParameter 	<https://vivoweb.org/ontology/person/parameter/persons> ;
+        dynapi:sparqlQueryText
+        """
+        SELECT ?uri ?label
+            WHERE
+                {
+                    ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person>
+                    OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#givenName> ?person_given_name }
+                    OPTIONAL { ?uri <http://vivoweb.org/ontology/core#middleName> ?person_middle_name }
+                    OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#familyName> ?person_last_name }
+                    OPTIONAL { ?uri <http://xmlns.com/foaf/0.1/Person> ?person_type }
+                    OPTIONAL { ?uri <http://vivoweb.org/ontology/core#identifier> ?person_internal_id }
+                    OPTIONAL { ?uri <http://vivoweb.org/ontology/core#orcidId> ?person_orcid }
+                    OPTIONAL { ?uri <http://vivoweb.org/ontology/core#scopusId> ?person_scopus_author_id }
+                    OPTIONAL { ?uri <http://vivoweb.org/ontology/core#researcherId> ?person_researcher_id }
+                    FILTER (?uri = ?resource_id)
+                }
+        """ .
+
+###############################################
+### UPDATE
+###############################################
+
+<https://vivoweb.org/ontology/update_person>
+        a                                               dynapi:Procedure ;
+        rdfs:label                                      "Updating a person"@en-US ;
+        dynapi:hasFirstStep 		                <https://vivoweb.org/procedure/update_person/fetching_properties/step> .
+
+<https://vivoweb.org/procedure/update_person/fetching_properties/step>
+        a                        			dynapi:OperationalStep ;
+        rdfs:label               			"Fetching of a person data for deleting"@en-US ;
+        dynapi:hasOperation 				<https://vivoweb.org/procedure/delete_person/fetching_properties/sparql_query> ;
+        dynapi:hasNextStep  				<https://vivoweb.org/procedure/update_person/deleting_properties/step> .
+
+<https://vivoweb.org/procedure/update_person/deleting_properties/step>
+        a                        			dynapi:OperationalStep ;
+        rdfs:label               			"Deleting of a person"@en-US ;
+        dynapi:hasOperation 				<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template> ;
+        dynapi:hasNextStep  				<https://vivoweb.org/procedure/update_person/addding_properties/step> .
+
+<https://vivoweb.org/procedure/update_person/addding_properties/step>
+        a                        			dynapi:OperationalStep ;
+        rdfs:label               			"creation of a person "@en-US ;
+        dynapi:hasOperation 				<https://vivoweb.org/procedure/create_person/execute_template/n3_template> .
+
+###############################################
+### DELETE
+###############################################
+
+<https://vivoweb.org/procedure/delete_person>
+        a                        			dynapi:Procedure ;
+        rdfs:label               			"Removing of a person"@en-US ;
+        dynapi:hasFirstStep 				<https://vivoweb.org/procedure/delete_person/fetching_properties/step> .
+
+<https://vivoweb.org/procedure/delete_person/fetching_properties/step>
+        a                        			dynapi:OperationalStep ;
+        rdfs:label               			"Fetching of a person data for deleting"@en-US ;
+        dynapi:hasOperation 				<https://vivoweb.org/procedure/delete_person/fetching_properties/sparql_query> ;
+        dynapi:hasNextStep  				<https://vivoweb.org/procedure/delete_person/deleting_properties/step> .
+
+<https://vivoweb.org/procedure/delete_person/fetching_properties/sparql_query>
+        a                                               dynapi:SparqlSelectQuery ;
+        rdfs:label                                      "Read persons sparql query"@en-US ;
+        dynapi:hasModel 		                <https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> ;
+        dynapi:requiresParameter 			<https://vivoweb.org/ontology/person/parameter/resourceId> ;
+        dynapi:providesParameter 			<https://vivoweb.org/procedure/person/parameter/person_for_deleting> ;
+        dynapi:sparqlQueryText
+        """
+        SELECT ?uri ?label
+            WHERE
+            {
+                ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person>
+                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#givenName> ?person_given_name }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#middleName> ?person_middle_name }
+                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#familyName> ?person_last_name }
+                OPTIONAL { ?uri <http://xmlns.com/foaf/0.1/Person> ?person_type }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#identifier> ?person_internal_id }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#orcidId> ?person_orcid }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#scopusId> ?person_scopus_author_id }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#researcherId> ?person_researcher_id }
+                FILTER (?uri = ?resource_id)
+            }
+        """ .
+
+<https://vivoweb.org/procedure/delete_person/deleting_properties/step>
+        a                        			dynapi:OperationalStep ;
+        rdfs:label               			"Deleting of a person"@en-US ;
+        dynapi:hasOperation 				<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template> .
+
+<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template>
+        a                        			dynapi:N3Template ;
+        rdfs:label               			"delete person label N3 Template"@en-US ;
+        dynapi:hasModel 				<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:requiresParameter 			<https://vivoweb.org/procedure/person/parameter/person_for_deleting> ;
+        dynapi:N3TextRetractions
+        """
+        ?person_for_deleting.0.uri
+            <http://www.w3.org/2000/01/rdf-schema#label> ?person_for_deleting.0.label ;
+            <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+        """ .
+
+###############################################
+### PARAMETERS
+###############################################
+
+#####################
+## Person response ##
+#####################
+
+<https://vivoweb.org/ontology/person/parameter/persons>
+        a                                   dynapi:Parameter ;
+        rdfs:label                          "persons"@en-US ;
+        dynapi:name                         "result" ;
+        dynapi:description                  "List of available persons and statistics (number)" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/JsonContainerArray> .
+
+<https://vivoweb.org/ontology/person/parameter/count>
+        a                                   dynapi:Parameter ;
+        rdfs:label                          "Number of fetched persons"@en-US ;
+        dynapi:name                         "count" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/JsonContainer> .
+
+#######################
+## Delete parameters ##
+#######################
+
+<https://vivoweb.org/ontology/person/parameter/personForDeleting>
+        a                                   dynapi:Parameter ;
+        rdfs:label                          "person for deleting"@en-US ;
+        dynapi:name                         "stateOrProvinceForDeleting" ;
+        dynapi:description                  "List of available persons" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/JsonContainerArray> .
+
+#####################
+## Creation fields ##
+#####################
+
+<https://vivoweb.org/procedure/person/parameter/person_uri>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "person_uri" ;
+        dynapi:defaultValue                 "http://xmlns.com/foaf/0.1/Person#,java_uuid_number" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/generated-uri> .
+
+<https://vivoweb.org/procedure/person/parameter/person_given_name>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "person_given_name" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/person/parameter/person_middle_name>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "person_middle_name" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/person/parameter/person_last_name>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "person_last_name" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/person/parameter/person_type>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "person_type" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/person/parameter/person_positions>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "person_positions" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/JsonContainerArray> .
+
+<https://vivoweb.org/procedure/person/parameter/person_internal_id>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "person_internal_id" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/person/parameter/person_orcid>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "person_orcid" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/person/parameter/person_scopus_author_id>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "person_scopus_author_id" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/person/parameter/person_researcher_id>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "person_researcher_id" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+#########################
+## Read request fields ##
+#########################
+
+<https://vivoweb.org/ontology/person/parameter/resourceId>
+        a                       dynapi:parameter ;
+        dynapi:name             "resource_id" ;
+        dynapi:hasType          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/uri> ;
+        rdfs:label              "resource uri"@en-US .
+
+<https://vivoweb.org/ontology/vitro-dynamic-api/parameter/total>
+        a                       dynapi:parameter ;
+        dynapi:name             "total" ;
+        dynapi:hasType 		<https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> ;
+        rdfs:label              "total"@en-US .
+
+<https://vivoweb.org/ontology/vitro-dynamic-api/parameter/limit>
+        a                       dynapi:parameter ;
+        dynapi:name             "limit" ;
+        dynapi:defaultValue     "20" ;
+        dynapi:hasType 		<https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> ;
+        rdfs:label              "limit"@en-US .
+
+<https://vivoweb.org/ontology/vitro-dynamic-api/parameter/offset>
+        a                       dynapi:parameter ;
+        dynapi:name             "offset" ;
+        dynapi:defaultValue     "0" ;
+        dynapi:hasType          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> ;
+        rdfs:label              "offset"@en-US .
+
+<https://vivoweb.org/ontology/vitro-dynamic-api/parameter/sortBy>
+        a                       dynapi:parameter ;
+        dynapi:name             "sortBy" ;
+        dynapi:defaultValue     "label" ;
+        dynapi:hasType 		<https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> ;
+        rdfs:label              "sortBy"@en-US .
+
+<https://vivoweb.org/ontology/vitro-dynamic-api/parameter/order>
+        a                       dynapi:parameter ;
+        dynapi:name             "order" ;
+        dynapi:defaultValue     "ASC" ;
+        dynapi:hasType 		<https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> ;
+        rdfs:label               "order"@en-US .
+
+<https://vivoweb.org/ontology/vitro-dynamic-api/model/persons>
+        a                       dynapi:Model ;
+        dynapi:name             "http://xmlns.com/foaf/0.1/Person" ;
+        rdfs:label              "persons model"@en-US ;
+        dynapi:hasType          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/model> .
