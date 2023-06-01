@@ -26,27 +26,27 @@
         rdfs:label               		"Create person N3 Template"@en-US ;
         dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/persons> ;
         dynapi:requiresParameter 	        <https://vivoweb.org/procedure/person/parameter/person_uri>;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_given_name> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_middle_name> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_last_name> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_type> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_positions> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_internal_id> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_orcid> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_scopus_author_id> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_researcher_id> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/first_name> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/middle_name> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/last_name> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/type> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/positions> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/internalID> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/ORCID> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/SCOPUSAuthorID> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/ResearcherID> ;
         dynapi:N3TextAdditions
         """
         ?person_uri
             <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> ;
-            <http://www.w3.org/2006/vcard/ns#givenName> ?person_given_name ;
-            <http://vivoweb.org/ontology/core#middleName> ?person_middle_name ;
-            <http://www.w3.org/2006/vcard/ns#familyName> ?person_last_name ;
-            <http://xmlns.com/foaf/0.1/Person> ?person_type ;
-            <http://vivoweb.org/ontology/core#identifier> ?person_internal_id ;
-            <http://vivoweb.org/ontology/core#orcidId> ?person_orcid ;
-            <http://vivoweb.org/ontology/core#scopusId> ?person_scopus_author_id;
-            <http://vivoweb.org/ontology/core#researcherId> ?person_researcher_id .
+            <http://www.w3.org/2006/vcard/ns#givenName> ?first_name ;
+            <http://vivoweb.org/ontology/core#middleName> ?middle_name ;
+            <http://www.w3.org/2006/vcard/ns#familyName> ?last_name ;
+            <http://xmlns.com/foaf/0.1/Person> ?type ;
+            <http://vivoweb.org/ontology/core#identifier> ?internalID ;
+            <http://vivoweb.org/ontology/core#orcidId> ?ORCID ;
+            <http://vivoweb.org/ontology/core#scopusId> ?SCOPUSAuthorID;
+            <http://vivoweb.org/ontology/core#researcherId> ?ResearcherID .
         """ .
 
 ###############################################
@@ -77,18 +77,18 @@
         dynapi:requiresPlainParameter           <https://vivoweb.org/ontology/person/parameter/order> ;
         dynapi:sparqlQueryText
         """
-        SELECT ?uri ?person_given_name ?person_middle_name ?person_last_name ?person_type ?person_internal_id ?person_orcid ?person_scopus_author_id ?person_researcher_id
+        SELECT ?uri ?first_name ?middle_name ?last_name ?type ?internalID ?ORCID ?SCOPUSAuthorID ?ResearcherID
             WHERE
                 {
                       ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person>
-                      OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#givenName> ?person_given_name }
-                      OPTIONAL { ?uri <http://vivoweb.org/ontology/core#middleName> ?person_middle_name }
-                      OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#familyName> ?person_last_name }
-                      OPTIONAL { ?uri <http://xmlns.com/foaf/0.1/Person> ?person_type }
-                      OPTIONAL { ?uri <http://vivoweb.org/ontology/core#identifier> ?person_internal_id }
-                      OPTIONAL { ?uri <http://vivoweb.org/ontology/core#orcidId> ?person_orcid }
-                      OPTIONAL { ?uri <http://vivoweb.org/ontology/core#scopusId> ?person_scopus_author_id }
-                      OPTIONAL { ?uri <http://vivoweb.org/ontology/core#researcherId> ?person_researcher_id }
+                      OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#givenName> ?first_name }
+                      OPTIONAL { ?uri <http://vivoweb.org/ontology/core#middleName> ?middle_name }
+                      OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#familyName> ?last_name }
+                      OPTIONAL { ?uri <http://xmlns.com/foaf/0.1/Person> ?type }
+                      OPTIONAL { ?uri <http://vivoweb.org/ontology/core#identifier> ?internalID }
+                      OPTIONAL { ?uri <http://vivoweb.org/ontology/core#orcidId> ?ORCID }
+                      OPTIONAL { ?uri <http://vivoweb.org/ontology/core#scopusId> ?SCOPUSAuthorID }
+                      OPTIONAL { ?uri <http://vivoweb.org/ontology/core#researcherId> ?ResearcherID }
                 }
             ORDER BY ?order(??sortBy)
             LIMIT ?limit OFFSET ?offset
@@ -136,18 +136,18 @@
         dynapi:providesParameter 	<https://vivoweb.org/ontology/person/parameter/persons> ;
         dynapi:sparqlQueryText
         """
-        SELECT ?uri ?label
+        SELECT ?uri ?first_name ?middle_name ?last_name ?type ?internalID ?ORCID ?SCOPUSAuthorID ?ResearcherID
             WHERE
                 {
                     ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person>
-                    OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#givenName> ?person_given_name }
-                    OPTIONAL { ?uri <http://vivoweb.org/ontology/core#middleName> ?person_middle_name }
-                    OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#familyName> ?person_last_name }
-                    OPTIONAL { ?uri <http://xmlns.com/foaf/0.1/Person> ?person_type }
-                    OPTIONAL { ?uri <http://vivoweb.org/ontology/core#identifier> ?person_internal_id }
-                    OPTIONAL { ?uri <http://vivoweb.org/ontology/core#orcidId> ?person_orcid }
-                    OPTIONAL { ?uri <http://vivoweb.org/ontology/core#scopusId> ?person_scopus_author_id }
-                    OPTIONAL { ?uri <http://vivoweb.org/ontology/core#researcherId> ?person_researcher_id }
+                    OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#givenName> ?first_name }
+                    OPTIONAL { ?uri <http://vivoweb.org/ontology/core#middleName> ?middle_name }
+                    OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#familyName> ?last_name }
+                    OPTIONAL { ?uri <http://xmlns.com/foaf/0.1/Person> ?type }
+                    OPTIONAL { ?uri <http://vivoweb.org/ontology/core#identifier> ?internalID }
+                    OPTIONAL { ?uri <http://vivoweb.org/ontology/core#orcidId> ?ORCID }
+                    OPTIONAL { ?uri <http://vivoweb.org/ontology/core#scopusId> ?SCOPUSAuthorID }
+                    OPTIONAL { ?uri <http://vivoweb.org/ontology/core#researcherId> ?ResearcherID }
                     FILTER (?uri = ?resource_id)
                 }
         """ .
@@ -201,18 +201,18 @@
         dynapi:providesParameter 			<https://vivoweb.org/procedure/person/parameter/person_for_deleting> ;
         dynapi:sparqlQueryText
         """
-        SELECT ?uri ?label
+        SELECT ?uri ?first_name ?middle_name ?last_name ?type ?internalID ?ORCID ?SCOPUSAuthorID ?ResearcherID
             WHERE
             {
                 ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person>
-                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#givenName> ?person_given_name }
-                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#middleName> ?person_middle_name }
-                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#familyName> ?person_last_name }
-                OPTIONAL { ?uri <http://xmlns.com/foaf/0.1/Person> ?person_type }
-                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#identifier> ?person_internal_id }
-                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#orcidId> ?person_orcid }
-                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#scopusId> ?person_scopus_author_id }
-                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#researcherId> ?person_researcher_id }
+                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#givenName> ?first_name }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#middleName> ?middle_name }
+                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#familyName> ?last_name }
+                OPTIONAL { ?uri <http://xmlns.com/foaf/0.1/Person> ?type }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#identifier> ?internalID }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#orcidId> ?ORCID }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#scopusId> ?SCOPUSAuthorID }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#researcherId> ?ResearcherID }
                 FILTER (?uri = ?resource_id)
             }
         """ .
@@ -230,7 +230,14 @@
         dynapi:N3TextRetractions
         """
         ?person_for_deleting.0.uri
-            <http://www.w3.org/2000/01/rdf-schema#label> ?person_for_deleting.0.label ;
+            <http://xmlns.com/foaf/0.1/Person> ?person_for_deleting.0.type ;
+            <http://www.w3.org/2006/vcard/ns#givenName> ?person_for_deleting.0.first_name ;
+            <http://vivoweb.org/ontology/core#middleName> ?person_for_deleting.0.middle_name ;
+            <http://www.w3.org/2006/vcard/ns#familyName> ?person_for_deleting.0.last_name ;
+            <http://vivoweb.org/ontology/core#identifier> ?person_for_deleting.0.internalID ;
+            <http://vivoweb.org/ontology/core#orcidId> ?person_for_deleting.0.ORCID ;
+            <http://vivoweb.org/ontology/core#scopusId> ?person_for_deleting.0.SCOPUSAuthorID ;
+            <http://vivoweb.org/ontology/core#researcherId> ?person_for_deleting.0.ResearcherID ;
             <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
         """ .
 
@@ -277,49 +284,49 @@
         dynapi:isInternal                   "true"^^xsd:boolean ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/generated-uri> .
 
-<https://vivoweb.org/procedure/person/parameter/person_given_name>
+<https://vivoweb.org/procedure/person/parameter/first_name>
         a                                   dynapi:Parameter ;
-        dynapi:name                         "person_given_name" ;
+        dynapi:name                         "first_name" ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
 
-<https://vivoweb.org/procedure/person/parameter/person_middle_name>
+<https://vivoweb.org/procedure/person/parameter/middle_name>
         a                                   dynapi:Parameter ;
-        dynapi:name                         "person_middle_name" ;
+        dynapi:name                         "middle_name" ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
 
-<https://vivoweb.org/procedure/person/parameter/person_last_name>
+<https://vivoweb.org/procedure/person/parameter/last_name>
         a                                   dynapi:Parameter ;
-        dynapi:name                         "person_last_name" ;
+        dynapi:name                         "last_name" ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
 
-<https://vivoweb.org/procedure/person/parameter/person_type>
+<https://vivoweb.org/procedure/person/parameter/type>
         a                                   dynapi:Parameter ;
-        dynapi:name                         "person_type" ;
+        dynapi:name                         "type" ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
 
-<https://vivoweb.org/procedure/person/parameter/person_positions>
+<https://vivoweb.org/procedure/person/parameter/positions>
         a                                   dynapi:Parameter ;
-        dynapi:name                         "person_positions" ;
+        dynapi:name                         "positions" ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/JsonContainerArray> .
 
-<https://vivoweb.org/procedure/person/parameter/person_internal_id>
+<https://vivoweb.org/procedure/person/parameter/internalID>
         a                                   dynapi:Parameter ;
-        dynapi:name                         "person_internal_id" ;
+        dynapi:name                         "internalID" ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
 
-<https://vivoweb.org/procedure/person/parameter/person_orcid>
+<https://vivoweb.org/procedure/person/parameter/ORCID>
         a                                   dynapi:Parameter ;
-        dynapi:name                         "person_orcid" ;
+        dynapi:name                         "ORCID" ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
 
-<https://vivoweb.org/procedure/person/parameter/person_scopus_author_id>
+<https://vivoweb.org/procedure/person/parameter/SCOPUSAuthorID>
         a                                   dynapi:Parameter ;
-        dynapi:name                         "person_scopus_author_id" ;
+        dynapi:name                         "SCOPUSAuthorID" ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
 
-<https://vivoweb.org/procedure/person/parameter/person_researcher_id>
+<https://vivoweb.org/procedure/person/parameter/ResearcherID>
         a                                   dynapi:Parameter ;
-        dynapi:name                         "person_researcher_id" ;
+        dynapi:name                         "ResearcherID" ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
 
 #########################
