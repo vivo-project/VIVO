@@ -266,7 +266,7 @@
 ## Delete parameters ##
 #######################
 
-<https://vivoweb.org/ontology/person/parameter/personForDeleting>
+<https://vivoweb.org/ontology/person/parameter/person_for_deleting>
         a                                   dynapi:Parameter ;
         rdfs:label                          "person for deleting"@en-US ;
         dynapi:name                         "stateOrProvinceForDeleting" ;
