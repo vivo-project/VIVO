@@ -3,11 +3,14 @@
 package org.vivoweb.webapp.controller.freemarker;
 
 import edu.cornell.mannlib.vedit.beans.LoginStatusBean;
+import edu.cornell.mannlib.vitro.webapp.auth.attributes.AccessOperation;
+import edu.cornell.mannlib.vitro.webapp.auth.objects.DataPropertyStatementAccessObject;
+import edu.cornell.mannlib.vitro.webapp.auth.objects.ObjectPropertyStatementAccessObject;
 import edu.cornell.mannlib.vitro.webapp.auth.permissions.SimplePermission;
 import edu.cornell.mannlib.vitro.webapp.auth.policy.PolicyHelper;
+import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthHelper;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;
-import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AddDataPropertyStatement;
-import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AddObjectPropertyStatement;
+import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.SimpleAuthorizationRequest;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.SelfEditingConfiguration;
 import edu.cornell.mannlib.vitro.webapp.beans.UserAccount;
@@ -50,6 +53,11 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+
+import static edu.cornell.mannlib.vitro.webapp.auth.objects.AccessObject.SOME_LITERAL;
+import static edu.cornell.mannlib.vitro.webapp.auth.objects.AccessObject.SOME_PREDICATE;
+import static edu.cornell.mannlib.vitro.webapp.auth.objects.AccessObject.SOME_URI;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -63,10 +71,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static edu.cornell.mannlib.vitro.webapp.auth.requestedAction.RequestedAction.SOME_LITERAL;
-import static edu.cornell.mannlib.vitro.webapp.auth.requestedAction.RequestedAction.SOME_PREDICATE;
-import static edu.cornell.mannlib.vitro.webapp.auth.requestedAction.RequestedAction.SOME_URI;
 
 /**
  * Main controller class for claiming (creating and/or linking) resources to a profile
@@ -294,9 +298,12 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
             // Check that we have back end editing priveleges
             if (!PolicyHelper.isAuthorizedForActions(vreq, SimplePermission.DO_BACK_END_EDITING.ACTION)) {
                 // If all else fails, can we add statements to this individual?
-                AddDataPropertyStatement adps = new AddDataPropertyStatement(vreq.getJenaOntModel(), profileUri, SOME_URI, SOME_LITERAL);
-                AddObjectPropertyStatement aops = new AddObjectPropertyStatement(vreq.getJenaOntModel(), profileUri, SOME_PREDICATE, SOME_URI);
-                if (!PolicyHelper.isAuthorizedForActions(vreq, adps.or(aops))) {
+                DataPropertyStatementAccessObject adps = new DataPropertyStatementAccessObject(vreq.getJenaOntModel(), profileUri, SOME_URI, SOME_LITERAL);
+                ObjectPropertyStatementAccessObject aops = new ObjectPropertyStatementAccessObject(vreq.getJenaOntModel(), profileUri, SOME_PREDICATE, SOME_URI);
+                if (!PolicyHelper.isAuthorizedForActions(vreq, 
+                        AuthHelper.logicOr(
+                                new SimpleAuthorizationRequest(aops, AccessOperation.ADD), 
+                                new SimpleAuthorizationRequest(aops, AccessOperation.ADD)))) {
                     return new TemplateResponseValues("unauthorizedForProfile.ftl");
                 }
             }
