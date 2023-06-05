@@ -95,3 +95,4 @@ edu.cornell.mannlib.vitro.webapp.servlet.setup.SearchEngineSmokeTest
 
 edu.cornell.mannlib.vitro.webapp.audit.AuditSetup
 
+edu.cornell.mannlib.vitro.webapp.dynapi.Initializer
