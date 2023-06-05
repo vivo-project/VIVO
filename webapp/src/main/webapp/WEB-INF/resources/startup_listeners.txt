@@ -97,3 +97,5 @@ edu.cornell.mannlib.vitro.webapp.controller.individual.VIVOIndividualResponseBui
 
 # This should be near the end, because it will issue a warning if the connection to the SearchEngine times out.
 edu.cornell.mannlib.vitro.webapp.servlet.setup.SearchEngineSmokeTest
+
+edu.cornell.mannlib.vitro.webapp.dynapi.Initializer
