@@ -8,7 +8,6 @@ import edu.cornell.mannlib.vitro.webapp.auth.objects.DataPropertyStatementAccess
 import edu.cornell.mannlib.vitro.webapp.auth.objects.ObjectPropertyStatementAccessObject;
 import edu.cornell.mannlib.vitro.webapp.auth.permissions.SimplePermission;
 import edu.cornell.mannlib.vitro.webapp.auth.policy.PolicyHelper;
-import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthHelper;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.SimpleAuthorizationRequest;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
@@ -301,7 +300,7 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
                 DataPropertyStatementAccessObject adps = new DataPropertyStatementAccessObject(vreq.getJenaOntModel(), profileUri, SOME_URI, SOME_LITERAL);
                 ObjectPropertyStatementAccessObject aops = new ObjectPropertyStatementAccessObject(vreq.getJenaOntModel(), profileUri, SOME_PREDICATE, SOME_URI);
                 if (!PolicyHelper.isAuthorizedForActions(vreq, 
-                        AuthHelper.logicOr(
+                        AuthorizationRequest.or(
                                 new SimpleAuthorizationRequest(aops, AccessOperation.ADD), 
                                 new SimpleAuthorizationRequest(aops, AccessOperation.ADD)))) {
                     return new TemplateResponseValues("unauthorizedForProfile.ftl");
