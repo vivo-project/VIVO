@@ -6,8 +6,8 @@
 @prefix auth: <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#> .
 @prefix ai: <https://vivoweb.org/ontology/vitro-application/auth/individual/> .
 @prefix ao: <https://vivoweb.org/ontology/vitro-application/auth/vocabulary/> .
-         
-ai:AdminPublishObjectPropertyTestData
+
+ai:SelfEditorPublishFauxObjectPropertyTestData
     ao:dataValue  <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/additionalEmailConfig> ;
     ao:dataValue  <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/addressLocationConfig> ;
     ao:dataValue  <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/adviseeRoleConfig> ;
