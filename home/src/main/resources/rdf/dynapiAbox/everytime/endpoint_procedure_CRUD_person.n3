@@ -162,53 +162,108 @@
         a                        		dynapi:OperationalStep ;
         rdfs:label               		"creation of a person step 1"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/create_person/execute_template/n3_template_subject> ;
-	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_person/creation_properties/step2> .
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step2> .
+
+<https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step2>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person first name check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/create_person/creation_properties/step2> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step3> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/first_name_check> .
 
 <https://vivoweb.org/procedure/create_person/creation_properties/step2>
-        a                        		dynapi:ConditionalStep ;
-        rdfs:label               		"creation of a person step 1"@en-US ;
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 2"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/create_person/execute_template/n3_template_first_name> ;
-	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_person/creation_properties/step3> .
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step3> .
+
+<https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step3>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person middle name check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/create_person/creation_properties/step3> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step4> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/middle_name_check> .
 
 <https://vivoweb.org/procedure/create_person/creation_properties/step3>
-        a                        		dynapi:ConditionalStep ;
-        rdfs:label               		"creation of a person step 1"@en-US ;
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 3"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/create_person/execute_template/n3_template_middle_name> ;
-	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_person/creation_properties/step4> .
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step4> .
+
+<https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step4>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person last name check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/create_person/creation_properties/step4> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step5> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/last_name_check> .
 
 <https://vivoweb.org/procedure/create_person/creation_properties/step4>
-        a                        		dynapi:ConditionalStep ;
-        rdfs:label               		"creation of a person step 1"@en-US ;
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 4"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/create_person/execute_template/n3_template_last_name> ;
-	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_person/creation_properties/step5> .
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step5> .
+
+<https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step2>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person type check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/create_person/creation_properties/step5> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step6> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/type_check> .
 
 <https://vivoweb.org/procedure/create_person/creation_properties/step5>
-        a                        		dynapi:ConditionalStep ;
-        rdfs:label               		"creation of a person step 1"@en-US ;
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 5"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/create_person/execute_template/n3_template_type> ;
-	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_person/creation_properties/step6> .
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step6> .
+
+<https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step6>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person internal id check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/create_person/creation_properties/step6> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step7> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/internal_id_check> .
 
 <https://vivoweb.org/procedure/create_person/creation_properties/step6>
-        a                        		dynapi:ConditionalStep ;
-        rdfs:label               		"creation of a person step 1"@en-US ;
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 6"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/create_person/execute_template/n3_template_internal_id> ;
-	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_person/creation_properties/step7> .
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step7> .
+
+<https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step7>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person ORCID check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/create_person/creation_properties/step7> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step8> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/orcid_check> .
 
 <https://vivoweb.org/procedure/create_person/creation_properties/step7>
-        a                        		dynapi:ConditionalStep ;
-        rdfs:label               		"creation of a person step 1"@en-US ;
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 7"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/create_person/execute_template/n3_template_orcid> ;
-	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_person/creation_properties/step8> .
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step8> .
+
+<https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step8>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person first name check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/create_person/creation_properties/step8> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step9> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/scopus_author_id_check> .
 
 <https://vivoweb.org/procedure/create_person/creation_properties/step8>
-        a                        		dynapi:ConditionalStep ;
-        rdfs:label               		"creation of a person step 1"@en-US ;
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 8"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/create_person/execute_template/n3_template_scopus_id> ;
-	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_person/creation_properties/step9> .
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step9> .
+
+<https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step9>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person first name check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/create_person/creation_properties/step9> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/researcher_id_check> .
 
 <https://vivoweb.org/procedure/create_person/creation_properties/step9>
-        a                        		dynapi:ConditionalStep ;
-        rdfs:label               		"creation of a person step 1"@en-US ;
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 9"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/create_person/execute_template/n3_template_researcher_id> .
 
 ###############################################
@@ -329,62 +384,118 @@
         dynapi:hasOperation 			<https://vivoweb.org/procedure/delete_person/fetching_properties/sparql_query> ;
         dynapi:hasNextStep  			<https://vivoweb.org/procedure/update_person/deleting_properties/step1> .
 
+<https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step1>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person first name attribute check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person/deleting_properties/step1> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step2> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/attribute_first_name_check> .
+
 <https://vivoweb.org/procedure/update_person/deleting_properties/step1>
-        a                        		dynapi:ConditionalStep ;
+        a                        		dynapi:OperationalStep ;
         rdfs:label               		"Deleting of a person first name"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template_first_name> ;
-        dynapi:hasNextStep  			<https://vivoweb.org/procedure/update_person/deleting_properties/step2> .
+        dynapi:hasNextStep  			<https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step2> .
+
+<https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step2>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person middle name attribute check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person/deleting_properties/step2> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step3> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/attribute_middle_name_check> .
 
 <https://vivoweb.org/procedure/update_person/deleting_properties/step2>
-        a                        		dynapi:ConditionalStep ;
+        a                        		dynapi:OperationalStep ;
         rdfs:label               		"Deleting of a person middle name"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template_middle_name> ;
-        dynapi:hasNextStep  			<https://vivoweb.org/procedure/update_person/deleting_properties/step3> .
+        dynapi:hasNextStep  			<https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step3> .
+
+<https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step3>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person last name attribute check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person/deleting_properties/step3> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step4> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/attribute_last_name_check> .
 
 <https://vivoweb.org/procedure/update_person/deleting_properties/step3>
-        a                        		dynapi:ConditionalStep ;
+        a                        		dynapi:OperationalStep ;
         rdfs:label               		"Deleting of a person last name"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template_last_name> ;
-        dynapi:hasNextStep  			<https://vivoweb.org/procedure/update_person/deleting_properties/step4> .
+        dynapi:hasNextStep  			<https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step4> .
+
+<https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step4>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person type attribute check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person/deleting_properties/step4> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step5> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/attribute_type_check> .
 
 <https://vivoweb.org/procedure/update_person/deleting_properties/step4>
-        a                        		dynapi:ConditionalStep ;
+        a                        		dynapi:OperationalStep ;
         rdfs:label               		"Deleting of a person type"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template_type> ;
-        dynapi:hasNextStep  			<https://vivoweb.org/procedure/update_person/deleting_properties/step5> .
+        dynapi:hasNextStep  			<https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step5> .
+
+<https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step5>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person internal ID attribute check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person/deleting_properties/step5> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step6> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/attribute_internal_id_check> .
 
 <https://vivoweb.org/procedure/update_person/deleting_properties/step5>
-        a                        		dynapi:ConditionalStep ;
+        a                        		dynapi:OperationalStep ;
         rdfs:label               		"Deleting of a person internal ID"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template_internal_id> ;
-        dynapi:hasNextStep  			<https://vivoweb.org/procedure/update_person/deleting_properties/step6> .
+        dynapi:hasNextStep  			<https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step6> .
+
+<https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step6>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person ORCID attribute check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person/deleting_properties/step6> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step7> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/attribute_orcid_check> .
 
 <https://vivoweb.org/procedure/update_person/deleting_properties/step6>
-        a                        		dynapi:ConditionalStep ;
+        a                        		dynapi:OperationalStep ;
         rdfs:label               		"Deleting of a person ORCID"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template_orcid> ;
-        dynapi:hasNextStep  			<https://vivoweb.org/procedure/update_person/deleting_properties/step7> .
+        dynapi:hasNextStep  			<https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step7> .
+
+<https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step7>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person SCOPUS author ID attribute check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person/deleting_properties/step7> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step8> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/attribute_scopus_author_id_check> .
 
 <https://vivoweb.org/procedure/update_person/deleting_properties/step7>
-        a                        		dynapi:ConditionalStep ;
+        a                        		dynapi:OperationalStep ;
         rdfs:label               		"Deleting of a person SCOPUS author ID"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template_scopus_id> ;
-        dynapi:hasNextStep  			<https://vivoweb.org/procedure/update_person/deleting_properties/step8> .
+        dynapi:hasNextStep  			<https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step8> .
+
+<https://vivoweb.org/procedure/update_person/deleting_properties/conditional_for_step8>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person type attribute check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person/deleting_properties/step8> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person/deleting_properties/step9> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/attribute_researcher_id_check> .
 
 <https://vivoweb.org/procedure/update_person/deleting_properties/step8>
-        a                        		dynapi:ConditionalStep ;
+        a                        		dynapi:OperationalStep ;
         rdfs:label               		"Deleting of a person researcher id"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template_researcher_id> ;
         dynapi:hasNextStep  			<https://vivoweb.org/procedure/update_person/deleting_properties/step9> .
 
 <https://vivoweb.org/procedure/update_person/deleting_properties/step9>
-        a                        		dynapi:ConditionalStep ;
+        a                        		dynapi:OperationalStep ;
         rdfs:label               		"Deleting of a person entity subject"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template_subject> ;
         dynapi:hasNextStep  			<https://vivoweb.org/procedure/update_person/addding_properties/step> .
 
 <https://vivoweb.org/procedure/update_person/addding_properties/step>
-        a                        		dynapi:ConditionalStep ;
+        a                        		dynapi:OperationalStep ;
         rdfs:label               		"Recreation of a person "@en-US ;
         dynapi:hasNextStep 			<https://vivoweb.org/procedure/create_person/creation_properties/step1> .
 
@@ -401,7 +512,7 @@
         a                        		dynapi:OperationalStep ;
         rdfs:label               	        "Fetching of a person data for deleting"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/delete_person/fetching_properties/sparql_query> ;
-        dynapi:hasNextStep  			<https://vivoweb.org/procedure/delete_person/deleting_properties/step1> .
+        dynapi:hasNextStep  			<https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step1> .
 
 <https://vivoweb.org/procedure/delete_person/fetching_properties/sparql_query>
         a                                       dynapi:SparqlSelectQuery ;
@@ -427,50 +538,106 @@
             }
         """ .
 
+<https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step1>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person first name attribute check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/delete_person/deleting_properties/step1> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step2> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/attribute_first_name_check> .
+
 <https://vivoweb.org/procedure/delete_person/deleting_properties/step1>
-        a                        		dynapi:ConditionalStep ;
+        a                        		dynapi:OperationalStep ;
         rdfs:label               		"Deleting of a person first name"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template_first_name> ;
-        dynapi:hasNextStep  			<https://vivoweb.org/procedure/delete_person/deleting_properties/step2> .
+        dynapi:hasNextStep  			<https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step2> .
+
+<https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step2>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person middle name attribute check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/delete_person/deleting_properties/step2> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step3> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/attribute_middle_name_check> .
 
 <https://vivoweb.org/procedure/delete_person/deleting_properties/step2>
-        a                        		dynapi:ConditionalStep ;
+        a                        		dynapi:OperationalStep ;
         rdfs:label               		"Deleting of a person middle name"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template_middle_name> ;
-        dynapi:hasNextStep  			<https://vivoweb.org/procedure/delete_person/deleting_properties/step3> .
+        dynapi:hasNextStep  			<https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step3> .
+
+<https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step3>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person last name attribute check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/delete_person/deleting_properties/step3> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step4> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/attribute_last_name_check> .
 
 <https://vivoweb.org/procedure/delete_person/deleting_properties/step3>
-        a                        		dynapi:ConditionalStep ;
+        a                        		dynapi:OperationalStep ;
         rdfs:label               		"Deleting of a person last name"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template_last_name> ;
-        dynapi:hasNextStep  			<https://vivoweb.org/procedure/delete_person/deleting_properties/step4> .
+        dynapi:hasNextStep  			<https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step4> .
+
+<https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step4>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person type attribute check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/delete_person/deleting_properties/step4> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step5> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/attribute_type_check> .
 
 <https://vivoweb.org/procedure/delete_person/deleting_properties/step4>
-        a                        		dynapi:ConditionalStep ;
+        a                        		dynapi:OperationalStep ;
         rdfs:label               		"Deleting of a person type"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template_type> ;
-        dynapi:hasNextStep  			<https://vivoweb.org/procedure/delete_person/deleting_properties/step5> .
+        dynapi:hasNextStep  			<https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step5> .
+
+<https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step5>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person internal ID attribute check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/delete_person/deleting_properties/step5> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step6> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/attribute_internal_id_check> .
 
 <https://vivoweb.org/procedure/delete_person/deleting_properties/step5>
-        a                        		dynapi:ConditionalStep ;
+        a                        		dynapi:OperationalStep ;
         rdfs:label               		"Deleting of a person internal id"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template_internal_id> ;
-        dynapi:hasNextStep  			<https://vivoweb.org/procedure/delete_person/deleting_properties/step6> .
+        dynapi:hasNextStep  			<https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step6> .
+
+<https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step6>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person ORCID attribute check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/delete_person/deleting_properties/step6> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step7> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/attribute_orcid_check> .
 
 <https://vivoweb.org/procedure/delete_person/deleting_properties/step6>
-        a                        		dynapi:ConditionalStep ;
+        a                        		dynapi:OperationalStep ;
         rdfs:label               		"Deleting of a person ORCID"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template_orcid> ;
-        dynapi:hasNextStep  			<https://vivoweb.org/procedure/delete_person/deleting_properties/step7> .
+        dynapi:hasNextStep  			<https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step7> .
+
+<https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step7>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person SCOPUS author ID attribute check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/delete_person/deleting_properties/step7> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step8> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/attribute_scopus_author_id_check> .
 
 <https://vivoweb.org/procedure/delete_person/deleting_properties/step7>
-        a                        		dynapi:ConditionalStep ;
+        a                        		dynapi:OperationalStep ;
         rdfs:label               		"Deleting of a person SCOPUS author ID"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template_scopus_id> ;
-        dynapi:hasNextStep  			<https://vivoweb.org/procedure/delete_person/deleting_properties/step8> .
+        dynapi:hasNextStep  			<https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step8> .
+
+<https://vivoweb.org/procedure/delete_person/deleting_properties/conditional_for_step8>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person researcher ID attribute check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/delete_person/deleting_properties/step8> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/delete_person/deleting_properties/step9> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/attribute_researcher_id_check> .
 
 <https://vivoweb.org/procedure/delete_person/deleting_properties/step8>
-        a                        		dynapi:ConditionalStep ;
+        a                        		dynapi:OperationalStep ;
         rdfs:label               		"Deleting of a person researcher ID"@en-US ;
         dynapi:hasOperation 			<https://vivoweb.org/procedure/delete_person/deleting_properties/n3_template_researcher_id> ;
         dynapi:hasNextStep  			<https://vivoweb.org/procedure/delete_person/deleting_properties/step9> .
@@ -617,3 +784,87 @@
         dynapi:name             "http://xmlns.com/foaf/0.1/Person" ;
         rdfs:label              "persons model"@en-US ;
         dynapi:hasType          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/model> .
+
+###############################################
+### PARAMETER CHECKS
+###############################################
+
+<https://vivoweb.org/condition/person/first_name_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if person first name is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/first_name> .
+
+<https://vivoweb.org/condition/person/attribute_first_name_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if person first name attribute is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_for_deleting.0.first_name> .
+
+<https://vivoweb.org/condition/person/middle_name_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if person middle name is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/middle_name> .
+
+<https://vivoweb.org/condition/person/attribute_middle_name_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if person middle name attribute is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_for_deleting.0.middle_name> .
+
+<https://vivoweb.org/condition/person/last_name_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if person last name is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/last_name> .
+
+<https://vivoweb.org/condition/person/attribute_last_name_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if person last name attribute is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_for_deleting.0.last_name> .
+
+<https://vivoweb.org/condition/person/type_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if person type is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/type> .
+
+<https://vivoweb.org/condition/person/attribute_type_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if person type attribute is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_for_deleting.0.type> .
+
+<https://vivoweb.org/condition/person/internal_id_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if person internal ID is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/internalID> .
+
+<https://vivoweb.org/condition/person/attribute_internal_id_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if person internal ID attribute is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_for_deleting.0.internalID> .
+
+<https://vivoweb.org/condition/person/orcid_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if person ORCID is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/ORCID> .
+
+<https://vivoweb.org/condition/person/attribute_orcid_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if person orcid attribute is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_for_deleting.0.ORCID> .
+
+<https://vivoweb.org/condition/person/scopus_author_id_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if person SCOPUS author id is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/SCOPUSAuthorID> .
+
+<https://vivoweb.org/condition/person/attribute_scopus_author_id_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if person SCOPUS author ID attribute is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_for_deleting.0.SCOPUSAuthorID> .
+
+<https://vivoweb.org/condition/person/researcher_id_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if person researcher ID is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/ResearcherID> .
+
+<https://vivoweb.org/condition/person/attribute_researcher_id_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if person researcher ID attribute is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/person_for_deleting.0.ResearcherID> .
