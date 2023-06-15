@@ -341,46 +341,73 @@
 <https://vivoweb.org/procedure/person/parameter/first_name>
         a                                   dynapi:Parameter ;
         dynapi:name                         "first_name" ;
+        dynapi:defaultValue                 "" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:isOptionalParam              "true"^^xsd:boolean ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
 
 <https://vivoweb.org/procedure/person/parameter/middle_name>
         a                                   dynapi:Parameter ;
         dynapi:name                         "middle_name" ;
+        dynapi:defaultValue                 "" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:isOptionalParam              "true"^^xsd:boolean ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
 
 <https://vivoweb.org/procedure/person/parameter/last_name>
         a                                   dynapi:Parameter ;
         dynapi:name                         "last_name" ;
+        dynapi:defaultValue                 "" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:isOptionalParam              "true"^^xsd:boolean ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
 
 <https://vivoweb.org/procedure/person/parameter/type>
         a                                   dynapi:Parameter ;
         dynapi:name                         "type" ;
+        dynapi:defaultValue                 "" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:isOptionalParam              "true"^^xsd:boolean ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
 
 <https://vivoweb.org/procedure/person/parameter/positions>
         a                                   dynapi:Parameter ;
         dynapi:name                         "positions" ;
+        dynapi:defaultValue                 "" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:isOptionalParam              "true"^^xsd:boolean ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/JsonContainerArray> .
 
 <https://vivoweb.org/procedure/person/parameter/internalID>
         a                                   dynapi:Parameter ;
         dynapi:name                         "internalID" ;
+        dynapi:defaultValue                 "" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:isOptionalParam              "true"^^xsd:boolean ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
 
 <https://vivoweb.org/procedure/person/parameter/ORCID>
         a                                   dynapi:Parameter ;
         dynapi:name                         "ORCID" ;
+        dynapi:defaultValue                 "" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:isOptionalParam              "true"^^xsd:boolean ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
 
 <https://vivoweb.org/procedure/person/parameter/SCOPUSAuthorID>
         a                                   dynapi:Parameter ;
         dynapi:name                         "SCOPUSAuthorID" ;
+        dynapi:defaultValue                 "" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:isOptionalParam              "true"^^xsd:boolean ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
 
 <https://vivoweb.org/procedure/person/parameter/ResearcherID>
         a                                   dynapi:Parameter ;
         dynapi:name                         "ResearcherID" ;
+        dynapi:defaultValue                 "" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:isOptionalParam              "true"^^xsd:boolean ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
 
 #########################
