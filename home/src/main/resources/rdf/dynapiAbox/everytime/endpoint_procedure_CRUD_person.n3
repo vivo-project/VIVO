@@ -229,7 +229,7 @@
         dynapi:requiresPlainParameter           <https://vivoweb.org/ontology/person/parameter/order> ;
         dynapi:sparqlQueryText
         """
-        SELECT ?uri ?label ?type
+        SELECT ?uri ?type
             WHERE
                 {
                       ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person>
@@ -259,7 +259,7 @@
         dynapi:providesParameter 	<https://vivoweb.org/ontology/person/parameter/count> ;
         dynapi:sparqlQueryText
         """
-        SELECT (count(distinct ?uri) as ?total)
+        SELECT (count(distinct ?uri) as ?count)
             WHERE
                 {
                     ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person>
@@ -368,7 +368,7 @@
         dynapi:defaultValue                 "" ;
         dynapi:isInternal                   "true"^^xsd:boolean ;
         dynapi:isOptionalParam              "true"^^xsd:boolean ;
-        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/model> .
 
 <https://vivoweb.org/procedure/person/parameter/positions>
         a                                   dynapi:Parameter ;
@@ -430,6 +430,8 @@
         a                       dynapi:parameter ;
         dynapi:name             "limit" ;
         dynapi:defaultValue     "20" ;
+        dynapi:isInternal       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam  "true"^^xsd:boolean ;
         dynapi:hasType 		<https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> ;
         rdfs:label              "limit"@en-US .
 
@@ -437,6 +439,8 @@
         a                       dynapi:parameter ;
         dynapi:name             "offset" ;
         dynapi:defaultValue     "0" ;
+        dynapi:isInternal       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam  "true"^^xsd:boolean ;
         dynapi:hasType          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> ;
         rdfs:label              "offset"@en-US .
 
@@ -444,6 +448,8 @@
         a                       dynapi:parameter ;
         dynapi:name             "sortBy" ;
         dynapi:defaultValue     "label" ;
+        dynapi:isInternal       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam  "true"^^xsd:boolean ;
         dynapi:hasType 		<https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> ;
         rdfs:label              "sortBy"@en-US .
 
@@ -451,6 +457,8 @@
         a                       dynapi:parameter ;
         dynapi:name             "order" ;
         dynapi:defaultValue     "ASC" ;
+        dynapi:isInternal       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam  "true"^^xsd:boolean ;
         dynapi:hasType 		<https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> ;
         rdfs:label               "order"@en-US .
 
