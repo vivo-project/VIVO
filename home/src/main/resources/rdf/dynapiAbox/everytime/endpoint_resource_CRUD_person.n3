@@ -10,4 +10,5 @@
         dynapi:minAPIVersion            "0.1.0" ;
         dynapi:onPost 			<https://vivoweb.org/procedure/create_person> ;
         dynapi:onGetAll 		<https://vivoweb.org/procedure/read_persons> ;
-        dynapi:onGet 			<https://vivoweb.org/procedure/read_person> .
+        dynapi:onGet 			<https://vivoweb.org/procedure/read_person> ;
+        dynapi:onDelete                 <https://vivoweb.org/procedure/delete_person> .
