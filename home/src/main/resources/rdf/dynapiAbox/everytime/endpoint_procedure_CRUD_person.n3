@@ -19,7 +19,7 @@
         dynapi:N3TextAdditions   		
         """
                 ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> ;
-                ?uri <http://www.w3.org/2000/01/rdf-schema#label> ?label .
+                <http://www.w3.org/2000/01/rdf-schema#label> ?label .
         """ .
 
 <https://vivoweb.org/procedure/create_person/execute_template/n3_template_subject_update>
@@ -31,7 +31,7 @@
         dynapi:N3TextAdditions   		
         """
                 ?person_uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> ;
-                ?person_uri <http://www.w3.org/2000/01/rdf-schema#label> ?label .
+                <http://www.w3.org/2000/01/rdf-schema#label> ?label .
         """ .
 
 <https://vivoweb.org/procedure/create_person/execute_template/n3_template_first_name>
