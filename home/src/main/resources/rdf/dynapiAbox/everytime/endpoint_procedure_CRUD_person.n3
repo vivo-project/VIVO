@@ -353,6 +353,7 @@
                  <http://www.w3.org/2006/vcard/ns#givenName> ?first_name ;
                  <http://vivoweb.org/ontology/core#middleName> ?middle_name ;
                  <http://www.w3.org/2006/vcard/ns#familyName> ?last_name ;
+                 <http://www.w3.org/2000/01/rdf-schema#label> ?label ;
                  <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type ;
                  <http://vivoweb.org/ontology/core#identifier> ?internalID ;
                  <http://vivoweb.org/ontology/core#orcidId> ?ORCID ;
@@ -362,8 +363,9 @@
          } WHERE {
                 ?person_uri rdf:type <http://xmlns.com/foaf/0.1/Person>
                 OPTIONAL { ?person_uri <http://www.w3.org/2006/vcard/ns#givenName> ?first_name }
-                OPTIONAL { ?uperson_uri <http://vivoweb.org/ontology/core#middleName> ?middle_name }
+                OPTIONAL { ?person_uri <http://vivoweb.org/ontology/core#middleName> ?middle_name }
                 OPTIONAL { ?person_uri <http://www.w3.org/2006/vcard/ns#familyName> ?last_name }
+                OPTIONAL { ?person_uri <http://www.w3.org/2000/01/rdf-schema#label> ?label }
                 OPTIONAL { ?person_uri <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type }
                 OPTIONAL { ?person_uri <http://vivoweb.org/ontology/core#identifier> ?internalID }
                 OPTIONAL { ?person_uri <http://vivoweb.org/ontology/core#orcidId> ?ORCID }
