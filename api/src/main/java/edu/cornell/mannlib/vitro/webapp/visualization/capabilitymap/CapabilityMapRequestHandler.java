@@ -31,12 +31,18 @@ import edu.cornell.mannlib.vitro.webapp.visualization.utilities.VisualizationCac
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 import org.apache.commons.logging.Log;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class CapabilityMapRequestHandler implements VisualizationRequestHandler {
+    
+    private static final String IPRET_FULL_RESULTS = "ipretFullResults";
+    private static final String IPRET_RESULTS = "ipretResults";
+    private static Set<String> callbackValues = new HashSet<String>(Arrays.asList(IPRET_FULL_RESULTS, IPRET_RESULTS));
+    
     @Override
     public AuthorizationRequest getRequiredPrivileges() {
         return null;
@@ -109,7 +115,7 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
             ObjectMapper mapper = new ObjectMapper();
 
             String callback = vitroRequest.getParameter("callback");
-            if (!StringUtils.isEmpty(callback)) {
+            if (!StringUtils.isEmpty(callback) && callbackValues.contains(callback)) {
                 return callback + "(" + mapper.writeValueAsString(response) + ");";
             }
             return mapper.writeValueAsString(response);
@@ -162,7 +168,7 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
 
             ObjectMapper mapper = new ObjectMapper();
             String callback = vitroRequest.getParameter("callback");
-            if (!StringUtils.isEmpty(callback)) {
+            if (!StringUtils.isEmpty(callback) && callbackValues.contains(callback)) {
                 return callback + "(" + mapper.writeValueAsString(response) + ");";
             }
             return mapper.writeValueAsString(response);
