@@ -94,7 +94,7 @@
         a                        		dynapi:N3Template ;
         rdfs:label               		"create person N3 Template"@en-US ;
         dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
-        dynapi:requiresParameter 		<https://vivoweb.org/procedure/delete_person/parameter/resource_id> ;
+        dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
         dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/label> ;
         dynapi:N3TextAdditions   		
         """
@@ -106,7 +106,7 @@
         a                        		dynapi:N3Template ;
         rdfs:label               		"create person first name N3 Template"@en-US ;
         dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
-        dynapi:requiresParameter 		<https://vivoweb.org/procedure/delete_person/parameter/resource_id>  ;
+        dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id>  ;
         dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/first_name> ;
         dynapi:N3TextAdditions   		"?resource_id <http://www.w3.org/2006/vcard/ns#givenName> ?first_name . " .
 
@@ -114,7 +114,7 @@
         a                        		dynapi:N3Template ;
         rdfs:label               		"create person middle name N3 Template"@en-US ;
         dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
-        dynapi:requiresParameter 		<https://vivoweb.org/procedure/delete_person/parameter/resource_id> ;
+        dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
         dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/middle_name> ;
         dynapi:N3TextAdditions   		"?resource_id <http://vivoweb.org/ontology/core#middleName> ?middle_name . " .
 
@@ -122,7 +122,7 @@
         a                        		dynapi:N3Template ;
         rdfs:label               		"create person last name N3 Template"@en-US ;
         dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
-        dynapi:requiresParameter 		<https://vivoweb.org/procedure/delete_person/parameter/resource_id> ;
+        dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
         dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/last_name> ;
         dynapi:N3TextAdditions   		"?resource_id <http://www.w3.org/2006/vcard/ns#familyName> ?last_name . " .
 
@@ -130,7 +130,7 @@
         a                        		dynapi:N3Template ;
         rdfs:label               		"create person type N3 Template"@en-US ;
         dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
-        dynapi:requiresParameter 		<https://vivoweb.org/procedure/delete_person/parameter/resource_id> ;
+        dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
         dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/type> ;
         dynapi:N3TextAdditions   		"?resource_id <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type . " .
 
@@ -138,7 +138,7 @@
         a                        		dynapi:N3Template ;
         rdfs:label               		"create person internal id N3 Template"@en-US ;
         dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
-        dynapi:requiresParameter 		<https://vivoweb.org/procedure/delete_person/parameter/resource_id> ;
+        dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
         dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/internalID> ;
         dynapi:N3TextAdditions   		"?resource_id <http://vivoweb.org/ontology/core#identifier> ?internalID . " .
 
@@ -146,7 +146,7 @@
         a                        		dynapi:N3Template ;
         rdfs:label               		"create person ORCID N3 Template"@en-US ;
         dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
-        dynapi:requiresParameter 		<https://vivoweb.org/procedure/delete_person/parameter/resource_id> ;
+        dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
         dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/ORCID> ;
         dynapi:N3TextAdditions   		"?resource_id <http://vivoweb.org/ontology/core#orcidId> ?ORCID . " .
 
@@ -154,7 +154,7 @@
         a                        		dynapi:N3Template ;
         rdfs:label               		"create person SCOPUS author ID N3 Template"@en-US ;
         dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
-        dynapi:requiresParameter 		<https://vivoweb.org/procedure/delete_person/parameter/resource_id> ;
+        dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
         dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/SCOPUSAuthorID> ;
         dynapi:N3TextAdditions   		"?resource_id <http://vivoweb.org/ontology/core#scopusId> ?SCOPUSAuthorID . " .
 
@@ -162,7 +162,7 @@
         a                        		dynapi:N3Template ;
         rdfs:label               		"create person researcher ID N3 Template"@en-US ;
         dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
-        dynapi:requiresParameter 		<https://vivoweb.org/procedure/delete_person/parameter/resource_id> ;
+        dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
         dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/ResearcherID> ;
         dynapi:N3TextAdditions   		"?resource_id <http://vivoweb.org/ontology/core#researcherId> ?ResearcherID . " .
 
@@ -442,7 +442,7 @@
          } 
          """ ;
          dynapi:providesParameter               <https://vivoweb.org/procedure/delete_person/parameter/person_graph> ;
-         dynapi:requiresParameter               <https://vivoweb.org/procedure/delete_person/parameter/resource_id> ;
+         dynapi:requiresParameter               <https://vivoweb.org/procedure/person/parameter/resource_id> ;
          dynapi:hasModel                        <https://vivoweb.org/ontology/vitro-dynamic-api/model/dynamic_api_abox_assertions> .
 
 <https://vivoweb.org/procedure/delete_person/remove_from_dynamic_api_model/step>
@@ -462,7 +462,7 @@
 <https://vivoweb.org/procedure/delete_person/unload_procedure_from_procedure_pool/operation>
         a                                       dynapi:ProcedurePoolAtomicOperation ;
         dynapi:poolOperationType                "unload" ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/delete_person/parameter/resource_id> .
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/resource_id> .
 
 ###############################################
 ### UPDATE
@@ -497,7 +497,7 @@
 <https://vivoweb.org/procedure/update_person/unload_procedure_from_procedure_pool/operation>
         a                                       dynapi:ProcedurePoolAtomicOperation ;
         dynapi:poolOperationType                "unload" ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/delete_person/parameter/resource_id> .
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/resource_id> .
 
 <https://vivoweb.org/procedure/update_person/creation_properties/step1>
         a                        		dynapi:OperationalStep ;
@@ -776,11 +776,6 @@
         a                                   dynapi:Model ;
         dynapi:name                         "person_graph" ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/model> .
-
-<https://vivoweb.org/procedure/delete_person/parameter/resource_id>
-        a                                   dynapi:Parameter ;
-        dynapi:name                         "resource_id" ;
-        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/uri> .
 
 ###############################################
 ### PARAMETER CHECKS
