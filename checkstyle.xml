@@ -8,7 +8,7 @@ Vitro CodeStyle Requirements
   1. 4-space indents for Java. NO TABS ALLOWED.
   2. One true brace style. Braces required on all blocks.
   3. Do not use wildcard imports (e.g. import java.util.*). Duplicated or unused imports also not allowed.
-  4. Maximum line length is 100 characters (except for long URLs, packages or imports)
+  4. Maximum line length is 120 characters (except for long URLs, packages or imports)
   5. No trailing spaces allowed (except in comments)
   6. Tokens should be surrounded by whitespace (see http://checkstyle.sourceforge.net/config_whitespace.html#WhitespaceAround)
   7. Each line of code can only include one statement. This also means each variable declaration must be on its own line
@@ -44,10 +44,10 @@ For more information on CheckStyle configurations below, see: http://checkstyle.
          with @SuppressWarnings. See also SuppressWarningsHolder below -->
     <module name="SuppressWarningsFilter" />
 
-    <!-- Maximum line length is 100 characters -->
+    <!-- Maximum line length is 120 characters -->
     <module name="LineLength">
         <property name="fileExtensions" value="java"/>
-        <property name="max" value="100"/>
+        <property name="max" value="120"/>
         <!-- Only exceptions for packages, imports, URLs, and JavaDoc {@link} tags -->
         <property name="ignorePattern" value="^package.*|^import.*|http://|https://|@link"/>
     </module>
