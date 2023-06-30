@@ -443,7 +443,7 @@
          """ ;
          dynapi:providesParameter               <https://vivoweb.org/procedure/delete_person/parameter/person_graph> ;
          dynapi:requiresParameter               <https://vivoweb.org/procedure/person/parameter/resource_id> ;
-         dynapi:hasModel                        <https://vivoweb.org/ontology/vitro-dynamic-api/model/dynamic_api_abox_assertions> .
+         dynapi:hasModel                        <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> .
 
 <https://vivoweb.org/procedure/delete_person/remove_from_dynamic_api_model/step>
         a                                       dynapi:OperationalStep ;
@@ -453,7 +453,7 @@
 <https://vivoweb.org/procedure/delete_person/remove_from_dynamic_api_model/operation>
         a                                       dynapi:ModelWriter ;
         dynapi:retractionModel                  <https://vivoweb.org/procedure/delete_person/parameter/person_graph> ;
-        dynapi:targetModel                      <https://vivoweb.org/ontology/vitro-dynamic-api/model/dynamic_api_abox_assertions> .
+        dynapi:targetModel                      <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> .
 
 <https://vivoweb.org/procedure/delete_person/unload_procedure_from_procedure_pool/step>
         a                                       dynapi:OperationalStep ;
@@ -487,7 +487,7 @@
 <https://vivoweb.org/procedure/update_person/remove_from_dynamic_api_model/operation>
         a                                       dynapi:ModelWriter ;
         dynapi:retractionModel                  <https://vivoweb.org/procedure/delete_person/parameter/person_graph> ;
-        dynapi:targetModel                      <https://vivoweb.org/ontology/vitro-dynamic-api/model/dynamic_api_abox_assertions> .
+        dynapi:targetModel                      <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> .
 
 <https://vivoweb.org/procedure/update_person/unload_procedure_from_procedure_pool/step>
         a                                       dynapi:OperationalStep ;
