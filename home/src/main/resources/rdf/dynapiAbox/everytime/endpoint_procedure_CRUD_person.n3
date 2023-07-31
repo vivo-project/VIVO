@@ -650,7 +650,7 @@
         dynapi:defaultValue                 "" ;
         dynapi:isInternal                   "true"^^xsd:boolean ;
         dynapi:isOptionalParam              "true"^^xsd:boolean ;
-        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/array-of-strings> .
 
 <https://vivoweb.org/procedure/person/parameter/middle_name>
         a                                   dynapi:Parameter ;
