@@ -293,66 +293,66 @@
         dynapi:hasCondition                     <https://vivoweb.org/condition/person/positions_check> .
 
 <https://vivoweb.org/procedure/create_person/creation_properties/step10>
-        a                                   dynapi:OperationalStep ;
-        dynapi:hasOperation                 <https://vivoweb.org/procedure/create_person/create_person_positions/loop> ;
-        rdfs:label                          "Create provided person positions"@en-US .
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/create_person/create_person_positions/loop> ;
+        rdfs:label                              "Create provided person positions"@en-US .
 
 ## Loop start
 
 <https://vivoweb.org/procedure/create_person/create_person_positions/loop>
-        a                                   dynapi:LoopOperation ;
+        a                                       dynapi:LoopOperation ;
         #get positions from array
-        dynapi:inputDescriptor              <https://vivoweb.org/procedure/create_person/create_person_positions/input_descriptor> ;
-        dynapi:conditionDescriptor          <https://vivoweb.org/procedure/create_person/create_person_positions/condition_descriptor> ;
+        dynapi:inputDescriptor                  <https://vivoweb.org/procedure/create_person/create_person_positions/input_descriptor> ;
+        dynapi:conditionDescriptor              <https://vivoweb.org/procedure/create_person/create_person_positions/condition_descriptor> ;
         
-        dynapi:outputDescriptor             <https://vivoweb.org/procedure/create_person/create_person_positions/output_descriptor> ;
-        dynapi:executableDescriptor         <https://vivoweb.org/procedure/create_person/create_person_positions/executable_descriptor> ;
+        dynapi:outputDescriptor                 <https://vivoweb.org/procedure/create_person/create_person_positions/output_descriptor> ;
+        dynapi:executableDescriptor             <https://vivoweb.org/procedure/create_person/create_person_positions/executable_descriptor> ;
         
-        dynapi:internalParameter            <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> ;
+        dynapi:internalParameter                <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> ;
         
-        dynapi:internalParameter            <https://vivoweb.org/procedure/create_person/parameter/container/query_graph_names> ;
-        dynapi:providesParameter            <https://vivoweb.org/procedure/create_person/parameter/container/query_graph_names> .
+        dynapi:internalParameter                <https://vivoweb.org/procedure/create_person/parameter/container/query_graph_names> ;
+        dynapi:providesParameter                <https://vivoweb.org/procedure/create_person/parameter/container/query_graph_names> .
 
 <https://vivoweb.org/procedure/create_person/create_person_positions/input_descriptor>
-        a                                   dynapi:ProcedureDescriptor ;
-        dynapi:providesParameter            <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> ;
-        dynapi:requiresParameter            <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> ;
-        dynapi:requiresParameter            <https://vivoweb.org/procedure/person/parameter/container/positions> ;
-        dynapi:call                         <https://vivoweb.org/procedure/get_position_from_container> .
+        a                                       dynapi:ProcedureDescriptor ;
+        dynapi:providesParameter                <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/container/positions> ;
+        dynapi:call                             <https://vivoweb.org/procedure/get_position_from_container> .
 
 <https://vivoweb.org/procedure/create_person/create_person_positions/condition_descriptor>
-        a                                   dynapi:ProcedureDescriptor ;
-        dynapi:providesParameter            <https://vivoweb.org/parameter/expected_int_result_1> ;
-        dynapi:requiresParameter            <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> ;
-        dynapi:requiresParameter            <https://vivoweb.org/procedure/person/parameter/container/positions> ;
-        dynapi:call                         <https://vivoweb.org/procedure/contains_position_item> .
+        a                                       dynapi:ProcedureDescriptor ;
+        dynapi:providesParameter                <https://vivoweb.org/parameter/expected_int_result_1> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/container/positions> ;
+        dynapi:call                             <https://vivoweb.org/procedure/contains_position_item> .
         
 <https://vivoweb.org/procedure/create_person/create_person_positions/output_descriptor>
-        a                                   dynapi:ProcedureDescriptor ;
-        dynapi:requiresParameter            <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> ;
-        dynapi:providesParameter            <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> ;
-        dynapi:call                         <https://vivoweb.org/procedure/increment_integer> . 
+        a                                       dynapi:ProcedureDescriptor ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> ;
+        dynapi:providesParameter                <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> ;
+        dynapi:call                             <https://vivoweb.org/procedure/increment_integer> . 
 
 <https://vivoweb.org/procedure/increment_integer>
-        a                                   dynapi:Procedure ;
-        dynapi:providesParameter            <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> ;
-        dynapi:hasFirstStep                 <https://vivoweb.org/procedure/increment_integer/step> .
+        a                                       dynapi:Procedure ;
+        dynapi:providesParameter                <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> ;
+        dynapi:hasFirstStep                     <https://vivoweb.org/procedure/increment_integer/step> .
         
 <https://vivoweb.org/procedure/increment_integer/step>
-        a                                   dynapi:OperationalStep ;
-        dynapi:hasOperation                 <https://vivoweb.org/procedure/increment_integer/sumOperation> .
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/increment_integer/sumOperation> .
         
 <https://vivoweb.org/procedure/increment_integer/sumOperation>
-	a                                   dynapi:SumOperation ;
-	dynapi:requiresParameter            <https://vivoweb.org/procedure/create_person/parameter/iteration_increment_param> ;
-	dynapi:requiresParameter            <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> ;
-	dynapi:providesParameter            <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> .
+	a                                       dynapi:SumOperation ;
+	dynapi:requiresParameter                <https://vivoweb.org/procedure/create_person/parameter/iteration_increment_param> ;
+	dynapi:requiresParameter                <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> ;
+	dynapi:providesParameter                <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> .
 
 <https://vivoweb.org/procedure/create_person/create_person_positions/executable_descriptor>
-        a                                   dynapi:ProcedureDescriptor ;
-        dynapi:requiresParameter            <https://vivoweb.org/procedure/create_person_position/parameter/current_step_uri> ;
-        dynapi:requiresParameter            <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> ;
-        dynapi:call                         <https://vivoweb.org/procedure/add_person_position> .  
+        a                                       dynapi:ProcedureDescriptor ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_person_position/parameter/current_step_uri> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> ;
+        dynapi:call                             <https://vivoweb.org/procedure/add_person_position> .  
 
 ## Loop end
 
@@ -360,65 +360,65 @@
 #Get position from a container 
 
 <https://vivoweb.org/procedure/get_position_from_container>
-        a                                   dynapi:Procedure ;
-        dynapi:hasFirstStep                 <https://vivoweb.org/procedure/get_position_from_container/step> ;
-        dynapi:providesParameter            <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> .
+        a                                       dynapi:Procedure ;
+        dynapi:hasFirstStep                     <https://vivoweb.org/procedure/get_position_from_container/step> ;
+        dynapi:providesParameter                <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> .
         
 <https://vivoweb.org/procedure/get_position_from_container/step> 
-        a                                   dynapi:OperationalStep ;
-        dynapi:hasOperation                 <https://vivoweb.org/procedure/get_position_from_container/operation> .
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/get_position_from_container/operation> .
         
 <https://vivoweb.org/procedure/get_position_from_container/operation>
- 	a                                   dynapi:ContainerQuery ;
- 	dynapi:providesParameter            <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> ;
- 	dynapi:targetContainer              <https://vivoweb.org/procedure/person/parameter/container/positions> ;
- 	dynapi:requiresParameter            <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> .
+ 	a                                       dynapi:ContainerQuery ;
+ 	dynapi:providesParameter                <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> ;
+ 	dynapi:targetContainer                  <https://vivoweb.org/procedure/person/parameter/container/positions> ;
+ 	dynapi:requiresParameter                <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> .
 
 ############################################################
 #Condition procedure
 
 <https://vivoweb.org/procedure/contains_position_item>
-        a                                   dynapi:Procedure ;
-        dynapi:providesParameter            <https://vivoweb.org/parameter/default_condition_0_int> ;
-        dynapi:hasFirstStep                 <https://vivoweb.org/procedure/contains_position_item/conditional_step> .
+        a                                       dynapi:Procedure ;
+        dynapi:providesParameter                <https://vivoweb.org/parameter/default_condition_0_int> ;
+        dynapi:hasFirstStep                     <https://vivoweb.org/procedure/contains_position_item/conditional_step> .
         
 <https://vivoweb.org/procedure/contains_position_item/conditional_step>
-        a                                   dynapi:ConditionalStep ;
-        dynapi:nextIfSatisfied              <https://vivoweb.org/procedure/contains_position_item/condition_satisfied_step> ;
-        dynapi:hasCondition                 <https://vivoweb.org/procedure/contains_position_item/condition_container_contains> .
+        a                                       dynapi:ConditionalStep ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/contains_position_item/condition_satisfied_step> ;
+        dynapi:hasCondition                     <https://vivoweb.org/procedure/contains_position_item/condition_container_contains> .
         
 <https://vivoweb.org/procedure/contains_position_item/condition_satisfied_step>
-        a                                   dynapi:OperationalStep ;
-        dynapi:hasOperation                 <https://vivoweb.org/procedure/contains_position_item/addOperation> .
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/contains_position_item/addOperation> .
         
 <https://vivoweb.org/procedure/contains_position_item/addOperation>
-	a                                   dynapi:SumOperation ;
-	dynapi:requiresParameter            <https://vivoweb.org/parameter/add_int_1_param> ;
-	dynapi:requiresParameter            <https://vivoweb.org/parameter/default_condition_0_int> ;
-	dynapi:providesParameter            <https://vivoweb.org/parameter/default_condition_0_int> .
+	a                                       dynapi:SumOperation ;
+	dynapi:requiresParameter                <https://vivoweb.org/parameter/add_int_1_param> ;
+	dynapi:requiresParameter                <https://vivoweb.org/parameter/default_condition_0_int> ;
+	dynapi:providesParameter                <https://vivoweb.org/parameter/default_condition_0_int> .
 
 <https://vivoweb.org/procedure/contains_position_item/condition_container_contains> 
-        a                                   dynapi:ConditionContainerContains ;
-        dynapi:targetContainer              <https://vivoweb.org/procedure/create_report/parameter/container/construct_queries> ;
-        dynapi:requiresParameter            <https://vivoweb.org/procedure/create_report/parameter/iteration_int_param> .
+        a                                       dynapi:ConditionContainerContains ;
+        dynapi:targetContainer                  <https://vivoweb.org/procedure/create_report/parameter/container/construct_queries> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_report/parameter/iteration_int_param> .
 
 ############################################################
 #Add person position construct query
 
 <https://vivoweb.org/procedure/add_person_position>
-        a                                   dynapi:Procedure ;
-        dynapi:hasFirstStep                 <https://vivoweb.org/procedure/get_construct_name/step> .
+        a                                       dynapi:Procedure ;
+        dynapi:hasFirstStep                     <https://vivoweb.org/procedure/get_construct_name/step> .
 
 <https://vivoweb.org/procedure/get_organisation_unit_name/step>
-        a                                   dynapi:OperationalStep ;
-        dynapi:hasNextStep                  <https://vivoweb.org/procedure/get_position_name/step> ;
-        dynapi:hasOperation                 <https://vivoweb.org/procedure/get_organisation_unit_name/operation> .
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      <https://vivoweb.org/procedure/get_position_name/step> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/get_organisation_unit_name/operation> .
 
 <https://vivoweb.org/procedure/get_organisation_unit_name/operation>
-        a                                   dynapi:ContainerQuery ;
-        dynapi:targetContainer              <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> ;
-        dynapi:requiresParameter            <https://vivoweb.org/procedure/create_report/parameter/name_key> ;
-        dynapi:providesParameter            <https://vivoweb.org/procedure/create_report/parameter/query_name> .
+        a                                       dynapi:ContainerQuery ;
+        dynapi:targetContainer                  <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_report/parameter/name_key> ;
+        dynapi:providesParameter                <https://vivoweb.org/procedure/create_report/parameter/query_name> .
 
 ###############################################
 ### READ (all)
@@ -768,44 +768,44 @@
 ######################
 
 <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param>
-        a                                   dynapi:Parameter ;
-        dynapi:name                         "iteration_param" ;
-        dynapi:defaultValue                 "0" ;
-        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> .
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "iteration_param" ;
+        dynapi:defaultValue                     "0" ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> .
 
 <https://vivoweb.org/procedure/create_person/parameter/iteration_increment_param>
-        a                                   dynapi:Parameter ;
-        dynapi:name                         "int_1" ;
-        dynapi:defaultValue                 "1" ;
-        dynapi:isInternal                   "true"^^xsd:boolean ;
-        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> .
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "int_1" ;
+        dynapi:defaultValue                     "1" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> .
 
 <https://vivoweb.org/parameter/default_condition_0_int>
-        a                                   dynapi:Parameter ;
-        dynapi:name                         "condition_result" ;
-        dynapi:defaultValue                 "0" ;
-        dynapi:isInternal                   "true"^^xsd:boolean ;
-        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> .
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "condition_result" ;
+        dynapi:defaultValue                     "0" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> .
         
 <https://vivoweb.org/parameter/expected_int_result_1>
-        a                                   dynapi:Parameter ;
-        dynapi:name                         "condition_result" ;
-        dynapi:defaultValue                 "1" ;
-        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> .
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "condition_result" ;
+        dynapi:defaultValue                     "1" ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> .
 
 <https://vivoweb.org/parameter/add_int_1_param>
-        a                                   dynapi:Parameter ;
-        dynapi:name                         "int_1" ;
-        dynapi:defaultValue                 "1" ;
-        dynapi:isInternal                   "true"^^xsd:boolean ;
-        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> .
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "int_1" ;
+        dynapi:defaultValue                     "1" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> .
 
 <https://vivoweb.org/procedure/create_person_position/parameter/current_step_uri>
-        a                                   dynapi:Parameter ;
-        dynapi:name                         "current_step_uri" ;
-        dynapi:defaultValue                 "https://vivoweb.org/procedure/create_person_position/step/,java_uuid_number" ;
-        dynapi:isInternal                   "true"^^xsd:boolean ;
-        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/generated-uri> .
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "current_step_uri" ;
+        dynapi:defaultValue                     "https://vivoweb.org/procedure/create_person_position/step/,java_uuid_number" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/generated-uri> .
 
 #####################
 ## Creation fields ##
@@ -896,14 +896,14 @@
         dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
 
 <https://vivoweb.org/procedure/person/parameter/container/positions>
-        a                                   dynapi:Parameter ;
-        dynapi:name                         "positions" ;
-        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/JsonContainerArray> .
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "positions" ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/JsonContainerArray> .
 
 <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item>
-        a                                   dynapi:Parameter ;
-        dynapi:name                         "item" ;
-        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/JsonContainer> .
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "item" ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/JsonContainer> .
 
 #########################
 ## Read request fields ##
