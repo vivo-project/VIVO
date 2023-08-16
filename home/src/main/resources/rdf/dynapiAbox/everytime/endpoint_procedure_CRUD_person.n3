@@ -283,13 +283,14 @@
 <https://vivoweb.org/procedure/create_person/creation_properties/step9>
         a                        		dynapi:OperationalStep ;
         rdfs:label               		"creation of a person step 9"@en-US ;
-        dynapi:hasOperation 			<https://vivoweb.org/procedure/create_person/execute_template/n3_template_researcher_id> .
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/create_person/execute_template/n3_template_researcher_id> ;
+        dynapi:hasNextStep			<https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step10> .
 
 <https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step10>
         a                                       dynapi:ConditionalStep ;
-        rdfs:label                              "conditional step for person first name check"@en-US ;
+        rdfs:label                              "conditional step for person positions check"@en-US ;
         dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/create_person/creation_properties/step10> ;
-        dynapi:hasCondition                     <https://vivoweb.org/condition/person/researcher_id_check> .
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/positions_check> .
 
 <https://vivoweb.org/procedure/create_person/creation_properties/step10>
         a                                   dynapi:OperationalStep ;
@@ -350,6 +351,7 @@
 <https://vivoweb.org/procedure/create_person/create_person_positions/executable_descriptor>
         a                                   dynapi:ProcedureDescriptor ;
         dynapi:requiresParameter            <https://vivoweb.org/procedure/create_person_position/parameter/current_step_uri> ;
+        dynapi:requiresParameter            <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> ;
         dynapi:call                         <https://vivoweb.org/procedure/add_person_position> .  
 
 ## Loop end
@@ -401,6 +403,22 @@
         dynapi:requiresParameter            <https://vivoweb.org/procedure/create_report/parameter/iteration_int_param> .
 
 ############################################################
+#Add person position construct query
+
+<https://vivoweb.org/procedure/add_person_position>
+        a                                   dynapi:Procedure ;
+        dynapi:hasFirstStep                 <https://vivoweb.org/procedure/get_construct_name/step> .
+
+<https://vivoweb.org/procedure/get_organisation_unit_name/step>
+        a                                   dynapi:OperationalStep ;
+        dynapi:hasNextStep                  <https://vivoweb.org/procedure/get_position_name/step> ;
+        dynapi:hasOperation                 <https://vivoweb.org/procedure/get_organisation_unit_name/operation> .
+
+<https://vivoweb.org/procedure/get_organisation_unit_name/operation>
+        a                                   dynapi:ContainerQuery ;
+        dynapi:targetContainer              <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> ;
+        dynapi:requiresParameter            <https://vivoweb.org/procedure/create_report/parameter/name_key> ;
+        dynapi:providesParameter            <https://vivoweb.org/procedure/create_report/parameter/query_name> .
 
 ###############################################
 ### READ (all)
@@ -781,6 +799,13 @@
         dynapi:defaultValue                 "1" ;
         dynapi:isInternal                   "true"^^xsd:boolean ;
         dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> .
+
+<https://vivoweb.org/procedure/create_person_position/parameter/current_step_uri>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "current_step_uri" ;
+        dynapi:defaultValue                 "https://vivoweb.org/procedure/create_person_position/step/,java_uuid_number" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/generated-uri> .
 
 #####################
 ## Creation fields ##
