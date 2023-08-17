@@ -399,8 +399,8 @@
 
 <https://vivoweb.org/procedure/contains_position_item/condition_container_contains> 
         a                                       dynapi:ConditionContainerContains ;
-        dynapi:targetContainer                  <https://vivoweb.org/procedure/create_report/parameter/container/construct_queries> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_report/parameter/iteration_int_param> .
+        dynapi:targetContainer                  <https://vivoweb.org/procedure/person/parameter/container/positions> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> .
 
 ############################################################
 #Add person position construct query
@@ -408,6 +408,17 @@
 <https://vivoweb.org/procedure/add_person_position>
         a                                       dynapi:Procedure ;
         dynapi:hasFirstStep                     <https://vivoweb.org/procedure/get_construct_name/step> .
+
+<https://vivoweb.org/procedure/get_organisation_unit_uri/step>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      <https://vivoweb.org/procedure/get_organisation_unit_name/step> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/get_organisation_unit_uri/operation> .
+
+<https://vivoweb.org/procedure/get_organisation_unit_uri/operation>
+        a                                       dynapi:ContainerQuery ;
+        dynapi:targetContainer                  <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_person_position/parameter/organizationUnitURI_key> ;
+        dynapi:providesParameter                <https://vivoweb.org/procedure/position/parameter/organizationUnitURI> .
 
 <https://vivoweb.org/procedure/get_organisation_unit_name/step>
         a                                       dynapi:OperationalStep ;
@@ -417,8 +428,54 @@
 <https://vivoweb.org/procedure/get_organisation_unit_name/operation>
         a                                       dynapi:ContainerQuery ;
         dynapi:targetContainer                  <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_report/parameter/name_key> ;
-        dynapi:providesParameter                <https://vivoweb.org/procedure/create_report/parameter/query_name> .
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_person_position/parameter/organizationUnitName_key> ;
+        dynapi:providesParameter                <https://vivoweb.org/procedure/position/parameter/organizationUnitName> .
+
+<https://vivoweb.org/procedure/get_position_name/step>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      <https://vivoweb.org/procedure/get_position_type/step> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/get_position_name/operation> .
+
+<https://vivoweb.org/procedure/get_position_name/operation>
+        a                                       dynapi:ContainerQuery ;
+        dynapi:targetContainer                  <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_person_position/parameter/positionName_key> ;
+        dynapi:providesParameter                <https://vivoweb.org/procedure/position/parameter/positionName> .
+
+<https://vivoweb.org/procedure/get_position_type/step>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      <https://vivoweb.org/procedure/get_start_date/step> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/get_position_type/operation> .
+
+<https://vivoweb.org/procedure/get_position_type/operation>
+        a                                       dynapi:ContainerQuery ;
+        dynapi:targetContainer                  <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_person_position/parameter/positionType_key> ;
+        dynapi:providesParameter                <https://vivoweb.org/procedure/position/parameter/positionType> .
+
+<https://vivoweb.org/procedure/get_start_date/step>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      <https://vivoweb.org/procedure/get_end_date/step> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/get_start_date/operation> .
+
+<https://vivoweb.org/procedure/get_start_date/operation>
+        a                                       dynapi:ContainerQuery ;
+        dynapi:targetContainer                  <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_person_position/parameter/startDate_key> ;
+        dynapi:providesParameter                <https://vivoweb.org/procedure/position/parameter/startDate> .
+
+<https://vivoweb.org/procedure/get_end_date/step>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/get_end_date/operation> .
+
+<https://vivoweb.org/procedure/get_end_date/operation>
+        a                                       dynapi:ContainerQuery ;
+        dynapi:targetContainer                  <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_person_position/parameter/endDate_key> ;
+        dynapi:providesParameter                <https://vivoweb.org/procedure/position/parameter/endDate> .
+
+# TODO: ADD N3 TEMPLATE FOR POSITION CREATION AND LINKING POSITION TO PERSON
+# TODO: ADD PARAMETER CHECKS FOR POSITION ENTITY
 
 ###############################################
 ### READ (all)
@@ -965,6 +1022,104 @@
         a                                       dynapi:Model ;
         dynapi:name                             "person_graph" ;
         dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/model> .
+
+###############################################
+### POSITION FIELDS
+###############################################
+
+# Internal
+
+<https://vivoweb.org/procedure/create_person_position/parameter/organizationUnitURI_key>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "organizationUnitURI_key" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:defaultValue                 "organizationUnitURI" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> .
+
+<https://vivoweb.org/procedure/create_person_position/parameter/organizationUnitName_key>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "organizationUnitName_key" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:defaultValue                 "organizationUnitName" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> .
+
+<https://vivoweb.org/procedure/create_person_position/parameter/positionName_key>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "positionName_key" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:defaultValue                 "positionName" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> .
+
+<https://vivoweb.org/procedure/create_person_position/parameter/positionType_key>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "positionType_key" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:defaultValue                 "positionType" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> .
+
+<https://vivoweb.org/procedure/create_person_position/parameter/startDate_key>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "startDate_key" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:defaultValue                 "startDate" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> .
+
+<https://vivoweb.org/procedure/create_person_position/parameter/endDate_key>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "endDate_key" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:defaultValue                 "endDate" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> .
+
+# Provided
+
+<https://vivoweb.org/procedure/position/parameter/organizationUnitURI>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "organizationUnitURI" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/uri> .
+
+<https://vivoweb.org/procedure/position/parameter/organizationUnitName>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "organizationUnitName" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/position/parameter/positionName>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "positionName" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/position/parameter/positionType>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "positionType" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/position/parameter/startDate>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "startDate" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/position/parameter/endDate>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "endDate" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
 
 ###############################################
 ### PARAMETER CHECKS
