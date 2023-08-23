@@ -63,7 +63,7 @@ RESET_CORE=false
 
 1. In VIVO (with Vitro cloned alongside it), run:
 ```
-docker-compose up
+docker-compose up --build
 ```
 
 ### Docker Image
@@ -87,9 +87,9 @@ docker logs --follow /vivo
 ```
 docker ps -a
 ```
-#### List containers
+#### List images
 ```
-docker ps -a
+docker images -a
 ```
 #### Stop/Start VIVO/SOLR
 ```
