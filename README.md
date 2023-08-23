@@ -1,3 +1,5 @@
+
+
 # VIVO: Connect, Share, Discover
 
 [![Build](https://github.com/vivo-project/VIVO/workflows/Build/badge.svg)](https://github.com/vivo-project/VIVO/actions?query=workflow%3ABuild) [![Deploy](https://github.com/vivo-project/VIVO/workflows/Deploy/badge.svg)](https://github.com/vivo-project/VIVO/actions?query=workflow%3ADeploy) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2639714.svg)](https://doi.org/10.5281/zenodo.2639713)
@@ -23,9 +25,24 @@ https://wiki.lyrasis.org/display/VIVODOC/All+Documentation
 
 When you select the wiki pages for technical documentation for the release you would like to install at https://wiki.lyrasis.org/display/VIVODOC/All+Documentation, please open the Installing VIVO section and follow the instructions. 
 
-### Docker
+## Docker run
 
 VIVO docker container is available at [vivoweb/vivo](https://hub.docker.com/repository/docker/vivoweb/vivo) with accompanying [vivoweb/vivo-solr](https://hub.docker.com/repository/docker/vivoweb/vivo-solr). These can be used independently or with docker-compose.
+
+###  VIVO Build
+Before building VIVO, you will also need to clone (and switch to the same branch, if other than main) of [Vitro](https://github.com/vivo-project/Vitro). The Vitro project must be cloned to a sibling directory next to VIVO so that it can be found during the build. 
+```
+cd $WORKSPACE
+git clone https://github.com/vivo-project/VIVO.git
+git clone https://github.com/vivo-project/Vitro.git
+cd $WORKSPACE/VIVO
+#    edit home/src/main/resources/config/example.runtime.properties
+#    in line 93
+#    replace http://localhost:8983/solr/vivocore 
+#    by http://solr:8983/solr/vivocore 
+vi home/src/main/resources/config/example.runtime.properties 
+mvn clean package -s installer/example-settings.xml
+```
 
 ### Docker Compose
 
@@ -42,13 +59,10 @@ RESET_CORE=false
 - `RESET_HOME`: Convenience to reset VIVO home when starting container. **Caution**, will delete local configuration, content, and configuration model.
 - `RESET_CORE`: Convenience to reset VIVO Solr core when starting container. **Caution**, will require complete reindex.
 
-Before building VIVO, you will also need to clone (and switch to the same branch, if other than main) of [Vitro](https://github.com/vivo-project/Vitro). The Vitro project must be cloned to a sibling directory next to VIVO so that it can be found during the build. 
-
-Build and start VIVO.
+#### Start VIVO.
 
 1. In VIVO (with Vitro cloned alongside it), run:
 ```
-mvn clean package -s installer/example-settings.xml
 docker-compose up
 ```
 
@@ -57,8 +71,16 @@ docker-compose up
 To build and run local Docker image.
 
 ```
+# Create a docker connection network
+docker network create vivo-net
+# Start solr docker
+docker run --net vivo-net --name solr -p 8983:8983 -d vivoweb/vivo-solr:latest
+# Start build docker for VIVO
 docker build -t vivoweb/vivo:development .
-docker run -p 8080:8080 vivoweb/vivo:development
+# Start VIVO docker
+docker run --net vivo-net --name vivo -p 8080:8080 -d vivoweb/vivo:development
+# Logging VIVO
+docker logs --follow /vivo
 ```
 
 ## Contact us

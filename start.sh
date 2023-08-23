@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+# set -e
 
 # allow easier debugging with `docker run -e VERBOSE=yes`
 if [[ "$VERBOSE" = "yes" ]]; then
@@ -57,4 +57,23 @@ if [ -f /usr/local/vivo/home/config/example.applicationSetup.n3 ]; then
   fi
 fi
 
+echo "Waiting for solr"
+# Run a few SOLR startup wait tests before starting tomcat
+SOLR_STATUS_URL=$(grep '/solr/' /usr/local/vivo/home/config/runtime.properties |\
+ grep -v '#' | cut -f 2 -d '='  | tr -d ' ' | \
+ sed 's,vivocore,admin/cores?action=STATUS,g')
+x=1
+while [ $x -le 10 ] ; do
+	RESULT=$(curl -s -o /dev/null -I -w '%{http_code}' $SOLR_STATUS_URL)
+	if [ "$RESULT" -eq '200' ]; then
+		echo 'solr run'
+		break
+	else
+		echo 'waiting for solr'
+		sleep 2
+		x=$(( $x + 1 ))
+	fi
+done
+echo "Starting VIVO"
+sleep 5
 catalina.sh run
