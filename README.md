@@ -73,14 +73,35 @@ To build and run local Docker image.
 ```
 # Create a docker connection network
 docker network create vivo-net
-# Start solr docker
+# Run solr docker
 docker run --net vivo-net --name solr -p 8983:8983 -d vivoweb/vivo-solr:latest
 # Start build docker for VIVO
 docker build -t vivoweb/vivo:development .
-# Start VIVO docker
+# Run VIVO docker
 docker run --net vivo-net --name vivo -p 8080:8080 -d vivoweb/vivo:development
 # Logging VIVO
 docker logs --follow /vivo
+```
+### Useful docker commands
+#### List containers
+```
+docker ps -a
+```
+#### List containers
+```
+docker ps -a
+```
+#### Stop/Start VIVO/SOLR
+```
+docker stop /vivo
+docker stop /solr
+docker start /vivo
+docker start /solr
+```
+#### Removing the containers
+```
+docker rm /vivo
+docker rm /solr
 ```
 
 ## Contact us
