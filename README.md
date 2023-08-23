@@ -63,7 +63,8 @@ RESET_CORE=false
 
 1. In VIVO (with Vitro cloned alongside it), run:
 ```
-docker-compose up --build
+docker-compose build
+docker-compose up
 ```
 
 ### Docker Image
