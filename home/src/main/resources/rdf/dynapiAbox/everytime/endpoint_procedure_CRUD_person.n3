@@ -567,7 +567,7 @@
         dynapi:requiresPlainParameter           <https://vivoweb.org/ontology/person/parameter/order> ;
         dynapi:sparqlQueryText
         """
-        SELECT ?uri ?label ?first_name ?middle_name ?last_name ?type ?internalID ?ORCID ?SCOPUSAuthorID ?ResearcherID
+        SELECT ?uri ?label ?first_name ?middle_name ?last_name ?type ?internalID ?ORCID ?SCOPUSAuthorID ?ResearcherID ? position
             WHERE
                 {
                       ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person>
@@ -580,6 +580,7 @@
                       OPTIONAL { ?uri <http://vivoweb.org/ontology/core#orcidId> ?ORCID }
                       OPTIONAL { ?uri <http://vivoweb.org/ontology/core#scopusId> ?SCOPUSAuthorID }
                       OPTIONAL { ?uri <http://vivoweb.org/ontology/core#researcherId> ?ResearcherID }
+                      OPTIONAL { ?uri <http://vivoweb.org/ontology/core#Position> ?position }
                 }
             ORDER BY ?order(??sortBy)
             LIMIT ?limit OFFSET ?offset
@@ -628,7 +629,7 @@
         dynapi:providesParameter 	        <https://vivoweb.org/ontology/person/parameter/persons> ;
         dynapi:sparqlQueryText
         """
-        SELECT ?uri ?label ?first_name ?middle_name ?last_name ?type ?internalID ?ORCID ?SCOPUSAuthorID ?ResearcherID
+        SELECT ?uri ?label ?first_name ?middle_name ?last_name ?type ?internalID ?ORCID ?SCOPUSAuthorID ?ResearcherID ?position
             WHERE
                 {
                     ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person>
@@ -641,6 +642,7 @@
                     OPTIONAL { ?uri <http://vivoweb.org/ontology/core#orcidId> ?ORCID }
                     OPTIONAL { ?uri <http://vivoweb.org/ontology/core#scopusId> ?SCOPUSAuthorID }
                     OPTIONAL { ?uri <http://vivoweb.org/ontology/core#researcherId> ?ResearcherID }
+                    OPTIONAL { ?uri <http://vivoweb.org/ontology/core#Position> ?position }
                     FILTER (?uri = ?resource_id)
                 }
                 LIMIT 1
@@ -973,10 +975,10 @@
         dynapi:isOptionalParam                  "true"^^xsd:boolean ;
         dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/uri> .
 
-<https://vivoweb.org/procedure/person/parameter/positions>
+<https://vivoweb.org/procedure/person/parameter/container/positions>
         a                                       dynapi:Parameter ;
         dynapi:name                             "positions" ;
-        dynapi:defaultValue                     "" ;
+        dynapi:defaultValue                     "[]" ;
         dynapi:isInternal                       "true"^^xsd:boolean ;
         dynapi:isOptionalParam                  "true"^^xsd:boolean ;
         dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/JsonContainerArray> .
@@ -1012,11 +1014,6 @@
         dynapi:isInternal                       "true"^^xsd:boolean ;
         dynapi:isOptionalParam                  "true"^^xsd:boolean ;
         dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
-
-<https://vivoweb.org/procedure/person/parameter/container/positions>
-        a                                       dynapi:Parameter ;
-        dynapi:name                             "positions" ;
-        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/JsonContainerArray> .
 
 <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item>
         a                                       dynapi:Parameter ;
@@ -1231,7 +1228,7 @@
 <https://vivoweb.org/condition/person/positions_check>
         a                                       dynapi:ConditionIsNotEmpty ;
         rdfs:label                              "condition if person positions are defined"@en-US ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/positions> .
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/container/positions> .
 
 # Person position container keys
 
