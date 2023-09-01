@@ -301,7 +301,7 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
                 ObjectPropertyStatementAccessObject aops = new ObjectPropertyStatementAccessObject(vreq.getJenaOntModel(), profileUri, SOME_PREDICATE, SOME_URI);
                 if (!PolicyHelper.isAuthorizedForActions(vreq, 
                         AuthorizationRequest.or(
-                                new SimpleAuthorizationRequest(aops, AccessOperation.ADD), 
+                                new SimpleAuthorizationRequest(adps, AccessOperation.ADD), 
                                 new SimpleAuthorizationRequest(aops, AccessOperation.ADD)))) {
                     return new TemplateResponseValues("unauthorizedForProfile.ftl");
                 }
