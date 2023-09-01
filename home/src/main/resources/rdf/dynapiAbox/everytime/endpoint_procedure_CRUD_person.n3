@@ -289,21 +289,17 @@
 <https://vivoweb.org/procedure/create_person/creation_properties/conditional_for_step10>
         a                                       dynapi:ConditionalStep ;
         rdfs:label                              "conditional step for person positions check"@en-US ;
-        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/assign_generated_uri/step> ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/create_person/creation_properties/step10> ;
         dynapi:hasCondition                     <https://vivoweb.org/condition/person/positions_check> .
 
-<https://vivoweb.org/procedure/assign_generated_uri/step>
-        a                                       dynapi:OperationalStep ;
-        dynapi:hasOperation                     <https://vivoweb.org/procedure/assign_generated_uri/operation> ;
-        dynapi:hasNextStep                     <https://vivoweb.org/procedure/create_person/creation_properties/step10> .
-
-<https://vivoweb.org/procedure/assign_generated_uri/operation>
-        a                                       dynapi:AssignOperation ;
-        dynapi:assignableParameter              <https://vivoweb.org/procedure/person/parameter/uri> ;
-        dynapi:targetParameter                  <https://vivoweb.org/procedure/person/parameter/current_uri_persisted> .
+<https://vivoweb.org/procedure/assign_generated_uri/substitution>
+        a                                       dynapi:ParameterSubstitution ;
+        dynapi:substitutionSource               <https://vivoweb.org/procedure/person/parameter/uri> ;
+        dynapi:substitutionTarget               <https://vivoweb.org/procedure/person/parameter/current_uri_persisted> .
 
 <https://vivoweb.org/procedure/create_person/creation_properties/step10>
         a                                       dynapi:OperationalStep ;
+        dynapi:hasParameterSubstitution         <https://vivoweb.org/procedure/assign_generated_uri/substitution> ;
         dynapi:hasOperation                     <https://vivoweb.org/procedure/create_person/create_person_positions/loop> ;
         rdfs:label                              "Create provided person positions"@en-US .
 
@@ -972,10 +968,9 @@
 #####################
 
 <https://vivoweb.org/procedure/person/parameter/current_uri_persisted>
-        a                                   dynapi:Parameter ;
-        dynapi:name                         "current_person_uri" ;
-        dynapi:isInternal                   "true"^^xsd:boolean ;
-        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/generated-uri> .
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "current_uri_persisted" ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/uri> .
 
 <https://vivoweb.org/procedure/person/parameter/uri>
         a                                       dynapi:Parameter ;
