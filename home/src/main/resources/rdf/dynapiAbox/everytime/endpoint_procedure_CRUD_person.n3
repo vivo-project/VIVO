@@ -92,7 +92,7 @@
 
 <https://vivoweb.org/procedure/update_person/execute_template/n3_template_subject>
         a                        		dynapi:N3Template ;
-        rdfs:label               		"create person N3 Template"@en-US ;
+        rdfs:label               		"update person N3 Template"@en-US ;
         dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
         dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/label> ;
@@ -104,7 +104,7 @@
 
 <https://vivoweb.org/procedure/update_person/execute_template/n3_template_first_name>
         a                        		dynapi:N3Template ;
-        rdfs:label               		"create person first name N3 Template"@en-US ;
+        rdfs:label               		"update person first name N3 Template"@en-US ;
         dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id>  ;
         dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/first_name> ;
@@ -112,7 +112,7 @@
 
 <https://vivoweb.org/procedure/update_person/execute_template/n3_template_middle_name>
         a                        		dynapi:N3Template ;
-        rdfs:label               		"create person middle name N3 Template"@en-US ;
+        rdfs:label               		"update person middle name N3 Template"@en-US ;
         dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
         dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/middle_name> ;
@@ -120,7 +120,7 @@
 
 <https://vivoweb.org/procedure/update_person/execute_template/n3_template_last_name>
         a                        		dynapi:N3Template ;
-        rdfs:label               		"create person last name N3 Template"@en-US ;
+        rdfs:label               		"update person last name N3 Template"@en-US ;
         dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
         dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/last_name> ;
@@ -128,7 +128,7 @@
 
 <https://vivoweb.org/procedure/update_person/execute_template/n3_template_type>
         a                        		dynapi:N3Template ;
-        rdfs:label               		"create person type N3 Template"@en-US ;
+        rdfs:label               		"update person type N3 Template"@en-US ;
         dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
         dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/type> ;
@@ -136,7 +136,7 @@
 
 <https://vivoweb.org/procedure/update_person/execute_template/n3_template_internal_id>
         a                        		dynapi:N3Template ;
-        rdfs:label               		"create person internal id N3 Template"@en-US ;
+        rdfs:label               		"update person internal id N3 Template"@en-US ;
         dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
         dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/internalID> ;
@@ -144,7 +144,7 @@
 
 <https://vivoweb.org/procedure/update_person/execute_template/n3_template_orcid>
         a                        		dynapi:N3Template ;
-        rdfs:label               		"create person ORCID N3 Template"@en-US ;
+        rdfs:label               		"update person ORCID N3 Template"@en-US ;
         dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
         dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/ORCID> ;
@@ -152,7 +152,7 @@
 
 <https://vivoweb.org/procedure/update_person/execute_template/n3_template_scopus_id>
         a                        		dynapi:N3Template ;
-        rdfs:label               		"create person SCOPUS author ID N3 Template"@en-US ;
+        rdfs:label               		"update person SCOPUS author ID N3 Template"@en-US ;
         dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
         dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/SCOPUSAuthorID> ;
@@ -160,7 +160,7 @@
 
 <https://vivoweb.org/procedure/update_person/execute_template/n3_template_researcher_id>
         a                        		dynapi:N3Template ;
-        rdfs:label               		"create person researcher ID N3 Template"@en-US ;
+        rdfs:label               		"update person researcher ID N3 Template"@en-US ;
         dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
         dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/ResearcherID> ;
@@ -539,6 +539,7 @@
         
         ?current_step_uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://vivoweb.org/ontology/core#Position> ;
                 <http://vivoweb.org/ontology/core#Position> ?positionType ;
+                <http://xmlns.com/foaf/0.1/Organization> ?organizationUnitURI ;
                 <http://vivoweb.org/ontology/core#start> ?startDate ;
                 <http://vivoweb.org/ontology/core#end> ?endDate .
         
@@ -604,11 +605,11 @@
                 OPTIONAL { ?uri <http://vivoweb.org/ontology/core#researcherId> ?ResearcherID }
                 OPTIONAL {
                         ?uri <http://vivoweb.org/ontology/core#Position> ?positionURI .
-                        ?positionURI <http://vivoweb.org/ontology/core#organizationUnit> ?organizationUnitURI .
+                        ?positionURI <http://xmlns.com/foaf/0.1/Organization> ?organizationUnitURI .
                         ?positionURI <http://vivoweb.org/ontology/core#positionInOrganization> ?positionName .
-                        ?positionURI <http://vivoweb.org/ontology/core#positionType> ?positionType .
-                        ?positionURI <http://vivoweb.org/ontology/core#startDate> ?startDate .
-                        ?positionURI <http://vivoweb.org/ontology/core#endDate> ?endDate .
+                        ?positionURI <http://vivoweb.org/ontology/core#Position> ?positionType .
+                        ?positionURI <http://vivoweb.org/ontology/core#start> ?startDate .
+                        ?positionURI <http://vivoweb.org/ontology/core#end> ?endDate .
                 }
         }
         ORDER BY ?label
@@ -653,7 +654,7 @@
 
 <https://vivoweb.org/procedure/read_person/fetching_properties/sparql_query>
         a                                       dynapi:SparqlSelectQuery ;
-        rdfs:label                              "read persons sparql query 1"@en-US ;
+        rdfs:label                              "read person sparql query 1"@en-US ;
         dynapi:hasModel 		        <https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> ;
         dynapi:requiresParameter 	        <https://vivoweb.org/procedure/person/parameter/resource_id> ;
         dynapi:providesParameter 	        <https://vivoweb.org/ontology/person/parameter/persons> ;
@@ -672,11 +673,11 @@
                 OPTIONAL { ?uri <http://vivoweb.org/ontology/core#researcherId> ?ResearcherID }
                 OPTIONAL {
                         ?uri <http://vivoweb.org/ontology/core#Position> ?positionURI .
-                        ?positionURI <http://vivoweb.org/ontology/core#organizationUnit> ?organizationUnitURI .
+                        ?positionURI <http://xmlns.com/foaf/0.1/Organization> ?organizationUnitURI .
                         ?positionURI <http://vivoweb.org/ontology/core#positionInOrganization> ?positionName .
-                        ?positionURI <http://vivoweb.org/ontology/core#positionType> ?positionType .
-                        ?positionURI <http://vivoweb.org/ontology/core#startDate> ?startDate .
-                        ?positionURI <http://vivoweb.org/ontology/core#endDate> ?endDate .
+                        ?positionURI <http://vivoweb.org/ontology/core#Position> ?positionType .
+                        ?positionURI <http://vivoweb.org/ontology/core#start> ?startDate .
+                        ?positionURI <http://vivoweb.org/ontology/core#end> ?endDate .
                 }
                 FILTER (?uri = ?resource_id)
         }
@@ -762,7 +763,7 @@
 <https://vivoweb.org/procedure/update_person>
         a                                       dynapi:Procedure ;
         rdfs:label                              "Updating a person"@en-US ;
-        dynapi:publicAccess                     "true"^^xsd:boolean ;
+        dynapi:accessWhitelist                  <https://vivoweb.org/procedure/person/access/admin> ;
         dynapi:hasFirstStep                     <https://vivoweb.org/procedure/update_person/get_person_from_dynamic_api_graph/step> .
 
 <https://vivoweb.org/procedure/update_person/get_person_from_dynamic_api_graph/step>
