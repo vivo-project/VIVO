@@ -13,7 +13,7 @@
 <https://vivoweb.org/procedure/create_organization_unit/execute_template/n3_template_subject>
         a                        		dynapi:N3Template ;
         rdfs:label               		"create OU N3 Template"@en-US ;
-        dynapi:hasModel 			    <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/organization_unit/parameter/uri> ;
         dynapi:N3TextAdditions   		
         """
@@ -23,43 +23,42 @@
 <https://vivoweb.org/procedure/create_organization_unit/execute_template/n3_template_type>
         a                        		dynapi:N3Template ;
         rdfs:label               		"create OU type N3 Template"@en-US ;
-        dynapi:hasModel 			    <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/organization_unit/parameter/uri> ;
-        dynapi:requiresParameter        <https://vivoweb.org/procedure/organization_unit/parameter/type> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/organization_unit/parameter/type> ;
         dynapi:N3TextAdditions   		"?uri <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type . " .
 
 <https://vivoweb.org/procedure/create_organization_unit/execute_template/n3_template_name>
         a                        		dynapi:N3Template ;
         rdfs:label               		"create OU name N3 Template"@en-US ;
-        dynapi:hasModel 			    <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/organization_unit/parameter/uri> ;
-        dynapi:requiresParameter        <https://vivoweb.org/procedure/organization_unit/parameter/name> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/organization_unit/parameter/name> ;
         dynapi:N3TextAdditions   		"?uri <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?name . " .
 
 <https://vivoweb.org/procedure/create_organization_unit/execute_template/n3_template_description>
         a                        		dynapi:N3Template ;
         rdfs:label               		"create OU description N3 Template"@en-US ;
-        dynapi:hasModel 			    <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/organization_unit/parameter/uri> ;
-        dynapi:requiresParameter        <https://vivoweb.org/procedure/organization_unit/parameter/description> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/organization_unit/parameter/description> ;
         dynapi:N3TextAdditions   		"?uri <http://vivoweb.org/ontology/core#description> ?description . " .
 
 <https://vivoweb.org/procedure/create_organization_unit/execute_template/n3_template_super_organization_unit_uri>
         a                        		dynapi:N3Template ;
         rdfs:label               		"create super OU name N3 Template"@en-US ;
-        dynapi:hasModel 			    <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/organization_unit/parameter/uri> ;
-        dynapi:requiresParameter        <https://vivoweb.org/procedure/organization_unit/parameter/superURI> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/organization_unit/parameter/superURI> ;
         dynapi:N3TextAdditions   		"?uri <http://xmlns.com/foaf/0.1/Organization> ?superURI . " .
 
 <https://vivoweb.org/procedure/create_organization_unit/execute_template/n3_template_super_organization_unit_name>
         a                        		dynapi:N3Template ;
         rdfs:label               		"create super OU name N3 Template"@en-US ;
-        dynapi:hasModel 			    <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/organization_unit/parameter/uri> ;
-        dynapi:requiresParameter        <https://vivoweb.org/procedure/organization_unit/parameter/superName> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/organization_unit/parameter/superName> ;
         dynapi:N3TextAdditions   		"?uri <http://www.w3.org/2006/vcard/ns#OrganizationalUnitName> ?superName . " .
-
 
 ###############################################
 ### N3 TEMPLATE PARTIAL ENTITY UPDATE
@@ -68,7 +67,7 @@
 <https://vivoweb.org/procedure/update_organization_unit/execute_template/n3_template_subject>
         a                        		dynapi:N3Template ;
         rdfs:label               		"update OU N3 Template"@en-US ;
-        dynapi:hasModel 			    <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/organization_unit/parameter/resource_id> ;
         dynapi:N3TextAdditions   		
         """
@@ -78,41 +77,41 @@
 <https://vivoweb.org/procedure/update_organization_unit/execute_template/n3_template_type>
         a                        		dynapi:N3Template ;
         rdfs:label               		"update OU type N3 Template"@en-US ;
-        dynapi:hasModel 			    <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/organization_unit/parameter/resource_id> ;
-        dynapi:requiresParameter        <https://vivoweb.org/procedure/organization_unit/parameter/type> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/organization_unit/parameter/type> ;
         dynapi:N3TextAdditions   		"?resource_id <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type . " .
 
 <https://vivoweb.org/procedure/update_organization_unit/execute_template/n3_template_name>
         a                        		dynapi:N3Template ;
         rdfs:label               		"update OU name N3 Template"@en-US ;
-        dynapi:hasModel 			    <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/organization_unit/parameter/resource_id> ;
-        dynapi:requiresParameter        <https://vivoweb.org/procedure/organization_unit/parameter/name> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/organization_unit/parameter/name> ;
         dynapi:N3TextAdditions   		"?resource_id <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?name . " .
 
 <https://vivoweb.org/procedure/update_organization_unit/execute_template/n3_template_description>
         a                        		dynapi:N3Template ;
         rdfs:label               		"update OU description N3 Template"@en-US ;
-        dynapi:hasModel 			    <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/organization_unit/parameter/resource_id> ;
-        dynapi:requiresParameter        <https://vivoweb.org/procedure/organization_unit/parameter/description> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/organization_unit/parameter/description> ;
         dynapi:N3TextAdditions   		"?resource_id <http://vivoweb.org/ontology/core#description> ?description . " .
 
 <https://vivoweb.org/procedure/update_organization_unit/execute_template/n3_template_super_organization_unit_uri>
         a                        		dynapi:N3Template ;
         rdfs:label               		"update super OU name N3 Template"@en-US ;
-        dynapi:hasModel 			    <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/organization_unit/parameter/resource_id> ;
-        dynapi:requiresParameter        <https://vivoweb.org/procedure/organization_unit/parameter/superURI> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/organization_unit/parameter/superURI> ;
         dynapi:N3TextAdditions   		"?resource_id <http://xmlns.com/foaf/0.1/Organization> ?superURI . " .
 
 <https://vivoweb.org/procedure/update_organization_unit/execute_template/n3_template_super_organization_unit_name>
         a                        		dynapi:N3Template ;
         rdfs:label               		"update super OU name N3 Template"@en-US ;
-        dynapi:hasModel 			    <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
         dynapi:requiresParameter 		<https://vivoweb.org/procedure/organization_unit/parameter/resource_id> ;
-        dynapi:requiresParameter        <https://vivoweb.org/procedure/organization_unit/parameter/superName> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/organization_unit/parameter/superName> ;
         dynapi:N3TextAdditions   		"?resource_id <http://www.w3.org/2006/vcard/ns#OrganizationalUnitName> ?superName . " .
 
 ###############################################
@@ -120,17 +119,17 @@
 ###############################################
 
 <https://vivoweb.org/procedure/create_organization_unit>
-        a                        		        dynapi:Procedure ;
-        rdfs:label               		        "Create a OU"@en-US ;
+        a                        		dynapi:Procedure ;
+        rdfs:label               		"Create a OU"@en-US ;
         dynapi:accessWhitelist                  <https://vivoweb.org/procedure/organization_unit/access/admin> ;
-        dynapi:hasFirstStep 			        <https://vivoweb.org/procedure/create_organization_unit/creation_properties/step1> ;
+        dynapi:hasFirstStep 			<https://vivoweb.org/procedure/create_organization_unit/creation_properties/step1> ;
         dynapi:providesParameter                <https://vivoweb.org/procedure/organization_unit/parameter/uri>  .
 
 <https://vivoweb.org/procedure/create_organization_unit/creation_properties/step1>
-        a                        		        dynapi:OperationalStep ;
-        rdfs:label               		        "creation of a OU step 1"@en-US ;
-        dynapi:hasOperation 			        <https://vivoweb.org/procedure/create_organization_unit/execute_template/n3_template_subject> ;
-	    dynapi:hasNextStep			            <https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step2> .
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a OU step 1"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/create_organization_unit/execute_template/n3_template_subject> ;
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step2> .
 
 <https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step2>
         a                                       dynapi:ConditionalStep ;
@@ -140,10 +139,10 @@
         dynapi:hasCondition                     <https://vivoweb.org/condition/organization_unit/type_check> .
 
 <https://vivoweb.org/procedure/create_organization_unit/creation_properties/step2>
-        a                        		        dynapi:OperationalStep ;
-        rdfs:label               		        "creation of a OU step 2"@en-US ;
-        dynapi:hasOperation 			        <https://vivoweb.org/procedure/create_organization_unit/execute_template/n3_template_type> ;
-	    dynapi:hasNextStep			            <https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step3> .
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a OU step 2"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/create_organization_unit/execute_template/n3_template_type> ;
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step3> .
 
 <https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step3>
         a                                       dynapi:ConditionalStep ;
@@ -153,47 +152,75 @@
         dynapi:hasCondition                     <https://vivoweb.org/condition/organization_unit/name_check> .
 
 <https://vivoweb.org/procedure/create_organization_unit/creation_properties/step3>
-        a                        		        dynapi:OperationalStep ;
-        rdfs:label               		        "creation of a OU step 3"@en-US ;
-        dynapi:hasOperation 			        <https://vivoweb.org/procedure/create_organization_unit/execute_template/n3_template_name> ;
-	    dynapi:hasNextStep			            <https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step4> .
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a OU step 3"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/create_organization_unit/execute_template/n3_template_name> ;
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step4> .
 
 <https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step4>
         a                                       dynapi:ConditionalStep ;
         rdfs:label                              "conditional step for OU description check"@en-US ;
         dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/create_organization_unit/creation_properties/step4> ;
-        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step5> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step5and6> ;
         dynapi:hasCondition                     <https://vivoweb.org/condition/organization_unit/description_check> .
 
 <https://vivoweb.org/procedure/create_organization_unit/creation_properties/step4>
-        a                        		        dynapi:OperationalStep ;
-        rdfs:label               		        "creation of a OU step 4"@en-US ;
-        dynapi:hasOperation 			        <https://vivoweb.org/procedure/create_organization_unit/execute_template/n3_template_description> ;
-	    dynapi:hasNextStep			            <https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step5> .
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a OU step 4"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/create_organization_unit/execute_template/n3_template_description> ;
+        dynapi:hasNextStep			<https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step5and6> .
+
+<https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step5and6>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for super OU check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step5> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/organization_unit/super_ou_check> .
 
 <https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step5>
         a                                       dynapi:ConditionalStep ;
-        rdfs:label                              "conditional step for super OU URI check"@en-US ;
-        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/create_organization_unit/creation_properties/step5> ;
+        rdfs:label                              "conditional step for super OU URI check"@en-US ;                                        
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/create_organization_unit/creation_properties/step5unpack> ;
         dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step6> ;
-        dynapi:hasCondition                     <https://vivoweb.org/condition/organization_unit/super_uri_check> .
+        dynapi:hasCondition                     <https://vivoweb.org/condition/organization_unit/contains_organisation_unit_uri_key/condition_container_contains> .
+
+<https://vivoweb.org/procedure/create_organization_unit/creation_properties/step5unpack>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      <https://vivoweb.org/procedure/create_organization_unit/creation_properties/step5> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/create_organization_unit/get_organisation_unit_uri/operation> .
 
 <https://vivoweb.org/procedure/create_organization_unit/creation_properties/step5>
-        a                        		        dynapi:OperationalStep ;
-        rdfs:label               		        "creation of a OU step 5"@en-US ;
-        dynapi:hasOperation 			        <https://vivoweb.org/procedure/create_organization_unit/execute_template/n3_template_super_organization_unit_uri> ;
-	    dynapi:hasNextStep			            <https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step6> .
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a OU step 5"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/create_organization_unit/execute_template/n3_template_super_organization_unit_uri> ;
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step6> .
 
 <https://vivoweb.org/procedure/create_organization_unit/creation_properties/conditional_for_step6>
         a                                       dynapi:ConditionalStep ;
         rdfs:label                              "conditional step for super OU name check"@en-US ;
-        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/create_organization_unit/creation_properties/step6> ;
-        dynapi:hasCondition                     <https://vivoweb.org/condition/organization_unit/super_name_check> .
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/create_organization_unit/creation_properties/step6unpack> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/organization_unit/contains_organisation_unit_name_key/condition_container_contains> .
+
+<https://vivoweb.org/procedure/create_organization_unit/creation_properties/step6unpack>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      <https://vivoweb.org/procedure/create_organization_unit/creation_properties/step6> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/create_organization_unit/get_organisation_unit_name/operation> .
 
 <https://vivoweb.org/procedure/create_organization_unit/creation_properties/step6>
-        a                        		        dynapi:OperationalStep ;
-        rdfs:label               		        "creation of a OU step 6"@en-US ;
-        dynapi:hasOperation 			        <https://vivoweb.org/procedure/create_organization_unit/execute_template/n3_template_super_organization_unit_name> .
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a OU step 6"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/create_organization_unit/execute_template/n3_template_super_organization_unit_name> .
+
+<https://vivoweb.org/procedure/create_organization_unit/get_organisation_unit_uri/operation>
+        a                                       dynapi:ContainerQuery ;
+        dynapi:targetContainer                  <https://vivoweb.org/procedure/organization_unit/parameter/superOrganizationUnit> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_organization_unit/parameter/superOrganizationUnitURI_key> ;
+        dynapi:providesParameter                <https://vivoweb.org/procedure/organization_unit/parameter/superURI> .
+
+<https://vivoweb.org/procedure/create_organization_unit/get_organisation_unit_name/operation>
+        a                                       dynapi:ContainerQuery ;
+        dynapi:targetContainer                  <https://vivoweb.org/procedure/organization_unit/parameter/superOrganizationUnit> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_organization_unit/parameter/superOrganizationUnitName_key> ;
+        dynapi:providesParameter                <https://vivoweb.org/procedure/organization_unit/parameter/superName> .
 
 ###############################################
 ### READ (all)
@@ -204,51 +231,54 @@
         rdfs:label                              "Fetching OUs"@en-US ;
         dynapi:accessWhitelist                  <https://vivoweb.org/procedure/organization_unit/access/admin> ;
         dynapi:providesParameter                <https://vivoweb.org/ontology/organization_unit/parameter/organizationUnits> ;
-        dynapi:providesParameter 		        <https://vivoweb.org/ontology/organization_unit/parameter/count>;
-        dynapi:hasFirstStep 			        <https://vivoweb.org/procedure/read_organization_units/fetching_properties/step> .
+        dynapi:providesParameter 		<https://vivoweb.org/ontology/organization_unit/parameter/count>;
+        dynapi:hasFirstStep 			<https://vivoweb.org/procedure/read_organization_units/fetching_properties/step> .
 
 <https://vivoweb.org/procedure/read_organization_units/fetching_properties/step>
         a                                       dynapi:OperationalStep ;
         rdfs:label                              "fetch OUs step"@en-US ;
-        dynapi:hasOperation 		            <https://vivoweb.org/procedure/read_organization_units/fetching_properties/sparql_select_query> ;
-	    dynapi:hasNextStep			            <https://vivoweb.org/procedure/read_organization_units/statistics/step> .
+        dynapi:hasOperation 		        <https://vivoweb.org/procedure/read_organization_units/fetching_properties/sparql_select_query> ;
+        dynapi:hasNextStep			<https://vivoweb.org/procedure/read_organization_units/statistics/step> .
 
 <https://vivoweb.org/procedure/read_organization_units/fetching_properties/sparql_select_query>
         a                                       dynapi:SparqlSelectQuery ;
         rdfs:label                              "read OUs sparql query"@en-US ;
-        dynapi:hasModel 			            <https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> ;
-        dynapi:providesParameter 		        <https://vivoweb.org/ontology/organization_unit/parameter/organizationUnits> ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> ;
+        dynapi:providesParameter 		<https://vivoweb.org/ontology/organization_unit/parameter/organizationUnits> ;
         dynapi:requiresPlainParameter 	        <https://vivoweb.org/ontology/organization_unit/parameter/limit> ;
         dynapi:requiresPlainParameter           <https://vivoweb.org/ontology/organization_unit/parameter/offset> ;
         dynapi:requiresPlainParameter           <https://vivoweb.org/ontology/organization_unit/parameter/sortBy> ;
         dynapi:requiresPlainParameter           <https://vivoweb.org/ontology/organization_unit/parameter/order> ;
         dynapi:sparqlQueryText
         """
-        SELECT ?uri (GROUP_CONCAT(DISTINCT ?type; separator="|") as ?typeList) (SAMPLE(?name) as ?sampleName) (SAMPLE(?description) as ?sampleDescription) (SAMPLE(?superOrganizationUnitUri) as ?sampleSuperOrganizationUnitUri) (SAMPLE(?superOrganizationUnitName) as ?sampleSuperOrganizationUnitName)
+        SELECT ?uri (GROUP_CONCAT(DISTINCT ?typeOptional; separator=" -> ") as ?type) 
+                    (SAMPLE(?nameOptional) as ?name) 
+                    (SAMPLE(?descriptionOptional) as ?description) 
+                    (SAMPLE(?superOrganizationUnitUriOptional) as ?superOrganizationUnitUri) 
+                    (SAMPLE(?superOrganizationUnitNameOptional) as ?superOrganizationUnitName)
         WHERE {
             ?uri a <http://xmlns.com/foaf/0.1/Organization> .
-            OPTIONAL { ?uri <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type }
-            OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?name }
-            OPTIONAL { ?uri <http://vivoweb.org/ontology/core#description> ?description }
-            OPTIONAL { ?uri <http://xmlns.com/foaf/0.1/Organization> ?superOrganizationUnitUri }
-            OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#OrganizationalUnitName> ?superOrganizationUnitName }
+            OPTIONAL { ?uri <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?typeOptional }
+            OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?nameOptional }
+            OPTIONAL { ?uri <http://vivoweb.org/ontology/core#description> ?descriptionOptional }
+            OPTIONAL { ?uri <http://xmlns.com/foaf/0.1/Organization> ?superOrganizationUnitUriOptional }
+            OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#OrganizationalUnitName> ?superOrganizationUnitNameOptional }
         }
         GROUP BY ?uri
         ORDER BY ?label
         LIMIT ?limit OFFSET ?offset
-
         """ .
 
 <https://vivoweb.org/procedure/read_organization_units/statistics/step>
         a                                       dynapi:OperationalStep ;
         rdfs:label                              "number of OUs step "@en-US ;
-        dynapi:hasOperation 		            <https://vivoweb.org/procedure/read_organization_units/statistics/sparql_query> .
+        dynapi:hasOperation 		        <https://vivoweb.org/procedure/read_organization_units/statistics/sparql_query> .
 
 <https://vivoweb.org/procedure/read_organization_units/statistics/sparql_query>
         a                                       dynapi:SparqlSelectQuery ;
         rdfs:label                              "number of OUs sparql query 1"@en-US ;
-        dynapi:hasModel 		                <https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> ;
-        dynapi:providesParameter 	            <https://vivoweb.org/ontology/organization_unit/parameter/count> ;
+        dynapi:hasModel 		        <https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> ;
+        dynapi:providesParameter 	        <https://vivoweb.org/ontology/organization_unit/parameter/count> ;
         dynapi:sparqlQueryText
         """
         SELECT (count(distinct ?uri) as ?count)
@@ -266,20 +296,20 @@
         a                                       dynapi:Procedure ;
         rdfs:label                              "Fetching a OU"@en-US ;
         dynapi:accessWhitelist                  <https://vivoweb.org/procedure/organization_unit/access/admin> ;
-        dynapi:providesParameter 	            <https://vivoweb.org/ontology/organization_unit/parameter/organizationUnits> ;
-        dynapi:hasFirstStep 		            <https://vivoweb.org/procedure/read_organization_unit/fetching_properties/step> .
+        dynapi:providesParameter 	        <https://vivoweb.org/ontology/organization_unit/parameter/organizationUnits> ;
+        dynapi:hasFirstStep 		        <https://vivoweb.org/procedure/read_organization_unit/fetching_properties/step> .
 
 <https://vivoweb.org/procedure/read_organization_unit/fetching_properties/step>
-        a                        	            dynapi:OperationalStep ;
-        rdfs:label               	            "reading of a OU"@en-US ;
-        dynapi:hasOperation 		            <https://vivoweb.org/procedure/read_organization_unit/fetching_properties/sparql_query> .
+        a                        	        dynapi:OperationalStep ;
+        rdfs:label               	        "reading of a OU"@en-US ;
+        dynapi:hasOperation 		        <https://vivoweb.org/procedure/read_organization_unit/fetching_properties/sparql_query> .
 
 <https://vivoweb.org/procedure/read_organization_unit/fetching_properties/sparql_query>
         a                                       dynapi:SparqlSelectQuery ;
         rdfs:label                              "read OU sparql query 1"@en-US ;
-        dynapi:hasModel 		                <https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> ;
-        dynapi:requiresParameter 	            <https://vivoweb.org/procedure/organization_unit/parameter/resource_id> ;
-        dynapi:providesParameter 	            <https://vivoweb.org/ontology/organization_unit/parameter/organizationUnits> ;
+        dynapi:hasModel 		        <https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> ;
+        dynapi:requiresParameter 	        <https://vivoweb.org/procedure/organization_unit/parameter/resource_id> ;
+        dynapi:providesParameter 	        <https://vivoweb.org/ontology/organization_unit/parameter/organizationUnits> ;
         dynapi:sparqlQueryText
         """
         SELECT ?uri ?type ?name ?description ?superOrganizationUnitUri ?superOrganizationUnitName
@@ -394,10 +424,10 @@
         dynapi:requiresParameter                <https://vivoweb.org/procedure/organization_unit/parameter/resource_id> .
 
 <https://vivoweb.org/procedure/update_organization_unit/creation_properties/step1>
-        a                        		        dynapi:OperationalStep ;
-        rdfs:label               		        "creation of a OU step 1"@en-US ;
-        dynapi:hasOperation 			        <https://vivoweb.org/procedure/update_organization_unit/execute_template/n3_template_subject> ;
-	dynapi:hasNextStep			                <https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step2> .
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a OU step 1"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/update_organization_unit/execute_template/n3_template_subject> ;
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step2> .
 
 <https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step2>
         a                                       dynapi:ConditionalStep ;
@@ -407,10 +437,10 @@
         dynapi:hasCondition                     <https://vivoweb.org/condition/organization_unit/type_check> .
 
 <https://vivoweb.org/procedure/update_organization_unit/creation_properties/step2>
-        a                        		        dynapi:OperationalStep ;
-        rdfs:label               		        "creation of a OU step 2"@en-US ;
-        dynapi:hasOperation 			        <https://vivoweb.org/procedure/update_organization_unit/execute_template/n3_template_type> ;
-	    dynapi:hasNextStep			            <https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step3> .
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a OU step 2"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/update_organization_unit/execute_template/n3_template_type> ;
+	    dynapi:hasNextStep			<https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step3> .
 
 <https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step3>
         a                                       dynapi:ConditionalStep ;
@@ -420,47 +450,63 @@
         dynapi:hasCondition                     <https://vivoweb.org/condition/organization_unit/name_check> .
 
 <https://vivoweb.org/procedure/update_organization_unit/creation_properties/step3>
-        a                        		        dynapi:OperationalStep ;
-        rdfs:label               		        "creation of a OU step 3"@en-US ;
-        dynapi:hasOperation 			        <https://vivoweb.org/procedure/update_organization_unit/execute_template/n3_template_name> ;
-	    dynapi:hasNextStep			            <https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step4> .
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a OU step 3"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/update_organization_unit/execute_template/n3_template_name> ;
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step4> .
 
 <https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step4>
         a                                       dynapi:ConditionalStep ;
         rdfs:label                              "conditional step for OU description check"@en-US ;
         dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_organization_unit/creation_properties/step4> ;
-        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step5> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step5and6> ;
         dynapi:hasCondition                     <https://vivoweb.org/condition/organization_unit/description_check> .
 
 <https://vivoweb.org/procedure/update_organization_unit/creation_properties/step4>
-        a                        		        dynapi:OperationalStep ;
-        rdfs:label               		        "creation of a OU step 4"@en-US ;
-        dynapi:hasOperation 			        <https://vivoweb.org/procedure/update_organization_unit/execute_template/n3_template_description> ;
-	    dynapi:hasNextStep			            <https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step5> .
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a OU step 4"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/update_organization_unit/execute_template/n3_template_description> ;
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step5and6> .
+
+<https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step5and6>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for super OU check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step5> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/organization_unit/super_ou_check> .
 
 <https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step5>
         a                                       dynapi:ConditionalStep ;
-        rdfs:label                              "conditional step for super OU URI check"@en-US ;
-        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_organization_unit/creation_properties/step5> ;
+        rdfs:label                              "conditional step for super OU URI check"@en-US ;                                        
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_organization_unit/creation_properties/step5unpack> ;
         dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step6> ;
-        dynapi:hasCondition                     <https://vivoweb.org/condition/organization_unit/super_uri_check> .
+        dynapi:hasCondition                     <https://vivoweb.org/condition/organization_unit/contains_organisation_unit_uri_key/condition_container_contains> .
+
+<https://vivoweb.org/procedure/update_organization_unit/creation_properties/step5unpack>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      <https://vivoweb.org/procedure/update_organization_unit/creation_properties/step5> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/create_organization_unit/get_organisation_unit_uri/operation> .
 
 <https://vivoweb.org/procedure/update_organization_unit/creation_properties/step5>
-        a                        		        dynapi:OperationalStep ;
-        rdfs:label               		        "creation of a OU step 5"@en-US ;
-        dynapi:hasOperation 			        <https://vivoweb.org/procedure/update_organization_unit/execute_template/n3_template_super_organization_unit_uri> ;
-	    dynapi:hasNextStep			            <https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step6> .
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a OU step 5"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/update_organization_unit/execute_template/n3_template_super_organization_unit_uri> ;
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step6> .
 
 <https://vivoweb.org/procedure/update_organization_unit/creation_properties/conditional_for_step6>
         a                                       dynapi:ConditionalStep ;
         rdfs:label                              "conditional step for super OU name check"@en-US ;
-        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_organization_unit/creation_properties/step6> ;
-        dynapi:hasCondition                     <https://vivoweb.org/condition/organization_unit/super_name_check> .
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_organization_unit/creation_properties/step6unpack> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/organization_unit/contains_organisation_unit_name_key/condition_container_contains> .
+
+<https://vivoweb.org/procedure/update_organization_unit/creation_properties/step6unpack>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      <https://vivoweb.org/procedure/update_organization_unit/creation_properties/step6> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/create_organization_unit/get_organisation_unit_name/operation> .
 
 <https://vivoweb.org/procedure/update_organization_unit/creation_properties/step6>
-        a                        		        dynapi:OperationalStep ;
-        rdfs:label               		        "creation of a OU step 6"@en-US ;
-        dynapi:hasOperation 			        <https://vivoweb.org/procedure/update_organization_unit/execute_template/n3_template_super_organization_unit_name> .
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a OU step 6"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/update_organization_unit/execute_template/n3_template_super_organization_unit_name> .
 
 ###############################################
 ### PARAMETERS
@@ -533,6 +579,30 @@
         dynapi:isInternal                       "true"^^xsd:boolean ;
         dynapi:isOptionalParam                  "true"^^xsd:boolean ;
         dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/organization_unit/parameter/superOrganizationUnit>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "superOrganizationUnit" ;
+        dynapi:defaultValue                     "{}" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/JsonContainer> .
+
+# Super Organisation Unit keys
+
+<https://vivoweb.org/procedure/create_organization_unit/parameter/superOrganizationUnitURI_key>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "superOrganizationUnitURI_key" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:defaultValue                     "uri" ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> .
+
+<https://vivoweb.org/procedure/create_organization_unit/parameter/superOrganizationUnitName_key>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "superOrganizationUnitName_key" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:defaultValue                     "name" ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> .
 
 #########################
 ## Read request fields ##
@@ -624,6 +694,20 @@
         rdfs:label                              "condition if super OU name is defined"@en-US ;
         dynapi:requiresParameter                <https://vivoweb.org/procedure/organization_unit/parameter/superName> .
 
+<https://vivoweb.org/condition/organization_unit/super_ou_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if super OU is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/organization_unit/parameter/superOrganizationUnit> .
+
+<https://vivoweb.org/condition/organization_unit/contains_organisation_unit_uri_key/condition_container_contains> 
+        a                                       dynapi:ConditionContainerContains ;
+        dynapi:targetContainer                  <https://vivoweb.org/procedure/organization_unit/parameter/superOrganizationUnit> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_organization_unit/parameter/superOrganizationUnitURI_key> .
+
+<https://vivoweb.org/condition/organization_unit/contains_organisation_unit_name_key/condition_container_contains>
+        a                                       dynapi:ConditionContainerContains ;
+        dynapi:targetContainer                  <https://vivoweb.org/procedure/organization_unit/parameter/superOrganizationUnit> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_organization_unit/parameter/superOrganizationUnitName_key> .
 
 ###############################################
 ### ACCESS CONTROL

@@ -538,7 +538,8 @@
         @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
         
         ?current_step_uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://vivoweb.org/ontology/core#Position> ;
-                <http://vivoweb.org/ontology/core#Position> ?positionType ;
+                <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?positionType ;
+                <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?organizationUnitName ;
                 <http://xmlns.com/foaf/0.1/Organization> ?organizationUnitURI ;
                 <http://vivoweb.org/ontology/core#start> ?startDate ;
                 <http://vivoweb.org/ontology/core#end> ?endDate .
@@ -606,8 +607,8 @@
                 OPTIONAL {
                         ?uri <http://vivoweb.org/ontology/core#Position> ?positionURI .
                         ?positionURI <http://xmlns.com/foaf/0.1/Organization> ?organizationUnitURI .
-                        ?positionURI <http://vivoweb.org/ontology/core#positionInOrganization> ?positionName .
-                        ?positionURI <http://vivoweb.org/ontology/core#Position> ?positionType .
+                        ?positionURI <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?positionName .
+                        ?positionURI <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?positionType .
                         ?positionURI <http://vivoweb.org/ontology/core#start> ?startDate .
                         ?positionURI <http://vivoweb.org/ontology/core#end> ?endDate .
                 }
@@ -674,8 +675,8 @@
                 OPTIONAL {
                         ?uri <http://vivoweb.org/ontology/core#Position> ?positionURI .
                         ?positionURI <http://xmlns.com/foaf/0.1/Organization> ?organizationUnitURI .
-                        ?positionURI <http://vivoweb.org/ontology/core#positionInOrganization> ?positionName .
-                        ?positionURI <http://vivoweb.org/ontology/core#Position> ?positionType .
+                        ?positionURI <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?positionName .
+                        ?positionURI <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?positionType .
                         ?positionURI <http://vivoweb.org/ontology/core#start> ?startDate .
                         ?positionURI <http://vivoweb.org/ontology/core#end> ?endDate .
                 }

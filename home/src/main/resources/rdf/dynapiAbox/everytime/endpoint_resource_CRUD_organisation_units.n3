@@ -4,12 +4,12 @@
 
 
 <https://vivoweb.org/resourceAPI/resource/organisation_unit>
-        a                                       dynapi:ResourceAPI ;
-        rdfs:label                              "Organisation Units resource API 1"@en-US ;
-        dynapi:name                             "organisation_unit" ;
-        dynapi:minAPIVersion                    "0.1.0" ;
-        dynapi:onPost 			        <https://vivoweb.org/procedure/create_organization_unit> ;
-        dynapi:onGetAll 		        <https://vivoweb.org/procedure/read_organization_units> ;
-        dynapi:onGet 			        <https://vivoweb.org/procedure/read_organization_unit> ;
-        dynapi:onPut 			        <https://vivoweb.org/procedure/update_organization_unit> ;
-        dynapi:onDelete                         <https://vivoweb.org/procedure/delete_organization_unit> .
+        a                               dynapi:ResourceAPI ;
+        rdfs:label                      "organisation units resource API 1"@en-US ;
+        dynapi:name                     "organisation_unit" ;
+        dynapi:minAPIVersion            "0.1.0" ;
+        dynapi:onPost 			<https://vivoweb.org/procedure/create_organization_unit> ;
+        dynapi:onGetAll 		<https://vivoweb.org/procedure/read_organization_units> ;
+        dynapi:onGet 			<https://vivoweb.org/procedure/read_organization_unit> ;
+        dynapi:onPut 			<https://vivoweb.org/procedure/update_organization_unit> ;
+        dynapi:onDelete                 <https://vivoweb.org/procedure/delete_organization_unit> .
