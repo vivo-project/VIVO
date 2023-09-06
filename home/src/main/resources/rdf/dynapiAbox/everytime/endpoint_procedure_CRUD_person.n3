@@ -539,6 +539,7 @@
         
         ?current_step_uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://vivoweb.org/ontology/core#Position> ;
                 <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?positionType ;
+                <http://www.w3.org/2000/01/rdf-schema#label> ?positionName ;
                 <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?organizationUnitName ;
                 <http://xmlns.com/foaf/0.1/Organization> ?organizationUnitURI ;
                 <http://vivoweb.org/ontology/core#start> ?startDate ;
@@ -563,6 +564,88 @@
         ?current_uri_persisted <http://vivoweb.org/ontology/core#Position> ?current_step_uri .
         
         """ .
+
+############################################################
+#Update person position construct query
+
+<https://vivoweb.org/procedure/update_person_position>
+        a                                       dynapi:Procedure ;
+        dynapi:hasFirstStep                     <https://vivoweb.org/procedure/update_person_position/contains_organisation_unit_uri_key/conditional_step> .
+
+<https://vivoweb.org/procedure/update_person_position/contains_organisation_unit_uri_key/conditional_step>
+        a                                       dynapi:ConditionalStep ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person_position/get_organisation_unit_uri/step> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person_position/contains_organisation_unit_name_key/conditional_step> ;
+        dynapi:hasCondition                     <https://vivoweb.org/procedure/contains_organisation_unit_uri_key/condition_container_contains> .
+
+<https://vivoweb.org/procedure/update_person_position/get_organisation_unit_uri/step>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      <https://vivoweb.org/procedure/update_person_position/contains_organisation_unit_name_key/conditional_step> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/get_organisation_unit_uri/operation> .
+
+<https://vivoweb.org/procedure/update_person_position/contains_organisation_unit_name_key/conditional_step>
+        a                                       dynapi:ConditionalStep ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person_position/get_organisation_unit_name/step> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person_position/contains_position_name_key/conditional_step> ;
+        dynapi:hasCondition                     <https://vivoweb.org/procedure/contains_organisation_unit_name_key/condition_container_contains> .
+
+<https://vivoweb.org/procedure/update_person_position/get_organisation_unit_name/step>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      <https://vivoweb.org/procedure/update_person_position/contains_position_name_key/conditional_step> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/get_organisation_unit_name/operation> .
+
+<https://vivoweb.org/procedure/update_person_position/contains_position_name_key/conditional_step>
+        a                                       dynapi:ConditionalStep ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person_position/get_position_name/step> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person_position/contains_position_type_key/conditional_step> ;
+        dynapi:hasCondition                     <https://vivoweb.org/procedure/contains_position_name_key/condition_container_contains> .
+
+<https://vivoweb.org/procedure/update_person_position/get_position_name/step>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      <https://vivoweb.org/procedure/update_person_position/contains_position_type_key/conditional_step>  ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/get_position_name/operation> .
+
+<https://vivoweb.org/procedure/update_person_position/contains_position_type_key/conditional_step>
+        a                                       dynapi:ConditionalStep ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person_position/get_position_type/step> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person_position/contains_start_date_key/conditional_step> ;
+        dynapi:hasCondition                     <https://vivoweb.org/procedure/contains_position_type_key/condition_container_contains> .
+
+<https://vivoweb.org/procedure/update_person_position/get_position_type/step>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      <https://vivoweb.org/procedure/update_person_position/contains_start_date_key/conditional_step> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/get_position_type/operation> .
+
+<https://vivoweb.org/procedure/update_person_position/contains_start_date_key/conditional_step>
+        a                                       dynapi:ConditionalStep ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person_position/get_start_date/step> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person_position/contains_end_date_key/conditional_step> ;
+        dynapi:hasCondition                     <https://vivoweb.org/procedure/contains_start_date_key/condition_container_contains> .
+
+<https://vivoweb.org/procedure/update_person_position/get_start_date/step>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      <https://vivoweb.org/procedure/update_person_position/contains_end_date_key/conditional_step> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/get_start_date/operation> .
+
+<https://vivoweb.org/procedure/update_person_position/contains_end_date_key/conditional_step>
+        a                                       dynapi:ConditionalStep ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person_position/get_end_date/step> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person_position/position_construct_query_fill_in/step> ;
+        dynapi:hasCondition                     <https://vivoweb.org/procedure/contains_end_date_key/condition_container_contains> .
+
+<https://vivoweb.org/procedure/update_person_position/get_end_date/step>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      <https://vivoweb.org/procedure/update_person_position/position_construct_query_fill_in/step> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/get_end_date/operation> .
+
+<https://vivoweb.org/procedure/update_person_position/position_construct_query_fill_in/step>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      <https://vivoweb.org/procedure/update_person_position/bind_position_construct_query/step> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/position_construct_query_fill_in/operation> .
+
+<https://vivoweb.org/procedure/update_person_position/bind_position_construct_query/step>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/bind_position_construct_query/operation> .
 
 ###############################################
 ### READ (all)
@@ -593,26 +676,52 @@
         dynapi:requiresPlainParameter           <https://vivoweb.org/ontology/person/parameter/order> ;
         dynapi:sparqlQueryText
         """
-        SELECT ?uri ?type ?label ?first_name ?middle_name ?last_name ?internalID ?ORCID ?SCOPUSAuthorID ?ResearcherID ?positionURI ?organizationUnitURI ?positionName ?positionType ?startDate ?endDate
+        SELECT  ?uri
+                (SAMPLE(?personType) as ?type) 
+                (SAMPLE(?personlabel) as ?label) 
+                (SAMPLE(?firstName) as ?first_name)
+                (SAMPLE(?middleName) as ?middle_name)
+                (SAMPLE(?lastName) as ?last_name)
+                (SAMPLE(?internalId) as ?internalID)
+                (SAMPLE(?orcid) as ?ORCID) 
+                (SAMPLE(?scopus) as ?SCOPUSAuthorID)
+                (SAMPLE(?researcherId) as ?ResearcherID)
+                (CONCAT('[',
+                        GROUP_CONCAT(DISTINCT
+                                CONCAT(
+                                        '{"organizationUnitURI":"', IF(BOUND(?organizationUnitURI), STR(?organizationUnitURI), ''), 
+                                        '", "organizationUnitName":"', IF(BOUND(?positionName), STR(?positionName), ''), 
+                                        '", "positionName":"', IF(BOUND(?positionName), STR(?positionName), ''), 
+                                        '", "positionType":"', IF(BOUND(?positionType), STR(?positionType), ''), 
+                                        '", "startDate":"', IF(BOUND(?startDate), STR(?startDate), ''), 
+                                        '", "endDate":"', IF(BOUND(?endDate), STR(?endDate), ''), 
+                                        '"}'
+                                ); separator=", "),
+                        ']')
+                AS ?positions)
         WHERE {
                 ?uri a <http://xmlns.com/foaf/0.1/Person> .
-                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#givenName> ?first_name }
-                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#middleName> ?middle_name }
-                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#familyName> ?last_name }
-                OPTIONAL { ?uri <http://www.w3.org/2000/01/rdf-schema#label> ?label }
-                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#identifier> ?internalID }
-                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#orcidId> ?ORCID }
-                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#scopusId> ?SCOPUSAuthorID }
-                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#researcherId> ?ResearcherID }
+                OPTIONAL { ?uri <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?personType }
+                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#givenName> ?firstName }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#middleName> ?middleName }
+                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#familyName> ?lastName }
+                OPTIONAL { ?uri <http://www.w3.org/2000/01/rdf-schema#label> ?personlabel }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#identifier> ?internalId }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#orcidId> ?orcid }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#scopusId> ?scopus }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#researcherId> ?researcherId }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#Position> ?positionURI }
                 OPTIONAL {
                         ?uri <http://vivoweb.org/ontology/core#Position> ?positionURI .
-                        ?positionURI <http://xmlns.com/foaf/0.1/Organization> ?organizationUnitURI .
-                        ?positionURI <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?positionName .
-                        ?positionURI <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?positionType .
-                        ?positionURI <http://vivoweb.org/ontology/core#start> ?startDate .
-                        ?positionURI <http://vivoweb.org/ontology/core#end> ?endDate .
+                        OPTIONAL { ?positionURI <http://xmlns.com/foaf/0.1/Organization> ?organizationUnitURI }
+                        OPTIONAL { ?positionURI <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?organisationUnitName }
+                        OPTIONAL { ?positionURI <http://www.w3.org/2000/01/rdf-schema#label> ?positionName }
+                        OPTIONAL { ?positionURI <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?positionType }
+                        OPTIONAL { ?positionURI <http://vivoweb.org/ontology/core#start> ?startDate }
+                        OPTIONAL { ?positionURI <http://vivoweb.org/ontology/core#end> ?endDate }
                 }
         }
+        GROUP BY ?uri
         ORDER BY ?label
         LIMIT ?limit OFFSET ?offset
 
@@ -661,29 +770,53 @@
         dynapi:providesParameter 	        <https://vivoweb.org/ontology/person/parameter/persons> ;
         dynapi:sparqlQueryText
         """
-        SELECT ?uri ?type ?label ?first_name ?middle_name ?last_name ?internalID ?ORCID ?SCOPUSAuthorID ?ResearcherID ?positionURI ?organizationUnitURI ?positionName ?positionType ?startDate ?endDate
+        SELECT  ?uri
+                (SAMPLE(?personType) as ?type) 
+                (SAMPLE(?personlabel) as ?label) 
+                (SAMPLE(?firstName) as ?first_name)
+                (SAMPLE(?middleName) as ?middle_name)
+                (SAMPLE(?lastName) as ?last_name)
+                (SAMPLE(?internalId) as ?internalID)
+                (SAMPLE(?orcid) as ?ORCID) 
+                (SAMPLE(?scopus) as ?SCOPUSAuthorID)
+                (SAMPLE(?researcherId) as ?ResearcherID)
+                (CONCAT('[',
+                        GROUP_CONCAT(DISTINCT
+                                CONCAT(
+                                        '{"organizationUnitURI":"', IF(BOUND(?organizationUnitURI), STR(?organizationUnitURI), ''), 
+                                        '", "organizationUnitName":"', IF(BOUND(?positionName), STR(?positionName), ''), 
+                                        '", "positionName":"', IF(BOUND(?positionName), STR(?positionName), ''), 
+                                        '", "positionType":"', IF(BOUND(?positionType), STR(?positionType), ''), 
+                                        '", "startDate":"', IF(BOUND(?startDate), STR(?startDate), ''), 
+                                        '", "endDate":"', IF(BOUND(?endDate), STR(?endDate), ''), 
+                                        '"}'
+                                ); separator=", "),
+                        ']')
+                AS ?positions)
         WHERE {
                 ?uri a <http://xmlns.com/foaf/0.1/Person> .
-                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#givenName> ?first_name }
-                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#middleName> ?middle_name }
-                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#familyName> ?last_name }
-                OPTIONAL { ?uri <http://www.w3.org/2000/01/rdf-schema#label> ?label }
-                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#identifier> ?internalID }
-                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#orcidId> ?ORCID }
-                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#scopusId> ?SCOPUSAuthorID }
-                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#researcherId> ?ResearcherID }
+                OPTIONAL { ?uri <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?personType }
+                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#givenName> ?firstName }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#middleName> ?middleName }
+                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#familyName> ?lastName }
+                OPTIONAL { ?uri <http://www.w3.org/2000/01/rdf-schema#label> ?personlabel }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#identifier> ?internalId }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#orcidId> ?orcid }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#scopusId> ?scopus }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#researcherId> ?researcherId }
                 OPTIONAL {
                         ?uri <http://vivoweb.org/ontology/core#Position> ?positionURI .
-                        ?positionURI <http://xmlns.com/foaf/0.1/Organization> ?organizationUnitURI .
-                        ?positionURI <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?positionName .
-                        ?positionURI <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?positionType .
-                        ?positionURI <http://vivoweb.org/ontology/core#start> ?startDate .
-                        ?positionURI <http://vivoweb.org/ontology/core#end> ?endDate .
+                        OPTIONAL { ?positionURI <http://xmlns.com/foaf/0.1/Organization> ?organizationUnitURI }
+                        OPTIONAL { ?positionURI <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?organisationUnitName }
+                        OPTIONAL { ?positionURI <http://www.w3.org/2000/01/rdf-schema#label> ?positionName }
+                        OPTIONAL { ?positionURI <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?positionType }
+                        OPTIONAL { ?positionURI <http://vivoweb.org/ontology/core#start> ?startDate }
+                        OPTIONAL { ?positionURI <http://vivoweb.org/ontology/core#end> ?endDate }
                 }
                 FILTER (?uri = ?resource_id)
         }
+        GROUP BY ?uri
         LIMIT 1
-
         """ .
 
 ###############################################
@@ -709,18 +842,25 @@
          prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
          prefix xsd: <http://www.w3.org/2001/XMLSchema#>
          CONSTRUCT { 
-                 ?resource_id 
-                 rdf:type <http://xmlns.com/foaf/0.1/Person> ;
-                 <http://www.w3.org/2006/vcard/ns#givenName> ?first_name ;
-                 <http://vivoweb.org/ontology/core#middleName> ?middle_name ;
-                 <http://www.w3.org/2006/vcard/ns#familyName> ?last_name ;
-                 <http://www.w3.org/2000/01/rdf-schema#label> ?label ;
-                 <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type ;
-                 <http://vivoweb.org/ontology/core#identifier> ?internalID ;
-                 <http://vivoweb.org/ontology/core#orcidId> ?ORCID ;
-                 <http://vivoweb.org/ontology/core#scopusId> ?SCOPUSAuthorID ;
-                 <http://vivoweb.org/ontology/core#researcherId> ?ResearcherID .
-                 
+                ?resource_id 
+                rdf:type <http://xmlns.com/foaf/0.1/Person> ;
+                <http://www.w3.org/2006/vcard/ns#givenName> ?first_name ;
+                <http://vivoweb.org/ontology/core#middleName> ?middle_name ;
+                <http://www.w3.org/2006/vcard/ns#familyName> ?last_name ;
+                <http://www.w3.org/2000/01/rdf-schema#label> ?label ;
+                <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type ;
+                <http://vivoweb.org/ontology/core#identifier> ?internalID ;
+                <http://vivoweb.org/ontology/core#orcidId> ?ORCID ;
+                <http://vivoweb.org/ontology/core#scopusId> ?SCOPUSAuthorID ;
+                <http://vivoweb.org/ontology/core#researcherId> ?ResearcherID .
+
+                ?positionURI 
+                rdf:type <http://vivoweb.org/ontology/core#Position> ;
+                <http://xmlns.com/foaf/0.1/Organization> ?organizationUnitURI ;
+                <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?positionName ;
+                <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?positionType ;
+                <http://vivoweb.org/ontology/core#start> ?startDate ;
+                <http://vivoweb.org/ontology/core#end> ?endDate .
          } WHERE {
                 ?resource_id rdf:type <http://xmlns.com/foaf/0.1/Person>
                 OPTIONAL { ?resource_id <http://www.w3.org/2006/vcard/ns#givenName> ?first_name }
@@ -732,6 +872,14 @@
                 OPTIONAL { ?resource_id <http://vivoweb.org/ontology/core#orcidId> ?ORCID }
                 OPTIONAL { ?resource_id <http://vivoweb.org/ontology/core#scopusId> ?SCOPUSAuthorID }
                 OPTIONAL { ?resource_id <http://vivoweb.org/ontology/core#researcherId> ?ResearcherID }
+                OPTIONAL {
+                        ?resource_id <http://vivoweb.org/ontology/core#Position> ?positionURI .
+                        ?positionURI <http://xmlns.com/foaf/0.1/Organization> ?organizationUnitURI .
+                        ?positionURI <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?positionName .
+                        ?positionURI <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?positionType .
+                        ?positionURI <http://vivoweb.org/ontology/core#start> ?startDate .
+                        ?positionURI <http://vivoweb.org/ontology/core#end> ?endDate .
+                }
          } 
          """ ;
          dynapi:providesParameter               <https://vivoweb.org/procedure/delete_person/parameter/person_graph> ;
@@ -898,7 +1046,44 @@
 <https://vivoweb.org/procedure/update_person/creation_properties/step9>
         a                        		dynapi:OperationalStep ;
         rdfs:label               		"creation of a person step 9"@en-US ;
-        dynapi:hasOperation 			<https://vivoweb.org/procedure/update_person/execute_template/n3_template_researcher_id> .
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/update_person/execute_template/n3_template_researcher_id> ;
+        dynapi:hasNextStep			<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step10> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step10>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person positions check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person/creation_properties/step10> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/positions_check> .
+
+<https://vivoweb.org/procedure/assign_provided_uri/substitution>
+        a                                       dynapi:ParameterSubstitution ;
+        dynapi:substitutionSource               <https://vivoweb.org/procedure/person/parameter/resource_id> ;
+        dynapi:substitutionTarget               <https://vivoweb.org/procedure/person/parameter/current_uri_persisted> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/step10>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasParameterSubstitution         <https://vivoweb.org/procedure/assign_provided_uri/substitution> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/update_person/create_person_positions/loop> ;
+        rdfs:label                              "Create provided person positions"@en-US .
+
+<https://vivoweb.org/procedure/update_person/create_person_positions/loop>
+        a                                       dynapi:LoopOperation ;
+        dynapi:inputDescriptor                  <https://vivoweb.org/procedure/create_person/create_person_positions/input_descriptor> ;
+        dynapi:conditionDescriptor              <https://vivoweb.org/procedure/create_person/create_person_positions/condition_descriptor> ;
+        
+        dynapi:outputDescriptor                 <https://vivoweb.org/procedure/create_person/create_person_positions/output_descriptor> ;
+        dynapi:executableDescriptor             <https://vivoweb.org/procedure/update_person/create_person_positions/executable_descriptor> ;
+        
+        dynapi:internalParameter                <https://vivoweb.org/procedure/create_person/parameter/iteration_int_param> ;
+        
+        dynapi:internalParameter                <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> ;
+        dynapi:providesParameter                <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> .
+
+<https://vivoweb.org/procedure/update_person/create_person_positions/executable_descriptor>
+        a                                       dynapi:ProcedureDescriptor ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_person_position/parameter/current_step_uri> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/get_position_from_container/parameter/container_positions_item> ;
+        dynapi:call                             <https://vivoweb.org/procedure/update_person_position> .
 
 ###############################################
 ### PARAMETERS
