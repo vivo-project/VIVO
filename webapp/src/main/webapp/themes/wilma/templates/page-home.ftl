@@ -46,7 +46,7 @@
                         <div id="search-home-field">
                             <input type="text" name="querytext" class="search-homepage" value="" autocapitalize="off" />
                             <input type="submit" value="${i18n().search_button}" class="search" />
-                            <input type="hidden" name="classgroup"  value="" autocapitalize="off" />
+                            <input type="hidden" name="filter_classgroup"  value="" autocapitalize="off" />
                         </div>
 
                         <a class="filter-search filter-default" href="#" title="${i18n().intro_filtersearch}">
