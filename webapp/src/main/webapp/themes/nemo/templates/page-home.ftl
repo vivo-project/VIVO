@@ -271,7 +271,7 @@
 			};
 			// set the 'limmit search' text and alignment
 			if	( $('input.search-homepage').css('text-align') == "right" ) {		
-				 $('input.search-homepage').attr("value","${i18n().limit_search} \u2192");
+				 $('input.search-homepage').attr("placeholder","${i18n().limit_search} \u2192");
 			}  
 		</script>
 	</body>
