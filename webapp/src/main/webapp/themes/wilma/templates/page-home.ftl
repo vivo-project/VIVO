@@ -42,7 +42,7 @@
 
                 <fieldset>
                     <legend>${i18n().search_form}</legend>
-                    <form id="search-homepage" action="${urls.base}/extendedsearch" name="search-home" role="search" method="post" >
+                    <form id="search-homepage" action="${urls.base}/search" name="search-home" role="search" method="post" >
                         <div id="search-home-field">
                             <input type="text" name="querytext" class="search-homepage" value="" autocapitalize="off" />
                             <input type="submit" value="${i18n().search_button}" class="search" />
