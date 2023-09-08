@@ -43,7 +43,7 @@
                         <form id="search-homepage" action="${urls.search}" name="search-home" role="search" method="post" class="form-horizontal">
                             <fieldset>
                                 <div class="form-group pull-left" style="margin-right: 5px;">
-                                    <select class="form-control" id="classgroup" name="filter_classgroup">
+                                    <select class="form-control" id="classgroup" name="filters_classgroup">
                                         <option value="">${i18n().all_capitalized}</option>
                                         <#list vClassGroups as group>
                                             <#if (group.individualCount > 0)>
