@@ -1,0 +1,15 @@
+@prefix rdfs:  		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dynapi: 	<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+
+
+
+<https://vivoweb.org/resourceAPI/resource/event>
+        a                               dynapi:ResourceAPI ;
+        rdfs:label                      "events resource API 1"@en-US ;
+        dynapi:name                     "event" ;
+        dynapi:minAPIVersion            "0.1.0" ;
+        dynapi:onPost 			<https://vivoweb.org/procedure/create_event> ;
+        dynapi:onGetAll 		<https://vivoweb.org/procedure/read_events> ;
+        dynapi:onGet 			<https://vivoweb.org/procedure/read_event> ;
+        dynapi:onPut 			<https://vivoweb.org/procedure/update_event> ;
+        dynapi:onDelete                 <https://vivoweb.org/procedure/delete_event> .

@@ -770,8 +770,7 @@
         dynapi:providesParameter 	        <https://vivoweb.org/ontology/person/parameter/persons> ;
         dynapi:sparqlQueryText
         """
-        SELECT  ?uri
-                (SAMPLE(?personType) as ?type) 
+        SELECT  ?uri (GROUP_CONCAT(DISTINCT ?personType; separator=" -> ") as ?type) 
                 (SAMPLE(?personlabel) as ?label) 
                 (SAMPLE(?firstName) as ?first_name)
                 (SAMPLE(?middleName) as ?middle_name)
