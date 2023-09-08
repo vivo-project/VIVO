@@ -30,7 +30,7 @@
 		<form 
 			class="navbar-form navbar-left" 
 			role="search" 
-			action="${urls.base}/search" 
+			action="${urls.search}" 
 			method="post"
 		>
 			<div class="form-group">

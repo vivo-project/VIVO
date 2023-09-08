@@ -3,6 +3,6 @@
 <aggregation-result>
    <count>${hitCount}</count>
    <population-type>${populationType}</population-type>
-   <preview-URL>${serverBase}${urls.base}/search?filter_classgroup=${classgroup?url}&querytext=${querytext?url}</preview-URL>
-   <search-results-URL>${serverBase}${urls.base}/search?filter_classgroup=${classgroup?url}&querytext=${querytext?url}</search-results-URL>
+   <preview-URL>${serverBase}${urls.search}?filter_classgroup=classgroup:${classgroup?url}&querytext=${querytext?url}</preview-URL>
+   <search-results-URL>${serverBase}${urls.search}?filter_classgroup=classgroup:${classgroup?url}&querytext=${querytext?url}</search-results-URL>
 </aggregation-result>
