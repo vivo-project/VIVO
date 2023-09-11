@@ -1,0 +1,89 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix whitelist_access:       <https://vivoweb.org/procedure/event/access/> .
+@prefix fetching_properties:    <https://vivoweb.org/procedure/read_events/fetching_properties/> .
+@prefix statistics:             <https://vivoweb.org/procedure/read_events/statistics/> .
+@prefix dynapi_model:           <https://vivoweb.org/ontology/vitro-dynamic-api/model/> .
+@prefix read_parameter:         <https://vivoweb.org/ontology/event/parameter/> .
+
+###############################################
+### READ (all)
+###############################################
+
+<https://vivoweb.org/procedure/read_events>
+        a                                       dynapi:Procedure ;
+        rdfs:label                              "Fetching OUs"@en-US ;
+        dynapi:accessWhitelist                  whitelist_access:admin ;
+        dynapi:providesParameter                read_parameter:events ;
+        dynapi:providesParameter 		read_parameter:count ;
+        dynapi:hasFirstStep 			fetching_properties:step .
+
+fetching_properties:step
+        a                                       dynapi:OperationalStep ;
+        rdfs:label                              "fetch events step"@en-US ;
+        dynapi:hasOperation 		        fetching_properties:sparql_select_query ;
+        dynapi:hasNextStep			statistics:step .
+
+fetching_properties:sparql_select_query
+        a                                       dynapi:SparqlSelectQuery ;
+        rdfs:label                              "read events sparql query"@en-US ;
+        dynapi:hasModel 			dynapi_model:full_union ;
+        dynapi:providesParameter 		read_parameter:events ;
+        dynapi:requiresPlainParameter 	        read_parameter:limit ;
+        dynapi:requiresPlainParameter           read_parameter:offset ;
+        dynapi:requiresPlainParameter           read_parameter:sortBy ;
+        dynapi:requiresPlainParameter           read_parameter:order ;
+        dynapi:sparqlQueryText
+        """
+        SELECT ?uri (GROUP_CONCAT(DISTINCT ?typeOptional; separator=" -> ") as ?type) 
+                    (SAMPLE(?nameOptional) as ?name)
+                    (SAMPLE(?abbreviationOptional) as ?abbreviation)
+                    (SAMPLE(?startDateOptional) as ?startDate)
+                    (SAMPLE(?endDateOptional) as ?endDate)
+                    (SAMPLE(?placeOptional) as ?place)
+                    (SAMPLE(CONCAT(
+                        '{"uri":"', IF(BOUND(?eventVenueURI), STR(?eventVenueURI), ''), 
+                        '", "name":"', IF(BOUND(?eventVenueName), STR(?eventVenueName), ''),
+                        '"}'
+                        )) as ?eventVenue)
+        WHERE {
+            ?uri a  <http://purl.org/NET/c4dm/event.owl#Event> .
+            OPTIONAL { ?uri <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?typeOptional }
+            OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#Name> ?nameOptional }
+            OPTIONAL { ?uri <http://vivoweb.org/ontology/core#abbreviation> ?abbreviationOptional }
+            OPTIONAL { ?uri <http://vivoweb.org/ontology/core#start> ?startDateOptional }
+            OPTIONAL { ?uri <http://vivoweb.org/ontology/core#end> ?endDateOptional }
+            OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#Address> ?placeOptional }
+            OPTIONAL {
+                        ?uri <http://vivoweb.org/ontology/core#hasPublicationVenue> ?eventVenueURI .
+                        OPTIONAL { ?eventVenueURI <http://www.w3.org/2006/vcard/ns#Name> ?eventVenueName }
+                }
+        }
+        GROUP BY ?uri
+        ORDER BY ?label
+        LIMIT ?limit OFFSET ?offset
+        """ .
+
+statistics:step
+        a                                       dynapi:OperationalStep ;
+        rdfs:label                              "number of events step "@en-US ;
+        dynapi:hasOperation 		        statistics:sparql_query .
+
+statistics:sparql_query
+        a                                       dynapi:SparqlSelectQuery ;
+        rdfs:label                              "number of events sparql query 1"@en-US ;
+        dynapi:hasModel 		        dynapi_model:full_union ;
+        dynapi:providesParameter 	        read_parameter:count ;
+        dynapi:sparqlQueryText
+        """
+        SELECT (count(distinct ?uri) as ?count)
+            WHERE
+                {
+                    ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/NET/c4dm/event.owl#Event>
+                }
+        """ .

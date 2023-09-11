@@ -1,0 +1,69 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+
+##########################
+## Unpacking operations ##
+##########################
+
+<https://vivoweb.org/procedure/create_event/unpacking_properties/get_event_venue_name>
+        a                                       dynapi:ContainerQuery ;
+        dynapi:targetContainer                  <https://vivoweb.org/procedure/event/parameter/eventVenue> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_event/parameter/eventVenueName_key> ;
+        dynapi:providesParameter                <https://vivoweb.org/procedure/event/parameter/venueName> .
+
+###############################################
+### PARAMETER CHECKS
+###############################################
+
+<https://vivoweb.org/condition/event/type_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if event type is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/event/parameter/type> .
+
+<https://vivoweb.org/condition/event/name_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if event name is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/event/parameter/name> .
+
+<https://vivoweb.org/condition/event/abbreviation_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if event abbreviation is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/event/parameter/abbreviation> .
+
+<https://vivoweb.org/condition/event/startDate_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if event startDate is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/event/parameter/startDate> .
+
+<https://vivoweb.org/condition/event/endDate_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if event endDate is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/event/parameter/endDate> .
+
+<https://vivoweb.org/condition/event/place_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if event place is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/event/parameter/place> .
+
+<https://vivoweb.org/condition/event/eventVenue_check>
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if event venue is defined"@en-US ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/event/parameter/eventVenue> .
+
+<https://vivoweb.org/condition/event/contains_event_name_key>
+        a                                       dynapi:ConditionContainerContains ;
+        dynapi:targetContainer                  <https://vivoweb.org/procedure/event/parameter/eventVenue> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/create_event/parameter/eventVenueName_key> .
+
+###############################################
+### ACCESS CONTROL
+###############################################
+
+<https://vivoweb.org/procedure/event/access/admin>
+        a                                       dynapi:GroupAccessWhitelist ;
+        dynapi:userGroup                        <https://vivoweb.org/ontology/vitro-dynamic-api/user-group/admin> .

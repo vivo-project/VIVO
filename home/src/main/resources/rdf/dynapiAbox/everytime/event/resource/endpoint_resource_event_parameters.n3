@@ -1,0 +1,181 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix dynapi_type:            <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/> .
+
+###############################################
+### PARAMETERS
+###############################################
+
+####################
+## Event response ##
+####################
+
+<https://vivoweb.org/ontology/event/parameter/events>
+        a                                       dynapi:Parameter ;
+        rdfs:label                              "events"@en-US ;
+        dynapi:name                             "events" ;
+        dynapi:description                      "List of available events and statistics (number)" ;
+        dynapi:hasType                          dynapi_type:JsonContainerArray .
+
+<https://vivoweb.org/ontology/event/parameter/count>
+        a                                       dynapi:Parameter ;
+        rdfs:label                              "Number of fetched events"@en-US ;
+        dynapi:name                             "count" ;
+        dynapi:hasType                          dynapi_type:JsonContainer .
+
+#####################
+## Creation fields ##
+#####################
+
+<https://vivoweb.org/procedure/event/parameter/uri>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "uri" ;
+        dynapi:defaultValue                     "http://purl.org/NET/c4dm/event.owl/Event#,java_uuid_number" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:generated-uri .
+
+<https://vivoweb.org/procedure/event/parameter/type>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "type" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:uri .
+
+<https://vivoweb.org/procedure/event/parameter/name>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "name" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:string-literal .
+
+<https://vivoweb.org/procedure/event/parameter/abbreviation>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "abbreviation" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:string-literal .
+
+<https://vivoweb.org/procedure/event/parameter/startDate>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "startDate" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:string-literal .
+
+<https://vivoweb.org/procedure/event/parameter/endDate>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "endDate" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:string-literal .
+
+<https://vivoweb.org/procedure/event/parameter/place>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "place" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:string-literal .
+
+<https://vivoweb.org/procedure/event/parameter/eventVenue>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "eventVenue" ;
+        dynapi:defaultValue                     "{}" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:JsonContainer .
+
+<https://vivoweb.org/procedure/event/parameter/venueURI>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "venueURI" ;
+        dynapi:defaultValue                     "http://www.w3.org/2006/vcard/ns/Individual#,java_uuid_number" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:generated-uri .
+
+<https://vivoweb.org/procedure/event/parameter/venueName>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "venueName" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:string-literal .
+
+# Event Venue keys
+
+<https://vivoweb.org/procedure/create_event/parameter/eventVenueName_key>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "eventVenueName_key" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:defaultValue                     "name" ;
+        dynapi:hasType                          dynapi_type:string .
+
+#########################
+## Read request fields ##
+#########################
+
+<https://vivoweb.org/procedure/event/parameter/resource_id>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "resource_id" ;
+        dynapi:hasType                          dynapi_type:uri ;
+        rdfs:label                              "resource uri"@en-US .
+
+<https://vivoweb.org/ontology/event/parameter/total>
+        a                                       dynapi:parameter ;
+        dynapi:name                             "total" ;
+        dynapi:hasType 		                dynapi_type:integer ;
+        rdfs:label                              "total"@en-US .
+
+<https://vivoweb.org/ontology/event/parameter/limit>
+        a                                       dynapi:parameter ;
+        dynapi:name                             "limit" ;
+        dynapi:defaultValue                     "20" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType 		                dynapi_type:integer ;
+        rdfs:label                              "limit"@en-US .
+
+<https://vivoweb.org/ontology/event/parameter/offset>
+        a                                       dynapi:parameter ;
+        dynapi:name                             "offset" ;
+        dynapi:defaultValue                     "0" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:integer ;
+        rdfs:label                              "offset"@en-US .
+
+<https://vivoweb.org/ontology/event/parameter/sortBy>
+        a                                       dynapi:parameter ;
+        dynapi:name                             "sortBy" ;
+        dynapi:defaultValue                     "label" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType 		                dynapi_type:string ;
+        rdfs:label                              "sortBy"@en-US .
+
+<https://vivoweb.org/ontology/event/parameter/order>
+        a                                       dynapi:parameter ;
+        dynapi:name                             "order" ;
+        dynapi:defaultValue                     "ASC" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType 		                dynapi_type:string ;
+        rdfs:label                              "order"@en-US .
+
+###########################
+## Delete request fields ##
+###########################
+
+<https://vivoweb.org/procedure/event/parameter/event_graph>
+        a                                       dynapi:Model ;
+        dynapi:name                             "event_graph" ;
+        dynapi:hasType                          dynapi_type:model .

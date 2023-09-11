@@ -1,0 +1,87 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix event_fetching:         <https://vivoweb.org/procedure/delete_event/get_event_from_dynamic_api_graph/> .
+@prefix event_removal:          <https://vivoweb.org/procedure/delete_event/remove_from_dynamic_api_model/> .
+@prefix procedure_unloading:    <https://vivoweb.org/procedure/delete_event/unload_procedure_from_procedure_pool/> .
+@prefix whitelist_access:       <https://vivoweb.org/procedure/event/access/> .
+@prefix deletion_parameter:     <https://vivoweb.org/procedure/event/parameter/> .
+@prefix dynapi_model:           <https://vivoweb.org/ontology/vitro-dynamic-api/model/> .
+
+###############################################
+### DELETE
+###############################################
+
+<https://vivoweb.org/procedure/delete_event>
+        a                                       dynapi:Procedure ;
+        rdfs:label                              "Deleting a OU"@en-US ;
+        dynapi:accessWhitelist                  whitelist_access:admin ;
+        dynapi:hasFirstStep                     event_fetching:step .
+
+event_fetching:step
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      event_removal:step ;
+        dynapi:hasOperation                     event_fetching:operation .
+
+event_fetching:operation
+         a                                      dynapi:SparqlConstructQuery ;
+         dynapi:sparqlQueryText              """
+         prefix dynapi: <https://vivoweb.org/ontology/vitro-dynamic-api#>
+         prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+         prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+         prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+         CONSTRUCT { 
+                 ?resource_id 
+                 rdf:type <http://purl.org/NET/c4dm/event.owl#Event> ;
+                 <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type ;
+                 <http://www.w3.org/2006/vcard/ns#Name> ?name ;
+                 <http://vivoweb.org/ontology/core#abbreviation> ?abbreviation ;
+                 <http://vivoweb.org/ontology/core#start> ?startDate ;
+                 <http://vivoweb.org/ontology/core#end> ?endDate ;
+                 <http://www.w3.org/2006/vcard/ns#Address> ?place ;
+                 <http://vivoweb.org/ontology/core#hasPublicationVenue> ?eventVenueURI .
+
+                 ?eventVenueURI
+                 rdf:type <http://www.w3.org/2006/vcard/ns#Individual> ;
+                 <http://www.w3.org/2006/vcard/ns#Name> ?eventVenueName .
+                 
+         } WHERE {
+                ?resource_id a <http://purl.org/NET/c4dm/event.owl#Event> .
+                OPTIONAL { ?uri <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?typeOptional }
+                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#Name> ?nameOptional }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#abbreviation> ?abbreviationOptional }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#start> ?startDateOptional }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#end> ?endDateOptional }
+                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#Address> ?placeOptional }
+                OPTIONAL {
+                                ?resource_id <http://vivoweb.org/ontology/core#hasPublicationVenue> ?eventVenueURI .
+                                OPTIONAL { ?eventVenueURI <http://www.w3.org/2006/vcard/ns#Name> ?eventVenueName }
+                        }
+         } 
+         """ ;
+         dynapi:providesParameter               deletion_parameter:event_graph ;
+         dynapi:requiresParameter               deletion_parameter:resource_id ;
+         dynapi:hasModel                        dynapi_model:abox_assertions .
+
+event_removal:step
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      procedure_unloading:step ;
+        dynapi:hasOperation                     event_removal:operation .
+
+event_removal:operation
+        a                                       dynapi:ModelWriter ;
+        dynapi:retractionModel                  deletion_parameter:event_graph ;
+        dynapi:targetModel                      dynapi_model:abox_assertions .
+
+procedure_unloading:step
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasOperation                     procedure_unloading:operation .
+
+procedure_unloading:operation
+        a                                       dynapi:ProcedurePoolAtomicOperation ;
+        dynapi:poolOperationType                "unload" ;
+        dynapi:requiresParameter                deletion_parameter:resource_id .
