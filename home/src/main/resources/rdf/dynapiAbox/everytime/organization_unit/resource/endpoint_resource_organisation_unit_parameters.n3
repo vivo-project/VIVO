@@ -6,27 +6,28 @@
 @prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
 @prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
 @prefix dynapi_type:            <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/> .
-@prefix response_parameters:     <https://vivoweb.org/ontology/event/parameter/> .
-@prefix request_parameters:        <https://vivoweb.org/procedure/event/parameter/> .
+@prefix response_parameters:    <https://vivoweb.org/ontology/organization_unit/parameter/> .
+@prefix request_parameters:     <https://vivoweb.org/procedure/organization_unit/parameter/> .
+
 
 ###############################################
 ### PARAMETERS
 ###############################################
 
-####################
-## Event response ##
-####################
+################################
+## Organization unit response ##
+################################
 
-response_parameters:events
+response_parameters:organizationUnits
         a                                       dynapi:Parameter ;
-        rdfs:label                              "events"@en-US ;
-        dynapi:name                             "events" ;
-        dynapi:description                      "List of available events and statistics (number)" ;
+        rdfs:label                              "organizationUnits"@en-US ;
+        dynapi:name                             "organizationUnits" ;
+        dynapi:description                      "List of available OUs and statistics (number)" ;
         dynapi:hasType                          dynapi_type:JsonContainerArray .
 
 response_parameters:count
         a                                       dynapi:Parameter ;
-        rdfs:label                              "Number of fetched events"@en-US ;
+        rdfs:label                              "Number of fetched OUs"@en-US ;
         dynapi:name                             "count" ;
         dynapi:hasType                          dynapi_type:JsonContainer .
 
@@ -37,7 +38,7 @@ response_parameters:count
 request_parameters:uri
         a                                       dynapi:Parameter ;
         dynapi:name                             "uri" ;
-        dynapi:defaultValue                     "http://purl.org/NET/c4dm/event.owl/Event#,java_uuid_number" ;
+        dynapi:defaultValue                     "http://xmlns.com/foaf/0.1/Organization#,java_uuid_number" ;
         dynapi:isInternal                       "true"^^xsd:boolean ;
         dynapi:hasType                          dynapi_type:generated-uri .
 
@@ -57,66 +58,50 @@ request_parameters:name
         dynapi:isOptionalParam                  "true"^^xsd:boolean ;
         dynapi:hasType                          dynapi_type:string-literal .
 
-request_parameters:abbreviation
+request_parameters:description
         a                                       dynapi:Parameter ;
-        dynapi:name                             "abbreviation" ;
+        dynapi:name                             "description" ;
         dynapi:defaultValue                     "" ;
         dynapi:isInternal                       "true"^^xsd:boolean ;
         dynapi:isOptionalParam                  "true"^^xsd:boolean ;
         dynapi:hasType                          dynapi_type:string-literal .
 
-request_parameters:startDate
+request_parameters:superURI
         a                                       dynapi:Parameter ;
-        dynapi:name                             "startDate" ;
+        dynapi:name                             "superURI" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:uri .
+
+request_parameters:superName
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "superName" ;
         dynapi:defaultValue                     "" ;
         dynapi:isInternal                       "true"^^xsd:boolean ;
         dynapi:isOptionalParam                  "true"^^xsd:boolean ;
         dynapi:hasType                          dynapi_type:string-literal .
 
-request_parameters:endDate
+request_parameters:superOrganizationUnit
         a                                       dynapi:Parameter ;
-        dynapi:name                             "endDate" ;
-        dynapi:defaultValue                     "" ;
-        dynapi:isInternal                       "true"^^xsd:boolean ;
-        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
-        dynapi:hasType                          dynapi_type:string-literal .
-
-request_parameters:place
-        a                                       dynapi:Parameter ;
-        dynapi:name                             "place" ;
-        dynapi:defaultValue                     "" ;
-        dynapi:isInternal                       "true"^^xsd:boolean ;
-        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
-        dynapi:hasType                          dynapi_type:string-literal .
-
-request_parameters:eventVenue
-        a                                       dynapi:Parameter ;
-        dynapi:name                             "eventVenue" ;
+        dynapi:name                             "superOrganizationUnit" ;
         dynapi:defaultValue                     "{}" ;
         dynapi:isInternal                       "true"^^xsd:boolean ;
         dynapi:isOptionalParam                  "true"^^xsd:boolean ;
         dynapi:hasType                          dynapi_type:JsonContainer .
 
-request_parameters:venueURI
+# Super Organisation Unit keys
+
+request_parameters:superOrganizationUnitURI_key
         a                                       dynapi:Parameter ;
-        dynapi:name                             "venueURI" ;
-        dynapi:defaultValue                     "http://www.w3.org/2006/vcard/ns/Individual#,java_uuid_number" ;
+        dynapi:name                             "superOrganizationUnitURI_key" ;
         dynapi:isInternal                       "true"^^xsd:boolean ;
-        dynapi:hasType                          dynapi_type:generated-uri .
+        dynapi:defaultValue                     "uri" ;
+        dynapi:hasType                          dynapi_type:string .
 
-request_parameters:venueName
+request_parameters:superOrganizationUnitName_key
         a                                       dynapi:Parameter ;
-        dynapi:name                             "venueName" ;
-        dynapi:defaultValue                     "" ;
-        dynapi:isInternal                       "true"^^xsd:boolean ;
-        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
-        dynapi:hasType                          dynapi_type:string-literal .
-
-# Event Venue keys
-
-request_parameters:eventVenueName_key
-        a                                       dynapi:Parameter ;
-        dynapi:name                             "eventVenueName_key" ;
+        dynapi:name                             "superOrganizationUnitName_key" ;
         dynapi:isInternal                       "true"^^xsd:boolean ;
         dynapi:defaultValue                     "name" ;
         dynapi:hasType                          dynapi_type:string .
@@ -177,7 +162,7 @@ request_parameters:order
 ## Delete request fields ##
 ###########################
 
-request_parameters:event_graph
+request_parameters:organization_unit_graph
         a                                       dynapi:Model ;
-        dynapi:name                             "event_graph" ;
+        dynapi:name                             "organization_unit_graph" ;
         dynapi:hasType                          dynapi_type:model .

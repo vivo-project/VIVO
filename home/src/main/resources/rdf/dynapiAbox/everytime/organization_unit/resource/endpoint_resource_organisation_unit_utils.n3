@@ -1,0 +1,62 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix creation_parameters:    <https://vivoweb.org/procedure/organization_unit/parameter/> .
+@prefix whitelist_access:       <https://vivoweb.org/procedure/organization_unit/access/> .
+@prefix condition:              <https://vivoweb.org/condition/organization_unit/> .
+
+###############################################
+### PARAMETER CHECKS
+###############################################
+
+condition:type_check
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if OU type is defined"@en-US ;
+        dynapi:requiresParameter                creation_parameters:type .
+
+condition:name_check
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if OU name is defined"@en-US ;
+        dynapi:requiresParameter                creation_parameters:name .
+
+condition:description_check
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if OU description is defined"@en-US ;
+        dynapi:requiresParameter                creation_parameters:description .
+
+condition:super_uri_check
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if super OU is defined"@en-US ;
+        dynapi:requiresParameter                creation_parameters:superURI .
+
+condition:super_name_check
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if super OU name is defined"@en-US ;
+        dynapi:requiresParameter                creation_parameters:superName .
+
+condition:super_ou_check
+        a                                       dynapi:ConditionIsNotEmpty ;
+        rdfs:label                              "condition if super OU is defined"@en-US ;
+        dynapi:requiresParameter                creation_parameters:superOrganizationUnit .
+
+condition:contains_organisation_unit_uri_key
+        a                                       dynapi:ConditionContainerContains ;
+        dynapi:targetContainer                  creation_parameters:superOrganizationUnit ;
+        dynapi:requiresParameter                creation_parameters:superOrganizationUnitURI_key .
+
+condition:contains_organization_unit_name_key
+        a                                       dynapi:ConditionContainerContains ;
+        dynapi:targetContainer                  creation_parameters:superOrganizationUnit ;
+        dynapi:requiresParameter                creation_parameters:superOrganizationUnitName_key .
+
+###############################################
+### ACCESS CONTROL
+###############################################
+
+whitelist_access:admin
+        a                                       dynapi:GroupAccessWhitelist ;
+        dynapi:userGroup                        <https://vivoweb.org/ontology/vitro-dynamic-api/user-group/admin> .

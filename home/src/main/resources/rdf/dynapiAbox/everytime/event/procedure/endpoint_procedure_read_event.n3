@@ -5,6 +5,11 @@
 @prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
 @prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
 @prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix response_parameters:    <https://vivoweb.org/ontology/event/parameter/> .
+@prefix read_parameters:        <https://vivoweb.org/procedure/event/parameter/> .
+@prefix dynapi_model:           <https://vivoweb.org/ontology/vitro-dynamic-api/model/> .
+@prefix whitelist_access:       <https://vivoweb.org/procedure/event/access/> .
+@prefix fetching_properties:    <https://vivoweb.org/procedure/read_event/fetching_properties/> .
 
 ###############################################
 ### READ (one)
@@ -13,21 +18,21 @@
 <https://vivoweb.org/procedure/read_event>
         a                                       dynapi:Procedure ;
         rdfs:label                              "Fetching an event"@en-US ;
-        dynapi:accessWhitelist                  <https://vivoweb.org/procedure/event/access/admin> ;
-        dynapi:providesParameter 	        <https://vivoweb.org/ontology/event/parameter/events> ;
-        dynapi:hasFirstStep 		        <https://vivoweb.org/procedure/read_event/fetching_properties/step> .
+        dynapi:accessWhitelist                  whitelist_access:admin ;
+        dynapi:providesParameter 	        response_parameters:events ;
+        dynapi:hasFirstStep 		        fetching_properties:step .
 
-<https://vivoweb.org/procedure/read_event/fetching_properties/step>
+fetching_properties:step
         a                        	        dynapi:OperationalStep ;
         rdfs:label               	        "reading of an event"@en-US ;
-        dynapi:hasOperation 		        <https://vivoweb.org/procedure/read_event/fetching_properties/sparql_query> .
+        dynapi:hasOperation 		        fetching_properties:sparql_query .
 
-<https://vivoweb.org/procedure/read_event/fetching_properties/sparql_query>
+fetching_properties:sparql_query
         a                                       dynapi:SparqlSelectQuery ;
         rdfs:label                              "read event sparql query"@en-US ;
-        dynapi:hasModel 		        <https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> ;
-        dynapi:requiresParameter 	        <https://vivoweb.org/procedure/event/parameter/resource_id> ;
-        dynapi:providesParameter 	        <https://vivoweb.org/ontology/event/parameter/events> ;
+        dynapi:hasModel 		        dynapi_model:full_union ;
+        dynapi:requiresParameter 	        read_parameters:resource_id ;
+        dynapi:providesParameter 	        response_parameters:events ;
         dynapi:sparqlQueryText
         """
         SELECT ?uri (GROUP_CONCAT(DISTINCT ?typeOptional; separator=" -> ") as ?type) 

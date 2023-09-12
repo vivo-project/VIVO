@@ -9,7 +9,8 @@
 @prefix fetching_properties:    <https://vivoweb.org/procedure/read_events/fetching_properties/> .
 @prefix statistics:             <https://vivoweb.org/procedure/read_events/statistics/> .
 @prefix dynapi_model:           <https://vivoweb.org/ontology/vitro-dynamic-api/model/> .
-@prefix read_parameter:         <https://vivoweb.org/ontology/event/parameter/> .
+@prefix response_parameters:    <https://vivoweb.org/ontology/event/parameter/> .
+@prefix request_parameters:     <https://vivoweb.org/procedure/event/parameter/> .
 
 ###############################################
 ### READ (all)
@@ -19,8 +20,8 @@
         a                                       dynapi:Procedure ;
         rdfs:label                              "Fetching OUs"@en-US ;
         dynapi:accessWhitelist                  whitelist_access:admin ;
-        dynapi:providesParameter                read_parameter:events ;
-        dynapi:providesParameter 		read_parameter:count ;
+        dynapi:providesParameter                response_parameters:events ;
+        dynapi:providesParameter 		response_parameters:count ;
         dynapi:hasFirstStep 			fetching_properties:step .
 
 fetching_properties:step
@@ -33,11 +34,11 @@ fetching_properties:sparql_select_query
         a                                       dynapi:SparqlSelectQuery ;
         rdfs:label                              "read events sparql query"@en-US ;
         dynapi:hasModel 			dynapi_model:full_union ;
-        dynapi:providesParameter 		read_parameter:events ;
-        dynapi:requiresPlainParameter 	        read_parameter:limit ;
-        dynapi:requiresPlainParameter           read_parameter:offset ;
-        dynapi:requiresPlainParameter           read_parameter:sortBy ;
-        dynapi:requiresPlainParameter           read_parameter:order ;
+        dynapi:providesParameter 		response_parameters:events ;
+        dynapi:requiresPlainParameter 	        request_parameters:limit ;
+        dynapi:requiresPlainParameter           request_parameters:offset ;
+        dynapi:requiresPlainParameter           request_parameters:sortBy ;
+        dynapi:requiresPlainParameter           request_parameters:order ;
         dynapi:sparqlQueryText
         """
         SELECT ?uri (GROUP_CONCAT(DISTINCT ?typeOptional; separator=" -> ") as ?type) 
@@ -78,7 +79,7 @@ statistics:sparql_query
         a                                       dynapi:SparqlSelectQuery ;
         rdfs:label                              "number of events sparql query 1"@en-US ;
         dynapi:hasModel 		        dynapi_model:full_union ;
-        dynapi:providesParameter 	        read_parameter:count ;
+        dynapi:providesParameter 	        response_parameters:count ;
         dynapi:sparqlQueryText
         """
         SELECT (count(distinct ?uri) as ?count)

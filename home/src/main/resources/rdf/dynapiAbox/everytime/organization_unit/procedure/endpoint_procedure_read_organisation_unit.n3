@@ -1,0 +1,52 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix fetching_properties:    <https://vivoweb.org/procedure/read_organization_unit/fetching_properties/> .
+@prefix whitelist_access:       <https://vivoweb.org/procedure/organization_unit/access/> .
+@prefix response_parameters:     <https://vivoweb.org/ontology/organization_unit/parameter/> .
+@prefix fetching_parameters:    <https://vivoweb.org/procedure/organization_unit/parameter/> .
+
+###############################################
+### READ (one)
+###############################################
+
+<https://vivoweb.org/procedure/read_organization_unit>
+        a                                       dynapi:Procedure ;
+        rdfs:label                              "Fetching an OU"@en-US ;
+        dynapi:accessWhitelist                  whitelist_access:admin ;
+        dynapi:providesParameter 	        response_parameters:organizationUnits ;
+        dynapi:hasFirstStep 		        fetching_properties:step .
+
+fetching_properties:step
+        a                        	        dynapi:OperationalStep ;
+        rdfs:label               	        "reading of an OU"@en-US ;
+        dynapi:hasOperation 		        fetching_properties:sparql_query .
+
+fetching_properties:sparql_query
+        a                                       dynapi:SparqlSelectQuery ;
+        rdfs:label                              "read OU sparql query 1"@en-US ;
+        dynapi:hasModel 		        <https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> ;
+        dynapi:requiresParameter 	        fetching_parameters:resource_id ;
+        dynapi:providesParameter 	        response_parameters:organizationUnits ;
+        dynapi:sparqlQueryText
+        """
+        SELECT ?uri (GROUP_CONCAT(DISTINCT ?typeOptional; separator=" -> ") as ?type) 
+                    (SAMPLE(?nameOptional) as ?name) 
+                    (SAMPLE(?descriptionOptional) as ?description) 
+                    (SAMPLE(?superOrganizationUnitUriOptional) as ?superOrganizationUnitUri) 
+                    (SAMPLE(?superOrganizationUnitNameOptional) as ?superOrganizationUnitName)
+        WHERE {
+                ?uri a <http://xmlns.com/foaf/0.1/Organization> .
+                OPTIONAL { ?uri <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?typeOptional }
+                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?nameOptional }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#description> ?descriptionOptional }
+                OPTIONAL { ?uri <http://xmlns.com/foaf/0.1/Organization> ?superOrganizationUnitUriOptional }
+                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#OrganizationalUnitName> ?superOrganizationUnitNameOptional }
+                FILTER( ?uri = ?resource_id)
+        }
+        GROUP BY ?uri
+        """ .

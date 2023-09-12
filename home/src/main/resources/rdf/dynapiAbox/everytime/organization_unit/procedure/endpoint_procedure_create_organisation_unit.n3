@@ -1,0 +1,176 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix creation_properties:    <https://vivoweb.org/procedure/create_organization_unit/creation_properties/> .
+@prefix execute_template:       <https://vivoweb.org/procedure/create_organization_unit/execute_template/> .
+@prefix unpacking_properties:   <https://vivoweb.org/procedure/create_organization_unit/unpacking_properties/> .
+@prefix dynapi_model:           <https://vivoweb.org/ontology/vitro-dynamic-api/model/> .
+@prefix creation_parameters:    <https://vivoweb.org/procedure/organization_unit/parameter/> .
+@prefix whitelist_access:       <https://vivoweb.org/procedure/organization_unit/access/> .
+@prefix condition:              <https://vivoweb.org/condition/organization_unit/> .
+
+###############################################
+### CREATE
+###############################################
+
+<https://vivoweb.org/procedure/create_organization_unit>
+        a                        		dynapi:Procedure ;
+        rdfs:label               		"Create an OU"@en-US ;
+        dynapi:accessWhitelist                  whitelist_access:admin ;
+        dynapi:hasFirstStep 			creation_properties:step1 ;
+        dynapi:providesParameter                creation_parameters:uri  .
+
+creation_properties:step1
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of an OU step 1"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_subject ;
+	dynapi:hasNextStep			creation_properties:conditional_for_step2 .
+
+creation_properties:conditional_for_step2
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for OU type check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:step2 ;
+        dynapi:nextIfNotSatisfied               creation_properties:conditional_for_step3 ;
+        dynapi:hasCondition                     condition:type_check .
+
+creation_properties:step2
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of an OU step 2"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_type ;
+	dynapi:hasNextStep			creation_properties:conditional_for_step3 .
+
+creation_properties:conditional_for_step3
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for OU name check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:step3 ;
+        dynapi:nextIfNotSatisfied               creation_properties:conditional_for_step4 ;
+        dynapi:hasCondition                     condition:name_check .
+
+creation_properties:step3
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of an OU step 3"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_name ;
+	dynapi:hasNextStep			creation_properties:conditional_for_step4 .
+
+creation_properties:conditional_for_step4
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for OU description check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:step4 ;
+        dynapi:nextIfNotSatisfied               creation_properties:conditional_for_step5and6 ;
+        dynapi:hasCondition                     condition:description_check .
+
+creation_properties:step4
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of an OU step 4"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_description ;
+        dynapi:hasNextStep			creation_properties:conditional_for_step5and6 .
+
+creation_properties:conditional_for_step5and6
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for super OU check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:conditional_for_step5 ;
+        dynapi:hasCondition                     condition:super_ou_check .
+
+creation_properties:conditional_for_step5
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for super OU URI check"@en-US ;                                        
+        dynapi:nextIfSatisfied                  creation_properties:step5unpack ;
+        dynapi:nextIfNotSatisfied               creation_properties:conditional_for_step6 ;
+        dynapi:hasCondition                     condition:contains_organisation_unit_uri_key .
+
+creation_properties:step5unpack
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      creation_properties:step5 ;
+        dynapi:hasOperation                     unpacking_properties:get_organisation_unit_uri .
+
+creation_properties:step5
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of an OU step 5"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_super_organization_unit_uri ;
+	dynapi:hasNextStep			creation_properties:conditional_for_step6 .
+
+creation_properties:conditional_for_step6
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for super OU name check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:step6unpack ;
+        dynapi:hasCondition                     condition:contains_organization_unit_name_key .
+
+creation_properties:step6unpack
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      creation_properties:step6 ;
+        dynapi:hasOperation                     unpacking_properties:get_organisation_unit_name .
+
+creation_properties:step6
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of an OU step 6"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_super_organization_unit_name .
+
+unpacking_properties:get_organisation_unit_uri
+        a                                       dynapi:ContainerQuery ;
+        dynapi:targetContainer                  creation_parameters:superOrganizationUnit ;
+        dynapi:requiresParameter                creation_parameters:superOrganizationUnitURI_key ;
+        dynapi:providesParameter                creation_parameters:superURI .
+
+unpacking_properties:get_organisation_unit_name
+        a                                       dynapi:ContainerQuery ;
+        dynapi:targetContainer                  creation_parameters:superOrganizationUnit ;
+        dynapi:requiresParameter                creation_parameters:superOrganizationUnitName_key ;
+        dynapi:providesParameter                creation_parameters:superName .
+
+###############################################
+### N3 TEMPLATE PARTIAL ENTITY CREATION
+###############################################
+
+execute_template:n3_template_subject
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create OU N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		creation_parameters:uri ;
+        dynapi:N3TextAdditions   		
+        """
+                ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Organization> ;
+        """ .
+
+execute_template:n3_template_type
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create OU type N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		creation_parameters:uri ;
+        dynapi:requiresParameter                creation_parameters:type ;
+        dynapi:N3TextAdditions   		"?uri <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type . " .
+
+execute_template:n3_template_name
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create OU name N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		creation_parameters:uri ;
+        dynapi:requiresParameter                creation_parameters:name ;
+        dynapi:N3TextAdditions   		"?uri <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?name . " .
+
+execute_template:n3_template_description
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create OU description N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		creation_parameters:uri ;
+        dynapi:requiresParameter                creation_parameters:description ;
+        dynapi:N3TextAdditions   		"?uri <http://vivoweb.org/ontology/core#description> ?description . " .
+
+execute_template:n3_template_super_organization_unit_uri
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create super OU name N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		creation_parameters:uri ;
+        dynapi:requiresParameter                creation_parameters:superURI ;
+        dynapi:N3TextAdditions   		"?uri <http://xmlns.com/foaf/0.1/Organization> ?superURI . " .
+
+execute_template:n3_template_super_organization_unit_name
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create super OU name N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		creation_parameters:uri ;
+        dynapi:requiresParameter                creation_parameters:superName ;
+        dynapi:N3TextAdditions   		"?uri <http://www.w3.org/2006/vcard/ns#OrganizationalUnitName> ?superName . " .

@@ -1,0 +1,75 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix fetching_properties:    <https://vivoweb.org/procedure/delete_organization_unit/get_organization_unit_from_dynamic_api_graph/> .
+@prefix deletion_properties:    <https://vivoweb.org/procedure/delete_organization_unit/remove_from_dynamic_api_model/> .
+@prefix unloading_properties:   <https://vivoweb.org/procedure/delete_organization_unit/unload_procedure_from_procedure_pool/> .
+@prefix deletion_parameters:    <https://vivoweb.org/procedure/organization_unit/parameter/> .
+@prefix whitelist_access:       <https://vivoweb.org/procedure/organization_unit/access/> .
+
+###############################################
+### DELETE
+###############################################
+
+<https://vivoweb.org/procedure/delete_organization_unit>
+        a                                       dynapi:Procedure ;
+        rdfs:label                              "Deleting an OU"@en-US ;
+        dynapi:accessWhitelist                  whitelist_access:admin ;
+        dynapi:hasFirstStep                     fetching_properties:step .
+
+fetching_properties:step
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      deletion_properties:step ;
+        dynapi:hasOperation                     fetching_properties:operation .
+
+fetching_properties:operation
+         a                                      dynapi:SparqlConstructQuery ;
+         dynapi:sparqlQueryText              """
+         prefix dynapi: <https://vivoweb.org/ontology/vitro-dynamic-api#>
+         prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+         prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+         prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+         CONSTRUCT { 
+                 ?resource_id 
+                 rdf:type <http://xmlns.com/foaf/0.1/Organization> ;
+                 <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type ;
+                 <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?name ;
+                 <http://vivoweb.org/ontology/core#description> ?description ;
+                 <http://xmlns.com/foaf/0.1/Organization> ?superOrganizationUnitUri ;
+                 <http://www.w3.org/2006/vcard/ns#OrganizationalUnitName> ?superOrganizationUnitName .
+                 
+         } WHERE {
+                ?resource_id a <http://xmlns.com/foaf/0.1/Organization> .
+                OPTIONAL { ?uri <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type }
+                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?name }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#description> ?description }
+                OPTIONAL { ?uri <http://xmlns.com/foaf/0.1/Organization> ?superOrganizationUnitUri }
+                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#OrganizationalUnitName> ?superOrganizationUnitName }
+         } 
+         """ ;
+         dynapi:providesParameter               deletion_parameters:organization_unit_graph ;
+         dynapi:requiresParameter               deletion_parameters:resource_id ;
+         dynapi:hasModel                        <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> .
+
+deletion_properties:step
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      unloading_properties:step ;
+        dynapi:hasOperation                     deletion_properties:operation .
+
+deletion_properties:operation
+        a                                       dynapi:ModelWriter ;
+        dynapi:retractionModel                  deletion_parameters:organization_unit_graph ;
+        dynapi:targetModel                      <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> .
+
+unloading_properties:step
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasOperation                     unloading_properties:operation .
+
+unloading_properties:operation
+        a                                       dynapi:ProcedurePoolAtomicOperation ;
+        dynapi:poolOperationType                "unload" ;
+        dynapi:requiresParameter                deletion_parameters:resource_id .
