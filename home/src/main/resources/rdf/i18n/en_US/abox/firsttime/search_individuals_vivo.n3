@@ -1,0 +1,11 @@
+@prefix : <https://vivoweb.org/ontology/vitro-search-individual/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:filter_publication_year rdfs:label "Publication year"@en-US .
+:field_persons rdfs:label "Persons"@en-US .
+:range_filter_dates rdfs:label "Dates"@en-US .
+:filter_organizations rdfs:label "Organizations"@en-US .
+:filter_persons rdfs:label "Persons"@en-US .
+:field_dates rdfs:label "Dates"@en-US .
+:field_organizations rdfs:label "Organizations"@en-US .
+:field_publication_year rdfs:label "Publication year"@en-US .

@@ -1,0 +1,49 @@
+@prefix :      <https://vivoweb.org/ontology/vitro-search-individual/> .
+@prefix vitro-search: <https://vivoweb.org/ontology/vitro-search#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+:filter_group_search_filters  a    vitro-search:FilterGroup ;
+        vitro-search:contains      :range_filter_dates , :filter_organizations , :filter_persons , :filter_publication_year .
+
+:filter_publication_year  a        vitro-search:Filter ;
+        vitro-search:facetResults  true ;
+        vitro-search:filterField   :field_publication_year ;
+        vitro-search:id            "publication_year" ;
+        vitro-search:public        true .
+
+:field_persons  a                  vitro-search:SearchField ;
+        vitro-search:indexField   "persons_ss" ;
+        vitro-search:isLanguageSpecific true ;
+        vitro-search:multivalued  true .
+
+:range_filter_dates  a            vitro-search:RangeFilter ;
+        vitro-search:filterField  :field_dates ;
+        vitro-search:from         "1900" ;
+        vitro-search:id           "dates" ;
+        vitro-search:public       false ;
+        vitro-search:to           "2030" .
+
+:filter_organizations  a           vitro-search:Filter ;
+        vitro-search:facetResults  true ;
+        vitro-search:filterField   :field_organizations ;
+        vitro-search:id            "organizations" ;
+        vitro-search:isUriValues   true ;
+        vitro-search:public        true .
+
+:filter_persons  a                 vitro-search:Filter ;
+        vitro-search:facetResults  true ;
+        vitro-search:filterField   :field_persons ;
+        vitro-search:id            "persons" ;
+        vitro-search:isUriValues   true ;
+        vitro-search:public        true .
+
+:field_dates  a                    vitro-search:SearchField ;
+        vitro-search:indexField    "dates_drsim" .
+
+:field_organizations  a            vitro-search:SearchField ;
+        vitro-search:indexField    "organizations_ss" ;
+        vitro-search:multivalued   true .
+
+:field_publication_year  a         vitro-search:SearchField ;
+        vitro-search:indexField    "publication_year_ss" .
