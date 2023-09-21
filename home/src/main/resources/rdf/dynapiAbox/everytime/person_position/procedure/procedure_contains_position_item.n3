@@ -1,0 +1,35 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+
+############################################################
+#Condition procedure
+
+<https://vivoweb.org/procedure/contains_position_item>
+        a                                       dynapi:Procedure ;
+        dynapi:providesParameter                <https://vivoweb.org/iteration_parameter/default_condition_0_int> ;
+        dynapi:hasFirstStep                     <https://vivoweb.org/procedure/contains_position_item/conditional_step> .
+        
+<https://vivoweb.org/procedure/contains_position_item/conditional_step>
+        a                                       dynapi:ConditionalStep ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/contains_position_item/condition_satisfied_step> ;
+        dynapi:hasCondition                     <https://vivoweb.org/procedure/contains_position_item/condition_container_contains> .
+        
+<https://vivoweb.org/procedure/contains_position_item/condition_satisfied_step>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/contains_position_item/addOperation> .
+        
+<https://vivoweb.org/procedure/contains_position_item/addOperation>
+	a                                       dynapi:SumOperation ;
+	dynapi:requiresParameter                <https://vivoweb.org/iteration_parameter/add_int_1_param> ;
+	dynapi:requiresParameter                <https://vivoweb.org/iteration_parameter/default_condition_0_int> ;
+	dynapi:providesParameter                <https://vivoweb.org/iteration_parameter/default_condition_0_int> .
+
+<https://vivoweb.org/procedure/contains_position_item/condition_container_contains> 
+        a                                       dynapi:ConditionContainerContains ;
+        dynapi:targetContainer                  <https://vivoweb.org/procedure/person/parameter/positions> ;
+        dynapi:requiresParameter                <https://vivoweb.org/iteration_parameter/iteration_int_param> .

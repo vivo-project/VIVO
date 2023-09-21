@@ -1,0 +1,275 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix creation_properties:    <https://vivoweb.org/procedure/create_person/creation_properties/> .
+@prefix execute_template:       <https://vivoweb.org/procedure/create_person/execute_template/> .
+@prefix condition:              <https://vivoweb.org/condition/person/> .
+@prefix person_parameter:       <https://vivoweb.org/procedure/person/parameter/> .
+@prefix create_person_positions:<https://vivoweb.org/procedure/create_person/create_person_positions/> .
+@prefix iteration_parameter:    <https://vivoweb.org/iteration_parameter/> .
+@prefix whitelist_access:       <https://vivoweb.org/procedure/person/access/> .
+
+###############################################
+### CREATE
+###############################################
+
+<https://vivoweb.org/procedure/create_person>
+        a                        		dynapi:Procedure ;
+        rdfs:label               		"Create a person"@en-US ;
+        dynapi:accessWhitelist                  whitelist_access:admin ;
+        dynapi:hasFirstStep 			creation_properties:step1 ;
+        dynapi:providesParameter                person_parameter:uri .
+
+creation_properties:step1
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 1"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_subject ;
+	dynapi:hasNextStep			creation_properties:conditional_for_step2 .
+
+creation_properties:conditional_for_step2
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person first name check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:step2 ;
+        dynapi:nextIfNotSatisfied               creation_properties:conditional_for_step3 ;
+        dynapi:hasCondition                     condition:first_name_check .
+
+creation_properties:step2
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 2"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_first_name ;
+	dynapi:hasNextStep			creation_properties:conditional_for_step3 .
+
+creation_properties:conditional_for_step3
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person middle name check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:step3 ;
+        dynapi:nextIfNotSatisfied               creation_properties:conditional_for_step4 ;
+        dynapi:hasCondition                     condition:middle_name_check .
+
+creation_properties:step3
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 3"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_middle_name ;
+	dynapi:hasNextStep			creation_properties:conditional_for_step4 .
+
+creation_properties:conditional_for_step4
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person last name check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:step4 ;
+        dynapi:nextIfNotSatisfied               creation_properties:conditional_for_step5 ;
+        dynapi:hasCondition                     condition:last_name_check .
+
+creation_properties:step4
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 4"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_last_name ;
+	dynapi:hasNextStep			creation_properties:conditional_for_step5 .
+
+creation_properties:conditional_for_step5
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person type check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:step5 ;
+        dynapi:nextIfNotSatisfied               creation_properties:conditional_for_step6 ;
+        dynapi:hasCondition                     condition:type_check .
+
+creation_properties:step5
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 5"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_type ;
+	dynapi:hasNextStep			creation_properties:conditional_for_step6 .
+
+creation_properties:conditional_for_step6
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person internal id check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:step6 ;
+        dynapi:nextIfNotSatisfied               creation_properties:conditional_for_step7 ;
+        dynapi:hasCondition                     condition:internal_id_check .
+
+creation_properties:step6
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 6"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_internal_id ;
+	dynapi:hasNextStep			creation_properties:conditional_for_step7 .
+
+creation_properties:conditional_for_step7
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person ORCID check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:step7 ;
+        dynapi:nextIfNotSatisfied               creation_properties:conditional_for_step8 ;
+        dynapi:hasCondition                     condition:orcid_check .
+
+creation_properties:step7
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 7"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_orcid ;
+	dynapi:hasNextStep			creation_properties:conditional_for_step8 .
+
+creation_properties:conditional_for_step8
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person first name check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:step8 ;
+        dynapi:nextIfNotSatisfied               creation_properties:conditional_for_step9 ;
+        dynapi:hasCondition                     condition:scopus_author_id_check .
+
+creation_properties:step8
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 8"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_scopus_id ;
+	dynapi:hasNextStep			creation_properties:conditional_for_step9 .
+
+creation_properties:conditional_for_step9
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person researcher ID check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:step9 ;
+        dynapi:hasCondition                     condition:researcher_id_check .
+
+creation_properties:step9
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 9"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_researcher_id ;
+        dynapi:hasNextStep			creation_properties:conditional_for_step10 .
+
+creation_properties:conditional_for_step10
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person positions check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:step10 ;
+        dynapi:hasCondition                     condition:positions_check .
+
+creation_properties:substitution
+        a                                       dynapi:ParameterSubstitution ;
+        dynapi:substitutionSource               person_parameter:uri ;
+        dynapi:substitutionTarget               person_parameter:current_uri_persisted .
+
+creation_properties:step10
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasParameterSubstitution         creation_properties:substitution ;
+        dynapi:hasOperation                     create_person_positions:loop ;
+        rdfs:label                              "Create provided person positions"@en-US .
+
+## Loop start
+
+create_person_positions:loop
+        a                                       dynapi:LoopOperation ;
+        dynapi:inputDescriptor                  create_person_positions:input_descriptor ;
+        dynapi:conditionDescriptor              create_person_positions:condition_descriptor ;
+        
+        dynapi:outputDescriptor                 create_person_positions:output_descriptor ;
+        dynapi:executableDescriptor             create_person_positions:executable_descriptor ;
+        
+        dynapi:internalParameter                iteration_parameter:iteration_int_param ;
+        
+        dynapi:internalParameter                iteration_parameter:current_positions_item ;
+        dynapi:providesParameter                iteration_parameter:current_positions_item .
+
+create_person_positions:input_descriptor
+        a                                       dynapi:ProcedureDescriptor ;
+        dynapi:providesParameter                iteration_parameter:current_positions_item ;
+        dynapi:requiresParameter                iteration_parameter:iteration_int_param ;
+        dynapi:requiresParameter                person_parameter:positions ;
+        dynapi:call                             <https://vivoweb.org/procedure/get_position_from_container> .
+
+create_person_positions:condition_descriptor
+        a                                       dynapi:ProcedureDescriptor ;
+        dynapi:providesParameter                iteration_parameter:expected_int_result_1 ;
+        dynapi:requiresParameter                iteration_parameter:iteration_int_param ;
+        dynapi:requiresParameter                person_parameter:positions ;
+        dynapi:call                             <https://vivoweb.org/procedure/contains_position_item> .
+        
+create_person_positions:output_descriptor
+        a                                       dynapi:ProcedureDescriptor ;
+        dynapi:requiresParameter                iteration_parameter:iteration_int_param ;
+        dynapi:providesParameter                iteration_parameter:iteration_int_param ;
+        dynapi:call                             <https://vivoweb.org/procedure/increment_iterator> . 
+
+create_person_positions:executable_descriptor
+        a                                       dynapi:ProcedureDescriptor ;
+        dynapi:requiresParameter                iteration_parameter:current_step_uri ;
+        dynapi:requiresParameter                person_parameter:current_uri_persisted ;
+        dynapi:requiresParameter                iteration_parameter:current_positions_item ;
+        dynapi:call                             <https://vivoweb.org/procedure/add_person_position> .  
+
+## Loop end
+
+###############################################
+### N3 TEMPLATE PARTIAL ENTITY CREATION
+###############################################
+
+execute_template:n3_template_subject
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create person N3 Template"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:requiresParameter 		person_parameter:uri ;
+        dynapi:requiresParameter                person_parameter:label ;
+        dynapi:N3TextAdditions   		
+        """
+                ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> ;
+                <http://www.w3.org/2000/01/rdf-schema#label> ?label .
+        """ .
+
+execute_template:n3_template_first_name
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create person first name N3 Template"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:requiresParameter 		person_parameter:uri ;
+        dynapi:requiresParameter                person_parameter:first_name ;
+        dynapi:N3TextAdditions   		"?uri <http://www.w3.org/2006/vcard/ns#givenName> ?first_name . " .
+
+execute_template:n3_template_middle_name
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create person middle name N3 Template"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:requiresParameter 		person_parameter:uri ;
+        dynapi:requiresParameter                person_parameter:middle_name ;
+        dynapi:N3TextAdditions   		"?uri <http://vivoweb.org/ontology/core#middleName> ?middle_name . " .
+
+execute_template:n3_template_last_name
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create person last name N3 Template"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:requiresParameter 		person_parameter:uri ;
+        dynapi:requiresParameter                person_parameter:last_name ;
+        dynapi:N3TextAdditions   		"?uri <http://www.w3.org/2006/vcard/ns#familyName> ?last_name . " .
+
+execute_template:n3_template_type
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create person type N3 Template"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:requiresParameter 		person_parameter:uri ;
+        dynapi:requiresParameter                person_parameter:type ;
+        dynapi:N3TextAdditions   		"?uri <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type . " .
+
+execute_template:n3_template_internal_id
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create person internal id N3 Template"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:requiresParameter 		person_parameter:uri ;
+        dynapi:requiresParameter                person_parameter:internalID ;
+        dynapi:N3TextAdditions   		"?uri <http://vivoweb.org/ontology/core#identifier> ?internalID . " .
+
+execute_template:n3_template_orcid
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create person ORCID N3 Template"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:requiresParameter 		person_parameter:uri ;
+        dynapi:requiresParameter                person_parameter:ORCID ;
+        dynapi:N3TextAdditions   		"?uri <http://vivoweb.org/ontology/core#orcidId> ?ORCID . " .
+
+execute_template:n3_template_scopus_id
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create person SCOPUS author ID N3 Template"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:requiresParameter 		person_parameter:uri ;
+        dynapi:requiresParameter                person_parameter:SCOPUSAuthorID ;
+        dynapi:N3TextAdditions   		"?uri <http://vivoweb.org/ontology/core#scopusId> ?SCOPUSAuthorID . " .
+
+execute_template:n3_template_researcher_id
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create person researcher ID N3 Template"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:requiresParameter 		person_parameter:uri ;
+        dynapi:requiresParameter                person_parameter:ResearcherID ;
+        dynapi:N3TextAdditions   		"?uri <http://vivoweb.org/ontology/core#researcherId> ?ResearcherID . " .

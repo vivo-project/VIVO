@@ -1,0 +1,329 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+
+###############################################
+### PARAMETERS
+###############################################
+
+#####################
+## Person response ##
+#####################
+
+<https://vivoweb.org/ontology/person/parameter/persons>
+        a                                       dynapi:Parameter ;
+        rdfs:label                              "persons"@en-US ;
+        dynapi:name                             "persons" ;
+        dynapi:description                      "List of available persons and statistics (number)" ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/JsonContainerArray> .
+
+<https://vivoweb.org/ontology/person/parameter/count>
+        a                                       dynapi:Parameter ;
+        rdfs:label                              "Number of fetched persons"@en-US ;
+        dynapi:name                             "count" ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/JsonContainer> .
+
+######################
+## Iteration params ##
+######################
+
+<https://vivoweb.org/iteration_parameter/iteration_int_param>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "iteration_param" ;
+        dynapi:defaultValue                     "0" ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> .
+
+<https://vivoweb.org/iteration_parameter/iteration_increment_param>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "int_1" ;
+        dynapi:defaultValue                     "1" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> .
+
+<https://vivoweb.org/iteration_parameter/default_condition_0_int>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "condition_result" ;
+        dynapi:defaultValue                     "0" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> .
+        
+<https://vivoweb.org/iteration_parameter/expected_int_result_1>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "condition_result" ;
+        dynapi:defaultValue                     "1" ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> .
+
+<https://vivoweb.org/iteration_parameter/add_int_1_param>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "int_1" ;
+        dynapi:defaultValue                     "1" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> .
+
+<https://vivoweb.org/iteration_parameter/current_step_uri>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "current_step_uri" ;
+        dynapi:defaultValue                     "https://vivoweb.org/procedure/person_position/,java_uuid_number" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/generated-uri> .
+
+<https://vivoweb.org/iteration_parameter/current_positions_item>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "item" ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/JsonContainer> .
+
+#####################
+## Creation fields ##
+#####################
+
+<https://vivoweb.org/procedure/person/parameter/current_uri_persisted>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "current_uri_persisted" ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/uri> .
+
+<https://vivoweb.org/procedure/person/parameter/uri>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "uri" ;
+        dynapi:defaultValue                     "http://xmlns.com/foaf/0.1/Person#,java_uuid_number" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/generated-uri> .
+
+<https://vivoweb.org/procedure/person/parameter/label>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "label" ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/person/parameter/first_name>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "first_name" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/person/parameter/middle_name>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "middle_name" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/person/parameter/last_name>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "last_name" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/person/parameter/type>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "type" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/uri> .
+
+<https://vivoweb.org/procedure/person/parameter/positions>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "positions" ;
+        dynapi:defaultValue                     "[]" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/JsonContainerArray> .
+
+<https://vivoweb.org/procedure/person/parameter/internalID>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "internalID" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/person/parameter/ORCID>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "ORCID" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/person/parameter/SCOPUSAuthorID>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "SCOPUSAuthorID" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/person/parameter/ResearcherID>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "ResearcherID" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+#########################
+## Read request fields ##
+#########################
+
+<https://vivoweb.org/procedure/person/parameter/resource_id>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "resource_id" ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/uri> ;
+        rdfs:label                              "resource uri"@en-US .
+
+<https://vivoweb.org/procedure/person/parameter/total>
+        a                                       dynapi:parameter ;
+        dynapi:name                             "total" ;
+        dynapi:hasType 		                <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> ;
+        rdfs:label                              "total"@en-US .
+
+<https://vivoweb.org/procedure/person/parameter/limit>
+        a                                       dynapi:parameter ;
+        dynapi:name                             "limit" ;
+        dynapi:defaultValue                     "20" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType 		                <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> ;
+        rdfs:label                              "limit"@en-US .
+
+<https://vivoweb.org/procedure/person/parameter/offset>
+        a                                       dynapi:parameter ;
+        dynapi:name                             "offset" ;
+        dynapi:defaultValue                     "0" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/integer> ;
+        rdfs:label                              "offset"@en-US .
+
+<https://vivoweb.org/procedure/person/parameter/sortBy>
+        a                                       dynapi:parameter ;
+        dynapi:name                             "sortBy" ;
+        dynapi:defaultValue                     "label" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType 		                <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> ;
+        rdfs:label                              "sortBy"@en-US .
+
+<https://vivoweb.org/procedure/person/parameter/order>
+        a                                       dynapi:parameter ;
+        dynapi:name                             "order" ;
+        dynapi:defaultValue                     "ASC" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType 		                <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> ;
+        rdfs:label                              "order"@en-US .
+
+###########################
+## Delete request fields ##
+###########################
+
+<https://vivoweb.org/procedure/person/parameter/person_graph>
+        a                                       dynapi:Model ;
+        dynapi:name                             "person_graph" ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/model> .
+
+###############################################
+### POSITION FIELDS
+###############################################
+
+# Internal
+
+<https://vivoweb.org/procedure/position/parameter/organizationUnitURI_key>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "organizationUnitURI_key" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:defaultValue                 "organizationUnitURI" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> .
+
+<https://vivoweb.org/procedure/position/parameter/organizationUnitName_key>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "organizationUnitName_key" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:defaultValue                 "organizationUnitName" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> .
+
+<https://vivoweb.org/procedure/position/parameter/positionName_key>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "positionName_key" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:defaultValue                 "positionName" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> .
+
+<https://vivoweb.org/procedure/position/parameter/positionType_key>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "positionType_key" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:defaultValue                 "positionType" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> .
+
+<https://vivoweb.org/procedure/position/parameter/startDate_key>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "startDate_key" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:defaultValue                 "startDate" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> .
+
+<https://vivoweb.org/procedure/position/parameter/endDate_key>
+        a                                   dynapi:Parameter ;
+        dynapi:name                         "endDate_key" ;
+        dynapi:isInternal                   "true"^^xsd:boolean ;
+        dynapi:defaultValue                 "endDate" ;
+        dynapi:hasType                      <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string> .
+
+# Provided
+
+<https://vivoweb.org/procedure/position/parameter/organizationUnitURI>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "organizationUnitURI" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/uri> .
+
+<https://vivoweb.org/procedure/position/parameter/organizationUnitName>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "organizationUnitName" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/position/parameter/positionName>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "positionName" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/position/parameter/positionType>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "positionType" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/position/parameter/startDate>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "startDate" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .
+
+<https://vivoweb.org/procedure/position/parameter/endDate>
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "endDate" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/string-literal> .

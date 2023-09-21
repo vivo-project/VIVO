@@ -1,0 +1,24 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix increment_iterator:     <https://vivoweb.org/procedure/increment_iterator/> .
+@prefix iteration_parameter:    <https://vivoweb.org/iteration_parameter/> .
+
+<https://vivoweb.org/procedure/increment_iterator>
+        a                                       dynapi:Procedure ;
+        dynapi:providesParameter                iteration_parameter:iteration_int_param ;
+        dynapi:hasFirstStep                     increment_iterator:step .
+        
+increment_iterator:step
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasOperation                     increment_iterator:sumOperation .
+        
+increment_iterator:sumOperation
+	a                                       dynapi:SumOperation ;
+	dynapi:requiresParameter                iteration_parameter:iteration_increment_param ;
+	dynapi:requiresParameter                iteration_parameter:iteration_int_param ;
+	dynapi:providesParameter                iteration_parameter:iteration_int_param .

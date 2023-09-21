@@ -95,7 +95,7 @@
 <https://vivoweb.org/condition/person/positions_check>
         a                                       dynapi:ConditionIsNotEmpty ;
         rdfs:label                              "condition if person positions are defined"@en-US ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/container/positions> .
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/positions> .
 
 # Person position container keys
 

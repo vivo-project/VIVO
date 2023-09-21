@@ -1,0 +1,98 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix get_from_graph:         <https://vivoweb.org/procedure/delete_person/get_person_from_dynamic_api_graph/> .
+@prefix remove_from_graph:      <https://vivoweb.org/procedure/delete_person/remove_from_dynamic_api_model/> .
+@prefix unload_from_graph:      <https://vivoweb.org/procedure/delete_person/unload_procedure_from_procedure_pool/> .
+@prefix whitelist_access:       <https://vivoweb.org/procedure/person/access/> .
+@prefix person_parameter:       <https://vivoweb.org/procedure/person/parameter/> .
+
+###############################################
+### DELETE
+###############################################
+
+<https://vivoweb.org/procedure/delete_person>
+        a                                       dynapi:Procedure ;
+        rdfs:label                              "Deleting a person"@en-US ;
+        dynapi:accessWhitelist                  whitelist_access:admin ;
+        dynapi:hasFirstStep                     get_from_graph:step .
+
+get_from_graph:step
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      remove_from_graph:step ;
+        dynapi:hasOperation                     get_from_graph:operation .
+
+get_from_graph:operation
+         a                                   dynapi:SparqlConstructQuery ;
+         dynapi:sparqlQueryText              """
+         prefix dynapi: <https://vivoweb.org/ontology/vitro-dynamic-api#>
+         prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+         prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+         prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+         CONSTRUCT { 
+                ?resource_id 
+                rdf:type <http://xmlns.com/foaf/0.1/Person> ;
+                <http://www.w3.org/2006/vcard/ns#givenName> ?first_name ;
+                <http://vivoweb.org/ontology/core#middleName> ?middle_name ;
+                <http://www.w3.org/2006/vcard/ns#familyName> ?last_name ;
+                <http://www.w3.org/2000/01/rdf-schema#label> ?label ;
+                <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type ;
+                <http://vivoweb.org/ontology/core#identifier> ?internalID ;
+                <http://vivoweb.org/ontology/core#orcidId> ?ORCID ;
+                <http://vivoweb.org/ontology/core#scopusId> ?SCOPUSAuthorID ;
+                <http://vivoweb.org/ontology/core#researcherId> ?ResearcherID .
+
+                ?positionURI 
+                rdf:type <http://vivoweb.org/ontology/core#Position> ;
+                <http://xmlns.com/foaf/0.1/Organization> ?organizationUnitURI ;
+                <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?positionName ;
+                <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?positionType ;
+                <http://vivoweb.org/ontology/core#start> ?startDate ;
+                <http://vivoweb.org/ontology/core#end> ?endDate .
+         } WHERE {
+                ?resource_id rdf:type <http://xmlns.com/foaf/0.1/Person>
+                OPTIONAL { ?resource_id <http://www.w3.org/2006/vcard/ns#givenName> ?first_name }
+                OPTIONAL { ?resource_id <http://vivoweb.org/ontology/core#middleName> ?middle_name }
+                OPTIONAL { ?resource_id <http://www.w3.org/2006/vcard/ns#familyName> ?last_name }
+                OPTIONAL { ?resource_id <http://www.w3.org/2000/01/rdf-schema#label> ?label }
+                OPTIONAL { ?resource_id <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type }
+                OPTIONAL { ?resource_id <http://vivoweb.org/ontology/core#identifier> ?internalID }
+                OPTIONAL { ?resource_id <http://vivoweb.org/ontology/core#orcidId> ?ORCID }
+                OPTIONAL { ?resource_id <http://vivoweb.org/ontology/core#scopusId> ?SCOPUSAuthorID }
+                OPTIONAL { ?resource_id <http://vivoweb.org/ontology/core#researcherId> ?ResearcherID }
+                OPTIONAL {
+                        ?resource_id <http://vivoweb.org/ontology/core#Position> ?positionURI .
+                        ?positionURI <http://xmlns.com/foaf/0.1/Organization> ?organizationUnitURI .
+                        ?positionURI <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?positionName .
+                        ?positionURI <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?positionType .
+                        ?positionURI <http://vivoweb.org/ontology/core#start> ?startDate .
+                        ?positionURI <http://vivoweb.org/ontology/core#end> ?endDate .
+                }
+         } 
+         """ ;
+         dynapi:providesParameter               person_parameter:person_graph ;
+         dynapi:requiresParameter               person_parameter:resource_id ;
+         dynapi:hasModel                        <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> .
+
+remove_from_graph:step
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      unload_from_graph:step ;
+        dynapi:hasOperation                     remove_from_graph:operation .
+
+remove_from_graph:operation
+        a                                       dynapi:ModelWriter ;
+        dynapi:retractionModel                  person_parameter:person_graph ;
+        dynapi:targetModel                      <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> .
+
+unload_from_graph:step
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasOperation                     unload_from_graph:operation .
+
+unload_from_graph:operation
+        a                                       dynapi:ProcedurePoolAtomicOperation ;
+        dynapi:poolOperationType                "unload" ;
+        dynapi:requiresParameter                person_parameter:resource_id .

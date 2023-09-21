@@ -1,0 +1,268 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+
+###############################################
+### UPDATE
+###############################################
+
+<https://vivoweb.org/procedure/update_person>
+        a                                       dynapi:Procedure ;
+        rdfs:label                              "Updating a person"@en-US ;
+        dynapi:accessWhitelist                  <https://vivoweb.org/procedure/person/access/admin> ;
+        dynapi:hasFirstStep                     <https://vivoweb.org/procedure/update_person/get_person_from_dynamic_api_graph/step> .
+
+<https://vivoweb.org/procedure/update_person/get_person_from_dynamic_api_graph/step>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      <https://vivoweb.org/procedure/update_person/remove_from_dynamic_api_model/step> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/delete_person/get_person_from_dynamic_api_graph/operation> .
+
+<https://vivoweb.org/procedure/update_person/remove_from_dynamic_api_model/step>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      <https://vivoweb.org/procedure/update_person/unload_procedure_from_procedure_pool/step> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/update_person/remove_from_dynamic_api_model/operation> .
+
+<https://vivoweb.org/procedure/update_person/remove_from_dynamic_api_model/operation>
+        a                                       dynapi:ModelWriter ;
+        dynapi:retractionModel                  <https://vivoweb.org/procedure/person/parameter/person_graph> ;
+        dynapi:targetModel                      <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> .
+
+<https://vivoweb.org/procedure/update_person/unload_procedure_from_procedure_pool/step>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      <https://vivoweb.org/procedure/update_person/creation_properties/step1> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/update_person/unload_procedure_from_procedure_pool/operation> .
+
+<https://vivoweb.org/procedure/update_person/unload_procedure_from_procedure_pool/operation>
+        a                                       dynapi:ProcedurePoolAtomicOperation ;
+        dynapi:poolOperationType                "unload" ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/resource_id> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/step1>
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 1"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/update_person/execute_template/n3_template_subject> ;
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step2> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step2>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person first name check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person/creation_properties/step2> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step3> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/first_name_check> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/step2>
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 2"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/update_person/execute_template/n3_template_first_name> ;
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step3> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step3>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person middle name check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person/creation_properties/step3> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step4> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/middle_name_check> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/step3>
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 3"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/update_person/execute_template/n3_template_middle_name> ;
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step4> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step4>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person last name check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person/creation_properties/step4> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step5> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/last_name_check> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/step4>
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 4"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/update_person/execute_template/n3_template_last_name> ;
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step5> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step5>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person type check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person/creation_properties/step5> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step6> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/type_check> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/step5>
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 5"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/update_person/execute_template/n3_template_type> ;
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step6> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step6>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person internal id check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person/creation_properties/step6> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step7> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/internal_id_check> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/step6>
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 6"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/update_person/execute_template/n3_template_internal_id> ;
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step7> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step7>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person ORCID check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person/creation_properties/step7> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step8> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/orcid_check> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/step7>
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 7"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/update_person/execute_template/n3_template_orcid> ;
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step8> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step8>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person first name check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person/creation_properties/step8> ;
+        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step9> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/scopus_author_id_check> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/step8>
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 8"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/update_person/execute_template/n3_template_scopus_id> ;
+	dynapi:hasNextStep			<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step9> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step9>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person first name check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person/creation_properties/step9> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/researcher_id_check> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/step9>
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of a person step 9"@en-US ;
+        dynapi:hasOperation 			<https://vivoweb.org/procedure/update_person/execute_template/n3_template_researcher_id> ;
+        dynapi:hasNextStep			<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step10> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/conditional_for_step10>
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for person positions check"@en-US ;
+        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/update_person/creation_properties/step10> ;
+        dynapi:hasCondition                     <https://vivoweb.org/condition/person/positions_check> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/substitution>
+        a                                       dynapi:ParameterSubstitution ;
+        dynapi:substitutionSource               <https://vivoweb.org/procedure/person/parameter/resource_id> ;
+        dynapi:substitutionTarget               <https://vivoweb.org/procedure/person/parameter/current_uri_persisted> .
+
+<https://vivoweb.org/procedure/update_person/creation_properties/step10>
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasParameterSubstitution         <https://vivoweb.org/procedure/update_person/creation_properties/substitution> ;
+        dynapi:hasOperation                     <https://vivoweb.org/procedure/update_person/create_person_positions/loop> ;
+        rdfs:label                              "Create provided person positions"@en-US .
+
+<https://vivoweb.org/procedure/update_person/create_person_positions/loop>
+        a                                       dynapi:LoopOperation ;
+        dynapi:inputDescriptor                  <https://vivoweb.org/procedure/create_person/create_person_positions/input_descriptor> ;
+        dynapi:conditionDescriptor              <https://vivoweb.org/procedure/create_person/create_person_positions/condition_descriptor> ;
+        
+        dynapi:outputDescriptor                 <https://vivoweb.org/procedure/create_person/create_person_positions/output_descriptor> ;
+        dynapi:executableDescriptor             <https://vivoweb.org/procedure/update_person/create_person_positions/executable_descriptor> ;
+        
+        dynapi:internalParameter                <https://vivoweb.org/iteration_parameter/iteration_int_param> ;
+        
+        dynapi:internalParameter                <https://vivoweb.org/iteration_parameter/current_positions_item> ;
+        dynapi:providesParameter                <https://vivoweb.org/iteration_parameter/current_positions_item> .
+
+<https://vivoweb.org/procedure/update_person/create_person_positions/executable_descriptor>
+        a                                       dynapi:ProcedureDescriptor ;
+        dynapi:requiresParameter                <https://vivoweb.org/iteration_parameter/current_step_uri> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/current_uri_persisted> ;
+        dynapi:requiresParameter                <https://vivoweb.org/iteration_parameter/current_positions_item> ;
+        dynapi:call                             <https://vivoweb.org/procedure/update_person_position> .
+
+###############################################
+### N3 TEMPLATE PARTIAL ENTITY UPDATE
+###############################################
+
+<https://vivoweb.org/procedure/update_person/execute_template/n3_template_subject>
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"update person N3 Template"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/label> ;
+        dynapi:N3TextAdditions   		
+        """
+                ?resource_id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> ;
+                <http://www.w3.org/2000/01/rdf-schema#label> ?label .
+        """ .
+
+<https://vivoweb.org/procedure/update_person/execute_template/n3_template_first_name>
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"update person first name N3 Template"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id>  ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/first_name> ;
+        dynapi:N3TextAdditions   		"?resource_id <http://www.w3.org/2006/vcard/ns#givenName> ?first_name . " .
+
+<https://vivoweb.org/procedure/update_person/execute_template/n3_template_middle_name>
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"update person middle name N3 Template"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/middle_name> ;
+        dynapi:N3TextAdditions   		"?resource_id <http://vivoweb.org/ontology/core#middleName> ?middle_name . " .
+
+<https://vivoweb.org/procedure/update_person/execute_template/n3_template_last_name>
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"update person last name N3 Template"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/last_name> ;
+        dynapi:N3TextAdditions   		"?resource_id <http://www.w3.org/2006/vcard/ns#familyName> ?last_name . " .
+
+<https://vivoweb.org/procedure/update_person/execute_template/n3_template_type>
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"update person type N3 Template"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/type> ;
+        dynapi:N3TextAdditions   		"?resource_id <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type . " .
+
+<https://vivoweb.org/procedure/update_person/execute_template/n3_template_internal_id>
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"update person internal id N3 Template"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/internalID> ;
+        dynapi:N3TextAdditions   		"?resource_id <http://vivoweb.org/ontology/core#identifier> ?internalID . " .
+
+<https://vivoweb.org/procedure/update_person/execute_template/n3_template_orcid>
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"update person ORCID N3 Template"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/ORCID> ;
+        dynapi:N3TextAdditions   		"?resource_id <http://vivoweb.org/ontology/core#orcidId> ?ORCID . " .
+
+<https://vivoweb.org/procedure/update_person/execute_template/n3_template_scopus_id>
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"update person SCOPUS author ID N3 Template"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/SCOPUSAuthorID> ;
+        dynapi:N3TextAdditions   		"?resource_id <http://vivoweb.org/ontology/core#scopusId> ?SCOPUSAuthorID . " .
+
+<https://vivoweb.org/procedure/update_person/execute_template/n3_template_researcher_id>
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"update person researcher ID N3 Template"@en-US ;
+        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:requiresParameter 		<https://vivoweb.org/procedure/person/parameter/resource_id> ;
+        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/ResearcherID> ;
+        dynapi:N3TextAdditions   		"?resource_id <http://vivoweb.org/ontology/core#researcherId> ?ResearcherID . " .

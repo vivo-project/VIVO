@@ -1,0 +1,83 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix fetching_properties:    <https://vivoweb.org/procedure/read_person/fetching_properties/> .
+@prefix whitelist_access:       <https://vivoweb.org/procedure/person/access/> .
+@prefix response_parameter:     <https://vivoweb.org/ontology/person/parameter/> .
+@prefix request_parameter:      <https://vivoweb.org/procedure/person/parameter/> .
+
+###############################################
+### READ (one)
+###############################################
+
+<https://vivoweb.org/procedure/read_person>
+        a                                       dynapi:Procedure ;
+        rdfs:label                              "Fetching a person"@en-US ;
+        dynapi:accessWhitelist                  whitelist_access:admin ;
+        dynapi:providesParameter 	        response_parameter:persons ;
+        dynapi:hasFirstStep 		        fetching_properties:step .
+
+fetching_properties:step
+        a                        	        dynapi:OperationalStep ;
+        rdfs:label               	        "reading of a person"@en-US ;
+        dynapi:hasOperation 		        fetching_properties:sparql_query .
+
+fetching_properties:sparql_query
+        a                                       dynapi:SparqlSelectQuery ;
+        rdfs:label                              "read person sparql query 1"@en-US ;
+        dynapi:hasModel 		        <https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> ;
+        dynapi:requiresParameter 	        request_parameter:resource_id ;
+        dynapi:providesParameter 	        response_parameter:persons ;
+        dynapi:sparqlQueryText
+        """
+        SELECT  ?uri (GROUP_CONCAT(DISTINCT ?personType; separator=" -> ") as ?type) 
+                (SAMPLE(?personlabel) as ?label) 
+                (SAMPLE(?firstName) as ?first_name)
+                (SAMPLE(?middleName) as ?middle_name)
+                (SAMPLE(?lastName) as ?last_name)
+                (SAMPLE(?internalId) as ?internalID)
+                (SAMPLE(?orcid) as ?ORCID) 
+                (SAMPLE(?scopus) as ?SCOPUSAuthorID)
+                (SAMPLE(?researcherId) as ?ResearcherID)
+                (CONCAT('[',
+                        GROUP_CONCAT(DISTINCT
+                                CONCAT(
+                                        '{"organizationUnitURI":"', IF(BOUND(?organizationUnitURI), STR(?organizationUnitURI), ''), 
+                                        '", "organizationUnitName":"', IF(BOUND(?positionName), STR(?positionName), ''), 
+                                        '", "positionName":"', IF(BOUND(?positionName), STR(?positionName), ''), 
+                                        '", "positionType":"', IF(BOUND(?positionType), STR(?positionType), ''), 
+                                        '", "startDate":"', IF(BOUND(?startDate), STR(?startDate), ''), 
+                                        '", "endDate":"', IF(BOUND(?endDate), STR(?endDate), ''), 
+                                        '"}'
+                                ); separator=", "),
+                        ']')
+                AS ?positions)
+        WHERE {
+                ?uri a <http://xmlns.com/foaf/0.1/Person> .
+                OPTIONAL { ?uri <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?personType }
+                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#givenName> ?firstName }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#middleName> ?middleName }
+                OPTIONAL { ?uri <http://www.w3.org/2006/vcard/ns#familyName> ?lastName }
+                OPTIONAL { ?uri <http://www.w3.org/2000/01/rdf-schema#label> ?personlabel }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#identifier> ?internalId }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#orcidId> ?orcid }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#scopusId> ?scopus }
+                OPTIONAL { ?uri <http://vivoweb.org/ontology/core#researcherId> ?researcherId }
+                OPTIONAL {
+                        ?uri <http://vivoweb.org/ontology/core#Position> ?positionURI .
+                        OPTIONAL { ?positionURI <http://xmlns.com/foaf/0.1/Organization> ?organizationUnitURI }
+                        OPTIONAL { ?positionURI <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?organisationUnitName }
+                        OPTIONAL { ?positionURI <http://www.w3.org/2000/01/rdf-schema#label> ?positionName }
+                        OPTIONAL { ?positionURI <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?positionType }
+                        OPTIONAL { ?positionURI <http://vivoweb.org/ontology/core#start> ?startDate }
+                        OPTIONAL { ?positionURI <http://vivoweb.org/ontology/core#end> ?endDate }
+                }
+                FILTER (?uri = ?resource_id)
+        }
+        GROUP BY ?uri
+        LIMIT 1
+        """ .
