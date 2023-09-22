@@ -5,31 +5,34 @@
 @prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
 @prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
 @prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix contains_position_item: <https://vivoweb.org/procedure/contains_position_item/> .
+@prefix iteration_parameter:    <https://vivoweb.org/iteration_parameter/> .
+@prefix request_parameter:      <https://vivoweb.org/procedure/person/parameter/> .
 
 ############################################################
 #Condition procedure
 
 <https://vivoweb.org/procedure/contains_position_item>
         a                                       dynapi:Procedure ;
-        dynapi:providesParameter                <https://vivoweb.org/iteration_parameter/default_condition_0_int> ;
-        dynapi:hasFirstStep                     <https://vivoweb.org/procedure/contains_position_item/conditional_step> .
+        dynapi:providesParameter                iteration_parameter:default_condition_0_int ;
+        dynapi:hasFirstStep                     contains_position_item:conditional_step .
         
-<https://vivoweb.org/procedure/contains_position_item/conditional_step>
+contains_position_item:conditional_step
         a                                       dynapi:ConditionalStep ;
-        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/contains_position_item/condition_satisfied_step> ;
-        dynapi:hasCondition                     <https://vivoweb.org/procedure/contains_position_item/condition_container_contains> .
+        dynapi:nextIfSatisfied                  contains_position_item:condition_satisfied_step ;
+        dynapi:hasCondition                     contains_position_item:condition_container_contains .
         
-<https://vivoweb.org/procedure/contains_position_item/condition_satisfied_step>
+contains_position_item:condition_satisfied_step
         a                                       dynapi:OperationalStep ;
-        dynapi:hasOperation                     <https://vivoweb.org/procedure/contains_position_item/addOperation> .
+        dynapi:hasOperation                     contains_position_item:addOperation .
         
-<https://vivoweb.org/procedure/contains_position_item/addOperation>
+contains_position_item:addOperation
 	a                                       dynapi:SumOperation ;
-	dynapi:requiresParameter                <https://vivoweb.org/iteration_parameter/add_int_1_param> ;
-	dynapi:requiresParameter                <https://vivoweb.org/iteration_parameter/default_condition_0_int> ;
-	dynapi:providesParameter                <https://vivoweb.org/iteration_parameter/default_condition_0_int> .
+	dynapi:requiresParameter                iteration_parameter:add_int_1_param ;
+	dynapi:requiresParameter                iteration_parameter:default_condition_0_int ;
+	dynapi:providesParameter                iteration_parameter:default_condition_0_int .
 
-<https://vivoweb.org/procedure/contains_position_item/condition_container_contains> 
+contains_position_item:condition_container_contains
         a                                       dynapi:ConditionContainerContains ;
-        dynapi:targetContainer                  <https://vivoweb.org/procedure/person/parameter/positions> ;
-        dynapi:requiresParameter                <https://vivoweb.org/iteration_parameter/iteration_int_param> .
+        dynapi:targetContainer                  request_parameter:positions ;
+        dynapi:requiresParameter                iteration_parameter:iteration_int_param .

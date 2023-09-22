@@ -5,6 +5,12 @@
 @prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
 @prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
 @prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix position_parameter:     <https://vivoweb.org/procedure/position/parameter/> .
+@prefix position_condition:     <https://vivoweb.org/condition/position/> .
+@prefix iteration_parameter:    <https://vivoweb.org/iteration_parameter/> .
+@prefix whitelist_access:       <https://vivoweb.org/procedure/person/access/> .
+@prefix person_condition:       <https://vivoweb.org/condition/person/> .
+@prefix person_parameter:       <https://vivoweb.org/procedure/person/parameter/> .
 
 ##########################
 ## Unpacking operations ##
@@ -12,39 +18,39 @@
 
 <https://vivoweb.org/procedure/unpacking_properties/get_organisation_unit_uri/operation>
         a                                       dynapi:ContainerQuery ;
-        dynapi:targetContainer                  <https://vivoweb.org/iteration_parameter/current_positions_item> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/position/parameter/organizationUnitURI_key> ;
-        dynapi:providesParameter                <https://vivoweb.org/procedure/position/parameter/organizationUnitURI> .
+        dynapi:targetContainer                  iteration_parameter:current_positions_item ;
+        dynapi:requiresParameter                position_parameter:organizationUnitURI_key ;
+        dynapi:providesParameter                position_parameter:organizationUnitURI .
 
 <https://vivoweb.org/procedure/unpacking_properties/get_organisation_unit_name/operation>
         a                                       dynapi:ContainerQuery ;
-        dynapi:targetContainer                  <https://vivoweb.org/iteration_parameter/current_positions_item> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/position/parameter/organizationUnitName_key> ;
-        dynapi:providesParameter                <https://vivoweb.org/procedure/position/parameter/organizationUnitName> .
+        dynapi:targetContainer                  iteration_parameter:current_positions_item ;
+        dynapi:requiresParameter                position_parameter:organizationUnitName_key ;
+        dynapi:providesParameter                position_parameter:organizationUnitName .
 
 <https://vivoweb.org/procedure/unpacking_properties/get_position_name/operation>
         a                                       dynapi:ContainerQuery ;
-        dynapi:targetContainer                  <https://vivoweb.org/iteration_parameter/current_positions_item> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/position/parameter/positionName_key> ;
-        dynapi:providesParameter                <https://vivoweb.org/procedure/position/parameter/positionName> .
+        dynapi:targetContainer                  iteration_parameter:current_positions_item ;
+        dynapi:requiresParameter                position_parameter:positionName_key ;
+        dynapi:providesParameter                position_parameter:positionName .
 
 <https://vivoweb.org/procedure/unpacking_properties/get_position_type/operation>
         a                                       dynapi:ContainerQuery ;
-        dynapi:targetContainer                  <https://vivoweb.org/iteration_parameter/current_positions_item> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/position/parameter/positionType_key> ;
-        dynapi:providesParameter                <https://vivoweb.org/procedure/position/parameter/positionType> .
+        dynapi:targetContainer                  iteration_parameter:current_positions_item ;
+        dynapi:requiresParameter                position_parameter:positionType_key ;
+        dynapi:providesParameter                position_parameter:positionType .
 
 <https://vivoweb.org/procedure/unpacking_properties/get_start_date/operation>
         a                                       dynapi:ContainerQuery ;
-        dynapi:targetContainer                  <https://vivoweb.org/iteration_parameter/current_positions_item> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/position/parameter/startDate_key> ;
-        dynapi:providesParameter                <https://vivoweb.org/procedure/position/parameter/startDate> .
+        dynapi:targetContainer                  iteration_parameter:current_positions_item ;
+        dynapi:requiresParameter                position_parameter:startDate_key ;
+        dynapi:providesParameter                position_parameter:startDate .
 
 <https://vivoweb.org/procedure/unpacking_properties/get_end_date/operation>
         a                                       dynapi:ContainerQuery ;
-        dynapi:targetContainer                  <https://vivoweb.org/iteration_parameter/current_positions_item> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/position/parameter/endDate_key> ;
-        dynapi:providesParameter                <https://vivoweb.org/procedure/position/parameter/endDate> .
+        dynapi:targetContainer                  iteration_parameter:current_positions_item ;
+        dynapi:requiresParameter                position_parameter:endDate_key ;
+        dynapi:providesParameter                position_parameter:endDate .
 
 ###############################################
 ### PARAMETER CHECKS
@@ -52,87 +58,87 @@
 
 # Person attributes
 
-<https://vivoweb.org/condition/person/first_name_check>
+person_condition:first_name_check
         a                                       dynapi:ConditionIsNotEmpty ;
         rdfs:label                              "condition if person first name is defined"@en-US ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/first_name> .
+        dynapi:requiresParameter                person_parameter:first_name .
 
-<https://vivoweb.org/condition/person/middle_name_check>
+person_condition:middle_name_check
         a                                       dynapi:ConditionIsNotEmpty ;
         rdfs:label                              "condition if person middle name is defined"@en-US ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/middle_name> .
+        dynapi:requiresParameter                person_parameter:middle_name .
 
-<https://vivoweb.org/condition/person/last_name_check>
+person_condition:last_name_check
         a                                       dynapi:ConditionIsNotEmpty ;
         rdfs:label                              "condition if person last name is defined"@en-US ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/last_name> .
+        dynapi:requiresParameter                person_parameter:last_name .
 
-<https://vivoweb.org/condition/person/type_check>
+person_condition:type_check
         a                                       dynapi:ConditionIsNotEmpty ;
         rdfs:label                              "condition if person type is defined"@en-US ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/type> .
+        dynapi:requiresParameter                person_parameter:type .
 
-<https://vivoweb.org/condition/person/internal_id_check>
+person_condition:internal_id_check
         a                                       dynapi:ConditionIsNotEmpty ;
         rdfs:label                              "condition if person internal ID is defined"@en-US ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/internalID> .
+        dynapi:requiresParameter                person_parameter:internalID .
 
-<https://vivoweb.org/condition/person/orcid_check>
+person_condition:orcid_check
         a                                       dynapi:ConditionIsNotEmpty ;
         rdfs:label                              "condition if person ORCID is defined"@en-US ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/ORCID> .
+        dynapi:requiresParameter                person_parameter:ORCID .
 
-<https://vivoweb.org/condition/person/scopus_author_id_check>
+person_condition:scopus_author_id_check
         a                                       dynapi:ConditionIsNotEmpty ;
         rdfs:label                              "condition if person SCOPUS author id is defined"@en-US ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/SCOPUSAuthorID> .
+        dynapi:requiresParameter                person_parameter:SCOPUSAuthorID .
 
-<https://vivoweb.org/condition/person/researcher_id_check>
+person_condition:researcher_id_check
         a                                       dynapi:ConditionIsNotEmpty ;
         rdfs:label                              "condition if person researcher ID is defined"@en-US ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/ResearcherID> .
+        dynapi:requiresParameter                person_parameter:ResearcherID .
 
-<https://vivoweb.org/condition/person/positions_check>
+person_condition:positions_check
         a                                       dynapi:ConditionIsNotEmpty ;
         rdfs:label                              "condition if person positions are defined"@en-US ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/positions> .
+        dynapi:requiresParameter                person_parameter:positions .
 
 # Person position container keys
 
-<https://vivoweb.org/condition/position/contains_organisation_unit_uri_key> 
+position_condition:contains_organisation_unit_uri_key
         a                                       dynapi:ConditionContainerContains ;
-        dynapi:targetContainer                  <https://vivoweb.org/iteration_parameter/current_positions_item> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/position/parameter/organizationUnitURI_key> .
+        dynapi:targetContainer                  iteration_parameter:current_positions_item ;
+        dynapi:requiresParameter                position_parameter:organizationUnitURI_key .
 
-<https://vivoweb.org/condition/position/contains_organisation_unit_name_key> 
+position_condition:contains_organisation_unit_name_key 
         a                                       dynapi:ConditionContainerContains ;
-        dynapi:targetContainer                  <https://vivoweb.org/iteration_parameter/current_positions_item> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/position/parameter/organizationUnitName_key> .
+        dynapi:targetContainer                  iteration_parameter:current_positions_item ;
+        dynapi:requiresParameter                position_parameter:organizationUnitName_key .
 
-<https://vivoweb.org/condition/position/contains_position_name_key> 
+position_condition:contains_position_name_key
         a                                       dynapi:ConditionContainerContains ;
-        dynapi:targetContainer                  <https://vivoweb.org/iteration_parameter/current_positions_item> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/position/parameter/positionName_key> .
+        dynapi:targetContainer                  iteration_parameter:current_positions_item ;
+        dynapi:requiresParameter                position_parameter:positionName_key .
 
-<https://vivoweb.org/condition/position/contains_position_type_key> 
+position_condition:contains_position_type_key
         a                                       dynapi:ConditionContainerContains ;
-        dynapi:targetContainer                  <https://vivoweb.org/iteration_parameter/current_positions_item> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/position/parameter/positionType_key> .
+        dynapi:targetContainer                  iteration_parameter:current_positions_item ;
+        dynapi:requiresParameter                position_parameter:positionType_key .
 
-<https://vivoweb.org/condition/position/contains_start_date_key> 
+position_condition:contains_start_date_key
         a                                       dynapi:ConditionContainerContains ;
-        dynapi:targetContainer                  <https://vivoweb.org/iteration_parameter/current_positions_item> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/position/parameter/startDate_key> .
+        dynapi:targetContainer                  iteration_parameter:current_positions_item ;
+        dynapi:requiresParameter                position_parameter:startDate_key .
 
-<https://vivoweb.org/condition/position/contains_end_date_key> 
+position_condition:contains_end_date_key
         a                                       dynapi:ConditionContainerContains ;
-        dynapi:targetContainer                  <https://vivoweb.org/iteration_parameter/current_positions_item> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/position/parameter/endDate_key> .
+        dynapi:targetContainer                  iteration_parameter:current_positions_item ;
+        dynapi:requiresParameter                position_parameter:endDate_key .
 
 ###############################################
 ### ACCESS CONTROL
 ###############################################
 
-<https://vivoweb.org/procedure/person/access/admin>
+whitelist_access:admin
         a                                       dynapi:GroupAccessWhitelist ;
         dynapi:userGroup                        <https://vivoweb.org/ontology/vitro-dynamic-api/user-group/admin> .

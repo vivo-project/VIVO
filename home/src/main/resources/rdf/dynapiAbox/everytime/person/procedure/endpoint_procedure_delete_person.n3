@@ -76,7 +76,7 @@ get_from_graph:operation
          """ ;
          dynapi:providesParameter               person_parameter:person_graph ;
          dynapi:requiresParameter               person_parameter:resource_id ;
-         dynapi:hasModel                        <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> .
+         dynapi:hasModel                        <https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> .
 
 remove_from_graph:step
         a                                       dynapi:OperationalStep ;

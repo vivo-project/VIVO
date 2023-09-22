@@ -65,7 +65,7 @@ event_fetching:operation
          """ ;
          dynapi:providesParameter               deletion_parameter:event_graph ;
          dynapi:requiresParameter               deletion_parameter:resource_id ;
-         dynapi:hasModel                        dynapi_model:abox_assertions .
+         dynapi:hasModel                        dynapi_model:full_union .
 
 event_removal:step
         a                                       dynapi:OperationalStep ;

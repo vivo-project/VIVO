@@ -53,7 +53,7 @@ fetching_properties:operation
          """ ;
          dynapi:providesParameter               deletion_parameters:organization_unit_graph ;
          dynapi:requiresParameter               deletion_parameters:resource_id ;
-         dynapi:hasModel                        <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> .
+         dynapi:hasModel                        <https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> .
 
 deletion_properties:step
         a                                       dynapi:OperationalStep ;
