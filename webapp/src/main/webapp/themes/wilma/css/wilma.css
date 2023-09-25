@@ -1188,12 +1188,10 @@ footer {
     color: #4e5051;
     background-color: #fff;
 }
-/* footer p.copyright { */
-    /* float: left; */
-    /* padding-top: 55px; */
-    /* padding-left: 30px; */
-    /* width: 600px; */
-/* } */
+footer p.copyright {
+    padding-left: 10px;
+}
+
 footer p.copyright small {
     font-size: 1em;
 }
@@ -1628,12 +1626,12 @@ ul#individual-tools {
 }
 
 #share-contact {
-    float: left;
+    float: unset;
 }
 
 @media (min-width: 768px) {
     #share-contact {
-        float: unset;
+        float: left;
     }
 }
 
@@ -1689,8 +1687,8 @@ h3.internal-auth {
 }
 
 #individual-intro.person #individual-info {
-    width: 100%;
-    float: unset;
+    width: 75%;
+    /* float: unset; */
 }
 
 ul#individual-personInPosition {
@@ -1742,14 +1740,14 @@ section#right-hand-column:after {
 
 #right-hand-column {
     float: unset;
-    width: initial;
+    width: 100%;
     padding: 0 0 20px 0;
 }
 
 @media (min-width: 768px) {
     #right-hand-column {
         padding: 0 0 0 20px;
-        width: 100%;
+        width: initial;
         float: right;
     }
 }
@@ -1801,6 +1799,7 @@ article.property .data-property-statement {
 article.property ul.property-list li a {
     /*color: #2485ae;*/   /* cappadona: seems unnecessarily specific and is overriding .more-less from individual.css so I'm commenting out for now */
     line-height: 1.6em;
+    word-break: break-all
 }
 /* MISCELLANEOUS ------>  */
 .displace {
