@@ -4,6 +4,7 @@
 @prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
 @prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
 @prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix dynapi_model:           <https://vivoweb.org/ontology/vitro-dynamic-api/model/> .
 @prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
 @prefix response_parameters:    <https://vivoweb.org/ontology/organization_unit/parameter/> .
 @prefix read_parameters:        <https://vivoweb.org/procedure/organization_unit/parameter/> .
@@ -32,7 +33,7 @@ fetching_properties:step
 fetching_properties:sparql_select_query
         a                                       dynapi:SparqlSelectQuery ;
         rdfs:label                              "read OUs sparql query"@en-US ;
-        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> ;
+        dynapi:hasModel 			dynapi_model:full_union ;
         dynapi:providesParameter 		response_parameters:organizationUnits ;
         dynapi:requiresPlainParameter 	        read_parameters:limit ;
         dynapi:requiresPlainParameter           read_parameters:offset ;
@@ -66,7 +67,7 @@ statistics:step
 statistics:sparql_query
         a                                       dynapi:SparqlSelectQuery ;
         rdfs:label                              "number of OUs sparql query 1"@en-US ;
-        dynapi:hasModel 		        <https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> ;
+        dynapi:hasModel 		        dynapi_model:full_union ;
         dynapi:providesParameter 	        response_parameters:count ;
         dynapi:sparqlQueryText
         """

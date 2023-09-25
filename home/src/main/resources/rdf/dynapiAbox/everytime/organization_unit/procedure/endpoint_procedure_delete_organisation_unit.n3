@@ -4,6 +4,7 @@
 @prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
 @prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
 @prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix dynapi_model:           <https://vivoweb.org/ontology/vitro-dynamic-api/model/> .
 @prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
 @prefix fetching_properties:    <https://vivoweb.org/procedure/delete_organization_unit/get_organization_unit_from_dynamic_api_graph/> .
 @prefix deletion_properties:    <https://vivoweb.org/procedure/delete_organization_unit/remove_from_dynamic_api_model/> .
@@ -53,7 +54,7 @@ fetching_properties:operation
          """ ;
          dynapi:providesParameter               deletion_parameters:organization_unit_graph ;
          dynapi:requiresParameter               deletion_parameters:resource_id ;
-         dynapi:hasModel                        <https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> .
+         dynapi:hasModel                        dynapi_model:full_union .
 
 deletion_properties:step
         a                                       dynapi:OperationalStep ;
@@ -63,7 +64,7 @@ deletion_properties:step
 deletion_properties:operation
         a                                       dynapi:ModelWriter ;
         dynapi:retractionModel                  deletion_parameters:organization_unit_graph ;
-        dynapi:targetModel                      <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> .
+        dynapi:targetModel                      dynapi_model:abox_assertions .
 
 unloading_properties:step
         a                                       dynapi:OperationalStep ;

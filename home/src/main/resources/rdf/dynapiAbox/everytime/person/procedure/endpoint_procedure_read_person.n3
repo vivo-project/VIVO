@@ -4,6 +4,7 @@
 @prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
 @prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
 @prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix dynapi_model:           <https://vivoweb.org/ontology/vitro-dynamic-api/model/> .
 @prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
 @prefix fetching_properties:    <https://vivoweb.org/procedure/read_person/fetching_properties/> .
 @prefix whitelist_access:       <https://vivoweb.org/procedure/person/access/> .
@@ -29,7 +30,7 @@ fetching_properties:step
 fetching_properties:sparql_query
         a                                       dynapi:SparqlSelectQuery ;
         rdfs:label                              "read person sparql query 1"@en-US ;
-        dynapi:hasModel 		        <https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> ;
+        dynapi:hasModel 		        dynapi_model:full_union ;
         dynapi:requiresParameter 	        request_parameter:resource_id ;
         dynapi:providesParameter 	        response_parameter:persons ;
         dynapi:sparqlQueryText

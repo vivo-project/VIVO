@@ -4,6 +4,7 @@
 @prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
 @prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
 @prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix dynapi_model:           <https://vivoweb.org/ontology/vitro-dynamic-api/model/> .
 @prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
 @prefix creation_properties:    <https://vivoweb.org/procedure/create_person/creation_properties/> .
 @prefix execute_template:       <https://vivoweb.org/procedure/create_person/execute_template/> .
@@ -110,7 +111,7 @@ creation_properties:step7
 
 creation_properties:conditional_for_step8
         a                                       dynapi:ConditionalStep ;
-        rdfs:label                              "conditional step for person first name check"@en-US ;
+        rdfs:label                              "conditional step for scopus ID check"@en-US ;
         dynapi:nextIfSatisfied                  creation_properties:step8 ;
         dynapi:nextIfNotSatisfied               creation_properties:conditional_for_step9 ;
         dynapi:hasCondition                     condition:scopus_author_id_check .
@@ -125,6 +126,7 @@ creation_properties:conditional_for_step9
         a                                       dynapi:ConditionalStep ;
         rdfs:label                              "conditional step for person researcher ID check"@en-US ;
         dynapi:nextIfSatisfied                  creation_properties:step9 ;
+        dynapi:nextIfNotSatisfied               creation_properties:conditional_for_step10 ;
         dynapi:hasCondition                     condition:researcher_id_check .
 
 creation_properties:step9
@@ -201,7 +203,7 @@ create_person_positions:executable_descriptor
 execute_template:n3_template_subject
         a                        		dynapi:N3Template ;
         rdfs:label               		"create person N3 Template"@en-US ;
-        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
         dynapi:requiresParameter 		person_parameter:uri ;
         dynapi:requiresParameter                person_parameter:label ;
         dynapi:N3TextAdditions   		
@@ -213,7 +215,7 @@ execute_template:n3_template_subject
 execute_template:n3_template_first_name
         a                        		dynapi:N3Template ;
         rdfs:label               		"create person first name N3 Template"@en-US ;
-        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
         dynapi:requiresParameter 		person_parameter:uri ;
         dynapi:requiresParameter                person_parameter:first_name ;
         dynapi:N3TextAdditions   		"?uri <http://www.w3.org/2006/vcard/ns#givenName> ?first_name . " .
@@ -221,7 +223,7 @@ execute_template:n3_template_first_name
 execute_template:n3_template_middle_name
         a                        		dynapi:N3Template ;
         rdfs:label               		"create person middle name N3 Template"@en-US ;
-        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
         dynapi:requiresParameter 		person_parameter:uri ;
         dynapi:requiresParameter                person_parameter:middle_name ;
         dynapi:N3TextAdditions   		"?uri <http://vivoweb.org/ontology/core#middleName> ?middle_name . " .
@@ -229,7 +231,7 @@ execute_template:n3_template_middle_name
 execute_template:n3_template_last_name
         a                        		dynapi:N3Template ;
         rdfs:label               		"create person last name N3 Template"@en-US ;
-        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
         dynapi:requiresParameter 		person_parameter:uri ;
         dynapi:requiresParameter                person_parameter:last_name ;
         dynapi:N3TextAdditions   		"?uri <http://www.w3.org/2006/vcard/ns#familyName> ?last_name . " .
@@ -237,7 +239,7 @@ execute_template:n3_template_last_name
 execute_template:n3_template_type
         a                        		dynapi:N3Template ;
         rdfs:label               		"create person type N3 Template"@en-US ;
-        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
         dynapi:requiresParameter 		person_parameter:uri ;
         dynapi:requiresParameter                person_parameter:type ;
         dynapi:N3TextAdditions   		"?uri <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type . " .
@@ -245,7 +247,7 @@ execute_template:n3_template_type
 execute_template:n3_template_internal_id
         a                        		dynapi:N3Template ;
         rdfs:label               		"create person internal id N3 Template"@en-US ;
-        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
         dynapi:requiresParameter 		person_parameter:uri ;
         dynapi:requiresParameter                person_parameter:internalID ;
         dynapi:N3TextAdditions   		"?uri <http://vivoweb.org/ontology/core#identifier> ?internalID . " .
@@ -253,7 +255,7 @@ execute_template:n3_template_internal_id
 execute_template:n3_template_orcid
         a                        		dynapi:N3Template ;
         rdfs:label               		"create person ORCID N3 Template"@en-US ;
-        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
         dynapi:requiresParameter 		person_parameter:uri ;
         dynapi:requiresParameter                person_parameter:ORCID ;
         dynapi:N3TextAdditions   		"?uri <http://vivoweb.org/ontology/core#orcidId> ?ORCID . " .
@@ -261,7 +263,7 @@ execute_template:n3_template_orcid
 execute_template:n3_template_scopus_id
         a                        		dynapi:N3Template ;
         rdfs:label               		"create person SCOPUS author ID N3 Template"@en-US ;
-        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
         dynapi:requiresParameter 		person_parameter:uri ;
         dynapi:requiresParameter                person_parameter:SCOPUSAuthorID ;
         dynapi:N3TextAdditions   		"?uri <http://vivoweb.org/ontology/core#scopusId> ?SCOPUSAuthorID . " .
@@ -269,7 +271,7 @@ execute_template:n3_template_scopus_id
 execute_template:n3_template_researcher_id
         a                        		dynapi:N3Template ;
         rdfs:label               		"create person researcher ID N3 Template"@en-US ;
-        dynapi:hasModel 			<https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
         dynapi:requiresParameter 		person_parameter:uri ;
         dynapi:requiresParameter                person_parameter:ResearcherID ;
         dynapi:N3TextAdditions   		"?uri <http://vivoweb.org/ontology/core#researcherId> ?ResearcherID . " .

@@ -4,96 +4,104 @@
 @prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
 @prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
 @prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix dynapi_model:           <https://vivoweb.org/ontology/vitro-dynamic-api/model/> .
 @prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix add_person_position:    <https://vivoweb.org/procedure/add_person_position/> .
+@prefix execute_template:       <https://vivoweb.org/procedure/add_person_position/execute_template/> .
+@prefix position_parameter:     <https://vivoweb.org/procedure/position/parameter/> .
+@prefix person_parameter:       <https://vivoweb.org/procedure/person/parameter/> .
+@prefix iteration_parameter:    <https://vivoweb.org/iteration_parameter/> .
+@prefix condition:              <https://vivoweb.org/condition/position/> .
+@prefix unpacking_properties:   <https://vivoweb.org/procedure/person_position/unpacking_properties/> .
 
 ############################################################
 #Add person position
 
 <https://vivoweb.org/procedure/add_person_position>
         a                                       dynapi:Procedure ;
-        dynapi:hasFirstStep                     <https://vivoweb.org/procedure/contains_organisation_unit_uri_key/conditional_step> .
+        dynapi:hasFirstStep                     add_person_position:contains_organisation_unit_uri_key .
 
-<https://vivoweb.org/procedure/contains_organisation_unit_uri_key/conditional_step>
+add_person_position:contains_organisation_unit_uri_key
         a                                       dynapi:ConditionalStep ;
-        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/get_organisation_unit_uri/step> ;
-        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/contains_organisation_unit_name_key/conditional_step> ;
-        dynapi:hasCondition                     <https://vivoweb.org/condition/position/contains_organisation_unit_uri_key> .
+        dynapi:nextIfSatisfied                  add_person_position:get_organisation_unit_uri ;
+        dynapi:nextIfNotSatisfied               add_person_position:contains_organisation_unit_name_key ;
+        dynapi:hasCondition                     condition:contains_organisation_unit_uri_key .
 
-<https://vivoweb.org/procedure/get_organisation_unit_uri/step>
+add_person_position:get_organisation_unit_uri
         a                                       dynapi:OperationalStep ;
-        dynapi:hasNextStep                      <https://vivoweb.org/procedure/contains_organisation_unit_name_key/conditional_step> ;
-        dynapi:hasOperation                     <https://vivoweb.org/procedure/unpacking_properties/get_organisation_unit_uri/operation> .
+        dynapi:hasNextStep                      add_person_position:contains_organisation_unit_name_key ;
+        dynapi:hasOperation                     unpacking_properties:get_organisation_unit_uri .
 
-<https://vivoweb.org/procedure/contains_organisation_unit_name_key/conditional_step>
+add_person_position:contains_organisation_unit_name_key
         a                                       dynapi:ConditionalStep ;
-        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/get_organisation_unit_name/step> ;
-        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/contains_position_name_key/conditional_step> ;
-        dynapi:hasCondition                     <https://vivoweb.org/condition/position/contains_organisation_unit_name_key> .
+        dynapi:nextIfSatisfied                  add_person_position:get_organisation_unit_name ;
+        dynapi:nextIfNotSatisfied               add_person_position:contains_position_name_key ;
+        dynapi:hasCondition                     condition:contains_organisation_unit_name_key .
 
-<https://vivoweb.org/procedure/get_organisation_unit_name/step>
+add_person_position:get_organisation_unit_name
         a                                       dynapi:OperationalStep ;
-        dynapi:hasNextStep                      <https://vivoweb.org/procedure/contains_position_name_key/conditional_step> ;
-        dynapi:hasOperation                     <https://vivoweb.org/procedure/unpacking_properties/get_organisation_unit_name/operation> .
+        dynapi:hasNextStep                      add_person_position:contains_position_name_key ;
+        dynapi:hasOperation                     unpacking_properties:get_organisation_unit_name .
 
-<https://vivoweb.org/procedure/contains_position_name_key/conditional_step>
+add_person_position:contains_position_name_key
         a                                       dynapi:ConditionalStep ;
-        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/get_position_name/step> ;
-        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/contains_position_type_key/conditional_step> ;
-        dynapi:hasCondition                     <https://vivoweb.org/condition/position/contains_position_name_key> .
+        dynapi:nextIfSatisfied                  add_person_position:get_position_name ;
+        dynapi:nextIfNotSatisfied               add_person_position:contains_position_type_key ;
+        dynapi:hasCondition                     condition:contains_position_name_key .
 
-<https://vivoweb.org/procedure/get_position_name/step>
+add_person_position:get_position_name
         a                                       dynapi:OperationalStep ;
-        dynapi:hasNextStep                      <https://vivoweb.org/procedure/contains_position_type_key/conditional_step>  ;
-        dynapi:hasOperation                     <https://vivoweb.org/procedure/unpacking_properties/get_position_name/operation> .
+        dynapi:hasNextStep                      add_person_position:contains_position_type_key  ;
+        dynapi:hasOperation                     unpacking_properties:get_position_name .
 
-<https://vivoweb.org/procedure/contains_position_type_key/conditional_step>
+add_person_position:contains_position_type_key
         a                                       dynapi:ConditionalStep ;
-        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/get_position_type/step> ;
-        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/contains_start_date_key/conditional_step> ;
-        dynapi:hasCondition                     <https://vivoweb.org/condition/position/contains_position_type_key> .
+        dynapi:nextIfSatisfied                  add_person_position:get_position_type ;
+        dynapi:nextIfNotSatisfied               add_person_position:contains_start_date_key ;
+        dynapi:hasCondition                     condition:contains_position_type_key .
 
-<https://vivoweb.org/procedure/get_position_type/step>
+add_person_position:get_position_type
         a                                       dynapi:OperationalStep ;
-        dynapi:hasNextStep                      <https://vivoweb.org/procedure/contains_start_date_key/conditional_step> ;
-        dynapi:hasOperation                     <https://vivoweb.org/procedure/unpacking_properties/get_position_type/operation> .
+        dynapi:hasNextStep                      add_person_position:contains_start_date_key ;
+        dynapi:hasOperation                     unpacking_properties:get_position_type .
 
-<https://vivoweb.org/procedure/contains_start_date_key/conditional_step>
+add_person_position:contains_start_date_key
         a                                       dynapi:ConditionalStep ;
-        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/get_start_date/step> ;
-        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/contains_end_date_key/conditional_step> ;
-        dynapi:hasCondition                     <https://vivoweb.org/condition/position/contains_start_date_key> .
+        dynapi:nextIfSatisfied                  add_person_position:get_start_date ;
+        dynapi:nextIfNotSatisfied               add_person_position:contains_end_date_key ;
+        dynapi:hasCondition                     condition:contains_start_date_key .
 
-<https://vivoweb.org/procedure/get_start_date/step>
+add_person_position:get_start_date
         a                                       dynapi:OperationalStep ;
-        dynapi:hasNextStep                      <https://vivoweb.org/procedure/contains_end_date_key/conditional_step> ;
-        dynapi:hasOperation                     <https://vivoweb.org/procedure/unpacking_properties/get_start_date/operation> .
+        dynapi:hasNextStep                      add_person_position:contains_end_date_key ;
+        dynapi:hasOperation                     unpacking_properties:get_start_date .
 
-<https://vivoweb.org/procedure/contains_end_date_key/conditional_step>
+add_person_position:contains_end_date_key
         a                                       dynapi:ConditionalStep ;
-        dynapi:nextIfSatisfied                  <https://vivoweb.org/procedure/get_end_date/step> ;
-        dynapi:nextIfNotSatisfied               <https://vivoweb.org/procedure/position_construct_query_fill_in/step> ;
-        dynapi:hasCondition                     <https://vivoweb.org/condition/position/contains_end_date_key> .
+        dynapi:nextIfSatisfied                  add_person_position:get_end_date ;
+        dynapi:nextIfNotSatisfied               add_person_position:position_construct_query_fill_in ;
+        dynapi:hasCondition                     condition:contains_end_date_key .
 
-<https://vivoweb.org/procedure/get_end_date/step>
+add_person_position:get_end_date
         a                                       dynapi:OperationalStep ;
-        dynapi:hasNextStep                      <https://vivoweb.org/procedure/position_construct_query_fill_in/step> ;
-        dynapi:hasOperation                     <https://vivoweb.org/procedure/unpacking_properties/get_end_date/operation> .
+        dynapi:hasNextStep                      add_person_position:position_construct_query_fill_in ;
+        dynapi:hasOperation                     unpacking_properties:get_end_date .
 
-<https://vivoweb.org/procedure/position_construct_query_fill_in/step>
+add_person_position:position_construct_query_fill_in
         a                                       dynapi:OperationalStep ;
-        dynapi:hasNextStep                      <https://vivoweb.org/procedure/bind_position_construct_query/step> ;
-        dynapi:hasOperation                     <https://vivoweb.org/procedure/position_construct_query_fill_in/operation> .
+        dynapi:hasNextStep                      add_person_position:bind_position_construct_query ;
+        dynapi:hasOperation                     execute_template:position_construct_query_fill_in .
 
-<https://vivoweb.org/procedure/position_construct_query_fill_in/operation>
+execute_template:position_construct_query_fill_in
         a                                       dynapi:N3Template ;
-        dynapi:hasModel                         <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/position/parameter/organizationUnitURI>  ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/position/parameter/organizationUnitName> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/position/parameter/positionName> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/position/parameter/positionType> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/position/parameter/startDate> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/position/parameter/endDate> ;
-        dynapi:requiresParameter                <https://vivoweb.org/iteration_parameter/current_step_uri> ;
+        dynapi:hasModel                         dynapi_model:abox_assertions ;
+        dynapi:requiresParameter                position_parameter:organizationUnitURI ;
+        dynapi:requiresParameter                position_parameter:organizationUnitName ;
+        dynapi:requiresParameter                position_parameter:positionName ;
+        dynapi:requiresParameter                position_parameter:positionType ;
+        dynapi:requiresParameter                position_parameter:startDate ;
+        dynapi:requiresParameter                position_parameter:endDate ;
+        dynapi:requiresParameter                iteration_parameter:current_step_uri ;
         dynapi:N3TextAdditions              
         """
         @prefix dynapi: <https://vivoweb.org/ontology/vitro-dynamic-api#> .
@@ -109,15 +117,15 @@
         
         """ .
 
-<https://vivoweb.org/procedure/bind_position_construct_query/step>
+add_person_position:bind_position_construct_query
         a                                       dynapi:OperationalStep ;
-        dynapi:hasOperation                     <https://vivoweb.org/procedure/bind_position_construct_query/operation> .
+        dynapi:hasOperation                     execute_template:bind_position_construct_query .
 
-<https://vivoweb.org/procedure/bind_position_construct_query/operation>
+execute_template:bind_position_construct_query
         a                                       dynapi:N3Template ;
-        dynapi:hasModel                         <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> ;
-        dynapi:requiresParameter                <https://vivoweb.org/procedure/person/parameter/current_uri_persisted> ;
-        dynapi:requiresParameter                <https://vivoweb.org/iteration_parameter/current_step_uri> ;
+        dynapi:hasModel                         dynapi_model:abox_assertions ;
+        dynapi:requiresParameter                person_parameter:current_uri_persisted ;
+        dynapi:requiresParameter                iteration_parameter:current_step_uri ;
         dynapi:N3TextAdditions              
         """
         @prefix dynapi: <https://vivoweb.org/ontology/vitro-dynamic-api#> .

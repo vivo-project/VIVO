@@ -4,6 +4,7 @@
 @prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
 @prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
 @prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix dynapi_model:           <https://vivoweb.org/ontology/vitro-dynamic-api/model/> .
 @prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
 @prefix get_from_graph:         <https://vivoweb.org/procedure/delete_person/get_person_from_dynamic_api_graph/> .
 @prefix remove_from_graph:      <https://vivoweb.org/procedure/delete_person/remove_from_dynamic_api_model/> .
@@ -76,7 +77,7 @@ get_from_graph:operation
          """ ;
          dynapi:providesParameter               person_parameter:person_graph ;
          dynapi:requiresParameter               person_parameter:resource_id ;
-         dynapi:hasModel                        <https://vivoweb.org/ontology/vitro-dynamic-api/model/full_union> .
+         dynapi:hasModel                        dynapi_model:full_union .
 
 remove_from_graph:step
         a                                       dynapi:OperationalStep ;
@@ -86,7 +87,7 @@ remove_from_graph:step
 remove_from_graph:operation
         a                                       dynapi:ModelWriter ;
         dynapi:retractionModel                  person_parameter:person_graph ;
-        dynapi:targetModel                      <https://vivoweb.org/ontology/vitro-dynamic-api/model/abox_assertions> .
+        dynapi:targetModel                      dynapi_model:abox_assertions .
 
 unload_from_graph:step
         a                                       dynapi:OperationalStep ;

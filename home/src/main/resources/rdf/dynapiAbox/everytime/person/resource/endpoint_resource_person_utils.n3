@@ -11,42 +11,43 @@
 @prefix whitelist_access:       <https://vivoweb.org/procedure/person/access/> .
 @prefix person_condition:       <https://vivoweb.org/condition/person/> .
 @prefix person_parameter:       <https://vivoweb.org/procedure/person/parameter/> .
+@prefix unpacking_properties:   <https://vivoweb.org/procedure/person_position/unpacking_properties/> .
 
 ##########################
 ## Unpacking operations ##
 ##########################
 
-<https://vivoweb.org/procedure/unpacking_properties/get_organisation_unit_uri/operation>
+unpacking_properties:get_organisation_unit_uri
         a                                       dynapi:ContainerQuery ;
         dynapi:targetContainer                  iteration_parameter:current_positions_item ;
         dynapi:requiresParameter                position_parameter:organizationUnitURI_key ;
         dynapi:providesParameter                position_parameter:organizationUnitURI .
 
-<https://vivoweb.org/procedure/unpacking_properties/get_organisation_unit_name/operation>
+unpacking_properties:get_organisation_unit_name
         a                                       dynapi:ContainerQuery ;
         dynapi:targetContainer                  iteration_parameter:current_positions_item ;
         dynapi:requiresParameter                position_parameter:organizationUnitName_key ;
         dynapi:providesParameter                position_parameter:organizationUnitName .
 
-<https://vivoweb.org/procedure/unpacking_properties/get_position_name/operation>
+unpacking_properties:get_position_name
         a                                       dynapi:ContainerQuery ;
         dynapi:targetContainer                  iteration_parameter:current_positions_item ;
         dynapi:requiresParameter                position_parameter:positionName_key ;
         dynapi:providesParameter                position_parameter:positionName .
 
-<https://vivoweb.org/procedure/unpacking_properties/get_position_type/operation>
+unpacking_properties:get_position_type
         a                                       dynapi:ContainerQuery ;
         dynapi:targetContainer                  iteration_parameter:current_positions_item ;
         dynapi:requiresParameter                position_parameter:positionType_key ;
         dynapi:providesParameter                position_parameter:positionType .
 
-<https://vivoweb.org/procedure/unpacking_properties/get_start_date/operation>
+unpacking_properties:get_start_date
         a                                       dynapi:ContainerQuery ;
         dynapi:targetContainer                  iteration_parameter:current_positions_item ;
         dynapi:requiresParameter                position_parameter:startDate_key ;
         dynapi:providesParameter                position_parameter:startDate .
 
-<https://vivoweb.org/procedure/unpacking_properties/get_end_date/operation>
+unpacking_properties:get_end_date
         a                                       dynapi:ContainerQuery ;
         dynapi:targetContainer                  iteration_parameter:current_positions_item ;
         dynapi:requiresParameter                position_parameter:endDate_key ;
