@@ -137,6 +137,7 @@ input[type="password"] {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     margin-bottom: .8em;
+    max-width: 100%;
 }
 input.block {
     margin-bottom: 20px;
@@ -1884,6 +1885,10 @@ p.address-line {
 .staticPageBackground input[type="file"] {
     width: 100%;
     text-wrap: wrap;
+}
+
+#pageList {
+    overflow-x: auto;
 }
 
 /* ------------------------------------------------->  */
