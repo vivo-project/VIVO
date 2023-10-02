@@ -2109,6 +2109,10 @@ span.subclassExpandMinus {
     
 }
 
+#cutofflabel {
+    width: initial;
+}
+
 #queryform input[type="text"], select, input[type="password"]{
     max-width: 100%;
 }
