@@ -287,9 +287,23 @@ p.submit {
 .editingForm table {
     border-color: #dfe6e6;
 }
+
 .editingForm td {
     padding: 3px;
 }
+
+.editingForm tr > td:first-child {
+    width: 40%;
+}
+
+
+@media (min-width: 768px) {
+    .editingForm tr > td:first-child {
+        width: 15%;
+    }
+}
+
+
 .editingForm .entryFormHead {
     background-color: #f1f2ee;
     border-color: #dfe6e6;
@@ -1819,6 +1833,7 @@ a {
 }
 input[type="submit"] {
     cursor: pointer;
+    text-wrap: balance;
 }
 input[type="search" i] {
     margin: 2px;
@@ -2270,7 +2285,7 @@ section#container div {
     
     .proxy-profile .profile {
         width: 50%;
-        padding-left: 30px;
+        padding-left: 12px;
     }
 }
 
@@ -2310,4 +2325,16 @@ section#floatRight {
 
 .classHierarchy {
     word-break: break-all;
+}
+
+#startup-trace h4, #startup-trace li{
+    overflow-wrap: anywhere;
+}
+
+#indexer {
+    overflow-x: auto;
+}
+
+form li {
+    overflow-wrap: break-word;
 }
