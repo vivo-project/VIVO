@@ -716,6 +716,7 @@ ul.individual-urls-people li a {
     margin-bottom: 30px;
     overflow: hidden;
     margin-top: 20px;
+    padding: 15px;
 }
 body.login #login {
     float: none;
@@ -723,8 +724,8 @@ body.login #login {
 #login h2 {
     font-size: 22px;
     color: #2485ae;
-    padding-left: 15px;
-    padding-top: 18px;
+    /* padding-left: 15px; */
+    /* padding-top: 18px; */
     border-bottom: none;
 }
 h3.internal-auth:hover {
@@ -790,7 +791,6 @@ h3.internal-auth:hover {
 #login-form p.submit-password {
     height: 40px;
     margin-top: 20px;
-    margin-left: 38px;
 }
 #login-form input.checkbox-remember-me {
     float: left;
@@ -2041,7 +2041,7 @@ span.subclassExpandMinus {
 /* ------------------------------------------------->  */
 
 #container {
-    width: initial;
+    width: initial !important;
 }
 
 #helptext {
@@ -2052,6 +2052,7 @@ span.subclassExpandMinus {
 #right-container {
     width: 100%;
     position: relative;
+    float: left;
 }
 
 .tabs {
@@ -2064,6 +2065,7 @@ span.subclassExpandMinus {
 
 #center-container {
     position: relative;
+    width: 100% !important;
 }
 
 @media (min-width: 768px) {
@@ -2092,6 +2094,18 @@ span.subclassExpandMinus {
     max-width: 100%;
 }
 
+#queryCutoff {
+    margin-left: -54px;
+}
+
+#infovis {
+    width: 100% !important;
+}
+
+#infovis > svg {
+    width: 100% !important;
+}
+
 /* Author Network */
 
 .propertyTabsList {
@@ -2107,6 +2121,10 @@ span.subclassExpandMinus {
     overflow: auto;
 }
 
+#chord > svg {
+    width: 100%;
+}
+
 #sparkline-container-full > #publication-count-sparkline-include {
     width: 100%;
     margin-bottom: 0px;
@@ -2117,6 +2135,11 @@ span.subclassExpandMinus {
     width: 100%;
     margin-bottom: 0px;
 }
+
+#sparkline-container-full .google-visualization-sparkline-default img.google-visualization-sparkline-image {
+    max-width: 100%;
+}
+
 
 #body .vis-tables {
     width: 100%;
