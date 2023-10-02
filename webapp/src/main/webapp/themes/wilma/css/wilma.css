@@ -902,7 +902,7 @@ p.external-auth a.blue:hover {
 input.search-home-vivo {
     float: left;
     margin: 10px 0 0 8px;
-    width: 350px;
+    max-width: 350px;
     height: 20px;
     border: 0;
     font-size: 18px;
@@ -1339,7 +1339,7 @@ ul#individual-tools-people li a {
     border-right: 1px solid #e8ece9;
 }
 #menupage-content {
-    width: 900px;
+    max-width: 900px;
 }
 #menupage-content h3 {
     font-size: 1.5em;
@@ -1547,9 +1547,12 @@ article.property ul.property-list {
     border: 1px solid #DDE4E3;
 }
 #photoCropping {
-    margin-left: 20px;
-    padding-left: 40px;
+    /* margin-left: 20px; */
+    padding-left: 60px;
     background: url(../images/pointToCropPreview.jpg) 0 30px no-repeat;
+    background-position-x: 20px;
+    overflow-x: auto;
+    max-width: 100%;
 }
 #photoCroppingPreview {
     width: 210px;
@@ -1760,7 +1763,8 @@ section#right-hand-column:after {
 }
 /* PROPERTY GROUP MENU ------>  */
 #property-group-menu {
-    width: 920px;
+    /* Style not used */
+    max-width: 920px;
     background: #f1f2ee;
 }
 #property-group-menu li {
