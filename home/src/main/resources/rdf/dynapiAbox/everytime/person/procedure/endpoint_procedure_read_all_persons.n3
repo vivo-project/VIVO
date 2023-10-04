@@ -55,7 +55,7 @@ fetching_properties:sparql_select_query
                         GROUP_CONCAT(DISTINCT
                                 CONCAT(
                                         '{"organizationUnitURI":"', IF(BOUND(?organizationUnitURI), STR(?organizationUnitURI), ''), 
-                                        '", "organizationUnitName":"', IF(BOUND(?positionName), STR(?positionName), ''), 
+                                        '", "organizationUnitName":"', IF(BOUND(?organisationUnitName), STR(?organisationUnitName), ''), 
                                         '", "positionName":"', IF(BOUND(?positionName), STR(?positionName), ''), 
                                         '", "positionType":"', IF(BOUND(?positionType), STR(?positionType), ''), 
                                         '", "startDate":"', IF(BOUND(?startDate), STR(?startDate), ''), 
@@ -89,7 +89,6 @@ fetching_properties:sparql_select_query
         GROUP BY ?uri
         ORDER BY ?label
         LIMIT ?limit OFFSET ?offset
-
         """ .
 
 statistics:step

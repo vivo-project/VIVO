@@ -35,7 +35,7 @@ fetching_properties:sparql_query
         dynapi:providesParameter 	        response_parameter:persons ;
         dynapi:sparqlQueryText
         """
-        SELECT  ?uri (GROUP_CONCAT(DISTINCT ?personType; separator=" -> ") as ?type) 
+        SELECT  ?uri (GROUP_CONCAT(DISTINCT ?personType; separator=" -> ") as ?type)
                 (SAMPLE(?personlabel) as ?label) 
                 (SAMPLE(?firstName) as ?first_name)
                 (SAMPLE(?middleName) as ?middle_name)
@@ -48,7 +48,7 @@ fetching_properties:sparql_query
                         GROUP_CONCAT(DISTINCT
                                 CONCAT(
                                         '{"organizationUnitURI":"', IF(BOUND(?organizationUnitURI), STR(?organizationUnitURI), ''), 
-                                        '", "organizationUnitName":"', IF(BOUND(?positionName), STR(?positionName), ''), 
+                                        '", "organizationUnitName":"', IF(BOUND(?organisationUnitName), STR(?organisationUnitName), ''), 
                                         '", "positionName":"', IF(BOUND(?positionName), STR(?positionName), ''), 
                                         '", "positionType":"', IF(BOUND(?positionType), STR(?positionType), ''), 
                                         '", "startDate":"', IF(BOUND(?startDate), STR(?startDate), ''), 
