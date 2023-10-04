@@ -1,0 +1,136 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix dynapi_model:           <https://vivoweb.org/ontology/vitro-dynamic-api/model/> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix add_person_position:    <https://vivoweb.org/procedure/add_person_position/> .
+@prefix execute_template:       <https://vivoweb.org/procedure/add_person_position/execute_template/> .
+@prefix position_parameter:     <https://vivoweb.org/procedure/position/parameter/> .
+@prefix person_parameter:       <https://vivoweb.org/procedure/person/parameter/> .
+@prefix iteration_parameter:    <https://vivoweb.org/iteration_parameter/> .
+@prefix condition:              <https://vivoweb.org/condition/position/> .
+@prefix unpacking_properties:   <https://vivoweb.org/procedure/person_position/unpacking_properties/> .
+
+############################################################
+#Add person position
+
+<https://vivoweb.org/procedure/add_person_position>
+        a                                       dynapi:Procedure ;
+        dynapi:hasFirstStep                     add_person_position:contains_organisation_unit_uri_key .
+
+add_person_position:contains_organisation_unit_uri_key
+        a                                       dynapi:ConditionalStep ;
+        dynapi:nextIfSatisfied                  add_person_position:get_organisation_unit_uri ;
+        dynapi:nextIfNotSatisfied               add_person_position:contains_organisation_unit_name_key ;
+        dynapi:hasCondition                     condition:contains_organisation_unit_uri_key .
+
+add_person_position:get_organisation_unit_uri
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      add_person_position:contains_organisation_unit_name_key ;
+        dynapi:hasOperation                     unpacking_properties:get_organisation_unit_uri .
+
+add_person_position:contains_organisation_unit_name_key
+        a                                       dynapi:ConditionalStep ;
+        dynapi:nextIfSatisfied                  add_person_position:get_organisation_unit_name ;
+        dynapi:nextIfNotSatisfied               add_person_position:contains_position_name_key ;
+        dynapi:hasCondition                     condition:contains_organisation_unit_name_key .
+
+add_person_position:get_organisation_unit_name
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      add_person_position:contains_position_name_key ;
+        dynapi:hasOperation                     unpacking_properties:get_organisation_unit_name .
+
+add_person_position:contains_position_name_key
+        a                                       dynapi:ConditionalStep ;
+        dynapi:nextIfSatisfied                  add_person_position:get_position_name ;
+        dynapi:nextIfNotSatisfied               add_person_position:contains_position_type_key ;
+        dynapi:hasCondition                     condition:contains_position_name_key .
+
+add_person_position:get_position_name
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      add_person_position:contains_position_type_key  ;
+        dynapi:hasOperation                     unpacking_properties:get_position_name .
+
+add_person_position:contains_position_type_key
+        a                                       dynapi:ConditionalStep ;
+        dynapi:nextIfSatisfied                  add_person_position:get_position_type ;
+        dynapi:nextIfNotSatisfied               add_person_position:contains_start_date_key ;
+        dynapi:hasCondition                     condition:contains_position_type_key .
+
+add_person_position:get_position_type
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      add_person_position:contains_start_date_key ;
+        dynapi:hasOperation                     unpacking_properties:get_position_type .
+
+add_person_position:contains_start_date_key
+        a                                       dynapi:ConditionalStep ;
+        dynapi:nextIfSatisfied                  add_person_position:get_start_date ;
+        dynapi:nextIfNotSatisfied               add_person_position:contains_end_date_key ;
+        dynapi:hasCondition                     condition:contains_start_date_key .
+
+add_person_position:get_start_date
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      add_person_position:contains_end_date_key ;
+        dynapi:hasOperation                     unpacking_properties:get_start_date .
+
+add_person_position:contains_end_date_key
+        a                                       dynapi:ConditionalStep ;
+        dynapi:nextIfSatisfied                  add_person_position:get_end_date ;
+        dynapi:nextIfNotSatisfied               add_person_position:position_construct_query_fill_in ;
+        dynapi:hasCondition                     condition:contains_end_date_key .
+
+add_person_position:get_end_date
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      add_person_position:position_construct_query_fill_in ;
+        dynapi:hasOperation                     unpacking_properties:get_end_date .
+
+add_person_position:position_construct_query_fill_in
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      add_person_position:bind_position_construct_query ;
+        dynapi:hasOperation                     execute_template:position_construct_query_fill_in .
+
+execute_template:position_construct_query_fill_in
+        a                                       dynapi:N3Template ;
+        dynapi:hasModel                         dynapi_model:abox_assertions ;
+        dynapi:requiresParameter                position_parameter:organizationUnitURI ;
+        dynapi:requiresParameter                position_parameter:organizationUnitName ;
+        dynapi:requiresParameter                position_parameter:positionName ;
+        dynapi:requiresParameter                position_parameter:positionType ;
+        dynapi:requiresParameter                position_parameter:startDate ;
+        dynapi:requiresParameter                position_parameter:endDate ;
+        dynapi:requiresParameter                iteration_parameter:current_step_uri ;
+        dynapi:N3TextAdditions              
+        """
+        @prefix dynapi: <https://vivoweb.org/ontology/vitro-dynamic-api#> .
+        @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+        
+        ?current_step_uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://vivoweb.org/ontology/core#Position> ;
+                <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?positionType ;
+                <http://www.w3.org/2000/01/rdf-schema#label> ?positionName ;
+                <http://www.w3.org/2006/vcard/ns#OrganizationUnitName> ?organizationUnitName ;
+                <http://xmlns.com/foaf/0.1/Organization> ?organizationUnitURI ;
+                <http://vivoweb.org/ontology/core#start> ?startDate ;
+                <http://vivoweb.org/ontology/core#end> ?endDate .
+        
+        """ .
+
+add_person_position:bind_position_construct_query
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasOperation                     execute_template:bind_position_construct_query .
+
+execute_template:bind_position_construct_query
+        a                                       dynapi:N3Template ;
+        dynapi:hasModel                         dynapi_model:abox_assertions ;
+        dynapi:requiresParameter                person_parameter:current_uri_persisted ;
+        dynapi:requiresParameter                iteration_parameter:current_step_uri ;
+        dynapi:N3TextAdditions              
+        """
+        @prefix dynapi: <https://vivoweb.org/ontology/vitro-dynamic-api#> .
+        @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+        
+        ?current_uri_persisted <http://vivoweb.org/ontology/core#Position> ?current_step_uri .
+        
+        """ .

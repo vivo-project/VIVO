@@ -1,0 +1,168 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix dynapi_type:            <https://vivoweb.org/ontology/vitro-dynamic-api/parameter/type/> .
+@prefix response_parameters:    <https://vivoweb.org/ontology/organization_unit/parameter/> .
+@prefix request_parameters:     <https://vivoweb.org/procedure/organization_unit/parameter/> .
+
+
+###############################################
+### PARAMETERS
+###############################################
+
+################################
+## Organization unit response ##
+################################
+
+response_parameters:organizationUnits
+        a                                       dynapi:Parameter ;
+        rdfs:label                              "organizationUnits"@en-US ;
+        dynapi:name                             "organizationUnits" ;
+        dynapi:description                      "List of available OUs and statistics (number)" ;
+        dynapi:hasType                          dynapi_type:JsonContainerArray .
+
+response_parameters:count
+        a                                       dynapi:Parameter ;
+        rdfs:label                              "Number of fetched OUs"@en-US ;
+        dynapi:name                             "count" ;
+        dynapi:hasType                          dynapi_type:JsonContainer .
+
+#####################
+## Creation fields ##
+#####################
+
+request_parameters:uri
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "uri" ;
+        dynapi:defaultValue                     "http://xmlns.com/foaf/0.1/Organization#,java_uuid_number" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:generated-uri .
+
+request_parameters:type
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "type" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:uri .
+
+request_parameters:name
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "name" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:string-literal .
+
+request_parameters:description
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "description" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:string-literal .
+
+request_parameters:superURI
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "superURI" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:uri .
+
+request_parameters:superName
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "superName" ;
+        dynapi:defaultValue                     "" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:string-literal .
+
+request_parameters:superOrganizationUnit
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "superOrganizationUnit" ;
+        dynapi:defaultValue                     "{}" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:JsonContainer .
+
+# Super Organisation Unit keys
+
+request_parameters:superOrganizationUnitURI_key
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "superOrganizationUnitURI_key" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:defaultValue                     "uri" ;
+        dynapi:hasType                          dynapi_type:string .
+
+request_parameters:superOrganizationUnitName_key
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "superOrganizationUnitName_key" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:defaultValue                     "name" ;
+        dynapi:hasType                          dynapi_type:string .
+
+#########################
+## Read request fields ##
+#########################
+
+request_parameters:resource_id
+        a                                       dynapi:Parameter ;
+        dynapi:name                             "resource_id" ;
+        dynapi:hasType                          dynapi_type:uri ;
+        rdfs:label                              "resource uri"@en-US .
+
+request_parameters:total
+        a                                       dynapi:parameter ;
+        dynapi:name                             "total" ;
+        dynapi:hasType 		                dynapi_type:integer ;
+        rdfs:label                              "total"@en-US .
+
+request_parameters:limit
+        a                                       dynapi:parameter ;
+        dynapi:name                             "limit" ;
+        dynapi:defaultValue                     "20" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType 		                dynapi_type:integer ;
+        rdfs:label                              "limit"@en-US .
+
+request_parameters:offset
+        a                                       dynapi:parameter ;
+        dynapi:name                             "offset" ;
+        dynapi:defaultValue                     "0" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType                          dynapi_type:integer ;
+        rdfs:label                              "offset"@en-US .
+
+request_parameters:sortBy
+        a                                       dynapi:parameter ;
+        dynapi:name                             "sortBy" ;
+        dynapi:defaultValue                     "label" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType 		                dynapi_type:string ;
+        rdfs:label                              "sortBy"@en-US .
+
+request_parameters:order
+        a                                       dynapi:parameter ;
+        dynapi:name                             "order" ;
+        dynapi:defaultValue                     "ASC" ;
+        dynapi:isInternal                       "true"^^xsd:boolean ;
+        dynapi:isOptionalParam                  "true"^^xsd:boolean ;
+        dynapi:hasType 		                dynapi_type:string ;
+        rdfs:label                              "order"@en-US .
+
+###########################
+## Delete request fields ##
+###########################
+
+request_parameters:organization_unit_graph
+        a                                       dynapi:Model ;
+        dynapi:name                             "organization_unit_graph" ;
+        dynapi:hasType                          dynapi_type:model .

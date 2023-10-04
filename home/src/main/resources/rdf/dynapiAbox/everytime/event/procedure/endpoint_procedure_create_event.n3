@@ -1,0 +1,210 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix creation_properties:    <https://vivoweb.org/procedure/create_event/creation_properties/> .
+@prefix unpacking_properties:   <https://vivoweb.org/procedure/create_event/unpacking_properties/> .
+@prefix execute_template:       <https://vivoweb.org/procedure/create_event/execute_template/> .
+@prefix creation_parameter:     <https://vivoweb.org/procedure/event/parameter/> .
+@prefix whitelist_access:       <https://vivoweb.org/procedure/event/access/> .
+@prefix event_condition:        <https://vivoweb.org/condition/event/> .
+@prefix dynapi_model:           <https://vivoweb.org/ontology/vitro-dynamic-api/model/> .
+
+###############################################
+### CREATE
+###############################################
+
+<https://vivoweb.org/procedure/create_event>
+        a                        		dynapi:Procedure ;
+        rdfs:label               		"Create an event"@en-US ;
+        dynapi:accessWhitelist                  whitelist_access:admin ;
+        dynapi:hasFirstStep 			creation_properties:step1 ;
+        dynapi:providesParameter                creation_parameter:uri .
+
+creation_properties:step1
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of an event step 1"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_subject ;
+	dynapi:hasNextStep			creation_properties:conditional_for_step2 .
+
+creation_properties:conditional_for_step2
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for event type check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:step2 ;
+        dynapi:nextIfNotSatisfied               creation_properties:conditional_for_step3 ;
+        dynapi:hasCondition                     event_condition:type_check .
+
+creation_properties:step2
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of an event step 2"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_type ;
+	dynapi:hasNextStep			creation_properties:conditional_for_step3 .
+
+creation_properties:conditional_for_step3
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for event name check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:step3 ;
+        dynapi:nextIfNotSatisfied               creation_properties:conditional_for_step4 ;
+        dynapi:hasCondition                     event_condition:name_check .
+
+creation_properties:step3
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of an event step 3"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_name ;
+	dynapi:hasNextStep			creation_properties:conditional_for_step4 .
+
+creation_properties:conditional_for_step4
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for event abbreviation check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:step4 ;
+        dynapi:nextIfNotSatisfied               creation_properties:conditional_for_step5 ;
+        dynapi:hasCondition                     event_condition:abbreviation_check .
+
+creation_properties:step4
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of an event step 4"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_abbreviation ;
+	dynapi:hasNextStep			creation_properties:conditional_for_step5 .
+
+creation_properties:conditional_for_step5
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for event startDate check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:step5 ;
+        dynapi:nextIfNotSatisfied               creation_properties:conditional_for_step6 ;
+        dynapi:hasCondition                     event_condition:startDate_check .
+
+creation_properties:step5
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of an event step 5"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_startDate ;
+	dynapi:hasNextStep			creation_properties:conditional_for_step6 .
+
+creation_properties:conditional_for_step6
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for event endDate check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:step6 ;
+        dynapi:nextIfNotSatisfied               creation_properties:conditional_for_step7 ;
+        dynapi:hasCondition                     event_condition:endDate_check .
+
+creation_properties:step6
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of an event step 6"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_endDate ;
+	dynapi:hasNextStep			creation_properties:conditional_for_step7 .
+
+creation_properties:conditional_for_step7
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for event place check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:step7 ;
+        dynapi:nextIfNotSatisfied               creation_properties:conditional_for_step8and9 ;
+        dynapi:hasCondition                     event_condition:place_check .
+
+creation_properties:step7
+        a                        		dynapi:OperationalStep ;
+        rdfs:label               		"creation of an event step 7"@en-US ;
+        dynapi:hasOperation 			execute_template:n3_template_place ;
+	dynapi:hasNextStep			creation_properties:conditional_for_step8and9 .
+
+creation_properties:conditional_for_step8and9
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for event venue check"@en-US ;
+        dynapi:nextIfSatisfied                  creation_properties:conditional_for_step8 ;
+        dynapi:hasCondition                     event_condition:eventVenue_check .
+
+creation_properties:conditional_for_step8
+        a                                       dynapi:ConditionalStep ;
+        rdfs:label                              "conditional step for event venue name check"@en-US ;                                        
+        dynapi:nextIfSatisfied                  creation_properties:step8_unpack ;
+        dynapi:nextIfNotSatisfied               creation_properties:create_eventVenue ;
+        dynapi:hasCondition                     event_condition:contains_event_name_key .
+
+creation_properties:step8_unpack
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasNextStep                      creation_properties:create_eventVenue ;
+        dynapi:hasOperation                     unpacking_properties:get_event_venue_name .
+
+creation_properties:create_eventVenue
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasOperation                     execute_template:event_venue_construct_query_fill_in .
+
+###############################################
+### N3 TEMPLATE PARTIAL ENTITY CREATION
+###############################################
+
+execute_template:n3_template_subject
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create event N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		creation_parameter:uri ;
+        dynapi:N3TextAdditions   		
+        """
+                ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/NET/c4dm/event.owl#Event> ;
+        """ .
+
+execute_template:n3_template_type
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create event type N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		creation_parameter:uri ;
+        dynapi:requiresParameter                creation_parameter:type ;
+        dynapi:N3TextAdditions   		"?uri <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type . " .
+
+execute_template:n3_template_name
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create event name N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		creation_parameter:uri ;
+        dynapi:requiresParameter                creation_parameter:name ;
+        dynapi:N3TextAdditions   		"?uri <http://www.w3.org/2006/vcard/ns#Name> ?name . " .
+
+execute_template:n3_template_abbreviation
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create event abbreviation N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		creation_parameter:uri ;
+        dynapi:requiresParameter                creation_parameter:abbreviation ;
+        dynapi:N3TextAdditions   		"?uri <http://vivoweb.org/ontology/core#abbreviation> ?abbreviation . " .
+
+execute_template:n3_template_startDate
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create event startDate N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		creation_parameter:uri ;
+        dynapi:requiresParameter                creation_parameter:startDate ;
+        dynapi:N3TextAdditions   		"?uri <http://vivoweb.org/ontology/core#start> ?startDate . " .
+
+execute_template:n3_template_endDate
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create event endDate N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		creation_parameter:uri ;
+        dynapi:requiresParameter                creation_parameter:endDate ;
+        dynapi:N3TextAdditions   		"?uri <http://vivoweb.org/ontology/core#end> ?endDate . " .
+
+execute_template:n3_template_place
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create event place N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		creation_parameter:uri ;
+        dynapi:requiresParameter                creation_parameter:place ;
+        dynapi:N3TextAdditions   		"?uri <http://www.w3.org/2006/vcard/ns#Address> ?place . " .
+
+execute_template:event_venue_construct_query_fill_in
+        a                                       dynapi:N3Template ;
+        dynapi:hasModel                         dynapi_model:abox_assertions ;
+        dynapi:requiresParameter                creation_parameter:venueName ;
+        dynapi:requiresParameter                creation_parameter:venueURI ;
+        dynapi:requiresParameter                creation_parameter:uri ;
+        dynapi:N3TextAdditions              
+        """
+        @prefix dynapi: <https://vivoweb.org/ontology/vitro-dynamic-api#> .
+        @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+        
+        ?venueURI <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2006/vcard/ns#Individual> ;
+                <http://www.w3.org/2006/vcard/ns#Name> ?venueName .
+        
+        ?uri <http://vivoweb.org/ontology/core#hasPublicationVenue> ?venueURI .
+        """ .

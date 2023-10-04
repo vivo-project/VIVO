@@ -1,0 +1,28 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix iteration_parameter:    <https://vivoweb.org/iteration_parameter/> .
+@prefix request_parameter:      <https://vivoweb.org/procedure/person/parameter/> .
+@prefix get_position_from_container:<https://vivoweb.org/procedure/get_position_from_container/> .
+
+############################################################
+#Get position from a container 
+
+<https://vivoweb.org/procedure/get_position_from_container>
+        a                                       dynapi:Procedure ;
+        dynapi:hasFirstStep                     get_position_from_container:step ;
+        dynapi:providesParameter                iteration_parameter:current_positions_item .
+        
+get_position_from_container:step
+        a                                       dynapi:OperationalStep ;
+        dynapi:hasOperation                     get_position_from_container:operation .
+        
+get_position_from_container:operation
+ 	a                                       dynapi:ContainerQuery ;
+ 	dynapi:providesParameter                iteration_parameter:current_positions_item ;
+ 	dynapi:targetContainer                  request_parameter:positions ;
+ 	dynapi:requiresParameter                iteration_parameter:iteration_int_param .

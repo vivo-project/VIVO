@@ -1,0 +1,89 @@
+@prefix rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  			<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   			<http://www.w3.org/2002/07/owl#> .
+@prefix vitro: 			<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix dynapi: 		<https://vivoweb.org/ontology/vitro-dynamic-api#> .
+@prefix dynapi_java: 	        <java:edu.cornell.mannlib.vitro.webapp.dynapi.components#> .
+@prefix xsd: 			<http://www.w3.org/2001/XMLSchema#> .
+@prefix dynapi_model:           <https://vivoweb.org/ontology/vitro-dynamic-api/model/> .
+@prefix execute_template:       <https://vivoweb.org/procedure/update_event/execute_template/> .
+@prefix update_parameter:       <https://vivoweb.org/procedure/event/parameter/> .
+
+###############################################
+### N3 TEMPLATE PARTIAL ENTITY UPDATE
+###############################################
+
+execute_template:n3_template_subject
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create event N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		update_parameter:resource_id ;
+        dynapi:N3TextAdditions   		
+        """
+                ?resource_id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/NET/c4dm/event.owl#Event> ;
+        """ .
+
+execute_template:n3_template_type
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create event type N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		update_parameter:resource_id ;
+        dynapi:requiresParameter                update_parameter:type ;
+        dynapi:N3TextAdditions   		"?resource_id <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?type . " .
+
+execute_template:n3_template_name
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create event name N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		update_parameter:resource_id ;
+        dynapi:requiresParameter                update_parameter:name ;
+        dynapi:N3TextAdditions   		"?resource_id <http://www.w3.org/2006/vcard/ns#Name> ?name . " .
+
+execute_template:n3_template_abbreviation
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create event abbreviation N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		update_parameter:resource_id ;
+        dynapi:requiresParameter                update_parameter:abbreviation ;
+        dynapi:N3TextAdditions   		"?resource_id <http://vivoweb.org/ontology/core#abbreviation> ?abbreviation . " .
+
+execute_template:n3_template_startDate
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create event startDate N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		update_parameter:resource_id ;
+        dynapi:requiresParameter                update_parameter:startDate ;
+        dynapi:N3TextAdditions   		"?resource_id <http://vivoweb.org/ontology/core#start> ?startDate . " .
+
+execute_template:n3_template_endDate
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create event endDate N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		update_parameter:resource_id ;
+        dynapi:requiresParameter                update_parameter:endDate ;
+        dynapi:N3TextAdditions   		"?resource_id <http://vivoweb.org/ontology/core#end> ?endDate . " .
+
+execute_template:n3_template_place
+        a                        		dynapi:N3Template ;
+        rdfs:label               		"create event place N3 Template"@en-US ;
+        dynapi:hasModel 			dynapi_model:abox_assertions ;
+        dynapi:requiresParameter 		update_parameter:resource_id ;
+        dynapi:requiresParameter                update_parameter:place ;
+        dynapi:N3TextAdditions   		"?resource_id <http://www.w3.org/2006/vcard/ns#Address> ?place . " .
+
+execute_template:event_venue_construct_query_fill_in
+        a                                       dynapi:N3Template ;
+        dynapi:hasModel                         dynapi_model:abox_assertions ;
+        dynapi:requiresParameter                update_parameter:venueName ;
+        dynapi:requiresParameter                update_parameter:venueURI ;
+        dynapi:requiresParameter                update_parameter:resource_id ;
+        dynapi:N3TextAdditions              
+        """
+        @prefix dynapi: <https://vivoweb.org/ontology/vitro-dynamic-api#> .
+        @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+        
+        ?venueURI <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2006/vcard/ns#Individual> ;
+                <http://www.w3.org/2006/vcard/ns#Name> ?venueName .
+        
+        ?resource_id <http://vivoweb.org/ontology/core#hasPublicationVenue> ?venueURI .
+        """ .
