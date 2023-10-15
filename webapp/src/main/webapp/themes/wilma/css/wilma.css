@@ -2159,12 +2159,87 @@ span.subclassExpandMinus {
 
 #chord {
     width: 100%;
+    float: left !important;
     overflow: auto;
 }
 
+
 #chord > svg {
-    width: 100%;
+    transform-origin: 0 50%;
+    -webkit-transform-origin: 0 50%;
+    -ms-transform-origin: 0 50%;
+    transform-origin: 0 50%;
 }
+
+@media (max-width: 360px) {
+    #chord > svg {
+        scale: 0.3;
+    }
+    
+    #chord-info-div {
+        scale: 0.7;
+    }
+}
+
+@media (min-width: 361px) and (max-width: 399px) {
+    #chord > svg {
+        scale: 0.4;
+    }
+    
+    #chord-info-div {
+        scale: 0.7;
+    }
+}
+
+
+@media (min-width: 400px) and (max-width: 449px) {
+    #chord > svg {
+        scale: 0.44;
+    }
+    
+    #chord-info-div {
+        scale: 0.7;
+    }
+}
+
+
+
+@media (min-width: 450px) and (max-width: 499px) {
+    #chord > svg {
+        scale: 0.5;
+    }
+    
+    #chord-info-div {
+        scale: 0.7;
+    }
+}
+
+
+
+@media (min-width: 500px) and (max-width: 575px) {
+    #chord > svg {
+        scale: 0.55;
+    }
+    
+    #chord-info-div {
+        scale: 0.8;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    #chord > svg {
+        scale: 0.6;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 991px) {
+    #chord > svg {
+        scale: 0.8;
+    }
+}
+
+
 
 #sparkline-container-full > #publication-count-sparkline-include {
     width: 100%;
