@@ -334,14 +334,14 @@ public class ManageLabelsForPersonGenerator extends BaseEditConfigurationGenerat
 
 	private Object isEditable(VitroRequest vreq, EditConfigurationVTwo config) {
 		Individual individual = EditConfigurationUtils.getIndividual(vreq, config.getSubjectUri());
-		DataPropertyStatementAccessObject adps = new DataPropertyStatementAccessObject(
+		DataPropertyStatementAccessObject dpsAccessObject = new DataPropertyStatementAccessObject(
 				vreq.getJenaOntModel(), individual.getURI(),
 				SOME_URI, SOME_LITERAL);
 
 		ObjectPropertyStatementAccessObject aops = new ObjectPropertyStatementAccessObject(
 				vreq.getJenaOntModel(), individual.getURI(),
 				SOME_PREDICATE, SOME_URI);
-    	return PolicyHelper.isAuthorizedForActions(vreq, AuthorizationRequest.or(new SimpleAuthorizationRequest(adps, AccessOperation.ADD), new SimpleAuthorizationRequest(aops, AccessOperation.ADD)));
+    	return PolicyHelper.isAuthorizedForActions(vreq, AuthorizationRequest.or(new SimpleAuthorizationRequest(dpsAccessObject, AccessOperation.ADD), new SimpleAuthorizationRequest(aops, AccessOperation.ADD)));
 	}
 
 

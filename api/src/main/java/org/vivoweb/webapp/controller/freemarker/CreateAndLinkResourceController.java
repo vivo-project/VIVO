@@ -297,12 +297,13 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
             // Check that we have back end editing priveleges
             if (!PolicyHelper.isAuthorizedForActions(vreq, SimplePermission.DO_BACK_END_EDITING.ACTION)) {
                 // If all else fails, can we add statements to this individual?
-                DataPropertyStatementAccessObject adps = new DataPropertyStatementAccessObject(vreq.getJenaOntModel(), profileUri, SOME_URI, SOME_LITERAL);
-                ObjectPropertyStatementAccessObject aops = new ObjectPropertyStatementAccessObject(vreq.getJenaOntModel(), profileUri, SOME_PREDICATE, SOME_URI);
-                if (!PolicyHelper.isAuthorizedForActions(vreq, 
-                        AuthorizationRequest.or(
-                                new SimpleAuthorizationRequest(adps, AccessOperation.ADD), 
-                                new SimpleAuthorizationRequest(aops, AccessOperation.ADD)))) {
+                DataPropertyStatementAccessObject dpsAccessObject = new DataPropertyStatementAccessObject(
+                        vreq.getJenaOntModel(), profileUri, SOME_URI, SOME_LITERAL);
+                ObjectPropertyStatementAccessObject opsAccessObject = new ObjectPropertyStatementAccessObject(
+                        vreq.getJenaOntModel(), profileUri, SOME_PREDICATE, SOME_URI);
+                if (!PolicyHelper.isAuthorizedForActions(vreq,
+                        AuthorizationRequest.or(new SimpleAuthorizationRequest(dpsAccessObject, AccessOperation.ADD),
+                                new SimpleAuthorizationRequest(opsAccessObject, AccessOperation.ADD)))) {
                     return new TemplateResponseValues("unauthorizedForProfile.ftl");
                 }
             }
