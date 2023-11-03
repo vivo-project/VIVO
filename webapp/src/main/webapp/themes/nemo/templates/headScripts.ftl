@@ -15,11 +15,7 @@ var i18nStrings = {
 
 <script type="text/javascript" src="${urls.base}/js/vitroUtils.js"></script>
 
-<!-- <script src="${urls.theme}/js/bootstrap.min.js"></script> -->
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
-  integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
-  crossorigin="anonymous"></script>
+<script src="${urls.base}/js/bootstrap/js/bootstrap.min.js"></script> 
 
 <script src="${urls.theme}/js/publicationTableFilter.js"></script>
 
