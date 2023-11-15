@@ -3,210 +3,228 @@
 @prefix : <https://vivoweb.org/ontology/vitro-application/auth/individual/access-allowed-class/> .
 @prefix access: <https://vivoweb.org/ontology/vitro-application/auth/vocabulary/> .
 
-:EditorPublishClassValueContainer
-    access:value <http://purl.org/NET/c4dm/event.owl#Event> ;
-    access:value <http://purl.org/ontology/bibo/AcademicArticle> ;
-    access:value <http://purl.org/ontology/bibo/Article> ;
-    access:value <http://purl.org/ontology/bibo/AudioDocument> ;
-    access:value <http://purl.org/ontology/bibo/AudioVisualDocument> ;
-    access:value <http://purl.org/ontology/bibo/Bill> ;
-    access:value <http://purl.org/ontology/bibo/Book> ;
-    access:value <http://purl.org/ontology/bibo/BookSection> ;
-    access:value <http://purl.org/ontology/bibo/Brief> ;
-    access:value <http://purl.org/ontology/bibo/Chapter> ;
-    access:value <http://purl.org/ontology/bibo/Code> ;
-    access:value <http://purl.org/ontology/bibo/CollectedDocument> ;
-    access:value <http://purl.org/ontology/bibo/Collection> ;
-    access:value <http://purl.org/ontology/bibo/Conference> ;
-    access:value <http://purl.org/ontology/bibo/CourtReporter> ;
-    access:value <http://purl.org/ontology/bibo/Document> ;
-    access:value <http://purl.org/ontology/bibo/DocumentPart> ;
-    access:value <http://purl.org/ontology/bibo/DocumentStatus> ;
-    access:value <http://purl.org/ontology/bibo/EditedBook> ;
-    access:value <http://purl.org/ontology/bibo/Excerpt> ;
-    access:value <http://purl.org/ontology/bibo/Film> ;
-    access:value <http://purl.org/ontology/bibo/Hearing> ;
-    access:value <http://purl.org/ontology/bibo/Image> ;
-    access:value <http://purl.org/ontology/bibo/Interview> ;
-    access:value <http://purl.org/ontology/bibo/Issue> ;
-    access:value <http://purl.org/ontology/bibo/Journal> ;
-    access:value <http://purl.org/ontology/bibo/LegalCaseDocument> ;
-    access:value <http://purl.org/ontology/bibo/LegalDecision> ;
-    access:value <http://purl.org/ontology/bibo/LegalDocument> ;
-    access:value <http://purl.org/ontology/bibo/Legislation> ;
-    access:value <http://purl.org/ontology/bibo/Letter> ;
-    access:value <http://purl.org/ontology/bibo/Magazine> ;
-    access:value <http://purl.org/ontology/bibo/Manual> ;
-    access:value <http://purl.org/ontology/bibo/Manuscript> ;
-    access:value <http://purl.org/ontology/bibo/Map> ;
-    access:value <http://purl.org/ontology/bibo/Newspaper> ;
-    access:value <http://purl.org/ontology/bibo/Note> ;
-    access:value <http://purl.org/ontology/bibo/Patent> ;
-    access:value <http://purl.org/ontology/bibo/Performance> ;
-    access:value <http://purl.org/ontology/bibo/Periodical> ;
-    access:value <http://purl.org/ontology/bibo/PersonalCommunicationDocument> ;
-    access:value <http://purl.org/ontology/bibo/Proceedings> ;
-    access:value <http://purl.org/ontology/bibo/Quote> ;
-    access:value <http://purl.org/ontology/bibo/ReferenceSource> ;
-    access:value <http://purl.org/ontology/bibo/Report> ;
-    access:value <http://purl.org/ontology/bibo/Series> ;
-    access:value <http://purl.org/ontology/bibo/Slide> ;
-    access:value <http://purl.org/ontology/bibo/Slideshow> ;
-    access:value <http://purl.org/ontology/bibo/Standard> ;
-    access:value <http://purl.org/ontology/bibo/Statute> ;
-    access:value <http://purl.org/ontology/bibo/Thesis> ;
-    access:value <http://purl.org/ontology/bibo/ThesisDegree> ;
-    access:value <http://purl.org/ontology/bibo/Webpage> ;
-    access:value <http://purl.org/ontology/bibo/Website> ;
-    access:value <http://purl.org/ontology/bibo/Workshop> ;
-    access:value <http://purl.org/spar/c4o/BibliographicInformationSource> ;
-    access:value <http://purl.org/spar/c4o/GlobalCitationCount> ;
-    access:value <http://purl.org/spar/fabio/ClinicalGuideline> ;
-    access:value <http://purl.org/spar/fabio/Comment> ;
-    access:value <http://purl.org/spar/fabio/Erratum> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/public#File> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/public#FileByteStream> ;
-    access:value <http://vivoweb.org/ontology/core#Abstract> ;
-    access:value <http://vivoweb.org/ontology/core#AcademicDegree> ;
-    access:value <http://vivoweb.org/ontology/core#AcademicDepartment> ;
-    access:value <http://vivoweb.org/ontology/core#AcademicTerm> ;
-    access:value <http://vivoweb.org/ontology/core#AcademicYear> ;
-    access:value <http://vivoweb.org/ontology/core#AdvisingRelationship> ;
-    access:value <http://vivoweb.org/ontology/core#Association> ;
-    access:value <http://vivoweb.org/ontology/core#AttendeeRole> ;
-    access:value <http://vivoweb.org/ontology/core#Authorship> ;
-    access:value <http://vivoweb.org/ontology/core#Award> ;
-    access:value <http://vivoweb.org/ontology/core#AwardReceipt> ;
-    access:value <http://vivoweb.org/ontology/core#Blog> ;
-    access:value <http://vivoweb.org/ontology/core#BlogPosting> ;
-    access:value <http://vivoweb.org/ontology/core#Building> ;
-    access:value <http://vivoweb.org/ontology/core#Campus> ;
-    access:value <http://vivoweb.org/ontology/core#CaseStudy> ;
-    access:value <http://vivoweb.org/ontology/core#Catalog> ;
-    access:value <http://vivoweb.org/ontology/core#Center> ;
-    access:value <http://vivoweb.org/ontology/core#Certificate> ;
-    access:value <http://vivoweb.org/ontology/core#ClinicalOrganization> ;
-    access:value <http://vivoweb.org/ontology/core#ClinicalRole> ;
-    access:value <http://vivoweb.org/ontology/core#College> ;
-    access:value <http://vivoweb.org/ontology/core#Committee> ;
-    access:value <http://vivoweb.org/ontology/core#Company> ;
-    access:value <http://vivoweb.org/ontology/core#Competition> ;
-    access:value <http://vivoweb.org/ontology/core#ConferencePaper> ;
-    access:value <http://vivoweb.org/ontology/core#ConferencePoster> ;
-    access:value <http://vivoweb.org/ontology/core#ConferenceSeries> ;
-    access:value <http://vivoweb.org/ontology/core#Consortium> ;
-    access:value <http://vivoweb.org/ontology/core#Continent> ;
-    access:value <http://vivoweb.org/ontology/core#Contract> ;
-    access:value <http://vivoweb.org/ontology/core#CoPrincipalInvestigatorRole> ;
-    access:value <http://vivoweb.org/ontology/core#CoreLaboratory> ;
-    access:value <http://vivoweb.org/ontology/core#Country> ;
-    access:value <http://vivoweb.org/ontology/core#County> ;
-    access:value <http://vivoweb.org/ontology/core#Course> ;
-    access:value <http://vivoweb.org/ontology/core#Credential> ;
-    access:value <http://vivoweb.org/ontology/core#Database> ;
-    access:value <http://vivoweb.org/ontology/core#Dataset> ;
-    access:value <http://vivoweb.org/ontology/core#DateTimeInterval> ;
-    access:value <http://vivoweb.org/ontology/core#DateTimeValue> ;
-    access:value <http://vivoweb.org/ontology/core#DateTimeValuePrecision> ;
-    access:value <http://vivoweb.org/ontology/core#Department> ;
-    access:value <http://vivoweb.org/ontology/core#Division> ;
-    access:value <http://vivoweb.org/ontology/core#EditorialArticle> ;
-    access:value <http://vivoweb.org/ontology/core#EditorRole> ;
-    access:value <http://vivoweb.org/ontology/core#EmeritusFaculty> ;
-    access:value <http://vivoweb.org/ontology/core#EmeritusLibrarian> ;
-    access:value <http://vivoweb.org/ontology/core#EmeritusProfessor> ;
-    access:value <http://vivoweb.org/ontology/core#Equipment> ;
-    access:value <http://vivoweb.org/ontology/core#EventSeries> ;
-    access:value <http://vivoweb.org/ontology/core#Exhibit> ;
-    access:value <http://vivoweb.org/ontology/core#ExtensionUnit> ;
-    access:value <http://vivoweb.org/ontology/core#F1000Link> ;
-    access:value <http://vivoweb.org/ontology/core#Facility> ;
-    access:value <http://vivoweb.org/ontology/core#FacultyAdministrativePosition> ;
-    access:value <http://vivoweb.org/ontology/core#FacultyMember> ;
-    access:value <http://vivoweb.org/ontology/core#FacultyMentoringRelationship> ;
-    access:value <http://vivoweb.org/ontology/core#FacultyPosition> ;
-    access:value <http://vivoweb.org/ontology/core#Foundation> ;
-    access:value <http://vivoweb.org/ontology/core#FundingOrganization> ;
-    access:value <http://vivoweb.org/ontology/core#GeographicLocation> ;
-    access:value <http://vivoweb.org/ontology/core#GeographicRegion> ;
-    access:value <http://vivoweb.org/ontology/core#GeopoliticalEntity> ;
-    access:value <http://vivoweb.org/ontology/core#GovernmentAgency> ;
-    access:value <http://vivoweb.org/ontology/core#GraduateAdvisingRelationship> ;
-    access:value <http://vivoweb.org/ontology/core#GraduateStudent> ;
-    access:value <http://vivoweb.org/ontology/core#Grant> ;
-    access:value <http://vivoweb.org/ontology/core#Hospital> ;
-    access:value <http://vivoweb.org/ontology/core#Institute> ;
-    access:value <http://vivoweb.org/ontology/core#Internship> ;
-    access:value <http://vivoweb.org/ontology/core#InvestigatorRole> ;
-    access:value <http://vivoweb.org/ontology/core#InvitedTalk> ;
-    access:value <http://vivoweb.org/ontology/core#Laboratory> ;
-    access:value <http://vivoweb.org/ontology/core#LeaderRole> ;
-    access:value <http://vivoweb.org/ontology/core#Librarian> ;
-    access:value <http://vivoweb.org/ontology/core#LibrarianPosition> ;
-    access:value <http://vivoweb.org/ontology/core#Library> ;
-    access:value <http://vivoweb.org/ontology/core#License> ;
-    access:value <http://vivoweb.org/ontology/core#Location> ;
-    access:value <http://vivoweb.org/ontology/core#MedicalResidency> ;
-    access:value <http://vivoweb.org/ontology/core#Meeting> ;
-    access:value <http://vivoweb.org/ontology/core#MemberRole> ;
-    access:value <http://vivoweb.org/ontology/core#Museum> ;
-    access:value <http://vivoweb.org/ontology/core#Newsletter> ;
-    access:value <http://vivoweb.org/ontology/core#NewsRelease> ;
-    access:value <http://vivoweb.org/ontology/core#NonAcademic> ;
-    access:value <http://vivoweb.org/ontology/core#NonAcademicPosition> ;
-    access:value <http://vivoweb.org/ontology/core#NonFacultyAcademic> ;
-    access:value <http://vivoweb.org/ontology/core#NonFacultyAcademicPosition> ;
-    access:value <http://vivoweb.org/ontology/core#OrganizerRole> ;
-    access:value <http://vivoweb.org/ontology/core#OutreachProviderRole> ;
-    access:value <http://vivoweb.org/ontology/core#PeerReviewerRole> ;
-    access:value <http://vivoweb.org/ontology/core#PopulatedPlace> ;
-    access:value <http://vivoweb.org/ontology/core#Position> ;
-    access:value <http://vivoweb.org/ontology/core#Postdoc> ;
-    access:value <http://vivoweb.org/ontology/core#PostdocOrFellowAdvisingRelationship> ;
-    access:value <http://vivoweb.org/ontology/core#PostdocPosition> ;
-    access:value <http://vivoweb.org/ontology/core#PostdoctoralTraining> ;
-    access:value <http://vivoweb.org/ontology/core#Presentation> ;
-    access:value <http://vivoweb.org/ontology/core#PresenterRole> ;
-    access:value <http://vivoweb.org/ontology/core#PrimaryPosition> ;
-    access:value <http://vivoweb.org/ontology/core#PrincipalInvestigatorRole> ;
-    access:value <http://vivoweb.org/ontology/core#PrivateCompany> ;
-    access:value <http://vivoweb.org/ontology/core#Program> ;
-    access:value <http://vivoweb.org/ontology/core#Project> ;
-    access:value <http://vivoweb.org/ontology/core#Publisher> ;
-    access:value <http://vivoweb.org/ontology/core#Relationship> ;
-    access:value <http://vivoweb.org/ontology/core#ResearcherRole> ;
-    access:value <http://vivoweb.org/ontology/core#ResearchOrganization> ;
-    access:value <http://vivoweb.org/ontology/core#ResearchProposal> ;
-    access:value <http://vivoweb.org/ontology/core#Review> ;
-    access:value <http://vivoweb.org/ontology/core#ReviewerRole> ;
-    access:value <http://vivoweb.org/ontology/core#Room> ;
-    access:value <http://vivoweb.org/ontology/core#School> ;
-    access:value <http://vivoweb.org/ontology/core#Score> ;
-    access:value <http://vivoweb.org/ontology/core#Screenplay> ;
-    access:value <http://vivoweb.org/ontology/core#SeminarSeries> ;
-    access:value <http://vivoweb.org/ontology/core#ServiceProvidingLaboratory> ;
-    access:value <http://vivoweb.org/ontology/core#Speech> ;
-    access:value <http://vivoweb.org/ontology/core#StateOrProvince> ;
-    access:value <http://vivoweb.org/ontology/core#Student> ;
-    access:value <http://vivoweb.org/ontology/core#StudentOrganization> ;
-    access:value <http://vivoweb.org/ontology/core#SubnationalRegion> ;
-    access:value <http://vivoweb.org/ontology/core#TeacherRole> ;
-    access:value <http://vivoweb.org/ontology/core#Team> ;
-    access:value <http://vivoweb.org/ontology/core#Translation> ;
-    access:value <http://vivoweb.org/ontology/core#UndergraduateAdvisingRelationship> ;
-    access:value <http://vivoweb.org/ontology/core#UndergraduateStudent> ;
-    access:value <http://vivoweb.org/ontology/core#University> ;
-    access:value <http://vivoweb.org/ontology/core#Video> ;
-    access:value <http://vivoweb.org/ontology/core#WorkingPaper> ;
-    access:value <http://vivoweb.org/ontology/core#WorkshopSeries> ;
-    access:value <http://vivoweb.org/ontology/scientific-research#Phase0ClinicalTrial> ;
-    access:value <http://vivoweb.org/ontology/scientific-research#Phase1ClinicalTrial> ;
-    access:value <http://vivoweb.org/ontology/scientific-research#Phase2ClinicalTrial> ;
-    access:value <http://vivoweb.org/ontology/scientific-research#Phase3ClinicalTrial> ;
-    access:value <http://vivoweb.org/ontology/scientific-research#Phase4ClinicalTrial> ;
-    access:value <http://www.w3.org/2004/02/skos/core#Concept> ;
-    access:value <http://xmlns.com/foaf/0.1/Agent> ;
-    access:value <http://xmlns.com/foaf/0.1/Group> ;
-    access:value <http://xmlns.com/foaf/0.1/Organization> ;
-    access:value <http://xmlns.com/foaf/0.1/Person> ;
-    .
+:EditorPublishClassValueContainer access:value
+    <http://aims.fao.org/aos/geopolitical.owl#area> ,
+    <http://aims.fao.org/aos/geopolitical.owl#disputed> ,
+    <http://aims.fao.org/aos/geopolitical.owl#economic_region> ,
+    <http://aims.fao.org/aos/geopolitical.owl#geographical_region> ,
+    <http://aims.fao.org/aos/geopolitical.owl#group> ,
+    <http://aims.fao.org/aos/geopolitical.owl#non_self_governing> ,
+    <http://aims.fao.org/aos/geopolitical.owl#organization> ,
+    <http://aims.fao.org/aos/geopolitical.owl#other> ,
+    <http://aims.fao.org/aos/geopolitical.owl#self_governing> ,
+    <http://aims.fao.org/aos/geopolitical.owl#special_group> ,
+    <http://aims.fao.org/aos/geopolitical.owl#territory> ,
+    <http://purl.obolibrary.org/obo/ERO_0000004> ,
+    <http://purl.obolibrary.org/obo/ERO_0000006> ,
+    <http://purl.obolibrary.org/obo/ERO_0000014> ,
+    <http://purl.obolibrary.org/obo/ERO_0000015> ,
+    <http://purl.obolibrary.org/obo/ERO_0000016> ,
+    <http://purl.obolibrary.org/obo/ERO_0000020> ,
+    <http://purl.obolibrary.org/obo/ERO_0000595> ,
+    <http://purl.org/NET/c4dm/event.owl#Event> ,
+    <http://purl.org/ontology/bibo/AcademicArticle> ,
+    <http://purl.org/ontology/bibo/Article> ,
+    <http://purl.org/ontology/bibo/AudioDocument> ,
+    <http://purl.org/ontology/bibo/AudioVisualDocument> ,
+    <http://purl.org/ontology/bibo/Bill> ,
+    <http://purl.org/ontology/bibo/Book> ,
+    <http://purl.org/ontology/bibo/BookSection> ,
+    <http://purl.org/ontology/bibo/Brief> ,
+    <http://purl.org/ontology/bibo/Chapter> ,
+    <http://purl.org/ontology/bibo/Code> ,
+    <http://purl.org/ontology/bibo/CollectedDocument> ,
+    <http://purl.org/ontology/bibo/Collection> ,
+    <http://purl.org/ontology/bibo/Conference> ,
+    <http://purl.org/ontology/bibo/CourtReporter> ,
+    <http://purl.org/ontology/bibo/Document> ,
+    <http://purl.org/ontology/bibo/DocumentPart> ,
+    <http://purl.org/ontology/bibo/DocumentStatus> ,
+    <http://purl.org/ontology/bibo/EditedBook> ,
+    <http://purl.org/ontology/bibo/Excerpt> ,
+    <http://purl.org/ontology/bibo/Film> ,
+    <http://purl.org/ontology/bibo/Hearing> ,
+    <http://purl.org/ontology/bibo/Image> ,
+    <http://purl.org/ontology/bibo/Interview> ,
+    <http://purl.org/ontology/bibo/Issue> ,
+    <http://purl.org/ontology/bibo/Journal> ,
+    <http://purl.org/ontology/bibo/LegalCaseDocument> ,
+    <http://purl.org/ontology/bibo/LegalDecision> ,
+    <http://purl.org/ontology/bibo/LegalDocument> ,
+    <http://purl.org/ontology/bibo/Legislation> ,
+    <http://purl.org/ontology/bibo/Letter> ,
+    <http://purl.org/ontology/bibo/Magazine> ,
+    <http://purl.org/ontology/bibo/Manual> ,
+    <http://purl.org/ontology/bibo/Manuscript> ,
+    <http://purl.org/ontology/bibo/Map> ,
+    <http://purl.org/ontology/bibo/Newspaper> ,
+    <http://purl.org/ontology/bibo/Note> ,
+    <http://purl.org/ontology/bibo/Patent> ,
+    <http://purl.org/ontology/bibo/Performance> ,
+    <http://purl.org/ontology/bibo/Periodical> ,
+    <http://purl.org/ontology/bibo/PersonalCommunicationDocument> ,
+    <http://purl.org/ontology/bibo/Proceedings> ,
+    <http://purl.org/ontology/bibo/Quote> ,
+    <http://purl.org/ontology/bibo/ReferenceSource> ,
+    <http://purl.org/ontology/bibo/Report> ,
+    <http://purl.org/ontology/bibo/Series> ,
+    <http://purl.org/ontology/bibo/Slide> ,
+    <http://purl.org/ontology/bibo/Slideshow> ,
+    <http://purl.org/ontology/bibo/Standard> ,
+    <http://purl.org/ontology/bibo/Statute> ,
+    <http://purl.org/ontology/bibo/Thesis> ,
+    <http://purl.org/ontology/bibo/ThesisDegree> ,
+    <http://purl.org/ontology/bibo/Webpage> ,
+    <http://purl.org/ontology/bibo/Website> ,
+    <http://purl.org/ontology/bibo/Workshop> ,
+    <http://purl.org/spar/c4o/BibliographicInformationSource> ,
+    <http://purl.org/spar/c4o/GlobalCitationCount> ,
+    <http://purl.org/spar/fabio/ClinicalGuideline> ,
+    <http://purl.org/spar/fabio/Comment> ,
+    <http://purl.org/spar/fabio/Erratum> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/public#File> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/public#FileByteStream> ,
+    <http://vivoweb.org/ontology/core#Abstract> ,
+    <http://vivoweb.org/ontology/core#AcademicDegree> ,
+    <http://vivoweb.org/ontology/core#AcademicDepartment> ,
+    <http://vivoweb.org/ontology/core#AcademicTerm> ,
+    <http://vivoweb.org/ontology/core#AcademicYear> ,
+    <http://vivoweb.org/ontology/core#AdvisingRelationship> ,
+    <http://vivoweb.org/ontology/core#Association> ,
+    <http://vivoweb.org/ontology/core#AttendeeRole> ,
+    <http://vivoweb.org/ontology/core#Authorship> ,
+    <http://vivoweb.org/ontology/core#Award> ,
+    <http://vivoweb.org/ontology/core#AwardReceipt> ,
+    <http://vivoweb.org/ontology/core#Blog> ,
+    <http://vivoweb.org/ontology/core#BlogPosting> ,
+    <http://vivoweb.org/ontology/core#Building> ,
+    <http://vivoweb.org/ontology/core#Campus> ,
+    <http://vivoweb.org/ontology/core#CaseStudy> ,
+    <http://vivoweb.org/ontology/core#Catalog> ,
+    <http://vivoweb.org/ontology/core#Center> ,
+    <http://vivoweb.org/ontology/core#Certificate> ,
+    <http://vivoweb.org/ontology/core#ClinicalOrganization> ,
+    <http://vivoweb.org/ontology/core#ClinicalRole> ,
+    <http://vivoweb.org/ontology/core#CoPrincipalInvestigatorRole> ,
+    <http://vivoweb.org/ontology/core#College> ,
+    <http://vivoweb.org/ontology/core#Committee> ,
+    <http://vivoweb.org/ontology/core#Company> ,
+    <http://vivoweb.org/ontology/core#Competition> ,
+    <http://vivoweb.org/ontology/core#ConferencePaper> ,
+    <http://vivoweb.org/ontology/core#ConferencePoster> ,
+    <http://vivoweb.org/ontology/core#ConferenceSeries> ,
+    <http://vivoweb.org/ontology/core#Consortium> ,
+    <http://vivoweb.org/ontology/core#Continent> ,
+    <http://vivoweb.org/ontology/core#Contract> ,
+    <http://vivoweb.org/ontology/core#CoreLaboratory> ,
+    <http://vivoweb.org/ontology/core#Country> ,
+    <http://vivoweb.org/ontology/core#County> ,
+    <http://vivoweb.org/ontology/core#Course> ,
+    <http://vivoweb.org/ontology/core#Credential> ,
+    <http://vivoweb.org/ontology/core#Database> ,
+    <http://vivoweb.org/ontology/core#Dataset> ,
+    <http://vivoweb.org/ontology/core#DateTimeInterval> ,
+    <http://vivoweb.org/ontology/core#DateTimeValue> ,
+    <http://vivoweb.org/ontology/core#DateTimeValuePrecision> ,
+    <http://vivoweb.org/ontology/core#Department> ,
+    <http://vivoweb.org/ontology/core#Division> ,
+    <http://vivoweb.org/ontology/core#EditorRole> ,
+    <http://vivoweb.org/ontology/core#EditorialArticle> ,
+    <http://vivoweb.org/ontology/core#EmeritusFaculty> ,
+    <http://vivoweb.org/ontology/core#EmeritusLibrarian> ,
+    <http://vivoweb.org/ontology/core#EmeritusProfessor> ,
+    <http://vivoweb.org/ontology/core#Equipment> ,
+    <http://vivoweb.org/ontology/core#EventSeries> ,
+    <http://vivoweb.org/ontology/core#Exhibit> ,
+    <http://vivoweb.org/ontology/core#ExtensionUnit> ,
+    <http://vivoweb.org/ontology/core#F1000Link> ,
+    <http://vivoweb.org/ontology/core#Facility> ,
+    <http://vivoweb.org/ontology/core#FacultyAdministrativePosition> ,
+    <http://vivoweb.org/ontology/core#FacultyMember> ,
+    <http://vivoweb.org/ontology/core#FacultyMentoringRelationship> ,
+    <http://vivoweb.org/ontology/core#FacultyPosition> ,
+    <http://vivoweb.org/ontology/core#Foundation> ,
+    <http://vivoweb.org/ontology/core#FundingOrganization> ,
+    <http://vivoweb.org/ontology/core#GeographicLocation> ,
+    <http://vivoweb.org/ontology/core#GeographicRegion> ,
+    <http://vivoweb.org/ontology/core#GeopoliticalEntity> ,
+    <http://vivoweb.org/ontology/core#GovernmentAgency> ,
+    <http://vivoweb.org/ontology/core#GraduateAdvisingRelationship> ,
+    <http://vivoweb.org/ontology/core#GraduateStudent> ,
+    <http://vivoweb.org/ontology/core#Grant> ,
+    <http://vivoweb.org/ontology/core#Hospital> ,
+    <http://vivoweb.org/ontology/core#Institute> ,
+    <http://vivoweb.org/ontology/core#Internship> ,
+    <http://vivoweb.org/ontology/core#InvestigatorRole> ,
+    <http://vivoweb.org/ontology/core#InvitedTalk> ,
+    <http://vivoweb.org/ontology/core#Laboratory> ,
+    <http://vivoweb.org/ontology/core#LeaderRole> ,
+    <http://vivoweb.org/ontology/core#Librarian> ,
+    <http://vivoweb.org/ontology/core#LibrarianPosition> ,
+    <http://vivoweb.org/ontology/core#Library> ,
+    <http://vivoweb.org/ontology/core#License> ,
+    <http://vivoweb.org/ontology/core#Location> ,
+    <http://vivoweb.org/ontology/core#MedicalResidency> ,
+    <http://vivoweb.org/ontology/core#Meeting> ,
+    <http://vivoweb.org/ontology/core#MemberRole> ,
+    <http://vivoweb.org/ontology/core#Museum> ,
+    <http://vivoweb.org/ontology/core#NewsRelease> ,
+    <http://vivoweb.org/ontology/core#Newsletter> ,
+    <http://vivoweb.org/ontology/core#NonAcademic> ,
+    <http://vivoweb.org/ontology/core#NonAcademicPosition> ,
+    <http://vivoweb.org/ontology/core#NonFacultyAcademic> ,
+    <http://vivoweb.org/ontology/core#NonFacultyAcademicPosition> ,
+    <http://vivoweb.org/ontology/core#OrganizerRole> ,
+    <http://vivoweb.org/ontology/core#OutreachProviderRole> ,
+    <http://vivoweb.org/ontology/core#PeerReviewerRole> ,
+    <http://vivoweb.org/ontology/core#PopulatedPlace> ,
+    <http://vivoweb.org/ontology/core#Position> ,
+    <http://vivoweb.org/ontology/core#Postdoc> ,
+    <http://vivoweb.org/ontology/core#PostdocOrFellowAdvisingRelationship> ,
+    <http://vivoweb.org/ontology/core#PostdocPosition> ,
+    <http://vivoweb.org/ontology/core#PostdoctoralTraining> ,
+    <http://vivoweb.org/ontology/core#Presentation> ,
+    <http://vivoweb.org/ontology/core#PresenterRole> ,
+    <http://vivoweb.org/ontology/core#PrimaryPosition> ,
+    <http://vivoweb.org/ontology/core#PrincipalInvestigatorRole> ,
+    <http://vivoweb.org/ontology/core#PrivateCompany> ,
+    <http://vivoweb.org/ontology/core#Program> ,
+    <http://vivoweb.org/ontology/core#Project> ,
+    <http://vivoweb.org/ontology/core#Publisher> ,
+    <http://vivoweb.org/ontology/core#Relationship> ,
+    <http://vivoweb.org/ontology/core#ResearchOrganization> ,
+    <http://vivoweb.org/ontology/core#ResearchProposal> ,
+    <http://vivoweb.org/ontology/core#ResearcherRole> ,
+    <http://vivoweb.org/ontology/core#Review> ,
+    <http://vivoweb.org/ontology/core#ReviewerRole> ,
+    <http://vivoweb.org/ontology/core#Room> ,
+    <http://vivoweb.org/ontology/core#School> ,
+    <http://vivoweb.org/ontology/core#Score> ,
+    <http://vivoweb.org/ontology/core#Screenplay> ,
+    <http://vivoweb.org/ontology/core#SeminarSeries> ,
+    <http://vivoweb.org/ontology/core#ServiceProvidingLaboratory> ,
+    <http://vivoweb.org/ontology/core#Speech> ,
+    <http://vivoweb.org/ontology/core#StateOrProvince> ,
+    <http://vivoweb.org/ontology/core#Student> ,
+    <http://vivoweb.org/ontology/core#StudentOrganization> ,
+    <http://vivoweb.org/ontology/core#SubnationalRegion> ,
+    <http://vivoweb.org/ontology/core#TeacherRole> ,
+    <http://vivoweb.org/ontology/core#Team> ,
+    <http://vivoweb.org/ontology/core#Translation> ,
+    <http://vivoweb.org/ontology/core#UndergraduateAdvisingRelationship> ,
+    <http://vivoweb.org/ontology/core#UndergraduateStudent> ,
+    <http://vivoweb.org/ontology/core#University> ,
+    <http://vivoweb.org/ontology/core#Video> ,
+    <http://vivoweb.org/ontology/core#WorkingPaper> ,
+    <http://vivoweb.org/ontology/core#WorkshopSeries> ,
+    <http://vivoweb.org/ontology/scientific-research#Phase0ClinicalTrial> ,
+    <http://vivoweb.org/ontology/scientific-research#Phase1ClinicalTrial> ,
+    <http://vivoweb.org/ontology/scientific-research#Phase2ClinicalTrial> ,
+    <http://vivoweb.org/ontology/scientific-research#Phase3ClinicalTrial> ,
+    <http://vivoweb.org/ontology/scientific-research#Phase4ClinicalTrial> ,
+    <http://www.w3.org/2004/02/skos/core#Concept> ,
+    <http://xmlns.com/foaf/0.1/Agent> ,
+    <http://xmlns.com/foaf/0.1/Group> ,
+    <http://xmlns.com/foaf/0.1/Organization> ,
+    <http://xmlns.com/foaf/0.1/Person> .
+
