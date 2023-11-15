@@ -3,287 +3,165 @@
 @prefix : <https://vivoweb.org/ontology/vitro-application/auth/individual/update-related-allowed-property/> .
 @prefix access: <https://vivoweb.org/ontology/vitro-application/auth/vocabulary/> .
 
-:SelfEditorDropDataPropertyValueContainer
-    access:value <http://www.w3.org/2000/01/rdf-schema#label> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#agriculturalArea> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaNotes> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaTotal> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaUnit> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaYear> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#area> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#codeAGROVOC> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#codeCurrency> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#codeDBPediaID> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#codeFAOSTAT> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#codeFAOTERM> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#codeGAUL> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#codeISO2> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#codeISO3> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#codeUN> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#codeUNDP> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#countryArea> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#countryAreaNotes> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#countryAreaTotal> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#countryAreaUnit> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#countryAreaYear> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#disputed> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#economic_region> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#GDP> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#GDPNotes> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#GDPTotalInCurrentPrices> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#GDPYear> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#geographical_region> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#group> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#hasBorderWith> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#hasCode> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#hasCoordinate> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#hasCurrency> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#hasListName> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#hasMaxLatitude> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#hasMaxLongitude> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#hasMember> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#hasMinLatitude> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#hasMinLongitude> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#hasNationality> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#hasOfficialName> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#hasShortName> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#hasStatistics> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#isAdministeredBy> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#isInGroup> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#isPredecessorOf> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#isSuccessorOf> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#landArea> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#landAreaNotes> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#landAreaTotal> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#landAreaUnit> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#landAreaYear> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameCurrencyAR> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameCurrencyEN> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameCurrencyES> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameCurrencyFR> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameCurrencyIT> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameCurrencyRU> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameCurrencyZH> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameListAR> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameListEN> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameListES> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameListFR> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameListIT> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameListRU> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameListZH> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameOfficialAR> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameOfficialEN> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameOfficialES> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameOfficialFR> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameOfficialIT> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameOfficialRU> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameOfficialZH> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameShortAR> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameShortEN> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameShortES> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameShortFR> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameShortIT> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameShortRU> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nameShortZH> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nationalityAR> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nationalityEN> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nationalityES> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nationalityFR> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nationalityIT> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nationalityRU> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#nationalityZH> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#non_self_governing> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#organization> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#other> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#population> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#populationNotes> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#populationTotal> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#populationUnit> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#populationYear> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#self_governing> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#special_group> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#territory> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#validSince> ;
-    access:value <http://aims.fao.org/aos/geopolitical.owl#validUntil> ;
-    access:value <http://purl.obolibrary.org/obo/ARG_0000197> ;
-    access:value <http://purl.obolibrary.org/obo/BFO_0000054> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000004> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000006> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000014> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000015> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000016> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000020> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000029> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000037> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000044> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000045> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000046> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000050> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000054> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000390> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000397> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000398> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000424> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000460> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000481> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000543> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000595> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000774> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000775> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000918> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0000919> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0001520> ;
-    access:value <http://purl.obolibrary.org/obo/ERO_0001521> ;
-    access:value <http://purl.obolibrary.org/obo/OBI_0000304> ;
-    access:value <http://purl.obolibrary.org/obo/RO_0003000> ;
-    access:value <http://purl.obolibrary.org/obo/RO_0003001> ;
-    access:value <http://purl.org/ontology/bibo/abstract> ;
-    access:value <http://purl.org/ontology/bibo/chapter> ;
-    access:value <http://purl.org/ontology/bibo/citedBy> ;
-    access:value <http://purl.org/ontology/bibo/cites> ;
-    access:value <http://purl.org/ontology/bibo/court> ;
-    access:value <http://purl.org/ontology/bibo/director> ;
-    access:value <http://purl.org/ontology/bibo/distributor> ;
-    access:value <http://purl.org/ontology/bibo/doi> ;
-    access:value <http://purl.org/ontology/bibo/eanucc13> ;
-    access:value <http://purl.org/ontology/bibo/edition> ;
-    access:value <http://purl.org/ontology/bibo/eissn> ;
-    access:value <http://purl.org/ontology/bibo/gtin14> ;
-    access:value <http://purl.org/ontology/bibo/interviewee> ;
-    access:value <http://purl.org/ontology/bibo/interviewer> ;
-    access:value <http://purl.org/ontology/bibo/isbn10> ;
-    access:value <http://purl.org/ontology/bibo/isbn13> ;
-    access:value <http://purl.org/ontology/bibo/issn> ;
-    access:value <http://purl.org/ontology/bibo/issue> ;
-    access:value <http://purl.org/ontology/bibo/issuer> ;
-    access:value <http://purl.org/ontology/bibo/lccn> ;
-    access:value <http://purl.org/ontology/bibo/number> ;
-    access:value <http://purl.org/ontology/bibo/numPages> ;
-    access:value <http://purl.org/ontology/bibo/oclcnum> ;
-    access:value <http://purl.org/ontology/bibo/pageEnd> ;
-    access:value <http://purl.org/ontology/bibo/pageStart> ;
-    access:value <http://purl.org/ontology/bibo/performer> ;
-    access:value <http://purl.org/ontology/bibo/pmid> ;
-    access:value <http://purl.org/ontology/bibo/prefixName> ;
-    access:value <http://purl.org/ontology/bibo/presentedAt> ;
-    access:value <http://purl.org/ontology/bibo/presents> ;
-    access:value <http://purl.org/ontology/bibo/recipient> ;
-    access:value <http://purl.org/ontology/bibo/reproducedIn> ;
-    access:value <http://purl.org/ontology/bibo/reversedBy> ;
-    access:value <http://purl.org/ontology/bibo/reviewOf> ;
-    access:value <http://purl.org/ontology/bibo/section> ;
-    access:value <http://purl.org/ontology/bibo/shortDescription> ;
-    access:value <http://purl.org/ontology/bibo/sici> ;
-    access:value <http://purl.org/ontology/bibo/status> ;
-    access:value <http://purl.org/ontology/bibo/translationOf> ;
-    access:value <http://purl.org/ontology/bibo/translator> ;
-    access:value <http://purl.org/ontology/bibo/upc> ;
-    access:value <http://purl.org/ontology/bibo/uri> ;
-    access:value <http://purl.org/ontology/bibo/volume> ;
-    access:value <http://purl.org/spar/c4o/hasGlobalCitationFrequency> ;
-    access:value <http://purl.org/spar/c4o/hasGlobalCountDate> ;
-    access:value <http://purl.org/spar/c4o/hasGlobalCountSource> ;
-    access:value <http://purl.org/spar/c4o/hasGlobalCountValue> ;
-    access:value <http://purl.org/spar/cito/citesAsDataSource> ;
-    access:value <http://purl.org/spar/cito/isCitedAsDataSourceBy> ;
-    access:value <http://purl.org/vocab/vann/preferredNamespaceUri> ;
-    access:value <http://vivoweb.org/ontology/core#abbreviation> ;
-    access:value <http://vivoweb.org/ontology/core#affiliatedOrganization> ;
-    access:value <http://vivoweb.org/ontology/core#assignee> ;
-    access:value <http://vivoweb.org/ontology/core#assigneeFor> ;
-    access:value <http://vivoweb.org/ontology/core#cclCode> ;
-    access:value <http://vivoweb.org/ontology/core#conceptAssociatedWith> ;
-    access:value <http://vivoweb.org/ontology/core#contactInformation> ;
-    access:value <http://vivoweb.org/ontology/core#courseCredits> ;
-    access:value <http://vivoweb.org/ontology/core#dateFiled> ;
-    access:value <http://vivoweb.org/ontology/core#dateIssued> ;
-    access:value <http://vivoweb.org/ontology/core#dateTime> ;
-    access:value <http://vivoweb.org/ontology/core#dateTimeInterval> ;
-    access:value <http://vivoweb.org/ontology/core#dateTimePrecision> ;
-    access:value <http://vivoweb.org/ontology/core#degreeCandidacy> ;
-    access:value <http://vivoweb.org/ontology/core#departmentOrSchool> ;
-    access:value <http://vivoweb.org/ontology/core#description> ;
-    access:value <http://vivoweb.org/ontology/core#distributes> ;
-    access:value <http://vivoweb.org/ontology/core#distributesFundingFrom> ;
-    access:value <http://vivoweb.org/ontology/core#eligibleFor> ;
-    access:value <http://vivoweb.org/ontology/core#end> ;
-    access:value <http://vivoweb.org/ontology/core#entryTerm> ;
-    access:value <http://vivoweb.org/ontology/core#equipmentFor> ;
-    access:value <http://vivoweb.org/ontology/core#eRACommonsId> ;
-    access:value <http://vivoweb.org/ontology/core#expirationDate> ;
-    access:value <http://vivoweb.org/ontology/core#featuredIn> ;
-    access:value <http://vivoweb.org/ontology/core#features> ;
-    access:value <http://vivoweb.org/ontology/core#freetextKeyword> ;
-    access:value <http://vivoweb.org/ontology/core#geographicFocus> ;
-    access:value <http://vivoweb.org/ontology/core#geographicFocusOf> ;
-    access:value <http://vivoweb.org/ontology/core#grantDirectCosts> ;
-    access:value <http://vivoweb.org/ontology/core#grantSubcontractedThrough> ;
-    access:value <http://vivoweb.org/ontology/core#hasAssociatedConcept> ;
-    access:value <http://vivoweb.org/ontology/core#hasEquipment> ;
-    access:value <http://vivoweb.org/ontology/core#hasFacility> ;
-    access:value <http://vivoweb.org/ontology/core#hasFundingVehicle> ;
-    access:value <http://vivoweb.org/ontology/core#hasGoverningAuthority> ;
-    access:value <http://vivoweb.org/ontology/core#hasPredecessorOrganization> ;
-    access:value <http://vivoweb.org/ontology/core#hasPrerequisite> ;
-    access:value <http://vivoweb.org/ontology/core#hasProceedings> ;
-    access:value <http://vivoweb.org/ontology/core#hasPublicationVenue> ;
-    access:value <http://vivoweb.org/ontology/core#hasResearchArea> ;
-    access:value <http://vivoweb.org/ontology/core#hasSubjectArea> ;
-    access:value <http://vivoweb.org/ontology/core#hasSuccessorOrganization> ;
-    access:value <http://vivoweb.org/ontology/core#hasTranslation> ;
-    access:value <http://vivoweb.org/ontology/core#hrJobTitle> ;
-    access:value <http://vivoweb.org/ontology/core#iclCode> ;
-    access:value <http://vivoweb.org/ontology/core#isCorrespondingAuthor> ;
-    access:value <http://vivoweb.org/ontology/core#licenseNumber> ;
-    access:value <http://vivoweb.org/ontology/core#localAwardId> ;
-    access:value <http://vivoweb.org/ontology/core#majorField> ;
-    access:value <http://vivoweb.org/ontology/core#nihmsid> ;
-    access:value <http://vivoweb.org/ontology/core#orcidId> ;
-    access:value <http://vivoweb.org/ontology/core#outreachOverview> ;
-    access:value <http://vivoweb.org/ontology/core#overview> ;
-    access:value <http://vivoweb.org/ontology/core#patentNumber> ;
-    access:value <http://vivoweb.org/ontology/core#placeOfPublication> ;
-    access:value <http://vivoweb.org/ontology/core#pmcid> ;
-    access:value <http://vivoweb.org/ontology/core#preferredDisplayOrder> ;
-    access:value <http://vivoweb.org/ontology/core#prerequisiteFor> ;
-    access:value <http://vivoweb.org/ontology/core#proceedingsOf> ;
-    access:value <http://vivoweb.org/ontology/core#providesFundingThrough> ;
-    access:value <http://vivoweb.org/ontology/core#publicationVenueFor> ;
-    access:value <http://vivoweb.org/ontology/core#publisher> ;
-    access:value <http://vivoweb.org/ontology/core#publisherOf> ;
-    access:value <http://vivoweb.org/ontology/core#rank> ;
-    access:value <http://vivoweb.org/ontology/core#reportId> ;
-    access:value <http://vivoweb.org/ontology/core#reproduces> ;
-    access:value <http://vivoweb.org/ontology/core#researchAreaOf> ;
-    access:value <http://vivoweb.org/ontology/core#researcherId> ;
-    access:value <http://vivoweb.org/ontology/core#researchOverview> ;
-    access:value <http://vivoweb.org/ontology/core#reviewedIn> ;
-    access:value <http://vivoweb.org/ontology/core#roleContributesTo> ;
-    access:value <http://vivoweb.org/ontology/core#scopusId> ;
-    access:value <http://vivoweb.org/ontology/core#seatingCapacity> ;
-    access:value <http://vivoweb.org/ontology/core#sponsorAwardId> ;
-    access:value <http://vivoweb.org/ontology/core#sponsoredBy> ;
-    access:value <http://vivoweb.org/ontology/core#sponsors> ;
-    access:value <http://vivoweb.org/ontology/core#start> ;
-    access:value <http://vivoweb.org/ontology/core#subcontractsGrant> ;
-    access:value <http://vivoweb.org/ontology/core#subjectAreaOf> ;
-    access:value <http://vivoweb.org/ontology/core#supplementalInformation> ;
-    access:value <http://vivoweb.org/ontology/core#supportedInformationResource> ;
-    access:value <http://vivoweb.org/ontology/core#teachingOverview> ;
-    access:value <http://vivoweb.org/ontology/core#termLabel> ;
-    access:value <http://vivoweb.org/ontology/core#termType> ;
-    access:value <http://vivoweb.org/ontology/core#totalAwardAmount> ;
-    access:value <http://vivoweb.org/ontology/core#translatorOf> ;
-    access:value <http://vivoweb.org/ontology/core#validIn> ;
-    access:value <http://vivoweb.org/ontology/scientific-research#accessProvidedBy> ;
-    access:value <http://vivoweb.org/ontology/scientific-research#documentationFor> ;
-    access:value <http://vivoweb.org/ontology/scientific-research#irbNumber> ;
-    access:value <http://vivoweb.org/ontology/scientific-research#nctId> ;
-    access:value <http://vivoweb.org/ontology/scientific-research#protocolRealizedBy> ;
-    access:value <http://vivoweb.org/ontology/scientific-research#studyPopulationCount> ;
-    access:value <http://www.ebi.ac.uk/efo/swo/SWO_0000741> ;
-    access:value <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> ;
-    access:value <http://www.w3.org/2004/02/skos/core#broader> ;
-    access:value <http://www.w3.org/2004/02/skos/core#narrower> ;
-    access:value <http://www.w3.org/2004/02/skos/core#related> ;
-    .
+:SelfEditorDropDataPropertyValueContainer access:value
+    <http://aims.fao.org/aos/geopolitical.owl#GDP> ,
+    <http://aims.fao.org/aos/geopolitical.owl#GDPNotes> ,
+    <http://aims.fao.org/aos/geopolitical.owl#GDPTotalInCurrentPrices> ,
+    <http://aims.fao.org/aos/geopolitical.owl#GDPYear> ,
+    <http://aims.fao.org/aos/geopolitical.owl#HDINotes> ,
+    <http://aims.fao.org/aos/geopolitical.owl#HDITotal> ,
+    <http://aims.fao.org/aos/geopolitical.owl#HDIYear> ,
+    <http://aims.fao.org/aos/geopolitical.owl#agriculturalArea> ,
+    <http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaNotes> ,
+    <http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaTotal> ,
+    <http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaUnit> ,
+    <http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaYear> ,
+    <http://aims.fao.org/aos/geopolitical.owl#codeAGROVOC> ,
+    <http://aims.fao.org/aos/geopolitical.owl#codeCurrency> ,
+    <http://aims.fao.org/aos/geopolitical.owl#codeDBPediaID> ,
+    <http://aims.fao.org/aos/geopolitical.owl#codeFAOSTAT> ,
+    <http://aims.fao.org/aos/geopolitical.owl#codeFAOTERM> ,
+    <http://aims.fao.org/aos/geopolitical.owl#codeGAUL> ,
+    <http://aims.fao.org/aos/geopolitical.owl#codeISO2> ,
+    <http://aims.fao.org/aos/geopolitical.owl#codeISO3> ,
+    <http://aims.fao.org/aos/geopolitical.owl#codeUN> ,
+    <http://aims.fao.org/aos/geopolitical.owl#codeUNDP> ,
+    <http://aims.fao.org/aos/geopolitical.owl#countryArea> ,
+    <http://aims.fao.org/aos/geopolitical.owl#countryAreaNotes> ,
+    <http://aims.fao.org/aos/geopolitical.owl#countryAreaTotal> ,
+    <http://aims.fao.org/aos/geopolitical.owl#countryAreaUnit> ,
+    <http://aims.fao.org/aos/geopolitical.owl#countryAreaYear> ,
+    <http://aims.fao.org/aos/geopolitical.owl#hasCode> ,
+    <http://aims.fao.org/aos/geopolitical.owl#hasCoordinate> ,
+    <http://aims.fao.org/aos/geopolitical.owl#hasCurrency> ,
+    <http://aims.fao.org/aos/geopolitical.owl#hasListName> ,
+    <http://aims.fao.org/aos/geopolitical.owl#hasMaxLatitude> ,
+    <http://aims.fao.org/aos/geopolitical.owl#hasMaxLongitude> ,
+    <http://aims.fao.org/aos/geopolitical.owl#hasMinLatitude> ,
+    <http://aims.fao.org/aos/geopolitical.owl#hasMinLongitude> ,
+    <http://aims.fao.org/aos/geopolitical.owl#hasNationality> ,
+    <http://aims.fao.org/aos/geopolitical.owl#hasOfficialName> ,
+    <http://aims.fao.org/aos/geopolitical.owl#hasShortName> ,
+    <http://aims.fao.org/aos/geopolitical.owl#hasStatistics> ,
+    <http://aims.fao.org/aos/geopolitical.owl#landArea> ,
+    <http://aims.fao.org/aos/geopolitical.owl#landAreaNotes> ,
+    <http://aims.fao.org/aos/geopolitical.owl#landAreaTotal> ,
+    <http://aims.fao.org/aos/geopolitical.owl#landAreaUnit> ,
+    <http://aims.fao.org/aos/geopolitical.owl#landAreaYear> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameCurrencyAR> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameCurrencyEN> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameCurrencyES> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameCurrencyFR> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameCurrencyIT> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameCurrencyRU> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameCurrencyZH> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameListAR> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameListEN> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameListES> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameListFR> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameListIT> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameListRU> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameListZH> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameOfficialAR> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameOfficialEN> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameOfficialES> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameOfficialFR> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameOfficialIT> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameOfficialRU> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameOfficialZH> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameShortAR> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameShortEN> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameShortES> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameShortFR> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameShortIT> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameShortRU> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nameShortZH> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nationalityAR> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nationalityEN> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nationalityES> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nationalityFR> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nationalityIT> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nationalityRU> ,
+    <http://aims.fao.org/aos/geopolitical.owl#nationalityZH> ,
+    <http://aims.fao.org/aos/geopolitical.owl#population> ,
+    <http://aims.fao.org/aos/geopolitical.owl#populationNotes> ,
+    <http://aims.fao.org/aos/geopolitical.owl#populationTotal> ,
+    <http://aims.fao.org/aos/geopolitical.owl#populationUnit> ,
+    <http://aims.fao.org/aos/geopolitical.owl#populationYear> ,
+    <http://aims.fao.org/aos/geopolitical.owl#validSince> ,
+    <http://aims.fao.org/aos/geopolitical.owl#validUntil> ,
+    <http://purl.obolibrary.org/obo/ARG_0000197> ,
+    <http://purl.obolibrary.org/obo/ERO_0000044> ,
+    <http://purl.obolibrary.org/obo/ERO_0000045> ,
+    <http://purl.obolibrary.org/obo/ERO_0000046> ,
+    <http://purl.obolibrary.org/obo/ERO_0000050> ,
+    <http://purl.obolibrary.org/obo/ERO_0000054> ,
+    <http://purl.obolibrary.org/obo/ERO_0000424> ,
+    <http://purl.obolibrary.org/obo/ERO_0000774> ,
+    <http://purl.org/ontology/bibo/abstract> ,
+    <http://purl.org/ontology/bibo/chapter> ,
+    <http://purl.org/ontology/bibo/doi> ,
+    <http://purl.org/ontology/bibo/eanucc13> ,
+    <http://purl.org/ontology/bibo/edition> ,
+    <http://purl.org/ontology/bibo/eissn> ,
+    <http://purl.org/ontology/bibo/gtin14> ,
+    <http://purl.org/ontology/bibo/isbn10> ,
+    <http://purl.org/ontology/bibo/isbn13> ,
+    <http://purl.org/ontology/bibo/issn> ,
+    <http://purl.org/ontology/bibo/issue> ,
+    <http://purl.org/ontology/bibo/lccn> ,
+    <http://purl.org/ontology/bibo/numPages> ,
+    <http://purl.org/ontology/bibo/number> ,
+    <http://purl.org/ontology/bibo/oclcnum> ,
+    <http://purl.org/ontology/bibo/pageEnd> ,
+    <http://purl.org/ontology/bibo/pageStart> ,
+    <http://purl.org/ontology/bibo/pmid> ,
+    <http://purl.org/ontology/bibo/prefixName> ,
+    <http://purl.org/ontology/bibo/section> ,
+    <http://purl.org/ontology/bibo/shortDescription> ,
+    <http://purl.org/ontology/bibo/sici> ,
+    <http://purl.org/ontology/bibo/upc> ,
+    <http://purl.org/ontology/bibo/uri> ,
+    <http://purl.org/ontology/bibo/volume> ,
+    <http://purl.org/spar/c4o/hasGlobalCountDate> ,
+    <http://purl.org/spar/c4o/hasGlobalCountValue> ,
+    <http://purl.org/vocab/vann/preferredNamespaceUri> ,
+    <http://vivoweb.org/ontology/core#abbreviation> ,
+    <http://vivoweb.org/ontology/core#cclCode> ,
+    <http://vivoweb.org/ontology/core#contactInformation> ,
+    <http://vivoweb.org/ontology/core#courseCredits> ,
+    <http://vivoweb.org/ontology/core#dateTime> ,
+    <http://vivoweb.org/ontology/core#departmentOrSchool> ,
+    <http://vivoweb.org/ontology/core#description> ,
+    <http://vivoweb.org/ontology/core#eRACommonsId> ,
+    <http://vivoweb.org/ontology/core#entryTerm> ,
+    <http://vivoweb.org/ontology/core#freetextKeyword> ,
+    <http://vivoweb.org/ontology/core#grantDirectCosts> ,
+    <http://vivoweb.org/ontology/core#hrJobTitle> ,
+    <http://vivoweb.org/ontology/core#iclCode> ,
+    <http://vivoweb.org/ontology/core#isCorrespondingAuthor> ,
+    <http://vivoweb.org/ontology/core#licenseNumber> ,
+    <http://vivoweb.org/ontology/core#localAwardId> ,
+    <http://vivoweb.org/ontology/core#majorField> ,
+    <http://vivoweb.org/ontology/core#nihmsid> ,
+    <http://vivoweb.org/ontology/core#outreachOverview> ,
+    <http://vivoweb.org/ontology/core#overview> ,
+    <http://vivoweb.org/ontology/core#patentNumber> ,
+    <http://vivoweb.org/ontology/core#placeOfPublication> ,
+    <http://vivoweb.org/ontology/core#pmcid> ,
+    <http://vivoweb.org/ontology/core#preferredDisplayOrder> ,
+    <http://vivoweb.org/ontology/core#rank> ,
+    <http://vivoweb.org/ontology/core#reportId> ,
+    <http://vivoweb.org/ontology/core#researchOverview> ,
+    <http://vivoweb.org/ontology/core#researcherId> ,
+    <http://vivoweb.org/ontology/core#scopusId> ,
+    <http://vivoweb.org/ontology/core#seatingCapacity> ,
+    <http://vivoweb.org/ontology/core#sponsorAwardId> ,
+    <http://vivoweb.org/ontology/core#supplementalInformation> ,
+    <http://vivoweb.org/ontology/core#teachingOverview> ,
+    <http://vivoweb.org/ontology/core#termLabel> ,
+    <http://vivoweb.org/ontology/core#termType> ,
+    <http://vivoweb.org/ontology/core#totalAwardAmount> ,
+    <http://vivoweb.org/ontology/scientific-research#irbNumber> ,
+    <http://vivoweb.org/ontology/scientific-research#nctId> ,
+    <http://vivoweb.org/ontology/scientific-research#studyPopulationCount> .

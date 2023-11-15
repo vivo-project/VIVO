@@ -3,118 +3,119 @@
 @prefix : <https://vivoweb.org/ontology/vitro-application/auth/individual/access-allowed-property/> .
 @prefix access: <https://vivoweb.org/ontology/vitro-application/auth/vocabulary/> .
 
-:CuratorPublishFauxObjectPropertyValueContainer
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/additionalEmailConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/addressLocationConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/adviseeRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/advisorRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/agentInFacilityConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/agentInGeoLocationConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/authorInAuthorshipConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/awardConferredByConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/awardOrHonorConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/awardOrHonorGivenConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/awardOrHonorReceiptsConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/awardReceiptsAwardForConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/awardReceiptsConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/bfo_0000055Config> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/collegeOffersDegreeConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/contractAdministeredByConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/contractAwardedByConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/contractRelatesConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/courseOfferedByConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/credentialOfConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/deptOffersDegreeConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/documentHasPartConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/documentPartOfConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/editorOfConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/educationalProcessDegreeConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/educationalProcessOrgConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/educationalProcessPersonConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/educationalTrainingConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/eventInFacilityConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/eventLocationConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/eventsForSeriesConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/eventWithinConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/facilityLocationOfEquipmentConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/facilityLocationOfServiceConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/facilitySiteOfAgentConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/facilitySiteOfEventConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/fullNameConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/geographicLocationContainsBuildingConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/geographicLocationContainsLocationConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/geographicLocationWithinLocationConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantAdministeredByConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantAwardedByConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantGeographicFocusConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantHasSubgrantConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantIsSubgrantOfConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantRelatesConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantSubjectAreaConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/groupHasEditorRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasAttendeeRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasClinicalRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasCo-PrincipalInvestigatorRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasCollaboratorConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasEditorRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasInvestigatorRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasLeaderRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasMemberRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasOrganizerRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasOutputConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasOutreachProviderRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasPresenterRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasPrincipalInvestigatorRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasResearcherRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasReviewerRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasRoomConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasServiceProviderRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasSubOrganizationConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasTeacherRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/includesEventConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/inEventSeriesConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/informationResourceInAuthorshipConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/informationResourceInEditorshipConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/issuedCredentialConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/labOffersServiceConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/mailingAddressConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/mailingAddressOrgConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/materialEntityInFacilityConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgAdministersGrantConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/organizationEmailConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/organizationForPositionConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgAwardsGrantConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgFaxConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgHasAttendeeRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgHasAwardOrHonorConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgHasClinicalRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgHasCollaboratorConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgHasLeaderRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgHasMemberRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgHasOrganizerRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgHasOutreachProviderRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgHasPresenterRoleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgInAuthorshipConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgOffersCourseConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgTelephoneConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/outputOfConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/personFaxConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/personInPositionConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/personTelephoneConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/preferredTitleConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/primaryEmailConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/publicationDateConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/roomWithinBuildingConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/siteGeographicallyWithinGeoLocationConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/subOrganizationWithinConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/uniOffersDegreeConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageEventConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageEventSeriesConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageFacilityConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageInfoConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageOrgConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpagePersonConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageProjectConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageSoftwareConfig> ;
-    access:value <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/yearAwardedConfig> ;
-    .
+:CuratorPublishFauxObjectPropertyValueContainer access:value
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/additionalEmailConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/addressLocationConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/adviseeRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/advisorRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/agentInFacilityConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/agentInGeoLocationConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/authorInAuthorshipConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/awardConferredByConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/awardOrHonorConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/awardOrHonorGivenConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/awardOrHonorReceiptsConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/awardReceiptsAwardForConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/awardReceiptsConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/bfo_0000055Config> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/collegeOffersDegreeConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/contractAdministeredByConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/contractAwardedByConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/contractRelatesConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/courseOfferedByConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/credentialOfConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/deptOffersDegreeConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/documentHasPartConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/documentPartOfConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/editorOfConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/educationalProcessDegreeConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/educationalProcessOrgConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/educationalProcessPersonConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/educationalTrainingConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/eventInFacilityConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/eventLocationConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/eventWithinConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/eventsForSeriesConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/facilityLocationOfEquipmentConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/facilityLocationOfServiceConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/facilitySiteOfAgentConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/facilitySiteOfEventConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/fullNameConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/geographicLocationContainsBuildingConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/geographicLocationContainsLocationConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/geographicLocationWithinLocationConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantAdministeredByConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantAwardedByConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantGeographicFocusConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantHasSubgrantConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantIsSubgrantOfConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantRelatesConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/grantSubjectAreaConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/groupHasEditorRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasAttendeeRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasClinicalRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasCo-PrincipalInvestigatorRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasCollaboratorConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasEditorRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasInvestigatorRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasLeaderRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasMemberRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasOrganizerRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasOutputConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasOutreachProviderRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasPresenterRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasPrincipalInvestigatorRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasResearcherRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasReviewerRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasRoomConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasServiceProviderRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasSubOrganizationConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/hasTeacherRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/inEventSeriesConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/includesEventConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/informationResourceInAuthorshipConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/informationResourceInEditorshipConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/issuedCredentialConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/labOffersServiceConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/mailingAddressConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/mailingAddressOrgConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/materialEntityInFacilityConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgAdministersGrantConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgAwardsGrantConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgFaxConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgHasAttendeeRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgHasAwardOrHonorConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgHasClinicalRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgHasCollaboratorConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgHasLeaderRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgHasMemberRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgHasOrganizerRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgHasOutreachProviderRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgHasPresenterRoleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgInAuthorshipConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgOffersCourseConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/orgTelephoneConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/organizationEmailConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/organizationForPositionConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/organizationForTrainingConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/outputOfConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/personFaxConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/personInPositionConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/personTelephoneConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/preferredTitleConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/primaryEmailConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/publicationDateConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/roomWithinBuildingConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/siteGeographicallyWithinGeoLocationConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/subOrganizationWithinConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/uniOffersDegreeConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageEventConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageEventSeriesConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageFacilityConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageInfoConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageOrgConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpagePersonConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageProjectConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/webpageSoftwareConfig> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/yearAwardedConfig> .
+
