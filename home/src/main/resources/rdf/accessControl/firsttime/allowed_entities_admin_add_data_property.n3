@@ -3,7 +3,7 @@
 @prefix : <https://vivoweb.org/ontology/vitro-application/auth/individual/access-allowed-property/> .
 @prefix access: <https://vivoweb.org/ontology/vitro-application/auth/vocabulary/> .
 
-:AdminAddDataPropertyValueContainer access:value
+:AdminAddDataPropertyValueSet access:value
     <http://aims.fao.org/aos/geopolitical.owl#GDP> ,
     <http://aims.fao.org/aos/geopolitical.owl#GDPNotes> ,
     <http://aims.fao.org/aos/geopolitical.owl#GDPTotalInCurrentPrices> ,

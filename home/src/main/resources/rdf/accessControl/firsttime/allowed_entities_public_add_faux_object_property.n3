@@ -3,5 +3,5 @@
 @prefix : <https://vivoweb.org/ontology/vitro-application/auth/individual/access-allowed-property/> .
 @prefix access: <https://vivoweb.org/ontology/vitro-application/auth/vocabulary/> .
 
-# :PublicAddFauxObjectPropertyValueContainer access:value <> .
+# :PublicAddFauxObjectPropertyValueSet access:value <> .
 

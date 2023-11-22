@@ -3,5 +3,5 @@
 @prefix : <https://vivoweb.org/ontology/vitro-application/auth/individual/access-allowed-class/> .
 @prefix access: <https://vivoweb.org/ontology/vitro-application/auth/vocabulary/> .
 
-#:CuratorUpdateClassValueContainer access:value <> .
+#:CuratorUpdateClassValueSet access:value <> .
 

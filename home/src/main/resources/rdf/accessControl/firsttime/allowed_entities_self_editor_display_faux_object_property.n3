@@ -3,7 +3,7 @@
 @prefix : <https://vivoweb.org/ontology/vitro-application/auth/individual/related-allowed-property/> .
 @prefix access: <https://vivoweb.org/ontology/vitro-application/auth/vocabulary/> .
 
-:SelfEditorDisplayFauxObjectPropertyValueContainer access:value
+:SelfEditorDisplayFauxObjectPropertyValueSet access:value
     <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/additionalEmailConfig> ,
     <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/addressLocationConfig> ,
     <http://vitro.mannlib.cornell.edu/ns/vitro/siteConfig/adviseeRoleConfig> ,
