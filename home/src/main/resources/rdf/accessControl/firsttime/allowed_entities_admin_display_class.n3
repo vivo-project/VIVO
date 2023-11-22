@@ -3,7 +3,7 @@
 @prefix access: <https://vivoweb.org/ontology/vitro-application/auth/vocabulary/> .
 @prefix : <https://vivoweb.org/ontology/vitro-application/auth/individual/access-allowed-class/> .
 
-:AdminDisplayClassValueContainer access:value
+:AdminDisplayClassValueSet access:value
     <http://aims.fao.org/aos/geopolitical.owl#area> ,
     <http://aims.fao.org/aos/geopolitical.owl#disputed> ,
     <http://aims.fao.org/aos/geopolitical.owl#economic_region> ,
