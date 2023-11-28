@@ -4,8 +4,8 @@ $(document).ready(function(){
 
     $.extend(this, individualLocalName);
     adjustFontSize();
-    padSectionBottoms();
-    checkLocationHash();
+    // padSectionBottoms();
+    // checkLocationHash();
 
     // prevents the page jumping down when loading a page with a requested tab in the url
     removeHash();
@@ -21,37 +21,53 @@ $(document).ready(function(){
         });
     }
 
-    // controls the property group tabs
-    $.each($('li.clickable'), function() {
-        var groupName = $(this).attr("groupName");
-        var $propertyGroupLi = $(this);
+    let showAllBtn = $('#show-all-tabs')[0];
 
-        $(this).click(function() {
-
-            if ( $propertyGroupLi.attr("class") == "nonSelectedGroupTab clickable" ) {
-                $.each($('li.selectedGroupTab'), function() {
-                    $(this).removeClass("selectedGroupTab clickable");
-                    $(this).addClass("nonSelectedGroupTab clickable");
-                });
-                $propertyGroupLi.removeClass("nonSelectedGroupTab clickable");
-                $propertyGroupLi.addClass("selectedGroupTab clickable");
-            }
-            if ( $propertyGroupLi.attr("groupname") == "viewAll" ) {
-                processViewAllTab();
-            }
-            else {
-                padSectionBottoms();
-                var $visibleSection = $('section.property-group:visible');
-                $visibleSection.hide();
-                $('h2[pgroup=tabs]').addClass("hidden");
-                $('nav#scroller').addClass("hidden");
-                $('section#' + groupName).show();
-            }
-
-            manageLocalStorage();
-            return false;
+    showAllBtn.addEventListener('show.bs.tab', function (event) {
+        event.preventDefault()
+        $('.propertyTabsList.nav.nav-tabs > li').each(function() {
+            $(this).attr("aria-selected", "false");
+            $(this).removeClass("active");
         });
-    });
+        
+        $('#show-all-tabs').addClass("active").attr("aria-selected", "true");
+        $(".tab-content>section.tab-pane").addClass('active show')    })
+
+    showAllBtn.addEventListener('hide.bs.tab', function (event) {
+        $(".tab-content>section.tab-pane").removeClass('show active')
+    })
+
+    // controls the property group tabs
+    // $.each($('li.clickable'), function() {
+    //     var groupName = $(this).attr("groupName");
+    //     var $propertyGroupLi = $(this);
+
+    //     $(this).click(function() {
+
+    //         if ( $propertyGroupLi.attr("class") == "nonSelectedGroupTab clickable" ) {
+    //             $.each($('li.selectedGroupTab'), function() {
+    //                 $(this).removeClass("selectedGroupTab clickable");
+    //                 $(this).addClass("nonSelectedGroupTab clickable");
+    //             });
+    //             $propertyGroupLi.removeClass("nonSelectedGroupTab clickable");
+    //             $propertyGroupLi.addClass("selectedGroupTab clickable");
+    //         }
+    //         if ( $propertyGroupLi.attr("groupname") == "viewAll" ) {
+    //             processViewAllTab();
+    //         }
+    //         else {
+    //             padSectionBottoms();
+    //             var $visibleSection = $('section.property-group:visible');
+    //             $visibleSection.hide();
+    //             $('h2[pgroup=tabs]').addClass("hidden");
+    //             $('nav#scroller').addClass("hidden");
+    //             $('section#' + groupName).show();
+    //         }
+
+    //         manageLocalStorage();
+    //         return false;
+    //     });
+    // });
 
 
     function removeHash () {

@@ -22,7 +22,7 @@ VIVO wilma theme: screen styles
 
 @charset "UTF-8";
 
-@import url("../bootstrap-5.3.2-dist/css/bootstrap-grid.min.css");
+@import url("../../../bootstrap-5.3.2/css/bootstrap.css");
 @import url("reset.css");
 @import url("wilma.css");
 @import url("page-createAndLink.css");
