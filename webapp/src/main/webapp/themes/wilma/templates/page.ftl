@@ -11,7 +11,7 @@
     <body class="${bodyClasses!}" onload="${bodyOnload!}">
         <div class="container">
             <#include "identity.ftl">
-            <#include "search.ftl"ß>
+            <#include "search.ftl">
             <#include "menu.ftl">
 
             <div class="row">
