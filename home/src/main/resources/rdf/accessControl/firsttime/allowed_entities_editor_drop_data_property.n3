@@ -4,6 +4,7 @@
 @prefix access: <https://vivoweb.org/ontology/vitro-application/auth/vocabulary/> .
 
 :EditorDropDataPropertyValueSet access:value
+    <http://www.w3.org/2000/01/rdf-schema#label> ,
     <http://aims.fao.org/aos/geopolitical.owl#GDP> ,
     <http://aims.fao.org/aos/geopolitical.owl#GDPNotes> ,
     <http://aims.fao.org/aos/geopolitical.owl#GDPTotalInCurrentPrices> ,

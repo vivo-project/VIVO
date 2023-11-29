@@ -4,7 +4,6 @@
 @prefix : <https://vivoweb.org/ontology/vitro-application/auth/individual/access-allowed-property/> .
 
 :AdminEditObjectPropertyValueSet access:value
-    <http://www.w3.org/2000/01/rdf-schema#label> ,
     <http://aims.fao.org/aos/geopolitical.owl#hasBorderWith> ,
     <http://aims.fao.org/aos/geopolitical.owl#hasMember> ,
     <http://aims.fao.org/aos/geopolitical.owl#isAdministeredBy> ,
