@@ -1,0 +1,11 @@
+@prefix : <https://vivoweb.org/ontology/vitro-search-individual/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:filter_publication_year rdfs:label "Godina izdanja"@sr-Latn-RS .
+:field_persons rdfs:label "Lica"@sr-Latn-RS .
+:range_filter_dates rdfs:label "Datumi"@sr-Latn-RS .
+:filter_organizations rdfs:label "Organizacije"@sr-Latn-RS .
+:filter_persons rdfs:label "Lica"@sr-Latn-RS .
+:field_dates rdfs:label "Datumi"@sr-Latn-RS .
+:field_organizations rdfs:label "Organizacije"@sr-Latn-RS .
+:field_publication_year rdfs:label "Godina izdanja"@sr-Latn-RS .
