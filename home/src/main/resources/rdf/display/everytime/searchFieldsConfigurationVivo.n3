@@ -152,6 +152,6 @@
                   )
                   BIND( CONCAT("[", STR(?cleanDateValue)," TO ", STR(?cleanDateValue),"]") as ?result )
 		}
-	}
+	} LIMIT 1
 """ .
 
