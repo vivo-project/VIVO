@@ -21,6 +21,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Tem
 import edu.cornell.mannlib.vitro.webapp.dao.IndividualDao;
 import edu.cornell.mannlib.vitro.webapp.dao.InsertException;
 import edu.cornell.mannlib.vitro.webapp.dao.NewURIMakerVitro;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.N3EditUtils;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelNames;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.ChangeSet;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
@@ -391,7 +392,7 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
                 }
 
                 // Finished processing confirmation, write the differences between the existing and updated model
-                writeChanges(vreq.getRDFService(), existingModel, updatedModel);
+                writeChanges(vreq.getRDFService(), existingModel, updatedModel, N3EditUtils.getEditorUri(vreq));
             }
 
             // Get any IDs that have not yet been processed from the form
@@ -1815,8 +1816,9 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
      * @param rdfService
      * @param existingModel
      * @param updatedModel
+     * @param editroUri 
      */
-    protected void writeChanges(RDFService rdfService, Model existingModel, Model updatedModel) {
+    protected void writeChanges(RDFService rdfService, Model existingModel, Model updatedModel, String editorUri) {
         Model removeModel = existingModel.difference(updatedModel);
         Model addModel = updatedModel.difference(existingModel);
 
@@ -1829,12 +1831,12 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
 
             if (!addModel.isEmpty()) {
                 addStream = makeN3InputStream(addModel);
-                changeSet.addAddition(addStream, RDFService.ModelSerializationFormat.N3, ModelNames.ABOX_ASSERTIONS);
+                changeSet.addAddition(addStream, RDFService.ModelSerializationFormat.N3, ModelNames.ABOX_ASSERTIONS, editorUri);
             }
 
             if (!removeModel.isEmpty()) {
                 removeStream = makeN3InputStream(removeModel);
-                changeSet.addRemoval(removeStream, RDFService.ModelSerializationFormat.N3, ModelNames.ABOX_ASSERTIONS);
+                changeSet.addRemoval(removeStream, RDFService.ModelSerializationFormat.N3, ModelNames.ABOX_ASSERTIONS, editorUri);
             }
 
             try {
