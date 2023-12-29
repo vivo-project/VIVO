@@ -170,8 +170,8 @@ var addAuthorForm = {
         this.hideSelectedPerson();
         this.hideSelectedOrg();
 
-        this.cancel.unbind('click');
-        this.cancel.bind('click', function() {
+        this.cancel.off('click');
+        this.cancel.on('click', function() {
             addAuthorForm.showAuthorListOnlyView();
             addAuthorForm.setAuthorType("person");
             return false;
@@ -184,7 +184,7 @@ var addAuthorForm = {
 
         // Show the form
         this.form.show();
-        //this.lastNameField.focus();
+        //this.lastNameField.on("focus", );
     },
 
     hideSelectedPerson: function() {
@@ -254,7 +254,7 @@ var addAuthorForm = {
                     complete: function(xhr, status) {
                         // Not sure why, but we need an explicit json parse here. jQuery
                         // should parse the response text and return a json object.
-                        var results = jQuery.parseJSON(xhr.responseText),
+                        var results = JSON.parse(xhr.responseText),
                             filteredResults = addAuthorForm.filterAcResults(results);
                         addAuthorForm.acCache[request.term] = filteredResults;
                         response(filteredResults);
@@ -338,7 +338,7 @@ var addAuthorForm = {
             // field when the form is redisplayed. Thus it's done explicitly in initFormView.
             this.hideFields(this.lastNameWrapper);
             // These get displayed if the selection was made through an enter keystroke,
-            // since the keydown event on the last name field is also triggered (and
+            // since the "keydown" event on the last name field is also triggered (and
             // executes first). So re-hide them here.
             this.hideFieldsForNewPerson();
             this.personLink.attr('href', this.verifyMatch.data('baseHref') + ui.item.uri);
@@ -356,8 +356,8 @@ var addAuthorForm = {
         }
 
         // Cancel restores initial form view
-        this.cancel.unbind('click');
-        this.cancel.bind('click', function() {
+        this.cancel.off('click');
+        this.cancel.on('click', function() {
             addAuthorForm.initFormView();
             addAuthorForm.setAuthorType(authType);
             return false;
@@ -478,29 +478,29 @@ var addAuthorForm = {
 
     bindEventListeners: function() {
 
-        this.showFormButton.click(function() {
+        this.showFormButton.on("click", function() {
             addAuthorForm.initFormView();
             return false;
         });
 
-        this.orgRadio.click(function() {
+        this.orgRadio.on("click", function() {
             addAuthorForm.setAuthorType("org");
         });
 
-        this.personRadio.click(function() {
+        this.personRadio.on("click", function() {
             addAuthorForm.setAuthorType("person");
         });
 
-        this.form.submit(function() {
+        this.form.on("submit", function() {
             // NB Important JavaScript scope issue: if we call it this way, this = addAuthorForm
-            // in prepareSubmit. If we do this.form.submit(this.prepareSubmit); then
+            // in prepareSubmit. If we do this.form.on("submit", this.prepareSubmit); then
             // this != addAuthorForm in prepareSubmit.
             $selectedObj = addAuthorForm.form.find('input.acSelector');
             addAuthorForm.deleteAcHelpText($selectedObj);
 			addAuthorForm.prepareSubmit();
         });
 
-        this.lastNameField.blur(function() {
+        this.lastNameField.on("blur", function() {
             // Cases where this event should be ignored:
             // 1. personUri field has a value: the autocomplete select event has already fired.
             // 2. The last name field is empty (especially since the field has focus when the form is displayed).
@@ -511,43 +511,43 @@ var addAuthorForm = {
             addAuthorForm.onLastNameChange();
         });
 
-        this.personLink.click(function() {
+        this.personLink.on("click", function() {
             window.open($(this).attr('href'), 'verifyMatchWindow', 'width=640,height=640,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,location=no');
             return false;
         });
 
-        this.orgLink.click(function() {
+        this.orgLink.on("click", function() {
             window.open($(this).attr('href'), 'verifyMatchWindow', 'width=640,height=640,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,location=no');
             return false;
         });
 
-    	this.acSelector.focus(function() {
+    	this.acSelector.on("focus", function() {
         	addAuthorForm.deleteAcHelpText(this);
     	});
 
-    	this.acSelector.blur(function() {
+    	this.acSelector.on("blur", function() {
         	addAuthorForm.addAcHelpText(this);
     	});
 
-    	this.orgName.focus(function() {
+    	this.orgName.on("focus", function() {
         	addAuthorForm.deleteAcHelpText(this);
     	});
 
-    	this.orgName.blur(function() {
+    	this.orgName.on("blur", function() {
         	addAuthorForm.addAcHelpText(this);
     	});
 
         // When hitting enter in last name field, show first and middle name fields.
         // NB This event fires when selecting an autocomplete suggestion with the enter
         // key. Since it fires first, we undo its effects in the ac select event listener.
-        this.lastNameField.keydown(function(event) {
+        this.lastNameField.on("keydown", function(event) {
             if (event.which === 13) {
                 addAuthorForm.onLastNameChange();
                 return false; // don't submit form
             }
         });
 
-        this.removeAuthorshipLinks.click(function() {
+        this.removeAuthorshipLinks.on("click", function() {
             addAuthorForm.removeAuthorship(this);
             return false;
         });
@@ -590,7 +590,7 @@ var addAuthorForm = {
 
     onLastNameChange: function() {
         this.showFieldsForNewPerson();
-        this.firstNameField.focus();
+        this.firstNameField.on("focus", );
         // this.fixNames();
     },
 
@@ -646,7 +646,7 @@ var addAuthorForm = {
             data: {
                 deletion: $(link).parents('li.authorship').data('authorshipUri')
             },
-            dataType: 'json',
+            dataType: 'html',
             context: link, // context for callback
             complete: function(request, status) {
                 var authorship,

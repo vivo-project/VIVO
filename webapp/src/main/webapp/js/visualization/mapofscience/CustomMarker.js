@@ -36,7 +36,7 @@ var ScinodePolygon = CirclePolygon.extend({
 		}));
 
 		me.registerEvent(addMouseOverListener(polygon, function() {
-			me.focus();
+			me.trigger("focus");
 		}));
 
 		me.registerEvent(addMouseOutListener(polygon, function() {

@@ -412,7 +412,7 @@ DetailsPanel.prototype.showDetails = function(mode, id) {
         $(this.panel)
             .empty()
             .append(title = $("<h2>" + i18nStringsCap.term + ": " + decodeURIComponent(id) + "</h2>")
-                .bind("click", function() {
+                .on("click", function() {
                     highlight(id);
                     detailsPane.showDetails(mode, id);
                 })
@@ -420,7 +420,7 @@ DetailsPanel.prototype.showDetails = function(mode, id) {
                 .prepend($("<span/>").addClass("orange-square"))
             )
             .append($("<button>" + i18nStringsCap.remove_capability + "</button>")
-                .bind("click", function() {
+                .on("click", function() {
                     g.removeCapability(id);
                     that.clearDetails();
                     render();
@@ -428,7 +428,7 @@ DetailsPanel.prototype.showDetails = function(mode, id) {
             )
             .append($("<span> </span>"))
             .append($("<button>" + i18nStringsCap.expand + "</button>")
-                .bind("click", function() {
+                .on("click", function() {
                     expandLastQuery = 1;
                     addKwd(decodeURIComponent(id));
                 })
@@ -473,7 +473,7 @@ DetailsPanel.prototype.groupInfo = function(i, group, mode, id) {
             $("<h2>" + i18nStringsCap.group + ": " + group.capabilities.map(function(c) {
                 return decodeURIComponent(c.term);
             }).join(", ") + "</h2>")
-                .bind("click", function() {
+                .on("click", function() {
                     highlight(i);
                     detailsPane.showDetails("group", i);
                 })
@@ -481,7 +481,7 @@ DetailsPanel.prototype.groupInfo = function(i, group, mode, id) {
                 .prepend($("<span/>").addClass("blue-circle"))
         )
         .append($("<button>" + i18nStringsCap.remove_group + "</button>")
-            .bind("click", function() {
+            .on("click", function() {
                 g.removeGroup(group);
                 that.clearDetails();
                 render();
@@ -507,7 +507,7 @@ DetailsPanel.prototype.groupInfo = function(i, group, mode, id) {
                             .append($("<span> </span>"))
                             .append($("<a>[X]</a>")
                                 .css("cursor", "pointer")
-                                .bind("click", function(k) {
+                                .on("click", function(k) {
                                     return function() {
                                         group.removePerson(group.people[k]);
                                         render();
@@ -531,7 +531,7 @@ DetailsPanel.makeslidedown = function(q, l, name) {
     return l != undefined
         ? $("<p>Matching " + name + ": " + l.length + " </p>")
             .append($("<button>+</button>")
-                .bind("click", function() {
+                .on("click", function() {
                     if ($(this).html() == "+") {
                         $(this).parent().children("ul").slideDown();
                         $(this).html("-");
@@ -849,7 +849,7 @@ var render = function() {
 
     // refresh UI
     $("#log").empty().append($("<button>" + i18nStringsCap.pause + "</button>")
-        .bind("click", function() {
+        .on("click", function() {
             if ($(this).html() != i18nStringsCap.resume) {
                 $(this).html(i18nStringsCap.resume);
                 force.stop();
@@ -861,7 +861,7 @@ var render = function() {
             }
         })
     ).append(" ").append($("<button>" + i18nStringsCap.hide_group_labels + "</button>")
-        .bind("click", function() {
+        .on("click", function() {
             if ($(this).html() != i18nStringsCap.show_group_labels) {
                 $(this).html(i18nStringsCap.show_group_labels);
                 $(".label-group").css("visibility", "hidden");
@@ -871,7 +871,7 @@ var render = function() {
             }
         })
     );
-    $("#log_printout").empty().append($("<button>" + i18nStringsCap.delete_selected + "</button>").bind("click", function() {
+    $("#log_printout").empty().append($("<button>" + i18nStringsCap.delete_selected + "</button>").on("click", function() {
         $("input[type=checkbox]:checked").each(function() {
             g.removeCapability($(this).attr("name"));
             $(this).parent().remove();
@@ -882,7 +882,7 @@ var render = function() {
         $("#log_printout")
             .append($("<li/>")
                 .append($("<a> " + decodeURI(c.term) + "</a>")
-                    .bind("click", function() {
+                    .on("click", function() {
                         highlight(c.term);
                         detailsPane.showDetails("capability", c.term);
                     })
@@ -1022,7 +1022,7 @@ var reset = function() {
 }
 var unhide = function() {
     hidden = false;
-    $("#resetButton").removeAttr("disabled");
+    $("#resetButton").prop("disabled", false );
     if ($(window).width() > 1230) {
         $("#container").css("box-shadow", "0px 0px 20px -6px #000000");
         $("#container").animate({"height" : "600px", "width" : "1200px", "margin-bottom" : "20px", "margin-left" : (($("#main-content").width() - 1200) / 2) + "px"}, 500);
@@ -1046,7 +1046,7 @@ function run_demo(demoValues) {
 var queryKeyDown = function(e) {
     e.cancelBubble = true;
     if(e.which === 13 || e.keyCode === 13) {
-        subButton.click();
+        subButton.trigger("click");
         e.returnValue = false;
         e.cancel = true;
         return false;
@@ -1068,20 +1068,20 @@ $(document).ready(function() {
     });
 
     // querycutoffelem hadling
-    $(queryCutoffElem).bind("keyup", function() {
+    $(queryCutoffElem).on("keyup", function() {
         var that = this;
         console.log($(this).val());
         if ($(this).data("prev") != $(this).val() && $("#infovis").html() != "") {
             $("#cutofflabel").empty().append($("<img/>")
                 .attr("src", contextPath + "/images/visualization/capabilitymap/refresh.png")
-                .bind("click", function() {
+                .on("click", function() {
                     $.each(g.getCapabilities(), function(i, c) {
                         if (c.cutoff != queryCutoffElem.value) {
                             g.removeCapability(c.term);
                             queryQueue.push(decodeURI(c.term));
                         }
                     });
-                    $(this).unbind("click");
+                    $(this).off("click");
                     $(this).parent().html("Cutoff:");
                     progressBar.reset(queryQueue.length, 1);
                     addKwd(false);
@@ -1089,7 +1089,7 @@ $(document).ready(function() {
                 })
             );
             setTimeout(function() {
-                $("#cutofflabel img").unbind("click");
+                $("#cutofflabel img").off("click");
                 $("#cutofflabel").html("Cutoff:");
             }, 5000);
         }
@@ -1107,20 +1107,20 @@ $(document).ready(function() {
     }
 
     // queryfield
-    $("#query").bind("focus", function() {
+    $("#query").on("focus", function() {
         $(this).data("previous", $(this).val());
         $(this).val("");
     });
-    $("#query").bind("blur", function() {
+    $("#query").on("blur", function() {
         if ($(this).val() == "") $(this).val($(this).data("previous"));
         else $(this).data("previous", $(this).val());
     });
-    $("#query").focus();
+    $("#query").trigger("focus");
     enableSubButton();
 
     // tabs
     $(".tabs div ul li + li + li + li + li").parent().children(":last-child").find("a").trigger("click");
-    $(".tabs ul.titles li[class!=\"full\"]").bind("click", function(e) {
+    $(".tabs ul.titles li[class!=\"full\"]").on("click", function(e) {
         $(this).parent().children("li").removeClass("activeTab");
         $(this).addClass("activeTab");
         $(this).parent().parent().find("div .result_section").css("display", "none");

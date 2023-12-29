@@ -172,13 +172,13 @@ var DataTableWidget = Class.extend({
 		table.append(tbody);
 		me.tableDiv.append(table);
 
-		table.children("tbody").children("tr").mouseenter(function() {
+		table.children("tbody").children("tr").on("mouseenter", function() {
 
 			var params = me.parseIDIntoScienceTypeAreaID($(this).attr("id"));
 			me.sciMapWidget.mouseIn(params[0], params[1]);
 		});
 
-		table.children("tbody").children("tr").mouseleave(function() {
+		table.children("tbody").children("tr").on("mouseleave", function() {
 
 			var params = me.parseIDIntoScienceTypeAreaID($(this).attr("id"));
 			me.sciMapWidget.mouseOut(params[0], params[1]);

@@ -47,7 +47,7 @@ var awardReceiptUtils = {
            window.setTimeout('awardReceiptUtils.hideConferredBy()', 180);
         });
 
-        this.award.blur( function(objEvent) {
+        this.award.on("blur", function(objEvent) {
            window.setTimeout('awardReceiptUtils.hideConferredBy()', 180);
         });
 

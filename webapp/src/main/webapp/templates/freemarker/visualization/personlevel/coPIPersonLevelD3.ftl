@@ -75,7 +75,7 @@ $(document).ready(function(){
     processProfileInformation("ego_label",
                               "ego_moniker",
                               "ego_profile_image",
-                              jQuery.parseJSON(getWellFormedURLs("${egoURIParam}", "profile_info")));
+                              JSON.parse(getWellFormedURLs("${egoURIParam}", "profile_info")));
 
     <#if (numOfCoInvestigations?? && numOfCoInvestigations <= 0) || (numOfInvestigators?? && numOfInvestigators <= 0) >
             if ($('#ego_label').text().length > 0) {

@@ -1,5 +1,5 @@
 ${scripts.add(
-    '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
+    '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.13.2.min.js"></script>',
     '<script type="text/javascript" src="${urls.base}/js/visualization/capabilitymap/d3v3.min.js"></script>',
     '<script type="text/javascript" src="${urls.base}/js/visualization/capabilitymap/jquery.color.js"></script>',
     '<script type="text/javascript" src="${urls.base}/js/visualization/capabilitymap/jsr_class.js"></script>',
@@ -7,7 +7,7 @@ ${scripts.add(
 )}
 
 ${stylesheets.add(
-    '<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />',
+    '<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.13.2.css" />',
     '<link rel="stylesheet" type="text/css" href="${urls.base}/templates/freemarker/edit/forms/css/autocomplete.css" />',
     '<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/personlevel/page.css" />',
     '<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/visualization.css" />',
@@ -40,7 +40,7 @@ ${stylesheets.add(
                 return result;
             }
         });
-        var conceptArray = $.parseJSON(loadedConcepts.responseText);
+        var conceptArray = JSON.parse(loadedConcepts.responseText);
         $("#query").autocomplete({
             source: conceptArray
         });

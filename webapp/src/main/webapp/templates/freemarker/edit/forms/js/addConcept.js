@@ -76,25 +76,25 @@ var addConceptForm = {
 
     },
     bindEventListeners: function() {
-    	this.searchSubmit.click(function() {
+    	this.searchSubmit.on("click", function() {
     		addConceptForm.clearErrors();
             addConceptForm.submitSearchTerm();
             return false;
          });
 
-    	this.form.submit(function() {
+    	this.form.on("submit", function() {
 			return addConceptForm.prepareSubmit();
         });
 
-    	this.addConceptButton.click(function() {
+    	this.addConceptButton.on("click", function() {
     		addConceptForm.initForm();
 
     	});
-    	 this.removeConceptLinks.click(function() {
+    	 this.removeConceptLinks.on("click", function() {
              addConceptForm.removeExistingConcept(this);
              return false;
          });
-    	 this.showHideSearchResults.find("a#showHideLink").click(function() {
+    	 this.showHideSearchResults.find("a#showHideLink").on("click", function() {
     		 addConceptForm.showHideMultipleSearchResults(this);
     		 return false;
     	 });
@@ -109,7 +109,7 @@ var addConceptForm = {
         this.submit.hide();
         //Also clear the search input
         this.searchTerm.val("");
-        this.cancel.unbind('click');
+        this.cancel.off('click');
         //make sure results loading indicator is hidden
         this.loadingIndicator.addClass("hidden");
         this.showHideSearchResults.hide();
@@ -430,7 +430,7 @@ var addConceptForm = {
         		additions: '',
                 retractions: addConceptForm.generateDeletionN3($(link).parents('.existingConcept').data('conceptNodeUri'))
             },
-            dataType: 'json',
+            dataType: 'html',
             context: link, // context for callback
             complete: function(request, status) {
                 var existingConcept,

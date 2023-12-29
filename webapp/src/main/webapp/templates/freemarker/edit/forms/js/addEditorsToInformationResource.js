@@ -158,8 +158,8 @@ var addEditorForm = {
 
         this.hideSelectedPerson();
 
-        this.cancel.unbind('click');
-        this.cancel.bind('click', function() {
+        this.cancel.off('click');
+        this.cancel.on('click', function() {
             addEditorForm.showEditorListOnlyView();
             addEditorForm.setEditorType("person");
             return false;
@@ -172,7 +172,7 @@ var addEditorForm = {
 
         // Show the form
         this.form.show();
-        //this.lastNameField.focus();
+        //this.lastNameField.trigger("focus");
     },
 
     hideSelectedPerson: function() {
@@ -226,7 +226,7 @@ var addEditorForm = {
                     complete: function(xhr, status) {
                         // Not sure why, but we need an explicit json parse here. jQuery
                         // should parse the response text and return a json object.
-                        var results = jQuery.parseJSON(xhr.responseText),
+                        var results = JSON.parse(xhr.responseText),
                             filteredResults = addEditorForm.filterAcResults(results);
                         addEditorForm.acCache[request.term] = filteredResults;
                         response(filteredResults);
@@ -317,8 +317,8 @@ var addEditorForm = {
         }
 
         // Cancel restores initial form view
-        this.cancel.unbind('click');
-        this.cancel.bind('click', function() {
+        this.cancel.off('click');
+        this.cancel.on('click', function() {
             addEditorForm.initFormView();
             addEditorForm.setEditorType(authType);
             return false;
@@ -439,21 +439,21 @@ var addEditorForm = {
 
     bindEventListeners: function() {
 
-        this.showFormButton.click(function() {
+        this.showFormButton.on("click", function() {
             addEditorForm.initFormView();
             return false;
         });
 
-        this.form.submit(function() {
+        this.form.on("submit", function() {
             // NB Important JavaScript scope issue: if we call it this way, this = addEditorForm
-            // in prepareSubmit. If we do this.form.submit(this.prepareSubmit); then
+            // in prepareSubmit. If we do this.form.on("submit", this.prepareSubmit); then
             // this != addEditorForm in prepareSubmit.
             $selectedObj = addEditorForm.form.find('input.acSelector');
             addEditorForm.deleteAcHelpText($selectedObj);
 			addEditorForm.prepareSubmit();
         });
 
-        this.lastNameField.blur(function() {
+        this.lastNameField.on("blur", function() {
             // Cases where this event should be ignored:
             // 1. personUri field has a value: the autocomplete select event has already fired.
             // 2. The last name field is empty (especially since the field has focus when the form is displayed).
@@ -464,30 +464,30 @@ var addEditorForm = {
             addEditorForm.onLastNameChange();
         });
 
-        this.personLink.click(function() {
+        this.personLink.on("click", function() {
             window.open($(this).attr('href'), 'verifyMatchWindow', 'width=640,height=640,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,location=no');
             return false;
         });
 
-    	this.acSelector.focus(function() {
+    	this.acSelector.on("focus", function() {
         	addEditorForm.deleteAcHelpText(this);
     	});
 
-    	this.acSelector.blur(function() {
+    	this.acSelector.on("blur", function() {
         	addEditorForm.addAcHelpText(this);
     	});
 
         // When hitting enter in last name field, show first and middle name fields.
         // NB This event fires when selecting an autocomplete suggestion with the enter
         // key. Since it fires first, we undo its effects in the ac select event listener.
-        this.lastNameField.keydown(function(event) {
+        this.lastNameField.on("keydown", function(event) {
             if (event.which === 13) {
                 addEditorForm.onLastNameChange();
                 return false; // don't submit form
             }
         });
 
-        this.removeEditorshipLinks.click(function() {
+        this.removeEditorshipLinks.on("click", function() {
             addEditorForm.removeEditorship(this);
             return false;
         });
@@ -526,7 +526,7 @@ var addEditorForm = {
 
     onLastNameChange: function() {
         this.showFieldsForNewPerson();
-        this.firstNameField.focus();
+        this.firstNameField.trigger("focus");
         // this.fixNames();
     },
 
@@ -564,7 +564,7 @@ var addEditorForm = {
             data: {
                 deletion: $(link).parents('.editorship').data('editorshipUri')
             },
-            dataType: 'json',
+            dataType: 'html',
             context: link, // context for callback
             complete: function(request, status) {
                 var editorship,
