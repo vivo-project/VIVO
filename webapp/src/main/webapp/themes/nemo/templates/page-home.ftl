@@ -44,7 +44,7 @@
 								action="${urls.search}" 
 								name="search-home" 
 								role="search" 
-								method="post" 
+								method="GET" 
 								class="form-horizontal">
 								<fieldset>
 									<div class="form-group pull-left" style="margin-right: 5px;">
