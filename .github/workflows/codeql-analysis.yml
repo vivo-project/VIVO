@@ -41,6 +41,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Clone Vitro
+      run: git clone https://github.com/vivo-project/Vitro.git ../Vitro
+
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2

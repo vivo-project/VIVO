@@ -1,0 +1,7 @@
+# $This file is distributed under the terms of the license in LICENSE$
+
+@prefix : <https://vivoweb.org/ontology/vitro-application/auth/individual/access-allowed-class/> .
+@prefix access: <https://vivoweb.org/ontology/vitro-application/auth/vocabulary/> .
+
+#:EditorUpdateClassValueSet access:value <> .
+

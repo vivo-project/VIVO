@@ -388,7 +388,7 @@ FullResultQueryUnit.prototype.fetch = function() {
 
 var showPanel = function(name) {
     $(".titles li").removeClass("activeTab");
-    $(".titles li a[href=#" + name + "]").parent().addClass("activeTab");
+    $(".titles li a[href='#" + name + "']").parent().addClass("activeTab");
     $(".result_section").css("display", "none");
     $("#" + name).css("display", "block");
 }

@@ -26,9 +26,21 @@
     :hasSearchIndexer             :basicSearchIndexer ;
     :hasImageProcessor            :iioImageProcessor ;
     :hasFileStorage               :ptiFileStorage ;
+#    :hasAuditModule               :tdbAuditModule ;
     :hasContentTripleSource       :tdbContentTripleSource ;
     :hasConfigurationTripleSource :tdbConfigurationTripleSource ;
     :hasTBoxReasonerModule        :jfactTBoxReasonerModule .
+
+# ----------------------------
+#
+# Audit module: 
+#
+
+#:tdbAuditModule
+#    a   <java:edu.cornell.mannlib.vitro.webapp.audit.TDBAuditModule> ,
+#        <java:edu.cornell.mannlib.vitro.webapp.audit.AuditModule> ;
+#    :hasTdbDirectory "tdbAuditModels" .
+
 
 # ----------------------------
 #

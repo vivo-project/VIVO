@@ -16,8 +16,8 @@ VIVO tenderfoot theme: screen styles
 
 @charset "UTF-8";
 
-@import url("../../../js/bootstrap/css/bootstrap.min.css");
-@import url("../../../js/bootstrap/css/bootstrap-theme.min.css");
+@import url("../../../bootstrap/css/bootstrap.min.css");
+@import url("../../../bootstrap/css/bootstrap-theme.min.css");
 @import url("reset.css");
 @import url("tenderfoot.css");
 @import url("edit.css");
