@@ -213,12 +213,10 @@ Add divs and wrapper to create funnelback basket controls. MUST BE REMOVED BEFOR
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
 
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tiny_mce/tiny_mce.js"></script>',
-	'<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip-1.0.0-rc3.min.js"></script>',
 	'<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>',
 	'<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>')}
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>',
-	'<script type="text/javascript" src="${urls.base}/js/individual/individualQtipBubble.js"></script>',
 	'<script type="text/javascript" src="${urls.base}/js/individual/individualUriRdf.js"></script>',
 	'<script type="text/javascript" src="${urls.base}/js/individual/moreLessController.js"></script>',
 	'<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
