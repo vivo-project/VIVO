@@ -258,6 +258,7 @@ ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tiny_mce/
                   '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>')}
 
 ${scripts.add('<script async type="text/javascript" src="${urls.base}/js/individual/individualUriRdf.js"></script>',
+              '<script async type="text/javascript" src="${urls.base}/js/individual/individualTooltipBubble.js"></script>',
               '<script async type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
               '<script async type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>',
               '<script async type="text/javascript" src="${urls.base}/js/individual/moreLessController.js"></script>',
