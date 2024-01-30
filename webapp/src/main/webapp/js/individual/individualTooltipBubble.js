@@ -12,7 +12,8 @@ $(document).ready(function(){
             data: {
                 title: "<div>" + i18nStrings.researchAreaTooltipOne + "</div><div>" + i18nStrings.researchAreaTooltipTwo + "</div>",
                 html: true,
-                fallbackPlacements: ['bottom', 'left', 'top', 'right']
+                fallbackPlacements: ['bottom', 'left', 'top', 'right'],
+				customClass: "vivoTooltip"
             }
         },
         {
@@ -20,7 +21,8 @@ $(document).ready(function(){
             data: {
                 content: i18nStrings.quickviewTooltip,
                 html: true,
-                fallbackPlacements: ['bottom', 'left', 'top', 'right']
+                fallbackPlacements: ['bottom', 'left', 'top', 'right'],
+				customClass: "vivoTooltip"
             }
         },
         {
@@ -28,7 +30,8 @@ $(document).ready(function(){
             data: {
                 content: "<div>" + i18nStrings.standardviewTooltipOne + '</div><div>' + i18nStrings.standardviewTooltipTwo + "</div>",
                 html: true,
-                fallbackPlacements: ['bottom', 'left', 'top', 'right']
+                fallbackPlacements: ['bottom', 'left', 'top', 'right'],
+				customClass: "vivoTooltip"
             }
         },
     ]
