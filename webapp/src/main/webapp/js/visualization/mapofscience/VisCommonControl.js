@@ -83,37 +83,37 @@ function initVisModeTypeButton() {
 	$(viewTypeRadio+ ":eq(0)").click();
 }
 
-function initGlobalToolTips() {
-	createToolTip($("#imageIconOne"), $('#toolTipOne').html(), "top left");
-	createToolTip($("#exploreInfoIcon"), $('#exploreTooltipText').html(), "top left");
-	createToolTip($("#compareInfoIcon"), $('#compareTooltipText').html(), "top left");
-	createToolTip($("#imageIconThree"), $('#toolTipThree').html(), "top right");
-}
+// function initGlobalToolTips() {
+// 	createToolTip($("#imageIconOne"), $('#toolTipOne').html(), "top left");
+// 	createToolTip($("#exploreInfoIcon"), $('#exploreTooltipText').html(), "top left");
+// 	createToolTip($("#compareInfoIcon"), $('#compareTooltipText').html(), "top left");
+// 	createToolTip($("#imageIconThree"), $('#toolTipThree').html(), "top right");
+// }
 
-var visCommonToolTipInit = true;
-function createToolTip(target, tipText, tipLocation) {
-	if (visCommonToolTipInit) {
-		$('head').append('<style id="visCommonToolTipCSS">.qtip { font-size: .7em; max-width: none !important; } .visCommonToolTip {'
-			+ ' background-color: #ffffc0;'
-			+ ' textAlign: left;'
-			+ ' padding: 6px 10px 6px 10px;'
-			+ ' lineHeight: 14px;'
-			+ '} </style>');
+// var visCommonToolTipInit = true;
+// function createToolTip(target, tipText, tipLocation) {
+// 	if (visCommonToolTipInit) {
+// 		$('head').append('<style id="visCommonToolTipCSS">.qtip { font-size: .7em; max-width: none !important; } .visCommonToolTip {'
+// 			+ ' background-color: #ffffc0;'
+// 			+ ' textAlign: left;'
+// 			+ ' padding: 6px 10px 6px 10px;'
+// 			+ ' lineHeight: 14px;'
+// 			+ '} </style>');
 
-		visCommonToolTipInit = false;
-	}
+// 		visCommonToolTipInit = false;
+// 	}
 
-	target.qtip({
-        content: {
-            text: tipText
-        },
-		position: {
-			my: tipLocation,
-			at: 'center'
-		},
-        style: {
-			classes: 'visCommonToolTip',
-            width: 500,
-        }
-    });
-}
+// 	target.qtip({
+//         content: {
+//             text: tipText
+//         },
+// 		position: {
+// 			my: tipLocation,
+// 			at: 'center'
+// 		},
+//         style: {
+// 			classes: 'visCommonToolTip',
+//             width: 500,
+//         }
+//     });
+// }
