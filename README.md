@@ -29,18 +29,43 @@ VIVO docker container is available at [vivoweb/vivo](https://hub.docker.com/repo
 
 ### Docker Compose
 
-Docker Compose environment variables:
+Docker Compose variable substitution:
 
 .env defaults
 ```
-LOCAL_VIVO_HOME=./vivo-home
-RESET_HOME=false
-RESET_CORE=false
+SOLR_RESET_CORE=false
+SOLR_VERBOSE=no
+
+SOLR_HOST_PORT=8983
+SOLR_CONTAINER_PORT=8983
+
+SOLR_CORES=./vivo-cores
+
+VIVO_RESET_HOME=false
+VIVO_VERBOSE=no
+
+VIVO_TDB_FILE_MODE=direct
+
+VIVO_HOST_VIVO_HOME=./vivo-home
+VIVO_CONTAINER_VIVO_HOME=/usr/local/vivo/home
+
+VIVO_HOST_PORT=8080
+VIVO_CONTAINER_PORT=8080
 ```
 
-- `LOCAL_VIVO_HOME`: VIVO home directory on your host machine which will mount to volume in docker container. Set this environment variable to persist your VIVO data on your host machine.
-- `RESET_HOME`: Convenience to reset VIVO home when starting container. **Caution**, will delete local configuration, content, and configuration model.
-- `RESET_CORE`: Convenience to reset VIVO Solr core when starting container. **Caution**, will require complete reindex.
+- `SOLR_RESET_CORE`: Convenience to reset VIVO Solr core when starting container. **Caution**, will require complete reindex.
+- `SOLR_VERBOSE`: Increase log verbosity.
+- `SOLR_HOST_PORT`: Host port binding for solr service port mapping.
+- `SOLR_CONTAINER_PORT`: Container port binding for solr service port mapping.
+- `SOLR_CORES`: Solr cores data directories on your host machine which will mount to volume in docker container. Set this environment variable to persist your Solr data on your host machine.
+
+- `VIVO_RESET_HOME`: Convenience to reset VIVO home when starting container. **Caution**, will delete local configuration, content, and configuration model.
+- `VIVO_VERBOSE`: Increase log verbosity.
+- `VIVO_TDB_FILE_MODE`: TDB file mode. See https://jena.apache.org/documentation/tdb/configuration.html#file-access-mode.
+- `VIVO_HOST_VIVO_HOME`: VIVO home directory on your host machine which will mount to volume in docker container. Set this environment variable to persist your VIVO data on your host machine.
+- `VIVO_CONTAINER_VIVO_HOME`: VIVO home directory within the container.
+- `VIVO_HOST_PORT`: Host port binding for VIVO Tomcat service port mapping.
+- `VIVO_CONTAINER_PORT`: Container port binding for VIVO Tomcat service port mapping.
 
 Before building VIVO, you will also need to clone (and switch to the same branch, if other than main) of [Vitro](https://github.com/vivo-project/Vitro). The Vitro project must be cloned to a sibling directory next to VIVO so that it can be found during the build. 
 
