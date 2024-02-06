@@ -5,10 +5,12 @@ services:
   solr:
     image: vivoweb/vivo-solr:latest
     environment:
-      - RESET_CORE=${RESET_CORE}
-      - VERBOSE=${VERBOSE}
+      - RESET_CORE=${SOLR_RESET_CORE}
+      - VERBOSE=${SOLR_VERBOSE}
     ports:
-      - 8983:8983
+      - ${SOLR_HOST_PORT}:${SOLR_CONTAINER_PORT}
+    volumes:
+      - ${SOLR_CORES}:/opt/solr/server/solr/mycores
     networks:
       - vivo
 
@@ -19,18 +21,26 @@ services:
       context: ./
       dockerfile: Dockerfile
       args:
-        - VIVO_DIR=/usr/local/vivo/home
-        - TDB_FILE_MODE=direct
-        - SOLR_URL=http://solr:8983/solr/vivocore
+        - TDB_FILE_MODE=${VIVO_TDB_FILE_MODE}
+        - VIVO_HOME=${VIVO_CONTAINER_VIVO_HOME}
+        - SOLR_URL=http://solr:${SOLR_CONTAINER_PORT}/solr/vivocore
     environment:
-      - RESET_HOME=${RESET_HOME}
-      - VERBOSE=${VERBOSE}
+      - RESET_HOME=${VIVO_RESET_HOME}
+      - VERBOSE=${VIVO_VERBOSE}
     ports:
-      - 8080:8080
+      - ${VIVO_HOST_PORT}:${VIVO_CONTAINER_PORT}
     volumes:
-      - ${LOCAL_VIVO_HOME}:/usr/local/vivo/home
+      - ${VIVO_HOST_VIVO_HOME}:${VIVO_CONTAINER_VIVO_HOME}
     networks:
       - vivo
+    depends_on:
+      - solr
+    entrypoint:
+      - /bin/bash
+      - '-c'
+      - |
+        while (!</dev/tcp/solr/${SOLR_CONTAINER_PORT}) > /dev/null 2>&1; do sleep 1; done;
+        catalina.sh run
 
 networks:
   vivo:
