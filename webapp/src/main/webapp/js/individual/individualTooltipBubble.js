@@ -19,7 +19,7 @@ $(document).ready(function(){
         {
             querySelector: "#fullViewIcon",
             data: {
-                content: i18nStrings.quickviewTooltip,
+                title: i18nStrings.quickviewTooltip,
                 html: true,
                 fallbackPlacements: ['bottom', 'left', 'top', 'right'],
 				customClass: "vivoTooltip"
@@ -28,7 +28,7 @@ $(document).ready(function(){
         {
             querySelector: "#quickViewIcon",
             data: {
-                content: "<div>" + i18nStrings.standardviewTooltipOne + '</div><div>' + i18nStrings.standardviewTooltipTwo + "</div>",
+                title: "<div>" + i18nStrings.standardviewTooltipOne + '</div><div>' + i18nStrings.standardviewTooltipTwo + "</div>",
                 html: true,
                 fallbackPlacements: ['bottom', 'left', 'top', 'right'],
 				customClass: "vivoTooltip"
