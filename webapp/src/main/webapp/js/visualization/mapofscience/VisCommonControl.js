@@ -89,33 +89,37 @@ function initGlobalToolTips() {
 		{
 			querySelector: "#imageIconOne",
 			data: {
-				title: "<div style='padding: 16px 22px;'>" + $('#toolTipOne').html() + "</div>",
+				title: "<div style='padding: 16px 22px; max-width: 400px;'>" + $('#toolTipOne').html() + "</div>",
 				customClass: "vivoTooltip vivoTooltip-yellow",
 				html: true,
+				sanitize: false,
 				fallbackPlacements: ['right', 'bottom', 'top', 'left']
 			}
 		},{
 			querySelector: "#exploreInfoIcon",
 			data: {
-				title: "<div style='padding: 16px 22px;'>" + $('#exploreTooltipText').html() + "</div>",
+				title: "<div style='padding: 16px 22px; max-width: 400px;'>" + $('#exploreTooltipText').html() + "</div>",
 				customClass: "vivoTooltip vivoTooltip-yellow",
 				html: true,
+				sanitize: false,
 				fallbackPlacements: ['right', 'bottom', 'top', 'left']
 			}
 		},{
 			querySelector: "#compareInfoIcon",
 			data: {
-				title: "<div style='padding: 16px 22px;'>" + $('#compareTooltipText').html() + "</div>",
+				title: "<div style='padding: 16px 22px; max-width: 400px;'>" + $('#compareTooltipText').html() + "</div>",
 				customClass: "vivoTooltip vivoTooltip-yellow",
 				html: true,
+				sanitize: false,
 				fallbackPlacements: ['right', 'bottom', 'top', 'left']
 			}
 		},{
 			querySelector: "#imageIconThree",
 			data: {
-				title: "<div style='padding: 16px 22px;'>" + $('#toolTipThree').html() + "</div>",
+				title: "<div style='padding: 16px 22px; max-width: 400px;'>" + $('#toolTipThree').html() + "</div>",
 				customClass: "vivoTooltip vivoTooltip-yellow",
 				html: true,
+				sanitize: false,
 				fallbackPlacements: ['left', 'bottom', 'top', 'right']
 			}
 		},

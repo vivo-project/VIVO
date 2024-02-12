@@ -180,13 +180,16 @@
 ${stylesheets.add(
 	'<link rel="stylesheet" href="${urls.base}/css/individual/individual.css" />',
 	'<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />',
-	'<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />',
+	'<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />'
 )}
 
 ${headScripts.add(
 	'<script type="text/javascript" src="${urls.base}/js/tiny_mce/tiny_mce.js"></script>',
-	'<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>'
-)}
+	'<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>',
+	'<script type="text/javascript" src="${urls.base}/js/tooltip/tooltip-utils.js"></script>',
+	'<script type="text/javascript" src="${urls.base}/js/tooltip/popper.min.js"></script>',
+	'<script src="${urls.base}/bootstrap-5.3.2/js/bootstrap.min.js"></script>'
+ )}
 
 ${scripts.add(
 	'<script async type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',

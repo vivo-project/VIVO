@@ -27,7 +27,7 @@ $(document).ready(function(){
         return false;
     });
     $(window).on('popstate', function () {
-        var anchor = location.hash || $('li[data-toggle=\'tab\']').first().attr('href');
+        var anchor = location.hash || $('li[data-bs-toggle=\'tab\']').first().attr('href');
         $('li[href=\'' + anchor + '\']').tab('show');
         if (anchor == "#viewAll") {
             showViewAll();
