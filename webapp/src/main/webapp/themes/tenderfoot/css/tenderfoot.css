@@ -385,6 +385,14 @@ img.add-individual {
     max-width: initial;
   }
   
+  .vivoTooltip > .tooltip-inner .close-footer {
+        display: flex;
+  }
+    
+  .vivoTooltip > .tooltip-inner .close-footer a.close {
+        margin-left: auto;
+  }
+
   .vivoTooltip > .tooltip-inner h5 {
     padding-bottom: 0;
   }
@@ -412,3 +420,14 @@ img.add-individual {
     text-align: left;
     line-height: 12px;
   } 
+
+  span#qrCodeImage {
+    top: 23px;
+    right: 25px;
+    left: initial !important;
+  }
+
+  .show {
+    display: block !important;
+    opacity: 1;
+  }

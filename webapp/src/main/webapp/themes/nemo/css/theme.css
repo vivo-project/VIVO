@@ -283,6 +283,19 @@ These are helper classes to add margin gaps where needed
   text-align: left;
   border-radius: 0;
   color: #333;
+  max-width: initial;
+}
+
+.vivoTooltip > .tooltip-inner #uriLink {
+  width: 350px;
+}
+
+.vivoTooltip > .tooltip-inner .close-footer {
+  display: flex;
+}
+
+.vivoTooltip > .tooltip-inner .close-footer a.close {
+  margin-left: auto;
 }
 
 .vivoTooltip > .tooltip-inner h5 {
@@ -312,3 +325,18 @@ These are helper classes to add margin gaps where needed
   text-align: left;
   line-height: 12px;
 } 
+
+
+/*  */
+
+#filter-groups .tab-content .tab-pane.active:not(.show) {
+  opacity: 0;
+}
+
+#filter-groups .tab-content .tab-pane.show:not(.active) {
+  opacity: 0;
+}
+
+.fade.in:not(.active) {
+  display: none;
+}
