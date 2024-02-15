@@ -4,14 +4,15 @@ services:
 
   solr:
     image: vivoweb/vivo-solr:latest
+    container_name: solr
     environment:
       - RESET_CORE=${RESET_CORE}
       - VERBOSE=${VERBOSE}
     ports:
       - 8983:8983
     networks:
-      - vivo
-
+      - vivo-net
+      
   tomcat:
     container_name: vivo
     hostname: vivo
@@ -30,7 +31,9 @@ services:
     volumes:
       - ${LOCAL_VIVO_HOME}:/usr/local/vivo/home
     networks:
-      - vivo
+      - vivo-net
+    depends_on:
+       - solr
 
 networks:
-  vivo:
+  vivo-net:
