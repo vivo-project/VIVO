@@ -2,7 +2,8 @@ version: '3.2'
 
 services:
 
-  solr:
+  vivo-solr:
+    container_name: vivo-solr
     image: vivoweb/vivo-solr:latest
     environment:
       - RESET_CORE=${SOLR_RESET_CORE}
@@ -12,10 +13,16 @@ services:
     volumes:
       - ${SOLR_CORES}:/opt/solr/server/solr/mycores
     networks:
-      - vivo
+      - vivoweb
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8983/solr/vivocore/admin/ping || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
 
-  tomcat:
+  vivo:
     container_name: vivo
+    image: vivoweb/vivo:latest
     hostname: vivo
     build:
       context: ./
@@ -23,7 +30,7 @@ services:
       args:
         - TDB_FILE_MODE=${VIVO_TDB_FILE_MODE}
         - VIVO_HOME=${VIVO_CONTAINER_VIVO_HOME}
-        - SOLR_URL=http://solr:${SOLR_CONTAINER_PORT}/solr/vivocore
+        - SOLR_URL=http://vivo-solr:${SOLR_CONTAINER_PORT}/solr/vivocore
     environment:
       - RESET_HOME=${VIVO_RESET_HOME}
       - VERBOSE=${VIVO_VERBOSE}
@@ -32,15 +39,10 @@ services:
     volumes:
       - ${VIVO_HOST_VIVO_HOME}:${VIVO_CONTAINER_VIVO_HOME}
     networks:
-      - vivo
+      - vivoweb
     depends_on:
-      - solr
-    entrypoint:
-      - /bin/bash
-      - '-c'
-      - |
-        while (!</dev/tcp/solr/${SOLR_CONTAINER_PORT}) > /dev/null 2>&1; do sleep 1; done;
-        catalina.sh run
+      vivo-solr:
+        condition: service_healthy
 
 networks:
-  vivo:
+  vivoweb:
