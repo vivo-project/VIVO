@@ -64,14 +64,14 @@ access-individual:PersonProfileProximityToResourceUri a access:SparqlSelectValue
         {
           ?profileUri <http://purl.obolibrary.org/obo/RO_0000053> ?roleUri .
           ?roleUri a <http://vivoweb.org/ontology/core#ClinicalRole> .
-          ?roleUri <http://vivoweb.org/ontology/core#contributesTo> ?resourceUri .
+          ?roleUri <http://vivoweb.org/ontology/core#roleContributesTo> ?resourceUri .
           ?resourceUri a <http://vivoweb.org/ontology/core#Project> .
         }
         UNION
         {
           ?profileUri <http://purl.obolibrary.org/obo/RO_0000053> ?roleUri .
           ?roleUri a <http://vivoweb.org/ontology/core#ClinicalRole> .
-          ?roleUri <http://vivoweb.org/ontology/core#contributesTo> ?resourceUri .
+          ?roleUri <http://vivoweb.org/ontology/core#roleContributesTo> ?resourceUri .
           ?resourceUri a <http://vivoweb.org/ontology/core#Service> .
         }
         UNION
@@ -137,14 +137,14 @@ access-individual:ExternalIdMatchProfileProximityToResourceUri a access:SparqlSe
         {
           ?profile <http://purl.obolibrary.org/obo/RO_0000053> ?roleUri .
           ?roleUri a <http://vivoweb.org/ontology/core#ClinicalRole> .
-          ?roleUri <http://vivoweb.org/ontology/core#contributesTo> ?resourceUri .
+          ?roleUri <http://vivoweb.org/ontology/core#roleContributesTo> ?resourceUri .
           ?resourceUri a <http://vivoweb.org/ontology/core#Project> .
         }
         UNION
         {
           ?profile <http://purl.obolibrary.org/obo/RO_0000053> ?roleUri .
           ?roleUri a <http://vivoweb.org/ontology/core#ClinicalRole> .
-          ?roleUri <http://vivoweb.org/ontology/core#contributesTo> ?resourceUri .
+          ?roleUri <http://vivoweb.org/ontology/core#roleContributesTo> ?resourceUri .
           ?resourceUri a <http://vivoweb.org/ontology/core#Service> .
         }
         UNION
