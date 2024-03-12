@@ -11,7 +11,7 @@ desired information across disciplines.
 ## Resources
 
 ### VIVO Project web site
-http://vivoweb.org/
+[https://vivo.lyrasis.org/](https://vivo.lyrasis.org/)
 
 ### VIVO Project Wiki
 https://wiki.lyrasis.org/display/VIVO/
@@ -61,31 +61,11 @@ docker build -t vivoweb/vivo:development .
 docker run -p 8080:8080 vivoweb/vivo:development
 ```
 
-## Contact us
-There are several ways to contact the VIVO community. 
-Whatever your interest, we would be pleased to hear from you.
-
-### Contact form 
-https://vivo.lyrasis.org/contact/
-
-### Mailing lists
-
-#### [vivo-all](https://groups.google.com/forum/#!forum/vivo-all) 
-This updates list provides news to the VIVO community of interest to all.
-
-#### [vivo-community](https://groups.google.com/forum/#!forum/vivo-community)  
-Join the VIVO community!  Here you'll find non-technical discussion regarding participation, the VIVO
-conference,  policy, project management, outreach, and engagement. 
-
-#### [vivo-tech](https://groups.google.com/forum/#!forum/vivo-tech)  
-The best place to get your hands dirty in the VIVO Project. 
-Developers and implementers frequent this list to get the latest on feature design, 
-development, implementation, and testing.
+## Community
+There are several ways to contact and join the VIVO community. All of them are listed at https://vivo.lyrasis.org/contact/
 
 ## Contributing Code
-If you would like to contribute code to the VIVO project, please open a ticket 
-in our [JIRA](https://jira.lyrasis.org/projects/VIVO), and prepare a 
-pull request that references your ticket.  Contributors welcome!
+If you would like to contribute code to the VIVO project, please read instructions at [this page](https://github.com/vivo-project/VIVO/wiki/Development-Processes#process-for-suggesting-contribution).  Contributors welcome!
 
 ## Citing VIVO
 If you are using VIVO in your publications or projects, please cite the software paper in the Journal of Open Source Software:
