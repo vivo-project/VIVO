@@ -3,6 +3,7 @@ package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -60,6 +61,7 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
 
 	    config.setVarNameForSubject("subject");
 	    config.setVarNameForObject("vcard");
+	    config.addFormSpecificData("fauxContextUri", vreq.getParameter("fauxContextUri"));
 
 	    config.addNewResource("vcard", DEFAULT_NS_FOR_NEW_RESOURCE);
 	    config.addNewResource("link", DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -238,6 +240,7 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
 		String rangeUri = (String) vreq.getParameter("rangeUri");
 		String generatorName = "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForIndividualGenerator";
 		String editUrl = EditConfigurationUtils.getEditUrlWithoutContext(vreq);
+		String fauxContextUri = vreq.getParameter("fauxContextUri");
 		String returnPath =  editUrl + "?subjectUri=" + UrlBuilder.urlEncode(subjectUri) +
 		"&predicateUri=" + UrlBuilder.urlEncode(predicateUri) +
 		"&editForm=" + UrlBuilder.urlEncode(generatorName);
@@ -246,6 +249,9 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
 		}
 		if(rangeUri != null && !rangeUri.isEmpty()) {
 			returnPath += "&rangeUri=" + UrlBuilder.urlEncode(rangeUri);
+		}
+		if (StringUtils.isNotBlank(fauxContextUri)) {
+		    returnPath += "&fauxContextUri=" + UrlBuilder.urlEncode(fauxContextUri);
 		}
 		return returnPath;
 
