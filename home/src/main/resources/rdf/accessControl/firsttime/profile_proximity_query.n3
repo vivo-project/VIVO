@@ -7,70 +7,70 @@ access-individual:PersonProfileProximityToResourceUri a access:SparqlSelectValue
     access:id """
     SELECT ?resourceUri WHERE {
         {
-          ?personUri <http://purl.obolibrary.org/obo/RO_0000053> ?roleUri .
+          ?profileUri <http://purl.obolibrary.org/obo/RO_0000053> ?roleUri .
           ?roleUri a <http://vivoweb.org/ontology/core#AdvisorRole> .
           ?roleUri <http://vivoweb.org/ontology/core#relatedBy> ?resourceUri .
           ?resourceUri a <http://vivoweb.org/ontology/core#AdvisingRelationship> .
         }
         UNION
         {
-          ?personUri <http://purl.obolibrary.org/obo/RO_0000053> ?roleUri .
+          ?profileUri <http://purl.obolibrary.org/obo/RO_0000053> ?roleUri .
           ?roleUri a <http://vivoweb.org/ontology/core#TeacherRole> .
           ?roleUri <http://purl.obolibrary.org/obo/BFO_0000054> ?resourceUri .
           ?resourceUri a <http://vivoweb.org/ontology/core#Course> .
         }
         UNION
         {
-          ?personUri <http://purl.obolibrary.org/obo/RO_0000053> ?roleUri .
+          ?profileUri <http://purl.obolibrary.org/obo/RO_0000053> ?roleUri .
           ?roleUri a <http://vivoweb.org/ontology/core#PrincipalInvestigatorRole> .
           ?roleUri <http://vivoweb.org/ontology/core#relatedBy> ?resourceUri .
           ?resourceUri a <http://vivoweb.org/ontology/core#Grant> .
         }
         UNION
         {
-          ?personUri <http://purl.obolibrary.org/obo/RO_0000053> ?roleUri .
+          ?profileUri <http://purl.obolibrary.org/obo/RO_0000053> ?roleUri .
           ?roleUri a <http://vivoweb.org/ontology/core#CoPrincipalInvestigatorRole> .
           ?roleUri <http://vivoweb.org/ontology/core#relatedBy> ?resourceUri .
           ?resourceUri a <http://vivoweb.org/ontology/core#Grant> .
         }
         UNION
         {
-          ?personUri <http://vivoweb.org/ontology/core#relatedBy> ?roleUri .
+          ?profileUri <http://vivoweb.org/ontology/core#relatedBy> ?roleUri .
           ?roleUri a <http://vivoweb.org/ontology/core#Authorship> .
           ?roleUri <http://vivoweb.org/ontology/core#relates> ?resourceUri .
           ?resourceUri a <http://purl.obolibrary.org/obo/IAO_0000030> .
         }
         UNION
         {
-          ?personUri <http://vivoweb.org/ontology/core#relatedBy> ?roleUri .
+          ?profileUri <http://vivoweb.org/ontology/core#relatedBy> ?roleUri .
           ?roleUri a <http://vivoweb.org/ontology/core#Editorship> .
           ?roleUri <http://vivoweb.org/ontology/core#relates> ?resourceUri .
           ?resourceUri a <http://purl.obolibrary.org/obo/IAO_0000030> .
         }
         UNION
         {
-          ?personUri <http://purl.obolibrary.org/obo/RO_0000053> ?roleUri .
+          ?profileUri <http://purl.obolibrary.org/obo/RO_0000053> ?roleUri .
           ?roleUri a <http://vivoweb.org/ontology/core#PresenterRole> .
           ?roleUri <http://purl.obolibrary.org/obo/BFO_0000054> ?resourceUri .
           ?resourceUri a <http://vivoweb.org/ontology/core#Presentation> .
         }
         UNION
         {
-          ?personUri <http://purl.obolibrary.org/obo/RO_0000053> ?roleUri .
+          ?profileUri <http://purl.obolibrary.org/obo/RO_0000053> ?roleUri .
           ?roleUri a <http://vivoweb.org/ontology/core#ClinicalRole> .
           ?roleUri <http://vivoweb.org/ontology/core#contributesTo> ?resourceUri .
           ?resourceUri a <http://vivoweb.org/ontology/core#Project> .
         }
         UNION
         {
-          ?personUri <http://purl.obolibrary.org/obo/RO_0000053> ?roleUri .
+          ?profileUri <http://purl.obolibrary.org/obo/RO_0000053> ?roleUri .
           ?roleUri a <http://vivoweb.org/ontology/core#ClinicalRole> .
           ?roleUri <http://vivoweb.org/ontology/core#contributesTo> ?resourceUri .
           ?resourceUri a <http://vivoweb.org/ontology/core#Service> .
         }
         UNION
         { 
-          BIND ( ?personUri as ?resourceUri)
+          BIND ( ?profileUri as ?resourceUri)
         }
     }
     """ .
