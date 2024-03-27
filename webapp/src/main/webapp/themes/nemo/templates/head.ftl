@@ -19,7 +19,8 @@
                           '<script type="text/javascript" src="${urls.base}/js/openSocial/orng.js"></script>')}
     </#if>	
 </#if>	
-
+<script src="${urls.base}/js/tooltip/tooltip-utils.js"></script>
+<script src="${urls.base}/js/tooltip/popper.min.js"></script>
 <script src="${urls.base}/bootstrap-5.3.2/js/bootstrap.min.js"></script> 
 
 <#include "stylesheets.ftl">

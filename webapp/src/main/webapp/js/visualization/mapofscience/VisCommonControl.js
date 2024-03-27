@@ -84,36 +84,48 @@ function initVisModeTypeButton() {
 }
 
 function initGlobalToolTips() {
-	createToolTip($("#imageIconOne"), $('#toolTipOne').html(), "top left");
-	createToolTip($("#exploreInfoIcon"), $('#exploreTooltipText').html(), "top left");
-	createToolTip($("#compareInfoIcon"), $('#compareTooltipText').html(), "top left");
-	createToolTip($("#imageIconThree"), $('#toolTipThree').html(), "top right");
-}
 
-var visCommonToolTipInit = true;
-function createToolTip(target, tipText, tipLocation) {
-	if (visCommonToolTipInit) {
-		$('head').append('<style id="visCommonToolTipCSS">.qtip { font-size: .7em; max-width: none !important; } .visCommonToolTip {'
-			+ ' background-color: #ffffc0;'
-			+ ' textAlign: left;'
-			+ ' padding: 6px 10px 6px 10px;'
-			+ ' lineHeight: 14px;'
-			+ '} </style>');
-
-		visCommonToolTipInit = false;
-	}
-
-	target.qtip({
-        content: {
-            text: tipText
-        },
-		position: {
-			my: tipLocation,
-			at: 'center'
+	let tooltips = [
+		{
+			querySelector: "#imageIconOne",
+			data: {
+				title: "<div style='padding: 16px 22px; max-width: 400px;'>" + $('#toolTipOne').html() + "</div>",
+				customClass: "vivoTooltip vivoTooltip-yellow",
+				html: true,
+				sanitize: false,
+				fallbackPlacements: ['right', 'bottom', 'top', 'left']
+			}
+		},{
+			querySelector: "#exploreInfoIcon",
+			data: {
+				title: "<div style='padding: 16px 22px; max-width: 400px;'>" + $('#exploreTooltipText').html() + "</div>",
+				customClass: "vivoTooltip vivoTooltip-yellow",
+				html: true,
+				sanitize: false,
+				fallbackPlacements: ['right', 'bottom', 'top', 'left']
+			}
+		},{
+			querySelector: "#compareInfoIcon",
+			data: {
+				title: "<div style='padding: 16px 22px; max-width: 400px;'>" + $('#compareTooltipText').html() + "</div>",
+				customClass: "vivoTooltip vivoTooltip-yellow",
+				html: true,
+				sanitize: false,
+				fallbackPlacements: ['right', 'bottom', 'top', 'left']
+			}
+		},{
+			querySelector: "#imageIconThree",
+			data: {
+				title: "<div style='padding: 16px 22px; max-width: 400px;'>" + $('#toolTipThree').html() + "</div>",
+				customClass: "vivoTooltip vivoTooltip-yellow",
+				html: true,
+				sanitize: false,
+				fallbackPlacements: ['left', 'bottom', 'top', 'right']
+			}
 		},
-        style: {
-			classes: 'visCommonToolTip',
-            width: 500,
-        }
-    });
+	]
+
+	tooltips.forEach(tooltip => {
+		setTooltip(tooltip.querySelector, tooltip.data)
+	})
 }

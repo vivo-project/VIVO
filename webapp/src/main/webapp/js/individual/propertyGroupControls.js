@@ -13,17 +13,17 @@ $(document).ready(function(){
     let showAllBtn = $('#show-all-tabs')[0];
     let tabList = $('ul.propertyTabsList')[0];
 
-    showAllBtn.addEventListener('show.bs.tab', function (event) {
+    showAllBtn?.addEventListener('show.bs.tab', function (event) {
         event.preventDefault()
         showAllTabs();
         manageLocalStorage();
     })
 
-    showAllBtn.addEventListener('hide.bs.tab', function (event) {
+    showAllBtn?.addEventListener('hide.bs.tab', function (event) {
         $(".tab-content>section.tab-pane").removeClass('show active')
     })
 
-    tabList.addEventListener('shown.bs.tab', function (event) {
+    tabList?.addEventListener('shown.bs.tab', function (event) {
         manageLocalStorage();
     })
 
