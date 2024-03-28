@@ -108,10 +108,10 @@ var i18nStrings = {
 </script>
 <#--//'<script type="text/javascript" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>', -->
 ${scripts.add('<script type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyBTRf2JXqvTvpqy4ryJn0J1BWaMRqxqeMU"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
-                          '<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.4.1.js"></script>'
+			  '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.13.2.min.js"></script>',
+                          '<script type="text/javascript" src="//code.jquery.com/jquery-migrate-3.4.1.js"></script>'
                           '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.blockUI.min.js"></script>',
-                          '<script type="text/javascript" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>',
+                          '<script type="text/javascript" src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>',
                           '<script type="text/javascript" src="${urls.base}/js/visualization/dataTables.helper.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/visualization-helper-functions.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.notify.min.js"></script>',
@@ -141,7 +141,7 @@ ${scripts.add('<script type="text/javascript" src="//maps.google.com/maps/api/js
 
 <#-- CSS files -->
 
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />',
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.13.2.css" />',
                   '<link rel="stylesheet" href="${urls.base}/js/visualization/entitycomparison/jquery_plugins/datatable/demo_table.css" />',
                   '<link rel="stylesheet" href="${urls.theme}/css/layout.css" />')}
 
