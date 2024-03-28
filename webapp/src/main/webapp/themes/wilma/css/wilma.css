@@ -145,7 +145,6 @@ input.block {
 label {
     margin-top: .5em;
     margin-bottom: .5em;
-    display: block;
 }
 label.inline {
     display: inline;
@@ -289,17 +288,17 @@ p.submit {
     border-color: #dfe6e6;
 }
 
-.editingForm > table > tbody > tr > td.verticalfieldlabel {
+.editingForm td {
     padding: 3px;
 }
 
-.editingForm > table > tbody > tr > td.verticalfieldlabel:first-child {
+.editingForm tr > td:first-child {
     width: 40%;
 }
 
 
 @media (min-width: 768px) {
-    .editingForm > table > tbody > tr > td.verticalfieldlabel:first-child {
+    .editingForm tr > td:first-child {
         width: 15%;
     }
 }
@@ -724,13 +723,13 @@ ul.individual-urls-people li a {
 /* LOG IN------>  */
 #login {
     /* float: right; */
-    max-width: 332px;
+    /* width: 314px; */
     border: 1px solid #e8ece9;
     /* margin-right: 25px; */
     padding-bottom: 30px;
     margin-bottom: 30px;
     overflow: hidden;
-    margin-top: 30px;
+    margin-top: 20px;
     padding: 15px;
 }
 body.login #login {
@@ -768,7 +767,7 @@ h3.internal-auth:hover {
 }
 
 #login-form > div {
-    padding: 10px 28px;
+    padding: 38px;
 }
 
 #login-form label {
@@ -860,10 +859,13 @@ p.password-note {
     padding: .25em;
     margin-bottom: 8px;
 }
-#flash-msg-container,
+/* #flash-msg-container,
 #welcome-msg-container {
-    padding: 10px;
-}
+    margin-bottom: 8px;
+    margin-top: -10px;
+    margin-right:-10px;
+    height:34px;
+} */
 p.external-auth {
     margin: 0 auto;
 }
@@ -1866,6 +1868,10 @@ p.address-line {
 /* ------------------------------------------------->  */
 /* SITE ADMIN DASHBOARD ---------------------------->  */
 /* ------------------------------------------------->  */
+#adminDashboard {
+    display: flex;
+    flex-wrap: wrap;
+}
 
 #adminDashboard .pageBodyGroup {
   padding: 0 1em .5em 1em;
@@ -2315,10 +2321,10 @@ span.subclassExpandMinus {
     line-height: unset;
 }
 
-/* table.form-background tr td {
+table.form-background tr td {
     width: 100%;
     display: block;
-} */
+}
 
 #wrapper-content > div > div > div > div > table > tbody > tr > td > div > form > div {
     display: flex;
@@ -2334,9 +2340,9 @@ span.subclassExpandMinus {
 }
 
 table.classHierarchy {
-    min-width: initial;
-    max-width: initial;
-    width: calc(100% - 25);
+    min-width: auto;
+    width: 100%;
+    margin-left: 0;
 }
 
 section#container div {
