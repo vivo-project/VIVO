@@ -4,39 +4,54 @@ $(document).ready(function(){
 
     $.extend(this, individualLocalName);
     adjustFontSize();
+    padSectionBottoms();
     checkLocationHash();
 
     // prevents the page jumping down when loading a page with a requested tab in the url
     removeHash();
 
-    // controls the property group tabs
-    let showAllBtn = $('#show-all-tabs')[0];
-    let tabList = $('ul.propertyTabsList')[0];
-
-    showAllBtn.addEventListener('show.bs.tab', function (event) {
-        event.preventDefault()
-        showAllTabs();
-        manageLocalStorage();
-    })
-
-    showAllBtn.addEventListener('hide.bs.tab', function (event) {
-        $(".tab-content>section.tab-pane").removeClass('show active')
-    })
-
-    tabList.addEventListener('shown.bs.tab', function (event) {
-        manageLocalStorage();
-    })
-
-
-    function showAllTabs() {
-        $('.propertyTabsList.nav.nav-tabs > li').each(function() {
-            $(this).attr("aria-selected", "false");
-            $(this).removeClass("active");
+    // ensures that shorter property group sections don't cause the page to "jump around"
+    // when the tabs are clicked
+    function padSectionBottoms() {
+        $.each($('section.property-group'), function() {
+            var sectionHeight = $(this).height();
+            if ( sectionHeight < 1000 ) {
+                $(this).css('margin-bottom', 1000-sectionHeight + "px");
+            }
         });
-        
-        $('#show-all-tabs').addClass("active").attr("aria-selected", "true");
-        $(".tab-content>section.tab-pane").addClass('active show')    
     }
+
+    // controls the property group tabs
+    $.each($('li.clickable'), function() {
+        var groupName = $(this).attr("groupName");
+        var $propertyGroupLi = $(this);
+
+        $(this).click(function() {
+
+            if ( $propertyGroupLi.attr("class") == "nonSelectedGroupTab clickable" ) {
+                $.each($('li.selectedGroupTab'), function() {
+                    $(this).removeClass("selectedGroupTab clickable");
+                    $(this).addClass("nonSelectedGroupTab clickable");
+                });
+                $propertyGroupLi.removeClass("nonSelectedGroupTab clickable");
+                $propertyGroupLi.addClass("selectedGroupTab clickable");
+            }
+            if ( $propertyGroupLi.attr("groupname") == "viewAll" ) {
+                processViewAllTab();
+            }
+            else {
+                padSectionBottoms();
+                var $visibleSection = $('section.property-group:visible');
+                $visibleSection.hide();
+                $('h2[pgroup=tabs]').addClass("hidden");
+                $('nav#scroller').addClass("hidden");
+                $('section#' + groupName).show();
+            }
+
+            manageLocalStorage();
+            return false;
+        });
+    });
 
 
     function removeHash () {
@@ -58,13 +73,22 @@ $(document).ready(function(){
         }
     }
 
+    function processViewAllTab() {
+        $.each($('section.property-group'), function() {
+            $(this).css("margin-bottom", "1px");
+            $(this).children('h2').css("margin-top", "-15px").css("border-bottom","1px solid #DFEBE5").css("padding","12px 25px 10px 20px");
+            $(this).show();
+            $('h2[pgroup=tabs]').removeClass("hidden");
+            $('nav#scroller').removeClass("hidden");
+        });
+    }
 
     // If a page is requested with a hash this script will try to open a property
     // group tab matching that hash value.
     // The geographic focus map links to a county's page with a #map hash. This will
     // select the research tab and expand the 'geographic focus of' property list.
     function checkLocationHash() {
-        var currentTab = $('li.nav-link').attr('groupName')
+        var currentTab = $('li.selectedGroupTab').attr('groupName')
 
         if ( location.hash ) {
             // remove the trailing white space
@@ -84,23 +108,55 @@ $(document).ready(function(){
 
             if ( tabName ) {
                 if ( tabName != currentTab ) {
-                    let tabSelect = $('li[groupName="' + tabName + '"]');
-                    let tab = new bootstrap.Tab(tabSelect);
-                    tab.show()
+                    swapTabs(tabName, currentTab)
                 }
             }
 
             // the requested tab was gibberish, try the local storage
             else {
-                retrieveLocalStorage();
+                retrieveLocalStorage(currentTab);
             }
         }
 
         else {
-            retrieveLocalStorage();
+            retrieveLocalStorage(currentTab);
         }
     }
 
+    function swapTabs(tabName, currentTab) {
+        $('li[groupName="' + tabName + '"]').removeClass("nonSelectedGroupTab clickable");
+        $('li[groupName="' + tabName + '"]').addClass("selectedGroupTab clickable");
+        // deselect the first tab
+        $('li[groupName="' + currentTab + '"]').removeClass("selectedGroupTab clickable");
+        $('li[groupName="' + currentTab + '"]').addClass("nonSelectedGroupTab clickable");
+
+        if ( tabName == 'viewAll'){
+            processViewAllTab();
+        }
+
+        else {
+            padSectionBottoms();
+            $('section.property-group:visible').hide();
+            // show the selected tab section
+            $('section#' + tabName).show();
+        }
+
+    }
+
+    function geoFocusExpand() {
+        // if the ontology is set to collate by subclass, $list.length will be > 0
+        // this ensures both possibilities are covered
+        var $list = $('ul#geographicFocusOfList').find('ul');
+        if ( $list.length > 0 )
+        {
+            var $more = $list.find('a.more-less');
+            $more.click();
+        }
+        else {
+            var $more = $('ul#geographicFocusOfList').find('a.more-less');
+            $more.click();
+        }
+    }
 
     //  Next two functions --  keep track of which property group tab was selected,
     //  so if we return from a custom form or a related individual, even via the back button,
@@ -130,7 +186,7 @@ $(document).ready(function(){
             }
         }
         var selectedTab = [];
-        selectedTab.push($('li.nav-link.active').attr('groupName'));
+        selectedTab.push($('li.selectedGroupTab').attr('groupName'));
         amplify.store(localName, selectedTab);
         var checkLength = amplify.store(localName);
         if ( checkLength.length == 0 ) {
@@ -138,7 +194,7 @@ $(document).ready(function(){
         }
     }
 
-    function retrieveLocalStorage() {
+    function retrieveLocalStorage(currentTab) {
 
         var localName = this.individualLocalName;
         var selectedTab = amplify.store(individualLocalName);
@@ -153,23 +209,28 @@ $(document).ready(function(){
                 // if the selected tab is the default first one, don't do anything
                 if ( $('li.clickable').first().attr("groupName") != groupName ) {
                     // deselect the default first tab
+                    var $firstTab = $('li.clickable').first();
+                    $firstTab.removeClass("selectedGroupTab clickable");
+                    $firstTab.addClass("nonSelectedGroupTab clickable");
+                    // select the stored tab
+                    $("li[groupName='" + groupName + "']").removeClass("nonSelectedGroupTab clickable");
+                    $("li[groupName='" + groupName + "']").addClass("selectedGroupTab clickable");
+                    // hide the first tab section
+                    $('section.property-group:visible').hide();
 
                     if ( groupName == "viewAll" ) {
-                        console.log("View all")
-                        showAllTabs();
-                    } else {
-
-                        let tabSelect = $('li[groupName="' + groupName + '"]');
-                        let tab = new bootstrap.Tab(tabSelect);
-                        tab.show();
+                        processViewAllTab();
                     }
+
+                    // show the selected tab section
+                    $('section#' + groupName).show();
                 }
             }
         }
         // If you wish to default to the "all" tab for small profiles, uncomment the following lines
 //      -- Start view all mod
 //        else if ( $('article.property').length < 10 ) {
-//            showAllTabs();
+//            swapTabs('viewAll', currentTab)
 //        }
 //      -- End view all mod
     }
