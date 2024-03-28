@@ -4,15 +4,13 @@
 
 <#include "developer.ftl">
 
-<div>
-    <nav role="navigation" class="row">
-        <ul id="main-nav" role="list">
-            <#list menu.items as item>
-                <li role="listitem"><a href="${item.url}" title="${item.linkText} ${i18n().menu_item}" <#if item.active> class="selected" </#if>>${item.linkText}</a></li>
-            </#list>
-        </ul>
-    </nav>
-</div>
+<nav role="navigation">
+    <ul id="main-nav" role="list">
+        <#list menu.items as item>
+            <li role="listitem"><a href="${item.url}" title="${item.linkText} ${i18n().menu_item}" <#if item.active> class="selected" </#if>>${item.linkText}</a></li>
+        </#list>
+    </ul>
+</nav>
 
 <div id="wrapper-content" role="main">
     <#if flash?has_content>
@@ -26,6 +24,7 @@
             </section>
         </#if>
     </#if>
+
     <!--[if lte IE 8]>
     <noscript>
         <p class="ie-alert">This site uses HTML elements that are not recognized by Internet Explorer 8 and below in the absence of JavaScript. As a result, the site will not be rendered appropriately. To correct this, please either enable JavaScript, upgrade to Internet Explorer 9, or use another browser. Here are the <a href="http://www.enable-javascript.com"  title="java script instructions">instructions for enabling JavaScript in your web browser</a>.</p>
