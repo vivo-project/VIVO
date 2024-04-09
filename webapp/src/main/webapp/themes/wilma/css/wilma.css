@@ -1637,7 +1637,7 @@ ul.propertyTabsList > li {
 }
 
 ul.propertyTabsList > li.groupTabSpacer:last-child {
-    width: initial !important;
+    width: initial;
     flex-grow: 1;
 }
 
@@ -2071,8 +2071,7 @@ span.subclassExpandMinus {
 /* ------------------------------------------------->  */
 
 #wrapper-content #main-content #container {
-    width: initial !important;
-    margin-left: initial !important;
+    display: flex;
 }
 
 #helptext {
@@ -2096,7 +2095,7 @@ span.subclassExpandMinus {
 
 #center-container {
     position: relative;
-    width: 100% !important;
+    width: 100%;
 }
 
 @media (min-width: 768px) {
@@ -2106,17 +2105,12 @@ span.subclassExpandMinus {
     }
 
     #right-container {
-        width: 30%;
-        position: absolute;
+        width: 34%;
     }
 
     #helptext {
         width: 70%;
         padding-right: 10px;
-    }
-
-    #center-container {
-        position: absolute;
     }
     
 }
@@ -2133,14 +2127,6 @@ span.subclassExpandMinus {
     margin-left: -54px;
 }
 
-#infovis {
-    width: 100% !important;
-}
-
-#infovis > svg {
-    width: 100% !important;
-}
-
 /* Author Network */
 
 .propertyTabsList {
@@ -2153,7 +2139,8 @@ span.subclassExpandMinus {
 
 #chord {
     width: 100%;
-    float: left !important;
+    height: 100%;
+    float: left;
     overflow: auto;
 }
 
@@ -2163,11 +2150,17 @@ span.subclassExpandMinus {
     -webkit-transform-origin: 0 50%;
     -ms-transform-origin: 0 50%;
     transform-origin: 0 50%;
+    height: 100%;
 }
 
 @media (max-width: 360px) {
-    #chord > svg {
+    #body > #bodyPannel {
+        height: 360px;
+    }
+
+    #chord > svg > * {
         scale: 0.3;
+        overflow: hidden;
     }
     
     #chord-info-div {
@@ -2176,7 +2169,11 @@ span.subclassExpandMinus {
 }
 
 @media (min-width: 361px) and (max-width: 399px) {
-    #chord > svg {
+    #body > #bodyPannel {
+        height: 360px;
+    }
+
+    #chord > svg > * {
         scale: 0.4;
     }
     
@@ -2187,7 +2184,11 @@ span.subclassExpandMinus {
 
 
 @media (min-width: 400px) and (max-width: 449px) {
-    #chord > svg {
+    #body > #bodyPannel {
+        height: 400px;
+    }
+    
+    #chord > svg > * {
         scale: 0.44;
     }
     
@@ -2199,7 +2200,11 @@ span.subclassExpandMinus {
 
 
 @media (min-width: 450px) and (max-width: 499px) {
-    #chord > svg {
+    #body > #bodyPannel {
+        height: 450px;
+    }
+    
+    #chord > svg > * {
         scale: 0.5;
     }
     
@@ -2211,7 +2216,11 @@ span.subclassExpandMinus {
 
 
 @media (min-width: 500px) and (max-width: 575px) {
-    #chord > svg {
+    #body > #bodyPannel {
+        height: 500px;
+    }
+    
+    #chord > svg > * {
         scale: 0.55;
     }
     
@@ -2221,14 +2230,22 @@ span.subclassExpandMinus {
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
-    #chord > svg {
+    #body > #bodyPannel {
+        height: 576px;
+    }
+    
+    #chord > svg > * {
         scale: 0.6;
     }
 }
 
 
 @media (min-width: 768px) and (max-width: 991px) {
-    #chord > svg {
+    #body > #bodyPannel {
+        height: 768px;
+    }
+    
+    #chord > svg > * {
         scale: 0.8;
     }
 }
