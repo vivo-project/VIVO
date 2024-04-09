@@ -9,19 +9,25 @@
     </head>
 
     <body class="${bodyClasses!}" onload="${bodyOnload!}">
-        <#include "identity.ftl">
-        <#include "search.ftl">
-        <#include "menu.ftl">
+        <div class="container">
+            <#include "identity.ftl">
+            <#include "search.ftl">
+            <#include "menu.ftl">
 
-		<#-- VIVO OpenSocial Extension by UCSF -->
-		<#if openSocial??>
-			<#if openSocial.visible>
-            	<div id="gadgets-tools" class="gadgets-gadget-parent"></div>
-            </#if>
-		</#if>
+            <div class="row">
+                <div class="row-wrapper">
+                <#-- VIVO OpenSocial Extension by UCSF -->
+                <#if openSocial??>
+                    <#if openSocial.visible>
+                        <div id="gadgets-tools" class="gadgets-gadget-parent"></div>
+                    </#if>
+                </#if>
 
-        ${body}
+                ${body}
+                </div>
+            </div>
 
-        <#include "footer.ftl">
+            <#include "footer.ftl">
+        </div>
     </body>
 </html>
