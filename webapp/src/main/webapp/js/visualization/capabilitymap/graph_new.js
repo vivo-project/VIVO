@@ -1026,6 +1026,7 @@ var unhide = function() {
     if ($(window).width() > 1230) {
         $("#container").css("box-shadow", "0px 0px 20px -6px #000000");
         $("#container").animate({"height" : "600px", "width" : "auto", "margin-bottom" : "20px"}, 500);
+        $("#container").addClass("wide-container");
     } else {
         $("#container").animate({"height" : "600px"});
     }
