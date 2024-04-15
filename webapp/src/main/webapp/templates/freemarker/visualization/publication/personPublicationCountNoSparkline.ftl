@@ -20,21 +20,21 @@
                 var onlyUnknownYearPublications = false;
 
                 var data = new google.visualization.DataTable();
-                data.addColumn('string', '${i18n().year_capitalized}');
+                data.addColumn('number', '${i18n().year_capitalized}');
                 data.addColumn('number', '${i18n().publications_capitalized}');
                 data.addRows(${sparklineVO.yearToEntityCountDataTable?size});
 
                 var knownYearPublicationCounts = 0;
 
                 <#list sparklineVO.yearToEntityCountDataTable as yearToPublicationCountDataElement>
-                    data.setValue(${yearToPublicationCountDataElement.yearToEntityCounter}, 0, '${yearToPublicationCountDataElement.year}');
+                    data.setValue(${yearToPublicationCountDataElement.yearToEntityCounter}, 0, ${yearToPublicationCountDataElement.year});
+                    data.setFormattedValue(${yearToPublicationCountDataElement.yearToEntityCounter}, 0, '${yearToPublicationCountDataElement.year}');
                     data.setValue(${yearToPublicationCountDataElement.yearToEntityCounter}, 1, ${yearToPublicationCountDataElement.currentEntitiesCount});
                     knownYearPublicationCounts += ${yearToPublicationCountDataElement.currentEntitiesCount};
                 </#list>
 
                 <#-- Create a view of the data containing only the column pertaining to publication count. -->
                 var sparklineDataView = new google.visualization.DataView(data);
-                sparklineDataView.setColumns([1]);
 
                 /*
                 This means that all the publications have unknown years & we do not need to display
@@ -112,7 +112,11 @@
                     table.prependTo('#${sparklineContainerID}');
                 }
 
-                drawPubCountVisualization();
+                google.charts.load('current', {
+                    callback: function() {
+                        drawPubCountVisualization();
+                    },
+                });
             });
         </script>
 
