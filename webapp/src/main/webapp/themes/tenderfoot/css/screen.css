@@ -31,5 +31,5 @@ VIVO tenderfoot theme: screen styles
 @import url("page-login.css");
 @import url("page-menu.css");
 @import url("page-createAndLink.css");
-@import url("https://fonts.googleapis.com/css?family=Noto+Sans");
+@import url("../../../webjars/fonts/noto-sans/index.css");
 @import url("../../../local/css/local.css");
