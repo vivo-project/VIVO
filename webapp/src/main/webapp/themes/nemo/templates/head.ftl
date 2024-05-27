@@ -20,7 +20,6 @@
     </#if>	
 </#if>	
 
-<script src="${urls.base}/bootstrap-5.3.2/js/bootstrap.min.js"></script> 
 
 <#include "stylesheets.ftl">
 <#-- <link rel="stylesheet" href="${urls.theme}/css/screen.css" /> -->
