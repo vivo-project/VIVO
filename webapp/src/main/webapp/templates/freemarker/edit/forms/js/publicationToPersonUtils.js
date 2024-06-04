@@ -84,7 +84,7 @@ var publicationToPersonUtils = {
            window.setTimeout('publicationToPersonUtils.hideFieldsForPub()', 180);
         });
 
-        this.pubTitle.blur( function(objEvent) {
+        this.pubTitle.on("blur", function(objEvent) {
            window.setTimeout('publicationToPersonUtils.hideFieldsForPub()', 180);
         });
 

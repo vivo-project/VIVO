@@ -191,7 +191,7 @@ var i18nStringsUriRdf = {
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual.css" />',
                   '<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />',
                   '<link rel="stylesheet" href="${urls.base}/css/individual/individual-2column-view.css" />',
-                  '<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />',
+                  '<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.13.2.css" />',
                   '<link rel="stylesheet" type="text/css" href="${urls.base}/css/jquery_plugins/qtip/jquery.qtip.min.css" />')}
 
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tiny_mce/tiny_mce.js"></script>',
@@ -201,7 +201,7 @@ ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tiny_mce/
 
 ${scripts.add('<script async type="text/javascript" src="${urls.base}/js/individual/individualUriRdf.js"></script>',
               '<script async type="text/javascript" src="${urls.base}/js/individual/individualQtipBubble.js"></script>',
-              '<script async type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
+              '<script async type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.13.2.min.js"></script>',
               '<script async type="text/javascript" src="${urls.base}/js/individual/individualUtils.js?vers=1.5.1"></script>',
 			  '<script async type="text/javascript" src="${urls.base}/js/individual/moreLessController.js"></script>',
               '<script async type="text/javascript" src="${urls.base}/js/individual/individualProfilePageType.js"></script>',

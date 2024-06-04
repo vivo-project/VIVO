@@ -16,7 +16,7 @@ var visKeyForFlash = "CoAuthor";
 
 function renderStatsOnNodeClicked(json){
 
-	var obj = jQuery.parseJSON(json);
+	var obj = JSON.parse(json);
 
 	var works = "";
 	var persons = "";
@@ -74,7 +74,7 @@ function renderStatsOnNodeClicked(json){
 		processProfileInformation("authorName",
 				"profileMoniker",
 				"profileImage",
-				jQuery.parseJSON(getWellFormedURLs(obj.url, "profile_info")),
+				JSON.parse(getWellFormedURLs(obj.url, "profile_info")),
 				true,
 				true);
 
