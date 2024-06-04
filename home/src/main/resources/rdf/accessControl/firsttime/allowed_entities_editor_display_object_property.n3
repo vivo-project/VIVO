@@ -4,6 +4,8 @@
 @prefix access: <https://vivoweb.org/ontology/vitro-application/auth/vocabulary/> .
 
 :EditorDisplayObjectPropertyValueSet access:value
+    <http://vitro.mannlib.cornell.edu/ns/vitro/public#downloadLocation> ,
+    <http://vitro.mannlib.cornell.edu/ns/vitro/public#mainImage> ,
     <http://aims.fao.org/aos/geopolitical.owl#hasBorderWith> ,
     <http://aims.fao.org/aos/geopolitical.owl#hasMember> ,
     <http://aims.fao.org/aos/geopolitical.owl#isAdministeredBy> ,

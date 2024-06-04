@@ -1,6 +1,5 @@
 <#-- $This file is distributed under the terms of the license in LICENSE$ -->
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8" />
 <!-- Google Chrome Frame open source plug-in brings Google Chrome's open web technologies and speedy JavaScript engine to Internet Explorer-->
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -18,8 +17,6 @@
                           '<script type="text/javascript" src="${urls.base}/js/openSocial/orng.js"></script>')}
     </#if>
 </#if>
-
-${headScripts.add('<script type="text/javascript" src="${urls.base}/bootstrap-5.3.2/js/bootstrap.min.js"></script>')}
 
 <#include "stylesheets.ftl">
 <link rel="stylesheet" href="${urls.theme}/css/screen.css" />
