@@ -17,8 +17,7 @@ div#researcherTotal {
 }
 .mapArea {
     height:540px;
-    width:885px;
-    margin: 2px 0 16px 16px;
+    margin: 2px 16px 16px 16px;
 }
 .divIconCount {
     border: none;
