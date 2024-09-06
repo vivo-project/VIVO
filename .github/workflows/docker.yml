@@ -34,7 +34,7 @@ jobs:
       - name: Maven Build
         run: |
           cd ../VIVO
-          mvn clean package -s installer/example-settings.xml
+          mvn clean install
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -47,7 +47,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
+
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
