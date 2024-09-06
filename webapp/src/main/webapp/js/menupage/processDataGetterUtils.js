@@ -8,6 +8,7 @@
 
 var processDataGetterUtils = {
 		dataGetterProcessorMap:{"browseClassGroup": processClassGroupDataGetterContent,
+								"searchFilterValues": processSearchFilterValuesDataGetterContent,
 								"sparqlQuery": processSparqlDataGetterContent,
 								"fixedHtml":processFixedHTMLDataGetterContent,
 								"internalClass":processInternalClassDataGetterContent,
