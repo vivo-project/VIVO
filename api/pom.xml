@@ -7,13 +7,13 @@
 
     <groupId>org.vivoweb</groupId>
     <artifactId>vivo-api</artifactId>
-    <version>1.13.1-SNAPSHOT</version>
+    <version>1.15.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <parent>
         <groupId>org.vivoweb</groupId>
         <artifactId>vivo-project</artifactId>
-        <version>1.13.1-SNAPSHOT</version>
+        <version>1.15.1-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
 
@@ -34,11 +34,6 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>fluent-hc</artifactId>
             <version>4.5.3</version>
-        </dependency>
-        <dependency>
-            <groupId>com.itextpdf</groupId>
-            <artifactId>itextpdf</artifactId>
-            <version>5.5.12</version>
         </dependency>
         <dependency>
             <groupId>org.vivoweb.dependencies</groupId>

@@ -4,7 +4,7 @@
 
     <groupId>org.vivoweb</groupId>
     <artifactId>vivo-project</artifactId>
-    <version>1.13.1-SNAPSHOT</version>
+    <version>1.15.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>VIVO</name>
@@ -352,10 +352,10 @@
                 </executions>
                 <configuration>
                     <configLocation>
-                        duraspace-checkstyle/checkstyle.xml
+                        checkstyle.xml
                     </configLocation>
                     <suppressionsLocation>
-                        vitro-checkstyle/checkstyle-suppressions.xml
+                        checkstyle-suppressions.xml
                     </suppressionsLocation>
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>

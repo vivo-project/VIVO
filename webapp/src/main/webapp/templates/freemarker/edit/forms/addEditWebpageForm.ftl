@@ -50,6 +50,7 @@
 <form class="customForm" action ="${submitUrl}">
 	<input type="hidden" name="rangeUri" value="${editConfiguration.rangeUri!}">
 	<input type="hidden" name="domainUri" value="${editConfiguration.domainUri!}">
+	<input type="hidden" name="fauxContextUri" value="${editConfiguration.pageData.fauxContextUri!}">
 
     <label for="urlType">${i18n().url_type}${requiredHint}</label>
     <#assign urlTypeOpts = editConfiguration.pageData.urlType />

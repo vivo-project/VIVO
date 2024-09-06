@@ -1910,6 +1910,7 @@ local:addressLocationConfig a :ObjectPropertyDisplayConfig ;
 local:bfo_0000055Context a :ConfigContext ;
     :hasConfiguration local:bfo_0000055Config ;
     :configContextFor <http://purl.obolibrary.org/obo/BFO_0000055> ;
+    :qualifiedByDomain <http://purl.obolibrary.org/obo/BFO_0000015> ;
     :qualifiedBy      <http://purl.obolibrary.org/obo/BFO_0000023> .
 
 local:bfo_0000055Config a :ObjectPropertyDisplayConfig ;

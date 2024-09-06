@@ -44,11 +44,11 @@
 								action="${urls.search}" 
 								name="search-home" 
 								role="search" 
-								method="post" 
+								method="GET" 
 								class="form-horizontal">
 								<fieldset>
 									<div class="form-group pull-left" style="margin-right: 5px;">
-										<select class="form-control" id="classgroup" name="classgroup">
+										<select class="form-control" id="classgroup" name="filters_category">
 											<option value="">${i18n().all_capitalized}</option>
 											<#list vClassGroups as group>
 												<#if (group.individualCount > 0)>
@@ -271,7 +271,7 @@
 			};
 			// set the 'limmit search' text and alignment
 			if	( $('input.search-homepage').css('text-align') == "right" ) {		
-				 $('input.search-homepage').attr("value","${i18n().limit_search} \u2192");
+				 $('input.search-homepage').attr("placeholder","${i18n().limit_search} \u2192");
 			}  
 		</script>
 	</body>

@@ -16,6 +16,9 @@ Disallow: /fedsearch/         # Vitro
 Disallow: /comments.jsp       # Vitro
 Disallow: /dataservice/       # Vitro
 Disallow: /listrdf/           # Vitro
+Disallow: /contact            # Vitro
+Disallow: /submitFeedback     # Vitro
+Disallow: /forgotPassword     # Vitro
 Disallow: /visualizationfm/   # VIVO addition
 Disallow: /visualization/     # VIVO addition
 Disallow: /vis/               # VIVO addition

@@ -1,0 +1,157 @@
+@prefix : <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+:vitrodocumentModifier_persons_filter
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SelectQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "persons filter" ;
+    :hasTargetField "persons_ss" ;
+    :hasSelectQuery """
+        PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX vivo:  <http://vivoweb.org/ontology/core#>
+        SELECT DISTINCT ?person
+        WHERE {
+            ?uri vivo:relatedBy ?position .
+            ?position vivo:relates ?person .
+            ?person rdf:type foaf:Person .
+        }
+""" .
+
+:vitrodocumentModifier_concepts_filter
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SelectQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "concepts filter" ;
+    :hasTargetField "concepts_ss" ;
+    :hasSelectQuery """
+        PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX vivo:  <http://vivoweb.org/ontology/core#>
+        SELECT DISTINCT ?concept
+        WHERE {
+            ?uri vivo:hasSubjectArea ?concept .
+            ?concept rdf:type <http://www.w3.org/2004/02/skos/core#Concept> .
+        }
+""" .
+
+:vitrodocumentModifier_organizations_filter
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SelectQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "organizations filter" ;
+    :hasTargetField "organizations_ss" ;
+    :hasSelectQuery """
+        PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX vivo:  <http://vivoweb.org/ontology/core#>
+        SELECT DISTINCT ?org
+        WHERE {
+            {
+              ?uri rdf:type <http://purl.obolibrary.org/obo/IAO_0000030> .
+              ?uri vivo:relatedBy ?personRelation .
+              ?personRelation vivo:relates ?person .
+              ?person rdf:type foaf:Person .
+              ?person vivo:relatedBy ?position .
+              ?position vivo:relates ?org .
+              ?org rdf:type foaf:Organization .
+            }
+             UNION
+            {
+              ?uri rdf:type foaf:Person .
+              ?uri vivo:relatedBy ?position .
+              ?position vivo:relates ?org .
+              ?org rdf:type foaf:Organization .
+            } 
+             UNION 
+            {
+              ?uri rdf:type foaf:Organization .
+              BIND( ?uri as ?org )
+            }
+        }
+""" .
+
+:vitrodocumentModifier_publications_filter
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SelectQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "publications filter" ;
+    :hasTargetField "publications_ss" ;
+    :hasSelectQuery """
+        PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX vivo:  <http://vivoweb.org/ontology/core#>
+        SELECT DISTINCT ?uri
+        WHERE {
+            {
+              ?uri rdf:type <http://purl.obolibrary.org/obo/IAO_0000030> . 
+            } 
+        }
+""" .
+
+:vitrodocumentModifier_publication_year
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SelectQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "publication date" ;
+    :hasTargetField "publication_year_ss" ;
+    :hasSelectQuery """
+        PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        SELECT ?result
+        WHERE
+        {
+          ?uri rdf:type <http://purl.obolibrary.org/obo/IAO_0000030> .
+          ?uri <http://vivoweb.org/ontology/core#dateTimeValue> ?dateValue .
+          ?dateValue <http://vivoweb.org/ontology/core#dateTime> ?dateTime .
+          BIND( SUBSTR(STR(?dateTime),0,5) as ?result )
+        }
+""" .
+
+:vitrodocumentModifier_dates
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SelectQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "dates" ;
+    :hasTargetField "dates_drsim" ;
+    :hasSelectQuery """
+	PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+	SELECT ?result
+	WHERE
+	{
+		{
+		  ?uri <http://vivoweb.org/ontology/core#dateTimeInterval> ?interval .
+		  ?interval <http://vivoweb.org/ontology/core#end> ?start .
+		  ?start <http://vivoweb.org/ontology/core#dateTime> ?startTime .
+		  ?interval <http://vivoweb.org/ontology/core#end> ?end .
+		  ?end <http://vivoweb.org/ontology/core#dateTime> ?endTime .
+                  BIND (
+                    COALESCE(
+                      IF(strlen(str(?startTime)) = 4, concat(str(?startTime),"-01-01T00:00:00Z"), 1/0),
+                      IF(strlen(str(?startTime)) = 7, concat(str(?startTime),"-01T00:00:00Z"), 1/0),
+                      IF(strlen(str(?startTime)) = 10, concat(str(?startTime),"T00:00:00Z"), 1/0),
+                      IF(strlen(str(?startTime)) = 19, concat(str(?startTime),"Z"), 1/0)
+                    ) AS ?cleanStartDateValue
+                  )
+                  BIND (
+                    COALESCE(
+                      IF(strlen(str(?endTime)) = 4, concat(str(?endTime),"-01-01T00:00:00Z"), 1/0),
+                      IF(strlen(str(?endTime)) = 7, concat(str(?endTime),"-01T00:00:00Z"), 1/0),
+                      IF(strlen(str(?endTime)) = 10, concat(str(?endTime),"T00:00:00Z"), 1/0),
+                      IF(strlen(str(?endTime)) = 19, concat(str(?endTime),"Z"), 1/0)
+                    ) AS ?cleanEndDateValue
+                  )
+
+		  BIND( CONCAT("[", ?cleanStartDateValue," TO ", ?cleanEndDateValue,"]") as ?result )
+		} UNION 
+		{
+		  ?uri <http://vivoweb.org/ontology/core#dateTimeValue> ?dateTimeValue .
+                  ?dateTimeValue <http://vivoweb.org/ontology/core#dateTime> ?rawStringDateValue .
+                  BIND (
+                    COALESCE(
+                      IF(strlen(str(?rawStringDateValue)) = 4, concat(str(?rawStringDateValue),"-01-01T00:00:00Z"), 1/0),
+                      IF(strlen(str(?rawStringDateValue)) = 7, concat(str(?rawStringDateValue),"-01T00:00:00Z"), 1/0),
+                      IF(strlen(str(?rawStringDateValue)) = 10, concat(str(?rawStringDateValue),"T00:00:00Z"), 1/0),
+                      IF(strlen(str(?rawStringDateValue)) = 19, concat(str(?rawStringDateValue),"Z"), 1/0)
+                    ) AS ?cleanDateValue
+                  )
+                  BIND( CONCAT("[", STR(?cleanDateValue)," TO ", STR(?cleanDateValue),"]") as ?result )
+		}
+	} LIMIT 1
+""" .
+

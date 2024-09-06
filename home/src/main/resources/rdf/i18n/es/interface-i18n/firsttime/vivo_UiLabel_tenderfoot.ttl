@@ -1,869 +1,869 @@
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix prop-data: <http://vivoweb.org/ontology/core/properties/individual#> .
-@prefix prop:  <http://vivoweb.org/ontology/core/properties/vocabulary#> .
+@prefix uil-data: <http://vivoweb.org/ontology/vitro/ui-label/individual#> .
+@prefix uil:  <http://vivoweb.org/ontology/vitro/ui-label/vocabulary#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 
-prop-data:collapsed_menu_name.VIVO.tenderfoot
+uil-data:collapsed_menu_name.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Menú"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "collapsed_menu_name" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "collapsed_menu_name" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:create_capitalized.VIVO.tenderfoot
+uil-data:create_capitalized.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Crear"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "create_capitalized" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "create_capitalized" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:menu_termuse.VIVO.tenderfoot
+uil-data:menu_termuse.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Términos de uso"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "menu_termuse" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_termuse" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:unable_to_handle_position_editing.VIVO.tenderfoot
+uil-data:unable_to_handle_position_editing.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Esta forma no es capaz de manejar la edición de esta posición, debido a que está asociada con múltiples posiciones particulares."@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "unable_to_handle_position_editing" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "unable_to_handle_position_editing" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:collection_or_series.VIVO.tenderfoot
+uil-data:collection_or_series.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "collection_or_series" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        rdf:type         uil:UILabel ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "collection_or_series" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:last_name.VIVO.tenderfoot
+uil-data:last_name.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Apellido"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "last_name" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "last_name" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:first_name.VIVO.tenderfoot
+uil-data:first_name.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Primer nombre"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "first_name" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "first_name" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:grant_type.VIVO.tenderfoot
+uil-data:grant_type.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Tipo de subvención"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "grant_type" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grant_type" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:view_all_members_of_org.VIVO.tenderfoot
+uil-data:view_all_members_of_org.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Ver todos los miembros de esta organización."@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "view_all_members_of_org" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "view_all_members_of_org" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:display_more.VIVO.tenderfoot
+uil-data:display_more.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "más"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "display_more" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "display_more" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:edit_mailing_address.VIVO.tenderfoot
+uil-data:edit_mailing_address.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Editar dirección postal"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "edit_mailing_address" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "edit_mailing_address" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:first_publication.VIVO.tenderfoot
+uil-data:first_publication.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Primera publicación"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "first_publication" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "first_publication" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:no_faculty_found.VIVO.tenderfoot
+uil-data:no_faculty_found.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "No se han encontrado miembros en la facultad."@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "no_faculty_found" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "no_faculty_found" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:identity_myprofile.VIVO.tenderfoot
+uil-data:identity_myprofile.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Mi perfil"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "identity_myprofile" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_myprofile" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:menu_powered.VIVO.tenderfoot
+uil-data:menu_powered.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Desarrollado por"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "menu_powered" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_powered" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:grants_text_one.VIVO.tenderfoot
+uil-data:grants_text_one.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Este cuerpo es de la plantilla en el archivo vivo/productMods/templates/freemarker/body/menupage/grants.ftl. En el modelo de presentación, la página de becas muestra: la propiedad requiresBodyTemplate que define que la página de becas anula la plantilla predeterminada. La plantilla predeterminada de estas páginas está en /vitro/webapp/web/templates/freemarker/cuerpo/menupage/menupage.ftl"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "grants_text_one" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grants_text_one" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:identity_title.VIVO.tenderfoot
+uil-data:identity_title.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "VIVO | conectar compartir descubrir"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "identity_title" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_title" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:researchers.VIVO.tenderfoot
+uil-data:researchers.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "investigadores"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "researchers" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "researchers" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:indiv_foafperson_for.VIVO.tenderfoot
+uil-data:indiv_foafperson_for.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "para"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "indiv_foafperson_for" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "indiv_foafperson_for" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:identity_index.VIVO.tenderfoot
+uil-data:identity_index.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Inicio"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "identity_index" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_index" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:vivo_profile.VIVO.tenderfoot
+uil-data:vivo_profile.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Perfil de VIVO"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "vivo_profile" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "vivo_profile" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:menu_logout.VIVO.tenderfoot
+uil-data:menu_logout.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Finalizar sesión"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "menu_logout" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_logout" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:create_entry.VIVO.tenderfoot
+uil-data:create_entry.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Crear entrada"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "create_entry" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "create_entry" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:placeholder_image.VIVO.tenderfoot
+uil-data:placeholder_image.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "imagen de marcador de posición"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "placeholder_image" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "placeholder_image" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:first_grant.VIVO.tenderfoot
+uil-data:first_grant.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Primera beca"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "first_grant" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "first_grant" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:attendee_capitalized.VIVO.tenderfoot
+uil-data:attendee_capitalized.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Asistente"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "attendee_capitalized" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "attendee_capitalized" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:map_state_string.VIVO.tenderfoot
+uil-data:map_state_string.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "estado."@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "map_state_string" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "map_state_string" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:menu_about.VIVO.tenderfoot
+uil-data:menu_about.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Acerca de"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "menu_about" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_about" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:grants_two.VIVO.tenderfoot
+uil-data:grants_two.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Esta técnica podría usarse para definir las páginas sin elementos de menú, que obtienen su contenido a partir de una plantilla FreeMarker. Un ejemplo sería la página acerca de."@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "grants_two" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grants_two" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:service_provider_role.VIVO.tenderfoot
+uil-data:service_provider_role.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Rol proveedor de servicios"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "service_provider_role" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "service_provider_role" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:profile_capitalized.VIVO.tenderfoot
+uil-data:profile_capitalized.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Perfil"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "profile_capitalized" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "profile_capitalized" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:email_address.VIVO.tenderfoot
+uil-data:email_address.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Dirección de correo clectrónico"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "email_address" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "email_address" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:statewide_locations.VIVO.tenderfoot
+uil-data:statewide_locations.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "lugares en todo el estado."@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "statewide_locations" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "statewide_locations" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:limit_search.VIVO.tenderfoot
+uil-data:limit_search.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "limitar la búsqueda"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "limit_search" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "limit_search" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:province_or_region.VIVO.tenderfoot
+uil-data:province_or_region.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Provincia o región"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "province_or_region" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "province_or_region" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:menu_copyright.VIVO.tenderfoot
+uil-data:menu_copyright.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "derechos de autor"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "menu_copyright" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_copyright" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:place_of_grant.VIVO.tenderfoot
+uil-data:place_of_grant.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Lugar de subvención"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "place_of_grant" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "place_of_grant" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:to.VIVO.tenderfoot
+uil-data:to.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "a"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "to" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "to" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:countries.VIVO.tenderfoot
+uil-data:countries.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "países"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "countries" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "countries" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:identity_edit.VIVO.tenderfoot
+uil-data:identity_edit.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Editar página"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "identity_edit" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_edit" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:enter_new_role_value.VIVO.tenderfoot
+uil-data:enter_new_role_value.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Por favor, introduzca un nuevo valor en el campo Rol."@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "enter_new_role_value" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "enter_new_role_value" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:menu_version.VIVO.tenderfoot
+uil-data:menu_version.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Versión"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "menu_version" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_version" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:last_grant.VIVO.tenderfoot
+uil-data:last_grant.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Última beca"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "last_grant" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "last_grant" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:no_grants_for.VIVO.tenderfoot
+uil-data:no_grants_for.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "De momento no hay subvenciones para"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "no_grants_for" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "no_grants_for" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:address_street_one.VIVO.tenderfoot
+uil-data:address_street_one.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "dirección calle uno"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "address_street_one" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "address_street_one" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:map_states_string.VIVO.tenderfoot
+uil-data:map_states_string.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "estados."@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "map_states_string" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "map_states_string" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:loading_website_image.VIVO.tenderfoot
+uil-data:loading_website_image.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Cargando imagen del sitio web"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "loading_website_image" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "loading_website_image" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:intro_filtersearch.VIVO.tenderfoot
+uil-data:intro_filtersearch.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Filtrar búsqueda"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "intro_filtersearch" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "intro_filtersearch" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:identity_user.VIVO.tenderfoot
+uil-data:identity_user.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "usuario"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "identity_user" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_user" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:unable_to_handle_grant_editing.VIVO.tenderfoot
+uil-data:unable_to_handle_grant_editing.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Esta forma no es capaz de manejar la edición de esta subvención, debido a que se encuentra asociada con múltiples subvenciones individuales."@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "unable_to_handle_grant_editing" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "unable_to_handle_grant_editing" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:currently_no_researchers.VIVO.tenderfoot
+uil-data:currently_no_researchers.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Actualmente no hay investigadores con un enfoque geográfico definido."@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "currently_no_researchers" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "currently_no_researchers" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:view_all_departments.VIVO.tenderfoot
+uil-data:view_all_departments.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "ver todos los departamentos académicos"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "view_all_departments" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "view_all_departments" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:view.VIVO.tenderfoot
+uil-data:view.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "ver"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "view" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "view" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:regions.VIVO.tenderfoot
+uil-data:regions.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "regiones"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "regions" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "regions" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:organizer_role.VIVO.tenderfoot
+uil-data:organizer_role.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Rol de organizador"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "organizer_role" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "organizer_role" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:identity_admin.VIVO.tenderfoot
+uil-data:identity_admin.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Administrador del sitio"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "identity_admin" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_admin" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:menu_support.VIVO.tenderfoot
+uil-data:menu_support.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Soporte"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "menu_support" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_support" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:researchers_in.VIVO.tenderfoot
+uil-data:researchers_in.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "investigadores en"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "researchers_in" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "researchers_in" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:faculty_memberships.VIVO.tenderfoot
+uil-data:faculty_memberships.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Participación en la facultad"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "faculty_memberships" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "faculty_memberships" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:last_publication.VIVO.tenderfoot
+uil-data:last_publication.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Última publicación"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "last_publication" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "last_publication" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:menu_item.VIVO.tenderfoot
+uil-data:menu_item.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "elemento de menú"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "menu_item" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_item" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:menu_loginfull.VIVO.tenderfoot
+uil-data:menu_loginfull.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Iniciar sesión para administrar este sitio"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "menu_loginfull" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_loginfull" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:countries_and_regions.VIVO.tenderfoot
+uil-data:countries_and_regions.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "países y regiones."@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "countries_and_regions" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "countries_and_regions" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:reviewer_role.VIVO.tenderfoot
+uil-data:reviewer_role.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Rol de revisor"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "reviewer_role" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "reviewer_role" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:no_departments_found.VIVO.tenderfoot
+uil-data:no_departments_found.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "No se han encontrado departamentos académicos."@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "no_departments_found" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "no_departments_found" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:return_to_grant.VIVO.tenderfoot
+uil-data:return_to_grant.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Volver a conceder"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "return_to_grant" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "return_to_grant" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:grant_entry_for.VIVO.tenderfoot
+uil-data:grant_entry_for.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Permitir la entrada de"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "grant_entry_for" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grant_entry_for" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:intro_searchvivo.VIVO.tenderfoot
+uil-data:intro_searchvivo.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Buscar en VIVO"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "intro_searchvivo" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "intro_searchvivo" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:address_street_three.VIVO.tenderfoot
+uil-data:address_street_three.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "dirección calle tres"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "address_street_three" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "address_street_three" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:address_label.VIVO.tenderfoot
+uil-data:address_label.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "etiqueta de dirección"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "address_label" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "address_label" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:change_selection.VIVO.tenderfoot
+uil-data:change_selection.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "cambiar selección"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "change_selection" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "change_selection" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:faculty_who_are_members_of_org.VIVO.tenderfoot
+uil-data:faculty_who_are_members_of_org.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Aquí están los profesores del departamento de {0} que son miembros de esta organización."@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "faculty_who_are_members_of_org" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "faculty_who_are_members_of_org" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:grants_in_vivo.VIVO.tenderfoot
+uil-data:grants_in_vivo.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "subvenciones en VIVO"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "grants_in_vivo" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grants_in_vivo" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:leadership_role.VIVO.tenderfoot
+uil-data:leadership_role.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Papel de liderazgo"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "leadership_role" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "leadership_role" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:currently_no_papers_for.VIVO.tenderfoot
+uil-data:currently_no_papers_for.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "De momento no hay {0} papeles para"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "currently_no_papers_for" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "currently_no_papers_for" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:menu_welcomestart.VIVO.tenderfoot
+uil-data:menu_welcomestart.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Bienvenido"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "menu_welcomestart" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_welcomestart" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:add_capitalized.VIVO.tenderfoot
+uil-data:add_capitalized.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Añadir"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "add_capitalized" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "add_capitalized" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:intro_title.VIVO.tenderfoot
+uil-data:intro_title.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Bienvenido a VIVO"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "intro_title" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "intro_title" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:grants_text_three.VIVO.tenderfoot
+uil-data:grants_text_three.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Esto crearía una página que utilice about.ftl como el cuerpo. Se accede a la página a través de /about y anularía todas las asignaciones de servlet mapeados en web.xml."@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "grants_text_three" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grants_text_three" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:research_area.VIVO.tenderfoot
+uil-data:research_area.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "área de investigación"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "research_area" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "research_area" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:menu_contactus.VIVO.tenderfoot
+uil-data:menu_contactus.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Contáctanos"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "menu_contactus" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_contactus" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:password.VIVO.tenderfoot
+uil-data:password.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "contraseña"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "password" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "password" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:intro_para1.VIVO.tenderfoot
+uil-data:intro_para1.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "VIVO es una herramienta de descubrimiento de investigación centrada en permitir la colaboración entre científicos de todas las disciplinas."@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "intro_para1" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "intro_para1" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:collection_capitalized.VIVO.tenderfoot
+uil-data:collection_capitalized.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Colección"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "collection_capitalized" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "collection_capitalized" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:address_street_two.VIVO.tenderfoot
+uil-data:address_street_two.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "dirección calle dos"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "address_street_two" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "address_street_two" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:select_award.VIVO.tenderfoot
+uil-data:select_award.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Premio seleccionado"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "select_award" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "select_award" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:manage_publications_link.VIVO.tenderfoot
+uil-data:manage_publications_link.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "manage_publications_link" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        rdf:type         uil:UILabel ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "manage_publications_link" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:loading_data.VIVO.tenderfoot
+uil-data:loading_data.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "cargando datos"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "loading_data" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "loading_data" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:indiv_foafperson_return.VIVO.tenderfoot
+uil-data:indiv_foafperson_return.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "volver a"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "indiv_foafperson_return" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "indiv_foafperson_return" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:menu_login.VIVO.tenderfoot
+uil-data:menu_login.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Iniciar sesión"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "menu_login" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_login" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:grant_date.VIVO.tenderfoot
+uil-data:grant_date.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Fecha de concesión"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "grant_date" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grant_date" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:intro_para2.VIVO.tenderfoot
+uil-data:intro_para2.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Explore o busque información sobre las personas, departamentos, cursos, becas y publicaciones."@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "intro_para2" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "intro_para2" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:identity_myaccount.VIVO.tenderfoot
+uil-data:identity_myaccount.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Mi cuenta"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "identity_myaccount" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_myaccount" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:full_name.VIVO.tenderfoot
+uil-data:full_name.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Nombre completo"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "full_name" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "full_name" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:years_participation_in.VIVO.tenderfoot
+uil-data:years_participation_in.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "Años de participación en"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "years_participation_in" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "years_participation_in" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
 
-prop-data:view_all_faculty.VIVO.tenderfoot
+uil-data:view_all_faculty.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
-        rdf:type         prop:PropertyKey ;
+        rdf:type         uil:UILabel ;
         rdfs:label       "ver todos los profesores"@es ;
-        prop:hasApp      "VIVO" ;
-        prop:hasKey      "view_all_faculty" ;
-        prop:hasPackage  "VIVO-languages" ;
-        prop:hasTheme    "tenderfoot" .
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "view_all_faculty" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .

@@ -42,11 +42,11 @@
 
                 <fieldset>
                     <legend>${i18n().search_form}</legend>
-                    <form id="search-homepage" action="${urls.search}" name="search-home" role="search" method="post" >
+                    <form id="search-homepage" action="${urls.search}" name="search-home" role="search" method="GET" >
                         <div id="search-home-field">
                             <input type="text" name="querytext" class="search-homepage" value="" autocapitalize="off" />
                             <input type="submit" value="${i18n().search_button}" class="search" />
-                            <input type="hidden" name="classgroup"  value="" autocapitalize="off" />
+                            <input type="hidden" name="filters_category"  value="" autocapitalize="off" />
                         </div>
 
                         <a class="filter-search filter-default" href="#" title="${i18n().intro_filtersearch}">
@@ -107,7 +107,7 @@
         };
         // set the 'limmit search' text and alignment
         if  ( $('input.search-homepage').css('text-align') == "right" ) {
-             $('input.search-homepage').attr("value","${i18n().limit_search} \u2192");
+             $('input.search-homepage').attr("placeholder","${i18n().limit_search} \u2192");
         }
     </script>
     </body>

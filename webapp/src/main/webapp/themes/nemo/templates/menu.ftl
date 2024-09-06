@@ -37,6 +37,7 @@
 				<input 
 					type="text" 
 					class="form-control" 
+                                        id="filter_input_querytext"
 					name="querytext" 
 					placeholder="${i18n().search_form}" 
 					autocapitalize="off" 
