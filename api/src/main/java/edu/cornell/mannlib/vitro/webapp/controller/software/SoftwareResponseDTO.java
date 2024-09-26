@@ -24,4 +24,6 @@ public class SoftwareResponseDTO {
     public String sameAs;
 
     public String url;
+
+    public String keywords;
 }

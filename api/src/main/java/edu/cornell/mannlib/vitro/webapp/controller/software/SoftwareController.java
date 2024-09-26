@@ -75,7 +75,7 @@ public class SoftwareController extends HttpServlet {
             "      OPTIONAL { ?funderObject vivo:assignedBy ?funder }\n" +
             "      OPTIONAL { ?funderObject rdfs:label ?funding }\n" +
             "    }\n" +
-            "    OPTIONAL { ?software vivo:freetextKeywords ?keywords }\n" +
+            "    OPTIONAL { ?software vivo:freetextKeyword ?keywords }\n" +
             "    OPTIONAL { ?software obo:ERO_0000072 ?version }\n" +
             "    OPTIONAL { ?software bibo:abstract ?abstract }\n" +
             "    OPTIONAL { ?software vivo:swhid ?identifier }\n" +
@@ -130,7 +130,7 @@ public class SoftwareController extends HttpServlet {
             "      OPTIONAL { ?funderObject vivo:assignedBy ?funder }\n" +
             "      OPTIONAL { ?funderObject rdfs:label ?funding }\n" +
             "    }\n" +
-            "    OPTIONAL { ?software vivo:freetextKeywords ?keywords }\n" +
+            "    OPTIONAL { ?software vivo:freetextKeyword ?keywords }\n" +
             "    OPTIONAL { ?software obo:ERO_0000072 ?version }\n" +
             "    OPTIONAL { ?software bibo:abstract ?abstract }\n" +
             "    OPTIONAL { ?software vivo:swhid ?identifier }\n" +
@@ -259,6 +259,7 @@ public class SoftwareController extends HttpServlet {
             software.sameAs = binding.getOrDefault("sameAs", null);
             software.identifier = binding.getOrDefault("identifier", null);
             software.url = binding.getOrDefault("url", null);
+            software.keywords = binding.getOrDefault("keywords", null);
 
             String dateTimeString = binding.getOrDefault("datePublished", null);
             if (Objects.nonNull(dateTimeString)) {
