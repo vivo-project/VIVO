@@ -26,4 +26,8 @@ public class SoftwareResponseDTO {
     public String url;
 
     public String keywords;
+
+    public String isPartOf;
+
+    public String hasPart;
 }

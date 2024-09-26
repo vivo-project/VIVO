@@ -78,6 +78,8 @@ public class SoftwareController extends HttpServlet {
             "    OPTIONAL { ?software vivo:freetextKeyword ?keywords }\n" +
             "    OPTIONAL { ?software obo:ERO_0000072 ?version }\n" +
             "    OPTIONAL { ?software bibo:abstract ?abstract }\n" +
+            "    OPTIONAL { ?software obo:BFO_0000050 ?isPartOf }\n" +
+            "    OPTIONAL { ?software obo:BFO_0000050 ?hasPart }\n" +
             "    OPTIONAL { ?software vivo:swhid ?identifier }\n" +
             "    OPTIONAL { ?software owl:sameAs ?sameAsObject .\n" +
             "        OPTIONAL { ?sameAsObject rdfs:label ?sameAs }\n" +
@@ -133,6 +135,8 @@ public class SoftwareController extends HttpServlet {
             "    OPTIONAL { ?software vivo:freetextKeyword ?keywords }\n" +
             "    OPTIONAL { ?software obo:ERO_0000072 ?version }\n" +
             "    OPTIONAL { ?software bibo:abstract ?abstract }\n" +
+            "    OPTIONAL { ?software obo:BFO_0000050 ?isPartOf }\n" +
+            "    OPTIONAL { ?software obo:BFO_0000050 ?hasPart }\n" +
             "    OPTIONAL { ?software vivo:swhid ?identifier }\n" +
             "    OPTIONAL { ?software owl:sameAs ?sameAsObject .\n" +
             "        OPTIONAL { ?sameAsObject rdfs:label ?sameAs }\n" +
@@ -260,6 +264,8 @@ public class SoftwareController extends HttpServlet {
             software.identifier = binding.getOrDefault("identifier", null);
             software.url = binding.getOrDefault("url", null);
             software.keywords = binding.getOrDefault("keywords", null);
+            software.isPartOf = binding.getOrDefault("isPartOf", null);
+            software.hasPart = binding.getOrDefault("hasPart", null);
 
             String dateTimeString = binding.getOrDefault("datePublished", null);
             if (Objects.nonNull(dateTimeString)) {
