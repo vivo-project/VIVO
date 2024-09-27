@@ -3,7 +3,7 @@ package edu.cornell.mannlib.vitro.webapp.controller.software;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SoftwareResponseDTO {
+public class SoftwareRequestDTO {
 
     public String internalIdentifier;
 
@@ -21,13 +21,5 @@ public class SoftwareResponseDTO {
 
     public String identifier;
 
-    public String sameAs;
-
-    public String url;
-
     public String keywords;
-
-    public String isPartOf;
-
-    public String hasPart;
 }

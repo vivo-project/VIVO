@@ -1,6 +1,6 @@
 package edu.cornell.mannlib.vitro.webapp.controller.software;
 
-public class AuthorResponseDTO {
+public class AuthorDTO {
 
     public String name;
 
