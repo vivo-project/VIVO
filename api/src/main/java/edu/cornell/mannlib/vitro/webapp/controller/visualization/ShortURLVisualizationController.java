@@ -20,6 +20,7 @@ import org.apache.jena.query.Syntax;
 import org.apache.jena.rdf.model.Model;
 
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;
+import edu.cornell.mannlib.vitro.webapp.config.ContextPath;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
@@ -245,7 +246,7 @@ public class ShortURLVisualizationController extends FreemarkerHttpServlet {
 	private List<String> extractShortURLParameters(VitroRequest vitroRequest) {
 
 		List<String> matchedGroups = new ArrayList<String>();
-		String subURIString = vitroRequest.getRequestURI().substring(vitroRequest.getContextPath().length()+1);
+		String subURIString = vitroRequest.getRequestURI().substring(ContextPath.getPath(vitroRequest).length()+1);
 		String[] urlParams = StringEscapeUtils.ESCAPE_HTML4.translate(subURIString).split("/");
 
 		if (urlParams.length > 1
