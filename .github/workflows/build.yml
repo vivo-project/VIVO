@@ -30,4 +30,4 @@ jobs:
       - name: Maven Build
         run: |
           cd ../VIVO
-          mvn clean package -s installer/example-settings.xml
+          mvn clean install

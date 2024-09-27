@@ -21,7 +21,8 @@ utilities/rdbmigration/.work
 **/.project
 **/bin/
 
-vivo-cores/
+vivo-solr/*
+!vivo-solr/solr.xml
 vivo-home/
 
 .fake

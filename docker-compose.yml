@@ -1,48 +1,52 @@
-version: '3.2'
+networks:
+  net:
 
 services:
 
-  vivo-solr:
-    container_name: vivo-solr
+  solr:
     image: vivoweb/vivo-solr:latest
+    container_name: vivo-solr
+    hostname: solr
     environment:
-      - RESET_CORE=${SOLR_RESET_CORE}
-      - VERBOSE=${SOLR_VERBOSE}
+      - VERBOSE=${VERBOSE}
+      - RESET_CORE=${RESET_CORE}
     ports:
-      - ${SOLR_HOST_PORT}:${SOLR_CONTAINER_PORT}
+      - ${LOCAL_SOLR_PORT}:8983
     volumes:
-      - ${SOLR_CORES}:/opt/solr/server/solr/mycores
+      - ${LOCAL_SOLR_DATA}:/var/solr/data
     networks:
-      - vivoweb
+      - net
     healthcheck:
-      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8983/solr/vivocore/admin/ping || exit 1"]
-      interval: 15s
-      timeout: 5s
+      test: ["CMD", "curl", "--silent", "--fail", "http://localhost:8983/solr/vivocore/admin/ping"]
+      start_period: 5s
+      interval: 5s
+      timeout: 10s
       retries: 3
 
-  vivo:
+  tomcat:
     container_name: vivo
-    image: vivoweb/vivo:latest
     hostname: vivo
     build:
       context: ./
       dockerfile: Dockerfile
-      args:
-        - TDB_FILE_MODE=${VIVO_TDB_FILE_MODE}
-        - VIVO_HOME=${VIVO_CONTAINER_VIVO_HOME}
-        - SOLR_URL=http://vivo-solr:${SOLR_CONTAINER_PORT}/solr/vivocore
     environment:
-      - RESET_HOME=${VIVO_RESET_HOME}
-      - VERBOSE=${VIVO_VERBOSE}
+      - VERBOSE=${VERBOSE}
+      - RESET_HOME=${RESET_HOME}
+      - VIVO_HOME=${VIVO_HOME}
+      - SOLR_URL=http://solr:8983/solr/vivocore
+      - LANGUAGE_FILTER_ENABLED=true
+      - SELECTABLE_LOCALES=en_US,de_DE,sr_Latn_RS,ru_RU,fr_CA,en_CA,es,pt_BR
+      - LOAD_SAMPLE_DATA=false
+      - SAMPLE_DATA_REPO_URL=https://github.com/chenejac/sample-data.git
+      - SAMPLE_DATA_BRANCH=reorganization
+      - SAMPLE_DATA_DIRECTORY=openvivo
+      - CATALINA_OPTS=-Xms2048M -Xmx8192M
     ports:
-      - ${VIVO_HOST_PORT}:${VIVO_CONTAINER_PORT}
+      - ${LOCAL_VIVO_PORT}:8080
     volumes:
-      - ${VIVO_HOST_VIVO_HOME}:${VIVO_CONTAINER_VIVO_HOME}
-    networks:
-      - vivoweb
+      - ${LOCAL_VIVO_HOME}:${VIVO_HOME}
     depends_on:
-      vivo-solr:
+      solr:
         condition: service_healthy
-
-networks:
-  vivoweb:
+    networks:
+      - net
