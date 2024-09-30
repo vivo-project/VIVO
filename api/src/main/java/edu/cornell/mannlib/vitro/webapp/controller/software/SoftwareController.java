@@ -705,7 +705,7 @@ public class SoftwareController extends VitroApiServlet {
         e.printStackTrace(w);
     }
 
-    private void authorise(HttpServletRequest req) {
+    private void authorise(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
             confirmAuthorization(req, REQUIRED_ACTIONS);
         } catch (AuthException e) {
