@@ -7,19 +7,21 @@ public class SoftwareResponseDTO {
 
     public String internalIdentifier;
 
-    public String label;
+    public String name;
 
     public String datePublished;
 
     public List<AuthorDTO> authors = new ArrayList<>();
 
-    public List<FundingDTO> funding = new ArrayList<>();
+    public List<String> fundings = new ArrayList<>();
+
+    public List<FunderDTO> funders = new ArrayList<>();
 
     public String version;
 
     public String description;
 
-    public String identifier;
+    public List<String> identifiers = new ArrayList<>();
 
     public String sameAs;
 

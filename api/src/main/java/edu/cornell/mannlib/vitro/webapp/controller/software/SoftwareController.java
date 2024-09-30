@@ -1,10 +1,11 @@
 package edu.cornell.mannlib.vitro.webapp.controller.software;
 
-import static javax.servlet.http.HttpServletResponse.SC_FORBIDDEN;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,8 +15,10 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.BiConsumer;
+import java.util.regex.Pattern;
 
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,16 +29,18 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import edu.cornell.mannlib.vitro.webapp.application.ApplicationUtils;
 import edu.cornell.mannlib.vitro.webapp.auth.permissions.SimplePermission;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;
+import edu.cornell.mannlib.vitro.webapp.beans.ApplicationBean;
 import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.controller.api.VitroApiServlet;
 import edu.cornell.mannlib.vitro.webapp.controller.api.sparqlquery.InvalidQueryTypeException;
 import edu.cornell.mannlib.vitro.webapp.controller.api.sparqlquery.SparqlQueryApiExecutor;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.RDFServiceDataset;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.modules.searchIndexer.SearchIndexer;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.jena.ontology.OntModel;
@@ -53,13 +58,11 @@ import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateRequest;
 
 @WebServlet(name = "softwareController", urlPatterns = {"/software", "/software/*"}, loadOnStartup = 5)
-public class SoftwareController extends VitroApiServlet {
+public class SoftwareController extends FreemarkerHttpServlet {
 
     private static final Log log = LogFactory.getLog(SoftwareController.class);
 
     private static final String CREATED_GRAPH_BASE_URI = "http://vitro.mannlib.cornell.edu/a/graph/";
-
-    private static final AuthorizationRequest REQUIRED_ACTIONS = SimplePermission.USE_SPARQL_UPDATE_API.ACTION;
 
     private final String FIND_ALL_QUERY =
         "PREFIX rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
@@ -82,7 +85,7 @@ public class SoftwareController extends VitroApiServlet {
             "PREFIX vcard:    <http://www.w3.org/2006/vcard/ns#>\n" +
             "\n" +
             "SELECT ?software ?label ?author ?authorType ?authorIdentifier ?datePublished ?funding ?funder ?keywords " +
-            "?version ?abstract ?identifier ?sameAs ?url\n" +
+            "?version ?abstract ?identifier ?doi ?sameAs ?url\n" +
             "WHERE\n" +
             "{\n" +
             "    ?software rdf:type obo:ERO_0000071\n" +
@@ -100,7 +103,10 @@ public class SoftwareController extends VitroApiServlet {
             "        OPTIONAL { ?dateObject vivo:dateTime ?datePublished }\n" +
             "    }\n" +
             "    OPTIONAL { ?software vivo:informationResourceSupportedBy ?funderObject .\n" +
-            "      OPTIONAL { ?funderObject vivo:assignedBy ?funder }\n" +
+            "      OPTIONAL { ?funderObject vivo:assignedBy ?funderObject ." +
+            "        OPTIONAL { ?dateObject rdfs:label ?funder }\n" +
+            "        OPTIONAL { ?dateObject vitro:mostSpecificType ?funderType }\n" +
+            "    }\n" +
             "      OPTIONAL { ?funderObject rdfs:label ?funding }\n" +
             "    }\n" +
             "    OPTIONAL { ?software vivo:freetextKeyword ?keywords }\n" +
@@ -109,6 +115,7 @@ public class SoftwareController extends VitroApiServlet {
             "    OPTIONAL { ?software obo:BFO_0000050 ?isPartOf }\n" +
             "    OPTIONAL { ?software obo:BFO_0000050 ?hasPart }\n" +
             "    OPTIONAL { ?software vivo:swhid ?identifier }\n" +
+            "    OPTIONAL { ?software bibo:doi ?doi }\n" +
             "    OPTIONAL { ?software owl:sameAs ?sameAsObject .\n" +
             "        OPTIONAL { ?sameAsObject rdfs:label ?sameAs }\n" +
             "    }\n" +
@@ -138,7 +145,7 @@ public class SoftwareController extends VitroApiServlet {
             "PREFIX vcard:    <http://www.w3.org/2006/vcard/ns#>\n" +
             "\n" +
             "SELECT ?software ?label ?author ?authorType ?authorIdentifier ?datePublished ?funding ?funder ?keywords " +
-            "?version ?abstract ?identifier ?sameAs ?url\n" +
+            "?version ?abstract ?identifier ?doi ?sameAs ?url\n" +
             "WHERE\n" +
             "{\n" +
             "    BIND (<%s> AS ?software)\n" +
@@ -157,7 +164,10 @@ public class SoftwareController extends VitroApiServlet {
             "        OPTIONAL { ?dateObject vivo:dateTime ?datePublished }\n" +
             "    }\n" +
             "    OPTIONAL { ?software vivo:informationResourceSupportedBy ?funderObject .\n" +
-            "      OPTIONAL { ?funderObject vivo:assignedBy ?funder }\n" +
+            "      OPTIONAL { ?funderObject vivo:assignedBy ?funderObject ." +
+            "        OPTIONAL { ?dateObject rdfs:label ?funder }\n" +
+            "        OPTIONAL { ?dateObject vitro:mostSpecificType ?funderType }\n" +
+            "    }\n" +
             "      OPTIONAL { ?funderObject rdfs:label ?funding }\n" +
             "    }\n" +
             "    OPTIONAL { ?software vivo:freetextKeyword ?keywords }\n" +
@@ -166,6 +176,7 @@ public class SoftwareController extends VitroApiServlet {
             "    OPTIONAL { ?software obo:BFO_0000050 ?isPartOf }\n" +
             "    OPTIONAL { ?software obo:BFO_0000050 ?hasPart }\n" +
             "    OPTIONAL { ?software vivo:swhid ?identifier }\n" +
+            "    OPTIONAL { ?software bibo:doi ?doi }\n" +
             "    OPTIONAL { ?software owl:sameAs ?sameAsObject .\n" +
             "        OPTIONAL { ?sameAsObject rdfs:label ?sameAs }\n" +
             "    }\n" +
@@ -296,7 +307,9 @@ public class SoftwareController extends VitroApiServlet {
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-//        authorise(req);
+        if (!isAuthorizedToDisplayPage(req, resp, requiredActions(new VitroRequest(req)))) {
+            return;
+        }
 
         executeWithTransaction(req, resp, (graphStore, softwareUri) -> {
 
@@ -321,6 +334,7 @@ public class SoftwareController extends VitroApiServlet {
 
             softwareDTO.internalIdentifier = softwareUri;
             try {
+                resp.setContentType("application/json");
                 resp.getWriter().println(serializeToJSON(softwareDTO));
             } catch (IOException e) {
                 try {
@@ -335,18 +349,61 @@ public class SoftwareController extends VitroApiServlet {
 
     @Override
     public void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        //        authorise(req);
+        if (!isAuthorizedToDisplayPage(req, resp, requiredActions(new VitroRequest(req)))) {
+            return;
+        }
 
-        executeWithTransaction(req, resp, (graphStore, softwareUri) -> {
-            String deleteQuery = String.format(DELETE_SOFTWARE_QUERY_TEMPLATE, softwareUri);
-            executeUpdate(graphStore, deleteQuery);
-            resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-        });
+        String pathInfo = req.getPathInfo();
+        if (Objects.isNull(pathInfo) || pathInfo.isEmpty()) {
+            do400BadRequest("You have to provide a record identifier.", resp);
+            return;
+        }
+
+        VitroRequest vreq = new VitroRequest(req);
+        ApplicationBean appBean = vreq.getAppBean();
+        String appName = appBean.getApplicationName().toLowerCase();
+        URL url = new URL("http://" + req.getServerName() + ":" + req.getServerPort() + "/" + appName +
+            "/deleteIndividualController?individualUri=" +
+            URLEncoder.encode(buildSoftwareUri(pathInfo.substring(1))) + "&redirectUrl=%2F");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+        connection.setRequestProperty("Accept", "application/json");
+
+        addCookiesToRequest(req, connection);
+
+        connection.getResponseCode();
+
+        resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+
+        connection.disconnect();
+
+//        executeWithTransaction(req, resp, (graphStore, softwareUri) -> {
+//            String deleteQuery = String.format(DELETE_SOFTWARE_QUERY_TEMPLATE, softwareUri);
+//            executeUpdate(graphStore, deleteQuery);
+//            resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+//        });
+    }
+
+    private void addCookiesToRequest(HttpServletRequest req, HttpURLConnection connection) {
+        Cookie[] cookies = req.getCookies();
+        if (cookies != null) {
+            StringBuilder cookieHeader = new StringBuilder();
+            for (Cookie cookie : cookies) {
+                cookieHeader.append(cookie.getName()).append("=").append(cookie.getValue()).append("; ");
+            }
+            // Remove the trailing "; " at the end of the cookie string
+            if (cookieHeader.length() > 0) {
+                cookieHeader.setLength(cookieHeader.length() - 2);
+            }
+            connection.setRequestProperty("Cookie", cookieHeader.toString());
+        }
     }
 
     @Override
     public void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        //        authorise(req);
+        if (!isAuthorizedToDisplayPage(req, resp, requiredActions(new VitroRequest(req)))) {
+            return;
+        }
 
         doDelete(req, resp);
 
@@ -369,7 +426,7 @@ public class SoftwareController extends VitroApiServlet {
     private String buildSoftwareUri(String softwareId) {
         String defaultNamespace =
             Objects.requireNonNull(ConfigurationProperties.getInstance().getProperty("Vitro.defaultNamespace"));
-        return defaultNamespace + softwareId;
+        return defaultNamespace + StringEscapeUtils.escapeJava(softwareId);
     }
 
     private void handleResponseContentType(HttpServletRequest req, HttpServletResponse resp) {
@@ -406,7 +463,8 @@ public class SoftwareController extends VitroApiServlet {
         addSoftwareRelatedFields(insertSoftwareQuery, softwareDTO, softwareUri);
         addPublicationDate(insertSoftwareQuery, softwareDTO.datePublished, defaultNamespace, softwareUri);
         addAuthors(insertSoftwareQuery, softwareDTO.authors, defaultNamespace, softwareUri, ontModel);
-        addFunding(insertSoftwareQuery, softwareDTO.funding, defaultNamespace, softwareUri);
+        addFunding(insertSoftwareQuery, softwareDTO.fundings, defaultNamespace, softwareUri);
+        addFunders(insertSoftwareQuery, softwareDTO.funders, defaultNamespace, softwareUri);
 
         insertSoftwareQuery.append("    }\n").append("}\n");
 
@@ -486,13 +544,34 @@ public class SoftwareController extends VitroApiServlet {
     }
 
     private void addSoftwareRelatedFields(StringBuilder query, SoftwareRequestDTO softwareDTO, String softwareUri) {
-        query
-            .append("<").append(softwareUri).append("> rdf:type obo:ERO_0000071 ;\n")
-            .append("rdfs:label \"").append(softwareDTO.label).append("\" ;\n")
-            .append("vivo:freetextKeyword \"").append(softwareDTO.keywords).append("\" ;\n")
-            .append("obo:ERO_0000072 \"").append(softwareDTO.version).append("\" ;\n")
-            .append("bibo:abstract \"").append(softwareDTO.description).append("\" ;\n")
-            .append("vivo:swhid \"").append(softwareDTO.identifier).append("\" .\n");
+        query.append("<").append(softwareUri).append("> rdf:type obo:ERO_0000071 ;\n");
+
+        if (Objects.nonNull(softwareDTO.keywords) && !softwareDTO.keywords.isEmpty()) {
+            query.append("vivo:freetextKeyword \"").append(StringEscapeUtils.escapeJava(softwareDTO.keywords))
+                .append("\" ;\n");
+        }
+
+        if (Objects.nonNull(softwareDTO.version) && !softwareDTO.version.isEmpty()) {
+            query.append("obo:ERO_0000072 \"").append(StringEscapeUtils.escapeJava(softwareDTO.version))
+                .append("\" ;\n");
+        }
+
+        if (Objects.nonNull(softwareDTO.description) && !softwareDTO.description.isEmpty()) {
+            query.append("bibo:abstract \"").append(StringEscapeUtils.escapeJava(softwareDTO.description))
+                .append("\" ;\n");
+        }
+
+        String doiPattern = "^10\\.\\d{4,9}/[-,._;()/:A-Z0-9]+$";
+        Pattern compiledPattern = Pattern.compile(doiPattern, Pattern.CASE_INSENSITIVE);
+        for (String identifier : softwareDTO.identifiers) {
+            if (compiledPattern.matcher(identifier).matches()) {
+                query.append("bibo:doi \"").append(StringEscapeUtils.escapeJava(identifier)).append("\" ;\n");
+            } else {
+                query.append("vivo:swhid \"").append(StringEscapeUtils.escapeJava(identifier)).append("\" ;\n");
+            }
+        }
+
+        query.append("rdfs:label \"").append(StringEscapeUtils.escapeJava(softwareDTO.name)).append("\" .\n");
     }
 
     private void addAuthors(StringBuilder query, List<AuthorDTO> authors, String defaultNamespace, String documentUri,
@@ -507,7 +586,7 @@ public class SoftwareController extends VitroApiServlet {
                         "PREFIX vivo:     <http://vivoweb.org/ontology/core#>\n" +
                         "PREFIX foaf:     <http://xmlns.com/foaf/0.1/>\n" +
                         "SELECT ?author WHERE { ?author rdf:type foaf:Person . ?author vivo:orcidId \"%s\" . }",
-                    author.identifier
+                    StringEscapeUtils.escapeJava(author.identifier)
                 );
 
                 try (QueryExecution qe = QueryExecutionFactory.create(checkAuthorQuery, ontModel)) {
@@ -526,11 +605,13 @@ public class SoftwareController extends VitroApiServlet {
             if (!personFound) {
                 authorUri = defaultNamespace + UUID.randomUUID();
 
-                query.append("<").append(authorUri).append("> rdf:type <").append(author.type).append("> ;\n")
-                    .append("rdfs:label \"").append(author.name).append("\" ;\n");
+                query.append("<").append(authorUri).append("> rdf:type <")
+                    .append(StringEscapeUtils.escapeJava(author.type)).append("> ;\n")
+                    .append("rdfs:label \"").append(StringEscapeUtils.escapeJava(author.name)).append("\" ;\n");
 
                 if (author.identifier != null && !author.identifier.isEmpty() && author.type.endsWith("Person")) {
-                    query.append("vivo:orcidId \"").append(author.identifier).append("\" ;\n");
+                    query.append("vivo:orcidId \"").append(StringEscapeUtils.escapeJava(author.identifier))
+                        .append("\" ;\n");
                 }
 
                 query.append(".\n");
@@ -552,24 +633,41 @@ public class SoftwareController extends VitroApiServlet {
             query.append("<").append(documentUri).append("> vivo:dateTimeValue <")
                 .append(dateObjectUri).append("> .\n")
                 .append("<").append(dateObjectUri).append("> rdf:type vivo:DateTimeValue ;\n")
-                .append("vivo:dateTime \"").append(dateString).append("\"^^xsd:date .\n");
+                .append("vivo:dateTime \"").append(StringEscapeUtils.escapeJava(dateString)).append("\"^^xsd:date .\n");
         }
     }
 
-    private void addFunding(StringBuilder query, List<FundingDTO> fundings, String defaultNamespace,
+    private void addFunding(StringBuilder query, List<String> fundings, String defaultNamespace,
                             String documentUri) {
-        for (FundingDTO funding : fundings) {
+        for (String funding : fundings) {
             String funderObjectUri = defaultNamespace + UUID.randomUUID();
 
             query.append("<").append(documentUri).append("> vivo:informationResourceSupportedBy <")
                 .append(funderObjectUri).append("> .\n")
                 .append("<").append(funderObjectUri).append("> rdf:type vivo:Funding ;\n");
 
-            if (funding.funder != null && !funding.funder.isEmpty()) {
-                query.append("vivo:assignedBy <").append(funding.funder).append("> ;\n");
-            }
+            query.append("rdfs:label \"").append(StringEscapeUtils.escapeJava(funding)).append("\" .\n");
+        }
+    }
 
-            query.append("rdfs:label \"").append(funding.funding).append("\" .\n");
+    private void addFunders(StringBuilder query, List<FunderDTO> funders, String defaultNamespace,
+                            String documentUri) {
+        for (FunderDTO funder : funders) {
+            String fundingObjectUri = defaultNamespace + UUID.randomUUID();
+            String funderObjectUri = defaultNamespace + UUID.randomUUID();
+
+            query.append("<").append(documentUri).append("> vivo:informationResourceSupportedBy <")
+                .append(fundingObjectUri).append("> .\n")
+                .append("<").append(fundingObjectUri).append("> rdf:type vivo:Funding .\n");
+
+            if (funder.name != null && !funder.name.isEmpty()) {
+                query
+                    .append("<").append(funderObjectUri).append("> rdf:type <")
+                    .append(StringEscapeUtils.escapeJava(funder.type)).append("> ;\n")
+                    .append("rdfs:label \"").append(StringEscapeUtils.escapeJava(funder.name)).append("\" .\n")
+                    .append("<").append(fundingObjectUri).append("> vivo:assignedBy <")
+                    .append(funderObjectUri).append("> .\n");
+            }
         }
     }
 
@@ -608,16 +706,27 @@ public class SoftwareController extends VitroApiServlet {
             if (existingRecord.isPresent()) {
                 addAuthorToSoftware(binding, existingRecord.get());
                 addFundingToSoftware(binding, existingRecord.get());
+                addFundersToSoftware(binding, existingRecord.get());
                 continue;
             }
 
             SoftwareResponseDTO software = new SoftwareResponseDTO();
             software.internalIdentifier = binding.getOrDefault("software", null);
-            software.label = binding.getOrDefault("label", null);
+            software.name = binding.getOrDefault("label", null);
             software.description = binding.getOrDefault("abstract", null);
             software.version = binding.getOrDefault("version", null);
             software.sameAs = binding.getOrDefault("sameAs", null);
-            software.identifier = binding.getOrDefault("identifier", null);
+
+            String swhid = binding.getOrDefault("identifier", null);
+            if (Objects.nonNull(swhid)) {
+                software.identifiers.add(swhid);
+            }
+
+            String doi = binding.getOrDefault("doi", null);
+            if (Objects.nonNull(doi)) {
+                software.identifiers.add(doi);
+            }
+
             software.url = binding.getOrDefault("url", null);
             software.keywords = binding.getOrDefault("keywords", null);
             software.isPartOf = binding.getOrDefault("isPartOf", null);
@@ -630,6 +739,7 @@ public class SoftwareController extends VitroApiServlet {
 
             addAuthorToSoftware(binding, software);
             addFundingToSoftware(binding, software);
+            addFundersToSoftware(binding, software);
 
             softwareResponse.add(software);
         }
@@ -654,22 +764,30 @@ public class SoftwareController extends VitroApiServlet {
     }
 
     private void addFundingToSoftware(Map<String, String> binding, SoftwareResponseDTO software) {
-        if (!Objects.nonNull(binding.get("funding")) && !Objects.nonNull(binding.get("funder"))) {
+        if (!Objects.nonNull(binding.get("funding"))) {
             return;
         }
 
-        if (software.funding.stream().anyMatch(funding -> funding.funding.equals(binding.get("funding")))) {
+        if (software.fundings.stream().anyMatch(funding -> funding.equals(binding.get("funding")))) {
             return;
         }
 
-        if (software.funding.stream().anyMatch(funding -> funding.funder.equals(binding.get("funder")))) {
+        software.fundings.add(binding.get("funding"));
+    }
+
+    private void addFundersToSoftware(Map<String, String> binding, SoftwareResponseDTO software) {
+        if (!Objects.nonNull(binding.get("funder"))) {
             return;
         }
 
-        FundingDTO funding = new FundingDTO();
-        funding.funding = binding.getOrDefault("funding", null);
-        funding.funder = binding.getOrDefault("funder", null);
-        software.funding.add(funding);
+        if (software.funders.stream().anyMatch(funder -> funder.name.equals(binding.get("funder")))) {
+            return;
+        }
+
+        FunderDTO funder = new FunderDTO();
+        funder.name = binding.get("funder");
+        funder.type = binding.getOrDefault("funderType", null);
+        software.funders.add(funder);
     }
 
     private String getSparqlQueryResponse(SparqlQueryApiExecutor core) throws IOException, RDFServiceException {
@@ -705,11 +823,8 @@ public class SoftwareController extends VitroApiServlet {
         e.printStackTrace(w);
     }
 
-    private void authorise(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        try {
-            confirmAuthorization(req, REQUIRED_ACTIONS);
-        } catch (AuthException e) {
-            sendShortResponse(SC_FORBIDDEN, e.getMessage(), resp);
-        }
+    @Override
+    protected AuthorizationRequest requiredActions(VitroRequest vreq) {
+        return SimplePermission.USE_SPARQL_UPDATE_API.ACTION;
     }
 }
