@@ -85,7 +85,7 @@ public class SoftwareController extends FreemarkerHttpServlet {
             "PREFIX vcard:    <http://www.w3.org/2006/vcard/ns#>\n" +
             "\n" +
             "SELECT ?software ?label ?author ?authorType ?authorIdentifier ?datePublished ?funding ?funder ?keywords " +
-            "?version ?abstract ?identifier ?doi ?sameAs ?url\n" +
+            "?version ?abstract ?identifier ?doi ?sameAs ?url ?funderType\n" +
             "WHERE\n" +
             "{\n" +
             "    ?software rdf:type obo:ERO_0000071\n" +
@@ -102,12 +102,12 @@ public class SoftwareController extends FreemarkerHttpServlet {
             "    OPTIONAL { ?software vivo:dateTimeValue ?dateObject .\n" +
             "        OPTIONAL { ?dateObject vivo:dateTime ?datePublished }\n" +
             "    }\n" +
-            "    OPTIONAL { ?software vivo:informationResourceSupportedBy ?funderObject .\n" +
-            "      OPTIONAL { ?funderObject vivo:assignedBy ?funderObject ." +
-            "        OPTIONAL { ?dateObject rdfs:label ?funder }\n" +
-            "        OPTIONAL { ?dateObject vitro:mostSpecificType ?funderType }\n" +
+            "    OPTIONAL { ?software vivo:informationResourceSupportedBy ?fundingObject .\n" +
+            "      OPTIONAL { ?fundingObject vivo:assignedBy ?funderObject ." +
+            "        OPTIONAL { ?funderObject rdfs:label ?funder }\n" +
+            "        OPTIONAL { ?funderObject vitro:mostSpecificType ?funderType }\n" +
             "    }\n" +
-            "      OPTIONAL { ?funderObject rdfs:label ?funding }\n" +
+            "      OPTIONAL { ?fundingObject rdfs:label ?funding }\n" +
             "    }\n" +
             "    OPTIONAL { ?software vivo:freetextKeyword ?keywords }\n" +
             "    OPTIONAL { ?software obo:ERO_0000072 ?version }\n" +
@@ -145,7 +145,7 @@ public class SoftwareController extends FreemarkerHttpServlet {
             "PREFIX vcard:    <http://www.w3.org/2006/vcard/ns#>\n" +
             "\n" +
             "SELECT ?software ?label ?author ?authorType ?authorIdentifier ?datePublished ?funding ?funder ?keywords " +
-            "?version ?abstract ?identifier ?doi ?sameAs ?url\n" +
+            "?version ?abstract ?identifier ?doi ?sameAs ?url ?funderType\n" +
             "WHERE\n" +
             "{\n" +
             "    BIND (<%s> AS ?software)\n" +
@@ -163,12 +163,12 @@ public class SoftwareController extends FreemarkerHttpServlet {
             "    OPTIONAL { ?software vivo:dateTimeValue ?dateObject .\n" +
             "        OPTIONAL { ?dateObject vivo:dateTime ?datePublished }\n" +
             "    }\n" +
-            "    OPTIONAL { ?software vivo:informationResourceSupportedBy ?funderObject .\n" +
-            "      OPTIONAL { ?funderObject vivo:assignedBy ?funderObject ." +
-            "        OPTIONAL { ?dateObject rdfs:label ?funder }\n" +
-            "        OPTIONAL { ?dateObject vitro:mostSpecificType ?funderType }\n" +
+            "    OPTIONAL { ?software vivo:informationResourceSupportedBy ?fundingObject .\n" +
+            "      OPTIONAL { ?fundingObject vivo:assignedBy ?funderObject ." +
+            "        OPTIONAL { ?funderObject rdfs:label ?funder }\n" +
+            "        OPTIONAL { ?funderObject vitro:mostSpecificType ?funderType }\n" +
             "    }\n" +
-            "      OPTIONAL { ?funderObject rdfs:label ?funding }\n" +
+            "      OPTIONAL { ?fundingObject rdfs:label ?funding }\n" +
             "    }\n" +
             "    OPTIONAL { ?software vivo:freetextKeyword ?keywords }\n" +
             "    OPTIONAL { ?software obo:ERO_0000072 ?version }\n" +
@@ -183,65 +183,6 @@ public class SoftwareController extends FreemarkerHttpServlet {
             "    OPTIONAL { ?software obo:ARG_2000028 ?contactInfo .\n" +
             "        OPTIONAL { ?contactInfo vcard:hasURL ?url }\n" +
             "    }\n" +
-            "}\n";
-
-    private final String DELETE_SOFTWARE_QUERY_TEMPLATE =
-        "PREFIX rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-            "PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>\n" +
-            "PREFIX xsd:      <http://www.w3.org/2001/XMLSchema#>\n" +
-            "PREFIX owl:      <http://www.w3.org/2002/07/owl#>\n" +
-            "PREFIX swrl:     <http://www.w3.org/2003/11/swrl#>\n" +
-            "PREFIX swrlb:    <http://www.w3.org/2003/11/swrlb#>\n" +
-            "PREFIX vitro:    <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>\n" +
-            "PREFIX bibo:     <http://purl.org/ontology/bibo/>\n" +
-            "PREFIX c4o:      <http://purl.org/spar/c4o/>\n" +
-            "PREFIX cito:     <http://purl.org/spar/cito/>\n" +
-            "PREFIX dcterms:  <http://purl.org/dc/terms/>\n" +
-            "PREFIX event:    <http://purl.org/NET/c4dm/event.owl#>\n" +
-            "PREFIX fabio:    <http://purl.org/spar/fabio/>\n" +
-            "PREFIX foaf:     <http://xmlns.com/foaf/0.1/>\n" +
-            "PREFIX geo:      <http://aims.fao.org/aos/geopolitical.owl#>\n" +
-            "PREFIX obo:      <http://purl.obolibrary.org/obo/>\n" +
-            "PREFIX vivo:     <http://vivoweb.org/ontology/core#>\n" +
-            "PREFIX vcard:    <http://www.w3.org/2006/vcard/ns#>\n" +
-            "\n" +
-            "DELETE\n" +
-            "{\n" +
-            "    ?software vivo:dateTimeValue ?dateObject .\n" +
-            "    ?dateObject ?p1 ?o1 .\n" +
-            "    ?software vivo:relatedBy ?relatedObject .\n" +
-            "    ?relatedObject rdf:type vivo:Authorship .\n" +
-            "    ?relatedObject ?p2 ?o2 .\n" +
-            "    ?software vivo:informationResourceSupportedBy ?funderObject .\n" +
-            "    ?funderObject ?p3 ?o3 .\n" +
-            "    ?software obo:ARG_2000028 ?contactInfo .\n" +
-            "    ?contactInfo ?p4 ?o4 .\n" +
-            "    ?software rdfs:label ?label .\n" +
-            "    ?software vivo:freetextKeyword ?keywords .\n" +
-            "    ?software obo:ERO_0000072 ?version .\n" +
-            "    ?software bibo:abstract ?abstract .\n" +
-            "    ?software vivo:swhid ?identifier .\n" +
-            "    ?software owl:sameAs ?sameAsObject .\n" +
-            "    ?sameAsObject rdfs:label ?sameAs .\n" +
-            "    ?software obo:ARG_2000028 ?contactInfo .\n" +
-            "    ?contactInfo vcard:hasURL ?url .\n" +
-            "}\n" +
-            "WHERE\n" +
-            "{\n" +
-            "    BIND (<%s> AS ?software)\n" +
-            "    OPTIONAL { ?software vivo:dateTimeValue ?dateObject . OPTIONAL { ?dateObject ?p1 ?o1 } }\n" +
-            "    OPTIONAL { ?software vivo:relatedBy ?relatedObject . ?relatedObject rdf:type vivo:Authorship .\n" +
-            "    OPTIONAL { ?relatedObject ?p2 ?o2 } }\n" +
-            "    OPTIONAL { ?software vivo:informationResourceSupportedBy ?funderObject .\n" +
-            "    OPTIONAL { ?funderObject ?p3 ?o3 } }\n" +
-            "    OPTIONAL { ?software obo:ARG_2000028 ?contactInfo .\n" +
-            "    OPTIONAL { ?contactInfo ?p4 ?o4 } OPTIONAL { ?contactInfo vcard:hasURL ?url } }\n" +
-            "    OPTIONAL { ?software rdfs:label ?label }\n" +
-            "    OPTIONAL { ?software vivo:freetextKeyword ?keywords }\n" +
-            "    OPTIONAL { ?software obo:ERO_0000072 ?version }\n" +
-            "    OPTIONAL { ?software bibo:abstract ?abstract }\n" +
-            "    OPTIONAL { ?software vivo:swhid ?identifier }\n" +
-            "    OPTIONAL { ?software owl:sameAs ?sameAsObject . OPTIONAL { ?sameAsObject rdfs:label ?sameAs } }\n" +
             "}\n";
 
 
@@ -376,12 +317,6 @@ public class SoftwareController extends FreemarkerHttpServlet {
         resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
 
         connection.disconnect();
-
-//        executeWithTransaction(req, resp, (graphStore, softwareUri) -> {
-//            String deleteQuery = String.format(DELETE_SOFTWARE_QUERY_TEMPLATE, softwareUri);
-//            executeUpdate(graphStore, deleteQuery);
-//            resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-//        });
     }
 
     private void addCookiesToRequest(HttpServletRequest req, HttpURLConnection connection) {
@@ -571,7 +506,7 @@ public class SoftwareController extends FreemarkerHttpServlet {
             }
         }
 
-        query.append("rdfs:label \"").append(StringEscapeUtils.escapeJava(softwareDTO.name)).append("\" .\n");
+        query.append("rdfs:label \"").append(StringEscapeUtils.escapeJava(softwareDTO.name)).append("\"@en-US .\n");
     }
 
     private void addAuthors(StringBuilder query, List<AuthorDTO> authors, String defaultNamespace, String documentUri,
@@ -607,7 +542,7 @@ public class SoftwareController extends FreemarkerHttpServlet {
 
                 query.append("<").append(authorUri).append("> rdf:type <")
                     .append(StringEscapeUtils.escapeJava(author.type)).append("> ;\n")
-                    .append("rdfs:label \"").append(StringEscapeUtils.escapeJava(author.name)).append("\" ;\n");
+                    .append("rdfs:label \"").append(StringEscapeUtils.escapeJava(author.name)).append("\"@en-US ;\n");
 
                 if (author.identifier != null && !author.identifier.isEmpty() && author.type.endsWith("Person")) {
                     query.append("vivo:orcidId \"").append(StringEscapeUtils.escapeJava(author.identifier))
@@ -646,28 +581,33 @@ public class SoftwareController extends FreemarkerHttpServlet {
                 .append(funderObjectUri).append("> .\n")
                 .append("<").append(funderObjectUri).append("> rdf:type vivo:Funding ;\n");
 
-            query.append("rdfs:label \"").append(StringEscapeUtils.escapeJava(funding)).append("\" .\n");
+            query.append("rdfs:label \"").append(StringEscapeUtils.escapeJava(funding)).append("\"@en-US .\n");
         }
     }
 
     private void addFunders(StringBuilder query, List<FunderDTO> funders, String defaultNamespace,
                             String documentUri) {
         for (FunderDTO funder : funders) {
-            String fundingObjectUri = defaultNamespace + UUID.randomUUID();
+            if (Objects.isNull(funder.name) || funder.name.isEmpty()) {
+                continue;
+            }
+
+            String grantObjectUri = defaultNamespace + UUID.randomUUID();
             String funderObjectUri = defaultNamespace + UUID.randomUUID();
 
             query.append("<").append(documentUri).append("> vivo:informationResourceSupportedBy <")
-                .append(fundingObjectUri).append("> .\n")
-                .append("<").append(fundingObjectUri).append("> rdf:type vivo:Funding .\n");
+                .append(grantObjectUri).append("> .\n")
+                .append("<").append(grantObjectUri).append("> rdf:type vivo:Grant ;\n")
+                .append("rdfs:label \"").append(StringEscapeUtils.escapeJava(funder.name)).append(" Grant")
+                .append("\"@en-US .\n");
 
-            if (funder.name != null && !funder.name.isEmpty()) {
-                query
-                    .append("<").append(funderObjectUri).append("> rdf:type <")
-                    .append(StringEscapeUtils.escapeJava(funder.type)).append("> ;\n")
-                    .append("rdfs:label \"").append(StringEscapeUtils.escapeJava(funder.name)).append("\" .\n")
-                    .append("<").append(fundingObjectUri).append("> vivo:assignedBy <")
-                    .append(funderObjectUri).append("> .\n");
-            }
+            query
+                .append("<").append(funderObjectUri).append("> rdf:type <")
+                .append(StringEscapeUtils.escapeJava(funder.type)).append("> ;\n")
+                .append("rdfs:label \"").append(StringEscapeUtils.escapeJava(funder.name)).append("\"@en-US .\n")
+                .append("<").append(grantObjectUri).append("> vivo:assignedBy <")
+                .append(funderObjectUri).append("> .\n");
+
         }
     }
 
