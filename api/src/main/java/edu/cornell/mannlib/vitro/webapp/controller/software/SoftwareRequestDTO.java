@@ -18,7 +18,7 @@ public class SoftwareRequestDTO {
 
     public List<String> fundings = new ArrayList<>();
 
-    public List<FunderDTO> funders = new ArrayList<>();
+    public List<FunderRequestDTO> funders = new ArrayList<>();
 
     public String version;
 

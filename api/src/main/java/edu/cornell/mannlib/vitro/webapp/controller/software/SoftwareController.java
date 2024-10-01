@@ -585,10 +585,11 @@ public class SoftwareController extends FreemarkerHttpServlet {
         }
     }
 
-    private void addFunders(StringBuilder query, List<FunderDTO> funders, String defaultNamespace,
+    private void addFunders(StringBuilder query, List<FunderRequestDTO> funders, String defaultNamespace,
                             String documentUri) {
-        for (FunderDTO funder : funders) {
-            if (Objects.isNull(funder.name) || funder.name.isEmpty()) {
+        for (FunderRequestDTO funder : funders) {
+            if (Objects.isNull(funder.name) || funder.name.isEmpty() || Objects.isNull(funder.type) ||
+                funder.type.isEmpty()) {
                 continue;
             }
 
@@ -597,8 +598,15 @@ public class SoftwareController extends FreemarkerHttpServlet {
 
             query.append("<").append(documentUri).append("> vivo:informationResourceSupportedBy <")
                 .append(grantObjectUri).append("> .\n")
-                .append("<").append(grantObjectUri).append("> rdf:type vivo:Grant ;\n")
-                .append("rdfs:label \"").append(StringEscapeUtils.escapeJava(funder.name)).append(" Grant")
+                .append("<").append(grantObjectUri).append("> rdf:type vivo:Grant ;\n");
+
+            if (Objects.nonNull(funder.grantName) && !funder.grantName.isEmpty()) {
+                query.append("rdfs:label \"").append(StringEscapeUtils.escapeJava(funder.grantName));
+            } else {
+                query.append("rdfs:label \"").append(StringEscapeUtils.escapeJava(funder.name)).append(" Grant");
+            }
+
+            query
                 .append("\"@en-US .\n");
 
             query
@@ -724,7 +732,7 @@ public class SoftwareController extends FreemarkerHttpServlet {
             return;
         }
 
-        FunderDTO funder = new FunderDTO();
+        FunderResponseDTO funder = new FunderResponseDTO();
         funder.name = binding.get("funder");
         funder.type = binding.getOrDefault("funderType", null);
         software.funders.add(funder);
