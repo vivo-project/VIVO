@@ -17,10 +17,10 @@ import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationReques
 import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.controller.api.dto.InformationContentEntityResponseUtility;
 import edu.cornell.mannlib.vitro.webapp.controller.api.dto.SoftwareRequestDTO;
 import edu.cornell.mannlib.vitro.webapp.controller.api.dto.SoftwareResponseDTO;
 import edu.cornell.mannlib.vitro.webapp.controller.api.sparqlquery.SparqlQueryApiExecutor;
+import edu.cornell.mannlib.vitro.webapp.controller.api.utility.InformationContentEntityResponseUtility;
 import edu.cornell.mannlib.vitro.webapp.controller.api.utility.InsertQueryBuilder;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;

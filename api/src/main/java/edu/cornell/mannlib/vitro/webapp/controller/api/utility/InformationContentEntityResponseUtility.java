@@ -1,7 +1,11 @@
-package edu.cornell.mannlib.vitro.webapp.controller.api.dto;
+package edu.cornell.mannlib.vitro.webapp.controller.api.utility;
 
 import java.util.Map;
 import java.util.Objects;
+
+import edu.cornell.mannlib.vitro.webapp.controller.api.dto.AuthorDTO;
+import edu.cornell.mannlib.vitro.webapp.controller.api.dto.FunderResponseDTO;
+import edu.cornell.mannlib.vitro.webapp.controller.api.dto.InformationContentEntityResponseDTO;
 
 public class InformationContentEntityResponseUtility {
 
