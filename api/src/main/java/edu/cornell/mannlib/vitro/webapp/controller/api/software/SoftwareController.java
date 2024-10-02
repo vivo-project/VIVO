@@ -1,4 +1,4 @@
-package edu.cornell.mannlib.vitro.webapp.controller.software;
+package edu.cornell.mannlib.vitro.webapp.controller.api.software;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,9 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 import edu.cornell.mannlib.vitro.webapp.auth.permissions.SimplePermission;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;
 import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
+import edu.cornell.mannlib.vitro.webapp.controller.VitroHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.controller.api.dto.InformationContentEntityResponseUtility;
+import edu.cornell.mannlib.vitro.webapp.controller.api.dto.SoftwareRequestDTO;
+import edu.cornell.mannlib.vitro.webapp.controller.api.dto.SoftwareResponseDTO;
 import edu.cornell.mannlib.vitro.webapp.controller.api.sparqlquery.SparqlQueryApiExecutor;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
+import edu.cornell.mannlib.vitro.webapp.controller.api.utility.InsertQueryBuilder;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
@@ -27,7 +31,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.jena.ontology.OntModel;
 
 @WebServlet(name = "softwareController", urlPatterns = {"/software", "/software/*"}, loadOnStartup = 5)
-public class SoftwareController extends FreemarkerHttpServlet {
+public class SoftwareController extends VitroHttpServlet {
 
     private static final Log log = LogFactory.getLog(SoftwareController.class);
 
@@ -367,7 +371,6 @@ public class SoftwareController extends FreemarkerHttpServlet {
         return softwareResponse;
     }
 
-    @Override
     protected AuthorizationRequest requiredActions(VitroRequest vreq) {
         return SimplePermission.USE_SPARQL_UPDATE_API.ACTION;
     }

@@ -1,4 +1,4 @@
-package edu.cornell.mannlib.vitro.webapp.controller.software;
+package edu.cornell.mannlib.vitro.webapp.controller.api.dto;
 
 import java.util.ArrayList;
 import java.util.List;

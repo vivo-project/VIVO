@@ -1,9 +1,12 @@
-package edu.cornell.mannlib.vitro.webapp.controller.software;
+package edu.cornell.mannlib.vitro.webapp.controller.api.utility;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import edu.cornell.mannlib.vitro.webapp.controller.api.dto.AuthorDTO;
+import edu.cornell.mannlib.vitro.webapp.controller.api.dto.FunderRequestDTO;
+import edu.cornell.mannlib.vitro.webapp.controller.api.software.IndividualApiSparqlUtility;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelNames;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.logging.Log;
