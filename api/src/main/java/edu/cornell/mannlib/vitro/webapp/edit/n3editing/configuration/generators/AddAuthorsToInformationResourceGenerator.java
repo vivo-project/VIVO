@@ -109,6 +109,14 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 		 "@prefix foaf: <" + foaf + "> .  \n"   ;
 	}
 
+    public String getDisableVCardPrefix() {
+        return "@prefix fail_pattern: ?createVCard .\n";
+    }
+
+    public String getDisableRealPersonPrefix() {
+        return "@prefix fail_pattern: ?createPersonInstance .\n";
+    }
+
 	private String getN3NewAuthorship() {
 		return getN3PrefixString() +
 		"?authorshipUri a core:Authorship ;\n" +
@@ -129,6 +137,12 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
                 getN3NewPersonMiddleName(),
                 getN3NewPersonLastName(),
                 getN3NewPerson(),
+                
+                getN3NewPersonVCardFirstName() ,
+                getN3NewPersonVCardMiddleName(),
+                getN3NewPersonVCardLastName(),
+                getN3NewPersonVCard(),
+                
                 getN3AuthorshipRank(),
                 getN3ForExistingPerson(),
                 getN3NewOrg(),
@@ -138,7 +152,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 
 
 	private String getN3NewPersonFirstName() {
-		return getN3PrefixString() +
+		return getN3PrefixString() + getDisableRealPersonPrefix() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
             "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
@@ -149,7 +163,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 	}
 
 	private String getN3NewPersonMiddleName() {
-		return getN3PrefixString() +
+		return getN3PrefixString() + getDisableRealPersonPrefix() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
             "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
@@ -160,7 +174,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 	}
 
 	private String getN3NewPersonLastName() {
-		return getN3PrefixString() +
+		return getN3PrefixString() + getDisableRealPersonPrefix() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
             "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
@@ -171,11 +185,49 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 	}
 
 	private String getN3NewPerson() {
-		return  getN3PrefixString() +
+		return  getN3PrefixString() + getDisableRealPersonPrefix() +
         "?newPerson a foaf:Person ;\n" +
         "<" + RDFS.label.getURI() + "> ?label .\n" +
         "?authorshipUri core:relates ?newPerson .\n" +
         "?newPerson core:relatedBy ?authorshipUri . ";
+	}
+
+	// Changes here for creating vcards for external authors
+	private String getN3NewPersonVCardFirstName() {
+		return getN3PrefixString() + getDisableVCardPrefix() +
+            "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+            "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
+            "?vcardPerson vcard:hasName  ?vcardName . \n" +
+            "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +
+            "?vcardName vcard:givenName ?firstName .";
+	}
+
+	private String getN3NewPersonVCardMiddleName() {
+		return getN3PrefixString() + getDisableVCardPrefix() +
+            "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+            "?vcardPerson a vcard:Individual . \n" +
+            "?vcardPerson vcard:hasName  ?vcardName . \n" +
+            "?vcardName a vcard:Name . \n" +
+            "?vcardName <http://vivoweb.org/ontology/core#middleName> ?middleName .";
+	}
+
+	private String getN3NewPersonVCardLastName() {
+		return getN3PrefixString() + getDisableVCardPrefix() +
+            "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+            "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
+            "?vcardPerson vcard:hasName  ?vcardName . \n" +
+            "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +
+            "?vcardName vcard:familyName ?lastName .";
+	}
+
+	// Changes here for creating vcards for external authors
+	private String getN3NewPersonVCard() {
+		return  getN3PrefixString() + getDisableVCardPrefix() +
+	"@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+	"?vcardPerson a vcard:Individual ;\n" +
+	"<" + RDFS.label.getURI() + "> ?label .\n" +
+        "?authorshipUri core:relates ?vcardPerson .\n" +
+        "?vcardPerson core:relatedBy ?authorshipUri . ";
 	}
 
 	private String getN3ForExistingPerson() {
@@ -229,6 +281,9 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
     	//If an existing person is being used as an author, need to get the person uri
     	urisOnForm.add("personUri");
     	urisOnForm.add("orgUri");
+
+    	urisOnForm.add("createPersonInstance");
+        urisOnForm.add("createVCard");
     	editConfiguration.setUrisOnform(urisOnForm);
 
     	//for person who is not in system, need to add first name, last name and middle name
@@ -268,6 +323,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
     	setPersonUriField(editConfiguration);
     	setOrgUriField(editConfiguration);
     	setOrgNameField(editConfiguration);
+    	setPatternFailFields(editConfiguration);
     }
 
 	private void setLabelField(EditConfigurationVTwo editConfiguration) {
@@ -287,6 +343,10 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 				);
 	}
 
+   private void setPatternFailFields(EditConfigurationVTwo editConfiguration) {
+        editConfiguration.addField(new FieldVTwo().setName("createVCard"));
+        editConfiguration.addField(new FieldVTwo().setName("createPersonInstance"));
+    }
 
 	private void setMiddleNameField(EditConfigurationVTwo editConfiguration) {
 		editConfiguration.addField(new FieldVTwo().
