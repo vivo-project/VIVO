@@ -38,7 +38,15 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
         conf.setVarNameForObject("projectRole");
 
         conf.setN3Required( Arrays.asList( n3ForNewProjectRole ) );
-        conf.setN3Optional(Arrays.asList( n3ForNewPerson, n3ForExistingPerson, firstNameAssertion, lastNameAssertion ) );
+        conf.setN3Optional(Arrays.asList(
+            n3ForNewPerson,
+            n3ForExistingPerson,
+            firstNameAssertion,
+            lastNameAssertion,
+            n3ForNewVCardPerson,
+            firstNameVCardAssertion,
+            lastNameVCardAssertion
+        ));
 
         conf.addNewResource("projectRole", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("newPerson",DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -48,7 +56,7 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
         //uris in scope: none
         //literals in scope: none
 
-        conf.setUrisOnform( Arrays.asList( "existingPerson"));
+        conf.setUrisOnform(Arrays.asList("existingPerson", "createPersonInstance", "createVCard"));
         conf.setLiteralsOnForm( Arrays.asList("personLabel", "personLabelDisplay", "roleLabel",
                                               "roleLabeldisplay", "firstName", "lastName"));
 
@@ -92,6 +100,9 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
                 setValidators( list("datatype:" + RDF.dtLangString.getURI()) )
                 );
 
+        conf.addField(new FieldVTwo().setName("createVCard"));
+        conf.addField(new FieldVTwo().setName("createPersonInstance"));
+            
         //Add validator
         conf.addValidator(new AntiXssValidation());
         conf.addValidator(new FirstAndLastNameValidator("existingPerson", I18n.bundle(vreq)));
@@ -113,6 +124,7 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
         "?projectRole <"+ label +"> ?roleLabel . \n" ;
 
     final static String n3ForNewPerson  =
+        getDisableRealPersonPrefix() +
         "?projectRole <http://purl.obolibrary.org/obo/RO_0000052> ?newPerson . \n" +
         "?newPerson <http://purl.obolibrary.org/obo/RO_0000053> ?projectRole . \n" +
         "?newPerson a <http://xmlns.com/foaf/0.1/Person> . \n" +
@@ -124,6 +136,7 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
         " ";
 
     final static String firstNameAssertion  =
+        getDisableRealPersonPrefix() +
         "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
         "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
         "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
@@ -133,9 +146,41 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
         "?vcardName vcard:givenName ?firstName .";
 
     final static String lastNameAssertion  =
+        getDisableRealPersonPrefix() +
         "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
         "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
         "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
+        "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
+        "?vcardPerson vcard:hasName  ?vcardName . \n" +
+        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +
+        "?vcardName vcard:familyName ?lastName .";
+
+    public static String getDisableVCardPrefix() {
+        return "@prefix fail_pattern: ?createVCard .\n";
+    }
+
+    public static String getDisableRealPersonPrefix() {
+        return "@prefix fail_pattern: ?createPersonInstance .\n";
+    }
+
+    final static String n3ForNewVCardPerson  =
+        getDisableVCardPrefix() +
+        "?projectRole <http://purl.obolibrary.org/obo/RO_0000052> ?vcardPerson . \n" +
+        "?vcardPerson <http://purl.obolibrary.org/obo/RO_0000053> ?projectRole . \n" +
+        "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
+        "?vcardPerson <"+ label +"> ?personLabel . ";
+
+    final static String firstNameVCardAssertion  =
+        getDisableVCardPrefix() +
+        "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+        "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
+        "?vcardPerson vcard:hasName  ?vcardName . \n" +
+        "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +
+        "?vcardName vcard:givenName ?firstName .";
+
+    final static String lastNameVCardAssertion  =
+        getDisableVCardPrefix() +
+        "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
         "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
         "?vcardPerson vcard:hasName  ?vcardName . \n" +
         "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +
