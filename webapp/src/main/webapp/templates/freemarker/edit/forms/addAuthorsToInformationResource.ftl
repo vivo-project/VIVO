@@ -122,15 +122,22 @@
         <input class="acSelector" size="35"  type="text" id="lastName" name="lastName" value="${lastNameValue}" role="input" />
         </p>
 
-				<p class="inline">
-        <label for="firstName">${i18n().first_name} ${requiredHint} ${initialHint}</label>
-        <input  size="20"  type="text" id="firstName" name="firstName" value="${firstNameValue}"  role="input" />
+        <p class="inline">
+            <label for="firstName">${i18n().first_name} ${requiredHint} ${initialHint}</label>
+            <input  size="20"  type="text" id="firstName" name="firstName" value="${firstNameValue}"  role="input" />
         </p>
-
-				<p class="inline">
-				<label for="middleName">${i18n().middle_name} <span class='hint'>(${i18n().initial_okay})</span></label>
-        <input  size="20"  type="text" id="middleName" name="middleName" value="${middleNameValue}"  role="input" />
+        <p class="inline">
+            <label for="middleName">${i18n().middle_name} <span class='hint'>(${i18n().initial_okay})</span></label>
+            <input  size="20"  type="text" id="middleName" name="middleName" value="${middleNameValue}"  role="input" />
         </p>
+        
+        <div>
+            <p>${i18n().select_type} ${requiredHint}</p>
+            <input type="radio" id="createVCard" class="radiotypes" name="createVCard" value="n3-pattern:create-vcard-instance"/>
+            <label class="inline" for="createVCard" >${i18n().vcard}</label>
+            <input type="radio" id="createPersonInstance" class="radiotypes" name="createPersonInstance" value="n3-pattern:create-person-instance" checked />
+            <label class="inline" for="createPersonInstance" >${i18n().person_capitalized}</label>
+        </div>
 
         <div id="selectedAuthor" class="acSelection">
             <p class="inline">
@@ -140,6 +147,8 @@
                 <input type="hidden" id="personUri" name="personUri" value=""  role="input" /> <!-- Field value populated by JavaScript -->
             </p>
         </div>
+        
+
     </section>
     <section id="organizationFields" role="organization">
     		<p class="inline">
@@ -194,6 +203,12 @@ var i18nStrings = {
     helpTextSelect: '${i18n().select_an_existing?js_string}',
     helpTextAdd: '${i18n().or_add_new_one?js_string}'
 };
+
+$(document).ready(function () {
+    $('input[type=radio].radiotypes').change(function() {
+        $('input[type=radio].radiotypes:checked').not(this).prop('checked', false);
+    });
+});
 </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />',
