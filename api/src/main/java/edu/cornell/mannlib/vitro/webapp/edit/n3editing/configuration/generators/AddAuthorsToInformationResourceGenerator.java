@@ -496,7 +496,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 	    + "	 bind ( COALESCE(?firstName, \"\") As ?firstName1) . \n"
 	    + "	 bind ( COALESCE(?middleName, \"\") As ?middleName1) . \n"
 	    + "	 bind ( COALESCE(?lastName, \"\") As ?lastName1) . \n"
-	    + "	 bind (concat(str(?lastName1 + \", \"),str(?middleName1 + \" \"),str(?firstName1)) as ?authorName) . \n"
+	    + "	 bind (concat(str(str(?lastName1) + \", \"),str(str(?middleName1) + \" \"),str(?firstName1)) as ?authorName) . \n"
         + "} } ORDER BY ?rank";
 
 
