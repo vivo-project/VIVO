@@ -54,53 +54,19 @@
             </build>
         </profile>
         <profile>
-            <id>install</id>
+            <id>deploy</id>
             <activation>
                 <property><name>tomcat-dir</name></property>
             </activation>
             <build>
                 <plugins>
-                    <plugin>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>remove-webapp</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <target>
-                                        <delete dir="${tomcat-dir}/webapps/${project.build.finalName}" />
-                                    </target>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
+		    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install</id>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>unpack</goal>
-                                </goals>
-                                <configuration>
-                                    <artifactItems>
-                                        <artifactItem>
-                                            <groupId>${project.groupId}</groupId>
-                                            <artifactId>${project.artifactId}</artifactId>
-                                            <version>${project.version}</version>
-                                            <type>war</type>
-                                            <overWrite>true</overWrite>
-                                            <outputDirectory>${tomcat-dir}/webapps/${project.build.finalName}</outputDirectory>
-                                        </artifactItem>
-                                    </artifactItems>
-                                </configuration>
-                            </execution>
-                        </executions>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>3.2.1</version>
+                        <configuration>
+                            <outputDirectory>${tomcat-dir}/webapps/</outputDirectory>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
