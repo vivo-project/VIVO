@@ -197,7 +197,6 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
         "SELECT ?existingPerson WHERE {\n"+
         "?projectRole <http://purl.obolibrary.org/obo/RO_0000052> ?existingPerson . \n" +
         "?existingPerson <http://purl.obolibrary.org/obo/RO_0000053> ?projectRole . \n" +
-        "?existingPerson a <http://xmlns.com/foaf/0.1/Person> . \n " +
         " }";
 
     final static String personLabelQuery  =
@@ -206,7 +205,6 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
         "?projectRole <http://purl.obolibrary.org/obo/RO_0000052> ?existingPerson . \n" +
         "?existingPerson <http://purl.obolibrary.org/obo/RO_0000053> ?projectRole .\n"+
         "?existingPerson <"+ label +"> ?existingPersonLabel .\n"+
-        "?existingPerson a <http://xmlns.com/foaf/0.1/Person> . \n " +
         " }";
 
 
