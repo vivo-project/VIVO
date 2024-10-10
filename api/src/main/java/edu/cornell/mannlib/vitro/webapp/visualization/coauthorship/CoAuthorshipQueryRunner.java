@@ -97,6 +97,8 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 			RDFNode documentNode = qs.get(QueryFieldLabels.DOCUMENT_URL);
 			RDFNode coAuthorURLNode = qs.get(QueryFieldLabels.CO_AUTHOR_URL);
 			RDFNode coAuthorLabelNode = qs.get(QueryFieldLabels.CO_AUTHOR_LABEL);
+			RDFNode coAuthorFamilyNode  = qs.get("coAuthorPersonFamily");
+			RDFNode coAuthorGivenNode   = qs.get("coAuthorPersonGiven");
 			RDFNode publicationDateNode = qs.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
 
 			String authorURI    = egoAuthorURLNode == null ? null : egoAuthorURLNode.asLiteral().getString();
@@ -106,10 +108,28 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 			String coAuthorURI  = coAuthorURLNode == null ? null : coAuthorURLNode.asLiteral().getString();
 			String coAuthorName = coAuthorLabelNode == null ? null : coAuthorLabelNode.asLiteral().getString();
 
-			processEntry(authorURI, authorName, documentURI, documentDate, coAuthorURI, coAuthorName);
+			if (StringUtils.isEmpty(coAuthorName)) {
+				String familyStr = coAuthorFamilyNode == null ? null : coAuthorFamilyNode.asLiteral().getString();
+				String givenStr  = coAuthorGivenNode == null ? null : coAuthorGivenNode.asLiteral().getString();
+				boolean isVcard = false;
+				if (StringUtils.isEmpty(coAuthorURI)) {
+					coAuthorURI = "info://vcard/" + familyStr + "/" + givenStr;
+					isVcard = true;
+				}
+				if (StringUtils.isEmpty(familyStr)) {
+					processEntry(authorURI, authorName, documentURI, documentDate, coAuthorURI, givenStr, isVcard);
+				} else if (StringUtils.isEmpty(givenStr)) {
+					processEntry(authorURI, authorName, documentURI, documentDate, coAuthorURI, familyStr, isVcard);
+				} else {
+					processEntry(authorURI, authorName, documentURI, documentDate, coAuthorURI, familyStr + ", " + givenStr, isVcard);
+				}
+			} else if (!StringUtils.isEmpty(coAuthorURI)) {
+				processEntry(authorURI, authorName, documentURI, documentDate, coAuthorURI, coAuthorName, false);
+			}
 		}
 
-		public void processEntry(String authorURI, String authorName, String documentURI, String documentDate, String coAuthorURI, String coAuthorName) {
+		public void processEntry(String authorURI, String authorName, String documentURI, String documentDate, String coAuthorURI, String coAuthorName, boolean coAuthorIsVCard) {
+
 			/*
 			 * We only want to create only ONE ego node.
 			 * */
@@ -156,6 +176,10 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 
 				if (coAuthorName != null) {
 					coAuthorNode.setCollaboratorName(coAuthorName);
+				}
+
+				if (coAuthorIsVCard) {
+					coAuthorNode.setIsVCard();
 				}
 			}
 
@@ -377,7 +401,6 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 			}
 			nodes.removeAll(nodesToBeRemoved);
 		}
-
 		/* END QUERY RUNNER */
 	}
 
@@ -390,16 +413,21 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 				+ "		(str(?authorLabel) as ?" + QueryFieldLabels.AUTHOR_LABEL + ") \n"
 				+ "		(str(?coAuthorPerson) as ?" + QueryFieldLabels.CO_AUTHOR_URL + ") \n"
 				+ "		(str(?coAuthorPersonLabel) as ?" + QueryFieldLabels.CO_AUTHOR_LABEL + ") \n"
+				+ "		(str(?coAuthorPersonFamilyName) as ?coAuthorPersonFamily) \n"
+				+ "		(str(?coAuthorPersonGivenName) as ?coAuthorPersonGiven) \n"
 				+ "		(str(?document) as ?" + QueryFieldLabels.DOCUMENT_URL + ") \n"
 				+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") \n"
 				+ "WHERE { \n"
 				+ "    <" + queryURI + "> local:authorLabel ?authorLabel ;"
 								  + " local:authorOf ?document . \n"
-	            + "    ?document local:coAuthor ?coAuthorPerson . \n"
-				+ "    ?coAuthorPerson rdfs:label ?coAuthorPersonLabel . \n"
+	            + "    ?document local:coAuthorship ?coAuthorshipNode . \n"
+				+ "    OPTIONAL { ?coAuthorshipNode local:coAuthor ?coAuthorPerson . } \n"
+				+ "    OPTIONAL { ?coAuthorshipNode rdfs:label ?coAuthorPersonLabel . } \n"
+				+ "    OPTIONAL { ?coAuthorshipNode local:familyName ?coAuthorPersonFamilyName . } \n"
+				+ "    OPTIONAL { ?coAuthorshipNode local:givenName ?coAuthorPersonGivenName . } \n"
 				+ "    OPTIONAL { ?document local:publicationDate ?publicationDate . } \n"
 				+ "} \n"
-				+ "ORDER BY ?document ?coAuthorPerson\n";
+				+ "ORDER BY ?document ?coAuthorshipNode\n";
 
 		log.debug("COAUTHORSHIP QUERY - " + sparqlQuery);
 
@@ -414,8 +442,11 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 				+ "    <" + queryURI + "> local:authorLabel ?authorLabel .\n"
 				+ "    <" + queryURI + "> local:authorOf ?document .\n"
                 + "    ?document local:publicationDate ?publicationDate .\n"
-                + "    ?document local:coAuthor ?coAuthorPerson .\n"
-                + "    ?coAuthorPerson rdfs:label ?coAuthorPersonLabel .\n"
+                + "    ?document local:coAuthorship ?coAuthorshipNode .\n"
+				+ "    ?coAuthorshipNode local:coAuthor ?coAuthorPerson .\n"
+				+ "    ?coAuthorshipNode rdfs:label ?coAuthorPersonLabel .\n"
+				+ "    ?coAuthorshipNode local:familyName ?coAuthorPersonFamilyName .\n"
+				+ "    ?coAuthorshipNode local:givenName ?coAuthorPersonGivenName .\n"
 				+ "}\n"
 				+ "WHERE\n"
 				+ "{\n"
@@ -432,7 +463,23 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 				+ "        ?coAuthorPerson rdf:type foaf:Person ; \n"
 				+ "                rdfs:label ?coAuthorPersonLabel . \n"
                 + "    }\n"
-                + "    UNION\n"
+				+ "    UNION\n"
+				+ "    {\n"
+				+ "        <" + queryURI + "> rdf:type foaf:Person ;"
+				+ "                rdfs:label ?authorLabel ;"
+				+ "                core:relatedBy ?authorshipNode . \n"
+				+ "        ?authorshipNode rdf:type core:Authorship ;"
+				+ "                core:relates ?document . \n"
+				+ "        ?document rdf:type <http://purl.obolibrary.org/obo/IAO_0000030> ; \n"
+				+ "                core:relatedBy ?coAuthorshipNode . \n"
+				+ "        ?coAuthorshipNode rdf:type core:Authorship ; \n"
+				+ "               core:relates ?coAuthorVCard . \n"
+				+ "        ?coAuthorVCard rdf:type <http://www.w3.org/2006/vcard/ns#Individual> ; \n"
+				+ "                <http://www.w3.org/2006/vcard/ns#hasName> ?coAuthorVCardName . \n"
+				+ "        ?coAuthorVCardName <http://www.w3.org/2006/vcard/ns#familyName> ?coAuthorPersonFamilyName ; \n"
+				+ "                <http://www.w3.org/2006/vcard/ns#givenName> ?coAuthorPersonGivenName . \n"
+				+ "    }\n"
+				+ "    UNION\n"
                 + "    {\n"
                 + "        <" + queryURI + "> rdf:type foaf:Person ;"
                 + "                rdfs:label ?authorLabel ;"
@@ -512,7 +559,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 				String documentDate = publicationToYearMap.get(documentURI);
 				for (String coAuthorURI : publicationToPersonMap.get(documentURI)) {
 					String coAuthorName = personLabelsMap.get(coAuthorURI);
-					consumer.processEntry(authorURI, authorName, documentURI, documentDate, coAuthorURI, coAuthorName);
+					consumer.processEntry(authorURI, authorName, documentURI, documentDate, coAuthorURI, coAuthorName, false);
 				}
 			}
 			consumer.endProcessing();

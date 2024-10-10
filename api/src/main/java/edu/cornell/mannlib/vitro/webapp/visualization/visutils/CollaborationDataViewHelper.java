@@ -56,7 +56,7 @@ public class CollaborationDataViewHelper {
             if (collaborator.getCollaboratorID() != data.getEgoCollaborator().getCollaboratorID()) {
 
                 // If the number of activities exceeds the threshold, it needs to be included in the top N
-                if (collaborator.getNumOfActivities() > threshold) {
+                if (collaborator.getNumOfActivities() + boost(collaborator) > threshold) {
                     // If we've filled the Top N
                     if (collaborators.size() == max - 1) {
                         // Remove the last (lowest) entry of the Top N
@@ -67,7 +67,8 @@ public class CollaborationDataViewHelper {
                     int insert = collaborators.size();
                     while (insert > 0) {
                         insert--;
-                        if (collaborators.get(insert).getNumOfActivities() > collaborator.getNumOfActivities()) {
+                        Collaborator collaboratorAtInsert = collaborators.get(insert);
+                        if (collaboratorAtInsert.getNumOfActivities() + boost(collaboratorAtInsert) > collaborator.getNumOfActivities() + boost(collaborator)) {
                             insert++;
                             break;
                         }
@@ -85,7 +86,8 @@ public class CollaborationDataViewHelper {
                     }
 
                     // Update the threshold with the new lowest position entry
-                    threshold = collaborators.get(collaborators.size() - 1).getNumOfActivities();
+                    Collaborator thresholdCollaborator = collaborators.get(collaborators.size() - 1);
+                    threshold = thresholdCollaborator.getNumOfActivities() + boost(thresholdCollaborator);
                 } else {
                     // If we are below the threshold, check if the top N is full
                     if (collaborators.size() < max - 1) {
@@ -93,7 +95,7 @@ public class CollaborationDataViewHelper {
                         collaborators.add(collaborator);
 
                         // And record the new collaboration as the threshold
-                        threshold = collaborator.getNumOfActivities();
+                        threshold = collaborator.getNumOfActivities() + boost(collaborator);
                     }
                 }
             }
@@ -161,5 +163,12 @@ public class CollaborationDataViewHelper {
 
         // Reset the activity count for the top left matrix entry (focus - focus collaboration)
         collaborationMatrix[0][0] = 0;
+    }
+
+    private int boost(Collaborator collaborator) {
+        if (!collaborator.getIsVCard()) {
+            return 10000;
+        }
+        return 0;
     }
 }
