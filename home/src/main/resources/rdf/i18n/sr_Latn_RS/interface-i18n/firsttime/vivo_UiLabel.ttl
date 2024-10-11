@@ -6272,3 +6272,10 @@ uil-data:vis_coauthor_vcard.VIVO
         rdfs:label       "Uključite spoljne koautore"@sr-Latn-RS ;
         uil:hasApp       "VIVO" ;
         uil:hasKey       "vis_coauthor_vcard" .
+
+uil-data:select_vcard_or_person.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Izaberite samo VCARD, kada osoba nema i ne bi trebalo da ima profil u VIVO-u. U suprotnom izaberite tip \"Osoba\"."@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "select_vcard_or_person" .
