@@ -6274,3 +6274,9 @@ uil-data:vis_coauthor_vcard.VIVO
         uil:hasApp       "VIVO" ;
         uil:hasKey       "vis_coauthor_vcard" .
 
+uil-data:select_vcard_or_person.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Por favor, seleccione VCARD sólo, cuando la persona no tenga ni deba tener un perfil en VIVO. En caso contrario, elija el tipo \"Persona\"."@es ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "select_vcard_or_person" .

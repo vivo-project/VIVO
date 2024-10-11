@@ -132,7 +132,7 @@
         </p>
         
         <div>
-            <p>${i18n().select_type} ${requiredHint}</p>
+            <p>${i18n().select_vcard_or_person} ${requiredHint}</p>
             <input type="radio" id="createVCard" class="radiotypes" name="createVCard" value="n3-pattern:create-vcard-instance"/>
             <label class="inline" for="createVCard" >${i18n().vcard}</label>
             <input type="radio" id="createPersonInstance" class="radiotypes" name="createPersonInstance" value="n3-pattern:create-person-instance" checked />

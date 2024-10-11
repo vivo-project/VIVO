@@ -114,7 +114,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
             <input type="hidden" id="lastName" name="lastName" value="">
             <input class="display" type="hidden" acGroupName="person" id="personDisplay" name="personLabelDisplay" value="${personLabelDisplayValue}" >
             <br>
-            <span>${i18n().select_type} ${requiredHint}</span><br>
+            <span>${i18n().select_vcard_or_person} ${requiredHint}</span><br>
             <input type="radio" id="createVCard" class="radiotypes" name="createVCard" value="n3-pattern:create-vcard-instance"/>
             <label class="inline" for="createVCard" >${i18n().vcard}</label>
             <input type="radio" id="createPersonInstance" class="radiotypes" name="createPersonInstance" value="n3-pattern:create-person-instance" checked />
