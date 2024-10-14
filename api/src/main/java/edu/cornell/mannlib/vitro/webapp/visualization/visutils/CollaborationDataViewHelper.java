@@ -2,15 +2,34 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.visutils;
 
+import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CollaborationData;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Collaboration;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Collaborator;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CollaborationDataViewHelper {
-    private static final int MAX_COLLABORATORS = 35;
+
+    private static final String DEFAULT_PERSON_COLLABORATORS_BOOST = "0";
+
+    private static final String DEFAULT_MAX_COLLABORATORS = "35";
+
+    private static final String MAX_COLLABORATORS_PROPERTY = "visualization.coAuthorNetwork.maxCollaborators";
+
+    private static final String PERSON_COLLABORATORS_BOOST_PROPERTY = "visualization.coAuthorNetwork.personBoost";
+
+    private static Log log = LogFactory.getLog(CollaborationDataViewHelper.class.getName());
+
+    private static final int MAX_COLLABORATORS = getPropertyIntValue(MAX_COLLABORATORS_PROPERTY,
+            DEFAULT_MAX_COLLABORATORS);
+
+    private static final int PERSON_COLLABORATORS_BOOST = getPropertyIntValue(PERSON_COLLABORATORS_BOOST_PROPERTY,
+            DEFAULT_PERSON_COLLABORATORS_BOOST);
+
     private CollaborationData data;
 
     private List<Collaborator> collaborators = null;
@@ -34,6 +53,21 @@ public class CollaborationDataViewHelper {
     public List<Collaborator> getCollaborators() {
         init(MAX_COLLABORATORS);
         return collaborators;
+    }
+
+    private static int getPropertyIntValue(String property, String defaultValue) {
+        ConfigurationProperties props = ConfigurationProperties.getInstance();
+        String propertyValue = props.getProperty(property, defaultValue);
+        try {
+            return Integer.parseInt(propertyValue);
+        } catch (Exception e) {
+            log.error(String.format(
+                    "Can't convert %s to integer value. " +
+                    "Property %s should be set to an integer value. " +
+                    "Use fallback to default value %s.",
+                    propertyValue, property, defaultValue));
+            return Integer.parseInt(defaultValue);
+        }
     }
 
     private synchronized void init(int max) {
@@ -167,7 +201,7 @@ public class CollaborationDataViewHelper {
 
     private int boost(Collaborator collaborator) {
         if (!collaborator.getIsVCard()) {
-            return 10000;
+            return PERSON_COLLABORATORS_BOOST;
         }
         return 0;
     }
