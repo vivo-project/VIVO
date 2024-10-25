@@ -246,7 +246,7 @@ public class ShortURLVisualizationController extends FreemarkerHttpServlet {
 	private List<String> extractShortURLParameters(VitroRequest vitroRequest) {
 
 		List<String> matchedGroups = new ArrayList<String>();
-		String subURIString = vitroRequest.getRequestURI().substring(ContextPath.getPath(vitroRequest).length()+1);
+		String subURIString = vitroRequest.getRequestURI().substring(vitroRequest.getContextPath().length()+1);
 		String[] urlParams = StringEscapeUtils.ESCAPE_HTML4.translate(subURIString).split("/");
 
 		if (urlParams.length > 1
