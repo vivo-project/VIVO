@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!-- $This file is distributed under the terms of the license in LICENSE$ -->
 
-<!-- See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
+<!-- See guidelines at https://wiki.lyrasis.org/display/VIVODOC112x/Custom+List+View+Configurations -->
 
 <list-view-config>
     <query-select>    
@@ -29,7 +29,7 @@
                 ?editorship core:relates ?editor .
                 ?editor a foaf:Agent .
                 ?editor rdfs:label ?editorName .
-				OPTIONAL {
+                OPTIONAL {
                     <precise-subquery>?subject ?property ?editorship .
                     ?editorship a core:Editorship .
                     ?editorship core:relates ?editor .
@@ -37,7 +37,7 @@
                     ?editor vitro:mostSpecificType ?subclass .
                     ?subclass rdfs:subClassOf foaf:Agent .
                 }
-            }	
+            }    
             OPTIONAL {
                 <precise-subquery>?subject ?property ?editorship .
                 ?editorship a core:Editorship .</precise-subquery>
