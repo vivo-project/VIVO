@@ -76,8 +76,8 @@ var addEditorForm = {
         this.orgLink = $('a#orgLink');
         this.personLink = $('a#personLink');
         this.returnLink = $('a#returnLink');
-		
-		this.orgSection.hide();
+
+        this.orgSection.hide();
     },
 
     // Initial page setup. Called only at page load.
@@ -500,7 +500,7 @@ var addEditorForm = {
             // this != addEditorForm in prepareSubmit.
             $selectedObj = addEditorForm.form.find('input.acSelector');
             addEditorForm.deleteAcHelpText($selectedObj);
-			addEditorForm.prepareSubmit();
+            addEditorForm.prepareSubmit();
         });
 
         this.lastNameField.blur(function() {
@@ -524,21 +524,21 @@ var addEditorForm = {
             return false;
         });
 
-    	this.acSelector.focus(function() {
-        	addEditorForm.deleteAcHelpText(this);
-    	});
+        this.acSelector.focus(function() {
+            addEditorForm.deleteAcHelpText(this);
+        });
 
-    	this.acSelector.blur(function() {
-        	addEditorForm.addAcHelpText(this);
-    	});
+        this.acSelector.blur(function() {
+            addEditorForm.addAcHelpText(this);
+        });
 
         this.orgName.focus(function() {
-        	addEditorForm.deleteAcHelpText(this);
-    	});
+            addEditorForm.deleteAcHelpText(this);
+        });
 
-    	this.orgName.blur(function() {
-        	addEditorForm.addAcHelpText(this);
-    	});
+        this.orgName.blur(function() {
+            addEditorForm.addAcHelpText(this);
+        });
 
 
         // When hitting enter in last name field, show first and middle name fields.
@@ -585,10 +585,10 @@ var addEditorForm = {
 
             this.labelField.val(name);
         }
-		// If user selected org via autocomplete, clear the org name field
-		if ( this.orgUriField.val() != '' ) {
-			this.orgName.val("");
-		}
+        // If user selected org via autocomplete, clear the org name field
+        if ( this.orgUriField.val() != '' ) {
+            this.orgName.val("");
+        }
 
     },
 
@@ -725,8 +725,8 @@ var addEditorForm = {
         // when clicking undo: add the editor back, and change link text to 'remove'
     },
 
-	// Set the initial help text in the lastName field and change the class name.
-	addAcHelpText: function(selectedObj) {
+    // Set the initial help text in the lastName field and change the class name.
+    addAcHelpText: function(selectedObj) {
         var typeText;
         if ( $(selectedObj).attr('id') == "lastName" ) {
             typeText = addEditorForm.editorTypeText;
@@ -736,83 +736,83 @@ var addEditorForm = {
         }
 
         if (!$(selectedObj).val()) {
-			$(selectedObj).val(addEditorForm.helpTextSelect + " " + typeText + " " + addEditorForm.helpTextAdd)
-						   .addClass(this.acHelpTextClass);
-		}
-	},
+            $(selectedObj).val(addEditorForm.helpTextSelect + " " + typeText + " " + addEditorForm.helpTextAdd)
+                           .addClass(this.acHelpTextClass);
+        }
+    },
 
-	deleteAcHelpText: function(selectedObj) {
-	    if ($(selectedObj).hasClass(this.acHelpTextClass)) {
-	            $(selectedObj).val('')
-	                          .removeClass(this.acHelpTextClass);
-	    }
-	},
+    deleteAcHelpText: function(selectedObj) {
+        if ($(selectedObj).hasClass(this.acHelpTextClass)) {
+                $(selectedObj).val('')
+                              .removeClass(this.acHelpTextClass);
+        }
+    },
 
     // we need to set the correct class names for fields like the acSelector, acSelection, etc.
     // as well as clear and disable fields, call other functions ...
-	setEditorType: function(editorType) {
+    setEditorType: function(editorType) {
         if ( editorType == "org" ) {
-	        this.personSection.hide();
-	        this.orgSection.show();
-			this.orgNameWrapper.show();
-	        // person fields
+            this.personSection.hide();
+            this.orgSection.show();
+            this.orgNameWrapper.show();
+            // person fields
             this.personRadio.prop('checked', false);  // needed for reset when cancel button is clicked
-	        this.acSelector.removeClass("acSelector");
-	        this.acSelector.removeClass(this.acHelpTextClass);
-	        this.selectedEditor.removeClass("acSelection");
-	        this.selectedEditorName.removeClass("acSelectionInfo");
-	        this.personLink.removeClass("verifyMatch");
-	        this.acSelector.attr('disabled', 'disabled');
-	        this.firstNameField.attr('disabled', 'disabled');
-	        this.middleNameField.attr('disabled', 'disabled');
-	        this.lastNameField.attr('disabled', 'disabled');
-	        this.acSelector.val('');
-	        this.firstNameField.val('');
-	        this.middleNameField.val('');
-	        this.lastNameField.val('');
-	        // org fields
-	        this.orgRadio.prop('checked', true); // needed for reset when cancel button is clicked
-	        this.orgName.addClass("acSelector");
-	        this.selectedOrg.addClass("acSelection");
-	        this.selectedOrgName.addClass("acSelectionInfo");
-	        this.orgLink.addClass("verifyMatch");
-	        this.orgName.attr('disabled', false);
-	        this.orgUriField.attr('disabled', false);
+            this.acSelector.removeClass("acSelector");
+            this.acSelector.removeClass(this.acHelpTextClass);
+            this.selectedEditor.removeClass("acSelection");
+            this.selectedEditorName.removeClass("acSelectionInfo");
+            this.personLink.removeClass("verifyMatch");
+            this.acSelector.attr('disabled', 'disabled');
+            this.firstNameField.attr('disabled', 'disabled');
+            this.middleNameField.attr('disabled', 'disabled');
+            this.lastNameField.attr('disabled', 'disabled');
+            this.acSelector.val('');
+            this.firstNameField.val('');
+            this.middleNameField.val('');
+            this.lastNameField.val('');
+            // org fields
+            this.orgRadio.prop('checked', true); // needed for reset when cancel button is clicked
+            this.orgName.addClass("acSelector");
+            this.selectedOrg.addClass("acSelection");
+            this.selectedOrgName.addClass("acSelectionInfo");
+            this.orgLink.addClass("verifyMatch");
+            this.orgName.attr('disabled', false);
+            this.orgUriField.attr('disabled', false);
 
-	        addEditorForm.addAcHelpText(this.orgName);
-	        addEditorForm.initAutocomplete();
-	        addEditorForm.hideSelectedPerson();
-	    }
-	    else if ( editorType == "person" ) {
-	        this.orgSection.hide();
-	        this.personSection.show();
-	        // org fields
-	        this.orgRadio.prop('checked', false);  // needed for reset when cancel button is clicked
-	        this.orgName.removeClass("acSelector");
-	        this.orgName.removeClass(this.acHelpTextClass);
-	        this.selectedOrg.removeClass("acSelection");
-	        this.selectedOrgName.removeClass("acSelectionInfo");
-	        this.orgLink.removeClass("verifyMatch");
-	        this.orgName.attr('disabled', 'disabled');
-	        this.orgUriField.attr('disabled', 'disabled');
-	        this.orgName.val('');
-	        this.orgUriField.val('');
+            addEditorForm.addAcHelpText(this.orgName);
+            addEditorForm.initAutocomplete();
+            addEditorForm.hideSelectedPerson();
+        }
+        else if ( editorType == "person" ) {
+            this.orgSection.hide();
+            this.personSection.show();
+            // org fields
+            this.orgRadio.prop('checked', false);  // needed for reset when cancel button is clicked
+            this.orgName.removeClass("acSelector");
+            this.orgName.removeClass(this.acHelpTextClass);
+            this.selectedOrg.removeClass("acSelection");
+            this.selectedOrgName.removeClass("acSelectionInfo");
+            this.orgLink.removeClass("verifyMatch");
+            this.orgName.attr('disabled', 'disabled');
+            this.orgUriField.attr('disabled', 'disabled');
+            this.orgName.val('');
+            this.orgUriField.val('');
             // person fields
             this.acSelector.addClass("acSelector");
             this.personRadio.prop('checked', true);  // needed for reset when cancel button is clicked
-	        this.selectedEditor.addClass("acSelection");
-	        this.selectedEditorName.addClass("acSelectionInfo");
-	        this.personLink.addClass("verifyMatch");
-	        this.acSelector.attr('disabled', false);
-	        this.firstNameField.attr('disabled', false);
-	        this.middleNameField.attr('disabled', false);
-	        this.lastNameField.attr('disabled', false);
+            this.selectedEditor.addClass("acSelection");
+            this.selectedEditorName.addClass("acSelectionInfo");
+            this.personLink.addClass("verifyMatch");
+            this.acSelector.attr('disabled', false);
+            this.firstNameField.attr('disabled', false);
+            this.middleNameField.attr('disabled', false);
+            this.lastNameField.attr('disabled', false);
 
-	        addEditorForm.addAcHelpText(this.acSelector);
-	        addEditorForm.initAutocomplete();
-	        addEditorForm.hideSelectedOrg();
+            addEditorForm.addAcHelpText(this.acSelector);
+            addEditorForm.initAutocomplete();
+            addEditorForm.hideSelectedOrg();
 
-	    }
+        }
     }
 };
 
