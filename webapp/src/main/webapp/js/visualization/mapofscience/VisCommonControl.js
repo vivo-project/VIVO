@@ -89,7 +89,7 @@ function initGlobalToolTips() {
 		{
 			querySelector: "#imageIconOne",
 			data: {
-				title: "<div style='padding: 16px 22px; max-width: 400px;'>" + $('#toolTipOne').html() + "</div>",
+				title: "<div class='visCommonControllTooltip'>" + $('#toolTipOne').html() + "</div>",
 				customClass: "vivoTooltip vivoTooltip-yellow",
 				html: true,
 				sanitize: false,
@@ -98,7 +98,7 @@ function initGlobalToolTips() {
 		},{
 			querySelector: "#exploreInfoIcon",
 			data: {
-				title: "<div style='padding: 16px 22px; max-width: 400px;'>" + $('#exploreTooltipText').html() + "</div>",
+				title: "<div class='visCommonControllTooltip'>" + $('#exploreTooltipText').html() + "</div>",
 				customClass: "vivoTooltip vivoTooltip-yellow",
 				html: true,
 				sanitize: false,
@@ -107,7 +107,7 @@ function initGlobalToolTips() {
 		},{
 			querySelector: "#compareInfoIcon",
 			data: {
-				title: "<div style='padding: 16px 22px; max-width: 400px;'>" + $('#compareTooltipText').html() + "</div>",
+				title: "<div class='visCommonControllTooltip'>" + $('#compareTooltipText').html() + "</div>",
 				customClass: "vivoTooltip vivoTooltip-yellow",
 				html: true,
 				sanitize: false,
@@ -116,7 +116,7 @@ function initGlobalToolTips() {
 		},{
 			querySelector: "#imageIconThree",
 			data: {
-				title: "<div style='padding: 16px 22px; max-width: 400px;'>" + $('#toolTipThree').html() + "</div>",
+				title: "<div class='visCommonControllTooltip'>" + $('#toolTipThree').html() + "</div>",
 				customClass: "vivoTooltip vivoTooltip-yellow",
 				html: true,
 				sanitize: false,
