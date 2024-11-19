@@ -2,35 +2,47 @@ version: '3.2'
 
 services:
 
-  solr:
+  vivo-solr:
+    container_name: vivo-solr
     image: vivoweb/vivo-solr:latest
     environment:
-      - RESET_CORE=${RESET_CORE}
-      - VERBOSE=${VERBOSE}
+      - RESET_CORE=${SOLR_RESET_CORE}
+      - VERBOSE=${SOLR_VERBOSE}
     ports:
-      - 8983:8983
+      - ${SOLR_HOST_PORT}:${SOLR_CONTAINER_PORT}
+    volumes:
+      - ${SOLR_CORES}:/opt/solr/server/solr/mycores
     networks:
-      - vivo
+      - vivoweb
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8983/solr/vivocore/admin/ping || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
 
-  tomcat:
+  vivo:
     container_name: vivo
+    image: vivoweb/vivo:latest
     hostname: vivo
     build:
       context: ./
       dockerfile: Dockerfile
       args:
-        - VIVO_DIR=/usr/local/vivo/home
-        - TDB_FILE_MODE=direct
-        - SOLR_URL=http://solr:8983/solr/vivocore
+        - TDB_FILE_MODE=${VIVO_TDB_FILE_MODE}
+        - VIVO_HOME=${VIVO_CONTAINER_VIVO_HOME}
+        - SOLR_URL=http://vivo-solr:${SOLR_CONTAINER_PORT}/solr/vivocore
     environment:
-      - RESET_HOME=${RESET_HOME}
-      - VERBOSE=${VERBOSE}
+      - RESET_HOME=${VIVO_RESET_HOME}
+      - VERBOSE=${VIVO_VERBOSE}
     ports:
-      - 8080:8080
+      - ${VIVO_HOST_PORT}:${VIVO_CONTAINER_PORT}
     volumes:
-      - ${LOCAL_VIVO_HOME}:/usr/local/vivo/home
+      - ${VIVO_HOST_VIVO_HOME}:${VIVO_CONTAINER_VIVO_HOME}
     networks:
-      - vivo
+      - vivoweb
+    depends_on:
+      vivo-solr:
+        condition: service_healthy
 
 networks:
-  vivo:
+  vivoweb:

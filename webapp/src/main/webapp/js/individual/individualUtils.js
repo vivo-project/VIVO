@@ -66,7 +66,7 @@ $(document).ready(function(){
 
 							spanStr = "<a title='" + i18nStrings.exportQrCodes + "' href='"
 							          + exportQrCodeUrl + "'>"
-							          + "<img id='codeImage' src='https://chart.googleapis.com/chart?cht=qr&amp;chs=125x125&amp;chl="
+							          + "<img id='codeImage' src='https://quickchart.io/chart?cht=qr&amp;chs=125x125&amp;chl="
 									  + vcard
 									  + "&amp;choe=UTF-8'/>"
 									  + "</a>";

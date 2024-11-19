@@ -21,6 +21,7 @@ utilities/rdbmigration/.work
 **/.project
 **/bin/
 
+vivo-cores/
 vivo-home/
 
 .fake

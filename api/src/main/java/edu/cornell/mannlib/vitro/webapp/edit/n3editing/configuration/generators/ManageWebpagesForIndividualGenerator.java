@@ -38,6 +38,8 @@ import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
  * This mainly sets up pageData for the template to use.
  */
 public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationGenerator implements EditConfigurationGenerator {
+    private static final String OBO_HAS_CONTACT_INFO_URI = "http://purl.obolibrary.org/obo/ARG_2000028";
+
     public static Log log = LogFactory.getLog(ManageWebpagesForIndividualGenerator.class);
 
     @Override
@@ -59,10 +61,12 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         config.addFormSpecificData("rankPredicate", "http://vivoweb.org/ontology/core#rank" );
         config.addFormSpecificData("reorderUrl", "/edit/reorder" );
         config.addFormSpecificData("deleteWebpageUrl", "/edit/primitiveDelete");
+        String fauxContextUri = vreq.getParameter("fauxContextUri");
 
         ParamMap paramMap = new ParamMap();
         paramMap.put("subjectUri", config.getSubjectUri());
         paramMap.put("editForm", this.getEditForm());
+        paramMap.put("fauxContextUri", fauxContextUri);
         paramMap.put("view", "form");
         String path = UrlBuilder.getUrl( UrlBuilder.Route.EDIT_REQUEST_DISPATCH ,paramMap);
 
@@ -76,6 +80,8 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         paramMap.put("predicateUri", config.getPredicateUri());
         paramMap.put("editForm" , this.getEditForm() );
         paramMap.put("cancelTo", "manage");
+        paramMap.put("fauxContextUri", fauxContextUri);
+
         if(domainUri != null && !domainUri.isEmpty()) {
         	paramMap.put("domainUri", domainUri);
         }

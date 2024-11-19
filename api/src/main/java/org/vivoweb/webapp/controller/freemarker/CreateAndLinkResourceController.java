@@ -57,6 +57,9 @@ import javax.servlet.annotation.WebServlet;
 import static edu.cornell.mannlib.vitro.webapp.auth.objects.AccessObject.SOME_LITERAL;
 import static edu.cornell.mannlib.vitro.webapp.auth.objects.AccessObject.SOME_PREDICATE;
 import static edu.cornell.mannlib.vitro.webapp.auth.objects.AccessObject.SOME_URI;
+import static edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary.Precision.DAY;
+import static edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary.Precision.MONTH;
+import static edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary.Precision.YEAR;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -1218,19 +1221,19 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
         if (date.month != null) {
             if (date.day != null) {
                 formattedDate = String.format("%04d-%02d-%02dT00:00:00", date.year, date.month, date.day);
-                precision = "http://vivoweb.org/ontology/core#dayPrecision";
+                precision = DAY.uri();
             } else {
                 formattedDate = String.format("%04d-%02d-01T00:00:00", date.year, date.month);
-                precision = "http://vivoweb.org/ontology/core#monthPrecision";
+                precision = MONTH.uri();
             }
         } else {
             formattedDate = String.format("%04d-01-01T00:00:00", date.year);
-            precision = "http://vivoweb.org/ontology/core#yearPrecision";
+            precision = YEAR.uri();
         }
 
         Resource dateResource = model.createResource(getUnusedUri(vreq)).addProperty(RDF.type, model.getResource("http://vivoweb.org/ontology/core#DateTimeValue"));
         dateResource.addProperty(model.createProperty(VIVO_DATETIME), formattedDate);
-        dateResource.addProperty(model.createProperty(VIVO_DATETIMEPRECISION), precision);
+        dateResource.addProperty(model.createProperty(VIVO_DATETIMEPRECISION), model.createResource(precision));
 
         work.addProperty(model.createProperty(VIVO_DATETIMEVALUE), dateResource);
         return true;

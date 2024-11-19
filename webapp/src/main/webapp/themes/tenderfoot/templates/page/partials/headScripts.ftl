@@ -16,6 +16,8 @@ var i18nStrings = {
 <script type="text/javascript" src="${urls.base}/js/html5.js"></script>
 <![endif]-->
 
+<script src="${urls.base}/js/bootstrap/js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
 	$(document).ready(function(){
         $('#nav-wrapper').height($("#nav").height());

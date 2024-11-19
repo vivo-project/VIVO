@@ -85,7 +85,7 @@
 
         <#local vCard = (removeBlankLines(vCard))?url>
 
-        <#local qrCodeUrl = "https://chart.googleapis.com/chart?cht=qr&amp;chs=${qrCodeWidth}x${qrCodeWidth}&amp;chl=${vCard}&amp;choe=UTF-8" >
+        <#local qrCodeUrl = "https://quickchart.io/chart?cht=qr&amp;chs=${qrCodeWidth}x${qrCodeWidth}&amp;chl=${vCard}&amp;choe=UTF-8" >
     </#if>
 
     <#return qrCodeUrl>
@@ -103,7 +103,7 @@
     <#if externalUrl != "">
     	<#local fullExternalUrl = externalUrl + individual.profileUrl>
     	<#local qrCodeContent = fullExternalUrl?url>
-        <#local qrCodeUrl = "https://chart.googleapis.com/chart?cht=qr&amp;chs=${qrCodeWidth}x${qrCodeWidth}&amp;chl=${qrCodeContent}&amp;choe=UTF-8" >
+        <#local qrCodeUrl = "https://quickchart.io/chart?cht=qr&amp;chs=${qrCodeWidth}x${qrCodeWidth}&amp;chl=${qrCodeContent}&amp;choe=UTF-8" >
     </#if>
 
     <#return qrCodeUrl>
