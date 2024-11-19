@@ -372,8 +372,8 @@ img.add-individual {
 /* TOOLTIP  ---------------------------------------->  */
 /* ------------------------------------------------->  */
 .vivoTooltip {
-    opacity: 1 !important;
-    --bs-tooltip-max-width: 400px !important;
+    opacity: 1;
+    max-width: 400px;
   }
   
   .vivoTooltip > .tooltip-inner {
@@ -405,12 +405,14 @@ img.add-individual {
     color: unset;
   }
   
-  .downloadTip {
-    --bs-tooltip-max-width: 600px !important;
+  div.vivoTooltip.downloadTip {
+    max-width: 600px;
+    --bs-tooltip-max-width: 600px;
   }
   
-  .vivoTooltip-yellow {
-    --bs-tooltip-max-width: 500px !important;
+  div.vivoTooltip.vivoTooltip-yellow {
+    max-width: 500px;
+    --bs-tooltip-max-width: 500px;
   }
   
   .vivoTooltip-yellow > .tooltip-inner {
@@ -421,10 +423,15 @@ img.add-individual {
     line-height: 12px;
   } 
 
-  span#qrCodeImage {
+  #qrCodeContainer {
+    position: absolute;
+    right: 380px;
+  }
+
+  span#qrCodeImage.bottomLeftAnchor {
     top: 23px;
     right: 25px;
-    left: initial !important;
+    left: initial;
   }
 
   .show {
