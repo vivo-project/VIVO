@@ -57,9 +57,11 @@
 						<img id="uriIcon" title="${individual.uri}" src="${urls.images}/individual/uriIcon.gif" alt="${i18n().uri_icon}"/>
 						<#if checkNamesResult?has_content >
 							<img id="qrIcon"  src="${urls.images}/individual/qr_icon.png" alt="${i18n().qr_icon}" />
-								<span id="qrCodeImage" class="hidden">${qrCodeLinkedImage!}
-									<a class="qrCloseLink" href="#"  title="${i18n().qr_code}">${i18n().close_capitalized}</a>
-								</span>
+								<div id="qrCodeContainer">
+									<span id="qrCodeImage" class="bottomLeftAnchor hidden">${qrCodeLinkedImage!}
+										<a class="qrCloseLink" href="#"  title="${i18n().qr_code}">${i18n().close_capitalized}</a>
+									</span>
+								</div>
 						</#if>
 					</span>
 					<section class="vcard person">
