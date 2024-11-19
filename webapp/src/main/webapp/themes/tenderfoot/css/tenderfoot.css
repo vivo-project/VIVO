@@ -371,70 +371,74 @@ img.add-individual {
 /* ------------------------------------------------->  */
 /* TOOLTIP  ---------------------------------------->  */
 /* ------------------------------------------------->  */
+/* 
 .vivoTooltip {
     opacity: 1;
+    --bs-tooltip-opacity: 1;
     max-width: 400px;
-  }
-  
-  .vivoTooltip > .tooltip-inner {
+    --bs-tooltip-max-width: 400px;
+}
+
+.vivoTooltip>.tooltip-inner {
     background-color: #f1f2ee;
     border: 1px solid #F1D031;
     text-align: left;
     border-radius: 0;
     color: #333;
     max-width: initial;
-  }
-  
-  .vivoTooltip > .tooltip-inner .close-footer {
-        display: flex;
-  }
-    
-  .vivoTooltip > .tooltip-inner .close-footer a.close {
-        margin-left: auto;
-  }
+}
 
-  .vivoTooltip > .tooltip-inner h5 {
+.vivoTooltip>.tooltip-inner .close-footer {
+    display: flex;
+}
+
+.vivoTooltip>.tooltip-inner .close-footer a.close {
+    margin-left: auto;
+}
+
+.vivoTooltip>.tooltip-inner h5 {
     padding-bottom: 0;
-  }
-  
-  .vivoTooltip > .tooltip-arrow::before {
+}
+
+.vivoTooltip>.tooltip-arrow::before {
     --bs-tooltip-bg: #F1D031;
-  }
-  
-  .tooltip:not(.vivoTooltip) > .tooltip-inner, .tooltip:not(.vivoTooltip) > .tooltip-inner * {
+}
+
+.tooltip:not(.vivoTooltip)>.tooltip-inner,
+.tooltip:not(.vivoTooltip)>.tooltip-inner * {
     color: unset;
-  }
-  
-  div.vivoTooltip.downloadTip {
+}
+
+div.vivoTooltip.downloadTip {
     max-width: 600px;
     --bs-tooltip-max-width: 600px;
-  }
-  
-  div.vivoTooltip.vivoTooltip-yellow {
+}
+
+div.vivoTooltip.vivoTooltip-yellow {
     max-width: 500px;
     --bs-tooltip-max-width: 500px;
-  }
-  
-  .vivoTooltip-yellow > .tooltip-inner {
+}
+
+.vivoTooltip-yellow>.tooltip-inner {
     background-color: #ffffc0;
     font-size: 0.8em;
     padding: 20px 22px;
     text-align: left;
     line-height: 12px;
-  } 
+} */
 
-  #qrCodeContainer {
+#qrCodeContainer {
     position: absolute;
     right: 380px;
-  }
+}
 
-  span#qrCodeImage.bottomLeftAnchor {
+span#qrCodeImage.bottomLeftAnchor {
     top: 23px;
     right: 25px;
     left: initial;
-  }
+}
 
-  .show {
+.show {
     display: block;
     opacity: 1;
-  }
+} 
