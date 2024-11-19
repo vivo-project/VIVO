@@ -435,6 +435,6 @@ img.add-individual {
   }
 
   .show {
-    display: block !important;
+    display: block;
     opacity: 1;
   }
