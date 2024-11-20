@@ -13,7 +13,7 @@ $(document).ready(function(){
                 title: "<div>" + i18nStrings.researchAreaTooltipOne + "</div><div>" + i18nStrings.researchAreaTooltipTwo + "</div>",
                 html: true,
                 fallbackPlacements: ['bottom', 'left', 'top', 'right'],
-				customClass: "vivoTooltip"
+				customClass: "vitroTooltip"
             }
         },
         {
@@ -22,7 +22,7 @@ $(document).ready(function(){
                 title: i18nStrings.quickviewTooltip,
                 html: true,
                 fallbackPlacements: ['bottom', 'left', 'top', 'right'],
-				customClass: "vivoTooltip"
+				customClass: "vitroTooltip"
             }
         },
         {
@@ -31,7 +31,7 @@ $(document).ready(function(){
                 title: "<div>" + i18nStrings.standardviewTooltipOne + '</div><div>' + i18nStrings.standardviewTooltipTwo + "</div>",
                 html: true,
                 fallbackPlacements: ['bottom', 'left', 'top', 'right'],
-				customClass: "vivoTooltip"
+				customClass: "vitroTooltip"
             }
         },
     ]

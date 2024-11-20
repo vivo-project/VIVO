@@ -90,7 +90,7 @@ function initGlobalToolTips() {
 			querySelector: "#imageIconOne",
 			data: {
 				title: "<div class='visCommonControllTooltip'>" + $('#toolTipOne').html() + "</div>",
-				customClass: "vivoTooltip vivoTooltip-yellow",
+				customClass: "vitroTooltip vitroTooltip-yellow",
 				html: true,
 				sanitize: false,
 				fallbackPlacements: ['right', 'bottom', 'top', 'left']
@@ -99,7 +99,7 @@ function initGlobalToolTips() {
 			querySelector: "#exploreInfoIcon",
 			data: {
 				title: "<div class='visCommonControllTooltip'>" + $('#exploreTooltipText').html() + "</div>",
-				customClass: "vivoTooltip vivoTooltip-yellow",
+				customClass: "vitroTooltip vitroTooltip-yellow",
 				html: true,
 				sanitize: false,
 				fallbackPlacements: ['right', 'bottom', 'top', 'left']
@@ -108,7 +108,7 @@ function initGlobalToolTips() {
 			querySelector: "#compareInfoIcon",
 			data: {
 				title: "<div class='visCommonControllTooltip'>" + $('#compareTooltipText').html() + "</div>",
-				customClass: "vivoTooltip vivoTooltip-yellow",
+				customClass: "vitroTooltip vitroTooltip-yellow",
 				html: true,
 				sanitize: false,
 				fallbackPlacements: ['right', 'bottom', 'top', 'left']
@@ -117,7 +117,7 @@ function initGlobalToolTips() {
 			querySelector: "#imageIconThree",
 			data: {
 				title: "<div class='visCommonControllTooltip'>" + $('#toolTipThree').html() + "</div>",
-				customClass: "vivoTooltip vivoTooltip-yellow",
+				customClass: "vitroTooltip vitroTooltip-yellow",
 				html: true,
 				sanitize: false,
 				fallbackPlacements: ['left', 'bottom', 'top', 'right']
