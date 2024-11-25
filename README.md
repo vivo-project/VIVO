@@ -87,7 +87,7 @@ docker run -p 8080:8080 vivoweb/vivo:development
 ```
 
 ## Community
-There are several ways to contact and join the VIVO community. All of them are listed at https://vivo.lyrasis.org/contact/
+There are several ways to contact and join the VIVO community. All of them are listed at [https://vivo.lyrasis.org/contact/](https://vivoweb.org/contact/).
 
 ## Contributing Code
 If you would like to contribute code to the VIVO project, please read instructions at [this page](https://github.com/vivo-project/VIVO/wiki/Development-Processes#process-for-suggesting-contribution).  Contributors welcome!
