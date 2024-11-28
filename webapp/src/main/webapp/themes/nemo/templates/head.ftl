@@ -20,6 +20,7 @@
     </#if>	
 </#if>	
 
+
 <#include "stylesheets.ftl">
 <#-- <link rel="stylesheet" href="${urls.theme}/css/screen.css" /> -->
 

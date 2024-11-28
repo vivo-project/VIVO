@@ -1,5 +1,16 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
+<style>
+ul#main-nav {
+    display:block;
+}
+
+nav.navbar.navbar-default {
+    display: block;
+    padding: 0;
+}
+</style>
+
 <div id="nav-wrapper">
     <div id="nav">
         <div class="container">
