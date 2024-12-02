@@ -85,7 +85,10 @@ corresponding changes in the included Templates. -->
     </div>
 </div>
 
-${headScripts.add('<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip.min.js"></script>')}
 
 ${stylesheets.add('<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/visualization.css" />',
-                  '<link rel="stylesheet" type="text/css" href="${urls.base}/css/jquery_plugins/qtip/jquery.qtip.min.css" />')}
+                  '<link rel="stylesheet" href="${urls.base}/bootstrap-5.3.2/css/bootstrap.min.css" />')}
+
+${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tooltip/tooltip-utils.js"></script>',
+                  '<script type="text/javascript" src="${urls.base}/js/tooltip/popper.min.js"></script>',
+                  '<script type="text/javascript" src="${urls.base}/bootstrap-5.3.2/js/bootstrap.min.js"></script>')}

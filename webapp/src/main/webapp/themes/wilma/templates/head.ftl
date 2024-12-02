@@ -18,6 +18,10 @@
     </#if>
 </#if>
 
+${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tooltip/tooltip-utils.js"></script>')}
+${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tooltip/popper.min.js"></script>')}
+${headScripts.add('<script type="text/javascript" src="${urls.base}/bootstrap-5.3.2/js/bootstrap.min.js"></script>')}
+
 <#include "stylesheets.ftl">
 <link rel="stylesheet" href="${urls.theme}/css/screen.css" />
 

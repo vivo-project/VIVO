@@ -10,6 +10,23 @@ $(document).ready(function(){
     // prevents the page jumping down when loading a page with a requested tab in the url
     removeHash();
 
+    // controls the property group tabs
+    let showAllBtn = $('#show-all-tabs')[0];
+    let tabList = $('ul.propertyTabsList')[0];
+
+    showAllBtn?.addEventListener('show.bs.tab', function (event) {
+        event.preventDefault()
+        showAllTabs();
+        manageLocalStorage();
+    })
+
+    showAllBtn?.addEventListener('hide.bs.tab', function (event) {
+        $(".tab-content>section.tab-pane").removeClass('show active')
+    })
+
+    tabList?.addEventListener('shown.bs.tab', function (event) {
+        manageLocalStorage();
+    })
     // ensures that shorter property group sections don't cause the page to "jump around"
     // when the tabs are clicked
     function padSectionBottoms() {
