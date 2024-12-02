@@ -6266,3 +6266,17 @@ uil-data:degree_candidacy.VIVO
         uil:hasApp      "VIVO" ;
         uil:hasKey      "degree_candidacy" ;
         uil:hasPackage  "VIVO-languages" .
+
+uil-data:vis_coauthor_vcard.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Включить внешних соавторов"@ru-RU ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "vis_coauthor_vcard" .
+
+uil-data:select_vcard_or_person.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Пожалуйста, выбирайте VCARD только в том случае, если у человека нет и не должно быть профиля в VIVO. В противном случае выберите тип \"Персона\"."@ru-RU ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "select_vcard_or_person" .

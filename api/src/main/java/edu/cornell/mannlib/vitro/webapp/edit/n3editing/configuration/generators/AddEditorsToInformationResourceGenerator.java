@@ -28,7 +28,7 @@ import org.apache.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.FirstAndLastNameValidator;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.PublicationHasAuthorValidator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
@@ -67,6 +67,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 
         editConfiguration.addNewResource("editorshipUri", DEFAULT_NS_TOKEN);
         editConfiguration.addNewResource("newPerson", DEFAULT_NS_TOKEN);
+	editConfiguration.addNewResource("newOrg", DEFAULT_NS_TOKEN);
         editConfiguration.addNewResource("vcardPerson", DEFAULT_NS_TOKEN);
         editConfiguration.addNewResource("vcardName", DEFAULT_NS_TOKEN);
 
@@ -85,7 +86,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
         //template file
         editConfiguration.setTemplate("addEditorsToInformationResource.ftl");
         //add validators
-        editConfiguration.addValidator(new FirstAndLastNameValidator("personUri", I18n.bundle(vreq)));
+        editConfiguration.addValidator(new PublicationHasAuthorValidator());
 
         //Adding additional data, specifically edit mode
         addFormSpecificData(editConfiguration, vreq);
@@ -109,6 +110,14 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 		 "@prefix foaf: <" + foaf + "> .  \n"   ;
 	}
 
+    public String getDisableVCardPrefix() {
+        return "@prefix fail_pattern: ?createVCard .\n";
+    }
+
+    public String getDisableRealPersonPrefix() {
+        return "@prefix fail_pattern: ?createPersonInstance .\n";
+    }
+	
 	private String getN3NewEditorship() {
 		return getN3PrefixString() +
 		"?editorshipUri a core:Editorship ;\n" +
@@ -118,7 +127,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 
 	private String getN3EditorshipRank() {
 		return getN3PrefixString() +
-        "?editorshipUri core:editorRank ?rank .";
+        "?editorshipUri core:rank ?rank .";
 	}
 
 	//first name, middle name, last name, and new perseon for new editor being created, and n3 for existing person
@@ -129,13 +138,21 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
                 getN3NewPersonMiddleName(),
                 getN3NewPersonLastName(),
                 getN3NewPerson(),
+
+                getN3NewVCardPersonFirstName() ,
+                getN3NewVCardPersonMiddleName(),
+                getN3NewVCardPersonLastName(),
+                getN3NewVCardPerson(),
+
                 getN3EditorshipRank(),
-                getN3ForExistingPerson());
+                getN3ForExistingPerson(),
+		getN3NewOrg(),
+                getN3ForExistingOrg());
 	}
 
 
 	private String getN3NewPersonFirstName() {
-		return getN3PrefixString() +
+		return getN3PrefixString() + getDisableRealPersonPrefix() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
             "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
@@ -146,7 +163,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 	}
 
 	private String getN3NewPersonMiddleName() {
-		return getN3PrefixString() +
+		return getN3PrefixString() + getDisableRealPersonPrefix() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
             "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
@@ -157,7 +174,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 	}
 
 	private String getN3NewPersonLastName() {
-		return getN3PrefixString() +
+		return getN3PrefixString() + getDisableRealPersonPrefix() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
             "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
@@ -168,17 +185,69 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 	}
 
 	private String getN3NewPerson() {
-		return  getN3PrefixString() +
+		return  getN3PrefixString() + getDisableRealPersonPrefix() +
         "?newPerson a foaf:Person ;\n" +
         "<" + RDFS.label.getURI() + "> ?label .\n" +
         "?editorshipUri core:relates ?newPerson .\n" +
         "?newPerson core:relatedBy ?editorshipUri . ";
 	}
 
+	// Changes here for creating vcards for external editors
+	private String getN3NewVCardPersonFirstName() {
+		return getN3PrefixString() + getDisableVCardPrefix() +
+            "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+            "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
+            "?vcardPerson vcard:hasName  ?vcardName . \n" +
+            "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +
+            "?vcardName vcard:givenName ?firstName .";
+	}
+
+	private String getN3NewVCardPersonMiddleName() {
+		return getN3PrefixString() + getDisableVCardPrefix() +
+            "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+            "?vcardPerson a vcard:Individual . \n" +
+            "?vcardPerson vcard:hasName  ?vcardName . \n" +
+            "?vcardName a vcard:Name . \n" +
+            "?vcardName <http://vivoweb.org/ontology/core#middleName> ?middleName .";
+	}
+
+	private String getN3NewVCardPersonLastName() {
+		return getN3PrefixString() + getDisableVCardPrefix() +
+            "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+            "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
+            "?vcardPerson vcard:hasName  ?vcardName . \n" +
+            "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +
+            "?vcardName vcard:familyName ?lastName .";
+	}
+
+	// Changes here for creating vcards for external editors
+	private String getN3NewVCardPerson() {
+	return  getN3PrefixString() + getDisableVCardPrefix() +
+	"@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
+	"?vcardPerson a vcard:Individual ;\n" +
+	"<" + RDFS.label.getURI() + "> ?label .\n" +
+        "?editorshipUri core:relates ?vcardPerson .\n" +
+        "?vcardPerson core:relatedBy ?editorshipUri . ";
+	}
+
 	private String getN3ForExistingPerson() {
 		return getN3PrefixString() +
 		"?editorshipUri core:relates ?personUri .\n" +
 		"?personUri core:relatedBy ?editorshipUri .";
+	}
+
+	private String getN3NewOrg() {
+		return  getN3PrefixString() +
+        "?newOrg a foaf:Organization ;\n" +
+        "<" + RDFS.label.getURI() + "> ?orgName .\n" +
+        "?editorshipUri core:relates ?newOrg .\n" +
+        "?newOrg core:relatedBy ?editorshipUri . ";
+	}
+
+	private String getN3ForExistingOrg() {
+		return getN3PrefixString() +
+		"?editorshipUri core:relates ?orgUri .\n" +
+		"?orgUri core:relatedBy ?editorshipUri .";
 	}
 
 	/**  Get new resources	 */
@@ -192,6 +261,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 			newResources.put("newPerson", DEFAULT_NS_TOKEN);
 			newResources.put("vcardPerson", DEFAULT_NS_TOKEN);
 			newResources.put("vcardName", DEFAULT_NS_TOKEN);
+			newResources.put("newOrg", DEFAULT_NS_TOKEN);
 			return newResources;
 		}
 
@@ -211,6 +281,10 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
     	List<String> urisOnForm = new ArrayList<String>();
     	//If an existing person is being used as an editor, need to get the person uri
     	urisOnForm.add("personUri");
+
+    	urisOnForm.add("createPersonInstance");
+    	urisOnForm.add("createVCard");
+    	urisOnForm.add("orgUri");
     	editConfiguration.setUrisOnform(urisOnForm);
 
     	//for person who is not in system, need to add first name, last name and middle name
@@ -219,6 +293,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
     			"middleName",
     			"lastName",
     			"rank",
+			"orgName",
     			"label");
     	editConfiguration.setLiteralsOnForm(literalsOnForm);
     }
@@ -247,8 +322,16 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
     	setLastNameField(editConfiguration);
     	setRankField(editConfiguration);
     	setPersonUriField(editConfiguration);
+    	setPatternFailFields(editConfiguration);
+    	setOrgUriField(editConfiguration);
+    	setOrgNameField(editConfiguration);
     }
 
+    private void setPatternFailFields(EditConfigurationVTwo editConfiguration) {
+        editConfiguration.addField(new FieldVTwo().setName("createVCard"));
+        editConfiguration.addField(new FieldVTwo().setName("createPersonInstance"));
+    }
+	
 	private void setLabelField(EditConfigurationVTwo editConfiguration) {
 		editConfiguration.addField(new FieldVTwo().
 				setName("label").
@@ -299,6 +382,20 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 				);
 	}
 
+	private void setOrgUriField(EditConfigurationVTwo editConfiguration) {
+		editConfiguration.addField(new FieldVTwo().
+				setName("orgUri")
+				);
+	}
+
+	private void setOrgNameField(EditConfigurationVTwo editConfiguration) {
+		editConfiguration.addField(new FieldVTwo().
+				setName("orgName").
+				setValidators(list("datatype:" + XSD.xstring.toString())).
+				setRangeDatatypeUri(XSD.xstring.toString())
+				);
+	}
+
 	//Form specific data
 	public void addFormSpecificData(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
 		HashMap<String, Object> formSpecificData = new HashMap<String, Object>();
@@ -313,14 +410,19 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 			+ "PREFIX core: <http://vivoweb.org/ontology/core#>\n"
 			+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
 			+ "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+			+ "PREFIX vcard:  <http://www.w3.org/2006/vcard/ns#>\n"
 			+ "CONSTRUCT\n"
 			+ "{\n"
 			+ "    ?subject core:relatedBy ?editorshipURI .\n"
 			+ "    ?editorshipURI a core:Editorship .\n"
 			+ "    ?editorshipURI core:relates ?editorURI .\n"
 			+ "    ?editorshipURI core:rank ?rank.\n"
-			+ "    ?editorURI a foaf:Person .\n"
+			+ "    ?editorURI a ?type .\n"
 			+ "    ?editorURI rdfs:label ?editorName .\n"
+			+ "    ?editorURI vcard:hasName ?vName .\n"
+			+ "    ?vName vcard:givenName ?firstName .\n"
+			+ "    ?vName vcard:familyName ?lastName .\n"
+			+ "    ?vName core:middleName ?middleName .\n"
 			+ "}\n"
 			+ "WHERE\n"
 			+ "{\n"
@@ -328,37 +430,74 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 			+ "        ?subject core:relatedBy ?editorshipURI .\n"
 			+ "        ?editorshipURI a core:Editorship .\n"
 			+ "        ?editorshipURI core:relates ?editorURI .\n"
-			+ "        ?editorURI a foaf:Person .\n"
+			+ "        ?editorURI a foaf:Agent .\n"
+			+ "        ?editorURI a ?type .\n"
 			+ "    }\n"
 			+ "    UNION\n"
 			+ "    {\n"
 			+ "        ?subject core:relatedBy ?editorshipURI .\n"
 			+ "        ?editorshipURI a core:Editorship .\n"
 			+ "        ?editorshipURI core:relates ?editorURI .\n"
-			+ "        ?editorURI a foaf:Person .\n"
+			+ "        ?editorURI a foaf:Agent .\n"
 			+ "        ?editorURI rdfs:label ?editorName .\n"
 			+ "    }\n"
 			+ "    UNION\n"
 			+ "    {\n"
 			+ "        ?subject core:relatedBy ?editorshipURI .\n"
 			+ "        ?editorshipURI a core:Editorship .\n"
-			+ "        ?editorshipURI core:rank ?rank.\n"
+			+ "        ?editorshipURI core:rank ?rank .\n"
+			+ "    }\n"
+			+ "    UNION\n"
+			+ "    {\n"
+			+ "        ?subject core:relatedBy ?editorshipURI .\n"
+			+ "        ?editorshipURI a core:Editorship .\n"
+			+ "        ?editorshipURI core:relates ?editorURI .\n"
+			+ "        ?editorURI a vcard:Individual .\n"
+			+ "        ?editorURI a ?type .\n"
+			+ "        ?editorURI vcard:hasName ?vName .\n"
+			+ "        ?vName vcard:givenName ?firstName .\n"
+			+ "        ?vName vcard:familyName ?lastName .\n"
+			+ "    }\n"
+			+ "    UNION\n"
+			+ "    {\n"
+			+ "         ?subject core:relatedBy ?editorshipURI .\n"
+			+ "         ?editorshipURI a core:Editorship .\n"
+			+ "         ?editorshipURI core:relates ?editorURI .\n"
+			+ "         ?editorURI a vcard:Individual .\n"
+			+ "         ?editorURI a ?type .\n"
+			+ "         ?editorURI vcard:hasName ?vName .\n"
+			+ "         ?vName core:middleName ?middleName .\n"
 			+ "    }\n"
 			+ "}\n";
 
-    private static String EDITORSHIPS_QUERY = ""
+    private static String EDITORSHIPS_QUERY = " \n"
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
         + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
         + "PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n"
+	+ "PREFIX vcard: <http://www.w3.org/2006/vcard/ns#> \n"
         + "SELECT ?editorshipURI (REPLACE(STR(?editorshipURI),\"^.*(#)(.*)$\", \"$2\") AS ?editorshipName) ?editorURI ?editorName ?rank \n"
-        + "WHERE { \n"
+        + "WHERE { { \n"
         + "?subject core:relatedBy ?editorshipURI . \n"
         + "?editorshipURI a core:Editorship . \n"
         + "?editorshipURI core:relates ?editorURI . \n"
-        + "?editorURI a foaf:Person . \n"
+        + "?editorURI a foaf:Agent . \n"
         + "OPTIONAL { ?editorURI rdfs:label ?editorName } \n"
         + "OPTIONAL { ?editorshipURI core:rank ?rank } \n"
-        + "} ORDER BY ?rank";
+		+ "} UNION {  \n"
+	    + "	 ?subject core:relatedBy ?editorshipURI .  \n"
+	    + "	 ?editorshipURI a core:Editorship .  \n"
+	    + "	 ?editorshipURI core:relates ?editorURI .  \n"
+	    + "	 ?editorURI a vcard:Individual .  \n"
+	    + "	 ?editorURI vcard:hasName ?vName . \n"
+	    + "	 ?vName vcard:givenName ?firstName . \n"
+	    + "	 ?vName vcard:familyName ?lastName . \n"
+	    + "	 OPTIONAL { ?vName core:middleName ?middleName . } \n"
+	    + "	 OPTIONAL { ?editorshipURI core:rank ?rank }  \n"
+	    + "	 bind ( COALESCE(?firstName, \"\") As ?firstName1) . \n"
+	    + "	 bind ( COALESCE(?middleName, \"\") As ?middleName1) . \n"
+	    + "	 bind ( COALESCE(?lastName, \"\") As ?lastName1) . \n"
+	    + "	 bind (concat(str(str(?lastName1) + \", \"),str(str(?middleName1) + \" \"),str(?firstName1)) as ?editorName) . \n"
+        + "} } ORDER BY ?rank";
 
 
     private List<EditorshipInfo> getExistingEditorships(String subjectUri, VitroRequest vreq) {
@@ -390,6 +529,8 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
         } catch (Exception e) {
             log.error(e, e);
         }
+        // Added QueryUtils.removeDuplicatesMapsFromList ...
+	editorships = QueryUtils.removeDuplicatesMapsFromList(editorships, "editorshipURI", "editorURI");
         log.debug("editorships = " + editorships);
         return getEditorshipInfo(editorships);
     }

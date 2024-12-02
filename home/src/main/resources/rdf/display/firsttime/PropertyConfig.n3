@@ -1914,7 +1914,7 @@ local:bfo_0000055Context a :ConfigContext ;
     :qualifiedBy      <http://purl.obolibrary.org/obo/BFO_0000023> .
 
 local:bfo_0000055Config a :ObjectPropertyDisplayConfig ;
-    :listViewConfigFile "listViewConfig-relatedRole.xml"^^xsd:string ;
+    :listViewConfigFile "listViewConfig-relatedExternalSpeakerRole.xml"^^xsd:string ;
     rdfs:label "relatedRole"@en-US;
     :displayName "participant" ;
     vitro:displayRankAnnot 17;

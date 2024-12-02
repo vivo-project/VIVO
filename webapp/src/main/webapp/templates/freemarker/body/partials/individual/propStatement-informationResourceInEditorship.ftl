@@ -7,13 +7,24 @@
  -->
 
 <#import "lib-sequence.ftl" as s>
+<#import "lib-meta-tags.ftl" as lmt>
+
 <@showEditorship statement />
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
 <#macro showEditorship statement>
-    <#if statement.person??>
-        <a href="${profileUrl(statement.uri("person"))}" title="${i18n().editor_name}">${statement.personName}</a>
+    <#if statement.editor??>
+    	<#if statement.subclass?? && statement.subclass?contains("vcard")>
+			<#if statement.editorName?replace(" ","")?length == statement.editorName?replace(" ","")?last_index_of(",") + 1 >
+        		${statement.editorName?replace(",","")}
+			<#else>
+				${statement.editorName!i18n().missing_editor}
+			</#if>
+    	<#else>
+        	<a href="${profileUrl(statement.uri("editor"))}" title="${i18n().editor_name}">${statement.editorName}</a>
+    	</#if>
+		<@lmt.addCitationMetaTag uri="http://vivoweb.org/ontology/core#Editorship" content=statement.editorName />
     <#else>
         <#-- This shouldn't happen, but we must provide for it -->
         <a href="${profileUrl(statement.uri("editorship"))}" title="${i18n().missing_editor}">${i18n().missing_editor}</a>
