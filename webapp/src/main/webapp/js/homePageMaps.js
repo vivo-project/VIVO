@@ -15,21 +15,21 @@ $(document).ready(function(){
     getGeoFocusResearcherCount();
 
 
-    $('a#globalLink').click(function() {
+    $('a#globalLink').on("click", function() {
         buildGlobalMap();
         $(this).addClass("selected");
         $('a#countryLink').removeClass("selected");
         $('a#localLink').removeClass("selected");
     });
 
-    $('a#countryLink').click(function() {
+    $('a#countryLink').on("click", function() {
         buildCountryMap();
         $(this).addClass("selected");
         $('a#globalLink').removeClass("selected");
         $('a#localLink').removeClass("selected");
     });
 
-    $('a#localLink').click(function() {
+    $('a#localLink').on("click", function() {
         buildLocalMap();
         $(this).addClass("selected");
         $('a#countryLink').removeClass("selected");
@@ -365,7 +365,7 @@ $(document).ready(function(){
                 action: "getGeoFocusLocations",
             },
             complete: function(xhr, status) {
-                var results = $.parseJSON(xhr.responseText);
+                var results = JSON.parse(xhr.responseText);
                 if ( results.length == 0 ) {
                     var html = i18nStrings.currentlyNoResearchers;
                     $('section#home-geo-focus div#timeIndicatorGeo span').html(html);
@@ -401,7 +401,7 @@ $(document).ready(function(){
             },
             complete: function(xhr, status) {
 
-                var results = $.parseJSON(xhr.responseText);
+                var results = JSON.parse(xhr.responseText);
                 // there will only ever be one key/value pair
                 if ( results != null ) {
                     geoResearcherCount = results.count;

@@ -37,7 +37,7 @@ var manageHideShowStatus = {
 
     bindEventListeners: function() {
 
-        $('.itemCheckbox').click(function() {
+        $('.itemCheckbox').on("click", function() {
             manageHideShowStatus.processItem(this);
             //return false;
         });
@@ -64,7 +64,7 @@ var manageHideShowStatus = {
                 additions: add,
                 retractions: retract
             },
-            dataType: 'json',
+            dataType: 'text',
             context: item, // context for callback
             complete: function(request, status) {
 

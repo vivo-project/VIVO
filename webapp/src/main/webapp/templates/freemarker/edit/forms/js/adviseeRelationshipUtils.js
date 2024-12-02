@@ -49,7 +49,7 @@ var adviseeRelUtils = {
         this.advisor.change( function(objEvent) {
            window.setTimeout('adviseeRelUtils.mapAdvisorValue()', 180);
         });
-        this.advisor.blur( function(objEvent) {
+        this.advisor.on("blur", function(objEvent) {
            window.setTimeout('adviseeRelUtils.mapAdvisorValue()', 180);
         });
 

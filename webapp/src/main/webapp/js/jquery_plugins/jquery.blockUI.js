@@ -26,7 +26,7 @@
 		var msie = /MSIE/.test(navigator.userAgent);
 		var ie6  = /MSIE 6.0/.test(navigator.userAgent) && ! /MSIE 8.0/.test(navigator.userAgent);
 		var mode = document.documentMode || 0;
-		var setExpr = $.isFunction( document.createElement('div').style.setExpression );
+		var setExpr = document.createElement('div').style.setExpression; // altered to make jquery happy
 
 		// global $ methods for blocking/unblocking the entire page
 		$.blockUI   = function(opts) { install(window, opts); };
@@ -551,9 +551,9 @@
 			// bind anchors and inputs for mouse and key events
 			var events = 'mousedown mouseup keydown keypress keyup touchstart touchend touchmove';
 			if (b)
-				$(document).bind(events, opts, handler);
+				$(document).on(events, opts, handler); // altered to make jquery happy
 			else
-				$(document).unbind(events, handler);
+				$(document).off(events, handler); // altered to make jquery happy
 
 		// former impl...
 		//		var $e = $('a,:input');
