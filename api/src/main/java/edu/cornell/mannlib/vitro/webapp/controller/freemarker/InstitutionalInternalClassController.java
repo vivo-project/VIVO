@@ -23,6 +23,7 @@ import org.apache.jena.shared.Lock;
 import edu.cornell.mannlib.vitro.webapp.auth.permissions.SimplePermission;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;
 import edu.cornell.mannlib.vitro.webapp.beans.VClass;
+import edu.cornell.mannlib.vitro.webapp.config.ContextPath;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.edit.utils.LocalNamespaceClassUtils;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.RedirectResponseValues;
@@ -81,8 +82,8 @@ public class InstitutionalInternalClassController extends FreemarkerHttpServlet 
 
     	//Check if existing local namespaces
 
-    	data.put("formUrl", vreq.getContextPath() + EDIT_FORM);
-    	data.put("cancelUrl", vreq.getContextPath() + REDIRECT_PAGE);
+    	data.put("formUrl", ContextPath.getPath(vreq) + EDIT_FORM);
+    	data.put("cancelUrl", ContextPath.getPath(vreq) + REDIRECT_PAGE);
 
     	//if no local namespaces, then provide message to display
     	//if existing namespace(s), then check
