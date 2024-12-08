@@ -148,4 +148,3 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/sm
 
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tooltip/tooltip-utils.js"></script>',
                   '<script type="text/javascript" src="${urls.base}/js/tooltip/popper.min.js"></script>',
-                  '<script type="text/javascript" src="${urls.base}/bootstrap-5.3.2/js/bootstrap.min.js"></script>')}
