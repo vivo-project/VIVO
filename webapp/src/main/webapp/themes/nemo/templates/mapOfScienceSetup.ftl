@@ -145,3 +145,6 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/sm
                   '<link rel="stylesheet" href="${urls.base}/js/visualization/entitycomparison/jquery_plugins/datatable/demo_table.css" />',
                   '<link rel="stylesheet" href="${urls.theme}/css/layout.css" />')}
 
+
+${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tooltip/tooltip-utils.js"></script>',
+                  '<script type="text/javascript" src="${urls.base}/js/tooltip/popper.min.js"></script>',

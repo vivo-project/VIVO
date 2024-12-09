@@ -8,6 +8,8 @@ legend {
 
 #nav {
     background: #f7f9f9;
+    position: sticky;
+    top: 0;
 }
 
 #nav.affix {
@@ -364,4 +366,24 @@ section#container div {
 img.add-individual {
     height: 15px;
     width: 15px;
+}
+
+/* ------------------------------------------------->  */
+/* TOOLTIP  ---------------------------------------->  */
+/* ------------------------------------------------->  */
+
+#qrCodeContainer {
+    position: absolute;
+    right: 380px;
+}
+
+span#qrCodeImage.bottomLeftAnchor {
+    top: 23px;
+    right: 25px;
+    left: initial;
+}
+
+.show {
+    display: block;
+    opacity: 1;
 }
