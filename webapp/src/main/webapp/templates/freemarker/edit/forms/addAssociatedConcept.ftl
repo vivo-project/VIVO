@@ -109,7 +109,7 @@
     <input type="submit" value="${i18n().add_concept}" id="showAddFormButton" name="showAddFormButton">  ${i18n().or}
     <a class="cancel" href="${cancelUrl}&url=/individual" title="${i18n().return_to_profile}">${i18n().return_to_profile}</a>
 </div>
-    <form id="addConceptForm" class="customForm" action="${submitUrl}">
+    <form id="addConceptForm" class="customForm" method="POST" action="${submitUrl}">
 		<#assign checkedSource = false />
 	<h4 class="services">${i18n().external_vocabulary_services}</h4>
     <#list sources?values?sort_by("label") as thisSource>
