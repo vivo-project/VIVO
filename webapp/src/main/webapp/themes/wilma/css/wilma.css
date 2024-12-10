@@ -98,7 +98,6 @@ input.block {
 label {
     margin-top: .5em;
     margin-bottom: .5em;
-    display: block;
 }
 label.inline {
     display: inline;
@@ -241,23 +240,9 @@ p.submit {
 .editingForm table {
     border-color: #dfe6e6;
 }
-
-.editingForm > table > tbody > tr > td.verticalfieldlabel {
+.editingForm td {
     padding: 3px;
 }
-
-.editingForm > table > tbody > tr > td.verticalfieldlabel:first-child {
-    width: 40%;
-}
-
-
-@media (min-width: 768px) {
-    .editingForm > table > tbody > tr > td.verticalfieldlabel:first-child {
-        width: 15%;
-    }
-}
-
-
 .editingForm .entryFormHead {
     background-color: #f1f2ee;
     border-color: #dfe6e6;
@@ -623,14 +608,13 @@ ul.individual-urls-people li a {
 /* LOG IN------>  */
 #login {
     float: right;
-    max-width: 332px;
+    width: 314px;
     border: 1px solid #e8ece9;
     margin-right: 25px;
     padding-bottom: 30px;
     margin-bottom: 30px;
     overflow: hidden;
-    margin-top: 30px;
-    padding: 15px;
+    margin-top: 20px;
 }
 body.login #login {
     float: none;
@@ -665,11 +649,6 @@ h3.internal-auth:hover {
     color: #a12424;
     padding-top: 5px;
 }
-
-#login-form > div {
-    padding: 10px 28px;
-}
-
 #login-form label {
     display: block;
     color: #5e6363;
@@ -764,7 +743,6 @@ p.password-note {
     margin-top: -10px;
     margin-right:-10px;
     height:34px;
-    padding: 10px;
 }
 p.external-auth {
     margin: 0 auto;
@@ -1581,7 +1559,6 @@ p.address-line {
 /* ------------------------------------------------->  */
 /* SITE ADMIN DASHBOARD ---------------------------->  */
 /* ------------------------------------------------->  */
-
 #adminDashboard .pageBodyGroup {
   padding: 0 1em .5em 1em;
 }
@@ -1755,368 +1732,4 @@ span.subclassExpandMinus {
 .collapseArrow {
     background:url(../images/green_minus_sign.gif) right center no-repeat;
     min-height:18px;
-}
-
-/* ------------------------------------------------->  */
-/* CAPABILITY MAP  --------------------------------->  */
-/* ------------------------------------------------->  */
-
-#wrapper-content #main-content #container {
-    width: initial !important;
-    margin-left: initial !important;
-}
-
-#helptext {
-    width: 100%;
-}
-
-
-#right-container {
-    width: 100%;
-    position: relative;
-    float: left;
-}
-
-.tabs {
-    width: 100%;
-}
-
-.tabs ul.titles li a, .tabs ul.titles li a{
-    width: 50%;
-}
-
-#center-container {
-    position: relative;
-    width: 100% !important;
-}
-
-@media (min-width: 768px) {
-    #adminDashboard .pageBodyGroup {
-        flex: 0 0 auto;
-        width: 50%;
-    }
-
-    #right-container {
-        width: 30%;
-        position: absolute;
-    }
-
-    #helptext {
-        width: 70%;
-        padding-right: 10px;
-    }
-
-    #center-container {
-        position: absolute;
-    }
-    
-}
-
-#cutofflabel {
-    width: initial;
-}
-
-#queryform input[type="text"], select, input[type="password"]{
-    max-width: 100%;
-}
-
-#queryCutoff {
-    margin-left: -54px;
-}
-
-#infovis {
-    width: 100% !important;
-}
-
-#infovis > svg {
-    width: 100% !important;
-}
-
-/* Author Network */
-
-.propertyTabsList {
-    display: flex;
-}
-
-#body {
-    min-width: initial;
-}
-
-#chord {
-    width: 100%;
-    float: left !important;
-    overflow: auto;
-}
-
-
-#chord > svg {
-    transform-origin: 0 50%;
-    -webkit-transform-origin: 0 50%;
-    -ms-transform-origin: 0 50%;
-    transform-origin: 0 50%;
-}
-
-@media (max-width: 360px) {
-    #chord > svg {
-        scale: 0.3;
-    }
-    
-    #chord-info-div {
-        scale: 0.7;
-    }
-}
-
-@media (min-width: 361px) and (max-width: 399px) {
-    #chord > svg {
-        scale: 0.4;
-    }
-    
-    #chord-info-div {
-        scale: 0.7;
-    }
-}
-
-
-@media (min-width: 400px) and (max-width: 449px) {
-    #chord > svg {
-        scale: 0.44;
-    }
-    
-    #chord-info-div {
-        scale: 0.7;
-    }
-}
-
-
-
-@media (min-width: 450px) and (max-width: 499px) {
-    #chord > svg {
-        scale: 0.5;
-    }
-    
-    #chord-info-div {
-        scale: 0.7;
-    }
-}
-
-
-
-@media (min-width: 500px) and (max-width: 575px) {
-    #chord > svg {
-        scale: 0.55;
-    }
-    
-    #chord-info-div {
-        scale: 0.8;
-    }
-}
-
-@media (min-width: 576px) and (max-width: 767px) {
-    #chord > svg {
-        scale: 0.6;
-    }
-}
-
-
-@media (min-width: 768px) and (max-width: 991px) {
-    #chord > svg {
-        scale: 0.8;
-    }
-}
-
-
-
-#sparkline-container-full > #publication-count-sparkline-include {
-    width: 100%;
-    margin-bottom: 0px;
-}
-
-
-#sparkline-container-full > #coauthor-count-sparkline-include {
-    width: 100%;
-    margin-bottom: 0px;
-}
-
-#sparkline-container-full .google-visualization-sparkline-default img.google-visualization-sparkline-image {
-    max-width: 100%;
-}
-
-
-#body .vis-tables {
-    width: 100%;
-    margin-bottom: 0px;
-}
-
-@media (min-width: 768px) {
-    #sparkline-container-full > #publication-count-sparkline-include {
-        width: 50%;
-        margin-bottom: 15px;
-    }
-    #sparkline-container-full > #coauthor-count-sparkline-include {
-        width: 50%;
-        margin-bottom: 15px;
-    }
-    #body .vis-tables {
-        width: 48%;
-        margin-bottom: 15px;
-    }
-}
-
-#graphContainer {
-    width: 100%;
-    position: relative;
-    overflow-x: auto;
-    height: 100%;
-}
-
-#leftblock {
-    width: 100%;
-}
-
-#rightblock {
-    width: 100%;
-    margin-right: 0;
-}
-
-@media (min-width: 768px) {
-    #leftblock {
-        width: 39%;
-    }
-    
-    #rightblock {
-        width: 54%;
-    }
-}
-
-#temporal-graph {
-    height: 100%;
-    overflow-x: auto;
-}
-
-#temporal-graph-response > .blockUI  {
-    width: 100%;
-    max-width: 420px;
-    left: 0;
-}
-
-
-.editingForm > table > tbody > tr {
-    text-wrap: wrap;
-    line-break: anywhere;
-    line-height: unset;
-}
-
-/* table.form-background tr td {
-    width: 100%;
-    display: block;
-} */
-
-#wrapper-content > div > div > div > div > table > tbody > tr > td > div > form > div {
-    display: flex;
-    flex-direction: column;
-}
-
-#wrapper-content  table > tbody > tr.header > td.verticalfieldlabel {
-    width: 100px;
-}
-
-#container section table tbody .subclassCell {
-    word-wrap: break-word;
-}
-
-table.classHierarchy {
-    min-width: initial;
-    max-width: initial;
-    width: calc(100% - 25);
-}
-
-section#container div {
-    width: initial;
-}
-
-section#container div {
-    width: initial;
-}
-
-#noLocalOntologyExists {
-    width: 100%;
-}
-
-#noLocalOntologyExists blockquote {
-    text-wrap: wrap;
-    word-break: break-word;
-}
-
-.proxy-profile {
-    width: 100%;
-}
-
-.proxy-profile .proxy {
-    width: 100%;
-}
-
-.proxy-profile .profile {
-    width: 100%;
-    padding-left: 0;
-}
-
-@media (min-width: 768px) {
-    .proxy-profile .proxy {
-        width: 50%;
-    }
-    
-    .proxy-profile .profile {
-        width: 50%;
-        padding-left: 12px;
-    }
-}
-
-ul.menuItems {
-    max-width: 300px;
-    width: initial;
-}
-
-section#floatRight {
-    width: initial;
-}
-
-#managePage #floatRight {
-    width: 100%;
-    float: unset;
-}
-
-#managePage #leftSide {
-    width: 100%;
-}
-
-@media (min-width: 768px) {
-    #managePage #floatRight {
-        width: initial;
-        float: right;
-    }
-    
-    #managePage #leftSide {
-        width: initial;
-    }
-}
-
-.customForm {
-    width: 100%;
-    overflow-x: auto;
-}
-
-.classHierarchy {
-    word-break: break-all;
-}
-
-#startup-trace h4, #startup-trace li{
-    overflow-wrap: anywhere;
-}
-
-#indexer {
-    overflow-x: auto;
-}
-
-form li {
-    overflow-wrap: break-word;
 }
