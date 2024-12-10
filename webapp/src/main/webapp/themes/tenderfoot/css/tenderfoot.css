@@ -8,8 +8,6 @@ legend {
 
 #nav {
     background: #f7f9f9;
-    position: sticky;
-    top: 0;
 }
 
 #nav.affix {
