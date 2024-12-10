@@ -6,7 +6,6 @@ var i18nStrings = {
     allCapitalized: '${i18n().all_capitalized?js_string}',
 };
 </script>
-<script src="${urls.base}/bootstrap-5.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${urls.base}/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="${urls.base}/js/jquery-migrate-1.4.1.js"></script>
 <script type="text/javascript" src="${urls.base}/js/vitroUtils.js"></script>

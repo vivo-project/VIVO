@@ -189,8 +189,7 @@ ${headScripts.add(
 	'<script type="text/javascript" src="${urls.base}/js/tiny_mce/tiny_mce.js"></script>',
 	'<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>',
 	'<script type="text/javascript" src="${urls.base}/js/tooltip/tooltip-utils.js"></script>',
-	'<script type="text/javascript" src="${urls.base}/js/tooltip/popper.min.js"></script>',
-	'<script src="${urls.base}/bootstrap-5.3.2/js/bootstrap.min.js"></script>'
+	'<script type="text/javascript" src="${urls.base}/js/tooltip/popper.min.js"></script>'
  )}
 
 ${scripts.add(
