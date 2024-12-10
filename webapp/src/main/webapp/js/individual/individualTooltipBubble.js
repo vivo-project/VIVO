@@ -11,8 +11,7 @@ $(document).ready(function(){
             querySelector: "#researchAreaIcon",
             data: {
                 title: "<div>" + i18nStrings.researchAreaTooltipOne + "</div><div>" + i18nStrings.researchAreaTooltipTwo + "</div>",
-                html: true,
-                fallbackPlacements: ['bottom', 'left', 'top', 'right'],
+                placements: ['top', 'right', 'bottom', 'left'],
 				customClass: "vitroTooltip"
             }
         },
@@ -20,8 +19,7 @@ $(document).ready(function(){
             querySelector: "#fullViewIcon",
             data: {
                 title: i18nStrings.quickviewTooltip,
-                html: true,
-                fallbackPlacements: ['bottom', 'left', 'top', 'right'],
+                placements: ['top', 'right', 'bottom', 'left'],
 				customClass: "vitroTooltip"
             }
         },
@@ -29,8 +27,7 @@ $(document).ready(function(){
             querySelector: "#quickViewIcon",
             data: {
                 title: "<div>" + i18nStrings.standardviewTooltipOne + '</div><div>' + i18nStrings.standardviewTooltipTwo + "</div>",
-                html: true,
-                fallbackPlacements: ['bottom', 'left', 'top', 'right'],
+                placements: ['top', 'right', 'bottom', 'left'],
 				customClass: "vitroTooltip"
             }
         },

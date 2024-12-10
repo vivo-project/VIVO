@@ -91,36 +91,28 @@ function initGlobalToolTips() {
 			data: {
 				title: "<div class='visCommonControllTooltip'>" + $('#toolTipOne').html() + "</div>",
 				customClass: "vitroTooltip vitroTooltip-yellow",
-				html: true,
-				sanitize: false,
-				fallbackPlacements: ['right', 'bottom', 'top', 'left']
+				placements: ['left', 'top', 'bottom', 'right']
 			}
 		},{
 			querySelector: "#exploreInfoIcon",
 			data: {
 				title: "<div class='visCommonControllTooltip'>" + $('#exploreTooltipText').html() + "</div>",
 				customClass: "vitroTooltip vitroTooltip-yellow",
-				html: true,
-				sanitize: false,
-				fallbackPlacements: ['right', 'bottom', 'top', 'left']
+				placements: ['left', 'top', 'bottom', 'right']
 			}
 		},{
 			querySelector: "#compareInfoIcon",
 			data: {
 				title: "<div class='visCommonControllTooltip'>" + $('#compareTooltipText').html() + "</div>",
 				customClass: "vitroTooltip vitroTooltip-yellow",
-				html: true,
-				sanitize: false,
-				fallbackPlacements: ['right', 'bottom', 'top', 'left']
+				placements: ['left', 'top', 'bottom', 'right']
 			}
 		},{
 			querySelector: "#imageIconThree",
 			data: {
 				title: "<div class='visCommonControllTooltip'>" + $('#toolTipThree').html() + "</div>",
 				customClass: "vitroTooltip vitroTooltip-yellow",
-				html: true,
-				sanitize: false,
-				fallbackPlacements: ['left', 'bottom', 'top', 'right']
+				placements: ['left', 'top', 'bottom', 'right']
 			}
 		},
 	]

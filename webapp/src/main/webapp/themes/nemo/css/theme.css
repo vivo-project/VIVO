@@ -268,15 +268,3 @@ These are helper classes to add margin gaps where needed
 .input-group-header-search {
 	
 }
-
-#filter-groups .tab-content .tab-pane.active:not(.show) {
-  opacity: 0;
-}
-
-#filter-groups .tab-content .tab-pane.show:not(.active) {
-  opacity: 0;
-}
-
-.fade.in:not(.active) {
-  display: none;
-}
