@@ -188,8 +188,7 @@ var i18nStringsUriRdf = {
 };
 </script>
 
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/bootstrap-5.3.2/css/bootstrap.min.css" />',
-                  '<link rel="stylesheet" href="${urls.base}/css/individual/individual.css" />',
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual.css" />',
                   '<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />',
                   '<link rel="stylesheet" href="${urls.base}/css/individual/individual-2column-view.css" />',
                   '<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />')}
