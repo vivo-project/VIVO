@@ -188,8 +188,10 @@ ${stylesheets.add(
 ${headScripts.add(
 	'<script type="text/javascript" src="${urls.base}/js/tiny_mce/tiny_mce.js"></script>',
 	'<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>',
-	'<script type="text/javascript" src="${urls.base}/js/tooltip/tooltip-utils.js"></script>',
-	'<script type="text/javascript" src="${urls.base}/js/tooltip/popper.min.js"></script>'
+
+    '<script type="text/javascript" src="${urls.base}/webjars/floatingui/floating-ui.core.umd.js"></script>',
+	'<script type="text/javascript" src="${urls.base}/webjars/floatingui/floating-ui.dom.umd.js"></script>',
+	'<script type="text/javascript" src="${urls.base}/js/tooltip/tooltip-utils.js"></script>'
  )}
 
 ${scripts.add(

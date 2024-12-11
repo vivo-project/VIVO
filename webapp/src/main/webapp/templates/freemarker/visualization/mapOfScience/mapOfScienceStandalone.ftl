@@ -88,5 +88,7 @@ corresponding changes in the included Templates. -->
 
 ${stylesheets.add('<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/visualization.css" />')}
 
-${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tooltip/tooltip-utils.js"></script>',
-                  '<script type="text/javascript" src="${urls.base}/js/tooltip/popper.min.js"></script>',
+${headScripts.add('<script type="text/javascript" src="${urls.base}/webjars/floatingui/floating-ui.core.umd.js"></script>',
+                  '<script type="text/javascript" src="${urls.base}/webjars/floatingui/floating-ui.dom.umd.js"></script>',
+                  '<script type="text/javascript" src="${urls.base}/js/tooltip/tooltip-utils.js"></script>'
+                  )}
