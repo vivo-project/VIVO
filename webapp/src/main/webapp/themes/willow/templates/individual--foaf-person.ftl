@@ -2,7 +2,7 @@
 
 <#--
     Individual profile page template for foaf:Person individuals. This is the default template for foaf persons
-    in the Wilma theme and should reside in the themes/wilma/templates directory.
+    in the Willow theme and should reside in the themes/willow/templates directory.
 -->
 
 <#include "individual-setup.ftl">
@@ -19,7 +19,7 @@
 <#if !languageCount??>
   <#assign languageCount = 1>
 </#if>
-<#assign visRequestingTemplate = "foaf-person-wilma">
+<#assign visRequestingTemplate = "foaf-person-willow">
 
 <#--add the VIVO-ORCID interface -->
 <#include "individual-orcidInterface.ftl">
