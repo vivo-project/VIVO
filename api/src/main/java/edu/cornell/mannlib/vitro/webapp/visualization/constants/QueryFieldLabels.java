@@ -3,7 +3,7 @@
 package edu.cornell.mannlib.vitro.webapp.visualization.constants;
 
 /**
- * Thsi contains the sparql fields which are used to capture data for the value objects.
+ * This contains the sparql fields which are used to capture data for the value objects.
  * @author cdtank
  */
 public class QueryFieldLabels {
@@ -47,6 +47,8 @@ public class QueryFieldLabels {
 	 * */
 	public static final String CO_AUTHOR_URL = "coAuthPersonLit";
 	public static final String CO_AUTHOR_LABEL = "coAuthPersonLabelLit";
+	public static final String CO_AUTHOR_PERSON_GIVEN = "coAuthorPersonGiven";
+	public static final String CO_AUTHOR_PERSON_FAMILY = "coAuthorPersonFamily";
 
 	/*
 	 * College related field labels
