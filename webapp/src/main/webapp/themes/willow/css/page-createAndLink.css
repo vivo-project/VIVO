@@ -1,0 +1,82 @@
+#createAndLink select {
+    height: 2.5em;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+#createAndLink .citation_error:before {
+    content: url('../../../images/createAndLink/error.png');
+    transform: scale(0.5);
+    margin-top: 10px;
+    margin-right: 10px;
+    float: left;
+}
+#createAndLink .citation_error {
+    height: 70px;
+}
+#createAndLink .citation_claimed:before {
+    content: url('../../../images/createAndLink/tick.png');
+    transform: scale(0.75);
+    margin-top: -17px;
+    margin-left: 535px;
+    float: left;
+    position: absolute;
+}
+#createAndLink .citation_claimed:hover:before {
+    opacity: 0.2;
+}
+#createAndLink .citation_claimed .citation {
+    opacity: 0.2;
+}
+#createAndLink .citation_claimed:hover .citation {
+    opacity: 1.0;
+}
+#createAndLink .citation_type {
+    font-style: italic;
+    padding: 5px;
+}
+#createAndLink .citation_title {
+    font-weight: bold;
+}
+#createAndLink .citation_journal {
+    font-style: italic;
+}
+#createAndLink .claimed {
+    font-weight: bold;
+}
+#createAndLink .linked {
+    font-style: italic;
+}
+#createAndLink .entryId {
+    background-color: #3e8baa; /* #E0E0E0; */
+    color: #ffffff;
+    padding: 5px;
+    font-weight: bold;
+    display: inline-block;
+}
+#createAndLink .entry {
+    border: 2px solid #3e8baa; /* #E0E0E0; */
+    padding: 5px;
+}
+#createAndLink label {
+    display: inline;
+}
+#createAndLink .radioWithLabel:checked + .labelForRadio {
+    font-weight: bold;
+}
+#createAndLink .description {
+    padding-left: 22px;
+}
+#createAndLink .remainder {
+    font-style: italic;
+}
+#createAndLink .claim-for {
+    float: right;
+    border: 2px solid #3e8baa; /* #E0E0E0; */
+    padding: 5px;
+}
+#createAndLink .claim-for h3 {
+    text-align: center;
+}
