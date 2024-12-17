@@ -124,7 +124,7 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
         "?projectRole <"+ label +"> ?roleLabel . \n" ;
 
     final static String n3ForNewPerson  =
-        getDisableRealPersonPrefix() +
+        getPersonInstanceFailPattern() +
         "?projectRole <http://purl.obolibrary.org/obo/RO_0000052> ?newPerson . \n" +
         "?newPerson <http://purl.obolibrary.org/obo/RO_0000053> ?projectRole . \n" +
         "?newPerson a <http://xmlns.com/foaf/0.1/Person> . \n" +
@@ -136,7 +136,7 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
         " ";
 
     final static String firstNameAssertion  =
-        getDisableRealPersonPrefix() +
+        getPersonInstanceFailPattern() +
         "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
         "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
         "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
@@ -146,7 +146,7 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
         "?vcardName vcard:givenName ?firstName .";
 
     final static String lastNameAssertion  =
-        getDisableRealPersonPrefix() +
+        getPersonInstanceFailPattern() +
         "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
         "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
         "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
@@ -155,23 +155,23 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
         "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +
         "?vcardName vcard:familyName ?lastName .";
 
-    public static String getDisableVCardPrefix() {
+    public static String getVcardFailPattern() {
         return "@prefix fail_pattern: ?createVCard .\n";
     }
 
-    public static String getDisableRealPersonPrefix() {
+    public static String getPersonInstanceFailPattern() {
         return "@prefix fail_pattern: ?createPersonInstance .\n";
     }
 
     final static String n3ForNewVCardPerson  =
-        getDisableVCardPrefix() +
+        getVcardFailPattern() +
         "?projectRole <http://purl.obolibrary.org/obo/RO_0000052> ?vcardPerson . \n" +
         "?vcardPerson <http://purl.obolibrary.org/obo/RO_0000053> ?projectRole . \n" +
         "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
         "?vcardPerson <"+ label +"> ?personLabel . ";
 
     final static String firstNameVCardAssertion  =
-        getDisableVCardPrefix() +
+        getVcardFailPattern() +
         "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
         "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
         "?vcardPerson vcard:hasName  ?vcardName . \n" +
@@ -179,7 +179,7 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
         "?vcardName vcard:givenName ?firstName .";
 
     final static String lastNameVCardAssertion  =
-        getDisableVCardPrefix() +
+        getVcardFailPattern() +
         "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
         "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
         "?vcardPerson vcard:hasName  ?vcardName . \n" +

@@ -109,11 +109,11 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 		 "@prefix foaf: <" + foaf + "> .  \n"   ;
 	}
 
-    public String getDisableVCardPrefix() {
+    public String getVcardFailPattern() {
         return "@prefix fail_pattern: ?createVCard .\n";
     }
 
-    public String getDisableRealPersonPrefix() {
+    public String getPersonInstanceFailPattern() {
         return "@prefix fail_pattern: ?createPersonInstance .\n";
     }
 
@@ -152,7 +152,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 
 
 	private String getN3NewPersonFirstName() {
-		return getN3PrefixString() + getDisableRealPersonPrefix() +
+		return getN3PrefixString() + getPersonInstanceFailPattern() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
             "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
@@ -163,7 +163,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 	}
 
 	private String getN3NewPersonMiddleName() {
-		return getN3PrefixString() + getDisableRealPersonPrefix() +
+		return getN3PrefixString() + getPersonInstanceFailPattern() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
             "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
@@ -174,7 +174,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 	}
 
 	private String getN3NewPersonLastName() {
-		return getN3PrefixString() + getDisableRealPersonPrefix() +
+		return getN3PrefixString() + getPersonInstanceFailPattern() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
             "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
@@ -185,7 +185,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 	}
 
 	private String getN3NewPerson() {
-		return  getN3PrefixString() + getDisableRealPersonPrefix() +
+		return  getN3PrefixString() + getPersonInstanceFailPattern() +
         "?newPerson a foaf:Person ;\n" +
         "<" + RDFS.label.getURI() + "> ?label .\n" +
         "?authorshipUri core:relates ?newPerson .\n" +
@@ -194,7 +194,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 
 	// Changes here for creating vcards for external authors
 	private String getN3NewPersonVCardFirstName() {
-		return getN3PrefixString() + getDisableVCardPrefix() +
+		return getN3PrefixString() + getVcardFailPattern() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
             "?vcardPerson vcard:hasName  ?vcardName . \n" +
@@ -203,7 +203,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 	}
 
 	private String getN3NewPersonVCardMiddleName() {
-		return getN3PrefixString() + getDisableVCardPrefix() +
+		return getN3PrefixString() + getVcardFailPattern() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?vcardPerson a vcard:Individual . \n" +
             "?vcardPerson vcard:hasName  ?vcardName . \n" +
@@ -212,7 +212,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 	}
 
 	private String getN3NewPersonVCardLastName() {
-		return getN3PrefixString() + getDisableVCardPrefix() +
+		return getN3PrefixString() + getVcardFailPattern() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
             "?vcardPerson vcard:hasName  ?vcardName . \n" +
@@ -222,7 +222,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 
 	// Changes here for creating vcards for external authors
 	private String getN3NewPersonVCard() {
-		return  getN3PrefixString() + getDisableVCardPrefix() +
+		return  getN3PrefixString() + getVcardFailPattern() +
 	"@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
 	"?vcardPerson a vcard:Individual ;\n" +
 	"<" + RDFS.label.getURI() + "> ?label .\n" +
@@ -249,20 +249,6 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 		"?authorshipUri core:relates ?orgUri .\n" +
 		"?orgUri core:relatedBy ?authorshipUri .";
 	}
-	/**  Get new resources	 */
-	//A new authorship uri will always be created when an author is added
-	//A new person may be added if a person not in the system will be added as author
-	 private Map<String, String> generateNewResources(VitroRequest vreq) {
-
-
-			HashMap<String, String> newResources = new HashMap<String, String>();
-			newResources.put("authorshipUri", DEFAULT_NS_TOKEN);
-			newResources.put("newPerson", DEFAULT_NS_TOKEN);
-			newResources.put("vcardPerson", DEFAULT_NS_TOKEN);
-			newResources.put("vcardName", DEFAULT_NS_TOKEN);
-			newResources.put("newOrg", DEFAULT_NS_TOKEN);
-			return newResources;
-		}
 
 	/** Set URIS and Literals In Scope and on form and supporting methods	 */
     private void setUrisAndLiteralsInScope(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
@@ -302,7 +288,6 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
         //Sparql queries are all empty for existing values
     	//This form is different from the others that it gets multiple authors on the same page
     	//and that information will be queried and stored in the additional form specific data
-        HashMap<String, String> map = new HashMap<String, String>();
     	editConfiguration.setSparqlForExistingUris(new HashMap<String, String>());
     	editConfiguration.setSparqlForExistingLiterals(new HashMap<String, String>());
     	editConfiguration.setSparqlForAdditionalUrisInScope(new HashMap<String, String>());

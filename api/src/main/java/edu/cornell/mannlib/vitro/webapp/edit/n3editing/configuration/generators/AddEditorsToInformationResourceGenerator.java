@@ -33,7 +33,6 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUti
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
-import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 
 /**
  * This is a slightly unusual generator that is used by Manage Editors on
@@ -110,11 +109,11 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 		 "@prefix foaf: <" + foaf + "> .  \n"   ;
 	}
 
-    public String getDisableVCardPrefix() {
+    public String getVcardFailPattern() {
         return "@prefix fail_pattern: ?createVCard .\n";
     }
 
-    public String getDisableRealPersonPrefix() {
+    public String getPersonInstanceFailPattern() {
         return "@prefix fail_pattern: ?createPersonInstance .\n";
     }
 	
@@ -152,7 +151,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 
 
 	private String getN3NewPersonFirstName() {
-		return getN3PrefixString() + getDisableRealPersonPrefix() +
+		return getN3PrefixString() + getPersonInstanceFailPattern() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
             "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
@@ -163,7 +162,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 	}
 
 	private String getN3NewPersonMiddleName() {
-		return getN3PrefixString() + getDisableRealPersonPrefix() +
+		return getN3PrefixString() + getPersonInstanceFailPattern() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
             "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
@@ -174,7 +173,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 	}
 
 	private String getN3NewPersonLastName() {
-		return getN3PrefixString() + getDisableRealPersonPrefix() +
+		return getN3PrefixString() + getPersonInstanceFailPattern() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
             "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
@@ -185,7 +184,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 	}
 
 	private String getN3NewPerson() {
-		return  getN3PrefixString() + getDisableRealPersonPrefix() +
+		return  getN3PrefixString() + getPersonInstanceFailPattern() +
         "?newPerson a foaf:Person ;\n" +
         "<" + RDFS.label.getURI() + "> ?label .\n" +
         "?editorshipUri core:relates ?newPerson .\n" +
@@ -194,7 +193,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 
 	// Changes here for creating vcards for external editors
 	private String getN3NewVCardPersonFirstName() {
-		return getN3PrefixString() + getDisableVCardPrefix() +
+		return getN3PrefixString() + getVcardFailPattern() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
             "?vcardPerson vcard:hasName  ?vcardName . \n" +
@@ -203,7 +202,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 	}
 
 	private String getN3NewVCardPersonMiddleName() {
-		return getN3PrefixString() + getDisableVCardPrefix() +
+		return getN3PrefixString() + getVcardFailPattern() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?vcardPerson a vcard:Individual . \n" +
             "?vcardPerson vcard:hasName  ?vcardName . \n" +
@@ -212,7 +211,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 	}
 
 	private String getN3NewVCardPersonLastName() {
-		return getN3PrefixString() + getDisableVCardPrefix() +
+		return getN3PrefixString() + getVcardFailPattern() +
             "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
             "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
             "?vcardPerson vcard:hasName  ?vcardName . \n" +
@@ -222,7 +221,7 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 
 	// Changes here for creating vcards for external editors
 	private String getN3NewVCardPerson() {
-	return  getN3PrefixString() + getDisableVCardPrefix() +
+	return  getN3PrefixString() + getVcardFailPattern() +
 	"@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
 	"?vcardPerson a vcard:Individual ;\n" +
 	"<" + RDFS.label.getURI() + "> ?label .\n" +
@@ -249,21 +248,6 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
 		"?editorshipUri core:relates ?orgUri .\n" +
 		"?orgUri core:relatedBy ?editorshipUri .";
 	}
-
-	/**  Get new resources	 */
-	//A new editorship uri will always be created when an editor is added
-	//A new person may be added if a person not in the system will be added as editor
-	 private Map<String, String> generateNewResources(VitroRequest vreq) {
-
-
-			HashMap<String, String> newResources = new HashMap<String, String>();
-			newResources.put("editorshipUri", DEFAULT_NS_TOKEN);
-			newResources.put("newPerson", DEFAULT_NS_TOKEN);
-			newResources.put("vcardPerson", DEFAULT_NS_TOKEN);
-			newResources.put("vcardName", DEFAULT_NS_TOKEN);
-			newResources.put("newOrg", DEFAULT_NS_TOKEN);
-			return newResources;
-		}
 
 	/** Set URIS and Literals In Scope and on form and supporting methods	 */
     private void setUrisAndLiteralsInScope(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
@@ -303,7 +287,6 @@ public class AddEditorsToInformationResourceGenerator extends VivoBaseGenerator 
         //Sparql queries are all empty for existing values
     	//This form is different from the others that it gets multiple editors on the same page
     	//and that information will be queried and stored in the additional form specific data
-        HashMap<String, String> map = new HashMap<String, String>();
     	editConfiguration.setSparqlForExistingUris(new HashMap<String, String>());
     	editConfiguration.setSparqlForExistingLiterals(new HashMap<String, String>());
     	editConfiguration.setSparqlForAdditionalUrisInScope(new HashMap<String, String>());

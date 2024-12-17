@@ -3,7 +3,6 @@
 package edu.cornell.mannlib.vitro.webapp.visualization.coauthorship;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,36 +11,34 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.jena.query.QueryExecution;
-import org.apache.jena.query.QueryExecutionFactory;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
+import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CoAuthorshipData;
+import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CollaboratorComparator;
+import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
+import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
+import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.utilities.VisualizationCaches;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Collaboration;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Collaborator;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UniqueIDGenerator;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.jena.iri.IRI;
 import org.apache.jena.iri.IRIFactory;
 import org.apache.jena.iri.Violation;
-
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.Syntax;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
-
-import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CoAuthorshipData;
-import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CollaboratorComparator;
-import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
-import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Collaboration;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Collaborator;
-import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
-import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UniqueIDGenerator;
 
 /**
  * This query runner is used to execute a sparql query to get all the publications
@@ -97,8 +94,8 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 			RDFNode documentNode = qs.get(QueryFieldLabels.DOCUMENT_URL);
 			RDFNode coAuthorURLNode = qs.get(QueryFieldLabels.CO_AUTHOR_URL);
 			RDFNode coAuthorLabelNode = qs.get(QueryFieldLabels.CO_AUTHOR_LABEL);
-			RDFNode coAuthorFamilyNode  = qs.get("coAuthorPersonFamily");
-			RDFNode coAuthorGivenNode   = qs.get("coAuthorPersonGiven");
+			RDFNode coAuthorFamilyNode  = qs.get(QueryFieldLabels.CO_AUTHOR_PERSON_FAMILY);
+			RDFNode coAuthorGivenNode   = qs.get(QueryFieldLabels.CO_AUTHOR_PERSON_GIVEN);
 			RDFNode publicationDateNode = qs.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
 
 			String authorURI    = egoAuthorURLNode == null ? null : egoAuthorURLNode.asLiteral().getString();
