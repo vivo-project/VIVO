@@ -27,6 +27,15 @@
     :hasIncomingProperty "http://vivoweb.org/ontology/core#relatedBy" ;
     :hasOutgoingProperty "http://vivoweb.org/ontology/core#relates" .
 
+# Special case for VCards being linked to Authorships (no label present)
+:extension_forContextNodeVCards
+    a   searchIndex:indexing.IndexingUriFinder ,
+        searchIndex:documentBuilding.DocumentModifier ,
+        searchIndex:extensions.VCardsAcrossContextNodes ;
+    rdfs:label "VCards across relatedBy/relates" ;
+    :hasIncomingProperty "http://vivoweb.org/ontology/core#relatedBy" ;
+    :hasOutgoingProperty "http://vivoweb.org/ontology/core#relates" .
+
 # Some roles look like this:  bearerOf ==> role ==> roleContributesTo
 #                            inheresIn <== role <== contributingRole
 :extension_forContextNodes_role_contributes_1
