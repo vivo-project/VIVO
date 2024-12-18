@@ -74,13 +74,13 @@ function initFilter(dom) {
 function initVisModeTypeButton() {
 	// Switch vis mode handling
 	var viewTypeRadio = "input[name='view-type']";
-	$(viewTypeRadio).change( function() {
+	$(viewTypeRadio).on("change", function() {
 		var visMode = $(viewTypeRadio+ ":checked").val();
 		switchVisMode(visMode);
 	});
 
 	/* Init default filter */
-	$(viewTypeRadio+ ":eq(0)").click();
+	$(viewTypeRadio+ ":eq(0)").trigger("click");
 }
 
 function initGlobalToolTips() {

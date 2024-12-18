@@ -19,7 +19,7 @@ $(document).ready(function(){
     $('a#verbosePropertySwitch:contains("' + i18nStrings.verboseTurnOff + '")').addClass('verbose-off');
 
     // Reveal vCard QR code when QR icon is clicked
-    $('#qrIcon, .qrCloseLink').click(function() {
+    $('#qrIcon, .qrCloseLink').on("click", function() {
 
 
 		// only create the img the first time, so check if it already exists
@@ -32,7 +32,7 @@ $(document).ready(function(){
 					uri: individualUri,
             	},
             	complete: function(xhr, status) {
-                	var results = $.parseJSON(xhr.responseText);
+                	var results = JSON.parse(xhr.responseText);
                 	if ( results.length == 0 ) {
                     	var html = i18nStrings.currentlyNoResearchers;
                 	}
