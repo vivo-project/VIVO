@@ -273,6 +273,11 @@ a.map-of-science-links {
     color: #2485AE;
 }
 
+.visCommonControllTooltip {
+    padding: 16px 22px;
+    max-width: 400px;
+}
+
 /* -------------------------------------------------------------->  */
 /* SPECIAL STYLES FOR THE error  */
 /* -------------------------------------------------------------->  */
