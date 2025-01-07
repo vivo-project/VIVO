@@ -113,30 +113,34 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
         return conf;
     }
 
+    private static final String vcardFailPattern = "@prefix fail_pattern: ?createVCard .\n";
+
+    private static final String personInstanceFailPattern = "@prefix fail_pattern: ?createPersonInstance .\n";
+    
     /* N3 assertions for working with educational training */
 
-    final static String n3ForNewProjectRole =
+    private static final String n3ForNewProjectRole =
         "@prefix core: <"+ vivoCore +"> .\n" +
-		"@prefix rdfs: <"+ rdfs +">  . \n"+
+        "@prefix rdfs: <"+ rdfs +">  . \n"+
         "?project <http://purl.obolibrary.org/obo/BFO_0000055>  ?projectRole .\n" +
         "?projectRole  a <http://vivoweb.org/ontology/core#ResearcherRole> .\n" +
         "?projectRole <http://purl.obolibrary.org/obo/BFO_0000054> ?project . \n" +
         "?projectRole <"+ label +"> ?roleLabel . \n" ;
 
-    final static String n3ForNewPerson  =
-        getPersonInstanceFailPattern() +
+    private static final String n3ForNewPerson  =
+        personInstanceFailPattern +
         "?projectRole <http://purl.obolibrary.org/obo/RO_0000052> ?newPerson . \n" +
         "?newPerson <http://purl.obolibrary.org/obo/RO_0000053> ?projectRole . \n" +
         "?newPerson a <http://xmlns.com/foaf/0.1/Person> . \n" +
         "?newPerson <"+ label +"> ?personLabel . ";
 
-    final static String n3ForExistingPerson  =
+    private static final String n3ForExistingPerson  =
         "?projectRole <http://purl.obolibrary.org/obo/RO_0000052> ?existingPerson . \n" +
         "?existingPerson <http://purl.obolibrary.org/obo/RO_0000053> ?projectRole . \n" +
         " ";
 
-    final static String firstNameAssertion  =
-        getPersonInstanceFailPattern() +
+    private static final String firstNameAssertion  =
+        personInstanceFailPattern +
         "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
         "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
         "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
@@ -145,8 +149,8 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
         "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +
         "?vcardName vcard:givenName ?firstName .";
 
-    final static String lastNameAssertion  =
-        getPersonInstanceFailPattern() +
+    private static final String lastNameAssertion  =
+        personInstanceFailPattern +
         "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
         "?newPerson <http://purl.obolibrary.org/obo/ARG_2000028>  ?vcardPerson . \n" +
         "?vcardPerson <http://purl.obolibrary.org/obo/ARG_2000029>  ?newPerson . \n" +
@@ -155,31 +159,23 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
         "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +
         "?vcardName vcard:familyName ?lastName .";
 
-    public static String getVcardFailPattern() {
-        return "@prefix fail_pattern: ?createVCard .\n";
-    }
-
-    public static String getPersonInstanceFailPattern() {
-        return "@prefix fail_pattern: ?createPersonInstance .\n";
-    }
-
-    final static String n3ForNewVCardPerson  =
-        getVcardFailPattern() +
+    private static final String n3ForNewVCardPerson  =
+        vcardFailPattern +
         "?projectRole <http://purl.obolibrary.org/obo/RO_0000052> ?vcardPerson . \n" +
         "?vcardPerson <http://purl.obolibrary.org/obo/RO_0000053> ?projectRole . \n" +
         "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
         "?vcardPerson <"+ label +"> ?personLabel . ";
 
-    final static String firstNameVCardAssertion  =
-        getVcardFailPattern() +
+    private static final String firstNameVCardAssertion  =
+        vcardFailPattern +
         "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
         "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
         "?vcardPerson vcard:hasName  ?vcardName . \n" +
         "?vcardName a <http://www.w3.org/2006/vcard/ns#Name> . \n" +
         "?vcardName vcard:givenName ?firstName .";
 
-    final static String lastNameVCardAssertion  =
-        getVcardFailPattern() +
+    private static final String lastNameVCardAssertion  =
+        vcardFailPattern +
         "@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .  \n" +
         "?vcardPerson a <http://www.w3.org/2006/vcard/ns#Individual> . \n" +
         "?vcardPerson vcard:hasName  ?vcardName . \n" +
@@ -188,18 +184,18 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
 
     /* Queries for editing an existing educational training entry */
 
-    final static String roleLabelQuery =
+    private static final String roleLabelQuery =
         "SELECT ?roleLabel WHERE {\n"+
         "?projectRole <"+ label +"> ?roleLabel }\n";
 
-    final static String existingPersonQuery  =
+    private static final String existingPersonQuery  =
         "PREFIX rdfs: <"+ rdfs +">   \n"+
         "SELECT ?existingPerson WHERE {\n"+
         "?projectRole <http://purl.obolibrary.org/obo/RO_0000052> ?existingPerson . \n" +
         "?existingPerson <http://purl.obolibrary.org/obo/RO_0000053> ?projectRole . \n" +
         " }";
 
-    final static String personLabelQuery  =
+    private static final String personLabelQuery  =
         "PREFIX rdfs: <"+ rdfs +">   \n"+
         "SELECT ?existingPersonLabel WHERE {\n"+
         "?projectRole <http://purl.obolibrary.org/obo/RO_0000052> ?existingPerson . \n" +
@@ -209,15 +205,15 @@ public class ProjectHasParticipantGenerator  extends VivoBaseGenerator implement
 
 
   //Adding form specific data such as edit mode
-	public void addFormSpecificData(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
-		HashMap<String, Object> formSpecificData = new HashMap<String, Object>();
-		formSpecificData.put("editMode", getEditMode(vreq).name().toLowerCase());
-		editConfiguration.setFormSpecificData(formSpecificData);
-	}
+    private void addFormSpecificData(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
+        HashMap<String, Object> formSpecificData = new HashMap<String, Object>();
+        formSpecificData.put("editMode", getEditMode(vreq).name().toLowerCase());
+        editConfiguration.setFormSpecificData(formSpecificData);
+    }
 
-	public EditMode getEditMode(VitroRequest vreq) {
-		List<String> predicates = new ArrayList<String>();
-		predicates.add("http://purl.obolibrary.org/obo/RO_0000053");
-		return EditModeUtils.getEditMode(vreq, predicates);
-	}
+    private EditMode getEditMode(VitroRequest vreq) {
+        List<String> predicates = new ArrayList<String>();
+        predicates.add("http://purl.obolibrary.org/obo/RO_0000053");
+        return EditModeUtils.getEditMode(vreq, predicates);
+    }
 }
