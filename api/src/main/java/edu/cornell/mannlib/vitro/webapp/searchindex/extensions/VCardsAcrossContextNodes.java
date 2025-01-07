@@ -18,7 +18,7 @@ import edu.cornell.mannlib.vitro.webapp.beans.VClass;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ContextModelAccess;
 import edu.cornell.mannlib.vitro.webapp.modules.searchEngine.SearchInputDocument;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
-import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.RDFServiceUtils;
 import edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier;
 import edu.cornell.mannlib.vitro.webapp.searchindex.indexing.IndexingUriFinder;
 import edu.cornell.mannlib.vitro.webapp.utils.configuration.ContextModelsUser;
@@ -27,11 +27,12 @@ import edu.cornell.mannlib.vitro.webapp.utils.configuration.Validation;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.query.ParameterizedSparqlString;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.rdf.model.Statement;
-import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.vocabulary.RDFS;
 
 /**
@@ -241,66 +242,47 @@ public class VCardsAcrossContextNodes implements IndexingUriFinder, DocumentModi
 
     private void addVCardsToTextFields(SearchInputDocument doc, List<String> vcardUris) {
         for (String  vcardUri : vcardUris) {
-            String value = vcardToString(vcardUri);
-            if (!StringUtils.isEmpty(value)) {
-                doc.addField(ALLTEXT, value);
-                doc.addField(ALLTEXTUNSTEMMED, value);
+            String name = getNameForVCard(vcardUri);
+            if (StringUtils.isNotEmpty(name)) {
+                doc.addField(ALLTEXT, name);
+                doc.addField(ALLTEXTUNSTEMMED, name);
             }
         }
     }
 
-    private String vcardToString(String vcardUri) {
-        String givenName = null;
-        String familyName = null;
+    private static final String SELECT_NAME_QUERY = ""
+        + "PREFIX vcard:    <http://www.w3.org/2006/vcard/ns#>\n"
+        + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
+        + "SELECT ?familyName ?givenName \n"
+        + "WHERE { \n"
+        + "   OPTIONAL { ?uri vcard:familyName ?familyName . } \n"
+        + "   OPTIONAL { ?uri vcard:givenName ?givenName . } \n"
+        + "} \n";
 
-        String sparqlConstruct = "CONSTRUCT\n"
-                + "{\n"
-                + "    <" + vcardUri + "> ?p ?o .\n"
-                + "}\n"
-                + "WHERE\n"
-                + "{\n"
-                + "    <" + vcardUri + "> ?p ?o .\n"
-                + "}\n";
-
-        try {
-            Model model = ModelFactory.createDefaultModel();
-            rdfService.sparqlConstructQuery(sparqlConstruct, model);
-
-            StmtIterator iter = model.listStatements();
-            try {
-                while (iter.hasNext()) {
-                    Statement stmt = iter.nextStatement();
-
-                    if (stmt.getObject().isLiteral()) {
-                        switch (stmt.getPredicate().getURI()) {
-                            case "http://www.w3.org/2006/vcard/ns#familyName":
-                                familyName = stmt.getObject().asLiteral().getString();
-                                break;
-
-                            case "http://www.w3.org/2006/vcard/ns#givenName":
-                                givenName = stmt.getObject().asLiteral().getString();
-                                break;
-                        }
-                    }
-                }
-            } finally {
-                iter.close();
-            }
-        } catch (RDFServiceException e) {
-            log.error(e, e);
+    private String getNameForVCard(String vcardUri) {
+        ParameterizedSparqlString pss = new ParameterizedSparqlString(SELECT_NAME_QUERY);
+        pss.setIri("uri", vcardUri);
+        ResultSet results = RDFServiceUtils.sparqlSelectQuery(pss.toString(), rdfService);
+        if (results == null || !results.hasNext()) {
+            return "";
         }
-
-        if (!StringUtils.isEmpty(familyName)) {
-            if (!StringUtils.isEmpty(givenName)) {
-                return familyName + ", " + givenName;
-            } else {
-                return familyName;
-            }
-        } else if (!StringUtils.isEmpty(givenName)) {
+        QuerySolution sol = results.next();
+        String familyName = getLiteralStringValue(sol.getLiteral("familyName"));
+        String givenName = getLiteralStringValue(sol.getLiteral("givenName"));
+        if (familyName.isEmpty()) {
             return givenName;
         }
+        if (givenName.isEmpty()) {
+            return familyName;
+        }
+        return familyName + ", " + givenName;
+    }
 
-        return null;
+    private String getLiteralStringValue(Literal literal) {
+        if (literal == null) {
+            return "";
+        }
+        return literal.getLexicalForm();
     }
 
     @Override
