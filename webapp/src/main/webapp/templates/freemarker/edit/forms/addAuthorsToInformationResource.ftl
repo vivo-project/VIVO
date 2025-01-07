@@ -132,11 +132,11 @@
         </p>
         
         <div>
-            <p>${i18n().select_vcard_or_person} ${requiredHint}</p>
+            <p>${i18n().add_to_person_profile} ${requiredHint}</p>
             <input type="radio" id="createVCard" class="radiotypes" name="createVCard" value="n3-pattern:create-vcard-instance"/>
-            <label class="inline" for="createVCard" >${i18n().vcard}</label>
+            <label class="inline" for="createVCard" >${i18n().no_add_to_person_profile}</label>
             <input type="radio" id="createPersonInstance" class="radiotypes" name="createPersonInstance" value="n3-pattern:create-person-instance" checked />
-            <label class="inline" for="createPersonInstance" >${i18n().person_capitalized}</label>
+            <label class="inline" for="createPersonInstance" >${i18n().yes_add_to_person_profile}</label>
         </div>
 
         <div id="selectedAuthor" class="acSelection">

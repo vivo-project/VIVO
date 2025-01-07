@@ -6274,9 +6274,23 @@ uil-data:vis_coauthor_vcard.VIVO
         uil:hasApp       "VIVO" ;
         uil:hasKey       "vis_coauthor_vcard" .
 
-uil-data:select_vcard_or_person.VIVO
+uil-data:add_to_person_profile.VIVO
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;
-        rdfs:label       "Please select VCARD only, when the person doesn't have and is not supposed to have a profile in VIVO. Otherwise choose the type \"Person\"."@en-CA ;
+        rdfs:label       ""Add to person’s profile page?"@en-CA ;
         uil:hasApp       "VIVO" ;
-        uil:hasKey       "select_vcard_or_person" .
+        uil:hasKey       "add_to_person_profile" .
+
+uil-data:yes_add_to_person_profile.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Yes"@en-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "yes_add_to_person_profile" .
+
+uil-data:no_add_to_person_profile.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "No"@en-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "no_add_to_person_profile" .

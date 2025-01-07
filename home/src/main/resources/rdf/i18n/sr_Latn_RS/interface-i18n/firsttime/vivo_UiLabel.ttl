@@ -6276,6 +6276,20 @@ uil-data:vis_coauthor_vcard.VIVO
 uil-data:select_vcard_or_person.VIVO
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;
-        rdfs:label       "Izaberite samo VCARD, kada osoba nema i ne bi trebalo da ima profil u VIVO-u. U suprotnom izaberite tip \"Osoba\"."@sr-Latn-RS ;
+        rdfs:label       "Dodati na stranicu profila osobe?"@sr-Latn-RS ;
         uil:hasApp       "VIVO" ;
         uil:hasKey       "select_vcard_or_person" .
+
+uil-data:yes_add_to_person_profile.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Da"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "yes_add_to_person_profile" .
+
+uil-data:no_add_to_person_profile.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Ne"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "no_add_to_person_profile" .
