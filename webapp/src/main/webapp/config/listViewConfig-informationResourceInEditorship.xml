@@ -4,7 +4,7 @@
 <!-- See guidelines at https://wiki.lyrasis.org/display/VIVODOC112x/Custom+List+View+Configurations -->
 
 <list-view-config>
-    <query-select>    
+    <query-select>
         PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
         PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
