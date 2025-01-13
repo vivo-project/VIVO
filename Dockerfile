@@ -11,7 +11,6 @@ ENV SOLR_URL=${SOLR_URL}
 RUN mkdir -p ${VIVO_HOME}
 
 # Copy VIVO home onto image for backup, initialization, and reset
-COPY ./installer/home/target/vivo /vivo-home
 COPY ./installer/webapp/target/vivo.war /usr/local/tomcat/webapps/ROOT.war
 
 COPY start.sh /start.sh

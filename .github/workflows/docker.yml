@@ -34,7 +34,7 @@ jobs:
       - name: Maven Build
         run: |
           cd ../VIVO
-          mvn clean package -s installer/example-settings.xml
+          mvn clean install -Dvivo-dir=/usr/local/vivo/home -Dapp-name=vivo -Ddefault-theme=wilma
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
