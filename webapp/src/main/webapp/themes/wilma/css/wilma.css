@@ -27,10 +27,21 @@ body {
     margin: 0 auto;
 }
 body {
-   background: #f3f3f0 url(../images/header-background.png) center 0 no-repeat;
+    background: #f3f3f0;
 }
+ 
+body > .banner {
+    z-index: -1;
+    background: url(../images/header-background.png) center 0 no-repeat;
+    width: 100%;
+    position: absolute;
+    height: 125px;
+    background-blend-mode: luminosity;
+    background-color: var(--banner-color);
+}
+
 a {
-    color: #2485AE;
+    color: var(--link-color, #2485AE);
 }
 a:hover,
 h2 a:hover,
@@ -48,11 +59,11 @@ h2 {
     padding: 10px 0 12px 0;
     margin: 0;
     font-size: 1.375em;
-    color: #064d68;
+    color: var(--primary-color-darker, #064d68);
     line-height: 1.5em;
 }
 h2 a {
-    color: #2485ae;
+    color: var(--primary-color, #2485ae);
 }
 h2 a:link,
 h2 a:visited {
@@ -62,19 +73,19 @@ h3 {
     padding: 10px 0 12px 0;
     margin: 0;
     font-size: 1.125em;
-    color: #064d68;
+    color: var(--primary-color-darker, #064d68);
 }
 h4 {
     padding: 10px 0 12px 0;
     margin: 0;
     font-size: 1em;
-    color: #064d68;
+    color: var(--primary-color-darker, #064d68);
 }
 h5 {
     padding: 10px 0 12px 0;
     margin: 0;
     font-size: .875em;
-    color: #064d68;
+    color: var(--primary-color-darker, #064d68);
 }
 /* ------------------------------------------------->  */
 /* EDITING STYLES ---------------------------------->  */
@@ -128,7 +139,7 @@ input.form-button:visited {
     position: relative;
     border: 0;
     margin: 0;
-    background-color: #749a02;
+    background-color: var(--accent-color, #749a02);
     color: #fff;
     font-size: 14px;
     font-weight: normal;
@@ -142,7 +153,7 @@ input.form-button:visited {
     color: #fff;
 }
 #verbose-mode b {
-    color: #595B5B;
+    color: var(--text-color, #595B5B);
 }
 #verbose-mode .verbose-off{
     background: #706a66;
@@ -163,7 +174,7 @@ input#delete:visited {
     cursor: pointer;
     border: 0;
     margin: 0;
-    background-color: #398aac;
+    background-color: var(--secondary-color, #398aac);
     color: #fff;
     font-size: 14px;
     font-weight: normal;
@@ -176,12 +187,12 @@ input.submit:hover,
 input#submit:hover,
 input.form-button:hover {
     color: #fff;
-    background-color: #b2d15a;
+    background-color: var(--accent-color, #b2d15a);
 }
 input.delete:hover,
 input#delete:hover {
     color: #fff;
-    background-color: #93c3d4;
+    background-color: var(--secondary-color, #93c3d4);
 }
 .verbose-toggle,
 .verbose-toggle:active,
@@ -253,7 +264,7 @@ p.submit {
     border-color: #e0dfdf;
     font-size: .8em;
     border-width: 1px;
-    color: #595B5B;
+    color: var(--text-color, #595B5B);
     padding: .3em;
 }
 a.return:hover,
@@ -264,26 +275,26 @@ a.return:active {
 }
 .database_header {
     background-color: #f1f2ee;
-    color: #2485ae;
+    color: var(--primary-color, #2485ae);
     font-size: 1em;
 }
 .database_upperleftcorner {
-    color: #5F6464;
+    color: var(--text-color, #5f6464);
     font-size: 1em;
 }
 .database_upperleftcenter {
     background-color: #B0C4DE;
-    color: #5F6464;
+    color: var(--text-color, #5f6464);
     font-size: 1em;
 }
 .rownumheader,
 .rownum {
     background-color: #F1F2EE;
-    color: #5F6464;
+    color: var(--text-color, #5f6464);
     font-size: 1em;
 }
 .headercenter {
-    color:  #5F6464;
+    color:  var(--text-color, #5f6464);
     font-size: 10pt;
     font-style: normal;
     text-align: center;
@@ -302,14 +313,14 @@ a.return:active {
     font-size: 1em;
 }
 .verticalfieldlabel {
-    color: #5E6363; /*#5F6464;*/
+    color: var(--text-color, #5f6464); /*#5F6464;*/
     font-style: normal !important;
     font-size: 10pt !important;
     line-height: 2em !important;
 }
 .row, .rowvert {
     background-color: #f7f9f9;
-    color: #5F6464;
+    color: var(--text-color, #5f6464);
     font-size: 10pt;
     font-style: normal;
     text-align: left;
@@ -317,13 +328,13 @@ a.return:active {
 }
 .rowalternate {
     background-color: #fff;
-    color: #5F6464;
+    color: var(--text-color, #5f6464);
     font-size: 1em;
     line-height: 2em;
 }
 .rowbold {
     background-color: #FFFAFA;
-    color: #5F6464;
+    color: var(--text-color, #5f6464);
     font-size: 10pt; /*1em;*/
     line-height: 2em;
 }
@@ -382,7 +393,7 @@ a.ingestMenu:visited,
 a.account-menu:link,
 a.account-menu:visited {
     text-decoration: none;
-    color: #2485AE;
+    color: var(--primary-color, #2485ae);
 }
 a.ingestMenu:hover,
 a.ingestMenu:active,
@@ -401,10 +412,15 @@ ul.ingestMenu {
 .toBeDeleted {
     margin-bottom: 0;
 }
+
 /* BACK-END FORMS -------------->  */
 .display-inline {
     display: inline-block;
 }
+.display-flex {
+    display: flex;
+}
+
 .theme-dir,
 #noContentMsg {
     clear: both;
@@ -458,6 +474,8 @@ h1.vivo-logo {
     top: 28px;
     left: 0;
     background: url(../images/VIVO-logo.png) 0 0 no-repeat;
+    background-size: contain;
+    background-image: var(--logo-url, url(../images/VIVO-logo.png));
 }
 h1.vivo-logo a {
     display: block;
@@ -504,9 +522,11 @@ ul#header-nav a.log-out {
     padding-top: 5px;
 }
 #search-field {
-    width: 396px;
-    height: 38px;
+    width: 393px;
+    height: 37px;
     background: url(../images/search-interior-pages.png) 0 0 no-repeat;
+    background-color: var(--accent-color);
+    background-blend-mode: luminosity;
 }
 #search-field input.search {
     text-decoration: none;
@@ -585,11 +605,11 @@ body.loggedIn #intro {
 #intro h2 {
     padding: 35px 0 12px 24px;
     border-bottom: none;
-    color: #2485AE;
+    color: var(--primary-color, #2485AE);
 }
 #intro p {
     font-size: 16px;
-    color: #5f6464;
+    color: var(--text-color, #5f6464);
     line-height: 1.3em;
     padding: 0 24px 0 24px;
 }
@@ -603,7 +623,7 @@ p.forgot-password a,
 ul#individual-personInPosition li a,
 ul.individual-urls li a,
 ul.individual-urls-people li a {
-    color: #2485ae
+    color: var(--primary-color, #2485ae);
 }
 /* LOG IN------>  */
 #login {
@@ -621,7 +641,7 @@ body.login #login {
 }
 #login h2 {
     font-size: 22px;
-    color: #2485ae;
+    color: var(--primary-color, #2485ae);
     padding-left: 15px;
     padding-top: 18px;
     border-bottom: none;
@@ -749,7 +769,7 @@ p.external-auth {
 }
 p.external-auth a.blue,
 p.external-auth a.blue:visited {
-     background-color: #398AAC;
+     background-color: var(--secondary-color, #398AAC);
      width: 180px;
      margin-bottom: 17px;
      line-height: 1.3em;
@@ -769,7 +789,7 @@ p.external-auth a.blue:hover {
     padding: 0;
     font-size: 22px;
     margin-bottom: 15px;
-    color: #2485AE;
+    color: var(--primary-color, #2485AE);
 		padding-left: 24px;
 }
 #search-home-field {
@@ -887,8 +907,8 @@ a.view-all-style {
 .home-sections h4 {
 		border-top: 1px solid rgba(220,228,227,.42); /* stroke */
 		border-bottom: 1px solid rgba(220,228,227,.42); /* stroke */
-		background-color: #395d7f; /* layer fill content */
-		border-bottom: 2px solid #62b6d7;
+		background-color: var(--primary-color, #395d7f); /* layer fill content */
+		border-bottom: 2px solid var(--secondary-color, #62b6d7);
 		color: #fff;
 }
 #home-stats {
@@ -1070,17 +1090,18 @@ ul#individual-facultyMemberships li:last-child {
     border-right: none;
 }
 #footer-nav a {
-    color: #4e5051
+    color: var(--link-color, #4e5051)
 }
 #footer-nav a:hover,
 a.terms,
 a.powered-by-vivo {
-    color: #09C;
+    color: var(--link-color, #09C);
     text-decoration: none;
 }
 a.terms:hover,
 a.powered-by-vivo:hover {
-    color: #4e5051;
+    /* TODO Darker */
+    color: var(--link-color, #09C);
     text-decoration: none;
 }
 p {
@@ -1123,7 +1144,7 @@ ul#individual-tools-people li a {
 }
 .green.button,
 .green.button:visited {
-    background-color: #749a02;
+    background-color: var(--accent-color, #749a02);
     color: #fff;
 }
 .green.button:hover {
@@ -1131,7 +1152,7 @@ ul#individual-tools-people li a {
 }
 .blue.button,
 .blue.button:visited {
-    background-color: #398aac;
+    background-color: var(--secondary-color, #398aac);
     color: #fff;
 }
 .blue.button:hover {
@@ -1159,7 +1180,7 @@ ul#individual-tools-people li a {
  }
 .individualList li a {
     font-weight: normal;
-    color: #2485AE;
+    color: var(--link-color, #2485ae);
 }
 
 /* ------------------------------------------------->  */
@@ -1174,7 +1195,7 @@ ul#individual-tools-people li a {
 }
 #menupage-intro h2 {
     font-size: 1.375em;
-    color: #064d68;
+    color: var(--primary-color-darker, #064d68);
     font-weight: normal;
 }
 #menupage-intro.people h2 {
@@ -1198,7 +1219,7 @@ ul#individual-tools-people li a {
 }
 #find-by h3 {
     font-size: 1.125em;
-    color: #2485ae;
+    color: var(--primary-color, #2485ae);
     font-weight: normal;
 }
 ul#find-filters a:hover,
@@ -1214,7 +1235,7 @@ ul#find-filters a.selected {
 }
 #researchers h3 {
     font-size: 1.25em;
-    color: #2485ae;
+    color: var(--primary-color, #2485ae);
     font-weight: normal;
     background: url(../images/arrow.gif) 140px 27px no-repeat;
 }
@@ -1230,7 +1251,7 @@ ul#find-filters a.selected {
     font-size: 4.375em;
     text-align: center;
     float: left;
-    color: #2485ae;
+    color: var(--primary-color, #2485ae);
     border-right: 1px dotted #dde4e3;
     font-weight: bold;
 }
@@ -1242,7 +1263,7 @@ ul#find-filters a.selected {
 }
 #nav-display p {
     font-size: 26px;
-    color: #2485ae;
+    color: var(--primary-color, #2485ae);
 }
 #nav-display img {
     border-left: 1px solid #e8e8e8;
@@ -1360,7 +1381,7 @@ article.property ul.property-list {
     background-color: #f2f9fb;
 }
 #admin h3 {
-    background: #2485AE;
+    background: var(--primary-color, #2485ae);
     color: #fff;
 }
 #admin .uri-link,
@@ -1368,15 +1389,30 @@ article.property ul.property-list {
     color: #888c8c;
 }
 #admin a {
-    color: #2a98bc;
+    color: var(--link-color, #2a98bc);
 }
+
+.advancedThemeColor {
+    display: none;
+}
+
+.themeColorReset {
+    opacity: 0.5;
+}
+
+.themeColorPickerWrapper{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
 /* INDIVIDUAL INTRO FOR ANY CLASS ------>  */
 .preferred {
     padding-top: .2em;
 }
 #individual-intro h1 {
     font-size: 1.375em;
-    color: #2485ae;
+    color: var(--primary-color, #2485ae);
 }
 #individual-intro span.display-title,
 h1.fn .display-title {
@@ -1406,7 +1442,7 @@ ul#individual-tools {
 .editingForm .entryFormHead h2,
 .header,
 .navlinkblock {
-    color: #5f6464;
+    color: var(--text-color, #5f6464);
 }
 ul.individual-urls {
     list-style: url(../../../images/individual/arrow-green.gif);
@@ -1430,7 +1466,7 @@ h3.internal-auth {
 }
 #individual-info h1.fn {
     font-size: 1.375em;
-    color: #595B5B;
+    color: var(--text-color, #595B5B);
     line-height: 1.3em;
 }
 #individual-info h2 {
@@ -1473,7 +1509,7 @@ a.all-vivo-publications {
 /* <------ TEMPORAL GRAPH and MAP O' SCIENCE  */
 #temporal-graph h3 a,
 #map-of-science h3 a {
-    color: #2485AE;
+    color: var(--primary-color, #2485ae);
     font-size: .8em !important;
     text-decoration: underline;
     vertical-align:text-top;
@@ -1485,7 +1521,7 @@ img.co-author {
 #co-authors h3,
 #right-hand-column h3 {
     font-size: 1.25em;
-    color: #2485ae;
+    color: var(--primary-color, #2485ae);
 }
 /* PROPERTY GROUP MENU ------>  */
 #property-group-menu {
@@ -1505,7 +1541,7 @@ img.co-author {
 section.property-group h2,
 #menupage-content h4 {
     font-size: 1.25em;
-    color: #2485ae;
+    color: var(--primary-color, #2485ae);
     font-weight: normal;
 }
 article.property {
@@ -1514,11 +1550,11 @@ article.property {
 article.property h3 {
     background: #fafaf9;
     font-size: 1.063em;
-    color: #8aa149;
+    color: var(--accent-color, #8aa149);
 }
 article.property ul.property-list li.subclass h3 {
     font-size: 1.063em;
-    color: #5E6363;
+    color: var(--primary-color, #5E6363);
 }
 article.property .data-property-statement {
     background: #fff;
@@ -1526,7 +1562,7 @@ article.property .data-property-statement {
     color: #5e6363;
 }
 article.property ul.property-list li a {
-    /*color: #2485ae;*/   /* cappadona: seems unnecessarily specific and is overriding .more-less from individual.css so I'm commenting out for now */
+    /*color: var(--primary-color, #2485ae);*/   /* cappadona: seems unnecessarily specific and is overriding .more-less from individual.css so I'm commenting out for now */
     line-height: 1.6em;
 }
 /* MISCELLANEOUS ------>  */
@@ -1567,7 +1603,7 @@ p.address-line {
   border-bottom: 1px dotted #AFB2B2;
   font-weight: bold;
   padding: .625em;
-  color: #064D68;
+  color: var(--primary-color-darker, #064d68);
   margin-bottom: .625em;
 }
 #adminDashboard .pageBodyGroup ul {
@@ -1598,7 +1634,7 @@ p.address-line {
 }
 #revision-levels caption {
     font-size: 18px;
-    color: #2485ae;
+    color: var(--primary-color, #2485ae);
 }
 #revision-levels th {
     font-weight: bold;
@@ -1651,7 +1687,7 @@ form.customForm p {
 section.accounts input.delete,
 section.accounts input.delete:visited {
     background-color: #FFF;
-    color: #2485AE;
+    color: var(--primary-color, #2485ae);
     border: 1px solid #96c5da;
 }
 section.accounts input.delete:hover {
