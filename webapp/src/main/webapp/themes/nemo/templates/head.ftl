@@ -20,6 +20,11 @@
     </#if>	
 </#if>	
 
+
+<script type="text/javascript" src="${urls.base}/webjars/floatingui/floating-ui.core.umd.js"></script>
+<script type="text/javascript" src="${urls.base}/webjars/floatingui/floating-ui.dom.umd.js"></script>
+<script src="${urls.base}/js/tooltip/tooltip-utils.js"></script>
+
 <#include "stylesheets.ftl">
 <#-- <link rel="stylesheet" href="${urls.theme}/css/screen.css" /> -->
 
