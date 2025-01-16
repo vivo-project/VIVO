@@ -39,4 +39,8 @@ ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tooltip/t
 an individual profile page. -->
 ${headContent!}
 
+<#if customCssPath?? && customCssPath != "null">
+    <link rel="stylesheet" href="${customCssPath}">
+</#if>
+
 <link rel="shortcut icon" type="image/x-icon" href="${urls.base}/favicon.ico">
