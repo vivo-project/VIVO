@@ -2,15 +2,34 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.visutils;
 
+import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CollaborationData;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Collaboration;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Collaborator;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CollaborationDataViewHelper {
-    private static final int MAX_COLLABORATORS = 35;
+
+    private static final String DEFAULT_PERSON_COLLABORATORS_BOOST = "0";
+
+    private static final String DEFAULT_MAX_COLLABORATORS = "35";
+
+    private static final String MAX_COLLABORATORS_PROPERTY = "visualization.coAuthorNetwork.maxCollaborators";
+
+    private static final String PERSON_COLLABORATORS_BOOST_PROPERTY = "visualization.coAuthorNetwork.personBoost";
+
+    private static Log log = LogFactory.getLog(CollaborationDataViewHelper.class.getName());
+
+    private static final int MAX_COLLABORATORS = getPropertyIntValue(MAX_COLLABORATORS_PROPERTY,
+            DEFAULT_MAX_COLLABORATORS);
+
+    private static final int PERSON_COLLABORATORS_BOOST = getPropertyIntValue(PERSON_COLLABORATORS_BOOST_PROPERTY,
+            DEFAULT_PERSON_COLLABORATORS_BOOST);
+
     private CollaborationData data;
 
     private List<Collaborator> collaborators = null;
@@ -36,6 +55,21 @@ public class CollaborationDataViewHelper {
         return collaborators;
     }
 
+    private static int getPropertyIntValue(String property, String defaultValue) {
+        ConfigurationProperties props = ConfigurationProperties.getInstance();
+        String propertyValue = props.getProperty(property, defaultValue);
+        try {
+            return Integer.parseInt(propertyValue);
+        } catch (Exception e) {
+            log.error(String.format(
+                    "Can't convert %s to integer value. " +
+                    "Property %s should be set to an integer value. " +
+                    "Use fallback to default value %s.",
+                    propertyValue, property, defaultValue));
+            return Integer.parseInt(defaultValue);
+        }
+    }
+
     private synchronized void init(int max) {
         if (collaborators != null) {
             return;
@@ -56,7 +90,7 @@ public class CollaborationDataViewHelper {
             if (collaborator.getCollaboratorID() != data.getEgoCollaborator().getCollaboratorID()) {
 
                 // If the number of activities exceeds the threshold, it needs to be included in the top N
-                if (collaborator.getNumOfActivities() > threshold) {
+                if (collaborator.getNumOfActivities() + boost(collaborator) > threshold) {
                     // If we've filled the Top N
                     if (collaborators.size() == max - 1) {
                         // Remove the last (lowest) entry of the Top N
@@ -67,7 +101,8 @@ public class CollaborationDataViewHelper {
                     int insert = collaborators.size();
                     while (insert > 0) {
                         insert--;
-                        if (collaborators.get(insert).getNumOfActivities() > collaborator.getNumOfActivities()) {
+                        Collaborator collaboratorAtInsert = collaborators.get(insert);
+                        if (collaboratorAtInsert.getNumOfActivities() + boost(collaboratorAtInsert) > collaborator.getNumOfActivities() + boost(collaborator)) {
                             insert++;
                             break;
                         }
@@ -85,7 +120,8 @@ public class CollaborationDataViewHelper {
                     }
 
                     // Update the threshold with the new lowest position entry
-                    threshold = collaborators.get(collaborators.size() - 1).getNumOfActivities();
+                    Collaborator thresholdCollaborator = collaborators.get(collaborators.size() - 1);
+                    threshold = thresholdCollaborator.getNumOfActivities() + boost(thresholdCollaborator);
                 } else {
                     // If we are below the threshold, check if the top N is full
                     if (collaborators.size() < max - 1) {
@@ -93,7 +129,7 @@ public class CollaborationDataViewHelper {
                         collaborators.add(collaborator);
 
                         // And record the new collaboration as the threshold
-                        threshold = collaborator.getNumOfActivities();
+                        threshold = collaborator.getNumOfActivities() + boost(collaborator);
                     }
                 }
             }
@@ -161,5 +197,12 @@ public class CollaborationDataViewHelper {
 
         // Reset the activity count for the top left matrix entry (focus - focus collaboration)
         collaborationMatrix[0][0] = 0;
+    }
+
+    private int boost(Collaborator collaborator) {
+        if (!collaborator.getIsVCard()) {
+            return PERSON_COLLABORATORS_BOOST;
+        }
+        return 0;
     }
 }

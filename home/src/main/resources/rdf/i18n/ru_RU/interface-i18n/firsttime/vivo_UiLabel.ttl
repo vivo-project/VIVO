@@ -6266,3 +6266,31 @@ uil-data:degree_candidacy.VIVO
         uil:hasApp      "VIVO" ;
         uil:hasKey      "degree_candidacy" ;
         uil:hasPackage  "VIVO-languages" .
+
+uil-data:vis_coauthor_vcard.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Включить внешних соавторов"@ru-RU ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "vis_coauthor_vcard" .
+
+uil-data:add_to_person_profile.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Добавить в профиль персоны?"@ru-RU ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "add_to_person_profile" .
+
+uil-data:yes_add_to_person_profile.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Да"@ru-RU ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "yes_add_to_person_profile" .
+
+uil-data:no_add_to_person_profile.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Нет"@ru-RU ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "no_add_to_person_profile" .

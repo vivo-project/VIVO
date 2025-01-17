@@ -22,6 +22,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 public class Collaborator extends Individual {
 
 	private int collaboratorID;
+	private boolean isVCard = false;
 	private Map<String, Integer> yearToActivityCount;
 
 	private Set<Activity> activities = new HashSet<Activity>();
@@ -31,6 +32,10 @@ public class Collaborator extends Individual {
 		super(collaboratorURI);
 		collaboratorID = uniqueIDGenerator.getNextNumericID();
 	}
+
+	public void setIsVCard() { isVCard = true;	}
+
+	public boolean getIsVCard() { return isVCard; }
 
 	public int getCollaboratorID() {
 		return collaboratorID;
