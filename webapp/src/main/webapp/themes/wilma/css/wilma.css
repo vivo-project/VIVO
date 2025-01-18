@@ -908,7 +908,7 @@ a.view-all-style {
 		border-top: 1px solid rgba(220,228,227,.42); /* stroke */
 		border-bottom: 1px solid rgba(220,228,227,.42); /* stroke */
 		background-color: var(--primary-color, #395d7f); /* layer fill content */
-		border-bottom: 2px solid var(--secondary-color, #62b6d7);
+		border-bottom: 2px solid var(--primary-color-lighter, #62b6d7);
 		color: #fff;
 }
 #home-stats {
