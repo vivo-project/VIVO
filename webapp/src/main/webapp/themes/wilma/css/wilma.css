@@ -63,7 +63,7 @@ h2 {
     line-height: 1.5em;
 }
 h2 a {
-    color: var(--primary-color, #2485ae);
+    color: var(--link-color, #2485ae);
 }
 h2 a:link,
 h2 a:visited {
@@ -907,8 +907,8 @@ a.view-all-style {
 .home-sections h4 {
 		border-top: 1px solid rgba(220,228,227,.42); /* stroke */
 		border-bottom: 1px solid rgba(220,228,227,.42); /* stroke */
-		background-color: var(--primary-color, #395d7f); /* layer fill content */
-		border-bottom: 2px solid var(--primary-color-lighter, #62b6d7);
+		background-color: var(--primary-color-darker, #395d7f); /* layer fill content */
+		border-bottom: 2px solid var(--primary-color, #62b6d7);
 		color: #fff;
 }
 #home-stats {
@@ -1144,7 +1144,7 @@ ul#individual-tools-people li a {
 }
 .green.button,
 .green.button:visited {
-    background-color: var(--accent-color, #749a02);
+    background-color: #749a02;
     color: #fff;
 }
 .green.button:hover {
@@ -1152,7 +1152,7 @@ ul#individual-tools-people li a {
 }
 .blue.button,
 .blue.button:visited {
-    background-color: var(--secondary-color, #398aac);
+    background-color: #398aac;
     color: #fff;
 }
 .blue.button:hover {
@@ -1390,20 +1390,6 @@ article.property ul.property-list {
 }
 #admin a {
     color: var(--link-color, #2a98bc);
-}
-
-.advancedThemeColor {
-    display: none;
-}
-
-.themeColorReset {
-    opacity: 0.5;
-}
-
-.themeColorPickerWrapper{
-    display: flex;
-    align-items: center;
-    gap: 5px;
 }
 
 /* INDIVIDUAL INTRO FOR ANY CLASS ------>  */
