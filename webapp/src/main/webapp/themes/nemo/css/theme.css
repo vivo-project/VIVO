@@ -19,13 +19,14 @@ body {
   height: 100%;
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
+  color: var(--text-color, #333);
 }
 a,
 a:hover,
 a:focus {
   text-decoration: none;
   /* color: #1E6B53; */
-  color: #064d68;
+  color: var(--link-color, #064d68);
   ;
 }
 /*---------------------------------------------
@@ -33,7 +34,7 @@ Styling identity.ftl header
 ----------------------------------------------*/
 .header {
   /* background: #1e6b52; */
-  background: #064d68;
+  background: var(--banner-color, #064d68);
   padding: 20px 0;
   /* border-bottom: 1px solid #16503d; */
   border-bottom: 1px solid #023447;
@@ -78,11 +79,11 @@ Styling identity.ftl header
   }
 }
 button.btn.sympl-search {
-  background: #064d68;
+  background: var(--primary-color, #064d68);
   text-shadow: 0 0 0 transparent;
   color: #fff;
   /* border: 2px solid #c9c9c9; */
-  border: 2px solid #023447;
+  border: 2px solid var(--primary-color-darker, #023447);
 }
 .theme-dropdown .dropdown-menu {
   position: static;
@@ -267,4 +268,29 @@ These are helper classes to add margin gaps where needed
 
 .input-group-header-search {
 	
+}
+
+/* ADMIN PANEL */
+
+.advancedThemeColor {
+  display: none;
+}
+
+.themeColorReset > span {
+  color: #888;
+}
+
+.themeColorResetButton {
+  background: #ff3737;
+  color: white;
+  border-radius: 4px;
+  padding: 3px 8px;
+  border: 1px solid red;
+  cursor: pointer;
+}
+
+.themeColorPickerWrapper{
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
