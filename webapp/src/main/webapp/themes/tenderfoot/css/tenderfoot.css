@@ -68,6 +68,16 @@ body {
     background: #f3f3f0 url(../images/header-background.png) center 0 no-repeat;
 }
 
+body > .banner {
+    z-index: -1;
+    background: #f3f3f0 url(../images/header-background.png) center 0 no-repeat;
+    width: 100%;
+    position: absolute;
+    height: 125px;
+    background-blend-mode: luminosity;
+    background-color: var(--banner-color);
+}
+
 #wrapper-content {
     background: none repeat scroll 0 0 #fff;
     padding-top: 20px;
@@ -86,7 +96,7 @@ body {
 }
 
 .row.title {
-    background: #398AAC;
+    background: var(--primary-color, #398AAC);
     padding-top: 7px;
     padding-bottom: 3px;
 }
@@ -176,9 +186,12 @@ ul#header-nav a.log-out {
     padding-top: 5px;
 }
 #search-field {
-    width: 396px;
-    height: 38px;
-    background: url(../images/search-interior-pages.png) 0 0 no-repeat;
+    width: 390px;
+    height: 33px;
+    border-radius: 4px;
+    background: url(../images/search-interior-pages.png) -2px -2px no-repeat;
+    background-color: var(--accent-color);
+    background-blend-mode: luminosity;
 }
 #search-field input.search {
     text-decoration: none;
@@ -288,11 +301,14 @@ h2 {
     padding: 5px 0 3px 0;
     margin: 0;
     font-size: 1.375em;
-    color: #064d68;
+    color: var(--primary-color-darker, #064d68);
     line-height: 1.5em;
 }
 h2 a {
-    color: #2485ae;
+    color: var(--link-color, #2485ae);
+}
+a:focus, a:hover {
+    color: var(--link-color, #23527c);
 }
 h2 a:link,
 h2 a:visited {
@@ -302,19 +318,19 @@ h3 {
     padding: 5px 0 6px 0;
     margin: 0;
     font-size: 1.125em;
-    color: #064d68;
+    color: var(--primary-color-darker, #064d68);
 }
 h4 {
     padding: 5px 0 6px 0;
     margin: 0;
     font-size: 1em;
-    color: #064d68;
+    color: var(--primary-color-darker, #064d68);
 }
 h5 {
     padding: 5px 0 6px 0;
     margin: 0;
     font-size: .875em;
-    color: #064d68;
+    color: var(--primary-color-darker, #064d68);
 }
 label {
     display: block;

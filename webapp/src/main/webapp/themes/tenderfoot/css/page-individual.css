@@ -63,7 +63,7 @@ article.property li h3 {
 
 #individual-intro h1 {
     font-size: 1.375em;
-    color: #2485ae;
+    color: var(--primary-color, #2485ae);
     float: left;
 }
 
@@ -131,7 +131,7 @@ a.edit-mainImage img.edit-individual {
     margin-top: 15px;
 }
 #admin h3 {
-    background-color: #398AAC;
+    background-color: var(--primary-color, #398AAC);
     color: #fff;
 }
 

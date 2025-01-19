@@ -14,7 +14,7 @@ body.login #login {
 }
 #login h2 {
     font-size: 22px;
-    color: #2485ae;
+    color: var(--primary-color, #2485ae);
     padding-left: 15px;
     padding-top: 18px;
     border-bottom: none;
@@ -137,7 +137,7 @@ p.external-auth {
 }
 p.external-auth a.blue,
 p.external-auth a.blue:visited {
-    background-color: #398AAC;
+    background-color: var(--secondary-color, #398AAC);
     width: 180px;
     margin-bottom: 17px;
     line-height: 1.3em;
