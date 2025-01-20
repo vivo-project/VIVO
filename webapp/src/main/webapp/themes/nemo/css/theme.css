@@ -46,8 +46,9 @@ Styling identity.ftl header
 }
 ----------------------------------------------*/
 .header img {
-  width: 263px;
+  /* width: 263px; */
   max-width: 500px;
+  object-fit: contain;
 }
 .header h1 {
   margin: 0;
