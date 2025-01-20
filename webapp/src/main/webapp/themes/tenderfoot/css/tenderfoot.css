@@ -286,8 +286,19 @@ h1.vivo-logo {
     top: 30px;
     left: 0;
     background: url(../images/VIVO-logo.png) 0 0 no-repeat;
-    background-size: 100% auto;
+
+    background-size: contain;
+    background-image: var(--logo-small-url, var(--logo-url, url(../images/VIVO-logo.png)));
+    max-width: 200px;
 }
+
+@media (min-width: 768px) {
+    h1.vivo-logo {
+        background-image: var(--logo-url, var(--logo-small-url, url(../images/VIVO-logo.png)));
+        max-width: none;
+    }
+}
+
 h1.vivo-logo a {
     display: block;
     width: 100%;
