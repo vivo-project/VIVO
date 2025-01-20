@@ -42,6 +42,7 @@ ${headContent!}
         <#if themeLinkColor?? && themeLinkColor != "null">--link-color: ${themeLinkColor};</#if>   
         <#if themeTextColor?? && themeTextColor != "null">--text-color: ${themeTextColor};</#if>
         <#if logoUrl?? && logoUrl != "null">--logo-url: url('${logoUrl}');</#if>
+        <#if logoSmallUrl?? && logoSmallUrl != "null">--logo-small-url: url('${logoSmallUrl}');</#if>
     }
 </style>
 
