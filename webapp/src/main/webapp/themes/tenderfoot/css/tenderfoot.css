@@ -384,8 +384,3 @@ span#qrCodeImage.bottomLeftAnchor {
     right: 25px;
     left: initial;
 }
-
-.show {
-    display: block;
-    opacity: 1;
-}
