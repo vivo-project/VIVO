@@ -33,7 +33,7 @@
 </section>
 
 <section id="individual-intro" class="vcard person" role="region"><span itemscope itemtype="http://schema.org/Person">
-	<div class="row row-eq-height">
+	<div class="row-eq-height">
 		<div class="col-md-2 photo-wrapper">
 			<!-- Image -->
 		<#assign individualImage>
