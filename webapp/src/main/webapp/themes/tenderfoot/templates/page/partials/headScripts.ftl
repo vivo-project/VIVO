@@ -20,6 +20,11 @@ var i18nStrings = {
 	$(document).ready(function(){
         $('#nav-wrapper').height($("#nav").height());
 
+		$('#nav').affix({
+			offset: {
+				top: $('header').height()
+			}
+		});
 
         $( window ).resize(function() {
             $('#nav-wrapper').height($("#nav").height());
