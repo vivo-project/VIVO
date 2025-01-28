@@ -8,11 +8,11 @@
 
 [
   a vitro:Portal ;
-  vitro:aboutText """<p>VIVO ist eine Open Source Anwendung für das semantische Web, die ursprünglich an der Cornell University entwickelt und eingesetzt wurde.
-        Nach Installation an einer Einrichtung und Hinzufügen von Inhalten ermöglicht VIVO es, Forschungs- und Lehraktivitäten innerhalb der Einrichtung
-        interdisziplinär zu entdecken. VIVO unterstützt, über die Informationen zu browsen und bietet eine Suchfunktion an, die schnell spezifische Resultate über
-        die gewünschten Informationen liefert. Der Inhalt einer lokalen VIVO Installation kann manuell hinzugefügt werden oder auch automatisiert aus anderen
-        Systemen in die Datenbasis gebracht werden, wie z. B. Förderprojekte, Kurse oder anderen lokal vorhandenen Datenbeständen.
+  vitro:aboutText """<p>VIVO ist eine Open-Source-Anwendung für das semantische Web, die ursprünglich an der Cornell University entwickelt und eingesetzt wurde.
+        Nach der Installation und dem Hinzufügen von Inhalten ermöglicht VIVO, Forschungs- und Lehraktivitäten innerhalb der Einrichtung
+        interdisziplinär zu entdecken. VIVO unterstützt das Browsen in den Informationen und bietet eine Suchfunktion an, die schnell spezifische Resultate über
+        die gewünschten Informationen liefert. Der Inhalt einer lokalen VIVO-Installation kann manuell hinzugefügt werden oder auch automatisiert aus anderen
+        Systemen in die Datenbasis gebracht werden, wie z. B. Förderprojekte, Kurse oder aus anderen lokal vorhandenen Datenbeständen.
         </p><p>Für mehr Informationen folgen Sie diesem Link: <a href=\"http://vivoweb.org\">VIVO Project</a>
         .</p>"""@de-DE ;
   rdfs:label "VIVO"@de-DE ;
