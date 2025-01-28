@@ -18,6 +18,7 @@
 <#assign lastNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "lastName") />
 <#assign firstNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "firstName") />
 <#assign middleNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "middleName") />
+<#assign orgNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgName") />
 
 <#--UL class based on size of existing editors-->
 <#assign ulClass = ""/>
@@ -101,23 +102,38 @@
 <form id="addEditorForm" action ="${submitUrl}" class="customForm noIE67">
     <h3>${i18n().add_an_editor}</h3>
 
+    <div style="display:inline">
+        <input type="radio" name="editorType" class="person-radio" value="" role="radio" checked />
+        <label class="inline" for="Person" >${i18n().person_capitalized}</label>
+        <input type="radio" name="editorType" class="org-radio" value="http://xmlns.com/foaf/0.1/Organization" role="radio" style="display:inline;margin-left:18px" />
+        <label class="inline" for="Organization">${i18n().organization_capitalized}</label>
+    </div>
+
     <section id="personFields" role="personContainer">
     		<#--These wrapper paragraph elements are important because javascript hides parent of these fields, since last name
     		should be visible even when first name/middle name are not, the parents should be separate for each field-->
-    		<p class="inline">
-        <label for="lastName">${i18n().last_name} <span class='requiredHint'> *</span></label>
-        <input class="acSelector" size="35"  type="text" id="lastName" name="lastName" value="${lastNameValue}" role="input" />
+        <p class="inline">
+            <label for="lastName">${i18n().last_name} <span class='requiredHint'> *</span></label>
+            <input class="acSelector" size="35"  type="text" id="lastName" name="lastName" value="${lastNameValue}" role="input" />
         </p>
 
-				<p class="inline">
-        <label for="firstName">${i18n().first_name} ${requiredHint} ${initialHint}</label>
-        <input  size="20"  type="text" id="firstName" name="firstName" value="${firstNameValue}"  role="input" />
+        <p class="inline">
+            <label for="firstName">${i18n().first_name} ${requiredHint} ${initialHint}</label>
+            <input  size="20"  type="text" id="firstName" name="firstName" value="${firstNameValue}"  role="input" />
         </p>
 
-				<p class="inline">
-				<label for="middleName">${i18n().middle_name} <span class='hint'>(${i18n().initial_okay})</span></label>
-        <input  size="20"  type="text" id="middleName" name="middleName" value="${middleNameValue}"  role="input" />
+        <p class="inline">
+            <label for="middleName">${i18n().middle_name} <span class='hint'>(${i18n().initial_okay})</span></label>
+            <input  size="20"  type="text" id="middleName" name="middleName" value="${middleNameValue}"  role="input" />
         </p>
+
+        <div>
+            <p>${i18n().add_to_person_profile} ${requiredHint}</p>
+            <input type="radio" id="createVCard" class="radiotypes" name="createVCard" value="n3-pattern:create-vcard-instance"/>
+            <label class="inline" for="createVCard" >${i18n().no_add_to_person_profile}</label>
+            <input type="radio" id="createPersonInstance" class="radiotypes" name="createPersonInstance" value="n3-pattern:create-person-instance" checked />
+            <label class="inline" for="createPersonInstance" >${i18n().yes_add_to_person_profile}</label>
+        </div>
 
         <div id="selectedEditor" class="acSelection">
             <p class="inline">
@@ -125,6 +141,22 @@
                 <span class="acSelectionInfo" id="selectedEditorName"></span>
                 <a href="${urls.base}/individual?uri=" id="personLink" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized})</a>
                 <input type="hidden" id="personUri" name="personUri" value=""  role="input" /> <!-- Field value populated by JavaScript -->
+            </p>
+        </div>
+    </section>
+
+    <section id="organizationFields" role="organization">
+    		<p class="inline">
+        <label for="orgName">${i18n().organization_name_capitalized} <span class='requiredHint'> *</span></label>
+        <input size="38"  type="text" id="orgName" name="orgName" value="${orgNameValue}" role="input" />
+        </p>
+
+        <div id="selectedOrg" class="acSelection">
+            <p class="inline">
+                <label>${i18n().selected_organization}:&nbsp;</label>
+                <span  id="selectedOrgName"></span>
+                <a href="${urls.base}/individual?uri=" id="orgLink"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized})</a>
+                <input type="hidden" id="orgUri" name="orgUri" value=""  role="input" /> <!-- Field value populated by JavaScript -->
             </p>
         </div>
     </section>
@@ -153,6 +185,7 @@ var customFormData = {
     acUrl: '${urls.base}/autocomplete?type=',
     tokenize: '&tokenize=true',
     personUrl: 'http://xmlns.com/foaf/0.1/Person',
+    orgUrl: 'http://xmlns.com/foaf/0.1/Organization',
     reorderUrl: '${urls.base}/edit/reorder'
 };
 var i18nStrings = {
@@ -161,9 +194,16 @@ var i18nStrings = {
     removeEditorshipMessage: '${i18n().confirm_editor_removal?js_string}',
     removeEditorshipAlert: '${i18n().error_processing_editor_request?js_string}',
     editorTypeText: '${i18n().editor_capitalized?js_string}',
+    organizationTypeText: '${i18n().organization_capitalized?js_string}',
     helpTextSelect: '${i18n().select_an_existing?js_string}',
     helpTextAdd: '${i18n().or_add_new_one?js_string}'
 };
+
+$(document).ready(function () {
+    $('input[type=radio].radiotypes').change(function() {
+        $('input[type=radio].radiotypes:checked').not(this).prop('checked', false);
+    });
+});
 </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />',

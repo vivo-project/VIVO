@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in LICENSE$ -->
+
+<!-- See guidelines at https://wiki.duraspace.org/x/eYXVAw -->
+
+
+<list-view-config>
+    <query-select>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+        PREFIX vcard:  &lt;http://www.w3.org/2006/vcard/ns#&gt;
+        
+
+        SELECT DISTINCT ?subclass
+                        ?vSubclass
+                        # send the property to the template, since this view supports multiple role properties
+                        ?property
+                        ?role
+                        ?roleLabel ?roleTypeLabel
+                        ?indivInRole (REPLACE(STR(?indivInRole),"^.*(#)(.*)$", "$2") AS ?indivName)
+                        ?indivLabel
+                        ?dateTimeInterval ?dateTimeStart ?dateTimeEnd ?objectType
+        WHERE {
+
+            ?subject ?property ?role .
+            ?role a ?objectType .
+
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?role .
+                ?role a ?objectType .</precise-subquery>
+                ?role rdfs:label ?roleLabel .
+            }
+
+            # We need ?subclass in the uncollated query to get the roleTypeLabel
+            # for roles that have no label.
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?role .
+                ?role a ?objectType .</precise-subquery>
+                ?role vitro:mostSpecificType ?subclass .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?role .
+                ?role a ?objectType .</precise-subquery>
+                ?role vitro:mostSpecificType ?subclass .
+                ?subclass rdfs:label ?roleTypeLabel .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?role .
+                ?role a ?objectType .</precise-subquery>
+                ?role &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?indivInRole .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?role .
+                ?role a ?objectType .</precise-subquery>
+                ?role &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?indivInRole .
+                ?indivInRole a foaf:Person .
+                ?indivInRole rdfs:label ?indivLabel .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?role .
+                ?role a ?objectType .</precise-subquery>
+                ?role &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?indivInRole .
+                ?indivInRole vitro:mostSpecificType ?vSubclass .
+                ?vSubclass rdfs:subClassOf vcard:Kind .
+                #?indivInRole a vcard:Kind .
+                ?indivInRole vcard:hasName ?vName .
+                ?vName vcard:familyName ?lastName .
+                OPTIONAL {
+                    <precise-subquery>?subject ?property ?role .
+                    ?role a ?objectType .
+                    ?role &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?indivInRole .
+                    ?indivInRole a vcard:Kind .
+                    ?indivInRole vcard:hasName ?vName .</precise-subquery>
+                    ?vName vcard:givenName ?firstName .
+                }
+                OPTIONAL {
+                    <precise-subquery>?subject ?property ?role .
+                    ?role a ?objectType .
+                    ?role &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?indivInRole .
+                    ?indivInRole a vcard:Kind .
+                    ?indivInRole vcard:hasName ?vName .</precise-subquery>
+                    ?vName core:middleName ?middleName .
+                }
+                bind ( COALESCE(?firstName, "") As ?firstName1) .
+                bind ( COALESCE(?middleName, "") As ?middleName1) .
+                bind ( COALESCE(?lastName, "") As ?lastName1) .
+                bind (concat(str(?lastName1), ", ", str(?firstName1), " ", str(?middleName1)) as ?indivLabel) .
+                OPTIONAL {
+                    <precise-subquery>?subject ?property ?role .
+                    ?role a ?objectType .
+                    ?role &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?indivInRole .
+                    ?indivInRole a vcard:Kind .</precise-subquery>
+                    ?indivInRole vitro:mostSpecificType ?vSubclass .
+                    ?vSubclass rdfs:subClassOf vcard:Kind .
+                }
+             }
+            OPTIONAL {
+                    <precise-subquery>?subject ?property ?role .
+                    ?role a ?objectType .
+                    ?role &lt;http://purl.obolibrary.org/obo/RO_0000052&gt; ?indivInRole .</precise-subquery>
+                    ?indivInRole a foaf:Person .
+                    ?indivInRole vitro:mostSpecificType ?vSubclass .
+                    ?vSubclass rdfs:subClassOf foaf:Person .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?role .
+                ?role a ?objectType .</precise-subquery>
+                ?role core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+            }
+            OPTIONAL {
+                <precise-subquery>?subject ?property ?role .
+                ?role a ?objectType .</precise-subquery>
+                ?role core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:end ?dateTimeEndValue .
+                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
+            }
+            <critical-data-required>
+            FILTER ( bound(?indivInRole) )
+            </critical-data-required>
+        } ORDER BY <collated>?subclass</collated> ?indivLabel ?roleLabel ?roleTypeLabel ?indivName
+    </query-select>
+
+    <template>propStatement-relatedRole.ftl</template>
+</list-view-config>

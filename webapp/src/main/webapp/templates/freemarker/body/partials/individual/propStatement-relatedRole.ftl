@@ -17,10 +17,10 @@
     <#local linkedIndividual>
         <#if statement.indivInRole??>
     		<#if statement.vSubclass?? && statement.vSubclass?contains("vcard")>
-				<#if statement.indivLabel?replace(" ","")?length == statement.indivLabel?replace(" ","")?last_index_of(",") + 1 >
-        			${statement.indivLabel?replace(",","")}
+				<#if statement.indivLabel!?replace(" ","")?length == statement.indivLabel!?replace(" ","")?last_index_of(",") + 1 >
+        			${statement.indivLabel!?replace(",","")}
 				<#else>
-					${statement.indivLabel}
+					${statement.indivLabel!}
 				</#if>
     		<#else>
         			<a href="${profileUrl(statement.uri("indivInRole"))}" title="${i18n().name}">${statement.indivLabel!statement.indivName}</a>

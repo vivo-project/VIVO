@@ -202,11 +202,13 @@ var addAuthorForm = {
     showFieldsForNewPerson: function() {
         this.firstNameWrapper.show();
         this.middleNameWrapper.show();
+        $('#createVCard').parent().show();
     },
 
     hideFieldsForNewPerson: function() {
         this.hideFields(this.firstNameWrapper);
         this.hideFields(this.middleNameWrapper);
+        $('#createVCard').parent().hide();
     },
 
     /* *** Ajax initializations *** */
