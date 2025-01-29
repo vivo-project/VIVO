@@ -1,0 +1,851 @@
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix uil-data: <http://vivoweb.org/ontology/vitro/ui-label/individual#> .
+@prefix uil:  <http://vivoweb.org/ontology/vitro/ui-label/vocabulary#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+uil-data:intro_filtersearch.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Filtrirajte pretragu"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "intro_filtersearch" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:leadership_role.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Vodeća uloga"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "leadership_role" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:view.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "pogled"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "view" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:place_of_grant.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Mesto izdavanja stipendije "@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "place_of_grant" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:select_award.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Odabrane nagrade"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "select_award" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:service_provider_role.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Uloga davaoca usloge"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "service_provider_role" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:first_name.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Ime"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "first_name" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_contactus.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Kontaktirajte nas"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_contactus" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:address_street_three.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "adresa ulice 3"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "address_street_three" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:reviewer_role.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Uloga recenzenta"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "reviewer_role" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_termuse.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Uslovi korišćenja"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_termuse" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:unable_to_handle_position_editing.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Preko ove forme ne možete da ažurirate ovu poziciju zato što se vezuje za više osoba."@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "unable_to_handle_position_editing" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:attendee_capitalized.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Polaznik"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "attendee_capitalized" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:placeholder_image.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "privremena slika"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "placeholder_image" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:identity_user.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "korisnik"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_user" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:last_publication.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Poslednji objavljen rad"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "last_publication" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:password.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "lozinka"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "password" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:unable_to_handle_grant_editing.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Preko ove forme ne možete da ažurirate ovu stipendiju zato što se vezuje za više osoba."@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "unable_to_handle_grant_editing" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:countries_and_regions.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "države i regioni."@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "countries_and_regions" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_logout.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Odjavite se"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_logout" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:identity_edit.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Ažurirajte stranicu"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_edit" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:to.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "do"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "to" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:grant_type.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Tip stipendije"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grant_type" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:identity_myaccount.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Moj nalog"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_myaccount" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:no_faculty_found.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Nisu pronađeni članovi fakulteta."@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "no_faculty_found" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:statewide_locations.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "lokacije na nivou čitave države."@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "statewide_locations" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:province_or_region.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Provincije ili region"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "province_or_region" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_support.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Podrška"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_support" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:researchers_in.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Istraživači u"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "researchers_in" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:last_name.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Prezime"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "last_name" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:add_capitalized.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Dodajte"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "add_capitalized" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:indiv_foafperson_for.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "za"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "indiv_foafperson_for" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:intro_para2.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Pratražite informacije o ljudima, departmanima, kursevima, stipendijama i radovima."@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "intro_para2" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:grant_entry_for.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "unos stipendije za"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grant_entry_for" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:identity_title.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "VIVO | povežite se  delite  otkrijte"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_title" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:profile_capitalized.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Profil"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "profile_capitalized" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:change_selection.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "promenite selekciju"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "change_selection" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:faculty_memberships.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Članstvo na fakultetu"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "faculty_memberships" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:create_capitalized.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Kreirajte"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "create_capitalized" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:identity_admin.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Administrator sajta"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_admin" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:collection_capitalized.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Kolekcija"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "collection_capitalized" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:countries.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "države"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "countries" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_loginfull.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Prijavite se kako bi ste upravljanli sajtom i sadržajem"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_loginfull" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:view_all_departments.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "prikažite sve departmane"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "view_all_departments" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:identity_myprofile.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Moj profil"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_myprofile" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:map_state_string.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "država."@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "map_state_string" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:grants_text_three.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Ovo bi kreiralo stranicu koja bi koristila about.ftl za telo. Stranici bi se pristupalopreko putanje /about koja bi pregazila svo mapiranje servleta u web.xml-u."@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grants_text_three" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_powered.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Sajt održava"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_powered" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:view_all_members_of_org.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Pogledajte sve članove ove organizacije."@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "view_all_members_of_org" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:email_address.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Email adresa"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "email_address" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:view_all_faculty.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "pogledajte sve fakultete"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "view_all_faculty" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:enter_new_role_value.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Molimo Vas unesite novu vrednost u polje za uloge."@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "enter_new_role_value" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:indiv_foafperson_return.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "vratite se na"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "indiv_foafperson_return" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:edit_mailing_address.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Ažurirajte spisak adresa"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "edit_mailing_address" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:collection_or_series.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "collection_or_series" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:years_participation_in.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Godina učešća u"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "years_participation_in" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:manage_publications_link.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "manage_publications_link" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_welcomestart.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Dobrodošli"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_welcomestart" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:grant_date.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Datum stipendije"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grant_date" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:address_label.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "labela za adresu"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "address_label" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:first_publication.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Prvi objavljen rad"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "first_publication" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:faculty_who_are_members_of_org.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Here are the faculty in the {0} department who are members of this organization."@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "faculty_who_are_members_of_org" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:limit_search.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "ograničite pretragu"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "limit_search" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:full_name.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Puno ime"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "full_name" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_version.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Verzija"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_version" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:identity_index.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Indeks"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_index" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:currently_no_researchers.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Trenutno nema istraživača sa definisanim geografskikm fokusom."@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "currently_no_researchers" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:intro_searchvivo.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Pretražite VIVO"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "intro_searchvivo" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_copyright.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "autorska prava"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_copyright" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:no_departments_found.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Nije pronađen ni jedan departman."@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "no_departments_found" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:loading_website_image.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Učitavanje slike veb stranice"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "loading_website_image" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:last_grant.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Poslednja Stipendija"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "last_grant" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:grants_text_one.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Ovaj deo stranice je iz fajla sa šablonom (freemarker template) vivo/productMods/templates/freemarker/body/menupage/grants.ftl.  U modelu prikazivanja, stranica za stipendije ima display:requiresBodyTemplate svojstvo koje definiše da strancie za stipendije treba da \"pregazi\" podrazumevani šablon. Podrazumevani šablon za ove stranice se nalazi na /vitro/webapp/web/templates/freemarker/body/menupage/menupage.ftl"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grants_text_one" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:no_grants_for.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Trenutno nema stipendija za"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "no_grants_for" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:map_states_string.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "države."@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "map_states_string" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:first_grant.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Prva stipendija"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "first_grant" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:grants_in_vivo.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "nagrade unutar VIVO-a"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grants_in_vivo" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:regions.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "regioni"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "regions" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:display_more.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "više"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "display_more" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:loading_data.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "učitavanje podataka"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "loading_data" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:grants_two.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Ova tehnika se može koristiti za definisanje stranica bez stavki menija, koje dobijaju svoj sadržaj iz freemarker šablona.  Primer ovoga je stranica \"O sajtu\" (About)."@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grants_two" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:create_entry.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Kreirajte unos"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "create_entry" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:organizer_role.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Uloga organizatora"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "organizer_role" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:address_street_one.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "adresa ulice 1"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "address_street_one" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:intro_para1.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "VIVO je alat namenjen pretraživanju i otkrivanju istraživačkih radova i aktivnosti, koji omogućuje saradnju između naučnika iz različitih disciplina i oblasti."@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "intro_para1" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_about.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "O sajtu"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_about" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:address_street_two.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "adresa ulice 2"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "address_street_two" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:vivo_profile.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "VIVO profil"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "vivo_profile" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:research_area.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "osobe unutar departmana koje se bave ovom istraživačkom oblasti."@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "research_area" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:currently_no_papers_for.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Trenutno nema {0} radova za"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "currently_no_papers_for" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:researchers.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "istraživači"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "researchers" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_login.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Prijavite se"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_login" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:intro_title.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Dobrodošli na VIVO"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "intro_title" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:return_to_grant.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Povratak na stipendiju"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "return_to_grant" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .

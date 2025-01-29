@@ -1,0 +1,851 @@
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix uil-data: <http://vivoweb.org/ontology/vitro/ui-label/individual#> .
+@prefix uil:  <http://vivoweb.org/ontology/vitro/ui-label/vocabulary#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+uil-data:intro_filtersearch.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Filtrar búsqueda"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "intro_filtersearch" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:leadership_role.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Papel de liderazgo"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "leadership_role" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:view.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "ver"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "view" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:place_of_grant.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Lugar de subvención"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "place_of_grant" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:select_award.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Premio seleccionado"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "select_award" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:service_provider_role.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Rol proveedor de servicios"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "service_provider_role" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:first_name.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Primer nombre"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "first_name" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_contactus.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Contáctanos"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_contactus" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:address_street_three.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "dirección calle tres"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "address_street_three" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:reviewer_role.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Rol de revisor"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "reviewer_role" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_termuse.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Términos de uso"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_termuse" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:unable_to_handle_position_editing.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Esta forma no es capaz de manejar la edición de esta posición, debido a que está asociada con múltiples posiciones particulares."@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "unable_to_handle_position_editing" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:attendee_capitalized.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Asistente"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "attendee_capitalized" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:placeholder_image.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "imagen de marcador de posición"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "placeholder_image" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:identity_user.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "usuario"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_user" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:last_publication.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Última publicación"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "last_publication" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:password.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "contraseña"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "password" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:unable_to_handle_grant_editing.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Esta forma no es capaz de manejar la edición de esta subvención, debido a que se encuentra asociada con múltiples subvenciones individuales."@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "unable_to_handle_grant_editing" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:countries_and_regions.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "países y regiones."@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "countries_and_regions" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_logout.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Finalizar sesión"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_logout" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:identity_edit.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Editar página"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_edit" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:to.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "a"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "to" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:grant_type.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Tipo de subvención"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grant_type" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:identity_myaccount.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Mi cuenta"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_myaccount" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:no_faculty_found.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "No se han encontrado miembros en la facultad."@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "no_faculty_found" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:statewide_locations.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "lugares en todo el estado."@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "statewide_locations" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:province_or_region.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Provincia o región"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "province_or_region" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_support.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Soporte"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_support" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:researchers_in.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "investigadores en"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "researchers_in" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:last_name.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Apellido"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "last_name" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:add_capitalized.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Añadir"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "add_capitalized" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:indiv_foafperson_for.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "para"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "indiv_foafperson_for" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:intro_para2.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Explore o busque información sobre las personas, departamentos, cursos, becas y publicaciones."@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "intro_para2" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:grant_entry_for.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Permitir la entrada de"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grant_entry_for" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:identity_title.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "VIVO | conectar compartir descubrir"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_title" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:profile_capitalized.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Perfil"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "profile_capitalized" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:change_selection.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "cambiar selección"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "change_selection" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:faculty_memberships.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Participación en la facultad"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "faculty_memberships" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:create_capitalized.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Crear"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "create_capitalized" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:identity_admin.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Administrador del sitio"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_admin" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:collection_capitalized.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Colección"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "collection_capitalized" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:countries.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "países"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "countries" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_loginfull.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Iniciar sesión para administrar este sitio"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_loginfull" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:view_all_departments.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "ver todos los departamentos académicos"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "view_all_departments" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:identity_myprofile.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Mi perfil"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_myprofile" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:map_state_string.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "estado."@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "map_state_string" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:grants_text_three.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Esto crearía una página que utilice about.ftl como el cuerpo. Se accede a la página a través de /about y anularía todas las asignaciones de servlet mapeados en web.xml."@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grants_text_three" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_powered.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Desarrollado por"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_powered" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:view_all_members_of_org.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Ver todos los miembros de esta organización."@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "view_all_members_of_org" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:email_address.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Dirección de correo clectrónico"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "email_address" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:view_all_faculty.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "ver todos los profesores"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "view_all_faculty" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:enter_new_role_value.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Por favor, introduzca un nuevo valor en el campo Rol."@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "enter_new_role_value" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:indiv_foafperson_return.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "volver a"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "indiv_foafperson_return" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:edit_mailing_address.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Editar dirección postal"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "edit_mailing_address" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:collection_or_series.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "collection_or_series" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:years_participation_in.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Años de participación en"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "years_participation_in" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:manage_publications_link.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "manage_publications_link" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_welcomestart.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Bienvenido"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_welcomestart" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:grant_date.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Fecha de concesión"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grant_date" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:address_label.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "etiqueta de dirección"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "address_label" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:first_publication.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Primera publicación"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "first_publication" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:faculty_who_are_members_of_org.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Aquí están los profesores del departamento de {0} que son miembros de esta organización."@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "faculty_who_are_members_of_org" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:limit_search.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "limitar la búsqueda"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "limit_search" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:full_name.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Nombre completo"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "full_name" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_version.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Versión"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_version" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:identity_index.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Inicio"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "identity_index" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:currently_no_researchers.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Actualmente no hay investigadores con un enfoque geográfico definido."@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "currently_no_researchers" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:intro_searchvivo.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Buscar en VIVO"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "intro_searchvivo" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_copyright.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "derechos de autor"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_copyright" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:no_departments_found.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "No se han encontrado departamentos académicos."@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "no_departments_found" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:loading_website_image.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Cargando imagen del sitio web"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "loading_website_image" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:last_grant.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Última beca"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "last_grant" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:grants_text_one.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Este cuerpo es de la plantilla en el archivo vivo/productMods/templates/freemarker/body/menupage/grants.ftl. En el modelo de presentación, la página de becas muestra: la propiedad requiresBodyTemplate que define que la página de becas anula la plantilla predeterminada. La plantilla predeterminada de estas páginas está en /vitro/webapp/web/templates/freemarker/cuerpo/menupage/menupage.ftl"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grants_text_one" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:no_grants_for.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "De momento no hay subvenciones para"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "no_grants_for" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:map_states_string.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "estados."@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "map_states_string" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:first_grant.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Primera beca"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "first_grant" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:grants_in_vivo.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "subvenciones en VIVO"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grants_in_vivo" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:regions.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "regiones"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "regions" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:display_more.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "más"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "display_more" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:loading_data.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "cargando datos"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "loading_data" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:grants_two.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Esta técnica podría usarse para definir las páginas sin elementos de menú, que obtienen su contenido a partir de una plantilla FreeMarker. Un ejemplo sería la página acerca de."@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "grants_two" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:create_entry.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Crear entrada"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "create_entry" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:organizer_role.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Rol de organizador"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "organizer_role" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:address_street_one.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "dirección calle uno"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "address_street_one" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:intro_para1.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "VIVO es una herramienta de descubrimiento de investigación centrada en permitir la colaboración entre científicos de todas las disciplinas."@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "intro_para1" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_about.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Acerca de"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_about" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:address_street_two.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "dirección calle dos"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "address_street_two" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:vivo_profile.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Perfil de VIVO"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "vivo_profile" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:research_area.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "área de investigación"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "research_area" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:currently_no_papers_for.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "De momento no hay {0} papeles para"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "currently_no_papers_for" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:researchers.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "investigadores"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "researchers" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:menu_login.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Iniciar sesión"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_login" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:intro_title.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Bienvenido a VIVO"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "intro_title" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
+
+uil-data:return_to_grant.VIVO.wilma
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Volver a conceder"@es ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "return_to_grant" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "wilma" .
