@@ -60,6 +60,8 @@ import static edu.cornell.mannlib.vitro.webapp.auth.objects.AccessObject.SOME_UR
 import static edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary.Precision.DAY;
 import static edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary.Precision.MONTH;
 import static edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary.Precision.YEAR;
+import static org.apache.jena.datatypes.xsd.XSDDatatype.XSDdateTime;
+import static org.apache.jena.rdf.model.ResourceFactory.createTypedLiteral;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -1232,7 +1234,7 @@ public class CreateAndLinkResourceController extends FreemarkerHttpServlet {
         }
 
         Resource dateResource = model.createResource(getUnusedUri(vreq)).addProperty(RDF.type, model.getResource("http://vivoweb.org/ontology/core#DateTimeValue"));
-        dateResource.addProperty(model.createProperty(VIVO_DATETIME), formattedDate);
+        dateResource.addProperty(model.createProperty(VIVO_DATETIME), createTypedLiteral(formattedDate, XSDdateTime));
         dateResource.addProperty(model.createProperty(VIVO_DATETIMEPRECISION), model.createResource(precision));
 
         work.addProperty(model.createProperty(VIVO_DATETIMEVALUE), dateResource);
