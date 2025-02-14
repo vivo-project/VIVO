@@ -41,19 +41,33 @@ body {
 
 /* Contains all the graphics. */
 #container {
-    /*width: 1200px;*/width:940px;
+    /*width: 1200px;*/
+    max-width:940px;
+    width: 100%;
     height: auto;
-    /* margin:0 auto; */
-    /*margin-left:-130px;*/
     position:relative;
-    /*box-shadow:0px 0px 20px -6px #000000;*/
     margin-top:15px;
+    transition: 0.5s ease all;
+    flex-wrap: wrap;
+
+}
+
+@media (min-width: 1200px) {
+    #container.wide-container {    
+        width: 1200px;
+        max-width: 1200px;
+        margin-left:-130px;
+        margin-right:-130px;
+    }
+
+    #container > #center-container {
+        width: 66%;
+    }
 }
 
 #left-container,
 #right-container,
 #center-container {
-    height:600px;
     position:absolute;
     top:0;
 }

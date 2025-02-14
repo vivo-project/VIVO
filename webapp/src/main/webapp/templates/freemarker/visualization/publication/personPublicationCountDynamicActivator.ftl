@@ -11,8 +11,8 @@
 -->
 <#if shouldVIVOrenderVis>
     <#-- Added requestingTemplate variable in release 1.6 to support multi-view option -->
-    <#if requestingTemplate = "foaf-person-wilma" >
-	    <#include "personPublicationSparklineContent.ftl">
+    <#if requestingTemplate == "foaf-person-wilma" || requestingTemplate == "foaf-person-willow">
+        <#include "personPublicationSparklineContent.ftl">
 	<#else>
         <#include "personPublicationCountNoSparkline.ftl">
     </#if>
