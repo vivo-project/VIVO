@@ -365,3 +365,22 @@ img.add-individual {
     height: 15px;
     width: 15px;
 }
+
+#individual-intro {
+    overflow: unset;
+}
+
+/* ------------------------------------------------->  */
+/* TOOLTIP  ---------------------------------------->  */
+/* ------------------------------------------------->  */
+
+#qrCodeContainer {
+    position: absolute;
+    right: 380px;
+}
+
+span#qrCodeImage.bottomLeftAnchor {
+    top: 23px;
+    right: 25px;
+    left: initial;
+}
