@@ -4,6 +4,7 @@
 @prefix access: <https://vivoweb.org/ontology/vitro-application/auth/vocabulary/> .
 
 :SelfEditorPublishObjectPropertyValueSet access:value
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>,
     <http://aims.fao.org/aos/geopolitical.owl#hasBorderWith> ,
     <http://aims.fao.org/aos/geopolitical.owl#hasMember> ,
     <http://aims.fao.org/aos/geopolitical.owl#isAdministeredBy> ,
