@@ -73,6 +73,8 @@
   </filter-mapping>
   <filter-mapping>
     <filter-name>Locale selection filter</filter-name>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>ERROR</dispatcher>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   <!-- If language support is enabled, this must not precede the LocaleSelectionFilter -->
@@ -146,6 +148,10 @@
     <url-pattern>/dwr/*</url-pattern>
   </servlet-mapping>
 
+  <error-page>
+    <error-code>404</error-code>
+    <location>/page_not_found</location>
+  </error-page>
  <!-- THIS SHOULD BE COMMENTED OUT FOR PRODUCTION
   <servlet>
     <servlet-name>FakeExternalAuthController</servlet-name>
