@@ -2573,3 +2573,8 @@ form li {
     width: 100%;
     margin-left: 0;
 }
+
+.searchResultsHeader {
+    width: 100%;
+    max-width: 675px;
+}
