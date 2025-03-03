@@ -89,28 +89,28 @@ function initGlobalToolTips() {
 		{
 			querySelector: "#imageIconOne",
 			data: {
-				title: "<div class='visCommonControllTooltip'>" + $('#toolTipOne').html() + "</div>",
+				title: $('#toolTipOne').html(),
 				customClass: "vitroTooltip vitroTooltip-yellow",
 				placements: ['left', 'top', 'bottom', 'right']
 			}
 		},{
 			querySelector: "#exploreInfoIcon",
 			data: {
-				title: "<div class='visCommonControllTooltip'>" + $('#exploreTooltipText').html() + "</div>",
+				title: $('#exploreTooltipText').html(),
 				customClass: "vitroTooltip vitroTooltip-yellow",
 				placements: ['left', 'top', 'bottom', 'right']
 			}
 		},{
 			querySelector: "#compareInfoIcon",
 			data: {
-				title: "<div class='visCommonControllTooltip'>" + $('#compareTooltipText').html() + "</div>",
+				title: $('#compareTooltipText').html(),
 				customClass: "vitroTooltip vitroTooltip-yellow",
 				placements: ['left', 'top', 'bottom', 'right']
 			}
 		},{
 			querySelector: "#imageIconThree",
 			data: {
-				title: "<div class='visCommonControllTooltip'>" + $('#toolTipThree').html() + "</div>",
+				title: $('#toolTipThree').html(),
 				customClass: "vitroTooltip vitroTooltip-yellow",
 				placements: ['left', 'top', 'bottom', 'right']
 			}
