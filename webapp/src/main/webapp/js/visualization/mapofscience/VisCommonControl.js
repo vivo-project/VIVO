@@ -84,36 +84,40 @@ function initVisModeTypeButton() {
 }
 
 function initGlobalToolTips() {
-	createToolTip($("#imageIconOne"), $('#toolTipOne').html(), "top left");
-	createToolTip($("#exploreInfoIcon"), $('#exploreTooltipText').html(), "top left");
-	createToolTip($("#compareInfoIcon"), $('#compareTooltipText').html(), "top left");
-	createToolTip($("#imageIconThree"), $('#toolTipThree').html(), "top right");
-}
 
-var visCommonToolTipInit = true;
-function createToolTip(target, tipText, tipLocation) {
-	if (visCommonToolTipInit) {
-		$('head').append('<style id="visCommonToolTipCSS">.qtip { font-size: .7em; max-width: none !important; } .visCommonToolTip {'
-			+ ' background-color: #ffffc0;'
-			+ ' textAlign: left;'
-			+ ' padding: 6px 10px 6px 10px;'
-			+ ' lineHeight: 14px;'
-			+ '} </style>');
-
-		visCommonToolTipInit = false;
-	}
-
-	target.qtip({
-        content: {
-            text: tipText
-        },
-		position: {
-			my: tipLocation,
-			at: 'center'
+	let tooltips = [
+		{
+			querySelector: "#imageIconOne",
+			data: {
+				title: $('#toolTipOne').html(),
+				customClass: "vitroTooltip vitroTooltip-yellow",
+				placements: ['left', 'top', 'bottom', 'right']
+			}
+		},{
+			querySelector: "#exploreInfoIcon",
+			data: {
+				title: $('#exploreTooltipText').html(),
+				customClass: "vitroTooltip vitroTooltip-yellow",
+				placements: ['left', 'top', 'bottom', 'right']
+			}
+		},{
+			querySelector: "#compareInfoIcon",
+			data: {
+				title: $('#compareTooltipText').html(),
+				customClass: "vitroTooltip vitroTooltip-yellow",
+				placements: ['left', 'top', 'bottom', 'right']
+			}
+		},{
+			querySelector: "#imageIconThree",
+			data: {
+				title: $('#toolTipThree').html(),
+				customClass: "vitroTooltip vitroTooltip-yellow",
+				placements: ['left', 'top', 'bottom', 'right']
+			}
 		},
-        style: {
-			classes: 'visCommonToolTip',
-            width: 500,
-        }
-    });
+	]
+
+	tooltips.forEach(tooltip => {
+		setTooltip(tooltip.querySelector, tooltip.data)
+	})
 }
