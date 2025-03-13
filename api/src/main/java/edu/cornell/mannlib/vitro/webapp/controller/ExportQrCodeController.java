@@ -15,6 +15,7 @@ import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
+import edu.cornell.mannlib.vitro.webapp.config.ContextPath;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ExceptionResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
@@ -132,7 +133,7 @@ public class ExportQrCodeController extends FreemarkerHttpServlet {
             qrData.put("externalUrl", externalUrl);
 
             String individualUri = individual.getURI();
-            String contextPath = vreq.getContextPath();
+            String contextPath = ContextPath.getPath(vreq);
             qrData.put("exportQrCodeUrl", contextPath + "/qrcode?uri=" + UrlBuilder.urlEncode(individualUri));
 
             qrData.put("aboutQrCodesUrl", contextPath + "/about_qrcode");
