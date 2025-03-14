@@ -26,7 +26,7 @@ $(document).ready(function(){
         var groupName = $(this).attr("groupName");
         var $propertyGroupLi = $(this);
 
-        $(this).click(function() {
+        $(this).on("click", function() {
 
             if ( $propertyGroupLi.attr("class") == "nonSelectedGroupTab clickable" ) {
                 $.each($('li.selectedGroupTab'), function() {

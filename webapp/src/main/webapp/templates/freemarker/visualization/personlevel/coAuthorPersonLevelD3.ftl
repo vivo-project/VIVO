@@ -70,7 +70,7 @@ $(document).ready(function(){
     processProfileInformation("ego_label",
                               "ego_moniker",
                               "ego_profile_image",
-                              jQuery.parseJSON(getWellFormedURLs("${egoURIParam}", "profile_info")));
+                              JSON.parse(getWellFormedURLs("${egoURIParam}", "profile_info")));
 
     <#if (numOfCoAuthorShips?? && numOfCoAuthorShips <= 0) || (numOfAuthors?? && numOfAuthors <= 0) >
         if ($('#ego_label').text().length > 0) {

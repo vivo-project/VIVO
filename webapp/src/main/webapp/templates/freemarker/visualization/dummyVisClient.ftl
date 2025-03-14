@@ -48,7 +48,7 @@ $(document).ready(function() {
 
 	}
 
-	   $("#ajax_activator").click(function() {
+	   $("#ajax_activator").on("click", function() {
 		   $.ajax({
 			   url: '${testURL}',
 			   dataType: "html",

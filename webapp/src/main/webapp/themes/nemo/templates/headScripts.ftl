@@ -8,7 +8,7 @@ var i18nStrings = {
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
 
-<script type="text/javascript" src="${urls.base}/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="${urls.base}/webjars/jquery/jquery.min.js"></script>
 
 <script type="text/javascript" src="${urls.base}/js/vitroUtils.js"></script>
 

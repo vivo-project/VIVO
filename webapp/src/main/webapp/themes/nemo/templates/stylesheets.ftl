@@ -7,18 +7,12 @@
 <link rel="stylesheet" href="${urls.base}/css/tooltip.css" />
 
 
-<!-- <link rel="stylesheet" href="${urls.theme}/css/bootstrap.min.css" /> -->
-<!-- <link rel="stylesheet" href="${urls.theme}/css/bootstrap-theme.css" /> -->
 
 <!-- Bootstrap - Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
-  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
-  crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="${urls.base}/js/bootstrap/css/bootstrap.min.css"/>
 
 <!-- Bootstrap - Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
-  integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" 
-  crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="${urls.base}/js/bootstrap/css/bootstrap-theme.min.css"/>
 
 <link rel="stylesheet" href="${urls.theme}/css/theme.css" />
 <link rel="stylesheet" href="${urls.theme}/css/homepage.css" />

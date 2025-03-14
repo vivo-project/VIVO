@@ -47,7 +47,7 @@ var awardReceiptUtils = {
            window.setTimeout('awardReceiptUtils.hideConferredBy()', 180);
         });
 
-        this.award.blur( function(objEvent) {
+        this.award.on("blur", function(objEvent) {
            window.setTimeout('awardReceiptUtils.hideConferredBy()', 180);
         });
 
@@ -56,7 +56,7 @@ var awardReceiptUtils = {
             awardReceiptUtils.buildAwardReceiptLabel();
         });
 
-        this.changeLink.click( function() {
+        this.changeLink.on("click", function() {
            awardReceiptUtils.showConferredBy();
         });
     },
