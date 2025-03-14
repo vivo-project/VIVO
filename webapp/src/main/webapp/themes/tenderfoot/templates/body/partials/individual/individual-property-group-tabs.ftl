@@ -21,10 +21,10 @@
 					<#assign groupNameHtmlId = "${i18n().properties}" >
 				</#if>
 				<#if tabCount = 1 >
-                    <li data-toggle="tab" groupName="${groupNameHtmlId?replace("/","-")}" class="active" href="#${groupNameHtmlId?replace("/","-")}Group"><a href="#">${groupName?capitalize}</a></li>
+                    <li data-toggle="tab" groupName="${groupNameHtmlId?replace("/","-")}" class="active" href="#${groupNameHtmlId?replace("/","-")}Group"><a href="#">${groupName}</a></li>
 					<#assign tabCount = 2>
 				<#else>
-                    <li data-toggle="tab" groupName="${groupNameHtmlId?replace("/","-")}" href="#${groupNameHtmlId?replace("/","-")}Group"><a href="#">${groupName?capitalize}</a></li>
+                    <li data-toggle="tab" groupName="${groupNameHtmlId?replace("/","-")}" href="#${groupNameHtmlId?replace("/","-")}Group"><a href="#">${groupName}</a></li>
 				</#if>
 			</#if>
 		</#list>
@@ -49,7 +49,7 @@
 					<#if groupName?has_content>
 						<#--the function replaces spaces in the name with underscores, also called for the property group menu-->
 						<#assign groupNameHtmlId = p.createPropertyGroupHtmlId(groupName) >
-                        <h2 id="${groupNameHtmlId?replace("/","-")}" pgroup="tabs" class="hidden">${groupName?capitalize}</h2>
+                        <h2 id="${groupNameHtmlId?replace("/","-")}" pgroup="tabs" class="hidden">${groupName}</h2>
 					<#else>
                         <h2 id="properties" pgroup="tabs" class="hidden">${i18n().properties_capitalized}</h2>
 					</#if>
