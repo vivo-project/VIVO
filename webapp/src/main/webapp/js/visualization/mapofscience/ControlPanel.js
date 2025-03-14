@@ -138,7 +138,7 @@ var CheckBoxPanel = ControlPanel.extend({
 		}
 	},
 	click: function(handlerFunc) {
-		this.checkBox.click(handlerFunc);
+		this.checkBox.on("click", handlerFunc);
 	},
 	isChecked: function() {
 		return this.checkBox.prop('checked');
