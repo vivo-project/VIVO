@@ -23,22 +23,22 @@
 					<#if tabCount = 1 >
 						<li role="presentation" class="active">
 							<a 	href="#${groupNameHtmlId?replace("/","-")}" 
-								aria-controls="${groupName?capitalize}" 
+								aria-controls="${groupName}" 
 								role="tab" 
 								data-toggle="tab">
 								
-								${groupName?capitalize}
+								${groupName}
 							</a>
 						</li>
 						<#assign tabCount = 2>
 					<#else>
 						<li role="presentation">
 							<a 	href="#${groupNameHtmlId?replace("/","-")}" 
-								aria-controls="${groupName?capitalize}" 
+								aria-controls="${groupName}" 
 								role="tab" 
 								data-toggle="tab">
 								
-								${groupName?capitalize}
+								${groupName}
 							</a>
 						</li>
 					</#if>
@@ -48,10 +48,10 @@
 				<#if (propertyGroups.all?size > 1) >
 					<li role="presentation">
 						<a href="#${groupNameHtmlId?replace("/","-")}" 
-							aria-controls="${groupName?capitalize}" 
+							aria-controls="${groupName}" 
 							role="tab" data-toggle="tab">
 							
-							${groupName?capitalize}
+							${groupName}
 						</a>
 					</li>
 				</#if>
