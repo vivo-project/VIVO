@@ -7,7 +7,7 @@ ${scripts.add(
 )}
 
 ${stylesheets.add(
-    '<link rel="stylesheet" href="$${urls.base}/webjars/jquery-ui-themes/smoothness/jquery-ui.min.css" />',
+    '<link rel="stylesheet" href="${urls.base}/webjars/jquery-ui-themes/smoothness/jquery-ui.min.css" />',
     '<link rel="stylesheet" type="text/css" href="${urls.base}/templates/freemarker/edit/forms/css/autocomplete.css" />',
     '<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/personlevel/page.css" />',
     '<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/visualization.css" />',

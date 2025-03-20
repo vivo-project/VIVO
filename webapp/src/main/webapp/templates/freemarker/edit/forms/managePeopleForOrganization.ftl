@@ -50,7 +50,7 @@ var i18nStrings = {
 </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />',
-                  '<link rel="stylesheet" href="$${urls.base}/webjars/jquery-ui-themes/smoothness/jquery-ui.min.css" />')}
+                  '<link rel="stylesheet" href="${urls.base}/webjars/jquery-ui-themes/smoothness/jquery-ui.min.css" />')}
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/utils.js"></script>',
               '<script type="text/javascript" src="${urls.base}/webjars/jquery-ui/jquery-ui.min.js"></script>',
