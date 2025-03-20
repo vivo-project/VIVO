@@ -134,7 +134,7 @@ Also multiple types parameter set to true only if more than one type returned-->
 	 edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddAttendeeRoleToPersonGenerator
 -->
 
-${stylesheets.add('<link rel="stylesheet" href="$${urls.base}/webjars/jquery-ui-themes/smoothness/jquery-ui.min.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/webjars/jquery-ui-themes/smoothness/jquery-ui.min.css" />')}
  ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}
  ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customFormWithAutocomplete.css" />')}
 

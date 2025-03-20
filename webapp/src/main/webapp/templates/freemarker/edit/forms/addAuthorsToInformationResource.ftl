@@ -211,7 +211,7 @@ $(document).ready(function () {
 });
 </script>
 
-${stylesheets.add('<link rel="stylesheet" href="$${urls.base}/webjars/jquery-ui-themes/smoothness/jquery-ui.min.css" />',
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/webjars/jquery-ui-themes/smoothness/jquery-ui.min.css" />',
 					'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />',
 					'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/autocomplete.css" />',
 					'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/manageDragDropList.css" />')}

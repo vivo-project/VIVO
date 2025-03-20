@@ -150,7 +150,7 @@ ${scripts.add('<!--[if IE]><script type="text/javascript" src="${urls.base}/js/v
 
 <#-- CSS files -->
 
-${stylesheets.add('<link rel="stylesheet" href="$${urls.base}/webjars/jquery-ui-themes/smoothness/jquery-ui.min.css" />',
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/webjars/jquery-ui-themes/smoothness/jquery-ui.min.css" />',
                   '<link rel="stylesheet" href="${urls.base}/js/visualization/entitycomparison/jquery_plugins/datatable/demo_table.css" />',
                   '<link rel="stylesheet" href="${urls.base}/css/visualization/entitycomparison/layout.css" />',
                   '<link rel="stylesheet" href="${urls.base}/css/visualization/visualization.css" />',
