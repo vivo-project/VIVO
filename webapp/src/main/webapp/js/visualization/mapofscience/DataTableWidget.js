@@ -109,7 +109,16 @@ var DataTableWidget = Class.extend({
 		    	'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">' + dom.secondFilterLabel + '</span>' +
 		    	'<img class="'+ dom.filterInfoIconClass +'" id="imageIconTwo" src="'+ infoIconUrl +'" alt="information icon" title="" /></div>');
 		me.tableDiv.append(filter);
-		createToolTip($("#imageIconTwo"), $('#toolTipTwo').html(), "top left");
+
+		const tooltipDataImageIconTwo = {
+			title: "<div>" + $('#toolTipTwo').html() + "</div>",
+			customClass: "vitroTooltip vitroTooltip-yellow",
+			placements: ['right', 'top', 'bottom', 'left'],	
+        }
+
+		setTooltip("#imageIconTwo", tooltipDataImageIconTwo)
+
+
 		initFilter(dom);
 
 		var table = $('<table>');
@@ -227,15 +236,22 @@ var DataTableWidget = Class.extend({
 		});
 
 
-		var searchInputBox = $("." + me.dom.searchBarParentContainerClass).find("input[type=text]");
+		var searchInputBox = $("." + me.dom.searchBarParentContainerClass).find("input[type=search]");
 		searchInputBox.css("width", "140px");
-		searchInputBox.after("<span id='reset-search' title='" + i18nStrings.clearSearchQuery + "'>X</span>"
-								+ "<img class='filterInfoIcon' id='searchInfoIcon' src='" + infoIconUrl
+		searchInputBox.after("<img class='filterInfoIcon' id='searchInfoIcon' src='" + infoIconUrl
 								+ "' alt='" + i18nStrings.infoIconString + "' title='' />");
 		$( document ).on('click', "#reset-search", function() {
 			me.widget.fnFilter("");
 		});
-		createToolTip($("#searchInfoIcon"), $('#searchInfoTooltipText').html(), "top left");
+
+		const tooltipDataSearchInfoIcon = {
+			title: "<div>" + $('#searchInfoTooltipText').html() + "</div>",
+			customClass: "vitroTooltip vitroTooltip-yellow",
+			placements: ['right', 'top', 'bottom', 'left'],	
+        }
+
+		setTooltip("#searchInfoIcon", tooltipDataSearchInfoIcon)
+
 
 		var csvButton = '<hr class="subtle-hr"/><div id="main-science-areas-table-footer"><a id="csv" href="' +
 						entityMapOfScienceSubDisciplineCSVURL +
