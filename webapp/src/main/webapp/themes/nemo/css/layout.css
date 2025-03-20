@@ -34,8 +34,6 @@
 	padding-top:5px; 
 }
 
-#datatable_wrapper { display : none;}
-
 .subEntityTable {
 	width: 32%; 
 	padding-top:5px;
@@ -271,6 +269,11 @@ a.map-of-science-links {
     padding-right: 5px; 
     cursor: pointer;
     color: #2485AE;
+}
+
+.visCommonControllTooltip {
+    padding: 16px 22px;
+    max-width: 400px;
 }
 
 /* -------------------------------------------------------------->  */

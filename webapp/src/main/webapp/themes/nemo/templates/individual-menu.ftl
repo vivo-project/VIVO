@@ -43,7 +43,7 @@
     ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual.css" />',
                       '<link rel="stylesheet" href="${urls.base}/css/individual/menuManagement-menuItems.css" />')}
                       
-    ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>')}
+    ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>')}
     
     <#assign positionPredicate = "${namespaces.display}menuPosition" />
     
