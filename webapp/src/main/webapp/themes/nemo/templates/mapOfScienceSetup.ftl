@@ -106,12 +106,11 @@ var i18nStrings = {
     percentActivity: '${i18n().percent_activity}'
 };
 </script>
-<#--//'<script type="text/javascript" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>', -->
 ${scripts.add('<script type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyBTRf2JXqvTvpqy4ryJn0J1BWaMRqxqeMU"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
+			  '<script type="text/javascript" src="${urls.base}/webjars/jquery-ui/jquery-ui.min.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/jquery-migrate-1.4.1.js"></script>'
 			  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.blockUI.js"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/datatable/1.10.12/jquery.dataTables.min.js"></script>',
+			  '<script type="text/javascript" src="${urls.base}/webjars/datatables/js/dataTables.js""></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/dataTables.helper.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/visualization-helper-functions.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.notify.min.js"></script>',
@@ -141,7 +140,7 @@ ${scripts.add('<script type="text/javascript" src="//maps.google.com/maps/api/js
 
 <#-- CSS files -->
 
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />',
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/webjars/jquery-ui-themes/smoothness/jquery-ui.min.css" />',
                   '<link rel="stylesheet" href="${urls.base}/js/visualization/entitycomparison/jquery_plugins/datatable/demo_table.css" />',
                   '<link rel="stylesheet" href="${urls.theme}/css/layout.css" />')}
 
