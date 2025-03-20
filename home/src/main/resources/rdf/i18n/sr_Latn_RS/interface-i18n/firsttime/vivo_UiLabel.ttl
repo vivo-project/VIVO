@@ -198,14 +198,6 @@ uil-data:vis_next_link.VIVO
         uil:hasKey      "vis_next_link" ;
         uil:hasPackage  "VIVO-languages" .
 
-uil-data:resource_name.VIVO
-        rdf:type         owl:NamedIndividual ;
-        rdf:type         uil:UILabel ;
-        rdfs:label       "naziv resursa"@sr-Latn-RS ;
-        uil:hasApp      "VIVO" ;
-        uil:hasKey      "resource_name" ;
-        uil:hasPackage  "VIVO-languages" .
-
 uil-data:check_grants_to_exclude.VIVO
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;
