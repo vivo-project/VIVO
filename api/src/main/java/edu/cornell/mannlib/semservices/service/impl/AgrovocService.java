@@ -58,7 +58,7 @@ public class AgrovocService implements ExternalConceptService {
 	protected final String dbpedia_endpoint = " http://dbpedia.org/sparql";
 	// URL to get all the information for a concept
 
-	protected final String conceptSkosMosBase = "https://agrovoc.uniroma2.it/agrovoc/rest/v1/";
+	protected final String conceptSkosMosBase = "https://agrovoc.fao.org/browse/rest/v1/";
 	protected final String conceptsSkosMosSearch = conceptSkosMosBase + "search?";
 	protected final String conceptSkosMosURL = conceptSkosMosBase + "data?";
 	@Override
