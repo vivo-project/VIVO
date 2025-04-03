@@ -8,7 +8,7 @@
 <#-- Funnelback scripts -->
 <#--
 
-<script src="/s/resources-global/js/jquery/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="${urls.base}/webjars/jquery-ui/jquery-ui.min.js"></script>
 <script src="/s/resources-global/js/jquery/jquery.tmpl.min.js"></script>
 <script src="/s/resources-global/js/jquery.funnelback-completion-15.2.0.js"></script>
 <script>

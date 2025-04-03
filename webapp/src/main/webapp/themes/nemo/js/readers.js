@@ -29,7 +29,7 @@ if (doi.includes('figshare')){
                                         '</div>'+
                                  '</div>'+
                        '</div>');
-      $( "#figshareTab" ).click(function() {
+      $( "#figshareTab" ).on("click", function() {
               $('iframe').each(function() {$(this).attr('src', $(this).attr('src'));});
       });
       $('.nav a[href="#' + "figshare" + '"]').tab('show');
@@ -69,7 +69,7 @@ $.getJSON( "https://api.crossref.org/v1/works/http://dx.doi.org/"+doi,
                                         '</div>'+
                                  '</div>'+
                        '</div>');
-                   $( "#readcubeTab" ).click(function() {
+                   $( "#readcubeTab" ).on("click", function() {
                    $('iframe').each(function() {$(this).attr('src', $(this).attr('src'));});
                    });
                    $('.nav a[href="#' + "readcube" + '"]').tab('show');
