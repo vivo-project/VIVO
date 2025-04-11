@@ -19,7 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.jena.query.QuerySolution;
-
+import edu.cornell.mannlib.vitro.webapp.config.ContextPath;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
@@ -41,7 +41,7 @@ public class SiteMapServlet extends VitroHttpServlet {
         if (requestURI != null) {
             if (requestURI.contains("robots.txt")) {
                 String robotsPath = getServletContext().getRealPath("/robots.txt");
-                String contextPath = request.getContextPath();
+                String contextPath = ContextPath.getPath(request);
 
                 StringBuilder builder = new StringBuilder("Sitemap: ");
                 builder.append(getSchemeAndServer(request));
