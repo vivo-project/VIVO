@@ -296,9 +296,70 @@ These are helper classes to add margin gaps where needed
   gap: 5px;
 }
 
-.logoImgPreview {
-  max-width: 100%;
-  max-height: 50px;
-  object-fit: contain;
+/* Logo upload */
+.logo-section {
+  margin-bottom: 2rem;
+}
+
+.logo-label {
+  font-weight: 600;
   display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.logo-preview {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  background-color: #f2f2f2;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  margin: 0.5rem 0;
+  display: block;
+}
+
+.logo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  display: none;
+}
+
+.logo-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-controls input[type="file"] {
+  flex: 1;
+}
+
+.logo-controls button {
+  background: #e0e0e0;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.logo-controls button:hover {
+  background: #ccc;
+}
+
+.submit {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.submit:hover {
+  background-color: #2980b9;
 }

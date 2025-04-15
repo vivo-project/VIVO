@@ -1,5 +1,7 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <#-- Template for scripts that must be loaded in the head -->
 <script>
 var i18nStrings = {

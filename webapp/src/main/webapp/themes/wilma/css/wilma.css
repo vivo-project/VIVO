@@ -480,7 +480,7 @@ h1.vivo-logo {
 
 @media (min-width: 768px) {
     h1.vivo-logo {
-        background-image: var(--logo-url, var(--logo-small-url, url(../images/VIVO-logo.png)));
+        background-image: var(--logo-url, url(../images/VIVO-logo.png));
         width: 442px;
         max-width: none;
     }
