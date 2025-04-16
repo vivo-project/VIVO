@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.lang3.StringUtils;
 
 import org.apache.jena.query.Dataset;
 import org.apache.jena.query.Syntax;
@@ -26,6 +27,10 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Tem
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Services a visualization request. This will return a simple error message and a 501 if
@@ -87,6 +92,11 @@ public class AjaxVisualizationController extends FreemarkerHttpServlet {
             }
 
 		} else {
+			String callback = vreq.getParameter("callback");
+			Set<String> callbackValues = new HashSet<String>(Arrays.asList("ipretFullResults", "ipretResults"));
+			if (!StringUtils.isEmpty(callback) && callbackValues.contains(callback)) {
+				response.setContentType("text/javascript");
+			}
 			response.getWriter().write(ajaxResponse.toString());
 		}
 	}
@@ -193,4 +203,3 @@ public class AjaxVisualizationController extends FreemarkerHttpServlet {
 	}
 
 }
-
