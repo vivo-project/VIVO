@@ -179,8 +179,6 @@ var manageWebpages = {
             context: link, // context for callback
             complete: function(request, status) {
                 var webpage;
-                console.info("hey")
-                console.info(status)
                 if (status === 'success') {
                     
                     webpage = $(this).parents('.webpage');
