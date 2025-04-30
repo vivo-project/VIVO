@@ -10,15 +10,7 @@
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
 <#macro showConcept statement>
-      <#if statement.vocabularySourceName??>
-          <a href="${profileUrl(statement.uri("concept"))}" title="${i18n().concept_name}" class="label label-primary">${statement.conceptLabel!statement.conceptName}</a> (${statement.vocabularySourceName})
-      <#else>
-      <a 
-	      href="https://demo-new.funnelback.co.uk/s/search.html?collection=vivo-lilliput&form=simple&profile=_default_preview&facetScope=f.Subject%2520Area%257CsubjectArea%3D${statement.conceptLabel!statement.conceptName}"
-	      title="${i18n().concept_name}" 
-	      class="label label-primary">${statement.conceptLabel!statement.conceptName}
-      </a>
-      </#if>
+  <a href="${profileUrl(statement.uri("concept"))}" title="${i18n().concept_name}" class="label label-primary">${statement.conceptLabel!statement.conceptName}</a><#if statement.vocabularySourceName??> (${statement.vocabularySourceName})</#if>
 </#macro>
 
 <#--  <a href="${profileUrl(statement.uri("concept"))}" title="${i18n().concept_name}" class="label label-primary">${statement.conceptLabel!statement.conceptName}</a>  -->

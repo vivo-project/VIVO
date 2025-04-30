@@ -65,7 +65,7 @@ function processcart(data){
          addtobasket = '<a id="addtobasket" href="#" title="add this Expert to your basket" class="add-basket"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>'
          $('#addB').html(addtobasket);
          $('#addB').show();
-         $('#addtobasket').click(function(data) {
+         $('#addtobasket').on("click", function(data) {
              $.post("/s/cart.json?collection=vivo-lilliput", {url:currentPage},
                  function(data) {
                   processcart(data)

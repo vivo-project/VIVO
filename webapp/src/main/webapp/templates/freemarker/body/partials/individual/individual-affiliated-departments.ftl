@@ -18,14 +18,14 @@
         </ul>
 </#if>
 <script>
-$('a#raMore').click(function() {
+$('a#raMore').on("click", function() {
     $('li.raLinkMore').each(function() {
         $(this).show();
     });
     $('li#raMoreContainer').hide();
     $('li#raLessContainer').show();
 });
-$('a#raLess').click(function() {
+$('a#raLess').on("click", function() {
     $('li.raLinkMore').each(function() {
         $(this).hide();
     });
