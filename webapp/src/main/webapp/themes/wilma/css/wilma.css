@@ -88,13 +88,7 @@ h5 {
 /* ------------------------------------------------->  */
 
 
-.container,
-.container-fluid,
-.container-xxl,
-.container-xl,
-.container-lg,
-.container-md,
-.container-sm {
+.container {
   width: 100%;
   padding-right: var(--bs-gutter-x, 0.75rem);
   padding-left: var(--bs-gutter-x, 0.75rem);
@@ -107,18 +101,12 @@ h5 {
     --bs-gutter-y: 0;
     display: flex;
     flex-wrap: wrap;
-    /* margin-top: calc(-1 * var(--bs-gutter-y));
-    margin-right: calc(-0.5 * var(--bs-gutter-x));
-    margin-left: calc(-0.5 * var(--bs-gutter-x)); */
   }
   .row > * {
     box-sizing: border-box;
     flex-shrink: 0;
     width: 100%;
     max-width: 100%;
-    /* padding-right: calc(var(--bs-gutter-x) * 0.5);
-    padding-left: calc(var(--bs-gutter-x) * 0.5); */
-    /* margin-top: var(--bs-gutter-y); */
   }
 
 @media (min-width: 768px) {
@@ -694,6 +682,7 @@ ul#main-nav {
     margin-left: 18px;
 }
 
+/* Navbar profile username hover */
 ul.dropdown li#user-menu a {
     margin-right: 0;
 }
@@ -1627,6 +1616,7 @@ img.individual-photo {
     border: 7px solid #ebebeb;
 }
 
+/* Individual tabs */
 ul.propertyTabsList {
     display: flex;
     flex-wrap: wrap;
@@ -2337,8 +2327,9 @@ span.subclassExpandMinus {
     line-height: unset;
 }
 
+/* Various tables in site admin */
 #wrapper-content  table > tbody td.verticalfieldlabel {
-    width: 100px;
+    width: 130px;
 }
 
 #container section table tbody .subclassCell {
