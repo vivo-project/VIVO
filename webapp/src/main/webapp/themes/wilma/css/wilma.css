@@ -2337,12 +2337,7 @@ span.subclassExpandMinus {
     line-height: unset;
 }
 
-#wrapper-content > div > div > div > div > table > tbody > tr > td > div > form > div {
-    display: flex;
-    flex-direction: column;
-}
-
-#wrapper-content  table > tbody > tr.header > td.verticalfieldlabel {
+#wrapper-content  table > tbody td.verticalfieldlabel {
     width: 100px;
 }
 
