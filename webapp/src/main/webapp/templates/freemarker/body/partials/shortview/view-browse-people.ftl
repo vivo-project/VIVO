@@ -20,7 +20,7 @@
 <#if (extra[0].pt)?? >
     <span class="title">${extra[0].pt}</span>
 <#else>
-    <#assign cleanTypes = 'edu.cornell.mannlib.vitro.webapp.web.TemplateUtils$DropFromSequence'?new()(individual.mostSpecificTypes, vclass) />
+    <#assign cleanTypes = 'edu.cornell.mannlib.vitro.webapp.web.TemplateUtils$DropFromSequence'?new()(individual.mostSpecificTypes, vclass!"") />
     <#if cleanTypes?size == 1>
         <span class="title">${cleanTypes[0]}</span>
     <#elseif (cleanTypes?size > 1) >
