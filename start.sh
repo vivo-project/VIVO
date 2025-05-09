@@ -13,22 +13,10 @@ if [[ "$RESET_HOME" = "true" ]]; then
   rm -rf "$VIVO_HOME/*"
 fi
 
-# copy home bin if not exists
-if [ ! -d "$VIVO_HOME/bin" ]; then
-  echo "Copying home bin directory to $VIVO_HOME/bin"
-  cp -r /vivo-home/bin "$VIVO_HOME/bin"
-fi
-
 # copy home config if not exists
 if [ ! -d $VIVO_HOME/config ]; then
   echo "Copying home config directory to $VIVO_HOME/config"
   cp -r /vivo-home/config "$VIVO_HOME/config"
-fi
-
-# copy home rdf if not exists
-if [ ! -d $VIVO_HOME/rdf ]; then
-  echo "Copying home rdf directory to $VIVO_HOME/rdf"
-  cp -r /vivo-home/rdf "$VIVO_HOME/rdf"
 fi
 
 # copy runtime.properties if it does not already exist in target home directory

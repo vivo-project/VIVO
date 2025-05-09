@@ -73,7 +73,7 @@ Build and start VIVO.
 
 1. In VIVO (with Vitro cloned alongside it), run:
 ```
-mvn clean package -s installer/example-settings.xml
+mvn clean package -s installer/docker-example-settings.xml
 docker-compose up
 ```
 
