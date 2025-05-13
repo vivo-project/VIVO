@@ -1,9 +1,0 @@
-{
-    "themeStyle": {
-        "css": [
-            "/themes/nemo/css/theme.css",
-            "/themes/nemo/css/homepage.css",
-            "/themes/nemo/css/individual.css"
-        ]
-    }
-}
