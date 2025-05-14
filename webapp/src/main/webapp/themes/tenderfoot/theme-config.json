@@ -1,0 +1,12 @@
+{
+    "defaultBrandingColors": {
+        "primary-lighter": "#8bb9cc",
+        "primary-base": "#3E8BAA",
+        "primary-darker": "#0c0cb5",
+        "banner-base": "#013049",
+        "secondary-base": "#93c3d4",
+        "accent-base": "#3446A0",
+        "text-base": "#595B5B",
+        "link-base": "#2485ae"
+    }
+}
