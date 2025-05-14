@@ -3,6 +3,7 @@
 var i18nStrings = {
     allCapitalized: '${i18n().all_capitalized}',
 };
+var baseUrl = '${urls.base}';
 </script>
 <!-- <script type="text/javascript" src="${urls.base}/js/jquery.js"></script> -->
 

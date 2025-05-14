@@ -13,7 +13,7 @@ Homepage colours
 }
 .person-content .user-nav {
   margin: 20px 0 17px 0;
-  color: #337ab7;
+  color: var(--primary-color-lighter, #337ab7);
   /* Hide the contact button for demo purposes */
 }
 .person-content .user-nav > li + li {
@@ -69,7 +69,7 @@ Styling for the left hand side contact info column on the individual person page
 }
 .share-contact a.email {
   word-break: break-word;
-  color: #222222;
+  color: var(--text-color, #222222);
   font-size: 15px;
 }
 .share-contact .individual-urls .list-group-item {
@@ -92,7 +92,7 @@ Styling for the left hand side contact info column on the individual person page
 .share-contact #coinvestigator_link_container .collaboratorship-link a {
   min-width: 165px;
   background-image: none;
-  background-color: #064d68;
+  background-color: var(--primary-color, #064d68);
   color: white;
   text-shadow: none;
 }
@@ -109,13 +109,13 @@ Styling for the left hand side contact info column on the individual person page
 #individual-info #individual-hasResearchArea a.label {
   font-size: 13px;
   background: transparent;
-  border: 1px solid #337ab7;
-  color: #337ab7;
+  border: 1px solid var(--primary-color-lighter, #337ab7);
+  color: var(--primary-color-lighter, #337ab7);
   font-weight: 400;
   transition: all 0.5s;
 }
 #individual-info #individual-hasResearchArea a.label:hover {
-  background: #337ab7;
+  background: var(--primary-color-lighter, #337ab7);
   color: #fff;
 }
 /* Remove borders from all items in nav tab content panes */
