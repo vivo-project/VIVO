@@ -404,7 +404,7 @@ ul#browse-classes a,
 ul#find-filters a,
 ul#vgraph-classes a {
     text-decoration: none;
-    color: #5E6363;
+    color: var(--text-color, #5E6363);
 }
 ul.ingestMenu {
     margin-bottom: 1.5em;
@@ -553,7 +553,7 @@ input.search-vivo {
     height: 25px;
     border: 0;
     font-size: 16px;
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
     margin-left: 10px;
     margin-top: 5px;
     padding: 0;
@@ -680,7 +680,7 @@ h3.internal-auth:hover {
 }
 #login-form label {
     display: block;
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
     padding-top: 0;
     padding-left: 38px;
     font-size: 14px;
@@ -717,7 +717,7 @@ h3.internal-auth:hover {
     float: left;
     height: 14px;
     width: 14px;
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
     padding: 0;
     margin-top: 33px;
     margin-left: 20px;
@@ -725,7 +725,7 @@ h3.internal-auth:hover {
 #login-form label.label-remember-me {
     display: block;
     float: right;
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
     font-size: 12px;
     width: 100px;
     margin: 0;
@@ -823,7 +823,7 @@ input.search-home-vivo {
     height: 20px;
     border: 0;
     font-size: 18px;
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
     margin-left: 4px;
     margin-top: 2px;
 }
@@ -891,10 +891,10 @@ ul#classes-in-classgroup a.selected,
 ul#vgraph-classes a:hover,
 ul#vgraph-classes a.selected {
     background: url(../images/arrow.gif) 0 10px no-repeat;
-    color: #2ea0cf;
+    color: var(--primary-color-lighter, #2ea0cf);
 }
 svg text:hover {
-    color: #2EA0CF;
+    color: var(--primary-color-lighter, #2ea0cf);
 }
 p.view-all {
     clear: both;
@@ -1234,7 +1234,7 @@ ul#individual-tools-people li a {
 ul#find-filters a:hover,
 ul#find-filters a.selected {
     background: url(../images/arrow.gif) 0 6px no-repeat;
-    color: #2ea0cf;
+    color: var(--primary-color-lighter, #2ea0cf);
 }
 /* RESEARCHERS ------>  */
 #researchers {
@@ -1250,7 +1250,7 @@ ul#find-filters a.selected {
 }
 #researchers p {
     font-size: 1.125em;
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
 }
 #researchers-slider {
     border: 1px solid #e8e8e8;
@@ -1300,7 +1300,7 @@ ul#vgraph-classes li {
 ul#browse-classes a:hover,
 ul#browse-classes a.selected {
     background: url(../images/arrow.gif) 4px 5px no-repeat;
-    color: #2ea0cf;
+    color: var(--primary-color-lighter, #2ea0cf);
 }
 ul#browse-classes .count-classes {
     font-size: 12px;
@@ -1312,7 +1312,7 @@ ul#alpha-browse-individuals {
 ul#alpha-browse-individuals a:hover,
 ul#alpha-browse-individuals a.selected {
     background: url(../images/arrowSmall.gif) -3px 7px no-repeat;
-    color: #2ea0cf;
+    color: var(--primary-color-lighter, #2ea0cf);
 }
 ul#alpha-browse-individuals .count-classes,
 ul#vgraph-classes .count-classes {
@@ -1345,7 +1345,7 @@ nav#alpha-browse-container {
 #individuals-in-class li h1,
 #property-group-menu ul,
 article.property ul.property-list {
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
     font-size: 1em;
 }
 .pagination.menupage li a:hover {
@@ -1412,7 +1412,7 @@ article.property ul.property-list {
 #individual-intro span.display-title,
 h1.fn .display-title {
     font-size: .825em;
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
     border-left: 1px solid #a6b1b0;
 }
 ul#individual-tools {
@@ -1457,7 +1457,7 @@ ul.individual-urls-people {
 h2#mainImage,
 #share-contact h2,
 h3.internal-auth {
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
 }
 #individual-info h1.fn {
     font-size: 1.375em;
@@ -1465,7 +1465,7 @@ h3.internal-auth {
     line-height: 1.3em;
 }
 #individual-info h2 {
-    color: #5E6363;
+    color: var(--text-color, #5E6363);
     font-size: 1em;
     font-weight: bold;
 }
@@ -1499,7 +1499,7 @@ p.view-all-coauthors {
 }
 a.all-vivo-publications {
     font-size: .875em;
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
 }
 /* <------ TEMPORAL GRAPH and MAP O' SCIENCE  */
 #temporal-graph h3 a,
@@ -1554,7 +1554,7 @@ article.property ul.property-list li.subclass h3 {
 article.property .data-property-statement {
     background: #fff;
     font-size: 1em;
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
 }
 article.property ul.property-list li a {
     /*color: var(--primary-color, #2485ae);*/   /* cappadona: seems unnecessarily specific and is overriding .more-less from individual.css so I'm commenting out for now */
@@ -1605,13 +1605,13 @@ p.address-line {
   margin: 0 0 1em .6em;
 }
 #adminDashboard .pageBodyGroup h4 {
-  color: #5E6363;
+  color: var(--text-color, #5E6363);
   font-size: 1em;
   margin-left: .6em;
   font-weight: bold;
 }
 #adminDashboard .pageBodyGroup h4 a {
-  color: #5E6363;
+  color: var(--text-color, #5E6363);
   font-size: 1em;
   margin-left: 0;
   font-weight: bold;
@@ -1653,7 +1653,7 @@ p.address-line {
 section.verbosePropertyListing {
     font-size: 12px;
     font-weight: normal;
-    color: #5E6363;
+    color: var(--text-color, #5E6363);
 }
 section.verbosePropertyListing span {
     color: #9bae5a;

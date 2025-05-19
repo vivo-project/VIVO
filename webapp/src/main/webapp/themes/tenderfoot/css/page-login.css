@@ -44,7 +44,7 @@ h3.internal-auth:hover {
 }
 #login-form label {
     display: block;
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
     padding-top: 0;
     padding-left: 38px;
     font-size: 14px;
@@ -81,7 +81,7 @@ h3.internal-auth:hover {
     float: left;
     height: 14px;
     width: 14px;
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
     padding: 0;
     margin-top: 33px;
     margin-left: 20px;
@@ -89,7 +89,7 @@ h3.internal-auth:hover {
 #login-form label.label-remember-me {
     display: block;
     float: right;
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
     font-size: 12px;
     width: 100px;
     margin: 0;

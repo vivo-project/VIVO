@@ -209,7 +209,7 @@ input.search-vivo {
     height: 25px;
     border: 0;
     font-size: 16px;
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
     margin-left: 10px;
     margin-top: 5px;
     padding: 0;
