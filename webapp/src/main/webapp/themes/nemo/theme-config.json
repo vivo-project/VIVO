@@ -1,0 +1,12 @@
+{
+    "defaultBrandingColors": {
+        "primary-lighter": "#337ab7",
+        "primary-base": "#064d68",
+        "primary-darker": "#023447",
+        "banner-base": "#064d68",
+        "secondary-base": "#064d68",
+        "accent-base": "#8BAB2E",
+        "text-base": "#333",
+        "link-base": "#064d68"
+    }
+}
