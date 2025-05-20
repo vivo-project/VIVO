@@ -208,7 +208,7 @@ function processProfileInformation(nameContainerID,
 
 function visLoaded(nodes){
 
-	var jsonedNodes = jQuery.parseJSON(nodes);
+	var jsonedNodes = JSON.parse(nodes);
 
 	$(document).ready(function() {
 		 createTable(collaboratorTableMetadata.tableID, collaboratorTableMetadata.tableContainer, jsonedNodes);
