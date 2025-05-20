@@ -41,7 +41,6 @@ body {
 
 /* Contains all the graphics. */
 #container {
-    /*width: 1200px;*/
     max-width:940px;
     width: 100%;
     height: auto;

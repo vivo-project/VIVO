@@ -94,6 +94,8 @@ h5 {
   padding-left: var(--bs-gutter-x, 0.75rem);
   margin-right: auto;
   margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .row {
@@ -109,24 +111,6 @@ h5 {
     max-width: 100%;
   }
 
-@media (min-width: 768px) {
-    .col-md-5 {
-      flex: 0 0 auto;
-      width: 41.66666667%;
-    }
-  
-    .col-md-7 {
-      flex: 0 0 auto;
-      width: 58.33333333%;
-    }
-}
-
-@media (min-width: 970px) {
-    .container {
-        max-width: 970px;
-    }
-}
-
 .row-margin-fill {
     --bs-gutter-x: 1.5rem;
     --bs-gutter-y: 0;
@@ -134,12 +118,6 @@ h5 {
     margin-right: calc(-.5 * var(--bs-gutter-x));
     margin-left: calc(-.5 * var(--bs-gutter-x));
 }
-
-.container {
-    padding-left: 0;
-    padding-right: 0;
-}
-
 
 * {
     box-sizing: border-box;
@@ -319,14 +297,6 @@ p.submit {
 .editingForm > table > tbody > tr > td.verticalfieldlabel:first-child {
     width: 40%;
 }
-
-
-@media (min-width: 768px) {
-    .editingForm > table > tbody > tr > td.verticalfieldlabel:first-child {
-        width: 15%;
-    }
-}
-
 
 .editingForm .entryFormHead {
     background-color: #f1f2ee;
@@ -549,24 +519,6 @@ h1.vivo-logo a {
     height: 59px;
 }
 
-@media (min-width: 768px) {
-    #branding {
-        height: 114px;
-    }
-
-    h1.vivo-logo {
-        width: 50%;
-        top: 28px;
-        background-size: contain;
-
-    }
-
-    h1.vivo-logo a {
-        max-width: 386px;
-    }
-}
-
-
 
 /* HEADER NAV------>  */
 ul#header-nav {
@@ -609,13 +561,6 @@ ul#header-nav a.log-out {
     top: 40px;
     right: 0;
     padding: 5px 10px 0px;
-}
-
-@media (min-width: 768px) {
-    #search {
-        width: 50%;
-        margin-top: 0;
-    }
 }
 
 #search-field {
@@ -1049,13 +994,6 @@ a.view-all-style {
 		opacity: .5;
 }
 
-@media (min-width: 768px) {
-    #home-research  {
-        flex: 0 0 auto;
-        width: 33.3333333%;
-    }
-}
-
 #home-research > ul {
     position: absolute;
     bottom: 0;
@@ -1104,13 +1042,6 @@ a.view-all-style {
 	text-align: center;
 }
 
-@media (min-width: 768px) {
-    #home-academic-depts  {
-        flex: 0 0 auto;
-        width: 33.3333333%;
-    }
-}
-
 #home-academic-depts h4,
 #home-faculty-mbrs h4,
 #home-geo-focus h4,
@@ -1135,13 +1066,6 @@ a.view-all-style {
 	padding-top: 1.0em;
 	padding-right: 4px;
 	font-size: 0.9em;
-}
-
-@media (min-width: 768px) {
-    #home-faculty-mbrs  {
-        flex: 0 0 auto;
-        width: 33.3333333%;
-    }
 }
 
 div#tempSpacing {
@@ -1442,13 +1366,6 @@ ul#browse-classes {
     width: 100%;
 }
 
-@media (min-width: 768px) {
-    ul#browse-classes {
-        float: left;
-        width: 33.333333%;
-    }
-}
-
 ul#browse-classes li,
 ul#vgraph-classes li {
     border-bottom: 1px solid #dde4e3;
@@ -1502,13 +1419,6 @@ nav#alpha-browse-container {
     float: unset
 }
 
-@media (min-width: 768px) {
-    nav#alpha-browse-container {
-        float: left;
-        width: 66.6666666%;
-    }
-}
-
 /* BROWSE INDIVIDUALS------>  */
 #individuals-in-class {
     width: 100%;
@@ -1516,13 +1426,6 @@ nav#alpha-browse-container {
     background-color: #fff;
     float: none;
     margin-right: 0;
-}
-
-@media (min-width: 768px) {
-    #individuals-in-class {
-        float: left;
-        width: 66.666666%;
-    }
 }
 
 #individuals-in-class li.individual {
@@ -1634,11 +1537,6 @@ ul.propertyTabsList > li.groupTabSpacer:last-child {
 .scroll-up {
     right: -12px;
 }  
-@media (min-width: 768px) {
-    .scroll-up {
-        right: -21px;
-    }    
-}
 
 .rdf-url {
     padding-top: .8em;
@@ -1650,12 +1548,6 @@ ul#individual-tools {
 
 #share-contact {
     float: unset;
-}
-
-@media (min-width: 768px) {
-    #share-contact {
-        float: left;
-    }
 }
 
 #share-contact a.email,
@@ -1714,13 +1606,6 @@ h3.internal-auth {
     width: 100%;
 }
 
-@media (min-width: 768px) {
-
-    #individual-intro.person #individual-info {
-        width: 75%;
-    }
-}
-
 ul#individual-personInPosition {
     font-size: 1em;
     list-style: url("../../../images/individual/arrow-green.gif");
@@ -1772,14 +1657,6 @@ section#right-hand-column:after {
     float: unset;
     width: 100%;
     padding: 0 0 20px 0;
-}
-
-@media (min-width: 768px) {
-    #right-hand-column {
-        padding: 0 0 0 20px;
-        width: initial;
-        float: right;
-    }
 }
 
 #co-authors h3,
@@ -1865,13 +1742,6 @@ p.address-line {
 #adminDashboard .pageBodyGroup {
   padding: 0 1em .5em 1em;
   width: 100%;
-}
-
-@media (min-width: 768px) {
-    #adminDashboard .pageBodyGroup {
-        flex: 0 0 auto;
-        width: 50%;
-    }
 }
 
 #addIndividualClass #submit {
@@ -2093,23 +1963,6 @@ span.subclassExpandMinus {
     width: 100%;
 }
 
-@media (min-width: 768px) {
-    #adminDashboard .pageBodyGroup {
-        flex: 0 0 auto;
-        width: 50%;
-    }
-
-    #right-container {
-        width: 34%;
-    }
-
-    #helptext {
-        width: 70%;
-        padding-right: 10px;
-    }
-    
-}
-
 #cutofflabel {
     width: initial;
 }
@@ -2235,15 +2088,6 @@ span.subclassExpandMinus {
 }
 
 
-@media (min-width: 768px) and (max-width: 991px) {
-    #body > #bodyPannel {
-        height: 768px;
-    }
-    
-    #chord > svg > * {
-        scale: 0.8;
-    }
-}
 
 
 
@@ -2268,21 +2112,6 @@ span.subclassExpandMinus {
     margin-bottom: 0px;
 }
 
-@media (min-width: 768px) {
-    #sparkline-container-full > #publication-count-sparkline-include {
-        width: 50%;
-        margin-bottom: 15px;
-    }
-    #sparkline-container-full > #coauthor-count-sparkline-include {
-        width: 50%;
-        margin-bottom: 15px;
-    }
-    #body .vis-tables {
-        width: 48%;
-        margin-bottom: 15px;
-    }
-}
-
 #graphContainer {
     width: 100%;
     position: relative;
@@ -2297,16 +2126,6 @@ span.subclassExpandMinus {
 #rightblock {
     width: 100%;
     margin-right: 0;
-}
-
-@media (min-width: 768px) {
-    #leftblock {
-        width: 39%;
-    }
-    
-    #rightblock {
-        width: 54%;
-    }
 }
 
 #temporal-graph {
@@ -2372,17 +2191,6 @@ section#container div {
     padding-left: 0;
 }
 
-@media (min-width: 768px) {
-    .proxy-profile .proxy {
-        width: 50%;
-    }
-    
-    .proxy-profile .profile {
-        width: 50%;
-        padding-left: 12px;
-    }
-}
-
 ul.menuItems {
     max-width: 300px;
     width: initial;
@@ -2399,17 +2207,6 @@ section#floatRight {
 
 #managePage #leftSide {
     width: 100%;
-}
-
-@media (min-width: 768px) {
-    #managePage #floatRight {
-        width: initial;
-        float: right;
-    }
-    
-    #managePage #leftSide {
-        width: initial;
-    }
 }
 
 .customForm {
@@ -2443,4 +2240,164 @@ form li {
 .searchResultsHeader {
     width: 100%;
     max-width: 675px;
+}
+
+
+@media (min-width: 768px) {
+    .col-md-5 {
+      flex: 0 0 auto;
+      width: 41.66666667%;
+    }
+  
+    .col-md-7 {
+      flex: 0 0 auto;
+      width: 58.33333333%;
+    }
+
+    .editingForm > table > tbody > tr > td.verticalfieldlabel:first-child {
+        width: 15%;
+    }
+
+    #branding {
+        height: 114px;
+    }
+
+    h1.vivo-logo {
+        width: 50%;
+        top: 28px;
+        background-size: contain;
+    }
+
+    h1.vivo-logo a {
+        max-width: 386px;
+    }
+
+    #search {
+        width: 50%;
+        margin-top: 0;
+    }
+
+    #home-research  {
+        flex: 0 0 auto;
+        width: 33.3333333%;
+    }
+
+    #home-academic-depts  {
+        flex: 0 0 auto;
+        width: 33.3333333%;
+    }
+
+    #home-faculty-mbrs  {
+        flex: 0 0 auto;
+        width: 33.3333333%;
+    }
+
+    ul#browse-classes {
+        float: left;
+        width: 33.333333%;
+    }
+
+    nav#alpha-browse-container {
+        float: left;
+        width: 66.6666666%;
+    }
+
+    #individuals-in-class {
+        float: left;
+        width: 66.666666%;
+    }
+
+    .scroll-up {
+        right: -21px;
+    }  
+
+    #share-contact {
+        float: left;
+    }
+
+    #individual-intro.person #individual-info {
+        width: 75%;
+    }
+
+    #right-hand-column {
+        padding: 0 0 0 20px;
+        width: initial;
+        float: right;
+    }
+
+    #adminDashboard .pageBodyGroup {
+        flex: 0 0 auto;
+        width: 50%;
+    }
+
+    #adminDashboard .pageBodyGroup {
+        flex: 0 0 auto;
+        width: 50%;
+    }
+
+    #right-container {
+        width: 34%;
+    }
+
+    #helptext {
+        width: 70%;
+        padding-right: 10px;
+    }
+
+    #sparkline-container-full > #publication-count-sparkline-include {
+        width: 50%;
+        margin-bottom: 15px;
+    }
+    #sparkline-container-full > #coauthor-count-sparkline-include {
+        width: 50%;
+        margin-bottom: 15px;
+    }
+    #body .vis-tables {
+        width: 48%;
+        margin-bottom: 15px;
+    }
+
+    #leftblock {
+        width: 39%;
+    }
+    
+    #rightblock {
+        width: 54%;
+    }
+
+    .proxy-profile .proxy {
+        width: 50%;
+    }
+    
+    .proxy-profile .profile {
+        width: 50%;
+        padding-left: 12px;
+    }
+
+    #managePage #floatRight {
+        width: initial;
+        float: right;
+    }
+    
+    #managePage #leftSide {
+        width: initial;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    #body > #bodyPannel {
+        height: 768px;
+    }
+    
+    #chord > svg > * {
+        scale: 0.8;
+    }
+}
+
+
+@media (min-width: 970px) {
+    .container {
+        max-width: 970px;
+    }
 }
