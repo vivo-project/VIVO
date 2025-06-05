@@ -109,11 +109,11 @@ var SimpleDataTableWidget = Class.extend({
 		me.tableDiv.append(table);
 
 		/* Register events */
-		table.children("tbody").children("tr").mouseenter(function() {
+		table.children("tbody").children("tr").on("mouseenter", function() {
 			me.sciMapWidget.mouseInNode(me.type, me.label, $(this).attr("id"));
 		});
 
-		table.children("tbody").children("tr").mouseleave(function() {
+		table.children("tbody").children("tr").on("mouseleave", function() {
 			me.sciMapWidget.mouseOutNode(me.type, me.label, $(this).attr("id"));
 		});
 

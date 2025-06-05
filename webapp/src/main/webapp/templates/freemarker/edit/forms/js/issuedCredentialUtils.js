@@ -27,7 +27,7 @@ var issuedCredentialUtils = {
     bindEventListeners: function() {
         this.idCache = {};
 
-        this.form.submit(function() {
+        this.form.on("submit", function() {
             issuedCredentialUtils.setIssuedCredentialType($(issuedCredentialUtils.typeSelector).find(":selected").text());
             issuedCredentialUtils.setYearCredentialedValue();
         });

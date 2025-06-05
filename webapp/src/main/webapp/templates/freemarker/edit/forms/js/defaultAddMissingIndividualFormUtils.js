@@ -21,7 +21,7 @@ var missingIndividualFormUtils = {
     bindEventListeners: function() {
         this.idCache = {};
 
-        this.form.submit(function() {
+        this.form.on("submit", function() {
             missingIndividualFormUtils.buildRDFSLabel();
             missingIndividualFormUtils.submitButton.attr("disabled",true);
         });

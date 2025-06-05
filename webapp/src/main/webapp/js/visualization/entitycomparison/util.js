@@ -42,34 +42,34 @@ $.extend(this, i18nStringsUtil);
             nPaging.appendChild(nNext);
             nPaging.appendChild(nLast);
 
-            $(nFirst).click(function () {
+            $(nFirst).on("click", function () {
                 if (oSettings.oApi._fnPageChange(oSettings, "first")) {
                     fnCallbackDraw(oSettings);
                 }
             });
 
-            $(nPrevious).click(function () {
+            $(nPrevious).on("click", function () {
                 if (oSettings.oApi._fnPageChange(oSettings, "previous")) {
                     fnCallbackDraw(oSettings);
                 }
             });
 
-            $(nNext).click(function () {
+            $(nNext).on("click", function () {
                 if (oSettings.oApi._fnPageChange(oSettings, "next")) {
                     fnCallbackDraw(oSettings);
                 }
             });
 
-            $(nLast).click(function () {
+            $(nLast).on("click", function () {
                 if (oSettings.oApi._fnPageChange(oSettings, "last")) {
                     fnCallbackDraw(oSettings);
                 }
             });
 
             /* Take the brutal approach to cancelling text selection */
-            $('span', nPaging).bind('mousedown', function () {
+            $('span', nPaging).on('mousedown', function () {
                 return false;
-            }).bind('selectstart', function () {
+            }).on('selectstart', function () {
                 return false;
             });
 

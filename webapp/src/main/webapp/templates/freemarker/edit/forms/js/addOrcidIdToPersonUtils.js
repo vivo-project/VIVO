@@ -18,7 +18,7 @@ var addOrcidIdToPersonUtils = {
 
     bindEventListeners: function() {
 
-        this.form.submit(function() {
+        this.form.on("submit", function() {
             addOrcidIdToPersonUtils.buildOrcidIdURL();
         });
 

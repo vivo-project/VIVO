@@ -18,7 +18,7 @@ var visualization = {
 			},
             dataType: 'html',
             success:function(data){
-            	if ($.trim(data) != "") {
+            	if (data.trim() != "") {
             		containerCoAuthor.html(data);
     				containerCoAuthor.children("#pub_count_short_sparkline_vis");
             	}

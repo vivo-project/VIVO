@@ -18,7 +18,7 @@ var educationalTrainingUtils = {
 
     bindEventListeners: function() {
 
-        this.degreeSelector.change(function() {
+        this.degreeSelector.on("change", function() {
             educationalTrainingUtils.setAwardedDegreeLabel();
         });
 
