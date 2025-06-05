@@ -51,7 +51,7 @@ var awardReceiptUtils = {
            window.setTimeout('awardReceiptUtils.hideConferredBy()', 180);
         });
 
-        this.form.submit(function() {
+        this.form.on("submit", function() {
             awardReceiptUtils.setYearAwardedValue();
             awardReceiptUtils.buildAwardReceiptLabel();
         });

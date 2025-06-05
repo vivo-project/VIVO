@@ -942,7 +942,7 @@ var importGraphDetails = function() {
 var download = function(content, ext) {
     $("#download").attr("action", "http://115.146.84.185/search/download.php?ext=" + ext);
     $("#exportContent").val(content);
-    $("#download").submit();
+    $("#download").trigger("submit");
 }
 var showhideadvanced = function(button) {
     if ($("#advanced_options").data("shown") != true) {

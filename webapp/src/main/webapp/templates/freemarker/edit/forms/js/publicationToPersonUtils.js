@@ -92,7 +92,7 @@ var publicationToPersonUtils = {
            publicationToPersonUtils.showFieldsForPub();
         });
 
-        this.form.submit(function() {
+        this.form.on("submit", function() {
             publicationToPersonUtils.resolveEditorNames();
         });
 

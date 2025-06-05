@@ -33,7 +33,7 @@ var mailingAddressUtils = {
     bindEventListeners: function() {
         this.idCache = {};
 
-        this.form.submit(function() {
+        this.form.on("submit", function() {
             mailingAddressUtils.setStreetAddressField();
         });
 

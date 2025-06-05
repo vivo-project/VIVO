@@ -54,7 +54,7 @@ var adviseeRelUtils = {
         });
 
 
-        this.form.submit(function() {
+        this.form.on("submit", function() {
             adviseeRelUtils.resolveAdvisorNames();
             adviseeRelUtils.buildAdvisingRelLabel();
         });

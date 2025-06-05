@@ -54,7 +54,7 @@ var advisorRelUtils = {
         });
 
 
-        this.form.submit(function() {
+        this.form.on("submit", function() {
             advisorRelUtils.resolveAdviseeNames();
             advisorRelUtils.buildAdvisingRelLabel();
 
