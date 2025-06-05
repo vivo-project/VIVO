@@ -72,9 +72,9 @@ $.fn.dataTableExt.oPagination.gmail_style = {
             });
 
             /* Take the brutal approach to cancelling text selection */
-            $('span', nPaging).bind('mousedown', function () {
+            $('span', nPaging).on('mousedown', function () {
                 return false;
-            }).bind('selectstart', function () {
+            }).on('selectstart', function () {
                 return false;
             });
 
