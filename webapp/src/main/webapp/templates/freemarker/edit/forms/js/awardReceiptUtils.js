@@ -43,7 +43,7 @@ var awardReceiptUtils = {
         this.idCache = {};
 
         // the delay ensures that the function is called after the ac selection is completed
-        this.award.change( function(objEvent) {
+        this.award.on("change", function(objEvent) {
            window.setTimeout('awardReceiptUtils.hideConferredBy()', 180);
         });
 

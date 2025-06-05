@@ -46,7 +46,7 @@ var adviseeRelUtils = {
         // we want to use the advisor label in the relationship label.
         // since the former gets cleared on submit in some cases, store
         // the value in a hidden field and map to relationship label
-        this.advisor.change( function(objEvent) {
+        this.advisor.on("change", function(objEvent) {
            window.setTimeout('adviseeRelUtils.mapAdvisorValue()', 180);
         });
         this.advisor.on("blur", function(objEvent) {

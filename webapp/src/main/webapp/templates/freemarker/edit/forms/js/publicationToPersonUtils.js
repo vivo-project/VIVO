@@ -68,7 +68,7 @@ var publicationToPersonUtils = {
     bindEventListeners: function() {
         this.idCache = {};
 
-        this.typeSelector.change(function() {
+        this.typeSelector.on("change", function() {
             // controls the fieldsForNewPub div. If the user selects an existing pub/title,
             // this div gets hidden.
             publicationToPersonUtils.showFieldsForPub();
@@ -80,7 +80,7 @@ var publicationToPersonUtils = {
 
         // we need the delay in the next two functions to ensure the correct timing after the user
         // selects the ac item. The .change handles a mouse click; .blur an arrow key and tab selection
-        this.pubTitle.change( function(objEvent) {
+        this.pubTitle.on("change", function(objEvent) {
            window.setTimeout('publicationToPersonUtils.hideFieldsForPub()', 180);
         });
 

@@ -205,7 +205,7 @@ var i18nStrings = {
 };
 
 $(document).ready(function () {
-    $('input[type=radio].radiotypes').change(function() {
+    $('input[type=radio].radiotypes').on("change", function() {
         $('input[type=radio].radiotypes:checked').not(this).prop('checked', false);
     });
 });

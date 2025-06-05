@@ -150,11 +150,11 @@ $(document).ready(function(){
         if ( $list.length > 0 )
         {
             var $more = $list.find('a.more-less');
-            $more.click();
+            $more.trigger("click");
         }
         else {
             var $more = $('ul#geographicFocusOfList').find('a.more-less');
-            $more.click();
+            $more.trigger("click");
         }
     }
 

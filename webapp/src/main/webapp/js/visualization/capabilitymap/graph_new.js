@@ -1039,7 +1039,7 @@ function run_demo(demoValues) {
 var queryKeyDown = function(e) {
     e.cancelBubble = true;
     if(e.which === 13 || e.keyCode === 13) {
-        subButton.click();
+        subButton.trigger("click");
         e.returnValue = false;
         e.cancel = true;
         return false;
