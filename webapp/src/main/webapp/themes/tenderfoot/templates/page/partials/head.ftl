@@ -46,4 +46,16 @@ ${headContent!}
     }
 </style>
 
+<script>
+    var globalI18nStrings = {
+        brandingColorsSubmitAlert: '${i18n().branding_colors_submit_alert?js_string}',
+        brandingColorsCancelAlert: '${i18n().branding_colors_cancel_alert?js_string}',
+        brandingColorsResetAlert: '${i18n().branding_colors_reset_alert?js_string}',
+        brandingColorsErrorFetchConfig: '${i18n().branding_colors_error_fetch_config?js_string}',
+        brandingColorsErrorFormatConfig: '${i18n().branding_colors_error_format_config?js_string}',
+        brandingColorsErrorUnexpectedConfig: '${i18n().branding_colors_error_unexpected_config?js_string}',
+        brandingColorsOpenAfterSave: '${i18n().branding_colors_open_after_save?js_string}',
+    }
+</script>
+
 <link rel="shortcut icon" type="image/x-icon" href="${urls.base}/favicon.ico">
