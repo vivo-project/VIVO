@@ -42,16 +42,16 @@ ${headContent!}
 
 <style>
     :root {
-        <#if themePrimaryColorLighter?? && themePrimaryColorLighter != "null">--primary-color-lighter: ${themePrimaryColorLighter};</#if>
-        <#if themePrimaryColor?? && themePrimaryColor != "null">--primary-color: ${themePrimaryColor};</#if>
-        <#if themePrimaryColorDarker?? && themePrimaryColorDarker != "null">--primary-color-darker: ${themePrimaryColorDarker};</#if>
-        <#if themeBannerColor?? && themeBannerColor != "null">--banner-color: ${themeBannerColor};</#if>
-        <#if themeSecondaryColor?? && themeSecondaryColor != "null">--secondary-color: ${themeSecondaryColor};</#if>
-        <#if themeAccentColor?? && themeAccentColor != "null">--accent-color: ${themeAccentColor};</#if>
-        <#if themeLinkColor?? && themeLinkColor != "null">--link-color: ${themeLinkColor};</#if>   
-        <#if themeTextColor?? && themeTextColor != "null">--text-color: ${themeTextColor};</#if>
-        <#if logoUrl?? && logoUrl != "null">--logo-url: url('${logoUrl}');</#if>
-        <#if logoSmallUrl?? && logoSmallUrl != "null">--logo-small-url: url('${logoSmallUrl}');</#if>
+        <#if themePrimaryColorLighter?has_content>--primary-color-lighter: ${themePrimaryColorLighter};</#if>
+        <#if themePrimaryColor?has_content>--primary-color: ${themePrimaryColor};</#if>
+        <#if themePrimaryColorDarker?has_content>--primary-color-darker: ${themePrimaryColorDarker};</#if>
+        <#if themeBannerColor?has_content>--banner-color: ${themeBannerColor};</#if>
+        <#if themeSecondaryColor?has_content>--secondary-color: ${themeSecondaryColor};</#if>
+        <#if themeAccentColor?has_content>--accent-color: ${themeAccentColor};</#if>
+        <#if themeLinkColor?has_content>--link-color: ${themeLinkColor};</#if>   
+        <#if themeTextColor?has_content>--text-color: ${themeTextColor};</#if>
+        <#if logoUrl?has_content>--logo-url: url('${logoUrl}');</#if>
+        <#if logoSmallUrl?has_content>--logo-small-url: url('${logoSmallUrl}');</#if>
     }
 </style>
 
