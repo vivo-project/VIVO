@@ -182,7 +182,7 @@
 ${stylesheets.add(
 	'<link rel="stylesheet" href="${urls.base}/css/individual/individual.css" />',
 	'<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />',
-	'<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.12.1.css" />'
+	'<link rel="stylesheet" href="${urls.base}/webjars/jquery-ui-themes/smoothness/jquery-ui.min.css" />'
 )}
 
 ${headScripts.add(
@@ -195,7 +195,7 @@ ${headScripts.add(
  )}
 
 ${scripts.add(
-	'<script async type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.12.1.min.js"></script>',
+	'<script async type="text/javascript" src="${urls.base}/webjars/jquery-ui/jquery-ui.min.js"></script>',
 	'<script async type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>',
 	'<script async type="text/javascript" src="${urls.base}/js/individual/individualTooltipBubble.js"></script>',
 	'<script async type="text/javascript" src="${urls.base}/js/individual/individualUriRdf.js"></script>',

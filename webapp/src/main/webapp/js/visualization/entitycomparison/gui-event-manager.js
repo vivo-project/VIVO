@@ -24,7 +24,7 @@ $(document).ready(function() {
      * update the status accordingly.
      */
 
-    $("select.comparisonValues").change(function() {
+    $("select.comparisonValues").on("change", function() {
 
         var selectedValue = $("select.comparisonValues option:selected").val();
 

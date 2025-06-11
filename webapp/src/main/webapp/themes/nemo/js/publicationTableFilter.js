@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     (function ($) {
 
-        $('#publicationFilter').keyup(function () {
+        $('#publicationFilter').on("keyup", function () {
 
             var rex = new RegExp($(this).val(), 'i');
             $('.publicationTableRow').hide();

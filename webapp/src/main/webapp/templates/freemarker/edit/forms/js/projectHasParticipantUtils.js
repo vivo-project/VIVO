@@ -34,7 +34,7 @@ var projectHasParticipantUtils = {
     bindEventListeners: function() {
         this.idCache = {};
 
-        this.form.submit(function() {
+        this.form.on("submit", function() {
             projectHasParticipantUtils.resolveFirstLastNames();
 
         });
