@@ -348,18 +348,3 @@ These are helper classes to add margin gaps where needed
 .logo-controls button:hover {
   background: #ccc;
 }
-
-.submit {
-  background-color: #3498db;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  font-size: 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 1rem;
-}
-
-.submit:hover {
-  background-color: #2980b9;
-}
