@@ -31,7 +31,7 @@
 an individual profile page. -->
 ${headContent!}
 
-<#if customCssPath?? && customCssPath != "null">
+<#if customCssPath?has_content >
     <link rel="stylesheet" href="${customCssPath}">
 </#if>
 
