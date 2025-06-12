@@ -182,7 +182,7 @@ Customise the meet faculty/expert section
 Customise the about our research section
 ----------------------------------------------*/
 .research-count {
-  background-color: #064d68;
+  background-color: var(--primary-color, #064d68);
   padding: 60px;
   color: #fff;
   border: 1px solid #023447;
