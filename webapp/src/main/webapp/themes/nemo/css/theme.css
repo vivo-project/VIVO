@@ -271,31 +271,6 @@ These are helper classes to add margin gaps where needed
 	
 }
 
-/* ADMIN PANEL */
-
-.advancedThemeColor {
-  display: none;
-}
-
-.themeColorReset > span {
-  color: #888;
-}
-
-.themeColorResetButton {
-  background: #ff3737;
-  color: white;
-  border-radius: 4px;
-  padding: 3px 8px;
-  border: 1px solid red;
-  cursor: pointer;
-}
-
-.themeColorPickerWrapper{
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
 /* Logo upload */
 .logo-section {
   margin-bottom: 2rem;
@@ -347,4 +322,35 @@ These are helper classes to add margin gaps where needed
 
 .logo-controls button:hover {
   background: #ccc;
+}
+
+/* If input selector have attribute [user-changed="false"] then .chain gets this style */
+input#primary-lighter-color[user-changed="false"] + .chain {
+  content: "";
+  color: #888;    
+  position: absolute;
+  top: 16px;
+  right: -3px;
+  width: 13px;
+  height: 22px;
+  background-image: url('../images/link-chain.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  user-select: none;
+}
+
+input#primary-darker-color[user-changed="false"] + .chain {
+  content: "";
+  color: #888;    
+  position: absolute;
+  bottom: 16px;
+  right: -3px;
+  width: 13px;
+  height: 22px;
+  background-image: url('../images/link-chain.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  user-select: none;
 }
