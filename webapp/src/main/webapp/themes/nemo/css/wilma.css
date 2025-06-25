@@ -394,6 +394,7 @@ ul#find-filters a,
 ul#vgraph-classes a {
     text-decoration: none;
     color: #5E6363;
+    color: #5E6363;
 }
 ul.ingestMenu {
     margin-bottom: 1.5em;
@@ -861,7 +862,7 @@ ul#classes-in-classgroup a.selected,
 ul#vgraph-classes a:hover,
 ul#vgraph-classes a.selected {
     background: url(../images/arrow.gif) 0 10px no-repeat;
-    color: #2ea0cf;
+    color: var(--primary-color-lighter, #2ea0cf);
 }
 svg text:hover {
     color: #2EA0CF;

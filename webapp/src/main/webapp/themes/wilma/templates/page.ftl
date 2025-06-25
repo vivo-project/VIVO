@@ -9,6 +9,7 @@
     </head>
 
     <body class="${bodyClasses!}" onload="${bodyOnload!}">
+        <div class="banner"></div>
         <#include "identity.ftl">
         <#include "search.ftl">
         <#include "menu.ftl">
