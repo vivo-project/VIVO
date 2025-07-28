@@ -260,7 +260,7 @@ function chord_hover(opacity) {
                 chordInfoDiv.style('left', leftPos + 'px');
             }
 
-            svg.selectAll(".chord path")
+            d3.select('#chord > svg').selectAll(".chord path")
                     .filter(function(d) { return d.source.index != i && d.target.index != i; })
                     .transition()
                     .style("opacity", opacity);
