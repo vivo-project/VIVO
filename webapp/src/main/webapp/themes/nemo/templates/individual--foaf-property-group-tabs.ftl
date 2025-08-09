@@ -24,15 +24,15 @@
 				</#if>
 				<#if tabCount = 1 >
 					<li id="${groupNameHtmlId?replace("/","-")}Tab" role="presentation" class="active">
-					   <a href="#${groupNameHtmlId?replace("/","-")}" aria-controls="${groupName?capitalize}" role="tab" data-toggle="tab">
-						   ${groupName?capitalize}
+					   <a href="#${groupNameHtmlId?replace("/","-")}" aria-controls="${groupName}" role="tab" data-toggle="tab">
+						   ${groupName}
 					   </a>
 					</li>
 					<#assign tabCount = 2>
 				<#else>
 					<li id="${groupNameHtmlId?replace("/","-")}Tab" role="presentation">
-					   <a href="#${groupNameHtmlId?replace("/","-")}" aria-controls="${groupName?capitalize}" role="tab" data-toggle="tab">
-						   ${groupName?capitalize}
+					   <a href="#${groupNameHtmlId?replace("/","-")}" aria-controls="${groupName}" role="tab" data-toggle="tab">
+						   ${groupName}
 					   </a>
 					</li>
 				</#if>
