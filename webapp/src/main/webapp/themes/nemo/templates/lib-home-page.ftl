@@ -200,7 +200,7 @@
 <#-- Works in conjunction with the homePageUtils.js file -->
 <#macro academicDeptsHtml>
     <section id="home-academic-depts" class="home-sections">
-        <h4>${i18n().departments}</h4>
+        <h4>${i18n().organizations}</h4>
         <div id="academic-depts">
         </div>
     </section>        
