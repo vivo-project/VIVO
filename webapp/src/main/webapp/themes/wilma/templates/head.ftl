@@ -4,6 +4,7 @@
 <!-- Google Chrome Frame open source plug-in brings Google Chrome's open web technologies and speedy JavaScript engine to Internet Explorer-->
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="generator" content="VIVO ${version.label}" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>${(title?html)!siteName!}</title>
 
