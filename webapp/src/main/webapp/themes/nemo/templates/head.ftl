@@ -39,7 +39,7 @@ an individual profile page. -->
 ${headContent!}
 
 <#if customCssPath?has_content >
-    <link rel="stylesheet" href="${customCssPath}">
+    <link id="custom-css-path" rel="stylesheet" href="${customCssPath}">
 </#if>
 
 <link rel="shortcut icon" type="image/x-icon" href="${urls.base}/favicon.ico">
