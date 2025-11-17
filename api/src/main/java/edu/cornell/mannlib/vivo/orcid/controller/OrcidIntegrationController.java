@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.cornell.mannlib.orcidclient.OrcidClientException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -56,6 +57,7 @@ public class OrcidIntegrationController extends FreemarkerHttpServlet {
 	private final static String PATHINFO_READ_PROFILE = "/readProfile";
 	private final static String PATHINFO_AUTH_EXTERNAL_ID = "/authExternalId";
 	private final static String PATHINFO_ADD_EXTERNAL_ID = "/addExternalId";
+	private final static String PATHINFO_ALLOW_PUSH = "/allowPush";
 
 	public final static String PATH_DEFAULT = "orcid";
 
@@ -83,7 +85,15 @@ public class OrcidIntegrationController extends FreemarkerHttpServlet {
 			show404NotFound(resp);
 		}
 		if (PATHINFO_CALLBACK.equals(req.getPathInfo())) {
-			new OrcidCallbackHandler(req, resp).exec();
+			if (req.getParameterMap().containsKey("state")) {
+				new OrcidCallbackHandler(req, resp).exec();
+			} else {
+                try {
+                    new OrcidAllowPushHandler(new VitroRequest(req), resp).handleCallback();
+                } catch (OrcidClientException e) {
+					resp.sendError(SC_INTERNAL_SERVER_ERROR);
+                }
+            }
 		} else {
 			super.doGet(req, resp);
 		}
@@ -115,6 +125,8 @@ public class OrcidIntegrationController extends FreemarkerHttpServlet {
 				return new OrcidAuthExternalIdsHandler(vreq).exec();
 			} else if (PATHINFO_ADD_EXTERNAL_ID.equals(pathInfo)) {
 				return new OrcidAddExternalIdHandler(vreq).exec();
+			} else if (PATHINFO_ALLOW_PUSH.equals(pathInfo)) {
+				return new OrcidAllowPushHandler(vreq, null).exec();
 			} else {
 				return new OrcidDefaultHandler(vreq).exec();
 			}

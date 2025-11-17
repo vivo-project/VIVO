@@ -78,6 +78,8 @@
                     </form>
                 </#if>
             </#if>
+
+            <#include "individual-orcidPush.ftl">
         </#if>
         </section>
         <#include "individual-adminPanel.ftl">

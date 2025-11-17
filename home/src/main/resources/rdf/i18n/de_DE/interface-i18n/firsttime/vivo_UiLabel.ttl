@@ -1382,6 +1382,14 @@ uil-data:add_orcid_id.VIVO
         uil:hasKey      "add_orcid_id" ;
         uil:hasPackage  "VIVO-languages" .
 
+uil-data:allow_orcid_push.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Push zu ORCID erlauben"@de-DE ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "allow_orcid_push" ;
+        uil:hasPackage  "VIVO-languages" .
+
 uil-data:reference_basemap_description.VIVO
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;
