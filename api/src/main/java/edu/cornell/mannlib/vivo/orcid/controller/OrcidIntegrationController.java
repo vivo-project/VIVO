@@ -13,9 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.cornell.mannlib.orcidclient.OrcidClientException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import edu.cornell.mannlib.orcidclient.context.OrcidClientContext;
 import edu.cornell.mannlib.orcidclient.context.OrcidClientContext.Setting;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationRequest;
@@ -24,6 +21,8 @@ import edu.cornell.mannlib.vitro.webapp.controller.authenticate.LogoutRedirector
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ExceptionResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * New workflow:
@@ -49,106 +48,109 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Res
  */
 @WebServlet(name = "OrcidIntegrationController", urlPatterns = {"/orcid/*"})
 public class OrcidIntegrationController extends FreemarkerHttpServlet {
-	private static final Log log = LogFactory
-			.getLog(OrcidIntegrationController.class);
+    private static final Log log = LogFactory
+        .getLog(OrcidIntegrationController.class);
 
-	private final static String PATHINFO_CALLBACK = "/callback";
-	private final static String PATHINFO_AUTH_AUTHENTICATE = "/getAuthticateAuth";
-	private final static String PATHINFO_READ_PROFILE = "/readProfile";
-	private final static String PATHINFO_AUTH_EXTERNAL_ID = "/authExternalId";
-	private final static String PATHINFO_ADD_EXTERNAL_ID = "/addExternalId";
-	private final static String PATHINFO_ALLOW_PUSH = "/allowPush";
+    private final static String PATHINFO_CALLBACK = "/callback";
+    private final static String PATHINFO_AUTH_AUTHENTICATE = "/getAuthticateAuth";
+    private final static String PATHINFO_READ_PROFILE = "/readProfile";
+    private final static String PATHINFO_AUTH_EXTERNAL_ID = "/authExternalId";
+    private final static String PATHINFO_ADD_EXTERNAL_ID = "/addExternalId";
+    private final static String PATHINFO_ALLOW_PUSH = "/allowPush";
+    private final static String PATHINFO_DISALLOW_PUSH = "/disallowPush";
 
-	public final static String PATH_DEFAULT = "orcid";
+    public final static String PATH_DEFAULT = "orcid";
 
-	final static String PATH_AUTH_AUTHENTICATE = path(PATHINFO_AUTH_AUTHENTICATE);
-	final static String PATH_READ_PROFILE = path(PATHINFO_READ_PROFILE);
-	final static String PATH_AUTH_EXTERNAL_ID = path(PATHINFO_AUTH_EXTERNAL_ID);
-	final static String PATH_ADD_EXTERNAL_ID = path(PATHINFO_ADD_EXTERNAL_ID);
+    final static String PATH_AUTH_AUTHENTICATE = path(PATHINFO_AUTH_AUTHENTICATE);
+    final static String PATH_READ_PROFILE = path(PATHINFO_READ_PROFILE);
+    final static String PATH_AUTH_EXTERNAL_ID = path(PATHINFO_AUTH_EXTERNAL_ID);
+    final static String PATH_ADD_EXTERNAL_ID = path(PATHINFO_ADD_EXTERNAL_ID);
 
-	static String path(String pathInfo) {
-		return PATH_DEFAULT + pathInfo;
-	}
+    static String path(String pathInfo) {
+        return PATH_DEFAULT + pathInfo;
+    }
 
-	final static String TEMPLATE_CONFIRM = "orcidConfirm.ftl";
+    final static String TEMPLATE_CONFIRM = "orcidConfirm.ftl";
 
-	public static final String PROPERTY_EXTERNAL_ID_COMMON_NAME = "orcid.externalIdCommonName";
-	public static final String DEFAULT_EXTERNAL_ID_COMMON_NAME = "VIVO Identifier";
+    public static final String PROPERTY_EXTERNAL_ID_COMMON_NAME = "orcid.externalIdCommonName";
+    public static final String DEFAULT_EXTERNAL_ID_COMMON_NAME = "VIVO Identifier";
 
-	/**
-	 * Get in before FreemarkerHttpServlet for special handling.
-	 */
-	@Override
-	public void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws IOException, ServletException {
-		if (!isOrcidConfigured()) {
-			show404NotFound(resp);
-		}
-		if (PATHINFO_CALLBACK.equals(req.getPathInfo())) {
-			if (req.getParameterMap().containsKey("state")) {
-				new OrcidCallbackHandler(req, resp).exec();
-			} else {
+    /**
+     * Get in before FreemarkerHttpServlet for special handling.
+     */
+    @Override
+    public void doGet(HttpServletRequest req, HttpServletResponse resp)
+        throws IOException, ServletException {
+        if (!isOrcidConfigured()) {
+            show404NotFound(resp);
+        }
+        if (PATHINFO_CALLBACK.equals(req.getPathInfo())) {
+            if (req.getParameterMap().containsKey("state")) {
+                new OrcidCallbackHandler(req, resp).exec();
+            } else {
                 try {
-                    new OrcidAllowPushHandler(new VitroRequest(req), resp).handleCallback();
+                    new OrcidMemberCallbackHandler(new VitroRequest(req), resp).exec();
                 } catch (OrcidClientException e) {
-					resp.sendError(SC_INTERNAL_SERVER_ERROR);
+                    resp.sendError(SC_INTERNAL_SERVER_ERROR);
                 }
             }
-		} else {
-			super.doGet(req, resp);
-		}
-	}
+        } else {
+            super.doGet(req, resp);
+        }
+    }
 
-	/**
-	 * We return AUTHORIZED here, but we want the LogoutRedirector to know that
-	 * the user should not remain on this page after logging out.
-	 */
-	@Override
-	protected AuthorizationRequest requiredActions(VitroRequest vreq) {
-		LogoutRedirector.recordRestrictedPageUri(vreq);
-		return AuthorizationRequest.AUTHORIZED;
-	}
+    /**
+     * We return AUTHORIZED here, but we want the LogoutRedirector to know that
+     * the user should not remain on this page after logging out.
+     */
+    @Override
+    protected AuthorizationRequest requiredActions(VitroRequest vreq) {
+        LogoutRedirector.recordRestrictedPageUri(vreq);
+        return AuthorizationRequest.AUTHORIZED;
+    }
 
-	/**
-	 * Look at the path info and delegate to a handler.
-	 */
-	@Override
-	protected ResponseValues processRequest(VitroRequest vreq) throws Exception {
-		try {
-			String pathInfo = vreq.getPathInfo();
-			log.debug("Path info: " + pathInfo);
-			if (PATHINFO_AUTH_AUTHENTICATE.equals(pathInfo)) {
-				return new OrcidAuthAuthenticateHandler(vreq).exec();
-			} else if (PATHINFO_READ_PROFILE.equals(pathInfo)) {
-				return new OrcidReadProfileHandler(vreq).exec();
-			} else if (PATHINFO_AUTH_EXTERNAL_ID.equals(pathInfo)) {
-				return new OrcidAuthExternalIdsHandler(vreq).exec();
-			} else if (PATHINFO_ADD_EXTERNAL_ID.equals(pathInfo)) {
-				return new OrcidAddExternalIdHandler(vreq).exec();
-			} else if (PATHINFO_ALLOW_PUSH.equals(pathInfo)) {
-				return new OrcidAllowPushHandler(vreq, null).exec();
-			} else {
-				return new OrcidDefaultHandler(vreq).exec();
-			}
-		} catch (Exception e) {
-			return new ExceptionResponseValues(e, SC_INTERNAL_SERVER_ERROR);
-		}
-	}
+    /**
+     * Look at the path info and delegate to a handler.
+     */
+    @Override
+    protected ResponseValues processRequest(VitroRequest vreq) throws Exception {
+        try {
+            String pathInfo = vreq.getPathInfo();
+            log.debug("Path info: " + pathInfo);
+            if (PATHINFO_AUTH_AUTHENTICATE.equals(pathInfo)) {
+                return new OrcidAuthAuthenticateHandler(vreq).exec();
+            } else if (PATHINFO_READ_PROFILE.equals(pathInfo)) {
+                return new OrcidReadProfileHandler(vreq).exec();
+            } else if (PATHINFO_AUTH_EXTERNAL_ID.equals(pathInfo)) {
+                return new OrcidAuthExternalIdsHandler(vreq).exec();
+            } else if (PATHINFO_ADD_EXTERNAL_ID.equals(pathInfo)) {
+                return new OrcidAddExternalIdHandler(vreq).exec();
+            } else if (PATHINFO_ALLOW_PUSH.equals(pathInfo)) {
+                return new OrcidAllowPushHandler(vreq).exec();
+            } else if (PATHINFO_DISALLOW_PUSH.equals(pathInfo)) {
+                return new OrcidDisallowPushHandler(vreq).exec();
+            } else {
+                return new OrcidDefaultHandler(vreq).exec();
+            }
+        } catch (Exception e) {
+            return new ExceptionResponseValues(e, SC_INTERNAL_SERVER_ERROR);
+        }
+    }
 
-	/**
-	 * If the ORCID interface is configured, it should not throw an exception
-	 * when asked for the value of a setting.
-	 */
-	private boolean isOrcidConfigured() {
-		try {
-			OrcidClientContext.getInstance().getSetting(Setting.CLIENT_ID);
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
+    /**
+     * If the ORCID interface is configured, it should not throw an exception
+     * when asked for the value of a setting.
+     */
+    private boolean isOrcidConfigured() {
+        try {
+            OrcidClientContext.getInstance().getSetting(Setting.CLIENT_ID);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
-	private void show404NotFound(HttpServletResponse resp) throws IOException {
-		resp.sendError(SC_NOT_FOUND);
-	}
+    private void show404NotFound(HttpServletResponse resp) throws IOException {
+        resp.sendError(SC_NOT_FOUND);
+    }
 }

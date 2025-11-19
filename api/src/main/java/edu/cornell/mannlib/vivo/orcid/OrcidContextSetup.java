@@ -41,7 +41,7 @@ public class OrcidContextSetup implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		ServletContext ctx = sce.getServletContext();
-		ConfigurationProperties props = ConfigurationProperties.getBean(ctx);
+		ConfigurationProperties props = ConfigurationProperties.getInstance();
 		StartupStatus ss = StartupStatus.getBean(ctx);
 
 		if (props.getProperty("orcid.clientId", "").isEmpty()) {
@@ -54,7 +54,11 @@ public class OrcidContextSetup implements ServletContextListener {
 		checkForCommonNameProperty(props, ss);
 
 		SchedulerManager.scheduleTasks(
-			new OrcidSyncService()
+			new OrcidSyncService(
+				props.getProperty("orcid.clientId"),
+				props.getProperty("orcid.clientPassword"),
+				props.getProperty("orcid.api")
+			)
 		);
 	}
 

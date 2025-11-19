@@ -79,7 +79,9 @@
                 </#if>
             </#if>
 
-            <#include "individual-orcidPush.ftl">
+            <#if !individual.showAdminPanel>
+                <#include "individual-orcidPush.ftl">
+            </#if>
         </#if>
         </section>
         <#include "individual-adminPanel.ftl">
