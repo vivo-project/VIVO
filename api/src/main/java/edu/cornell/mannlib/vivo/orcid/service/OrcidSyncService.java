@@ -7,7 +7,10 @@ import java.util.Map;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ContextModelAccess;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelNames;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vivo.orcid.controller.OrcidTokenExchange;
+import edu.cornell.mannlib.vivo.orcid.export.ExportSet;
+import edu.cornell.mannlib.vivo.orcid.export.OrcidExportDataLoader;
 import edu.cornell.mannlib.vivo.orcid.util.OrcidIdOperationsUtil;
 import edu.cornell.mannlib.vivo.orcid.util.Scheduled;
 import org.apache.jena.ontology.OntModel;
@@ -25,20 +28,27 @@ public class OrcidSyncService {
 
     private final String environment;
 
+    private final OrcidExportDataLoader orcidExportDataLoader;
 
-    public OrcidSyncService(String clientId, String clientPassword, String environment) {
+
+    public OrcidSyncService(String clientId, String clientPassword, String environment, RDFService rdfService) {
         this.clientId = clientId;
         this.clientPassword = clientPassword;
         this.environment = environment;
+        this.orcidExportDataLoader = new OrcidExportDataLoader(rdfService);
     }
 
     @Scheduled(cron = "${orcid.sync.cron}")
     public void syncOrcidProfiles() {
         getIndividualsWithBoundTokens(OrcidIdOperationsUtil.ACCESS_TOKEN_PROPERTY)
             .forEach(
-                (individual, accessToken) ->
+                (individual, accessToken) -> {
                     System.out.println(
-                        "SYNCING: " + individual + " WITH " + OrcidIdOperationsUtil.decryptSecret(accessToken)));
+                        "SYNCING: " + individual + " WITH " + OrcidIdOperationsUtil.decryptSecret(accessToken));
+
+                    orcidExportDataLoader.exportSetForIndividual(individual, ExportSet.EDUCATION);
+                    orcidExportDataLoader.exportSetForIndividual(individual, ExportSet.EMPLOYMENTS);
+                });
     }
 
     @Scheduled(cron = "${orcid.refresh.cron}")

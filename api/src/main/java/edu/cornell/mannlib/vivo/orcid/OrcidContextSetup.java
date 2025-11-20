@@ -13,6 +13,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 import edu.cornell.mannlib.vivo.orcid.controller.OrcidAbstractHandler;
 import edu.cornell.mannlib.vivo.orcid.service.OrcidSyncService;
 import edu.cornell.mannlib.vivo.orcid.util.SchedulerManager;
@@ -57,7 +58,8 @@ public class OrcidContextSetup implements ServletContextListener {
 			new OrcidSyncService(
 				props.getProperty("orcid.clientId"),
 				props.getProperty("orcid.clientPassword"),
-				props.getProperty("orcid.api")
+				props.getProperty("orcid.api"),
+				ModelAccess.on(ctx).getRDFService()
 			)
 		);
 	}
