@@ -34,6 +34,8 @@ public class OrcidIdOperationsUtil {
 
     public static String TOKEN_CREATED_AT_PROPERTY = "http://vivoweb.org/ontology/core#tokenCreatedAt";
 
+    public static String PUSHED_TO_ORCID_REPOSITORY = "http://vivoweb.org/ontology/core#pushedToOrcidRepository";
+
     public static String ALLOW_PUSH_PROPERTY = VitroVocabulary.vitroURI + "allowedPush";
 
     private static final String ENCRYPTION_ALGORITHM = "AES";
@@ -263,5 +265,27 @@ public class OrcidIdOperationsUtil {
         ontologyModel.add(
             statement
         );
+    }
+
+    public static void markPushed(String resourceUri) {
+        OntModel ontologyModel = getOntModel(false);
+
+        saveModelStatement(ontologyModel, new StatementImpl(
+            ResourceFactory.createResource(resourceUri),
+            ResourceFactory.createProperty(PUSHED_TO_ORCID_REPOSITORY),
+            ResourceFactory.createTypedLiteral(true)
+        ));
+    }
+
+    public static boolean wasResourcePushedInPast(String resourceUri) {
+        OntModel ontologyModel = getOntModel(false);
+
+        StmtIterator iter = ontologyModel.listStatements(
+            ResourceFactory.createResource(resourceUri),
+            ResourceFactory.createProperty(PUSHED_TO_ORCID_REPOSITORY),
+            (RDFNode) null
+        );
+
+        return iter.hasNext() && iter.nextStatement().getLiteral().getBoolean();
     }
 }
