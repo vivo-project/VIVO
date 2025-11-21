@@ -17,6 +17,7 @@ import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ContextModelAccess;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelNames;
+import edu.cornell.mannlib.vivo.orcid.OrcidIdDataGetter;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
@@ -58,7 +59,7 @@ public class OrcidIdOperationsUtil {
             ontologyModel,
             new StatementImpl(
                 person,
-                ontologyModel.createProperty("http://vivoweb.org/ontology/core#orcidId"),
+                ontologyModel.createProperty(OrcidIdDataGetter.ORCID_ID),
                 orcid
             ));
 
@@ -67,7 +68,7 @@ public class OrcidIdOperationsUtil {
             ontologyModel,
             new StatementImpl(
                 orcid,
-                ontologyModel.createProperty("http://vivoweb.org/ontology/core#confirmedOrcidId"),
+                ontologyModel.createProperty(OrcidIdDataGetter.ORCID_IS_CONFIRMED),
                 person
             ));
     }
@@ -287,5 +288,25 @@ public class OrcidIdOperationsUtil {
         );
 
         return iter.hasNext() && iter.nextStatement().getLiteral().getBoolean();
+    }
+
+    @Nullable
+    public static String readOrcidIdForUser(String resourceUri) {
+        OntModel ontologyModel = getOntModel(true);
+
+        StmtIterator iter = ontologyModel.listStatements(
+            ResourceFactory.createResource(resourceUri),
+            ResourceFactory.createProperty(OrcidIdDataGetter.ORCID_ID),
+            (RDFNode) null
+        );
+
+        if (iter.hasNext()) {
+            Object orcidId = iter.nextStatement().getObject();
+            if (orcidId != null) {
+                return orcidId.toString();
+            }
+        }
+
+        return null;
     }
 }

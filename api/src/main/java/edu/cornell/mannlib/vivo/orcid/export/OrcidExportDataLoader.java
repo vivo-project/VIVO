@@ -2,20 +2,31 @@ package edu.cornell.mannlib.vivo.orcid.export;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cornell.mannlib.vitro.webapp.controller.api.sparqlquery.SparqlQueryApiExecutor;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
+import edu.cornell.mannlib.vivo.orcid.export.converter.EducationConverter;
+import edu.cornell.mannlib.vivo.orcid.export.converter.EmploymentConverter;
+import edu.cornell.mannlib.vivo.orcid.export.converter.WorkConverter;
 import edu.cornell.mannlib.vivo.orcid.util.OrcidIdOperationsUtil;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class OrcidExportDataLoader {
+
+    private static final Log log = LogFactory.getLog(OrcidExportDataLoader.class);
 
     private final RDFService rdfService;
 
@@ -64,7 +75,7 @@ public class OrcidExportDataLoader {
         return recordsList;
     }
 
-    public void exportSetForIndividual(String individualUri, ExportSet exportSet) {
+    public void exportSetForIndividual(String individualUri, ExportSet exportSet, String orcidId) {
         try {
             boolean shouldFetch = true;
             String lastFetchedResourceUri = "";
@@ -87,13 +98,24 @@ public class OrcidExportDataLoader {
                     return;
                 }
 
+                Method conversionMethod = getConversionMethod(exportSet);
+                if (conversionMethod == null) {
+                    return; // should never happen
+                }
+
                 for (Map<String, String> binding : bindings) {
                     String resourceUri = binding.get("resource");
                     lastFetchedResourceUri = resourceUri;
 
                     boolean alreadyPushed = OrcidIdOperationsUtil.wasResourcePushedInPast(resourceUri);
 
-                    System.out.println(exportSet.name() + ": " + resourceUri + " -> " + alreadyPushed);
+                    try {
+                        Object result = conversionMethod.invoke(null, binding, orcidId);
+                        System.out.println(result);
+                    } catch (IllegalAccessException | InvocationTargetException e) {
+                        log.error("Error while converting to ORCID entity: " + e.getMessage());
+                    }
+
                 }
 
                 shouldFetch = bindings.size() == BATCH_SIZE;
@@ -114,5 +136,34 @@ public class OrcidExportDataLoader {
         }
 
         return ""; // Should never happen
+    }
+
+    @Nullable
+    private Class<?> getConverterClass(ExportSet exportSet) {
+        switch (exportSet) {
+            case WORKS:
+                return WorkConverter.class;
+            case EDUCATION:
+                return EducationConverter.class;
+            case EMPLOYMENTS:
+                return EmploymentConverter.class;
+        }
+
+        return null;
+    }
+
+    @Nullable
+    private Method getConversionMethod(ExportSet exportSet) {
+        Class<?> converterClass = getConverterClass(exportSet);
+
+        if (converterClass == null) {
+            return null; // should never happen
+        }
+
+        try {
+            return converterClass.getMethod("toOrcidModel", Map.class, String.class);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

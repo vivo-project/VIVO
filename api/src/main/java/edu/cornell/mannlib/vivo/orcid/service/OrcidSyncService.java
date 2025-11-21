@@ -46,8 +46,13 @@ public class OrcidSyncService {
                     System.out.println(
                         "SYNCING: " + individual + " WITH " + OrcidIdOperationsUtil.decryptSecret(accessToken));
 
-                    orcidExportDataLoader.exportSetForIndividual(individual, ExportSet.EDUCATION);
-                    orcidExportDataLoader.exportSetForIndividual(individual, ExportSet.EMPLOYMENTS);
+                    String orcidId = OrcidIdOperationsUtil.readOrcidIdForUser((individual));
+                    if (orcidId == null) {
+                        return; // should never happen
+                    }
+
+                    orcidExportDataLoader.exportSetForIndividual(individual, ExportSet.EDUCATION, orcidId);
+                    orcidExportDataLoader.exportSetForIndividual(individual, ExportSet.EMPLOYMENTS, orcidId);
                 });
     }
 
