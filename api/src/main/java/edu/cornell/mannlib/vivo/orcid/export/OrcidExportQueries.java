@@ -16,8 +16,8 @@ public class OrcidExportQueries {
             "PREFIX dcterms:    <http://purl.org/dc/terms/>\n" +
             "\n" +
             "SELECT ?resource\n" +
-            "       ?startValue\n" +
-            "       ?endValue\n" +
+            "       ?startDate\n" +
+            "       ?endDate\n" +
             "       ?position\n" +
             "       ?department\n" +
             "       ?institutionName\n" +
@@ -65,12 +65,12 @@ public class OrcidExportQueries {
             "        \n" +
             "        OPTIONAL { \n" +
             "            ?interval vivo:start ?startDT .\n" +
-            "            ?startDT vivo:dateTime ?startValue .\n" +
+            "            ?startDT vivo:dateTime ?startDate .\n" +
             "        }\n" +
             "        \n" +
             "        OPTIONAL {\n" +
             "            ?interval vivo:end ?endDT .\n" +
-            "            ?endDT vivo:dateTime ?endValue .\n" +
+            "            ?endDT vivo:dateTime ?endDate .\n" +
             "        }\n" +
             "    }\n" +
             "}\n" +
@@ -87,10 +87,10 @@ public class OrcidExportQueries {
             "PREFIX vitro:      <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>\n" +
             "\n" +
             "SELECT ?resource\n" +
-            "       ?positionName\n" +
+            "       ?position\n" +
             "       ?institutionName\n" +
-            "       ?startValue\n" +
-            "       ?endValue\n" +
+            "       ?startDate\n" +
+            "       ?endDate\n" +
             "       ?city\n" +
             "       ?region\n" +
             "       ?country\n" +
@@ -103,7 +103,7 @@ public class OrcidExportQueries {
             "    ?resource vitro:mostSpecificType vivo:FacultyPosition .\n" +
             "\n" +
             "    OPTIONAL {\n" +
-            "        ?resource rdfs:label ?positionName .\n" +
+            "        ?resource rdfs:label ?position .\n" +
             "    }\n" +
             "\n" +
             "    OPTIONAL {\n" +
@@ -132,12 +132,12 @@ public class OrcidExportQueries {
             "    \n" +
             "        OPTIONAL { \n" +
             "            ?interval vivo:start ?startDT .\n" +
-            "            ?startDT vivo:dateTime ?startValue .\n" +
+            "            ?startDT vivo:dateTime ?startDate .\n" +
             "        }\n" +
             "        \n" +
             "        OPTIONAL {\n" +
             "            ?interval vivo:end ?endDT .\n" +
-            "            ?endDT vivo:dateTime ?endValue .\n" +
+            "            ?endDT vivo:dateTime ?endDate .\n" +
             "        }\n" +
             "    }\n" +
             "}\n" +

@@ -2,12 +2,22 @@ package edu.cornell.mannlib.vivo.orcid.export.model.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class DateDTO {
 
-    private DateValue year;
+    private ContentValue year;
 
-    private DateValue month;
+    private ContentValue month;
 
-    private DateValue day;
+    private ContentValue day;
+
+
+    public DateDTO() {
+    }
+
+    public DateDTO(ContentValue year, ContentValue month, ContentValue day) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    }
 }
