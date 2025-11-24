@@ -75,7 +75,7 @@ public class OrcidExportDataLoader {
         return recordsList;
     }
 
-    public void exportSetForIndividual(String individualUri, ExportSet exportSet, String orcidId) {
+    public void exportSetForIndividual(String individualUri, ExportSet exportSet, String orcidId, String accessToken) {
         try {
             boolean shouldFetch = true;
             String lastFetchedResourceUri = "";
@@ -111,7 +111,14 @@ public class OrcidExportDataLoader {
 
                     try {
                         Object result = conversionMethod.invoke(null, binding, orcidId);
-                        System.out.println(result);
+                        String updateCode =
+                            OrcidIdOperationsUtil.pushToOrcid(orcidId, getResourceEndpoint(exportSet), result,
+                                accessToken, alreadyPushed, resourceUri);
+
+                        if (!alreadyPushed && updateCode != null) {
+                            OrcidIdOperationsUtil.markPushed(resourceUri);
+                            OrcidIdOperationsUtil.setOrcidUpdateCode(resourceUri, updateCode);
+                        }
                     } catch (IllegalAccessException | InvocationTargetException e) {
                         log.error("Error while converting to ORCID entity: " + e.getMessage());
                     }
@@ -133,6 +140,19 @@ public class OrcidExportDataLoader {
                 return OrcidExportQueries.FIND_ALL_EDUCATION;
             case EMPLOYMENTS:
                 return OrcidExportQueries.FIND_ALL_EMPLOYMENTS;
+        }
+
+        return ""; // Should never happen
+    }
+
+    private String getResourceEndpoint(ExportSet exportSet) {
+        switch (exportSet) {
+            case WORKS:
+                return "work";
+            case EDUCATION:
+                return "education";
+            case EMPLOYMENTS:
+                return "employment";
         }
 
         return ""; // Should never happen

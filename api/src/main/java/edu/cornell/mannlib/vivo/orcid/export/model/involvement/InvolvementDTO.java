@@ -1,12 +1,13 @@
 package edu.cornell.mannlib.vivo.orcid.export.model.involvement;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import edu.cornell.mannlib.vivo.orcid.export.model.common.BaseEntityDTO;
 import edu.cornell.mannlib.vivo.orcid.export.model.common.ContentValue;
 import edu.cornell.mannlib.vivo.orcid.export.model.common.DateDTO;
 import edu.cornell.mannlib.vivo.orcid.export.model.common.ExternalIds;
 import edu.cornell.mannlib.vivo.orcid.export.model.common.Organization;
 
-public class InvolvementDTO {
+public class InvolvementDTO extends BaseEntityDTO {
 
     @JsonProperty("department-name")
     private String departmentName;

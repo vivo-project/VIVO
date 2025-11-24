@@ -1,10 +1,8 @@
 package edu.cornell.mannlib.vivo.orcid.export.model.work;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import edu.cornell.mannlib.vivo.orcid.export.model.common.ContentValue;
 
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Contributor {
 
     @JsonProperty("contributor-orcid")
@@ -18,4 +16,38 @@ public class Contributor {
 
     @JsonProperty("contributor-attributes")
     private ContributorAttributes contributorAttributes;
+
+
+    public ContributorOrcid getContributorOrcid() {
+        return contributorOrcid;
+    }
+
+    public void setContributorOrcid(ContributorOrcid contributorOrcid) {
+        this.contributorOrcid = contributorOrcid;
+    }
+
+    public ContentValue getCreditName() {
+        return creditName;
+    }
+
+    public void setCreditName(ContentValue creditName) {
+        this.creditName = creditName;
+    }
+
+    public String getContributorEmail() {
+        return contributorEmail;
+    }
+
+    public void setContributorEmail(String contributorEmail) {
+        this.contributorEmail = contributorEmail;
+    }
+
+    public ContributorAttributes getContributorAttributes() {
+        return contributorAttributes;
+    }
+
+    public void setContributorAttributes(
+        ContributorAttributes contributorAttributes) {
+        this.contributorAttributes = contributorAttributes;
+    }
 }

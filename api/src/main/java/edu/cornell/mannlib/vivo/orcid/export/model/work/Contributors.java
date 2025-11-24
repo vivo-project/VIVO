@@ -2,10 +2,23 @@ package edu.cornell.mannlib.vivo.orcid.export.model.work;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Contributors {
 
     private List<Contributor> contributor;
+
+
+    public Contributors() {
+    }
+
+    public Contributors(List<Contributor> contributor) {
+        this.contributor = contributor;
+    }
+
+    public List<Contributor> getContributor() {
+        return contributor;
+    }
+
+    public void setContributor(List<Contributor> contributor) {
+        this.contributor = contributor;
+    }
 }
