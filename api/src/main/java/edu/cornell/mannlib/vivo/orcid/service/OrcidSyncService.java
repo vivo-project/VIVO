@@ -51,8 +51,11 @@ public class OrcidSyncService {
                         return; // should never happen
                     }
 
-                    orcidExportDataLoader.exportSetForIndividual(individual, ExportSet.EDUCATION, orcidId);
-                    orcidExportDataLoader.exportSetForIndividual(individual, ExportSet.EMPLOYMENTS, orcidId);
+//                    orcidExportDataLoader.exportSetForIndividual(individual,
+//                    ExportSet.EDUCATION, orcidId, accessToken);
+//                    orcidExportDataLoader.exportSetForIndividual(individual, ExportSet.EMPLOYMENTS, orcidId,
+//                        accessToken);
+                    orcidExportDataLoader.exportSetForIndividual(individual, ExportSet.WORKS, orcidId, accessToken);
                 });
     }
 

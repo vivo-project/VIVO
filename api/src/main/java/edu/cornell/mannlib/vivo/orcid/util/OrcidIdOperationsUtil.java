@@ -1,9 +1,18 @@
 package edu.cornell.mannlib.vivo.orcid.util;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.Base64;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 import javax.crypto.BadPaddingException;
@@ -12,12 +21,16 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ContextModelAccess;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelNames;
 import edu.cornell.mannlib.vivo.orcid.OrcidIdDataGetter;
+import edu.cornell.mannlib.vivo.orcid.export.model.common.BaseEntityDTO;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
@@ -26,6 +39,8 @@ import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.rdf.model.impl.StatementImpl;
 
 public class OrcidIdOperationsUtil {
+
+    private static final Log log = LogFactory.getLog(OrcidIdOperationsUtil.class);
 
     public static String ACCESS_TOKEN_PROPERTY = "http://vivoweb.org/ontology/core#orcidAccessToken";
 
@@ -36,6 +51,8 @@ public class OrcidIdOperationsUtil {
     public static String TOKEN_CREATED_AT_PROPERTY = "http://vivoweb.org/ontology/core#tokenCreatedAt";
 
     public static String PUSHED_TO_ORCID_REPOSITORY = "http://vivoweb.org/ontology/core#pushedToOrcidRepository";
+
+    public static String ORCID_PUT_CODE = "http://vivoweb.org/ontology/core#orcidPutCode";
 
     public static String ALLOW_PUSH_PROPERTY = VitroVocabulary.vitroURI + "allowedPush";
 
@@ -290,6 +307,33 @@ public class OrcidIdOperationsUtil {
         return iter.hasNext() && iter.nextStatement().getLiteral().getBoolean();
     }
 
+    public static void setOrcidUpdateCode(String resourceUri, String updateCode) {
+        OntModel ontologyModel = getOntModel(false);
+
+        saveModelStatement(ontologyModel, new StatementImpl(
+            ResourceFactory.createResource(resourceUri),
+            ResourceFactory.createProperty(ORCID_PUT_CODE),
+            ResourceFactory.createTypedLiteral(updateCode)
+        ));
+    }
+
+    @Nullable
+    public static String readOrcidUpdateCode(String resourceUri) {
+        OntModel ontologyModel = getOntModel(false);
+
+        StmtIterator iter = ontologyModel.listStatements(
+            ResourceFactory.createResource(resourceUri),
+            ResourceFactory.createProperty(ORCID_PUT_CODE),
+            (RDFNode) null
+        );
+
+        if (iter.hasNext()) {
+            return iter.nextStatement().getLiteral().getString();
+        }
+
+        return null;
+    }
+
     @Nullable
     public static String readOrcidIdForUser(String resourceUri) {
         OntModel ontologyModel = getOntModel(true);
@@ -308,5 +352,63 @@ public class OrcidIdOperationsUtil {
         }
 
         return null;
+    }
+
+    @Nullable
+    public static String pushToOrcid(String orcidId, String endpoint, Object dto, String accessToken,
+                                     boolean alreadyPushed, String resourceUri) throws IOException {
+        String url = String.format("https://api.sandbox.orcid.org/v3.0/%s/%s",
+            orcidId.replace("http://orcid.org/", ""),
+            endpoint
+        );
+
+        if (alreadyPushed) {
+            String updateCode = OrcidIdOperationsUtil.readOrcidUpdateCode(resourceUri);
+            ((BaseEntityDTO) dto).setPutCode(Integer.parseInt(updateCode));
+            url += "/" + updateCode;
+        }
+
+        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+
+        try {
+            connection.setRequestMethod(alreadyPushed ? "PUT" : "POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Authorization", "Bearer " + decryptSecret(accessToken));
+            connection.setDoOutput(true);
+
+            String requestBody = convertToJson(dto);
+
+            try (OutputStream os = connection.getOutputStream()) {
+                byte[] input = requestBody.getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+            }
+
+            int responseCode = connection.getResponseCode();
+
+            if (responseCode == HttpURLConnection.HTTP_CREATED || responseCode == HttpURLConnection.HTTP_OK) {
+                String location = connection.getHeaderField("Location");
+                if (location == null) {
+                    return null;
+                }
+
+                return location.substring(location.lastIndexOf('/') + 1);
+            } else {
+                try (InputStream es = connection.getErrorStream();
+                     BufferedReader reader = new BufferedReader(new InputStreamReader(es))) {
+                    String errorResponse = reader.lines().collect(Collectors.joining());
+                    log.warn("ORCID API request failed: " + responseCode + " - " + errorResponse);
+                }
+            }
+        } finally {
+            connection.disconnect();
+        }
+
+        return null; // should never return here
+    }
+
+    private static String convertToJson(Object dto) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(dto);
     }
 }

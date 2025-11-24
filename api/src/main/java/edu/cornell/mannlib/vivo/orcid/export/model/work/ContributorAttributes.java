@@ -1,9 +1,7 @@
 package edu.cornell.mannlib.vivo.orcid.export.model.work;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ContributorAttributes {
 
     @JsonProperty("contributor-sequence")
@@ -11,4 +9,29 @@ public class ContributorAttributes {
 
     @JsonProperty("contributor-role")
     private String contributorRole;
+
+
+    public ContributorAttributes() {
+    }
+
+    public ContributorAttributes(String contributorSequence, String contributorRole) {
+        this.contributorSequence = contributorSequence;
+        this.contributorRole = contributorRole;
+    }
+
+    public String getContributorSequence() {
+        return contributorSequence;
+    }
+
+    public void setContributorSequence(String contributorSequence) {
+        this.contributorSequence = contributorSequence;
+    }
+
+    public String getContributorRole() {
+        return contributorRole;
+    }
+
+    public void setContributorRole(String contributorRole) {
+        this.contributorRole = contributorRole;
+    }
 }
