@@ -55,11 +55,12 @@ public class InvolvementConverter {
                 organization.setAddress(address);
             }
 
-            // TODO: for testing only
-            organization.setDisambiguatedOrganization(new DisambiguatedOrganization(
-                "https://ror.org/05dxps055",
-                "ROR"
-            ));
+            if (record.containsKey("ror")) {
+                organization.setDisambiguatedOrganization(new DisambiguatedOrganization(
+                    "https://ror.org/" + record.get("ror"),
+                    "ROR"
+                ));
+            }
 
             dto.setOrganization(organization);
         }

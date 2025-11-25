@@ -19,7 +19,7 @@ import edu.cornell.mannlib.vivo.orcid.export.model.work.WorkDTO;
 
 public class WorkConverter {
 
-    public static WorkDTO toOrcidModel(Map<String, String> record, String researcherOrcidId) {
+    public static WorkDTO toOrcidModel(Map<String, String> record) {
         WorkDTO dto = new WorkDTO();
 
         if (record.containsKey("resourceLabel")) {
@@ -53,29 +53,27 @@ public class WorkConverter {
 
         if (record.containsKey("performance")) {
             dto.setType("artistic-performance");
+        } else if (record.containsKey("magazine")) {
+            dto.setType("magazine-article");
+        } else if (record.containsKey("newspaper")) {
+            dto.setType("newspaper-article");
         } else {
             dto.setType(getWorkType(record.get("workType")));
         }
 
-        // TODO: Testing data
-        ExternalIds externalIds = new ExternalIds();
-        externalIds.setExternalId(new ArrayList<>());
-        externalIds.getExternalId().add(
-            new ExternalId(
-                "doi",
-                "10.1087/20120404",
-                new ContentValue("https://doi.org/10.1087/20120404"),
-                "part-of")
-        );
-        externalIds.getExternalId().add(
-            new ExternalId(
-                "doi",
-                "work:doi",
-                new ContentValue("http://orcid.org"),
-                "self")
-        );
+        if (record.containsKey("doi")) {
+            ExternalIds externalIds = new ExternalIds();
+            externalIds.setExternalId(new ArrayList<>());
+            externalIds.getExternalId().add(
+                new ExternalId(
+                    "doi",
+                    record.get("doi"),
+                    new ContentValue("https://doi.org/" + record.get("doi")),
+                    "self")
+            );
 
-        dto.setExternalIds(externalIds);
+            dto.setExternalIds(externalIds);
+        }
 
         return dto;
     }
@@ -184,7 +182,6 @@ public class WorkConverter {
             return "manual";
         }
 
-        // magazine-article newspaper-article
         return "Other dissemination output";
     }
 }

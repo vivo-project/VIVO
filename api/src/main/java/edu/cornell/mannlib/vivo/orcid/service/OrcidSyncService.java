@@ -11,8 +11,10 @@ import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vivo.orcid.controller.OrcidTokenExchange;
 import edu.cornell.mannlib.vivo.orcid.export.ExportSet;
 import edu.cornell.mannlib.vivo.orcid.export.OrcidExportDataLoader;
-import edu.cornell.mannlib.vivo.orcid.util.OrcidIdOperationsUtil;
+import edu.cornell.mannlib.vivo.orcid.util.OrcidInternalOperationsUtil;
 import edu.cornell.mannlib.vivo.orcid.util.Scheduled;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
@@ -22,11 +24,15 @@ import org.apache.jena.rdf.model.StmtIterator;
 
 public class OrcidSyncService {
 
+    private static final Log log = LogFactory.getLog(OrcidSyncService.class);
+
     private final String clientId;
 
     private final String clientPassword;
 
     private final String environment;
+
+    private final boolean sandboxed;
 
     private final OrcidExportDataLoader orcidExportDataLoader;
 
@@ -35,33 +41,35 @@ public class OrcidSyncService {
         this.clientId = clientId;
         this.clientPassword = clientPassword;
         this.environment = environment;
+        this.sandboxed = environment.equals("sandbox");
         this.orcidExportDataLoader = new OrcidExportDataLoader(rdfService);
     }
 
     @Scheduled(cron = "${orcid.sync.cron}")
     public void syncOrcidProfiles() {
-        getIndividualsWithBoundTokens(OrcidIdOperationsUtil.ACCESS_TOKEN_PROPERTY)
+        getIndividualsWithBoundTokens(OrcidInternalOperationsUtil.ACCESS_TOKEN_PROPERTY)
             .forEach(
                 (individual, accessToken) -> {
-                    System.out.println(
-                        "SYNCING: " + individual + " WITH " + OrcidIdOperationsUtil.decryptSecret(accessToken));
+                    log.info(
+                        "SYNCING: " + individual + " WITH " + OrcidInternalOperationsUtil.decryptSecret(accessToken));
 
-                    String orcidId = OrcidIdOperationsUtil.readOrcidIdForUser((individual));
+                    String orcidId = OrcidInternalOperationsUtil.readOrcidIdForUser((individual));
                     if (orcidId == null) {
                         return; // should never happen
                     }
 
-//                    orcidExportDataLoader.exportSetForIndividual(individual,
-//                    ExportSet.EDUCATION, orcidId, accessToken);
-//                    orcidExportDataLoader.exportSetForIndividual(individual, ExportSet.EMPLOYMENTS, orcidId,
-//                        accessToken);
-                    orcidExportDataLoader.exportSetForIndividual(individual, ExportSet.WORKS, orcidId, accessToken);
+                    orcidExportDataLoader.exportSetForIndividual(individual, ExportSet.EDUCATION, orcidId, accessToken,
+                        sandboxed);
+                    orcidExportDataLoader.exportSetForIndividual(individual, ExportSet.EMPLOYMENTS, orcidId,
+                        accessToken, sandboxed);
+                    orcidExportDataLoader.exportSetForIndividual(individual, ExportSet.WORKS, orcidId, accessToken,
+                        sandboxed);
                 });
     }
 
     @Scheduled(cron = "${orcid.refresh.cron}")
     public void refreshTokens() {
-        getIndividualsWithBoundTokens(OrcidIdOperationsUtil.REFRESH_TOKEN_PROPERTY)
+        getIndividualsWithBoundTokens(OrcidInternalOperationsUtil.REFRESH_TOKEN_PROPERTY)
             .forEach(this::refreshSingleToken);
     }
 
@@ -74,28 +82,28 @@ public class OrcidSyncService {
 
         try {
             OrcidTokenExchange.OrcidTokenResponse tokenResponse =
-                tokenExchanger.refreshToken(OrcidIdOperationsUtil.decryptSecret(refreshTokenValue));
+                tokenExchanger.refreshToken(OrcidInternalOperationsUtil.decryptSecret(refreshTokenValue));
 
-            OrcidIdOperationsUtil.updateOrcidCredentialsForUser(
+            OrcidInternalOperationsUtil.updateOrcidCredentialsForUser(
                 individualUri,
                 tokenResponse.getAccessToken(),
                 tokenResponse.getRefreshToken(),
                 tokenResponse.getExpiresIn()
             );
         } catch (IOException e) {
-            System.out.println("Refreshing of ORCID access token failed, reason: " + e.getMessage());
+            log.warn("Refreshing of ORCID access token failed, reason: " + e.getMessage());
         }
     }
 
     @Scheduled(cron = "${orcid.cleanup.cron}")
     public void cleanupExpiredTokens() {
-        getIndividualsWithBoundTokens(OrcidIdOperationsUtil.ACCESS_TOKEN_PROPERTY)
+        getIndividualsWithBoundTokens(OrcidInternalOperationsUtil.ACCESS_TOKEN_PROPERTY)
             .forEach(
                 (individual, accessToken) -> getIndividualsWithExpirationInformation().forEach(
                     (individualUri, tokenInformation) -> {
-                        if (OrcidIdOperationsUtil.shouldCleanup(Long.parseLong(tokenInformation[0]),
+                        if (OrcidInternalOperationsUtil.shouldCleanup(Long.parseLong(tokenInformation[0]),
                             Integer.parseInt(tokenInformation[1]))) {
-                            OrcidIdOperationsUtil.removeOrcidCredentialsForUser(individualUri);
+                            OrcidInternalOperationsUtil.removeOrcidCredentialsForUser(individualUri);
                         }
                     }));
     }
@@ -106,7 +114,7 @@ public class OrcidSyncService {
         StmtIterator iter =
             displayModel.listStatements(
                 null,
-                ResourceFactory.createProperty(OrcidIdOperationsUtil.ALLOW_PUSH_PROPERTY),
+                ResourceFactory.createProperty(OrcidInternalOperationsUtil.ALLOW_PUSH_PROPERTY),
                 ResourceFactory.createTypedLiteral(true)
             );
 
@@ -142,7 +150,7 @@ public class OrcidSyncService {
         StmtIterator iter =
             displayModel.listStatements(
                 null,
-                ResourceFactory.createProperty(OrcidIdOperationsUtil.TOKEN_CREATED_AT_PROPERTY),
+                ResourceFactory.createProperty(OrcidInternalOperationsUtil.TOKEN_CREATED_AT_PROPERTY),
                 (RDFNode) null
             );
 
@@ -155,7 +163,7 @@ public class OrcidSyncService {
                 StmtIterator expiresInIter =
                     displayModel.listStatements(
                         individual,
-                        ResourceFactory.createProperty(OrcidIdOperationsUtil.TOKEN_EXPIRES_IN_PROPERTY),
+                        ResourceFactory.createProperty(OrcidInternalOperationsUtil.TOKEN_EXPIRES_IN_PROPERTY),
                         (RDFNode) null
                     );
 
@@ -175,6 +183,6 @@ public class OrcidSyncService {
 
     private OntModel getOntModel() {
         ContextModelAccess cma = ModelAccess.getInstance();
-        return cma.getOntModel(ModelNames.APPLICATION_METADATA);
+        return cma.getOntModel(ModelNames.INTEGRATION_SETTINGS);
     }
 }

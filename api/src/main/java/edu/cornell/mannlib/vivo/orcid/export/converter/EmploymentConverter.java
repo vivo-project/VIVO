@@ -6,7 +6,7 @@ import edu.cornell.mannlib.vivo.orcid.export.model.involvement.EmploymentDTO;
 
 public class EmploymentConverter extends InvolvementConverter {
 
-    public static EmploymentDTO toOrcidModel(Map<String, String> record, String researcherOrcidId) {
+    public static EmploymentDTO toOrcidModel(Map<String, String> record) {
         EmploymentDTO dto = new EmploymentDTO();
 
         setCommonFields(record, dto);

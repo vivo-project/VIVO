@@ -26,6 +26,7 @@ public class OrcidExportQueries {
             "       ?region\n" +
             "       ?country\n" +
             "       ?urlValue\n" +
+            "       ?ror\n" +
             "WHERE {\n" +
             "    <%s> obo:RO_0000056 ?resource .\n" +
             "\n" +
@@ -44,6 +45,10 @@ public class OrcidExportQueries {
             "        ?resource obo:RO_0000057 ?institution .\n" +
             "        ?institution a foaf:Organization .\n" +
             "        ?institution rdfs:label ?institutionName .\n" +
+            "\n" +
+            "        OPTIONAL {\n" +
+            "            ?institution vivo:rorId ?ror .\n" +
+            "        }\n" +
             "\n" +
             "        OPTIONAL {\n" +
             "            ?institution obo:ARG_2000028 ?vcardIndividual .\n" +
@@ -97,6 +102,7 @@ public class OrcidExportQueries {
             "       ?region\n" +
             "       ?country\n" +
             "       ?urlValue\n" +
+            "       ?ror\n" +
             "WHERE {\n" +
             "    <%s> vivo:relatedBy ?resource .\n" +
             "\n" +
@@ -112,6 +118,10 @@ public class OrcidExportQueries {
             "        ?resource vivo:relates ?institution .\n" +
             "        ?institution a foaf:Organization .\n" +
             "        ?institution rdfs:label ?institutionName .\n" +
+            "\n" +
+            "        OPTIONAL {\n" +
+            "            ?institution vivo:rorId ?ror .\n" +
+            "        }\n" +
             "\n" +
             "        OPTIONAL {\n" +
             "            ?institution obo:ARG_2000028 ?vcardIndividual .\n" +
@@ -160,10 +170,13 @@ public class OrcidExportQueries {
             "       ?workType\n" +
             "       ?journal\n" +
             "       ?journalLabel\n" +
+            "       ?magazine\n" +
+            "       ?newspaper\n" +
             "       ?publicationDate\n" +
             "       ?urlValue\n" +
             "       ?abstract\n" +
             "       ?performance\n" +
+            "       ?doi\n" +
             "       (GROUP_CONCAT(?authorEmailWithDefault; SEPARATOR=\"; \") AS ?authorEmails)\n" +
             "       (GROUP_CONCAT(?authorName; SEPARATOR=\"; \") AS ?authors)\n" +
             "       (GROUP_CONCAT(?authorRole; SEPARATOR=\"; \") AS ?authorRoles)\n" +
@@ -186,7 +199,18 @@ public class OrcidExportQueries {
             "\n" +
             "    OPTIONAL {\n" +
             "        ?resource vivo:hasPublicationVenue ?journal .\n" +
+            "        ?journal rdf:type bibo:Journal .\n" +
             "        ?journal rdfs:label ?journalLabel .\n" +
+            "    }\n" +
+            "\n" +
+            "    OPTIONAL {\n" +
+            "        ?resource vivo:hasPublicationVenue ?magazine .\n" +
+            "        ?magazine rdf:type bibo:Magazine .\n" +
+            "    }\n" +
+            "\n" +
+            "    OPTIONAL {\n" +
+            "        ?resource vivo:hasPublicationVenue ?newspaper .\n" +
+            "        ?newspaper rdf:type bibo:Newspaper .\n" +
             "    }\n" +
             "\n" +
             "    OPTIONAL {\n" +
@@ -199,11 +223,15 @@ public class OrcidExportQueries {
             "        ?vcardInd vcard:hasURL ?urlNode .\n" +
             "        ?urlNode vcard:url ?urlValue .\n" +
             "    }\n" +
-            "  \n" +
+            "\n" +
             "    OPTIONAL {\n" +
             "        ?resource bibo:abstract ?abstract .\n" +
             "    }\n" +
-            "  \n" +
+            "\n" +
+            "    OPTIONAL {\n" +
+            "        ?resource bibo:doi ?doi .\n" +
+            "    }\n" +
+            "\n" +
             "    OPTIONAL {\n" +
             "        ?resource obo:RO_0002353 ?performance .\n" +
             "        ?performance a bibo:Performance .\n" +
@@ -240,7 +268,8 @@ public class OrcidExportQueries {
             "    }\n" +
             "}\n" +
             "GROUP BY ?resource ?resourceLabel ?journal ?journalLabel " +
-            "?publicationDate ?urlValue ?workType ?abstract ?performance\n" +
+            "?publicationDate ?urlValue ?workType ?abstract ?performance " +
+            "?doi ?magazine ?newspaper\n" +
             "ORDER BY ?resource\n" +
             "LIMIT %s";
 }

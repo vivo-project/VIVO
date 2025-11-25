@@ -6,7 +6,7 @@ import edu.cornell.mannlib.vivo.orcid.export.model.involvement.EducationDTO;
 
 public class EducationConverter extends InvolvementConverter {
 
-    public static EducationDTO toOrcidModel(Map<String, String> record, String researcherOrcidId) {
+    public static EducationDTO toOrcidModel(Map<String, String> record) {
         EducationDTO dto = new EducationDTO();
 
         setCommonFields(record, dto);
