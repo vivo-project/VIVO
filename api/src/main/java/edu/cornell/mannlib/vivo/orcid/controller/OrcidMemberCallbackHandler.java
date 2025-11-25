@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import edu.cornell.mannlib.orcidclient.OrcidClientException;
 import edu.cornell.mannlib.orcidclient.context.OrcidClientContext;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vivo.orcid.util.OrcidIdOperationsUtil;
+import edu.cornell.mannlib.vivo.orcid.util.OrcidInternalOperationsUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -47,10 +47,10 @@ public class OrcidMemberCallbackHandler extends OrcidAbstractHandler {
                 tokenExchanger.exchangeCodeForToken(authorizationCode);
 
             String individualUri = vreq.getSession().getAttribute("profileUri").toString();
-            OrcidIdOperationsUtil.updateOrcidIdForUser(individualUri, tokenResponse.getOrcid());
-            OrcidIdOperationsUtil.updateOrcidCredentialsForUser(individualUri, tokenResponse.getAccessToken(),
+            OrcidInternalOperationsUtil.updateOrcidIdForUser(individualUri, tokenResponse.getOrcid());
+            OrcidInternalOperationsUtil.updateOrcidCredentialsForUser(individualUri, tokenResponse.getAccessToken(),
                 tokenResponse.getRefreshToken(), tokenResponse.getExpiresIn());
-            OrcidIdOperationsUtil.setAllowPushStatusForIndividual(individualUri, true);
+            OrcidInternalOperationsUtil.setAllowPushStatusForIndividual(individualUri, true);
 
             httpServletResponse.sendRedirect(
                 occ.getSetting(OrcidClientContext.Setting.WEBAPP_BASE_URL) + "individual?uri=" + individualUri);

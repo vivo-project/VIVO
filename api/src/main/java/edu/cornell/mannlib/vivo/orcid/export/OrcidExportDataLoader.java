@@ -20,7 +20,13 @@ import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
 import edu.cornell.mannlib.vivo.orcid.export.converter.EducationConverter;
 import edu.cornell.mannlib.vivo.orcid.export.converter.EmploymentConverter;
 import edu.cornell.mannlib.vivo.orcid.export.converter.WorkConverter;
-import edu.cornell.mannlib.vivo.orcid.util.OrcidIdOperationsUtil;
+import edu.cornell.mannlib.vivo.orcid.export.model.common.Address;
+import edu.cornell.mannlib.vivo.orcid.export.model.common.BaseEntityDTO;
+import edu.cornell.mannlib.vivo.orcid.export.model.common.Organization;
+import edu.cornell.mannlib.vivo.orcid.export.model.involvement.InvolvementDTO;
+import edu.cornell.mannlib.vivo.orcid.export.model.work.WorkDTO;
+import edu.cornell.mannlib.vivo.orcid.util.OrcidExternalOperationsUtil;
+import edu.cornell.mannlib.vivo.orcid.util.OrcidInternalOperationsUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -30,7 +36,9 @@ public class OrcidExportDataLoader {
 
     private final RDFService rdfService;
 
-    private final int BATCH_SIZE = 1;
+    private final int BATCH_SIZE = 10;
+
+    private final int MAX_RETRIES = 1;
 
 
     public OrcidExportDataLoader(RDFService rdfService) {
@@ -75,7 +83,8 @@ public class OrcidExportDataLoader {
         return recordsList;
     }
 
-    public void exportSetForIndividual(String individualUri, ExportSet exportSet, String orcidId, String accessToken) {
+    public void exportSetForIndividual(String individualUri, ExportSet exportSet, String orcidId, String accessToken,
+                                       boolean sandboxed) {
         try {
             boolean shouldFetch = true;
             String lastFetchedResourceUri = "";
@@ -107,22 +116,36 @@ public class OrcidExportDataLoader {
                     String resourceUri = binding.get("resource");
                     lastFetchedResourceUri = resourceUri;
 
-                    boolean alreadyPushed = OrcidIdOperationsUtil.wasResourcePushedInPast(resourceUri);
+                    boolean alreadyPushed = OrcidInternalOperationsUtil.wasResourcePushedInPast(resourceUri);
 
                     try {
-                        Object result = conversionMethod.invoke(null, binding, orcidId);
-                        String updateCode =
-                            OrcidIdOperationsUtil.pushToOrcid(orcidId, getResourceEndpoint(exportSet), result,
-                                accessToken, alreadyPushed, resourceUri);
+                        Object record = conversionMethod.invoke(null, binding);
 
-                        if (!alreadyPushed && updateCode != null) {
-                            OrcidIdOperationsUtil.markPushed(resourceUri);
-                            OrcidIdOperationsUtil.setOrcidUpdateCode(resourceUri, updateCode);
+                        boolean tryPush = isRecordValid(record);
+                        int retries = 0;
+                        boolean isRetryScenario = alreadyPushed;
+
+                        while (tryPush && retries <= MAX_RETRIES) {
+                            String updateCode =
+                                OrcidExternalOperationsUtil.pushToOrcid(orcidId, getResourceEndpoint(exportSet), record,
+                                    accessToken, alreadyPushed, resourceUri, sandboxed);
+
+                            if (!alreadyPushed && updateCode != null) {
+                                OrcidInternalOperationsUtil.setPushed(resourceUri, true);
+                                OrcidInternalOperationsUtil.setOrcidUpdateCode(resourceUri, updateCode);
+                                tryPush = false;
+                            } else if (isRetryScenario && updateCode != null && updateCode.equals("RETRY")) {
+                                alreadyPushed = false;
+                                isRetryScenario = false;
+                                ((BaseEntityDTO) record).setPutCode(null);
+                                retries++;
+                            } else {
+                                tryPush = false;
+                            }
                         }
                     } catch (IllegalAccessException | InvocationTargetException e) {
                         log.error("Error while converting to ORCID entity: " + e.getMessage());
                     }
-
                 }
 
                 shouldFetch = bindings.size() == BATCH_SIZE;
@@ -181,9 +204,39 @@ public class OrcidExportDataLoader {
         }
 
         try {
-            return converterClass.getMethod("toOrcidModel", Map.class, String.class);
+            return converterClass.getMethod("toOrcidModel", Map.class);
         } catch (NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private boolean isRecordValid(Object record) {
+        if (record instanceof InvolvementDTO) {
+            Organization org = ((InvolvementDTO) record).getOrganization();
+            if (org == null) {
+                return false;
+            }
+
+            Address adr = org.getAddress();
+            if (adr == null) {
+                return false;
+            }
+
+            if (!valueExists(adr.getCity()) || !valueExists(adr.getCountry())) {
+                return false;
+            }
+
+            return org.getDisambiguatedOrganization() != null;
+        } else if (record instanceof WorkDTO) {
+            return ((WorkDTO) record).getExternalIds() != null &&
+                ((WorkDTO) record).getExternalIds().getExternalId() != null &&
+                !((WorkDTO) record).getExternalIds().getExternalId().isEmpty();
+        }
+
+        return true;
+    }
+
+    private boolean valueExists(String value) {
+        return value != null && !value.trim().isEmpty();
     }
 }

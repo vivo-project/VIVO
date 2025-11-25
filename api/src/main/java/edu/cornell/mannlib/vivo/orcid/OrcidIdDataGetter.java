@@ -19,7 +19,7 @@ import edu.cornell.mannlib.vitro.webapp.utils.dataGetter.DataGetter;
 import edu.cornell.mannlib.vitro.webapp.utils.sparqlrunner.ResultSetParser;
 import edu.cornell.mannlib.vitro.webapp.utils.sparqlrunner.SparqlQueryRunner;
 import edu.cornell.mannlib.vivo.orcid.controller.OrcidIntegrationController;
-import edu.cornell.mannlib.vivo.orcid.util.OrcidIdOperationsUtil;
+import edu.cornell.mannlib.vivo.orcid.util.OrcidInternalOperationsUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.jena.query.QuerySolution;
@@ -138,7 +138,7 @@ public class OrcidIdDataGetter implements DataGetter {
             OrcidIntegrationController.PATH_DEFAULT, "individualUri",
             individualUri));
         orcidInfoMap.put("orcids", confirmationMap);
-        orcidInfoMap.put("allowPush", OrcidIdOperationsUtil.getAllowPushStatusForIndividual(individualUri));
+        orcidInfoMap.put("allowPush", OrcidInternalOperationsUtil.getAllowPushStatusForIndividual(individualUri));
 
         Map<String, Object> map = new HashMap<>();
         map.put("orcidInfo", orcidInfoMap);

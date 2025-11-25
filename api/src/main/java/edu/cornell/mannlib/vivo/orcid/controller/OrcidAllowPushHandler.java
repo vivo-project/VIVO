@@ -11,7 +11,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.RedirectResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.web.URLEncoder;
-import edu.cornell.mannlib.vivo.orcid.util.OrcidIdOperationsUtil;
+import edu.cornell.mannlib.vivo.orcid.util.OrcidInternalOperationsUtil;
 
 public class OrcidAllowPushHandler extends OrcidAbstractHandler {
 
@@ -23,8 +23,8 @@ public class OrcidAllowPushHandler extends OrcidAbstractHandler {
         OrcidClientException, UnsupportedEncodingException {
         String individualUri = vreq.getParameter("profileUri");
 
-        if (OrcidIdOperationsUtil.hasConfiguredPushCredentials(individualUri)) {
-            OrcidIdOperationsUtil.setAllowPushStatusForIndividual(individualUri, true);
+        if (OrcidInternalOperationsUtil.hasConfiguredPushCredentials(individualUri)) {
+            OrcidInternalOperationsUtil.setAllowPushStatusForIndividual(individualUri, true);
 
             return new RedirectResponseValues(
                 occ.getSetting(OrcidClientContext.Setting.WEBAPP_BASE_URL) + "individual?uri=" + individualUri);
