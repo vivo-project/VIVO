@@ -6269,7 +6269,7 @@ uil-data:vis_coauthor_vcard.VIVO
 uil-data:add_to_person_profile.VIVO
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;
-        rdfs:label       ""Add to person’s profile page?"@en-CA ;
+        rdfs:label       "Add to person’s profile page?"@en-CA ;
         uil:hasApp       "VIVO" ;
         uil:hasKey       "add_to_person_profile" .
 
