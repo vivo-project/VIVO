@@ -30,7 +30,7 @@ body {
    background: #f3f3f0 url(../images/header-background.png) center 0 no-repeat; 
 }
 a {
-    color: #2485AE;
+    color: #12739D;
 }
 a:hover,
 h2 a:hover,
@@ -52,7 +52,7 @@ h2 {
     line-height: 1.5em;
 }
 h2 a {
-    color: #2485ae; 
+    color: #12739D; 
 }
 h2 a:link, 
 h2 a:visited {
@@ -86,7 +86,7 @@ input[type="password"] {
     font-size: 14px;
     padding: .5em;
     background: #fff;
-    border: 1px solid #e0dfdf;
+    border: 1px solid #898989;
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -128,7 +128,7 @@ input.form-button:visited {
     position: relative;
     border: 0;
     margin: 0;
-    background-color: #749a02;
+    background-color: #405503;
     color: #fff;
     font-size: 14px;
     font-weight: normal;
@@ -176,7 +176,7 @@ input.submit:hover,
 input#submit:hover,
 input.form-button:hover {
     color: #fff;
-    background-color: #b2d15a;
+    background-color: #435A00;
 }
 input.delete:hover,
 input#delete:hover {
@@ -197,7 +197,7 @@ section.accounts input.delete:active {
     top: 1px;
 }
 form textarea {
-    border: 1px solid #e0dfdf; 
+    border: 1px solid #898989; 
     border-radius: 4px; 
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px; 
@@ -214,7 +214,7 @@ form a:visited.cancel,
 a.return:link,
 a.return:visited {
     text-decoration: underline;
-    color: #f70;
+    color: #B50;
     border-color: none;
     padding-left: 3px;
 }
@@ -225,7 +225,7 @@ a.return:visited {
 form a:hover.cancel, 
 form a:active.cancel {
     text-decoration: none;
-    color: #f70;
+    color: #B50;
     background: none;
 }
 .validationError {
@@ -244,13 +244,13 @@ p.submit {
     padding: 3px;
 }
 .editingForm .entryFormHead {
-    background-color: #f1f2ee;
+    background-color: #F5F5F5;
     border-color: #dfe6e6;
 }
 .form-item {
     margin-top:.3em;
     background-color: #fff;
-    border-color: #e0dfdf;
+    border-color: #898989;
     font-size: .8em;
     border-width: 1px;
     color: #595B5B;
@@ -259,12 +259,12 @@ p.submit {
 a.return:hover,
 a.return:active {
     text-decoration: none;
-    color: #f70;
+    color: #B50;
     background: none;
 }
 .database_header {
-    background-color: #f1f2ee;
-    color: #2485ae;
+    background-color: #F5F5F5;
+    color: #12739D;
     font-size: 1em;
 }
 .database_upperleftcorner {
@@ -278,7 +278,7 @@ a.return:active {
 }
 .rownumheader,
 .rownum {
-    background-color: #F1F2EE;
+    background-color: #F5F5F5;
     color: #5F6464;
     font-size: 1em;
 }
@@ -365,7 +365,7 @@ form select {
    font-size: 14px;
    padding: .5em;
    background: #fff;
-   border: 1px solid #e0dfdf;
+   border: 1px solid #898989;
    border-radius: 5px;
    -moz-border-radius: 5px;
    -webkit-border-radius: 5px;
@@ -382,7 +382,7 @@ a.ingestMenu:visited,
 a.account-menu:link,
 a.account-menu:visited {
     text-decoration: none;
-    color: #2485AE;
+    color: #12739D;
 }
 a.ingestMenu:hover, 
 a.ingestMenu:active,
@@ -451,7 +451,7 @@ hr.formDivider {
     margin: 0 auto;
 }
 /* BRANDING ------>  */
-h1.vivo-logo {
+.vivo-logo {
     position: absolute;
     width: 442px;
     height: 59px;
@@ -459,7 +459,7 @@ h1.vivo-logo {
     left: 0;
     background: url(../images/VIVO-logo.png) 0 0 no-repeat;
 }
-h1.vivo-logo a {
+.vivo-logo a {
     display: block;
     width: 386px;
     height: 59px;
@@ -489,7 +489,7 @@ ul#header-nav li:last-child {
 ul#header-nav a:hover,
 ul#header-nav a:active {
     text-decoration: none;
-    color: #999;
+    color: #656565;
 }
 ul#header-nav a.log-out {
     padding-left: 10px;
@@ -506,7 +506,7 @@ ul#header-nav a.log-out {
 #search-field {
     width: 396px;
     height: 38px;
-    background: url(../images/search-interior-pages.png) 0 0 no-repeat;
+    background: url(../images/search-interior-pages-darkened.png) 0 0 no-repeat;
 }
 #search-field input.search {
     text-decoration: none;
@@ -561,7 +561,7 @@ ul#main-nav {
 }
 #main-nav li a.selected {
     color: #002b44;
-    background: url(../images/selected-main-nav.jpg) left -1px no-repeat;
+    background: url(../images/selected-main-nav.png) left -1px no-repeat;
     margin-left: 18px;
 }
 /* WRAPPER CONTENT------>  */
@@ -585,7 +585,7 @@ body.loggedIn #intro {
 #intro h2 {
     padding: 35px 0 12px 24px;
     border-bottom: none;
-    color: #2485AE;
+    color: #12739D;
 }
 #intro p {
     font-size: 16px;
@@ -603,7 +603,7 @@ p.forgot-password a,
 ul#individual-personInPosition li a,
 ul.individual-urls li a,
 ul.individual-urls-people li a {
-    color: #2485ae
+    color: #12739D
 }
 /* LOG IN------>  */          
 #login {
@@ -621,13 +621,13 @@ body.login #login {
 }
 #login h2 {
     font-size: 22px;
-    color: #2485ae;
+    color: #12739D;
     padding-left: 15px;
     padding-top: 18px;
     border-bottom: none;
 }
 h3.internal-auth:hover {
-    color: #47B6D0;
+    color: #267C90;
 }
 #error-alert {
     margin-left: 0;
@@ -664,7 +664,7 @@ h3.internal-auth:hover {
     height: 24px;
     margin-left: 38px;
     background: #fff;
-    border: 1px solid #e0dfdf;
+    border: 1px solid #898989;
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;     
@@ -768,13 +768,13 @@ p.external-auth a.blue:hover {
     padding: 0;
     font-size: 22px;
     margin-bottom: 15px;
-    color: #2485AE;
+    color: #12739D;
 		padding-left: 24px;
 }
 #search-home-field {
     width: 483px;
     height: 44px;
-    background: url(../images/search-field-and-button.gif) 0 0 no-repeat;
+    background: url(../images/search-field-and-button-darkened.gif) 0 0 no-repeat;
 }
 #search-home-field input.search {
     text-decoration: none;
@@ -801,7 +801,7 @@ input.search-home-vivo {
 /* SEARCH HOME------>  */ 
 
 #search-home-field {
-		background: url(../images/search-field-and-button.gif) 0 0 no-repeat;
+		background: url(../images/search-field-and-button-darkened.gif) 0 0 no-repeat;
 		width: 520px;
 }
 #search-home-field input.search {
@@ -816,7 +816,6 @@ input.search-homepage {
 		border: 0;
 		background-color: #f9fafa;
 		background-position: right;
-		opacity: .5;
 		text-align:right; 
 }
 
@@ -860,11 +859,11 @@ ul#classes-in-classgroup a:hover,
 ul#classes-in-classgroup a.selected,
 ul#vgraph-classes a:hover,
 ul#vgraph-classes a.selected {
-    background: url(../images/arrow.gif) 0 10px no-repeat;
-    color: #2ea0cf;
+    background: url(../images/arrow_darkened.gif) 0 10px no-repeat;
+    color: #0C5E7F;
 }
 svg text:hover {
-    color: #2EA0CF;
+    color: #0C5E7F;
 }
 p.view-all {
     clear: both;
@@ -1101,7 +1100,7 @@ p {
 .green,
 ul#individual-tools li a,
 ul#individual-tools-people li a {
-    color: #b2d15a;
+    color: #435A00;
 }
 .small.button,
 .small.button:visited {
@@ -1115,11 +1114,11 @@ ul#individual-tools-people li a {
 }
 .green.button,
 .green.button:visited {
-    background-color: #749a02;
+    background-color: #405503;
     color: #fff;
 }
 .green.button:hover {
-    background-color: #b2d15a;
+    background-color: #435A00;
 }
 .blue.button,
 .blue.button:visited {
@@ -1147,11 +1146,11 @@ ul#individual-tools-people li a {
 }
 .individualList li,
 .individualList li span { 
-  color: #9c9c9c;
+  color: #656565;
  }
 .individualList li a { 
     font-weight: normal; 
-    color: #2485AE;
+    color: #12739D;
 }
 
 /* ------------------------------------------------->  */
@@ -1190,13 +1189,13 @@ ul#individual-tools-people li a {
 }
 #find-by h3 {
     font-size: 1.125em;
-    color: #2485ae;
+    color: #12739D;
     font-weight: normal;
 }
 ul#find-filters a:hover,
 ul#find-filters a.selected {
-    background: url(../images/arrow.gif) 0 6px no-repeat;
-    color: #2ea0cf;
+    background: url(../images/arrow_darkened.gif) 0 6px no-repeat;
+    color: #0C5E7F;
 }
 /* RESEARCHERS ------>  */
 #researchers {
@@ -1206,9 +1205,9 @@ ul#find-filters a.selected {
 }
 #researchers h3 {
     font-size: 1.25em;
-    color: #2485ae;
+    color: #12739D;
     font-weight: normal;
-    background: url(../images/arrow.gif) 140px 27px no-repeat;
+    background: url(../images/arrow_darkened.gif) 140px 27px no-repeat;
 }
 #researchers p {
     font-size: 1.125em;
@@ -1222,7 +1221,7 @@ ul#find-filters a.selected {
     font-size: 4.375em;
     text-align: center;
     float: left;
-    color: #2485ae;
+    color: #12739D;
     border-right: 1px dotted #dde4e3;
     font-weight: bold;
 }
@@ -1234,7 +1233,7 @@ ul#find-filters a.selected {
 }
 #nav-display p {
     font-size: 26px;
-    color: #2485ae;
+    color: #12739D;
 }
 #nav-display img {
     border-left: 1px solid #e8e8e8;
@@ -1252,7 +1251,7 @@ ul#find-filters a.selected {
 ul#browse-classes {
     border: 1px solid #dde4e3;
     border-right: 0;
-    background-color: #f1f2ee;
+    background-color: #F5F5F5;
 }
 ul#browse-classes li,
 ul#vgraph-classes li {
@@ -1261,8 +1260,8 @@ ul#vgraph-classes li {
 }
 ul#browse-classes a:hover,
 ul#browse-classes a.selected {
-    background: url(../images/arrow.gif) 4px 5px no-repeat;
-    color: #2ea0cf;
+    background: url(../images/arrow_darkened.gif) 4px 5px no-repeat;
+    color: #0C5E7F;
 }
 ul#browse-classes .count-classes {    
     font-size: 12px; 
@@ -1273,8 +1272,8 @@ ul#alpha-browse-individuals {
 }
 ul#alpha-browse-individuals a:hover,
 ul#alpha-browse-individuals a.selected {
-    background: url(../images/arrowSmall.gif) -3px 7px no-repeat;
-    color: #2ea0cf;
+    background: url(../images/arrowSmall-darkened.gif) -3px 7px no-repeat;
+    color: #0C5E7F;
 }
 ul#alpha-browse-individuals .count-classes,
 ul#vgraph-classes .count-classes {
@@ -1352,7 +1351,7 @@ article.property ul.property-list {
     background-color: #f2f9fb;
 }
 #admin h3 {
-    background: #2485AE;
+    background: #12739D;
     color: #fff;
 }
 #admin .uri-link,
@@ -1360,7 +1359,7 @@ article.property ul.property-list {
     color: #888c8c;
 }
 #admin a {
-    color: #2a98bc;
+    color: #12739D;
 }
 /* INDIVIDUAL INTRO FOR ANY CLASS ------>  */
 .preferred {
@@ -1368,7 +1367,7 @@ article.property ul.property-list {
 }
 #individual-intro h1 {
     font-size: 1.375em; 
-    color: #2485ae; 
+    color: #12739D; 
 }
 #individual-intro span.display-title,
 h1.fn .display-title {
@@ -1377,7 +1376,7 @@ h1.fn .display-title {
     border-left: 1px solid #a6b1b0;
 }
 ul#individual-tools {
-    color: #8AA149;
+    color: #536520;
 }
 h2#webpage {
     font-weight: bold;
@@ -1391,7 +1390,7 @@ img.individual-photo {
     display: block;
 }
 ul#individual-tools {
-    color: #8AA149
+    color: #536520
 }
 #share-contact a.email,
 #share-contact a.tel,
@@ -1465,7 +1464,7 @@ a.all-vivo-publications {
 /* <------ TEMPORAL GRAPH and MAP O' SCIENCE  */
 #temporal-graph h3 a,
 #map-of-science h3 a {
-    color: #2485AE;
+    color: #12739D;
     font-size: .8em !important;
     text-decoration: underline;
     vertical-align:text-top;
@@ -1477,12 +1476,12 @@ img.co-author {
 #co-authors h3,
 #right-hand-column h3 {
     font-size: 1.25em;
-    color: #2485ae;
+    color: #12739D;
 }
 /* PROPERTY GROUP MENU ------>  */
 #property-group-menu {
     width: 920px;
-    background: #f1f2ee;
+    background: #F5F5F5;
 }
 #property-group-menu li {
     background: url(../../../images/individual/separator-property-group-nav.jpg) right 10px no-repeat;
@@ -1497,7 +1496,7 @@ img.co-author {
 section.property-group h2,
 #menupage-content h4 {
     font-size: 1.25em;
-    color: #2485ae;
+    color: #12739D;
     font-weight: normal;
 }
 article.property {
@@ -1506,7 +1505,7 @@ article.property {
 article.property h3 {
     background: #fafaf9;
     font-size: 1.063em;
-    color: #8aa149;
+    color: #536520;
 }
 article.property ul.property-list li.subclass h3 {
     font-size: 1.063em;
@@ -1518,7 +1517,7 @@ article.property .data-property-statement {
     color: #5e6363;
 }
 article.property ul.property-list li a {
-    /*color: #2485ae;*/   /* cappadona: seems unnecessarily specific and is overriding .more-less from individual.css so I'm commenting out for now */
+    /*color: #12739D;*/   /* cappadona: seems unnecessarily specific and is overriding .more-less from individual.css so I'm commenting out for now */
     line-height: 1.6em;
 }
 /* MISCELLANEOUS ------>  */
@@ -1543,7 +1542,7 @@ p.address-line {
 }
 /* EDITING DISPLAY------>  */
 .edit-individual {
-    border-left: 1px dotted #B2D15A;
+    border-left: 1px dotted #435A00;
 }
 /* ------------------------------------------------->  */
 /* SITE ADMIN DASHBOARD ---------------------------->  */
@@ -1587,7 +1586,7 @@ p.address-line {
 }
 #revision-levels caption {
     font-size: 18px;
-    color: #2485ae;
+    color: #12739D;
 }
 #revision-levels th {
     font-weight: bold;
@@ -1640,7 +1639,7 @@ form.customForm p {
 section.accounts input.delete,
 section.accounts input.delete:visited {
     background-color: #FFF;
-    color: #2485AE;
+    color: #12739D;
     border: 1px solid #96c5da;
 }
 section.accounts input.delete:hover {
@@ -1661,7 +1660,7 @@ input.add-account:hover {
 }
 .disabledSubmit {
     color: #ede ! important;
-    background-color: #b2d15a ! important;
+    background-color: #435A00 ! important;
     cursor: default ! important;
 }
 /* ------------------------------------------------->  */

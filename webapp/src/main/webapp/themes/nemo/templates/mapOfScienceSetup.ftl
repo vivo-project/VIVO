@@ -47,7 +47,7 @@ var mapOfScienceImageFolderPrefix  = imageFolderPrefix + "mapofscience/";
 var disciplineLabelImageUrlPrefix = mapOfScienceImageFolderPrefix + "labels/";
 var disciplineBlackLabelImageUrlPrefix = disciplineLabelImageUrlPrefix + "black/";
 
-var infoIconUrl = "${urls.images}/iconInfo.png";
+var infoIconUrl = "${urls.images}/iconInfo-darkened.png";
 var drillDownIconUrl = "${urls.images}/visualization/drill_down_icon.png";
 											
 var entityLabel = '${entityLabel}';

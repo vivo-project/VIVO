@@ -93,7 +93,7 @@ div#profileTypeContainer select {
     display:inline-block;
     padding: .5em;
     background: none repeat scroll 0 0 #FFFFFF;
-    border: 1px solid #E0DFDF;
+    border: 1px solid #898989;
     border-radius: 5px 5px 5px 5px;
     font-size: 14px;
     margin-bottom: 0.8em;
@@ -231,7 +231,7 @@ div#contactPhoneDiv {
     text-align:right;
 }
 /* <------ RESEARCH AREA */
-ul#individual-hasResearchArea li {
+ul.individual-hasResearchArea li {
     float: left;
     padding-right: 10px;
     margin-right: 10px;
@@ -269,7 +269,7 @@ span#quickViewLink img {
     padding-top:18px;
 }
 #individual-info div#contactContainer h3{
-    color:#8aa149;
+    color:#536520;
 }
 ul#individual-personInPosition li {
     padding-bottom:12px;
@@ -280,5 +280,5 @@ ul#individual-personInPosition li:last-child {
     padding-bottom: 0;
 }
 td#totalPubs {
-    color: #2485AE;
+    color: #12739D;
 }
