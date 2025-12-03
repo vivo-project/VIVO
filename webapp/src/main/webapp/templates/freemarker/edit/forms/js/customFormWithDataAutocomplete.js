@@ -117,7 +117,7 @@ var customForm = {
         this.requiredLegend.hide();
         this.or.hide();
 
-        this.cancel.unbind('click');
+        this.cancel.off('click');
     },
 
 
@@ -133,9 +133,9 @@ var customForm = {
         // Set the initial autocomplete help text in the acSelector field.
         this.addAcHelpText();
 
-        this.cancel.unbind('click');
+        this.cancel.off('click');
         if (this.formSteps > 1) {
-            this.cancel.click(function() {
+            this.cancel.on("click", function() {
                 customForm.clearFormData(); // clear any input and validation errors
                 customForm.initFormTypeView();
                 return false;
@@ -183,15 +183,15 @@ var customForm = {
 
        //no longer need type selector and verify match
 
-        this.acSelector.focus(function() {
+        this.acSelector.on("focus", function() {
             customForm.deleteAcHelpText();
         });
 
-        this.acSelector.blur(function() {
+        this.acSelector.on("blur", function() {
             customForm.addAcHelpText();
         });
 
-        this.form.submit(function() {
+        this.form.on("submit", function() {
             customForm.deleteAcHelpText();
         });
 
@@ -229,7 +229,7 @@ var customForm = {
             },
             complete: function(xhr, status) {
                 // Not sure why, but we need an explicit json parse here.
-                var results = $.parseJSON(xhr.responseText),
+                var results = JSON.parse(xhr.responseText),
                 filteredResults = customForm.filterAcResults(results);
                 customForm.acCache[request.term] = filteredResults;
                 response(filteredResults);
@@ -333,8 +333,8 @@ var customForm = {
 
 //        this.setButtonText('existing');
 
-        this.cancel.unbind('click');
-        this.cancel.click(function() {
+        this.cancel.off('click');
+        this.cancel.on("click", function() {
             customForm.undoAutocompleteSelection();
             customForm.initFormFullView();
             return false;

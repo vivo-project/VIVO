@@ -60,4 +60,8 @@ ${headContent!}
     }
 </script>
 
+<#if customCssPath?has_content >
+    <link id="custom-css-path" rel="stylesheet" href="${customCssPath}">
+</#if>
+
 <link rel="shortcut icon" type="image/x-icon" href="${urls.base}/favicon.ico">

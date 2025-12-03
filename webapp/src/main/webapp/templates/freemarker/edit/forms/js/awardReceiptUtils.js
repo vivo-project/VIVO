@@ -43,20 +43,20 @@ var awardReceiptUtils = {
         this.idCache = {};
 
         // the delay ensures that the function is called after the ac selection is completed
-        this.award.change( function(objEvent) {
+        this.award.on("change", function(objEvent) {
            window.setTimeout('awardReceiptUtils.hideConferredBy()', 180);
         });
 
-        this.award.blur( function(objEvent) {
+        this.award.on("blur", function(objEvent) {
            window.setTimeout('awardReceiptUtils.hideConferredBy()', 180);
         });
 
-        this.form.submit(function() {
+        this.form.on("submit", function() {
             awardReceiptUtils.setYearAwardedValue();
             awardReceiptUtils.buildAwardReceiptLabel();
         });
 
-        this.changeLink.click( function() {
+        this.changeLink.on("click", function() {
            awardReceiptUtils.showConferredBy();
         });
     },

@@ -161,12 +161,12 @@
                 window.onload = init;
 
                 $(document).ready(function() {
-                    $('a.help').click(function() {
+                    $('a.help').on("click", function() {
                         $('#csvHelp-collapsible').toggleClass('hidden');
                         return false;
                     });
 
-                    $('#harvestButton').click(function() {
+                    $('#harvestButton').on("click", function() {
                         doHarvest();
                         return false;
                     });

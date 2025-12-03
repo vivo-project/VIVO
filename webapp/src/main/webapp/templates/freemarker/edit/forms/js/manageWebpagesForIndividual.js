@@ -49,7 +49,7 @@ var manageWebpages = {
 
     bindEventListeners: function() {
 
-        $('.remove').click(function() {
+        $('.remove').on("click", function() {
             manageWebpages.removeWebpage(this);
             return false;
         });
@@ -175,13 +175,12 @@ var manageWebpages = {
             data: {
                 deletion: $(link).parents('.webpage').data('webpageUri')
             },
-            dataType: 'json',
+            dataType: 'html',
             context: link, // context for callback
             complete: function(request, status) {
                 var webpage;
-
                 if (status === 'success') {
-
+                    
                     webpage = $(this).parents('.webpage');
 
                     webpage.fadeOut(400, function() {

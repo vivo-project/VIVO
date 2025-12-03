@@ -32,7 +32,7 @@ var orgHasPositionUtils = {
     bindEventListeners: function() {
         this.idCache = {};
 
-        this.form.submit(function() {
+        this.form.on("submit", function() {
             orgHasPositionUtils.resolvePersonNames();
         });
     },
