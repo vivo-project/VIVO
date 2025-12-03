@@ -1,12 +1,67 @@
 {
-    "defaultBrandingColors": {
-        "primary-lighter": "#337ab7",
-        "primary-base": "#064d68",
-        "primary-darker": "#023447",
-        "banner-base": "#064d68",
-        "secondary-base": "#064d68",
-        "accent-base": "#8BAB2E",
-        "text-base": "#333",
-        "link-base": "#064d68"
+    "themeName": "nemo",
+    "themeColors": {
+        "pallete": [
+            {
+                "groupName": "primary",
+                "colors": [
+                    {
+                        "name": "primary-lighter",
+                        "value": "#337ab7",
+                        "cssVariable": "--primary-color-lighter",
+                        "shade": {
+                            "type": "lighten",
+                            "amount": 20,
+                            "base": "primary-base"
+                        }
+                    },
+                    {
+                        "name": "primary-base",
+                        "value": "#064d68",
+                        "cssVariable": "--primary-color"
+                    },
+                    {
+                        "name": "primary-darker",
+                        "value": "#023447",
+                        "cssVariable": "--primary-color-darker",
+                        "shade": {
+                            "type": "darken",
+                            "amount": 20,
+                            "base": "primary-base"
+                        }
+                    }
+                ]
+            },
+            {
+                "groupName": "banner",
+                "colors": [
+                    {
+                        "name": "banner-base",
+                        "value": "#064d68",
+                        "cssVariable": "--banner-color"
+                    }
+                ]
+            },
+            {
+                "groupName": "text",
+                "colors": [
+                    {
+                        "name": "text-base",
+                        "value": "#333333",
+                        "cssVariable": "--text-color"
+                    }
+                ]
+            },
+            {
+                "groupName": "link",
+                "colors": [
+                    {
+                        "name": "link-base",
+                        "value": "#064d68",
+                        "cssVariable": "--link-color"
+                    }
+                ]
+            }
+        ]
     }
 }

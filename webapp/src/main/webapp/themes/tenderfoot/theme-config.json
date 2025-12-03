@@ -1,12 +1,77 @@
 {
-    "defaultBrandingColors": {
-        "primary-lighter": "#8bb9cc",
-        "primary-base": "#3E8BAA",
-        "primary-darker": "#0c0cb5",
-        "banner-base": "#013049",
-        "secondary-base": "#93c3d4",
-        "accent-base": "#3446A0",
-        "text-base": "#595B5B",
-        "link-base": "#2485ae"
+    "themeName": "tenderfoot",
+    "themeColors": {
+        "pallete": [
+            {
+                "groupName": "primary",
+                "colors": [
+                    {
+                        "name": "primary-base",
+                        "value": "#3E8BAA",
+                        "cssVariable": "--primary-color"
+                    },
+                    {
+                        "name": "primary-darker",
+                        "value": "#0c0cb5",
+                        "cssVariable": "--primary-color-darker",
+                        "shade": {
+                            "type": "darken",
+                            "amount": 20,
+                            "base": "primary-base"
+                        }
+                    }
+                ]
+            },
+            {
+                "groupName": "secondary",
+                "colors": [
+                    {
+                        "name": "secondary-base",
+                        "value": "#93c3d4",
+                        "cssVariable": "--secondary-color"
+                    }
+                ]
+            },
+            {
+                "groupName": "accent",
+                "colors": [
+                    {
+                        "name": "accent-base",
+                        "value": "#3446A0",
+                        "cssVariable": "--accent-color"
+                    }
+                ]
+            },
+            {
+                "groupName": "banner",
+                "colors": [
+                    {
+                        "name": "banner-base",
+                        "value": "#013049",
+                        "cssVariable": "--banner-color"
+                    }
+                ]
+            },
+            {
+                "groupName": "text",
+                "colors": [
+                    {
+                        "name": "text-base",
+                        "value": "#595B5B",
+                        "cssVariable": "--text-color"
+                    }
+                ]
+            },
+            {
+                "groupName": "link",
+                "colors": [
+                    {
+                        "name": "link-base",
+                        "value": "#2485ae",
+                        "cssVariable": "--link-color"
+                    }
+                ]
+            }
+        ]
     }
 }

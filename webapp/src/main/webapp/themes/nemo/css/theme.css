@@ -354,3 +354,88 @@ input#primary-darker-color[user-changed="false"] + .chain {
   background-size: contain;
   user-select: none;
 }
+
+/* Branding Colors Editor */
+.branding-editor-body {
+    margin-bottom: 180px;
+}
+
+footer#fixed-footer.branding-fixed-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgb(243 243 240);
+    border-top: 1px solid #ccc;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    height: 180px;
+    max-height: 160px;
+    overflow-y: auto;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+#color-inputs.branding-color-inputs {
+    display: flex;
+    justify-content: center;
+    column-gap: 50px;
+    flex-wrap: wrap;
+    padding: 0 10px;
+}
+
+.branding-color-col {
+    align-items: center;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.branding-color-label {
+    color: #000;
+    margin-bottom: 10px;
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.branding-color-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+input.branding-color-input.shade-borderless {
+    border: 0;
+}
+
+.branding-button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.branding-btn {
+    padding: 5px 10px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.branding-btn.btn-danger {
+    background: #f44336;
+}
+
+.branding-btn.btn-success {
+    background: #4CAF50;
+}
+
+.branding-reset-btn {
+    margin-top: 10px;
+    display: none;
+}

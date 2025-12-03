@@ -1,12 +1,87 @@
 {
-    "defaultBrandingColors": {
-        "primary-lighter": "#7bb3cb",
-        "primary-base": "#2485ae",
-        "primary-darker": "#064d68",
-        "banner-base": "#023048",
-        "secondary-base": "#398aac",
-        "accent-base": "#749a02",
-        "text-base": "#5f6464",
-        "link-base": "#2485ae"
+    "themeName": "wilma",
+    "themeColors": {
+        "pallete": [
+            {
+                "groupName": "primary",
+                "colors": [
+                    {
+                        "name": "primary-lighter",
+                        "value": "#7bb3cb",
+                        "cssVariable": "--primary-color-lighter",
+                        "shade": {
+                            "type": "lighten",
+                            "amount": 20,
+                            "base": "primary-base"
+                        }
+                    },
+                    {
+                        "name": "primary-base",
+                        "value": "#2485ae",
+                        "cssVariable": "--primary-color"
+                    },
+                    {
+                        "name": "primary-darker",
+                        "value": "#064d68",
+                        "cssVariable": "--primary-color-darker",
+                        "shade": {
+                            "type": "darken",
+                            "amount": 20,
+                            "base": "primary-base"
+                        }
+                    }
+                ]
+            },
+            {
+                "groupName": "secondary",
+                "colors": [
+                    {
+                        "name": "secondary-base",
+                        "value": "#398aac",
+                        "cssVariable": "--secondary-color"
+                    }
+                ]
+            },
+            {
+                "groupName": "accent",
+                "colors": [
+                    {
+                        "name": "accent-base",
+                        "value": "#749a02",
+                        "cssVariable": "--accent-color"
+                    }
+                ]
+            },
+            {
+                "groupName": "banner",
+                "colors": [
+                    {
+                        "name": "banner-base",
+                        "value": "#023048",
+                        "cssVariable": "--banner-color"
+                    }
+                ]
+            },
+            {
+                "groupName": "text",
+                "colors": [
+                    {
+                        "name": "text-base",
+                        "value": "#5f6464",
+                        "cssVariable": "--text-color"
+                    }
+                ]
+            },
+            {
+                "groupName": "link",
+                "colors": [
+                    {
+                        "name": "link-base",
+                        "value": "#2485ae",
+                        "cssVariable": "--link-color"
+                    }
+                ]
+            }
+        ]
     }
 }
