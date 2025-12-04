@@ -1350,7 +1350,7 @@ article.property ul.property-list {
 
 /* ADMIN PANEL ------>  */
 #admin {
-    background-color: #f2f9fb;
+    background-color: var(--secondary-color-extralight, #f2f9fb);
 }
 #admin h3 {
     background: #2485AE;

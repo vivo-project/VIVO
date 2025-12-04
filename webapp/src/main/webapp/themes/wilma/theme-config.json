@@ -36,6 +36,27 @@
                 "groupName": "secondary",
                 "colors": [
                     {
+                        "name": "secondary-extralight",
+                        "value": "#E4ECF3",
+                        "cssVariable": "--secondary-color-extralight",
+                        "shade": {
+                            "type": "lighten",
+                            "amount": 90,
+                            "base": "secondary-base"
+                        }
+                    },
+                    {
+                        "name": "secondary-lighter",
+                        "value": "#DFE6E5",
+                        "cssVariable": "--secondary-color-lighter",
+                        "hidden": true,
+                        "shade": {
+                            "type": "lighten",
+                            "amount": 80,
+                            "base": "secondary-base"
+                        }
+                    },
+                    {
                         "name": "secondary-base",
                         "value": "#398aac",
                         "cssVariable": "--secondary-color"
