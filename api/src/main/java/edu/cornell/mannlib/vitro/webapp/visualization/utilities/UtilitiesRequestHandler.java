@@ -5,9 +5,6 @@ package edu.cornell.mannlib.vitro.webapp.visualization.utilities;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
@@ -19,6 +16,7 @@ import org.apache.jena.iri.Violation;
 import org.vivoweb.webapp.util.ModelUtils;
 
 import org.apache.jena.query.Dataset;
+import org.apache.jena.query.ParameterizedSparqlString;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.RDFNode;
@@ -62,7 +60,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 
         String visMode = vitroRequest.getParameter(
         									VisualizationFrameworkConstants.VIS_MODE_KEY);
-
+        String sanitizedIndividualUri = sanitizeUri(individualURI);
         /*
 		 * If the info being requested is about a profile which includes the name, moniker
 		 * & image url.
@@ -101,8 +99,8 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 											  QueryFieldLabels.THUMBNAIL_LOCATION_URL);
 			fieldLabelToOutputFieldLabel.put("fileName", QueryFieldLabels.THUMBNAIL_FILENAME);
 
-			String whereClause = "<" + individualURI
-									+ "> public:thumbnailImage ?thumbnailImage .  "
+			String whereClause = sanitizedIndividualUri
+									+ "public:thumbnailImage ?thumbnailImage .  "
 									+ "?thumbnailImage public:downloadLocation "
 									+ "?downloadLocation ; public:filename ?fileName .";
 
@@ -127,7 +125,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			String aggregationRules = "(count(DISTINCT ?document) AS ?numOfPublications)";
 
 			String whereClause =
-				"<" + individualURI + "> rdf:type foaf:Person ;"
+					sanitizedIndividualUri + "rdf:type foaf:Person ;"
 					+ " core:relatedBy ?authorshipNode . \n"
 				+ "?authorshipNode rdf:type core:Authorship ;"
 					+ " core:relates ?document . \n"
@@ -158,18 +156,18 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			String grantType = "http://vivoweb.org/ontology/core#Grant";
 
 			ObjectProperty predicate = ModelUtils.getPropertyForRoleInClass(grantType, vitroRequest.getWebappDaoFactory());
-			String roleToGrantPredicate = "<" + predicate.getURI() + ">";
-			String whereClause = "{ <" + individualURI + "> rdf:type foaf:Person ;"
+			String roleToGrantPredicate = sanitizeUri(predicate.getURI());
+			String whereClause = "{" + sanitizedIndividualUri + "rdf:type foaf:Person ;"
 										+ " <http://purl.obolibrary.org/obo/RO_0000053> ?Role . \n"
 									+ "?Role rdf:type core:PrincipalInvestigatorRole . \n"
 									+ "?Role " + roleToGrantPredicate + " ?Grant . }"
 									+ "UNION \n"
-									+ "{ <" + individualURI + "> rdf:type foaf:Person ;"
+									+ "{" + sanitizedIndividualUri + "rdf:type foaf:Person ;"
 										+ " <http://purl.obolibrary.org/obo/RO_0000053> ?Role . \n"
 									+ "?Role rdf:type core:CoPrincipalInvestigatorRole . \n"
 									+ "?Role " + roleToGrantPredicate + " ?Grant . }"
 									+ "UNION \n"
-									+ "{ <" + individualURI + "> rdf:type foaf:Person ;"
+									+ "{" + sanitizedIndividualUri + "rdf:type foaf:Person ;"
 										+ " <http://purl.obolibrary.org/obo/RO_0000053> ?Role . \n"
 									+ "?Role rdf:type core:InvestigatorRole. \n"
     								+ "?Role vitro:mostSpecificType ?subclass . \n"
@@ -348,6 +346,12 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 											individualProfileURLParams);
 		}
 
+	}
+
+	private String sanitizeUri(String uri) {
+		ParameterizedSparqlString pss = new ParameterizedSparqlString(" ?uri ");
+		pss.setIri(" ?uri ", uri);
+		return pss.toString();
 	}
 
 	private class HighetTopLevelOrgTemporalGraphURLConsumer extends ResultSetConsumer {
