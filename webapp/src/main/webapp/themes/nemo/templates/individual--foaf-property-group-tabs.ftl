@@ -24,15 +24,15 @@
 				</#if>
 				<#if tabCount = 1 >
 					<li id="${groupNameHtmlId?replace("/","-")}Tab" role="presentation" class="active">
-					   <a href="#${groupNameHtmlId?replace("/","-")}" aria-controls="${groupName?capitalize}" role="tab" data-toggle="tab">
-						   ${groupName?capitalize}
+					   <a href="#${groupNameHtmlId?replace("/","-")}" aria-controls="${groupName}" role="tab" data-toggle="tab">
+						   ${groupName}
 					   </a>
 					</li>
 					<#assign tabCount = 2>
 				<#else>
 					<li id="${groupNameHtmlId?replace("/","-")}Tab" role="presentation">
-					   <a href="#${groupNameHtmlId?replace("/","-")}" aria-controls="${groupName?capitalize}" role="tab" data-toggle="tab">
-						   ${groupName?capitalize}
+					   <a href="#${groupNameHtmlId?replace("/","-")}" aria-controls="${groupName}" role="tab" data-toggle="tab">
+						   ${groupName}
 					   </a>
 					</li>
 				</#if>
@@ -98,6 +98,5 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/indi
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/amplify/amplify.store.min.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/propertyGroupControls.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.theme}/js/showcase.js"></script>')}
-${scripts.add('<script type="text/javascript" src="${urls.theme}/js/publonsAuthorWidget.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.theme}/js/resultsNav.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.theme}/js/readshare.js""></script>')}

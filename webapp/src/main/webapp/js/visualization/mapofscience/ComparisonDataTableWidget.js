@@ -134,19 +134,19 @@ var ComparisonDataTableWidget = Class.extend({
 		table.append(tbody);
 		me.tableDiv.append(table);
 
-		table.children("tbody").children("tr").mouseenter(function() {
+		table.children("tbody").children("tr").on("mouseenter", function() {
 
 			var item = me.subEntities[$(this).attr("id")];
 			me.sciMapWidget.mouseIn(item.type, item.label);
 		});
 
-		table.children("tbody").children("tr").mouseleave(function() {
+		table.children("tbody").children("tr").on("mouseleave", function() {
 
 			var item = me.subEntities[$(this).attr("id")];
 			me.sciMapWidget.mouseOut(item.type, item.label);
 		});
 
-		$('.chk').click(function() {
+		$('.chk').on("click", function() {
 			var element = $(this);
 			var index = element.attr("value");
 			var item = me.subEntities[index];
@@ -251,7 +251,7 @@ var ComparisonDataTableWidget = Class.extend({
 					var item = me.subEntities[$(this).attr("value")];
 					if (item.type == me.currentSelectedFilter) {
 						// click event didn't work at this point???
-						$(this).click();
+						$(this).trigger("click");
 						me.loadEntity(item.uri, $(this).attr("value"));
 						return false;
 					}

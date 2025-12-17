@@ -34,7 +34,7 @@ var grantHasContributorUtils = {
     bindEventListeners: function() {
         this.idCache = {};
 
-        this.form.submit(function() {
+        this.form.on("submit", function() {
             grantHasContributorUtils.resolveFirstLastNames();
         });
     },
