@@ -63,7 +63,7 @@ public class OrcidInternalOperationsUtil {
             ontologyModel,
             new StatementImpl(
                 person,
-                ontologyModel.createProperty(OrcidIdDataGetter.ORCID_ID),
+                ResourceFactory.createProperty(OrcidIdDataGetter.ORCID_ID),
                 orcid
             ));
 
@@ -72,7 +72,7 @@ public class OrcidInternalOperationsUtil {
             ontologyModel,
             new StatementImpl(
                 orcid,
-                ontologyModel.createProperty(OrcidIdDataGetter.ORCID_IS_CONFIRMED),
+                ResourceFactory.createProperty(OrcidIdDataGetter.ORCID_IS_CONFIRMED),
                 person
             ));
     }
@@ -174,16 +174,25 @@ public class OrcidInternalOperationsUtil {
     }
 
     public static boolean hasConfiguredPushCredentials(String individualUri) {
-        OntModel ontologyModel = getOntModel(false);
         Resource personResource = ResourceFactory.createResource(individualUri);
 
-        StmtIterator iter = ontologyModel.listStatements(
-            personResource,
-            ResourceFactory.createProperty(ACCESS_TOKEN_PROPERTY),
-            (RDFNode) null
-        );
+        StmtIterator iterAccessToken =
+            getOntModel(false)
+                .listStatements(
+                    personResource,
+                    ResourceFactory.createProperty(ACCESS_TOKEN_PROPERTY),
+                    (RDFNode) null
+                );
 
-        return iter.hasNext();
+        StmtIterator iterOrcidId =
+            getOntModel(true)
+                .listStatements(
+                    personResource,
+                    ResourceFactory.createProperty(OrcidIdDataGetter.ORCID_ID),
+                    (RDFNode) null
+                );
+
+        return iterAccessToken.hasNext() && iterOrcidId.hasNext();
     }
 
     /**

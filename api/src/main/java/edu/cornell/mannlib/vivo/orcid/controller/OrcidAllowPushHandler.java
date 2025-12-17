@@ -27,7 +27,9 @@ public class OrcidAllowPushHandler extends OrcidAbstractHandler {
             OrcidInternalOperationsUtil.setAllowPushStatusForIndividual(individualUri, true);
 
             return new RedirectResponseValues(
-                occ.getSetting(OrcidClientContext.Setting.WEBAPP_BASE_URL) + "individual?uri=" + individualUri);
+                occ.getSetting(OrcidClientContext.Setting.WEBAPP_BASE_URL) +
+                    "individual?uri=" + individualUri
+            );
         }
 
         vreq.getSession().setAttribute("profileUri", individualUri);
@@ -38,13 +40,16 @@ public class OrcidAllowPushHandler extends OrcidAbstractHandler {
         }
 
         String clientId = occ.getSetting(OrcidClientContext.Setting.CLIENT_ID);
+        String redirectUri =
+            occ.getSetting(OrcidClientContext.Setting.WEBAPP_BASE_URL) +
+                occ.getSetting(OrcidClientContext.Setting.CALLBACK_PATH);
 
         String authUrl = "https://sandbox.orcid.org/oauth/authorize" +
             "?client_id=" + URLEncoder.encode(clientId) +
             "&response_type=code" +
             "&scope=" + URLEncoder.encode("/activities/update /person/update") +
             "&redirect_uri=" +
-            URLEncoder.encode("http://127.0.0.1/bind/oauth2/code/orcid");
+            URLEncoder.encode(redirectUri);
 
         return new RedirectResponseValues(authUrl);
     }
