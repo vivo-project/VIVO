@@ -73,7 +73,7 @@
 					<#--
 						<nav id="scroller" class="scroll-up hidden" role="navigation"> 
 							<a href="#branding" title="${i18n().scroll_to_menus}" >
-								<img src="${urls.images}/individual/scroll-up.gif" alt="${i18n().scroll_to_menus}" />
+								<img src="${urls.images}/individual/scroll-up-darkened.gif" alt="${i18n().scroll_to_menus}" />
 							</a>
 						</nav> 
 					-->

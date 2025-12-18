@@ -197,7 +197,7 @@ ul#individual-personInPosition li:last-child {
 }
 
 /* <------ RESEARCH AREA */
-ul#individual-hasResearchArea li,
+ul.individual-hasResearchArea li,
 ul#individual-facultyMemberships li {
     float: left;
     padding-right: 10px;
