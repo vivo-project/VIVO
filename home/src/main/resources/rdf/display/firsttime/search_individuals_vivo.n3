@@ -27,7 +27,7 @@
         vitro-search:facetResults  true ;
         vitro-search:filterField   :field_organizations ;
         vitro-search:id            "organizations" ;
-        vitro-search:isUriValues   true ;
+        vitro-search:moreLimit     1 ;
         vitro-search:public        true .
 
 :filter_persons  a                 vitro-search:Filter ;
@@ -41,8 +41,25 @@
         vitro-search:indexField    "dates_drsim" .
 
 :field_organizations  a            vitro-search:SearchField ;
-        vitro-search:indexField    "organizations_ss" ;
+        vitro-search:indexField    "_organizations_ss" ;
+        vitro-search:isLanguageSpecific  true ;
         vitro-search:multivalued   true .
 
 :field_publication_year  a         vitro-search:SearchField ;
         vitro-search:indexField    "publication_year_ss" .
+
+:n31664
+        a                   vitro-search:RangeFilter , vitro-search:Filter ;
+        rdfs:label          "Time period"@en-US ;
+        vitro-search:filterField  :n48994 ;
+        vitro-search:from         "2000" ;
+        vitro-search:id           "dates" ;
+        vitro-search:public       true ;
+        vitro-search:to           "2025" .
+
+:n48994
+        a                  vitro-search:SearchField ;
+        rdfs:label         "Datum"@de-DE , "Date"@en-US ;
+        vitro-search:indexField  "dates_drsim" .
+
+<https://vivoweb.org/ontology/vitro-search-individual/filter_group_search_filters> vitro-search:contains :n31664 .
