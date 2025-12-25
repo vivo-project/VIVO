@@ -1,6 +1,6 @@
 <#if orcidInfo??>
 
-    <p>${i18n().orcid_integration}</p>
+    <p class="mt-5 section-title-small">${i18n().orcid_integration}</p>
     <#if orcidInfo.allowPush?? && orcidInfo.allowPush>
         <form action="${urls.base}/orcid/disallowPush" method="get">
             <input type="hidden" name="profileUri" value="${individual.uri}" />
