@@ -38,6 +38,8 @@ ${headContent!}
                 ${key}: ${brandingColors[key]};
             </#list>
         </#if>
+        <#if logoUrl?has_content >--logo-url: url('${logoUrl}');</#if>
+        <#if logoSmallUrl?has_content >--logo-small-url: url('${logoSmallUrl}');</#if>
     }
 </style>
 

@@ -7,16 +7,14 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 col-sm-12 hidden-xs">
-						<#if logoUrl?? && logoUrl != "null">
+						<#if logoUrl?has_content>
 							<a href="${urls.home}"><img height="66" src="${logoUrl}" alt="${i18n().vivo_logo}" /></a>
-						<#elseif logoSmallUrl?? && logoSmallUrl != "null">
-							<a href="${urls.home}"><img height="66" src="${logoSmallUrl}" alt="${i18n().vivo_logo}" /></a>
 						<#else>
 							<a href="${urls.home}"><img height="66" src="${urls.theme}/images/vivo_logo.png" alt="${i18n().vivo_logo}" /></a>
 						</#if>
 					</div>
 					<div class="col-xs-12 visible-xs-block">
-						<#if logoSmallUrl?? && logoSmallUrl != "null">
+						<#if logoSmallUrl?has_content>
 							<a href="${urls.home}"><img height="66" src="${logoSmallUrl}" alt="${i18n().vivo_logo}" /></a>
 						<#else>
 							<a href="${urls.home}"><img height="66" src="${urls.theme}/images/vivo_logo.png" alt="${i18n().vivo_logo}" /></a>
