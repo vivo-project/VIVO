@@ -78,6 +78,9 @@ public class AjaxVisualizationController extends FreemarkerHttpServlet {
 
 			TemplateResponseValues trv = (TemplateResponseValues) ajaxResponse;
 			try {
+               if (trv.getStatusCode() > 0) {
+                   response.setStatus(trv.getStatusCode());
+               }
                 writeTemplate(trv.getTemplateName(), trv.getMap(), vreq, response);
             } catch (TemplateProcessingException e) {
                 log.error(e.getMessage(), e);
@@ -141,10 +144,11 @@ public class AjaxVisualizationController extends FreemarkerHttpServlet {
 				return visRequestHandler.generateAjaxVisualization(vitroRequest,
 														log,
 														dataset);
-			} catch (JsonProcessingException|MalformedQueryParametersException e) {
+			} catch (Exception e) {
+				log.error(e, e);
 				return UtilityFunctions.handleMalformedParameters(
 						"Ajax Visualization Query Error - Individual Publication Count",
-						e.getMessage(),
+						"",
 						vitroRequest);
 
 			}

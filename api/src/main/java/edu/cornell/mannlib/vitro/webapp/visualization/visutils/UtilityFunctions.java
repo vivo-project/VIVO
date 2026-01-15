@@ -2,6 +2,8 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.visutils;
 
+import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
+
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
@@ -12,9 +14,6 @@ import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -142,7 +141,7 @@ public class UtilityFunctions {
         body.put("error", errorMessage);
         body.put("title", errorPageTitle);
 
-        return new TemplateResponseValues(VisualizationFrameworkConstants.ERROR_TEMPLATE, body);
+        return new TemplateResponseValues(VisualizationFrameworkConstants.ERROR_TEMPLATE, body, SC_BAD_REQUEST);
     }
 
     public static void handleMalformedParameters(String errorMessage,
