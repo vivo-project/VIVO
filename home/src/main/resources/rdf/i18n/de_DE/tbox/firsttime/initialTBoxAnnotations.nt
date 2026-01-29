@@ -537,7 +537,7 @@
 <http://purl.obolibrary.org/obo/ARG_2000084> <http://www.w3.org/2000/01/rdf-schema#label> "American Board of Preventive Medicine"@de-DE .
 <http://purl.obolibrary.org/obo/RO_0000056> <http://www.w3.org/2000/01/rdf-schema#label> "beteiligt an"@de-DE .
 <http://www.w3.org/2006/vcard/ns#timeZone> <http://www.w3.org/2000/01/rdf-schema#label> "Zeitzone"@de-DE .
-<http://purl.org/spar/c4o/hasGlobalCountValue> <http://www.w3.org/2000/01/rdf-schema#label> "hat weltweiten Zählwert"@de-DE .
+<http://purl.org/spar/c4o/hasGlobalCountValue> <http://www.w3.org/2000/01/rdf-schema#label> "hat Gesamt-Count"@de-DE .
 <http://purl.obolibrary.org/obo/RO_0000056> <http://www.w3.org/2000/01/rdf-schema#label> "Beschriftung Maßeinheit"@de-DE .
 <http://www.w3.org/2006/vcard/ns#hasNickname> <http://www.w3.org/2000/01/rdf-schema#label> "hat Spitznamen"@de-DE .
 <http://purl.obolibrary.org/obo/ARG_2000083> <http://www.w3.org/2000/01/rdf-schema#label> "American Board of Plastic Surgery"@de-DE .
@@ -593,7 +593,7 @@
 <http://www.w3.org/2006/vcard/ns#Photo> <http://www.w3.org/2000/01/rdf-schema#label> "Foto"@de-DE .
 <http://purl.obolibrary.org/obo/ERO_0000029> <http://www.w3.org/2000/01/rdf-schema#label> "bietet Zugriff auf"@de-DE .
 <http://www.w3.org/2006/vcard/ns#honorificSuffix> <http://www.w3.org/2000/01/rdf-schema#label> "ehrende Nachsilbe"@de-DE .
-<http://purl.org/spar/c4o/hasGlobalCitationFrequency> <http://www.w3.org/2000/01/rdf-schema#label> "weltweite Zitationshäufigkeit"@de-DE .
+<http://purl.org/spar/c4o/hasGlobalCitationFrequency> <http://www.w3.org/2000/01/rdf-schema#label> "gesamte Zitationsfrequenz"@de-DE .
 <http://aims.fao.org/aos/geopolitical.owl#nameListIT> <http://www.w3.org/2000/01/rdf-schema#label> "Hauptname in Italienisch"@de-DE .
 <http://www.w3.org/2006/vcard/ns#Explanatory> <http://www.w3.org/2000/01/rdf-schema#label> "Begründung"@de-DE .
 <http://www.w3.org/2006/vcard/ns#Parent> <http://www.w3.org/2000/01/rdf-schema#label> "Übergeordnete/r"@de-DE .
