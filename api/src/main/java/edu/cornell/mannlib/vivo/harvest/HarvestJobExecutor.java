@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -12,18 +14,17 @@ public class HarvestJobExecutor {
     private static final ExecutorService executor =
         Executors.newCachedThreadPool();
 
-    public static void runAsync(String moduleName, String command) {
-
+    public static void runAsync(String moduleName, List<String> command, Path modulePath) {
         executor.submit(() -> {
-
             HarvestJobRegistry.startJob(moduleName);
 
             File logFile =
                 new File("/tmp/harvest-" + moduleName + ".log");
 
             try {
-                ProcessBuilder pb =
-                    new ProcessBuilder("bash", command);
+                ProcessBuilder pb = new ProcessBuilder(command);
+
+                pb.directory(new File(modulePath.toString()));
 
                 pb.redirectErrorStream(true);
                 Process process = pb.start();
@@ -34,7 +35,7 @@ public class HarvestJobExecutor {
                             new InputStreamReader(
                                 process.getInputStream()));
                     FileWriter writer =
-                        new FileWriter(logFile, true)
+                        new FileWriter(logFile, false)
                 ) {
                     String line;
                     while ((line = reader.readLine()) != null) {
@@ -43,7 +44,6 @@ public class HarvestJobExecutor {
                 }
 
                 process.waitFor();
-
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

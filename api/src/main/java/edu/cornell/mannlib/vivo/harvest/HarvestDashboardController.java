@@ -1,7 +1,10 @@
 package edu.cornell.mannlib.vivo.harvest;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.annotation.WebServlet;
@@ -46,40 +49,44 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
         HarvestContext.modules.stream()
             .filter(module -> module.getName().equals(parameters.get("moduleName")[0])).findFirst()
             .ifPresent(module -> {
+                Path modulePath = Paths.get(ConfigurationProperties.getInstance().getProperty("harvester.directory"),
+                    module.getPath()).normalize();
 
-                StringBuilder commandBuilder =
-                    new StringBuilder("\"")
-                        .append(Paths.get(ConfigurationProperties.getInstance().getProperty("harvester.directory"),
-                            module.getPath(), "run-fetch.sh").normalize())
-                        .append("\"");
+                List<String> command = new ArrayList<>();
+                command.add("./run-fetch.sh");
+                command.add("sparql");
 
                 module.getParameters().forEach(parameter -> {
+                    StringBuilder paramBuilder = new StringBuilder();
 
                     String value = vreq.getParameter(parameter.getSymbol());
 
                     if (value != null && !value.trim().isEmpty()) {
-                        commandBuilder.append(" ")
-                            .append(parameter.getSymbol())
-                            .append(" \"")
-                            .append(value);
+//                        if (!parameter.getSymbol().trim().isEmpty()) {
+//                            commandBuilder.append(parameter.getSymbol()).append(" ");
+//                        }
+
+                        paramBuilder.append("\"").append(value);
 
                         if (parameter.getSubfields() != null && !parameter.getSubfields().isEmpty()) {
-                            commandBuilder.append("?");
+                            paramBuilder.append("?");
 
                             parameter.getSubfields().forEach(subfield -> {
-                                commandBuilder
+                                paramBuilder
                                     .append(subfield.getSymbol())
                                     .append("=")
                                     .append(vreq.getParameter(subfield.getSymbol()));
                             });
                         }
 
-                        commandBuilder.append("\"");
+                        paramBuilder.append("\"");
                     }
+
+                    command.add(paramBuilder.toString());
                 });
 
                 module.setRunning(true);
-                HarvestJobExecutor.runAsync(module.getName(), commandBuilder.toString());
+                HarvestJobExecutor.runAsync(module.getName(), command, modulePath);
             });
 
 

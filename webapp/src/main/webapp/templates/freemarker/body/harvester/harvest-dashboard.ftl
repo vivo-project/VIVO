@@ -66,10 +66,22 @@ ${param.name}
     <#assign inputType = "datetime-local">
 </#if>
 
+<#assign inputValue = param.defaultValue!>
+
+<#if param.type == "dateTime" && inputValue?has_content>
+    <#-- remove Z -->
+    <#assign inputValue = inputValue?replace("Z", "")>
+
+    <#-- optionally trim seconds -->
+    <#if inputValue?length gt 16>
+        <#assign inputValue = inputValue?substring(0,16)>
+    </#if>
+</#if>
+
 <input
     type="${inputType}"
     name="${param.symbol}"
-    value="${param.defaultValue!}"
+    value="${inputValue}"
     <#if param.required>required</#if>
 >
 
@@ -87,9 +99,8 @@ ${param.name}
 </#list>
 
 <button type="submit"
-    class="run-btn"
-    data-module="${module.name}"
-    <#if module.running>disabled</#if>>
+        class="run-btn"
+        data-module="${module.name}">
     <span class="btn-text">Run Export</span>
     <span class="spinner" style="display:none;">⏳</span>
 </button>
@@ -104,10 +115,52 @@ ${param.name}
 
 <script>
 document.querySelectorAll(".run-btn").forEach(btn => {
-    btn.closest("form").addEventListener("submit", () => {
+
+    const module = btn.dataset.module;
+
+    btn.closest("form").addEventListener("submit", (e) => {
+
+        e.preventDefault();
+
+        const form = e.target;
+        const formData = new FormData(form);
+
         btn.disabled = true;
         btn.querySelector(".btn-text").style.display = "none";
         btn.querySelector(".spinner").style.display = "inline";
+
+        fetch(form.action, {
+            method: "POST",
+            body: formData
+        })
+        .then(() => {
+            startPolling(btn, module);
+        })
+        .catch(() => {
+            btn.disabled = false;
+            btn.querySelector(".btn-text").style.display = "inline";
+            btn.querySelector(".spinner").style.display = "none";
+        });
     });
 });
+
+function startPolling(btn, module) {
+
+    const interval = setInterval(() => {
+
+        fetch("${contextPath}/harvest-status?module=" + module)
+            .then(r => r.json())
+            .then(data => {
+                if (!data.running) {
+
+                    btn.disabled = false;
+                    btn.querySelector(".btn-text").style.display = "inline";
+                    btn.querySelector(".spinner").style.display = "none";
+
+                    clearInterval(interval);
+                }
+            });
+
+    }, 2000);
+}
 </script>
