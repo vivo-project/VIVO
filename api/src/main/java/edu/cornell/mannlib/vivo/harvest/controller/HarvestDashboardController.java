@@ -1,4 +1,4 @@
-package edu.cornell.mannlib.vivo.harvest;
+package edu.cornell.mannlib.vivo.harvest.controller;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,14 +9,19 @@ import java.util.Map;
 
 import javax.servlet.annotation.WebServlet;
 
+import edu.cornell.mannlib.vedit.beans.LoginStatusBean;
+import edu.cornell.mannlib.vitro.webapp.beans.UserAccount;
 import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.config.ContextPath;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
+import edu.cornell.mannlib.vivo.harvest.HarvestJobExecutor;
+import edu.cornell.mannlib.vivo.harvest.RoleCheckUtility;
+import edu.cornell.mannlib.vivo.harvest.contextmodel.HarvestContext;
 
-@WebServlet(name = "harvest", urlPatterns = {"/harvest"})
+@WebServlet(name = "etlWorkflows", urlPatterns = {"/etlWorkflows"})
 public class HarvestDashboardController extends FreemarkerHttpServlet {
 
     private static final String TEMPLATE_NAME = "harvest-dashboard.ftl";
@@ -25,6 +30,12 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
     @Override
     protected ResponseValues processRequest(VitroRequest vreq) throws Exception {
         Map<String, Object> dataContext = new HashMap<>();
+
+        UserAccount acc = LoginStatusBean.getCurrentUser(vreq);
+        if (acc == null || !RoleCheckUtility.isAdmin(acc)) {
+            return new TemplateResponseValues("login.ftl", dataContext);
+        }
+
         setCommonValues(dataContext, vreq);
 
         if (vreq.getMethod().equalsIgnoreCase("GET")) {
@@ -33,7 +44,6 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
 
         return handlePostRequest(vreq, dataContext);
     }
-
 
     private void setCommonValues(Map<String, Object> dataContext, VitroRequest vreq) {
         dataContext.put("contextPath", ContextPath.getPath(vreq));
@@ -46,8 +56,10 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
 
     private ResponseValues handlePostRequest(VitroRequest vreq, Map<String, Object> dataContext) {
         Map<String, String[]> parameters = vreq.getParameterMap();
+        String moduleName = parameters.get("moduleName")[0];
+
         HarvestContext.modules.stream()
-            .filter(module -> module.getName().equals(parameters.get("moduleName")[0])).findFirst()
+            .filter(module -> module.getName().equals(moduleName)).findFirst()
             .ifPresent(module -> {
                 Path modulePath = Paths.get(ConfigurationProperties.getInstance().getProperty("harvester.directory"),
                     module.getPath()).normalize();
@@ -86,6 +98,9 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
                 });
 
                 module.setRunning(true);
+
+                WorkflowOutputLogController.resetLogPosition(moduleName);
+
                 HarvestJobExecutor.runAsync(module.getName(), command, modulePath);
             });
 

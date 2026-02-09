@@ -6286,3 +6286,51 @@ uil-data:no_add_to_person_profile.VIVO
         rdfs:label       "No"@en-US ;
         uil:hasApp       "VIVO" ;
         uil:hasKey       "no_add_to_person_profile" .
+
+uil-data:available_harvest_modules.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Available harvest modules:"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "available_harvest_modules" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:run_workflow.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Run workflow"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "run_workflow" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:workflow_in_progress.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Workflow in progress"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "workflow_in_progress" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:stop_workflow.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Stop workflow"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "stop_workflow" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:download_workflow_logs.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Download logs"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "download_workflow_logs" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:etl_workflows.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "ETL workflows"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "etl_workflows" ;
+        uil:hasPackage  "VIVO-languages" .

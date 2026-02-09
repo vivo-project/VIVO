@@ -1,4 +1,4 @@
-package edu.cornell.mannlib.vivo.harvest;
+package edu.cornell.mannlib.vivo.harvest.contextmodel;
 
 import java.util.List;
 

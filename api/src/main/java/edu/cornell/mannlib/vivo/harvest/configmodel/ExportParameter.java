@@ -19,6 +19,8 @@ public class ExportParameter {
 
     private List<ExportParameter> subfields;
 
+    private List<String> options;
+
 
     public String getName() {
         return name;
@@ -66,6 +68,14 @@ public class ExportParameter {
 
     public void setSubfields(List<ExportParameter> subfields) {
         this.subfields = subfields;
+    }
+
+    public List<String> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<String> options) {
+        this.options = options;
     }
 }
 

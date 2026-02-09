@@ -12,6 +12,7 @@ import javax.servlet.ServletContextListener;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vivo.harvest.configmodel.ExportConfig;
+import edu.cornell.mannlib.vivo.harvest.contextmodel.HarvestContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

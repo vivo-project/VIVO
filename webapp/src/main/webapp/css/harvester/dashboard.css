@@ -1,0 +1,55 @@
+.container {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.module-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+.module-card h2 {
+    margin-top: 0;
+}
+
+.form-row {
+    margin-bottom: 12px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 6px;
+}
+
+.spinner {
+    margin-left: 10px;
+}
+
+.cli-box {
+    margin-top: 15px;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 13px;
+    white-space: pre-wrap;
+    height: 160px;
+    overflow-y: auto;
+}
+
+.title-label {
+    color: #064d68;
+    font-size: 2em;
+    line-height: 1.4;
+    padding: 15px 0 18px 0;
+    margin: 0 0 20px 0;
+    font-weight: 600;
+}
