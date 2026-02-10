@@ -36,7 +36,15 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
                             </#if>
                         </#if>
 
-                        <#if param.type == "select">
+                        <#if param.type == "file">
+                            <input
+                                type="file"
+                                id="${param.name?html}"
+                                name="${param.symbol?html}"
+                                accept="${param.acceptType}"
+                                <#if param.required>required</#if>
+                            />
+                        <#elseif param.type == "select" || param.type == "graph">
                             <select
                                 name="${param.symbol}"
                                 <#if param.required>required</#if>
@@ -60,7 +68,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
                         </#if>
                     </div>
 
-                    <#if param.subfields??>
+                    <#if param.type == "url" && param.subfields??>
                         <#list param.subfields as sub>
                             <div class="form-row" style="margin-left:20px;">
                                 <label>${sub.name}</label>

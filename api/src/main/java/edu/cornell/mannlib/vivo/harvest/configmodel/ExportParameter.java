@@ -15,12 +15,62 @@ public class ExportParameter {
     @JsonProperty("default")
     private String defaultValue;
 
+    private String acceptType;
+
+    private String group;
+
+    private String tmpLocation;
+
+    // separator between multiple subfields in a group
+    private String groupSep;
+
+    // separator inside group key:value pair
+    private String kvSep;
+
     private boolean required;
 
     private List<ExportParameter> subfields;
-
     private List<String> options;
 
+    public String getGroupSep() {
+        return groupSep;
+    }
+
+    public void setGroupSep(String groupSep) {
+        this.groupSep = groupSep;
+    }
+
+    public String getKvSep() {
+        return kvSep;
+    }
+
+    public void setKvSep(String kvSep) {
+        this.kvSep = kvSep;
+    }
+
+    public String getTmpLocation() {
+        return tmpLocation;
+    }
+
+    public void setTmpLocation(String tmpLocation) {
+        this.tmpLocation = tmpLocation;
+    }
+
+    public String getAcceptType() {
+        return acceptType;
+    }
+
+    public void setAcceptType(String acceptType) {
+        this.acceptType = acceptType;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
 
     public String getName() {
         return name;

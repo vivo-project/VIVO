@@ -1,11 +1,18 @@
 package edu.cornell.mannlib.vivo.harvest.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -19,7 +26,9 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Res
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vivo.harvest.HarvestJobExecutor;
 import edu.cornell.mannlib.vivo.harvest.RoleCheckUtility;
+import edu.cornell.mannlib.vivo.harvest.configmodel.ExportParameter;
 import edu.cornell.mannlib.vivo.harvest.contextmodel.HarvestContext;
+import org.apache.commons.fileupload.FileItem;
 
 @WebServlet(name = "etlWorkflows", urlPatterns = {"/etlWorkflows"})
 public class HarvestDashboardController extends FreemarkerHttpServlet {
@@ -71,24 +80,81 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
                 module.getParameters().forEach(parameter -> {
                     StringBuilder paramBuilder = new StringBuilder();
 
-                    String value = vreq.getParameter(parameter.getSymbol());
+                    String value = null;
+
+                    if ("file".equals(parameter.getType())) {
+                        Map<String, List<FileItem>> fileItems = vreq.getFiles();
+                        FileItem item = fileItems != null ? fileItems.get(parameter.getSymbol()).get(0) : null;
+
+                        if (item != null && !item.isFormField() && item.getSize() > 0) {
+                            String fileName = Paths.get(item.getName()).getFileName().toString();
+                            Path tmpPath = Paths.get(parameter.getTmpLocation(), fileName);
+
+                            try (InputStream in = item.getInputStream()) {
+                                Files.copy(in, tmpPath, StandardCopyOption.REPLACE_EXISTING);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+
+                            value = tmpPath.toString();
+                        }
+                    } else {
+                        value = vreq.getParameter(parameter.getSymbol());
+                    }
 
                     if (value != null && !value.trim().isEmpty()) {
-//                        if (!parameter.getSymbol().trim().isEmpty()) {
-//                            commandBuilder.append(parameter.getSymbol()).append(" ");
-//                        }
-
                         paramBuilder.append("\"").append(value);
 
-                        if (parameter.getSubfields() != null && !parameter.getSubfields().isEmpty()) {
-                            paramBuilder.append("?");
+                        if ("url".equals(parameter.getType())
+                            && parameter.getSubfields() != null
+                            && !parameter.getSubfields().isEmpty()) {
 
-                            parameter.getSubfields().forEach(subfield -> {
-                                paramBuilder
-                                    .append(subfield.getSymbol())
-                                    .append("=")
-                                    .append(vreq.getParameter(subfield.getSymbol()));
-                            });
+                            Map<String, List<ExportParameter>> grouped =
+                                parameter.getSubfields().stream()
+                                    .collect(Collectors.groupingBy(
+                                        sf -> sf.getGroup() != null ? sf.getGroup() : "",
+                                        LinkedHashMap::new,
+                                        Collectors.toList()
+                                    ));
+
+                            List<String> queryParts = new ArrayList<>();
+
+                            for (Map.Entry<String, List<ExportParameter>> entry : grouped.entrySet()) {
+
+                                String group = entry.getKey();
+                                List<ExportParameter> fields = entry.getValue();
+
+                                if (group.isEmpty()) {
+                                    for (ExportParameter sf : fields) {
+                                        String val = vreq.getParameter(sf.getSymbol());
+                                        if (val != null && !val.trim().isEmpty()) {
+                                            queryParts.add(sf.getSymbol() + "=" + val.trim());
+                                        }
+                                    }
+
+                                } else {
+                                    List<String> groupItems = fields.stream()
+                                        .map(sf -> {
+                                            String val = vreq.getParameter(sf.getSymbol());
+                                            if (val == null || val.trim().isEmpty()) {
+                                                return null;
+                                            }
+                                            return sf.getSymbol() + sf.getKvSep() + val.trim();
+                                        })
+                                        .filter(Objects::nonNull)
+                                        .collect(Collectors.toList());
+
+                                    if (!groupItems.isEmpty()) {
+                                        queryParts.add(group + "=" +
+                                            String.join(fields.get(0).getGroupSep(), groupItems));
+                                    }
+                                }
+                            }
+
+                            if (!queryParts.isEmpty()) {
+                                paramBuilder.append("?")
+                                    .append(String.join("\\&", queryParts)); // escaped &
+                            }
                         }
 
                         paramBuilder.append("\"");

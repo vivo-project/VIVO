@@ -1,9 +1,12 @@
 package edu.cornell.mannlib.vivo.harvest;
 
+import static edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess.WhichService.CONTENT;
+
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -11,6 +14,9 @@ import javax.servlet.ServletContextListener;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
+import edu.cornell.mannlib.vitro.webapp.dao.jena.BlankNodeFilteringModelMaker;
+import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vivo.harvest.configmodel.ExportConfig;
 import edu.cornell.mannlib.vivo.harvest.contextmodel.HarvestContext;
 import org.apache.commons.logging.Log;
@@ -39,6 +45,15 @@ public class HarvestContextSetup implements ServletContextListener {
             ExportConfig config = mapper.readValue(is, ExportConfig.class);
 
             HarvestContext.modules = config.getExportModules();
+
+            RDFService rdfService = ModelAccess.on(ctx).getRDFService(CONTENT);
+            List<String> models = new BlankNodeFilteringModelMaker(rdfService, ModelAccess.on(
+                ctx).getModelMaker(CONTENT)).listModels().toList();
+
+            HarvestContext.modules.forEach(module ->
+                module.getParameters().stream().filter(param -> param.getType().equals("graph"))
+                    .forEach(param ->
+                        param.setOptions(models)));
         } catch (Exception e) {
             throw new RuntimeException("Failed to load export modules config", e);
         }
