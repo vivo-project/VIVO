@@ -6,11 +6,19 @@
 		<div class="hgroup">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12 col-sm-12 hidden-xs logo-sm">
-						<a href="${urls.home}"><img height="66" src="${urls.theme}/images/vivo_logo.png" alt="VIVO Logo" /></a>
+					<div class="col-md-12 col-sm-12 hidden-xs">
+						<#if logoUrl?has_content>
+							<a href="${urls.home}"><img height="66" src="${logoUrl}" alt="${i18n().vivo_logo}" /></a>
+						<#else>
+							<a href="${urls.home}"><img height="66" src="${urls.theme}/images/vivo_logo.png" alt="${i18n().vivo_logo}" /></a>
+						</#if>
 					</div>
 					<div class="col-xs-12 visible-xs-block">
-						<a href="${urls.home}"><img height="66" src="${urls.theme}/images/vivo_logo.png" alt="VIVO Logo" /></a>
+						<#if logoSmallUrl?has_content>
+							<a href="${urls.home}"><img height="66" src="${logoSmallUrl}" alt="${i18n().vivo_logo}" /></a>
+						<#else>
+							<a href="${urls.home}"><img height="66" src="${urls.theme}/images/vivo_logo.png" alt="${i18n().vivo_logo}" /></a>
+						</#if>
 					</div>
 				</div>
 			</div>

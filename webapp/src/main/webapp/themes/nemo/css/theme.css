@@ -19,13 +19,14 @@ body {
   height: 100%;
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
+  color: var(--text-color, #333);
 }
 a,
 a:hover,
 a:focus {
   text-decoration: none;
   /* color: #1E6B53; */
-  color: #064d68;
+  color: var(--link-color, #064d68);
   ;
 }
 /*---------------------------------------------
@@ -33,7 +34,7 @@ Styling identity.ftl header
 ----------------------------------------------*/
 .header {
   /* background: #1e6b52; */
-  background: #064d68;
+  background: var(--banner-color, #064d68);
   padding: 20px 0;
   /* border-bottom: 1px solid #16503d; */
   border-bottom: 1px solid #023447;
@@ -45,8 +46,9 @@ Styling identity.ftl header
 }
 ----------------------------------------------*/
 .header img {
-  width: 263px;
+  /* width: 263px; */
   max-width: 500px;
+  object-fit: contain;
 }
 .header h1 {
   margin: 0;
@@ -78,11 +80,11 @@ Styling identity.ftl header
   }
 }
 button.btn.sympl-search {
-  background: #064d68;
+  background: var(--primary-color, #064d68);
   text-shadow: 0 0 0 transparent;
   color: #fff;
   /* border: 2px solid #c9c9c9; */
-  border: 2px solid #023447;
+  border: 2px solid var(--primary-color-darker, #023447);
 }
 .theme-dropdown .dropdown-menu {
   position: static;
@@ -267,4 +269,173 @@ These are helper classes to add margin gaps where needed
 
 .input-group-header-search {
 	
+}
+
+/* Logo upload */
+.logo-section {
+  margin-bottom: 2rem;
+}
+
+.logo-label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.logo-preview {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  background-color: #f2f2f2;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  margin: 0.5rem 0;
+  display: block;
+}
+
+.logo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  display: none;
+}
+
+.logo-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-controls input[type="file"] {
+  flex: 1;
+}
+
+.logo-controls button {
+  background: #e0e0e0;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.logo-controls button:hover {
+  background: #ccc;
+}
+
+/* If input selector have attribute [user-changed="false"] then .chain gets this style */
+input#primary-lighter-color[user-changed="false"] + .chain {
+  content: "";
+  color: #888;    
+  position: absolute;
+  top: 16px;
+  right: -3px;
+  width: 13px;
+  height: 22px;
+  background-image: url('../images/link-chain.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  user-select: none;
+}
+
+input#primary-darker-color[user-changed="false"] + .chain {
+  content: "";
+  color: #888;    
+  position: absolute;
+  bottom: 16px;
+  right: -3px;
+  width: 13px;
+  height: 22px;
+  background-image: url('../images/link-chain.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  user-select: none;
+}
+
+/* Branding Colors Editor */
+.branding-editor-body {
+    margin-bottom: 180px;
+}
+
+footer#fixed-footer.branding-fixed-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgb(243 243 240);
+    border-top: 1px solid #ccc;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    height: 180px;
+    max-height: 160px;
+    overflow-y: auto;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+#color-inputs.branding-color-inputs {
+    display: flex;
+    justify-content: center;
+    column-gap: 50px;
+    flex-wrap: wrap;
+    padding: 0 10px;
+}
+
+.branding-color-col {
+    align-items: center;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.branding-color-label {
+    color: #000;
+    margin-bottom: 10px;
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.branding-color-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+input.branding-color-input.shade-borderless {
+    border: 0;
+}
+
+.branding-button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.branding-btn {
+    padding: 5px 10px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.branding-btn.btn-danger {
+    background: #f44336;
+}
+
+.branding-btn.btn-success {
+    background: #4CAF50;
+}
+
+.branding-reset-btn {
+    margin-top: 10px;
+    display: none;
 }
