@@ -160,6 +160,7 @@ function render_chord() {
     // #9edae5
 
     var svg = d3.select('#chord').append('svg')
+        .attr('role', 'presentation')
         .attr('width', width+padding)
         .attr('height', height+padding)
         .append('g').attr('transform', 'translate(' + (width+padding) / 2 + ',' + (height+padding) / 2 +')')
@@ -220,14 +221,50 @@ function render_chord() {
         .on('click', chord_click())
         .on("mouseover", chord_hover(.05))
         .on("mouseout", chord_hover(.8));
+
+    // Hide on mouse away from info
+    d3.select('#chord-info-div')
+        .on('mouseout', function(event) {
+            var e = event || d3.event;
+            var div = this.getBoundingClientRect();
+            var x = (e.clientX !== undefined) ? e.clientX : (e.changedTouches ? e.changedTouches[0].clientX : 0);
+            var y = (e.clientY !== undefined) ? e.clientY : (e.changedTouches ? e.changedTouches[0].clientY : 0);
+
+            d3.select(this).style('display', 'none');
+            $('#chord').css('cursor', 'default');
+        });
+
+    $(document).on('keydown', function(e) {
+        if (e.key === "Escape" || e.key === "Esc" || e.keyCode === 27) {
+            $('#chord-info-div').hide();
+        }
+    });
 }
 
 function chord_hover(opacity) {
         return function(g, i) {
             if (opacity > .5) {
                 var chordInfoDiv = d3.select('#chord-info-div');
-                chordInfoDiv.style('display', 'none');
-                $('#chord').css('cursor', 'default');
+
+                var isHoveringTooltip = false;
+                if (chordInfoDiv && chordInfoDiv.node()) {
+                    var rect = chordInfoDiv.node().getBoundingClientRect();
+                    var mouseX = d3.event.clientX;
+                    var mouseY = d3.event.clientY;
+                    if (
+                        mouseX >= rect.left - 40 &&
+                        mouseX <= rect.right + 40 &&
+                        mouseY >= rect.top - 40 &&
+                        mouseY <= rect.bottom + 40
+                    ) {
+                        isHoveringTooltip = true;
+                    }
+                }
+                if (!isHoveringTooltip) {
+                    chordInfoDiv.style('display', 'none');
+                    $('#chord').css('cursor', 'default');
+                }
+
             } else {
                 var hoverEvent = d3.event;
                 var topPos = hoverEvent.pageY - 60;

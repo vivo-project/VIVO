@@ -17,9 +17,14 @@
         <!-- Contact Info -->
         <div id="individual-tools-people">
             <span id="iconControlsLeftSide">
-                <img id="uriIcon" title="${individual.uri}" src="${urls.images}/individual/uriIcon.gif" alt="${i18n().uri_icon}"/>
+                <button id="uriIcon" class="nostyle" aria-label="${i18n().qr_icon_label}">
+                    <img title="${individual.uri}" src="${urls.images}/individual/uriIcon.gif" alt="${i18n().uri_icon}" aria-hidden="true"/>
+                </button>
   				<#if checkNamesResult?has_content >
-					<img id="qrIcon"  src="${urls.images}/individual/qr_icon.png" alt="${i18n().qr_icon}" />
+					
+                    <button id="qrIcon" class="nostyle" aria-label="${i18n().uri_icon_label}">
+					    <img src="${urls.images}/individual/qr_icon.png" alt="${i18n().qr_icon}" aria-hidden="true" />
+                    </button
                 	<span id="qrCodeImage" class="hidden">${qrCodeLinkedImage!}
 						<a class="qrCloseLink" href="#"  title="${i18n().qr_code}">${i18n().close_capitalized}</a>
 					</span>
