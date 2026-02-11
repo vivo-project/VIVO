@@ -53,3 +53,28 @@ input {
     margin: 0 0 20px 0;
     font-weight: 600;
 }
+
+.tab-header {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 8px 14px;
+    border: 1px solid #ccc;
+    background: #f3f3f3;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.tab-btn.active {
+    background: #2c7be5;
+    color: white;
+    border-color: #2c7be5;
+}
+
+.tab-panel {
+    display: none;
+}
