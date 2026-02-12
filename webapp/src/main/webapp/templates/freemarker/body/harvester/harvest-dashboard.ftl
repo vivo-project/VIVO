@@ -91,12 +91,32 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
 
                     </#list>
 
+                    <div class="form-row">
+                        <label>${i18n().recurrence_type}</label>
+                        <select name="recurrenceType" class="recurrence-select">
+                            <#list ["ONCE","DAILY","WEEKLY","MONTHLY","QUARTERLY"] as rec>
+                                <option value="${rec}"
+                                    <#if rec == "ONCE">selected</#if>>
+                                    ${i18n()[rec]}
+                                </option>
+                            </#list>
+                        </select>
+                    </div>
+
+                    <div class="form-row scheduled-name-row" style="display:none;">
+                        <label>${i18n().scheduled_task_name} *</label>
+                        <input type="text"
+                               name="scheduledTaskName"
+                               class="scheduled-name-input">
+                    </div>
+
                     <button type="submit"
-                            class="run-btn"
-                            data-module="${module.name}">
+                        class="run-btn"
+                        data-module="${module.name}">
                         <span class="btn-text">${i18n().run_workflow}</span>
                         <span class="spinner" style="display:none;">${i18n().workflow_in_progress} ⏳</span>
                     </button>
+
                     <button
                         type="button"
                         class="stop-btn"
@@ -121,6 +141,61 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
                         ${i18n().download_workflow_logs}
                     </a>
                 </form>
+
+                <#if module.scheduledTasks?? && module.scheduledTasks?size gt 0>
+                    <h3>${i18n().scheduled_tasks}</h3>
+
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>${i18n().task_name}</th>
+                                <th>${i18n().recurrence_type}</th>
+                                <th>Next runtime at</th>
+                                <th>${i18n().actions}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <#list module.scheduledTasks?keys as taskName>
+                                <tr>
+                                    <td>${taskName}</td>
+                                    <td>${i18n()[module.scheduledTasks[taskName].recurrenceType]}</td>
+                                    <td>${module.scheduledTasks[taskName].nextRuntimeDate}</td>
+                                    <td>
+                                        <button
+                                            type="button"
+                                            class="delete-schedule-btn"
+                                            data-module="${module.name}"
+                                            data-task="${taskName}">
+                                            ${i18n().delete}
+                                        </button>
+                                    </td>
+                                </tr>
+                            </#list>
+                        </tbody>
+                    </table>
+                </#if>
+
+                <#if module.logFiles?? && module.logFiles?size gt 0>
+                    <h3>${i18n().available_logs}</h3>
+
+                    <ul class="log-list">
+                        <#list module.logFiles as log>
+                            <li>
+                                <a href="${contextPath}/downloadWorkflowLog?module=${module.name}&file=${log}">
+                                    ${log}
+                                </a>
+
+                                <button
+                                    type="button"
+                                    class="delete-log-btn"
+                                    data-module="${module.name}"
+                                    data-file="${log}">
+                                    ${i18n().delete}
+                                </button>
+                            </li>
+                        </#list>
+                    </ul>
+                </#if>
             </div>
         </div>
     </#list>
@@ -135,11 +210,21 @@ document.querySelectorAll(".run-btn").forEach(btn => {
     stopBtn.style.display = "none";
 
     form.addEventListener("submit", (e) => {
-        e.preventDefault();
+        if (!e.submitter || !e.submitter.classList.contains("run-btn")) {
+            e.preventDefault();
+            return;
+        }
 
         const form = e.target;
         const formData = new FormData(form);
 
+        const recurrenceSelect = form.querySelector(".recurrence-select");
+
+        if (recurrenceSelect.value !== "ONCE") {
+            return;
+        }
+
+        e.preventDefault();
         btn.disabled = true;
         btn.querySelector(".btn-text").style.display = "none";
         btn.querySelector(".spinner").style.display = "inline";
@@ -244,5 +329,56 @@ tabButtons.forEach(btn => {
 if (tabButtons.length > 0) {
     activateTab(tabButtons[0].dataset.tab);
 }
+
+document.querySelectorAll(".recurrence-select").forEach(select => {
+    const form = select.closest("form");
+    const row = form.querySelector(".scheduled-name-row");
+    const input = form.querySelector(".scheduled-name-input");
+
+    function update() {
+        if (select.value !== "ONCE") {
+            row.style.display = "block";
+            input.required = true;
+        } else {
+            row.style.display = "none";
+            input.required = false;
+            input.value = "";
+        }
+    }
+
+    select.addEventListener("change", update);
+    update();
+});
+
+document.querySelectorAll(".delete-schedule-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        fetch(
+            "${contextPath}/scheduledWorkflow?module=" +
+            encodeURIComponent(btn.dataset.module) +
+            "&taskToDelete=" +
+            encodeURIComponent(btn.dataset.task),
+            {
+                method: "DELETE"
+            }
+        ).then(() => window.location.replace(window.location.pathname));
+    });
+});
+
+document.querySelectorAll(".delete-log-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+
+        fetch(
+            "${contextPath}/downloadWorkflowLog?module=" +
+            btn.dataset.module +
+            "&file=" +
+            btn.dataset.file,
+            { method:"DELETE" }
+        )
+        .then(() => location.reload());
+    });
+});
 
 </script>

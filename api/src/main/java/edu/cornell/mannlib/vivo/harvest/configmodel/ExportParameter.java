@@ -30,7 +30,13 @@ public class ExportParameter {
     private boolean required;
 
     private List<ExportParameter> subfields;
+
     private List<String> options;
+
+    private boolean startDateAttribute;
+
+    private boolean endDateAttribute;
+
 
     public String getGroupSep() {
         return groupSep;
@@ -126,6 +132,22 @@ public class ExportParameter {
 
     public void setOptions(List<String> options) {
         this.options = options;
+    }
+
+    public boolean isStartDateAttribute() {
+        return startDateAttribute;
+    }
+
+    public void setStartDateAttribute(boolean startDateAttribute) {
+        this.startDateAttribute = startDateAttribute;
+    }
+
+    public boolean isEndDateAttribute() {
+        return endDateAttribute;
+    }
+
+    public void setEndDateAttribute(boolean endDateAttribute) {
+        this.endDateAttribute = endDateAttribute;
     }
 }
 

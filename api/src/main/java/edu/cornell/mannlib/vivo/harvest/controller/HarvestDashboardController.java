@@ -25,6 +25,8 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServ
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vivo.harvest.HarvestJobExecutor;
+import edu.cornell.mannlib.vivo.harvest.InternalScheduleOperations;
+import edu.cornell.mannlib.vivo.harvest.RecurrenceType;
 import edu.cornell.mannlib.vivo.harvest.RoleCheckUtility;
 import edu.cornell.mannlib.vivo.harvest.configmodel.ExportParameter;
 import edu.cornell.mannlib.vivo.harvest.contextmodel.HarvestContext;
@@ -70,6 +72,19 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
         HarvestContext.modules.stream()
             .filter(module -> module.getName().equals(moduleName)).findFirst()
             .ifPresent(module -> {
+                boolean isScheduledTask;
+
+                String recurrence = vreq.getParameter("recurrenceType");
+                if (module.isSchedulable()) {
+                    if (recurrence == null || recurrence.trim().isEmpty()) {
+                        return;
+                    }
+
+                    isScheduledTask = !(RecurrenceType.ONCE.name()).equals(recurrence);
+                } else {
+                    isScheduledTask = false;
+                }
+
                 Path modulePath = Paths.get(ConfigurationProperties.getInstance().getProperty("harvester.directory"),
                     module.getPath()).normalize();
 
@@ -99,7 +114,7 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
                             value = tmpPath.toString();
                         }
                     } else {
-                        value = vreq.getParameter(parameter.getSymbol());
+                        value = getParameterValue(parameter, isScheduledTask, vreq);
                     }
 
                     if (value != null && !value.trim().isEmpty()) {
@@ -120,13 +135,12 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
                             List<String> queryParts = new ArrayList<>();
 
                             for (Map.Entry<String, List<ExportParameter>> entry : grouped.entrySet()) {
-
                                 String group = entry.getKey();
                                 List<ExportParameter> fields = entry.getValue();
 
                                 if (group.isEmpty()) {
                                     for (ExportParameter sf : fields) {
-                                        String val = vreq.getParameter(sf.getSymbol());
+                                        String val = getParameterValue(sf, isScheduledTask, vreq);
                                         if (val != null && !val.trim().isEmpty()) {
                                             queryParts.add(sf.getSymbol() + "=" + val.trim());
                                         }
@@ -135,7 +149,7 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
                                 } else {
                                     List<String> groupItems = fields.stream()
                                         .map(sf -> {
-                                            String val = vreq.getParameter(sf.getSymbol());
+                                            String val = getParameterValue(sf, isScheduledTask, vreq);
                                             if (val == null || val.trim().isEmpty()) {
                                                 return null;
                                             }
@@ -167,10 +181,32 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
 
                 WorkflowOutputLogController.resetLogPosition(moduleName);
 
-                HarvestJobExecutor.runAsync(module.getName(), command, modulePath);
+                if (isScheduledTask) {
+                    InternalScheduleOperations.saveScheduledTask(
+                        module,
+                        vreq.getParameter("scheduledTaskName"),
+                        RecurrenceType.valueOf(recurrence),
+                        String.join("§", command));
+                } else {
+                    HarvestJobExecutor.runAsync(module.getName(), command, modulePath);
+                }
             });
 
-
+        dataContext.put("modules", HarvestContext.modules);
         return new TemplateResponseValues(TEMPLATE_NAME, dataContext);
+    }
+
+    private String getParameterValue(ExportParameter parameter, boolean isScheduledTask, VitroRequest vreq) {
+        if (!isScheduledTask) {
+            return vreq.getParameter(parameter.getSymbol());
+        }
+
+        if (parameter.isStartDateAttribute()) {
+            return InternalScheduleOperations.START_DATE_PLACEHOLDER;
+        } else if (parameter.isEndDateAttribute()) {
+            return InternalScheduleOperations.END_DATE_PLACEHOLDER;
+        }
+
+        return vreq.getParameter(parameter.getSymbol());
     }
 }

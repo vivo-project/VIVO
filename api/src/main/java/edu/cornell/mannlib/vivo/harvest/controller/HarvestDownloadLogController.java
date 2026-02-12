@@ -16,6 +16,7 @@ import edu.cornell.mannlib.vivo.harvest.RoleCheckUtility;
 @WebServlet("/downloadWorkflowLog")
 public class HarvestDownloadLogController extends HttpServlet {
 
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         UserAccount acc = LoginStatusBean.getCurrentUser(req);
         if (acc == null || !RoleCheckUtility.isAdmin(acc)) {
@@ -24,8 +25,12 @@ public class HarvestDownloadLogController extends HttpServlet {
         }
 
         String module = req.getParameter("module");
+        if (module == null || module.trim().isEmpty()) {
+            resp.sendError(400, "Module parameter is required");
+            return;
+        }
 
-        File file = new File("/tmp/harvest-" + module + ".log");
+        File file = new File("/tmp/harvest-" + sanitizeModuleName(module) + ".log");
 
         if (!file.exists()) {
             resp.sendError(404);
@@ -39,5 +44,37 @@ public class HarvestDownloadLogController extends HttpServlet {
                 file.getName() + "\"");
 
         Files.copy(file.toPath(), resp.getOutputStream());
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        UserAccount acc = LoginStatusBean.getCurrentUser(req);
+        if (acc == null || !RoleCheckUtility.isAdmin(acc)) {
+            resp.sendError(401);
+            return;
+        }
+
+        String module = req.getParameter("module");
+        if (module == null || module.trim().isEmpty()) {
+            resp.sendError(400, "Module parameter is required");
+            return;
+        }
+
+        File file = new File("/tmp/harvest-" + sanitizeModuleName(module) + ".log");
+
+        if (!file.exists()) {
+            resp.sendError(404);
+            return;
+        }
+
+        if (file.delete()) {
+            resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+        } else {
+            resp.sendError(500, "Failed to delete file");
+        }
+    }
+
+    private String sanitizeModuleName(String moduleName) {
+        return moduleName.replaceAll("[^a-zA-Z0-9_-]", "");
     }
 }
