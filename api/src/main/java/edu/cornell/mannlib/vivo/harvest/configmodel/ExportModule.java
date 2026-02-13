@@ -8,13 +8,23 @@ import java.util.Map;
 public class ExportModule {
 
     private final Map<String, ScheduledTaskMetadata> scheduledTasks = new HashMap<>();
+
     private final List<String> logFiles = new ArrayList<>();
+
     private String name;
+
     private String description;
+
     private String path;
+
     private boolean running = false;
+
     private List<ExportParameter> parameters;
+
     private boolean schedulable = false;
+
+    private boolean manualRunLogExists = false;
+
 
     public String getName() {
         return name;
@@ -70,5 +80,13 @@ public class ExportModule {
 
     public List<String> getLogFiles() {
         return logFiles;
+    }
+
+    public boolean isManualRunLogExists() {
+        return manualRunLogExists;
+    }
+
+    public void setManualRunLogExists(boolean manualRunLogExists) {
+        this.manualRunLogExists = manualRunLogExists;
     }
 }

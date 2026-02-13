@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import edu.cornell.mannlib.vedit.beans.LoginStatusBean;
 import edu.cornell.mannlib.vitro.webapp.beans.UserAccount;
 import edu.cornell.mannlib.vivo.harvest.HarvestJobRegistry;
+import edu.cornell.mannlib.vivo.harvest.InternalScheduleOperations;
 import edu.cornell.mannlib.vivo.harvest.RoleCheckUtility;
 
 @WebServlet("/stopWorkflow")
@@ -24,7 +25,7 @@ public class WorkflowStopController extends HttpServlet {
 
         String module = req.getParameter("module");
 
-        HarvestJobRegistry.stopJob(module);
+        HarvestJobRegistry.stopJob(InternalScheduleOperations.sanitizeModuleName(module));
 
         resp.setContentType("application/json");
         resp.getWriter().write("{\"stopped\":true}");

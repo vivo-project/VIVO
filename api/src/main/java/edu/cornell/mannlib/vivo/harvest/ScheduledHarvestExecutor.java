@@ -1,5 +1,7 @@
 package edu.cornell.mannlib.vivo.harvest;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -11,9 +13,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ContextModelAccess;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelNames;
+import edu.cornell.mannlib.vivo.harvest.configmodel.ScheduledTaskMetadata;
+import edu.cornell.mannlib.vivo.harvest.contextmodel.HarvestContext;
 import edu.cornell.mannlib.vivo.scheduler.Scheduled;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.Property;
@@ -27,11 +32,34 @@ public class ScheduledHarvestExecutor {
 
     private final DateTimeFormatter dateFilterPattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+
     @Scheduled(cron = "${workflow.scheduler.scan}")
     public void runScheduledWorkflowsForToday() {
         getScheduledWorkflows().forEach((scheduledTaskUri, commandString) -> {
-            List<String> commandToRun = Arrays.stream(commandString.split("§")).collect(Collectors.toList());
-            InternalScheduleOperations.removeScheduledTask(scheduledTaskUri);
+            List<String> commandToRun =
+                Arrays.stream(commandString.split("§")).collect(Collectors.toList());
+
+            HarvestContext.modules.stream()
+                .filter(module -> module.getScheduledTasks().containsKey(scheduledTaskUri))
+                .findFirst().ifPresentOrElse(module -> {
+                    InternalScheduleOperations.removeScheduledTask(scheduledTaskUri);
+                    ScheduledTaskMetadata taskMetadata = module.getScheduledTasks().get(scheduledTaskUri);
+
+                    Path modulePath =
+                        Paths.get(ConfigurationProperties.getInstance().getProperty("harvester.directory"),
+                            module.getPath()).normalize();
+
+                    HarvestJobExecutor.runAsync(
+                        InternalScheduleOperations.sanitizeModuleName(module.getName()),
+                        commandToRun, modulePath, taskMetadata.getTaskName()
+                    );
+
+                    InternalScheduleOperations.saveScheduledTask(
+                        module,
+                        taskMetadata.getTaskName(),
+                        RecurrenceType.valueOf(taskMetadata.getRecurrenceType()),
+                        commandString);
+                }, () -> InternalScheduleOperations.removeScheduledTask(scheduledTaskUri));
         });
     }
 

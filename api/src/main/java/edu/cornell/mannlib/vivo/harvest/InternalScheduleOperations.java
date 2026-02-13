@@ -48,7 +48,7 @@ public class InternalScheduleOperations {
         OntModel ontologyModel = getOntModel();
         Resource scheduledTaskResource =
             ResourceFactory.createResource(
-                SCHEDULED_TASK_URI + taskName.toLowerCase().replace(" ", "_")
+                SCHEDULED_TASK_URI + taskName.toLowerCase().replaceAll("\\s", "_")
             );
 
         long taskCreationTime = Instant.now().getEpochSecond();
@@ -105,8 +105,9 @@ public class InternalScheduleOperations {
         }
 
         exportModule.getScheduledTasks()
-            .put(taskName, new ScheduledTaskMetadata(taskName, scheduledTaskResource.getURI(), recurrenceType.name(),
-                nextRuntimeDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+            .put(scheduledTaskResource.getURI(),
+                new ScheduledTaskMetadata(taskName, scheduledTaskResource.getURI(), recurrenceType.name(),
+                    nextRuntimeDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
     }
 
     public static void removeScheduledTask(String scheduledTaskUri) {
@@ -241,5 +242,9 @@ public class InternalScheduleOperations {
         ontologyModel.add(
             statement
         );
+    }
+
+    public static String sanitizeModuleName(String moduleName) {
+        return moduleName.replaceAll("[^a-zA-Z0-9_-]", "");
     }
 }

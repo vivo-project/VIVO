@@ -86,4 +86,8 @@ public class HarvestJobRegistry {
 
         finishJob(module);
     }
+
+    public static void stopAllJobs() {
+        jobs.keySet().forEach(HarvestJobRegistry::stopJob);
+    }
 }

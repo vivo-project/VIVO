@@ -1,5 +1,6 @@
 package edu.cornell.mannlib.vivo.harvest.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -7,11 +8,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.servlet.annotation.WebServlet;
@@ -29,6 +32,7 @@ import edu.cornell.mannlib.vivo.harvest.InternalScheduleOperations;
 import edu.cornell.mannlib.vivo.harvest.RecurrenceType;
 import edu.cornell.mannlib.vivo.harvest.RoleCheckUtility;
 import edu.cornell.mannlib.vivo.harvest.configmodel.ExportParameter;
+import edu.cornell.mannlib.vivo.harvest.configmodel.ScheduledTaskMetadata;
 import edu.cornell.mannlib.vivo.harvest.contextmodel.HarvestContext;
 import org.apache.commons.fileupload.FileItem;
 
@@ -58,6 +62,44 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
 
     private void setCommonValues(Map<String, Object> dataContext, VitroRequest vreq) {
         dataContext.put("contextPath", ContextPath.getPath(vreq));
+
+        File tmpDir = new File("/tmp");
+
+        HarvestContext.modules.forEach(module -> {
+            Map<String, ScheduledTaskMetadata> tasks =
+                InternalScheduleOperations
+                    .getScheduledTasksForModule(module.getName())
+                    .stream()
+                    .collect(Collectors.toMap(
+                        ScheduledTaskMetadata::getTaskUri,
+                        Function.identity(),
+                        (a, b) -> b
+                        // safety in case of duplicate task names, should never happen
+                    ));
+
+            module.getScheduledTasks().clear();
+            module.getScheduledTasks().putAll(tasks);
+
+            String safeModuleName = InternalScheduleOperations.sanitizeModuleName(module.getName());
+            String prefix = "harvest-" + safeModuleName + "-";
+            String exactFile = "harvest-" + safeModuleName + ".log";
+
+            File[] matchingScheduledFiles = tmpDir.listFiles((dir, name) -> name.startsWith(prefix));
+            File[] matchingManualRunFiles = tmpDir.listFiles((dir, name) -> name.equals(exactFile));
+
+            if (matchingScheduledFiles != null && matchingScheduledFiles.length > 0) {
+                module.getLogFiles().clear();
+                module.getLogFiles().addAll(Arrays.stream(matchingScheduledFiles)
+                    .map(File::getName)
+                    .collect(Collectors.toList())
+                );
+            }
+
+            if (matchingManualRunFiles != null && matchingManualRunFiles.length > 0) {
+                module.setManualRunLogExists(true);
+            }
+        });
+
         dataContext.put("modules", HarvestContext.modules);
     }
 
@@ -188,7 +230,10 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
                         RecurrenceType.valueOf(recurrence),
                         String.join("§", command));
                 } else {
-                    HarvestJobExecutor.runAsync(module.getName(), command, modulePath);
+                    HarvestJobExecutor.runAsync(
+                        InternalScheduleOperations.sanitizeModuleName(module.getName()),
+                        command, modulePath, null
+                    );
                 }
             });
 

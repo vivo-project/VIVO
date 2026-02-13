@@ -78,3 +78,112 @@ input {
 .tab-panel {
     display: none;
 }
+
+/* ---------- Tables ---------- */
+
+.table-label {
+    margin-top: 50px;
+}
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 14px;
+    background: #ffffff;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.schedule-table th,
+.schedule-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.schedule-table thead {
+    background: #f0f4f8;
+}
+
+.schedule-table th {
+    font-weight: 600;
+    color: #064d68;
+}
+
+.schedule-table tbody tr:hover {
+    background: #f7fbff;
+}
+
+/* ---------- Log List ---------- */
+
+.log-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 10px;
+}
+
+.log-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    border: 1px solid #e0e0e0;
+    background: #ffffff;
+    border-radius: 6px;
+}
+
+.log-list a {
+    text-decoration: none;
+    color: #2c7be5;
+    font-weight: 500;
+}
+
+.log-list a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- Buttons ---------- */
+
+.delete-schedule-btn,
+.delete-log-btn {
+    border: none;
+    background: #fbeaea;
+    color: #c0392b;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.delete-schedule-btn:hover,
+.delete-log-btn:hover {
+    background: #f5c6cb;
+}
+
+.run-btn,
+.stop-btn {
+    padding: 7px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.run-btn {
+    background: #2c7be5;
+    color: white;
+}
+
+.run-btn:hover {
+    background: #1a68d1;
+}
+
+.stop-btn {
+    background: #e55353;
+    color: white;
+}
+
+.stop-btn:hover {
+    background: #c0392b;
+}

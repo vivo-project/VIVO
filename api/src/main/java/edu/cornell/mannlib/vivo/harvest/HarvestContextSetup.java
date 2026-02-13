@@ -7,9 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -21,7 +18,6 @@ import edu.cornell.mannlib.vitro.webapp.dao.jena.BlankNodeFilteringModelMaker;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vivo.harvest.configmodel.ExportConfig;
-import edu.cornell.mannlib.vivo.harvest.configmodel.ScheduledTaskMetadata;
 import edu.cornell.mannlib.vivo.harvest.contextmodel.HarvestContext;
 import edu.cornell.mannlib.vivo.scheduler.SchedulerManager;
 import org.apache.commons.logging.Log;
@@ -63,19 +59,6 @@ public class HarvestContextSetup implements ServletContextListener {
                 module.getParameters().stream()
                     .filter(param -> "graph".equals(param.getType()))
                     .forEach(param -> param.setOptions(models));
-
-                Map<String, ScheduledTaskMetadata> tasks =
-                    InternalScheduleOperations
-                        .getScheduledTasksForModule(module.getName())
-                        .stream()
-                        .collect(Collectors.toMap(
-                            ScheduledTaskMetadata::getTaskName,
-                            Function.identity(),
-                            (a, b) -> b
-                            // safety in case of duplicate task names, should never happen
-                        ));
-
-                module.getScheduledTasks().putAll(tasks);
             });
         } catch (Exception e) {
             throw new RuntimeException("Failed to load export modules config", e);
@@ -85,5 +68,6 @@ public class HarvestContextSetup implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
         HarvestContext.modules.clear();
+        HarvestJobExecutor.shutdown();
     }
 }

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.cornell.mannlib.vedit.beans.LoginStatusBean;
 import edu.cornell.mannlib.vitro.webapp.beans.UserAccount;
+import edu.cornell.mannlib.vivo.harvest.InternalScheduleOperations;
 import edu.cornell.mannlib.vivo.harvest.RoleCheckUtility;
 
 @WebServlet("/workflowOutputLog")
@@ -37,7 +38,8 @@ public class WorkflowOutputLogController extends HttpServlet {
         }
 
         String moduleName = req.getParameter("module");
-        File logFile = new File("/tmp/harvest-" + moduleName + ".log");
+        File logFile = new File(
+            "/tmp/harvest-" + InternalScheduleOperations.sanitizeModuleName(moduleName) + ".log");
 
         StringBuilder newContent = new StringBuilder();
         long currentPosition = 0;

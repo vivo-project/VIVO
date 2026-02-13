@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.cornell.mannlib.vedit.beans.LoginStatusBean;
 import edu.cornell.mannlib.vitro.webapp.beans.UserAccount;
+import edu.cornell.mannlib.vivo.harvest.InternalScheduleOperations;
 import edu.cornell.mannlib.vivo.harvest.RoleCheckUtility;
+import edu.cornell.mannlib.vivo.harvest.contextmodel.HarvestContext;
 
 @WebServlet("/downloadWorkflowLog")
 public class HarvestDownloadLogController extends HttpServlet {
@@ -30,7 +32,7 @@ public class HarvestDownloadLogController extends HttpServlet {
             return;
         }
 
-        File file = new File("/tmp/harvest-" + sanitizeModuleName(module) + ".log");
+        File file = new File("/tmp/harvest-" + InternalScheduleOperations.sanitizeModuleName(module) + ".log");
 
         if (!file.exists()) {
             resp.sendError(404);
@@ -54,13 +56,14 @@ public class HarvestDownloadLogController extends HttpServlet {
             return;
         }
 
-        String module = req.getParameter("module");
-        if (module == null || module.trim().isEmpty()) {
+        String moduleName = req.getParameter("module");
+        if (moduleName == null || moduleName.trim().isEmpty()) {
             resp.sendError(400, "Module parameter is required");
             return;
         }
 
-        File file = new File("/tmp/harvest-" + sanitizeModuleName(module) + ".log");
+        String fileName = req.getParameter("file");
+        File file = new File("/tmp/" + fileName);
 
         if (!file.exists()) {
             resp.sendError(404);
@@ -68,13 +71,13 @@ public class HarvestDownloadLogController extends HttpServlet {
         }
 
         if (file.delete()) {
+            HarvestContext.modules.stream()
+                .filter(module -> module.getName().equals(moduleName)).findFirst()
+                .ifPresent(module -> module.getLogFiles().remove(fileName));
+
             resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
         } else {
             resp.sendError(500, "Failed to delete file");
         }
-    }
-
-    private String sanitizeModuleName(String moduleName) {
-        return moduleName.replaceAll("[^a-zA-Z0-9_-]", "");
     }
 }

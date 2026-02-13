@@ -21,22 +21,20 @@ public class ScheduledTaskController extends HttpServlet {
         VitroRequest vreq = new VitroRequest(req);
 
         String moduleName = vreq.getParameter("module");
-        String task = vreq.getParameter("taskToDelete");
+        String taskUri = vreq.getParameter("taskToDelete");
 
-        if (moduleName != null && task != null) {
+        if (moduleName != null && !moduleName.trim().isEmpty() && taskUri != null && !taskUri.trim().isEmpty()) {
             HarvestContext.modules.stream()
                 .filter(module ->
                     module.getName().equals(moduleName))
                 .findFirst()
                 .ifPresent(module -> {
-
-                    ScheduledTaskMetadata scheduledTask = module.getScheduledTasks().get(task);
+                    ScheduledTaskMetadata scheduledTask = module.getScheduledTasks().get(taskUri);
 
                     if (scheduledTask != null) {
                         InternalScheduleOperations.removeScheduledTask(scheduledTask.getTaskUri());
 
-                        module.getScheduledTasks()
-                            .remove(task);
+                        module.getScheduledTasks().remove(taskUri);
                     }
                 });
         }

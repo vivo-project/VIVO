@@ -136,14 +136,14 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
                         href="${contextPath}/downloadWorkflowLog?module=${module.name}"
                         style="
                             margin-top:10px;
-                            display:<#if module.tmpExists?? && module.tmpExists>inline-block<#else>none</#if>;
+                            display:<#if module.manualRunLogExists?? && module.manualRunLogExists>inline-block<#else>none</#if>;
                         ">
                         ${i18n().download_workflow_logs}
                     </a>
                 </form>
 
                 <#if module.scheduledTasks?? && module.scheduledTasks?size gt 0>
-                    <h3>${i18n().scheduled_tasks}</h3>
+                    <h3 class="table-label">${i18n().scheduled_tasks}</h3>
 
                     <table class="schedule-table">
                         <thead>
@@ -155,17 +155,17 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
                             </tr>
                         </thead>
                         <tbody>
-                            <#list module.scheduledTasks?keys as taskName>
+                            <#list module.scheduledTasks?keys as taskUri>
                                 <tr>
-                                    <td>${taskName}</td>
-                                    <td>${i18n()[module.scheduledTasks[taskName].recurrenceType]}</td>
-                                    <td>${module.scheduledTasks[taskName].nextRuntimeDate}</td>
+                                    <td>${module.scheduledTasks[taskUri].taskName}</td>
+                                    <td>${i18n()[module.scheduledTasks[taskUri].recurrenceType]}</td>
+                                    <td>${module.scheduledTasks[taskUri].nextRuntimeDate}</td>
                                     <td>
                                         <button
                                             type="button"
                                             class="delete-schedule-btn"
                                             data-module="${module.name}"
-                                            data-task="${taskName}">
+                                            data-task="${taskUri}">
                                             ${i18n().delete}
                                         </button>
                                     </td>
@@ -176,7 +176,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
                 </#if>
 
                 <#if module.logFiles?? && module.logFiles?size gt 0>
-                    <h3>${i18n().available_logs}</h3>
+                    <h3 class="table-label">${i18n().available_logs}</h3>
 
                     <ul class="log-list">
                         <#list module.logFiles as log>
@@ -210,11 +210,6 @@ document.querySelectorAll(".run-btn").forEach(btn => {
     stopBtn.style.display = "none";
 
     form.addEventListener("submit", (e) => {
-        if (!e.submitter || !e.submitter.classList.contains("run-btn")) {
-            e.preventDefault();
-            return;
-        }
-
         const form = e.target;
         const formData = new FormData(form);
 
@@ -334,15 +329,18 @@ document.querySelectorAll(".recurrence-select").forEach(select => {
     const form = select.closest("form");
     const row = form.querySelector(".scheduled-name-row");
     const input = form.querySelector(".scheduled-name-input");
+    const runBtnText = form.querySelector(".run-btn").querySelector(".btn-text");
 
     function update() {
         if (select.value !== "ONCE") {
             row.style.display = "block";
             input.required = true;
+            runBtnText.textContent = "${i18n().schedule_workflow?js_string}";
         } else {
             row.style.display = "none";
             input.required = false;
             input.value = "";
+            runBtnText.textContent = "${i18n().run_workflow?js_string}";
         }
     }
 
@@ -377,7 +375,7 @@ document.querySelectorAll(".delete-log-btn").forEach(btn => {
             btn.dataset.file,
             { method:"DELETE" }
         )
-        .then(() => location.reload());
+        .then(() => window.location.replace(window.location.pathname));
     });
 });
 
