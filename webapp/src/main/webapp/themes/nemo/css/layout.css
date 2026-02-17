@@ -50,7 +50,7 @@
 #header-entity-label {
 font-family: "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica, sans-serif;
     font-size: 1.5275em;
-    color: #2485ae;
+    color: #12739D;
     line-height: 1.3em;
     padding-top:15px;
     padding-bottom:10px;
@@ -108,7 +108,7 @@ a.clear-selected-entities {
 /* filter */
 
 .filter-option, .comparison-filter-option {
-	color: #2485AE;
+	color: #12739D;
 	cursor: pointer;
 	/*padding-right: 5px;*/
 	text-decoration: underline;
@@ -161,7 +161,7 @@ a.clear-selected-entities {
 }
 
 #reset-search, #comparison-reset-search {
-    color: #2485AE;
+    color: #12739D;
     cursor: pointer;
     margin-left: 10px;
 }
@@ -178,7 +178,7 @@ th#percentage-activity-column {
 
 .corner-triangle {
     border-left: 10px solid #F6F6F6;
-    border-top: 10px solid #2485AE;
+    border-top: 10px solid #12739D;
     float: right;
     font-size: 0;
     line-height: 0;
@@ -228,13 +228,13 @@ a.map-of-science-links {
     text-align: center;
     height: 25px;
     max-width: 260px;
-    background-color: #2485AE;
+    background-color: #12739D;
     height: 20px;
     padding: 4px 5px 3px;
 }
 
 #download-unlocated-journal-info {
-    background-color: #2485AE;
+    background-color: #12739D;
     height: 20px;
     margin-top: 10px;
     max-width: 260px;
@@ -268,7 +268,7 @@ a.map-of-science-links {
 .subpaginatedtabs span {
     padding-right: 5px; 
     cursor: pointer;
-    color: #2485AE;
+    color: #12739D;
 }
 
 .visCommonControllTooltip {
@@ -286,7 +286,7 @@ a.map-of-science-links {
 
 #noPublications-header {
     font-size: 1.375em;
-    color: #2485ae;
+    color: #12739D;
     line-height: 1.3em;
     padding-top:15px;
     padding-bottom:10px;

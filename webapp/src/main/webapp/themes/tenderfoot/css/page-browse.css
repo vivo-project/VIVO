@@ -2,7 +2,7 @@
 ul#browse-classes {
     border: 1px solid #dde4e3;
     border-right: 0;
-    background-color: #f1f2ee;
+    background-color: #F5F5F5;
 }
 ul#browse-classes li,
 ul#vgraph-classes li {
@@ -11,8 +11,8 @@ ul#vgraph-classes li {
 }
 ul#browse-classes a:hover,
 ul#browse-classes a.selected {
-    background: url(../images/arrow.gif) 4px 5px no-repeat;
-    color: #2ea0cf;
+    background: url(../images/arrow_darkened.gif) 4px 5px no-repeat;
+    color: #0C5E7F;
 }
 ul#browse-classes .count-classes {
     font-size: 12px;
@@ -26,8 +26,8 @@ ul#alpha-browse-individuals {
 }
 ul#alpha-browse-individuals a:hover,
 ul#alpha-browse-individuals a.selected {
-    background: url(../images/arrowSmall.gif) -3px 7px no-repeat;
-    color: #2ea0cf;
+    background: url(../images/arrowSmall-darkened.gif) -3px 7px no-repeat;
+    color: #0C5E7F;
 }
 ul#alpha-browse-individuals .count-classes,
 ul#vgraph-classes .count-classes {

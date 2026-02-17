@@ -27,7 +27,7 @@
 .paginatedtabs span {
     padding-right: 5px;
     cursor: pointer;
-    color: #2485AE;
+    color: #12739D;
 }
 
 .paginate-nav-text {
@@ -35,9 +35,9 @@
 }
 
 .datatablewrapper td, th {
-    border-bottom: 1px #F1F2EE solid;
-    border-right: 1px #F1F2EE solid;
-    border-left: 1px #F1F2EE solid;
+    border-bottom: 1px #F5F5F5 solid;
+    border-right: 1px #F5F5F5 solid;
+    border-left: 1px #F5F5F5 solid;
     text-align: left;
     padding: 5px;
     font-size: 12px;
@@ -59,7 +59,7 @@
 
 .datatablewrapper th {
     border-top: 1px #3D454E solid;
-    background:#F1F2ee;
+    background:#F5F5F5;
     font-weight:bold;
     font-size:12px;
     padding-bottom: 3px;
