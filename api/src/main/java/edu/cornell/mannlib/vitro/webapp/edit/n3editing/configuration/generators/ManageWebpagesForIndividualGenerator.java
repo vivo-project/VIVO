@@ -8,6 +8,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18nBundle;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.jena.query.ParameterizedSparqlString;
@@ -98,6 +100,15 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         }else{
             config.addFormSpecificData("subjectName", null);
         }
+
+        String name = (String) config.getFormSpecificData().get("subjectName");
+        I18nBundle i18n = I18n.bundle(vreq);
+        String title = i18n.text("manage_web_pages");;
+        if (name != null && !name.isEmpty()) {
+            title += " - " + name;
+        }
+        config.addNewResource("pageTitle", title);
+
         prepare(vreq, config);
         return config;
     }
