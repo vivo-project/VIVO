@@ -3,8 +3,8 @@
 package edu.cornell.mannlib.vivo.orcid.controller;
 
 import static edu.cornell.mannlib.vivo.orcid.controller.OrcidConfirmationState.Progress.START;
-import static edu.cornell.mannlib.vivo.orcid.controller.OrcidIntegrationController.PATH_AUTH_EXTERNAL_ID;
 import static edu.cornell.mannlib.vivo.orcid.controller.OrcidIntegrationController.PATH_AUTH_AUTHENTICATE;
+import static edu.cornell.mannlib.vivo.orcid.controller.OrcidIntegrationController.PATH_AUTH_EXTERNAL_ID;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,212 +18,209 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import edu.cornell.mannlib.orcidclient.model.ExternalIdentifier;
 import edu.cornell.mannlib.orcidclient.model.OrcidBio;
 import edu.cornell.mannlib.orcidclient.model.OrcidId;
 import edu.cornell.mannlib.orcidclient.model.OrcidProfile;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Keep track of where we are in the Orcid confirmation process; what has been
  * requested, and what has been returned.
  */
 class OrcidConfirmationState {
-	private static final Log log = LogFactory
-			.getLog(OrcidConfirmationState.class);
+    private static final Log log = LogFactory
+        .getLog(OrcidConfirmationState.class);
 
 
-	// ----------------------------------------------------------------------
-	// The factory
-	// ----------------------------------------------------------------------
+    // ----------------------------------------------------------------------
+    // The factory
+    // ----------------------------------------------------------------------
 
-	private static final String ATTRIBUTE_NAME = OrcidConfirmationState.class
-			.getName();
+    private static final String ATTRIBUTE_NAME = OrcidConfirmationState.class
+        .getName();
+    private static final Set<Progress> requiresMessage = EnumSet.of(
+        Progress.GOT_PROFILE, Progress.ADDED_ID);
 
-	static OrcidConfirmationState fetch(HttpServletRequest req) {
-		HttpSession session = req.getSession();
-		Object o = session.getAttribute(ATTRIBUTE_NAME);
-		if (o instanceof OrcidConfirmationState) {
-			return (OrcidConfirmationState) o;
-		} else {
-			OrcidConfirmationState ocs = new OrcidConfirmationState();
-			session.setAttribute(ATTRIBUTE_NAME, ocs);
-			return ocs;
-		}
-	}
+    // ----------------------------------------------------------------------
+    // The instance
+    // ----------------------------------------------------------------------
+    private Progress progress;
+    private String individualUri;
+    private Set<String> existingOrcids;
+    private OrcidProfile profile;
+    private String profilePageUrl;
 
-	// ----------------------------------------------------------------------
-	// The instance
-	// ----------------------------------------------------------------------
+    static OrcidConfirmationState fetch(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        Object o = session.getAttribute(ATTRIBUTE_NAME);
+        if (o instanceof OrcidConfirmationState) {
+            return (OrcidConfirmationState) o;
+        } else {
+            OrcidConfirmationState ocs = new OrcidConfirmationState();
+            session.setAttribute(ATTRIBUTE_NAME, ocs);
+            return ocs;
+        }
+    }
 
-	public enum Progress {
-		START, DENIED_AUTHENTICATE, FAILED_AUTHENTICATE, GOT_PROFILE, ID_ALREADY_PRESENT, DENIED_ID, FAILED_ID, ADDED_ID
-	}
+    public void reset(String uri, String profileUrl) {
+        progress = START;
+        individualUri = uri;
+        existingOrcids = Collections.emptySet();
+        profile = null;
+        profilePageUrl = profileUrl;
+    }
 
-	private static final Set<Progress> requiresMessage = EnumSet.of(
-			Progress.GOT_PROFILE, Progress.ADDED_ID);
+    public void setExistingOrcids(Set<String> existing) {
+        existingOrcids = new HashSet<>(existing);
+    }
 
-	private Progress progress;
-	private String individualUri;
-	private Set<String> existingOrcids;
-	private OrcidProfile profile;
-	private String profilePageUrl;
+    public void progress(Progress p, OrcidProfile... profiles) {
+        progress = p;
 
-	public void reset(String uri, String profileUrl) {
-		progress = START;
-		individualUri = uri;
-		existingOrcids = Collections.emptySet();
-		profile = null;
-		profilePageUrl = profileUrl;
-	}
+        if (requiresMessage.contains(p)) {
+            if (profiles.length != 1) {
+                throw new IllegalStateException("Progress to " + p
+                    + " requires an OrcidMessage");
+            }
+            profile = profiles[0];
+        } else {
+            if (profiles.length != 0) {
+                throw new IllegalStateException("Progress to " + p
+                    + " does not accept an OrcidMessage");
+            }
+        }
+    }
 
-	public void setExistingOrcids(Set<String> existing) {
-		existingOrcids = new HashSet<>(existing);
-	}
+    public String getProgress() {
+        return progress.toString();
+    }
 
-	public void progress(Progress p, OrcidProfile... profiles) {
-		progress = p;
+    // ----------------------------------------------------------------------
+    // Convenience methods for extracting information from the profile.
+    // ----------------------------------------------------------------------
 
-		if (requiresMessage.contains(p)) {
-			if (profiles.length != 1) {
-				throw new IllegalStateException("Progress to " + p
-						+ " requires an OrcidMessage");
-			}
-			profile = profiles[0];
-		} else {
-			if (profiles.length != 0) {
-				throw new IllegalStateException("Progress to " + p
-						+ " does not accept an OrcidMessage");
-			}
-		}
-	}
+    public String getProgressUrl() {
+        switch (progress) {
+            case START:
+                return UrlBuilder.getUrl(PATH_AUTH_AUTHENTICATE);
+            case GOT_PROFILE:
+                return UrlBuilder.getUrl(PATH_AUTH_EXTERNAL_ID);
+            default:
+                return null;
+        }
+    }
 
-	// ----------------------------------------------------------------------
-	// Convenience methods for extracting information from the profile.
-	// ----------------------------------------------------------------------
+    public String getIndividualUri() {
+        return individualUri;
+    }
 
-	public String getProgress() {
-		return progress.toString();
-	}
+    public String getProfilePageUrl() {
+        return profilePageUrl;
+    }
 
-	public String getProgressUrl() {
-		switch (progress) {
-		case START:
-			return UrlBuilder.getUrl(PATH_AUTH_AUTHENTICATE);
-		case GOT_PROFILE:
-			return UrlBuilder.getUrl(PATH_AUTH_EXTERNAL_ID);
-		default:
-			return null;
-		}
-	}
+    public String getOrcid() {
+        return getElementFromOrcidIdentifier("path");
 
-	public String getIndividualUri() {
-		return individualUri;
-	}
+    }
 
-	public String getProfilePageUrl() {
-		return profilePageUrl;
-	}
+    public String getOrcidUri() {
+        return getElementFromOrcidIdentifier("uri");
+    }
 
-	public String getOrcid() {
-		return getElementFromOrcidIdentifier("path");
+    public ExternalIdentifier getVivoId() {
+        for (ExternalIdentifier id : getExternalIds()) {
+            if (individualUri.equals(id.getExternalIdUrl())) {
+                return id;
+            }
+        }
+        return null;
+    }
 
-	}
+    public List<ExternalIdentifier> getExternalIds() {
+        OrcidProfile orcidProfile = getOrcidProfile();
+        if (orcidProfile == null) {
+            return Collections.emptyList();
+        }
 
-	public String getOrcidUri() {
-		return getElementFromOrcidIdentifier("uri");
-	}
+        OrcidBio bio = orcidProfile.getOrcidBio();
+        if (bio == null) {
+            return Collections.emptyList();
+        }
 
-	public ExternalIdentifier getVivoId() {
-		for (ExternalIdentifier id : getExternalIds()) {
-			if (individualUri.equals(id.getExternalIdUrl())) {
-				return id;
-			}
-		}
-		return null;
-	}
+        if (bio.getExternalIdentifiers() == null) {
+            return Collections.emptyList();
+        }
 
-	public List<ExternalIdentifier> getExternalIds() {
-		OrcidProfile orcidProfile = getOrcidProfile();
-		if (orcidProfile == null) {
-			return Collections.emptyList();
-		}
+        return bio.getExternalIdentifiers();
+    }
 
-		OrcidBio bio = orcidProfile.getOrcidBio();
-		if (bio == null) {
-			return Collections.emptyList();
-		}
+    private String getElementFromOrcidIdentifier(String elementName) {
+        OrcidProfile orcidProfile = getOrcidProfile();
+        if (orcidProfile == null) {
+            return "";
+        }
 
-		if (bio.getExternalIdentifiers() == null) {
-			return Collections.emptyList();
-		}
+        OrcidId id = orcidProfile.getOrcidIdentifier();
+        if (id == null) {
+            log.warn("There is no ORCID Identifier in the profile.");
+            return "";
+        }
 
-		return bio.getExternalIdentifiers();
-	}
+        if ("path".equalsIgnoreCase(elementName)) {
+            return id.getPath();
+        } else if ("uri".equalsIgnoreCase(elementName)) {
+            return id.getUri();
+        }
 
-	private String getElementFromOrcidIdentifier(String elementName) {
-		OrcidProfile orcidProfile = getOrcidProfile();
-		if (orcidProfile == null) {
-			return "";
-		}
+        log.warn("Didn't find the element '' in the ORCID Identifier");
+        return "";
+    }
 
-		OrcidId id = orcidProfile.getOrcidIdentifier();
-		if (id == null) {
-			log.warn("There is no ORCID Identifier in the profile.");
-			return "";
-		}
+    private OrcidProfile getOrcidProfile() {
+        if (profile == null) {
+            return null;
+        }
 
-		if ("path".equalsIgnoreCase(elementName)) {
-			return id.getPath();
-		} else if ("uri".equalsIgnoreCase(elementName)) {
-			return id.getUri();
-		}
+        return profile;
+    }
 
-		log.warn("Didn't find the element '' in the ORCID Identifier");
-		return "";
-	}
+    public Map<String, Object> toMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("progress", progress.toString());
+        map.put("individualUri", individualUri);
+        map.put("profilePage", profilePageUrl);
+        map.put("orcid", getOrcid());
+        map.put("orcidUri", getOrcidUri());
+        map.put("hasVivoId", getVivoId() == null);
+        map.put("externalIds", formatExternalIds());
+        map.put("existingOrcids", existingOrcids);
 
-	private OrcidProfile getOrcidProfile() {
-		if (profile == null) {
-			return null;
-		}
+        String progressUrl = getProgressUrl();
+        if (progressUrl == null) {
+            map.put("progressUrl", "");
+        } else {
+            map.put("progressUrl", progressUrl);
+        }
 
-		return profile;
-	}
+        return map;
+    }
 
-	public Map<String, Object> toMap() {
-		Map<String, Object> map = new HashMap<>();
-		map.put("progress", progress.toString());
-		map.put("individualUri", individualUri);
-		map.put("profilePage", profilePageUrl);
-		map.put("orcid", getOrcid());
-		map.put("orcidUri", getOrcidUri());
-		map.put("hasVivoId", getVivoId() == null);
-		map.put("externalIds", formatExternalIds());
-		map.put("existingOrcids", existingOrcids);
+    private List<Map<String, String>> formatExternalIds() {
+        List<Map<String, String>> list = new ArrayList<>();
+        for (ExternalIdentifier id : getExternalIds()) {
+            Map<String, String> map = new HashMap<>();
+            map.put("commonName", id.getExternalIdCommonName());
+            map.put("reference", id.getExternalIdReference());
+            map.put("uri", id.getExternalIdUrl());
+            list.add(map);
+        }
+        return list;
+    }
 
-		String progressUrl = getProgressUrl();
-		if (progressUrl == null) {
-			map.put("progressUrl", "");
-		} else {
-			map.put("progressUrl", progressUrl);
-		}
-
-		return map;
-	}
-
-	private List<Map<String, String>> formatExternalIds() {
-		List<Map<String, String>> list = new ArrayList<>();
-		for (ExternalIdentifier id : getExternalIds()) {
-			Map<String, String> map = new HashMap<>();
-			map.put("commonName", id.getExternalIdCommonName());
-			map.put("reference", id.getExternalIdReference());
-			map.put("uri", id.getExternalIdUrl());
-			list.add(map);
-		}
-		return list;
-	}
+    public enum Progress {
+        START, DENIED_AUTHENTICATE, FAILED_AUTHENTICATE, GOT_PROFILE, ID_ALREADY_PRESENT, DENIED_ID, FAILED_ID, ADDED_ID
+    }
 }

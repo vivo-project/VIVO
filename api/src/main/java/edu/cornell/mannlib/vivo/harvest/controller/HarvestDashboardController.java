@@ -1,6 +1,5 @@
 package edu.cornell.mannlib.vivo.harvest.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -8,13 +7,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +29,6 @@ import edu.cornell.mannlib.vivo.harvest.InternalScheduleOperations;
 import edu.cornell.mannlib.vivo.harvest.RecurrenceType;
 import edu.cornell.mannlib.vivo.harvest.RoleCheckUtility;
 import edu.cornell.mannlib.vivo.harvest.configmodel.ExportParameter;
-import edu.cornell.mannlib.vivo.harvest.configmodel.ScheduledTaskMetadata;
 import edu.cornell.mannlib.vivo.harvest.contextmodel.HarvestContext;
 import org.apache.commons.fileupload.FileItem;
 
@@ -54,6 +50,7 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
         setCommonValues(dataContext, vreq);
 
         if (vreq.getMethod().equalsIgnoreCase("GET")) {
+            dataContext.put("allScheduledTasks", InternalScheduleOperations.getAllScheduledTasks());
             return showForm(dataContext);
         }
 
@@ -63,42 +60,7 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
     private void setCommonValues(Map<String, Object> dataContext, VitroRequest vreq) {
         dataContext.put("contextPath", ContextPath.getPath(vreq));
 
-        File tmpDir = new File("/tmp");
-
-        HarvestContext.modules.forEach(module -> {
-            Map<String, ScheduledTaskMetadata> tasks =
-                InternalScheduleOperations
-                    .getScheduledTasksForModule(module.getName())
-                    .stream()
-                    .collect(Collectors.toMap(
-                        ScheduledTaskMetadata::getTaskUri,
-                        Function.identity(),
-                        (a, b) -> b
-                        // safety in case of duplicate task names, should never happen
-                    ));
-
-            module.getScheduledTasks().clear();
-            module.getScheduledTasks().putAll(tasks);
-
-            String safeModuleName = InternalScheduleOperations.sanitizeModuleName(module.getName());
-            String prefix = "harvest-" + safeModuleName + "-";
-            String exactFile = "harvest-" + safeModuleName + ".log";
-
-            File[] matchingScheduledFiles = tmpDir.listFiles((dir, name) -> name.startsWith(prefix));
-            File[] matchingManualRunFiles = tmpDir.listFiles((dir, name) -> name.equals(exactFile));
-
-            if (matchingScheduledFiles != null && matchingScheduledFiles.length > 0) {
-                module.getLogFiles().clear();
-                module.getLogFiles().addAll(Arrays.stream(matchingScheduledFiles)
-                    .map(File::getName)
-                    .collect(Collectors.toList())
-                );
-            }
-
-            if (matchingManualRunFiles != null && matchingManualRunFiles.length > 0) {
-                module.setManualRunLogExists(true);
-            }
-        });
+        InternalScheduleOperations.reloadTaskMetadataAndLogs();
 
         dataContext.put("modules", HarvestContext.modules);
     }
@@ -110,6 +72,7 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
     private ResponseValues handlePostRequest(VitroRequest vreq, Map<String, Object> dataContext) {
         Map<String, String[]> parameters = vreq.getParameterMap();
         String moduleName = parameters.get("moduleName")[0];
+        Map<String, String> taskParameters = new HashMap<>();
 
         HarvestContext.modules.stream()
             .filter(module -> module.getName().equals(moduleName)).findFirst()
@@ -157,6 +120,7 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
                         }
                     } else {
                         value = getParameterValue(parameter, isScheduledTask, vreq);
+                        taskParameters.put(parameter.getSymbol(), value);
                     }
 
                     if (value != null && !value.trim().isEmpty()) {
@@ -183,6 +147,8 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
                                 if (group.isEmpty()) {
                                     for (ExportParameter sf : fields) {
                                         String val = getParameterValue(sf, isScheduledTask, vreq);
+                                        taskParameters.put(sf.getSymbol(), val);
+
                                         if (val != null && !val.trim().isEmpty()) {
                                             queryParts.add(sf.getSymbol() + "=" + val.trim());
                                         }
@@ -192,6 +158,8 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
                                     List<String> groupItems = fields.stream()
                                         .map(sf -> {
                                             String val = getParameterValue(sf, isScheduledTask, vreq);
+                                            taskParameters.put(sf.getSymbol(), val);
+
                                             if (val == null || val.trim().isEmpty()) {
                                                 return null;
                                             }
@@ -228,7 +196,8 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
                         module,
                         vreq.getParameter("scheduledTaskName"),
                         RecurrenceType.valueOf(recurrence),
-                        String.join("§", command));
+                        String.join("§", command),
+                        taskParameters);
                 } else {
                     HarvestJobExecutor.runAsync(
                         InternalScheduleOperations.sanitizeModuleName(module.getName()),
@@ -238,6 +207,7 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
             });
 
         dataContext.put("modules", HarvestContext.modules);
+        dataContext.put("allScheduledTasks", InternalScheduleOperations.getAllScheduledTasks());
         return new TemplateResponseValues(TEMPLATE_NAME, dataContext);
     }
 

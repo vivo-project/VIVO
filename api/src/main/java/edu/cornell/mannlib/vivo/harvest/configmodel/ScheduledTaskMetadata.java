@@ -1,5 +1,7 @@
 package edu.cornell.mannlib.vivo.harvest.configmodel;
 
+import java.util.Map;
+
 public class ScheduledTaskMetadata {
 
     private String taskName;
@@ -10,12 +12,22 @@ public class ScheduledTaskMetadata {
 
     private String nextRuntimeDate;
 
+    private String moduleName;
 
-    public ScheduledTaskMetadata(String taskName, String taskUri, String recurrenceType, String nextRuntimeDate) {
+    private Map<String, String> parameters;
+
+    private String command;
+
+
+    public ScheduledTaskMetadata(String taskName, String taskUri, String recurrenceType, String nextRuntimeDate,
+                                 String moduleName, Map<String, String> parameters, String command) {
         this.taskName = taskName;
         this.taskUri = taskUri;
         this.recurrenceType = recurrenceType;
         this.nextRuntimeDate = nextRuntimeDate;
+        this.moduleName = moduleName;
+        this.parameters = parameters;
+        this.command = command;
     }
 
     public String getTaskName() {
@@ -48,5 +60,29 @@ public class ScheduledTaskMetadata {
 
     public void setNextRuntimeDate(String nextRuntimeDate) {
         this.nextRuntimeDate = nextRuntimeDate;
+    }
+
+    public String getModuleName() {
+        return moduleName;
+    }
+
+    public void setModuleName(String moduleName) {
+        this.moduleName = moduleName;
+    }
+
+    public Map<String, String> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(Map<String, String> parameters) {
+        this.parameters = parameters;
+    }
+
+    public String getCommand() {
+        return command;
+    }
+
+    public void setCommand(String command) {
+        this.command = command;
     }
 }

@@ -32,6 +32,12 @@ public class HarvestContextSetup implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext ctx = sce.getServletContext();
 
+        HarvestContext.logFileLocation =
+            ConfigurationProperties.getInstance().getProperty("workflow.log.directory");
+        if (!HarvestContext.logFileLocation.endsWith("/")) {
+            HarvestContext.logFileLocation += "/";
+        }
+
         loadModules(ctx);
 
         SchedulerManager.scheduleTasks(
@@ -55,11 +61,13 @@ public class HarvestContextSetup implements ServletContextListener {
             List<String> models = new BlankNodeFilteringModelMaker(rdfService, ModelAccess.on(
                 ctx).getModelMaker(CONTENT)).listModels().toList();
 
-            HarvestContext.modules.forEach(module -> {
+            HarvestContext.modules.forEach(module ->
                 module.getParameters().stream()
                     .filter(param -> "graph".equals(param.getType()))
-                    .forEach(param -> param.setOptions(models));
-            });
+                    .forEach(param -> param.setOptions(models))
+            );
+
+            InternalScheduleOperations.reloadTaskMetadataAndLogs();
         } catch (Exception e) {
             throw new RuntimeException("Failed to load export modules config", e);
         }

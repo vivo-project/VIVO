@@ -6303,6 +6303,14 @@ uil-data:run_workflow.VIVO
         uil:hasKey      "run_workflow" ;
         uil:hasPackage  "VIVO-languages" .
 
+uil-data:schedule_workflow.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Schedule workflow"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "schedule_workflow" ;
+        uil:hasPackage  "VIVO-languages" .
+
 uil-data:workflow_in_progress.VIVO
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;
@@ -6389,6 +6397,38 @@ uil-data:delete.VIVO
         rdfs:label       "Delete"@en-US ;
         uil:hasApp      "VIVO" ;
         uil:hasKey      "delete" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:all_scheduled_tasks.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "All scheduled tasks"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "all_scheduled_tasks" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:next_runtime_at.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Next runtime at"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "next_runtime_at" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:no_scheduled_tasks.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "There are no scheduled tasks yet."@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "no_scheduled_tasks" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:module_name.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Module name"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "module_name" ;
         uil:hasPackage  "VIVO-languages" .
 
 uil-data:ONCE.VIVO

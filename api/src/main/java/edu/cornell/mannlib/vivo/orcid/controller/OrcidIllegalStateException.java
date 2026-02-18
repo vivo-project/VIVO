@@ -9,12 +9,12 @@ import edu.cornell.mannlib.orcidclient.OrcidClientException;
  * error.
  */
 public class OrcidIllegalStateException extends OrcidClientException {
-	public OrcidIllegalStateException(String message) {
-		super(message);
-	}
+    public OrcidIllegalStateException(String message) {
+        super(message);
+    }
 
-	public OrcidIllegalStateException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    public OrcidIllegalStateException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
 }

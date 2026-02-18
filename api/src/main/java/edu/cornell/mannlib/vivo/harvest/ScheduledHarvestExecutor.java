@@ -58,7 +58,7 @@ public class ScheduledHarvestExecutor {
                         module,
                         taskMetadata.getTaskName(),
                         RecurrenceType.valueOf(taskMetadata.getRecurrenceType()),
-                        commandString);
+                        commandString, taskMetadata.getParameters());
                 }, () -> InternalScheduleOperations.removeScheduledTask(scheduledTaskUri));
         });
     }

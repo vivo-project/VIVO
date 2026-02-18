@@ -25,8 +25,7 @@ public class ScheduledTaskController extends HttpServlet {
 
         if (moduleName != null && !moduleName.trim().isEmpty() && taskUri != null && !taskUri.trim().isEmpty()) {
             HarvestContext.modules.stream()
-                .filter(module ->
-                    module.getName().equals(moduleName))
+                .filter(module -> module.getName().equals(moduleName))
                 .findFirst()
                 .ifPresent(module -> {
                     ScheduledTaskMetadata scheduledTask = module.getScheduledTasks().get(taskUri);

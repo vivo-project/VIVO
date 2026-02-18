@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Nullable;
 
+import edu.cornell.mannlib.vivo.harvest.contextmodel.HarvestContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -53,7 +54,7 @@ public class HarvestJobExecutor {
 
             File logFile =
                 new File(
-                    "/tmp/harvest-" + moduleName +
+                    HarvestContext.logFileLocation + "harvest-" + moduleName +
                         (isScheduled ? ("-" + scheduledTaskName.toLowerCase().replaceAll("\\s", "_")) : "") +
                         (isScheduled ? ("-" + LocalDateTime.now()) : "") +
                         ".log"
