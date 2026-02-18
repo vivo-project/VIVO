@@ -7,4 +7,6 @@ import edu.cornell.mannlib.vivo.harvest.configmodel.ExportModule;
 public class HarvestContext {
 
     public static List<ExportModule> modules;
+
+    public static String logFileLocation;
 }

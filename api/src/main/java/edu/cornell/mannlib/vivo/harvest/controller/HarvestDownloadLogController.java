@@ -32,7 +32,15 @@ public class HarvestDownloadLogController extends HttpServlet {
             return;
         }
 
-        File file = new File("/tmp/harvest-" + InternalScheduleOperations.sanitizeModuleName(module) + ".log");
+        String filename = req.getParameter("file");
+        File file;
+        if (filename != null) {
+            file = new File(HarvestContext.logFileLocation + filename);
+        } else {
+            file = new File(
+                HarvestContext.logFileLocation +
+                    "harvest-" + InternalScheduleOperations.sanitizeModuleName(module) + ".log");
+        }
 
         if (!file.exists()) {
             resp.sendError(404);
@@ -63,7 +71,7 @@ public class HarvestDownloadLogController extends HttpServlet {
         }
 
         String fileName = req.getParameter("file");
-        File file = new File("/tmp/" + fileName);
+        File file = new File(HarvestContext.logFileLocation + fileName);
 
         if (!file.exists()) {
             resp.sendError(404);

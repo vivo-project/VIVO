@@ -12,6 +12,13 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
                 ${module.name}
             </button>
         </#list>
+
+        <button
+            type="button"
+            class="tab-btn"
+            data-tab="tab-all-scheduled">
+            ${i18n().all_scheduled_tasks}
+        </button>
     </div>
 
     <#list modules as module>
@@ -55,6 +62,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
                                     name="${param.symbol?html}"
                                     accept="${param.acceptType}"
                                     <#if param.required>required</#if>
+                                    <#if param.startDateAttribute || param.endDateAttribute>class="temporal"</#if>
                                 />
                             <#elseif param.type == "select" || param.type == "graph">
                                 <select
@@ -73,6 +81,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
                             <#else>
                                 <input
                                     type="${inputType}"
+                                    <#if param.startDateAttribute || param.endDateAttribute>class="temporal"</#if>
                                     name="${param.symbol}"
                                     value="${inputValue}"
                                     <#if param.required>required</#if>
@@ -84,11 +93,14 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
                             <#list param.subfields as sub>
                                 <div class="form-row" style="margin-left:20px;">
                                     <label>${sub.name}</label>
-                                    <input type="text" name="${sub.symbol}" value="${sub.defaultValue!}">
+                                    <input
+                                        type="text"
+                                        <#if sub.startDateAttribute || sub.endDateAttribute>class="temporal"</#if>
+                                        name="${sub.symbol}"
+                                        value="${sub.defaultValue!}">
                                 </div>
                             </#list>
                         </#if>
-
                     </#list>
 
                     <div class="form-row">
@@ -150,13 +162,14 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
                             <tr>
                                 <th>${i18n().task_name}</th>
                                 <th>${i18n().recurrence_type}</th>
-                                <th>Next runtime at</th>
+                                <th>${i18n().next_runtime_at}</th>
                                 <th>${i18n().actions}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <#list module.scheduledTasks?keys as taskUri>
-                                <tr>
+                                <tr style="cursor:pointer;"
+                                    onclick="window.location='${contextPath}/taskDetails?taskUri=${taskUri}'">
                                     <td>${module.scheduledTasks[taskUri].taskName}</td>
                                     <td>${i18n()[module.scheduledTasks[taskUri].recurrenceType]}</td>
                                     <td>${module.scheduledTasks[taskUri].nextRuntimeDate}</td>
@@ -199,6 +212,48 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
             </div>
         </div>
     </#list>
+    <div class="tab-panel" id="tab-all-scheduled">
+        <div class="module-card">
+            <h2>${i18n().all_scheduled_tasks}</h2>
+
+            <#if allScheduledTasks?? && allScheduledTasks?size gt 0>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>${i18n().task_name}</th>
+                            <th>${i18n().module_name}</th>
+                            <th>${i18n().recurrence_type}</th>
+                            <th>${i18n().next_runtime_at}</th>
+                            <th>${i18n().actions}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <#list allScheduledTasks as task>
+                            <tr
+                                style="cursor:pointer;"
+                                onclick="window.location='${contextPath}/taskDetails?taskUri=${task.taskUri?url}'">
+                                <td>${task.taskName}</td>
+                                <td>${task.moduleName}</td>
+                                <td>${i18n()[task.recurrenceType]}</td>
+                                <td>${task.nextRuntimeDate}</td>
+                                <td>
+                                    <button
+                                        type="button"
+                                        class="delete-schedule-btn"
+                                        data-module="${task.moduleName}"
+                                        data-task="${task.taskUri}">
+                                        ${i18n().delete}
+                                    </button>
+                                </td>
+                            </tr>
+                        </#list>
+                    </tbody>
+                </table>
+            <#else>
+                <p>${i18n().no_scheduled_tasks}</p>
+            </#if>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -320,9 +375,9 @@ tabButtons.forEach(btn => {
     });
 });
 
-// activate first tab by default
+// activate last tab (all scheduled tasks) by default
 if (tabButtons.length > 0) {
-    activateTab(tabButtons[0].dataset.tab);
+    activateTab(tabButtons[tabButtons.length - 1].dataset.tab);
 }
 
 document.querySelectorAll(".recurrence-select").forEach(select => {
@@ -332,15 +387,25 @@ document.querySelectorAll(".recurrence-select").forEach(select => {
     const runBtnText = form.querySelector(".run-btn").querySelector(".btn-text");
 
     function update() {
+        const temporalFields = form.querySelectorAll(".temporal");
+
         if (select.value !== "ONCE") {
             row.style.display = "block";
             input.required = true;
             runBtnText.textContent = "${i18n().schedule_workflow?js_string}";
+
+            temporalFields.forEach(field => {
+                field.closest(".form-row").style.display = "none";
+            });
         } else {
             row.style.display = "none";
             input.required = false;
             input.value = "";
             runBtnText.textContent = "${i18n().run_workflow?js_string}";
+
+            temporalFields.forEach(field => {
+                field.closest(".form-row").style.display = "block";
+            });
         }
     }
 
