@@ -46,6 +46,7 @@
 
             <#else>
                 <li role="listitem"><a class="log-out" title="${i18n().menu_loginfull}" href="${urls.login}">${i18n().menu_login}</a></li>
+                <li role="listitem"><a class="log-out" title="${i18n().menu_loginfull}" href="http://localhost:8080/orcid_auth_war/orcidAuth">${i18n().menu_login_orcid}</a></li>
             </#if>
         </ul>
 
