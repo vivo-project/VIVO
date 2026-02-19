@@ -61,6 +61,7 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
         dataContext.put("contextPath", ContextPath.getPath(vreq));
 
         InternalScheduleOperations.reloadTaskMetadataAndLogs();
+        HarvestContext.resolveLabelsBasedOnLocale(vreq);
 
         dataContext.put("modules", HarvestContext.modules);
     }

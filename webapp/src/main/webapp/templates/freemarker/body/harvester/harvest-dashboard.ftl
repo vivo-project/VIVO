@@ -25,7 +25,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
         <div class="tab-panel" id="tab-${module.name}">
             <div class="module-card">
                 <h2>${module.name}</h2>
-                <p>${module.description}</p>
+                <p>${module.resolvedDescription}</p>
 
                 <form method="post" action="${contextPath}/etlWorkflows">
                     <input type="hidden" name="moduleName" value="${module.name}">
@@ -34,7 +34,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
                     <#list module.parameters as param>
                         <div class="form-row">
                             <label>
-                                ${param.name}
+                                ${param.resolvedName}
                                 <#if param.required>*</#if>
                             </label>
 
@@ -58,7 +58,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
                             <#if param.type == "file">
                                 <input
                                     type="file"
-                                    id="${param.name?html}"
+                                    id="${param.symbol?html}"
                                     name="${param.symbol?html}"
                                     accept="${param.acceptType}"
                                     <#if param.required>required</#if>
@@ -92,7 +92,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
                         <#if param.type == "url" && param.subfields??>
                             <#list param.subfields as sub>
                                 <div class="form-row" style="margin-left:20px;">
-                                    <label>${sub.name}</label>
+                                    <label>${sub.resolvedName}</label>
                                     <input
                                         type="text"
                                         <#if sub.startDateAttribute || sub.endDateAttribute>class="temporal"</#if>
@@ -160,7 +160,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
                     <table class="schedule-table">
                         <thead>
                             <tr>
-                                <th>${i18n().task_name}</th>
+                                <th>${i18n().scheduled_task_name}</th>
                                 <th>${i18n().recurrence_type}</th>
                                 <th>${i18n().next_runtime_at}</th>
                                 <th>${i18n().actions}</th>
@@ -220,7 +220,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
                 <table class="schedule-table">
                     <thead>
                         <tr>
-                            <th>${i18n().task_name}</th>
+                            <th>${i18n().scheduled_task_name}</th>
                             <th>${i18n().module_name}</th>
                             <th>${i18n().recurrence_type}</th>
                             <th>${i18n().next_runtime_at}</th>
@@ -356,7 +356,7 @@ function startLogPolling(module) {
 const tabButtons = document.querySelectorAll(".tab-btn");
 const tabPanels = document.querySelectorAll(".tab-panel");
 
-function activateTab(tabId) {
+function activateTab(tabId, updateUrl = true) {
     tabPanels.forEach(p => {
         p.style.display = (p.id === tabId) ? "block" : "none";
     });
@@ -367,6 +367,12 @@ function activateTab(tabId) {
             b.dataset.tab === tabId
         );
     });
+
+    if (updateUrl) {
+        const url = new URL(window.location);
+        url.searchParams.set("tab", tabId);
+        history.pushState(null, "", url);
+    }
 }
 
 tabButtons.forEach(btn => {
@@ -375,9 +381,14 @@ tabButtons.forEach(btn => {
     });
 });
 
-// activate last tab (all scheduled tasks) by default
-if (tabButtons.length > 0) {
-    activateTab(tabButtons[tabButtons.length - 1].dataset.tab);
+// Activate tab from URL or fallback to last tab
+const urlParams = new URLSearchParams(window.location.search);
+const tabFromUrl = urlParams.get("tab");
+
+if (tabFromUrl && document.getElementById(tabFromUrl)) {
+    activateTab(tabFromUrl, false);
+} else if (tabButtons.length > 0) {
+    activateTab(tabButtons[tabButtons.length - 1].dataset.tab, false);
 }
 
 document.querySelectorAll(".recurrence-select").forEach(select => {
@@ -426,7 +437,7 @@ document.querySelectorAll(".delete-schedule-btn").forEach(btn => {
             {
                 method: "DELETE"
             }
-        ).then(() => window.location.replace(window.location.pathname));
+        ).then(() => window.location.replace(window.location.href));
     });
 });
 
@@ -440,7 +451,7 @@ document.querySelectorAll(".delete-log-btn").forEach(btn => {
             btn.dataset.file,
             { method:"DELETE" }
         )
-        .then(() => window.location.replace(window.location.pathname));
+        .then(() => window.location.replace(window.location.href));
     });
 });
 

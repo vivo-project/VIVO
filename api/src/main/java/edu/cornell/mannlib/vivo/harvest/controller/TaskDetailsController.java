@@ -90,6 +90,8 @@ public class TaskDetailsController extends FreemarkerHttpServlet {
             );
         }
 
+        HarvestContext.resolveLabelsBasedOnLocale(vreq);
+
         dataContext.put("scheduledTask", taskMetadata);
         dataContext.put("module", module.get());
     }
