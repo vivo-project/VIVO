@@ -1,12 +1,15 @@
 package edu.cornell.mannlib.vivo.harvest.configmodel;
 
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ExportParameter {
 
-    private String name;
+    private Map<String, String> name;
+
+    private String resolvedName;
 
     private String type;
 
@@ -78,12 +81,20 @@ public class ExportParameter {
         this.group = group;
     }
 
-    public String getName() {
+    public Map<String, String> getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Map<String, String> name) {
         this.name = name;
+    }
+
+    public String getResolvedName() {
+        return resolvedName;
+    }
+
+    public void setResolvedName(String resolvedName) {
+        this.resolvedName = resolvedName;
     }
 
     public String getType() {

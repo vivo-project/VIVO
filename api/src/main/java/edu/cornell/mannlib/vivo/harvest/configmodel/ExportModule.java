@@ -13,7 +13,9 @@ public class ExportModule {
 
     private String name;
 
-    private String description;
+    private Map<String, String> description;
+
+    private String resolvedDescription;
 
     private String path;
 
@@ -34,12 +36,20 @@ public class ExportModule {
         this.name = name;
     }
 
-    public String getDescription() {
+    public Map<String, String> getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(Map<String, String> description) {
         this.description = description;
+    }
+
+    public String getResolvedDescription() {
+        return resolvedDescription;
+    }
+
+    public void setResolvedDescription(String resolvedDescription) {
+        this.resolvedDescription = resolvedDescription;
     }
 
     public String getPath() {

@@ -18,7 +18,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
 
                     <div class="form-row">
                         <label>
-                            ${param.name}
+                            ${param.resolvedName}
                             <#if param.required>*</#if>
                         </label>
 
@@ -74,7 +74,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
 
                                 <div class="form-row" style="margin-left:20px;">
                                     <label>
-                                        ${sub.name}
+                                        ${sub.resolvedName}
                                         <#if sub.required>*</#if>
                                     </label>
 
