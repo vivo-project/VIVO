@@ -6461,3 +6461,11 @@ uil-data:QUARTERLY.VIVO
         uil:hasApp       "VIVO" ;
         uil:hasKey       "QUARTERLY" ;
         uil:hasPackage   "VIVO-languages" .
+
+uil-data:refresh_config.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Ponovo učitaj konfiguraciju."@en-US ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "refresh_config" ;
+        uil:hasPackage   "VIVO-languages" .

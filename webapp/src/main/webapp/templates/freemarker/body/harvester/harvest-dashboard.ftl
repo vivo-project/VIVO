@@ -249,6 +249,12 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
                         </#list>
                     </tbody>
                 </table>
+
+                <button
+                    type="button"
+                    class="refresh-config-btn">
+                    ${i18n().refresh_config}
+                </button>
             <#else>
                 <p>${i18n().no_scheduled_tasks}</p>
             </#if>
@@ -452,6 +458,20 @@ document.querySelectorAll(".delete-log-btn").forEach(btn => {
             { method:"DELETE" }
         )
         .then(() => window.location.replace(window.location.href));
+    });
+});
+
+document.querySelectorAll(".refresh-config-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        fetch(
+            "${contextPath}/etlWorkflows?refreshConfig=true",
+            {
+                method: "GET"
+            }
+        ).then(() => window.location.replace(window.location.href));
     });
 });
 

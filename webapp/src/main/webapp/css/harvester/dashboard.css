@@ -179,11 +179,22 @@ input {
     background: #1a68d1;
 }
 
-.stop-btn {
+.stop-btn
+.refresh-config-btn {
     background: #e55353;
     color: white;
 }
 
-.stop-btn:hover {
+.stop-btn:hover
+.refresh-config-btn:hover {
     background: #c0392b;
+}
+
+.refresh-config-btn {
+    margin-top: 10px;
+    margin-top: 5px;
+    padding: 7px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
 }

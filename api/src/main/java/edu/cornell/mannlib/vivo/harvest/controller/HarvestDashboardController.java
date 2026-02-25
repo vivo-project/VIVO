@@ -24,6 +24,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
+import edu.cornell.mannlib.vivo.harvest.HarvestContextSetup;
 import edu.cornell.mannlib.vivo.harvest.HarvestJobExecutor;
 import edu.cornell.mannlib.vivo.harvest.InternalScheduleOperations;
 import edu.cornell.mannlib.vivo.harvest.RecurrenceType;
@@ -45,6 +46,11 @@ public class HarvestDashboardController extends FreemarkerHttpServlet {
         UserAccount acc = LoginStatusBean.getCurrentUser(vreq);
         if (acc == null || !RoleCheckUtility.isAdmin(acc)) {
             return new TemplateResponseValues("login.ftl", dataContext);
+        }
+
+        if ("true".equals(vreq.getParameter("refreshConfig"))) {
+            HarvestContextSetup.loadModules(vreq.getServletContext());
+            return null;
         }
 
         setCommonValues(dataContext, vreq);

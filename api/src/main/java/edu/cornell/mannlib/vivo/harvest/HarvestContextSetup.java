@@ -27,25 +27,7 @@ public class HarvestContextSetup implements ServletContextListener {
 
     private static final Log log = LogFactory.getLog(HarvestContextSetup.class);
 
-
-    @Override
-    public void contextInitialized(ServletContextEvent sce) {
-        ServletContext ctx = sce.getServletContext();
-
-        HarvestContext.logFileLocation =
-            ConfigurationProperties.getInstance().getProperty("workflow.log.directory");
-        if (!HarvestContext.logFileLocation.endsWith("/")) {
-            HarvestContext.logFileLocation += "/";
-        }
-
-        loadModules(ctx);
-
-        SchedulerManager.scheduleTasks(
-            new ScheduledHarvestExecutor()
-        );
-    }
-
-    private void loadModules(ServletContext ctx) {
+    public static void loadModules(ServletContext ctx) {
         String harvesterDirectory = ConfigurationProperties.getInstance().getProperty("harvester.directory");
         String harvesterConfigurationPath =
             ConfigurationProperties.getInstance().getProperty("harvester.configuration");
@@ -71,6 +53,23 @@ public class HarvestContextSetup implements ServletContextListener {
         } catch (Exception e) {
             throw new RuntimeException("Failed to load export modules config", e);
         }
+    }
+
+    @Override
+    public void contextInitialized(ServletContextEvent sce) {
+        ServletContext ctx = sce.getServletContext();
+
+        HarvestContext.logFileLocation =
+            ConfigurationProperties.getInstance().getProperty("workflow.log.directory");
+        if (!HarvestContext.logFileLocation.endsWith("/")) {
+            HarvestContext.logFileLocation += "/";
+        }
+
+        loadModules(ctx);
+
+        SchedulerManager.scheduleTasks(
+            new ScheduledHarvestExecutor()
+        );
     }
 
     @Override
