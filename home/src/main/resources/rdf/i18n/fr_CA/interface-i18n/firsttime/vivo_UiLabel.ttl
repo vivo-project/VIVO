@@ -6286,3 +6286,187 @@ uil-data:no_add_to_person_profile.VIVO
         rdfs:label       "Non"@fr-CA ;
         uil:hasApp       "VIVO" ;
         uil:hasKey       "no_add_to_person_profile" .
+
+uil-data:available_harvest_modules.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Modules de récolte disponibles:"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "available_harvest_modules" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:run_workflow.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Exécuter le flux de travail"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "run_workflow" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:schedule_workflow.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Planifier le flux de travail"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "schedule_workflow" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:workflow_in_progress.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Flux de travail en cours"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "workflow_in_progress" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:stop_workflow.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Arrêter le flux de travail"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "stop_workflow" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:download_workflow_logs.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Télécharger les journaux"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "download_workflow_logs" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:etl_workflows.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Flux de travail ETL"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "etl_workflows" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:scheduled_tasks.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Tâches planifiées"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "scheduled_tasks" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:scheduled_task_name.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Nom de la tâche"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "scheduled_task_name" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:recurrence_type.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Type de récurrence"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "recurrence_type" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:actions.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Actions"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "actions" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:available_logs.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Journaux disponibles"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "available_logs" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:delete.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Supprimer"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "delete" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:all_scheduled_tasks.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Toutes les tâches planifiées"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "all_scheduled_tasks" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:next_runtime_at.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Prochaine exécution à"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "next_runtime_at" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:no_scheduled_tasks.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Il n'y a pas encore de tâches planifiées."@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "no_scheduled_tasks" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:module_name.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Nom du module"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "module_name" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:ONCE.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Une fois"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "ONCE" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:DAILY.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Quotidien"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "DAILY" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:WEEKLY.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Hebdomadaire"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "WEEKLY" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:MONTHLY.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Mensuel"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "MONTHLY" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:QUARTERLY.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Trimestriel"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "QUARTERLY" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:refresh_config.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Recharger la configuration"@fr-CA ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "refresh_config" ;
+        uil:hasPackage   "VIVO-languages" .

@@ -7,7 +7,7 @@ import edu.cornell.mannlib.vivo.harvest.configmodel.ExportModule;
 
 public class HarvestContext {
 
-    public static final String DEFAULT_DISPLAY_LANGUAGE = "en";
+    public static final String DEFAULT_DISPLAY_LANGUAGE = "en-US";
 
     public static List<ExportModule> modules;
 
@@ -15,7 +15,7 @@ public class HarvestContext {
 
 
     public static void resolveLabelsBasedOnLocale(VitroRequest vreq) {
-        String locale = vreq.getLocale().getLanguage();
+        String locale = vreq.getLocale().toLanguageTag();
 
         HarvestContext.modules.forEach(module -> {
             module.setResolvedDescription(
