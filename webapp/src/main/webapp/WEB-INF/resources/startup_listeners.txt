@@ -86,6 +86,7 @@ org.apache.commons.fileupload.servlet.FileCleanerCleanup
 edu.cornell.mannlib.vitro.webapp.dao.jena.VClassGroupCache$Setup
 
 edu.cornell.mannlib.vivo.orcid.OrcidContextSetup
+edu.cornell.mannlib.vivo.harvest.HarvestContextSetup
 
 # Register the extensions to the IndividualResponseBuilder (e.g. alt metric, plum analytics)
 edu.cornell.mannlib.vitro.webapp.controller.individual.VIVOIndividualResponseBuilderExtension$Setup

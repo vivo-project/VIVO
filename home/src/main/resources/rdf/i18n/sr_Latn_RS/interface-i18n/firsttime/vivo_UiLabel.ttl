@@ -6285,3 +6285,187 @@ uil-data:no_add_to_person_profile.VIVO
         rdfs:label       "Ne"@sr-Latn-RS ;
         uil:hasApp       "VIVO" ;
         uil:hasKey       "no_add_to_person_profile" .
+
+uil-data:available_harvest_modules.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Dostupni moduli za prikupljanje"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "available_harvest_modules" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:run_workflow.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Pokreni radni tok"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "run_workflow" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:schedule_workflow.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Zakaži radni tok"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "schedule_workflow" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:workflow_in_progress.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Radni tok u toku"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "workflow_in_progress" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:stop_workflow.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Zaustavi radni tok"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "stop_workflow" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:download_workflow_logs.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Preuzmi logove"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "download_workflow_logs" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:etl_workflows.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "ETL radni tokovi"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "etl_workflows" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:scheduled_tasks.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Zakazani zadaci"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "scheduled_tasks" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:scheduled_task_name.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Naziv zadatka"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "scheduled_task_name" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:recurrence_type.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Tip ponavljanja"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "recurrence_type" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:actions.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Akcije"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "actions" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:available_logs.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Dostupni logovi"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "available_logs" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:delete.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Obriši"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "delete" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:all_scheduled_tasks.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Svi zakazani zadaci"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "all_scheduled_tasks" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:next_runtime_at.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Sledeće izvršenje u"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "next_runtime_at" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:no_scheduled_tasks.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Još uvek nema zakazanih zadataka."@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "no_scheduled_tasks" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:module_name.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Naziv modula"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "module_name" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:ONCE.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Jednom"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "ONCE" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:DAILY.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Dnevno"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "DAILY" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:WEEKLY.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Nedeljno"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "WEEKLY" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:MONTHLY.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Mesečno"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "MONTHLY" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:QUARTERLY.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Kvartalno"@sr-Latn-RS ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "QUARTERLY" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:refresh_config.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Ponovo učitaj konfiguraciju."@en-US ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "refresh_config" ;
+        uil:hasPackage   "VIVO-languages" .

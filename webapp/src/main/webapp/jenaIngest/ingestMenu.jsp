@@ -34,6 +34,10 @@
     <li><a href="harvester/harvest?job=csvGrant" title="Use the harvester to ingest grant data from CSV files">Harvest Grant Data from CSV</a></li>
 -->
     <li><a href="ingest?action=executeWorkflow" title="Execute an RDF-encoded ingest workflow">Execute Workflow</a></li>
+<!--
+    <li><a href="etlWorkflows" title="Execute ETL workflow">${i18n.text('etl_workflows')}</a></li>
+-->
+    <li><a href="etlWorkflows" title="Execute ETL workflow">ETL Workflows</a></li>
 </ul>
 
 <ul class="ingestMenu">

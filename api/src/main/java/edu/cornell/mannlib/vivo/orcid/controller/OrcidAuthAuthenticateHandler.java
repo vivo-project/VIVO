@@ -9,58 +9,57 @@ import static edu.cornell.mannlib.vivo.orcid.controller.OrcidIntegrationControll
 
 import java.net.URISyntaxException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import edu.cornell.mannlib.orcidclient.OrcidClientException;
 import edu.cornell.mannlib.orcidclient.auth.AuthorizationStatus;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.RedirectResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * We offered the confirmation screen, and they decided to go ahead. Get
  * authorization to authenticate them.
- *
+ * <p>
  * We can't assume that they haven't been here before, so they might already
  * have authorized, or denied authorization.
  */
 public class OrcidAuthAuthenticateHandler extends OrcidAbstractHandler {
-	private static final Log log = LogFactory
-			.getLog(OrcidAuthAuthenticateHandler.class);
+    private static final Log log = LogFactory
+        .getLog(OrcidAuthAuthenticateHandler.class);
 
-	private AuthorizationStatus status;
+    private AuthorizationStatus status;
 
-	public OrcidAuthAuthenticateHandler(VitroRequest vreq) {
-		super(vreq);
-	}
+    public OrcidAuthAuthenticateHandler(VitroRequest vreq) {
+        super(vreq);
+    }
 
-	public ResponseValues exec() throws URISyntaxException,
-			OrcidClientException {
-		status = auth.getAuthorizationStatus(AUTHENTICATE);
-		if (status.isNone()) {
-			return seekAuthorizationForAuthenticate();
-		} else if (status.isSuccess()) {
-			return redirectToReadProfile();
-		} else if (status.isDenied()) {
-			return showConfirmationPage(DENIED_AUTHENTICATE);
-		} else {
-			return showConfirmationPage(FAILED_AUTHENTICATE);
-		}
-	}
+    public ResponseValues exec() throws URISyntaxException,
+        OrcidClientException {
+        status = auth.getAuthorizationStatus(AUTHENTICATE);
+        if (status.isNone()) {
+            return seekAuthorizationForAuthenticate();
+        } else if (status.isSuccess()) {
+            return redirectToReadProfile();
+        } else if (status.isDenied()) {
+            return showConfirmationPage(DENIED_AUTHENTICATE);
+        } else {
+            return showConfirmationPage(FAILED_AUTHENTICATE);
+        }
+    }
 
-	private ResponseValues seekAuthorizationForAuthenticate()
-			throws OrcidClientException, URISyntaxException {
-		log.debug("Seeking authorization to authenticate.");
-		String returnUrl = occ.resolvePathWithWebapp(PATH_READ_PROFILE);
-		String seekUrl = auth.seekAuthorization(AUTHENTICATE, returnUrl);
-		return new RedirectResponseValues(seekUrl);
-	}
+    private ResponseValues seekAuthorizationForAuthenticate()
+        throws OrcidClientException, URISyntaxException {
+        log.debug("Seeking authorization to authenticate.");
+        String returnUrl = occ.resolvePathWithWebapp(PATH_READ_PROFILE);
+        String seekUrl = auth.seekAuthorization(AUTHENTICATE, returnUrl);
+        return new RedirectResponseValues(seekUrl);
+    }
 
-	private ResponseValues redirectToReadProfile() throws URISyntaxException {
-		log.debug("Already authorized to authenticate.");
-		return new RedirectResponseValues(
-				occ.resolvePathWithWebapp(PATH_READ_PROFILE));
-	}
+    private ResponseValues redirectToReadProfile() throws URISyntaxException {
+        log.debug("Already authorized to authenticate.");
+        return new RedirectResponseValues(
+            occ.resolvePathWithWebapp(PATH_READ_PROFILE));
+    }
 
 }
