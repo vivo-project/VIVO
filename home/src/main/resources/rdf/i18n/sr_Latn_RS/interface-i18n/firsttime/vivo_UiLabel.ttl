@@ -1380,6 +1380,30 @@ uil-data:add_orcid_id.VIVO
         uil:hasKey      "add_orcid_id" ;
         uil:hasPackage  "VIVO-languages" .
 
+uil-data:allow_orcid_push.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Dozvoli otpremanje u ORCID"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "allow_orcid_push" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:disallow_orcid_push.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Zabrani otpremanje u ORCID"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "disallow_orcid_push" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:orcid_integration.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "ORCID integracija:"@sr-Latn-RS ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "orcid_integration" ;
+        uil:hasPackage  "VIVO-languages" .
+
 uil-data:reference_basemap_description.VIVO
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;
