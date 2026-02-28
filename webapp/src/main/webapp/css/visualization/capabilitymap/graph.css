@@ -23,7 +23,7 @@ body {
     -webkit-text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
     -moz-text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
     -o-text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
-    background-color: #8BAB2E;
+    background-color: var(--accent-color, #8BAB2E);
 //    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#446791), to(#164682));
 //    background-image: -moz-linear-gradient(top, #446791, #164682);
     width: auto;
@@ -285,7 +285,7 @@ hr {
 .tabs ul.titles {
     list-style: none;
     height:30px;
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
     font-size: 13px;
 }
 .tabs ul.titles li a {
@@ -299,7 +299,7 @@ hr {
     height:30px;
     line-height:30px;
     text-align:center;
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
 }
 
 .tabs ul.titles li a:hover {

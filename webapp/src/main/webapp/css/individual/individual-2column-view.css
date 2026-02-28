@@ -269,7 +269,7 @@ span#quickViewLink img {
     padding-top:18px;
 }
 #individual-info div#contactContainer h3{
-    color:#8aa149;
+    color: var(--secondary-color, #8aa149);
 }
 ul#individual-personInPosition li {
     padding-bottom:12px;
