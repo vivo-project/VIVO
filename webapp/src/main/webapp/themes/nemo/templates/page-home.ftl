@@ -131,7 +131,7 @@
 			<div class="row faculty-home">
 				<div class="container">
 					<div class="col-md-12">
-						<h2 class="h1">Meet our faculty</h2>
+						<h2 class="h1">Meet our people</h2>
 						<div class="gap20"></div>
 						<p>${i18n().home_faculty_para1}</p>
 						<!-- Use bootstrap carousel to showcase faculty members, edited in lib-home-page.ftl and homePageUtils.js -->
@@ -173,7 +173,7 @@
 						-->
 						<div class="row department-count">
 							<div class="col-md-6">
-								<h2 class="h1">Departments</h2>
+								<h2 class="h1">Organizations</h2>
 								<div class="gap20"></div>
 								<p>${i18n().home_departments_para1}</p>
 							</div>
