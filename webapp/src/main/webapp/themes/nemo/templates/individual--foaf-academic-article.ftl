@@ -87,7 +87,11 @@
 
                     <#--  Most-specific types -->
                     <@p.mostSpecificTypes individual />
-                    <span id="iconControlsVitro"><img id="uriIcon" title="${individual.uri}" class="middle" src="${urls.images}/individual/uriIcon.gif" alt="uri icon"/></span>
+                    <span id="iconControlsVitro">
+                    <button id="uriIcon" class="nostyle" aria-label="${i18n().qr_icon_label}">
+                        <img title="${individual.uri}" class="middle" src="${urls.images}/individual/uriIcon.gif" alt="uri icon" aria-hidden="true" />
+                    </button>
+                    </span>
                 </h1>
             </#if>
         </header>
