@@ -231,7 +231,7 @@ div#contactPhoneDiv {
     text-align:right;
 }
 /* <------ RESEARCH AREA */
-ul#individual-hasResearchArea li {
+ul.individual-hasResearchArea li {
     float: left;
     padding-right: 10px;
     margin-right: 10px;

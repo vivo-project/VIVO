@@ -76,7 +76,7 @@ Styling for the left hand side contact info column on the individual person page
   border: none;
   background: #ececec;
 }
-.share-contact #individual-hasResearchArea .list-group-item {
+.share-contact .individual-hasResearchArea .list-group-item {
   background: none;
   border: none;
   padding: 5px 0;
@@ -106,7 +106,7 @@ Styling for the left hand side contact info column on the individual person page
 #individual-info a#relatedBy:hover {
   text-decoration: none;
 }
-#individual-info #individual-hasResearchArea a.label {
+#individual-info .individual-hasResearchArea a.label {
   font-size: 13px;
   background: transparent;
   border: 1px solid #337ab7;
@@ -114,7 +114,7 @@ Styling for the left hand side contact info column on the individual person page
   font-weight: 400;
   transition: all 0.5s;
 }
-#individual-info #individual-hasResearchArea a.label:hover {
+#individual-info .individual-hasResearchArea a.label:hover {
   background: #337ab7;
   color: #fff;
 }
@@ -160,12 +160,12 @@ li.list-group-item {
   padding: 7px 0;
   border: none;
 }
-#individual-hasResearchArea {
+.individual-hasResearchArea {
   padding-left: 0;
   font-size: 14px;
   margin: 8px auto;
 }
-#individual-hasResearchArea .list-group-item {
+.individual-hasResearchArea .list-group-item {
   padding: 7px 10px 0 0;
   border: none;
   display: inline-block;

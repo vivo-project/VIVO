@@ -43,7 +43,7 @@ article.property li h3 {
     display: none;
 }
 
-#individual-hasResearchArea a {
+.individual-hasResearchArea a {
     font-size: 13px;
     background: transparent;
     border: 1px solid #337ab7;
@@ -55,7 +55,7 @@ article.property li h3 {
     border-top-right-radius: 4px;
 }
 
-#individual-hasResearchArea a:hover {
+.individual-hasResearchArea a:hover {
     background: #337ab7;
     color: #fff;
     text-decoration: none;
@@ -94,11 +94,11 @@ article.property li h3 {
     margin-left: 10px;
 }
 
-ul#individual-hasResearchArea {
+ul.individual-hasResearchArea {
     margin-left: 10px;
 }
 
-ul#individual-hasResearchArea li,
+ul.individual-hasResearchArea li,
 ul#individual-facultyMemberships li {
     float: left;
     padding-right: 10px;
