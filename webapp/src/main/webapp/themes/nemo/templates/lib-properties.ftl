@@ -162,11 +162,11 @@
 		displayLimitAnnot, for example). Otherwise the display looks odd, since neighboring 
 		properties have labels. 
 		<#if addLink?has_content || verboseDisplay?has_content>
-			<h4 id="${property.localName}" title="${property.publicDescription!}">${label}  ${addLink!} ${verboseDisplay!}</h4>         
+			<h4 class="${property.localName}" title="${property.publicDescription!}">${label}  ${addLink!} ${verboseDisplay!}</h4>         
 		</#if>
 	-->
 	<#if editable> 
-		<h4 id="${property.localName!}" title="${property.publicDescription!}">${label}  ${addLink!} ${verboseDisplay!}</h4>
+		<h4 class="${property.localName!}" title="${property.publicDescription!}">${label}  ${addLink!} ${verboseDisplay!}</h4>
 	</#if>
 </#macro>
 
@@ -203,7 +203,7 @@
 
 
 <#macro propertyLabel property label="${property.name?capitalize}">
-	<h4 id="${property.localName}" title="${property.publicDescription!}">${label}  <@verboseDisplay property /></h4>
+	<h4 class="${property.localName}" title="${property.publicDescription!}">${label}  <@verboseDisplay property /></h4>
 </#macro>
 
 
