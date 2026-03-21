@@ -44,7 +44,7 @@
 
                 </select>
 
-                <img id="copy-vis-viewlink-icon" title="${i18n().persistent_link_to_visualization}" class="middle" src="${urls.images}/individual/uriIcon.gif" alt="${i18n().uri_icon}" />
+                <img id="copy-vis-viewlink-icon" title="${i18n().persistent_link_to_visualization}" class="middle" src="${urls.images}/individual/uriIcon_darkened.gif" alt="${i18n().uri_icon}" />
                 <span id="copy-vis-viewlink"><input type="text" size="21" value="${currentViewLink}" /></span>
 
                 </div>
