@@ -106,8 +106,10 @@ var DataTableWidget = Class.extend({
 		var dom = me.dom;
 		var filter = $('<div class="science-areas-filter">' +
 				'<span id="' + dom.firstFilterID + '" class="' + dom.filterOptionClass + ' ' + dom.activeFilterClass + '">' + dom.firstFilterLabel + '</span> | ' +
-		    	'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">' + dom.secondFilterLabel + '</span>' +
-		    	'<img class="'+ dom.filterInfoIconClass +'" id="imageIconTwo" src="'+ infoIconUrl +'" alt="information icon" title="" /></div>');
+				'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">' + dom.secondFilterLabel + '</span>' +
+				'<button class="nostyle" id="imageIconTwo" aria-label="information icon">' +
+					'<img class="'+ dom.filterInfoIconClass +'" src="'+ infoIconUrl +'" alt="information icon" title="" aria-hidden="true" />' +
+				'</button></div>');
 		me.tableDiv.append(filter);
 
 		const tooltipDataImageIconTwo = {
@@ -238,8 +240,12 @@ var DataTableWidget = Class.extend({
 
 		var searchInputBox = $("." + me.dom.searchBarParentContainerClass).find("input[type=search]");
 		searchInputBox.css("width", "140px");
-		searchInputBox.after("<img class='filterInfoIcon' id='searchInfoIcon' src='" + infoIconUrl
-								+ "' alt='" + i18nStrings.infoIconString + "' title='' />");
+		searchInputBox.after(
+			"<button class='nostyle' id='searchInfoIcon' aria-label='"+ i18nStrings.infoIconString +"'>" +
+				"<img class='filterInfoIcon' src='" + infoIconUrl
+				+ "' alt='" + i18nStrings.infoIconString + "' title='' aria-hidden='true' />" +
+			"</button>"
+		);
 		$( document ).on('click', "#reset-search", function() {
 			me.widget.fnFilter("");
 		});
