@@ -74,7 +74,7 @@
                 	<span id="organizations-filter" class="filter-option">${i18n().organizations_capitalized}</span> |
                 	<span id="people-filter" class="filter-option">${i18n().people_capitalized}</span> |
                   <span id="no-filter" class="filter-option">${i18n().view_all}</span>
-                	<img class="filterInfoIcon" src="${urls.images}/iconInfo.png"
+                	<img class="filterInfoIcon" src="${urls.images}/iconInfo-darkened.png"
                 		 alt="${i18n().info_icon}"
                 		 title="${i18n().organization_hierarchy_note(organizationLabel)}" />
                 </div>
@@ -104,7 +104,7 @@
 
             <div id="bottom">
                 <h3><span id="comparisonParameter"></span>&nbsp;
-                <img id="incomplete-data-disclaimer" class="infoIcon" src="${urls.images}/iconInfo.png" alt="${i18n().info_icon}" title="${i18n().info_based_on_vivo_data(currentParameterObject.value)}"  width="15px" height="15px"/></h3>
+                <img id="incomplete-data-disclaimer" class="infoIcon" src="${urls.images}/iconInfo-darkened.png" alt="${i18n().info_icon}" title="${i18n().info_based_on_vivo_data(currentParameterObject.value)}"  width="15px" height="15px"/></h3>
             <p class="displayCounter">${i18n().you_have_selected} <span id="counter">0</span> ${i18n().of_a_maximum}
             <span id="total">10</span> <span id="entityleveltext"> ${i18n().schools}</span>.
             <span id="legend-row-header">
