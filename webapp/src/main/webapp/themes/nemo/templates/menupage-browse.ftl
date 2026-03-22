@@ -44,7 +44,8 @@
             </nav>
             <section id="individuals-in-class" role="region">
                 <ul role="list">
-
+                    <div aria-live="polite" id="individuals-list-info"></div>
+                    
                     <#-- Will be populated dynamically via AJAX request -->
                 </ul>
             </section>
