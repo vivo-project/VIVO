@@ -164,7 +164,7 @@
         </#list>
 	</table>
 	<ul>
-		<li><a href="${urls.base}/research" alt="${i18n().view_all_research}">${i18n().view_all}</a></li>
+        <li><a href="${urls.base}/research" alt="${i18n().view_all_research}">${i18n().view_all_research?capitalize}...</a></li>
 	</ul>
 </#macro>
 
