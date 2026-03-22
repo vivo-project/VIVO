@@ -39,16 +39,20 @@ if (typeof i18nStringsCap == 'undefined')
         delete_selected: 'delete selected',
         remove_capability: 'Remove capability',
         remove_group: 'Remove group',
-        expand: 'Expand'
+        expand: 'Expand',
+        view: 'View',
+        capability_map_remove_person: 'Remove person from capability map view',
+        capability_map_svg_title: 'Capability Map Visualization',
+        capability_map_svg_desc: 'A visualization of groups and capabilities as a force-directed graph.'
     }
 };
 var schemes = {
     "white" : {
         "backgroundcolor" : "#FFFFFF",
-        "capabilitycolor" : "#FFA500",
+        "capabilitycolor" : "#A46A00",
         "nodestroke" : "#FFFFFF",
         "fontcolor" : "#555",
-        "linkcolor" : "#B8B8B8",
+        "linkcolor" : "#676767",
         "gradient" : function(percent) {
             return percent
         }
@@ -58,7 +62,7 @@ var schemes = {
         "capabilitycolor" : "#FFA500",
         "nodestroke" : "#333333",
         "fontcolor" : "#FFF",
-        "linkcolor" : "#777",
+        "linkcolor" : "#9b9b9b",
         "gradient" : function(percent) {
             return -percent + 125;
         }
@@ -665,6 +669,8 @@ var render = function() {
     }
     if (!delta) {
         var outer = d3.select("#infovis").append("svg:svg").attr("width", w).attr("height", h);
+        outer.append("svg:title").text(i18nStringsCap.capability_map_svg_title);
+        outer.append("svg:desc").text(i18nStringsCap.capability_map_svg_desc);
         var rescale = function() { vis.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")"); }
         vis = outer
             .append('svg:g')

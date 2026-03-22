@@ -5115,6 +5115,38 @@ uil-data:capability_map.VIVO
         uil:hasKey      "capability_map" ;
         uil:hasPackage  "VIVO-languages" .
 
+uil-data:capability_map_remove_person.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Remove person from capability map view"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "capability_map_remove_person" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:capability_map_input.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Capability Map search input"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "capability_map_input" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:capability_map_svg_title.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Capability Map Visualization"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "capability_map_svg_title" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:capability_map_svg_desc.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "A visualization of groups and capabilities as a force-directed graph."@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "capability_map_svg_desc" ;
+        uil:hasPackage  "VIVO-languages" .
+
 uil-data:search_info_tool_tip_text_the_first_part.VIVO
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;

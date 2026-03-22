@@ -27,7 +27,11 @@ ${stylesheets.add(
         delete_selected: '${i18n().delete_selected?js_string}',
         remove_capability: '${i18n().remove_capability?js_string}',
         remove_group: '${i18n().remove_group?js_string}',
-        expand: '${i18n().expand?js_string}'
+        expand: '${i18n().expand?js_string}',
+        view: '${i18n().view?js_string}',
+        capability_map_remove_person: '${i18n().capability_map_remove_person?js_string}',
+        capability_map_svg_title: '${i18n().capability_map_svg_title?js_string}',
+        capability_map_svg_desc: '${i18n().capability_map_svg_desc?js_string}'
     };
     var contextPath = "${urls.base}";
     $(document).ready(function() {
@@ -110,13 +114,15 @@ ${stylesheets.add(
                 </ul>
 
                 <div class="result_body">
-                    <div class="result_section" id="demo">
-                        <h2>${i18n().cap_map_cur_search_terms}</h2>
-                        <ul id="log_printout">
-                            <li>
-                                ${i18n().cap_map_text6}
-                            </li>
-                        </ul>
+                    <div class="result_section" id="tabpanel-demo" role="tabpanel" aria-labelledby="tab-demo" tabindex="0">
+                        <h2 id="cur-search-terms">${i18n().cap_map_cur_search_terms}</h2>
+                        <div id="log_printout" role="group" aria-labelledby="cur-search-terms">
+                            <ul>
+                                <li>
+                                    ${i18n().cap_map_text6}
+                                </li>
+                            </ul>
+                        </div>
                         <p style="position:absolute; bottom:10px">
                         <div class="capability">${i18n().cap_map_key1}</div>
                         <div class="edge">${i18n().cap_map_key2}</div>
