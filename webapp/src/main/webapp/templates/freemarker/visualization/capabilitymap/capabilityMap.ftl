@@ -103,14 +103,18 @@ ${stylesheets.add(
 
         <div id="right-container">
             <div class="tabs">
-                <ul  class="titles">
-                    <li><a href="#demo">${i18n().cap_map_search_terms}</a></li>
-                    <li><a href="#logg">${i18n().cap_map_info}</a></li>
+                <ul  class="titles" role="tablist" aria-orientation="horizontal">
+                    <li>
+                        <a href="#tabpanel-demo" id="tab-demo" role="tab" aria-controls="tabpanel-demo" aria-selected="true" tabindex="0">${i18n().cap_map_search_terms}</a>
+                    </li>
+                    <li>
+                        <a href="#tabpanel-logg" id="tab-logg" role="tab" aria-controls="tabpanel-logg" aria-selected="false" tabindex="0">${i18n().cap_map_info}</a>
+                    </li>
                     <!-- li><a href="#extractData">Data</a></li -->
                 </ul>
 
                 <div class="result_body">
-                    <div class="result_section" id="demo">
+                    <div class="result_section" id="tabpanel-demo" role="tabpanel" aria-labelledby="tab-demo" tabindex="0">
                         <h2>${i18n().cap_map_cur_search_terms}</h2>
                         <ul id="log_printout">
                             <li>
@@ -126,7 +130,7 @@ ${stylesheets.add(
                         <div class="links4">${i18n().cap_map_key6}</div>
                         </p>
                     </div>
-                    <div class="result_section" id="logg">
+                    <div class="result_section" id="tabpanel-logg" role="tabpanel" aria-labelledby="tab-logg" tabindex="0" hidden>
                         <div id="inner-details">
                             <p>
                                 ${i18n().cap_map_text7}
