@@ -5,7 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="generator" content="VIVO ${version.label}" />
 
-<title>${(title?html)!siteName!}</title>
+<#if title?? && title?has_content>
+    <title>${title?html} | ${siteName}</title>
+<#else>
+    <title>${siteName}</title>
+</#if>
 
 <#-- VIVO OpenSocial Extension by UCSF -->
 <#if openSocial??>
