@@ -94,7 +94,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <@lvf.unsupportedBrowser urls.base />
 
-<form class="customForm" action ="${submitUrl}" class="customForm noIE67" role="${formAction} position entry">
+<form class="customForm" action ="${submitUrl}" class="customForm noIE67" aria-label="${formAction} position entry">
   <p class="inline">
     <label for="orgType">${i18n().org_type_capitalized}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
     <#assign orgTypeOpts = editConfiguration.pageData.orgType />
@@ -109,7 +109,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <#else>
     </#if>
 -->
-<select id="typeSelector" name="orgType" acGroupName="organization">
+<select id="typeSelector" name="orgType" id="orgType" acGroupName="organization">
     <option value="" selected="selected">${i18n().select_one}</option>
     <#list orgTypeOpts?keys as key>
         <option value="${key}"  <#if orgTypeValue = key>selected</#if>>${orgTypeOpts[key]}</option>
@@ -118,7 +118,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
   </p>
 
   <p>
-    <label for="relatedIndLabel">${i18n().organization_capitalized} ${i18n().name_capitalized} ${requiredHint}</label>
+    <label for="orgLabel">${i18n().organization_capitalized} ${i18n().name_capitalized} ${requiredHint}</label>
     <input type="text" name="orgLabel" id="orgLabel" acGroupName="organization" size="50" class="acSelector" value="${orgLabelValue}" >
     <input class="display" type="hidden" id="orgDisplay" acGroupName="organization" name="orgLabelDisplay" value="${orgLabelDisplayValue}">
   </p>
@@ -133,11 +133,11 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     </div>
 
     <label for="positionTitle">${i18n().position_title} ${requiredHint}</label>
-    <input  size="30"  type="text" id="positionTitle" name="positionTitle" value="${positionTitleValue}" role="input" />
+    <input  size="30"  type="text" id="positionTitle" name="positionTitle" value="${positionTitleValue}" />
 
       <label for="positionType">${i18n().position_type} ${requiredHint}</label>
       <#assign posnTypeOpts = editConfiguration.pageData.positionType />
-      <select name="positionType" style="margin-top:-2px" >
+      <select name="positionType" id="positionType" style="margin-top:-2px" >
           <option value="" <#if positionTypeValue == "">selected</#if>>${i18n().select_one}</option>
           <#list posnTypeOpts?keys as key>
               <option value="${key}"  <#if positionTypeValue == key>selected</#if>>${posnTypeOpts[key]}</option>
@@ -146,12 +146,12 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
       <p></p>
       <#--Need to draw edit elements for dates here-->
        <#if htmlForElements?keys?seq_contains("startField")>
-  			<label class="dateTime" for="startField">${i18n().start_capitalized}</label>
+  			<label for="startField-year" class="dateTime" for="startField">${i18n().start_capitalized}</label>
   			${htmlForElements["startField"]} ${yearHint}
        </#if>
        <p></p>
        <#if htmlForElements?keys?seq_contains("endField")>
-  			<label class="dateTime" for="endField">${i18n().end_capitalized}</label>
+  			<label for="endField-year" class="dateTime" for="endField">${i18n().end_capitalized}</label>
   		 	${htmlForElements["endField"]} ${yearHint}
        </#if>
 

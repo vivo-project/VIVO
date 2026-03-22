@@ -55,7 +55,7 @@ ${stylesheets.add(
     <div id="queryform">
         <p>
             <span>
-                <input name="query" id="query" size="34" value="" onfocus="" accesskey="q" onblur="" type="text" onkeydown="queryKeyDown(event);">
+                <input name="query" id="query" size="34" value="" onfocus="" accesskey="q" onblur="" type="text" onkeydown="queryKeyDown(event);" aria-label="${i18n().capability_map_input?js_string}">
                 <label id="cutofflabel" for="queryCutoff">Cutoff:</label>
                 <input id="queryCutoff" name="queryCutoff" type="text" title="Cutoff" size="4" value="10">
                 <input value="${i18n().cap_map_search}" type="submit" id="add" type="button" onclick="addKwd();">
