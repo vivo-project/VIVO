@@ -104,9 +104,9 @@ var DataTableWidget = Class.extend({
 		var me = this;
 
 		var dom = me.dom;
-		var filter = $('<div class="science-areas-filter">' +
-				'<span id="' + dom.firstFilterID + '" class="' + dom.filterOptionClass + ' ' + dom.activeFilterClass + '">' + dom.firstFilterLabel + '</span> | ' +
-		    	'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">' + dom.secondFilterLabel + '</span>' +
+		var filter = $('<div class="science-areas-filter" role="tablist" aria-orientation="horizontal">' +
+				'<span id="' + dom.firstFilterID + '" role="tab" aria-selected="true" aria-controls="datatable" class="' + dom.filterOptionClass + ' ' + dom.activeFilterClass + '">' + dom.firstFilterLabel + '</span> | ' +
+		    	'<span id="' + dom.secondFilterID + '" role="tab" aria-selected="false" aria-controls="datatable" class="' + dom.filterOptionClass + '">' + dom.secondFilterLabel + '</span>' +
 		    	'<img class="'+ dom.filterInfoIconClass +'" id="imageIconTwo" src="'+ infoIconUrl +'" alt="information icon" title="" /></div>');
 		me.tableDiv.append(filter);
 
@@ -179,6 +179,8 @@ var DataTableWidget = Class.extend({
 		tbody.append(rowsToInsert.join(''));
 
 		table.append(tbody);
+		// Add aria-labelledby to the table for accessibility
+		table.attr('aria-labelledby', dom.firstFilterID + ' ' + dom.secondFilterID);
 		me.tableDiv.append(table);
 
 		table.children("tbody").children("tr").on("mouseenter", function() {

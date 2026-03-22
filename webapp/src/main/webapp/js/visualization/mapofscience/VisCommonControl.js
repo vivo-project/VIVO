@@ -56,15 +56,19 @@ function initFilter(dom) {
 		if (!obj.hasClass(dom.activeFilterClass)) {
 			var checked = obj.attr('id');
 			if (checked === dom.secondFilterID) {
-				$("#" + dom.firstFilterID).removeClass(dom.activeFilterClass);
+				$("#" + dom.firstFilterID)
+					.removeClass(dom.activeFilterClass)
+					.attr('aria-selected', 'false');
 				currentController.changeFilter(2);
 
 			} else if (checked === dom.firstFilterID) {
-				$("#" + dom.secondFilterID).removeClass(dom.activeFilterClass);
+				$("#" + dom.secondFilterID)
+					.removeClass(dom.activeFilterClass)
+					.attr('aria-selected', 'false');
 				currentController.changeFilter(1);
 			}
 
-			obj.addClass(dom.activeFilterClass);
+			obj.addClass(dom.activeFilterClass).attr('aria-selected', 'true');
 		}
 	});
 
