@@ -112,6 +112,12 @@ var DataTableWidget = Class.extend({
 				'</button></div>');
 		me.tableDiv.append(filter);
 
+		$("#" + dom.firstFilterID + ", #" + dom.secondFilterID).on("keydown", function(e) {
+			if (e.key === "Enter" || e.keyCode === 13) {
+				$(this).trigger("click");
+			}
+		});
+
 		const tooltipDataImageIconTwo = {
 			title: "<div>" + $('#toolTipTwo').html() + "</div>",
 			customClass: "vitroTooltip vitroTooltip-yellow",
@@ -237,6 +243,35 @@ var DataTableWidget = Class.extend({
 		    }
 		});
 
+		$('#datatable_paginate').attr('role', 'list')
+		const $paginationList = $('<div role="list" class="pagination-wrapper"></div>');
+
+		['#datatable_first', '#datatable_previous', '#datatable_next', '#datatable_last'].forEach(selector => {
+			const $button = $(selector)
+				.attr('tabindex', 0)
+				.attr('role', 'button')
+				.wrap('<div role="listitem" class="pagination-item" style="display:inline"></div>');
+
+			// Attach keyboard support
+			$button.on('keydown', function(e) {
+				if (e.key === "Enter" || e.key === " ") {
+					e.preventDefault();
+					$(this).trigger("click");
+				}
+			});
+
+			// Move each listitem into the list container
+			$paginationList.append($button.closest('[role="listitem"]'));
+		});
+
+		// Replace the old container with the new accessible structure
+		$('#datatable_paginate').empty().append($paginationList);
+
+		table.find('tbody > tr').each(function() {
+			var $firstTd = $(this).children('td').first();
+			var th = $('<th class="ignore-th"></th>').html($firstTd.html());
+			$firstTd.replaceWith(th);
+		});
 
 		var searchInputBox = $("." + me.dom.searchBarParentContainerClass).find("input[type=search]");
 		searchInputBox.css("width", "140px");
