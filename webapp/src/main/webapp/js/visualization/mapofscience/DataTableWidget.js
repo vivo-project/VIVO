@@ -105,8 +105,8 @@ var DataTableWidget = Class.extend({
 
 		var dom = me.dom;
 		var filter = $('<div class="science-areas-filter" role="tablist" aria-orientation="horizontal">' +
-				'<span id="' + dom.firstFilterID + '" role="tab" aria-selected="true" aria-controls="datatable" class="' + dom.filterOptionClass + ' ' + dom.activeFilterClass + '">' + dom.firstFilterLabel + '</span> | ' +
-		    	'<span id="' + dom.secondFilterID + '" role="tab" aria-selected="false" aria-controls="datatable" class="' + dom.filterOptionClass + '">' + dom.secondFilterLabel + '</span>' +
+				'<span id="' + dom.firstFilterID + '" role="tab" aria-selected="true" aria-controls="datatable" class="' + dom.filterOptionClass + ' ' + dom.activeFilterClass + '" tabindex="0">' + dom.firstFilterLabel + '</span> | ' +
+		    	'<span id="' + dom.secondFilterID + '" role="tab" aria-selected="false" aria-controls="datatable" class="' + dom.filterOptionClass + '" tabindex="0">' + dom.secondFilterLabel + '</span>' +
 		    	'<img class="'+ dom.filterInfoIconClass +'" id="imageIconTwo" src="'+ infoIconUrl +'" alt="information icon" title="" /></div>');
 		me.tableDiv.append(filter);
 

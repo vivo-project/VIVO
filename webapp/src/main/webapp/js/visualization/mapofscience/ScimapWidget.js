@@ -210,9 +210,33 @@ var ScimapWidget = Class.extend({
 			} else {
 				slider.setTypeString(i18nStrings.subdisciplinesLower);
 			}
-			slider.setMin(Math.min(1, length));
+			const minValue = Math.min(1, length); 
+			slider.setMin(minValue);
 			slider.setMax(length);
 			slider.setValue(length);
+			
+			var sliderDiv = slider.sliderDiv;
+			var sliderLabel = slider.labelDiv;
+
+			sliderLabel.attr('id', 'scimap-slider-description');
+
+			var handle = sliderDiv && sliderDiv.children()[0];
+
+			if (sliderDiv) {
+				sliderDiv.attr('role', 'presentation')				
+			}
+			if (handle) {
+				handle.setAttribute('tabindex', '0');
+				handle.setAttribute('role', 'slider');
+				handle.setAttribute('aria-valuenow', slider.getValue());
+				handle.setAttribute('aria-valuemin', minValue);
+				handle.setAttribute('aria-valuemax', length);
+				handle.setAttribute('aria-labelledby', 'scimap-slider-description');
+				$(handle).on('keydown mouseup touchend', function() {
+					handle.setAttribute('aria-valuenow', slider.getValue());
+				});
+			}
+			
 		}
 	},
 	changeFilter: function(filterType) {
