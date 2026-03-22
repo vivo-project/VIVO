@@ -96,7 +96,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <form class="customForm" action ="${submitUrl}" class="customForm noIE67" aria-label="${formAction} position entry">
   <p class="inline">
-    <label for="orgType">${i18n().org_type_capitalized}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
+    <label for="typeSelector">${i18n().org_type_capitalized}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
     <#assign orgTypeOpts = editConfiguration.pageData.orgType />
 <#--
     <#if editMode == "edit">
@@ -119,7 +119,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
   <p>
     <label for="orgLabel">${i18n().organization_capitalized} ${i18n().name_capitalized} ${requiredHint}</label>
-    <input type="text" name="orgLabel" id="orgLabel" acGroupName="organization" size="50" class="acSelector" value="${orgLabelValue}" >
+    <input type="text" name="orgLabel" id="orgLabel" acGroupName="organization" size="62" class="acSelector" value="${orgLabelValue}" >
     <input class="display" type="hidden" id="orgDisplay" acGroupName="organization" name="orgLabelDisplay" value="${orgLabelDisplayValue}">
   </p>
     <div class="acSelection" acGroupName="organization">
