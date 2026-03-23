@@ -69,8 +69,8 @@ var ComparisonDataTableWidget = Class.extend({
 				' | ' +
 				'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">' + dom.secondFilterLabel + '</span>' +
 			*/
-			'<button id="comparisonImageIconTwo" aria-label="' + i18nStrings.infoIconString + '" class="nostyle">' +
-				'<img class="' + dom.filterInfoIconClass + '" src="'+ infoIconUrl +'" alt="' + i18nStrings.infoIconString + '" title="" aria-hidden="true" />' +
+			'<button id="comparisonImageIconTwo" aria-label="' + i18nStrings.infoIconString + '" class="nostyle ' + dom.filterInfoIconClass + '">' +
+				'<img src="'+ infoIconUrl +'" alt="' + i18nStrings.infoIconString + '" title="" aria-hidden="true" />' +
 			'</button></div>');
 		me.tableDiv.append(filter);
 
@@ -248,8 +248,8 @@ var ComparisonDataTableWidget = Class.extend({
 		searchInputBox.css("width", "140px");
 		searchInputBox.after(
 			"<span id='comparison-reset-search' title='" + i18nStrings.clearSearchQuery + "'>X</span>"
-			+ "<button id='comparisonSearchInfoIcon' aria-label='" + i18nStrings.infoIconString + "' class='nostyle'>"
-			+ "<img class='comparisonFilterInfoIcon' src='" + infoIconUrl + "' alt='" + i18nStrings.infoIconString + "' title='' aria-hidden='true' />"
+			+ "<button id='comparisonSearchInfoIcon' aria-label='" + i18nStrings.infoIconString + "' class='nostyle comparisonFilterInfoIcon'>"
+			+ "<img src='" + infoIconUrl + "' alt='" + i18nStrings.infoIconString + "' title='' aria-hidden='true' />"
 			+ "</button>"
 		);
 		$( document ).on('click', "#comparison-reset-search", function() {

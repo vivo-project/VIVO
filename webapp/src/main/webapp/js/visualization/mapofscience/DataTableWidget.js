@@ -107,8 +107,8 @@ var DataTableWidget = Class.extend({
 		var filter = $('<div class="science-areas-filter">' +
 				'<span id="' + dom.firstFilterID + '" class="' + dom.filterOptionClass + ' ' + dom.activeFilterClass + '">' + dom.firstFilterLabel + '</span> | ' +
 				'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">' + dom.secondFilterLabel + '</span>' +
-				'<button class="nostyle" id="imageIconTwo" aria-label="information icon">' +
-					'<img class="'+ dom.filterInfoIconClass +'" src="'+ infoIconUrl +'" alt="information icon" title="" aria-hidden="true" />' +
+				'<button class="nostyle ' + dom.filterInfoIconClass + '" id="imageIconTwo" aria-label="information icon">' +
+					'<img src="'+ infoIconUrl +'" alt="information icon" title="" aria-hidden="true" />' +
 				'</button></div>');
 		me.tableDiv.append(filter);
 
@@ -276,8 +276,8 @@ var DataTableWidget = Class.extend({
 		var searchInputBox = $("." + me.dom.searchBarParentContainerClass).find("input[type=search]");
 		searchInputBox.css("width", "140px");
 		searchInputBox.after(
-			"<button class='nostyle' id='searchInfoIcon' aria-label='"+ i18nStrings.infoIconString +"'>" +
-				"<img class='filterInfoIcon' src='" + infoIconUrl
+			"<button class='nostyle filterInfoIcon' id='searchInfoIcon' aria-label='"+ i18nStrings.infoIconString +"'>" +
+				"<img src='" + infoIconUrl
 				+ "' alt='" + i18nStrings.infoIconString + "' title='' aria-hidden='true' />" +
 			"</button>"
 		);

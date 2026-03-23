@@ -324,7 +324,7 @@ $(document).ready(function(){
         <div class="vis_stats_full">
 
         <div class="sub_headings" id="table_heading"><h3>${i18n().tables_capitalized}</h3></div>
-            <p style="float:left;font-size:.9em">${i18n().grant_info_for_all_years}&nbsp;<button id="imageIconThree" class="nostyle" aria-label="${i18n().info_icon}"><img class="filterInfoIcon" width="16px" height="16px" src="${urls.images}/iconInfo.png" alt="${i18n().info_icon}" title="${i18n().grant_sparkline_note}" aria-hidden="true" /></button></p>
+            <p style="float:left;font-size:.9em">${i18n().grant_info_for_all_years}&nbsp;<button id="imageIconThree" class="nostyle filterInfoIcon" aria-label="${i18n().info_icon}"><img width="16px" height="16px" src="${urls.images}/iconInfo.png" alt="${i18n().info_icon}" title="${i18n().grant_sparkline_note}" aria-hidden="true" /></button></p>
 
             <div style="clear:both"></div>
 

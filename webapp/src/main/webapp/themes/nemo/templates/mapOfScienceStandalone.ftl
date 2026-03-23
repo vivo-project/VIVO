@@ -22,8 +22,8 @@ corresponding changes in the included Templates. -->
 <h2 id="header-entity-label" class="hide-dom-on-init"><span><a id="entityMoniker" href="${entityVivoProfileURL}" title="${i18n().entity_label}">${entityLabel}</a></span></h2>
 
 <div id="map-of-science-info" class="hide-dom-on-init"> ${i18n().explore_activity} (<span id="mapped-publications" style="font-weight: bold"></span> ${i18n().publications}) ${i18n().across_subdisciplines} 
-	<button id="imageIconOne" class="nostyle" aria-label="${i18n().info_icon}">
-        <img class="filterInfoIcon" src="${urls.images}/iconInfo.png" 
+	<button id="imageIconOne" class="nostyle filterInfoIcon" aria-label="${i18n().info_icon}">
+        <img src="${urls.images}/iconInfo.png" 
             alt="${i18n().info_icon}" aria-hidden="true" /> 
     </button>
 </div>
@@ -52,14 +52,14 @@ corresponding changes in the included Templates. -->
     <#-- VIEW TYPE FILTER -->
     <div id="view-type-filter" style="display:${viewTypeFilterDisplay};">
     	<input type="radio" name="view-type" value="ENTITY"> ${i18n().explore_capitalized} ${entityLabel} </input>
-        <button id="exploreInfoIcon" class="nostyle" aria-label="${i18n().info_icon}">
-    	    <img class="filterInfoIcon" src="${urls.images}/iconInfo.png" alt="${i18n().info_icon}" title="" aria-hidden="true" />
+        <button id="exploreInfoIcon" class="nostyle filterInfoIcon" aria-label="${i18n().info_icon}">
+    	    <img src="${urls.images}/iconInfo.png" alt="${i18n().info_icon}" title="" aria-hidden="true" />
         </button>
         <br>
 		<input type="radio" name="view-type" value="COMPARISON"> ${i18n().compare_organizations} <#--/ people --></input>
 
-        <button id="compareInfoIcon" class="nostyle" aria-label="${i18n().info_icon}">
-    	    <img class="filterInfoIcon" src="${urls.images}/iconInfo.png" alt="${i18n().info_icon}" title="" aria-hidden="true"/>
+        <button id="compareInfoIcon" class="nostyle filterInfoIcon" aria-label="${i18n().info_icon}">
+    	    <img src="${urls.images}/iconInfo.png" alt="${i18n().info_icon}" title="" aria-hidden="true"/>
         </button>        
         <br><br>
     </div>
@@ -68,8 +68,8 @@ corresponding changes in the included Templates. -->
     <div id="percent-mapped-info">
                 ${i18n().mapped} <span id="percent-mapped"></span>% ${i18n().of} <span id="total-publications"></span> ${i18n().publications}
 
-                <button id="imageIconThree" class="nostyle" aria-label="${i18n().info_icon}">
-                    <img class="filterInfoIcon" src="${urls.images}/iconInfo.png" alt="${i18n().info_icon}" aria-hidden="true" />
+                <button id="imageIconThree" class="nostyle filterInfoIcon" aria-label="${i18n().info_icon}">
+                    <img src="${urls.images}/iconInfo.png" alt="${i18n().info_icon}" aria-hidden="true" />
                 </button>
 
         </div>
