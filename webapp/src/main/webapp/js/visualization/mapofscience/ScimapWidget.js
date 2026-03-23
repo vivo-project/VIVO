@@ -226,6 +226,7 @@ var ScimapWidget = Class.extend({
 				sliderDiv.attr('role', 'presentation')				
 			}
 			if (handle) {
+				handle.style.background = '#13739d';
 				handle.setAttribute('tabindex', '0');
 				handle.setAttribute('role', 'slider');
 				handle.setAttribute('aria-valuenow', slider.getValue());
