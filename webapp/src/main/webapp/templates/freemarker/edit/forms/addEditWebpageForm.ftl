@@ -66,10 +66,10 @@
         </#list>
     </select>
     <label for="url">URL ${requiredHint}</label>
-    <input  size="70"  type="text" id="url" name="url" value="${url}" role="input" />
+    <input  size="70"  type="text" id="url" name="url" value="${url}" />
 
     <label for="label">${i18n().webpage_name}</label>
-    <input  size="70"  type="text" id="label" name="label" value="${label?html}" role="input" />
+    <input  size="70"  type="text" id="label" name="label" value="${label?html}" />
 
     <#if editMode="add">
         <input type="hidden" name="rank" value="${newRank}" />

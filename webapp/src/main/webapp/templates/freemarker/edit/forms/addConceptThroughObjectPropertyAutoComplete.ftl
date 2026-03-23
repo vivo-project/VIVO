@@ -51,7 +51,7 @@
 <#if editConfiguration.propertySelectFromExisting = true>
     <#if rangeOptionsExist  = true >
         <form class="customForm" action = "${submitUrl}">
-            <input type="hidden" name="editKey" id="editKey" value="${editKey}" role="input" />
+            <input type="hidden" name="editKey" id="editKey" value="${editKey}" />
             <#if editConfiguration.propertyPublicDescription?has_content>
                 <p>${editConfiguration.propertyPublicDescription}</p>
              </#if>
