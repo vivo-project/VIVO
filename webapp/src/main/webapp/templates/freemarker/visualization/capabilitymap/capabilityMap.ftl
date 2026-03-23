@@ -46,8 +46,27 @@ ${stylesheets.add(
         });
         var conceptArray = JSON.parse(loadedConcepts.responseText);
         $("#query").autocomplete({
-            source: conceptArray
-        });
+            source: conceptArray,
+            minLength: 1,
+            open: function(event, ui) {
+                $("#query").attr("aria-expanded", "true");
+                $(".ui-autocomplete").attr("id", "query-autocomplete-list").attr("role", "listbox");
+                $(".ui-autocomplete li").attr("role", "option");
+            },
+            close: function(event, ui) {
+                $("#query").attr("aria-expanded", "false");
+            },
+            select: function(event, ui) {
+                $("#query").val(ui.item.value);
+                return false;
+            }
+        }).data("ui-autocomplete")._renderItem = function(ul, item) {
+            return $("<li>")
+                .attr("role", "option")
+                .append($("<div>").text(item.label))
+                .appendTo(ul);
+        };
+
     });
 </script>
 <div class="main" id="main-content" role="main">
@@ -59,7 +78,7 @@ ${stylesheets.add(
     <div id="queryform">
         <p>
             <span>
-                <input name="query" id="query" size="34" value="" onfocus="" accesskey="q" onblur="" type="text" onkeydown="queryKeyDown(event);">
+                <input name="query" id="query" size="34" value="" onfocus="" accesskey="q" onblur="" type="text" onkeydown="queryKeyDown(event);" aria-label="${i18n().capability_map_input?js_string}" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-owns="query-autocomplete-list">
                 <label id="cutofflabel" for="queryCutoff">Cutoff:</label>
                 <input id="queryCutoff" name="queryCutoff" type="text" title="Cutoff" size="4" value="10">
                 <input value="${i18n().cap_map_search}" type="submit" id="add" type="button" onclick="addKwd();">

@@ -58,7 +58,7 @@ body {
     top:0;
 }
 
-ul#log_printout {
+#log_printout {
     display: block;
     height: 330px;
     overflow: scroll
@@ -309,7 +309,8 @@ hr {
 
 .tabs ul.titles li.activeTab a,
 .tabs ul.titles li.activeTab a:hover {
-    background-color: #fff;
+    background-color: #13739D;
+    color: white;
 }
 .smalllogo {
     margin-left:-5px;
