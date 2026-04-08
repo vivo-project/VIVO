@@ -156,12 +156,14 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
 			OrcidTokenResponse orcidToken = getOrcidToken(vreq);
 			if (userAccountExists(vreq, orcidToken) ) {
 				return login(vreq, orcidToken);
+//			} else {
+//				if (isAgreementAccepted(vreq)) {
+//					return register(vreq, orcidToken);
+//				} else {
+//					return proposeAgrement(vreq, orcidToken);
+//				}
 			} else {
-				if (isAgreementAccepted(vreq)) {
-					return register(vreq, orcidToken);
-				} else {
-					return proposeAgrement(vreq, orcidToken);
-				}
+				return null;
 			}
 			
 		} catch (OrcidNotConfiguredException e) {
@@ -237,21 +239,28 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
 			String givenName = getGivenName(orcidBio);
 			UserAccount userAccount = getAuthenticator(vreq).getAccountForExternalAuth(orcidToken.orcid);
 			String profileUri = getProfileUri(vreq, userAccount);
-			if (profileUri == null) {
-				profileUri = createProfile(vreq, orcidToken, orcidBio, familyName, givenName, userAccount);
-			}
+//			if (profileUri == null) {
+//				profileUri = createProfile(vreq, orcidToken, orcidBio, familyName, givenName, userAccount);
+//			}
+
 			getAuthenticator(vreq).recordLoginAgainstUserAccount(userAccount, LoginStatusBean.AuthenticationSource.EXTERNAL);
 			String[] dois = getOrcidDOIs(vreq.getRDFService(), profileUri, orcidToken);
 
-			if (shouldGoToClaimDoi(dois)) {
-				return claimDoi(false, familyName, givenName, profileUri, dois);
+//			if (shouldGoToClaimDoi(dois)) {
+//				return claimDoi(false, familyName, givenName, profileUri, dois);
+//			}
+
+			if (profileUri == null) {
+				return goToHomePage();
+			} else {
+				return goToUserProfile(vreq, profileUri);
 			}
-			return goToUserProfile(vreq, profileUri);
+
 				
 		} catch(Authenticator.LoginNotPermitted e) {
 			return new TemplateResponseValues(NOT_AUTHENTICATED_FTL);
-		} catch (NotEnoughInfoForNewProfileException e) {
-			return new TemplateResponseValues(NO_PROFILE_FTL);
+//		} catch (NotEnoughInfoForNewProfileException e) {
+//			return new TemplateResponseValues(NO_PROFILE_FTL);
 		}
 	}
 
@@ -299,6 +308,10 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
 
 	private ResponseValues goToUserProfile(VitroRequest vreq, String profileUri) {
 		return new DirectRedirectResponseValues(UrlBuilder.getIndividualProfileUrl(profileUri, vreq));
+	}
+
+	private ResponseValues goToHomePage() {
+		return new DirectRedirectResponseValues(UrlBuilder.getHomeUrl());
 	}
 
 	private ResponseValues claimDoi(boolean newAccount, String familyName, String givenName, String profileUri,
