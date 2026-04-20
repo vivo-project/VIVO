@@ -358,7 +358,12 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
 					if (!profile.hasProperty(model.getProperty(VIVO + "freetextKeyword"))) {
 						for (ValueString keyword : orcidBio.keywords.keyword) {
 							if (!StringUtils.isEmpty(keyword.value)) {
-								String[] splitKeywords = keyword.value.split("\\s*,\\s*");
+								// Split only on the literal comma
+								String[] splitKeywords = keyword.value.split(",");
+								for (int i = 0; i < splitKeywords.length; i++) {
+									// Clean up the whitespace for each element
+									splitKeywords[i] = splitKeywords[i].trim();
+								}
 								for (String splitKeyword : splitKeywords) {
 									addKeywordToProfile(model, profile, splitKeyword);
 								}
