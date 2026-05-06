@@ -21,8 +21,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 
 // 2. Third-party and Project Imports
-import com.google.gson.Gson;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cornell.mannlib.orcidclient.context.OrcidClientContext;
 import edu.cornell.mannlib.vedit.beans.LoginStatusBean;
 import edu.cornell.mannlib.vitro.webapp.auth.permissions.PermissionSets;
@@ -57,6 +60,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.params.ClientPNames;
+import org.apache.http.client.params.CookiePolicy;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.rdf.model.Model;
@@ -111,12 +116,14 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
     private String callbackUrl;
     private String apiPrefix;
     private String apiVersion;
-    private Gson gson;
+    private ObjectMapper mapper;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        gson = new Gson();
+        mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        mapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
         ConfigurationProperties configProperties = ConfigurationProperties.getBean(getServletContext());
         clientId = configProperties.getProperty(CONFIGURATION_AUTH_ORCID_CLIENT_ID);
         clientSecret = configProperties.getProperty(CONFIGURATION_AUTH_ORCID_CLIENT_PASSWORD);
@@ -194,7 +201,11 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
     private TemplateResponseValues proposeAgrement(VitroRequest vreq, OrcidTokenResponse orcidToken) {
         Map<String, Object> templateValues = new HashMap();
         if (orcidToken != null) {
-            templateValues.put(JSON_TOKEN_PARAM, gson.toJson(orcidToken));
+            try {
+                templateValues.put(JSON_TOKEN_PARAM, mapper.writeValueAsString(orcidToken));
+            } catch (Exception e) {
+                log.error("Error writing JSON token", e);
+            }
         }
         TemplateResponseValues agreement = new TemplateResponseValues(AGREEMENT_FTL, templateValues);
         return agreement;
@@ -511,7 +522,11 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
             return getTokenFromCodeParam(vreq);
         }
         if (!StringUtils.isEmpty(json)) {
-            orcidToken = gson.fromJson(json, OrcidTokenResponse.class);
+            try {
+                orcidToken = mapper.readValue(json, OrcidTokenResponse.class);
+            } catch (Exception e) {
+                log.error("Error parsing JSON token", e);
+            }
         }
 
         if (orcidToken == null || StringUtils.isEmpty(orcidToken.orcid)) {
@@ -539,7 +554,11 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
         String json = readJSON(getTokenUrl(), nvps);
 
         if (!StringUtils.isEmpty(json)) {
-            orcidToken = gson.fromJson(json, OrcidTokenResponse.class);
+            try {
+                orcidToken = mapper.readValue(json, OrcidTokenResponse.class);
+            } catch (Exception e) {
+                log.error("Error parsing JSON token", e);
+            }
         }
 
         if (orcidToken == null || StringUtils.isEmpty(orcidToken.orcid)) {
@@ -644,6 +663,8 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
 
             HttpClient client = HttpClientFactory.getHttpClient();
             HttpGet request = new HttpGet(url);
+
+            request.getParams().setParameter(ClientPNames.COOKIE_POLICY, CookiePolicy.IGNORE_COOKIES);
             request.setHeader("Authorization", "Bearer " + token.accessToken);
             request.setHeader("Accept", "application/json");
 
@@ -655,7 +676,7 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
                         IOUtils.copy(in, writer, "UTF-8");
 
                         String json = writer.toString();
-                        orcidResponse = gson.fromJson(json, OrcidWorks.class);
+                        orcidResponse = mapper.readValue(json, OrcidWorks.class);
 
                     }
             }
@@ -712,6 +733,9 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
 
             HttpClient client = HttpClientFactory.getHttpClient();
             HttpGet request = new HttpGet(url);
+
+            request.getParams().setParameter(ClientPNames.COOKIE_POLICY, CookiePolicy.IGNORE_COOKIES);
+
             request.setHeader("Authorization", "Bearer " + token.accessToken);
             request.setHeader("Accept", "application/json");
 
@@ -726,7 +750,7 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
                         if (log.isDebugEnabled()) {
                             log.debug("Person json " + json);
                         }
-                        OrcidRecord record = gson.fromJson(json, OrcidRecord.class);
+                        OrcidRecord record = mapper.readValue(json, OrcidRecord.class);
                         if (record != null && record.person != null) {
                             record.person.orcidIdentifier = record.orcidIdentifier;
                         }
@@ -752,19 +776,30 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
         try {
             HttpClient client = HttpClientFactory.getHttpClient();
             HttpPost request = new HttpPost(url);
+
+            request.getParams().setParameter(ClientPNames.COOKIE_POLICY, CookiePolicy.IGNORE_COOKIES);
+
             request.setEntity(new UrlEncodedFormEntity(nvps));
 
             // Content negotiate for csl / citeproc JSON
             request.setHeader("Accept", "application/json");
 
             HttpResponse response = client.execute(request);
-            switch (response.getStatusLine().getStatusCode()) {
+            int statusCode = response.getStatusLine().getStatusCode();
+            switch (statusCode) {
                 case 200:
                     try (InputStream in = response.getEntity().getContent()) {
                         StringWriter writer = new StringWriter();
                         IOUtils.copy(in, writer, "UTF-8");
                         return writer.toString();
                     }
+                default:
+                    try (InputStream in = response.getEntity().getContent()) {
+                        StringWriter writer = new StringWriter();
+                        IOUtils.copy(in, writer, "UTF-8");
+                        log.error("ORCID API returned status " + statusCode + ": " + writer.toString());
+                    }
+                    break;
             }
         } catch (IOException e) {
             log.error(e, e);
@@ -995,14 +1030,14 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
     static class NotEnoughInfoForNewProfileException extends Exception {
     }
 
-    private class OrcidTokenResponse {
-        @SerializedName("access_token")
+    private static class OrcidTokenResponse {
+        @JsonProperty("access_token")
         String accessToken;
 
         String name;
         String orcid;
 
-        @SerializedName("refresh_token")
+        @JsonProperty("refresh_token")
         String refreshToken;
 
         OrcidTokenResponse() {
@@ -1010,78 +1045,78 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
         }
     }
 
-    private class OrcidRecord {
-        @SerializedName("orcid-identifier")
+    private static class OrcidRecord {
+        @JsonProperty("orcid-identifier")
         OrcidIdentifier orcidIdentifier;
 
-        @SerializedName("person")
+        @JsonProperty("person")
         OrcidPerson person;
     }
 
-    private class OrcidPerson {
-        @SerializedName("name")
+    private static class OrcidPerson {
+        @JsonProperty("name")
         OrcidName orcidName;
 
         VisibilityString biography;
 
-        @SerializedName("researcher-urls")
+        @JsonProperty("researcher-urls")
         ResearcherUrls researcherUrls;
 
-        @SerializedName("emails")
+        @JsonProperty("emails")
         Emails emails;
 
-        @SerializedName("addresses")
+        @JsonProperty("addresses")
         ContactDetails contactDetails;
 
-        @SerializedName("keywords")
+        @JsonProperty("keywords")
         Keywords keywords;
 
-        @SerializedName("orcid-identifier")
+        @JsonProperty("orcid-identifier")
         OrcidIdentifier orcidIdentifier;
 
-        private class OrcidName {
-            @SerializedName("given-names")
+        private static class OrcidName {
+            @JsonProperty("given-names")
             ValueString givenNames;
 
-            @SerializedName("family-name")
+            @JsonProperty("family-name")
             ValueString familyName;
 
             String visibility;
         }
 
-        private class ResearcherUrls {
-            @SerializedName("researcher-url")
+        private static class ResearcherUrls {
+            @JsonProperty("researcher-url")
             ResearcherUrl[] researcherUrl;
             String visibility;
 
-            private class ResearcherUrl {
+            private static class ResearcherUrl {
                 ValueString url;
             }
         }
 
-        private class Emails {
-            @SerializedName("email")
+        private static class Emails {
+            @JsonProperty("email")
             Email[] email;
 
-            private class Email {
+            private static class Email {
                 String value;
                 String visibility;
             }
         }
 
-        private class ContactDetails {
-            @SerializedName("address")
+        private static class ContactDetails {
+            @JsonProperty("address")
             Address[] address;
 
-            private class Address {
-                @SerializedName("source")
+            private static class Address {
+                @JsonProperty("source")
                 Source source;
 
                 ValueString country;
                 String visibility;
 
-                private class Source {
-                    @SerializedName("source-orcid")
+                private static class Source {
+                    @JsonProperty("source-orcid")
                     OrcidIdentifier orcidIdentifier;
                 }
             }
@@ -1089,45 +1124,45 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
 
     }
 
-    private class OrcidIdentifier {
+    private static class OrcidIdentifier {
         String host;
         String path;
         String uri;
     }
 
-    private class Keywords {
+    private static class Keywords {
         ValueString[] keyword;
         String visibility;
     }
 
-    private class OrcidWorks {
-        @SerializedName("group")
+    private static class OrcidWorks {
+        @JsonProperty("group")
         OrcidWork[] orcidWork;
 
-        private class OrcidWork {
-            @SerializedName("external-ids")
+        private static class OrcidWork {
+            @JsonProperty("external-ids")
             WorkExternalIdentifiers workExternalIdentifiers;
 
-            private class WorkExternalIdentifiers {
-                @SerializedName("external-id")
+            private static class WorkExternalIdentifiers {
+                @JsonProperty("external-id")
                 WorkExternalIdentifier[] workExternalIdentifier;
 
-                private class WorkExternalIdentifier {
-                    @SerializedName("external-id-type")
+                private static class WorkExternalIdentifier {
+                    @JsonProperty("external-id-type")
                     String workExternalIdentifierType;
 
-                    @SerializedName("external-id-value")
+                    @JsonProperty("external-id-value")
                     String workExternalIdentifierId;
                 }
             }
         }
     }
 
-    private class ValueString {
+    private static class ValueString {
         String value;
     }
 
-    private class VisibilityString {
+    private static class VisibilityString {
         String value;
         String visibility;
     }
