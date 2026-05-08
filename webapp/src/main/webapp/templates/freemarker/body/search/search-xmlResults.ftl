@@ -20,7 +20,7 @@
           <#if individual.email?has_content>
           <str name="email">"${individual.email}"</str>
           </#if>
-          <str name="vivo-url">${individual.profileUrl?xml}"</str>
+          <str name="vivo-url">${individual.profileUrl?xml}</str>
           <str name="modTime">${individual.modTime?xml}</str>
         </doc>
     </#list>
