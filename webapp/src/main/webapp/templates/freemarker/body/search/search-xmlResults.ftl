@@ -21,6 +21,7 @@
           <str name="email">"${individual.email}"</str>
           </#if>
           <str name="vivo-url">${individual.profileUrl?xml}"</str>
+          <str name="modTime">${individual.modTime?xml}</str>
         </doc>
     </#list>
   </result>
