@@ -1,6 +1,6 @@
 <http://vivoweb.org/ontology#vitroPropertyGroupidentifiers> <http://www.w3.org/2000/01/rdf-schema#label> "Identidad"@es .
 <http://vivoweb.org/ontology#vitroPropertyGroupbibliographiconline> <http://www.w3.org/2000/01/rdf-schema#label> "Documentos relacionados"@es .
-<http://vivoweb.org/ontology#vitroPropertyGroupbiography> <http://www.w3.org/2000/01/rdf-schema#label> "Antecedentes"@es .
+<http://vivoweb.org/ontology#vitroPropertyGroupbiography> <http://www.w3.org/2000/01/rdf-schema#label> "Formación"@es .
 <http://vivoweb.org/ontology#vitroPropertyGroupoutreach> <http://www.w3.org/2000/01/rdf-schema#label> "Servicio"@es .
 <http://vivoweb.org/ontology#vitroPropertyGroupbibobscure> <http://www.w3.org/2000/01/rdf-schema#label> "Informaci\u00F3n adicional de documento"@es .
 <http://vivoweb.org/ontology#vitroPropertyGrouplinks> <http://www.w3.org/2000/01/rdf-schema#label> "Enlaces"@es .
