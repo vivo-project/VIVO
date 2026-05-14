@@ -143,8 +143,10 @@ public class OrcidExportDataLoader {
                                 tryPush = false;
                             }
                         }
-                    } catch (IllegalAccessException | InvocationTargetException e) {
-                        log.error("Error while converting to ORCID entity: " + e.getMessage());
+                    } catch (InvocationTargetException e) {
+                        log.error("Error while converting to ORCID entity", e.getCause());
+                    } catch (IllegalAccessException e) {
+                        log.error("Illegal access while converting to ORCID entity", e);
                     }
                 }
 
