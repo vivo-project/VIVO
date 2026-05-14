@@ -2,6 +2,7 @@ package edu.cornell.mannlib.vivo.orcid.export.converter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -90,11 +91,11 @@ public class WorkConverter {
 
     private static void setAuthorInformation(Map<String, String> record, WorkDTO dto) {
         if (record.containsKey("authors")) {
-            List<String> authorNames = Arrays.asList(record.get("authors").split("; "));
-            List<String> authorRoles = Arrays.asList(record.get("authorRoles").split("; "));
-            List<String> authorRanks = Arrays.asList(record.get("authorRanks").split("; "));
-            List<String> orcidIds = Arrays.asList(record.get("authorOrcidIds").split("; "));
-            List<String> emails = Arrays.asList(record.get("authorEmails").split("; "));
+            List<String> authorNames = splitOrEmpty(record.get("authors"));
+            List<String> authorRoles = splitOrEmpty(record.get("authorRoles"));
+            List<String> authorRanks = splitOrEmpty(record.get("authorRanks"));
+            List<String> orcidIds = splitOrEmpty(record.get("authorOrcidIds"));
+            List<String> emails = splitOrEmpty(record.get("authorEmails"));
 
             if (authorNames.size() != authorRoles.size() || authorNames.size() != authorRanks.size() ||
                 authorNames.size() != orcidIds.size() || authorNames.size() != emails.size()) {
@@ -183,5 +184,11 @@ public class WorkConverter {
         }
 
         return "Other dissemination output";
+    }
+
+    private static List<String> splitOrEmpty(String value) {
+        return value == null
+            ? Collections.emptyList()
+            : Arrays.asList(value.split("; "));
     }
 }
