@@ -61,7 +61,7 @@
               ?position vivo:relates ?org .
               ?org rdf:type foaf:Organization .
             }
-             UNION 
+             UNION
             {
               ?uri rdf:type foaf:Organization .
               BIND( ?uri as ?org )

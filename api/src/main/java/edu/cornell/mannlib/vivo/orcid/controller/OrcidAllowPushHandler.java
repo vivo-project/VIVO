@@ -44,7 +44,8 @@ public class OrcidAllowPushHandler extends OrcidAbstractHandler {
             occ.getSetting(OrcidClientContext.Setting.WEBAPP_BASE_URL) +
                 occ.getSetting(OrcidClientContext.Setting.CALLBACK_PATH);
 
-        String authUrl = "https://sandbox.orcid.org/oauth/authorize" +
+        String authUrl = (occ.getSetting(OrcidClientContext.Setting.API_ENVIRONMENT).equals("sandbox") ?
+            "https://sandbox.orcid.org/oauth/authorize" : "https://orcid.org/oauth/authorize") +
             "?client_id=" + URLEncoder.encode(clientId) +
             "&response_type=code" +
             "&scope=" + URLEncoder.encode("/activities/update /person/update") +
