@@ -698,6 +698,15 @@ uil-data:add_capitalized.VIVO.tenderfoot
         uil:hasPackage  "VIVO-languages" ;
         uil:hasTheme    "tenderfoot" .
 
+uil-data:menu_login_orcid.VIVO.tenderfoot
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Log in via ORCID"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "menu_login_orcid" ;
+        uil:hasPackage  "VIVO-languages" ;
+        uil:hasTheme    "tenderfoot" .
+
 uil-data:intro_title.VIVO.tenderfoot
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;

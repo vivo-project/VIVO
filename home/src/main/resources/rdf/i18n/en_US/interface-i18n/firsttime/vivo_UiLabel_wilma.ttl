@@ -835,7 +835,7 @@ uil-data:menu_login.VIVO.wilma
 uil-data:menu_login_orcid.VIVO.wilma
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;
-        rdfs:label       "Log in via ORCiD"@en-US ;
+        rdfs:label       "Log in via ORCID"@en-US ;
         uil:hasApp      "VIVO" ;
         uil:hasKey      "menu_login_orcid" ;
         uil:hasPackage  "VIVO-languages" ;
