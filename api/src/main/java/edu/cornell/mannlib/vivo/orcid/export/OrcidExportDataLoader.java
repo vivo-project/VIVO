@@ -160,14 +160,14 @@ public class OrcidExportDataLoader {
     private String getQueryForExportSet(ExportSet exportSet) {
         switch (exportSet) {
             case WORKS:
-                return OrcidExportQueries.FIND_ALL_WORKS;
+                return OrcidExportQueries.loadQuery("find_all_works.sparql");
             case EDUCATION:
-                return OrcidExportQueries.FIND_ALL_EDUCATION;
+                return OrcidExportQueries.loadQuery("find_all_education.sparql");
             case EMPLOYMENTS:
-                return OrcidExportQueries.FIND_ALL_EMPLOYMENTS;
+                return OrcidExportQueries.loadQuery("find_all_employments.sparql");
+            default:
+                return "";
         }
-
-        return ""; // Should never happen
     }
 
     private String getResourceEndpoint(ExportSet exportSet) {

@@ -1,5 +1,7 @@
 package edu.cornell.mannlib.vivo.orcid.controller;
 
+import static edu.cornell.mannlib.vivo.orcid.controller.OrcidConfirmationState.Progress.GOT_PROFILE;
+
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
@@ -51,6 +53,9 @@ public class OrcidMemberCallbackHandler extends OrcidAbstractHandler {
             OrcidInternalOperationsUtil.updateOrcidCredentialsForUser(individualUri, tokenResponse.getAccessToken(),
                 tokenResponse.getRefreshToken(), tokenResponse.getExpiresIn());
             OrcidInternalOperationsUtil.setAllowPushStatusForIndividual(individualUri, true);
+
+            state.progress(GOT_PROFILE, manager.createReadPublicBioAction().execute(tokenResponse.getOrcid()));
+            recordConfirmation();
 
             httpServletResponse.sendRedirect(
                 occ.getSetting(OrcidClientContext.Setting.WEBAPP_BASE_URL) + "individual?uri=" + individualUri);

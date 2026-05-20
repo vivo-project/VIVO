@@ -1,0 +1,71 @@
+PREFIX rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:       <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf:       <http://xmlns.com/foaf/0.1/>
+PREFIX obo:        <http://purl.obolibrary.org/obo/>
+PREFIX vivo:       <http://vivoweb.org/ontology/core#>
+PREFIX vcard:      <http://www.w3.org/2006/vcard/ns#>
+PREFIX vitro:      <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>
+
+SELECT ?resource
+       ?position
+       ?institution
+       ?institutionName
+       ?startDate
+       ?endDate
+       ?city
+       ?region
+       ?country
+       ?urlValue
+       ?ror
+WHERE {
+    <%s> vivo:relatedBy ?resource .
+
+    FILTER (STR(?resource) > "%s")
+
+    ?resource vitro:mostSpecificType vivo:FacultyPosition .
+
+    OPTIONAL {
+        ?resource rdfs:label ?position .
+    }
+
+    OPTIONAL {
+        ?resource vivo:relates ?institution .
+        ?institution a foaf:Organization .
+        ?institution rdfs:label ?institutionName .
+
+        OPTIONAL {
+            ?institution vivo:rorId ?ror .
+        }
+
+        OPTIONAL {
+            ?institution obo:ARG_2000028 ?vcardIndividual .
+            ?vcardIndividual vcard:hasAddress ?address .
+
+            OPTIONAL { ?address vcard:locality ?city . }
+            OPTIONAL { ?address vcard:region ?region . }
+            OPTIONAL { ?address vcard:country ?country . }
+        }
+
+        OPTIONAL {
+            ?institution obo:ARG_2000028 ?vcardInd .
+            ?vcardInd vcard:hasURL ?urlNode .
+            ?urlNode vcard:url ?urlValue .
+        }
+    }
+
+    OPTIONAL {
+        ?resource vivo:dateTimeInterval ?interval .
+
+        OPTIONAL {
+            ?interval vivo:start ?startDT .
+            ?startDT vivo:dateTime ?startDate .
+        }
+
+        OPTIONAL {
+            ?interval vivo:end ?endDT .
+            ?endDT vivo:dateTime ?endDate .
+        }
+    }
+}
+ORDER BY ?resource
+LIMIT %s

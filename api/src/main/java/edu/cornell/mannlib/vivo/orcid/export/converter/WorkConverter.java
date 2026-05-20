@@ -1,5 +1,6 @@
 package edu.cornell.mannlib.vivo.orcid.export.converter;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cornell.mannlib.vivo.orcid.export.model.common.ContentValue;
 import edu.cornell.mannlib.vivo.orcid.export.model.common.DateDTO;
 import edu.cornell.mannlib.vivo.orcid.export.model.common.ExternalId;
@@ -19,6 +22,10 @@ import edu.cornell.mannlib.vivo.orcid.export.model.work.Title;
 import edu.cornell.mannlib.vivo.orcid.export.model.work.WorkDTO;
 
 public class WorkConverter {
+
+    private static final Map<String, String> WORK_TYPE_MAPPING =
+        loadWorkTypeMappings();
+
 
     public static WorkDTO toOrcidModel(Map<String, String> record) {
         WorkDTO dto = new WorkDTO();
@@ -115,7 +122,9 @@ public class WorkConverter {
                 if (!orcidIds.get(i).equals("NONE")) {
                     contributor.setContributorOrcid(new ContributorOrcid(
                         orcidIds.get(i).replace("http", "https"),
-                        orcidIds.get(i).replace("http://orcid.org/", ""),
+                        orcidIds.get(i)
+                            .replace("http://orcid.org/", "")
+                            .replace("https://orcid.org/", ""),
                         "orcid.org"
                     ));
                 }
@@ -132,63 +141,44 @@ public class WorkConverter {
         }
     }
 
-    private static String getWorkType(String type) {
-        if (type.endsWith("Book")) {
-            return "book";
-        } else if (type.endsWith("Chapter")) {
-            return "book-chapter";
-        } else if (type.endsWith("ConferencePaper")) {
-            return "conference-output";
-        } else if (type.endsWith("Slideshow")) {
-            return "conference-presentation";
-        } else if (type.endsWith("ConferencePoster")) {
-            return "conference-poster";
-        } else if (type.endsWith("Proceedings")) {
-            return "conference-proceedings";
-        } else if (type.endsWith("AcademicArticle")) {
-            return "journal-article";
-        } else if (type.endsWith("Article")) {
-            return "preprint";
-        } else if (type.endsWith("Thesis")) {
-            return "dissertation-thesis";
-        } else if (type.endsWith("WorkingPaper")) {
-            return "working-paper";
-        } else if (type.endsWith("Document")) {
-            return "other";
-        } else if (type.endsWith("BlogPosting")) {
-            return "blog-post";
-        } else if (type.endsWith("ReferenceSource")) {
-            return "dictionary-entry"; //encyclopedia-entry
-        } else if (type.endsWith("Report")) {
-            return "report";
-        } else if (type.endsWith("Speech")) {
-            return "public-speech";
-        } else if (type.endsWith("Image")) {
-            return "image";
-        } else if (type.endsWith("Score")) {
-            return "musical-composition";
-        } else if (type.endsWith("AudioDocument")) {
-            return "sound";
-        } else if (type.endsWith("Map")) {
-            return "cartographic-material";
-        } else if (type.endsWith("CaseStudy")) {
-            return "clinical-study";
-        } else if (type.endsWith("Dataset")) {
-            return "data-set";
-        } else if (type.endsWith("Patent")) {
-            return "patent";
-        } else if (type.endsWith("EditedBook")) {
-            return "edited-book";
-        } else if (type.endsWith("Manual")) {
-            return "manual";
-        }
-
-        return "Other dissemination output";
-    }
-
     private static List<String> splitOrEmpty(String value) {
         return value == null
             ? Collections.emptyList()
             : Arrays.asList(value.split("; "));
+    }
+
+    private static String getWorkType(String type) {
+        if (type == null) {
+            return "other";
+        }
+
+        for (Map.Entry<String, String> entry : WORK_TYPE_MAPPING.entrySet()) {
+            if (type.endsWith(entry.getKey())) {
+                return entry.getValue();
+            }
+        }
+
+        return "other";
+    }
+
+    private static Map<String, String> loadWorkTypeMappings() {
+        try (InputStream is = WorkConverter.class
+            .getClassLoader()
+            .getResourceAsStream("json/work-type-mapping.json")
+        ) {
+            if (is == null) {
+                throw new RuntimeException("Mapping file not found");
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+
+            return mapper.readValue(
+                is,
+                new TypeReference<Map<String, String>>() {
+                }
+            );
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load work type mappings", e);
+        }
     }
 }

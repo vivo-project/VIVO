@@ -24,6 +24,8 @@ import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.rdf.model.impl.StatementImpl;
+import org.apache.jena.vocabulary.OWL;
+import org.apache.jena.vocabulary.RDF;
 
 public class OrcidInternalOperationsUtil {
 
@@ -54,7 +56,8 @@ public class OrcidInternalOperationsUtil {
     public static void updateOrcidIdForUser(String individualUri, String orcidId) {
         OntModel ontologyModel = getOntModel(true);
 
-        String orcidUri = "http://orcid.org/" + orcidId;
+        String orcidUri = "https://orcid.org/" + orcidId;
+
         Resource person = ontologyModel.createResource(individualUri);
         Resource orcid = ontologyModel.createResource(orcidUri);
 
@@ -74,6 +77,15 @@ public class OrcidInternalOperationsUtil {
                 orcid,
                 ResourceFactory.createProperty(OrcidIdDataGetter.ORCID_IS_CONFIRMED),
                 person
+            ));
+
+        // orcid rdf:type owl:Thing
+        saveModelStatement(
+            ontologyModel,
+            new StatementImpl(
+                orcid,
+                RDF.type,
+                OWL.Thing
             ));
     }
 

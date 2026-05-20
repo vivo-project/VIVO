@@ -27,7 +27,9 @@ public class OrcidExternalOperationsUtil {
                                      boolean alreadyPushed, String resourceUri, boolean sandboxed) throws IOException {
         String url = String.format("https://api%s.orcid.org/v3.0/%s/%s",
             sandboxed ? ".sandbox" : "",
-            orcidId.replace("http://orcid.org/", ""),
+            orcidId
+                .replace("http://orcid.org/", "")
+                .replace("https://orcid.org/", ""),
             endpoint
         );
 

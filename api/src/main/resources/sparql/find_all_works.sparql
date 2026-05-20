@@ -1,0 +1,142 @@
+PREFIX rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX vivo:     <http://vivoweb.org/ontology/core#>
+PREFIX bibo:     <http://purl.org/ontology/bibo/>
+PREFIX obo:      <http://purl.obolibrary.org/obo/>
+PREFIX vcard:    <http://www.w3.org/2006/vcard/ns#>
+PREFIX foaf:     <http://xmlns.com/foaf/0.1/>
+
+SELECT ?resource
+       ?resourceLabel
+       ?workType
+       ?journal
+       ?journalLabel
+       ?magazine
+       ?newspaper
+       ?publicationDate
+       ?urlValue
+       ?abstract
+       ?performance
+       ?doi
+       (GROUP_CONCAT(?authorEmailWithDefault; SEPARATOR="; ") AS ?authorEmails)
+       (GROUP_CONCAT(?authorName; SEPARATOR="; ") AS ?authors)
+       (GROUP_CONCAT(?authorRole; SEPARATOR="; ") AS ?authorRoles)
+       (GROUP_CONCAT(?authorRank; SEPARATOR="; ") AS ?authorRanks)
+       (GROUP_CONCAT(?orcidIdWithDefault; SEPARATOR="; ") AS ?authorOrcidIds)
+WHERE {
+
+    {
+        SELECT DISTINCT ?resource ?workType ?resourceLabel
+        WHERE {
+            <%s> vivo:relatedBy ?authorship .
+            ?authorship vivo:relates ?resource .
+            ?resource <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#mostSpecificType> ?workType .
+            ?resource rdf:type bibo:Document .
+
+            OPTIONAL {
+                ?resource rdfs:label ?resourceLabel .
+            }
+        }
+    }
+
+    FILTER (STR(?resource) > "%s")
+
+    OPTIONAL {
+        ?resource vivo:hasPublicationVenue ?journal .
+        ?journal rdf:type bibo:Journal .
+        ?journal rdfs:label ?journalLabel .
+    }
+
+    OPTIONAL {
+        ?resource vivo:hasPublicationVenue ?magazine .
+        ?magazine rdf:type bibo:Magazine .
+    }
+
+    OPTIONAL {
+        ?resource vivo:hasPublicationVenue ?newspaper .
+        ?newspaper rdf:type bibo:Newspaper .
+    }
+
+    OPTIONAL {
+        ?resource vivo:dateTimeValue ?dtValue .
+        ?dtValue vivo:dateTime ?publicationDate .
+    }
+
+    OPTIONAL {
+        ?resource obo:ARG_2000028 ?vcardInd .
+        ?vcardInd vcard:hasURL ?urlNode .
+        ?urlNode vcard:url ?urlValue .
+    }
+
+    OPTIONAL {
+        ?resource bibo:abstract ?abstract .
+    }
+
+    OPTIONAL {
+        ?resource bibo:doi ?doi .
+    }
+
+    OPTIONAL {
+        ?resource obo:RO_0002353 ?performance .
+        ?performance a bibo:Performance .
+    }
+
+    OPTIONAL {
+        ?resource vivo:relatedBy ?anyAuthorship .
+        ?anyAuthorship vivo:relates ?author .
+        ?author a foaf:Person .
+
+        OPTIONAL {
+            ?author rdfs:label ?authorName .
+        }
+
+        OPTIONAL {
+            ?author obo:ARG_2000028 ?vcardIndividual .
+            ?vcardIndividual vcard:hasEmail ?emailNode .
+            ?emailNode vcard:email ?authorEmail .
+
+            OPTIONAL {
+                ?emailNode vcard:type ?emailType .
+            }
+        }
+
+        BIND(COALESCE(?authorEmail, "NONE") AS ?authorEmailWithDefault)
+
+        OPTIONAL {
+            ?anyAuthorship a ?authorRole .
+            FILTER(
+                ?authorRole = vivo:Authorship ||
+                ?authorRole = vivo:Editorship
+            )
+        }
+
+        OPTIONAL {
+            ?anyAuthorship vivo:rank ?authorRank .
+        }
+
+        OPTIONAL {
+            ?author vivo:orcidId ?orcidNode .
+
+            OPTIONAL {
+                ?orcidNode vivo:confirmedOrcidId ?orcidId .
+            }
+        }
+
+        BIND(COALESCE(?orcidNode, "NONE") AS ?orcidIdWithDefault)
+    }
+}
+GROUP BY
+    ?resource
+    ?resourceLabel
+    ?journal
+    ?journalLabel
+    ?publicationDate
+    ?urlValue
+    ?workType
+    ?abstract
+    ?performance
+    ?doi
+    ?magazine
+    ?newspaper
+ORDER BY ?resource
+LIMIT %s
