@@ -69,9 +69,18 @@ public class WorkConverter {
             dto.setType(getWorkType(record.get("workType")));
         }
 
+        ExternalIds externalIds = new ExternalIds();
+        externalIds.setExternalId(new ArrayList<>());
+
+        externalIds.getExternalId().add(
+            new ExternalId(
+                "source-work-id",
+                record.get("resource"),
+                new ContentValue(record.get("resource")),
+                "self")
+        );
+
         if (record.containsKey("doi")) {
-            ExternalIds externalIds = new ExternalIds();
-            externalIds.setExternalId(new ArrayList<>());
             externalIds.getExternalId().add(
                 new ExternalId(
                     "doi",
@@ -79,9 +88,49 @@ public class WorkConverter {
                     new ContentValue("https://doi.org/" + record.get("doi")),
                     "self")
             );
-
-            dto.setExternalIds(externalIds);
         }
+
+        if (record.containsKey("pmid")) {
+            externalIds.getExternalId().add(
+                new ExternalId(
+                    "pmid",
+                    record.get("pmid"),
+                    new ContentValue("https://pubmed.ncbi.nlm.nih.gov/" + record.get("pmid")),
+                    "self")
+            );
+        }
+
+        if (record.containsKey("issn") || record.containsKey("eissn")) {
+            String issn = record.getOrDefault("eissn", null);
+            if (issn == null) {
+                issn = record.get("issn");
+            }
+
+            externalIds.getExternalId().add(
+                new ExternalId(
+                    "issn",
+                    issn,
+                    new ContentValue("https://portal.issn.org/resource/ISSN/" + issn),
+                    "self")
+            );
+        }
+
+        if (record.containsKey("isbn10") || record.containsKey("isbn13")) {
+            String isbn = record.getOrDefault("isbn10", null);
+            if (isbn == null) {
+                isbn = record.get("isbn13");
+            }
+
+            externalIds.getExternalId().add(
+                new ExternalId(
+                    "isbn",
+                    isbn,
+                    new ContentValue("https://www.worldcat.org/isbn/" + isbn),
+                    "self")
+            );
+        }
+
+        dto.setExternalIds(externalIds);
 
         return dto;
     }
@@ -121,7 +170,7 @@ public class WorkConverter {
 
                 if (!orcidIds.get(i).equals("NONE")) {
                     contributor.setContributorOrcid(new ContributorOrcid(
-                        orcidIds.get(i).replace("http", "https"),
+                        orcidIds.get(i).replaceFirst("^http://", "https://"),
                         orcidIds.get(i)
                             .replace("http://orcid.org/", "")
                             .replace("https://orcid.org/", ""),
@@ -153,7 +202,7 @@ public class WorkConverter {
         }
 
         for (Map.Entry<String, String> entry : WORK_TYPE_MAPPING.entrySet()) {
-            if (type.endsWith(entry.getKey())) {
+            if (type.equals(entry.getKey())) {
                 return entry.getValue();
             }
         }

@@ -18,6 +18,11 @@ SELECT ?resource
        ?abstract
        ?performance
        ?doi
+       ?pmid
+       ?issn
+       ?eissn
+       ?isbn10
+       ?isbn13
        (GROUP_CONCAT(?authorEmailWithDefault; SEPARATOR="; ") AS ?authorEmails)
        (GROUP_CONCAT(?authorName; SEPARATOR="; ") AS ?authors)
        (GROUP_CONCAT(?authorRole; SEPARATOR="; ") AS ?authorRoles)
@@ -74,6 +79,26 @@ WHERE {
 
     OPTIONAL {
         ?resource bibo:doi ?doi .
+    }
+
+    OPTIONAL {
+        ?resource bibo:pmid ?pmid .
+    }
+
+    OPTIONAL {
+        ?resource bibo:issn ?issn .
+    }
+
+    OPTIONAL {
+        ?resource bibo:eissn ?eissn .
+    }
+
+    OPTIONAL {
+        ?resource bibo:isbn10 ?isbn10 .
+    }
+
+    OPTIONAL {
+        ?resource bibo:isbn13 ?isbn13 .
     }
 
     OPTIONAL {
@@ -136,6 +161,11 @@ GROUP BY
     ?abstract
     ?performance
     ?doi
+    ?pmid
+    ?issn
+    ?eissn
+    ?isbn10
+    ?isbn13
     ?magazine
     ?newspaper
 ORDER BY ?resource
