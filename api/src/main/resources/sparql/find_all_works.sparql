@@ -23,11 +23,13 @@ SELECT ?resource
        ?eissn
        ?isbn10
        ?isbn13
-       (GROUP_CONCAT(?authorEmailWithDefault; SEPARATOR="; ") AS ?authorEmails)
-       (GROUP_CONCAT(?authorName; SEPARATOR="; ") AS ?authors)
-       (GROUP_CONCAT(?authorRole; SEPARATOR="; ") AS ?authorRoles)
-       (GROUP_CONCAT(?authorRank; SEPARATOR="; ") AS ?authorRanks)
-       (GROUP_CONCAT(?orcidIdWithDefault; SEPARATOR="; ") AS ?authorOrcidIds)
+       ?book
+       ?bookTitle
+       ?authorEmails
+       ?authors
+       ?authorRoles
+       ?authorRanks
+       ?authorOrcidIds
 WHERE {
 
     {
@@ -107,66 +109,68 @@ WHERE {
     }
 
     OPTIONAL {
-        ?resource vivo:relatedBy ?anyAuthorship .
-        ?anyAuthorship vivo:relates ?author .
-        ?author a foaf:Person .
+        ?resource vivo:hasPublicationVenue ?book .
+        ?book rdf:type bibo:Book .
 
         OPTIONAL {
-            ?author rdfs:label ?authorName .
+            ?book rdfs:label ?bookTitle .
         }
+    }
 
-        OPTIONAL {
-            ?author obo:ARG_2000028 ?vcardIndividual .
-            ?vcardIndividual vcard:hasEmail ?emailNode .
-            ?emailNode vcard:email ?authorEmail .
+    OPTIONAL {
+        {
+            SELECT ?resource
+                   (GROUP_CONCAT(?authorName;          SEPARATOR="; ") AS ?authors)
+                   (GROUP_CONCAT(?authorEmailWithDefault; SEPARATOR="; ") AS ?authorEmails)
+                   (GROUP_CONCAT(?authorRole;          SEPARATOR="; ") AS ?authorRoles)
+                   (GROUP_CONCAT(?authorRank;          SEPARATOR="; ") AS ?authorRanks)
+                   (GROUP_CONCAT(?orcidIdWithDefault;  SEPARATOR="; ") AS ?authorOrcidIds)
+            WHERE {
+                {
+                    SELECT DISTINCT ?resource ?anyAuthorship ?authorName ?authorEmailWithDefault ?authorRole ?authorRank ?orcidIdWithDefault
+                    WHERE {
+                        ?resource vivo:relatedBy ?anyAuthorship .
+                        ?anyAuthorship vivo:relates ?author .
+                        ?author a foaf:Person .
 
-            OPTIONAL {
-                ?emailNode vcard:type ?emailType .
+                        OPTIONAL {
+                            ?author rdfs:label ?authorName .
+                        }
+
+                        OPTIONAL {
+                            ?author obo:ARG_2000028 ?vcardIndividual .
+                            ?vcardIndividual vcard:hasEmail ?emailNode .
+                            ?emailNode vcard:email ?authorEmail .
+                        }
+
+                        BIND(COALESCE(?authorEmail, "NONE") AS ?authorEmailWithDefault)
+
+                        OPTIONAL {
+                            ?anyAuthorship a ?authorRole .
+                            FILTER(
+                                ?authorRole = vivo:Authorship ||
+                                ?authorRole = vivo:Editorship
+                            )
+                        }
+
+                        OPTIONAL {
+                            ?anyAuthorship vivo:rank ?authorRank .
+                        }
+
+                        OPTIONAL {
+                            ?author vivo:orcidId ?orcidNode .
+                            OPTIONAL {
+                                ?orcidNode vivo:confirmedOrcidId ?orcidId .
+                            }
+                        }
+
+                        BIND(COALESCE(?orcidNode, "NONE") AS ?orcidIdWithDefault)
+                    }
+                }
             }
+            GROUP BY ?resource
         }
-
-        BIND(COALESCE(?authorEmail, "NONE") AS ?authorEmailWithDefault)
-
-        OPTIONAL {
-            ?anyAuthorship a ?authorRole .
-            FILTER(
-                ?authorRole = vivo:Authorship ||
-                ?authorRole = vivo:Editorship
-            )
-        }
-
-        OPTIONAL {
-            ?anyAuthorship vivo:rank ?authorRank .
-        }
-
-        OPTIONAL {
-            ?author vivo:orcidId ?orcidNode .
-
-            OPTIONAL {
-                ?orcidNode vivo:confirmedOrcidId ?orcidId .
-            }
-        }
-
-        BIND(COALESCE(?orcidNode, "NONE") AS ?orcidIdWithDefault)
     }
 }
-GROUP BY
-    ?resource
-    ?resourceLabel
-    ?journal
-    ?journalLabel
-    ?publicationDate
-    ?urlValue
-    ?workType
-    ?abstract
-    ?performance
-    ?doi
-    ?pmid
-    ?issn
-    ?eissn
-    ?isbn10
-    ?isbn13
-    ?magazine
-    ?newspaper
 ORDER BY ?resource
 LIMIT %s

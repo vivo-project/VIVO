@@ -38,6 +38,10 @@ public class WorkConverter {
             dto.setJournalTitle(new ContentValue(record.get("journalLabel")));
         }
 
+        if (record.containsKey("bookTitle")) {
+            dto.setJournalTitle(new ContentValue(record.get("bookTitle")));
+        }
+
         if (record.containsKey("abstract")) {
             dto.setShortDescription(record.get("abstract"));
         }
