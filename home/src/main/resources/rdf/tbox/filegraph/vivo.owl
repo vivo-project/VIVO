@@ -4758,7 +4758,15 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     </owl:DatatypeProperty>
 
+    <!-- http://vivoweb.org/ontology/core#rorId -->
 
+    <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#rorId">
+        <rdfs:label xml:lang="en">ROR ID</rdfs:label>
+        <obo:IAO_0000112 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The ROR ID is a unique identifier for organizations in the Research Organization Registry (ROR), which is a global, community-led registry of open persistent identifiers for research organizations.
+Definition source: https://ror.org/about/</obo:IAO_0000112>
+        <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#identifier"/>
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+    </owl:DatatypeProperty>
 
     <!-- http://vivoweb.org/ontology/core#researcherId -->
 
