@@ -134,7 +134,7 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
             }
         } catch (AuthenticationException e) {
             String message = e.getMessage();
-            Map<String, Object> templateValues = new HashMap();
+            Map<String, Object> templateValues = new HashMap<String, Object>();
             templateValues.put(MESSAGE, message);
             return new TemplateResponseValues(NOT_AUTHENTICATED_FTL, templateValues);
         }
