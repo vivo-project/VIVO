@@ -16,7 +16,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,7 +41,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.params.CookiePolicy;
@@ -56,7 +54,6 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
 
     private static final String JSON_TOKEN_PARAM = "json_token";
     private static final String SANDBOX = "sandbox";
-    private static final String API_VERSION = "v3.0";
     private static final String CONFIGURATION_ORCID_API = "orcid.api";
     private static final String CONFIGURATION_AUTH_ORCID_CALLBACK_URL = "auth.orcid.callbackUrl";
     private static final String CONFIGURATION_AUTH_ORCID_CLIENT_PASSWORD = "auth.orcid.clientPassword";
@@ -74,7 +71,6 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
     private String clientSecret;
     private String callbackUrl;
     private String apiPrefix;
-    private String apiVersion;
     private ObjectMapper mapper;
 
     @Override
@@ -88,7 +84,6 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
         clientSecret = configProperties.getProperty(CONFIGURATION_AUTH_ORCID_CLIENT_PASSWORD);
         callbackUrl = configProperties.getProperty(CONFIGURATION_AUTH_ORCID_CALLBACK_URL);
         String apiType = configProperties.getProperty(CONFIGURATION_ORCID_API);
-        apiVersion = API_VERSION;
 
         if (clientSecret != null && callbackUrl != null && clientId != null && apiType != null) {
             if (apiType.equals(SANDBOX)) {
@@ -162,7 +157,6 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
 
     private ResponseValues login(VitroRequest vreq, OrcidTokenResponse orcidToken) {
         try {
-            OrcidPerson orcidBio = getPersonDetails(orcidToken);
             UserAccount userAccount = getAuthenticator(vreq).getAccountForExternalAuth(orcidToken.orcid);
             String profileUri = getProfileUri(vreq, userAccount);
 
@@ -271,45 +265,6 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
         return Authenticator.getInstance(req);
     }
 
-    private OrcidPerson getPersonDetails(OrcidTokenResponse token) {
-        try {
-            String url = "https://pub." + apiPrefix + "orcid.org/" + apiVersion + "/" + token.orcid + "/record";
-
-            HttpClient client = HttpClientFactory.getHttpClient();
-            HttpGet request = new HttpGet(url);
-
-            request.getParams().setParameter(ClientPNames.COOKIE_POLICY, CookiePolicy.IGNORE_COOKIES);
-
-            request.setHeader("Authorization", "Bearer " + token.accessToken);
-            request.setHeader("Accept", "application/json");
-
-            HttpResponse response = client.execute(request);
-
-            switch (response.getStatusLine().getStatusCode()) {
-                case 200:
-                    try (InputStream in = response.getEntity().getContent()) {
-                        StringWriter writer = new StringWriter();
-                        IOUtils.copy(in, writer, "UTF-8");
-                        String json = writer.toString();
-                        if (log.isDebugEnabled()) {
-                            log.debug("Person json " + json);
-                        }
-                        OrcidRecord record = mapper.readValue(json, OrcidRecord.class);
-                        if (record != null && record.person != null) {
-                            record.person.orcidIdentifier = record.orcidIdentifier;
-                        }
-                        return record.person;
-                    }
-                default:
-                    break;
-            }
-        } catch (IOException e) {
-            log.error(e, e);
-        }
-        return null;
-    }
-
-
     /**
      * Read JSON from the URL
      *
@@ -386,116 +341,8 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
     }
 
     private static class OrcidTokenResponse {
-        @JsonProperty("access_token")
-        String accessToken;
-
-        String name;
         String orcid;
 
-        @JsonProperty("refresh_token")
-        String refreshToken;
-
-        OrcidTokenResponse() {
-            // no-args constructor
-        }
-    }
-
-    private static class OrcidRecord {
-        @JsonProperty("orcid-identifier")
-        OrcidIdentifier orcidIdentifier;
-
-        @JsonProperty("person")
-        OrcidPerson person;
-    }
-
-    private static class OrcidPerson {
-        @JsonProperty("name")
-        OrcidName orcidName;
-
-        VisibilityString biography;
-
-        @JsonProperty("researcher-urls")
-        ResearcherUrls researcherUrls;
-
-        @JsonProperty("emails")
-        Emails emails;
-
-        @JsonProperty("addresses")
-        ContactDetails contactDetails;
-
-        @JsonProperty("keywords")
-        Keywords keywords;
-
-        @JsonProperty("orcid-identifier")
-        OrcidIdentifier orcidIdentifier;
-
-        private static class OrcidName {
-            @JsonProperty("given-names")
-            ValueString givenNames;
-
-            @JsonProperty("family-name")
-            ValueString familyName;
-
-            String visibility;
-        }
-
-        private static class ResearcherUrls {
-            @JsonProperty("researcher-url")
-            ResearcherUrl[] researcherUrl;
-            String visibility;
-
-            private static class ResearcherUrl {
-                ValueString url;
-            }
-        }
-
-        private static class Emails {
-            @JsonProperty("email")
-            Email[] email;
-
-            private static class Email {
-                String value;
-                String visibility;
-            }
-        }
-
-        private static class ContactDetails {
-            @JsonProperty("address")
-            Address[] address;
-
-            private static class Address {
-                @JsonProperty("source")
-                Source source;
-
-                ValueString country;
-                String visibility;
-
-                private static class Source {
-                    @JsonProperty("source-orcid")
-                    OrcidIdentifier orcidIdentifier;
-                }
-            }
-        }
-    }
-
-    private static class OrcidIdentifier {
-        String host;
-        String path;
-        String uri;
-    }
-
-    private static class Keywords {
-        ValueString[] keyword;
-        String visibility;
-    }
-
-    private static class ValueString {
-        String value;
-    }
-
-    private static class VisibilityString {
-        String value;
-        String visibility;
     }
 
 }
