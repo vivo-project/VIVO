@@ -389,8 +389,8 @@ FullResultQueryUnit.prototype.fetch = function() {
 }
 
 var showPanel = function(name) {
-    $(".titles li").removeClass("activeTab");
-    $(".titles li a[href='#" + name + "']").parent().addClass("activeTab");
+    $(".titles li").removeClass("activeTab").find("a").attr("aria-selected", "false");
+    $(".titles li a[href='#" + name + "']").parent().addClass("activeTab").attr("aria-selected", "true");
     $(".result_section").css("display", "none");
     $("#" + name).css("display", "block");
 }
@@ -404,7 +404,7 @@ DetailsPanel.prototype.clearDetails = function() {
     $(this.panel).empty();
 }
 DetailsPanel.prototype.showDetails = function(mode, id) {
-    showPanel("logg");
+    showPanel("tabpanel-logg");
 
     var that = this;
     var departments = {};
@@ -992,7 +992,7 @@ var restoreDefaults = function() {
 }
 var finish = function() {
     render();
-    showPanel("demo");
+    showPanel("tabpanel-demo");
     enableSubButton();
     fullResultsQueue = [];
     $.each(g.groups, function(key, group) {
