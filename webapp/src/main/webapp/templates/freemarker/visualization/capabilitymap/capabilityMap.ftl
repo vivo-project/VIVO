@@ -80,10 +80,10 @@ ${stylesheets.add(
             <span>
                 <input name="query" id="query" size="34" value="" onfocus="" accesskey="q" onblur="" type="text" onkeydown="queryKeyDown(event);" aria-label="${i18n().capability_map_input?js_string}" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-owns="query-autocomplete-list">
                 <label id="cutofflabel" for="queryCutoff">Cutoff:</label>
-                <input id="queryCutoff" name="queryCutoff" type="text" title="Cutoff" size="4" value="10">
-                <input value="${i18n().cap_map_search}" type="submit" id="add" type="button" onclick="addKwd();">
-                <input value="${i18n().cap_map_search_expand}" type="submit" id="sExpand" onclick="expandLastQuery = 1; addKwd();">
-                <input value="${i18n().cap_map_reset}" id="resetButton" type="submit" onclick="reset()" disabled>
+                <input id="queryCutoff" name="queryCutoff" type="text" title="Cutoff" size="4" value="10" aria-label="Cutoff">
+                <input value="${i18n().cap_map_search}" type="button" id="add" onclick="addKwd();">
+                <input value="${i18n().cap_map_search_expand}" type="button" id="sExpand" onclick="expandLastQuery = 1; addKwd();">
+                <input value="${i18n().cap_map_reset}" id="resetButton" type="button" onclick="reset()" disabled>
                 <!-- a style="display:inline-block; float:right; line-height:32px; height:32px; cursor:pointer" onclick="showhideadvanced(this)">Show advanced</a -->
             </span>
         </p>
@@ -92,7 +92,7 @@ ${stylesheets.add(
     <hr style="clear:both;">
 
     <div id="container">
-        <div id="helptext">
+        <div id="helptext" role="region" aria-label="${i18n().capability_map?js_string}">
             <p>
                 ${i18n().cap_map_text_intro}
             </p>
@@ -118,9 +118,9 @@ ${stylesheets.add(
             </p>
         </div>
 
-        <div id="center-container">
+        <div id="center-container" role="region" aria-label="${i18n().capability_map_svg_title?js_string}">
             <div id="log"></div>
-            <div id="infovis"></div>
+            <div id="infovis" tabindex="0" aria-live="polite"></div>
             <div class="capability-progress"><div id="progressbar"></div></div>
         </div>
 
@@ -146,7 +146,7 @@ ${stylesheets.add(
                                 </li>
                             </ul>
                         </div>
-                        <p style="position:absolute; bottom:10px">
+                        <p style="position:absolute; bottom:10px" role="group" aria-label="${i18n().cap_map_search_terms?js_string}">
                         <div class="capability">${i18n().cap_map_key1}</div>
                         <div class="edge">${i18n().cap_map_key2}</div>
                         <div class="group">${i18n().cap_map_key3}</div>
