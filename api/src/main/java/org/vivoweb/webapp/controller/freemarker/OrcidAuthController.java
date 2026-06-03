@@ -121,7 +121,7 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
             if (userAccountExists(vreq, orcidToken)) {
                 return login(vreq, orcidToken);
             } else {
-                return null;
+                return new TemplateResponseValues(UNKNOWN_PROFILE_FTL);
             }
 
         } catch (OrcidNotConfiguredException e) {
