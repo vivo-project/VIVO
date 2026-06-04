@@ -55,9 +55,9 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
     private static final String JSON_TOKEN_PARAM = "json_token";
     private static final String SANDBOX = "sandbox";
     private static final String CONFIGURATION_ORCID_API = "orcid.api";
-    private static final String CONFIGURATION_AUTH_ORCID_CALLBACK_URL = "auth.orcid.callbackUrl";
-    private static final String CONFIGURATION_AUTH_ORCID_CLIENT_PASSWORD = "auth.orcid.clientPassword";
-    private static final String CONFIGURATION_AUTH_ORCID_CLIENT_ID = "auth.orcid.clientId";
+    private static final String CONFIGURATION_AUTH_ORCID_CALLBACK_URL = "orcid.webappBaseUrl";
+    private static final String CONFIGURATION_AUTH_ORCID_CLIENT_PASSWORD = "orcid.clientPassword";
+    private static final String CONFIGURATION_AUTH_ORCID_CLIENT_ID = "orcid.clientId";
     private static final String CODE_PARAM = "code";
     private static final String CALLBACK = "callback";
     private static final String NOT_AUTHENTICATED_FTL = "notAuthenticated.ftl";
@@ -82,7 +82,7 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
         ConfigurationProperties configProperties = ConfigurationProperties.getInstance();
         clientId = configProperties.getProperty(CONFIGURATION_AUTH_ORCID_CLIENT_ID);
         clientSecret = configProperties.getProperty(CONFIGURATION_AUTH_ORCID_CLIENT_PASSWORD);
-        callbackUrl = configProperties.getProperty(CONFIGURATION_AUTH_ORCID_CALLBACK_URL);
+        callbackUrl = configProperties.getProperty(CONFIGURATION_AUTH_ORCID_CALLBACK_URL) + "orcidAuth/callback";
         String apiType = configProperties.getProperty(CONFIGURATION_ORCID_API);
 
         if (clientSecret != null && callbackUrl != null && clientId != null && apiType != null) {
