@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cornell.mannlib.orcidclient.context.OrcidClientContext;
 import edu.cornell.mannlib.vedit.beans.LoginStatusBean;
+import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.SelfEditingConfiguration;
 import edu.cornell.mannlib.vitro.webapp.beans.UserAccount;
@@ -32,6 +34,9 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.DirectRedirectResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
+import edu.cornell.mannlib.vitro.webapp.dao.DataPropertyStatementDao;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
 import edu.cornell.mannlib.vitro.webapp.utils.http.HttpClientFactory;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -45,6 +50,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.params.CookiePolicy;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.rdf.model.RDFNode;
 
 /**
  *
@@ -63,6 +70,7 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
     private static final String NOT_AUTHENTICATED_FTL = "notAuthenticated.ftl";
     private static final String UNKNOWN_PROFILE_FTL = "unknownProfile.ftl";
     private static final String ORCID_NOT_CONFIGURED_FTL = "orcidNotConfigured.ftl";
+    private static final String ORCID_ID_PROPERTY_URI = "http://vivoweb.org/ontology/core#orcidId";
 
     private static final String MESSAGE = "message";
 
@@ -141,7 +149,95 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
     }
 
     private boolean userAccountExists(VitroRequest vreq, OrcidTokenResponse orcidToken) {
-        return getAuthenticator(vreq).getAccountForExternalAuth(orcidToken.orcid) != null;
+        return getLinkedUserAccount(vreq, orcidToken) != null;
+    }
+
+    private UserAccount getLinkedUserAccount(VitroRequest vreq, OrcidTokenResponse orcidToken) {
+        if (orcidToken == null || StringUtils.isEmpty(orcidToken.orcid)) {
+            return null;
+        }
+
+        String personUri = getPersonUriByOrcidUri(vreq, "https://orcid.org/" + orcidToken.orcid);
+        Individual individual = null;
+
+        if (personUri != null) {
+            individual = vreq.getWebappDaoFactory()
+                    .getIndividualDao()
+                    .getIndividualByURI(personUri);
+        }
+
+        if (individual != null) {
+            SelfEditingConfiguration sec = SelfEditingConfiguration.getBean(vreq);
+            String matchingPropertyUri = sec.getMatchingPropertyUri();
+            if (!StringUtils.isBlank(matchingPropertyUri)) {
+                String externalAuthId = getExternalAuthIdForIndividual(vreq, individual);
+                log.debug("External auth ID: " + externalAuthId);
+                if (StringUtils.isNotBlank(externalAuthId)) {
+                    return getAuthenticator(vreq).getAccountForExternalAuth(externalAuthId);
+                }
+            }
+        }
+        return getAuthenticator(vreq).getAccountForExternalAuth(orcidToken.orcid);
+    }
+
+    private String getPersonUriByOrcidUri(VitroRequest vreq, String orcidUri) {
+        final List<String> personUris = new ArrayList<String>();
+
+        String query = ""
+                + "SELECT ?person WHERE {\n"
+                + "  ?person <" + ORCID_ID_PROPERTY_URI + "> <" + orcidUri + "> .\n"
+                + "}\n"
+                + "LIMIT 1";
+
+        try {
+            vreq.getRDFService().sparqlSelectQuery(query, new ResultSetConsumer() {
+                @Override
+                protected void processQuerySolution(QuerySolution qs) {
+                    RDFNode personNode = qs.get("person");
+                    if (personNode != null && personNode.isURIResource()) {
+                        personUris.add(personNode.asResource().getURI());
+                    }
+                }
+            });
+        } catch (RDFServiceException e) {
+            log.error("Error finding person by ORCID URI: " + orcidUri, e);
+        }
+
+        if (personUris.isEmpty()) {
+            return null;
+        }
+
+        return personUris.get(0);
+    }
+    private String getExternalAuthIdForIndividual(VitroRequest vreq, Individual individual) {
+        if (individual == null || StringUtils.isBlank(individual.getURI())) {
+            return null;
+        }
+
+        SelfEditingConfiguration sec = SelfEditingConfiguration.getBean(vreq);
+        String matchingPropertyUri = sec.getMatchingPropertyUri();
+
+        log.debug("Matching property URI: " + matchingPropertyUri);
+
+        if (StringUtils.isBlank(matchingPropertyUri)) {
+            return null;
+        }
+
+        DataPropertyStatementDao dpsDao = vreq.getUnfilteredWebappDaoFactory()
+                .getDataPropertyStatementDao();
+
+        Collection<DataPropertyStatement> statements =
+                dpsDao.getDataPropertyStatementsForIndividualByDataPropertyURI(
+                        individual,
+                        matchingPropertyUri);
+
+        if (statements == null || statements.isEmpty()) {
+            log.debug("No external auth ID found on individual " + individual.getURI()
+                    + " using property " + matchingPropertyUri);
+            return null;
+        }
+
+        return statements.iterator().next().getData();
     }
 
     private boolean needOrcidCallBack(String requestURI) {
@@ -157,7 +253,7 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
 
     private ResponseValues login(VitroRequest vreq, OrcidTokenResponse orcidToken) {
         try {
-            UserAccount userAccount = getAuthenticator(vreq).getAccountForExternalAuth(orcidToken.orcid);
+            UserAccount userAccount = getLinkedUserAccount(vreq, orcidToken);
             String profileUri = getProfileUri(vreq, userAccount);
 
             getAuthenticator(vreq).recordLoginAgainstUserAccount(userAccount,
