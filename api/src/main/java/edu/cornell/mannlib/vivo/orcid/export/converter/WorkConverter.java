@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.cornell.mannlib.vivo.orcid.export.OrcidExportDataLoader;
 import edu.cornell.mannlib.vivo.orcid.export.model.common.ContentValue;
 import edu.cornell.mannlib.vivo.orcid.export.model.common.DateDTO;
 import edu.cornell.mannlib.vivo.orcid.export.model.common.ExternalId;
@@ -27,7 +28,7 @@ public class WorkConverter {
         loadWorkTypeMappings();
 
 
-    public static WorkDTO toOrcidModel(Map<String, String> record) {
+    public static WorkDTO toOrcidModel(Map<String, String> record, OrcidExportDataLoader dataLoader) {
         WorkDTO dto = new WorkDTO();
 
         if (record.containsKey("resourceLabel")) {

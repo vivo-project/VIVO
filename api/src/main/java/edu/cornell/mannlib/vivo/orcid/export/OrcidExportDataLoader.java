@@ -14,9 +14,12 @@ import javax.annotation.Nullable;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.cornell.mannlib.vitro.webapp.controller.api.sparqlquery.InvalidQueryTypeException;
 import edu.cornell.mannlib.vitro.webapp.controller.api.sparqlquery.SparqlQueryApiExecutor;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
+import edu.cornell.mannlib.vitro.webapp.utils.http.AcceptHeaderParsingException;
+import edu.cornell.mannlib.vitro.webapp.utils.http.NotAcceptableException;
 import edu.cornell.mannlib.vivo.orcid.export.converter.EducationConverter;
 import edu.cornell.mannlib.vivo.orcid.export.converter.EmploymentConverter;
 import edu.cornell.mannlib.vivo.orcid.export.converter.WorkConverter;
@@ -92,17 +95,11 @@ public class OrcidExportDataLoader {
             while (shouldFetch) {
                 String queryString =
                     String.format(getQueryForExportSet(exportSet), individualUri, lastFetchedResourceUri, BATCH_SIZE);
-
                 if (queryString.isEmpty()) {
                     return;
                 }
 
-                SparqlQueryApiExecutor core =
-                    SparqlQueryApiExecutor.instance(rdfService, queryString, "application/sparql-results+json");
-
-                String sparqlQueryResponse = getSparqlQueryResponse(core);
-
-                List<Map<String, String>> bindings = parseBindings(sparqlQueryResponse);
+                List<Map<String, String>> bindings = runSparqlQuery(queryString);
                 if (bindings.isEmpty()) {
                     return;
                 }
@@ -119,7 +116,7 @@ public class OrcidExportDataLoader {
                     boolean alreadyPushed = OrcidInternalOperationsUtil.wasResourcePushedInPast(resourceUri);
 
                     try {
-                        Object record = conversionMethod.invoke(null, binding);
+                        Object record = conversionMethod.invoke(null, binding, this);
 
                         boolean tryPush = isRecordValid(record);
                         int retries = 0;
@@ -155,6 +152,17 @@ public class OrcidExportDataLoader {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Map<String, String>> runSparqlQuery(String queryString)
+        throws InvalidQueryTypeException, NotAcceptableException, AcceptHeaderParsingException, RDFServiceException,
+        IOException {
+        SparqlQueryApiExecutor core =
+            SparqlQueryApiExecutor.instance(rdfService, queryString, "application/sparql-results+json");
+
+        String sparqlQueryResponse = getSparqlQueryResponse(core);
+
+        return parseBindings(sparqlQueryResponse);
     }
 
     private String getQueryForExportSet(ExportSet exportSet) {
@@ -206,7 +214,7 @@ public class OrcidExportDataLoader {
         }
 
         try {
-            return converterClass.getMethod("toOrcidModel", Map.class);
+            return converterClass.getMethod("toOrcidModel", Map.class, OrcidExportDataLoader.class);
         } catch (NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
