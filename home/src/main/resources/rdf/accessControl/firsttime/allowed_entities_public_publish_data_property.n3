@@ -182,6 +182,7 @@
     vivo:rank ,
     vivo:reportId ,
     vivo:researchOverview ,
+    vivo:rodId ,
     vivo:seatingCapacity ,
     vivo:sponsorAwardId ,
     vivo:supplementalInformation ,
