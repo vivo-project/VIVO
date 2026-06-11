@@ -4766,7 +4766,8 @@ use one freetextKeyword assertion for each keyword or phrase.</obo:IAO_0000112>
 Definition source: https://ror.org/about/</obo:IAO_0000112>
         <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#identifier"/>
         <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-    </owl:DatatypeProperty>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+</owl:DatatypeProperty>
 
     <!-- http://vivoweb.org/ontology/core#researcherId -->
 
