@@ -93,7 +93,10 @@ public class InvolvementConverter {
                     if (disambiguatedOrganization == null && binding.containsKey("ror")) {
                         disambiguatedOrganization =
                             new DisambiguatedOrganization(
-                                "https://ror.org/" + binding.get("ror"),
+                                "https://ror.org/" +
+                                    binding.get("ror")
+                                        .replace("http://ror.org/", "")
+                                        .replace("https://ror.org/", ""),
                                 "ROR"
                             );
                     }
