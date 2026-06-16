@@ -133,6 +133,7 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
             }
 
         } catch (OrcidNotConfiguredException e) {
+            log.error("processRequest: ORCID is not configured.", e);
             return new TemplateResponseValues(ORCID_NOT_CONFIGURED_FTL);
         } catch (UnexpectedLoggedInUserException e) {
             if (e.getUrl() == null) {
@@ -141,6 +142,7 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
                 return new DirectRedirectResponseValues(e.getUrl());
             }
         } catch (AuthenticationException e) {
+            log.error("processRequest: Authentication error.", e);
             String message = e.getMessage();
             Map<String, Object> templateValues = new HashMap<String, Object>();
             templateValues.put(MESSAGE, message);
@@ -154,10 +156,12 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
 
     private UserAccount getLinkedUserAccount(VitroRequest vreq, OrcidTokenResponse orcidToken) {
         if (orcidToken == null || StringUtils.isEmpty(orcidToken.orcid)) {
+            log.debug("getLinkedUserAccount: orcidToken is null or orcid is empty");
             return null;
         }
 
-        String personUri = getPersonUriByOrcidUri(vreq, "https://orcid.org/" + orcidToken.orcid);
+        String orcidUri = "https://orcid.org/" + orcidToken.orcid;
+        String personUri = getPersonUriByOrcidUri(vreq, orcidUri);
         Individual individual = null;
 
         if (personUri != null) {
@@ -171,23 +175,40 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
             String matchingPropertyUri = sec.getMatchingPropertyUri();
             if (!StringUtils.isBlank(matchingPropertyUri)) {
                 String externalAuthId = getExternalAuthIdForIndividual(vreq, individual);
-                log.debug("External auth ID: " + externalAuthId);
                 if (StringUtils.isNotBlank(externalAuthId)) {
-                    return getAuthenticator(vreq).getAccountForExternalAuth(externalAuthId);
+                    UserAccount account = getAuthenticator(vreq).getAccountForExternalAuth(externalAuthId);
+                    if (account != null) {
+                        return account;
+                    }
                 }
             }
         }
-        return getAuthenticator(vreq).getAccountForExternalAuth(orcidToken.orcid);
+        UserAccount fallbackAccount = getAuthenticator(vreq).getAccountForExternalAuth(orcidToken.orcid);
+
+        return fallbackAccount;
     }
 
     private String getPersonUriByOrcidUri(VitroRequest vreq, String orcidUri) {
         final List<String> personUris = new ArrayList<String>();
 
-        String query = ""
-                + "SELECT ?person WHERE {\n"
-                + "  ?person <" + ORCID_ID_PROPERTY_URI + "> <" + orcidUri + "> .\n"
-                + "}\n"
-                + "LIMIT 1";
+        SelfEditingConfiguration sec = SelfEditingConfiguration.getBean(vreq);
+        String matchingPropertyUri = sec.getMatchingPropertyUri();
+
+        String query = "";
+        if (StringUtils.isNotBlank(matchingPropertyUri)) {
+            query = "SELECT ?person WHERE {\n"
+                    + "  ?person <" + ORCID_ID_PROPERTY_URI + "> <" + orcidUri + "> .\n"
+                    + "  ?person <" + matchingPropertyUri + "> ?matchingValue .\n"
+                    + "}\n"
+                    + "ORDER BY ?person\n"
+                    + "LIMIT 1";
+        } else {
+            query = "SELECT ?person WHERE {\n"
+                    + "  ?person <" + ORCID_ID_PROPERTY_URI + "> <" + orcidUri + "> .\n"
+                    + "}\n"
+                    + "ORDER BY ?person\n"
+                    + "LIMIT 1";
+        }
 
         try {
             vreq.getRDFService().sparqlSelectQuery(query, new ResultSetConsumer() {
@@ -204,6 +225,7 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
         }
 
         if (personUris.isEmpty()) {
+            log.debug("getPersonUriByOrcidUri: Query returned no results.");
             return null;
         }
 
