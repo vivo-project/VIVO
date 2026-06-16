@@ -160,8 +160,7 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
             return null;
         }
 
-        String orcidUri = "https://orcid.org/" + orcidToken.orcid;
-        String personUri = getPersonUriByOrcidUri(vreq, orcidUri);
+        String personUri = getPersonUriByOrcidId(vreq, orcidToken.orcid);
         Individual individual = null;
 
         if (personUri != null) {
@@ -188,23 +187,34 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
         return fallbackAccount;
     }
 
-    private String getPersonUriByOrcidUri(VitroRequest vreq, String orcidUri) {
+    private String getPersonUriByOrcidId(VitroRequest vreq, String orcidId) {
         final List<String> personUris = new ArrayList<String>();
 
         SelfEditingConfiguration sec = SelfEditingConfiguration.getBean(vreq);
         String matchingPropertyUri = sec.getMatchingPropertyUri();
 
+        String orcidHttps = "https://orcid.org/" + orcidId;
+        String orcidHttp = "http://orcid.org/" + orcidId;
+
         String query = "";
         if (StringUtils.isNotBlank(matchingPropertyUri)) {
             query = "SELECT ?person WHERE {\n"
-                    + "  ?person <" + ORCID_ID_PROPERTY_URI + "> <" + orcidUri + "> .\n"
+                    + "  {\n"
+                    + "    ?person <" + ORCID_ID_PROPERTY_URI + "> <" + orcidHttps + "> .\n"
+                    + "  } UNION {\n"
+                    + "    ?person <" + ORCID_ID_PROPERTY_URI + "> <" + orcidHttp + "> .\n"
+                    + "  }\n"
                     + "  ?person <" + matchingPropertyUri + "> ?matchingValue .\n"
                     + "}\n"
                     + "ORDER BY ?person\n"
                     + "LIMIT 1";
         } else {
             query = "SELECT ?person WHERE {\n"
-                    + "  ?person <" + ORCID_ID_PROPERTY_URI + "> <" + orcidUri + "> .\n"
+                    + "  {\n"
+                    + "    ?person <" + ORCID_ID_PROPERTY_URI + "> <" + orcidHttps + "> .\n"
+                    + "  } UNION {\n"
+                    + "    ?person <" + ORCID_ID_PROPERTY_URI + "> <" + orcidHttp + "> .\n"
+                    + "  }\n"
                     + "}\n"
                     + "ORDER BY ?person\n"
                     + "LIMIT 1";
@@ -221,11 +231,11 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
                 }
             });
         } catch (RDFServiceException e) {
-            log.error("Error finding person by ORCID URI: " + orcidUri, e);
+            log.error("Error finding person by ORCID ID: " + orcidId, e);
         }
 
         if (personUris.isEmpty()) {
-            log.debug("getPersonUriByOrcidUri: Query returned no results.");
+            log.debug("getPersonUriByOrcidId: Query returned no results.");
             return null;
         }
 
