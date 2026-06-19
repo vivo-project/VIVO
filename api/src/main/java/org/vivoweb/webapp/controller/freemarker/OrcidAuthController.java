@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +21,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cornell.mannlib.orcidclient.context.OrcidClientContext;
 import edu.cornell.mannlib.vedit.beans.LoginStatusBean;
-import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.SelfEditingConfiguration;
 import edu.cornell.mannlib.vitro.webapp.beans.UserAccount;
@@ -34,7 +32,6 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.DirectRedirectResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
-import edu.cornell.mannlib.vitro.webapp.dao.DataPropertyStatementDao;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
 import edu.cornell.mannlib.vitro.webapp.utils.http.HttpClientFactory;
@@ -160,20 +157,12 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
             return null;
         }
 
-        String personUri = getPersonUriByOrcidId(vreq, orcidToken.orcid);
-        Individual individual = null;
+        String externalAuthId = getExternalAuthIdForOrcidId(vreq, orcidToken.orcid);
 
-        if (personUri != null) {
-            individual = vreq.getWebappDaoFactory()
-                    .getIndividualDao()
-                    .getIndividualByURI(personUri);
-        }
-
-        if (individual != null) {
+        if (externalAuthId != null) {
             SelfEditingConfiguration sec = SelfEditingConfiguration.getBean(vreq);
             String matchingPropertyUri = sec.getMatchingPropertyUri();
             if (!StringUtils.isBlank(matchingPropertyUri)) {
-                String externalAuthId = getExternalAuthIdForIndividual(vreq, individual);
                 if (StringUtils.isNotBlank(externalAuthId)) {
                     UserAccount account = getAuthenticator(vreq).getAccountForExternalAuth(externalAuthId);
                     if (account != null) {
@@ -182,15 +171,13 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
                 }
             }
         }
-        UserAccount fallbackAccount = getAuthenticator(vreq).getAccountForExternalAuth(orcidToken.orcid);
 
-        return fallbackAccount;
+        return getAuthenticator(vreq).getAccountForExternalAuth(orcidToken.orcid);
     }
 
-    private String getPersonUriByOrcidId(VitroRequest vreq, String orcidId) {
-        final List<String> personUris = new ArrayList<String>();
-
-        SelfEditingConfiguration sec = SelfEditingConfiguration.getBean(vreq);
+    private String getExternalAuthIdForOrcidId(VitroRequest vreq, String orcidId) {
+        final List<String> matchingId = new ArrayList<>();
+        final SelfEditingConfiguration sec = SelfEditingConfiguration.getBean(vreq);
         String matchingPropertyUri = sec.getMatchingPropertyUri();
 
         String orcidHttps = "https://orcid.org/" + orcidId;
@@ -198,7 +185,7 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
 
         String query = "";
         if (StringUtils.isNotBlank(matchingPropertyUri)) {
-            query = "SELECT ?person WHERE {\n"
+            query = "SELECT ?person ?matchingValue WHERE {\n"
                     + "  {\n"
                     + "    ?person <" + ORCID_ID_PROPERTY_URI + "> <" + orcidHttps + "> .\n"
                     + "  } UNION {\n"
@@ -208,25 +195,15 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
                     + "}\n"
                     + "ORDER BY ?person\n"
                     + "LIMIT 1";
-        } else {
-            query = "SELECT ?person WHERE {\n"
-                    + "  {\n"
-                    + "    ?person <" + ORCID_ID_PROPERTY_URI + "> <" + orcidHttps + "> .\n"
-                    + "  } UNION {\n"
-                    + "    ?person <" + ORCID_ID_PROPERTY_URI + "> <" + orcidHttp + "> .\n"
-                    + "  }\n"
-                    + "}\n"
-                    + "ORDER BY ?person\n"
-                    + "LIMIT 1";
         }
 
         try {
             vreq.getRDFService().sparqlSelectQuery(query, new ResultSetConsumer() {
                 @Override
                 protected void processQuerySolution(QuerySolution qs) {
-                    RDFNode personNode = qs.get("person");
-                    if (personNode != null && personNode.isURIResource()) {
-                        personUris.add(personNode.asResource().getURI());
+                    RDFNode matchingValueNode = qs.get("matchingValue");
+                    if (matchingValueNode != null) {
+                            matchingId.add(matchingValueNode.toString());
                     }
                 }
             });
@@ -234,42 +211,12 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
             log.error("Error finding person by ORCID ID: " + orcidId, e);
         }
 
-        if (personUris.isEmpty()) {
-            log.debug("getPersonUriByOrcidId: Query returned no results.");
+        if (matchingId.isEmpty()) {
+            log.debug("getExternalAuthIdForOrcidId: Query returned no results.");
             return null;
         }
 
-        return personUris.get(0);
-    }
-    private String getExternalAuthIdForIndividual(VitroRequest vreq, Individual individual) {
-        if (individual == null || StringUtils.isBlank(individual.getURI())) {
-            return null;
-        }
-
-        SelfEditingConfiguration sec = SelfEditingConfiguration.getBean(vreq);
-        String matchingPropertyUri = sec.getMatchingPropertyUri();
-
-        log.debug("Matching property URI: " + matchingPropertyUri);
-
-        if (StringUtils.isBlank(matchingPropertyUri)) {
-            return null;
-        }
-
-        DataPropertyStatementDao dpsDao = vreq.getUnfilteredWebappDaoFactory()
-                .getDataPropertyStatementDao();
-
-        Collection<DataPropertyStatement> statements =
-                dpsDao.getDataPropertyStatementsForIndividualByDataPropertyURI(
-                        individual,
-                        matchingPropertyUri);
-
-        if (statements == null || statements.isEmpty()) {
-            log.debug("No external auth ID found on individual " + individual.getURI()
-                    + " using property " + matchingPropertyUri);
-            return null;
-        }
-
-        return statements.iterator().next().getData();
+        return matchingId.get(0);
     }
 
     private boolean needOrcidCallBack(String requestURI) {
@@ -285,11 +232,15 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
 
     private ResponseValues login(VitroRequest vreq, OrcidTokenResponse orcidToken) {
         try {
+            String profileUri = null;
             UserAccount userAccount = getLinkedUserAccount(vreq, orcidToken);
-            String profileUri = getProfileUri(vreq, userAccount);
 
-            getAuthenticator(vreq).recordLoginAgainstUserAccount(userAccount,
-                    LoginStatusBean.AuthenticationSource.EXTERNAL);
+            if (userAccount != null) {
+                profileUri = getProfileUri(vreq, userAccount);
+
+                getAuthenticator(vreq).recordLoginAgainstUserAccount(userAccount,
+                        LoginStatusBean.AuthenticationSource.EXTERNAL);
+            }
 
             if (profileUri == null) {
                 return goToHomePage();
@@ -470,7 +421,5 @@ public class OrcidAuthController extends FreemarkerHttpServlet {
 
     private static class OrcidTokenResponse {
         String orcid;
-
     }
-
 }
