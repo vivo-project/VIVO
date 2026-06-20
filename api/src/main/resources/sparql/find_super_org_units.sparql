@@ -1,0 +1,23 @@
+PREFIX rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX vivo:     <http://vivoweb.org/ontology/core#>
+PREFIX obo:      <http://purl.obolibrary.org/obo/>
+PREFIX vcard:    <http://www.w3.org/2006/vcard/ns#>
+
+SELECT ?superInstitution ?ror ?city ?region ?country
+WHERE {
+  <%s> obo:BFO_0000050* ?superInstitution .
+
+  OPTIONAL {
+    ?superInstitution vivo:rorId ?ror .
+  }
+
+  OPTIONAL {
+    ?superInstitution obo:ARG_2000028 ?vcardIndividual .
+    ?vcardIndividual vcard:hasAddress ?address .
+
+    OPTIONAL { ?address vcard:locality ?city . }
+    OPTIONAL { ?address vcard:region ?region . }
+    OPTIONAL { ?address vcard:country ?country . }
+  }
+}

@@ -1733,3 +1733,14 @@ span.subclassExpandMinus {
     background:url(../images/green_minus_sign.gif) right center no-repeat;
     min-height:18px;
 }
+/* ------------------------------------------------->  */
+/* ORCID BUTTON  ----------------------------------->  */
+/* ------------------------------------------------->  */
+
+.mt-5 {
+    margin-top: 3.5rem;
+}
+
+.section-title-small {
+    margin-bottom: 0rem;
+}
