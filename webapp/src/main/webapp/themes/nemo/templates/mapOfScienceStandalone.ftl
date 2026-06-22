@@ -22,7 +22,7 @@ corresponding changes in the included Templates. -->
 <h2 id="header-entity-label" class="hide-dom-on-init"><span><a id="entityMoniker" href="${entityVivoProfileURL}" title="${i18n().entity_label}">${entityLabel}</a></span></h2>
 
 <div id="map-of-science-info" class="hide-dom-on-init"> ${i18n().explore_activity} (<span id="mapped-publications" style="font-weight: bold"></span> ${i18n().publications}) ${i18n().across_subdisciplines} 
-	<img class="filterInfoIcon" id="imageIconOne"  src="${urls.images}/iconInfo.png" 
+	<img class="filterInfoIcon" id="imageIconOne"  src="${urls.images}/iconInfo-darkened.png" 
 		alt="${i18n().info_icon}" /> 
 </div>
 </div>
@@ -50,15 +50,15 @@ corresponding changes in the included Templates. -->
     <#-- VIEW TYPE FILTER -->
     <div id="view-type-filter" style="display:${viewTypeFilterDisplay};">
     	<input type="radio" name="view-type" value="ENTITY"> ${i18n().explore_capitalized} ${entityLabel} </input>
-    	<img class="filterInfoIcon" id="exploreInfoIcon" src="${urls.images}/iconInfo.png" alt="${i18n().info_icon}" title="" /><br>
+    	<img class="filterInfoIcon" id="exploreInfoIcon" src="${urls.images}/iconInfo-darkened.png" alt="${i18n().info_icon}" title="" /><br>
 		<input type="radio" name="view-type" value="COMPARISON"> ${i18n().compare_organizations} <#--/ people --></input>
-		<img class="filterInfoIcon" id="compareInfoIcon" src="${urls.images}/iconInfo.png" alt="${i18n().info_icon}" title="" /><br><br>
+		<img class="filterInfoIcon" id="compareInfoIcon" src="${urls.images}/iconInfo-darkened.png" alt="${i18n().info_icon}" title="" /><br><br>
     </div>
     
     <!-- <h3>${i18n().what_to_compare}</h3> -->
     <div id="percent-mapped-info">
                 ${i18n().mapped} <span id="percent-mapped"></span>% ${i18n().of} <span id="total-publications"></span> ${i18n().publications}
-                <img class="filterInfoIcon" id="imageIconThree" src="${urls.images}/iconInfo.png" alt="${i18n().info_icon}"/>
+                <img class="filterInfoIcon" id="imageIconThree" src="${urls.images}/iconInfo-darkened.png" alt="${i18n().info_icon}"/>
 
         </div>
     

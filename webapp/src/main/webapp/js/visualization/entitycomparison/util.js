@@ -1294,7 +1294,7 @@ function removeStopWords(val) {
 function setEntityLevel(entityLevel){
 	$('#entityleveltext').text('  ' + entityLevel.toLowerCase()).css('font-style', 'italic');
 	$('#entityHeader').text(entityLevel).css('font-weight', 'bold');
-	$('#headerText').css("color", "#2485ae");
+	$('#headerText').css("color", "#12739D");
 }
 
 function toCamelCase(string){
