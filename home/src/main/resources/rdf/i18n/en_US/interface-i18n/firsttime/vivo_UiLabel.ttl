@@ -925,6 +925,22 @@ uil-data:qr_icon.VIVO
         uil:hasKey      "qr_icon" ;
         uil:hasPackage  "VIVO-languages" .
 
+uil-data:uri_icon_label.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Open sharing options for this profile"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "uri_icon_label" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:qr_icon_label.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Open individual URI QR code"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "qr_icon_label" ;
+        uil:hasPackage  "VIVO-languages" .
+
 uil-data:label_type.VIVO
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;
@@ -3074,6 +3090,14 @@ uil-data:research_areas.VIVO
         rdfs:label       "research areas"@en-US ;
         uil:hasApp      "VIVO" ;
         uil:hasKey      "research_areas" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:research_areas_icon.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "research areas icon"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "research_areas_icon" ;
         uil:hasPackage  "VIVO-languages" .
 
 uil-data:missing_grant.VIVO
@@ -5921,6 +5945,22 @@ uil-data:has_no_webpages.VIVO
         rdfs:label       "This individual currently has no web pages specified. Add a new web page by clicking on the button below."@en-US ;
         uil:hasApp      "VIVO" ;
         uil:hasKey      "has_no_webpages" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:arrow_key_reorder_note.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Use Arrow keys to navigate, and Shift + Arrow keys to move items up or down."@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "arrow_key_reorder_note" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:reorder_action_info.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "{0} moved to position {1}."@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "reorder_action_info" ;
         uil:hasPackage  "VIVO-languages" .
 
 uil-data:through_today.VIVO

@@ -11,6 +11,9 @@ import java.util.Map.Entry;
 
 import javax.servlet.http.HttpSession;
 
+import edu.cornell.mannlib.vitro.webapp.beans.Individual;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18nBundle;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.rdf.model.Model;
@@ -101,6 +104,14 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 
         //NOITCE this generator does not run prepare() since it
         //is never an update and has no SPARQL for existing
+
+        I18nBundle i18n = I18n.bundle(vreq);
+        String title = i18n.text("manage_authors");
+        Individual subject = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(editConfiguration.getSubjectUri());
+        if( subject != null && subject.getName() != null ){
+            title += " - " + subject.getName();
+        }
+        editConfiguration.addNewResource("pageTitle", title);
 
         return editConfiguration;
     }

@@ -382,10 +382,71 @@ var addEditorForm = {
 
         editorshipList.sortable({
             cursor: 'move',
-            update: function(event, ui) {
-                addEditorForm.reorderEditors(event, ui);
+        });
+
+        editorshipList.on('sortupdate', (event, ui) => {
+            addEditorForm.reorderEditors(event, ui);
+        });
+
+        editorshipList.on('keydown', 'li', (e) => {
+            const $focused = $(e.currentTarget);
+            const $allItems = editorshipList.children('li');
+            const index = $allItems.index($focused);
+            const key = e.key;
+
+            const moveItem = (direction) => {
+                const targetIndex = index + direction;
+                if (targetIndex < 0 || targetIndex >= $allItems.length) return;
+
+                e.preventDefault();
+
+                if (direction === -1) {
+                    $focused.insertBefore($allItems.eq(targetIndex));
+                } else {
+                    $focused.insertAfter($allItems.eq(targetIndex));
+                }
+
+                $focused.focus();
+                triggerUpdateEvent();
+
+                const itemName = $focused.find('.itemName').text().trim() || $focused.text().trim();
+                const newIndex = targetIndex + 1;
+
+                $('#live-region').text(
+                    i18nStrings.reorderActionInfo
+                        .replace("{0}", itemName)
+                        .replace("{1}", newIndex)
+                );
+            };
+
+            const moveFocus = (direction) => {
+                const targetIndex = index + direction;
+                if (targetIndex < 0 || targetIndex >= $allItems.length) return;
+
+                e.preventDefault();
+                $allItems.eq(targetIndex).focus();
+            };
+
+            if (e.shiftKey || e.ctrlKey) {
+                if (key === 'ArrowUp') {
+                    moveItem(-1);
+                } else if (key === 'ArrowDown') {
+                    moveItem(1);
+                }
+            } else {
+                if (key === 'ArrowUp') {
+                    moveFocus(-1);
+                } else if (key === 'ArrowDown') {
+                    moveFocus(1);
+                }
             }
         });
+
+        function triggerUpdateEvent() {
+            editorshipList.sortable('refresh');
+            editorshipList.trigger('sortupdate');
+        }
+
     },
 
     // Reorder editors. Called on page load and after editor drag-and-drop and remove.

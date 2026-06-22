@@ -180,8 +180,8 @@
     <br />
 </p>
 <span id="fullViewLink">
-    <a href="${urls.base}/display/${individual.localName}?destination=standardView" >
-        <img id="fullViewIcon" src="${urls.images}/individual/fullViewIcon.png" alt="${i18n().full_view_icon}"/>
+    <a id="fullViewIcon" href="${urls.base}/display/${individual.localName}?destination=standardView" aria-label="${i18n().full_view_icon}" >
+        <img src="${urls.images}/individual/fullViewIcon.png" alt="${i18n().full_view_icon}" aria-hidden="true" />
     </a>
 </span>
 <#if !editable>
