@@ -4,7 +4,7 @@
 <#assign webpage = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#URL")!>
     <#if webpage?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
         <#if !editable && individual.person() >
-            <ul style="font-size:0.9em;padding-bottom:4px"><li><strong>${i18n().websites}</strong></li></ul>
+            <h2 style="font-size:0.9em;padding-bottom:4px"><strong>${i18n().websites}</strong></h2>
         </#if>
         <@p.addLinkWithLabel webpage editable i18n().websites/>
         <#assign localName = webpage.localName>
