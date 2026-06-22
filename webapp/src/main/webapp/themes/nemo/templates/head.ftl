@@ -7,7 +7,11 @@
 <!-- Google Chrome Frame open source plug-in brings Google Chrome's open web technologies and speedy JavaScript engine to Internet Explorer-->
 <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
 
-<title>${(title?html)!siteName!}</title>
+<#if title?? && title?has_content>
+    <title>${title?html} | ${siteName}</title>
+<#else>
+    <title>${siteName}</title>
+</#if>
 
 <#-- VIVO OpenSocial Extension by UCSF -->
 <#if openSocial??>

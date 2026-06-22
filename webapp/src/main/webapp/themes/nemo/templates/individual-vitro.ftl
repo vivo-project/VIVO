@@ -92,7 +92,8 @@
 	var i18nStringsUriRdf = {
 		shareProfileUri: '${i18n().share_profile_uri}',
 		viewRDFProfile: '${i18n().view_profile_in_rdf}',
-		closeString: '${i18n().close}'
+		closeString: '${i18n().close}',
+        uriInputString: '${i18n().uri_input_label}'
 	};
 	var i18nStrings = {
 		displayLess: '${i18n().display_less}',
