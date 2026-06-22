@@ -39,28 +39,32 @@ if (typeof i18nStringsCap == 'undefined')
         delete_selected: 'delete selected',
         remove_capability: 'Remove capability',
         remove_group: 'Remove group',
-        expand: 'Expand'
+        expand: 'Expand',
+        view: 'View',
+        capability_map_remove_person: 'Remove person from capability map view',
+        capability_map_svg_title: 'Capability Map Visualization',
+        capability_map_svg_desc: 'Interactive capability map. Search terms appear as orange squares; groups of researchers appear as blue circles. Square and circle size reflect result counts; circle shading shows how many search terms each group is linked to. Lines connect related terms and groups.'
     }
 };
 var schemes = {
     "white" : {
         "backgroundcolor" : "#FFFFFF",
-        "capabilitycolor" : "#FFA500",
+        "capabilitycolor" : "#A46A00",
         "nodestroke" : "#FFFFFF",
         "fontcolor" : "#555",
-        "linkcolor" : "#B8B8B8",
+        "linkcolor" : "#676767",
         "gradient" : function(percent) {
-            return percent
+            return percent * 0.55 + 18;
         }
     },
     "black" : {
         "backgroundcolor" : "#333333",
-        "capabilitycolor" : "#FFA500",
+        "capabilitycolor" : "#D49214",
         "nodestroke" : "#333333",
         "fontcolor" : "#FFF",
-        "linkcolor" : "#777",
+        "linkcolor" : "#A3A3A3",
         "gradient" : function(percent) {
-            return -percent + 125;
+            return -percent * 0.55 + 128;
         }
     }
 };
@@ -385,8 +389,8 @@ FullResultQueryUnit.prototype.fetch = function() {
 }
 
 var showPanel = function(name) {
-    $(".titles li").removeClass("activeTab");
-    $(".titles li a[href='#" + name + "']").parent().addClass("activeTab");
+    $(".titles li").removeClass("activeTab").find("a").attr("aria-selected", "false");
+    $(".titles li a[href='#" + name + "']").parent().addClass("activeTab").attr("aria-selected", "true");
     $(".result_section").css("display", "none");
     $("#" + name).css("display", "block");
 }
@@ -400,7 +404,7 @@ DetailsPanel.prototype.clearDetails = function() {
     $(this.panel).empty();
 }
 DetailsPanel.prototype.showDetails = function(mode, id) {
-    showPanel("logg");
+    showPanel("tabpanel-logg");
 
     var that = this;
     var departments = {};
@@ -415,7 +419,7 @@ DetailsPanel.prototype.showDetails = function(mode, id) {
                     detailsPane.showDetails(mode, id);
                 })
                 .css("cursor", "pointer")
-                .prepend($("<span/>").addClass("orange-square"))
+                .prepend($("<span/>").addClass("orange-square").attr("aria-hidden", "true"))
             )
             .append($("<button>" + i18nStringsCap.remove_capability + "</button>")
                 .on("click", function() {
@@ -476,7 +480,7 @@ DetailsPanel.prototype.groupInfo = function(i, group, mode, id) {
                     detailsPane.showDetails("group", i);
                 })
                 .css("cursor", "pointer")
-                .prepend($("<span/>").addClass("blue-circle"))
+                .prepend($("<span/>").addClass("blue-circle").attr("aria-hidden", "true"))
         )
         .append($("<button>" + i18nStringsCap.remove_group + "</button>")
             .on("click", function() {
@@ -496,14 +500,16 @@ DetailsPanel.prototype.groupInfo = function(i, group, mode, id) {
                             .attr("width", 50)
                             .css({"float" : "right", "margin-top" : "10px", "clear" : "both"}))
                         )
-                        .append($("<h3/>")
+                        .append($("<p/>")
+                            .css({"font-size" : "1.15em"})
                             .css({"clear" : "none"})
                             .append($("<a>" + p.fullname() + "</a>")
                                 .attr("href", contextPath + "/display?uri=" + encodeURI(p.id))
                                 .attr("target", "_blank")
                             )
                             .append($("<span> </span>"))
-                            .append($("<a>[X]</a>")
+                            .append($("<a tabindex='0'>[X]</a>")
+                                .attr("aria-label", i18nStringsCap.capability_map_remove_person)
                                 .css("cursor", "pointer")
                                 .on("click", function(k) {
                                     return function() {
@@ -512,14 +518,18 @@ DetailsPanel.prototype.groupInfo = function(i, group, mode, id) {
                                         that.showDetails(mode, id);
                                     }
                                 }(i))
+                                .on("keydown", function(e) {
+                                    if (e.key === "Enter" || e.keyCode === 13) {
+                                        group.removePerson(group.people[i]);
+                                        render();
+                                        that.showDetails(mode, id);
+                                    }
+                                })
                             )
                         )
                         .append($("<p>" + p.info["md_4"].replace(/\|/g, " / ") + "</p>").css("font-style", "italic"))
                         .append(DetailsPanel.makeslidedown(p.queryText(group.capabilities), p.fullInfo["md_8"], "grants"))
                         .append(DetailsPanel.makeslidedown(p.queryText(group.capabilities), p.fullInfo["md_U"], "publications"))
-
-
-
                     )
 
             }, $("<div/>"))
@@ -642,7 +652,7 @@ var getLinkColor = function() {
         return linkColor;
     }
 
-    return "#B8B8B8";
+    return "#676767";
 }
 var render = function() {
     if (!force) $("#infovis").empty();
@@ -664,7 +674,12 @@ var render = function() {
         $("#linkColor").val(scheme["linkcolor"]);
     }
     if (!delta) {
-        var outer = d3.select("#infovis").append("svg:svg").attr("width", w).attr("height", h);
+        var outer = d3.select("#infovis").append("svg:svg")
+            .attr("width", w).attr("height", h)
+            .attr("role", "img")
+            .attr("aria-labelledby", "cap-map-svg-title cap-map-svg-desc");
+        outer.append("svg:title").attr("id", "cap-map-svg-title").text(i18nStringsCap.capability_map_svg_title);
+        outer.append("svg:desc").attr("id", "cap-map-svg-desc").text(i18nStringsCap.capability_map_svg_desc);
         var rescale = function() { vis.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")"); }
         vis = outer
             .append('svg:g')
@@ -721,7 +736,7 @@ var render = function() {
     link_data.enter().append("svg:line")
         .attr("class", "link")
         .style("stroke", getLinkColor())
-        .style("stroke-opacity", ".6")
+        .style("stroke-opacity", ".9")
         .style("stroke-width", function(d) {
             return Math.sqrt(d.value) + 1;
         });
@@ -746,25 +761,36 @@ var render = function() {
         .style("stroke-width", 2)
         .each(function(d, i) {
             d3.select(this).selectAll("*").remove();
-            if (d.nodetype == "group") d3.select(this).append("svg:circle");
-            else d3.select(this).append("svg:rect");
+            var nodeTitle;
+            if (d.nodetype == "group") {
+                nodeTitle = i18nStringsCap.group + " (" + d.value + "): blue circle";
+                d3.select(this).append("svg:circle");
+            } else {
+                nodeTitle = i18nStringsCap.term + ": " + decodeURIComponent(d.identifier) + " (orange square)";
+                d3.select(this).append("svg:rect");
+            }
             if (d.nodetype == "group") {
                 d3.select(this).select("circle")
                     .attr("r", function(d) {
-                        return 4 * d.value / queryCutoffElem.value + 4;
+                        var baseRadius = 4 * d.value / queryCutoffElem.value + 4;
+                        var caps = Math.max(1, Math.min(4, d.numcaps || 1));
+                        var capsScale = 1.1 + ((caps - 1) * 0.15); // 1 => 0.75, 4 => 1.50
+                        return baseRadius * capsScale;
                     })
                     .style("fill", function(d) {
-                        var p = (85 - Math.min(1, d.numcaps / 4) * 50);
+                        var p = (70 - Math.min(1, d.numcaps / 4) * 45);
                         var l = scheme["gradient"](p);
                         var c = "hsl(240, " + (85 - p) + "%, " + l + "%)";
                         return c;
-                    });
+                    })
+                    .append("svg:title").text(nodeTitle);
             } else {
                 var dim = 2 * (Math.sqrt(d.value / 10) + 5);
                 d3.select(this).select("rect")
                     .attr("width", dim).attr("height", dim)
                     .attr("transform", "translate(-" + dim / 2 + ", -" + dim / 2 + ")")
-                    .style("fill", scheme["capabilitycolor"]);
+                    .style("fill", scheme["capabilitycolor"])
+                    .append("svg:title").text(nodeTitle);
             }
         })
         .call(force.drag);
@@ -874,19 +900,35 @@ var render = function() {
         });
         render();
     }));
+    $("#log_printout").append("<ul></ul>");
     $.each(g.getCapabilities(), function(i, c) {
-        $("#log_printout")
+        $("#log_printout > ul")
             .append($("<li/>")
-                .append($("<a> " + decodeURI(c.term) + "</a>")
-                    .on("click", function() {
-                        highlight(c.term);
-                        detailsPane.showDetails("capability", c.term);
-                    })
-                    .css("cursor", "pointer")
-                )
-                .prepend($("<input/>").attr("type", "checkbox")
-                    .attr("name", c.term)
-                )
+            .append($("<label/>")
+                .css({
+                "display": "inline",
+                "margin-right": "5px"
+                })
+                .attr("for", "checkbox-" + i)
+                .text(decodeURI(c.term))
+            )
+            .append($("<a tabindex='0'>" + i18nStringsCap.view + "</a>")
+                .on("click", function() {
+                highlight(c.term);
+                detailsPane.showDetails("capability", c.term);
+                })
+                .on("keydown", function(e) {
+                if (e.key === "Enter" || e.keyCode === 13) {
+                    highlight(c.term);
+                    detailsPane.showDetails("capability", c.term);
+                }
+                })
+                .css("cursor", "pointer")
+            )
+            .prepend($("<input/>").attr("type", "checkbox")
+                .attr("name", c.term)
+                .attr("id", "checkbox-" + i)
+            )
             );
     });
 }
@@ -919,7 +961,7 @@ var unhighlight = function() {
             var strokewidth = parseFloat(d3.select(this).style("stroke-width").replace(/px/g, ""));
             d3.select(this).style("stroke", getLinkColor())
                 .style("stroke-width", (strokewidth - 2) + "px")
-                .style("stroke-opacity", 0.6);
+                .style("stroke-opacity", 0.9);
         }
     });
 }
@@ -960,11 +1002,11 @@ var restoreDefaults = function() {
     $("#graph_gravity").val("1");
     $("#graph_charge").val("-1500");
     $("#graph_linkdistance").val("40");
-    $("#linkColor").val("#B8B8B8");
+    $("#linkColor").val("#676767");
 }
 var finish = function() {
     render();
-    showPanel("demo");
+    showPanel("tabpanel-demo");
     enableSubButton();
     fullResultsQueue = [];
     $.each(g.groups, function(key, group) {
@@ -998,7 +1040,8 @@ var reset = function() {
         $("#infovis").html("");
         window.location.hash = "";
 
-        $("#log_printout").empty();
+        $("#log_printout > ul").empty();
+        $("#log_printout > button").remove();
         detailsPane.clearDetails();
         $("#graphDetails").attr("value", "");
         $(".result_section").each(function() {
