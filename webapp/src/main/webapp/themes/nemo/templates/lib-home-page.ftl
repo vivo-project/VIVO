@@ -178,7 +178,7 @@
                             </a>
                     </#if>
                 </#list>
-                <a href="${urls.base}/research" alt="${i18n().view_all_research}">${i18n().view_all}</a>
+                <a href="${urls.base}/research" alt="${i18n().view_all_research}">${i18n().view_all_research?capitalize}...</a>
             </#if>
         </#list>
         <#if !foundClassGroup>

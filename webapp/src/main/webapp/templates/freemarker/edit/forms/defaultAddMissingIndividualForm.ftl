@@ -70,7 +70,7 @@ ${i18n().new_entry_for(editConfiguration.propertyPublicDomainTitle, editConfigur
         <input size="30"  type="text" id="label" name="label" value="${labelValue}" />
     </p>
 </#if>
-    <input type="hidden" name="editKey" id="editKey" value="${editKey}" role="input" />
+    <input type="hidden" name="editKey" id="editKey" value="${editKey}" />
 
     <p class="submit">
         <input type="submit" id="submit" value="${submitLabel}" role="submit" />
