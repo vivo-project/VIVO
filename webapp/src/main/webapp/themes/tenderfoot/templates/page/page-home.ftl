@@ -27,6 +27,7 @@
     <body class="${bodyClasses!}" onload="${bodyOnload!}">
         <#-- supplies the faculty count to the js function that generates a random row number for the search query -->
         <@lh.facultyMemberCount  vClassGroups! />
+        <div class="banner"></div>
 		<header id="branding" role="banner">
 			<#include "identity.ftl">
 		</header>

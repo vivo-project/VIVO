@@ -31,6 +31,30 @@
 an individual profile page. -->
 ${headContent!}
 
+<style>
+    :root {
+        <#if brandingColors?has_content>
+            <#list brandingColors?keys as key>
+                ${key}: ${brandingColors[key]};
+            </#list>
+        </#if>
+        <#if logoUrl?has_content >--logo-url: url('${logoUrl}');</#if>
+        <#if logoSmallUrl?has_content >--logo-small-url: url('${logoSmallUrl}');</#if>
+    }
+</style>
+
+<script>
+    var globalI18nStrings = {
+        brandingColorsSubmitAlert: '${i18n().branding_colors_submit_alert?js_string}',
+        brandingColorsCancelAlert: '${i18n().branding_colors_cancel_alert?js_string}',
+        brandingColorsResetAlert: '${i18n().branding_colors_reset_alert?js_string}',
+        brandingColorsErrorFetchConfig: '${i18n().branding_colors_error_fetch_config?js_string}',
+        brandingColorsErrorFormatConfig: '${i18n().branding_colors_error_format_config?js_string}',
+        brandingColorsErrorUnexpectedConfig: '${i18n().branding_colors_error_unexpected_config?js_string}',
+        brandingColorsOpenAfterSave: '${i18n().branding_colors_open_after_save?js_string}',
+    }
+</script>
+
 <#if customCssPath?has_content >
     <link id="custom-css-path" rel="stylesheet" href="${customCssPath}">
 </#if>

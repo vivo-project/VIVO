@@ -14,7 +14,7 @@ body.login #login {
 }
 #login h2 {
     font-size: 22px;
-    color: #2485ae;
+    color: var(--primary-color, #2485ae);
     padding-left: 15px;
     padding-top: 18px;
     border-bottom: none;
@@ -44,7 +44,7 @@ h3.internal-auth:hover {
 }
 #login-form label {
     display: block;
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
     padding-top: 0;
     padding-left: 38px;
     font-size: 14px;
@@ -81,7 +81,7 @@ h3.internal-auth:hover {
     float: left;
     height: 14px;
     width: 14px;
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
     padding: 0;
     margin-top: 33px;
     margin-left: 20px;
@@ -89,7 +89,7 @@ h3.internal-auth:hover {
 #login-form label.label-remember-me {
     display: block;
     float: right;
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
     font-size: 12px;
     width: 100px;
     margin: 0;
@@ -137,7 +137,7 @@ p.external-auth {
 }
 p.external-auth a.blue,
 p.external-auth a.blue:visited {
-    background-color: #398AAC;
+    background-color: var(--secondary-color, #398AAC);
     width: 180px;
     margin-bottom: 17px;
     line-height: 1.3em;
