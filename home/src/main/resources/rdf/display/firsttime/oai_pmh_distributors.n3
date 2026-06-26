@@ -1,0 +1,732 @@
+@prefix :      <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#> .
+@prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+
+:7493e3fe-7368-4068-945f-8d9479fce5f3
+        a                       <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.SelectFromContentDistributor> , <java:edu.cornell.library.scholars.webapp.controller.api.distribute.DataDistributor> ;
+        :actionName             "OAI PMH Configuration" ;
+        :query                  """
+        PREFIX bob: <http://good.dad/meaning/bob#>
+		PREFIX bib: <http://zeitkunst.org/bibtex/0.1/bibtex.owl#>
+		PREFIX bibo: <http://purl.org/ontology/bibo/>
+		PREFIX fabio: <http://purl.org/spar/fabio/>
+		PREFIX vivo: <http://vivoweb.org/ontology/core#>
+		PREFIX obo: <http://purl.obolibrary.org/obo/>
+		SELECT ?directory ?filter ?lang ?endpoint ?suffix
+		WHERE {
+		  {
+		    BIND ("publications" as ?directory)
+		    BIND ("type" as ?filterName)
+		    BIND ("OAI PMH Publication" as ?endpoint)
+		    BIND ("" as ?lang)
+		    VALUES ?filterValue {
+		      bibo:Article
+		      bibo:Book
+		      bibo:Journal
+		      bibo:Chapter
+		      fabio:Comment
+		      vivo:ConferencePoster
+		      bibo:Manuscript
+		      bibo:PersonalCommunicationDocument
+		      obo:OBI_0000272
+		      bibo:Report
+		      vivo:ResearchProposal
+		      vivo:Speech
+		      bibo:Thesis
+		      vivo:WorkingPaper
+		    }
+		    BIND (STR(?filterName) + ":" + STR(?filterValue) as ?filter)
+		  }
+		  UNION
+		  {
+		    BIND ("persons" as ?directory)
+		    BIND ("type" as ?filterName)
+		    BIND ("http://xmlns.com/foaf/0.1/Person" as ?filterValue)
+		    BIND ("OAI PMH Person" as ?endpoint)
+		    BIND ("" as ?lang)
+		    BIND (STR(?filterName) + ":" + STR(?filterValue) as ?filter)
+		  }
+		  UNION
+		  {
+		    BIND ("orgunits" as ?directory)
+		    BIND ("type" as ?filterName)
+		    BIND ("http://xmlns.com/foaf/0.1/Organization" as ?filterValue)
+		    BIND ("OAI PMH Organization" as ?endpoint)
+		    BIND ("" as ?lang)
+		    BIND (STR(?filterName) + ":" + STR(?filterValue) as ?filter)
+		  }
+		  UNION
+		  {
+		    BIND ("events" as ?directory)
+		    BIND ("type" as ?filterName)
+		    BIND ("http://purl.org/NET/c4dm/event.owl#Event" as ?filterValue)
+		    BIND ("OAI PMH Event" as ?endpoint)
+		    BIND ("" as ?lang)
+		    BIND (STR(?filterName) + ":" + STR(?filterValue) as ?filter)
+		  }
+		  UNION
+		  {
+		    BIND ("products" as ?directory)
+		    BIND ("type" as ?filterName)
+		    VALUES ?filterValue {
+		      bibo:AudioVisualDocument
+		      vivo:CaseStudy
+		      vivo:Dataset
+		      bibo:Image
+		    }
+		    BIND ("OAI PMH Product" as ?endpoint)
+		    BIND ("" as ?lang)
+		    BIND (STR(?filterName) + ":" + STR(?filterValue) as ?filter)
+		  }
+		  UNION
+		  {
+		    BIND ("patents" as ?directory)
+		    BIND ("type" as ?filterName)
+		    BIND (bibo:Patent as ?filterValue)
+		    BIND ("OAI PMH Patent" as ?endpoint)
+		    BIND ("" as ?lang)
+		    BIND (STR(?filterName) + ":" + STR(?filterValue) as ?filter)
+		  }
+		  UNION
+		  {
+		    BIND ("funding" as ?directory)
+		    BIND ("type" as ?filterName)
+		    VALUES ?filterValue {
+		      vivo:Grant
+		      vivo:Award
+		    }
+		    BIND ("OAI PMH Funding" as ?endpoint)
+		    BIND ("" as ?lang)
+		    BIND (STR(?filterName) + ":" + STR(?filterValue) as ?filter)
+		  }
+		  UNION
+		  {
+		    BIND ("equipment" as ?directory)
+		    BIND ("type" as ?filterName)
+		    BIND (vivo:Equipment as ?filterValue)
+		    BIND ("OAI PMH Equipment" as ?endpoint)
+		    BIND ("" as ?lang)
+		    BIND (STR(?filterName) + ":" + STR(?filterValue) as ?filter)
+		  }        UNION
+		  {
+		    BIND ("projects" as ?directory)
+		    BIND ("type" as ?filterName)
+		    BIND (vivo:Project as ?filterValue)
+		    BIND ("OAI PMH Projects" as ?endpoint)
+		    BIND ("" as ?lang)
+		    BIND (STR(?filterName) + ":" + STR(?filterValue) as ?filter)
+		  }
+		}
+		 """ ;
+        :resultFormat           "JSON" .
+
+:90419f7a-bedb-4e02-8505-4462ec919443
+        a                       <java:edu.cornell.library.scholars.webapp.controller.api.distribute.DataDistributor> , <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.RdfGraphDistributor> ;
+        :actionName             "OAI PMH Projects" ;
+        :graphBuilder           :7e49263f-bb4a-4394-8e13-f4a2b643ec32 ;
+        :rdfLang                "RDF/XML" .
+
+:7e49263f-bb4a-4394-8e13-f4a2b643ec32
+        a                       <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.graphbuilder.ConstructQueryGraphBuilder> , <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.graphbuilder.GraphBuilder> ;
+        :builderName            "OAI PMH Projects" ;
+        :constructQuery         """
+		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+		PREFIX vivo: <http://vivoweb.org/ontology/core#>
+		PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>
+		PREFIX obo: <http://purl.obolibrary.org/obo/>
+		PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+		CONSTRUCT {
+		  ?project rdfs:comment "OpenAIRE Project" .
+		  ?project ?p ?o .
+		  ?project obo:BFO_0000055 ?role .
+		  ?role a ?roleType .
+		  ?role obo:RO_0000052 ?agent .
+		  ?agent rdfs:label ?agentLabel .
+		  ?agent rdf:type ?agentType .
+		}
+		WHERE {
+		  BIND (?uri as ?project)
+		  ?project a vivo:Project .
+		  ?project rdfs:label|vitro:mostSpecificType|a ?o .
+		  ?project ?p ?o .
+		  OPTIONAL {
+		    ?project obo:BFO_0000055 ?role .
+		    ?role a ?roleType .
+		    ?role obo:RO_0000052 ?agent .
+		    ?agent rdfs:label ?agentLabel .
+		    ?agent rdf:type ?agentType .
+		  }
+		}
+        """ ;
+        :uriBinding             "uri" .
+
+:90419f7a-bedb-4e02-8505-4462ec919a98
+        a                       <java:edu.cornell.library.scholars.webapp.controller.api.distribute.DataDistributor> , <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.RdfGraphDistributor> ;
+        :actionName             "OAI PMH Equipment" ;
+        :graphBuilder           :7e49263f-bb4a-4394-8e13-f4a2b643ec56 ;
+        :rdfLang                "RDF/XML" .
+
+:7e49263f-bb4a-4394-8e13-f4a2b643ec56
+        a                       <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.graphbuilder.ConstructQueryGraphBuilder> , <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.graphbuilder.GraphBuilder> ;
+        :builderName            "OAI PMH Equipment" ;
+        :constructQuery         """
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX vivo: <http://vivoweb.org/ontology/core#>
+PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>
+CONSTRUCT {
+  ?equipment rdfs:comment "OpenAIRE Equipment" .
+  ?equipment ?p ?o .
+}
+WHERE {
+  BIND (?uri as ?equipment)
+  ?equipment a vivo:Equipment .
+  ?equipment rdfs:label|vitro:mostSpecificType|a ?o .
+  ?equipment ?p ?o .
+}
+        """ ;
+        :uriBinding             "uri" .
+
+:af6b2a40-58d2-4f0b-9d28-82e2dda266b6
+        a                       <java:edu.cornell.library.scholars.webapp.controller.api.distribute.DataDistributor> , <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.RdfGraphDistributor> ;
+        :actionName             "OAI PMH Publication" ;
+        :graphBuilder           :17814aa6-8a6d-47ac-a222-a6b02ff0e921 ;
+        :rdfLang                "RDF/XML" .
+
+:17814aa6-8a6d-47ac-a222-a6b02ff0e921
+        a                       <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.graphbuilder.ConstructQueryGraphBuilder> , <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.graphbuilder.GraphBuilder> ;
+        :builderName            "OAI PMH Publication" ;
+        :constructQuery         """
+		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+		PREFIX bibo: <http://purl.org/ontology/bibo/>
+		PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>
+		PREFIX bib: <http://zeitkunst.org/bibtex/0.1/bibtex.owl#>
+		PREFIX vivo: <http://vivoweb.org/ontology/core#>
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+		PREFIX obo: <http://purl.obolibrary.org/obo/>
+		CONSTRUCT {
+		  ?publication rdfs:comment "OpenAIRE Publication" .
+		  ?publication ?p ?o .
+		  ?publication vivo:relatedBy ?relBy .
+		  ?relBy a ?relType .
+		  ?relBy vivo:relates ?agent .
+		  ?agent a ?agentType .
+		  ?agent rdfs:label ?agentLabel .
+		  ?publication vivo:hasSubjectArea ?area .
+		  ?area ?areaP ?areaO .
+		  ?publication vivo:publisher ?publisher .
+		  ?publisher a ?publisherType .
+		  ?publisher rdfs:label ?publisherLabel .
+		  ?publication vivo:dateTimeValue ?dtv .
+		  ?dtv ?dtvp ?dtvo .
+		  ?publication ?publicationToEventProp ?event .
+		  ?event ?eventProp ?eventValue .
+		} WHERE {
+		  BIND (?uri as ?publication)
+		  {
+		    ?publication a bibo:Document .
+		  } UNION
+		  {
+		    ?publication a bibo:Journal .
+		  }
+		  {
+		    ?publication a|rdfs:label|vitro:mostSpecificType|bibo:abstract|bibo:issn|bibo:volume|bibo:issue|bibo:pageStart|bibo:pageEnd|bibo:doi|bibo:status|bibo:isbn10|bibo:isbn13|vivo:freetextKeyword|bibo:edition|vivo:placeOfPublication|vivo:abbreviation ?o .
+		    ?publication ?p ?o .
+		  }
+		  UNION
+		  {
+		    ?publication vivo:relatedBy ?relBy .
+		    ?relBy a ?relType .
+		    ?relBy vivo:relates ?agent .
+		    ?agent a ?agentType .
+		    ?agent rdfs:label ?agentLabel .
+		  }
+		  UNION
+		  {
+		    ?publication vivo:hasSubjectArea ?area .
+		    ?area vitro:mostSpecificType|a|rdfs:label ?areaO .
+		    ?area ?areaP ?areaO .
+		  }
+		  UNION {
+		    ?publication vivo:publisher ?publisher .
+		    ?publisher a foaf:Organization .
+		    ?publisher a ?publisherType .
+		    ?publisher rdfs:label ?publisherLabel .
+		  }
+		  UNION {
+		    ?publication vivo:dateTimeValue ?dtv .
+		    ?dtv ?dtvp ?dtvo .
+		  }
+		  UNION {
+		    ?publication bibo:presentedAt|obo:RO_0002353 ?event .
+		    ?publication ?publicationToEventProp ?event .
+		    ?event a|rdfs:label|vivo:abbreviation ?eventValue .
+		    ?event ?eventProp ?eventValue .
+		  }
+		}
+        """ ;
+        :uriBinding             "uri" .
+
+:6ac9438a-379b-459b-84e2-70183740d8dd
+        a                       <java:edu.cornell.library.scholars.webapp.controller.api.distribute.DataDistributor> , <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.RdfGraphDistributor> ;
+        :actionName             "OAI PMH Person" ;
+        :graphBuilder           :9c3ce7a2-47c3-4af9-9483-5578d41ffb18 ;
+        :rdfLang                "RDF/XML" .
+
+:9c3ce7a2-47c3-4af9-9483-5578d41ffb18
+        a                       <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.graphbuilder.ConstructQueryGraphBuilder> , <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.graphbuilder.GraphBuilder> ;
+        :builderName            "OAI PMH Person" ;
+        :constructQuery         """
+		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+		PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+		PREFIX obo: <http://purl.obolibrary.org/obo/>
+		PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+		PREFIX vivo: <http://vivoweb.org/ontology/core#>
+		PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+		CONSTRUCT {
+		  ?person ?personProperty ?personObject .
+		  ?person rdfs:comment "OpenAIRE Person" .
+		  ?person obo:ARG_2000028 ?vcardInd .
+		  ?vcardInd vcard:hasName ?vcardName .
+		  ?vcardName vcard:givenName ?givenName .
+		  ?vcardName vcard:familyName ?familyName .
+		  ?vcardName vivo:middleName ?middleName .
+		  ?vcardInd vcard:hasEmail ?emailInd .
+		  ?emailInd vitro:mostSpecificType ?emailMst .
+		  ?emailInd vcard:email ?email .
+		  ?vcardInd vcard:hasTelephone ?telephoneInd .
+		  ?telephoneInd vitro:mostSpecificType ?telephoneMst .
+		  ?telephoneInd vcard:telephone ?telephone .
+		  ?person obo:RO_0000053 ?role .
+		  ?role vitro:mostSpecificType ?roleType .
+		  ?person obo:RO_0000053 ?role .
+		  ?role vitro:mostSpecificType ?roleType.
+		  ?role vivo:roleContributesTo ?org .
+		  ?org vivo:abbreviation ?abbreviation .
+		  ?person vivo:orcidId ?orcid .
+		} WHERE {
+		  BIND (?uri as ?person)
+		  ?person rdfs:label|vitro:mostSpecificType|a|vivo:orcidId|vivo:researcherId|vivo:scopusId ?personObject .
+		  ?person ?personProperty ?personObject .
+		  OPTIONAL {
+		    ?person obo:ARG_2000028 ?vcardInd .
+		    {
+		      ?vcardInd vcard:hasName ?vcardName .
+		      {
+		        ?vcardName vcard:givenName ?givenName .
+		      } UNION
+		      {
+		        ?vcardName vcard:familyName ?familyName .
+		      } UNION
+		      {
+		        ?vcardName vivo:middleName ?middleName .
+		      }
+		    } 
+		    UNION
+		    {
+		      ?vcardInd vcard:hasEmail ?emailInd .
+		      ?emailInd vitro:mostSpecificType ?emailMst .
+		      ?emailInd vcard:email ?email .
+		    }
+		    UNION
+		    {
+		      ?vcardInd vcard:hasTelephone ?telephoneInd .
+		      ?telephoneInd vitro:mostSpecificType ?telephoneMst .
+		      ?telephoneInd vcard:telephone ?telephone .
+		    }
+		  }
+		  OPTIONAL {
+		    ?person obo:RO_0000053 ?role .
+		    ?role vitro:mostSpecificType ?roleType.
+		    ?role vivo:roleContributesTo ?org .
+		    ?org a foaf:Organization .
+		    OPTIONAL {
+		      ?org vivo:abbreviation ?abbreviation .
+		    }
+		  }
+		}
+	    """ ;
+        :uriBinding             "uri" .
+
+:be33e587-ea4b-4502-a634-d33cef8ee576
+        a                       <java:edu.cornell.library.scholars.webapp.controller.api.distribute.DataDistributor> , <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.RdfGraphDistributor> ;
+        :actionName             "OAI PMH Event" ;
+        :graphBuilder           :de322d5d-0d58-43da-b2af-f999e72c356b ;
+        :rdfLang                "RDF/XML" .
+
+:de322d5d-0d58-43da-b2af-f999e72c356b
+        a                       <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.graphbuilder.ConstructQueryGraphBuilder> , <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.graphbuilder.GraphBuilder> ;
+        :builderName            "OAI PMH Event" ;
+        :constructQuery         """
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+		PREFIX bibo: <http://purl.org/ontology/bibo/>
+		PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>
+		PREFIX bib: <http://zeitkunst.org/bibtex/0.1/bibtex.owl#>
+		PREFIX vivo: <http://vivoweb.org/ontology/core#>
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+		PREFIX geo:      <http://aims.fao.org/aos/geopolitical.owl#>
+		PREFIX ev: <http://www.w3.org/2001/xml-events/>
+		PREFIX event: <http://purl.org/NET/c4dm/event.owl#>
+		PREFIX obo: <http://purl.obolibrary.org/obo/>
+		CONSTRUCT {
+		  ?event rdfs:comment "OpenAIRE Event" .
+		  ?event ?p ?o .
+		  ?event vivo:dateTimeInterval ?dti .
+		  ?dti vivo:end ?dtiEnd .
+		  ?dtiEnd vivo:dateTime ?dtiEndValue .
+		  ?dtiEnd vivo:dateTimePrecision ?dtiEndPrecision .
+		  ?dti vivo:start ?dtiStart .
+		  ?dtiStart vivo:dateTime ?dtiStartValue .
+		  ?dtiStart vivo:dateTimePrecision ?dtiStartPrecision .
+		  ?event obo:RO_0001025 ?geoLocation .
+		  ?geoLocation ?geoLocationP ?geoLocationO .
+		  ?event vivo:hasSubjectArea ?area .
+		  ?area ?areaP ?areaO .
+		} WHERE {
+		  BIND (?uri as ?event)
+		  ?event a event:Event .
+		  ?event rdfs:label|vitro:mostSpecificType|a|vivo:description|vivo:abbreviation ?o .
+		  ?event ?p ?o .
+		  OPTIONAL {
+		    ?event obo:RO_0001025 ?geoLocation .
+		    ?geoLocation vitro:mostSpecificType|a|rdfs:label|geo:codeISO2 ?geoLocationO .
+		    ?geoLocation ?geoLocationP ?geoLocationO .
+		  }
+		  OPTIONAL {
+		    ?event vivo:hasSubjectArea ?area .
+		    ?area vitro:mostSpecificType|a|rdfs:label ?areaO .
+		    ?area ?areaP ?areaO .
+		  }
+		  OPTIONAL {
+		    ?event vivo:dateTimeInterval ?dti .
+		    {
+		      ?dti vivo:end ?dtiEnd .
+		      ?dtiEnd vivo:dateTime ?dtiEndValue .
+		      ?dtiEnd vivo:dateTimePrecision ?dtiEndPrecision .
+		    } 
+		    UNION
+		    {
+		      ?dti vivo:start ?dtiStart .
+		      ?dtiStart vivo:dateTime ?dtiStartValue .
+		      ?dtiStart vivo:dateTimePrecision ?dtiStartPrecision .
+		    }
+		  }
+		}
+""" ;
+        :uriBinding             "uri" .
+
+
+:ea5acef4-b74f-45f6-9d80-6ec91546b3db
+        a                       <java:edu.cornell.library.scholars.webapp.controller.api.distribute.DataDistributor> , <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.RdfGraphDistributor> ;
+        :actionName             "OAI PMH Organization" ;
+        :graphBuilder           :d91230de-a3c7-42aa-ab44-29046b201522 ;
+        :rdfLang                "RDF/XML" .
+        
+:d91230de-a3c7-42aa-ab44-29046b201522
+        a                       <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.graphbuilder.ConstructQueryGraphBuilder> , <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.graphbuilder.GraphBuilder> ;
+        :builderName            "OAI PMH Organization" ;
+        :constructQuery         """
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+		PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+		PREFIX obo: <http://purl.obolibrary.org/obo/>
+		PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+		PREFIX vivo: <http://vivoweb.org/ontology/core#>
+		PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+		CONSTRUCT {
+		  ?org ?orgP ?orgO .
+		  ?uri rdfs:comment "OpenAIRE OrgUnit" .
+		  ?greaterOrg obo:BFO_0000050 ?org .
+		  ?org obo:ARG_2000028 ?vcardInd .
+		  ?vcardInd vcard:hasURL ?urlInd .
+		  ?urlInd vcard:url ?url .
+		  ?org obo:BFO_0000050 ?ofOrg .
+		  ?ofOrg rdfs:label ?ofOrgLabel .
+		  ?org obo:ARG_2000028 ?vcardInd .
+		  ?vcardInd vcard:hasEmail ?emailInd .
+		  ?emailInd vitro:mostSpecificType ?emailMst .
+		  ?emailInd vcard:email ?email .
+		  ?vcardInd vcard:hasTelephone ?telephoneInd .
+		  ?telephoneInd vitro:mostSpecificType ?telephoneMst .
+		  ?telephoneInd vcard:telephone ?telephone .
+		} WHERE {
+		  ?uri obo:BFO_0000050* ?org .
+		  ?uri a foaf:Organization .
+		  OPTIONAL {
+		    ?greaterOrg obo:BFO_0000050 ?org .
+		  }
+		  ?org a|rdfs:label|vitro:mostSpecificType|vivo:abbreviation ?orgO .
+		  ?org ?orgP ?orgO .
+		  OPTIONAL {
+		    ?org obo:ARG_2000028 ?vcardInd .
+		    ?vcardInd vcard:hasURL ?urlInd .
+		    ?urlInd vcard:url ?url .
+		  }
+		  OPTIONAL {
+		    ?org obo:BFO_0000050 ?ofOrg .
+		    ?ofOrg rdfs:label ?ofOrgLabel .
+		  }
+		  OPTIONAL {
+		    ?org obo:ARG_2000028 ?vcardInd .
+		    {
+		      ?vcardInd vcard:hasEmail ?emailInd .
+		      ?emailInd vitro:mostSpecificType ?emailMst .
+		      ?emailInd vcard:email ?email .
+		    }
+		    UNION
+		    {
+		      ?vcardInd vcard:hasTelephone ?telephoneInd .
+		      ?telephoneInd vitro:mostSpecificType ?telephoneMst .
+		      ?telephoneInd vcard:telephone ?telephone .
+		    }
+		  }
+		}
+        """ ;
+        :uriBinding             "uri" .
+
+:a90aa862-8a14-47fc-be7e-6ece2bd8baa1
+        a                       <java:edu.cornell.library.scholars.webapp.controller.api.distribute.DataDistributor> , <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.RdfGraphDistributor> ;
+        :actionName             "OAI PMH Funding" ;
+        :graphBuilder           :3ea0fd15-73b7-4cd5-8ba6-3bd004da6398 ;
+        :rdfLang                "RDF/XML" .
+
+:3ea0fd15-73b7-4cd5-8ba6-3bd004da6398
+        a                       <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.graphbuilder.ConstructQueryGraphBuilder> , <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.graphbuilder.GraphBuilder> ;
+        :builderName            "OAI PMH Funding" ;
+        :constructQuery         """
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+		PREFIX bibo: <http://purl.org/ontology/bibo/>
+		PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>
+		PREFIX bib: <http://zeitkunst.org/bibtex/0.1/bibtex.owl#>
+		PREFIX obo: <http://purl.obolibrary.org/obo/>
+		PREFIX vivo: <http://vivoweb.org/ontology/core#>
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+		PREFIX ev: <http://www.w3.org/2001/xml-events/>
+		PREFIX event: <http://purl.org/NET/c4dm/event.owl#>
+		CONSTRUCT {
+		  ?uri rdfs:comment "OpenAIRE Funding" .
+		  ?funding ?p ?o .
+		  ?funding vivo:hasSubjectArea ?subjArea .
+		  ?subjArea vivo:hasAssociatedConcept ?concept .
+		  ?concept rdfs:label ?conceptLabel .
+		  ?funding obo:BFO_0000050 ?ofFunding .
+		  ?ofFunding a ?ofFundingType .
+		  ?ofFunding vitro:mostSpecificType ?ofFundingMst .
+		  ?ofFunding rdfs:label ?ofFundingLabel .
+		  ?funding vivo:dateTimeInterval ?dti .
+		  ?dti vivo:end ?dtiEnd .
+		  ?dtiEnd vivo:dateTime ?dtiEndValue .
+		  ?dtiEnd vivo:dateTimePrecision ?dtiEndPrecision .
+		  ?dti vivo:start ?dtiStart .
+		  ?dtiStart vivo:dateTime ?dtiStartValue .
+		  ?dtiStart vivo:dateTimePrecision ?dtiStartPrecision .
+		  ?funding vivo:sponsoredBy ?sponsor .
+		  ?sponsor a foaf:Organization .
+		  ?sponsor rdfs:label ?sponsorLabel .
+		  ?funding vivo:assignedBy ?funder .
+		  ?funder a foaf:Organization .
+		  ?funder rdfs:label ?funderLabel .
+		  ?greaterFunding obo:BFO_0000050 ?funding .
+		} WHERE {
+		  {
+		    ?uri a vivo:Grant .
+		  }
+		  UNION
+		  {
+		    ?uri a vivo:Award .
+		  }
+		  ?uri obo:BFO_0000050* ?funding .
+		  ?funding rdfs:label|vitro:mostSpecificType|a|vivo:totalAwardAmount|bibo:abstract ?o .
+		  ?funding ?p ?o .
+		  OPTIONAL {
+		    ?greaterFunding obo:BFO_0000050 ?funding .
+		  }
+		  OPTIONAL {
+		    ?funding vivo:sponsoredBy ?sponsor .
+		    ?sponsor a foaf:Organization .
+		    ?sponsor rdfs:label ?sponsorLabel .
+		  }
+		  OPTIONAL {
+		    ?funding vivo:assignedBy ?funder .
+		    ?funder a foaf:Organization .
+		    ?funder rdfs:label ?funderLabel .
+		  }
+		  OPTIONAL {
+		    ?funding vivo:hasSubjectArea ?subjArea .
+		    ?subjArea vivo:hasAssociatedConcept ?concept .
+		    ?concept rdfs:label ?conceptLabel .
+		  }
+		  OPTIONAL {
+		    ?funding obo:BFO_0000050 ?ofFunding .
+		    ?ofFunding a bibo:Grant .
+		    ?ofFunding a ?ofFundingType .
+		    ?ofFunding vitro:mostSpecificType ?ofFundingMst .
+		    ?ofFunding rdfs:label ?ofFundingLabel .
+		  }
+		  OPTIONAL {
+		    ?funding vivo:dateTimeInterval ?dti .
+		    {
+		      ?dti vivo:end ?dtiEnd .
+		      ?dtiEnd vivo:dateTime ?dtiEndValue .
+		      ?dtiEnd vivo:dateTimePrecision ?dtiEndPrecision .
+		    } 
+		    UNION
+		    {
+		      ?dti vivo:start ?dtiStart .
+		      ?dtiStart vivo:dateTime ?dtiStartValue .
+		      ?dtiStart vivo:dateTimePrecision ?dtiStartPrecision .
+		    }
+		  }
+		}
+		""" ;
+        :uriBinding             "uri" .
+
+:86b9eddc-0173-484a-a18a-5101d7f6ce15
+        a                       <java:edu.cornell.library.scholars.webapp.controller.api.distribute.DataDistributor> , <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.RdfGraphDistributor> ;
+        :actionName             "OAI PMH Product" ;
+        :graphBuilder           :2c68f9ee-4a4c-444c-b6fc-a14a7759b235 ;
+        :rdfLang                "RDF/XML" .
+
+:2c68f9ee-4a4c-444c-b6fc-a14a7759b235
+        a                       <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.graphbuilder.ConstructQueryGraphBuilder> , <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.graphbuilder.GraphBuilder> ;
+        :builderName            "OAI PMH Product" ;
+        :constructQuery         """
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+		PREFIX bibo: <http://purl.org/ontology/bibo/>
+		PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>
+		PREFIX bib: <http://zeitkunst.org/bibtex/0.1/bibtex.owl#>
+		PREFIX vivo: <http://vivoweb.org/ontology/core#>
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+		PREFIX ev: <http://www.w3.org/2001/xml-events/>
+		PREFIX event: <http://purl.org/NET/c4dm/event.owl#>
+		PREFIX obo: <http://purl.obolibrary.org/obo/>
+		PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+		CONSTRUCT {
+		  ?product rdfs:comment "OpenAIRE Product" .
+		  ?product ?productP ?productO .
+		  ?product vivo:hasSubjectArea ?concept .
+		  ?concept rdfs:label ?conceptLabel .
+		  ?product ?publicationToEventProp ?event .
+		  ?event ?eventProp ?eventValue .
+		  ?product vivo:relatedBy ?relBy .
+		  ?relBy a ?relType .
+		  ?relBy vivo:relates ?agent .
+		  ?agent a ?agentType .
+		  ?agent rdfs:label ?agentLabel .
+		  ?product obo:ARG_2000028 ?kind .
+		  ?kind vcard:hasURL ?vcardURL .
+		  ?vcardURL vcard:url ?url .
+		} WHERE {
+		  BIND (?uri as ?product)
+		  {
+		    ?product a bibo:AudioVisualDocument .
+		  }
+		  UNION
+		  {
+		    ?product a vivo:CaseStudy .
+		  }
+		  UNION
+		  {
+		    ?product a vivo:Dataset .
+		  }
+		  UNION
+		  {
+		    ?product a bibo:Image .
+		  }
+		  ?product rdfs:label|vitro:mostSpecificType|a|bibo:doi|vivo:freetextKeyword|bibo:abstract ?o .
+		  ?product ?productP ?productO .
+		  OPTIONAL {
+		    ?product vivo:hasSubjectArea ?concept .
+		    ?concept rdfs:label ?conceptLabel .
+		  }
+		  OPTIONAL {
+		    ?product bibo:presentedAt|obo:RO_0002353 ?event .
+		    ?product ?publicationToEventProp ?event .
+		    ?event a|rdfs:label|vivo:abbreviation ?eventValue .
+		    ?event ?eventProp ?eventValue .
+		  }
+		  OPTIONAL {
+		    ?product vivo:relatedBy ?relBy .
+		    ?relBy a ?relType .
+		    ?relBy vivo:relates ?agent .
+		    ?agent a ?agentType .
+		    ?agent rdfs:label ?agentLabel .
+		  }
+		  OPTIONAL {
+		    ?product obo:ARG_2000028 ?kind .
+		    ?kind vcard:hasURL ?vcardURL .
+		    ?vcardURL vcard:url ?url .
+		  }
+		}
+        """ ;
+        :uriBinding             "uri" .
+
+:03009b3f-9cfb-41d3-8e39-69c42f4ec30e
+        a                       <java:edu.cornell.library.scholars.webapp.controller.api.distribute.DataDistributor> , <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.RdfGraphDistributor> ;
+        :actionName             "OAI PMH Patent" ;
+        :graphBuilder           :c8de5b6c-db9e-40c1-8687-5627c76f85ce ;
+        :rdfLang                "RDF/XML" .
+
+:c8de5b6c-db9e-40c1-8687-5627c76f85ce
+        a                       <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.graphbuilder.ConstructQueryGraphBuilder> , <java:edu.cornell.library.scholars.webapp.controller.api.distribute.rdf.graphbuilder.GraphBuilder> ;
+        :builderName            "OAI PMH Patent" ;
+        :constructQuery         """
+		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+		PREFIX bibo: <http://purl.org/ontology/bibo/>
+		PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>
+		PREFIX bib: <http://zeitkunst.org/bibtex/0.1/bibtex.owl#>
+		PREFIX vivo: <http://vivoweb.org/ontology/core#>
+		PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+		PREFIX ev: <http://www.w3.org/2001/xml-events/>
+		PREFIX event: <http://purl.org/NET/c4dm/event.owl#>
+		PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+		PREFIX obo: <http://purl.obolibrary.org/obo/>
+		CONSTRUCT {
+		  ?patent rdfs:comment "OpenAIRE Patent" .
+		  ?patent ?p ?o .
+		  ?patent vivo:relatedBy ?relBy .
+		  ?relBy a ?relType .
+		  ?relBy vivo:relates ?agent .
+		  ?agent a ?agentType .
+		  ?agent rdfs:label ?agentLabel .
+		  ?patent obo:ARG_2000028 ?kind .
+		  ?kind vcard:hasURL ?vcardURL .
+		  ?vcardURL vcard:url ?url .
+		  ?patent vivo:hasSubjectArea ?area .
+		  ?area ?areaP ?areaO .
+		  ?publication vivo:dateIssued ?dateIssued .
+		  ?dateIssued ?dateIssuedP ?dateIssuedO .
+		  ?publication vivo:dateFiled ?dateFiled .
+		  ?dateFiled ?dateFiledP ?dateFiledO .
+		} WHERE {
+		  BIND (?uri as ?patent)
+		  ?patent a bibo:Patent .
+		  ?patent rdfs:label|vitro:mostSpecificType|a|vivo:freetextKeyword|bibo:abstract|vivo:patentNumber ?o .
+		  ?patent ?p ?o .
+		  OPTIONAL {
+		    ?patent vivo:relatedBy ?relBy .
+		    ?relBy a ?relType .
+		    ?relBy vivo:relates ?agent .
+		    ?agent a ?agentType .
+		    ?agent rdfs:label ?agentLabel .
+		  }
+		  OPTIONAL {
+		    ?patent obo:ARG_2000028 ?kind .
+		    ?kind vcard:hasURL ?vcardURL .
+		    ?vcardURL vcard:url ?url .
+		  }
+		  OPTIONAL {
+		    ?patent vivo:hasSubjectArea ?area .
+		    ?area vitro:mostSpecificType|a|rdfs:label ?areaO .
+		    ?area ?areaP ?areaO .
+		  }
+		  OPTIONAL {
+		    ?publication vivo:dateIssued ?dateIssued .
+		    ?dateIssued ?dateIssuedP ?dateIssuedO .
+		  }
+		  OPTIONAL {
+		    ?publication vivo:dateFiled ?dateFiled .
+		    ?dateFiled ?dateFiledP ?dateFiledO .
+		  }
+		}
+        """ ;
+        :uriBinding             "uri" .
