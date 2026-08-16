@@ -1,0 +1,21 @@
+@prefix : <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix search: <https://vivoweb.org/ontology/vitro-search#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+:n31664
+        a                   search:RangeFilter , search:Filter ;
+        rdfs:label          "Time period"@en-US ;
+        search:filterField  :n48994 ;
+        search:from         "2000" ;
+        search:id           "dates" ;
+        search:public       true ;
+        search:to           "2025" .
+
+:n48994
+        a                  search:SearchField ;
+        rdfs:label         "Datum"@de-DE , "Date"@en-US ;
+        search:indexField  "dates_drsim" .
+
+<https://vivoweb.org/ontology/vitro-search-individual/filter_group_search_filters> search:contains :n31664 .
+

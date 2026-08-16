@@ -1,0 +1,200 @@
+.container {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.module-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+.module-card h2 {
+    margin-top: 0;
+}
+
+.form-row {
+    margin-bottom: 12px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 6px;
+}
+
+.spinner {
+    margin-left: 10px;
+}
+
+.cli-box {
+    margin-top: 15px;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 13px;
+    white-space: pre-wrap;
+    height: 160px;
+    overflow-y: auto;
+}
+
+.title-label {
+    color: #064d68;
+    font-size: 2em;
+    line-height: 1.4;
+    padding: 15px 0 18px 0;
+    margin: 0 0 20px 0;
+    font-weight: 600;
+}
+
+.tab-header {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 8px 14px;
+    border: 1px solid #ccc;
+    background: #f3f3f3;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.tab-btn.active {
+    background: #2c7be5;
+    color: white;
+    border-color: #2c7be5;
+}
+
+.tab-panel {
+    display: none;
+}
+
+/* ---------- Tables ---------- */
+
+.table-label {
+    margin-top: 50px;
+}
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 14px;
+    background: #ffffff;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.schedule-table th,
+.schedule-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.schedule-table thead {
+    background: #f0f4f8;
+}
+
+.schedule-table th {
+    font-weight: 600;
+    color: #064d68;
+}
+
+.schedule-table tbody tr:hover {
+    background: #f7fbff;
+}
+
+/* ---------- Log List ---------- */
+
+.log-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 10px;
+}
+
+.log-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    border: 1px solid #e0e0e0;
+    background: #ffffff;
+    border-radius: 6px;
+}
+
+.log-list a {
+    text-decoration: none;
+    color: #2c7be5;
+    font-weight: 500;
+}
+
+.log-list a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- Buttons ---------- */
+
+.delete-schedule-btn,
+.delete-log-btn {
+    border: none;
+    background: #fbeaea;
+    color: #c0392b;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.delete-schedule-btn:hover,
+.delete-log-btn:hover {
+    background: #f5c6cb;
+}
+
+.run-btn,
+.stop-btn {
+    padding: 7px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.run-btn {
+    background: #2c7be5;
+    color: white;
+}
+
+.run-btn:hover {
+    background: #1a68d1;
+}
+
+.stop-btn
+.refresh-config-btn {
+    background: #e55353;
+    color: white;
+}
+
+.stop-btn:hover
+.refresh-config-btn:hover {
+    background: #c0392b;
+}
+
+.refresh-config-btn {
+    margin-top: 10px;
+    margin-top: 5px;
+    padding: 7px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
