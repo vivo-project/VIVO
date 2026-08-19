@@ -49,7 +49,7 @@ $(document).ready(function(){
             }
 
             var dataServiceUrl = urlsBase + "/dataservice?getRandomSearchIndividualsByVClass=1&vclassId=";
-            var url = dataServiceUrl + encodeURIComponent("http://vivoweb.org/ontology/core#FacultyMember");
+            var url = dataServiceUrl + encodeURIComponent("http://xmlns.com/foaf/0.1/Person");
             url += "&page=" + rowStart + "&pageSize=" + pageSize;
 
             $.getJSON(url, function(results) {
@@ -87,7 +87,7 @@ $(document).ready(function(){
                     });
                     var viewMore = "<ul id='viewMoreFac'><li><a href='"
                                 + urlsBase
-                                + "/people#http://vivoweb.org/ontology/core#FacultyMember' alt='"
+                                + "/people#http://xmlns.com/foaf/0.1/Person' alt='"
                                 + i18nStrings.viewAllFaculty + "'>"
                                 + i18nStrings.viewAllString + "</a></li></ul>";
                     $('div#research-faculty-mbrs').append(viewMore);
@@ -155,7 +155,7 @@ $(document).ready(function(){
             html += "</ul><ul style='list-style:none'>"
                     + "<li style='font-size:0.9em;text-align:right;padding: 6px 16px 0 0'><a href='"
                     + urlsBase
-                    + "/organizations#http://vivoweb.org/ontology/core#AcademicDepartment' alt='"
+                    + "/organizations#http://xmlns.com/foaf/0.1/Organization' alt='"
                     + i18nStrings.viewAllDepartments + "'>"
                     + i18nStrings.viewAllString + "</a></li></ul>";
         }
