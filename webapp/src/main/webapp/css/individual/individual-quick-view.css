@@ -61,7 +61,7 @@ section#qv-share-contact {
     clear:left;
 }
 section#label-title h2 {
-    color: #5E6363;
+    color: var(--text-color, #5E6363);
     font-size: 1em;
     font-weight: bold;
     padding:6px 0 0 0;
@@ -105,7 +105,7 @@ h2.websites {
     border-bottom: 1px solid #a1d2e2;
     padding-bottom:3px;
     width:418px;
-    color: #5E6363;
+    color: var(--text-color, #5E6363);
     font-size: 1em;
     font-weight: bold;
 }

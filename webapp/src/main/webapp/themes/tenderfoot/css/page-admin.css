@@ -16,13 +16,13 @@
     margin: 0 0 1em .6em;
 }
 #adminDashboard .pageBodyGroup h4 {
-    color: #5E6363;
+    color: var(--text-color, #5E6363);
     font-size: 1em;
     margin-left: .6em;
     font-weight: bold;
 }
 #adminDashboard .pageBodyGroup h4 a {
-    color: #5E6363;
+    color: var(--text-color, #5E6363);
     font-size: 1em;
     margin-left: 0;
     font-weight: bold;

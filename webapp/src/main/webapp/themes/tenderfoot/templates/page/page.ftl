@@ -9,6 +9,7 @@
     </head>
 
     <body class="${bodyClasses!}" onload="${bodyOnload!}">
+		<div class="banner"></div>
 		<header id="branding" role="banner" -->
 			<#include "identity.ftl">
 		</header>

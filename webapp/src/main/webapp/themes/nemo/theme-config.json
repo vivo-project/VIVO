@@ -1,0 +1,67 @@
+{
+    "themeName": "nemo",
+    "themeColors": {
+        "palette": [
+            {
+                "groupName": "primary",
+                "colors": [
+                    {
+                        "name": "primary-lighter",
+                        "value": "#337ab7",
+                        "cssVariable": "--primary-color-lighter",
+                        "shade": {
+                            "type": "lighten",
+                            "amount": 20,
+                            "base": "primary-base"
+                        }
+                    },
+                    {
+                        "name": "primary-base",
+                        "value": "#064d68",
+                        "cssVariable": "--primary-color"
+                    },
+                    {
+                        "name": "primary-darker",
+                        "value": "#023447",
+                        "cssVariable": "--primary-color-darker",
+                        "shade": {
+                            "type": "darken",
+                            "amount": 20,
+                            "base": "primary-base"
+                        }
+                    }
+                ]
+            },
+            {
+                "groupName": "banner",
+                "colors": [
+                    {
+                        "name": "banner-base",
+                        "value": "#064d68",
+                        "cssVariable": "--banner-color"
+                    }
+                ]
+            },
+            {
+                "groupName": "text",
+                "colors": [
+                    {
+                        "name": "text-base",
+                        "value": "#333333",
+                        "cssVariable": "--text-color"
+                    }
+                ]
+            },
+            {
+                "groupName": "link",
+                "colors": [
+                    {
+                        "name": "link-base",
+                        "value": "#064d68",
+                        "cssVariable": "--link-color"
+                    }
+                ]
+            }
+        ]
+    }
+}

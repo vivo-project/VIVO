@@ -6286,3 +6286,10 @@ uil-data:no_add_to_person_profile.VIVO
         rdfs:label       "No"@en-US ;
         uil:hasApp       "VIVO" ;
         uil:hasKey       "no_add_to_person_profile" .
+
+uil-data:vivo_logo.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "VIVO Logo"@en-US ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "vivo_logo" .

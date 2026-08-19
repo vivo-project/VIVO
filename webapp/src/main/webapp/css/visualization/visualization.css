@@ -60,7 +60,7 @@ span.incomplete-data-holder,
     text-align: left;
     line-height: 1.5em;
     width: 180px;
-    color: #5e6363;
+    color: var(--text-color, #5E6363);
 }
 .google-visualization-sparkline-default {
     margin-bottom: 5px;
