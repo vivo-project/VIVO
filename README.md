@@ -111,3 +111,7 @@ If you are using VIVO in your publications or projects, please cite the software
   title = {{VIVO}: a system for research discovery},
   journal = {Journal of Open Source Software}
 }
+
+## Security
+
+See [SECURITY.md](SECURITY.md) for vulnerability reporting.
