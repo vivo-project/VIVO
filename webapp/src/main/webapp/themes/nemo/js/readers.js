@@ -35,7 +35,7 @@ if (doi.includes('figshare')){
       $('.nav a[href="#' + "figshare" + '"]').tab('show');
     }
 
-$.getJSON( "https://api.crossref.org/v1/works/http://dx.doi.org/"+doi, 
+$.getJSON( "https://api.crossref.org/v1/works/http://doi.org/"+doi,
            function(data)
 
                 {
