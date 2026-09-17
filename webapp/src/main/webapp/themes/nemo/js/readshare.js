@@ -7,7 +7,7 @@ $('div[data-doi]').each(function( index ) {
           $( this ).parent().prev().append('<span><img src="https://web-static.figshare.com/assets/ef6e8637cc252600e22cd4c1d755b4b771120789/public/global/favicon/favicon-32x32.png" width="20"/></span>')
        }   
  
-    $.getJSON( "https://api.crossref.org/v1/works/http://doi.org/"+doi,
+    $.getJSON( "https://api.crossref.org/v1/works/https://doi.org/"+doi,
            function(data)
                 {
                   publisher = data.message.publisher;
