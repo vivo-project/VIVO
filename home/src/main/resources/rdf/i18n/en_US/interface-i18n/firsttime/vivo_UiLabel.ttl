@@ -6286,3 +6286,59 @@ uil-data:no_add_to_person_profile.VIVO
         rdfs:label       "No"@en-US ;
         uil:hasApp       "VIVO" ;
         uil:hasKey       "no_add_to_person_profile" .
+
+uil-data:individual_publication_count_visualization.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Individual Publication Count visualization"@en-US ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "individual_publication_count_visualization" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:individual_grant_count_visualization.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Individual Grant Count visualization"@en-US ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "individual_grant_count_visualization" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:regenerate_constructed_models.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Regenerate Constructed Models"@en-US ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "regenerate_constructed_models" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:temporal_graph_visualization_title.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "{0} - Temporal Graph Visualization"@en-US ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "temporal_graph_visualization_title" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:map_of_science_visualization_title.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "{0} - Map of Science Visualization"@en-US ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "map_of_science_visualization_title" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:person_level_visualization.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Person Level Visualization"@en-US ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "person_level_visualization" ;
+        uil:hasPackage   "VIVO-languages" .
+
+uil-data:person_level_visualization_title.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "{0} - Person Level Visualization"@en-US ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "person_level_visualization_title" ;
+        uil:hasPackage   "VIVO-languages" .

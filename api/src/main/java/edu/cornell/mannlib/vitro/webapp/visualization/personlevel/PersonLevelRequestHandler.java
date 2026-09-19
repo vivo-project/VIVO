@@ -17,6 +17,7 @@ import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationReques
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.CoAuthorshipQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.CoAuthorshipVisCodeGenerator;
@@ -226,12 +227,13 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 
         body.put("egoLocalName", UtilityFunctions.getIndividualLocalName(egoURI, vitroRequest));
 
-        String title = "";
+        String title = I18n.text(vitroRequest, "person_level_visualization");
 
         if (coAuthorshipVO.getCollaborators() != null
         			&& coAuthorshipVO.getCollaborators().size() > 0) {
         	body.put("numOfAuthors", coAuthorshipVO.getCollaborators().size());
-        	title = coAuthorshipVO.getEgoCollaborator().getCollaboratorName() + " - ";
+        	title = I18n.text(vitroRequest, "person_level_visualization_title",
+        			coAuthorshipVO.getEgoCollaborator().getCollaboratorName());
 		}
 
 		if (coAuthorshipVO.getCollaborations() != null
@@ -246,7 +248,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 			body.put("builtFromCacheTime", coAuthorshipVO.getBuiltFromCacheTime());
 		}
 
-		body.put("title",  title + "Person Level Visualization");
+		body.put("title", title);
 
 		return new TemplateResponseValues(standaloneTemplate, body);
 
@@ -265,11 +267,12 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 
         body.put("egoLocalName", UtilityFunctions.getIndividualLocalName(egoURI, vitroRequest));
 
-        String title = "";
+        String title = I18n.text(vitroRequest, "person_level_visualization");
 
         if (coPIVO.getCollaborators() != null && coPIVO.getCollaborators().size() > 0) {
         	body.put("numOfInvestigators", coPIVO.getCollaborators().size());
-        	title = coPIVO.getEgoCollaborator().getCollaboratorName() + " - ";
+        	title = I18n.text(vitroRequest, "person_level_visualization_title",
+        			coPIVO.getEgoCollaborator().getCollaboratorName());
 		}
 
 		if (coPIVO.getCollaborations() != null && coPIVO.getCollaborations().size() > 0) {
@@ -282,7 +285,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		body.put("egoGrantSparklineVO", egoGrantSparklineVO);
 		body.put("uniqueCoInvestigatorsSparklineVO", uniqueCopisSparklineVO);
 
-		body.put("title",  title + "Person Level Visualization");
+		body.put("title", title);
 
 		return new TemplateResponseValues(standaloneTemplate, body);
 

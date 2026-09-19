@@ -37,6 +37,7 @@ import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationReques
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.MapOfScienceConstants;
@@ -437,7 +438,7 @@ public class MapOfScienceVisualizationRequestHandler implements VisualizationReq
         String entityLabel = UtilityFunctions.getIndividualLabelFromDAO(vreq, entityURI);
 
         Map<String, Object> body = new HashMap<String, Object>();
-        body.put("title", entityLabel + " - Map of Science Visualization");
+        body.put("title", I18n.text(vreq, "map_of_science_visualization_title", entityLabel));
         body.put("entityURI", entityURI);
         body.put("entityLocalName", UtilityFunctions.getIndividualLocalName(entityURI, vreq));
         body.put("entityLabel", entityLabel);
