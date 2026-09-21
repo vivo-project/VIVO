@@ -81,7 +81,7 @@
                 } else {
 
                     <#-- Create the vis object and draw it in the div pertaining to sparkline. -->
-                    var sparkline = new google.visualization.ImageSparkLine(providedSparklineImgTD[0]);
+                    var sparkline = new google.visualization.LineChart(providedSparklineImgTD[0]);
                     sparkline.draw(sparklineDataView, {
                         width: visualizationOptions.width,
                         height: visualizationOptions.height,
