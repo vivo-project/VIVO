@@ -69,9 +69,11 @@
 		    BIND ("type" as ?filterName)
 		    VALUES ?filterValue {
 		      bibo:AudioVisualDocument
+		      bibo:AudioDocument
 		      vivo:CaseStudy
 		      vivo:Dataset
 		      bibo:Image
+		      bibo:Webpage
 		    }
 		    BIND ("OAI PMH Product" as ?endpoint)
 		    BIND ("" as ?lang)
@@ -142,6 +144,13 @@
 		  ?role obo:RO_0000052 ?agent .
 		  ?agent rdfs:label ?agentLabel .
 		  ?agent rdf:type ?agentType .
+		  ?project vivo:dateTimeInterval ?dti .
+		  ?dti vivo:end ?dtiEnd .
+		  ?dtiEnd vivo:dateTime ?dtiEndValue .
+		  ?dtiEnd vivo:dateTimePrecision ?dtiEndPrecision .
+		  ?dti vivo:start ?dtiStart .
+		  ?dtiStart vivo:dateTime ?dtiStartValue .
+		  ?dtiStart vivo:dateTimePrecision ?dtiStartPrecision .
 		}
 		WHERE {
 		  BIND (?uri as ?project)
@@ -154,6 +163,20 @@
 		    ?role obo:RO_0000052 ?agent .
 		    ?agent rdfs:label ?agentLabel .
 		    ?agent rdf:type ?agentType .
+		  }
+		  OPTIONAL {
+		    ?project vivo:dateTimeInterval ?dti .
+		    {
+		      ?dti vivo:end ?dtiEnd .
+		      ?dtiEnd vivo:dateTime ?dtiEndValue .
+		      ?dtiEnd vivo:dateTimePrecision ?dtiEndPrecision .
+		    } 
+		    UNION
+		    {
+		      ?dti vivo:start ?dtiStart .
+		      ?dtiStart vivo:dateTime ?dtiStartValue .
+		      ?dtiStart vivo:dateTimePrecision ?dtiStartPrecision .
+		    }
 		  }
 		}
         """ ;
@@ -207,6 +230,7 @@ WHERE {
 		  ?publication ?p ?o .
 		  ?publication vivo:relatedBy ?relBy .
 		  ?relBy a ?relType .
+		  ?relBy vivo:rank ?rank .
 		  ?relBy vivo:relates ?agent .
 		  ?agent a ?agentType .
 		  ?agent rdfs:label ?agentLabel .
@@ -235,6 +259,9 @@ WHERE {
 		  {
 		    ?publication vivo:relatedBy ?relBy .
 		    ?relBy a ?relType .
+		    OPTIONAL {
+		      ?relBy vivo:rank ?rank .
+		    }
 		    ?relBy vivo:relates ?agent .
 		    ?agent a ?agentType .
 		    ?agent rdfs:label ?agentLabel .
@@ -435,7 +462,9 @@ WHERE {
 		CONSTRUCT {
 		  ?org ?orgP ?orgO .
 		  ?uri rdfs:comment "OpenAIRE OrgUnit" .
+		  ?org vivo:rorId ?rorId .
 		  ?greaterOrg obo:BFO_0000050 ?org .
+		  ?greaterOrg vivo:rorId ?greaterOrgId .
 		  ?org obo:ARG_2000028 ?vcardInd .
 		  ?vcardInd vcard:hasURL ?urlInd .
 		  ?urlInd vcard:url ?url .
@@ -453,6 +482,12 @@ WHERE {
 		  ?uri a foaf:Organization .
 		  OPTIONAL {
 		    ?greaterOrg obo:BFO_0000050 ?org .
+		    OPTIONAL {
+		      ?greaterOrg vivo:rorId ?greaterOrgId .
+		    }
+		  }
+		  OPTIONAL {
+		    ?org vivo:rorId ?rorId .
 		  }
 		  ?org a|rdfs:label|vitro:mostSpecificType|vivo:abbreviation ?orgO .
 		  ?org ?orgP ?orgO .
@@ -505,8 +540,7 @@ WHERE {
 		CONSTRUCT {
 		  ?uri rdfs:comment "OpenAIRE Funding" .
 		  ?funding ?p ?o .
-		  ?funding vivo:hasSubjectArea ?subjArea .
-		  ?subjArea vivo:hasAssociatedConcept ?concept .
+		  ?funding vivo:hasSubjectArea ?concept .
 		  ?concept rdfs:label ?conceptLabel .
 		  ?funding obo:BFO_0000050 ?ofFunding .
 		  ?ofFunding a ?ofFundingType .
@@ -551,13 +585,12 @@ WHERE {
 		    ?funder rdfs:label ?funderLabel .
 		  }
 		  OPTIONAL {
-		    ?funding vivo:hasSubjectArea ?subjArea .
-		    ?subjArea vivo:hasAssociatedConcept ?concept .
+		    ?funding vivo:hasSubjectArea ?concept .
 		    ?concept rdfs:label ?conceptLabel .
 		  }
 		  OPTIONAL {
 		    ?funding obo:BFO_0000050 ?ofFunding .
-		    ?ofFunding a bibo:Grant .
+		    ?ofFunding a vivo:Grant .
 		    ?ofFunding a ?ofFundingType .
 		    ?ofFunding vitro:mostSpecificType ?ofFundingMst .
 		    ?ofFunding rdfs:label ?ofFundingLabel .
@@ -609,6 +642,7 @@ WHERE {
 		  ?event ?eventProp ?eventValue .
 		  ?product vivo:relatedBy ?relBy .
 		  ?relBy a ?relType .
+                  ?relBy vivo:rank ?rank .
 		  ?relBy vivo:relates ?agent .
 		  ?agent a ?agentType .
 		  ?agent rdfs:label ?agentLabel .
@@ -632,6 +666,14 @@ WHERE {
 		  {
 		    ?product a bibo:Image .
 		  }
+		  UNION 
+		  {
+		    ?product a bibo:AudioDocument .
+		  }
+		  UNION 
+		  {
+		    ?product a bibo:Webpage .
+		  }
 		  ?product rdfs:label|vitro:mostSpecificType|a|bibo:doi|vivo:freetextKeyword|bibo:abstract ?o .
 		  ?product ?productP ?productO .
 		  OPTIONAL {
@@ -646,6 +688,9 @@ WHERE {
 		  }
 		  OPTIONAL {
 		    ?product vivo:relatedBy ?relBy .
+                    OPTIONAL {
+		      ?relBy vivo:rank ?rank .
+		    }
 		    ?relBy a ?relType .
 		    ?relBy vivo:relates ?agent .
 		    ?agent a ?agentType .
@@ -685,6 +730,7 @@ WHERE {
 		  ?patent ?p ?o .
 		  ?patent vivo:relatedBy ?relBy .
 		  ?relBy a ?relType .
+		  ?relBy vivo:rank ?rank .
 		  ?relBy vivo:relates ?agent .
 		  ?agent a ?agentType .
 		  ?agent rdfs:label ?agentLabel .
@@ -693,9 +739,9 @@ WHERE {
 		  ?vcardURL vcard:url ?url .
 		  ?patent vivo:hasSubjectArea ?area .
 		  ?area ?areaP ?areaO .
-		  ?publication vivo:dateIssued ?dateIssued .
+		  ?patent vivo:dateIssued ?dateIssued .
 		  ?dateIssued ?dateIssuedP ?dateIssuedO .
-		  ?publication vivo:dateFiled ?dateFiled .
+		  ?patent vivo:dateFiled ?dateFiled .
 		  ?dateFiled ?dateFiledP ?dateFiledO .
 		} WHERE {
 		  BIND (?uri as ?patent)
@@ -704,6 +750,9 @@ WHERE {
 		  ?patent ?p ?o .
 		  OPTIONAL {
 		    ?patent vivo:relatedBy ?relBy .
+                    OPTIONAL {
+		      ?relBy vivo:rank ?rank .
+		    }
 		    ?relBy a ?relType .
 		    ?relBy vivo:relates ?agent .
 		    ?agent a ?agentType .
@@ -720,11 +769,11 @@ WHERE {
 		    ?area ?areaP ?areaO .
 		  }
 		  OPTIONAL {
-		    ?publication vivo:dateIssued ?dateIssued .
+		    ?patent vivo:dateIssued ?dateIssued .
 		    ?dateIssued ?dateIssuedP ?dateIssuedO .
 		  }
 		  OPTIONAL {
-		    ?publication vivo:dateFiled ?dateFiled .
+		    ?patent vivo:dateFiled ?dateFiled .
 		    ?dateFiled ?dateFiledP ?dateFiledO .
 		  }
 		}
