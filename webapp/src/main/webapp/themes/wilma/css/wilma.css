@@ -1478,6 +1478,10 @@ a.all-vivo-publications {
     text-decoration: underline;
     vertical-align:text-top;
 }
+.report-container > div > a {
+	text-decoration: underline;
+    vertical-align:bottom;
+}
 /* COAUTHORS ------>  */
 img.co-author {
     border: 2px solid #ebebeb;
