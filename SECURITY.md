@@ -1,6 +1,6 @@
 # Security Policy
 ## Reporting a vulnerability
-If you discover a security vulnerability, please report it privately by email via the contact form at https://vivoweb.org/contact/.
+If you discover a security vulnerability, please report it privately by sending an email to vivosecurity@lyrasis.org.
 
 Please do not report security vulnerabilities through our public GitHub issues, discussions, or pull requests.
 
