@@ -1,0 +1,22 @@
+volumes:
+  joai-config:
+    name: ${JOAI_CONFIG_HOME}
+  joai-data:
+    name: ${JOAI_DATA_HOME}
+services:
+  joai:
+    hostname: joai
+    container_name: joai
+    volumes:
+      - joai-config:/joai/config:Z
+      - joai-data:/joai/data:Z
+    environment:
+      - VIVO_URL=http://vivo:${VIVO_CONTAINER_PORT}
+    networks:
+      - vivoweb
+    ports:
+      - ${JOAI_HOST_PORT}:${JOAI_CONTAINER_PORT}
+      - ${JOAI_HOST_HTTPS_PORT}:${JOAI_CONTAINER_HTTPS_PORT}
+    build:
+      context: ./oai
+

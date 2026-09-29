@@ -1,0 +1,22 @@
+61,71c61,69
+< <logic:notEmpty name="rf" property="descriptions">
+< 
+< <description>
+< 
+< 	<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ https://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+< 
+< 		<logic:iterate name="rf" property="descriptions" id="description" ><dc:description><bean:write name="description" filter="true"/></dc:description></logic:iterate>
+< 
+< 	</oai_dc:dc>
+< 
+< </description></logic:notEmpty>
+---
+>   <description>
+>     <Service xmlns="https://www.openaire.eu/cerif-profile/1.2/" id="<%= rf.getRepositoryIdentifier() %>">
+>       <Compatibility xmlns="https://www.openaire.eu/cerif-profile/vocab/OpenAIRE_Service_Compatibility">https://www.openaire.eu/cerif-profile/vocab/OpenAIRE_Service_Compatibility#1.2</Compatibility>
+>       <logic:notEmpty name="rf" property="descriptions">
+>         <logic:iterate name="rf" property="descriptions" id="description" ><Description xml:lang="en"><bean:write name="description" filter="true"/></Description></logic:iterate>
+>       </logic:notEmpty>
+>       <OAIPMHBaseURL><bean:write name="rf" property="baseURL"/></OAIPMHBaseURL>
+>     </Service>
+>   </description>
