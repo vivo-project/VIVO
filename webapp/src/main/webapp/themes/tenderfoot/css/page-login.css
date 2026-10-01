@@ -14,13 +14,13 @@ body.login #login {
 }
 #login h2 {
     font-size: 22px;
-    color: #2485ae;
+    color: #12739D;
     padding-left: 15px;
     padding-top: 18px;
     border-bottom: none;
 }
 h3.internal-auth:hover {
-    color: #47B6D0;
+    color: #267C90;
 }
 #error-alert {
     margin-left: 0;
@@ -57,7 +57,7 @@ h3.internal-auth:hover {
     height: 24px;
     margin-left: 38px;
     background: #fff;
-    border: 1px solid #e0dfdf;
+    border: 1px solid #898989;
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;

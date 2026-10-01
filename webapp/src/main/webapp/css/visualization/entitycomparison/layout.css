@@ -44,7 +44,7 @@ for the message is getting set to 50%, hence we need to override it here.
 }
 
 .filter-option {
-	color: #2485AE;
+	color: #12739D;
 	cursor: pointer;
 	/*padding-right: 5px;*/
 	text-decoration: underline;
@@ -118,7 +118,7 @@ img#copy-vis-viewlink-icon {
 }
 
 a.temporalGraphLinks {
-    background-color: #2485AE;
+    background-color: #12739D;
     color: white;
     cursor: pointer;
     font-weight: bold;
@@ -146,7 +146,7 @@ a.clear-selected-entities,
     vertical-align: sub;
 }
 #reset-search {
-    color: #2485AE;
+    color: #12739D;
     cursor: pointer;
     margin-left: 10px;
 }
@@ -215,7 +215,7 @@ a.clear-selected-entities,
 font-family: "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica,
 sans-serif;
     font-size: 1.5275em;
-    color: #2485ae;
+    color: #12739D;
     line-height: 1.3em;
     padding-top:15px;
     padding-bottom:10px;
@@ -230,7 +230,7 @@ sans-serif;
     margin-left: 10px;
     display: inline-block;
     text-decoration: underline;
-    color: #2485AE;
+    color: #12739D;
 }
 .ellipsis.multiline {
     white-space: normal;
@@ -301,14 +301,14 @@ p.displayCounter{
 #entitylevelheading,
 #comparisonParameter,
 #headerText {
-    color: #2485ae;
+    color: #12739D;
 }
 /* -------------------------------------------------------------->  */
 /* SPECIAL STYLES FOR THE entityComparisonErrorCommonBody.ftl FILE  */
 /* -------------------------------------------------------------->  */
 #noPubsOrGrants-header {
     font-size: 1.375em;
-    color: #2485ae;
+    color: #12739D;
     line-height: 1.3em;
     padding-top:15px;
     padding-bottom:10px;

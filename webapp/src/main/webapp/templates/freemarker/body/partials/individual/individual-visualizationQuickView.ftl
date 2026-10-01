@@ -42,7 +42,7 @@
             </ul>
             <script type="text/javascript">
                 var visualizationUrl = '${urls.base}/visualizationAjax?uri=${individual.uri?url}';
-                var infoIconSrc = '${urls.images}/iconInfo.png';
+                var infoIconSrc = '${urls.images}/iconInfo-darkened.png';
             </script>
 
 </#if>
