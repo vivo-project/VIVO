@@ -26,9 +26,14 @@
     <p>${i18n().has_no_webpages}</p>
 </#if>
 
+<div id="reorder-instructions" class="sr-only">
+    ${i18n().arrow_key_reorder_note}
+</div>
+<div id="live-region" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
 <ul id="dragDropList" ${ulClass} role="list">
     <#list editConfiguration.pageData.webpages as webpage>
-        <li class="webpage" role="listitem">
+        <li class="webpage" tabindex="0" role="listitem">
             <#if webpage.label??>
                 <#assign anchor=webpage.label >
             <#else>
@@ -73,7 +78,8 @@ var i18nStrings = {
     dragDropToReorderWebpages: '${i18n().drag_drop_to_reorder_webpages?js_string}',
     webpageReorderingFailed: '${i18n().webpage_reordering_failed?js_string}',
     confirmWebpageDeletion: '${i18n().confirm_webpage_deletion?js_string}',
-    errorRemovingWebpage: '${i18n().error_removing_webpage?js_string}'
+    errorRemovingWebpage: '${i18n().error_removing_webpage?js_string}',
+    reorderActionInfo: '${i18n().reorder_action_info?js_string}'
 };
 </script>
 

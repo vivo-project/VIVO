@@ -382,10 +382,70 @@ var addAuthorForm = {
 
         authorshipList.sortable({
             cursor: 'move',
-            update: function(event, ui) {
-                addAuthorForm.reorderAuthors(event, ui);
+        });
+
+        authorshipList.on('sortupdate', (event, ui) => {
+            addAuthorForm.reorderAuthors(event, ui);
+        });
+
+        authorshipList.on('keydown', 'li', (e) => {
+            const $focused = $(e.currentTarget);
+            const $allItems = authorshipList.children('li');
+            const index = $allItems.index($focused);
+            const key = e.key;
+
+            const moveItem = (direction) => {
+                const targetIndex = index + direction;
+                if (targetIndex < 0 || targetIndex >= $allItems.length) return;
+
+                e.preventDefault();
+
+                if (direction === -1) {
+                    $focused.insertBefore($allItems.eq(targetIndex));
+                } else {
+                    $focused.insertAfter($allItems.eq(targetIndex));
+                }
+
+                $focused.focus();
+                triggerUpdateEvent();
+
+                const itemName = $focused.find('.itemName').text().trim() || $focused.text().trim();
+                const newIndex = targetIndex + 1;
+
+                $('#live-region').text(
+                    i18nStrings.reorderActionInfo
+                        .replace("{0}", itemName)
+                        .replace("{1}", newIndex)
+                );
+            };
+
+            const moveFocus = (direction) => {
+                const targetIndex = index + direction;
+                if (targetIndex < 0 || targetIndex >= $allItems.length) return;
+
+                e.preventDefault();
+                $allItems.eq(targetIndex).focus();
+            };
+
+            if (e.shiftKey || e.ctrlKey) {
+                if (key === 'ArrowUp') {
+                    moveItem(-1);
+                } else if (key === 'ArrowDown') {
+                    moveItem(1);
+                }
+            } else {
+                if (key === 'ArrowUp') {
+                    moveFocus(-1);
+                } else if (key === 'ArrowDown') {
+                    moveFocus(1);
+                }
             }
         });
+
+        function triggerUpdateEvent() {
+            authorshipList.sortable('refresh');
+            authorshipList.trigger('sortupdate');
+        }
     },
 
     // Reorder authors. Called on page load and after author drag-and-drop and remove.
