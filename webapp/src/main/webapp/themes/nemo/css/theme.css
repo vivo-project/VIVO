@@ -107,6 +107,7 @@ section#browse-by nav#alpha-browse-container.panel {
   border-radius: 3px 3px 0 0;
   border-bottom: 0;
 }
+section#browse-by nav#alpha-browse-container.panel h2.selected-class,
 section#browse-by nav#alpha-browse-container.panel h3.selected-class {
   margin: 0;
   padding: 1em 0;

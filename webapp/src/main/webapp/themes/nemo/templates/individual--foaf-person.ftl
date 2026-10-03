@@ -30,9 +30,9 @@
 	<@p.label individual editable labelCount localesCount/>
 	<#if title?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
 		<#if (title.statements?size < 1) >
-			<@p.addLinkWithLabel title editable />
+			<@p.addLinkWithLabel title editable headingTag="p" />
 		<#elseif editable>
-			<h2>${title.name?capitalize!}</h2>
+			<p class="individual-section-label">${title.name?capitalize!}</p>
 			<@p.verboseDisplay title />
 		</#if>
 		<#list title.statements as statement>

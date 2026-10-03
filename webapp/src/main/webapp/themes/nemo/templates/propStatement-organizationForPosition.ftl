@@ -17,8 +17,8 @@
 		<span class="hideThis">&nbsp;</span>
 		<script type="text/javascript" >
 			$('span.hideThis').parent().parent().addClass("hideThis");
-			if ( $('h3#relatedBy-Position').attr('class').length == 0 ) {
-				$('h3#relatedBy-Position').addClass('hiddenPeople');
+			if ( $('h3.relatedBy-Position').attr('class').length == 0 ) {
+				$('h3.relatedBy-Position').addClass('hiddenPeople');
 			}
 			$('span.hideThis').parent().remove();
 		</script>

@@ -8,7 +8,7 @@
         ${geographicFoci.name}
         <@p.addLink geographicFoci editable /> <@p.verboseDisplay geographicFoci />
     </h2>
-    <ul id="individual-hasResearchArea" role="list" >
+    <ul class="individual-hasResearchArea" role="list" >
         <@p.objectProperty geographicFoci editable />
     </ul>
 </#if>

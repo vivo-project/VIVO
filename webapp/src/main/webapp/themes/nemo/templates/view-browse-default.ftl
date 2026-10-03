@@ -8,13 +8,13 @@
 
 <#if (individual.thumbUrl)??>
     <img src="${individual.thumbUrl}" width="90" alt="${individual.name}" />
-    <h2 class="thumb">
+    <p class="thumb">
         <a href="${individual.profileUrl}" title="${i18n().view_profile_page_for} ${individual.name}">${individual.name}</a>
-    </h2>
+    </p>
 <#else>
-    <h2>
+    <p>
         <a href="${individual.profileUrl}" title="${i18n().view_profile_page_for} ${individual.name}">${individual.name}</a>
-    </h2>
+    </p>
 </#if>
 
 <#assign cleanTypes = 'edu.cornell.mannlib.vitro.webapp.web.TemplateUtils$DropFromSequence'?new()(individual.mostSpecificTypes, vclass!"") />

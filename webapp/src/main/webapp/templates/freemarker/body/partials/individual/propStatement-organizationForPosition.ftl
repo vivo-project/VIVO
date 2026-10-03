@@ -17,8 +17,8 @@
     <span class="hideThis">&nbsp;</span>
     <script type="text/javascript" >
         $('span.hideThis').parent().parent().addClass("hideThis");
-        if ( jQuery.isEmptyObject($('h3#relatedBy-Position').attr('class')) ) {
-            $('h3#relatedBy-Position').addClass('hiddenPeople');
+        if ( jQuery.isEmptyObject($('h3.relatedBy-Position').attr('class')) ) {
+            $('h3.relatedBy-Position').addClass('hiddenPeople');
         }
         $('span.hideThis').parent().remove();
     </script>

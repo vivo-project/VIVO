@@ -100,7 +100,7 @@
     <#assign selected = 'class="selected" ' />
     <#assign classGroupList>
         <section id="home-research" class="home-sections">
-            <h4>Statistics</h4>
+            <h3>Statistics</h3>
             <div id="home-sections-list" class="list-group">
                 <#assign groupCount = 1>
                 <#list classGroups as group>
@@ -139,7 +139,7 @@
     <#if firstPopulatedClassGroup??>
             ${classGroupList}
     <#else>
-        <h3 id="noContentMsg">${i18n().no_content_create_groups_classes}</h3>
+        <h2 id="noContentMsg">${i18n().no_content_create_groups_classes}</h2>
         
         <#if user.loggedIn>
             <#if user.hasSiteAdminAccess>
@@ -163,7 +163,7 @@
 <#macro researchClasses classGroups=vClassGroups>
 <#assign foundClassGroup = false />
 <section id="home-research" class="home-sections">
-    <h4>${i18n().research_capitalized}</h4>
+    <h3>${i18n().research_capitalized}</h3>
     <div id="home-sections-list" class="list-group">
         <#list classGroups as group>
             <#if (group.individualCount > 0) && group.uri?contains("publications") >
@@ -200,7 +200,7 @@
 <#-- Works in conjunction with the homePageUtils.js file -->
 <#macro academicDeptsHtml>
     <section id="home-academic-depts" class="home-sections">
-        <h4>${i18n().departments}</h4>
+        <h3>${i18n().departments}</h3>
         <div id="academic-depts">
         </div>
     </section>        

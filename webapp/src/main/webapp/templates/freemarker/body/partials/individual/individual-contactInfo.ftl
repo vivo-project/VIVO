@@ -7,7 +7,7 @@
 <#assign addlEmail = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Email")!>
 
 <#if phone?has_content || primaryEmail?has_content || addlEmail?has_content >
-    <ul style="font-size:1em;padding-bottom:4px"><li><strong>${i18n().contact_info}</strong></li></ul>
+    <p class="individual-section-label">${i18n().contact_info}</p>
 </#if>
 
 <#-- Primary Email -->
@@ -19,7 +19,7 @@
 <#-- Phone -->
 
 <#if phone?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-    <@p.addLinkWithLabel phone editable />
+    <@p.addLinkWithLabel phone editable headingTag="p" />
     <#if phone.statements?has_content> <#-- if there are any statements -->
         <ul id="individual-phone" role="list" <#if editable>style="list-style:none;margin-left:0;"</#if>>
             <#list phone.statements as statement>
@@ -41,7 +41,7 @@
         <#local label = "${i18n().additional_emails_capitalized}">
     </#if>
     <#if email?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-        <@p.addLinkWithLabel email editable label/>
+        <@p.addLinkWithLabel email editable label headingTag="p"/>
         <#if email.statements?has_content> <#-- if there are any statements -->
             <ul id="${listId}" class="individual-emails" role="list" <#if editable>style="list-style:none;margin-left:0;"</#if>>
                 <#list email.statements as statement>

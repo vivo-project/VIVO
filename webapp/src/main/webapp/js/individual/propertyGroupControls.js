@@ -44,7 +44,7 @@ $(document).ready(function(){
                 var $visibleSection = $('section.property-group:visible');
                 $visibleSection.hide();
                 $('h2[pgroup=tabs]').addClass("hidden");
-                $('nav#scroller').addClass("hidden");
+                $('nav.scroller').addClass("hidden");
                 $('section#' + groupName).show();
             }
 
@@ -79,7 +79,7 @@ $(document).ready(function(){
             $(this).children('h2').css("margin-top", "-15px").css("border-bottom","1px solid #DFEBE5").css("padding","12px 25px 10px 20px");
             $(this).show();
             $('h2[pgroup=tabs]').removeClass("hidden");
-            $('nav#scroller').removeClass("hidden");
+            $('nav.scroller').removeClass("hidden");
         });
     }
 

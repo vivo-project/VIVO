@@ -17,8 +17,8 @@
     <span class="hideThis">&nbsp;</span>
     <script type="text/javascript" >
         $('span.hideThis').parent().parent().addClass("hideThis");
-        if ( jQuery.isEmptyObject($('h3#RO_0000053').attr('class')) ) {
-            $('h3#RO_0000053').addClass('hiddenGrants');
+        if ( jQuery.isEmptyObject($('h3.RO_0000053').attr('class')) ) {
+            $('h3.RO_0000053').addClass('hiddenGrants');
         }
         $('span.hideThis').parent().remove();
     </script>

@@ -19,8 +19,8 @@
     <span class="hideThis">&nbsp;</span>
     <script type="text/javascript" >
         $('span.hideThis').parent().parent().addClass("hideThis");
-        if ( $('h3#relatedBy-Authorship').attr('class').length == 0 ) {
-            $('h3#relatedBy-Authorship').addClass('hiddenPubs');
+        if ( $('h3.relatedBy-Authorship').attr('class').length == 0 ) {
+            $('h3.relatedBy-Authorship').addClass('hiddenPubs');
         }
         $('span.hideThis').parent().remove(); 
     </script>

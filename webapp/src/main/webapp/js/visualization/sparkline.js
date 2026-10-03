@@ -6,7 +6,7 @@ var visualization = {
 	renderCoAuthor: function(url) {
 
 		var containerIdCoAuthor = 'vis_container_coauthor',
-		containerCoAuthor = $('#' + containerIdCoAuthor);
+		containerCoAuthor = $('.' + containerIdCoAuthor);
 
         $.ajax({
             url: url,
