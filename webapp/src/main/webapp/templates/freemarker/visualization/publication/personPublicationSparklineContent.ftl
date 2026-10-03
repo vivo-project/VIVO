@@ -179,7 +179,7 @@
                     }
 
                     if (totalPublicationCount) {
-                        sparksText += ' <br /><a href="${sparklineVO.downloadDataLink}" title="csv ${i18n().file}">(.CSV ${i18n().file_capitalized})</a> ';
+                        sparksText += ' <br /><a href="${sparklineVO.downloadDataLink}" title="csv ${i18n().file}"><span class="sr-only">' + pubDisplay + ' </span>(.CSV ${i18n().file_capitalized})</a> ';
                     }
 
 

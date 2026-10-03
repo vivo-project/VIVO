@@ -33,7 +33,7 @@
 							</div>
 						<#else>
 							<div id="photo-wrapper">
-								<img width="190" title="no image" class="img-rounded" alt="placeholder image" src="/images/placeholders/person.thumbnail.jpg">
+								<img width="190" title="no image" class="img-rounded" alt="" src="/images/placeholders/person.thumbnail.jpg">
 							</div>
 						</#if>		
 					</div>

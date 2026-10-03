@@ -311,6 +311,15 @@ hr {
 .tabs ul.titles li.activeTab a:hover {
     background-color: #fff;
 }
+
+/* Focus styles for tab links */
+.tabs ul.titles li a:focus {
+    outline: 2px solid #0078d7; /* 2px box around focused element */
+    font-weight: bold;          /* Make text bold */
+    position: relative;
+    z-index: 1;
+}
+
 .smalllogo {
     margin-left:-5px;
     vertical-align:middle;

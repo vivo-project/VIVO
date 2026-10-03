@@ -13,7 +13,7 @@
     <#if rangeOptionsExist  = true >
         <#assign rangeOptionKeys = rangeOptions?keys />
         <form class="editForm" action = "${submitUrl}">
-            <input type="hidden" name="editKey" id="editKey" value="${editKey}" role="input" />
+            <input type="hidden" name="editKey" id="editKey" value="${editKey}" />
             <#if editConfiguration.propertyPublicDescription?has_content>
                 <p>${editConfiguration.propertyPublicDescription}</p>
              </#if>

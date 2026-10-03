@@ -2,7 +2,7 @@
 
 <table id='${tableID}'>
     <caption>
-    ${tableCaption} <a href="${fileDownloadLink}">(.CSV ${i18n().file_capitalized})</a>
+    ${tableCaption} <a href="${fileDownloadLink}" aria-label="${tableCaption} .CSV" >(.CSV ${i18n().file_capitalized})</a>
     </caption>
     <thead>
     <tr>

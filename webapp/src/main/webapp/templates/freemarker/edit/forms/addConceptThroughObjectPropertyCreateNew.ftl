@@ -14,11 +14,11 @@
 	 </#if>
 
 	<#assign typesList = editConfiguration.pageData.createNewTypes/>
-	<form class="editForm" action="${editConfiguration.mainEditUrl}" role="input" />
-	    <input type="hidden" value="${editConfiguration.subjectUri}" name="subjectUri" role="input" />
-	    <input type="hidden" value="${editConfiguration.predicateUri}" name="predicateUri" role="input" />
-	    <input type="hidden" value="${objectUri}" name="objectUri" role="input" />
-	    <input type="hidden" value="create" name="cmd" role="input" />
+	<form class="editForm" action="${editConfiguration.mainEditUrl}" />
+	    <input type="hidden" value="${editConfiguration.subjectUri}" name="subjectUri" />
+	    <input type="hidden" value="${editConfiguration.predicateUri}" name="predicateUri" />
+	    <input type="hidden" value="${objectUri}" name="objectUri" />
+	    <input type="hidden" value="create" name="cmd" />
 
 	    <select id="typeOfNew" name="typeOfNew" role="selection">
 	    <#assign typeKeys = typesList?keys />

@@ -53,7 +53,7 @@
     </#list>
 </ul>
 
-<section id="addAndCancelLinks" role="section">
+<section id="addAndCancelLinks">
     <#-- There is no editConfig at this stage, so we don't need to go through postEditCleanup.jsp on cancel.
          These can just be ordinary links, rather than a v:input element, as in
          addAuthorsToInformationResource.jsp. -->

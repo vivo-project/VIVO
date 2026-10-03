@@ -26,7 +26,7 @@
 	    <form id="pageListForm" action="${urls.base}/editRequestDispatch" method="get">
 	        <input type="hidden" name="typeOfNew" value="http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Page">              
 	        <input type="hidden" name="switchToDisplayModel" value="1">
-	        <input type="hidden" name="editForm" value="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManagePageGenerator" role="input">
+	        <input type="hidden" name="editForm" value="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManagePageGenerator">
 	   		<input type="hidden" name="addMenuItem" value="true" />
 	   		<input id="submit" value="Add new menu page" role="button" type="submit" >
 	   		<input type="hidden" name="returnURL" value="${returnURL?url}" />

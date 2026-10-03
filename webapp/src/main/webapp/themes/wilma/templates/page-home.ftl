@@ -38,20 +38,20 @@
             <p>${i18n().intro_para2}</p>
 
             <section id="search-home" role="region">
-                <h3>${i18n().intro_searchvivo} <span class="search-filter-selected">filteredSearch</span></h3>
+                <h3 id="search-input-label">${i18n().intro_searchvivo} <span class="search-filter-selected">filteredSearch</span></h3>
 
                 <fieldset>
                     <legend>${i18n().search_form}</legend>
                     <form id="search-homepage" action="${urls.search}" name="search-home" role="search" method="GET" >
                         <div id="search-home-field">
-                            <input type="text" name="querytext" class="search-homepage" value="" autocapitalize="off" />
+                            <input type="text" name="querytext" aria-label="${i18n().search_vitro}" aria-labelledby="search-input-label" class="search-homepage" value="" autocapitalize="off" />
+                            <a class="filter-search filter-default" aria-expanded="false" href="#" title="${i18n().intro_filtersearch}">
+                                <span class="displace">${i18n().intro_filtersearch}</span>
+                            </a>
                             <input type="submit" value="${i18n().search_button}" class="search" />
                             <input type="hidden" name="filters_category"  value="" autocapitalize="off" />
                         </div>
-
-                        <a class="filter-search filter-default" href="#" title="${i18n().intro_filtersearch}">
-                            <span class="displace">${i18n().intro_filtersearch}</span>
-                        </a>
+                        
 
                         <ul id="filter-search-nav">
                             <li><a class="active" href="">${i18n().all_capitalized}</a></li>
