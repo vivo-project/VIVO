@@ -1,6 +1,8 @@
 # Security Policy
 ## Reporting a vulnerability
-If you discover a security vulnerability, please report it privately by sending an email to vivosecurity@lyrasis.org.
+If you discover a security vulnerability, please report it privately using GitHub's Private Vulnerability Reporting feature by selecting Security -> Report a vulnerability in this repository.  
+
+If you are unable to use GitHub Private Vulnerability Reporting, you may alternatively contact us at vivosecurity@lyrasis.org.
 
 Please do not report security vulnerabilities through our public GitHub issues, discussions, or pull requests.
 
