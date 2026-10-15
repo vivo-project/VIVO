@@ -4,7 +4,10 @@
 
 <#-- Do not show the link for temporal visualization unless it's enabled -->
 
-<#if temporalVisualizationEnabled || mapOfScienceVisualizationEnabled>
+<#if temporalVisualizationEnabled 
+  || mapOfScienceVisualizationEnabled 
+  || isReportAuth("http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#OrganizationMetricsReport")
+  || isReportAuth("http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#OrganizationTrendsReport") >
     <#assign classSpecificExtension>
         <section id="right-hand-column" role="region">
             <#if temporalVisualizationEnabled>
@@ -12,6 +15,12 @@
             </#if>
             <#if mapOfScienceVisualizationEnabled>
                 <#include "individual-visualizationMapOfScience.ftl">
+            </#if>
+            <#if isReportAuth("http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#OrganizationMetricsReport") >
+                <#include "individual-organizationMetricsReport.ftl">
+            </#if>
+            <#if isReportAuth("http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#OrganizationTrendsReport") >
+                <#include "individual-organizationTrendsReport.ftl">
             </#if>
         </section> <!-- #right-hand-column -->
     </#assign>
@@ -22,12 +31,12 @@
 </#assign>
 
 <#if individual.mostSpecificTypes?seq_contains("Academic Department") && getGrantResults?has_content>
-    <#assign departmentalGrantsExtension>
+    <#assign departmentalGrantsExtension>    
         <div id="activeGrantsLink">
         <img src="${urls.base}/images/individual/arrow-green.gif">
             <a href="${urls.base}/deptGrants?individualURI=${individual.uri}" title="${i18n().view_all_active_grants}">
                 ${i18n().view_all_active_grants}
-            </a>
+            </a>    
         </div>
     </#assign>
 </#if>

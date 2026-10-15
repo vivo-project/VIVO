@@ -182,7 +182,7 @@ $( document ).on('click', ".filter-option", function() {
 
 		$(this).addClass('active-filter');
 
-		temporalGraphProcessor.dataTable.fnDraw();
+		temporalGraphProcessor.dataTable.draw();
 	}
 });
 
@@ -677,10 +677,10 @@ temporalGraphProcessor = {
         } else {
 
         	/*
-        	 * We have to redraw the table so that top 3 entities are selected. fnDraw() triggers sorting of the
+             * We have to redraw the table so that top 3 entities are selected. draw() triggers sorting of the
         	 * table and other filters.
         	 * */
-        	temporalGraphProcessor.dataTable.fnDraw();
+            temporalGraphProcessor.dataTable.draw();
 
 	        /*
 	         * This will make sure that top 3 entities are selected by default when the page loads.
@@ -698,7 +698,7 @@ temporalGraphProcessor = {
          * Table has to be redrawn now & not later to avoid checkboxes not being selected, which is
          * caused if they are not visible at that point of time.
          * */
-        temporalGraphProcessor.dataTable.fnDraw();
+        temporalGraphProcessor.dataTable.draw();
 
         if ($("#incomplete-data-disclaimer").length > 0 && lastCachedAtDateTimes.length > 0) {
 

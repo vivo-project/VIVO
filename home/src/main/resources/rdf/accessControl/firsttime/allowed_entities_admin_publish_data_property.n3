@@ -165,6 +165,7 @@
     <http://vivoweb.org/ontology/core#reportId> ,
     <http://vivoweb.org/ontology/core#researchOverview> ,
     <http://vivoweb.org/ontology/core#researcherId> ,
+    <http://vivoweb.org/ontology/core#rorId> ,
     <http://vivoweb.org/ontology/core#scopusId> ,
     <http://vivoweb.org/ontology/core#seatingCapacity> ,
     <http://vivoweb.org/ontology/core#sponsorAwardId> ,

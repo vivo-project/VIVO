@@ -219,8 +219,7 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 	private List<String> getN3ForExistingRoleActivity() {
 	    List<String> n3ForExistingRoleActivity = new ArrayList<String>();
         n3ForExistingRoleActivity.add("?role " + getRoleToActivityPlaceholder() + " ?existingRoleActivity .\n"+
-        "?existingRoleActivity " + getActivityToRolePlaceholder() + " ?role . \n" +
-        "?existingRoleActivity a ?roleActivityType .");
+        "?existingRoleActivity " + getActivityToRolePlaceholder() + " ?role . \n");
     	return n3ForExistingRoleActivity;
     }
 

@@ -1,0 +1,12 @@
+# $This file is distributed under the terms of the license in LICENSE$
+
+@prefix appSetup: <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#> .
+@prefix access: <https://vivoweb.org/ontology/vitro-application/auth/vocabulary/> .
+@prefix : <https://vivoweb.org/ontology/vitro-application/auth/individual/access-allowed-report-generator/> .
+
+
+:AdminExecuteReportGeneratorValueSet access:value
+  appSetup:OrganizationMetricsReport,
+  appSetup:OrganizationTrendsReport .
+
+
