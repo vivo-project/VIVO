@@ -50,8 +50,8 @@ $(document).ready(function(){
             }
 
             var dataServiceUrl = urlsBase + "/dataservice?getRandomSearchIndividualsByVClass=1&vclassId=";
-            //var url = dataServiceUrl + encodeURIComponent("http://xmlns.com/foaf/0.1/Person");
-            var url = dataServiceUrl + encodeURIComponent("http://vivoweb.org/ontology/core#FacultyMember");
+            var url = dataServiceUrl + encodeURIComponent("http://xmlns.com/foaf/0.1/Person");
+            //var url = dataServiceUrl + encodeURIComponent("http://vivoweb.org/ontology/core#FacultyMember");
             url += "&page=" + rowStart + "&pageSize=" + pageSize;
 
             $.getJSON(url, function(results) {
@@ -111,16 +111,16 @@ $(document).ready(function(){
                             });
                         }
                     });
-                    var viewMore = "<ul id='viewMoreFac' style='list-style:none;margin:0;padding:0;'><li><a href='"
-                                + urlsBase
-                                + "/people#http://vivoweb.org/ontology/core#FacultyMember' alt='" 
-                                + i18nStrings.viewAllFaculty + "'>"
-                                + i18nStrings.viewAllString + "</a></li></ul>";
                     //var viewMore = "<ul id='viewMoreFac' style='list-style:none;margin:0;padding:0;'><li><a href='"
-                    //    + urlsBase
-                    //    + "/people#http://xmlns.com/foaf/0.1/Person' alt='" 
-                    //    + i18nStrings.viewAllFaculty + "'>"
-                    //    + i18nStrings.viewAllString + "</a></li?</ul>";                    
+                    //            + urlsBase
+                    //            + "/people#http://vivoweb.org/ontology/core#FacultyMember' alt='" 
+                    //            + i18nStrings.viewAllFaculty + "'>"
+                    //            + i18nStrings.viewAllString + "</a></li></ul>";
+                    var viewMore = "<ul id='viewMoreFac' style='list-style:none;margin:0;padding:0;'><li><a href='"
+                        + urlsBase
+                        + "/people#http://xmlns.com/foaf/0.1/Person' alt='" 
+                        + i18nStrings.viewAllFaculty + "'>"
+                        + i18nStrings.viewAllString + "</a></li></ul>";                    
                     $('div#research-faculty-mbrs').append(viewMore);
                 }
             });
@@ -198,7 +198,7 @@ $(document).ready(function(){
 //              + i18nStrings.viewAllString + "</a>"
 //              + "</li></ul>";
           html += "<a href='" + urlsBase 
-              + "/organizations#http://vivoweb.org/ontology/core#AcademicDepartment' alt='" 
+              + "/organizations#http://xmlns.com/foaf/0.1/Organization' alt='" 
               + i18nStrings.viewAllDepartments + "'>" 
               + i18nStrings.viewAllString + "</a>"
               + "</div>"

@@ -16,7 +16,7 @@
 <#-- Works in conjunction with the homePageUtils.js file, which contains the ajax call. -->
 <#macro facultyMbrHtml>
     <section id="home-faculty-mbrs" class="home-sections"  >
-        <h4>${i18n().faculty_capitalized}</h4>
+        <h4>${i18n().people_capitalized}</h4>
         <div id="tempSpacing">
             <span>${i18n().loading_faculty}&nbsp;&nbsp;&nbsp;
                 <img  src="${urls.images}/indicatorWhite.gif">
@@ -36,7 +36,7 @@
     <#list classGroups as group>
         <#if (group.individualCount > 0) && group.uri?contains("people") >
             <#list group.classes as class>
-                <#if (class.uri?contains("FacultyMember")) >
+                <#if (class.uri?contains("Person")) >
                     <#assign foundClassGroup = true />
                     <#if (class.individualCount > 0) >
                         <script>var facultyMemberCount = ${class.individualCount?string?replace("[^\\d]", "", "r")};</script>
@@ -173,7 +173,7 @@
 <#-- Works in conjunction with the homePageUtils.js file -->
 <#macro academicDeptsHtml>
     <section id="home-academic-depts" class="home-sections">
-        <h4>${i18n().departments}</h4>
+        <h4>${i18n().organizations}</h4>
         <div id="academic-depts">
         </div>
     </section>
