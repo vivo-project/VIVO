@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <#if title?? && title?has_content>
-    <title>${title?html} | ${siteName}</title>
+    <title>${title?html}</title>
 <#else>
     <title>${siteName}</title>
 </#if>

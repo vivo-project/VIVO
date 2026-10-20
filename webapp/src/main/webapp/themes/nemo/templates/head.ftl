@@ -8,7 +8,7 @@
 <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
 
 <#if title?? && title?has_content>
-    <title>${title?html} | ${siteName}</title>
+    <title>${title?html}</title>
 <#else>
     <title>${siteName}</title>
 </#if>

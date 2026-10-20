@@ -6,7 +6,7 @@
 <meta name="generator" content="VIVO ${version.label}" />
 
 <#if title?? && title?has_content>
-    <title>${title?html} | ${siteName}</title>
+    <title>${title?html}</title>
 <#else>
     <title>${siteName}</title>
 </#if>
