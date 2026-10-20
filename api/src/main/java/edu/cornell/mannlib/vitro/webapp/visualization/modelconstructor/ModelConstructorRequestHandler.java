@@ -21,6 +21,7 @@ import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationReques
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.IllegalConstructedModelIdentifierException;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
@@ -73,7 +74,7 @@ public class ModelConstructorRequestHandler implements
 		}
 
 		Map<String, Object> body = new HashMap<String, Object>();
-		body.put("title", "Regenerate Constructed Models");
+		body.put("title", I18n.text(vitroRequest, "regenerate_constructed_models"));
 		body.put("vivoDefaultNamespace", vitroRequest.getWebappDaoFactory()
 				.getDefaultNamespace());
 		body.put("currentModels", currentConstructedModels);

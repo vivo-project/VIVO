@@ -17,6 +17,7 @@ import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationReques
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
@@ -233,7 +234,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
         String standaloneTemplate = "personGrantCountStandaloneActivator.ftl";
 
         Map<String, Object> body = new HashMap<String, Object>();
-        body.put("title", "Individual Grant Count visualization");
+        body.put("title", I18n.text(vreq, "individual_grant_count_visualization"));
         body.put("sparklineVO", valueObjectContainer);
 
         return new TemplateResponseValues(standaloneTemplate, body);

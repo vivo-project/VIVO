@@ -19,6 +19,7 @@ import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationReques
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceException;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.ResultSetConsumer;
@@ -186,7 +187,7 @@ public class CapabilityMapRequestHandler implements VisualizationRequestHandler 
         String standaloneTemplate = "capabilityMap.ftl";
 
         Map<String, Object> body = new HashMap<String, Object>();
-        body.put("title", "Capability Map");
+        body.put("title", I18n.text(vreq, "capability_map"));
         body.put("vivoDefaultNamespace", vreq.getWebappDaoFactory().getDefaultNamespace());
         return new TemplateResponseValues(standaloneTemplate, body);
     }

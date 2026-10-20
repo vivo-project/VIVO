@@ -14,6 +14,7 @@ import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationReques
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
@@ -60,7 +61,7 @@ public class ToolsRequestHandler implements VisualizationRequestHandler {
 		String standaloneTemplate = "tools.ftl";
 
 		Map<String, Object> body = new HashMap<String, Object>();
-		body.put("title", "Visualization Tools");
+		body.put("title", I18n.text(vitroRequest, "visualization_tools"));
 
 		return new TemplateResponseValues(standaloneTemplate, body);
 	}
