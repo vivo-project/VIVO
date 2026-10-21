@@ -1,8 +1,11 @@
 package edu.cornell.mannlib.vivo.harvest.controller;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -11,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 
 import edu.cornell.mannlib.vedit.beans.LoginStatusBean;
 import edu.cornell.mannlib.vitro.webapp.beans.UserAccount;
+import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.config.ContextPath;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
@@ -18,6 +22,9 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Red
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.web.URLEncoder;
+import edu.cornell.mannlib.vivo.harvest.HarvestContextSetup;
+import edu.cornell.mannlib.vivo.harvest.CommandAssembler;
+import edu.cornell.mannlib.vivo.harvest.HarvestJobExecutor;
 import edu.cornell.mannlib.vivo.harvest.InternalScheduleOperations;
 import edu.cornell.mannlib.vivo.harvest.RecurrenceType;
 import edu.cornell.mannlib.vivo.harvest.RoleCheckUtility;
@@ -90,6 +97,7 @@ public class TaskDetailsController extends FreemarkerHttpServlet {
             );
         }
 
+        HarvestContextSetup.refreshGraphOptions(vreq.getServletContext());
         HarvestContext.resolveLabelsBasedOnLocale(vreq);
 
         dataContext.put("scheduledTask", taskMetadata);
@@ -102,17 +110,45 @@ public class TaskDetailsController extends FreemarkerHttpServlet {
 
     private ResponseValues handlePostRequest(VitroRequest vreq, Map<String, Object> dataContext) {
         ScheduledTaskMetadata taskMetadata = (ScheduledTaskMetadata) dataContext.get("scheduledTask");
-        taskMetadata.getParameters().keySet().forEach(symbol ->
-            taskMetadata.getParameters().put(symbol, vreq.getParameter(symbol)));
+        ExportModule module = (ExportModule) dataContext.get("module");
+        RecurrenceType recurrence = RecurrenceType.valueOf(vreq.getParameter("recurrenceType"));
+
+        Map<String, String> taskParameters = new HashMap<>();
+        List<String> command =
+            CommandAssembler.assemble(module, vreq, recurrence != RecurrenceType.ONCE, taskParameters);
+
+        if (recurrence == RecurrenceType.ONCE) {
+            Path modulePath = Paths.get(ConfigurationProperties.getInstance().getProperty("harvester.directory"),
+                module.getPath()).normalize();
+
+            boolean started = HarvestJobExecutor.runAsync(
+                InternalScheduleOperations.sanitizeModuleName(module.getName()),
+                command, modulePath, null
+            );
+
+            if (!started) {
+                return new RedirectResponseValues(
+                    "/taskDetails?taskUri=" + URLEncoder.encode(taskMetadata.getTaskUri()));
+            }
+
+            module.setRunning(true);
+            WorkflowOutputLogController.resetLogPosition(module.getName());
+            InternalScheduleOperations.removeScheduledTask(taskMetadata.getTaskUri());
+
+            return new RedirectResponseValues("/etlWorkflows");
+        }
+
+        taskMetadata.getParameters().clear();
+        taskMetadata.getParameters().putAll(taskParameters);
 
         InternalScheduleOperations.removeScheduledTask(taskMetadata.getTaskUri());
         taskMetadata.setTaskName(vreq.getParameter("scheduledTaskName"));
 
         String savedTaskUri = InternalScheduleOperations.saveScheduledTask(
-            (ExportModule) dataContext.get("module"),
+            module,
             taskMetadata.getTaskName(),
-            RecurrenceType.valueOf(vreq.getParameter("recurrenceType")),
-            taskMetadata.getCommand(),
+            recurrence,
+            String.join("§", command),
             taskMetadata.getParameters());
 
         String redirectUrl = "/taskDetails?taskUri=" + URLEncoder.encode(savedTaskUri);

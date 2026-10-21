@@ -106,6 +106,6 @@ public class SchedulerManager {
     }
 
     public static void shutdown() {
-        scheduler.shutdown();
+        scheduler.shutdownNow();
     }
 }

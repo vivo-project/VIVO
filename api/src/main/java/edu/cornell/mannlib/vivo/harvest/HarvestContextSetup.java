@@ -58,20 +58,28 @@ public class HarvestContextSetup implements ServletContextListener {
 
             HarvestContext.modules = config.getExportModules();
 
-            RDFService rdfService = ModelAccess.on(ctx).getRDFService(CONTENT);
-            List<String> models = new BlankNodeFilteringModelMaker(rdfService, ModelAccess.on(
-                ctx).getModelMaker(CONTENT)).listModels().toList();
-
-            HarvestContext.modules.forEach(module ->
-                module.getParameters().stream()
-                    .filter(param -> "graph".equals(param.getType()))
-                    .forEach(param -> param.setOptions(models))
-            );
+            refreshGraphOptions(ctx);
 
             InternalScheduleOperations.reloadTaskMetadataAndLogs();
         } catch (Exception e) {
             throw new RuntimeException("Failed to load export modules config", e);
         }
+    }
+
+    public static void refreshGraphOptions(ServletContext ctx) {
+        if (!HarvestContext.configured) {
+            return;
+        }
+
+        RDFService rdfService = ModelAccess.on(ctx).getRDFService(CONTENT);
+        List<String> models = new BlankNodeFilteringModelMaker(rdfService, ModelAccess.on(
+            ctx).getModelMaker(CONTENT)).listModels().toList();
+
+        HarvestContext.modules.forEach(module ->
+            module.getParameters().stream()
+                .filter(param -> "graph".equals(param.getType()))
+                .forEach(param -> param.setOptions(models))
+        );
     }
 
     @Override
@@ -111,5 +119,6 @@ public class HarvestContextSetup implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
         HarvestContext.modules.clear();
         HarvestJobExecutor.shutdown();
+        SchedulerManager.shutdown();
     }
 }

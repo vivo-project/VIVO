@@ -13,8 +13,8 @@ public class HarvestJobRegistry {
         new ConcurrentHashMap<>();
 
 
-    public static void startJob(String module) {
-        jobs.put(module, new ModuleRuntimeContext(module));
+    public static boolean tryStartJob(String module) {
+        return jobs.putIfAbsent(module, new ModuleRuntimeContext(module)) == null;
     }
 
     public static void finishJob(String module) {

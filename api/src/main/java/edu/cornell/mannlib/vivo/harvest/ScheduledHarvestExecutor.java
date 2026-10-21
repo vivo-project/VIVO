@@ -35,9 +35,9 @@ public class ScheduledHarvestExecutor {
 
     @Scheduled(cron = "${workflow.scheduler.scan}")
     public void runScheduledWorkflowsForToday() {
-        getScheduledWorkflows().forEach((scheduledTaskUri, commandString) -> {
+        getScheduledWorkflows().forEach((scheduledTaskUri, command) -> {
             List<String> commandToRun =
-                Arrays.stream(commandString.split("§")).collect(Collectors.toList());
+                Arrays.stream(command.resolved.split("§")).collect(Collectors.toList());
 
             HarvestContext.modules.stream()
                 .filter(module -> module.getScheduledTasks().containsKey(scheduledTaskUri))
@@ -58,12 +58,22 @@ public class ScheduledHarvestExecutor {
                         module,
                         taskMetadata.getTaskName(),
                         RecurrenceType.valueOf(taskMetadata.getRecurrenceType()),
-                        commandString, taskMetadata.getParameters());
+                        command.stored, taskMetadata.getParameters());
                 }, () -> InternalScheduleOperations.removeScheduledTask(scheduledTaskUri));
         });
     }
 
-    private Map<String, String> getScheduledWorkflows() {
+    private static class ScheduledCommand {
+        private final String stored;
+        private final String resolved;
+
+        ScheduledCommand(String stored, String resolved) {
+            this.stored = stored;
+            this.resolved = resolved;
+        }
+    }
+
+    private Map<String, ScheduledCommand> getScheduledWorkflows() {
         OntModel displayModel = getOntModel();
 
         Property commandProp =
@@ -75,7 +85,7 @@ public class ScheduledHarvestExecutor {
         Property recurrenceProp =
             ResourceFactory.createProperty(InternalScheduleOperations.RECURRENCE_PROPERTY);
 
-        Map<String, String> workflowsThatShouldRunToday = new HashMap<>();
+        Map<String, ScheduledCommand> workflowsThatShouldRunToday = new HashMap<>();
 
         LocalDate today = LocalDate.now(ZoneId.systemDefault());
 
@@ -148,14 +158,15 @@ public class ScheduledHarvestExecutor {
             if (shouldRun) {
                 String startDate = referenceDate.format(dateFilterPattern);
                 String endDate = today.format(dateFilterPattern);
-                String command =
-                    commandStmt.getObject().asLiteral().getString()
+                String storedCommand = commandStmt.getObject().asLiteral().getString();
+                String resolvedCommand =
+                    storedCommand
                         .replace(InternalScheduleOperations.START_DATE_PLACEHOLDER, startDate)
                         .replace(InternalScheduleOperations.END_DATE_PLACEHOLDER, endDate);
 
                 workflowsThatShouldRunToday.put(
                     workflow.getURI(),
-                    command
+                    new ScheduledCommand(storedCommand, resolvedCommand)
                 );
             }
         }

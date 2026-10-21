@@ -41,76 +41,84 @@ public class HarvestJobExecutor {
         );
 
 
-    public static void runAsync(String moduleName, List<String> command, Path modulePath,
-                                @Nullable String scheduledTaskName) {
-        if (HarvestJobRegistry.isRunning(moduleName)) {
-            return;
+    public static boolean runAsync(String moduleName, List<String> command, Path modulePath,
+                                   @Nullable String scheduledTaskName) {
+        if (!HarvestJobRegistry.tryStartJob(moduleName)) {
+            return false;
         }
 
         boolean isScheduled = Objects.nonNull(scheduledTaskName);
 
-        Future<?> future = executor.submit(() -> {
-            HarvestJobRegistry.startJob(moduleName);
+        Future<?> future;
 
-            File logFile =
-                new File(
-                    HarvestContext.logFileLocation + "harvest-" + moduleName +
-                        (isScheduled ? ("-" + scheduledTaskName.toLowerCase().replaceAll("\\s", "_")) : "") +
-                        (isScheduled ? ("-" + LocalDateTime.now()) : "") +
-                        ".log"
-                );
+        try {
+            future = executor.submit(() -> {
+                File logFile =
+                    new File(
+                        HarvestContext.logFileLocation + "harvest-" + moduleName +
+                            (isScheduled ? ("-" + scheduledTaskName.toLowerCase().replaceAll("\\s", "_")) : "") +
+                            (isScheduled ? ("-" + LocalDateTime.now()) : "") +
+                            ".log"
+                    );
 
-            try {
-                List<String> fullCommand = new ArrayList<>();
+                try {
+                    List<String> fullCommand = new ArrayList<>();
 
-                fullCommand.add("/usr/bin/setsid");
-                fullCommand.addAll(command);
+                    fullCommand.add("/usr/bin/setsid");
+                    fullCommand.addAll(command);
 
-                ProcessBuilder pb =
-                    new ProcessBuilder(fullCommand);
+                    ProcessBuilder pb =
+                        new ProcessBuilder(fullCommand);
 
-                pb.directory(modulePath.toFile());
-                pb.redirectErrorStream(true);
-                pb.environment().clear();
-                pb.environment().put("PATH", "/usr/bin:/bin");
+                    pb.directory(modulePath.toFile());
+                    pb.redirectErrorStream(true);
+                    pb.environment().clear();
+                    pb.environment().put("PATH", "/usr/bin:/bin");
 
-                Process process = pb.start();
+                    Process process = pb.start();
 
-                long pid = process.pid();
+                    long pid = process.pid();
 
-                HarvestJobRegistry
-                    .registerProcess(moduleName, process);
+                    HarvestJobRegistry
+                        .registerProcess(moduleName, process);
 
-                HarvestJobRegistry
-                    .registerPid(moduleName, pid);
+                    HarvestJobRegistry
+                        .registerPid(moduleName, pid);
 
-                try (
-                    BufferedReader reader =
-                        new BufferedReader(new InputStreamReader(process.getInputStream()));
-                    FileWriter writer = new FileWriter(logFile, false)) {
-                    String line;
+                    try (
+                        BufferedReader reader =
+                            new BufferedReader(new InputStreamReader(process.getInputStream()));
+                        FileWriter writer = new FileWriter(logFile, false)) {
+                        String line;
 
-                    while ((line = reader.readLine()) != null) {
-                        if (Thread.currentThread().isInterrupted()) {
-                            process.destroyForcibly();
-                            break;
+                        while ((line = reader.readLine()) != null) {
+                            if (Thread.currentThread().isInterrupted()) {
+                                process.destroyForcibly();
+                                break;
+                            }
+
+                            writer.write(line + "\n");
+                            writer.flush();
                         }
-
-                        writer.write(line + "\n");
-                        writer.flush();
                     }
-                }
 
-                process.waitFor();
-            } catch (Exception e) {
-                log.error("Unexpected error occurred when trying to run harvest job: " + e.getMessage());
-            } finally {
-                HarvestJobRegistry.finishJob(moduleName);
-            }
-        });
+                    process.waitFor();
+                } catch (Exception e) {
+                    log.error("Unexpected error occurred when trying to run harvest job: " + e.getMessage());
+                } finally {
+                    HarvestJobRegistry.finishJob(moduleName);
+                }
+            });
+        } catch (RuntimeException e) {
+            HarvestJobRegistry.finishJob(moduleName);
+            log.error("Harvest job for " + moduleName + " could not be submitted: " + e.getMessage());
+            return false;
+        }
 
         HarvestJobRegistry
             .registerFuture(moduleName, future);
+
+        return true;
     }
 
     public static void shutdown() {

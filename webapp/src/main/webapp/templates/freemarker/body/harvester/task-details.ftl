@@ -13,87 +13,91 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
             <input type="hidden" name="scriptPath" value="${module.path}">
 
             <#list module.parameters as param>
-                <#if !(param.startDateAttribute?? && param.startDateAttribute)
-                   && !(param.endDateAttribute?? && param.endDateAttribute)>
+                <#assign isDateParam = (param.startDateAttribute?? && param.startDateAttribute)
+                                    || (param.endDateAttribute?? && param.endDateAttribute)>
 
-                    <div class="form-row">
-                        <label>
-                            ${param.resolvedName}
-                            <#if param.required>*</#if>
-                        </label>
+                <div class="form-row<#if isDateParam> once-only</#if>">
+                    <label>
+                        ${param.resolvedName}
+                        <#if param.required>*</#if>
+                    </label>
 
-                        <#assign inputType = "text">
-                        <#if param.type == "dateTime">
-                            <#assign inputType = "datetime-local">
-                        </#if>
-
-                        <#assign inputValue = scheduledTask.parameters[param.symbol]!param.defaultValue!>
-
-                        <#if param.type == "dateTime" && inputValue?has_content>
-                            <#assign inputValue = inputValue?replace("Z", "")>
-                            <#if inputValue?length gt 16>
-                                <#assign inputValue = inputValue?substring(0,16)>
-                            </#if>
-                        </#if>
-
-                        <#if param.type == "file">
-                            <input type="file"
-                                   name="${param.symbol}"
-                                   <#if param.required>required</#if>
-                            />
-                        <#elseif param.type == "select" || param.type == "graph">
-                            <select name="${param.symbol}" <#if param.required>required</#if>>
-                                <#list param.options as opt>
-                                    <option value="${opt}"
-                                        <#if opt == inputValue>selected</#if>>
-                                        ${opt}
-                                    </option>
-                                </#list>
-                            </select>
-                        <#elseif param.type == "url">
-                            <input type="text"
-                                   name="${param.symbol}"
-                                   value="${inputValue}"
-                                   <#if param.required>required</#if>
-                            />
-                        <#else>
-                            <input type="${inputType}"
-                                   name="${param.symbol}"
-                                   value="${inputValue}"
-                                   <#if param.required>required</#if>
-                            >
-                        </#if>
-                    </div>
-
-                    <#if param.type == "url" && param.subfields??>
-                        <#list param.subfields as sub>
-                            <#if !(sub.startDateAttribute?? && sub.startDateAttribute)
-                               && !(sub.endDateAttribute?? && sub.endDateAttribute)>
-
-                                <#assign subValue = scheduledTask.parameters[sub.symbol]!sub.defaultValue!>
-
-                                <div class="form-row" style="margin-left:20px;">
-                                    <label>
-                                        ${sub.resolvedName}
-                                        <#if sub.required>*</#if>
-                                    </label>
-
-                                    <input type="text"
-                                           name="${sub.symbol}"
-                                           value="${subValue}"
-                                           <#if sub.required>required</#if>
-                                    >
-                                </div>
-                            </#if>
-                        </#list>
+                    <#assign inputType = "text">
+                    <#if param.type == "dateTime">
+                        <#assign inputType = "datetime-local">
                     </#if>
+
+                    <#assign inputValue = scheduledTask.parameters[param.symbol]!param.defaultValue!>
+                    <#if isDateParam>
+                        <#assign inputValue = param.defaultValue!>
+                    </#if>
+
+                    <#if param.type == "dateTime" && inputValue?has_content>
+                        <#assign inputValue = inputValue?replace("Z", "")>
+                        <#if inputValue?length gt 16>
+                            <#assign inputValue = inputValue?substring(0,16)>
+                        </#if>
+                    </#if>
+
+                    <#if param.type == "file">
+                        <input type="file"
+                               name="${param.symbol}"
+                               <#if param.required>required</#if>
+                        />
+                    <#elseif param.type == "select" || param.type == "graph">
+                        <select name="${param.symbol}" <#if param.required>required</#if>>
+                            <#list param.options as opt>
+                                <option value="${opt}"
+                                    <#if opt == inputValue>selected</#if>>
+                                    ${opt}
+                                </option>
+                            </#list>
+                        </select>
+                    <#elseif param.type == "url">
+                        <input type="text"
+                               name="${param.symbol}"
+                               value="${inputValue}"
+                               <#if param.required>required</#if>
+                        />
+                    <#else>
+                        <input type="${inputType}"
+                               name="${param.symbol}"
+                               value="${inputValue}"
+                               <#if param.required>required</#if>
+                        >
+                    </#if>
+                </div>
+
+                <#if param.type == "url" && param.subfields??>
+                    <#list param.subfields as sub>
+                        <#assign isDateSub = (sub.startDateAttribute?? && sub.startDateAttribute)
+                                          || (sub.endDateAttribute?? && sub.endDateAttribute)>
+
+                        <#assign subValue = scheduledTask.parameters[sub.symbol]!sub.defaultValue!>
+                        <#if isDateSub>
+                            <#assign subValue = sub.defaultValue!>
+                        </#if>
+
+                        <div class="form-row<#if isDateSub> once-only</#if>" style="margin-left:20px;">
+                            <label>
+                                ${sub.resolvedName}
+                                <#if sub.required>*</#if>
+                            </label>
+
+                            <input type="text"
+                                   name="${sub.symbol}"
+                                   value="${subValue}"
+                                   <#if sub.required>required</#if>
+                            >
+                        </div>
+                    </#list>
                 </#if>
-            </#list>
+        </#list>
 
             <div class="form-row">
                 <label>${i18n().recurrence_type}</label>
-                <select name="recurrenceType">
-                    <#list ["DAILY","WEEKLY","MONTHLY","QUARTERLY"] as rec>
+                <select name="recurrenceType" id="recurrenceType">
+                    <#list ["ONCE","DAILY","WEEKLY","MONTHLY","QUARTERLY"] as rec>
                         <option value="${rec}"
                             <#if rec == scheduledTask.recurrenceType>selected</#if>>
                             ${i18n()[rec]}
@@ -140,6 +144,21 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
 </div>
 
 <script>
+
+const recurrenceSelect = document.getElementById("recurrenceType");
+
+function toggleOnceOnlyRows() {
+    const show = recurrenceSelect.value === "ONCE";
+    document.querySelectorAll(".once-only").forEach(row => {
+        row.style.display = show ? "" : "none";
+        row.querySelectorAll("input, select").forEach(field => {
+            field.disabled = !show;
+        });
+    });
+}
+
+recurrenceSelect.addEventListener("change", toggleOnceOnlyRows);
+toggleOnceOnlyRows();
 
 document.querySelectorAll(".delete-log-btn").forEach(btn => {
     btn.addEventListener("click", () => {

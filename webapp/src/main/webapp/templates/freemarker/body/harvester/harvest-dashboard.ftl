@@ -249,15 +249,15 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/dashb
                         </#list>
                     </tbody>
                 </table>
-
-                <button
-                    type="button"
-                    class="refresh-config-btn">
-                    ${i18n().refresh_config}
-                </button>
             <#else>
                 <p>${i18n().no_scheduled_tasks}</p>
             </#if>
+
+            <button
+                type="button"
+                class="refresh-config-btn">
+                ${i18n().refresh_config}
+            </button>
         </div>
     </div>
 </div>
