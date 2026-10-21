@@ -62,7 +62,7 @@
 
 <section id="addFullNameToPerson" role="region">
 
-    <form id="addFullNameToPerson" class="customForm noIE67" action="${submitUrl}"  role="add/edit name">
+    <form id="addFullNameToPerson" class="customForm noIE67" action="${submitUrl}">
 
         <p>
             <label for="firstName">${i18n().first_name} ${requiredHint}<span style="padding-left:300px">${i18n().name_prefix}</span></label>

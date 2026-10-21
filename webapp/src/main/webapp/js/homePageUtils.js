@@ -76,7 +76,7 @@ $(document).ready(function(){
 
                     $.each($('div#research-faculty-mbrs ul#facultyThumbs li.individual'), function() {
                         if ( $(this).children('img').length == 0 ) {
-                            var imgHtml = "<img width='60' alt='" + i18nStrings.placeholderImage + "' src='" + urlsBase + "/images/placeholders/person.bordered.thumbnail.jpg'>";
+                            var imgHtml = "<img width='60' alt='' src='" + urlsBase + "/images/placeholders/person.bordered.thumbnail.jpg'>";
                             $(this).prepend(imgHtml);
                         }
                         else {
@@ -89,7 +89,7 @@ $(document).ready(function(){
                                 + urlsBase
                                 + "/people#http://vivoweb.org/ontology/core#FacultyMember' alt='"
                                 + i18nStrings.viewAllFaculty + "'>"
-                                + i18nStrings.viewAllString + "</a></li></ul>";
+                                + i18nStrings.viewAllFaculty.charAt(0).toUpperCase() + i18nStrings.viewAllFaculty.slice(1) + "...</a></li></ul>";
                     $('div#research-faculty-mbrs').append(viewMore);
                 }
             });
@@ -157,7 +157,7 @@ $(document).ready(function(){
                     + urlsBase
                     + "/organizations#http://vivoweb.org/ontology/core#AcademicDepartment' alt='"
                     + i18nStrings.viewAllDepartments + "'>"
-                    + i18nStrings.viewAllString + "</a></li></ul>";
+                    + i18nStrings.viewAllDepartments.charAt(0).toUpperCase() + i18nStrings.viewAllDepartments.slice(1) + "...</a></li></ul>";
         }
         $('div#academic-depts').html(html);
     }

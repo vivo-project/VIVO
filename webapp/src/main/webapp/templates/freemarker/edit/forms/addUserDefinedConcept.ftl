@@ -16,7 +16,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <@lvf.unsupportedBrowser urls.base />
 
 <form id="addUserDefinedConceptForm" class="customForm noIE67" action = "${submitUrl}" method="post">
-    <input type="hidden" name="editKey" id="editKey" value="${editKey}" role="input" />
+    <input type="hidden" name="editKey" id="editKey" value="${editKey}" />
    <#--Autocomplete for looking up existing skos concepts -->
 						<p>
 		            <label for="relatedIndLabel">${i18n().concept_capitalized} <span class='requiredHint'> *</span></label>

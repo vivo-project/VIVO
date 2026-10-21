@@ -27,7 +27,7 @@
 <#assign literalValues = "${editConfiguration.dataLiteralValuesAsString}" />
 
 <form class="customForm" action = "${submitUrl}" method="post">
-    <input type="hidden" name="editKey" id="editKey" value="${editKey}" role="input" />
+    <input type="hidden" name="editKey" id="editKey" value="${editKey}" />
     <#if editConfiguration.dataPredicatePublicDescription?has_content>
        <label for="${editConfiguration.dataLiteral}"><p class="propEntryHelpText">${editConfiguration.dataPredicatePublicDescription}</p></label>
     </#if>
@@ -46,7 +46,7 @@
 	</div>
     <br />
 
-    <input type="submit" id="submit" value="${editConfiguration.submitLabel}" role="button"/>
+    <input type="submit" id="submit" value="${editConfiguration.submitLabel}" aria-label="${editConfiguration.submitLabel}" role="button"/>
     <span class="or"> ${i18n().or} </span>
     <a title="${i18n().cancel_title}" href="${cancelUrl}">${i18n().cancel_link}</a>
 
