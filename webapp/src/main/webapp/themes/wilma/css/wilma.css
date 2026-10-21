@@ -861,7 +861,7 @@ ul#classes-in-classgroup a:hover,
 ul#classes-in-classgroup a.selected,
 ul#vgraph-classes a:hover,
 ul#vgraph-classes a.selected {
-    background: url(../images/arrow_darkened.gif) 0 10px no-repeat;
+    background: url(../images/arrow.gif) 0 10px no-repeat;
     color: #0C5E7F;
 }
 svg text:hover {
@@ -1203,7 +1203,7 @@ ul#individual-tools-people li a {
 }
 ul#find-filters a:hover,
 ul#find-filters a.selected {
-    background: url(../images/arrow_darkened.gif) 0 6px no-repeat;
+    background: url(../images/arrow.gif) 0 6px no-repeat;
     color: #0C5E7F;
 }
 /* RESEARCHERS ------>  */
@@ -1216,7 +1216,7 @@ ul#find-filters a.selected {
     font-size: 1.25em;
     color: #12739D;
     font-weight: normal;
-    background: url(../images/arrow_darkened.gif) 140px 27px no-repeat;
+    background: url(../images/arrow.gif) 140px 27px no-repeat;
 }
 #researchers p {
     font-size: 1.125em;
@@ -1269,7 +1269,7 @@ ul#vgraph-classes li {
 }
 ul#browse-classes a:hover,
 ul#browse-classes a.selected {
-    background: url(../images/arrow_darkened.gif) 4px 5px no-repeat;
+    background: url(../images/arrow.gif) 4px 5px no-repeat;
     color: #0C5E7F;
 }
 ul#browse-classes .count-classes {
@@ -1625,7 +1625,7 @@ section.verbosePropertyListing {
     color: #5E6363;
 }
 section.verbosePropertyListing span {
-    color: #9bae5a;
+    color: #536520;
 }
 h2#email .verbosePropertyListing,
 h2#phoneNumber .verbosePropertyListing {

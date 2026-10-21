@@ -11,7 +11,7 @@ ul#vgraph-classes li {
 }
 ul#browse-classes a:hover,
 ul#browse-classes a.selected {
-    background: url(../images/arrow_darkened.gif) 4px 5px no-repeat;
+    background: url(../images/arrow.gif) 4px 5px no-repeat;
     color: #0C5E7F;
 }
 ul#browse-classes .count-classes {
