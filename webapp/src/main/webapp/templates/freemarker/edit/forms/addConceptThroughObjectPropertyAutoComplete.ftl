@@ -75,7 +75,7 @@
             <#--The above section should be autocomplete-->
 
             <p>
-                <input type="submit" id="submit" value="${submitButtonText}" role="button" disabled="disabled"/>
+                <input type="submit" id="submit" value="${submitButtonText}" aria-label="${submitButtonText}" role="button" disabled="disabled"/>
 
                 <span class="or"> ${i18n().or} </span>
                 <a title="${i18n().cancel_title}" class="cancel" href="${cancelUrl}">${i18n().cancel_link}</a>

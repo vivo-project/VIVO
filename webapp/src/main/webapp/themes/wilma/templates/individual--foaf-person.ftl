@@ -53,12 +53,12 @@
                          aria-hidden="true"/>
                 </button>
   				<#if checkNamesResult?has_content >
-                    <button id="qrIcon" title="${individual.uri}" class="nostyle" aria-label="${i18n().qr_icon_label}">
+                    <button type="button" id="qrIcon" title="${individual.uri}" class="nostyle" aria-label="${i18n().qr_icon_label}">
 					    <img src="${urls.images}/individual/qr_icon.png" alt="${i18n().qr_icon}" aria-hidden="true" />
                     </button>
 
                 	<span id="qrCodeImage" class="hidden">${qrCodeLinkedImage!}
-						<a class="qrCloseLink" href="#" title="${i18n().qr_code}" aria-hidden="true">${i18n().close_capitalized}</a>
+						<button type="button" class="qrCloseLink nostyle">${i18n().close_capitalized}</button>
 					</span>
 				</#if>
             </span>
@@ -78,13 +78,13 @@
                 <#if claimSources?seq_contains("doi")>
                     <form action="${urls.base}/createAndLink/doi" method="get" style="float: left;">
                         <input type="hidden" name="profileUri" value="${individual.uri}" />
-                        <input type="submit" class="submit" value="${i18n().claim_publications_by_doi}" />
+                        <input type="submit" class="submit" value="${i18n().claim_publications_by_doi}" aria-label="${i18n().claim_publications_by_doi?html}" />
                     </form>
                 </#if>
                 <#if claimSources?seq_contains("pmid")>
                     <form action="${urls.base}/createAndLink/pmid" method="get" style="float: right;">
                         <input type="hidden" name="profileUri" value="${individual.uri}" />
-                        <input type="submit" class="submit" value="${i18n().claim_publications_by_pmid}" />
+                        <input type="submit" class="submit" value="${i18n().claim_publications_by_pmid}" aria-label="${i18n().claim_publications_by_pmid?html}" />
                     </form>
                 </#if>
             </#if>

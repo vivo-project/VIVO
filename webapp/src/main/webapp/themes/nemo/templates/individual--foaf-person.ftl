@@ -102,13 +102,13 @@ Add divs and wrapper to create funnelback basket controls. MUST BE REMOVED BEFOR
 									<img title="${individual.uri}" src="${urls.images}/individual/uriIcon.gif" alt="${i18n().uri_icon}" aria-hidden="true" />
 								</button>
 								<#if checkNamesResult?has_content >
-									<button id="qrIcon" class="nostyle" aria-label="${i18n().uri_icon_label}">
+									<button type="button" id="qrIcon" class="nostyle" aria-label="${i18n().qr_icon_label}">
 										<img src="${urls.images}/individual/qr_icon.png" alt="${i18n().qr_icon}" aria-hidden="true" />
 									</button>
 									<span id="qrCodeImage" class="hidden">${qrCodeLinkedImage!} 
-										<a class="qrCloseLink" href="#"  title="${i18n().qr_code}">
+										<button type="button" class="qrCloseLink nostyle">
 											${i18n().close_capitalized}
-										</a>
+										</button>
 									</span>
 								</#if>
 							</span>

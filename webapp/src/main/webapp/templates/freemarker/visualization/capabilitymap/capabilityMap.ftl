@@ -58,9 +58,9 @@ ${stylesheets.add(
                 <input name="query" id="query" size="34" value="" onfocus="" accesskey="q" onblur="" type="text" onkeydown="queryKeyDown(event);" aria-label="${i18n().capability_map_input?js_string}">
                 <label id="cutofflabel" for="queryCutoff">Cutoff:</label>
                 <input id="queryCutoff" name="queryCutoff" type="text" title="Cutoff" size="4" value="10">
-                <input value="${i18n().cap_map_search}" type="submit" id="add" type="button" onclick="addKwd();">
-                <input value="${i18n().cap_map_search_expand}" type="submit" id="sExpand" onclick="expandLastQuery = 1; addKwd();">
-                <input value="${i18n().cap_map_reset}" id="resetButton" type="submit" onclick="reset()" disabled>
+                <input value="${i18n().cap_map_search?html}" aria-label="${i18n().cap_map_search?html}" type="submit" id="add" onclick="addKwd();">
+                <input value="${i18n().cap_map_search_expand?html}" aria-label="${i18n().cap_map_search_expand?html}" type="submit" id="sExpand" onclick="expandLastQuery = 1; addKwd();">
+                <input value="${i18n().cap_map_reset?html}" aria-label="${i18n().cap_map_reset?html}" id="resetButton" type="submit" onclick="reset()" disabled>
                 <!-- a style="display:inline-block; float:right; line-height:32px; height:32px; cursor:pointer" onclick="showhideadvanced(this)">Show advanced</a -->
             </span>
         </p>

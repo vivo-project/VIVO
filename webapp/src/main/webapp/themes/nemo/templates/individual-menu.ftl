@@ -28,7 +28,7 @@
 	        <input type="hidden" name="switchToDisplayModel" value="1">
 	        <input type="hidden" name="editForm" value="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManagePageGenerator">
 	   		<input type="hidden" name="addMenuItem" value="true" />
-	   		<input id="submit" value="Add new menu page" role="button" type="submit" >
+            <input id="submit" value="Add new menu page" aria-label="Add new menu page" type="submit" >
 	   		<input type="hidden" name="returnURL" value="${returnURL?url}" />
 	   	<#if verbosePropertySwitch.url?contains("pageManagement")>
 	   	    <span class="or"> ${i18n().or} </span>

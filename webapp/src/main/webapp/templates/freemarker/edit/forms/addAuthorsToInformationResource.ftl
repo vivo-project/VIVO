@@ -114,7 +114,7 @@
         <label class="inline" for="Organization">${i18n().organization_capitalized}</label>
     </div>
 
-    <section id="personFields" role="personContainer">
+    <section id="personFields">
     		<#--These wrapper paragraph elements are important because javascript hides parent of these fields, since last name
     		should be visible even when first name/middle name are not, the parents should be separate for each field-->
     		<p class="inline">
@@ -150,7 +150,7 @@
         
 
     </section>
-    <section id="organizationFields" role="organization">
+    <section id="organizationFields">
     		<p class="inline">
         <label for="orgName">${i18n().organization_name_capitalized} <span class='requiredHint'> *</span></label>
         <input size="38"  type="text" id="orgName" name="orgName" value="${orgNameValue}" />

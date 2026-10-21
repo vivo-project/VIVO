@@ -48,7 +48,7 @@
                             <a class="filter-search filter-default" aria-expanded="false" href="#" title="${i18n().intro_filtersearch}">
                                 <span class="displace">${i18n().intro_filtersearch}</span>
                             </a>
-                            <input type="submit" value="${i18n().search_button}" class="search" />
+                            <input type="submit" value="${i18n().search_button}" aria-label="${i18n().search_button}" class="search" />
                             <input type="hidden" name="filters_category"  value="" autocapitalize="off" />
                         </div>
                         

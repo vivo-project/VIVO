@@ -629,12 +629,12 @@ var ipretResults = function(results) {
 var disableSubButton = function() {
     subButton.disabled = true;
     $("#sExpand").attr("disabled", true);
-    $("#resetButton").val(i18nStringsCap.pause);
+    $("#resetButton").val(i18nStringsCap.pause).attr("aria-label", i18nStringsCap.pause);
 }
 var enableSubButton = function() {
     subButton.disabled = false;
     $("#sExpand").attr("disabled", false);
-    $("#resetButton").val(i18nStringsCap.reset);
+    $("#resetButton").val(i18nStringsCap.reset).attr("aria-label", i18nStringsCap.reset);
 }
 var getLinkColor = function() {
     var linkColor = $("#linkColor").val();
@@ -877,7 +877,7 @@ var render = function() {
     $.each(g.getCapabilities(), function(i, c) {
         $("#log_printout")
             .append($("<li/>")
-                .append($("<a> " + decodeURI(c.term) + "</a>")
+                .append($("<a/>").text(" " + decodeURI(c.term))
                     .on("click", function() {
                         highlight(c.term);
                         detailsPane.showDetails("capability", c.term);
@@ -886,6 +886,7 @@ var render = function() {
                 )
                 .prepend($("<input/>").attr("type", "checkbox")
                     .attr("name", c.term)
+                    .attr("aria-label", decodeURI(c.term))
                 )
             );
     });

@@ -161,9 +161,9 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
       <p class="submit">
         <#if editMode == "edit">
-            <input type="submit" id="submit" name="submit-${formAction}" value="${submitButtonText}" class="submit" />
+            <input type="submit" id="submit" name="submit-${formAction}" value="${submitButtonText}" aria-label="${submitButtonText}" class="submit" />
         <#else>
-            <input type="submit" id="submit" name="submit-${formAction}" value="${submitButtonText}" class="submit" />
+            <input type="submit" id="submit" name="submit-${formAction}" value="${submitButtonText}" aria-label="${submitButtonText}" class="submit" />
         </#if>
 
         <span class="or"> ${i18n().or} </span><a class="cancel" href="${editConfiguration.cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>

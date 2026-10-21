@@ -46,7 +46,7 @@
 	</div>
     <br />
 
-    <input type="submit" id="submit" value="${editConfiguration.submitLabel}" role="button"/>
+    <input type="submit" id="submit" value="${editConfiguration.submitLabel}" aria-label="${editConfiguration.submitLabel}" role="button"/>
     <span class="or"> ${i18n().or} </span>
     <a title="${i18n().cancel_title}" href="${cancelUrl}">${i18n().cancel_link}</a>
 

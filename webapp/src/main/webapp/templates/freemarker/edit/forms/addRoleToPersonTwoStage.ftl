@@ -128,7 +128,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <section id="add${roleDescriptor?cap_first}RoleToPersonTwoStage" role="region">
 
-    <form id="add${roleDescriptor?cap_first}RoleToPersonTwoStage" class="customForm noIE67" action="${submitUrl}"  role="add/edit grant role">
+    <form id="add${roleDescriptor?cap_first}RoleToPersonTwoStage" class="customForm noIE67" action="${submitUrl}">
 
        <p class="inline">
         <label for="typeSelector">${typeSelectorLabel?cap_first}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
@@ -207,7 +207,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <#--        </div> -->
         <p class="submit">
             <input type="hidden" id="editKey" name="editKey" value="${editKey}" />
-            <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> ${i18n().or} </span><a class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
+            <input type="submit" id="submit" value="${submitButtonText}" aria-label="${submitButtonText}"/><span class="or"> ${i18n().or} </span><a class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
         </p>
 
         <p id="requiredLegend" class="requiredHint">* ${i18n().required_fields}</p>

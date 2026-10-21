@@ -58,12 +58,12 @@
 							<img title="${individual.uri}" src="${urls.images}/individual/uriIcon.gif" alt="${i18n().uri_icon}" aria-hidden="true" />
 						</button>
 						<#if checkNamesResult?has_content >
-							<button id="qrIcon" class="nostyle" aria-label="${i18n().uri_icon_label}">
+							<button type="button" id="qrIcon" class="nostyle" aria-label="${i18n().qr_icon_label}">
 							<img src="${urls.images}/individual/qr_icon.png" alt="${i18n().qr_icon}" aria-hidden="true" />
 							</button>
 								<div id="qrCodeContainer">
 									<span id="qrCodeImage" class="bottomLeftAnchor hidden">${qrCodeLinkedImage!}
-										<a class="qrCloseLink" href="#"  title="${i18n().qr_code}">${i18n().close_capitalized}</a>
+										<button type="button" class="qrCloseLink nostyle">${i18n().close_capitalized}</button>
 									</span>
 								</div>
 						</#if>
@@ -116,13 +116,13 @@
 				<#if claimSources?seq_contains("doi")>
 					<form action="${urls.base}/createAndLink/doi" method="get" style="display: inline-block;">
 						<input type="hidden" name="profileUri" value="${individual.uri}" />
-						<input type="submit" class="submit" value="${i18n().claim_publications_by_doi}" />
+						<input type="submit" class="submit" value="${i18n().claim_publications_by_doi}" aria-label="${i18n().claim_publications_by_doi?html}" />
 					</form>
 				</#if>
 				<#if claimSources?seq_contains("pmid")>
 					<form action="${urls.base}/createAndLink/pmid" method="get" style="display: inline-block;">
 						<input type="hidden" name="profileUri" value="${individual.uri}" />
-						<input type="submit" class="submit" value="${i18n().claim_publications_by_pmid}" />
+						<input type="submit" class="submit" value="${i18n().claim_publications_by_pmid}" aria-label="${i18n().claim_publications_by_pmid?html}" />
 					</form>
 				</#if>
 			</#if>

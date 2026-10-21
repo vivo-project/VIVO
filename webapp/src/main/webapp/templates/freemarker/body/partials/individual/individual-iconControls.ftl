@@ -6,11 +6,11 @@
 	<img title="${individual.uri}" src="${urls.images}/individual/share-uri-icon.png" alt="${i18n().share_the_uri}" aria-hidden="true" />
 </button>
 <#if checkNamesResult?has_content >
-    <button id="qrIcon" class="nostyle" aria-label="${i18n().uri_icon_label}">
+    <button type="button" id="qrIcon" class="nostyle" aria-label="${i18n().qr_icon_label}">
 		<img src="${urls.images}/individual/qr-code-icon.png" alt="${i18n().qr_icon}" aria-hidden="true" />
 	</button>
 	<span id="qrCodeImage" class="hidden">${qrCodeLinkedImage!}
-		<a class="qrCloseLink" href="#"  title="${i18n().qr_code}">${i18n().close_capitalized}</a>
+		<button type="button" class="qrCloseLink nostyle">${i18n().close_capitalized}</button>
 	</span>
 </#if>
 
