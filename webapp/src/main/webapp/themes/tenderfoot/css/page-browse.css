@@ -26,7 +26,7 @@ ul#alpha-browse-individuals {
 }
 ul#alpha-browse-individuals a:hover,
 ul#alpha-browse-individuals a.selected {
-    background: url(../images/arrowSmall-darkened.gif) -3px 7px no-repeat;
+    background: url(../images/arrowSmall.gif) -3px 7px no-repeat;
     color: #0C5E7F;
 }
 ul#alpha-browse-individuals .count-classes,
