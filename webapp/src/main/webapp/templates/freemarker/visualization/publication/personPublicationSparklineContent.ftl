@@ -169,7 +169,7 @@
                         var pubDisplay = "${i18n().publications?js_string}";
                     }
 
-                    $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).attr("class", "grey-text").append("<span style='color: #2485AE;'> "+ pubDisplay +"<br/></span>");
+                    $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).attr("class", "grey-text").append("<span style='color: #12739D;'> "+ pubDisplay +"<br/></span>");
 
                     var sparksText = '  ${i18n().from?js_string} <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}'
                                         + ' - ${sparklineVO.latestRenderedPublicationYear?c}</span>';

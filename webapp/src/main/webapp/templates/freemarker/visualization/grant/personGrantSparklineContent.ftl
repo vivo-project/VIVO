@@ -135,7 +135,7 @@
                         var grantDisplay = "${i18n().grants?js_string}";
                     }
 
-                    $('#${sparklineContainerID} td.sparkline_number').text(totalGrants).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + grantDisplay + " <br/></span>");
+                    $('#${sparklineContainerID} td.sparkline_number').text(totalGrants).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #12739D;'> " + grantDisplay + " <br/></span>");
 
                     var sparksText = '  ${i18n().within_last_10_years?js_string}';
 
@@ -164,7 +164,7 @@
                         var grantDisplay = "${i18n().grants?js_string}";
                     }
 
-                    $('#${sparklineContainerID} td.sparkline_number').text(totalGrants).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + grantDisplay + " <br/></span>");
+                    $('#${sparklineContainerID} td.sparkline_number').text(totalGrants).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #12739D;'> " + grantDisplay + " <br/></span>");
 
                     var sparksText = '  from <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}'
                                         + ' through ${sparklineVO.latestRenderedGrantYear?c}</span>';
