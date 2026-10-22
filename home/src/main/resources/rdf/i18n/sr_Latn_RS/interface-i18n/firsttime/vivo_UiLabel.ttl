@@ -6465,7 +6465,7 @@ uil-data:QUARTERLY.VIVO
 uil-data:refresh_config.VIVO
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;
-        rdfs:label       "Ponovo učitaj konfiguraciju."@en-US ;
+        rdfs:label       "Ponovo učitaj konfiguraciju."@sr-Latn-RS ;
         uil:hasApp       "VIVO" ;
         uil:hasKey       "refresh_config" ;
         uil:hasPackage   "VIVO-languages" .

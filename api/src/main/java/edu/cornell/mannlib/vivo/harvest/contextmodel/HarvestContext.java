@@ -11,16 +11,11 @@ import edu.cornell.mannlib.vivo.harvest.configmodel.ExportModule;
 public class HarvestContext {
 
     public static final String DEFAULT_DISPLAY_LANGUAGE = "en-US";
-
-    public static List<ExportModule> modules = new ArrayList<>();
-
-    public static String logFileLocation;
-
-    public static boolean configured = false;
-
     public static final List<String> REQUIRED_PROPERTIES = Collections.unmodifiableList(
         Arrays.asList("harvester.directory", "harvester.configuration", "workflow.log.directory"));
-
+    public static List<ExportModule> modules = new ArrayList<>();
+    public static String logFileLocation;
+    public static boolean configured = false;
 
     public static void resolveLabelsBasedOnLocale(VitroRequest vreq) {
         String locale = vreq.getLocale().toLanguageTag();

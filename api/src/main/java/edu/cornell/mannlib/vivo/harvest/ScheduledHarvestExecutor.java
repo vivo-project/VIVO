@@ -20,6 +20,8 @@ import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelNames;
 import edu.cornell.mannlib.vivo.harvest.configmodel.ScheduledTaskMetadata;
 import edu.cornell.mannlib.vivo.harvest.contextmodel.HarvestContext;
 import edu.cornell.mannlib.vivo.scheduler.Scheduled;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
@@ -29,6 +31,8 @@ import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 
 public class ScheduledHarvestExecutor {
+
+    private static final Log log = LogFactory.getLog(ScheduledHarvestExecutor.class);
 
     private final DateTimeFormatter dateFilterPattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -42,35 +46,29 @@ public class ScheduledHarvestExecutor {
             HarvestContext.modules.stream()
                 .filter(module -> module.getScheduledTasks().containsKey(scheduledTaskUri))
                 .findFirst().ifPresentOrElse(module -> {
-                    InternalScheduleOperations.removeScheduledTask(scheduledTaskUri);
                     ScheduledTaskMetadata taskMetadata = module.getScheduledTasks().get(scheduledTaskUri);
 
                     Path modulePath =
                         Paths.get(ConfigurationProperties.getInstance().getProperty("harvester.directory"),
                             module.getPath()).normalize();
 
-                    HarvestJobExecutor.runAsync(
+                    boolean started = HarvestJobExecutor.runAsync(
                         InternalScheduleOperations.sanitizeModuleName(module.getName()),
                         commandToRun, modulePath, taskMetadata.getTaskName()
                     );
 
-                    InternalScheduleOperations.saveScheduledTask(
-                        module,
-                        taskMetadata.getTaskName(),
-                        RecurrenceType.valueOf(taskMetadata.getRecurrenceType()),
-                        command.stored, taskMetadata.getParameters());
+                    if (started) {
+                        InternalScheduleOperations.saveScheduledTask(
+                            module,
+                            taskMetadata.getTaskName(),
+                            RecurrenceType.valueOf(taskMetadata.getRecurrenceType()),
+                            command.stored, taskMetadata.getParameters());
+                    } else {
+                        log.warn("Scheduled task " + taskMetadata.getTaskName() + " did not start because module "
+                            + module.getName() + " is already running, it stays due and will be retried.");
+                    }
                 }, () -> InternalScheduleOperations.removeScheduledTask(scheduledTaskUri));
         });
-    }
-
-    private static class ScheduledCommand {
-        private final String stored;
-        private final String resolved;
-
-        ScheduledCommand(String stored, String resolved) {
-            this.stored = stored;
-            this.resolved = resolved;
-        }
     }
 
     private Map<String, ScheduledCommand> getScheduledWorkflows() {
@@ -133,7 +131,9 @@ public class ScheduledHarvestExecutor {
 
             switch (recurrence) {
                 case DAILY:
-                    shouldRun = !today.isBefore(referenceDate);
+                    shouldRun =
+                        !today.isBefore(referenceDate) &&
+                            ChronoUnit.DAYS.between(referenceDate, today) >= 1;
                     break;
 
                 case WEEKLY:
@@ -177,5 +177,15 @@ public class ScheduledHarvestExecutor {
     private OntModel getOntModel() {
         ContextModelAccess cma = ModelAccess.getInstance();
         return cma.getOntModel(ModelNames.SCHEDULED_WORKFLOWS);
+    }
+
+    private static class ScheduledCommand {
+        private final String stored;
+        private final String resolved;
+
+        ScheduledCommand(String stored, String resolved) {
+            this.stored = stored;
+            this.resolved = resolved;
+        }
     }
 }

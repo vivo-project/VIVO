@@ -22,8 +22,8 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Red
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.web.URLEncoder;
-import edu.cornell.mannlib.vivo.harvest.HarvestContextSetup;
 import edu.cornell.mannlib.vivo.harvest.CommandAssembler;
+import edu.cornell.mannlib.vivo.harvest.HarvestContextSetup;
 import edu.cornell.mannlib.vivo.harvest.HarvestJobExecutor;
 import edu.cornell.mannlib.vivo.harvest.InternalScheduleOperations;
 import edu.cornell.mannlib.vivo.harvest.RecurrenceType;
