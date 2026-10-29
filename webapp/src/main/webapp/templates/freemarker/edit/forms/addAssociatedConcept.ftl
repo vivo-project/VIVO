@@ -88,8 +88,8 @@
 
         <script type="text/javascript">
             existingConceptsData.push({
-                "conceptNodeUri": "${existingConcept.conceptURI}",
-                "conceptLabel": "${existingConcept.conceptLabel}"
+                "conceptNodeUri": "${existingConcept.conceptURI?js_string}",
+                "conceptLabel": "${existingConcept.conceptLabel?js_string}"
             });
         </script>
 
@@ -164,13 +164,13 @@
 <script type="text/javascript">
 var customFormData = {
         dataServiceUrl: '${urls.base}/conceptSearchService',
-        subjectUri: '${editConfiguration.subjectUri}',
-        predicateUri: '${editConfiguration.predicateUri}',
-        inversePredicateUri: '${inversePredicate}'
+        subjectUri: '${editConfiguration.subjectUri?js_string}',
+        predicateUri: '${editConfiguration.predicateUri?js_string}',
+        inversePredicateUri: '${inversePredicate?js_string}'
 };
 var vocabSpecificDisplay = {};
 <#list vocabSpecificDisplay?keys as vocab>
-vocabSpecificDisplay["${vocab}"] = "${vocabSpecificDisplay[vocab]}";
+vocabSpecificDisplay["${vocab?js_string}"] = "${vocabSpecificDisplay[vocab]?js_string}";
 </#list>
 var i18nStrings = {
     vocServiceUnavailable: '${i18n().vocabulary_service_unavailable?js_string}',

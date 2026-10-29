@@ -199,25 +199,25 @@
 </script>
 </#if>
 <script>
-    var individualLocalName = "${individual.localName}";
+    var individualLocalName = "${individual.localName?js_string}";
     var imagesPath = '${urls.images}';
 </script>
 <#assign rdfUrl = individual.rdfUrl>
 
 <#if rdfUrl??>
     <script>
-        var individualRdfUrl = '${rdfUrl}';
+        var individualRdfUrl = '${rdfUrl?js_string}';
     </script>
 </#if>
 <script type="text/javascript">
-var individualUri = '${individual.uri!}';
-var individualPhoto = '${individual.thumbNail!}';
-var exportQrCodeUrl = '${urls.base}/qrcode?uri=${individual.uri!}';
+var individualUri = '${individual.uri!?js_string}';
+var individualPhoto = '${individual.thumbNail!?js_string}';
+var exportQrCodeUrl = '${urls.base}/qrcode?uri=${individual.uri!?js_string}';
 var baseUrl = '${urls.base}';
 var profileTypeData = {
     processingUrl: '${urls.base}/edit/primitiveRdfEdit',
-    individualUri: '${individual.uri!}',
-    defaultProfileType: '${profileType!}'
+    individualUri: '${individual.uri!?js_string}',
+    defaultProfileType: '${profileType!?js_string}'
 };
 var i18nStrings = {
     errorProcessingTypeChange: '${i18n().error_processing_type_change?js_string}',

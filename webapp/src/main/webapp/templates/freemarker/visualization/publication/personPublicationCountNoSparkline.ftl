@@ -20,15 +20,15 @@
                 var onlyUnknownYearPublications = false;
 
                 var data = new google.visualization.DataTable();
-                data.addColumn('number', '${i18n().year_capitalized}');
-                data.addColumn('number', '${i18n().publications_capitalized}');
+                data.addColumn('number', '${i18n().year_capitalized?js_string}');
+                data.addColumn('number', '${i18n().publications_capitalized?js_string}');
                 data.addRows(${sparklineVO.yearToEntityCountDataTable?size});
 
                 var knownYearPublicationCounts = 0;
 
                 <#list sparklineVO.yearToEntityCountDataTable as yearToPublicationCountDataElement>
-                    data.setValue(${yearToPublicationCountDataElement.yearToEntityCounter}, 0, ${yearToPublicationCountDataElement.year});
-                    data.setFormattedValue(${yearToPublicationCountDataElement.yearToEntityCounter}, 0, '${yearToPublicationCountDataElement.year}');
+                    data.setValue(${yearToPublicationCountDataElement.yearToEntityCounter}, 0, ${yearToPublicationCountDataElement.year?js_string});
+                    data.setFormattedValue(${yearToPublicationCountDataElement.yearToEntityCounter}, 0, '${yearToPublicationCountDataElement.year?js_string}');
                     data.setValue(${yearToPublicationCountDataElement.yearToEntityCounter}, 1, ${yearToPublicationCountDataElement.currentEntitiesCount});
                     knownYearPublicationCounts += ${yearToPublicationCountDataElement.currentEntitiesCount};
                 </#list>
@@ -59,14 +59,14 @@
 
                 var td1Text = totalPublicationCount;
                 var td2Text = "";
-                var infoImgText = "<img class='infoIcon' src='" + infoIconSrc + "' height='14px' width='14px' alt='${i18n().info_icon}' title='${i18n().numbers_based_on_publications_in_vivo}' />";
+                var infoImgText = "<img class='infoIcon' src='" + infoIconSrc + "' height='14px' width='14px' alt='${i18n().info_icon?js_string}' title='${i18n().numbers_based_on_publications_in_vivo?js_string}' />";
 
                 if ( !onlyUnknownYearPublications ) {
                     if ( td1Text == tenYearCount ) {
                         td2Text += "${i18n().last_ten_full_years?js_string} " ;
                     }
                     else {
-                        td2Text += "<strong>" + tenYearCount + "</strong> ${i18n().last_ten_full_years} " ;
+                        td2Text += "<strong>" + tenYearCount + "</strong> ${i18n().last_ten_full_years?js_string} " ;
                     }
 
                     if ( tenYearCount < 100 ) {
@@ -74,7 +74,7 @@
                     }
                 }
                 else {
-                    td2Text += "total <img class='infoIcon' src='" + infoIconSrc + "' height='14px' width='14px' alt='${i18n().info_icon}' title='${i18n().numbers_based_on_publications_in_vivo}' />";
+                    td2Text += "total <img class='infoIcon' src='" + infoIconSrc + "' height='14px' width='14px' alt='${i18n().info_icon?js_string}' title='${i18n().numbers_based_on_publications_in_vivo?js_string}' />";
                 }
 
                 $('#${sparklineContainerID} td#totalPubs').html(td1Text);

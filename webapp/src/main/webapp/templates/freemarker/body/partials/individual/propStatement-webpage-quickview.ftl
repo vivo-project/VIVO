@@ -61,7 +61,7 @@
         </#if>
 -->
 <#-- Here is the placeholder link -->
-    <a href="${statement.url}" title="${i18n().link_text}">${linkText}</a><script>$("a[title='${i18n().link_text}']").parent('li').css("float","none");</script>
+    <a href="${statement.url}" title="${i18n().link_text}">${linkText}</a><script>$("a[title='${i18n().link_text?js_string}']").parent('li').css("float","none");</script>
 <#else>
     <a href="${profileUrl(statement.uri("link"))}" title="${i18n().link_name}">${statement.linkName}</a> (${i18n().no_url_provided})
 </#if>
@@ -70,9 +70,9 @@
 
 <script>
 
-$('img#img-${identifier}').on("load", function(){
-    $('span#span-${identifier}').hide();
-    $('img#img-${identifier}').fadeIn();
-    $('img#icon-${identifier}').fadeIn();
+$('img#img-${identifier?js_string}').on("load", function(){
+    $('span#span-${identifier?js_string}').hide();
+    $('img#img-${identifier?js_string}').fadeIn();
+    $('img#icon-${identifier?js_string}').fadeIn();
 });
 </script>
