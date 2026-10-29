@@ -109,22 +109,22 @@
         <label class="inline" for="Organization">${i18n().organization_capitalized}</label>
     </div>
 
-    <section id="personFields" role="personContainer">
+    <section id="personFields">
     		<#--These wrapper paragraph elements are important because javascript hides parent of these fields, since last name
     		should be visible even when first name/middle name are not, the parents should be separate for each field-->
         <p class="inline">
             <label for="lastName">${i18n().last_name} <span class='requiredHint'> *</span></label>
-            <input class="acSelector" size="35"  type="text" id="lastName" name="lastName" value="${lastNameValue}" role="input" />
+            <input class="acSelector" size="35"  type="text" id="lastName" name="lastName" value="${lastNameValue}" />
         </p>
 
         <p class="inline">
             <label for="firstName">${i18n().first_name} ${requiredHint} ${initialHint}</label>
-            <input  size="20"  type="text" id="firstName" name="firstName" value="${firstNameValue}"  role="input" />
+            <input  size="20"  type="text" id="firstName" name="firstName" value="${firstNameValue}" />
         </p>
 
         <p class="inline">
             <label for="middleName">${i18n().middle_name} <span class='hint'>(${i18n().initial_okay})</span></label>
-            <input  size="20"  type="text" id="middleName" name="middleName" value="${middleNameValue}"  role="input" />
+            <input  size="20"  type="text" id="middleName" name="middleName" value="${middleNameValue}" />
         </p>
 
         <div>
@@ -140,15 +140,15 @@
                 <label>${i18n().selected_editor}:&nbsp;</label>
                 <span class="acSelectionInfo" id="selectedEditorName"></span>
                 <a href="${urls.base}/individual?uri=" id="personLink" class="verifyMatch"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized})</a>
-                <input type="hidden" id="personUri" name="personUri" value=""  role="input" /> <!-- Field value populated by JavaScript -->
+                <input type="hidden" id="personUri" name="personUri" value="" /> <!-- Field value populated by JavaScript -->
             </p>
         </div>
     </section>
 
-    <section id="organizationFields" role="organization">
+    <section id="organizationFields">
     		<p class="inline">
         <label for="orgName">${i18n().organization_name_capitalized} <span class='requiredHint'> *</span></label>
-        <input size="38"  type="text" id="orgName" name="orgName" value="${orgNameValue}" role="input" />
+        <input size="38"  type="text" id="orgName" name="orgName" value="${orgNameValue}" />
         </p>
 
         <div id="selectedOrg" class="acSelection">
@@ -156,19 +156,19 @@
                 <label>${i18n().selected_organization}:&nbsp;</label>
                 <span  id="selectedOrgName"></span>
                 <a href="${urls.base}/individual?uri=" id="orgLink"  title="${i18n().verify_match_capitalized}">(${i18n().verify_match_capitalized})</a>
-                <input type="hidden" id="orgUri" name="orgUri" value=""  role="input" /> <!-- Field value populated by JavaScript -->
+                <input type="hidden" id="orgUri" name="orgUri" value="" /> <!-- Field value populated by JavaScript -->
             </p>
         </div>
     </section>
 
-    <input type="hidden" id="label" name="label" value=""  role="input" />  <!-- Field value populated by JavaScript -->
+    <input type="hidden" id="label" name="label" value="" />  <!-- Field value populated by JavaScript -->
 
 
-        <input type="hidden" name="rank" id="rank" value="${newRank}" role="input" />
+        <input type="hidden" name="rank" id="rank" value="${newRank}" />
 
         <p class="submit">
-            <input type="hidden" name = "editKey" value="${editKey}" role="input" />
-            <input type="submit" id="submit" value="${i18n().add_editor}" role="button" role="input" />
+            <input type="hidden" name = "editKey" value="${editKey}" />
+            <input type="submit" id="submit" value="${i18n().add_editor}" role="button" />
 
             <span class="or"> ${i18n().or} </span>
 

@@ -98,7 +98,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <section id="personHasAwardOrHonor" role="region">
 
-    <form id="personHasAwardOrHonor" class="customForm noIE67" action="${submitUrl}"  role="add/edit AwardOrHonor">
+    <form id="personHasAwardOrHonor" class="customForm noIE67" action="${submitUrl}">
     <p>
         <label for="relatedIndLabel">${i18n().award_honor_name} ${requiredHint}</label>
             <input class="acSelector" size="50"  type="text" id="award" acGroupName="award" name="awardLabel" value="${awardLabelValue}">
@@ -165,7 +165,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>
 
     <p class="submit">
-         <input type="submit" class="submit" value="${submitButtonText}"/><span class="or"> ${i18n().or} </span>
+         <input type="submit" class="submit" value="${submitButtonText}" aria-label="${submitButtonText}"/><span class="or"> ${i18n().or} </span>
          <a class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
      </p>
 

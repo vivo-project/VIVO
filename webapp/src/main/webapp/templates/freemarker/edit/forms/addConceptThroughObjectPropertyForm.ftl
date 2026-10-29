@@ -13,18 +13,18 @@
     <#if rangeOptionsExist  = true >
         <#assign rangeOptionKeys = rangeOptions?keys />
         <form class="editForm" action = "${submitUrl}">
-            <input type="hidden" name="editKey" id="editKey" value="${editKey}" role="input" />
+            <input type="hidden" name="editKey" id="editKey" value="${editKey}" />
             <#if editConfiguration.propertyPublicDescription?has_content>
                 <p>${editConfiguration.propertyPublicDescription}</p>
              </#if>
-            <select id="objectVar" name="objectVar" role="select">
+            <select id="objectVar" name="objectVar">
                 <#list rangeOptionKeys as key>
                  <option value="${key}" <#if editConfiguration.objectUri?has_content && editConfiguration.objectUri = key>selected</#if> role="option">${rangeOptions[key]}</option>
                 </#list>
             </select>
 
             <p>
-                <input type="submit" id="submit" value="${editConfiguration.submitLabel}" role="button "/>
+                <input type="submit" id="submit" value="${editConfiguration.submitLabel}" aria-label="${editConfiguration.submitLabel}" role="button "/>
                 <span class="or"> ${i18n().or} </span>
                 <a title="${i18n().cancel_title}" class="cancel" href="${cancelUrl}">${i18n().cancel_link}</a>
             </p>

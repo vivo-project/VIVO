@@ -97,7 +97,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <section id="addPresenterRoleToPerson" role="region">
 
-    <form id="addPresenterRoleToPerson" class="customForm noIE67" action="${submitUrl}"  role="add/edit Presentation">
+    <form id="addPresenterRoleToPerson" class="customForm noIE67" action="${submitUrl}">
     <p class="inline">
       <label for="presentationType">${i18n().presentation_type}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
       <#assign presentationTypeOpts = editConfiguration.pageData.presentationType />
@@ -161,7 +161,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>
 
     <p class="submit">
-        <input type="submit" class="submit" value="${submitButtonText}"/><span class="or"> ${i18n().or} </span>
+        <input type="submit" class="submit" value="${submitButtonText}" aria-label="${submitButtonText}"/><span class="or"> ${i18n().or} </span>
         <a class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
     </p>
 

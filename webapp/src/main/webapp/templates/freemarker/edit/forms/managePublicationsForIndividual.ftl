@@ -32,7 +32,7 @@ ${i18n().check_pubs_to_exclude}
             ${sub}s
         </#if>
     </h4>
-        <section id="pubsContainer" role="container">
+        <section id="pubsContainer">
         <#assign pubs = publications[sub]>
         <ul >
             <#list pubs as pub>
