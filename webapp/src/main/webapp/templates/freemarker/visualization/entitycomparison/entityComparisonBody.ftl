@@ -74,7 +74,7 @@
                 	<span id="organizations-filter" class="filter-option">${i18n().organizations_capitalized}</span> |
                 	<span id="people-filter" class="filter-option">${i18n().people_capitalized}</span> |
                   <span id="no-filter" class="filter-option">${i18n().view_all}</span>
-                	<img class="filterInfoIcon" src="${urls.images}/iconInfo.png"
+                    <img class="filterInfoIcon" src="${urls.images}/iconInfo.png"
                 		 alt="${i18n().info_icon}"
                 		 title="${i18n().organization_hierarchy_note(organizationLabel)}" />
                 </div>

@@ -166,7 +166,7 @@ div#profileTypeContainer select {
     display:inline-block;
     padding: .5em;
     background: none repeat scroll 0 0 #FFFFFF;
-    border: 1px solid #E0DFDF;
+    border: 1px solid #898989;
     border-radius: 5px 5px 5px 5px;
     font-size: 14px;
     margin-bottom: 0.8em;
@@ -193,7 +193,7 @@ ul#individual-personInPosition {
     padding-left: 10px;
     margin: 10px 0 0 0;
 }
-ul#individual-hasResearchArea li {
+ul.individual-hasResearchArea li {
     float: left;
     padding-right: 10px;
     margin-right: 10px;
@@ -201,7 +201,7 @@ ul#individual-hasResearchArea li {
     border-right: 1px solid #5e6363 ;
     white-space:nowrap !important;
 }
-ul#individual-hasResearchArea li:last-child {
+ul.individual-hasResearchArea li:last-child {
     white-space:nowrap !important;
 }
 
