@@ -82,9 +82,9 @@
 
 	<script type="text/javascript">
 			editorshipData.push({
-					"editorshipUri": "${editorship.editorshipUri}",
-					"editorUri": "${editorUri}",
-					"editorName": "${editorName}"
+					"editorshipUri": "${editorship.editorshipUri?js_string}",
+					"editorUri": "${editorUri?js_string}",
+					"editorName": "${editorName?js_string}"
 			});
 	</script>
 </#list>
@@ -181,7 +181,7 @@
 
 <script type="text/javascript">
 var customFormData = {
-    rankPredicate: '${rankPredicate}',
+    rankPredicate: '${rankPredicate?js_string}',
     acUrl: '${urls.base}/autocomplete?type=',
     tokenize: '&tokenize=true',
     personUrl: 'http://xmlns.com/foaf/0.1/Person',
