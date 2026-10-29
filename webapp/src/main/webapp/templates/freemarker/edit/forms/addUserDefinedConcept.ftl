@@ -50,8 +50,8 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
     <script type="text/javascript">
     var customFormData  = {
-        sparqlForAcFilter: '${sparqlForAcFilter}',
-        sparqlQueryUrl: '${sparqlQueryUrl}',
+        sparqlForAcFilter: '${sparqlForAcFilter?js_string}',
+        sparqlQueryUrl: '${sparqlQueryUrl?js_string}',
         acUrl: '${urls.base}/autocomplete?tokenize=true',
         acTypes: {concept: 'http://www.w3.org/2004/02/skos/core#Concept'},
         editMode: 'add',

@@ -150,7 +150,7 @@ var customFormData  = {
     baseHref: '${urls.base}/individual?uri=',
     blankSentinel: '${blankSentinel}',
     flagClearLabelForExisting: '${flagClearLabelForExisting}',
-    subjectName: '${editConfiguration.subjectName}'
+    subjectName: '${editConfiguration.subjectName?js_string}'
 };
 var i18nStrings = {
     selectAnExisting: '${i18n().select_an_existing?js_string}',

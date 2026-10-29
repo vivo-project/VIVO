@@ -39,15 +39,15 @@
                 var onlyUnknownYearGrants = false;
 
                 var data = new google.visualization.DataTable();
-                data.addColumn('number', '${i18n().year_capitalized}');
-                data.addColumn('number', '${i18n().grants_capitalized}');
+                data.addColumn('number', '${i18n().year_capitalized?js_string}');
+                data.addColumn('number', '${i18n().grants_capitalized?js_string}');
                 data.addRows(${sparklineVO.yearToEntityCountDataTable?size});
 
                 var knownYearGrantCounts = 0;
 
                 <#list sparklineVO.yearToEntityCountDataTable as yearToGrantCountDataElement>
-                    data.setValue(${yearToGrantCountDataElement.yearToEntityCounter}, 0, ${yearToGrantCountDataElement.year});
-                    data.setFormattedValue(${yearToGrantCountDataElement.yearToEntityCounter}, 0, '${yearToGrantCountDataElement.year}');
+                    data.setValue(${yearToGrantCountDataElement.yearToEntityCounter}, 0, ${yearToGrantCountDataElement.year?js_string});
+                    data.setFormattedValue(${yearToGrantCountDataElement.yearToEntityCounter}, 0, '${yearToGrantCountDataElement.year?js_string}');
                     data.setValue(${yearToGrantCountDataElement.yearToEntityCounter}, 1, ${yearToGrantCountDataElement.currentEntitiesCount});
                     knownYearGrantCounts += ${yearToGrantCountDataElement.currentEntitiesCount};
                 </#list>
@@ -174,7 +174,7 @@
                     }
 
                     if (totalGrantCount) {
-                        sparksText += '<br /> <a href="${sparklineVO.downloadDataLink}"  title=".csv ${i18n().file}">(.CSV ${i18n().file_capitalized})</a> ';
+                        sparksText += '<br /> <a href="${sparklineVO.downloadDataLink?js_string}"  title=".csv ${i18n().file?js_string}">(.CSV ${i18n().file_capitalized?js_string})</a> ';
                     }
 
                  </#if>

@@ -206,7 +206,7 @@ var i18nStrings = {
 
 <script type="text/javascript">
  $(document).ready(function(){
-    awardReceiptUtils.onLoad('${editMode}', '${editConfiguration.subjectName}', '${urls.base}/individual?uri=');
+    awardReceiptUtils.onLoad('${editMode}', '${editConfiguration.subjectName?js_string}', '${urls.base}/individual?uri=');
 });
 </script>
 

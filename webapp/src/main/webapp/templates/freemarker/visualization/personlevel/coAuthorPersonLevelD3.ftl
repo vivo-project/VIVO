@@ -29,13 +29,13 @@
 <!--
 // -----------------------------------------------------------------------------
 // Globals
-var egoURI = "${egoURI}";
-var unEncodedEgoURI = "${egoURIParam}";
-var egoCoAuthorshipDataFeederURL = "${egoCoAuthorshipDataFeederURL}";
-var egoCoAuthorsListDataFileURL = "${egoCoAuthorsListDataFileURL}";
+var egoURI = "${egoURI?js_string}";
+var unEncodedEgoURI = "${egoURIParam?js_string}";
+var egoCoAuthorshipDataFeederURL = "${egoCoAuthorshipDataFeederURL?js_string}";
+var egoCoAuthorsListDataFileURL = "${egoCoAuthorsListDataFileURL?js_string}";
 var contextPath = "${urls.base}";
 
-var visualizationDataRoot = "${dataVisualizationURLRoot}";
+var visualizationDataRoot = "${dataVisualizationURLRoot?js_string}";
 // -->
 
 var i18nStringsCoauthorship = {
@@ -70,7 +70,7 @@ $(document).ready(function(){
     processProfileInformation("ego_label",
                               "ego_moniker",
                               "ego_profile_image",
-                              jQuery.parseJSON(getWellFormedURLs("${egoURIParam}", "profile_info")));
+                              jQuery.parseJSON(getWellFormedURLs("${egoURIParam?js_string}", "profile_info")));
 
     <#if (numOfCoAuthorShips?? && numOfCoAuthorShips <= 0) || (numOfAuthors?? && numOfAuthors <= 0) >
         if ($('#ego_label').text().length > 0) {
@@ -81,7 +81,7 @@ $(document).ready(function(){
 
     $.ajax({
             url: "${urls.base}/visualizationAjax",
-            data: ({vis: "utilities", vis_mode: "SHOW_GRANTS_LINK", uri: '${egoURIParam}'}),
+            data: ({vis: "utilities", vis_mode: "SHOW_GRANTS_LINK", uri: '${egoURIParam?js_string}'}),
             dataType: "json",
             success:function(data){
 
@@ -111,8 +111,8 @@ $(document).ready(function(){
         matrixX++;
     </#list>
     <#list coAuthorshipData.collaborators as collaborator>
-        labels.push("${collaborator.collaboratorName}");
-        uris.push("${collaborator.collaboratorURI}");
+        labels.push("${collaborator.collaboratorName?js_string}");
+        uris.push("${collaborator.collaboratorURI?js_string}");
     </#list>
 
     var chord = d3.chord()
@@ -212,9 +212,9 @@ $(document).ready(function(){
                 var chordInfoDiv = d3.select('#chord-info-div');
                 var hoverMsg = labels[i] + "<br/>";
                 if (i > 0) {
-                    hoverMsg += matrix[i][0] + " Joint ${i18n().publication_s_capitalized}<br/>";
+                    hoverMsg += matrix[i][0] + " Joint ${i18n().publication_s_capitalized?js_string}<br/>";
                 } else {
-                    hoverMsg += "${coAuthorshipData.collaboratorsCount} ${i18n().co_author_s_capitalized}<br/>";
+                    hoverMsg += "${coAuthorshipData.collaboratorsCount} ${i18n().co_author_s_capitalized?js_string}<br/>";
                 }
 
                 chordInfoDiv.html(hoverMsg);
