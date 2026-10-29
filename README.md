@@ -92,6 +92,9 @@ There are several ways to contact and join the VIVO community. All of them are l
 ## Contributing Code
 If you would like to contribute code to the VIVO project, please read instructions at [this page](https://github.com/vivo-project/VIVO/wiki/Development-Processes#process-for-suggesting-contribution).  Contributors welcome!
 
+## Security
+Please consult [SECURITY.md](SECURITY.md) for reporting of vulnerabilities.
+
 ## Citing VIVO
 If you are using VIVO in your publications or projects, please cite the software paper in the Journal of Open Source Software:
 
