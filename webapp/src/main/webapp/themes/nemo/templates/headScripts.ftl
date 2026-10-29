@@ -1,7 +1,7 @@
 <#-- Template for scripts that must be loaded in the head -->
 <script>
 var i18nStrings = {
-    allCapitalized: '${i18n().all_capitalized}',
+    allCapitalized: '${i18n().all_capitalized?js_string}',
 };
 </script>
 <!-- <script type="text/javascript" src="${urls.base}/js/jquery.js"></script> -->

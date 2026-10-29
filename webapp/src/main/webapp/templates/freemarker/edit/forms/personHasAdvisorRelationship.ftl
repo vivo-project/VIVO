@@ -207,15 +207,15 @@ var customFormData  = {
     editMode: '${editMode}',
     defaultTypeName: 'advisee',
     multipleTypeNames: {advisee: 'advisee', SubjectArea: 'Subject Area'},
-    sparqlForAcFilter: '${sparqlForAcFilter}',
-    sparqlQueryUrl: '${sparqlQueryUrl}',
+    sparqlForAcFilter: '${sparqlForAcFilter?js_string}',
+    sparqlQueryUrl: '${sparqlQueryUrl?js_string}',
     acFilterForIndividuals: ${acFilterForIndividuals},
     baseHref: '${urls.base}/individual?uri=',
     blankSentinel: '${blankSentinel}',
     flagClearLabelForExisting: '${flagClearLabelForExisting}'
 };
-<#--Removing this line for now from above : newUriSentinel : '${newUriSentinel}',-->
-<#--Also removed this: ,doNotRemoveOriginalObject: '${doNotRemoveOriginalObject}'-->
+<#--Removing this line for now from above : newUriSentinel : '${newUriSentinel?js_string}',-->
+<#--Also removed this: ,doNotRemoveOriginalObject: '${doNotRemoveOriginalObject?js_string}'-->
 var i18nStrings = {
     selectAnExisting: '${i18n().select_an_existing?js_string}',
     selectedString: '${i18n().selected?js_string}',
@@ -227,7 +227,7 @@ var i18nStrings = {
 
 <script type="text/javascript">
 $(document).ready(function(){
-    advisorRelUtils.onLoad('${editConfiguration.subjectName}', '${blankSentinel}');
+    advisorRelUtils.onLoad('${editConfiguration.subjectName?js_string}', '${blankSentinel}');
 });
 </script>
 

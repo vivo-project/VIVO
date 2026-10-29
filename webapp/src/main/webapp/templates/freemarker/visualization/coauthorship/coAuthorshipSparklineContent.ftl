@@ -46,8 +46,8 @@
                 var knownYearPublicationCounts = 0;
 
                 <#list sparklineVO.yearToEntityCountDataTable as yearToUniqueCoauthorsDataElement>
-                    data.setValue(${yearToUniqueCoauthorsDataElement.yearToEntityCounter}, 0, ${yearToUniqueCoauthorsDataElement.year});
-                    data.setFormattedValue(${yearToUniqueCoauthorsDataElement.yearToEntityCounter}, 0, '${yearToUniqueCoauthorsDataElement.year}');
+                    data.setValue(${yearToUniqueCoauthorsDataElement.yearToEntityCounter}, 0, ${yearToUniqueCoauthorsDataElement.year?js_string});
+                    data.setFormattedValue(${yearToUniqueCoauthorsDataElement.yearToEntityCounter}, 0, '${yearToUniqueCoauthorsDataElement.year?js_string}');
                     data.setValue(${yearToUniqueCoauthorsDataElement.yearToEntityCounter}, 1, ${yearToUniqueCoauthorsDataElement.currentEntitiesCount});
                     knownYearPublicationCounts += ${yearToUniqueCoauthorsDataElement.currentEntitiesCount};
                 </#list>
@@ -179,7 +179,7 @@
                     }
 
                     if (totalPublicationCount) {
-                        sparksText += ' <br /><a href="${sparklineVO.downloadDataLink}" title="csv ${i18n().file_capitalized?js_string}">(.CSV ${i18n().file_capitalized})</a> ';
+                        sparksText += ' <br /><a href="${sparklineVO.downloadDataLink?js_string}" title="csv ${i18n().file_capitalized?js_string}">(.CSV ${i18n().file_capitalized?js_string})</a> ';
                     }
 
                  </#if>

@@ -63,12 +63,12 @@ Also multiple types parameter set to true only if more than one type returned-->
     <script type="text/javascript">
     var customFormData  = {
         acUrl: '${urls.base}/dataautocomplete?',
-      	property: '${editConfiguration.predicateUri}',
+      	property: '${editConfiguration.predicateUri?js_string}',
         submitButtonTextType: 'simple',
         editMode: '${editMode}', //Change this to check whether adding or editing
-        sparqlForAcFilter: '${sparqlForAcFilter}',
-        sparqlQueryUrl: '${sparqlQueryUrl}',
-        defaultTypeName: '${propertyPublicName}'
+        sparqlForAcFilter: '${sparqlForAcFilter?js_string}',
+        sparqlQueryUrl: '${sparqlQueryUrl?js_string}',
+        defaultTypeName: '${propertyPublicName?js_string}'
     };
     var i18nStrings = {
         selectAnExistingOrCreateNewOne: '${i18n().select_an_existing_or_create_a_new_one?js_string}',

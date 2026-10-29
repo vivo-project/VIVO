@@ -84,9 +84,9 @@
 
 	<script type="text/javascript">
 			authorshipData.push({
-					"authorshipUri": "${authorship.authorshipUri}",
-					"authorUri": "${authorUri}",
-					"authorName": "${authorName}"
+					"authorshipUri": "${authorship.authorshipUri?js_string}",
+					"authorUri": "${authorUri?js_string}",
+					"authorName": "${authorName?js_string}"
 			});
 	</script>
 </#list>
@@ -186,7 +186,7 @@
 
 <script type="text/javascript">
 var customFormData = {
-    rankPredicate: '${rankPredicate}',
+    rankPredicate: '${rankPredicate?js_string}',
     acUrl: '${urls.base}/autocomplete?type=',
     tokenize: '&tokenize=true',
     personUrl: 'http://xmlns.com/foaf/0.1/Person',

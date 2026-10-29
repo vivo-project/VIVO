@@ -41,7 +41,7 @@
                 ${mapofscience}
             </ul>
             <script type="text/javascript">
-                var visualizationUrl = '${urls.base}/visualizationAjax?uri=${individual.uri?url}';
+                var visualizationUrl = '${urls.base}/visualizationAjax?uri=${individual.uri?url?js_string}';
                 var infoIconSrc = '${urls.images}/iconInfo.png';
             </script>
 

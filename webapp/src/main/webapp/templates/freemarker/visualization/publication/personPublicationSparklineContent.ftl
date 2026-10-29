@@ -39,15 +39,15 @@
                 var onlyUnknownYearPublications = false;
 
                 var data = new google.visualization.DataTable();
-                data.addColumn('number', '${i18n().year_capitalized}');
-                data.addColumn('number', '${i18n().publications_capitalized}');
+                data.addColumn('number', '${i18n().year_capitalized?js_string}');
+                data.addColumn('number', '${i18n().publications_capitalized?js_string}');
                 data.addRows(${sparklineVO.yearToEntityCountDataTable?size});
 
                 var knownYearPublicationCounts = 0;
 
                 <#list sparklineVO.yearToEntityCountDataTable as yearToPublicationCountDataElement>
-                    data.setValue(${yearToPublicationCountDataElement.yearToEntityCounter}, 0, ${yearToPublicationCountDataElement.year});
-                    data.setFormattedValue(${yearToPublicationCountDataElement.yearToEntityCounter}, 0, '${yearToPublicationCountDataElement.year}');
+                    data.setValue(${yearToPublicationCountDataElement.yearToEntityCounter}, 0, ${yearToPublicationCountDataElement.year?js_string});
+                    data.setFormattedValue(${yearToPublicationCountDataElement.yearToEntityCounter}, 0, '${yearToPublicationCountDataElement.year?js_string}');
                     data.setValue(${yearToPublicationCountDataElement.yearToEntityCounter}, 1, ${yearToPublicationCountDataElement.currentEntitiesCount});
                     knownYearPublicationCounts += ${yearToPublicationCountDataElement.currentEntitiesCount};
                 </#list>
@@ -139,13 +139,13 @@
                                         if (totalPubs !== totalPublicationCount) {
                                         //sparksText += ' (' + totalPublicationCount + ' ${i18n().total})' ;
                                         }
-                                        sparksText += "&nbsp;<img class='infoIcon' src='" + infoIconSrc + "' height='16px' width='16px' alt='${i18n().info_icon}' title='${i18n().numbers_based_on_publications_in_vivo}' />" ;
+                                        sparksText += "&nbsp;<img class='infoIcon' src='" + infoIconSrc + "' height='16px' width='16px' alt='${i18n().info_icon?js_string}' title='${i18n().numbers_based_on_publications_in_vivo?js_string}' />" ;
 
                                     }
                                     else {
                                     var totalPubs = onlyUnknownYearPublications ? unknownYearPublicationCounts : renderedSparks;
 
-                                    $('#${sparklineContainerID} td.sparkline_number').html(totalPubs + "  total <img class='infoIcon' src='" + infoIconSrc + "' height='16px' width='16px' alt='${i18n().info_icon}' title='${i18n().numbers_based_on_publications_in_vivo}' />").attr("class", "grey-text");
+                                    $('#${sparklineContainerID} td.sparkline_number').html(totalPubs + "  total <img class='infoIcon' src='" + infoIconSrc + "' height='16px' width='16px' alt='${i18n().info_icon?js_string}' title='${i18n().numbers_based_on_publications_in_vivo?js_string}' />").attr("class", "grey-text");
                                    }
 
                                  <#else>
@@ -179,7 +179,7 @@
                     }
 
                     if (totalPublicationCount) {
-                        sparksText += ' <br /><a href="${sparklineVO.downloadDataLink}" title="csv ${i18n().file}">(.CSV ${i18n().file_capitalized})</a> ';
+                        sparksText += ' <br /><a href="${sparklineVO.downloadDataLink?js_string}" title="csv ${i18n().file?js_string}">(.CSV ${i18n().file_capitalized?js_string})</a> ';
                     }
 
 

@@ -91,7 +91,7 @@
 	</div>
 </div>
 <script>
-	var individualLocalName = "${individual.localName}";
+	var individualLocalName = "${individual.localName?js_string}";
 </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual-property-groups.css" />')}

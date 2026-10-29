@@ -183,7 +183,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 </form>
 <#assign credentials = editConfiguration.pageData.credentialTypeMap />
 <script>
-    var credentials = {<#list credentials?keys as key>${key}: '${credentials[key]!}'<#if key_has_next>, </#if></#list>}
+    var credentials = {<#list credentials?keys as key>${key?js_string}: '${credentials[key]!?js_string}'<#if key_has_next>, </#if></#list>}
 </script>
 </section>
 
