@@ -42,10 +42,10 @@
                             window.setTimeout(continueHarvest, 1000);
                         }
                     }
-                    request.open("POST", "${postTo}", true);
+                    request.open("POST", "${postTo?js_string}", true);
                     request.setRequestHeader("content-type","application/x-www-form-urlencoded");
-                    //request.send("${paramMode}=${modeHarvest}&${paramJob}=${job}");
-                    request.send("${paramMode}=${modeHarvest}");
+                    //request.send("${paramMode?js_string}=${modeHarvest?js_string}&${paramJob?js_string}=${job?js_string}");
+                    request.send("${paramMode?js_string}=${modeHarvest?js_string}");
                 }
 
                 function continueHarvest() {
@@ -68,10 +68,10 @@
                                 window.setTimeout(continueHarvest, 1000);
                             }
                         }
-                        request.open("POST", "${postTo}", true);
+                        request.open("POST", "${postTo?js_string}", true);
                         request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-                        //request.send("${paramMode}=${modeCheckStatus}&${paramJob}=${job}");
-                        request.send("${paramMode}=${modeCheckStatus}");
+                        //request.send("${paramMode?js_string}=${modeCheckStatus?js_string}&${paramJob?js_string}=${job?js_string}");
+                        request.send("${paramMode?js_string}=${modeCheckStatus?js_string}");
                     } else {
                         // var linkHeader = document.getElementById("linkHeader");
                         // linkHeader.style.display = "inline";
@@ -88,7 +88,7 @@
                             }
                         } else {
                             var newLi = document.createElement("li");
-                            newLi.innerHTML = "${jobSpecificNoNewDataMessage}";
+                            newLi.innerHTML = "${jobSpecificNoNewDataMessage?js_string}";
                             importedItems.appendChild(newLi);
                         }
 
@@ -124,7 +124,7 @@
 
                     fileListing.appendChild(newLi);
 
-                    document.getElementById("${paramFirstUpload}").value = "false";
+                    document.getElementById("${paramFirstUpload?js_string}").value = "false";
 
                     //document.getElementById("responseArea").innerHTML = response;
                 }
@@ -132,7 +132,7 @@
                 function init() {
                         document.getElementById("harvestButton").disabled = false;
 
-                        document.getElementById("${paramFirstUpload}").value = "true";
+                        document.getElementById("${paramFirstUpload?js_string}").value = "true";
                         document.getElementById("fileUploadForm").onsubmit = function()
                         {
                             document.getElementById("fileUploadForm").target = "uploadTarget";

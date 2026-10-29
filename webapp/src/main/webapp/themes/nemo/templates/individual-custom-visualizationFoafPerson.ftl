@@ -64,7 +64,7 @@
                           '<script type="text/javascript" src="${urls.base}/js/visualization/sparkline.js"></script>')}           
             
             <script type="text/javascript">
-                var visualizationUrl = '${urls.base}/visualizationAjax?uri=${individual.uri?url}&template=${visRequestingTemplate!}';
+                var visualizationUrl = '${urls.base}/visualizationAjax?uri=${individual.uri?url?js_string}&template=${visRequestingTemplate!?js_string}';
                 var infoIconSrc = '${urls.images}/iconInfo.png';
             </script>
             

@@ -187,7 +187,7 @@ var academicDepartments = [
     <#list academicDeptDG as resultRow>
         <#assign uri = resultRow["theURI"] />
         <#assign label = resultRow["name"] />
-        {"uri": "${uri?url}", "name": "${label}"}<#if (resultRow_has_next)>,</#if>
+        {"uri": "${uri?url?js_string}", "name": "${label?js_string}"}<#if (resultRow_has_next)>,</#if>
     </#list>
 </#if>
 ];

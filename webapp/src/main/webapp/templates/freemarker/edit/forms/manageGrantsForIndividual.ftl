@@ -29,7 +29,7 @@ ${i18n().check_grants_to_exclude}
             </li>
             <script type="text/javascript">
                 itemData.push({
-                    "relatedUri": "${grant.role!}"
+                    "relatedUri": "${grant.role!?js_string}"
                 });
             </script>
 

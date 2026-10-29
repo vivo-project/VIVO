@@ -35,7 +35,7 @@ $(document).ready(function() {
 
 	function renderVisualization(visualizationURL) {
 
-		$("#ajax_recipient").empty().html('<img src="${loadingImageLink?url}" />');
+		$("#ajax_recipient").empty().html('<img src="${loadingImageLink?url?js_string}" />');
 
 		   $.ajax({
 			   url: visualizationURL,
@@ -50,7 +50,7 @@ $(document).ready(function() {
 
 	   $("#ajax_activator").click(function() {
 		   $.ajax({
-			   url: '${testURL}',
+			   url: '${testURL?js_string}',
 			   dataType: "html",
 			   success:function(data){
 

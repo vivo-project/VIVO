@@ -177,29 +177,29 @@ Add divs and wrapper to create funnelback basket controls. MUST BE REMOVED BEFOR
 
 <#if rdfUrl??>
 	<script>
-		var individualRdfUrl = '${rdfUrl}';
+		var individualRdfUrl = '${rdfUrl?js_string}';
 	</script>
 </#if>
 
 <script>
 	var imagesPath = '${urls.images}';
-	var individualUri = '${individual.uri!}';
-	var individualPhoto = '${individual.thumbNail!}';
-	var exportQrCodeUrl = '${urls.base}/qrcode?uri=${individual.uri!}';
+	var individualUri = '${individual.uri!?js_string}';
+	var individualPhoto = '${individual.thumbNail!?js_string}';
+	var exportQrCodeUrl = '${urls.base}/qrcode?uri=${individual.uri!?js_string}';
 	var baseUrl = '${urls.base}';
 	var i18nStrings = {
-		displayLess: '${i18n().display_less}',
-		displayMoreEllipsis: '${i18n().display_more_ellipsis}',
-		showMoreContent: '${i18n().show_more_content}',
-		verboseTurnOff: '${i18n().verbose_turn_off}',
+		displayLess: '${i18n().display_less?js_string}',
+		displayMoreEllipsis: '${i18n().display_more_ellipsis?js_string}',
+		showMoreContent: '${i18n().show_more_content?js_string}',
+		verboseTurnOff: '${i18n().verbose_turn_off?js_string}',
                 exportQrCodes: '${i18n().export_qr_codes?js_string}',
-		researchAreaTooltipOne: '${i18n().research_area_tooltip_one}',
-		researchAreaTooltipTwo: '${i18n().research_area_tooltip_two}'
+		researchAreaTooltipOne: '${i18n().research_area_tooltip_one?js_string}',
+		researchAreaTooltipTwo: '${i18n().research_area_tooltip_two?js_string}'
 		};
 	var i18nStringsUriRdf = {
-		shareProfileUri: '${i18n().share_profile_uri}',
-		viewRDFProfile: '${i18n().view_profile_in_rdf}',
-		closeString: '${i18n().close}'
+		shareProfileUri: '${i18n().share_profile_uri?js_string}',
+		viewRDFProfile: '${i18n().view_profile_in_rdf?js_string}',
+		closeString: '${i18n().close?js_string}'
 		};
 </script>
 

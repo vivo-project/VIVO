@@ -312,8 +312,8 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
     <script type="text/javascript">
     var customFormData  = {
-        sparqlForAcFilter: '${sparqlForAcFilter}',
-        sparqlQueryUrl: '${sparqlQueryUrl}',
+        sparqlForAcFilter: '${sparqlForAcFilter?js_string}',
+        sparqlQueryUrl: '${sparqlQueryUrl?js_string}',
         acUrl: '${urls.base}/autocomplete?tokenize=true',
         acTypes: {publication: 'http://purl.org/ontology/bibo/Document', collection: 'http://purl.org/ontology/bibo/Periodical', book: 'http://purl.org/ontology/bibo/Book', conference: 'http://purl.org/NET/c4dm/event.owl#Event', event: 'http://purl.org/NET/c4dm/event.owl#Event', editor: 'http://xmlns.com/foaf/0.1/Person', publisher: 'http://xmlns.com/foaf/0.1/Organization'},
         editMode: '${editMode}',

@@ -36,11 +36,11 @@
 <script language="JavaScript" type="text/javascript">
 
 var entityVivoProfileURLPrefix = "${urls.base}/individual?uri=";
-var entityMapOfScienceURLPrefix = "${urls.base}${shortVisualizationURLRoot}/${mapOfScienceVisParam}?uri=";
+var entityMapOfScienceURLPrefix = "${urls.base}${shortVisualizationURLRoot?js_string}/${mapOfScienceVisParam?js_string}?uri=";
 var contextPath = "${urls.base}";
-var scienceMapDataPrefix = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&output=json&uri=";
-var scienceMapDataURL = scienceMapDataPrefix + "${entityURI}";
-var entityUnmappedJournalsCSVURLPrefix = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&output=csv&vis_mode=unlocated_journals&uri=";
+var scienceMapDataPrefix = "${urls.base}${dataVisualizationURLRoot?js_string}?vis=${mapOfScienceVisParam?js_string}&output=json&uri=";
+var scienceMapDataURL = scienceMapDataPrefix + "${entityURI?js_string}";
+var entityUnmappedJournalsCSVURLPrefix = "${urls.base}${dataVisualizationURLRoot?js_string}?vis=${mapOfScienceVisParam?js_string}&output=csv&vis_mode=unlocated_journals&uri=";
 
 var imageFolderPrefix = "${urls.images}/visualization/";
 var mapOfScienceImageFolderPrefix  = imageFolderPrefix + "mapofscience/";
@@ -50,9 +50,9 @@ var disciplineBlackLabelImageUrlPrefix = disciplineLabelImageUrlPrefix + "black/
 var infoIconUrl = "${urls.images}/iconInfo.png";
 var drillDownIconUrl = "${urls.images}/visualization/drill_down_icon.png";
 
-var entityLabel = '${entityLabel}';
+var entityLabel = '${entityLabel?js_string}';
 
-var ENTITY_TYPE = '${entityType}';
+var ENTITY_TYPE = '${entityType?js_string}';
 <#if entityType == "PERSON" >
 	<#assign viewTypeFilterDisplay = "none">
 <#else>
@@ -62,10 +62,10 @@ var ENTITY_TYPE = '${entityType}';
 var loadingImageLink = contextPath + "/images/visualization/ajax-loader-indicator.gif";
 var refreshPageImageLink = contextPath + "/images/visualization/refresh-green.png";
 
-var comparisonScienceMapCsvDataUrlPrefix = "${urls.base}${dataVisualizationURLRoot}?labelField=label&vis=entity_comparison&uri=";
-var entityMapOfScienceSubDisciplineCSVURLPrefix = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&output=csv&vis_mode=subdiscipline&&uri="
-var entityMapOfScienceDisciplineCSVURL = "${entityMapOfScienceDisciplineCSVURL}";
-var entityMapOfScienceSubDisciplineCSVURL = "${entityMapOfScienceSubDisciplineCSVURL}";
+var comparisonScienceMapCsvDataUrlPrefix = "${urls.base}${dataVisualizationURLRoot?js_string}?labelField=label&vis=entity_comparison&uri=";
+var entityMapOfScienceSubDisciplineCSVURLPrefix = "${urls.base}${dataVisualizationURLRoot?js_string}?vis=${mapOfScienceVisParam?js_string}&output=csv&vis_mode=subdiscipline&&uri="
+var entityMapOfScienceDisciplineCSVURL = "${entityMapOfScienceDisciplineCSVURL?js_string}";
+var entityMapOfScienceSubDisciplineCSVURL = "${entityMapOfScienceSubDisciplineCSVURL?js_string}";
 var i18nStrings = {
     firstString: '${i18n().vis_first_link?js_string}',
     lastString: '${i18n().vis_last_link?js_string}',

@@ -74,8 +74,8 @@ var activitiesLabel = {
     plural: '${i18n().activities?js_string}'
 };
 var i18nStringsGuiEvents = {
-    temporalGraphCapped: '${i18n().temporal_graph_capitalized?js_string?js_string}',
-    temporalGraphLower: '${i18n().temporal_graph?js_string?js_string}',
+    temporalGraphCapped: '${i18n().temporal_graph_capitalized?js_string}',
+    temporalGraphLower: '${i18n().temporal_graph?js_string}',
     viewString: '${i18n().view?js_string}',
     entityMaxNote: '${i18n().max_entity_note?js_string}',
     organizationsCappedString: '${i18n().organizations_capitalized?js_string}',
@@ -162,22 +162,22 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/sm
 <script language="JavaScript" type="text/javascript">
 
 var contextPath = "${urls.base}";
-var temporalGraphDrillUpIcon = "${temporalGraphDrillUpIcon}";
-var temporalGraphDrillDownIcon = "${temporalGraphDrillDownIcon}";
-var subOrganizationVivoProfileURL = "${subOrganizationVivoProfileURL}";
+var temporalGraphDrillUpIcon = "${temporalGraphDrillUpIcon?js_string}";
+var temporalGraphDrillDownIcon = "${temporalGraphDrillDownIcon?js_string}";
+var subOrganizationVivoProfileURL = "${subOrganizationVivoProfileURL?js_string}";
 
-var subOrganizationGrantTemporalGraphCommonURL = "${subOrganizationGrantTemporalGraphCommonURL}";
-var subOrganizationPublicationTemporalGraphCommonURL = "${subOrganizationPublicationTemporalGraphCommonURL}";
+var subOrganizationGrantTemporalGraphCommonURL = "${subOrganizationGrantTemporalGraphCommonURL?js_string}";
+var subOrganizationPublicationTemporalGraphCommonURL = "${subOrganizationPublicationTemporalGraphCommonURL?js_string}";
 
-var jsonString = '${jsonContent!}';
-var vivoDefaultNamespace = '${vivoDefaultNamespace!}';
+var jsonString = '${jsonContent!?js_string}';
+var vivoDefaultNamespace = '${vivoDefaultNamespace!?js_string}';
 var organizationLabel = '${organizationLabel?js_string}';
-var organizationVIVOProfileURL = "${organizationVivoProfileURL}";
+var organizationVIVOProfileURL = "${organizationVivoProfileURL?js_string}";
 
 var loadingImageLink = contextPath + "/images/visualization/ajax-loader-indicator.gif";
 var refreshPageImageLink = contextPath + "/images/visualization/refresh-green.png";
 
-var entityCheckboxSelectorDOMClass = "${entityCheckboxSelectorDOMClass}";
+var entityCheckboxSelectorDOMClass = "${entityCheckboxSelectorDOMClass?js_string}";
 
 var isDataRequestSentViaAJAX = false;
 
@@ -190,10 +190,10 @@ var COMPARISON_PARAMETERS_INFO = {
 
 <#list parameterOptions as parameter>
 
-    ${parameter.name}: {
+    ${parameter.name?js_string}: {
 
     <#list parameter?keys as key>
-        ${key}:"${parameter[key]}"<#if key_has_next>,</#if>
+        ${key?js_string}:"${parameter[key]?js_string}"<#if key_has_next>,</#if>
     </#list>
 
     }<#if parameter_has_next>,</#if>

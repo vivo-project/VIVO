@@ -36,11 +36,11 @@
 <script language="JavaScript" type="text/javascript">
 
 var entityVivoProfileURLPrefix = "${urls.base}/individual?uri=";
-var entityMapOfScienceURLPrefix = "${urls.base}${shortVisualizationURLRoot}/${mapOfScienceVisParam}?uri=";
+var entityMapOfScienceURLPrefix = "${urls.base}${shortVisualizationURLRoot?js_string}/${mapOfScienceVisParam?js_string}?uri=";
 var contextPath = "${urls.base}";
-var scienceMapDataPrefix = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&output=json&uri=";
-var scienceMapDataURL = scienceMapDataPrefix + "${entityURI}";
-var entityUnmappedJournalsCSVURLPrefix = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&output=csv&vis_mode=unlocated_journals&uri=";
+var scienceMapDataPrefix = "${urls.base}${dataVisualizationURLRoot?js_string}?vis=${mapOfScienceVisParam?js_string}&output=json&uri=";
+var scienceMapDataURL = scienceMapDataPrefix + "${entityURI?js_string}";
+var entityUnmappedJournalsCSVURLPrefix = "${urls.base}${dataVisualizationURLRoot?js_string}?vis=${mapOfScienceVisParam?js_string}&output=csv&vis_mode=unlocated_journals&uri=";
 
 var imageFolderPrefix = "${urls.images}/visualization/";
 var mapOfScienceImageFolderPrefix  = imageFolderPrefix + "mapofscience/";
@@ -50,9 +50,9 @@ var disciplineBlackLabelImageUrlPrefix = disciplineLabelImageUrlPrefix + "black/
 var infoIconUrl = "${urls.images}/iconInfo.png";
 var drillDownIconUrl = "${urls.images}/visualization/drill_down_icon.png";
 											
-var entityLabel = '${entityLabel}';
+var entityLabel = '${entityLabel?js_string}';
 
-var ENTITY_TYPE = '${entityType}';
+var ENTITY_TYPE = '${entityType?js_string}';
 <#if entityType == "PERSON" >
 	<#assign viewTypeFilterDisplay = "none">
 <#else>
@@ -62,48 +62,48 @@ var ENTITY_TYPE = '${entityType}';
 var loadingImageLink = contextPath + "/images/visualization/ajax-loader-indicator.gif";
 var refreshPageImageLink = contextPath + "/images/visualization/refresh-green.png";
 											
-var comparisonScienceMapCsvDataUrlPrefix = "${urls.base}${dataVisualizationURLRoot}?labelField=label&vis=entity_comparison&uri=";
-var entityMapOfScienceSubDisciplineCSVURLPrefix = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&output=csv&vis_mode=subdiscipline&&uri="
-var entityMapOfScienceDisciplineCSVURL = "${entityMapOfScienceDisciplineCSVURL}";
-var entityMapOfScienceSubDisciplineCSVURL = "${entityMapOfScienceSubDisciplineCSVURL}";											
+var comparisonScienceMapCsvDataUrlPrefix = "${urls.base}${dataVisualizationURLRoot?js_string}?labelField=label&vis=entity_comparison&uri=";
+var entityMapOfScienceSubDisciplineCSVURLPrefix = "${urls.base}${dataVisualizationURLRoot?js_string}?vis=${mapOfScienceVisParam?js_string}&output=csv&vis_mode=subdiscipline&&uri="
+var entityMapOfScienceDisciplineCSVURL = "${entityMapOfScienceDisciplineCSVURL?js_string}";
+var entityMapOfScienceSubDisciplineCSVURL = "${entityMapOfScienceSubDisciplineCSVURL?js_string}";											
 var i18nStrings = {
-    firstString: '${i18n().vis_first_link}',
-    lastString: '${i18n().vis_last_link}',
-    previousString: '${i18n().vis_previous_link}',
-    nextString: '${i18n().vis_next_link}',
-    organizationsString: '${i18n().organizations_capitalized}',
-    peopleString: '${i18n().people_capitalized}',
-    infoIconString: '${i18n().info_icon}',
-    entityTypeString: '${i18n().entity_type}',
-    organizationString: '${i18n().organization_capitalized}',
-    personString: '${i18n().person_capitalized}',
-    numberOfPubs: '${i18n().of_pubs}',
-    maxNbrForComp: '${i18n().max_nbr_for_comp}',
-    noMatchingScienceAreas: '${i18n().no_matching_science_areas}',
-    clearSearchQuery: '${i18n().clear_search_query}',
-    saveAllAsCSV: '${i18n().save_all_as_csv}',
-    drillDownString: '${i18n().drill_down}',
-    subdisciplinesString: '${i18n().subdisciplines}',
-    disciplinesString: '${i18n().disciplines}',
-    scienceAreaLevel: '${i18n().science_area_level}',
-    ofActivityString: '${i18n().of_activity}',
-    subdisciplinesLower: '${i18n().subdisciplines_lower}',
-    disciplinesLower: '${i18n().disciplines_lower}',
-    showDisciplineLabels: '${i18n().show_discipline_labels}',
-    noAttributedPubs: '${i18n().no_attributed_publications}',
-    noneOfThe: '${i18n().none_of_the}',
-    pubsAttributedTo: '${i18n().publications_attributed_to}',
-    beenScienceLocated: '${i18n().been_science_located}',
-    pubAttributedTo: '${i18n().publication_attributed_to}',
-    notScienceLocated: '${i18n().not_science_located}',
-    publicationsString: '${i18n().publications}',
-    publicationString: '${i18n().publication}',
-    noJournalInformation: '${i18n().no_journal_information}',
-    noMatchingMapLocation: '${i18n().no_matching_map_location}',
-    loadingDataFor: '${i18n().loading_data_for}',
-    mapBeingRefreshed: '${i18n().map_being_refreshed_msg}',
-    publicationsPubs: '${i18n().publication_pubs}',
-    percentActivity: '${i18n().percent_activity}'
+    firstString: '${i18n().vis_first_link?js_string}',
+    lastString: '${i18n().vis_last_link?js_string}',
+    previousString: '${i18n().vis_previous_link?js_string}',
+    nextString: '${i18n().vis_next_link?js_string}',
+    organizationsString: '${i18n().organizations_capitalized?js_string}',
+    peopleString: '${i18n().people_capitalized?js_string}',
+    infoIconString: '${i18n().info_icon?js_string}',
+    entityTypeString: '${i18n().entity_type?js_string}',
+    organizationString: '${i18n().organization_capitalized?js_string}',
+    personString: '${i18n().person_capitalized?js_string}',
+    numberOfPubs: '${i18n().of_pubs?js_string}',
+    maxNbrForComp: '${i18n().max_nbr_for_comp?js_string}',
+    noMatchingScienceAreas: '${i18n().no_matching_science_areas?js_string}',
+    clearSearchQuery: '${i18n().clear_search_query?js_string}',
+    saveAllAsCSV: '${i18n().save_all_as_csv?js_string}',
+    drillDownString: '${i18n().drill_down?js_string}',
+    subdisciplinesString: '${i18n().subdisciplines?js_string}',
+    disciplinesString: '${i18n().disciplines?js_string}',
+    scienceAreaLevel: '${i18n().science_area_level?js_string}',
+    ofActivityString: '${i18n().of_activity?js_string}',
+    subdisciplinesLower: '${i18n().subdisciplines_lower?js_string}',
+    disciplinesLower: '${i18n().disciplines_lower?js_string}',
+    showDisciplineLabels: '${i18n().show_discipline_labels?js_string}',
+    noAttributedPubs: '${i18n().no_attributed_publications?js_string}',
+    noneOfThe: '${i18n().none_of_the?js_string}',
+    pubsAttributedTo: '${i18n().publications_attributed_to?js_string}',
+    beenScienceLocated: '${i18n().been_science_located?js_string}',
+    pubAttributedTo: '${i18n().publication_attributed_to?js_string}',
+    notScienceLocated: '${i18n().not_science_located?js_string}',
+    publicationsString: '${i18n().publications?js_string}',
+    publicationString: '${i18n().publication?js_string}',
+    noJournalInformation: '${i18n().no_journal_information?js_string}',
+    noMatchingMapLocation: '${i18n().no_matching_map_location?js_string}',
+    loadingDataFor: '${i18n().loading_data_for?js_string}',
+    mapBeingRefreshed: '${i18n().map_being_refreshed_msg?js_string}',
+    publicationsPubs: '${i18n().publication_pubs?js_string}',
+    percentActivity: '${i18n().percent_activity?js_string}'
 };
 </script>
 <#--//'<script type="text/javascript" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>', -->

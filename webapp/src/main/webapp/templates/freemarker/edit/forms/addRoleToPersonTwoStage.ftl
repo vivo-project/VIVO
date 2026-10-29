@@ -220,7 +220,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 	    acUrl: '${urls.base}/autocomplete?tokenize=true',
 	    editMode: '${editMode}',
 	    acTypes: ${acTypes!},
-	    <#if acMultipleTypes??>acMultipleTypes: ${acMultipleTypes!},</#if>
+	    <#if acMultipleTypes??>acMultipleTypes: ${acMultipleTypes!?js_string},</#if>
 	    // used in repair mode: button text and org name label
 	    defaultTypeName: <#if genericLabel??>'${genericLabel?js_string}'<#else>'activity'</#if>,
 	    baseHref: '${urls.base}/individual?uri=',

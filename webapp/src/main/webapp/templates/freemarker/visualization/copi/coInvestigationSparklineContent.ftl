@@ -39,15 +39,15 @@
                 var onlyUnknownYearGrants = false;
 
                 var data = new google.visualization.DataTable();
-                data.addColumn('number', '${i18n().year_capitalized}');
-                data.addColumn('number', '${i18n().unique_coinvestigators}');
+                data.addColumn('number', '${i18n().year_capitalized?js_string}');
+                data.addColumn('number', '${i18n().unique_coinvestigators?js_string}');
                 data.addRows(${sparklineVO.yearToEntityCountDataTable?size});
 
                 var knownYearGrantCounts = 0;
 
                 <#list sparklineVO.yearToEntityCountDataTable as yearToUniqueCoinvestigatorsDataElement>
-                    data.setValue(${yearToUniqueCoinvestigatorsDataElement.yearToEntityCounter}, 0, ${yearToUniqueCoinvestigatorsDataElement.year});
-                    data.setFormattedValue(${yearToUniqueCoinvestigatorsDataElement.yearToEntityCounter}, 0, '${yearToUniqueCoinvestigatorsDataElement.year}');
+                    data.setValue(${yearToUniqueCoinvestigatorsDataElement.yearToEntityCounter}, 0, ${yearToUniqueCoinvestigatorsDataElement.year?js_string});
+                    data.setFormattedValue(${yearToUniqueCoinvestigatorsDataElement.yearToEntityCounter}, 0, '${yearToUniqueCoinvestigatorsDataElement.year?js_string}');
                     data.setValue(${yearToUniqueCoinvestigatorsDataElement.yearToEntityCounter}, 1, ${yearToUniqueCoinvestigatorsDataElement.currentEntitiesCount});
                     knownYearGrantCounts += ${yearToUniqueCoinvestigatorsDataElement.currentEntitiesCount};
                 </#list>
@@ -181,7 +181,7 @@
                     }
 
                     if (totalGrantCount) {
-                        sparksText += '<br /> <a href="${sparklineVO.downloadDataLink}" title="csv ${i18n().file_capitalized}">(.CSV ${i18n().file_capitalized})</a> ';
+                        sparksText += '<br /> <a href="${sparklineVO.downloadDataLink?js_string}" title="csv ${i18n().file_capitalized?js_string}">(.CSV ${i18n().file_capitalized?js_string})</a> ';
                     }
 
                  </#if>

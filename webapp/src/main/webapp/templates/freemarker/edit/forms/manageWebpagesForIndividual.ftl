@@ -47,7 +47,7 @@
 
         <script type="text/javascript">
             webpageData.push({
-                "webpageUri": "${webpage.link}"
+                "webpageUri": "${webpage.link?js_string}"
             });
         </script>
     </#list>
@@ -66,7 +66,7 @@
 
 <script type="text/javascript">
 var customFormData = {
-    rankPredicate: '${editConfiguration.pageData.rankPredicate}',
+    rankPredicate: '${editConfiguration.pageData.rankPredicate?js_string}',
     reorderUrl: '${urls.base}/edit/reorder'
 };
 var i18nStrings = {
