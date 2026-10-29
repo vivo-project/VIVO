@@ -156,9 +156,9 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <script type="text/javascript">
 var customFormData  = {
-    sparqlForAcFilter: '${sparqlForAcFilter}',
-    sparqlQueryUrl: '${urls.base}${sparqlQueryUrl}',
-    acUrl: '${urls.base}${acUrl}',
+    sparqlForAcFilter: '${sparqlForAcFilter?js_string}',
+    sparqlQueryUrl: '${urls.base}${sparqlQueryUrl?js_string}',
+    acUrl: '${urls.base}${acUrl?js_string}',
     acTypes: {grant: 'http://vivoweb.org/ontology/core#Grant'},
     editMode: '${editMode}',
     typeName: 'Grant',

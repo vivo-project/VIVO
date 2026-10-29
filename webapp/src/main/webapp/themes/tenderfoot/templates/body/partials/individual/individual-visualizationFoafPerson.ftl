@@ -34,7 +34,7 @@
             </svg>
 
             <script>
-                var dataUrl = '${urls.base}/visualizationAjax?vis=cumulative_pub_count&uri=${individual.uri?url}';
+                var dataUrl = '${urls.base}/visualizationAjax?vis=cumulative_pub_count&uri=${individual.uri?url?js_string}';
 
                 function renderPublicationsChart() {
                     var chartWidth = parseInt(d3.select("#publicationsChart").style("width"),10);

@@ -42,7 +42,7 @@ ${i18n().check_pubs_to_exclude}
             </li>
             <script type="text/javascript">
                 itemData.push({
-                    "relatedUri": "${pub.authorship}"
+                    "relatedUri": "${pub.authorship?js_string}"
                 });
             </script>
 

@@ -154,14 +154,14 @@
 
 <#if rdfUrl??>
 <script>
-    var individualRdfUrl = '${rdfUrl}';
+    var individualRdfUrl = '${rdfUrl?js_string}';
 </script>
 </#if>
 <script>
     var imagesPath = '${urls.images}';
-    var individualUri = '${individual.uri!}';
-    var individualPhoto = '${individual.thumbNail!}';
-    var exportQrCodeUrl = '${urls.base}/qrcode?uri=${individual.uri!}';
+    var individualUri = '${individual.uri!?js_string}';
+    var individualPhoto = '${individual.thumbNail!?js_string}';
+    var exportQrCodeUrl = '${urls.base}/qrcode?uri=${individual.uri!?js_string}';
     var baseUrl = '${urls.base}';
     var i18nStrings = {
         displayLess: '${i18n().display_less?js_string}',

@@ -117,19 +117,19 @@
 
 <#if rdfUrl??>
     <script>
-        var individualRdfUrl = '${rdfUrl}';
+        var individualRdfUrl = '${rdfUrl?js_string}';
     </script>
 </#if>
 <script>
     var i18nStringsUriRdf = {
-        shareProfileUri: '${i18n().share_profile_uri}',
-        viewRDFProfile: '${i18n().view_profile_in_rdf}',
-        closeString: '${i18n().close}'
+        shareProfileUri: '${i18n().share_profile_uri?js_string}',
+        viewRDFProfile: '${i18n().view_profile_in_rdf?js_string}',
+        closeString: '${i18n().close?js_string}'
     };
         var i18nStrings = {
-            displayLess: '${i18n().display_less}',
-            displayMoreEllipsis: '${i18n().display_more_ellipsis}',
-            showMoreContent: '${i18n().show_more_content}',
+            displayLess: '${i18n().display_less?js_string}',
+            displayMoreEllipsis: '${i18n().display_more_ellipsis?js_string}',
+            showMoreContent: '${i18n().show_more_content?js_string}',
         };
 
 </script>
@@ -137,7 +137,7 @@
 
 
 <script type="text/javascript">
-    i18n_confirmDelete = "${i18n().confirm_delete}"
+    i18n_confirmDelete = "${i18n().confirm_delete?js_string}"
 </script>
 
 

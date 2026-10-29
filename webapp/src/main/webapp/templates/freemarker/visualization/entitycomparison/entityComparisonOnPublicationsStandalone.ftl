@@ -7,7 +7,7 @@ corresponding changes in the included Templates. -->
 
 <script language="JavaScript" type="text/javascript">
 
-var currentParameter = "${currentParameter}";
+var currentParameter = "${currentParameter?js_string}";
 
 </script>
 
@@ -25,7 +25,7 @@ This is used in util.js to print grant temporal graph links for all sub-organiza
 */
 var temporalGraphCommonURL = subOrganizationPublicationTemporalGraphCommonURL;
 
-var temporalGraphDataURL = '${temporalGraphDataURL}';
+var temporalGraphDataURL = '${temporalGraphDataURL?js_string}';
 
 $(document).ready(function () {
 

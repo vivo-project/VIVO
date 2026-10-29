@@ -46,7 +46,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/search.css" />'
 
 $(document).ready(function() {
     	$.ajax({
-            url: "${regenerateCacheURL}",
+            url: "${regenerateCacheURL?js_string}",
             dataType: "json",
             timeout: 5 * 60 * 1000
         });

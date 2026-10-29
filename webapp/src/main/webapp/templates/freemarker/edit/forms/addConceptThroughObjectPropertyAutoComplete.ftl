@@ -115,12 +115,12 @@ Also multiple types parameter set to true only if more than one type returned-->
             acMultipleTypes: 'true',
         </#if>
         editMode: '${editMode}',
-        typeName:'${propertyNameForDisplay}',
+        typeName:'${propertyNameForDisplay?js_string}',
         acSelectOnly: 'true',
-        sparqlForAcFilter: '${sparqlForAcFilter}',
-        sparqlQueryUrl: '${sparqlQueryUrl}',
+        sparqlForAcFilter: '${sparqlForAcFilter?js_string}',
+        sparqlQueryUrl: '${sparqlQueryUrl?js_string}',
         acFilterForIndividuals: ${acFilterForIndividuals},
-        defaultTypeName: '${propertyNameForDisplay}', // used in repair mode to generate button text
+        defaultTypeName: '${propertyNameForDisplay?js_string}', // used in repair mode to generate button text
         baseHref: '${urls.base}/individual?uri='
     };
     var i18nStrings = {
