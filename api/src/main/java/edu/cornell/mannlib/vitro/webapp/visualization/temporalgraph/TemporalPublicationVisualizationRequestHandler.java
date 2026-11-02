@@ -30,6 +30,7 @@ import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.AuthorizationReques
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
+import edu.cornell.mannlib.vitro.webapp.i18n.I18n;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
@@ -295,7 +296,7 @@ public class TemporalPublicationVisualizationRequestHandler implements
         String organizationLabel = OrganizationUtilityFunctions.getEntityLabelFromDAO(vreq, entityURI);
 
         Map<String, Object> body = new HashMap<String, Object>();
-        body.put("title", organizationLabel + " - Temporal Graph Visualization");
+        body.put("title", I18n.text(vreq, "temporal_graph_visualization_title", organizationLabel));
         body.put("organizationURI", entityURI);
         body.put("organizationLocalName", UtilityFunctions.getIndividualLocalName(entityURI, vreq));
         body.put("vivoDefaultNamespace", vreq.getWebappDaoFactory().getDefaultNamespace());

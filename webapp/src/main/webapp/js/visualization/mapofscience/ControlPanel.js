@@ -120,10 +120,7 @@ var CheckBoxPanel = ControlPanel.extend({
 		var me = this;
 		var description
 		var text = me.options.text;
-		var checkBox = $('<input type="checkbox"><span style="font-size: 75%; vertical-align: text-top">'
-				+ text
-				+ '</span></input>'
-			);
+		var checkBox = $('<label style="font-size: 75%; line-height: 1.5; vertical-align: middle;"><input type="checkbox" aria-label="' + text + '" style="vertical-align: middle; margin-right: 4px;">' + text + '</label>');
 		me.checkBox = checkBox;
 
 		var div = me.getDiv();

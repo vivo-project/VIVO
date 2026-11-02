@@ -232,7 +232,8 @@ var i18nStrings = {
 var i18nStringsUriRdf = {
     shareProfileUri: '${i18n().share_profile_uri?js_string}',
     viewRDFProfile: '${i18n().view_profile_in_rdf?js_string}',
-    closeString: '${i18n().close?js_string}'
+    closeString: '${i18n().close?js_string}',
+    uriInputString: '${i18n().uri_input_label?js_string}'
 };
 </script>
 <#if editable>
