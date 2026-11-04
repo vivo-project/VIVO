@@ -26,7 +26,7 @@
     border-bottom: 1px dotted #dbe3e3; /* stroke */
     background-color: #fff; /* layer fill content */
 }
-.home-sections h4 {
+.home-sections h2 {
     border-top: 1px solid rgba(220,228,227,.42); /* stroke */
     border-bottom: 1px solid rgba(220,228,227,.42); /* stroke */
     /* background-color: #395d7f; /* layer fill content */
@@ -99,10 +99,10 @@
     margin-left: 15px;
     float: left;
 }
-#home-academic-depts h4,
-#home-faculty-mbrs h4,
-#home-geo-focus h4,
-#home-research h4 {
+#home-academic-depts h2,
+#home-faculty-mbrs h2,
+#home-geo-focus h2,
+#home-research h2 {
     display: inline;
     padding: 3px 10px;
 }

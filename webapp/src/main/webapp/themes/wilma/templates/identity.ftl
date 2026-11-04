@@ -2,7 +2,7 @@
 
 <header id="branding" role="banner">
 
-    <h1 class="vivo-logo"><a title="${i18n().identity_title}" href="${urls.home}"><span class="displace">${siteName}</span></a></h1>
+    <p class="vivo-logo"><a title="${i18n().identity_title}" href="${urls.home}"><span class="displace">${siteName}</span></a></p>
     <#-- Since we are using a graphic text for the tagline, we won't render ${siteTagline}
     <#if siteTagline?has_content>
         <em>${siteTagline}</em>

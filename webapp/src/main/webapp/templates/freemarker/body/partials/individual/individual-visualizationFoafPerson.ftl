@@ -27,7 +27,7 @@
 
             <span id="sparklineHeading">${i18n().publications_in_vivo}</span>
 
-            <div id="vis_container_coauthor">&nbsp;</div>
+            <div class="vis_container_coauthor">&nbsp;</div>
 
             <div class="collaboratorship-link-separator"></div>
 

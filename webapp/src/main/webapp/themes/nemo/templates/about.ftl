@@ -2,7 +2,7 @@
 
 <#-- Template for the body of the About page -->
 <div style="min-height=100%;height=100%;">
-<h2>${siteName!}</h2>
+<h1>${siteName!}</h1>
 
 <#if aboutText?has_content>
     <div class="pageGroupBody" id="aboutText">${aboutText}</div>

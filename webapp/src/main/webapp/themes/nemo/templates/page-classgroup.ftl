@@ -4,7 +4,7 @@
 
 <#if !noData>
     <section id="menupage-intro" role="region">
-        <h2>${page.title}</h2>
+        <h1>${page.title}</h1>
     </section>
     
     <#include "menupage-browse.ftl">

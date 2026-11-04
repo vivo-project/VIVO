@@ -12,7 +12,7 @@
             ${headingText}
         </h2>
         <#assign numberRows = researchAreaResults?size/>
-        <ul id="individual-hasResearchArea" role="list">
+        <ul class="individual-hasResearchArea" role="list">
             <#assign totalLength = 0 >
             <#assign moreDisplayed = false>
             <#list researchAreaResults as resultRow>

@@ -48,7 +48,7 @@ ${stylesheets.add(
 </script>
 <div class="main" id="main-content" role="main">
     <div class="col-8">
-        <h2>${i18n().capability_map}</h2>
+        <h1>${i18n().capability_map}</h1>
         <p>${i18n().cap_map_intro}</p>
     </div>
 
@@ -73,23 +73,23 @@ ${stylesheets.add(
             <p>
                 ${i18n().cap_map_text_intro}
             </p>
-            <h3>${i18n().cap_map_text_headline1}</h3>
+            <h2>${i18n().cap_map_text_headline1}</h2>
             <p>
                 ${i18n().cap_map_text1}
             </p>
             <p>
                 ${i18n().cap_map_text2}
             </p>
-            <h3>${i18n().cap_map_text_headline2}</h3>
+            <h2>${i18n().cap_map_text_headline2}</h2>
             <p>
                 ${i18n().cap_map_text3}
             </p>
-            <h4>${i18n().cap_map_text_headline3}</h4>
+            <h3>${i18n().cap_map_text_headline3}</h3>
             <p>
                 ${i18n().cap_map_text4}
             </p>
-            <h3>${i18n().cap_map_text_headline4}</h3>
-            <h4>${i18n().cap_map_text_headline5}</h4>
+            <h2>${i18n().cap_map_text_headline4}</h2>
+            <h3>${i18n().cap_map_text_headline5}</h3>
             <p>
                 ${i18n().cap_map_text5}
             </p>

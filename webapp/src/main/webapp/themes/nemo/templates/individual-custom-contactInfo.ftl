@@ -30,7 +30,7 @@
 <#-- Phone --> 
 <div class="phoneContainer" style="width:100%;text-align: left;font-size:small;">
 <#if phone?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-    <@p.addLinkWithLabel phone editable />
+    <@p.addLinkWithLabel phone editable headingTag="p" />
     <#if phone.statements?has_content> <#-- if there are any statements -->
         <ul id="individual-phone" role="list" <#if editable>style="list-style:none;margin-left:0;"</#if>>
             <h5>
@@ -70,7 +70,7 @@
 
 <div class="addressContainer" style="width:100%;text-align: left;font-size:small;">
 <#if mailingAddress?has_content>
-    <@p.addLinkWithLabel mailingAddress editable />
+    <@p.addLinkWithLabel mailingAddress editable headingTag="p" />
     <#if mailingAddress.statements?has_content> <#-- if there are any statements -->	
 	    <div id="individual-address" role="list" <#if editable>style="list-style:none;margin-left:0;"</#if>>
 		    <h5>
@@ -83,7 +83,7 @@
 </div>
 
 <#if officeHours?has_content>
-	<@p.addLinkWithLabel officeHours editable />
+	<@p.addLinkWithLabel officeHours editable headingTag="p" />
 	<#if officeHours.statements?has_content> <#-- if there are any statements -->	
 		<div id="individual-officehours" role="list" <#if editable>style="list-style:none;margin-left:0;"</#if>>
 			<h4>
@@ -107,7 +107,7 @@
         <#local label = "${i18n().additional_emails_capitalized}">
     </#if>     
     <#if email?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-        <@p.addLinkWithLabel email editable label/>
+        <@p.addLinkWithLabel email editable label headingTag="p"/>
         <#if email.statements?has_content> <#-- if there are any statements -->
             <ul id="${listId}" class="individual-emails" role="list" <#if editable>style="list-style:none;margin-left:0;"</#if>>
                 <#list email.statements as statement>
