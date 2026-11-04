@@ -27,7 +27,11 @@ ${stylesheets.add(
         delete_selected: '${i18n().delete_selected?js_string}',
         remove_capability: '${i18n().remove_capability?js_string}',
         remove_group: '${i18n().remove_group?js_string}',
-        expand: '${i18n().expand?js_string}'
+        expand: '${i18n().expand?js_string}',
+        view: '${i18n().view?js_string}',
+        capability_map_remove_person: '${i18n().capability_map_remove_person?js_string}',
+        capability_map_svg_title: '${i18n().capability_map_svg_title?js_string}',
+        capability_map_svg_desc: '${i18n().capability_map_svg_desc?js_string}'
     };
     var contextPath = "${urls.base}";
     $(document).ready(function() {
@@ -42,8 +46,27 @@ ${stylesheets.add(
         });
         var conceptArray = JSON.parse(loadedConcepts.responseText);
         $("#query").autocomplete({
-            source: conceptArray
-        });
+            source: conceptArray,
+            minLength: 1,
+            open: function(event, ui) {
+                $("#query").attr("aria-expanded", "true");
+                $(".ui-autocomplete").attr("id", "query-autocomplete-list").attr("role", "listbox");
+                $(".ui-autocomplete li").attr("role", "option");
+            },
+            close: function(event, ui) {
+                $("#query").attr("aria-expanded", "false");
+            },
+            select: function(event, ui) {
+                $("#query").val(ui.item.value);
+                return false;
+            }
+        }).data("ui-autocomplete")._renderItem = function(ul, item) {
+            return $("<li>")
+                .attr("role", "option")
+                .append($("<div>").text(item.label))
+                .appendTo(ul);
+        };
+
     });
 </script>
 <div class="main" id="main-content" role="main">
@@ -55,12 +78,12 @@ ${stylesheets.add(
     <div id="queryform">
         <p>
             <span>
-                <input name="query" id="query" size="34" value="" onfocus="" accesskey="q" onblur="" type="text" onkeydown="queryKeyDown(event);">
+                <input name="query" id="query" size="34" value="" onfocus="" accesskey="q" onblur="" type="text" onkeydown="queryKeyDown(event);" aria-label="${i18n().capability_map_input?js_string}" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-owns="query-autocomplete-list">
                 <label id="cutofflabel" for="queryCutoff">Cutoff:</label>
-                <input id="queryCutoff" name="queryCutoff" type="text" title="Cutoff" size="4" value="10">
-                <input value="${i18n().cap_map_search}" type="submit" id="add" type="button" onclick="addKwd();">
-                <input value="${i18n().cap_map_search_expand}" type="submit" id="sExpand" onclick="expandLastQuery = 1; addKwd();">
-                <input value="${i18n().cap_map_reset}" id="resetButton" type="submit" onclick="reset()" disabled>
+                <input id="queryCutoff" name="queryCutoff" type="text" title="Cutoff" size="4" value="10" aria-label="Cutoff">
+                <input value="${i18n().cap_map_search}" type="button" id="add" onclick="addKwd();">
+                <input value="${i18n().cap_map_search_expand}" type="button" id="sExpand" onclick="expandLastQuery = 1; addKwd();">
+                <input value="${i18n().cap_map_reset}" id="resetButton" type="button" onclick="reset()" disabled>
                 <!-- a style="display:inline-block; float:right; line-height:32px; height:32px; cursor:pointer" onclick="showhideadvanced(this)">Show advanced</a -->
             </span>
         </p>
@@ -69,7 +92,7 @@ ${stylesheets.add(
     <hr style="clear:both;">
 
     <div id="container">
-        <div id="helptext">
+        <div id="helptext" role="region" aria-label="${i18n().capability_map?js_string}">
             <p>
                 ${i18n().cap_map_text_intro}
             </p>
@@ -95,29 +118,35 @@ ${stylesheets.add(
             </p>
         </div>
 
-        <div id="center-container">
+        <div id="center-container" role="region" aria-label="${i18n().capability_map_svg_title?js_string}">
             <div id="log"></div>
-            <div id="infovis"></div>
+            <div id="infovis" tabindex="0" aria-live="polite"></div>
             <div class="capability-progress"><div id="progressbar"></div></div>
         </div>
 
         <div id="right-container">
             <div class="tabs">
-                <ul  class="titles">
-                    <li><a href="#demo">${i18n().cap_map_search_terms}</a></li>
-                    <li><a href="#logg">${i18n().cap_map_info}</a></li>
+                <ul  class="titles" role="tablist" aria-orientation="horizontal">
+                    <li>
+                        <a href="#tabpanel-demo" id="tab-demo" role="tab" aria-controls="tabpanel-demo" aria-selected="true" tabindex="0">${i18n().cap_map_search_terms}</a>
+                    </li>
+                    <li>
+                        <a href="#tabpanel-logg" id="tab-logg" role="tab" aria-controls="tabpanel-logg" aria-selected="false" tabindex="0">${i18n().cap_map_info}</a>
+                    </li>
                     <!-- li><a href="#extractData">Data</a></li -->
                 </ul>
 
                 <div class="result_body">
-                    <div class="result_section" id="demo">
-                        <h2>${i18n().cap_map_cur_search_terms}</h2>
-                        <ul id="log_printout">
-                            <li>
-                                ${i18n().cap_map_text6}
-                            </li>
-                        </ul>
-                        <p style="position:absolute; bottom:10px">
+                    <div class="result_section" id="tabpanel-demo" role="tabpanel" aria-labelledby="tab-demo" tabindex="0">
+                        <h2 id="cur-search-terms">${i18n().cap_map_cur_search_terms}</h2>
+                        <div id="log_printout" role="group" aria-labelledby="cur-search-terms">
+                            <ul>
+                                <li>
+                                    ${i18n().cap_map_text6}
+                                </li>
+                            </ul>
+                        </div>
+                        <p style="position:absolute; bottom:10px" role="group" aria-label="${i18n().cap_map_search_terms?js_string}">
                         <div class="capability">${i18n().cap_map_key1}</div>
                         <div class="edge">${i18n().cap_map_key2}</div>
                         <div class="group">${i18n().cap_map_key3}</div>
@@ -126,7 +155,7 @@ ${stylesheets.add(
                         <div class="links4">${i18n().cap_map_key6}</div>
                         </p>
                     </div>
-                    <div class="result_section" id="logg">
+                    <div class="result_section" id="tabpanel-logg" role="tabpanel" aria-labelledby="tab-logg" tabindex="0" hidden>
                         <div id="inner-details">
                             <p>
                                 ${i18n().cap_map_text7}
