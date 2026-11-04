@@ -5923,6 +5923,22 @@ uil-data:has_no_webpages.VIVO
         uil:hasKey      "has_no_webpages" ;
         uil:hasPackage  "VIVO-languages" .
 
+uil-data:arrow_key_reorder_note.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Используйте клавиши со стрелками для навигации, а Shift + стрелки — для перемещения элементов вверх или вниз."@ru-RU ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "arrow_key_reorder_note" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:reorder_action_info.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "{0} перемещён на позицию {1}."@ru-RU ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "reorder_action_info" ;
+        uil:hasPackage  "VIVO-languages" .
+
 uil-data:through_today.VIVO
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;

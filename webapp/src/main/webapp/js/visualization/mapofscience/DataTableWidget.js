@@ -106,9 +106,17 @@ var DataTableWidget = Class.extend({
 		var dom = me.dom;
 		var filter = $('<div class="science-areas-filter">' +
 				'<span id="' + dom.firstFilterID + '" class="' + dom.filterOptionClass + ' ' + dom.activeFilterClass + '">' + dom.firstFilterLabel + '</span> | ' +
-		    	'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">' + dom.secondFilterLabel + '</span>' +
-		    	'<img class="'+ dom.filterInfoIconClass +'" id="imageIconTwo" src="'+ infoIconUrl +'" alt="information icon" title="" /></div>');
+				'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">' + dom.secondFilterLabel + '</span>' +
+				'<button class="nostyle ' + dom.filterInfoIconClass + '" id="imageIconTwo" aria-label="information icon">' +
+					'<img src="'+ infoIconUrl +'" alt="information icon" title="" aria-hidden="true" />' +
+				'</button></div>');
 		me.tableDiv.append(filter);
+
+		$("#" + dom.firstFilterID + ", #" + dom.secondFilterID).on("keydown", function(e) {
+			if (e.key === "Enter" || e.keyCode === 13) {
+				$(this).trigger("click");
+			}
+		});
 
 		const tooltipDataImageIconTwo = {
 			title: "<div>" + $('#toolTipTwo').html() + "</div>",
@@ -235,11 +243,44 @@ var DataTableWidget = Class.extend({
 		    }
 		});
 
+		$('#datatable_paginate').attr('role', 'list')
+		const $paginationList = $('<div role="list" class="pagination-wrapper"></div>');
+
+		['#datatable_first', '#datatable_previous', '#datatable_next', '#datatable_last'].forEach(selector => {
+			const $button = $(selector)
+				.attr('tabindex', 0)
+				.attr('role', 'button')
+				.wrap('<div role="listitem" class="pagination-item" style="display:inline"></div>');
+
+			// Attach keyboard support
+			$button.on('keydown', function(e) {
+				if (e.key === "Enter" || e.key === " ") {
+					e.preventDefault();
+					$(this).trigger("click");
+				}
+			});
+
+			// Move each listitem into the list container
+			$paginationList.append($button.closest('[role="listitem"]'));
+		});
+
+		// Replace the old container with the new accessible structure
+		$('#datatable_paginate').empty().append($paginationList);
+
+		table.find('tbody > tr').each(function() {
+			var $firstTd = $(this).children('td').first();
+			var th = $('<th class="ignore-th"></th>').html($firstTd.html());
+			$firstTd.replaceWith(th);
+		});
 
 		var searchInputBox = $("." + me.dom.searchBarParentContainerClass).find("input[type=search]");
 		searchInputBox.css("width", "140px");
-		searchInputBox.after("<img class='filterInfoIcon' id='searchInfoIcon' src='" + infoIconUrl
-								+ "' alt='" + i18nStrings.infoIconString + "' title='' />");
+		searchInputBox.after(
+			"<button class='nostyle filterInfoIcon' id='searchInfoIcon' aria-label='"+ i18nStrings.infoIconString +"'>" +
+				"<img src='" + infoIconUrl
+				+ "' alt='" + i18nStrings.infoIconString + "' title='' aria-hidden='true' />" +
+			"</button>"
+		);
 		$( document ).on('click', "#reset-search", function() {
 			me.widget.fnFilter("");
 		});

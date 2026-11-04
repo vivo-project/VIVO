@@ -130,8 +130,8 @@
 
 <#if profilePageTypesEnabled && (targetedView?has_content || user.loggedIn) >
 <span id="quickViewLink" >
-    <a href="${urls.base}/display/${individual.localName}?destination=quickView" >
-        <img id="quickViewIcon" src="${urls.images}/individual/quickViewIcon.png" alt="${i18n().quick_view_icon}"/>
+    <a id="quickViewIcon" href="${urls.base}/display/${individual.localName}?destination=quickView" aria-label="${i18n().quick_view_icon}" >
+        <img src="${urls.images}/individual/quickViewIcon.png" alt="${i18n().quick_view_icon}" aria-hidden="true" />
     </a>
 </span>
 </#if>

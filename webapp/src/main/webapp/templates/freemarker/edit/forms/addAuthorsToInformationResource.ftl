@@ -51,6 +51,11 @@
 
 <h3>${i18n().manage_authors}</h3>
 
+<div id="reorder-instructions" class="sr-only">
+    ${i18n().arrow_key_reorder_note}
+</div>
+<div id="live-region" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
 <ul id="dragDropList" ${ulClass}>
 
 <script type="text/javascript">
@@ -64,7 +69,7 @@
 	<#assign authorUri = authorship.authorUri/>
 	<#assign authorName = authorship.authorName/>
 
-	<li class="authorship">
+	<li class="authorship" tabindex="0">
 			<#-- span.author will be used in the next phase, when we display a message that the author has been
 			removed. That text will replace the a.authorName, which will be removed. -->
 			<span class="authorship">
@@ -201,7 +206,9 @@ var i18nStrings = {
     authorTypeText: '${i18n().author_capitalized?js_string}',
     organizationTypeText: '${i18n().organization_capitalized?js_string}',
     helpTextSelect: '${i18n().select_an_existing?js_string}',
-    helpTextAdd: '${i18n().or_add_new_one?js_string}'
+    helpTextAdd: '${i18n().or_add_new_one?js_string}',
+    errorRemovingWebpage: '${i18n().error_removing_webpage?js_string}',
+    reorderActionInfo: '${i18n().reorder_action_info?js_string}'
 };
 
 $(document).ready(function () {

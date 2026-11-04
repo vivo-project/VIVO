@@ -5923,6 +5923,22 @@ uil-data:has_no_webpages.VIVO
         uil:hasKey      "has_no_webpages" ;
         uil:hasPackage  "VIVO-languages" .
 
+uil-data:arrow_key_reorder_note.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Aucune page web n'est associée à cette personne. Ajouter une page web en cliquant sur le bouton ci-dessous."@fr-CA ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "arrow_key_reorder_note" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:reorder_action_info.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "{0} a été déplacé à la position {1}."@fr-CA ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "reorder_action_info" ;
+        uil:hasPackage  "VIVO-languages" .
+
 uil-data:through_today.VIVO
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;

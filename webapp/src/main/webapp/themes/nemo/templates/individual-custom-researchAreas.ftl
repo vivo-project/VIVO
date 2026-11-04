@@ -7,7 +7,9 @@
     <#assign localName = researchAreas.localName>
     <h3 id="${localName}" class="mainPropGroup h4" title="${researchAreas.publicDescription!}">
         ${researchAreas.name?capitalize} 
-        <img id="researchAreaIcon" src="${urls.images}/individual/research-group-icon.png" alt="${i18n().research_areas}" />
+        <button id="researchAreaIcon" class="nostyle" aria-label="${i18n().research_areas_icon}">
+            <img src="${urls.images}/individual/research-group-icon.png" alt="${i18n().research_areas_icon}" aria-hidden="true" />
+        </button>
         <@p.addLink researchAreas editable /> <@p.verboseDisplay researchAreas />
     </h3>
     <ul id="individual-${localName}" role="list" >
