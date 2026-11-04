@@ -7,7 +7,7 @@
 <#assign addlEmail = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Email")!>
 
 <#if phone?has_content || primaryEmail?has_content || addlEmail?has_content >
-    <ul style="font-size:1em;padding-bottom:4px"><li><strong>${i18n().contact_info}</strong></li></ul>
+    <h2 style="font-size:1em;padding-bottom:4px"><strong>${i18n().contact_info}</strong></h2>
 </#if>
 
 <#-- Primary Email -->
