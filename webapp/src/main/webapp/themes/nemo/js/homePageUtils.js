@@ -102,7 +102,7 @@ $(document).ready(function(){
                 
                     $.each($('div#research-faculty-mbrs div.item a.faculty-mbrs '), function() {
                         if ( $(this).children('img').length == 0 ) {
-                            var imgHtml = "<img class='img-circle' width='160' alt='" + i18nStrings.placeholderImage + "' src='" + urlsBase + "/images/placeholders/person.bordered.thumbnail.jpg'>";
+                            var imgHtml = "<img class='img-circle' width='160' alt='' src='" + urlsBase + "/images/placeholders/person.bordered.thumbnail.jpg'>";
                             $(this).prepend(imgHtml);
                         }
                         else { 
@@ -115,7 +115,7 @@ $(document).ready(function(){
                                 + urlsBase
                                 + "/people#http://vivoweb.org/ontology/core#FacultyMember' alt='" 
                                 + i18nStrings.viewAllFaculty + "'>"
-                                + i18nStrings.viewAllString + "</a></li></ul>";
+                                + i18nStrings.i18nStrings.viewAllFaculty.charAt(0).toUpperCase() + i18nStrings.viewAllFaculty.slice(1) + "...</a></li></ul>";
                     //var viewMore = "<ul id='viewMoreFac' style='list-style:none;margin:0;padding:0;'><li><a href='"
                     //    + urlsBase
                     //    + "/people#http://xmlns.com/foaf/0.1/Person' alt='" 
@@ -200,8 +200,8 @@ $(document).ready(function(){
           html += "<a href='" + urlsBase 
               + "/organizations#http://vivoweb.org/ontology/core#AcademicDepartment' alt='" 
               + i18nStrings.viewAllDepartments + "'>" 
-              + i18nStrings.viewAllString + "</a>"
-              + "</div>"
+              + i18nStrings.viewAllDepartments.charAt(0).toUpperCase() + i18nStrings.viewAllDepartments.slice(1) + "...</a>"
+              + "</div>";
           //<a href="${urls.base}/research" alt="${i18n().view_all_research}">${i18n().view_all}</a>
       }
         $('div#academic-depts').html(html);

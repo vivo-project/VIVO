@@ -45,12 +45,12 @@
 				>				
 				<#-- Search button for search form in navbar -->
 				<button type="submit" class="btn btn-default sympl-search hidden-xs">
-					<span class="glyphicon glyphicon-search" role="submit"></span>
+					<span class="glyphicon glyphicon-search"></span>
 				</button>
 			
 				<#-- Button for submitting search has been repeated with btn-block and hidden on lg and md devices to fix mobile support -->
 				<button type="submit" class="btn btn-default btn-block sympl-search hidden-sm hidden-lg hidden-md">
-					<span class="glyphicon glyphicon-search" role="submit"></span>
+					<span class="glyphicon glyphicon-search"></span>
 				</button>				
 			</div>
 		</form>		
@@ -77,13 +77,13 @@
 			<#-- Search button for search form in navbar -->
 		<#--
 			<button type="submit" class="btn btn-default sympl-search hidden-xs">
-				<span class="glyphicon glyphicon-search" role="submit"></span>
+				<span class="glyphicon glyphicon-search"></span>
 			</button>
 		-->
 			<#-- Button for submitting search has been repeated with btn-block and hidden on lg and md devices to fix mobile support -->
 		<#--
 			<button type="submit" class="btn btn-default btn-block sympl-search hidden-sm hidden-lg hidden-md">
-				<span class="glyphicon glyphicon-search" role="submit"></span>
+				<span class="glyphicon glyphicon-search"></span>
 			</button>
 		</form>
 		-->
@@ -125,7 +125,7 @@
 <div class="container"> <#--This container has to be left open to contain all search result pages, however it must be closed at the top of footer.ftl or the footer will not extend the width of the browser. -->        
 	<#if flash?has_content>
 		<#if flash?starts_with(i18n().menu_welcomestart) >
-			<section  id="welcome-msg-container" role="container">
+			<section  id="welcome-msg-container">
 				<section  id="welcome-message" role="alert">${flash}</section>
 			</section>
 		<#else>

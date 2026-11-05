@@ -54,7 +54,7 @@
 
 <section id="personHasAdditionalEmail" role="region">
 
-    <form id="personHasAdditionalEmail" class="customForm noIE67" action="${submitUrl}"  role="add/edit phone">
+    <form id="personHasAdditionalEmail" class="customForm noIE67" action="${submitUrl}">
 
         <p>
             <label for="additionalEmail">${i18n().email_address} ${requiredHint}</label>

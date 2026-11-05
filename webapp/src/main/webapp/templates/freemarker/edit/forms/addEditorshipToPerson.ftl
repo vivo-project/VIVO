@@ -77,7 +77,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <section id="addEditorshipToPerson" role="region">
 
-    <form id="addEditorshipToPerson" class="customForm noIE67" action="${submitUrl}"  role="add/edit editorship">
+    <form id="addEditorshipToPerson" class="customForm noIE67" action="${submitUrl}">
 
 
     <p class="inline">
@@ -114,7 +114,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
   	<#--End draw elements-->
     <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>
     <p class="submit">
-         <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> ${i18n().or} </span>
+         <input type="submit" id="submit" value="${submitButtonText}" aria-label="${submitButtonText}"/><span class="or"> ${i18n().or} </span>
          <a class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
      </p>
 

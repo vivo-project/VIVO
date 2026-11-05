@@ -31,7 +31,7 @@
 
  			<input type="hidden" name="editKey" id="editKey" value="${editKey}"/>
 
-        	<input type="submit" class="submit" id="submit" value="${i18n().save_button}" role="button" role="input" />
+        	<input type="submit" class="submit" id="submit" value="${i18n().save_button}" role="button" />
 			${i18n().or}
 			<a href="${urls.referringPage}" class="cancel" title="${i18n().cancel_title}" >${i18n().cancel_link}</a>
 

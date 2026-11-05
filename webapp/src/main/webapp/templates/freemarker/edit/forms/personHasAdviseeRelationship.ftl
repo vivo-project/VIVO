@@ -101,7 +101,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <section id="personHasAdvisingRelationship" role="region">
 
-    <form id="personHasAdvisingRelationship" class="customForm noIE67" action="${submitUrl}"  role="add/edit AdvisingRelationship">
+    <form id="personHasAdvisingRelationship" class="customForm noIE67" action="${submitUrl}">
     <p class="inline">
       <label for="orgType">${i18n().advising_relationship_type}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
       <#assign advisingRelTypeOpts = editConfiguration.pageData.advisingRelType />
@@ -189,7 +189,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>
 
    <p class="submit">
-        <input type="submit" class="submit" value="${submitButtonText}"/><span class="or"> ${i18n().or} </span>
+        <input type="submit" class="submit" value="${submitButtonText}" aria-label="${submitButtonText}"/><span class="or"> ${i18n().or} </span>
         <a class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
     </p>
 

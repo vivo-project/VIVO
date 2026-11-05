@@ -54,7 +54,7 @@
 
 <section id="personHasTelephoneNumber" role="region">
 
-    <form id="personHasTelephoneNumber" class="customForm noIE67" action="${submitUrl}"  role="add/edit phone">
+    <form id="personHasTelephoneNumber" class="customForm noIE67" action="${submitUrl}">
 
         <p>
             <label for="preferredTitle">${i18n().preferred_title} ${requiredHint}</label>

@@ -235,12 +235,18 @@ span#qrCodeImage {
 span#qrCodeImage img {
     padding: 1.7em 1.7em 0 1.7em;
 }
-a.qrCloseLink {
+.qrCloseLink {
     float: right;
     padding-right: 1em;
     margin-right: 0;
     font-size: .8em;
-}/* MISCELLANEOUS------>  */
+}
+button.qrCloseLink {
+    color: inherit;
+    font-family: inherit;
+    cursor: pointer;
+}
+/* MISCELLANEOUS------>  */
 .listDateTime {
     padding: 0 0.4em;
     font-size: 0.8em;

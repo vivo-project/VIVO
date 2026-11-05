@@ -20,7 +20,7 @@ ${i18n().check_grants_to_exclude}
 
     <#list allSubclasses as sub>
     <h4>${sub}</h4>
-        <section id="pubsContainer" role="container">
+        <section id="pubsContainer">
         <#assign grantList = grants[sub]>
         <ul >
             <#list grantList as grant>

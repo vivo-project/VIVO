@@ -112,7 +112,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <@lvf.unsupportedBrowser  urls.base />
 
 
-    <form id="addGrantRoleToPerson" class="customForm noIE67" action="${submitUrl}"  role="add/edit grant role">
+    <form id="addGrantRoleToPerson" class="customForm noIE67" action="${submitUrl}">
 
         <p>
             <label for="grant">${i18n().grant_name} ${requiredHint}</label>

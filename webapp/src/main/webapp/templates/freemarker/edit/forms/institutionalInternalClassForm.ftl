@@ -54,7 +54,7 @@ edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.Institu
             <h3>${i18n().create_new_class}</h3>
 
             <label for="localClassName">${i18n().name_capitalized}<span class="requiredHint"> *</span></label>
-            <input type="text" id="localClassName" name="localClassName" value="" role="input" />
+            <input type="text" id="localClassName" name="localClassName" value="" />
             <p class="note">${i18n().use_capitals_each_word}</p>
 
             <#--If more than one local namespace, generate select-->
