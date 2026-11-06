@@ -6286,3 +6286,17 @@ uil-data:no_add_to_person_profile.VIVO
         rdfs:label       "No"@en-US ;
         uil:hasApp       "VIVO" ;
         uil:hasKey       "no_add_to_person_profile" .
+
+uil-data:organization_metrics_report.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Metrics report"@en-US ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "organization_metrics_report" .
+
+uil-data:organization_trends_report.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Trends report"@en-US ;
+        uil:hasApp       "VIVO" ;
+        uil:hasKey       "organization_trends_report" .

@@ -179,10 +179,22 @@ p.view-all-coauthors {
     padding: 0 29px 20px 0;
     background-color: #fff;
 }
+
 #map-of-science h3,
 #temporal-graph h3 {
     margin: 0;
     padding: 0;
+}
+.report-container > div > img {
+	padding-right: 10px;
+    vertical-align: text-top;
+}
+.report-container {
+  padding: 0 3px 20px 0;	
+}
+.report-container > div {
+	margin: 0;
+	padding: 0;
 }
 /* <------ POSITIONS */
 ul#individual-personInPosition {
