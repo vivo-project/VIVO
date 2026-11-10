@@ -7,7 +7,7 @@
     <#assign localName = researchAreas.localName>
     <h2 id="${localName}" class="mainPropGroup" title="${researchAreas.publicDescription!}">
         ${researchAreas.name}
-        <img id="researchAreaIcon" src="${urls.images}/individual/research-group-icon.png" alt="${i18n().research_areas}" />
+        <img id="researchAreaIcon" src="${urls.images}/individual/research-group-icon.png" alt="${i18n().research_areas_icon}" />
         <@p.addLink researchAreas editable />
     </h2>
     <@p.verboseDisplay researchAreas />
