@@ -44,6 +44,7 @@ em {
     font-style: italic;
 }
 /* h1,h2,h3,h4,h5,h6 ------>  */
+h1,
 h2 {
     padding: 10px 0 12px 0;
     margin: 0;
@@ -451,7 +452,7 @@ hr.formDivider {
     margin: 0 auto;
 }
 /* BRANDING ------>  */
-h1.vivo-logo {
+.vivo-logo {
     position: absolute;
     width: 442px;
     height: 59px;
@@ -459,7 +460,7 @@ h1.vivo-logo {
     left: 0;
     background: url(../images/VIVO-logo.png) 0 0 no-repeat;
 }
-h1.vivo-logo a {
+.vivo-logo a {
     display: block;
     width: 386px;
     height: 59px;
@@ -883,6 +884,7 @@ a.view-all-style {
 		border-bottom: 1px dotted #dbe3e3; /* stroke */
 		background-color: #fff; /* layer fill content */
 }
+.home-sections h3,
 .home-sections h4 {
 		border-top: 1px solid rgba(220,228,227,.42); /* stroke */
 		border-bottom: 1px solid rgba(220,228,227,.42); /* stroke */
@@ -942,9 +944,13 @@ a.view-all-style {
 	margin-left: 15px;
 	float: left;
 }
+#home-academic-depts h3,
 #home-academic-depts h4,
+#home-faculty-mbrs h3,
 #home-faculty-mbrs h4,
+#home-geo-focus h3,
 #home-geo-focus h4,
+#home-research h3,
 #home-research h4 {
     display: inline;
     padding: 3px 10px;
@@ -1057,7 +1063,7 @@ ul#footer-nav li {
 }
 ul#footer-nav li:last-child,
 ul#header-nav li.last,
-ul#individual-hasResearchArea li:last-child,
+ul.individual-hasResearchArea li:last-child,
 ul#individual-facultyMemberships li:last-child {
     border-right: none;
 }
@@ -1164,11 +1170,13 @@ ul#individual-tools-people li a {
     width: 920px;
     background: #fff;
 }
+#menupage-intro h1,
 #menupage-intro h2 {
     font-size: 1.375em;
     color: #064d68;
     font-weight: normal;
 }
+#menupage-intro.people h1,
 #menupage-intro.people h2 {
     float: left;
 }
@@ -1243,10 +1251,14 @@ ul#find-filters a.selected {
 #browse-by {
     width: 920px;
 }
-#browse-by h2 {
+#browse-by h2:not(.selected-class) {
     background: #5e6363;
     font-size: 1.375em;
     color: #fff;
+}
+#browse-by h2.selected-class {
+    background: none;
+    color: #064d68;
 }
 /* BROWSE CLASSES ------>  */
 ul#browse-classes {
@@ -1351,7 +1363,8 @@ article.property ul.property-list {
 #admin {
     background-color: #f2f9fb;
 }
-#admin h3 {
+#admin h3,
+#admin #adminPanel {
     background: #2485AE;
     color: #fff;
 }
@@ -1447,7 +1460,7 @@ ul#individual-personInPosition li {
     padding-top: 10px;
     width: 100%;
 }
-ul#individual-hasResearchArea li {
+ul.individual-hasResearchArea li {
     border-right: 1px solid #A6B1B0;
 }
 ul#individual-facultyMemberships li {
@@ -1464,7 +1477,9 @@ a.all-vivo-publications {
 }
 /* <------ TEMPORAL GRAPH and MAP O' SCIENCE  */
 #temporal-graph h3 a,
-#map-of-science h3 a {
+#temporal-graph p a,
+#map-of-science h3 a,
+#map-of-science p a {
     color: #2485AE;
     font-size: .8em !important;
     text-decoration: underline;

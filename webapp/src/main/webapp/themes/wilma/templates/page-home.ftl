@@ -32,13 +32,13 @@
         <#include "menu.ftl">
 
         <section id="intro" role="region">
-            <h2>${i18n().intro_title}</h2>
+            <h1>${i18n().intro_title}</h1>
 
             <p>${i18n().intro_para1}</p>
             <p>${i18n().intro_para2}</p>
 
             <section id="search-home" role="region">
-                <h3>${i18n().intro_searchvivo} <span class="search-filter-selected">filteredSearch</span></h3>
+                <h2>${i18n().intro_searchvivo} <span class="search-filter-selected">filteredSearch</span></h2>
 
                 <fieldset>
                     <legend>${i18n().search_form}</legend>

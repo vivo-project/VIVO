@@ -31,7 +31,7 @@
             
             <#-- <h5 id="sparklineHeading">${i18n().publications_in_vivo}</h5> -->
             <#-- Below divs seem to be empty, have been removed
-            <div id="vis_container_coauthor">&nbsp;</div>
+            <div class="vis_container_coauthor">&nbsp;</div>
             
             <div class="collaboratorship-link-separator"></div> -->
             <#-- <h5>Visualizations</h5> -->

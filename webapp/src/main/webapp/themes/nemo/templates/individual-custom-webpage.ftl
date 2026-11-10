@@ -7,7 +7,7 @@
         <#if !editable && individual.person() > 
             <h5><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> <strong>${i18n().websites}</strong></h5>
         </#if>
-        <@p.addLinkWithLabel webpage editable i18n().websites/> 
+        <@p.addLinkWithLabel webpage editable i18n().websites headingTag="p"/> 
         <#assign localName = webpage.localName>
         <ul class="individual-urls" role="list" <#if individual.organization() && !editable>style="font-size:1.15em"</#if>>
             <@p.objectProperty webpage editable />

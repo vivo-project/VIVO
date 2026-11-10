@@ -97,7 +97,7 @@ $(document).ready(function(){
 
     // if there are no selected pubs, hide the manage link; same for grants
     // and affiliated people on the org profile page
-    if ( $('ul#relatedBy-Authorship-List').children('li').length < 1 && $('h3#relatedBy-Authorship').attr('class') != "hiddenPubs" ) {
+    if ( $('ul#relatedBy-Authorship-List').children('li').length < 1 && $('h3.relatedBy-Authorship').attr('class') != "hiddenPubs" ) {
         $('a#managePubLink').hide();
     }
 
@@ -105,11 +105,11 @@ $(document).ready(function(){
             $('ul#RO_0000053-PrincipalInvestigatorRole-List').children('li').length < 1 &&
             $('ul#RO_0000053-CoPrincipalInvestigatorRole-List').children('li').length < 1 &&
             $('ul#RO_0000053-InvestigatorRole-List').children('li').length < 1 &&
-            $('h3#RO_0000053-ResearcherRole').attr('class') != "hiddenGrants" ) {
+            $('h3.RO_0000053-ResearcherRole').attr('class') != "hiddenGrants" ) {
                     $('a#manageGrantLink').hide();
     }
 
-    if ( $('ul#relatedBy-Position-List').children('li').length < 1 && $('h3#relatedBy-Position').attr('class') != "hiddenPeople" ) {
+    if ( $('ul#relatedBy-Position-List').children('li').length < 1 && $('h3.relatedBy-Position').attr('class') != "hiddenPeople" ) {
         $('a#managePeopleLink').hide();
     }
 

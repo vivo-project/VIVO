@@ -154,19 +154,24 @@
 	we need to also show the property label. If no label is specified, the property
 	name will be used as the label. 
 -->
-<#macro addLinkWithLabel property editable label="${property.name?capitalize}">
+<#macro addLinkWithLabel property editable label="${property.name?capitalize}" headingTag="h4">
 	<#local addLink><@addLink property editable label /></#local>
 	<#local verboseDisplay><@verboseDisplay property /></#local>
+	<#local headingTag = headingTag!'h4'>
 	<#-- 
 		Changed to display the label when user is in edit mode, even if there's no add link (due to 
 		displayLimitAnnot, for example). Otherwise the display looks odd, since neighboring 
 		properties have labels. 
 		<#if addLink?has_content || verboseDisplay?has_content>
-			<h4 id="${property.localName}" title="${property.publicDescription!}">${label}  ${addLink!} ${verboseDisplay!}</h4>         
+			<h4 class="${property.localName}" title="${property.publicDescription!}">${label}  ${addLink!} ${verboseDisplay!}</h4>         
 		</#if>
 	-->
-	<#if editable> 
-		<h4 id="${property.localName!}" title="${property.publicDescription!}">${label}  ${addLink!} ${verboseDisplay!}</h4>
+	<#if editable>
+		<#local labelClass = property.localName!>
+		<#if headingTag == "p">
+			<#local labelClass = labelClass + " individual-section-label">
+		</#if>
+		<${headingTag} class="${labelClass}" title="${property.publicDescription!}">${label}  ${addLink!} ${verboseDisplay!}</${headingTag}>
 	</#if>
 </#macro>
 
@@ -203,7 +208,7 @@
 
 
 <#macro propertyLabel property label="${property.name?capitalize}">
-	<h4 id="${property.localName}" title="${property.publicDescription!}">${label}  <@verboseDisplay property /></h4>
+	<h4 class="${property.localName}" title="${property.publicDescription!}">${label}  <@verboseDisplay property /></h4>
 </#macro>
 
 
@@ -336,7 +341,7 @@
         </a>
         <@editingLinks "${mainImage.localName}" "" mainImage.first() editable />
     <#else>
-        <#local imageLabel><@addLinkWithLabel mainImage editable "${i18n().photo}" /></#local>
+        <#local imageLabel><@addLinkWithLabel property=mainImage editable=editable label="${i18n().photo}" headingTag="p" /></#local>
         ${imageLabel}
         <#if showPlaceholder == "always" || (showPlaceholder="with_add_link" && imageLabel?has_content)>
             <img class="img-rounded" src="${placeholderImageUrl(individual.uri)}" title = "${i18n().no_image}" alt="${i18n().placeholder_image}" width="${imageWidth!}" />

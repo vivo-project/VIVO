@@ -84,7 +84,7 @@
 
         <header>
             <#if relatedSubject??>
-                <h2>${relatedSubject.relatingPredicateDomainPublic} ${i18n().indiv_foafperson_for} ${relatedSubject.name}</h2>
+                <h1>${relatedSubject.relatingPredicateDomainPublic} ${i18n().indiv_foafperson_for} ${relatedSubject.name}</h1>
                 <p><a href="${relatedSubject.url}" title="${i18n().indiv_foafperson_return}">&larr; ${i18n().indiv_foafperson_return} ${relatedSubject.name}</a></p>
             <#else>
                 <h1 class="foaf-person">
@@ -96,9 +96,9 @@
                     <#assign title = propertyGroups.pullProperty("http://purl.obolibrary.org/obo/ARG_2000028","http://www.w3.org/2006/vcard/ns#Title")!>
                     <#if title?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
                         <#if (title.statements?size < 1) >
-                            <@p.addLinkWithLabel title editable />
+                            <@p.addLinkWithLabel title editable headingTag="p" />
                         <#elseif editable>
-                            <h2>${title.name}</h2>
+                            <p class="individual-section-label">${title.name}</p>
                             <@p.verboseDisplay title />
                         </#if>
                         <#list title.statements as statement>

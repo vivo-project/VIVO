@@ -18,8 +18,8 @@
     <span class="hideThis">&nbsp;</span>
     <script type="text/javascript" >
         $('span.hideThis').parent().parent().addClass("hideThis");
-        if ( jQuery.isEmptyObject($('h3#relatedBy-Authorship').attr('class')) ) {
-            $('h3#relatedBy-Authorship').addClass('hiddenPubs');
+        if ( jQuery.isEmptyObject($('h3.relatedBy-Authorship').attr('class')) ) {
+            $('h3.relatedBy-Authorship').addClass('hiddenPubs');
         }
         $('span.hideThis').parent().remove();
     </script>

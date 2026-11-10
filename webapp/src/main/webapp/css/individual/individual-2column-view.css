@@ -176,7 +176,9 @@ div#pub_count_short_sparkline_vis {
     margin-top: -4px;
 }
 #temporal-graph h3 img,
-#map-of-science h3 img {
+#temporal-graph p img,
+#map-of-science h3 img,
+#map-of-science p img {
     padding-right: 10px;
     vertical-align: middle;
 }
@@ -231,7 +233,7 @@ div#contactPhoneDiv {
     text-align:right;
 }
 /* <------ RESEARCH AREA */
-ul#individual-hasResearchArea li {
+ul.individual-hasResearchArea li {
     float: left;
     padding-right: 10px;
     margin-right: 10px;

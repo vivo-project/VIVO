@@ -16,7 +16,7 @@
 <#-- Works in conjunction with the homePageUtils.js file, which contains the ajax call. -->
 <#macro facultyMbrHtml>
     <section id="home-faculty-mbrs" class="home-sections"  >
-        <h4>${i18n().faculty_capitalized}</h4>
+        <h2>${i18n().faculty_capitalized}</h2>
         <div id="tempSpacing">
             <span>${i18n().loading_faculty}&nbsp;&nbsp;&nbsp;
                 <img  src="${urls.images}/indicatorWhite.gif">
@@ -58,7 +58,7 @@
     <#assign selected = 'class="selected" ' />
     <#assign classGroupList>
         <section id="home-stats" class="home-sections" >
-            <h4>${i18n().statistics}</h4>
+            <h2>${i18n().statistics}</h2>
             <ul id="stats">
                 <#assign groupCount = 1>
                 <#list classGroups as group>
@@ -100,7 +100,7 @@
     <#if firstPopulatedClassGroup??>
             ${classGroupList}
     <#else>
-        <h3 id="noContentMsg">${i18n().no_content_create_groups_classes}</h3>
+        <h2 id="noContentMsg">${i18n().no_content_create_groups_classes}</h2>
 
         <#if user.loggedIn>
             <#if user.hasSiteAdminAccess>
@@ -117,7 +117,7 @@
 <#-- Works in conjunction with the homePageUtils.js file -->
 <#macro researchClasses classGroups=vClassGroups>
 <section id="home-research" class="home-sections">
-    <h4>${i18n().research_capitalized}</h4>
+    <h2>${i18n().research_capitalized}</h2>
         <#if isResearchContentFound(classGroups) >
         	<@printResearchTable classGroups />
         <#else>
@@ -173,7 +173,7 @@
 <#-- Works in conjunction with the homePageUtils.js file -->
 <#macro academicDeptsHtml>
     <section id="home-academic-depts" class="home-sections">
-        <h4>${i18n().departments}</h4>
+        <h2>${i18n().departments}</h2>
         <div id="academic-depts">
         </div>
     </section>
@@ -200,7 +200,7 @@ var urlsBase = "${urls.base}";
 <#-- as the leaflet javascript library.                                     -->
 <#macro geographicFocusHtml>
     <section id="home-geo-focus" class="home-sections">
-        <h4>${i18n().geographic_focus}</h4>
+        <h2>${i18n().geographic_focus}</h2>
         <#-- map controls allow toggling between multiple map types: e.g., global, country, state/province. -->
         <#-- VIVO default is for only a global display, though the javascript exists to support the other   -->
         <#-- types. See map documentation for additional information on how to implement additional types.  -->
