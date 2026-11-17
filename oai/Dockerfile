@@ -11,8 +11,8 @@ RUN patch joai-project/web/oai_requests/Identify.jsp Identify.patch
 
 WORKDIR /usr/local
 RUN curl --location 'https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.118/bin/apache-tomcat-9.0.118.tar.gz' | tar xz
-RUN git clone https://github.com/litvinovg/rdf-to-openaire
-RUN git clone https://github.com/litvinovg/joai-connector
+RUN git clone https://github.com/vivo-project/rdf-to-openaire
+RUN git clone https://github.com/vivo-project/joai-connector
 RUN cd apache-tomcat* && echo "catalina.home=$(pwd)" > ~/build.properties
 COPY . /tmp/joai-project
 
