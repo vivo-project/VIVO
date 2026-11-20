@@ -2487,7 +2487,7 @@ uil-data:years_of_grant_participation.VIVO
 uil-data:cap_map_key3.VIVO
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;
-        rdfs:label       "group"@en-US ;
+        rdfs:label       "group (blue circle)"@en-US ;
         uil:hasApp      "VIVO" ;
         uil:hasKey      "cap_map_key3" ;
         uil:hasPackage  "VIVO-languages" .
@@ -2999,7 +2999,7 @@ uil-data:subdisciplines_lower.VIVO
 uil-data:cap_map_key1.VIVO
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;
-        rdfs:label       "capability"@en-US ;
+        rdfs:label       "capability (orange square)"@en-US ;
         uil:hasApp      "VIVO" ;
         uil:hasKey      "cap_map_key1" ;
         uil:hasPackage  "VIVO-languages" .
@@ -4134,7 +4134,7 @@ uil-data:cap_map_text_headline2.VIVO
 uil-data:cap_map_text4.VIVO
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;
-        rdfs:label       "To make the visualisation easier to read, search terms and groups are scaled according to the number of results returned. Groups are also given different shades according to the number of connected search terms. The darker the shade, the more search terms a group is connected to."@en-US ;
+        rdfs:label       "To make the visualization easier to read, search terms and groups are scaled according to the number of results returned. Groups are also colored and sized based on the number of connected search terms. Groups with fewer connections appear smaller and in lighter shades of blue, while groups with more connections appear larger and in darker shades of blue."@en-US ;
         uil:hasApp      "VIVO" ;
         uil:hasKey      "cap_map_text4" ;
         uil:hasPackage  "VIVO-languages" .
@@ -5030,7 +5030,7 @@ uil-data:create_year_awarded.VIVO
 uil-data:cap_map_text1.VIVO
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;
-        rdfs:label       "Enter a research area into the search field above and press 'Search'. The resulting diagram displays the search term, rendered in orange, connected to the blue group of researchers that are active in that area. Enter another search term to see how researchers from both searches relate. Keep adding search terms to build a capability map."@en-US ;
+        rdfs:label       "Enter a research area into the search field above and press 'Search'. The resulting diagram displays the search term as an orange square, connected to blue circles that represent groups of researchers active in that area. Enter another search term to see how researchers from both searches relate. Keep adding search terms to build a capability map."@en-US ;
         uil:hasApp      "VIVO" ;
         uil:hasKey      "cap_map_text1" ;
         uil:hasPackage  "VIVO-languages" .
@@ -5113,6 +5113,38 @@ uil-data:capability_map.VIVO
         rdfs:label       "Capability Map"@en-US ;
         uil:hasApp      "VIVO" ;
         uil:hasKey      "capability_map" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:capability_map_remove_person.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Remove person from capability map view"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "capability_map_remove_person" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:capability_map_input.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Capability Map search input"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "capability_map_input" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:capability_map_svg_title.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Capability Map Visualization"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "capability_map_svg_title" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:capability_map_svg_desc.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Interactive capability map. Search terms appear as orange squares; groups of researchers appear as blue circles. Square and circle size reflect result counts; circle shading shows how many search terms each group is linked to. Lines connect related terms and groups."@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "capability_map_svg_desc" ;
         uil:hasPackage  "VIVO-languages" .
 
 uil-data:search_info_tool_tip_text_the_first_part.VIVO
