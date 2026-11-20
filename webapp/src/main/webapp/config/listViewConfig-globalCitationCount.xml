@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- List view for http://purl.org/spar/c4o/GlobalCitationCount -->
+
+<list-view-config>
+    <query-select>
+        PREFIX biro: &lt;http://purl.org/spar/biro/&gt;
+        PREFIX co: &lt;http://purl.org/co/&gt;
+        PREFIX frbr: &lt;http://purl.org/vocab/frbr/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+        PREFIX c4o: &lt;http://purl.org/spar/c4o/&gt;
+
+    SELECT DISTINCT ?citationCount
+        ?countDate
+        ?countValue
+        ?countSource ?countSourceName
+
+    WHERE {
+        ?subject ?property ?citationCount .
+        ?citationCount a c4o:GlobalCitationCount .
+
+        OPTIONAL {
+            <precise-subquery>
+                ?subject ?property ?citationCount.
+                ?citationCount a c4o:GlobalCitationCount .
+            </precise-subquery>
+            ?citationCount c4o:hasGlobalCountDate ?countDate .
+        }
+
+        OPTIONAL {
+            <precise-subquery>
+                ?subject ?property ?citationCount.
+                ?citationCount a c4o:GlobalCitationCount .
+            </precise-subquery>
+            ?citationCount c4o:hasGlobalCountValue ?countValue .
+        }
+        
+        OPTIONAL {
+            <precise-subquery>
+                ?subject ?property ?citationCount.
+                ?citationCount a c4o:GlobalCitationCount .
+            </precise-subquery>
+            ?citationCount c4o:hasGlobalCountSource ?countSource .
+            ?countSource rdfs:label ?countSourceName .
+        }
+    } ORDER BY DESC(?countDate)
+    </query-select>
+
+    <template>propStatement-globalCitationCount.ftl</template>
+</list-view-config>

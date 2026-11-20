@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:display="http://vitro.mannlib.cornell.edu/ontologies/display/1.1#">
+
+    <!-- Registering the List View-->
+    <rdf:Description rdf:about="http://purl.org/spar/c4o/hasGlobalCitationFrequency">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-globalCitationCount.xml</display:listViewConfigFile>
+    </rdf:Description>
+</rdf:RDF>
