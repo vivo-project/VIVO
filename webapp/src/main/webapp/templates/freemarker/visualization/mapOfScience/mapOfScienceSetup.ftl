@@ -147,4 +147,3 @@ ${scripts.add('<script type="text/javascript" src="${urls.base}/webjars/jquery-u
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/webjars/jquery-ui-themes/smoothness/jquery-ui.min.css" />',
                   '<link rel="stylesheet" href="${urls.base}/js/visualization/entitycomparison/jquery_plugins/datatable/demo_table.css" />',
                   '<link rel="stylesheet" href="${urls.base}/css/visualization/mapofscience/layout.css" />')}
-

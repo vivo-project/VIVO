@@ -19,9 +19,11 @@
 
         <#if isAuthor>
             <#assign coAuthorIcon = "${urls.images}/visualization/coauthorship/co_author_icon.png">
-            <#assign mapOfScienceIcon = "${urls.images}/visualization/mapofscience/scimap_icon.png">
             <#assign coAuthorVisUrl = individual.coAuthorVisUrl()>
-            <#assign mapOfScienceVisUrl = individual.mapOfScienceUrl()>
+            <#if mapOfScienceVisualizationEnabled>
+                <#assign mapOfScienceIcon = "${urls.images}/visualization/mapofscience/scimap_icon.png">
+                <#assign mapOfScienceVisUrl = individual.mapOfScienceUrl()>
+            </#if>
 
             <#assign googleJSAPI = "https://www.gstatic.com/charts/loader.js">
 
@@ -38,14 +40,16 @@
                 <div class="collaboratorship-link"><a href="${coAuthorVisUrl}" title="${i18n().co_author_network}">${i18n().co_author_network}</a></div>
             </div>
 
-            <div class="collaboratorship-link-separator"></div>
+            <#if mapOfScienceVisualizationEnabled>
+                <div class="collaboratorship-link-separator"></div>
 
-  	      	<div id="mapofscience_link_container" class="collaboratorship-link-container">
-            	<div class="collaboratorship-icon">
-                    <a href="${mapOfScienceVisUrl}" title="${i18n().map_of_science}"><img src="${mapOfScienceIcon}" alt="${i18n().map_of_science}" width="25px" height="25px" /></a>
+                <div id="mapofscience_link_container" class="collaboratorship-link-container">
+                    <div class="collaboratorship-icon">
+                        <a href="${mapOfScienceVisUrl}" title="${i18n().map_of_science}"><img src="${mapOfScienceIcon}" alt="${i18n().map_of_science}" width="25px" height="25px" /></a>
+                    </div>
+                    <div class="collaboratorship-link"><a href="${mapOfScienceVisUrl}" title="${i18n().map_of_science}">${i18n().map_of_science_capitalized}</a></div>
                 </div>
-                <div class="collaboratorship-link"><a href="${mapOfScienceVisUrl}" title="${i18n().map_of_science}">${i18n().map_of_science_capitalized}</a></div>
-            </div>
+            </#if>
 
             ${scripts.add('<script type="text/javascript" src="${googleJSAPI}"></script>',
                           '<script type="text/javascript" src="${urls.base}/js/visualization/visualization-helper-functions.js"></script>',
