@@ -57,7 +57,7 @@
     clear: both;
 }
 
-.datatablewrapper th {
+.datatablewrapper th:not(.ignore-th) {
     border-top: 1px #3D454E solid;
     background:#F1F2ee;
     font-weight:bold;

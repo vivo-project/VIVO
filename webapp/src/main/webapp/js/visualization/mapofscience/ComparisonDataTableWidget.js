@@ -64,13 +64,21 @@ var ComparisonDataTableWidget = Class.extend({
 		/* Create filter */
 		var dom = me.dom;
 		var filter = $('<div class="science-areas-filter">' +
-	    	'<span id="' + dom.firstFilterID + '" class="' + dom.filterOptionClass + ' ' + dom.activeFilterClass + '">' + dom.firstFilterLabel + '</span>'+
-	    	/* This is temporary removed due to the person's publications mapping rate is too low to be displayed.
-		    	' | ' +
-		    	'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">' + dom.secondFilterLabel + '</span>' +
-	    	*/
-	    	'<img class="' + dom.filterInfoIconClass + '" id="comparisonImageIconTwo" src="'+ infoIconUrl +'" alt="' + i18nStrings.infoIconString + '" title="" /></div>');
+			'<span id="' + dom.firstFilterID + '" class="' + dom.filterOptionClass + ' ' + dom.activeFilterClass + '">' + dom.firstFilterLabel + '</span>'+
+			/* This is temporary removed due to the person's publications mapping rate is too low to be displayed.
+				' | ' +
+				'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">' + dom.secondFilterLabel + '</span>' +
+			*/
+			'<button id="comparisonImageIconTwo" aria-label="' + i18nStrings.infoIconString + '" class="nostyle ' + dom.filterInfoIconClass + '">' +
+				'<img src="'+ infoIconUrl +'" alt="' + i18nStrings.infoIconString + '" title="" aria-hidden="true" />' +
+			'</button></div>');
 		me.tableDiv.append(filter);
+
+		$("#" + dom.firstFilterID + ", #" + dom.secondFilterID).on("keydown", function(e) {
+			if (e.key === "Enter" || e.keyCode === 13) {
+				$(this).trigger("click");
+			}
+		});
 
 		const tooltipDataComparisonImageIconTwo = {
 			title: $('#comparisonToolTipTwo').html(),
@@ -205,11 +213,45 @@ var ComparisonDataTableWidget = Class.extend({
 		    }
 		});
 
+		$('#datatable_paginate').attr('role', 'list')
+		const $paginationList = $('<div role="list" class="pagination-wrapper" style="display:inline"></div>');
+
+		['#datatable_first', '#datatable_previous', '#datatable_next', '#datatable_last'].forEach(selector => {
+			const $button = $(selector)
+				.attr('tabindex', 0)
+				.attr('role', 'button')
+				.wrap('<div role="listitem" class="pagination-item" style="display:inline"></div>');
+
+			// Attach keyboard support
+			$button.on('keydown', function(e) {
+				if (e.key === "Enter" || e.key === " ") {
+					e.preventDefault();
+					$(this).trigger("click");
+				}
+			});
+
+			// Move each listitem into the list container
+			$paginationList.append($button.closest('[role="listitem"]'));
+		});
+
+		// Replace the old container with the new accessible structure
+		$('#datatable_paginate').empty().append($paginationList);
+
+		table.find('tbody > tr').each(function() {
+			var $firstTd = $(this).children('td').first();
+			var th = $('<th class="ignore-th"></th>').html($firstTd.html());
+			$firstTd.replaceWith(th);
+		});
+		
 		/* Create search box */
 		var searchInputBox = $("." + me.dom.searchBarParentContainerClass).find("input[type=text]");
 		searchInputBox.css("width", "140px");
-		searchInputBox.after("<span id='comparison-reset-search' title='" + i18nStrings.clearSearchQuery + "'>X</span>"
-								+ "<img class='comparisonFilterInfoIcon' id='comparisonSearchInfoIcon' src='" + infoIconUrl + "' alt='" + i18nStrings.infoIconString + "' title='' />");
+		searchInputBox.after(
+			"<span id='comparison-reset-search' title='" + i18nStrings.clearSearchQuery + "'>X</span>"
+			+ "<button id='comparisonSearchInfoIcon' aria-label='" + i18nStrings.infoIconString + "' class='nostyle comparisonFilterInfoIcon'>"
+			+ "<img src='" + infoIconUrl + "' alt='" + i18nStrings.infoIconString + "' title='' aria-hidden='true' />"
+			+ "</button>"
+		);
 		$( document ).on('click', "#comparison-reset-search", function() {
 			me.widget.fnFilter("");
 		});

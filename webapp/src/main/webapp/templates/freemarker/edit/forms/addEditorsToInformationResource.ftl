@@ -49,6 +49,11 @@
 
 <h3>${i18n().manage_editors}</h3>
 
+<div id="reorder-instructions" class="sr-only">
+    ${i18n().arrow_key_reorder_note}
+</div>
+<div id="live-region" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
 <ul id="dragDropList" ${ulClass}>
 
 <script type="text/javascript">
@@ -62,7 +67,7 @@
 	<#assign editorUri = editorship.editorUri/>
 	<#assign editorName = editorship.editorName/>
 
-	<li class="editorship">
+	<li class="editorship" tabindex="0">
 			<#-- span.editor will be used in the next phase, when we display a message that the editor has been
 			removed. That text will replace the a.editorName, which will be removed. -->
 			<span class="editor">
@@ -196,7 +201,9 @@ var i18nStrings = {
     editorTypeText: '${i18n().editor_capitalized?js_string}',
     organizationTypeText: '${i18n().organization_capitalized?js_string}',
     helpTextSelect: '${i18n().select_an_existing?js_string}',
-    helpTextAdd: '${i18n().or_add_new_one?js_string}'
+    helpTextAdd: '${i18n().or_add_new_one?js_string}',
+    errorRemovingWebpage: '${i18n().error_removing_webpage?js_string}',
+    reorderActionInfo: '${i18n().reorder_action_info?js_string}'
 };
 
 $(document).ready(function () {
