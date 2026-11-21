@@ -37,7 +37,7 @@
 .gadgets-gadget-title-bar {
   padding: 4px 4px 2px;
   background-color: #EEEBE5;
-  background-color: #f1f2ee; /* #e5ecf9; */
+  background-color: #F5F5F5; /* #e5ecf9; */
 }
 /*.gadgets-gadget-title-bar:hover { background-color: #e7e3db; } */
 .gadgets-gadget-title-bar img,
@@ -49,7 +49,7 @@
 .gadgets-gadget-title a, .gadgets-gadget-title a:hover, .gadgets-gadget-title a:visited  {
  /* font-weight: bold; */
   font-size: 16px; /*14px*/
-  color: #2485AE; /*#CA7C29*/
+  color: #12739D; /*#CA7C29*/
   padding-left:8px; /*tlw72*/
   text-decoration: none; /*tlw72*/
 }

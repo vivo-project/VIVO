@@ -23,7 +23,7 @@ body {
     -webkit-text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
     -moz-text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
     -o-text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
-    background-color: #8BAB2E;
+    background-color: #536520;
 //    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#446791), to(#164682));
 //    background-image: -moz-linear-gradient(top, #446791, #164682);
     width: auto;
@@ -58,7 +58,7 @@ body {
     top:0;
 }
 
-ul#log_printout {
+#log_printout {
     display: block;
     height: 330px;
     overflow: scroll
@@ -309,8 +309,18 @@ hr {
 
 .tabs ul.titles li.activeTab a,
 .tabs ul.titles li.activeTab a:hover {
-    background-color: #fff;
+    background-color: #13739D;
+    color: white;
 }
+
+/* Focus styles for tab links */
+.tabs ul.titles li a:focus {
+    outline: 2px solid #0078d7; /* 2px box around focused element */
+    font-weight: bold;          /* Make text bold */
+    position: relative;
+    z-index: 1;
+}
+
 .smalllogo {
     margin-left:-5px;
     vertical-align:middle;

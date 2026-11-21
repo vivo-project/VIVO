@@ -45,10 +45,10 @@ if (typeof i18nStringsCap == 'undefined')
 var schemes = {
     "white" : {
         "backgroundcolor" : "#FFFFFF",
-        "capabilitycolor" : "#FFA500",
+        "capabilitycolor" : "#A46A00",
         "nodestroke" : "#FFFFFF",
         "fontcolor" : "#555",
-        "linkcolor" : "#B8B8B8",
+        "linkcolor" : "#676767",
         "gradient" : function(percent) {
             return percent
         }
@@ -58,7 +58,7 @@ var schemes = {
         "capabilitycolor" : "#FFA500",
         "nodestroke" : "#333333",
         "fontcolor" : "#FFF",
-        "linkcolor" : "#777",
+        "linkcolor" : "#9b9b9b",
         "gradient" : function(percent) {
             return -percent + 125;
         }
