@@ -39,7 +39,7 @@
             ${qrCodeLinkedImage}
         <#elseif (display == "icon")>
                 <a id="qrIcon" title="${i18n().vcard_qr_code}" href="${qrData.exportQrCodeUrl}"><img  src="${urls.images}/individual/${imageFile!}" alt="${i18n().qr_icon}" /></a>
-                <span id="qrCodeImage" class="hidden">${qrCodeLinkedImage} <a class="qrCloseLink" href="#"  title="${i18n().qr_code}">${i18n().close_capitalized}</a></span>
+                <span id="qrCodeImage" class="hidden">${qrCodeLinkedImage} <button type="button" class="qrCloseLink nostyle">${i18n().close_capitalized}</button></span>
         <#else>
             <p class="notice">${i18n().invalid_qr_code_parameter}</p>
         </#if>

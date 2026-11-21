@@ -110,7 +110,8 @@ return - returns empty string if no value found-->
 
 <#macro printYearField fieldName required=false>
     <fieldset class="dateTime">
-        <input class="text-field" name="${fieldName}-year" id="${fieldName}-year" type="text" value="${year!}" size="4" maxlength="4" <#if required>required </#if> />
+        <legend>${i18n()[('label.dateTimeWithPrecision.year_capitalized')]?html}</legend>
+        <input class="text-field" name="${fieldName}-year" id="${fieldName}-year" type="text" aria-label="${i18n()[('label.dateTimeWithPrecision.year_capitalized')]?html}" value="${year!}" size="4" maxlength="4" <#if required>required </#if> />
     </fieldset>
 </#macro>
 

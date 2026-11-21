@@ -146,7 +146,7 @@
 
     <input type="hidden" name="editKey" id="editKey" value="${editKey}"/>
     <p class="submit">
-        <input type="submit" id="submit" name="submit" value="${i18n().add_selected_concept}" />
+        <input type="submit" id="submit" name="submit" value="${i18n().add_selected_concept}" aria-label="${i18n().add_selected_concept}" />
 
     </p>
     <div id="createOwnTwo"><br />

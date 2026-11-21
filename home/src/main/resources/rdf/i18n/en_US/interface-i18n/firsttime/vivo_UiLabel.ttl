@@ -925,6 +925,22 @@ uil-data:qr_icon.VIVO
         uil:hasKey      "qr_icon" ;
         uil:hasPackage  "VIVO-languages" .
 
+uil-data:uri_icon_label.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Open sharing options for this profile"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "uri_icon_label" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:qr_icon_label.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Open individual URI QR code"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "qr_icon_label" ;
+        uil:hasPackage  "VIVO-languages" .
+
 uil-data:label_type.VIVO
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;
@@ -3076,6 +3092,14 @@ uil-data:research_areas.VIVO
         uil:hasKey      "research_areas" ;
         uil:hasPackage  "VIVO-languages" .
 
+uil-data:research_areas_icon.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "research areas icon"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "research_areas_icon" ;
+        uil:hasPackage  "VIVO-languages" .
+
 uil-data:missing_grant.VIVO
         rdf:type         owl:NamedIndividual ;
         rdf:type         uil:UILabel ;
@@ -3465,6 +3489,14 @@ uil-data:manage_editors.VIVO
         rdfs:label       "Manage Editors"@en-US ;
         uil:hasApp      "VIVO" ;
         uil:hasKey      "manage_editors" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:manage_positions.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Manage Positions"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "manage_positions" ;
         uil:hasPackage  "VIVO-languages" .
 
 uil-data:the_capitalized.VIVO
@@ -5113,6 +5145,14 @@ uil-data:capability_map.VIVO
         rdfs:label       "Capability Map"@en-US ;
         uil:hasApp      "VIVO" ;
         uil:hasKey      "capability_map" ;
+        uil:hasPackage  "VIVO-languages" .
+
+uil-data:capability_map_input.VIVO
+        rdf:type         owl:NamedIndividual ;
+        rdf:type         uil:UILabel ;
+        rdfs:label       "Capability Map search input"@en-US ;
+        uil:hasApp      "VIVO" ;
+        uil:hasKey      "capability_map_input" ;
         uil:hasPackage  "VIVO-languages" .
 
 uil-data:search_info_tool_tip_text_the_first_part.VIVO

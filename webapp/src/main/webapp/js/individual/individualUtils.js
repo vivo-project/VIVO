@@ -18,69 +18,107 @@ $(document).ready(function(){
     // Change background color button when verbose mode is off
     $('a#verbosePropertySwitch:contains("' + i18nStrings.verboseTurnOff + '")').addClass('verbose-off');
 
-    // Reveal vCard QR code when QR icon is clicked
-    $('#qrIcon, .qrCloseLink').on("click", function() {
+    // The QR code is a non-modal disclosure. Keep its controls exposed while open.
+    var qrTrigger = $('#qrIcon');
+    var qrPopup = $('#qrCodeImage');
+    var qrLoaded = qrPopup.find('img').length > 0;
+    var qrLoading = false;
 
-
-		// only create the img the first time, so check if it already exists
-		if ( !$('img#codeImage').length ) {
-			$.ajax({
-            	url: baseUrl + "/qrCodeAjax",
-            	dataType: "json",
-            	data: {
-                	action: "getQrCodeDetails",
-					uri: individualUri,
-            	},
-            	complete: function(xhr, status) {
-                	var results = JSON.parse(xhr.responseText);
-                	if ( results.length == 0 ) {
-                    	var html = i18nStrings.currentlyNoResearchers;
-                	}
-                	else {
-						if ( results[0].firstName.length < 1 || results[1].lastName.length < 1 ) {
-							$('#qrCodeImage').css("width","225px");
-							var noCodeStr = "<div style='padding:25px 0 30px 22px;font-size:13px'>"
-							                + "The QR Code could not be generated due to incomplete information about this person. </div>"
-							$('#qrCodeImage').prepend(noCodeStr);
-						}
-						else if ( results[0].firstName.length > 0 || results[1] == null || results[1].lastName.length > 0 ) {
-							var vcard = "";
-							vcard += "BEGIN:VCARD" + String.fromCharCode(13);
-							vcard += "VERSION:3.0" + String.fromCharCode(13);
-							vcard += "N:" + results[1].lastName + String.fromCharCode(13);
-							vcard += "FN:" + results[0].firstName + String.fromCharCode(13);
-							if ( results[2].preferredTitle.length > 0 ) {
-								vcard += "TITLE:" + results[2].preferredTitle + String.fromCharCode(13);
-							}
-							if ( results[3].phoneNumber.length > 0 ) {
-								vcard += "TEL;TYPE=WORK,VOICE:" + results[3].phoneNumber + String.fromCharCode(13);
-							}
-							if ( results[4].email.length > 0 ) {
-								vcard += "EMAIL;TYPE=PREF,INTERNET:" + results[4].email + String.fromCharCode(13);
-							}
-							vcard += "URL:" + individualUri + String.fromCharCode(13);
-							if ( individualPhoto.length > 0 ) {
-								vcard += "PHOTO;VALUE=URL;TYPE=JPG:" + individualPhoto + String.fromCharCode(13);
-							}
-							vcard += "END:VCARD";
-
-							spanStr = "<a title='" + i18nStrings.exportQrCodes + "' href='"
-							          + exportQrCodeUrl + "'>"
-							          + "<img id='codeImage' src='https://quickchart.io/chart?cht=qr&amp;chs=125x125&amp;chl="
-									  + vcard
-									  + "&amp;choe=UTF-8'/>"
-									  + "</a>";
-
-							$('#qrCodeImage').prepend(spanStr);
-							$('#qrCodeImage').toggleClass('hidden');
-						}
-                 	}
-            	}
-       		});
+    function setQrOpen(open, moveFocus) {
+        if (!open && $.contains(qrPopup[0], document.activeElement)) {
+            qrTrigger.trigger('focus');
         }
-		else {
-			$('#qrCodeImage').toggleClass('hidden');
-		}
+        qrPopup.toggleClass('hidden', !open).prop('hidden', !open).removeAttr('aria-hidden');
+        qrTrigger.attr('aria-expanded', open ? 'true' : 'false');
+        if (open && moveFocus) {
+            qrPopup.find('.qrCloseLink').first().trigger('focus');
+        }
+    }
+
+    if (qrTrigger.length && qrPopup.length) {
+        qrTrigger.attr('aria-controls', 'qrCodeImage');
+        qrTrigger.filter('a').attr('role', 'button');
+        setQrOpen(false, false);
+    }
+
+    qrTrigger.on('click', function(event) {
+        event.preventDefault();
+        if (!qrPopup.length) {
+            return;
+        }
+        var open = qrPopup.hasClass('hidden');
+        setQrOpen(open, true);
+        if (!open || qrLoaded || qrLoading) {
+            return;
+        }
+
+        qrLoading = true;
+        $.ajax({
+            url: baseUrl + '/qrCodeAjax',
+            dataType: 'json',
+            data: { action: 'getQrCodeDetails', uri: individualUri },
+            complete: function(xhr, status) {
+                qrLoading = false;
+                if (status !== 'success') {
+                    return;
+                }
+                var results = xhr.responseJSON || JSON.parse(xhr.responseText);
+                var firstName = (results[0] || {}).firstName || '';
+                var lastName = (results[1] || {}).lastName || '';
+                if (!firstName || !lastName) {
+                    qrPopup.css('width', '225px').prepend($('<div/>')
+                        .css({ padding: '25px 0 30px 22px', fontSize: '13px' })
+                        .text('The QR Code could not be generated due to incomplete information about this person.'));
+                    qrLoaded = true;
+                    return;
+                }
+
+                var vcard = 'BEGIN:VCARD\rVERSION:3.0\rN:' + lastName + '\rFN:' + firstName + '\r';
+                if ((results[2] || {}).preferredTitle) {
+                    vcard += 'TITLE:' + results[2].preferredTitle + '\r';
+                }
+                if ((results[3] || {}).phoneNumber) {
+                    vcard += 'TEL;TYPE=WORK,VOICE:' + results[3].phoneNumber + '\r';
+                }
+                if ((results[4] || {}).email) {
+                    vcard += 'EMAIL;TYPE=PREF,INTERNET:' + results[4].email + '\r';
+                }
+                vcard += 'URL:' + individualUri + '\r';
+                if (individualPhoto.length > 0) {
+                    vcard += 'PHOTO;VALUE=URL;TYPE=JPG:' + individualPhoto + '\r';
+                }
+                vcard += 'END:VCARD';
+
+                qrPopup.prepend($('<a/>').attr({ title: i18nStrings.exportQrCodes, href: exportQrCodeUrl })
+                    .append($('<img/>').attr({
+                        id: 'codeImage',
+                        alt: qrTrigger.attr('aria-label') || qrTrigger.attr('title') || i18nStrings.exportQrCodes,
+                        src: 'https://quickchart.io/chart?cht=qr&chs=125x125&chl=' + encodeURIComponent(vcard) + '&choe=UTF-8'
+                    })));
+                qrLoaded = true;
+                // Do not reopen or move focus if the user closed it while loading.
+            }
+        });
+    });
+
+    qrTrigger.filter('a').on('keydown', function(event) {
+        if (event.key === ' ' || event.which === 32) {
+            event.preventDefault();
+            $(this).trigger('click');
+        }
+    });
+    qrPopup.find('.qrCloseLink').on('click', function(event) {
+        event.preventDefault();
+        qrTrigger.trigger('focus');
+        setQrOpen(false, false);
+    });
+    qrPopup.add(qrTrigger).on('keydown', function(event) {
+        if ((event.key === 'Escape' || event.which === 27) && !qrPopup.hasClass('hidden')) {
+            event.preventDefault();
+            event.stopPropagation();
+            qrTrigger.trigger('focus');
+            setQrOpen(false, false);
+        }
     });
 
     // For pubs and grants on the foaf:person profile, and affiliated people

@@ -385,8 +385,8 @@ FullResultQueryUnit.prototype.fetch = function() {
 }
 
 var showPanel = function(name) {
-    $(".titles li").removeClass("activeTab");
-    $(".titles li a[href='#" + name + "']").parent().addClass("activeTab");
+    $(".titles li").removeClass("activeTab").find("a").attr("aria-selected", "false");
+    $(".titles li a[href='#" + name + "']").parent().addClass("activeTab").attr("aria-selected", "true");
     $(".result_section").css("display", "none");
     $("#" + name).css("display", "block");
 }
@@ -400,7 +400,7 @@ DetailsPanel.prototype.clearDetails = function() {
     $(this.panel).empty();
 }
 DetailsPanel.prototype.showDetails = function(mode, id) {
-    showPanel("logg");
+    showPanel("tabpanel-logg");
 
     var that = this;
     var departments = {};
@@ -629,12 +629,12 @@ var ipretResults = function(results) {
 var disableSubButton = function() {
     subButton.disabled = true;
     $("#sExpand").attr("disabled", true);
-    $("#resetButton").val(i18nStringsCap.pause);
+    $("#resetButton").val(i18nStringsCap.pause).attr("aria-label", i18nStringsCap.pause);
 }
 var enableSubButton = function() {
     subButton.disabled = false;
     $("#sExpand").attr("disabled", false);
-    $("#resetButton").val(i18nStringsCap.reset);
+    $("#resetButton").val(i18nStringsCap.reset).attr("aria-label", i18nStringsCap.reset);
 }
 var getLinkColor = function() {
     var linkColor = $("#linkColor").val();
@@ -877,7 +877,7 @@ var render = function() {
     $.each(g.getCapabilities(), function(i, c) {
         $("#log_printout")
             .append($("<li/>")
-                .append($("<a> " + decodeURI(c.term) + "</a>")
+                .append($("<a/>").text(" " + decodeURI(c.term))
                     .on("click", function() {
                         highlight(c.term);
                         detailsPane.showDetails("capability", c.term);
@@ -886,6 +886,7 @@ var render = function() {
                 )
                 .prepend($("<input/>").attr("type", "checkbox")
                     .attr("name", c.term)
+                    .attr("aria-label", decodeURI(c.term))
                 )
             );
     });
@@ -964,7 +965,7 @@ var restoreDefaults = function() {
 }
 var finish = function() {
     render();
-    showPanel("demo");
+    showPanel("tabpanel-demo");
     enableSubButton();
     fullResultsQueue = [];
     $.each(g.groups, function(key, group) {

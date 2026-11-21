@@ -16,7 +16,7 @@ ${i18n().check_people_to_exclude}
 
     <#list allSubclasses as sub>
     <h4>${sub}</h4>
-        <section id="pubsContainer" role="container">
+        <section id="pubsContainer">
         <#assign peeps = people[sub]>
         <ul >
             <#list peeps as person>

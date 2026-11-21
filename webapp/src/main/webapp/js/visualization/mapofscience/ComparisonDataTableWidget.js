@@ -63,11 +63,11 @@ var ComparisonDataTableWidget = Class.extend({
 
 		/* Create filter */
 		var dom = me.dom;
-		var filter = $('<div class="science-areas-filter">' +
-	    	'<span id="' + dom.firstFilterID + '" class="' + dom.filterOptionClass + ' ' + dom.activeFilterClass + '">' + dom.firstFilterLabel + '</span>'+
+		var filter = $('<div class="science-areas-filter" role="tablist" aria-orientation="horizontal">' +
+	    	'<span id="' + dom.firstFilterID + '" role="tab" aria-selected="true" aria-controls="comparisonDatatable" tabindex="0" class="' + dom.filterOptionClass + ' ' + dom.activeFilterClass + '">' + dom.firstFilterLabel + '</span>'+
 	    	/* This is temporary removed due to the person's publications mapping rate is too low to be displayed.
 		    	' | ' +
-		    	'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">' + dom.secondFilterLabel + '</span>' +
+		    	'<span id="' + dom.secondFilterID + '" role="tab" aria-selected="false" aria-controls="comparisonDatatable" tabindex="-1" class="' + dom.filterOptionClass + '">' + dom.secondFilterLabel + '</span>' +
 	    	*/
 	    	'<img class="' + dom.filterInfoIconClass + '" id="comparisonImageIconTwo" src="'+ infoIconUrl +'" alt="' + i18nStrings.infoIconString + '" title="" /></div>');
 		me.tableDiv.append(filter);
@@ -131,6 +131,7 @@ var ComparisonDataTableWidget = Class.extend({
 
 		tbody.append(rowsToInsert.join(''));
 
+		table.attr('aria-labelledby', dom.firstFilterID + ' ' + dom.secondFilterID);
 		table.append(tbody);
 		me.tableDiv.append(table);
 

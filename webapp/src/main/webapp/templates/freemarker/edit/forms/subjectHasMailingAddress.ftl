@@ -68,7 +68,7 @@
 
 <section id="personHasMailingAddress" role="region">
 
-    <form id="personHasMailingAddress" class="customForm noIE67" action="${submitUrl}"  role="add/edit mailing address">
+    <form id="personHasMailingAddress" class="customForm noIE67" action="${submitUrl}">
 
         <p>
             <label for="streetAddress">${i18n().street_address} 1 ${requiredHint}</label>

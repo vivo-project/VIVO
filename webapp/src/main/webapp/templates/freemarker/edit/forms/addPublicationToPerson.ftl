@@ -127,7 +127,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <section id="addPublicationToPerson" role="region">
 
 <@lvf.unsupportedBrowser urls.base/>
-<form id="addpublicationToPerson" class="customForm noIE67" action="${submitUrl}"  role="add/edit publication">
+<form id="addpublicationToPerson" class="customForm noIE67" action="${submitUrl}">
 
         <#--TODO: Check if possible to have existing publication options here in order to select-->
     <p class="inline"><label for="typeSelector">${i18n().publication_type}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
@@ -301,7 +301,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
        <p class="submit">
             <input type="hidden" name = "editKey" value="${editKey}"/>
-            <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> ${i18n().or} </span><a class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
+            <input type="submit" id="submit" value="${submitButtonText}" aria-label="${submitButtonText}"/><span class="or"> ${i18n().or} </span><a class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
        </p>
 
        <p id="requiredLegend" class="requiredHint">* ${i18n().required_fields}</p>

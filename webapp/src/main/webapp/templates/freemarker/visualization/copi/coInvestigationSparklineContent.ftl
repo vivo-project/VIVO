@@ -181,7 +181,7 @@
                     }
 
                     if (totalGrantCount) {
-                        sparksText += '<br /> <a href="${sparklineVO.downloadDataLink}" title="csv ${i18n().file_capitalized}">(.CSV ${i18n().file_capitalized})</a> ';
+                        sparksText += '<br /> <a href="${sparklineVO.downloadDataLink}" title="csv ${i18n().file_capitalized}"><span class="sr-only">' + grantDisplay + ' </span>(.CSV ${i18n().file_capitalized})</a> ';
                     }
 
                  </#if>

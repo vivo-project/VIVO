@@ -89,7 +89,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <section id="organizationHasPositionHistory" role="region">
 
-	<form id="organizationHasPositionHistory" class="customForm noIE67" action="${submitUrl}"  role="add/edit position history">
+	<form id="organizationHasPositionHistory" class="customForm noIE67" action="${submitUrl}">
 	    <p>
 	        <label for="positionTitle">${i18n().position_title} ${requiredHint}</label>
 	        <input size="30" type="text" id="positionTitle" name="positionTitle" value="${positionTitleValue}" />
@@ -144,7 +144,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
         <p class="submit">
             <input type="hidden" id="editKey" name="editKey" value="${editKey}" />
-            <input type="submit" id="submit" value="${submitButtonText}"/>
+            <input type="submit" id="submit" value="${submitButtonText}" aria-label="${submitButtonText}"/>
             <span class="or"> ${i18n().or} </span><a class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
         </p>
 

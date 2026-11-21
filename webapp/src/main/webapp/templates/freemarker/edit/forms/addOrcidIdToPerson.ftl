@@ -54,7 +54,7 @@
 
 <section id="personHasOrcidId" role="region">
 
-    <form id="personHasOrcidId" class="customForm noIE67" action="${submitUrl}"  role="add/edit orcidId">
+    <form id="personHasOrcidId" class="customForm noIE67" action="${submitUrl}">
 
         <p>
             <label for="orcidId">ORCID iD ${requiredHint}</label>

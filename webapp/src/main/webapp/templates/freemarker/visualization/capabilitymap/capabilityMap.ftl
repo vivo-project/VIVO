@@ -55,12 +55,12 @@ ${stylesheets.add(
     <div id="queryform">
         <p>
             <span>
-                <input name="query" id="query" size="34" value="" onfocus="" accesskey="q" onblur="" type="text" onkeydown="queryKeyDown(event);">
+                <input name="query" id="query" size="34" value="" onfocus="" accesskey="q" onblur="" type="text" onkeydown="queryKeyDown(event);" aria-label="${i18n().capability_map_input?js_string}">
                 <label id="cutofflabel" for="queryCutoff">Cutoff:</label>
                 <input id="queryCutoff" name="queryCutoff" type="text" title="Cutoff" size="4" value="10">
-                <input value="${i18n().cap_map_search}" type="submit" id="add" type="button" onclick="addKwd();">
-                <input value="${i18n().cap_map_search_expand}" type="submit" id="sExpand" onclick="expandLastQuery = 1; addKwd();">
-                <input value="${i18n().cap_map_reset}" id="resetButton" type="submit" onclick="reset()" disabled>
+                <input value="${i18n().cap_map_search?html}" aria-label="${i18n().cap_map_search?html}" type="submit" id="add" onclick="addKwd();">
+                <input value="${i18n().cap_map_search_expand?html}" aria-label="${i18n().cap_map_search_expand?html}" type="submit" id="sExpand" onclick="expandLastQuery = 1; addKwd();">
+                <input value="${i18n().cap_map_reset?html}" aria-label="${i18n().cap_map_reset?html}" id="resetButton" type="submit" onclick="reset()" disabled>
                 <!-- a style="display:inline-block; float:right; line-height:32px; height:32px; cursor:pointer" onclick="showhideadvanced(this)">Show advanced</a -->
             </span>
         </p>
@@ -103,14 +103,18 @@ ${stylesheets.add(
 
         <div id="right-container">
             <div class="tabs">
-                <ul  class="titles">
-                    <li><a href="#demo">${i18n().cap_map_search_terms}</a></li>
-                    <li><a href="#logg">${i18n().cap_map_info}</a></li>
+                <ul  class="titles" role="tablist" aria-orientation="horizontal">
+                    <li>
+                        <a href="#tabpanel-demo" id="tab-demo" role="tab" aria-controls="tabpanel-demo" aria-selected="true" tabindex="0">${i18n().cap_map_search_terms}</a>
+                    </li>
+                    <li>
+                        <a href="#tabpanel-logg" id="tab-logg" role="tab" aria-controls="tabpanel-logg" aria-selected="false" tabindex="0">${i18n().cap_map_info}</a>
+                    </li>
                     <!-- li><a href="#extractData">Data</a></li -->
                 </ul>
 
                 <div class="result_body">
-                    <div class="result_section" id="demo">
+                    <div class="result_section" id="tabpanel-demo" role="tabpanel" aria-labelledby="tab-demo" tabindex="0">
                         <h2>${i18n().cap_map_cur_search_terms}</h2>
                         <ul id="log_printout">
                             <li>
@@ -126,7 +130,7 @@ ${stylesheets.add(
                         <div class="links4">${i18n().cap_map_key6}</div>
                         </p>
                     </div>
-                    <div class="result_section" id="logg">
+                    <div class="result_section" id="tabpanel-logg" role="tabpanel" aria-labelledby="tab-logg" tabindex="0" hidden>
                         <div id="inner-details">
                             <p>
                                 ${i18n().cap_map_text7}

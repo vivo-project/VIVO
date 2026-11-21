@@ -109,7 +109,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <section id="organizationForTraining" role="region">
 
-    <form id="organizationForTraining" class="customForm noIE67" action="${submitUrl}"  role="add/edit organizational training">
+    <form id="organizationForTraining" class="customForm noIE67" action="${submitUrl}">
 
     <p >
         <label for="person">${i18n().person_capitalized}: ${i18n().last_name}  ${requiredHint}<span style="padding-left:322px">${i18n().first_name}  ${requiredHint}</span></label>
@@ -182,7 +182,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
   	<#--End draw elements-->
     <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>
     <p class="submit">
-         <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> ${i18n().or} </span>
+         <input type="submit" id="submit" value="${submitButtonText}" aria-label="${submitButtonText}"/><span class="or"> ${i18n().or} </span>
          <a class="cancel" href="${cancelUrl}" title="${i18n().cancel_title}">${i18n().cancel_link}</a>
      </p>
 

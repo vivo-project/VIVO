@@ -70,10 +70,10 @@ ${i18n().new_entry_for(editConfiguration.propertyPublicDomainTitle, editConfigur
         <input size="30"  type="text" id="label" name="label" value="${labelValue}" />
     </p>
 </#if>
-    <input type="hidden" name="editKey" id="editKey" value="${editKey}" role="input" />
+    <input type="hidden" name="editKey" id="editKey" value="${editKey}" />
 
     <p class="submit">
-        <input type="submit" id="submit" value="${submitLabel}" role="submit" />
+        <input type="submit" id="submit" value="${submitLabel}" aria-label="${submitLabel}" />
         <span class="or"> ${i18n().or} </span>
         <a class="cancel" title="${i18n().cancel_title}" href="${editConfiguration.cancelUrl}">${i18n().cancel_link}</a>
     </p>

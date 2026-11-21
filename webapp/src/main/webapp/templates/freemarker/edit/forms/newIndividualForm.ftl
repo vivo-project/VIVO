@@ -47,7 +47,7 @@
 
 <section id="newIndividual" role="region">
 
-    <form id="newIndividual" class="customForm noIE67" action="${submitUrl}"  role="add new individual">
+    <form id="newIndividual" class="customForm noIE67" action="${submitUrl}">
 
     <#if isPersonType = "true">
         <p>
